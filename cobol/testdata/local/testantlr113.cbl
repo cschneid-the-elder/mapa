@@ -1,0 +1,21 @@
+000001 Identification Division.
+000002 Program-ID. testantlr113.
+000003 Data Division.
+000004 Working-Storage Section.
+000005
+000006 01  CONSTANTS.
+000007     05  MYNAME               PIC X(012) VALUE 'testantlr113'.
+000008
+000009 Procedure Division.
+000010     DISPLAY MYNAME ' Begin'
+000011     
+000012     EXEC SQL
+000013          CALL PGMA0001(AEIOU, EGBDF)
+000014     END-EXEC
+000015
+000016     DISPLAY MYNAME ' End'
+000017     
+000018     GOBACK
+000019     .
+000020
+000021

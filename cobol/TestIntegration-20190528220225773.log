@@ -1,0 +1,1120 @@
+[Tue May 28 22:02:25 CDT 2019] INFO: Logger Name: TestIntegration
+[Tue May 28 22:02:25 CDT 2019] INFO: unit testing is in effect
+[Tue May 28 22:02:25 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr001.cbl
+[Tue May 28 22:02:25 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:26 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:26 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:27 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:27 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr001.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr001.cbl calls 0 modules
+[Tue May 28 22:02:27 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr002.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:27 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:27 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr002.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:27 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:27 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:27 CDT 2019] FINE: callingModuleName = testantlr002
+[Tue May 28 22:02:27 CDT 2019] FINE: caller = testantlr002
+[Tue May 28 22:02:27 CDT 2019] FINE: this.callType = CALLBYLITERAL
+[Tue May 28 22:02:27 CDT 2019] FINE: ty = CALLBYLITERAL
+[Tue May 28 22:02:27 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr002.cbl calls 1 modules
+[Tue May 28 22:02:27 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr003.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:27 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:27 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr003.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:27 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:27 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:27 CDT 2019] FINE: callingModuleName = testantlr003
+[Tue May 28 22:02:27 CDT 2019] FINE: caller = testantlr003
+[Tue May 28 22:02:27 CDT 2019] FINE: this.callType = CALLBYLITERAL
+[Tue May 28 22:02:27 CDT 2019] FINE: ty = CALLBYLITERAL
+[Tue May 28 22:02:27 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr003.cbl calls 1 modules
+[Tue May 28 22:02:27 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr004.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:27 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:27 CDT 2019] FINE: valueInValueClause = |'PGMA0001'|
+[Tue May 28 22:02:27 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr004.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:27 CDT 2019] FINE: node found
+[Tue May 28 22:02:27 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:27 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:27 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:27 CDT 2019] FINE: callingModuleName = testantlr004
+[Tue May 28 22:02:27 CDT 2019] FINE: caller = testantlr004
+[Tue May 28 22:02:27 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:27 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:27 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr004.cbl calls 1 modules
+[Tue May 28 22:02:27 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr005.cbl
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:27 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: valueInValueClause = |'PGMA0001'|
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr005.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr005
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr005
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr005.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr006.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr006.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr006
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr006
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSLINKBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSLINKBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr006.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr007.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr007.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr007
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr007
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSXCTLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSXCTLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr007.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr008.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: valueInValueClause = |'PGMA0001'|
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr008.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr008
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr008
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSLINKBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSLINKBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr008.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr009.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: valueInValueClause = |'PGMA0001'|
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr009.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr009
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr009
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSXCTLBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSXCTLBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr009.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr010.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr010.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr010
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr010
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = SQLCALLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = SQLCALLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr010.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr011.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr011.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr011
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr011
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSLINKBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSLINKBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr011.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr012.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr012.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr012
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr012
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSXCTLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSXCTLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr012.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr013.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr013.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr013
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr013
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = SQLCALLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = SQLCALLBYLITERAL
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr013.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr014.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: valueInValueClause = |'PGMA0001'|
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr014.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr014
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr014
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSLINKBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSLINKBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr014.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr015.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:28 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:28 CDT 2019] FINE: valueInValueClause = |'PGMA0001'|
+[Tue May 28 22:02:28 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr015.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:28 CDT 2019] FINE: node found
+[Tue May 28 22:02:28 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: calledModuleNames = [PGMA0001]
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:28 CDT 2019] FINE: callingModuleName = testantlr015
+[Tue May 28 22:02:28 CDT 2019] FINE: caller = testantlr015
+[Tue May 28 22:02:28 CDT 2019] FINE: this.callType = CICSXCTLBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: ty = CICSXCTLBYIDENTIFIER
+[Tue May 28 22:02:28 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr015.cbl calls 1 modules
+[Tue May 28 22:02:28 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr016.cbl
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:28 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause = |null|
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause == null
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr016.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: calledModuleNames = [PGMB0004]
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: callingModuleName = testantlr016
+[Tue May 28 22:02:29 CDT 2019] FINE: caller = testantlr016
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr016.cbl calls 1 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr017.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause = |null|
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause == null
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr017.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: calledModuleNames = [PGMB0005]
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: callingModuleName = testantlr017
+[Tue May 28 22:02:29 CDT 2019] FINE: caller = testantlr017
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr017.cbl calls 1 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr018.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause = |'PGMO0010'|
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr018.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: calledModuleNames = [PGMO0010]
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: callingModuleName = testantlr018
+[Tue May 28 22:02:29 CDT 2019] FINE: caller = testantlr018
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr018.cbl calls 1 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr019.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause = |'PGMN0010'|
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr019.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: calledModuleNames = [PGMN0010]
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: callingModuleName = testantlr019
+[Tue May 28 22:02:29 CDT 2019] FINE: caller = testantlr019
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr019.cbl calls 1 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr020.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause = |null|
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause == null
+[Tue May 28 22:02:29 CDT 2019] FINE: redefinesIdentifier = PGM-0008-VAL
+[Tue May 28 22:02:29 CDT 2019] FINE: list.size() = 1
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr020.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: calledModuleNames = [PGMK0008]
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: callingModuleName = testantlr020
+[Tue May 28 22:02:29 CDT 2019] FINE: caller = testantlr020
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr020.cbl calls 1 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr021.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: newLineWithReplacingApplied
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: valueInValueClause = |'PGMB0001'|
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr021.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: this.calledModuleNames.contains(callee) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: calledModuleNames = [PGMB0001]
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callingModuleName.equals(caller) = true
+[Tue May 28 22:02:29 CDT 2019] FINE: callingModuleName = testantlr021
+[Tue May 28 22:02:29 CDT 2019] FINE: caller = testantlr021
+[Tue May 28 22:02:29 CDT 2019] FINE: this.callType = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: ty = CALLBYIDENTIFIER
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr021.cbl calls 1 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr022.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: writeTheCopyContent
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes
+[Tue May 28 22:02:29 CDT 2019] FINE: Executing unit tests for /home/craig/mapa/cobol/testdata/local/testantlr022.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 5 || CONSTANTS != MYNAME
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: 1 != 77 || CONSTANTS != AA-FROM-COPY
+[Tue May 28 22:02:29 CDT 2019] FINE: 5 != 77 || MYNAME != AA-FROM-COPY
+[Tue May 28 22:02:29 CDT 2019] FINE: 5 != 77 || PGM-0001 != AA-FROM-COPY
+[Tue May 28 22:02:29 CDT 2019] FINE: 5 != 77 || PGM-0002 != AA-FROM-COPY
+[Tue May 28 22:02:29 CDT 2019] FINE: 5 != 77 || PGM-0003 != AA-FROM-COPY
+[Tue May 28 22:02:29 CDT 2019] FINE: node found
+[Tue May 28 22:02:29 CDT 2019] FINE: /home/craig/mapa/cobol/testdata/local/testantlr022.cbl calls 0 modules
+[Tue May 28 22:02:29 CDT 2019] INFO: Processing /home/craig/mapa/cobol/testdata/local/testantlr023.cbl
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForIdDiv
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyCopyStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: writeTheCopyContent
+[Tue May 28 22:02:29 CDT 2019] WARNING: TA023 not found in any path specified
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForReplacementStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: rewriteApplyingReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: applyReplaceStatements
+[Tue May 28 22:02:29 CDT 2019] FINE: assembleDataNodeTree
+[Tue May 28 22:02:29 CDT 2019] FINE: lookForCalledRoutines
+[Tue May 28 22:02:29 CDT 2019] FINE: resolveCalledNodes

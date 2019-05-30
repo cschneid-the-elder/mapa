@@ -1,0 +1,19 @@
+000001 Identification Division.
+000002 Program-ID. testantlr108.
+000003 Data Division.
+000004 Working-Storage Section.
+000005 01  CONSTANTS.
+000006     05  MYNAME               PIC X(012) VALUE 'testantlr108'.
+000007     05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+000008
+000009 Procedure Division.
+000010     DISPLAY MYNAME ' Begin'
+000011     
+000012     EXEC CICS LINK PROGRAM(PGM-0001) END-EXEC
+000013
+000014     DISPLAY MYNAME ' End'
+000015     
+000016     GOBACK
+000017     .
+000018
+000019

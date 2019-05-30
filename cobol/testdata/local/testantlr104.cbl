@@ -1,0 +1,23 @@
+000001 Identification Division.
+000002 Program-ID. testantlr104.
+000003 Data Division.
+000004 Working-Storage Section.
+000005 01  CONSTANTS.
+000006     05  MYNAME               PIC X(012) VALUE 'testantlr104'.
+000007     05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+000008
+000009
+000010 Procedure Division.
+000011     DISPLAY MYNAME ' Begin'
+000012     
+000013     CALL PGM-0001 USING MYNAME
+000014
+000015     DISPLAY MYNAME ' End'
+000016     
+000017     GOBACK
+000018     .
+000019
+000020 1000-para.
+000021
+000022     .
+000023

@@ -1,0 +1,27 @@
+000001 Identification Division.
+000002 Program-ID. testantlr122.
+000003 Data Division.
+000004 Working-Storage Section.
+000005
+000006 01  CONSTANTS.
+000007     05  MYNAME               PIC X(012) VALUE 'testantlr122'.
+000008     05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+000009     05  PGM-0002             PIC X(008) VALUE 'PGMA0002'.
+000010     05  PGM-0003             PIC X(008) VALUE 'PGMA0003'.
+000011
+000012*
+000013
+000014 COPY 'testantlr005.cpy' REPLACING ==:PRFX:== BY ==AA-==
+000015 .
+000016 
+000017
+000018 Procedure Division.
+000019     DISPLAY MYNAME ' Begin'
+000020     
+000021
+000022     DISPLAY MYNAME ' End'
+000023     
+000024     GOBACK
+000025     .
+000026
+000027

@@ -1,0 +1,35 @@
+000001 Identification Division.
+000002 Program-ID. testantlr123.
+000003 Data Division.
+000004 Working-Storage Section.
+000005
+000006*
+000007*comment
+000008*
+000009
+000010 01  CONSTANTS.
+000011     05  MYNAME               PIC X(012) VALUE 'testantlr123'.
+000012     05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+000013     05  PGM-0002             PIC X(008) VALUE 'PGMA0002'.
+000014     05  PGM-0003             PIC X(008) VALUE 'PGMA0003'.
+000015
+000016*
+000017
+000018 01 WORK-AREAS.                                        COPY TA023.
+000019
+000020 Procedure Division.
+000021     DISPLAY MYNAME ' Begin'
+000022
+000023     MOVE 'PGMB0004' TO PGM-0004
+000024     
+000025     DISPLAY MYNAME ' End'
+000026     
+000027     GOBACK
+000028     .
+000029
+000030 1000-para.
+000031
+000032     CALL PGM-0004
+000033
+000034     .
+000035
