@@ -9,6 +9,7 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	public String callingModuleName = null;
 	public DDNode parent = null;
 	public DDNode prev = null;
+	public DataLocation locn = null;
 
 	public DataDescriptionEntryListener(ArrayList<DDNode> al) {
 		super();
@@ -23,10 +24,26 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		callingModuleName = ctx.getText();
 	}
 
+	@Override public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
+		this.locn = DataLocation.FILEDESCRIPTION;
+	}
+
+	@Override public void enterWorkingStorageSection(CobolParser.WorkingStorageSectionContext ctx) {
+		this.locn = DataLocation.WORKINGSTORAGE;
+	}
+
+	@Override public void enterLocalStorageSection(CobolParser.LocalStorageSectionContext ctx) {
+		this.locn = DataLocation.LOCALSTORAGE;
+	}
+
+	@Override public void enterLinkageSection(CobolParser.LinkageSectionContext ctx) {
+		this.locn = DataLocation.LINKAGE;
+	}
+
 	@Override public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
 		/**
 		*/
-		DDNode node = new DDNode(callingModuleName, ctx);
+		DDNode node = new DDNode(callingModuleName, ctx, locn);
 
 		TestIntegration.LOGGER.finer(callingModuleName + " " + node);
 

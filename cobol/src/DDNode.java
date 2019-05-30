@@ -20,6 +20,7 @@ class DDNode {
 	public String valueInValueClause = null;
 	public List<String> valuesSet = new ArrayList<>();
 	public String programName = null;
+	public DataLocation locn = null;
 	public CobolParser.DataDescriptionEntryContext ddeCtx = null;
 	public CobolParser.DataDescriptionEntryFormat1Context dde1Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat2Context dde2Ctx = null;
@@ -30,12 +31,14 @@ class DDNode {
 		this.programName = programName;
 		this.parent = parent;
 		this.ddeCtx = ctx;
+		this.locn = parent.locn;
 		this.initialize();
 	}
 
-	public DDNode(String programName, CobolParser.DataDescriptionEntryContext ctx) {
+	public DDNode(String programName, CobolParser.DataDescriptionEntryContext ctx, DataLocation locn) {
 		this.programName = programName;
 		this.ddeCtx = ctx;
+		this.locn = locn;
 		this.initialize();
 	}
 
@@ -230,7 +233,7 @@ class DDNode {
 	}
 
 	public String toString() {
-		return this.level.toString() + " " + this.identifier + " [parent=" + this.parent + "]";
+		return this.level.toString() + " " + this.identifier + " [parent=" + this.parent + "] " + this.locn;
 	}
 
 }

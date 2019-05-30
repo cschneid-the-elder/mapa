@@ -854,6 +854,20 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(05), "A", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "X", dataNodes)) failCount++;
 				break;
+			case "testantlr028":
+			case "testantlr128":
+			case "testantlr228":
+			case "testantlr328":
+				if (!testDD002(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "MYNAME", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "X", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(01), "LOCAL-WORK-AREAS", dataNodes, DataLocation.LOCALSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "Y", dataNodes, DataLocation.LOCALSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(01), "PARM-DATA", dataNodes, DataLocation.LINKAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "PARM-DATA-LEN", dataNodes, DataLocation.LINKAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "PARM-DATA-VAL", dataNodes, DataLocation.LINKAGE)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
@@ -919,7 +933,7 @@ public static void main(String[] args) throws Exception {
 		for (DDNode node: dataNodes) {
 			if (node.level.equals(level) && node.identifier.equals(identifier)) {
 				rc = true;
-				LOGGER.fine("node found");
+				LOGGER.fine(identifier + " node found");
 				break;
 			} else {
 				LOGGER.fine(node.level + " != " + level + " || " + node.identifier + " != " + identifier);
@@ -930,6 +944,33 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - no dataNode found " + level + " " + identifier);
 			LOGGER.fine("dataNodes = " + dataNodes);
+		}
+
+		return rc;
+	}
+
+	public static Boolean testDD002(String fileName
+						, String bareName
+						, Integer level
+						, String identifier
+						, ArrayList<DDNode> dataNodes
+						, DataLocation locn) {
+		Boolean rc = false;
+
+		for (DDNode node: dataNodes) {
+			if (node.level.equals(level) && node.identifier.equals(identifier) && node.locn == locn) {
+				rc = true;
+				LOGGER.fine(identifier + " node found");
+				break;
+			} else {
+				LOGGER.finest(node.level + " != " + level + " || " + node.identifier + " != " + identifier + " || " + node.locn + " != " + locn);
+			}
+		}
+
+		if (!rc) {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - no dataNode found " + level + " " + identifier + " " + locn);
+			LOGGER.finest("dataNodes = " + dataNodes);
 		}
 
 		return rc;

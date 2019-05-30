@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessor.tokens ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class
+all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessor.tokens ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/DataLocation.class
 
 .PHONY: all clean cleanmine mine jar testLocal testNist
 
@@ -44,7 +44,7 @@ testLocal:
 	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local
 
 testNist:
-	java -jar CallTree.jar -unitTest -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist
+	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist
 
 ./src/CobolLexer.tokens: 
 
@@ -54,13 +54,15 @@ testNist:
 
 ./class/CallType.class: 
 
+./class/DataLocation.class:
+
 ./class/CallEtAlListener.class: ./class/CallWrapper.class
 
-./class/DataDescriptionEntryListener.class: 
+./class/DataDescriptionEntryListener.class: ./class/DataLocation.class
 
 ./class/SetListener.class: 
 
-./class/DDNode.class: 
+./class/DDNode.class: ./class/DataLocation.class
 
 ./class/CallWrapper.class: ./class/CallType.class ./class/DDNode.class
 
