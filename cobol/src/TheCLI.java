@@ -13,6 +13,7 @@ public class TheCLI{
 	public HelpFormatter formatter = new HelpFormatter();
 	public ArrayList<String> fileNamesToProcess = new ArrayList<>();
 	public ArrayList<String> copyPaths = new ArrayList<>();
+	public String outFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
 
@@ -28,6 +29,8 @@ public class TheCLI{
 			, "name of a single path in which to locate copybooks, takes precedence over the copyList option");
 		Option copyList = new Option("copyList", true
 			, "name of a file containing a list of paths in which to locate copybooks");
+		Option out = new Option("out", true
+			, "name of a file in which to store the CALLs, EXEC CICS LINKs, EXEC CICS XCTLs, and EXEC SQL CALLs");
 		Option logLevel = new Option("logLevel", true
 			, "logging level for this run {SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST}");
 		Option unitTest = new Option("unitTest", false
@@ -40,6 +43,7 @@ public class TheCLI{
 		this.options.addOption(fileList);
 		this.options.addOption(copy);
 		this.options.addOption(copyList);
+		this.options.addOption(out);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
 		this.options.addOption(saveTemp);
@@ -77,6 +81,10 @@ public class TheCLI{
 			TestIntegration.LOGGER.config("Either the copy or the copyList option must be provided");
 			this.formatter.printHelp( "CallTree", options, true );
 			System.exit(16);
+		}
+
+		if (this.line.hasOption("out")) {
+			this.outFileName = this.line.getOptionValue("out");
 		}
 
 		if (this.line.hasOption("logLevel")) {

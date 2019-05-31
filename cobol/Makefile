@@ -41,10 +41,10 @@ jar:
 	jar cfm CallTree.jar manifest -C class .
 
 testLocal:
-	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local
+	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
 
 testNist:
-	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist
+	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 
 ./src/CobolLexer.tokens: 
 

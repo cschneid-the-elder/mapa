@@ -1,9 +1,12 @@
 
 import java.util.*;
+import java.io.*;
+import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
 
 class CallWrapper {
 
+	public UUID uuid = UUID.randomUUID();
 	public CallType callType = null;
 	public String identifier = null; //COBOL identifier
 	public List<String> calledModuleNames = new ArrayList<>();
@@ -46,9 +49,33 @@ class CallWrapper {
 
 	public void addCalledModuleName(String calledModuleName) {
 		if (calledModuleName != null) {
-			this.calledModuleNames.add(calledModuleName.replace("'", ""));
+			String aString = calledModuleName.replace("'", "");
+			aString = aString.replace("\"", "");
+			if (!this.includes(calledModuleName)) {
+				this.calledModuleNames.add(aString);
+			}
 		}
 		return;
+	}
+
+	public Boolean seemsLike(CallWrapper cw) {
+		/*
+			Only unique CALLs (et. al.) are interesting.  If the source contains
+			multiple CALLs to the same identifier, it's not necessary to record that.
+		*/
+		Boolean is = this.callingModuleName.equals(cw.callingModuleName);
+		is = is && this.callType == cw.callType;
+		if (is && (this.callType == CallType.CALLBYLITERAL
+					|| this.callType == CallType.CICSLINKBYLITERAL
+					|| this.callType == CallType.CICSXCTLBYLITERAL
+					|| this.callType == CallType.SQLCALLBYLITERAL)
+					) {
+			is = is && this.calledModuleNames.equals(cw.calledModuleNames);
+		} else {
+			if (this.identifier != null && identifier != null) is = is && this.identifier.equals(cw.identifier);
+		}
+		is = is && this.ofs.equals(cw.ofs);
+		return is; 
 	}
 
 	public Boolean selectDataNode(List<DDNode> dataNodes, ArrayList<DDNode> allDataNodes) {
@@ -299,4 +326,11 @@ class CallWrapper {
 		}
 	}
 
+	public void writeOn(PrintWriter out) throws IOException {
+
+		for (String cm: calledModuleNames) {
+			out.printf("%s\t%s\t%s\t%s\n", uuid.toString(), callingModuleName, callType, cm);
+		}
+
+	}
 }

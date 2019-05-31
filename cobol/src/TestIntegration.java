@@ -101,6 +101,16 @@ public static void main(String[] args) throws Exception {
 
 	if (failCount > 0) LOGGER.info("----> At least one unit test failed");
 
+	if (CLI.outFileName != null) {
+		LOGGER.info("writing to " + CLI.outFileName);
+		File outFile = new File(CLI.outFileName);
+		PrintWriter pw = new PrintWriter(outFile);
+		for (CallWrapper cw: allTheCalledNodes) {
+			cw.writeOn(pw);
+		}
+		pw.close();
+	}
+
 	LOGGER.info("Processing complete");
 }
 
@@ -868,6 +878,17 @@ public static void main(String[] args) throws Exception {
 				if (!testDD002(fileName, bareName, new Integer(05), "PARM-DATA-LEN", dataNodes, DataLocation.LINKAGE)) failCount++;
 				if (!testDD002(fileName, bareName, new Integer(05), "PARM-DATA-VAL", dataNodes, DataLocation.LINKAGE)) failCount++;
 				break;
+			case "testantlr029":
+			case "testantlr129":
+			case "testantlr229":
+			case "testantlr329":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMK0008", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMO0010", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0004", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMB0004", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
@@ -891,6 +912,52 @@ public static void main(String[] args) throws Exception {
 		} else {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - calledNodes.size() != 1");
+			LOGGER.fine(fileName + " calledNodes.size() = " + calledNodes.size());
+			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
+		} 
+
+		if (rc && calledNodes.get(0).calledModuleNames.size() == 1) {
+			rc = true;
+		} else {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+		} 
+
+		if (rc) {
+			rc = false;
+			for (CallWrapper cw: calledNodes) {
+				if (cw.includes(bareName, callee, ty)) {
+					rc = true;
+					break;
+				}
+			} 
+		}
+
+		if (!rc) {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - calledNodes.includes(" + callee + ") == false");
+			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
+		} 
+
+		return rc;
+	}
+
+	public static Boolean testCall001(String fileName
+						, String bareName
+						, String callee
+						, CallType ty
+						, ArrayList<CallWrapper> calledNodes
+						, int count
+						) {
+		Boolean rc = false;
+
+		if (calledNodes.size() == count) {
+			rc = true;
+		} else {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - calledNodes.size() != " + count);
 			LOGGER.fine(fileName + " calledNodes.size() = " + calledNodes.size());
 			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
 		} 

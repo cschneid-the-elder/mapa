@@ -22,19 +22,51 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	}
 
 	@Override public void enterCallStatement(CobolParser.CallStatementContext ctx) {
-		calledNodes.add(new CallWrapper(ctx, callingModuleName));
+		Boolean found = false;
+		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		for (CallWrapper cw: calledNodes) {
+			if (cw.seemsLike(aCall)) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) calledNodes.add(aCall);
 	}
 
 	@Override public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
-		calledNodes.add(new CallWrapper(ctx, callingModuleName));
+		Boolean found = false;
+		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		for (CallWrapper cw: calledNodes) {
+			if (cw.seemsLike(aCall)) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) calledNodes.add(aCall);
 	}
 
 	@Override public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
-		calledNodes.add(new CallWrapper(ctx, callingModuleName));
+		Boolean found = false;
+		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		for (CallWrapper cw: calledNodes) {
+			if (cw.seemsLike(aCall)) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) calledNodes.add(aCall);
 	}
 
 	@Override public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
-		calledNodes.add(new CallWrapper(ctx, callingModuleName));
+		Boolean found = false;
+		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		for (CallWrapper cw: calledNodes) {
+			if (cw.seemsLike(aCall)) {
+				found = true;
+				break;
+			}
+		}
+		if (!found) calledNodes.add(aCall);
 	}
 
 }
