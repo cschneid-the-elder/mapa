@@ -507,6 +507,438 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDdParmDCB_Parameter(JCLParser.DdParmDCB_ParameterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_Parameter(JCLParser.DdParmDCB_ParameterContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BFALN(JCLParser.DdParmDCB_BFALNContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BFALN(JCLParser.DdParmDCB_BFALNContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BFTEK(JCLParser.DdParmDCB_BFTEKContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BFTEK(JCLParser.DdParmDCB_BFTEKContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BLKSIZE(JCLParser.DdParmDCB_BLKSIZEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BLKSIZE(JCLParser.DdParmDCB_BLKSIZEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFIN(JCLParser.DdParmDCB_BUFINContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFIN(JCLParser.DdParmDCB_BUFINContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFL(JCLParser.DdParmDCB_BUFLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFL(JCLParser.DdParmDCB_BUFLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFMAX(JCLParser.DdParmDCB_BUFMAXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFMAX(JCLParser.DdParmDCB_BUFMAXContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFNO(JCLParser.DdParmDCB_BUFNOContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFNO(JCLParser.DdParmDCB_BUFNOContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFOFF(JCLParser.DdParmDCB_BUFOFFContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFOFF(JCLParser.DdParmDCB_BUFOFFContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFOUT(JCLParser.DdParmDCB_BUFOUTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFOUT(JCLParser.DdParmDCB_BUFOUTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_BUFSIZE(JCLParser.DdParmDCB_BUFSIZEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_BUFSIZE(JCLParser.DdParmDCB_BUFSIZEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_CPRI(JCLParser.DdParmDCB_CPRIContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_CPRI(JCLParser.DdParmDCB_CPRIContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_CYLOFL(JCLParser.DdParmDCB_CYLOFLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_CYLOFL(JCLParser.DdParmDCB_CYLOFLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_DEN(JCLParser.DdParmDCB_DENContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_DEN(JCLParser.DdParmDCB_DENContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_DIAGNS(JCLParser.DdParmDCB_DIAGNSContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_DIAGNS(JCLParser.DdParmDCB_DIAGNSContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_DSORG(JCLParser.DdParmDCB_DSORGContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_DSORG(JCLParser.DdParmDCB_DSORGContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_EROPT(JCLParser.DdParmDCB_EROPTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_EROPT(JCLParser.DdParmDCB_EROPTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_FUNC(JCLParser.DdParmDCB_FUNCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_FUNC(JCLParser.DdParmDCB_FUNCContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_GNCP(JCLParser.DdParmDCB_GNCPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_GNCP(JCLParser.DdParmDCB_GNCPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_INTVL(JCLParser.DdParmDCB_INTVLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_INTVL(JCLParser.DdParmDCB_INTVLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_IPLTXID(JCLParser.DdParmDCB_IPLTXIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_IPLTXID(JCLParser.DdParmDCB_IPLTXIDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_KEYLEN(JCLParser.DdParmDCB_KEYLENContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_KEYLEN(JCLParser.DdParmDCB_KEYLENContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_LIMCT(JCLParser.DdParmDCB_LIMCTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_LIMCT(JCLParser.DdParmDCB_LIMCTContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_LRECL(JCLParser.DdParmDCB_LRECLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_LRECL(JCLParser.DdParmDCB_LRECLContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_MODE(JCLParser.DdParmDCB_MODEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_MODE(JCLParser.DdParmDCB_MODEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_NCP(JCLParser.DdParmDCB_NCPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_NCP(JCLParser.DdParmDCB_NCPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_NTM(JCLParser.DdParmDCB_NTMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_NTM(JCLParser.DdParmDCB_NTMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_OPTCD(JCLParser.DdParmDCB_OPTCDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_OPTCD(JCLParser.DdParmDCB_OPTCDContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_PCI(JCLParser.DdParmDCB_PCIContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_PCI(JCLParser.DdParmDCB_PCIContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_PRTSP(JCLParser.DdParmDCB_PRTSPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_PRTSP(JCLParser.DdParmDCB_PRTSPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_RECFM(JCLParser.DdParmDCB_RECFMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_RECFM(JCLParser.DdParmDCB_RECFMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_RESERVE(JCLParser.DdParmDCB_RESERVEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_RESERVE(JCLParser.DdParmDCB_RESERVEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_RKP(JCLParser.DdParmDCB_RKPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_RKP(JCLParser.DdParmDCB_RKPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_STACK(JCLParser.DdParmDCB_STACKContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_STACK(JCLParser.DdParmDCB_STACKContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_THRESH(JCLParser.DdParmDCB_THRESHContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_THRESH(JCLParser.DdParmDCB_THRESHContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -538,6 +970,42 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDdParmDISP(JCLParser.DdParmDISPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDISP_STATUS(JCLParser.DdParmDISP_STATUSContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDISP_STATUS(JCLParser.DdParmDISP_STATUSContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDISP_NORMAL_TERM(JCLParser.DdParmDISP_NORMAL_TERMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDISP_NORMAL_TERM(JCLParser.DdParmDISP_NORMAL_TERMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDdParmDISP_ABNORMAL_TERM(JCLParser.DdParmDISP_ABNORMAL_TERMContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDISP_ABNORMAL_TERM(JCLParser.DdParmDISP_ABNORMAL_TERMContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2007,25 +2475,25 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSymbolicParameter(JCLParser.SymbolicParameterContext ctx) { }
+	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSymbolicParameter(JCLParser.SymbolicParameterContext ctx) { }
+	@Override public void exitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSymbolicParameters(JCLParser.SymbolicParametersContext ctx) { }
+	@Override public void enterDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSymbolicParameters(JCLParser.SymbolicParametersContext ctx) { }
+	@Override public void exitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

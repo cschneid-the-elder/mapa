@@ -417,6 +417,366 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmDCB(JCLParser.DdParmDCBContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_Parameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_Parameter(JCLParser.DdParmDCB_ParameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_Parameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_Parameter(JCLParser.DdParmDCB_ParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BFALN}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BFALN(JCLParser.DdParmDCB_BFALNContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BFALN}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BFALN(JCLParser.DdParmDCB_BFALNContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BFTEK}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BFTEK(JCLParser.DdParmDCB_BFTEKContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BFTEK}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BFTEK(JCLParser.DdParmDCB_BFTEKContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BLKSIZE}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BLKSIZE(JCLParser.DdParmDCB_BLKSIZEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BLKSIZE}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BLKSIZE(JCLParser.DdParmDCB_BLKSIZEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFIN}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFIN(JCLParser.DdParmDCB_BUFINContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFIN}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFIN(JCLParser.DdParmDCB_BUFINContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFL}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFL(JCLParser.DdParmDCB_BUFLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFL}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFL(JCLParser.DdParmDCB_BUFLContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFMAX}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFMAX(JCLParser.DdParmDCB_BUFMAXContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFMAX}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFMAX(JCLParser.DdParmDCB_BUFMAXContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFNO}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFNO(JCLParser.DdParmDCB_BUFNOContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFNO}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFNO(JCLParser.DdParmDCB_BUFNOContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFOFF}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFOFF(JCLParser.DdParmDCB_BUFOFFContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFOFF}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFOFF(JCLParser.DdParmDCB_BUFOFFContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFOUT}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFOUT(JCLParser.DdParmDCB_BUFOUTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFOUT}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFOUT(JCLParser.DdParmDCB_BUFOUTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_BUFSIZE}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_BUFSIZE(JCLParser.DdParmDCB_BUFSIZEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_BUFSIZE}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_BUFSIZE(JCLParser.DdParmDCB_BUFSIZEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_CPRI}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_CPRI(JCLParser.DdParmDCB_CPRIContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_CPRI}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_CPRI(JCLParser.DdParmDCB_CPRIContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_CYLOFL}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_CYLOFL(JCLParser.DdParmDCB_CYLOFLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_CYLOFL}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_CYLOFL(JCLParser.DdParmDCB_CYLOFLContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_DEN}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_DEN(JCLParser.DdParmDCB_DENContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_DEN}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_DEN(JCLParser.DdParmDCB_DENContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_DIAGNS}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_DIAGNS(JCLParser.DdParmDCB_DIAGNSContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_DIAGNS}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_DIAGNS(JCLParser.DdParmDCB_DIAGNSContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_DSORG}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_DSORG(JCLParser.DdParmDCB_DSORGContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_DSORG}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_DSORG(JCLParser.DdParmDCB_DSORGContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_EROPT}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_EROPT(JCLParser.DdParmDCB_EROPTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_EROPT}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_EROPT(JCLParser.DdParmDCB_EROPTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_FUNC}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_FUNC(JCLParser.DdParmDCB_FUNCContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_FUNC}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_FUNC(JCLParser.DdParmDCB_FUNCContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_GNCP}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_GNCP(JCLParser.DdParmDCB_GNCPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_GNCP}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_GNCP(JCLParser.DdParmDCB_GNCPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_INTVL}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_INTVL(JCLParser.DdParmDCB_INTVLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_INTVL}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_INTVL(JCLParser.DdParmDCB_INTVLContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_IPLTXID}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_IPLTXID(JCLParser.DdParmDCB_IPLTXIDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_IPLTXID}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_IPLTXID(JCLParser.DdParmDCB_IPLTXIDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_KEYLEN}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_KEYLEN(JCLParser.DdParmDCB_KEYLENContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_KEYLEN}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_KEYLEN(JCLParser.DdParmDCB_KEYLENContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_LIMCT}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_LIMCT(JCLParser.DdParmDCB_LIMCTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_LIMCT}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_LIMCT(JCLParser.DdParmDCB_LIMCTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_LRECL}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_LRECL(JCLParser.DdParmDCB_LRECLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_LRECL}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_LRECL(JCLParser.DdParmDCB_LRECLContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_MODE}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_MODE(JCLParser.DdParmDCB_MODEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_MODE}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_MODE(JCLParser.DdParmDCB_MODEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_NCP}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_NCP(JCLParser.DdParmDCB_NCPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_NCP}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_NCP(JCLParser.DdParmDCB_NCPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_NTM}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_NTM(JCLParser.DdParmDCB_NTMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_NTM}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_NTM(JCLParser.DdParmDCB_NTMContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_OPTCD}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_OPTCD(JCLParser.DdParmDCB_OPTCDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_OPTCD}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_OPTCD(JCLParser.DdParmDCB_OPTCDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_PCI}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_PCI(JCLParser.DdParmDCB_PCIContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_PCI}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_PCI(JCLParser.DdParmDCB_PCIContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_PRTSP}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_PRTSP(JCLParser.DdParmDCB_PRTSPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_PRTSP}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_PRTSP(JCLParser.DdParmDCB_PRTSPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_RECFM}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_RECFM(JCLParser.DdParmDCB_RECFMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_RECFM}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_RECFM(JCLParser.DdParmDCB_RECFMContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_RESERVE}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_RESERVE(JCLParser.DdParmDCB_RESERVEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_RESERVE}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_RESERVE(JCLParser.DdParmDCB_RESERVEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_RKP}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_RKP(JCLParser.DdParmDCB_RKPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_RKP}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_RKP(JCLParser.DdParmDCB_RKPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_STACK}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_STACK(JCLParser.DdParmDCB_STACKContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_STACK}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_STACK(JCLParser.DdParmDCB_STACKContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_THRESH}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_THRESH(JCLParser.DdParmDCB_THRESHContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_THRESH}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_THRESH(JCLParser.DdParmDCB_THRESHContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDCB_TRTCH}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDCB_TRTCH}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmDDNAME}.
 	 * @param ctx the parse tree
 	 */
@@ -446,6 +806,36 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDdParmDISP(JCLParser.DdParmDISPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDISP_STATUS}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDISP_STATUS(JCLParser.DdParmDISP_STATUSContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDISP_STATUS}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDISP_STATUS(JCLParser.DdParmDISP_STATUSContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDISP_NORMAL_TERM}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDISP_NORMAL_TERM(JCLParser.DdParmDISP_NORMAL_TERMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDISP_NORMAL_TERM}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDISP_NORMAL_TERM(JCLParser.DdParmDISP_NORMAL_TERMContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmDISP_ABNORMAL_TERM}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmDISP_ABNORMAL_TERM(JCLParser.DdParmDISP_ABNORMAL_TERMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmDISP_ABNORMAL_TERM}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmDISP_ABNORMAL_TERM(JCLParser.DdParmDISP_ABNORMAL_TERMContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmDLM}.
 	 * @param ctx the parse tree
@@ -1667,25 +2057,25 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitProc(JCLParser.ProcContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#symbolicParameter}.
+	 * Enter a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
 	 * @param ctx the parse tree
 	 */
-	void enterSymbolicParameter(JCLParser.SymbolicParameterContext ctx);
+	void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JCLParser#symbolicParameter}.
+	 * Exit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
 	 * @param ctx the parse tree
 	 */
-	void exitSymbolicParameter(JCLParser.SymbolicParameterContext ctx);
+	void exitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#symbolicParameters}.
+	 * Enter a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
 	 * @param ctx the parse tree
 	 */
-	void enterSymbolicParameters(JCLParser.SymbolicParametersContext ctx);
+	void enterDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link JCLParser#symbolicParameters}.
+	 * Exit a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
 	 * @param ctx the parse tree
 	 */
-	void exitSymbolicParameters(JCLParser.SymbolicParametersContext ctx);
+	void exitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#stepName}.
 	 * @param ctx the parse tree

@@ -256,6 +256,222 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmDCB(JCLParser.DdParmDCBContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_Parameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_Parameter(JCLParser.DdParmDCB_ParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BFALN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BFALN(JCLParser.DdParmDCB_BFALNContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BFTEK}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BFTEK(JCLParser.DdParmDCB_BFTEKContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BLKSIZE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BLKSIZE(JCLParser.DdParmDCB_BLKSIZEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFIN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFIN(JCLParser.DdParmDCB_BUFINContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFL(JCLParser.DdParmDCB_BUFLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFMAX}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFMAX(JCLParser.DdParmDCB_BUFMAXContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFNO}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFNO(JCLParser.DdParmDCB_BUFNOContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFOFF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFOFF(JCLParser.DdParmDCB_BUFOFFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFOUT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFOUT(JCLParser.DdParmDCB_BUFOUTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_BUFSIZE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_BUFSIZE(JCLParser.DdParmDCB_BUFSIZEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_CPRI}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_CPRI(JCLParser.DdParmDCB_CPRIContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_CYLOFL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_CYLOFL(JCLParser.DdParmDCB_CYLOFLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_DEN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_DEN(JCLParser.DdParmDCB_DENContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_DIAGNS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_DIAGNS(JCLParser.DdParmDCB_DIAGNSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_DSORG}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_DSORG(JCLParser.DdParmDCB_DSORGContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_EROPT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_EROPT(JCLParser.DdParmDCB_EROPTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_FUNC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_FUNC(JCLParser.DdParmDCB_FUNCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_GNCP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_GNCP(JCLParser.DdParmDCB_GNCPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_INTVL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_INTVL(JCLParser.DdParmDCB_INTVLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_IPLTXID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_IPLTXID(JCLParser.DdParmDCB_IPLTXIDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_KEYLEN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_KEYLEN(JCLParser.DdParmDCB_KEYLENContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_LIMCT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_LIMCT(JCLParser.DdParmDCB_LIMCTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_LRECL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_LRECL(JCLParser.DdParmDCB_LRECLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_MODE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_MODE(JCLParser.DdParmDCB_MODEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_NCP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_NCP(JCLParser.DdParmDCB_NCPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_NTM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_NTM(JCLParser.DdParmDCB_NTMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_OPTCD}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_OPTCD(JCLParser.DdParmDCB_OPTCDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_PCI}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_PCI(JCLParser.DdParmDCB_PCIContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_PRTSP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_PRTSP(JCLParser.DdParmDCB_PRTSPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_RECFM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_RECFM(JCLParser.DdParmDCB_RECFMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_RESERVE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_RESERVE(JCLParser.DdParmDCB_RESERVEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_RKP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_RKP(JCLParser.DdParmDCB_RKPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_STACK}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_STACK(JCLParser.DdParmDCB_STACKContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_THRESH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_THRESH(JCLParser.DdParmDCB_THRESHContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDCB_TRTCH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmDDNAME}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -273,6 +489,24 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDdParmDISP(JCLParser.DdParmDISPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDISP_STATUS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDISP_STATUS(JCLParser.DdParmDISP_STATUSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDISP_NORMAL_TERM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDISP_NORMAL_TERM(JCLParser.DdParmDISP_NORMAL_TERMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDISP_ABNORMAL_TERM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDISP_ABNORMAL_TERM(JCLParser.DdParmDISP_ABNORMAL_TERMContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmDLM}.
 	 * @param ctx the parse tree
@@ -1006,17 +1240,17 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProc(JCLParser.ProcContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#symbolicParameter}.
+	 * Visit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSymbolicParameter(JCLParser.SymbolicParameterContext ctx);
+	T visitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#symbolicParameters}.
+	 * Visit a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSymbolicParameters(JCLParser.SymbolicParametersContext ctx);
+	T visitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#stepName}.
 	 * @param ctx the parse tree
