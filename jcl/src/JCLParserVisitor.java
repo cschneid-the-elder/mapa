@@ -34,6 +34,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommentStatement(JCLParser.CommentStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#jclStep}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJclStep(JCLParser.JclStepContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#execStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -147,6 +153,18 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDdStatement(JCLParser.DdStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddStatementConcatenation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdStatementConcatenation(JCLParser.DdStatementConcatenationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddStatementAmalgamation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdStatementAmalgamation(JCLParser.DdStatementAmalgamationContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddName}.
 	 * @param ctx the parse tree
@@ -471,12 +489,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmDDNAME}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmDEST}.
 	 * @param ctx the parse tree
@@ -838,6 +850,24 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmVOLUME(JCLParser.DdParmVOLUMEContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmVolSer}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmVolSer(JCLParser.DdParmVolSerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmVOLUME_SER}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmVOLUME_SER(JCLParser.DdParmVOLUME_SERContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmVOLUME_REF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmVOLUME_REF(JCLParser.DdParmVOLUME_REFContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_Parameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -946,6 +976,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmAMP_SYNAD(JCLParser.DdParmAMP_SYNADContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmReferback}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmReferback(JCLParser.DdParmReferbackContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -987,6 +1023,30 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDdParmAMP_TRACE_PARM2(JCLParser.DdParmAMP_TRACE_PARM2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#joblibStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoblibStatement(JCLParser.JoblibStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#joblibConcatenation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoblibConcatenation(JCLParser.JoblibConcatenationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#joblibAmalgamation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoblibAmalgamation(JCLParser.JoblibAmalgamationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#joblibParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJoblibParameter(JCLParser.JoblibParameterContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobCard}.
 	 * @param ctx the parse tree
@@ -1263,4 +1323,34 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProcName(JCLParser.ProcNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#commandStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommandStatement(JCLParser.CommandStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#cntlStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCntlStatement(JCLParser.CntlStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#endcntlStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndcntlStatement(JCLParser.EndcntlStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#cntlStatementAmalgamation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCntlStatementAmalgamation(JCLParser.CntlStatementAmalgamationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#exportStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExportStatement(JCLParser.ExportStatementContext ctx);
 }

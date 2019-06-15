@@ -47,6 +47,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitCommentStatement(JCLParser.CommentStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#jclStep}.
+	 * @param ctx the parse tree
+	 */
+	void enterJclStep(JCLParser.JclStepContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jclStep}.
+	 * @param ctx the parse tree
+	 */
+	void exitJclStep(JCLParser.JclStepContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#execStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -236,6 +246,26 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDdStatement(JCLParser.DdStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddStatementConcatenation}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdStatementConcatenation(JCLParser.DdStatementConcatenationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddStatementConcatenation}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdStatementConcatenation(JCLParser.DdStatementConcatenationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddStatementAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdStatementAmalgamation(JCLParser.DdStatementAmalgamationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddStatementAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdStatementAmalgamation(JCLParser.DdStatementAmalgamationContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddName}.
 	 * @param ctx the parse tree
@@ -776,16 +806,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDdParmDCB_TRTCH(JCLParser.DdParmDCB_TRTCHContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmDDNAME}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmDDNAME}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmDEST}.
 	 * @param ctx the parse tree
@@ -1387,6 +1407,36 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmVOLUME(JCLParser.DdParmVOLUMEContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmVolSer}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmVolSer(JCLParser.DdParmVolSerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmVolSer}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmVolSer(JCLParser.DdParmVolSerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmVOLUME_SER}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmVOLUME_SER(JCLParser.DdParmVOLUME_SERContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmVOLUME_SER}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmVOLUME_SER(JCLParser.DdParmVOLUME_SERContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmVOLUME_REF}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmVOLUME_REF(JCLParser.DdParmVOLUME_REFContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmVOLUME_REF}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmVOLUME_REF(JCLParser.DdParmVOLUME_REFContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_Parameter}.
 	 * @param ctx the parse tree
 	 */
@@ -1567,6 +1617,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmAMP_SYNAD(JCLParser.DdParmAMP_SYNADContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmReferback}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmReferback(JCLParser.DdParmReferbackContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmReferback}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmReferback(JCLParser.DdParmReferbackContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE}.
 	 * @param ctx the parse tree
 	 */
@@ -1636,6 +1696,46 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDdParmAMP_TRACE_PARM2(JCLParser.DdParmAMP_TRACE_PARM2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#joblibStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoblibStatement(JCLParser.JoblibStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#joblibStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoblibStatement(JCLParser.JoblibStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#joblibConcatenation}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoblibConcatenation(JCLParser.JoblibConcatenationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#joblibConcatenation}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoblibConcatenation(JCLParser.JoblibConcatenationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#joblibAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoblibAmalgamation(JCLParser.JoblibAmalgamationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#joblibAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoblibAmalgamation(JCLParser.JoblibAmalgamationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#joblibParameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterJoblibParameter(JCLParser.JoblibParameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#joblibParameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitJoblibParameter(JCLParser.JoblibParameterContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobCard}.
 	 * @param ctx the parse tree
@@ -2096,4 +2196,54 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProcName(JCLParser.ProcNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#commandStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommandStatement(JCLParser.CommandStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#commandStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommandStatement(JCLParser.CommandStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#cntlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCntlStatement(JCLParser.CntlStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#cntlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCntlStatement(JCLParser.CntlStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#endcntlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndcntlStatement(JCLParser.EndcntlStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#endcntlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndcntlStatement(JCLParser.EndcntlStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#cntlStatementAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void enterCntlStatementAmalgamation(JCLParser.CntlStatementAmalgamationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#cntlStatementAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void exitCntlStatementAmalgamation(JCLParser.CntlStatementAmalgamationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#exportStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterExportStatement(JCLParser.ExportStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#exportStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitExportStatement(JCLParser.ExportStatementContext ctx);
 }
