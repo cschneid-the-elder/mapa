@@ -1353,4 +1353,40 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExportStatement(JCLParser.ExportStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ifStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfStatement(JCLParser.IfStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#elseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElseStatement(JCLParser.ElseStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#endifStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndifStatement(JCLParser.EndifStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#includeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncludeStatement(JCLParser.IncludeStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jcllibStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJcllibStatement(JCLParser.JcllibStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#notifyStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotifyStatement(JCLParser.NotifyStatementContext ctx);
 }

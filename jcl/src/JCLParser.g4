@@ -22,11 +22,11 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | proc+ ;
 
-execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | exportStatement)+)+ ;
+execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement)+)+ ;
 
 commentStatement : COMMENT_FLAG (COMMENT_TEXT | EOF) ;
 
-jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation)* ;
+jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | includeStatement | commentStatement)* ;
 
 execStatement : SS stepName? EXEC ((PGM EQUAL) | (PROC_EX EQUAL))? NAME_EX (((COMMA | inlineComment) SS?)? execParameter inlineComment?)* ;
 
@@ -490,5 +490,25 @@ exportStatement : SS NAME_FIELD EXPORT SYMLIST EQUAL (
     (LPAREN NAME (COMMA | (inlineComment SS CONTINUATION_WS) NAME)* RPAREN)
   ) ;
 
+ifStatement : SS NAME_FIELD? IF LPAREN* IF_CHECK ((SS CONTINUATION_WS)? LPAREN* IF_CHECK RPAREN*)* RPAREN* THEN inlineComment? ;
+
+elseStatement : SS NAME_FIELD? ELSE inlineComment? ;
+
+endifStatement : SS NAME_FIELD? ENDIF inlineComment? ;
+
+includeStatement : SS NAME_FIELD? INCLUDE MEMBER EQUAL MEMBER_NAME inlineComment? ;
+
+jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL LPAREN? (DATASET_NAME | QUOTED_STRING) ((COMMA | (inlineComment SS CONTINUATION_WS)) (DATASET_NAME | QUOTED_STRING))* RPAREN? ;
+
+notifyStatement : SS NAME_FIELD? NOTIFY 
+    ((EMAIL EQUAL QUOTED_STRING) | (USER EQUAL (NAME DOT)? NAME)) 
+        ((COMMA |
+         (inlineComment SS CONTINUATION_WS)) 
+         TYPE EQUAL (EMAIL | MSG))? 
+        ((COMMA |
+         (inlineComment SS CONTINUATION_WS)) 
+         WHEN EQUAL LPAREN* WHEN_CHECK 
+            ((SS CONTINUATION_WS)? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
+    ;
 
 

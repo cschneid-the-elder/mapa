@@ -2246,4 +2246,64 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExportStatement(JCLParser.ExportStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfStatement(JCLParser.IfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfStatement(JCLParser.IfStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#elseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterElseStatement(JCLParser.ElseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#elseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitElseStatement(JCLParser.ElseStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#endifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndifStatement(JCLParser.EndifStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#endifStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndifStatement(JCLParser.EndifStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#includeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncludeStatement(JCLParser.IncludeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#includeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncludeStatement(JCLParser.IncludeStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jcllibStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJcllibStatement(JCLParser.JcllibStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jcllibStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJcllibStatement(JCLParser.JcllibStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#notifyStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotifyStatement(JCLParser.NotifyStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#notifyStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotifyStatement(JCLParser.NotifyStatementContext ctx);
 }
