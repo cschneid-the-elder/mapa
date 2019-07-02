@@ -63,7 +63,7 @@ execParmDYNAMNBR : DYNAMNBR (DOT NAME)? EQUAL NUM_LIT ;
 
 execParmMEMLIMIT : MEMLIMIT EQUAL ((NUM_LIT MEM_UNIT) | NOLIMIT) ;
 
-execParmPARM : PARM EQUAL (SIMPLE_STRING | QUOTED_STRING | SYMBOLIC) ;
+execParmPARM : PARM EQUAL (SIMPLE_STRING | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
 
 execParmPARMDD : PARMDD EQUAL NAME ;
 
@@ -92,15 +92,10 @@ ddStatementAmalgamation : ddStatement ddStatementConcatenation* ;
 ddName : NAME_FIELD (DOT NAME_FIELD)? ;
 ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME ;
 
-ddParmACCODE : ACCODE EQUAL (SIMPLE_STRING | QUOTED_STRING);
+ddParmACCODE : ACCODE EQUAL (SIMPLE_STRING | QUOTED_STRING_FRAGMENT);
 ddParmAMP : AMP EQUAL 
     (LPAREN 
-        (QUOTED_STRING ((COMMA | inlineComment) SS QUOTED_STRING))* |
-        (SQUOTE 
-            ddParmAMP_Parameter 
-                ((COMMA ddParmAMP_Parameter) | 
-                 (SQUOTE (inlineComment | COMMA) SS SQUOTE ddParmAMP_Parameter))* 
-        SQUOTE) 
+        (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment) SS QUOTED_STRING_FRAGMENT))*
     RPAREN) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
@@ -168,9 +163,10 @@ ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? COMMA? ddParmDISP_NORMAL_TERM
 ddParmDISP_STATUS : MOD | NEW | OLD | SHR | SYMBOLIC ;
 ddParmDISP_NORMAL_TERM : CATLG | DELETE | KEEP | PASS | UNCATLG | SYMBOLIC ;
 ddParmDISP_ABNORMAL_TERM : CATLG | DELETE | KEEP | PASS | UNCATLG | SYMBOLIC ;
-ddParmDLM : DLM EQUAL DLM_VAL ;
+//ddParmDLM : DLM EQUAL DLM_VAL ;
+ddParmDLM : DLM DLM_VAL ;
 ddParmDSID : DSID EQUAL (DSID_VAL | (LPAREN DSID_VAL COMMA V RPAREN)) ;
-ddParmDSKEYLBL : DSKEYLBL EQUAL QUOTED_STRING ;
+ddParmDSKEYLBL : DSKEYLBL EQUAL QUOTED_STRING_FRAGMENT ;
 ddParmDSNAME : (DSNAME | DSN) EQUAL DATASET_NAME ;
 ddParmDSNTYPE : DSNTYPE EQUAL DSNTYPE_VAL ;
 ddParmDUMMY : DUMMY ;
@@ -184,8 +180,8 @@ ddParmFREE : FREE EQUAL (END | CLOSE) ;
 ddParmFREEVOL : FREEVOL EQUAL (END | EOV) ;
 ddParmGDGORDER : GDGORDER EQUAL (FIFO | LIFO | USECATLG) ;
 ddParmHOLD : HOLD EQUAL (YES | NO | Y | N);
-ddParmKEYLABL1 : KEYLABL1 EQUAL (QUOTED_STRING | SIMPLE_STRING) ;
-ddParmKEYLABL2 : KEYLABL2 EQUAL (QUOTED_STRING | SIMPLE_STRING) ;
+ddParmKEYLABL1 : KEYLABL1 EQUAL (QUOTED_STRING_FRAGMENT | SIMPLE_STRING) ;
+ddParmKEYLABL2 : KEYLABL2 EQUAL (QUOTED_STRING_FRAGMENT | SIMPLE_STRING) ;
 ddParmKEYENCD1 : KEYENCD1 EQUAL (L | H) ;
 ddParmKEYENCD2 : KEYENCD2 EQUAL (L | H) ;
 ddParmKEYLEN : KEYLEN EQUAL NUM_LIT ;
@@ -212,7 +208,7 @@ ddParmOUTPUT : OUTPUT EQUAL (ddParmReferback |
             ((COMMA ddParmReferback) | 
             (inlineComment SS ddParmReferback))* 
     RPAREN)) ;
-ddParmPATH : PATH EQUAL (QUOTED_STRING | SIMPLE_STRING) ;
+ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT | SIMPLE_STRING) ;
 ddParmPATHDISP : PATHDISP EQUAL (
     (KEEP | DELETE) | 
     (LPAREN (KEEP | DELETE) (COMMA (KEEP | DELETE))? RPAREN) | 
@@ -253,7 +249,7 @@ ddParmSPACE : SPACE EQUAL (
 ddParmSPIN : SPIN EQUAL (
     NO | 
     UNALLOC |
-    (LPAREN UNALLOC COMMA QUOTED_STRING RPAREN) |
+    (LPAREN UNALLOC COMMA QUOTED_STRING_FRAGMENT RPAREN) |
     (LPAREN UNALLOC COMMA NUM_LIT (K | M)? RPAREN) |
     (LPAREN UNALLOC COMMA NOCMND RPAREN) |
     (LPAREN UNALLOC COMMA CMNDONLY RPAREN)
@@ -261,10 +257,10 @@ ddParmSPIN : SPIN EQUAL (
 
 ddParmSTORCLAS : STORCLAS EQUAL NAME? ;
 ddParmSUBSYS : SUBSYS EQUAL (
-    (SIMPLE_STRING | QUOTED_STRING) |
-    (LPAREN (SIMPLE_STRING | QUOTED_STRING) (
-        (COMMA (SIMPLE_STRING | QUOTED_STRING)) |
-        (inlineComment SS (SIMPLE_STRING | QUOTED_STRING))
+    (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) |
+    (LPAREN (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) (
+        (COMMA (SIMPLE_STRING | QUOTED_STRING_FRAGMENT)) |
+        (inlineComment SS (SIMPLE_STRING | QUOTED_STRING_FRAGMENT))
       )*
     RPAREN)
   ) ;
@@ -320,14 +316,14 @@ ddParmVOLUME : VOLUME EQUAL (
     RPAREN)
   ) ;
 
-ddParmVolSer : (NUM_LIT | SIMPLE_STRING | ALNUMNAT | QUOTED_STRING) ;
+ddParmVolSer : (NUM_LIT | SIMPLE_STRING | ALNUMNAT | QUOTED_STRING_FRAGMENT) ;
 ddParmVOLUME_SER : 
     (SER EQUAL ddParmVolSer) |
     (SER EQUAL LPAREN  ddParmVolSer (
             (COMMA ddParmVolSer)* |
             (inlineComment SS ddParmVolSer)* 
           ) RPAREN) ;
-ddParmVOLUME_REF : REF EQUAL (ddName | DATASET_NAME | QUOTED_STRING) ;
+ddParmVOLUME_REF : REF EQUAL (ddName | DATASET_NAME | QUOTED_STRING_FRAGMENT) ;
 
 
 ddParmAMP_Parameter : ddParmAMP_ACCBIAS | ddParmAMP_AMORG | ddParmAMP_BUFND | ddParmAMP_BUFNI | ddParmAMP_BUFSP | ddParmAMP_CROPS | ddParmAMP_FRLOG | ddParmAMP_MSG | ddParmAMP_OPTCD | ddParmAMP_RECFM | ddParmAMP_RMODE31 | ddParmAMP_SMBDFR | ddParmAMP_SMBHWT | ddParmAMP_SMBVSP | ddParmAMP_SMBVSPI | ddParmAMP_STRNO | ddParmAMP_SYNAD | ddParmAMP_TRACE ;
@@ -365,8 +361,11 @@ Home > z/OS 2.3.0 > z/OS DFSMS > z/OS DFSMSdfp Diagnosis > VSAM diagnostic aids 
 ...for the future, when z/OS 2.3 documentation drops off the back of the stove.
 
 */
-ddParmAMP_TRACE : TRACE EQUAL LPAREN SQUOTE ddParmAMP_TRACE_Parameter ((COMMA ddParmAMP_TRACE_Parameter) | (SQUOTE (inlineComment | COMMA) SS SQUOTE ddParmAMP_TRACE_Parameter))* SQUOTE RPAREN ;
-
+//ddParmAMP_TRACE : TRACE EQUAL LPAREN SQUOTE ddParmAMP_TRACE_Parameter ((COMMA ddParmAMP_TRACE_Parameter) | (SQUOTE (inlineComment | COMMA) SS SQUOTE ddParmAMP_TRACE_Parameter))* SQUOTE RPAREN ;
+ddParmAMP_TRACE : TRACE EQUAL 
+    LPAREN
+        (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment) SS QUOTED_STRING_FRAGMENT))*
+    RPAREN ;
 ddParmAMP_TRACE_Parameter : ddParmAMP_TRACE_HOOK | ddParmAMP_TRACE_ECODE | ddParmAMP_TRACE_KEY | ddParmAMP_TRACE_PARM1 | ddParmAMP_TRACE_PARM2 ;
 
 ddParmAMP_TRACE_HOOK : HOOK EQUAL LPAREN NUM_LIT (COMMA NUM_LIT)* RPAREN ;
@@ -389,13 +388,13 @@ jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment
 
 jobName : NAME_FIELD ;
 
-jobProgrammerName : QUOTED_STRING | SIMPLE_STRING | NUM_LIT | NAME ;
+jobProgrammerName : QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME ;
 
 jobAccountingInformation : jobAccountingInformationSimple | jobAccountingInformationMultiLine ;
 
-jobAccountingInformationSimple : (QUOTED_STRING | SIMPLE_STRING | NUM_LIT | NAME) (COMMA (QUOTED_STRING | SIMPLE_STRING | NUM_LIT | NAME))* ;
+jobAccountingInformationSimple : (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME) (COMMA (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME))* ;
 
-jobAccountingInformationMultiLine : (QUOTED_STRING | SIMPLE_STRING | NUM_LIT | NAME) ((COMMA SS?)? (QUOTED_STRING | SIMPLE_STRING | NUM_LIT | NAME))* ;
+jobAccountingInformationMultiLine : (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME) ((COMMA SS?)? (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME))* ;
 
 jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
 
@@ -461,7 +460,7 @@ jobParmTIME : TIME EQUAL LPAREN? (NOLIMIT | MAXIMUM | FOURTEENFORTY | (NUM_LIT (
 
 jobParmTYPRUN : TYPRUN EQUAL (COPY | HOLD | JCLHOLD | SCAN) ;
 
-jobParmUJOBCORR : UJOBCORR EQUAL (SIMPLE_STRING | QUOTED_STRING) ;
+jobParmUJOBCORR : UJOBCORR EQUAL (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) ;
 
 jobParmUSER : USER EQUAL NAME ;
 
@@ -469,7 +468,7 @@ inlineComment : COMMENT_FLAG_INLINE? COMMENT_TEXT ;
 
 proc : SS procName PROC definedSymbolicParameters* ;
 
-defineSymbolicParameter : NAME EQUAL (QUOTED_STRING | SIMPLE_STRING)? ;
+defineSymbolicParameter : NAME EQUAL (QUOTED_STRING_FRAGMENT | SIMPLE_STRING)? ;
 
 definedSymbolicParameters : defineSymbolicParameter ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* ;
 
@@ -477,7 +476,7 @@ stepName : NAME_FIELD ;
 
 procName : NAME_FIELD ;
 
-commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING ;
+commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT ;
  
 cntlStatement : SS NAME_FIELD CNTL ASTERISK inlineComment* ;
 
@@ -498,10 +497,10 @@ endifStatement : SS NAME_FIELD? ENDIF inlineComment? ;
 
 includeStatement : SS NAME_FIELD? INCLUDE MEMBER EQUAL MEMBER_NAME inlineComment? ;
 
-jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL LPAREN? (DATASET_NAME | QUOTED_STRING) ((COMMA | (inlineComment SS CONTINUATION_WS)) (DATASET_NAME | QUOTED_STRING))* RPAREN? ;
+jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL LPAREN? (DATASET_NAME | QUOTED_STRING_FRAGMENT) ((COMMA | (inlineComment SS CONTINUATION_WS)) (DATASET_NAME | QUOTED_STRING_FRAGMENT))* RPAREN? ;
 
 notifyStatement : SS NAME_FIELD? NOTIFY 
-    ((EMAIL EQUAL QUOTED_STRING) | (USER EQUAL (NAME DOT)? NAME)) 
+    ((EMAIL EQUAL QUOTED_STRING_FRAGMENT) | (USER EQUAL (NAME DOT)? NAME)) 
         ((COMMA |
          (inlineComment SS CONTINUATION_WS)) 
          TYPE EQUAL (EMAIL | MSG))? 
@@ -510,5 +509,120 @@ notifyStatement : SS NAME_FIELD? NOTIFY
          WHEN EQUAL LPAREN* WHEN_CHECK 
             ((SS CONTINUATION_WS)? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
     ;
+/*
+outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter+ ;
+
+outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | outputStatementAFPSTATS | outputStatementBUILDING | outputStatementBURST | outputStatementCHARS | outputStatementCKPTLINE | outputStatementCKPTPAGE | outputStatementCKPTSEC | outputStatementCLASS | outputStatementCOLORMAP | outputStatementCOMPACT | outputStatementCOMSETUP | outputStatementCONTROL | outputStatementCOPIES | outputStatementCOPYCNT | outputStatementDATACK | outputStatementDDNAME | outputStatementDEFAULT | outputStatementDEPT | outputStatementDEST | outputStatementDPAGELBL | outputStatementDUPLEX | outputStatementFCB | outputStatementFLASH | outputStatementFORMDEF | outputStatementFORMLEN | outputStatementFORMS | outputStatementFSSDATA | outputStatementGROUPID | outputStatementINDEX | outputStatementINTRAY | outputStatementJESDS | outputStatementLINDEX | outputStatementLINECT | outputStatementMAILBCC | outputStatementMAILCC | outputStatementMAILFILE | outputStatementMAILFROM | outputStatementMAILTO | outputStatementMERGE | outputStatementMODIFY | outputStatementNAME | outputStatementNOTIFY | outputStatementOFFSETXB | outputStatementOFFSETXF | outputStatementOFFSETYB | outputStatementOFFSETYF | outputStatementOUTBIN | outputStatementOUTDISP | outputStatementOVERLAYB | outputStatementOVERLAYF | outputStatementOVFL | outputStatementPAGEDEF | outputStatementPIMSG | outputStatementPORTNO | outputStatementPRMODE | outputStatementPRTATTRS | outputStatementPRTERROR | outputStatementPRTOPTNS | outputStatementPRTQUEUE | outputStatementPRTY | outputStatementREPLYTO | outputStatementRESFMT | outputStatementRETAINS | outputStatementRETAINF | outputStatementRETRYL | outputStatementRETRYT | outputStatementROOM | outputStatementSYSAREA | outputStatementTHRESHLD | outputStatementTITLE | outputStatementTRC | outputStatementUCS | outputStatementUSERDATA | outputStatementUSERLIB | outputStatementUSERPATH | outputStatementWRITER ;
+
+outputStatementADDRESS : ADDRESS EQUAL (
+    LPAREN QUOTED_STRING_FRAGMENT 
+        (COMMA | (inlineComment SS CONTINUATION_WS) QUOTED_STRING_FRAGMENT)*
+    RPAREN
+  ) |
+    QUOTED_STRING_FRAGMENT
+  ;
+outputStatementAFPPARMS : AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT) ;
+outputStatementAFPSTATS : AFPSTATS EQUAL (YES | Y | NO | N) ;
+outputStatementBUILDING : BUILDING EQUAL QUOTED_STRING_FRAGMENT ;
+outputStatementBURST : BURST EQUAL (YES | Y | NO | N) ;
+outputStatementCHARS : CHARS EQUAL (
+    LPAREN (NAME | DUMP )
+        (COMMA | (inlineComment SS CONTINUATION_WS) NAME)*
+    RPAREN
+  ) |
+    STD |
+    DUMP
+  ;
+outputStatementCKPTLINE : CKPTLINE EQUAL NUM_LIT ;
+outputStatementCKPTPAGE : CKPTPAGE EQUAL NUM_LIT ;
+outputStatementCKPTSEC : CKPTSEC EQUAL NUM_LIT ;
+outputStatementCLASS : CLASS EQUAL (ALPHA | NUM_LIT | ASTERISK) ;
+outputStatementCOLORMAP : COLORMAP EQUAL ALNUMNAT ;
+outputStatementCOMPACT : COMPACT EQUAL ALNUMNAT ;
+outputStatementCOMSETUP : COMSETUP EQUAL ALNUMNAT ;
+outputStatementCONTROL : CONTROL EQUAL (PROGRAM | SINGLE | DOUBLE | TRIPLE) ;
+outputStatementCOPIES : COPIES EQUAL (
+    LPAREN NUM_LIT? (
+        COMMA LPAREN (NUM_LIT (COMMA NUM_LIT)*)? RPAREN
+      )?
+    RPAREN
+  ) |
+    NUM_LIT
+  ;
+outputStatementCOPYCNT : COPYCNT EQUAL NUM_LIT ;
+outputStatementDATACK : DATACK EQUAL (BLOCK | UNBLOCK | BLKCHAR | BLKPOS) ;
+outputStatementDDNAME : DDNAME EQUAL NAME (DOT NAME)? (DOT NAME)? ;
+outputStatementDEFAULT : DEFAULT EQUAL (YES | Y | NO | N) ;
+outputStatementDEPT : DEPT EQUAL (QUOTED_STRING_FRAGMENT | ALNUMNAT | ALPHA | NUM_LIT) ;
+outputStatementDEST : DEST EQUAL (
+    LOCAL |
+    ANYLOCAL |
+    NAME |
+    ALNUMNAT |
+    QUOTED_STRING_FRAGMENT |
+    (NAME DOT NAME)
+  )
+  ;
+//    (SQUOTE (NAME DOT)? I P COLON NUM_LIT DOT NUM_LIT DOT NUM_LIT DOT NUM_LIT SQUOTE) |
+
+
+outputStatementDPAGELBL : 
+outputStatementDUPLEX : 
+outputStatementFCB : 
+outputStatementFLASH : 
+outputStatementFORMDEF : 
+outputStatementFORMLEN : 
+outputStatementFORMS : 
+outputStatementFSSDATA : 
+outputStatementGROUPID : 
+outputStatementINDEX : 
+outputStatementINTRAY : 
+outputStatementJESDS : 
+outputStatementLINDEX : 
+outputStatementLINECT : 
+outputStatementMAILBCC : 
+outputStatementMAILCC : 
+outputStatementMAILFILE : 
+outputStatementMAILFROM : 
+outputStatementMAILTO : 
+outputStatementMERGE : 
+outputStatementMODIFY : 
+outputStatementNAME : NAME_OUTPUT 
+outputStatementNOTIFY : 
+outputStatementOFFSETXB : 
+outputStatementOFFSETXF : 
+outputStatementOFFSETYB : 
+outputStatementOFFSETYF : 
+outputStatementOUTBIN : 
+outputStatementOUTDISP : 
+outputStatementOVERLAYB : 
+outputStatementOVERLAYF : 
+outputStatementOVFL : 
+outputStatementPAGEDEF : 
+outputStatementPIMSG : 
+outputStatementPORTNO : 
+outputStatementPRMODE : 
+outputStatementPRTATTRS : 
+outputStatementPRTERROR : 
+outputStatementPRTOPTNS : 
+outputStatementPRTQUEUE : 
+outputStatementPRTY : 
+outputStatementREPLYTO : 
+outputStatementRESFMT : 
+outputStatementRETAINS : 
+outputStatementRETAINF : 
+outputStatementRETRYL : 
+outputStatementRETRYT : 
+outputStatementROOM : 
+outputStatementSYSAREA : 
+outputStatementTHRESHLD : 
+outputStatementTITLE : 
+outputStatementTRC : 
+outputStatementUCS : 
+outputStatementUSERDATA : 
+outputStatementUSERLIB : 
+outputStatementUSERPATH : 
+outputStatementWRITER : 
+*/
 
 
