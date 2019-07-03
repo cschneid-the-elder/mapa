@@ -493,7 +493,7 @@ XMIT_DFLT : X M I T ->mode(POST_OP),type(XMIT) ;
 
 fragment ANYCHAR : ~[\n\r] ;
 //fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
-NAME : (NATL | ALPHA) (ALPHA | NATL | NUM)+ {getText().length() < 9}? ;
+NAME : (NATL | ALPHA) (ALPHA | NATL | NUM)* {getText().length() < 9}? ;
 NUM_LIT : NUM+ ;
 ALNUMNAT : (ALPHA | NATL | NUM)+ ;
 DSID_VAL : (ALPHA | NATL | NUM | HYPHEN | '[')+ ;
