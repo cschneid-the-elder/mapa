@@ -83,7 +83,7 @@ execParmTVSMSG : TVSMSG EQUAL (COMMIT | BACKOUT | ALL) ;
 
 execParmTVSAMCOM : TVSAMCOM EQUAL LPAREN NUM_LIT COMMA NUM_LIT RPAREN ;
 
-ddStatement : SS ddName? DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
+ddStatement : SS ddName DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
 
 ddStatementConcatenation : SS DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
 
@@ -95,7 +95,7 @@ ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmB
 ddParmACCODE : ACCODE EQUAL (SIMPLE_STRING | QUOTED_STRING_FRAGMENT);
 ddParmAMP : AMP EQUAL 
     (LPAREN 
-        (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment) SS QUOTED_STRING_FRAGMENT))*
+        (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment)? SS? QUOTED_STRING_FRAGMENT))*
     RPAREN) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
