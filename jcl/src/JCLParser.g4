@@ -208,7 +208,7 @@ ddParmOUTPUT : OUTPUT EQUAL (ddParmReferback |
             ((COMMA ddParmReferback) | 
             (inlineComment SS ddParmReferback))* 
     RPAREN)) ;
-ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT | SIMPLE_STRING) ;
+ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT | UNQUOTED_STRING) ;
 ddParmPATHDISP : PATHDISP EQUAL (
     (KEEP | DELETE) | 
     (LPAREN (KEEP | DELETE) (COMMA (KEEP | DELETE))? RPAREN) | 
@@ -364,7 +364,7 @@ Home > z/OS 2.3.0 > z/OS DFSMS > z/OS DFSMSdfp Diagnosis > VSAM diagnostic aids 
 //ddParmAMP_TRACE : TRACE EQUAL LPAREN SQUOTE ddParmAMP_TRACE_Parameter ((COMMA ddParmAMP_TRACE_Parameter) | (SQUOTE (inlineComment | COMMA) SS SQUOTE ddParmAMP_TRACE_Parameter))* SQUOTE RPAREN ;
 ddParmAMP_TRACE : TRACE EQUAL 
     LPAREN
-        (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment) SS QUOTED_STRING_FRAGMENT))*
+        (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment)? SS? QUOTED_STRING_FRAGMENT))*
     RPAREN ;
 ddParmAMP_TRACE_Parameter : ddParmAMP_TRACE_HOOK | ddParmAMP_TRACE_ECODE | ddParmAMP_TRACE_KEY | ddParmAMP_TRACE_PARM1 | ddParmAMP_TRACE_PARM2 ;
 
@@ -383,7 +383,6 @@ joblibAmalgamation : joblibStatement joblibConcatenation* ;
 joblibParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
 
 
-//jobCard : SS jobName JOB LPAREN? jobAccountingInformation* RPAREN? (COMMA (NEWLINE SS CONTINUATION_WS)? jobKeywordParameter)* ;
 jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment? (COMMA jobProgrammerName)? inlineComment? (((COMMA | inlineComment) SS?)? jobKeywordParameter inlineComment?)* ;
 
 jobName : NAME_FIELD ;
@@ -509,7 +508,9 @@ notifyStatement : SS NAME_FIELD? NOTIFY
          WHEN EQUAL LPAREN* WHEN_CHECK 
             ((SS CONTINUATION_WS)? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
     ;
-/*
+
+yesOrNo : YES | NO | Y | N ;
+
 outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter+ ;
 
 outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | outputStatementAFPSTATS | outputStatementBUILDING | outputStatementBURST | outputStatementCHARS | outputStatementCKPTLINE | outputStatementCKPTPAGE | outputStatementCKPTSEC | outputStatementCLASS | outputStatementCOLORMAP | outputStatementCOMPACT | outputStatementCOMSETUP | outputStatementCONTROL | outputStatementCOPIES | outputStatementCOPYCNT | outputStatementDATACK | outputStatementDDNAME | outputStatementDEFAULT | outputStatementDEPT | outputStatementDEST | outputStatementDPAGELBL | outputStatementDUPLEX | outputStatementFCB | outputStatementFLASH | outputStatementFORMDEF | outputStatementFORMLEN | outputStatementFORMS | outputStatementFSSDATA | outputStatementGROUPID | outputStatementINDEX | outputStatementINTRAY | outputStatementJESDS | outputStatementLINDEX | outputStatementLINECT | outputStatementMAILBCC | outputStatementMAILCC | outputStatementMAILFILE | outputStatementMAILFROM | outputStatementMAILTO | outputStatementMERGE | outputStatementMODIFY | outputStatementNAME | outputStatementNOTIFY | outputStatementOFFSETXB | outputStatementOFFSETXF | outputStatementOFFSETYB | outputStatementOFFSETYF | outputStatementOUTBIN | outputStatementOUTDISP | outputStatementOVERLAYB | outputStatementOVERLAYF | outputStatementOVFL | outputStatementPAGEDEF | outputStatementPIMSG | outputStatementPORTNO | outputStatementPRMODE | outputStatementPRTATTRS | outputStatementPRTERROR | outputStatementPRTOPTNS | outputStatementPRTQUEUE | outputStatementPRTY | outputStatementREPLYTO | outputStatementRESFMT | outputStatementRETAINS | outputStatementRETAINF | outputStatementRETRYL | outputStatementRETRYT | outputStatementROOM | outputStatementSYSAREA | outputStatementTHRESHLD | outputStatementTITLE | outputStatementTRC | outputStatementUCS | outputStatementUSERDATA | outputStatementUSERLIB | outputStatementUSERPATH | outputStatementWRITER ;
@@ -522,9 +523,9 @@ outputStatementADDRESS : ADDRESS EQUAL (
     QUOTED_STRING_FRAGMENT
   ;
 outputStatementAFPPARMS : AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT) ;
-outputStatementAFPSTATS : AFPSTATS EQUAL (YES | Y | NO | N) ;
+outputStatementAFPSTATS : AFPSTATS EQUAL yesOrNo ;
 outputStatementBUILDING : BUILDING EQUAL QUOTED_STRING_FRAGMENT ;
-outputStatementBURST : BURST EQUAL (YES | Y | NO | N) ;
+outputStatementBURST : BURST EQUAL yesOrNo ;
 outputStatementCHARS : CHARS EQUAL (
     LPAREN (NAME | DUMP )
         (COMMA | (inlineComment SS CONTINUATION_WS) NAME)*
@@ -552,7 +553,7 @@ outputStatementCOPIES : COPIES EQUAL (
 outputStatementCOPYCNT : COPYCNT EQUAL NUM_LIT ;
 outputStatementDATACK : DATACK EQUAL (BLOCK | UNBLOCK | BLKCHAR | BLKPOS) ;
 outputStatementDDNAME : DDNAME EQUAL NAME (DOT NAME)? (DOT NAME)? ;
-outputStatementDEFAULT : DEFAULT EQUAL (YES | Y | NO | N) ;
+outputStatementDEFAULT : DEFAULT EQUAL yesOrNo ;
 outputStatementDEPT : DEPT EQUAL (QUOTED_STRING_FRAGMENT | ALNUMNAT | ALPHA | NUM_LIT) ;
 outputStatementDEST : DEST EQUAL (
     LOCAL |
@@ -563,66 +564,118 @@ outputStatementDEST : DEST EQUAL (
     (NAME DOT NAME)
   )
   ;
-//    (SQUOTE (NAME DOT)? I P COLON NUM_LIT DOT NUM_LIT DOT NUM_LIT DOT NUM_LIT SQUOTE) |
 
+/*
+The QUOTED_STRING_FRAGMENT in the DEST parameter takes the place of the
+IP address below.
 
-outputStatementDPAGELBL : 
-outputStatementDUPLEX : 
-outputStatementFCB : 
-outputStatementFLASH : 
-outputStatementFORMDEF : 
-outputStatementFORMLEN : 
-outputStatementFORMS : 
-outputStatementFSSDATA : 
-outputStatementGROUPID : 
-outputStatementINDEX : 
-outputStatementINTRAY : 
-outputStatementJESDS : 
-outputStatementLINDEX : 
-outputStatementLINECT : 
-outputStatementMAILBCC : 
-outputStatementMAILCC : 
-outputStatementMAILFILE : 
-outputStatementMAILFROM : 
-outputStatementMAILTO : 
-outputStatementMERGE : 
-outputStatementMODIFY : 
-outputStatementNAME : NAME_OUTPUT 
-outputStatementNOTIFY : 
-outputStatementOFFSETXB : 
-outputStatementOFFSETXF : 
-outputStatementOFFSETYB : 
-outputStatementOFFSETYF : 
-outputStatementOUTBIN : 
-outputStatementOUTDISP : 
-outputStatementOVERLAYB : 
-outputStatementOVERLAYF : 
-outputStatementOVFL : 
-outputStatementPAGEDEF : 
-outputStatementPIMSG : 
-outputStatementPORTNO : 
-outputStatementPRMODE : 
-outputStatementPRTATTRS : 
-outputStatementPRTERROR : 
-outputStatementPRTOPTNS : 
-outputStatementPRTQUEUE : 
-outputStatementPRTY : 
-outputStatementREPLYTO : 
-outputStatementRESFMT : 
-outputStatementRETAINS : 
-outputStatementRETAINF : 
-outputStatementRETRYL : 
-outputStatementRETRYT : 
-outputStatementROOM : 
-outputStatementSYSAREA : 
-outputStatementTHRESHLD : 
-outputStatementTITLE : 
-outputStatementTRC : 
-outputStatementUCS : 
-outputStatementUSERDATA : 
-outputStatementUSERLIB : 
-outputStatementUSERPATH : 
-outputStatementWRITER : 
+    (SQUOTE (NAME DOT)? I P COLON NUM_LIT DOT NUM_LIT DOT NUM_LIT DOT NUM_LIT SQUOTE) |
+
 */
+
+outputStatementDPAGELBL : DPAGELBL EQUAL yesOrNo ;
+outputStatementDUPLEX : DUPLEX EQUAL (NO | N | NORMAL | TUMBLE) ;
+outputStatementFCB : FCB EQUAL ALNUMNAT ;
+outputStatementFLASH : FLASH EQUAL (
+    (LPAREN ALNUMNAT? (COMMA NUM_LIT)? RPAREN) |
+    ALNUMNAT
+  )
+  ;
+
+outputStatementFORMDEF : FORMDEF EQUAL ALNUMNAT ;
+outputStatementFORMLEN : FORMLEN EQUAL NUM_LIT (DOT NUM_LIT)? (IN | CM_UNIT) ;
+outputStatementFORMS : FORMS EQUAL ALNUMNAT ;
+outputStatementFSSDATA : FSSDATA EQUAL (QUOTED_STRING_FRAGMENT | ALNUMNAT | SYMBOLIC) ;
+outputStatementGROUPID : GROUPID EQUAL ALNUMNAT ;
+outputStatementINDEX : INDEX EQUAL NUM_LIT ;
+outputStatementINTRAY : INTRAY EQUAL NUM_LIT ;
+outputStatementJESDS : JESDS EQUAL (ALL | LOG | JCL | MSG) ;
+outputStatementLINDEX : LINDEX EQUAL NUM_LIT ;
+outputStatementLINECT : LINECT EQUAL NUM_LIT ;
+outputStatementMAILBCC : MAILBCC EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT |
+    (LPAREN 
+        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
+            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+    RPAREN)
+  ;
+outputStatementMAILCC : MAILCC EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT |
+    (LPAREN 
+        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
+            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+    RPAREN)
+  ;
+outputStatementMAILFILE : MAILFILE EQUAL QUOTED_STRING_FRAGMENT ;
+outputStatementMAILFROM : MAILFROM EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT ;
+outputStatementMAILTO : MAILTO EQUAL EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT |
+    (LPAREN 
+        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
+            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+    RPAREN)
+  ;
+outputStatementMERGE : MERGE EQUAL yesOrNo ;
+outputStatementMODIFY : MODIFY EQUAL ALNUMNAT | (LPAREN ALNUMNAT (COMMA NUM_LIT)?) ;
+outputStatementNAME : NAME_OUTPUT EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT ;
+outputStatementNOTIFY : NOTIFY EQUAL (NAME (DOT NAME)?) | 
+    (LPAREN (NAME (DOT NAME)?) (COMMA (NAME (DOT NAME)?)+ RPAREN))
+  ;
+outputStatementOFFSETXB : OFFSETXB EQUAL NUM_LIT (DOT NUM_LIT)? outputStatementOFFSET_unit ;
+outputStatementOFFSETXF : OFFSETXF EQUAL NUM_LIT (DOT NUM_LIT)? outputStatementOFFSET_unit ;
+outputStatementOFFSETYB : OFFSETYB EQUAL NUM_LIT (DOT NUM_LIT)? outputStatementOFFSET_unit ;
+outputStatementOFFSETYF : OFFSETYF EQUAL NUM_LIT (DOT NUM_LIT)? outputStatementOFFSET_unit ;
+outputStatementOFFSET_unit : IN | CM_UNIT | MM | PELS | POINTS ;
+outputStatementOUTBIN : OUTBIN EQUAL NUM_LIT ;
+outputStatementOUTDISP : OUTDISP EQUAL outputStatementOUTDISP_val | 
+    (LPAREN outputStatementOUTDISP_val (COMMA outputStatementOUTDISP_val)? RPAREN)
+  ;
+outputStatementOUTDISP_val : WRITE | HOLD | KEEP | LEAVE | PURGE ;
+outputStatementOVERLAYB : OVERLAYB EQUAL NAME ;
+outputStatementOVERLAYF : OVERLAYF EQUAL NAME ;
+outputStatementOVFL : OVFL EQUAL (ON | OFF) ;
+outputStatementPAGEDEF : PAGEDEF EQUAL NAME ;
+outputStatementPIMSG : PIMSG EQUAL yesOrNo | 
+    (LPAREN yesOrNo (COMMA NUM_LIT)? RPAREN)
+  ;
+outputStatementPORTNO : PORTNO EQUAL NUM_LIT ;
+outputStatementPRMODE : PRMODE EQUAL NAME ;
+outputStatementPRTATTRS : PRTATTRS EQUAL QUOTED_STRING_FRAGMENT ;
+outputStatementPRTERROR : PRTERROR EQUAL DEFAULT | QUIT | HOLD ;
+outputStatementPRTOPTNS : PRTOPTNS EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT ;
+outputStatementPRTQUEUE : PRTQUEUE EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT ;
+outputStatementPRTY : PRTY EQUAL NUM_LIT ;
+outputStatementREPLYTO : REPLYTO EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT ;
+outputStatementRESFMT : RESFMT EQUAL NAME ;
+outputStatementRETAINS : RETAINS EQUAL QUOTED_STRING_FRAGMENT | FOREVER ;
+outputStatementRETAINF : RETAINF EQUAL QUOTED_STRING_FRAGMENT | FOREVER ;
+outputStatementRETRYL : RETRYL EQUAL NUM_LIT ;
+outputStatementRETRYT : RETRYT EQUAL QUOTED_STRING_FRAGMENT ;
+outputStatementROOM : ROOM EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT ;
+outputStatementSYSAREA : SYSAREA EQUAL yesOrNo ;
+outputStatementTHRESHLD : THRESHLD EQUAL NUM_LIT ;
+outputStatementTITLE : TITLE EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT ;
+outputStatementTRC : TRC EQUAL yesOrNo ;
+outputStatementUCS : UCS EQUAL NAME ;
+outputStatementUSERDATA : USERDATA EQUAL QUOTED_STRING_FRAGMENT | ALNUMNAT |
+    (LPAREN 
+        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
+            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+    RPAREN)
+  ;
+
+outputStatementUSERLIB : USERLIB EQUAL DATASET_NAME | QUOTED_STRING_FRAGMENT |
+    (LPAREN 
+        (DATASET_NAME | QUOTED_STRING_FRAGMENT) 
+            ((COMMA | inlineComment)? SS? (DATASET_NAME | QUOTED_STRING_FRAGMENT))*
+    RPAREN)
+  ;
+
+outputStatementUSERPATH : USERPATH EQUAL UNQUOTED_STRING | QUOTED_STRING_FRAGMENT |
+    (LPAREN 
+        (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT) 
+            ((COMMA | inlineComment)? SS? (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT))*
+    RPAREN)
+  ;
+
+outputStatementWRITER : WRITER EQUAL NAME ;
+
 
 

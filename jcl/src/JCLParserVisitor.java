@@ -1389,4 +1389,502 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNotifyStatement(JCLParser.NotifyStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#yesOrNo}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitYesOrNo(JCLParser.YesOrNoContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatement(JCLParser.OutputStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementParameter(JCLParser.OutputStatementParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementADDRESS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementADDRESS(JCLParser.OutputStatementADDRESSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementAFPPARMS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementAFPPARMS(JCLParser.OutputStatementAFPPARMSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementAFPSTATS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementAFPSTATS(JCLParser.OutputStatementAFPSTATSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementBUILDING}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementBUILDING(JCLParser.OutputStatementBUILDINGContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementBURST}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementBURST(JCLParser.OutputStatementBURSTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCHARS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCHARS(JCLParser.OutputStatementCHARSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCKPTLINE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCKPTLINE(JCLParser.OutputStatementCKPTLINEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCKPTPAGE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCKPTPAGE(JCLParser.OutputStatementCKPTPAGEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCKPTSEC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCKPTSEC(JCLParser.OutputStatementCKPTSECContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCLASS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCLASS(JCLParser.OutputStatementCLASSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCOLORMAP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCOLORMAP(JCLParser.OutputStatementCOLORMAPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCOMPACT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCOMPACT(JCLParser.OutputStatementCOMPACTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCOMSETUP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCOMSETUP(JCLParser.OutputStatementCOMSETUPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCONTROL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCONTROL(JCLParser.OutputStatementCONTROLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCOPIES}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCOPIES(JCLParser.OutputStatementCOPIESContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCOPYCNT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCOPYCNT(JCLParser.OutputStatementCOPYCNTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDATACK}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDATACK(JCLParser.OutputStatementDATACKContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDDNAME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDDNAME(JCLParser.OutputStatementDDNAMEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDEFAULT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDEFAULT(JCLParser.OutputStatementDEFAULTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDEPT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDEPT(JCLParser.OutputStatementDEPTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDEST}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDEST(JCLParser.OutputStatementDESTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDPAGELBL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDPAGELBL(JCLParser.OutputStatementDPAGELBLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementDUPLEX}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementDUPLEX(JCLParser.OutputStatementDUPLEXContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementFCB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementFCB(JCLParser.OutputStatementFCBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementFLASH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementFLASH(JCLParser.OutputStatementFLASHContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementFORMDEF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementFORMDEF(JCLParser.OutputStatementFORMDEFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementFORMLEN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementFORMLEN(JCLParser.OutputStatementFORMLENContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementFORMS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementFORMS(JCLParser.OutputStatementFORMSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementFSSDATA}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementFSSDATA(JCLParser.OutputStatementFSSDATAContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementGROUPID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementGROUPID(JCLParser.OutputStatementGROUPIDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementINDEX}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementINDEX(JCLParser.OutputStatementINDEXContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementINTRAY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementINTRAY(JCLParser.OutputStatementINTRAYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementJESDS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementJESDS(JCLParser.OutputStatementJESDSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementLINDEX}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementLINDEX(JCLParser.OutputStatementLINDEXContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementLINECT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementLINECT(JCLParser.OutputStatementLINECTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMAILBCC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMAILBCC(JCLParser.OutputStatementMAILBCCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMAILCC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMAILCC(JCLParser.OutputStatementMAILCCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMAILFILE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMAILFILE(JCLParser.OutputStatementMAILFILEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMAILFROM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMAILFROM(JCLParser.OutputStatementMAILFROMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMAILTO}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMAILTO(JCLParser.OutputStatementMAILTOContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMERGE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMERGE(JCLParser.OutputStatementMERGEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementMODIFY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementMODIFY(JCLParser.OutputStatementMODIFYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementNAME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementNAME(JCLParser.OutputStatementNAMEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementNOTIFY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementNOTIFY(JCLParser.OutputStatementNOTIFYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOFFSETXB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOFFSETXB(JCLParser.OutputStatementOFFSETXBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOFFSETXF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOFFSETXF(JCLParser.OutputStatementOFFSETXFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOFFSETYB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOFFSETYB(JCLParser.OutputStatementOFFSETYBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOFFSETYF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOFFSETYF(JCLParser.OutputStatementOFFSETYFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOFFSET_unit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOFFSET_unit(JCLParser.OutputStatementOFFSET_unitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOUTBIN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOUTBIN(JCLParser.OutputStatementOUTBINContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOUTDISP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOUTDISP(JCLParser.OutputStatementOUTDISPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOUTDISP_val}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOUTDISP_val(JCLParser.OutputStatementOUTDISP_valContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOVERLAYB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOVERLAYB(JCLParser.OutputStatementOVERLAYBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOVERLAYF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOVERLAYF(JCLParser.OutputStatementOVERLAYFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementOVFL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementOVFL(JCLParser.OutputStatementOVFLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPAGEDEF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPAGEDEF(JCLParser.OutputStatementPAGEDEFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPIMSG}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPIMSG(JCLParser.OutputStatementPIMSGContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPORTNO}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPORTNO(JCLParser.OutputStatementPORTNOContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPRMODE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPRMODE(JCLParser.OutputStatementPRMODEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPRTATTRS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPRTATTRS(JCLParser.OutputStatementPRTATTRSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPRTERROR}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPRTERROR(JCLParser.OutputStatementPRTERRORContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPRTOPTNS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPRTOPTNS(JCLParser.OutputStatementPRTOPTNSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPRTQUEUE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPRTQUEUE(JCLParser.OutputStatementPRTQUEUEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementPRTY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementPRTY(JCLParser.OutputStatementPRTYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementREPLYTO}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementREPLYTO(JCLParser.OutputStatementREPLYTOContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementRESFMT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementRESFMT(JCLParser.OutputStatementRESFMTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementRETAINS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementRETAINS(JCLParser.OutputStatementRETAINSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementRETAINF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementRETAINF(JCLParser.OutputStatementRETAINFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementRETRYL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementRETRYL(JCLParser.OutputStatementRETRYLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementRETRYT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementRETRYT(JCLParser.OutputStatementRETRYTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementROOM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementROOM(JCLParser.OutputStatementROOMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementSYSAREA}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementSYSAREA(JCLParser.OutputStatementSYSAREAContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementTHRESHLD}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementTHRESHLD(JCLParser.OutputStatementTHRESHLDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementTITLE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementTITLE(JCLParser.OutputStatementTITLEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementTRC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementTRC(JCLParser.OutputStatementTRCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementUCS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementUCS(JCLParser.OutputStatementUCSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementUSERDATA}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementUSERDATA(JCLParser.OutputStatementUSERDATAContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementUSERLIB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementUSERLIB(JCLParser.OutputStatementUSERLIBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementUSERPATH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementUSERPATH(JCLParser.OutputStatementUSERPATHContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementWRITER}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementWRITER(JCLParser.OutputStatementWRITERContext ctx);
 }
