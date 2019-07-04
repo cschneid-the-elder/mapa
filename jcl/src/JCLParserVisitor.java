@@ -46,6 +46,18 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecStatement(JCLParser.ExecStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#execPgmStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecPgmStatement(JCLParser.ExecPgmStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execProcStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecProcStatement(JCLParser.ExecProcStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#execParameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1294,11 +1306,11 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInlineComment(JCLParser.InlineCommentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#proc}.
+	 * Visit a parse tree produced by {@link JCLParser#procStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitProc(JCLParser.ProcContext ctx);
+	T visitProcStatement(JCLParser.ProcStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
 	 * @param ctx the parse tree
@@ -1887,4 +1899,10 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOutputStatementWRITER(JCLParser.OutputStatementWRITERContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#pendStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPendStatement(JCLParser.PendStatementContext ctx);
 }

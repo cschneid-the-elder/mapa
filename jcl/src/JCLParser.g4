@@ -20,15 +20,21 @@ options {tokenVocab=JCLLexer;}
 
 startRule : jcl | EOF ;
 
-jcl : execJCL+ | proc+ ;
+jcl : execJCL+ | procStatement ;
 
-execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement)+)+ ;
+execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | procStatement | pendStatement)+)+ ;
 
 commentStatement : COMMENT_FLAG (COMMENT_TEXT | EOF) ;
 
 jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | includeStatement | commentStatement)* ;
 
-execStatement : SS stepName? EXEC ((PGM EQUAL) | (PROC_EX EQUAL))? NAME_EX (((COMMA | inlineComment) SS?)? execParameter inlineComment?)* ;
+//execStatement : SS stepName? EXEC ((PGM EQUAL) | (PROC_EX EQUAL))? NAME_EX (((COMMA | inlineComment) SS?)? execParameter inlineComment?)* ;
+
+execStatement : execPgmStatement | execProcStatement ;
+
+execPgmStatement : SS stepName? EXEC PGM EQUAL NAME_EX (((COMMA | inlineComment) SS?)? execParameter inlineComment?)* ;
+
+execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? NAME_EX (((COMMA | inlineComment) SS?)? definedSymbolicParameters inlineComment?)* ;
 
 /*
 Some of the parameters for the EXEC statement are identical to those
@@ -465,9 +471,9 @@ jobParmUSER : USER EQUAL NAME ;
 
 inlineComment : COMMENT_FLAG_INLINE? COMMENT_TEXT ;
 
-proc : SS procName PROC definedSymbolicParameters* ;
+procStatement : SS procName? PROC definedSymbolicParameters* ;
 
-defineSymbolicParameter : NAME EQUAL (QUOTED_STRING_FRAGMENT | SIMPLE_STRING)? ;
+defineSymbolicParameter : NAME EQUAL (QUOTED_STRING_FRAGMENT | UNQUOTED_STRING)? ;
 
 definedSymbolicParameters : defineSymbolicParameter ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* ;
 
@@ -677,5 +683,6 @@ outputStatementUSERPATH : USERPATH EQUAL UNQUOTED_STRING | QUOTED_STRING_FRAGMEN
 
 outputStatementWRITER : WRITER EQUAL NAME ;
 
+pendStatement : SS NAME_FIELD? PEND inlineComment? ;
 
 
