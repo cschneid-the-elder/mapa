@@ -20,15 +20,27 @@ options {tokenVocab=JCLLexer;}
 
 startRule : jcl | EOF ;
 
-jcl : execJCL+ | procStatement ;
+jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | procStatement | pendStatement)+)+ ;
+execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
 
-commentStatement : COMMENT_FLAG (COMMENT_TEXT | EOF) ;
+procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
-jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | includeStatement | commentStatement)* ;
+procStatement : SS procName? PROC definedSymbolicParameters* ;
 
-//execStatement : SS stepName? EXEC ((PGM EQUAL) | (PROC_EX EQUAL))? NAME_EX (((COMMA | inlineComment) SS?)? execParameter inlineComment?)* ;
+defineSymbolicParameter : NAME EQUAL (QUOTED_STRING_FRAGMENT | UNQUOTED_STRING)? ;
+
+definedSymbolicParameters : defineSymbolicParameter ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* ;
+
+commentStatement : COMMENT_FLAG (COMMENT_TEXT? | EOF) ;
+
+inlineComment : COMMENT_FLAG_INLINE? COMMENT_TEXT ;
+
+stepName : NAME_FIELD ;
+
+procName : NAME_FIELD ;
+
+jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ;
 
 execStatement : execPgmStatement | execProcStatement ;
 
@@ -105,7 +117,7 @@ ddParmAMP : AMP EQUAL
     RPAREN) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
-ddParmAVGREC : AVGREC EQUAL AVGREC_UNIT ;
+ddParmAVGREC : AVGREC EQUAL MEM_UNIT ;
 ddParmBLKSIZE : BLKSIZE EQUAL NUM_LIT MEM_UNIT? ;
 ddParmBLKSZLIM : BLKSZLIM EQUAL NUM_LIT MEM_UNIT? ;
 ddParmBURST : BURST EQUAL (Y | YES | N | NO) ;
@@ -157,7 +169,7 @@ ddParmDCB_NTM : NTM EQUAL NUM_LIT ;
 ddParmDCB_OPTCD : OPTCD EQUAL ALPHA+ ;
 ddParmDCB_PCI : PCI EQUAL LPAREN? ALPHA (COMMA ALPHA)? RPAREN ;
 ddParmDCB_PRTSP : PRTSP EQUAL NUM_LIT ;
-ddParmDCB_RECFM : RECFM EQUAL ALPHA+ ;
+ddParmDCB_RECFM : RECFM EQUAL NAME ;
 ddParmDCB_RESERVE : RESERVE EQUAL LPAREN NUM_LIT COMMA NUM_LIT RPAREN ;
 ddParmDCB_RKP : RKP EQUAL NUM_LIT ;
 ddParmDCB_STACK : STACK EQUAL NUM_LIT ;
@@ -270,7 +282,7 @@ ddParmSUBSYS : SUBSYS EQUAL (
       )*
     RPAREN)
   ) ;
-ddParmSYMBOLS : SYMBOLS EQUAL LPAREN? (CNVTSYS | EXECSYS | JCLONLY) (COMMA ddName)? RPAREN? ;
+ddParmSYMBOLS : SYMBOLS EQUAL LPAREN? (CNVTSYS | EXECSYS | JCLONLY) (COMMA (NAME | LOGGING_DDNAME))? RPAREN? ;
 ddParmSYMLIST : SYMLIST EQUAL (
     ALNUMNAT |
     (LPAREN ALNUMNAT (
@@ -437,7 +449,7 @@ jobParmMSGCLASS : MSGCLASS EQUAL ALPHA ;
 
 jobParmMSGLEVEL : MSGLEVEL EQUAL LPAREN? NUM_LIT (COMMA NUM_LIT)? RPAREN? ;
 
-jobParmNOTIFY : NOTIFY EQUAL NAME (DOT NAME)? ;
+jobParmNOTIFY : NOTIFY EQUAL ((NAME (DOT NAME)?) | SYMBOLIC) ;
 
 jobParmPASSWORD : PASSWORD EQUAL LPAREN? NAME (COMMA NAME)? RPAREN? ;
 
@@ -469,18 +481,6 @@ jobParmUJOBCORR : UJOBCORR EQUAL (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) ;
 
 jobParmUSER : USER EQUAL NAME ;
 
-inlineComment : COMMENT_FLAG_INLINE? COMMENT_TEXT ;
-
-procStatement : SS procName? PROC definedSymbolicParameters* ;
-
-defineSymbolicParameter : NAME EQUAL (QUOTED_STRING_FRAGMENT | UNQUOTED_STRING)? ;
-
-definedSymbolicParameters : defineSymbolicParameter ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* ;
-
-stepName : NAME_FIELD ;
-
-procName : NAME_FIELD ;
-
 commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT ;
  
 cntlStatement : SS NAME_FIELD CNTL ASTERISK inlineComment* ;
@@ -489,7 +489,7 @@ endcntlStatement : SS NAME_FIELD ENDCNTL inlineComment* ;
 
 cntlStatementAmalgamation : cntlStatement CNTL_DATA* endcntlStatement ;
 
-exportStatement : SS NAME_FIELD EXPORT SYMLIST EQUAL (
+exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL (
     ASTERISK |
     (LPAREN NAME (COMMA | (inlineComment SS CONTINUATION_WS) NAME)* RPAREN)
   ) ;
@@ -517,7 +517,8 @@ notifyStatement : SS NAME_FIELD? NOTIFY
 
 yesOrNo : YES | NO | Y | N ;
 
-outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter+ ;
+outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter 
+    ((COMMA | (inlineComment SS)) outputStatementParameter)* ;
 
 outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | outputStatementAFPSTATS | outputStatementBUILDING | outputStatementBURST | outputStatementCHARS | outputStatementCKPTLINE | outputStatementCKPTPAGE | outputStatementCKPTSEC | outputStatementCLASS | outputStatementCOLORMAP | outputStatementCOMPACT | outputStatementCOMSETUP | outputStatementCONTROL | outputStatementCOPIES | outputStatementCOPYCNT | outputStatementDATACK | outputStatementDDNAME | outputStatementDEFAULT | outputStatementDEPT | outputStatementDEST | outputStatementDPAGELBL | outputStatementDUPLEX | outputStatementFCB | outputStatementFLASH | outputStatementFORMDEF | outputStatementFORMLEN | outputStatementFORMS | outputStatementFSSDATA | outputStatementGROUPID | outputStatementINDEX | outputStatementINTRAY | outputStatementJESDS | outputStatementLINDEX | outputStatementLINECT | outputStatementMAILBCC | outputStatementMAILCC | outputStatementMAILFILE | outputStatementMAILFROM | outputStatementMAILTO | outputStatementMERGE | outputStatementMODIFY | outputStatementNAME | outputStatementNOTIFY | outputStatementOFFSETXB | outputStatementOFFSETXF | outputStatementOFFSETYB | outputStatementOFFSETYF | outputStatementOUTBIN | outputStatementOUTDISP | outputStatementOVERLAYB | outputStatementOVERLAYF | outputStatementOVFL | outputStatementPAGEDEF | outputStatementPIMSG | outputStatementPORTNO | outputStatementPRMODE | outputStatementPRTATTRS | outputStatementPRTERROR | outputStatementPRTOPTNS | outputStatementPRTQUEUE | outputStatementPRTY | outputStatementREPLYTO | outputStatementRESFMT | outputStatementRETAINS | outputStatementRETAINF | outputStatementRETRYL | outputStatementRETRYT | outputStatementROOM | outputStatementSYSAREA | outputStatementTHRESHLD | outputStatementTITLE | outputStatementTRC | outputStatementUCS | outputStatementUSERDATA | outputStatementUSERLIB | outputStatementUSERPATH | outputStatementWRITER ;
 
@@ -543,7 +544,7 @@ outputStatementCHARS : CHARS EQUAL (
 outputStatementCKPTLINE : CKPTLINE EQUAL NUM_LIT ;
 outputStatementCKPTPAGE : CKPTPAGE EQUAL NUM_LIT ;
 outputStatementCKPTSEC : CKPTSEC EQUAL NUM_LIT ;
-outputStatementCLASS : CLASS EQUAL (ALPHA | NUM_LIT | ASTERISK) ;
+outputStatementCLASS : CLASS EQUAL CLASS_VAL ;
 outputStatementCOLORMAP : COLORMAP EQUAL ALNUMNAT ;
 outputStatementCOMPACT : COMPACT EQUAL ALNUMNAT ;
 outputStatementCOMSETUP : COMSETUP EQUAL ALNUMNAT ;
@@ -684,5 +685,27 @@ outputStatementUSERPATH : USERPATH EQUAL UNQUOTED_STRING | QUOTED_STRING_FRAGMEN
 outputStatementWRITER : WRITER EQUAL NAME ;
 
 pendStatement : SS NAME_FIELD? PEND inlineComment? ;
+
+scheduleStatement : SS NAME_FIELD? SCHEDULE scheduleParameters* ;
+
+scheduleParameters : scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY | scheduleParmHOLDUNTIL | scheduleParmJOBGROUP | scheduleParmSTARTBY | scheduleParmWITH ;
+
+scheduleParmAFTER : AFTER EQUAL NAME ;
+scheduleParmBEFORE : BEFORE EQUAL NAME ;
+scheduleParmDELAY : DELAY EQUAL (YES | Y) ;
+scheduleParmHOLDUNTIL : HOLDUNTIL EQUAL 
+    QUOTED_STRING_FRAGMENT |
+    (LPAREN QUOTED_STRING_FRAGMENT (COMMA QUOTED_STRING_FRAGMENT)? RPAREN)
+  ;
+scheduleParmJOBGROUP : JOBGROUP EQUAL NAME (DOT NAME)? ;
+scheduleParmSTARTBY : STARTBY EQUAL 
+    QUOTED_STRING_FRAGMENT |
+    (LPAREN QUOTED_STRING_FRAGMENT (COMMA QUOTED_STRING_FRAGMENT)? RPAREN)
+  ;
+scheduleParmWITH : WITH EQUAL NAME ;
+
+setStatement : SS NAME_FIELD? SET (NAME | ALPHA+) EQUAL (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT)?
+    ((COMMA | inlineComment)? SS? (NAME | ALPHA+) EQUAL (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT))*
+  ;
 
 

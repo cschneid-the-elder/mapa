@@ -28,11 +28,53 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecJCL(JCLParser.ExecJCLContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#procJCL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcJCL(JCLParser.ProcJCLContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#procStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcStatement(JCLParser.ProcStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#commentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitCommentStatement(JCLParser.CommentStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#inlineComment}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInlineComment(JCLParser.InlineCommentContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#stepName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStepName(JCLParser.StepNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#procName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcName(JCLParser.ProcNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#jclStep}.
 	 * @param ctx the parse tree
@@ -1300,42 +1342,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJobParmUSER(JCLParser.JobParmUSERContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#inlineComment}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInlineComment(JCLParser.InlineCommentContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#procStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitProcStatement(JCLParser.ProcStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#stepName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStepName(JCLParser.StepNameContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#procName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitProcName(JCLParser.ProcNameContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#commandStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1905,4 +1911,64 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPendStatement(JCLParser.PendStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleStatement(JCLParser.ScheduleStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParameters(JCLParser.ScheduleParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmAFTER}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmAFTER(JCLParser.ScheduleParmAFTERContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmBEFORE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmBEFORE(JCLParser.ScheduleParmBEFOREContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmDELAY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmDELAY(JCLParser.ScheduleParmDELAYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmHOLDUNTIL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmHOLDUNTIL(JCLParser.ScheduleParmHOLDUNTILContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmJOBGROUP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmJOBGROUP(JCLParser.ScheduleParmJOBGROUPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmSTARTBY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmSTARTBY(JCLParser.ScheduleParmSTARTBYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#scheduleParmWITH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScheduleParmWITH(JCLParser.ScheduleParmWITHContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#setStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetStatement(JCLParser.SetStatementContext ctx);
 }

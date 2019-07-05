@@ -37,6 +37,46 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitExecJCL(JCLParser.ExecJCLContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#procJCL}.
+	 * @param ctx the parse tree
+	 */
+	void enterProcJCL(JCLParser.ProcJCLContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#procJCL}.
+	 * @param ctx the parse tree
+	 */
+	void exitProcJCL(JCLParser.ProcJCLContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#procStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterProcStatement(JCLParser.ProcStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#procStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitProcStatement(JCLParser.ProcStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#commentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -46,6 +86,36 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCommentStatement(JCLParser.CommentStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#inlineComment}.
+	 * @param ctx the parse tree
+	 */
+	void enterInlineComment(JCLParser.InlineCommentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#inlineComment}.
+	 * @param ctx the parse tree
+	 */
+	void exitInlineComment(JCLParser.InlineCommentContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#stepName}.
+	 * @param ctx the parse tree
+	 */
+	void enterStepName(JCLParser.StepNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#stepName}.
+	 * @param ctx the parse tree
+	 */
+	void exitStepName(JCLParser.StepNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#procName}.
+	 * @param ctx the parse tree
+	 */
+	void enterProcName(JCLParser.ProcNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#procName}.
+	 * @param ctx the parse tree
+	 */
+	void exitProcName(JCLParser.ProcNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#jclStep}.
 	 * @param ctx the parse tree
@@ -2157,66 +2227,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitJobParmUSER(JCLParser.JobParmUSERContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#inlineComment}.
-	 * @param ctx the parse tree
-	 */
-	void enterInlineComment(JCLParser.InlineCommentContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#inlineComment}.
-	 * @param ctx the parse tree
-	 */
-	void exitInlineComment(JCLParser.InlineCommentContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#procStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterProcStatement(JCLParser.ProcStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#procStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitProcStatement(JCLParser.ProcStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#defineSymbolicParameter}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#definedSymbolicParameters}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefinedSymbolicParameters(JCLParser.DefinedSymbolicParametersContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#stepName}.
-	 * @param ctx the parse tree
-	 */
-	void enterStepName(JCLParser.StepNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#stepName}.
-	 * @param ctx the parse tree
-	 */
-	void exitStepName(JCLParser.StepNameContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#procName}.
-	 * @param ctx the parse tree
-	 */
-	void enterProcName(JCLParser.ProcNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#procName}.
-	 * @param ctx the parse tree
-	 */
-	void exitProcName(JCLParser.ProcNameContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#commandStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -3166,4 +3176,104 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPendStatement(JCLParser.PendStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleStatement(JCLParser.ScheduleStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleStatement(JCLParser.ScheduleStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParameters(JCLParser.ScheduleParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParameters(JCLParser.ScheduleParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmAFTER}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmAFTER(JCLParser.ScheduleParmAFTERContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmAFTER}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmAFTER(JCLParser.ScheduleParmAFTERContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmBEFORE}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmBEFORE(JCLParser.ScheduleParmBEFOREContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmBEFORE}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmBEFORE(JCLParser.ScheduleParmBEFOREContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmDELAY}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmDELAY(JCLParser.ScheduleParmDELAYContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmDELAY}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmDELAY(JCLParser.ScheduleParmDELAYContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmHOLDUNTIL}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmHOLDUNTIL(JCLParser.ScheduleParmHOLDUNTILContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmHOLDUNTIL}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmHOLDUNTIL(JCLParser.ScheduleParmHOLDUNTILContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmJOBGROUP}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmJOBGROUP(JCLParser.ScheduleParmJOBGROUPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmJOBGROUP}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmJOBGROUP(JCLParser.ScheduleParmJOBGROUPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmSTARTBY}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmSTARTBY(JCLParser.ScheduleParmSTARTBYContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmSTARTBY}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmSTARTBY(JCLParser.ScheduleParmSTARTBYContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#scheduleParmWITH}.
+	 * @param ctx the parse tree
+	 */
+	void enterScheduleParmWITH(JCLParser.ScheduleParmWITHContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#scheduleParmWITH}.
+	 * @param ctx the parse tree
+	 */
+	void exitScheduleParmWITH(JCLParser.ScheduleParmWITHContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#setStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetStatement(JCLParser.SetStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#setStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetStatement(JCLParser.SetStatementContext ctx);
 }
