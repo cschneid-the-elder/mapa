@@ -418,15 +418,21 @@ jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment
 
 jobName : NAME_FIELD ;
 
-jobProgrammerName : QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME | DATASET_NAME ;
+//jobProgrammerName : QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME | DATASET_NAME ;
 
 jobAccountingInformation : jobAccountingInformationSimple | jobAccountingInformationMultiLine ;
 
-jobAccountingInformationSimple : (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT) 
-    (COMMA (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT)?)* ;
+/*
+jobAccountingInformationSimple : (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT) 
+    (COMMA (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT)?)* ;
 
-jobAccountingInformationMultiLine : (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT) 
-    (COMMA? SS? (QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME| ALNUMNAT))* ;
+jobAccountingInformationMultiLine : (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT) 
+    (COMMA? SS? (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME| ALNUMNAT))* ;
+*/
+jobAccountingInformationSimple : jobAccountingString (COMMA jobAccountingString?)* ;
+jobAccountingInformationMultiLine : jobAccountingString (COMMA? SS? jobAccountingString)* ;
+jobAccountingString : (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | JOB_ACCT_MODE2_UNQUOTED_STRING+) ;
+jobProgrammerName : (QUOTED_STRING_FRAGMENT | JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING+) ;
 
 jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
 

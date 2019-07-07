@@ -1138,12 +1138,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJobName(JCLParser.JobNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#jobProgrammerName}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJobProgrammerName(JCLParser.JobProgrammerNameContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobAccountingInformation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1161,6 +1155,18 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJobAccountingInformationMultiLine(JCLParser.JobAccountingInformationMultiLineContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobAccountingString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobAccountingString(JCLParser.JobAccountingStringContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobProgrammerName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobProgrammerName(JCLParser.JobProgrammerNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobKeywordParameter}.
 	 * @param ctx the parse tree

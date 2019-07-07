@@ -2271,18 +2271,6 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJobProgrammerName(JCLParser.JobProgrammerNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJobProgrammerName(JCLParser.JobProgrammerNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterJobAccountingInformation(JCLParser.JobAccountingInformationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -2314,6 +2302,30 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJobAccountingInformationMultiLine(JCLParser.JobAccountingInformationMultiLineContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJobAccountingString(JCLParser.JobAccountingStringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJobAccountingString(JCLParser.JobAccountingStringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJobProgrammerName(JCLParser.JobProgrammerNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJobProgrammerName(JCLParser.JobProgrammerNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

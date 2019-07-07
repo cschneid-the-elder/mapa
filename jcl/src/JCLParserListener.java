@@ -1887,16 +1887,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitJobName(JCLParser.JobNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#jobProgrammerName}.
-	 * @param ctx the parse tree
-	 */
-	void enterJobProgrammerName(JCLParser.JobProgrammerNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#jobProgrammerName}.
-	 * @param ctx the parse tree
-	 */
-	void exitJobProgrammerName(JCLParser.JobProgrammerNameContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobAccountingInformation}.
 	 * @param ctx the parse tree
 	 */
@@ -1926,6 +1916,26 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJobAccountingInformationMultiLine(JCLParser.JobAccountingInformationMultiLineContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobAccountingString}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobAccountingString(JCLParser.JobAccountingStringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobAccountingString}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobAccountingString(JCLParser.JobAccountingStringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobProgrammerName}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobProgrammerName(JCLParser.JobProgrammerNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobProgrammerName}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobProgrammerName(JCLParser.JobProgrammerNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobKeywordParameter}.
 	 * @param ctx the parse tree
