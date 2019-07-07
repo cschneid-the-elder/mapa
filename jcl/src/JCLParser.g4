@@ -22,7 +22,7 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard joblibAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
+execJCL : (jobCard joblibAmalgamation? syschkAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
 
 procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -187,7 +187,7 @@ ddParmDISP_ABNORMAL_TERM : CATLG | DELETE | KEEP | PASS | UNCATLG | SYMBOLIC ;
 ddParmDLM : DLM DLM_VAL ;
 ddParmDSID : DSID EQUAL (DSID_VAL | (LPAREN DSID_VAL COMMA V RPAREN)) ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL QUOTED_STRING_FRAGMENT ;
-ddParmDSNAME : (DSNAME | DSN) EQUAL (DATASET_NAME | REFERBACK | QUOTED_STRING_FRAGMENT) ;
+ddParmDSNAME : (DSNAME | DSN) EQUAL (NAME | DATASET_NAME | REFERBACK | QUOTED_STRING_FRAGMENT) ;
 ddParmDSNTYPE : DSNTYPE EQUAL DSNTYPE_VAL ;
 ddParmDUMMY : DUMMY ;
 ddParmDYNAM : DYNAM ;
@@ -308,10 +308,11 @@ ddParmUCS : UCS EQUAL (
   ) ;
 
 ddParmUNIT : UNIT EQUAL (
+    NUM_LIT |
     (SLASH? SIMPLE_STRING) |
     (AFF EQUAL ddName) |
     (LPAREN 
-        (SLASH? SIMPLE_STRING)? 
+        (SLASH? (SIMPLE_STRING | NUM_LIT))? 
             (COMMA (NUM_LIT | P)? 
                 (COMMA DEFER? 
                     (COMMA SMSHONOR)?
@@ -403,6 +404,15 @@ joblibAmalgamation : joblibStatement joblibConcatenation* ;
 joblibParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
 
 
+syschkStatement : SS SYSCHK DD syschkParameter (((COMMA | inlineComment) SS?)? syschkParameter inlineComment?)* ;
+
+syschkConcatenation : SS DD syschkParameter (((COMMA | inlineComment) SS?)? syschkParameter inlineComment?)* ;
+
+syschkAmalgamation : syschkStatement syschkConcatenation* ;
+
+syschkParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
+
+
 jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment? (COMMA jobProgrammerName)? inlineComment? (((COMMA | inlineComment) SS?)? jobKeywordParameter inlineComment?)* ;
 
 jobName : NAME_FIELD ;
@@ -483,7 +493,7 @@ jobParmREGION : REGION EQUAL (NUM_MEM_VAL | ALNUMNAT) ;
 
 jobParmREGIONX : REGIONX EQUAL LPAREN? (NUM_MEM_VAL | ALNUMNAT) (COMMA (NUM_MEM_VAL | ALNUMNAT)) RPAREN? ;
 
-jobParmRESTART : RESTART EQUAL (ASTERISK | NAME (DOT NAME)?) (COMMA UNQUOTED_STRING)? ;
+jobParmRESTART : RESTART EQUAL LPAREN? (ASTERISK | (NAME (DOT NAME)?) | DATASET_NAME) (COMMA (NAME | UNQUOTED_STRING | QUOTED_STRING_FRAGMENT))? RPAREN? ;
 
 jobParmSECLABEL : SECLABEL EQUAL NAME ;
 

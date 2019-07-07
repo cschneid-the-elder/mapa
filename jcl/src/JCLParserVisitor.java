@@ -1102,6 +1102,30 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJoblibParameter(JCLParser.JoblibParameterContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#syschkStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSyschkStatement(JCLParser.SyschkStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#syschkConcatenation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSyschkConcatenation(JCLParser.SyschkConcatenationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#syschkAmalgamation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSyschkAmalgamation(JCLParser.SyschkAmalgamationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#syschkParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSyschkParameter(JCLParser.SyschkParameterContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobCard}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

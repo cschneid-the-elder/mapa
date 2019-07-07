@@ -1827,6 +1827,46 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitJoblibParameter(JCLParser.JoblibParameterContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#syschkStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSyschkStatement(JCLParser.SyschkStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#syschkStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSyschkStatement(JCLParser.SyschkStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#syschkConcatenation}.
+	 * @param ctx the parse tree
+	 */
+	void enterSyschkConcatenation(JCLParser.SyschkConcatenationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#syschkConcatenation}.
+	 * @param ctx the parse tree
+	 */
+	void exitSyschkConcatenation(JCLParser.SyschkConcatenationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#syschkAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void enterSyschkAmalgamation(JCLParser.SyschkAmalgamationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#syschkAmalgamation}.
+	 * @param ctx the parse tree
+	 */
+	void exitSyschkAmalgamation(JCLParser.SyschkAmalgamationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#syschkParameter}.
+	 * @param ctx the parse tree
+	 */
+	void enterSyschkParameter(JCLParser.SyschkParameterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#syschkParameter}.
+	 * @param ctx the parse tree
+	 */
+	void exitSyschkParameter(JCLParser.SyschkParameterContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobCard}.
 	 * @param ctx the parse tree
 	 */
