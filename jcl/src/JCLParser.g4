@@ -137,7 +137,8 @@ ddParmDCB : DCB EQUAL ddParmDCB_Parameter |
             ((COMMA ddParmDCB_Parameter) |
             (inlineComment SS ddParmDCB_Parameter))*
     RPAREN) |
-    REFERBACK
+    REFERBACK |
+    DATASET_NAME
   ;
 
 ddParmDCB_Parameter : ddParmDCB_BFALN | ddParmDCB_BFTEK | ddParmDCB_BLKSIZE | ddParmDCB_BUFIN | ddParmDCB_BUFL | ddParmDCB_BUFMAX | ddParmDCB_BUFNO | ddParmDCB_BUFOFF | ddParmDCB_BUFOUT | ddParmDCB_BUFSIZE | ddParmDCB_CPRI | ddParmDCB_CYLOFL | ddParmDCB_DEN | ddParmDCB_DIAGNS | ddParmDCB_DSORG | ddParmDCB_EROPT | ddParmDCB_FUNC | ddParmDCB_GNCP | ddParmDCB_INTVL | ddParmDCB_IPLTXID | ddParmDCB_KEYLEN | ddParmDCB_LIMCT| ddParmDCB_LRECL | ddParmDCB_MODE |  ddParmDCB_NCP | ddParmDCB_NTM | ddParmDCB_OPTCD | ddParmDCB_PCI | ddParmDCB_PRTSP | ddParmDCB_RECFM | ddParmDCB_RESERVE | ddParmDCB_RKP | ddParmDCB_STACK | ddParmDCB_THRESH | ddParmDCB_TRTCH ;
