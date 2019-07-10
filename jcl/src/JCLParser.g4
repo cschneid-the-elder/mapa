@@ -418,21 +418,12 @@ jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment
 
 jobName : NAME_FIELD ;
 
-//jobProgrammerName : QUOTED_STRING_FRAGMENT | SIMPLE_STRING | NUM_LIT | NAME | DATASET_NAME ;
-
 jobAccountingInformation : jobAccountingInformationSimple | jobAccountingInformationMultiLine ;
 
-/*
-jobAccountingInformationSimple : (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT) 
-    (COMMA (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT)?)* ;
-
-jobAccountingInformationMultiLine : (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME | ALNUMNAT) 
-    (COMMA? SS? (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | SIMPLE_STRING | NUM_LIT | NAME| ALNUMNAT))* ;
-*/
 jobAccountingInformationSimple : jobAccountingString (COMMA jobAccountingString?)* ;
 jobAccountingInformationMultiLine : jobAccountingString (COMMA? SS? jobAccountingString)* ;
 jobAccountingString : (QUOTED_STRING_FRAGMENT | JOB_ACCT_MODE1_UNQUOTED_STRING+ | JOB_ACCT_MODE2_UNQUOTED_STRING+) ;
-jobProgrammerName : (QUOTED_STRING_FRAGMENT | JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING+) ;
+jobProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME | JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING+) ;
 
 jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
 
@@ -479,14 +470,8 @@ jobParmMSGLEVEL : MSGLEVEL EQUAL (
   ) 
   ;
 
-/*
-At least for right now, I'm including DATASET_NAME as a valid token in the NOTIFY
-parameter and the NOTIFY statement.  This is because a user name qualified with a
-node name (node.user) looks _exactly_ like a two part dataset name.  I'd like to
-introduce a mode for either parameters that match dataset names or for those that
-match user names, but this is a quick fix.
-*/
-jobParmNOTIFY : NOTIFY EQUAL ((NAME (DOT NAME)?) | SYMBOLIC | DATASET_NAME) ;
+
+jobParmNOTIFY : NOTIFY EQUAL ((NAME (DOT NAME)?) | SYMBOLIC) ;
 
 jobParmPASSWORD : PASSWORD EQUAL LPAREN? NAME (COMMA NAME)? RPAREN? ;
 
@@ -541,16 +526,8 @@ includeStatement : SS NAME_FIELD? INCLUDE MEMBER EQUAL MEMBER_NAME inlineComment
 
 jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL LPAREN? (DATASET_NAME | QUOTED_STRING_FRAGMENT) ((COMMA | (inlineComment SS CONTINUATION_WS)) (DATASET_NAME | QUOTED_STRING_FRAGMENT))* RPAREN? ;
 
-/*
-At least for right now, I'm including DATASET_NAME as a valid token in the NOTIFY
-parameter and the NOTIFY statement.  This is because a user name qualified with a
-node name (node.user) looks _exactly_ like a two part dataset name.  I'd like to
-introduce a mode for either parameters that match dataset names or for those that
-match user names, but this is a quick fix.
-*/
-
 notifyStatement : SS NAME_FIELD? NOTIFY 
-    (EMAIL EQUAL QUOTED_STRING_FRAGMENT) | (USER EQUAL (DATASET_NAME | ((NAME DOT)? NAME))) 
+    (EMAIL EQUAL QUOTED_STRING_FRAGMENT) | (USER EQUAL (SYMBOLIC | ((NAME DOT)? NAME))) 
         ((COMMA |
          (inlineComment SS CONTINUATION_WS)) 
          TYPE EQUAL (EMAIL | MSG))? 
