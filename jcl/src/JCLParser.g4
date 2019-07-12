@@ -44,7 +44,27 @@ jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | o
 
 execStatement : execPgmStatement | execProcStatement ;
 
-execPgmStatement : SS stepName? EXEC PGM EQUAL NAME_EX (((COMMA | inlineComment) SS?)? execParameter inlineComment?)* ;
+//execPgmStatement : SS stepName? EXEC PGM EQUAL NAME_EX (((COMMA | inlineComment | EOF) SS?)? execParameter inlineComment?)* ;
+//execPgmStatement : SS stepName? EXEC PGM EQUAL NAME_EX (((COMMA | inlineComment | EOF) SS? commentStatement*)? execParameter inlineComment?)* ;
+/*
+execPgmStatement : SS stepName? EXEC PGM EQUAL NAME_EX (
+    (COMMA SS commentStatement? execParameter inlineComment?) |
+    (COMMA execParameter inlineComment?) |
+    (inlineComment SS commentStatement? execParameter inlineComment?) |
+  )* ;
+*/
+execPgmStatement : SS stepName? EXEC PGM EQUAL NAME_EX (
+    execPgmClosure1 |
+    execPgmClosure2 |
+    execPgmClosure3 |
+    execPgmClosure4 |
+    execPgmClosure5
+  )*? ;
+execPgmClosure1 : COMMA commentStatement* SS execParameter inlineComment? ;
+execPgmClosure2 : COMMA SS execParameter inlineComment? ;
+execPgmClosure3 : COMMA execParameter inlineComment? ;
+execPgmClosure4 : inlineComment commentStatement* SS execParameter inlineComment? ;
+execPgmClosure5 : inlineComment commentStatement* EOF ;
 
 execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? NAME_EX (((COMMA | inlineComment) SS?)? definedSymbolicParameters inlineComment?)* ;
 

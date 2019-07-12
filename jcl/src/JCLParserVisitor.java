@@ -94,6 +94,36 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecPgmStatement(JCLParser.ExecPgmStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#execPgmClosure1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecPgmClosure1(JCLParser.ExecPgmClosure1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execPgmClosure2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecPgmClosure2(JCLParser.ExecPgmClosure2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execPgmClosure3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecPgmClosure3(JCLParser.ExecPgmClosure3Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execPgmClosure4}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecPgmClosure4(JCLParser.ExecPgmClosure4Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execPgmClosure5}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecPgmClosure5(JCLParser.ExecPgmClosure5Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#execProcStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

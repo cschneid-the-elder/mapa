@@ -147,6 +147,56 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitExecPgmStatement(JCLParser.ExecPgmStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#execPgmClosure1}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecPgmClosure1(JCLParser.ExecPgmClosure1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#execPgmClosure1}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecPgmClosure1(JCLParser.ExecPgmClosure1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#execPgmClosure2}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecPgmClosure2(JCLParser.ExecPgmClosure2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#execPgmClosure2}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecPgmClosure2(JCLParser.ExecPgmClosure2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#execPgmClosure3}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecPgmClosure3(JCLParser.ExecPgmClosure3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#execPgmClosure3}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecPgmClosure3(JCLParser.ExecPgmClosure3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#execPgmClosure4}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecPgmClosure4(JCLParser.ExecPgmClosure4Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#execPgmClosure4}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecPgmClosure4(JCLParser.ExecPgmClosure4Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#execPgmClosure5}.
+	 * @param ctx the parse tree
+	 */
+	void enterExecPgmClosure5(JCLParser.ExecPgmClosure5Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#execPgmClosure5}.
+	 * @param ctx the parse tree
+	 */
+	void exitExecPgmClosure5(JCLParser.ExecPgmClosure5Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#execProcStatement}.
 	 * @param ctx the parse tree
 	 */
