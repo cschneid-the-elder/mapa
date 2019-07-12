@@ -414,7 +414,9 @@ syschkAmalgamation : syschkStatement syschkConcatenation* ;
 syschkParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
 
 
-jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment? (COMMA jobProgrammerName)? inlineComment? (((COMMA | inlineComment) SS?)? jobKeywordParameter inlineComment?)* ;
+//jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment? (COMMA jobProgrammerName)? inlineComment? (((COMMA | inlineComment) SS?)? jobKeywordParameter inlineComment?)* ;
+
+jobCard : SS jobName JOB LPAREN? jobAccountingInformation? RPAREN? inlineComment? (COMMA jobProgrammerName)?  (((COMMA | inlineComment) SS?)? jobKeywordParameter inlineComment?)* ;
 
 jobName : NAME_FIELD ;
 
@@ -489,9 +491,9 @@ jobParmRESTART : RESTART EQUAL LPAREN? (ASTERISK | (NAME (DOT NAME)?) | DATASET_
 
 jobParmSECLABEL : SECLABEL EQUAL NAME ;
 
-jobParmSCHENV : SCHENV EQUAL ALNUMNAT ;
+jobParmSCHENV : SCHENV EQUAL NAME ;
 
-jobParmSYSAFF : SYSAFF EQUAL HYPHEN? LPAREN? HYPHEN? (ALNUMNAT | ANY | IND | ASTERISK) (COMMA HYPHEN? (ALNUMNAT | ANY | IND | ASTERISK))* RPAREN? ;
+jobParmSYSAFF : SYSAFF EQUAL HYPHEN? LPAREN? HYPHEN? (NAME | ANY | IND | ASTERISK) (COMMA HYPHEN? (NAME | ANY | IND | ASTERISK))* RPAREN? ;
 
 jobParmSYSTEM : SYSTEM EQUAL HYPHEN? LPAREN? HYPHEN? (ALNUMNAT | ANY | JGLOBAL | JLOCAL | ASTERISK) (COMMA HYPHEN? (ALNUMNAT | ANY | JGLOBAL | JLOCAL | ASTERISK))* RPAREN? ;
 
@@ -499,7 +501,7 @@ jobParmTIME : TIME EQUAL LPAREN? (NOLIMIT | MAXIMUM | FOURTEENFORTY | (NUM_LIT (
 
 jobParmTYPRUN : TYPRUN EQUAL (COPY | HOLD | JCLHOLD | SCAN) ;
 
-jobParmUJOBCORR : UJOBCORR EQUAL (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) ;
+jobParmUJOBCORR : UJOBCORR EQUAL (NAME | UNQUOTED_STRING | QUOTED_STRING_FRAGMENT) ;
 
 jobParmUSER : USER EQUAL NAME ;
 

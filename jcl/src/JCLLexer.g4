@@ -67,6 +67,7 @@ lexer grammar JCLLexer;
       add("/*");
     }};
     public java.util.ArrayList<String> dlmVals = new java.util.ArrayList(defaultDlmVals);
+    Boolean haveProgrammerName = false;
 
 }
 
@@ -855,7 +856,7 @@ CONTINUATION_WS_QS_SS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),popMo
 mode QS_JOB_PROGRAMMER_NAME_MODE ;
 
 SQUOTE2_QS_JOB_PROGRAMMER_NAME_MODE : SQUOTE SQUOTE ;
-SQUOTE_QS_JOB_PROGRAMMER_NAME_MODE : SQUOTE ->channel(HIDDEN),popMode ;
+SQUOTE_QS_JOB_PROGRAMMER_NAME_MODE : SQUOTE {haveProgrammerName = true;} ->channel(HIDDEN),popMode ;
 ANYCHAR_NOSQUOTE_JOB_PROGRAMMER_NAME_MODE : ~['\n\r] ;
 NEWLINE_QS_JOB_PROGRAMMER_NAME_MODE : [\n\r] ->channel(HIDDEN),pushMode(QS_SS_JOB_PROGRAMMER_NAME_MODE) ;
 
@@ -1107,12 +1108,22 @@ mode JOB_ACCT_MODE3 ;
 
 JOB_ACCT_MODE3_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_ACCT_MODE3_LINE_NB : LINE_NB ->skip ;
-JOB_ACCT_MODE3_COMMA : COMMA_DFLT ->type(COMMA),mode(JOB_PROGRAMMER_NAME_MODE) ;
+JOB_ACCT_MODE3_COMMA : COMMA_DFLT {haveProgrammerName = false;} ->type(COMMA),mode(JOB_PROGRAMMER_NAME_MODE) ;
 
 
 mode JOB_PROGRAMMER_NAME_MODE ;
 
-JOB_PROGRAMMER_NAME_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+/*
+The only way into this mode is via JOB_ACCT_MODE3 encountering a comma following the
+accounting information.
+
+The only ways out of this mode are via NEWLINE or COMMA provided we have encountered
+the programmer name -or- via one of the other valid keywords on the JOB statement.
+*/
+
+JOB_PROGRAMMER_NAME_MODE_SS : SS ->channel(HIDDEN) ;
+JOB_PROGRAMMER_NAME_MODE_CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN) ;
+JOB_PROGRAMMER_NAME_MODE_NEWLINE : NEWLINE {if (haveProgrammerName) mode(DEFAULT_MODE);} ->channel(HIDDEN) ;
 JOB_PROGRAMMER_NAME_MODE_LINE_NB : LINE_NB ->skip ;
 JOB_PROGRAMMER_NAME_MODE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_JOB_PROGRAMMER_NAME_MODE) ;
 /*
@@ -1120,7 +1131,7 @@ Almost works - probabaly have to duplicate QS and make a unique QUOTED_STRING_FR
 specifically for programmer name so it doesn't get mixed up with jobAccountingString
 in the parser.
 */
-JOB_PROGRAMMER_NAME_MODE_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
+JOB_PROGRAMMER_NAME_MODE_COMMA : COMMA_DFLT {if (haveProgrammerName) mode(DEFAULT_MODE);} ->type(COMMA) ;
 
 JOB_PROGRAMMER_NAME_MODE_ADDRSPC : ADDRSPC_DFLT ->type(ADDRSPC),mode(DEFAULT_MODE) ;
 JOB_PROGRAMMER_NAME_MODE_BYTES : BYTES_DFLT ->type(BYTES),mode(DEFAULT_MODE) ;
@@ -1156,5 +1167,5 @@ JOB_PROGRAMMER_NAME_MODE_TYPRUN : TYPRUN_DFLT ->type(TYPRUN),mode(DEFAULT_MODE) 
 JOB_PROGRAMMER_NAME_MODE_UJOBCORR : UJOBCORR_DFLT ->type(UJOBCORR),mode(DEFAULT_MODE) ;
 JOB_PROGRAMMER_NAME_MODE_USER : USER_DFLT ->type(USER),mode(DEFAULT_MODE) ;
 
-JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
+JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? {haveProgrammerName = true;} ;
 
