@@ -121,9 +121,28 @@ execParmTVSMSG : TVSMSG EQUAL (COMMIT | BACKOUT | ALL) ;
 
 execParmTVSAMCOM : TVSAMCOM EQUAL LPAREN NUM_LIT COMMA NUM_LIT RPAREN ;
 
-ddStatement : SS ddName DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
+//ddStatement : SS ddName DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
+ddStatement : SS ddName DD ddParameter? (
+    ddStatementClosure1 |
+    ddStatementClosure2 |
+    ddStatementClosure3 |
+    ddStatementClosure4 |
+    inlineComment)* 
+      ddParmASTERISK_DATA* ;
 
-ddStatementConcatenation : SS DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
+ddStatementClosure1 : COMMA commentStatement* ddParameter inlineComment? ;
+ddStatementClosure2 : COMMA SS ddParameter inlineComment? ;
+ddStatementClosure3 : COMMA ddParameter inlineComment? ;
+ddStatementClosure4 : inlineComment commentStatement* SS ddParameter inlineComment? ;
+
+//ddStatementConcatenation : SS DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
+ddStatementConcatenation : SS DD ddParameter? (
+    ddStatementClosure1 |
+    ddStatementClosure2 |
+    ddStatementClosure3 |
+    ddStatementClosure4 |
+    inlineComment)* 
+      ddParmASTERISK_DATA* ;
 
 ddStatementAmalgamation : ddStatement ddStatementConcatenation* ;
 

@@ -387,6 +387,46 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdStatement(JCLParser.DdStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure1}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdStatementClosure1(JCLParser.DdStatementClosure1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure1}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdStatementClosure1(JCLParser.DdStatementClosure1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure2}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdStatementClosure2(JCLParser.DdStatementClosure2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure2}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdStatementClosure2(JCLParser.DdStatementClosure2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure3}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdStatementClosure3(JCLParser.DdStatementClosure3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure3}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdStatementClosure3(JCLParser.DdStatementClosure3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure4}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdStatementClosure4(JCLParser.DdStatementClosure4Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure4}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdStatementClosure4(JCLParser.DdStatementClosure4Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddStatementConcatenation}.
 	 * @param ctx the parse tree
 	 */
