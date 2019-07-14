@@ -22,7 +22,8 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard joblibAmalgamation? syschkAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
+//execJCL : (jobCard joblibAmalgamation? syschkAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
+execJCL : (jobCard (joblibAmalgamation | syschkAmalgamation | jcllibStatement)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
 
 procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -554,7 +555,7 @@ cntlStatementAmalgamation : cntlStatement CNTL_DATA* endcntlStatement ;
 
 exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL (
     ASTERISK |
-    (LPAREN NAME (COMMA | (inlineComment SS CONTINUATION_WS) NAME)* RPAREN)
+    (LPAREN NAME (COMMA | (inlineComment SS) NAME)* RPAREN)
   ) ;
 
 ifStatement : SS NAME_FIELD? IF LPAREN* IF_CHECK ((SS CONTINUATION_WS)? LPAREN* IF_CHECK RPAREN*)* RPAREN* THEN inlineComment? ;
@@ -565,17 +566,27 @@ endifStatement : SS NAME_FIELD? ENDIF inlineComment? ;
 
 includeStatement : SS NAME_FIELD? INCLUDE MEMBER EQUAL MEMBER_NAME inlineComment? ;
 
-jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL LPAREN? (DATASET_NAME | QUOTED_STRING_FRAGMENT) ((COMMA | (inlineComment SS CONTINUATION_WS)) (DATASET_NAME | QUOTED_STRING_FRAGMENT))* RPAREN? ;
+//jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL LPAREN? (DATASET_NAME | QUOTED_STRING_FRAGMENT) ((COMMA | (inlineComment SS)) (DATASET_NAME | QUOTED_STRING_FRAGMENT))* RPAREN? ;
+jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL (
+    ((DATASET_NAME | QUOTED_STRING_FRAGMENT) inlineComment?) |
+    (LPAREN 
+        (DATASET_NAME | QUOTED_STRING_FRAGMENT) 
+    RPAREN inlineComment?) |
+    (LPAREN 
+        (DATASET_NAME | QUOTED_STRING_FRAGMENT) 
+            (((COMMA COMMENT_TEXT?) | inlineComment) (DATASET_NAME | QUOTED_STRING_FRAGMENT))* 
+    RPAREN inlineComment?)
+  ) ;
 
 notifyStatement : SS NAME_FIELD? NOTIFY 
     (EMAIL EQUAL QUOTED_STRING_FRAGMENT) | (USER EQUAL (SYMBOLIC | ((NAME DOT)? NAME))) 
         ((COMMA |
-         (inlineComment SS CONTINUATION_WS)) 
+         (inlineComment SS)) 
          TYPE EQUAL (EMAIL | MSG))? 
         ((COMMA |
-         (inlineComment SS CONTINUATION_WS)) 
+         (inlineComment SS)) 
          WHEN EQUAL LPAREN* WHEN_CHECK 
-            ((SS CONTINUATION_WS)? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
+            (SS? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
     ;
 
 yesOrNo : YES | NO | Y | N ;
