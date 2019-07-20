@@ -845,9 +845,9 @@ WS_CNTL : [ ]+ ->channel(HIDDEN) ;
 
 mode QS ;
 
-SQUOTE2_QS : SQUOTE SQUOTE ;
+fragment SQUOTE2_QS : SQUOTE SQUOTE ;
 SQUOTE_QS : SQUOTE ->channel(HIDDEN),popMode ;
-ANYCHAR_NOSQUOTE : ~['\n\r] ;
+fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
 NEWLINE_QS : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
 
 QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+ ;
