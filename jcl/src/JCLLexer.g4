@@ -71,7 +71,7 @@ lexer grammar JCLLexer;
 
 }
 
-tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SER , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME }
+tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SER , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING }
 
 // lexer rules --------------------------------------------------------------------------------
 
@@ -367,7 +367,7 @@ OVERLAYF : O V E R L A Y F ;
 OVFL : O V F L ;
 PAGEDEF : P A G E D E F ;
 PAGES_DFLT : P A G E S ->type(PAGES) ;
-PARM : P A R M ;
+PARM : P A R M ->mode(EXEC_PARM_MODE) ;
 PARMDD : P A R M D D ;
 PARM1 : P A R M '1' ;
 PARM2 : P A R M '2' ;
@@ -652,6 +652,106 @@ PGM : P G M ;
 PROC_EX : P R O C ;
 EQUAL_EX : EQUAL_DFLT ->type(EQUAL) ;
 NAME_EX : NAME ->mode(DEFAULT_MODE) ;
+
+/*
+
+This deserves some explanation.  Consider...
+
+//STEP002U EXEC PGM=IEFBR14,PARM=XX11@@
+//STEP002V EXEC PGM=IEFBR14,PARM=1X@
+//STEP003  EXEC PGM=IEFBR14,PARM='X'
+//STEP004  EXEC PGM=IEFBR14,PARM='A1@/STGRPT(ON)'
+//STEP005  EXEC PGM=IEFBR14,PARM=&A
+//STEP006  EXEC PGM=IEFBR14,PARM=&AB
+//STEP007  EXEC PGM=IEFBR14,PARM=&A.1
+//STEP008  EXEC PGM=IEFBR14,PARM=ZZ&A
+//STEP009  EXEC PGM=IEFBR14,PARM=ZZ&A.1
+//STEP010  EXEC PGM=IEFBR14,PARM='AND A ONE AND A TWO AND
+//       A THREE AND A FOUR'
+//STEP011  EXEC PGM=IEFBR14,PARM=(A,B,C,D,E,F,G)
+//STEP012  EXEC PGM=IEFBR14,PARM=(A,              PARM 1
+//  B,                                            PARM 2
+//    C,                                          PARM 3
+// D,                                             PARM 4
+//         E,                                     PARM 5
+//      F,                                        PARM 6
+//        G)                                      PARM 7
+//STEP013  EXEC PGM=IEFBR14,
+// PARM=(A,
+// B,
+// C,
+// D,
+// E,F,
+//         G)
+//STEP014  EXEC PGM=IEFBR14,PARM=('ABC',&A,7,'BLAH
+//  BLAH BLAH')
+
+...all of which are valid PARM parameters on an EXEC statement.
+
+In DEFAULT_MODE, PARM is used to get us into EXEC_PARM_MODE.  From
+there, if we encounter a left paren then we must parse allow for a
+comma-separated list which may span physical lines, each of which
+may have a comment delimited by whitespace and must begin with '//'
+followed by at least one space before the list continues.
+
+If we don't encounter a left paren, then we have the "simple" case of
+a PARM comprised of either a contiguous series of bytes or a quoted
+string.  A quoted string may span physical lines, each of which must
+begin with '//' followed by at least one space.
+
+In the "simple" case the PARM may be followed by a comment delimited
+by whitespace.
+
+*/
+
+mode EXEC_PARM_MODE ;
+
+EQUAL_EXEC_PARM : EQUAL_DFLT ->type(EQUAL),mode(EXEC_PARM_MODE2) ;
+
+mode EXEC_PARM_MODE2 ;
+
+NEWLINE_EXEC_PARM : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+COMMA_EXEC_PARM : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
+WS_EXEC_PARM : [ ]+ ->channel(HIDDEN),mode(CM) ;
+LPAREN_EXEC_PARM : LPAREN_DFLT ->type(LPAREN),mode(EXEC_PARM_PAREN_MODE) ;
+SQUOTE_EXEC_PARM : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+EXEC_PARM_STRING_DFLT : (
+    SIMPLE_STRING | 
+    SYMBOLIC | 
+    ALPHA | 
+    ALNUMNAT | 
+    NUM_LIT_DFLT | 
+    DOT | 
+    NAME
+  )+ ->type(EXEC_PARM_STRING) ;
+
+mode EXEC_PARM_PAREN_MODE ;
+
+NEWLINE_EXEC_PARM_PAREN : NEWLINE ->channel(HIDDEN),pushMode(EXEC_PARM_PAREN_SS) ;
+WS_EXEC_PARM_PAREN : [ ]+ ->channel(HIDDEN),pushMode(EXEC_PARM_CM) ;
+RPAREN_EXEC_PARM_PAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SQUOTE_EXEC_PARM_PAREN : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+EXEC_PARM_STRING_PAREN : (
+    SIMPLE_STRING | 
+    SYMBOLIC | 
+    ALPHA | 
+    ALNUMNAT | 
+    NUM_LIT_DFLT | 
+    DOT | 
+    NAME | 
+    COMMA_DFLT
+  )+ ->type(EXEC_PARM_STRING) ;
+
+mode EXEC_PARM_CM ;
+
+NEWLINE_EXEC_PARM_CM : NEWLINE ->channel(HIDDEN),popMode ;
+COMMENT_TEXT_EXEC_PARM_CM : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
+NEWLINE_SS_WS_EXEC_PARM_CM : NEWLINE SLASH SLASH ' '+ ->channel(HIDDEN),popMode ;
+
+mode EXEC_PARM_PAREN_SS ;
+
+SS_EXEC_PARM_PAREN_SS : SLASH SLASH {getCharPositionInLine() == 2}? ->channel(HIDDEN) ;
+CONTINUATION_WS_EXEC_PARM_PAREN_SS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),popMode ;
 
 mode POST_IF ;
 
