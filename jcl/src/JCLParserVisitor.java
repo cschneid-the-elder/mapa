@@ -130,11 +130,71 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecProcStatement(JCLParser.ExecProcStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#execProcClosure1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecProcClosure1(JCLParser.ExecProcClosure1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execProcClosure2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecProcClosure2(JCLParser.ExecProcClosure2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execProcClosure3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecProcClosure3(JCLParser.ExecProcClosure3Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execProcClosure4}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecProcClosure4(JCLParser.ExecProcClosure4Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execProcClosure5}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecProcClosure5(JCLParser.ExecProcClosure5Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#execParameter}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExecParameter(JCLParser.ExecParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#execParameterOverrides}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExecParameterOverrides(JCLParser.ExecParameterOverridesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#stepAccountingInformation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStepAccountingInformation(JCLParser.StepAccountingInformationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#stepAccountingInformationSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStepAccountingInformationSimple(JCLParser.StepAccountingInformationSimpleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#stepAccountingInformationMultiLine}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStepAccountingInformationMultiLine(JCLParser.StepAccountingInformationMultiLineContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#stepAccountingString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStepAccountingString(JCLParser.StepAccountingStringContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#execParmACCT}.
 	 * @param ctx the parse tree

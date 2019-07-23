@@ -67,7 +67,20 @@ execPgmClosure3 : COMMA execParameter inlineComment? ;
 execPgmClosure4 : inlineComment commentStatement* SS execParameter inlineComment? ;
 execPgmClosure5 : inlineComment commentStatement* EOF ;
 
-execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? NAME_EX (((COMMA | inlineComment) SS?)? definedSymbolicParameters inlineComment?)* ;
+//execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? NAME_EX (((COMMA | inlineComment) SS?)? (defineSymbolicParameter | execParameterOverrides) inlineComment?)* ;
+
+execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? NAME_EX (
+    execProcClosure1 |
+    execProcClosure2 |
+    execProcClosure3 |
+    execProcClosure4 |
+    execProcClosure5
+  )*? ;
+execProcClosure1 : COMMA commentStatement* SS (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
+execProcClosure2 : COMMA SS (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
+execProcClosure3 : COMMA (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
+execProcClosure4 : inlineComment commentStatement* SS (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
+execProcClosure5 : inlineComment commentStatement* EOF ;
 
 /*
 Some of the parameters for the EXEC statement are identical to those
@@ -78,13 +91,25 @@ the COND parameter, which is in fact different.
 */
 execParameter : execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmTIME | execParmTVSMSG | execParmTVSAMCOM ;
 
-execParmACCT : ACCT (DOT NAME)? EQUAL jobAccountingInformation ;
+/*
+Some of the parameters for the EXEC statement can have a procstepname 
+indicating they are potentially overriding a value coded in the proc.
+*/
 
-execParmADDRSPC : ADDRSPC EQUAL (REAL | VIRT) ;
+execParameterOverrides : execParmACCT | execParmADDRSPC | execParmCOND | execParmDYNAMNBR | execParmPARM | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmTIME ;
+
+stepAccountingInformation : stepAccountingInformationSimple | stepAccountingInformationMultiLine ;
+stepAccountingInformationSimple : stepAccountingString (COMMA stepAccountingString?)* ;
+stepAccountingInformationMultiLine : stepAccountingString (COMMA? SS? stepAccountingString)* ;
+stepAccountingString : (QUOTED_STRING_FRAGMENT | STEP_ACCT_MODE1_UNQUOTED_STRING+ | STEP_ACCT_MODE2_UNQUOTED_STRING+) ;
+
+execParmACCT : ACCT (DOT NAME)? EQUAL LPAREN? stepAccountingInformation RPAREN? ;
+
+execParmADDRSPC : ADDRSPC (DOT NAME)? EQUAL (REAL | VIRT) ;
 
 execParmCCSID : CCSID EQUAL NUM_LIT ;
 
-execParmCOND : COND EQUAL 
+execParmCOND : COND (DOT NAME)? EQUAL 
     (EVEN | 
      ONLY | 
         (LPAREN? 
@@ -113,17 +138,17 @@ execParmPARM : PARM (DOT NAME)? EQUAL (
 
 execParmPARMDD : PARMDD EQUAL NAME ;
 
-execParmPERFORM : PERFORM EQUAL NUM_LIT ;
+execParmPERFORM : PERFORM (DOT NAME)? EQUAL NUM_LIT ;
 
-execParmRD : RD EQUAL RD_VALUE ; 
+execParmRD : RD (DOT NAME)? EQUAL RD_VALUE ; 
 
-execParmREGION : REGION EQUAL NUM_MEM_VAL ;
+execParmREGION : REGION (DOT NAME)? EQUAL NUM_MEM_VAL ;
 
-execParmREGIONX : REGIONX EQUAL LPAREN? NUM_MEM_VAL (COMMA NUM_MEM_VAL) RPAREN? ;
+execParmREGIONX : REGIONX (DOT NAME)? EQUAL LPAREN? NUM_MEM_VAL (COMMA NUM_MEM_VAL) RPAREN? ;
 
 execParmRLSTMOUT : RLSTMOUT EQUAL NUM_LIT ;
 
-execParmTIME : TIME EQUAL LPAREN? (NOLIMIT | MAXIMUM | FOURTEENFORTY | (NUM_LIT (COMMA NUM_LIT)?)) RPAREN? ;
+execParmTIME : TIME (DOT NAME)? EQUAL LPAREN? (NOLIMIT | MAXIMUM | FOURTEENFORTY | (NUM_LIT (COMMA NUM_LIT)?)) RPAREN? ;
 
 execParmTVSMSG : TVSMSG EQUAL (COMMIT | BACKOUT | ALL) ;
 
