@@ -113,11 +113,12 @@ execParmCOND : COND (DOT NAME)? EQUAL
     (EVEN | 
      ONLY | 
         (LPAREN? 
-            LPAREN NUM_LIT COMMA COND_OP (COMMA NAME)? RPAREN 
-                ((COMMA? LPAREN NUM_LIT COMMA COND_OP (COMMA NAME)? RPAREN) | 
+            LPAREN NUM_LIT COMMA COND_OP (COMMA NAME (DOT NAME)?)? RPAREN 
+                ((COMMA? LPAREN NUM_LIT COMMA COND_OP (COMMA NAME (DOT NAME)?)? RPAREN) | 
                  (COMMA? EVEN) | 
                  (COMMA? ONLY) |
-                 (inlineComment? SS)
+                 (inlineComment? SS) |
+                 (COMMA SS)
                 )* RPAREN?
         )
     )
