@@ -29,4 +29,4 @@
 // ACCT.STEPA=A1, acctA
 // ACCT.STEPB=('A1+','B2(1)'), acctB
 // ADDRSPC.STEPC=VIRT, addrspcC
-// ADDRSPC.STEPD=REAL addrspcD
+// ADDRSPC.STEPD=&ADDRSPCD addrspcD
