@@ -1,5 +1,7 @@
 /*
-Copyright (C) 2019, Craig Schneiderwent.  All rights reserved.
+Copyright (C) 2019, Craig Schneiderwent.  All rights reserved.  I accept
+no liability for damages of any kind resulting from the use of this 
+software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
@@ -143,7 +145,7 @@ execParmPARMDD : PARMDD EQUAL PARMDD_NAME ;
 
 execParmPERFORM : PERFORM (DOT NAME)? EQUAL (NUM_LIT | SYMBOLIC+) ;
 
-execParmRD : RD (DOT NAME)? EQUAL (RD_VALUE | SYMBOLIC+) ; 
+execParmRD : RD (DOT NAME)? EQUAL (RD_VALUE | RD_SYMBOLIC+) ; 
 
 execParmREGION : REGION (DOT NAME)? EQUAL (NUM_MEM_VAL | SYMBOLIC+) ;
 
@@ -162,7 +164,8 @@ execParmTIME : TIME (DOT NAME)? EQUAL
         MAXIMUM |
         FOURTEENFORTY |
         SYMBOLIC+ |
-        ((NUM_LIT | SYMBOLIC+) (COMMA (NUM_LIT | SYMBOLIC+))?)
+        ((NUM_LIT | SYMBOLIC+) (COMMA (NUM_LIT | SYMBOLIC+))?) |
+        ((NUM_LIT | SYMBOLIC+)? COMMA (NUM_LIT | SYMBOLIC+))
     ) RPAREN? ;
 
 execParmTVSMSG : TVSMSG EQUAL (COMMIT | BACKOUT | ALL | SYMBOLIC+) ;
