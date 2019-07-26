@@ -56,6 +56,10 @@ test:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0012.jcl | grep -v '^\[' || exit 0
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0013.jcl | grep -v '^\[' || exit 0
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0014.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0015.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0016.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0017.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0018.jcl | grep -v '^\[' || exit 0
 
 testrig:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0001.jcl
@@ -98,6 +102,18 @@ testrig13:
 
 testrig14:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0014.jcl
+
+testrig15:
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0015.jcl
+
+testrig16:
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0016.jcl
+
+testrig17:
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0017.jcl
+
+testrig18:
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0018.jcl
 
 #testLocal:
 #	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log

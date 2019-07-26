@@ -123,8 +123,8 @@ public class JCLParser extends Parser {
 		JOB_PROGRAMMER_NAME_MODE_SQUOTE=594, JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING=595, 
 		STEP_ACCT_MODE1_NEWLINE=596, STEP_ACCT_MODE1_LINE_NB=597, STEP_ACCT_MODE1_SQUOTE=598, 
 		STEP_ACCT_MODE1_UNQUOTED_STRING=599, STEP_ACCT_MODE2_NEWLINE=600, STEP_ACCT_MODE2_LINE_NB=601, 
-		STEP_ACCT_MODE2_SQUOTE=602, STEP_ACCT_MODE2_UNQUOTED_STRING=603, COMMA_DFLT=604, 
-		DOT_DFLT=605, EQUAL_DFLT=606, LPAREN_DFLT=607, RPAREN_DFLT=608;
+		STEP_ACCT_MODE2_SQUOTE=602, STEP_ACCT_MODE2_UNQUOTED_STRING=603, PARMDD_NAME=604, 
+		COMMA_DFLT=605, DOT_DFLT=606, EQUAL_DFLT=607, LPAREN_DFLT=608, RPAREN_DFLT=609;
 	public static final int
 		RULE_startRule = 0, RULE_jcl = 1, RULE_execJCL = 2, RULE_procJCL = 3, 
 		RULE_procStatement = 4, RULE_defineSymbolicParameter = 5, RULE_definedSymbolicParameters = 6, 
@@ -396,8 +396,8 @@ public class JCLParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, "','", "'.'", "'='", 
-			"'('", "')'"
+			null, null, null, null, null, null, null, null, null, null, "','", "'.'", 
+			"'='", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -500,8 +500,8 @@ public class JCLParser extends Parser {
 			"JOB_PROGRAMMER_NAME_MODE_SQUOTE", "JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING", 
 			"STEP_ACCT_MODE1_NEWLINE", "STEP_ACCT_MODE1_LINE_NB", "STEP_ACCT_MODE1_SQUOTE", 
 			"STEP_ACCT_MODE1_UNQUOTED_STRING", "STEP_ACCT_MODE2_NEWLINE", "STEP_ACCT_MODE2_LINE_NB", 
-			"STEP_ACCT_MODE2_SQUOTE", "STEP_ACCT_MODE2_UNQUOTED_STRING", "COMMA_DFLT", 
-			"DOT_DFLT", "EQUAL_DFLT", "LPAREN_DFLT", "RPAREN_DFLT"
+			"STEP_ACCT_MODE2_SQUOTE", "STEP_ACCT_MODE2_UNQUOTED_STRING", "PARMDD_NAME", 
+			"COMMA_DFLT", "DOT_DFLT", "EQUAL_DFLT", "LPAREN_DFLT", "RPAREN_DFLT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -4703,7 +4703,7 @@ public class JCLParser extends Parser {
 	public static class ExecParmPARMDDContext extends ParserRuleContext {
 		public TerminalNode PARMDD() { return getToken(JCLParser.PARMDD, 0); }
 		public TerminalNode EQUAL() { return getToken(JCLParser.EQUAL, 0); }
-		public TerminalNode NAME() { return getToken(JCLParser.NAME, 0); }
+		public TerminalNode PARMDD_NAME() { return getToken(JCLParser.PARMDD_NAME, 0); }
 		public ExecParmPARMDDContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -4734,7 +4734,7 @@ public class JCLParser extends Parser {
 			setState(1224);
 			match(EQUAL);
 			setState(1225);
-			match(NAME);
+			match(PARMDD_NAME);
 			}
 		}
 		catch (RecognitionException re) {
@@ -31687,7 +31687,7 @@ public class JCLParser extends Parser {
 
 	private static final int _serializedATNSegments = 2;
 	private static final String _serializedATNSegment0 =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0262\u1138\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0263\u1138\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -32492,7 +32492,7 @@ public class JCLParser extends Parser {
 		"\2\2\u04c1\u04c8\7\u00b1\2\2\u04c2\u04c4\7\u021c\2\2\u04c3\u04c2\3\2\2"+
 		"\2\u04c4\u04c5\3\2\2\2\u04c5\u04c3\3\2\2\2\u04c5\u04c6\3\2\2\2\u04c6\u04c8"+
 		"\3\2\2\2\u04c7\u04a4\3\2\2\2\u04c7\u04c1\3\2\2\2\u04c7\u04c3\3\2\2\2\u04c8"+
-		"M\3\2\2\2\u04c9\u04ca\7\u0161\2\2\u04ca\u04cb\7\26\2\2\u04cb\u04cc\7\u01c5"+
+		"M\3\2\2\2\u04c9\u04ca\7\u0161\2\2\u04ca\u04cb\7\26\2\2\u04cb\u04cc\7\u025e"+
 		"\2\2\u04ccO\3\2\2\2\u04cd\u04d0\7\u00a1\2\2\u04ce\u04cf\7\u00b2\2\2\u04cf"+
 		"\u04d1\7\u01c5\2\2\u04d0\u04ce\3\2\2\2\u04d0\u04d1\3\2\2\2\u04d1\u04d2"+
 		"\3\2\2\2\u04d2\u04d9\7\26\2\2\u04d3\u04da\7q\2\2\u04d4\u04d6\7\u00ba\2"+
