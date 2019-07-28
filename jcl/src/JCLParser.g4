@@ -209,12 +209,12 @@ ddParmAMP : AMP EQUAL (
   ) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
-ddParmAVGREC : AVGREC EQUAL MEM_UNIT ;
-ddParmBLKSIZE : BLKSIZE EQUAL NUM_LIT | NUM_MEM_VAL ;
-ddParmBLKSZLIM : BLKSZLIM EQUAL NUM_LIT | NUM_MEM_VAL ;
-ddParmBURST : BURST EQUAL yesOrNo ;
-ddParmCCSID : CCSID EQUAL NUM_LIT ;
-ddParmCHARS : CHARS EQUAL LPAREN? (ALNUMNAT | DUMP) (COMMA ALNUMNAT)* RPAREN? ;
+ddParmAVGREC : AVGREC EQUAL (MEM_UNIT | SYMBOLIC) ;
+ddParmBLKSIZE : BLKSIZE EQUAL (NUM_LIT | NUM_MEM_VAL | SYMBOLIC) ;
+ddParmBLKSZLIM : BLKSZLIM EQUAL (NUM_LIT | NUM_MEM_VAL | SYMBOLIC) ;
+ddParmBURST : BURST EQUAL (yesOrNo | SYMBOLIC) ;
+ddParmCCSID : CCSID EQUAL (NUM_LIT | SYMBOLIC) ;
+ddParmCHARS : CHARS EQUAL LPAREN? (ALNUMNAT | DUMP | SYMBOLIC) (COMMA (ALNUMNAT | SYMBOLIC))* RPAREN? ;
 ddParmCHKPT : CHKPT EQUAL EOV ;
 ddParmCNTL : CNTL EQUAL REFERBACK ;
 ddParmCOPIES : COPIES EQUAL (NUM_LIT | 
@@ -439,7 +439,14 @@ ddParmVOLUME_SER :
           ) RPAREN) ;
 ddParmVOLUME_REF : REF EQUAL (ddName | DATASET_NAME | QUOTED_STRING_FRAGMENT) ;
 
+/*
+The ddParmAMP_ stuff isn't used in this parser, it turns out the 
+AMP DD parameter is just quoted strings.  But... I bet this would
+be useful as a separate parser (and lexer) just for this one odd
+parameter.  Maybe to people tuning VSAM.
 
+TODO separate the AMP stuff.
+*/
 ddParmAMP_Parameter : ddParmAMP_ACCBIAS | ddParmAMP_AMORG | ddParmAMP_BUFND | ddParmAMP_BUFNI | ddParmAMP_BUFSP | ddParmAMP_CROPS | ddParmAMP_FRLOG | ddParmAMP_MSG | ddParmAMP_OPTCD | ddParmAMP_RECFM | ddParmAMP_RMODE31 | ddParmAMP_SMBDFR | ddParmAMP_SMBHWT | ddParmAMP_SMBVSP | ddParmAMP_SMBVSPI | ddParmAMP_STRNO | ddParmAMP_SYNAD | ddParmAMP_TRACE ;
 
 ddParmAMP_ACCBIAS : ACCBIAS EQUAL (USER | SYSTEM | DO | DW | SO | SW) ;
