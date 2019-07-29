@@ -198,7 +198,7 @@ DEST_DFLT : D E S T ->type(DEST) ;
 DIAGNS_DFLT : D I A G N S ->type(DIAGNS) ;
 DISALLOW : D I S A L L O W ;
 DISP_DFLT : D I S P ->type(DISP) ;
-DLM_DFLT : D L M ->pushMode(DLM_MODE),type(DLM) ;
+DLM_DFLT : D L M ->mode(DLM_MODE),type(DLM) ;
 DO : D O ;
 DOT_DFLT : '.' ->type(DOT) ;
 DOUBLE : D O U B L E ;
@@ -798,6 +798,12 @@ CLASS_VAL : (
 
 mode DD_OP ;
 
+/*
+TODO set dlmVals to '//' and '/*' for DD_ASTERISK and just '/*'
+for DD_DATA.
+
+*/
+
 WS_DD_OP : [ ]+ ->channel(HIDDEN) ;
 NEWLINE_DD_OP : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 DD_OP_COMMA : COMMA_DFLT ->type(COMMA) ;
@@ -893,7 +899,7 @@ DATA_PARM_MODE_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE) ;
 DATA_PARM_MODE_BUFNO : BUFNO_DFLT ->type(BUFNO) ;
 DATA_PARM_MODE_DCB : DCB_DFLT ->type(DCB) ;
 DATA_PARM_MODE_DIAGNS : DIAGNS_DFLT ->type(DIAGNS) ;
-DATA_PARM_MODE_DLM : DLM_DFLT EQUAL_DFLT ->type(DLM),pushMode(DLM_MODE) ;
+DATA_PARM_MODE_DLM : DLM_DFLT EQUAL_DFLT ->type(DLM),mode(DLM_MODE) ;
 DATA_PARM_MODE_DSID : DSID_DFLT ->type(DSID) ;
 DATA_PARM_MODE_LIKE : LIKE_DFLT ->type(LIKE) ;
 DATA_PARM_MODE_LRECL : LRECL_DFLT ->type(LRECL) ;
@@ -917,15 +923,15 @@ mode DLM_MODE ;
 //DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
 DLM_WS : [ ]+ ->channel(HIDDEN) ;
 SQUOTE_DLM : '\'' ->channel(HIDDEN),mode(DLM_QS);
-DLM_VAL : (SIMPLE_STRING | QUOTED_DLM_VAL) {dlmVals = new java.util.ArrayList(); dlmVals.add(getText());} ->popMode ;
+DLM_VAL : (SIMPLE_STRING | QUOTED_DLM_VAL) {dlmVals = new java.util.ArrayList(); dlmVals.add(getText());} ->mode(DATA_PARM_MODE) ;
 
 mode DLM_QS ;
 
 SQUOTE2_DLM_QS : SQUOTE SQUOTE ;
-SQUOTE_DLM_QS : SQUOTE ->channel(HIDDEN),mode(DLM_MODE) ;
-ANYCHAR_NOSQUOTE_DLM_QS : ~['\n\r] ;
+SQUOTE_DLM_QS : SQUOTE ->channel(HIDDEN),mode(DATA_PARM_MODE) ;
+fragment ANYCHAR_NOSQUOTE_DLM_QS : ~['\n\r] ;
 
-QUOTED_DLM_VAL : (ANYCHAR_NOSQUOTE+ | SQUOTE2_DLM_QS+) ;
+QUOTED_DLM_VAL : (ANYCHAR_NOSQUOTE+ | SQUOTE2_DLM_QS+) {dlmVals = new java.util.ArrayList(); dlmVals.add(getText());} ;
 
 mode DATA_PARM_CM_MODE ;
 
