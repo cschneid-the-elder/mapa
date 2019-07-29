@@ -5,6 +5,13 @@ software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
+
+
+I do not like thee, JCL,
+The reason why -- I cannot tell;
+But this I know, and know full well,
+I do not like thee, JCL.
+
 */
 
 /*
@@ -172,6 +179,8 @@ execParmTVSMSG : TVSMSG EQUAL (COMMIT | BACKOUT | ALL | SYMBOLIC+) ;
 
 execParmTVSAMCOM : TVSAMCOM EQUAL LPAREN (NUM_LIT | SYMBOLIC+) COMMA (NUM_LIT | SYMBOLIC+) RPAREN ;
 
+referback : ASTERISK DOT NAME (DOT NAME)? (DOT NAME)? ;
+
 //ddStatement : SS ddName DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
 ddStatement : SS ddName DD ddParameter? (
     ddStatementClosure1 |
@@ -214,12 +223,12 @@ ddParmBLKSIZE : BLKSIZE EQUAL (NUM_LIT | NUM_MEM_VAL | SYMBOLIC) ;
 ddParmBLKSZLIM : BLKSZLIM EQUAL (NUM_LIT | NUM_MEM_VAL | SYMBOLIC) ;
 ddParmBURST : BURST EQUAL (yesOrNo | SYMBOLIC) ;
 ddParmCCSID : CCSID EQUAL (NUM_LIT | SYMBOLIC) ;
-ddParmCHARS : CHARS EQUAL LPAREN? (ALNUMNAT | DUMP | SYMBOLIC) (COMMA (ALNUMNAT | SYMBOLIC))* RPAREN? ;
+ddParmCHARS : CHARS EQUAL LPAREN? (CHARS_FONT | SYMBOLIC) (COMMA (CHARS_FONT | SYMBOLIC))* RPAREN? ;
 ddParmCHKPT : CHKPT EQUAL EOV ;
-ddParmCNTL : CNTL EQUAL REFERBACK ;
-ddParmCOPIES : COPIES EQUAL (NUM_LIT | 
-                   (LPAREN NUM_LIT 
-                       (COMMA LPAREN NUM_LIT (COMMA NUM_LIT)* RPAREN)? 
+ddParmCNTL : CNTL EQUAL referback ;
+ddParmCOPIES : COPIES EQUAL ((NUM_LIT | SYMBOLIC) | 
+                   (LPAREN (NUM_LIT | SYMBOLIC) 
+                       (COMMA LPAREN (NUM_LIT | SYMBOLIC) (COMMA (NUM_LIT | SYMBOLIC))* RPAREN)? 
                    RPAREN)) ;
 ddParmDATA : DATA ;
 ddParmDATACLAS : DATACLAS EQUAL NAME ;
@@ -648,7 +657,7 @@ notifyStatement : SS NAME_FIELD? NOTIFY
             (SS? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
     ;
 
-yesOrNo : YES | NO | Y | N ;
+yesOrNo : YES | NO | ALPHA ;
 
 outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter 
     ((COMMA | (inlineComment SS)) outputStatementParameter)* ;
