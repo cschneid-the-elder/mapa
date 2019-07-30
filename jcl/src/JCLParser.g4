@@ -231,7 +231,7 @@ ddParmCOPIES : COPIES EQUAL ((NUM_LIT | SYMBOLIC) |
                        (COMMA LPAREN (NUM_LIT | SYMBOLIC) (COMMA (NUM_LIT | SYMBOLIC))* RPAREN)? 
                    RPAREN)) ;
 ddParmDATA : DATA ;
-ddParmDATACLAS : DATACLAS EQUAL NAME ;
+ddParmDATACLAS : DATACLAS EQUAL (DATACLAS_VALUE | SYMBOLIC)? ;
 ddParmDCB : DCB EQUAL ddParmDCB_Parameter | 
     (LPAREN 
         ddParmDCB_Parameter 
