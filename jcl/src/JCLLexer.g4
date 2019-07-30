@@ -67,11 +67,7 @@ lexer grammar JCLLexer;
 
 @lexer::members {
 
-    public java.util.Set<String> defaultDlmVals = new java.util.HashSet<String>(){{
-      add("//");
-      add("/*");
-    }};
-    public java.util.ArrayList<String> dlmVals = new java.util.ArrayList(defaultDlmVals);
+    public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
     Boolean haveProgrammerName = false;
 
 }
@@ -811,7 +807,7 @@ DD_OP_COMMA : COMMA_DFLT ->type(COMMA) ;
 DD_ACCODE : ACCODE_DFLT ->type(ACCODE),mode(ACCODE_MODE) ;
 DD_AMP : AMP_DFLT ->type(AMP),mode(DEFAULT_MODE) ;
 DD_AVGREC : AVGREC_DFLT ->type(AVGREC),mode(DEFAULT_MODE) ;
-DD_ASTERISK : '*' ->type(ASTERISK),mode(DATA_PARM_MODE) ;
+DD_ASTERISK : '*' {dlmVals.add("/*"); dlmVals.add("//");} ->type(ASTERISK),mode(DATA_PARM_MODE) ;
 DD_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),mode(DEFAULT_MODE) ;
 DD_BLKSZLIM : BLKSZLIM_DFLT ->type(BLKSZLIM),mode(DEFAULT_MODE) ;
 DD_BURST : BURST_DFLT ->type(BURST),mode(DEFAULT_MODE) ;
@@ -820,7 +816,7 @@ DD_CHARS : CHARS_DFLT ->type(CHARS),mode(CHARS_MODE) ;
 DD_CHKPT : CHKPT_DFLT ->type(CHKPT),mode(DEFAULT_MODE) ;
 DD_CNTL : CNTL_DFLT ->type(CNTL),mode(DEFAULT_MODE) ;
 DD_COPIES : COPIES_DFLT ->type(COPIES),mode(DEFAULT_MODE) ;
-DD_DATA : DATA_DFLT ->type(DATA),mode(DATA_PARM_MODE) ;
+DD_DATA : DATA_DFLT {dlmVals.add("/*");} ->type(DATA),mode(DATA_PARM_MODE) ;
 DD_DATACLAS : DATACLAS_DFLT ->type(DATACLAS),mode(DEFAULT_MODE) ;
 DD_DCB : DCB_DFLT ->type(DCB),mode(DSN_MODE) ;
 DD_DDNAME : DDNAME_DFLT ->type(DDNAME),mode(DEFAULT_MODE) ;
@@ -949,7 +945,7 @@ grammar.
 DATA_MODE_TERMINATOR1 : SLASH SLASH ASTERISK {dlmVals.contains("//") && getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM);
 DATA_MODE_TERMINATOR2 : SLASH SLASH {dlmVals.contains("//") && getCharPositionInLine() == 2}? ->type(SS),mode(NM) ;
 DATA_MODE_TERMINATOR3 : SLASH ASTERISK {dlmVals.contains("/*") && getCharPositionInLine() == 2}? ->mode(DEFAULT_MODE) ;
-DATA_MODE_TERMINATORX : ANYCHAR ANYCHAR {dlmVals.contains(getText())}? {dlmVals = new java.util.ArrayList(defaultDlmVals);} ->mode(DEFAULT_MODE) ;
+DATA_MODE_TERMINATORX : ANYCHAR ANYCHAR {dlmVals.contains(getText())}? {dlmVals = new java.util.ArrayList();} ->mode(DEFAULT_MODE) ;
 DD_ASTERISK_DATA : ([ \n\r] | ANYCHAR)+? ;
 
 mode CNTL_MODE ;
