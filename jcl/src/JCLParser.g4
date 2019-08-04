@@ -265,9 +265,10 @@ DCB parameter...
 ddParmDCB : DCB EQUAL (
     ddParmDCB_Parameter | 
     (LPAREN 
-        ddParmDCB_Parameter 
-            ((COMMA ddParmDCB_Parameter) |
-            (inlineComment SS ddParmDCB_Parameter))*
+        ddParmDCB_Parameter (
+            (COMMA SS? ddParmDCB_Parameter) |
+            (inlineComment SS ddParmDCB_Parameter)
+          )*
     RPAREN) |
     REFERBACK |
     DATASET_NAME
@@ -354,7 +355,7 @@ ddParmPATHOPTS : PATHOPTS EQUAL (ALPHA+ |
         ((COMMA ALPHA+) | 
         (inlineComment SS ALPHA+))*
     RPAREN)) ;
-ddParmPCI : PCI EQUAL LPAREN? (ALPHA | SYMBOLIC) (COMMA (ALPHA | SYMBOLIC))? RPAREN? ;
+ddParmPCI : PCI EQUAL LPAREN? (PCI_VALUE | SYMBOLIC) (COMMA (PCI_VALUE | SYMBOLIC))? RPAREN? ;
 ddParmPROTECT : PROTECT EQUAL (YES | Y) ;
 ddParmPRTSP : PRTSP EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmRECFM : RECFM EQUAL (RECFM_VALUE | SYMBOLIC) ;
