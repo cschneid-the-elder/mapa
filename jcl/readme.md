@@ -4,4 +4,4 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (12-Jun-2019) a work in progress.
+Currently (04-Aug-2019) a work in progress.

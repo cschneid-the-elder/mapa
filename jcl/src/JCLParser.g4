@@ -179,7 +179,7 @@ execParmTVSMSG : TVSMSG EQUAL (COMMIT | BACKOUT | ALL | SYMBOLIC+) ;
 
 execParmTVSAMCOM : TVSAMCOM EQUAL LPAREN (NUM_LIT | SYMBOLIC+) COMMA (NUM_LIT | SYMBOLIC+) RPAREN ;
 
-referback : ASTERISK DOT NAME (DOT NAME)? (DOT NAME)? ;
+//referback : ASTERISK DOT NAME (DOT NAME)? (DOT NAME)? ;
 
 //ddStatement : SS ddName DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
 ddStatement : SS ddName DD ddParameter? (
@@ -206,7 +206,7 @@ ddStatementConcatenation : SS DD ddParameter? (
 
 ddStatementAmalgamation : ddStatement ddStatementConcatenation* ;
 
-ddName : NAME_FIELD (DOT NAME_FIELD)? ;
+ddName : (NAME | NAME_FIELD) (DOT (NAME | NAME_FIELD))? ;
 ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter;
 
 ddParmACCODE : ACCODE EQUAL (ACCODE_VALUE | QUOTED_STRING_FRAGMENT | SYMBOLIC);
@@ -234,7 +234,7 @@ ddParmBURST : BURST EQUAL (yesOrNo | SYMBOLIC) ;
 ddParmCCSID : CCSID EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmCHARS : CHARS EQUAL LPAREN? (CHARS_FONT | SYMBOLIC) (COMMA (CHARS_FONT | SYMBOLIC))* RPAREN? ;
 ddParmCHKPT : CHKPT EQUAL EOV ;
-ddParmCNTL : CNTL EQUAL referback ;
+ddParmCNTL : CNTL EQUAL ddParmReferback ;
 ddParmCOPIES : COPIES EQUAL ((NUM_LIT | SYMBOLIC) | 
                    (LPAREN (NUM_LIT | SYMBOLIC) 
                        (COMMA LPAREN (NUM_LIT | SYMBOLIC) (COMMA (NUM_LIT | SYMBOLIC))* RPAREN)? 
@@ -269,12 +269,10 @@ ddParmDCB : DCB EQUAL (
             (COMMA SS? ddParmDCB_Parameter) |
             (inlineComment SS ddParmDCB_Parameter)
           )*
-    RPAREN) |
-    REFERBACK |
-    DATASET_NAME
+    RPAREN) 
   ) ;
 
-ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH ;
+ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | DATASET_NAME | ddParmReferback ;
 
 
 ddParmDEN : DEN EQUAL (NUM_LIT | SYMBOLIC) ;
@@ -288,7 +286,7 @@ ddParmDISP_ABNORMAL_TERM : CATLG | DELETE | KEEP | PASS | UNCATLG | SYMBOLIC ;
 ddParmDLM : DLM (DLM_VAL | QUOTED_DLM_VAL) ;
 ddParmDSID : DSID EQUAL (DSID_VAL | (LPAREN DSID_VAL COMMA V RPAREN)) ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL QUOTED_STRING_FRAGMENT ;
-ddParmDSNAME : (DSNAME | DSN) EQUAL (NAME | DATASET_NAME | REFERBACK | QUOTED_STRING_FRAGMENT) ;
+ddParmDSNAME : (DSNAME | DSN) EQUAL (NAME | DATASET_NAME | ddParmReferback | QUOTED_STRING_FRAGMENT) ;
 ddParmDSNTYPE : DSNTYPE EQUAL DSNTYPE_VAL ;
 ddParmDSORG : DSORG EQUAL (NAME | SYMBOLIC) ;
 ddParmDUMMY : DUMMY ;

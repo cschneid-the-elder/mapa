@@ -292,12 +292,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecParmTVSAMCOM(JCLParser.ExecParmTVSAMCOMContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#referback}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitReferback(JCLParser.ReferbackContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
