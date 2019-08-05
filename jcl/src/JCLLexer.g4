@@ -922,7 +922,7 @@ DATA_PARM_MODE_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE) ;
 DATA_PARM_MODE_BUFNO : BUFNO_DFLT ->type(BUFNO) ;
 DATA_PARM_MODE_DCB : DCB_DFLT ->type(DCB) ;
 DATA_PARM_MODE_DIAGNS : DIAGNS_DFLT ->type(DIAGNS) ;
-DATA_PARM_MODE_DLM : DLM_DFLT EQUAL_DFLT ->type(DLM),mode(DLM_MODE) ;
+DATA_PARM_MODE_DLM : DLM_DFLT ->type(DLM),mode(DLM_MODE) ;
 DATA_PARM_MODE_DSID : DSID_DFLT ->type(DSID) ;
 DATA_PARM_MODE_LIKE : LIKE_DFLT ->type(LIKE) ;
 DATA_PARM_MODE_LRECL : LRECL_DFLT ->type(LRECL),mode(DATA_PARM_LRECL_MODE) ;
@@ -954,10 +954,10 @@ DATA_PARM_LRECL_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DATA_PARM_MODE) ;
  
 mode DLM_MODE ;
 
-//DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
+DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
 DLM_WS : [ ]+ ->channel(HIDDEN) ;
 SQUOTE_DLM : '\'' ->channel(HIDDEN),mode(DLM_QS);
-DLM_VAL : (SIMPLE_STRING | QUOTED_DLM_VAL) {dlmVals = new java.util.ArrayList(); dlmVals.add(getText());} ->mode(DATA_PARM_MODE) ;
+DLM_VAL : SIMPLE_STRING {dlmVals = new java.util.ArrayList(); dlmVals.add(getText());} ->mode(DATA_PARM_MODE) ;
 
 mode DLM_QS ;
 
