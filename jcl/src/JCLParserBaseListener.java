@@ -1023,6 +1023,18 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDdParmDEN(JCLParser.DdParmDENContext ctx) { }
 	/**
 	 * {@inheritDoc}

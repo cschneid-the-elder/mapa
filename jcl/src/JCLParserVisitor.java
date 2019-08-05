@@ -514,6 +514,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmDCB_Parameter(JCLParser.DdParmDCB_ParameterContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmDDNAME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmDDNAME(JCLParser.DdParmDDNAMEContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmDEN}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
