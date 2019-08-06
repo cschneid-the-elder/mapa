@@ -202,7 +202,7 @@ DPAGELBL : D P A G E L B L ;
 DQUOTE : '"' ;
 DSENQSHR_DFLT : D S E N Q S H R ->type(DSENQSHR) ;
 DSID_DFLT : D S I D ->type(DSID),mode(DSID_MODE) ;
-DSKEYLBL_DFLT : D S K E Y L B L ->type(DSKEYLBL) ;
+DSKEYLBL_DFLT : D S K E Y L B L ->type(DSKEYLBL),mode(DSKEYLBL_MODE) ;
 DSN_DFLT : D S N ->type(DSN),mode(DSN_MODE);
 DSNAME_DFLT : D S N A M E ->type(DSNAME),mode(DSN_MODE) ;
 DSORG_DFLT : D S O R G ->type(DSORG) ;
@@ -453,7 +453,7 @@ SO : S O ;
 SPACE_DFLT : S P A C E ->type(SPACE) ;
 SPIN_DFLT : S P I N ->type(SPIN) ;
 SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-SQUOTE2 : SQUOTE SQUOTE ;
+fragment SQUOTE2 : SQUOTE SQUOTE ;
 STACK_DFLT : S T A C K ->type(STACK) ;
 STARTBY : S T A R T B Y ;
 STD : S T D ;
@@ -813,7 +813,7 @@ DD_DEST : DEST_DFLT ->type(DEST),mode(DEST_MODE) ;
 DD_DISP : DISP_DFLT ->type(DISP),mode(DEFAULT_MODE) ;
 DD_DLM : DLM_DFLT ->type(DLM),mode(DEFAULT_MODE) ;
 DD_DSID : DSID_DFLT ->type(DSID),mode(DSID_MODE) ;
-DD_DSKEYLBL : DSKEYLBL_DFLT ->type(DSKEYLBL),mode(DEFAULT_MODE) ;
+DD_DSKEYLBL : DSKEYLBL_DFLT ->type(DSKEYLBL),mode(DSKEYLBL_MODE) ;
 DD_DSN : DSN_DFLT ->type(DSN),mode(DSN_MODE) ;
 DD_DSNAME : DSNAME_DFLT ->type(DSNAME),mode(DSN_MODE) ;
 DD_DSNTYPE : DSNTYPE_DFLT ->type(DSNTYPE),mode(DEFAULT_MODE) ;
@@ -1006,7 +1006,7 @@ NEWLINE_QS : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
 QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+ ;
 
 mode QS_SS ;
-
+//TODO handle //* comments here and in clones thereof
 SLASH_QS : '/' ;
 SS_QS : SLASH_QS SLASH_QS {getCharPositionInLine() == 2}? ->channel(HIDDEN) ;
 CONTINUATION_WS_QS_SS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),popMode ;
@@ -1730,4 +1730,13 @@ mode DSID_V_MODE ;
 DSID_VERIFIED : 'V' ;
 DSID_V_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 DSID_V_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+
+mode DSKEYLBL_MODE ;
+
+DSKEYLBL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+DSKEYLBL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+DSKEYLBL_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
+DSKEYLBL_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+DSKEYLBL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+DSKEYLBL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 
