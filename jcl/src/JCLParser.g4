@@ -340,11 +340,34 @@ ddParmKEYENCD1 : KEYENCD1 EQUAL (KEYENCD_VALUE | SYMBOLIC) ;
 ddParmKEYENCD2 : KEYENCD2 EQUAL (KEYENCD_VALUE | SYMBOLIC) ;
 ddParmKEYLEN : KEYLEN EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmKEYOFF : KEYOFF EQUAL (NUM_LIT | SYMBOLIC) ;
+ddParmLABEL : LABEL EQUAL (
+    LABEL_SEQUENCE |
+    ddParmRETPD |
+    ddParmEXPDT |
+    SYMBOLIC |
+    (LPAREN (LABEL_SEQUENCE | SYMBOLIC) RPAREN) |
+    (LPAREN ddParmRETPD RPAREN) |
+    (LPAREN ddParmEXPDT RPAREN) |
+    (LPAREN
+        (LABEL_SEQUENCE | SYMBOLIC)? 
+        COMMA? 
+        (LABEL_TYPE | SYMBOLIC)? 
+        COMMA? 
+        (LABEL_PASSWORD_PROTECT | SYMBOLIC)? 
+        COMMA? 
+        (LABEL_I_O | SYMBOLIC)?
+        COMMA?
+        (ddParmRETPD | ddParmEXPDT)?
+    RPAREN)
+  ) ;
+
+/*
 ddParmLABEL : LABEL EQUAL 
     (LPAREN? (NUM_LIT | ddParmRETPD | ddParmEXPDT) RPAREN?) | 
     (LPAREN 
         (NUM_LIT | SYMBOLIC)? (COMMA ALPHA+? (COMMA (PASSWORD | NOPWREAD)? (COMMA ddParmRETPD? (COMMA ddParmEXPDT)?)?)?)?
     RPAREN) ;
+*/
 /*
 It's not really a dataset name in the LGSTREAM parameter, but it
 does match the same pattern.
