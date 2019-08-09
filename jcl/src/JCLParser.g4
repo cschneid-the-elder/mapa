@@ -395,8 +395,8 @@ ddParmOUTLIM : OUTLIM EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmOUTPUT : OUTPUT EQUAL (ddParmReferback | 
     (LPAREN 
         ddParmReferback 
-            ((COMMA ddParmReferback) | 
-            (inlineComment SS ddParmReferback))* 
+            ((COMMA COMMENT_TEXT? ddParmReferback) | 
+            (inlineComment ddParmReferback))* 
     RPAREN)) ;
 ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT | UNQUOTED_STRING) ;
 ddParmPATHDISP : PATHDISP EQUAL (
