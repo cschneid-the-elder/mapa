@@ -266,7 +266,7 @@ ddParmDCB : DCB EQUAL (
     ddParmDCB_Parameter | 
     (LPAREN 
         ddParmDCB_Parameter (
-            (COMMA SS? ddParmDCB_Parameter) |
+            (COMMA COMMENT_TEXT? SS? ddParmDCB_Parameter) |
             (inlineComment SS ddParmDCB_Parameter)
           )*
     RPAREN) 

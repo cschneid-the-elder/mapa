@@ -822,8 +822,8 @@ DD_KEYENCD2 : KEYENCD2_DFLT ->type(KEYENCD2),mode(KEYENCD_MODE) ;
 DD_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),mode(DEFAULT_MODE) ;
 DD_KEYOFF : KEYOFF_DFLT ->type(KEYOFF),mode(DEFAULT_MODE) ;
 DD_LABEL : LABEL_DFLT ->type(LABEL),mode(LABEL_MODE) ;
-DD_LGSTREAM : LGSTREAM_DFLT ->type(LGSTREAM),mode(DEFAULT_MODE) ;
-DD_LIKE : LIKE_DFLT ->type(LIKE),mode(DEFAULT_MODE) ;
+DD_LGSTREAM : LGSTREAM_DFLT ->type(LGSTREAM),mode(DSN_MODE) ;
+DD_LIKE : LIKE_DFLT ->type(LIKE),mode(DSN_MODE) ;
 DD_LRECL : LRECL_DFLT ->type(LRECL),mode(LRECL_MODE) ;
 DD_MAXGENS : MAXGENS_DFLT ->type(MAXGENS),mode(DEFAULT_MODE) ;
 DD_MGMTCLAS : MGMTCLAS_DFLT ->type(MGMTCLAS),mode(DEFAULT_MODE) ;
@@ -1053,9 +1053,6 @@ XYZ(0)
 LIB.PROD(&PGM.#)
 MASTER.FILE.%%ODATE
 
-Single character dataset names are not allowed by this pattern. My
-justification is that I cannot imagine one being used in a real
-environment.
 
 */
 DSN_MODE_DATASET_NAME : (
@@ -1063,7 +1060,7 @@ DSN_MODE_DATASET_NAME : (
     (AMPERSAND AMPERSAND NAME) | 
     (
         (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | HYPHEN | '+' | '%' | LPAREN_DFLT | RPAREN_DFLT)+
+          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | HYPHEN | '+' | '%' | LPAREN_DFLT | RPAREN_DFLT)*
     )
   )
   ->mode(DEFAULT_MODE),type(DATASET_NAME) 
