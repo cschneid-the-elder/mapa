@@ -403,11 +403,17 @@ ddParmPATHDISP : PATHDISP EQUAL (
     (KEEP | DELETE | SYMBOLIC) | 
     (LPAREN (KEEP | DELETE | SYMBOLIC) (COMMA (KEEP | DELETE | SYMBOLIC))? RPAREN) | 
     (LPAREN COMMA (KEEP | DELETE | SYMBOLIC) RPAREN)) ;
-ddParmPATHMODE : PATHMODE EQUAL (ALPHA+ |
-    (LPAREN ALPHA+
-        ((COMMA ALPHA+) | 
-        (inlineComment SS ALPHA+))*
-    RPAREN)) ;
+ddParmPATHMODE : PATHMODE EQUAL (
+    PATHMODE_VALUE |
+    SYMBOLIC |
+    (LPAREN 
+        (PATHMODE_VALUE | SYMBOLIC)
+            (
+              (COMMA COMMENT_TEXT? (PATHMODE_VALUE | SYMBOLIC)) | 
+              (inlineComment SS (PATHMODE_VALUE | SYMBOLIC))
+            )*
+    RPAREN)
+  ) ;
 ddParmPATHOPTS : PATHOPTS EQUAL (ALPHA+ |
     (LPAREN ALPHA+
         ((COMMA ALPHA+) | 
