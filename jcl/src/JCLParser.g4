@@ -414,11 +414,17 @@ ddParmPATHMODE : PATHMODE EQUAL (
             )*
     RPAREN)
   ) ;
-ddParmPATHOPTS : PATHOPTS EQUAL (ALPHA+ |
-    (LPAREN ALPHA+
-        ((COMMA ALPHA+) | 
-        (inlineComment SS ALPHA+))*
-    RPAREN)) ;
+ddParmPATHOPTS : PATHOPTS EQUAL  (
+    PATHOPTS_VALUE |
+    SYMBOLIC |
+    (LPAREN 
+        (PATHOPTS_VALUE | SYMBOLIC)
+            (
+              (COMMA COMMENT_TEXT? (PATHOPTS_VALUE | SYMBOLIC)) | 
+              (inlineComment SS (PATHOPTS_VALUE | SYMBOLIC))
+            )*
+    RPAREN)
+  ) ;
 ddParmPCI : PCI EQUAL LPAREN? (PCI_VALUE | SYMBOLIC) (COMMA (PCI_VALUE | SYMBOLIC))? RPAREN? ;
 ddParmPROTECT : PROTECT EQUAL (YES | Y) ;
 ddParmPRTSP : PRTSP EQUAL (NUM_LIT | SYMBOLIC) ;
