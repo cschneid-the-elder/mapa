@@ -244,7 +244,7 @@ FSSDATA : F S S D A T A ;
 FUNC_DFLT : F U N C ->type(FUNC),mode(FUNC_MODE) ;
 GDGBIAS_DFLT : G D G B I A S ->mode(GDGBIAS_MODE),type(GDGBIAS) ;
 GDGORDER_DFLT : G D G O R D E R ->type(GDGORDER) ;
-GENERIC : G E N E R I C ;
+//GENERIC : G E N E R I C ;
 GNCP_DFLT : G N C P ->type(GNCP) ;
 GROUP_DFLT : G R O U P ->type(GROUP) ;
 GROUPID : G R O U P I D ;
