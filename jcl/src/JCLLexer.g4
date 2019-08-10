@@ -170,8 +170,8 @@ COPIES_DFLT : C O P I E S ->type(COPIES) ;
 COPY : C O P Y ;
 COPYCNT : C O P Y C N T ;
 CPRI_DFLT : C P R I ->type(CPRI) ;
-CR : C R ;
-CRE : C R E ;
+//CR : C R ;
+//CRE : C R E ;
 CROPS : C R O P S ;
 CYL : C Y L ;
 CYLOFL_DFLT : C Y L O F L ->type(CYLOFL) ;
@@ -333,7 +333,7 @@ NOTIFY_DFLT : N O T I F Y ->type(NOTIFY) ;
 NR : N R ;
 NRC : N R C ;
 NRE : N R E ;
-NRI : N R I ;
+//NRI : N R I ;
 NTM_DFLT : N T M ->type(NTM) ;
 NULLFILE : N U L L F I L E ;
 fragment NUM : [0-9] ;
@@ -402,7 +402,7 @@ RESTART_DFLT : R E S T A R T ->type(RESTART) ;
 RETAIN : R E T A I N ;
 RETPD_DFLT : R E T P D ->type(RETPD) ;
 RKP_DFLT : R K P ->type(RKP) ;
-RLS_DFLT : R L S ->type(RLS) ;
+RLS_DFLT : R L S ->type(RLS),mode(RLS_MODE) ;
 RLSE : R L S E ;
 RLSTMOUT : R L S T M O U T ;
 RMODE31 : R M O D E '3' '1' ;
@@ -839,7 +839,7 @@ DD_RECFM : RECFM_DFLT ->type(RECFM),mode(RECFM_MODE) ;
 DD_RECORG : RECORG_DFLT ->type(RECORG),mode(RECORG_MODE) ;
 DD_REFDD : REFDD_DFLT ->type(REFDD),mode(DSN_MODE) ;
 DD_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
-DD_RLS : RLS_DFLT ->type(RLS),mode(DEFAULT_MODE) ;
+DD_RLS : RLS_DFLT ->type(RLS),mode(RLS_MODE) ;
 DD_ROACCESS : ROACCESS_DFLT ->type(ROACCESS),mode(DEFAULT_MODE) ;
 DD_SECMODEL : SECMODEL_DFLT ->type(SECMODEL),mode(SECMODEL_MODE) ;
 DD_SEGMENT : SEGMENT_DFLT ->type(SEGMENT),mode(DEFAULT_MODE) ;
@@ -2178,4 +2178,19 @@ fragment RECORG_KS : K S ;
 fragment RECORG_ES : E S ;
 fragment RECORG_RR : R R ;
 fragment RECORG_LS : L S ;
+
+mode RLS_MODE ;
+
+RLS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+RLS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
+RLS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+RLS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+RLS_VALUE : RLS_NRI | RLS_CR | RLS_CRE ;
+RLS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+
+fragment RLS_NRI : N R I ;
+fragment RLS_CR : C R ;
+fragment RLS_CRE : C R E ;
+
+
 
