@@ -1527,6 +1527,56 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmSPACE(JCLParser.DdParmSPACEContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmSPACE_unit}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmSPACE_unit(JCLParser.DdParmSPACE_unitContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmSPACE_unit}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmSPACE_unit(JCLParser.DdParmSPACE_unitContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmSPACE_primary}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmSPACE_primary(JCLParser.DdParmSPACE_primaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmSPACE_primary}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmSPACE_primary(JCLParser.DdParmSPACE_primaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmSPACE_secondary}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmSPACE_secondary(JCLParser.DdParmSPACE_secondaryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmSPACE_secondary}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmSPACE_secondary(JCLParser.DdParmSPACE_secondaryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmSPACE_directory}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmSPACE_directory(JCLParser.DdParmSPACE_directoryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmSPACE_directory}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmSPACE_directory(JCLParser.DdParmSPACE_directoryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmSPACE_track_address}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmSPACE_track_address(JCLParser.DdParmSPACE_track_addressContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmSPACE_track_address}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmSPACE_track_address(JCLParser.DdParmSPACE_track_addressContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmSPIN}.
 	 * @param ctx the parse tree
 	 */

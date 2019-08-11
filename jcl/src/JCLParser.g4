@@ -449,13 +449,30 @@ ddParmSECMODEL : SECMODEL EQUAL (
 ddParmSEGMENT : SEGMENT EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmSPACE : SPACE EQUAL (
     (LPAREN
-        (CYL | TRK | NUM_LIT | SYMBOLIC) COMMA 
-            ((NUM_LIT | SYMBOLIC) |
-            (LPAREN (NUM_LIT | SYMBOLIC) COMMA? (NUM_LIT | SYMBOLIC)? COMMA? (NUM_LIT | SYMBOLIC)? COMMA? (NUM_LIT | SYMBOLIC) RPAREN))
-        COMMA? RLSE? COMMA? (CONTIG | MXIG | ALX | SYMBOLIC)? COMMA? ROUND?
+        ddParmSPACE_unit? COMMA (
+            ddParmSPACE_primary |
+            (LPAREN ddParmSPACE_primary?
+              COMMA? ddParmSPACE_secondary? 
+                COMMA? ddParmSPACE_directory? 
+             RPAREN)
+            )
+        COMMA? (RLSE | SYMBOLIC)? COMMA? (CONTIG | MXIG | ALX | SYMBOLIC)? COMMA? (ROUND | SYMBOLIC)?
     RPAREN) |
-    (LPAREN ABSTR COMMA (NUM_LIT | SYMBOLIC) (COMMA (NUM_LIT | SYMBOLIC))?)
+    (LPAREN ABSTR COMMA 
+      LPAREN ddParmSPACE_primary 
+        (COMMA ddParmSPACE_track_address)?
+          (COMMA ddParmSPACE_directory)?
+      RPAREN
+    RPAREN) |
+    SYMBOLIC
   ) ;
+ddParmSPACE_unit : (CYL | TRK | NUM_LIT | SYMBOLIC) ;
+ddParmSPACE_primary : (NUM_LIT | SYMBOLIC) ;
+ddParmSPACE_secondary : (NUM_LIT | SYMBOLIC) ;
+ddParmSPACE_directory : (NUM_LIT | SYMBOLIC) ;
+ddParmSPACE_track_address : (NUM_LIT | SYMBOLIC) ;
+
+
 ddParmSPIN : SPIN EQUAL (
     NO | 
     UNALLOC |

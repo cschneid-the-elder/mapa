@@ -922,6 +922,36 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmSPACE(JCLParser.DdParmSPACEContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmSPACE_unit}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmSPACE_unit(JCLParser.DdParmSPACE_unitContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmSPACE_primary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmSPACE_primary(JCLParser.DdParmSPACE_primaryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmSPACE_secondary}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmSPACE_secondary(JCLParser.DdParmSPACE_secondaryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmSPACE_directory}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmSPACE_directory(JCLParser.DdParmSPACE_directoryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmSPACE_track_address}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmSPACE_track_address(JCLParser.DdParmSPACE_track_addressContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmSPIN}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
