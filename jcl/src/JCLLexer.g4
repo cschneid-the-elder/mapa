@@ -295,7 +295,7 @@ LINES_DFLT : L I N E S ->type(LINES) ;
 LOCAL : L O C A L ;
 LOG : L O G ;
 LPAREN_DFLT : '(' ->type(LPAREN) ;
-LRECL_DFLT : L R E C L ->type(LRECL),mode(LRECL_MODE) ;
+LRECL_DFLT : L R E C L {cameFromDataMode = false;} ->type(LRECL),mode(LRECL_MODE) ;
 MAILBCC : M A I L B C C ;
 MAILCC : M A I L C C ;
 MAILFILE : M A I L F I L E ;
@@ -825,7 +825,7 @@ DD_KEYOFF : KEYOFF_DFLT ->type(KEYOFF),mode(DEFAULT_MODE) ;
 DD_LABEL : LABEL_DFLT ->type(LABEL),mode(LABEL_MODE) ;
 DD_LGSTREAM : LGSTREAM_DFLT ->type(LGSTREAM),mode(DSN_MODE) ;
 DD_LIKE : LIKE_DFLT ->type(LIKE),mode(DSN_MODE) ;
-DD_LRECL : LRECL_DFLT ->type(LRECL),mode(LRECL_MODE) ;
+DD_LRECL : LRECL_DFLT {cameFromDataMode = false;} ->type(LRECL),mode(LRECL_MODE) ;
 DD_MAXGENS : MAXGENS_DFLT ->type(MAXGENS),mode(DEFAULT_MODE) ;
 DD_MGMTCLAS : MGMTCLAS_DFLT ->type(MGMTCLAS),mode(MGMTCLAS_MODE) ;
 DD_MODIFY : MODIFY_DFLT ->type(MODIFY),mode(MODIFY_MODE) ;
@@ -848,7 +848,7 @@ DD_SPACE : SPACE_DFLT ->type(SPACE),mode(DEFAULT_MODE) ;
 DD_SPIN : SPIN_DFLT ->type(SPIN),mode(DEFAULT_MODE) ;
 DD_STORCLAS : STORCLAS_DFLT ->type(STORCLAS),mode(STORCLAS_MODE) ;
 DD_SUBSYS : SUBSYS_DFLT ->type(SUBSYS),mode(SUBSYS_MODE) ;
-DD_SYMBOLS : SYMBOLS_DFLT ->type(SYMBOLS),mode(SYMBOLS_MODE) ;
+DD_SYMBOLS : SYMBOLS_DFLT {cameFromDataMode = false;} ->type(SYMBOLS),mode(SYMBOLS_MODE) ;
 DD_SYMLIST : SYMLIST_DFLT ->type(SYMLIST),mode(DEFAULT_MODE) ;
 DD_SYSOUT : SYSOUT_DFLT ->type(SYSOUT),mode(DEFAULT_MODE) ;
 DD_TERM : TERM_DFLT ->type(TERM),mode(DEFAULT_MODE) ;
@@ -913,14 +913,14 @@ DATA_PARM_MODE_DLM : DLM_DFLT ->type(DLM),mode(DLM_MODE) ;
 //TODO need a copy of DSID_MODE that returns here and not DEFAULT_MODE
 DATA_PARM_MODE_DSID : DSID_DFLT ->type(DSID),mode(DSID_MODE) ;
 DATA_PARM_MODE_LIKE : LIKE_DFLT ->type(LIKE) ;
-DATA_PARM_MODE_LRECL : LRECL_DFLT ->type(LRECL),mode(DATA_PARM_LRECL_MODE) ;
+DATA_PARM_MODE_LRECL : LRECL_DFLT {cameFromDataMode = true;} ->type(LRECL),mode(LRECL_MODE) ;
 DATA_PARM_MODE_REFDD : REFDD_DFLT ->type(REFDD),mode(DATA_PARM_REFDD_MODE) ;
 DATA_PARM_MODE_MODE : MODE_DFLT ->type(MODE) ;
 DATA_PARM_MODE_DSNAME : DSNAME_DFLT ->type(DSNAME) ;
 DATA_PARM_MODE_VOLUME : VOLUME_DFLT ->type(VOLUME) ;
 DATA_PARM_MODE_SER : SER_DFLT ->type(SER) ;
 DATA_PARM_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DATA_PARM_MODE_SYMBOLS : SYMBOLS_DFLT {cameFromDataMode = true;} ->type(SYMBOLS),mode(DATA_PARM_SYMBOLS_MODE) ; 
+DATA_PARM_MODE_SYMBOLS : SYMBOLS_DFLT {cameFromDataMode = true;} ->type(SYMBOLS),mode(SYMBOLS_MODE) ; 
 //DATA_PARM_MODE_CNVTSYS : CNVTSYS_DFLT ->type(CNVTSYS) ;
 //DATA_PARM_MODE_EXECSYS : EXECSYS_DFLT ->type(EXECSYS) ;
 //DATA_PARM_MODE_JCLONLY : JCLONLY_DFLT ->type(JCLONLY) ;
@@ -929,6 +929,7 @@ DATA_PARM_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
 DATA_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
 DATA_PARM_RPAREN : RPAREN_DFLT ->type(RPAREN) ;
 
+/*
 mode DATA_PARM_SYMBOLS_MODE ;
 
 DATA_PARM_SYMBOLS_EQUAL : EQUAL_DFLT ->type(EQUAL),mode(SYMBOLS_MODE) ;
@@ -942,10 +943,8 @@ DATA_PARM_LRECL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 DATA_PARM_LRECL_COMMA : COMMA_DFLT ->type(COMMA),mode(DATA_PARM_MODE) ;
 DATA_PARM_LRECL_WS : [ ]+ ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
 DATA_PARM_LRECL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DATA_MODE) ;
-DATA_PARM_LRECL_VALUE : (ALPHA | NUM_LIT_DFLT | NUM_MEM_VAL) ->type(LRECL_VALUE) ;
-DATA_PARM_LRECL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 DATA_PARM_LRECL_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DATA_PARM_MODE) ;
-
+*/
  
 mode DLM_MODE ;
 
@@ -1616,12 +1615,44 @@ FUNC_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
 mode LRECL_MODE ;
 
 LRECL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-LRECL_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-LRECL_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-LRECL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+LRECL_COMMA : COMMA_DFLT 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->type(COMMA) ;
+LRECL_WS : [ ]+ 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_CM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->channel(HIDDEN) ;
+LRECL_NEWLINE : NEWLINE 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->channel(HIDDEN) ;
 LRECL_VALUE : (ALPHA | NUM_LIT_DFLT | NUM_MEM_VAL) ;
 LRECL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LRECL_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+LRECL_RPAREN : RPAREN_DFLT 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->type(RPAREN) ;
 
 mode MODE_MODE ;
 
@@ -2251,7 +2282,7 @@ SYMBOLS_RPAREN : RPAREN_DFLT
     {
       if (cameFromDataMode) {
         cameFromDataMode = false;
-        mode(DATA_PARM_SYMBOLS_MODE);
+        mode(DATA_PARM_MODE);
       } else {
         mode(DEFAULT_MODE);
       }
@@ -2265,7 +2296,7 @@ SYMBOLS_COMMA_RPAREN : RPAREN_DFLT
     {
       if (cameFromDataMode) {
         cameFromDataMode = false;
-        mode(DATA_PARM_SYMBOLS_MODE);
+        mode(DATA_PARM_MODE);
       } else {
         mode(DEFAULT_MODE);
       }
