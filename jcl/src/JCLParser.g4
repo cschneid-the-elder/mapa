@@ -517,10 +517,10 @@ ddParmSYMBOLS : SYMBOLS EQUAL (
     RPAREN)
   ) ;
 ddParmSYMLIST : SYMLIST EQUAL (
-    ALNUMNAT |
-    (LPAREN ALNUMNAT (
-        (COMMA ALNUMNAT) |
-        (inlineComment SS ALNUMNAT)
+    SYMLIST_VALUE |
+    (LPAREN SYMLIST_VALUE (
+        (COMMA COMMENT_TEXT? SYMLIST_VALUE) |
+        (inlineComment SS SYMLIST_VALUE)
       )*
     RPAREN)
   ) ;
