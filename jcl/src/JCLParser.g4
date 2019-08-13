@@ -753,10 +753,13 @@ endcntlStatement : SS NAME_FIELD ENDCNTL inlineComment* ;
 
 cntlStatementAmalgamation : cntlStatement CNTL_DATA* endcntlStatement ;
 
+exportStatement : SS NAME_FIELD? EXPORT ddParmSYMLIST ;
+/*
 exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL (
     ASTERISK |
     (LPAREN NAME (COMMA | (inlineComment SS) NAME)* RPAREN)
   ) ;
+*/
 
 ifStatement : SS NAME_FIELD? IF LPAREN* IF_CHECK ((SS CONTINUATION_WS)? LPAREN* IF_CHECK RPAREN*)* RPAREN* THEN inlineComment? ;
 
