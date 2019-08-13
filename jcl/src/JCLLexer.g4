@@ -199,7 +199,7 @@ DOUBLE : D O U B L E ;
 DPAGELBL : D P A G E L B L ;
 DQUOTE : '"' ;
 DSENQSHR_DFLT : D S E N Q S H R ->type(DSENQSHR) ;
-DSID_DFLT : D S I D ->type(DSID),mode(DSID_MODE) ;
+DSID_DFLT : D S I D {cameFromDataMode = false;} ->type(DSID),mode(DSID_MODE) ;
 DSKEYLBL_DFLT : D S K E Y L B L ->type(DSKEYLBL),mode(DSKEYLBL_MODE) ;
 DSN_DFLT : D S N ->type(DSN),mode(DSN_MODE);
 DSNAME_DFLT : D S N A M E ->type(DSNAME),mode(DSN_MODE) ;
@@ -800,7 +800,7 @@ DD_DDNAME : DDNAME_DFLT ->type(DDNAME),mode(DEFAULT_MODE) ;
 DD_DEST : DEST_DFLT ->type(DEST),mode(DEST_MODE) ;
 DD_DISP : DISP_DFLT ->type(DISP),mode(DEFAULT_MODE) ;
 DD_DLM : DLM_DFLT ->type(DLM),mode(DEFAULT_MODE) ;
-DD_DSID : DSID_DFLT ->type(DSID),mode(DSID_MODE) ;
+DD_DSID : DSID_DFLT {cameFromDataMode = false;} ->type(DSID),mode(DSID_MODE) ;
 DD_DSKEYLBL : DSKEYLBL_DFLT ->type(DSKEYLBL),mode(DSKEYLBL_MODE) ;
 DD_DSN : DSN_DFLT ->type(DSN),mode(DSN_MODE) ;
 DD_DSNAME : DSNAME_DFLT ->type(DSNAME),mode(DSN_MODE) ;
@@ -911,7 +911,7 @@ DATA_PARM_MODE_DCB : DCB_DFLT ->type(DCB) ;
 DATA_PARM_MODE_DIAGNS : DIAGNS_DFLT ->type(DIAGNS) ;
 DATA_PARM_MODE_DLM : DLM_DFLT ->type(DLM),mode(DLM_MODE) ;
 //TODO need a copy of DSID_MODE that returns here and not DEFAULT_MODE
-DATA_PARM_MODE_DSID : DSID_DFLT ->type(DSID),mode(DSID_MODE) ;
+DATA_PARM_MODE_DSID : DSID_DFLT {cameFromDataMode = true;} ->type(DSID),mode(DSID_MODE) ;
 DATA_PARM_MODE_LIKE : LIKE_DFLT ->type(LIKE) ;
 DATA_PARM_MODE_LRECL : LRECL_DFLT {cameFromDataMode = true;} ->type(LRECL),mode(LRECL_MODE) ;
 DATA_PARM_MODE_REFDD : REFDD_DFLT ->type(REFDD),mode(DATA_PARM_REFDD_MODE) ;
@@ -1730,26 +1730,74 @@ TRTCH_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
 mode DSID_MODE ;
 
 DSID_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSID_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DSID_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DSID_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+DSID_COMMA : COMMA_DFLT 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->type(COMMA) ; //,mode(DEFAULT_MODE) ;
+DSID_WS : [ ]+ 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_CM_MODE);
+      } else {
+        mode(CM);
+      }
+    } ->channel(HIDDEN) ; //,mode(CM) ;
+DSID_NEWLINE : NEWLINE 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->channel(HIDDEN) ; //,mode(DEFAULT_MODE) ;
 DSID_VALUE : (ALPHA | NATL | NUM | HYPHEN | '[')+ ;
 DSID_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 DSID_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(DSID_PAREN_MODE) ;
-DSID_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+DSID_RPAREN : RPAREN_DFLT 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ;
 
 mode DSID_PAREN_MODE ;
 
 DSID_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(DSID_V_MODE) ;
 DSID_PAREN_VALUE : DSID_VALUE ->type(DSID_VALUE) ;
 DSID_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSID_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+DSID_PAREN_RPAREN : RPAREN_DFLT 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ;
 
 mode DSID_V_MODE ;
 
 DSID_VERIFIED : 'V' ;
 DSID_V_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSID_V_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+DSID_V_RPAREN : RPAREN_DFLT 
+    {
+      if (cameFromDataMode) {
+        cameFromDataMode = false;
+        mode(DATA_PARM_MODE);
+      } else {
+        mode(DEFAULT_MODE);
+      }
+    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ;
 
 mode DSKEYLBL_MODE ;
 
