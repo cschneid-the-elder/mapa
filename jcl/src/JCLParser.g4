@@ -549,18 +549,26 @@ ddParmUCS : UCS EQUAL (
   ) ;
 
 /*
-ddParmUNIT : UNIT EQUAL (
-    ddParmUNIT_UNIT |
-    (UNIT_AFF EQUAL NAME) |
-    (LPAREN 
-        ddParmUNIT_UNIT? 
-            (COMMA (UNIT_COUNT | UNIT_ALLOC)? 
-                (COMMA UNIT_DEFER? 
-                    (COMMA UNIT_SMSHONOR)?
-                )?
-            )?
-    RPAREN)
-  ) ;
+Here's the thing with symbolic parameters: they can be abused because
+their values are substituted early in the interpretation process.
+
+Thus...
+
+UNIT=(&UNIT&COUNT&DEFER)
+
+...where, earlier in the job...
+
+SET UNIT=CART
+SET COUNT=
+SET DEFER=',3,DEFER'
+
+...resulting in, after conversion...
+
+UNIT=(CART,3,DEFER)
+
+...which is syntactically correct.  And so this sort of behavior
+must be allowed for herein, however much we may wish otherwise.
+
 */
 
 ddParmUNIT : UNIT EQUAL (
