@@ -526,11 +526,14 @@ ddParmSYMLIST : SYMLIST EQUAL (
   ) ;
 
 ddParmSYSOUT : SYSOUT EQUAL (
-    ASTERISK |
-    (ALPHA | NUM_LIT) |
+    sysoutClass |
     (LPAREN COMMA RPAREN ) |
-    (LPAREN (ALPHA | NUM_LIT) COMMA? ALNUMNAT? COMMA? ALNUMNAT? RPAREN)
+    (LPAREN sysoutClass COMMA? sysoutWriter? COMMA? sysoutFormOrCase? RPAREN)
   ) ;
+
+sysoutClass : (SYSOUT_CLASS | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
+sysoutWriter : (SYSOUT_WRITER | SYSOUT_INTRDR | SYMBOLIC) ;
+sysoutFormOrCase : (SYSOUT_FORM | SYMBOLIC) ;
 
 ddParmTERM : TERM EQUAL T S ;
 ddParmTHRESH : THRESH EQUAL (NUM_LIT | SYMBOLIC) ;

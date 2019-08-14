@@ -994,6 +994,24 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmSYSOUT(JCLParser.DdParmSYSOUTContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#sysoutClass}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSysoutClass(JCLParser.SysoutClassContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#sysoutWriter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSysoutWriter(JCLParser.SysoutWriterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#sysoutFormOrCase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSysoutFormOrCase(JCLParser.SysoutFormOrCaseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmTERM}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

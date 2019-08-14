@@ -1647,6 +1647,36 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmSYSOUT(JCLParser.DdParmSYSOUTContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#sysoutClass}.
+	 * @param ctx the parse tree
+	 */
+	void enterSysoutClass(JCLParser.SysoutClassContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#sysoutClass}.
+	 * @param ctx the parse tree
+	 */
+	void exitSysoutClass(JCLParser.SysoutClassContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#sysoutWriter}.
+	 * @param ctx the parse tree
+	 */
+	void enterSysoutWriter(JCLParser.SysoutWriterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#sysoutWriter}.
+	 * @param ctx the parse tree
+	 */
+	void exitSysoutWriter(JCLParser.SysoutWriterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#sysoutFormOrCase}.
+	 * @param ctx the parse tree
+	 */
+	void enterSysoutFormOrCase(JCLParser.SysoutFormOrCaseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#sysoutFormOrCase}.
+	 * @param ctx the parse tree
+	 */
+	void exitSysoutFormOrCase(JCLParser.SysoutFormOrCaseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmTERM}.
 	 * @param ctx the parse tree
 	 */
