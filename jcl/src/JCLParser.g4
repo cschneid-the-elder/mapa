@@ -191,7 +191,7 @@ ddStatement : SS ddName DD ddParameter? (
       ddParmASTERISK_DATA* ;
 
 ddStatementClosure1 : COMMA commentStatement* ddParameter inlineComment? ;
-ddStatementClosure2 : COMMA SS ddParameter inlineComment? ;
+ddStatementClosure2 : COMMA COMMENT_TEXT? SS ddParameter inlineComment? ;
 ddStatementClosure3 : COMMA ddParameter inlineComment? ;
 ddStatementClosure4 : inlineComment commentStatement* SS ddParameter inlineComment? ;
 
@@ -539,8 +539,13 @@ ddParmTERM : TERM EQUAL (TERM_VALUE | SYMBOLIC) ;
 ddParmTHRESH : THRESH EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmTRTCH : TRTCH EQUAL (TRTCH_VALUE | SYMBOLIC) ;
 ddParmUCS : UCS EQUAL (
-    ALNUMNAT |
-    (LPAREN ALNUMNAT COMMA? FOLD? COMMA? VERIFY? RPAREN)
+    UCS_CODE |
+    SYMBOLIC |
+    (LPAREN 
+        (UCS_CODE | SYMBOLIC) 
+          COMMA? (UCS_FOLD | SYMBOLIC)? 
+            COMMA? (UCS_VERIFY | SYMBOLIC)?
+    RPAREN)
   ) ;
 
 ddParmUNIT : UNIT EQUAL (
