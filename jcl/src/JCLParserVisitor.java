@@ -1042,6 +1042,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmUNIT(JCLParser.DdParmUNITContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmUNIT_UNIT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmUNIT_UNIT(JCLParser.DdParmUNIT_UNITContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmVOLUME}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

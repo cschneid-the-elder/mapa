@@ -548,19 +548,33 @@ ddParmUCS : UCS EQUAL (
     RPAREN)
   ) ;
 
+/*
 ddParmUNIT : UNIT EQUAL (
-    NUM_LIT |
-    (SLASH? SIMPLE_STRING) |
-    (AFF EQUAL ddName) |
+    ddParmUNIT_UNIT |
+    (UNIT_AFF EQUAL NAME) |
     (LPAREN 
-        (SLASH? (SIMPLE_STRING | NUM_LIT))? 
-            (COMMA (NUM_LIT | P)? 
-                (COMMA DEFER? 
-                    (COMMA SMSHONOR)?
+        ddParmUNIT_UNIT? 
+            (COMMA (UNIT_COUNT | UNIT_ALLOC)? 
+                (COMMA UNIT_DEFER? 
+                    (COMMA UNIT_SMSHONOR)?
                 )?
             )?
     RPAREN)
   ) ;
+*/
+
+ddParmUNIT : UNIT EQUAL (
+    ddParmUNIT_UNIT |
+    (UNIT_AFF EQUAL UNIT_DDNAME) |
+    (LPAREN 
+        ddParmUNIT_UNIT? 
+            COMMA? (UNIT_COUNT | UNIT_ALLOC | SYMBOLIC+)? 
+                COMMA? (UNIT_DEFER | SYMBOLIC+)? 
+                    COMMA? (UNIT_SMSHONOR | SYMBOLIC+)?
+    RPAREN)
+  ) ;
+
+ddParmUNIT_UNIT : (UNIT_NUMBER | UNIT_DEVICE_TYPE | UNIT_GROUP_NAME | SYMBOLIC+) ;
 
 ddParmVOLUME : VOLUME EQUAL (
     PRIVATE |
