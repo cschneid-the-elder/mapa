@@ -584,30 +584,31 @@ ddParmUNIT : UNIT EQUAL (
 
 ddParmUNIT_UNIT : (UNIT_NUMBER | UNIT_DEVICE_TYPE | UNIT_GROUP_NAME | SYMBOLIC+) ;
 
-ddParmVOLUME : VOLUME EQUAL (
-    PRIVATE |
+ddParmVOLUME : (VOL | VOLUME) EQUAL (
+    VOL_PRIVATE |
     ddParmVOLUME_SER |
     ddParmVOLUME_REF |
     (LPAREN
-        PRIVATE? 
-            (COMMA ddParmVOLUME_SER? 
-                (COMMA ddParmVOLUME_REF? 
-                    (COMMA NUM_LIT? 
-                        (COMMA NUM_LIT)?
-                    )?
-                )?
-            )?
+        VOL_PRIVATE? 
+        COMMA? VOL_RETAIN?
+        COMMA? VOL_SEQ_NB?
+        COMMA? VOL_COUNT?
+        COMMA? ddParmVOLUME_SER? 
+        COMMA? ddParmVOLUME_REF? 
     RPAREN)
   ) ;
 
-ddParmVolSer : (NUM_LIT | SIMPLE_STRING | ALNUMNAT | QUOTED_STRING_FRAGMENT) ;
+ddParmVolSer : (VOL_SER_NB | QUOTED_STRING_FRAGMENT) ;
 ddParmVOLUME_SER : 
-    (SER EQUAL ddParmVolSer) |
-    (SER EQUAL LPAREN  ddParmVolSer (
-            (COMMA ddParmVolSer)* |
+    (VOL_SER EQUAL ddParmVolSer) |
+    (VOL_SER EQUAL
+        LPAREN  ddParmVolSer (
+            (COMMA COMMENT_TEXT? ddParmVolSer)* |
             (inlineComment SS ddParmVolSer)* 
-          ) RPAREN) ;
-ddParmVOLUME_REF : REF EQUAL (ddName | DATASET_NAME | QUOTED_STRING_FRAGMENT) ;
+        ) RPAREN
+    ) ;
+
+ddParmVOLUME_REF : VOL_REF EQUAL (ddParmReferback | DATASET_NAME | QUOTED_STRING_FRAGMENT) ;
 
 /*
 The ddParmAMP_ stuff isn't used in this parser, it turns out the 
