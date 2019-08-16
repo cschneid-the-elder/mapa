@@ -2809,7 +2809,19 @@ mode VOL_REF_MODE ;
 VOL_REF_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 VOL_REF_ASTERISK : ASTERISK ->type(ASTERISK),mode(VOL_REF_SPLAT_MODE) ;
 VOL_REF_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-VOL_REF_DSN : DSN_MODE_DATASET_NAME ->type(DATASET_NAME) ;
+
+/*
+Note that VOL_REF_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
+are missing.  From the z/OS 2.3 documentation...
+
+ The dsname cannot be a generation data group (GDG) base name or a member name of a non-GDG data set.
+
+...which makes life easier because we also have to match the RPAREN ending the VOL=() group.
+*/
+VOL_REF_DSN : 
+    (AMPERSAND | NATL | ALPHA) 
+        (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')*
+ ->type(DATASET_NAME) ;
 VOL_REF_RPAREN : RPAREN_DFLT 
     {
       if (cameFromDataMode) {
