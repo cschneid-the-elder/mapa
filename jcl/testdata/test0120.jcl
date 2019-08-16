@@ -1,0 +1,182 @@
+//VOLUME JOB
+//*
+//STEP0001 EXEC PGM=IEFBR14
+//DD000001 DD  VOL=SER=(ABC,123,DEF,456)
+//DD000002 DD  VOLUME=SER=(ABC,123,DEF,456)
+//DD000003 DD  VOL=SER=(ABC,
+//             123,DEF,456)
+//DD000004 DD  VOLUME=SER=(ABC,
+//             123,DEF,456)
+//DD000005 DD  VOL=SER=(ABC,
+//             123,
+//             DEF,
+//             456)
+//DD000006 DD  VOLUME=SER=(ABC,
+//             123,
+//             DEF,
+//             456)
+//DD000007 DD  *,VOL=SER=(ABC,123,DEF,456)
+//DD000008 DD  *,VOLUME=SER=(ABC,123,DEF,456)
+//DD000009 DD  *,VOL=SER=(ABC,
+//             123,DEF,456)
+//DD000010 DD  *,VOLUME=SER=(ABC,
+//             123,DEF,456)
+//DD000011 DD  *,VOL=SER=(ABC,
+//             123,
+//             DEF,
+//             456)
+//DD000012 DD  *,VOLUME=SER=(ABC,
+//             123,
+//             DEF,
+//             456)
+//DD000013 DD  *,VOL=SER=(ABC,123,DEF,456),MODE=C
+//DD000014 DD  *,VOLUME=SER=(ABC,123,DEF,456),MODE=C
+//DD000015 DD  *,VOL=SER=(ABC,
+//             123,DEF,456),MODE=C
+//DD000016 DD  *,VOLUME=SER=(ABC,
+//             123,DEF,456),MODE=C
+//DD000017 DD  *,VOL=SER=(ABC,
+//             123,
+//             DEF,
+//             456),MODE=C
+//DD000018 DD  *,VOLUME=SER=(ABC,
+//             123,
+//             DEF,
+//             456),MODE=C
+//DD000019 DD  VOL=SER=(ABC,123,DEF,456) VOL=SER
+//DD000020 DD  VOLUME=SER=(ABC,123,DEF,456) VOL=SER
+//DD000021 DD  VOL=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+//DD000022 DD  VOLUME=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+//DD000023 DD  VOL=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+//DD000024 DD  VOLUME=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+//DD000025 DD  *,VOL=SER=(ABC,123,DEF,456) VOL=SER
+//DD000026 DD  *,VOLUME=SER=(ABC,123,DEF,456) VOL=SER
+//DD000027 DD  *,VOL=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+//DD000028 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+//DD000029 DD  *,VOL=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+//DD000030 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+//DD000031 DD  *,VOL=SER=(ABC,123,DEF,456),MODE=C VOL=SER
+//DD000032 DD  *,VOLUME=SER=(ABC,123,DEF,456),MODE=C VOL=SER
+//DD000033 DD  *,VOL=SER=(ABC, VOL=SER
+//             123,DEF,456),MODE=C VOL=SER
+//DD000034 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123,DEF,456),MODE=C VOL=SER
+//DD000035 DD  *,VOL=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456),MODE=C VOL=SER
+//DD000036 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456),MODE=C VOL=SER
+//DD000037 DD  *,VOL=SER=(ABC,123,DEF,456)
+AEIOU
+//DD000038 DD  *,VOLUME=SER=(ABC,123,DEF,456)
+AEIOU
+//DD000039 DD  *,VOL=SER=(ABC,
+//             123,DEF,456)
+AEIOU
+//DD000040 DD  *,VOLUME=SER=(ABC,
+//             123,DEF,456)
+AEIOU
+//DD000041 DD  *,VOL=SER=(ABC,
+//             123,
+//             DEF,
+//             456)
+AEIOU
+//DD000042 DD  *,VOLUME=SER=(ABC,
+//             123,
+//             DEF,
+//             456)
+AEIOU
+//DD000043 DD  *,VOL=SER=(ABC,123,DEF,456),MODE=C
+AEIOU
+//DD000044 DD  *,VOLUME=SER=(ABC,123,DEF,456),MODE=C
+AEIOU
+//DD000045 DD  *,VOL=SER=(ABC,
+//             123,DEF,456),MODE=C
+AEIOU
+//DD000046 DD  *,VOLUME=SER=(ABC,
+//             123,DEF,456),MODE=C
+AEIOU
+//DD000047 DD  *,VOL=SER=(ABC,
+//             123,
+//             DEF,
+//             456),MODE=C
+AEIOU
+//DD000048 DD  *,VOLUME=SER=(ABC,
+//             123,
+//             DEF,
+//             456),MODE=C
+AEIOU
+//DD000049 DD  VOL=SER=(ABC,123,DEF,456) VOL=SER
+//DD000050 DD  VOLUME=SER=(ABC,123,DEF,456) VOL=SER
+//DD000051 DD  VOL=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+//DD000052 DD  VOLUME=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+//DD000053 DD  VOL=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+//DD000054 DD  VOLUME=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+//DD000055 DD  *,VOL=SER=(ABC,123,DEF,456) VOL=SER
+AEIOU
+//DD000056 DD  *,VOLUME=SER=(ABC,123,DEF,456) VOL=SER
+AEIOU
+//DD000057 DD  *,VOL=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+AEIOU
+//DD000058 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123,DEF,456) VOL=SER
+AEIOU
+//DD000059 DD  *,VOL=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+AEIOU
+//DD000060 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456) VOL=SER
+AEIOU
+//DD000061 DD  *,VOL=SER=(ABC,123,DEF,456),MODE=C VOL=SER
+AEIOU
+//DD000062 DD  *,VOLUME=SER=(ABC,123,DEF,456),MODE=C VOL=SER
+AEIOU
+//DD000063 DD  *,VOL=SER=(ABC, VOL=SER
+//             123,DEF,456),MODE=C VOL=SER
+AEIOU
+//DD000064 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123,DEF,456),MODE=C VOL=SER
+AEIOU
+//DD000065 DD  *,VOL=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456),MODE=C VOL=SER
+AEIOU
+//DD000066 DD  *,VOLUME=SER=(ABC, VOL=SER
+//             123, VOL=SER
+//             DEF, VOL=SER
+//             456),MODE=C VOL=SER
+AEIOU
+
