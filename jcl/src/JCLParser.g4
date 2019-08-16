@@ -190,7 +190,7 @@ ddStatement : SS ddName DD ddParameter? (
     inlineComment)* 
       ddParmASTERISK_DATA* ;
 
-ddStatementClosure1 : COMMA commentStatement* ddParameter inlineComment? ;
+ddStatementClosure1 : COMMA commentStatement* SS ddParameter inlineComment? ;
 ddStatementClosure2 : COMMA COMMENT_TEXT? SS ddParameter inlineComment? ;
 ddStatementClosure3 : COMMA ddParameter inlineComment? ;
 ddStatementClosure4 : inlineComment commentStatement* SS ddParameter inlineComment? ;
@@ -267,6 +267,7 @@ ddParmDCB : DCB EQUAL (
     (LPAREN 
         ddParmDCB_Parameter (
             (COMMA COMMENT_TEXT? SS? ddParmDCB_Parameter) |
+            (COMMA commentStatement* SS? ddParmDCB_Parameter) |
             (inlineComment SS ddParmDCB_Parameter)
           )*
     RPAREN) 
@@ -395,8 +396,11 @@ ddParmOUTLIM : OUTLIM EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmOUTPUT : OUTPUT EQUAL (ddParmReferback | 
     (LPAREN 
         ddParmReferback 
-            ((COMMA COMMENT_TEXT? ddParmReferback) | 
-            (inlineComment ddParmReferback))* 
+            (
+              (COMMA COMMENT_TEXT? ddParmReferback) | 
+              (COMMA commentStatement* ddParmReferback) | 
+              (inlineComment ddParmReferback)
+            )* 
     RPAREN)) ;
 ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT+ | PATH_VALUE) ;
 ddParmPATHDISP : PATHDISP EQUAL (
@@ -410,6 +414,7 @@ ddParmPATHMODE : PATHMODE EQUAL (
         (PATHMODE_VALUE | SYMBOLIC)
             (
               (COMMA COMMENT_TEXT? (PATHMODE_VALUE | SYMBOLIC)) | 
+              (COMMA commentStatement* (PATHMODE_VALUE | SYMBOLIC)) | 
               (inlineComment SS (PATHMODE_VALUE | SYMBOLIC))
             )*
     RPAREN)
@@ -421,6 +426,7 @@ ddParmPATHOPTS : PATHOPTS EQUAL  (
         (PATHOPTS_VALUE | SYMBOLIC)
             (
               (COMMA COMMENT_TEXT? (PATHOPTS_VALUE | SYMBOLIC)) | 
+              (COMMA commentStatement* (PATHOPTS_VALUE | SYMBOLIC)) | 
               (inlineComment SS (PATHOPTS_VALUE | SYMBOLIC))
             )*
     RPAREN)
@@ -494,6 +500,7 @@ ddParmSUBSYS : SUBSYS EQUAL (
         (SUBSYS_NAME | SYMBOLIC)
             (
               (COMMA COMMENT_TEXT? (SUBSYS_PARM | QUOTED_STRING_FRAGMENT | SYMBOLIC)) | 
+              (COMMA commentStatement* (SUBSYS_PARM | QUOTED_STRING_FRAGMENT | SYMBOLIC)) | 
               (inlineComment SS (SUBSYS_PARM | QUOTED_STRING_FRAGMENT | SYMBOLIC))
             )*
     RPAREN)
@@ -605,6 +612,7 @@ ddParmVOLUME_SER :
     (VOL_SER EQUAL
         LPAREN  ddParmVolSer (
             (COMMA COMMENT_TEXT? ddParmVolSer)* |
+            (COMMA commentStatement* ddParmVolSer)* |
             (inlineComment SS ddParmVolSer)* 
         ) RPAREN
     ) ;
