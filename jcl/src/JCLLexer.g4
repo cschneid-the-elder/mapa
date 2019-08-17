@@ -577,7 +577,7 @@ find next.  In either case, we might find a JCL operation and thus the duplicati
 
 */
 
-CNTL_OP : C N T L ->mode(POST_OP),type(CNTL) ;
+CNTL_OP : C N T L ->mode(CNTL_MODE),type(CNTL) ;
 COMMAND_OP : C O M M A N D ->mode(POST_OP),type(COMMAND) ;
 DD_OP : D D->mode(DD_OP),type(DD) ;
 ELSE_OP : E L S E ->mode(POST_OP),type(ELSE) ;
@@ -1001,14 +1001,28 @@ DD_ASTERISK_DATA : ([ \n\r] | ANYCHAR)+? ;
 
 mode CNTL_MODE ;
 
-ASTERISK_CNTL : ASTERISK ;
-NEWLINE_CNTL_MODE : [\n\r] ->channel(HIDDEN) ;
-ENDCNTL_CNTL : E N D C N T L ->type(ENDCNTL) ;
-
-CNTL_MODE_TERMINATORX : SLASH SLASH NAME? ENDCNTL_CNTL ->mode(POST_OP) ;
-CNTL_DATA : (' ' | ANYCHAR)+? ;
+ASTERISK_CNTL : ASTERISK {returnToMode = _mode;} ->type(ASTERISK),mode(CNTL_MODE_CM) ;
+NEWLINE_CNTL_MODE : NEWLINE ->channel(HIDDEN),mode(CNTL_DATA_MODE) ;
 
 WS_CNTL : [ ]+ ->channel(HIDDEN) ;
+
+mode CNTL_MODE_CM ;
+
+CNTL_CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(CNTL_DATA_MODE) ;
+CNTL_CM_COMMENT_TEXT : COMMENT_TEXT_CM ->type(COMMENT_TEXT) ;
+
+mode CNTL_DATA_MODE ;
+
+//ENDCNTL_CNTL : E N D C N T L ->type(ENDCNTL) ;
+
+/*
+I don't like this, it really feels like a parser thing and not a lexer
+thing, but the entire ENDCNTL statement functions as a terminator for
+the CNTL_DATA capture.
+*/
+CNTL_MODE_TERMINATORX : SLASH SLASH ([A-Z0-9@#$]+)? [ ]+ (E N D C N T L) ->mode(CM) ;
+CNTL_DATA : DD_ASTERISK_DATA+? ;
+
 
 mode QS ;
 

@@ -32,7 +32,7 @@ startRule : jcl | EOF ;
 jcl : execJCL+ | procJCL ;
 
 //execJCL : (jobCard joblibAmalgamation? syschkAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
-execJCL : (jobCard (joblibAmalgamation | syschkAmalgamation | jcllibStatement)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
+execJCL : (jobCard (commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
 
 procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -788,9 +788,9 @@ jobParmUSER : USER EQUAL NAME ;
 
 commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT ;
  
-cntlStatement : SS NAME_FIELD CNTL ASTERISK inlineComment* ;
+cntlStatement : SS NAME_FIELD? CNTL ASTERISK? (inlineComment | COMMENT_TEXT)? ;
 
-endcntlStatement : SS NAME_FIELD ENDCNTL inlineComment* ;
+endcntlStatement : (SS NAME_FIELD ENDCNTL inlineComment*) | CNTL_MODE_TERMINATORX COMMENT_TEXT?;
 
 cntlStatementAmalgamation : cntlStatement CNTL_DATA* endcntlStatement ;
 
