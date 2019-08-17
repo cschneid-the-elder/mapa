@@ -555,8 +555,9 @@ mode NM ;
 
 JOBLIB : J O B L I B ;
 SYSCHK : S Y S C H K ;
-NAME_FIELD : NAME (DOT_DFLT NAME)? ->mode(OP) ;
-//DD_OVERRIDE : NAME DOT_DFLT NAME ->mode(OP) ;
+//NAME_FIELD : NAME (DOT_DFLT NAME)? ->mode(OP) ;
+fragment NM_PART : [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? ;
+NAME_FIELD : NM_PART (DOT_DFLT NM_PART)?  ->mode(OP) ;
 CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode OP ;
