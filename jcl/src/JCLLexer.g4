@@ -1396,6 +1396,7 @@ at runtime in any given installation.
 
 
 JOB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_MODE1) ;
+JOB_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 JOB_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_MODE_LINE_NB : LINE_NB ->skip ;
 JOB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
@@ -1442,6 +1443,7 @@ JOB_MODE_USER : USER_DFLT ->type(USER),mode(DEFAULT_MODE) ;
 mode JOB_ACCT_MODE1 ;
 
 JOB_ACCT_MODE1_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JOB_ACCT_MODE1_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 JOB_ACCT_MODE1_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE1_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(JOB_ACCT_MODE2) ;
 JOB_ACCT_MODE1_RPAREN : RPAREN_DFLT ->type(RPAREN) ;
@@ -1489,6 +1491,7 @@ JOB_ACCT_MODE1_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 mode JOB_ACCT_MODE2 ;
 
 JOB_ACCT_MODE2_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JOB_ACCT_MODE2_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 JOB_ACCT_MODE2_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE2_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
 JOB_ACCT_MODE2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(JOB_ACCT_MODE3) ;
@@ -1518,14 +1521,9 @@ the programmer name -or- via one of the other valid keywords on the JOB statemen
 JOB_PROGRAMMER_NAME_MODE_SS : SS ->channel(HIDDEN) ;
 JOB_PROGRAMMER_NAME_MODE_CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN) ;
 JOB_PROGRAMMER_NAME_MODE_NEWLINE : NEWLINE {if (haveProgrammerName) mode(DEFAULT_MODE);} ->channel(HIDDEN) ;
+JOB_PROGRAMMER_NAME_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 JOB_PROGRAMMER_NAME_MODE_LINE_NB : LINE_NB ->skip ;
 JOB_PROGRAMMER_NAME_MODE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_JOB_PROGRAMMER_NAME_MODE) ;
-/*
-TODO
-Almost works - probabaly have to duplicate QS and make a unique QUOTED_STRING_FRAGMENT
-specifically for programmer name so it doesn't get mixed up with jobAccountingString
-in the parser.
-*/
 JOB_PROGRAMMER_NAME_MODE_COMMA : COMMA_DFLT {if (haveProgrammerName) mode(DEFAULT_MODE);} ->type(COMMA) ;
 
 JOB_PROGRAMMER_NAME_MODE_ADDRSPC : ADDRSPC_DFLT ->type(ADDRSPC),mode(DEFAULT_MODE) ;
