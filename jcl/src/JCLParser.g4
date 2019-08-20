@@ -802,7 +802,20 @@ exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL (
   ) ;
 */
 
-ifStatement : SS NAME_FIELD? IF LPAREN* IF_CHECK ((SS CONTINUATION_WS)? LPAREN* IF_CHECK RPAREN*)* RPAREN* THEN inlineComment? ;
+ifStatement : SS NAME_FIELD? IF
+    LPAREN*
+      ifTest SS? (IF_LOGICAL SS? LPAREN* SS? ifTest SS? RPAREN*)*
+    RPAREN*
+    SS? THEN COMMENT_TEXT?
+  ;
+
+ifKeyword : ABEND | ABENDCC | RUN | RC ;
+ifTest : IF_STEP? ifKeyword
+    (IF_REL_OP (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
+
+
+ 
+//      IF_CHECK ((SS CONTINUATION_WS)? LPAREN* IF_CHECK RPAREN*)* RPAREN* THEN inlineComment? ;
 
 elseStatement : SS NAME_FIELD? ELSE inlineComment? ;
 

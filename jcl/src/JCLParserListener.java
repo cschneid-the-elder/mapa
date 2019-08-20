@@ -2587,6 +2587,26 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitIfStatement(JCLParser.IfStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ifKeyword}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfKeyword(JCLParser.IfKeywordContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ifKeyword}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfKeyword(JCLParser.IfKeywordContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#ifTest}.
+	 * @param ctx the parse tree
+	 */
+	void enterIfTest(JCLParser.IfTestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ifTest}.
+	 * @param ctx the parse tree
+	 */
+	void exitIfTest(JCLParser.IfTestContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#elseStatement}.
 	 * @param ctx the parse tree
 	 */

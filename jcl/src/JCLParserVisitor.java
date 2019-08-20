@@ -1558,6 +1558,18 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIfStatement(JCLParser.IfStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ifKeyword}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfKeyword(JCLParser.IfKeywordContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#ifTest}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIfTest(JCLParser.IfTestContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#elseStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
