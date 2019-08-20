@@ -803,8 +803,8 @@ exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL (
 */
 
 ifStatement : SS NAME_FIELD? IF
-    LPAREN*
-      ifTest SS? (IF_LOGICAL SS? LPAREN* SS? ifTest SS? RPAREN*)*
+    NOT_SYMBOL* LPAREN*
+      ifTest RPAREN* SS? (IF_LOGICAL SS? NOT_SYMBOL* LPAREN* SS? ifTest SS? RPAREN*)*
     RPAREN*
     SS? THEN COMMENT_TEXT?
   ;
