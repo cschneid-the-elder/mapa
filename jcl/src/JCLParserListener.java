@@ -2377,6 +2377,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitJobParmNOTIFY(JCLParser.JobParmNOTIFYContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#nameOrSymbolic}.
+	 * @param ctx the parse tree
+	 */
+	void enterNameOrSymbolic(JCLParser.NameOrSymbolicContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#nameOrSymbolic}.
+	 * @param ctx the parse tree
+	 */
+	void exitNameOrSymbolic(JCLParser.NameOrSymbolicContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobParmPASSWORD}.
 	 * @param ctx the parse tree
 	 */
@@ -2656,6 +2666,76 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNotifyStatement(JCLParser.NotifyStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#notifyParms}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotifyParms(JCLParser.NotifyParmsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#notifyParms}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotifyParms(JCLParser.NotifyParmsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#interveningCruft}.
+	 * @param ctx the parse tree
+	 */
+	void enterInterveningCruft(JCLParser.InterveningCruftContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#interveningCruft}.
+	 * @param ctx the parse tree
+	 */
+	void exitInterveningCruft(JCLParser.InterveningCruftContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#notifyUSER}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotifyUSER(JCLParser.NotifyUSERContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#notifyUSER}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotifyUSER(JCLParser.NotifyUSERContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#notifyTYPE}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotifyTYPE(JCLParser.NotifyTYPEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#notifyTYPE}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotifyTYPE(JCLParser.NotifyTYPEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#notifyWHEN}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotifyWHEN(JCLParser.NotifyWHENContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#notifyWHEN}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotifyWHEN(JCLParser.NotifyWHENContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#whenKeyword}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhenKeyword(JCLParser.WhenKeywordContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#whenKeyword}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhenKeyword(JCLParser.WhenKeywordContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#whenTest}.
+	 * @param ctx the parse tree
+	 */
+	void enterWhenTest(JCLParser.WhenTestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#whenTest}.
+	 * @param ctx the parse tree
+	 */
+	void exitWhenTest(JCLParser.WhenTestContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#yesOrNo}.
 	 * @param ctx the parse tree

@@ -1432,6 +1432,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJobParmNOTIFY(JCLParser.JobParmNOTIFYContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#nameOrSymbolic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNameOrSymbolic(JCLParser.NameOrSymbolicContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobParmPASSWORD}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1599,6 +1605,48 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNotifyStatement(JCLParser.NotifyStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#notifyParms}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotifyParms(JCLParser.NotifyParmsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#interveningCruft}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInterveningCruft(JCLParser.InterveningCruftContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#notifyUSER}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotifyUSER(JCLParser.NotifyUSERContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#notifyTYPE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotifyTYPE(JCLParser.NotifyTYPEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#notifyWHEN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotifyWHEN(JCLParser.NotifyWHENContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#whenKeyword}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhenKeyword(JCLParser.WhenKeywordContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#whenTest}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWhenTest(JCLParser.WhenTestContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#yesOrNo}.
 	 * @param ctx the parse tree

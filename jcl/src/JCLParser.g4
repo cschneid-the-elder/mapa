@@ -32,7 +32,7 @@ startRule : jcl | EOF ;
 jcl : execJCL+ | procJCL ;
 
 //execJCL : (jobCard joblibAmalgamation? syschkAmalgamation? (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
-execJCL : (jobCard (commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
+execJCL : (jobCard (commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
 
 procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -730,7 +730,7 @@ jobParmCOND : COND EQUAL LPAREN? LPAREN NUM_LIT COMMA COND_OP RPAREN (COMMA LPAR
 
 jobParmDSENQSHR : DSENQSHR EQUAL (DISALLOW | USEJC | ALLOW) ;
 
-jobParmEMAIL : EMAIL EQUAL (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT) ;
+jobParmEMAIL : EMAIL EQUAL (SYMBOLIC | QUOTED_STRING_FRAGMENT) ;
 
 jobParmGDGBIAS : GDGBIAS EQUAL (GDGBIAS_JOB | GDGBIAS_STEP) ;
 
@@ -756,7 +756,9 @@ jobParmMSGLEVEL : MSGLEVEL EQUAL (
   ;
 
 
-jobParmNOTIFY : NOTIFY EQUAL ((NAME (DOT NAME)?) | SYMBOLIC) ;
+jobParmNOTIFY : NOTIFY EQUAL nameOrSymbolic ;
+
+nameOrSymbolic : ((NAME (DOT NAME)?) | SYMBOLIC) ;
 
 jobParmPASSWORD : PASSWORD EQUAL LPAREN? NAME (COMMA NAME)? RPAREN? ;
 
@@ -837,6 +839,7 @@ jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL (
     RPAREN inlineComment?)
   ) ;
 
+/*
 notifyStatement : SS NAME_FIELD? NOTIFY 
     (EMAIL EQUAL QUOTED_STRING_FRAGMENT) | (USER EQUAL (SYMBOLIC | ((NAME DOT)? NAME))) 
         ((COMMA |
@@ -847,6 +850,48 @@ notifyStatement : SS NAME_FIELD? NOTIFY
          WHEN EQUAL LPAREN* WHEN_CHECK 
             (SS? LPAREN* WHEN_CHECK RPAREN*)* RPAREN* inlineComment?)?
     ;
+
+notifyStatement : SS NAME_FIELD? NOTIFY_OP
+    (jobParmEMAIL |
+    (USER EQUAL nameOrSymbolic))
+        (
+          (COMMA | inlineComment) SS? commentStatement*
+          TYPE EQUAL (EMAIL | MSG)
+        )? 
+        (
+          (COMMA | inlineComment) SS? commentStatement*
+          WHEN EQUAL QUOTED_STRING_FRAGMENT+
+          COMMENT_TEXT?
+        )?
+  ;
+*/
+
+notifyStatement : SS NAME_FIELD? NOTIFY_OP
+    notifyParms (interveningCruft notifyParms)* COMMENT_TEXT? ;
+
+notifyParms : jobParmEMAIL | notifyUSER | notifyTYPE | notifyWHEN ;
+interveningCruft : (COMMA | inlineComment) SS? commentStatement* ;
+notifyUSER : USER EQUAL nameOrSymbolic ;
+notifyTYPE : TYPE EQUAL (EMAIL | MSG) ;
+notifyWHEN : WHEN EQUAL QUOTED_STRING_FRAGMENT+ ;
+
+/*
+This syntax would be correct if the WHEN parameter of the NOTIFY statement
+followed that of the IF statement.  It is documented as doing so, but the
+examples all show WHEN=quoted-string.
+
+          WHEN EQUAL
+            NOT_SYMBOL* LPAREN*
+              whenTest RPAREN* SS? (WHEN_LOGICAL SS? NOT_SYMBOL* LPAREN* SS? whenTest SS? RPAREN*)*
+            RPAREN*
+
+*/
+
+whenKeyword : ABEND | ABENDCC | RUN | RC | SECERR | JCLERR ;
+whenTest : whenKeyword
+    (WHEN_REL_OP (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
+
+
 
 yesOrNo : YES | NO | ALPHA ;
 
