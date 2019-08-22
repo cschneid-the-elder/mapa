@@ -1636,18 +1636,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNotifyWHEN(JCLParser.NotifyWHENContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#whenKeyword}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhenKeyword(JCLParser.WhenKeywordContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#whenTest}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWhenTest(JCLParser.WhenTestContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#yesOrNo}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
