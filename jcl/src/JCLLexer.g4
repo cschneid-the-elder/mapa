@@ -80,7 +80,7 @@ tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF
 
 // lexer rules --------------------------------------------------------------------------------
 
-SS : SLASH SLASH {getCharPositionInLine() == 2}? ->mode(NM) ;
+SS : SLASH SLASH {/*System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());*/}{getCharPositionInLine() == 2}? ->mode(NM) ;
 LINE_NB : ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR {getCharPositionInLine() == 80}? -> skip;
 COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM);
 COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM) ;
@@ -113,18 +113,18 @@ AMPERSAND : '&' ;
 ANY : A N Y ;
 ANYLOCAL : A N Y L O C A L ;
 ASTERISK : '*' ;
-AVGREC_DFLT : A V G R E C ->type(AVGREC) ;
+AVGREC_DFLT : A V G R E C ->type(AVGREC),pushMode(AVGREC_MODE) ;
 BACKOUT : B A C K O U T ;
 BEFORE : B E F O R E ;
 BFALN_DFLT : B F A L N ->type(BFALN);
 BFALN_D : D ;
 BFALN_F : F ;
 BFTEK_DFLT : B F T E K ->type(BFTEK) ;
-BLKCHAR : B L K C H A R ;
-BLKPOS : B L K P O S ;
+//BLKCHAR : B L K C H A R ;
+//BLKPOS : B L K P O S ;
 BLKSIZE_DFLT : B L K S I Z E ->type(BLKSIZE) ;
 BLKSZLIM_DFLT : B L K S Z L I M ->type(BLKSZLIM) ;
-BLOCK : B L O C K ;
+//BLOCK : B L O C K ;
 BUFF : B U F F ;
 BUFIN_DFLT : B U F I N ->type(BUFIN) ;
 BUFL_DFLT : B U F L ->type(BUFL) ;
@@ -141,7 +141,7 @@ BURST_DFLT : B U R S T ->type(BURST) ;
 BYTES_DFLT : B Y T E S ->type(BYTES) ; 
 CANCEL : C A N C E L ;
 CARDS_DFLT : C A R D S ->type(CARDS) ;
-CATLG : C A T L G ;
+
 CB : C B ;
 CCSID_DFLT : C C S I D ->type(CCSID) ;
 CHARS_DFLT : C H A R S ->type(CHARS),mode(CHARS_MODE) ;
@@ -188,21 +188,21 @@ DDNAME_DFLT : D D N A M E ->type(DDNAME) ;
 DEFAULT : D E F A U L T ;
 //DEFER : D E F E R ;
 DELAY : D E L A Y ;
-DELETE : D E L E T E ;
+
 DEN_DFLT : D E N ->type(DEN) ;
 DEPT : D E P T ;
 DEST_DFLT : D E S T ->type(DEST),mode(DEST_MODE) ;
 DIAGNS_DFLT : D I A G N S ->type(DIAGNS) ;
 DISALLOW : D I S A L L O W ;
-DISP_DFLT : D I S P ->type(DISP) ;
+DISP_DFLT : D I S P ->type(DISP),pushMode(DISP_MODE) ;
 DLM_DFLT : D L M ->mode(DLM_MODE),type(DLM) ;
 DO : D O ;
 DOT_DFLT : '.' ->type(DOT) ;
-DOUBLE : D O U B L E ;
+//DOUBLE : D O U B L E ;
 DPAGELBL : D P A G E L B L ;
 DQUOTE : '"' ;
 DSENQSHR_DFLT : D S E N Q S H R ->type(DSENQSHR) ;
-DSID_DFLT : D S I D {cameFromMode = _mode;}  ->type(DSID),mode(DSID_MODE) ;
+DSID_DFLT : D S I D {cameFromMode = _mode;}  ->type(DSID),pushMode(DSID_MODE) ;
 DSKEYLBL_DFLT : D S K E Y L B L ->type(DSKEYLBL),mode(DSKEYLBL_MODE) ;
 DSN_DFLT : D S N {cameFromMode = _mode;} ->type(DSN),mode(DSN_MODE);
 DSNAME_DFLT : D S N A M E {cameFromMode = _mode;} ->type(DSNAME),mode(DSN_MODE) ;
@@ -276,7 +276,7 @@ JLOCAL : J L O C A L ;
 JOB_DFLT : J O B ->mode(POST_OP),type(JOB) ;
 JOBGROUP : J O B G R O U P ;
 JOBRC_DFLT : J O B R C ->mode(JOBRC_MODE),type(JOBRC) ;
-KEEP : K E E P ;
+
 KEY : K E Y ;
 KEYENCD1_DFLT : K E Y E N C D '1' ->type(KEYENCD1),mode(KEYENCD_MODE) ;
 KEYENCD2_DFLT : K E Y E N C D '2' ->type(KEYENCD2),mode(KEYENCD_MODE) ;
@@ -312,9 +312,9 @@ MEMLIMIT_DFLT : M E M L I M I T ->type(MEMLIMIT) ;
 MERGE : M E R G E ;
 MGMTCLAS_DFLT : M G M T C L A S ->type(MGMTCLAS),mode(MGMTCLAS_MODE) ;
 MM : M M ;
-MOD : M O D ;
+
 MODE_DFLT : M O D E {cameFromMode = _mode;}  ->type(MODE),mode(MODE_MODE) ;
-MODIFY_DFLT : M O D I F Y ->type(MODIFY),mode(MODIFY_MODE) ;
+MODIFY_DFLT : M O D I F Y ->type(MODIFY),pushMode(MODIFY_MODE) ;
 MSG : M S G ;
 MSGCLASS_DFLT : M S G C L A S S ->type(MSGCLASS) ;
 MSGLEVEL_DFLT : M S G L E V E L ->type(MSGLEVEL) ;
@@ -324,7 +324,7 @@ fragment NATL : [@#$] ;
 NC : N C ;
 NCK : N C K ;
 NCP_DFLT : N C P ->type(NCP) ;
-NEW : N E W ;
+
 NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 NOCMND : N O C M N D ;
 NOLIMIT : N O L I M I T ;
@@ -346,7 +346,7 @@ OFFSETXB : O F F S E T X B ;
 OFFSETXF : O F F S E T X F ;
 OFFSETYB : O F F S E T Y B ;
 OFFSETYF : O F F S E T Y F ;
-OLD : O L D ;
+
 ON : O N ;
 ONLY : O N L Y ;
 OPTCD_DFLT : O P T C D ->type(OPTCD),mode(OPTCD_MODE) ;
@@ -364,7 +364,7 @@ PARM : P A R M ->mode(EXEC_PARM_MODE) ;
 PARMDD : P A R M D D ->mode(PARMDD_MODE) ;
 PARM1 : P A R M '1' ;
 PARM2 : P A R M '2' ;
-PASS : P A S S ;
+
 PASSWORD_DFLT : P A S S W O R D ->type(PASSWORD) ;
 PATH_DFLT : P A T H ->type(PATH),mode(PATH_MODE) ;
 PATHDISP_DFLT : P A T H D I S P ->type(PATHDISP) ;
@@ -379,7 +379,7 @@ POINTS : P O I N T S ;
 PORTNO : P O R T N O ;
 PRMODE : P R M O D E ;
 PROC_DFLT : P R O C ->mode(POST_OP),type(PROC) ;
-PROGRAM : P R O G R A M ;
+//PROGRAM : P R O G R A M ;
 PROTECT_DFLT : P R O T E C T ->type(PROTECT),mode(PROTECT_MODE) ;
 PRTATTRS : P R T A T T R S ;
 PRTERROR : P R T E R R O R ;
@@ -427,8 +427,8 @@ SECLABEL_DFLT : S E C L A B E L ->type(SECLABEL) ;
 SECMODEL_DFLT : S E C M O D E L ->type(SECMODEL),mode(SECMODEL_MODE) ;
 SEGMENT_DFLT : S E G M E N T ->type(SEGMENT) ;
 SET_DFLT : S E T ->mode(POST_OP),type(SET) ;
-SHR : S H R ;
-SINGLE : S I N G L E ;
+
+//SINGLE : S I N G L E ;
 SLASH : '/' ;
 SMBBIAS : S M B B I A S ;
 SMBDFR : S M B D F R ;
@@ -453,7 +453,7 @@ SUBSYS_DFLT : S U B S Y S ->type(SUBSYS),mode(SUBSYS_MODE) ;
 SUPPRESS : S U P P R E S S ;
 SW : S W ;
 SYMBOLS_DFLT : S Y M B O L S {cameFromMode = _mode;}  ->type(SYMBOLS),mode(SYMBOLS_MODE) ;
-SYMLIST_DFLT : S Y M L I S T {cameFromMode = _mode;}  ->type(SYMLIST),mode(SYMLIST_MODE) ;
+SYMLIST_DFLT : S Y M L I S T {cameFromMode = _mode;}  ->type(SYMLIST),pushMode(SYMLIST_MODE) ;
 SYNAD : S Y N A D ;
 SYSAFF_DFLT : S Y S A F F ->type(SYSAFF) ;
 SYSAREA : S Y S A R E A ;
@@ -466,7 +466,7 @@ TIME_DFLT : T I M E ->type(TIME) ;
 TITLE : T I T L E ;
 TRACE : T R A C E ;
 TRC : T R C ;
-TRIPLE : T R I P L E ;
+//TRIPLE : T R I P L E ;
 TRK : T R K ;
 TRKLOCK : T R K L O C K ;
 TRTCH_DFLT : T R T C H ->type(TRTCH),mode(TRTCH_MODE) ;
@@ -479,8 +479,8 @@ TYPRUN_DFLT : T Y P R U N ->type(TYPRUN) ;
 UCS_DFLT : U C S ->type(UCS),mode(UCS_MODE) ;
 UJOBCORR_DFLT : U J O B C O R R ->type(UJOBCORR) ;
 UNALLOC : U N A L L O C ;
-UNBLOCK : U N B L O C K ;
-UNCATLG : U N C A T L G ;
+//UNBLOCK : U N B L O C K ;
+
 UNIT_DFLT : U N I T ->type(UNIT),mode(UNIT_MODE) ;
 USCORE : '_' ;
 USECATLG : U S E C A T L G ;
@@ -491,8 +491,8 @@ USERLIB : U S E R L I B ->mode(DSN_MODE);
 USERPATH : U S E R P A T H ;
 //VERIFY : V E R I F Y ;
 VIRT : V I R T ;
-VOL_DFLT : V O L ->type(VOL),mode(VOL_MODE) ;
-VOLUME_DFLT : V O L U M E ->type(VOLUME),mode(VOL_MODE) ;
+VOL_DFLT : V O L ->type(VOL),pushMode(VOL_MODE) ;
+VOLUME_DFLT : V O L U M E ->type(VOLUME),pushMode(VOL_MODE) ;
 WARNING : W A R N I N G ;
 WHEN : W H E N ;
 WHEN_GE : '>' '=' ;
@@ -554,13 +554,48 @@ mode CM ;
 NEWLINE_CM : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 COMMENT_TEXT_CM : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
 
+/*
+
+COMMA_WS_MODE is used when encountering a comma followed by 
+whitespace which indicates the statement is continued but there
+may be an inline or embedded comment.  This inline or embedded
+comment may be followed by one or more comment statements.
+
+Syntactically, there can be no NAME_FIELD on a following physical
+line.  Only COMMENT_FLAG or SS follwed by CONTINUATION_WS are
+allowed.  The former is the pattern that, when matched, does the
+double popMode to return to the "invoking" mode.
+
+*/
+mode COMMA_WS_MODE ;
+
+COMMA_WS_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
+COMMA_WS_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_WS_NEWLINE_MODE) ;
+
+mode COMMA_WS_NEWLINE_MODE ;
+
+COMMA_WS_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),popMode ;
+COMMA_WS_NEWLINE_SS_WS : SS CONTINUATION_WS ->channel(HIDDEN),popMode,popMode ;
+
+mode COMMA_NEWLINE_MODE ;
+
+COMMA_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
+COMMA_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),popMode ;
+
+mode COMMA_NEWLINE_CM_MODE ;
+
+COMMA_NEWLINE_CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
+COMMA_NEWLINE_CM_NEWLINE : NEWLINE ->channel(HIDDEN),popMode ;
+
+
+
 mode NM ;
 
-JOBLIB : J O B L I B ;
-SYSCHK : S Y S C H K ;
+JOBLIB : J O B L I B ->mode(OP) ;
+SYSCHK : S Y S C H K ->mode(OP) ;
 //NAME_FIELD : NAME (DOT_DFLT NAME)? ->mode(OP) ;
 fragment NM_PART : [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? ;
-NAME_FIELD : NM_PART (DOT_DFLT NM_PART)?  ->mode(OP) ;
+NAME_FIELD : NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();} ->mode(OP) ;
 CONTINUATION_WS : ' '+ {getText().length() <= 13}? 
   {
     switch(cameFromMode) {
@@ -791,122 +826,130 @@ CLASS_VAL : (
 
 mode DD_OP ;
 //TODO make DD_OP work like OUTPUT_STMT
-WS_DD_OP : [ ]+ ->channel(HIDDEN) ;
-NEWLINE_DD_OP : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DD_OP_COMMA : COMMA_DFLT ->type(COMMA) ;
+WS_DD_OP : [ ]+ ->channel(HIDDEN),mode(DD_PARM_MODE) ;
 
-DD_ACCODE : ACCODE_DFLT ->type(ACCODE),mode(ACCODE_MODE) ;
-DD_AMP : AMP_DFLT ->type(AMP),mode(DEFAULT_MODE) ;
-DD_AVGREC : AVGREC_DFLT ->type(AVGREC),mode(DEFAULT_MODE) ;
-DD_ASTERISK : '*' {dlmVals.add("/*"); dlmVals.add("//");} ->type(ASTERISK),mode(DATA_PARM_MODE) ;
-DD_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),mode(DEFAULT_MODE) ;
-DD_BLKSZLIM : BLKSZLIM_DFLT ->type(BLKSZLIM),mode(DEFAULT_MODE) ;
-DD_BURST : BURST_DFLT ->type(BURST),mode(DEFAULT_MODE) ;
-DD_CCSID : CCSID_DFLT ->type(CCSID),mode(DEFAULT_MODE) ;
+mode DD_PARM_MODE ;
+
+DD_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+DD_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
+DD_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+DD_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+DD_COMMA : COMMA_DFLT ->type(COMMA) ;
+DD_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
+DD_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN) ;
+
+DD_ACCODE : ACCODE_DFLT ->type(ACCODE),pushMode(ACCODE_MODE) ;
+DD_AMP : AMP_DFLT ->type(AMP),pushMode(AMP_MODE) ;
+DD_AVGREC : AVGREC_DFLT ->type(AVGREC),pushMode(AVGREC_MODE) ;
+DD_ASTERISK : '*' {dlmVals.add("/*"); dlmVals.add("//");} ->type(ASTERISK),pushMode(DATA_PARM_MODE) ;
+DD_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
+DD_BLKSZLIM : BLKSZLIM_DFLT ->type(BLKSZLIM),pushMode(KYWD_VAL_MODE) ;
+DD_BURST : BURST_DFLT ->type(BURST),pushMode(KYWD_VAL_MODE) ;
+DD_CCSID : CCSID_DFLT ->type(CCSID),pushMode(KYWD_VAL_MODE) ;
 //TODO DD_CHARS setting cameFromMode this way is lame but it works temporarily
-DD_CHARS : CHARS_DFLT {cameFromMode = DEFAULT_MODE;} ->type(CHARS),mode(CHARS_MODE) ;
-DD_CHKPT : CHKPT_DFLT ->type(CHKPT),mode(DEFAULT_MODE) ;
-DD_CNTL : CNTL_DFLT ->type(CNTL),mode(DEFAULT_MODE) ;
-DD_COPIES : COPIES_DFLT ->type(COPIES),mode(DEFAULT_MODE) ;
-DD_DATA : DATA_DFLT {dlmVals.add("/*");} ->type(DATA),mode(DATA_PARM_MODE) ;
-DD_DATACLAS : DATACLAS_DFLT ->type(DATACLAS),mode(DATACLAS_MODE) ;
-DD_DCB : DCB_DFLT ->type(DCB),mode(DCB_MODE) ;
-DD_DDNAME : DDNAME_DFLT ->type(DDNAME),mode(DEFAULT_MODE) ;
-DD_DEST : DEST_DFLT ->type(DEST),mode(DEST_MODE) ;
-DD_DISP : DISP_DFLT ->type(DISP),mode(DEFAULT_MODE) ;
-DD_DLM : DLM_DFLT ->type(DLM),mode(DEFAULT_MODE) ;
-DD_DSID : DSID_DFLT {cameFromMode = _mode;}  ->type(DSID),mode(DSID_MODE) ;
-DD_DSKEYLBL : DSKEYLBL_DFLT ->type(DSKEYLBL),mode(DSKEYLBL_MODE) ;
-DD_DSN : DSN_DFLT {cameFromMode = _mode;}  ->type(DSN),mode(DSN_MODE) ;
-DD_DSNAME : DSNAME_DFLT {cameFromMode = _mode;}  ->type(DSNAME),mode(DSN_MODE) ;
-DD_DSNTYPE : DSNTYPE_DFLT ->type(DSNTYPE),mode(DSNTYPE_MODE) ;
-DD_DUMMY : DUMMY_DFLT ->type(DUMMY),mode(DEFAULT_MODE) ;
-DD_DYNAM : DYNAM_DFLT ->type(DYNAM),mode(DEFAULT_MODE) ;
-DD_EATTR : EATTR_DFLT ->type(EATTR),mode(EATTR_MODE) ;
-DD_EXPDT : EXPDT_DFLT ->type(EXPDT),mode(EXPDT_MODE) ;
-DD_FCB : FCB_DFLT ->type(FCB),mode(FCB_MODE) ;
-DD_FILEDATA : FILEDATA_DFLT ->type(FILEDATA),mode(FILEDATA_MODE) ;
-DD_FLASH : FLASH_DFLT ->type(FLASH),mode(FLASH_MODE) ;
-DD_FREE : FREE_DFLT ->type(FREE),mode(DEFAULT_MODE) ;
-DD_FREEVOL : FREEVOL_DFLT ->type(FREEVOL),mode(DEFAULT_MODE) ;
-DD_GDGORDER : GDGORDER_DFLT ->type(GDGORDER),mode(DEFAULT_MODE) ;
-DD_HOLD : HOLD_DFLT ->type(HOLD),mode(HOLD_MODE) ;
-DD_KEYLABL1 : KEYLABL1_DFLT ->type(KEYLABL1),mode(KEYLABL_MODE) ;
-DD_KEYLABL2 : KEYLABL2_DFLT ->type(KEYLABL2),mode(KEYLABL_MODE) ;
-DD_KEYENCD1 : KEYENCD1_DFLT ->type(KEYENCD1),mode(KEYENCD_MODE) ;
-DD_KEYENCD2 : KEYENCD2_DFLT ->type(KEYENCD2),mode(KEYENCD_MODE) ;
-DD_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),mode(DEFAULT_MODE) ;
-DD_KEYOFF : KEYOFF_DFLT ->type(KEYOFF),mode(DEFAULT_MODE) ;
-DD_LABEL : LABEL_DFLT ->type(LABEL),mode(LABEL_MODE) ;
-DD_LGSTREAM : LGSTREAM_DFLT {cameFromMode = _mode;}  ->type(LGSTREAM),mode(DSN_MODE) ;
-DD_LIKE : LIKE_DFLT {cameFromMode = _mode;}  ->type(LIKE),mode(DSN_MODE) ;
-DD_LRECL : LRECL_DFLT {cameFromMode = _mode;}  ->type(LRECL),mode(LRECL_MODE) ;
-DD_MAXGENS : MAXGENS_DFLT ->type(MAXGENS),mode(DEFAULT_MODE) ;
-DD_MGMTCLAS : MGMTCLAS_DFLT ->type(MGMTCLAS),mode(MGMTCLAS_MODE) ;
-DD_MODIFY : MODIFY_DFLT ->type(MODIFY),mode(MODIFY_MODE) ;
-DD_OUTLIM : OUTLIM_DFLT ->type(OUTLIM),mode(DEFAULT_MODE) ;
-DD_OUTPUT : OUTPUT_DFLT ->type(OUTPUT),mode(OUTPUT_PARM_MODE) ;
-DD_PATH : PATH_DFLT ->type(PATH),mode(PATH_MODE) ;
-DD_PATHDISP : PATHDISP_DFLT ->type(PATHDISP),mode(DEFAULT_MODE) ;
-DD_PATHMODE : PATHMODE_DFLT ->type(PATHMODE),mode(PATHMODE_MODE) ;
-DD_PATHOPTS : PATHOPTS_DFLT ->type(PATHOPTS),mode(PATHOPTS_MODE) ;
-DD_PROTECT : PROTECT_DFLT ->type(PROTECT),mode(PROTECT_MODE) ;
-DD_RECFM : RECFM_DFLT ->type(RECFM),mode(RECFM_MODE) ;
-DD_RECORG : RECORG_DFLT ->type(RECORG),mode(RECORG_MODE) ;
-DD_REFDD : REFDD_DFLT {cameFromMode = _mode;}  ->type(REFDD),mode(DSN_MODE) ;
-DD_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
-DD_RLS : RLS_DFLT ->type(RLS),mode(RLS_MODE) ;
-DD_ROACCESS : ROACCESS_DFLT ->type(ROACCESS),mode(ROACCESS_MODE) ;
-DD_SECMODEL : SECMODEL_DFLT ->type(SECMODEL),mode(SECMODEL_MODE) ;
-DD_SEGMENT : SEGMENT_DFLT ->type(SEGMENT),mode(DEFAULT_MODE) ;
-DD_SPACE : SPACE_DFLT ->type(SPACE),mode(DEFAULT_MODE) ;
-DD_SPIN : SPIN_DFLT ->type(SPIN),mode(DEFAULT_MODE) ;
-DD_STORCLAS : STORCLAS_DFLT ->type(STORCLAS),mode(STORCLAS_MODE) ;
-DD_SUBSYS : SUBSYS_DFLT ->type(SUBSYS),mode(SUBSYS_MODE) ;
-DD_SYMBOLS : SYMBOLS_DFLT {cameFromMode = _mode;}  ->type(SYMBOLS),mode(SYMBOLS_MODE) ;
-DD_SYMLIST : SYMLIST_DFLT {cameFromMode = _mode;}  ->type(SYMLIST),mode(SYMLIST_MODE) ;
-DD_SYSOUT : SYSOUT_DFLT ->type(SYSOUT),mode(SYSOUT_MODE) ;
-DD_TERM : TERM_DFLT ->type(TERM),mode(TERM_MODE) ;
-DD_UCS : UCS_DFLT ->type(UCS),mode(UCS_MODE) ;
-DD_UNIT : UNIT_DFLT ->type(UNIT),mode(UNIT_MODE) ;
-DD_VOL : VOL_DFLT ->type(VOL),mode(VOL_MODE) ;
-DD_VOLUME : VOLUME_DFLT ->type(VOLUME),mode(VOL_MODE) ;
+DD_CHARS : CHARS_DFLT {cameFromMode = DEFAULT_MODE;} ->type(CHARS),pushMode(CHARS_MODE) ;
+DD_CHKPT : CHKPT_DFLT ->type(CHKPT),pushMode(KYWD_VAL_MODE) ;
+DD_CNTL : CNTL_DFLT ->type(CNTL),pushMode(DSN_MODE) ;
+DD_COPIES : COPIES_DFLT ->type(COPIES),pushMode(COPIES_MODE) ;
+DD_DATA : DATA_DFLT {dlmVals.add("/*");} ->type(DATA),pushMode(DATA_PARM_MODE) ;
+DD_DATACLAS : DATACLAS_DFLT ->type(DATACLAS),pushMode(DATACLAS_MODE) ;
+DD_DCB : DCB_DFLT ->type(DCB),pushMode(DCB_MODE) ;
+DD_DDNAME : DDNAME_DFLT ->type(DDNAME),pushMode(DEFAULT_MODE) ;
+DD_DEST : DEST_DFLT ->type(DEST),pushMode(DEST_MODE) ;
+DD_DISP : DISP_DFLT ->type(DISP),pushMode(DISP_MODE) ;
+DD_DLM : DLM_DFLT ->type(DLM),pushMode(DEFAULT_MODE) ;
+DD_DSID : DSID_DFLT {cameFromMode = _mode;}  ->type(DSID),pushMode(DSID_MODE) ;
+DD_DSKEYLBL : DSKEYLBL_DFLT ->type(DSKEYLBL),pushMode(DSKEYLBL_MODE) ;
+DD_DSN : DSN_DFLT {cameFromMode = _mode;}  ->type(DSN),pushMode(DSN_MODE) ;
+DD_DSNAME : DSNAME_DFLT {cameFromMode = _mode;}  ->type(DSNAME),pushMode(DSN_MODE) ;
+DD_DSNTYPE : DSNTYPE_DFLT ->type(DSNTYPE),pushMode(DSNTYPE_MODE) ;
+DD_DUMMY : DUMMY_DFLT ->type(DUMMY) ;
+DD_DYNAM : DYNAM_DFLT ->type(DYNAM) ;
+DD_EATTR : EATTR_DFLT ->type(EATTR),pushMode(EATTR_MODE) ;
+DD_EXPDT : EXPDT_DFLT ->type(EXPDT),pushMode(EXPDT_MODE) ;
+DD_FCB : FCB_DFLT ->type(FCB),pushMode(FCB_MODE) ;
+DD_FILEDATA : FILEDATA_DFLT ->type(FILEDATA),pushMode(FILEDATA_MODE) ;
+DD_FLASH : FLASH_DFLT ->type(FLASH),pushMode(FLASH_MODE) ;
+DD_FREE : FREE_DFLT ->type(FREE),pushMode(KYWD_VAL_MODE) ;
+DD_FREEVOL : FREEVOL_DFLT ->type(FREEVOL),pushMode(KYWD_VAL_MODE) ;
+DD_GDGORDER : GDGORDER_DFLT ->type(GDGORDER),pushMode(KYWD_VAL_MODE) ;
+DD_HOLD : HOLD_DFLT ->type(HOLD),pushMode(HOLD_MODE) ;
+DD_KEYLABL1 : KEYLABL1_DFLT ->type(KEYLABL1),pushMode(KEYLABL_MODE) ;
+DD_KEYLABL2 : KEYLABL2_DFLT ->type(KEYLABL2),pushMode(KEYLABL_MODE) ;
+DD_KEYENCD1 : KEYENCD1_DFLT ->type(KEYENCD1),pushMode(KEYENCD_MODE) ;
+DD_KEYENCD2 : KEYENCD2_DFLT ->type(KEYENCD2),pushMode(KEYENCD_MODE) ;
+DD_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),pushMode(KYWD_VAL_MODE) ;
+DD_KEYOFF : KEYOFF_DFLT ->type(KEYOFF),pushMode(KYWD_VAL_MODE) ;
+DD_LABEL : LABEL_DFLT ->type(LABEL),pushMode(LABEL_MODE) ;
+DD_LGSTREAM : LGSTREAM_DFLT {cameFromMode = _mode;}  ->type(LGSTREAM),pushMode(DSN_MODE) ;
+DD_LIKE : LIKE_DFLT {cameFromMode = _mode;}  ->type(LIKE),pushMode(DSN_MODE) ;
+DD_LRECL : LRECL_DFLT {cameFromMode = _mode;}  ->type(LRECL),pushMode(LRECL_MODE) ;
+DD_MAXGENS : MAXGENS_DFLT ->type(MAXGENS),pushMode(KYWD_VAL_MODE) ;
+DD_MGMTCLAS : MGMTCLAS_DFLT ->type(MGMTCLAS),pushMode(KYWD_VAL_MODE) ;
+DD_MODIFY : MODIFY_DFLT ->type(MODIFY),pushMode(MODIFY_MODE) ;
+DD_OUTLIM : OUTLIM_DFLT ->type(OUTLIM),pushMode(KYWD_VAL_MODE) ;
+DD_OUTPUT : OUTPUT_DFLT ->type(OUTPUT),pushMode(OUTPUT_PARM_MODE) ;
+DD_PATH : PATH_DFLT ->type(PATH),pushMode(PATH_MODE) ;
+DD_PATHDISP : PATHDISP_DFLT ->type(PATHDISP),pushMode(PATHDISP_MODE) ;
+DD_PATHMODE : PATHMODE_DFLT ->type(PATHMODE),pushMode(PATHMODE_MODE) ;
+DD_PATHOPTS : PATHOPTS_DFLT ->type(PATHOPTS),pushMode(PATHOPTS_MODE) ;
+DD_PROTECT : PROTECT_DFLT ->type(PROTECT),pushMode(PROTECT_MODE) ;
+DD_RECFM : RECFM_DFLT ->type(RECFM),pushMode(RECFM_MODE) ;
+DD_RECORG : RECORG_DFLT ->type(RECORG),pushMode(RECORG_MODE) ;
+DD_REFDD : REFDD_DFLT {cameFromMode = _mode;}  ->type(REFDD),pushMode(DSN_MODE) ;
+DD_RETPD : RETPD_DFLT ->type(RETPD),pushMode(RETPD_MODE) ;
+DD_RLS : RLS_DFLT ->type(RLS),pushMode(RLS_MODE) ;
+DD_ROACCESS : ROACCESS_DFLT ->type(ROACCESS),pushMode(ROACCESS_MODE) ;
+DD_SECMODEL : SECMODEL_DFLT ->type(SECMODEL),pushMode(SECMODEL_MODE) ;
+DD_SEGMENT : SEGMENT_DFLT ->type(SEGMENT),pushMode(KYWD_VAL_MODE) ;
+DD_SPACE : SPACE_DFLT ->type(SPACE),pushMode(DEFAULT_MODE) ;
+DD_SPIN : SPIN_DFLT ->type(SPIN),pushMode(KYWD_VAL_MODE) ;
+DD_STORCLAS : STORCLAS_DFLT ->type(STORCLAS),pushMode(KYWD_VAL_MODE) ;
+DD_SUBSYS : SUBSYS_DFLT ->type(SUBSYS),pushMode(SUBSYS_MODE) ;
+DD_SYMBOLS : SYMBOLS_DFLT {cameFromMode = _mode;}  ->type(SYMBOLS),pushMode(SYMBOLS_MODE) ;
+DD_SYMLIST : SYMLIST_DFLT {cameFromMode = _mode;}  ->type(SYMLIST),pushMode(SYMLIST_MODE) ;
+DD_SYSOUT : SYSOUT_DFLT ->type(SYSOUT),pushMode(SYSOUT_MODE) ;
+DD_TERM : TERM_DFLT ->type(TERM),pushMode(TERM_MODE) ;
+DD_UCS : UCS_DFLT ->type(UCS),pushMode(UCS_MODE) ;
+DD_UNIT : UNIT_DFLT ->type(UNIT),pushMode(UNIT_MODE) ;
+DD_VOL : VOL_DFLT ->type(VOL),pushMode(VOL_MODE) ;
+DD_VOLUME : VOLUME_DFLT ->type(VOLUME),pushMode(VOL_MODE) ;
 
-DD_BFALN : BFALN_DFLT ->type(BFALN),mode(DEFAULT_MODE) ;
-DD_BFTEK : BFTEK_DFLT ->type(BFTEK),mode(DEFAULT_MODE) ;
-//DD_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),mode(DEFAULT_MODE) ;
-DD_BUFIN : BUFIN_DFLT ->type(BUFIN),mode(DEFAULT_MODE) ;
-DD_BUFL : BUFL_DFLT ->type(BUFL),mode(DEFAULT_MODE) ;
-DD_BUFMAX : BUFMAX_DFLT ->type(BUFL),mode(DEFAULT_MODE) ;
-DD_BUFNO : BUFNO_DFLT ->type(BUFNO),mode(DEFAULT_MODE) ;
-DD_BUFOFF : BUFOFF_DFLT ->type(BUFOFF),mode(DEFAULT_MODE) ;
-DD_BUFOUT : BUFOUT_DFLT ->type(BUFOUT),mode(DEFAULT_MODE) ;
-DD_BUFSIZE : BUFSIZE_DFLT ->type(BUFSIZE),mode(DEFAULT_MODE) ;
-DD_CPRI : CPRI_DFLT ->type(CPRI),mode(DEFAULT_MODE) ;
-DD_CYLOFL : CYLOFL_DFLT ->type(CYLOFL),mode(DEFAULT_MODE) ;
-DD_DEN : DEN_DFLT ->type(DEN),mode(DEFAULT_MODE) ;
-DD_DIAGNS : DIAGNS_DFLT ->type(DIAGNS),mode(DEFAULT_MODE) ;
-DD_DSORG : DSORG_DFLT ->type(DSORG),mode(DSORG_MODE) ;
-DD_EROPT : EROPT_DFLT ->type(EROPT),mode(EROPT_MODE) ;
-DD_FUNC : FUNC_DFLT ->type(FUNC),mode(FUNC_MODE) ;
-DD_GNCP : GNCP_DFLT ->type(GNCP),mode(DEFAULT_MODE) ;
-DD_INTVL : INTVL_DFLT ->type(INTVL),mode(DEFAULT_MODE) ;
-DD_IPLTXID : IPLTXID_DFLT ->type(IPLTXID),mode(DEFAULT_MODE) ;
-//DD_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),mode(DEFAULT_MODE) ;
-DD_LIMCT : LIMCT_DFLT ->type(LIMCT),mode(DEFAULT_MODE) ;
-//DD_LRECL : LRECL_DFLT ->type(LRECL),mode(DEFAULT_MODE) ;
-DD_MODE : MODE_DFLT {cameFromMode = _mode;}  ->type(MODE),mode(MODE_MODE) ; 
-DD_NCP : NCP_DFLT ->type(NCP),mode(DEFAULT_MODE) ;
-DD_NTM : NTM_DFLT ->type(NTM),mode(DEFAULT_MODE) ;
-DD_OPTCD : OPTCD_DFLT ->type(OPTCD),mode(OPTCD_MODE) ;
-DD_PCI : PCI_DFLT ->type(PCI),mode(PCI_MODE) ;
-DD_PRTSP : PRTSP_DFLT ->type(PRTSP),mode(DEFAULT_MODE) ;
-//DD_RECFM : RECFM_DFLT ->type(RECFM),mode(DEFAULT_MODE) ;
-DD_RESERVE : RESERVE_DFLT ->type(RESERVE),mode(RESERVE_MODE) ;
-DD_RKP : RKP_DFLT ->type(RKP),mode(DEFAULT_MODE) ;
-DD_STACK : STACK_DFLT ->type(STACK),mode(DEFAULT_MODE) ;
-DD_THRESH : THRESH_DFLT ->type(THRESH),mode(DEFAULT_MODE) ;
-DD_TRTCH : TRTCH_DFLT ->type(TRTCH),mode(TRTCH_MODE) ;
+DD_BFALN : BFALN_DFLT ->type(BFALN),pushMode(BFALN_MODE) ;
+DD_BFTEK : BFTEK_DFLT ->type(BFTEK),pushMode(KYWD_VAL_MODE) ;
+//DD_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
+DD_BUFIN : BUFIN_DFLT ->type(BUFIN),pushMode(BUFIN_MODE) ;
+DD_BUFL : BUFL_DFLT ->type(BUFL),pushMode(BUFL_MODE) ;
+DD_BUFMAX : BUFMAX_DFLT ->type(BUFMAX),pushMode(BUFMAX_MODE) ;
+DD_BUFNO : BUFNO_DFLT ->type(BUFNO),pushMode(BUFNO_MODE) ;
+DD_BUFOFF : BUFOFF_DFLT ->type(BUFOFF),pushMode(BUFOFF_MODE) ;
+DD_BUFOUT : BUFOUT_DFLT ->type(BUFOUT),pushMode(BUFOUT_MODE) ;
+DD_BUFSIZE : BUFSIZE_DFLT ->type(BUFSIZE),pushMode(BUFSIZE_MODE) ;
+DD_CPRI : CPRI_DFLT ->type(CPRI),pushMode(KYWD_VAL_MODE) ;
+DD_CYLOFL : CYLOFL_DFLT ->type(CYLOFL),pushMode(KYWD_VAL_MODE) ;
+DD_DEN : DEN_DFLT ->type(DEN),pushMode(KYWD_VAL_MODE) ;
+DD_DIAGNS : DIAGNS_DFLT ->type(DIAGNS),pushMode(KYWD_VAL_MODE) ;
+DD_DSORG : DSORG_DFLT ->type(DSORG),pushMode(DSORG_MODE) ;
+DD_EROPT : EROPT_DFLT ->type(EROPT),pushMode(EROPT_MODE) ;
+DD_FUNC : FUNC_DFLT ->type(FUNC),pushMode(FUNC_MODE) ;
+DD_GNCP : GNCP_DFLT ->type(GNCP),pushMode(KYWD_VAL_MODE) ;
+DD_INTVL : INTVL_DFLT ->type(INTVL),pushMode(KYWD_VAL_MODE) ;
+DD_IPLTXID : IPLTXID_DFLT ->type(IPLTXID),pushMode(KYWD_VAL_MODE) ;
+//DD_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),pushMode(KYWD_VAL_MODE) ;
+DD_LIMCT : LIMCT_DFLT ->type(LIMCT),pushMode(KYWD_VAL_MODE) ;
+//DD_LRECL : LRECL_DFLT ->type(LRECL),pushMode(KYWD_VAL_MODE) ;
+DD_MODE : MODE_DFLT {cameFromMode = _mode;}  ->type(MODE),pushMode(MODE_MODE) ; 
+DD_NCP : NCP_DFLT ->type(NCP),pushMode(KYWD_VAL_MODE) ;
+DD_NTM : NTM_DFLT ->type(NTM),pushMode(KYWD_VAL_MODE) ;
+DD_OPTCD : OPTCD_DFLT ->type(OPTCD),pushMode(OPTCD_MODE) ;
+DD_PCI : PCI_DFLT ->type(PCI),pushMode(PCI_MODE) ;
+DD_PRTSP : PRTSP_DFLT ->type(PRTSP),pushMode(KYWD_VAL_MODE) ;
+//DD_RECFM : RECFM_DFLT ->type(RECFM),pushMode(KYWD_VAL_MODE) ;
+DD_RESERVE : RESERVE_DFLT ->type(RESERVE),pushMode(KYWD_VAL_MODE) ;
+DD_RKP : RKP_DFLT ->type(RKP),pushMode(KYWD_VAL_MODE) ;
+DD_STACK : STACK_DFLT ->type(STACK),pushMode(KYWD_VAL_MODE) ;
+DD_THRESH : THRESH_DFLT ->type(THRESH),pushMode(KYWD_VAL_MODE) ;
+DD_TRTCH : TRTCH_DFLT ->type(TRTCH),pushMode(TRTCH_MODE) ;
 
 mode OUTPUT_STMT_MODE ;
 
@@ -922,22 +965,22 @@ OUTPUT_STMT_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE
 OUTPUT_STMT_PARM_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
 OUTPUT_STMT_COMMA : COMMA_DFLT ->type(COMMA) ;
 
-OUTPUT_STMT_ADDRESS : A D D R E S S {cameFromMode = _mode;} ->pushMode(OUTPUT_ADDRESS_MODE) ;
+OUTPUT_STMT_ADDRESS : A D D R E S S ->pushMode(OUTPUT_ADDRESS_MODE) ;
 OUTPUT_STMT_AFPPARMS : A F P P A R M S {cameFromMode = _mode;} ->mode(DSN_MODE) ;
-OUTPUT_STMT_AFPSTATS : A F P S T A T S ;
-OUTPUT_STMT_BUILDING : B U I L D I N G ;
-OUTPUT_STMT_BURST : B U R S T ;
+OUTPUT_STMT_AFPSTATS : A F P S T A T S ->pushMode(OUTPUT_AFPSTATS_MODE) ;
+OUTPUT_STMT_BUILDING : B U I L D I N G ->pushMode(OUTPUT_BUILDING_MODE) ;
+OUTPUT_STMT_BURST : B U R S T ->pushMode(OUTPUT_BURST_MODE) ;
 OUTPUT_STMT_CHARS : C H A R S {cameFromMode = _mode;} ->mode(CHARS_MODE) ;
-OUTPUT_STMT_CKPTLINE : C K P T L I N E ;
-OUTPUT_STMT_CKPTPAGE : C K P T P A G E ;
-OUTPUT_STMT_CKPTSEC : C K P T S E C ;
-OUTPUT_STMT_CLASS : C L A S S {cameFromMode = _mode;} ->pushMode(OUTPUT_CLASS_MODE) ;
-OUTPUT_STMT_COLORMAP : C O L O R M A P ;
-OUTPUT_STMT_COMPACT : C O M P A C T ;
-OUTPUT_STMT_COMSETUP : C O M S E T U P;
-OUTPUT_STMT_CONTROL : C O N T R O L ;
-OUTPUT_STMT_COPIES : C O P I E S ;
-OUTPUT_STMT_COPYCNT : C O P Y C N T ;
+OUTPUT_STMT_CKPTLINE : C K P T L I N E ->pushMode(OUTPUT_CKPTLINE_MODE) ;
+OUTPUT_STMT_CKPTPAGE : C K P T P A G E ->pushMode(OUTPUT_CKPTPAGE_MODE) ;
+OUTPUT_STMT_CKPTSEC : C K P T S E C ->pushMode(OUTPUT_CKPTSEC_MODE) ;
+OUTPUT_STMT_CLASS : C L A S S ->pushMode(OUTPUT_CLASS_MODE) ;
+OUTPUT_STMT_COLORMAP : C O L O R M A P ->pushMode(OUTPUT_COLORMAP_MODE) ;
+OUTPUT_STMT_COMPACT : C O M P A C T ->pushMode(OUTPUT_COMPACT_MODE) ;
+OUTPUT_STMT_COMSETUP : C O M S E T U P ->pushMode(OUTPUT_COMSETUP_MODE) ;
+OUTPUT_STMT_CONTROL : C O N T R O L ->pushMode(OUTPUT_CONTROL_MODE) ;
+OUTPUT_STMT_COPIES : C O P I E S ->pushMode(COPIES_MODE) ;
+OUTPUT_STMT_COPYCNT : C O P Y C N T ->pushMode(OUTPUT_COPYCNT_MODE) ;
 OUTPUT_STMT_DATACK : D A T A C K ;
 OUTPUT_STMT_DDNAME : D D N A M E ;
 OUTPUT_STMT_DEFAULT : D E F A U L T {cameFromMode = _mode;} ->pushMode(OUTPUT_DEFAULT_MODE) ;
@@ -1013,7 +1056,7 @@ mode OUTPUT_ADDRESS_MODE ;
 OUTPUT_ADDRESS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 OUTPUT_ADDRESS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(OUTPUT_ADDRESS_PAREN_MODE) ;
 OUTPUT_ADDRESS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-OUTPUT_ADDRESS_VALUE : [A-Z0-9@#$*-+./] ->popMode ;
+OUTPUT_ADDRESS_VALUE : [A-Z0-9@#$*-+./]+ ->popMode ;
 OUTPUT_ADDRESS_SQUOTE : '\'' 
     {
       /*
@@ -1059,23 +1102,55 @@ OUTPUT_ADDRESS_PAREN_NEWLINE : NEWLINE
       mode(GLOBAL_PAREN_CONT_MODE);
     } ->channel(HIDDEN);
 OUTPUT_ADDRESS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-OUTPUT_ADDRESS_PAREN_VALUE : OUTPUT_ADDRESS_VALUE ;
+OUTPUT_ADDRESS_PAREN_VALUE : OUTPUT_ADDRESS_VALUE ->type(OUTPUT_ADDRESS_VALUE) ;
 OUTPUT_ADDRESS_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
+mode OUTPUT_AFPSTATS_MODE ;
 
-mode OUTPUT_JESDS_MODE ;
+OUTPUT_AFPSTATS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_AFPSTATS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_AFPSTATS_VALUE : OUTPUT_Y_N_VALUE ->popMode ;
 
-OUTPUT_JESDS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-OUTPUT_JESDS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-OUTPUT_JESDS_VALUE : (OUTPUT_JESDS_ALL | OUTPUT_JESDS_LOG | OUTPUT_JESDS_JCL | OUTPUT_JESDS_MSG) ->popMode ;
+mode OUTPUT_BUILDING_MODE ;
 
-fragment OUTPUT_JESDS_ALL : A L L ;
-fragment OUTPUT_JESDS_LOG : L O G ;
-fragment OUTPUT_JESDS_JCL : J C L ;
-fragment OUTPUT_JESDS_MSG : M S G ;
+OUTPUT_BUILDING_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_BUILDING_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_BUILDING_VALUE : [A-Z0-9@#$*\-+&./]+ ->popMode ;
+OUTPUT_BUILDING_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+
+mode OUTPUT_BURST_MODE ;
+
+OUTPUT_BURST_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_BURST_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_BURST_VALUE : OUTPUT_Y_N_VALUE ->popMode ;
+
+mode OUTPUT_CKPTLINE_MODE ;
+
+OUTPUT_CKPTLINE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_CKPTLINE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_CKPTLINE_VALUE : [0-9]+ ->popMode ;
+
+mode OUTPUT_CKPTPAGE_MODE ;
+
+OUTPUT_CKPTPAGE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_CKPTPAGE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_CKPTPAGE_VALUE : [0-9]+ ->popMode ;
+
+mode OUTPUT_CKPTSEC_MODE ;
+
+OUTPUT_CKPTSEC_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_CKPTSEC_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_CKPTSEC_VALUE : [0-9]+ ->popMode ;
 
 mode OUTPUT_CLASS_MODE ;
-
+//TODO CLASS= is syntactically valid
 OUTPUT_CLASS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 OUTPUT_CLASS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 OUTPUT_CLASS_VALUE : [A-Z0-9*] ->popMode ;
@@ -1088,11 +1163,78 @@ OUTPUT_CLASS_SQUOTE : '\''
       cameFromMode = _mode;
     } ->channel(HIDDEN),pushMode(QS) ;
 
+mode OUTPUT_COLORMAP_MODE ;
+
+OUTPUT_COLORMAP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_COLORMAP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_COLORMAP_VALUE : [A-Z0-9@#$]+ ->popMode ;
+
+mode OUTPUT_COMPACT_MODE ;
+
+OUTPUT_COMPACT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_COMPACT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_COMPACT_VALUE : [A-Z0-9]+ ->popMode ;
+
+mode OUTPUT_COMSETUP_MODE ;
+
+OUTPUT_COMSETUP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_COMSETUP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_COMSETUP_VALUE : [A-Z0-9@#$]+ ->popMode ;
+
+mode OUTPUT_CONTROL_MODE ;
+
+OUTPUT_CONTROL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_CONTROL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_CONTROL_VALUE : (
+    OUTPUT_CONTROL_PROGRAM |
+    OUTPUT_CONTROL_SINGLE |
+    OUTPUT_CONTROL_DOUBLE |
+    OUTPUT_CONTROL_TRIPLE
+  ) ->popMode ;
+
+fragment OUTPUT_CONTROL_PROGRAM : P R O G R A M ;
+fragment OUTPUT_CONTROL_SINGLE : S I N G L E ;
+fragment OUTPUT_CONTROL_DOUBLE : D O U B L E ;
+fragment OUTPUT_CONTROL_TRIPLE : T R I P L E ;
+
+mode OUTPUT_COPYCNT_MODE ;
+
+OUTPUT_COPYCNT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_COPYCNT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_COPYCNT_VALUE : [0-9]+ ->popMode ;
+
+mode OUTPUT_DATACK_MODE ;
+
+OUTPUT_DATACK_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_DATACK_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_DATACK_VALUE : (
+    OUTPUT_DATACK_BLOCK |
+    OUTPUT_DATACK_UNBLOCK |
+    OUTPUT_DATACK_BLKCHAR |
+    OUTPUT_DATACK_BLKPOS
+  ) ->popMode ;
+
+fragment OUTPUT_DATACK_BLOCK : B L O C K ;
+fragment OUTPUT_DATACK_UNBLOCK : U N B L O C K ;
+fragment OUTPUT_DATACK_BLKCHAR : B L K C H A R ;
+fragment OUTPUT_DATACK_BLKPOS : B L K P O S ;
+
 mode OUTPUT_DEFAULT_MODE ;
 
 OUTPUT_DEFAULT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 OUTPUT_DEFAULT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 OUTPUT_DEFAULT_VALUE : OUTPUT_Y_N_VALUE ->popMode ;
+
+mode OUTPUT_JESDS_MODE ;
+
+OUTPUT_JESDS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+OUTPUT_JESDS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+OUTPUT_JESDS_VALUE : (OUTPUT_JESDS_ALL | OUTPUT_JESDS_LOG | OUTPUT_JESDS_JCL | OUTPUT_JESDS_MSG) ->popMode ;
+
+fragment OUTPUT_JESDS_ALL : A L L ;
+fragment OUTPUT_JESDS_LOG : L O G ;
+fragment OUTPUT_JESDS_JCL : J C L ;
+fragment OUTPUT_JESDS_MSG : M S G ;
 
 mode DATA_PARM_MODE ;
 
@@ -1108,7 +1250,7 @@ DATA_PARM_COMMA : COMMA_DFLT ->type(COMMA) ;
 
 DATA_PARM_MODE_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE) ;
 DATA_PARM_MODE_BUFNO : BUFNO_DFLT ->type(BUFNO) ;
-DATA_PARM_MODE_DCB : DCB_DFLT ->type(DCB) ;
+DATA_PARM_MODE_DCB : DCB_DFLT ->type(DCB),pushMode(DCB_MODE) ;
 DATA_PARM_MODE_DIAGNS : DIAGNS_DFLT ->type(DIAGNS) ;
 DATA_PARM_MODE_DLM : DLM_DFLT ->type(DLM),mode(DLM_MODE) ;
 DATA_PARM_MODE_DSID : DSID_DFLT {cameFromMode = _mode;}  ->type(DSID),mode(DSID_MODE) ;
@@ -1118,15 +1260,15 @@ DATA_PARM_MODE_LIKE : LIKE_DFLT {cameFromMode = _mode;}  ->type(LIKE),mode(DSN_M
 DATA_PARM_MODE_LRECL : LRECL_DFLT {cameFromMode = _mode;}  ->type(LRECL),mode(LRECL_MODE) ;
 DATA_PARM_MODE_REFDD : REFDD_DFLT {cameFromMode = _mode;}  ->type(REFDD),mode(DSN_MODE) ;
 DATA_PARM_MODE_MODE : MODE_DFLT {cameFromMode = _mode;}  ->type(MODE),mode(MODE_MODE) ;
-DATA_PARM_MODE_VOL : VOL_DFLT {cameFromMode = _mode;}  ->type(VOL),mode(VOL_MODE) ;
-DATA_PARM_MODE_VOLUME : VOLUME_DFLT {cameFromMode = _mode;}  ->type(VOLUME),mode(VOL_MODE) ;
+DATA_PARM_MODE_VOL : VOL_DFLT {cameFromMode = _mode;}  ->type(VOL),pushMode(VOL_MODE) ;
+DATA_PARM_MODE_VOLUME : VOLUME_DFLT {cameFromMode = _mode;}  ->type(VOLUME),pushMode(VOL_MODE) ;
 DATA_PARM_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DATA_PARM_MODE_SYMBOLS : SYMBOLS_DFLT {cameFromMode = _mode;}  ->type(SYMBOLS),mode(SYMBOLS_MODE) ; 
+DATA_PARM_MODE_SYMBOLS : SYMBOLS_DFLT {cameFromMode = _mode;}  ->type(SYMBOLS),pushMode(SYMBOLS_MODE) ; 
 //DATA_PARM_MODE_CNVTSYS : CNVTSYS_DFLT ->type(CNVTSYS) ;
 //DATA_PARM_MODE_EXECSYS : EXECSYS_DFLT ->type(EXECSYS) ;
 //DATA_PARM_MODE_JCLONLY : JCLONLY_DFLT ->type(JCLONLY) ;
 //DATA_PARM_MODE_LOGGING_DDNAME : NAME -> type(LOGGING_DDNAME) ;
-DATA_PARM_MODE_SYMLIST : SYMLIST_DFLT {cameFromMode = _mode;}  ->type(SYMLIST),mode(SYMLIST_MODE) ; 
+DATA_PARM_MODE_SYMLIST : SYMLIST_DFLT {cameFromMode = _mode;}  ->type(SYMLIST),pushMode(SYMLIST_MODE) ; 
 DATA_PARM_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
 DATA_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
 DATA_PARM_RPAREN : RPAREN_DFLT ->type(RPAREN) ;
@@ -1231,9 +1373,38 @@ mode QS ;
 fragment SQUOTE2_QS : SQUOTE SQUOTE ;
 SQUOTE_QS : SQUOTE
     {
+      //TODO think about using _modeStack.peek()
       switch(cameFromMode) {
         case OUTPUT_CLASS_MODE :
         case OUTPUT_ADDRESS_MODE :
+        case OUTPUT_BUILDING_MODE :
+        case ACCODE_MODE :
+        case AMP_MODE :
+        case DEST_MODE :
+        case DSKEYLBL_MODE :
+        case KEYLABL_MODE :
+        case PATH_MODE :
+        case SYSOUT_MODE :
+        case VOL_REF1_MODE :
+        case KYWD_VAL_MODE :
+        case SYMLIST_MODE :
+        case DCB_MODE :
+            cameFromMode = DEFAULT_MODE;
+            popMode();
+            popMode();
+            break;
+        case VOL_SER1_MODE :
+            cameFromMode = DEFAULT_MODE;
+            popMode();
+            popMode();
+            popMode();
+            break;
+        case VOL_REF2_MODE :
+            cameFromMode = DEFAULT_MODE;
+            popMode();
+            popMode();
+            popMode();
+            popMode();
             popMode();
             popMode();
             break;
@@ -1417,50 +1588,68 @@ DSN_ASTERISK_MODE_NEWLINE : [\n\r]
 
 mode DCB_MODE ;
 
-DCB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
-DCB_MODE_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
-DCB_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DCB_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
-DCB_MODE_COMMA : COMMA_DFLT ->type(COMMA) ;
-DCB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DCB_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+//DCB_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN) ;
+//DCB_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
+//DD_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+//DD_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 
-DCB_MODE_DCB_BFALN : BFALN_DFLT ->type(BFALN),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BFTEK : BFTEK_DFLT ->type(BFTEK),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFIN : BUFIN_DFLT ->type(BUFIN),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFL : BUFL_DFLT ->type(BUFL),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFMAX : BUFMAX_DFLT ->type(BUFL),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFNO : BUFNO_DFLT ->type(BUFNO),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFOFF : BUFOFF_DFLT ->type(BUFOFF),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFOUT : BUFOUT_DFLT ->type(BUFOUT),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_BUFSIZE : BUFSIZE_DFLT ->type(BUFSIZE),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_CPRI : CPRI_DFLT ->type(CPRI),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_CYLOFL : CYLOFL_DFLT ->type(CYLOFL),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB : DCB_DFLT ->type(DCB) ;
-DCB_MODE_DCB_DEN : DEN_DFLT ->type(DEN),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_DIAGNS : DIAGNS_DFLT ->type(DIAGNS),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_DSORG : DSORG_DFLT ->type(DSORG),mode(DSORG_MODE) ;
-DCB_MODE_DCB_EROPT : EROPT_DFLT ->type(EROPT),mode(EROPT_MODE) ;
-DCB_MODE_DCB_FUNC : FUNC_DFLT ->type(FUNC),mode(FUNC_MODE) ;
-DCB_MODE_DCB_GNCP : GNCP_DFLT ->type(GNCP),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_INTVL : INTVL_DFLT ->type(INTVL),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_IPLTXID : IPLTXID_DFLT ->type(IPLTXID),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_LIMCT : LIMCT_DFLT ->type(LIMCT),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_LRECL : LRECL_DFLT ->type(LRECL),mode(LRECL_MODE) ;
-DCB_MODE_DCB_MODE : MODE_DFLT ->type(MODE),mode(MODE_MODE) ; 
-DCB_MODE_DCB_NCP : NCP_DFLT ->type(NCP),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_NTM : NTM_DFLT ->type(NTM),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_OPTCD : OPTCD_DFLT ->type(OPTCD),mode(OPTCD_MODE) ;
-DCB_MODE_DCB_PCI : PCI_DFLT ->type(PCI),mode(PCI_MODE) ;
-DCB_MODE_DCB_PRTSP : PRTSP_DFLT ->type(PRTSP),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_RECFM : RECFM_DFLT ->type(RECFM),mode(RECFM_MODE) ;
-DCB_MODE_DCB_RESERVE : RESERVE_DFLT ->type(RESERVE),mode(RESERVE_MODE) ;
-DCB_MODE_DCB_RKP : RKP_DFLT ->type(RKP),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_STACK : STACK_DFLT ->type(STACK),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_THRESH : THRESH_DFLT ->type(THRESH),mode(DEFAULT_MODE) ;
-DCB_MODE_DCB_TRTCH : TRTCH_DFLT ->type(TRTCH),mode(TRTCH_MODE) ;
+DCB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DCB_PAREN_MODE) ;
+DCB_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+DCB_MODE_SQUOTE : SQUOTE {cameFromMode = _mode;} ->channel(HIDDEN),pushMode(QS) ;
+//DCB_MODE_COMMA : COMMA_DFLT ->type(COMMA),popMode ;
+//DCB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+//DCB_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+
+/*
+
+Note how the mode switching works.  In DCB_MODE modes are switched via
+the mode command.  In DCB_PAREN_MODE modes are switched via the pushMode
+command.
+
+In the former case, the popMode doesn't send us back here, it
+sends us back to where we came from to get here because we will only ever
+have one of the following parameters specified.
+
+In the latter case, we've encountered a left paren indicating we should 
+stay in DCB_PAREN_MODE until a right paren is encountered.
+
+*/
+
+DCB_BFALN : BFALN_DFLT ->type(BFALN),mode(BFALN_MODE) ;
+DCB_BFTEK : BFTEK_DFLT ->type(BFTEK),mode(KYWD_VAL_MODE) ;
+DCB_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),mode(KYWD_VAL_MODE) ;
+DCB_BUFIN : BUFIN_DFLT ->type(BUFIN),mode(BUFIN_MODE) ;
+DCB_BUFL : BUFL_DFLT ->type(BUFL),mode(BUFL_MODE) ;
+DCB_BUFMAX : BUFMAX_DFLT ->type(BUFMAX),mode(BUFMAX_MODE) ;
+DCB_BUFNO : BUFNO_DFLT ->type(BUFNO),mode(BUFNO_MODE) ;
+DCB_BUFOFF : BUFOFF_DFLT ->type(BUFOFF),mode(BUFOFF_MODE) ;
+DCB_BUFOUT : BUFOUT_DFLT ->type(BUFOUT),mode(BUFOUT_MODE) ;
+DCB_BUFSIZE : BUFSIZE_DFLT ->type(BUFSIZE),mode(BUFSIZE_MODE) ;
+DCB_CPRI : CPRI_DFLT ->type(CPRI),mode(KYWD_VAL_MODE) ;
+DCB_CYLOFL : CYLOFL_DFLT ->type(CYLOFL),mode(KYWD_VAL_MODE) ;
+DCB_DEN : DEN_DFLT ->type(DEN),mode(KYWD_VAL_MODE) ;
+DCB_DIAGNS : DIAGNS_DFLT ->type(DIAGNS),mode(KYWD_VAL_MODE) ;
+DCB_DSORG : DSORG_DFLT ->type(DSORG),mode(DSORG_MODE) ;
+DCB_EROPT : EROPT_DFLT ->type(EROPT),mode(EROPT_MODE) ;
+DCB_FUNC : FUNC_DFLT ->type(FUNC),mode(FUNC_MODE) ;
+DCB_GNCP : GNCP_DFLT ->type(GNCP),mode(KYWD_VAL_MODE) ;
+DCB_INTVL : INTVL_DFLT ->type(INTVL),mode(KYWD_VAL_MODE) ;
+DCB_IPLTXID : IPLTXID_DFLT ->type(IPLTXID),mode(KYWD_VAL_MODE) ;
+DCB_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),mode(KYWD_VAL_MODE) ;
+DCB_LIMCT : LIMCT_DFLT ->type(LIMCT),mode(KYWD_VAL_MODE) ;
+DCB_LRECL : LRECL_DFLT ->type(LRECL),mode(LRECL_MODE) ;
+DCB_MODE : MODE_DFLT ->type(MODE),mode(MODE_MODE) ; 
+DCB_NCP : NCP_DFLT ->type(NCP),mode(KYWD_VAL_MODE) ;
+DCB_NTM : NTM_DFLT ->type(NTM),mode(KYWD_VAL_MODE) ;
+DCB_OPTCD : OPTCD_DFLT ->type(OPTCD),mode(OPTCD_MODE) ;
+DCB_PCI : PCI_DFLT ->type(PCI),mode(PCI_MODE) ;
+DCB_PRTSP : PRTSP_DFLT ->type(PRTSP),mode(KYWD_VAL_MODE) ;
+DCB_RECFM : RECFM_DFLT ->type(RECFM),mode(RECFM_MODE) ;
+DCB_RESERVE : RESERVE_DFLT ->type(RESERVE),mode(KYWD_VAL_MODE) ;
+DCB_RKP : RKP_DFLT ->type(RKP),mode(KYWD_VAL_MODE) ;
+DCB_STACK : STACK_DFLT ->type(STACK),mode(KYWD_VAL_MODE) ;
+DCB_THRESH : THRESH_DFLT ->type(THRESH),mode(KYWD_VAL_MODE) ;
+DCB_TRTCH : TRTCH_DFLT ->type(TRTCH),mode(TRTCH_MODE) ;
 
 /*
 This pattern is _very_ inclusive.  Consider...
@@ -1471,7 +1660,7 @@ LIB.&SYSUID
 MASTER.FILE.%%ODATE
 
 */
-DCB_MODE_DATASET_NAME : (
+DCB_DATASET_NAME : (
     NULLFILE |
     (AMPERSAND AMPERSAND NAME) | 
     (
@@ -1479,21 +1668,90 @@ DCB_MODE_DATASET_NAME : (
           (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')+
     )
   )
-  ->mode(DEFAULT_MODE),type(DATASET_NAME) 
-  ; //TODO remove mode(DEFAULT_MODE) ?
+  ->type(DATASET_NAME),popMode
+  ; 
 
-DCB_MODE_ASTERISK : ASTERISK ->type(ASTERISK),mode(DCB_ASTERISK_MODE) ;
+//DCB_ASTERISK : ASTERISK ->type(ASTERISK),mode(DCB_ASTERISK_MODE) ;
 
-//DCB_MODE_REFERBACK : ASTERISK DOT_DFLT NAME (DOT_DFLT NAME)? (DOT_DFLT NAME)? ->type(REFERBACK),mode(DEFAULT_MODE) ;
+DCB_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(REFERBACK),popMode ;
 
 mode DCB_ASTERISK_MODE ;
 
-DCB_ASTERISK_MODE_NAME : NAME ->type(NAME) ;
-DCB_ASTERISK_MODE_DOT : DOT_DFLT ->type(DOT) ;
-DCB_ASTERISK_MODE_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DCB_ASTERISK_MODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DCB_ASTERISK_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+DCB_ASTERISK_NAME : NAME ->type(NAME) ;
+DCB_ASTERISK_DOT : DOT_DFLT ->type(DOT) ;
+DCB_ASTERISK_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
+DCB_ASTERISK_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+DCB_ASTERISK_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
+mode DCB_PAREN_MODE ;
+
+DCB_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+DCB_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+DCB_PAREN_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+DCB_PAREN_COMMENT_FLAG_INLINE : 
+    COMMENT_FLAG_INLINE
+    {returnToMode = _mode;} 
+    ->type(COMMENT_FLAG_INLINE),mode(GLOBAL_PAREN_MODE_CM)
+  ;
+DCB_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+
+DCB_PAREN_BFALN : BFALN_DFLT ->type(BFALN),pushMode(BFALN_MODE) ;
+DCB_PAREN_BFTEK : BFTEK_DFLT ->type(BFTEK),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BLKSIZE : BLKSIZE_DFLT ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFIN : BUFIN_DFLT ->type(BUFIN),pushMode(BUFIN_MODE) ;
+DCB_PAREN_BUFL : BUFL_DFLT ->type(BUFL),pushMode(BUFL_MODE) ;
+DCB_PAREN_BUFMAX : BUFMAX_DFLT ->type(BUFMAX),pushMode(BUFMAX_MODE) ;
+DCB_PAREN_BUFNO : BUFNO_DFLT ->type(BUFNO),pushMode(BUFNO_MODE) ;
+DCB_PAREN_BUFOFF : BUFOFF_DFLT ->type(BUFOFF),pushMode(BUFOFF_MODE) ;
+DCB_PAREN_BUFOUT : BUFOUT_DFLT ->type(BUFOUT),pushMode(BUFOUT_MODE) ;
+DCB_PAREN_BUFSIZE : BUFSIZE_DFLT ->type(BUFSIZE),pushMode(BUFSIZE_MODE) ;
+DCB_PAREN_CPRI : CPRI_DFLT ->type(CPRI),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_CYLOFL : CYLOFL_DFLT ->type(CYLOFL),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_DEN : DEN_DFLT ->type(DEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_DIAGNS : DIAGNS_DFLT ->type(DIAGNS),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_DSORG : DSORG_DFLT ->type(DSORG),pushMode(DSORG_MODE) ;
+DCB_PAREN_EROPT : EROPT_DFLT ->type(EROPT),pushMode(EROPT_MODE) ;
+DCB_PAREN_FUNC : FUNC_DFLT ->type(FUNC),pushMode(FUNC_MODE) ;
+DCB_PAREN_GNCP : GNCP_DFLT ->type(GNCP),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_INTVL : INTVL_DFLT ->type(INTVL),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_IPLTXID : IPLTXID_DFLT ->type(IPLTXID),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_KEYLEN : KEYLEN_DFLT ->type(KEYLEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_LIMCT : LIMCT_DFLT ->type(LIMCT),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_LRECL : LRECL_DFLT ->type(LRECL),pushMode(LRECL_MODE) ;
+DCB_PAREN_MODE : MODE_DFLT ->type(MODE),pushMode(MODE_MODE) ; 
+DCB_PAREN_NCP : NCP_DFLT ->type(NCP),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_NTM : NTM_DFLT ->type(NTM),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_OPTCD : OPTCD_DFLT ->type(OPTCD),pushMode(OPTCD_MODE) ;
+DCB_PAREN_PCI : PCI_DFLT ->type(PCI),pushMode(PCI_MODE) ;
+DCB_PAREN_PRTSP : PRTSP_DFLT ->type(PRTSP),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_RECFM : RECFM_DFLT ->type(RECFM),pushMode(RECFM_MODE) ;
+DCB_PAREN_RESERVE : RESERVE_DFLT ->type(RESERVE),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_RKP : RKP_DFLT ->type(RKP),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_STACK : STACK_DFLT ->type(STACK),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_THRESH : THRESH_DFLT ->type(THRESH),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_TRTCH : TRTCH_DFLT ->type(TRTCH),pushMode(TRTCH_MODE) ;
+
+/*
+This pattern is _very_ inclusive.  Consider...
+
+&SYSUID..JCL.CNTL
+LIB.&SYSUID
+&SYSUID.P.&LIB
+MASTER.FILE.%%ODATE
+
+*/
+DCB_PAREN_DATASET_NAME : (
+    NULLFILE |
+    (AMPERSAND AMPERSAND NAME) | 
+    (
+        (AMPERSAND | NATL | ALPHA) 
+          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')+
+    )
+  )
+  ->type(DATASET_NAME)
+  ; 
+
+DCB_PAREN_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(REFERBACK) ;
 
 
 mode MEMBER_MODE ;
@@ -1843,35 +2101,152 @@ mode PARMDD_MODE ;
 PARMDD_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 PARMDD_NAME : NAME ->mode(DEFAULT_MODE) ;
 
+
+mode KYWD_VAL_MODE ;
+
+KYWD_VAL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+KEYWORD_VALUE : [A-Z0-9@#$*\-+&./%[]+ ->popMode ;
+KYWD_VAL_SQUOTE : '\'' 
+    {
+      
+      //  The QS mode knows to popMode twice when it sees that
+      //  cameFromMode = this mode.
+      
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
+/*
+
+The newline, comma newline, and ws tokens are here because some keywords
+can have a null value...
+
+//PROCSTEP.DD001 DD DATACLAS=
+//PROCSTEP.DD002 DD DATACLAS= NULL IT OUT
+//PROCSTEP.DD003 DD COPIES=,  NULL IT OUT
+//  DATACLAS=  NULL THIS OUT TOO
+
+...and thus we must check to see if the statement ends right there, or
+if it's being continued, or if it's got a comment in either of those
+two situations.
+
+*/
+KYWD_VAL_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+KYWD_VAL_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+
+mode KYWD_VAL_PAREN_MODE ;
+
+KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
+KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+
+
 mode ACCODE_MODE ;
 
-ACCODE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+ACCODE_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
 ACCODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-ACCODE_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-ACCODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-ACCODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-ACCODE_VALUE : NUM_LIT_DFLT | ALPHA | NAME ;
-ACCODE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+ACCODE_VALUE : [A-Z0-9]+ {getText().length() <= 8}? ->popMode ;
+ACCODE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode AMP_MODE ;
+
+AMP_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+AMP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+AMP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+AMP_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(AMP_PAREN_MODE) ;
+
+mode AMP_PAREN_MODE ;
+
+AMP_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+AMP_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+AMP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+AMP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+AMP_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
+AMP_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+
+mode AVGREC_MODE ;
+
+AVGREC_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+AVGREC_VALUE : (U | K | M) ->popMode ;
+AVGREC_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BFALN_MODE ;
+
+BFALN_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BFALN_VALUE : (F | D) ->popMode ;
+BFALN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BFTEK_MODE ;
+
+BFTEK_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BFTEK_VALUE : (A | D | E | R | S) ->popMode ;
+BFTEK_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFIN_MODE ;
+
+BUFIN_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFIN_VALUE : [0-9]+ ->popMode ;
+BUFIN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFL_MODE ;
+
+BUFL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFL_VALUE : [0-9]+ ->popMode ;
+BUFL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFMAX_MODE ;
+
+BUFMAX_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFMAX_VALUE : [0-9]+ ->popMode ;
+BUFMAX_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFNO_MODE ;
+
+BUFNO_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFNO_VALUE : [0-9]+ ->popMode ;
+BUFNO_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFOFF_MODE ;
+
+BUFOFF_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFOFF_VALUE : ([0-9]+ | L)  ->popMode ;
+BUFOFF_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFOUT_MODE ;
+
+BUFOUT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFOUT_VALUE : [0-9]+ ->popMode ;
+BUFOUT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+mode BUFSIZE_MODE ;
+
+BUFSIZE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+BUFSIZE_VALUE : [0-9]+ ->popMode ;
+BUFSIZE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode CHARS_MODE ;
 
 CHARS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-CHARS_COMMA : COMMA_DFLT
-    {
-      mode(cameFromMode);
-    } ->type(COMMA) ; //,mode(DEFAULT_MODE) ;
-CHARS_WS : [ ]+
-    {
-      returnToMode = cameFromMode;
-      mode(GLOBAL_PAREN_CONT_MODE);
-    } ->channel(HIDDEN); //,mode(CM) ;
-CHARS_NEWLINE : NEWLINE 
-    {
-      mode(cameFromMode);
-    } ->channel(HIDDEN); //,mode(DEFAULT_MODE) ;
-CHARS_VALUE : (CHARS_DUMP | CHARS_STD | CHARS_FONT_NAME) ->type(CHARS_FONT) ;
-CHARS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-CHARS_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(CHARS_PAREN_MODE) ;
+CHARS_VALUE : (CHARS_DUMP | CHARS_STD | CHARS_FONT_NAME) ->type(CHARS_FONT),popMode ;
+CHARS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+CHARS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(CHARS_PAREN_MODE) ;
 
 fragment CHARS_DUMP : D U M P ;
 fragment CHARS_STD : S T D ;
@@ -1882,346 +2257,196 @@ mode CHARS_PAREN_MODE ;
 CHARS_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 CHARS_PAREN_VALUE : CHARS_VALUE ->type(CHARS_FONT) ;
 CHARS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-CHARS_PAREN_RPAREN : RPAREN_DFLT 
-    {
-      mode(cameFromMode);
-    } ->type(RPAREN); //,mode(DEFAULT_MODE) ;
+CHARS_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+
+mode COPIES_MODE ;
+
+COPIES_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+COPIES_VALUE : [0-9]+ ->popMode ;
+COPIES_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+COPIES_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(COPIES_PAREN_MODE) ;
+
+mode COPIES_PAREN_MODE ;
+
+COPIES_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+COPIES_PAREN_VALUE : COPIES_VALUE ->type(COPIES_VALUE) ;
+COPIES_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+COPIES_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(COPIES_GROUP_MODE) ;
+COPIES_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ; 
+
+mode COPIES_GROUP_MODE ;
+
+COPIES_GROUP_COMMA : COMMA_DFLT ->type(COMMA) ;
+COPIES_GROUP_VALUE : COPIES_VALUE ;
+COPIES_GROUP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+COPIES_GROUP_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ; 
 
 mode DATACLAS_MODE ;
 
 DATACLAS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DATACLAS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DATACLAS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DATACLAS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DATACLAS_VALUE : (NUM_LIT_DFLT | ALPHA | NAME | ALNUMNAT) ;
-DATACLAS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DATACLAS_VALUE : [A-Z0-9@#$]+ {getText().length() <= 8}? ->popMode ;
+DATACLAS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+DATACLAS_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+DATACLAS_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+DATACLAS_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
 
 mode STORCLAS_MODE ;
 
 STORCLAS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-STORCLAS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-STORCLAS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-STORCLAS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-STORCLAS_VALUE : (NUM_LIT_DFLT | ALPHA | NAME | ALNUMNAT) ;
-STORCLAS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+STORCLAS_VALUE : [A-Z0-9@#$]+ {getText().length() <= 8}? ->popMode ;
+STORCLAS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode DEST_MODE ;
 
 DEST_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DEST_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DEST_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DEST_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DEST_VALUE : [A-Z0-9@#$]+ ->type(DEST_VALUE);
-DEST_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DEST_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(DEST_PAREN_MODE) ;
-DEST_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+DEST_VALUE : [A-Z0-9@#$]+ {getText().length() <= 8}? ->type(DEST_VALUE),popMode ;
+DEST_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+DEST_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DEST_PAREN_MODE) ;
+DEST_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
 
 mode DEST_PAREN_MODE ;
 
 DEST_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-DEST_PAREN_VALUE : [A-Z0-9@#$]+ ->type(DEST_VALUE) ;
+DEST_PAREN_VALUE : [A-Z0-9@#$]+ {getText().length() <= 8}? ->type(DEST_VALUE) ;
 DEST_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DEST_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+DEST_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 DEST_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+
+mode DISP_MODE ;
+
+DISP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+DISP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+DISP_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DISP_PAREN_MODE) ;
+
+DISP_MOD : M O D ->popMode ;
+DISP_NEW : N E W ->popMode ;
+DISP_OLD : O L D ->popMode ;
+DISP_SHR : S H R ->popMode ;
+
+mode DISP_PAREN_MODE ;
+
+DISP_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+DISP_PAREN_MOD : DISP_MOD ->type(DISP_MOD) ;
+DISP_PAREN_NEW : DISP_NEW ->type(DISP_NEW) ;
+DISP_PAREN_OLD : DISP_OLD ->type(DISP_OLD) ;
+DISP_PAREN_SHR : DISP_SHR ->type(DISP_SHR) ;
+DISP_CATLG : C A T L G ;
+DISP_DELETE : D E L E T E ;
+DISP_KEEP : K E E P ;
+DISP_PASS : P A S S ;
+DISP_UNCATLG : U N C A T L G ;
+DISP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DISP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode DSORG_MODE ;
 
 DSORG_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSORG_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DSORG_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DSORG_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DSORG_VALUE : [ACDGOPSUX]+ ;
-DSORG_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSORG_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+DSORG_VALUE : [ACDGOPSUX]+ ->popMode ;
+DSORG_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode FUNC_MODE ;
 
 FUNC_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-FUNC_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-FUNC_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-FUNC_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-FUNC_VALUE : [IRPWDXT]+ ;
-FUNC_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-FUNC_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+FUNC_VALUE : [IRPWDXT]+ ->popMode ;
+FUNC_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode LRECL_MODE ;
 
 LRECL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-LRECL_COMMA : COMMA_DFLT 
-    {
-      switch(cameFromMode) {
-        case OUTPUT_STMT_MODE :
-            mode(OUTPUT_STMT_MODE);
-            break;
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA) ;
-LRECL_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case OUTPUT_STMT_MODE :
-            returnToMode = cameFromMode;
-            mode(GLOBAL_PAREN_MODE_CM);
-            break;
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ;
-LRECL_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case OUTPUT_STMT_MODE :
-            returnToMode = cameFromMode;
-            mode(GLOBAL_PAREN_CONT_MODE);
-            break;
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ;
-LRECL_VALUE : (ALPHA | NUM_LIT_DFLT | NUM_MEM_VAL) ;
-LRECL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LRECL_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case OUTPUT_STMT_MODE :
-            mode(OUTPUT_STMT_MODE);
-            break;
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //TODO can this be hit?
+LRECL_VALUE : [0-9KX]+ ->popMode ;
+LRECL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode MODE_MODE ;
 
 MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-MODE_COMMA : COMMA_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA) ; //,mode(DEFAULT_MODE) ;
-MODE_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ; //,mode(CM) ;
-MODE_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ; //,mode(DEFAULT_MODE) ;
-MODE_VALUE : [CEOR]+ ;
-MODE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-MODE_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ;
+MODE_VALUE : [CEOR]+ ->popMode;
+MODE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode OPTCD_MODE ;
 
 OPTCD_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-OPTCD_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-OPTCD_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-OPTCD_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-OPTCD_VALUE : [ABCEFHIJLQRTUWZ]+ ;
-OPTCD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-OPTCD_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+OPTCD_VALUE : [ABCEFHIJLQRTUWZ]+ ->popMode;
+OPTCD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode PCI_MODE ;
 
 PCI_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-PCI_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-PCI_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-PCI_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PCI_VALUE : [ANRX] ->type(PCI_VALUE);
-PCI_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-PCI_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(PCI_PAREN_MODE) ;
-PCI_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+PCI_VALUE : [ANRX] ->popMode ;
+PCI_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+PCI_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(PCI_PAREN_MODE) ;
 
 mode PCI_PAREN_MODE ;
 
 PCI_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 PCI_PAREN_VALUE : [ANRX]+ ->type(PCI_VALUE) ;
 PCI_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-PCI_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+PCI_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode RECFM_MODE ;
 
 RECFM_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-RECFM_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-RECFM_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-RECFM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-RECFM_VALUE : [ABDFMTUVS]+ ;
-RECFM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-RECFM_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+RECFM_VALUE : [ABDFMTUVS]+ ->popMode ;
+RECFM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode RESERVE_MODE ;
 
 RESERVE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-RESERVE_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-RESERVE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-RESERVE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-RESERVE_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(RESERVE_PAREN_MODE) ;
-
-mode RESERVE_PAREN_MODE ;
-
-RESERVE_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-RESERVE_PAREN_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
-RESERVE_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-RESERVE_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+RESERVE_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
+RESERVE_COMMA : COMMA_DFLT ->type(COMMA) ;
+RESERVE_VALUE : [0-9]+ ;
+RESERVE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+RESERVE_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
 mode TRTCH_MODE ;
 
 TRTCH_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-TRTCH_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-TRTCH_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-TRTCH_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-TRTCH_VALUE : ([CET]+ | (C O M P) | (N O C O M P)) ;
-TRTCH_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-TRTCH_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+TRTCH_VALUE : ([CET]+ | (C O M P) | (N O C O M P)) ->popMode ;
+TRTCH_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode DSID_MODE ;
 
 DSID_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSID_COMMA : COMMA_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA) ; //,mode(DEFAULT_MODE) ;
-DSID_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ; //,mode(CM) ;
-DSID_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ; //,mode(DEFAULT_MODE) ;
-DSID_VALUE : (ALPHA | NATL | NUM | HYPHEN | '[')+ ;
-DSID_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSID_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(DSID_PAREN_MODE) ;
-DSID_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ; TODO can this even be hit?
+DSID_VALUE : [A-Z0-9@#$[\-]+ ->popMode ;
+DSID_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+DSID_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DSID_PAREN_MODE) ;
 
 mode DSID_PAREN_MODE ;
 
-DSID_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(DSID_V_MODE) ;
+DSID_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(DSID_V_MODE) ;
 DSID_PAREN_VALUE : DSID_VALUE ->type(DSID_VALUE) ;
 DSID_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSID_PAREN_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ;
+DSID_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode DSID_V_MODE ;
 
-DSID_VERIFIED : 'V' ;
-DSID_V_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSID_V_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //,mode(DEFAULT_MODE) ;
+DSID_VERIFIED : 'V' ->popMode ;
+DSID_V_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode DSKEYLBL_MODE ;
 
 DSKEYLBL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSKEYLBL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-DSKEYLBL_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DSKEYLBL_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DSKEYLBL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DSKEYLBL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DSKEYLBL_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+DSKEYLBL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode DSNTYPE_MODE ;
 
 DSNTYPE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSNTYPE_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DSNTYPE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DSNTYPE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DSNTYPE_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(DSNTYPE_PAREN_MODE) ;
-DSNTYPE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DSNTYPE_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DSNTYPE_PAREN_MODE) ;
+DSNTYPE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 DSNTYPE_VALUE : (
     DSNTYPE_BASIC |
     DSNTYPE_EXTPREF |
@@ -2231,7 +2456,7 @@ DSNTYPE_VALUE : (
     DSNTYPE_LIBRARY |
     DSNTYPE_PDS |
     DSNTYPE_PIPE
-  ) ;
+  ) ->popMode ;
 fragment DSNTYPE_BASIC : B A S I C ;
 fragment DSNTYPE_EXTPREF : E X T P R E F ;
 fragment DSNTYPE_EXTREQ : E X T R E Q ;
@@ -2245,29 +2470,24 @@ mode DSNTYPE_PAREN_MODE ;
 
 DSNTYPE_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 DSNTYPE_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DSNTYPE_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+DSNTYPE_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 DSNTYPE_PAREN_VALUE : DSNTYPE_VALUE ->type(DSNTYPE_VALUE) ;
 DSNTYPE_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
 
 mode EATTR_MODE ;
 
 EATTR_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-EATTR_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-EATTR_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-EATTR_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-fragment OPT : O P T ;
-EATTR_VALUE : (OPT | NO) ;
-EATTR_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+EATTR_VALUE : (EATTR_OPT | EATTR_NO) ->popMode ;
+EATTR_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+fragment EATTR_OPT : O P T ;
+fragment EATTR_NO : N O ;
 
 mode EROPT_MODE ;
 
 EROPT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-EROPT_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-EROPT_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-EROPT_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-EROPT_VALUE : EROPT_ABE | EROPT_SKP | EROPT_ACC ;
-EROPT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-EROPT_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+EROPT_VALUE : (EROPT_ABE | EROPT_SKP | EROPT_ACC) ->popMode ;
+EROPT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 fragment EROPT_ABE : A B E ;
 fragment EROPT_SKP : S K P ;
@@ -2276,28 +2496,21 @@ fragment EROPT_ACC : A C C ;
 mode EXPDT_MODE ;
 
 EXPDT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-EXPDT_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-EXPDT_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-EXPDT_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-EXPDT_VALUE : NUM_LIT_DFLT | (NUM_LIT_DFLT SLASH NUM_LIT_DFLT) ;
-EXPDT_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
-EXPDT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+EXPDT_VALUE : (NUM_LIT_DFLT | (NUM_LIT_DFLT SLASH NUM_LIT_DFLT)) ->popMode ;
+EXPDT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode FCB_MODE ;
 
 FCB_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-FCB_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-FCB_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-FCB_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-FCB_VALUE : [A-Z0-9@#$]+ {getText().length() <= 4}? ;
-FCB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-FCB_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(FCB_PAREN_MODE) ;
+FCB_VALUE : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+FCB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+FCB_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(FCB_PAREN_MODE) ;
 
 mode FCB_PAREN_MODE ;
 
 FCB_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 FCB_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-FCB_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+FCB_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 FCB_PAREN_VALUE : FCB_VALUE ->type(FCB_VALUE) ;
 FCB_ALIGN : A L I G N ;
 FCB_VERIFY : V E R I F Y ;
@@ -2305,11 +2518,8 @@ FCB_VERIFY : V E R I F Y ;
 mode FILEDATA_MODE ;
 
 FILEDATA_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-FILEDATA_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-FILEDATA_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-FILEDATA_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-FILEDATA_VALUE : FILEDATA_BINARY | FILEDATA_RECORD | FILEDATA_TEXT ;
-FILEDATA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+FILEDATA_VALUE : (FILEDATA_BINARY | FILEDATA_RECORD | FILEDATA_TEXT) ->popMode ;
+FILEDATA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 fragment FILEDATA_BINARY : B I N A R Y ;
 fragment FILEDATA_RECORD : R E C O R D ;
@@ -2318,44 +2528,34 @@ fragment FILEDATA_TEXT : T E X T ;
 mode FLASH_MODE ;
 
 FLASH_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-FLASH_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-FLASH_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-FLASH_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-FLASH_OVERLAY : [A-Z0-9@#$]+ {getText().length() <= 4}? ;
-FLASH_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-FLASH_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(FLASH_PAREN_MODE) ;
-FLASH_NONE : N O N E ;
+FLASH_OVERLAY : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+FLASH_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+FLASH_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(FLASH_PAREN_MODE) ;
+FLASH_NONE : N O N E ->popMode ;
 
 mode FLASH_PAREN_MODE ;
 
-FLASH_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(FLASH_COMMA_MODE) ;
+FLASH_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(FLASH_COMMA_MODE) ;
 FLASH_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-FLASH_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+FLASH_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 FLASH_PAREN_OVERLAY : FLASH_OVERLAY ->type(FLASH_OVERLAY) ;
 
 mode FLASH_COMMA_MODE ;
 
-FLASH_COUNT : [0-9]+ ;
-FLASH_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-FLASH_COMMA_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+FLASH_COUNT : [0-9]+ ->popMode ;
+FLASH_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode FORMDEF_MODE ;
 
 FORMDEF_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-FORMDEF_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-FORMDEF_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-FORMDEF_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-FORMDEF_VALUE : [A-Z0-9@#$]+ {getText().length() <= 6}? ;
-FORMDEF_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+FORMDEF_VALUE : [A-Z0-9@#$]+ {getText().length() <= 6}? ->popMode ;
+FORMDEF_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode HOLD_MODE ;
 
 HOLD_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-HOLD_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-HOLD_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-HOLD_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-HOLD_VALUE : HOLD_YES | HOLD_NO | HOLD_Y | HOLD_N ;
-HOLD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+HOLD_VALUE : (HOLD_YES | HOLD_NO | HOLD_Y | HOLD_N) ->popMode ;
+HOLD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 fragment HOLD_YES : Y E S ;
 fragment HOLD_NO : N O ;
@@ -2365,69 +2565,61 @@ fragment HOLD_N : N ;
 mode KEYLABL_MODE ;
 
 KEYLABL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-KEYLABL_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-KEYLABL_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-KEYLABL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-KEYLABL_VALUE : [A-Z0-9@#$.]+ ;
-KEYLABL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-KEYLABL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+KEYLABL_VALUE : [A-Z0-9@#$.]+ ->popMode ;
+KEYLABL_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+KEYLABL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode KEYENCD_MODE ;
 
 KEYENCD_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-KEYENCD_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-KEYENCD_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-KEYENCD_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-KEYENCD_VALUE : [LH] ;
-KEYENCD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+KEYENCD_VALUE : [LH] ->popMode ;
+KEYENCD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode LABEL_MODE ;
 
 LABEL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-LABEL_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-LABEL_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-LABEL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-LABEL_SEQUENCE : NUM_LIT_DFLT ;
+LABEL_SEQUENCE : NUM_LIT_DFLT ->popMode ;
 LABEL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(LABEL_MODE2) ;
-LABEL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LABEL_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
+LABEL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+LABEL_RETPD : RETPD_DFLT ->type(RETPD),mode(RETPD_MODE) ;
 LABEL_EXPDT : EXPDT_DFLT ->type(EXPDT),mode(EXPDT_MODE) ;
 
 mode LABEL_MODE2 ;
 
 LABEL2_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 LABEL2_COMMA : COMMA_DFLT ->type(COMMA),mode(LABEL_MODE3) ;
-LABEL2_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-LABEL2_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 LABEL2_SEQUENCE : NUM_LIT_DFLT ->type(LABEL_SEQUENCE);
-LABEL2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+LABEL2_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 LABEL2_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LABEL2_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
-LABEL2_EXPDT : EXPDT_DFLT ->type(EXPDT),mode(EXPDT_MODE) ;
+LABEL2_RETPD : RETPD_DFLT ->type(RETPD),pushMode(RETPD_MODE) ;
+LABEL2_EXPDT : EXPDT_DFLT ->type(EXPDT),pushMode(EXPDT_MODE) ;
 
 mode LABEL_MODE3 ;
 
 LABEL3_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 LABEL3_COMMA : COMMA_DFLT ->type(COMMA),mode(LABEL_MODE4) ;
-LABEL3_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-LABEL3_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 LABEL_TYPE : [ABLMNPSTU]+ ;
-LABEL3_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+LABEL3_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 LABEL3_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LABEL3_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
-LABEL3_EXPDT : EXPDT_DFLT ->type(EXPDT),mode(EXPDT_MODE) ;
+LABEL3_RETPD : RETPD_DFLT ->type(RETPD),pushMode(RETPD_MODE) ;
+LABEL3_EXPDT : EXPDT_DFLT ->type(EXPDT),pushMode(EXPDT_MODE) ;
 
 mode LABEL_MODE4 ;
 
 LABEL4_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 LABEL4_COMMA : COMMA_DFLT ->type(COMMA),mode(LABEL_MODE5) ;
-LABEL4_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-LABEL4_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 LABEL_PASSWORD_PROTECT : (LABEL_PASSWORD | LABEL_NOPWREAD) ;
-LABEL4_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+LABEL4_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 LABEL4_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LABEL4_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
-LABEL4_EXPDT : EXPDT_DFLT ->type(EXPDT),mode(EXPDT_MODE) ;
+LABEL4_RETPD : RETPD_DFLT ->type(RETPD),pushMode(RETPD_MODE) ;
+LABEL4_EXPDT : EXPDT_DFLT ->type(EXPDT),pushMode(EXPDT_MODE) ;
 
 fragment LABEL_PASSWORD : P A S S W O R D ;
 fragment LABEL_NOPWREAD : N O P W R E A D ;
@@ -2435,14 +2627,12 @@ fragment LABEL_NOPWREAD : N O P W R E A D ;
 mode LABEL_MODE5 ;
 
 LABEL5_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-LABEL5_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-LABEL5_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-LABEL5_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+LABEL5_COMMA : COMMA_DFLT ->type(COMMA) ;
 LABEL_I_O : (LABEL_INPUT | LABEL_OUTPUT) ;
-LABEL5_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+LABEL5_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 LABEL5_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-LABEL5_RETPD : RETPD_DFLT ->type(RETPD),mode(DEFAULT_MODE) ;
-LABEL5_EXPDT : EXPDT_DFLT ->type(EXPDT),mode(EXPDT_MODE) ;
+LABEL5_RETPD : RETPD_DFLT ->type(RETPD),pushMode(RETPD_MODE) ;
+LABEL5_EXPDT : EXPDT_DFLT ->type(EXPDT),pushMode(EXPDT_MODE) ;
 
 fragment LABEL_INPUT : I N ;
 fragment LABEL_OUTPUT : O U T ;
@@ -2450,74 +2640,85 @@ fragment LABEL_OUTPUT : O U T ;
 mode MGMTCLAS_MODE ;
 
 MGMTCLAS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-MGMTCLAS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-MGMTCLAS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-MGMTCLAS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-MGMTCLAS_VALUE : ALPHA | NAME ;
-MGMTCLAS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+MGMTCLAS_VALUE : [A-Z0-9@#$]+ {getText().length() <= 8}? ->popMode ;
+MGMTCLAS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode MODIFY_MODE ;
 
 MODIFY_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-MODIFY_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-MODIFY_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-MODIFY_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-MODIFY_MODULE : [A-Z0-9@#$]+ {getText().length() <= 4}? ;
-MODIFY_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-MODIFY_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(MODIFY_PAREN_MODE) ;
+MODIFY_MODULE : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+MODIFY_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+MODIFY_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(MODIFY_PAREN_MODE) ;
 
 mode MODIFY_PAREN_MODE ;
 
-MODIFY_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(MODIFY_COMMA_MODE) ;
+MODIFY_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(MODIFY_COMMA_MODE) ;
 MODIFY_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-MODIFY_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+MODIFY_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 MODIFY_PAREN_MODULE : MODIFY_MODULE ->type(MODIFY_MODULE) ;
 
 mode MODIFY_COMMA_MODE ;
 
-MODIFY_TRC : NUM_LIT_DFLT ;
-MODIFY_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-MODIFY_COMMA_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+MODIFY_TRC : NUM_LIT_DFLT ->popMode ;
+MODIFY_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode OUTPUT_PARM_MODE ;
 
 OUTPUT_PARM_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-OUTPUT_PARM_ASTERISK : ASTERISK ->type(ASTERISK) ;
-OUTPUT_PARM_NAME : NAME ->type(NAME) ;
-OUTPUT_PARM_DOT : DOT_DFLT ->type(DOT) ;
-OUTPUT_PARM_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-OUTPUT_PARM_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-OUTPUT_PARM_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+//OUTPUT_PARM_ASTERISK : ASTERISK ->type(ASTERISK) ;
+//OUTPUT_PARM_NAME : NAME ->type(NAME) ;
+//OUTPUT_PARM_DOT : DOT_DFLT ->type(DOT) ;
+OUTPUT_PARM_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode ;
 OUTPUT_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(OUTPUT_PARM_PAREN_MODE) ;
 
 mode OUTPUT_PARM_PAREN_MODE ;
 
-OUTPUT_PARM_PAREN_ASTERISK : ASTERISK ->type(ASTERISK) ;
-OUTPUT_PARM_PAREN_NAME : NAME ->type(NAME) ;
-OUTPUT_PARM_PAREN_DOT : DOT_DFLT ->type(DOT) ;
+//OUTPUT_PARM_PAREN_ASTERISK : ASTERISK ->type(ASTERISK) ;
+//OUTPUT_PARM_PAREN_NAME : NAME ->type(NAME) ;
+//OUTPUT_PARM_PAREN_DOT : DOT_DFLT ->type(DOT) ;
+OUTPUT_PARM_PAREN_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)?
+     ->type(OUTPUT_PARM_REFERENCE) ;
 OUTPUT_PARM_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 OUTPUT_PARM_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 OUTPUT_PARM_PAREN_NEWLINE : [\n\r] {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
-OUTPUT_PARM_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+OUTPUT_PARM_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
 mode PATH_MODE ;
 
 PATH_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-PATH_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-PATH_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-PATH_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PATH_VALUE : [A-Z0-9@#$/+-.&*]+ ;
-PATH_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+PATH_VALUE : [A-Z0-9@#$/+-.&*]+ ->popMode ;
+PATH_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+
+mode PATHDISP_MODE ;
+
+PATHDISP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+PATHDISP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+PATHDISP_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(PATHDISP_PAREN_MODE) ;
+
+PATHDISP_DELETE : D E L E T E ->popMode ;
+PATHDISP_KEEP : K E E P ->popMode ;
+
+mode PATHDISP_PAREN_MODE ;
+
+PATHDISP_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+PATHDISP_PAREN_DELETE : PATHDISP_DELETE ->type(PATHDISP_DELETE) ;
+PATHDISP_PAREN_KEEP : PATHDISP_KEEP ->type(PATHDISP_KEEP) ;
+PATHDISP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+PATHDISP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode PATHMODE_MODE ;
 
 PATHMODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-PATHMODE_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-PATHMODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-PATHMODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PATHMODE_VALUE : (PATHMODE_OWNER+ | PATHMODE_GROUP+ | PATHMODE_OTHER+ | PATHMODE_SET+) ;
-PATHMODE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-PATHMODE_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(PATHMODE_PAREN_MODE) ;
+PATHMODE_VALUE : (PATHMODE_OWNER | PATHMODE_GROUP | PATHMODE_OTHER | PATHMODE_SET) ->popMode ;
+PATHMODE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+PATHMODE_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(PATHMODE_PAREN_MODE) ;
 
 fragment PATHMODE_OWNER : (
     (S I R U S R) |
@@ -2549,17 +2750,14 @@ PATHMODE_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_P
 PATHMODE_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 PATHMODE_PAREN_VALUE : PATHMODE_VALUE ->type(PATHMODE_VALUE) ;
 PATHMODE_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-PATHMODE_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+PATHMODE_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode PATHOPTS_MODE ;
 
 PATHOPTS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-PATHOPTS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-PATHOPTS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-PATHOPTS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PATHOPTS_VALUE : (PATHOPTS_ACCESS+ | PATHOPTS_STATUS+) ;
-PATHOPTS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-PATHOPTS_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(PATHOPTS_PAREN_MODE) ;
+PATHOPTS_VALUE : (PATHOPTS_ACCESS | PATHOPTS_STATUS) ->popMode;
+PATHOPTS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+PATHOPTS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(PATHOPTS_PAREN_MODE) ;
 
 fragment PATHOPTS_ACCESS : (
     (O R D O N L Y) |
@@ -2583,16 +2781,13 @@ PATHOPTS_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_P
 PATHOPTS_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 PATHOPTS_PAREN_VALUE : PATHOPTS_VALUE ->type(PATHOPTS_VALUE) ;
 PATHOPTS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-PATHOPTS_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+PATHOPTS_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode PROTECT_MODE ;
 
 PROTECT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-PROTECT_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-PROTECT_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-PROTECT_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PROTECT_VALUE : PROTECT_YES | PROTECT_Y ;
-PROTECT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+PROTECT_VALUE : (PROTECT_YES | PROTECT_Y) ->popMode ;
+PROTECT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 fragment PROTECT_YES : Y E S ;
 fragment PROTECT_Y : Y ;
@@ -2600,25 +2795,25 @@ fragment PROTECT_Y : Y ;
 mode RECORG_MODE ;
 
 RECORG_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-RECORG_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-RECORG_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-RECORG_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-RECORG_VALUE : RECORG_KS | RECORG_ES | RECORG_RR | RECORG_LS ;
-RECORG_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+RECORG_VALUE : (RECORG_KS | RECORG_ES | RECORG_RR | RECORG_LS) ->popMode ;
+RECORG_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 fragment RECORG_KS : K S ;
 fragment RECORG_ES : E S ;
 fragment RECORG_RR : R R ;
 fragment RECORG_LS : L S ;
 
+mode RETPD_MODE ;
+
+RETPD_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+RETPD_VALUE : [0-9]+ ->popMode ;
+RETPD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
 mode RLS_MODE ;
 
 RLS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-RLS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-RLS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-RLS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-RLS_VALUE : RLS_NRI | RLS_CR | RLS_CRE ;
-RLS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+RLS_VALUE : (RLS_NRI | RLS_CR | RLS_CRE) ->popMode ;
+RLS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 fragment RLS_NRI : N R I ;
 fragment RLS_CR : C R ;
@@ -2627,12 +2822,9 @@ fragment RLS_CRE : C R E ;
 mode ROACCESS_MODE ;
 
 ROACCESS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-ROACCESS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-ROACCESS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-ROACCESS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-ROACCESS_REQUEST : ROACCESS_ALLOW | ROACCESS_DISALLOW ;
-ROACCESS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-ROACCESS_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(ROACCESS_PAREN_MODE) ;
+ROACCESS_REQUEST : (ROACCESS_ALLOW | ROACCESS_DISALLOW) ->popMode ;
+ROACCESS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+ROACCESS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(ROACCESS_PAREN_MODE) ;
 
 fragment ROACCESS_ALLOW : A L L O W ;
 fragment ROACCESS_DISALLOW : D I S A L L O W ;
@@ -2641,9 +2833,9 @@ mode ROACCESS_PAREN_MODE ;
 
 ROACCESS_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 ROACCESS_PAREN_REQUEST : ROACCESS_REQUEST ->type(ROACCESS_REQUEST) ;
-ROACCESS_LOCK : ROACCESS_EXTLOCK | ROACCESS_TRKLOCK ;
+ROACCESS_LOCK : (ROACCESS_EXTLOCK | ROACCESS_TRKLOCK) ;
 ROACCESS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-ROACCESS_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+ROACCESS_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 fragment ROACCESS_EXTLOCK : E X T L O C K ;
 fragment ROACCESS_TRKLOCK : T R K L O C K ;
@@ -2651,41 +2843,34 @@ fragment ROACCESS_TRKLOCK : T R K L O C K ;
 mode SECMODEL_MODE ;
 
 SECMODEL_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-SECMODEL_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-SECMODEL_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-SECMODEL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-DATASET_PROFILE : (NATL | ALPHA) (ALPHA | NATL | NUM | DOT_DFLT | ASTERISK | '%')* ;
-SECMODEL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(SECMODEL_PAREN_MODE) ;
+DATASET_PROFILE : (NATL | ALPHA) (ALPHA | NATL | NUM | DOT_DFLT | ASTERISK | '%')* ->popMode ;
+SECMODEL_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SECMODEL_PAREN_MODE) ;
 
 mode SECMODEL_PAREN_MODE ;
 
-SECMODEL_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(SECMODEL_COMMA_MODE) ;
+SECMODEL_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SECMODEL_COMMA_MODE) ;
 DATASET_PAREN_PROFILE : DATASET_PROFILE ->type(DATASET_PROFILE) ;
-SECMODEL_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SECMODEL_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode SECMODEL_COMMA_MODE ;
 
-SECMODEL_GENERIC : G E N E R I C ;
-SECMODEL_COMMA_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SECMODEL_GENERIC : G E N E R I C ->popMode ;
 
 mode SUBSYS_MODE ;
 
 SUBSYS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-SUBSYS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-SUBSYS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-SUBSYS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-SUBSYS_NAME : [A-Z0-9@#$]+ {getText().length() <= 4}? ;
-SUBSYS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SUBSYS_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(SUBSYS_PAREN_MODE) ;
+SUBSYS_NAME : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+SUBSYS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+SUBSYS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SUBSYS_PAREN_MODE) ;
 
 mode SUBSYS_PAREN_MODE ;
 
-SUBSYS_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-SUBSYS_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN) ;
-SUBSYS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(SUBSYS_COMMA_MODE) ;
+//SUBSYS_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
+//SUBSYS_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN) ;
+SUBSYS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SUBSYS_COMMA_MODE) ;
 SUBSYS_PAREN_NAME : SUBSYS_NAME ->type(SUBSYS_NAME) ;
 SUBSYS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SUBSYS_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SUBSYS_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 SUBSYS_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 mode SUBSYS_COMMA_MODE ;
@@ -2695,48 +2880,15 @@ SUBSYS_COMMA_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GL
 SUBSYS_COMMA_COMMA : COMMA_DFLT ->type(COMMA) ;
 SUBSYS_PARM : [A-Z0-9@#$]+ ;
 SUBSYS_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SUBSYS_COMMA_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SUBSYS_COMMA_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 SUBSYS_COMMA_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 mode SYMBOLS_MODE ;
 
 SYMBOLS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-SYMBOLS_COMMA : COMMA_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA); //mode(DEFAULT_MODE) ;
-SYMBOLS_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(CM) ;
-SYMBOLS_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(DEFAULT_MODE) ;
-SYMBOLS_VALUE : SYMBOLS_CNVTSYS | SYMBOLS_EXECSYS | SYMBOLS_JCLONLY ;
-SYMBOLS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYMBOLS_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(SYMBOLS_PAREN_MODE) ;
+SYMBOLS_VALUE : (SYMBOLS_CNVTSYS | SYMBOLS_EXECSYS | SYMBOLS_JCLONLY) ->popMode;
+SYMBOLS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+SYMBOLS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYMBOLS_PAREN_MODE) ;
 
 fragment SYMBOLS_CNVTSYS : C N V T S Y S ;
 fragment SYMBOLS_EXECSYS : E X E C S Y S ;
@@ -2744,75 +2896,29 @@ fragment SYMBOLS_JCLONLY : J C L O N L Y ;
 
 mode SYMBOLS_PAREN_MODE ;
 
-SYMBOLS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(SYMBOLS_COMMA_MODE) ;
+SYMBOLS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SYMBOLS_COMMA_MODE) ;
 SYMBOLS_PAREN_VALUE : SYMBOLS_VALUE ->type(SYMBOLS_VALUE) ;
 SYMBOLS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYMBOLS_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+SYMBOLS_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode SYMBOLS_COMMA_MODE ;
 
-SYMBOLS_LOGGING_DDNAME : NAME ->type(LOGGING_DDNAME) ;
-SYMBOLS_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYMBOLS_COMMA_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+SYMBOLS_LOGGING_DDNAME : NAME ->type(LOGGING_DDNAME),popMode ;
+SYMBOLS_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode SYMLIST_MODE ;
 
 SYMLIST_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-SYMLIST_COMMA : COMMA_DFLT 
+SYMLIST_VALUE : [A-Z0-9@#$*]+ {getText().length() <= 8}? ->popMode ;
+SYMLIST_SQUOTE : '\'' 
     {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA); //mode(DEFAULT_MODE) ;
-SYMLIST_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(CM) ;
-SYMLIST_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(DEFAULT_MODE) ;
-SYMLIST_VALUE : [A-Z0-9@#$*]+ {getText().length() <= 9}? ;
-SYMLIST_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(SYMLIST_PAREN_MODE) ;
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+SYMLIST_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYMLIST_PAREN_MODE) ;
 
 mode SYMLIST_PAREN_MODE ;
 
@@ -2820,102 +2926,85 @@ SYMLIST_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 SYMLIST_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 SYMLIST_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 SYMLIST_PAREN_VALUE : SYMLIST_VALUE ->type(SYMLIST_VALUE) ;
-SYMLIST_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+SYMLIST_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode SYSOUT_MODE ;
 
 SYSOUT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-SYSOUT_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-SYSOUT_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-SYSOUT_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-SYSOUT_CLASS : [A-Z0-9*$] ;
-SYSOUT_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-SYSOUT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(SYSOUT_PAREN_MODE) ;
+SYSOUT_CLASS : [A-Z0-9*$] ->popMode ;
+SYSOUT_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+SYSOUT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYSOUT_PAREN_MODE) ;
 
 mode SYSOUT_PAREN_MODE ;
 
-SYSOUT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(SYSOUT_WRITER_MODE) ;
+SYSOUT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SYSOUT_WRITER_MODE) ;
 SYSOUT_PAREN_CLASS : [A-Z0-9*$] ->type(SYSOUT_CLASS) ;
 SYSOUT_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 SYSOUT_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYSOUT_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SYSOUT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode SYSOUT_WRITER_MODE ;
 
-SYSOUT_WRITER_COMMA : COMMA_DFLT ->type(COMMA),mode(SYSOUT_FORM_MODE) ;
+SYSOUT_WRITER_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SYSOUT_FORM_MODE) ;
 SYSOUT_INTRDR : I N T R D R ;
 SYSOUT_WRITER : [A-Z0-9]+ {getText().length() <= 8}? ;
 SYSOUT_WRITER_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYSOUT_WRITER_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SYSOUT_WRITER_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 
 mode SYSOUT_FORM_MODE ;
 
-SYSOUT_FORM : [A-Z0-9@#$]+ {getText().length() <= 4}? ;
-SYSOUT_FORM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYSOUT_FORM_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+SYSOUT_FORM : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+SYSOUT_FORM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode TERM_MODE ;
 
 TERM_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-TERM_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-TERM_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-TERM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-TERM_VALUE : T S ;
-TERM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+TERM_VALUE : T S ->popMode ;
+TERM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode UCS_MODE ;
 
 UCS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-UCS_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-UCS_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-UCS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-UCS_CODE : [A-Z0-9@#$]+ {getText().length() <= 4}? ;
-UCS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UCS_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(UCS_PAREN_MODE) ;
+UCS_CODE : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+UCS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+UCS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(UCS_PAREN_MODE) ;
 
 mode UCS_PAREN_MODE ;
 
-UCS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(UCS_FOLD_MODE) ;
+UCS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(UCS_FOLD_MODE) ;
 UCS_PAREN_CODE : [A-Z0-9@#$]+ {getText().length() <= 4}? ->type(UCS_CODE) ;
 UCS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UCS_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UCS_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode UCS_FOLD_MODE ;
 
-UCS_FOLD_COMMA : COMMA_DFLT ->type(COMMA),mode(UCS_VERIFY_MODE) ;
+UCS_FOLD_COMMA : COMMA_DFLT ->type(COMMA),pushMode(UCS_VERIFY_MODE) ;
 UCS_FOLD : F O L D ;
 UCS_FOLD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UCS_FOLD_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UCS_FOLD_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 
 mode UCS_VERIFY_MODE ;
 
-UCS_VERIFY : V E R I F Y ;
-UCS_VERIFY_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UCS_VERIFY_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UCS_VERIFY : V E R I F Y ->popMode ;
+UCS_VERIFY_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode UNIT_MODE ;
 
 UNIT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-UNIT_AFF : A F F ->mode(UNIT_AFF_MODE);
-UNIT_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-UNIT_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-UNIT_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-UNIT_NUMBER : UNIT_3DIGIT | UNIT_4DIGIT ;
-UNIT_GROUP_NAME : [A-Z0-9]+ {getText().length() <= 8}? ;
-UNIT_DEVICE_TYPE : [A-Z0-9-]+ ;
-UNIT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(UNIT_PAREN_MODE) ;
+UNIT_AFF : A F F ->pushMode(UNIT_AFF_MODE) ;
+UNIT_NUMBER : (UNIT_3DIGIT | UNIT_4DIGIT) ->popMode ;
+UNIT_GROUP_NAME : [A-Z0-9]+ {getText().length() <= 8}? ->popMode ;
+UNIT_DEVICE_TYPE : [A-Z0-9-]+ ->popMode ;
+UNIT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+UNIT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(UNIT_PAREN_MODE) ;
 
 fragment HEX_DIGIT : [A-F0-9] ;
 fragment UNIT_3DIGIT : SLASH? HEX_DIGIT HEX_DIGIT HEX_DIGIT ;
@@ -2924,87 +3013,51 @@ fragment UNIT_4DIGIT : SLASH HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT ;
 mode UNIT_AFF_MODE ;
 
 UNIT_AFF_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-UNIT_AFF_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-UNIT_AFF_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-UNIT_AFF_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-UNIT_DDNAME : NAME ;
+UNIT_DDNAME : NAME ->popMode,popMode ;
 
 mode UNIT_PAREN_MODE ;
 
-UNIT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),mode(UNIT_COUNT_MODE) ;
+UNIT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(UNIT_COUNT_MODE) ;
 UNIT_PAREN_NUMBER : UNIT_NUMBER ->type(UNIT_NUMBER) ;
 UNIT_PAREN_GROUP_NAME : UNIT_GROUP_NAME {getText().length() <= 8}? ->type(UNIT_GROUP_NAME) ;
 UNIT_PAREN_DEVICE_TYPE : UNIT_DEVICE_TYPE ->type(UNIT_DEVICE_TYPE) ;
 UNIT_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UNIT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode UNIT_COUNT_MODE ;
 
-UNIT_COUNT_COMMA : COMMA_DFLT ->type(COMMA),mode(UNIT_DEFER_MODE) ;
+UNIT_COUNT_COMMA : COMMA_DFLT ->type(COMMA),pushMode(UNIT_DEFER_MODE) ;
 UNIT_COUNT : NUM_LIT_DFLT ;
 UNIT_ALLOC : P ;
 UNIT_COUNT_DEFER : D E F E R ->type(UNIT_DEFER) ;
 UNIT_COUNT_SMSHONOR : S M S H O N O R ->type(UNIT_SMSHONOR) ;
 UNIT_COUNT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UNIT_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 
 mode UNIT_DEFER_MODE ;
 
-UNIT_DEFER_COMMA : COMMA_DFLT ->type(COMMA),mode(UNIT_SMSHONOR_MODE) ;
+UNIT_DEFER_COMMA : COMMA_DFLT ->type(COMMA),pushMode(UNIT_SMSHONOR_MODE) ;
 UNIT_DEFER : D E F E R ;
 UNIT_DEFER_SMSHONOR : S M S H O N O R ->type(UNIT_SMSHONOR) ;
 UNIT_DEFER_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_DEFER_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UNIT_DEFER_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode ;
 
 mode UNIT_SMSHONOR_MODE ;
 
-UNIT_SMSHONOR : S M S H O N O R ;
-UNIT_SMSHONOR_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_SMSHONOR_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
+UNIT_SMSHONOR : S M S H O N O R ->popMode ;
+UNIT_SMSHONOR_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode VOL_MODE ;
 
 VOL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_COMMA : COMMA_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA); //mode(DEFAULT_MODE) ;
-VOL_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(CM) ;
-VOL_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(DEFAULT_MODE) ;
-VOL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(VOL_PRIVATE_MODE) ;
+VOL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+VOL_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_PRIVATE_MODE) ;
+VOL_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
 VOL_PRIVATE : P R I V A T E ;
 VOL_RETAIN : R E T A I N ;
-VOL_SER : S E R ->mode(VOL_SER1_MODE) ;
-VOL_REF : R E F ->mode(VOL_REF_MODE) ;
+VOL_SER : S E R ->pushMode(VOL_SER1_MODE) ;
+VOL_REF : R E F ->pushMode(VOL_REF1_MODE) ;
 
 /*
 Note that there is a VOL_SER1_MODE and a VOL_SER3_MODE.  The former
@@ -3015,143 +3068,67 @@ VOL=(,,,,SER=ABC) and VOL=(,,,,SER=(ABC,123)).
 mode VOL_SER1_MODE ;
 
 VOL_SER1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_SER_NB : [A-Z0-9@#$-]+ ;
-VOL_SER1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_SER1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-VOL_SER1_COMMA : COMMA_DFLT 
+VOL_SER_NB : [A-Z0-9@#$-]+ ->popMode,popMode ;
+VOL_SER1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode ;
+VOL_SER1_SQUOTE : '\'' 
     {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(COMMA) ;
-VOL_SER1_WS : [ ]+ 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_CM_MODE);
-            break;
-        default :
-            mode(CM);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(CM) ;
-VOL_SER1_NEWLINE : NEWLINE 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->channel(HIDDEN) ; //mode(DEFAULT_MODE) ;
-VOL_SER1_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(VOL_SER1_PAREN_MODE) ;
+      /*
+        The QS mode knows to popMode three times when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+VOL_SER1_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER1_PAREN_MODE) ;
 
 mode VOL_SER1_PAREN_MODE ;
 
 VOL_SER1_PAREN : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
 VOL_SER1_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER1_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-VOL_SER1_PAREN_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(VOL_SER1_MODE);
-            break;
-      }
-    } ->type(RPAREN) ;
+VOL_SER1_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 VOL_SER1_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 VOL_SER1_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 VOL_SER1_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 
 mode VOL_PRIVATE_MODE ;
 
-VOL_PRIVATE_COMMA : COMMA_DFLT ->type(COMMA),mode(VOL_RETAIN_MODE) ;
+VOL_PRIVATE_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_RETAIN_MODE) ;
 VOL_PRIVATE1 : VOL_PRIVATE ->type(VOL_PRIVATE) ;
 VOL_PRIVATE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_PRIVATE_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+VOL_PRIVATE_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
 mode VOL_RETAIN_MODE ;
 
-VOL_RETAIN_COMMA : COMMA_DFLT ->type(COMMA),mode(VOL_SEQ_NB_MODE) ;
+VOL_RETAIN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_SEQ_NB_MODE) ;
 VOL_RETAIN1 : VOL_RETAIN ->type(VOL_RETAIN) ;
 VOL_RETAIN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_RETAIN_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+VOL_RETAIN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 VOL_RETAIN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 VOL_RETAIN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 
 mode VOL_SEQ_NB_MODE ;
 
-VOL_SEQ_NB_COMMA : COMMA_DFLT ->type(COMMA),mode(VOL_COUNT_MODE) ;
+VOL_SEQ_NB_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_COUNT_MODE) ;
 VOL_SEQ_NB : NUM_LIT_DFLT ;
 VOL_SEQ_NB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_SEQ_NB_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+VOL_SEQ_NB_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode ;
 VOL_SEQ_NB_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 VOL_SEQ_NB_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 
 mode VOL_COUNT_MODE ;
 
-VOL_COUNT_COMMA : COMMA_DFLT ->type(COMMA),mode(VOL_SER2_MODE) ;
+VOL_COUNT_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_SER2_MODE) ;
 VOL_COUNT : NUM_LIT_DFLT ;
 VOL_COUNT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_COUNT_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(DEFAULT_MODE);
-            break;
-      }
-    } ->type(RPAREN) ; //mode(DEFAULT_MODE) ;
+VOL_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode ;
 VOL_COUNT_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 VOL_COUNT_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 
 mode VOL_SER2_MODE ;
 
-VOL_SER2_REF : VOL_REF ->type(VOL_REF),mode(VOL_REF_MODE) ;
+VOL_SER2_REF : VOL_REF ->type(VOL_REF),pushMode(VOL_REF2_MODE) ;
 VOL_SER2 : VOL_SER ->type(VOL_SER) ;
-VOL_SER2_EQUAL : EQUAL_DFLT ->type(EQUAL),mode(VOL_SER3_MODE) ;
+VOL_SER2_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(VOL_SER3_MODE) ;
 VOL_SER2_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 VOL_SER2_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 
@@ -3160,49 +3137,54 @@ mode VOL_SER3_MODE ;
 VOL_SER3 : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
 VOL_SER3_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-VOL_SER3_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(VOL_SER3_PAREN_MODE) ;
-VOL_SER3_RPAREN : RPAREN_DFLT 
-    {
-      switch(cameFromMode) {
-        case DATA_PARM_MODE :
-            mode(DATA_PARM_MODE);
-            break;
-        default :
-            mode(VOL_MODE);
-            break;
-      }
-    } ->type(RPAREN) ;
+VOL_SER3_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER3_PAREN_MODE) ;
+VOL_SER3_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
 
 mode VOL_SER3_PAREN_MODE ;
 
 VOL_SER3_PAREN : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
 VOL_SER3_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(VOL_SER3_MODE) ;
+VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 VOL_SER3_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 VOL_SER3_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 VOL_SER3_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
 
-mode VOL_REF_MODE ;
+mode VOL_REF1_MODE ;
 
-VOL_REF_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_REF_ASTERISK : ASTERISK ->type(ASTERISK),mode(VOL_REF_SPLAT_MODE) ;
-VOL_REF_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_REF1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_REF_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode,popMode ;
+VOL_REF1_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode twice when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
 
 /*
-Note that VOL_REF_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
+Note that VOL_REF1_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
 are missing.  From the z/OS 2.3 documentation...
 
  The dsname cannot be a generation data group (GDG) base name or a member name of a non-GDG data set.
 
 ...which makes life easier because we also have to match the RPAREN ending the VOL=() group.
 */
-VOL_REF_DSN : 
+VOL_REF1_DSN : 
     (AMPERSAND | NATL | ALPHA) 
         (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')*
- ->type(DATASET_NAME) ;
-VOL_REF_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_REF_RPAREN : RPAREN_DFLT 
+ ->type(DATASET_NAME),popMode,popMode ;
+VOL_REF1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode ;
+VOL_REF1_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+
+mode VOL_REF1_SPLAT_MODE ; //TODO not currently used
+
+VOL_REF1_SPLAT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_REF1_SPLAT_DOT : DOT_DFLT ->type(DOT) ;
+VOL_REF1_SPLAT_NAME : NAME ->type(NAME) ;
+VOL_REF1_SPLAT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+VOL_REF1_SPLAT_RPAREN : RPAREN_DFLT 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3213,7 +3195,7 @@ VOL_REF_RPAREN : RPAREN_DFLT
             break;
       }
     } ->type(RPAREN) ;
-VOL_REF_COMMA : COMMA_DFLT 
+VOL_REF1_SPLAT_COMMA : COMMA_DFLT 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3224,7 +3206,7 @@ VOL_REF_COMMA : COMMA_DFLT
             break;
       }
     } ->type(COMMA) ;
-VOL_REF_WS : [ ]+ 
+VOL_REF1_SPLAT_WS : [ ]+ 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3235,7 +3217,7 @@ VOL_REF_WS : [ ]+
             break;
       }
     } ->channel(HIDDEN) ; //mode(CM) ;
-VOL_REF_NEWLINE : NEWLINE 
+VOL_REF1_SPLAT_NEWLINE : NEWLINE 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3247,13 +3229,50 @@ VOL_REF_NEWLINE : NEWLINE
       }
     } ->channel(HIDDEN) ; //mode(DEFAULT_MODE) ;
 
-mode VOL_REF_SPLAT_MODE ;
+/*
 
-VOL_REF_SPLAT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_REF_SPLAT_DOT : DOT_DFLT ->type(DOT) ;
-VOL_REF_SPLAT_NAME : NAME ->type(NAME) ;
-VOL_REF_SPLAT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_REF_SPLAT_RPAREN : RPAREN_DFLT 
+Breaking out of VOL_REF2_MODE involves six popMode operations.  If you're
+keeping track, that one short of getting us out of VOL_MODE.  That's 
+because VOL_MODE has the responsibility of eating the right paren (RPAREN)
+token and bringing us back to whence we came.
+
+*/
+mode VOL_REF2_MODE ;
+
+VOL_REF2_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+//VOL_REF2_ASTERISK : ASTERISK ->type(ASTERISK),pushMode(VOL_REF2_SPLAT_MODE) ;
+VOL_REF2_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(VOL_REF_REFERBACK),popMode,popMode,popMode,popMode,popMode,popMode ;
+VOL_REF2_SQUOTE : '\'' 
+    {
+      /*
+        The QS mode knows to popMode six times when it sees that
+        cameFromMode = this mode.
+      */
+      cameFromMode = _mode;
+    } ->channel(HIDDEN),pushMode(QS) ;
+
+/*
+Note that VOL_REF2_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
+are missing.  From the z/OS 2.3 documentation...
+
+ The dsname cannot be a generation data group (GDG) base name or a member name of a non-GDG data set.
+
+...which makes life easier because we also have to match the RPAREN ending the VOL=() group.
+*/
+VOL_REF2_DSN : 
+    (AMPERSAND | NATL | ALPHA) 
+        (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')*
+ ->type(DATASET_NAME),popMode,popMode,popMode,popMode,popMode,popMode ;
+VOL_REF2_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode,popMode,popMode,popMode,popMode ;
+VOL_REF2_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode ;
+
+mode VOL_REF2_SPLAT_MODE ; //TODO not currently used
+
+VOL_REF2_SPLAT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_REF2_SPLAT_DOT : DOT_DFLT ->type(DOT) ;
+VOL_REF2_SPLAT_NAME : NAME ->type(NAME) ;
+VOL_REF2_SPLAT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+VOL_REF2_SPLAT_RPAREN : RPAREN_DFLT 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3264,7 +3283,7 @@ VOL_REF_SPLAT_RPAREN : RPAREN_DFLT
             break;
       }
     } ->type(RPAREN) ;
-VOL_REF_SPLAT_COMMA : COMMA_DFLT 
+VOL_REF2_SPLAT_COMMA : COMMA_DFLT 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3275,7 +3294,7 @@ VOL_REF_SPLAT_COMMA : COMMA_DFLT
             break;
       }
     } ->type(COMMA) ;
-VOL_REF_SPLAT_WS : [ ]+ 
+VOL_REF2_SPLAT_WS : [ ]+ 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3286,7 +3305,7 @@ VOL_REF_SPLAT_WS : [ ]+
             break;
       }
     } ->channel(HIDDEN) ; //mode(CM) ;
-VOL_REF_SPLAT_NEWLINE : NEWLINE 
+VOL_REF2_SPLAT_NEWLINE : NEWLINE 
     {
       switch(cameFromMode) {
         case DATA_PARM_MODE :
@@ -3316,7 +3335,8 @@ instead of a parameter on a DD statement.
 
 Each of the above must set the returnToMode variable to the current 
 mode so when GLOBAL_PAREN_CONT_MODE_CONTINUATION_WS is encountered
-it knows where to return to.
+it knows where to return to. TODO pretty sure pushMode and popMode
+would work for this just fine.
 
 The GLOBAL_* modes that follow allow those inline comments to be
 processed correctly.

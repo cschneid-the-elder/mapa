@@ -2577,6 +2577,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitOutputStatementADDRESS(JCLParser.OutputStatementADDRESSContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#outputStatementADDRESS_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterOutputStatementADDRESS_value(JCLParser.OutputStatementADDRESS_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#outputStatementADDRESS_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitOutputStatementADDRESS_value(JCLParser.OutputStatementADDRESS_valueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatementAFPPARMS}.
 	 * @param ctx the parse tree
 	 */
@@ -2626,6 +2636,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOutputStatementCHARS(JCLParser.OutputStatementCHARSContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#outputStatementCHARS_value}.
+	 * @param ctx the parse tree
+	 */
+	void enterOutputStatementCHARS_value(JCLParser.OutputStatementCHARS_valueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#outputStatementCHARS_value}.
+	 * @param ctx the parse tree
+	 */
+	void exitOutputStatementCHARS_value(JCLParser.OutputStatementCHARS_valueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatementCKPTLINE}.
 	 * @param ctx the parse tree

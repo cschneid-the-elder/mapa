@@ -1552,6 +1552,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOutputStatementADDRESS(JCLParser.OutputStatementADDRESSContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementADDRESS_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementADDRESS_value(JCLParser.OutputStatementADDRESS_valueContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementAFPPARMS}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1581,6 +1587,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOutputStatementCHARS(JCLParser.OutputStatementCHARSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#outputStatementCHARS_value}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOutputStatementCHARS_value(JCLParser.OutputStatementCHARS_valueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementCKPTLINE}.
 	 * @param ctx the parse tree
