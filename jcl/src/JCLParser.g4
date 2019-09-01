@@ -190,9 +190,9 @@ ddStatement : SS ddName DD ddParameter? (
     inlineComment)* 
       ddParmASTERISK_DATA* ;
 
-ddStatementClosure1 : COMMA commentStatement* SS ddParameter inlineComment? ;
-ddStatementClosure2 : COMMA COMMENT_TEXT? SS? ddParameter inlineComment? ;
-ddStatementClosure3 : COMMA ddParameter inlineComment? ;
+ddStatementClosure1 : COMMA? commentStatement* SS? ddParameter inlineComment? ;
+ddStatementClosure2 : COMMA? COMMENT_FLAG? COMMENT_TEXT? SS? ddParameter inlineComment? ;
+ddStatementClosure3 : COMMA? ddParameter inlineComment? ;
 ddStatementClosure4 : inlineComment commentStatement* SS? ddParameter inlineComment? ;
 
 //ddStatementConcatenation : SS DD ddParameter (((COMMA | inlineComment) SS?)? ddParameter inlineComment?)* ddParmASTERISK_DATA* ;
@@ -679,7 +679,9 @@ ddParmAMP_STRNO : STRNO EQUAL NUM_LIT;
 ddParmAMP_SYNAD : SYNAD EQUAL NAME;
 */
 //ddParmReferback : ASTERISK DOT ddName (DOT ddName (DOT ddName)?)? ;
-ddParmReferback : ASTERISK DOT NAME (DOT NAME (DOT NAME)?)? ;
+ddParmReferback : DSN_MODE_REFERENCE |
+    (ASTERISK DOT NAME (DOT NAME (DOT NAME)?)?)
+   ;
 
 /*
 
