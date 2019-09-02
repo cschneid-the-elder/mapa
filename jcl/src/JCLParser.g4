@@ -680,6 +680,7 @@ ddParmAMP_SYNAD : SYNAD EQUAL NAME;
 */
 //ddParmReferback : ASTERISK DOT ddName (DOT ddName (DOT ddName)?)? ;
 ddParmReferback : DSN_MODE_REFERENCE |
+    REFERBACK |
     (ASTERISK DOT NAME (DOT NAME (DOT NAME)?)?)
    ;
 
