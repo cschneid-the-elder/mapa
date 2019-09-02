@@ -82,6 +82,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJclStep(JCLParser.JclStepContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#keywordOrSymbolic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitKeywordOrSymbolic(JCLParser.KeywordOrSymbolicContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#execStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1684,6 +1690,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOutputStatementDEST(JCLParser.OutputStatementDESTContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#destValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDestValue(JCLParser.DestValueContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementDPAGELBL}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1846,12 +1858,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOutputStatementOFFSETYF(JCLParser.OutputStatementOFFSETYFContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#outputStatementOFFSET_unit}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOutputStatementOFFSET_unit(JCLParser.OutputStatementOFFSET_unitContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementOUTBIN}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1863,12 +1869,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOutputStatementOUTDISP(JCLParser.OutputStatementOUTDISPContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#outputStatementOUTDISP_val}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOutputStatementOUTDISP_val(JCLParser.OutputStatementOUTDISP_valContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementOVERLAYB}.
 	 * @param ctx the parse tree

@@ -127,6 +127,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitJclStep(JCLParser.JclStepContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#keywordOrSymbolic}.
+	 * @param ctx the parse tree
+	 */
+	void enterKeywordOrSymbolic(JCLParser.KeywordOrSymbolicContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#keywordOrSymbolic}.
+	 * @param ctx the parse tree
+	 */
+	void exitKeywordOrSymbolic(JCLParser.KeywordOrSymbolicContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#execStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -2797,6 +2807,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitOutputStatementDEST(JCLParser.OutputStatementDESTContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#destValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterDestValue(JCLParser.DestValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#destValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitDestValue(JCLParser.DestValueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatementDPAGELBL}.
 	 * @param ctx the parse tree
 	 */
@@ -3067,16 +3087,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitOutputStatementOFFSETYF(JCLParser.OutputStatementOFFSETYFContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#outputStatementOFFSET_unit}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutputStatementOFFSET_unit(JCLParser.OutputStatementOFFSET_unitContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#outputStatementOFFSET_unit}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutputStatementOFFSET_unit(JCLParser.OutputStatementOFFSET_unitContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatementOUTBIN}.
 	 * @param ctx the parse tree
 	 */
@@ -3096,16 +3106,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitOutputStatementOUTDISP(JCLParser.OutputStatementOUTDISPContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#outputStatementOUTDISP_val}.
-	 * @param ctx the parse tree
-	 */
-	void enterOutputStatementOUTDISP_val(JCLParser.OutputStatementOUTDISP_valContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#outputStatementOUTDISP_val}.
-	 * @param ctx the parse tree
-	 */
-	void exitOutputStatementOUTDISP_val(JCLParser.OutputStatementOUTDISP_valContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatementOVERLAYB}.
 	 * @param ctx the parse tree
