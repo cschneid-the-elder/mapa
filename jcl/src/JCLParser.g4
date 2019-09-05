@@ -52,7 +52,7 @@ procName : NAME_FIELD ;
 
 jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ;
 
-keywordOrSymbolic : (QUOTED_STRING_FRAGMENT | KEYWORD_VALUE | SYMBOLIC) ;
+keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE | SYMBOLIC) ;
 
 execStatement : execPgmStatement | execProcStatement ;
 
@@ -929,10 +929,11 @@ whenTest : whenKeyword
 yesOrNo : YES | NO | ALPHA ;
 
 outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter 
-    (interveningCruft outputStatementParameter)* COMMENT_TEXT? ;
+    (interveningCruft? outputStatementParameter)* COMMENT_TEXT? ;
 
 outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | outputStatementAFPSTATS | outputStatementBUILDING | outputStatementBURST | outputStatementCHARS | outputStatementCKPTLINE | outputStatementCKPTPAGE | outputStatementCKPTSEC | outputStatementCLASS | outputStatementCOLORMAP | outputStatementCOMPACT | outputStatementCOMSETUP | outputStatementCONTROL | outputStatementCOPIES | outputStatementCOPYCNT | outputStatementDATACK | outputStatementDDNAME | outputStatementDEFAULT | outputStatementDEPT | outputStatementDEST | outputStatementDPAGELBL | outputStatementDUPLEX | outputStatementFCB | outputStatementFLASH | outputStatementFORMDEF | outputStatementFORMLEN | outputStatementFORMS | outputStatementFSSDATA | outputStatementGROUPID | outputStatementINDEX | outputStatementINTRAY | outputStatementJESDS | outputStatementLINDEX | outputStatementLINECT | outputStatementMAILBCC | outputStatementMAILCC | outputStatementMAILFILE | outputStatementMAILFROM | outputStatementMAILTO | outputStatementMERGE | outputStatementMODIFY | outputStatementNAME | outputStatementNOTIFY | outputStatementOFFSETXB | outputStatementOFFSETXF | outputStatementOFFSETYB | outputStatementOFFSETYF | outputStatementOUTBIN | outputStatementOUTDISP | outputStatementOVERLAYB | outputStatementOVERLAYF | outputStatementOVFL | outputStatementPAGEDEF | outputStatementPIMSG | outputStatementPORTNO | outputStatementPRMODE | outputStatementPRTATTRS | outputStatementPRTERROR | outputStatementPRTOPTNS | outputStatementPRTQUEUE | outputStatementPRTY | outputStatementREPLYTO | outputStatementRESFMT | outputStatementRETAINS | outputStatementRETAINF | outputStatementRETRYL | outputStatementRETRYT | outputStatementROOM | outputStatementSYSAREA | outputStatementTHRESHLD | outputStatementTITLE | outputStatementTRC | outputStatementUCS | outputStatementUSERDATA | outputStatementUSERLIB | outputStatementUSERPATH | outputStatementWRITER ;
 
+/*
 outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL (
     (LPAREN outputStatementADDRESS_value
         (interveningCruft outputStatementADDRESS_value)*
@@ -940,6 +941,15 @@ outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL (
     outputStatementADDRESS_value
   ) ;
 outputStatementADDRESS_value : (OUTPUT_ADDRESS_VALUE | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
+*/
+outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL (
+    (keywordOrSymbolic COMMENT_TEXT?) |
+    (LPAREN 
+        keywordOrSymbolic
+            ((COMMA | inlineComment)? SS? COMMENT_TEXT? keywordOrSymbolic)*
+    RPAREN COMMENT_TEXT?)
+  ) ;
+
 outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
 outputStatementAFPSTATS : OUTPUT_STMT_AFPSTATS EQUAL (OUTPUT_AFPSTATS_VALUE | SYMBOLIC) ;
 outputStatementBUILDING : OUTPUT_STMT_BUILDING EQUAL (OUTPUT_BUILDING_VALUE | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
@@ -1010,54 +1020,61 @@ outputStatementFSSDATA : OUTPUT_STMT_FSSDATA EQUAL keywordOrSymbolic ;
 outputStatementGROUPID : OUTPUT_STMT_GROUPID EQUAL keywordOrSymbolic ;
 outputStatementINDEX : OUTPUT_STMT_INDEX EQUAL keywordOrSymbolic ;
 outputStatementINTRAY : OUTPUT_STMT_INTRAY EQUAL keywordOrSymbolic ;
-outputStatementJESDS : OUTPUT_STMT_JESDS EQUAL OUTPUT_JESDS_VALUE ;
+outputStatementJESDS : OUTPUT_STMT_JESDS EQUAL (OUTPUT_JESDS_VALUE | SYMBOLIC) ;
 outputStatementLINDEX : OUTPUT_STMT_LINDEX EQUAL keywordOrSymbolic ;
 outputStatementLINECT : OUTPUT_STMT_LINECT EQUAL keywordOrSymbolic ;
-outputStatementMAILBCC : OUTPUT_STMT_MAILBCC EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT |
+outputStatementMAILBCC : OUTPUT_STMT_MAILBCC EQUAL (keywordOrSymbolic |
     (LPAREN 
-        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
-            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+        keywordOrSymbolic 
+            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
     RPAREN)
-  ;
-outputStatementMAILCC : OUTPUT_STMT_MAILCC EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT |
+  ) ;
+outputStatementMAILCC : OUTPUT_STMT_MAILCC EQUAL  (keywordOrSymbolic |
     (LPAREN 
-        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
-            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+        keywordOrSymbolic 
+            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
     RPAREN)
-  ;
+  ) ;
 outputStatementMAILFILE : OUTPUT_STMT_MAILFILE EQUAL keywordOrSymbolic ;
 outputStatementMAILFROM : OUTPUT_STMT_MAILFROM EQUAL keywordOrSymbolic ;
-outputStatementMAILTO : OUTPUT_STMT_MAILTO EQUAL EQUAL ALNUMNAT | QUOTED_STRING_FRAGMENT |
+outputStatementMAILTO : OUTPUT_STMT_MAILTO EQUAL  (keywordOrSymbolic |
     (LPAREN 
-        (ALNUMNAT | QUOTED_STRING_FRAGMENT) 
-            ((COMMA | inlineComment)? SS? (ALNUMNAT | QUOTED_STRING_FRAGMENT))*
+        keywordOrSymbolic 
+            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
     RPAREN)
-  ;
+  ) ;
 outputStatementMERGE : OUTPUT_STMT_MERGE EQUAL keywordOrSymbolic ;
-outputStatementMODIFY : OUTPUT_STMT_MODIFY EQUAL keywordOrSymbolic |
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)?)
-  ;
+outputStatementMODIFY : OUTPUT_STMT_MODIFY EQUAL (keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN) |
+    (LPAREN keywordOrSymbolic? COMMA keywordOrSymbolic RPAREN)
+  ) ;
 outputStatementNAME : OUTPUT_STMT_NAME EQUAL keywordOrSymbolic ;
-outputStatementNOTIFY : OUTPUT_STMT_NOTIFY EQUAL (NAME (DOT NAME)?) | 
-    (LPAREN (NAME (DOT NAME)?) (COMMA (NAME (DOT NAME)?)+ RPAREN))
-  ;
+outputStatementNOTIFY : OUTPUT_STMT_NOTIFY EQUAL (
+    (keywordOrSymbolic COMMENT_TEXT?) | 
+    (
+      LPAREN keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic)* 
+      RPAREN COMMENT_TEXT?
+    )
+  ) ;
 outputStatementOFFSETXB : OUTPUT_STMT_OFFSETXB EQUAL keywordOrSymbolic ;
 outputStatementOFFSETXF : OUTPUT_STMT_OFFSETXF EQUAL keywordOrSymbolic ;
 outputStatementOFFSETYB : OUTPUT_STMT_OFFSETYB EQUAL keywordOrSymbolic ;
 outputStatementOFFSETYF : OUTPUT_STMT_OFFSETYF EQUAL keywordOrSymbolic ;
 //outputStatementOFFSET_unit : IN | CM_UNIT | MM | PELS | POINTS ;
 outputStatementOUTBIN : OUTPUT_STMT_OUTBIN EQUAL keywordOrSymbolic ;
-outputStatementOUTDISP : OUTPUT_STMT_OUTDISP EQUAL keywordOrSymbolic | 
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
-  ;
+outputStatementOUTDISP : OUTPUT_STMT_OUTDISP EQUAL (keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN) |
+    (LPAREN keywordOrSymbolic? COMMA keywordOrSymbolic RPAREN)
+  ) ;
 //outputStatementOUTDISP_val : WRITE | HOLD | KEEP | LEAVE | PURGE ;
 outputStatementOVERLAYB : OUTPUT_STMT_OVERLAYB EQUAL keywordOrSymbolic ;
 outputStatementOVERLAYF : OUTPUT_STMT_OVERLAYF EQUAL keywordOrSymbolic ;
 outputStatementOVFL : OUTPUT_STMT_OVFL EQUAL keywordOrSymbolic ;
 outputStatementPAGEDEF : OUTPUT_STMT_PAGEDEF EQUAL keywordOrSymbolic ;
-outputStatementPIMSG : OUTPUT_STMT_PIMSG EQUAL keywordOrSymbolic | 
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
-  ;
+outputStatementPIMSG : OUTPUT_STMT_PIMSG EQUAL (keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN) |
+    (LPAREN keywordOrSymbolic? COMMA keywordOrSymbolic RPAREN)
+  ) ;
 outputStatementPORTNO : OUTPUT_STMT_PORTNO EQUAL keywordOrSymbolic ;
 outputStatementPRMODE : OUTPUT_STMT_PRMODE EQUAL keywordOrSymbolic ;
 outputStatementPRTATTRS : OUTPUT_STMT_PRTATTRS EQUAL keywordOrSymbolic ;
@@ -1066,7 +1083,7 @@ outputStatementPRTOPTNS : OUTPUT_STMT_PRTOPTNS EQUAL keywordOrSymbolic ;
 outputStatementPRTQUEUE : OUTPUT_STMT_PRTQUEUE EQUAL keywordOrSymbolic ;
 outputStatementPRTY : OUTPUT_STMT_PRTY EQUAL keywordOrSymbolic ;
 outputStatementREPLYTO : OUTPUT_STMT_REPLYTO EQUAL keywordOrSymbolic ;
-outputStatementRESFMT : OUTPUT_STMT_RESFMT EQUAL NAME ;
+outputStatementRESFMT : OUTPUT_STMT_RESFMT EQUAL keywordOrSymbolic ;
 outputStatementRETAINS : OUTPUT_STMT_RETAINS EQUAL keywordOrSymbolic ;
 outputStatementRETAINF : OUTPUT_STMT_RETAINF EQUAL keywordOrSymbolic ;
 outputStatementRETRYL : OUTPUT_STMT_RETRYL EQUAL keywordOrSymbolic ;
@@ -1077,28 +1094,30 @@ outputStatementTHRESHLD : OUTPUT_STMT_THRESHLD EQUAL keywordOrSymbolic ;
 outputStatementTITLE : OUTPUT_STMT_TITLE EQUAL keywordOrSymbolic ;
 outputStatementTRC : OUTPUT_STMT_TRC EQUAL keywordOrSymbolic ;
 outputStatementUCS : OUTPUT_STMT_UCS EQUAL keywordOrSymbolic ;
-outputStatementUSERDATA : OUTPUT_STMT_USERDATA EQUAL keywordOrSymbolic |
+outputStatementUSERDATA : OUTPUT_STMT_USERDATA EQUAL (keywordOrSymbolic |
     (LPAREN 
         keywordOrSymbolic 
             ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
     RPAREN)
-  ;
+  ) ;
 
-outputStatementUSERLIB : OUTPUT_STMT_USERLIB EQUAL DATASET_NAME | QUOTED_STRING_FRAGMENT |
+outputStatementUSERLIB : OUTPUT_STMT_USERLIB EQUAL (
+    keywordOrSymbolic |
     (LPAREN 
-        (DATASET_NAME | QUOTED_STRING_FRAGMENT) 
-            ((COMMA | inlineComment)? SS? (DATASET_NAME | QUOTED_STRING_FRAGMENT))*
+        keywordOrSymbolic 
+            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
     RPAREN)
-  ;
+  ) ;
 
-outputStatementUSERPATH : OUTPUT_STMT_USERPATH EQUAL UNQUOTED_STRING | QUOTED_STRING_FRAGMENT |
+outputStatementUSERPATH : OUTPUT_STMT_USERPATH EQUAL (
+    keywordOrSymbolic |
     (LPAREN 
-        (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT) 
-            ((COMMA | inlineComment)? SS? (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT))*
+        keywordOrSymbolic 
+            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
     RPAREN)
-  ;
+  ) ;
 
-outputStatementWRITER : OUTPUT_STMT_WRITER EQUAL NAME ;
+outputStatementWRITER : OUTPUT_STMT_WRITER EQUAL keywordOrSymbolic ;
 
 pendStatement : SS NAME_FIELD? PEND inlineComment? ;
 

@@ -972,7 +972,7 @@ OUTPUT_STMT_COMMA : COMMA_DFLT ->type(COMMA) ;
 OUTPUT_STMT_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
 OUTPUT_STMT_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN) ;
 
-OUTPUT_STMT_ADDRESS : A D D R E S S ->pushMode(OUTPUT_ADDRESS_MODE) ;
+OUTPUT_STMT_ADDRESS : A D D R E S S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_AFPPARMS : A F P P A R M S {cameFromMode = _mode;} ->pushMode(DSN_MODE) ;
 OUTPUT_STMT_AFPSTATS : A F P S T A T S ->pushMode(OUTPUT_AFPSTATS_MODE) ;
 OUTPUT_STMT_BUILDING : B U I L D I N G ->pushMode(OUTPUT_BUILDING_MODE) ;
@@ -1172,7 +1172,7 @@ OUTPUT_CLASS_SQUOTE : '\''
 OUTPUT_CLASS_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 OUTPUT_CLASS_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 OUTPUT_CLASS_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
-OUTPUT_CLASS_COMMA_WS : COMMA_DFLT [ ]+ ->mode(COMMA_WS_MODE) ;
+OUTPUT_CLASS_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 
 mode OUTPUT_COLORMAP_MODE ;
 
@@ -2152,6 +2152,9 @@ can have a null value...
 if it's being continued, or if it's got a comment in either of those
 two situations.
 
+Also note that we mode(COMMA_NEWLINE_MODE) and allow the popMode there to
+take us back into the "parent" mode.
+
 */
 KYWD_VAL_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
@@ -2164,6 +2167,25 @@ KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
 KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+
+/*
+
+The newline, comma newline, and ws tokens are here because some keywords
+can have a null value...
+
+//PROCSTEP.DD001 DD DATACLAS=
+//PROCSTEP.DD002 DD DATACLAS= NULL IT OUT
+//PROCSTEP.DD003 DD COPIES=,  NULL IT OUT
+//  DATACLAS=  NULL THIS OUT TOO
+
+...and thus we must check to see if the statement ends right there, or
+if it's being continued, or if it's got a comment in either of those
+two situations.
+
+*/
+KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+//KYWD_VAL_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_NEWLINE_CM_MODE) ;
+KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 
 
 mode ACCODE_MODE ;

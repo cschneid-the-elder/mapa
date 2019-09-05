@@ -1558,12 +1558,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOutputStatementADDRESS(JCLParser.OutputStatementADDRESSContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#outputStatementADDRESS_value}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitOutputStatementADDRESS_value(JCLParser.OutputStatementADDRESS_valueContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementAFPPARMS}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

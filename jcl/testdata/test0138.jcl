@@ -1,0 +1,107 @@
+//OUTPUT JOB 
+//* 
+//@0000001 OUTPUT ADDRESS='1234 Triskelion', comment
+//             AFPPARMS=PROD.SYS.AFPPARMS, comment
+//             AFPSTATS=YES, comment
+//             BUILDING='O''Brian Center for Science', comment
+//             BURST=NO, comment
+//             CHARS=@#$1, comment
+//             CKPTLINE=32767, comment
+//             CKPTPAGE=32767, comment
+//             CKPTSEC=32767, comment
+//             CLASS=, comment
+//             COLORMAP=#0000001, comment
+//             COMSETUP=#1, comment
+//             CONTROL=PROGRAM, comment
+//             COPIES=(255,(255,255,255,255,255,255,255,255)), comment
+//             COPYCNT=2147483647, comment
+//             DATACK=BLOCK, comment
+//             DDNAME=JSTEP.PSTEP.DDNAME, comment
+//             DEFAULT=YES, comment
+//             DEPT='Department of Silly Test Cases', comment
+//             DEST=(LONDON.CICSUSR), comment
+//             DPAGELBL=YES, comment
+//             DUPLEX=TUMBLE, comment
+//             FCB=$$$$, comment
+//             FLASH=NONE, comment
+//             FORMDEF=#, comment
+//             FORMLEN=1.001CM, comment
+//             FORMS=@001$002, comment
+//             FSSDATA=A1@.+-/, comment
+//             GROUPID=A, comment
+//             INDEX=1, comment
+//             INTRAY=1, comment
+//             JESDS=ALL, comment
+//             LINDEX=1, comment
+//             LINECT=1, comment
+//             MAILBCC=('quentin.coldwater@example.com', comment
+//             'alice.quinn@example.com', comment
+//             'julia.wicker@example.com', comment
+//             'eliot.waugh@example.com', comment
+//             'margo.hanson@example.com', comment
+//             'penny.adiyodi@example.com', comment
+//             'kady.orloff-diaz@example.com'), comment
+//             MAILCC=(QUENTIN.COLDWATER@EXAMPLE.COM, comment
+//             ALICE.QUINN@EXAMPLE.COM, comment
+//             JULIA.WICKER@EXAMPLE.COM, comment
+//             ELIOT.WAUGH@EXAMPLE.COM, comment
+//             MARGO.HANSON@EXAMPLE.COM, comment
+//             PENNY.ADIYODI@EXAMPLE.COM, comment
+//             KADY.ORLOFF-DIAZ@EXAMPLE.COM), comment
+//             MAILFILE='Latest Results', comment
+//             MAILFROM=PRODUCTION.REPORT.DISTRIBUTION, comment
+//             MAILTO=('quentin.coldwater@example.com', comment
+//             'alice.quinn@example.com', comment
+//             'julia.wicker@example.com', comment
+//             'eliot.waugh@example.com', comment
+//             'margo.hanson@example.com', comment
+//             'penny.adiyodi@example.com', comment
+//             'kady.orloff-diaz@example.com'), comment
+//             MERGE=Y, comment
+//             MODIFY=(&MODIFY,&TRC), comment
+//             NAME='Charlie Jade', comment
+//             NOTIFY=(NEWYORK.IBMUSER1, comment
+//             LONDON.IBMUSER2, comment
+//             PARIS.IBMUSER3, comment
+//             MUNICH.IBMUSER4), comment
+//             OFFSETXB=1234.567POINTS, comment
+//             OFFSETXF=1234.567CM, comment
+//             OFFSETYB=1234.567MM, comment
+//             OFFSETYF=1234.567PELS, comment
+//             OUTBIN=1, comment
+//             OUTDISP=(WRITE,KEEP), comment
+//             OVERLAYB=#ABC, comment
+//             OVERLAYF=A123, comment
+//             OVFL=ON, comment
+//             PAGEDEF=@#$@#$, comment
+//             PIMSG=(YES,4), comment
+//             PORTNO=65535, comment
+//             PRMODE=ABCDEFGH, comment
+//             PRTATTRS='serenity=firefly,moya=leviathan', comment
+//             PRTERROR=DEFAULT, comment
+//             PRTOPTNS='4-8-15-16-23-42', comment
+//             PRTQUEUE='123456789A123456789B123456789C123456789D comment
+//             123456789E123456789F123456789G123456789H123456789I', comment
+//             PRTY=255, comment
+//             REPLYTO='yalena.yardeen@example.com', comment
+//             RESFMT=P300, comment
+//             RETAINS=FOREVER, comment
+//             RETAINF=FOREVER, comment
+//             RETRYT='9999:99:99', comment
+//             RETRYL=32767, comment
+//             ROOM=201B, comment
+//             SYSAREA=N, comment
+//             THRESHLD=99999999, comment
+//             TITLE='This is the title text, such as it is', comment
+//             TRC=&TRC, comment
+//             UCS=RN, comment
+//             USERDATA=('Sleestak'), comment
+//             USERLIB=(&SYSUID..USERLIB, comment
+//             QA.USERLIB, comment
+//             PROD.USERLIB), comment
+//             USERPATH=(&PATCH, comment
+//             '/user/cschneid/fonts', comment
+//             '/integration-test/fonts', comment
+//             '/prod/fonts'), comment
+//             WRITER=$WRITER comment
+
