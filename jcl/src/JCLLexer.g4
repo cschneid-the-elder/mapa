@@ -640,7 +640,7 @@ JOB_OP : J O B ->mode(JOB_MODE),type(JOB) ;
 NOTIFY_OP : N O T I F Y ->mode(POST_OP) ;
 OUTPUT_OP : O U T P U T ->mode(OUTPUT_STMT_MODE),type(OUTPUT) ;
 PEND_OP : P E N D ->mode(POST_OP),type(PEND) ;
-PROC_OP : P R O C ->mode(POST_OP),type(PROC) ;
+PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
 SCHEDULE_OP : S C H E D U L E ->mode(POST_OP),type(SCHEDULE) ;
 SET_OP : S E T ->mode(POST_OP),type(SET) ;
 XMIT_OP : X M I T ->mode(POST_OP),type(XMIT) ;
@@ -1246,6 +1246,28 @@ fragment OUTPUT_JESDS_ALL : A L L ;
 fragment OUTPUT_JESDS_LOG : L O G ;
 fragment OUTPUT_JESDS_JCL : J C L ;
 fragment OUTPUT_JESDS_MSG : M S G ;
+
+mode PROC_MODE ;
+
+PROC_WS : [ ]+ ->channel(HIDDEN),mode(PROC_PARM_MODE) ;
+PROC_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+
+mode PROC_PARM_MODE ;
+
+PROC_PARM_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(PROC_PARM_VALUE_MODE) ;
+PROC_PARM_NAME : NM_PART ;
+
+mode PROC_PARM_VALUE_MODE ;
+
+PROC_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+PROC_PARM_VALUE : [)(A-Z0-9@#$*\-+&./%[]+ ;
+PROC_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+
+PROC_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+PROC_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
+PROC_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+PROC_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+
 
 mode DATA_PARM_MODE ;
 

@@ -38,9 +38,14 @@ procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatemen
 
 procStatement : SS procName? PROC definedSymbolicParameters* ;
 
-defineSymbolicParameter : NAME EQUAL (QUOTED_STRING_FRAGMENT | UNQUOTED_STRING)? ;
+defineSymbolicParameter : PROC_PARM_NAME EQUAL (QUOTED_STRING_FRAGMENT | PROC_PARM_VALUE)? ;
 
-definedSymbolicParameters : defineSymbolicParameter ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* ;
+//definedSymbolicParameters : defineSymbolicParameter ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* ;
+
+definedSymbolicParameters : defineSymbolicParameter (
+    ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* |
+    (COMMENT_TEXT?)
+  ) ;
 
 commentStatement : COMMENT_FLAG (COMMENT_TEXT? | EOF) ;
 
