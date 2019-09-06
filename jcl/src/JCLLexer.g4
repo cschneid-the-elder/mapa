@@ -1251,6 +1251,7 @@ mode PROC_MODE ;
 
 PROC_WS : [ ]+ ->channel(HIDDEN),mode(PROC_PARM_MODE) ;
 PROC_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+PROC_WS_NEWLINE : PROC_WS PROC_NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode PROC_PARM_MODE ;
 
