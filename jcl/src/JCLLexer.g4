@@ -118,7 +118,6 @@ ADDRSPC_DFLT : A D D R S P C ->type(ADDRSPC) ;
 //AFF : A F F ;
 AFPPARMS : A F P P A R M S ->pushMode(DSN_MODE);
 AFPSTATS : A F P S T A T S ;
-AFTER : A F T E R ;
 ALL : A L L ;
 ALLOW : A L L O W ;
 ALPHA : [A-Z] ;
@@ -131,7 +130,6 @@ ANYLOCAL : A N Y L O C A L ;
 ASTERISK : '*' ;
 AVGREC_DFLT : A V G R E C ->type(AVGREC),pushMode(AVGREC_MODE) ;
 BACKOUT : B A C K O U T ;
-BEFORE : B E F O R E ;
 BFALN_DFLT : B F A L N ->type(BFALN);
 BFALN_D : D ;
 BFALN_F : F ;
@@ -203,7 +201,6 @@ DD_DFLT : D D ->mode(DD_OP),type(DD) ;
 DDNAME_DFLT : D D N A M E ->type(DDNAME) ;
 DEFAULT : D E F A U L T ;
 //DEFER : D E F E R ;
-DELAY : D E L A Y ;
 
 DEN_DFLT : D E N ->type(DEN) ;
 DEPT : D E P T ;
@@ -269,7 +266,6 @@ GNCP_DFLT : G N C P ->type(GNCP) ;
 GROUP_DFLT : G R O U P ->type(GROUP) ;
 GROUPID : G R O U P I D ;
 HOLD_DFLT : H O L D ->type(HOLD),mode(HOLD_MODE) ;
-HOLDUNTIL : H O L D U N T I L ;
 HOOK : H O O K ;
 HYPHEN : '-' ;
 IF_DFLT : I F ->mode(POST_IF),type(IF) ;
@@ -290,7 +286,6 @@ JESLOG_DFLT : J E S L O G ->type(JESLOG) ;
 JGLOBAL : J G L O B A L ;
 JLOCAL : J L O C A L ;
 JOB_DFLT : J O B ->mode(POST_OP),type(JOB) ;
-JOBGROUP : J O B G R O U P ;
 JOBRC_DFLT : J O B R C ->mode(JOBRC_MODE),type(JOBRC) ;
 
 KEY : K E Y ;
@@ -436,7 +431,7 @@ RETRYT : R E T R Y T ;
 ROOM : R O O M ;
 RUN_DFLT : R U N ->type(RUN) ;
 SCAN : S C A N ;
-SCHEDULE_DFLT : S C H E D U L E ->mode(POST_OP),type(SCHEDULE) ;
+SCHEDULE_DFLT : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SCHENV_DFLT : S C H E N V ->type(SCHENV) ;
 SECERR : S E C E R R ;
 SECLABEL_DFLT : S E C L A B E L ->type(SECLABEL) ;
@@ -460,7 +455,6 @@ SPIN_DFLT : S P I N ->type(SPIN) ;
 SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 fragment SQUOTE2 : SQUOTE SQUOTE ;
 STACK_DFLT : S T A C K ->type(STACK) ;
-STARTBY : S T A R T B Y ;
 STD : S T D ;
 //STEP : S T E P ;
 STORCLAS_DFLT : S T O R C L A S ->type(STORCLAS),mode(STORCLAS_MODE) ;
@@ -522,7 +516,6 @@ WHEN_NL : (N L) | (NOT_SYMBOL_DFLT '<') ;
 //WHEN_REL_EXP_KEYWORD : ABEND_DFLT | ABENDCC_DFLT | RC_DFLT | RUN_DFLT | SECERR | JCLERR ;
 WHEN_REL_OP : COND_OP | EQUAL_DFLT | WHEN_GE | WHEN_LE | WHEN_NE | WHEN_NG | WHEN_NL | WHEN_GT | WHEN_LT;
 //WHEN_CHECK : NOT_SYMBOL_DFLT? WHEN_REL_EXP_KEYWORD (WHEN_REL_OP (FALSE_DFLT | TRUE_DFLT | NUM_LIT_DFLT | ALNUMNAT))? ;
-WITH : W I T H ;
 WRITE : W R I T E ;
 WRITER : W R I T E R ;
 WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
@@ -657,7 +650,7 @@ NOTIFY_OP : N O T I F Y ->mode(POST_OP) ;
 OUTPUT_OP : O U T P U T ->mode(OUTPUT_STMT_MODE),type(OUTPUT) ;
 PEND_OP : P E N D ->mode(POST_OP),type(PEND) ;
 PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
-SCHEDULE_OP : S C H E D U L E ->mode(POST_OP),type(SCHEDULE) ;
+SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_OP : S E T ->mode(POST_OP),type(SET) ;
 XMIT_OP : X M I T ->mode(POST_OP),type(XMIT) ;
 
@@ -1282,9 +1275,30 @@ PROC_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 PROC_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 PROC_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
-PROC_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+PROC_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 PROC_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
 
+mode SCHEDULE_MODE ;
+
+SCHEDULE_WS : [ ]+ ->channel(HIDDEN),mode(SCHEDULE_PARM_MODE) ;
+SCHEDULE_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+SCHEDULE_WS_NEWLINE : PROC_WS PROC_NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+
+mode SCHEDULE_PARM_MODE ;
+
+SCHEDULE_PARM_AFTER : A F T E R ->pushMode(KYWD_VAL_MODE) ;
+SCHEDULE_PARM_BEFORE : B E F O R E ->pushMode(KYWD_VAL_MODE) ;
+SCHEDULE_PARM_DELAY : D E L A Y ->pushMode(KYWD_VAL_MODE) ;
+SCHEDULE_PARM_HOLDUNTIL : H O L D U N T I L ->pushMode(KYWD_VAL_MODE) ;
+SCHEDULE_PARM_JOBGROUP : J O B G R O U P ->pushMode(KYWD_VAL_MODE) ;
+SCHEDULE_PARM_STARTBY : S T A R T B Y ->pushMode(KYWD_VAL_MODE) ;
+SCHEDULE_PARM_WITH : W I T H ->pushMode(KYWD_VAL_MODE) ;
+
+SCHEDULE_PARM_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+SCHEDULE_PARM_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+SCHEDULE_PARM_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+SCHEDULE_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+SCHEDULE_PARM_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 
 mode DATA_PARM_MODE ;
 

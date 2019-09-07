@@ -1136,21 +1136,21 @@ pendStatement : SS NAME_FIELD? PEND inlineComment? ;
 
 scheduleStatement : SS NAME_FIELD? SCHEDULE scheduleParameters* ;
 
-scheduleParameters : scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY | scheduleParmHOLDUNTIL | scheduleParmJOBGROUP | scheduleParmSTARTBY | scheduleParmWITH ;
+scheduleParameters : (scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY | scheduleParmHOLDUNTIL | scheduleParmJOBGROUP | scheduleParmSTARTBY | scheduleParmWITH) ;
 
-scheduleParmAFTER : AFTER EQUAL NAME ;
-scheduleParmBEFORE : BEFORE EQUAL NAME ;
-scheduleParmDELAY : DELAY EQUAL (YES | Y) ;
-scheduleParmHOLDUNTIL : HOLDUNTIL EQUAL 
-    QUOTED_STRING_FRAGMENT |
-    (LPAREN QUOTED_STRING_FRAGMENT (COMMA QUOTED_STRING_FRAGMENT)? RPAREN)
-  ;
-scheduleParmJOBGROUP : JOBGROUP EQUAL NAME (DOT NAME)? ;
-scheduleParmSTARTBY : STARTBY EQUAL 
-    QUOTED_STRING_FRAGMENT |
-    (LPAREN QUOTED_STRING_FRAGMENT (COMMA QUOTED_STRING_FRAGMENT)? RPAREN)
-  ;
-scheduleParmWITH : WITH EQUAL NAME ;
+scheduleParmAFTER : SCHEDULE_PARM_AFTER EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmBEFORE : SCHEDULE_PARM_BEFORE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmDELAY : SCHEDULE_PARM_DELAY EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmHOLDUNTIL : SCHEDULE_PARM_HOLDUNTIL EQUAL (
+    keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
+  ) COMMENT_TEXT? ;
+scheduleParmJOBGROUP : SCHEDULE_PARM_JOBGROUP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmSTARTBY : SCHEDULE_PARM_STARTBY EQUAL (
+    keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
+  ) COMMENT_TEXT? ;
+scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 
 setStatement : SS NAME_FIELD? SET (NAME | ALPHA+) EQUAL (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT)?
     ((COMMA | inlineComment)? SS? (NAME | ALPHA+) EQUAL (UNQUOTED_STRING | QUOTED_STRING_FRAGMENT))*
