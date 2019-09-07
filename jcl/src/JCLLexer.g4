@@ -437,7 +437,7 @@ SECERR : S E C E R R ;
 SECLABEL_DFLT : S E C L A B E L ->type(SECLABEL) ;
 SECMODEL_DFLT : S E C M O D E L ->type(SECMODEL),mode(SECMODEL_MODE) ;
 SEGMENT_DFLT : S E G M E N T ->type(SEGMENT) ;
-SET_DFLT : S E T ->mode(POST_OP),type(SET) ;
+SET_DFLT : S E T ->mode(SET_MODE),type(SET) ;
 
 //SINGLE : S I N G L E ;
 SLASH : '/' ;
@@ -651,7 +651,7 @@ OUTPUT_OP : O U T P U T ->mode(OUTPUT_STMT_MODE),type(OUTPUT) ;
 PEND_OP : P E N D ->mode(POST_OP),type(PEND) ;
 PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
 SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
-SET_OP : S E T ->mode(POST_OP),type(SET) ;
+SET_OP : S E T ->mode(SET_MODE),type(SET) ;
 XMIT_OP : X M I T ->mode(POST_OP),type(XMIT) ;
 
 WS_OP : [ ]+ ->channel(HIDDEN) ;
@@ -1299,6 +1299,29 @@ SCHEDULE_PARM_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MOD
 SCHEDULE_PARM_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 SCHEDULE_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
 SCHEDULE_PARM_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+
+mode SET_MODE ;
+
+SET_WS : [ ]+ ->channel(HIDDEN),mode(SET_PARM_MODE) ;
+SET_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+SET_WS_NEWLINE : SET_WS SET_NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+
+mode SET_PARM_MODE ;
+
+SET_PARM_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(SET_PARM_VALUE_MODE) ;
+SET_PARM_NAME : NM_PART ;
+
+mode SET_PARM_VALUE_MODE ;
+
+SET_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+SET_PARM_VALUE : [)(A-Z0-9@#$*\-+&./%[]+ ;
+SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+
+SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
+SET_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+SET_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+SET_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
 mode DATA_PARM_MODE ;
 

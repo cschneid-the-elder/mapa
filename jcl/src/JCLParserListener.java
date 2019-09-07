@@ -3486,4 +3486,14 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSetStatement(JCLParser.SetStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#setOperation}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetOperation(JCLParser.SetOperationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#setOperation}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetOperation(JCLParser.SetOperationContext ctx);
 }

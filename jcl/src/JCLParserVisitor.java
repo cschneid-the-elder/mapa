@@ -2097,4 +2097,10 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetStatement(JCLParser.SetStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#setOperation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetOperation(JCLParser.SetOperationContext ctx);
 }
