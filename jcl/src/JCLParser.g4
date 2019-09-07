@@ -57,6 +57,14 @@ procName : NAME_FIELD ;
 
 jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ;
 
+/*
+TODO
+If I can figure out a way to only match SYMBOLIC_SUBSTRING after I've
+matched SYMBOLIC then I can reinstate this.  Until then, substringing
+system symbols will have to wait.
+keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE | (SYMBOLIC SYMBOLIC_SUBSTRING?)) ;
+*/
+
 keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE | SYMBOLIC) ;
 
 execStatement : execPgmStatement | execProcStatement ;

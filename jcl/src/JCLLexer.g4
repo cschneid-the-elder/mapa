@@ -91,6 +91,22 @@ MEM_UNIT : U | K | M | G | T | P ;
 NUM_MEM_VAL : NUM_LIT_DFLT MEM_UNIT ;
 SYMBOLIC : AMPERSAND [A-Z0-9@#$]+ {getText().length() <= 9}? ;
 
+/*
+TODO The only time we should match this is after matching a SYMBOLIC.
+
+Maybe in KYWD mode?
+
+SYMBOLIC_SUBSTRING : (
+    LPAREN_DFLT
+      (
+        (NUM ':' NUM) |
+        (NUM)
+      )?  
+    RPAREN_DFLT
+  ) ;
+
+*/
+
 ABEND_DFLT : A B E N D ->type(ABEND) ;
 ABENDCC_DFLT : A B E N D C C ->type(ABENDCC) ;
 ABSTR : A B S T R ;
