@@ -225,7 +225,7 @@ ddName : (NAME | NAME_FIELD) (DOT (NAME | NAME_FIELD))? ;
 
 ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDDNAME | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter;
 
-ddParmACCODE : ACCODE EQUAL (ACCODE_VALUE | QUOTED_STRING_FRAGMENT | SYMBOLIC);
+ddParmACCODE : ACCODE EQUAL keywordOrSymbolic;
 ddParmAMP : AMP EQUAL (
     (LPAREN 
         QUOTED_STRING_FRAGMENT ((COMMA | inlineComment)? SS? COMMENT_TEXT? QUOTED_STRING_FRAGMENT)*
@@ -234,27 +234,27 @@ ddParmAMP : AMP EQUAL (
   ) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
-ddParmAVGREC : AVGREC EQUAL (AVGREC_VALUE | SYMBOLIC) ;
-ddParmBFALN : BFALN EQUAL (BFALN_VALUE | SYMBOLIC) ;
+ddParmAVGREC : AVGREC EQUAL keywordOrSymbolic ;
+ddParmBFALN : BFALN EQUAL keywordOrSymbolic ;
 ddParmBFTEK : BFTEK EQUAL keywordOrSymbolic ;
 //ddParmBLKSIZE : BLKSIZE EQUAL (NUM_LIT | NUM_MEM_VAL | SYMBOLIC) ;
 ddParmBLKSIZE : BLKSIZE EQUAL keywordOrSymbolic ;
 //ddParmBLKSZLIM : BLKSZLIM EQUAL (NUM_LIT | NUM_MEM_VAL | SYMBOLIC) ;
 ddParmBLKSZLIM : BLKSZLIM EQUAL keywordOrSymbolic ;
-ddParmBUFIN : BUFIN EQUAL (BUFIN_VALUE | SYMBOLIC) ;
-ddParmBUFL : BUFL EQUAL (BUFL_VALUE | SYMBOLIC) ;
-ddParmBUFMAX : BUFMAX EQUAL (BUFMAX_VALUE | SYMBOLIC) ;
-ddParmBUFNO : BUFNO EQUAL (BUFNO_VALUE | SYMBOLIC) ;
-ddParmBUFOFF : BUFOFF EQUAL (BUFOFF_VALUE | SYMBOLIC) ;
-ddParmBUFOUT : BUFOUT EQUAL (BUFOUT_VALUE | SYMBOLIC) ;
-ddParmBUFSIZE : BUFSIZE EQUAL (BUFSIZE_VALUE | SYMBOLIC) ;
+ddParmBUFIN : BUFIN EQUAL keywordOrSymbolic ;
+ddParmBUFL : BUFL EQUAL keywordOrSymbolic ;
+ddParmBUFMAX : BUFMAX EQUAL keywordOrSymbolic ;
+ddParmBUFNO : BUFNO EQUAL keywordOrSymbolic ;
+ddParmBUFOFF : BUFOFF EQUAL keywordOrSymbolic ;
+ddParmBUFOUT : BUFOUT EQUAL keywordOrSymbolic ;
+ddParmBUFSIZE : BUFSIZE EQUAL keywordOrSymbolic ;
 //ddParmBURST : BURST EQUAL (yesOrNo | SYMBOLIC) ;
 //ddParmCCSID : CCSID EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmBURST : BURST EQUAL keywordOrSymbolic ;
 ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
-ddParmCHARS : CHARS EQUAL LPAREN? (CHARS_FONT | SYMBOLIC) (COMMA (CHARS_FONT | SYMBOLIC))* RPAREN? ;
+ddParmCHARS : CHARS EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN? ;
 //ddParmCHKPT : CHKPT EQUAL EOV ;
-ddParmCHKPT : CHKPT EQUAL KEYWORD_VALUE ;
+ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL ddParmReferback ;
 ddParmCOPIES : COPIES EQUAL (
     (COPIES_VALUE | SYMBOLIC) | 
@@ -273,7 +273,7 @@ ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
 //ddParmCYLOFL : CYLOFL EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
 ddParmDATA : DATA ;
-ddParmDATACLAS : DATACLAS EQUAL (DATACLAS_VALUE | SYMBOLIC)? ;
+ddParmDATACLAS : DATACLAS EQUAL keywordOrSymbolic? ;
 
 /*
 At some point in the past, the DCB parameter was the only place you
@@ -307,13 +307,12 @@ ddParmDCB : DCB EQUAL (
 ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | DATASET_NAME | ddParmReferback ;
 
 
-ddParmDDNAME : DDNAME EQUAL NAME? ;
+ddParmDDNAME : DDNAME EQUAL keywordOrSymbolic? ;
 //ddParmDEN : DEN EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmDEN : DEN EQUAL keywordOrSymbolic ;
 ddParmDEST : DEST EQUAL  (
-    destValue |
-    (LPAREN destValue RPAREN) |
-    (LPAREN destValue DOT destValue RPAREN)
+    keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic RPAREN)
   )
   ;
 ddParmDIAGNS : DIAGNS EQUAL KEYWORD_VALUE ;
@@ -330,16 +329,20 @@ ddParmDSID : DSID EQUAL (
   ) ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL (QUOTED_STRING_FRAGMENT+ | SYMBOLIC) ;
 ddParmDSNAME : (DSNAME | DSN) EQUAL (NAME | DATASET_NAME | ddParmReferback | QUOTED_STRING_FRAGMENT) ;
+ddParmDSNTYPE : DSNTYPE EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
+
+/*
 ddParmDSNTYPE : DSNTYPE EQUAL (
     DSNTYPE_VALUE |
     SYMBOLIC |
     (LPAREN (DSNTYPE_VALUE | SYMBOLIC) COMMA (NUM_LIT | SYMBOLIC) RPAREN)
   ) ;
-ddParmDSORG : DSORG EQUAL (DSORG_VALUE | SYMBOLIC) ;
+*/
+ddParmDSORG : DSORG EQUAL keywordOrSymbolic ;
 ddParmDUMMY : DUMMY ;
 ddParmDYNAM : DYNAM ;
-ddParmEATTR : EATTR EQUAL (EATTR_VALUE | SYMBOLIC) ;
-ddParmEROPT : EROPT EQUAL (EROPT_VALUE | SYMBOLIC) ;
+ddParmEATTR : EATTR EQUAL keywordOrSymbolic ;
+ddParmEROPT : EROPT EQUAL keywordOrSymbolic ;
 ddParmEXPDT : EXPDT EQUAL (EXPDT_VALUE | SYMBOLIC) ;
 ddParmFCB : FCB EQUAL (
     (FCB_VALUE | SYMBOLIC) |
@@ -359,7 +362,7 @@ ddParmFLASH : FLASH EQUAL (
   ) ;
 ddParmFREE : FREE EQUAL keywordOrSymbolic ;
 ddParmFREEVOL : FREEVOL EQUAL keywordOrSymbolic ;
-ddParmFUNC : FUNC EQUAL (FUNC_VALUE | SYMBOLIC) ;
+ddParmFUNC : FUNC EQUAL keywordOrSymbolic ;
 ddParmGDGORDER : GDGORDER EQUAL keywordOrSymbolic ;
 //ddParmGNCP : GNCP EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmGNCP : GNCP EQUAL keywordOrSymbolic ;
@@ -412,11 +415,13 @@ ddParmLGSTREAM : LGSTREAM EQUAL DATASET_NAME ;
 ddParmLIKE : LIKE EQUAL DATASET_NAME ;
 //ddParmLIMCT: LIMCT EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmLIMCT: LIMCT EQUAL keywordOrSymbolic ;
-ddParmLRECL : LRECL EQUAL (LRECL_VALUE | SYMBOLIC) ;
+ddParmLRECL : LRECL EQUAL keywordOrSymbolic ;
 //ddParmMAXGENS : MAXGENS EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmMAXGENS : MAXGENS EQUAL keywordOrSymbolic ;
 ddParmMGMTCLAS : MGMTCLAS EQUAL keywordOrSymbolic? ;
-ddParmMODE : MODE EQUAL (MODE_VALUE | SYMBOLIC) ; 
+ddParmMODE : MODE EQUAL keywordOrSymbolic ; 
+ddParmMODIFY : MODIFY EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
+/*
 ddParmMODIFY : MODIFY EQUAL (
     MODIFY_MODULE |
     SYMBOLIC |
@@ -425,12 +430,12 @@ ddParmMODIFY : MODIFY EQUAL (
             (COMMA (MODIFY_TRC | SYMBOLIC))?
     RPAREN)
   ) ;
-
+*/
 //ddParmNCP : NCP EQUAL (NUM_LIT | SYMBOLIC) ;
 //ddParmNTM : NTM EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmNCP : NCP EQUAL keywordOrSymbolic ;
 ddParmNTM : NTM EQUAL keywordOrSymbolic ;
-ddParmOPTCD : OPTCD EQUAL (OPTCD_VALUE | SYMBOLIC) ;
+ddParmOPTCD : OPTCD EQUAL keywordOrSymbolic ;
 //ddParmOUTLIM : OUTLIM EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmOUTLIM : OUTLIM EQUAL keywordOrSymbolic ;
 ddParmOUTPUT : OUTPUT EQUAL (OUTPUT_PARM_REFERENCE | 
@@ -471,12 +476,12 @@ ddParmPATHOPTS : PATHOPTS EQUAL  (
             )*
     RPAREN)
   ) ;
-ddParmPCI : PCI EQUAL LPAREN? (PCI_VALUE | SYMBOLIC) (COMMA (PCI_VALUE | SYMBOLIC))? RPAREN? ;
+ddParmPCI : PCI EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
 ddParmPROTECT : PROTECT EQUAL( PROTECT_VALUE | SYMBOLIC) ;
 //ddParmPRTSP : PRTSP EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
-ddParmRECFM : RECFM EQUAL (RECFM_VALUE | SYMBOLIC) ;
-ddParmRECORG : RECORG EQUAL (RECORG_VALUE | SYMBOLIC) ;
+ddParmRECFM : RECFM EQUAL keywordOrSymbolic ;
+ddParmRECORG : RECORG EQUAL keywordOrSymbolic ;
 ddParmREFDD : REFDD EQUAL ddParmReferback ;
 //ddParmRESERVE : RESERVE EQUAL LPAREN (NUM_LIT | SYMBOLIC) COMMA (NUM_LIT | SYMBOLIC) RPAREN ;
 ddParmRESERVE : RESERVE EQUAL LPAREN keywordOrSymbolic COMMA keywordOrSymbolic RPAREN ;
@@ -566,6 +571,11 @@ ddParmSYMBOLS : SYMBOLS EQUAL (
             (COMMA (LOGGING_DDNAME | SYMBOLIC))?
     RPAREN)
   ) ;
+
+ddParmSYMLIST : SYMLIST EQUAL
+    LPAREN? keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic COMMENT_TEXT?)* 
+    RPAREN? COMMENT_TEXT? ;
+/*
 ddParmSYMLIST : SYMLIST EQUAL (
     (SYMLIST_VALUE COMMENT_TEXT?) |
     (LPAREN SYMLIST_VALUE (
@@ -574,7 +584,7 @@ ddParmSYMLIST : SYMLIST EQUAL (
       )*
     RPAREN COMMENT_TEXT?)
   ) ;
-
+*/
 ddParmSYSOUT : SYSOUT EQUAL (
     sysoutClass |
     (LPAREN COMMA RPAREN ) |
@@ -585,9 +595,9 @@ sysoutClass : (SYSOUT_CLASS | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
 sysoutWriter : (SYSOUT_WRITER | SYSOUT_INTRDR | SYMBOLIC) ;
 sysoutFormOrCase : (SYSOUT_FORM | SYMBOLIC) ;
 
-ddParmTERM : TERM EQUAL (TERM_VALUE | SYMBOLIC) ;
+ddParmTERM : TERM EQUAL keywordOrSymbolic ;
 ddParmTHRESH : THRESH EQUAL keywordOrSymbolic ;
-ddParmTRTCH : TRTCH EQUAL (TRTCH_VALUE | SYMBOLIC) ;
+ddParmTRTCH : TRTCH EQUAL keywordOrSymbolic ;
 ddParmUCS : UCS EQUAL (
     UCS_CODE |
     SYMBOLIC |
@@ -844,7 +854,10 @@ endcntlStatement : (SS NAME_FIELD ENDCNTL inlineComment*) | CNTL_MODE_TERMINATOR
 
 cntlStatementAmalgamation : cntlStatement CNTL_DATA* endcntlStatement ;
 
-exportStatement : SS NAME_FIELD? EXPORT ddParmSYMLIST ;
+exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL 
+    LPAREN? keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic COMMENT_TEXT?)* 
+    RPAREN? COMMENT_TEXT? ;
+//exportStatement : SS NAME_FIELD? EXPORT ddParmSYMLIST ;
 /*
 exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL (
     ASTERISK |
@@ -973,7 +986,7 @@ outputStatementCHARS : OUTPUT_STMT_CHARS EQUAL (
     RPAREN) |
     outputStatementCHARS_value
   ) ;
-outputStatementCHARS_value : (CHARS_FONT | SYMBOLIC) ;
+outputStatementCHARS_value : keywordOrSymbolic ;
 outputStatementCKPTLINE : OUTPUT_STMT_CKPTLINE EQUAL (OUTPUT_CKPTLINE_VALUE | SYMBOLIC) ;
 outputStatementCKPTPAGE : OUTPUT_STMT_CKPTPAGE EQUAL (OUTPUT_CKPTPAGE_VALUE | SYMBOLIC) ;
 outputStatementCKPTSEC : OUTPUT_STMT_CKPTSEC EQUAL (OUTPUT_CKPTSEC_VALUE | SYMBOLIC) ;
@@ -1000,9 +1013,8 @@ outputStatementDDNAME : OUTPUT_STMT_DDNAME EQUAL keywordOrSymbolic ;
 outputStatementDEFAULT : OUTPUT_STMT_DEFAULT EQUAL (OUTPUT_DEFAULT_VALUE | SYMBOLIC) ;
 outputStatementDEPT : OUTPUT_STMT_DEPT EQUAL keywordOrSymbolic ;
 outputStatementDEST : OUTPUT_STMT_DEST EQUAL (
-    destValue |
-    (LPAREN destValue RPAREN) |
-    (LPAREN destValue DOT destValue RPAREN)
+    keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic RPAREN)
   )
   ;
 
