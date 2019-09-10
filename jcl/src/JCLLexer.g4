@@ -961,12 +961,6 @@ mode OUTPUT_STMT_PARM_MODE ;
 
 OUTPUT_STMT_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 OUTPUT_STMT_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
-/*
-OUTPUT_STMT_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE
-    {
-      returnToMode = _mode;
-    } ->type(COMMENT_FLAG_INLINE),mode(GLOBAL_PAREN_MODE_CM) ;
-*/
 OUTPUT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
 OUTPUT_STMT_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 OUTPUT_STMT_COMMA : COMMA_DFLT ->type(COMMA) ;
@@ -1481,11 +1475,8 @@ mode DCB_PAREN_MODE ;
 DCB_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 DCB_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 DCB_PAREN_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
-DCB_PAREN_COMMENT_FLAG_INLINE : 
-    COMMENT_FLAG_INLINE
-    {returnToMode = _mode;} 
-    ->type(COMMENT_FLAG_INLINE),mode(GLOBAL_PAREN_MODE_CM)
-  ;
+
+DCB_PAREN_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
 DCB_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 DCB_PAREN_BFALN : BFALN_DFLT ->type(BFALN),pushMode(KYWD_VAL_MODE) ;
@@ -1620,10 +1611,6 @@ The possibilities...
 ...are handled differently due to different mode exit requirements.  The
 first two can exit on encountering whitespace and switch to mode(CM).
 
-The remaining cases must mode(ORDER_PAREN_MODE_CM) which will mode(ORDER_PAREN_MODE)
-on encountering a NEWLINE.  The only exit is via RPAREN, which closes the
-group of libraries.
-
 The DATASET_NAME definition is copied from DSN_MODE, save for the parens and % and +.
 
 */
@@ -1634,8 +1621,8 @@ ORDER_PAREN_MODE_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
 ORDER_PAREN_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 ORDER_PAREN_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
 ORDER_PAREN_MODE_COMMA : COMMA_DFLT ->type(COMMA) ;
-ORDER_PAREN_MODE_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-ORDER_PAREN_MODE_NEWLINE : [\n\r] {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ; 
+ORDER_PAREN_MODE_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+ORDER_PAREN_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ; 
 
 ORDER_PAREN_MODE_DATASET_NAME : (
     NULLFILE |
@@ -1692,7 +1679,7 @@ at runtime in any given installation.
 
 
 JOB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_MODE1) ;
-JOB_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
+JOB_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 JOB_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_MODE_LINE_NB : LINE_NB ->skip ;
 JOB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
@@ -1739,7 +1726,7 @@ JOB_MODE_USER : USER_DFLT ->type(USER),mode(DEFAULT_MODE) ;
 mode JOB_ACCT_MODE1 ;
 
 JOB_ACCT_MODE1_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JOB_ACCT_MODE1_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
+JOB_ACCT_MODE1_COMMENT_FLAG : COMMENT_FLAG_DFLT ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 JOB_ACCT_MODE1_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE1_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(JOB_ACCT_MODE2) ;
 JOB_ACCT_MODE1_RPAREN : RPAREN_DFLT ->type(RPAREN) ;
@@ -1787,7 +1774,7 @@ JOB_ACCT_MODE1_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 mode JOB_ACCT_MODE2 ;
 
 JOB_ACCT_MODE2_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JOB_ACCT_MODE2_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
+JOB_ACCT_MODE2_COMMENT_FLAG : COMMENT_FLAG_DFLT ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 JOB_ACCT_MODE2_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE2_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
 JOB_ACCT_MODE2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(JOB_ACCT_MODE3) ;
@@ -1817,7 +1804,7 @@ the programmer name -or- via one of the other valid keywords on the JOB statemen
 JOB_PROGRAMMER_NAME_MODE_SS : SS ->channel(HIDDEN) ;
 JOB_PROGRAMMER_NAME_MODE_CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN) ;
 JOB_PROGRAMMER_NAME_MODE_NEWLINE : NEWLINE {if (haveProgrammerName) mode(DEFAULT_MODE);} ->channel(HIDDEN) ;
-JOB_PROGRAMMER_NAME_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
+JOB_PROGRAMMER_NAME_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 JOB_PROGRAMMER_NAME_MODE_LINE_NB : LINE_NB ->skip ;
 JOB_PROGRAMMER_NAME_MODE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_JOB_PROGRAMMER_NAME_MODE) ;
 JOB_PROGRAMMER_NAME_MODE_COMMA : COMMA_DFLT {if (haveProgrammerName) mode(DEFAULT_MODE);} ->type(COMMA) ;
@@ -1965,8 +1952,8 @@ AMP_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 AMP_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 AMP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 AMP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
-AMP_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-AMP_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+AMP_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+AMP_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode COPIES_MODE ;
 
@@ -2101,14 +2088,11 @@ OUTPUT_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(OUTPUT_PARM_PAREN_MODE) ;
 
 mode OUTPUT_PARM_PAREN_MODE ;
 
-//OUTPUT_PARM_PAREN_ASTERISK : ASTERISK ->type(ASTERISK) ;
-//OUTPUT_PARM_PAREN_NAME : NAME ->type(NAME) ;
-//OUTPUT_PARM_PAREN_DOT : DOT_DFLT ->type(DOT) ;
 OUTPUT_PARM_PAREN_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)?
      ->type(OUTPUT_PARM_REFERENCE) ;
 OUTPUT_PARM_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-OUTPUT_PARM_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-OUTPUT_PARM_PAREN_NEWLINE : [\n\r] {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+OUTPUT_PARM_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+OUTPUT_PARM_PAREN_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 OUTPUT_PARM_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
 mode PATH_MODE ;
@@ -2167,8 +2151,8 @@ fragment PATHMODE_SET : (
 mode PATHMODE_PAREN_MODE ;
 
 PATHMODE_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-PATHMODE_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-PATHMODE_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+PATHMODE_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+PATHMODE_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 PATHMODE_PAREN_VALUE : PATHMODE_VALUE ->type(PATHMODE_VALUE) ;
 PATHMODE_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 PATHMODE_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
@@ -2198,8 +2182,8 @@ fragment PATHOPTS_STATUS : (
 mode PATHOPTS_PAREN_MODE ;
 
 PATHOPTS_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-PATHOPTS_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-PATHOPTS_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+PATHOPTS_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+PATHOPTS_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 PATHOPTS_PAREN_VALUE : PATHOPTS_VALUE ->type(PATHOPTS_VALUE) ;
 PATHOPTS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 PATHOPTS_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
@@ -2269,7 +2253,6 @@ SUBSYS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SUBSYS_PAREN_MODE) ;
 
 mode SUBSYS_PAREN_MODE ;
 
-//SUBSYS_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
 //SUBSYS_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN) ;
 SUBSYS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SUBSYS_COMMA_MODE) ;
 SUBSYS_PAREN_NAME : SUBSYS_NAME ->type(SUBSYS_NAME) ;
@@ -2279,8 +2262,8 @@ SUBSYS_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 mode SUBSYS_COMMA_MODE ;
 
-SUBSYS_COMMA_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-SUBSYS_COMMA_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+SUBSYS_COMMA_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+SUBSYS_COMMA_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 SUBSYS_COMMA_COMMA : COMMA_DFLT ->type(COMMA) ;
 SUBSYS_PARM : [A-Z0-9@#$]+ ;
 SUBSYS_COMMA_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
@@ -2320,8 +2303,8 @@ SYMLIST_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYMLIST_PAREN_MODE) ;
 mode SYMLIST_PAREN_MODE ;
 
 SYMLIST_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-SYMLIST_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-SYMLIST_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+SYMLIST_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+SYMLIST_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 SYMLIST_PAREN_VALUE : SYMLIST_VALUE ->type(SYMLIST_VALUE) ;
 SYMLIST_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
@@ -2464,8 +2447,8 @@ VOL_SER1_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER1_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 VOL_SER1_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 VOL_SER1_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-VOL_SER1_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-VOL_SER1_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+VOL_SER1_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_SER1_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_PRIVATE_MODE ;
 
@@ -2480,8 +2463,8 @@ VOL_RETAIN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_SEQ_NB_MODE) ;
 VOL_RETAIN1 : VOL_RETAIN ->type(VOL_RETAIN) ;
 VOL_RETAIN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_RETAIN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
-VOL_RETAIN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-VOL_RETAIN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+VOL_RETAIN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_RETAIN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SEQ_NB_MODE ;
 
@@ -2489,8 +2472,8 @@ VOL_SEQ_NB_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_COUNT_MODE) ;
 VOL_SEQ_NB : NUM_LIT_DFLT ;
 VOL_SEQ_NB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SEQ_NB_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode ;
-VOL_SEQ_NB_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-VOL_SEQ_NB_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+VOL_SEQ_NB_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_SEQ_NB_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_COUNT_MODE ;
 
@@ -2498,16 +2481,16 @@ VOL_COUNT_COMMA : COMMA_DFLT ->type(COMMA),pushMode(VOL_SER2_MODE) ;
 VOL_COUNT : NUM_LIT_DFLT ;
 VOL_COUNT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode ;
-VOL_COUNT_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-VOL_COUNT_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+VOL_COUNT_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_COUNT_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SER2_MODE ;
 
 VOL_SER2_REF : VOL_REF ->type(VOL_REF),pushMode(VOL_REF2_MODE) ;
 VOL_SER2 : VOL_SER ->type(VOL_SER) ;
 VOL_SER2_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(VOL_SER3_MODE) ;
-VOL_SER2_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-VOL_SER2_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+VOL_SER2_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_SER2_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SER3_MODE ;
 
@@ -2524,8 +2507,8 @@ VOL_SER3_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 VOL_SER3_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
-VOL_SER3_PAREN_WS : [ ]+ {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_MODE_CM) ;
-VOL_SER3_PAREN_NEWLINE : NEWLINE {returnToMode = _mode;} ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
+VOL_SER3_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_SER3_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_REF1_MODE ;
 
@@ -2560,7 +2543,6 @@ token and bringing us back to whence we came.
 mode VOL_REF2_MODE ;
 
 VOL_REF2_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-//VOL_REF2_ASTERISK : ASTERISK ->type(ASTERISK),pushMode(VOL_REF2_SPLAT_MODE) ;
 VOL_REF2_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(VOL_REF_REFERBACK),popMode,popMode,popMode,popMode,popMode,popMode ;
 VOL_REF2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
@@ -2579,47 +2561,5 @@ VOL_REF2_DSN :
 VOL_REF2_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode,popMode,popMode,popMode,popMode ;
 VOL_REF2_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode ;
 
-
-
-
-/*
-This is my way of dealing with the general case...
-
-//NAME DD PARAM=(VALUE, inline comment
-// VALUE, inline comment
-// VALUE, inline comment
-// VALUE) inline comment
-
-...where PARAM is PATHOPTS, PATHMODE, SUBSYS or the ORDER statement
-instead of a parameter on a DD statement.
-
-Each of the above must set the returnToMode variable to the current 
-mode so when GLOBAL_PAREN_CONT_MODE_CONTINUATION_WS is encountered
-it knows where to return to. TODO pretty sure pushMode and popMode
-would work for this just fine.
-
-The GLOBAL_* modes that follow allow those inline comments to be
-processed correctly.
-
-There's probably a more elegant solution, but this is my first go
-at an ANTLR lexer grammar.  Simple stuff is boring anyway.
-
-*/
-
-mode GLOBAL_PAREN_MODE_CM ;
-
-GLOBAL_PAREN_MODE_CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
-GLOBAL_PAREN_MODE_CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
-
-mode GLOBAL_PAREN_CONT_MODE ;
-
-GLOBAL_PAREN_CONT_MODE_SS : SS ->channel(HIDDEN) ;
-GLOBAL_PAREN_CONT_MODE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),mode(GLOBAL_PAREN_CONT_MODE_CM) ;
-GLOBAL_PAREN_CONT_MODE_CONTINUATION_WS : CONTINUATION_WS {mode(returnToMode);} ->channel(HIDDEN) ;
-
-mode GLOBAL_PAREN_CONT_MODE_CM ;
-
-GLOBAL_PAREN_CONT_MODE_CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(GLOBAL_PAREN_CONT_MODE) ;
-GLOBAL_PAREN_CONT_MODE_CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
 
 

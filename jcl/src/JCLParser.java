@@ -184,9 +184,8 @@ public class JCLParser extends Parser {
 		VOL_COUNT_WS=771, VOL_COUNT_NEWLINE=772, VOL_SER2_WS=773, VOL_SER2_NEWLINE=774, 
 		VOL_SER3_SQUOTE=775, VOL_SER3_PAREN_SQUOTE=776, VOL_SER3_PAREN_WS=777, 
 		VOL_SER3_PAREN_NEWLINE=778, VOL_REF_REFERBACK=779, VOL_REF1_SQUOTE=780, 
-		VOL_REF2_SQUOTE=781, GLOBAL_PAREN_MODE_CM_NEWLINE=782, GLOBAL_PAREN_CONT_MODE_SS=783, 
-		GLOBAL_PAREN_CONT_MODE_CONTINUATION_WS=784, GLOBAL_PAREN_CONT_MODE_CM_NEWLINE=785, 
-		COMMA_DFLT=786, DOT_DFLT=787, EQUAL_DFLT=788, LPAREN_DFLT=789, RPAREN_DFLT=790;
+		VOL_REF2_SQUOTE=781, COMMA_DFLT=782, DOT_DFLT=783, EQUAL_DFLT=784, LPAREN_DFLT=785, 
+		RPAREN_DFLT=786;
 	public static final int
 		RULE_startRule = 0, RULE_jcl = 1, RULE_execJCL = 2, RULE_procJCL = 3, 
 		RULE_procStatement = 4, RULE_defineSymbolicParameter = 5, RULE_definedSymbolicParameters = 6, 
@@ -469,8 +468,8 @@ public class JCLParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, null, "','", 
-			"'.'", "'='", "'('", "')'"
+			null, null, null, null, null, null, null, "','", "'.'", "'='", "'('", 
+			"')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -626,9 +625,8 @@ public class JCLParser extends Parser {
 			"VOL_SEQ_NB_NEWLINE", "VOL_COUNT", "VOL_COUNT_WS", "VOL_COUNT_NEWLINE", 
 			"VOL_SER2_WS", "VOL_SER2_NEWLINE", "VOL_SER3_SQUOTE", "VOL_SER3_PAREN_SQUOTE", 
 			"VOL_SER3_PAREN_WS", "VOL_SER3_PAREN_NEWLINE", "VOL_REF_REFERBACK", "VOL_REF1_SQUOTE", 
-			"VOL_REF2_SQUOTE", "GLOBAL_PAREN_MODE_CM_NEWLINE", "GLOBAL_PAREN_CONT_MODE_SS", 
-			"GLOBAL_PAREN_CONT_MODE_CONTINUATION_WS", "GLOBAL_PAREN_CONT_MODE_CM_NEWLINE", 
-			"COMMA_DFLT", "DOT_DFLT", "EQUAL_DFLT", "LPAREN_DFLT", "RPAREN_DFLT"
+			"VOL_REF2_SQUOTE", "COMMA_DFLT", "DOT_DFLT", "EQUAL_DFLT", "LPAREN_DFLT", 
+			"RPAREN_DFLT"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -32403,7 +32401,7 @@ public class JCLParser extends Parser {
 
 	private static final int _serializedATNSegments = 2;
 	private static final String _serializedATNSegment0 =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0318\u11b2\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u0314\u11b2\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
