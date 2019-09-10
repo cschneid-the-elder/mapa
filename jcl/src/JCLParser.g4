@@ -257,14 +257,14 @@ ddParmCHARS : CHARS EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)* R
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL ddParmReferback ;
 ddParmCOPIES : COPIES EQUAL (
-    (COPIES_VALUE | SYMBOLIC) | 
+    keywordOrSymbolic |
     (
       LPAREN 
-        (COPIES_VALUE | SYMBOLIC)
-          (COMMA
-            LPAREN 
-              (COPIES_GROUP_VALUE | SYMBOLIC) (COMMA (COPIES_GROUP_VALUE | SYMBOLIC))* 
-            RPAREN)? 
+        keywordOrSymbolic?
+          (
+            COMMA LPAREN (keywordOrSymbolic (COMMA keywordOrSymbolic)*)
+                  RPAREN
+          )?
       RPAREN
     )
   ) ;
@@ -445,7 +445,8 @@ ddParmOUTPUT : OUTPUT EQUAL (OUTPUT_PARM_REFERENCE |
               (inlineComment OUTPUT_PARM_REFERENCE)
             )* 
     RPAREN)) ;
-ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT+ | PATH_VALUE) ;
+//ddParmPATH : PATH EQUAL (QUOTED_STRING_FRAGMENT+ | PATH_VALUE) ;
+ddParmPATH : PATH EQUAL keywordOrSymbolic ;
 ddParmPATHDISP : PATHDISP EQUAL (
     (PATHDISP_KEEP | PATHDISP_DELETE | SYMBOLIC) | 
     (LPAREN (PATHDISP_KEEP | PATHDISP_DELETE | SYMBOLIC) (COMMA (PATHDISP_KEEP | PATHDISP_DELETE | SYMBOLIC))? RPAREN) | 
@@ -475,7 +476,7 @@ ddParmPATHOPTS : PATHOPTS EQUAL  (
     RPAREN)
   ) ;
 ddParmPCI : PCI EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
-ddParmPROTECT : PROTECT EQUAL( PROTECT_VALUE | SYMBOLIC) ;
+ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
 //ddParmPRTSP : PRTSP EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
 ddParmRECFM : RECFM EQUAL keywordOrSymbolic ;
@@ -486,18 +487,30 @@ ddParmRESERVE : RESERVE EQUAL LPAREN keywordOrSymbolic COMMA keywordOrSymbolic R
 ddParmRETPD : RETPD EQUAL keywordOrSymbolic ;
 //ddParmRKP : RKP EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmRKP : RKP EQUAL keywordOrSymbolic ;
-ddParmRLS : RLS EQUAL (RLS_VALUE | SYMBOLIC) ;
+ddParmRLS : RLS EQUAL keywordOrSymbolic ;
+ddParmROACCESS : ROACCESS EQUAL (
+    keywordOrSymbolic | 
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
+  ) ;
+/*
 ddParmROACCESS : ROACCESS EQUAL (
     ROACCESS_REQUEST | 
     SYMBOLIC |
     (LPAREN (ROACCESS_REQUEST | SYMBOLIC) RPAREN) | 
     (LPAREN (ROACCESS_REQUEST | SYMBOLIC) COMMA (ROACCESS_LOCK | SYMBOLIC) RPAREN)
   ) ;
+*/
+ddParmSECMODEL : SECMODEL EQUAL (
+    keywordOrSymbolic |
+    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
+  ) ;
+/*
 ddParmSECMODEL : SECMODEL EQUAL (
     DATASET_PROFILE |
     (LPAREN DATASET_PROFILE RPAREN) | 
     (LPAREN DATASET_PROFILE COMMA SECMODEL_GENERIC RPAREN)
   ) ;
+*/
 //ddParmSEGMENT : SEGMENT EQUAL (NUM_LIT | SYMBOLIC) ;
 ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
 ddParmSPACE : SPACE EQUAL (
@@ -540,6 +553,19 @@ ddParmSPIN : SPIN EQUAL (
 ddParmSTACK : STACK EQUAL keywordOrSymbolic ;
 ddParmSTORCLAS : STORCLAS EQUAL keywordOrSymbolic? ;
 ddParmSUBSYS : SUBSYS EQUAL (
+    keywordOrSymbolic |
+    (LPAREN
+        keywordOrSymbolic
+            (
+              (COMMA? COMMENT_TEXT? keywordOrSymbolic) | 
+              (COMMA? commentStatement* keywordOrSymbolic) | 
+              (inlineComment SS keywordOrSymbolic)
+            )*
+    RPAREN)
+  ) ;
+
+/*
+ddParmSUBSYS : SUBSYS EQUAL (
     SUBSYS_NAME |
     SYMBOLIC |
     (LPAREN
@@ -551,7 +577,7 @@ ddParmSUBSYS : SUBSYS EQUAL (
             )*
     RPAREN)
   ) ;
-/*
+
 ddParmSUBSYS : SUBSYS EQUAL (
     (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) |
     (LPAREN (SIMPLE_STRING | QUOTED_STRING_FRAGMENT) (
@@ -562,6 +588,15 @@ ddParmSUBSYS : SUBSYS EQUAL (
   ) ;
 */
 ddParmSYMBOLS : SYMBOLS EQUAL (
+    keywordOrSymbolic |
+    (LPAREN
+        keywordOrSymbolic
+            (COMMA keywordOrSymbolic)?
+    RPAREN)
+  ) ;
+
+/*
+ddParmSYMBOLS : SYMBOLS EQUAL (
     SYMBOLIC |
     SYMBOLS_VALUE |
     (LPAREN
@@ -569,7 +604,7 @@ ddParmSYMBOLS : SYMBOLS EQUAL (
             (COMMA (LOGGING_DDNAME | SYMBOLIC))?
     RPAREN)
   ) ;
-
+*/
 ddParmSYMLIST : SYMLIST EQUAL
     LPAREN? keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic COMMENT_TEXT?)* 
     RPAREN? COMMENT_TEXT? ;
@@ -994,6 +1029,19 @@ outputStatementCOMPACT : OUTPUT_STMT_COMPACT EQUAL keywordOrSymbolic ;
 outputStatementCOMSETUP : OUTPUT_STMT_COMSETUP EQUAL keywordOrSymbolic ;
 outputStatementCONTROL : OUTPUT_STMT_CONTROL EQUAL keywordOrSymbolic ;
 outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL (
+    keywordOrSymbolic |
+    (
+      LPAREN 
+        keywordOrSymbolic?
+          (
+            COMMA LPAREN (keywordOrSymbolic (COMMA keywordOrSymbolic)*)
+                  RPAREN
+          )?
+      RPAREN
+    )
+  ) ;
+/*
+outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL (
     (COPIES_VALUE | SYMBOLIC) |
     (
       LPAREN 
@@ -1005,6 +1053,7 @@ outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL (
       RPAREN
     )
   ) ;
+*/
 outputStatementCOPYCNT : OUTPUT_STMT_COPYCNT EQUAL keywordOrSymbolic ;
 outputStatementDATACK : OUTPUT_STMT_DATACK EQUAL keywordOrSymbolic ;
 outputStatementDDNAME : OUTPUT_STMT_DDNAME EQUAL keywordOrSymbolic ;
