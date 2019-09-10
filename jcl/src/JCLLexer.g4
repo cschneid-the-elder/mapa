@@ -110,9 +110,7 @@ ABSTR : A B S T R ;
 ACCODE_DFLT : A C C O D E ->type(ACCODE);
 ACCBIAS : A C C B I A S ;
 ACCT : A C C T ->mode(STEP_ACCT_MODE) ;
-//ADDRESS : A D D R E S S ;
 ADDRSPC_DFLT : A D D R S P C ->type(ADDRSPC) ;
-//AFF : A F F ;
 AFPPARMS : A F P P A R M S ;
 AFPSTATS : A F P S T A T S ;
 ALL : A L L ;
@@ -131,11 +129,8 @@ BFALN_DFLT : B F A L N ->type(BFALN);
 BFALN_D : D ;
 BFALN_F : F ;
 BFTEK_DFLT : B F T E K ->type(BFTEK) ;
-//BLKCHAR : B L K C H A R ;
-//BLKPOS : B L K P O S ;
 BLKSIZE_DFLT : B L K S I Z E ->type(BLKSIZE) ;
 BLKSZLIM_DFLT : B L K S Z L I M ->type(BLKSZLIM) ;
-//BLOCK : B L O C K ;
 BUFF : B U F F ;
 BUFIN_DFLT : B U F I N ->type(BUFIN) ;
 BUFL_DFLT : B U F L ->type(BUFL) ;
@@ -165,7 +160,6 @@ CLOSE : C L O S E ;
 CM_UNIT : C M ;
 CMNDONLY : C M N D O N L Y ;
 CNTL_DFLT : C N T L ->mode(CNTL_MODE),type(CNTL) ;
-//CNVTSYS_DFLT : C N V T S Y S ->type(CNVTSYS) ;
 COLORMAP : C O L O R M A P ;
 COMMA_DFLT : ',' ->type(COMMA) ;
 COMMAND_DFLT : C O M M A N D ->mode(POST_OP),type(COMMAND) ;
@@ -185,8 +179,6 @@ COPIES_DFLT : C O P I E S ->type(COPIES) ;
 COPY : C O P Y ;
 COPYCNT : C O P Y C N T ;
 CPRI_DFLT : C P R I ->type(CPRI) ;
-//CR : C R ;
-//CRE : C R E ;
 CROPS : C R O P S ;
 CYL : C Y L ;
 CYLOFL_DFLT : C Y L O F L ->type(CYLOFL) ;
@@ -197,7 +189,6 @@ DCB_DFLT : D C B ->type(DCB) ;
 DD_DFLT : D D ->type(DD),mode(DD_OP) ;
 DDNAME_DFLT : D D N A M E ->type(DDNAME) ;
 DEFAULT : D E F A U L T ;
-//DEFER : D E F E R ;
 
 DEN_DFLT : D E N ->type(DEN) ;
 DEPT : D E P T ;
@@ -208,7 +199,6 @@ DISP_DFLT : D I S P ->type(DISP) ;
 DLM_DFLT : D L M ->type(DLM) ;
 DO : D O ;
 DOT_DFLT : '.' ->type(DOT) ;
-//DOUBLE : D O U B L E ;
 DPAGELBL : D P A G E L B L ;
 DQUOTE : '"' ;
 DSENQSHR_DFLT : D S E N Q S H R ->type(DSENQSHR) ;
@@ -236,7 +226,6 @@ EQUAL_DFLT : '=' ->type(EQUAL) ;
 EROPT_DFLT : E R O P T ->type(EROPT) ;
 EVEN : E V E N ;
 EXEC_DFLT : E X E C ->mode(EX),type(EXEC) ;
-//EXECSYS_DFLT : E X E C S Y S ->type(EXECSYS) ;
 EXPDT_DFLT : E X P D T ->type(EXPDT) ;
 EXTLOCK : E X T L O C K ;
 EXPORT_DFLT : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
@@ -245,7 +234,6 @@ FCB_DFLT : F C B ->type(FCB) ;
 FIFO : F I F O ;
 FILEDATA_DFLT : F I L E D A T A ->type(FILEDATA) ;
 FLASH_DFLT : F L A S H ->type(FLASH) ;
-//FOLD : F O L D ;
 FOREVER : F O R E V E R ;
 FORMDEF : F O R M D E F ;
 FORMLEN : F O R M L E N ;
@@ -258,7 +246,6 @@ FSSDATA : F S S D A T A ;
 FUNC_DFLT : F U N C ->type(FUNC) ;
 GDGBIAS_DFLT : G D G B I A S ->mode(GDGBIAS_MODE),type(GDGBIAS) ;
 GDGORDER_DFLT : G D G O R D E R ->type(GDGORDER) ;
-//GENERIC : G E N E R I C ;
 GNCP_DFLT : G N C P ->type(GNCP) ;
 GROUP_DFLT : G R O U P ->type(GROUP) ;
 GROUPID : G R O U P I D ;
@@ -273,12 +260,9 @@ INDEX : I N D E X ;
 INTRAY : I N T R A Y ;
 INTVL_DFLT : I N T V L ->type(INTVL) ;
 IPLTXID_DFLT : I P L T X I D ->type(IPLTXID) ;
-//JCL : J C L ;
 JCLERR : J C L E R R ;
 JCLHOLD : J C L H O L D ;
 JCLLIB_DFLT : J C L L I B ->mode(POST_OP),type(JCLLIB) ;
-//JCLONLY_DFLT : J C L O N L Y ->type(JCLONLY) ;
-//JESDS : J E S D S ;
 JESLOG_DFLT : J E S L O G ->type(JESLOG) ;
 JGLOBAL : J G L O B A L ;
 JLOCAL : J L O C A L ;
@@ -294,7 +278,6 @@ KEYLEN_DFLT : K E Y L E N ->type(KEYLEN) ;
 KEYOFF_DFLT : K E Y O F F ->type(KEYOFF) ;
 LABEL_DFLT : L A B E L ->type(LABEL),mode(LABEL_MODE) ;
 LARGE : L A R G E ;
-//LASTRC : L A S T R C ;
 LEAVE : L E A V E ;
 LGSTREAM_DFLT : L G S T R E A M ->type(LGSTREAM),pushMode(DSN_MODE) ;
 LIFO : L I F O ;
@@ -304,7 +287,6 @@ LINDEX : L I N D E X ;
 LINECT : L I N E C T ;
 LINES_DFLT : L I N E S ->type(LINES) ;
 LOCAL : L O C A L ;
-//LOG : L O G ;
 LPAREN_DFLT : '(' ->type(LPAREN) ;
 LRECL_DFLT : L R E C L  ->type(LRECL) ;
 MAILBCC : M A I L B C C ;
@@ -314,7 +296,6 @@ MAILFROM : M A I L F R O M ;
 MAILTO : M A I L T O ;
 MAXGENS_DFLT : M A X G E N S ->type(MAXGENS) ;
 MAXIMUM : M A X I M U M ;
-//MAXRC : M A X R C ;
 MEMBER : M E M B E R ->mode(MEMBER_MODE) ;
 MEMLIMIT_DFLT : M E M L I M I T ->type(MEMLIMIT) ;
 MERGE : M E R G E ;
@@ -327,7 +308,6 @@ MSG : M S G ;
 MSGCLASS_DFLT : M S G C L A S S ->type(MSGCLASS) ;
 MSGLEVEL_DFLT : M S G L E V E L ->type(MSGLEVEL) ;
 MXIG : M X I G ;
-//NAME_OUTPUT : N A M E ;
 fragment NATL : [@#$] ;
 NC : N C ;
 NCK : N C K ;
@@ -345,7 +325,6 @@ NOTIFY_DFLT : N O T I F Y ->type(NOTIFY) ;
 NR : N R ;
 NRC : N R C ;
 NRE : N R E ;
-//NRI : N R I ;
 NTM_DFLT : N T M ->type(NTM) ;
 NULLFILE : N U L L F I L E ;
 fragment NUM : [0-9] ;
@@ -387,7 +366,6 @@ POINTS : P O I N T S ;
 PORTNO : P O R T N O ;
 PRMODE : P R M O D E ;
 PROC_DFLT : P R O C ->mode(POST_OP),type(PROC) ;
-//PROGRAM : P R O G R A M ;
 PROTECT_DFLT : P R O T E C T ->type(PROTECT) ;
 PRTATTRS : P R T A T T R S ;
 PRTERROR : P R T E R R O R ;
@@ -436,11 +414,9 @@ SECMODEL_DFLT : S E C M O D E L ->type(SECMODEL) ;
 SEGMENT_DFLT : S E G M E N T ->type(SEGMENT) ;
 SET_DFLT : S E T ->mode(SET_MODE),type(SET) ;
 
-//SINGLE : S I N G L E ;
 SLASH : '/' ;
 SMBBIAS : S M B B I A S ;
 SMBDFR : S M B D F R ;
-//SMSHONOR : S M S H O N O R ;
 NO : N O ;
 YES : Y E S ;
 SMBHWT : S M B H W T ;
@@ -453,7 +429,6 @@ SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 fragment SQUOTE2 : SQUOTE SQUOTE ;
 STACK_DFLT : S T A C K ->type(STACK) ;
 STD : S T D ;
-//STEP : S T E P ;
 STORCLAS_DFLT : S T O R C L A S ->type(STORCLAS) ;
 STRNO : S T R N O ;
 SUBSYS_DFLT : S U B S Y S ->type(SUBSYS) ;
@@ -473,7 +448,6 @@ TIME_DFLT : T I M E ->type(TIME) ;
 TITLE : T I T L E ;
 TRACE : T R A C E ;
 TRC : T R C ;
-//TRIPLE : T R I P L E ;
 TRK : T R K ;
 TRKLOCK : T R K L O C K ;
 TRTCH_DFLT : T R T C H ->type(TRTCH) ;
@@ -486,7 +460,6 @@ TYPRUN_DFLT : T Y P R U N ->type(TYPRUN) ;
 UCS_DFLT : U C S ->type(UCS) ;
 UJOBCORR_DFLT : U J O B C O R R ->type(UJOBCORR) ;
 UNALLOC : U N A L L O C ;
-//UNBLOCK : U N B L O C K ;
 
 UNIT_DFLT : U N I T ->type(UNIT) ;
 USCORE : '_' ;
@@ -496,7 +469,6 @@ USER_DFLT : U S E R ->type(USER) ;
 USERDATA : U S E R D A T A ;
 USERLIB : U S E R L I B ;
 USERPATH : U S E R P A T H ;
-//VERIFY : V E R I F Y ;
 VIRT : V I R T ;
 VOL_DFLT : V O L ->type(VOL) ;
 VOLUME_DFLT : V O L U M E ->type(VOLUME) ;
@@ -599,7 +571,6 @@ mode NM ;
 
 JOBLIB : J O B L I B ->mode(OP) ;
 SYSCHK : S Y S C H K ->mode(OP) ;
-//NAME_FIELD : NAME (DOT_DFLT NAME)? ->mode(OP) ;
 fragment NM_PART : [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? ;
 NAME_FIELD : NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();} ->mode(OP) ;
 CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),mode(DEFAULT_MODE) ;
@@ -1154,36 +1125,11 @@ DATA_PARM_MODE_VOL : VOL_DFLT  ->type(VOL),pushMode(VOL_MODE) ;
 DATA_PARM_MODE_VOLUME : VOLUME_DFLT  ->type(VOLUME),pushMode(VOL_MODE) ;
 DATA_PARM_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 DATA_PARM_MODE_SYMBOLS : SYMBOLS_DFLT  ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ; 
-//DATA_PARM_MODE_CNVTSYS : CNVTSYS_DFLT ->type(CNVTSYS) ;
-//DATA_PARM_MODE_EXECSYS : EXECSYS_DFLT ->type(EXECSYS) ;
-//DATA_PARM_MODE_JCLONLY : JCLONLY_DFLT ->type(JCLONLY) ;
-//DATA_PARM_MODE_LOGGING_DDNAME : NAME -> type(LOGGING_DDNAME) ;
 DATA_PARM_MODE_SYMLIST : SYMLIST_DFLT  ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ; 
-//DATA_PARM_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
-//DATA_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
-//DATA_PARM_RPAREN : RPAREN_DFLT ->type(RPAREN) ;
-
-/*
-mode DATA_PARM_SYMBOLS_MODE ;
-
-DATA_PARM_SYMBOLS_EQUAL : EQUAL_DFLT ->type(EQUAL),mode(SYMBOLS_MODE) ;
-DATA_PARM_SYMBOLS_COMMA : COMMA_DFLT ->type(COMMA),mode(DATA_PARM_MODE) ;
-DATA_PARM_SYMBOLS_WS : [ ]+ ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
-DATA_PARM_SYMBOLS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DATA_MODE) ;
-
-mode DATA_PARM_LRECL_MODE ;
-
-DATA_PARM_LRECL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DATA_PARM_LRECL_COMMA : COMMA_DFLT ->type(COMMA),mode(DATA_PARM_MODE) ;
-DATA_PARM_LRECL_WS : [ ]+ ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
-DATA_PARM_LRECL_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DATA_MODE) ;
-DATA_PARM_LRECL_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DATA_PARM_MODE) ;
-*/
  
 mode DLM_MODE ;
 
 DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
-//DLM_WS : [ ]+ ->channel(HIDDEN) ;
 SQUOTE_DLM : '\'' ->channel(HIDDEN),pushMode(DLM_QS);
 DLM_VAL : SIMPLE_STRING 
     {
@@ -1207,17 +1153,6 @@ mode DATA_PARM_CM_MODE ;
 
 DATA_PARM_CM_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DATA_MODE) ;
 DATA_PARM_CM_MODE_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
-/*
-mode DATA_PARM_REFDD_MODE ;
-
-DATA_PARM_REFDD_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DATA_PARM_REFDD_ASTERISK : ASTERISK ->type(ASTERISK) ;
-DATA_PARM_REFDD_NAME : NAME ->type(NAME) ;
-DATA_PARM_REFDD_DOT : DOT_DFLT ->type(DOT) ;
-DATA_PARM_REFDD_COMMA : COMMA_DFLT ->type(COMMA),mode(DATA_PARM_MODE) ;
-DATA_PARM_REFDD_WS : [ ]+ ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
-DATA_PARM_REFDD_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DATA_MODE) ;
-*/
 
 mode DATA_MODE ;
 
@@ -1247,7 +1182,6 @@ CNTL_CM_COMMENT_TEXT : COMMENT_TEXT_CM ->type(COMMENT_TEXT) ;
 
 mode CNTL_DATA_MODE ;
 
-//ENDCNTL_CNTL : E N D C N T L ->type(ENDCNTL) ;
 
 /*
 I don't like this, it really feels like a parser thing and not a lexer
@@ -1367,23 +1301,14 @@ DSN_MODE_DATASET_NAME : (
   ->type(DATASET_NAME),popMode 
   ; //removed mode(DEFAULT_MODE) under assumption NEWLINE and COMMA would prevail
 
-//DSN_MODE_ASTERISK : ASTERISK ->type(ASTERISK),mode(DSN_ASTERISK_MODE) ;
 DSN_MODE_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode ;
 
 
 mode DCB_MODE ;
 
-//DCB_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN) ;
-//DCB_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
-//DD_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
-//DD_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
-
 DCB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DCB_PAREN_MODE) ;
 DCB_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 DCB_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
-//DCB_MODE_COMMA : COMMA_DFLT ->type(COMMA),popMode ;
-//DCB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-//DCB_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 /*
 
@@ -1456,17 +1381,7 @@ DCB_DATASET_NAME : (
   ->type(DATASET_NAME),popMode
   ; 
 
-//DCB_ASTERISK : ASTERISK ->type(ASTERISK),mode(DCB_ASTERISK_MODE) ;
-
 DCB_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(REFERBACK),popMode ;
-
-mode DCB_ASTERISK_MODE ;
-
-DCB_ASTERISK_NAME : NAME ->type(NAME) ;
-DCB_ASTERISK_DOT : DOT_DFLT ->type(DOT) ;
-DCB_ASTERISK_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-DCB_ASTERISK_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-DCB_ASTERISK_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode DCB_PAREN_MODE ;
 
@@ -1888,7 +1803,6 @@ KYWD_VAL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 //KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 KEYWORD_VALUE : [A-Z0-9@#$*\-+&./%[]+ ->popMode ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-//KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
 /*
 
@@ -2060,9 +1974,6 @@ fragment LABEL_OUTPUT : O U T ;
 mode OUTPUT_PARM_MODE ;
 
 OUTPUT_PARM_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-//OUTPUT_PARM_ASTERISK : ASTERISK ->type(ASTERISK) ;
-//OUTPUT_PARM_NAME : NAME ->type(NAME) ;
-//OUTPUT_PARM_DOT : DOT_DFLT ->type(DOT) ;
 OUTPUT_PARM_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode ;
 OUTPUT_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(OUTPUT_PARM_PAREN_MODE) ;
 
