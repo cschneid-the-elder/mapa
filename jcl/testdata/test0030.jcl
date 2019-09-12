@@ -120,7 +120,7 @@
 //STEP016  EXEC PROC=IAYEAYE,
 // PARM.STEPA=&A,              parm
 // ACCT.STEPA=A1,              acctA
-// TIME.STEPA=10               timeA
+// TIME.STEPA=10,              timeA
 // ACCT.STEPB=('A1+','B2(1)'), acctB
 // TIME.STEPB=(10),            timeB
 // TIME.STEPC=&TM,             timeC
