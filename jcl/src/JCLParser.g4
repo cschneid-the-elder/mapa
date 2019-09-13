@@ -767,19 +767,15 @@ elseStatement : SS NAME_FIELD? ELSE inlineComment? ;
 
 endifStatement : SS NAME_FIELD? ENDIF inlineComment? ;
 
-includeStatement : SS NAME_FIELD? INCLUDE MEMBER EQUAL MEMBER_NAME inlineComment? ;
+includeStatement : SS NAME_FIELD? INCLUDE INCLUDE_PARM_MEMBER EQUAL keywordOrSymbolic inlineComment? ;
 
-jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL (
-    ((DATASET_NAME | QUOTED_STRING_FRAGMENT) inlineComment?) |
+jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL (
+    (keywordOrSymbolic COMMENT_TEXT?) |
     (LPAREN 
-        (DATASET_NAME | QUOTED_STRING_FRAGMENT) 
-    RPAREN inlineComment?) |
-    (LPAREN 
-        (DATASET_NAME | QUOTED_STRING_FRAGMENT) 
-            (((COMMA COMMENT_TEXT?) | inlineComment) (DATASET_NAME | QUOTED_STRING_FRAGMENT))* 
-    RPAREN inlineComment?)
+        keywordOrSymbolic
+            ((COMMA | inlineComment)? SS? COMMENT_TEXT? keywordOrSymbolic)*
+    RPAREN COMMENT_TEXT?)
   ) ;
-
 
 notifyStatement : SS NAME_FIELD? NOTIFY_OP
     notifyParms COMMENT_TEXT? (notifyParms COMMENT_TEXT?)* ;

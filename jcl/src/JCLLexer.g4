@@ -296,7 +296,6 @@ MAILFROM : M A I L F R O M ;
 MAILTO : M A I L T O ;
 MAXGENS_DFLT : M A X G E N S ->type(MAXGENS) ;
 MAXIMUM : M A X I M U M ;
-MEMBER : M E M B E R ->mode(MEMBER_MODE) ;
 MEMLIMIT_DFLT : M E M L I M I T ->type(MEMLIMIT) ;
 MERGE : M E R G E ;
 MGMTCLAS_DFLT : M G M T C L A S ->type(MGMTCLAS) ;
@@ -337,7 +336,7 @@ OFFSETYF : O F F S E T Y F ;
 ON : O N ;
 ONLY : O N L Y ;
 OPTCD_DFLT : O P T C D ->type(OPTCD) ;
-ORDER : O R D E R ->mode(ORDER_MODE) ;
+
 OUTBIN : O U T B I N ;
 OUTDISP : O U T D I S P ;
 OUTLIM_DFLT : O U T L I M ->type(OUTLIM) ;
@@ -601,8 +600,8 @@ ENDIF_OP : E N D I F ->mode(CM),type(ENDIF) ;
 EXEC_OP : E X E C ->mode(EXEC1_MODE),type(EXEC) ;
 EXPORT_OP : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
 IF_OP : I F ->mode(POST_IF),type(IF) ;
-INCLUDE_OP : I N C L U D E ->mode(POST_OP),type(INCLUDE) ;
-JCLLIB_OP : J C L L I B ->mode(POST_OP),type(JCLLIB) ;
+INCLUDE_OP : I N C L U D E ->mode(INCLUDE_MODE),type(INCLUDE) ;
+JCLLIB_OP : J C L L I B ->mode(JCLLIB_MODE),type(JCLLIB) ;
 JOB_OP : J O B ->mode(JOB1_MODE),type(JOB) ;
 NOTIFY_OP : N O T I F Y ->mode(NOTIFY_STMT_MODE) ;
 OUTPUT_OP : O U T P U T ->mode(OUTPUT_STMT_MODE),type(OUTPUT) ;
@@ -1449,103 +1448,27 @@ DCB_PAREN_DATASET_NAME : (
 
 DCB_PAREN_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(REFERBACK) ;
 
+mode INCLUDE_MODE ;
 
-mode MEMBER_MODE ;
+INCLUDE_WS : [ ]+ ->channel(HIDDEN),mode(INCLUDE_PARM_MODE) ;
 
-MEMBER_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-MEMBER_NAME : (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM)+ ->mode(DEFAULT_MODE) ;
+mode INCLUDE_PARM_MODE ;
 
-mode ORDER_MODE ;
+INCLUDE_PARM_MEMBER : M E M B E R ->pushMode(KYWD_VAL_MODE) ;
 
-/*
+INCLUDE_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+INCLUDE_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
 
-Note the difference between ORDER_MODE and ORDER_PAREN_MODE.  
+mode JCLLIB_MODE ;
 
-The possibilities...
+JCLLIB_WS : [ ]+ ->channel(HIDDEN),mode(JCLLIB_PARM_MODE) ;
 
-// JCLLIB ORDER=SYS1.PROCLIB                 COMMENT
-// JCLLIB ORDER='SYS1.PROCLIB'               COMMENT
-// JCLLIB ORDER=(SYS1.PROCLIB)               COMMENT
-// JCLLIB ORDER=('SYS1.PROCLIB')             COMMENT
-// JCLLIB ORDER=(SYS1.PROCLIB,USER.PROCLIB)  COMMENT
-// JCLLIB ORDER=(SYS1.PROCLIB,               COMMENT
-//        USER.PROCLIB)                      COMMENT
+mode JCLLIB_PARM_MODE ;
 
-...are handled differently due to different mode exit requirements.  The
-first two can exit on encountering whitespace and switch to mode(CM), or
-on encountering a DATASET_NAME.
+JCLLIB_PARM_ORDER : O R D E R ->pushMode(KYWD_VAL_MODE) ;
+JCLLIB_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JCLLIB_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
 
-The remaining cases must mode(ORDER_MODE_CM) which will mode(ORDER_PAREN_MODE)
-on encountering a NEWLINE.  The only exit is via RPAREN, which closes the
-group of libraries.
-
-The DATASET_NAME definition is copied from DSN_MODE, save for the parens and % and +.
-
-*/
-
-ORDER_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(ORDER_PAREN_MODE) ;
-ORDER_MODE_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
-ORDER_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-ORDER_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
-ORDER_MODE_COMMA : COMMA_DFLT ->type(COMMA) ;
-ORDER_MODE_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-ORDER_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ; 
-ORDER_MODE_SS : SS ->channel(HIDDEN) ;
-ORDER_MODE_CONTINUATION_WS : CONTINUATION_WS ->channel(HIDDEN) ;
-
-ORDER_MODE_DATASET_NAME : (
-    NULLFILE |
-    (AMPERSAND AMPERSAND NAME) | 
-    (
-        (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM)+
-    )
-  )
-  ->mode(DEFAULT_MODE),type(DATASET_NAME) 
-  ; //TODO remove mode(DEFAULT_MODE) ?
-
-mode ORDER_PAREN_MODE ;
-
-/*
-
-Note the difference between ORDER_MODE and ORDER_PAREN_MODE.  
-
-The possibilities...
-
-// JCLLIB ORDER=SYS1.PROCLIB                 COMMENT
-// JCLLIB ORDER='SYS1.PROCLIB'               COMMENT
-// JCLLIB ORDER=(SYS1.PROCLIB)               COMMENT
-// JCLLIB ORDER=('SYS1.PROCLIB')             COMMENT
-// JCLLIB ORDER=(SYS1.PROCLIB,USER.PROCLIB)  COMMENT
-// JCLLIB ORDER=(SYS1.PROCLIB,               COMMENT
-//        USER.PROCLIB)                      COMMENT
-
-...are handled differently due to different mode exit requirements.  The
-first two can exit on encountering whitespace and switch to mode(CM).
-
-The DATASET_NAME definition is copied from DSN_MODE, save for the parens and % and +.
-
-*/
-
-
-ORDER_PAREN_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
-ORDER_PAREN_MODE_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
-ORDER_PAREN_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-ORDER_PAREN_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
-ORDER_PAREN_MODE_COMMA : COMMA_DFLT ->type(COMMA) ;
-ORDER_PAREN_MODE_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-ORDER_PAREN_MODE_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ; 
-
-ORDER_PAREN_MODE_DATASET_NAME : (
-    NULLFILE |
-    (AMPERSAND AMPERSAND NAME) | 
-    (
-        (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM)+
-    )
-  )
-  ->type(DATASET_NAME) 
-  ;
 
 mode JOB1_MODE ;
 
