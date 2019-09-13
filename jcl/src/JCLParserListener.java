@@ -287,46 +287,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitExecParameterOverrides(JCLParser.ExecParameterOverridesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#stepAccountingInformation}.
-	 * @param ctx the parse tree
-	 */
-	void enterStepAccountingInformation(JCLParser.StepAccountingInformationContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#stepAccountingInformation}.
-	 * @param ctx the parse tree
-	 */
-	void exitStepAccountingInformation(JCLParser.StepAccountingInformationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#stepAccountingInformationSimple}.
-	 * @param ctx the parse tree
-	 */
-	void enterStepAccountingInformationSimple(JCLParser.StepAccountingInformationSimpleContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#stepAccountingInformationSimple}.
-	 * @param ctx the parse tree
-	 */
-	void exitStepAccountingInformationSimple(JCLParser.StepAccountingInformationSimpleContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#stepAccountingInformationMultiLine}.
-	 * @param ctx the parse tree
-	 */
-	void enterStepAccountingInformationMultiLine(JCLParser.StepAccountingInformationMultiLineContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#stepAccountingInformationMultiLine}.
-	 * @param ctx the parse tree
-	 */
-	void exitStepAccountingInformationMultiLine(JCLParser.StepAccountingInformationMultiLineContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#stepAccountingString}.
-	 * @param ctx the parse tree
-	 */
-	void enterStepAccountingString(JCLParser.StepAccountingStringContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#stepAccountingString}.
-	 * @param ctx the parse tree
-	 */
-	void exitStepAccountingString(JCLParser.StepAccountingStringContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#execParmACCT}.
 	 * @param ctx the parse tree
 	 */

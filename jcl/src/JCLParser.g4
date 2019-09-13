@@ -108,11 +108,6 @@ indicating they are potentially overriding a value coded in the proc.
 
 execParameterOverrides : execParmACCT | execParmADDRSPC | execParmCOND | execParmDYNAMNBR | execParmPARM | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmTIME ;
 
-stepAccountingInformation : stepAccountingInformationSimple | stepAccountingInformationMultiLine ;
-stepAccountingInformationSimple : stepAccountingString (COMMA stepAccountingString?)* ;
-stepAccountingInformationMultiLine : stepAccountingString (COMMA? SS? stepAccountingString)* ;
-stepAccountingString : (QUOTED_STRING_FRAGMENT | STEP_ACCT_MODE1_UNQUOTED_STRING+ | STEP_ACCT_MODE2_UNQUOTED_STRING+) ;
-
 execParmACCT : EXEC_ACCT EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN? ;
 
 execParmADDRSPC : EXEC_ADDRSPC EQUAL keywordOrSymbolic ;

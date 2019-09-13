@@ -155,7 +155,7 @@ CHKPT_DFLT : C H K P T ->type(CHKPT) ;
 CKPTLINE : C K P T L I N E ;
 CKPTPAGE : C K P T P A G E ;
 CKPTSEC : C K P T S E C ;
-CLASS_DFLT : C L A S S ->type(CLASS),mode(CL) ;
+CLASS_DFLT : C L A S S ->type(CLASS) ;
 CLOSE : C L O S E ;
 CM_UNIT : C M ;
 CMNDONLY : C M N D O N L Y ;
@@ -244,7 +244,7 @@ FREEVOL_DFLT : F R E E V O L ->type(FREEVOL) ;
 FRLOG : F R L O G ;
 FSSDATA : F S S D A T A ;
 FUNC_DFLT : F U N C ->type(FUNC) ;
-GDGBIAS_DFLT : G D G B I A S ->mode(GDGBIAS_MODE),type(GDGBIAS) ;
+GDGBIAS_DFLT : G D G B I A S ->type(GDGBIAS) ;
 GDGORDER_DFLT : G D G O R D E R ->type(GDGORDER) ;
 GNCP_DFLT : G N C P ->type(GNCP) ;
 GROUP_DFLT : G R O U P ->type(GROUP) ;
@@ -267,7 +267,7 @@ JESLOG_DFLT : J E S L O G ->type(JESLOG) ;
 JGLOBAL : J G L O B A L ;
 JLOCAL : J L O C A L ;
 JOB_DFLT : J O B ->mode(POST_OP),type(JOB) ;
-JOBRC_DFLT : J O B R C ->mode(JOBRC_MODE),type(JOBRC) ;
+JOBRC_DFLT : J O B R C ->type(JOBRC) ;
 
 KEY : K E Y ;
 KEYENCD1_DFLT : K E Y E N C D '1' ->type(KEYENCD1) ;
@@ -347,8 +347,6 @@ OVERLAYF : O V E R L A Y F ;
 OVFL : O V F L ;
 PAGEDEF : P A G E D E F ;
 PAGES_DFLT : P A G E S ->type(PAGES) ;
-//PARM : P A R M ->mode(EXEC_PARM_MODE) ;
-//PARMDD : P A R M D D ->mode(PARMDD_MODE) ;
 PARM : P A R M ;
 PARMDD : P A R M D D ;
 PARM1 : P A R M '1' ;
@@ -379,7 +377,7 @@ PURGE : P U R G E ;
 QUIT : Q U I T ;
 RC_DFLT : R C ->type(RC) ;
 RCK : R C K ;
-RD_DFLT : R D ->mode(RD_MODE),type(RD) ;
+RD_DFLT : R D ->type(RD) ;
 REAL : R E A L ;
 RECFM_DFLT : R E C F M ->type(RECFM) ;
 RECORG_DFLT : R E C O R G ->type(RECORG) ;
@@ -500,32 +498,32 @@ SIMPLE_STRING : (ALPHA | NATL | NUM | HYPHEN | USCORE)+ ;
 UNQUOTED_STRING : (~['\n\r] | SQUOTE2)+? ;
 
 
-A:'A';
-B:'B';
-C:'C';
-D:'D';
-E:'E';
-F:'F';
-G:'G';
-H:'H';
-I:'I';
-J:'J';
-K:'K';
-L:'L';
-M:'M';
-N:'N';
-O:'O';
-P:'P';
-Q:'Q';
-R:'R';
-S:'S';
-T:'T';
-U:'U';
-V:'V';
-W:'W';
-X:'X';
-Y:'Y';
-Z:'Z';
+fragment A:'A';
+fragment B:'B';
+fragment C:'C';
+fragment D:'D';
+fragment E:'E';
+fragment F:'F';
+fragment G:'G';
+fragment H:'H';
+fragment I:'I';
+fragment J:'J';
+fragment K:'K';
+fragment L:'L';
+fragment M:'M';
+fragment N:'N';
+fragment O:'O';
+fragment P:'P';
+fragment Q:'Q';
+fragment R:'R';
+fragment S:'S';
+fragment T:'T';
+fragment U:'U';
+fragment V:'V';
+fragment W:'W';
+fragment X:'X';
+fragment Y:'Y';
+fragment Z:'Z';
 
 
 
@@ -620,16 +618,6 @@ mode POST_OP ;
 
 WS_POST_OP : [ ]+ ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 NEWLINE_POST_OP : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-
-mode RD_MODE ;
-
-RD_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-RD_VALUE : (R | RNC | NR | NC) ->mode(DEFAULT_MODE);
-RD_SYMBOLIC : SYMBOLIC ;
-RD_DOT : DOT_DFLT ->type(DOT) ;
-RD_NAME : NAME ->type(NAME) ;
-RD_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),mode(CM) ;
-RD_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode EXEC1_MODE ;
 
@@ -815,15 +803,6 @@ IF_STEP : NM_PART DOT_DFLT (NM_PART DOT_DFLT)? ;
 //IF_CHECK : NOT_SYMBOL_IF? (IF_STEP DOT_DFLT)? IF_REL_EXP_KEYWORD (IF_REL_OP (FALSE_IF | TRUE_IF | IF_NUM_LIT | ALNUMNAT))? ;
 IF_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
 IF_ALNUMNAT : ALNUMNAT ->type(ALNUMNAT) ;
-
-mode CL ;
-
-EQUAL_CL : EQUAL_DFLT ->type(EQUAL) ;
-CLASS_VAL : (
-    (ASTERISK | SYMBOLIC) | 
-    ((NUM | ALPHA) (ALPHA | NATL | NUM)*)
-  ) {getText().length() < 9}? ->mode(DEFAULT_MODE) ;
-
 
 mode DD_OP ;
 //TODO make DD_OP work like OUTPUT_STMT
@@ -1069,7 +1048,6 @@ OUTPUT_STMT_WRITER : W R I T E R ->pushMode(KYWD_VAL_MODE) ;
 
 
 mode OUTPUT_CLASS_MODE ;
-//TODO CLASS= is syntactically valid
 OUTPUT_CLASS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 OUTPUT_CLASS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 OUTPUT_CLASS_VALUE : [A-Z0-9*] ->popMode ;
@@ -1290,39 +1268,6 @@ mode QS_SS ;
 SLASH_QS : '/' ;
 SS_QS : SLASH_QS SLASH_QS {getCharPositionInLine() == 2}? ->channel(HIDDEN) ;
 CONTINUATION_WS_QS_SS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),popMode ;
-
-mode QS_JOB_PROGRAMMER_NAME_MODE ;
-
-SQUOTE2_QS_JOB_PROGRAMMER_NAME_MODE : SQUOTE SQUOTE ;
-SQUOTE_QS_JOB_PROGRAMMER_NAME_MODE : SQUOTE {haveProgrammerName = true;} ->channel(HIDDEN),popMode ;
-ANYCHAR_NOSQUOTE_JOB_PROGRAMMER_NAME_MODE : ~['\n\r] ;
-NEWLINE_QS_JOB_PROGRAMMER_NAME_MODE : [\n\r] ->channel(HIDDEN),pushMode(QS_SS_JOB_PROGRAMMER_NAME_MODE) ;
-
-QUOTED_STRING_PROGRAMMER_NAME : (ANYCHAR_NOSQUOTE_JOB_PROGRAMMER_NAME_MODE | SQUOTE2_QS_JOB_PROGRAMMER_NAME_MODE)+ ;
-
-mode QS_SS_JOB_PROGRAMMER_NAME_MODE ;
-
-SLASH_QS_JOB_PROGRAMMER_NAME_MODE : '/' ;
-SS_QS_JOB_PROGRAMMER_NAME_MODE : SLASH_QS SLASH_QS {getCharPositionInLine() == 2}? ->channel(HIDDEN) ;
-CONTINUATION_WS_QS_SS_JOB_PROGRAMMER_NAME_MODE : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),popMode ;
-
-mode JOBRC_MODE ;
-
-LASTRC : L A S T R C ->mode(DEFAULT_MODE) ;
-MAXRC : M A X R C ->mode(DEFAULT_MODE) ;
-JOBRC_STEP_LIT : S T E P ;
-JOBRC_COMMA : COMMA_DFLT ->type(COMMA) ;
-JOBRC_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-JOBRC_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
-JOBRC_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
-JOBRC_STEP_NAME : NAME (DOT_DFLT NAME)? ;
-JOBRC_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-
-mode GDGBIAS_MODE ;
-
-GDGBIAS_JOB : J O B ->mode(DEFAULT_MODE) ;
-GDGBIAS_STEP : S T E P ->mode(DEFAULT_MODE) ;
-GDGBIAS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 
 mode DSN_MODE ;
 
@@ -1789,42 +1734,6 @@ JOB_PROGRAMMER_NAME_MODE_USER : USER_DFLT ->type(USER),pushMode(KYWD_VAL_MODE) ;
 
 JOB_PROGRAMMER_NAME_MODE_SQUOTE : '\'' {haveProgrammerName = true;} ->channel(HIDDEN),pushMode(QS) ;
 JOB_PROGRAMMER_NAME_MODE_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? {haveProgrammerName = true;} ;
-
-mode STEP_ACCT_MODE ;
-
-STEP_ACCT_MODE_DOT : DOT_DFLT ->type(DOT) ;
-STEP_ACCT_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL),mode(STEP_ACCT_MODE1) ;
-STEP_ACCT_MODE_NAME : NAME ->type(NAME) ;
-
-mode STEP_ACCT_MODE1 ;
-
-STEP_ACCT_MODE1_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-STEP_ACCT_MODE1_LINE_NB : LINE_NB ->skip ;
-STEP_ACCT_MODE1_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(STEP_ACCT_MODE2) ;
-STEP_ACCT_MODE1_RPAREN : RPAREN_DFLT ->type(RPAREN) ;
-
-STEP_ACCT_MODE1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-
-STEP_ACCT_MODE1_COMMA : COMMA_DFLT ->type(COMMA),mode(DEFAULT_MODE) ;
-
-STEP_ACCT_MODE1_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
-
-mode STEP_ACCT_MODE2 ;
-
-STEP_ACCT_MODE2_NEWLINE : NEWLINE ->channel(HIDDEN) ;
-STEP_ACCT_MODE2_LINE_NB : LINE_NB ->skip ;
-STEP_ACCT_MODE2_LPAREN : LPAREN_DFLT ->type(LPAREN) ;
-STEP_ACCT_MODE2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(DEFAULT_MODE) ;
-
-STEP_ACCT_MODE2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-STEP_ACCT_MODE2_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
-
-STEP_ACCT_MODE2_COMMA : COMMA_DFLT ->type(COMMA) ;
-
-mode PARMDD_MODE ;
-
-PARMDD_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-PARMDD_NAME : NAME ->mode(DEFAULT_MODE) ;
 
 
 mode KYWD_VAL_MODE ;
