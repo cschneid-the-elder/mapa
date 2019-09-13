@@ -1516,6 +1516,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInterveningCruft(JCLParser.InterveningCruftContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#notifyEMAIL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotifyEMAIL(JCLParser.NotifyEMAILContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#notifyUSER}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

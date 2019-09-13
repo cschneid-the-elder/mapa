@@ -51,37 +51,37 @@
 //NOTIFY02 NOTIFY EMAIL='cschneid@example.com', comment
 //             WHEN='ABEND' comment
 //NOTIFY03 NOTIFY EMAIL='cschneid@example.com', comment
-//             WHEN='ABEND | comment
+//             WHEN='ABEND | 
 //             !RUN' comment
 //NOTIFY04 NOTIFY USER=CSCHNEID,WHEN='RC!=0' comment
 //NOTIFY05 NOTIFY USER=CSCHNEID, comment
 //             WHEN='ABEND' comment
 //NOTIFY06 NOTIFY USER=CSCHNEID, comment
-//             WHEN='ABEND | comment
+//             WHEN='ABEND | 
 //             !RUN' comment
 //NOTIFY11 NOTIFY EMAIL='cschneid@example.com',WHEN='RC!=0',TYPE=EMAIL comment
 //NOTIFY12 NOTIFY EMAIL='cschneid@example.com', comment
 //             WHEN='ABEND',TYPE=EMAIL comment
 //NOTIFY13 NOTIFY EMAIL='cschneid@example.com', comment
-//             WHEN='ABEND | comment
+//             WHEN='ABEND | 
 //             !RUN',TYPE=EMAIL comment
 //NOTIFY14 NOTIFY USER=CSCHNEID,WHEN='RC!=0',TYPE=MSG comment
 //NOTIFY15 NOTIFY USER=CSCHNEID, comment
 //             WHEN='ABEND',TYPE=MSG comment
 //NOTIFY16 NOTIFY USER=CSCHNEID, comment
-//             WHEN='ABEND | comment
+//             WHEN='ABEND | 
 //             !RUN',TYPE=MSG comment
 //NOTIFY21 NOTIFY EMAIL='cschneid@example.com',TYPE=EMAIL,WHEN='RC!=0' comment
 //NOTIFY22 NOTIFY EMAIL='cschneid@example.com',TYPE=EMAIL, comment
 //             WHEN='ABEND' comment
 //NOTIFY23 NOTIFY EMAIL='cschneid@example.com',TYPE=EMAIL, comment
-//             WHEN='ABEND | comment
+//             WHEN='ABEND | 
 //             !RUN' comment
 //NOTIFY24 NOTIFY USER=CSCHNEID,TYPE=MSG,WHEN='RC!=0' comment
 //NOTIFY25 NOTIFY USER=CSCHNEID,TYPE=MSG, comment
 //             WHEN='ABEND' comment
 //NOTIFY26 NOTIFY USER=CSCHNEID,TYPE=MSG, comment
-//             WHEN='ABEND | comment
+//             WHEN='ABEND | 
 //             !RUN' comment
 //NOTIFY30 NOTIFY TYPE=MSG, comment
 //             USER=CSCHNEID, comment

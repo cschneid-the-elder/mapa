@@ -787,13 +787,14 @@ jcllibStatement : SS NAME_FIELD? JCLLIB ORDER EQUAL (
 
 
 notifyStatement : SS NAME_FIELD? NOTIFY_OP
-    notifyParms (interveningCruft notifyParms)* COMMENT_TEXT? ;
+    notifyParms COMMENT_TEXT? (notifyParms COMMENT_TEXT?)* ;
 
-notifyParms : jobParmEMAIL | notifyUSER | notifyTYPE | notifyWHEN ;
+notifyParms : notifyEMAIL | notifyUSER | notifyTYPE | notifyWHEN ;
 interveningCruft : (COMMA | inlineComment) SS? commentStatement* ;
-notifyUSER : USER EQUAL nameOrSymbolic ;
-notifyTYPE : TYPE EQUAL (EMAIL | MSG) ;
-notifyWHEN : WHEN EQUAL QUOTED_STRING_FRAGMENT+ ;
+notifyEMAIL : NOTIFY_STMT_PARM_EMAIL EQUAL keywordOrSymbolic ;
+notifyUSER : NOTIFY_STMT_PARM_USER EQUAL keywordOrSymbolic ;
+notifyTYPE : NOTIFY_STMT_PARM_TYPE EQUAL keywordOrSymbolic ;
+notifyWHEN : NOTIFY_STMT_PARM_WHEN EQUAL keywordOrSymbolic ;
 
 /*
 This syntax would be correct if the WHEN parameter of the NOTIFY statement

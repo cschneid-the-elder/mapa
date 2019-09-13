@@ -2517,6 +2517,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitInterveningCruft(JCLParser.InterveningCruftContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#notifyEMAIL}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotifyEMAIL(JCLParser.NotifyEMAILContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#notifyEMAIL}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotifyEMAIL(JCLParser.NotifyEMAILContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#notifyUSER}.
 	 * @param ctx the parse tree
 	 */

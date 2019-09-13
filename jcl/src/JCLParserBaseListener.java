@@ -3027,6 +3027,18 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNotifyEMAIL(JCLParser.NotifyEMAILContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNotifyEMAIL(JCLParser.NotifyEMAILContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNotifyUSER(JCLParser.NotifyUSERContext ctx) { }
 	/**
 	 * {@inheritDoc}
