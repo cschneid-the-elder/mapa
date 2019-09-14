@@ -1060,48 +1060,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmReferback(JCLParser.DdParmReferbackContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE(JCLParser.DdParmAMP_TRACEContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_Parameter}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE_Parameter(JCLParser.DdParmAMP_TRACE_ParameterContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_HOOK}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE_HOOK(JCLParser.DdParmAMP_TRACE_HOOKContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_ECODE}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE_ECODE(JCLParser.DdParmAMP_TRACE_ECODEContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_KEY}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE_KEY(JCLParser.DdParmAMP_TRACE_KEYContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_PARM1}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE_PARM1(JCLParser.DdParmAMP_TRACE_PARM1Context ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_PARM2}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmAMP_TRACE_PARM2(JCLParser.DdParmAMP_TRACE_PARM2Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#joblibStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1515,12 +1473,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNotifyWHEN(JCLParser.NotifyWHENContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#yesOrNo}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitYesOrNo(JCLParser.YesOrNoContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatement}.
 	 * @param ctx the parse tree

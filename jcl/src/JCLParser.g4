@@ -203,7 +203,8 @@ ddParmAMP : AMP EQUAL (
     (LPAREN 
         QUOTED_STRING_FRAGMENT ((COMMA | inlineComment)? SS? COMMENT_TEXT? QUOTED_STRING_FRAGMENT)*
     RPAREN) |
-    (QUOTED_STRING_FRAGMENT inlineComment?)
+    (QUOTED_STRING_FRAGMENT inlineComment?) |
+    (LPAREN? AMORG RPAREN?)
   ) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
@@ -617,7 +618,6 @@ Home > z/OS 2.3.0 > z/OS DFSMS > z/OS DFSMSdfp Diagnosis > VSAM diagnostic aids 
 
 ...for the future, when z/OS 2.3 documentation drops off the back of the stove.
 
-*/
 ddParmAMP_TRACE : TRACE EQUAL 
     LPAREN
         (QUOTED_STRING_FRAGMENT ((COMMA | inlineComment)? SS? QUOTED_STRING_FRAGMENT))*
@@ -629,6 +629,7 @@ ddParmAMP_TRACE_ECODE : ECODE EQUAL (ANY | NUM_LIT) ;
 ddParmAMP_TRACE_KEY : KEY EQUAL SIMPLE_STRING ;
 ddParmAMP_TRACE_PARM1 : PARM1 EQUAL SIMPLE_STRING ;
 ddParmAMP_TRACE_PARM2 : PARM2 EQUAL SIMPLE_STRING ;
+*/
 
 joblibStatement : SS JOBLIB DD joblibParameter (((COMMA | inlineComment) SS?)? joblibParameter inlineComment?)* ;
 
@@ -804,8 +805,6 @@ whenTest : whenKeyword
     (WHEN_REL_OP (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
 */
 
-
-yesOrNo : YES | NO | ALPHA ;
 
 outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter 
     (interveningCruft? outputStatementParameter)* COMMENT_TEXT? ;

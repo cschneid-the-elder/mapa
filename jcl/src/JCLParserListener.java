@@ -1757,76 +1757,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmReferback(JCLParser.DdParmReferbackContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE(JCLParser.DdParmAMP_TRACEContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE(JCLParser.DdParmAMP_TRACEContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_Parameter}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE_Parameter(JCLParser.DdParmAMP_TRACE_ParameterContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_Parameter}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE_Parameter(JCLParser.DdParmAMP_TRACE_ParameterContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_HOOK}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE_HOOK(JCLParser.DdParmAMP_TRACE_HOOKContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_HOOK}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE_HOOK(JCLParser.DdParmAMP_TRACE_HOOKContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_ECODE}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE_ECODE(JCLParser.DdParmAMP_TRACE_ECODEContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_ECODE}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE_ECODE(JCLParser.DdParmAMP_TRACE_ECODEContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_KEY}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE_KEY(JCLParser.DdParmAMP_TRACE_KEYContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_KEY}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE_KEY(JCLParser.DdParmAMP_TRACE_KEYContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_PARM1}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE_PARM1(JCLParser.DdParmAMP_TRACE_PARM1Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_PARM1}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE_PARM1(JCLParser.DdParmAMP_TRACE_PARM1Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_PARM2}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdParmAMP_TRACE_PARM2(JCLParser.DdParmAMP_TRACE_PARM2Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddParmAMP_TRACE_PARM2}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdParmAMP_TRACE_PARM2(JCLParser.DdParmAMP_TRACE_PARM2Context ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#joblibStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -2516,16 +2446,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNotifyWHEN(JCLParser.NotifyWHENContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#yesOrNo}.
-	 * @param ctx the parse tree
-	 */
-	void enterYesOrNo(JCLParser.YesOrNoContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#yesOrNo}.
-	 * @param ctx the parse tree
-	 */
-	void exitYesOrNo(JCLParser.YesOrNoContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatement}.
 	 * @param ctx the parse tree
