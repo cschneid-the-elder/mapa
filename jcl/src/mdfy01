@@ -1,0 +1,48 @@
+#! /usr/bin/awk -f
+
+# changing some pattern names in JCLLexer.g4 with an eye
+# towards localizing them in modes where they are used
+
+# not fully baked, I needed to modify DD_KEYLABL1 & 2 and
+# DD_KEYENCD1 & 2 to put apostrophes around the trailing
+# digits and add a semicolon after DD_DATA due to the code
+# in {} taking up $4's position.  close enough.
+
+# also had to sudo apt install gawk
+
+{
+
+if ($1 ~ /^DD_/ && $3 != "COMMA_DFLT" && $3 != "COMMENT_FLAG_DFLT" && $3 ~ /_DFLT$/) {
+    new3 = "";
+    split($3, part3, "", seps);
+    for (i=1; part3[i] != "_"; i++) {
+        if (i == 1) {
+            new3 = part3[i];
+        } else {
+            new3 = new3 " " part3[i];
+        }
+    }
+    print $1 " " $2 " " new3 " " $4 " " $5;
+} else {
+    if ($1 ~ /^DCB_/ && $3 != "COMMA_DFLT" && $3 != "LPAREN_DFLT" && $3 != "EQUAL_DFLT" && $3 != "RPAREN_DFLT" && $3 ~ /_DFLT$/) {
+        new3 = "DD_";
+        split($3, part3, "", seps);
+        for (i=1; part3[i] != "_"; i++) {
+            new3 = new3 part3[i];
+        }
+        print $1 " " $2 " " new3 " " $4 " " $5;
+    } else {
+        if ($1 ~ /^DATA_PARM_MODE/ && $3 != "COMMA_DFLT" && $3 != "EQUAL_DFLT" ) {
+            new3 = "DD_";
+            split($3, part3, "", seps);
+            for (i=1; part3[i] != "_"; i++) {
+                new3 = new3 part3[i];
+            }
+            print $1 " " $2 " " new3 " " $4 " " $5;
+        } else {
+            print $0;
+        }
+    }
+}
+
+}
