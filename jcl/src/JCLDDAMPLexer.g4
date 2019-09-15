@@ -47,6 +47,9 @@ SW : S W ;
 SYNAD : S Y N A D ;
 TRACE : T R A C E ;
 
+MEM_UNIT : U | K | M | G | T | P ;
+NUM_MEM_VAL : NUM_LIT_DFLT MEM_UNIT ;
+
 
 mode AMP_MODE ;
 

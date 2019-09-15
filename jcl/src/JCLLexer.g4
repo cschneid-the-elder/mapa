@@ -82,9 +82,6 @@ LINE_NB : ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR {getCh
 COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM);
 COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM) ;
 //NAME_FIELD : NAME (DOT NAME)? {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));} ->mode(OP) ;
-COND_OP : COND_EQ | COND_GE | COND_GT | COND_LE | COND_LT | COND_NE ;
-MEM_UNIT : U | K | M | G | T | P ;
-NUM_MEM_VAL : NUM_LIT_DFLT MEM_UNIT ;
 SYMBOLIC : AMPERSAND [A-Z0-9@#$]+ {getText().length() <= 9}? ;
 
 /*
@@ -103,52 +100,34 @@ SYMBOLIC_SUBSTRING : (
 
 */
 
-ABEND_DFLT : A B E N D ->type(ABEND) ;
-ABENDCC_DFLT : A B E N D C C ->type(ABENDCC) ;
 ABSTR : A B S T R ;
 ACCT : A C C T ;
 ALPHA : [A-Z] ;
 ALX : A L X ;
 AMPERSAND : '&' ;
-ANY : A N Y ;
 ASTERISK : '*' ;
 
-CLOSE : C L O S E ;
 COMMA_DFLT : ',' ->type(COMMA) ;
 COMMAND_DFLT : C O M M A N D ->mode(POST_OP),type(COMMAND) ;
-COND_EQ : E Q ;
-COND_GE : G E ;
-COND_GT : G T ;
-COND_LE : L E ;
-COND_LT : L T ;
-COND_NE : N E ;
 CONTIG : C O N T I G ;
 CYL : C Y L ;
 DD_DFLT : D D ->type(DD),mode(DD_OP) ;
 DOT_DFLT : '.' ->type(DOT) ;
-DQUOTE : '"' ;
 ELSE_DFLT : E L S E ->mode(CM),type(ELSE) ;
 END : E N D ;
 ENDCNTL_DFLT : E N D C N T L ->mode(POST_OP),type(ENDCNTL) ;
 ENDIF_DFLT : E N D I F ->mode(CM),type(ENDIF) ;
 EQUAL_DFLT : '=' ->type(EQUAL) ;
-EVEN : E V E N ;
 EXEC_DFLT : E X E C ->type(EXEC) ;
 EXPORT_DFLT : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
 FALSE_DFLT : F A L S E ->type(FALSE) ;
-FIFO : F I F O ;
-HOOK : H O O K ;
 HYPHEN : '-' ;
 IF_DFLT : I F ->mode(IF_MODE),type(IF) ;
 INCLUDE_DFLT : I N C L U D E ->mode(POST_OP),type(INCLUDE) ;
-JCLHOLD : J C L H O L D ;
 JCLLIB_DFLT : J C L L I B ->mode(POST_OP),type(JCLLIB) ;
-JGLOBAL : J G L O B A L ;
-JLOCAL : J L O C A L ;
 JOB_DFLT : J O B ->mode(POST_OP),type(JOB) ;
 
 KEY : K E Y ;
-LIFO : L I F O ;
 LPAREN_DFLT : '(' ->type(LPAREN) ;
 MXIG : M X I G ;
 fragment NATL : [@#$] ;
@@ -157,16 +136,11 @@ NEWLINE : [\n\r] ->channel(HIDDEN) ;
 NOT_SYMBOL_DFLT : [^!] ->type(NOT_SYMBOL) ;
 NULLFILE : N U L L F I L E ;
 fragment NUM : [0-9] ;
-
-ONLY : O N L Y ;
-
 PEND_DFLT : P E N D ->mode(POST_OP),type(PEND) ;
 PROC_DFLT : P R O C ->mode(POST_OP),type(PROC) ;
-RC_DFLT : R C ->type(RC) ;
 RLSE : R L S E ;
 ROUND : R O U N D ;
 RPAREN_DFLT : ')' ->type(RPAREN) ;
-RUN_DFLT : R U N ->type(RUN) ;
 SCHEDULE_DFLT : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_DFLT : S E T ->mode(SET_MODE),type(SET) ;
 
@@ -176,10 +150,6 @@ fragment SQUOTE2 : SQUOTE SQUOTE ;
 TRK : T R K ;
 
 USCORE : '_' ;
-USECATLG : U S E C A T L G ;
-USEJC : U S E J C ;
-WHEN : W H E N ;
-WRITE : W R I T E ;
 WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
 XMIT_DFLT : X M I T ->mode(POST_OP),type(XMIT) ;
 
