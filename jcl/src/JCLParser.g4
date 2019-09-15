@@ -751,16 +751,26 @@ exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL
     LPAREN? keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic COMMENT_TEXT?)* 
     RPAREN? COMMENT_TEXT? ;
 
+/*
 ifStatement : SS NAME_FIELD? IF
     NOT_SYMBOL* LPAREN*
-      ifTest RPAREN* SS? (IF_LOGICAL SS? NOT_SYMBOL* LPAREN* SS? ifTest SS? RPAREN*)*
+      ifTest RPAREN* (IF_LOGICAL NOT_SYMBOL* LPAREN* ifTest RPAREN*)*
     RPAREN*
-    SS? THEN COMMENT_TEXT?
+    THEN COMMENT_TEXT?
+  ;
+*/
+
+ifStatement : SS NAME_FIELD? IF
+    NOT_SYMBOL* LPAREN*
+      ifTest RPAREN* (IF_LOGICAL NOT_SYMBOL* LPAREN* ifTest RPAREN*)*
+    RPAREN*
+    THEN COMMENT_TEXT?
   ;
 
-ifKeyword : ABEND | ABENDCC | RUN | RC ;
+ifRelOp : (IF_EQ | IF_GE | IF_LE | IF_NE | IF_NG | IF_NL | IF_GT | IF_LT) ;
+ifKeyword : (ABEND | ABENDCC | RUN | RC) ;
 ifTest : IF_STEP? ifKeyword
-    (IF_REL_OP (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
+    (ifRelOp (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
 
 
  

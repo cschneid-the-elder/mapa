@@ -1,0 +1,34 @@
+#! /usr/bin/awk -f
+
+# changing some pattern names in JCLLexer.g4 with an eye
+# towards localizing them in modes where they are used
+
+
+
+{
+
+if ($1 ~ /^JOB_MODE_/ && $3 != "COMMA_DFLT" && $3 != "LPAREN_DFLT" && $3 ~ /_DFLT$/) {
+    new3 = "";
+    split($3, part3, "", seps);
+    for (i=1; part3[i] != "_"; i++) {
+        if (i == 1) {
+            new3 = part3[i];
+        } else {
+            new3 = new3 " " part3[i];
+        }
+    }
+    print $1 " " $2 " " new3 " " $4 " " $5;
+} else {
+    if ($1 ~ /^JOB_PROGRAMMER_NAME_MODE_/ && $3 != "COMMA_DFLT" && $3 ~ /_DFLT$/) {
+        new3 = "JOB_";
+        split($3, part3, "", seps);
+        for (i=1; part3[i] != "_"; i++) {
+            new3 = new3 part3[i];
+        }
+        print $1 " " $2 " " new3 " " $4 " " $5;
+    } else {
+            print $0;
+        }
+    }
+
+}
