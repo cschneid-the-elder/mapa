@@ -163,8 +163,9 @@ fragment Z:'Z';
 
 mode CM_MODE ;
 
-NEWLINE_CM : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-COMMENT_TEXT_CM : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
+CM_LINE_NB : LINE_NB {getCharPositionInLine() == 80}? -> skip;
+CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
 
 /*
 
@@ -212,7 +213,7 @@ CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),mode(OP_MOD
 mode OP_MODE ;
 
 CNTL_OP : C N T L ->mode(CNTL_MODE),type(CNTL) ;
-COMMAND_OP : C O M M A N D ->mode(POST_OP_MODE),type(COMMAND) ;
+COMMAND_OP : C O M M A N D ->mode(COMMAND_MODE),type(COMMAND) ;
 DD_OP : D D ->mode(DD_MODE),type(DD) ;
 ELSE_OP : E L S E ->mode(CM_MODE),type(ELSE) ;
 ENDCNTL_OP : E N D C N T L ->mode(POST_OP_MODE),type(ENDCNTL) ;
@@ -232,11 +233,23 @@ SET_OP : S E T ->mode(SET_MODE),type(SET) ;
 XMIT_OP : X M I T ->mode(POST_OP_MODE),type(XMIT) ;
 
 WS_OP : [ ]+ ->channel(HIDDEN) ;
+NEWLINE_OP : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode POST_OP_MODE ;
 
 WS_POST_OP : [ ]+ ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 NEWLINE_POST_OP : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+
+mode COMMAND_MODE ;
+
+COMMAND_WS : ' '+ ->channel(HIDDEN),mode(COMMAND_PARM_MODE) ;
+
+mode COMMAND_PARM_MODE ;
+
+COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+COMMAND_PARM_WS : ' '+ ->channel(HIDDEN),mode(CM_MODE) ;
+COMMAND_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+COMMAND_PARM_LINE_NB : LINE_NB {getCharPositionInLine() == 80}? -> skip;
 
 mode EXEC1_MODE ;
 
@@ -728,7 +741,7 @@ WS_CNTL : [ ]+ ->channel(HIDDEN) ;
 mode CNTL_MODE_CM ;
 
 CNTL_CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(CNTL_DATA_MODE) ;
-CNTL_CM_COMMENT_TEXT : COMMENT_TEXT_CM ->type(COMMENT_TEXT) ;
+CNTL_CM_COMMENT_TEXT : CM_COMMENT_TEXT ->type(COMMENT_TEXT) ;
 
 mode CNTL_DATA_MODE ;
 
@@ -744,6 +757,7 @@ CNTL_DATA : DD_ASTERISK_DATA+? ;
 
 mode QS ;
 
+QS_LINE_NB : LINE_NB {getCharPositionInLine() == 80}? -> skip;
 fragment SQUOTE2_QS : SQUOTE SQUOTE ;
 SQUOTE_QS : SQUOTE
     {
@@ -779,7 +793,28 @@ SQUOTE_QS : SQUOTE
 fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
 NEWLINE_QS : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
 
-QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
+/*
+One way around the behavior of the +? operation would be to
+pre-process all the JCL, stripping the bytes in positions
+73 - 80.
+
+#! /usr/bin/awk -f
+
+# example of removing line numbers from JCL
+
+{
+
+if (length($0) == 80) {
+    new = substr($0, 1, 72) "        ";
+    print new;
+} else {
+    print $0 ;
+}
+
+}
+*/
+
+QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+?
     {
         if (_modeStack.peek() == JOB_PROGRAMMER_NAME_MODE) setType(QUOTED_STRING_PROGRAMMER_NAME);
     }

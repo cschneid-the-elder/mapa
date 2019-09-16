@@ -31,9 +31,9 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard (commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ ;
+execJCL : (jobCard (commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ EOF?;
 
-procJCL : procStatement (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
+procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
 procStatement : SS procName? PROC definedSymbolicParameters* ;
 
@@ -687,7 +687,7 @@ jobParmUJOBCORR : UJOBCORR EQUAL keywordOrSymbolic ;
 
 jobParmUSER : USER EQUAL keywordOrSymbolic ;
 
-commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT ;
+commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT+ ;
  
 cntlStatement : SS NAME_FIELD? CNTL ASTERISK? (inlineComment | COMMENT_TEXT)? ;
 

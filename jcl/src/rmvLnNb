@@ -1,0 +1,14 @@
+#! /usr/bin/awk -f
+
+# example of removing line numbers from JCL
+
+{
+
+if (length($0) == 80) {
+    new = substr($0, 1, 72) "        ";
+    print new;
+} else {
+    print $0 ;
+}
+
+}
