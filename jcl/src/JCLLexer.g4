@@ -98,17 +98,12 @@ SYMBOLIC_SUBSTRING : (
 
 */
 
-ABSTR : A B S T R ;
-ACCT : A C C T ;
 ALPHA : [A-Z] ;
-ALX : A L X ;
 AMPERSAND : '&' ;
 ASTERISK : '*' ;
 
 COMMA_DFLT : ',' ->type(COMMA) ;
 COMMAND_DFLT : C O M M A N D ->mode(POST_OP),type(COMMAND) ;
-CONTIG : C O N T I G ;
-CYL : C Y L ;
 DD_DFLT : D D ->type(DD),mode(DD_OP) ;
 DOT_DFLT : '.' ->type(DOT) ;
 ELSE_DFLT : E L S E ->mode(CM),type(ELSE) ;
@@ -127,7 +122,6 @@ JOB_DFLT : J O B ->mode(POST_OP),type(JOB) ;
 
 KEY : K E Y ;
 LPAREN_DFLT : '(' ->type(LPAREN) ;
-MXIG : M X I G ;
 fragment NATL : [@#$] ;
 
 NEWLINE : [\n\r] ->channel(HIDDEN) ;
@@ -136,8 +130,6 @@ NULLFILE : N U L L F I L E ;
 fragment NUM : [0-9] ;
 PEND_DFLT : P E N D ->mode(POST_OP),type(PEND) ;
 PROC_DFLT : P R O C ->mode(POST_OP),type(PROC) ;
-RLSE : R L S E ;
-ROUND : R O U N D ;
 RPAREN_DFLT : ')' ->type(RPAREN) ;
 SCHEDULE_DFLT : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_DFLT : S E T ->mode(SET_MODE),type(SET) ;
@@ -145,7 +137,6 @@ SET_DFLT : S E T ->mode(SET_MODE),type(SET) ;
 SLASH : '/' ;
 SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 fragment SQUOTE2 : SQUOTE SQUOTE ;
-TRK : T R K ;
 
 USCORE : '_' ;
 WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
@@ -155,7 +146,6 @@ fragment ANYCHAR : ~[\n\r] ;
 NAME : (NATL | ALPHA) (ALPHA | NATL | NUM)* {getText().length() < 9}? ;
 NUM_LIT_DFLT : NUM+ ->type(NUM_LIT) ;
 ALNUMNAT : (ALPHA | NATL | NUM)+ ;
-SIMPLE_STRING : (ALPHA | NATL | NUM | HYPHEN | USCORE)+ ;
 UNQUOTED_STRING : (~['\n\r] | SQUOTE2)+? ;
 
 
@@ -431,7 +421,7 @@ DD_RLS : R L S ->type(RLS),pushMode(KYWD_VAL_MODE) ;
 DD_ROACCESS : R O A C C E S S ->type(ROACCESS),pushMode(KYWD_VAL_MODE) ;
 DD_SECMODEL : S E C M O D E L ->type(SECMODEL),pushMode(KYWD_VAL_MODE) ;
 DD_SEGMENT : S E G M E N T ->type(SEGMENT),pushMode(KYWD_VAL_MODE) ;
-DD_SPACE : S P A C E ->type(SPACE),pushMode(DEFAULT_MODE) ;
+DD_SPACE : S P A C E ->type(SPACE),pushMode(SPACE_MODE) ;
 DD_SPIN : S P I N ->type(SPIN),pushMode(KYWD_VAL_MODE) ;
 DD_STORCLAS : S T O R C L A S ->type(STORCLAS),pushMode(KYWD_VAL_MODE) ;
 DD_SUBSYS : S U B S Y S ->type(SUBSYS),pushMode(KYWD_VAL_MODE) ;
@@ -708,7 +698,7 @@ mode DLM_MODE ;
 
 DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
 SQUOTE_DLM : '\'' ->channel(HIDDEN),pushMode(DLM_QS);
-DLM_VAL : SIMPLE_STRING 
+DLM_VAL : [A-Z0-9@#$_\-]+ 
     {
         dlmVals = new java.util.ArrayList();
         dlmVals.add(getText());
@@ -1484,6 +1474,29 @@ PATHOPTS_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) 
 PATHOPTS_PAREN_VALUE : PATHOPTS_VALUE ->type(PATHOPTS_VALUE) ;
 PATHOPTS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 PATHOPTS_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+
+mode SPACE_MODE ;
+
+SPACE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+SPACE_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(SPACE_PAREN_MODE) ;
+SPACE_NEWLINE : NEWLINE ->popMode ;
+SPACE_SYMBOLIC : (AMPERSAND [A-Z0-9@#$]+)+ ->type(SYMBOLIC),popMode ;
+
+mode SPACE_PAREN_MODE ;
+
+ABSTR : A B S T R ;
+ALX : A L X ;
+CONTIG : C O N T I G ;
+CYL : C Y L ;
+MXIG : M X I G ;
+RLSE : R L S E ;
+ROUND : R O U N D ;
+SPACE_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+SPACE_PAREN_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
+SPACE_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SPACE_PAREN_MODE) ;
+SPACE_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
+SPACE_PAREN_SYMBOLIC : SYMBOLIC+ ->type(SYMBOLIC) ;
+TRK : T R K ;
 
 mode SYSOUT_MODE ;
 

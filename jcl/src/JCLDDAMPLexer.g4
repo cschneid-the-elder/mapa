@@ -36,6 +36,7 @@ PARM2 : P A R M '2' ;
 RCK : R C K ;
 REDO : R E D O ;
 RMODE31 : R M O D E '3' '1' ;
+SIMPLE_STRING : [A-Z0-9@#$_\-]+ ;
 SMBBIAS : S M B B I A S ;
 SMBDFR : S M B D F R ;
 SMBHWT : S M B H W T ;
