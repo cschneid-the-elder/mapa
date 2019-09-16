@@ -75,11 +75,11 @@ tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF
 
 // lexer rules --------------------------------------------------------------------------------
 
-SS : SLASH SLASH {/*System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());*/}{getCharPositionInLine() == 2}? ->mode(NM) ;
+SS : SLASH SLASH {/*System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());*/}{getCharPositionInLine() == 2}? ->mode(NM_MODE) ;
 LINE_NB : ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR {getCharPositionInLine() == 80}? -> skip;
-COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM);
-COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM) ;
-//NAME_FIELD : NAME (DOT NAME)? {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));} ->mode(OP) ;
+COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM_MODE);
+COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM_MODE) ;
+//NAME_FIELD : NAME (DOT NAME)? {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));} ->mode(OP_MODE) ;
 SYMBOLIC : AMPERSAND [A-Z0-9@#$]+ {getText().length() <= 9}? ;
 
 /*
@@ -103,22 +103,10 @@ AMPERSAND : '&' ;
 ASTERISK : '*' ;
 
 COMMA_DFLT : ',' ->type(COMMA) ;
-COMMAND_DFLT : C O M M A N D ->mode(POST_OP),type(COMMAND) ;
-DD_DFLT : D D ->type(DD),mode(DD_OP) ;
 DOT_DFLT : '.' ->type(DOT) ;
-ELSE_DFLT : E L S E ->mode(CM),type(ELSE) ;
-END : E N D ;
-ENDCNTL_DFLT : E N D C N T L ->mode(POST_OP),type(ENDCNTL) ;
-ENDIF_DFLT : E N D I F ->mode(CM),type(ENDIF) ;
 EQUAL_DFLT : '=' ->type(EQUAL) ;
-EXEC_DFLT : E X E C ->type(EXEC) ;
-EXPORT_DFLT : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
 FALSE_DFLT : F A L S E ->type(FALSE) ;
 HYPHEN : '-' ;
-IF_DFLT : I F ->mode(IF_MODE),type(IF) ;
-INCLUDE_DFLT : I N C L U D E ->mode(POST_OP),type(INCLUDE) ;
-JCLLIB_DFLT : J C L L I B ->mode(POST_OP),type(JCLLIB) ;
-JOB_DFLT : J O B ->mode(POST_OP),type(JOB) ;
 
 KEY : K E Y ;
 LPAREN_DFLT : '(' ->type(LPAREN) ;
@@ -128,19 +116,14 @@ NEWLINE : [\n\r] ->channel(HIDDEN) ;
 NOT_SYMBOL_DFLT : [^!] ->type(NOT_SYMBOL) ;
 NULLFILE : N U L L F I L E ;
 fragment NUM : [0-9] ;
-PEND_DFLT : P E N D ->mode(POST_OP),type(PEND) ;
-PROC_DFLT : P R O C ->mode(POST_OP),type(PROC) ;
 RPAREN_DFLT : ')' ->type(RPAREN) ;
-SCHEDULE_DFLT : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
-SET_DFLT : S E T ->mode(SET_MODE),type(SET) ;
 
 SLASH : '/' ;
 SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 fragment SQUOTE2 : SQUOTE SQUOTE ;
 
 USCORE : '_' ;
-WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
-XMIT_DFLT : X M I T ->mode(POST_OP),type(XMIT) ;
+WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 
 fragment ANYCHAR : ~[\n\r] ;
 NAME : (NATL | ALPHA) (ALPHA | NATL | NUM)* {getText().length() < 9}? ;
@@ -178,7 +161,7 @@ fragment Z:'Z';
 
 
 
-mode CM ;
+mode CM_MODE ;
 
 NEWLINE_CM : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 COMMENT_TEXT_CM : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
@@ -218,22 +201,22 @@ COMMA_NEWLINE_CM_NEWLINE : NEWLINE ->channel(HIDDEN),popMode ;
 
 
 
-mode NM ;
+mode NM_MODE ;
 
-JOBLIB : J O B L I B ->mode(OP) ;
-SYSCHK : S Y S C H K ->mode(OP) ;
+JOBLIB : J O B L I B ->mode(OP_MODE) ;
+SYSCHK : S Y S C H K ->mode(OP_MODE) ;
 fragment NM_PART : [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? ;
-NAME_FIELD : NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();} ->mode(OP) ;
-CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),mode(OP) ;
+NAME_FIELD : NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();} ->mode(OP_MODE) ;
+CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),mode(OP_MODE) ;
 
-mode OP ;
+mode OP_MODE ;
 
 CNTL_OP : C N T L ->mode(CNTL_MODE),type(CNTL) ;
-COMMAND_OP : C O M M A N D ->mode(POST_OP),type(COMMAND) ;
-DD_OP : D D->mode(DD_OP),type(DD) ;
-ELSE_OP : E L S E ->mode(CM),type(ELSE) ;
-ENDCNTL_OP : E N D C N T L ->mode(POST_OP),type(ENDCNTL) ;
-ENDIF_OP : E N D I F ->mode(CM),type(ENDIF) ;
+COMMAND_OP : C O M M A N D ->mode(POST_OP_MODE),type(COMMAND) ;
+DD_OP : D D ->mode(DD_MODE),type(DD) ;
+ELSE_OP : E L S E ->mode(CM_MODE),type(ELSE) ;
+ENDCNTL_OP : E N D C N T L ->mode(POST_OP_MODE),type(ENDCNTL) ;
+ENDIF_OP : E N D I F ->mode(CM_MODE),type(ENDIF) ;
 EXEC_OP : E X E C ->mode(EXEC1_MODE),type(EXEC) ;
 EXPORT_OP : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
 IF_OP : I F ->mode(IF_MODE),type(IF) ;
@@ -242,15 +225,15 @@ JCLLIB_OP : J C L L I B ->mode(JCLLIB_MODE),type(JCLLIB) ;
 JOB_OP : J O B ->mode(JOB1_MODE),type(JOB) ;
 NOTIFY_OP : N O T I F Y ->mode(NOTIFY_STMT_MODE) ;
 OUTPUT_OP : O U T P U T ->mode(OUTPUT_STMT_MODE),type(OUTPUT) ;
-PEND_OP : P E N D ->mode(POST_OP),type(PEND) ;
+PEND_OP : P E N D ->mode(POST_OP_MODE),type(PEND) ;
 PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
 SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_OP : S E T ->mode(SET_MODE),type(SET) ;
-XMIT_OP : X M I T ->mode(POST_OP),type(XMIT) ;
+XMIT_OP : X M I T ->mode(POST_OP_MODE),type(XMIT) ;
 
 WS_OP : [ ]+ ->channel(HIDDEN) ;
 
-mode POST_OP ;
+mode POST_OP_MODE ;
 
 WS_POST_OP : [ ]+ ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 NEWLINE_POST_OP : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
@@ -307,7 +290,7 @@ EXEC_PROC_PARM : NAME ->pushMode(KYWD_VAL_MODE) ;
 
 EXEC_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 EXEC_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-EXEC_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+EXEC_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 EXEC_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 EXEC_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 EXEC_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
@@ -343,16 +326,16 @@ IF_STEP : NM_PART DOT_DFLT (NM_PART DOT_DFLT)? ;
 IF_NUM_LIT : NUM_LIT_DFLT ->type(NUM_LIT) ;
 IF_ALNUMNAT : ALNUMNAT ->type(ALNUMNAT) ;
 
-mode DD_OP ;
-//TODO make DD_OP work like OUTPUT_STMT
-WS_DD_OP : [ ]+ ->channel(HIDDEN),mode(DD_PARM_MODE) ;
+mode DD_MODE ;
+
+DD_WS : [ ]+ ->channel(HIDDEN),mode(DD_PARM_MODE) ;
 DD_NEWLINE1 : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode DD_PARM_MODE ;
 
 DD_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 DD_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
-DD_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+DD_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 DD_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 DD_COMMA : COMMA_DFLT ->type(COMMA) ;
 DD_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
@@ -473,7 +456,7 @@ EXPORT_STMT_WS : [ ]+ ->channel(HIDDEN),mode(EXPORT_STMT_PARM_MODE) ;
 mode EXPORT_STMT_PARM_MODE ;
 
 EXPORT_STMT_PARM_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
-EXPORT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+EXPORT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 EXPORT_STMT_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode NOTIFY_STMT_MODE ;
@@ -486,7 +469,7 @@ NOTIFY_STMT_PARM_EMAIL : E M A I L ->pushMode(KYWD_VAL_MODE) ;
 NOTIFY_STMT_PARM_USER : U S E R ->pushMode(KYWD_VAL_MODE) ;
 NOTIFY_STMT_PARM_TYPE : T Y P E ->pushMode(KYWD_VAL_MODE) ;
 NOTIFY_STMT_PARM_WHEN : W H E N ->pushMode(KYWD_VAL_MODE) ;
-NOTIFY_STMT_PARM_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+NOTIFY_STMT_PARM_WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 NOTIFY_STMT_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 NOTIFY_STMT_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 NOTIFY_STMT_COMMA_WS : COMMA_DFLT ' '+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
@@ -500,7 +483,7 @@ mode OUTPUT_STMT_PARM_MODE ;
 
 OUTPUT_STMT_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 OUTPUT_STMT_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
-OUTPUT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+OUTPUT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 OUTPUT_STMT_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 OUTPUT_STMT_COMMA : COMMA_DFLT ->type(COMMA) ;
 OUTPUT_STMT_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
@@ -593,7 +576,7 @@ OUTPUT_CLASS_VALUE : [A-Z0-9*] ->popMode ;
 OUTPUT_CLASS_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 OUTPUT_CLASS_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 OUTPUT_CLASS_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-OUTPUT_CLASS_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+OUTPUT_CLASS_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 OUTPUT_CLASS_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 
 mode PROC_MODE ;
@@ -616,7 +599,7 @@ PROC_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 PROC_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 PROC_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 PROC_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PROC_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+PROC_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 PROC_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
 mode SCHEDULE_MODE ;
@@ -638,7 +621,7 @@ SCHEDULE_PARM_WITH : W I T H ->pushMode(KYWD_VAL_MODE) ;
 SCHEDULE_PARM_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 SCHEDULE_PARM_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 SCHEDULE_PARM_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-SCHEDULE_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+SCHEDULE_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 SCHEDULE_PARM_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 
 mode SET_MODE ;
@@ -661,7 +644,7 @@ SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 SET_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-SET_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+SET_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 SET_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
 mode DATA_PARM_MODE ;
@@ -729,8 +712,8 @@ because the data may need to be parsed on its own, possibly with another ANTLR
 grammar.
 */
 
-DATA_MODE_TERMINATOR1 : SLASH SLASH ASTERISK {dlmVals.contains("//") && getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM);
-DATA_MODE_TERMINATOR2 : SLASH SLASH {dlmVals.contains("//") && getCharPositionInLine() == 2}? ->type(SS),mode(NM) ;
+DATA_MODE_TERMINATOR1 : SLASH SLASH ASTERISK {dlmVals.contains("//") && getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM_MODE);
+DATA_MODE_TERMINATOR2 : SLASH SLASH {dlmVals.contains("//") && getCharPositionInLine() == 2}? ->type(SS),mode(NM_MODE) ;
 DATA_MODE_TERMINATOR3 : SLASH ASTERISK {dlmVals.contains("/*") && getCharPositionInLine() == 2}? ->mode(DEFAULT_MODE) ;
 DATA_MODE_TERMINATORX : ANYCHAR ANYCHAR {dlmVals.contains(getText())}? {dlmVals = new java.util.ArrayList();} ->mode(DEFAULT_MODE) ;
 DD_ASTERISK_DATA : ([ \n\r] | ANYCHAR)+? ;
@@ -755,7 +738,7 @@ I don't like this, it really feels like a parser thing and not a lexer
 thing, but the entire ENDCNTL statement functions as a terminator for
 the CNTL_DATA capture.
 */
-CNTL_MODE_TERMINATORX : SLASH SLASH ([A-Z0-9@#$]+)? [ ]+ (E N D C N T L) ->mode(CM) ;
+CNTL_MODE_TERMINATORX : SLASH SLASH ([A-Z0-9@#$]+)? [ ]+ (E N D C N T L) ->mode(CM_MODE) ;
 CNTL_DATA : DD_ASTERISK_DATA+? ;
 
 
@@ -997,7 +980,7 @@ mode INCLUDE_PARM_MODE ;
 INCLUDE_PARM_MEMBER : M E M B E R ->pushMode(KYWD_VAL_MODE) ;
 
 INCLUDE_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-INCLUDE_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+INCLUDE_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 
 mode JCLLIB_MODE ;
 
@@ -1007,7 +990,7 @@ mode JCLLIB_PARM_MODE ;
 
 JCLLIB_PARM_ORDER : O R D E R ->pushMode(KYWD_VAL_MODE) ;
 JCLLIB_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JCLLIB_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+JCLLIB_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 
 
 mode JOB1_MODE ;
@@ -1064,7 +1047,7 @@ JOB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_MODE1) ;
 mode JOB_ACCT_MODE1 ;
 
 JOB_ACCT_MODE1_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JOB_ACCT_MODE1_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+JOB_ACCT_MODE1_WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 JOB_ACCT_MODE1_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_MODE) ;
 JOB_ACCT_MODE1_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->mode(JOB_ACCT_COMMA_NEWLINE_MODE) ;
 JOB_ACCT_MODE1_LINE_NB : LINE_NB ->skip ;
@@ -1152,7 +1135,7 @@ JOB_ACCT_MODE3_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(JOB_ACC
 mode JOB_PROGRAMMER_NAME_MODE ;
 
 JOB_PROGRAMMER_NAME_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JOB_PROGRAMMER_NAME_WS : [ ]+ ->channel(HIDDEN),mode(CM) ;
+JOB_PROGRAMMER_NAME_WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 JOB_PROGRAMMER_NAME_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 
 JOB_PROGRAMMER_NAME_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
@@ -1224,7 +1207,7 @@ take us back into the "parent" mode.
 */
 KYWD_VAL_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-KYWD_VAL_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM) ;
+KYWD_VAL_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 
 mode KYWD_VAL_PAREN_MODE ;
 
