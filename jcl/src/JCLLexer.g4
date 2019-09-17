@@ -61,8 +61,33 @@ Parm strings are no fun either.
 
 Sometimes a parameter and an operation look identical, e.g. NOTIFY.
 
+You must strip the line numbers from your JCL before processing with this
+grammar.  Line numbers are in byte positions 73 - 80 of each JCL record
+and have served no purpose since the demise of the punched card deck.
+
+The following awk script will remove your line numbers.
+
+----------8<snip----------
+#! /usr/bin/awk -f
+
+# example of removing line numbers from JCL
+
+{
+
+if (length($0) == 80) {
+    new = substr($0, 1, 72) "        ";
+    print new;
+} else {
+    print $0 ;
+}
+
+}
+----------8<snip----------
+
 {System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText() + "/");}
 */
+
+
 
 lexer grammar JCLLexer;
 
@@ -76,7 +101,6 @@ tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF
 // lexer rules --------------------------------------------------------------------------------
 
 SS : SLASH SLASH {/*System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());*/}{getCharPositionInLine() == 2}? ->mode(NM_MODE) ;
-LINE_NB : ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR ANYCHAR {getCharPositionInLine() == 80}? -> skip;
 COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM_MODE);
 COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM_MODE) ;
 //NAME_FIELD : NAME (DOT NAME)? {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));} ->mode(OP_MODE) ;
@@ -163,7 +187,6 @@ fragment Z:'Z';
 
 mode CM_MODE ;
 
-CM_LINE_NB : LINE_NB {getCharPositionInLine() == 80}? -> skip;
 CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
 
@@ -232,6 +255,8 @@ SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_OP : S E T ->mode(SET_MODE),type(SET) ;
 XMIT_OP : X M I T ->mode(POST_OP_MODE),type(XMIT) ;
 
+JCL_COMMAND : [A-Z0-9@#$]+ ->mode(JCL_COMMAND_MODE) ;
+
 WS_OP : [ ]+ ->channel(HIDDEN) ;
 NEWLINE_OP : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
@@ -249,7 +274,17 @@ mode COMMAND_PARM_MODE ;
 COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
 COMMAND_PARM_WS : ' '+ ->channel(HIDDEN),mode(CM_MODE) ;
 COMMAND_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-COMMAND_PARM_LINE_NB : LINE_NB {getCharPositionInLine() == 80}? -> skip;
+
+mode JCL_COMMAND_MODE ;
+
+JCL_COMMAND_WS : ' '+ ->channel(HIDDEN),mode(JCL_COMMAND_PARM_MODE) ;
+
+mode JCL_COMMAND_PARM_MODE ;
+
+JCL_COMMAND_PARM : [A-Z0-9@#$*\-+&./%,]+ ;
+JCL_COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+JCL_COMMAND_PARM_WS : ' '+ ->channel(HIDDEN),mode(CM_MODE) ;
+JCL_COMMAND_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode EXEC1_MODE ;
 
@@ -757,7 +792,6 @@ CNTL_DATA : DD_ASTERISK_DATA+? ;
 
 mode QS ;
 
-QS_LINE_NB : LINE_NB {getCharPositionInLine() == 80}? -> skip;
 fragment SQUOTE2_QS : SQUOTE SQUOTE ;
 SQUOTE_QS : SQUOTE
     {
@@ -793,28 +827,7 @@ SQUOTE_QS : SQUOTE
 fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
 NEWLINE_QS : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
 
-/*
-One way around the behavior of the +? operation would be to
-pre-process all the JCL, stripping the bytes in positions
-73 - 80.
-
-#! /usr/bin/awk -f
-
-# example of removing line numbers from JCL
-
-{
-
-if (length($0) == 80) {
-    new = substr($0, 1, 72) "        ";
-    print new;
-} else {
-    print $0 ;
-}
-
-}
-*/
-
-QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+?
+QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
     {
         if (_modeStack.peek() == JOB_PROGRAMMER_NAME_MODE) setType(QUOTED_STRING_PROGRAMMER_NAME);
     }
@@ -1075,7 +1088,6 @@ at runtime in any given installation.
 */
 
 
-JOB_MODE_LINE_NB : LINE_NB ->skip ;
 JOB_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_MODE1) ;
 
@@ -1085,7 +1097,6 @@ JOB_ACCT_MODE1_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_ACCT_MODE1_WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 JOB_ACCT_MODE1_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_MODE) ;
 JOB_ACCT_MODE1_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->mode(JOB_ACCT_COMMA_NEWLINE_MODE) ;
-JOB_ACCT_MODE1_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE1_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(JOB_ACCT_MODE2) ;
 JOB_ACCT_MODE1_COMMA : COMMA_DFLT ->type(COMMA),mode(JOB_PROGRAMMER_NAME_MODE) ;
 
@@ -1151,7 +1162,6 @@ mode JOB_ACCT_MODE2 ;
 
 JOB_ACCT_MODE2_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_ACCT_MODE2_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-JOB_ACCT_MODE2_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(JOB_ACCT_MODE3) ;
 
 JOB_ACCT_MODE2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
@@ -1162,7 +1172,6 @@ JOB_ACCT_MODE2_COMMA : COMMA_DFLT ->type(COMMA) ;
 mode JOB_ACCT_MODE3 ;
 
 JOB_ACCT_MODE3_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JOB_ACCT_MODE3_LINE_NB : LINE_NB ->skip ;
 JOB_ACCT_MODE3_COMMA : COMMA_DFLT ->type(COMMA),mode(JOB_PROGRAMMER_NAME_MODE) ;
 JOB_ACCT_MODE3_COMMA_WS : COMMA_DFLT ' '+ ->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_MODE) ;
 JOB_ACCT_MODE3_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_NEWLINE_MODE) ;
@@ -1174,7 +1183,6 @@ JOB_PROGRAMMER_NAME_WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 JOB_PROGRAMMER_NAME_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 
 JOB_PROGRAMMER_NAME_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
-JOB_PROGRAMMER_NAME_LINE_NB : LINE_NB ->skip ;
 JOB_PROGRAMMER_NAME_COMMA : COMMA_DFLT ->type(COMMA) ;
 
 JOB_PROGRAMMER_NAME_ADDRSPC : JOB_ADDRSPC ->type(ADDRSPC),pushMode(KYWD_VAL_MODE) ;
