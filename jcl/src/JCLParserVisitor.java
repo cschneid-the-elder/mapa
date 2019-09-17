@@ -1366,6 +1366,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommandStatement(JCLParser.CommandStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#jclCommandStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJclCommandStatement(JCLParser.JclCommandStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#cntlStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

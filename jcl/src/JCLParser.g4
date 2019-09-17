@@ -31,7 +31,7 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard (commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement)* (commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ EOF?;
+execJCL : (jobCard (jclCommandStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ EOF?;
 
 procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -688,7 +688,9 @@ jobParmUJOBCORR : UJOBCORR EQUAL keywordOrSymbolic ;
 jobParmUSER : USER EQUAL keywordOrSymbolic ;
 
 commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT+ ;
- 
+
+jclCommandStatement : SS JCL_COMMAND JCL_COMMAND_PARM COMMENT_TEXT? ;
+
 cntlStatement : SS NAME_FIELD? CNTL ASTERISK? (inlineComment | COMMENT_TEXT)? ;
 
 endcntlStatement : (SS NAME_FIELD ENDCNTL inlineComment*) | CNTL_MODE_TERMINATORX COMMENT_TEXT?;

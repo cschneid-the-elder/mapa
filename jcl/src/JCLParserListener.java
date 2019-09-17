@@ -2267,6 +2267,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitCommandStatement(JCLParser.CommandStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#jclCommandStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJclCommandStatement(JCLParser.JclCommandStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jclCommandStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJclCommandStatement(JCLParser.JclCommandStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#cntlStatement}.
 	 * @param ctx the parse tree
 	 */

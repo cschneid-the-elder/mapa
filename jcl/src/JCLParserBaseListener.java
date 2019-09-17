@@ -2727,6 +2727,18 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJclCommandStatement(JCLParser.JclCommandStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJclCommandStatement(JCLParser.JclCommandStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCntlStatement(JCLParser.CntlStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
