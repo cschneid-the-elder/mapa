@@ -96,7 +96,7 @@ lexer grammar JCLLexer;
     public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
 }
 
-tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , CHARS_FONT , PCI_VALUE , REFERBACK , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME }
+tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , CHARS_FONT , PCI_VALUE , REFERBACK , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME , SUBCHARS }
 
 // lexer rules --------------------------------------------------------------------------------
 
@@ -253,7 +253,11 @@ PEND_OP : P E N D ->mode(POST_OP_MODE),type(PEND) ;
 PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
 SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_OP : S E T ->mode(SET_MODE),type(SET) ;
-XMIT_OP : X M I T ->mode(POST_OP_MODE),type(XMIT) ;
+XMIT_OP : X M I T 
+    {
+      dlmVals.add("/*");
+      dlmVals.add("//");
+    } ->mode(XMIT_MODE),type(XMIT) ;
 
 JCL_COMMAND : [A-Z0-9@#$]+ ->mode(JCL_COMMAND_MODE) ;
 
@@ -695,6 +699,23 @@ SET_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DE
 SET_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
 SET_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
+mode XMIT_MODE ;
+
+XMIT_WS : WS ->channel(HIDDEN),mode(XMIT_PARM_MODE) ;
+XMIT_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DATA_MODE) ;
+
+mode XMIT_PARM_MODE ;
+
+XMIT_PARM_DEST : D E S T ->type(DEST),pushMode(KYWD_VAL_MODE) ;
+XMIT_PARM_DLM : DD_DLM ->type(DLM),pushMode(DLM_MODE) ;
+XMIT_PARM_SUBCHAR : S U B C H A R S ->type(SUBCHARS),pushMode(KYWD_VAL_MODE) ;
+XMIT_PARM_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DATA_MODE) ;
+XMIT_PARM_WS : WS ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
+XMIT_PARM_WS_NEWLINE : WS NEWLINE ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
+XMIT_PARM_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+XMIT_PARM_COMMA_WS : COMMA_DFLT WS ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+XMIT_PARM_COMMA : COMMA_DFLT ->channel(HIDDEN) ;
+
 mode DATA_PARM_MODE ;
 
 /*
@@ -728,7 +749,7 @@ DATA_PARM_MODE_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 mode DLM_MODE ;
 
 DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
-SQUOTE_DLM : '\'' ->channel(HIDDEN),pushMode(DLM_QS);
+DLM_SQUOTE : '\'' ->channel(HIDDEN),pushMode(DLM_QS);
 DLM_VAL : [A-Z0-9@#$_\-]+ 
     {
         dlmVals = new java.util.ArrayList();
@@ -737,11 +758,11 @@ DLM_VAL : [A-Z0-9@#$_\-]+
 
 mode DLM_QS ;
 
-SQUOTE2_DLM_QS : SQUOTE SQUOTE ;
-SQUOTE_DLM_QS : SQUOTE ->channel(HIDDEN),popMode,popMode ;
-fragment ANYCHAR_NOSQUOTE_DLM_QS : ~['\n\r] ;
+DLM_QS_SQUOTE2 : SQUOTE SQUOTE ;
+DLM_QS_SQUOTE : SQUOTE ->channel(HIDDEN),popMode,popMode ;
+fragment ANYCHAR_NODLM_QS_SQUOTE : ~['\n\r] ;
 
-QUOTED_DLM_VAL : (ANYCHAR_NOSQUOTE+ | SQUOTE2_DLM_QS+) 
+QUOTED_DLM_VAL : (ANYCHAR_NOSQUOTE+ | DLM_QS_SQUOTE2+) 
     {
         dlmVals = new java.util.ArrayList();
         dlmVals.add(getText());
@@ -760,10 +781,26 @@ because the data may need to be parsed on its own, possibly with another ANTLR
 grammar.
 */
 
-DATA_MODE_TERMINATOR1 : SLASH SLASH ASTERISK {dlmVals.contains("//") && getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM_MODE);
-DATA_MODE_TERMINATOR2 : SLASH SLASH {dlmVals.contains("//") && getCharPositionInLine() == 2}? ->type(SS),mode(NM_MODE) ;
-DATA_MODE_TERMINATOR3 : SLASH ASTERISK {dlmVals.contains("/*") && getCharPositionInLine() == 2}? ->mode(DEFAULT_MODE) ;
-DATA_MODE_TERMINATORX : ANYCHAR ANYCHAR {dlmVals.contains(getText())}? {dlmVals = new java.util.ArrayList();} ->mode(DEFAULT_MODE) ;
+DATA_MODE_TERMINATOR1 : SLASH SLASH ASTERISK {dlmVals.contains("//") && getCharPositionInLine() == 3}? 
+    {
+      dlmVals = new java.util.ArrayList();
+      _modeStack.clear();
+    } ->type(COMMENT_FLAG),mode(CM_MODE);
+DATA_MODE_TERMINATOR2 : SLASH SLASH {dlmVals.contains("//") && getCharPositionInLine() == 2}? 
+    {
+      dlmVals = new java.util.ArrayList();
+      _modeStack.clear();
+    } ->type(SS),mode(NM_MODE) ;
+DATA_MODE_TERMINATOR3 : SLASH ASTERISK {dlmVals.contains("/*") && getCharPositionInLine() == 2}? 
+    {
+      dlmVals = new java.util.ArrayList();
+      _modeStack.clear();
+    } ->mode(DEFAULT_MODE) ;
+DATA_MODE_TERMINATORX : ANYCHAR+ {dlmVals.contains(getText())}?
+    {
+      dlmVals = new java.util.ArrayList();
+      _modeStack.clear();
+    } ->mode(DEFAULT_MODE) ;
 DD_ASTERISK_DATA : ([ \n\r] | ANYCHAR)+? ;
 
 mode CNTL_MODE ;

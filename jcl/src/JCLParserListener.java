@@ -3406,4 +3406,54 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSetOperation(JCLParser.SetOperationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#xmitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmitStatement(JCLParser.XmitStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#xmitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmitStatement(JCLParser.XmitStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#xmitParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmitParameters(JCLParser.XmitParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#xmitParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmitParameters(JCLParser.XmitParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#xmitParmDEST}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmitParmDEST(JCLParser.XmitParmDESTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#xmitParmDEST}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmitParmDEST(JCLParser.XmitParmDESTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#xmitParmDLM}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmitParmDLM(JCLParser.XmitParmDLMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#xmitParmDLM}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmitParmDLM(JCLParser.XmitParmDLMContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#xmitParmSUBCHARS}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmitParmSUBCHARS(JCLParser.XmitParmSUBCHARSContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#xmitParmSUBCHARS}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmitParmSUBCHARS(JCLParser.XmitParmSUBCHARSContext ctx);
 }

@@ -31,7 +31,7 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard (jclCommandStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)+)+ EOF?;
+execJCL : (jobCard (jclCommandStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
 
 procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -969,4 +969,14 @@ setStatement : SS NAME_FIELD? SET setOperation+
   ;
 
 setOperation : (SET_PARM_NAME EQUAL (SET_PARM_VALUE | QUOTED_STRING_FRAGMENT)? COMMENT_TEXT?) ;
+
+xmitStatement : SS NAME_FIELD? XMIT xmitParameters* COMMENT_TEXT? ddParmASTERISK_DATA* ;
+
+xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStatement) ;
+
+xmitParmDEST : DEST EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+
+xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_DLM_VAL) COMMENT_TEXT? ;
+
+xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 

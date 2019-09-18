@@ -2049,4 +2049,34 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetOperation(JCLParser.SetOperationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#xmitStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmitStatement(JCLParser.XmitStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#xmitParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmitParameters(JCLParser.XmitParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#xmitParmDEST}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmitParmDEST(JCLParser.XmitParmDESTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#xmitParmDLM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmitParmDLM(JCLParser.XmitParmDLMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#xmitParmSUBCHARS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmitParmSUBCHARS(JCLParser.XmitParmSUBCHARSContext ctx);
 }
