@@ -2079,4 +2079,142 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitXmitParmSUBCHARS(JCLParser.XmitParmSUBCHARSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jesExecutionControlStatements}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJesExecutionControlStatements(JCLParser.JesExecutionControlStatementsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupStatement(JCLParser.JobGroupStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupAccountingString}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupAccountingString(JCLParser.JobGroupAccountingStringContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupAccountingInformation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupAccountingInformation(JCLParser.JobGroupAccountingInformationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupAccountingInformationSimple}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupAccountingInformationSimple(JCLParser.JobGroupAccountingInformationSimpleContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupAccountingInformationMultiLine}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupAccountingInformationMultiLine(JCLParser.JobGroupAccountingInformationMultiLineContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupProgrammerName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupProgrammerName(JCLParser.JobGroupProgrammerNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupParameters(JCLParser.JobGroupParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupEMAIL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupEMAIL(JCLParser.JobGroupEMAILContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupOWNER}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupOWNER(JCLParser.JobGroupOWNERContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupGROUP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupGROUP(JCLParser.JobGroupGROUPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupPASSWORD}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupPASSWORD(JCLParser.JobGroupPASSWORDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupSECLABEL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupSECLABEL(JCLParser.JobGroupSECLABELContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupTYPE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupTYPE(JCLParser.JobGroupTYPEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupHOLD}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupHOLD(JCLParser.JobGroupHOLDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupERROR}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupERROR(JCLParser.JobGroupERRORContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupERROR_RelOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupERROR_RelOp(JCLParser.JobGroupERROR_RelOpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupERROR_Keyword}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupERROR_Keyword(JCLParser.JobGroupERROR_KeywordContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupERROR_Test}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupERROR_Test(JCLParser.JobGroupERROR_TestContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupONERROR}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupONERROR(JCLParser.JobGroupONERRORContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupSYSAFF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupSYSAFF(JCLParser.JobGroupSYSAFFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupSYSTEM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupSYSTEM(JCLParser.JobGroupSYSTEMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupSCHENV}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupSCHENV(JCLParser.JobGroupSCHENVContext ctx);
 }

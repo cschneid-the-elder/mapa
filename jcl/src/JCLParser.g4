@@ -31,7 +31,7 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : (jobCard (jclCommandStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
+execJCL : jesExecutionControlStatements (jobCard (jclCommandStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
 
 procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -979,4 +979,52 @@ xmitParmDEST : DEST EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_DLM_VAL) COMMENT_TEXT? ;
 
 xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+
+jesExecutionControlStatements : (jobGroupStatement)* ;
+
+jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP LPAREN? jobGroupAccountingInformation? RPAREN? COMMENT_TEXT? jobGroupProgrammerName? COMMENT_TEXT? jobGroupParameters* ;
+
+jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | JOBGROUP_ACCT_UNQUOTED_STRING+) ;
+
+jobGroupAccountingInformation : jobGroupAccountingInformationSimple | jobGroupAccountingInformationMultiLine ;
+
+jobGroupAccountingInformationSimple : jobGroupAccountingString (COMMA jobGroupAccountingString?)* ;
+jobGroupAccountingInformationMultiLine : jobGroupAccountingString (COMMA? SS? jobGroupAccountingString)* ;
+jobGroupProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME | JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING+) ;
+
+jobGroupParameters : (jobGroupEMAIL | jobGroupOWNER | jobGroupGROUP | jobGroupPASSWORD | jobGroupSECLABEL | jobGroupTYPE | jobGroupHOLD | jobGroupERROR | jobGroupONERROR | jobGroupSYSAFF | jobGroupSYSTEM | jobGroupSCHENV) ;
+
+jobGroupEMAIL : JOBGROUP_EMAIL EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupOWNER : JOBGROUP_OWNER EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupGROUP : JOBGROUP_GROUP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupPASSWORD : JOBGROUP_PASSWORD EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupSECLABEL : JOBGROUP_SECLABEL EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupTYPE : JOBGROUP_TYPE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupHOLD : JOBGROUP_HOLD EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+
+jobGroupERROR : JOBGROUP_ERROR EQUAL
+    LPAREN*
+      NOT_SYMBOL* jobGroupERROR_Test 
+        (JOBGROUP_ERROR_LOGICAL NOT_SYMBOL* LPAREN* jobGroupERROR_Test RPAREN*)*
+    RPAREN*
+    COMMENT_TEXT?
+  ;
+jobGroupERROR_RelOp : (
+    JOBGROUP_ERROR_EQ | 
+    JOBGROUP_ERROR_GE | 
+    JOBGROUP_ERROR_LE | 
+    JOBGROUP_ERROR_NE | 
+    JOBGROUP_ERROR_NG | 
+    JOBGROUP_ERROR_NL | 
+    JOBGROUP_ERROR_GT | 
+    JOBGROUP_ERROR_LT
+  ) ;
+jobGroupERROR_Keyword : (ABEND | ABENDCC | RUN | RC) ;
+jobGroupERROR_Test : NOT_SYMBOL* jobGroupERROR_Keyword
+    (NOT_SYMBOL* jobGroupERROR_RelOp (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
+
+jobGroupONERROR : JOBGROUP_ONERROR EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupSYSAFF : JOBGROUP_SYSAFF EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupSYSTEM : JOBGROUP_SYSTEM EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupSCHENV : JOBGROUP_SCHENV EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 

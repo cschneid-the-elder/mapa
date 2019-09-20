@@ -3456,4 +3456,234 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXmitParmSUBCHARS(JCLParser.XmitParmSUBCHARSContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jesExecutionControlStatements}.
+	 * @param ctx the parse tree
+	 */
+	void enterJesExecutionControlStatements(JCLParser.JesExecutionControlStatementsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jesExecutionControlStatements}.
+	 * @param ctx the parse tree
+	 */
+	void exitJesExecutionControlStatements(JCLParser.JesExecutionControlStatementsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupStatement(JCLParser.JobGroupStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupStatement(JCLParser.JobGroupStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupAccountingString}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupAccountingString(JCLParser.JobGroupAccountingStringContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupAccountingString}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupAccountingString(JCLParser.JobGroupAccountingStringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupAccountingInformation}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupAccountingInformation(JCLParser.JobGroupAccountingInformationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupAccountingInformation}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupAccountingInformation(JCLParser.JobGroupAccountingInformationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupAccountingInformationSimple}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupAccountingInformationSimple(JCLParser.JobGroupAccountingInformationSimpleContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupAccountingInformationSimple}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupAccountingInformationSimple(JCLParser.JobGroupAccountingInformationSimpleContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupAccountingInformationMultiLine}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupAccountingInformationMultiLine(JCLParser.JobGroupAccountingInformationMultiLineContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupAccountingInformationMultiLine}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupAccountingInformationMultiLine(JCLParser.JobGroupAccountingInformationMultiLineContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupProgrammerName}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupProgrammerName(JCLParser.JobGroupProgrammerNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupProgrammerName}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupProgrammerName(JCLParser.JobGroupProgrammerNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupParameters(JCLParser.JobGroupParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupParameters(JCLParser.JobGroupParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupEMAIL}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupEMAIL(JCLParser.JobGroupEMAILContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupEMAIL}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupEMAIL(JCLParser.JobGroupEMAILContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupOWNER}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupOWNER(JCLParser.JobGroupOWNERContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupOWNER}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupOWNER(JCLParser.JobGroupOWNERContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupGROUP}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupGROUP(JCLParser.JobGroupGROUPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupGROUP}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupGROUP(JCLParser.JobGroupGROUPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupPASSWORD}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupPASSWORD(JCLParser.JobGroupPASSWORDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupPASSWORD}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupPASSWORD(JCLParser.JobGroupPASSWORDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupSECLABEL}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupSECLABEL(JCLParser.JobGroupSECLABELContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupSECLABEL}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupSECLABEL(JCLParser.JobGroupSECLABELContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupTYPE}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupTYPE(JCLParser.JobGroupTYPEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupTYPE}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupTYPE(JCLParser.JobGroupTYPEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupHOLD}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupHOLD(JCLParser.JobGroupHOLDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupHOLD}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupHOLD(JCLParser.JobGroupHOLDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupERROR}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupERROR(JCLParser.JobGroupERRORContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupERROR}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupERROR(JCLParser.JobGroupERRORContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupERROR_RelOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupERROR_RelOp(JCLParser.JobGroupERROR_RelOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupERROR_RelOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupERROR_RelOp(JCLParser.JobGroupERROR_RelOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupERROR_Keyword}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupERROR_Keyword(JCLParser.JobGroupERROR_KeywordContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupERROR_Keyword}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupERROR_Keyword(JCLParser.JobGroupERROR_KeywordContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupERROR_Test}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupERROR_Test(JCLParser.JobGroupERROR_TestContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupERROR_Test}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupERROR_Test(JCLParser.JobGroupERROR_TestContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupONERROR}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupONERROR(JCLParser.JobGroupONERRORContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupONERROR}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupONERROR(JCLParser.JobGroupONERRORContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupSYSAFF}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupSYSAFF(JCLParser.JobGroupSYSAFFContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupSYSAFF}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupSYSAFF(JCLParser.JobGroupSYSAFFContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupSYSTEM}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupSYSTEM(JCLParser.JobGroupSYSTEMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupSYSTEM}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupSYSTEM(JCLParser.JobGroupSYSTEMContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupSCHENV}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupSCHENV(JCLParser.JobGroupSCHENVContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupSCHENV}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupSCHENV(JCLParser.JobGroupSCHENVContext ctx);
 }
