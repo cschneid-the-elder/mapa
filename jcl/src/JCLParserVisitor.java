@@ -2176,6 +2176,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJobGroupERROR(JCLParser.JobGroupERRORContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobGroupCondition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobGroupCondition(JCLParser.JobGroupConditionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobGroupERROR_RelOp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2217,4 +2223,154 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJobGroupSCHENV(JCLParser.JobGroupSCHENVContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#gJobStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGJobStatement(JCLParser.GJobStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#gJobParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGJobParameters(JCLParser.GJobParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#gJobFLUSHTYP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGJobFLUSHTYP(JCLParser.GJobFLUSHTYPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobSetStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobSetStatement(JCLParser.JobSetStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobSetParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobSetParameters(JCLParser.JobSetParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jobSetFLUSHTYP}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobSetFLUSHTYP(JCLParser.JobSetFLUSHTYPContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#sJobStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSJobStatement(JCLParser.SJobStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#endSetStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndSetStatement(JCLParser.EndSetStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#endGroupStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndGroupStatement(JCLParser.EndGroupStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#afterStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAfterStatement(JCLParser.AfterStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#afterParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAfterParameters(JCLParser.AfterParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#afterNAME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAfterNAME(JCLParser.AfterNAMEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#afterACTION}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAfterACTION(JCLParser.AfterACTIONContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#afterOTHERWISE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAfterOTHERWISE(JCLParser.AfterOTHERWISEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#afterWHEN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAfterWHEN(JCLParser.AfterWHENContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#beforeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeforeStatement(JCLParser.BeforeStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#beforeParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeforeParameters(JCLParser.BeforeParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#beforeNAME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeforeNAME(JCLParser.BeforeNAMEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#beforeACTION}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeforeACTION(JCLParser.BeforeACTIONContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#beforeOTHERWISE}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeforeOTHERWISE(JCLParser.BeforeOTHERWISEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#beforeWHEN}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBeforeWHEN(JCLParser.BeforeWHENContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#concurrentStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcurrentStatement(JCLParser.ConcurrentStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#concurrentParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcurrentParameters(JCLParser.ConcurrentParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#concurrentNAME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConcurrentNAME(JCLParser.ConcurrentNAMEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#singleOrMultipleValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
 }

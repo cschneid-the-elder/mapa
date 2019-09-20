@@ -3617,6 +3617,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitJobGroupERROR(JCLParser.JobGroupERRORContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobGroupCondition}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobGroupCondition(JCLParser.JobGroupConditionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobGroupCondition}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobGroupCondition(JCLParser.JobGroupConditionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobGroupERROR_RelOp}.
 	 * @param ctx the parse tree
 	 */
@@ -3686,4 +3696,254 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJobGroupSCHENV(JCLParser.JobGroupSCHENVContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#gJobStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGJobStatement(JCLParser.GJobStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#gJobStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGJobStatement(JCLParser.GJobStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#gJobParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterGJobParameters(JCLParser.GJobParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#gJobParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitGJobParameters(JCLParser.GJobParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#gJobFLUSHTYP}.
+	 * @param ctx the parse tree
+	 */
+	void enterGJobFLUSHTYP(JCLParser.GJobFLUSHTYPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#gJobFLUSHTYP}.
+	 * @param ctx the parse tree
+	 */
+	void exitGJobFLUSHTYP(JCLParser.GJobFLUSHTYPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobSetStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobSetStatement(JCLParser.JobSetStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobSetStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobSetStatement(JCLParser.JobSetStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobSetParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobSetParameters(JCLParser.JobSetParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobSetParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobSetParameters(JCLParser.JobSetParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jobSetFLUSHTYP}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobSetFLUSHTYP(JCLParser.JobSetFLUSHTYPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jobSetFLUSHTYP}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobSetFLUSHTYP(JCLParser.JobSetFLUSHTYPContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#sJobStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSJobStatement(JCLParser.SJobStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#sJobStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSJobStatement(JCLParser.SJobStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#endSetStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndSetStatement(JCLParser.EndSetStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#endSetStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndSetStatement(JCLParser.EndSetStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#endGroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndGroupStatement(JCLParser.EndGroupStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#endGroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndGroupStatement(JCLParser.EndGroupStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#afterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAfterStatement(JCLParser.AfterStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#afterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAfterStatement(JCLParser.AfterStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#afterParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterAfterParameters(JCLParser.AfterParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#afterParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitAfterParameters(JCLParser.AfterParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#afterNAME}.
+	 * @param ctx the parse tree
+	 */
+	void enterAfterNAME(JCLParser.AfterNAMEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#afterNAME}.
+	 * @param ctx the parse tree
+	 */
+	void exitAfterNAME(JCLParser.AfterNAMEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#afterACTION}.
+	 * @param ctx the parse tree
+	 */
+	void enterAfterACTION(JCLParser.AfterACTIONContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#afterACTION}.
+	 * @param ctx the parse tree
+	 */
+	void exitAfterACTION(JCLParser.AfterACTIONContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#afterOTHERWISE}.
+	 * @param ctx the parse tree
+	 */
+	void enterAfterOTHERWISE(JCLParser.AfterOTHERWISEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#afterOTHERWISE}.
+	 * @param ctx the parse tree
+	 */
+	void exitAfterOTHERWISE(JCLParser.AfterOTHERWISEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#afterWHEN}.
+	 * @param ctx the parse tree
+	 */
+	void enterAfterWHEN(JCLParser.AfterWHENContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#afterWHEN}.
+	 * @param ctx the parse tree
+	 */
+	void exitAfterWHEN(JCLParser.AfterWHENContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#beforeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeforeStatement(JCLParser.BeforeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#beforeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeforeStatement(JCLParser.BeforeStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#beforeParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeforeParameters(JCLParser.BeforeParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#beforeParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeforeParameters(JCLParser.BeforeParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#beforeNAME}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeforeNAME(JCLParser.BeforeNAMEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#beforeNAME}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeforeNAME(JCLParser.BeforeNAMEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#beforeACTION}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeforeACTION(JCLParser.BeforeACTIONContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#beforeACTION}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeforeACTION(JCLParser.BeforeACTIONContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#beforeOTHERWISE}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeforeOTHERWISE(JCLParser.BeforeOTHERWISEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#beforeOTHERWISE}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeforeOTHERWISE(JCLParser.BeforeOTHERWISEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#beforeWHEN}.
+	 * @param ctx the parse tree
+	 */
+	void enterBeforeWHEN(JCLParser.BeforeWHENContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#beforeWHEN}.
+	 * @param ctx the parse tree
+	 */
+	void exitBeforeWHEN(JCLParser.BeforeWHENContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#concurrentStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcurrentStatement(JCLParser.ConcurrentStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#concurrentStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcurrentStatement(JCLParser.ConcurrentStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#concurrentParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcurrentParameters(JCLParser.ConcurrentParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#concurrentParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcurrentParameters(JCLParser.ConcurrentParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#concurrentNAME}.
+	 * @param ctx the parse tree
+	 */
+	void enterConcurrentNAME(JCLParser.ConcurrentNAMEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#concurrentNAME}.
+	 * @param ctx the parse tree
+	 */
+	void exitConcurrentNAME(JCLParser.ConcurrentNAMEContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#singleOrMultipleValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#singleOrMultipleValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
 }

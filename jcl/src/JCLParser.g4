@@ -980,7 +980,7 @@ xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_DLM_VAL) COMMENT_TEXT? ;
 
 xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 
-jesExecutionControlStatements : (jobGroupStatement)* ;
+jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetStatement | sJobStatement | endSetStatement | endGroupStatement | afterStatement | beforeStatement | concurrentStatement)* ;
 
 jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP LPAREN? jobGroupAccountingInformation? RPAREN? COMMENT_TEXT? jobGroupProgrammerName? COMMENT_TEXT? jobGroupParameters* ;
 
@@ -1002,7 +1002,9 @@ jobGroupSECLABEL : JOBGROUP_SECLABEL EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 jobGroupTYPE : JOBGROUP_TYPE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 jobGroupHOLD : JOBGROUP_HOLD EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 
-jobGroupERROR : JOBGROUP_ERROR EQUAL
+jobGroupERROR : JOBGROUP_ERROR EQUAL jobGroupCondition ;
+
+jobGroupCondition :
     LPAREN*
       NOT_SYMBOL* jobGroupERROR_Test 
         (JOBGROUP_ERROR_LOGICAL NOT_SYMBOL* LPAREN* jobGroupERROR_Test RPAREN*)*
@@ -1027,4 +1029,54 @@ jobGroupONERROR : JOBGROUP_ONERROR EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 jobGroupSYSAFF : JOBGROUP_SYSAFF EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 jobGroupSYSTEM : JOBGROUP_SYSTEM EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 jobGroupSCHENV : JOBGROUP_SCHENV EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+
+gJobStatement : SS NAME_FIELD? GJOB_OP gJobParameters ;
+
+gJobParameters : (gJobFLUSHTYP) ;
+
+gJobFLUSHTYP : GJOB_PARM_FLUSHTYP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+
+jobSetStatement : SS NAME_FIELD? JOBSET_OP jobSetParameters ;
+
+jobSetParameters : (jobSetFLUSHTYP) ;
+
+jobSetFLUSHTYP : JOBSET_PARM_FLUSHTYP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+
+sJobStatement : SS NAME_FIELD? SJOB_OP COMMENT_TEXT? ;
+
+endSetStatement : SS NAME_FIELD? ENDSET_OP COMMENT_TEXT? ;
+
+endGroupStatement : SS NAME_FIELD? ENDGROUP_OP COMMENT_TEXT? ;
+
+afterStatement : SS AFTER_OP afterParameters+ ;
+
+afterParameters : (afterNAME | afterACTION | afterOTHERWISE | afterWHEN) ;
+
+afterNAME : AFTER_PARM_NAME EQUAL singleOrMultipleValue ;
+afterACTION : AFTER_PARM_ACTION EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+afterOTHERWISE : AFTER_PARM_OTHERWISE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+afterWHEN : AFTER_PARM_WHEN EQUAL jobGroupCondition ;
+
+beforeStatement : SS BEFORE_OP beforeParameters+ ;
+
+beforeParameters : (beforeNAME | beforeACTION | beforeOTHERWISE | beforeWHEN) ;
+
+beforeNAME : BEFORE_PARM_NAME EQUAL singleOrMultipleValue ;
+beforeACTION : BEFORE_PARM_ACTION EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+beforeOTHERWISE : BEFORE_PARM_OTHERWISE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+beforeWHEN : BEFORE_PARM_WHEN EQUAL jobGroupCondition ;
+
+concurrentStatement : SS CONCURRENT_OP concurrentParameters+ ;
+
+concurrentParameters : (concurrentNAME) ;
+
+concurrentNAME : CONCURRENT_PARM_NAME EQUAL singleOrMultipleValue ;
+
+singleOrMultipleValue : (
+    keywordOrSymbolic |
+    (LPAREN
+      keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic)*
+    RPAREN)
+  ) COMMENT_TEXT? ;
+
 
