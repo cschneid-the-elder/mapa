@@ -973,17 +973,33 @@ concurrentParameters : (concurrentNAME) ;
 
 concurrentNAME : CONCURRENT_PARM_NAME EQUAL singleOrMultipleValue ;
 
+/*
+Trying to accomodate...
+
+PARM=VAL
+PARM=(VAL)
+PARM=(VAL,VAL,VAL)
+PARM=((VAL,VAL),VAL)
+PARM=(VAL,(VAL,VAL))
+
+*/
 singleOrMultipleValue : (
     keywordOrSymbolic |
     (LPAREN
       keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic)*
     RPAREN) |
+    (LPAREN
+      keywordOrSymbolic COMMA? COMMENT_TEXT?
+        LPAREN
+          keywordOrSymbolic (COMMA keywordOrSymbolic)*
+        RPAREN
+    RPAREN) |
     (LPAREN+
-      keywordOrSymbolic RPAREN? (COMMA? COMMENT_TEXT? keywordOrSymbolic RPAREN?)*
+      keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic RPAREN?)*
     RPAREN+)
   ) COMMENT_TEXT? ;
 
-jes2CntlStatement : (jes2JobParmStatement) ;
+jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement) ;
 
 jes2JobParmStatement : SA JES2_JOBPARM jes2JobParmParameters* ;
 
@@ -1003,4 +1019,55 @@ jes2JobParmRESTART : JES2_JOBPARM_RESTART EQUAL keywordOrSymbolic ;
 jes2JobParmROOM : JES2_JOBPARM_ROOM EQUAL keywordOrSymbolic ;
 jes2JobParmSYSAFF : JES2_JOBPARM_SYSAFF EQUAL singleOrMultipleValue ;
 jes2JobParmTIME : JES2_JOBPARM_TIME EQUAL keywordOrSymbolic ;
+
+jes2MessageStatement : SA JES2_MESSAGE jes2MessageParameter ;
+
+jes2MessageParameter : JES2_MESSAGE_PARM_MSG ;
+
+jes2NetAcctStatement : SA JES2_NETACCT jes2NetAcctParameter ;
+
+jes2NetAcctParameter : JES2_NETACCT_PARM_NUMBER ;
+
+jes2NotifyStatement : SA JES2_NOTIFY jes2NotifyParameter ;
+
+jes2NotifyParameter : JES2_NOTIFY_PARM ;
+
+jes2OutputStatement : SA JES2_OUTPUT jes2OutputParameters* ;
+
+jes2OutputParameters : (jes2OutputCONTINUATION | jes2OutputBURST | jes2OutputCHARS | jes2OutputCKPTLNS | jes2OutputCKPTPGS | jes2OutputCOMPACT | jes2OutputCOPIES | jes2OutputCOPYG | jes2OutputDEST | jes2OutputFCB | jes2OutputFLASH | jes2OutputFLASHC | jes2OutputFORMS | jes2OutputINDEX | jes2OutputLINDEX | jes2OutputLINECT | jes2OutputMODIFY | jes2OutputMODTRC | jes2OutputUCS) ;
+
+jes2OutputCONTINUATION : JES2_OUTPUT_CONTINUATION ;
+jes2OutputBURST : JES2_OUTPUT_BURST EQUAL keywordOrSymbolic ;
+jes2OutputCHARS : JES2_OUTPUT_CHARS EQUAL singleOrMultipleValue ;
+jes2OutputCKPTLNS : JES2_OUTPUT_CKPTLNS EQUAL keywordOrSymbolic ;
+jes2OutputCKPTPGS : JES2_OUTPUT_CKPTPGS EQUAL keywordOrSymbolic ;
+jes2OutputCOMPACT : JES2_OUTPUT_COMPACT EQUAL keywordOrSymbolic ;
+jes2OutputCOPIES : JES2_OUTPUT_COPIES EQUAL singleOrMultipleValue ;
+jes2OutputCOPYG : JES2_OUTPUT_COPYG EQUAL singleOrMultipleValue ;
+jes2OutputDEST : JES2_OUTPUT_DEST EQUAL singleOrMultipleValue ;
+jes2OutputFCB : JES2_OUTPUT_FCB EQUAL keywordOrSymbolic ;
+jes2OutputFLASH : JES2_OUTPUT_FLASH EQUAL singleOrMultipleValue ;
+jes2OutputFLASHC : JES2_OUTPUT_FLASHC EQUAL keywordOrSymbolic ;
+jes2OutputFORMS : JES2_OUTPUT_FORMS EQUAL keywordOrSymbolic ;
+jes2OutputINDEX : JES2_OUTPUT_INDEX EQUAL keywordOrSymbolic ;
+jes2OutputLINDEX : JES2_OUTPUT_LINDEX EQUAL keywordOrSymbolic ;
+jes2OutputLINECT : JES2_OUTPUT_LINECT EQUAL keywordOrSymbolic ;
+jes2OutputMODIFY : JES2_OUTPUT_MODIFY EQUAL singleOrMultipleValue ;
+jes2OutputMODTRC : JES2_OUTPUT_MODTRC EQUAL keywordOrSymbolic ;
+jes2OutputUCS : JES2_OUTPUT_UCS EQUAL keywordOrSymbolic ;
+
+jes2PriorityStatement : SA JES2_PRIORITY jes2PriorityParameter ;
+
+jes2PriorityParameter : JES2_PRIORITY_PARM ;
+
+jes2RouteStatement : SA JES2_ROUTE jes2RouteParameter ;
+
+jes2RouteParameter : (jes2RoutePRINT | jes2RoutePUNCH | jes2RouteXEQ) ;
+
+jes2RoutePRINT : JES2_ROUTE_PRINT JES2_ROUTE_VALUE ;
+jes2RoutePUNCH : JES2_ROUTE_PUNCH JES2_ROUTE_VALUE ;
+jes2RouteXEQ : JES2_ROUTE_XEQ JES2_ROUTE_VALUE ;
+
+
+
 

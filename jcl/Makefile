@@ -197,6 +197,9 @@ test:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0153.jcl | grep -v '^\[' || exit 0
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0154.jcl | grep -v '^\[' || exit 0
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0155.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0156.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0157.jcl | grep -v '^\[' || exit 0
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < ./testdata/test0158.jcl | grep -v '^\[' || exit 0
 
 testrig:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test0001.jcl

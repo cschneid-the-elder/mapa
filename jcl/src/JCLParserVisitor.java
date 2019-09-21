@@ -2475,4 +2475,208 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJes2JobParmTIME(JCLParser.Jes2JobParmTIMEContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2MessageStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2MessageStatement(JCLParser.Jes2MessageStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2MessageParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2MessageParameter(JCLParser.Jes2MessageParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2NetAcctStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2NetAcctStatement(JCLParser.Jes2NetAcctStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2NetAcctParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2NetAcctParameter(JCLParser.Jes2NetAcctParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2NotifyStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2NotifyStatement(JCLParser.Jes2NotifyStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2NotifyParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2NotifyParameter(JCLParser.Jes2NotifyParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputStatement(JCLParser.Jes2OutputStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputParameters(JCLParser.Jes2OutputParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCONTINUATION}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCONTINUATION(JCLParser.Jes2OutputCONTINUATIONContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputBURST}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputBURST(JCLParser.Jes2OutputBURSTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCHARS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCHARS(JCLParser.Jes2OutputCHARSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCKPTLNS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCKPTLNS(JCLParser.Jes2OutputCKPTLNSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCKPTPGS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCKPTPGS(JCLParser.Jes2OutputCKPTPGSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCOMPACT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCOMPACT(JCLParser.Jes2OutputCOMPACTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCOPIES}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCOPIES(JCLParser.Jes2OutputCOPIESContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputCOPYG}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputCOPYG(JCLParser.Jes2OutputCOPYGContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputDEST}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputDEST(JCLParser.Jes2OutputDESTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputFCB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputFCB(JCLParser.Jes2OutputFCBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputFLASH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputFLASH(JCLParser.Jes2OutputFLASHContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputFLASHC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputFLASHC(JCLParser.Jes2OutputFLASHCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputFORMS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputFORMS(JCLParser.Jes2OutputFORMSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputINDEX}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputINDEX(JCLParser.Jes2OutputINDEXContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputLINDEX}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputLINDEX(JCLParser.Jes2OutputLINDEXContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputLINECT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputLINECT(JCLParser.Jes2OutputLINECTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputMODIFY}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputMODIFY(JCLParser.Jes2OutputMODIFYContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputMODTRC}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputMODTRC(JCLParser.Jes2OutputMODTRCContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2OutputUCS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2OutputUCS(JCLParser.Jes2OutputUCSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2PriorityStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2PriorityStatement(JCLParser.Jes2PriorityStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2PriorityParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2PriorityParameter(JCLParser.Jes2PriorityParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2RouteStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2RouteStatement(JCLParser.Jes2RouteStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2RouteParameter}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2RouteParameter(JCLParser.Jes2RouteParameterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2RoutePRINT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2RoutePRINT(JCLParser.Jes2RoutePRINTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2RoutePUNCH}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2RoutePUNCH(JCLParser.Jes2RoutePUNCHContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2RouteXEQ}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2RouteXEQ(JCLParser.Jes2RouteXEQContext ctx);
 }
