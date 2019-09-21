@@ -108,7 +108,7 @@ indicating they are potentially overriding a value coded in the proc.
 
 execParameterOverrides : execParmACCT | execParmADDRSPC | execParmCOND | execParmDYNAMNBR | execParmPARM | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmTIME ;
 
-execParmACCT : EXEC_ACCT EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN? ;
+execParmACCT : EXEC_ACCT EQUAL singleOrMultipleValue ;
 
 execParmADDRSPC : EXEC_ADDRSPC EQUAL keywordOrSymbolic ;
 
@@ -135,13 +135,7 @@ execParmDYNAMNBR : EXEC_DYNAMNBR EQUAL keywordOrSymbolic ;
 
 execParmMEMLIMIT : EXEC_MEMLIMIT EQUAL keywordOrSymbolic ;
 
-execParmPARM : EXEC_PARM EQUAL (
-    (LPAREN 
-        keywordOrSymbolic 
-            (COMMA? inlineComment? keywordOrSymbolic)* 
-    RPAREN) |
-    keywordOrSymbolic
-  ) ;
+execParmPARM : EXEC_PARM EQUAL singleOrMultipleValue ;
 
 execParmPARMDD : EXEC_PARMDD EQUAL keywordOrSymbolic ;
 
@@ -294,7 +288,7 @@ ddParmDSID : DSID EQUAL (
   ) ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL keywordOrSymbolic ;
 ddParmDSNAME : (DSNAME | DSN) EQUAL (NAME | DATASET_NAME | ddParmReferback | QUOTED_STRING_FRAGMENT) ;
-ddParmDSNTYPE : DSNTYPE EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
+ddParmDSNTYPE : DSNTYPE EQUAL singleOrMultipleValue ;
 
 ddParmDSORG : DSORG EQUAL keywordOrSymbolic ;
 ddParmDUMMY : DUMMY ;
@@ -302,20 +296,9 @@ ddParmDYNAM : DYNAM ;
 ddParmEATTR : EATTR EQUAL keywordOrSymbolic ;
 ddParmEROPT : EROPT EQUAL keywordOrSymbolic ;
 ddParmEXPDT : EXPDT EQUAL keywordOrSymbolic ;
-ddParmFCB : FCB EQUAL (
-    keywordOrSymbolic |
-    (LPAREN
-        keywordOrSymbolic
-            (COMMA keywordOrSymbolic)?
-    RPAREN)
-  ) ;
+ddParmFCB : FCB EQUAL singleOrMultipleValue ;
 ddParmFILEDATA : FILEDATA EQUAL keywordOrSymbolic ;
-ddParmFLASH : FLASH EQUAL (
-    keywordOrSymbolic |
-    (LPAREN
-        keywordOrSymbolic (COMMA keywordOrSymbolic)?
-    RPAREN)
-  ) ;
+ddParmFLASH : FLASH EQUAL singleOrMultipleValue ;
 ddParmFREE : FREE EQUAL keywordOrSymbolic ;
 ddParmFREEVOL : FREEVOL EQUAL keywordOrSymbolic ;
 ddParmFUNC : FUNC EQUAL keywordOrSymbolic ;
@@ -362,7 +345,7 @@ ddParmLRECL : LRECL EQUAL keywordOrSymbolic ;
 ddParmMAXGENS : MAXGENS EQUAL keywordOrSymbolic ;
 ddParmMGMTCLAS : MGMTCLAS EQUAL keywordOrSymbolic? ;
 ddParmMODE : MODE EQUAL keywordOrSymbolic ; 
-ddParmMODIFY : MODIFY EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
+ddParmMODIFY : MODIFY EQUAL singleOrMultipleValue ;
 ddParmNCP : NCP EQUAL keywordOrSymbolic ;
 ddParmNTM : NTM EQUAL keywordOrSymbolic ;
 ddParmOPTCD : OPTCD EQUAL keywordOrSymbolic ;
@@ -405,7 +388,7 @@ ddParmPATHOPTS : PATHOPTS EQUAL  (
             )*
     RPAREN)
   ) ;
-ddParmPCI : PCI EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN? ;
+ddParmPCI : PCI EQUAL singleOrMultipleValue ;
 ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
 ddParmRECFM : RECFM EQUAL keywordOrSymbolic ;
@@ -415,14 +398,8 @@ ddParmRESERVE : RESERVE EQUAL LPAREN keywordOrSymbolic COMMA keywordOrSymbolic R
 ddParmRETPD : RETPD EQUAL keywordOrSymbolic ;
 ddParmRKP : RKP EQUAL keywordOrSymbolic ;
 ddParmRLS : RLS EQUAL keywordOrSymbolic ;
-ddParmROACCESS : ROACCESS EQUAL (
-    keywordOrSymbolic | 
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
-  ) ;
-ddParmSECMODEL : SECMODEL EQUAL (
-    keywordOrSymbolic |
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
-  ) ;
+ddParmROACCESS : ROACCESS EQUAL singleOrMultipleValue ;
+ddParmSECMODEL : SECMODEL EQUAL singleOrMultipleValue ;
 ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
 ddParmSPACE : SPACE EQUAL (
     (LPAREN
@@ -463,29 +440,11 @@ ddParmSPIN : SPIN EQUAL (
 
 ddParmSTACK : STACK EQUAL keywordOrSymbolic ;
 ddParmSTORCLAS : STORCLAS EQUAL keywordOrSymbolic? ;
-ddParmSUBSYS : SUBSYS EQUAL (
-    keywordOrSymbolic |
-    (LPAREN
-        keywordOrSymbolic
-            (
-              (COMMA? COMMENT_TEXT? keywordOrSymbolic) | 
-              (COMMA? commentStatement* keywordOrSymbolic) | 
-              (inlineComment SS keywordOrSymbolic)
-            )*
-    RPAREN)
-  ) ;
+ddParmSUBSYS : SUBSYS EQUAL singleOrMultipleValue ;
 
-ddParmSYMBOLS : SYMBOLS EQUAL (
-    keywordOrSymbolic |
-    (LPAREN
-        keywordOrSymbolic
-            (COMMA keywordOrSymbolic)?
-    RPAREN)
-  ) ;
+ddParmSYMBOLS : SYMBOLS EQUAL singleOrMultipleValue ;
 
-ddParmSYMLIST : SYMLIST EQUAL
-    LPAREN? keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic COMMENT_TEXT?)* 
-    RPAREN? COMMENT_TEXT? ;
+ddParmSYMLIST : SYMLIST EQUAL singleOrMultipleValue ;
 ddParmSYSOUT : SYSOUT EQUAL (
     sysoutClass |
     (LPAREN COMMA RPAREN ) |
@@ -697,9 +656,7 @@ endcntlStatement : (SS NAME_FIELD ENDCNTL inlineComment*) | CNTL_MODE_TERMINATOR
 
 cntlStatementAmalgamation : cntlStatement CNTL_DATA* endcntlStatement ;
 
-exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL 
-    LPAREN? keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic COMMENT_TEXT?)* 
-    RPAREN? COMMENT_TEXT? ;
+exportStatement : SS NAME_FIELD? EXPORT SYMLIST EQUAL singleOrMultipleValue ;
 
 /*
 ifStatement : SS NAME_FIELD? IF
@@ -730,13 +687,7 @@ endifStatement : SS NAME_FIELD? ENDIF inlineComment? ;
 
 includeStatement : SS NAME_FIELD? INCLUDE INCLUDE_PARM_MEMBER EQUAL keywordOrSymbolic inlineComment? ;
 
-jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL (
-    (keywordOrSymbolic COMMENT_TEXT?) |
-    (LPAREN 
-        keywordOrSymbolic
-            ((COMMA | inlineComment)? SS? COMMENT_TEXT? keywordOrSymbolic)*
-    RPAREN COMMENT_TEXT?)
-  ) ;
+jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL singleOrMultipleValue ;
 
 notifyStatement : SS NAME_FIELD? NOTIFY_OP
     notifyParms COMMENT_TEXT? (notifyParms COMMENT_TEXT?)* ;
@@ -771,13 +722,7 @@ outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter
 
 outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | outputStatementAFPSTATS | outputStatementBUILDING | outputStatementBURST | outputStatementCHARS | outputStatementCKPTLINE | outputStatementCKPTPAGE | outputStatementCKPTSEC | outputStatementCLASS | outputStatementCOLORMAP | outputStatementCOMPACT | outputStatementCOMSETUP | outputStatementCONTROL | outputStatementCOPIES | outputStatementCOPYCNT | outputStatementDATACK | outputStatementDDNAME | outputStatementDEFAULT | outputStatementDEPT | outputStatementDEST | outputStatementDPAGELBL | outputStatementDUPLEX | outputStatementFCB | outputStatementFLASH | outputStatementFORMDEF | outputStatementFORMLEN | outputStatementFORMS | outputStatementFSSDATA | outputStatementGROUPID | outputStatementINDEX | outputStatementINTRAY | outputStatementJESDS | outputStatementLINDEX | outputStatementLINECT | outputStatementMAILBCC | outputStatementMAILCC | outputStatementMAILFILE | outputStatementMAILFROM | outputStatementMAILTO | outputStatementMERGE | outputStatementMODIFY | outputStatementNAME | outputStatementNOTIFY | outputStatementOFFSETXB | outputStatementOFFSETXF | outputStatementOFFSETYB | outputStatementOFFSETYF | outputStatementOUTBIN | outputStatementOUTDISP | outputStatementOVERLAYB | outputStatementOVERLAYF | outputStatementOVFL | outputStatementPAGEDEF | outputStatementPIMSG | outputStatementPORTNO | outputStatementPRMODE | outputStatementPRTATTRS | outputStatementPRTERROR | outputStatementPRTOPTNS | outputStatementPRTQUEUE | outputStatementPRTY | outputStatementREPLYTO | outputStatementRESFMT | outputStatementRETAINS | outputStatementRETAINF | outputStatementRETRYL | outputStatementRETRYT | outputStatementROOM | outputStatementSYSAREA | outputStatementTHRESHLD | outputStatementTITLE | outputStatementTRC | outputStatementUCS | outputStatementUSERDATA | outputStatementUSERLIB | outputStatementUSERPATH | outputStatementWRITER ;
 
-outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL (
-    (keywordOrSymbolic COMMENT_TEXT?) |
-    (LPAREN 
-        keywordOrSymbolic
-            ((COMMA | inlineComment)? SS? COMMENT_TEXT? keywordOrSymbolic)*
-    RPAREN COMMENT_TEXT?)
-  ) ;
+outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL singleOrMultipleValue ;
 
 outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT | SYMBOLIC) ;
 outputStatementAFPSTATS : OUTPUT_STMT_AFPSTATS EQUAL keywordOrSymbolic ;
@@ -851,39 +796,18 @@ outputStatementINTRAY : OUTPUT_STMT_INTRAY EQUAL keywordOrSymbolic ;
 outputStatementJESDS : OUTPUT_STMT_JESDS EQUAL keywordOrSymbolic ;
 outputStatementLINDEX : OUTPUT_STMT_LINDEX EQUAL keywordOrSymbolic ;
 outputStatementLINECT : OUTPUT_STMT_LINECT EQUAL keywordOrSymbolic ;
-outputStatementMAILBCC : OUTPUT_STMT_MAILBCC EQUAL (keywordOrSymbolic |
-    (LPAREN 
-        keywordOrSymbolic 
-            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
-    RPAREN)
-  ) ;
-outputStatementMAILCC : OUTPUT_STMT_MAILCC EQUAL  (keywordOrSymbolic |
-    (LPAREN 
-        keywordOrSymbolic 
-            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
-    RPAREN)
-  ) ;
+outputStatementMAILBCC : OUTPUT_STMT_MAILBCC EQUAL singleOrMultipleValue ;
+outputStatementMAILCC : OUTPUT_STMT_MAILCC EQUAL singleOrMultipleValue ;
 outputStatementMAILFILE : OUTPUT_STMT_MAILFILE EQUAL keywordOrSymbolic ;
 outputStatementMAILFROM : OUTPUT_STMT_MAILFROM EQUAL keywordOrSymbolic ;
-outputStatementMAILTO : OUTPUT_STMT_MAILTO EQUAL  (keywordOrSymbolic |
-    (LPAREN 
-        keywordOrSymbolic 
-            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
-    RPAREN)
-  ) ;
+outputStatementMAILTO : OUTPUT_STMT_MAILTO EQUAL singleOrMultipleValue ;
 outputStatementMERGE : OUTPUT_STMT_MERGE EQUAL keywordOrSymbolic ;
 outputStatementMODIFY : OUTPUT_STMT_MODIFY EQUAL (keywordOrSymbolic |
     (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN) |
     (LPAREN keywordOrSymbolic? COMMA keywordOrSymbolic RPAREN)
   ) ;
 outputStatementNAME : OUTPUT_STMT_NAME EQUAL keywordOrSymbolic ;
-outputStatementNOTIFY : OUTPUT_STMT_NOTIFY EQUAL (
-    (keywordOrSymbolic COMMENT_TEXT?) | 
-    (
-      LPAREN keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic)* 
-      RPAREN COMMENT_TEXT?
-    )
-  ) ;
+outputStatementNOTIFY : OUTPUT_STMT_NOTIFY EQUAL singleOrMultipleValue ;
 outputStatementOFFSETXB : OUTPUT_STMT_OFFSETXB EQUAL keywordOrSymbolic ;
 outputStatementOFFSETXF : OUTPUT_STMT_OFFSETXF EQUAL keywordOrSymbolic ;
 outputStatementOFFSETYB : OUTPUT_STMT_OFFSETYB EQUAL keywordOrSymbolic ;
@@ -920,28 +844,11 @@ outputStatementTHRESHLD : OUTPUT_STMT_THRESHLD EQUAL keywordOrSymbolic ;
 outputStatementTITLE : OUTPUT_STMT_TITLE EQUAL keywordOrSymbolic ;
 outputStatementTRC : OUTPUT_STMT_TRC EQUAL keywordOrSymbolic ;
 outputStatementUCS : OUTPUT_STMT_UCS EQUAL keywordOrSymbolic ;
-outputStatementUSERDATA : OUTPUT_STMT_USERDATA EQUAL (keywordOrSymbolic |
-    (LPAREN 
-        keywordOrSymbolic 
-            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
-    RPAREN)
-  ) ;
+outputStatementUSERDATA : OUTPUT_STMT_USERDATA EQUAL singleOrMultipleValue ;
 
-outputStatementUSERLIB : OUTPUT_STMT_USERLIB EQUAL (
-    keywordOrSymbolic |
-    (LPAREN 
-        keywordOrSymbolic 
-            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
-    RPAREN)
-  ) ;
+outputStatementUSERLIB : OUTPUT_STMT_USERLIB EQUAL singleOrMultipleValue ;
 
-outputStatementUSERPATH : OUTPUT_STMT_USERPATH EQUAL (
-    keywordOrSymbolic |
-    (LPAREN 
-        keywordOrSymbolic 
-            ((COMMA | inlineComment)? SS? keywordOrSymbolic)*
-    RPAREN)
-  ) ;
+outputStatementUSERPATH : OUTPUT_STMT_USERPATH EQUAL singleOrMultipleValue ;
 
 outputStatementWRITER : OUTPUT_STMT_WRITER EQUAL keywordOrSymbolic ;
 
@@ -954,15 +861,9 @@ scheduleParameters : (scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY
 scheduleParmAFTER : SCHEDULE_PARM_AFTER EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 scheduleParmBEFORE : SCHEDULE_PARM_BEFORE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 scheduleParmDELAY : SCHEDULE_PARM_DELAY EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-scheduleParmHOLDUNTIL : SCHEDULE_PARM_HOLDUNTIL EQUAL (
-    keywordOrSymbolic |
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
-  ) COMMENT_TEXT? ;
+scheduleParmHOLDUNTIL : SCHEDULE_PARM_HOLDUNTIL EQUAL singleOrMultipleValue ;
 scheduleParmJOBGROUP : SCHEDULE_PARM_JOBGROUP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-scheduleParmSTARTBY : SCHEDULE_PARM_STARTBY EQUAL (
-    keywordOrSymbolic |
-    (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)? RPAREN)
-  ) COMMENT_TEXT? ;
+scheduleParmSTARTBY : SCHEDULE_PARM_STARTBY EQUAL singleOrMultipleValue ;
 scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 
 setStatement : SS NAME_FIELD? SET setOperation+
