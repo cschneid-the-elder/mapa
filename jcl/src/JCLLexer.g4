@@ -85,6 +85,7 @@ if (length($0) == 80) {
 ----------8<snip----------
 
 {System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText() + "/");}
+{System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));}
 */
 
 
@@ -100,10 +101,23 @@ tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF
 
 // lexer rules --------------------------------------------------------------------------------
 
-SS : SLASH SLASH {/*System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());*/}{getCharPositionInLine() == 2}? ->mode(NM_MODE) ;
+SS : SLASH SLASH
+    {
+      /*
+      System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());
+      */
+    }
+    {
+      getCharPositionInLine() == 2
+    }? ->mode(NM_MODE) ;
+
+SA : SLASH ASTERISK
+    {
+      getCharPositionInLine() == 2
+    }? ->mode(JES2_CNTL_MODE) ;
+
 COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM_MODE);
 COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM_MODE) ;
-//NAME_FIELD : NAME (DOT NAME)? {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));} ->mode(OP_MODE) ;
 SYMBOLIC : AMPERSAND [A-Z0-9@#$]+ {getText().length() <= 9}? ;
 
 /*
@@ -223,7 +237,20 @@ mode COMMA_NEWLINE_CM_MODE ;
 COMMA_NEWLINE_CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT) ;
 COMMA_NEWLINE_CM_NEWLINE : NEWLINE ->channel(HIDDEN),popMode ;
 
+mode JES2_CNTL_MODE ;
 
+JES2_JOBPARM : J O B P A R M ->mode(JES2_JOBPARM_MODE) ;
+JES2_MESSAGE : M E S S A G E ;
+JES2_NETACCT : N E T A C C T ;
+JES2_NOTIFY : N O T I F Y ;
+JES2_OUTPUT : O U T P U T ;
+JES2_PRIORITY : P R I O R I T Y ;
+JES2_ROUTE : R O U T E ;
+JES2_SETUP : S E T U P ;
+JES2_SIGNOFF : S I G N O F F ;
+JES2_SIGNON : S I G N O N ;
+JES2_XEQ : X E Q ;
+JES2_XMIT : X M I T ;
 
 mode NM_MODE ;
 
@@ -937,7 +964,30 @@ mode ENDGROUP_MODE ;
 ENDGROUP_WS : WS ->channel(HIDDEN),mode(CM_MODE) ;
 ENDGROUP_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
+mode JES2_JOBPARM_MODE ;
 
+JES2_JOBPARM_WS : WS ->channel(HIDDEN),mode(JES2_JOBPARM_PARM_MODE) ;
+
+mode JES2_JOBPARM_PARM_MODE ;
+
+JES2_JOBPARM_PARM_WS : WS ->channel(HIDDEN),mode(CM_MODE) ;
+JES2_JOBPARM_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JES2_JOBPARM_PARM_COMMA : COMMA_DFLT ->channel(HIDDEN) ;
+
+JES2_JOBPARM_BURST : (B | (B U R S T)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_BYTES : (M | (B Y T E S)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_CARDS : (C | (C A R D S)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_COPIES : (N | (C O P I E S)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_FORMS : (F | (F O R M S)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_LINECT : (K | (L I N E C T)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_LINES : (L | (L I N E S)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_NOLOG : (J | (N O L O G)) ;
+JES2_JOBPARM_PAGES : (G | (P A G E S)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_PROCLIB : (P | (P R O C L I B)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_RESTART : (E | (R E S T A R T)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_ROOM : (R | (R O O M)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_SYSAFF : (S | (S Y S A F F)) ->pushMode(KYWD_VAL_MODE) ;
+JES2_JOBPARM_TIME : (T| (T I M E)) ->pushMode(KYWD_VAL_MODE) ;
 
 mode DATA_PARM_MODE ;
 

@@ -2373,4 +2373,106 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2CntlStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2CntlStatement(JCLParser.Jes2CntlStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmStatement(JCLParser.Jes2JobParmStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmParameters}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmParameters(JCLParser.Jes2JobParmParametersContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmBURST}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmBURST(JCLParser.Jes2JobParmBURSTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmBYTES}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmBYTES(JCLParser.Jes2JobParmBYTESContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmCARDS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmCARDS(JCLParser.Jes2JobParmCARDSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmCOPIES}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmCOPIES(JCLParser.Jes2JobParmCOPIESContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmFORMS}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmFORMS(JCLParser.Jes2JobParmFORMSContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmLINECT}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmLINECT(JCLParser.Jes2JobParmLINECTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmLINES}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmLINES(JCLParser.Jes2JobParmLINESContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmNOLOG}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmNOLOG(JCLParser.Jes2JobParmNOLOGContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmPAGES}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmPAGES(JCLParser.Jes2JobParmPAGESContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmPROCLIB}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmPROCLIB(JCLParser.Jes2JobParmPROCLIBContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmRESTART}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmRESTART(JCLParser.Jes2JobParmRESTARTContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmROOM}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmROOM(JCLParser.Jes2JobParmROOMContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmSYSAFF}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmSYSAFF(JCLParser.Jes2JobParmSYSAFFContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2JobParmTIME}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2JobParmTIME(JCLParser.Jes2JobParmTIMEContext ctx);
 }

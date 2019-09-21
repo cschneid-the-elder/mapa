@@ -31,7 +31,7 @@ startRule : jcl | EOF ;
 
 jcl : execJCL+ | procJCL ;
 
-execJCL : jesExecutionControlStatements (jobCard (jclCommandStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
+execJCL : jesExecutionControlStatements (jobCard (jclCommandStatement | jes2CntlStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
 
 procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
 
@@ -977,7 +977,30 @@ singleOrMultipleValue : (
     keywordOrSymbolic |
     (LPAREN
       keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic)*
-    RPAREN)
+    RPAREN) |
+    (LPAREN+
+      keywordOrSymbolic RPAREN? (COMMA? COMMENT_TEXT? keywordOrSymbolic RPAREN?)*
+    RPAREN+)
   ) COMMENT_TEXT? ;
 
+jes2CntlStatement : (jes2JobParmStatement) ;
+
+jes2JobParmStatement : SA JES2_JOBPARM jes2JobParmParameters* ;
+
+jes2JobParmParameters : (jes2JobParmBURST | jes2JobParmBYTES | jes2JobParmCARDS | jes2JobParmCOPIES | jes2JobParmFORMS | jes2JobParmLINECT | jes2JobParmLINES | jes2JobParmNOLOG | jes2JobParmPAGES | jes2JobParmPROCLIB | jes2JobParmRESTART | jes2JobParmROOM | jes2JobParmSYSAFF | jes2JobParmTIME) ;
+
+jes2JobParmBURST : JES2_JOBPARM_BURST EQUAL keywordOrSymbolic ;
+jes2JobParmBYTES : JES2_JOBPARM_BYTES EQUAL keywordOrSymbolic ;
+jes2JobParmCARDS : JES2_JOBPARM_CARDS EQUAL keywordOrSymbolic ;
+jes2JobParmCOPIES : JES2_JOBPARM_COPIES EQUAL keywordOrSymbolic ;
+jes2JobParmFORMS : JES2_JOBPARM_FORMS EQUAL keywordOrSymbolic ;
+jes2JobParmLINECT : JES2_JOBPARM_LINECT EQUAL keywordOrSymbolic ;
+jes2JobParmLINES : JES2_JOBPARM_LINES EQUAL keywordOrSymbolic ;
+jes2JobParmNOLOG : JES2_JOBPARM_NOLOG ;
+jes2JobParmPAGES : JES2_JOBPARM_PAGES EQUAL keywordOrSymbolic ;
+jes2JobParmPROCLIB : JES2_JOBPARM_PROCLIB EQUAL keywordOrSymbolic ;
+jes2JobParmRESTART : JES2_JOBPARM_RESTART EQUAL keywordOrSymbolic ;
+jes2JobParmROOM : JES2_JOBPARM_ROOM EQUAL keywordOrSymbolic ;
+jes2JobParmSYSAFF : JES2_JOBPARM_SYSAFF EQUAL singleOrMultipleValue ;
+jes2JobParmTIME : JES2_JOBPARM_TIME EQUAL keywordOrSymbolic ;
 

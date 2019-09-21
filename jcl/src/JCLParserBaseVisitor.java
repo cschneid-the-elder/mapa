@@ -2768,4 +2768,123 @@ public class JCLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2CntlStatement(JCLParser.Jes2CntlStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmStatement(JCLParser.Jes2JobParmStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmParameters(JCLParser.Jes2JobParmParametersContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmBURST(JCLParser.Jes2JobParmBURSTContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmBYTES(JCLParser.Jes2JobParmBYTESContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmCARDS(JCLParser.Jes2JobParmCARDSContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmCOPIES(JCLParser.Jes2JobParmCOPIESContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmFORMS(JCLParser.Jes2JobParmFORMSContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmLINECT(JCLParser.Jes2JobParmLINECTContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmLINES(JCLParser.Jes2JobParmLINESContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmNOLOG(JCLParser.Jes2JobParmNOLOGContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmPAGES(JCLParser.Jes2JobParmPAGESContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmPROCLIB(JCLParser.Jes2JobParmPROCLIBContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmRESTART(JCLParser.Jes2JobParmRESTARTContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmROOM(JCLParser.Jes2JobParmROOMContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmSYSAFF(JCLParser.Jes2JobParmSYSAFFContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitJes2JobParmTIME(JCLParser.Jes2JobParmTIMEContext ctx) { return visitChildren(ctx); }
 }

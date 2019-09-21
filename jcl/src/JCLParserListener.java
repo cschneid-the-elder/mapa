@@ -3946,4 +3946,174 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2CntlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2CntlStatement(JCLParser.Jes2CntlStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2CntlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2CntlStatement(JCLParser.Jes2CntlStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmStatement(JCLParser.Jes2JobParmStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmStatement(JCLParser.Jes2JobParmStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmParameters}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmParameters(JCLParser.Jes2JobParmParametersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmParameters}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmParameters(JCLParser.Jes2JobParmParametersContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmBURST}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmBURST(JCLParser.Jes2JobParmBURSTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmBURST}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmBURST(JCLParser.Jes2JobParmBURSTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmBYTES}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmBYTES(JCLParser.Jes2JobParmBYTESContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmBYTES}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmBYTES(JCLParser.Jes2JobParmBYTESContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmCARDS}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmCARDS(JCLParser.Jes2JobParmCARDSContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmCARDS}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmCARDS(JCLParser.Jes2JobParmCARDSContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmCOPIES}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmCOPIES(JCLParser.Jes2JobParmCOPIESContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmCOPIES}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmCOPIES(JCLParser.Jes2JobParmCOPIESContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmFORMS}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmFORMS(JCLParser.Jes2JobParmFORMSContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmFORMS}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmFORMS(JCLParser.Jes2JobParmFORMSContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmLINECT}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmLINECT(JCLParser.Jes2JobParmLINECTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmLINECT}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmLINECT(JCLParser.Jes2JobParmLINECTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmLINES}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmLINES(JCLParser.Jes2JobParmLINESContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmLINES}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmLINES(JCLParser.Jes2JobParmLINESContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmNOLOG}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmNOLOG(JCLParser.Jes2JobParmNOLOGContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmNOLOG}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmNOLOG(JCLParser.Jes2JobParmNOLOGContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmPAGES}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmPAGES(JCLParser.Jes2JobParmPAGESContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmPAGES}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmPAGES(JCLParser.Jes2JobParmPAGESContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmPROCLIB}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmPROCLIB(JCLParser.Jes2JobParmPROCLIBContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmPROCLIB}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmPROCLIB(JCLParser.Jes2JobParmPROCLIBContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmRESTART}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmRESTART(JCLParser.Jes2JobParmRESTARTContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmRESTART}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmRESTART(JCLParser.Jes2JobParmRESTARTContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmROOM}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmROOM(JCLParser.Jes2JobParmROOMContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmROOM}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmROOM(JCLParser.Jes2JobParmROOMContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmSYSAFF}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmSYSAFF(JCLParser.Jes2JobParmSYSAFFContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmSYSAFF}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmSYSAFF(JCLParser.Jes2JobParmSYSAFFContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2JobParmTIME}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2JobParmTIME(JCLParser.Jes2JobParmTIMEContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2JobParmTIME}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2JobParmTIME(JCLParser.Jes2JobParmTIMEContext ctx);
 }
