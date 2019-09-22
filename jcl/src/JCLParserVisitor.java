@@ -2679,4 +2679,28 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJes2RouteXEQ(JCLParser.Jes2RouteXEQContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2SetupStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2SetupStatement(JCLParser.Jes2SetupStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2SignoffStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2SignoffStatement(JCLParser.Jes2SignoffStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2SignonStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2SignonStatement(JCLParser.Jes2SignonStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2XEQStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2XEQStatement(JCLParser.Jes2XEQStatementContext ctx);
 }

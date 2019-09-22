@@ -4456,4 +4456,44 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJes2RouteXEQ(JCLParser.Jes2RouteXEQContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2SetupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2SetupStatement(JCLParser.Jes2SetupStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2SetupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2SetupStatement(JCLParser.Jes2SetupStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2SignoffStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2SignoffStatement(JCLParser.Jes2SignoffStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2SignoffStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2SignoffStatement(JCLParser.Jes2SignoffStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2SignonStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2SignonStatement(JCLParser.Jes2SignonStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2SignonStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2SignonStatement(JCLParser.Jes2SignonStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#jes2XEQStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJes2XEQStatement(JCLParser.Jes2XEQStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#jes2XEQStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJes2XEQStatement(JCLParser.Jes2XEQStatementContext ctx);
 }

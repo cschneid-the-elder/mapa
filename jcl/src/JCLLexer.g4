@@ -74,7 +74,7 @@ The following awk script will remove your line numbers.
 
 {
 
-if (length($0) == 80) {
+if (length($0) == 80 && $1 != "/*SIGNON") {
     new = substr($0, 1, 72) "        ";
     print new;
 } else {
@@ -116,9 +116,15 @@ SA : SLASH ASTERISK
       getCharPositionInLine() == 2
     }? ->mode(JES2_CNTL_MODE) ;
 
-COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK {getCharPositionInLine() == 3}? ->type(COMMENT_FLAG),mode(CM_MODE);
+COMMENT_FLAG_DFLT : SLASH SLASH ASTERISK
+    {
+      getCharPositionInLine() == 3
+    }? ->type(COMMENT_FLAG),mode(CM_MODE);
 COMMENT_FLAG_INLINE : COMMA_DFLT ' ' ->mode(CM_MODE) ;
-SYMBOLIC : AMPERSAND [A-Z0-9@#$]+ {getText().length() <= 9}? ;
+SYMBOLIC : AMPERSAND [A-Z0-9@#$]+
+    {
+      getText().length() <= 9
+    }? ;
 
 /*
 TODO The only time we should match this is after matching a SYMBOLIC.
@@ -246,10 +252,10 @@ JES2_NOTIFY : N O T I F Y ->mode(JES2_NOTIFY_MODE) ;
 JES2_OUTPUT : O U T P U T ->mode(JES2_OUTPUT_MODE) ;
 JES2_PRIORITY : P R I O R I T Y ->mode(JES2_PRIORITY_MODE) ;
 JES2_ROUTE : R O U T E ->mode(JES2_ROUTE_MODE) ;
-JES2_SETUP : S E T U P ;
-JES2_SIGNOFF : S I G N O F F ;
-JES2_SIGNON : S I G N O N ;
-JES2_XEQ : X E Q ;
+JES2_SETUP : S E T U P ->mode(JES2_SETUP_MODE) ;
+JES2_SIGNOFF : S I G N O F F ->mode(CM_MODE) ;
+JES2_SIGNON : S I G N O N ->mode(JES2_SIGNON_MODE) ;
+JES2_XEQ : X E Q ->mode(JES2_XEQ_MODE) ;
 JES2_XMIT : X M I T ;
 
 mode NM_MODE ;
@@ -1073,6 +1079,48 @@ mode JES2_ROUTE_PARM1_MODE ;
 
 JES2_ROUTE_PARM1_WS : WS ->channel(HIDDEN) ;
 JES2_ROUTE_VALUE : [A-Z0-9@#$*\-+&./%[:()]+ ->popMode ;
+
+mode JES2_SETUP_MODE ;
+
+JES2_SETUP_WS : WS ->channel(HIDDEN),mode(JES2_SETUP_PARM_MODE) ;
+
+mode JES2_SETUP_PARM_MODE ;
+
+JES2_SETUP_PARM_WS : WS ->channel(HIDDEN),mode(CM_MODE) ;
+JES2_SETUP_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JES2_SETUP_PARM_COMMA : COMMA_DFLT ->channel(HIDDEN) ;
+
+JES2_SETUP_VALUE : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
+
+mode JES2_SIGNON_MODE ;
+
+JES2_SIGNON_WS : WS ->channel(HIDDEN) ;
+JES2_SIGNON_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+fragment JES2_PASSWORD : [A-Z0-9@#$]
+     [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] ;
+
+JES2_SIGNON_NODE : [A-Z@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$] [ A-Z0-9@#$]
+    {
+      getCharPositionInLine() == 24
+    }? ;
+JES2_SIGNON_PASSWORD1 : JES2_PASSWORD
+    {
+      getCharPositionInLine() == 32
+    }? ;
+JES2_SIGNON_NEW_PASSWORD : JES2_PASSWORD
+    {
+      getCharPositionInLine() == 42
+    }? ;
+JES2_SIGNON_PASSWORD2 :JES2_PASSWORD
+    {
+      getCharPositionInLine() == 80
+    }? ;
+
+mode JES2_XEQ_MODE ;
+
+JES2_XEQ_WS : WS ->channel(HIDDEN) ;
+JES2_XEQ_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JES2_XEQ_NODE : [A-Z0-9@#$*\-+&./%[:()]+ ;
 
 
 mode DATA_PARM_MODE ;

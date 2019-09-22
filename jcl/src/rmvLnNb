@@ -4,7 +4,7 @@
 
 {
 
-if (length($0) == 80) {
+if (length($0) == 80 && $1 != "/*SIGNON") {
     new = substr($0, 1, 72) "        ";
     print new;
 } else {

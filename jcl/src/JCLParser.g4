@@ -999,7 +999,7 @@ singleOrMultipleValue : (
     RPAREN+)
   ) COMMENT_TEXT? ;
 
-jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement) ;
+jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement | jes2SetupStatement | jes2SignoffStatement |  jes2SignonStatement | jes2XEQStatement) ;
 
 jes2JobParmStatement : SA JES2_JOBPARM jes2JobParmParameters* ;
 
@@ -1068,6 +1068,14 @@ jes2RoutePRINT : JES2_ROUTE_PRINT JES2_ROUTE_VALUE ;
 jes2RoutePUNCH : JES2_ROUTE_PUNCH JES2_ROUTE_VALUE ;
 jes2RouteXEQ : JES2_ROUTE_XEQ JES2_ROUTE_VALUE ;
 
+jes2SetupStatement : SA JES2_SETUP VOL_SER_NB+ ;
+
+jes2SignoffStatement : SA JES2_SIGNOFF COMMENT_TEXT? ;
+
+jes2SignonStatement : SA JES2_SIGNON 
+    JES2_SIGNON_NODE JES2_SIGNON_PASSWORD1? JES2_SIGNON_NEW_PASSWORD? JES2_SIGNON_PASSWORD2? ;
+
+jes2XEQStatement : SA JES2_XEQ JES2_XEQ_NODE ;
 
 
 
