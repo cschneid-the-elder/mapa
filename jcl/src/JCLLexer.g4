@@ -231,12 +231,18 @@ COMMA_WS_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_WS_NEWLINE_MODE) ;
 mode COMMA_WS_NEWLINE_MODE ;
 
 COMMA_WS_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),popMode ;
-COMMA_WS_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),popMode,popMode ;
+COMMA_WS_NEWLINE_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN),popMode,popMode ;
 
 mode COMMA_NEWLINE_MODE ;
 
 COMMA_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
-COMMA_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),popMode ;
+COMMA_NEWLINE_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN),popMode ;
 
 mode COMMA_NEWLINE_CM_MODE ;
 
@@ -256,7 +262,7 @@ JES2_SETUP : S E T U P ->mode(JES2_SETUP_MODE) ;
 JES2_SIGNOFF : S I G N O F F ->mode(CM_MODE) ;
 JES2_SIGNON : S I G N O N ->mode(JES2_SIGNON_MODE) ;
 JES2_XEQ : X E Q ->mode(JES2_XEQ_MODE) ;
-JES2_XMIT : X M I T ;
+JES2_XMIT : X M I T ->mode(JES2_XMIT_MODE) ;
 
 mode NM_MODE ;
 
@@ -264,7 +270,10 @@ JOBLIB : J O B L I B ->mode(OP_MODE) ;
 SYSCHK : S Y S C H K ->mode(OP_MODE) ;
 fragment NM_PART : [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? ;
 NAME_FIELD : NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();} ->mode(OP_MODE) ;
-CONTINUATION_WS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),mode(OP_MODE) ;
+CONTINUATION_WS : ' '+
+    {
+      getText().length() <= 13
+    }? ->channel(HIDDEN),mode(OP_MODE) ;
 
 mode OP_MODE ;
 
@@ -385,11 +394,20 @@ EXEC_PROC_PARM : NAME ->pushMode(KYWD_VAL_MODE) ;
 
 EXEC_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 EXEC_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-EXEC_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
-EXEC_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+EXEC_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
+EXEC_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 EXEC_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 EXEC_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
-EXEC_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN) ;
+EXEC_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN) ;
 
 mode IF_MODE ;
 
@@ -424,22 +442,39 @@ IF_ALNUMNAT : ALNUMNAT ->type(ALNUMNAT) ;
 mode DD_MODE ;
 
 DD_WS : [ ]+ ->channel(HIDDEN),mode(DD_PARM_MODE) ;
-DD_NEWLINE1 : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+DD_NEWLINE1 : NEWLINE
+    {
+      _modeStack.clear();
+    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode DD_PARM_MODE ;
 
 DD_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 DD_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
-DD_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
-DD_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+DD_PARM_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
+DD_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 DD_COMMA : COMMA_DFLT ->type(COMMA) ;
 DD_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
-DD_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN) ;
+DD_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN) ;
 
 DD_ACCODE : A C C O D E ->type(ACCODE),pushMode(KYWD_VAL_MODE) ;
 DD_AMP : A M P ->type(AMP),pushMode(AMP_MODE) ;
 DD_AVGREC : A V G R E C ->type(AVGREC),pushMode(KYWD_VAL_MODE) ;
-DD_ASTERISK : '*' {dlmVals.add("/*"); dlmVals.add("//");} ->type(ASTERISK),pushMode(DATA_PARM_MODE) ;
+DD_ASTERISK : '*'
+    {
+      dlmVals = new java.util.ArrayList();
+      dlmVals.add("/*");
+      dlmVals.add("//");
+    } ->type(ASTERISK),pushMode(DATA_PARM_MODE) ;
 DD_BLKSIZE : B L K S I Z E ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
 DD_BLKSZLIM : B L K S Z L I M ->type(BLKSZLIM),pushMode(KYWD_VAL_MODE) ;
 DD_BURST : B U R S T ->type(BURST),pushMode(KYWD_VAL_MODE) ;
@@ -448,7 +483,11 @@ DD_CHARS : C H A R S ->type(CHARS),pushMode(KYWD_VAL_MODE) ;
 DD_CHKPT : C H K P T ->type(CHKPT),pushMode(KYWD_VAL_MODE) ;
 DD_CNTL : C N T L ->type(CNTL),pushMode(DSN_MODE) ;
 DD_COPIES : C O P I E S ->type(COPIES),pushMode(KYWD_VAL_MODE) ;
-DD_DATA : D A T A {dlmVals.add("/*");} ->type(DATA),pushMode(DATA_PARM_MODE) ;
+DD_DATA : D A T A
+    {
+      dlmVals = new java.util.ArrayList();
+      dlmVals.add("/*");
+    } ->type(DATA),pushMode(DATA_PARM_MODE) ;
 DD_DATACLAS : D A T A C L A S ->type(DATACLAS),pushMode(KYWD_VAL_MODE) ;
 DD_DCB : D C B ->type(DCB),pushMode(DCB_MODE) ;
 DD_DDNAME : D D N A M E ->type(DDNAME),pushMode(KYWD_VAL_MODE) ;
@@ -551,8 +590,14 @@ EXPORT_STMT_WS : [ ]+ ->channel(HIDDEN),mode(EXPORT_STMT_PARM_MODE) ;
 mode EXPORT_STMT_PARM_MODE ;
 
 EXPORT_STMT_PARM_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
-EXPORT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
-EXPORT_STMT_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+EXPORT_STMT_PARM_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
+EXPORT_STMT_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode NOTIFY_STMT_MODE ;
 
@@ -578,11 +623,20 @@ mode OUTPUT_STMT_PARM_MODE ;
 
 OUTPUT_STMT_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 OUTPUT_STMT_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),pushMode(COMMA_WS_MODE) ;
-OUTPUT_STMT_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
-OUTPUT_STMT_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+OUTPUT_STMT_PARM_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
+OUTPUT_STMT_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 OUTPUT_STMT_COMMA : COMMA_DFLT ->type(COMMA) ;
 OUTPUT_STMT_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),pushMode(COMMA_NEWLINE_CM_MODE) ;
-OUTPUT_STMT_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN) ;
+OUTPUT_STMT_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN) ;
 
 OUTPUT_STMT_ADDRESS : A D D R E S S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_AFPPARMS : A F P P A R M S ->pushMode(DSN_MODE) ;
@@ -669,9 +723,15 @@ OUTPUT_CLASS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 OUTPUT_CLASS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 OUTPUT_CLASS_VALUE : [A-Z0-9*] ->popMode ;
 OUTPUT_CLASS_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-OUTPUT_CLASS_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+OUTPUT_CLASS_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 OUTPUT_CLASS_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-OUTPUT_CLASS_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+OUTPUT_CLASS_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 OUTPUT_CLASS_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 
 mode PROC_MODE ;
@@ -693,8 +753,14 @@ PROC_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 PROC_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 PROC_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
-PROC_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-PROC_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+PROC_PARM_VALUE_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+PROC_PARM_VALUE_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 PROC_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
 mode SCHEDULE_MODE ;
@@ -715,8 +781,14 @@ SCHEDULE_PARM_WITH : W I T H ->pushMode(KYWD_VAL_MODE) ;
 
 SCHEDULE_PARM_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 SCHEDULE_PARM_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-SCHEDULE_PARM_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-SCHEDULE_PARM_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+SCHEDULE_PARM_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+SCHEDULE_PARM_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 SCHEDULE_PARM_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 
 mode SET_MODE ;
@@ -738,8 +810,14 @@ SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
-SET_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-SET_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+SET_PARM_VALUE_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+SET_PARM_VALUE_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 SET_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
 mode XMIT_MODE ;
@@ -798,12 +876,18 @@ JOBGROUP_ACCT_COMMA_WS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(JOBGROUP_ACCT_CO
 mode JOBGROUP_ACCT_COMMA_WS_NEWLINE_MODE ;
 
 JOBGROUP_ACCT_COMMA_WS_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),mode(JOBGROUP_ACCT_COMMA_WS_MODE) ;
-JOBGROUP_ACCT_COMMA_WS_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE) ;
+JOBGROUP_ACCT_COMMA_WS_NEWLINE_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE) ;
 
 mode JOBGROUP_ACCT_COMMA_NEWLINE_MODE ;
 
 JOBGROUP_ACCT_COMMA_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),mode(JOBGROUP_ACCT_COMMA_NEWLINE_CM_MODE) ;
-JOBGROUP_ACCT_COMMA_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE) ;
+JOBGROUP_ACCT_COMMA_NEWLINE_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE) ;
 
 mode JOBGROUP_ACCT_COMMA_NEWLINE_CM_MODE ;
 
@@ -1122,6 +1206,33 @@ JES2_XEQ_WS : WS ->channel(HIDDEN) ;
 JES2_XEQ_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JES2_XEQ_NODE : [A-Z0-9@#$*\-+&./%[:()]+ ;
 
+mode JES2_XMIT_MODE ;
+
+JES2_XMIT_WS : WS ->channel(HIDDEN),mode(JES2_XMIT_NODE_MODE) ;
+
+mode JES2_XMIT_NODE_MODE ;
+
+JES2_XMIT_NODE_WS : WS
+    {
+      dlmVals = new java.util.ArrayList();
+      dlmVals.add("/*");
+    } ->channel(HIDDEN),mode(JES2_XMIT_DLM_MODE) ;
+JES2_XMIT_NODE_NEWLINE : NEWLINE 
+    {
+      dlmVals = new java.util.ArrayList();
+      dlmVals.add("/*");
+    } ->channel(HIDDEN),mode(DATA_MODE) ;
+
+JES2_XMIT_NODE : [A-Z0-9@#$*\-+&./%[:()]+ ;
+
+mode JES2_XMIT_DLM_MODE ;
+
+JES2_XMIT_DLM : DD_DLM ->type(DLM),pushMode(DLM_MODE) ;
+JES2_XMIT_DLM_WS : WS ->channel(HIDDEN) ;
+JES2_XMIT_DLM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DATA_MODE) ;
+
+
+
 
 mode DATA_PARM_MODE ;
 
@@ -1289,8 +1400,14 @@ QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
 mode QS_SS ;
 //TODO handle //* comments here and in clones thereof
 SLASH_QS : '/' ;
-SS_QS : SLASH_QS SLASH_QS {getCharPositionInLine() == 2}? ->channel(HIDDEN) ;
-CONTINUATION_WS_QS_SS : ' '+ {getText().length() <= 13}? ->channel(HIDDEN),popMode ;
+SS_QS : SLASH_QS SLASH_QS
+    {
+      getCharPositionInLine() == 2
+    }? ->channel(HIDDEN) ;
+CONTINUATION_WS_QS_SS : ' '+
+    {
+      getText().length() <= 13
+    }? ->channel(HIDDEN),popMode ;
 
 mode DSN_MODE ;
 
@@ -1480,8 +1597,14 @@ mode INCLUDE_PARM_MODE ;
 
 INCLUDE_PARM_MEMBER : M E M B E R ->pushMode(KYWD_VAL_MODE) ;
 
-INCLUDE_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-INCLUDE_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+INCLUDE_PARM_VALUE_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+INCLUDE_PARM_VALUE_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 
 mode JCLLIB_MODE ;
 
@@ -1490,8 +1613,14 @@ JCLLIB_WS : [ ]+ ->channel(HIDDEN),mode(JCLLIB_PARM_MODE) ;
 mode JCLLIB_PARM_MODE ;
 
 JCLLIB_PARM_ORDER : O R D E R ->pushMode(KYWD_VAL_MODE) ;
-JCLLIB_PARM_VALUE_NEWLINE : NEWLINE {_modeStack.clear();} ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JCLLIB_PARM_VALUE_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+JCLLIB_PARM_VALUE_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JCLLIB_PARM_VALUE_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 
 
 mode JOB1_MODE ;
@@ -1599,12 +1728,18 @@ JOB_ACCT_COMMA_WS_NEWLINE : NEWLINE ->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_NEW
 mode JOB_ACCT_COMMA_WS_NEWLINE_MODE ;
 
 JOB_ACCT_COMMA_WS_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),mode(JOB_ACCT_COMMA_WS_MODE) ;
-JOB_ACCT_COMMA_WS_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE) ;
+JOB_ACCT_COMMA_WS_NEWLINE_SS_WS : SS ' '+ 
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE) ;
 
 mode JOB_ACCT_COMMA_NEWLINE_MODE ;
 
 JOB_ACCT_COMMA_NEWLINE_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),mode(JOB_ACCT_COMMA_NEWLINE_CM_MODE) ;
-JOB_ACCT_COMMA_NEWLINE_SS_WS : SS ' '+ {getText().length() <= 15}? ->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE) ;
+JOB_ACCT_COMMA_NEWLINE_SS_WS : SS ' '+
+    {
+      getText().length() <= 15
+    }? ->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE) ;
 
 mode JOB_ACCT_COMMA_NEWLINE_CM_MODE ;
 
@@ -1701,9 +1836,15 @@ Also note that we mode(COMMA_NEWLINE_MODE) and allow the popMode there to
 take us back into the "parent" mode.
 
 */
-KYWD_VAL_NEWLINE : NEWLINE {_modeStack.clear();} ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+KYWD_VAL_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-KYWD_VAL_WS : [ ]+ {_modeStack.clear();} ->channel(HIDDEN),mode(CM_MODE) ;
+KYWD_VAL_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 
 mode KYWD_VAL_PAREN_MODE ;
 
@@ -1997,26 +2138,38 @@ mode SYSOUT_WRITER_MODE ;
 
 SYSOUT_WRITER_COMMA : COMMA_DFLT ->type(COMMA),pushMode(SYSOUT_FORM_MODE) ;
 SYSOUT_INTRDR : I N T R D R ;
-SYSOUT_WRITER : [A-Z0-9]+ {getText().length() <= 8}? ;
+SYSOUT_WRITER : [A-Z0-9]+
+    {
+      getText().length() <= 8
+    }? ;
 SYSOUT_WRITER_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 SYSOUT_WRITER_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 
 mode SYSOUT_FORM_MODE ;
 
-SYSOUT_FORM : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+SYSOUT_FORM : [A-Z0-9@#$]+
+    {
+      getText().length() <= 4
+    }? ->popMode ;
 SYSOUT_FORM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode UCS_MODE ;
 
 UCS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-UCS_CODE : [A-Z0-9@#$]+ {getText().length() <= 4}? ->popMode ;
+UCS_CODE : [A-Z0-9@#$]+
+    {
+      getText().length() <= 4
+    }? ->popMode ;
 UCS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 UCS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(UCS_PAREN_MODE) ;
 
 mode UCS_PAREN_MODE ;
 
 UCS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),pushMode(UCS_FOLD_MODE) ;
-UCS_PAREN_CODE : [A-Z0-9@#$]+ {getText().length() <= 4}? ->type(UCS_CODE) ;
+UCS_PAREN_CODE : [A-Z0-9@#$]+
+    {
+      getText().length() <= 4
+    }? ->type(UCS_CODE) ;
 UCS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 UCS_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 

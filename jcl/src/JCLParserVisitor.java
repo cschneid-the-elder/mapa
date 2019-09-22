@@ -2703,4 +2703,10 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJes2XEQStatement(JCLParser.Jes2XEQStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#jes2XMITStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJes2XMITStatement(JCLParser.Jes2XMITStatementContext ctx);
 }

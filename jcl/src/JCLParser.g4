@@ -999,7 +999,7 @@ singleOrMultipleValue : (
     RPAREN+)
   ) COMMENT_TEXT? ;
 
-jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement | jes2SetupStatement | jes2SignoffStatement |  jes2SignonStatement | jes2XEQStatement) ;
+jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement | jes2SetupStatement | jes2SignoffStatement |  jes2SignonStatement | jes2XEQStatement | jes2XMITStatement) ;
 
 jes2JobParmStatement : SA JES2_JOBPARM jes2JobParmParameters* ;
 
@@ -1077,5 +1077,9 @@ jes2SignonStatement : SA JES2_SIGNON
 
 jes2XEQStatement : SA JES2_XEQ JES2_XEQ_NODE ;
 
-
+jes2XMITStatement : SA JES2_XMIT JES2_XMIT_NODE
+    (DLM EQUAL (QUOTED_DLM_VAL | DLM_VAL))?
+    DD_ASTERISK_DATA+
+    (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)?
+  ;
 
