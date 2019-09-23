@@ -280,30 +280,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdStatement(JCLParser.DdStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddStatementClosure1}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdStatementClosure1(JCLParser.DdStatementClosure1Context ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddStatementClosure2}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdStatementClosure2(JCLParser.DdStatementClosure2Context ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddStatementClosure3}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdStatementClosure3(JCLParser.DdStatementClosure3Context ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddStatementClosure4}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdStatementClosure4(JCLParser.DdStatementClosure4Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddStatementConcatenation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1125,24 +1101,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJobAccountingInformation(JCLParser.JobAccountingInformationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#jobAccountingInformationSimple}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJobAccountingInformationSimple(JCLParser.JobAccountingInformationSimpleContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#jobAccountingInformationMultiLine}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJobAccountingInformationMultiLine(JCLParser.JobAccountingInformationMultiLineContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#jobAccountingString}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitJobAccountingString(JCLParser.JobAccountingStringContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#jobProgrammerName}.
 	 * @param ctx the parse tree
@@ -2373,6 +2331,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#parenList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParenList(JCLParser.ParenListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#jes2CntlStatement}.
 	 * @param ctx the parse tree

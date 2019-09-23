@@ -457,46 +457,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdStatement(JCLParser.DdStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure1}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdStatementClosure1(JCLParser.DdStatementClosure1Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure1}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdStatementClosure1(JCLParser.DdStatementClosure1Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure2}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdStatementClosure2(JCLParser.DdStatementClosure2Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure2}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdStatementClosure2(JCLParser.DdStatementClosure2Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure3}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdStatementClosure3(JCLParser.DdStatementClosure3Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure3}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdStatementClosure3(JCLParser.DdStatementClosure3Context ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#ddStatementClosure4}.
-	 * @param ctx the parse tree
-	 */
-	void enterDdStatementClosure4(JCLParser.DdStatementClosure4Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#ddStatementClosure4}.
-	 * @param ctx the parse tree
-	 */
-	void exitDdStatementClosure4(JCLParser.DdStatementClosure4Context ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddStatementConcatenation}.
 	 * @param ctx the parse tree
 	 */
@@ -1866,36 +1826,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJobAccountingInformation(JCLParser.JobAccountingInformationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#jobAccountingInformationSimple}.
-	 * @param ctx the parse tree
-	 */
-	void enterJobAccountingInformationSimple(JCLParser.JobAccountingInformationSimpleContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#jobAccountingInformationSimple}.
-	 * @param ctx the parse tree
-	 */
-	void exitJobAccountingInformationSimple(JCLParser.JobAccountingInformationSimpleContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#jobAccountingInformationMultiLine}.
-	 * @param ctx the parse tree
-	 */
-	void enterJobAccountingInformationMultiLine(JCLParser.JobAccountingInformationMultiLineContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#jobAccountingInformationMultiLine}.
-	 * @param ctx the parse tree
-	 */
-	void exitJobAccountingInformationMultiLine(JCLParser.JobAccountingInformationMultiLineContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#jobAccountingString}.
-	 * @param ctx the parse tree
-	 */
-	void enterJobAccountingString(JCLParser.JobAccountingStringContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#jobAccountingString}.
-	 * @param ctx the parse tree
-	 */
-	void exitJobAccountingString(JCLParser.JobAccountingStringContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#jobProgrammerName}.
 	 * @param ctx the parse tree
@@ -3946,6 +3876,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSingleOrMultipleValue(JCLParser.SingleOrMultipleValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#parenList}.
+	 * @param ctx the parse tree
+	 */
+	void enterParenList(JCLParser.ParenListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#parenList}.
+	 * @param ctx the parse tree
+	 */
+	void exitParenList(JCLParser.ParenListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link JCLParser#jes2CntlStatement}.
 	 * @param ctx the parse tree
