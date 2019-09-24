@@ -14,14 +14,6 @@ I do not like thee, JCL.
 
 */
 
-/*
-Comments complicate this grammar, comments and my desire to retain
-them.  The easiest thing to do with comments is route them to
-channel(HIDDEN) but my experience is that comments in JCL can be
-very useful so I went through the effort to keep them around.
-
-*/
-
 parser grammar JCLParser;
 
 options {tokenVocab=JCLLexer;}
@@ -55,14 +47,23 @@ procName : NAME_FIELD ;
 jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ;
 
 /*
-TODO
-If I can figure out a way to only match SYMBOLIC_SUBSTRING after I've
-matched SYMBOLIC then I can reinstate this.  Until then, substringing
-system symbols will have to wait.
-keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE | (SYMBOLIC SYMBOLIC_SUBSTRING?)) ;
+System symbols can be substringed...
+
+&SYSCLONE(2:1)
+
+...and you can detect this is your application code by looking for...
+
+KEYWORD_VALUE LPAREN number : number RPAREN
+
+...which, I'm afraid, is all the help I'm willing to provide.
+
+Also keep in mind that system symbols may be prefixed by _two_
+ampersands, indicating the interpretation of the symbol is to be
+deferred until after the JCL has begun "executing."
+
 */
 
-keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE | SYMBOLIC) ;
+keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE) ;
 
 execStatement : execPgmStatement | execProcStatement ;
 
@@ -207,7 +208,7 @@ ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
 ddParmCHARS : CHARS EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN? ;
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL ddParmReferback ;
-ddParmCOPIES : COPIES EQUAL singleOrMultipleValue ;
+ddParmCOPIES : COPIES EQUAL copiesPayload ;
 ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
 ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
 ddParmDATA : DATA ;
@@ -257,7 +258,7 @@ ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? COMMA? ddParmDISP_NORMAL_TERM
 ddParmDISP_STATUS : DISP_MOD | DISP_NEW | DISP_OLD | DISP_SHR | SYMBOLIC ;
 ddParmDISP_NORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDISP_ABNORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
-ddParmDLM : DLM EQUAL (DLM_VAL | QUOTED_DLM_VAL) ;
+ddParmDLM : DLM EQUAL (DLM_VAL | QUOTED_STRING_FRAGMENT) ;
 ddParmDSID : DSID EQUAL (
     DSID_VALUE | 
     SYMBOLIC |
@@ -676,12 +677,23 @@ outputStatementCHARS_value : singleOrMultipleValue ;
 outputStatementCKPTLINE : OUTPUT_STMT_CKPTLINE EQUAL keywordOrSymbolic ;
 outputStatementCKPTPAGE : OUTPUT_STMT_CKPTPAGE EQUAL keywordOrSymbolic ;
 outputStatementCKPTSEC : OUTPUT_STMT_CKPTSEC EQUAL keywordOrSymbolic ;
-outputStatementCLASS : OUTPUT_STMT_CLASS EQUAL (OUTPUT_CLASS_VALUE | SYMBOLIC | QUOTED_STRING_FRAGMENT)? ;
+outputStatementCLASS : OUTPUT_STMT_CLASS EQUAL keywordOrSymbolic? ;
 outputStatementCOLORMAP : OUTPUT_STMT_COLORMAP EQUAL keywordOrSymbolic ;
 outputStatementCOMPACT : OUTPUT_STMT_COMPACT EQUAL keywordOrSymbolic ;
 outputStatementCOMSETUP : OUTPUT_STMT_COMSETUP EQUAL keywordOrSymbolic ;
 outputStatementCONTROL : OUTPUT_STMT_CONTROL EQUAL keywordOrSymbolic ;
-outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL singleOrMultipleValue ;
+outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL copiesPayload ;
+copiesPayload : (
+    copiesValueOrSymbolic |
+    (LPAREN copiesValueOrSymbolic RPAREN) |
+    (LPAREN
+      copiesValueOrSymbolic?
+      LPAREN
+        (COPIES_GROUP_VALUE | SYMBOLIC)+
+      RPAREN
+    RPAREN)
+  ) ;
+copiesValueOrSymbolic : (COPIES_VALUE | SYMBOLIC) ;
 outputStatementCOPYCNT : OUTPUT_STMT_COPYCNT EQUAL keywordOrSymbolic ;
 outputStatementDATACK : OUTPUT_STMT_DATACK EQUAL keywordOrSymbolic ;
 outputStatementDDNAME : OUTPUT_STMT_DDNAME EQUAL keywordOrSymbolic ;
@@ -807,7 +819,7 @@ xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStateme
 
 xmitParmDEST : DEST EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 
-xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_DLM_VAL) COMMENT_TEXT? ;
+xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_STRING_FRAGMENT) COMMENT_TEXT? ;
 
 xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic COMMENT_TEXT? ;
 
@@ -1006,7 +1018,7 @@ jes2SignonStatement : SA JES2_SIGNON
 jes2XEQStatement : SA JES2_XEQ JES2_XEQ_NODE ;
 
 jes2XMITStatement : SA JES2_XMIT JES2_XMIT_NODE
-    (DLM EQUAL (QUOTED_DLM_VAL | DLM_VAL))?
+    (DLM EQUAL (QUOTED_STRING_FRAGMENT | DLM_VAL))?
     DD_ASTERISK_DATA+
     (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)?
   ;

@@ -52,12 +52,7 @@ is comments and not to be recognized as parameters.
 //          SPACE=(80,(10,10),RLSE,CONTIG,ROUND) end of statement
 
 Also, it is difficult to overstate the ugliness of the DLM parameter in
-conjunction with DD * and DD DATA.  More modes, along with globals.
-
-And don't get me started on job accounting information and how it's just
-enough different from step accounting information to make for more modes.
-
-Parm strings are no fun either.
+conjunction with DD * and DD DATA.
 
 Sometimes a parameter and an operation look identical, e.g. NOTIFY.
 
@@ -126,22 +121,6 @@ SYMBOLIC : AMPERSAND [A-Z0-9@#$]+
     {
       getText().length() <= 9
     }? ;
-
-/*
-TODO The only time we should match this is after matching a SYMBOLIC.
-
-Maybe in KYWD mode?
-
-SYMBOLIC_SUBSTRING : (
-    LPAREN_DFLT
-      (
-        (NUM ':' NUM) |
-        (NUM)
-      )?  
-    RPAREN_DFLT
-  ) ;
-
-*/
 
 ALPHA : [A-Z] ;
 AMPERSAND : '&' ;
@@ -483,7 +462,7 @@ DD_CCSID : C C S I D ->type(CCSID),pushMode(KYWD_VAL_MODE) ;
 DD_CHARS : C H A R S ->type(CHARS),pushMode(KYWD_VAL_MODE) ;
 DD_CHKPT : C H K P T ->type(CHKPT),pushMode(KYWD_VAL_MODE) ;
 DD_CNTL : C N T L ->type(CNTL),pushMode(DSN_MODE) ;
-DD_COPIES : C O P I E S ->type(COPIES),pushMode(KYWD_VAL_MODE) ;
+DD_COPIES : C O P I E S ->type(COPIES),pushMode(COPIES_MODE) ;
 DD_DATA : D A T A
     {
       dlmVals = new java.util.ArrayList();
@@ -648,12 +627,12 @@ OUTPUT_STMT_CHARS : C H A R S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_CKPTLINE : C K P T L I N E ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_CKPTPAGE : C K P T P A G E ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_CKPTSEC : C K P T S E C ->pushMode(KYWD_VAL_MODE) ;
-OUTPUT_STMT_CLASS : C L A S S ->pushMode(OUTPUT_CLASS_MODE) ;
+OUTPUT_STMT_CLASS : C L A S S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_COLORMAP : C O L O R M A P ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_COMPACT : C O M P A C T ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_COMSETUP : C O M S E T U P ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_CONTROL : C O N T R O L ->pushMode(KYWD_VAL_MODE) ;
-OUTPUT_STMT_COPIES : C O P I E S ->pushMode(KYWD_VAL_MODE) ;
+OUTPUT_STMT_COPIES : C O P I E S ->pushMode(COPIES_MODE) ;
 OUTPUT_STMT_COPYCNT : C O P Y C N T ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_DATACK : D A T A C K ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_DDNAME : D D N A M E ->pushMode(KYWD_VAL_MODE) ;
@@ -718,23 +697,6 @@ OUTPUT_STMT_USERLIB : U S E R L I B ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_USERPATH : U S E R P A T H ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_WRITER : W R I T E R ->pushMode(KYWD_VAL_MODE) ;
 
-
-mode OUTPUT_CLASS_MODE ;
-
-OUTPUT_CLASS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-OUTPUT_CLASS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-OUTPUT_CLASS_VALUE : [A-Z0-9*] ->popMode ;
-OUTPUT_CLASS_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
-OUTPUT_CLASS_NEWLINE : NEWLINE
-    {
-      _modeStack.clear();
-    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
-OUTPUT_CLASS_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-OUTPUT_CLASS_WS : [ ]+
-    {
-      _modeStack.clear();
-    } ->channel(HIDDEN),mode(CM_MODE) ;
-OUTPUT_CLASS_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 
 mode OUTPUT_FLASH_MODE ;
 
@@ -1322,24 +1284,12 @@ DATA_PARM_MODE_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 mode DLM_MODE ;
 
 DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
-DLM_SQUOTE : '\'' ->channel(HIDDEN),pushMode(DLM_QS);
+DLM_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS);
 DLM_VAL : [A-Z0-9@#$_\-]+ 
     {
         dlmVals = new java.util.ArrayList();
         dlmVals.add(getText());
     } ->popMode ;
-
-mode DLM_QS ;
-
-DLM_QS_SQUOTE2 : SQUOTE SQUOTE ;
-DLM_QS_SQUOTE : SQUOTE ->channel(HIDDEN),popMode,popMode ;
-fragment ANYCHAR_NODLM_QS_SQUOTE : ~['\n\r] ;
-
-QUOTED_DLM_VAL : (ANYCHAR_NOSQUOTE+ | DLM_QS_SQUOTE2+) 
-    {
-        dlmVals = new java.util.ArrayList();
-        dlmVals.add(getText());
-    } ;
 
 mode DATA_PARM_CM_MODE ;
 
@@ -1406,12 +1356,12 @@ fragment SQUOTE2_QS : SQUOTE SQUOTE ;
 SQUOTE_QS : SQUOTE
     {
       switch(_modeStack.peek()) {
-        case OUTPUT_CLASS_MODE :
         case AMP_MODE :
         case SYSOUT_MODE :
         case KYWD_VAL_MODE :
         case DCB_MODE :
         case DSN_MODE :
+        case DLM_MODE :
             popMode();
             popMode();
             break;
@@ -1446,6 +1396,10 @@ QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
         case JOBGROUP_PROGRAMMER_NAME_MODE :
             setType(QUOTED_STRING_PROGRAMMER_NAME);
             break;
+        case DLM_MODE :
+            dlmVals = new java.util.ArrayList();
+            dlmVals.add(getText());
+            break;
         default :
             break;
       }
@@ -1453,7 +1407,6 @@ QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
   ;
 
 mode QS_SS ;
-//TODO handle //* comments here and in clones thereof
 SS_QS : SS
     {
       getCharPositionInLine() == 2
@@ -1870,7 +1823,24 @@ JOB_PROGRAMMER_NAME_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 mode KYWD_VAL_MODE ;
 
 KYWD_VAL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-//KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+/*
+Originally I had coded...
+
+KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+
+...but that, coupled with the need to popMode after a match, precluded
+detecting...
+
+keyWord=&symbolic1&symbolic2&symbolic3
+
+...so I added '&' to the regex for KEYWORD_VALUE and now all is right
+with the world.  Except users of this grammar must inspect KEYWORD_VALUE
+in their application code to detect symbolics.  However, having ':' 
+embedded in the regex for KEYWORD_VALUE means that such users can also
+detect substringed system symbolics.  So we've got that going for us.
+
+*/
+
 KEYWORD_VALUE : [A-Z0-9@#$*\-+&./%[:]+ ->popMode ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
@@ -1889,7 +1859,7 @@ if it's being continued, or if it's got a comment in either of those
 two situations.
 
 Also note that we mode(COMMA_NEWLINE_MODE) and allow the popMode there to
-take us back into the "parent" mode.
+take us back into the "parent" mode.  Same for COMMA_WS_MODE.
 
 */
 KYWD_VAL_NEWLINE : NEWLINE
@@ -1897,6 +1867,7 @@ KYWD_VAL_NEWLINE : NEWLINE
       _modeStack.clear();
     } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
 KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+KYWD_VAL_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 KYWD_VAL_WS : [ ]+
     {
       _modeStack.clear();
@@ -1905,7 +1876,6 @@ KYWD_VAL_WS : [ ]+
 mode KYWD_VAL_PAREN_MODE ;
 
 KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
-//KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
 KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
@@ -1948,6 +1918,28 @@ AMP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 AMP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 AMP_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 AMP_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+
+mode COPIES_MODE ;
+
+COPIES_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+COPIES_VALUE : [0-9]+ ->popMode ;
+COPIES_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+COPIES_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(COPIES_PAREN_MODE) ;
+
+mode COPIES_PAREN_MODE ;
+
+COPIES_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+COPIES_PAREN_VALUE : COPIES_VALUE ->type(COPIES_VALUE) ;
+COPIES_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+COPIES_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(COPIES_GROUP_MODE) ;
+COPIES_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ; 
+
+mode COPIES_GROUP_MODE ;
+
+COPIES_GROUP_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+COPIES_GROUP_VALUE : COPIES_VALUE ;
+COPIES_GROUP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+COPIES_GROUP_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ; 
 
 mode DISP_MODE ;
 

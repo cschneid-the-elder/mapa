@@ -3099,6 +3099,30 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCopiesPayload(JCLParser.CopiesPayloadContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopiesPayload(JCLParser.CopiesPayloadContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCopiesValueOrSymbolic(JCLParser.CopiesValueOrSymbolicContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopiesValueOrSymbolic(JCLParser.CopiesValueOrSymbolicContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOutputStatementCOPYCNT(JCLParser.OutputStatementCOPYCNTContext ctx) { }
 	/**
 	 * {@inheritDoc}
