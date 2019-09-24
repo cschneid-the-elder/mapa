@@ -56,6 +56,8 @@ conjunction with DD * and DD DATA.
 
 Sometimes a parameter and an operation look identical, e.g. NOTIFY.
 
+JES3 control statements are not currently supported.
+
 You must strip the line numbers from your JCL before processing with this
 grammar.  Line numbers are in byte positions 73 - 80 of each JCL record
 and have served no purpose since the demise of the punched card deck.
@@ -129,10 +131,6 @@ ASTERISK : '*' ;
 COMMA_DFLT : ',' ->type(COMMA),channel(HIDDEN) ;
 DOT_DFLT : '.' ->type(DOT) ;
 EQUAL_DFLT : '=' ->type(EQUAL) ;
-FALSE_DFLT : F A L S E ->type(FALSE) ;
-HYPHEN : '-' ;
-
-KEY : K E Y ;
 LPAREN_DFLT : '(' ->type(LPAREN) ;
 fragment NATL : [@#$] ;
 
@@ -146,7 +144,6 @@ SLASH : '/' ;
 SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 fragment SQUOTE2 : SQUOTE SQUOTE ;
 
-USCORE : '_' ;
 WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 
 fragment ANYCHAR : ~[\n\r] ;
@@ -261,7 +258,7 @@ CNTL_OP : C N T L ->mode(CNTL_MODE),type(CNTL) ;
 COMMAND_OP : C O M M A N D ->mode(COMMAND_MODE),type(COMMAND) ;
 DD_OP : D D ->mode(DD_MODE),type(DD) ;
 ELSE_OP : E L S E ->mode(CM_MODE),type(ELSE) ;
-ENDCNTL_OP : E N D C N T L ->mode(POST_OP_MODE),type(ENDCNTL) ;
+ENDCNTL_OP : E N D C N T L ->mode(CM_MODE),type(ENDCNTL) ;
 ENDIF_OP : E N D I F ->mode(CM_MODE),type(ENDIF) ;
 EXEC_OP : E X E C ->mode(EXEC1_MODE),type(EXEC) ;
 EXPORT_OP : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
@@ -271,7 +268,7 @@ JCLLIB_OP : J C L L I B ->mode(JCLLIB_MODE),type(JCLLIB) ;
 JOB_OP : J O B ->mode(JOB1_MODE),type(JOB) ;
 NOTIFY_OP : N O T I F Y ->mode(NOTIFY_STMT_MODE) ;
 OUTPUT_OP : O U T P U T ->mode(OUTPUT_STMT_MODE),type(OUTPUT) ;
-PEND_OP : P E N D ->mode(POST_OP_MODE),type(PEND) ;
+PEND_OP : P E N D ->mode(CM_MODE),type(PEND) ;
 PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
 SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
 SET_OP : S E T ->mode(SET_MODE),type(SET) ;
@@ -295,11 +292,6 @@ JCL_COMMAND : [A-Z0-9@#$]+ ->mode(JCL_COMMAND_MODE) ;
 
 WS_OP : [ ]+ ->channel(HIDDEN) ;
 NEWLINE_OP : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-
-mode POST_OP_MODE ;
-
-WS_POST_OP : [ ]+ ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-NEWLINE_POST_OP : [\n\r] ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode COMMAND_MODE ;
 
@@ -1443,7 +1435,7 @@ DSN_MODE_DATASET_NAME : (
     (AMPERSAND AMPERSAND NAME) | 
     (
         (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | HYPHEN | '+' | '%' | LPAREN_DFLT | RPAREN_DFLT)*
+          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '-' | '+' | '%' | LPAREN_DFLT | RPAREN_DFLT)*
     )
   )
   ->type(DATASET_NAME),popMode 
@@ -2241,7 +2233,10 @@ mode UNIT_MODE ;
 UNIT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 UNIT_AFF : A F F ->pushMode(UNIT_AFF_MODE) ;
 UNIT_NUMBER : (UNIT_3DIGIT | UNIT_4DIGIT) ->popMode ;
-UNIT_GROUP_NAME : [A-Z0-9]+ {getText().length() <= 8}? ->popMode ;
+UNIT_GROUP_NAME : [A-Z0-9]+
+    {
+      getText().length() <= 8
+    }? ->popMode ;
 UNIT_DEVICE_TYPE : [A-Z0-9-]+ ->popMode ;
 UNIT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 UNIT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(UNIT_PAREN_MODE) ;
@@ -2259,7 +2254,10 @@ mode UNIT_PAREN_MODE ;
 
 UNIT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(UNIT_COUNT_MODE) ;
 UNIT_PAREN_NUMBER : UNIT_NUMBER ->type(UNIT_NUMBER) ;
-UNIT_PAREN_GROUP_NAME : UNIT_GROUP_NAME {getText().length() <= 8}? ->type(UNIT_GROUP_NAME) ;
+UNIT_PAREN_GROUP_NAME : UNIT_GROUP_NAME
+    {
+      getText().length() <= 8
+    }? ->type(UNIT_GROUP_NAME) ;
 UNIT_PAREN_DEVICE_TYPE : UNIT_DEVICE_TYPE ->type(UNIT_DEVICE_TYPE) ;
 UNIT_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 UNIT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
@@ -2315,7 +2313,7 @@ VOL_SER1_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER1_PAREN_MODE) ;
 
 mode VOL_SER1_PAREN_MODE ;
 
-VOL_SER1_PAREN : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
+VOL_SER1_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
 VOL_SER1_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER1_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 VOL_SER1_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
@@ -2367,7 +2365,7 @@ VOL_SER2_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SER3_MODE ;
 
-VOL_SER3 : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
+VOL_SER3 : VOL_SER_NB ->type(VOL_SER_NB) ;
 VOL_SER3_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 VOL_SER3_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER3_PAREN_MODE) ;
@@ -2375,7 +2373,7 @@ VOL_SER3_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,pop
 
 mode VOL_SER3_PAREN_MODE ;
 
-VOL_SER3_PAREN : [A-Z0-9@#$-]+ ->type(VOL_SER_NB) ;
+VOL_SER3_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
 VOL_SER3_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
