@@ -130,4 +130,24 @@
 //  (90,LE,STEP001),           step001le90
 //  (31,EQ,STEP002B.STEPX),    step002beq31
 //  EVEN)                      even
+//STEP017  EXEC PROC=IAYEAYE,
+// APARM1='ALEX',
+// PARM.STEPA=&A,              parm
+// APARM2='AMOS',
+// ACCT.STEPA=A1,              acctA
+// APARM3='BOBBIE',
+// TIME.STEPA=10,              timeA
+// APARM4='CLARISSA',
+// ACCT.STEPB=('A1+','B2(1)'), acctB
+// APARM5='JAMES',
+// TIME.STEPB=(10),            timeB
+// APARM6='NAOMI',
+// TIME.STEPC=&TM,             timeC
+// APARM7=THE_EXPANSE,
+// TIME.STEPD=(,10),
+// TIME.STEPE=(1,10),
+// COND=((16,GE),              any16
+//  (90,LE,STEP001),           step001le90
+//  (31,EQ,STEP002B.STEPX),    step002beq31
+//  EVEN)                      even
 

@@ -42,14 +42,16 @@ COMMENTS
 is comments and not to be recognized as parameters.
 
 //ELBOW JOB 'HI THERE',TIME=7 HERE IS A COMMENT
-//ZEBRA EXEC PGM=J8765309 ,PARM='THIS IS A COMMENT STARTING AT THE COMMA'
-//DD001 DD  DISP=SHR,DSN=SYS1.PARMLIB
-//DD002 DD  DISP=(NEW,CATLG,DELETE),
-//          DSN=THIS.IS.STILL.THE.DD002.STMT,
-//          MGMTCLAS=STD, still the same statement
-//          AVGREC=K, still the same statement
-//          LRECL=80, still the same statement
-//          SPACE=(80,(10,10),RLSE,CONTIG,ROUND) end of statement
+//ZEBRA    EXEC PGM=J8765309 ,PARM='THIS IS A COMMENT STARTING AT THE COMMA'
+//STEPLIB  DD  DISP=SHR,DSN=PATCH.LIB
+//         DD  DISP=SHR,DSN=PROD.LIB
+//DD001    DD  DISP=SHR,DSN=SYS1.PARMLIB
+//DD002    DD  DISP=(NEW,CATLG,DELETE),
+//             DSN=THIS.IS.STILL.THE.DD002.STMT,
+//             MGMTCLAS=STD, still the same statement
+//             AVGREC=K, still the same statement
+//             LRECL=80, still the same statement
+//             SPACE=(80,(10,10),RLSE,CONTIG,ROUND) end of statement
 
 Also, it is difficult to overstate the ugliness of the DLM parameter in
 conjunction with DD * and DD DATA.
@@ -1833,7 +1835,7 @@ detect substringed system symbolics.  So we've got that going for us.
 
 */
 
-KEYWORD_VALUE : [A-Z0-9@#$*\-+&./%[:]+ ->popMode ;
+KEYWORD_VALUE : [A-Z0-9@#$*\-+&./%[:_]+ ->popMode ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
 /*

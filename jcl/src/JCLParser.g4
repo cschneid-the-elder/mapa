@@ -31,10 +31,7 @@ procStatement : SS procName? PROC definedSymbolicParameters* ;
 
 defineSymbolicParameter : PROC_PARM_NAME EQUAL (QUOTED_STRING_FRAGMENT | PROC_PARM_VALUE)? ;
 
-definedSymbolicParameters : defineSymbolicParameter (
-    ((COMMA | (inlineComment SS CONTINUATION_WS)) defineSymbolicParameter)* |
-    (COMMENT_TEXT?)
-  ) ;
+definedSymbolicParameters : defineSymbolicParameter+ ;
 
 commentStatement : COMMENT_FLAG (COMMENT_TEXT | EOF)? ;
 
@@ -67,31 +64,11 @@ keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE) ;
 
 execStatement : execPgmStatement | execProcStatement ;
 
-execPgmStatement : SS stepName? EXEC PGM EQUAL keywordOrSymbolic (
-    execPgmClosure1 |
-    execPgmClosure2 |
-    execPgmClosure3 |
-    execPgmClosure4 |
-    execPgmClosure5
-  )*? ;
-execPgmClosure1 : COMMA commentStatement* SS execParameter inlineComment? ;
-execPgmClosure2 : COMMA SS execParameter inlineComment? ;
-execPgmClosure3 : COMMA? execParameter inlineComment? ;
-execPgmClosure4 : inlineComment commentStatement* SS? execParameter inlineComment? ;
-execPgmClosure5 : inlineComment commentStatement* EOF ;
+execPgmStatement : SS stepName? EXEC PGM EQUAL keywordOrSymbolic execParameter* ;
 
-execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? keywordOrSymbolic (
-    execProcClosure1 |
-    execProcClosure2 |
-    execProcClosure3 |
-    execProcClosure4 |
-    execProcClosure5
-  )*? ;
-execProcClosure1 : COMMA commentStatement* SS (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
-execProcClosure2 : COMMA SS (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
-execProcClosure3 : COMMA (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
-execProcClosure4 : inlineComment commentStatement* SS? (defineSymbolicParameter | execParameterOverrides) inlineComment? ;
-execProcClosure5 : inlineComment commentStatement* EOF ;
+execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? keywordOrSymbolic (execProcParm | execParameterOverrides)* ;
+
+execProcParm : EXEC_PROC_PARM EQUAL keywordOrSymbolic ;
 
 /*
 Some of the parameters for the EXEC statement are identical to those
@@ -120,13 +97,9 @@ execParmCOND : EXEC_COND EQUAL (
     (
       LPAREN? 
         (
-          COMMA?
-          COMMENT_TEXT?
-          commentStatement*
           LPAREN?
-            keywordOrSymbolic (COMMA keywordOrSymbolic)*
+            keywordOrSymbolic+
           RPAREN?
-          COMMENT_TEXT?
         )+
       RPAREN?
     )
@@ -146,21 +119,11 @@ execParmRD : EXEC_RD EQUAL keywordOrSymbolic ;
 
 execParmREGION : EXEC_REGION EQUAL keywordOrSymbolic;
 
-execParmREGIONX : EXEC_REGIONX EQUAL 
-    LPAREN?
-        keywordOrSymbolic
-            (COMMA keywordOrSymbolic)? 
-    RPAREN?
-  ;
+execParmREGIONX : EXEC_REGIONX EQUAL singleOrMultipleValue ;
 
 execParmRLSTMOUT : EXEC_RLSTMOUT EQUAL keywordOrSymbolic ;
 
-execParmTIME : EXEC_TIME EQUAL 
-    LPAREN? (
-        keywordOrSymbolic |
-        (keywordOrSymbolic (COMMA keywordOrSymbolic)?) |
-        (keywordOrSymbolic? COMMA keywordOrSymbolic)
-    ) RPAREN? ;
+execParmTIME : EXEC_TIME EQUAL singleOrMultipleValue ;
 
 execParmTVSMSG : EXEC_TVSMSG EQUAL keywordOrSymbolic ;
 
@@ -168,11 +131,6 @@ execParmTVSAMCOM : EXEC_TVSAMCOM EQUAL parenList ;
 
 ddStatement : SS ddName DD ddParameter* ddParmASTERISK_DATA* ;
 
-/*ddStatementClosure1 : COMMA? commentStatement* SS? ddParameter inlineComment? ;
-ddStatementClosure2 : COMMA? COMMENT_FLAG? COMMENT_TEXT? SS? ddParameter inlineComment? ;
-ddStatementClosure3 : COMMA? ddParameter inlineComment? ;
-ddStatementClosure4 : inlineComment commentStatement* SS? ddParameter inlineComment? ;
-*/
 ddStatementConcatenation : SS DD ddParameter* ddParmASTERISK_DATA* ;
 
 ddStatementAmalgamation : ddStatement ddStatementConcatenation* ;
@@ -184,10 +142,10 @@ ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmB
 ddParmACCODE : ACCODE EQUAL keywordOrSymbolic;
 ddParmAMP : AMP EQUAL (
     (LPAREN 
-        QUOTED_STRING_FRAGMENT ((COMMA | inlineComment)? SS? COMMENT_TEXT? QUOTED_STRING_FRAGMENT)*
+        (AMORG | QUOTED_STRING_FRAGMENT+)
     RPAREN) |
-    (QUOTED_STRING_FRAGMENT inlineComment?) |
-    (LPAREN? AMORG RPAREN?)
+    QUOTED_STRING_FRAGMENT |
+    AMORG
   ) ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
@@ -205,7 +163,7 @@ ddParmBUFOUT : BUFOUT EQUAL keywordOrSymbolic ;
 ddParmBUFSIZE : BUFSIZE EQUAL keywordOrSymbolic ;
 ddParmBURST : BURST EQUAL keywordOrSymbolic ;
 ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
-ddParmCHARS : CHARS EQUAL LPAREN? keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN? ;
+ddParmCHARS : CHARS EQUAL singleOrMultipleValue ;
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL ddParmReferback ;
 ddParmCOPIES : COPIES EQUAL copiesPayload ;
@@ -235,11 +193,7 @@ DCB parameter...
 ddParmDCB : DCB EQUAL (
     ddParmDCB_Parameter | 
     (LPAREN 
-        ddParmDCB_Parameter (
-            (COMMA? COMMENT_TEXT? SS? ddParmDCB_Parameter) |
-            (COMMA commentStatement* SS? ddParmDCB_Parameter) |
-            (inlineComment SS? ddParmDCB_Parameter)
-          )*
+        ddParmDCB_Parameter+
     RPAREN) 
   ) ;
 
@@ -254,7 +208,7 @@ ddParmDEST : DEST EQUAL  (
   )
   ;
 ddParmDIAGNS : DIAGNS EQUAL KEYWORD_VALUE ;
-ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? COMMA? ddParmDISP_NORMAL_TERM? COMMA? ddParmDISP_ABNORMAL_TERM? RPAREN? ;
+ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? ddParmDISP_NORMAL_TERM? ddParmDISP_ABNORMAL_TERM? RPAREN? ;
 ddParmDISP_STATUS : DISP_MOD | DISP_NEW | DISP_OLD | DISP_SHR | SYMBOLIC ;
 ddParmDISP_NORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDISP_ABNORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
@@ -301,13 +255,9 @@ ddParmLABEL : LABEL EQUAL (
     (LPAREN ddParmEXPDT RPAREN) |
     (LPAREN
         (LABEL_SEQUENCE | SYMBOLIC)? 
-        COMMA? 
         (LABEL_TYPE | SYMBOLIC)? 
-        COMMA? 
         (LABEL_PASSWORD_PROTECT | SYMBOLIC)? 
-        COMMA? 
         (LABEL_I_O | SYMBOLIC)?
-        COMMA?
         (ddParmRETPD | ddParmEXPDT)?
     RPAREN)
   ) ;
@@ -561,7 +511,6 @@ jobParmMSGCLASS : MSGCLASS EQUAL keywordOrSymbolic ;
 
 jobParmMSGLEVEL : MSGLEVEL EQUAL singleOrMultipleValue ;
 
-
 jobParmNOTIFY : NOTIFY EQUAL keywordOrSymbolic ;
 
 nameOrSymbolic : ((NAME (DOT NAME)?) | SYMBOLIC) ;
@@ -620,8 +569,6 @@ ifKeyword : (ABEND | ABENDCC | RUN | RC) ;
 ifTest : IF_STEP? ifKeyword
     (ifRelOp (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
 
-
- 
 elseStatement : SS NAME_FIELD? ELSE ;
 
 endifStatement : SS NAME_FIELD? ENDIF ;
@@ -633,29 +580,10 @@ jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL singleOrMultiple
 notifyStatement : SS NAME_FIELD? NOTIFY_OP notifyParms+ ;
 
 notifyParms : notifyEMAIL | notifyUSER | notifyTYPE | notifyWHEN ;
-interveningCruft : (COMMA | inlineComment) SS? commentStatement* ;
 notifyEMAIL : NOTIFY_STMT_PARM_EMAIL EQUAL keywordOrSymbolic ;
 notifyUSER : NOTIFY_STMT_PARM_USER EQUAL keywordOrSymbolic ;
 notifyTYPE : NOTIFY_STMT_PARM_TYPE EQUAL keywordOrSymbolic ;
 notifyWHEN : NOTIFY_STMT_PARM_WHEN EQUAL keywordOrSymbolic ;
-
-/*
-This syntax would be correct if the WHEN parameter of the NOTIFY statement
-followed that of the IF statement.  It is documented as doing so, but the
-examples all show WHEN=quoted-string.
-
-          WHEN EQUAL
-            NOT_SYMBOL* LPAREN*
-              whenTest RPAREN* SS? (WHEN_LOGICAL SS? NOT_SYMBOL* LPAREN* SS? whenTest SS? RPAREN*)*
-            RPAREN*
-
-
-
-whenKeyword : ABEND | ABENDCC | RUN | RC | SECERR | JCLERR ;
-whenTest : whenKeyword
-    (WHEN_REL_OP (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
-*/
-
 
 outputStatement : SS NAME_FIELD? OUTPUT outputStatementParameter+ ;
 
@@ -667,13 +595,7 @@ outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRI
 outputStatementAFPSTATS : OUTPUT_STMT_AFPSTATS EQUAL keywordOrSymbolic ;
 outputStatementBUILDING : OUTPUT_STMT_BUILDING EQUAL keywordOrSymbolic ;
 outputStatementBURST : OUTPUT_STMT_BURST EQUAL keywordOrSymbolic ;
-outputStatementCHARS : OUTPUT_STMT_CHARS EQUAL (
-    (LPAREN outputStatementCHARS_value
-        ((COMMA | (inlineComment SS CONTINUATION_WS)) outputStatementCHARS_value)*
-    RPAREN) |
-    outputStatementCHARS_value
-  ) ;
-outputStatementCHARS_value : singleOrMultipleValue ;
+outputStatementCHARS : OUTPUT_STMT_CHARS EQUAL singleOrMultipleValue ;
 outputStatementCKPTLINE : OUTPUT_STMT_CKPTLINE EQUAL keywordOrSymbolic ;
 outputStatementCKPTPAGE : OUTPUT_STMT_CKPTPAGE EQUAL keywordOrSymbolic ;
 outputStatementCKPTSEC : OUTPUT_STMT_CKPTSEC EQUAL keywordOrSymbolic ;
@@ -831,7 +753,7 @@ jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | JOBGROUP_ACCT_UNQUOTED_STR
 
 jobGroupAccountingInformation : jobGroupAccountingInformationSimple | jobGroupAccountingInformationMultiLine ;
 
-jobGroupAccountingInformationSimple : jobGroupAccountingString (COMMA jobGroupAccountingString?)* ;
+jobGroupAccountingInformationSimple : jobGroupAccountingString+ ;
 jobGroupAccountingInformationMultiLine : jobGroupAccountingString (COMMA? SS? jobGroupAccountingString)* ;
 jobGroupProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME | JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING+) ;
 
@@ -852,7 +774,6 @@ jobGroupCondition :
       NOT_SYMBOL* jobGroupERROR_Test 
         (JOBGROUP_ERROR_LOGICAL NOT_SYMBOL* LPAREN* jobGroupERROR_Test RPAREN*)*
     RPAREN*
-    COMMENT_TEXT?
   ;
 jobGroupERROR_RelOp : (
     JOBGROUP_ERROR_EQ | 
@@ -933,7 +854,7 @@ singleOrMultipleValue : (
       parenList
     RPAREN) |
     (LPAREN+
-      keywordOrSymbolic (COMMA? COMMENT_TEXT? keywordOrSymbolic RPAREN?)*
+      keywordOrSymbolic (keywordOrSymbolic RPAREN?)*
     RPAREN+)
   ) COMMENT_TEXT? ;
 
