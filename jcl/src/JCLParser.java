@@ -2216,7 +2216,7 @@ public class JCLParser extends Parser {
 			setState(1011);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==CCSID || ((((_la - 242)) & ~0x3f) == 0 && ((1L << (_la - 242)) & ((1L << (EXEC_ACCT - 242)) | (1L << (EXEC_ADDRSPC - 242)) | (1L << (EXEC_COND - 242)) | (1L << (EXEC_DYNAMNBR - 242)) | (1L << (EXEC_MEMLIMIT - 242)) | (1L << (EXEC_PARM - 242)) | (1L << (EXEC_PARMDD - 242)) | (1L << (EXEC_PERFORM - 242)) | (1L << (EXEC_RD - 242)) | (1L << (EXEC_REGION - 242)) | (1L << (EXEC_REGIONX - 242)) | (1L << (EXEC_RLSTMOUT - 242)) | (1L << (EXEC_TIME - 242)) | (1L << (EXEC_TVSMSG - 242)) | (1L << (EXEC_TVSAMCOM - 242)))) != 0)) {
+			while (((((_la - 242)) & ~0x3f) == 0 && ((1L << (_la - 242)) & ((1L << (EXEC_ACCT - 242)) | (1L << (EXEC_ADDRSPC - 242)) | (1L << (EXEC_CCSID - 242)) | (1L << (EXEC_COND - 242)) | (1L << (EXEC_DYNAMNBR - 242)) | (1L << (EXEC_MEMLIMIT - 242)) | (1L << (EXEC_PARM - 242)) | (1L << (EXEC_PARMDD - 242)) | (1L << (EXEC_PERFORM - 242)) | (1L << (EXEC_RD - 242)) | (1L << (EXEC_REGION - 242)) | (1L << (EXEC_REGIONX - 242)) | (1L << (EXEC_RLSTMOUT - 242)) | (1L << (EXEC_TIME - 242)) | (1L << (EXEC_TVSMSG - 242)) | (1L << (EXEC_TVSAMCOM - 242)))) != 0)) {
 				{
 				{
 				setState(1008);
@@ -2506,7 +2506,7 @@ public class JCLParser extends Parser {
 				execParmADDRSPC();
 				}
 				break;
-			case CCSID:
+			case EXEC_CCSID:
 				enterOuterAlt(_localctx, 3);
 				{
 				setState(1037);
@@ -2862,7 +2862,7 @@ public class JCLParser extends Parser {
 	}
 
 	public static class ExecParmCCSIDContext extends ParserRuleContext {
-		public TerminalNode CCSID() { return getToken(JCLParser.CCSID, 0); }
+		public TerminalNode EXEC_CCSID() { return getToken(JCLParser.EXEC_CCSID, 0); }
 		public TerminalNode EQUAL() { return getToken(JCLParser.EQUAL, 0); }
 		public KeywordOrSymbolicContext keywordOrSymbolic() {
 			return getRuleContext(KeywordOrSymbolicContext.class,0);
@@ -2893,7 +2893,7 @@ public class JCLParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(1073);
-			match(CCSID);
+			match(EXEC_CCSID);
 			setState(1074);
 			match(EQUAL);
 			setState(1075);
@@ -32454,8 +32454,8 @@ public class JCLParser extends Parser {
 		"\u0427\3\2\2\2\u0429\u0428\3\2\2\2\u042a\'\3\2\2\2\u042b\u042c\7\u00f4"+
 		"\2\2\u042c\u042d\7\26\2\2\u042d\u042e\5\u02f4\u017b\2\u042e)\3\2\2\2\u042f"+
 		"\u0430\7\u00f5\2\2\u0430\u0431\7\26\2\2\u0431\u0432\5\32\16\2\u0432+\3"+
-		"\2\2\2\u0433\u0434\7\37\2\2\u0434\u0435\7\26\2\2\u0435\u0436\5\32\16\2"+
-		"\u0436-\3\2\2\2\u0437\u0438\7\u00f7\2\2\u0438\u044f\7\26\2\2\u0439\u0450"+
+		"\2\2\2\u0433\u0434\7\u00f6\2\2\u0434\u0435\7\26\2\2\u0435\u0436\5\32\16"+
+		"\2\u0436-\3\2\2\2\u0437\u0438\7\u00f7\2\2\u0438\u044f\7\26\2\2\u0439\u0450"+
 		"\5\32\16\2\u043a\u043c\7q\2\2\u043b\u043a\3\2\2\2\u043b\u043c\3\2\2\2"+
 		"\u043c\u0448\3\2\2\2\u043d\u043f\7q\2\2\u043e\u043d\3\2\2\2\u043e\u043f"+
 		"\3\2\2\2\u043f\u0441\3\2\2\2\u0440\u0442\5\32\16\2\u0441\u0440\3\2\2\2"+

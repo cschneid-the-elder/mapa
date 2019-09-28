@@ -1,0 +1,33 @@
+#!/bin/bash
+
+export myRC=0
+export tmp01=/tmp/$(date +%Y%m%d%H%M%S).$$.mapajcl01
+if [ "$1" = "all" ]
+then
+  ls -Al testdata/test0*.jcl | awk '{print $9}' > $tmp01
+else
+  ls -Al testdata/test$1.jcl | awk '{print $9}' > $tmp01
+fi
+
+while read line
+do
+  java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < $line | grep -v '^\['
+  if [ "$?" -eq 0 ]
+  then
+    export myRC=12
+  else
+    echo $line " OK"
+  fi
+  export filePart=${line: -8}
+  export numPart=${filePart:0:4}
+  java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tree < $line | ./src/treeCount -vruleName=test$numPart
+  if [ $? > $myRC ]
+  then
+    export myRC=$?
+  fi
+done < $tmp01
+
+rm $tmp01
+
+exit $myRC
+

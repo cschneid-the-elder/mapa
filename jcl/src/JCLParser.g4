@@ -90,7 +90,7 @@ execParmACCT : EXEC_ACCT EQUAL singleOrMultipleValue ;
 
 execParmADDRSPC : EXEC_ADDRSPC EQUAL keywordOrSymbolic ;
 
-execParmCCSID : CCSID EQUAL keywordOrSymbolic ;
+execParmCCSID : EXEC_CCSID EQUAL keywordOrSymbolic ;
 
 execParmCOND : EXEC_COND EQUAL (
     keywordOrSymbolic |
