@@ -547,7 +547,7 @@ jobParmUSER : USER EQUAL keywordOrSymbolic ;
 
 commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT+ ;
 
-jclCommandStatement : SS JCL_COMMAND JCL_COMMAND_PARM COMMENT_TEXT? ;
+jclCommandStatement : SS JCL_COMMAND JCL_COMMAND_PARM ;
 
 cntlStatement : SS NAME_FIELD? CNTL ASTERISK? ;
 
@@ -722,32 +722,32 @@ scheduleStatement : SS NAME_FIELD? SCHEDULE scheduleParameters* ;
 
 scheduleParameters : (scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY | scheduleParmHOLDUNTIL | scheduleParmJOBGROUP | scheduleParmSTARTBY | scheduleParmWITH) ;
 
-scheduleParmAFTER : SCHEDULE_PARM_AFTER EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-scheduleParmBEFORE : SCHEDULE_PARM_BEFORE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-scheduleParmDELAY : SCHEDULE_PARM_DELAY EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmAFTER : SCHEDULE_PARM_AFTER EQUAL keywordOrSymbolic ;
+scheduleParmBEFORE : SCHEDULE_PARM_BEFORE EQUAL keywordOrSymbolic  ;
+scheduleParmDELAY : SCHEDULE_PARM_DELAY EQUAL keywordOrSymbolic  ;
 scheduleParmHOLDUNTIL : SCHEDULE_PARM_HOLDUNTIL EQUAL singleOrMultipleValue ;
-scheduleParmJOBGROUP : SCHEDULE_PARM_JOBGROUP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmJOBGROUP : SCHEDULE_PARM_JOBGROUP EQUAL keywordOrSymbolic  ;
 scheduleParmSTARTBY : SCHEDULE_PARM_STARTBY EQUAL singleOrMultipleValue ;
-scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic  ;
 
 setStatement : SS NAME_FIELD? SET setOperation+
   ;
 
-setOperation : (SET_PARM_NAME EQUAL (SET_PARM_VALUE | QUOTED_STRING_FRAGMENT)? COMMENT_TEXT?) ;
+setOperation : (SET_PARM_NAME EQUAL (SET_PARM_VALUE | QUOTED_STRING_FRAGMENT)? ) ;
 
-xmitStatement : SS NAME_FIELD? XMIT xmitParameters* COMMENT_TEXT? ddParmASTERISK_DATA* ;
+xmitStatement : SS NAME_FIELD? XMIT xmitParameters* ddParmASTERISK_DATA* ;
 
 xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStatement) ;
 
-xmitParmDEST : DEST EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+xmitParmDEST : DEST EQUAL keywordOrSymbolic ;
 
-xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_STRING_FRAGMENT) COMMENT_TEXT? ;
+xmitParmDLM : DLM EQUAL (DLM_VAL | QUOTED_STRING_FRAGMENT) ;
 
-xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic ;
 
 jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetStatement | sJobStatement | endSetStatement | endGroupStatement | afterStatement | beforeStatement | concurrentStatement)* ;
 
-jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP LPAREN? jobGroupAccountingInformation? RPAREN? COMMENT_TEXT? jobGroupProgrammerName? COMMENT_TEXT? jobGroupParameters* ;
+jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP LPAREN? jobGroupAccountingInformation? RPAREN? jobGroupProgrammerName? jobGroupParameters* ;
 
 jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | JOBGROUP_ACCT_UNQUOTED_STRING+) ;
 
@@ -759,13 +759,13 @@ jobGroupProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME | JOBGROUP_PROGRAMMER_NA
 
 jobGroupParameters : (jobGroupEMAIL | jobGroupOWNER | jobGroupGROUP | jobGroupPASSWORD | jobGroupSECLABEL | jobGroupTYPE | jobGroupHOLD | jobGroupERROR | jobGroupONERROR | jobGroupSYSAFF | jobGroupSYSTEM | jobGroupSCHENV) ;
 
-jobGroupEMAIL : JOBGROUP_EMAIL EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupOWNER : JOBGROUP_OWNER EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupGROUP : JOBGROUP_GROUP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupPASSWORD : JOBGROUP_PASSWORD EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupSECLABEL : JOBGROUP_SECLABEL EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupTYPE : JOBGROUP_TYPE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupHOLD : JOBGROUP_HOLD EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupEMAIL : JOBGROUP_EMAIL EQUAL keywordOrSymbolic ;
+jobGroupOWNER : JOBGROUP_OWNER EQUAL keywordOrSymbolic ;
+jobGroupGROUP : JOBGROUP_GROUP EQUAL keywordOrSymbolic ;
+jobGroupPASSWORD : JOBGROUP_PASSWORD EQUAL keywordOrSymbolic ;
+jobGroupSECLABEL : JOBGROUP_SECLABEL EQUAL keywordOrSymbolic ;
+jobGroupTYPE : JOBGROUP_TYPE EQUAL keywordOrSymbolic ;
+jobGroupHOLD : JOBGROUP_HOLD EQUAL keywordOrSymbolic ;
 
 jobGroupERROR : JOBGROUP_ERROR EQUAL jobGroupCondition ;
 
@@ -789,36 +789,36 @@ jobGroupERROR_Keyword : (ABEND | ABENDCC | RUN | RC) ;
 jobGroupERROR_Test : NOT_SYMBOL* jobGroupERROR_Keyword
     (NOT_SYMBOL* jobGroupERROR_RelOp (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
 
-jobGroupONERROR : JOBGROUP_ONERROR EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupSYSAFF : JOBGROUP_SYSAFF EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupSYSTEM : JOBGROUP_SYSTEM EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-jobGroupSCHENV : JOBGROUP_SCHENV EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobGroupONERROR : JOBGROUP_ONERROR EQUAL keywordOrSymbolic ;
+jobGroupSYSAFF : JOBGROUP_SYSAFF EQUAL keywordOrSymbolic ;
+jobGroupSYSTEM : JOBGROUP_SYSTEM EQUAL keywordOrSymbolic ;
+jobGroupSCHENV : JOBGROUP_SCHENV EQUAL keywordOrSymbolic ;
 
 gJobStatement : SS NAME_FIELD? GJOB_OP gJobParameters ;
 
 gJobParameters : (gJobFLUSHTYP) ;
 
-gJobFLUSHTYP : GJOB_PARM_FLUSHTYP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+gJobFLUSHTYP : GJOB_PARM_FLUSHTYP EQUAL keywordOrSymbolic ;
 
 jobSetStatement : SS NAME_FIELD? JOBSET_OP jobSetParameters ;
 
 jobSetParameters : (jobSetFLUSHTYP) ;
 
-jobSetFLUSHTYP : JOBSET_PARM_FLUSHTYP EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+jobSetFLUSHTYP : JOBSET_PARM_FLUSHTYP EQUAL keywordOrSymbolic ;
 
-sJobStatement : SS NAME_FIELD? SJOB_OP COMMENT_TEXT? ;
+sJobStatement : SS NAME_FIELD? SJOB_OP ;
 
-endSetStatement : SS NAME_FIELD? ENDSET_OP COMMENT_TEXT? ;
+endSetStatement : SS NAME_FIELD? ENDSET_OP ;
 
-endGroupStatement : SS NAME_FIELD? ENDGROUP_OP COMMENT_TEXT? ;
+endGroupStatement : SS NAME_FIELD? ENDGROUP_OP ;
 
 afterStatement : SS AFTER_OP afterParameters+ ;
 
 afterParameters : (afterNAME | afterACTION | afterOTHERWISE | afterWHEN) ;
 
 afterNAME : AFTER_PARM_NAME EQUAL singleOrMultipleValue ;
-afterACTION : AFTER_PARM_ACTION EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-afterOTHERWISE : AFTER_PARM_OTHERWISE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+afterACTION : AFTER_PARM_ACTION EQUAL keywordOrSymbolic ;
+afterOTHERWISE : AFTER_PARM_OTHERWISE EQUAL keywordOrSymbolic ;
 afterWHEN : AFTER_PARM_WHEN EQUAL jobGroupCondition ;
 
 beforeStatement : SS BEFORE_OP beforeParameters+ ;
@@ -826,8 +826,8 @@ beforeStatement : SS BEFORE_OP beforeParameters+ ;
 beforeParameters : (beforeNAME | beforeACTION | beforeOTHERWISE | beforeWHEN) ;
 
 beforeNAME : BEFORE_PARM_NAME EQUAL singleOrMultipleValue ;
-beforeACTION : BEFORE_PARM_ACTION EQUAL keywordOrSymbolic COMMENT_TEXT? ;
-beforeOTHERWISE : BEFORE_PARM_OTHERWISE EQUAL keywordOrSymbolic COMMENT_TEXT? ;
+beforeACTION : BEFORE_PARM_ACTION EQUAL keywordOrSymbolic ;
+beforeOTHERWISE : BEFORE_PARM_OTHERWISE EQUAL keywordOrSymbolic ;
 beforeWHEN : BEFORE_PARM_WHEN EQUAL jobGroupCondition ;
 
 concurrentStatement : SS CONCURRENT_OP concurrentParameters+ ;
@@ -856,7 +856,7 @@ singleOrMultipleValue : (
     (LPAREN+
       keywordOrSymbolic (keywordOrSymbolic RPAREN?)*
     RPAREN+)
-  ) COMMENT_TEXT? ;
+  ) ;
 
 parenList : (LPAREN keywordOrSymbolic+ RPAREN) ;
 
@@ -931,7 +931,7 @@ jes2RouteXEQ : JES2_ROUTE_XEQ JES2_ROUTE_VALUE ;
 
 jes2SetupStatement : SA JES2_SETUP VOL_SER_NB+ ;
 
-jes2SignoffStatement : SA JES2_SIGNOFF COMMENT_TEXT? ;
+jes2SignoffStatement : SA JES2_SIGNOFF ;
 
 jes2SignonStatement : SA JES2_SIGNON 
     JES2_SIGNON_NODE JES2_SIGNON_PASSWORD1? JES2_SIGNON_NEW_PASSWORD? JES2_SIGNON_PASSWORD2? ;

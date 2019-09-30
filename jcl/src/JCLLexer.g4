@@ -311,7 +311,7 @@ JCL_COMMAND_WS : ' '+ ->channel(HIDDEN),mode(JCL_COMMAND_PARM_MODE) ;
 
 mode JCL_COMMAND_PARM_MODE ;
 
-JCL_COMMAND_PARM : [A-Z0-9@#$*\-+&./%,]+ ;
+JCL_COMMAND_PARM : [)(A-Z0-9@#$*\-+&./%,:]+ ;
 JCL_COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
 JCL_COMMAND_PARM_WS : ' '+ ->channel(HIDDEN),mode(CM_MODE) ;
 JCL_COMMAND_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
@@ -816,7 +816,7 @@ SET_PARM_NAME : NM_PART ;
 mode SET_PARM_VALUE_MODE ;
 
 SET_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SET_PARM_VALUE : [)(A-Z0-9@#$*\-+&./%[]+ ;
+SET_PARM_VALUE : [)(A-Z0-9@#$*\-+&./%[:_]+ ;
 SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 
 SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
@@ -1829,13 +1829,15 @@ keyWord=&symbolic1&symbolic2&symbolic3
 
 ...so I added '&' to the regex for KEYWORD_VALUE and now all is right
 with the world.  Except users of this grammar must inspect KEYWORD_VALUE
-in their application code to detect symbolics.  However, having ':' 
-embedded in the regex for KEYWORD_VALUE means that such users can also
-detect substringed system symbolics.  So we've got that going for us.
+in their application code to detect symbolics.  The second half of the
+KEYWORD_VALUE token is an attempt to detect substringed system symbolics.
 
 */
 
-KEYWORD_VALUE : [A-Z0-9@#$*\-+&./%[:_]+ ->popMode ;
+KEYWORD_VALUE : (
+    ([A-Z0-9@#$*\-+&./%[:_]+) | 
+    (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+
+  ) ->popMode ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
 /*
