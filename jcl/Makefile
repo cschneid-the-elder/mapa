@@ -22,8 +22,7 @@ all: ./src/JCLLexer.tokens ./src/JCLParser.tokens
 
 clean:
 	echo `date` clean >> build.log
-	cd ./class &&\
-	rm -f JCLLexer*.java JCLLexer*.class JCLLexer*.tokens JCLLexer*.interp JCLParser*.java JCLParser*.class JCLParser.tokens JCLParser.interp
+	rm -f ./src/JCLLexer*.java ./class/JCLLexer*.class ./src/JCLLexer*.tokens ./src/JCLLexer*.interp ./src/JCLParser*.java ./class/JCLParser*.class ./src/JCLParser.tokens ./src/JCLParser.interp
 	cd ..
 
 cleanmine:
@@ -33,7 +32,7 @@ cleanmine:
 
 mine:
 	echo `date` mine >> build.log
-	$(JC) $(JCOPT) 
+	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetSymbolValueListener.java ./src/SetSymbolValue.java
 
 jar:
 	echo `date` jar >> build.log
@@ -65,7 +64,12 @@ testrig9001:
 ./src/JCLParser.tokens: ./src/JCLLexer.tokens
 
 
-#./class/TheCLI.class: 
+./class/TheCLI.class: 
 
+./class/Demo01.class:
+
+./class/SetSymbolValueListener.class:
+
+./class/SetSymbolValue.class:
 
 
