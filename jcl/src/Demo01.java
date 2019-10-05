@@ -49,6 +49,7 @@ public static void main(String[] args) throws Exception {
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing " + aFileName);
 		sets = lookForSetSymbols(aFileName);
+		LOGGER.fine("sets = " + sets);
 	}
 
 	LOGGER.info("Processing complete");

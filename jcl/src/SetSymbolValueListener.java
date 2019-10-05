@@ -26,5 +26,8 @@ public class SetSymbolValueListener extends JCLParserBaseListener {
 		this.sets.add(new SetSymbolValue(ctx, this.fileName));
 	}
 
+	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
+		this.sets.add(new SetSymbolValue(ctx, this.fileName));
+	}
 
 }

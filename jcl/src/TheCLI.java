@@ -6,6 +6,7 @@ import java.util.logging.Logger;
 import org.apache.commons.cli.*;
 
 public class TheCLI{
+	public final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
 	public String[] args = null;
 	public Options options = new Options();
 	public CommandLineParser parser = new DefaultParser();
@@ -49,7 +50,7 @@ public class TheCLI{
 		try {
 			this.line = parser.parse( options, args );
 		} catch( ParseException exp ) {
-			Demo01.LOGGER.severe( "Command line parsing failed.  Reason: " + exp.getMessage() );
+			this.LOGGER.severe( "Command line parsing failed.  Reason: " + exp.getMessage() );
 			System.exit(16);
 		}
 
@@ -64,7 +65,7 @@ public class TheCLI{
 			List<String> list = Files.readAllLines(Paths.get(this.line.getOptionValue("fileList")));
 			this.fileNamesToProcess.addAll(list);
 		} else {
-			Demo01.LOGGER.config("Either the file or the fileList option must be provided");
+			this.LOGGER.info("Either the file or the fileList option must be provided");
 			this.formatter.printHelp( "Demo01", options, true );
 			System.exit(16);
 		}
@@ -75,7 +76,7 @@ public class TheCLI{
 			List<String> list = Files.readAllLines(Paths.get(this.line.getOptionValue("includeList")));
 			this.copyPaths.addAll(list);
 		} else {
-			Demo01.LOGGER.config("Either the include or the includeList option must be provided");
+			this.LOGGER.info("Either the include or the includeList option must be provided");
 			this.formatter.printHelp( "Demo01", options, true );
 			System.exit(16);
 		}
@@ -87,31 +88,32 @@ public class TheCLI{
 		if (this.line.hasOption("logLevel")) {
 			switch(this.line.getOptionValue("logLevel")) {
 				case "SEVERE":
-					Demo01.LOGGER.setLevel(Level.SEVERE);
+					this.LOGGER.setLevel(Level.SEVERE);
 					break;
 				case "WARNING":
-					Demo01.LOGGER.setLevel(Level.WARNING);
+					this.LOGGER.setLevel(Level.WARNING);
 					break;
 				case "INFO":
-					Demo01.LOGGER.setLevel(Level.INFO);
+					this.LOGGER.setLevel(Level.INFO);
 					break;
 				case "CONFIG":
-					Demo01.LOGGER.setLevel(Level.CONFIG);
+					this.LOGGER.setLevel(Level.CONFIG);
 					break;
 				case "FINE":
-					Demo01.LOGGER.setLevel(Level.FINE);
+					this.LOGGER.setLevel(Level.FINE);
 					break;
 				case "FINER":
-					Demo01.LOGGER.setLevel(Level.FINER);
+					this.LOGGER.setLevel(Level.FINER);
 					break;
 				case "FINEST":
-					Demo01.LOGGER.setLevel(Level.FINEST);
+					this.LOGGER.setLevel(Level.FINEST);
 					break;
 				default:
-					Demo01.LOGGER.config("Unrecognized logLevel option " + this.line.getOptionValue("LogLevel"));
+					this.LOGGER.config("Unrecognized logLevel option " + this.line.getOptionValue("LogLevel"));
 			}
 		} else {
-			Demo01.LOGGER.setLevel(Level.INFO);
+			this.LOGGER.setLevel(Level.INFO);
+			this.LOGGER.info("Logging level set to " + this.LOGGER.getLevel());
 		}
 
 		if (this.line.hasOption("unitTest")) {
@@ -121,13 +123,13 @@ public class TheCLI{
 				||  this.line.getOptionValue("logLevel").equals("FINER")
 				||  this.line.getOptionValue("logLevel").equals("FINEST")) {
 				} else {
-					Demo01.LOGGER.setLevel(Level.FINE);
-					Demo01.LOGGER.info("overriding logLevel");
+					this.LOGGER.setLevel(Level.FINE);
+					this.LOGGER.info("overriding logLevel");
 				}
 			} else {
-				Demo01.LOGGER.setLevel(Level.FINE);
+				this.LOGGER.setLevel(Level.FINE);
 			}
-			Demo01.LOGGER.info("unit testing is in effect");
+			this.LOGGER.info("unit testing is in effect");
 		}
 
 

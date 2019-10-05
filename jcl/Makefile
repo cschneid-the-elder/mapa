@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -27,8 +27,7 @@ clean:
 
 cleanmine:
 	echo `date` cleanmine >> build.log
-	cd ./class &&\
-#	rm -f 
+	rm -f ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/TheCLI.class ./class/Demo01.class
 
 mine:
 	echo `date` mine >> build.log
@@ -67,9 +66,5 @@ testrig9001:
 ./class/TheCLI.class: 
 
 ./class/Demo01.class:
-
-./class/SetSymbolValueListener.class:
-
-./class/SetSymbolValue.class:
 
 
