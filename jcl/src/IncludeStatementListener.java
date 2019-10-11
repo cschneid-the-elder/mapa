@@ -9,8 +9,8 @@ public class IncludeStatementListener extends JCLParserBaseListener {
 
 	public ArrayList<IncludeStatement> includes = null;
 	public String fileName = null;
-	public Boolean inInStreamProc = false;
-	public Boolean jobCardFound = false;
+	public Boolean inProc = false;
+	public String procName = null;
 
 	public IncludeStatementListener(
 			ArrayList<IncludeStatement> includes
@@ -22,19 +22,17 @@ public class IncludeStatementListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterIncludeStatement(JCLParser.IncludeStatementContext ctx) {
-
+		includes.add(new IncludeStatement(ctx, fileName, inProc, procName));
 	}
 
 	@Override public void enterProcStatement(JCLParser.ProcStatementContext ctx) {
-		inInStreamProc = true && jobCardFound;
+		inProc = true;
+		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 	}
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
-		inInStreamProc = false;
-	}
-
-	@Override public void enterJobCard(JCLParser.JobCardContext ctx) {
-		jobCardFound = true;
+		inProc = false;
+		this.procName = null;
 	}
 
 }

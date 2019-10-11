@@ -9,87 +9,132 @@ public class SetSymbolValue {
 	private ParserRuleContext ctx = null;
 	private String fileName = null;
 	private String parentFileName = null;
+	private SetTypeOfSymbolValue setType = null;
+	private KeywordOrSymbolicWrapper kywd = null;
+	private String parmValue = null;
+	private String parmName = null;
+	private int line = -1;
+	public Boolean inProc = false;
+	public String procName = null;
 
-	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName) {
+	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName, Boolean inProc, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
+		this.inProc = inProc;
+		this.procName = procName;
+		this.setType = SetTypeOfSymbolValue.SET;
 	}
 
-	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName) {
+	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, Boolean inProc, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
+		this.inProc = inProc;
+		this.procName = procName;
+		this.setType = SetTypeOfSymbolValue.EXEC;
+		if (ctx.keywordOrSymbolic() == null) {
+		} else {
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+		}
 	}
 
-	public SetSymbolValue(JCLParser.DefineSymbolicParameterContext ctx, String fileName) {
+	public SetSymbolValue(JCLParser.DefineSymbolicParameterContext ctx, String fileName, Boolean inProc, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
+		this.inProc = inProc;
+		this.procName = procName;
+		this.setType = SetTypeOfSymbolValue.PROC;
 	}
 
 	public String getFileName() {
 		return this.fileName;
 	}
 
-	public String getParmName() {
-		String theParmName = new String();
+	public SetTypeOfSymbolValue getSetType() {
+		return this.setType;
+	}
 
-		switch(this.ctx.getClass().getName()) {
-			case "JCLParser$SetOperationContext":
-				theParmName = getParmNameForSetOperationContext();
-				break;
-			case "JCLParser$ExecProcParmContext":
-				theParmName = getParmNameForExecProcParmContext();
-				break;
-			case "JCLParser$DefineSymbolicParameterContext":
-				theParmName = getParmNameForDefineSymbolicParameterContext();
-				break;
-			default:
-				Demo01.LOGGER.severe(this.getClass().getName() + "getParmName() found " + this.ctx.getClass().getName());
-				break;
+	public String getParmName() {
+
+		if (this.parmName == null) {
+			String theParmName = new String();
+			switch(this.setType) {
+				case SET:
+					theParmName = getParmNameForSetOperationContext();
+					break;
+				case EXEC:
+					theParmName = getParmNameForExecProcParmContext();
+					break;
+				case PROC:
+					theParmName = getParmNameForDefineSymbolicParameterContext();
+					break;
+				default:
+					Demo01.LOGGER.severe(
+						this.getClass().getName() 
+						+ "getParmName() found " 
+						+ this.ctx.getClass().getName()
+					);
+					break;
+			}
+			this.parmName = theParmName;
 		}
 
-		return theParmName;
+		return this.parmName;
 	}
 
 	public int getLine() {
-		int theLine = -1;
 
-		switch(this.ctx.getClass().getName()) {
-			case "JCLParser$SetOperationContext":
-				theLine = getLineForSetOperationContext();
-				break;
-			case "JCLParser$ExecProcParmContext":
-				theLine = getLineForExecProcParmContext();
-				break;
-			case "JCLParser$DefineSymbolicParameterContext":
-				theLine = getLineForDefineSymbolicParameterContext();
-				break;
-			default:
-				Demo01.LOGGER.severe(this.getClass().getName() + "getLine() found " + this.ctx.getClass().getName());
-				break;
+		if (this.line == -1) {
+			int theLine = -1;
+			switch(this.setType) {
+				case SET:
+					theLine = getLineForSetOperationContext();
+					break;
+				case EXEC:
+					theLine = getLineForExecProcParmContext();
+					break;
+				case PROC:
+					theLine = getLineForDefineSymbolicParameterContext();
+					break;
+				default:
+					Demo01.LOGGER.severe(
+						this.getClass().getName() 
+						+ "getLine() found " 
+						+ this.ctx.getClass().getName()
+					);
+					break;
+			}
+			this.line = theLine;
 		}
 
-		return theLine;
+		return this.line;
 	}
 
 	public String getParmValue() {
-		String theText = new String();
 
-		switch(this.ctx.getClass().getName()) {
-			case "JCLParser$SetOperationContext":
-				theText = getParmValueForSetOperationContext();
-				break;
-			case "JCLParser$ExecProcParmContext":
-				theText = getParmValueForExecProcParmContext();
-				break;
-			case "JCLParser$DefineSymbolicParameterContext":
-				theText = getParmValueForDefineSymbolicParameterContext();
-				break;
-			default:
-				Demo01.LOGGER.severe(this.getClass().getName() + "getParmValue() found " + this.ctx.getClass().getName());
-				break;
+		if (this.parmValue == null) {
+			String theText = new String();
+			switch(this.setType) {
+				case SET:
+					theText = getParmValueForSetOperationContext();
+					break;
+				case EXEC:
+					theText = getParmValueForExecProcParmContext();
+					break;
+				case PROC:
+					theText = getParmValueForDefineSymbolicParameterContext();
+					break;
+				default:
+					Demo01.LOGGER.severe(
+						this.getClass().getName() 
+						+ "getParmValue() found " 
+						+ this.ctx.getClass().getName()
+					);
+					break;
+			}
+			this.parmValue = theText;
 		}
 
-		return theText;
+		return this.parmValue;
 	}
 
 	private String getParmNameForSetOperationContext() {
@@ -115,7 +160,12 @@ public class SetSymbolValue {
 		int theLine = -1;
 
 		if (ctx.SET_PARM_NAME() == null) {
-			Demo01.LOGGER.severe(this.getClass().getName() + "getLineForSetOperationContext() found " + ctx.getClass().getName() + "SET_PARM_NAME() == null");
+			Demo01.LOGGER.severe(
+				this.getClass().getName() 
+				+ "getLineForSetOperationContext() found " 
+				+ ctx.getClass().getName() 
+				+ "SET_PARM_NAME() == null"
+			);
 		} else {
 			theLine = ctx.SET_PARM_NAME().getSymbol().getLine();
 		}
@@ -128,7 +178,12 @@ public class SetSymbolValue {
 		int theLine = -1;
 
 		if (ctx.EXEC_PROC_PARM() == null) {
-			Demo01.LOGGER.severe(this.getClass().getName() + "getLineForExecProcParmContext() found " + ctx.getClass().getName() + "EXEC_PROC_PARM() == null");
+			Demo01.LOGGER.severe(
+				this.getClass().getName() 
+				+ "getLineForExecProcParmContext() found " 
+				+ ctx.getClass().getName() 
+				+ "EXEC_PROC_PARM() == null"
+			);
 		} else {
 			theLine = ctx.EXEC_PROC_PARM().getSymbol().getLine();
 		}
@@ -141,7 +196,12 @@ public class SetSymbolValue {
 		int theLine = -1;
 
 		if (ctx.PROC_PARM_NAME() == null) {
-			Demo01.LOGGER.severe(this.getClass().getName() + "getLineForDefineSymbolicParameterContext() found " + ctx.getClass().getName() + "PROC_PARM_NAME() == null");
+			Demo01.LOGGER.severe(
+				this.getClass().getName() 
+				+ "getLineForDefineSymbolicParameterContext() found " 
+				+ ctx.getClass().getName() 
+				+ "PROC_PARM_NAME() == null"
+			);
 		} else {
 			theLine = ctx.PROC_PARM_NAME().getSymbol().getLine();
 		}
@@ -169,18 +229,17 @@ public class SetSymbolValue {
 		JCLParser.ExecProcParmContext ctx = (JCLParser.ExecProcParmContext)this.ctx;
 		String theText = new String();
 
-		if (ctx.keywordOrSymbolic() == null) {
+		if (this.kywd == null) {
+			/*
+				It's legal for this to be null.  The following is syntactically correct.
+
+				//JS01 EXEC PROC=MOYA,TALYN=
+
+				In this instance the parm TALYN is set to nothing.  Any default value
+				set in the PROC statement for the proc MOYA is nullified.
+			*/
 		} else {
-			if (ctx.keywordOrSymbolic().KEYWORD_VALUE() == null) {
-				if (ctx.keywordOrSymbolic().QUOTED_STRING_FRAGMENT() == null || ctx.keywordOrSymbolic().QUOTED_STRING_FRAGMENT().size() == 0) {
-				} else {
-					for (TerminalNode t: ctx.keywordOrSymbolic().QUOTED_STRING_FRAGMENT()) {
-						theText = theText.concat(t.getSymbol().getText());
-					}
-				}
-			} else {
-				theText = ctx.keywordOrSymbolic().KEYWORD_VALUE().getSymbol().getText();
-			}
+			theText = kywd.toString();
 		}
 
 		return theText;
@@ -203,6 +262,17 @@ public class SetSymbolValue {
 	}
 
 	public String toString() {
-		return ctx.getClass().getName() + " fileName: |" + this.fileName + "| line: |" + this.getLine() + "| parmName: |" + this.getParmName() + "| parmValue: |" + this.getParmValue() + "|";
+		return 
+			ctx.getClass().getName() 
+			+ " fileName: |" 
+			+ this.fileName 
+			+ "| line: |" 
+			+ this.getLine() 
+			+ "| parmName: |" 
+			+ this.getParmName() 
+			+ "| parmValue: |" 
+			+ this.getParmValue() 
+			+ "|"
+		;
 	}
 }

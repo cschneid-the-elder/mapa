@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -27,7 +27,7 @@ clean:
 
 cleanmine:
 	echo `date` cleanmine >> build.log
-	rm -f ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/TheCLI.class ./class/Demo01.class
+	rm -f ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.java ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/TheCLI.class ./class/Demo01.class
 
 mine:
 	echo `date` mine >> build.log
@@ -52,8 +52,8 @@ testrig:
 testrig9001:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test9001.jcl
 
-#testLocal:
-#	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
+test9002:
+	java -jar JCLParser.jar -file testdata/test9002.jcl -include testdata -logLevel FINE
 
 #testNist:
 #	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log

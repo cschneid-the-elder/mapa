@@ -60,7 +60,7 @@ deferred until after the JCL has begun "executing."
 
 */
 
-keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE) ;
+keywordOrSymbolic : (QUOTED_STRING_FRAGMENT | KEYWORD_VALUE | SYMBOLIC)+ ;
 
 execStatement : execPgmStatement | execProcStatement ;
 

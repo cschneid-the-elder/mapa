@@ -45,11 +45,14 @@ public static void main(String[] args) throws Exception {
 	CLI = new TheCLI(args);
 	String cwFileName = null; //current work file name
 	ArrayList<SetSymbolValue> sets = null;
+	ArrayList<IncludeStatement> includes = null;
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing " + aFileName);
 		sets = lookForSetSymbols(aFileName);
 		LOGGER.fine("sets = " + sets);
+		includes = lookForIncludes(aFileName);
+		LOGGER.fine("includes = " + includes);
 	}
 
 	LOGGER.info("Processing complete");
@@ -77,5 +80,46 @@ public static void main(String[] args) throws Exception {
 		
 	}
 
+	public static ArrayList<IncludeStatement> lookForIncludes(String fileName) throws IOException {
+		LOGGER.fine("lookForIncludes");
+		ArrayList<IncludeStatement> includes = new ArrayList<>();
+		CharStream cs = fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		IncludeStatementListener includeStatementListener = new IncludeStatementListener(includes, fileName);
+	
+		LOGGER.finer("----------walking tree with includeStatementListener");
+	
+		jclwalker.walk(includeStatementListener, jcltree);
+
+		return includes;
+		
+	}
+
+	public static String setSymbolsOnIncludeStatements(
+							ArrayList<SetSymbolValue> sets
+							, ArrayList<IncludeStatement> includes
+							, String fileName) 
+						throws IOException {
+		LOGGER.fine("setSymbolsOnIncludeStatements");
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+		File tmp = File.createTempFile("Demo01-", "-jcl", new File("./"));
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		String inLine = src.readLine();
+
+		fileName = tmp.getPath();
+		return fileName;
+	}
 
 }

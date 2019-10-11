@@ -8,6 +8,8 @@ public class SetSymbolValueListener extends JCLParserBaseListener {
 
 	public ArrayList<SetSymbolValue> sets = null;
 	public String fileName = null;
+	public Boolean inProc = false;
+	public String procName = null;
 
 	public SetSymbolValueListener(
 			ArrayList<SetSymbolValue> sets
@@ -19,15 +21,25 @@ public class SetSymbolValueListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterSetOperation(JCLParser.SetOperationContext ctx) { 
-		this.sets.add(new SetSymbolValue(ctx, this.fileName));
+		this.sets.add(new SetSymbolValue(ctx, this.fileName, this.inProc, this.procName));
 	}
 
 	@Override public void enterExecProcParm(JCLParser.ExecProcParmContext ctx) { 
-		this.sets.add(new SetSymbolValue(ctx, this.fileName));
+		this.sets.add(new SetSymbolValue(ctx, this.fileName, this.inProc, this.procName));
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
-		this.sets.add(new SetSymbolValue(ctx, this.fileName));
+		this.sets.add(new SetSymbolValue(ctx, this.fileName, this.inProc, this.procName));
+	}
+
+	@Override public void enterProcStatement(JCLParser.ProcStatementContext ctx) {
+		inProc = true;
+		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
+	}
+
+	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
+		inProc = false;
+		procName = null;
 	}
 
 }

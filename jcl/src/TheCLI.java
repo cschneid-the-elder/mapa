@@ -36,6 +36,8 @@ public class TheCLI{
 			, "logging level for this run {SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST}");
 		Option unitTest = new Option("unitTest", false
 			, "used to test lexer, parser, listeners, et. al");
+		Option saveTemp = new Option("saveTemp", false
+			, "save temporary files, used to test lexer, parser, listeners, et. al");
 		Option help = new Option("help", false, "print this message");
 
 		this.options.addOption(file);
@@ -45,6 +47,7 @@ public class TheCLI{
 		this.options.addOption(out);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
+		this.options.addOption(saveTemp);
 		this.options.addOption(help);
 
 		try {
@@ -130,6 +133,11 @@ public class TheCLI{
 				this.LOGGER.setLevel(Level.FINE);
 			}
 			this.LOGGER.info("unit testing is in effect");
+		}
+
+		if (this.line.hasOption("saveTemp")) {
+			this.saveTemp = true;
+			this.LOGGER.info("temporary files will be preserved");
 		}
 
 

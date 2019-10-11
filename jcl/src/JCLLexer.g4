@@ -93,6 +93,7 @@ lexer grammar JCLLexer;
 
 @lexer::members {
     public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
+    public int myMode = DEFAULT_MODE;
 }
 
 tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , CHARS_FONT , PCI_VALUE , REFERBACK , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME , SUBCHARS }
@@ -186,7 +187,10 @@ fragment Z:'Z';
 
 mode CM_MODE ;
 
-CM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+CM_NEWLINE : NEWLINE
+    {
+      mode(myMode);
+    } ->channel(HIDDEN) ;
 CM_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT),channel(COMMENTS) ;
 
 /*
@@ -278,6 +282,7 @@ XMIT_OP : X M I T
     {
       dlmVals.add("/*");
       dlmVals.add("//");
+      myMode = DATA_MODE;
     } ->mode(XMIT_MODE),type(XMIT) ;
 
 JOBGROUP_OP : J O B G R O U P ->mode(JOBGROUP_MODE) ;
@@ -448,6 +453,7 @@ DD_ASTERISK : '*'
       dlmVals = new java.util.ArrayList();
       dlmVals.add("/*");
       dlmVals.add("//");
+      myMode = DATA_MODE;
     } ->type(ASTERISK),pushMode(DATA_PARM_MODE) ;
 DD_BLKSIZE : B L K S I Z E ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
 DD_BLKSZLIM : B L K S Z L I M ->type(BLKSZLIM),pushMode(KYWD_VAL_MODE) ;
@@ -461,6 +467,7 @@ DD_DATA : D A T A
     {
       dlmVals = new java.util.ArrayList();
       dlmVals.add("/*");
+      myMode = DATA_MODE;
     } ->type(DATA),pushMode(DATA_PARM_MODE) ;
 DD_DATACLAS : D A T A C L A S ->type(DATACLAS),pushMode(KYWD_VAL_MODE) ;
 DD_DCB : D C B ->type(DCB),pushMode(DCB_MODE) ;
@@ -842,8 +849,8 @@ XMIT_PARM_DEST : D E S T ->type(DEST),pushMode(KYWD_VAL_MODE) ;
 XMIT_PARM_DLM : DD_DLM ->type(DLM),pushMode(DLM_MODE) ;
 XMIT_PARM_SUBCHAR : S U B C H A R S ->type(SUBCHARS),pushMode(KYWD_VAL_MODE) ;
 XMIT_PARM_NEWLINE : [\n\r] ->channel(HIDDEN),mode(DATA_MODE) ;
-XMIT_PARM_WS : WS ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
-XMIT_PARM_WS_NEWLINE : WS NEWLINE ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
+XMIT_PARM_WS : WS ->channel(HIDDEN),mode(CM_MODE) ;
+XMIT_PARM_WS_NEWLINE : WS NEWLINE ->channel(HIDDEN),mode(CM_MODE) ;
 XMIT_PARM_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 XMIT_PARM_COMMA_WS : COMMA_DFLT WS ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 XMIT_PARM_COMMA : COMMA_DFLT ->channel(HIDDEN) ;
@@ -1254,7 +1261,7 @@ DATA_MODE to get back to DEFAULT_MODE.
 */
 
 NEWLINE_DATA_PARM_MODE : [\n\r] ->channel(HIDDEN),mode(DATA_MODE) ;
-WS_DATA_PARM_MODE : [ ]+ ->channel(HIDDEN),mode(DATA_PARM_CM_MODE) ;
+WS_DATA_PARM_MODE : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 DATA_PARM_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 
 DATA_PARM_MODE_BLKSIZE : DD_BLKSIZE ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
@@ -1285,11 +1292,6 @@ DLM_VAL : [A-Z0-9@#$_\-]+
         dlmVals.add(getText());
     } ->popMode ;
 
-mode DATA_PARM_CM_MODE ;
-
-DATA_PARM_CM_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DATA_MODE) ;
-DATA_PARM_CM_MODE_COMMENT_TEXT : (' ' | ANYCHAR)+ ->type(COMMENT_TEXT),channel(COMMENTS) ;
-
 mode DATA_MODE ;
 
 /*
@@ -1302,21 +1304,25 @@ DATA_MODE_TERMINATOR1 : SLASH SLASH ASTERISK {dlmVals.contains("//") && getCharP
     {
       dlmVals = new java.util.ArrayList();
       _modeStack.clear();
+      myMode = DEFAULT_MODE;
     } ->type(COMMENT_FLAG),channel(COMMENTS),mode(CM_MODE);
 DATA_MODE_TERMINATOR2 : SLASH SLASH {dlmVals.contains("//") && getCharPositionInLine() == 2}? 
     {
       dlmVals = new java.util.ArrayList();
       _modeStack.clear();
+      myMode = DEFAULT_MODE;
     } ->type(SS),mode(NM_MODE) ;
 DATA_MODE_TERMINATOR3 : SLASH ASTERISK {dlmVals.contains("/*") && getCharPositionInLine() == 2}? 
     {
       dlmVals = new java.util.ArrayList();
       _modeStack.clear();
+      myMode = DEFAULT_MODE;
     } ->mode(DEFAULT_MODE) ;
 DATA_MODE_TERMINATORX : ANYCHAR+ {dlmVals.contains(getText())}?
     {
       dlmVals = new java.util.ArrayList();
       _modeStack.clear();
+      myMode = DEFAULT_MODE;
     } ->mode(DEFAULT_MODE) ;
 DD_ASTERISK_DATA : ([ \n\r] | ANYCHAR)+? ;
 
@@ -1834,12 +1840,24 @@ KEYWORD_VALUE token is an attempt to detect substringed system symbolics.
 
 */
 
+KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KEYWORD_VALUE : (
-    ([A-Z0-9@#$*\-+&./%[:_]+) | 
+    ([A-Z0-9@#$&*\-+./%[:_]+?) | 
     (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+
-  ) ->popMode ;
+  ) ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
+KYWD_VAL_RPAREN : RPAREN_DFLT
+    {
+      if (_modeStack.peek() == DCB_PAREN_MODE) {
+          popMode();
+          popMode();
+          popMode();
+      } else {
+          popMode();
+          popMode();
+      }
+    } ->type(RPAREN) ;
 /*
 
 The newline, comma newline, and ws tokens are here because some keywords
@@ -1861,7 +1879,9 @@ take us back into the "parent" mode.  Same for COMMA_WS_MODE.
 KYWD_VAL_NEWLINE : NEWLINE
     {
       _modeStack.clear();
-    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+      mode(myMode);
+    } ->type(NEWLINE),channel(HIDDEN) ;
+KYWD_VAL_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),popMode ;
 KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 KYWD_VAL_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 KYWD_VAL_WS : [ ]+
@@ -1872,6 +1892,7 @@ KYWD_VAL_WS : [ ]+
 mode KYWD_VAL_PAREN_MODE ;
 
 KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
 KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
