@@ -53,7 +53,7 @@ testrig9001:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test9001.jcl
 
 test9002:
-	java -jar JCLParser.jar -file testdata/test9002.jcl -include testdata -logLevel FINE
+	java -jar JCLParser.jar -file testdata/test9002.jcl -include testdata -logLevel FINEST
 
 #testNist:
 #	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log

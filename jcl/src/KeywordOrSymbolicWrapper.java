@@ -23,31 +23,27 @@ public class KeywordOrSymbolicWrapper {
 		if (this.ctx.QUOTED_STRING_FRAGMENT() == null 
 		|| this.ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
 		} else {
-			String theText = new String();
 			for (TerminalNode t: this.ctx.QUOTED_STRING_FRAGMENT()) {
-				theText = theText.concat(t.getSymbol().getText());
+				this.kvw.add(
+					new KeywordValueWrapper(
+						t.getSymbol().getText()
+						, t.getSymbol().getLine()
+						, t.getSymbol().getCharPositionInLine()
+					));
 			}
-			this.kvw.add(
-				new KeywordValueWrapper(
-					theText
-					, this.ctx.QUOTED_STRING_FRAGMENT().get(0).getSymbol().getLine()
-					, this.ctx.QUOTED_STRING_FRAGMENT().get(0).getSymbol().getCharPositionInLine()
-				));
 		}
 
 		if (this.ctx.KEYWORD_VALUE() == null 
 		|| this.ctx.KEYWORD_VALUE().size() == 0) {
 		} else {
-			String theText = new String();
 			for (TerminalNode t: this.ctx.KEYWORD_VALUE()) {
-				theText = theText.concat(t.getSymbol().getText());
+				this.kvw.add(
+					new KeywordValueWrapper(
+						t.getSymbol().getText()
+						, t.getSymbol().getLine()
+						, t.getSymbol().getCharPositionInLine()
+				));
 			}
-			this.kvw.add(
-				new KeywordValueWrapper(
-					theText
-					, this.ctx.KEYWORD_VALUE().get(0).getSymbol().getLine()
-					, this.ctx.KEYWORD_VALUE().get(0).getSymbol().getCharPositionInLine()
-			));
 		}
 
 		if (this.ctx.SYMBOLIC() == null 
@@ -97,9 +93,6 @@ public class KeywordOrSymbolicWrapper {
 
 		for (KeywordValueWrapper k: this.kvw) {
 			aString = aString.concat(k.getValue());
-			/*if (k.hasNext()) {
-				aString = aString.concat(" + ");
-			}*/
 		}
 
 		return aString;

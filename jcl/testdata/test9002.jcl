@@ -53,3 +53,12 @@
 //*
 //JS06     EXEC PROC=MOYA,AENV=Z
 //*
+//JS02     EXEC PGM=CRAIS
+//STEPLIB      INCLUDE MEMBER=LIB&AENV
+//OUTPUT01 DD  DISP=(,CATLG,DELETE),
+//             DSN=&SYSUID..CRICHTON.&AENV,
+//             AVGREC=K,
+//             LRECL=80,
+//             SPACE=(80,(10,10),RLSE)
+//PRINT        INCLUDE MEMBER=OUT&A.X&B&C.YZ
+//*
