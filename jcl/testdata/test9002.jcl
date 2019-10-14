@@ -2,15 +2,16 @@
 //*
 //GLOBAL   INCLUDE MEMBER=GSET
 //*
-//AERYN    PROC AENV=D
+//AERYN    PROC AENV=D,B=7
 //*
 //PS01     EXEC PGM=CHIANA
-//STEPLIB      INCLUDE MEMBER=LIB&AENV Production
+//STEPLIB      INCLUDE MEMBER=LIB&AENV
 //OUTPUT01 DD  DISP=(,CATLG,DELETE),
 //             DSN=&SYSUID..CHIANNA.&AENV,
 //             AVGREC=K,
 //             LRECL=80,
 //             SPACE=(80,(10,10),RLSE)
+//PRINT        INCLUDE MEMBER=O&A.X&B&C.YZ
 //*
 //         PEND
 //*
@@ -51,7 +52,7 @@
 //*
 //JS05     EXEC PROC=MOYA
 //*
-//JS06     EXEC PROC=MOYA,AENV=Z
+//JS06     EXEC PROC=MOYA,AENV=Q
 //*
 //JS02     EXEC PGM=CRAIS
 //STEPLIB      INCLUDE MEMBER=LIB&AENV
@@ -60,5 +61,5 @@
 //             AVGREC=K,
 //             LRECL=80,
 //             SPACE=(80,(10,10),RLSE)
-//PRINT        INCLUDE MEMBER=OUT&A.X&B&C.YZ
+//PRINT        INCLUDE MEMBER=O&A.X&B&C.YZ
 //*

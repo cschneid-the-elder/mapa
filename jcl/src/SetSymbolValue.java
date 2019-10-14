@@ -239,7 +239,7 @@ public class SetSymbolValue {
 				set in the PROC statement for the proc MOYA is nullified.
 			*/
 		} else {
-			theText = kywd.toString();
+			theText = kywd.getValue();
 		}
 
 		return theText;

@@ -346,7 +346,7 @@ EXEC3_MODE.
 WS_POST_EX : [ ]+ ->channel(HIDDEN) ;
 PGM : P G M ->mode(EXEC2_MODE) ;
 PROC_EX : P R O C ->mode(EXEC2_MODE) ;
-EXEC_PROC_NAME : KEYWORD_VALUE ->type(KEYWORD_VALUE),mode(EXEC2_MODE) ;
+EXEC_PROC_NAME : NM_PART ->type(KEYWORD_VALUE),mode(EXEC2_MODE) ;
 
 mode EXEC2_MODE ;
 
@@ -1823,24 +1823,13 @@ JOB_PROGRAMMER_NAME_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 mode KYWD_VAL_MODE ;
 
 KYWD_VAL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-/*
-Originally I had coded...
-
-KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-
-...but that, coupled with the need to popMode after a match, precluded
-detecting...
-
-keyWord=&symbolic1&symbolic2&symbolic3
-
-...so I added '&' to the regex for KEYWORD_VALUE and now all is right
-with the world.  Except users of this grammar must inspect KEYWORD_VALUE
-in their application code to detect symbolics.  The second half of the
-KEYWORD_VALUE token is an attempt to detect substringed system symbolics.
-
-*/
 
 KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+/*
+
+The second half of the KEYWORD_VALUE token is an attempt to detect substringed system symbolics.
+
+*/
 KEYWORD_VALUE : (
     ([A-Z0-9@#$&*\-+./%[:_]+?) | 
     (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+
@@ -1917,6 +1906,9 @@ My reading of the documentation is that the following are allowed...
 
 ...meaning that AMORG is special.  It is a keyword parameter with
 no value, and it can be specified outside of apostrophes.
+
+The rest of the AMP parameters (apparently?) must be specified within
+parentheses.  So a separate grammar for those is indicated.
 
 */
 

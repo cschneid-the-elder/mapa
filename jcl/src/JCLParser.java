@@ -6879,7 +6879,9 @@ public class JCLParser extends Parser {
 	public static class DdParmDIAGNSContext extends ParserRuleContext {
 		public TerminalNode DIAGNS() { return getToken(JCLParser.DIAGNS, 0); }
 		public TerminalNode EQUAL() { return getToken(JCLParser.EQUAL, 0); }
-		public TerminalNode KEYWORD_VALUE() { return getToken(JCLParser.KEYWORD_VALUE, 0); }
+		public KeywordOrSymbolicContext keywordOrSymbolic() {
+			return getRuleContext(KeywordOrSymbolicContext.class,0);
+		}
 		public DdParmDIAGNSContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -6910,7 +6912,7 @@ public class JCLParser extends Parser {
 			setState(1453);
 			match(EQUAL);
 			setState(1454);
-			match(KEYWORD_VALUE);
+			keywordOrSymbolic();
 			}
 		}
 		catch (RecognitionException re) {
@@ -32184,7 +32186,7 @@ public class JCLParser extends Parser {
 		"\u05ac\7\26\2\2\u05a7\u05ad\5\32\16\2\u05a8\u05a9\7q\2\2\u05a9\u05aa\5"+
 		"\32\16\2\u05aa\u05ab\7r\2\2\u05ab\u05ad\3\2\2\2\u05ac\u05a7\3\2\2\2\u05ac"+
 		"\u05a8\3\2\2\2\u05ad\u008f\3\2\2\2\u05ae\u05af\7(\2\2\u05af\u05b0\7\26"+
-		"\2\2\u05b0\u05b1\7\u0299\2\2\u05b1\u0091\3\2\2\2\u05b2\u05b3\7)\2\2\u05b3"+
+		"\2\2\u05b0\u05b1\5\32\16\2\u05b1\u0091\3\2\2\2\u05b2\u05b3\7)\2\2\u05b3"+
 		"\u05b5\7\26\2\2\u05b4\u05b6\7q\2\2\u05b5\u05b4\3\2\2\2\u05b5\u05b6\3\2"+
 		"\2\2\u05b6\u05b8\3\2\2\2\u05b7\u05b9\5\u0094K\2\u05b8\u05b7\3\2\2\2\u05b8"+
 		"\u05b9\3\2\2\2\u05b9\u05bb\3\2\2\2\u05ba\u05bc\5\u0096L\2\u05bb\u05ba"+
