@@ -29,7 +29,7 @@ public class TheCLI{
 		Option include = new Option("include", true
 			, "name of a single path in which to locate cataloged procs and JCL INCLUDEs, takes precedence over the includeList option");
 		Option includeList = new Option("includeList", true
-			, "name of a file containing a list of paths in which to locate cataloged procs and JCL INCLUDEs");
+			, "name of a tab-delimited file containing a list of paths in which to locate cataloged procs and JCL INCLUDEs and the PDS(E)s to which they correspond");
 		Option out = new Option("out", true
 			, "name of a file in which to store the gathered information");
 		Option logLevel = new Option("logLevel", true

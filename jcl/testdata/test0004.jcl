@@ -50,6 +50,12 @@
 //        'USER.PROCLIB')
 // EXEC PGM=IEFBR14
 //* 
+//TESTJCLD JOB
+// JCLLIB ORDER=('SYS1.PROCLIB',
+//        'USER.PROCLIB',
+//        '&SYSUID..PROCLIB')
+// EXEC PGM=IEFBR14
+//* 
 //TESTJCL1 JOB
 // JCLLIB ORDER=SYS1.PROCLIB  comment
 // EXEC PGM=IEFBR14
@@ -100,6 +106,12 @@
 //TESTJCLC JOB
 // JCLLIB ORDER=('SYS1.PROCLIB',  comment
 //        'USER.PROCLIB')  comment
+// EXEC PGM=IEFBR14
+//* 
+//TESTJCLD JOB
+// JCLLIB ORDER=('SYS1.PROCLIB',  comment
+//        'USER.PROCLIB',  comment
+//        '&SYSUID..PROCLIB') comment
 // EXEC PGM=IEFBR14
 //* 
 

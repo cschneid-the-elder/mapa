@@ -93,6 +93,7 @@ lexer grammar JCLLexer;
 
 @lexer::members {
     public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
+    public String dlmString = null;
     public int myMode = DEFAULT_MODE;
 }
 
@@ -1285,7 +1286,10 @@ DATA_PARM_MODE_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 mode DLM_MODE ;
 
 DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
-DLM_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS);
+DLM_SQUOTE : '\''
+    {
+      dlmString = new String();
+    } ->channel(HIDDEN),pushMode(QS);
 DLM_VAL : [A-Z0-9@#$_\-]+ 
     {
         dlmVals = new java.util.ArrayList();
@@ -1361,7 +1365,12 @@ SQUOTE_QS : SQUOTE
         case KYWD_VAL_MODE :
         case DCB_MODE :
         case DSN_MODE :
+            popMode();
+            popMode();
+            break;
         case DLM_MODE :
+            dlmVals = new java.util.ArrayList();
+            dlmVals.add(dlmString);
             popMode();
             popMode();
             break;
@@ -1386,8 +1395,8 @@ SQUOTE_QS : SQUOTE
     } ->channel(HIDDEN) ;
 fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
 NEWLINE_QS : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
-
-QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
+QS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+?
     {
       switch(_modeStack.peek()) {
         case JOB_PROGRAMMER_NAME_MODE :
@@ -1397,8 +1406,7 @@ QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+
             setType(QUOTED_STRING_PROGRAMMER_NAME);
             break;
         case DLM_MODE :
-            dlmVals = new java.util.ArrayList();
-            dlmVals.add(getText());
+            dlmString = dlmString.concat(getText());
             break;
         default :
             break;
