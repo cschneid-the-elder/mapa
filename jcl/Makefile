@@ -23,7 +23,6 @@ all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/T
 clean:
 	echo `date` clean >> build.log
 	rm -f ./src/JCLLexer*.java ./class/JCLLexer*.class ./src/JCLLexer*.tokens ./src/JCLLexer*.interp ./src/JCLParser*.java ./class/JCLParser*.class ./src/JCLParser.tokens ./src/JCLParser.interp
-	cd ..
 
 cleanmine:
 	echo `date` cleanmine >> build.log
@@ -49,11 +48,8 @@ endif
 testrig:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
 
-testrig9001:
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test9001.jcl
-
-test9002:
-	java -jar JCLParser.jar -file testdata/test9002.jcl -include testdata -logLevel FINEST
+testdemo:
+	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -logLevel FINEST
 
 #testNist:
 #	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log

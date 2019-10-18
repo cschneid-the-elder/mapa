@@ -46,6 +46,7 @@ public static void main(String[] args) throws Exception {
 	String cwFileName = null; //current work file name
 	ArrayList<SetSymbolValue> sets = null;
 	ArrayList<IncludeStatement> includes = null;
+	ArrayList<JobCardWrapper> jobs = null;
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing " + aFileName);
@@ -53,6 +54,8 @@ public static void main(String[] args) throws Exception {
 		LOGGER.fine("sets = " + sets);
 		includes = lookForIncludes(aFileName);
 		LOGGER.fine("includes = " + includes);
+		jobs = lookForJobs(aFileName);
+		LOGGER.fine("jobs = " + jobs);
 	}
 
 	LOGGER.info("Processing complete");
@@ -99,6 +102,28 @@ public static void main(String[] args) throws Exception {
 		jclwalker.walk(includeStatementListener, jcltree);
 
 		return includes;
+		
+	}
+
+	public static ArrayList<JobCardWrapper> lookForJobs(String fileName) throws IOException {
+		LOGGER.fine("lookForJobs");
+		ArrayList<JobCardWrapper> jobs = new ArrayList<>();
+		CharStream cs = fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		JobCardListener jobCardListener = new JobCardListener(jobs, fileName);
+	
+		LOGGER.finer("----------walking tree with jobCardListener");
+	
+		jclwalker.walk(jobCardListener, jcltree);
+
+		return jobs;
 		
 	}
 

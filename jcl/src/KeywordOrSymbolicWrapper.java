@@ -49,54 +49,33 @@ public class KeywordOrSymbolicWrapper {
 	private Boolean inProc = null;
 	private Boolean parameterized = null;
 
+	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList) {
+		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
+
+		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
+			kywdList.add(new KeywordOrSymbolicWrapper(k, null));
+		}
+
+		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		return kywdList;
+	}
+
 	public KeywordOrSymbolicWrapper(JCLParser.KeywordOrSymbolicContext ctx, String procName) {
 		this.ctx = ctx;
 		this.procName = procName;
-		this.inProc = (procName == null);
+		this.inProc = !(procName == null);
 		this.initialize();
 	}
 
 	private void initialize() {
-
-		if (this.ctx.QUOTED_STRING_FRAGMENT() == null 
-		|| this.ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
-		} else {
-			for (TerminalNode t: this.ctx.QUOTED_STRING_FRAGMENT()) {
-				this.kvw.add(
-					new KeywordValueWrapper(
-						t.getSymbol().getText()
-						, t.getSymbol().getLine()
-						, t.getSymbol().getCharPositionInLine()
-					));
-			}
-		}
-
-		if (this.ctx.KEYWORD_VALUE() == null 
-		|| this.ctx.KEYWORD_VALUE().size() == 0) {
-		} else {
-			for (TerminalNode t: this.ctx.KEYWORD_VALUE()) {
-				this.kvw.add(
-					new KeywordValueWrapper(
-						t.getSymbol().getText()
-						, t.getSymbol().getLine()
-						, t.getSymbol().getCharPositionInLine()
-				));
-			}
-		}
+		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx));
 
 		if (this.ctx.SYMBOLIC() == null 
 		|| this.ctx.SYMBOLIC().size() == 0) {
 			this.parameterized = false;
 		} else {
 			this.parameterized = true;
-			for (TerminalNode t: this.ctx.SYMBOLIC()) {
-				this.kvw.add(
-					new KeywordValueWrapper(
-						t.getSymbol().getText()
-						, t.getSymbol().getLine()
-						, t.getSymbol().getCharPositionInLine()
-				));
-			}
 		}
 
 		Demo01.LOGGER.finest(this.getClass().getName() + " kvw:");
@@ -118,33 +97,35 @@ public class KeywordOrSymbolicWrapper {
 	}
 
 	public void resolveText(ArrayList<SetSymbolValue> sets) {
-		for(SetSymbolValue s: sets) {
-			switch(s.getSetType()) {
-				case SET:
-					if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
-					}
-					break;
+		if (this.parameterized) {
+			for(SetSymbolValue s: sets) {
+				switch(s.getSetType()) {
+					case SET:
+						if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
+						}
+						break;
+				}
 			}
 		}
 	}
 
 	public String getValue() {
-		String aString = new String();
+		StringBuffer aString = new StringBuffer();
 
 		for (KeywordValueWrapper k: this.kvw) {
-			aString = aString.concat(k.getValue());
+			aString.append(k.getValue());
 		}
 
-		return aString;
+		return aString.toString();
 	}
 
 	public String toString() {
-		String aString = new String();
+		StringBuffer aString = new StringBuffer();
 
 		for (KeywordValueWrapper k: this.kvw) {
-			aString = aString.concat(k.getValue());
+			aString.append(k.getValue());
 		}
 
-		return aString;
+		return aString.toString();
 	}
 }

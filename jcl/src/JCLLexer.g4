@@ -1394,7 +1394,8 @@ SQUOTE_QS : SQUOTE
       }
     } ->channel(HIDDEN) ;
 fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
-NEWLINE_QS : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
+QS_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
+QS_AMPERSAND : AMPERSAND AMPERSAND ;
 QS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+?
     {
@@ -1888,15 +1889,15 @@ KYWD_VAL_WS : [ ]+
 
 mode KYWD_VAL_PAREN_MODE ;
 
-KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
 KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
 KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
 KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
-KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
-KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->type(COMMA),pushMode(COMMA_NEWLINE_MODE) ;
+KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->type(COMMA),pushMode(COMMA_WS_MODE) ;
 
 mode AMP_MODE ;
 
@@ -1916,7 +1917,7 @@ My reading of the documentation is that the following are allowed...
 no value, and it can be specified outside of apostrophes.
 
 The rest of the AMP parameters (apparently?) must be specified within
-parentheses.  So a separate grammar for those is indicated.
+single quotes.  So a separate grammar for those is indicated.
 
 */
 

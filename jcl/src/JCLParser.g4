@@ -29,7 +29,7 @@ procJCL : commandStatement? procStatement (commandStatement | commentStatement |
 
 procStatement : SS procName? PROC definedSymbolicParameters* ;
 
-defineSymbolicParameter : PROC_PARM_NAME EQUAL (SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | PROC_PARM_VALUE)? ;
+defineSymbolicParameter : PROC_PARM_NAME EQUAL (SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | PROC_PARM_VALUE)? ;
 
 definedSymbolicParameters : defineSymbolicParameter+ ;
 
@@ -60,7 +60,7 @@ deferred until after the JCL has begun "executing."
 
 */
 
-keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | KEYWORD_VALUE | SYMBOLIC)+ ;
+keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | KEYWORD_VALUE | SYMBOLIC)+ ;
 
 execStatement : execPgmStatement | execProcStatement ;
 
@@ -97,8 +97,9 @@ execParmCOND : EXEC_COND EQUAL (
     (
       LPAREN? 
         (
+          COMMA?
           LPAREN?
-            keywordOrSymbolic+
+            keywordOrSymbolic (COMMA keywordOrSymbolic)*
           RPAREN?
         )+
       RPAREN?
@@ -142,9 +143,10 @@ ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmB
 ddParmACCODE : ACCODE EQUAL keywordOrSymbolic;
 ddParmAMP : AMP EQUAL (
     (LPAREN 
-        (AMORG | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+)
+        (AMORG | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+)
     RPAREN) |
     QUOTED_STRING_FRAGMENT+ |
+    QS_AMPERSAND+ |
     AMORG
   ) ;
 ddParmASTERISK : ASTERISK ;
@@ -212,7 +214,7 @@ ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? ddParmDISP_NORMAL_TERM? ddPar
 ddParmDISP_STATUS : DISP_MOD | DISP_NEW | DISP_OLD | DISP_SHR | SYMBOLIC ;
 ddParmDISP_NORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDISP_ABNORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
-ddParmDLM : DLM EQUAL (DLM_VAL | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+) ;
+ddParmDLM : DLM EQUAL (DLM_VAL | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+) ;
 ddParmDSID : DSID EQUAL (
     DSID_VALUE | 
     SYMBOLIC |
@@ -358,7 +360,7 @@ ddParmSYSOUT : SYSOUT EQUAL (
     (LPAREN sysoutClass sysoutWriter? sysoutFormOrCase? RPAREN)
   ) ;
 
-sysoutClass : (SYSOUT_CLASS | QUOTED_STRING_FRAGMENT+ | SYMBOLIC+) ;
+sysoutClass : (SYSOUT_CLASS | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | SYMBOLIC+) ;
 sysoutWriter : (SYSOUT_WRITER | SYSOUT_INTRDR | SYMBOLIC) ;
 sysoutFormOrCase : (SYSOUT_FORM | SYMBOLIC) ;
 
@@ -426,13 +428,13 @@ ddParmVOLUME : (VOL | VOLUME) EQUAL (
     RPAREN)
   ) ;
 
-ddParmVolSer : (VOL_SER_NB | QUOTED_STRING_FRAGMENT+ | SYMBOLIC+) ;
+ddParmVolSer : (VOL_SER_NB | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | SYMBOLIC+) ;
 ddParmVOLUME_SER : (
     (VOL_SER EQUAL ddParmVolSer) |
     (VOL_SER EQUAL LPAREN  ddParmVolSer+ RPAREN)
   ) ;
 
-ddParmVOLUME_REF : VOL_REF EQUAL (VOL_REF_REFERBACK | DATASET_NAME | QUOTED_STRING_FRAGMENT+ | SYMBOLIC+) ;
+ddParmVOLUME_REF : VOL_REF EQUAL (VOL_REF_REFERBACK | DATASET_NAME | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | SYMBOLIC+) ;
 
 ddParmReferback : DSN_MODE_REFERENCE |
     REFERBACK |
@@ -467,10 +469,11 @@ jobName : NAME_FIELD ;
 
 jobAccountingInformation : (
     QUOTED_STRING_FRAGMENT+ |
+    QS_AMPERSAND+ |
     JOB_ACCT_MODE1_UNQUOTED_STRING+ |
     JOB_ACCT_MODE2_UNQUOTED_STRING+
   ) ;
-jobProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | JOB_PROGRAMMER_NAME_UNQUOTED_STRING+) ;
+jobProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | JOB_PROGRAMMER_NAME_UNQUOTED_STRING+ | QS_AMPERSAND+) ;
 
 jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
 
@@ -515,7 +518,7 @@ jobParmNOTIFY : NOTIFY EQUAL keywordOrSymbolic ;
 
 nameOrSymbolic : ((NAME (DOT NAME)?) | SYMBOLIC) ;
 
-jobParmPASSWORD : PASSWORD EQUAL LPAREN? keywordOrSymbolic+ RPAREN? ;
+jobParmPASSWORD : PASSWORD EQUAL singleOrMultipleValue ;
 
 jobParmPERFORM : PERFORM EQUAL keywordOrSymbolic ;
 
@@ -525,9 +528,9 @@ jobParmRD : RD EQUAL keywordOrSymbolic ;
 
 jobParmREGION : REGION EQUAL keywordOrSymbolic ;
 
-jobParmREGIONX : REGIONX EQUAL LPAREN? keywordOrSymbolic+ RPAREN? ;
+jobParmREGIONX : REGIONX EQUAL singleOrMultipleValue ;
 
-jobParmRESTART : RESTART EQUAL LPAREN? keywordOrSymbolic+ RPAREN? ;
+jobParmRESTART : RESTART EQUAL singleOrMultipleValue ;
 
 jobParmSECLABEL : SECLABEL EQUAL keywordOrSymbolic ;
 
@@ -591,7 +594,7 @@ outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | ou
 
 outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL singleOrMultipleValue ;
 
-outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT+ | SYMBOLIC+) ;
+outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | SYMBOLIC+) ;
 outputStatementAFPSTATS : OUTPUT_STMT_AFPSTATS EQUAL keywordOrSymbolic ;
 outputStatementBUILDING : OUTPUT_STMT_BUILDING EQUAL keywordOrSymbolic ;
 outputStatementBURST : OUTPUT_STMT_BURST EQUAL keywordOrSymbolic ;
@@ -621,13 +624,9 @@ outputStatementDATACK : OUTPUT_STMT_DATACK EQUAL keywordOrSymbolic ;
 outputStatementDDNAME : OUTPUT_STMT_DDNAME EQUAL keywordOrSymbolic ;
 outputStatementDEFAULT : OUTPUT_STMT_DEFAULT EQUAL keywordOrSymbolic ;
 outputStatementDEPT : OUTPUT_STMT_DEPT EQUAL keywordOrSymbolic ;
-outputStatementDEST : OUTPUT_STMT_DEST EQUAL (
-    keywordOrSymbolic |
-    (LPAREN keywordOrSymbolic RPAREN)
-  )
-  ;
+outputStatementDEST : OUTPUT_STMT_DEST EQUAL singleOrMultipleValue ;
 
-destValue : (DEST_VALUE | QUOTED_STRING_FRAGMENT+ | SYMBOLIC+) ;
+destValue : (DEST_VALUE | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | SYMBOLIC+) ;
 
 
 /*
@@ -730,10 +729,9 @@ scheduleParmJOBGROUP : SCHEDULE_PARM_JOBGROUP EQUAL keywordOrSymbolic  ;
 scheduleParmSTARTBY : SCHEDULE_PARM_STARTBY EQUAL singleOrMultipleValue ;
 scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic  ;
 
-setStatement : SS NAME_FIELD? SET setOperation+
-  ;
+setStatement : SS NAME_FIELD? SET setOperation+ ;
 
-setOperation : (SET_PARM_NAME EQUAL (SET_PARM_VALUE | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+)? ) ;
+setOperation : (SET_PARM_NAME EQUAL (SET_PARM_VALUE | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND)? ) ;
 
 xmitStatement : SS NAME_FIELD? XMIT xmitParameters* ddParmASTERISK_DATA* ;
 
@@ -741,7 +739,7 @@ xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStateme
 
 xmitParmDEST : DEST EQUAL keywordOrSymbolic ;
 
-xmitParmDLM : DLM EQUAL (DLM_VAL | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+) ;
+xmitParmDLM : DLM EQUAL (DLM_VAL | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+) ;
 
 xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic ;
 
@@ -749,13 +747,13 @@ jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetState
 
 jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP LPAREN? jobGroupAccountingInformation? RPAREN? jobGroupProgrammerName? jobGroupParameters* ;
 
-jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | JOBGROUP_ACCT_UNQUOTED_STRING+) ;
+jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | JOBGROUP_ACCT_UNQUOTED_STRING+) ;
 
 jobGroupAccountingInformation : jobGroupAccountingInformationSimple | jobGroupAccountingInformationMultiLine ;
 
 jobGroupAccountingInformationSimple : jobGroupAccountingString+ ;
-jobGroupAccountingInformationMultiLine : jobGroupAccountingString (COMMA? SS? jobGroupAccountingString)* ;
-jobGroupProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING+) ;
+jobGroupAccountingInformationMultiLine : jobGroupAccountingString (COMMA jobGroupAccountingString)* ;
+jobGroupProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | QS_AMPERSAND+ | JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING+) ;
 
 jobGroupParameters : (jobGroupEMAIL | jobGroupOWNER | jobGroupGROUP | jobGroupPASSWORD | jobGroupSECLABEL | jobGroupTYPE | jobGroupHOLD | jobGroupERROR | jobGroupONERROR | jobGroupSYSAFF | jobGroupSYSTEM | jobGroupSCHENV) ;
 
@@ -850,15 +848,20 @@ singleOrMultipleValue : (
     keywordOrSymbolic |
     parenList |
     (LPAREN
-      keywordOrSymbolic
+      keywordOrSymbolic?
+      COMMA
       parenList
     RPAREN) |
+    (LPAREN
+      keywordOrSymbolic? (COMMA keywordOrSymbolic)+
+    RPAREN) |
     (LPAREN+
-      keywordOrSymbolic (keywordOrSymbolic RPAREN?)*
+      keywordOrSymbolic (COMMA keywordOrSymbolic RPAREN?)*
     RPAREN+)
+
   ) ;
 
-parenList : (LPAREN keywordOrSymbolic+ RPAREN) ;
+parenList : (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN) ;
 
 jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement | jes2SetupStatement | jes2SignoffStatement |  jes2SignonStatement | jes2XEQStatement | jes2XMITStatement) ;
 
@@ -939,7 +942,7 @@ jes2SignonStatement : SA JES2_SIGNON
 jes2XEQStatement : SA JES2_XEQ JES2_XEQ_NODE ;
 
 jes2XMITStatement : SA JES2_XMIT JES2_XMIT_NODE
-    (DLM EQUAL (SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | DLM_VAL))?
+    (DLM EQUAL (SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | DLM_VAL))?
     DD_ASTERISK_DATA+
     (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)?
   ;

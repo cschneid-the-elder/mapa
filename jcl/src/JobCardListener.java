@@ -16,6 +16,7 @@ public class JobCardListener extends JCLParserBaseListener {
 			, String fileName
 			) {
 		super();
+		this.jobs = jobs;
 		this.fileName = fileName;
 	}
 

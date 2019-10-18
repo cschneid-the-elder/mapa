@@ -214,9 +214,11 @@ public class SetSymbolValue {
 		String theText = new String();
 
 		if (ctx.SET_PARM_VALUE() == null) {
-			if (ctx.QUOTED_STRING_FRAGMENT() == null) {
+			if (ctx.QUOTED_STRING_FRAGMENT() == null || ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
 			} else {
-				theText = ctx.QUOTED_STRING_FRAGMENT().getSymbol().getText();
+				for (TerminalNode t: ctx.QUOTED_STRING_FRAGMENT()) {
+					theText = t.getSymbol().getText();
+				}
 			}
 		} else {
 			theText = ctx.SET_PARM_VALUE().getSymbol().getText();
@@ -249,14 +251,16 @@ public class SetSymbolValue {
 		JCLParser.DefineSymbolicParameterContext ctx = (JCLParser.DefineSymbolicParameterContext)this.ctx;
 		String theText = new String();
 
-			if (ctx.PROC_PARM_VALUE() == null) {
-				if (ctx.QUOTED_STRING_FRAGMENT() == null) {
-				} else {
-					theText = ctx.QUOTED_STRING_FRAGMENT().getSymbol().getText();
-				}
+		if (ctx.PROC_PARM_VALUE() == null) {
+			if (ctx.QUOTED_STRING_FRAGMENT() == null || ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
 			} else {
-				theText = ctx.PROC_PARM_VALUE().getSymbol().getText();
+				for (TerminalNode t: ctx.QUOTED_STRING_FRAGMENT()) {
+					theText = t.getSymbol().getText();
+				}
 			}
+		} else {
+			theText = ctx.PROC_PARM_VALUE().getSymbol().getText();
+		}
 
 		return theText;
 	}
