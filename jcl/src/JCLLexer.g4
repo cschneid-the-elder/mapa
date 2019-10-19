@@ -145,7 +145,7 @@ fragment NUM : [0-9] ;
 RPAREN_DFLT : ')' ->type(RPAREN) ;
 
 SLASH : '/' ;
-SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 fragment SQUOTE2 : SQUOTE SQUOTE ;
 
 WS : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
@@ -307,7 +307,7 @@ COMMAND_WS : ' '+ ->channel(HIDDEN),mode(COMMAND_PARM_MODE) ;
 
 mode COMMAND_PARM_MODE ;
 
-COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 COMMAND_PARM_WS : ' '+ ->channel(HIDDEN),mode(CM_MODE) ;
 COMMAND_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
@@ -318,7 +318,7 @@ JCL_COMMAND_WS : ' '+ ->channel(HIDDEN),mode(JCL_COMMAND_PARM_MODE) ;
 mode JCL_COMMAND_PARM_MODE ;
 
 JCL_COMMAND_PARM : [)(A-Z0-9@#$*\-+&./%,:]+ ;
-JCL_COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+JCL_COMMAND_PARM_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 JCL_COMMAND_PARM_WS : ' '+ ->channel(HIDDEN),mode(CM_MODE) ;
 JCL_COMMAND_PARM_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
@@ -768,7 +768,7 @@ mode PROC_PARM_VALUE_MODE ;
 
 PROC_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 PROC_PARM_VALUE : [)(A-Z0-9@#$*\-+&./%[]+ ;
-PROC_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+PROC_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 PROC_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 PROC_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
@@ -825,7 +825,7 @@ mode SET_PARM_VALUE_MODE ;
 
 SET_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 SET_PARM_VALUE : [)(A-Z0-9@#$*\-+&./%[:_]+ ;
-SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
@@ -883,7 +883,7 @@ JOBGROUP_SYSAFF : S Y S A F F ->pushMode(KYWD_VAL_MODE) ;
 JOBGROUP_SYSTEM : S Y S T E M ->pushMode(KYWD_VAL_MODE) ;
 JOBGROUP_TYPE : T Y P E ->pushMode(KYWD_VAL_MODE) ;
 
-JOBGROUP_ACCT1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+JOBGROUP_ACCT1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 JOBGROUP_ACCT_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 
@@ -919,7 +919,7 @@ JOBGROUP_ACCT2_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOBGROUP_ACCT2_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 JOBGROUP_ACCT2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(JOBGROUP_ACCT3_MODE) ;
 
-JOBGROUP_ACCT2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+JOBGROUP_ACCT2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 JOBGROUP_ACCT2_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ->type(JOBGROUP_ACCT_UNQUOTED_STRING) ;
 
 JOBGROUP_ACCT2_COMMA : COMMA_DFLT ->channel(HIDDEN) ;
@@ -953,7 +953,7 @@ JOBGROUP_PROGRAMMER_NAME_SYSAFF : JOBGROUP_SYSAFF ->type(JOBGROUP_SYSAFF),pushMo
 JOBGROUP_PROGRAMMER_NAME_SYSTEM : JOBGROUP_SYSTEM ->type(JOBGROUP_SYSTEM),pushMode(KYWD_VAL_MODE) ;
 JOBGROUP_PROGRAMMER_NAME_TYPE : JOBGROUP_TYPE ->type(JOBGROUP_TYPE),pushMode(KYWD_VAL_MODE) ;
 
-JOBGROUP_PROGRAMMER_NAME_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+JOBGROUP_PROGRAMMER_NAME_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 
 mode JOBGROUP_ERROR_MODE ;
@@ -1289,7 +1289,7 @@ DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
 DLM_SQUOTE : '\''
     {
       dlmString = new String();
-    } ->channel(HIDDEN),pushMode(QS);
+    } ->channel(HIDDEN),pushMode(QS_MODE);
 DLM_VAL : [A-Z0-9@#$_\-]+ 
     {
         dlmVals = new java.util.ArrayList();
@@ -1354,10 +1354,10 @@ CNTL_MODE_TERMINATORX : SLASH SLASH ([A-Z0-9@#$]+)? [ ]+ (E N D C N T L) ->mode(
 CNTL_DATA : DD_ASTERISK_DATA+? ;
 
 
-mode QS ;
+mode QS_MODE ;
 
-fragment SQUOTE2_QS : SQUOTE SQUOTE ;
-SQUOTE_QS : SQUOTE
+QS_SQUOTE2 : SQUOTE SQUOTE ;
+QS_SQUOTE : SQUOTE
     {
       switch(_modeStack.peek()) {
         case AMP_MODE :
@@ -1394,10 +1394,10 @@ SQUOTE_QS : SQUOTE
       }
     } ->channel(HIDDEN) ;
 fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
-QS_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(QS_SS) ;
+QS_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(QS_SS_MODE) ;
 QS_AMPERSAND : AMPERSAND AMPERSAND ;
 QS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+?
+QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE)+?
     {
       switch(_modeStack.peek()) {
         case JOB_PROGRAMMER_NAME_MODE :
@@ -1415,8 +1415,8 @@ QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE | SQUOTE2_QS)+?
     }
   ;
 
-mode QS_SS ;
-SS_QS : SS
+mode QS_SS_MODE ;
+QS_SS : SS
     {
       getCharPositionInLine() == 2
     }? ->channel(HIDDEN) ;
@@ -1430,7 +1430,7 @@ QS_SS_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),channel(COMMENTS),mo
 mode DSN_MODE ;
 
 DSN_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSN_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+DSN_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 /*
 This pattern is _very_ inclusive.  Consider...
 
@@ -1465,7 +1465,7 @@ mode DCB_MODE ;
 
 DCB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DCB_PAREN_MODE) ;
 DCB_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DCB_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+DCB_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 /*
 
@@ -1544,7 +1544,7 @@ mode DCB_PAREN_MODE ;
 
 DCB_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 DCB_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
-DCB_PAREN_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS) ;
+DCB_PAREN_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 DCB_PAREN_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),channel(COMMENTS),pushMode(COMMA_WS_MODE) ;
 DCB_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
@@ -1734,7 +1734,7 @@ JOB_TYPRUN : T Y P R U N ->type(TYPRUN),pushMode(KYWD_VAL_MODE) ;
 JOB_UJOBCORR : U J O B C O R R ->type(UJOBCORR),pushMode(KYWD_VAL_MODE) ;
 JOB_USER : U S E R ->type(USER),pushMode(KYWD_VAL_MODE) ;
 
-JOB_ACCT_MODE1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+JOB_ACCT_MODE1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 JOB_ACCT_MODE1_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 
@@ -1770,7 +1770,7 @@ JOB_ACCT_MODE2_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JOB_ACCT_MODE2_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 JOB_ACCT_MODE2_RPAREN : RPAREN_DFLT ->type(RPAREN),mode(JOB_ACCT_MODE3) ;
 
-JOB_ACCT_MODE2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+JOB_ACCT_MODE2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 JOB_ACCT_MODE2_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 
 JOB_ACCT_MODE2_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
@@ -1825,7 +1825,7 @@ JOB_PROGRAMMER_NAME_TYPRUN : JOB_TYPRUN ->type(TYPRUN),pushMode(KYWD_VAL_MODE) ;
 JOB_PROGRAMMER_NAME_UJOBCORR : JOB_UJOBCORR ->type(UJOBCORR),pushMode(KYWD_VAL_MODE) ;
 JOB_PROGRAMMER_NAME_USER : JOB_USER ->type(USER),pushMode(KYWD_VAL_MODE) ;
 
-JOB_PROGRAMMER_NAME_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+JOB_PROGRAMMER_NAME_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 JOB_PROGRAMMER_NAME_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 
 
@@ -1843,7 +1843,7 @@ KEYWORD_VALUE : (
     ([A-Z0-9@#$&*\-+./%[:_]+?) | 
     (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+
   ) ;
-KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
 KYWD_VAL_RPAREN : RPAREN_DFLT
     {
@@ -1892,7 +1892,7 @@ mode KYWD_VAL_PAREN_MODE ;
 KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
 KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
-KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
 KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
@@ -1922,7 +1922,7 @@ single quotes.  So a separate grammar for those is indicated.
 */
 
 AMORG : A M O R G ->popMode ;
-AMP_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+AMP_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 AMP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 AMP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 AMP_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(AMP_PAREN_MODE) ;
@@ -1930,7 +1930,7 @@ AMP_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(AMP_PAREN_MODE) ;
 mode AMP_PAREN_MODE ;
 
 AMP_PAREN_AMORG : A M O R G ->type(AMORG) ;
-AMP_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+AMP_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 AMP_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 AMP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 AMP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
@@ -2191,7 +2191,7 @@ mode SYSOUT_MODE ;
 
 SYSOUT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 SYSOUT_CLASS : [A-Z0-9*$] ->popMode ;
-SYSOUT_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+SYSOUT_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 SYSOUT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYSOUT_PAREN_MODE) ;
 
@@ -2199,7 +2199,7 @@ mode SYSOUT_PAREN_MODE ;
 
 SYSOUT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(SYSOUT_WRITER_MODE) ;
 SYSOUT_PAREN_CLASS : [A-Z0-9*$] ->type(SYSOUT_CLASS) ;
-SYSOUT_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+SYSOUT_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 SYSOUT_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 SYSOUT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
 
@@ -2334,14 +2334,14 @@ mode VOL_SER1_MODE ;
 VOL_SER1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 VOL_SER_NB : [A-Z0-9@#$-]+ ->popMode,popMode ;
 VOL_SER1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode ;
-VOL_SER1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_SER1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 VOL_SER1_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER1_PAREN_MODE) ;
 
 mode VOL_SER1_PAREN_MODE ;
 
 VOL_SER1_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
 VOL_SER1_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_SER1_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_SER1_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 VOL_SER1_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
 VOL_SER1_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 VOL_SER1_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
@@ -2393,7 +2393,7 @@ mode VOL_SER3_MODE ;
 
 VOL_SER3 : VOL_SER_NB ->type(VOL_SER_NB) ;
 VOL_SER3_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_SER3_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_SER3_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 VOL_SER3_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER3_PAREN_MODE) ;
 VOL_SER3_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
 
@@ -2401,7 +2401,7 @@ mode VOL_SER3_PAREN_MODE ;
 
 VOL_SER3_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
 VOL_SER3_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_SER3_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_SER3_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 VOL_SER3_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 VOL_SER3_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
@@ -2411,7 +2411,7 @@ mode VOL_REF1_MODE ;
 
 VOL_REF1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 VOL_REF_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode,popMode ;
-VOL_REF1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_REF1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 /*
 Note that VOL_REF1_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
@@ -2441,7 +2441,7 @@ mode VOL_REF2_MODE ;
 
 VOL_REF2_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 VOL_REF2_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(VOL_REF_REFERBACK),popMode,popMode,popMode,popMode,popMode,popMode ;
-VOL_REF2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS) ;
+VOL_REF2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 /*
 Note that VOL_REF2_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
