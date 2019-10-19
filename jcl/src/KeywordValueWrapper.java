@@ -9,6 +9,7 @@ public class KeywordValueWrapper {
 	private String value = null;
 	private int line = -1;
 	private int posn = -1;
+	private KeywordValueType type = null;
 
 	public static ArrayList<KeywordValueWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList) {		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
 
@@ -34,6 +35,7 @@ public class KeywordValueWrapper {
 						t.getSymbol().getText()
 						, t.getSymbol().getLine()
 						, t.getSymbol().getCharPositionInLine()
+						, KeywordValueType.QUOTED_STRING
 					));
 			}
 		}
@@ -48,6 +50,7 @@ public class KeywordValueWrapper {
 						t.getSymbol().getText()
 						, t.getSymbol().getLine()
 						, t.getSymbol().getCharPositionInLine()
+						, KeywordValueType.UNQUOTED_STRING
 				));
 			}
 		}
@@ -62,6 +65,37 @@ public class KeywordValueWrapper {
 						t.getSymbol().getText()
 						, t.getSymbol().getLine()
 						, t.getSymbol().getCharPositionInLine()
+						, KeywordValueType.SYMBOLIC
+				));
+			}
+		}
+
+		if (ctx.QS_AMPERSAND() == null 
+		|| ctx.QS_AMPERSAND().size() == 0) {
+		} else {
+			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.QS_AMPERSAND().size(): " + ctx.QS_AMPERSAND().size());
+			for (TerminalNode t: ctx.QS_AMPERSAND()) {
+				kvw.add(
+					new KeywordValueWrapper(
+						t.getSymbol().getText()
+						, t.getSymbol().getLine()
+						, t.getSymbol().getCharPositionInLine()
+						, KeywordValueType.AMPERSAND
+				));
+			}
+		}
+
+		if (ctx.QS_SQUOTE2() == null 
+		|| ctx.QS_SQUOTE2().size() == 0) {
+		} else {
+			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.QS_SQUOTE2().size(): " + ctx.QS_SQUOTE2().size());
+			for (TerminalNode t: ctx.QS_SQUOTE2()) {
+				kvw.add(
+					new KeywordValueWrapper(
+						t.getSymbol().getText()
+						, t.getSymbol().getLine()
+						, t.getSymbol().getCharPositionInLine()
+						, KeywordValueType.SINGLE_QUOTE
 				));
 			}
 		}
@@ -69,10 +103,11 @@ public class KeywordValueWrapper {
 		return kvw;
 	}
 
-	public KeywordValueWrapper(String value, int line, int posn) {
+	public KeywordValueWrapper(String value, int line, int posn, KeywordValueType type) {
 		this.value = value;
 		this.line = line;
 		this.posn = posn;
+		this.type = type;
 	}
 
 	public String getValue() {
@@ -85,6 +120,14 @@ public class KeywordValueWrapper {
 
 	public int getPosn() {
 		return this.posn;
+	}
+
+	public KeywordValueType getType() {
+		return this.type;
+	}
+
+	public Boolean isParm() {
+		return this.type == KeywordValueType.SYMBOLIC;
 	}
 
 	public long getSortKey() {

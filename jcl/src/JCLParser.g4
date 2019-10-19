@@ -29,7 +29,7 @@ procJCL : commandStatement? procStatement (commandStatement | commentStatement |
 
 procStatement : SS procName? PROC definedSymbolicParameters* ;
 
-defineSymbolicParameter : PROC_PARM_NAME EQUAL (SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | PROC_PARM_VALUE)? ;
+defineSymbolicParameter : PROC_PARM_NAME EQUAL keywordOrSymbolic? ;
 
 definedSymbolicParameters : defineSymbolicParameter+ ;
 
@@ -733,7 +733,7 @@ scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic  ;
 
 setStatement : SS NAME_FIELD? SET setOperation+ ;
 
-setOperation : (SET_PARM_NAME EQUAL (SET_PARM_VALUE | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND)? ) ;
+setOperation : (SET_PARM_NAME EQUAL keywordOrSymbolic?) ;
 
 xmitStatement : SS NAME_FIELD? XMIT xmitParameters* ddParmASTERISK_DATA* ;
 

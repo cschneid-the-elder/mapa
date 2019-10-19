@@ -23,6 +23,10 @@ public class SetSymbolValue {
 		this.inProc = inProc;
 		this.procName = procName;
 		this.setType = SetTypeOfSymbolValue.SET;
+		if (ctx.keywordOrSymbolic() == null) {
+		} else {
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+		}
 	}
 
 	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, Boolean inProc, String procName) {
@@ -43,6 +47,10 @@ public class SetSymbolValue {
 		this.inProc = inProc;
 		this.procName = procName;
 		this.setType = SetTypeOfSymbolValue.PROC;
+		if (ctx.keywordOrSymbolic() == null) {
+		} else {
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+		}
 	}
 
 	public String getFileName() {
@@ -213,15 +221,16 @@ public class SetSymbolValue {
 		JCLParser.SetOperationContext ctx = (JCLParser.SetOperationContext)this.ctx;
 		String theText = new String();
 
-		if (ctx.SET_PARM_VALUE() == null) {
-			if (ctx.QUOTED_STRING_FRAGMENT() == null || ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
-			} else {
-				for (TerminalNode t: ctx.QUOTED_STRING_FRAGMENT()) {
-					theText = t.getSymbol().getText();
-				}
-			}
+		if (this.kywd == null) {
+			/*
+				It's legal for this to be null.  The following is syntactically correct.
+
+				// SET TALYN=
+
+				In this instance the parm TALYN is set to nothing.
+			*/
 		} else {
-			theText = ctx.SET_PARM_VALUE().getSymbol().getText();
+			theText = kywd.getValue();
 		}
 
 		return theText;
@@ -238,7 +247,8 @@ public class SetSymbolValue {
 				//JS01 EXEC PROC=MOYA,TALYN=
 
 				In this instance the parm TALYN is set to nothing.  Any default value
-				set in the PROC statement for the proc MOYA is nullified.
+				set in the PROC statement for the proc MOYA is nullified.  Any value
+				set in a SET statement prior to this EXEC statement is nullified.
 			*/
 		} else {
 			theText = kywd.getValue();
@@ -251,15 +261,17 @@ public class SetSymbolValue {
 		JCLParser.DefineSymbolicParameterContext ctx = (JCLParser.DefineSymbolicParameterContext)this.ctx;
 		String theText = new String();
 
-		if (ctx.PROC_PARM_VALUE() == null) {
-			if (ctx.QUOTED_STRING_FRAGMENT() == null || ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
-			} else {
-				for (TerminalNode t: ctx.QUOTED_STRING_FRAGMENT()) {
-					theText = t.getSymbol().getText();
-				}
-			}
+		if (this.kywd == null) {
+			/*
+				It's legal for this to be null.  The following is syntactically correct.
+
+				//MOYA PROC TALYN=
+
+				In this instance the parm TALYN is set to nothing.  Any value
+				set in a SET statement prior to execution of the proc MOYA is nullified.
+			*/
 		} else {
-			theText = ctx.PROC_PARM_VALUE().getSymbol().getText();
+			theText = kywd.getValue();
 		}
 
 		return theText;

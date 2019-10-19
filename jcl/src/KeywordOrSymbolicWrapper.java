@@ -89,6 +89,8 @@ public class KeywordOrSymbolicWrapper {
 				+ k.getPosn()
 				+ "| sortKey = |"
 				+ k.getSortKey()
+				+ "| type = |"
+				+ k.getType()
 				+ "|"
 			);
 
@@ -96,12 +98,14 @@ public class KeywordOrSymbolicWrapper {
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
 	}
 
-	public void resolveText(ArrayList<SetSymbolValue> sets) {
+	public void resolveParms(ArrayList<SetSymbolValue> sets) {
 		if (this.parameterized) {
 			for(SetSymbolValue s: sets) {
 				switch(s.getSetType()) {
 					case SET:
-						if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
+						if (this.inProc && s.inProc && s.procName.equals(this.procName) //&& nothing on EXEC or PROC
+						|| (!this.inProc && !s.inProc)
+						) {
 						}
 						break;
 				}

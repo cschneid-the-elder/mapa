@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -26,11 +26,11 @@ clean:
 
 cleanmine:
 	echo `date` cleanmine >> build.log
-	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class
+	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class
 
 mine:
 	echo `date` mine >> build.log
-	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/SetSymbolValue.java ./src/SetSymbolValueListener.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/IncludeStatementListener.java ./src/JobCardWrapper.java ./src/JobCardListener.java
+	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/SetSymbolValueListener.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/IncludeStatementListener.java ./src/JobCardWrapper.java ./src/JobCardListener.java
 
 jar:
 	echo `date` jar >> build.log
