@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.tree.*;
 public class KeywordValueWrapper {
 
 	private String value = null;
+	private String resolvedValue = null;
 	private int line = -1;
 	private int posn = -1;
 	private KeywordValueType type = null;
@@ -132,5 +133,9 @@ public class KeywordValueWrapper {
 
 	public long getSortKey() {
 		return ((long)this.line * (long)Integer.MAX_VALUE) + this.posn;
+	}
+
+	public void setResolvedValue(String resolvedValue) {
+		this.resolvedValue = resolvedValue;
 	}
 }
