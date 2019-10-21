@@ -54,7 +54,8 @@ is comments and not to be recognized as parameters.
 //             SPACE=(80,(10,10),RLSE,CONTIG,ROUND) end of statement
 
 Also, it is difficult to overstate the ugliness of the DLM parameter in
-conjunction with DD * and DD DATA.
+conjunction with DD * and DD DATA.  DLM=&PARM is not supported, you'll
+have to write an application to make that work.
 
 Sometimes a parameter and an operation look identical, e.g. NOTIFY.
 
@@ -425,7 +426,7 @@ DD_WS : [ ]+ ->channel(HIDDEN),mode(DD_PARM_MODE) ;
 DD_NEWLINE1 : NEWLINE
     {
       _modeStack.clear();
-    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode DD_PARM_MODE ;
 
@@ -438,7 +439,7 @@ DD_PARM_WS : [ ]+
 DD_NEWLINE : NEWLINE
     {
       _modeStack.clear();
-    } ->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE) ;
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 DD_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 DD_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),channel(COMMENTS),pushMode(COMMA_NEWLINE_CM_MODE) ;
 DD_SS_WS : SS ' '+
@@ -462,7 +463,7 @@ DD_BURST : B U R S T ->type(BURST),pushMode(KYWD_VAL_MODE) ;
 DD_CCSID : C C S I D ->type(CCSID),pushMode(KYWD_VAL_MODE) ;
 DD_CHARS : C H A R S ->type(CHARS),pushMode(KYWD_VAL_MODE) ;
 DD_CHKPT : C H K P T ->type(CHKPT),pushMode(KYWD_VAL_MODE) ;
-DD_CNTL : C N T L ->type(CNTL),pushMode(DSN_MODE) ;
+DD_CNTL : C N T L ->type(CNTL),pushMode(KYWD_VAL_MODE) ;
 DD_COPIES : C O P I E S ->type(COPIES),pushMode(COPIES_MODE) ;
 DD_DATA : D A T A
     {
@@ -478,8 +479,8 @@ DD_DISP : D I S P ->type(DISP),pushMode(DISP_MODE) ;
 DD_DLM : D L M ->type(DLM),pushMode(DLM_MODE) ;
 DD_DSID : D S I D ->type(DSID),pushMode(DSID_MODE) ;
 DD_DSKEYLBL : D S K E Y L B L ->type(DSKEYLBL),pushMode(KYWD_VAL_MODE) ;
-DD_DSN : D S N ->type(DSN),pushMode(DSN_MODE) ;
-DD_DSNAME : D S N A M E ->type(DSNAME),pushMode(DSN_MODE) ;
+DD_DSN : D S N ->type(DSN),pushMode(KYWD_VAL_MODE) ;
+DD_DSNAME : D S N A M E ->type(DSNAME),pushMode(KYWD_VAL_MODE) ;
 DD_DSNTYPE : D S N T Y P E ->type(DSNTYPE),pushMode(KYWD_VAL_MODE) ;
 DD_DUMMY : D U M M Y ->type(DUMMY) ;
 DD_DYNAM : D Y N A M ->type(DYNAM) ;
@@ -499,8 +500,8 @@ DD_KEYENCD2 : K E Y E N C D '2' ->type(KEYENCD2),pushMode(KYWD_VAL_MODE) ;
 DD_KEYLEN : K E Y L E N ->type(KEYLEN),pushMode(KYWD_VAL_MODE) ;
 DD_KEYOFF : K E Y O F F ->type(KEYOFF),pushMode(KYWD_VAL_MODE) ;
 DD_LABEL : L A B E L ->type(LABEL),pushMode(LABEL_MODE) ;
-DD_LGSTREAM : L G S T R E A M ->type(LGSTREAM),pushMode(DSN_MODE) ;
-DD_LIKE : L I K E ->type(LIKE),pushMode(DSN_MODE) ;
+DD_LGSTREAM : L G S T R E A M ->type(LGSTREAM),pushMode(KYWD_VAL_MODE) ;
+DD_LIKE : L I K E ->type(LIKE),pushMode(KYWD_VAL_MODE) ;
 DD_LRECL : L R E C L ->type(LRECL),pushMode(KYWD_VAL_MODE) ;
 DD_MAXGENS : M A X G E N S ->type(MAXGENS),pushMode(KYWD_VAL_MODE) ;
 DD_MGMTCLAS : M G M T C L A S ->type(MGMTCLAS),pushMode(KYWD_VAL_MODE) ;
@@ -514,7 +515,7 @@ DD_PATHOPTS : P A T H O P T S ->type(PATHOPTS),pushMode(PATHOPTS_MODE) ;
 DD_PROTECT : P R O T E C T ->type(PROTECT),pushMode(KYWD_VAL_MODE) ;
 DD_RECFM : R E C F M ->type(RECFM),pushMode(KYWD_VAL_MODE) ;
 DD_RECORG : R E C O R G ->type(RECORG),pushMode(KYWD_VAL_MODE) ;
-DD_REFDD : R E F D D ->type(REFDD),pushMode(DSN_MODE) ;
+DD_REFDD : R E F D D ->type(REFDD),pushMode(KYWD_VAL_MODE) ;
 DD_RETPD : R E T P D ->type(RETPD),pushMode(KYWD_VAL_MODE) ;
 DD_RLS : R L S ->type(RLS),pushMode(KYWD_VAL_MODE) ;
 DD_ROACCESS : R O A C C E S S ->type(ROACCESS),pushMode(KYWD_VAL_MODE) ;
@@ -621,7 +622,7 @@ OUTPUT_STMT_SS_WS : SS ' '+
     }? ->channel(HIDDEN) ;
 
 OUTPUT_STMT_ADDRESS : A D D R E S S ->pushMode(KYWD_VAL_MODE) ;
-OUTPUT_STMT_AFPPARMS : A F P P A R M S ->pushMode(DSN_MODE) ;
+OUTPUT_STMT_AFPPARMS : A F P P A R M S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_AFPSTATS : A F P S T A T S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_BUILDING : B U I L D I N G ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_BURST : B U R S T ->pushMode(KYWD_VAL_MODE) ;
@@ -1271,11 +1272,11 @@ DATA_PARM_MODE_DCB : DD_DCB ->type(DCB),pushMode(DCB_MODE) ;
 DATA_PARM_MODE_DIAGNS : DD_DIAGNS ->type(DIAGNS),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DLM : DD_DLM ->type(DLM),pushMode(DLM_MODE) ;
 DATA_PARM_MODE_DSID : DD_DSID ->type(DSID),pushMode(DSID_MODE) ;
-DATA_PARM_MODE_DSN : DD_DSN ->type(DSNAME),pushMode(DSN_MODE) ;
-DATA_PARM_MODE_DSNAME : DD_DSNAME ->type(DSNAME),pushMode(DSN_MODE) ;
-DATA_PARM_MODE_LIKE : DD_LIKE ->type(LIKE),pushMode(DSN_MODE) ;
+DATA_PARM_MODE_DSN : DD_DSN ->type(DSNAME),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_DSNAME : DD_DSNAME ->type(DSNAME),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_LIKE : DD_LIKE ->type(LIKE),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_LRECL : DD_LRECL ->type(LRECL),pushMode(KYWD_VAL_MODE) ;
-DATA_PARM_MODE_REFDD : DD_REFDD ->type(REFDD),pushMode(DSN_MODE) ;
+DATA_PARM_MODE_REFDD : DD_REFDD ->type(REFDD),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_MODE : DD_MODE ->type(MODE),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_VOL : DD_VOL ->type(VOL),pushMode(VOL_MODE) ;
 DATA_PARM_MODE_VOLUME : DD_VOLUME ->type(VOLUME),pushMode(VOL_MODE) ;
@@ -1364,7 +1365,6 @@ QS_SQUOTE : SQUOTE
         case SYSOUT_MODE :
         case KYWD_VAL_MODE :
         case DCB_MODE :
-        case DSN_MODE :
             popMode();
             popMode();
             break;
@@ -1427,45 +1427,16 @@ QS_SS_CONTINUATION_WS : ' '+
 
 QS_SS_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),channel(COMMENTS),mode(COMMA_WS_MODE) ;
 
-mode DSN_MODE ;
-
-DSN_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DSN_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
-/*
-This pattern is _very_ inclusive.  Consider...
-
-&SYSUID..JCL.CNTL
-LIB.&SYSUID
-&SYSUID.P.&LIB
-&SYSUID.T(MEMBER)
-&DSNQ1..&DSNQ2..&DSNQ3(#&MEMBER)
-AEIOU(+1)
-ABCDEF(-1)
-XYZ(0)
-LIB.PROD(&PGM.#)
-MASTER.FILE.%%ODATE
-
-
-*/
-DSN_MODE_DATASET_NAME : (
-    NULLFILE |
-    (AMPERSAND AMPERSAND NAME) | 
-    (
-        (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '-' | '+' | '%' | LPAREN_DFLT | RPAREN_DFLT)*
-    )
-  )
-  ->type(DATASET_NAME),popMode 
-  ; 
-
-DSN_MODE_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode ;
-
-
 mode DCB_MODE ;
 
-DCB_MODE_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DCB_PAREN_MODE) ;
-DCB_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-DCB_MODE_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
+DCB_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DCB_PAREN_MODE) ;
+DCB_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+DCB_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
+DCB_COMMA : COMMA_DFLT ->more,popMode ;
+DCB_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 /*
 
@@ -1518,27 +1489,8 @@ DCB_STACK : DD_STACK ->type(STACK),mode(KYWD_VAL_MODE) ;
 DCB_THRESH : DD_THRESH ->type(THRESH),mode(KYWD_VAL_MODE) ;
 DCB_TRTCH : DD_TRTCH ->type(TRTCH),mode(KYWD_VAL_MODE) ;
 
-/*
-This pattern is _very_ inclusive.  Consider...
-
-&SYSUID..JCL.CNTL
-LIB.&SYSUID
-&SYSUID.P.&LIB
-MASTER.FILE.%%ODATE
-
-*/
-DCB_DATASET_NAME : (
-    NULLFILE |
-    (AMPERSAND AMPERSAND NAME) | 
-    (
-        (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')+
-    )
-  )
-  ->type(DATASET_NAME),popMode
-  ; 
-
-DCB_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(REFERBACK),popMode ;
+DCB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DCB_KEYWORD_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE);
 
 mode DCB_PAREN_MODE ;
 
@@ -1585,27 +1537,8 @@ DCB_PAREN_STACK : DD_STACK ->type(STACK),pushMode(KYWD_VAL_MODE) ;
 DCB_PAREN_THRESH : DD_THRESH ->type(THRESH),pushMode(KYWD_VAL_MODE) ;
 DCB_PAREN_TRTCH : DD_TRTCH ->type(TRTCH),pushMode(KYWD_VAL_MODE) ;
 
-/*
-This pattern is _very_ inclusive.  Consider...
-
-&SYSUID..JCL.CNTL
-LIB.&SYSUID
-&SYSUID.P.&LIB
-MASTER.FILE.%%ODATE
-
-*/
-DCB_PAREN_DATASET_NAME : (
-    NULLFILE |
-    (AMPERSAND AMPERSAND NAME) | 
-    (
-        (AMPERSAND | NATL | ALPHA) 
-          (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')+
-    )
-  )
-  ->type(DATASET_NAME)
-  ; 
-
-DCB_PAREN_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(REFERBACK) ;
+DCB_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DCB_PAREN_KEYWORD_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE);
 
 mode INCLUDE_MODE ;
 
@@ -1688,8 +1621,8 @@ at runtime in any given installation.
 */
 
 
-JOB_MODE_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
-JOB_MODE_WS : [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_MODE1) ;
+JOB_NEWLINE : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+JOB_WS : [ ]+ ->channel(HIDDEN),mode(JOB_ACCT_MODE1) ;
 
 mode JOB_ACCT_MODE1 ;
 
@@ -1836,12 +1769,13 @@ KYWD_VAL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 /*
 
-The second half of the KEYWORD_VALUE token is an attempt to detect substringed system symbolics.
-
+The second part of the KEYWORD_VALUE token is an attempt to detect substringed system symbolics.
+The third part of the KEYWORD_VALUE token is an attempt to detect temporary file names.
 */
 KEYWORD_VALUE : (
     ([A-Z0-9@#$&*\-+./%[:_]+?) | 
-    (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+
+    (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+ |
+    (AMPERSAND AMPERSAND ALNUMNAT)
   ) ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
@@ -1878,7 +1812,7 @@ KYWD_VAL_NEWLINE : NEWLINE
     {
       _modeStack.clear();
       mode(myMode);
-    } ->type(NEWLINE),channel(HIDDEN) ;
+    } ->channel(HIDDEN) ;
 KYWD_VAL_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),popMode ;
 KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 KYWD_VAL_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;

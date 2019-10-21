@@ -62,6 +62,8 @@ deferred until after the JCL has begun "executing."
 
 keywordOrSymbolic : (QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | KEYWORD_VALUE | SYMBOLIC)+ ;
 
+datasetName : keywordOrSymbolic (LPAREN keywordOrSymbolic RPAREN)? ;
+
 execStatement : execPgmStatement | execProcStatement ;
 
 execPgmStatement : SS stepName? EXEC PGM EQUAL keywordOrSymbolic execParameter* ;
@@ -168,7 +170,7 @@ ddParmBURST : BURST EQUAL keywordOrSymbolic ;
 ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
 ddParmCHARS : CHARS EQUAL singleOrMultipleValue ;
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
-ddParmCNTL : CNTL EQUAL ddParmReferback ;
+ddParmCNTL : CNTL EQUAL keywordOrSymbolic ;
 ddParmCOPIES : COPIES EQUAL copiesPayload ;
 ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
 ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
@@ -200,7 +202,7 @@ ddParmDCB : DCB EQUAL (
     RPAREN) 
   ) ;
 
-ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | DATASET_NAME | ddParmReferback ;
+ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | datasetName ;
 
 
 ddParmDDNAME : DDNAME EQUAL keywordOrSymbolic? ;
@@ -222,7 +224,7 @@ ddParmDSID : DSID EQUAL (
     (LPAREN (DSID_VALUE | SYMBOLIC) (DSID_VERIFIED | SYMBOLIC)? RPAREN)
   ) ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL keywordOrSymbolic ;
-ddParmDSNAME : (DSNAME | DSN) EQUAL (NAME | DATASET_NAME | ddParmReferback | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+) ;
+ddParmDSNAME : (DSNAME | DSN) EQUAL datasetName ;
 ddParmDSNTYPE : DSNTYPE EQUAL singleOrMultipleValue ;
 
 ddParmDSORG : DSORG EQUAL keywordOrSymbolic ;
@@ -269,8 +271,8 @@ ddParmLABEL : LABEL EQUAL (
 It's not really a dataset name in the LGSTREAM parameter, but it
 does match the same pattern.
 */
-ddParmLGSTREAM : LGSTREAM EQUAL DATASET_NAME ;
-ddParmLIKE : LIKE EQUAL DATASET_NAME ;
+ddParmLGSTREAM : LGSTREAM EQUAL datasetName ;
+ddParmLIKE : LIKE EQUAL datasetName ;
 ddParmLIMCT: LIMCT EQUAL keywordOrSymbolic ;
 ddParmLRECL : LRECL EQUAL keywordOrSymbolic ;
 ddParmMAXGENS : MAXGENS EQUAL keywordOrSymbolic ;
@@ -310,7 +312,7 @@ ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
 ddParmRECFM : RECFM EQUAL keywordOrSymbolic ;
 ddParmRECORG : RECORG EQUAL keywordOrSymbolic ;
-ddParmREFDD : REFDD EQUAL ddParmReferback ;
+ddParmREFDD : REFDD EQUAL keywordOrSymbolic ;
 ddParmRESERVE : RESERVE EQUAL parenList ;
 ddParmRETPD : RETPD EQUAL keywordOrSymbolic ;
 ddParmRKP : RKP EQUAL keywordOrSymbolic ;
@@ -436,12 +438,6 @@ ddParmVOLUME_SER : (
   ) ;
 
 ddParmVOLUME_REF : VOL_REF EQUAL (VOL_REF_REFERBACK | DATASET_NAME | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | SYMBOLIC+) ;
-
-ddParmReferback : DSN_MODE_REFERENCE |
-    REFERBACK |
-    (ASTERISK DOT NAME (DOT NAME (DOT NAME)?)?)
-   ;
-
 
 joblibStatement : SS JOBLIB DD joblibParameter+ ;
 
@@ -596,7 +592,7 @@ outputStatementParameter : outputStatementADDRESS | outputStatementAFPPARMS | ou
 
 outputStatementADDRESS : OUTPUT_STMT_ADDRESS EQUAL singleOrMultipleValue ;
 
-outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL (DATASET_NAME | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | SYMBOLIC+) ;
+outputStatementAFPPARMS : OUTPUT_STMT_AFPPARMS EQUAL datasetName ;
 outputStatementAFPSTATS : OUTPUT_STMT_AFPSTATS EQUAL keywordOrSymbolic ;
 outputStatementBUILDING : OUTPUT_STMT_BUILDING EQUAL keywordOrSymbolic ;
 outputStatementBURST : OUTPUT_STMT_BURST EQUAL keywordOrSymbolic ;

@@ -88,6 +88,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitKeywordOrSymbolic(JCLParser.KeywordOrSymbolicContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#datasetName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDatasetName(JCLParser.DatasetNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#execStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -975,12 +981,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDdParmVOLUME_REF(JCLParser.DdParmVOLUME_REFContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmReferback}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmReferback(JCLParser.DdParmReferbackContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#joblibStatement}.
 	 * @param ctx the parse tree
