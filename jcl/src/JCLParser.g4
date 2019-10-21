@@ -437,7 +437,7 @@ ddParmVOLUME_SER : (
     (VOL_SER EQUAL LPAREN  ddParmVolSer+ RPAREN)
   ) ;
 
-ddParmVOLUME_REF : VOL_REF EQUAL (VOL_REF_REFERBACK | DATASET_NAME | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | SYMBOLIC+) ;
+ddParmVOLUME_REF : VOL_REF EQUAL keywordOrSymbolic ;
 
 joblibStatement : SS JOBLIB DD joblibParameter+ ;
 

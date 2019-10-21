@@ -2344,53 +2344,32 @@ VOL_SER3_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) 
 mode VOL_REF1_MODE ;
 
 VOL_REF1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_REF_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode,popMode ;
 VOL_REF1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
-/*
-Note that VOL_REF1_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
-are missing.  From the z/OS 2.3 documentation...
+VOL_REF1_DSN : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
+VOL_REF1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 
- The dsname cannot be a generation data group (GDG) base name or a member name of a non-GDG data set.
+VOL_REF1_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+      mode(myMode);
+    } ->channel(HIDDEN) ;
+VOL_REF1_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),popMode,popMode ;
+VOL_REF1_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+VOL_REF1_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
+VOL_REF1_WS : [ ]+
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(CM_MODE) ;
 
-...which makes life easier because we also have to match the RPAREN ending the VOL=() group.
-*/
-VOL_REF1_DSN : 
-    (AMPERSAND | NATL | ALPHA) 
-        (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')*
- ->type(DATASET_NAME),popMode,popMode ;
-VOL_REF1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode ;
-VOL_REF1_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
-
-
-/*
-
-Breaking out of VOL_REF2_MODE involves six popMode operations.  If you're
-keeping track, that one short of getting us out of VOL_MODE.  That's 
-because VOL_MODE has the responsibility of eating the right paren (RPAREN)
-token and bringing us back to whence we came.
-
-*/
 mode VOL_REF2_MODE ;
 
 VOL_REF2_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_REF2_REFERBACK : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->type(VOL_REF_REFERBACK),popMode,popMode,popMode,popMode,popMode,popMode ;
 VOL_REF2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
-/*
-Note that VOL_REF2_DSN doesn't quite match DSN_MODE_DATASET_NAME.  The parens
-are missing.  From the z/OS 2.3 documentation...
-
- The dsname cannot be a generation data group (GDG) base name or a member name of a non-GDG data set.
-
-...which makes life easier because we also have to match the RPAREN ending the VOL=() group.
-*/
-VOL_REF2_DSN : 
-    (AMPERSAND | NATL | ALPHA) 
-        (AMPERSAND | ALPHA | DOT_DFLT | NATL | NUM | '%')*
- ->type(DATASET_NAME),popMode,popMode,popMode,popMode,popMode,popMode ;
-VOL_REF2_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode,popMode,popMode,popMode,popMode ;
-VOL_REF2_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode ;
+VOL_REF2_DSN : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
+VOL_REF2_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+VOL_REF2_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
 
 
 
