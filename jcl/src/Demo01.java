@@ -56,6 +56,10 @@ public static void main(String[] args) throws Exception {
 		LOGGER.fine("includes = " + includes);
 		jobs = lookForJobs(aFileName);
 		LOGGER.fine("jobs = " + jobs);
+		for (IncludeStatement i: includes) {
+			i.resolveParms(sets);
+		}
+		LOGGER.fine("includes (after resolving parms) = " + includes);
 	}
 
 	LOGGER.info("Processing complete");

@@ -80,37 +80,85 @@ public class KeywordOrSymbolicWrapper {
 
 		Demo01.LOGGER.finest(this.getClass().getName() + " kvw:");
 		for (KeywordValueWrapper k: this.kvw) {
-			Demo01.LOGGER.finest(
-				"value = |" 
-				+ k.getValue() 
-				+ "| line = |"
-				+ k.getLine()
-				+ "| posn = |"
-				+ k.getPosn()
-				+ "| sortKey = |"
-				+ k.getSortKey()
-				+ "| type = |"
-				+ k.getType()
-				+ "|"
-			);
+			Demo01.LOGGER.finest(k.toString());
 
 		}
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
+		Demo01.LOGGER.finest("resolveParms this: " + this);
+		Demo01.LOGGER.finest("resolveParms sets: " + sets);
 		if (this.parameterized) {
-			for(SetSymbolValue s: sets) {
-				switch(s.getSetType()) {
-					case SET:
-						if (this.inProc && s.inProc && s.procName.equals(this.procName) //&& nothing on EXEC or PROC
-						|| (!this.inProc && !s.inProc)
-						) {
+			Demo01.LOGGER.finest("parameterized == true");
+			for(KeywordValueWrapper k: kvw) {
+				Demo01.LOGGER.finest("k: " + k);
+				if (k.getType() == KeywordValueType.SYMBOLIC) {
+					for(SetSymbolValue s: sets) {
+						Demo01.LOGGER.finest("s: " + s);
+						if (s.getParmName().equals(k.getParmName())) {
+							switch(s.getSetType()) {
+								case SET:
+									if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
+										&& !this.parmSetByExec(sets, s) && !this.parmDefinedByProc(sets, s))
+									|| (!this.inProc && !s.inProc && k.getLine() > s.getLine())
+									) {
+										k.setResolvedValue(s.getParmValue());
+									}
+									break;
+								case PROC:
+									if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
+										&& !this.parmSetByExec(sets, s))
+									) {
+										k.setResolvedValue(s.getParmValue());
+									}
+									break;
+								case EXEC:
+									if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
+										k.setResolvedValue(s.getParmValue());
+									}
+									break;
+								default:
+									break;
+							}
 						}
-						break;
+					}
 				}
 			}
 		}
+	}
+
+	private Boolean parmSetByExec(ArrayList<SetSymbolValue> sets, SetSymbolValue v) {
+		Boolean rc = false;
+
+		for(SetSymbolValue s: sets) {
+			if (s.getParmName().equals(v.getParmName())
+			&& s.getSetType() == SetTypeOfSymbolValue.EXEC
+			&& s.getProcBeingExecuted().equals(this.procName)
+			&& s != v
+			) {
+				rc = true;
+				break;
+			}
+		}
+
+		return rc;
+	}
+
+	private Boolean parmDefinedByProc(ArrayList<SetSymbolValue> sets, SetSymbolValue v) {
+		Boolean rc = false;
+
+		for(SetSymbolValue s: sets) {
+			if (s.getParmName().equals(v.getParmName())
+			&& s.getSetType() == SetTypeOfSymbolValue.PROC
+			&& s != v
+			) {
+				rc = true;
+				break;
+			}
+		}
+
+		return rc;
 	}
 
 	public String getValue() {
@@ -123,12 +171,24 @@ public class KeywordOrSymbolicWrapper {
 		return aString.toString();
 	}
 
+	public String getResolvedValue() {
+		StringBuffer aString = new StringBuffer();
+
+		for (KeywordValueWrapper k: this.kvw) {
+			aString.append(k.getResolvedValue());
+		}
+
+		return aString.toString();
+	}
+
 	public String toString() {
 		StringBuffer aString = new StringBuffer();
 
 		for (KeywordValueWrapper k: this.kvw) {
 			aString.append(k.getValue());
 		}
+
+		aString.append(" procName: |" + this.procName + "| inProc: |" + this.inProc + "|");
 
 		return aString.toString();
 	}

@@ -29,8 +29,8 @@ public class IncludeStatement {
 		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 	}
 
-	private int getLine() {
-		if (line == -1) {
+	public int getLine() {
+		if (this.line == -1) {
 			if (this.ctx.INCLUDE_PARM_MEMBER() == null) {
 				Demo01.LOGGER.severe(
 					this.getClass().getName() 
@@ -39,15 +39,15 @@ public class IncludeStatement {
 					+ "INCLUDE_PARM_MEMBER() == null"
 				);
 			} else {
-				line = this.ctx.INCLUDE_PARM_MEMBER().getSymbol().getLine();
+				this.line = this.ctx.INCLUDE_PARM_MEMBER().getSymbol().getLine();
 			}
 		}
 
-		return line;
+		return this.line;
 	}
 
-	private int getPosn() {
-		if (posn == -1) {
+	public int getPosn() {
+		if (this.posn == -1) {
 			if (this.ctx.EQUAL() == null) {
 				Demo01.LOGGER.severe(
 					this.getClass().getName() 
@@ -56,19 +56,27 @@ public class IncludeStatement {
 					+ "EQUAL() == null"
 				);
 			} else {
-				posn = this.ctx.EQUAL().getSymbol().getCharPositionInLine() + 1;
+				this.posn = this.ctx.EQUAL().getSymbol().getCharPositionInLine() + 1;
 			}
 		}
 
-		return posn;
+		return this.posn;
 	}
 
-	private String getOriginalText() {
+	public String getOriginalText() {
 		if (this.originalText == null) {
-			this.originalText = kywd.toString();
+			this.originalText = kywd.getValue();
 		}
 
 		return this.originalText;
+	}
+
+	public String getResolvedText() {
+		return this.kywd.getResolvedValue();
+	}
+
+	public void resolveParms(ArrayList<SetSymbolValue> sets) {
+		this.kywd.resolveParms(sets);
 	}
 
 	public String toString() {
@@ -80,8 +88,10 @@ public class IncludeStatement {
 			+ this.getLine() 
 			+ "| posn: |" 
 			+ this.getPosn() 
-			+ "| text: |" 
+			+ "| originalText: |" 
 			+ this.getOriginalText() 
+			+ "| resolvedText: |"
+			+ this.getResolvedText()
 			+ "| inProc: |" 
 			+ this.inProc + "|"
 		;

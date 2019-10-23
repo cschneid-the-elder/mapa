@@ -51,6 +51,9 @@ testrig:
 testdemo:
 	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -logLevel FINEST
 
+ziplogs:
+	zip -DjmTv9 demologs Demo01-*.log
+
 #testNist:
 #	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 

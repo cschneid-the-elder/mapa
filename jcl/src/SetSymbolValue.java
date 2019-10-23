@@ -16,6 +16,7 @@ public class SetSymbolValue {
 	private int line = -1;
 	public Boolean inProc = false;
 	public String procName = null;
+	private String procBeingExecuted = null;
 
 	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName, Boolean inProc, String procName) {
 		this.ctx = ctx;
@@ -29,11 +30,12 @@ public class SetSymbolValue {
 		}
 	}
 
-	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, Boolean inProc, String procName) {
+	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, Boolean inProc, String procName, String procBeingExecuted) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = inProc;
 		this.procName = procName;
+		this.procBeingExecuted = procBeingExecuted;
 		this.setType = SetTypeOfSymbolValue.EXEC;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
@@ -277,6 +279,10 @@ public class SetSymbolValue {
 		return theText;
 	}
 
+	public String getProcBeingExecuted() {
+		return this.procBeingExecuted;
+	}
+
 	public String toString() {
 		return 
 			ctx.getClass().getName() 
@@ -288,6 +294,10 @@ public class SetSymbolValue {
 			+ this.getParmName() 
 			+ "| parmValue: |" 
 			+ this.getParmValue() 
+			+ "| inProc: |"
+			+ this.inProc
+			+ "| procName: |"
+			+ this.procName
 			+ "|"
 		;
 	}
