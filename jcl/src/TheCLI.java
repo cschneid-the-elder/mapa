@@ -1,8 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.logging.*;
 import org.apache.commons.cli.*;
 
 public class TheCLI{

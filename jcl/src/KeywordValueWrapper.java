@@ -138,6 +138,10 @@ public class KeywordValueWrapper {
 		return this.type == KeywordValueType.SYMBOLIC;
 	}
 
+	public Boolean isResolved() {
+		return this.resolvedValue != null;
+	}
+
 	public long getSortKey() {
 		return ((long)this.line * (long)Integer.MAX_VALUE) + this.posn;
 	}

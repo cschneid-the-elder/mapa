@@ -87,42 +87,51 @@ public class KeywordOrSymbolicWrapper {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.finest("resolveParms this: " + this);
-		Demo01.LOGGER.finest("resolveParms sets: " + sets);
 		if (this.parameterized) {
 			Demo01.LOGGER.finest("parameterized == true");
-			for(KeywordValueWrapper k: kvw) {
-				Demo01.LOGGER.finest("k: " + k);
-				if (k.getType() == KeywordValueType.SYMBOLIC) {
-					for(SetSymbolValue s: sets) {
-						Demo01.LOGGER.finest("s: " + s);
-						if (s.getParmName().equals(k.getParmName())) {
-							switch(s.getSetType()) {
-								case SET:
-									if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
-										&& !this.parmSetByExec(sets, s) && !this.parmDefinedByProc(sets, s))
-									|| (!this.inProc && !s.inProc && k.getLine() > s.getLine())
-									) {
-										k.setResolvedValue(s.getParmValue());
-									}
-									break;
-								case PROC:
-									if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
-										&& !this.parmSetByExec(sets, s))
-									) {
-										k.setResolvedValue(s.getParmValue());
-									}
-									break;
-								case EXEC:
-									if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
-										k.setResolvedValue(s.getParmValue());
-									}
-									break;
-								default:
-									break;
-							}
+		} else {
+			Demo01.LOGGER.finest("parameterized == false - exiting");
+		}
+
+		Demo01.LOGGER.finest("resolveParms this: " + this);
+		Demo01.LOGGER.finest("resolveParms sets: " + sets);
+
+		KeywordValueWrapper[] symbolic_kvw = 
+			kvw.stream()
+			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC)
+			.toArray(KeywordValueWrapper[]::new);
+
+		for(KeywordValueWrapper k: symbolic_kvw) {
+			Demo01.LOGGER.finest("k: " + k);
+			SetSymbolValue[] matching_sets =
+				sets.stream()
+				.filter(s -> s.getParmName().equals(k.getParmName()))
+				.toArray(SetSymbolValue[]::new);
+			for(SetSymbolValue s: matching_sets) {
+				Demo01.LOGGER.finest("s: " + s);
+				switch(s.getSetType()) {
+					case SET:
+						if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
+							&& !this.parmSetByExec(sets, s) && !this.parmDefinedByProc(sets, s))
+						|| (!this.inProc && !s.inProc && k.getLine() > s.getLine())
+						) {
+							k.setResolvedValue(s.getParmValue());
 						}
-					}
+						break;
+					case PROC:
+						if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
+							&& !this.parmSetByExec(sets, s))
+						) {
+							k.setResolvedValue(s.getParmValue());
+						}
+						break;
+					case EXEC:
+						if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
+							k.setResolvedValue(s.getParmValue());
+						}
+						break;
+					default:
+						break;
 				}
 			}
 		}
@@ -173,9 +182,30 @@ public class KeywordOrSymbolicWrapper {
 
 	public String getResolvedValue() {
 		StringBuffer aString = new StringBuffer();
+		KeywordValueWrapper prev = null;
 
 		for (KeywordValueWrapper k: this.kvw) {
-			aString.append(k.getResolvedValue());
+			if (prev != null && prev.isParm() && prev.isResolved() && k.getValue().equals(".")) {
+				/*
+					Given...
+
+					SET B=2,D=4,F=6,H=8
+
+					...a value of...
+
+					A&B.C&D..E&F.G&H
+
+					...should resolve to...
+
+					A2C4.E6G8
+
+					More generally, a dot "." following a symbolic is a delimiter
+					and not part of the symbolic or what follows.
+				*/
+			} else {
+				aString.append(k.getResolvedValue());
+			}
+			prev = k;
 		}
 
 		return aString.toString();
