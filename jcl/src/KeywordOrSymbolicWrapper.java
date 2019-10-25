@@ -91,6 +91,7 @@ public class KeywordOrSymbolicWrapper {
 			Demo01.LOGGER.finest("parameterized == true");
 		} else {
 			Demo01.LOGGER.finest("parameterized == false - exiting");
+			return;
 		}
 
 		Demo01.LOGGER.finest("resolveParms this: " + this);
