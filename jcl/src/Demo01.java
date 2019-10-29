@@ -6,7 +6,6 @@ import java.nio.file.*;
 import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
-import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 /**
 
@@ -63,7 +62,7 @@ public static void main(String[] args) throws Exception {
 	public static ArrayList<SetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
 		LOGGER.fine("lookForSetSymbols");
 		ArrayList<SetSymbolValue> sets = new ArrayList<>();
-		CharStream cs = fromFileName(fileName);  //load the file
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
 		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
 		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
@@ -85,7 +84,7 @@ public static void main(String[] args) throws Exception {
 	public static ArrayList<IncludeStatement> lookForIncludes(String fileName) throws IOException {
 		LOGGER.fine("lookForIncludes");
 		ArrayList<IncludeStatement> includes = new ArrayList<>();
-		CharStream cs = fromFileName(fileName);  //load the file
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
 		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
 		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
@@ -107,7 +106,7 @@ public static void main(String[] args) throws Exception {
 	public static ArrayList<JobCardWrapper> lookForJobs(String fileName) throws IOException {
 		LOGGER.fine("lookForJobs");
 		ArrayList<JobCardWrapper> jobs = new ArrayList<>();
-		CharStream cs = fromFileName(fileName);  //load the file
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
 		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
 		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
