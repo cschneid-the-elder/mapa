@@ -43,6 +43,7 @@ examples.
 */
 public class KeywordOrSymbolicWrapper {
 
+	private String myName = null;
 	private JCLParser.KeywordOrSymbolicContext ctx = null;
 	private ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
 	private String procName = null;
@@ -69,6 +70,7 @@ public class KeywordOrSymbolicWrapper {
 	}
 
 	private void initialize() {
+		myName = this.getClass().getName();
 		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx));
 
 		if (this.ctx.SYMBOLIC() == null 
@@ -88,14 +90,14 @@ public class KeywordOrSymbolicWrapper {
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
 		if (this.parameterized) {
-			Demo01.LOGGER.finest("parameterized == true");
+			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
 		} else {
-			Demo01.LOGGER.finest("parameterized == false - exiting");
+			Demo01.LOGGER.finest(myName + " parameterized == false - exiting");
 			return;
 		}
 
-		Demo01.LOGGER.finest("resolveParms this: " + this);
-		Demo01.LOGGER.finest("resolveParms sets: " + sets);
+		Demo01.LOGGER.finest(myName + " resolveParms this: " + this);
+		Demo01.LOGGER.finest(myName + " resolveParms sets: " + sets);
 
 		KeywordValueWrapper[] symbolic_kvw = 
 			kvw.stream()
@@ -103,13 +105,13 @@ public class KeywordOrSymbolicWrapper {
 			.toArray(KeywordValueWrapper[]::new);
 
 		for(KeywordValueWrapper k: symbolic_kvw) {
-			Demo01.LOGGER.finest("k: " + k);
+			Demo01.LOGGER.finest(myName + " k: " + k);
 			SetSymbolValue[] matching_sets =
 				sets.stream()
 				.filter(s -> s.getParmName().equals(k.getParmName()))
 				.toArray(SetSymbolValue[]::new);
 			for(SetSymbolValue s: matching_sets) {
-				Demo01.LOGGER.finest("s: " + s);
+				Demo01.LOGGER.finest(myName + " s: " + s);
 				switch(s.getSetType()) {
 					case SET:
 						if ((this.inProc && s.inProc && s.procName.equals(this.procName) 

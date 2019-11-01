@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 
 public class IncludeStatement {
 
+	private String myName = null;
 	private JCLParser.IncludeStatementContext ctx = null;
 	private String fileName = null;
 	private String originalText = null;
@@ -19,21 +20,25 @@ public class IncludeStatement {
 	public IncludeStatement(
 		JCLParser.IncludeStatementContext ctx
 		, String fileName
-		, Boolean inProc
 		, String procName
 		) {
 		this.ctx = ctx;
 		this.fileName = fileName;
-		this.inProc = inProc;
+		this.inProc = !(procName == null);
 		this.procName = procName;
 		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+		this.initialize();
+	}
+
+	private void initialize() {
+		myName = this.getClass().getName();
 	}
 
 	public int getLine() {
 		if (this.line == -1) {
 			if (this.ctx.INCLUDE_PARM_MEMBER() == null) {
 				Demo01.LOGGER.severe(
-					this.getClass().getName() 
+					this.myName
 					+ "getLine() found " 
 					+ this.ctx.getClass().getName() 
 					+ "INCLUDE_PARM_MEMBER() == null"
@@ -50,7 +55,7 @@ public class IncludeStatement {
 		if (this.posn == -1) {
 			if (this.ctx.EQUAL() == null) {
 				Demo01.LOGGER.severe(
-					this.getClass().getName() 
+					this.myName 
 					+ "getPosn() found " 
 					+ this.ctx.getClass().getName() 
 					+ "EQUAL() == null"
@@ -81,7 +86,7 @@ public class IncludeStatement {
 
 	public String toString() {
 		return 
-			this.ctx.getClass().getName() 
+			this.myName 
 			+ " fileName: |" 
 			+ this.fileName 
 			+ "| line: |" 
