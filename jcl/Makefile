@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class ./class/Job.class ./class/InstreamProc.class ./class/Proc.class ./class/JobListener.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -26,11 +26,11 @@ clean:
 
 cleanmine:
 	echo `date` cleanmine >> build.log
-	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class
+	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/SetSymbolValueListener.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/IncludeStatementListener.class ./class/JobCardWrapper.class ./class/JobCardListener.class ./class/Job.class ./class/InstreamProc.class ./class/Proc.class ./class/JobListener.class
 
 mine:
 	echo `date` mine >> build.log
-	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/SetSymbolValueListener.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/IncludeStatementListener.java ./src/JobCardWrapper.java ./src/JobCardListener.java
+	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/SetSymbolValueListener.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/IncludeStatementListener.java ./src/JobCardWrapper.java ./src/JobCardListener.java ./src/Job.java ./src/InstreamProc.java ./src/Proc.java ./src/JobListener.java
 
 jar:
 	echo `date` jar >> build.log
@@ -46,12 +46,15 @@ else
 endif
 
 testrig:
+	echo `date` testrig $(n) >> build.log
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testdemo:
+	echo `date` testdemo $(n) >> build.log
 	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -logLevel FINEST
 
 ziplogs:
+	echo `date` ziplogs >> build.log
 	zip -DjmTv9 demologs Demo01-*.log
 
 #testNist:

@@ -38,26 +38,41 @@ public static void main(String[] args) throws Exception {
 
 	CLI = new TheCLI(args);
 	String cwFileName = null; //current work file name
-	ArrayList<SetSymbolValue> sets = null;
-	ArrayList<IncludeStatement> includes = null;
-	ArrayList<JobCardWrapper> jobs = null;
+	ArrayList<SetSymbolValue> sets = new ArrayList<>();
+	ArrayList<Proc> procs = new ArrayList<>();
+	ArrayList<IncludeStatement> includes = new ArrayList<>();
+	ArrayList<Job> jobs = new ArrayList<>();
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing " + aFileName);
-		sets = lookForSetSymbols(aFileName);
-		LOGGER.fine("sets = " + sets);
-		includes = lookForIncludes(aFileName);
-		LOGGER.fine("includes = " + includes);
-		jobs = lookForJobs(aFileName);
-		LOGGER.fine("jobs = " + jobs);
-		for (IncludeStatement i: includes) {
-			i.resolveParms(sets);
+		initialProcess(jobs, procs, aFileName);
+		for (Job j: jobs) {
+			j.resolveParmedIncludes();
 		}
-		LOGGER.fine("includes (after resolving parms) = " + includes);
 	}
 
 	LOGGER.info("Processing complete");
 }
+
+	public static void initialProcess(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
+		LOGGER.fine("initialProcess");
+
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		JobListener jobListener = new JobListener(jobs, procs, fileName);
+	
+		LOGGER.finer("----------walking tree with JobListener");
+	
+		jclwalker.walk(jobListener, jcltree);
+
+	}
 
 	public static ArrayList<SetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
 		LOGGER.fine("lookForSetSymbols");

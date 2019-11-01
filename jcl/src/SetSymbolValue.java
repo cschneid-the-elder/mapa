@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 
 public class SetSymbolValue {
 
+	private String myName = null;
 	private ParserRuleContext ctx = null;
 	private String fileName = null;
 	private String parentFileName = null;
@@ -18,22 +19,23 @@ public class SetSymbolValue {
 	public String procName = null;
 	private String procBeingExecuted = null;
 
-	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName, Boolean inProc, String procName) {
+	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
-		this.inProc = inProc;
+		this.inProc = !(procName == null);
 		this.procName = procName;
 		this.setType = SetTypeOfSymbolValue.SET;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
 			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
+		this.initialize();
 	}
 
-	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, Boolean inProc, String procName, String procBeingExecuted) {
+	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, String procName, String procBeingExecuted) {
 		this.ctx = ctx;
 		this.fileName = fileName;
-		this.inProc = inProc;
+		this.inProc = !(procName == null);
 		this.procName = procName;
 		this.procBeingExecuted = procBeingExecuted;
 		this.setType = SetTypeOfSymbolValue.EXEC;
@@ -41,18 +43,24 @@ public class SetSymbolValue {
 		} else {
 			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
+		this.initialize();
 	}
 
-	public SetSymbolValue(JCLParser.DefineSymbolicParameterContext ctx, String fileName, Boolean inProc, String procName) {
+	public SetSymbolValue(JCLParser.DefineSymbolicParameterContext ctx, String fileName, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
-		this.inProc = inProc;
+		this.inProc = !(procName == null);
 		this.procName = procName;
 		this.setType = SetTypeOfSymbolValue.PROC;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
 			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
+		this.initialize();
+	}
+
+	private void initialize() {
+		myName = this.getClass().getName();
 	}
 
 	public String getFileName() {
@@ -79,8 +87,8 @@ public class SetSymbolValue {
 					break;
 				default:
 					Demo01.LOGGER.severe(
-						this.getClass().getName() 
-						+ "getParmName() found " 
+						this.myName
+						+ " getParmName() found " 
 						+ this.ctx.getClass().getName()
 					);
 					break;
@@ -107,8 +115,8 @@ public class SetSymbolValue {
 					break;
 				default:
 					Demo01.LOGGER.severe(
-						this.getClass().getName() 
-						+ "getLine() found " 
+						this.myName
+						+ " getLine() found " 
 						+ this.ctx.getClass().getName()
 					);
 					break;
@@ -135,8 +143,8 @@ public class SetSymbolValue {
 					break;
 				default:
 					Demo01.LOGGER.severe(
-						this.getClass().getName() 
-						+ "getParmValue() found " 
+						this.myName
+						+ " getParmValue() found " 
 						+ this.ctx.getClass().getName()
 					);
 					break;
@@ -171,10 +179,10 @@ public class SetSymbolValue {
 
 		if (ctx.SET_PARM_NAME() == null) {
 			Demo01.LOGGER.severe(
-				this.getClass().getName() 
-				+ "getLineForSetOperationContext() found " 
+				this.myName
+				+ " getLineForSetOperationContext() found " 
 				+ ctx.getClass().getName() 
-				+ "SET_PARM_NAME() == null"
+				+ " SET_PARM_NAME() == null"
 			);
 		} else {
 			theLine = ctx.SET_PARM_NAME().getSymbol().getLine();
@@ -189,10 +197,10 @@ public class SetSymbolValue {
 
 		if (ctx.EXEC_PROC_PARM() == null) {
 			Demo01.LOGGER.severe(
-				this.getClass().getName() 
-				+ "getLineForExecProcParmContext() found " 
+				this.myName
+				+ " getLineForExecProcParmContext() found " 
 				+ ctx.getClass().getName() 
-				+ "EXEC_PROC_PARM() == null"
+				+ " EXEC_PROC_PARM() == null"
 			);
 		} else {
 			theLine = ctx.EXEC_PROC_PARM().getSymbol().getLine();
@@ -207,10 +215,10 @@ public class SetSymbolValue {
 
 		if (ctx.PROC_PARM_NAME() == null) {
 			Demo01.LOGGER.severe(
-				this.getClass().getName() 
-				+ "getLineForDefineSymbolicParameterContext() found " 
+				this.myName
+				+ " getLineForDefineSymbolicParameterContext() found " 
 				+ ctx.getClass().getName() 
-				+ "PROC_PARM_NAME() == null"
+				+ " PROC_PARM_NAME() == null"
 			);
 		} else {
 			theLine = ctx.PROC_PARM_NAME().getSymbol().getLine();
@@ -285,7 +293,7 @@ public class SetSymbolValue {
 
 	public String toString() {
 		return 
-			ctx.getClass().getName() 
+			this.myName 
 			+ " fileName: |" 
 			+ this.fileName 
 			+ "| line: |" 
