@@ -75,6 +75,10 @@ public class InstreamProc {
 		this.steps.add(step);
 	}
 
+	public String getProcName() {
+		return this.procName;
+	}
+
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
@@ -85,6 +89,7 @@ public class InstreamProc {
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + includes);
 
+		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + steps);
 		for (JclStep s: steps) {
 			s.resolveParmedIncludes(mergedSymbolics);
 		}
