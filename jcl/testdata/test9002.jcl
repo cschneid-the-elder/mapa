@@ -20,7 +20,7 @@
 //MOYA     PROC
 //*
 //PS01     EXEC PGM=TALYN
-//STEPLIB       INCLUDE MEMBER=LIB&AENV Must be set via SET
+//STEPLIB       INCLUDE MEMBER=LIB&AENV Must be set via SET or EXEC
 //OUTPUT01 DD  DISP=(,CATLG,DELETE),
 //             DSN=&SYSUID..TALYN.&AENV,
 //             AVGREC=K,

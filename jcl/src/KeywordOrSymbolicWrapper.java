@@ -114,7 +114,7 @@ public class KeywordOrSymbolicWrapper {
 				Demo01.LOGGER.finest(myName + " s: " + s);
 				switch(s.getSetType()) {
 					case SET:
-						if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
+						if ((this.inProc  
 							&& !this.parmSetByExec(sets, s) && !this.parmDefinedByProc(sets, s))
 						|| (!this.inProc && !s.inProc && k.getLine() > s.getLine())
 						) {
@@ -129,7 +129,7 @@ public class KeywordOrSymbolicWrapper {
 						}
 						break;
 					case EXEC:
-						if (this.inProc && s.inProc && s.procName.equals(this.procName)) {
+						if (this.inProc) {
 							k.setResolvedValue(s.getParmValue());
 						}
 						break;

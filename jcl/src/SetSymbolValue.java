@@ -306,6 +306,8 @@ public class SetSymbolValue {
 			+ this.inProc
 			+ "| procName: |"
 			+ this.procName
+			+ "| setType: |"
+			+ this.getSetType()
 			+ "|"
 		;
 	}

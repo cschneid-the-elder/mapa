@@ -72,6 +72,14 @@ public class Job {
 
 	public void addJclStep(JclStep step) {
 		this.steps.add(step);
+		if (step.isExecProc()) {
+			for (InstreamProc p: procs) {
+				if (step.getProcExecuted().equals(p.getProcName())) {
+					step.setInstreamProc(p);
+					break;
+				}
+			}
+		}
 	}
 
 	public void resolveParmedIncludes() {
@@ -84,11 +92,6 @@ public class Job {
 		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + steps);
 		for (JclStep s: steps) {
 			s.resolveParmedIncludes(symbolics);
-		}
-
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving procs " + procs);
-		for (InstreamProc p: procs) {
-			p.resolveParmedIncludes(symbolics);
 		}
 	}
 
