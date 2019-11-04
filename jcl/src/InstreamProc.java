@@ -12,7 +12,8 @@ public class InstreamProc {
 	private JCLParser.ProcStatementContext procCtx = null;
 	private JCLParser.PendStatementContext pendCtx = null;
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
-	private ArrayList<IncludeStatement> includes = null;
+	private ArrayList<IncludeStatement> includes = new ArrayList<>();
+	private ArrayList<JclStep> steps = new ArrayList<>();
 	private String fileName = null;
 	private String procName = null;
 	private int startLine = -1;
@@ -33,19 +34,61 @@ public class InstreamProc {
 		this.initialize();
 	}
 
-	private void initialize() {
-		this.myName = this.getClass().getName();
-		this.procName = this.procCtx.procName().NAME_FIELD().getSymbol().getText();
-		this.startLine = this.procCtx.PROC().getSymbol().getLine();
-		this.endLine = this.pendCtx.PEND().getSymbol().getLine();
+	public InstreamProc(
+				JCLParser.ProcStatementContext procCtx
+				, String fileName
+				) {
+		this.procCtx = procCtx;
+		this.fileName = fileName;
+		this.initialize();
 	}
 
-	public void resolveParmedIncludes() {
+	private void initialize() {
+		if (this.myName == null) {
+			this.myName = this.getClass().getName();
+		}
+		if (this.procName == null) {
+			this.procName = this.procCtx.procName().NAME_FIELD().getSymbol().getText();
+		}
+		if (this.procCtx != null) {
+			this.startLine = this.procCtx.PROC().getSymbol().getLine();
+		}
+		if (this.pendCtx != null) {
+			this.endLine = this.pendCtx.PEND().getSymbol().getLine();
+		}
+	}
+
+	public void addPendCtx(JCLParser.PendStatementContext pendCtx) {
+		this.pendCtx = pendCtx;
+		this.initialize();
+	}
+
+	public void addInclude(IncludeStatement include) {
+		this.includes.add(include);
+	}
+
+	public void addSymbolic(SetSymbolValue symbolic) {
+		this.symbolics.add(symbolic);
+	}
+
+	public void addJclStep(JclStep step) {
+		this.steps.add(step);
+	}
+
+	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
+		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+		mergedSymbolics.addAll(this.symbolics);
+
 		Demo01.LOGGER.finest(myName + " resolveParmedIncludes: " + this.procName);
 		for (IncludeStatement i: includes) {
-			i.resolveParms(symbolics);
+			i.resolveParms(mergedSymbolics);
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + includes);
+
+		for (JclStep s: steps) {
+			s.resolveParmedIncludes(mergedSymbolics);
+		}
+
 	}
 
 	public String toString() {
