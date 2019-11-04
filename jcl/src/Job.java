@@ -15,6 +15,7 @@ public class Job {
 	private ArrayList<InstreamProc> procs  = new ArrayList<>();
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
+	private ArrayList<JclStep> steps = new ArrayList<>();
 	private String fileName = null;
 
 	public Job(JCLParser.JobCardContext ctx, String fileName) {
@@ -69,12 +70,26 @@ public class Job {
 		this.includes.add(include);
 	}
 
+	public void addJclStep(JclStep step) {
+		this.steps.add(step);
+	}
+
 	public void resolveParmedIncludes() {
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
+		Demo01.LOGGER.finest(myName + " resolveParmedIncludes " + this);
 		for (IncludeStatement i: includes) {
 			i.resolveParms(symbolics);
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + includes);
+
+		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + steps);
+		for (JclStep s: steps) {
+			s.resolveParmedIncludes(symbolics);
+		}
+
+		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving procs " + procs);
+		for (InstreamProc p: procs) {
+			p.resolveParmedIncludes(symbolics);
+		}
 	}
 
 	public String toString() {
