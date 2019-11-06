@@ -48,6 +48,7 @@ public static void main(String[] args) throws Exception {
 		initialProcess(jobs, procs, aFileName);
 		for (Job j: jobs) {
 			j.resolveParmedIncludes();
+			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 		}
 	}
 

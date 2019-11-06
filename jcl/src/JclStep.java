@@ -16,7 +16,7 @@ public class JclStep {
 	private int line = -1;
 	private KeywordOrSymbolicWrapper procExecuted = null;
 	private KeywordOrSymbolicWrapper pgmExecuted = null;
-	private InstreamProc proc = null;
+	private Proc proc = null;
 	private Boolean inProc = null;
 	private JCLParser.JclStepContext jclStepCtx = null;
 	private JCLParser.ExecStatementContext execStmtCtx = null;
@@ -76,12 +76,20 @@ public class JclStep {
 		return this.execPgmStmtCtx != null;
 	}
 
+	public Boolean needsCatalogedProc() {
+		return this.isExecProc() && (this.proc == null);
+	}
+
 	public String getProcExecuted() {
 		return this.procExecuted.getValue();
 	}
 
-	public void setInstreamProc(InstreamProc proc) {
+	public void setProc(Proc proc) {
 		this.proc = proc;
+	}
+
+	public Proc getProc() {
+		return this.proc;
 	}
 
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
