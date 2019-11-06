@@ -11,7 +11,6 @@ public class JobListener extends JCLParserBaseListener {
 	public String fileName = null;
 	public String procName = null;
 	public Job currJob = null;
-	public InstreamProc currInstreamProc = null;
 	public Proc currProc = null;
 	public JclStep currJclStep = null;
 
@@ -36,40 +35,31 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterSetOperation(JCLParser.SetOperationContext ctx) { 
-		if (this.currInstreamProc == null) {
-			if (this.currJob == null) {
-				this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
-			} else {
-				this.currJob.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
-			}
+		if (this.currProc == null) {
+			this.currJob.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
 		} else {
-			this.currInstreamProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterProcStatement(JCLParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
+		this.currProc = new Proc(ctx, this.fileName);
 		if (this.currJob == null) {
-			this.currProc = new Proc(ctx, this.fileName);
 		} else {
-			this.currInstreamProc = new InstreamProc(ctx, this.fileName);
-			this.currJob.addInstreamProc(this.currInstreamProc);
+			this.currJob.addInstreamProc(this.currProc);
 		}
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
-		if (this.currInstreamProc == null) {
-			this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
-		} else {
-			this.currInstreamProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
-		}
+		this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
-		this.currInstreamProc.addPendCtx(ctx);
+		this.currProc.addPendCtx(ctx);
 		this.procName = null;
-		this.currInstreamProc = null;
+		this.currProc = null;
 		this.currJclStep = null;
 	}
 
@@ -102,34 +92,30 @@ public class JobListener extends JCLParserBaseListener {
 			is attached to JS01.
 		*/
 		if (this.currJclStep == null) {
-			if (this.currInstreamProc == null) {
-				if (this.currJob == null) {
-					this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
-				} else {
-					this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
-				}
+			if (this.currProc == null) {
+				this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
 			} else {
-				this.currInstreamProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
+				this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
 			}
 		}
 	}
 
 	@Override public void enterJclStep(JCLParser.JclStepContext ctx) {
 		this.currJclStep = new JclStep(ctx, this.fileName, this.procName);
-		if (this.currInstreamProc == null) {
-			if (this.currJob == null) {
-				this.currProc.addJclStep(this.currJclStep);
-			} else {
-				this.currJob.addJclStep(this.currJclStep);
-			}
+		if (this.currProc == null) {
+			this.currJob.addJclStep(this.currJclStep);
 		} else {
-			this.currInstreamProc.addJclStep(this.currJclStep);
+			this.currProc.addJclStep(this.currJclStep);
 		}
 	}
 
 	@Override public void exitStartRule(JCLParser.StartRuleContext ctx) {
 		if (this.currJob == null) {
-			this.procs.add(this.currProc);
+			if (this.currProc == null) {
+			} else {
+				this.currProc.setEndLine(ctx.EOF().getSymbol().getLine());
+				this.procs.add(this.currProc);
+			}
 		}
 	}
 

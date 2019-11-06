@@ -12,7 +12,7 @@ public class Job {
 	private JCLParser.JobCardContext jobCardCtx = null;
 	private JCLParser.JcllibStatementContext jcllibCtx = null;
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
-	private ArrayList<InstreamProc> procs  = new ArrayList<>();
+	private ArrayList<Proc> procs  = new ArrayList<>();
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
@@ -58,7 +58,7 @@ public class Job {
 		this.jcllib.addAll(KeywordOrSymbolicWrapper.bunchOfThese(kywdCtxList));
 	}
 
-	public void addInstreamProc(InstreamProc iProc) {
+	public void addInstreamProc(Proc iProc) {
 		this.procs.add(iProc);
 	}
 
@@ -73,9 +73,9 @@ public class Job {
 	public void addJclStep(JclStep step) {
 		this.steps.add(step);
 		if (step.isExecProc()) {
-			for (InstreamProc p: procs) {
+			for (Proc p: procs) {
 				if (step.getProcExecuted().equals(p.getProcName())) {
-					step.setInstreamProc(p);
+					step.setProc(p);
 					break;
 				}
 			}
@@ -93,6 +93,22 @@ public class Job {
 		for (JclStep s: steps) {
 			s.resolveParmedIncludes(symbolics);
 		}
+	}
+
+	public ArrayList<JclStep> stepsInNeedOfProc() {
+		ArrayList<JclStep> stepsInNeed = new ArrayList<>();
+
+		for (JclStep step: this.steps) {
+			if (step.isExecProc()) {
+				if (step.needsCatalogedProc()) {
+					stepsInNeed.add(step);
+				} else {
+					stepsInNeed.addAll(step.getProc().stepsInNeedOfProc());
+				} 
+			}
+		}
+
+		return stepsInNeed;
 	}
 
 	public String toString() {
