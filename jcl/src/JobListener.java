@@ -28,7 +28,7 @@ public class JobListener extends JCLParserBaseListener {
 	@Override public void enterJobCard(JCLParser.JobCardContext ctx) {
 		if (this.currJob == null) {
 		} else {
-			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine());
+			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
 		this.currJob = new Job(ctx, fileName);
 		this.jobs.add(this.currJob);
@@ -117,11 +117,11 @@ public class JobListener extends JCLParserBaseListener {
 		if (this.currJob == null) {
 			if (this.currProc == null) {
 			} else {
-				this.currProc.setEndLine(ctx.EOF().getSymbol().getLine());
+				this.currProc.setEndLine(ctx.getStop().getLine());
 				this.procs.add(this.currProc);
 			}
 		} else {
-			this.currJob.setEndLine(ctx.EOF().getSymbol().getLine());
+			this.currJob.setEndLine(ctx.getStop().getLine());
 		}
 	}
 

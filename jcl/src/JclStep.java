@@ -123,6 +123,14 @@ public class JclStep {
 		return this.uuid;
 	}
 
+	public IncludeStatement includeStatementAt(int aLine) {
+		for (IncludeStatement i: this.includes) {
+			if (i.getLine() == aLine) return i;
+		}
+
+		return null;
+	}
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer(this.myName);
 
