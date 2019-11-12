@@ -51,7 +51,7 @@ testrig:
 
 testdemo:
 	echo `date` testdemo $(n) >> build.log
-	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -logLevel FINEST
+	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -logLevel FINEST -saveTemp
 
 ziplogs:
 	echo `date` ziplogs >> build.log

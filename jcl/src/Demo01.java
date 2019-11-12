@@ -54,8 +54,9 @@ public static void main(String[] args) throws Exception {
 			File tmpProcDir = newTempDir();
 			rewriteJob(j, tmpJobDir, tmpProcDir);
 			/*
-				Now must iteratively parse this job until all includes and procs
-				are resolved.
+				Now must iteratively parse this job until all includes 
+				are resolved -or- we have determined all that remain are 
+				unresolvable includes.
 			*/
 		}
 		/*
@@ -101,9 +102,15 @@ public static void main(String[] args) throws Exception {
 	}
 
 	public static void rewriteJob(Job job, File tmpJobDir, File tmpProcDir) throws IOException {
+		/*
+			Rewrite one job from the current file, separating any instream procs into their own
+			files to be processed later.
+
+			At this point the intent is to iteratively process the job until all INCLUDEs are
+			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
+		*/
 		LOGGER.fine("rewriteJob job = |" + job + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
 
-		ArrayList<JclStep> inNeedOfProc = job.stepsInNeedOfProc();
 		File aFile = new File(job.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
 		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + job.getUUID());
@@ -112,66 +119,108 @@ public static void main(String[] args) throws Exception {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		LOGGER.finest("out = |" + out + "|");
+		LOGGER.finest("tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
+		Proc aProc = null;
+		File procTmp = null;
+		PrintWriter procOut = null;
 		while ((inLine = src.readLine()) != null) {
-			if (job.lineIsInInstreamProc(src.getLineNumber())) {
-				/*
-					Deliberately drop these lines, they will be picked up
-					when the step executing the instream proc is processed.
-				*/
+			if (job.lineIsInThisJob(src.getLineNumber())) {
 			} else {
+				continue;
+			}
+			aProc = job.instreamProcThisLineIsIn(src.getLineNumber());
+			if (aProc == null) {
+				if (procOut == null) {
+				} else {
+					procOut.close();
+					procTmp = null;
+					procOut = null;
+				}
 				IncludeStatement i = job.includeStatementAt(src.getLineNumber());
 				if (i == null) {
-					JclStep step = job.jclStepAt(src.getLineNumber());
-					if (step == null) {
-						out.println(inLine);
-					} else {
-							if (step.isExecProc() && !inNeedOfProc.contains(step)) {
-							/*
-								This step executed an instream proc, the content of
-								which will now be written to a file external to the
-								job, effectively making it appear as a cataloged
-								proc in subsequent processing.
-							*/
-							writeTheProcContent(job, step, tmpProcDir);
-						} else {
-							out.println(inLine);
-						}
-					}
+					out.println(inLine);
 				} else {
-					writeTheIncludeContent(i, out);
+					if (writeTheIncludeContent(i, out)) {
+					} else {
+						out.println(inLine);
+					}
 				}
+			} else {
+				if (procOut == null) {
+					procTmp = new File(tmpProcDir.toString() + File.separator + aProc.getProcName());
+					if (CLI.saveTemp) {
+					} else {
+						procTmp.deleteOnExit();
+					}
+					procOut = new PrintWriter(procTmp);
+					LOGGER.finest("procTmp = |" + procTmp.getName() + "|");
 				}
+				procOut.println(inLine);
+			}
 			if (src.getLineNumber() == job.getEndLine()) break; //end of this job in this file
 		}
+		src.close();
+		out.close();
 	}
 
-	public static void writeTheIncludeContent(
+	public static Boolean writeTheIncludeContent(
 							IncludeStatement i
 							, PrintWriter out)
 						throws IOException {
 
 		LOGGER.fine("writeTheIncludeContent");
+		Boolean foundIt = true;
 		String includeFileFull = null;
 		String includeFile = i.getResolvedText();
 
 		for (String path: CLI.copyPaths) {
-			File aFile = new File(path + "/" + includeFile);
+			File aFile = new File(path + File.separator + includeFile);
 			if (aFile.exists()) {
-				includeFileFull = path + "/" + includeFile;
+				includeFileFull = path + File.separator + includeFile;
 				break;
 			}
 		}
 
 		if (includeFileFull == null) {
-			LOGGER.warning(includeFile + " not found in any path specified");
+			foundIt = false;
+			//LOGGER.warning(includeFile + " not found in any path specified");
 			//throw new FileNotFoundException(copyFile + " not found in any path specified");
 		} else {
 			List<String> list = 
 				Files.readAllLines(Paths.get(includeFileFull));
 			for (String line: list) out.println(line);
 		}
+
+		return foundIt;
+	}
+
+	public static void writeInstreamProcContent(
+							Job job
+							, Proc aProc
+							, File tmpProcDir)
+						throws IOException {
+
+		LOGGER.fine("writeInstreamProcContent");
+		File tmp = new File(tmpProcDir.toString() + File.separator + aProc.getProcName());
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		LOGGER.finest("out = |" + out + "|");
+
+		File aFile = new File(job.getFileName());
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+
+		String inLine = new String();
+		while ((inLine = src.readLine()) != null) {
+			if (src.getLineNumber() >= aProc.getStartLine()) out.println(inLine);
+			if (src.getLineNumber() > aProc.getEndLine()) break;
+		}
+
+		src.close();
+		out.close();
 	}
 
 	public static void writeTheProcContent(
@@ -215,7 +264,7 @@ public static void main(String[] args) throws Exception {
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
 		*/
-		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-xr-x");
+		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =
 			PosixFilePermissions.asFileAttribute(perms);
 		File tmpDir = Files.createTempDirectory("Demo01-", attr).toFile();

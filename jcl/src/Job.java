@@ -130,11 +130,32 @@ public class Job {
 		return b;
 	}
 
+	public Proc instreamProcThisLineIsIn(int aLine) {
+		Proc aProc = null;
+
+		for (Proc p: this.procs) {
+			if (p.containsLine(aLine) && (p.getFileName().equals(this.fileName))) {
+				aProc = p;
+				break;
+			}
+		}
+
+		return aProc;
+	}
+
+	public Boolean lineIsInThisJob(int aLine) {
+		return ((aLine >= this.startLine) && (aLine <= this.endLine));
+	}
+
 	public IncludeStatement includeStatementAt(int aLine) {
 		for (IncludeStatement i: this.includes) {
 			if (i.getLine() == aLine) return i;
 		}
 
+		for (JclStep s: steps) {
+			IncludeStatement i = s.includeStatementAt(aLine);
+			if (i != null) return i;
+		}
 		return null;
 	}
 
