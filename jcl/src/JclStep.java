@@ -76,7 +76,7 @@ public class JclStep {
 		return this.execPgmStmtCtx != null;
 	}
 
-	public Boolean needsCatalogedProc() {
+	public Boolean needsProc() {
 		return this.isExecProc() && (this.proc == null);
 	}
 
@@ -90,6 +90,10 @@ public class JclStep {
 
 	public Proc getProc() {
 		return this.proc;
+	}
+
+	public int getLine() {
+		return this.line;
 	}
 
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
@@ -113,6 +117,10 @@ public class JclStep {
 			Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving proc " + proc);
 			proc.resolveParmedIncludes(mergedSymbolics);
 		}
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
 	}
 
 	public String toString() {

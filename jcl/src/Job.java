@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.*;
 */
 public class Job {
 
+	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private JCLParser.JobCardContext jobCardCtx = null;
 	private JCLParser.JcllibStatementContext jcllibCtx = null;
@@ -17,6 +18,8 @@ public class Job {
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
 	private String fileName = null;
+	private int startLine = -1;
+	private int endLine = -1;
 
 	public Job(JCLParser.JobCardContext ctx, String fileName) {
 		this.jobCardCtx = ctx;
@@ -26,6 +29,7 @@ public class Job {
 
 	private void initialize() {
 		myName = this.getClass().getName();
+		this.startLine = this.jobCardCtx.JOB().getSymbol().getLine();
 	}
 
 	public void addJcllib(JCLParser.JcllibStatementContext ctx) {
@@ -56,6 +60,10 @@ public class Job {
 		}
 
 		this.jcllib.addAll(KeywordOrSymbolicWrapper.bunchOfThese(kywdCtxList));
+	}
+
+	public void setEndLine(int aLine) {
+		this.endLine = aLine;
 	}
 
 	public void addInstreamProc(Proc iProc) {
@@ -100,7 +108,7 @@ public class Job {
 
 		for (JclStep step: this.steps) {
 			if (step.isExecProc()) {
-				if (step.needsCatalogedProc()) {
+				if (step.needsProc()) {
 					stepsInNeed.add(step);
 				} else {
 					stepsInNeed.addAll(step.getProc().stepsInNeedOfProc());
@@ -109,6 +117,49 @@ public class Job {
 		}
 
 		return stepsInNeed;
+	}
+
+	public Boolean lineIsInInstreamProc(int aLine) {
+		Boolean b = false;
+
+		for (Proc p: this.procs) {
+			b = p.containsLine(aLine) && (p.getFileName().equals(this.fileName));
+			if (b) break;
+		}
+
+		return b;
+	}
+
+	public IncludeStatement includeStatementAt(int aLine) {
+		for (IncludeStatement i: this.includes) {
+			if (i.getLine() == aLine) return i;
+		}
+
+		return null;
+	}
+
+	public JclStep jclStepAt(int aLine) {
+		for (JclStep j: steps) {
+			if (j.getLine() == aLine) return j;
+		}
+
+		return null;
+	}
+
+	public String getFileName() {
+		return this.fileName;
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
+	}
+
+	public int getStartLine() {
+		return this.startLine;
+	}
+
+	public int getEndLine() {
+		return this.endLine;
 	}
 
 	public String toString() {

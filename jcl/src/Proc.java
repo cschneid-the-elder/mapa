@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.*;
 */
 public class Proc {
 
+	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private JCLParser.ProcStatementContext procCtx = null;
 	private JCLParser.PendStatementContext pendCtx = null;
@@ -83,6 +84,34 @@ public class Proc {
 		return this.procName;
 	}
 
+	public String getFileName() {
+		return this.fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
+	}
+
+	public int getStartLine() {
+		return this.startLine;
+	}
+
+	public int getEndLine() {
+		return this.endLine;
+	}
+
+	public IncludeStatement includeStatementAt(int aLine) {
+		for (IncludeStatement i: this.includes) {
+			if (i.getLine() == aLine) return i;
+		}
+
+		return null;
+	}
+
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
@@ -105,7 +134,7 @@ public class Proc {
 
 		for (JclStep step: this.steps) {
 			if (step.isExecProc()) {
-				if (step.needsCatalogedProc()) {
+				if (step.needsProc()) {
 					stepsInNeed.add(step);
 				} else {
 					stepsInNeed.addAll(step.getProc().stepsInNeedOfProc());
@@ -114,6 +143,10 @@ public class Proc {
 		}
 
 		return stepsInNeed;
+	}
+
+	public Boolean containsLine(int aLine) {
+		return (aLine >= startLine) && (aLine <= endLine);
 	}
 
 	public String toString() {
