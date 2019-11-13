@@ -174,17 +174,28 @@ public class KeywordOrSymbolicWrapper {
 	}
 
 	public String getValue() {
-		StringBuffer aString = new StringBuffer();
+		StringBuffer buf = new StringBuffer();
 
 		for (KeywordValueWrapper k: this.kvw) {
-			aString.append(k.getValue());
+			buf.append(k.getValue());
 		}
 
-		return aString.toString();
+		return buf.toString();
+	}
+
+	public Boolean isResolved() {
+		Boolean b = true;
+
+		for (KeywordValueWrapper k: this.kvw) {
+			b = b && k.isResolved();
+			if (!b) break;
+		}
+
+		return b;
 	}
 
 	public String getResolvedValue() {
-		StringBuffer aString = new StringBuffer();
+		StringBuffer buf = new StringBuffer();
 		KeywordValueWrapper prev = null;
 
 		for (KeywordValueWrapper k: this.kvw) {
@@ -206,23 +217,23 @@ public class KeywordOrSymbolicWrapper {
 					and not part of the symbolic or what follows.
 				*/
 			} else {
-				aString.append(k.getResolvedValue());
+				buf.append(k.getResolvedValue());
 			}
 			prev = k;
 		}
 
-		return aString.toString();
+		return buf.toString();
 	}
 
 	public String toString() {
-		StringBuffer aString = new StringBuffer();
+		StringBuffer buf = new StringBuffer();
 
 		for (KeywordValueWrapper k: this.kvw) {
-			aString.append(k.getValue());
+			buf.append(k.getValue());
 		}
 
-		aString.append(" procName: |" + this.procName + "| inProc: |" + this.inProc + "|");
+		buf.append(" procName: |" + this.procName + "| inProc: |" + this.inProc + "|");
 
-		return aString.toString();
+		return buf.toString();
 	}
 }

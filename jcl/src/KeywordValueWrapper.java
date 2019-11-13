@@ -139,7 +139,11 @@ public class KeywordValueWrapper {
 	}
 
 	public Boolean isResolved() {
-		return this.resolvedValue != null;
+		if (this.isParm()) {
+			return this.resolvedValue != null;
+		} else {
+			return true;
+		}
 	}
 
 	public long getSortKey() {

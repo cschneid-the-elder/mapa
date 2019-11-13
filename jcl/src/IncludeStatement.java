@@ -84,6 +84,14 @@ public class IncludeStatement {
 		this.kywd.resolveParms(sets);
 	}
 
+	public Boolean isResolved() {
+		return this.kywd.isResolved();
+	}
+
+	public Boolean isProbablyTheSame(IncludeStatement i) {
+		return this.getOriginalText().equals(i.getOriginalText());
+	}
+
 	public String toString() {
 		return 
 			this.myName 

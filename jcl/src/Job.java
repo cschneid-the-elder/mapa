@@ -183,6 +183,16 @@ public class Job {
 		return this.endLine;
 	}
 
+	public ArrayList<IncludeStatement> getAllIncludes() {
+		ArrayList<IncludeStatement> i = new ArrayList<>(this.includes);
+
+		for (JclStep s: steps) {
+			i.addAll(s.getIncludes());
+		}
+
+		return i;
+	}
+
 	public String toString() {
 		return this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText() + " @ " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getLine() + " in " + this.fileName;
 	}

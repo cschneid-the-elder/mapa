@@ -41,7 +41,6 @@ public static void main(String[] args) throws Exception {
 	String cwFileName = null; //current work file name
 	ArrayList<SetSymbolValue> sets = new ArrayList<>();
 	ArrayList<Proc> procs = new ArrayList<>();
-	ArrayList<IncludeStatement> includes = new ArrayList<>();
 	ArrayList<Job> jobs = new ArrayList<>();
 
 	for (String aFileName: CLI.fileNamesToProcess) {
@@ -52,12 +51,56 @@ public static void main(String[] args) throws Exception {
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 			File tmpJobDir = newTempDir();
 			File tmpProcDir = newTempDir();
-			rewriteJob(j, tmpJobDir, tmpProcDir);
+			File jobFile = rewriteJobAndSeparateInstreamProcs(j, tmpJobDir, tmpProcDir);
 			/*
 				Now must iteratively parse this job until all includes 
 				are resolved -or- we have determined all that remain are 
 				unresolvable includes.
 			*/
+			Job aJob = j;
+			Boolean iterating = true;
+			int sanity = 0;
+			do {
+				IncludeStatement[] unresolved_includes1 = 
+					aJob.getAllIncludes().stream()
+					.filter(i -> !i.isResolved())
+					.toArray(IncludeStatement[]::new);
+				ArrayList<IncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
+				ArrayList<Proc> dummyProcs = new ArrayList<>();
+				ArrayList<Job> thisJob = new ArrayList<>();
+				subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+				thisJob.get(0).resolveParmedIncludes();
+				IncludeStatement[] unresolved_includes2 = 
+					thisJob.get(0).getAllIncludes().stream()
+					.filter(i -> !i.isResolved())
+					.toArray(IncludeStatement[]::new);
+				ArrayList<IncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
+				//are all includes from before still there after? yes = stop iterating
+				if (includes_after.size() == includes_before.size()) {
+					Boolean allContained = true;
+					for (IncludeStatement ia: includes_after) {
+						Boolean contains = false;
+						for (IncludeStatement ib: includes_before) {
+							if (ia.isProbablyTheSame(ib)) {
+								contains = true;
+								break;
+							}
+						}
+						allContained = allContained && contains;
+					}
+					if (allContained) {
+						iterating = false;
+					}
+				} else {
+					iterating = true;
+				}
+				if (iterating) {
+					aJob = thisJob.get(0);
+					jobFile = rewriteJob(aJob, tmpJobDir);
+				}
+				sanity++;
+			} while(iterating && (sanity < 20));
+			if (sanity >= 20) LOGGER.severe("sanity check failed for " + j);
 		}
 		/*
 			the plan...
@@ -101,15 +144,15 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static void rewriteJob(Job job, File tmpJobDir, File tmpProcDir) throws IOException {
+	public static File rewriteJobAndSeparateInstreamProcs(Job job, File tmpJobDir, File tmpProcDir) throws IOException {
 		/*
 			Rewrite one job from the current file, separating any instream procs into their own
 			files to be processed later.
 
-			At this point the intent is to iteratively process the job until all INCLUDEs are
+			After this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
-		LOGGER.fine("rewriteJob job = |" + job + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
+		LOGGER.fine("rewriteJobAndSeparateInstreamProcs job = |" + job + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
 
 		File aFile = new File(job.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
@@ -162,6 +205,7 @@ public static void main(String[] args) throws Exception {
 		}
 		src.close();
 		out.close();
+		return tmp;
 	}
 
 	public static Boolean writeTheIncludeContent(
@@ -221,6 +265,61 @@ public static void main(String[] args) throws Exception {
 
 		src.close();
 		out.close();
+	}
+
+	public static void subsequentProcess(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
+		LOGGER.fine("subsequentProcess");
+
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		JobListener jobListener = new JobListener(jobs, procs, fileName);
+	
+		LOGGER.finer("----------walking tree with JobListener");
+	
+		jclwalker.walk(jobListener, jcltree);
+
+	}
+
+	public static File rewriteJob(Job job, File tmpJobDir) throws IOException {
+		/*
+			Rewrite one job from the current file.
+
+			At this point the intent is to iteratively process the job until all INCLUDEs are
+			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
+		*/
+		LOGGER.fine("rewriteJob job = |" + job + "| tmpJobDir = |" + tmpJobDir + "|");
+
+		File aFile = new File(job.getFileName());
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + job.getUUID());
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		LOGGER.finest("tmp = |" + tmp.getName() + "|");
+		String inLine = new String();
+		while ((inLine = src.readLine()) != null) {
+			IncludeStatement i = job.includeStatementAt(src.getLineNumber());
+			if (i == null) {
+				out.println(inLine);
+			} else {
+				if (writeTheIncludeContent(i, out)) {
+				} else {
+					out.println(inLine);
+				}
+			}
+		}
+		src.close();
+		out.close();
+		return tmp;
 	}
 
 	public static void writeTheProcContent(

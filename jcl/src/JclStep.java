@@ -131,6 +131,10 @@ public class JclStep {
 		return null;
 	}
 
+	public ArrayList<IncludeStatement> getIncludes() {
+		return this.includes;
+	}
+
 	public String toString() {
 		StringBuffer sb = new StringBuffer(this.myName);
 
