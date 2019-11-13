@@ -1,0 +1,2 @@
+//         DD  DISP=SHR,DSN=SYST.LOADLIB
+//             INCLUDE MEMBER=SLIBQ
