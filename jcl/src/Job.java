@@ -183,6 +183,10 @@ public class Job {
 		return this.endLine;
 	}
 
+	public ArrayList<JclStep> getSteps() {
+		return this.steps;
+	}
+
 	public ArrayList<IncludeStatement> getAllIncludes() {
 		ArrayList<IncludeStatement> i = new ArrayList<>(this.includes);
 
@@ -193,8 +197,22 @@ public class Job {
 		return i;
 	}
 
+	public ArrayList<String> getJcllibStrings() {
+		ArrayList<String> libs = new ArrayList<>();
+
+		for (KeywordOrSymbolicWrapper k: jcllib) {
+			libs.add(k.getValue());
+		}
+
+		return libs;
+	}
+
+	public String getJobName() {
+		return this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
+	}
+
 	public String toString() {
-		return this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText() + " @ " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getLine() + " in " + this.fileName;
+		return this.getJobName() + " @ " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getLine() + " in " + this.fileName;
 	}
 }
 

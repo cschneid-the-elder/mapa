@@ -12,7 +12,8 @@ public class TheCLI{
 	public CommandLine line = null;
 	public HelpFormatter formatter = new HelpFormatter();
 	public ArrayList<String> fileNamesToProcess = new ArrayList<>();
-	public ArrayList<String> copyPaths = new ArrayList<>();
+	public ArrayList<String> staticProcPaths = new ArrayList<>();
+	public Hashtable<String, String> mappedProcPaths = new Hashtable<>();
 	public String outFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
@@ -73,10 +74,17 @@ public class TheCLI{
 		}
 
 		if (this.line.hasOption("include")) {
-			this.copyPaths.add(this.line.getOptionValue("include"));
+			this.staticProcPaths.add(this.line.getOptionValue("include"));
 		} else if (this.line.hasOption("includeList")) {
 			List<String> list = Files.readAllLines(Paths.get(this.line.getOptionValue("includeList")));
-			this.copyPaths.addAll(list);
+			for (String rec: list) {
+				if (rec.contains(",")) {
+					String[] kv = rec.split(",");
+					mappedProcPaths.put(kv[0], kv[1]);
+				} else {
+					this.staticProcPaths.add(rec);
+				}
+			}
 		} else {
 			this.LOGGER.info("Either the include or the includeList option must be provided");
 			this.formatter.printHelp( "Demo01", options, true );

@@ -42,11 +42,13 @@ public static void main(String[] args) throws Exception {
 	ArrayList<SetSymbolValue> sets = new ArrayList<>();
 	ArrayList<Proc> procs = new ArrayList<>();
 	ArrayList<Job> jobs = new ArrayList<>();
+	ArrayList<Job> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
 
 	for (String aFileName: CLI.fileNamesToProcess) {
-		LOGGER.info("Processing " + aFileName);
+		LOGGER.info("Processing file " + aFileName);
 		initialProcess(jobs, procs, aFileName);
 		for (Job j: jobs) {
+			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes();
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 			File tmpJobDir = newTempDir();
@@ -57,67 +59,10 @@ public static void main(String[] args) throws Exception {
 				are resolved -or- we have determined all that remain are 
 				unresolvable includes.
 			*/
-			Job aJob = j;
-			Boolean iterating = true;
-			int sanity = 0;
-			do {
-				IncludeStatement[] unresolved_includes1 = 
-					aJob.getAllIncludes().stream()
-					.filter(i -> !i.isResolved())
-					.toArray(IncludeStatement[]::new);
-				ArrayList<IncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
-				ArrayList<Proc> dummyProcs = new ArrayList<>();
-				ArrayList<Job> thisJob = new ArrayList<>();
-				subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
-				thisJob.get(0).resolveParmedIncludes();
-				IncludeStatement[] unresolved_includes2 = 
-					thisJob.get(0).getAllIncludes().stream()
-					.filter(i -> !i.isResolved())
-					.toArray(IncludeStatement[]::new);
-				ArrayList<IncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
-				//are all includes from before still there after? yes = stop iterating
-				if (includes_after.size() == includes_before.size()) {
-					Boolean allContained = true;
-					for (IncludeStatement ia: includes_after) {
-						Boolean contains = false;
-						for (IncludeStatement ib: includes_before) {
-							if (ia.isProbablyTheSame(ib)) {
-								contains = true;
-								break;
-							}
-						}
-						allContained = allContained && contains;
-					}
-					if (allContained) {
-						iterating = false;
-					}
-				} else {
-					iterating = true;
-				}
-				if (iterating) {
-					aJob = thisJob.get(0);
-					jobFile = rewriteJob(aJob, tmpJobDir);
-				}
-				sanity++;
-			} while(iterating && (sanity < 20));
-			if (sanity >= 20) LOGGER.severe("sanity check failed for " + j);
+			Job rJob = iterativelyResolveJobIncludes(j, tmpJobDir, tmpProcDir, jobFile);
+			rJobs.add(rJob);
+			iterativelyResolveJobProcs(rJob, tmpProcDir);
 		}
-		/*
-			the plan...
-
-			for each job, read a record from its file
-				if the record number resides in an instream proc, skip it
-				if the record number corresponds to a resolved include,
-					skip writing the include, instead read the file it
-					refers to and add that to the output in place of the include
-				if the record number corresponds to a jclstep _not_ in stepsInNeedOfProc,
-					open a new LineNumberReader on the jclstep's file
-					read the proc, writing records to a new file
-					if the record number corresponds to a resolved include,
-						skip writing the include, instead read the file it
-						refers to and add that to the output in place of the include
-				write the record read to output
-		*/
 	}
 
 
@@ -152,6 +97,22 @@ public static void main(String[] args) throws Exception {
 			After this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
+		/*
+			the plan...
+
+			for each job, read a record from its file
+				if the record number resides in an instream proc, skip it
+				if the record number corresponds to a resolved include,
+					skip writing the include, instead read the file it
+					refers to and add that to the output in place of the include
+				if the record number corresponds to a jclstep _not_ in stepsInNeedOfProc,
+					open a new LineNumberReader on the jclstep's file
+					read the proc, writing records to a new file
+					if the record number corresponds to a resolved include,
+						skip writing the include, instead read the file it
+						refers to and add that to the output in place of the include
+				write the record read to output
+		*/
 		LOGGER.fine("rewriteJobAndSeparateInstreamProcs job = |" + job + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
 
 		File aFile = new File(job.getFileName());
@@ -184,7 +145,7 @@ public static void main(String[] args) throws Exception {
 				if (i == null) {
 					out.println(inLine);
 				} else {
-					if (writeTheIncludeContent(i, out)) {
+					if (writeTheIncludeContent(i, out, tmpProcDir, job.getJcllibStrings())) {
 					} else {
 						out.println(inLine);
 					}
@@ -210,21 +171,22 @@ public static void main(String[] args) throws Exception {
 
 	public static Boolean writeTheIncludeContent(
 							IncludeStatement i
-							, PrintWriter out)
+							, PrintWriter out
+							, File tmpProcDir
+							, ArrayList<String> jcllib)
 						throws IOException {
 
 		LOGGER.fine("writeTheIncludeContent");
+
+		if (i.isResolved()) {
+		} else {
+			return false;
+		}
+
 		Boolean foundIt = true;
-		String includeFileFull = null;
 		String includeFile = i.getResolvedText();
 
-		for (String path: CLI.copyPaths) {
-			File aFile = new File(path + File.separator + includeFile);
-			if (aFile.exists()) {
-				includeFileFull = path + File.separator + includeFile;
-				break;
-			}
-		}
+		String includeFileFull = searchProcPathsFor(includeFile, tmpProcDir, jcllib);
 
 		if (includeFileFull == null) {
 			foundIt = false;
@@ -267,6 +229,58 @@ public static void main(String[] args) throws Exception {
 		out.close();
 	}
 
+	public static Job iterativelyResolveJobIncludes(Job j, File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
+		LOGGER.fine("iterativelyResolveJobIncludes");
+
+			Job aJob = j;
+			File jobFile = initialJobFile;
+			Boolean iterating = true;
+			int sanity = 0;
+			do {
+				IncludeStatement[] unresolved_includes1 = 
+					aJob.getAllIncludes().stream()
+					.filter(i -> !i.isResolved())
+					.toArray(IncludeStatement[]::new);
+				ArrayList<IncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
+				ArrayList<Proc> dummyProcs = new ArrayList<>();
+				ArrayList<Job> thisJob = new ArrayList<>();
+				subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+				thisJob.get(0).resolveParmedIncludes();
+				IncludeStatement[] unresolved_includes2 = 
+					thisJob.get(0).getAllIncludes().stream()
+					.filter(i -> !i.isResolved())
+					.toArray(IncludeStatement[]::new);
+				ArrayList<IncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
+				//are all includes from before still there after? yes = stop iterating
+				if (includes_after.size() == includes_before.size()) {
+					Boolean allContained = true;
+					for (IncludeStatement ia: includes_after) {
+						Boolean contains = false;
+						for (IncludeStatement ib: includes_before) {
+							if (ia.isProbablyTheSame(ib)) {
+								contains = true;
+								break;
+							}
+						}
+						allContained = allContained && contains;
+					}
+					if (allContained) {
+						iterating = false;
+					}
+				} else {
+					iterating = true;
+				}
+				if (iterating) {
+					aJob = thisJob.get(0);
+					jobFile = rewriteJob(aJob, tmpJobDir, tmpProcDir);
+				}
+				sanity++;
+			} while(iterating && (sanity < 20));
+			if (sanity >= 20) LOGGER.severe("sanity check failed for " + j);
+
+		return aJob;
+	}
+
 	public static void subsequentProcess(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
 		LOGGER.fine("subsequentProcess");
 
@@ -287,7 +301,7 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static File rewriteJob(Job job, File tmpJobDir) throws IOException {
+	public static File rewriteJob(Job job, File tmpJobDir, File tmpProcDir) throws IOException {
 		/*
 			Rewrite one job from the current file.
 
@@ -311,7 +325,7 @@ public static void main(String[] args) throws Exception {
 			if (i == null) {
 				out.println(inLine);
 			} else {
-				if (writeTheIncludeContent(i, out)) {
+				if (writeTheIncludeContent(i, out, tmpProcDir, job.getJcllibStrings())) {
 				} else {
 					out.println(inLine);
 				}
@@ -320,6 +334,14 @@ public static void main(String[] args) throws Exception {
 		src.close();
 		out.close();
 		return tmp;
+	}
+
+	public static void iterativelyResolveJobProcs(Job job, File tmpProcDir) throws IOException {
+
+		for (JclStep s: job.getSteps()) {
+			if (!s.isExecProc()) continue;
+			String procFileName = s.getProcExecuted();
+		}
 	}
 
 	public static void writeTheProcContent(
@@ -374,6 +396,35 @@ public static void main(String[] args) throws Exception {
 		}
 
 		return tmpDir;
+	}
+
+	public static String searchProcPathsFor(String fileName, File tmpProcDir, ArrayList<String> jcllib) throws IOException {
+		File aFile = new File(tmpProcDir.getName() + File.separator + fileName);
+		if (aFile.exists()) {
+			LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+			return aFile.getCanonicalPath();
+		}
+
+		for (String lib: jcllib) {
+			if (CLI.mappedProcPaths.containsKey(lib)) {
+				aFile = new File(CLI.mappedProcPaths.get(lib) + File.separator + fileName);
+				if (aFile.exists()) {
+					LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+					return aFile.getCanonicalPath();
+				}
+			}
+		}
+
+		for (String path: CLI.staticProcPaths) {
+			aFile = new File(path + File.separator + fileName);
+			if (aFile.exists()) {
+				LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+				return aFile.getCanonicalPath();
+			}
+		}
+
+		LOGGER.warning("searchProcPathsFor() did not find " + fileName);
+		return null;
 	}
 
 	public static ArrayList<SetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
