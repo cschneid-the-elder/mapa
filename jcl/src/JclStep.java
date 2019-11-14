@@ -97,6 +97,28 @@ public class JclStep {
 	}
 
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
+		/**
+			Of note here: an INCLUDE that is attached to a JclStep may not have
+			anything to do with the JclStep.  It is syntactically impossible to
+			discern the coder's intent.  Consider...
+
+			//RIGEL   EXEC PGM=IEFBR14
+			//        INCLUDE MEMBER=DARGO
+			//PILOT   EXEC PGM=IEFBR14
+
+			...where the member DARGO contains...
+
+			//        SET A=1,B=2,C=3
+			//STARK   EXEC PROC=NORANTI
+			//        INCLUDE MEMBER=SIKOZU&A
+
+			...and thus statements unrelated to the JclStep will be inserted into
+			the jobstream.
+
+			Subsequent parsing takes care of this, and in fact is one of the reasons
+			the original JCL is parsed iteratively.
+		*/
+
 		Demo01.LOGGER.finest(this.myName + " resolveParmedIncludes: " + this.stepName);
 		for (IncludeStatement i: this.includes) {
 			i.resolveParms(symbolics);
