@@ -92,14 +92,14 @@ public class Job {
 
 	public void resolveParmedIncludes() {
 		Demo01.LOGGER.finest(myName + " resolveParmedIncludes " + this);
-		for (IncludeStatement i: includes) {
-			i.resolveParms(symbolics);
+		for (IncludeStatement i: this.includes) {
+			i.resolveParms(this.symbolics);
 		}
-		Demo01.LOGGER.finest(myName + " includes (after resolving): " + includes);
+		Demo01.LOGGER.finest(myName + " includes (after resolving): " + this.includes);
 
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + steps);
-		for (JclStep s: steps) {
-			s.resolveParmedIncludes(symbolics);
+		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + this.steps);
+		for (JclStep s: this.steps) {
+			s.resolveParmedIncludes(this.symbolics);
 		}
 	}
 

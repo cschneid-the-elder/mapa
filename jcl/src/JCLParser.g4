@@ -140,18 +140,10 @@ ddStatementAmalgamation : ddStatement ddStatementConcatenation* ;
 
 ddName : (NAME | NAME_FIELD) (DOT (NAME | NAME_FIELD))? ;
 
-ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDDNAME | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter;
+ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDDNAME | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter;
 
 ddParmACCODE : ACCODE EQUAL keywordOrSymbolic;
-ddParmAMP : AMP EQUAL (
-    (LPAREN 
-        (AMORG | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+)
-    RPAREN) |
-    QUOTED_STRING_FRAGMENT+ |
-    QS_AMPERSAND+ |
-    QS_SQUOTE2+ |
-    AMORG
-  ) ;
+ddParmAMP : AMP EQUAL singleOrMultipleValue ;
 ddParmASTERISK : ASTERISK ;
 ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
 ddParmAVGREC : AVGREC EQUAL keywordOrSymbolic ;
@@ -217,7 +209,7 @@ ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? ddParmDISP_NORMAL_TERM? ddPar
 ddParmDISP_STATUS : DISP_MOD | DISP_NEW | DISP_OLD | DISP_SHR | SYMBOLIC ;
 ddParmDISP_NORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDISP_ABNORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
-ddParmDLM : DLM EQUAL (DLM_VAL | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+) ;
+ddParmDLM : DLM EQUAL keywordOrSymbolic ;
 ddParmDSID : DSID EQUAL (
     DSID_VALUE | 
     SYMBOLIC |
@@ -737,7 +729,7 @@ xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStateme
 
 xmitParmDEST : DEST EQUAL keywordOrSymbolic ;
 
-xmitParmDLM : DLM EQUAL (DLM_VAL | SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+) ;
+xmitParmDLM : DLM EQUAL keywordOrSymbolic ;
 
 xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic ;
 
@@ -940,7 +932,7 @@ jes2SignonStatement : SA JES2_SIGNON
 jes2XEQStatement : SA JES2_XEQ JES2_XEQ_NODE ;
 
 jes2XMITStatement : SA JES2_XMIT JES2_XMIT_NODE
-    (DLM EQUAL (SYMBOLIC+ | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | DLM_VAL))?
+    (DLM EQUAL keywordOrSymbolic)?
     DD_ASTERISK_DATA+
     (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)?
   ;
