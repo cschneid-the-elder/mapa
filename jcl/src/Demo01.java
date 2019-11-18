@@ -34,6 +34,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.info("Logger Name: " + LOGGER.getName());
 	} catch (Exception e) {
 		LOGGER.severe("Exception " + e + " encountered");
+		e.printStackTrace();
 		System.exit(16);
 	}
 

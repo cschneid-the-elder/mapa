@@ -1,0 +1,249 @@
+#! /usr/bin/gawk -f
+
+# Generate initializeTediously() code for DdStatementAmalgamation
+
+/^\t\tpublic\s[A-Za-z]*\sddParmCHARS/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDSNTYPE/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmFCB/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmFLASH/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmMODIFY/ {
+	somvw();
+	next;
+}
+
+/^\t\txpublic\s[A-Za-z]*\sddParmPCI/ {
+	somvwx();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmROACCESS/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSECMODEL/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSPIN/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSUBSYS/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSYMBOLS/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSYMLIST/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDSNAME/ {
+	dsnw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmLGSTREAM/ {
+	dsnw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmLIKE/ {
+	dsnw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmASTERISK/ {
+	blank()
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDATA\(/ {
+	blank()
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmAMP/ {
+	somvw();
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDCB_Parameter/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDISP/ {
+	printf("\t\t\tif (ddParm.%s != null) {\n", $3);
+	printf("\t\t\t\tthis.dispw = new DispWrapper(ddParm.%s, this.procName);\n", $3);
+	printf("\t\t\t\tcontinue;\n");
+	printf("\t\t\t}\n\n");
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDSID/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDUMMY/ {
+	blank()
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmDYNAM/ {
+	blank()
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmLABEL/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmOUTPUT/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmPATHDISP/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmPATHMODE/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmPATHOPTS/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSPACE/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmSYSOUT/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmUCS/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmUNIT/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmVOLUME/ {
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParm/ {
+	kosw();
+	next;
+}
+
+/^\t\txpublic\s[A-Za-z]*\sddParm/ {
+	koswx();
+	next;
+}
+
+
+EXIT
+
+function kosw() {
+		#print substr($3,7,length($3) - 8)
+
+		printf("\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\tKeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.%s.keywordOrSymbolic(), this.procName);\n", $3);
+		x = substr($3,7,length($3) - 8);
+		printf("\t\t\t\tthis.kosParms.put(\"%s\", kosw);\n", x);
+		printf("\t\t\t\tcontinue;\n");
+		printf("\t\t\t}\n\n");
+
+}
+
+function somvw() {
+		#print substr($3,7,length($3) - 8)
+
+		printf("\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\tSingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.%s.singleOrMultipleValue(), this.procName);\n", $3);
+		x = substr($3,7,length($3) - 8);
+		printf("\t\t\t\tthis.somvParms.put(\"%s\", somvw);\n", x);
+		printf("\t\t\t\tcontinue;\n");
+		printf("\t\t\t}\n\n");
+
+}
+
+function somvwx() {
+		#print substr($3,7,length($3) - 8)
+
+		printf("\t\t\tif (ddParm.ddParmDCB_Parameter() != null) {\n");
+		printf("\t\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\t\tSingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmDCB_Parameter().%s.singleOrMultipleValue(), this.procName);\n", $3);
+		x = substr($3,7,length($3) - 8);
+		printf("\t\t\t\t\tthis.somvParms.put(\"%s\", somvw);\n", x);
+		printf("\t\t\t\t\tcontinue;\n");
+		printf("\t\t\t\t}\n\n");
+		printf("\t\t\t}\n\n");
+
+}
+
+function koswx() {
+		#print substr($3,7,length($3) - 8)
+
+		printf("\t\t\tif (ddParm.ddParmDCB_Parameter() != null) {\n");
+		printf("\t\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\t\tKeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.ddParmDCB_Parameter().%s.keywordOrSymbolic(), this.procName);\n", $3);
+		x = substr($3,7,length($3) - 8);
+		printf("\t\t\t\t\tthis.kosParms.put(\"%s\", kosw);\n", x);
+		printf("\t\t\t\t\tcontinue;\n");
+		printf("\t\t\t\t}\n\n");
+		printf("\t\t\t}\n\n");
+
+}
+
+function blank() {
+		#print substr($3,7,length($3) - 8)
+
+		printf("\t\t\tif (ddParm.%s != null) {\n", $3);
+		x = substr($3,7,length($3) - 8);
+		printf("\t\t\t\tthis.blankParms.add(\"%s\");\n", x);
+		printf("\t\t\t\tcontinue;\n");
+		printf("\t\t\t}\n\n");
+
+}
+
+function dsnw() {
+		#print substr($3,7,length($3) - 8)
+
+		printf("\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\tDatasetNameWrapper dsnw = new DatasetNameWrapper(ddParm.%s.datasetName(), this.procName);\n", $3);
+		x = substr($3,7,length($3) - 8);
+		printf("\t\t\t\tthis.dsnParms.put(\"%s\", dsnw);\n", x);
+		printf("\t\t\t\tcontinue;\n");
+		printf("\t\t\t}\n\n");
+
+}
+
+

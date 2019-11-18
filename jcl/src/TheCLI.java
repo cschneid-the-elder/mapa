@@ -80,7 +80,7 @@ public class TheCLI{
 			for (String rec: list) {
 				if (rec.contains(",")) {
 					String[] kv = rec.split(",");
-					mappedProcPaths.put(kv[0], kv[1]);
+					mappedProcPaths.put(kv[1], kv[0]);
 				} else {
 					this.staticProcPaths.add(rec);
 				}

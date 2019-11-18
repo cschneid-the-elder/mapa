@@ -26,6 +26,7 @@ public class JclStep {
 	private List<JCLParser.IncludeStatementContext> includeStmtCtxs = null;
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
+	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
 
 	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName) {
 		this.jclStepCtx = jclStepCtx;
@@ -65,7 +66,14 @@ public class JclStep {
 			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
 				this.symbolics.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
 			}
-		}		
+		}
+
+		if (this.ddStmtAmlgnCtxs == null) {
+		} else {
+			for (JCLParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
+				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName));
+			}
+		}	
 	}
 
 	public Boolean isExecProc() {

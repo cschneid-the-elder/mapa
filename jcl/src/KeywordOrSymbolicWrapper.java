@@ -62,6 +62,18 @@ public class KeywordOrSymbolicWrapper {
 		return kywdList;
 	}
 
+	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList, String procName) {
+		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
+
+		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
+			kywdList.add(new KeywordOrSymbolicWrapper(k, procName));
+		}
+
+		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		return kywdList;
+	}
+
 	public KeywordOrSymbolicWrapper(JCLParser.KeywordOrSymbolicContext ctx, String procName) {
 		this.ctx = ctx;
 		this.procName = procName;

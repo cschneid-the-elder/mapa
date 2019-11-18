@@ -448,7 +448,7 @@ DD_SS_WS : SS ' '+
     }? ->channel(HIDDEN) ;
 
 DD_ACCODE : A C C O D E ->type(ACCODE),pushMode(KYWD_VAL_MODE) ;
-DD_AMP : A M P ->type(AMP),pushMode(AMP_MODE) ;
+DD_AMP : A M P ->type(AMP),pushMode(KYWD_VAL_MODE) ;
 DD_AVGREC : A V G R E C ->type(AVGREC),pushMode(KYWD_VAL_MODE) ;
 DD_ASTERISK : '*'
     {
@@ -1295,7 +1295,7 @@ DLM_VAL : [A-Z0-9@#$_\-]+
     {
         dlmVals = new java.util.ArrayList();
         dlmVals.add(getText());
-    } ->popMode ;
+    } ->type(KEYWORD_VALUE),popMode ;
 
 mode DATA_MODE ;
 
@@ -1361,7 +1361,6 @@ QS_SQUOTE2 : SQUOTE SQUOTE ;
 QS_SQUOTE : SQUOTE
     {
       switch(_modeStack.peek()) {
-        case AMP_MODE :
         case SYSOUT_MODE :
         case KYWD_VAL_MODE :
         case DCB_MODE :
@@ -1832,44 +1831,6 @@ KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
 KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->type(COMMA),pushMode(COMMA_NEWLINE_MODE) ;
 KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->type(COMMA),pushMode(COMMA_WS_MODE) ;
-
-mode AMP_MODE ;
-
-/*
-My reading of the documentation is that the following are allowed...
-
-//DD01 DD AMP=AMORG
-//DD01 DD AMP=(AMORG)
-//DD01 DD AMP='AMORG'
-//DD01 DD AMP=('AMORG')
-//DD01 DD AMP='ACCBIAS=SYSTEM,BUFND=24,BUFNI=48,BUFSP=4096'
-//DD01 DD AMP=('ACCBIAS=SYSTEM,BUFND=24,BUFNI=48,BUFSP=4096',
-//           'CROPS=NRE,FRLOG=REDO,OPTCD=I,RMODE31=ALL',
-//           'TRACE=(PARM1=F1F2F3F4F5F6,KEY=ABCDEF)')
-
-...meaning that AMORG is special.  It is a keyword parameter with
-no value, and it can be specified outside of apostrophes.
-
-The rest of the AMP parameters (apparently?) must be specified within
-single quotes.  So a separate grammar for those is indicated.
-
-*/
-
-AMORG : A M O R G ->popMode ;
-AMP_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-AMP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-AMP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-AMP_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(AMP_PAREN_MODE) ;
-
-mode AMP_PAREN_MODE ;
-
-AMP_PAREN_AMORG : A M O R G ->type(AMORG) ;
-AMP_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-AMP_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
-AMP_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-AMP_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
-AMP_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-AMP_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode COPIES_MODE ;
 
