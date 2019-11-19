@@ -16,12 +16,7 @@ public class DdStatementAmalgamation {
 	private String procName = null;
 	private Boolean inProc = null;
 	private JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx = null;
-	private ArrayList<String> blankParms = new ArrayList<>();
-	private Hashtable<String, KeywordOrSymbolicWrapper> kosParms = new Hashtable<>();
-	private Hashtable<String, SingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
-	private Hashtable<String, DatasetNameWrapper> dsnParms = new Hashtable<>();
-	private DispWrapper dispw = null;
-	private DsidWrapper dsidw = null;
+	private ArrayList<DdStatement> dds = null;
 
 	public DdStatementAmalgamation(JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName) {
 		this.ddStmtAmlgnCtx = ddStmtAmlgnCtx;
@@ -35,16 +30,7 @@ public class DdStatementAmalgamation {
 		Demo01.LOGGER.finest(this.myName + " initialize");
 		this.setDdName(this.ddStmtAmlgnCtx.ddStatement().ddName().DOT()
 			, this.ddStmtAmlgnCtx.ddStatement().ddName().NAME_FIELD());
-		this.initializeTediously();
-	}
-
-	private void initializeTediously() {
-		/*
-			The following bad idea is brought to you by the dozens of parameters of
-			the DD statement.
-		*/
-		for (JCLParser.DdParameterContext ddParm: this.ddStmtAmlgnCtx.ddStatement().ddParameter()) {
-		}
+		this.dds = DdStatement.bunchOfThese(this.ddStmtAmlgnCtx, this.procName, this.ddName);
 	}
 
 	private void setDdName(TerminalNode dot, List<TerminalNode> name_field) {
