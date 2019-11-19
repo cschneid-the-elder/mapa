@@ -21,6 +21,7 @@ public class DdStatementAmalgamation {
 	private Hashtable<String, SingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
 	private Hashtable<String, DatasetNameWrapper> dsnParms = new Hashtable<>();
 	private DispWrapper dispw = null;
+	private DsidWrapper dsidw = null;
 
 	public DdStatementAmalgamation(JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName) {
 		this.ddStmtAmlgnCtx = ddStmtAmlgnCtx;
