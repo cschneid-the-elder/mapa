@@ -32,7 +32,9 @@ public class DispWrapper {
 	}
 
 	private void setStatus() {
-		if (this.statusCtx.DISP_MOD() != null) {
+		if (this.statusCtx == null) {
+			this.status = "NEW";
+		} else if (this.statusCtx.DISP_MOD() != null) {
 			this.status = this.statusCtx.DISP_MOD().getSymbol().getText();
 		} else if (this.statusCtx.DISP_NEW() != null) {
 			this.status = this.statusCtx.DISP_NEW().getSymbol().getText();
@@ -42,14 +44,14 @@ public class DispWrapper {
 			this.status = this.statusCtx.DISP_SHR().getSymbol().getText();
 		} else if (this.statusCtx.SYMBOLIC() != null) {
 			this.status = this.statusCtx.SYMBOLIC().getSymbol().getText();
-		} else {
-			this.status = "NEW";
 		}
 
 	}
 
 	private void setNormalTerm() {
-		if (this.normalTermCtx.DISP_CATLG() != null) {
+		if (this.normalTermCtx == null) {
+			this.normalTerm = "DELETE";
+		} else if (this.normalTermCtx.DISP_CATLG() != null) {
 			this.normalTerm = this.normalTermCtx.DISP_CATLG().getSymbol().getText();
 		} else if (this.normalTermCtx.DISP_DELETE() != null) {
 			this.normalTerm = this.normalTermCtx.DISP_DELETE().getSymbol().getText();
@@ -61,14 +63,14 @@ public class DispWrapper {
 			this.normalTerm = this.normalTermCtx.DISP_UNCATLG().getSymbol().getText();
 		} else if (this.normalTermCtx.SYMBOLIC() != null) {
 			this.normalTerm = this.normalTermCtx.SYMBOLIC().getSymbol().getText();
-		} else {
-			this.normalTerm = "DELETE";
 		}
 
 	}
 
 	private void setAbnormalTerm() {
-		if (this.abnormalTermCtx.DISP_CATLG() != null) {
+		if (this.abnormalTermCtx == null) {
+			this.abnormalTerm = this.normalTerm;
+		} else if (this.abnormalTermCtx.DISP_CATLG() != null) {
 			this.abnormalTerm = this.abnormalTermCtx.DISP_CATLG().getSymbol().getText();
 		} else if (this.abnormalTermCtx.DISP_DELETE() != null) {
 			this.abnormalTerm = this.abnormalTermCtx.DISP_DELETE().getSymbol().getText();
@@ -80,8 +82,6 @@ public class DispWrapper {
 			this.abnormalTerm = this.abnormalTermCtx.DISP_UNCATLG().getSymbol().getText();
 		} else if (this.abnormalTermCtx.SYMBOLIC() != null) {
 			this.abnormalTerm = this.abnormalTermCtx.SYMBOLIC().getSymbol().getText();
-		} else {
-			this.abnormalTerm = this.normalTerm;
 		}
 
 	}

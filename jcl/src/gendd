@@ -92,7 +92,7 @@
 	next;
 }
 
-/^\t\tpublic\s[A-Za-z]*\sddParmDCB_Parameter/ {
+/^\t\tpublic\s[A-Za-z]*\sddParmDCB/ {
 	#not sure I need to do anything here
 	next;
 }
@@ -120,6 +120,10 @@
 
 /^\t\tpublic\s[A-Za-z]*\sddParmDYNAM/ {
 	blank()
+	next;
+}
+
+/^\t\tpublic\s[A-Za-z]*\sddParmCOPIES/ {
 	next;
 }
 
@@ -160,6 +164,10 @@
 }
 
 /^\t\tpublic\s[A-Za-z]*\sddParmVOLUME/ {
+	next;
+}
+
+/^\t\txpublic\s[A-Za-z]*\sddParmRESERVE/ {
 	next;
 }
 
@@ -204,7 +212,7 @@ function somvwx() {
 		#print substr($3,7,length($3) - 8)
 
 		printf("\t\t\tif (ddParm.ddParmDCB_Parameter() != null) {\n");
-		printf("\t\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\tif (ddParm.ddParmDCB_Parameter().%s != null) {\n", $3);
 		printf("\t\t\t\t\tSingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmDCB_Parameter().%s.singleOrMultipleValue(), this.procName);\n", $3);
 		x = substr($3,7,length($3) - 8);
 		printf("\t\t\t\t\tthis.somvParms.put(\"%s\", somvw);\n", x);
@@ -218,7 +226,7 @@ function koswx() {
 		#print substr($3,7,length($3) - 8)
 
 		printf("\t\t\tif (ddParm.ddParmDCB_Parameter() != null) {\n");
-		printf("\t\t\t\tif (ddParm.%s != null) {\n", $3);
+		printf("\t\t\t\tif (ddParm.ddParmDCB_Parameter().%s != null) {\n", $3);
 		printf("\t\t\t\t\tKeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.ddParmDCB_Parameter().%s.keywordOrSymbolic(), this.procName);\n", $3);
 		x = substr($3,7,length($3) - 8);
 		printf("\t\t\t\t\tthis.kosParms.put(\"%s\", kosw);\n", x);
