@@ -322,7 +322,7 @@ ddParmSPACE : SPACE EQUAL (
                ddParmSPACE_directory? 
              RPAREN)
             )
-        (RLSE | SYMBOLIC)? (CONTIG | MXIG | ALX | SYMBOLIC)? (ROUND | SYMBOLIC)?
+        ddParmSPACE_rlse? ddParmSPACE_characteristics? ddParmSPACE_round?
     RPAREN) |
     (LPAREN ABSTR 
       LPAREN
@@ -338,6 +338,9 @@ ddParmSPACE_primary : (NUM_LIT | SYMBOLIC) ;
 ddParmSPACE_secondary : (NUM_LIT | SYMBOLIC) ;
 ddParmSPACE_directory : (NUM_LIT | SYMBOLIC) ;
 ddParmSPACE_track_address : (NUM_LIT | SYMBOLIC) ;
+ddParmSPACE_rlse : (RLSE | SYMBOLIC) ;
+ddParmSPACE_characteristics : (CONTIG | MXIG | ALX | SYMBOLIC) ;
+ddParmSPACE_round : (ROUND | SYMBOLIC) ;
 
 
 ddParmSPIN : SPIN EQUAL singleOrMultipleValue ;
@@ -363,14 +366,17 @@ ddParmTERM : TERM EQUAL keywordOrSymbolic ;
 ddParmTHRESH : THRESH EQUAL keywordOrSymbolic ;
 ddParmTRTCH : TRTCH EQUAL keywordOrSymbolic ;
 ddParmUCS : UCS EQUAL (
-    UCS_CODE |
-    SYMBOLIC |
+    ddParmUCS_code |
     (LPAREN 
-        (UCS_CODE | SYMBOLIC) 
-        (UCS_FOLD | SYMBOLIC)? 
-        (UCS_VERIFY | SYMBOLIC)?
+        ddParmUCS_code 
+        ddParmUCS_fold? 
+        ddParmUCS_verify?
     RPAREN)
   ) ;
+
+ddParmUCS_code : (UCS_CODE | SYMBOLIC) ;
+ddParmUCS_fold : (UCS_FOLD | SYMBOLIC) ;
+ddParmUCS_verify : (UCS_VERIFY | SYMBOLIC) ;
 
 /*
 Here's the thing with symbolic parameters: they can be abused because
@@ -396,28 +402,30 @@ must be allowed for herein, however much we may wish otherwise.
 */
 
 ddParmUNIT : UNIT EQUAL (
-    ddParmUNIT_UNIT |
+    ddParmUNIT_unit |
     (UNIT_AFF EQUAL UNIT_DDNAME) |
     (LPAREN 
-        ddParmUNIT_UNIT? 
-            (UNIT_COUNT | UNIT_ALLOC | SYMBOLIC+)? 
-                (UNIT_DEFER | SYMBOLIC+)? 
-                    (UNIT_SMSHONOR | SYMBOLIC+)?
+        ddParmUNIT_unit? 
+            ddParmUNIT_count? 
+                ddParmUNIT_defer? 
+                    ddParmUNIT_smshonor?
     RPAREN)
   ) ;
 
-ddParmUNIT_UNIT : (UNIT_NUMBER | UNIT_DEVICE_TYPE | UNIT_GROUP_NAME | SYMBOLIC+) ;
+ddParmUNIT_unit : (UNIT_NUMBER | UNIT_DEVICE_TYPE | UNIT_GROUP_NAME | SYMBOLIC+) ;
+ddParmUNIT_count : (UNIT_COUNT | UNIT_ALLOC | SYMBOLIC+) ;
+ddParmUNIT_defer : (UNIT_DEFER | SYMBOLIC+) ;
+ddParmUNIT_smshonor : (UNIT_SMSHONOR | SYMBOLIC+) ;
 
 ddParmVOLUME : (VOL | VOLUME) EQUAL (
-    VOL_PRIVATE |
-    SYMBOLIC |
+    ddParmVOLUME_private |
     ddParmVOLUME_SER |
     ddParmVOLUME_REF |
     (LPAREN
-        (VOL_PRIVATE | SYMBOLIC)?
-        (VOL_RETAIN | SYMBOLIC)?
-        (VOL_SEQ_NB | SYMBOLIC)?
-        (VOL_COUNT | SYMBOLIC)?
+        ddParmVOLUME_private?
+        ddParmVOLUME_retain?
+        ddParmVOLUME_seq_nb?
+        ddParmVOLUME_count?
         ddParmVOLUME_SER? 
         ddParmVOLUME_REF? 
     RPAREN)
@@ -430,6 +438,11 @@ ddParmVOLUME_SER : (
   ) ;
 
 ddParmVOLUME_REF : VOL_REF EQUAL keywordOrSymbolic ;
+
+ddParmVOLUME_private : (VOL_PRIVATE | SYMBOLIC) ;
+ddParmVOLUME_retain : (VOL_RETAIN | SYMBOLIC) ;
+ddParmVOLUME_seq_nb : (VOL_SEQ_NB | SYMBOLIC) ;
+ddParmVOLUME_count : (VOL_COUNT | SYMBOLIC) ;
 
 joblibStatement : SS JOBLIB DD joblibParameter+ ;
 
