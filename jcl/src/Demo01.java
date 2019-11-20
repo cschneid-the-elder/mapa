@@ -177,7 +177,7 @@ public static void main(String[] args) throws Exception {
 							, ArrayList<String> jcllib)
 						throws IOException {
 
-		LOGGER.fine("writeTheIncludeContent");
+		LOGGER.fine("writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -231,59 +231,65 @@ public static void main(String[] args) throws Exception {
 	}
 
 	public static Job iterativelyResolveJobIncludes(Job j, File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
-		LOGGER.fine("iterativelyResolveJobIncludes");
+		LOGGER.fine("iterativelyResolveJobIncludes j = |" + j + "| tmpJobDir = |" + tmpJobDir.getName() + "| tmpProcDir = |" + tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
 
-			Job aJob = j;
-			File jobFile = initialJobFile;
-			Boolean iterating = true;
-			int sanity = 0;
-			do {
-				IncludeStatement[] unresolved_includes1 = 
-					aJob.getAllIncludes().stream()
-					.filter(i -> !i.isResolved())
-					.toArray(IncludeStatement[]::new);
-				ArrayList<IncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
-				ArrayList<Proc> dummyProcs = new ArrayList<>();
-				ArrayList<Job> thisJob = new ArrayList<>();
-				subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
-				thisJob.get(0).resolveParmedIncludes();
-				IncludeStatement[] unresolved_includes2 = 
-					thisJob.get(0).getAllIncludes().stream()
-					.filter(i -> !i.isResolved())
-					.toArray(IncludeStatement[]::new);
-				ArrayList<IncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
-				//are all includes from before still there after? yes = stop iterating
-				if (includes_after.size() == includes_before.size()) {
-					Boolean allContained = true;
-					for (IncludeStatement ia: includes_after) {
-						Boolean contains = false;
-						for (IncludeStatement ib: includes_before) {
-							if (ia.isProbablyTheSame(ib)) {
-								contains = true;
-								break;
-							}
+		Job aJob = j;
+		File jobFile = initialJobFile;
+		Boolean iterating = true;
+		int sanity = 0;
+		do {
+			LOGGER.finest("jobFile = |" + jobFile.getName() + "|");
+			IncludeStatement[] unresolved_includes1 = 
+				aJob.getAllIncludes().stream()
+				.filter(i -> !i.isResolved())
+				.toArray(IncludeStatement[]::new);
+			ArrayList<IncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
+			ArrayList<Proc> dummyProcs = new ArrayList<>();
+			ArrayList<Job> thisJob = new ArrayList<>();
+			subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+			thisJob.get(0).resolveParmedIncludes();
+			IncludeStatement[] unresolved_includes2 = 
+				thisJob.get(0).getAllIncludes().stream()
+				.filter(i -> !i.isResolved())
+				.toArray(IncludeStatement[]::new);
+			ArrayList<IncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
+			//are all includes from before still there after? yes = stop iterating
+			LOGGER.finest("includes_before = " + includes_before);
+			LOGGER.finest("includes_after  = " + includes_after);
+			if (includes_after.size() == includes_before.size()) {
+				LOGGER.finest("includes_after.size() == includes_before.size()");
+				Boolean allContained = true;
+				for (IncludeStatement ia: includes_after) {
+					Boolean contains = false;
+					for (IncludeStatement ib: includes_before) {
+						if (ia.isProbablyTheSame(ib)) {
+							LOGGER.finest("ia = |" + ia + "| ib = |" + ib + "| isProbablyTheSame");
+							contains = true;
+							break;
 						}
-						allContained = allContained && contains;
 					}
-					if (allContained) {
-						iterating = false;
-					}
-				} else {
-					iterating = true;
+					allContained = allContained && contains;
 				}
-				if (iterating) {
-					aJob = thisJob.get(0);
-					jobFile = rewriteJob(aJob, tmpJobDir, tmpProcDir);
+				if (allContained) {
+					iterating = false;
 				}
-				sanity++;
-			} while(iterating && (sanity < 20));
-			if (sanity >= 20) LOGGER.severe("sanity check failed for " + j);
+			} else {
+				LOGGER.finest("includes_after.size() != includes_before.size()");
+				iterating = true;
+			}
+			if (iterating) {
+				aJob = thisJob.get(0);
+				jobFile = rewriteJob(aJob, tmpJobDir, tmpProcDir);
+			}
+			sanity++;
+		} while(iterating && (sanity < 20));
+		if (sanity >= 20) LOGGER.severe("sanity check failed for " + j);
 
 		return aJob;
 	}
 
 	public static void subsequentProcess(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
-		LOGGER.fine("subsequentProcess");
+		LOGGER.fine("subsequentProcess jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer

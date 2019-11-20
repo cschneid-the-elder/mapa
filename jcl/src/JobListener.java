@@ -32,6 +32,9 @@ public class JobListener extends JCLParserBaseListener {
 		}
 		this.currJob = new Job(ctx, fileName);
 		this.jobs.add(this.currJob);
+		this.procName = null;
+		this.currProc = null;
+		this.currJclStep = null;
 	}
 
 	@Override public void enterJcllibStatement(JCLParser.JcllibStatementContext ctx) {
