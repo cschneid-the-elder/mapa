@@ -127,7 +127,7 @@ public class JclStep {
 			the original JCL is parsed iteratively.
 		*/
 
-		Demo01.LOGGER.finest(this.myName + " resolveParmedIncludes: " + this.stepName);
+		Demo01.LOGGER.finest(this.myName + " " + this.stepName + " resolveParmedIncludes");
 		for (IncludeStatement i: this.includes) {
 			i.resolveParms(symbolics);
 		}
@@ -144,8 +144,19 @@ public class JclStep {
 				}
 			}
 			mergedSymbolics.addAll(this.symbolics);
-			Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving proc " + proc);
-			proc.resolveParmedIncludes(mergedSymbolics);
+			Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving proc " + this.proc);
+			this.proc.resolveParmedIncludes(mergedSymbolics);
+		}
+	}
+
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
+		for (DdStatementAmalgamation dda: ddStatements) {
+			dda.resolveParms(symbolics);
+		}
+
+		if (this.proc != null) {
+			this.proc.resolveParms(symbolics);
 		}
 	}
 

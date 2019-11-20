@@ -63,6 +63,7 @@ public static void main(String[] args) throws Exception {
 			Job rJob = iterativelyResolveJobIncludes(j, tmpJobDir, tmpProcDir, jobFile);
 			rJobs.add(rJob);
 			iterativelyResolveJobProcs(rJob, tmpProcDir);
+			j.resolveParms();
 		}
 	}
 

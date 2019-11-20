@@ -113,10 +113,10 @@ public class Proc {
 	}
 
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes: " + this.procName);
 		for (IncludeStatement i: includes) {
 			i.resolveParms(mergedSymbolics);
 		}
@@ -125,6 +125,17 @@ public class Proc {
 		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + steps);
 		for (JclStep s: steps) {
 			s.resolveParmedIncludes(mergedSymbolics);
+		}
+
+	}
+
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(myName + " " + this.procName + " resolveParms");
+		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+		mergedSymbolics.addAll(this.symbolics);
+
+		for (JclStep s: steps) {
+			s.resolveParms(mergedSymbolics);
 		}
 
 	}

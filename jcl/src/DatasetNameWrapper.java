@@ -26,12 +26,12 @@ public class DatasetNameWrapper {
 		}
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(myName + " resolveParms sets = |" + sets + "|");
-		dsn.resolveParms(sets);
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.fine(myName + " resolveParms symbolics = |" + symbolics + "|");
+		this.dsn.resolveParms(symbolics);
 		if (this.mem == null) {
 		} else {
-			this.mem.resolveParms(sets);
+			this.mem.resolveParms(symbolics);
 		}
 	}
 
@@ -40,7 +40,7 @@ public class DatasetNameWrapper {
 		if (this.mem == null) {
 			buf.append("|");
 		} else {
-			buf.append("(" + this.mem.getResolvedValue() + "|)");
+			buf.append("(" + this.mem.getResolvedValue() + ")|)");
 		}
 
 		return buf.toString();

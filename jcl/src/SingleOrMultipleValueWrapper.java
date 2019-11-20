@@ -22,10 +22,10 @@ public class SingleOrMultipleValueWrapper {
 		this.kosw.addAll(KeywordOrSymbolicWrapper.bunchOfThese(ctx.parenList().keywordOrSymbolic()));
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(this.myName + " resolveParms sets = |" + sets + "|");
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.fine(this.myName + " resolveParms symbolics = |" + symbolics + "|");
 		for (KeywordOrSymbolicWrapper k: this.kosw) {
-			k.resolveParms(sets);
+			k.resolveParms(symbolics);
 		}
 	}
 
