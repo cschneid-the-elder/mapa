@@ -685,4 +685,20 @@ public class DdStatement {
 		}
 	}
 
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(this.myName + " resolveParms symbolics = |" + symbolics + "|");
+
+		for (KeywordOrSymbolicWrapper kos: this.kosParms.values()) {
+			kos.resolveParms(symbolics);
+		}
+
+		for (SingleOrMultipleValueWrapper somv: this.somvParms.values()) {
+			somv.resolveParms(symbolics);
+		}
+
+		for (DatasetNameWrapper dsn: this.dsnParms.values()) {
+			dsn.resolveParms(symbolics);
+		}
+	}
+
 }

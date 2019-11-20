@@ -103,6 +103,14 @@ public class Job {
 		}
 	}
 
+	public void resolveParms() {
+		Demo01.LOGGER.finest(myName + " resolveParms " + this);
+
+		for (JclStep step: this.steps) {
+			step.resolveParms(this.symbolics);
+		}
+	}
+
 	public ArrayList<JclStep> stepsInNeedOfProc() {
 		ArrayList<JclStep> stepsInNeed = new ArrayList<>();
 

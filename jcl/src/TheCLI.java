@@ -29,7 +29,11 @@ public class TheCLI{
 		Option include = new Option("include", true
 			, "name of a single path in which to locate cataloged procs and JCL INCLUDEs, takes precedence over the includeList option");
 		Option includeList = new Option("includeList", true
-			, "name of a tab-delimited file containing a list of paths in which to locate cataloged procs and JCL INCLUDEs and the PDS(E)s to which they correspond");
+			, "name of a comma-delimited file containing a list of paths in which to locate cataloged procs and JCL INCLUDEs and the PDS(E)s to which they correspond");
+		Option set = new Option("set", true
+			, "symbol=value to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
+		Option setList = new Option("setList", true
+			, "name of a file containing symbol=value pairs (one per line) to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
 		Option out = new Option("out", true
 			, "name of a file in which to store the gathered information");
 		Option logLevel = new Option("logLevel", true
@@ -44,6 +48,8 @@ public class TheCLI{
 		this.options.addOption(fileList);
 		this.options.addOption(include);
 		this.options.addOption(includeList);
+		this.options.addOption(set);
+		this.options.addOption(setList);
 		this.options.addOption(out);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);

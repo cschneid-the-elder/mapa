@@ -47,4 +47,11 @@ public class DdStatementAmalgamation {
 		this.ddName = buf.toString();
 	}
 
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(this.myName + " resolveParmedDDs symbolics = |" + symbolics + "|");
+		for (DdStatement dd: dds) {
+			dd.resolveParms(symbolics);
+		}
+	}
+
 }
