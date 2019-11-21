@@ -150,14 +150,7 @@ public class JclStep {
 
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
-		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>();
-		for (SetSymbolValue s: symbolics) {
-			if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < this.line)
-				|| s.getSetType() != SetTypeOfSymbolValue.SET
-			) {
-				mergedSymbolics.add(s);
-			}
-		}
+		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 
 		for (DdStatementAmalgamation dda: ddStatements) {
