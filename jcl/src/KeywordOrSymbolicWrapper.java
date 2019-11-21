@@ -145,6 +145,9 @@ public class KeywordOrSymbolicWrapper {
 							k.setResolvedValue(s.getParmValue());
 						}
 						break;
+					case SYS:
+						k.setResolvedValue(s.getParmValue());
+						break;
 					default:
 						break;
 				}

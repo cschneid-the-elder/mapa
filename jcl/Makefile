@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/JobListener.class ./class/JclStep.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -26,11 +26,11 @@ clean:
 
 cleanmine:
 	echo `date` cleanmine >> build.log
-	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/JobListener.class ./class/JclStep.java ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
+	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.java ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
 
 mine:
 	echo `date` mine >> build.log
-	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java
+	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java
 
 jar:
 	echo `date` jar >> build.log
@@ -51,7 +51,7 @@ testrig:
 
 testdemo:
 	echo `date` testdemo $(n) >> build.log
-	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -logLevel FINEST -saveTemp
+	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -logLevel FINEST -saveTemp
 
 ziplogs:
 	echo `date` ziplogs >> build.log

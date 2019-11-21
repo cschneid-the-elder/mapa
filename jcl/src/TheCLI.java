@@ -17,6 +17,7 @@ public class TheCLI{
 	public String outFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
+	public File setFile = null;
 
 	public TheCLI(String[] args) throws Exception {
 
@@ -97,6 +98,12 @@ public class TheCLI{
 			System.exit(16);
 		}
 
+		if (this.line.hasOption("set")) {
+			this.setFile = this.writeSet();
+		} else if (this.line.hasOption("setList")) {
+			this.setFile = this.writeSetFile();
+		}
+
 		if (this.line.hasOption("out")) {
 			this.outFileName = this.line.getOptionValue("out");
 		}
@@ -152,7 +159,46 @@ public class TheCLI{
 			this.saveTemp = true;
 			this.LOGGER.info("temporary files will be preserved");
 		}
-
-
 	}
+
+	private File writeSet() throws IOException {
+		String aString = this.line.getOptionValue("set");
+		File tmpDir = this.newTempDir();
+		File tmp = new File(tmpDir.toString() + File.separator + "set-" + UUID.randomUUID());
+		tmp.deleteOnExit();
+		PrintWriter out = new PrintWriter(tmp);
+		out.printf("//UNUSED JOB\n");
+		out.printf("// SET %s\n", aString);
+		out.close();
+
+		return tmp;
+	}
+
+	private File writeSetFile() throws IOException {
+		String aString = new String();
+		File aFile = new File(this.line.getOptionValue("setFile"));
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmpDir = this.newTempDir();
+		File tmp = new File(tmpDir.toString() + File.separator + "set-" + UUID.randomUUID());
+		tmp.deleteOnExit();
+		PrintWriter out = new PrintWriter(tmp);
+		out.printf("//UNUSED JOB\n");
+
+		while ((aString = src.readLine()) != null) {
+			out.printf("// SET %s\n", aString);
+		}
+		out.close();
+		src.close();
+
+		return tmp;
+	}
+
+	public File newTempDir() throws IOException {
+		File tmpDir = Files.createTempDirectory("Demo01-").toFile();
+
+		tmpDir.deleteOnExit();
+
+		return tmpDir;
+	}
+
 }

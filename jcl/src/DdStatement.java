@@ -701,4 +701,16 @@ public class DdStatement {
 		}
 	}
 
+	public String getResolvedValue(String key) {
+		if (kosParms.containsKey(key)) {
+			return kosParms.get(key).getResolvedValue();
+		} else if (somvParms.containsKey(key)) {
+			return somvParms.get(key).getResolvedValue();
+		} else if (dsnParms.containsKey(key)) {
+			return dsnParms.get(key).getResolvedValue();
+		} else {
+			return key + " not found";
+		}
+	}
+
 }
