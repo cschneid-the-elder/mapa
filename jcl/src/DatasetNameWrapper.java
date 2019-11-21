@@ -35,6 +35,17 @@ public class DatasetNameWrapper {
 		}
 	}
 
+	public String getResolvedValue() {
+		StringBuffer buf = new StringBuffer(this.dsn.getResolvedValue());
+
+		if (this.mem == null) {
+		} else {
+			buf.append("(" + this.mem.getResolvedValue() + ")");
+		}
+
+		return buf.toString();
+	}
+
 	public String toString() {
 		StringBuffer buf = new StringBuffer(this.myName + " procName = |" + this.procName + "| dsn = |" + this.dsn.getResolvedValue());
 		if (this.mem == null) {

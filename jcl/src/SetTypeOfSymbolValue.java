@@ -1,4 +1,4 @@
 	enum SetTypeOfSymbolValue {
-		SET, EXEC, PROC;
+		SET, EXEC, PROC, SYS;
 	}
 

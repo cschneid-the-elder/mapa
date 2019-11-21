@@ -90,24 +90,30 @@ public class Job {
 		}
 	}
 
-	public void resolveParmedIncludes() {
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes " + this);
+	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
+		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+		mergedSymbolics.addAll(this.symbolics);
+
 		for (IncludeStatement i: this.includes) {
-			i.resolveParms(this.symbolics);
+			i.resolveParms(mergedSymbolics);
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + this.includes);
 
 		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + this.steps);
 		for (JclStep s: this.steps) {
-			s.resolveParmedIncludes(this.symbolics);
+			s.resolveParmedIncludes(mergedSymbolics);
 		}
 	}
 
-	public void resolveParms() {
-		Demo01.LOGGER.finest(myName + " resolveParms " + this);
+	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+		Demo01.LOGGER.finest(myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
+
+		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+		mergedSymbolics.addAll(this.symbolics);
 
 		for (JclStep step: this.steps) {
-			step.resolveParms(this.symbolics);
+			step.resolveParms(mergedSymbolics);
 		}
 	}
 

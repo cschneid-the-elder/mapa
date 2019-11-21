@@ -17,6 +17,7 @@ public class Demo01{
 
 public static final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
 public static TheCLI CLI = null;
+public static ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 
 public static void main(String[] args) throws Exception {
 
@@ -39,8 +40,10 @@ public static void main(String[] args) throws Exception {
 	}
 
 	CLI = new TheCLI(args);
-	String cwFileName = null; //current work file name
-	ArrayList<SetSymbolValue> sets = new ArrayList<>();
+	if (CLI.setFile != null) {
+		symbolics = lookForSetSymbols(CLI.setFile.getCanonicalPath());
+	}
+
 	ArrayList<Proc> procs = new ArrayList<>();
 	ArrayList<Job> jobs = new ArrayList<>();
 	ArrayList<Job> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
@@ -50,7 +53,7 @@ public static void main(String[] args) throws Exception {
 		initialProcess(jobs, procs, aFileName);
 		for (Job j: jobs) {
 			LOGGER.info("Processing job " + j);
-			j.resolveParmedIncludes();
+			j.resolveParmedIncludes(symbolics);
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 			File tmpJobDir = newTempDir();
 			File tmpProcDir = newTempDir();
@@ -63,7 +66,7 @@ public static void main(String[] args) throws Exception {
 			Job rJob = iterativelyResolveJobIncludes(j, tmpJobDir, tmpProcDir, jobFile);
 			rJobs.add(rJob);
 			iterativelyResolveJobProcs(rJob, tmpProcDir);
-			j.resolveParms();
+			j.resolveParms(symbolics);
 		}
 	}
 
@@ -248,7 +251,7 @@ public static void main(String[] args) throws Exception {
 			ArrayList<Proc> dummyProcs = new ArrayList<>();
 			ArrayList<Job> thisJob = new ArrayList<>();
 			subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
-			thisJob.get(0).resolveParmedIncludes();
+			thisJob.get(0).resolveParmedIncludes(symbolics);
 			IncludeStatement[] unresolved_includes2 = 
 				thisJob.get(0).getAllIncludes().stream()
 				.filter(i -> !i.isResolved())

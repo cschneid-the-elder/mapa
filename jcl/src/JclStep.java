@@ -133,8 +133,7 @@ public class JclStep {
 		}
 		Demo01.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 
-		if (this.proc == null) {
-		} else {
+		if (this.proc != null) {
 			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>();
 			for (SetSymbolValue s: symbolics) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < this.line)
@@ -151,12 +150,22 @@ public class JclStep {
 
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
+		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>();
+		for (SetSymbolValue s: symbolics) {
+			if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < this.line)
+				|| s.getSetType() != SetTypeOfSymbolValue.SET
+			) {
+				mergedSymbolics.add(s);
+			}
+		}
+		mergedSymbolics.addAll(this.symbolics);
+
 		for (DdStatementAmalgamation dda: ddStatements) {
-			dda.resolveParms(symbolics);
+			dda.resolveParms(mergedSymbolics);
 		}
 
 		if (this.proc != null) {
-			this.proc.resolveParms(symbolics);
+			this.proc.resolveParms(mergedSymbolics);
 		}
 	}
 
