@@ -58,7 +58,7 @@
 //*
 //JS05     EXEC PROC=MOYA
 //*
-//JS06     EXEC PROC=MOYA,AENV=Q
+//JS06     EXEC PROC=MOYA,AENV=D
 //*
 // SET A=6
 //*

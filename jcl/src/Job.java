@@ -109,10 +109,16 @@ public class Job {
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
 
-		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-		mergedSymbolics.addAll(this.symbolics);
 
 		for (JclStep step: this.steps) {
+			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+			for (SetSymbolValue s: this.symbolics) {
+				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
+				|| s.getSetType() != SetTypeOfSymbolValue.SET
+				) {
+					mergedSymbolics.add(s);
+				}
+			}
 			step.resolveParms(mergedSymbolics);
 		}
 	}
