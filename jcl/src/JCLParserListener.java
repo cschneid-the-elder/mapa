@@ -2597,26 +2597,6 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitOutputStatementCOPIES(JCLParser.OutputStatementCOPIESContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link JCLParser#copiesPayload}.
-	 * @param ctx the parse tree
-	 */
-	void enterCopiesPayload(JCLParser.CopiesPayloadContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#copiesPayload}.
-	 * @param ctx the parse tree
-	 */
-	void exitCopiesPayload(JCLParser.CopiesPayloadContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link JCLParser#copiesValueOrSymbolic}.
-	 * @param ctx the parse tree
-	 */
-	void enterCopiesValueOrSymbolic(JCLParser.CopiesValueOrSymbolicContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link JCLParser#copiesValueOrSymbolic}.
-	 * @param ctx the parse tree
-	 */
-	void exitCopiesValueOrSymbolic(JCLParser.CopiesValueOrSymbolicContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link JCLParser#outputStatementCOPYCNT}.
 	 * @param ctx the parse tree
 	 */

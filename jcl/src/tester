@@ -9,9 +9,17 @@ else
   ls -Al testdata/test$1.jcl | awk '{print $9}' > $tmp01
 fi
 
+if [ "$2" = "pp" ]
+then
+  export kind="JCLPP"
+else
+  export kind="JCL"
+fi
+echo "testing kind = " $kind
+
 while read line
 do
-  java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -tokens < $line | grep -v '^\['
+  java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tokens < $line | grep -v '^\['
   if [ "$?" -eq 0 ]
   then
     export myRC=12

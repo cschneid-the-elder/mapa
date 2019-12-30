@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -39,15 +39,28 @@ jar:
 test:
 ifeq ($(strip $(n)),)
 	echo `date` testing >> build.log
-	./src/tester all
+	./src/tester all x
 else
 	echo `date` testing $(n) >> build.log
-	./src/tester $(n)
+	./src/tester $(n) x
 endif
 
 testrig:
 	echo `date` testrig $(n) >> build.log
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
+
+testpp:
+ifeq ($(strip $(n)),)
+	echo `date` testing >> build.log
+	./src/tester all pp
+else
+	echo `date` testing $(n) >> build.log
+	./src/tester $(n) pp
+endif
+
+testrigpp:
+	echo `date` testrig $(n) >> build.log
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCLPP startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testdemo:
 	echo `date` testdemo $(n) >> build.log
@@ -64,6 +77,7 @@ ziplogs:
 
 ./src/JCLParser.tokens: ./src/JCLLexer.tokens
 
+./src/JCLPPParser.tokens: ./src/JCLPPLexer.tokens
 
 ./class/TheCLI.class: 
 

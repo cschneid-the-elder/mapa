@@ -163,7 +163,7 @@ ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
 ddParmCHARS : CHARS EQUAL singleOrMultipleValue ;
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL keywordOrSymbolic ;
-ddParmCOPIES : COPIES EQUAL copiesPayload ;
+ddParmCOPIES : COPIES EQUAL singleOrMultipleValue ;
 ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
 ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
 ddParmDATA : DATA ;
@@ -275,10 +275,7 @@ ddParmNCP : NCP EQUAL keywordOrSymbolic ;
 ddParmNTM : NTM EQUAL keywordOrSymbolic ;
 ddParmOPTCD : OPTCD EQUAL keywordOrSymbolic ;
 ddParmOUTLIM : OUTLIM EQUAL keywordOrSymbolic ;
-ddParmOUTPUT : OUTPUT EQUAL (
-    OUTPUT_PARM_REFERENCE | 
-    (LPAREN OUTPUT_PARM_REFERENCE+ RPAREN)
-  ) ;
+ddParmOUTPUT : OUTPUT EQUAL singleOrMultipleValue ;
 ddParmPATH : PATH EQUAL keywordOrSymbolic ;
 ddParmPATHDISP : PATHDISP EQUAL (
     PATHDISP_NORMAL | 
@@ -610,18 +607,7 @@ outputStatementCOLORMAP : OUTPUT_STMT_COLORMAP EQUAL keywordOrSymbolic ;
 outputStatementCOMPACT : OUTPUT_STMT_COMPACT EQUAL keywordOrSymbolic ;
 outputStatementCOMSETUP : OUTPUT_STMT_COMSETUP EQUAL keywordOrSymbolic ;
 outputStatementCONTROL : OUTPUT_STMT_CONTROL EQUAL keywordOrSymbolic ;
-outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL copiesPayload ;
-copiesPayload : (
-    copiesValueOrSymbolic |
-    (LPAREN copiesValueOrSymbolic RPAREN) |
-    (LPAREN
-      copiesValueOrSymbolic?
-      LPAREN
-        (COPIES_GROUP_VALUE | SYMBOLIC)+
-      RPAREN
-    RPAREN)
-  ) ;
-copiesValueOrSymbolic : (COPIES_VALUE | SYMBOLIC) ;
+outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL singleOrMultipleValue ;
 outputStatementCOPYCNT : OUTPUT_STMT_COPYCNT EQUAL keywordOrSymbolic ;
 outputStatementDATACK : OUTPUT_STMT_DATACK EQUAL keywordOrSymbolic ;
 outputStatementDDNAME : OUTPUT_STMT_DDNAME EQUAL keywordOrSymbolic ;
