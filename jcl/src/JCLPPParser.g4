@@ -66,7 +66,7 @@ datasetName : keywordOrSymbolic (LPAREN keywordOrSymbolic RPAREN)? ;
 
 execStatement : execPgmStatement | execProcStatement ;
 
-execPgmStatement : SS stepName? EXEC PGM EQUAL SYMBOLIC* execParameter* ;
+execPgmStatement : SS stepName? EXEC PGM EQUAL keywordOrSymbolic execParameter* ;
 
 execProcStatement : SS stepName? EXEC (PROC_EX EQUAL)? keywordOrSymbolic (execProcParm | execParameterOverrides)* ;
 
@@ -445,9 +445,9 @@ ddParmVOLUME_retain : (VOL_RETAIN | SYMBOLIC) ;
 ddParmVOLUME_seq_nb : (VOL_SEQ_NB | SYMBOLIC) ;
 ddParmVOLUME_count : (VOL_COUNT | SYMBOLIC) ;
 
-joblibStatement : SS JOBLIB DD joblibParameter+ ;
+joblibStatement : SS JOBLIB DD SYMBOLIC* ;
 
-joblibConcatenation : SS DD joblibParameter+ ;
+joblibConcatenation : SS DD SYMBOLIC* ;
 
 joblibAmalgamation : joblibStatement joblibConcatenation* ;
 

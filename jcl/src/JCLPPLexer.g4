@@ -107,6 +107,7 @@ lexer grammar JCLPPLexer;
     public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
     public String dlmString = null;
     public int myMode = DEFAULT_MODE;
+    public Boolean hide = true;
 }
 
 tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , CHARS_FONT , PCI_VALUE , REFERBACK , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME , SUBCHARS }
@@ -284,7 +285,7 @@ EXPORT_OP : E X P O R T ->mode(EXPORT_STMT_MODE),type(EXPORT) ;
 IF_OP : I F ->mode(IF_MODE),type(IF) ;
 INCLUDE_OP : I N C L U D E ->mode(INCLUDE_MODE),type(INCLUDE) ;
 JCLLIB_OP : J C L L I B ->mode(JCLLIB_MODE),type(JCLLIB) ;
-JOB_OP : J O B ->mode(JOB1_MODE),type(JOB) ;
+JOB_OP : J O B ->mode(OP_PARM1_MODE),type(JOB) ;
 NOTIFY_OP : N O T I F Y ->mode(NOTIFY_STMT_MODE) ;
 OUTPUT_OP : O U T P U T ->mode(OP_PARM1_MODE),type(OUTPUT) ;
 PEND_OP : P E N D ->mode(CM_MODE),type(PEND) ;
@@ -315,6 +316,10 @@ NEWLINE_OP : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode OP_PARM1_MODE ;
 
+OP_PARM1_NEWLINE : NEWLINE
+    {
+      _modeStack.clear();
+    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 OP_PARM1_WS : [ ]+ ->channel(HIDDEN),mode(OP_PARM_MODE) ;
 
 mode OP_PARM_MODE ;
@@ -386,30 +391,42 @@ EXEC3_MODE.
 WS_POST_EX : [ ]+ ->channel(HIDDEN) ;
 PGM : P G M ->mode(EXEC2_MODE) ;
 PROC_EX : P R O C ->mode(EXEC2_MODE) ;
-EXEC_PROC_NAME : NM_PART ->type(KEYWORD_VALUE),mode(EXEC2_MODE) ;
+EXEC_PROC_NAME : NM_PART
+    {
+      hide = false;
+    }
+ ->type(KEYWORD_VALUE),mode(EXEC2_MODE) ;
 
 mode EXEC2_MODE ;
 
-EXEC_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(KYWD_VAL_MODE) ;
+EXEC_EQUAL : EQUAL_DFLT
+    {
+      hide = false;
+    }
+ ->type(EQUAL),pushMode(KYWD_VAL_MODE) ;
 
-EXEC_ACCT : A C C T (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_ADDRSPC : A D D R S P C (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_CCSID : C C S I D (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_COND : C O N D (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_DYNAMNBR : D Y N A M N B R (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_MEMLIMIT : M E M L I M I T (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_PARM : P A R M (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_PARMDD : P A R M D D (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_PERFORM : P E R F O R M (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_RD : R D (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_REGION : R E G I O N (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_REGIONX : R E G I O N X (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_RLSTMOUT : R L S T M O U T (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_TIME : T I M E (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_TVSMSG : T V S M S G (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
-EXEC_TVSAMCOM : T V S A M C O M (DOT_DFLT NM_PART)? ->pushMode(KYWD_VAL_MODE) ;
+EXEC_ACCT : A C C T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_ADDRSPC : A D D R S P C (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_CCSID : C C S I D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_COND : C O N D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_DYNAMNBR : D Y N A M N B R (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_MEMLIMIT : M E M L I M I T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_PARM : P A R M (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_PARMDD : P A R M D D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_PERFORM : P E R F O R M (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_RD : R D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_REGION : R E G I O N (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_REGIONX : R E G I O N X (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_RLSTMOUT : R L S T M O U T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_TIME : T I M E (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_TVSMSG : T V S M S G (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_TVSAMCOM : T V S A M C O M (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 
-EXEC_PROC_PARM : NAME ->pushMode(KYWD_VAL_MODE) ;
+EXEC_PROC_PARM : NAME
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
 
 EXEC_CONTINUED : COMMA_DFLT NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 EXEC_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
@@ -559,12 +576,20 @@ DD_RLS : R L S ->type(RLS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_ROACCESS : R O A C C E S S ->type(ROACCESS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_SECMODEL : S E C M O D E L ->type(SECMODEL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_SEGMENT : S E G M E N T ->type(SEGMENT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_SPACE : S P A C E ->type(SPACE),channel(HIDDEN),pushMode(SPACE_MODE) ;
+DD_SPACE : S P A C E ->type(SPACE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_SPIN : S P I N ->type(SPIN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_STORCLAS : S T O R C L A S ->type(STORCLAS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_SUBSYS : S U B S Y S ->type(SUBSYS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_SYMBOLS : S Y M B O L S ->type(SYMBOLS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_SYMLIST : S Y M L I S T ->type(SYMLIST),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_SYMBOLS : S Y M B O L S
+    {
+      hide = false;
+    }
+ ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ;
+DD_SYMLIST : S Y M L I S T
+    {
+      hide = false;
+    }
+ ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 DD_SYSOUT : S Y S O U T ->type(SYSOUT),channel(HIDDEN),pushMode(SYSOUT_MODE) ;
 DD_TERM : T E R M ->type(TERM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_UCS : U C S ->type(UCS),channel(HIDDEN),pushMode(UCS_MODE) ;
@@ -604,21 +629,33 @@ DD_STACK : S T A C K ->type(STACK),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_THRESH : T H R E S H ->type(THRESH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_TRTCH : T R T C H ->type(TRTCH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 
+DD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DD_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_ANYCHAR : ANYCHAR ->channel(HIDDEN) ;
+
 mode EXPORT_STMT_MODE ;
 
 EXPORT_STMT_WS : [ ]+ ->channel(HIDDEN),mode(EXPORT_STMT_PARM_MODE) ;
 
 mode EXPORT_STMT_PARM_MODE ;
 
-EXPORT_STMT_PARM_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
+EXPORT_STMT_PARM_SYMLIST : DD_SYMLIST
+    {
+      hide = false;
+    }
+ ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 EXPORT_STMT_PARM_WS : [ ]+
     {
       _modeStack.clear();
-    } ->channel(HIDDEN),mode(CM_MODE) ;
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(CM_MODE) ;
 EXPORT_STMT_NEWLINE : NEWLINE
     {
       _modeStack.clear();
-    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 
 mode NOTIFY_STMT_MODE ;
 
@@ -864,18 +901,47 @@ mode SET_PARM_VALUE_MODE ;
 
 SET_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 SET_PARM_VALUE : (KEYWORD_VALUE | [)(A-Z0-9@#$*\-+&./%[_]+) ->type(KEYWORD_VALUE) ;
-SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
+SET_PARM_VALUE_SQUOTE : '\''
+    {
+      hide = false;
+    }
+ ->channel(HIDDEN),pushMode(QS_MODE)
+ ;
 
-SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
+/*
+These two are mode() on purpose, the popMode in the target modes will correctly
+bring us back to SET_PARM_MODE.  The lack of _modeStack.clear() is intentional.
+*/
+SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE
+    {
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE)
+ ;
+
+SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+
+    {
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(COMMA_WS_MODE)
+ ;
+
 SET_PARM_VALUE_NEWLINE : NEWLINE
     {
       _modeStack.clear();
-    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(DEFAULT_MODE)
+ ;
+
 SET_PARM_VALUE_WS : [ ]+
     {
       _modeStack.clear();
-    } ->channel(HIDDEN),mode(CM_MODE) ;
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(CM_MODE)
+ ;
+
 SET_PARM_VALUE_COMMA : COMMA_DFLT ->channel(HIDDEN),popMode ;
 
 mode XMIT_MODE ;
@@ -1304,15 +1370,37 @@ NEWLINE_DATA_PARM_MODE : [\n\r] ->channel(HIDDEN),mode(DATA_MODE) ;
 WS_DATA_PARM_MODE : [ ]+ ->channel(HIDDEN),mode(CM_MODE) ;
 DATA_PARM_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 
+DATA_PARM_MODE_BLKSIZE : DD_BLKSIZE ->type(BLKSIZE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_BUFNO : DD_BUFNO ->type(BUFNO),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_DCB : DD_DCB ->type(DCB),channel(HIDDEN),pushMode(DCB_MODE) ;
+DATA_PARM_MODE_DIAGNS : DD_DIAGNS ->type(DIAGNS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DLM : DD_DLM ->type(DLM),channel(HIDDEN),pushMode(DLM_MODE) ;
-DATA_PARM_MODE_SYMBOLS : DD_SYMBOLS ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ;
-DATA_PARM_MODE_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_DSID : DD_DSID ->type(DSID),channel(HIDDEN),pushMode(DSID_MODE) ;
+DATA_PARM_MODE_DSN : DD_DSN ->type(DSNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_DSNAME : DD_DSNAME ->type(DSNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_LIKE : DD_LIKE ->type(LIKE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_LRECL : DD_LRECL ->type(LRECL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_REFDD : DD_REFDD ->type(REFDD),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_MODE : DD_MODE ->type(MODE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_VOL : DD_VOL ->type(VOL),channel(HIDDEN),pushMode(VOL_MODE) ;
+DATA_PARM_MODE_VOLUME : DD_VOLUME ->type(VOLUME),channel(HIDDEN),pushMode(VOL_MODE) ;
+DATA_PARM_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
+DATA_PARM_MODE_SYMBOLS : DD_SYMBOLS
+    {
+      hide = false;
+    }
+ ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_SYMLIST : DD_SYMLIST
+    {
+      hide = false;
+    }
+ ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 
 DATA_PARM_MODE_ANYCHAR : ANYCHAR ->channel(HIDDEN) ;
 
 mode DLM_MODE ;
 
-DLM_EQUAL : EQUAL_DFLT ->type(EQUAL);
+DLM_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 DLM_SQUOTE : '\''
     {
       dlmString = new String();
@@ -1383,7 +1471,11 @@ CNTL_DATA : DD_ASTERISK_DATA+? ;
 
 mode QS_MODE ;
 
-QS_SQUOTE2 : SQUOTE SQUOTE ->channel(HIDDEN) ;
+QS_SQUOTE2 : SQUOTE SQUOTE
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ;
 QS_SQUOTE : SQUOTE
     {
       switch(_modeStack.peek()) {
@@ -1420,10 +1512,16 @@ QS_SQUOTE : SQUOTE
     } ->channel(HIDDEN) ;
 fragment ANYCHAR_NOSQUOTE : ~['\n\r] ;
 QS_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(QS_SS_MODE) ;
-QS_AMPERSAND : AMPERSAND AMPERSAND ->channel(HIDDEN) ;
+QS_AMPERSAND : AMPERSAND AMPERSAND
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ;
 QS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE)+?
     {
+      if (hide) setChannel(HIDDEN);
+
       switch(_modeStack.peek()) {
         case JOB_PROGRAMMER_NAME_MODE :
             setType(QUOTED_STRING_PROGRAMMER_NAME);
@@ -1438,7 +1536,7 @@ QUOTED_STRING_FRAGMENT : (ANYCHAR_NOSQUOTE)+?
             break;
       }
     }
-  ->channel(HIDDEN) ;
+  ;
 
 mode QS_SS_MODE ;
 QS_SS : SS
@@ -1571,15 +1669,22 @@ INCLUDE_WS : [ ]+ ->channel(HIDDEN),mode(INCLUDE_PARM_MODE) ;
 
 mode INCLUDE_PARM_MODE ;
 
-INCLUDE_PARM_MEMBER : M E M B E R ->pushMode(KYWD_VAL_MODE) ;
+INCLUDE_PARM_MEMBER : M E M B E R
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE)
+ ;
 
 INCLUDE_PARM_VALUE_NEWLINE : NEWLINE
     {
       _modeStack.clear();
+      hide = true;
     } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 INCLUDE_PARM_VALUE_WS : [ ]+
     {
       _modeStack.clear();
+      hide = true;
     } ->channel(HIDDEN),mode(CM_MODE) ;
 
 mode JCLLIB_MODE ;
@@ -1588,14 +1693,20 @@ JCLLIB_WS : [ ]+ ->channel(HIDDEN),mode(JCLLIB_PARM_MODE) ;
 
 mode JCLLIB_PARM_MODE ;
 
-JCLLIB_PARM_ORDER : O R D E R ->pushMode(KYWD_VAL_MODE) ;
+JCLLIB_PARM_ORDER : O R D E R
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
 JCLLIB_PARM_VALUE_NEWLINE : NEWLINE
     {
       _modeStack.clear();
+      hide = true;
     } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 JCLLIB_PARM_VALUE_WS : [ ]+
     {
       _modeStack.clear();
+      hide = true;
     } ->channel(HIDDEN),mode(CM_MODE) ;
 
 
@@ -1789,7 +1900,12 @@ JOB_PROGRAMMER_NAME_UNQUOTED_STRING : (~[,'\n\r] | SQUOTE2)+? ;
 
 mode KYWD_VAL_MODE ;
 
-KYWD_VAL_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
+KYWD_VAL_EQUAL : EQUAL_DFLT
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(EQUAL)
+ ;
 
 KYWD_VAL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 /*
@@ -1801,11 +1917,22 @@ KEYWORD_VALUE : (
     ([A-Z0-9@#$&*\-+./%[:_]+?) | 
     (AMPERSAND AMPERSAND? ALNUMNAT LPAREN_DFLT NUM_LIT_DFLT? ':' NUM_LIT_DFLT? RPAREN_DFLT)+ |
     (AMPERSAND AMPERSAND ALNUMNAT)
-  ) ->channel(HIDDEN) ;
+  )
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ;
 KYWD_VAL_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-KYWD_VAL_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),mode(KYWD_VAL_PAREN_MODE) ;
+KYWD_VAL_LPAREN : LPAREN_DFLT
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(LPAREN),mode(KYWD_VAL_PAREN_MODE) ;
 KYWD_VAL_RPAREN : RPAREN_DFLT
     {
+      if (hide) setChannel(HIDDEN);
+      hide = true;
+
       if (_modeStack.peek() == DCB_PAREN_MODE) {
           popMode();
           popMode();
@@ -1814,7 +1941,8 @@ KYWD_VAL_RPAREN : RPAREN_DFLT
           popMode();
           popMode();
       }
-    } ->type(RPAREN),channel(HIDDEN) ;
+    }
+ ->type(RPAREN) ;
 /*
 
 The newline, comma newline, and ws tokens are here because some keywords
@@ -1836,24 +1964,56 @@ take us back into the "parent" mode.  Same for COMMA_WS_MODE.
 KYWD_VAL_NEWLINE : NEWLINE
     {
       _modeStack.clear();
+      hide = true;
       mode(myMode);
-    } ->channel(HIDDEN) ;
-KYWD_VAL_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),popMode ;
-KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
-KYWD_VAL_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
+    }
+ ->channel(HIDDEN) ;
+KYWD_VAL_COMMA : COMMA_DFLT
+    {
+      hide = true;
+    }
+ ->type(COMMA),channel(HIDDEN),popMode ;
+KYWD_VAL_COMMA_NEWLINE : COMMA_DFLT NEWLINE
+    {
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
+KYWD_VAL_COMMA_WS : COMMA_DFLT [ ]+
+    {
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
 KYWD_VAL_WS : [ ]+
     {
       _modeStack.clear();
-    } ->channel(HIDDEN),mode(CM_MODE) ;
+      hide = true;
+    }
+ ->channel(HIDDEN),mode(CM_MODE) ;
 
 mode KYWD_VAL_PAREN_MODE ;
 
-KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+KYWD_VAL_PAREN_COMMA : COMMA_DFLT
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(COMMA) ;
 KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE),channel(HIDDEN) ;
+KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(KEYWORD_VALUE) ;
 KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(KYWD_VAL_PAREN_MODE) ;
-KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode ;
+KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(LPAREN),pushMode(KYWD_VAL_PAREN_MODE) ;
+KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(RPAREN),popMode ;
 
 KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->type(COMMA),channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->type(COMMA),channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
@@ -2095,8 +2255,8 @@ TRK : T R K ;
 
 mode SYSOUT_MODE ;
 
-SYSOUT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-SYSOUT_CLASS : [A-Z0-9*$] ->popMode ;
+SYSOUT_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
+SYSOUT_CLASS : [A-Z0-9*$] ->channel(HIDDEN),popMode ;
 SYSOUT_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 SYSOUT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYSOUT_PAREN_MODE) ;
@@ -2104,39 +2264,45 @@ SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYSOUT_PAREN_MODE) ;
 mode SYSOUT_PAREN_MODE ;
 
 SYSOUT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(SYSOUT_WRITER_MODE) ;
-SYSOUT_PAREN_CLASS : [A-Z0-9*$] ->type(SYSOUT_CLASS) ;
+SYSOUT_PAREN_CLASS : [A-Z0-9*$] ->type(SYSOUT_CLASS),channel(HIDDEN) ;
 SYSOUT_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 SYSOUT_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYSOUT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+SYSOUT_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode ;
 
 mode SYSOUT_WRITER_MODE ;
 
 SYSOUT_WRITER_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(SYSOUT_FORM_MODE) ;
-SYSOUT_INTRDR : I N T R D R ;
+SYSOUT_INTRDR : I N T R D R ->channel(HIDDEN) ;
 SYSOUT_WRITER : [A-Z0-9]+
     {
       getText().length() <= 8
-    }? ;
+    }?
+ ->channel(HIDDEN)
+ ;
 SYSOUT_WRITER_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-SYSOUT_WRITER_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
+SYSOUT_WRITER_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode ;
 
 mode SYSOUT_FORM_MODE ;
 
 SYSOUT_FORM : [A-Z0-9@#$]+
     {
       getText().length() <= 4
-    }? ->popMode ;
+    }?
+ ->channel(HIDDEN),popMode
+ ;
 SYSOUT_FORM_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode UCS_MODE ;
 
-UCS_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+UCS_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 UCS_CODE : [A-Z0-9@#$]+
     {
       getText().length() <= 4
-    }? ->popMode ;
+    }?
+ ->channel(HIDDEN),popMode
+ ;
 UCS_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-UCS_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(UCS_PAREN_MODE) ;
+UCS_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(UCS_PAREN_MODE) ;
 
 mode UCS_PAREN_MODE ;
 
@@ -2144,34 +2310,34 @@ UCS_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(UCS_FOLD_MOD
 UCS_PAREN_CODE : [A-Z0-9@#$]+
     {
       getText().length() <= 4
-    }? ->type(UCS_CODE) ;
+    }? ->type(UCS_CODE),channel(HIDDEN) ;
 UCS_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UCS_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+UCS_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode ;
 
 mode UCS_FOLD_MODE ;
 
 UCS_FOLD_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(UCS_VERIFY_MODE) ;
-UCS_FOLD : F O L D ;
+UCS_FOLD : F O L D ->channel(HIDDEN) ;
 UCS_FOLD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UCS_FOLD_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
+UCS_FOLD_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode ;
 
 mode UCS_VERIFY_MODE ;
 
-UCS_VERIFY : V E R I F Y ->popMode ;
+UCS_VERIFY : V E R I F Y ->channel(HIDDEN),popMode ;
 UCS_VERIFY_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode UNIT_MODE ;
 
-UNIT_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-UNIT_AFF : A F F ->pushMode(UNIT_AFF_MODE) ;
-UNIT_NUMBER : (UNIT_3DIGIT | UNIT_4DIGIT) ->popMode ;
+UNIT_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
+UNIT_AFF : A F F ->channel(HIDDEN),pushMode(UNIT_AFF_MODE) ;
+UNIT_NUMBER : (UNIT_3DIGIT | UNIT_4DIGIT) ->channel(HIDDEN),popMode ;
 UNIT_GROUP_NAME : [A-Z0-9]+
     {
       getText().length() <= 8
-    }? ->popMode ;
+    }? ->channel(HIDDEN),popMode ;
 UNIT_DEVICE_TYPE : [A-Z0-9-]+ ->popMode ;
 UNIT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-UNIT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(UNIT_PAREN_MODE) ;
+UNIT_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(UNIT_PAREN_MODE) ;
 
 fragment HEX_DIGIT : [A-F0-9] ;
 fragment UNIT_3DIGIT : SLASH? HEX_DIGIT HEX_DIGIT HEX_DIGIT ;
@@ -2179,55 +2345,55 @@ fragment UNIT_4DIGIT : SLASH HEX_DIGIT HEX_DIGIT HEX_DIGIT HEX_DIGIT ;
 
 mode UNIT_AFF_MODE ;
 
-UNIT_AFF_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-UNIT_DDNAME : NAME ->popMode,popMode ;
+UNIT_AFF_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
+UNIT_DDNAME : NAME ->channel(HIDDEN),popMode,popMode ;
 
 mode UNIT_PAREN_MODE ;
 
 UNIT_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(UNIT_COUNT_MODE) ;
-UNIT_PAREN_NUMBER : UNIT_NUMBER ->type(UNIT_NUMBER) ;
+UNIT_PAREN_NUMBER : UNIT_NUMBER ->type(UNIT_NUMBER),channel(HIDDEN) ;
 UNIT_PAREN_GROUP_NAME : UNIT_GROUP_NAME
     {
       getText().length() <= 8
-    }? ->type(UNIT_GROUP_NAME) ;
-UNIT_PAREN_DEVICE_TYPE : UNIT_DEVICE_TYPE ->type(UNIT_DEVICE_TYPE) ;
+    }? ->type(UNIT_GROUP_NAME),channel(HIDDEN) ;
+UNIT_PAREN_DEVICE_TYPE : UNIT_DEVICE_TYPE ->type(UNIT_DEVICE_TYPE),channel(HIDDEN) ;
 UNIT_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+UNIT_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode ;
 
 mode UNIT_COUNT_MODE ;
 
 UNIT_COUNT_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(UNIT_DEFER_MODE) ;
-UNIT_COUNT : NUM_LIT_DFLT ;
-UNIT_ALLOC : P ;
-UNIT_COUNT_DEFER : D E F E R ->type(UNIT_DEFER) ;
-UNIT_COUNT_SMSHONOR : S M S H O N O R ->type(UNIT_SMSHONOR) ;
+UNIT_COUNT : NUM_LIT_DFLT ->channel(HIDDEN) ;
+UNIT_ALLOC : P ->channel(HIDDEN) ;
+UNIT_COUNT_DEFER : D E F E R ->type(UNIT_DEFER),channel(HIDDEN) ;
+UNIT_COUNT_SMSHONOR : S M S H O N O R ->type(UNIT_SMSHONOR),channel(HIDDEN) ;
 UNIT_COUNT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
+UNIT_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode ;
 
 mode UNIT_DEFER_MODE ;
 
 UNIT_DEFER_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(UNIT_SMSHONOR_MODE) ;
-UNIT_DEFER : D E F E R ;
-UNIT_DEFER_SMSHONOR : S M S H O N O R ->type(UNIT_SMSHONOR) ;
+UNIT_DEFER : D E F E R ->channel(HIDDEN) ;
+UNIT_DEFER_SMSHONOR : S M S H O N O R ->type(UNIT_SMSHONOR),channel(HIDDEN) ;
 UNIT_DEFER_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-UNIT_DEFER_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode ;
+UNIT_DEFER_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode,popMode ;
 
 mode UNIT_SMSHONOR_MODE ;
 
-UNIT_SMSHONOR : S M S H O N O R ->popMode ;
+UNIT_SMSHONOR : S M S H O N O R ->channel(HIDDEN),popMode ;
 UNIT_SMSHONOR_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 
 mode VOL_MODE ;
 
-VOL_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 VOL_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-VOL_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_PRIVATE_MODE) ;
-VOL_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
+VOL_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(VOL_PRIVATE_MODE) ;
+VOL_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode ;
 
-VOL_PRIVATE : P R I V A T E ->popMode ;
-VOL_RETAIN : R E T A I N ;
-VOL_SER : S E R ->pushMode(VOL_SER1_MODE) ;
-VOL_REF : R E F ->pushMode(VOL_REF1_MODE) ;
+VOL_PRIVATE : P R I V A T E ->channel(HIDDEN),popMode ;
+VOL_RETAIN : R E T A I N ->channel(HIDDEN) ;
+VOL_SER : S E R ->channel(HIDDEN),pushMode(VOL_SER1_MODE) ;
+VOL_REF : R E F ->channel(HIDDEN),pushMode(VOL_REF1_MODE) ;
 
 /*
 Note that there is a VOL_SER1_MODE and a VOL_SER3_MODE.  The former
@@ -2237,18 +2403,18 @@ VOL=(,,,,SER=ABC) and VOL=(,,,,SER=(ABC,123)).
 
 mode VOL_SER1_MODE ;
 
-VOL_SER1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-VOL_SER_NB : [A-Z0-9@#$-]+ ->popMode,popMode ;
+VOL_SER1_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
+VOL_SER_NB : [A-Z0-9@#$-]+ ->channel(HIDDEN),popMode,popMode ;
 VOL_SER1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode,popMode ;
 VOL_SER1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-VOL_SER1_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER1_PAREN_MODE) ;
+VOL_SER1_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(VOL_SER1_PAREN_MODE) ;
 
 mode VOL_SER1_PAREN_MODE ;
 
-VOL_SER1_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
+VOL_SER1_PAREN : VOL_SER_NB ->type(VOL_SER_NB),channel(HIDDEN) ;
 VOL_SER1_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER1_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-VOL_SER1_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
+VOL_SER1_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode ;
 VOL_SER1_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 VOL_SER1_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_SER1_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
@@ -2256,69 +2422,69 @@ VOL_SER1_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) 
 mode VOL_PRIVATE_MODE ;
 
 VOL_PRIVATE_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(VOL_RETAIN_MODE) ;
-VOL_PRIVATE1 : VOL_PRIVATE ->type(VOL_PRIVATE) ;
+VOL_PRIVATE1 : VOL_PRIVATE ->type(VOL_PRIVATE),channel(HIDDEN) ;
 VOL_PRIVATE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_PRIVATE_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+VOL_PRIVATE_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode ;
 
 mode VOL_RETAIN_MODE ;
 
 VOL_RETAIN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(VOL_SEQ_NB_MODE) ;
-VOL_RETAIN1 : VOL_RETAIN ->type(VOL_RETAIN) ;
+VOL_RETAIN1 : VOL_RETAIN ->type(VOL_RETAIN),channel(HIDDEN) ;
 VOL_RETAIN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_RETAIN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode ;
+VOL_RETAIN_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode ;
 VOL_RETAIN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_RETAIN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SEQ_NB_MODE ;
 
 VOL_SEQ_NB_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(VOL_COUNT_MODE) ;
-VOL_SEQ_NB : NUM_LIT_DFLT ;
+VOL_SEQ_NB : NUM_LIT_DFLT ->channel(HIDDEN) ;
 VOL_SEQ_NB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_SEQ_NB_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode ;
+VOL_SEQ_NB_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode,popMode ;
 VOL_SEQ_NB_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_SEQ_NB_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_COUNT_MODE ;
 
 VOL_COUNT_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(VOL_SER2_MODE) ;
-VOL_COUNT : NUM_LIT_DFLT ;
+VOL_COUNT : NUM_LIT_DFLT ->channel(HIDDEN) ;
 VOL_COUNT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode ;
+VOL_COUNT_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode,popMode,popMode ;
 VOL_COUNT_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_COUNT_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SER2_MODE ;
 
-VOL_SER2_REF : VOL_REF ->type(VOL_REF),pushMode(VOL_REF2_MODE) ;
-VOL_SER2 : VOL_SER ->type(VOL_SER) ;
-VOL_SER2_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(VOL_SER3_MODE) ;
+VOL_SER2_REF : VOL_REF ->type(VOL_REF),channel(HIDDEN),pushMode(VOL_REF2_MODE) ;
+VOL_SER2 : VOL_SER ->type(VOL_SER),channel(HIDDEN) ;
+VOL_SER2_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN),pushMode(VOL_SER3_MODE) ;
 VOL_SER2_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_SER2_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SER3_MODE ;
 
-VOL_SER3 : VOL_SER_NB ->type(VOL_SER_NB) ;
+VOL_SER3 : VOL_SER_NB ->type(VOL_SER_NB),channel(HIDDEN) ;
 VOL_SER3_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-VOL_SER3_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER3_PAREN_MODE) ;
-VOL_SER3_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
+VOL_SER3_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(VOL_SER3_PAREN_MODE) ;
+VOL_SER3_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
 
 mode VOL_SER3_PAREN_MODE ;
 
-VOL_SER3_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
+VOL_SER3_PAREN : VOL_SER_NB ->type(VOL_SER_NB),channel(HIDDEN) ;
 VOL_SER3_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SER3_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
-VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
+VOL_SER3_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode ;
 VOL_SER3_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 VOL_SER3_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_SER3_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_REF1_MODE ;
 
-VOL_REF1_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_REF1_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 VOL_REF1_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
-VOL_REF1_DSN : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
+VOL_REF1_DSN : KEYWORD_VALUE ->type(KEYWORD_VALUE),channel(HIDDEN) ;
 VOL_REF1_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 
 VOL_REF1_NEWLINE : NEWLINE
@@ -2336,12 +2502,12 @@ VOL_REF1_WS : [ ]+
 
 mode VOL_REF2_MODE ;
 
-VOL_REF2_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_REF2_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 VOL_REF2_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
-VOL_REF2_DSN : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
+VOL_REF2_DSN : KEYWORD_VALUE ->type(KEYWORD_VALUE),channel(HIDDEN) ;
 VOL_REF2_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-VOL_REF2_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
+VOL_REF2_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode,popMode,popMode,popMode,popMode,popMode ;
 
 
 

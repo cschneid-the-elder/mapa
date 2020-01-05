@@ -13,5 +13,6 @@
 //            &S&P&A&C&E=(80,(100,100),&R&L&S&E)
 //DD02    DD  &D1
 //DD03    DD  &D2&D3
+//DD04    DD  &D.I&S.P=&O.L&D,D&S.N=&SYSUID..&T.E&S.T.D&D.04
 //*
 
