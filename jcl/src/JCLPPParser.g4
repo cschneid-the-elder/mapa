@@ -737,7 +737,7 @@ setStatement : SS NAME_FIELD? SET setOperation+ ;
 
 setOperation : (SET_PARM_NAME EQUAL keywordOrSymbolic?) ;
 
-xmitStatement : SS NAME_FIELD? XMIT xmitParameters* ddParmASTERISK_DATA* ;
+xmitStatement : SS NAME_FIELD? XMIT SYMBOLIC* ddParmASTERISK_DATA* ;
 
 xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStatement) ;
 
@@ -749,7 +749,7 @@ xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic ;
 
 jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetStatement | sJobStatement | endSetStatement | endGroupStatement | afterStatement | beforeStatement | concurrentStatement)* ;
 
-jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP LPAREN? jobGroupAccountingInformation? RPAREN? jobGroupProgrammerName? jobGroupParameters* ;
+jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP SYMBOLIC* ;
 
 jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | JOBGROUP_ACCT_UNQUOTED_STRING+) ;
 
@@ -796,13 +796,13 @@ jobGroupSYSAFF : JOBGROUP_SYSAFF EQUAL keywordOrSymbolic ;
 jobGroupSYSTEM : JOBGROUP_SYSTEM EQUAL keywordOrSymbolic ;
 jobGroupSCHENV : JOBGROUP_SCHENV EQUAL keywordOrSymbolic ;
 
-gJobStatement : SS NAME_FIELD? GJOB_OP gJobParameters ;
+gJobStatement : SS NAME_FIELD? GJOB_OP SYMBOLIC* ;
 
 gJobParameters : (gJobFLUSHTYP) ;
 
 gJobFLUSHTYP : GJOB_PARM_FLUSHTYP EQUAL keywordOrSymbolic ;
 
-jobSetStatement : SS NAME_FIELD? JOBSET_OP jobSetParameters ;
+jobSetStatement : SS NAME_FIELD? JOBSET_OP SYMBOLIC* ;
 
 jobSetParameters : (jobSetFLUSHTYP) ;
 
@@ -814,7 +814,7 @@ endSetStatement : SS NAME_FIELD? ENDSET_OP ;
 
 endGroupStatement : SS NAME_FIELD? ENDGROUP_OP ;
 
-afterStatement : SS AFTER_OP afterParameters+ ;
+afterStatement : SS AFTER_OP SYMBOLIC* ;
 
 afterParameters : (afterNAME | afterACTION | afterOTHERWISE | afterWHEN) ;
 
@@ -823,7 +823,7 @@ afterACTION : AFTER_PARM_ACTION EQUAL keywordOrSymbolic ;
 afterOTHERWISE : AFTER_PARM_OTHERWISE EQUAL keywordOrSymbolic ;
 afterWHEN : AFTER_PARM_WHEN EQUAL jobGroupCondition ;
 
-beforeStatement : SS BEFORE_OP beforeParameters+ ;
+beforeStatement : SS BEFORE_OP SYMBOLIC* ;
 
 beforeParameters : (beforeNAME | beforeACTION | beforeOTHERWISE | beforeWHEN) ;
 
@@ -832,7 +832,7 @@ beforeACTION : BEFORE_PARM_ACTION EQUAL keywordOrSymbolic ;
 beforeOTHERWISE : BEFORE_PARM_OTHERWISE EQUAL keywordOrSymbolic ;
 beforeWHEN : BEFORE_PARM_WHEN EQUAL jobGroupCondition ;
 
-concurrentStatement : SS CONCURRENT_OP concurrentParameters+ ;
+concurrentStatement : SS CONCURRENT_OP SYMBOLIC* ;
 
 concurrentParameters : (concurrentNAME) ;
 
@@ -945,8 +945,7 @@ jes2SignonStatement : SA JES2_SIGNON
 
 jes2XEQStatement : SA JES2_XEQ JES2_XEQ_NODE ;
 
-jes2XMITStatement : SA JES2_XMIT JES2_XMIT_NODE
-    (DLM EQUAL keywordOrSymbolic)?
+jes2XMITStatement : SA JES2_XMIT SYMBOLIC*
     DD_ASTERISK_DATA+
     (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)?
   ;
