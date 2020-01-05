@@ -275,7 +275,7 @@ CONTINUATION_WS : ' '+
 mode OP_MODE ;
 
 CNTL_OP : C N T L ->mode(CNTL_MODE),type(CNTL) ;
-COMMAND_OP : C O M M A N D ->mode(COMMAND_MODE),type(COMMAND) ;
+COMMAND_OP : C O M M A N D ->mode(OP_PARM1_MODE),type(COMMAND) ;
 DD_OP : D D ->mode(DD_MODE),type(DD) ;
 ELSE_OP : E L S E ->mode(CM_MODE),type(ELSE) ;
 ENDCNTL_OP : E N D C N T L ->mode(CM_MODE),type(ENDCNTL) ;
@@ -286,11 +286,11 @@ IF_OP : I F ->mode(IF_MODE),type(IF) ;
 INCLUDE_OP : I N C L U D E ->mode(INCLUDE_MODE),type(INCLUDE) ;
 JCLLIB_OP : J C L L I B ->mode(JCLLIB_MODE),type(JCLLIB) ;
 JOB_OP : J O B ->mode(OP_PARM1_MODE),type(JOB) ;
-NOTIFY_OP : N O T I F Y ->mode(NOTIFY_STMT_MODE) ;
+NOTIFY_OP : N O T I F Y ->mode(OP_PARM1_MODE) ;
 OUTPUT_OP : O U T P U T ->mode(OP_PARM1_MODE),type(OUTPUT) ;
 PEND_OP : P E N D ->mode(CM_MODE),type(PEND) ;
 PROC_OP : P R O C ->mode(PROC_MODE),type(PROC) ;
-SCHEDULE_OP : S C H E D U L E ->mode(SCHEDULE_MODE),type(SCHEDULE) ;
+SCHEDULE_OP : S C H E D U L E ->mode(OP_PARM1_MODE),type(SCHEDULE) ;
 SET_OP : S E T ->mode(SET_MODE),type(SET) ;
 XMIT_OP : X M I T 
     {
@@ -309,7 +309,7 @@ BEFORE_OP : B E F O R E ->mode(BEFORE_MODE) ;
 CONCURRENT_OP : C O N C U R R E N T ->mode(CONCURRENT_MODE) ;
 ENDGROUP_OP : E N D G R O U P ->mode(ENDGROUP_MODE) ;
 
-JCL_COMMAND : [A-Z0-9@#$]+ ->mode(JCL_COMMAND_MODE) ;
+JCL_COMMAND : [A-Z0-9@#$]+ ->mode(OP_PARM1_MODE) ;
 
 WS_OP : [ ]+ ->channel(HIDDEN) ;
 NEWLINE_OP : NEWLINE ->channel(HIDDEN),mode(DEFAULT_MODE) ;

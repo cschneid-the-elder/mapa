@@ -552,9 +552,9 @@ jobParmUJOBCORR : UJOBCORR EQUAL keywordOrSymbolic ;
 
 jobParmUSER : USER EQUAL keywordOrSymbolic ;
 
-commandStatement : SS NAME_FIELD COMMAND QUOTED_STRING_FRAGMENT+ ;
+commandStatement : SS NAME_FIELD COMMAND SYMBOLIC* ;
 
-jclCommandStatement : SS JCL_COMMAND JCL_COMMAND_PARM ;
+jclCommandStatement : SS JCL_COMMAND SYMBOLIC* ;
 
 cntlStatement : SS NAME_FIELD? CNTL ASTERISK? ;
 
@@ -584,7 +584,7 @@ includeStatement : SS NAME_FIELD? INCLUDE INCLUDE_PARM_MEMBER EQUAL keywordOrSym
 
 jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL singleOrMultipleValue ;
 
-notifyStatement : SS NAME_FIELD? NOTIFY_OP notifyParms+ ;
+notifyStatement : SS NAME_FIELD? NOTIFY_OP SYMBOLIC* ;
 
 notifyParms : notifyEMAIL | notifyUSER | notifyTYPE | notifyWHEN ;
 notifyEMAIL : NOTIFY_STMT_PARM_EMAIL EQUAL keywordOrSymbolic ;
@@ -721,7 +721,7 @@ outputStatementWRITER : OUTPUT_STMT_WRITER EQUAL keywordOrSymbolic ;
 
 pendStatement : SS NAME_FIELD? PEND inlineComment? ;
 
-scheduleStatement : SS NAME_FIELD? SCHEDULE scheduleParameters* ;
+scheduleStatement : SS NAME_FIELD? SCHEDULE SYMBOLIC* ;
 
 scheduleParameters : (scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY | scheduleParmHOLDUNTIL | scheduleParmJOBGROUP | scheduleParmSTARTBY | scheduleParmWITH) ;
 
