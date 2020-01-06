@@ -389,21 +389,23 @@ EXEC3_MODE.
 */
 
 WS_POST_EX : [ ]+ ->channel(HIDDEN) ;
-PGM : P G M ->mode(EXEC2_MODE) ;
-PROC_EX : P R O C ->mode(EXEC2_MODE) ;
-EXEC_PROC_NAME : NM_PART
+PGM : P G M
     {
       hide = false;
     }
- ->type(KEYWORD_VALUE),mode(EXEC2_MODE) ;
+ ->mode(EXEC2_MODE) ;
+
+PROC_EX : P R O C
+    {
+      hide = false;
+    }
+ ->mode(EXEC2_MODE) ;
+
+EXEC_PROC_NAME : NM_PART ->type(KEYWORD_VALUE),mode(EXEC2_MODE) ;
 
 mode EXEC2_MODE ;
 
-EXEC_EQUAL : EQUAL_DFLT
-    {
-      hide = false;
-    }
- ->type(EQUAL),pushMode(KYWD_VAL_MODE) ;
+EXEC_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(KYWD_VAL_MODE) ;
 
 EXEC_ACCT : A C C T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 EXEC_ADDRSPC : A D D R S P C (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -519,7 +521,7 @@ DD_CCSID : C C S I D ->type(CCSID),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_CHARS : C H A R S ->type(CHARS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_CHKPT : C H K P T ->type(CHKPT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_CNTL : C N T L ->type(CNTL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_COPIES : C O P I E S ->type(COPIES),channel(HIDDEN),pushMode(COPIES_MODE) ;
+DD_COPIES : C O P I E S ->type(COPIES),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DATA : D A T A
     {
       dlmVals = new java.util.ArrayList();
@@ -532,13 +534,13 @@ DD_DDNAME : D D N A M E ->type(DDNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DEST : D E S T ->type(DEST),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DISP : D I S P ->type(DISP),channel(HIDDEN),pushMode(DISP_MODE) ;
 DD_DLM : D L M ->type(DLM),channel(HIDDEN),pushMode(DLM_MODE) ;
-DD_DSID : D S I D ->type(DSID),channel(HIDDEN),pushMode(DSID_MODE) ;
+DD_DSID : D S I D ->type(DSID),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DSKEYLBL : D S K E Y L B L ->type(DSKEYLBL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DSN : D S N ->type(DSN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DSNAME : D S N A M E ->type(DSNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DSNTYPE : D S N T Y P E ->type(DSNTYPE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_DUMMY : D U M M Y ->type(DUMMY) ;
-DD_DYNAM : D Y N A M ->type(DYNAM) ;
+DD_DUMMY : D U M M Y ->type(DUMMY),channel(HIDDEN) ;
+DD_DYNAM : D Y N A M ->type(DYNAM),channel(HIDDEN) ;
 DD_EATTR : E A T T R ->type(EATTR),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_EXPDT : E X P D T ->type(EXPDT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_FCB : F C B ->type(FCB),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -554,7 +556,7 @@ DD_KEYENCD1 : K E Y E N C D '1' ->type(KEYENCD1),channel(HIDDEN),pushMode(KYWD_V
 DD_KEYENCD2 : K E Y E N C D '2' ->type(KEYENCD2),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_KEYLEN : K E Y L E N ->type(KEYLEN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_KEYOFF : K E Y O F F ->type(KEYOFF),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_LABEL : L A B E L ->type(LABEL),channel(HIDDEN),pushMode(LABEL_MODE) ;
+DD_LABEL : L A B E L ->type(LABEL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_LGSTREAM : L G S T R E A M ->type(LGSTREAM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_LIKE : L I K E ->type(LIKE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_LRECL : L R E C L ->type(LRECL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -564,9 +566,9 @@ DD_MODIFY : M O D I F Y ->type(MODIFY),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_OUTLIM : O U T L I M ->type(OUTLIM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_OUTPUT : O U T P U T ->type(OUTPUT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_PATH : P A T H ->type(PATH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_PATHDISP : P A T H D I S P ->type(PATHDISP),channel(HIDDEN),pushMode(PATHDISP_MODE) ;
-DD_PATHMODE : P A T H M O D E ->type(PATHMODE),channel(HIDDEN),pushMode(PATHMODE_MODE) ;
-DD_PATHOPTS : P A T H O P T S ->type(PATHOPTS),channel(HIDDEN),pushMode(PATHOPTS_MODE) ;
+DD_PATHDISP : P A T H D I S P ->type(PATHDISP),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_PATHMODE : P A T H M O D E ->type(PATHMODE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_PATHOPTS : P A T H O P T S ->type(PATHOPTS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_PROTECT : P R O T E C T ->type(PROTECT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_RECFM : R E C F M ->type(RECFM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_RECORG : R E C O R G ->type(RECORG),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -629,8 +631,8 @@ DD_STACK : S T A C K ->type(STACK),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_THRESH : T H R E S H ->type(THRESH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_TRTCH : T R T C H ->type(TRTCH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 
-DD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DD_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_SYMBOLIC : SYMBOLIC {System.out.println("DD_MODE DD_SYMBOLIC");} ->type(SYMBOLIC) ;
+DD_EQUAL : EQUAL_DFLT {System.out.println("DD_MODE DD_EQUAL");} ->type(EQUAL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_ANYCHAR : ANYCHAR ->channel(HIDDEN) ;
 
 mode EXPORT_STMT_MODE ;
@@ -1557,7 +1559,7 @@ DATA_PARM_MODE_BUFNO : DD_BUFNO ->type(BUFNO),channel(HIDDEN),pushMode(KYWD_VAL_
 DATA_PARM_MODE_DCB : DD_DCB ->type(DCB),channel(HIDDEN),pushMode(DCB_MODE) ;
 DATA_PARM_MODE_DIAGNS : DD_DIAGNS ->type(DIAGNS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DLM : DD_DLM ->type(DLM),channel(HIDDEN),pushMode(DLM_MODE) ;
-DATA_PARM_MODE_DSID : DD_DSID ->type(DSID),channel(HIDDEN),pushMode(DSID_MODE) ;
+DATA_PARM_MODE_DSID : DD_DSID ->type(DSID),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DSN : DD_DSN ->type(DSNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DSNAME : DD_DSNAME ->type(DSNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_LIKE : DD_LIKE ->type(LIKE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -1734,8 +1736,8 @@ QS_SS_COMMENT_FLAG : COMMENT_FLAG_DFLT ->type(COMMENT_FLAG),channel(COMMENTS),mo
 
 mode DCB_MODE ;
 
-DCB_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(DCB_PAREN_MODE) ;
-DCB_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+DCB_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(DCB_PAREN_MODE) ;
+DCB_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 DCB_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 DCB_COMMA : COMMA_DFLT ->more,popMode ;
 DCB_NEWLINE : NEWLINE
@@ -1758,92 +1760,92 @@ stay in DCB_PAREN_MODE until a right paren is encountered.
 
 */
 
-DCB_BFALN : DD_BFALN ->type(BFALN),mode(KYWD_VAL_MODE) ;
-DCB_BFTEK : DD_BFTEK ->type(BFTEK),mode(KYWD_VAL_MODE) ;
-DCB_BLKSIZE : DD_BLKSIZE ->type(BLKSIZE),mode(KYWD_VAL_MODE) ;
-DCB_BUFIN : DD_BUFIN ->type(BUFIN),mode(KYWD_VAL_MODE) ;
-DCB_BUFL : DD_BUFL ->type(BUFL),mode(KYWD_VAL_MODE) ;
-DCB_BUFMAX : DD_BUFMAX ->type(BUFMAX),mode(KYWD_VAL_MODE) ;
-DCB_BUFNO : DD_BUFNO ->type(BUFNO),mode(KYWD_VAL_MODE) ;
-DCB_BUFOFF : DD_BUFOFF ->type(BUFOFF),mode(KYWD_VAL_MODE) ;
-DCB_BUFOUT : DD_BUFOUT ->type(BUFOUT),mode(KYWD_VAL_MODE) ;
-DCB_BUFSIZE : DD_BUFSIZE ->type(BUFSIZE),mode(KYWD_VAL_MODE) ;
-DCB_CPRI : DD_CPRI ->type(CPRI),mode(KYWD_VAL_MODE) ;
-DCB_CYLOFL : DD_CYLOFL ->type(CYLOFL),mode(KYWD_VAL_MODE) ;
-DCB_DEN : DD_DEN ->type(DEN),mode(KYWD_VAL_MODE) ;
-DCB_DIAGNS : DD_DIAGNS ->type(DIAGNS),mode(KYWD_VAL_MODE) ;
-DCB_DSORG : DD_DSORG ->type(DSORG),mode(KYWD_VAL_MODE) ;
-DCB_EROPT : DD_EROPT ->type(EROPT),mode(KYWD_VAL_MODE) ;
-DCB_FUNC : DD_FUNC ->type(FUNC),mode(KYWD_VAL_MODE) ;
-DCB_GNCP : DD_GNCP ->type(GNCP),mode(KYWD_VAL_MODE) ;
-DCB_INTVL : DD_INTVL ->type(INTVL),mode(KYWD_VAL_MODE) ;
-DCB_IPLTXID : DD_IPLTXID ->type(IPLTXID),mode(KYWD_VAL_MODE) ;
-DCB_KEYLEN : DD_KEYLEN ->type(KEYLEN),mode(KYWD_VAL_MODE) ;
-DCB_LIMCT : DD_LIMCT ->type(LIMCT),mode(KYWD_VAL_MODE) ;
-DCB_LRECL : DD_LRECL ->type(LRECL),mode(KYWD_VAL_MODE) ;
-DCB_MODE : DD_MODE ->type(MODE),mode(KYWD_VAL_MODE) ;
-DCB_NCP : DD_NCP ->type(NCP),mode(KYWD_VAL_MODE) ;
-DCB_NTM : DD_NTM ->type(NTM),mode(KYWD_VAL_MODE) ;
-DCB_OPTCD : DD_OPTCD ->type(OPTCD),mode(KYWD_VAL_MODE) ;
-DCB_PCI : DD_PCI ->type(PCI),mode(KYWD_VAL_MODE) ;
-DCB_PRTSP : DD_PRTSP ->type(PRTSP),mode(KYWD_VAL_MODE) ;
-DCB_RECFM : DD_RECFM ->type(RECFM),mode(KYWD_VAL_MODE) ;
-DCB_RESERVE : DD_RESERVE ->type(RESERVE),mode(KYWD_VAL_MODE) ;
-DCB_RKP : DD_RKP ->type(RKP),mode(KYWD_VAL_MODE) ;
-DCB_STACK : DD_STACK ->type(STACK),mode(KYWD_VAL_MODE) ;
-DCB_THRESH : DD_THRESH ->type(THRESH),mode(KYWD_VAL_MODE) ;
-DCB_TRTCH : DD_TRTCH ->type(TRTCH),mode(KYWD_VAL_MODE) ;
+DCB_BFALN : DD_BFALN ->type(BFALN),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BFTEK : DD_BFTEK ->type(BFTEK),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BLKSIZE : DD_BLKSIZE ->type(BLKSIZE),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFIN : DD_BUFIN ->type(BUFIN),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFL : DD_BUFL ->type(BUFL),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFMAX : DD_BUFMAX ->type(BUFMAX),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFNO : DD_BUFNO ->type(BUFNO),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFOFF : DD_BUFOFF ->type(BUFOFF),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFOUT : DD_BUFOUT ->type(BUFOUT),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_BUFSIZE : DD_BUFSIZE ->type(BUFSIZE),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_CPRI : DD_CPRI ->type(CPRI),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_CYLOFL : DD_CYLOFL ->type(CYLOFL),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_DEN : DD_DEN ->type(DEN),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_DIAGNS : DD_DIAGNS ->type(DIAGNS),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_DSORG : DD_DSORG ->type(DSORG),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_EROPT : DD_EROPT ->type(EROPT),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_FUNC : DD_FUNC ->type(FUNC),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_GNCP : DD_GNCP ->type(GNCP),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_INTVL : DD_INTVL ->type(INTVL),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_IPLTXID : DD_IPLTXID ->type(IPLTXID),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_KEYLEN : DD_KEYLEN ->type(KEYLEN),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_LIMCT : DD_LIMCT ->type(LIMCT),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_LRECL : DD_LRECL ->type(LRECL),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_MODE : DD_MODE ->type(MODE),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_NCP : DD_NCP ->type(NCP),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_NTM : DD_NTM ->type(NTM),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_OPTCD : DD_OPTCD ->type(OPTCD),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_PCI : DD_PCI ->type(PCI),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_PRTSP : DD_PRTSP ->type(PRTSP),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_RECFM : DD_RECFM ->type(RECFM),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_RESERVE : DD_RESERVE ->type(RESERVE),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_RKP : DD_RKP ->type(RKP),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_STACK : DD_STACK ->type(STACK),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_THRESH : DD_THRESH ->type(THRESH),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
+DCB_TRTCH : DD_TRTCH ->type(TRTCH),channel(HIDDEN),mode(KYWD_VAL_MODE) ;
 
 DCB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DCB_KEYWORD_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE);
+DCB_KEYWORD_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE),channel(HIDDEN) ;
 
 mode DCB_PAREN_MODE ;
 
-DCB_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+DCB_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),channel(HIDDEN),popMode,popMode ;
 DCB_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
 DCB_PAREN_SQUOTE : SQUOTE ->channel(HIDDEN),pushMode(QS_MODE) ;
 
 DCB_PAREN_COMMENT_FLAG_INLINE : COMMENT_FLAG_INLINE ->type(COMMENT_FLAG_INLINE),channel(COMMENTS),pushMode(COMMA_WS_MODE) ;
 DCB_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
-DCB_PAREN_BFALN : DD_BFALN ->type(BFALN),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BFTEK : DD_BFTEK ->type(BFTEK),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BLKSIZE : DD_BLKSIZE ->type(BLKSIZE),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFIN : DD_BUFIN ->type(BUFIN),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFL : DD_BUFL ->type(BUFL),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFMAX : DD_BUFMAX ->type(BUFMAX),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFNO : DD_BUFNO ->type(BUFNO),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFOFF : DD_BUFOFF ->type(BUFOFF),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFOUT : DD_BUFOUT ->type(BUFOUT),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_BUFSIZE : DD_BUFSIZE ->type(BUFSIZE),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_CPRI : DD_CPRI ->type(CPRI),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_CYLOFL : DD_CYLOFL ->type(CYLOFL),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_DEN : DD_DEN ->type(DEN),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_DIAGNS : DD_DIAGNS ->type(DIAGNS),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_DSORG : DD_DSORG ->type(DSORG),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_EROPT : DD_EROPT ->type(EROPT),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_FUNC : DD_FUNC ->type(FUNC),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_GNCP : DD_GNCP ->type(GNCP),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_INTVL : DD_INTVL ->type(INTVL),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_IPLTXID : DD_IPLTXID ->type(IPLTXID),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_KEYLEN : DD_KEYLEN ->type(KEYLEN),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_LIMCT : DD_LIMCT ->type(LIMCT),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_LRECL : DD_LRECL ->type(LRECL),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_MODE : DD_MODE ->type(MODE),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_NCP : DD_NCP ->type(NCP),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_NTM : DD_NTM ->type(NTM),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_OPTCD : DD_OPTCD ->type(OPTCD),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_PCI : DD_PCI ->type(PCI),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_PRTSP : DD_PRTSP ->type(PRTSP),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_RECFM : DD_RECFM ->type(RECFM),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_RESERVE : DD_RESERVE ->type(RESERVE),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_RKP : DD_RKP ->type(RKP),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_STACK : DD_STACK ->type(STACK),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_THRESH : DD_THRESH ->type(THRESH),pushMode(KYWD_VAL_MODE) ;
-DCB_PAREN_TRTCH : DD_TRTCH ->type(TRTCH),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BFALN : DD_BFALN ->type(BFALN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BFTEK : DD_BFTEK ->type(BFTEK),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BLKSIZE : DD_BLKSIZE ->type(BLKSIZE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFIN : DD_BUFIN ->type(BUFIN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFL : DD_BUFL ->type(BUFL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFMAX : DD_BUFMAX ->type(BUFMAX),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFNO : DD_BUFNO ->type(BUFNO),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFOFF : DD_BUFOFF ->type(BUFOFF),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFOUT : DD_BUFOUT ->type(BUFOUT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_BUFSIZE : DD_BUFSIZE ->type(BUFSIZE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_CPRI : DD_CPRI ->type(CPRI),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_CYLOFL : DD_CYLOFL ->type(CYLOFL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_DEN : DD_DEN ->type(DEN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_DIAGNS : DD_DIAGNS ->type(DIAGNS),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_DSORG : DD_DSORG ->type(DSORG),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_EROPT : DD_EROPT ->type(EROPT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_FUNC : DD_FUNC ->type(FUNC),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_GNCP : DD_GNCP ->type(GNCP),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_INTVL : DD_INTVL ->type(INTVL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_IPLTXID : DD_IPLTXID ->type(IPLTXID),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_KEYLEN : DD_KEYLEN ->type(KEYLEN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_LIMCT : DD_LIMCT ->type(LIMCT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_LRECL : DD_LRECL ->type(LRECL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_MODE : DD_MODE ->type(MODE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_NCP : DD_NCP ->type(NCP),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_NTM : DD_NTM ->type(NTM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_OPTCD : DD_OPTCD ->type(OPTCD),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_PCI : DD_PCI ->type(PCI),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_PRTSP : DD_PRTSP ->type(PRTSP),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_RECFM : DD_RECFM ->type(RECFM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_RESERVE : DD_RESERVE ->type(RESERVE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_RKP : DD_RKP ->type(RKP),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_STACK : DD_STACK ->type(STACK),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_THRESH : DD_THRESH ->type(THRESH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DCB_PAREN_TRTCH : DD_TRTCH ->type(TRTCH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 
 DCB_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-DCB_PAREN_KEYWORD_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE);
+DCB_PAREN_KEYWORD_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE),channel(HIDDEN) ;
 
 mode INCLUDE_MODE ;
 
@@ -2194,8 +2196,16 @@ KYWD_VAL_PAREN_LPAREN : LPAREN_DFLT
 KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT
     {
       if (hide) setChannel(HIDDEN);
+      if (_modeStack.peek() != KYWD_VAL_PAREN_MODE) hide = true;
     }
  ->type(RPAREN),popMode ;
+
+KYWD_VAL_PAREN_EQUAL : EQUAL_DFLT
+    {
+      if (hide) setChannel(HIDDEN);
+    }
+ ->type(EQUAL)
+ ;
 
 KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->type(COMMA),channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->type(COMMA),channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
@@ -2441,7 +2451,7 @@ SYSOUT_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 SYSOUT_CLASS : [A-Z0-9*$] ->channel(HIDDEN),popMode ;
 SYSOUT_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 SYSOUT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(SYSOUT_PAREN_MODE) ;
+SYSOUT_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(SYSOUT_PAREN_MODE) ;
 
 mode SYSOUT_PAREN_MODE ;
 
@@ -2517,7 +2527,7 @@ UNIT_GROUP_NAME : [A-Z0-9]+
     {
       getText().length() <= 8
     }? ->channel(HIDDEN),popMode ;
-UNIT_DEVICE_TYPE : [A-Z0-9-]+ ->popMode ;
+UNIT_DEVICE_TYPE : [A-Z0-9-]+ ->channel(HIDDEN),popMode ;
 UNIT_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
 UNIT_LPAREN : LPAREN_DFLT ->type(LPAREN),channel(HIDDEN),pushMode(UNIT_PAREN_MODE) ;
 
