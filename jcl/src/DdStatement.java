@@ -15,6 +15,7 @@ public class DdStatement {
 	private Boolean inProc = null;
 	private JCLParser.DdStatementContext ddStmtCtx = null;
 	private JCLParser.DdStatementConcatenationContext ddStmtConcatCtx = null;
+	private List<JCLParser.DdParmASTERISK_DATAContext> ddSplatCtx = null;
 	private ArrayList<String> blankParms = new ArrayList<>();
 	private Hashtable<String, KeywordOrSymbolicWrapper> kosParms = new Hashtable<>();
 	private Hashtable<String, SingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
@@ -42,12 +43,14 @@ public class DdStatement {
 
 	public DdStatement(JCLParser.DdStatementContext ddStmtCtx, String procName, String ddName) {
 		this.ddStmtCtx = ddStmtCtx;
+		this.ddSplatCtx = ddStmtCtx.ddParmASTERISK_DATA();
 		this.initialize(procName, ddName);
 		this.initializeTediously(this.ddStmtCtx.ddParameter());
 	}
 
 	public DdStatement(JCLParser.DdStatementConcatenationContext ddStmtConcatCtx, String procName, String ddName) {
 		this.ddStmtConcatCtx = ddStmtConcatCtx;
+		this.ddSplatCtx = ddStmtConcatCtx.ddParmASTERISK_DATA();
 		this.initialize(procName, ddName);
 		this.initializeTediously(this.ddStmtConcatCtx.ddParameter());
 	}

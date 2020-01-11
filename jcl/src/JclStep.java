@@ -57,11 +57,17 @@ public class JclStep {
 
 		if (this.isExecPgm()) {
 			this.line = this.execPgmStmtCtx.EXEC().getSymbol().getLine();
-			this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
+			if (this.execPgmStmtCtx.stepName() == null) {
+			} else {
+				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
+			}
 			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName);
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
-			this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
+			if (this.execProcStmtCtx.stepName() == null) {
+			} else {
+				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
+			}
 			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName);
 			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
 				this.symbolics.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
