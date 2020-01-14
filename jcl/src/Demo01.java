@@ -21,6 +21,9 @@ public static ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 
 public static void main(String[] args) throws Exception {
 
+	/*
+	Housekeeping.  Set up a logger to log messages to a file.
+	*/
 	Handler fileHandler  = null;
 
 	System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tc] %4$s: %5$s%n");
@@ -39,7 +42,14 @@ public static void main(String[] args) throws Exception {
 		System.exit(16);
 	}
 
+	/*
+	Housekeeping.  Parse command line options.
+	*/
 	CLI = new TheCLI(args);
+
+	/*
+	Initial setup.  Get symbolics and their values as specified on command line.
+	*/
 	if (CLI.setFile != null) {
 		symbolics = lookForSetSymbols(CLI.setFile.getCanonicalPath());
 	}

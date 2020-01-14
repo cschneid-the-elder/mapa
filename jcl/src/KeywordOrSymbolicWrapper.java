@@ -100,7 +100,30 @@ public class KeywordOrSymbolicWrapper {
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
 	}
 
+	public ArrayList<KeywordValueWrapper> resolvedParms() {
+		Demo01.LOGGER.finer(myName + " resolvedParms");
+
+		ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
+
+		if (this.parameterized) {
+			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
+		} else {
+			Demo01.LOGGER.finest(myName + " parameterized == false - exiting");
+			return kvw;
+		}
+
+		KeywordValueWrapper[] symbolic_kvw = 
+			kvw.stream()
+			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
+			.toArray(KeywordValueWrapper[]::new);
+
+		kvw.addAll(Arrays.asList(symbolic_kvw));
+		return kvw;
+	}
+
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
+		Demo01.LOGGER.finer(myName + " resolveParms sets: " + sets);
+
 		if (this.parameterized) {
 			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
 		} else {
@@ -109,7 +132,6 @@ public class KeywordOrSymbolicWrapper {
 		}
 
 		Demo01.LOGGER.finest(myName + " resolveParms this: " + this);
-		Demo01.LOGGER.finest(myName + " resolveParms sets: " + sets);
 
 		KeywordValueWrapper[] symbolic_kvw = 
 			kvw.stream()
