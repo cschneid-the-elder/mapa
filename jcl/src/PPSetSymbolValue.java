@@ -4,14 +4,14 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
-public class SetSymbolValue {
+public class PPSetSymbolValue {
 
 	private String myName = null;
 	private ParserRuleContext ctx = null;
 	private String fileName = null;
 	private String parentFileName = null;
 	private SetTypeOfSymbolValue setType = null;
-	private KeywordOrSymbolicWrapper kywd = null;
+	private PPKeywordOrSymbolicWrapper kywd = null;
 	private String parmValue = null;
 	private String parmName = null;
 	private int line = -1;
@@ -19,17 +19,17 @@ public class SetSymbolValue {
 	public String procName = null;
 	private String procBeingExecuted = null;
 
-	public SetSymbolValue(JCLParser.SetOperationContext ctx) {
+	public PPSetSymbolValue(JCLPPParser.SetOperationContext ctx) {
 		this.ctx = ctx;
 		this.setType = SetTypeOfSymbolValue.SYS;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
 		this.initialize();
 	}
 
-	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName, String procName) {
+	public PPSetSymbolValue(JCLPPParser.SetOperationContext ctx, String fileName, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -37,12 +37,12 @@ public class SetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.SET;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
 		this.initialize();
 	}
 
-	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, String procName, String procBeingExecuted) {
+	public PPSetSymbolValue(JCLPPParser.ExecProcParmContext ctx, String fileName, String procName, String procBeingExecuted) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -51,12 +51,12 @@ public class SetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.EXEC;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
 		this.initialize();
 	}
 
-	public SetSymbolValue(JCLParser.DefineSymbolicParameterContext ctx, String fileName, String procName) {
+	public PPSetSymbolValue(JCLPPParser.DefineSymbolicParameterContext ctx, String fileName, String procName) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -64,7 +64,7 @@ public class SetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.PROC;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		}
 		this.initialize();
 	}
@@ -181,25 +181,25 @@ public class SetSymbolValue {
 	}
 
 	private String getParmNameForSetOperationContext() {
-		JCLParser.SetOperationContext ctx = (JCLParser.SetOperationContext)this.ctx;
+		JCLPPParser.SetOperationContext ctx = (JCLPPParser.SetOperationContext)this.ctx;
 
 		return ctx.SET_PARM_NAME().getSymbol().getText();
 	}
 
 	private String getParmNameForExecProcParmContext() {
-		JCLParser.ExecProcParmContext ctx = (JCLParser.ExecProcParmContext)this.ctx;
+		JCLPPParser.ExecProcParmContext ctx = (JCLPPParser.ExecProcParmContext)this.ctx;
 
 		return ctx.EXEC_PROC_PARM().getSymbol().getText();
 	}
 
 	private String getParmNameForDefineSymbolicParameterContext() {
-		JCLParser.DefineSymbolicParameterContext ctx = (JCLParser.DefineSymbolicParameterContext)this.ctx;
+		JCLPPParser.DefineSymbolicParameterContext ctx = (JCLPPParser.DefineSymbolicParameterContext)this.ctx;
 
 		return ctx.PROC_PARM_NAME().getSymbol().getText();
 	}
 
 	private int getLineForSetOperationContext() {
-		JCLParser.SetOperationContext ctx = (JCLParser.SetOperationContext)this.ctx;
+		JCLPPParser.SetOperationContext ctx = (JCLPPParser.SetOperationContext)this.ctx;
 		int theLine = -1;
 
 		if (ctx.SET_PARM_NAME() == null) {
@@ -217,7 +217,7 @@ public class SetSymbolValue {
 	}
 
 	private int getLineForExecProcParmContext() {
-		JCLParser.ExecProcParmContext ctx = (JCLParser.ExecProcParmContext)this.ctx;
+		JCLPPParser.ExecProcParmContext ctx = (JCLPPParser.ExecProcParmContext)this.ctx;
 		int theLine = -1;
 
 		if (ctx.EXEC_PROC_PARM() == null) {
@@ -235,7 +235,7 @@ public class SetSymbolValue {
 	}
 
 	private int getLineForDefineSymbolicParameterContext() {
-		JCLParser.DefineSymbolicParameterContext ctx = (JCLParser.DefineSymbolicParameterContext)this.ctx;
+		JCLPPParser.DefineSymbolicParameterContext ctx = (JCLPPParser.DefineSymbolicParameterContext)this.ctx;
 		int theLine = -1;
 
 		if (ctx.PROC_PARM_NAME() == null) {
@@ -253,7 +253,7 @@ public class SetSymbolValue {
 	}
 
 	private String getParmValueForSetOperationContext() {
-		JCLParser.SetOperationContext ctx = (JCLParser.SetOperationContext)this.ctx;
+		JCLPPParser.SetOperationContext ctx = (JCLPPParser.SetOperationContext)this.ctx;
 		String theText = new String();
 
 		if (this.kywd == null) {
@@ -272,7 +272,7 @@ public class SetSymbolValue {
 	}
 
 	private String getParmValueForExecProcParmContext() {
-		JCLParser.ExecProcParmContext ctx = (JCLParser.ExecProcParmContext)this.ctx;
+		JCLPPParser.ExecProcParmContext ctx = (JCLPPParser.ExecProcParmContext)this.ctx;
 		String theText = new String();
 
 		if (this.kywd == null) {
@@ -293,7 +293,7 @@ public class SetSymbolValue {
 	}
 
 	private String getParmValueForDefineSymbolicParameterContext() {
-		JCLParser.DefineSymbolicParameterContext ctx = (JCLParser.DefineSymbolicParameterContext)this.ctx;
+		JCLPPParser.DefineSymbolicParameterContext ctx = (JCLPPParser.DefineSymbolicParameterContext)this.ctx;
 		String theText = new String();
 
 		if (this.kywd == null) {
@@ -316,10 +316,10 @@ public class SetSymbolValue {
 		return this.procBeingExecuted;
 	}
 
-	public Boolean parmSetByExec(ArrayList<SetSymbolValue> sets, String procName) {
+	public Boolean parmSetByExec(ArrayList<PPSetSymbolValue> sets, String procName) {
 		Boolean rc = false;
 
-		for(SetSymbolValue s: sets) {
+		for(PPSetSymbolValue s: sets) {
 			if (s.getParmName().equals(this.getParmName())
 			&& s.getSetType() == SetTypeOfSymbolValue.EXEC
 			&& s.getProcBeingExecuted().equals(procName)
@@ -333,10 +333,10 @@ public class SetSymbolValue {
 		return rc;
 	}
 
-	public Boolean parmDefinedByProc(ArrayList<SetSymbolValue> sets) {
+	public Boolean parmDefinedByProc(ArrayList<PPSetSymbolValue> sets) {
 		Boolean rc = false;
 
-		for(SetSymbolValue s: sets) {
+		for(PPSetSymbolValue s: sets) {
 			if (s.getParmName().equals(this.getParmName())
 			&& s.getSetType() == SetTypeOfSymbolValue.PROC
 			&& s != this

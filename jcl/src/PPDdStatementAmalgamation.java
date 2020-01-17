@@ -8,7 +8,7 @@ Instances of this class represent a DD statement and any/all DD
 statements concatenated to it.
 
 */
-public class DdStatementAmalgamation {
+public class PPDdStatementAmalgamation {
 
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
@@ -16,10 +16,10 @@ public class DdStatementAmalgamation {
 	private String procName = null;
 	private String fileName = null;
 	private Boolean inProc = null;
-	private JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx = null;
-	private ArrayList<DdStatement> dds = null;
+	private JCLPPParser.DdStatementAmalgamationContext ddStmtAmlgnCtx = null;
+	private ArrayList<PPDdStatement> dds = null;
 
-	public DdStatementAmalgamation(JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName, String fileName) {
+	public PPDdStatementAmalgamation(JCLPPParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName, String fileName) {
 		this.ddStmtAmlgnCtx = ddStmtAmlgnCtx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
@@ -32,7 +32,7 @@ public class DdStatementAmalgamation {
 		Demo01.LOGGER.finest(this.myName + " initialize");
 		this.setDdName(this.ddStmtAmlgnCtx.ddStatement().ddName().DOT()
 			, this.ddStmtAmlgnCtx.ddStatement().ddName().NAME_FIELD());
-		this.dds = DdStatement.bunchOfThese(this.ddStmtAmlgnCtx, this.procName, this.ddName, this.fileName);
+		this.dds = PPDdStatement.bunchOfThese(this.ddStmtAmlgnCtx, this.procName, this.ddName, this.fileName);
 	}
 
 	private void setDdName(TerminalNode dot, List<TerminalNode> name_field) {
@@ -49,9 +49,9 @@ public class DdStatementAmalgamation {
 		this.ddName = buf.toString();
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(this.myName + " resolveParms symbolics = |" + symbolics + "|");
-		for (DdStatement dd: dds) {
+		for (PPDdStatement dd: dds) {
 			dd.resolveParms(symbolics);
 			Demo01.LOGGER.finest(this.myName + " resolved dsn = |" + dd.getResolvedValue("DSNAME") + "|");
 		}

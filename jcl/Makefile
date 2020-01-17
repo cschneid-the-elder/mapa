@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/JclStep.class ./class/Symbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class
 
 .PHONY: all clean cleanmine mine jar testrig
 
@@ -69,6 +69,26 @@ testdemo:
 ziplogs:
 	echo `date` ziplogs >> build.log
 	zip -DjmTv9 demologs Demo01-*.log
+
+pptransform:
+# The preprocessor versions of these wrapper classes are simple transforms
+# performed against the "normal" parser versions.
+# The absence of PPDdStatement is intentional, it is custom code, not 
+# transformed from the original via sed.
+	echo `date` pptransform >> build.log
+	sed -r -f ./src/pptransform ./src/IncludeStatement.java > ./src/PPIncludeStatement.java
+	sed -r -f ./src/pptransform ./src/JclStep.java > ./src/PPJclStep.java
+	sed -r -f ./src/pptransform ./src/Job.java > ./src/PPJob.java
+	sed -r -f ./src/pptransform ./src/KeywordOrSymbolicWrapper.java > ./src/PPKeywordOrSymbolicWrapper.java
+	sed -r -f ./src/pptransform ./src/KeywordValueWrapper.java > ./src/PPKeywordValueWrapper.java
+	sed -r -f ./src/pptransform ./src/SingleOrMultipleValueWrapper.java > ./src/PPSingleOrMultipleValueWrapper.java
+	sed -r -f ./src/pptransform ./src/Proc.java > ./src/PPProc.java
+	sed -r -f ./src/pptransform ./src/SetSymbolValue.java > ./src/PPSetSymbolValue.java
+	sed -r -f ./src/pptransform ./src/DdStatementAmalgamation.java > ./src/PPDdStatementAmalgamation.java
+	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java
+
+pp:
+	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/Symbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java
 
 #testNist:
 #	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log

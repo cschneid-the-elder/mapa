@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 
 
 */
-public class JclStep {
+public class PPJclStep {
 
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
@@ -14,21 +14,21 @@ public class JclStep {
 	private String procName = null;
 	private String stepName = null;
 	private int line = -1;
-	private KeywordOrSymbolicWrapper procExecuted = null;
-	private KeywordOrSymbolicWrapper pgmExecuted = null;
-	private Proc proc = null;
+	private PPKeywordOrSymbolicWrapper procExecuted = null;
+	private PPKeywordOrSymbolicWrapper pgmExecuted = null;
+	private PPProc proc = null;
 	private Boolean inProc = null;
-	private JCLParser.JclStepContext jclStepCtx = null;
-	private JCLParser.ExecStatementContext execStmtCtx = null;
-	private JCLParser.ExecPgmStatementContext execPgmStmtCtx = null;
-	private JCLParser.ExecProcStatementContext execProcStmtCtx = null;
-	private List<JCLParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
-	private List<JCLParser.IncludeStatementContext> includeStmtCtxs = null;
-	private ArrayList<IncludeStatement> includes = new ArrayList<>();
-	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
-	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
+	private JCLPPParser.JclStepContext jclStepCtx = null;
+	private JCLPPParser.ExecStatementContext execStmtCtx = null;
+	private JCLPPParser.ExecPgmStatementContext execPgmStmtCtx = null;
+	private JCLPPParser.ExecProcStatementContext execProcStmtCtx = null;
+	private List<JCLPPParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
+	private List<JCLPPParser.IncludeStatementContext> includeStmtCtxs = null;
+	private ArrayList<PPIncludeStatement> includes = new ArrayList<>();
+	private ArrayList<PPSetSymbolValue> symbolics = new ArrayList<>();
+	private ArrayList<PPDdStatementAmalgamation> ddStatements = new ArrayList<>();
 
-	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName) {
+	public PPJclStep(JCLPPParser.JclStepContext jclStepCtx, String fileName, String procName) {
 		this.jclStepCtx = jclStepCtx;
 		this.fileName = fileName;
 		this.procName = procName;
@@ -45,8 +45,8 @@ public class JclStep {
 		this.ddStmtAmlgnCtxs = this.jclStepCtx.ddStatementAmalgamation();
 		this.includeStmtCtxs = this.jclStepCtx.includeStatement();
 		
-		for (JCLParser.IncludeStatementContext i: this.includeStmtCtxs) {
-			this.includes.add(new IncludeStatement(i, this.fileName, this.procName));
+		for (JCLPPParser.IncludeStatementContext i: this.includeStmtCtxs) {
+			this.includes.add(new PPIncludeStatement(i, this.fileName, this.procName));
 		}
 
 		if (this.isExecProc() && this.isExecPgm()) {
@@ -61,23 +61,23 @@ public class JclStep {
 			} else {
 				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName);
+			this.pgmExecuted = new PPKeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName);
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execProcStmtCtx.stepName() == null) {
 			} else {
 				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName);
-			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
-				this.symbolics.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
+			this.procExecuted = new PPKeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName);
+			for (JCLPPParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
+				this.symbolics.add(new PPSetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
 			}
 		}
 
 		if (this.ddStmtAmlgnCtxs == null) {
 		} else {
-			for (JCLParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
-				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName, this.fileName));
+			for (JCLPPParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
+				this.ddStatements.add(new PPDdStatementAmalgamation(d, this.procName, this.fileName));
 			}
 		}	
 	}
@@ -98,11 +98,11 @@ public class JclStep {
 		return this.procExecuted.getValue();
 	}
 
-	public void setProc(Proc proc) {
+	public void setProc(PPProc proc) {
 		this.proc = proc;
 	}
 
-	public Proc getProc() {
+	public PPProc getProc() {
 		return this.proc;
 	}
 
@@ -110,10 +110,10 @@ public class JclStep {
 		return this.line;
 	}
 
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
+	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> symbolics) {
 		/**
-			Of note here: an INCLUDE that is attached to a JclStep may not have
-			anything to do with the JclStep.  It is syntactically impossible to
+			Of note here: an INCLUDE that is attached to a PPJclStep may not have
+			anything to do with the PPJclStep.  It is syntactically impossible to
 			discern the coder's intent.  Consider...
 
 			//RIGEL   EXEC PGM=IEFBR14
@@ -126,7 +126,7 @@ public class JclStep {
 			//STARK   EXEC PROC=NORANTI
 			//        INCLUDE MEMBER=SIKOZU&A
 
-			...and thus statements unrelated to the JclStep will be inserted into
+			...and thus statements unrelated to the PPJclStep will be inserted into
 			the jobstream.
 
 			Subsequent parsing takes care of this, and in fact is one of the reasons
@@ -134,14 +134,14 @@ public class JclStep {
 		*/
 
 		Demo01.LOGGER.finest(this.myName + " " + this.stepName + " resolveParmedIncludes");
-		for (IncludeStatement i: this.includes) {
+		for (PPIncludeStatement i: this.includes) {
 			i.resolveParms(symbolics);
 		}
 		Demo01.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 
 		if (this.proc != null) {
-			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>();
-			for (SetSymbolValue s: symbolics) {
+			ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>();
+			for (PPSetSymbolValue s: symbolics) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < this.line)
 					|| s.getSetType() != SetTypeOfSymbolValue.SET
 				) {
@@ -154,12 +154,12 @@ public class JclStep {
 		}
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
+	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
-		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+		ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 
-		for (DdStatementAmalgamation dda: ddStatements) {
+		for (PPDdStatementAmalgamation dda: ddStatements) {
 			dda.resolveParms(mergedSymbolics);
 		}
 
@@ -172,15 +172,15 @@ public class JclStep {
 		return this.uuid;
 	}
 
-	public IncludeStatement includeStatementAt(int aLine) {
-		for (IncludeStatement i: this.includes) {
+	public PPIncludeStatement includeStatementAt(int aLine) {
+		for (PPIncludeStatement i: this.includes) {
 			if (i.getLine() == aLine) return i;
 		}
 
 		return null;
 	}
 
-	public ArrayList<IncludeStatement> getIncludes() {
+	public ArrayList<PPIncludeStatement> getIncludes() {
 		return this.includes;
 	}
 

@@ -9,17 +9,17 @@ This may be confusing.  A KeywordOrSymbolicContext instance contains zero
 or more collections of each of three flavors of TerminalNode instances.
 
 Each of those TerminalNode instances has attributes we store in an instance
-of KeywordValueWrapper.
+of PPKeywordValueWrapper.
 
 All of these TerminalNode instances combined are what we think of as the
-"value" of this instance of KeywordOrSymbolicWrapper.
+"value" of this instance of PPKeywordOrSymbolicWrapper.
 
 The original JCL may look like...
 
 //STEPNAME EXEC PGM=A&B&C.D&E.FG
 
 ...where the values of &B, &C, and &E are set elsewhere.  In this case we
-will have an ArrayList called kvw containing instances of KeywordValueWrapper
+will have an ArrayList called kvw containing instances of PPKeywordValueWrapper
 whose values are...
 
 A
@@ -41,20 +41,20 @@ or PROC statements.  See the IBM documentation for the SET statement for
 examples.
 
 */
-public class KeywordOrSymbolicWrapper {
+public class PPKeywordOrSymbolicWrapper {
 
 	private String myName = null;
-	private JCLParser.KeywordOrSymbolicContext ctx = null;
-	private ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
+	private JCLPPParser.KeywordOrSymbolicContext ctx = null;
+	private ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
 	private String procName = null;
 	private Boolean inProc = null;
 	private Boolean parameterized = null;
 
-	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList) {
-		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
+	public static ArrayList<PPKeywordOrSymbolicWrapper> bunchOfThese(List<JCLPPParser.KeywordOrSymbolicContext> ctxList) {
+		ArrayList<PPKeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
-		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new KeywordOrSymbolicWrapper(k, null));
+		for (JCLPPParser.KeywordOrSymbolicContext k: ctxList) {
+			kywdList.add(new PPKeywordOrSymbolicWrapper(k, null));
 		}
 
 		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
@@ -62,11 +62,11 @@ public class KeywordOrSymbolicWrapper {
 		return kywdList;
 	}
 
-	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList, String procName) {
-		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
+	public static ArrayList<PPKeywordOrSymbolicWrapper> bunchOfThese(List<JCLPPParser.KeywordOrSymbolicContext> ctxList, String procName) {
+		ArrayList<PPKeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
-		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new KeywordOrSymbolicWrapper(k, procName));
+		for (JCLPPParser.KeywordOrSymbolicContext k: ctxList) {
+			kywdList.add(new PPKeywordOrSymbolicWrapper(k, procName));
 		}
 
 		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
@@ -74,7 +74,7 @@ public class KeywordOrSymbolicWrapper {
 		return kywdList;
 	}
 
-	public KeywordOrSymbolicWrapper(JCLParser.KeywordOrSymbolicContext ctx, String procName) {
+	public PPKeywordOrSymbolicWrapper(JCLPPParser.KeywordOrSymbolicContext ctx, String procName) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
@@ -83,7 +83,7 @@ public class KeywordOrSymbolicWrapper {
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx));
+		this.kvw.addAll(PPKeywordValueWrapper.bunchOfThese(this.ctx));
 
 		if (this.ctx.SYMBOLIC() == null 
 		|| this.ctx.SYMBOLIC().size() == 0) {
@@ -93,17 +93,17 @@ public class KeywordOrSymbolicWrapper {
 		}
 
 		Demo01.LOGGER.finest(this.getClass().getName() + " kvw:");
-		for (KeywordValueWrapper k: this.kvw) {
+		for (PPKeywordValueWrapper k: this.kvw) {
 			Demo01.LOGGER.finest(k.toString());
 
 		}
-		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
+		kvw.sort(Comparator.comparingLong(PPKeywordValueWrapper::getSortKey));
 	}
 
-	public ArrayList<KeywordValueWrapper> resolvedParms() {
+	public ArrayList<PPKeywordValueWrapper> resolvedParms() {
 		Demo01.LOGGER.finer(myName + " resolvedParms");
 
-		ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
+		ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
 
 		if (this.parameterized) {
 			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
@@ -112,16 +112,16 @@ public class KeywordOrSymbolicWrapper {
 			return kvw;
 		}
 
-		KeywordValueWrapper[] symbolic_kvw = 
+		PPKeywordValueWrapper[] symbolic_kvw = 
 			kvw.stream()
 			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
-			.toArray(KeywordValueWrapper[]::new);
+			.toArray(PPKeywordValueWrapper[]::new);
 
 		kvw.addAll(Arrays.asList(symbolic_kvw));
 		return kvw;
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
+	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
 		Demo01.LOGGER.finer(myName + " resolveParms sets: " + sets);
 
 		if (this.parameterized) {
@@ -133,18 +133,18 @@ public class KeywordOrSymbolicWrapper {
 
 		Demo01.LOGGER.finest(myName + " resolveParms this: " + this);
 
-		KeywordValueWrapper[] symbolic_kvw = 
+		PPKeywordValueWrapper[] symbolic_kvw = 
 			kvw.stream()
 			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC)
-			.toArray(KeywordValueWrapper[]::new);
+			.toArray(PPKeywordValueWrapper[]::new);
 
-		for(KeywordValueWrapper k: symbolic_kvw) {
+		for(PPKeywordValueWrapper k: symbolic_kvw) {
 			Demo01.LOGGER.finest(myName + " k: " + k);
-			SetSymbolValue[] matching_sets =
+			PPSetSymbolValue[] matching_sets =
 				sets.stream()
 				.filter(s -> s.getParmName().equals(k.getParmName()))
-				.toArray(SetSymbolValue[]::new);
-			for(SetSymbolValue s: matching_sets) {
+				.toArray(PPSetSymbolValue[]::new);
+			for(PPSetSymbolValue s: matching_sets) {
 				Demo01.LOGGER.finest(myName + " s: " + s);
 				switch(s.getSetType()) {
 					case SET:
@@ -177,10 +177,10 @@ public class KeywordOrSymbolicWrapper {
 		}
 	}
 /*
-	private Boolean parmSetByExec(ArrayList<SetSymbolValue> sets, SetSymbolValue v) {
+	private Boolean parmSetByExec(ArrayList<PPSetSymbolValue> sets, PPSetSymbolValue v) {
 		Boolean rc = false;
 
-		for(SetSymbolValue s: sets) {
+		for(PPSetSymbolValue s: sets) {
 			if (s.getParmName().equals(v.getParmName())
 			&& s.getSetType() == SetTypeOfSymbolValue.EXEC
 			&& s.getProcBeingExecuted().equals(this.procName)
@@ -194,10 +194,10 @@ public class KeywordOrSymbolicWrapper {
 		return rc;
 	}
 
-	private Boolean parmDefinedByProc(ArrayList<SetSymbolValue> sets, SetSymbolValue v) {
+	private Boolean parmDefinedByProc(ArrayList<PPSetSymbolValue> sets, PPSetSymbolValue v) {
 		Boolean rc = false;
 
-		for(SetSymbolValue s: sets) {
+		for(PPSetSymbolValue s: sets) {
 			if (s.getParmName().equals(v.getParmName())
 			&& s.getSetType() == SetTypeOfSymbolValue.PROC
 			&& s != v
@@ -213,7 +213,7 @@ public class KeywordOrSymbolicWrapper {
 	public String getValue() {
 		StringBuffer buf = new StringBuffer();
 
-		for (KeywordValueWrapper k: this.kvw) {
+		for (PPKeywordValueWrapper k: this.kvw) {
 			buf.append(k.getValue());
 		}
 
@@ -223,7 +223,7 @@ public class KeywordOrSymbolicWrapper {
 	public Boolean isResolved() {
 		Boolean b = true;
 
-		for (KeywordValueWrapper k: this.kvw) {
+		for (PPKeywordValueWrapper k: this.kvw) {
 			b = b && k.isResolved();
 			if (!b) break;
 		}
@@ -233,9 +233,9 @@ public class KeywordOrSymbolicWrapper {
 
 	public String getResolvedValue() {
 		StringBuffer buf = new StringBuffer();
-		KeywordValueWrapper prev = null;
+		PPKeywordValueWrapper prev = null;
 
-		for (KeywordValueWrapper k: this.kvw) {
+		for (PPKeywordValueWrapper k: this.kvw) {
 			if (prev != null && prev.isParm() && prev.isResolved() && k.getValue().equals(".")) {
 				/*
 					Given...
@@ -265,7 +265,7 @@ public class KeywordOrSymbolicWrapper {
 	public String toString() {
 		StringBuffer buf = new StringBuffer();
 
-		for (KeywordValueWrapper k: this.kvw) {
+		for (PPKeywordValueWrapper k: this.kvw) {
 			buf.append(k.getValue());
 		}
 

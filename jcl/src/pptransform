@@ -1,0 +1,11 @@
+s/JCLParser/JCLPPParser/g
+s/([ \t<(])KeywordOrSymbolicWrapper/\1PPKeywordOrSymbolicWrapper/g
+s/([ \t<(])KeywordValueWrapper/\1PPKeywordValueWrapper/g
+s/([ \t<(])SetSymbolValue/\1PPSetSymbolValue/g
+s/([ \t<(])Proc/\1PPProc/g
+s/([ \t<(])Job/\1PPJob/g
+s/([ \t<(])IncludeStatement/\1PPIncludeStatement/g
+s/([ \t<(])JclStep/\1PPJclStep/g
+s/([ \t<(])DdStatementAmalgamation/\1PPDdStatementAmalgamation/g
+s/([ \t<(])DdStatement/\1PPDdStatement/g
+s/([ \t<(])SingleOrMultipleValueWrapper/\1PPSingleOrMultipleValueWrapper/g

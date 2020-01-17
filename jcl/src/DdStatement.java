@@ -12,6 +12,7 @@ public class DdStatement {
 	private String myName = null;
 	private String ddName = null;
 	private String procName = null;
+	private String fileName = null;
 	private Boolean inProc = null;
 	private JCLParser.DdStatementContext ddStmtCtx = null;
 	private JCLParser.DdStatementConcatenationContext ddStmtConcatCtx = null;
@@ -23,42 +24,43 @@ public class DdStatement {
 	private DispWrapper dispw = null;
 	private DsidWrapper dsidw = null;
 
-	public static ArrayList<DdStatement> bunchOfThese(JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName, String ddName) {
+	public static ArrayList<DdStatement> bunchOfThese(JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName, String ddName, String fileName) {
 		ArrayList<DdStatement> dds = new ArrayList<>();
 
 		if (ddStmtAmlgnCtx.ddStatement() == null) {
 		} else {
-			dds.add(new DdStatement(ddStmtAmlgnCtx.ddStatement(), procName, ddName));
+			dds.add(new DdStatement(ddStmtAmlgnCtx.ddStatement(), procName, ddName, fileName));
 		}
 
 		if (ddStmtAmlgnCtx.ddStatementConcatenation() == null) {
 		} else {
 			for (JCLParser.DdStatementConcatenationContext ddcCtx: ddStmtAmlgnCtx.ddStatementConcatenation()) {
-				dds.add(new DdStatement(ddcCtx, procName, ddName));
+				dds.add(new DdStatement(ddcCtx, procName, ddName, fileName));
 			}
 		}
 
 		return dds;
 	}
 
-	public DdStatement(JCLParser.DdStatementContext ddStmtCtx, String procName, String ddName) {
+	public DdStatement(JCLParser.DdStatementContext ddStmtCtx, String procName, String ddName, String fileName) {
 		this.ddStmtCtx = ddStmtCtx;
 		this.ddSplatCtx = ddStmtCtx.ddParmASTERISK_DATA();
-		this.initialize(procName, ddName);
+		this.initialize(procName, ddName, fileName);
 		this.initializeTediously(this.ddStmtCtx.ddParameter());
 	}
 
-	public DdStatement(JCLParser.DdStatementConcatenationContext ddStmtConcatCtx, String procName, String ddName) {
+	public DdStatement(JCLParser.DdStatementConcatenationContext ddStmtConcatCtx, String procName, String ddName, String fileName) {
 		this.ddStmtConcatCtx = ddStmtConcatCtx;
 		this.ddSplatCtx = ddStmtConcatCtx.ddParmASTERISK_DATA();
-		this.initialize(procName, ddName);
+		this.initialize(procName, ddName, fileName);
 		this.initializeTediously(this.ddStmtConcatCtx.ddParameter());
 	}
 
-	private void initialize(String procName, String ddName) {
+	private void initialize(String procName, String ddName, String fileName) {
 		this.myName = this.getClass().getName();
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.fileName = fileName;
 		this.ddName = ddName;
 	}
 

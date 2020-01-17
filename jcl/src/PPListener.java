@@ -6,23 +6,26 @@ import org.antlr.v4.runtime.tree.*;
 
 public class PPListener extends JCLPPParserBaseListener {
 
-	public ArrayList<Job> jobs = null;
-	public ArrayList<Proc> procs = null;
-	public ArrayList<SetSymbolValue> sets = null;
+	public ArrayList<PPJob> jobs = null;
+	public ArrayList<PPProc> procs = null;
+	public ArrayList<PPOp> stmts = null;
+	public ArrayList<PPSetSymbolValue> sets = null;
 	public String fileName = null;
 	public String procName = null;
-	public Job currJob = null;
-	public Proc currProc = null;
-	public JclStep currJclStep = null;
+	public PPJob currJob = null;
+	public PPProc currProc = null;
+	public PPJclStep currJclStep = null;
 
 	public PPListener(
-			ArrayList<Job> jobs
-			, ArrayList<Proc> procs
+			ArrayList<PPJob> jobs
+			, ArrayList<PPProc> procs
+			, ArrayList<PPOp> stmts
 			, String fileName
 			) {
 		super();
 		this.jobs = jobs;
 		this.procs = procs;
+		this.stmts = stmts;
 		this.fileName = fileName;
 	}
 
@@ -31,41 +34,60 @@ public class PPListener extends JCLPPParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new Job(ctx, fileName);
+		this.currJob = new PPJob(ctx, fileName);
 		this.jobs.add(this.currJob);
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
+		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {
 		this.currJob.addJcllib(ctx);
 	}
 
-	@Override public void enterNotifyStatement(JCLPPParser.NotifyStatementContext ctx) {
+	@Override public void enterCommandStatement(JCLPPParser.CommandStatementContext ctx) {
+		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+	}
 
+	@Override public void enterJclCommandStatement(JCLPPParser.JclCommandStatementContext ctx) {
+		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+	}
+
+	@Override public void enterScheduleStatement(JCLPPParser.ScheduleStatementContext ctx) {
+		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+	}
+
+	@Override public void enterNotifyStatement(JCLPPParser.NotifyStatementContext ctx) {
+		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterOutputStatement(JCLPPParser.OutputStatementContext ctx) {
-
+		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterXmitStatement(JCLPPParser.XmitStatementContext ctx) {
 
 	}
 
-	@Override public void enterSetOperation(JCLPPParser.SetOperationContext ctx) { 
+	@Override public void enterSetOperation(JCLPPParser.SetOperationContext ctx) {
+		/**
+			A SET statement is considered to be part of the current "owning" entity - 
+			either the current Job or the current Proc.
+
+		*/
+
 		if (this.currProc == null) {
-			this.currJob.addSymbolic(new SetSymbolValue(ctx, this.fileName, null));
+			this.currJob.addSymbolic(new PPSetSymbolValue(ctx, this.fileName, null));
 		} else {
-			this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSymbolic(new PPSetSymbolValue(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterProcStatement(JCLPPParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new Proc(ctx, this.fileName);
+		this.currProc = new PPProc(ctx, this.fileName);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);
@@ -73,7 +95,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLPPParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+		this.currProc.addSymbolic(new PPSetSymbolValue(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterPendStatement(JCLPPParser.PendStatementContext ctx) {
@@ -108,14 +130,20 @@ public class PPListener extends JCLPPParserBaseListener {
 			is also attached to Job ZHANN.
 		*/
 		if (this.currProc == null) {
-			this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
+			this.currJob.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName));
 		} else {
-			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
+			this.currProc.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterJclStep(JCLPPParser.JclStepContext ctx) {
-		this.currJclStep = new JclStep(ctx, this.fileName, this.procName);
+		/**
+			A JCL step is considered to be part of the current "owning" entity - 
+			either the current Job or the current Proc.
+
+		*/
+
+		this.currJclStep = new PPJclStep(ctx, this.fileName, this.procName);
 		if (this.currProc == null) {
 			this.currJob.addJclStep(this.currJclStep);
 		} else {
@@ -123,11 +151,12 @@ public class PPListener extends JCLPPParserBaseListener {
 		}
 	}
 
-	@Override public void enterSetOperation(JCLPPParser.SetOperationContext ctx) { 
-		this.sets.add(new SetSymbolValue(ctx));
-	}
-
 	@Override public void exitStartRule(JCLPPParser.StartRuleContext ctx) {
+		/**
+			It is convenient to have the end line of the current Job or Proc.
+			In-stream procs will have been ended by their PEND statement.
+		*/
+
 		if (this.currJob == null) {
 			if (this.currProc == null) {
 			} else {
