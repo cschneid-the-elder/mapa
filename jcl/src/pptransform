@@ -1,6 +1,6 @@
 s/JCLParser/JCLPPParser/g
 s/([ \t<(])KeywordOrSymbolicWrapper/\1PPKeywordOrSymbolicWrapper/g
-s/([ \t<(])KeywordValueWrapper/\1PPKeywordValueWrapper/g
+s/([ \t<(\"])KeywordValueWrapper/\1PPKeywordValueWrapper/g
 s/([ \t<(])SetSymbolValue/\1PPSetSymbolValue/g
 s/([ \t<(])Proc/\1PPProc/g
 s/([ \t<(])Job/\1PPJob/g

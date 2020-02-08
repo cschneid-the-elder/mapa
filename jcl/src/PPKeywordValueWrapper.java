@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 
 public class PPKeywordValueWrapper {
 
+	private String myName = null;
 	private String value = null;
 	private String resolvedValue = null;
 	private int line = -1;
@@ -29,7 +30,7 @@ public class PPKeywordValueWrapper {
 		if (ctx.QUOTED_STRING_FRAGMENT() == null 
 		|| ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
 		} else {
-			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.QUOTED_STRING_FRAGMENT().size(): " + ctx.QUOTED_STRING_FRAGMENT().size());
+			Demo01.LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.QUOTED_STRING_FRAGMENT().size(): " + ctx.QUOTED_STRING_FRAGMENT().size());
 			for (TerminalNode t: ctx.QUOTED_STRING_FRAGMENT()) {
 				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.QUOTED_STRING));
 			}
@@ -38,7 +39,7 @@ public class PPKeywordValueWrapper {
 		if (ctx.KEYWORD_VALUE() == null 
 		|| ctx.KEYWORD_VALUE().size() == 0) {
 		} else {
-			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.KEYWORD_VALUE().size(): " + ctx.KEYWORD_VALUE().size());
+			Demo01.LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.KEYWORD_VALUE().size(): " + ctx.KEYWORD_VALUE().size());
 			for (TerminalNode t: ctx.KEYWORD_VALUE()) {
 				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.UNQUOTED_STRING));
 			}
@@ -47,7 +48,7 @@ public class PPKeywordValueWrapper {
 		if (ctx.SYMBOLIC() == null 
 		|| ctx.SYMBOLIC().size() == 0) {
 		} else {
-			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.SYMBOLIC().size(): " + ctx.SYMBOLIC().size());
+			Demo01.LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.SYMBOLIC().size(): " + ctx.SYMBOLIC().size());
 			for (TerminalNode t: ctx.SYMBOLIC()) {
 				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.SYMBOLIC));
 			}
@@ -56,7 +57,7 @@ public class PPKeywordValueWrapper {
 		if (ctx.QS_AMPERSAND() == null 
 		|| ctx.QS_AMPERSAND().size() == 0) {
 		} else {
-			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.QS_AMPERSAND().size(): " + ctx.QS_AMPERSAND().size());
+			Demo01.LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.QS_AMPERSAND().size(): " + ctx.QS_AMPERSAND().size());
 			for (TerminalNode t: ctx.QS_AMPERSAND()) {
 				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.AMPERSAND));
 			}
@@ -65,7 +66,7 @@ public class PPKeywordValueWrapper {
 		if (ctx.QS_SQUOTE2() == null 
 		|| ctx.QS_SQUOTE2().size() == 0) {
 		} else {
-			Demo01.LOGGER.finest("KeywordValueWrapper bunchOfThese ctx.QS_SQUOTE2().size(): " + ctx.QS_SQUOTE2().size());
+			Demo01.LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.QS_SQUOTE2().size(): " + ctx.QS_SQUOTE2().size());
 			for (TerminalNode t: ctx.QS_SQUOTE2()) {
 				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.SINGLE_QUOTE));
 			}
@@ -79,6 +80,8 @@ public class PPKeywordValueWrapper {
 		this.line = t.getSymbol().getLine();
 		this.posn = t.getSymbol().getCharPositionInLine();
 		this.type = type;
+		this.myName = this.getClass().getName();
+
 
 		switch(type) {
 			case AMPERSAND :
@@ -159,7 +162,7 @@ public class PPKeywordValueWrapper {
 	}
 
 	public void setResolvedValue(String resolvedValue) {
-		Demo01.LOGGER.finest(this.getClass().getName() + " " + this + " setResolvedValue(" + resolvedValue + ")");
+		Demo01.LOGGER.finest(this.myName + " " + this + " setResolvedValue(" + resolvedValue + ")");
 		this.resolvedValue = resolvedValue;
 	}
 

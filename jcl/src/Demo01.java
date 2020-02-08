@@ -17,7 +17,7 @@ public class Demo01{
 
 public static final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
 public static TheCLI CLI = null;
-public static ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
+public static ArrayList<PPSetSymbolValue> symbolics = new ArrayList<>();
 
 public static void main(String[] args) throws Exception {
 
@@ -54,14 +54,15 @@ public static void main(String[] args) throws Exception {
 		symbolics = lookForSetSymbols(CLI.setFile.getCanonicalPath());
 	}
 
-	ArrayList<Proc> procs = new ArrayList<>();
-	ArrayList<Job> jobs = new ArrayList<>();
-	ArrayList<Job> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
+	ArrayList<PPProc> procs = new ArrayList<>();
+	ArrayList<PPJob> jobs = new ArrayList<>();
+	ArrayList<PPOp> stmts = new ArrayList<>();
+	ArrayList<PPJob> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
-		initialProcess(jobs, procs, aFileName);
-		for (Job j: jobs) {
+		initialProcess(jobs, procs, stmts, aFileName);
+		for (PPJob j: jobs) {
 			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes(symbolics);
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
@@ -73,7 +74,7 @@ public static void main(String[] args) throws Exception {
 				are resolved -or- we have determined all that remain are 
 				unresolvable includes.
 			*/
-			Job rJob = iterativelyResolveJobIncludes(j, tmpJobDir, tmpProcDir, jobFile);
+			PPJob rJob = iterativelyResolveJobIncludes(j, tmpJobDir, tmpProcDir, jobFile);
 			rJobs.add(rJob);
 			iterativelyResolveJobProcs(rJob, tmpProcDir);
 			j.resolveParms(symbolics);
@@ -84,19 +85,19 @@ public static void main(String[] args) throws Exception {
 	LOGGER.info("Processing complete");
 }
 
-	public static void initialProcess(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
+	public static void initialProcess(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, ArrayList<PPOp> stmts, String fileName) throws IOException {
 		LOGGER.fine("initialProcess");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
 		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
 
 		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(jobs, procs, fileName);
+		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName);
 	
 		LOGGER.finer("----------walking tree with JobListener");
 	
@@ -104,7 +105,7 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static File rewriteJobAndSeparateInstreamProcs(Job job, File tmpJobDir, File tmpProcDir) throws IOException {
+	public static File rewriteJobAndSeparateInstreamProcs(PPJob job, File tmpJobDir, File tmpProcDir) throws IOException {
 		/*
 			Rewrite one job from the current file, separating any instream procs into their own
 			files to be processed later.
@@ -140,7 +141,7 @@ public static void main(String[] args) throws Exception {
 		PrintWriter out = new PrintWriter(tmp);
 		LOGGER.finest("tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
-		Proc aProc = null;
+		PPProc aProc = null;
 		File procTmp = null;
 		PrintWriter procOut = null;
 		while ((inLine = src.readLine()) != null) {
@@ -156,7 +157,7 @@ public static void main(String[] args) throws Exception {
 					procTmp = null;
 					procOut = null;
 				}
-				IncludeStatement i = job.includeStatementAt(src.getLineNumber());
+				PPIncludeStatement i = job.includeStatementAt(src.getLineNumber());
 				if (i == null) {
 					out.println(inLine);
 				} else {
@@ -185,7 +186,7 @@ public static void main(String[] args) throws Exception {
 	}
 
 	public static Boolean writeTheIncludeContent(
-							IncludeStatement i
+							PPIncludeStatement i
 							, PrintWriter out
 							, File tmpProcDir
 							, ArrayList<String> jcllib)
@@ -244,38 +245,39 @@ public static void main(String[] args) throws Exception {
 		out.close();
 	}
 
-	public static Job iterativelyResolveJobIncludes(Job j, File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
+	public static PPJob iterativelyResolveJobIncludes(PPJob j, File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
 		LOGGER.fine("iterativelyResolveJobIncludes j = |" + j + "| tmpJobDir = |" + tmpJobDir.getName() + "| tmpProcDir = |" + tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
 
-		Job aJob = j;
+		PPJob aJob = j;
 		File jobFile = initialJobFile;
 		Boolean iterating = true;
 		int sanity = 0;
 		do {
 			LOGGER.finest("jobFile = |" + jobFile.getName() + "|");
-			IncludeStatement[] unresolved_includes1 = 
+			PPIncludeStatement[] unresolved_includes1 = 
 				aJob.getAllIncludes().stream()
 				.filter(i -> !i.isResolved())
-				.toArray(IncludeStatement[]::new);
-			ArrayList<IncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
-			ArrayList<Proc> dummyProcs = new ArrayList<>();
-			ArrayList<Job> thisJob = new ArrayList<>();
-			subsequentProcess(thisJob, dummyProcs, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+				.toArray(PPIncludeStatement[]::new);
+			ArrayList<PPIncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
+			ArrayList<PPProc> dummyProcs = new ArrayList<>();
+			ArrayList<PPJob> thisJob = new ArrayList<>();
+			ArrayList<PPOp> dummyStmts = new ArrayList<>();
+			subsequentProcess(thisJob, dummyProcs, dummyStmts, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes(symbolics);
-			IncludeStatement[] unresolved_includes2 = 
+			PPIncludeStatement[] unresolved_includes2 = 
 				thisJob.get(0).getAllIncludes().stream()
 				.filter(i -> !i.isResolved())
-				.toArray(IncludeStatement[]::new);
-			ArrayList<IncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
+				.toArray(PPIncludeStatement[]::new);
+			ArrayList<PPIncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
 			//are all includes from before still there after? yes = stop iterating
 			LOGGER.finest("includes_before = " + includes_before);
 			LOGGER.finest("includes_after  = " + includes_after);
 			if (includes_after.size() == includes_before.size()) {
 				LOGGER.finest("includes_after.size() == includes_before.size()");
 				Boolean allContained = true;
-				for (IncludeStatement ia: includes_after) {
+				for (PPIncludeStatement ia: includes_after) {
 					Boolean contains = false;
-					for (IncludeStatement ib: includes_before) {
+					for (PPIncludeStatement ib: includes_before) {
 						if (ia.isProbablyTheSame(ib)) {
 							LOGGER.finest("ia = |" + ia + "| ib = |" + ib + "| isProbablyTheSame");
 							contains = true;
@@ -302,19 +304,19 @@ public static void main(String[] args) throws Exception {
 		return aJob;
 	}
 
-	public static void subsequentProcess(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
+	public static void subsequentProcess(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, ArrayList<PPOp> stmts, String fileName) throws IOException {
 		LOGGER.fine("subsequentProcess jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
 		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
 
 		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(jobs, procs, fileName);
+		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName);
 	
 		LOGGER.finer("----------walking tree with JobListener");
 	
@@ -322,7 +324,7 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static File rewriteJob(Job job, File tmpJobDir, File tmpProcDir) throws IOException {
+	public static File rewriteJob(PPJob job, File tmpJobDir, File tmpProcDir) throws IOException {
 		/*
 			Rewrite one job from the current file.
 
@@ -342,7 +344,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		while ((inLine = src.readLine()) != null) {
-			IncludeStatement i = job.includeStatementAt(src.getLineNumber());
+			PPIncludeStatement i = job.includeStatementAt(src.getLineNumber());
 			if (i == null) {
 				out.println(inLine);
 			} else {
@@ -357,9 +359,9 @@ public static void main(String[] args) throws Exception {
 		return tmp;
 	}
 
-	public static void iterativelyResolveJobProcs(Job job, File tmpProcDir) throws IOException {
+	public static void iterativelyResolveJobProcs(PPJob job, File tmpProcDir) throws IOException {
 
-		for (JclStep s: job.getSteps()) {
+		for (PPJclStep s: job.getSteps()) {
 			if (!s.isExecProc()) continue;
 			String procFileName = s.getProcExecuted();
 		}
@@ -448,19 +450,19 @@ public static void main(String[] args) throws Exception {
 		return null;
 	}
 
-	public static ArrayList<SetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
+	public static ArrayList<PPSetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
 		LOGGER.fine("lookForSetSymbols");
-		ArrayList<SetSymbolValue> sets = new ArrayList<>();
+		ArrayList<PPSetSymbolValue> sets = new ArrayList<>();
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
 		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
 
 		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		SetSymbolValueListener setSymbolValueListener = new SetSymbolValueListener(sets, fileName);
+		PPSetSymbolValueListener setSymbolValueListener = new PPSetSymbolValueListener(sets, fileName);
 	
 		LOGGER.finer("----------walking tree with setSymbolValueListener");
 	

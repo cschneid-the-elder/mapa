@@ -31,6 +31,7 @@ public class Symbolic {
 	}
 
 	public Symbolic(org.antlr.v4.runtime.tree.TerminalNode tn, String fileName, String procName) {
+		this.myName = this.getClass().getName();
 		this.terminalNode = tn;
 		this.token = tn.getSymbol();
 		this.fileName = fileName;

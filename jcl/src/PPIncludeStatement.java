@@ -81,6 +81,7 @@ public class PPIncludeStatement {
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
+		Demo01.LOGGER.fine(this + " resolveParms");
 		this.kywd.resolveParms(sets);
 	}
 

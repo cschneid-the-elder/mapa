@@ -81,6 +81,7 @@ public class IncludeStatement {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
+		Demo01.LOGGER.fine(this + " resolveParms");
 		this.kywd.resolveParms(sets);
 	}
 

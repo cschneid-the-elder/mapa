@@ -6,6 +6,7 @@ import org.antlr.v4.runtime.tree.*;
 
 public class KeywordValueWrapper {
 
+	private String myName = null;
 	private String value = null;
 	private String resolvedValue = null;
 	private int line = -1;
@@ -79,6 +80,8 @@ public class KeywordValueWrapper {
 		this.line = t.getSymbol().getLine();
 		this.posn = t.getSymbol().getCharPositionInLine();
 		this.type = type;
+		this.myName = this.getClass().getName();
+
 
 		switch(type) {
 			case AMPERSAND :
@@ -159,7 +162,7 @@ public class KeywordValueWrapper {
 	}
 
 	public void setResolvedValue(String resolvedValue) {
-		Demo01.LOGGER.finest(this.getClass().getName() + " " + this + " setResolvedValue(" + resolvedValue + ")");
+		Demo01.LOGGER.finest(this.myName + " " + this + " setResolvedValue(" + resolvedValue + ")");
 		this.resolvedValue = resolvedValue;
 	}
 
