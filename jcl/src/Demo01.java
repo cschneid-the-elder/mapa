@@ -99,7 +99,7 @@ public static void main(String[] args) throws Exception {
 	
 		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName);
 	
-		LOGGER.finer("----------walking tree with JobListener");
+		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	
 		jclwalker.walk(jobListener, jcltree);
 
@@ -133,7 +133,7 @@ public static void main(String[] args) throws Exception {
 
 		File aFile = new File(job.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + job.getUUID());
+		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + job.getJobName() + "-" + job.getUUID());
 		if (CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -254,21 +254,13 @@ public static void main(String[] args) throws Exception {
 		int sanity = 0;
 		do {
 			LOGGER.finest("jobFile = |" + jobFile.getName() + "|");
-			PPIncludeStatement[] unresolved_includes1 = 
-				aJob.getAllIncludes().stream()
-				.filter(i -> !i.isResolved())
-				.toArray(PPIncludeStatement[]::new);
-			ArrayList<PPIncludeStatement> includes_before = new ArrayList<>(Arrays.asList(unresolved_includes1));
+			ArrayList<PPIncludeStatement> includes_before = aJob.getAllUnresolvedIncludes();
 			ArrayList<PPProc> dummyProcs = new ArrayList<>();
 			ArrayList<PPJob> thisJob = new ArrayList<>();
 			ArrayList<PPOp> dummyStmts = new ArrayList<>();
 			subsequentProcess(thisJob, dummyProcs, dummyStmts, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes(symbolics);
-			PPIncludeStatement[] unresolved_includes2 = 
-				thisJob.get(0).getAllIncludes().stream()
-				.filter(i -> !i.isResolved())
-				.toArray(PPIncludeStatement[]::new);
-			ArrayList<PPIncludeStatement> includes_after = new ArrayList<>(Arrays.asList(unresolved_includes2));
+			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
 			LOGGER.finest("includes_before = " + includes_before);
 			LOGGER.finest("includes_after  = " + includes_after);
@@ -318,7 +310,7 @@ public static void main(String[] args) throws Exception {
 	
 		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName);
 	
-		LOGGER.finer("----------walking tree with JobListener");
+		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	
 		jclwalker.walk(jobListener, jcltree);
 
@@ -335,7 +327,7 @@ public static void main(String[] args) throws Exception {
 
 		File aFile = new File(job.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + job.getUUID());
+		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + job.getJobName() + "-" + job.getUUID());
 		if (CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -381,7 +373,7 @@ public static void main(String[] args) throws Exception {
 		*/
 
 		LOGGER.fine("writeTheProcContent");
-		File tmp = new File(tmpProcDir.toString() + File.separator + "proc-" + step.getProc().getUUID() + step.getUUID());
+		File tmp = new File(tmpProcDir.toString() + File.separator + "proc-" + step.getProc().getProcName() + "-" + step.getProc().getUUID() + "-" + step.getUUID());
 		if (CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();

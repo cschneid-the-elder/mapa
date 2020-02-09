@@ -23,8 +23,6 @@ public class JclStep {
 	private JCLParser.ExecPgmStatementContext execPgmStmtCtx = null;
 	private JCLParser.ExecProcStatementContext execProcStmtCtx = null;
 	private List<JCLParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
-	private List<JCLParser.IncludeStatementContext> includeStmtCtxs = null;
-	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
 
@@ -43,12 +41,7 @@ public class JclStep {
 		this.execPgmStmtCtx = this.execStmtCtx.execPgmStatement();
 		this.execProcStmtCtx = this.execStmtCtx.execProcStatement();
 		this.ddStmtAmlgnCtxs = this.jclStepCtx.ddStatementAmalgamation();
-		this.includeStmtCtxs = this.jclStepCtx.includeStatement();
 		
-		for (JCLParser.IncludeStatementContext i: this.includeStmtCtxs) {
-			this.includes.add(new IncludeStatement(i, this.fileName, this.procName));
-		}
-
 		if (this.isExecProc() && this.isExecPgm()) {
 			Demo01.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
 		} else if (!this.isExecProc() && !this.isExecPgm()) {
@@ -110,50 +103,6 @@ public class JclStep {
 		return this.line;
 	}
 
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
-		/**
-			Of note here: an INCLUDE that is attached to a JclStep may not have
-			anything to do with the JclStep.  It is syntactically impossible to
-			discern the coder's intent.  Consider...
-
-			//RIGEL   EXEC PGM=IEFBR14
-			//        INCLUDE MEMBER=DARGO
-			//PILOT   EXEC PGM=IEFBR14
-
-			...where the member DARGO contains...
-
-			//        SET A=1,B=2,C=3
-			//STARK   EXEC PROC=NORANTI
-			//        INCLUDE MEMBER=SIKOZU&A
-
-			...and thus statements unrelated to the JclStep will be inserted into
-			the jobstream.
-
-			Subsequent parsing takes care of this, and in fact is one of the reasons
-			the original JCL is parsed iteratively.
-		*/
-
-		Demo01.LOGGER.finest(this.myName + " " + this.stepName + " resolveParmedIncludes");
-		for (IncludeStatement i: this.includes) {
-			i.resolveParms(symbolics);
-		}
-		Demo01.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
-
-		if (this.proc != null) {
-			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>();
-			for (SetSymbolValue s: symbolics) {
-				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < this.line)
-					|| s.getSetType() != SetTypeOfSymbolValue.SET
-				) {
-					mergedSymbolics.add(s);
-				}
-			}
-			mergedSymbolics.addAll(this.symbolics);
-			Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving proc " + this.proc);
-			this.proc.resolveParmedIncludes(mergedSymbolics);
-		}
-	}
-
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
@@ -170,18 +119,6 @@ public class JclStep {
 
 	public UUID getUUID() {
 		return this.uuid;
-	}
-
-	public IncludeStatement includeStatementAt(int aLine) {
-		for (IncludeStatement i: this.includes) {
-			if (i.getLine() == aLine) return i;
-		}
-
-		return null;
-	}
-
-	public ArrayList<IncludeStatement> getIncludes() {
-		return this.includes;
 	}
 
 	public String toString() {

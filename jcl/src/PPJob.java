@@ -18,6 +18,7 @@ public class PPJob {
 	private ArrayList<PPIncludeStatement> includes = new ArrayList<>();
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
 	private String fileName = null;
+	private String jobName = null;
 	private int startLine = -1;
 	private int endLine = -1;
 
@@ -30,6 +31,7 @@ public class PPJob {
 	private void initialize() {
 		myName = this.getClass().getName();
 		this.startLine = this.jobCardCtx.JOB().getSymbol().getLine();
+		this.jobName = this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}
 
 	public void addJcllib(JCLPPParser.JcllibStatementContext ctx) {
@@ -100,10 +102,6 @@ public class PPJob {
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + this.includes);
 
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + this.steps);
-		for (PPJclStep s: this.steps) {
-			s.resolveParmedIncludes(mergedSymbolics);
-		}
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {
@@ -172,10 +170,6 @@ public class PPJob {
 			if (i.getLine() == aLine) return i;
 		}
 
-		for (PPJclStep s: steps) {
-			PPIncludeStatement i = s.includeStatementAt(aLine);
-			if (i != null) return i;
-		}
 		return null;
 	}
 
@@ -195,6 +189,10 @@ public class PPJob {
 		return this.uuid;
 	}
 
+	public String getJobName() {
+		return this.jobName;
+	}
+
 	public int getStartLine() {
 		return this.startLine;
 	}
@@ -208,13 +206,15 @@ public class PPJob {
 	}
 
 	public ArrayList<PPIncludeStatement> getAllIncludes() {
-		ArrayList<PPIncludeStatement> i = new ArrayList<>(this.includes);
+		return this.includes;
+	}
 
-		for (PPJclStep s: steps) {
-			i.addAll(s.getIncludes());
-		}
-
-		return i;
+	public ArrayList<PPIncludeStatement> getAllUnresolvedIncludes() {
+		PPIncludeStatement[] unresolved_includes = 
+				this.getAllIncludes().stream()
+				.filter(i -> !i.isResolved())
+				.toArray(PPIncludeStatement[]::new);
+		return new ArrayList<PPIncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
 	public ArrayList<String> getJcllibStrings() {
@@ -225,10 +225,6 @@ public class PPJob {
 		}
 
 		return libs;
-	}
-
-	public String getJobName() {
-		return this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}
 
 	public String toString() {

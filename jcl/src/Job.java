@@ -18,6 +18,7 @@ public class Job {
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
 	private String fileName = null;
+	private String jobName = null;
 	private int startLine = -1;
 	private int endLine = -1;
 
@@ -30,6 +31,7 @@ public class Job {
 	private void initialize() {
 		myName = this.getClass().getName();
 		this.startLine = this.jobCardCtx.JOB().getSymbol().getLine();
+		this.jobName = this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}
 
 	public void addJcllib(JCLParser.JcllibStatementContext ctx) {
@@ -100,10 +102,6 @@ public class Job {
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + this.includes);
 
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + this.steps);
-		for (JclStep s: this.steps) {
-			s.resolveParmedIncludes(mergedSymbolics);
-		}
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
@@ -172,10 +170,6 @@ public class Job {
 			if (i.getLine() == aLine) return i;
 		}
 
-		for (JclStep s: steps) {
-			IncludeStatement i = s.includeStatementAt(aLine);
-			if (i != null) return i;
-		}
 		return null;
 	}
 
@@ -195,6 +189,10 @@ public class Job {
 		return this.uuid;
 	}
 
+	public String getJobName() {
+		return this.jobName;
+	}
+
 	public int getStartLine() {
 		return this.startLine;
 	}
@@ -208,13 +206,15 @@ public class Job {
 	}
 
 	public ArrayList<IncludeStatement> getAllIncludes() {
-		ArrayList<IncludeStatement> i = new ArrayList<>(this.includes);
+		return this.includes;
+	}
 
-		for (JclStep s: steps) {
-			i.addAll(s.getIncludes());
-		}
-
-		return i;
+	public ArrayList<IncludeStatement> getAllUnresolvedIncludes() {
+		IncludeStatement[] unresolved_includes = 
+				this.getAllIncludes().stream()
+				.filter(i -> !i.isResolved())
+				.toArray(IncludeStatement[]::new);
+		return new ArrayList<IncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
 	public ArrayList<String> getJcllibStrings() {
@@ -225,10 +225,6 @@ public class Job {
 		}
 
 		return libs;
-	}
-
-	public String getJobName() {
-		return this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}
 
 	public String toString() {

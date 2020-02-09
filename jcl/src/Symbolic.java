@@ -47,7 +47,7 @@ public class Symbolic {
 	}
 
 	public String getParmName() {
-		return this.getText();
+		return this.getText().substring(1);
 	}
 
 	public int getLine() {
@@ -67,6 +67,7 @@ public class Symbolic {
 	}
 
 	public void setResolvedValue(String v) {
+		Demo01.LOGGER.finer(myName + " text = |" + this.getText() + "| setResolvedValue(" + v + ")");
 		this.resolvedText = v;
 	}
 
@@ -111,6 +112,18 @@ public class Symbolic {
 					break;
 			}
 		}
+	}
+
+	public String toString() {
+		return
+			this.myName
+			+ " text = |" + this.getText()
+			+ "| resolvedText = |" + this.getResolvedText()
+			+ "| line = |" + this.getLine()
+			+ "| posn = |" + this.getPosn()
+			+ "| fileName = |" + this.getFileName()
+			+ "| procName = |" + this.getProcName()
+			+ "|";
 	}
 
 	public Boolean equals(Symbolic s) {

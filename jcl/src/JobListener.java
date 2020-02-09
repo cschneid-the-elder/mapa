@@ -72,12 +72,8 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterIncludeStatement(JCLParser.IncludeStatementContext ctx) {
 		/**
-			If a JclStep has been encountered then any IncludeStatement encountered will
-			be picked up as part of a JclStep.  If a JclStep has _not_ been encountered then
-			any IncludeStatement encountered stands on its own and is not considered a part
-			of any JclStep and therefore must be added to the "owning" entity - either the
-			current Job, the current Proc, or the current InstreamProc.  Whether there is
-			a currently extant JclStep is reset on encountering a PROC or PEND statement.
+			An IncludeStatement is considered to be part of the current "owning" entity - 
+			either the current Job or the current Proc.
 
 			Consider...
 
@@ -92,11 +88,11 @@ public class JobListener extends JCLParserBaseListener {
 			//JS01  EXEC PROC=RYGEL
 			//      INCLUDE MEMBER=AERYN
 
-			...the IncludeStatement CHIANA is standalone and attached to Job ZHANN.  The
-			IncludeStatement DARGO is standalone and attached to InstreamProc RYGEL.  The
-			IncludeStatement TALYN is attached to JclStep PS01.  The IncludeStatement
-			CRICHTON is standalone and attached to Job ZHANN.  The IncludeStatement AERYN
-			is attached to JS01.
+			...the IncludeStatement CHIANA is attached to Job ZHANN.  The
+			IncludeStatement DARGO is standalone and attached to Proc RYGEL.  The
+			IncludeStatement TALYN is also attached to Proc RYGEL.  The IncludeStatement
+			CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
+			is also attached to Job ZHANN.
 		*/
 		if (this.currJclStep == null) {
 			if (this.currProc == null) {

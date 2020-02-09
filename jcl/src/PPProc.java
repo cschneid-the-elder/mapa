@@ -112,6 +112,18 @@ public class PPProc {
 		return null;
 	}
 
+	public ArrayList<PPIncludeStatement> getAllIncludes() {
+		return this.includes;
+	}
+
+	public ArrayList<PPIncludeStatement> getAllUnresolvedIncludes() {
+		PPIncludeStatement[] unresolved_includes = 
+				this.getAllIncludes().stream()
+				.filter(i -> !i.isResolved())
+				.toArray(PPIncludeStatement[]::new);
+		return new ArrayList<PPIncludeStatement>(Arrays.asList(unresolved_includes));
+	}
+
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> symbolics) {
 		Demo01.LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
 		ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
@@ -121,11 +133,6 @@ public class PPProc {
 			i.resolveParms(mergedSymbolics);
 		}
 		Demo01.LOGGER.finest(myName + " includes (after resolving): " + includes);
-
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving steps " + steps);
-		for (PPJclStep s: steps) {
-			s.resolveParmedIncludes(mergedSymbolics);
-		}
 
 	}
 
