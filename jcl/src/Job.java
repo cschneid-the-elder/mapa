@@ -26,6 +26,7 @@ public class Job {
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
 		this.initialize();
+		Demo01.LOGGER.finer(this.myName + " " + this.jobName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
@@ -35,29 +36,29 @@ public class Job {
 	}
 
 	public void addJcllib(JCLParser.JcllibStatementContext ctx) {
-		Demo01.LOGGER.finest(myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
+		Demo01.LOGGER.finest(this.myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
 		List<JCLParser.KeywordOrSymbolicContext> kywdCtxList = ctx.singleOrMultipleValue().keywordOrSymbolic();
-		Demo01.LOGGER.finest(myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
+		Demo01.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
 
 		this.jcllibCtx = ctx;
 		if (kywdCtxList == null || kywdCtxList.size() == 0) {
 			kywdCtxList = ctx.singleOrMultipleValue().parenList().keywordOrSymbolic();
-			Demo01.LOGGER.finest(myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
+			Demo01.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
 		}
 
 		for (JCLParser.KeywordOrSymbolicContext k: kywdCtxList) {
-			Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList k: " + k);
-			Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
-			Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
-			Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
+			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k: " + k);
+			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
+			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
+			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
 			for (TerminalNode t: k.KEYWORD_VALUE()) {
-				Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
+				Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 			for (TerminalNode t: k.SYMBOLIC()) {
-				Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
+				Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 			for (TerminalNode t: k.QUOTED_STRING_FRAGMENT()) {
-				Demo01.LOGGER.finest(myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
+				Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 		}
 
@@ -93,19 +94,19 @@ public class Job {
 	}
 
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
+		Demo01.LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 
 		for (IncludeStatement i: this.includes) {
 			i.resolveParms(mergedSymbolics);
 		}
-		Demo01.LOGGER.finest(myName + " includes (after resolving): " + this.includes);
+		Demo01.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
+		Demo01.LOGGER.finest(this.myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
 
 
 		for (JclStep step: this.steps) {

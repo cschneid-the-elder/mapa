@@ -57,8 +57,8 @@ public class PPKeywordOrSymbolicWrapper {
 			kywdList.add(new PPKeywordOrSymbolicWrapper(k, null));
 		}
 
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
@@ -69,8 +69,8 @@ public class PPKeywordOrSymbolicWrapper {
 			kywdList.add(new PPKeywordOrSymbolicWrapper(k, procName));
 		}
 
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 

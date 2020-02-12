@@ -20,7 +20,7 @@ public class PPDdStatement {
 	private ArrayList<String> blankParms = new ArrayList<>();
 	private Hashtable<String, PPKeywordOrSymbolicWrapper> kosParms = new Hashtable<>();
 	private Hashtable<String, PPSingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
-	private ArrayList<Symbolic> symbolics = new ArrayList<>();
+	private ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
 	public static ArrayList<PPDdStatement> bunchOfThese(JCLPPParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName, String ddName, String fileName) {
 		ArrayList<PPDdStatement> dds = new ArrayList<>();
@@ -97,7 +97,7 @@ public class PPDdStatement {
 			}
 
 			if (ddParm.SYMBOLIC() != null) {
-				this.symbolics = Symbolic.bunchOfThese(ddParm.SYMBOLIC(), this.fileName, this.procName);
+				this.symbolics = PPSymbolic.bunchOfThese(ddParm.SYMBOLIC(), this.fileName, this.procName);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class PPDdStatement {
 			somv.resolveParms(sets);
 		}
 
-		for (Symbolic s: this.symbolics) {
+		for (PPSymbolic s: this.symbolics) {
 			s.resolve(sets);
 		}
 	}

@@ -42,6 +42,7 @@ public class PPProc {
 		this.procCtx = procCtx;
 		this.fileName = fileName;
 		this.initialize();
+		Demo01.LOGGER.finer(this.myName + " " + this.procName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {

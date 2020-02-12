@@ -32,6 +32,7 @@ public class JclStep {
 		this.procName = procName;
 		this.inProc = !(procName == null);
 		this.initialize();
+		Demo01.LOGGER.finer(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
 
 	}
 

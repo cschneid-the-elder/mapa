@@ -12,8 +12,10 @@ public class PPKeywordValueWrapper {
 	private int line = -1;
 	private int posn = -1;
 	private KeywordValueType type = null;
+	private PPSymbolic symbolic = null;
 
-	public static ArrayList<PPKeywordValueWrapper> bunchOfThese(List<JCLPPParser.KeywordOrSymbolicContext> ctxList) {		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+	public static ArrayList<PPKeywordValueWrapper> bunchOfThese(List<JCLPPParser.KeywordOrSymbolicContext> ctxList) {
+		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
 
 		ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
 
@@ -90,12 +92,17 @@ public class PPKeywordValueWrapper {
 			case SINGLE_QUOTE :
 				this.setResolvedValue("'");
 				break;
+			case SYMBOLIC :
+				this.symbolic = new PPSymbolic(t, null, null);
+				break;
 			default :
 				break;
 		}
 	}
 
-	public PPKeywordValueWrapper(String value, int line, int posn, KeywordValueType type) {
+/*	public PPKeywordValueWrapper(String value, int line, int posn, KeywordValueType type) {
+		Demo01.LOGGER.warning("PPKeywordValueWrapper instantiated via PPKeywordValueWrapper(String value, int line, int posn, KeywordValueType type)");
+
 		this.value = value;
 		this.line = line;
 		this.posn = posn;
@@ -111,7 +118,7 @@ public class PPKeywordValueWrapper {
 			default :
 				break;
 		}
-	}
+	}*/
 
 	public String getValue() {
 		return this.value;

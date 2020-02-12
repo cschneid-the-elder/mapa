@@ -10,7 +10,7 @@ public class PPOp {
 	private String fileName = null;
 	private String originalText = null;
 	private String resolvedText = null;
-	private Hashtable<Symbolic, String> symbolics = new Hashtable<>();
+	private Hashtable<PPSymbolic, String> symbolics = new Hashtable<>();
 	private Boolean inProc = false;
 	private String procName = null;
 
@@ -22,7 +22,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (Symbolic s: Symbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
 			symbolics.put(s, null);
 		}
 		this.initialize();
@@ -36,7 +36,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (Symbolic s: Symbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
 			symbolics.put(s, null);
 		}
 		this.initialize();
@@ -50,7 +50,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (Symbolic s: Symbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
 			symbolics.put(s, null);
 		}
 		this.initialize();
@@ -64,7 +64,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (Symbolic s: Symbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
 			symbolics.put(s, null);
 		}
 		this.initialize();
@@ -78,7 +78,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (Symbolic s: Symbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
 			symbolics.put(s, null);
 		}
 		this.initialize();
@@ -92,7 +92,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (Symbolic s: Symbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
 			symbolics.put(s, null);
 		}
 		this.initialize();
@@ -103,7 +103,7 @@ public class PPOp {
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
-		for (Symbolic s: this.symbolics.keySet()) {
+		for (PPSymbolic s: this.symbolics.keySet()) {
 			s.resolve(sets);
 			this.symbolics.put(s, s.getResolvedText());
 		}

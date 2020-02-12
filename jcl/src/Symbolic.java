@@ -75,14 +75,14 @@ public class Symbolic {
 		return this.resolvedText;
 	}
 
-	public void resolve(ArrayList<PPSetSymbolValue> sets) {
+	public void resolve(ArrayList<SetSymbolValue> sets) {
 		Demo01.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
 
-		PPSetSymbolValue[] matching_sets =
+		SetSymbolValue[] matching_sets =
 			sets.stream()
 			.filter(s -> s.getParmName().equals(this.getParmName()))
-			.toArray(PPSetSymbolValue[]::new);
-		for(PPSetSymbolValue s: matching_sets) {
+			.toArray(SetSymbolValue[]::new);
+		for(SetSymbolValue s: matching_sets) {
 			Demo01.LOGGER.finest(myName + " s: " + s);
 			switch(s.getSetType()) {
 				case SET:

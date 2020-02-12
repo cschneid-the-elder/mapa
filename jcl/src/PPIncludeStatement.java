@@ -16,6 +16,7 @@ public class PPIncludeStatement {
 	private int posn = -1;  // 0 to n-1
 	public Boolean inProc = false;
 	public String procName = null;
+	private String nameField = null;
 
 	public PPIncludeStatement(
 		JCLPPParser.IncludeStatementContext ctx
@@ -28,10 +29,15 @@ public class PPIncludeStatement {
 		this.procName = procName;
 		this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
 		this.initialize();
+		Demo01.LOGGER.finer(this.myName + " " + this.nameField + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
 		myName = this.getClass().getName();
+		if (this.ctx.NAME_FIELD() == null) {
+		} else {
+			this.nameField = this.ctx.NAME_FIELD().getSymbol().getText();
+		}
 	}
 
 	public int getLine() {
