@@ -78,6 +78,11 @@ public static void main(String[] args) throws Exception {
 			rJobs.add(rJob);
 			iterativelyResolveJobProcs(rJob, tmpProcDir);
 			j.resolveParms(symbolics);
+			/*
+				Includes are resolved to the extent possible.
+				Now must rewrite job with resolved values for parms substituted.
+				Merge with procs?
+			*/
 		}
 	}
 

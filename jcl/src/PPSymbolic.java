@@ -4,7 +4,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
-public class Symbolic {
+public class PPSymbolic {
 
 	private String myName = null;
 	private String fileName = null;
@@ -17,20 +17,20 @@ public class Symbolic {
 	private int line = -1;
 	private int posn = -1;
 
-	public static ArrayList<Symbolic> bunchOfThese(List<org.antlr.v4.runtime.tree.TerminalNode> tn
+	public static ArrayList<PPSymbolic> bunchOfThese(List<org.antlr.v4.runtime.tree.TerminalNode> tn
 			, String fileName
 			, String procName
 			) {
-		ArrayList<Symbolic> symbolics = new ArrayList<>();		
+		ArrayList<PPSymbolic> symbolics = new ArrayList<>();		
 
 		for (org.antlr.v4.runtime.tree.TerminalNode aNode: tn) {
-			symbolics.add(new Symbolic(aNode, fileName, procName));
+			symbolics.add(new PPSymbolic(aNode, fileName, procName));
 		}
 
 		return symbolics;
 	}
 
-	public Symbolic(org.antlr.v4.runtime.tree.TerminalNode tn, String fileName, String procName) {
+	public PPSymbolic(org.antlr.v4.runtime.tree.TerminalNode tn, String fileName, String procName) {
 		this.myName = this.getClass().getName();
 		this.terminalNode = tn;
 		this.token = tn.getSymbol();
@@ -80,14 +80,14 @@ public class Symbolic {
 		return this.resolvedText;
 	}
 
-	public void resolve(ArrayList<SetSymbolValue> sets) {
+	public void resolve(ArrayList<PPSetSymbolValue> sets) {
 		Demo01.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
 
-		SetSymbolValue[] matching_sets =
+		PPSetSymbolValue[] matching_sets =
 			sets.stream()
 			.filter(s -> s.getParmName().equals(this.getParmName()))
-			.toArray(SetSymbolValue[]::new);
-		for(SetSymbolValue s: matching_sets) {
+			.toArray(PPSetSymbolValue[]::new);
+		for(PPSetSymbolValue s: matching_sets) {
 			Demo01.LOGGER.finest(myName + " s: " + s);
 			switch(s.getSetType()) {
 				case SET:
@@ -131,7 +131,7 @@ public class Symbolic {
 			+ "|";
 	}
 
-	public Boolean equals(Symbolic s) {
+	public Boolean equals(PPSymbolic s) {
 		return
 			this.getText().equals(s.getText())
 			&& this.getLine() == s.getLine()

@@ -85,7 +85,7 @@ public class PPKeywordValueWrapper {
 		this.myName = this.getClass().getName();
 
 
-		switch(type) {
+		switch(this.type) {
 			case AMPERSAND :
 				this.setResolvedValue("&");
 				break;
@@ -125,10 +125,10 @@ public class PPKeywordValueWrapper {
 	}
 
 	public String getResolvedValue() {
-		if (this.resolvedValue == null) {
-			return this.getValue();
+		if (this.isParm() && this.symbolic.isResolved()) {
+			return this.symbolic.getResolvedText();
 		} else {
-			return this.resolvedValue;
+			return this.getValue();
 		}
 	}
 
@@ -150,7 +150,7 @@ public class PPKeywordValueWrapper {
 
 	public Boolean isResolved() {
 		if (this.isParm()) {
-			return this.resolvedValue != null;
+			return this.symbolic.isResolved();
 		} else {
 			return true;
 		}
@@ -165,6 +165,16 @@ public class PPKeywordValueWrapper {
 			return this.value.substring(1);
 		} else {
 			return null;
+		}
+	}
+
+	public void resolve(ArrayList<PPSetSymbolValue> sets) {
+		switch(this.type) {
+			case SYMBOLIC :
+				this.symbolic.resolve(sets);
+				break;
+			default :
+				break;
 		}
 	}
 

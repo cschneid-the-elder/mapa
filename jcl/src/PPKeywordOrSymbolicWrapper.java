@@ -133,6 +133,11 @@ public class PPKeywordOrSymbolicWrapper {
 
 		Demo01.LOGGER.finest(myName + " resolveParms this: " + this);
 
+		for(PPKeywordValueWrapper k: this.kvw) {
+			k.resolve(sets);
+		}
+
+		/*
 		PPKeywordValueWrapper[] symbolic_kvw = 
 			kvw.stream()
 			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC)
@@ -175,6 +180,7 @@ public class PPKeywordOrSymbolicWrapper {
 				}
 			}
 		}
+		*/
 	}
 /*
 	private Boolean parmSetByExec(ArrayList<PPSetSymbolValue> sets, PPSetSymbolValue v) {
