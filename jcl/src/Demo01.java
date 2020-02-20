@@ -77,7 +77,7 @@ public static void main(String[] args) throws Exception {
 			PPJob rJob = iterativelyResolveJobIncludes(j, tmpJobDir, tmpProcDir, jobFile);
 			rJobs.add(rJob);
 			iterativelyResolveJobProcs(rJob, tmpProcDir);
-			j.resolveParms(symbolics);
+			rJob.resolveParms(symbolics);
 			/*
 				Includes are resolved to the extent possible.
 				Now must rewrite job with resolved values for parms substituted.
@@ -292,7 +292,7 @@ public static void main(String[] args) throws Exception {
 			}
 			if (iterating) {
 				aJob = thisJob.get(0);
-				jobFile = rewriteJob(aJob, tmpJobDir, tmpProcDir);
+				jobFile = aJob.rewriteJobWithIncludesResolved(tmpJobDir, tmpProcDir, CLI.saveTemp);
 			}
 			sanity++;
 		} while(iterating && (sanity < 20));

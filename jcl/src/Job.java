@@ -1,5 +1,8 @@
 
 import java.util.*;
+import java.io.*;
+import java.nio.file.*;
+import java.nio.file.attribute.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -227,9 +230,130 @@ public class Job {
 
 		return libs;
 	}
+/*
+	public File rewriteWithParmsResolved(File appRootDir, Boolean saveTemp) throws IOException {
+
+	}
+*/
+	public File rewriteJobWithIncludesResolved(File tmpJobDir, File tmpProcDir, Boolean saveTemp) throws IOException {
+		/*
+			At this point the intent is to iteratively process the job until all INCLUDEs are
+			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
+		*/
+		Demo01.LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + tmpJobDir + "|");
+
+		File aFile = new File(this.getFileName());
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + this.getJobName() + "-" + this.getUUID());
+		if (saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		Demo01.LOGGER.finest("tmp = |" + tmp.getName() + "|");
+		String inLine = new String();
+		while ((inLine = src.readLine()) != null) {
+			IncludeStatement i = this.includeStatementAt(src.getLineNumber());
+			if (i == null) {
+				out.println(inLine);
+			} else {
+				if (writeTheIncludeContent(i, out, tmpProcDir)) {
+				} else {
+					out.println(inLine);
+				}
+			}
+		}
+		src.close();
+		out.close();
+		return tmp;
+	}
+
+	public Boolean writeTheIncludeContent(
+							IncludeStatement i
+							, PrintWriter out
+							, File tmpProcDir)
+						throws IOException {
+
+		Demo01.LOGGER.fine("writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
+
+		if (i.isResolved()) {
+		} else {
+			return false;
+		}
+
+		Boolean foundIt = true;
+		String includeFile = i.getResolvedText();
+
+		String includeFileFull = searchProcPathsFor(includeFile, tmpProcDir);
+
+		if (includeFileFull == null) {
+			foundIt = false;
+			//Demo01.LOGGER.warning(includeFile + " not found in any path specified");
+			//throw new FileNotFoundException(copyFile + " not found in any path specified");
+		} else {
+			List<String> list = 
+				Files.readAllLines(Paths.get(includeFileFull));
+			for (String line: list) out.println(line);
+		}
+
+		return foundIt;
+	}
+
+	public String searchProcPathsFor(String fileName, File tmpProcDir) throws IOException {
+		File aFile = new File(tmpProcDir.getName() + File.separator + fileName);
+		if (aFile.exists()) {
+			Demo01.LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+			return aFile.getCanonicalPath();
+		}
+
+		ArrayList<String> jcllib = this.getJcllibStrings();
+		for (String lib: jcllib) {
+			if (Demo01.CLI.mappedProcPaths.containsKey(lib)) {
+				aFile = new File(Demo01.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
+				if (aFile.exists()) {
+					Demo01.LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+					return aFile.getCanonicalPath();
+				}
+			}
+		}
+
+		for (String path: Demo01.CLI.staticProcPaths) {
+			aFile = new File(path + File.separator + fileName);
+			if (aFile.exists()) {
+				Demo01.LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+				return aFile.getCanonicalPath();
+			}
+		}
+
+		Demo01.LOGGER.warning("searchProcPathsFor() did not find " + fileName);
+		return null;
+	}
+
+	public File newTempDir(File appRootDir, Boolean saveTemp) throws IOException {
+		/*
+			It's possible the file permissions are superfluous.  The code would be more
+			portable without them.  TODO maybe remove the code setting file permissions.
+		*/
+		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+		FileAttribute<Set<PosixFilePermission>> attr =
+			PosixFilePermissions.asFileAttribute(perms);
+		File tmpDir = Files.createTempDirectory(appRootDir.toString() + File.separator + this.getJobName() + "-", attr).toFile();
+
+		if (saveTemp) {
+		} else {
+			tmpDir.deleteOnExit();
+		}
+
+		return tmpDir;
+	}
 
 	public String toString() {
-		return this.getJobName() + " @ " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getLine() + " in " + this.fileName;
+		return 
+			this.getJobName() 
+			+ " @ " 
+			+ this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getLine() 
+			+ " in " 
+			+ this.fileName;
 	}
 }
 
