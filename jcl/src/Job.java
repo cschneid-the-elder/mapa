@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
@@ -11,6 +12,8 @@ import org.antlr.v4.runtime.tree.*;
 */
 public class Job {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private JCLParser.JobCardContext jobCardCtx = null;
@@ -25,11 +28,13 @@ public class Job {
 	private int startLine = -1;
 	private int endLine = -1;
 
-	public Job(JCLParser.JobCardContext ctx, String fileName) {
+	public Job(JCLParser.JobCardContext ctx, String fileName, Logger LOGGER, TheCLI CLI) {
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
-		Demo01.LOGGER.finer(this.myName + " " + this.jobName + " instantiated from " + this.fileName);
+		LOGGER.finer(this.myName + " " + this.jobName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
@@ -39,29 +44,29 @@ public class Job {
 	}
 
 	public void addJcllib(JCLParser.JcllibStatementContext ctx) {
-		Demo01.LOGGER.finest(this.myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
+		LOGGER.finest(this.myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
 		List<JCLParser.KeywordOrSymbolicContext> kywdCtxList = ctx.singleOrMultipleValue().keywordOrSymbolic();
-		Demo01.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
+		LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
 
 		this.jcllibCtx = ctx;
 		if (kywdCtxList == null || kywdCtxList.size() == 0) {
 			kywdCtxList = ctx.singleOrMultipleValue().parenList().keywordOrSymbolic();
-			Demo01.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
+			LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
 		}
 
 		for (JCLParser.KeywordOrSymbolicContext k: kywdCtxList) {
-			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k: " + k);
-			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
-			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
-			Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
+			LOGGER.finest(this.myName + " addJcllib kywdCtxList k: " + k);
+			LOGGER.finest(this.myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
+			LOGGER.finest(this.myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
+			LOGGER.finest(this.myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
 			for (TerminalNode t: k.KEYWORD_VALUE()) {
-				Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
+				LOGGER.finest(this.myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 			for (TerminalNode t: k.SYMBOLIC()) {
-				Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
+				LOGGER.finest(this.myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 			for (TerminalNode t: k.QUOTED_STRING_FRAGMENT()) {
-				Demo01.LOGGER.finest(this.myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
+				LOGGER.finest(this.myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 		}
 
@@ -97,19 +102,19 @@ public class Job {
 	}
 
 	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
+		LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 
 		for (IncludeStatement i: this.includes) {
 			i.resolveParms(mergedSymbolics);
 		}
-		Demo01.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
+		LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(this.myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
+		LOGGER.finest(this.myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
 
 
 		for (JclStep step: this.steps) {
@@ -231,7 +236,7 @@ public class Job {
 		return libs;
 	}
 /*
-	public File rewriteWithParmsResolved(File appRootDir, Boolean saveTemp) throws IOException {
+	public File rewriteWithParmsResolved(File tmpRootDir, Boolean saveTemp) throws IOException {
 
 	}
 */
@@ -240,7 +245,7 @@ public class Job {
 			At this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
-		Demo01.LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + tmpJobDir + "|");
+		LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + tmpJobDir + "|");
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
@@ -250,7 +255,7 @@ public class Job {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		Demo01.LOGGER.finest("tmp = |" + tmp.getName() + "|");
+		LOGGER.finest("tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		while ((inLine = src.readLine()) != null) {
 			IncludeStatement i = this.includeStatementAt(src.getLineNumber());
@@ -268,13 +273,93 @@ public class Job {
 		return tmp;
 	}
 
+	public File rewriteJobAndSeparateInstreamProcs(File tmpJobDir, File tmpProcDir) throws IOException {
+		/*
+			Rewrite one job from the current file, separating any instream procs into their own
+			files to be processed later.
+
+			After this point the intent is to iteratively process the job until all INCLUDEs are
+			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
+		*/
+		/*
+			the plan...
+
+			for each job, read a record from its file
+				if the record number resides in an instream proc, skip it
+				if the record number corresponds to a resolved include,
+					skip writing the include, instead read the file it
+					refers to and add that to the output in place of the include
+				if the record number corresponds to a jclstep _not_ in stepsInNeedOfProc,
+					open a new LineNumberReader on the jclstep's file
+					read the proc, writing records to a new file
+					if the record number corresponds to a resolved include,
+						skip writing the include, instead read the file it
+						refers to and add that to the output in place of the include
+				write the record read to output
+		*/
+		LOGGER.fine(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
+
+		File aFile = new File(this.getFileName());
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + this.getJobName() + "-" + this.getUUID());
+		if (this.CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		LOGGER.finest("tmp = |" + tmp.getName() + "|");
+		String inLine = new String();
+		Proc aProc = null;
+		File procTmp = null;
+		PrintWriter procOut = null;
+		while ((inLine = src.readLine()) != null) {
+			if (this.lineIsInThisJob(src.getLineNumber())) {
+			} else {
+				continue;
+			}
+			aProc = this.instreamProcThisLineIsIn(src.getLineNumber());
+			if (aProc == null) {
+				if (procOut == null) {
+				} else {
+					procOut.close();
+					procTmp = null;
+					procOut = null;
+				}
+				IncludeStatement i = this.includeStatementAt(src.getLineNumber());
+				if (i == null) {
+					out.println(inLine);
+				} else {
+					if (writeTheIncludeContent(i, out, tmpProcDir)) {
+					} else {
+						out.println(inLine);
+					}
+				}
+			} else {
+				if (procOut == null) {
+					procTmp = new File(tmpProcDir.toString() + File.separator + aProc.getProcName());
+					if (this.CLI.saveTemp) {
+					} else {
+						procTmp.deleteOnExit();
+					}
+					procOut = new PrintWriter(procTmp);
+					LOGGER.finest("procTmp = |" + procTmp.getName() + "|");
+				}
+				procOut.println(inLine);
+			}
+			if (src.getLineNumber() == this.getEndLine()) break; //end of this job in this file
+		}
+		src.close();
+		out.close();
+		return tmp;
+	}
+
 	public Boolean writeTheIncludeContent(
 							IncludeStatement i
 							, PrintWriter out
 							, File tmpProcDir)
 						throws IOException {
 
-		Demo01.LOGGER.fine("writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
+		LOGGER.fine("writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -288,7 +373,7 @@ public class Job {
 
 		if (includeFileFull == null) {
 			foundIt = false;
-			//Demo01.LOGGER.warning(includeFile + " not found in any path specified");
+			//LOGGER.warning(includeFile + " not found in any path specified");
 			//throw new FileNotFoundException(copyFile + " not found in any path specified");
 		} else {
 			List<String> list = 
@@ -302,30 +387,30 @@ public class Job {
 	public String searchProcPathsFor(String fileName, File tmpProcDir) throws IOException {
 		File aFile = new File(tmpProcDir.getName() + File.separator + fileName);
 		if (aFile.exists()) {
-			Demo01.LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+			LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
 			return aFile.getCanonicalPath();
 		}
 
 		ArrayList<String> jcllib = this.getJcllibStrings();
 		for (String lib: jcllib) {
-			if (Demo01.CLI.mappedProcPaths.containsKey(lib)) {
-				aFile = new File(Demo01.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
+			if (this.CLI.mappedProcPaths.containsKey(lib)) {
+				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
 				if (aFile.exists()) {
-					Demo01.LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+					LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
 					return aFile.getCanonicalPath();
 				}
 			}
 		}
 
-		for (String path: Demo01.CLI.staticProcPaths) {
+		for (String path: this.CLI.staticProcPaths) {
 			aFile = new File(path + File.separator + fileName);
 			if (aFile.exists()) {
-				Demo01.LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+				LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
 				return aFile.getCanonicalPath();
 			}
 		}
 
-		Demo01.LOGGER.warning("searchProcPathsFor() did not find " + fileName);
+		LOGGER.warning("searchProcPathsFor() did not find " + fileName);
 		return null;
 	}
 

@@ -66,9 +66,10 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes(symbolics);
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
+			File tmpRootDir = newTempDir(); // Use later for temp job/proc root
 			File tmpJobDir = newTempDir();
 			File tmpProcDir = newTempDir();
-			File jobFile = rewriteJobAndSeparateInstreamProcs(j, tmpJobDir, tmpProcDir);
+			File jobFile = j.rewriteJobAndSeparateInstreamProcs(tmpJobDir, tmpProcDir);
 			/*
 				Now must iteratively parse this job until all includes 
 				are resolved -or- we have determined all that remain are 
@@ -102,7 +103,7 @@ public static void main(String[] args) throws Exception {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName);
+		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	
@@ -110,15 +111,14 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static File rewriteJobAndSeparateInstreamProcs(PPJob job, File tmpJobDir, File tmpProcDir) throws IOException {
 		/*
+	public static File rewriteJobAndSeparateInstreamProcs(PPJob job, File tmpJobDir, File tmpProcDir) throws IOException {
 			Rewrite one job from the current file, separating any instream procs into their own
 			files to be processed later.
 
 			After this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		/*
+
 			the plan...
 
 			for each job, read a record from its file
@@ -133,7 +133,7 @@ public static void main(String[] args) throws Exception {
 						skip writing the include, instead read the file it
 						refers to and add that to the output in place of the include
 				write the record read to output
-		*/
+
 		LOGGER.fine("rewriteJobAndSeparateInstreamProcs job = |" + job + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
 
 		File aFile = new File(job.getFileName());
@@ -189,6 +189,7 @@ public static void main(String[] args) throws Exception {
 		out.close();
 		return tmp;
 	}
+
 
 	public static Boolean writeTheIncludeContent(
 							PPIncludeStatement i
@@ -249,6 +250,7 @@ public static void main(String[] args) throws Exception {
 		src.close();
 		out.close();
 	}
+		*/
 
 	public static PPJob iterativelyResolveJobIncludes(PPJob j, File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
 		LOGGER.fine("iterativelyResolveJobIncludes j = |" + j + "| tmpJobDir = |" + tmpJobDir.getName() + "| tmpProcDir = |" + tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
@@ -313,7 +315,7 @@ public static void main(String[] args) throws Exception {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName);
+		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	
@@ -321,13 +323,12 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static File rewriteJob(PPJob job, File tmpJobDir, File tmpProcDir) throws IOException {
 		/*
+	public static File rewriteJob(PPJob job, File tmpJobDir, File tmpProcDir) throws IOException {
 			Rewrite one job from the current file.
 
 			At this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
 		LOGGER.fine("rewriteJob job = |" + job + "| tmpJobDir = |" + tmpJobDir + "|");
 
 		File aFile = new File(job.getFileName());
@@ -355,6 +356,7 @@ public static void main(String[] args) throws Exception {
 		out.close();
 		return tmp;
 	}
+		*/
 
 	public static void iterativelyResolveJobProcs(PPJob job, File tmpProcDir) throws IOException {
 

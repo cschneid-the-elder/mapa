@@ -6,6 +6,8 @@ import org.antlr.v4.runtime.tree.*;
 
 public class PPListener extends JCLPPParserBaseListener {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	public ArrayList<PPJob> jobs = null;
 	public ArrayList<PPProc> procs = null;
 	public ArrayList<PPOp> stmts = null;
@@ -21,12 +23,16 @@ public class PPListener extends JCLPPParserBaseListener {
 			, ArrayList<PPProc> procs
 			, ArrayList<PPOp> stmts
 			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
 			) {
 		super();
 		this.jobs = jobs;
 		this.procs = procs;
 		this.stmts = stmts;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 	}
 
 	@Override public void enterJobCard(JCLPPParser.JobCardContext ctx) {
@@ -34,7 +40,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new PPJob(ctx, fileName);
+		this.currJob = new PPJob(ctx, fileName, LOGGER, CLI);
 		this.jobs.add(this.currJob);
 		this.procName = null;
 		this.currProc = null;
