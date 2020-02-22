@@ -40,7 +40,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new PPJob(ctx, fileName, LOGGER, CLI);
+		this.currJob = new PPJob(ctx, fileName, this.LOGGER, this.CLI);
 		this.jobs.add(this.currJob);
 		this.procName = null;
 		this.currProc = null;
@@ -149,7 +149,7 @@ public class PPListener extends JCLPPParserBaseListener {
 
 		*/
 
-		this.currJclStep = new PPJclStep(ctx, this.fileName, this.procName);
+		this.currJclStep = new PPJclStep(ctx, this.fileName, this.procName, this.LOGGER, this.CLI);
 		if (this.currProc == null) {
 			this.currJob.addJclStep(this.currJclStep);
 		} else {

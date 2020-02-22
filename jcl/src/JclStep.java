@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -8,6 +9,8 @@ import org.antlr.v4.runtime.tree.*;
 */
 public class JclStep {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private String fileName = null;
@@ -26,13 +29,15 @@ public class JclStep {
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
 
-	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName) {
+	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName, Logger LOGGER, TheCLI CLI) {
 		this.jclStepCtx = jclStepCtx;
 		this.fileName = fileName;
 		this.procName = procName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.inProc = !(procName == null);
 		this.initialize();
-		Demo01.LOGGER.finer(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
+		LOGGER.finer(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
 
 	}
 
@@ -44,9 +49,9 @@ public class JclStep {
 		this.ddStmtAmlgnCtxs = this.jclStepCtx.ddStatementAmalgamation();
 		
 		if (this.isExecProc() && this.isExecPgm()) {
-			Demo01.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
+			LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
 		} else if (!this.isExecProc() && !this.isExecPgm()) {
-			Demo01.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are null");
+			LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are null");
 		}
 
 		if (this.isExecPgm()) {
@@ -105,7 +110,7 @@ public class JclStep {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
+		LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
 		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 

@@ -103,19 +103,42 @@ public class PPJob {
 
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> symbolics) {
 		LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
-		ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-		mergedSymbolics.addAll(this.symbolics);
+
+		/*
+			The symbolics passed into this method come from a list provided at
+			execution time.  These would typically be static and/or dynamic system
+			symbols such as SYSCLONE or SYSUID.
+
+			These symbolics are merged with the relevant symbolics (those whose SET
+			statement come before the include being processed) from this job.
+		*/
 
 		for (PPIncludeStatement i: this.includes) {
+			ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
+			for (PPSetSymbolValue s: this.symbolics) {
+				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
+				|| s.getSetType() != SetTypeOfSymbolValue.SET
+				) {
+					mergedSymbolics.add(s);
+				}
+			}
 			i.resolveParms(mergedSymbolics);
 		}
-		LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 
+		LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {
 		LOGGER.finest(this.myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
 
+		/*
+			The symbolics passed into this method come from a list provided at
+			execution time.  These would typically be static and/or dynamic system
+			symbols such as SYSCLONE or SYSUID.
+
+			These symbolics are merged with the relevant symbolics (those whose SET
+			statement come before the step being processed) from this job.
+		*/
 
 		for (PPJclStep step: this.steps) {
 			ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);

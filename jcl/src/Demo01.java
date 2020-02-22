@@ -420,6 +420,7 @@ public static void main(String[] args) throws Exception {
 		return tmpDir;
 	}
 
+/*
 	public static String searchProcPathsFor(String fileName, File tmpProcDir, ArrayList<String> jcllib) throws IOException {
 		File aFile = new File(tmpProcDir.getName() + File.separator + fileName);
 		if (aFile.exists()) {
@@ -448,6 +449,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.warning("searchProcPathsFor() did not find " + fileName);
 		return null;
 	}
+*/
 
 	public static ArrayList<PPSetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
 		LOGGER.fine("lookForSetSymbols");
