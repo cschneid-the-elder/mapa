@@ -6,8 +6,11 @@ import org.antlr.v4.runtime.tree.*;
 
 public class JobListener extends JCLParserBaseListener {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	public ArrayList<Job> jobs = null;
 	public ArrayList<Proc> procs = null;
+	public ArrayList<PPOp> stmts = null;
 	public String fileName = null;
 	public String procName = null;
 	public Job currJob = null;
@@ -17,12 +20,17 @@ public class JobListener extends JCLParserBaseListener {
 	public JobListener(
 			ArrayList<Job> jobs
 			, ArrayList<Proc> procs
+			, ArrayList<PPOp> stmts
 			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
 			) {
 		super();
 		this.jobs = jobs;
 		this.procs = procs;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 	}
 
 	@Override public void enterJobCard(JCLParser.JobCardContext ctx) {
@@ -30,7 +38,7 @@ public class JobListener extends JCLParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new Job(ctx, fileName);
+		this.currJob = new Job(ctx, fileName, this.LOGGER, this.CLI);
 		this.jobs.add(this.currJob);
 		this.procName = null;
 		this.currProc = null;
@@ -52,7 +60,7 @@ public class JobListener extends JCLParserBaseListener {
 	@Override public void enterProcStatement(JCLParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new Proc(ctx, this.fileName);
+		this.currProc = new Proc(ctx, this.fileName, this.LOGGER, this.CLI);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);
@@ -104,7 +112,7 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterJclStep(JCLParser.JclStepContext ctx) {
-		this.currJclStep = new JclStep(ctx, this.fileName, this.procName);
+		this.currJclStep = new JclStep(ctx, this.fileName, this.procName, this.LOGGER, this.CLI);
 		if (this.currProc == null) {
 			this.currJob.addJclStep(this.currJclStep);
 		} else {

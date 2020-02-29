@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -8,6 +9,8 @@ import org.antlr.v4.runtime.tree.*;
 */
 public class PPProc {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private JCLPPParser.ProcStatementContext procCtx = null;
@@ -20,29 +23,18 @@ public class PPProc {
 	private int startLine = -1;
 	private int endLine = -1;
 
-	/*public InstreamProc(
-				JCLPPParser.ProcStatementContext procCtx
-				, JCLPPParser.PendStatementContext pendCtx
-				, ArrayList<PPSetSymbolValue> symbolics
-				, ArrayList<PPIncludeStatement> includes
-				, String fileName
-				) {
-		this.procCtx = procCtx;
-		this.pendCtx = pendCtx;
-		this.symbolics = symbolics;
-		this.includes = includes;
-		this.fileName = fileName;
-		this.initialize();
-	}*/
-
 	public PPProc(
 				JCLPPParser.ProcStatementContext procCtx
 				, String fileName
+				, Logger LOGGER
+				, TheCLI CLI
 				) {
 		this.procCtx = procCtx;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
-		Demo01.LOGGER.finer(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+		LOGGER.finer(this.myName + " " + this.procName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
@@ -126,19 +118,19 @@ public class PPProc {
 	}
 
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
+		LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
 		ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
 		mergedSymbolics.addAll(this.symbolics);
 
 		for (PPIncludeStatement i: includes) {
 			i.resolveParms(mergedSymbolics);
 		}
-		Demo01.LOGGER.finest(myName + " includes (after resolving): " + includes);
+		LOGGER.finest(myName + " includes (after resolving): " + includes);
 
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(myName + " " + this.procName + " resolveParms");
+		LOGGER.fine(myName + " " + this.procName + " resolveParms");
 
 		for (PPJclStep step: steps) {
 			ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);

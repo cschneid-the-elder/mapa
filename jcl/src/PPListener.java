@@ -93,7 +93,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	@Override public void enterProcStatement(JCLPPParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new PPProc(ctx, this.fileName);
+		this.currProc = new PPProc(ctx, this.fileName, this.LOGGER, this.CLI);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);

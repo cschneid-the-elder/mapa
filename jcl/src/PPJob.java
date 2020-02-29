@@ -4,6 +4,7 @@ import java.util.logging.*;
 import java.io.*;
 import java.nio.file.*;
 import java.nio.file.attribute.*;
+import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -91,6 +92,7 @@ public class PPJob {
 
 	public void addJclStep(PPJclStep step) {
 		this.steps.add(step);
+		/*
 		if (step.isExecProc()) {
 			for (PPProc p: procs) {
 				if (step.getProcExecuted().equals(p.getProcName())) {
@@ -99,6 +101,7 @@ public class PPJob {
 				}
 			}
 		}
+		*/
 	}
 
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> symbolics) {
@@ -167,17 +170,6 @@ public class PPJob {
 		}
 
 		return stepsInNeed;
-	}
-
-	public Boolean lineIsInInstreamProc(int aLine) {
-		Boolean b = false;
-
-		for (PPProc p: this.procs) {
-			b = p.containsLine(aLine) && (p.getFileName().equals(this.fileName));
-			if (b) break;
-		}
-
-		return b;
 	}
 
 	public PPProc instreamProcThisLineIsIn(int aLine) {
@@ -263,6 +255,77 @@ public class PPJob {
 
 	}
 */
+	public PPJob iterativelyResolveJobIncludes(File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
+		LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + tmpJobDir.getName() + "| tmpProcDir = |" + tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
+
+		PPJob aJob = this;
+		File jobFile = initialJobFile;
+		Boolean iterating = true;
+		int sanity = 0;
+		do {
+			LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
+			ArrayList<PPIncludeStatement> includes_before = aJob.getAllUnresolvedIncludes();
+			ArrayList<PPProc> dummyProcs = new ArrayList<>();
+			ArrayList<PPJob> thisJob = new ArrayList<>();
+			ArrayList<PPOp> dummyStmts = new ArrayList<>();
+			lexAndParse(thisJob, dummyProcs, dummyStmts, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+			thisJob.get(0).resolveParmedIncludes(symbolics);
+			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
+			//are all includes from before still there after? yes = stop iterating
+			LOGGER.finest(this.myName + " includes_before = " + includes_before);
+			LOGGER.finest(this.myName + " includes_after  = " + includes_after);
+			if (includes_after.size() == includes_before.size()) {
+				LOGGER.finest(this.myName + " includes_after.size() == includes_before.size()");
+				Boolean allContained = true;
+				for (PPIncludeStatement ia: includes_after) {
+					Boolean contains = false;
+					for (PPIncludeStatement ib: includes_before) {
+						if (ia.isProbablyTheSame(ib)) {
+							LOGGER.finest(this.myName + " ia = |" + ia + "| ib = |" + ib + "| isProbablyTheSame");
+							contains = true;
+							break;
+						}
+					}
+					allContained = allContained && contains;
+				}
+				if (allContained) {
+					iterating = false;
+				}
+			} else {
+				LOGGER.finest(this.myName + " includes_after.size() != includes_before.size()");
+				iterating = true;
+			}
+			if (iterating) {
+				aJob = thisJob.get(0);
+				jobFile = aJob.rewriteJobWithIncludesResolved(tmpJobDir, tmpProcDir, CLI.saveTemp);
+			}
+			sanity++;
+		} while(iterating && (sanity < CLI.getSanity()));
+		if (sanity >= CLI.getSanity()) LOGGER.severe(this.myName + " sanity check failed for " + this);
+
+		return aJob;
+	}
+
+	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, ArrayList<PPOp> stmts, String fileName) throws IOException {
+		LOGGER.fine(this.myName + " lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
+
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName, LOGGER, CLI);
+	
+		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
+	
+		jclwalker.walk(jobListener, jcltree);
+
+	}
+
 	public File rewriteJobWithIncludesResolved(File tmpJobDir, File tmpProcDir, Boolean saveTemp) throws IOException {
 		/*
 			At this point the intent is to iteratively process the job until all INCLUDEs are

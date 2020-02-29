@@ -17,6 +17,7 @@ public class TheCLI{
 	public String outFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
+	public Integer sanity = new Integer(20);
 	public File setFile = null;
 
 	public TheCLI(String[] args) throws Exception {
@@ -43,6 +44,8 @@ public class TheCLI{
 			, "used to test lexer, parser, listeners, et. al");
 		Option saveTemp = new Option("saveTemp", false
 			, "save temporary files, used to test lexer, parser, listeners, et. al");
+		Option sanity = new Option("sanity", true
+			, "used to limit the number of iterations when resolving INCLUDEs {default = 20}");
 		Option help = new Option("help", false, "print this message");
 
 		this.options.addOption(file);
@@ -55,6 +58,7 @@ public class TheCLI{
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
 		this.options.addOption(saveTemp);
+		this.options.addOption(sanity);
 		this.options.addOption(help);
 
 		try {
@@ -159,6 +163,14 @@ public class TheCLI{
 			this.saveTemp = true;
 			this.LOGGER.info("temporary files will be preserved");
 		}
+
+		if (this.line.hasOption("sanity")) {
+			this.sanity = new Integer(this.line.getOptionValue("sanity"));
+		}
+	}
+
+	public int getSanity() {
+		return sanity.intValue();
 	}
 
 	private File writeSet() throws IOException {
