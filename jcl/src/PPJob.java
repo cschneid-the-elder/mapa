@@ -274,6 +274,7 @@ public class PPJob {
 			//are all includes from before still there after? yes = stop iterating
 			LOGGER.finest(this.myName + " includes_before = " + includes_before);
 			LOGGER.finest(this.myName + " includes_after  = " + includes_after);
+/*
 			if (includes_after.size() == includes_before.size()) {
 				LOGGER.finest(this.myName + " includes_after.size() == includes_before.size()");
 				Boolean allContained = true;
@@ -295,11 +296,15 @@ public class PPJob {
 				LOGGER.finest(this.myName + " includes_after.size() != includes_before.size()");
 				iterating = true;
 			}
+*/
 			if (iterating) {
 				aJob = thisJob.get(0);
 				jobFile = aJob.rewriteJobWithIncludesResolved(tmpJobDir, tmpProcDir, CLI.saveTemp);
 			}
 			sanity++;
+			if (includes_after.size() == 0) {
+				iterating = false;
+			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) LOGGER.severe(this.myName + " sanity check failed for " + this);
 
