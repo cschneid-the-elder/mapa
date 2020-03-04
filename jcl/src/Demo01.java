@@ -58,6 +58,7 @@ public static void main(String[] args) throws Exception {
 	ArrayList<PPJob> jobs = new ArrayList<>();
 	ArrayList<PPOp> stmts = new ArrayList<>();
 	ArrayList<PPJob> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
+	File baseDir = newTempDir(); // Use later for temp job/proc root
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
@@ -66,18 +67,17 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes(symbolics);
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
-			File tmpRootDir = newTempDir(); // Use later for temp job/proc root
-			File tmpJobDir = newTempDir();
-			File tmpProcDir = newTempDir();
-			File jobFile = j.rewriteJobAndSeparateInstreamProcs(tmpJobDir, tmpProcDir);
+			//File tmpJobDir = newTempDir();
+			//File tmpProcDir = newTempDir();
+			File jobFile = j.rewriteJobAndSeparateInstreamProcs(baseDir);
 			/*
 				Now must iteratively parse this job until all includes 
 				are resolved -or- we have determined all that remain are 
 				unresolvable includes.
 			*/
-			PPJob rJob = j.iterativelyResolveJobIncludes(tmpJobDir, tmpProcDir, jobFile);
+			PPJob rJob = j.iterativelyResolveJobIncludes(jobFile);
 			rJobs.add(rJob);
-			iterativelyResolveJobProcs(rJob, tmpProcDir);
+			//iterativelyResolveJobProcs(rJob, tmpProcDir); //doesn't appear to have done anything
 			rJob.resolveParms(symbolics);
 			/*
 				Includes are resolved to the extent possible.

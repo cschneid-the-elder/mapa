@@ -28,6 +28,9 @@ public class Job {
 	private String jobName = null;
 	private int startLine = -1;
 	private int endLine = -1;
+	private File baseDir = null;
+	private File tmpJobDir = null;
+	private File tmpProcDir = null;
 
 	public Job(JCLParser.JobCardContext ctx, String fileName, Logger LOGGER, TheCLI CLI) {
 		this.jobCardCtx = ctx;
@@ -76,6 +79,44 @@ public class Job {
 
 	public void setEndLine(int aLine) {
 		this.endLine = aLine;
+	}
+
+	private void setTmpDirs(File baseDir) throws IOException {
+		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + ")");
+		if (this.baseDir == null) {
+			this.baseDir = baseDir;
+			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+		}
+
+		if (this.tmpJobDir == null) {
+			this.tmpJobDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-", this.CLI.saveTemp);
+			this.LOGGER.finest(this.myName + " setTmpDirs tmpJobDir set to |" + this.tmpJobDir + "|");
+		}
+
+		if (this.tmpProcDir == null) {
+			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-and-includes-", this.CLI.saveTemp);
+			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+		}
+		
+	}
+
+	public void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) throws IOException {
+		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
+		if (this.baseDir == null) {
+			this.baseDir = baseDir;
+			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+		}
+
+		if (this.tmpJobDir == null) {
+			this.tmpJobDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-", this.CLI.saveTemp);
+			this.LOGGER.finest(this.myName + " setTmpDirs tmpJobDir set to |" + this.tmpJobDir + "|");
+		}
+
+		if (this.tmpProcDir == null) {
+			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-and-includes-", this.CLI.saveTemp);
+			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+		}
+		
 	}
 
 	public void addInstreamProc(Proc iProc) {
@@ -255,8 +296,8 @@ public class Job {
 
 	}
 */
-	public Job iterativelyResolveJobIncludes(File tmpJobDir, File tmpProcDir, File initialJobFile) throws IOException {
-		LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + tmpJobDir.getName() + "| tmpProcDir = |" + tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
+	public Job iterativelyResolveJobIncludes(File initialJobFile) throws IOException {
+		LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
 
 		Job aJob = this;
 		File jobFile = initialJobFile;
@@ -268,7 +309,7 @@ public class Job {
 			ArrayList<Proc> dummyProcs = new ArrayList<>();
 			ArrayList<Job> thisJob = new ArrayList<>();
 			ArrayList<PPOp> dummyStmts = new ArrayList<>();
-			lexAndParse(thisJob, dummyProcs, dummyStmts, tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+			lexAndParse(thisJob, dummyProcs, dummyStmts, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes(symbolics);
 			ArrayList<IncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
@@ -299,14 +340,15 @@ public class Job {
 */
 			if (iterating) {
 				aJob = thisJob.get(0);
-				jobFile = aJob.rewriteJobWithIncludesResolved(tmpJobDir, tmpProcDir, CLI.saveTemp);
+				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
+				jobFile = aJob.rewriteJobWithIncludesResolved();
 			}
 			sanity++;
 			if (includes_after.size() == 0) {
 				iterating = false;
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
-		if (sanity >= CLI.getSanity()) LOGGER.severe(this.myName + " sanity check failed for " + this);
+		if (sanity >= CLI.getSanity()) LOGGER.severe(this.myName + " sanity check failed in iterativelyResolveJobIncludes for " + this);
 
 		return aJob;
 	}
@@ -325,35 +367,35 @@ public class Job {
 	
 		JobListener jobListener = new JobListener(jobs, procs, stmts, fileName, LOGGER, CLI);
 	
-		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
+		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	
 		jclwalker.walk(jobListener, jcltree);
 
 	}
 
-	public File rewriteJobWithIncludesResolved(File tmpJobDir, File tmpProcDir, Boolean saveTemp) throws IOException {
+	public File rewriteJobWithIncludesResolved() throws IOException {
 		/*
 			At this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
-		LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + tmpJobDir + "|");
+		LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + this.getJobName() + "-" + this.getUUID());
-		if (saveTemp) {
+		File tmp = new File(this.tmpJobDir.toString() + File.separator + "job-" + this.getJobName() + "-" + this.getUUID());
+		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		LOGGER.finest("tmp = |" + tmp.getName() + "|");
+		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		while ((inLine = src.readLine()) != null) {
 			IncludeStatement i = this.includeStatementAt(src.getLineNumber());
 			if (i == null) {
 				out.println(inLine);
 			} else {
-				if (writeTheIncludeContent(i, out, tmpProcDir)) {
+				if (writeTheIncludeContent(i, out, this.tmpProcDir)) {
 				} else {
 					out.println(inLine);
 				}
@@ -364,7 +406,7 @@ public class Job {
 		return tmp;
 	}
 
-	public File rewriteJobAndSeparateInstreamProcs(File tmpJobDir, File tmpProcDir) throws IOException {
+	public File rewriteJobAndSeparateInstreamProcs(File baseDir) throws IOException {
 		/*
 			Rewrite one job from the current file, separating any instream procs into their own
 			files to be processed later.
@@ -388,17 +430,18 @@ public class Job {
 						refers to and add that to the output in place of the include
 				write the record read to output
 		*/
-		LOGGER.fine(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| tmpJobDir = |" + tmpJobDir + "| tmpProcDir = |" + tmpProcDir + "|");
+		LOGGER.fine(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
 
+		this.setTmpDirs(baseDir);
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(tmpJobDir.toString() + File.separator + "job-" + this.getJobName() + "-" + this.getUUID());
+		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		LOGGER.finest("tmp = |" + tmp.getName() + "|");
+		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		Proc aProc = null;
 		File procTmp = null;
@@ -420,20 +463,20 @@ public class Job {
 				if (i == null) {
 					out.println(inLine);
 				} else {
-					if (writeTheIncludeContent(i, out, tmpProcDir)) {
+					if (writeTheIncludeContent(i, out, this.tmpProcDir)) {
 					} else {
 						out.println(inLine);
 					}
 				}
 			} else {
 				if (procOut == null) {
-					procTmp = new File(tmpProcDir.toString() + File.separator + aProc.getProcName());
+					procTmp = new File(this.tmpProcDir.toString() + File.separator + aProc.getProcName());
 					if (this.CLI.saveTemp) {
 					} else {
 						procTmp.deleteOnExit();
 					}
 					procOut = new PrintWriter(procTmp);
-					LOGGER.finest("procTmp = |" + procTmp.getName() + "|");
+					LOGGER.finest(this.myName + " procTmp = |" + procTmp.getName() + "|");
 				}
 				procOut.println(inLine);
 			}
@@ -450,7 +493,7 @@ public class Job {
 							, File tmpProcDir)
 						throws IOException {
 
-		LOGGER.fine("writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
+		LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -478,7 +521,7 @@ public class Job {
 	public String searchProcPathsFor(String fileName, File tmpProcDir) throws IOException {
 		File aFile = new File(tmpProcDir.getName() + File.separator + fileName);
 		if (aFile.exists()) {
-			LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+			LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 			return aFile.getCanonicalPath();
 		}
 
@@ -487,7 +530,7 @@ public class Job {
 			if (this.CLI.mappedProcPaths.containsKey(lib)) {
 				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
 				if (aFile.exists()) {
-					LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+					LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 					return aFile.getCanonicalPath();
 				}
 			}
@@ -496,16 +539,16 @@ public class Job {
 		for (String path: this.CLI.staticProcPaths) {
 			aFile = new File(path + File.separator + fileName);
 			if (aFile.exists()) {
-				LOGGER.finer("searchProcPathsFor() found " + aFile.getCanonicalPath());
+				LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 				return aFile.getCanonicalPath();
 			}
 		}
 
-		LOGGER.warning("searchProcPathsFor() did not find " + fileName);
+		LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
 		return null;
 	}
 
-	public File newTempDir(File appRootDir, Boolean saveTemp) throws IOException {
+	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
@@ -513,7 +556,7 @@ public class Job {
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =
 			PosixFilePermissions.asFileAttribute(perms);
-		File tmpDir = Files.createTempDirectory(appRootDir.toString() + File.separator + this.getJobName() + "-", attr).toFile();
+		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx, attr).toFile();
 
 		if (saveTemp) {
 		} else {
