@@ -95,6 +95,12 @@ public class PPIncludeStatement {
 		return this.kywd.isResolved();
 	}
 
+	public ArrayList<PPSymbolic> collectSymbolics() {
+		Demo01.LOGGER.fine(this.myName + " collectSymbolics");
+
+		return kywd.collectSymbolics();
+	}
+
 	public String toString() {
 		return 
 			this.myName 

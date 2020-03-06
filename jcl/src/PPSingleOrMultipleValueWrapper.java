@@ -40,6 +40,16 @@ public class PPSingleOrMultipleValueWrapper {
 		return buf.toString();
 	}
 
+	public ArrayList<PPSymbolic> collectSymbolics() {
+		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
+
+		for (PPKeywordOrSymbolicWrapper k: this.kosw) {
+			symbolics.addAll(k.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 	public String toString() {
 		return this.myName + " procName = |" + this.procName + "| kosw = |" + this.kosw + "|";
 	}

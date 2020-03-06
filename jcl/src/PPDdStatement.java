@@ -118,6 +118,24 @@ public class PPDdStatement {
 		}
 	}
 
+	public ArrayList<PPSymbolic> collectSymbolics() {
+		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+
+		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
+
+		for (PPKeywordOrSymbolicWrapper k: kosParms.values()) {
+			symbolics.addAll(k.collectSymbolics());
+		}
+
+		for (PPSingleOrMultipleValueWrapper s: somvParms.values()) {
+			symbolics.addAll(s.collectSymbolics());
+		}
+
+		symbolics.addAll(this.symbolics);
+
+		return symbolics;
+	}
+
 	public String getResolvedValue(String key) {
 		if (kosParms.containsKey(key)) {
 			return kosParms.get(key).getResolvedValue();

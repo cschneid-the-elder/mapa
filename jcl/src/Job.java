@@ -299,9 +299,10 @@ public class Job {
 		LOGGER.fine(this.myName + " rewriteWithParmsResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
 
 		this.sym = this.collectSymbolics();
+		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
+		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-resolved-" + this.getUUID());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -311,19 +312,28 @@ public class Job {
 		String inLine = new String();
 		StringBuffer outLine = new StringBuffer();
 		while ((inLine = src.readLine()) != null) {
-			Symbolic[] symOnThisLine = 
+			// first get just the symbolics on this line
+			Symbolic[] symOnThisLineA = 
 				this.sym.stream()
 				.filter(s -> s.getLine() == src.getLineNumber())
 				.toArray(Symbolic[]::new);
+			// now sort them by size descending so we don't get confused over
+			// replacing &A and &A1
+			ArrayList<Symbolic> symOnThisLine = new ArrayList<>();
+			symOnThisLine.addAll(Arrays.asList(symOnThisLineA));
+			symOnThisLine.sort(Comparator.comparingInt(Symbolic::getLen).reversed());
+			this.LOGGER.finest(this.myName + " symOnThisLine = |" + symOnThisLine + "|");
 			outLine = new StringBuffer(inLine);
 			this.LOGGER.finest(this.myName + " outLine before = |" + outLine + "|");
+			// replace symbolics with their resolved value - if the
+			// symbolic is followed by a dot, get rid of the dot
 			for (Symbolic s: symOnThisLine) {
-				int end = s.getPosn() + s.getLen() - 1;
-				int dot = s.getPosn() + s.getResolvedText().length();
-				outLine.replace(s.getPosn(), end, s.getResolvedText());
-				if (outLine.substring(dot, dot + 1).equals(".")) {
-					outLine.deleteCharAt(dot - 1);
+				int start = outLine.indexOf(s.getText());
+				int end = start + s.getLen();
+				if (outLine.substring(end, end + 1).equals(".")) {
+					end++;
 				}
+				outLine.replace(start, end, s.getResolvedText());
 			}
 			this.LOGGER.finest(this.myName + " outLine after  = |" + outLine + "|");
 			out.println(outLine);
@@ -334,23 +344,31 @@ public class Job {
 	}
 
 	private ArrayList<Symbolic> collectSymbolics() {
+		this.LOGGER.fine(this.myName + " collectSymbolics");
+
 		ArrayList<Symbolic> symbolics = new ArrayList<>();
 
 		for (JclStep j: steps) {
 			symbolics.addAll(j.collectSymbolics());
 		}
 
+		// these should be resolved?
+		for (IncludeStatement i: includes) {
+			symbolics.addAll(i.collectSymbolics());
+		}
+
 		return symbolics;
 	}
 
 	public Job iterativelyResolveJobIncludes(File initialJobFile) throws IOException {
-		LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
+		this.LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
 
 		Job aJob = this;
 		File jobFile = initialJobFile;
 		Boolean iterating = true;
 		int sanity = 0;
 		do {
+			//something wrong here, rJob in Demo01 ends up w/previous aJob
 			LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
 			ArrayList<Proc> dummyProcs = new ArrayList<>();
 			ArrayList<Job> thisJob = new ArrayList<>();

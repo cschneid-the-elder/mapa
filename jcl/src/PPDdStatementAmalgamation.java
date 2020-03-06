@@ -57,4 +57,16 @@ public class PPDdStatementAmalgamation {
 		}
 	}
 
+	public ArrayList<PPSymbolic> collectSymbolics() {
+		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+
+		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
+
+		for (PPDdStatement dd: dds) {
+			symbolics.addAll(dd.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 }

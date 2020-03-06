@@ -40,6 +40,16 @@ public class SingleOrMultipleValueWrapper {
 		return buf.toString();
 	}
 
+	public ArrayList<Symbolic> collectSymbolics() {
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
+
+		for (KeywordOrSymbolicWrapper k: this.kosw) {
+			symbolics.addAll(k.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 	public String toString() {
 		return this.myName + " procName = |" + this.procName + "| kosw = |" + this.kosw + "|";
 	}

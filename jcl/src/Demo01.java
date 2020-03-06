@@ -82,6 +82,7 @@ public static void main(String[] args) throws Exception {
 				Now must rewrite job with resolved values for parms substituted.
 				Merge with procs?
 			*/
+			rJob.rewriteWithParmsResolved();
 		}
 	}
 

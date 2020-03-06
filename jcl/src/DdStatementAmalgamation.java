@@ -57,4 +57,16 @@ public class DdStatementAmalgamation {
 		}
 	}
 
+	public ArrayList<Symbolic> collectSymbolics() {
+		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
+
+		for (DdStatement dd: dds) {
+			symbolics.addAll(dd.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 }

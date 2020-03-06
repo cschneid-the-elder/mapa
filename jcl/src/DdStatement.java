@@ -718,4 +718,24 @@ public class DdStatement {
 		}
 	}
 
+	public ArrayList<Symbolic> collectSymbolics() {
+		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
+
+		for (KeywordOrSymbolicWrapper k: kosParms.values()) {
+			symbolics.addAll(k.collectSymbolics());
+		}
+
+		for (SingleOrMultipleValueWrapper s: somvParms.values()) {
+			symbolics.addAll(s.collectSymbolics());
+		}
+
+		for (DatasetNameWrapper d: dsnParms.values()) {
+			symbolics.addAll(d.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 }

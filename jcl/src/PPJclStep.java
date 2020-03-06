@@ -110,6 +110,8 @@ public class PPJclStep {
 	}
 
 	public ArrayList<PPSymbolic> collectSymbolics() {
+		Demo01.LOGGER.fine(this.myName + " collectSymbolics");
+
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
 		if (this.isExecPgm()) {
@@ -118,6 +120,9 @@ public class PPJclStep {
 			symbolics.addAll(this.procExecuted.collectSymbolics());
 		}
 
+		for (PPDdStatementAmalgamation d: this.ddStatements) {
+			symbolics.addAll(d.collectSymbolics());
+		}
 
 		return symbolics;
 	}

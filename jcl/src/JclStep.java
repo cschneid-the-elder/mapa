@@ -110,6 +110,8 @@ public class JclStep {
 	}
 
 	public ArrayList<Symbolic> collectSymbolics() {
+		Demo01.LOGGER.fine(this.myName + " collectSymbolics");
+
 		ArrayList<Symbolic> symbolics = new ArrayList<>();
 
 		if (this.isExecPgm()) {
@@ -118,6 +120,9 @@ public class JclStep {
 			symbolics.addAll(this.procExecuted.collectSymbolics());
 		}
 
+		for (DdStatementAmalgamation d: this.ddStatements) {
+			symbolics.addAll(d.collectSymbolics());
+		}
 
 		return symbolics;
 	}

@@ -46,6 +46,22 @@ public class DatasetNameWrapper {
 		return buf.toString();
 	}
 
+	public ArrayList<Symbolic> collectSymbolics() {
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
+
+		if (this.dsn == null) {
+		} else {
+			symbolics.addAll(dsn.collectSymbolics());
+		}
+
+		if (this.mem == null) {
+		} else {
+			symbolics.addAll(mem.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 	public String toString() {
 		StringBuffer buf = new StringBuffer(this.myName + " procName = |" + this.procName + "| dsn = |" + this.dsn.getResolvedValue());
 		if (this.mem == null) {
