@@ -237,6 +237,21 @@ public class KeywordOrSymbolicWrapper {
 		return b;
 	}
 
+	public ArrayList<Symbolic> collectSymbolics() {
+
+		KeywordValueWrapper[] symbolic_kvw = 
+			kvw.stream()
+			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
+			.toArray(KeywordValueWrapper[]::new);
+
+		ArrayList<Symbolic> sym = new ArrayList<>();
+		for (KeywordValueWrapper k: symbolic_kvw) {
+			sym.add(k.getSymbolic());
+		}
+
+		return sym;
+	}
+
 	public String getResolvedValue() {
 		StringBuffer buf = new StringBuffer();
 		KeywordValueWrapper prev = null;

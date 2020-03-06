@@ -11,6 +11,7 @@ public class PPKeywordValueWrapper {
 	private String resolvedValue = null;
 	private int line = -1;
 	private int posn = -1;
+	private int len = -1;
 	private KeywordValueType type = null;
 	private PPSymbolic symbolic = null;
 
@@ -81,6 +82,7 @@ public class PPKeywordValueWrapper {
 		this.value = t.getSymbol().getText();
 		this.line = t.getSymbol().getLine();
 		this.posn = t.getSymbol().getCharPositionInLine();
+		this.len = this.value.length();
 		this.type = type;
 		this.myName = this.getClass().getName();
 
@@ -142,6 +144,10 @@ public class PPKeywordValueWrapper {
 
 	public KeywordValueType getType() {
 		return this.type;
+	}
+
+	public PPSymbolic getSymbolic() {
+		return this.symbolic;
 	}
 
 	public Boolean isParm() {

@@ -16,6 +16,7 @@ public class Symbolic {
 	private Boolean inProc = null;
 	private int line = -1;
 	private int posn = -1;
+	private int len = -1;
 
 	public static ArrayList<Symbolic> bunchOfThese(List<org.antlr.v4.runtime.tree.TerminalNode> tn
 			, String fileName
@@ -39,6 +40,7 @@ public class Symbolic {
 		this.line = this.token.getLine();
 		this.posn = this.token.getCharPositionInLine();
 		this.text = this.token.getText();
+		this.len = this.text.length();
 		this.inProc = !(procName == null);
 		Demo01.LOGGER.finer(this.myName + " " + this.getText() + " instantiated from " + this.fileName);
 	}
@@ -57,6 +59,10 @@ public class Symbolic {
 
 	public int getPosn() {
 		return this.posn;
+	}
+
+	public int getLen() {
+		return this.len;
 	}
 
 	public String getFileName() {

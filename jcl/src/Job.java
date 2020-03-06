@@ -21,9 +21,10 @@ public class Job {
 	private JCLParser.JcllibStatementContext jcllibCtx = null;
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private ArrayList<Proc> procs  = new ArrayList<>();
-	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
+	private ArrayList<SetSymbolValue> setSym = new ArrayList<>();
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
+	private ArrayList<Symbolic> sym = new ArrayList<>();
 	private String fileName = null;
 	private String jobName = null;
 	private int startLine = -1;
@@ -94,7 +95,7 @@ public class Job {
 		}
 
 		if (this.tmpProcDir == null) {
-			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-and-includes-", this.CLI.saveTemp);
+			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-", this.CLI.saveTemp);
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
@@ -108,12 +109,12 @@ public class Job {
 		}
 
 		if (this.tmpJobDir == null) {
-			this.tmpJobDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-", this.CLI.saveTemp);
+			this.tmpJobDir = tmpJobDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpJobDir set to |" + this.tmpJobDir + "|");
 		}
 
 		if (this.tmpProcDir == null) {
-			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-and-includes-", this.CLI.saveTemp);
+			this.tmpProcDir = tmpProcDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
@@ -123,8 +124,8 @@ public class Job {
 		this.procs.add(iProc);
 	}
 
-	public void addSymbolic(SetSymbolValue symbolic) {
-		this.symbolics.add(symbolic);
+	public void addSymbolic(SetSymbolValue setSym) {
+		this.setSym.add(setSym);
 	}
 
 	public void addInclude(IncludeStatement include) {
@@ -145,8 +146,8 @@ public class Job {
 		*/
 	}
 
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
-		LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " symbolics = |" + symbolics + "|");
+	public void resolveParmedIncludes(ArrayList<SetSymbolValue> setSym) {
+		LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " setSym = |" + setSym + "|");
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -158,22 +159,22 @@ public class Job {
 		*/
 
 		for (IncludeStatement i: this.includes) {
-			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-			for (SetSymbolValue s: this.symbolics) {
+			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			for (SetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
 				) {
-					mergedSymbolics.add(s);
+					mergedSetSym.add(s);
 				}
 			}
-			i.resolveParms(mergedSymbolics);
+			i.resolveParms(mergedSetSym);
 		}
 
 		LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		LOGGER.finest(this.myName + " resolveParms " + this + " symbolics = |" + symbolics + "|");
+	public void resolveParms(ArrayList<SetSymbolValue> setSym) {
+		LOGGER.finest(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -185,15 +186,15 @@ public class Job {
 		*/
 
 		for (JclStep step: this.steps) {
-			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-			for (SetSymbolValue s: this.symbolics) {
+			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			for (SetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
 				) {
-					mergedSymbolics.add(s);
+					mergedSetSym.add(s);
 				}
 			}
-			step.resolveParms(mergedSymbolics);
+			step.resolveParms(mergedSetSym);
 		}
 	}
 
@@ -291,11 +292,57 @@ public class Job {
 
 		return libs;
 	}
-/*
-	public File rewriteWithParmsResolved(File tmpRootDir, Boolean saveTemp) throws IOException {
 
+	public File rewriteWithParmsResolved() throws IOException {
+		/*
+		*/
+		LOGGER.fine(this.myName + " rewriteWithParmsResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+
+		this.sym = this.collectSymbolics();
+		File aFile = new File(this.getFileName());
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
+		if (this.CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
+		String inLine = new String();
+		StringBuffer outLine = new StringBuffer();
+		while ((inLine = src.readLine()) != null) {
+			Symbolic[] symOnThisLine = 
+				this.sym.stream()
+				.filter(s -> s.getLine() == src.getLineNumber())
+				.toArray(Symbolic[]::new);
+			outLine = new StringBuffer(inLine);
+			this.LOGGER.finest(this.myName + " outLine before = |" + outLine + "|");
+			for (Symbolic s: symOnThisLine) {
+				int end = s.getPosn() + s.getLen() - 1;
+				int dot = s.getPosn() + s.getResolvedText().length();
+				outLine.replace(s.getPosn(), end, s.getResolvedText());
+				if (outLine.substring(dot, dot + 1).equals(".")) {
+					outLine.deleteCharAt(dot - 1);
+				}
+			}
+			this.LOGGER.finest(this.myName + " outLine after  = |" + outLine + "|");
+			out.println(outLine);
+		}
+		src.close();
+		out.close();
+		return tmp;
 	}
-*/
+
+	private ArrayList<Symbolic> collectSymbolics() {
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
+
+		for (JclStep j: steps) {
+			symbolics.addAll(j.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 	public Job iterativelyResolveJobIncludes(File initialJobFile) throws IOException {
 		LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
 
@@ -305,39 +352,14 @@ public class Job {
 		int sanity = 0;
 		do {
 			LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
-			ArrayList<IncludeStatement> includes_before = aJob.getAllUnresolvedIncludes();
 			ArrayList<Proc> dummyProcs = new ArrayList<>();
 			ArrayList<Job> thisJob = new ArrayList<>();
 			ArrayList<PPOp> dummyStmts = new ArrayList<>();
 			lexAndParse(thisJob, dummyProcs, dummyStmts, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
-			thisJob.get(0).resolveParmedIncludes(symbolics);
+			thisJob.get(0).resolveParmedIncludes(setSym);
 			ArrayList<IncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
-			LOGGER.finest(this.myName + " includes_before = " + includes_before);
 			LOGGER.finest(this.myName + " includes_after  = " + includes_after);
-/*
-			if (includes_after.size() == includes_before.size()) {
-				LOGGER.finest(this.myName + " includes_after.size() == includes_before.size()");
-				Boolean allContained = true;
-				for (IncludeStatement ia: includes_after) {
-					Boolean contains = false;
-					for (IncludeStatement ib: includes_before) {
-						if (ia.isProbablyTheSame(ib)) {
-							LOGGER.finest(this.myName + " ia = |" + ia + "| ib = |" + ib + "| isProbablyTheSame");
-							contains = true;
-							break;
-						}
-					}
-					allContained = allContained && contains;
-				}
-				if (allContained) {
-					iterating = false;
-				}
-			} else {
-				LOGGER.finest(this.myName + " includes_after.size() != includes_before.size()");
-				iterating = true;
-			}
-*/
 			if (iterating) {
 				aJob = thisJob.get(0);
 				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
@@ -382,7 +404,7 @@ public class Job {
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + "job-" + this.getJobName() + "-" + this.getUUID());
+		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();

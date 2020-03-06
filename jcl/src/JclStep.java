@@ -26,7 +26,7 @@ public class JclStep {
 	private JCLParser.ExecPgmStatementContext execPgmStmtCtx = null;
 	private JCLParser.ExecProcStatementContext execProcStmtCtx = null;
 	private List<JCLParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
-	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
+	private ArrayList<SetSymbolValue> setSym = new ArrayList<>();
 	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
 
 	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName, Logger LOGGER, TheCLI CLI) {
@@ -69,7 +69,7 @@ public class JclStep {
 			}
 			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName);
 			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
-				this.symbolics.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
+				this.setSym.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
 			}
 		}
 
@@ -109,17 +109,42 @@ public class JclStep {
 		return this.line;
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
-		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-		mergedSymbolics.addAll(this.symbolics);
+	public ArrayList<Symbolic> collectSymbolics() {
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
 
-		for (DdStatementAmalgamation dda: ddStatements) {
-			dda.resolveParms(mergedSymbolics);
+		if (this.isExecPgm()) {
+			symbolics.addAll(this.pgmExecuted.collectSymbolics());
+		} else {
+			symbolics.addAll(this.procExecuted.collectSymbolics());
 		}
 
+
+		return symbolics;
+	}
+
+	public void resolveParms(ArrayList<SetSymbolValue> setSym) {
+		/*
+			Symbolics come from SET statements and dynamic system symbols defined
+			on the command line.
+
+			The mergedSetSym are only created and used when executing a proc, and
+			would be empty anyway if just executing a program.  We do have to take
+			them into account when resolving DD statements as those are overrides or
+			additions to the executed proc.
+		*/
+		LOGGER.finest(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
+
 		if (this.proc != null) {
-			this.proc.resolveParms(mergedSymbolics);
+			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			mergedSetSym.addAll(this.setSym);
+			this.proc.resolveParms(mergedSetSym);
+			for (DdStatementAmalgamation dda: ddStatements) {
+				dda.resolveParms(mergedSetSym);
+			}
+		} else {
+			for (DdStatementAmalgamation dda: ddStatements) {
+				dda.resolveParms(setSym);
+			}
 		}
 	}
 

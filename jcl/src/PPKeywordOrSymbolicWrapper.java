@@ -237,6 +237,21 @@ public class PPKeywordOrSymbolicWrapper {
 		return b;
 	}
 
+	public ArrayList<PPSymbolic> collectSymbolics() {
+
+		PPKeywordValueWrapper[] symbolic_kvw = 
+			kvw.stream()
+			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
+			.toArray(PPKeywordValueWrapper[]::new);
+
+		ArrayList<PPSymbolic> sym = new ArrayList<>();
+		for (PPKeywordValueWrapper k: symbolic_kvw) {
+			sym.add(k.getSymbolic());
+		}
+
+		return sym;
+	}
+
 	public String getResolvedValue() {
 		StringBuffer buf = new StringBuffer();
 		PPKeywordValueWrapper prev = null;

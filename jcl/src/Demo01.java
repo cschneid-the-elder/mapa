@@ -67,8 +67,6 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes(symbolics);
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
-			//File tmpJobDir = newTempDir();
-			//File tmpProcDir = newTempDir();
 			File jobFile = j.rewriteJobAndSeparateInstreamProcs(baseDir);
 			/*
 				Now must iteratively parse this job until all includes 

@@ -87,16 +87,12 @@ public class IncludeStatement {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(this + " resolveParms");
+		Demo01.LOGGER.fine(this.myName + " resolveParms sets = |" + sets + "|");
 		this.kywd.resolveParms(sets);
 	}
 
 	public Boolean isResolved() {
 		return this.kywd.isResolved();
-	}
-
-	public Boolean isProbablyTheSame(IncludeStatement i) {
-		return this.getOriginalText().equals(i.getOriginalText());
 	}
 
 	public String toString() {
