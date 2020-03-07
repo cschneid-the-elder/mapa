@@ -10,7 +10,6 @@ public class PPListener extends JCLPPParserBaseListener {
 	private TheCLI CLI = null;
 	public ArrayList<PPJob> jobs = null;
 	public ArrayList<PPProc> procs = null;
-	public ArrayList<PPOp> stmts = null;
 	public ArrayList<PPSetSymbolValue> sets = null;
 	public String fileName = null;
 	public String procName = null;
@@ -21,7 +20,6 @@ public class PPListener extends JCLPPParserBaseListener {
 	public PPListener(
 			ArrayList<PPJob> jobs
 			, ArrayList<PPProc> procs
-			, ArrayList<PPOp> stmts
 			, String fileName
 			, Logger LOGGER
 			, TheCLI CLI
@@ -29,7 +27,6 @@ public class PPListener extends JCLPPParserBaseListener {
 		super();
 		this.jobs = jobs;
 		this.procs = procs;
-		this.stmts = stmts;
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
@@ -45,7 +42,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
-		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+		this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {
@@ -53,23 +50,43 @@ public class PPListener extends JCLPPParserBaseListener {
 	}
 
 	@Override public void enterCommandStatement(JCLPPParser.CommandStatementContext ctx) {
-		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+		if (this.currProc == null) {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		}
 	}
 
 	@Override public void enterJclCommandStatement(JCLPPParser.JclCommandStatementContext ctx) {
-		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+		if (this.currProc == null) {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		}
 	}
 
 	@Override public void enterScheduleStatement(JCLPPParser.ScheduleStatementContext ctx) {
-		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+		if (this.currProc == null) {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		}
 	}
 
 	@Override public void enterNotifyStatement(JCLPPParser.NotifyStatementContext ctx) {
-		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+		if (this.currProc == null) {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		}
 	}
 
 	@Override public void enterOutputStatement(JCLPPParser.OutputStatementContext ctx) {
-		this.stmts.add(new PPOp(ctx, this.fileName, this.procName));
+		if (this.currProc == null) {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		}
 	}
 
 	@Override public void enterXmitStatement(JCLPPParser.XmitStatementContext ctx) {

@@ -73,6 +73,21 @@ public class SetSymbolValue {
 		myName = this.getClass().getName();
 	}
 
+	public void resolveParms(ArrayList<SetSymbolValue> sets) {
+		Demo01.LOGGER.finer(myName + " resolveParms sets: " + sets);
+
+		ArrayList<SetSymbolValue> notThisSet = new ArrayList<>(sets);
+		notThisSet.remove(this);
+
+		Demo01.LOGGER.finer(myName + " resolveParms notThisSet: " + notThisSet);
+
+		this.kywd.resolveParms(notThisSet);
+	}
+
+	public Boolean isParameterized() {
+		return this.kywd.isParameterized();
+	}
+
 	public String getFileName() {
 		return this.fileName;
 	}

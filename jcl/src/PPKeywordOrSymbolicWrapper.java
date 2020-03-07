@@ -237,6 +237,10 @@ public class PPKeywordOrSymbolicWrapper {
 		return b;
 	}
 
+	public Boolean isParameterized() {
+		return this.parameterized;
+	}
+
 	public ArrayList<PPSymbolic> collectSymbolics() {
 
 		PPKeywordValueWrapper[] symbolic_kvw = 

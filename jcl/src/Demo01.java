@@ -56,13 +56,12 @@ public static void main(String[] args) throws Exception {
 
 	ArrayList<PPProc> procs = new ArrayList<>();
 	ArrayList<PPJob> jobs = new ArrayList<>();
-	ArrayList<PPOp> stmts = new ArrayList<>();
 	ArrayList<PPJob> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
 	File baseDir = newTempDir(); // Use later for temp job/proc root
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
-		lexAndParse(jobs, procs, stmts, aFileName);
+		lexAndParse(jobs, procs, aFileName);
 		for (PPJob j: jobs) {
 			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes(symbolics);
@@ -90,7 +89,7 @@ public static void main(String[] args) throws Exception {
 	LOGGER.info("Processing complete");
 }
 
-	public static void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, ArrayList<PPOp> stmts, String fileName) throws IOException {
+	public static void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
 		LOGGER.fine("lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
@@ -102,7 +101,7 @@ public static void main(String[] args) throws Exception {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName, LOGGER, CLI);
+		PPListener jobListener = new PPListener(jobs, procs, fileName, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	

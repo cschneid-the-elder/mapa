@@ -109,8 +109,23 @@ public class PPOp {
 		}
 	}
 
+	public ArrayList<PPSymbolic> collectSymbolics() {
+		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+
+		return new ArrayList<>(this.symbolics.keySet());
+	}
+
 	public String toString() {
-		StringBuffer buf = new StringBuffer(this.myName + " fileName: |" + this.fileName + "| procName: |" + this.procName + "| symbolics: |" + symbolics + "|");
+		StringBuffer buf = new StringBuffer(
+			this.myName 
+			+ " fileName: |" 
+			+ this.fileName 
+			+ "| procName: |" 
+			+ this.procName 
+			+ "| symbolics: |" 
+			+ symbolics 
+			+ "|"
+			);
 
 		/*for (Symbolic s: this.symbolics.keySet()) {
 			buf.append(

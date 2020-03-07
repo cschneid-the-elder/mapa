@@ -10,7 +10,6 @@ public class JobListener extends JCLParserBaseListener {
 	private TheCLI CLI = null;
 	public ArrayList<Job> jobs = null;
 	public ArrayList<Proc> procs = null;
-	public ArrayList<PPOp> stmts = null;
 	public String fileName = null;
 	public String procName = null;
 	public Job currJob = null;
@@ -20,7 +19,6 @@ public class JobListener extends JCLParserBaseListener {
 	public JobListener(
 			ArrayList<Job> jobs
 			, ArrayList<Proc> procs
-			, ArrayList<PPOp> stmts
 			, String fileName
 			, Logger LOGGER
 			, TheCLI CLI

@@ -139,6 +139,8 @@ public class PPJclStep {
 		*/
 		LOGGER.finest(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
 
+		// TODO procExecuted & pgmExecuted resolveParms(mergedSetSym)
+
 		if (this.proc != null) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);

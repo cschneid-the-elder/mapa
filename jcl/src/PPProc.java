@@ -18,6 +18,7 @@ public class PPProc {
 	private ArrayList<PPSetSymbolValue> symbolics = new ArrayList<>();
 	private ArrayList<PPIncludeStatement> includes = new ArrayList<>();
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
+	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String procName = null;
 	private int startLine = -1;
@@ -71,6 +72,10 @@ public class PPProc {
 
 	public void addJclStep(PPJclStep step) {
 		this.steps.add(step);
+	}
+
+	public void addOp(PPOp anOp) {
+		this.op.add(anOp);
 	}
 
 	public String getProcName() {

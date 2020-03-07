@@ -18,6 +18,7 @@ public class Proc {
 	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
+	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String procName = null;
 	private int startLine = -1;
@@ -71,6 +72,10 @@ public class Proc {
 
 	public void addJclStep(JclStep step) {
 		this.steps.add(step);
+	}
+
+	public void addOp(PPOp anOp) {
+		this.op.add(anOp);
 	}
 
 	public String getProcName() {

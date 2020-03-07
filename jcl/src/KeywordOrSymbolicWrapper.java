@@ -237,6 +237,10 @@ public class KeywordOrSymbolicWrapper {
 		return b;
 	}
 
+	public Boolean isParameterized() {
+		return this.parameterized;
+	}
+
 	public ArrayList<Symbolic> collectSymbolics() {
 
 		KeywordValueWrapper[] symbolic_kvw = 

@@ -25,6 +25,7 @@ public class PPJob {
 	private ArrayList<PPIncludeStatement> includes = new ArrayList<>();
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
 	private ArrayList<PPSymbolic> sym = new ArrayList<>();
+	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String jobName = null;
 	private int startLine = -1;
@@ -146,6 +147,10 @@ public class PPJob {
 		*/
 	}
 
+	public void addOp(PPOp anOp) {
+		this.op.add(anOp);
+	}
+
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> setSym) {
 		LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " setSym = |" + setSym + "|");
 
@@ -184,6 +189,12 @@ public class PPJob {
 			These symbolics are merged with the relevant symbolics (those whose SET
 			statement come before the step being processed) from this job.
 		*/
+
+		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(setSym);
+		allSym.addAll(this.setSym);
+		for (PPSetSymbolValue s: this.setSym) {
+			s.resolveParms(allSym);
+		}
 
 		for (PPJclStep step: this.steps) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
@@ -372,20 +383,23 @@ public class PPJob {
 			LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
 			ArrayList<PPProc> dummyProcs = new ArrayList<>();
 			ArrayList<PPJob> thisJob = new ArrayList<>();
-			ArrayList<PPOp> dummyStmts = new ArrayList<>();
-			lexAndParse(thisJob, dummyProcs, dummyStmts, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+			lexAndParse(thisJob, dummyProcs, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes(setSym);
 			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
 			LOGGER.finest(this.myName + " includes_after  = " + includes_after);
-			if (iterating) {
-				aJob = thisJob.get(0);
-				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
-				jobFile = aJob.rewriteJobWithIncludesResolved();
-			}
+			aJob = thisJob.get(0);
+			aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
+			jobFile = aJob.rewriteJobWithIncludesResolved();
 			sanity++;
 			if (includes_after.size() == 0) {
+				//includes resolved, parse one last time to get resolved PPJob instance
 				iterating = false;
+				dummyProcs = new ArrayList<>();
+				thisJob = new ArrayList<>();
+				lexAndParse(thisJob, dummyProcs, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+				aJob = thisJob.get(0);
+				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) LOGGER.severe(this.myName + " sanity check failed in iterativelyResolveJobIncludes for " + this);
@@ -393,7 +407,7 @@ public class PPJob {
 		return aJob;
 	}
 
-	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, ArrayList<PPOp> stmts, String fileName) throws IOException {
+	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
 		LOGGER.fine(this.myName + " lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
@@ -405,7 +419,7 @@ public class PPJob {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, stmts, fileName, LOGGER, CLI);
+		PPListener jobListener = new PPListener(jobs, procs, fileName, LOGGER, CLI);
 	
 		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

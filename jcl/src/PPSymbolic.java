@@ -17,6 +17,7 @@ public class PPSymbolic {
 	private int line = -1;
 	private int posn = -1;
 	private int len = -1;
+	private PPSetSymbolValue ssv = null;
 
 	public static ArrayList<PPSymbolic> bunchOfThese(List<org.antlr.v4.runtime.tree.TerminalNode> tn
 			, String fileName
@@ -74,12 +75,13 @@ public class PPSymbolic {
 	}
 
 	public Boolean isResolved() {
-		return this.resolvedText != null;
+		return (this.resolvedText != null && !this.ssv.isParameterized());
 	}
 
-	public void setResolvedValue(String v) {
-		Demo01.LOGGER.finer(myName + " text = |" + this.getText() + "| setResolvedValue(" + v + ")");
-		this.resolvedText = v;
+	public void setResolvedValue(PPSetSymbolValue s) {
+		Demo01.LOGGER.finer(myName + " text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
+		this.resolvedText = s.getParmValue();
+		this.ssv = s;
 	}
 
 	public String getResolvedText() {
@@ -101,23 +103,23 @@ public class PPSymbolic {
 						&& !s.parmSetByExec(sets, this.procName) && !s.parmDefinedByProc(sets))
 					|| (!this.inProc && !s.inProc && this.getLine() > s.getLine())
 					) {
-						this.setResolvedValue(s.getParmValue());
+						this.setResolvedValue(s);
 					}
 					break;
 				case PROC:
 					if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
 						&& !s.parmSetByExec(sets, this.procName))
 					) {
-						this.setResolvedValue(s.getParmValue());
+						this.setResolvedValue(s);
 					}
 					break;
 				case EXEC:
 					if (this.inProc) {
-						this.setResolvedValue(s.getParmValue());
+						this.setResolvedValue(s);
 					}
 					break;
 				case SYS:
-					this.setResolvedValue(s.getParmValue());
+					this.setResolvedValue(s);
 					break;
 				default:
 					break;
