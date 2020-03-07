@@ -85,7 +85,12 @@ public class PPSymbolic {
 	}
 
 	public String getResolvedText() {
-		return this.resolvedText;
+		//return this.resolvedText;
+		if (this.ssv == null || !this.ssv.isParameterized()) {
+			return this.resolvedText;
+		} else {
+			return this.ssv.getResolvedValue();
+		}
 	}
 
 	public void resolve(ArrayList<PPSetSymbolValue> sets) {

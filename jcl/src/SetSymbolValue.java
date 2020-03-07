@@ -195,6 +195,10 @@ public class SetSymbolValue {
 		return this.parmValue;
 	}
 
+	public String getResolvedValue() {
+		return kywd.getResolvedValue();
+	}
+
 	private String getParmNameForSetOperationContext() {
 		JCLParser.SetOperationContext ctx = (JCLParser.SetOperationContext)this.ctx;
 

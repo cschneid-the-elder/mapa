@@ -195,6 +195,10 @@ public class PPSetSymbolValue {
 		return this.parmValue;
 	}
 
+	public String getResolvedValue() {
+		return kywd.getResolvedValue();
+	}
+
 	private String getParmNameForSetOperationContext() {
 		JCLPPParser.SetOperationContext ctx = (JCLPPParser.SetOperationContext)this.ctx;
 
