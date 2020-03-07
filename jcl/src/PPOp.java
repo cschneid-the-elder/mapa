@@ -127,18 +127,6 @@ public class PPOp {
 			+ "|"
 			);
 
-		/*for (Symbolic s: this.symbolics.keySet()) {
-			buf.append(
-				"| symbolic: |"
-				+ s.getText() 
-				+ "| line: |" 
-				+ s.getLine() 
-				+ "| posn: |" 
-				+ s.getPosn()
-				+ "|"
-			);
-		}*/
-
 		return buf.toString();
 	}
 

@@ -85,7 +85,6 @@ public class Symbolic {
 	}
 
 	public String getResolvedText() {
-		//return this.resolvedText;
 		if (this.ssv == null || !this.ssv.isParameterized()) {
 			return this.resolvedText;
 		} else {

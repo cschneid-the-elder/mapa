@@ -137,85 +137,8 @@ public class PPKeywordOrSymbolicWrapper {
 			k.resolve(sets);
 		}
 
-		/*
-		PPKeywordValueWrapper[] symbolic_kvw = 
-			kvw.stream()
-			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC)
-			.toArray(PPKeywordValueWrapper[]::new);
-
-		for(PPKeywordValueWrapper k: symbolic_kvw) {
-			Demo01.LOGGER.finest(myName + " k: " + k);
-			PPSetSymbolValue[] matching_sets =
-				sets.stream()
-				.filter(s -> s.getParmName().equals(k.getParmName()))
-				.toArray(PPSetSymbolValue[]::new);
-			for(PPSetSymbolValue s: matching_sets) {
-				Demo01.LOGGER.finest(myName + " s: " + s);
-				switch(s.getSetType()) {
-					case SET:
-						if ((this.inProc  
-							&& !s.parmSetByExec(sets, this.procName) && !s.parmDefinedByProc(sets))
-						|| (!this.inProc && !s.inProc && k.getLine() > s.getLine())
-						) {
-							k.setResolvedValue(s.getParmValue());
-						}
-						break;
-					case PROC:
-						if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
-							&& !s.parmSetByExec(sets, this.procName))
-						) {
-							k.setResolvedValue(s.getParmValue());
-						}
-						break;
-					case EXEC:
-						if (this.inProc) {
-							k.setResolvedValue(s.getParmValue());
-						}
-						break;
-					case SYS:
-						k.setResolvedValue(s.getParmValue());
-						break;
-					default:
-						break;
-				}
-			}
-		}
-		*/
-	}
-/*
-	private Boolean parmSetByExec(ArrayList<PPSetSymbolValue> sets, PPSetSymbolValue v) {
-		Boolean rc = false;
-
-		for(PPSetSymbolValue s: sets) {
-			if (s.getParmName().equals(v.getParmName())
-			&& s.getSetType() == SetTypeOfSymbolValue.EXEC
-			&& s.getProcBeingExecuted().equals(this.procName)
-			&& s != v
-			) {
-				rc = true;
-				break;
-			}
-		}
-
-		return rc;
 	}
 
-	private Boolean parmDefinedByProc(ArrayList<PPSetSymbolValue> sets, PPSetSymbolValue v) {
-		Boolean rc = false;
-
-		for(PPSetSymbolValue s: sets) {
-			if (s.getParmName().equals(v.getParmName())
-			&& s.getSetType() == SetTypeOfSymbolValue.PROC
-			&& s != v
-			) {
-				rc = true;
-				break;
-			}
-		}
-
-		return rc;
-	}
-*/
 	public String getValue() {
 		StringBuffer buf = new StringBuffer();
 

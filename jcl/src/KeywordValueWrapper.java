@@ -102,26 +102,6 @@ public class KeywordValueWrapper {
 		}
 	}
 
-/*	public KeywordValueWrapper(String value, int line, int posn, KeywordValueType type) {
-		Demo01.LOGGER.warning("KeywordValueWrapper instantiated via KeywordValueWrapper(String value, int line, int posn, KeywordValueType type)");
-
-		this.value = value;
-		this.line = line;
-		this.posn = posn;
-		this.type = type;
-
-		switch(type) {
-			case AMPERSAND :
-				this.setResolvedValue("&");
-				break;
-			case SINGLE_QUOTE :
-				this.setResolvedValue("'");
-				break;
-			default :
-				break;
-		}
-	}*/
-
 	public String getValue() {
 		return this.value;
 	}
