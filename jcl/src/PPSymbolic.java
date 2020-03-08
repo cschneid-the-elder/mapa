@@ -79,7 +79,7 @@ public class PPSymbolic {
 	}
 
 	public void setResolvedValue(PPSetSymbolValue s) {
-		Demo01.LOGGER.finer(myName + " text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
+		Demo01.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
 		this.resolvedText = s.getParmValue();
 		this.ssv = s;
 	}
@@ -100,7 +100,7 @@ public class PPSymbolic {
 			.filter(s -> s.getParmName().equals(this.getParmName()))
 			.toArray(PPSetSymbolValue[]::new);
 		for(PPSetSymbolValue s: matching_sets) {
-			Demo01.LOGGER.finest(myName + " s: " + s);
+			Demo01.LOGGER.finest(myName + " resolve s: |" + s + "|");
 			switch(s.getSetType()) {
 				case SET:
 					if ((this.inProc  

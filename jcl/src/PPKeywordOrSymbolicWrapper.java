@@ -122,16 +122,14 @@ public class PPKeywordOrSymbolicWrapper {
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
-		Demo01.LOGGER.finer(myName + " resolveParms sets: " + sets);
+		Demo01.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
 
 		if (this.parameterized) {
-			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
+			Demo01.LOGGER.finer(myName + " parameterized == true  - continuing");
 		} else {
-			Demo01.LOGGER.finest(myName + " parameterized == false - exiting");
+			Demo01.LOGGER.finer(myName + " parameterized == false - exiting");
 			return;
 		}
-
-		Demo01.LOGGER.finest(myName + " resolveParms this: " + this);
 
 		for(PPKeywordValueWrapper k: this.kvw) {
 			k.resolve(sets);

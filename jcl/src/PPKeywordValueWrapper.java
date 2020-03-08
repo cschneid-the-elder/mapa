@@ -165,7 +165,7 @@ public class PPKeywordValueWrapper {
 	}
 
 	public void setResolvedValue(String resolvedValue) {
-		Demo01.LOGGER.finest(this.myName + " " + this + " setResolvedValue(" + resolvedValue + ")");
+		Demo01.LOGGER.fine(this.myName + " setResolvedValue this = |" + this + "| resolvedValue = |" + resolvedValue + "|");
 		this.resolvedValue = resolvedValue;
 	}
 

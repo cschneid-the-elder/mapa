@@ -74,12 +74,12 @@ public class SetSymbolValue {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.finer(myName + " resolveParms sets: " + sets);
+		Demo01.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets +"|");
 
 		ArrayList<SetSymbolValue> notThisSet = new ArrayList<>(sets);
 		notThisSet.remove(this);
 
-		Demo01.LOGGER.finer(myName + " resolveParms notThisSet: " + notThisSet);
+		Demo01.LOGGER.finest(myName + " resolveParms notThisSet = |" + notThisSet + "|");
 
 		this.kywd.resolveParms(notThisSet);
 	}
