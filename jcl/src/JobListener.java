@@ -8,6 +8,7 @@ public class JobListener extends JCLParserBaseListener {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
+	private String myName = null;
 	public ArrayList<Job> jobs = null;
 	public ArrayList<Proc> procs = null;
 	public String fileName = null;
@@ -29,6 +30,21 @@ public class JobListener extends JCLParserBaseListener {
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
+		this.myName = this.getClass().getName();
+	}
+
+	public JobListener(
+			ArrayList<Proc> procs
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		super();
+		this.procs = procs;
+		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.myName = this.getClass().getName();
 	}
 
 	@Override public void enterJobCard(JCLParser.JobCardContext ctx) {
@@ -37,7 +53,11 @@ public class JobListener extends JCLParserBaseListener {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
 		this.currJob = new Job(ctx, fileName, this.LOGGER, this.CLI);
-		this.jobs.add(this.currJob);
+		if (this.jobs == null) {
+			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
+		} else {
+			this.jobs.add(this.currJob);
+		}
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
@@ -49,9 +69,9 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterSetOperation(JCLParser.SetOperationContext ctx) { 
 		if (this.currProc == null) {
-			this.currJob.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currJob.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName));
 		} else {
-			this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName));
 		}
 	}
 
@@ -66,7 +86,7 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+		this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {

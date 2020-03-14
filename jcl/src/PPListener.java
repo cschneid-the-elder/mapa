@@ -8,6 +8,7 @@ public class PPListener extends JCLPPParserBaseListener {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
+	private String myName = null;
 	public ArrayList<PPJob> jobs = null;
 	public ArrayList<PPProc> procs = null;
 	public ArrayList<PPSetSymbolValue> sets = null;
@@ -30,6 +31,21 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
+		this.myName = this.getClass().getName();
+	}
+
+	public PPListener(
+			ArrayList<PPProc> procs
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		super();
+		this.procs = procs;
+		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.myName = this.getClass().getName();
 	}
 
 	@Override public void enterJobCard(JCLPPParser.JobCardContext ctx) {
@@ -38,7 +54,11 @@ public class PPListener extends JCLPPParserBaseListener {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
 		this.currJob = new PPJob(ctx, fileName, this.LOGGER, this.CLI);
-		this.jobs.add(this.currJob);
+		if (this.jobs == null) {
+			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
+		} else {
+			this.jobs.add(this.currJob);
+		}
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
@@ -46,7 +66,10 @@ public class PPListener extends JCLPPParserBaseListener {
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {
-		this.currJob.addJcllib(ctx);
+		if (this.jobs == null) {
+		} else {
+			this.currJob.addJcllib(ctx);
+		}
 	}
 
 	@Override public void enterCommandStatement(JCLPPParser.CommandStatementContext ctx) {
@@ -101,9 +124,9 @@ public class PPListener extends JCLPPParserBaseListener {
 		*/
 
 		if (this.currProc == null) {
-			this.currJob.addSymbolic(new PPSetSymbolValue(ctx, this.fileName, null));
+			this.currJob.addSetSym(new PPSetSymbolValue(ctx, this.fileName, null));
 		} else {
-			this.currProc.addSymbolic(new PPSetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSetSym(new PPSetSymbolValue(ctx, this.fileName, this.procName));
 		}
 	}
 
@@ -118,7 +141,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLPPParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSymbolic(new PPSetSymbolValue(ctx, this.fileName, this.procName));
+		this.currProc.addSetSym(new PPSetSymbolValue(ctx, this.fileName, this.procName));
 	}
 
 	@Override public void enterPendStatement(JCLPPParser.PendStatementContext ctx) {

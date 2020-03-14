@@ -15,7 +15,7 @@ public class PPProc {
 	private String myName = null;
 	private JCLPPParser.ProcStatementContext procCtx = null;
 	private JCLPPParser.PendStatementContext pendCtx = null;
-	private ArrayList<PPSetSymbolValue> symbolics = new ArrayList<>();
+	private ArrayList<PPSetSymbolValue> setSym = new ArrayList<>();
 	private ArrayList<PPIncludeStatement> includes = new ArrayList<>();
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
 	private ArrayList<PPOp> op = new ArrayList<>();
@@ -66,8 +66,8 @@ public class PPProc {
 		this.includes.add(include);
 	}
 
-	public void addSymbolic(PPSetSymbolValue symbolic) {
-		this.symbolics.add(symbolic);
+	public void addSetSym(PPSetSymbolValue setSym) {
+		this.setSym.add(setSym);
 	}
 
 	public void addJclStep(PPJclStep step) {
@@ -122,31 +122,37 @@ public class PPProc {
 		return new ArrayList<PPIncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
-	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> symbolics) {
+	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> setSym) {
 		LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
-		ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-		mergedSymbolics.addAll(this.symbolics);
+		ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+		mergedSetSym.addAll(this.setSym);
 
 		for (PPIncludeStatement i: includes) {
-			i.resolveParms(mergedSymbolics);
+			i.resolveParms(mergedSetSym);
 		}
 		LOGGER.finest(myName + " includes (after resolving): " + includes);
 
 	}
 
-	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {
-		LOGGER.fine(myName + " " + this.procName + " resolveParms");
+	public void resolveParms(ArrayList<PPSetSymbolValue> setSym) {
+		LOGGER.fine(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
+
+		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(setSym);
+		allSym.addAll(this.setSym);
+		for (PPSetSymbolValue s: this.setSym) {
+			s.resolveParms(allSym);
+		}
 
 		for (PPJclStep step: steps) {
-			ArrayList<PPSetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-			for (PPSetSymbolValue s: this.symbolics) {
+			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			for (PPSetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
 				) {
-					mergedSymbolics.add(s);
+					mergedSetSym.add(s);
 				}
 			}
-			step.resolveParms(mergedSymbolics);
+			step.resolveParms(mergedSetSym);
 		}
 
 	}

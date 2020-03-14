@@ -15,7 +15,7 @@ public class Proc {
 	private String myName = null;
 	private JCLParser.ProcStatementContext procCtx = null;
 	private JCLParser.PendStatementContext pendCtx = null;
-	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
+	private ArrayList<SetSymbolValue> setSym = new ArrayList<>();
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
 	private ArrayList<PPOp> op = new ArrayList<>();
@@ -66,8 +66,8 @@ public class Proc {
 		this.includes.add(include);
 	}
 
-	public void addSymbolic(SetSymbolValue symbolic) {
-		this.symbolics.add(symbolic);
+	public void addSetSym(SetSymbolValue setSym) {
+		this.setSym.add(setSym);
 	}
 
 	public void addJclStep(JclStep step) {
@@ -122,31 +122,37 @@ public class Proc {
 		return new ArrayList<IncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
+	public void resolveParmedIncludes(ArrayList<SetSymbolValue> setSym) {
 		LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
-		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-		mergedSymbolics.addAll(this.symbolics);
+		ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+		mergedSetSym.addAll(this.setSym);
 
 		for (IncludeStatement i: includes) {
-			i.resolveParms(mergedSymbolics);
+			i.resolveParms(mergedSetSym);
 		}
 		LOGGER.finest(myName + " includes (after resolving): " + includes);
 
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		LOGGER.fine(myName + " " + this.procName + " resolveParms");
+	public void resolveParms(ArrayList<SetSymbolValue> setSym) {
+		LOGGER.fine(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
+
+		ArrayList<SetSymbolValue> allSym = new ArrayList<>(setSym);
+		allSym.addAll(this.setSym);
+		for (SetSymbolValue s: this.setSym) {
+			s.resolveParms(allSym);
+		}
 
 		for (JclStep step: steps) {
-			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-			for (SetSymbolValue s: this.symbolics) {
+			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			for (SetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
 				) {
-					mergedSymbolics.add(s);
+					mergedSetSym.add(s);
 				}
 			}
-			step.resolveParms(mergedSymbolics);
+			step.resolveParms(mergedSetSym);
 		}
 
 	}

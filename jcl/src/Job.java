@@ -125,7 +125,7 @@ public class Job {
 		this.procs.add(iProc);
 	}
 
-	public void addSymbolic(SetSymbolValue setSym) {
+	public void addSetSym(SetSymbolValue setSym) {
 		this.setSym.add(setSym);
 	}
 
@@ -135,16 +135,6 @@ public class Job {
 
 	public void addJclStep(JclStep step) {
 		this.steps.add(step);
-		/*
-		if (step.isExecProc()) {
-			for (Proc p: procs) {
-				if (step.getProcExecuted().equals(p.getProcName())) {
-					step.setProc(p);
-					break;
-				}
-			}
-		}
-		*/
 	}
 
 	public void addOp(PPOp anOp) {
@@ -206,6 +196,14 @@ public class Job {
 				}
 			}
 			step.resolveParms(mergedSetSym);
+		}
+	}
+
+	public void resolveProcs() throws IOException {
+		LOGGER.finest(this.myName + " resolveProcs " + this);
+
+		for (JclStep step: this.steps) {
+			step.resolveProc(this);
 		}
 	}
 
@@ -449,7 +447,7 @@ public class Job {
 			if (i == null) {
 				out.println(inLine);
 			} else {
-				if (writeTheIncludeContent(i, out, this.tmpProcDir)) {
+				if (writeTheIncludeContent(i, out)) {
 				} else {
 					out.println(inLine);
 				}
@@ -517,7 +515,7 @@ public class Job {
 				if (i == null) {
 					out.println(inLine);
 				} else {
-					if (writeTheIncludeContent(i, out, this.tmpProcDir)) {
+					if (writeTheIncludeContent(i, out)) {
 					} else {
 						out.println(inLine);
 					}
@@ -544,10 +542,10 @@ public class Job {
 	public Boolean writeTheIncludeContent(
 							IncludeStatement i
 							, PrintWriter out
-							, File tmpProcDir)
+							)
 						throws IOException {
 
-		LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "| tmpProcDir = |" + tmpProcDir.getName() + "|");
+		LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -557,7 +555,7 @@ public class Job {
 		Boolean foundIt = true;
 		String includeFile = i.getResolvedText();
 
-		String includeFileFull = searchProcPathsFor(includeFile, tmpProcDir);
+		String includeFileFull = searchProcPathsFor(includeFile);
 
 		if (includeFileFull == null) {
 			foundIt = false;
@@ -572,8 +570,8 @@ public class Job {
 		return foundIt;
 	}
 
-	public String searchProcPathsFor(String fileName, File tmpProcDir) throws IOException {
-		File aFile = new File(tmpProcDir.getName() + File.separator + fileName);
+	public String searchProcPathsFor(String fileName) throws IOException {
+		File aFile = new File(this.tmpProcDir.getName() + File.separator + fileName);
 		if (aFile.exists()) {
 			LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 			return aFile.getCanonicalPath();

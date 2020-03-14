@@ -1,6 +1,8 @@
 
 import java.util.*;
 import java.util.logging.*;
+import java.io.*;
+import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -153,6 +155,41 @@ public class JclStep {
 				dda.resolveParms(setSym);
 			}
 		}
+	}
+
+	public void resolveProc(Job myJob) throws IOException {
+		this.LOGGER.fine(this.myName + " resolveProc " + this.getProcExecuted());
+
+		if (this.needsProc()) {
+			String aProc = myJob.searchProcPathsFor(this.getProcExecuted());
+			if (aProc == null) {
+				this.LOGGER.warning(this + " proc not found");
+			} else {
+				ArrayList<Proc> procs = new ArrayList<>();
+				this.lexAndParse(procs, aProc);
+			}
+
+		}
+	}
+
+	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
+		LOGGER.fine(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
+
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		JobListener jobListener = new JobListener(procs, fileName, LOGGER, CLI);
+	
+		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
+	
+		jclwalker.walk(jobListener, jcltree);
+
 	}
 
 	public UUID getUUID() {
