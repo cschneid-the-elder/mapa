@@ -39,7 +39,7 @@ public class JclStep {
 		this.CLI = CLI;
 		this.inProc = !(procName == null);
 		this.initialize();
-		LOGGER.finer(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
+		this.LOGGER.finer(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
 
 	}
 
@@ -51,9 +51,9 @@ public class JclStep {
 		this.ddStmtAmlgnCtxs = this.jclStepCtx.ddStatementAmalgamation();
 		
 		if (this.isExecProc() && this.isExecPgm()) {
-			LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
+			this.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
 		} else if (!this.isExecProc() && !this.isExecPgm()) {
-			LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are null");
+			this.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are null");
 		}
 
 		if (this.isExecPgm()) {
@@ -112,7 +112,7 @@ public class JclStep {
 	}
 
 	public ArrayList<Symbolic> collectSymbolics() {
-		Demo01.LOGGER.fine(this.myName + " collectSymbolics");
+		this.LOGGER.fine(this.myName + " collectSymbolics");
 
 		ArrayList<Symbolic> symbolics = new ArrayList<>();
 
@@ -139,7 +139,7 @@ public class JclStep {
 			them into account when resolving DD statements as those are overrides or
 			additions to the executed proc.
 		*/
-		LOGGER.finest(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
+		this.LOGGER.finest(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
 
 		// TODO procExecuted & pgmExecuted resolveParms(mergedSetSym)
 
@@ -161,19 +161,19 @@ public class JclStep {
 		this.LOGGER.fine(this.myName + " resolveProc " + this.getProcExecuted());
 
 		if (this.needsProc()) {
-			String aProc = myJob.searchProcPathsFor(this.getProcExecuted());
-			if (aProc == null) {
+			String aProcFile = myJob.searchProcPathsFor(this.getProcExecuted());
+			if (aProcFile == null) {
 				this.LOGGER.warning(this + " proc not found");
 			} else {
 				ArrayList<Proc> procs = new ArrayList<>();
-				this.lexAndParse(procs, aProc);
+				this.lexAndParse(procs, aProcFile);
 			}
 
 		}
 	}
 
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
-		LOGGER.fine(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
+		this.LOGGER.fine(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
@@ -186,7 +186,7 @@ public class JclStep {
 	
 		JobListener jobListener = new JobListener(null, procs, fileName, LOGGER, CLI);
 	
-		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
+		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	
 		jclwalker.walk(jobListener, jcltree);
 

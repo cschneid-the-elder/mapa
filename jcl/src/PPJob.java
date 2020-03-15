@@ -40,7 +40,7 @@ public class PPJob {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
-		LOGGER.finer(this.myName + " " + this.jobName + " instantiated from " + this.fileName);
+		this.LOGGER.finer(this.myName + " " + this.jobName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
@@ -50,29 +50,29 @@ public class PPJob {
 	}
 
 	public void addJcllib(JCLPPParser.JcllibStatementContext ctx) {
-		LOGGER.finest(this.myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
+		this.LOGGER.finest(this.myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
 		List<JCLPPParser.KeywordOrSymbolicContext> kywdCtxList = ctx.singleOrMultipleValue().keywordOrSymbolic();
-		LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
+		this.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
 
 		this.jcllibCtx = ctx;
 		if (kywdCtxList == null || kywdCtxList.size() == 0) {
 			kywdCtxList = ctx.singleOrMultipleValue().parenList().keywordOrSymbolic();
-			LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
+			this.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
 		}
 
 		for (JCLPPParser.KeywordOrSymbolicContext k: kywdCtxList) {
-			LOGGER.finest(this.myName + " addJcllib kywdCtxList k: " + k);
-			LOGGER.finest(this.myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
-			LOGGER.finest(this.myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
-			LOGGER.finest(this.myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
+			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k: " + k);
+			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
+			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
+			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
 			for (TerminalNode t: k.KEYWORD_VALUE()) {
-				LOGGER.finest(this.myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
+				this.LOGGER.finest(this.myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 			for (TerminalNode t: k.SYMBOLIC()) {
-				LOGGER.finest(this.myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
+				this.LOGGER.finest(this.myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 			for (TerminalNode t: k.QUOTED_STRING_FRAGMENT()) {
-				LOGGER.finest(this.myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
+				this.LOGGER.finest(this.myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
 			}
 		}
 
@@ -142,7 +142,7 @@ public class PPJob {
 	}
 
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> setSym) {
-		LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " setSym = |" + setSym + "|");
+		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " setSym = |" + setSym + "|");
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -165,11 +165,11 @@ public class PPJob {
 			i.resolveParms(mergedSetSym);
 		}
 
-		LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
+		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> setSym) {
-		LOGGER.finest(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
+		this.LOGGER.finest(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -305,7 +305,7 @@ public class PPJob {
 	public File rewriteWithParmsResolved() throws IOException {
 		/*
 		*/
-		LOGGER.fine(this.myName + " rewriteWithParmsResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+		this.LOGGER.fine(this.myName + " rewriteWithParmsResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
 
 		this.sym = this.collectSymbolics();
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
@@ -317,7 +317,7 @@ public class PPJob {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
+		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		StringBuffer outLine = new StringBuffer();
 		while ((inLine = src.readLine()) != null) {
@@ -369,22 +369,21 @@ public class PPJob {
 		return symbolics;
 	}
 
-	public PPJob iterativelyResolveJobIncludes(File initialJobFile) throws IOException {
-		this.LOGGER.fine(this.myName + " iterativelyResolveJobIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
+	public PPJob iterativelyResolveIncludes(File initialJobFile) throws IOException {
+		this.LOGGER.fine(this.myName + " iterativelyResolveIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
 
 		PPJob aJob = this;
 		File jobFile = initialJobFile;
 		Boolean iterating = true;
 		int sanity = 0;
 		do {
-			//something wrong here, rJob in Demo01 ends up w/previous aJob
-			LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
+			this.LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
 			ArrayList<PPJob> thisJob = new ArrayList<>();
 			lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes(setSym);
 			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
-			LOGGER.finest(this.myName + " includes_after  = " + includes_after);
+			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);
 			aJob = thisJob.get(0);
 			aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 			jobFile = aJob.rewriteJobWithIncludesResolved();
@@ -398,13 +397,13 @@ public class PPJob {
 				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
-		if (sanity >= CLI.getSanity()) LOGGER.severe(this.myName + " sanity check failed in iterativelyResolveJobIncludes for " + this);
+		if (sanity >= CLI.getSanity()) this.LOGGER.severe(this.myName + " sanity check failed in iterativelyResolveIncludes for " + this);
 
 		return aJob;
 	}
 
 	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
-		LOGGER.fine(this.myName + " lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
+		this.LOGGER.fine(this.myName + " lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
@@ -417,7 +416,7 @@ public class PPJob {
 	
 		PPListener jobListener = new PPListener(jobs, procs, fileName, LOGGER, CLI);
 	
-		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
+		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	
 		jclwalker.walk(jobListener, jcltree);
 
@@ -428,7 +427,7 @@ public class PPJob {
 			At this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
-		LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+		this.LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
@@ -438,7 +437,7 @@ public class PPJob {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
+		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		while ((inLine = src.readLine()) != null) {
 			PPIncludeStatement i = this.includeStatementAt(src.getLineNumber());
@@ -480,7 +479,7 @@ public class PPJob {
 						refers to and add that to the output in place of the include
 				write the record read to output
 		*/
-		LOGGER.fine(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
+		this.LOGGER.fine(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
 
 		this.setTmpDirs(baseDir);
 		File aFile = new File(this.getFileName());
@@ -491,7 +490,7 @@ public class PPJob {
 			tmp.deleteOnExit();
 		}
 		PrintWriter out = new PrintWriter(tmp);
-		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
+		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		PPProc aProc = null;
 		File procTmp = null;
@@ -526,7 +525,7 @@ public class PPJob {
 						procTmp.deleteOnExit();
 					}
 					procOut = new PrintWriter(procTmp);
-					LOGGER.finest(this.myName + " procTmp = |" + procTmp.getName() + "|");
+					this.LOGGER.finest(this.myName + " procTmp = |" + procTmp.getName() + "|");
 				}
 				procOut.println(inLine);
 			}
@@ -543,7 +542,7 @@ public class PPJob {
 							)
 						throws IOException {
 
-		LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "|");
+		this.LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -571,7 +570,7 @@ public class PPJob {
 	public String searchProcPathsFor(String fileName) throws IOException {
 		File aFile = new File(this.tmpProcDir.getName() + File.separator + fileName);
 		if (aFile.exists()) {
-			LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 			return aFile.getCanonicalPath();
 		}
 
@@ -580,7 +579,7 @@ public class PPJob {
 			if (this.CLI.mappedProcPaths.containsKey(lib)) {
 				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
 				if (aFile.exists()) {
-					LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 					return aFile.getCanonicalPath();
 				}
 			}
@@ -589,12 +588,12 @@ public class PPJob {
 		for (String path: this.CLI.staticProcPaths) {
 			aFile = new File(path + File.separator + fileName);
 			if (aFile.exists()) {
-				LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
 				return aFile.getCanonicalPath();
 			}
 		}
 
-		LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
+		this.LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
 		return null;
 	}
 

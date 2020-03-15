@@ -72,7 +72,7 @@ public static void main(String[] args) throws Exception {
 				are resolved -or- we have determined all that remain are 
 				unresolvable includes.
 			*/
-			PPJob rJob = j.iterativelyResolveJobIncludes(jobFile);
+			PPJob rJob = j.iterativelyResolveIncludes(jobFile);
 			rJobs.add(rJob);
 			//iterativelyResolveJobProcs(rJob, tmpProcDir); //doesn't appear to have done anything
 			rJob.resolveParms(symbolics);
