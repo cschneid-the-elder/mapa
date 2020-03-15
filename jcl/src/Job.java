@@ -379,9 +379,8 @@ public class Job {
 		do {
 			//something wrong here, rJob in Demo01 ends up w/previous aJob
 			LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
-			ArrayList<Proc> dummyProcs = new ArrayList<>();
 			ArrayList<Job> thisJob = new ArrayList<>();
-			lexAndParse(thisJob, dummyProcs, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+			lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes(setSym);
 			ArrayList<IncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
@@ -393,9 +392,8 @@ public class Job {
 			if (includes_after.size() == 0) {
 				//includes resolved, parse one last time to get resolved Job instance
 				iterating = false;
-				dummyProcs = new ArrayList<>();
 				thisJob = new ArrayList<>();
-				lexAndParse(thisJob, dummyProcs, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+				lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 				aJob = thisJob.get(0);
 				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 			}

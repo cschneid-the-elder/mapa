@@ -26,22 +26,14 @@ public class PPListener extends JCLPPParserBaseListener {
 			, TheCLI CLI
 			) {
 		super();
-		this.jobs = jobs;
-		this.procs = procs;
-		this.fileName = fileName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.myName = this.getClass().getName();
-	}
-
-	public PPListener(
-			ArrayList<PPProc> procs
-			, String fileName
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		super();
-		this.procs = procs;
+		if (jobs == null) {
+		} else {
+			this.jobs = jobs;
+		}
+		if (procs == null) {
+		} else {
+			this.procs = procs;
+		}
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
@@ -74,41 +66,41 @@ public class PPListener extends JCLPPParserBaseListener {
 
 	@Override public void enterCommandStatement(JCLPPParser.CommandStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
-		} else {
 			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterJclCommandStatement(JCLPPParser.JclCommandStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
-		} else {
 			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterScheduleStatement(JCLPPParser.ScheduleStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
-		} else {
 			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterNotifyStatement(JCLPPParser.NotifyStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
-		} else {
 			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
 		}
 	}
 
 	@Override public void enterOutputStatement(JCLPPParser.OutputStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
-		} else {
 			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		} else {
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
 		}
 	}
 
@@ -146,6 +138,13 @@ public class PPListener extends JCLPPParserBaseListener {
 
 	@Override public void enterPendStatement(JCLPPParser.PendStatementContext ctx) {
 		this.currProc.addPendCtx(ctx);
+		if (this.procs == null) {
+			if (this.currJob == null) {
+				this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
+			}
+		} else {
+			this.procs.add(this.currProc);
+		}
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
@@ -207,7 +206,11 @@ public class PPListener extends JCLPPParserBaseListener {
 			if (this.currProc == null) {
 			} else {
 				this.currProc.setEndLine(ctx.getStop().getLine());
-				this.procs.add(this.currProc);
+				if (this.procs == null) {
+					this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
+				} else {
+					this.procs.add(this.currProc);
+				}
 			}
 		} else {
 			this.currJob.setEndLine(ctx.getStop().getLine());

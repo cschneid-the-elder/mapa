@@ -184,7 +184,7 @@ public class PPJclStep {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(procs, fileName, LOGGER, CLI);
+		PPListener jobListener = new PPListener(null, procs, fileName, LOGGER, CLI);
 	
 		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

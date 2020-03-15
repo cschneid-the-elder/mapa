@@ -184,7 +184,7 @@ public class JclStep {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(procs, fileName, LOGGER, CLI);
+		JobListener jobListener = new JobListener(null, procs, fileName, LOGGER, CLI);
 	
 		LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

@@ -25,22 +25,14 @@ public class JobListener extends JCLParserBaseListener {
 			, TheCLI CLI
 			) {
 		super();
-		this.jobs = jobs;
-		this.procs = procs;
-		this.fileName = fileName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.myName = this.getClass().getName();
-	}
-
-	public JobListener(
-			ArrayList<Proc> procs
-			, String fileName
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		super();
-		this.procs = procs;
+		if (jobs == null) {
+		} else {
+			this.jobs = jobs;
+		}
+		if (procs == null) {
+		} else {
+			this.procs = procs;
+		}
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
@@ -91,6 +83,13 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
 		this.currProc.addPendCtx(ctx);
+		if (this.procs == null) {
+			if (this.currJob == null) {
+				this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
+			}
+		} else {
+			this.procs.add(this.currProc);
+		}
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
@@ -143,7 +142,11 @@ public class JobListener extends JCLParserBaseListener {
 			if (this.currProc == null) {
 			} else {
 				this.currProc.setEndLine(ctx.getStop().getLine());
-				this.procs.add(this.currProc);
+				if (this.procs == null) {
+					this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
+				} else {
+					this.procs.add(this.currProc);
+				}
 			}
 		} else {
 			this.currJob.setEndLine(ctx.getStop().getLine());
