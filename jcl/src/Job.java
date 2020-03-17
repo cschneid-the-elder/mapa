@@ -141,8 +141,8 @@ public class Job {
 		this.op.add(anOp);
 	}
 
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> setSym) {
-		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " setSym = |" + setSym + "|");
+	public void resolveParmedIncludes() {
+		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this);
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -154,7 +154,7 @@ public class Job {
 		*/
 
 		for (IncludeStatement i: this.includes) {
-			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(CLI.setSym);
 			for (SetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
@@ -168,8 +168,8 @@ public class Job {
 		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> setSym) {
-		this.LOGGER.finest(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
+	public void resolveParms() {
+		this.LOGGER.finest(this.myName + " resolveParms " + this);
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -180,14 +180,14 @@ public class Job {
 			statement come before the step being processed) from this job.
 		*/
 
-		ArrayList<SetSymbolValue> allSym = new ArrayList<>(setSym);
+		ArrayList<SetSymbolValue> allSym = new ArrayList<>(CLI.setSym);
 		allSym.addAll(this.setSym);
 		for (SetSymbolValue s: this.setSym) {
 			s.resolveParms(allSym);
 		}
 
 		for (JclStep step: this.steps) {
-			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(CLI.setSym);
 			for (SetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
@@ -380,7 +380,7 @@ public class Job {
 			this.LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
 			ArrayList<Job> thisJob = new ArrayList<>();
 			lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
-			thisJob.get(0).resolveParmedIncludes(setSym);
+			thisJob.get(0).resolveParmedIncludes();
 			ArrayList<IncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
 			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);

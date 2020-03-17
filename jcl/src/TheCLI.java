@@ -3,6 +3,8 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.logging.*;
 import org.apache.commons.cli.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 public class TheCLI{
 	public final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
@@ -19,6 +21,8 @@ public class TheCLI{
 	public Boolean saveTemp = false;
 	public Integer sanity = new Integer(20);
 	public File setFile = null;
+	public ArrayList<SetSymbolValue> setSym = new ArrayList<>();
+	public ArrayList<PPSetSymbolValue> PPsetSym = new ArrayList<>();
 
 	public TheCLI(String[] args) throws Exception {
 
@@ -167,6 +171,15 @@ public class TheCLI{
 		if (this.line.hasOption("sanity")) {
 			this.sanity = new Integer(this.line.getOptionValue("sanity"));
 		}
+
+		/*
+		Initial setup.  Get symbolics and their values as specified on command line.
+		*/
+		if (this.setFile != null) {
+			this.PPsetSym = lookForPPSetSymbols(this.setFile.getCanonicalPath());
+			this.setSym = lookForSetSymbols(this.setFile.getCanonicalPath());
+		}
+
 	}
 
 	public int getSanity() {
@@ -211,6 +224,50 @@ public class TheCLI{
 		tmpDir.deleteOnExit();
 
 		return tmpDir;
+	}
+
+	public ArrayList<PPSetSymbolValue> lookForPPSetSymbols(String fileName) throws IOException {
+		this.LOGGER.fine("lookForSetSymbols");
+		ArrayList<PPSetSymbolValue> sets = new ArrayList<>();
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		PPSetSymbolValueListener setSymbolValueListener = new PPSetSymbolValueListener(sets, fileName);
+	
+		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
+	
+		jclwalker.walk(setSymbolValueListener, jcltree);
+
+		return sets;
+		
+	}
+
+	public ArrayList<SetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
+		this.LOGGER.fine("lookForSetSymbols");
+		ArrayList<SetSymbolValue> sets = new ArrayList<>();
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		SetSymbolValueListener setSymbolValueListener = new SetSymbolValueListener(sets, fileName);
+	
+		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
+	
+		jclwalker.walk(setSymbolValueListener, jcltree);
+
+		return sets;
+		
 	}
 
 }

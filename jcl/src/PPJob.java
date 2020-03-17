@@ -141,8 +141,8 @@ public class PPJob {
 		this.op.add(anOp);
 	}
 
-	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> setSym) {
-		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this + " setSym = |" + setSym + "|");
+	public void resolveParmedIncludes() {
+		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this);
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -154,7 +154,7 @@ public class PPJob {
 		*/
 
 		for (PPIncludeStatement i: this.includes) {
-			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(CLI.PPsetSym);
 			for (PPSetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
@@ -168,8 +168,8 @@ public class PPJob {
 		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
-	public void resolveParms(ArrayList<PPSetSymbolValue> setSym) {
-		this.LOGGER.finest(this.myName + " resolveParms " + this + " setSym = |" + setSym + "|");
+	public void resolveParms() {
+		this.LOGGER.finest(this.myName + " resolveParms " + this);
 
 		/*
 			The symbolics passed into this method come from a list provided at
@@ -180,14 +180,14 @@ public class PPJob {
 			statement come before the step being processed) from this job.
 		*/
 
-		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(setSym);
+		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(CLI.PPsetSym);
 		allSym.addAll(this.setSym);
 		for (PPSetSymbolValue s: this.setSym) {
 			s.resolveParms(allSym);
 		}
 
 		for (PPJclStep step: this.steps) {
-			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
+			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(CLI.PPsetSym);
 			for (PPSetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
@@ -380,7 +380,7 @@ public class PPJob {
 			this.LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
 			ArrayList<PPJob> thisJob = new ArrayList<>();
 			lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
-			thisJob.get(0).resolveParmedIncludes(setSym);
+			thisJob.get(0).resolveParmedIncludes();
 			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
 			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);

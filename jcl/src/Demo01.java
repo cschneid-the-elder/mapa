@@ -17,7 +17,6 @@ public class Demo01{
 
 public static final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
 public static TheCLI CLI = null;
-public static ArrayList<PPSetSymbolValue> symbolics = new ArrayList<>();
 
 public static void main(String[] args) throws Exception {
 
@@ -47,13 +46,6 @@ public static void main(String[] args) throws Exception {
 	*/
 	CLI = new TheCLI(args);
 
-	/*
-	Initial setup.  Get symbolics and their values as specified on command line.
-	*/
-	if (CLI.setFile != null) {
-		symbolics = lookForSetSymbols(CLI.setFile.getCanonicalPath());
-	}
-
 	ArrayList<PPProc> procs = new ArrayList<>();
 	ArrayList<PPJob> jobs = new ArrayList<>();
 	ArrayList<PPJob> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
@@ -64,7 +56,7 @@ public static void main(String[] args) throws Exception {
 		lexAndParse(jobs, procs, aFileName);
 		for (PPJob j: jobs) {
 			LOGGER.info("Processing job " + j);
-			j.resolveParmedIncludes(symbolics);
+			j.resolveParmedIncludes();
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 			File jobFile = j.rewriteJobAndSeparateInstreamProcs(baseDir);
 			/*
@@ -74,8 +66,7 @@ public static void main(String[] args) throws Exception {
 			*/
 			PPJob rJob = j.iterativelyResolveIncludes(jobFile);
 			rJobs.add(rJob);
-			//iterativelyResolveJobProcs(rJob, tmpProcDir); //doesn't appear to have done anything
-			rJob.resolveParms(symbolics);
+			rJob.resolveParms();
 			/*
 				Includes are resolved to the extent possible.
 				Now must rewrite job with resolved values for parms substituted.
@@ -109,14 +100,6 @@ public static void main(String[] args) throws Exception {
 
 	}
 
-	public static void iterativelyResolveJobProcs(PPJob job, File tmpProcDir) throws IOException {
-
-		for (PPJclStep s: job.getSteps()) {
-			if (!s.isExecProc()) continue;
-			String procFileName = s.getProcExecuted();
-		}
-	}
-
 	public static File newTempDir() throws IOException {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
@@ -133,28 +116,6 @@ public static void main(String[] args) throws Exception {
 		}
 
 		return tmpDir;
-	}
-
-	public static ArrayList<PPSetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
-		LOGGER.fine("lookForSetSymbols");
-		ArrayList<PPSetSymbolValue> sets = new ArrayList<>();
-		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
-
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
-	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
-	
-		PPSetSymbolValueListener setSymbolValueListener = new PPSetSymbolValueListener(sets, fileName);
-	
-		LOGGER.finer("----------walking tree with setSymbolValueListener");
-	
-		jclwalker.walk(setSymbolValueListener, jcltree);
-
-		return sets;
-		
 	}
 
 }
