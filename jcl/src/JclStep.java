@@ -146,7 +146,7 @@ public class JclStep {
 		if (this.proc != null) {
 			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);
-			this.proc.resolveParms(mergedSetSym);
+			this.proc.resolveParms();
 			for (DdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(mergedSetSym);
 			}

@@ -154,7 +154,7 @@ public class PPJob {
 		*/
 
 		for (PPIncludeStatement i: this.includes) {
-			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(CLI.PPsetSym);
+			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
 			for (PPSetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
@@ -180,14 +180,14 @@ public class PPJob {
 			statement come before the step being processed) from this job.
 		*/
 
-		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(CLI.PPsetSym);
+		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(this.CLI.PPsetSym);
 		allSym.addAll(this.setSym);
 		for (PPSetSymbolValue s: this.setSym) {
 			s.resolveParms(allSym);
 		}
 
 		for (PPJclStep step: this.steps) {
-			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(CLI.PPsetSym);
+			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
 			for (PPSetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
@@ -305,13 +305,28 @@ public class PPJob {
 	public File rewriteWithParmsResolved() throws IOException {
 		/*
 		*/
-		this.LOGGER.fine(this.myName + " rewriteWithParmsResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+		this.LOGGER.fine(
+			this.myName 
+			+ " rewriteWithParmsResolved job = |" 
+			+ this 
+			+ "| tmpJobDir = |" 
+			+ this.tmpJobDir 
+			+ "|"
+			);
 
 		this.sym = this.collectSymbolics();
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-resolved-" + this.getUUID());
+		File tmp = new File(
+			this.tmpJobDir.toString() 
+			+ File.separator 
+			+ this.myName 
+			+ "-" 
+			+ this.getJobName() 
+			+ "-resolved-" 
+			+ this.getUUID()
+			);
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -370,7 +385,14 @@ public class PPJob {
 	}
 
 	public PPJob iterativelyResolveIncludes(File initialJobFile) throws IOException {
-		this.LOGGER.fine(this.myName + " iterativelyResolveIncludes this = |" + this + "| tmpJobDir = |" + this.tmpJobDir.getName() + "| tmpProcDir = |" + this.tmpProcDir.getName() + "| initialJobFile = |" + initialJobFile.getName() + "|");
+		this.LOGGER.fine(
+			this.myName 
+			+ " iterativelyResolveIncludes this = |" 
+			+ this 
+			+ "| initialJobFile = |" 
+			+ initialJobFile.getName() 
+			+ "|"
+			);
 
 		PPJob aJob = this;
 		File jobFile = initialJobFile;
@@ -392,18 +414,35 @@ public class PPJob {
 				//includes resolved, parse one last time to get resolved PPJob instance
 				iterating = false;
 				thisJob = new ArrayList<>();
-				lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+				lexAndParse(
+					thisJob
+					, null
+					, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName()
+					);
 				aJob = thisJob.get(0);
 				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
-		if (sanity >= CLI.getSanity()) this.LOGGER.severe(this.myName + " sanity check failed in iterativelyResolveIncludes for " + this);
+		if (sanity >= CLI.getSanity()) 
+			this.LOGGER.severe(
+				this.myName 
+				+ " sanity check failed in iterativelyResolveIncludes for " 
+				+ this
+				);
 
 		return aJob;
 	}
 
 	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
-		this.LOGGER.fine(this.myName + " lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
+		this.LOGGER.fine(
+			this.myName 
+			+ " lexAndParse jobs = |" 
+			+ jobs 
+			+ "| procs = |" 
+			+ procs 
+			+ "| fileName = |" 
+			+ fileName + "|"
+			);
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer

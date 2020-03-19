@@ -146,7 +146,7 @@ public class PPJclStep {
 		if (this.proc != null) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);
-			this.proc.resolveParms(mergedSetSym);
+			this.proc.resolveParms();
 			for (PPDdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(mergedSetSym);
 			}
