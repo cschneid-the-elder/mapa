@@ -73,6 +73,7 @@ public static void main(String[] args) throws Exception {
 				Merge with procs?
 			*/
 			rJob.rewriteWithParmsResolved();
+			rJob.resolveProcs();
 		}
 	}
 

@@ -29,7 +29,6 @@ public class PPProc {
 	private int startLine = -1;
 	private int endLine = -1;
 	private File baseDir = null;
-	private File tmpJobDir = null;
 	private File tmpProcDir = null;
 
 	public PPProc(
@@ -73,10 +72,13 @@ public class PPProc {
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
+		for (PPJclStep step: this.steps) {
+			step.setTmpDirs(this.baseDir, this.tmpProcDir);
+		}
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
+		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
@@ -87,6 +89,9 @@ public class PPProc {
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
+		for (PPJclStep step: this.steps) {
+			step.setTmpDirs(this.baseDir, this.tmpProcDir);
+		}
 	}
 
 	public void addPendCtx(JCLPPParser.PendStatementContext pendCtx) {
@@ -100,6 +105,9 @@ public class PPProc {
 
 	public void setJcllib(ArrayList<PPKeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
+		for (PPJclStep step: this.steps) {
+			step.setJcllib(jcllib);
+		}
 	}
 
 	public ArrayList<String> getJcllibStrings() {
@@ -192,7 +200,15 @@ public class PPProc {
 		return (aLine >= startLine) && (aLine <= endLine);
 	}
 
-	public void resolveParmedIncludes() {
+	public void resolveProcs() throws IOException {
+		LOGGER.finest(this.myName + " resolveProcs " + this);
+
+		for (PPJclStep step: this.steps) {
+			step.resolveProc();
+		}
+	}
+
+	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> execSetSym) {
 		/* previously...
 		LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
 		ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
@@ -224,17 +240,19 @@ public class PPProc {
 					mergedSetSym.add(s);
 				}
 			}
+			mergedSetSym.addAll(execSetSym);
 			i.resolveParms(mergedSetSym);
 		}
 
 		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
-	public void resolveParms() {
+	public void resolveParms(ArrayList<PPSetSymbolValue> execSetSym) {
 		LOGGER.fine(this.myName + " resolveParms " + this);
 
 		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(this.CLI.PPsetSym);
 		allSym.addAll(this.setSym);
+		allSym.addAll(execSetSym);
 		for (PPSetSymbolValue s: this.setSym) {
 			s.resolveParms(allSym);
 		}
@@ -248,12 +266,16 @@ public class PPProc {
 					mergedSetSym.add(s);
 				}
 			}
+			mergedSetSym.addAll(execSetSym);
 			step.resolveParms(mergedSetSym);
 		}
 
 	}
 
-	public PPProc iterativelyResolveIncludes(File initialFile) throws IOException {
+	public PPProc iterativelyResolveIncludes(
+					ArrayList<PPSetSymbolValue> execSetSym
+					, File initialFile
+					) throws IOException {
 		this.LOGGER.fine(
 			this.myName 
 			+ " iterativelyResolveIncludes this = |" 
@@ -271,12 +293,13 @@ public class PPProc {
 			this.LOGGER.finest(this.myName + " procFile = |" + procFile.getName() + "|");
 			ArrayList<PPProc> thisProc = new ArrayList<>();
 			lexAndParse(null, thisProc, this.tmpProcDir.getCanonicalPath() + File.separator + procFile.getName());
-			thisProc.get(0).resolveParmedIncludes();
+			thisProc.get(0).resolveParmedIncludes(execSetSym);
 			ArrayList<PPIncludeStatement> includes_after = thisProc.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
 			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);
 			aProc = thisProc.get(0);
 			aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
+			aProc.setJcllib(this.jcllib);
 			procFile = aProc.rewriteWithIncludesResolved();
 			sanity++;
 			if (includes_after.size() == 0) {
@@ -290,6 +313,7 @@ public class PPProc {
 					);
 				aProc = thisProc.get(0);
 				aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
+				aProc.setJcllib(this.jcllib);
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) 

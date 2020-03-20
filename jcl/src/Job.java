@@ -100,6 +100,9 @@ public class Job {
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
+		for (JclStep step: this.steps) {
+			step.setTmpDirs(this.baseDir, this.tmpProcDir);
+		}
 	}
 
 	public void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) throws IOException {
@@ -119,6 +122,9 @@ public class Job {
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
+		for (JclStep step: this.steps) {
+			step.setTmpDirs(this.baseDir, this.tmpProcDir);
+		}
 	}
 
 	public void addInstreamProc(Proc iProc) {
@@ -135,6 +141,7 @@ public class Job {
 
 	public void addJclStep(JclStep step) {
 		this.steps.add(step);
+		step.setJcllib(this.jcllib);
 	}
 
 	public void addOp(PPOp anOp) {
@@ -203,7 +210,7 @@ public class Job {
 		LOGGER.finest(this.myName + " resolveProcs " + this);
 
 		for (JclStep step: this.steps) {
-			step.resolveProc(this);
+			step.resolveProc();
 		}
 	}
 
@@ -547,15 +554,7 @@ public class Job {
 					procTmp = null;
 					procOut = null;
 				}
-				IncludeStatement i = this.includeStatementAt(src.getLineNumber());
-				if (i == null) {
-					out.println(inLine);
-				} else {
-					if (writeTheIncludeContent(i, out)) {
-					} else {
-						out.println(inLine);
-					}
-				}
+				out.println(inLine);
 			} else {
 				if (procOut == null) {
 					procTmp = new File(this.tmpProcDir.toString() + File.separator + aProc.getProcName());

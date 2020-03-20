@@ -29,7 +29,11 @@ public class PPJclStep {
 	private JCLPPParser.ExecProcStatementContext execProcStmtCtx = null;
 	private List<JCLPPParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
 	private ArrayList<PPSetSymbolValue> setSym = new ArrayList<>();
+	private ArrayList<PPSetSymbolValue> incomingSetSym = new ArrayList<>();
 	private ArrayList<PPDdStatementAmalgamation> ddStatements = new ArrayList<>();
+	private ArrayList<PPKeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
+	private File baseDir = null;
+	private File tmpProcDir = null;
 
 	public PPJclStep(JCLPPParser.JclStepContext jclStepCtx, String fileName, String procName, Logger LOGGER, TheCLI CLI) {
 		this.jclStepCtx = jclStepCtx;
@@ -83,6 +87,20 @@ public class PPJclStep {
 		}	
 	}
 
+	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
+		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		if (this.baseDir == null) {
+			this.baseDir = baseDir;
+			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+		}
+
+		if (this.tmpProcDir == null) {
+			this.tmpProcDir = tmpProcDir;
+			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+		}
+		
+	}
+
 	public Boolean isExecProc() {
 		return this.execProcStmtCtx != null;
 	}
@@ -109,6 +127,20 @@ public class PPJclStep {
 
 	public int getLine() {
 		return this.line;
+	}
+
+	public void setJcllib(ArrayList<PPKeywordOrSymbolicWrapper> jcllib) {
+		this.jcllib = jcllib;
+	}
+
+	public ArrayList<String> getJcllibStrings() {
+		ArrayList<String> libs = new ArrayList<>();
+
+		for (PPKeywordOrSymbolicWrapper k: jcllib) {
+			libs.add(k.getValue());
+		}
+
+		return libs;
 	}
 
 	public ArrayList<PPSymbolic> collectSymbolics() {
@@ -141,12 +173,13 @@ public class PPJclStep {
 		*/
 		this.LOGGER.finest(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
 
+		this.incomingSetSym.addAll(setSym);
 		// TODO procExecuted & pgmExecuted resolveParms(mergedSetSym)
 
 		if (this.proc != null) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);
-			this.proc.resolveParms();
+			this.proc.resolveParms(mergedSetSym);
 			for (PPDdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(mergedSetSym);
 			}
@@ -157,16 +190,19 @@ public class PPJclStep {
 		}
 	}
 
-	public void resolveProc(PPJob myJob) throws IOException {
-		this.LOGGER.fine(this.myName + " resolveProc " + this.getProcExecuted());
+	public void resolveProc() throws IOException {
+		this.LOGGER.fine(this.myName + " resolveProc ");
 
 		if (this.needsProc()) {
-			String aProcFile = myJob.searchProcPathsFor(this.getProcExecuted());
+			String aProcFile = this.searchProcPathsFor(this.getProcExecuted());
 			if (aProcFile == null) {
 				this.LOGGER.warning(this + " proc not found");
 			} else {
 				ArrayList<PPProc> procs = new ArrayList<>();
 				this.lexAndParse(procs, aProcFile);
+				procs.get(0).setJcllib(this.jcllib);
+				this.proc = procs.get(0).iterativelyResolveIncludes(incomingSetSym, new File(aProcFile));
+				this.proc.resolveProcs();
 			}
 
 		}
@@ -194,6 +230,48 @@ public class PPJclStep {
 
 	public UUID getUUID() {
 		return this.uuid;
+	}
+
+	public String searchProcPathsFor(String fileName) throws IOException {
+		File aFile = new File(this.tmpProcDir.getName() + File.separator + fileName);
+		if (aFile.exists()) {
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+			return aFile.getCanonicalPath();
+		}
+
+		ArrayList<String> jcllib = this.getJcllibStrings();
+		for (String lib: jcllib) {
+			if (this.CLI.mappedProcPaths.containsKey(lib)) {
+				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
+				if (aFile.exists()) {
+					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+					return aFile.getCanonicalPath();
+				}
+			}
+		}
+
+		for (String path: this.CLI.staticProcPaths) {
+			aFile = new File(path + File.separator + fileName);
+			if (aFile.exists()) {
+				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+				return aFile.getCanonicalPath();
+			}
+		}
+
+		this.LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
+		this.LOGGER.finer(
+			this.myName 
+			+ " searchProcPathsFor() searched for " 
+			+ aFile.getCanonicalPath()
+			+ " in "
+			+ this.tmpProcDir.getName()
+			+ " and "
+			+ this.CLI.mappedProcPaths
+			+ " and even "
+			+ this.CLI.staticProcPaths
+			+ " without success"
+			);
+		return null;
 	}
 
 	public String toString() {
