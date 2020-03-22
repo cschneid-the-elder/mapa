@@ -292,7 +292,7 @@ public class Proc {
 		do {
 			this.LOGGER.finest(this.myName + " procFile = |" + procFile.getName() + "|");
 			ArrayList<Proc> thisProc = new ArrayList<>();
-			lexAndParse(null, thisProc, this.tmpProcDir.getCanonicalPath() + File.separator + procFile.getName());
+			lexAndParse(null, thisProc, this.tmpProcDir.getPath() + File.separator + procFile.getName());
 			thisProc.get(0).resolveParmedIncludes(execSetSym);
 			ArrayList<IncludeStatement> includes_after = thisProc.get(0).getAllUnresolvedIncludes();
 			//are all includes from before still there after? yes = stop iterating
@@ -309,7 +309,7 @@ public class Proc {
 				lexAndParse(
 					null
 					, thisProc
-					, this.tmpProcDir.getCanonicalPath() + File.separator + procFile.getName()
+					, this.tmpProcDir.getPath() + File.separator + procFile.getName()
 					);
 				aProc = thisProc.get(0);
 				aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
@@ -419,10 +419,10 @@ public class Proc {
 	}
 
 	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getName() + File.separator + fileName);
+		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 		if (aFile.exists()) {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-			return aFile.getCanonicalPath();
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+			return aFile.getPath();
 		}
 
 		ArrayList<String> jcllib = this.getJcllibStrings();
@@ -430,8 +430,8 @@ public class Proc {
 			if (this.CLI.mappedProcPaths.containsKey(lib)) {
 				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
 				if (aFile.exists()) {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-					return aFile.getCanonicalPath();
+					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+					return aFile.getPath();
 				}
 			}
 		}
@@ -439,8 +439,8 @@ public class Proc {
 		for (String path: this.CLI.staticProcPaths) {
 			aFile = new File(path + File.separator + fileName);
 			if (aFile.exists()) {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-				return aFile.getCanonicalPath();
+				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+				return aFile.getPath();
 			}
 		}
 

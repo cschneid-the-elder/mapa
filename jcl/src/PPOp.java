@@ -1,11 +1,14 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
 public class PPOp {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private String fileName = null;
 	private String originalText = null;
@@ -18,88 +21,78 @@ public class PPOp {
 		JCLPPParser.CommandStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
-		this.fileName = fileName;
-		this.inProc = !(procName == null);
-		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
-			symbolics.put(s, null);
-		}
-		this.initialize();
+		this.initialize(fileName, procName, ctx.SYMBOLIC(), LOGGER, CLI);
 	}
 
 	public PPOp(
 		JCLPPParser.JobCardContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
-		this.fileName = fileName;
-		this.inProc = !(procName == null);
-		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
-			symbolics.put(s, null);
-		}
-		this.initialize();
+		this.initialize(fileName, procName, ctx.SYMBOLIC(), LOGGER, CLI);
 	}
 
 	public PPOp(
 		JCLPPParser.NotifyStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
-		this.fileName = fileName;
-		this.inProc = !(procName == null);
-		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
-			symbolics.put(s, null);
-		}
-		this.initialize();
+		this.initialize(fileName, procName, ctx.SYMBOLIC(), LOGGER, CLI);
 	}
 
 	public PPOp(
 		JCLPPParser.OutputStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
-		this.fileName = fileName;
-		this.inProc = !(procName == null);
-		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
-			symbolics.put(s, null);
-		}
-		this.initialize();
+		this.initialize(fileName, procName, ctx.SYMBOLIC(), LOGGER, CLI);
 	}
 
 	public PPOp(
 		JCLPPParser.ScheduleStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
-		this.fileName = fileName;
-		this.inProc = !(procName == null);
-		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
-			symbolics.put(s, null);
-		}
-		this.initialize();
+		this.initialize(fileName, procName, ctx.SYMBOLIC(), LOGGER, CLI);
 	}
 
 	public PPOp(
 		JCLPPParser.JclCommandStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
+		this.initialize(fileName, procName, ctx.SYMBOLIC(), LOGGER, CLI);
+	}
+
+	private void initialize(
+			String fileName
+			, String procName
+			, List<org.antlr.v4.runtime.tree.TerminalNode> tn
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		this.myName = this.getClass().getName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(ctx.SYMBOLIC(), fileName, procName)) {
+		for (PPSymbolic s: PPSymbolic.bunchOfThese(tn, fileName, procName, LOGGER, CLI)) {
 			symbolics.put(s, null);
 		}
-		this.initialize();
-	}
-
-	private void initialize() {
-		myName = this.getClass().getName();
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
@@ -110,7 +103,7 @@ public class PPOp {
 	}
 
 	public ArrayList<PPSymbolic> collectSymbolics() {
-		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+		this.LOGGER.finest(this.myName + " collectSymbolics");
 
 		return new ArrayList<>(this.symbolics.keySet());
 	}

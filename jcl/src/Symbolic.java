@@ -1,11 +1,14 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
 public class Symbolic {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private String fileName = null;
 	private String text = null;
@@ -22,17 +25,25 @@ public class Symbolic {
 	public static ArrayList<Symbolic> bunchOfThese(List<org.antlr.v4.runtime.tree.TerminalNode> tn
 			, String fileName
 			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
 			) {
 		ArrayList<Symbolic> symbolics = new ArrayList<>();		
 
 		for (org.antlr.v4.runtime.tree.TerminalNode aNode: tn) {
-			symbolics.add(new Symbolic(aNode, fileName, procName));
+			symbolics.add(new Symbolic(aNode, fileName, procName, LOGGER, CLI));
 		}
 
 		return symbolics;
 	}
 
-	public Symbolic(org.antlr.v4.runtime.tree.TerminalNode tn, String fileName, String procName) {
+	public Symbolic(
+			org.antlr.v4.runtime.tree.TerminalNode tn
+			, String fileName
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.myName = this.getClass().getName();
 		this.terminalNode = tn;
 		this.token = tn.getSymbol();
@@ -43,7 +54,9 @@ public class Symbolic {
 		this.text = this.token.getText();
 		this.len = this.text.length();
 		this.inProc = !(procName == null);
-		Demo01.LOGGER.finer(this.myName + " " + this.getText() + " instantiated from " + this.fileName);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.LOGGER.finer(this.myName + " " + this.getText() + " instantiated from " + this.fileName);
 	}
 
 	public String getText() {
@@ -79,7 +92,7 @@ public class Symbolic {
 	}
 
 	public void setResolvedValue(SetSymbolValue s) {
-		Demo01.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
+		this.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
 		this.resolvedText = s.getParmValue();
 		this.ssv = s;
 	}
@@ -93,14 +106,14 @@ public class Symbolic {
 	}
 
 	public void resolve(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
+		this.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
 
 		SetSymbolValue[] matching_sets =
 			sets.stream()
 			.filter(s -> s.getParmName().equals(this.getParmName()))
 			.toArray(SetSymbolValue[]::new);
 		for(SetSymbolValue s: matching_sets) {
-			Demo01.LOGGER.finest(myName + " resolve s: |" + s + "|");
+			this.LOGGER.finest(myName + " resolve s: |" + s + "|");
 			switch(s.getSetType()) {
 				case SET:
 					if ((this.inProc  

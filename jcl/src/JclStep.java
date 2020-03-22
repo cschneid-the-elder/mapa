@@ -35,7 +35,13 @@ public class JclStep {
 	private File baseDir = null;
 	private File tmpProcDir = null;
 
-	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName, Logger LOGGER, TheCLI CLI) {
+	public JclStep(
+			JCLParser.JclStepContext jclStepCtx
+			, String fileName
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.jclStepCtx = jclStepCtx;
 		this.fileName = fileName;
 		this.procName = procName;
@@ -66,37 +72,37 @@ public class JclStep {
 			} else {
 				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName);
+			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execProcStmtCtx.stepName() == null) {
 			} else {
 				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName);
+			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
-				this.setSym.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
+				this.setSym.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted(), this.LOGGER, this.CLI));
 			}
 		}
 
 		if (this.ddStmtAmlgnCtxs == null) {
 		} else {
 			for (JCLParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
-				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName, this.fileName));
+				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName, this.fileName, this.LOGGER, this.CLI));
 			}
 		}	
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
 		}
 
 		if (this.tmpProcDir == null) {
 			this.tmpProcDir = tmpProcDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 		
 	}
@@ -201,6 +207,7 @@ public class JclStep {
 				ArrayList<Proc> procs = new ArrayList<>();
 				this.lexAndParse(procs, aProcFile);
 				procs.get(0).setJcllib(this.jcllib);
+				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
 				this.proc = procs.get(0).iterativelyResolveIncludes(incomingSetSym, new File(aProcFile));
 				this.proc.resolveProcs();
 			}
@@ -233,10 +240,14 @@ public class JclStep {
 	}
 
 	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getName() + File.separator + fileName);
+		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
+
+		this.LOGGER.finer(this.myName + " " + this.stepName + " searchProcPaths searching " + tmpProcDir);
 		if (aFile.exists()) {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-			return aFile.getCanonicalPath();
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+			return aFile.getPath();
+		} else {
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() did not find " + aFile.getPath());
 		}
 
 		ArrayList<String> jcllib = this.getJcllibStrings();
@@ -244,17 +255,22 @@ public class JclStep {
 			if (this.CLI.mappedProcPaths.containsKey(lib)) {
 				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
 				if (aFile.exists()) {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-					return aFile.getCanonicalPath();
+					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+					return aFile.getPath();
+				} else {
+					this.LOGGER.finer(this.myName + " searchProcPathsFor() did not find " + aFile.getPath());
 				}
 			}
 		}
 
 		for (String path: this.CLI.staticProcPaths) {
 			aFile = new File(path + File.separator + fileName);
+			this.LOGGER.finer(this.myName + " " + this.stepName + " searchProcPaths searching " + path);
 			if (aFile.exists()) {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
+				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
 				return aFile.getCanonicalPath();
+			} else {
+				this.LOGGER.finer(this.myName + " searchProcPathsFor() did not find " + aFile.getPath());
 			}
 		}
 
@@ -262,9 +278,9 @@ public class JclStep {
 		this.LOGGER.finer(
 			this.myName 
 			+ " searchProcPathsFor() searched for " 
-			+ aFile.getCanonicalPath()
+			+ fileName
 			+ " in "
-			+ this.tmpProcDir.getName()
+			+ this.tmpProcDir
 			+ " and "
 			+ this.CLI.mappedProcPaths
 			+ " and even "

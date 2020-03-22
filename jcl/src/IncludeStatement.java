@@ -1,11 +1,14 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
 public class IncludeStatement {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.IncludeStatementContext ctx = null;
 	private String fileName = null;
@@ -22,18 +25,22 @@ public class IncludeStatement {
 		JCLParser.IncludeStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
-		this.initialize();
-		Demo01.LOGGER.finer(this.myName + " " + this.nameField + " instantiated from " + this.fileName);
+		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
+		this.initialize(LOGGER, CLI);
+		LOGGER.finer(this.myName + " " + this.nameField + " instantiated from " + this.fileName);
 	}
 
-	private void initialize() {
+	private void initialize(Logger LOGGER, TheCLI CLI) {
 		myName = this.getClass().getName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		if (this.ctx.NAME_FIELD() == null) {
 		} else {
 			this.nameField = this.ctx.NAME_FIELD().getSymbol().getText();
@@ -43,7 +50,7 @@ public class IncludeStatement {
 	public int getLine() {
 		if (this.line == -1) {
 			if (this.ctx.INCLUDE_PARM_MEMBER() == null) {
-				Demo01.LOGGER.severe(
+				this.LOGGER.severe(
 					this.myName
 					+ "getLine() found " 
 					+ this.ctx.getClass().getName() 
@@ -60,7 +67,7 @@ public class IncludeStatement {
 	public int getPosn() {
 		if (this.posn == -1) {
 			if (this.ctx.EQUAL() == null) {
-				Demo01.LOGGER.severe(
+				this.LOGGER.severe(
 					this.myName 
 					+ "getPosn() found " 
 					+ this.ctx.getClass().getName() 
@@ -87,7 +94,7 @@ public class IncludeStatement {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(this.myName + " resolveParms sets = |" + sets + "|");
+		this.LOGGER.fine(this.myName + " resolveParms sets = |" + sets + "|");
 		this.kywd.resolveParms(sets);
 	}
 
@@ -96,7 +103,7 @@ public class IncludeStatement {
 	}
 
 	public ArrayList<Symbolic> collectSymbolics() {
-		Demo01.LOGGER.fine(this.myName + " collectSymbolics");
+		this.LOGGER.fine(this.myName + " collectSymbolics");
 
 		return kywd.collectSymbolics();
 	}

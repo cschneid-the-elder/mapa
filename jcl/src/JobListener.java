@@ -61,9 +61,9 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterSetOperation(JCLParser.SetOperationContext ctx) { 
 		if (this.currProc == null) {
-			this.currJob.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currJob.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
@@ -78,7 +78,7 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName));
+		this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 	}
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
@@ -121,9 +121,9 @@ public class JobListener extends JCLParserBaseListener {
 		*/
 		if (this.currJclStep == null) {
 			if (this.currProc == null) {
-				this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
+				this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 			} else {
-				this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
+				this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 			}
 		}
 	}

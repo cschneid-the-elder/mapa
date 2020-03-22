@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -43,6 +44,8 @@ examples.
 */
 public class KeywordOrSymbolicWrapper {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.KeywordOrSymbolicContext ctx = null;
 	private ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
@@ -50,40 +53,56 @@ public class KeywordOrSymbolicWrapper {
 	private Boolean inProc = null;
 	private Boolean parameterized = null;
 
-	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList) {
+	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(
+			List<JCLParser.KeywordOrSymbolicContext> ctxList
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
 		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new KeywordOrSymbolicWrapper(k, null));
+			kywdList.add(new KeywordOrSymbolicWrapper(k, null, LOGGER, CLI));
 		}
 
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
-	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList, String procName) {
+	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(
+			List<JCLParser.KeywordOrSymbolicContext> ctxList
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
 		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new KeywordOrSymbolicWrapper(k, procName));
+			kywdList.add(new KeywordOrSymbolicWrapper(k, procName, LOGGER, CLI));
 		}
 
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
-	public KeywordOrSymbolicWrapper(JCLParser.KeywordOrSymbolicContext ctx, String procName) {
+	public KeywordOrSymbolicWrapper(
+			JCLParser.KeywordOrSymbolicContext ctx
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
 	}
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx));
+		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx, this.procName, this.LOGGER, this.CLI));
 
 		if (this.ctx.SYMBOLIC() == null 
 		|| this.ctx.SYMBOLIC().size() == 0) {
@@ -92,23 +111,23 @@ public class KeywordOrSymbolicWrapper {
 			this.parameterized = true;
 		}
 
-		Demo01.LOGGER.finest(this.getClass().getName() + " kvw:");
+		this.LOGGER.finest(this.getClass().getName() + " kvw:");
 		for (KeywordValueWrapper k: this.kvw) {
-			Demo01.LOGGER.finest(k.toString());
+			this.LOGGER.finest(k.toString());
 
 		}
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
 	}
 
 	public ArrayList<KeywordValueWrapper> resolvedParms() {
-		Demo01.LOGGER.finer(myName + " resolvedParms");
+		this.LOGGER.finer(myName + " resolvedParms");
 
 		ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
 
 		if (this.parameterized) {
-			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
+			this.LOGGER.finest(myName + " parameterized == true  - continuing");
 		} else {
-			Demo01.LOGGER.finest(myName + " parameterized == false - exiting");
+			this.LOGGER.finest(myName + " parameterized == false - exiting");
 			return kvw;
 		}
 
@@ -122,12 +141,12 @@ public class KeywordOrSymbolicWrapper {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
+		this.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
 
 		if (this.parameterized) {
-			Demo01.LOGGER.finer(myName + " parameterized == true  - continuing");
+			this.LOGGER.finer(myName + " parameterized == true  - continuing");
 		} else {
-			Demo01.LOGGER.finer(myName + " parameterized == false - exiting");
+			this.LOGGER.finer(myName + " parameterized == false - exiting");
 			return;
 		}
 

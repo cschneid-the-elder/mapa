@@ -54,7 +54,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
-		this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+		this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {
@@ -66,41 +66,41 @@ public class PPListener extends JCLPPParserBaseListener {
 
 	@Override public void enterCommandStatement(JCLPPParser.CommandStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterJclCommandStatement(JCLPPParser.JclCommandStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterScheduleStatement(JCLPPParser.ScheduleStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterNotifyStatement(JCLPPParser.NotifyStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterOutputStatement(JCLPPParser.OutputStatementContext ctx) {
 		if (this.currProc == null) {
-			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName));
+			this.currProc.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
@@ -116,9 +116,9 @@ public class PPListener extends JCLPPParserBaseListener {
 		*/
 
 		if (this.currProc == null) {
-			this.currJob.addSetSym(new PPSetSymbolValue(ctx, this.fileName, null));
+			this.currJob.addSetSym(new PPSetSymbolValue(ctx, this.fileName, null, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addSetSym(new PPSetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSetSym(new PPSetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
@@ -133,7 +133,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLPPParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSetSym(new PPSetSymbolValue(ctx, this.fileName, this.procName));
+		this.currProc.addSetSym(new PPSetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 	}
 
 	@Override public void enterPendStatement(JCLPPParser.PendStatementContext ctx) {
@@ -175,9 +175,9 @@ public class PPListener extends JCLPPParserBaseListener {
 			is also attached to Job ZHANN.
 		*/
 		if (this.currProc == null) {
-			this.currJob.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName));
+			this.currJob.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName));
+			this.currProc.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 

@@ -76,7 +76,7 @@ public class Job {
 			}
 		}
 
-		this.jcllib.addAll(KeywordOrSymbolicWrapper.bunchOfThese(kywdCtxList));
+		this.jcllib.addAll(KeywordOrSymbolicWrapper.bunchOfThese(kywdCtxList, this.LOGGER, this.CLI));
 	}
 
 	public void setEndLine(int aLine) {
@@ -606,10 +606,10 @@ public class Job {
 	}
 
 	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getName() + File.separator + fileName);
+		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 		if (aFile.exists()) {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-			return aFile.getCanonicalPath();
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+			return aFile.getPath();
 		}
 
 		ArrayList<String> jcllib = this.getJcllibStrings();
@@ -617,8 +617,8 @@ public class Job {
 			if (this.CLI.mappedProcPaths.containsKey(lib)) {
 				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
 				if (aFile.exists()) {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-					return aFile.getCanonicalPath();
+					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+					return aFile.getPath();
 				}
 			}
 		}
@@ -626,8 +626,8 @@ public class Job {
 		for (String path: this.CLI.staticProcPaths) {
 			aFile = new File(path + File.separator + fileName);
 			if (aFile.exists()) {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getCanonicalPath());
-				return aFile.getCanonicalPath();
+				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+				return aFile.getPath();
 			}
 		}
 

@@ -1,25 +1,35 @@
 
 import java.util.*;
+import java.util.logging.*;
 
 public class PPSingleOrMultipleValueWrapper {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLPPParser.SingleOrMultipleValueContext ctx = null;
 	private ArrayList<PPKeywordOrSymbolicWrapper> kosw = new ArrayList<>();
 	private String procName = null;
 	private Boolean inProc = null;
 
-	public PPSingleOrMultipleValueWrapper(JCLPPParser.SingleOrMultipleValueContext ctx, String procName) {
+	public PPSingleOrMultipleValueWrapper(
+			JCLPPParser.SingleOrMultipleValueContext ctx
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
 	}
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.kosw.addAll(PPKeywordOrSymbolicWrapper.bunchOfThese(ctx.keywordOrSymbolic()));
-		this.kosw.addAll(PPKeywordOrSymbolicWrapper.bunchOfThese(ctx.parenList().keywordOrSymbolic()));
+		this.kosw.addAll(PPKeywordOrSymbolicWrapper.bunchOfThese(ctx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI));
+		this.kosw.addAll(PPKeywordOrSymbolicWrapper.bunchOfThese(ctx.parenList().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI));
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> symbolics) {

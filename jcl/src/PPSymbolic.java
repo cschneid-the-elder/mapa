@@ -1,11 +1,14 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
 public class PPSymbolic {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private String fileName = null;
 	private String text = null;
@@ -22,17 +25,25 @@ public class PPSymbolic {
 	public static ArrayList<PPSymbolic> bunchOfThese(List<org.antlr.v4.runtime.tree.TerminalNode> tn
 			, String fileName
 			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
 			) {
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();		
 
 		for (org.antlr.v4.runtime.tree.TerminalNode aNode: tn) {
-			symbolics.add(new PPSymbolic(aNode, fileName, procName));
+			symbolics.add(new PPSymbolic(aNode, fileName, procName, LOGGER, CLI));
 		}
 
 		return symbolics;
 	}
 
-	public PPSymbolic(org.antlr.v4.runtime.tree.TerminalNode tn, String fileName, String procName) {
+	public PPSymbolic(
+			org.antlr.v4.runtime.tree.TerminalNode tn
+			, String fileName
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.myName = this.getClass().getName();
 		this.terminalNode = tn;
 		this.token = tn.getSymbol();
@@ -43,7 +54,9 @@ public class PPSymbolic {
 		this.text = this.token.getText();
 		this.len = this.text.length();
 		this.inProc = !(procName == null);
-		Demo01.LOGGER.finer(this.myName + " " + this.getText() + " instantiated from " + this.fileName);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.LOGGER.finer(this.myName + " " + this.getText() + " instantiated from " + this.fileName);
 	}
 
 	public String getText() {
@@ -79,7 +92,7 @@ public class PPSymbolic {
 	}
 
 	public void setResolvedValue(PPSetSymbolValue s) {
-		Demo01.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
+		this.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
 		this.resolvedText = s.getParmValue();
 		this.ssv = s;
 	}
@@ -93,14 +106,14 @@ public class PPSymbolic {
 	}
 
 	public void resolve(ArrayList<PPSetSymbolValue> sets) {
-		Demo01.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
+		this.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
 
 		PPSetSymbolValue[] matching_sets =
 			sets.stream()
 			.filter(s -> s.getParmName().equals(this.getParmName()))
 			.toArray(PPSetSymbolValue[]::new);
 		for(PPSetSymbolValue s: matching_sets) {
-			Demo01.LOGGER.finest(myName + " resolve s: |" + s + "|");
+			this.LOGGER.finest(myName + " resolve s: |" + s + "|");
 			switch(s.getSetType()) {
 				case SET:
 					if ((this.inProc  

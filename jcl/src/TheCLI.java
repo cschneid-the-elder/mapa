@@ -238,7 +238,7 @@ public class TheCLI{
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPSetSymbolValueListener setSymbolValueListener = new PPSetSymbolValueListener(sets, fileName);
+		PPSetSymbolValueListener setSymbolValueListener = new PPSetSymbolValueListener(sets, fileName, this.LOGGER, this);
 	
 		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
 	
@@ -260,7 +260,7 @@ public class TheCLI{
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		SetSymbolValueListener setSymbolValueListener = new SetSymbolValueListener(sets, fileName);
+		SetSymbolValueListener setSymbolValueListener = new SetSymbolValueListener(sets, fileName, this.LOGGER, this);
 	
 		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
 	

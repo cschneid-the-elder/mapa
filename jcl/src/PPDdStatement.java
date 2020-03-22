@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -8,6 +9,8 @@ Instances of this class represent a DD statement.
 */
 public class PPDdStatement {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private String ddName = null;
@@ -22,44 +25,73 @@ public class PPDdStatement {
 	private Hashtable<String, PPSingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
 	private ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
-	public static ArrayList<PPDdStatement> bunchOfThese(JCLPPParser.DdStatementAmalgamationContext ddStmtAmlgnCtx, String procName, String ddName, String fileName) {
+	public static ArrayList<PPDdStatement> bunchOfThese(
+			JCLPPParser.DdStatementAmalgamationContext ddStmtAmlgnCtx
+			, String procName
+			, String ddName
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<PPDdStatement> dds = new ArrayList<>();
 
 		if (ddStmtAmlgnCtx.ddStatement() == null) {
 		} else {
-			dds.add(new PPDdStatement(ddStmtAmlgnCtx.ddStatement(), procName, ddName, fileName));
+			dds.add(new PPDdStatement(ddStmtAmlgnCtx.ddStatement(), procName, ddName, fileName, LOGGER, CLI));
 		}
 
 		if (ddStmtAmlgnCtx.ddStatementConcatenation() == null) {
 		} else {
 			for (JCLPPParser.DdStatementConcatenationContext ddcCtx: ddStmtAmlgnCtx.ddStatementConcatenation()) {
-				dds.add(new PPDdStatement(ddcCtx, procName, ddName, fileName));
+				dds.add(new PPDdStatement(ddcCtx, procName, ddName, fileName, LOGGER, CLI));
 			}
 		}
 
 		return dds;
 	}
 
-	public PPDdStatement(JCLPPParser.DdStatementContext ddStmtCtx, String procName, String ddName, String fileName) {
+	public PPDdStatement(
+			JCLPPParser.DdStatementContext ddStmtCtx
+			, String procName
+			, String ddName
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ddStmtCtx = ddStmtCtx;
 		this.ddSplatCtx = ddStmtCtx.ddParmASTERISK_DATA();
-		this.initialize(procName, ddName, fileName);
+		this.initialize(procName, ddName, fileName, LOGGER, CLI);
 		this.initializeTediously(this.ddStmtCtx.ddParameter());
 	}
 
-	public PPDdStatement(JCLPPParser.DdStatementConcatenationContext ddStmtConcatCtx, String procName, String ddName, String fileName) {
+	public PPDdStatement(
+			JCLPPParser.DdStatementConcatenationContext ddStmtConcatCtx
+			, String procName
+			, String ddName
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ddStmtConcatCtx = ddStmtConcatCtx;
 		this.ddSplatCtx = ddStmtConcatCtx.ddParmASTERISK_DATA();
-		this.initialize(procName, ddName, fileName);
+		this.initialize(procName, ddName, fileName, LOGGER, CLI);
 		this.initializeTediously(this.ddStmtConcatCtx.ddParameter());
 	}
 
-	private void initialize(String procName, String ddName, String fileName) {
+	private void initialize(
+			String procName
+			, String ddName
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.myName = this.getClass().getName();
 		this.procName = procName;
 		this.inProc = !(procName == null);
 		this.fileName = fileName;
 		this.ddName = ddName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 	}
 
 	private void initializeTediously(List<JCLPPParser.DdParameterContext> ddParms) {
@@ -79,31 +111,31 @@ public class PPDdStatement {
 			}
 
 			if (ddParm.ddParmDLM() != null) {
-				PPKeywordOrSymbolicWrapper kosw = new PPKeywordOrSymbolicWrapper(ddParm.ddParmDLM().keywordOrSymbolic(), this.procName);
+				PPKeywordOrSymbolicWrapper kosw = new PPKeywordOrSymbolicWrapper(ddParm.ddParmDLM().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 				this.kosParms.put("DLM", kosw);
 				continue;
 			}
 
 			if (ddParm.ddParmSYMBOLS() != null) {
-				PPSingleOrMultipleValueWrapper somvw = new PPSingleOrMultipleValueWrapper(ddParm.ddParmSYMBOLS().singleOrMultipleValue(), this.procName);
+				PPSingleOrMultipleValueWrapper somvw = new PPSingleOrMultipleValueWrapper(ddParm.ddParmSYMBOLS().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
 				this.somvParms.put("SYMBOLS", somvw);
 				continue;
 			}
 
 			if (ddParm.ddParmSYMLIST() != null) {
-				PPSingleOrMultipleValueWrapper somvw = new PPSingleOrMultipleValueWrapper(ddParm.ddParmSYMLIST().singleOrMultipleValue(), this.procName);
+				PPSingleOrMultipleValueWrapper somvw = new PPSingleOrMultipleValueWrapper(ddParm.ddParmSYMLIST().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
 				this.somvParms.put("SYMLIST", somvw);
 				continue;
 			}
 
 			if (ddParm.SYMBOLIC() != null) {
-				this.symbolics = PPSymbolic.bunchOfThese(ddParm.SYMBOLIC(), this.fileName, this.procName);
+				this.symbolics = PPSymbolic.bunchOfThese(ddParm.SYMBOLIC(), this.fileName, this.procName, this.LOGGER, this.CLI);
 			}
 		}
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
-		Demo01.LOGGER.finest(this.myName + " resolveParms sets = |" + sets + "|");
+		this.LOGGER.finest(this.myName + " resolveParms sets = |" + sets + "|");
 
 		for (PPKeywordOrSymbolicWrapper kos: this.kosParms.values()) {
 			kos.resolveParms(sets);
@@ -119,7 +151,7 @@ public class PPDdStatement {
 	}
 
 	public ArrayList<PPSymbolic> collectSymbolics() {
-		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
+		this.LOGGER.finest(this.myName + " collectSymbolics");
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 

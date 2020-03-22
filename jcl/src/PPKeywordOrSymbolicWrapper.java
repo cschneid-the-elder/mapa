@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -43,6 +44,8 @@ examples.
 */
 public class PPKeywordOrSymbolicWrapper {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLPPParser.KeywordOrSymbolicContext ctx = null;
 	private ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
@@ -50,40 +53,56 @@ public class PPKeywordOrSymbolicWrapper {
 	private Boolean inProc = null;
 	private Boolean parameterized = null;
 
-	public static ArrayList<PPKeywordOrSymbolicWrapper> bunchOfThese(List<JCLPPParser.KeywordOrSymbolicContext> ctxList) {
+	public static ArrayList<PPKeywordOrSymbolicWrapper> bunchOfThese(
+			List<JCLPPParser.KeywordOrSymbolicContext> ctxList
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<PPKeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
 		for (JCLPPParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new PPKeywordOrSymbolicWrapper(k, null));
+			kywdList.add(new PPKeywordOrSymbolicWrapper(k, null, LOGGER, CLI));
 		}
 
-		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
-	public static ArrayList<PPKeywordOrSymbolicWrapper> bunchOfThese(List<JCLPPParser.KeywordOrSymbolicContext> ctxList, String procName) {
+	public static ArrayList<PPKeywordOrSymbolicWrapper> bunchOfThese(
+			List<JCLPPParser.KeywordOrSymbolicContext> ctxList
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<PPKeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
 		for (JCLPPParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new PPKeywordOrSymbolicWrapper(k, procName));
+			kywdList.add(new PPKeywordOrSymbolicWrapper(k, procName, LOGGER, CLI));
 		}
 
-		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
-	public PPKeywordOrSymbolicWrapper(JCLPPParser.KeywordOrSymbolicContext ctx, String procName) {
+	public PPKeywordOrSymbolicWrapper(
+			JCLPPParser.KeywordOrSymbolicContext ctx
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
 	}
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.kvw.addAll(PPKeywordValueWrapper.bunchOfThese(this.ctx));
+		this.kvw.addAll(PPKeywordValueWrapper.bunchOfThese(this.ctx, this.procName, this.LOGGER, this.CLI));
 
 		if (this.ctx.SYMBOLIC() == null 
 		|| this.ctx.SYMBOLIC().size() == 0) {
@@ -92,23 +111,23 @@ public class PPKeywordOrSymbolicWrapper {
 			this.parameterized = true;
 		}
 
-		Demo01.LOGGER.finest(this.getClass().getName() + " kvw:");
+		this.LOGGER.finest(this.getClass().getName() + " kvw:");
 		for (PPKeywordValueWrapper k: this.kvw) {
-			Demo01.LOGGER.finest(k.toString());
+			this.LOGGER.finest(k.toString());
 
 		}
 		kvw.sort(Comparator.comparingLong(PPKeywordValueWrapper::getSortKey));
 	}
 
 	public ArrayList<PPKeywordValueWrapper> resolvedParms() {
-		Demo01.LOGGER.finer(myName + " resolvedParms");
+		this.LOGGER.finer(myName + " resolvedParms");
 
 		ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
 
 		if (this.parameterized) {
-			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
+			this.LOGGER.finest(myName + " parameterized == true  - continuing");
 		} else {
-			Demo01.LOGGER.finest(myName + " parameterized == false - exiting");
+			this.LOGGER.finest(myName + " parameterized == false - exiting");
 			return kvw;
 		}
 
@@ -122,12 +141,12 @@ public class PPKeywordOrSymbolicWrapper {
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
-		Demo01.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
+		this.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
 
 		if (this.parameterized) {
-			Demo01.LOGGER.finer(myName + " parameterized == true  - continuing");
+			this.LOGGER.finer(myName + " parameterized == true  - continuing");
 		} else {
-			Demo01.LOGGER.finer(myName + " parameterized == false - exiting");
+			this.LOGGER.finer(myName + " parameterized == false - exiting");
 			return;
 		}
 
