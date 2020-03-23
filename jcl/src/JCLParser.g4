@@ -25,7 +25,7 @@ jcl : execJCL+ | procJCL ;
 
 execJCL : jesExecutionControlStatements (jobCard (jclCommandStatement | jes2CntlStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
 
-procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ ;
+procJCL : commandStatement? procStatement (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ pendStatement? commentStatement* EOF? ;
 
 procStatement : SS procName? PROC definedSymbolicParameters* ;
 
