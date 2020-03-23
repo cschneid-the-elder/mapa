@@ -197,7 +197,7 @@ public class PPJclStep {
 	}
 
 	public void resolveProc() throws IOException {
-		this.LOGGER.fine(this.myName + " resolveProc ");
+		this.LOGGER.fine(this.myName + " " + this.stepName + " resolveProc ");
 
 		if (this.needsProc()) {
 			String aProcFile = this.searchProcPathsFor(this.getProcExecuted());
@@ -209,6 +209,8 @@ public class PPJclStep {
 				procs.get(0).setJcllib(this.jcllib);
 				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
 				this.proc = procs.get(0).iterativelyResolveIncludes(incomingSetSym, new File(aProcFile));
+				this.proc.resolveParms(incomingSetSym);
+				File finalProcFile = this.proc.rewriteWithParmsResolved();
 				this.proc.resolveProcs();
 			}
 

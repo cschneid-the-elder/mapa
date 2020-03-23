@@ -23,6 +23,7 @@ public class Proc {
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
+	private ArrayList<Symbolic> sym = new ArrayList<>();
 	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String procName = null;
@@ -272,10 +273,98 @@ public class Proc {
 
 	}
 
+	public File rewriteWithParmsResolved() throws IOException {
+		/*
+		*/
+		this.LOGGER.fine(
+			this.myName 
+			+ " "
+			+ this.procName
+			+ " rewriteWithParmsResolved job = |" 
+			+ this 
+			+ "| tmpProcDir = |" 
+			+ this.tmpProcDir 
+			+ "|"
+			);
+
+		this.sym = this.collectSymbolics();
+		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
+		File aFile = new File(this.getFileName());
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmp = new File(
+			this.tmpProcDir.toString() 
+			+ File.separator 
+			+ this.myName 
+			+ "-" 
+			+ this.procName 
+			+ "-resolved-" 
+			+ this.getUUID()
+			);
+		if (this.CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
+		String inLine = new String();
+		StringBuffer outLine = new StringBuffer();
+		while ((inLine = src.readLine()) != null) {
+			// first get just the symbolics on this line
+			Symbolic[] symOnThisLineA = 
+				this.sym.stream()
+				.filter(s -> s.getLine() == src.getLineNumber())
+				.toArray(Symbolic[]::new);
+			// now sort them by size descending so we don't get confused over
+			// replacing &A and &A1
+			ArrayList<Symbolic> symOnThisLine = new ArrayList<>();
+			symOnThisLine.addAll(Arrays.asList(symOnThisLineA));
+			symOnThisLine.sort(Comparator.comparingInt(Symbolic::getLen).reversed());
+			this.LOGGER.finest(this.myName + " symOnThisLine = |" + symOnThisLine + "|");
+			outLine = new StringBuffer(inLine);
+			this.LOGGER.finest(this.myName + " outLine before = |" + outLine + "|");
+			// replace symbolics with their resolved value - if the
+			// symbolic is followed by a dot, get rid of the dot
+			for (Symbolic s: symOnThisLine) {
+				int start = outLine.indexOf(s.getText());
+				int end = start + s.getLen();
+				if (outLine.substring(end, end + 1).equals(".")) {
+					end++;
+				}
+				outLine.replace(start, end, s.getResolvedText());
+			}
+			this.LOGGER.finest(this.myName + " outLine after  = |" + outLine + "|");
+			out.println(outLine);
+		}
+		src.close();
+		out.close();
+		return tmp;
+	}
+
+	private ArrayList<Symbolic> collectSymbolics() {
+		this.LOGGER.fine(this.myName + " " + this.procName + " collectSymbolics");
+
+		ArrayList<Symbolic> symbolics = new ArrayList<>();
+
+		for (JclStep j: steps) {
+			symbolics.addAll(j.collectSymbolics());
+		}
+
+		// these should be resolved?
+		for (IncludeStatement i: includes) {
+			symbolics.addAll(i.collectSymbolics());
+		}
+
+		return symbolics;
+	}
+
 	public Proc iterativelyResolveIncludes(
 					ArrayList<SetSymbolValue> execSetSym
 					, File initialFile
 					) throws IOException {
+		/*
+			At this point the intent is to iteratively process the job until all INCLUDEs are
+			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
+		*/
 		this.LOGGER.fine(
 			this.myName 
 			+ " iterativelyResolveIncludes this = |" 
@@ -291,29 +380,18 @@ public class Proc {
 		int sanity = 0;
 		do {
 			this.LOGGER.finest(this.myName + " procFile = |" + procFile.getName() + "|");
-			ArrayList<Proc> thisProc = new ArrayList<>();
-			lexAndParse(null, thisProc, this.tmpProcDir.getPath() + File.separator + procFile.getName());
-			thisProc.get(0).resolveParmedIncludes(execSetSym);
-			ArrayList<IncludeStatement> includes_after = thisProc.get(0).getAllUnresolvedIncludes();
-			//are all includes from before still there after? yes = stop iterating
-			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);
-			aProc = thisProc.get(0);
-			aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
-			aProc.setJcllib(this.jcllib);
-			procFile = aProc.rewriteWithIncludesResolved();
+			aProc = this.lexAndParseAndStuff(procFile, execSetSym);
+			procFile = aProc.rewriteWithIncludedContent();
+			ArrayList<IncludeStatement> includes_after = aProc.getAllIncludes();
+			this.LOGGER.finest(this.myName + " includes_after (1)  = " + includes_after);
 			sanity++;
 			if (includes_after.size() == 0) {
-				//includes resolved, parse one last time to get resolved Proc instance
-				iterating = false;
-				thisProc = new ArrayList<>();
-				lexAndParse(
-					null
-					, thisProc
-					, this.tmpProcDir.getPath() + File.separator + procFile.getName()
-					);
-				aProc = thisProc.get(0);
-				aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
-				aProc.setJcllib(this.jcllib);
+				aProc = this.lexAndParseAndStuff(procFile, execSetSym);
+				includes_after = aProc.getAllIncludes();
+				this.LOGGER.finest(this.myName + " includes_after (2)  = " + includes_after);
+				if (includes_after.size() == 0) {
+					iterating = false;
+				}
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) 
@@ -322,6 +400,19 @@ public class Proc {
 				+ " sanity check failed in iterativelyResolveIncludes for " 
 				+ this
 				);
+
+		return aProc;
+	}
+
+	private Proc lexAndParseAndStuff(File procFile, ArrayList<SetSymbolValue> execSetSym) throws IOException {
+		this.LOGGER.fine(this.myName + " " + this.procName + " lexAndParseAndStuff");
+
+		ArrayList<Proc> thisProc = new ArrayList<>();
+		lexAndParse(null, thisProc, this.tmpProcDir.getPath() + File.separator + procFile.getName());
+		thisProc.get(0).resolveParmedIncludes(execSetSym);
+		Proc aProc = thisProc.get(0);
+		aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
+		aProc.setJcllib(this.jcllib);
 
 		return aProc;
 	}
@@ -354,12 +445,8 @@ public class Proc {
 
 	}
 
-	public File rewriteWithIncludesResolved() throws IOException {
-		/*
-			At this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		this.LOGGER.fine(this.myName + " rewriteWithIncludesResolved " + this);
+	public File rewriteWithIncludedContent() throws IOException {
+		this.LOGGER.fine(this.myName + " rewriteWithIncludedContent " + this);
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));

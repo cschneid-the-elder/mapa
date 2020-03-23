@@ -70,9 +70,8 @@ public static void main(String[] args) throws Exception {
 			/*
 				Includes are resolved to the extent possible.
 				Now must rewrite job with resolved values for parms substituted.
-				Merge with procs?
 			*/
-			rJob.rewriteWithParmsResolved();
+			File finalJobFile = rJob.rewriteWithParmsResolved();
 			rJob.resolveProcs();
 		}
 	}
