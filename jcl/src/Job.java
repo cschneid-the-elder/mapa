@@ -193,6 +193,10 @@ public class Job {
 			s.resolveParms(allSym);
 		}
 
+		for (PPOp o: this.op) {
+			o.resolveParms(allSym, this);
+		}
+
 		for (JclStep step: this.steps) {
 			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.setSym);
 			for (SetSymbolValue s: this.setSym) {
@@ -359,9 +363,12 @@ public class Job {
 			// replace symbolics with their resolved value - if the
 			// symbolic is followed by a dot, get rid of the dot
 			for (Symbolic s: symOnThisLine) {
+				this.LOGGER.finest(this.myName + " s = " + s);
 				int start = outLine.indexOf(s.getText());
 				int end = start + s.getLen();
-				if (outLine.substring(end, end + 1).equals(".")) {
+				this.LOGGER.finest(this.myName + " start = " + start);
+				this.LOGGER.finest(this.myName + " end   = " + end);
+				if ((end < outLine.length()) && (outLine.substring(end, end + 1).equals("."))) {
 					end++;
 				}
 				outLine.replace(start, end, s.getResolvedText());
@@ -381,6 +388,10 @@ public class Job {
 
 		for (JclStep j: steps) {
 			symbolics.addAll(j.collectSymbolics());
+		}
+
+		for (PPOp o: this.op) {
+			symbolics.addAll(o.collectSymbolics(this));
 		}
 
 		// these should be resolved?

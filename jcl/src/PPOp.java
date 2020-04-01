@@ -13,7 +13,7 @@ public class PPOp {
 	private String fileName = null;
 	private String originalText = null;
 	private String resolvedText = null;
-	private Hashtable<PPSymbolic, String> symbolics = new Hashtable<>();
+	private HashMap<PPSymbolic, String> symbolics = new HashMap<>();
 	private Boolean inProc = false;
 	private String procName = null;
 
@@ -95,17 +95,27 @@ public class PPOp {
 		}
 	}
 
-	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
+	public void resolveParms(ArrayList<PPSetSymbolValue> sets, PPJob unused) {
 		for (PPSymbolic s: this.symbolics.keySet()) {
 			s.resolve(sets);
 			this.symbolics.put(s, s.getResolvedText());
 		}
 	}
 
-	public ArrayList<PPSymbolic> collectSymbolics() {
+	public void resolveParms(ArrayList<SetSymbolValue> sets, Job unused) {
+		this.LOGGER.severe(this.myName + " resolveParms should not be executed by instances of Job");
+	}
+
+	public ArrayList<PPSymbolic> collectSymbolics(PPJob unused) {
 		this.LOGGER.finest(this.myName + " collectSymbolics");
 
 		return new ArrayList<>(this.symbolics.keySet());
+	}
+
+	public ArrayList<Symbolic> collectSymbolics(Job unused) {
+		this.LOGGER.severe(this.myName + " collectSymbolics should not be executed by instances of Job");
+
+		return new ArrayList<Symbolic>();
 	}
 
 	public String toString() {
