@@ -208,8 +208,10 @@ public class PPJclStep {
 				this.lexAndParse(procs, aProcFile);
 				procs.get(0).setJcllib(this.jcllib);
 				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
-				this.proc = procs.get(0).iterativelyResolveIncludes(incomingSetSym, new File(aProcFile));
-				this.proc.resolveParms(incomingSetSym);
+				ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.incomingSetSym);
+				mergedSetSym.addAll(this.setSym);
+				this.proc = procs.get(0).iterativelyResolveIncludes(mergedSetSym, new File(aProcFile));
+				this.proc.resolveParms(mergedSetSym);
 				File finalProcFile = this.proc.rewriteWithParmsResolved();
 				this.proc.resolveProcs();
 			}

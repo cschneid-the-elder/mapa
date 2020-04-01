@@ -232,13 +232,25 @@ public class PPProc {
 			statement come before the include being processed) from this job.
 		*/
 
+		this.LOGGER.finest(
+			myName 
+			+ " " 
+			+ this.procName 
+			+ " resolveParmedIncludes execSetSym = |" 
+			+ execSetSym 
+			+ "|"
+			);
+
 		for (PPIncludeStatement i: this.includes) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
 			for (PPSetSymbolValue s: this.setSym) {
 				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
 				|| s.getSetType() != SetTypeOfSymbolValue.SET
 				) {
+					this.LOGGER.finest(this.myName + " mergedSetSym.add |" + s + "|");
 					mergedSetSym.add(s);
+				} else {
+					this.LOGGER.finest(this.myName + " mergedSetSym discarding |" + s + "|");
 				}
 			}
 			mergedSetSym.addAll(execSetSym);
@@ -369,8 +381,10 @@ public class PPProc {
 			this.myName 
 			+ " iterativelyResolveIncludes this = |" 
 			+ this 
-			+ "| initialJobFile = |" 
+			+ "| initialFile = |" 
 			+ initialFile.getName() 
+			+ "| execSetSym = |"
+			+ execSetSym
 			+ "|"
 			);
 
@@ -383,12 +397,12 @@ public class PPProc {
 			aProc = this.lexAndParseAndStuff(procFile, execSetSym);
 			procFile = aProc.rewriteWithIncludedContent();
 			ArrayList<PPIncludeStatement> includes_after = aProc.getAllIncludes();
-			this.LOGGER.finest(this.myName + " includes_after (1)  = " + includes_after);
+			this.LOGGER.finest(this.myName + " includes_after (1)  = |" + includes_after + "|");
 			sanity++;
 			if (includes_after.size() == 0) {
 				aProc = this.lexAndParseAndStuff(procFile, execSetSym);
 				includes_after = aProc.getAllIncludes();
-				this.LOGGER.finest(this.myName + " includes_after (2)  = " + includes_after);
+				this.LOGGER.finest(this.myName + " includes_after (2)  = |" + includes_after + "|");
 				if (includes_after.size() == 0) {
 					iterating = false;
 				}
