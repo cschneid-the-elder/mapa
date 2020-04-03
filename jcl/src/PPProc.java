@@ -8,7 +8,43 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
+This class represents a JCL PPProcedure - cataloged or instream.
 
+<p>-->NOTE This class is used as a base to create another class via a sed script 
+executed in the Makefile.  The resulting file has the name of this file with 
+"PP" prepended.
+
+<p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
+may be nested and may contain SET statements for symbolics.  On most (all?) 
+JCL statements, everything beyond the operation (JOB, EXEC, DD, etc.) can 
+consist of parameters only, thus...
+<p>
+<code>
+<br>// INCLUDE MEMBER=ASET
+<br>//*
+<br>//STEP01   EXEC &MYEXEC
+<br>//SYSUT1   DD  &SYS1DISP,
+<br>//             &SYS1DSN
+<br>//SYSUT2   DD  &SYS2DISP,
+<br>//             &SYS2DSN
+</code>
+
+<p>...is perfectly legal so long as values for these symbolics are provided.  So 
+ASET may contain a SET for one or more of these symbolics, followed by an 
+INCLUDE MEMBER=BSET which contains SETs for those same symbolics, overriding 
+those in ASET.  And the member being INCLUDEd may be parameterized.
+
+<p>Code is included to iteratively resolve INCLUDE statements by resolving 
+symbolics to the extent known, rewrite the JCL, and then to re-lex-and-parse 
+the rewritten JCL, continuing until all INCLUDEs are resolved.
+
+<p>This is accomplished via two separate grammars, one used by the preprocessing 
+code to resolve symbolics and INCLUDEs, the other to lex and parse the 
+resulting JCL.
+
+<p>An unfortunate side effect of this class and its brethren being created
+by an ANTLR listener class is that not all instance variables are known at
+instantiation time, they must be added as they are encountered by the listener.
 
 */
 public class PPProc {
@@ -24,6 +60,13 @@ public class PPProc {
 	private ArrayList<PPKeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
 	private ArrayList<PPSymbolic> sym = new ArrayList<>();
+	/**
+	This collection of PPOp instances is only used in the generated PPProc
+	class;  PPOp is a generic representation of most JCL statements that are
+	not needed in preprocessing other than for resolving INCLUDEs and 
+	symbolics;  The primary function of PPOp is to hold symbolics that must be
+	iteratively resolved as the JCL is rewritten. 
+	*/
 	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String procName = null;
@@ -43,7 +86,7 @@ public class PPProc {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
-		LOGGER.finer(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
@@ -62,7 +105,7 @@ public class PPProc {
 	}
 
 	private void setTmpDirs(File baseDir) throws IOException {
-		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + ")");
+		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
@@ -79,7 +122,7 @@ public class PPProc {
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
@@ -95,6 +138,12 @@ public class PPProc {
 		}
 	}
 
+	/**
+	Used by listeners in constructing instances of PPProc.
+
+	<p>A PEND statement is optional, if present it is used to determine
+	the endLine for this PPProc.
+	*/
 	public void addPendCtx(JCLPPParser.PendStatementContext pendCtx) {
 		this.pendCtx = pendCtx;
 		this.initialize();
@@ -198,11 +247,22 @@ public class PPProc {
 	}
 
 	public Boolean containsLine(int aLine) {
+		if (this.endLine <= this.startLine) {
+			this.LOGGER.severe(
+				this.myName 
+				+ " " 
+				+ this.procName 
+				+ " containsLine detected either endLine or startLine not set |" 
+				+ this
+				+ "|"
+				);
+		}
+
 		return (aLine >= startLine) && (aLine <= endLine);
 	}
 
 	public void resolveProcs() throws IOException {
-		LOGGER.finest(this.myName + " resolveProcs " + this);
+		this.LOGGER.finer(this.myName + " " + this.procName + " resolveProcs " + this);
 
 		for (PPJclStep step: this.steps) {
 			step.resolveProc();
@@ -232,8 +292,8 @@ public class PPProc {
 			statement come before the include being processed) from this job.
 		*/
 
-		this.LOGGER.finest(
-			myName 
+		this.LOGGER.finer(
+			this.myName 
 			+ " " 
 			+ this.procName 
 			+ " resolveParmedIncludes execSetSym = |" 
@@ -261,7 +321,7 @@ public class PPProc {
 	}
 
 	public void resolveParms(ArrayList<PPSetSymbolValue> execSetSym) {
-		LOGGER.fine(this.myName + " resolveParms " + this);
+		LOGGER.finer(this.myName + " resolveParms " + this);
 
 		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(this.CLI.PPsetSym);
 		allSym.addAll(this.setSym);
@@ -288,7 +348,7 @@ public class PPProc {
 	public File rewriteWithParmsResolved() throws IOException {
 		/*
 		*/
-		this.LOGGER.fine(
+		this.LOGGER.finer(
 			this.myName 
 			+ " "
 			+ this.procName
@@ -353,7 +413,7 @@ public class PPProc {
 	}
 
 	private ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.fine(this.myName + " " + this.procName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " " + this.procName + " collectSymbolics");
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
@@ -377,7 +437,7 @@ public class PPProc {
 			At this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
-		this.LOGGER.fine(
+		this.LOGGER.finer(
 			this.myName 
 			+ " iterativelyResolveIncludes this = |" 
 			+ this 
@@ -419,7 +479,7 @@ public class PPProc {
 	}
 
 	private PPProc lexAndParseAndStuff(File procFile, ArrayList<PPSetSymbolValue> execSetSym) throws IOException {
-		this.LOGGER.fine(this.myName + " " + this.procName + " lexAndParseAndStuff");
+		this.LOGGER.finer(this.myName + " " + this.procName + " lexAndParseAndStuff");
 
 		ArrayList<PPProc> thisProc = new ArrayList<>();
 		lexAndParse(null, thisProc, this.tmpProcDir.getPath() + File.separator + procFile.getName());
@@ -432,7 +492,7 @@ public class PPProc {
 	}
 
 	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
-		this.LOGGER.fine(
+		this.LOGGER.finer(
 			this.myName 
 			+ " lexAndParse jobs = |" 
 			+ jobs 
@@ -460,7 +520,7 @@ public class PPProc {
 	}
 
 	public File rewriteWithIncludedContent() throws IOException {
-		this.LOGGER.fine(this.myName + " rewriteWithIncludedContent " + this);
+		this.LOGGER.finer(this.myName + " rewriteWithIncludedContent " + this);
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
@@ -494,7 +554,7 @@ public class PPProc {
 							)
 						throws IOException {
 
-		this.LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "|");
+		this.LOGGER.finer(this.myName + " writeTheIncludeContent i =|" + i + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -568,7 +628,14 @@ public class PPProc {
 	}
 
 	public String toString() {
-		return this.procName + " @ " + this.startLine + " to " + this.endLine + " in " + this.fileName;
+		return 
+			this.procName 
+			+ " @ " 
+			+ this.startLine 
+			+ " to " 
+			+ this.endLine 
+			+ " in " 
+			+ this.fileName;
 	}
 
 }

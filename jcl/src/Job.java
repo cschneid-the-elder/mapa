@@ -8,7 +8,42 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
+This class represents a JCL Job.
 
+<p>-->NOTE This class is used as a base to create another class via a sed script 
+executed in the Makefile.  The resulting file has the name of this file with 
+"PP" prepended.
+
+<p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
+may be nested and may contain SET statements for symbolics.  On most (all?) 
+JCL statements, everything beyond the operation (JOB, EXEC, DD, etc.) can 
+consist of parameters only, thus...
+<p>
+<code>
+<br>// INCLUDE MEMBER=ASET
+<br>//*
+<br>//STEP01   EXEC &MYEXEC
+<br>//SYSUT1   DD  &SYS1DISP,
+<br>//             &SYS1DSN
+<br>//SYSUT2   DD  &SYS2DISP,
+<br>//             &SYS2DSN
+</code>
+<p>...is perfectly legal so long as values for these symbolics are provided.  So 
+ASET may contain a SET for one or more of these symbolics, followed by an 
+INCLUDE MEMBER=BSET which contains SETs for those same symbolics, overriding 
+those in ASET.  And the member being INCLUDEd may be parameterized.
+
+<p>Code is included to iteratively resolve INCLUDE statements by resolving 
+symbolics to the extent known, rewrite the JCL, and then to re-lex-and-parse 
+the rewritten JCL, continuing until all INCLUDEs are resolved.
+
+<p>This is accomplished via two separate grammars, one used by the preprocessing 
+code to resolve symbolics and INCLUDEs, the other to lex and parse the 
+resulting JCL.
+
+<p>An unfortunate side effect of this class and its brethren being created
+by an ANTLR listener class is that not all instance variables are known at
+instantiation time, they must be added as they are encountered by the listener.
 
 */
 public class Job {
@@ -25,6 +60,13 @@ public class Job {
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
 	private ArrayList<Symbolic> sym = new ArrayList<>();
+	/**
+	This collection of PPOp instances is only used in the generated PPJob
+	class;  PPOp is a generic representation of most JCL statements that are
+	not needed in preprocessing other than for resolving INCLUDEs and 
+	symbolics;  The primary function of PPOp is to hold symbolics that must be
+	iteratively resolved as the JCL is rewritten. 
+	*/
 	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String jobName = null;
@@ -34,57 +76,142 @@ public class Job {
 	private File tmpJobDir = null;
 	private File tmpProcDir = null;
 
-	public Job(JCLParser.JobCardContext ctx, String fileName, Logger LOGGER, TheCLI CLI) {
+	public Job(
+			JCLParser.JobCardContext ctx
+			, String fileName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
-		this.LOGGER.finer(this.myName + " " + this.jobName + " instantiated from " + this.fileName);
+		this.LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.jobName 
+			+ " instantiated from " 
+			+ this.fileName
+			);
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
+		this.myName = this.getClass().getName();
 		this.startLine = this.jobCardCtx.JOB().getSymbol().getLine();
 		this.jobName = this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}
 
+	/**
+	Used by listeners constructing instances of Job.
+
+	<p>Note that a JCLLIB statement is optional, and if absent then
+	the path(s) to search for INCLUDEs and PROCs must be set via (in
+	this case) the CLI.
+	*/
 	public void addJcllib(JCLParser.JcllibStatementContext ctx) {
-		this.LOGGER.finest(this.myName + " addJcllib: " + this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText());
-		List<JCLParser.KeywordOrSymbolicContext> kywdCtxList = ctx.singleOrMultipleValue().keywordOrSymbolic();
-		this.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().keywordOrSymbolic());
+		this.LOGGER.fine(
+			this.myName 
+			+ " addJcllib jobName = |" 
+			+ this.jobName
+			+ "|"
+			);
+
+		/*
+		Handle single entry non-parenthesized JCLLIB...
+		// JCLLIB ORDER=SIKOZU
+		*/
+		List<JCLParser.KeywordOrSymbolicContext> kywdCtxList = 
+			ctx.singleOrMultipleValue().keywordOrSymbolic();
+
+		this.LOGGER.finest(
+			this.myName 
+			+ " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic() = |" 
+			+ ctx.singleOrMultipleValue().keywordOrSymbolic()
+			+ "|"
+			);
 
 		this.jcllibCtx = ctx;
 		if (kywdCtxList == null || kywdCtxList.size() == 0) {
+			/*
+			Handle parenthesized JCLLIB
+			// JCLLIB ORDER=(SIKOZU)
+			...or...
+			// JCLLIB ORDER=(SIKOZU,JOOL)
+			*/
 			kywdCtxList = ctx.singleOrMultipleValue().parenList().keywordOrSymbolic();
-			this.LOGGER.finest(this.myName + " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic(): " + ctx.singleOrMultipleValue().parenList().keywordOrSymbolic());
+			this.LOGGER.finest(
+				this.myName 
+				+ " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic() = |" 
+				+ ctx.singleOrMultipleValue().parenList().keywordOrSymbolic()
+				+ "|"
+				);
 		}
 
 		for (JCLParser.KeywordOrSymbolicContext k: kywdCtxList) {
-			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k: " + k);
-			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.KEYWORD_VALUE(): " + k.KEYWORD_VALUE());
-			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.SYMBOLIC(): " + k.SYMBOLIC());
-			this.LOGGER.finest(this.myName + " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT(): " + k.QUOTED_STRING_FRAGMENT());
+			this.LOGGER.finest(
+				this.myName 
+				+ " addJcllib kywdCtxList k = |" 
+				+ k
+				+ "|"
+				);
+			this.LOGGER.finest(
+				this.myName 
+				+ " addJcllib kywdCtxList k.KEYWORD_VALUE() = |" 
+				+ k.KEYWORD_VALUE()
+				+ "|"
+				);
+			this.LOGGER.finest(
+				this.myName 
+				+ " addJcllib kywdCtxList k.SYMBOLIC() = |" 
+				+ k.SYMBOLIC()
+				+ "|"
+				);
+			this.LOGGER.finest(
+				this.myName 
+				+ " addJcllib kywdCtxList k.QUOTED_STRING_FRAGMENT() = |" 
+				+ k.QUOTED_STRING_FRAGMENT()
+				+ "|"
+				);
 			for (TerminalNode t: k.KEYWORD_VALUE()) {
-				this.LOGGER.finest(this.myName + " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText(): " + t.getSymbol().getText());
+				this.LOGGER.finest(
+					this.myName 
+					+ " addJcllib kywdCtxList KEYWORD_VALUE() t.getSymbol().getText() = |" 
+					+ t.getSymbol().getText()
+					+ "|"
+					);
 			}
 			for (TerminalNode t: k.SYMBOLIC()) {
-				this.LOGGER.finest(this.myName + " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText(): " + t.getSymbol().getText());
+				this.LOGGER.finest(
+					this.myName 
+					+ " addJcllib kywdCtxList SYMBOLIC() t.getSymbol().getText() + |" 
+					+ t.getSymbol().getText()
+					+ "|"
+					);
 			}
 			for (TerminalNode t: k.QUOTED_STRING_FRAGMENT()) {
-				this.LOGGER.finest(this.myName + " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText(): " + t.getSymbol().getText());
+				this.LOGGER.finest(
+					this.myName 
+					+ " addJcllib kywdCtxList QUOTED_STRING_FRAGMENT() t.getSymbol().getText() = |" 
+					+ t.getSymbol().getText()
+					+ "|"
+					);
 			}
 		}
 
 		this.jcllib.addAll(KeywordOrSymbolicWrapper.bunchOfThese(kywdCtxList, this.LOGGER, this.CLI));
 	}
 
+	/**
+	Used by listeners to set the end line of this Job. A file can
+	contain more than one JOB statement.
+	*/
 	public void setEndLine(int aLine) {
 		this.endLine = aLine;
 	}
 
 	private void setTmpDirs(File baseDir) throws IOException {
-		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + ")");
+		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
@@ -106,7 +233,7 @@ public class Job {
 	}
 
 	public void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finest(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
+		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
@@ -149,10 +276,10 @@ public class Job {
 	}
 
 	public void resolveParmedIncludes() {
-		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this);
+		this.LOGGER.finer(this.myName + " resolveParmedIncludes " + this);
 
 		/*
-			The symbolics passed into this method come from a list provided at
+			The symbolics (setSym) in CLI used by this method come from a list provided at
 			execution time.  These would typically be static and/or dynamic system
 			symbols such as SYSCLONE or SYSUID.
 
@@ -176,10 +303,10 @@ public class Job {
 	}
 
 	public void resolveParms() {
-		this.LOGGER.finest(this.myName + " resolveParms " + this);
+		this.LOGGER.finer(this.myName + " resolveParms " + this);
 
 		/*
-			The symbolics passed into this method come from a list provided at
+			The symbolics (setSym) in CLI used by this method come from a list provided at
 			execution time.  These would typically be static and/or dynamic system
 			symbols such as SYSCLONE or SYSUID.
 
@@ -211,7 +338,7 @@ public class Job {
 	}
 
 	public void resolveProcs() throws IOException {
-		LOGGER.finest(this.myName + " resolveProcs " + this);
+		LOGGER.finer(this.myName + " resolveProcs " + this);
 
 		for (JclStep step: this.steps) {
 			step.resolveProc();
@@ -316,7 +443,7 @@ public class Job {
 	public File rewriteWithParmsResolved() throws IOException {
 		/*
 		*/
-		this.LOGGER.fine(
+		this.LOGGER.finer(
 			this.myName 
 			+ " rewriteWithParmsResolved job = |" 
 			+ this 
@@ -382,7 +509,7 @@ public class Job {
 	}
 
 	private ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.fine(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics");
 
 		ArrayList<Symbolic> symbolics = new ArrayList<>();
 
@@ -403,7 +530,7 @@ public class Job {
 	}
 
 	public Job iterativelyResolveIncludes(File initialJobFile) throws IOException {
-		this.LOGGER.fine(
+		this.LOGGER.finer(
 			this.myName 
 			+ " iterativelyResolveIncludes this = |" 
 			+ this 
@@ -452,7 +579,7 @@ public class Job {
 	}
 
 	public void lexAndParse(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
-		this.LOGGER.fine(
+		this.LOGGER.finer(
 			this.myName 
 			+ " lexAndParse jobs = |" 
 			+ jobs 
@@ -484,7 +611,7 @@ public class Job {
 			At this point the intent is to iteratively process the job until all INCLUDEs are
 			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
 		*/
-		this.LOGGER.fine(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+		this.LOGGER.finer(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
@@ -536,7 +663,7 @@ public class Job {
 						refers to and add that to the output in place of the include
 				write the record read to output
 		*/
-		this.LOGGER.fine(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
+		this.LOGGER.finer(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
 
 		this.setTmpDirs(baseDir);
 		File aFile = new File(this.getFileName());
@@ -591,7 +718,7 @@ public class Job {
 							)
 						throws IOException {
 
-		this.LOGGER.fine(this.myName + " writeTheIncludeContent i =|" + i + "|");
+		this.LOGGER.finer(this.myName + " writeTheIncludeContent i =|" + i + "|");
 
 		if (i.isResolved()) {
 		} else {
@@ -605,8 +732,6 @@ public class Job {
 
 		if (includeFileFull == null) {
 			foundIt = false;
-			//LOGGER.warning(includeFile + " not found in any path specified");
-			//throw new FileNotFoundException(copyFile + " not found in any path specified");
 		} else {
 			List<String> list = 
 				Files.readAllLines(Paths.get(includeFileFull));

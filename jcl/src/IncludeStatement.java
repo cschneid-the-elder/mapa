@@ -4,6 +4,15 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class represents a JCL INCLUDE statement.
+
+<p>-->NOTE This class is used as a base to create another class via a sed script 
+executed in the Makefile.  The resulting file has the name of this file with 
+"PP" prepended.
+
+
+*/
 
 public class IncludeStatement {
 
@@ -34,7 +43,7 @@ public class IncludeStatement {
 		this.procName = procName;
 		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		this.initialize(LOGGER, CLI);
-		LOGGER.finer(this.myName + " " + this.nameField + " instantiated from " + this.fileName);
+		LOGGER.fine(this.myName + " " + this.nameField + " instantiated from " + this.fileName);
 	}
 
 	private void initialize(Logger LOGGER, TheCLI CLI) {
@@ -42,6 +51,7 @@ public class IncludeStatement {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		if (this.ctx.NAME_FIELD() == null) {
+			this.nameField = ">NONAME<";
 		} else {
 			this.nameField = this.ctx.NAME_FIELD().getSymbol().getText();
 		}
@@ -94,7 +104,7 @@ public class IncludeStatement {
 	}
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		this.LOGGER.fine(this.myName + " resolveParms sets = |" + sets + "|");
+		this.LOGGER.finer(this.myName + " resolveParms sets = |" + sets + "|");
 		this.kywd.resolveParms(sets);
 	}
 
@@ -103,7 +113,7 @@ public class IncludeStatement {
 	}
 
 	public ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.fine(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics");
 
 		return kywd.collectSymbolics();
 	}

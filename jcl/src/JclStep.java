@@ -6,6 +6,24 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
+This class represents a JCL Job Step.
+
+<p>-->NOTE This class is used as a base to create another class via a sed script 
+executed in the Makefile.  The resulting file has the name of this file with 
+"PP" prepended.
+
+<p>An instance of JclStep is meaningless without its containing Job or Proc, 
+which provide values for symbolics that may be present.
+
+<p>A JclStep may execute a procedure, which may have its symbolics resolved by
+values set by this JclStep.  The same procedure may be executed by several
+different JclSteps in the same Job, all with different parameters.  So each
+JclStep locates, parses, and provides any proc it executes its own collection
+of SetSymbolValues for resolution.
+
+<p>An unfortunate side effect of this class and its brethren being created
+by an ANTLR listener class is that not all instance variables are known at
+instantiation time, they must be added as they are encountered by the listener.
 
 
 */
@@ -28,7 +46,16 @@ public class JclStep {
 	private JCLParser.ExecPgmStatementContext execPgmStmtCtx = null;
 	private JCLParser.ExecProcStatementContext execProcStmtCtx = null;
 	private List<JCLParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
+	/**
+	The collection setSym holds instances of SetSymbolValue representing
+	parameters set on execution of a cataloged or instream procedure.
+	*/
 	private ArrayList<SetSymbolValue> setSym = new ArrayList<>();
+	/**
+	The collection incomingSetSym holds instances of SetSymbolValue
+	representing parameters set by SET statements or other means prior
+	to execution of this step.
+	*/
 	private ArrayList<SetSymbolValue> incomingSetSym = new ArrayList<>();
 	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
@@ -49,7 +76,7 @@ public class JclStep {
 		this.CLI = CLI;
 		this.inProc = !(procName == null);
 		this.initialize();
-		this.LOGGER.finer(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
+		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
 
 	}
 
@@ -69,6 +96,7 @@ public class JclStep {
 		if (this.isExecPgm()) {
 			this.line = this.execPgmStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execPgmStmtCtx.stepName() == null) {
+				this.stepName = ">NONAME<";
 			} else {
 				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
@@ -76,6 +104,7 @@ public class JclStep {
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execProcStmtCtx.stepName() == null) {
+				this.stepName = ">NONAME<";
 			} else {
 				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
@@ -94,7 +123,7 @@ public class JclStep {
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		this.LOGGER.finer(this.myName + " " + this.stepName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
 			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
@@ -150,7 +179,7 @@ public class JclStep {
 	}
 
 	public ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.fine(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics");
 
 		ArrayList<Symbolic> symbolics = new ArrayList<>();
 
@@ -177,7 +206,7 @@ public class JclStep {
 			them into account when resolving DD statements as those are overrides or
 			additions to the executed proc.
 		*/
-		this.LOGGER.finest(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
+		this.LOGGER.finer(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
 
 		this.incomingSetSym.addAll(setSym);
 		// TODO procExecuted & pgmExecuted resolveParms(mergedSetSym)
@@ -197,7 +226,7 @@ public class JclStep {
 	}
 
 	public void resolveProc() throws IOException {
-		this.LOGGER.fine(this.myName + " " + this.stepName + " resolveProc ");
+		this.LOGGER.finer(this.myName + " " + this.stepName + " resolveProc ");
 
 		if (this.needsProc()) {
 			String aProcFile = this.searchProcPathsFor(this.getProcExecuted());
@@ -220,7 +249,7 @@ public class JclStep {
 	}
 
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
-		this.LOGGER.fine(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
+		this.LOGGER.finer(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer

@@ -91,6 +91,9 @@ pptransform:
 pp:
 	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java
 
+javadoc:
+	javadoc -private -d ~/Documents/jcl src/Job.java src/JclStep.java
+
 #testNist:
 #	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 
