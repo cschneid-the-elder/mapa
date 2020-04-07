@@ -72,8 +72,11 @@ public class PPProc {
 	private String procName = null;
 	private int startLine = -1;
 	private int endLine = -1;
+	private int jobOrdNb = 0;
+	private int ordNb = 0;
 	private File baseDir = null;
 	private File tmpProcDir = null;
+	private PPJclStep parentJclStep = null;
 
 	public PPProc(
 				JCLPPParser.ProcStatementContext procCtx
@@ -208,6 +211,26 @@ public class PPProc {
 
 	public int getEndLine() {
 		return this.endLine;
+	}
+
+	public void setOrdNb(int ordNb) {
+		this.ordNb = ordNb;
+	}
+
+	public void setJobOrdNb(int jobOrdNb) {
+		this.jobOrdNb = jobOrdNb;
+	}
+
+	public void setParentJclStep(PPJclStep jclStep) {
+		this.parentJclStep = jclStep;
+	}
+
+	public StringBuffer getResolvedSuffix() {
+		if (this.parentJclStep == null) {
+			return new StringBuffer("000000");
+		} else {
+			return this.parentJclStep.getResolvedSuffix();
+		}
 	}
 
 	public PPIncludeStatement includeStatementAt(int aLine) {
@@ -370,7 +393,7 @@ public class PPProc {
 			+ "-" 
 			+ this.procName 
 			+ "-resolved-" 
-			+ this.getUUID()
+			+ this.getResolvedSuffix()
 			);
 		if (this.CLI.saveTemp) {
 		} else {
@@ -487,6 +510,9 @@ public class PPProc {
 		PPProc aProc = thisProc.get(0);
 		aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
 		aProc.setJcllib(this.jcllib);
+		aProc.setOrdNb(this.ordNb);
+		aProc.setJobOrdNb(this.jobOrdNb);
+		aProc.setParentJclStep(this.parentJclStep);
 
 		return aProc;
 	}

@@ -51,7 +51,7 @@ public class PPIncludeStatement {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		if (this.ctx.NAME_FIELD() == null) {
-			this.nameField = ">NONAME<";
+			this.nameField = "_NONAME_";
 		} else {
 			this.nameField = this.ctx.NAME_FIELD().getSymbol().getText();
 		}

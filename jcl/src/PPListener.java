@@ -17,6 +17,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	public PPJob currJob = null;
 	public PPProc currProc = null;
 	public PPJclStep currJclStep = null;
+	public int nbJobs = 0;
 
 	public PPListener(
 			ArrayList<PPJob> jobs
@@ -55,6 +56,8 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.currProc = null;
 		this.currJclStep = null;
 		this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+		this.nbJobs++;
+		this.currJob.setOrdNb(this.nbJobs);
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {
@@ -188,10 +191,11 @@ public class PPListener extends JCLPPParserBaseListener {
 
 		*/
 
-		this.currJclStep = new PPJclStep(ctx, this.fileName, this.procName, this.LOGGER, this.CLI);
 		if (this.currProc == null) {
+			this.currJclStep = new PPJclStep(ctx, this.fileName, this.currJob, this.LOGGER, this.CLI);
 			this.currJob.addJclStep(this.currJclStep);
 		} else {
+			this.currJclStep = new PPJclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
 			this.currProc.addJclStep(this.currJclStep);
 		}
 	}

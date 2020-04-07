@@ -72,6 +72,8 @@ public class PPJob {
 	private String jobName = null;
 	private int startLine = -1;
 	private int endLine = -1;
+	private int ordNb = 0;
+	private int nbSteps = 0;
 	private File baseDir = null;
 	private File tmpJobDir = null;
 	private File tmpProcDir = null;
@@ -84,6 +86,28 @@ public class PPJob {
 			) {
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.initialize();
+		this.LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.jobName 
+			+ " instantiated from " 
+			+ this.fileName
+			);
+	}
+
+	public PPJob(
+			JCLPPParser.JobCardContext ctx
+			, String fileName
+			, int ordNb
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		this.jobCardCtx = ctx;
+		this.fileName = fileName;
+		this.ordNb = ordNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
@@ -267,12 +291,23 @@ public class PPJob {
 	}
 
 	public void addJclStep(PPJclStep step) {
+		this.nbSteps++;
+		step.setOrdNb(this.nbSteps);
+		step.setJobOrdNb(this.ordNb);
 		this.steps.add(step);
 		step.setJcllib(this.jcllib);
 	}
 
 	public void addOp(PPOp anOp) {
 		this.op.add(anOp);
+	}
+
+	public void setOrdNb(int ordNb) {
+		this.ordNb = ordNb;
+	}
+
+	public StringBuffer getFormattedOrdNb() {
+		return new StringBuffer(String.format("%06d", this.ordNb));
 	}
 
 	public void resolveParmedIncludes() {
@@ -463,7 +498,7 @@ public class PPJob {
 			+ "-" 
 			+ this.getJobName() 
 			+ "-resolved-" 
-			+ this.getUUID()
+			+ this.getFormattedOrdNb()
 			);
 		if (this.CLI.saveTemp) {
 		} else {
@@ -566,6 +601,7 @@ public class PPJob {
 					);
 				aJob = thisJob.get(0);
 				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
+				aJob.setOrdNb(this.ordNb);
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) 

@@ -37,6 +37,8 @@ public class JclStep {
 	private String procName = null;
 	private String stepName = null;
 	private int line = -1;
+	private int jobOrdNb = 0;
+	private int ordNb = 0;
 	private KeywordOrSymbolicWrapper procExecuted = null;
 	private KeywordOrSymbolicWrapper pgmExecuted = null;
 	private Proc proc = null;
@@ -61,6 +63,8 @@ public class JclStep {
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private File baseDir = null;
 	private File tmpProcDir = null;
+	private Job parentJob = null;
+	private Proc parentProc = null;
 
 	public JclStep(
 			JCLParser.JclStepContext jclStepCtx
@@ -75,6 +79,42 @@ public class JclStep {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.inProc = !(procName == null);
+		this.initialize();
+		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
+
+	}
+
+	public JclStep(
+			JCLParser.JclStepContext jclStepCtx
+			, String fileName
+			, Proc parentProc
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		this.jclStepCtx = jclStepCtx;
+		this.fileName = fileName;
+		this.procName = parentProc.getProcName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.inProc = true;
+		this.initialize();
+		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
+
+	}
+
+	public JclStep(
+			JCLParser.JclStepContext jclStepCtx
+			, String fileName
+			, Job parentJob
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		this.jclStepCtx = jclStepCtx;
+		this.fileName = fileName;
+		this.parentJob = parentJob;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.inProc = false;
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
 
@@ -96,7 +136,7 @@ public class JclStep {
 		if (this.isExecPgm()) {
 			this.line = this.execPgmStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execPgmStmtCtx.stepName() == null) {
-				this.stepName = ">NONAME<";
+				this.stepName = "_NONAME_";
 			} else {
 				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
@@ -104,7 +144,7 @@ public class JclStep {
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execProcStmtCtx.stepName() == null) {
-				this.stepName = ">NONAME<";
+				this.stepName = "_NONAME_";
 			} else {
 				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
@@ -152,8 +192,30 @@ public class JclStep {
 		return this.procExecuted.getValue();
 	}
 
-	public void setProc(Proc proc) {
+	/*public void setProc(Proc proc) {
 		this.proc = proc;
+	}*/
+
+	public void setOrdNb(int ordNb) {
+		this.ordNb = ordNb;
+	}
+
+	public void setJobOrdNb(int jobOrdNb) {
+		this.jobOrdNb = jobOrdNb;
+	}
+
+	public StringBuffer getResolvedSuffix() {
+		StringBuffer sb = new StringBuffer();
+
+		if (this.parentProc == null) {
+			sb.append(this.parentJob.getFormattedOrdNb());
+		} else {
+			sb.append(this.parentProc.getResolvedSuffix());
+		}
+
+		sb.append("-");
+		sb.append(String.format("%06d", this.ordNb));
+		return sb;
 	}
 
 	public Proc getProc() {
@@ -237,6 +299,9 @@ public class JclStep {
 				this.lexAndParse(procs, aProcFile);
 				procs.get(0).setJcllib(this.jcllib);
 				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
+				procs.get(0).setOrdNb(this.ordNb);
+				procs.get(0).setJobOrdNb(this.jobOrdNb);
+				procs.get(0).setParentJclStep(this);
 				ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(this.incomingSetSym);
 				mergedSetSym.addAll(this.setSym);
 				this.proc = procs.get(0).iterativelyResolveIncludes(mergedSetSym, new File(aProcFile));
