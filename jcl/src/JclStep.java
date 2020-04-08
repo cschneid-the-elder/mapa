@@ -226,6 +226,14 @@ public class JclStep {
 		return this.line;
 	}
 
+	private int getFileNb() {
+		if (this.parentJob == null) {
+			return this.parentProc.getFileNb();
+		} else {
+			return this.parentJob.getFileNb();
+		}
+	}
+
 	public void setJcllib(ArrayList<KeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
 	}
@@ -325,7 +333,7 @@ public class JclStep {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(null, procs, fileName, LOGGER, CLI);
+		JobListener jobListener = new JobListener(null, procs, fileName, this.getFileNb(), LOGGER, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

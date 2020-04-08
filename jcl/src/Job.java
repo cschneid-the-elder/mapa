@@ -73,6 +73,7 @@ public class Job {
 	private int startLine = -1;
 	private int endLine = -1;
 	private int ordNb = 0;
+	private int fileNb = 0;
 	private int nbSteps = 0;
 	private File baseDir = null;
 	private File tmpJobDir = null;
@@ -102,12 +103,14 @@ public class Job {
 			JCLParser.JobCardContext ctx
 			, String fileName
 			, int ordNb
+			, int fileNb
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
 		this.ordNb = ordNb;
+		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
@@ -310,6 +313,13 @@ public class Job {
 		return new StringBuffer(String.format("%06d", this.ordNb));
 	}
 
+	public StringBuffer getResolvedSuffix() {
+		StringBuffer sb = new StringBuffer(String.format("%06d", this.fileNb));
+		sb.append("-");
+		sb.append(String.format("%06d", this.ordNb));
+		return sb;
+	}
+
 	public void resolveParmedIncludes() {
 		this.LOGGER.finer(this.myName + " resolveParmedIncludes " + this);
 
@@ -433,6 +443,10 @@ public class Job {
 		return this.fileName;
 	}
 
+	public int getFileNb() {
+		return this.fileNb;
+	}
+
 	public UUID getUUID() {
 		return this.uuid;
 	}
@@ -498,7 +512,7 @@ public class Job {
 			+ "-" 
 			+ this.getJobName() 
 			+ "-resolved-" 
-			+ this.getFormattedOrdNb()
+			+ this.getResolvedSuffix()
 			);
 		if (this.CLI.saveTemp) {
 		} else {
@@ -634,7 +648,7 @@ public class Job {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(jobs, procs, fileName, LOGGER, CLI);
+		JobListener jobListener = new JobListener(jobs, procs, fileName, this.fileNb, LOGGER, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

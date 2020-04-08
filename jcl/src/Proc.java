@@ -74,6 +74,7 @@ public class Proc {
 	private int endLine = -1;
 	private int jobOrdNb = 0;
 	private int ordNb = 0;
+	private int fileNb = 0;
 	private File baseDir = null;
 	private File tmpProcDir = null;
 	private JclStep parentJclStep = null;
@@ -86,6 +87,22 @@ public class Proc {
 				) {
 		this.procCtx = procCtx;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.initialize();
+		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+	}
+
+	public Proc(
+				JCLParser.ProcStatementContext procCtx
+				, String fileName
+				, int fileNb
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		this.procCtx = procCtx;
+		this.fileName = fileName;
+		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
@@ -152,10 +169,22 @@ public class Proc {
 		this.initialize();
 	}
 
+	/**
+	Used by listeners in constructing instances of Proc.
+
+	<p>A PEND statement is optional, when absent the listener manually sets
+	the endLine for this Proc.
+	*/
 	public void setEndLine(int endLine) {
 		this.endLine = endLine;
 	}
 
+	/**
+	Used by JclStep in constructing instances of Proc.
+
+	<p>The JCLLIB concatenation is needed to resolve INCLUDE statements and
+	PROCs executed by JclSteps in this Proc.
+	*/
 	public void setJcllib(ArrayList<KeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
 		for (JclStep step: this.steps) {
@@ -197,6 +226,10 @@ public class Proc {
 		return this.fileName;
 	}
 
+	public int getFileNb() {
+		return this.fileNb;
+	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
@@ -231,6 +264,18 @@ public class Proc {
 		} else {
 			return this.parentJclStep.getResolvedSuffix();
 		}
+	}
+
+	public StringBuffer getResolvedFileName() {
+		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
+		sb.append(File.separator );
+		sb.append(this.myName);
+		sb.append("-");
+		sb.append(this.procName);
+		sb.append("-resolved-");
+		sb.append(this.getResolvedSuffix());
+
+		return sb;
 	}
 
 	public IncludeStatement includeStatementAt(int aLine) {
@@ -386,15 +431,7 @@ public class Proc {
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(
-			this.tmpProcDir.toString() 
-			+ File.separator 
-			+ this.myName 
-			+ "-" 
-			+ this.procName 
-			+ "-resolved-" 
-			+ this.getResolvedSuffix()
-			);
+		File tmp = new File(this.getResolvedFileName().toString());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -537,7 +574,7 @@ public class Proc {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(jobs, procs, fileName, LOGGER, CLI);
+		JobListener jobListener = new JobListener(jobs, procs, fileName, this.getFileNb(), LOGGER, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

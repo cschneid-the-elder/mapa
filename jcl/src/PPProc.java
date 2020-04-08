@@ -74,6 +74,7 @@ public class PPProc {
 	private int endLine = -1;
 	private int jobOrdNb = 0;
 	private int ordNb = 0;
+	private int fileNb = 0;
 	private File baseDir = null;
 	private File tmpProcDir = null;
 	private PPJclStep parentJclStep = null;
@@ -86,6 +87,22 @@ public class PPProc {
 				) {
 		this.procCtx = procCtx;
 		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.initialize();
+		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+	}
+
+	public PPProc(
+				JCLPPParser.ProcStatementContext procCtx
+				, String fileName
+				, int fileNb
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		this.procCtx = procCtx;
+		this.fileName = fileName;
+		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
@@ -152,10 +169,22 @@ public class PPProc {
 		this.initialize();
 	}
 
+	/**
+	Used by listeners in constructing instances of PPProc.
+
+	<p>A PEND statement is optional, when absent the listener manually sets
+	the endLine for this PPProc.
+	*/
 	public void setEndLine(int endLine) {
 		this.endLine = endLine;
 	}
 
+	/**
+	Used by PPJclStep in constructing instances of PPProc.
+
+	<p>The JCLLIB concatenation is needed to resolve INCLUDE statements and
+	PROCs executed by PPJclSteps in this PPProc.
+	*/
 	public void setJcllib(ArrayList<PPKeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
 		for (PPJclStep step: this.steps) {
@@ -197,6 +226,10 @@ public class PPProc {
 		return this.fileName;
 	}
 
+	public int getFileNb() {
+		return this.fileNb;
+	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
@@ -231,6 +264,18 @@ public class PPProc {
 		} else {
 			return this.parentJclStep.getResolvedSuffix();
 		}
+	}
+
+	public StringBuffer getResolvedFileName() {
+		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
+		sb.append(File.separator );
+		sb.append(this.myName);
+		sb.append("-");
+		sb.append(this.procName);
+		sb.append("-resolved-");
+		sb.append(this.getResolvedSuffix());
+
+		return sb;
 	}
 
 	public PPIncludeStatement includeStatementAt(int aLine) {
@@ -386,15 +431,7 @@ public class PPProc {
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(
-			this.tmpProcDir.toString() 
-			+ File.separator 
-			+ this.myName 
-			+ "-" 
-			+ this.procName 
-			+ "-resolved-" 
-			+ this.getResolvedSuffix()
-			);
+		File tmp = new File(this.getResolvedFileName().toString());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -537,7 +574,7 @@ public class PPProc {
 	
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, fileName, LOGGER, CLI);
+		PPListener jobListener = new PPListener(jobs, procs, fileName, this.getFileNb(), LOGGER, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
 	

@@ -18,11 +18,13 @@ public class PPListener extends JCLPPParserBaseListener {
 	public PPProc currProc = null;
 	public PPJclStep currJclStep = null;
 	public int nbJobs = 0;
+	public int fileNb = 0;
 
 	public PPListener(
 			ArrayList<PPJob> jobs
 			, ArrayList<PPProc> procs
 			, String fileName
+			, int fileNb
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
@@ -36,6 +38,7 @@ public class PPListener extends JCLPPParserBaseListener {
 			this.procs = procs;
 		}
 		this.fileName = fileName;
+		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.myName = this.getClass().getName();
@@ -46,7 +49,8 @@ public class PPListener extends JCLPPParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new PPJob(ctx, fileName, this.LOGGER, this.CLI);
+		this.nbJobs++;
+		this.currJob = new PPJob(ctx, fileName, nbJobs, fileNb, this.LOGGER, this.CLI);
 		if (this.jobs == null) {
 			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
 		} else {
@@ -56,8 +60,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.currProc = null;
 		this.currJclStep = null;
 		this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
-		this.nbJobs++;
-		this.currJob.setOrdNb(this.nbJobs);
+		//this.currJob.setOrdNb(this.nbJobs);
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {

@@ -16,11 +16,14 @@ public class JobListener extends JCLParserBaseListener {
 	public Job currJob = null;
 	public Proc currProc = null;
 	public JclStep currJclStep = null;
+	public int nbJobs = 0;
+	public int fileNb = 0;
 
 	public JobListener(
 			ArrayList<Job> jobs
 			, ArrayList<Proc> procs
 			, String fileName
+			, int fileNb
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
@@ -34,6 +37,7 @@ public class JobListener extends JCLParserBaseListener {
 			this.procs = procs;
 		}
 		this.fileName = fileName;
+		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.myName = this.getClass().getName();
@@ -44,7 +48,8 @@ public class JobListener extends JCLParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new Job(ctx, fileName, this.LOGGER, this.CLI);
+		this.nbJobs++;
+		this.currJob = new Job(ctx, fileName, this.nbJobs, this.fileNb, this.LOGGER, this.CLI);
 		if (this.jobs == null) {
 			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
 		} else {
@@ -70,7 +75,7 @@ public class JobListener extends JCLParserBaseListener {
 	@Override public void enterProcStatement(JCLParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new Proc(ctx, this.fileName, this.LOGGER, this.CLI);
+		this.currProc = new Proc(ctx, this.fileName, this.fileNb, this.LOGGER, this.CLI);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);
@@ -129,10 +134,11 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterJclStep(JCLParser.JclStepContext ctx) {
-		this.currJclStep = new JclStep(ctx, this.fileName, this.procName, this.LOGGER, this.CLI);
 		if (this.currProc == null) {
+			this.currJclStep = new JclStep(ctx, this.fileName, this.currJob, this.LOGGER, this.CLI);
 			this.currJob.addJclStep(this.currJclStep);
 		} else {
+			this.currJclStep = new JclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
 			this.currProc.addJclStep(this.currJclStep);
 		}
 	}
