@@ -208,7 +208,7 @@ public class JclStep {
 		StringBuffer sb = new StringBuffer();
 
 		if (this.parentProc == null) {
-			sb.append(this.parentJob.getFormattedOrdNb());
+			sb.append(this.parentJob.getResolvedSuffix());
 		} else {
 			sb.append(this.parentProc.getResolvedSuffix());
 		}

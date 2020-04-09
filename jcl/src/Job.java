@@ -309,6 +309,10 @@ public class Job {
 		this.ordNb = ordNb;
 	}
 
+	public File getProcDir() {
+		return this.tmpProcDir;
+	}
+
 	public StringBuffer getFormattedOrdNb() {
 		return new StringBuffer(String.format("%06d", this.ordNb));
 	}

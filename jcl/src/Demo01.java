@@ -46,35 +46,42 @@ public static void main(String[] args) throws Exception {
 	*/
 	CLI = new TheCLI(args);
 
-	ArrayList<PPProc> procs = new ArrayList<>();
-	ArrayList<PPJob> jobs = new ArrayList<>();
-	ArrayList<PPJob> rJobs = new ArrayList<>(); //jobs whose INCLUDEs have been resolved
-	File baseDir = newTempDir(); // Use later for temp job/proc root
+	File baseDir = newTempDir(); // keep all temp files contained here
 	int fileNb = 0;
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
 		fileNb++;
-		lexAndParse(jobs, procs, aFileName, fileNb);
-		for (PPJob j: jobs) {
+		ArrayList<PPProc> procsPP = new ArrayList<>();
+		ArrayList<PPJob> jobsPP = new ArrayList<>();
+		int jobNb = 0;
+		lexAndParsePP(jobsPP, procsPP, aFileName, fileNb);
+		for (PPJob j: jobsPP) {
+			jobNb++;
 			LOGGER.info("Processing job " + j);
 			j.resolveParmedIncludes();
 			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 			File jobFile = j.rewriteJobAndSeparateInstreamProcs(baseDir);
 			/*
-				Now must iteratively parse this job until all includes 
-				are resolved -or- we have determined all that remain are 
-				unresolvable includes.
+				Now must iteratively parse this job until all INCLUDEs 
+				are resolved.  Unresolvable INCLUDEs generate a warning.
 			*/
 			PPJob rJob = j.iterativelyResolveIncludes(jobFile);
-			rJobs.add(rJob);
+			/*
+				Symbolic parms may have had values SET inside an INCLUDE,
+				so only now the INCLUDEs have been resolved can the symbolics 
+				be resolved.
+			*/
 			rJob.resolveParms();
 			/*
-				Includes are resolved to the extent possible.
 				Now must rewrite job with resolved values for parms substituted.
 			*/
 			File finalJobFile = rJob.rewriteWithParmsResolved();
 			rJob.resolveProcs();
+			ArrayList<Proc> procs = new ArrayList<>();
+			ArrayList<Job> jobs = new ArrayList<>();
+			lexAndParse(jobs, procs, finalJobFile.getPath(), fileNb);
+			
 		}
 	}
 
@@ -82,13 +89,13 @@ public static void main(String[] args) throws Exception {
 	LOGGER.info("Processing complete");
 }
 
-	public static void lexAndParse(
+	public static void lexAndParsePP(
 					ArrayList<PPJob> jobs
 					, ArrayList<PPProc> procs
 					, String fileName
 					, int fileNb
 					) throws IOException {
-		LOGGER.fine("lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
+		LOGGER.fine("lexAndParsePP jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
@@ -100,6 +107,31 @@ public static void main(String[] args) throws Exception {
 		ParseTreeWalker jclwalker = new ParseTreeWalker();
 	
 		PPListener jobListener = new PPListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
+	
+		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
+	
+		jclwalker.walk(jobListener, jcltree);
+
+	}
+
+	public static void lexAndParse(
+					ArrayList<Job> jobs
+					, ArrayList<Proc> procs
+					, String fileName
+					, int fileNb
+					) throws IOException {
+		LOGGER.fine("lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
+
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		JobListener jobListener = new JobListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	

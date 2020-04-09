@@ -258,9 +258,20 @@ public class PPProc {
 		this.parentJclStep = jclStep;
 	}
 
+	/**
+	Return the suffix to be used in the file name of the fully resolved 
+	version of this PPProc.  If there is a parent JCL step, then defer to
+	its resolved suffix, otherwise construct our own.
+
+	A predictable file name is needed so the transition from preprocessing
+	to "normal" lexing/parsing works seamlessly.
+	*/
 	public StringBuffer getResolvedSuffix() {
 		if (this.parentJclStep == null) {
-			return new StringBuffer("000000");
+			StringBuffer sb = new StringBuffer(String.format("%06d", this.fileNb));
+			sb.append("-");
+			sb.append(String.format("%06d", this.ordNb));
+			return sb;
 		} else {
 			return this.parentJclStep.getResolvedSuffix();
 		}
