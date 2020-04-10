@@ -81,7 +81,12 @@ public static void main(String[] args) throws Exception {
 			ArrayList<Proc> procs = new ArrayList<>();
 			ArrayList<Job> jobs = new ArrayList<>();
 			lexAndParse(jobs, procs, finalJobFile.getPath(), fileNb);
-			
+			jobs.get(0).setTmpDirs(baseDir, rJob.getJobDir(), rJob.getProcDir());
+			jobs.get(0).setOrdNb(rJob.getOrdNb());
+			jobs.get(0).lexAndParseProcs();
+			StringBuffer sb = new StringBuffer();
+			jobs.get(0).toCSV(sb);
+			LOGGER.fine(sb.toString());
 		}
 	}
 

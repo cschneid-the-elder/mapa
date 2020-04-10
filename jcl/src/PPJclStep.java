@@ -81,7 +81,7 @@ public class PPJclStep {
 		this.inProc = !(procName == null);
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-
+		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
 	}
 
 	public PPJclStep(
@@ -99,7 +99,7 @@ public class PPJclStep {
 		this.inProc = true;
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-
+		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
 	}
 
 	public PPJclStep(
@@ -117,7 +117,7 @@ public class PPJclStep {
 		this.inProc = false;
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-
+		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
 	}
 
 	private void initialize() {
@@ -173,6 +173,8 @@ public class PPJclStep {
 			this.tmpProcDir = tmpProcDir;
 			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
+
+		this.LOGGER.fine(this.myName +  " " + this.stepName + " setTmpDirs procExecuted = |" + this.procExecuted + "|");
 		
 	}
 
@@ -191,10 +193,6 @@ public class PPJclStep {
 	public String getProcExecuted() {
 		return this.procExecuted.getValue();
 	}
-
-	/*public void setProc(PPProc proc) {
-		this.proc = proc;
-	}*/
 
 	public void setOrdNb(int ordNb) {
 		this.ordNb = ordNb;
@@ -215,6 +213,19 @@ public class PPJclStep {
 
 		sb.append("-");
 		sb.append(String.format("%06d", this.ordNb));
+		return sb;
+	}
+
+	public StringBuffer getProcFileName() {
+		this.LOGGER.finest(this.myName +  " " + this.stepName + " getProcFileName procExecuted = |" + this.procExecuted + "|");
+		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
+		sb.append(File.separator);
+		sb.append("PPProc");
+		sb.append("-");
+		sb.append(this.getProcExecuted());
+		sb.append("-resolved-");
+		sb.append(this.getResolvedSuffix());
+
 		return sb;
 	}
 
@@ -394,6 +405,54 @@ public class PPJclStep {
 			+ " without success"
 			);
 		return null;
+	}
+
+	public void lexAndParseProc() throws IOException {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " lexAndParseProc");
+		if (this.isExecProc()) {
+			this.LOGGER.fine(
+						this.myName 
+						+ " " 
+						+ this.stepName 
+						+ " lexAndParseProc procName = |" 
+						+ this.procName 
+						+ "|"
+						);
+			File aFile = new File(this.getProcFileName().toString());
+			if (aFile.exists()) {
+				ArrayList<PPProc> procs = new ArrayList<>();
+				String fileName = this.getProcFileName().toString();
+				this.lexAndParse(procs, fileName);
+				this.proc = procs.get(0);
+				procs.get(0).setJcllib(this.jcllib);
+				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
+				procs.get(0).setOrdNb(this.ordNb);
+				procs.get(0).setJobOrdNb(this.jobOrdNb);
+				procs.get(0).setParentJclStep(this);
+				this.proc.lexAndParseProcs();
+			}
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut) {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " toCSV");
+		csvOut.append(",");
+		csvOut.append(this.stepName);
+		csvOut.append(",");
+		csvOut.append(this.ordNb);
+		csvOut.append(",");
+		if (this.isExecPgm()) {
+			csvOut.append("PGM");
+			csvOut.append(",");
+			csvOut.append(this.pgmExecuted.getValue());
+		} else {
+			csvOut.append("PROC");
+			csvOut.append(",");
+			csvOut.append(this.procExecuted.getValue());
+			if (this.proc != null) {
+				this.proc.toCSV(csvOut);
+			}
+		}
 	}
 
 	public String toString() {

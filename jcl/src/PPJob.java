@@ -309,8 +309,16 @@ public class PPJob {
 		this.ordNb = ordNb;
 	}
 
+	public File getJobDir() {
+		return this.tmpJobDir;
+	}
+
 	public File getProcDir() {
 		return this.tmpProcDir;
+	}
+
+	public int getOrdNb() {
+		return this.ordNb;
 	}
 
 	public StringBuffer getFormattedOrdNb() {
@@ -841,6 +849,21 @@ public class PPJob {
 		}
 
 		return tmpDir;
+	}
+
+	public void lexAndParseProcs() throws IOException {
+		for (PPJclStep s: this.steps) {
+			s.lexAndParseProc();
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut) {
+		csvOut.append(this.jobName);
+		csvOut.append(",");
+		csvOut.append(this.ordNb);
+		for (PPJclStep s: this.steps) {
+			s.toCSV(csvOut);
+		}
 	}
 
 	public String toString() {

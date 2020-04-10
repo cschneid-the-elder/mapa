@@ -279,7 +279,7 @@ public class PPProc {
 
 	public StringBuffer getResolvedFileName() {
 		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
-		sb.append(File.separator );
+		sb.append(File.separator);
 		sb.append(this.myName);
 		sb.append("-");
 		sb.append(this.procName);
@@ -699,6 +699,22 @@ public class PPProc {
 		}
 
 		return tmpDir;
+	}
+
+	public void lexAndParseProcs() throws IOException {
+		this.LOGGER.fine(this.myName + " " + this.procName + " lexAndParseProcs");
+		for (PPJclStep s: this.steps) {
+			s.lexAndParseProc();
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut) {
+		csvOut.append(",");
+		csvOut.append(this.procName);
+		csvOut.append(",");
+		for (PPJclStep s: this.steps) {
+			s.toCSV(csvOut);
+		}
 	}
 
 	public String toString() {
