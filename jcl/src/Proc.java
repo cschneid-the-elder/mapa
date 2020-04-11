@@ -75,6 +75,7 @@ public class Proc {
 	private int jobOrdNb = 0;
 	private int ordNb = 0;
 	private int fileNb = 0;
+	private int nbSteps = 0;
 	private File baseDir = null;
 	private File tmpProcDir = null;
 	private JclStep parentJclStep = null;
@@ -180,7 +181,7 @@ public class Proc {
 	}
 
 	/**
-	Used by JclStep in constructing instances of Proc.
+	Used by JclStep and Proc in constructing instances of Proc.
 
 	<p>The JCLLIB concatenation is needed to resolve INCLUDE statements and
 	PROCs executed by JclSteps in this Proc.
@@ -210,7 +211,17 @@ public class Proc {
 		this.setSym.add(setSym);
 	}
 
+	/**
+	Add a JclStep to this Proc.
+
+	<p>Note that this is similar to addJclStep in Job, but neither
+	<code>setJcllib()</code> nor <code>setJobOrdNb</code> are executed
+	from here.  Instead, those methods are executed in Proc's implementation
+	of them, for the collection of JclSteps.
+	*/
 	public void addJclStep(JclStep step) {
+		this.nbSteps++;
+		step.setOrdNb(this.nbSteps);
 		this.steps.add(step);
 	}
 
@@ -252,10 +263,17 @@ public class Proc {
 
 	public void setJobOrdNb(int jobOrdNb) {
 		this.jobOrdNb = jobOrdNb;
+		for (JclStep step: this.steps) {
+			step.setJobOrdNb(jobOrdNb);
+		}
 	}
 
 	public void setParentJclStep(JclStep jclStep) {
 		this.parentJclStep = jclStep;
+	}
+
+	public JclStep getParentJclStep() {
+		return this.parentJclStep;
 	}
 
 	/**
@@ -708,11 +726,34 @@ public class Proc {
 		}
 	}
 
+	/**
+	Add a comma separated representation of this Proc to the passed
+	StringBuffer.
+
+	The tricky <code>while</code> is to get the indentation right by
+	working through the tree of JclSteps and Procs leading to this instance.
+	*/
 	public void toCSV(StringBuffer csvOut) {
-		csvOut.append(",");
+		StringBuffer prefix = new StringBuffer();
+		JclStep aStep = this.parentJclStep;
+		if (aStep != null) {
+			prefix.append(",,");
+		}
+		while (aStep != null) {
+			prefix.append(",");
+			Proc aProc = aStep.getParentProc();
+			if (aProc == null) {
+				aStep = null;
+			} else {
+				aStep = aProc.getParentJclStep();
+			}
+		}
+		csvOut.append(prefix);
 		csvOut.append(this.procName);
-		csvOut.append(",");
+		prefix.append(",");
 		for (JclStep s: this.steps) {
+			csvOut.append('\n');
+			csvOut.append(prefix);
 			s.toCSV(csvOut);
 		}
 	}

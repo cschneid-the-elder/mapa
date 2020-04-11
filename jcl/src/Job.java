@@ -862,6 +862,7 @@ public class Job {
 		csvOut.append(",");
 		csvOut.append(this.ordNb);
 		for (JclStep s: this.steps) {
+			csvOut.append('\n');
 			s.toCSV(csvOut);
 		}
 	}

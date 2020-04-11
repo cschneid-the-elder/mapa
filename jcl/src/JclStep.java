@@ -93,6 +93,7 @@ public class JclStep {
 			) {
 		this.jclStepCtx = jclStepCtx;
 		this.fileName = fileName;
+		this.parentProc = parentProc;
 		this.procName = parentProc.getProcName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
@@ -231,6 +232,14 @@ public class JclStep {
 
 	public Proc getProc() {
 		return this.proc;
+	}
+
+	public Proc getParentProc() {
+		return this.parentProc;
+	}
+
+	public Job getParentJob() {
+		return this.parentJob;
 	}
 
 	public int getLine() {
@@ -449,6 +458,8 @@ public class JclStep {
 			csvOut.append("PROC");
 			csvOut.append(",");
 			csvOut.append(this.procExecuted.getValue());
+			csvOut.append('\n');
+			csvOut.append(",");
 			if (this.proc != null) {
 				this.proc.toCSV(csvOut);
 			}

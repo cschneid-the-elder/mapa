@@ -75,6 +75,7 @@ public class PPProc {
 	private int jobOrdNb = 0;
 	private int ordNb = 0;
 	private int fileNb = 0;
+	private int nbSteps = 0;
 	private File baseDir = null;
 	private File tmpProcDir = null;
 	private PPJclStep parentJclStep = null;
@@ -180,7 +181,7 @@ public class PPProc {
 	}
 
 	/**
-	Used by PPJclStep in constructing instances of PPProc.
+	Used by PPJclStep and PPProc in constructing instances of PPProc.
 
 	<p>The JCLLIB concatenation is needed to resolve INCLUDE statements and
 	PROCs executed by PPJclSteps in this PPProc.
@@ -210,7 +211,17 @@ public class PPProc {
 		this.setSym.add(setSym);
 	}
 
+	/**
+	Add a PPJclStep to this PPProc.
+
+	<p>Note that this is similar to addJclStep in PPJob, but neither
+	<code>setJcllib()</code> nor <code>setJobOrdNb</code> are executed
+	from here.  Instead, those methods are executed in PPProc's implementation
+	of them, for the collection of PPJclSteps.
+	*/
 	public void addJclStep(PPJclStep step) {
+		this.nbSteps++;
+		step.setOrdNb(this.nbSteps);
 		this.steps.add(step);
 	}
 
@@ -252,10 +263,17 @@ public class PPProc {
 
 	public void setJobOrdNb(int jobOrdNb) {
 		this.jobOrdNb = jobOrdNb;
+		for (PPJclStep step: this.steps) {
+			step.setJobOrdNb(jobOrdNb);
+		}
 	}
 
 	public void setParentJclStep(PPJclStep jclStep) {
 		this.parentJclStep = jclStep;
+	}
+
+	public PPJclStep getParentJclStep() {
+		return this.parentJclStep;
 	}
 
 	/**
@@ -708,11 +726,34 @@ public class PPProc {
 		}
 	}
 
+	/**
+	Add a comma separated representation of this PPProc to the passed
+	StringBuffer.
+
+	The tricky <code>while</code> is to get the indentation right by
+	working through the tree of PPJclSteps and PPProcs leading to this instance.
+	*/
 	public void toCSV(StringBuffer csvOut) {
-		csvOut.append(",");
+		StringBuffer prefix = new StringBuffer();
+		PPJclStep aStep = this.parentJclStep;
+		if (aStep != null) {
+			prefix.append(",,");
+		}
+		while (aStep != null) {
+			prefix.append(",");
+			PPProc aProc = aStep.getParentProc();
+			if (aProc == null) {
+				aStep = null;
+			} else {
+				aStep = aProc.getParentJclStep();
+			}
+		}
+		csvOut.append(prefix);
 		csvOut.append(this.procName);
-		csvOut.append(",");
+		prefix.append(",");
 		for (PPJclStep s: this.steps) {
+			csvOut.append('\n');
+			csvOut.append(prefix);
 			s.toCSV(csvOut);
 		}
 	}
