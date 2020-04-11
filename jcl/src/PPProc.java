@@ -570,8 +570,9 @@ public class PPProc {
 	private PPProc lexAndParseAndStuff(File procFile, ArrayList<PPSetSymbolValue> execSetSym) throws IOException {
 		this.LOGGER.finer(this.myName + " " + this.procName + " lexAndParseAndStuff");
 
+		String procFileFull = searchProcPathsFor(procFile.getName());
 		ArrayList<PPProc> thisProc = new ArrayList<>();
-		lexAndParse(null, thisProc, this.tmpProcDir.getPath() + File.separator + procFile.getName());
+		lexAndParse(null, thisProc, procFileFull);
 		thisProc.get(0).resolveParmedIncludes(execSetSym);
 		PPProc aProc = thisProc.get(0);
 		aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
