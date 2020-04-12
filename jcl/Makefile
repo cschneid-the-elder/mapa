@@ -64,7 +64,7 @@ testrigpp:
 
 testdemo:
 	echo `date` testdemo $(n) >> build.log
-	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -logLevel FINEST -saveTemp
+	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -outcsv test$(n).csv -logLevel FINEST -saveTemp
 
 ziplogs:
 	echo `date` ziplogs >> build.log

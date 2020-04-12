@@ -16,7 +16,7 @@ public class TheCLI{
 	public ArrayList<String> fileNamesToProcess = new ArrayList<>();
 	public ArrayList<String> staticProcPaths = new ArrayList<>();
 	public Hashtable<String, String> mappedProcPaths = new Hashtable<>();
-	public String outFileName = null;
+	public String outcsvFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
 	public Integer sanity = new Integer(20);
@@ -40,8 +40,8 @@ public class TheCLI{
 			, "symbol=value to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
 		Option setList = new Option("setList", true
 			, "name of a file containing symbol=value pairs (one per line) to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
-		Option out = new Option("out", true
-			, "name of a file in which to store the gathered information");
+		Option outcsv = new Option("outcsv", true
+			, "name of a file in which to store the gathered information in csv format");
 		Option logLevel = new Option("logLevel", true
 			, "logging level for this run {SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST}");
 		Option unitTest = new Option("unitTest", false
@@ -58,7 +58,7 @@ public class TheCLI{
 		this.options.addOption(includeList);
 		this.options.addOption(set);
 		this.options.addOption(setList);
-		this.options.addOption(out);
+		this.options.addOption(outcsv);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
 		this.options.addOption(saveTemp);
@@ -112,8 +112,8 @@ public class TheCLI{
 			this.setFile = this.writeSetFile();
 		}
 
-		if (this.line.hasOption("out")) {
-			this.outFileName = this.line.getOptionValue("out");
+		if (this.line.hasOption("outcsv")) {
+			this.outcsvFileName = this.line.getOptionValue("outcsv");
 		}
 
 		if (this.line.hasOption("logLevel")) {

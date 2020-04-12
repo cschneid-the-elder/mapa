@@ -429,6 +429,14 @@ public class JclStep {
 						);
 			File aFile = new File(this.getProcFileName().toString());
 			if (aFile.exists()) {
+				this.LOGGER.fine(
+							this.myName 
+							+ " " 
+							+ this.stepName 
+							+ " lexAndParseProc aFile.getName() = |" 
+							+ aFile.getName() 
+							+ "| exists"
+							);
 				ArrayList<Proc> procs = new ArrayList<>();
 				String fileName = this.getProcFileName().toString();
 				this.lexAndParse(procs, fileName);
@@ -439,6 +447,15 @@ public class JclStep {
 				procs.get(0).setJobOrdNb(this.jobOrdNb);
 				procs.get(0).setParentJclStep(this);
 				this.proc.lexAndParseProcs();
+			} else {
+				this.LOGGER.fine(
+							this.myName 
+							+ " " 
+							+ this.stepName 
+							+ " lexAndParseProc aFile.getName() = |" 
+							+ aFile.getName() 
+							+ "| does not exist"
+							);
 			}
 		}
 	}
@@ -458,11 +475,12 @@ public class JclStep {
 			csvOut.append("PROC");
 			csvOut.append(",");
 			csvOut.append(this.procExecuted.getValue());
-			csvOut.append('\n');
-			csvOut.append(",");
 			if (this.proc != null) {
+				csvOut.append(System.getProperty("line.separator"));
+				csvOut.append(",");
 				this.proc.toCSV(csvOut);
 			}
+			//csvOut.append(System.getProperty("line.separator"));
 		}
 	}
 

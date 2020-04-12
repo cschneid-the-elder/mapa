@@ -48,6 +48,12 @@ public static void main(String[] args) throws Exception {
 
 	File baseDir = newTempDir(); // keep all temp files contained here
 	int fileNb = 0;
+	BufferedWriter outcsv = null;
+
+	if (CLI.outcsvFileName == null) {
+	} else {
+        outcsv = new BufferedWriter(new FileWriter(CLI.outcsvFileName));
+	}
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
@@ -78,18 +84,31 @@ public static void main(String[] args) throws Exception {
 			*/
 			File finalJobFile = rJob.rewriteWithParmsResolved();
 			rJob.resolveProcs();
+			/*
+				Now transition from preprocessing to lexing/parsing resolved JCL.
+			*/
 			ArrayList<Proc> procs = new ArrayList<>();
 			ArrayList<Job> jobs = new ArrayList<>();
 			lexAndParse(jobs, procs, finalJobFile.getPath(), fileNb);
 			jobs.get(0).setTmpDirs(baseDir, rJob.getJobDir(), rJob.getProcDir());
 			jobs.get(0).setOrdNb(rJob.getOrdNb());
 			jobs.get(0).lexAndParseProcs();
-			StringBuffer sb = new StringBuffer();
-			jobs.get(0).toCSV(sb);
-			LOGGER.fine(sb.toString());
+			if (CLI.outcsvFileName == null) {
+			} else {
+				StringBuffer sb = new StringBuffer();
+				sb.append(System.getProperty("line.separator"));
+				jobs.get(0).toCSV(sb);
+		        outcsv.write(sb.toString());
+				LOGGER.fine(sb.toString());
+			}
 		}
 	}
 
+	if (CLI.outcsvFileName == null) {
+	} else {
+        outcsv.flush();
+        outcsv.close();
+	}
 
 	LOGGER.info("Processing complete");
 }

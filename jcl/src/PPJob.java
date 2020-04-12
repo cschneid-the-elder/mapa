@@ -862,7 +862,7 @@ public class PPJob {
 		csvOut.append(",");
 		csvOut.append(this.ordNb);
 		for (PPJclStep s: this.steps) {
-			csvOut.append('\n');
+			csvOut.append(System.getProperty("line.separator"));
 			s.toCSV(csvOut);
 		}
 	}

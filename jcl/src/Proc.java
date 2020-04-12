@@ -488,7 +488,7 @@ public class Proc {
 			for (Symbolic s: symOnThisLine) {
 				int start = outLine.indexOf(s.getText());
 				int end = start + s.getLen();
-				if (outLine.substring(end, end + 1).equals(".")) {
+				if (end < outLine.length() && outLine.substring(end, end + 1).equals(".")) {
 					end++;
 				}
 				outLine.replace(start, end, s.getResolvedText());
@@ -555,6 +555,14 @@ public class Proc {
 				if (includes_after.size() == 0) {
 					iterating = false;
 				}
+			} else {
+				// if any INCLUDEs remain that can be resolved, continue
+				Boolean found = false;
+				for (IncludeStatement i: includes_after) {
+					found = (searchProcPathsFor(i.getResolvedText()) != null);
+					if (found) break;
+				}
+				iterating = found;
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) 
@@ -753,7 +761,7 @@ public class Proc {
 		csvOut.append(this.procName);
 		prefix.append(",");
 		for (JclStep s: this.steps) {
-			csvOut.append('\n');
+			csvOut.append(System.getProperty("line.separator"));
 			csvOut.append(prefix);
 			s.toCSV(csvOut);
 		}
