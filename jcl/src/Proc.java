@@ -95,6 +95,20 @@ public class Proc {
 	}
 
 	public Proc(
+				String fileName
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		this.myName = this.getClass().getName();
+		this.fileName = fileName;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.procName = this.procNameFromFileName();
+		this.initialize();
+		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+	}
+
+	public Proc(
 				JCLParser.ProcStatementContext procCtx
 				, String fileName
 				, int fileNb
@@ -114,14 +128,58 @@ public class Proc {
 		if (this.myName == null) {
 			this.myName = this.getClass().getName();
 		}
+
 		if (this.procName == null) {
-			this.procName = this.procCtx.procName().NAME_FIELD().getSymbol().getText();
+			if (this.procCtx.procName() == null) {
+				this.procName = this.procNameFromFileName();
+			} else {
+				this.procName = this.procCtx.procName().NAME_FIELD().getSymbol().getText();
+			}
 		}
-		if (this.procCtx != null) {
+
+		if (this.procCtx == null) {
+			this.startLine = 1;
+		} else {
 			this.startLine = this.procCtx.PROC().getSymbol().getLine();
 		}
-		if (this.pendCtx != null) {
+
+		if (this.pendCtx == null) {
+		} else {
 			this.endLine = this.pendCtx.PEND().getSymbol().getLine();
+		}
+	}
+
+	/**
+	This may be awful, but it turns out the PROC statement is optional for 
+	a cataloged proc, and even if present, the name field on the PROC statement
+	is optional; this is not true for an instream proc, where the PROC
+	statement is required and must contain a name field.
+
+	So the proc name is set from the value returned by this method, which is
+	dependent on the naming convention used for temp files.  Which I invented.
+	*/
+	private String procNameFromFileName() {
+		int s = this.fileName.lastIndexOf(File.separator);
+		int i = -1;
+
+		if (s > -1) {
+			s++;
+			i = this.fileName.indexOf('-', s);
+		} else {
+			i = this.fileName.indexOf('-');
+		}
+
+		this.LOGGER.finer(this.myName + " procNameFromFileName fileName = |" + this.fileName + "|");
+		this.LOGGER.finer(this.myName + " procNameFromFileName s = |" + s + "| i = |" + i + "|");
+
+		if (s == -1 && i == -1) {
+			return this.fileName;
+		} else if (s == -1) {
+			return this.fileName.substring(0, i);
+		} else if (i == -1) {
+			return this.fileName.substring(s);
+		} else {
+			return this.fileName.substring(s, i);
 		}
 	}
 
@@ -298,8 +356,6 @@ public class Proc {
 	public StringBuffer getResolvedFileName() {
 		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
 		sb.append(File.separator);
-		sb.append(this.myName);
-		sb.append("-");
 		sb.append(this.procName);
 		sb.append("-resolved-");
 		sb.append(this.getResolvedSuffix());
@@ -625,7 +681,7 @@ public class Proc {
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpProcDir.toString() + File.separator + this.myName + "-" + this.procName + "-" + this.getUUID());
+		File tmp = new File(this.tmpProcDir.toString() + File.separator + this.procName + "-" + this.getUUID());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -745,11 +801,8 @@ public class Proc {
 	public void toCSV(StringBuffer csvOut) {
 		StringBuffer prefix = new StringBuffer();
 		JclStep aStep = this.parentJclStep;
-		if (aStep != null) {
-			prefix.append(",,");
-		}
 		while (aStep != null) {
-			prefix.append(",");
+			prefix.append(",,,,");
 			Proc aProc = aStep.getParentProc();
 			if (aProc == null) {
 				aStep = null;
@@ -759,7 +812,6 @@ public class Proc {
 		}
 		csvOut.append(prefix);
 		csvOut.append(this.procName);
-		prefix.append(",");
 		for (JclStep s: this.steps) {
 			csvOut.append(System.getProperty("line.separator"));
 			csvOut.append(prefix);

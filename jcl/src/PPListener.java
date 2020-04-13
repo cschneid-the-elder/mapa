@@ -194,7 +194,11 @@ public class PPListener extends JCLPPParserBaseListener {
 
 		*/
 
-		if (this.currProc == null) {
+		if (this.currProc == null && this.currJob == null) {
+			this.currProc = new PPProc(this.fileName, this.LOGGER, this.CLI);
+			this.currJclStep = new PPJclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
+			this.currProc.addJclStep(this.currJclStep);
+		} else if (this.currProc == null) {
 			this.currJclStep = new PPJclStep(ctx, this.fileName, this.currJob, this.LOGGER, this.CLI);
 			this.currJob.addJclStep(this.currJclStep);
 		} else {

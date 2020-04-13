@@ -221,8 +221,6 @@ public class PPJclStep {
 		this.LOGGER.finest(this.myName +  " " + this.stepName + " getProcFileName procExecuted = |" + this.procExecuted + "|");
 		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
 		sb.append(File.separator);
-		sb.append("PPProc");
-		sb.append("-");
 		sb.append(this.getProcExecuted());
 		sb.append("-resolved-");
 		sb.append(this.getResolvedSuffix());
@@ -440,6 +438,16 @@ public class PPJclStep {
 				ArrayList<PPProc> procs = new ArrayList<>();
 				String fileName = this.getProcFileName().toString();
 				this.lexAndParse(procs, fileName);
+				if (procs.size() == 0) {
+					this.LOGGER.severe(
+						this.myName 
+						+ " lexAndParseProc error parsing " 
+						+ this.procName 
+						+ " in " 
+						+ fileName
+						);
+					return;
+				}
 				this.proc = procs.get(0);
 				procs.get(0).setJcllib(this.jcllib);
 				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
@@ -477,10 +485,8 @@ public class PPJclStep {
 			csvOut.append(this.procExecuted.getValue());
 			if (this.proc != null) {
 				csvOut.append(System.getProperty("line.separator"));
-				csvOut.append(",");
 				this.proc.toCSV(csvOut);
 			}
-			//csvOut.append(System.getProperty("line.separator"));
 		}
 	}
 

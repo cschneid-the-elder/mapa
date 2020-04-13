@@ -124,17 +124,22 @@ public class JobListener extends JCLParserBaseListener {
 			CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
 			is also attached to Job ZHANN.
 		*/
-		if (this.currJclStep == null) {
-			if (this.currProc == null) {
-				this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
-			} else {
-				this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
-			}
+		if (this.currProc == null && this.currJob == null) {
+			this.currProc = new Proc(this.fileName, this.LOGGER, this.CLI);
+			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.currProc.getProcName(), this.LOGGER, this.CLI));
+		} else if (this.currProc == null) {
+			this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+		} else {
+			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterJclStep(JCLParser.JclStepContext ctx) {
-		if (this.currProc == null) {
+		if (this.currProc == null && this.currJob == null) {
+			this.currProc = new Proc(this.fileName, this.LOGGER, this.CLI);
+			this.currJclStep = new JclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
+			this.currProc.addJclStep(this.currJclStep);
+		} else if (this.currProc == null) {
 			this.currJclStep = new JclStep(ctx, this.fileName, this.currJob, this.LOGGER, this.CLI);
 			this.currJob.addJclStep(this.currJclStep);
 		} else {
