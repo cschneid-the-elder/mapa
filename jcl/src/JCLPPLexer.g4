@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019, Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -631,8 +631,8 @@ DD_STACK : S T A C K ->type(STACK),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_THRESH : T H R E S H ->type(THRESH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_TRTCH : T R T C H ->type(TRTCH),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 
-DD_SYMBOLIC : SYMBOLIC {System.out.println("DD_MODE DD_SYMBOLIC");} ->type(SYMBOLIC) ;
-DD_EQUAL : EQUAL_DFLT {System.out.println("DD_MODE DD_EQUAL");} ->type(EQUAL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+DD_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_ANYCHAR : ANYCHAR ->channel(HIDDEN) ;
 
 mode EXPORT_STMT_MODE ;
