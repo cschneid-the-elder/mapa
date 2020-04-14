@@ -48,7 +48,13 @@ public static void main(String[] args) throws Exception {
 
 	File baseDir = newTempDir(); // keep all temp files contained here
 	int fileNb = 0;
+	BufferedWriter outtree = null;
 	BufferedWriter outcsv = null;
+
+	if (CLI.outtreeFileName == null) {
+	} else {
+        outtree = new BufferedWriter(new FileWriter(CLI.outtreeFileName));
+	}
 
 	if (CLI.outcsvFileName == null) {
 	} else {
@@ -57,10 +63,12 @@ public static void main(String[] args) throws Exception {
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
+		Boolean first = true;
 		fileNb++;
 		ArrayList<PPProc> procsPP = new ArrayList<>();
 		ArrayList<PPJob> jobsPP = new ArrayList<>();
 		int jobNb = 0;
+		UUID uuid = UUID.randomUUID(); //identify a file
 		lexAndParsePP(jobsPP, procsPP, aFileName, fileNb);
 		for (PPJob j: jobsPP) {
 			jobNb++;
@@ -93,21 +101,43 @@ public static void main(String[] args) throws Exception {
 			jobs.get(0).setTmpDirs(baseDir, rJob.getJobDir(), rJob.getProcDir());
 			jobs.get(0).setOrdNb(rJob.getOrdNb());
 			jobs.get(0).lexAndParseProcs();
-			if (CLI.outcsvFileName == null) {
+			if (CLI.outtreeFileName == null) {
 			} else {
 				StringBuffer sb = new StringBuffer();
 				sb.append(System.getProperty("line.separator"));
-				jobs.get(0).toCSV(sb);
-		        outcsv.write(sb.toString());
+				jobs.get(0).toTree(sb);
+		        outtree.write(sb.toString());
 				LOGGER.fine(sb.toString());
 			}
+			if (CLI.outcsvFileName == null) {
+			} else {
+				StringBuffer buf = new StringBuffer();
+				if (first) {
+					buf.append("FILE");
+					buf.append(",");
+					buf.append(aFileName);
+					buf.append(",");
+					buf.append(uuid.toString());
+				}
+				buf.append(System.getProperty("line.separator"));
+				jobs.get(0).toCSV(buf, uuid);
+				outcsv.write(buf.toString());
+				LOGGER.fine(buf.toString());
+			}
+			first = false;
 		}
+	}
+
+	if (CLI.outtreeFileName == null) {
+	} else {
+        outtree.flush();
+        outtree.close();
 	}
 
 	if (CLI.outcsvFileName == null) {
 	} else {
-        outcsv.flush();
-        outcsv.close();
+		outcsv.flush();
+		outcsv.close();
 	}
 
 	LOGGER.info("Processing complete");

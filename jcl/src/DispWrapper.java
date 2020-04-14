@@ -60,7 +60,11 @@ public class DispWrapper {
 
 	private void setNormalTerm() {
 		if (this.normalTermCtx == null) {
-			this.normalTerm = "DELETE";
+			if (this.status.equals("NEW")) {
+				this.normalTerm = "DELETE";
+			} else {
+				this.normalTerm = "KEEP";
+			}
 		} else if (this.normalTermCtx.DISP_CATLG() != null) {
 			this.normalTerm = this.normalTermCtx.DISP_CATLG().getSymbol().getText();
 		} else if (this.normalTermCtx.DISP_DELETE() != null) {
@@ -98,6 +102,18 @@ public class DispWrapper {
 
 	public void resolveParms(ArrayList<SetSymbolValue> sets) {
 		this.LOGGER.fine(myName + " resolveParms sets = |" + sets + "|");
+	}
+
+	public String getStatus() {
+		return this.status;
+	}
+
+	public String getNormalTerm() {
+		return this.normalTerm;
+	}
+
+	public String getAbnormalTerm() {
+		return this.abnormalTerm;
 	}
 
 	public String toString() {

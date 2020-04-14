@@ -20,6 +20,7 @@ public class DdStatement {
 	private JCLParser.DdStatementContext ddStmtCtx = null;
 	private JCLParser.DdStatementConcatenationContext ddStmtConcatCtx = null;
 	private List<JCLParser.DdParmASTERISK_DATAContext> ddSplatCtx = null;
+	private JCLParser.DdParmSYSOUTContext ddStmtSysoutCtx = null;
 	private ArrayList<String> blankParms = new ArrayList<>();
 	private Hashtable<String, KeywordOrSymbolicWrapper> kosParms = new Hashtable<>();
 	private Hashtable<String, SingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
@@ -408,6 +409,11 @@ public class DdStatement {
 				continue;
 			}
 
+			if (ddParm.ddParmSYSOUT() != null) {
+				this.ddStmtSysoutCtx = ddParm.ddParmSYSOUT();
+				continue;
+			}
+
 			if (ddParm.ddParmTERM() != null) {
 				KeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.ddParmTERM().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 				this.kosParms.put("TERM", kosw);
@@ -768,6 +774,39 @@ public class DdStatement {
 		}
 
 		return symbolics;
+	}
+
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		this.LOGGER.fine(this.myName + " " + this.ddName + " toCSV");
+
+		csvOut.append("DD");
+		csvOut.append(",");
+		csvOut.append(this.ddName);
+		csvOut.append(",");
+		csvOut.append(parentUUID.toString());
+		csvOut.append(",");
+		csvOut.append(this.uuid.toString());
+		csvOut.append(",");
+
+		if (dsnParms.get("DSNAME") != null) {
+			csvOut.append(dsnParms.get("DSNAME").getResolvedValue());
+		} else if (this.ddStmtSysoutCtx != null) {
+			csvOut.append("SYSOUT");
+		} else if (this.ddSplatCtx != null) {
+			csvOut.append("*");
+		} else {
+			csvOut.append("_NONAME_");
+		}
+
+		if (this.dispw != null) {
+			csvOut.append(",");
+			csvOut.append(this.dispw.getStatus());
+			csvOut.append(",");
+			csvOut.append(this.dispw.getNormalTerm());
+			csvOut.append(",");
+			csvOut.append(this.dispw.getAbnormalTerm());
+		}
+
 	}
 
 }

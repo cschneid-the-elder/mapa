@@ -80,4 +80,13 @@ public class DdStatementAmalgamation {
 		return symbolics;
 	}
 
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		this.LOGGER.fine(this.myName + " toCSV");
+
+		for (DdStatement dd: this.dds) {
+			csvOut.append(System.getProperty("line.separator"));
+			dd.toCSV(csvOut, parentUUID);
+		}
+	}
+
 }

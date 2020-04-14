@@ -792,17 +792,19 @@ public class Proc {
 	}
 
 	/**
-	Add a comma separated representation of this Proc to the passed
+	Add a "tree" representation of this Proc to the passed
 	StringBuffer.
 
 	The tricky <code>while</code> is to get the indentation right by
 	working through the tree of JclSteps and Procs leading to this instance.
 	*/
-	public void toCSV(StringBuffer csvOut) {
+	public void toTree(StringBuffer treeOut) {
+		this.LOGGER.fine(this.myName + " " + this.procName + " toTree");
+
 		StringBuffer prefix = new StringBuffer();
 		JclStep aStep = this.parentJclStep;
 		while (aStep != null) {
-			prefix.append(",,,,");
+			prefix.append("\t\t\t\t");
 			Proc aProc = aStep.getParentProc();
 			if (aProc == null) {
 				aStep = null;
@@ -810,12 +812,29 @@ public class Proc {
 				aStep = aProc.getParentJclStep();
 			}
 		}
-		csvOut.append(prefix);
+		treeOut.append(prefix);
+		treeOut.append(this.procName);
+		for (JclStep s: this.steps) {
+			treeOut.append(System.getProperty("line.separator"));
+			treeOut.append(prefix);
+			s.toTree(treeOut);
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		this.LOGGER.fine(this.myName + " " + this.procName + " toCSV");
+
+		csvOut.append("PROC");
+		csvOut.append(",");
 		csvOut.append(this.procName);
+		csvOut.append(",");
+		csvOut.append(parentUUID.toString());
+		csvOut.append(",");
+		csvOut.append(this.uuid.toString());
+
 		for (JclStep s: this.steps) {
 			csvOut.append(System.getProperty("line.separator"));
-			csvOut.append(prefix);
-			s.toCSV(csvOut);
+			s.toCSV(csvOut, this.uuid);
 		}
 	}
 

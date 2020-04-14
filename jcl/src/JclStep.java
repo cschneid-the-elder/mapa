@@ -468,24 +468,57 @@ public class JclStep {
 		}
 	}
 
-	public void toCSV(StringBuffer csvOut) {
+	public void toTree(StringBuffer treeOut) {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " toTree");
+
+		treeOut.append('\t');
+		treeOut.append(this.stepName);
+		treeOut.append('\t');
+		treeOut.append(this.ordNb);
+		treeOut.append('\t');
+		if (this.isExecPgm()) {
+			treeOut.append("PGM");
+			treeOut.append('\t');
+			treeOut.append(this.pgmExecuted.getValue());
+		} else {
+			treeOut.append("PROC");
+			treeOut.append('\t');
+			treeOut.append(this.procExecuted.getValue());
+			if (this.proc != null) {
+				treeOut.append(System.getProperty("line.separator"));
+				this.proc.toTree(treeOut);
+			}
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
 		this.LOGGER.fine(this.myName + " " + this.stepName + " toCSV");
+
+		csvOut.append("STEP");
 		csvOut.append(",");
 		csvOut.append(this.stepName);
 		csvOut.append(",");
 		csvOut.append(this.ordNb);
 		csvOut.append(",");
+		csvOut.append(parentUUID.toString());
+		csvOut.append(",");
+		csvOut.append(this.uuid.toString());
+		csvOut.append(",");
+
 		if (this.isExecPgm()) {
 			csvOut.append("PGM");
 			csvOut.append(",");
 			csvOut.append(this.pgmExecuted.getValue());
+			for (DdStatementAmalgamation dda: ddStatements) {
+				dda.toCSV(csvOut, this.uuid);
+			}
 		} else {
 			csvOut.append("PROC");
 			csvOut.append(",");
 			csvOut.append(this.procExecuted.getValue());
 			if (this.proc != null) {
 				csvOut.append(System.getProperty("line.separator"));
-				this.proc.toCSV(csvOut);
+				this.proc.toCSV(csvOut, this.uuid);
 			}
 		}
 	}

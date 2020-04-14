@@ -857,13 +857,34 @@ public class Job {
 		}
 	}
 
-	public void toCSV(StringBuffer csvOut) {
+	public void toTree(StringBuffer treeOut) {
+		this.LOGGER.fine(this.myName + " " + this.jobName + " toTree");
+
+		treeOut.append(this.jobName);
+		treeOut.append('\t');
+		treeOut.append(this.ordNb);
+		for (JclStep s: this.steps) {
+			treeOut.append(System.getProperty("line.separator"));
+			s.toTree(treeOut);
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		this.LOGGER.fine(this.myName + " " + this.jobName + " toCSV");
+
+		csvOut.append("JOB");
+		csvOut.append(",");
 		csvOut.append(this.jobName);
 		csvOut.append(",");
 		csvOut.append(this.ordNb);
+		csvOut.append(",");
+		csvOut.append(parentUUID.toString());
+		csvOut.append(",");
+		csvOut.append(this.uuid.toString());
+
 		for (JclStep s: this.steps) {
 			csvOut.append(System.getProperty("line.separator"));
-			s.toCSV(csvOut);
+			s.toCSV(csvOut, this.uuid);
 		}
 	}
 
