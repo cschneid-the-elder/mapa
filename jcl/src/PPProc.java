@@ -8,11 +8,8 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents a JCL PPProcedure - cataloged or instream.
-
-<p>-->NOTE This class is used as a base to create another class via a sed script 
-executed in the Makefile.  The resulting file has the name of this file with 
-"PP" prepended.
+This class represents a JCL PPProcedure - cataloged or instream - which is
+used in PreProcessing to resolve parms and INCLUDEs.
 
 <p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
 may be nested and may contain SET statements for symbolics.  On most (all?) 
@@ -96,11 +93,13 @@ public class PPProc {
 
 	public PPProc(
 				String fileName
+				, int fileNb
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
 		this.myName = this.getClass().getName();
 		this.fileName = fileName;
+		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.procName = this.procNameFromFileName();
@@ -183,7 +182,7 @@ public class PPProc {
 		}
 	}
 
-	private void setTmpDirs(File baseDir) throws IOException {
+	public void setTmpDirs(File baseDir) throws IOException {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
@@ -299,6 +298,10 @@ public class PPProc {
 		return this.fileNb;
 	}
 
+	public File getProcDir() {
+		return this.tmpProcDir;
+	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
@@ -317,6 +320,10 @@ public class PPProc {
 
 	public void setOrdNb(int ordNb) {
 		this.ordNb = ordNb;
+	}
+
+	public int getOrdNb() {
+		return this.ordNb;
 	}
 
 	public void setJobOrdNb(int jobOrdNb) {

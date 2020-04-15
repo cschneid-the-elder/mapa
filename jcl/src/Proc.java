@@ -299,6 +299,10 @@ public class Proc {
 		return this.fileNb;
 	}
 
+	public File getProcDir() {
+		return this.tmpProcDir;
+	}
+
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}

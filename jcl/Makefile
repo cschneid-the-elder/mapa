@@ -18,7 +18,7 @@ AOPT = -visitor -listener
 
 all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/JclStep.class ./class/Symbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class
 
-.PHONY: all clean cleanmine mine jar testrig
+.PHONY: all clean cleanmine mine jar testrig test testpp testrigpp testdemo ziplogs javadoc
 
 clean:
 	echo `date` clean >> build.log
@@ -26,11 +26,11 @@ clean:
 
 cleanmine:
 	echo `date` cleanmine >> build.log
-	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.java ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/Symbolic.class
+	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.java ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/Symbolic.class ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java
 
 mine:
 	echo `date` mine >> build.log
-	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java ./src/Symbolic.java
+	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java ./src/Symbolic.java ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java
 
 jar:
 	echo `date` jar >> build.log
@@ -71,25 +71,31 @@ ziplogs:
 	zip -DjmTv9 demologs Demo01-*.log
 
 pptransform:
+# This is no longer needed.  Upon discovery that PreProcessor versions
+# of these classes were necessary, they were generated.  As the application
+# evolved, the preprocessor versions diverges sufficiently from the 
+# originals that they are now maintained separately instead of being
+# generated in this fashion.
+#
 # The preprocessor versions of these wrapper classes are simple transforms
 # performed against the "normal" parser versions.
 # The absence of PPDdStatement is intentional, it is custom code, not 
 # transformed from the original via sed.
-	echo `date` pptransform >> build.log
-	sed -r -f ./src/pptransform ./src/IncludeStatement.java > ./src/PPIncludeStatement.java
-	sed -r -f ./src/pptransform ./src/JclStep.java > ./src/PPJclStep.java
-	sed -r -f ./src/pptransform ./src/Job.java > ./src/PPJob.java
-	sed -r -f ./src/pptransform ./src/KeywordOrSymbolicWrapper.java > ./src/PPKeywordOrSymbolicWrapper.java
-	sed -r -f ./src/pptransform ./src/KeywordValueWrapper.java > ./src/PPKeywordValueWrapper.java
-	sed -r -f ./src/pptransform ./src/SingleOrMultipleValueWrapper.java > ./src/PPSingleOrMultipleValueWrapper.java
-	sed -r -f ./src/pptransform ./src/Proc.java > ./src/PPProc.java
-	sed -r -f ./src/pptransform ./src/SetSymbolValue.java > ./src/PPSetSymbolValue.java
-	sed -r -f ./src/pptransform ./src/DdStatementAmalgamation.java > ./src/PPDdStatementAmalgamation.java
-	sed -r -f ./src/pptransform ./src/Symbolic.java > ./src/PPSymbolic.java
-	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java
+#	echo `date` pptransform >> build.log
+#	sed -r -f ./src/pptransform ./src/IncludeStatement.java > ./src/PPIncludeStatement.java
+#	sed -r -f ./src/pptransform ./src/JclStep.java > ./src/PPJclStep.java
+#	sed -r -f ./src/pptransform ./src/Job.java > ./src/PPJob.java
+#	sed -r -f ./src/pptransform ./src/KeywordOrSymbolicWrapper.java > ./src/PPKeywordOrSymbolicWrapper.java
+#	sed -r -f ./src/pptransform ./src/KeywordValueWrapper.java > ./src/PPKeywordValueWrapper.java
+#	sed -r -f ./src/pptransform ./src/SingleOrMultipleValueWrapper.java > ./src/PPSingleOrMultipleValueWrapper.java
+#	sed -r -f ./src/pptransform ./src/Proc.java > ./src/PPProc.java
+#	sed -r -f ./src/pptransform ./src/SetSymbolValue.java > ./src/PPSetSymbolValue.java
+#	sed -r -f ./src/pptransform ./src/DdStatementAmalgamation.java > ./src/PPDdStatementAmalgamation.java
+#	sed -r -f ./src/pptransform ./src/Symbolic.java > ./src/PPSymbolic.java
+#	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java
 
 pp:
-	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java
+#	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java
 
 javadoc:
 	javadoc -private -d ~/Documents/jcl src/Job.java src/JclStep.java

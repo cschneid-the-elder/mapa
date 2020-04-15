@@ -24,12 +24,13 @@ public static void main(String[] args) throws Exception {
 	Housekeeping.  Set up a logger to log messages to a file.
 	*/
 	Handler fileHandler  = null;
+	DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+	String dateTimeStamp = LocalDateTime.now().format(df).toString();
 
 	System.setProperty("java.util.logging.SimpleFormatter.format", "[%1$tc] %4$s: %5$s%n");
 
 	try {
-		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
-		fileHandler = new FileHandler("./" + Demo01.class.getName() + "-" + LocalDateTime.now().format(df) +".log");
+		fileHandler = new FileHandler("./" + Demo01.class.getName() + "-" + dateTimeStamp + ".log");
 		fileHandler.setFormatter(new SimpleFormatter());
 		LOGGER.addHandler(fileHandler);
 		fileHandler.setLevel(Level.ALL);
@@ -117,10 +118,66 @@ public static void main(String[] args) throws Exception {
 					buf.append(",");
 					buf.append(aFileName);
 					buf.append(",");
+					buf.append(dateTimeStamp);
+					buf.append(",");
 					buf.append(uuid.toString());
 				}
 				buf.append(System.getProperty("line.separator"));
 				jobs.get(0).toCSV(buf, uuid);
+				outcsv.write(buf.toString());
+				LOGGER.fine(buf.toString());
+			}
+		}
+		for (PPProc p: procsPP) {
+			LOGGER.info("Processing proc " + p);
+			p.setTmpDirs(baseDir);
+			File procFile = new File(p.getFileName());
+			/*
+				Now must iteratively parse this proc until all INCLUDEs 
+				are resolved.  Unresolvable INCLUDEs generate a warning.
+			*/
+			ArrayList<PPSetSymbolValue> emptySetSym = new ArrayList<>();
+			PPProc rProc = p.iterativelyResolveIncludes(emptySetSym, procFile);
+			/*
+				Symbolic parms may have had values SET inside an INCLUDE,
+				so only now the INCLUDEs have been resolved can the symbolics 
+				be resolved.
+			*/
+			rProc.resolveParms(emptySetSym);
+			/*
+				Now must rewrite proc with resolved values for parms substituted.
+			*/
+			File finalProcFile = rProc.rewriteWithParmsResolved();
+			rProc.resolveProcs();
+			/*
+				Now transition from preprocessing to lexing/parsing resolved JCL.
+			*/
+			ArrayList<Proc> procs = new ArrayList<>();
+			ArrayList<Job> jobs = new ArrayList<>();
+			lexAndParse(jobs, procs, finalProcFile.getPath(), fileNb);
+			procs.get(0).setTmpDirs(baseDir, rProc.getProcDir());
+			procs.get(0).setOrdNb(rProc.getOrdNb());
+			procs.get(0).lexAndParseProcs();
+			if (CLI.outtreeFileName == null) {
+			} else {
+				StringBuffer sb = new StringBuffer();
+				sb.append(System.getProperty("line.separator"));
+				procs.get(0).toTree(sb);
+		        outtree.write(sb.toString());
+				LOGGER.fine(sb.toString());
+			}
+			if (CLI.outcsvFileName == null) {
+			} else {
+				StringBuffer buf = new StringBuffer();
+				if (first) {
+					buf.append("FILE");
+					buf.append(",");
+					buf.append(aFileName);
+					buf.append(",");
+					buf.append(uuid.toString());
+				}
+				buf.append(System.getProperty("line.separator"));
+				procs.get(0).toCSV(buf, uuid);
 				outcsv.write(buf.toString());
 				LOGGER.fine(buf.toString());
 			}

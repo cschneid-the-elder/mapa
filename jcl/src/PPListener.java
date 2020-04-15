@@ -50,7 +50,7 @@ public class PPListener extends JCLPPParserBaseListener {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
 		this.nbJobs++;
-		this.currJob = new PPJob(ctx, fileName, nbJobs, fileNb, this.LOGGER, this.CLI);
+		this.currJob = new PPJob(ctx, this.fileName, this.nbJobs, this.fileNb, this.LOGGER, this.CLI);
 		if (this.jobs == null) {
 			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
 		} else {
@@ -131,7 +131,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	@Override public void enterProcStatement(JCLPPParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new PPProc(ctx, this.fileName, this.LOGGER, this.CLI);
+		this.currProc = new PPProc(ctx, this.fileName, this.fileNb, this.LOGGER, this.CLI);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);
@@ -149,7 +149,9 @@ public class PPListener extends JCLPPParserBaseListener {
 				this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
 			}
 		} else {
-			this.procs.add(this.currProc);
+			if (this.currJob == null) {
+				this.procs.add(this.currProc);
+			}
 		}
 		this.procName = null;
 		this.currProc = null;
@@ -195,7 +197,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		*/
 
 		if (this.currProc == null && this.currJob == null) {
-			this.currProc = new PPProc(this.fileName, this.LOGGER, this.CLI);
+			this.currProc = new PPProc(this.fileName, this.fileNb, this.LOGGER, this.CLI);
 			this.currJclStep = new PPJclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
 			this.currProc.addJclStep(this.currJclStep);
 		} else if (this.currProc == null) {

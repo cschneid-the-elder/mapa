@@ -6,11 +6,8 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents a JCL PPJob Step.
-
-<p>-->NOTE This class is used as a base to create another class via a sed script 
-executed in the Makefile.  The resulting file has the name of this file with 
-"PP" prepended.
+This class represents a JCL PPJob Step which is
+used in PreProcessing to resolve parms and INCLUDEs.
 
 <p>An instance of PPJclStep is meaningless without its containing PPJob or PPProc, 
 which provide values for symbolics that may be present.
