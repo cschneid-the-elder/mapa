@@ -8,10 +8,6 @@ import org.antlr.v4.runtime.tree.*;
 /**
 This class represents a JCL Job Step.
 
-<p>-->NOTE This class is used as a base to create another class via a sed script 
-executed in the Makefile.  The resulting file has the name of this file with 
-"PP" prepended.
-
 <p>An instance of JclStep is meaningless without its containing Job or Proc, 
 which provide values for symbolics that may be present.
 
@@ -81,7 +77,6 @@ public class JclStep {
 		this.inProc = !(procName == null);
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
 	}
 
 	public JclStep(
@@ -100,7 +95,6 @@ public class JclStep {
 		this.inProc = true;
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
 	}
 
 	public JclStep(
@@ -118,7 +112,6 @@ public class JclStep {
 		this.inProc = false;
 		this.initialize();
 		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
 	}
 
 	private void initialize() {
@@ -175,8 +168,6 @@ public class JclStep {
 			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
 
-		this.LOGGER.fine(this.myName +  " " + this.stepName + " setTmpDirs procExecuted = |" + this.procExecuted + "|");
-		
 	}
 
 	public Boolean isExecProc() {
@@ -218,7 +209,6 @@ public class JclStep {
 	}
 
 	public StringBuffer getProcFileName() {
-		this.LOGGER.finest(this.myName +  " " + this.stepName + " getProcFileName procExecuted = |" + this.procExecuted + "|");
 		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
 		sb.append(File.separator);
 		sb.append(this.getProcExecuted());
@@ -264,79 +254,6 @@ public class JclStep {
 		}
 
 		return libs;
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " collectSymbolics");
-
-		ArrayList<Symbolic> symbolics = new ArrayList<>();
-
-		if (this.isExecPgm()) {
-			symbolics.addAll(this.pgmExecuted.collectSymbolics());
-		} else {
-			symbolics.addAll(this.procExecuted.collectSymbolics());
-		}
-
-		for (DdStatementAmalgamation d: this.ddStatements) {
-			symbolics.addAll(d.collectSymbolics());
-		}
-
-		return symbolics;
-	}
-
-	public void resolveParms(ArrayList<SetSymbolValue> setSym) {
-		/*
-			Symbolics come from SET statements and dynamic system symbols defined
-			on the command line.
-
-			The mergedSetSym are only created and used when executing a proc, and
-			would be empty anyway if just executing a program.  We do have to take
-			them into account when resolving DD statements as those are overrides or
-			additions to the executed proc.
-		*/
-		this.LOGGER.finer(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
-
-		this.incomingSetSym.addAll(setSym);
-		// TODO procExecuted & pgmExecuted resolveParms(mergedSetSym)
-
-		if (this.proc != null) {
-			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
-			mergedSetSym.addAll(this.setSym);
-			this.proc.resolveParms(mergedSetSym);
-			for (DdStatementAmalgamation dda: ddStatements) {
-				dda.resolveParms(mergedSetSym);
-			}
-		} else {
-			for (DdStatementAmalgamation dda: ddStatements) {
-				dda.resolveParms(setSym);
-			}
-		}
-	}
-
-	public void resolveProc() throws IOException {
-		this.LOGGER.finer(this.myName + " " + this.stepName + " resolveProc ");
-
-		if (this.needsProc()) {
-			String aProcFile = this.searchProcPathsFor(this.getProcExecuted());
-			if (aProcFile == null) {
-				this.LOGGER.warning(this + " proc not found");
-			} else {
-				ArrayList<Proc> procs = new ArrayList<>();
-				this.lexAndParse(procs, aProcFile);
-				procs.get(0).setJcllib(this.jcllib);
-				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
-				procs.get(0).setOrdNb(this.ordNb);
-				procs.get(0).setJobOrdNb(this.jobOrdNb);
-				procs.get(0).setParentJclStep(this);
-				ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(this.incomingSetSym);
-				mergedSetSym.addAll(this.setSym);
-				this.proc = procs.get(0).iterativelyResolveIncludes(mergedSetSym, new File(aProcFile));
-				this.proc.resolveParms(mergedSetSym);
-				File finalProcFile = this.proc.rewriteWithParmsResolved();
-				this.proc.resolveProcs();
-			}
-
-		}
 	}
 
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {

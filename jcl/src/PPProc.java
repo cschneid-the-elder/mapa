@@ -429,29 +429,19 @@ public class PPProc {
 		}
 	}
 
+	/**
+	Resolve INCLUDE statements that are parameterized, i.e. that take the
+	form <code>INCLUDE MEMBER=LIB&ENV</code> where the value of the symbolic
+	parameter ENV is set at execution time.
+
+	<p>The symbolics passed into this method come from a list provided at
+	execution time.  These would typically be static and/or dynamic system
+	symbols such as SYSCLONE or SYSUID.
+	
+	<p>These symbolics are merged with the relevant symbolics (those whose SET
+	statement come before the include being processed) from this job.
+	*/
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> execSetSym) {
-		/* previously...
-		LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
-		ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
-		mergedSetSym.addAll(this.setSym);
-
-		for (PPIncludeStatement i: includes) {
-			i.resolveParms(mergedSetSym);
-		}
-		LOGGER.finest(myName + " includes (after resolving): " + includes);
-
-		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this);
-		*/
-
-		/*
-			The symbolics passed into this method come from a list provided at
-			execution time.  These would typically be static and/or dynamic system
-			symbols such as SYSCLONE or SYSUID.
-
-			These symbolics are merged with the relevant symbolics (those whose SET
-			statement come before the include being processed) from this job.
-		*/
-
 		this.LOGGER.finer(
 			this.myName 
 			+ " " 
@@ -480,6 +470,14 @@ public class PPProc {
 		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
+	/**
+	Resolve symbolic parameters with respect to values set at execution
+	time.
+
+	<p>These values may be set as command line parameters or may be in the
+	SET statements in the execution JCL.  INCLUDE members may also contain
+	SET statements.
+	*/
 	public void resolveParms(ArrayList<PPSetSymbolValue> execSetSym) {
 		LOGGER.finer(this.myName + " resolveParms " + this);
 

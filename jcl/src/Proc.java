@@ -10,10 +10,6 @@ import org.antlr.v4.runtime.tree.*;
 /**
 This class represents a JCL Procedure - cataloged or instream.
 
-<p>-->NOTE This class is used as a base to create another class via a sed script 
-executed in the Makefile.  The resulting file has the name of this file with 
-"PP" prepended.
-
 <p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
 may be nested and may contain SET statements for symbolics.  On most (all?) 
 JCL statements, everything beyond the operation (JOB, EXEC, DD, etc.) can 
@@ -60,14 +56,6 @@ public class Proc {
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
 	private ArrayList<Symbolic> sym = new ArrayList<>();
-	/**
-	This collection of PPOp instances is only used in the generated PPProc
-	class;  PPOp is a generic representation of most JCL statements that are
-	not needed in preprocessing other than for resolving INCLUDEs and 
-	symbolics;  The primary function of PPOp is to hold symbolics that must be
-	iteratively resolved as the JCL is rewritten. 
-	*/
-	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String procName = null;
 	private int startLine = -1;
@@ -283,10 +271,6 @@ public class Proc {
 		this.steps.add(step);
 	}
 
-	public void addOp(PPOp anOp) {
-		this.op.add(anOp);
-	}
-
 	public String getProcName() {
 		return this.procName;
 	}
@@ -343,7 +327,7 @@ public class Proc {
 	version of this Proc.  If there is a parent JCL step, then defer to
 	its resolved suffix, otherwise construct our own.
 
-	A predictable file name is needed so the transition from preprocessing
+	<p>A predictable file name is needed so the transition from preprocessing
 	to "normal" lexing/parsing works seamlessly.
 	*/
 	public StringBuffer getResolvedSuffix() {
@@ -357,6 +341,14 @@ public class Proc {
 		}
 	}
 
+	/**
+	Return the file name of the fully resolved 
+	version of this Proc.  If there is a parent JCL step, then defer to
+	its resolved suffix, otherwise construct our own.
+
+	<p>A predictable file name is needed so the transition from preprocessing
+	to "normal" lexing/parsing works seamlessly.
+	*/
 	public StringBuffer getResolvedFileName() {
 		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
 		sb.append(File.separator);
@@ -367,6 +359,10 @@ public class Proc {
 		return sb;
 	}
 
+	/**
+	Return the INCLUDE statement at the indicated line, if there is
+	none return null;
+	*/
 	public IncludeStatement includeStatementAt(int aLine) {
 		for (IncludeStatement i: this.includes) {
 			if (i.getLine() == aLine) return i;
@@ -377,367 +373,6 @@ public class Proc {
 
 	public ArrayList<IncludeStatement> getAllIncludes() {
 		return this.includes;
-	}
-
-	public ArrayList<IncludeStatement> getAllUnresolvedIncludes() {
-		IncludeStatement[] unresolved_includes = 
-				this.getAllIncludes().stream()
-				.filter(i -> !i.isResolved())
-				.toArray(IncludeStatement[]::new);
-		return new ArrayList<IncludeStatement>(Arrays.asList(unresolved_includes));
-	}
-
-	public ArrayList<JclStep> stepsInNeedOfProc() {
-		ArrayList<JclStep> stepsInNeed = new ArrayList<>();
-
-		for (JclStep step: this.steps) {
-			if (step.isExecProc()) {
-				if (step.needsProc()) {
-					stepsInNeed.add(step);
-				} else {
-					stepsInNeed.addAll(step.getProc().stepsInNeedOfProc());
-				} 
-			}
-		}
-
-		return stepsInNeed;
-	}
-
-	public Boolean containsLine(int aLine) {
-		if (this.endLine <= this.startLine) {
-			this.LOGGER.severe(
-				this.myName 
-				+ " " 
-				+ this.procName 
-				+ " containsLine detected either endLine or startLine not set |" 
-				+ this
-				+ "|"
-				);
-		}
-
-		return (aLine >= startLine) && (aLine <= endLine);
-	}
-
-	public void resolveProcs() throws IOException {
-		this.LOGGER.finer(this.myName + " " + this.procName + " resolveProcs " + this);
-
-		for (JclStep step: this.steps) {
-			step.resolveProc();
-		}
-	}
-
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> execSetSym) {
-		/* previously...
-		LOGGER.finest(myName + " " + this.procName + " resolveParmedIncludes");
-		ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.setSym);
-		mergedSetSym.addAll(this.setSym);
-
-		for (IncludeStatement i: includes) {
-			i.resolveParms(mergedSetSym);
-		}
-		LOGGER.finest(myName + " includes (after resolving): " + includes);
-
-		this.LOGGER.finest(this.myName + " resolveParmedIncludes " + this);
-		*/
-
-		/*
-			The symbolics passed into this method come from a list provided at
-			execution time.  These would typically be static and/or dynamic system
-			symbols such as SYSCLONE or SYSUID.
-
-			These symbolics are merged with the relevant symbolics (those whose SET
-			statement come before the include being processed) from this job.
-		*/
-
-		this.LOGGER.finer(
-			this.myName 
-			+ " " 
-			+ this.procName 
-			+ " resolveParmedIncludes execSetSym = |" 
-			+ execSetSym 
-			+ "|"
-			);
-
-		for (IncludeStatement i: this.includes) {
-			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.setSym);
-			for (SetSymbolValue s: this.setSym) {
-				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < i.getLine())
-				|| s.getSetType() != SetTypeOfSymbolValue.SET
-				) {
-					this.LOGGER.finest(this.myName + " mergedSetSym.add |" + s + "|");
-					mergedSetSym.add(s);
-				} else {
-					this.LOGGER.finest(this.myName + " mergedSetSym discarding |" + s + "|");
-				}
-			}
-			mergedSetSym.addAll(execSetSym);
-			i.resolveParms(mergedSetSym);
-		}
-
-		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
-	}
-
-	public void resolveParms(ArrayList<SetSymbolValue> execSetSym) {
-		LOGGER.finer(this.myName + " resolveParms " + this);
-
-		ArrayList<SetSymbolValue> allSym = new ArrayList<>(this.CLI.setSym);
-		allSym.addAll(this.setSym);
-		allSym.addAll(execSetSym);
-		for (SetSymbolValue s: this.setSym) {
-			s.resolveParms(allSym);
-		}
-
-		for (JclStep step: steps) {
-			ArrayList<SetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.setSym);
-			for (SetSymbolValue s: this.setSym) {
-				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < step.getLine())
-				|| s.getSetType() != SetTypeOfSymbolValue.SET
-				) {
-					mergedSetSym.add(s);
-				}
-			}
-			mergedSetSym.addAll(execSetSym);
-			step.resolveParms(mergedSetSym);
-		}
-
-	}
-
-	public File rewriteWithParmsResolved() throws IOException {
-		/*
-		*/
-		this.LOGGER.finer(
-			this.myName 
-			+ " "
-			+ this.procName
-			+ " rewriteWithParmsResolved job = |" 
-			+ this 
-			+ "| tmpProcDir = |" 
-			+ this.tmpProcDir 
-			+ "|"
-			);
-
-		this.sym = this.collectSymbolics();
-		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
-		File aFile = new File(this.getFileName());
-		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.getResolvedFileName().toString());
-		if (this.CLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-		PrintWriter out = new PrintWriter(tmp);
-		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
-		String inLine = new String();
-		StringBuffer outLine = new StringBuffer();
-		while ((inLine = src.readLine()) != null) {
-			// first get just the symbolics on this line
-			Symbolic[] symOnThisLineA = 
-				this.sym.stream()
-				.filter(s -> s.getLine() == src.getLineNumber())
-				.toArray(Symbolic[]::new);
-			// now sort them by size descending so we don't get confused over
-			// replacing &A and &A1
-			ArrayList<Symbolic> symOnThisLine = new ArrayList<>();
-			symOnThisLine.addAll(Arrays.asList(symOnThisLineA));
-			symOnThisLine.sort(Comparator.comparingInt(Symbolic::getLen).reversed());
-			this.LOGGER.finest(this.myName + " symOnThisLine = |" + symOnThisLine + "|");
-			outLine = new StringBuffer(inLine);
-			this.LOGGER.finest(this.myName + " outLine before = |" + outLine + "|");
-			// replace symbolics with their resolved value - if the
-			// symbolic is followed by a dot, get rid of the dot
-			for (Symbolic s: symOnThisLine) {
-				int start = outLine.indexOf(s.getText());
-				int end = start + s.getLen();
-				if (end < outLine.length() && outLine.substring(end, end + 1).equals(".")) {
-					end++;
-				}
-				outLine.replace(start, end, s.getResolvedText());
-			}
-			this.LOGGER.finest(this.myName + " outLine after  = |" + outLine + "|");
-			out.println(outLine);
-		}
-		src.close();
-		out.close();
-		return tmp;
-	}
-
-	private ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " " + this.procName + " collectSymbolics");
-
-		ArrayList<Symbolic> symbolics = new ArrayList<>();
-
-		for (JclStep j: steps) {
-			symbolics.addAll(j.collectSymbolics());
-		}
-
-		// these should be resolved?
-		for (IncludeStatement i: includes) {
-			symbolics.addAll(i.collectSymbolics());
-		}
-
-		return symbolics;
-	}
-
-	public Proc iterativelyResolveIncludes(
-					ArrayList<SetSymbolValue> execSetSym
-					, File initialFile
-					) throws IOException {
-		/*
-			At this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		this.LOGGER.finer(
-			this.myName 
-			+ " iterativelyResolveIncludes this = |" 
-			+ this 
-			+ "| initialFile = |" 
-			+ initialFile.getName() 
-			+ "| execSetSym = |"
-			+ execSetSym
-			+ "|"
-			);
-
-		Proc aProc = this;
-		File procFile = initialFile;
-		Boolean iterating = true;
-		int sanity = 0;
-		do {
-			this.LOGGER.finest(this.myName + " procFile = |" + procFile.getName() + "|");
-			aProc = this.lexAndParseAndStuff(procFile, execSetSym);
-			procFile = aProc.rewriteWithIncludedContent();
-			ArrayList<IncludeStatement> includes_after = aProc.getAllIncludes();
-			this.LOGGER.finest(this.myName + " includes_after (1)  = |" + includes_after + "|");
-			sanity++;
-			if (includes_after.size() == 0) {
-				aProc = this.lexAndParseAndStuff(procFile, execSetSym);
-				includes_after = aProc.getAllIncludes();
-				this.LOGGER.finest(this.myName + " includes_after (2)  = |" + includes_after + "|");
-				if (includes_after.size() == 0) {
-					iterating = false;
-				}
-			} else {
-				// if any INCLUDEs remain that can be resolved, continue
-				Boolean found = false;
-				for (IncludeStatement i: includes_after) {
-					found = (searchProcPathsFor(i.getResolvedText()) != null);
-					if (found) break;
-				}
-				iterating = found;
-			}
-		} while(iterating && (sanity < CLI.getSanity()));
-		if (sanity >= CLI.getSanity()) 
-			this.LOGGER.severe(
-				this.myName 
-				+ " sanity check failed in iterativelyResolveIncludes for " 
-				+ this
-				);
-
-		return aProc;
-	}
-
-	private Proc lexAndParseAndStuff(File procFile, ArrayList<SetSymbolValue> execSetSym) throws IOException {
-		this.LOGGER.finer(this.myName + " " + this.procName + " lexAndParseAndStuff");
-
-		String procFileFull = searchProcPathsFor(procFile.getName());
-		ArrayList<Proc> thisProc = new ArrayList<>();
-		lexAndParse(null, thisProc, procFileFull);
-		thisProc.get(0).resolveParmedIncludes(execSetSym);
-		Proc aProc = thisProc.get(0);
-		aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
-		aProc.setJcllib(this.jcllib);
-		aProc.setOrdNb(this.ordNb);
-		aProc.setJobOrdNb(this.jobOrdNb);
-		aProc.setParentJclStep(this.parentJclStep);
-
-		return aProc;
-	}
-
-	public void lexAndParse(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
-		this.LOGGER.finer(
-			this.myName 
-			+ " lexAndParse jobs = |" 
-			+ jobs 
-			+ "| procs = |" 
-			+ procs 
-			+ "| fileName = |" 
-			+ fileName + "|"
-			);
-
-		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
-
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
-	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
-	
-		JobListener jobListener = new JobListener(jobs, procs, fileName, this.getFileNb(), LOGGER, CLI);
-	
-		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
-	
-		jclwalker.walk(jobListener, jcltree);
-
-	}
-
-	public File rewriteWithIncludedContent() throws IOException {
-		this.LOGGER.finer(this.myName + " rewriteWithIncludedContent " + this);
-
-		File aFile = new File(this.getFileName());
-		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpProcDir.toString() + File.separator + this.procName + "-" + this.getUUID());
-		if (this.CLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-		PrintWriter out = new PrintWriter(tmp);
-		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
-		String inLine = new String();
-		while ((inLine = src.readLine()) != null) {
-			IncludeStatement i = this.includeStatementAt(src.getLineNumber());
-			if (i == null) {
-				out.println(inLine);
-			} else {
-				if (writeTheIncludeContent(i, out)) {
-				} else {
-					out.println(inLine);
-				}
-			}
-		}
-		src.close();
-		out.close();
-		return tmp;
-	}
-
-	public Boolean writeTheIncludeContent(
-							IncludeStatement i
-							, PrintWriter out
-							)
-						throws IOException {
-
-		this.LOGGER.finer(this.myName + " writeTheIncludeContent i =|" + i + "|");
-
-		if (i.isResolved()) {
-		} else {
-			return false;
-		}
-
-		Boolean foundIt = true;
-		String includeFile = i.getResolvedText();
-
-		String includeFileFull = searchProcPathsFor(includeFile);
-
-		if (includeFileFull == null) {
-			foundIt = false;
-			//LOGGER.warning(includeFile + " not found in any path specified");
-			//throw new FileNotFoundException(copyFile + " not found in any path specified");
-		} else {
-			List<String> list = 
-				Files.readAllLines(Paths.get(includeFileFull));
-			for (String line: list) out.println(line);
-		}
-
-		return foundIt;
 	}
 
 	public String searchProcPathsFor(String fileName) throws IOException {
@@ -772,7 +407,7 @@ public class Proc {
 
 	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
 		/*
-			It's possible the file permissions are superfluous.  The code would be more
+			It's possible the file permissions are superfluous.  The code might be more
 			portable without them.  TODO maybe remove the code setting file permissions.
 		*/
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
@@ -825,6 +460,16 @@ public class Proc {
 		}
 	}
 
+	/**
+	Add a comma separated value representation of this Proc to the passed
+	StringBuffer.
+
+	<p>The parentUUID is used to tie this Proc to its executing JclStep or
+	the file in which it resides if there is no owning JclStep.
+
+	<p>The csvOut StringBuffer is eventually written to a file which can be
+	used to load a database with information gathered in parsing.
+	*/
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
 		this.LOGGER.fine(this.myName + " " + this.procName + " toCSV");
 
