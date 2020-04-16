@@ -1,0 +1,15 @@
+-injars JCLParser.jar
+-libraryjars /usr/lib/jvm/default-java/jre/lib/rt.jar:antlr-4.7.2-complete.jar:commons-cli-1.4.jar
+
+-dontoptimize
+-dontobfuscate
+-dontpreverify
+-printusage
+-dontnote
+-ignorewarnings
+
+-keep public class Demo01 {
+    public static void main(java.lang.String[]);
+}
+
+

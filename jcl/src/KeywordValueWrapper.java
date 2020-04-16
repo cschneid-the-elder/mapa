@@ -177,16 +177,6 @@ public class KeywordValueWrapper {
 		}
 	}
 
-	public void resolve(ArrayList<SetSymbolValue> sets) {
-		switch(this.type) {
-			case SYMBOLIC :
-				this.symbolic.resolve(sets);
-				break;
-			default :
-				break;
-		}
-	}
-
 	public void setResolvedValue(String resolvedValue) {
 		this.LOGGER.fine(this.myName + " setResolvedValue this = |" + this + "| resolvedValue = |" + resolvedValue + "|");
 		this.resolvedValue = resolvedValue;
