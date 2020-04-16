@@ -75,10 +75,6 @@ public class Symbolic {
 		return this.posn;
 	}
 
-	public int getLen() {
-		return this.len;
-	}
-
 	public String getFileName() {
 		return this.fileName;
 	}
@@ -91,56 +87,11 @@ public class Symbolic {
 		return (this.resolvedText != null && !this.ssv.isParameterized());
 	}
 
-	public void setResolvedValue(SetSymbolValue s) {
-		this.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
-		this.resolvedText = s.getParmValue();
-		this.ssv = s;
-	}
-
 	public String getResolvedText() {
 		if (this.ssv == null || !this.ssv.isParameterized()) {
 			return this.resolvedText;
 		} else {
 			return this.ssv.getResolvedValue();
-		}
-	}
-
-	public void resolve(ArrayList<SetSymbolValue> sets) {
-		this.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
-
-		SetSymbolValue[] matching_sets =
-			sets.stream()
-			.filter(s -> s.getParmName().equals(this.getParmName()))
-			.toArray(SetSymbolValue[]::new);
-		for(SetSymbolValue s: matching_sets) {
-			this.LOGGER.finest(myName + " resolve s: |" + s + "|");
-			switch(s.getSetType()) {
-				case SET:
-					if ((this.inProc  
-						&& !s.parmSetByExec(sets, this.procName) && !s.parmDefinedByProc(sets))
-					|| (!this.inProc && !s.inProc && this.getLine() > s.getLine())
-					) {
-						this.setResolvedValue(s);
-					}
-					break;
-				case PROC:
-					if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
-						&& !s.parmSetByExec(sets, this.procName))
-					) {
-						this.setResolvedValue(s);
-					}
-					break;
-				case EXEC:
-					if (this.inProc) {
-						this.setResolvedValue(s);
-					}
-					break;
-				case SYS:
-					this.setResolvedValue(s);
-					break;
-				default:
-					break;
-			}
 		}
 	}
 

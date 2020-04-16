@@ -79,26 +79,6 @@ public class PPJob {
 	public PPJob(
 			JCLPPParser.JobCardContext ctx
 			, String fileName
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		this.jobCardCtx = ctx;
-		this.fileName = fileName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.initialize();
-		this.LOGGER.fine(
-			this.myName 
-			+ " " 
-			+ this.jobName 
-			+ " instantiated from " 
-			+ this.fileName
-			);
-	}
-
-	public PPJob(
-			JCLPPParser.JobCardContext ctx
-			, String fileName
 			, int ordNb
 			, int fileNb
 			, Logger LOGGER
@@ -318,10 +298,6 @@ public class PPJob {
 		return this.ordNb;
 	}
 
-	public StringBuffer getFormattedOrdNb() {
-		return new StringBuffer(String.format("%06d", this.ordNb));
-	}
-
 	public StringBuffer getResolvedSuffix() {
 		StringBuffer sb = new StringBuffer(String.format("%06d", this.fileNb));
 		sb.append("-");
@@ -375,7 +351,7 @@ public class PPJob {
 		}
 
 		for (PPOp o: this.op) {
-			o.resolveParms(allSym, this);
+			o.resolveParms(allSym);
 		}
 
 		for (PPJclStep step: this.steps) {
@@ -440,14 +416,6 @@ public class PPJob {
 		return null;
 	}
 
-	public PPJclStep jclStepAt(int aLine) {
-		for (PPJclStep j: steps) {
-			if (j.getLine() == aLine) return j;
-		}
-
-		return null;
-	}
-
 	public String getFileName() {
 		return this.fileName;
 	}
@@ -464,16 +432,8 @@ public class PPJob {
 		return this.jobName;
 	}
 
-	public int getStartLine() {
-		return this.startLine;
-	}
-
 	public int getEndLine() {
 		return this.endLine;
-	}
-
-	public ArrayList<PPJclStep> getSteps() {
-		return this.steps;
 	}
 
 	public ArrayList<PPIncludeStatement> getAllIncludes() {
@@ -576,7 +536,7 @@ public class PPJob {
 		}
 
 		for (PPOp o: this.op) {
-			symbolics.addAll(o.collectSymbolics(this));
+			symbolics.addAll(o.collectSymbolics());
 		}
 
 		// these should be resolved?
@@ -846,22 +806,6 @@ public class PPJob {
 		}
 
 		return tmpDir;
-	}
-
-	public void lexAndParseProcs() throws IOException {
-		for (PPJclStep s: this.steps) {
-			s.lexAndParseProc();
-		}
-	}
-
-	public void toCSV(StringBuffer csvOut) {
-		csvOut.append(this.jobName);
-		csvOut.append(",");
-		csvOut.append(this.ordNb);
-		for (PPJclStep s: this.steps) {
-			csvOut.append(System.getProperty("line.separator"));
-			s.toCSV(csvOut);
-		}
 	}
 
 	public String toString() {

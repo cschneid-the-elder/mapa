@@ -60,26 +60,6 @@ public class DdStatementAmalgamation {
 		this.ddName = buf.toString();
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		this.LOGGER.finest(this.myName + " resolveParms symbolics = |" + symbolics + "|");
-		for (DdStatement dd: dds) {
-			dd.resolveParms(symbolics);
-			this.LOGGER.finest(this.myName + " resolved dsn = |" + dd.getResolvedValue("DSNAME") + "|");
-		}
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.finest(this.myName + " collectSymbolics");
-
-		ArrayList<Symbolic> symbolics = new ArrayList<>();
-
-		for (DdStatement dd: dds) {
-			symbolics.addAll(dd.collectSymbolics());
-		}
-
-		return symbolics;
-	}
-
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
 		this.LOGGER.fine(this.myName + " toCSV");
 

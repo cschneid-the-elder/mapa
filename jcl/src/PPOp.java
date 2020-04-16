@@ -115,31 +115,13 @@ public class PPOp {
 	didn't throw away the type of a collection before resolving methods then
 	the unused PPJob reference wouldn't be necessary.
 	*/
-	public void resolveParms(ArrayList<PPSetSymbolValue> sets, PPJob unused) {
+	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
 		this.LOGGER.finer(this.myName + " " + this.myType + " resolveParms");
 
 		for (PPSymbolic s: this.symbolics.keySet()) {
 			s.resolve(sets);
 			this.symbolics.put(s, s.getResolvedText());
 		}
-	}
-
-	/**
-	Generate an error message, this method should not be used, and only
-	exists to make javac happy with PPJob being generated from Job.
-
-	<p>The unused Job is to differentiate this method from the illegal (so
-	to speak) method of the same name using non-preprocessing types.  If javac
-	didn't throw away the type of a collection before resolving methods then
-	the unused Job reference wouldn't be necessary.
-	*/
-	public void resolveParms(ArrayList<SetSymbolValue> sets, Job unused) {
-		this.LOGGER.severe(
-			this.myName 
-			+ " " 
-			+ this.myType 
-			+ " resolveParms should not be executed by instances of Job"
-			);
 	}
 
 	/**
@@ -150,30 +132,10 @@ public class PPOp {
 	didn't throw away the type of a collection before resolving methods then
 	the unused PPJob reference wouldn't be necessary.
 	*/
-	public ArrayList<PPSymbolic> collectSymbolics(PPJob unused) {
+	public ArrayList<PPSymbolic> collectSymbolics() {
 		this.LOGGER.finer(this.myName + " " + this.myType + " collectSymbolics");
 
 		return new ArrayList<>(this.symbolics.keySet());
-	}
-
-	/**
-	Generate an error message, this method should not be used, and only
-	exists to make javac happy with PPJob being generated from Job.
-
-	<p>The unused Job is to differentiate this method from the illegal (so
-	to speak) method of the same name using non-preprocessing types.  If javac
-	didn't throw away the type of a collection before resolving methods then
-	the unused Job reference wouldn't be necessary.
-	*/
-	public ArrayList<Symbolic> collectSymbolics(Job unused) {
-		this.LOGGER.severe(
-			this.myName 
-			+ " " 
-			+ this.myType 
-			+ " collectSymbolics should not be executed by instances of Job"
-			);
-
-		return new ArrayList<Symbolic>();
 	}
 
 	public String toString() {

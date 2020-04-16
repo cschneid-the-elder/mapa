@@ -83,26 +83,6 @@ public class Job {
 	public Job(
 			JCLParser.JobCardContext ctx
 			, String fileName
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		this.jobCardCtx = ctx;
-		this.fileName = fileName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.initialize();
-		this.LOGGER.fine(
-			this.myName 
-			+ " " 
-			+ this.jobName 
-			+ " instantiated from " 
-			+ this.fileName
-			);
-	}
-
-	public Job(
-			JCLParser.JobCardContext ctx
-			, String fileName
 			, int ordNb
 			, int fileNb
 			, Logger LOGGER
@@ -238,28 +218,6 @@ public class Job {
 		this.endLine = aLine;
 	}
 
-	private void setTmpDirs(File baseDir) throws IOException {
-		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
-		if (this.baseDir == null) {
-			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
-		}
-
-		if (this.tmpJobDir == null) {
-			this.tmpJobDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-", this.CLI.saveTemp);
-			this.LOGGER.finest(this.myName + " setTmpDirs tmpJobDir set to |" + this.tmpJobDir + "|");
-		}
-
-		if (this.tmpProcDir == null) {
-			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-", this.CLI.saveTemp);
-			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
-		}
-		
-		for (JclStep step: this.steps) {
-			step.setTmpDirs(this.baseDir, this.tmpProcDir);
-		}
-	}
-
 	public void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) throws IOException {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
@@ -302,28 +260,8 @@ public class Job {
 		step.setJcllib(this.jcllib);
 	}
 
-	public void addOp(PPOp anOp) {
-		this.op.add(anOp);
-	}
-
 	public void setOrdNb(int ordNb) {
 		this.ordNb = ordNb;
-	}
-
-	public File getJobDir() {
-		return this.tmpJobDir;
-	}
-
-	public File getProcDir() {
-		return this.tmpProcDir;
-	}
-
-	public int getOrdNb() {
-		return this.ordNb;
-	}
-
-	public StringBuffer getFormattedOrdNb() {
-		return new StringBuffer(String.format("%06d", this.ordNb));
 	}
 
 	public StringBuffer getResolvedSuffix() {
@@ -331,30 +269,6 @@ public class Job {
 		sb.append("-");
 		sb.append(String.format("%06d", this.ordNb));
 		return sb;
-	}
-
-	public Boolean lineIsInThisJob(int aLine) {
-		return ((aLine >= this.startLine) && (aLine <= this.endLine));
-	}
-
-	public IncludeStatement includeStatementAt(int aLine) {
-		for (IncludeStatement i: this.includes) {
-			if (i.getLine() == aLine) return i;
-		}
-
-		return null;
-	}
-
-	public JclStep jclStepAt(int aLine) {
-		for (JclStep j: steps) {
-			if (j.getLine() == aLine) return j;
-		}
-
-		return null;
-	}
-
-	public String getFileName() {
-		return this.fileName;
 	}
 
 	public int getFileNb() {
@@ -367,109 +281,6 @@ public class Job {
 
 	public String getJobName() {
 		return this.jobName;
-	}
-
-	public int getStartLine() {
-		return this.startLine;
-	}
-
-	public int getEndLine() {
-		return this.endLine;
-	}
-
-	public ArrayList<JclStep> getSteps() {
-		return this.steps;
-	}
-
-	public ArrayList<IncludeStatement> getAllIncludes() {
-		return this.includes;
-	}
-
-	public ArrayList<String> getJcllibStrings() {
-		ArrayList<String> libs = new ArrayList<>();
-
-		for (KeywordOrSymbolicWrapper k: jcllib) {
-			libs.add(k.getValue());
-		}
-
-		return libs;
-	}
-
-	public void lexAndParse(ArrayList<Job> jobs, ArrayList<Proc> procs, String fileName) throws IOException {
-		this.LOGGER.finer(
-			this.myName 
-			+ " lexAndParse jobs = |" 
-			+ jobs 
-			+ "| procs = |" 
-			+ procs 
-			+ "| fileName = |" 
-			+ fileName + "|"
-			);
-
-		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
-
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
-	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
-	
-		JobListener jobListener = new JobListener(jobs, procs, fileName, this.fileNb, LOGGER, CLI);
-	
-		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
-	
-		jclwalker.walk(jobListener, jcltree);
-
-	}
-
-
-	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
-		if (aFile.exists()) {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-			return aFile.getPath();
-		}
-
-		ArrayList<String> jcllib = this.getJcllibStrings();
-		for (String lib: jcllib) {
-			if (this.CLI.mappedProcPaths.containsKey(lib)) {
-				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
-				if (aFile.exists()) {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-					return aFile.getPath();
-				}
-			}
-		}
-
-		for (String path: this.CLI.staticProcPaths) {
-			aFile = new File(path + File.separator + fileName);
-			if (aFile.exists()) {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-				return aFile.getPath();
-			}
-		}
-
-		this.LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
-		return null;
-	}
-
-	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
-		/*
-			It's possible the file permissions are superfluous.  The code would be more
-			portable without them.  TODO maybe remove the code setting file permissions.
-		*/
-		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
-		FileAttribute<Set<PosixFilePermission>> attr =
-			PosixFilePermissions.asFileAttribute(perms);
-		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx, attr).toFile();
-
-		if (saveTemp) {
-		} else {
-			tmpDir.deleteOnExit();
-		}
-
-		return tmpDir;
 	}
 
 	public void lexAndParseProcs() throws IOException {

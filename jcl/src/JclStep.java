@@ -65,23 +65,6 @@ public class JclStep {
 	public JclStep(
 			JCLParser.JclStepContext jclStepCtx
 			, String fileName
-			, String procName
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		this.jclStepCtx = jclStepCtx;
-		this.fileName = fileName;
-		this.procName = procName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.inProc = !(procName == null);
-		this.initialize();
-		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-	}
-
-	public JclStep(
-			JCLParser.JclStepContext jclStepCtx
-			, String fileName
 			, Proc parentProc
 			, Logger LOGGER
 			, TheCLI CLI
@@ -178,10 +161,6 @@ public class JclStep {
 		return this.execPgmStmtCtx != null;
 	}
 
-	public Boolean needsProc() {
-		return this.isExecProc() && (this.proc == null);
-	}
-
 	public String getProcExecuted() {
 		return this.procExecuted.getValue();
 	}
@@ -246,16 +225,6 @@ public class JclStep {
 		this.jcllib = jcllib;
 	}
 
-	public ArrayList<String> getJcllibStrings() {
-		ArrayList<String> libs = new ArrayList<>();
-
-		for (KeywordOrSymbolicWrapper k: jcllib) {
-			libs.add(k.getValue());
-		}
-
-		return libs;
-	}
-
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
 		this.LOGGER.finer(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
 
@@ -278,57 +247,6 @@ public class JclStep {
 
 	public UUID getUUID() {
 		return this.uuid;
-	}
-
-	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
-
-		this.LOGGER.finer(this.myName + " " + this.stepName + " searchProcPaths searching " + tmpProcDir);
-		if (aFile.exists()) {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-			return aFile.getPath();
-		} else {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() did not find " + aFile.getPath());
-		}
-
-		ArrayList<String> jcllib = this.getJcllibStrings();
-		for (String lib: jcllib) {
-			if (this.CLI.mappedProcPaths.containsKey(lib)) {
-				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
-				if (aFile.exists()) {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-					return aFile.getPath();
-				} else {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() did not find " + aFile.getPath());
-				}
-			}
-		}
-
-		for (String path: this.CLI.staticProcPaths) {
-			aFile = new File(path + File.separator + fileName);
-			this.LOGGER.finer(this.myName + " " + this.stepName + " searchProcPaths searching " + path);
-			if (aFile.exists()) {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-				return aFile.getCanonicalPath();
-			} else {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() did not find " + aFile.getPath());
-			}
-		}
-
-		this.LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
-		this.LOGGER.finer(
-			this.myName 
-			+ " searchProcPathsFor() searched for " 
-			+ fileName
-			+ " in "
-			+ this.tmpProcDir
-			+ " and "
-			+ this.CLI.mappedProcPaths
-			+ " and even "
-			+ this.CLI.staticProcPaths
-			+ " without success"
-			);
-		return null;
 	}
 
 	public void lexAndParseProc() throws IOException {

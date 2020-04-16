@@ -32,34 +32,6 @@ public class SingleOrMultipleValueWrapper {
 		this.kosw.addAll(KeywordOrSymbolicWrapper.bunchOfThese(ctx.parenList().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI));
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.fine(this.myName + " resolveParms symbolics = |" + symbolics + "|");
-		for (KeywordOrSymbolicWrapper k: this.kosw) {
-			k.resolveParms(symbolics);
-		}
-	}
-
-	public String getResolvedValue() {
-		StringBuffer buf = new StringBuffer();
-
-		for (KeywordOrSymbolicWrapper k: this.kosw) {
-			buf.append(k.getResolvedValue());
-			buf.append(" ");
-		}
-
-		return buf.toString();
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-		ArrayList<Symbolic> symbolics = new ArrayList<>();
-
-		for (KeywordOrSymbolicWrapper k: this.kosw) {
-			symbolics.addAll(k.collectSymbolics());
-		}
-
-		return symbolics;
-	}
-
 	public String toString() {
 		return this.myName + " procName = |" + this.procName + "| kosw = |" + this.kosw + "|";
 	}

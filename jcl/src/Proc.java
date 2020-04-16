@@ -69,20 +69,6 @@ public class Proc {
 	private JclStep parentJclStep = null;
 
 	public Proc(
-				JCLParser.ProcStatementContext procCtx
-				, String fileName
-				, Logger LOGGER
-				, TheCLI CLI
-				) {
-		this.procCtx = procCtx;
-		this.fileName = fileName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.initialize();
-		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
-	}
-
-	public Proc(
 				String fileName
 				, Logger LOGGER
 				, TheCLI CLI
@@ -171,23 +157,6 @@ public class Proc {
 		}
 	}
 
-	private void setTmpDirs(File baseDir) throws IOException {
-		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
-		if (this.baseDir == null) {
-			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
-		}
-
-		if (this.tmpProcDir == null) {
-			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.procName + "-" + this.uuid, this.CLI.saveTemp);
-			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
-		}
-		
-		for (JclStep step: this.steps) {
-			step.setTmpDirs(this.baseDir, this.tmpProcDir);
-		}
-	}
-
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
@@ -239,16 +208,6 @@ public class Proc {
 		}
 	}
 
-	public ArrayList<String> getJcllibStrings() {
-		ArrayList<String> libs = new ArrayList<>();
-
-		for (KeywordOrSymbolicWrapper k: jcllib) {
-			libs.add(k.getValue());
-		}
-
-		return libs;
-	}
-
 	public void addInclude(IncludeStatement include) {
 		this.includes.add(include);
 	}
@@ -275,32 +234,12 @@ public class Proc {
 		return this.procName;
 	}
 
-	public String getFileName() {
-		return this.fileName;
-	}
-
 	public int getFileNb() {
 		return this.fileNb;
 	}
 
-	public File getProcDir() {
-		return this.tmpProcDir;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 	public UUID getUUID() {
 		return this.uuid;
-	}
-
-	public int getStartLine() {
-		return this.startLine;
-	}
-
-	public int getEndLine() {
-		return this.endLine;
 	}
 
 	public void setOrdNb(int ordNb) {
@@ -339,88 +278,6 @@ public class Proc {
 		} else {
 			return this.parentJclStep.getResolvedSuffix();
 		}
-	}
-
-	/**
-	Return the file name of the fully resolved 
-	version of this Proc.  If there is a parent JCL step, then defer to
-	its resolved suffix, otherwise construct our own.
-
-	<p>A predictable file name is needed so the transition from preprocessing
-	to "normal" lexing/parsing works seamlessly.
-	*/
-	public StringBuffer getResolvedFileName() {
-		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
-		sb.append(File.separator);
-		sb.append(this.procName);
-		sb.append("-resolved-");
-		sb.append(this.getResolvedSuffix());
-
-		return sb;
-	}
-
-	/**
-	Return the INCLUDE statement at the indicated line, if there is
-	none return null;
-	*/
-	public IncludeStatement includeStatementAt(int aLine) {
-		for (IncludeStatement i: this.includes) {
-			if (i.getLine() == aLine) return i;
-		}
-
-		return null;
-	}
-
-	public ArrayList<IncludeStatement> getAllIncludes() {
-		return this.includes;
-	}
-
-	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
-		if (aFile.exists()) {
-			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-			return aFile.getPath();
-		}
-
-		ArrayList<String> jcllib = this.getJcllibStrings();
-		for (String lib: jcllib) {
-			if (this.CLI.mappedProcPaths.containsKey(lib)) {
-				aFile = new File(this.CLI.mappedProcPaths.get(lib) + File.separator + fileName);
-				if (aFile.exists()) {
-					this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-					return aFile.getPath();
-				}
-			}
-		}
-
-		for (String path: this.CLI.staticProcPaths) {
-			aFile = new File(path + File.separator + fileName);
-			if (aFile.exists()) {
-				this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
-				return aFile.getPath();
-			}
-		}
-
-		this.LOGGER.warning(this.myName + " searchProcPathsFor() did not find " + fileName);
-		return null;
-	}
-
-	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
-		/*
-			It's possible the file permissions are superfluous.  The code might be more
-			portable without them.  TODO maybe remove the code setting file permissions.
-		*/
-		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
-		FileAttribute<Set<PosixFilePermission>> attr =
-			PosixFilePermissions.asFileAttribute(perms);
-		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx, attr).toFile();
-
-		if (saveTemp) {
-		} else {
-			tmpDir.deleteOnExit();
-		}
-
-		return tmpDir;
 	}
 
 	public void lexAndParseProcs() throws IOException {

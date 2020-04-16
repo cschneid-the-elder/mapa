@@ -103,21 +103,6 @@ public class IncludeStatement {
 		return this.kywd.getResolvedValue();
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		this.LOGGER.finer(this.myName + " resolveParms sets = |" + sets + "|");
-		this.kywd.resolveParms(sets);
-	}
-
-	public Boolean isResolved() {
-		return this.kywd.isResolved();
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " collectSymbolics");
-
-		return kywd.collectSymbolics();
-	}
-
 	public String toString() {
 		return 
 			this.myName 

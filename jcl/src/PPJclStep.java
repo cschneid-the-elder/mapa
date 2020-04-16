@@ -66,24 +66,6 @@ public class PPJclStep {
 	public PPJclStep(
 			JCLPPParser.JclStepContext jclStepCtx
 			, String fileName
-			, String procName
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		this.jclStepCtx = jclStepCtx;
-		this.fileName = fileName;
-		this.procName = procName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.inProc = !(procName == null);
-		this.initialize();
-		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
-		this.LOGGER.finest(this.myName + " procExecuted = |" + this.procExecuted + "|");
-	}
-
-	public PPJclStep(
-			JCLPPParser.JclStepContext jclStepCtx
-			, String fileName
 			, PPProc parentProc
 			, Logger LOGGER
 			, TheCLI CLI
@@ -214,27 +196,8 @@ public class PPJclStep {
 		return sb;
 	}
 
-	public StringBuffer getProcFileName() {
-		this.LOGGER.finest(this.myName +  " " + this.stepName + " getProcFileName procExecuted = |" + this.procExecuted + "|");
-		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
-		sb.append(File.separator);
-		sb.append(this.getProcExecuted());
-		sb.append("-resolved-");
-		sb.append(this.getResolvedSuffix());
-
-		return sb;
-	}
-
 	public PPProc getProc() {
 		return this.proc;
-	}
-
-	public PPProc getParentProc() {
-		return this.parentProc;
-	}
-
-	public PPJob getParentJob() {
-		return this.parentJob;
 	}
 
 	public int getLine() {
@@ -409,82 +372,6 @@ public class PPJclStep {
 			+ " without success"
 			);
 		return null;
-	}
-
-	public void lexAndParseProc() throws IOException {
-		this.LOGGER.fine(this.myName + " " + this.stepName + " lexAndParseProc");
-		if (this.isExecProc()) {
-			this.LOGGER.fine(
-						this.myName 
-						+ " " 
-						+ this.stepName 
-						+ " lexAndParseProc procName = |" 
-						+ this.procName 
-						+ "|"
-						);
-			File aFile = new File(this.getProcFileName().toString());
-			if (aFile.exists()) {
-				this.LOGGER.fine(
-							this.myName 
-							+ " " 
-							+ this.stepName 
-							+ " lexAndParseProc aFile.getName() = |" 
-							+ aFile.getName() 
-							+ "| exists"
-							);
-				ArrayList<PPProc> procs = new ArrayList<>();
-				String fileName = this.getProcFileName().toString();
-				this.lexAndParse(procs, fileName);
-				if (procs.size() == 0) {
-					this.LOGGER.severe(
-						this.myName 
-						+ " lexAndParseProc error parsing " 
-						+ this.procName 
-						+ " in " 
-						+ fileName
-						);
-					return;
-				}
-				this.proc = procs.get(0);
-				procs.get(0).setJcllib(this.jcllib);
-				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
-				procs.get(0).setOrdNb(this.ordNb);
-				procs.get(0).setJobOrdNb(this.jobOrdNb);
-				procs.get(0).setParentJclStep(this);
-				this.proc.lexAndParseProcs();
-			} else {
-				this.LOGGER.fine(
-							this.myName 
-							+ " " 
-							+ this.stepName 
-							+ " lexAndParseProc aFile.getName() = |" 
-							+ aFile.getName() 
-							+ "| does not exist"
-							);
-			}
-		}
-	}
-
-	public void toCSV(StringBuffer csvOut) {
-		this.LOGGER.fine(this.myName + " " + this.stepName + " toCSV");
-		csvOut.append(",");
-		csvOut.append(this.stepName);
-		csvOut.append(",");
-		csvOut.append(this.ordNb);
-		csvOut.append(",");
-		if (this.isExecPgm()) {
-			csvOut.append("PGM");
-			csvOut.append(",");
-			csvOut.append(this.pgmExecuted.getValue());
-		} else {
-			csvOut.append("PROC");
-			csvOut.append(",");
-			csvOut.append(this.procExecuted.getValue());
-			if (this.proc != null) {
-				csvOut.append(System.getProperty("line.separator"));
-				this.proc.toCSV(csvOut);
-			}
-		}
 	}
 
 	public String toString() {

@@ -78,20 +78,6 @@ public class PPProc {
 	private PPJclStep parentJclStep = null;
 
 	public PPProc(
-				JCLPPParser.ProcStatementContext procCtx
-				, String fileName
-				, Logger LOGGER
-				, TheCLI CLI
-				) {
-		this.procCtx = procCtx;
-		this.fileName = fileName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.initialize();
-		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
-	}
-
-	public PPProc(
 				String fileName
 				, int fileNb
 				, Logger LOGGER
@@ -302,20 +288,8 @@ public class PPProc {
 		return this.tmpProcDir;
 	}
 
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 	public UUID getUUID() {
 		return this.uuid;
-	}
-
-	public int getStartLine() {
-		return this.startLine;
-	}
-
-	public int getEndLine() {
-		return this.endLine;
 	}
 
 	public void setOrdNb(int ordNb) {
@@ -335,10 +309,6 @@ public class PPProc {
 
 	public void setParentJclStep(PPJclStep jclStep) {
 		this.parentJclStep = jclStep;
-	}
-
-	public PPJclStep getParentJclStep() {
-		return this.parentJclStep;
 	}
 
 	/**
@@ -380,14 +350,6 @@ public class PPProc {
 
 	public ArrayList<PPIncludeStatement> getAllIncludes() {
 		return this.includes;
-	}
-
-	public ArrayList<PPIncludeStatement> getAllUnresolvedIncludes() {
-		PPIncludeStatement[] unresolved_includes = 
-				this.getAllIncludes().stream()
-				.filter(i -> !i.isResolved())
-				.toArray(PPIncludeStatement[]::new);
-		return new ArrayList<PPIncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
 	public ArrayList<PPJclStep> stepsInNeedOfProc() {
@@ -787,41 +749,6 @@ public class PPProc {
 		}
 
 		return tmpDir;
-	}
-
-	public void lexAndParseProcs() throws IOException {
-		this.LOGGER.fine(this.myName + " " + this.procName + " lexAndParseProcs");
-		for (PPJclStep s: this.steps) {
-			s.lexAndParseProc();
-		}
-	}
-
-	/**
-	Add a comma separated representation of this PPProc to the passed
-	StringBuffer.
-
-	The tricky <code>while</code> is to get the indentation right by
-	working through the tree of PPJclSteps and PPProcs leading to this instance.
-	*/
-	public void toCSV(StringBuffer csvOut) {
-		StringBuffer prefix = new StringBuffer();
-		PPJclStep aStep = this.parentJclStep;
-		while (aStep != null) {
-			prefix.append(",,,,");
-			PPProc aProc = aStep.getParentProc();
-			if (aProc == null) {
-				aStep = null;
-			} else {
-				aStep = aProc.getParentJclStep();
-			}
-		}
-		csvOut.append(prefix);
-		csvOut.append(this.procName);
-		for (PPJclStep s: this.steps) {
-			csvOut.append(System.getProperty("line.separator"));
-			csvOut.append(prefix);
-			s.toCSV(csvOut);
-		}
 	}
 
 	public String toString() {

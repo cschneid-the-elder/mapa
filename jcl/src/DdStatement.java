@@ -728,22 +728,6 @@ public class DdStatement {
 		}
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(this.myName + " resolveParms symbolics = |" + symbolics + "|");
-
-		for (KeywordOrSymbolicWrapper kos: this.kosParms.values()) {
-			kos.resolveParms(symbolics);
-		}
-
-		for (SingleOrMultipleValueWrapper somv: this.somvParms.values()) {
-			somv.resolveParms(symbolics);
-		}
-
-		for (DatasetNameWrapper dsn: this.dsnParms.values()) {
-			dsn.resolveParms(symbolics);
-		}
-	}
-
 	public String getResolvedValue(String key) {
 		if (kosParms.containsKey(key)) {
 			return kosParms.get(key).getResolvedValue();
@@ -754,26 +738,6 @@ public class DdStatement {
 		} else {
 			return key + " not found";
 		}
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-		Demo01.LOGGER.finest(this.myName + " collectSymbolics");
-
-		ArrayList<Symbolic> symbolics = new ArrayList<>();
-
-		for (KeywordOrSymbolicWrapper k: kosParms.values()) {
-			symbolics.addAll(k.collectSymbolics());
-		}
-
-		for (SingleOrMultipleValueWrapper s: somvParms.values()) {
-			symbolics.addAll(s.collectSymbolics());
-		}
-
-		for (DatasetNameWrapper d: dsnParms.values()) {
-			symbolics.addAll(d.collectSymbolics());
-		}
-
-		return symbolics;
 	}
 
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {

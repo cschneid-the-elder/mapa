@@ -44,10 +44,6 @@ public class DsidWrapper {
 		}
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		this.LOGGER.fine(myName + " resolveParms sets = |" + sets + "|");
-	}
-
 	public String toString() {
 		StringBuffer buf = new StringBuffer(this.myName + " dsid = |" + this.dsid + "| verified = |" + this.verified);
 

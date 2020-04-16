@@ -100,8 +100,10 @@ pp:
 javadoc:
 	javadoc -private -d ~/Documents/jcl src/Job.java src/JclStep.java
 
-#testNist:
-#	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
+lint:
+	echo `date` proguard >>build.log
+	java -jar ~/proguard6.2.2/lib/proguard.jar @usage.pg > proguard.log
+	java -jar ~/spotbugs-4.0.2/lib/spotbugs.jar -textui -effort:max -exclude spotbugs-exclude.xml JCLParser.jar > spotbugs.log
 
 ./src/JCLLexer.tokens: 
 

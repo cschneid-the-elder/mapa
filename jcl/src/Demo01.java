@@ -114,6 +114,7 @@ public static void main(String[] args) throws Exception {
 			} else {
 				StringBuffer buf = new StringBuffer();
 				if (first) {
+					buf.append(System.getProperty("line.separator"));
 					buf.append("FILE");
 					buf.append(",");
 					buf.append(aFileName);
@@ -170,6 +171,7 @@ public static void main(String[] args) throws Exception {
 			} else {
 				StringBuffer buf = new StringBuffer();
 				if (first) {
+					buf.append(System.getProperty("line.separator"));
 					buf.append("FILE");
 					buf.append(",");
 					buf.append(aFileName);

@@ -100,10 +100,6 @@ public class DispWrapper {
 
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		this.LOGGER.fine(myName + " resolveParms sets = |" + sets + "|");
-	}
-
 	public String getStatus() {
 		return this.status;
 	}

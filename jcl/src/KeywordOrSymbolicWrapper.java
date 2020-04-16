@@ -119,43 +119,6 @@ public class KeywordOrSymbolicWrapper {
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
 	}
 
-	public ArrayList<KeywordValueWrapper> resolvedParms() {
-		this.LOGGER.finer(myName + " resolvedParms");
-
-		ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
-
-		if (this.parameterized) {
-			this.LOGGER.finest(myName + " parameterized == true  - continuing");
-		} else {
-			this.LOGGER.finest(myName + " parameterized == false - exiting");
-			return kvw;
-		}
-
-		KeywordValueWrapper[] symbolic_kvw = 
-			kvw.stream()
-			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
-			.toArray(KeywordValueWrapper[]::new);
-
-		kvw.addAll(Arrays.asList(symbolic_kvw));
-		return kvw;
-	}
-
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		this.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
-
-		if (this.parameterized) {
-			this.LOGGER.finer(myName + " parameterized == true  - continuing");
-		} else {
-			this.LOGGER.finer(myName + " parameterized == false - exiting");
-			return;
-		}
-
-		for(KeywordValueWrapper k: this.kvw) {
-			k.resolve(sets);
-		}
-
-	}
-
 	public String getValue() {
 		StringBuffer buf = new StringBuffer();
 
@@ -166,34 +129,8 @@ public class KeywordOrSymbolicWrapper {
 		return buf.toString();
 	}
 
-	public Boolean isResolved() {
-		Boolean b = true;
-
-		for (KeywordValueWrapper k: this.kvw) {
-			b = b && k.isResolved();
-			if (!b) break;
-		}
-
-		return b;
-	}
-
 	public Boolean isParameterized() {
 		return this.parameterized;
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-
-		KeywordValueWrapper[] symbolic_kvw = 
-			kvw.stream()
-			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
-			.toArray(KeywordValueWrapper[]::new);
-
-		ArrayList<Symbolic> sym = new ArrayList<>();
-		for (KeywordValueWrapper k: symbolic_kvw) {
-			sym.add(k.getSymbolic());
-		}
-
-		return sym;
 	}
 
 	public String getResolvedValue() {

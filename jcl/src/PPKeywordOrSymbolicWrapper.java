@@ -119,27 +119,6 @@ public class PPKeywordOrSymbolicWrapper {
 		kvw.sort(Comparator.comparingLong(PPKeywordValueWrapper::getSortKey));
 	}
 
-	public ArrayList<PPKeywordValueWrapper> resolvedParms() {
-		this.LOGGER.finer(myName + " resolvedParms");
-
-		ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
-
-		if (this.parameterized) {
-			this.LOGGER.finest(myName + " parameterized == true  - continuing");
-		} else {
-			this.LOGGER.finest(myName + " parameterized == false - exiting");
-			return kvw;
-		}
-
-		PPKeywordValueWrapper[] symbolic_kvw = 
-			kvw.stream()
-			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC && k.isResolved())
-			.toArray(PPKeywordValueWrapper[]::new);
-
-		kvw.addAll(Arrays.asList(symbolic_kvw));
-		return kvw;
-	}
-
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
 		this.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
 

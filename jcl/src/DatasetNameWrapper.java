@@ -36,15 +36,6 @@ public class DatasetNameWrapper {
 		}
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> setSym) {
-		this.LOGGER.fine(myName + " resolveParms setSym = |" + setSym + "|");
-		this.dsn.resolveParms(setSym);
-		if (this.mem == null) {
-		} else {
-			this.mem.resolveParms(setSym);
-		}
-	}
-
 	public String getResolvedValue() {
 		StringBuffer buf = new StringBuffer(this.dsn.getResolvedValue());
 
@@ -54,22 +45,6 @@ public class DatasetNameWrapper {
 		}
 
 		return buf.toString();
-	}
-
-	public ArrayList<Symbolic> collectSymbolics() {
-		ArrayList<Symbolic> symbolics = new ArrayList<>();
-
-		if (this.dsn == null) {
-		} else {
-			symbolics.addAll(dsn.collectSymbolics());
-		}
-
-		if (this.mem == null) {
-		} else {
-			symbolics.addAll(mem.collectSymbolics());
-		}
-
-		return symbolics;
 	}
 
 	public String toString() {

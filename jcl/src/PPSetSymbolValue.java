@@ -116,10 +116,6 @@ public class PPSetSymbolValue {
 		return this.kywd.isParameterized();
 	}
 
-	public String getFileName() {
-		return this.fileName;
-	}
-
 	public SetTypeOfSymbolValue getSetType() {
 		return this.setType;
 	}
@@ -127,19 +123,18 @@ public class PPSetSymbolValue {
 	public String getParmName() {
 
 		if (this.parmName == null) {
-			String theParmName = new String();
 			switch(this.setType) {
 				case SET:
-					theParmName = getParmNameForSetOperationContext();
+					this.parmName = getParmNameForSetOperationContext();
 					break;
 				case EXEC:
-					theParmName = getParmNameForExecProcParmContext();
+					this.parmName = getParmNameForExecProcParmContext();
 					break;
 				case PROC:
-					theParmName = getParmNameForDefineSymbolicParameterContext();
+					this.parmName = getParmNameForDefineSymbolicParameterContext();
 					break;
 				case SYS:
-					theParmName = getParmNameForSetOperationContext();
+					this.parmName = getParmNameForSetOperationContext();
 					break;
 				default:
 					this.LOGGER.severe(
@@ -149,9 +144,9 @@ public class PPSetSymbolValue {
 						+ " "
 						+ this.setType
 					);
+					this.parmName = new String();
 					break;
 			}
-			this.parmName = theParmName;
 		}
 
 		return this.parmName;
@@ -193,19 +188,18 @@ public class PPSetSymbolValue {
 	public String getParmValue() {
 
 		if (this.parmValue == null) {
-			String theText = new String();
 			switch(this.setType) {
 				case SET:
-					theText = getParmValueForSetOperationContext();
+					this.parmValue = getParmValueForSetOperationContext();
 					break;
 				case EXEC:
-					theText = getParmValueForExecProcParmContext();
+					this.parmValue = getParmValueForExecProcParmContext();
 					break;
 				case PROC:
-					theText = getParmValueForDefineSymbolicParameterContext();
+					this.parmValue = getParmValueForDefineSymbolicParameterContext();
 					break;
 				case SYS:
-					theText = getParmValueForSetOperationContext();
+					this.parmValue = getParmValueForSetOperationContext();
 					break;
 				default:
 					this.LOGGER.severe(
@@ -215,9 +209,9 @@ public class PPSetSymbolValue {
 						+ " "
 						+ this.setType
 					);
+					this.parmValue = new String();
 					break;
 			}
-			this.parmValue = theText;
 		}
 
 		return this.parmValue;
@@ -300,8 +294,7 @@ public class PPSetSymbolValue {
 	}
 
 	private String getParmValueForSetOperationContext() {
-		JCLPPParser.SetOperationContext ctx = (JCLPPParser.SetOperationContext)this.ctx;
-		String theText = new String();
+		String theText = null;
 
 		if (this.kywd == null) {
 			/*
@@ -311,6 +304,7 @@ public class PPSetSymbolValue {
 
 				In this instance the parm TALYN is set to nothing.
 			*/
+			theText = new String();
 		} else {
 			theText = kywd.getValue();
 		}
@@ -319,8 +313,7 @@ public class PPSetSymbolValue {
 	}
 
 	private String getParmValueForExecProcParmContext() {
-		JCLPPParser.ExecProcParmContext ctx = (JCLPPParser.ExecProcParmContext)this.ctx;
-		String theText = new String();
+		String theText = null;
 
 		if (this.kywd == null) {
 			/*
@@ -332,6 +325,7 @@ public class PPSetSymbolValue {
 				set in the PROC statement for the proc MOYA is nullified.  Any value
 				set in a SET statement prior to this EXEC statement is nullified.
 			*/
+			theText = new String();
 		} else {
 			theText = kywd.getValue();
 		}
@@ -340,8 +334,7 @@ public class PPSetSymbolValue {
 	}
 
 	private String getParmValueForDefineSymbolicParameterContext() {
-		JCLPPParser.DefineSymbolicParameterContext ctx = (JCLPPParser.DefineSymbolicParameterContext)this.ctx;
-		String theText = new String();
+		String theText = null;
 
 		if (this.kywd == null) {
 			/*
@@ -352,6 +345,7 @@ public class PPSetSymbolValue {
 				In this instance the parm TALYN is set to nothing.  Any value
 				set in a SET statement prior to execution of the proc MOYA is nullified.
 			*/
+			theText = new String();
 		} else {
 			theText = kywd.getValue();
 		}
