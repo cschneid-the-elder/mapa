@@ -1,8 +1,11 @@
 
 import java.util.*;
+import java.util.logging.*;
 
 public class DispWrapper {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.DdParmDISPContext ctx = null;
 	private JCLParser.DdParmDISP_STATUSContext statusCtx = null;
@@ -14,10 +17,17 @@ public class DispWrapper {
 	private String normalTerm = null;
 	private String abnormalTerm = null;
 
-	public DispWrapper(JCLParser.DdParmDISPContext ctx, String procName) {
+	public DispWrapper(
+			JCLParser.DdParmDISPContext ctx
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
 	}
 
@@ -50,7 +60,11 @@ public class DispWrapper {
 
 	private void setNormalTerm() {
 		if (this.normalTermCtx == null) {
-			this.normalTerm = "DELETE";
+			if (this.status.equals("NEW")) {
+				this.normalTerm = "DELETE";
+			} else {
+				this.normalTerm = "KEEP";
+			}
 		} else if (this.normalTermCtx.DISP_CATLG() != null) {
 			this.normalTerm = this.normalTermCtx.DISP_CATLG().getSymbol().getText();
 		} else if (this.normalTermCtx.DISP_DELETE() != null) {
@@ -86,8 +100,16 @@ public class DispWrapper {
 
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(myName + " resolveParms sets = |" + sets + "|");
+	public String getStatus() {
+		return this.status;
+	}
+
+	public String getNormalTerm() {
+		return this.normalTerm;
+	}
+
+	public String getAbnormalTerm() {
+		return this.abnormalTerm;
 	}
 
 	public String toString() {

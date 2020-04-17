@@ -3,6 +3,8 @@ import java.io.*;
 import java.nio.file.*;
 import java.util.logging.*;
 import org.apache.commons.cli.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 public class TheCLI{
 	public final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
@@ -14,10 +16,14 @@ public class TheCLI{
 	public ArrayList<String> fileNamesToProcess = new ArrayList<>();
 	public ArrayList<String> staticProcPaths = new ArrayList<>();
 	public Hashtable<String, String> mappedProcPaths = new Hashtable<>();
-	public String outFileName = null;
+	public String outcsvFileName = null;
+	public String outtreeFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
+	public Integer sanity = new Integer(20);
 	public File setFile = null;
+	public ArrayList<SetSymbolValue> setSym = new ArrayList<>();
+	public ArrayList<PPSetSymbolValue> PPsetSym = new ArrayList<>();
 
 	public TheCLI(String[] args) throws Exception {
 
@@ -35,14 +41,18 @@ public class TheCLI{
 			, "symbol=value to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
 		Option setList = new Option("setList", true
 			, "name of a file containing symbol=value pairs (one per line) to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
-		Option out = new Option("out", true
-			, "name of a file in which to store the gathered information");
+		Option outcsv = new Option("outcsv", true
+			, "name of a file in which to store the gathered information in csv format");
+		Option outtree = new Option("outtree", true
+			, "name of a file in which to store the gathered information in \"tree\" format");
 		Option logLevel = new Option("logLevel", true
 			, "logging level for this run {SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST}");
 		Option unitTest = new Option("unitTest", false
 			, "used to test lexer, parser, listeners, et. al");
 		Option saveTemp = new Option("saveTemp", false
 			, "save temporary files, used to test lexer, parser, listeners, et. al");
+		Option sanity = new Option("sanity", true
+			, "used to limit the number of iterations when resolving INCLUDEs {default = 20}");
 		Option help = new Option("help", false, "print this message");
 
 		this.options.addOption(file);
@@ -51,10 +61,12 @@ public class TheCLI{
 		this.options.addOption(includeList);
 		this.options.addOption(set);
 		this.options.addOption(setList);
-		this.options.addOption(out);
+		this.options.addOption(outcsv);
+		this.options.addOption(outtree);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
 		this.options.addOption(saveTemp);
+		this.options.addOption(sanity);
 		this.options.addOption(help);
 
 		try {
@@ -104,8 +116,12 @@ public class TheCLI{
 			this.setFile = this.writeSetFile();
 		}
 
-		if (this.line.hasOption("out")) {
-			this.outFileName = this.line.getOptionValue("out");
+		if (this.line.hasOption("outcsv")) {
+			this.outcsvFileName = this.line.getOptionValue("outcsv");
+		}
+
+		if (this.line.hasOption("outtree")) {
+			this.outtreeFileName = this.line.getOptionValue("outtree");
 		}
 
 		if (this.line.hasOption("logLevel")) {
@@ -159,6 +175,23 @@ public class TheCLI{
 			this.saveTemp = true;
 			this.LOGGER.info("temporary files will be preserved");
 		}
+
+		if (this.line.hasOption("sanity")) {
+			this.sanity = new Integer(this.line.getOptionValue("sanity"));
+		}
+
+		/*
+		Initial setup.  Get symbolics and their values as specified on command line.
+		*/
+		if (this.setFile != null) {
+			this.PPsetSym = lookForPPSetSymbols(this.setFile.getCanonicalPath());
+			this.setSym = lookForSetSymbols(this.setFile.getCanonicalPath());
+		}
+
+	}
+
+	public int getSanity() {
+		return sanity.intValue();
 	}
 
 	private File writeSet() throws IOException {
@@ -199,6 +232,50 @@ public class TheCLI{
 		tmpDir.deleteOnExit();
 
 		return tmpDir;
+	}
+
+	public ArrayList<PPSetSymbolValue> lookForPPSetSymbols(String fileName) throws IOException {
+		this.LOGGER.fine("lookForSetSymbols");
+		ArrayList<PPSetSymbolValue> sets = new ArrayList<>();
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		PPSetSymbolValueListener setSymbolValueListener = new PPSetSymbolValueListener(sets, fileName, this.LOGGER, this);
+	
+		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
+	
+		jclwalker.walk(setSymbolValueListener, jcltree);
+
+		return sets;
+		
+	}
+
+	public ArrayList<SetSymbolValue> lookForSetSymbols(String fileName) throws IOException {
+		this.LOGGER.fine("lookForSetSymbols");
+		ArrayList<SetSymbolValue> sets = new ArrayList<>();
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		SetSymbolValueListener setSymbolValueListener = new SetSymbolValueListener(sets, fileName, this.LOGGER, this);
+	
+		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
+	
+		jclwalker.walk(setSymbolValueListener, jcltree);
+
+		return sets;
+		
 	}
 
 }

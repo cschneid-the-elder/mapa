@@ -1,0 +1,15 @@
+<FindBugsFilter>
+<Match>
+	<Class name="JCLLexer" />
+</Match>
+<Match>
+	<Class name="JCLPPLexer" />
+</Match>
+<Match>
+	<Class name="JCLParser" />
+</Match>
+<Match>
+	<Class name="JCLPPParser" />
+</Match>
+</FindBugsFilter>
+

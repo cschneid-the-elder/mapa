@@ -1,8 +1,11 @@
 
 import java.util.*;
+import java.util.logging.*;
 
 public class DsidWrapper {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.DdParmDSIDContext ctx = null;
 	private String dsid = null;
@@ -10,10 +13,17 @@ public class DsidWrapper {
 	private String procName = null;
 	private Boolean inProc = null;
 
-	public DsidWrapper(JCLParser.DdParmDSIDContext ctx, String procName) {
+	public DsidWrapper(
+			JCLParser.DdParmDSIDContext ctx
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
 	}
 
@@ -32,10 +42,6 @@ public class DsidWrapper {
 		} else {
 			this.verified = this.ctx.DSID_VERIFIED().getSymbol().getText();
 		}
-	}
-
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		Demo01.LOGGER.fine(myName + " resolveParms sets = |" + sets + "|");
 	}
 
 	public String toString() {

@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -43,6 +44,8 @@ examples.
 */
 public class KeywordOrSymbolicWrapper {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.KeywordOrSymbolicContext ctx = null;
 	private ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
@@ -50,40 +53,56 @@ public class KeywordOrSymbolicWrapper {
 	private Boolean inProc = null;
 	private Boolean parameterized = null;
 
-	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList) {
+	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(
+			List<JCLParser.KeywordOrSymbolicContext> ctxList
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
 		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new KeywordOrSymbolicWrapper(k, null));
+			kywdList.add(new KeywordOrSymbolicWrapper(k, null, LOGGER, CLI));
 		}
 
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
-	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(List<JCLParser.KeywordOrSymbolicContext> ctxList, String procName) {
+	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(
+			List<JCLParser.KeywordOrSymbolicContext> ctxList
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		ArrayList<KeywordOrSymbolicWrapper> kywdList = new ArrayList<>();
 
 		for (JCLParser.KeywordOrSymbolicContext k: ctxList) {
-			kywdList.add(new KeywordOrSymbolicWrapper(k, procName));
+			kywdList.add(new KeywordOrSymbolicWrapper(k, procName, LOGGER, CLI));
 		}
 
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
-		Demo01.LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest("KeywordOrSymbolicWrapper bunchOfThese kywdList: " + kywdList);
 		return kywdList;
 	}
 
-	public KeywordOrSymbolicWrapper(JCLParser.KeywordOrSymbolicContext ctx, String procName) {
+	public KeywordOrSymbolicWrapper(
+			JCLParser.KeywordOrSymbolicContext ctx
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.procName = procName;
 		this.inProc = !(procName == null);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.initialize();
 	}
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx));
+		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx, this.procName, this.LOGGER, this.CLI));
 
 		if (this.ctx.SYMBOLIC() == null 
 		|| this.ctx.SYMBOLIC().size() == 0) {
@@ -92,100 +111,12 @@ public class KeywordOrSymbolicWrapper {
 			this.parameterized = true;
 		}
 
-		Demo01.LOGGER.finest(this.getClass().getName() + " kvw:");
+		this.LOGGER.finest(this.getClass().getName() + " kvw:");
 		for (KeywordValueWrapper k: this.kvw) {
-			Demo01.LOGGER.finest(k.toString());
+			this.LOGGER.finest(k.toString());
 
 		}
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
-	}
-
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		if (this.parameterized) {
-			Demo01.LOGGER.finest(myName + " parameterized == true  - continuing");
-		} else {
-			Demo01.LOGGER.finest(myName + " parameterized == false - exiting");
-			return;
-		}
-
-		Demo01.LOGGER.finest(myName + " resolveParms this: " + this);
-		Demo01.LOGGER.finest(myName + " resolveParms sets: " + sets);
-
-		KeywordValueWrapper[] symbolic_kvw = 
-			kvw.stream()
-			.filter(k -> k.getType() == KeywordValueType.SYMBOLIC)
-			.toArray(KeywordValueWrapper[]::new);
-
-		for(KeywordValueWrapper k: symbolic_kvw) {
-			Demo01.LOGGER.finest(myName + " k: " + k);
-			SetSymbolValue[] matching_sets =
-				sets.stream()
-				.filter(s -> s.getParmName().equals(k.getParmName()))
-				.toArray(SetSymbolValue[]::new);
-			for(SetSymbolValue s: matching_sets) {
-				Demo01.LOGGER.finest(myName + " s: " + s);
-				switch(s.getSetType()) {
-					case SET:
-						if ((this.inProc  
-							&& !this.parmSetByExec(sets, s) && !this.parmDefinedByProc(sets, s))
-						|| (!this.inProc && !s.inProc && k.getLine() > s.getLine())
-						) {
-							k.setResolvedValue(s.getParmValue());
-						}
-						break;
-					case PROC:
-						if ((this.inProc && s.inProc && s.procName.equals(this.procName) 
-							&& !this.parmSetByExec(sets, s))
-						) {
-							k.setResolvedValue(s.getParmValue());
-						}
-						break;
-					case EXEC:
-						if (this.inProc) {
-							k.setResolvedValue(s.getParmValue());
-						}
-						break;
-					case SYS:
-						k.setResolvedValue(s.getParmValue());
-						break;
-					default:
-						break;
-				}
-			}
-		}
-	}
-
-	private Boolean parmSetByExec(ArrayList<SetSymbolValue> sets, SetSymbolValue v) {
-		Boolean rc = false;
-
-		for(SetSymbolValue s: sets) {
-			if (s.getParmName().equals(v.getParmName())
-			&& s.getSetType() == SetTypeOfSymbolValue.EXEC
-			&& s.getProcBeingExecuted().equals(this.procName)
-			&& s != v
-			) {
-				rc = true;
-				break;
-			}
-		}
-
-		return rc;
-	}
-
-	private Boolean parmDefinedByProc(ArrayList<SetSymbolValue> sets, SetSymbolValue v) {
-		Boolean rc = false;
-
-		for(SetSymbolValue s: sets) {
-			if (s.getParmName().equals(v.getParmName())
-			&& s.getSetType() == SetTypeOfSymbolValue.PROC
-			&& s != v
-			) {
-				rc = true;
-				break;
-			}
-		}
-
-		return rc;
 	}
 
 	public String getValue() {
@@ -198,15 +129,8 @@ public class KeywordOrSymbolicWrapper {
 		return buf.toString();
 	}
 
-	public Boolean isResolved() {
-		Boolean b = true;
-
-		for (KeywordValueWrapper k: this.kvw) {
-			b = b && k.isResolved();
-			if (!b) break;
-		}
-
-		return b;
+	public Boolean isParameterized() {
+		return this.parameterized;
 	}
 
 	public String getResolvedValue() {

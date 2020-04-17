@@ -1,11 +1,23 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class represents a JCL INCLUDE statement.
+
+<p>-->NOTE This class is used as a base to create another class via a sed script 
+executed in the Makefile.  The resulting file has the name of this file with 
+"PP" prepended.
+
+
+*/
 
 public class IncludeStatement {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.IncludeStatementContext ctx = null;
 	private String fileName = null;
@@ -16,28 +28,39 @@ public class IncludeStatement {
 	private int posn = -1;  // 0 to n-1
 	public Boolean inProc = false;
 	public String procName = null;
+	private String nameField = null;
 
 	public IncludeStatement(
 		JCLParser.IncludeStatementContext ctx
 		, String fileName
 		, String procName
+		, Logger LOGGER
+		, TheCLI CLI
 		) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
-		this.initialize();
+		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
+		this.initialize(LOGGER, CLI);
+		LOGGER.fine(this.myName + " " + this.nameField + " instantiated from " + this.fileName);
 	}
 
-	private void initialize() {
+	private void initialize(Logger LOGGER, TheCLI CLI) {
 		myName = this.getClass().getName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		if (this.ctx.NAME_FIELD() == null) {
+			this.nameField = "_NONAME_";
+		} else {
+			this.nameField = this.ctx.NAME_FIELD().getSymbol().getText();
+		}
 	}
 
 	public int getLine() {
 		if (this.line == -1) {
 			if (this.ctx.INCLUDE_PARM_MEMBER() == null) {
-				Demo01.LOGGER.severe(
+				this.LOGGER.severe(
 					this.myName
 					+ "getLine() found " 
 					+ this.ctx.getClass().getName() 
@@ -54,7 +77,7 @@ public class IncludeStatement {
 	public int getPosn() {
 		if (this.posn == -1) {
 			if (this.ctx.EQUAL() == null) {
-				Demo01.LOGGER.severe(
+				this.LOGGER.severe(
 					this.myName 
 					+ "getPosn() found " 
 					+ this.ctx.getClass().getName() 
@@ -78,18 +101,6 @@ public class IncludeStatement {
 
 	public String getResolvedText() {
 		return this.kywd.getResolvedValue();
-	}
-
-	public void resolveParms(ArrayList<SetSymbolValue> sets) {
-		this.kywd.resolveParms(sets);
-	}
-
-	public Boolean isResolved() {
-		return this.kywd.isResolved();
-	}
-
-	public Boolean isProbablyTheSame(IncludeStatement i) {
-		return this.getOriginalText().equals(i.getOriginalText());
 	}
 
 	public String toString() {

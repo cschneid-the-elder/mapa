@@ -1564,18 +1564,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOutputStatementCOPIES(JCLParser.OutputStatementCOPIESContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#copiesPayload}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCopiesPayload(JCLParser.CopiesPayloadContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#copiesValueOrSymbolic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitCopiesValueOrSymbolic(JCLParser.CopiesValueOrSymbolicContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementCOPYCNT}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

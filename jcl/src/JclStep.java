@@ -1,19 +1,40 @@
 
 import java.util.*;
+import java.util.logging.*;
+import java.io.*;
+import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
+This class represents a JCL Job Step.
+
+<p>An instance of JclStep is meaningless without its containing Job or Proc, 
+which provide values for symbolics that may be present.
+
+<p>A JclStep may execute a procedure, which may have its symbolics resolved by
+values set by this JclStep.  The same procedure may be executed by several
+different JclSteps in the same Job, all with different parameters.  So each
+JclStep locates, parses, and provides any proc it executes its own collection
+of SetSymbolValues for resolution.
+
+<p>An unfortunate side effect of this class and its brethren being created
+by an ANTLR listener class is that not all instance variables are known at
+instantiation time, they must be added as they are encountered by the listener.
 
 
 */
 public class JclStep {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private String fileName = null;
 	private String procName = null;
 	private String stepName = null;
 	private int line = -1;
+	private int jobOrdNb = 0;
+	private int ordNb = 0;
 	private KeywordOrSymbolicWrapper procExecuted = null;
 	private KeywordOrSymbolicWrapper pgmExecuted = null;
 	private Proc proc = null;
@@ -23,18 +44,57 @@ public class JclStep {
 	private JCLParser.ExecPgmStatementContext execPgmStmtCtx = null;
 	private JCLParser.ExecProcStatementContext execProcStmtCtx = null;
 	private List<JCLParser.DdStatementAmalgamationContext> ddStmtAmlgnCtxs = null;
-	private List<JCLParser.IncludeStatementContext> includeStmtCtxs = null;
-	private ArrayList<IncludeStatement> includes = new ArrayList<>();
-	private ArrayList<SetSymbolValue> symbolics = new ArrayList<>();
+	/**
+	The collection setSym holds instances of SetSymbolValue representing
+	parameters set on execution of a cataloged or instream procedure.
+	*/
+	private ArrayList<SetSymbolValue> setSym = new ArrayList<>();
+	/**
+	The collection incomingSetSym holds instances of SetSymbolValue
+	representing parameters set by SET statements or other means prior
+	to execution of this step.
+	*/
+	private ArrayList<SetSymbolValue> incomingSetSym = new ArrayList<>();
 	private ArrayList<DdStatementAmalgamation> ddStatements = new ArrayList<>();
+	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
+	private File baseDir = null;
+	private File tmpProcDir = null;
+	private Job parentJob = null;
+	private Proc parentProc = null;
 
-	public JclStep(JCLParser.JclStepContext jclStepCtx, String fileName, String procName) {
+	public JclStep(
+			JCLParser.JclStepContext jclStepCtx
+			, String fileName
+			, Proc parentProc
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.jclStepCtx = jclStepCtx;
 		this.fileName = fileName;
-		this.procName = procName;
-		this.inProc = !(procName == null);
+		this.parentProc = parentProc;
+		this.procName = parentProc.getProcName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.inProc = true;
 		this.initialize();
+		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
+	}
 
+	public JclStep(
+			JCLParser.JclStepContext jclStepCtx
+			, String fileName
+			, Job parentJob
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		this.jclStepCtx = jclStepCtx;
+		this.fileName = fileName;
+		this.parentJob = parentJob;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.inProc = false;
+		this.initialize();
+		this.LOGGER.fine(this.myName + " " + this.stepName + " instantiated from " + this.fileName);
 	}
 
 	private void initialize() {
@@ -43,37 +103,54 @@ public class JclStep {
 		this.execPgmStmtCtx = this.execStmtCtx.execPgmStatement();
 		this.execProcStmtCtx = this.execStmtCtx.execProcStatement();
 		this.ddStmtAmlgnCtxs = this.jclStepCtx.ddStatementAmalgamation();
-		this.includeStmtCtxs = this.jclStepCtx.includeStatement();
 		
-		for (JCLParser.IncludeStatementContext i: this.includeStmtCtxs) {
-			this.includes.add(new IncludeStatement(i, this.fileName, this.procName));
-		}
-
 		if (this.isExecProc() && this.isExecPgm()) {
-			Demo01.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
+			this.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are not null");
 		} else if (!this.isExecProc() && !this.isExecPgm()) {
-			Demo01.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are null");
+			this.LOGGER.severe(this.myName + " both execPgmStmtCtx and ExecProcStmtCtx are null");
 		}
 
 		if (this.isExecPgm()) {
 			this.line = this.execPgmStmtCtx.EXEC().getSymbol().getLine();
-			this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
-			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName);
+			if (this.execPgmStmtCtx.stepName() == null) {
+				this.stepName = "_NONAME_";
+			} else {
+				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
+			}
+			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
-			this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
-			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName);
+			if (this.execProcStmtCtx.stepName() == null) {
+				this.stepName = "_NONAME_";
+			} else {
+				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
+			}
+			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
-				this.symbolics.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted()));
+				this.setSym.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted(), this.LOGGER, this.CLI));
 			}
 		}
 
 		if (this.ddStmtAmlgnCtxs == null) {
 		} else {
 			for (JCLParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
-				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName));
+				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName, this.fileName, this.LOGGER, this.CLI));
 			}
 		}	
+	}
+
+	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
+		this.LOGGER.finer(this.myName + " " + this.stepName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		if (this.baseDir == null) {
+			this.baseDir = baseDir;
+			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+		}
+
+		if (this.tmpProcDir == null) {
+			this.tmpProcDir = tmpProcDir;
+			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+		}
+
 	}
 
 	public Boolean isExecProc() {
@@ -84,98 +161,201 @@ public class JclStep {
 		return this.execPgmStmtCtx != null;
 	}
 
-	public Boolean needsProc() {
-		return this.isExecProc() && (this.proc == null);
-	}
-
 	public String getProcExecuted() {
 		return this.procExecuted.getValue();
 	}
 
-	public void setProc(Proc proc) {
-		this.proc = proc;
+	public void setOrdNb(int ordNb) {
+		this.ordNb = ordNb;
+	}
+
+	public void setJobOrdNb(int jobOrdNb) {
+		this.jobOrdNb = jobOrdNb;
+	}
+
+	public StringBuffer getResolvedSuffix() {
+		StringBuffer sb = new StringBuffer();
+
+		if (this.parentProc == null) {
+			sb.append(this.parentJob.getResolvedSuffix());
+		} else {
+			sb.append(this.parentProc.getResolvedSuffix());
+		}
+
+		sb.append("-");
+		sb.append(String.format("%06d", this.ordNb));
+		return sb;
+	}
+
+	public StringBuffer getProcFileName() {
+		StringBuffer sb = new StringBuffer(this.tmpProcDir.toString());
+		sb.append(File.separator);
+		sb.append(this.getProcExecuted());
+		sb.append("-resolved-");
+		sb.append(this.getResolvedSuffix());
+
+		return sb;
 	}
 
 	public Proc getProc() {
 		return this.proc;
 	}
 
+	public Proc getParentProc() {
+		return this.parentProc;
+	}
+
+	public Job getParentJob() {
+		return this.parentJob;
+	}
+
 	public int getLine() {
 		return this.line;
 	}
 
-	public void resolveParmedIncludes(ArrayList<SetSymbolValue> symbolics) {
-		/**
-			Of note here: an INCLUDE that is attached to a JclStep may not have
-			anything to do with the JclStep.  It is syntactically impossible to
-			discern the coder's intent.  Consider...
-
-			//RIGEL   EXEC PGM=IEFBR14
-			//        INCLUDE MEMBER=DARGO
-			//PILOT   EXEC PGM=IEFBR14
-
-			...where the member DARGO contains...
-
-			//        SET A=1,B=2,C=3
-			//STARK   EXEC PROC=NORANTI
-			//        INCLUDE MEMBER=SIKOZU&A
-
-			...and thus statements unrelated to the JclStep will be inserted into
-			the jobstream.
-
-			Subsequent parsing takes care of this, and in fact is one of the reasons
-			the original JCL is parsed iteratively.
-		*/
-
-		Demo01.LOGGER.finest(this.myName + " " + this.stepName + " resolveParmedIncludes");
-		for (IncludeStatement i: this.includes) {
-			i.resolveParms(symbolics);
-		}
-		Demo01.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
-
-		if (this.proc != null) {
-			ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>();
-			for (SetSymbolValue s: symbolics) {
-				if ((s.getSetType() == SetTypeOfSymbolValue.SET && s.getLine() < this.line)
-					|| s.getSetType() != SetTypeOfSymbolValue.SET
-				) {
-					mergedSymbolics.add(s);
-				}
-			}
-			mergedSymbolics.addAll(this.symbolics);
-			Demo01.LOGGER.finest(myName + " resolveParmedIncludes resolving proc " + this.proc);
-			this.proc.resolveParmedIncludes(mergedSymbolics);
+	private int getFileNb() {
+		if (this.parentJob == null) {
+			return this.parentProc.getFileNb();
+		} else {
+			return this.parentJob.getFileNb();
 		}
 	}
 
-	public void resolveParms(ArrayList<SetSymbolValue> symbolics) {
-		Demo01.LOGGER.finest(myName + " " + this.stepName + " resolveParms symbolics = |" + symbolics + "|");
-		ArrayList<SetSymbolValue> mergedSymbolics = new ArrayList<>(symbolics);
-		mergedSymbolics.addAll(this.symbolics);
+	public void setJcllib(ArrayList<KeywordOrSymbolicWrapper> jcllib) {
+		this.jcllib = jcllib;
+	}
 
-		for (DdStatementAmalgamation dda: ddStatements) {
-			dda.resolveParms(mergedSymbolics);
-		}
+	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
+		this.LOGGER.finer(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
 
-		if (this.proc != null) {
-			this.proc.resolveParms(mergedSymbolics);
-		}
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
+		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
+		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+
+		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker jclwalker = new ParseTreeWalker();
+	
+		JobListener jobListener = new JobListener(null, procs, fileName, this.getFileNb(), LOGGER, CLI);
+	
+		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
+	
+		jclwalker.walk(jobListener, jcltree);
+
 	}
 
 	public UUID getUUID() {
 		return this.uuid;
 	}
 
-	public IncludeStatement includeStatementAt(int aLine) {
-		for (IncludeStatement i: this.includes) {
-			if (i.getLine() == aLine) return i;
+	public void lexAndParseProc() throws IOException {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " lexAndParseProc");
+		if (this.isExecProc()) {
+			this.LOGGER.fine(
+						this.myName 
+						+ " " 
+						+ this.stepName 
+						+ " lexAndParseProc procName = |" 
+						+ this.procName 
+						+ "|"
+						);
+			File aFile = new File(this.getProcFileName().toString());
+			if (aFile.exists()) {
+				this.LOGGER.fine(
+							this.myName 
+							+ " " 
+							+ this.stepName 
+							+ " lexAndParseProc aFile.getName() = |" 
+							+ aFile.getName() 
+							+ "| exists"
+							);
+				ArrayList<Proc> procs = new ArrayList<>();
+				String fileName = this.getProcFileName().toString();
+				this.lexAndParse(procs, fileName);
+				if (procs.size() == 0) {
+					this.LOGGER.severe(
+						this.myName 
+						+ " lexAndParseProc error parsing " 
+						+ this.procName 
+						+ " in " 
+						+ fileName
+						);
+					return;
+				}
+				this.proc = procs.get(0);
+				procs.get(0).setJcllib(this.jcllib);
+				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
+				procs.get(0).setOrdNb(this.ordNb);
+				procs.get(0).setJobOrdNb(this.jobOrdNb);
+				procs.get(0).setParentJclStep(this);
+				this.proc.lexAndParseProcs();
+			} else {
+				this.LOGGER.fine(
+							this.myName 
+							+ " " 
+							+ this.stepName 
+							+ " lexAndParseProc aFile.getName() = |" 
+							+ aFile.getName() 
+							+ "| does not exist"
+							);
+			}
 		}
-
-		return null;
 	}
 
-	public ArrayList<IncludeStatement> getIncludes() {
-		return this.includes;
+	public void toTree(StringBuffer treeOut) {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " toTree");
+
+		treeOut.append('\t');
+		treeOut.append(this.stepName);
+		treeOut.append('\t');
+		treeOut.append(this.ordNb);
+		treeOut.append('\t');
+		if (this.isExecPgm()) {
+			treeOut.append("PGM");
+			treeOut.append('\t');
+			treeOut.append(this.pgmExecuted.getValue());
+		} else {
+			treeOut.append("PROC");
+			treeOut.append('\t');
+			treeOut.append(this.procExecuted.getValue());
+			if (this.proc != null) {
+				treeOut.append(System.getProperty("line.separator"));
+				this.proc.toTree(treeOut);
+			}
+		}
+	}
+
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " toCSV");
+
+		csvOut.append("STEP");
+		csvOut.append(",");
+		csvOut.append(this.stepName);
+		csvOut.append(",");
+		csvOut.append(this.ordNb);
+		csvOut.append(",");
+		csvOut.append(parentUUID.toString());
+		csvOut.append(",");
+		csvOut.append(this.uuid.toString());
+		csvOut.append(",");
+
+		if (this.isExecPgm()) {
+			csvOut.append("PGM");
+			csvOut.append(",");
+			csvOut.append(this.pgmExecuted.getValue());
+			for (DdStatementAmalgamation dda: ddStatements) {
+				dda.toCSV(csvOut, this.uuid);
+			}
+		} else {
+			csvOut.append("PROC");
+			csvOut.append(",");
+			csvOut.append(this.procExecuted.getValue());
+			if (this.proc != null) {
+				csvOut.append(System.getProperty("line.separator"));
+				this.proc.toCSV(csvOut, this.uuid);
+			}
+		}
 	}
 
 	public String toString() {

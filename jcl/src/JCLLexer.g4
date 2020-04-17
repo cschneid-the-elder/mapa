@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019, Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -464,7 +464,7 @@ DD_CCSID : C C S I D ->type(CCSID),pushMode(KYWD_VAL_MODE) ;
 DD_CHARS : C H A R S ->type(CHARS),pushMode(KYWD_VAL_MODE) ;
 DD_CHKPT : C H K P T ->type(CHKPT),pushMode(KYWD_VAL_MODE) ;
 DD_CNTL : C N T L ->type(CNTL),pushMode(KYWD_VAL_MODE) ;
-DD_COPIES : C O P I E S ->type(COPIES),pushMode(COPIES_MODE) ;
+DD_COPIES : C O P I E S ->type(COPIES),pushMode(KYWD_VAL_MODE) ;
 DD_DATA : D A T A
     {
       dlmVals = new java.util.ArrayList();
@@ -507,7 +507,7 @@ DD_MAXGENS : M A X G E N S ->type(MAXGENS),pushMode(KYWD_VAL_MODE) ;
 DD_MGMTCLAS : M G M T C L A S ->type(MGMTCLAS),pushMode(KYWD_VAL_MODE) ;
 DD_MODIFY : M O D I F Y ->type(MODIFY),pushMode(KYWD_VAL_MODE) ;
 DD_OUTLIM : O U T L I M ->type(OUTLIM),pushMode(KYWD_VAL_MODE) ;
-DD_OUTPUT : O U T P U T ->type(OUTPUT),pushMode(OUTPUT_PARM_MODE) ;
+DD_OUTPUT : O U T P U T ->type(OUTPUT),pushMode(KYWD_VAL_MODE) ;
 DD_PATH : P A T H ->type(PATH),pushMode(KYWD_VAL_MODE) ;
 DD_PATHDISP : P A T H D I S P ->type(PATHDISP),pushMode(PATHDISP_MODE) ;
 DD_PATHMODE : P A T H M O D E ->type(PATHMODE),pushMode(PATHMODE_MODE) ;
@@ -635,7 +635,7 @@ OUTPUT_STMT_COLORMAP : C O L O R M A P ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_COMPACT : C O M P A C T ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_COMSETUP : C O M S E T U P ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_CONTROL : C O N T R O L ->pushMode(KYWD_VAL_MODE) ;
-OUTPUT_STMT_COPIES : C O P I E S ->pushMode(COPIES_MODE) ;
+OUTPUT_STMT_COPIES : C O P I E S ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_COPYCNT : C O P Y C N T ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_DATACK : D A T A C K ->pushMode(KYWD_VAL_MODE) ;
 OUTPUT_STMT_DDNAME : D D N A M E ->pushMode(KYWD_VAL_MODE) ;
@@ -828,12 +828,18 @@ SET_PARM_VALUE_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 SET_PARM_VALUE : (KEYWORD_VALUE | [)(A-Z0-9@#$*\-+&./%[_]+) ->type(KEYWORD_VALUE) ;
 SET_PARM_VALUE_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
 
+/*
+These two are mode() on purpose, the popMode in the target modes will correctly
+bring us back to SET_PARM_MODE.  The lack of _modeStack.clear() is intentional.
+*/
 SET_PARM_VALUE_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->channel(HIDDEN),mode(COMMA_NEWLINE_MODE) ;
 SET_PARM_VALUE_COMMA_WS : COMMA_DFLT [ ]+ ->channel(HIDDEN),mode(COMMA_WS_MODE) ;
+
 SET_PARM_VALUE_NEWLINE : NEWLINE
     {
       _modeStack.clear();
-    } ->channel(HIDDEN),mode(DEFAULT_MODE) ;
+    }
+ ->channel(HIDDEN),mode(DEFAULT_MODE) ;
 SET_PARM_VALUE_WS : [ ]+
     {
       _modeStack.clear();
@@ -1832,28 +1838,6 @@ KYWD_VAL_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 KYWD_VAL_PAREN_COMMA_NEWLINE : COMMA_DFLT NEWLINE ->type(COMMA),pushMode(COMMA_NEWLINE_MODE) ;
 KYWD_VAL_PAREN_COMMA_WS : COMMA_DFLT [ ]+ ->type(COMMA),pushMode(COMMA_WS_MODE) ;
 
-mode COPIES_MODE ;
-
-COPIES_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-COPIES_VALUE : [0-9]+ ->popMode ;
-COPIES_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
-COPIES_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(COPIES_PAREN_MODE) ;
-
-mode COPIES_PAREN_MODE ;
-
-COPIES_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
-COPIES_PAREN_VALUE : COPIES_VALUE ->type(COPIES_VALUE) ;
-COPIES_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-COPIES_PAREN_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(COPIES_GROUP_MODE) ;
-COPIES_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ; 
-
-mode COPIES_GROUP_MODE ;
-
-COPIES_GROUP_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
-COPIES_GROUP_VALUE : COPIES_VALUE ;
-COPIES_GROUP_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
-COPIES_GROUP_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ; 
-
 mode DISP_MODE ;
 
 DISP_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
@@ -1953,21 +1937,6 @@ LABEL5_EXPDT : DD_EXPDT ->type(EXPDT),pushMode(KYWD_VAL_MODE) ;
 
 fragment LABEL_INPUT : I N ;
 fragment LABEL_OUTPUT : O U T ;
-
-mode OUTPUT_PARM_MODE ;
-
-OUTPUT_PARM_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
-OUTPUT_PARM_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)? ->popMode ;
-OUTPUT_PARM_LPAREN : LPAREN_DFLT ->type(LPAREN),mode(OUTPUT_PARM_PAREN_MODE) ;
-
-mode OUTPUT_PARM_PAREN_MODE ;
-
-OUTPUT_PARM_PAREN_REFERENCE : ASTERISK DOT_DFLT NM_PART (DOT_DFLT NM_PART)? (DOT_DFLT NM_PART)?
-     ->type(OUTPUT_PARM_REFERENCE) ;
-OUTPUT_PARM_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
-OUTPUT_PARM_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
-OUTPUT_PARM_PAREN_NEWLINE : [\n\r] ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
-OUTPUT_PARM_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode ;
 
 mode PATHDISP_MODE ;
 

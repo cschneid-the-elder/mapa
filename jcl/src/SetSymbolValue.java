@@ -1,11 +1,14 @@
 
 import java.util.*;
+import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 
 public class SetSymbolValue {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private String myName = null;
 	private ParserRuleContext ctx = null;
 	private String fileName = null;
@@ -19,17 +22,27 @@ public class SetSymbolValue {
 	public String procName = null;
 	private String procBeingExecuted = null;
 
-	public SetSymbolValue(JCLParser.SetOperationContext ctx) {
+	public SetSymbolValue(
+			JCLParser.SetOperationContext ctx
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.setType = SetTypeOfSymbolValue.SYS;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
-		this.initialize();
+		this.initialize(LOGGER, CLI);
 	}
 
-	public SetSymbolValue(JCLParser.SetOperationContext ctx, String fileName, String procName) {
+	public SetSymbolValue(
+			JCLParser.SetOperationContext ctx
+			, String fileName
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -37,12 +50,19 @@ public class SetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.SET;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
-		this.initialize();
+		this.initialize(LOGGER, CLI);
 	}
 
-	public SetSymbolValue(JCLParser.ExecProcParmContext ctx, String fileName, String procName, String procBeingExecuted) {
+	public SetSymbolValue(
+			JCLParser.ExecProcParmContext ctx
+			, String fileName
+			, String procName
+			, String procBeingExecuted
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -51,12 +71,18 @@ public class SetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.EXEC;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
-		this.initialize();
+		this.initialize(LOGGER, CLI);
 	}
 
-	public SetSymbolValue(JCLParser.DefineSymbolicParameterContext ctx, String fileName, String procName) {
+	public SetSymbolValue(
+			JCLParser.DefineSymbolicParameterContext ctx
+			, String fileName
+			, String procName
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -64,17 +90,19 @@ public class SetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.PROC;
 		if (ctx.keywordOrSymbolic() == null) {
 		} else {
-			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName);
+			this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
-		this.initialize();
+		this.initialize(LOGGER, CLI);
 	}
 
-	private void initialize() {
+	private void initialize(Logger LOGGER, TheCLI CLI) {
 		myName = this.getClass().getName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 	}
 
-	public String getFileName() {
-		return this.fileName;
+	public Boolean isParameterized() {
+		return this.kywd.isParameterized();
 	}
 
 	public SetTypeOfSymbolValue getSetType() {
@@ -84,31 +112,30 @@ public class SetSymbolValue {
 	public String getParmName() {
 
 		if (this.parmName == null) {
-			String theParmName = new String();
 			switch(this.setType) {
 				case SET:
-					theParmName = getParmNameForSetOperationContext();
+					this.parmName = getParmNameForSetOperationContext();
 					break;
 				case EXEC:
-					theParmName = getParmNameForExecProcParmContext();
+					this.parmName = getParmNameForExecProcParmContext();
 					break;
 				case PROC:
-					theParmName = getParmNameForDefineSymbolicParameterContext();
+					this.parmName = getParmNameForDefineSymbolicParameterContext();
 					break;
 				case SYS:
-					theParmName = getParmNameForSetOperationContext();
+					this.parmName = getParmNameForSetOperationContext();
 					break;
 				default:
-					Demo01.LOGGER.severe(
+					this.LOGGER.severe(
 						this.myName
 						+ " getParmName() found " 
 						+ this.ctx.getClass().getName()
 						+ " "
 						+ this.setType
 					);
+					this.parmName = new String();
 					break;
 			}
-			this.parmName = theParmName;
 		}
 
 		return this.parmName;
@@ -132,7 +159,7 @@ public class SetSymbolValue {
 					theLine = 0;
 					break;
 				default:
-					Demo01.LOGGER.severe(
+					this.LOGGER.severe(
 						this.myName
 						+ " getLine() found " 
 						+ this.ctx.getClass().getName()
@@ -150,34 +177,37 @@ public class SetSymbolValue {
 	public String getParmValue() {
 
 		if (this.parmValue == null) {
-			String theText = new String();
 			switch(this.setType) {
 				case SET:
-					theText = getParmValueForSetOperationContext();
+					this.parmValue = getParmValueForSetOperationContext();
 					break;
 				case EXEC:
-					theText = getParmValueForExecProcParmContext();
+					this.parmValue = getParmValueForExecProcParmContext();
 					break;
 				case PROC:
-					theText = getParmValueForDefineSymbolicParameterContext();
+					this.parmValue = getParmValueForDefineSymbolicParameterContext();
 					break;
 				case SYS:
-					theText = getParmValueForSetOperationContext();
+					this.parmValue = getParmValueForSetOperationContext();
 					break;
 				default:
-					Demo01.LOGGER.severe(
+					this.LOGGER.severe(
 						this.myName
 						+ " getParmValue() found " 
 						+ this.ctx.getClass().getName()
 						+ " "
 						+ this.setType
 					);
+					this.parmValue = new String();
 					break;
 			}
-			this.parmValue = theText;
 		}
 
 		return this.parmValue;
+	}
+
+	public String getResolvedValue() {
+		return kywd.getResolvedValue();
 	}
 
 	private String getParmNameForSetOperationContext() {
@@ -203,7 +233,7 @@ public class SetSymbolValue {
 		int theLine = -1;
 
 		if (ctx.SET_PARM_NAME() == null) {
-			Demo01.LOGGER.severe(
+			this.LOGGER.severe(
 				this.myName
 				+ " getLineForSetOperationContext() found " 
 				+ ctx.getClass().getName() 
@@ -221,7 +251,7 @@ public class SetSymbolValue {
 		int theLine = -1;
 
 		if (ctx.EXEC_PROC_PARM() == null) {
-			Demo01.LOGGER.severe(
+			this.LOGGER.severe(
 				this.myName
 				+ " getLineForExecProcParmContext() found " 
 				+ ctx.getClass().getName() 
@@ -239,7 +269,7 @@ public class SetSymbolValue {
 		int theLine = -1;
 
 		if (ctx.PROC_PARM_NAME() == null) {
-			Demo01.LOGGER.severe(
+			this.LOGGER.severe(
 				this.myName
 				+ " getLineForDefineSymbolicParameterContext() found " 
 				+ ctx.getClass().getName() 
@@ -253,8 +283,7 @@ public class SetSymbolValue {
 	}
 
 	private String getParmValueForSetOperationContext() {
-		JCLParser.SetOperationContext ctx = (JCLParser.SetOperationContext)this.ctx;
-		String theText = new String();
+		String theText = null;
 
 		if (this.kywd == null) {
 			/*
@@ -264,6 +293,7 @@ public class SetSymbolValue {
 
 				In this instance the parm TALYN is set to nothing.
 			*/
+			theText = new String();
 		} else {
 			theText = kywd.getValue();
 		}
@@ -272,8 +302,7 @@ public class SetSymbolValue {
 	}
 
 	private String getParmValueForExecProcParmContext() {
-		JCLParser.ExecProcParmContext ctx = (JCLParser.ExecProcParmContext)this.ctx;
-		String theText = new String();
+		String theText = null;
 
 		if (this.kywd == null) {
 			/*
@@ -285,6 +314,7 @@ public class SetSymbolValue {
 				set in the PROC statement for the proc MOYA is nullified.  Any value
 				set in a SET statement prior to this EXEC statement is nullified.
 			*/
+			theText = new String();
 		} else {
 			theText = kywd.getValue();
 		}
@@ -293,8 +323,7 @@ public class SetSymbolValue {
 	}
 
 	private String getParmValueForDefineSymbolicParameterContext() {
-		JCLParser.DefineSymbolicParameterContext ctx = (JCLParser.DefineSymbolicParameterContext)this.ctx;
-		String theText = new String();
+		String theText = null;
 
 		if (this.kywd == null) {
 			/*
@@ -305,15 +334,12 @@ public class SetSymbolValue {
 				In this instance the parm TALYN is set to nothing.  Any value
 				set in a SET statement prior to execution of the proc MOYA is nullified.
 			*/
+			theText = new String();
 		} else {
 			theText = kywd.getValue();
 		}
 
 		return theText;
-	}
-
-	public String getProcBeingExecuted() {
-		return this.procBeingExecuted;
 	}
 
 	public String toString() {

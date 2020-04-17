@@ -6,6 +6,9 @@ import org.antlr.v4.runtime.tree.*;
 
 public class JobListener extends JCLParserBaseListener {
 
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
+	private String myName = null;
 	public ArrayList<Job> jobs = null;
 	public ArrayList<Proc> procs = null;
 	public String fileName = null;
@@ -13,16 +16,31 @@ public class JobListener extends JCLParserBaseListener {
 	public Job currJob = null;
 	public Proc currProc = null;
 	public JclStep currJclStep = null;
+	public int nbJobs = 0;
+	public int fileNb = 0;
 
 	public JobListener(
 			ArrayList<Job> jobs
 			, ArrayList<Proc> procs
 			, String fileName
+			, int fileNb
+			, Logger LOGGER
+			, TheCLI CLI
 			) {
 		super();
-		this.jobs = jobs;
-		this.procs = procs;
+		if (jobs == null) {
+		} else {
+			this.jobs = jobs;
+		}
+		if (procs == null) {
+		} else {
+			this.procs = procs;
+		}
 		this.fileName = fileName;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.myName = this.getClass().getName();
 	}
 
 	@Override public void enterJobCard(JCLParser.JobCardContext ctx) {
@@ -30,8 +48,13 @@ public class JobListener extends JCLParserBaseListener {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
-		this.currJob = new Job(ctx, fileName);
-		this.jobs.add(this.currJob);
+		this.nbJobs++;
+		this.currJob = new Job(ctx, fileName, this.nbJobs, this.fileNb, this.LOGGER, this.CLI);
+		if (this.jobs == null) {
+			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
+		} else {
+			this.jobs.add(this.currJob);
+		}
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
@@ -43,16 +66,16 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterSetOperation(JCLParser.SetOperationContext ctx) { 
 		if (this.currProc == null) {
-			this.currJob.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currJob.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
-			this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+			this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterProcStatement(JCLParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new Proc(ctx, this.fileName);
+		this.currProc = new Proc(ctx, this.fileName, this.fileNb, this.LOGGER, this.CLI);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);
@@ -60,11 +83,18 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSymbolic(new SetSymbolValue(ctx, this.fileName, this.procName));
+		this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 	}
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
 		this.currProc.addPendCtx(ctx);
+		if (this.procs == null) {
+			if (this.currJob == null) {
+				this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
+			}
+		} else {
+			this.procs.add(this.currProc);
+		}
 		this.procName = null;
 		this.currProc = null;
 		this.currJclStep = null;
@@ -72,12 +102,8 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterIncludeStatement(JCLParser.IncludeStatementContext ctx) {
 		/**
-			If a JclStep has been encountered then any IncludeStatement encountered will
-			be picked up as part of a JclStep.  If a JclStep has _not_ been encountered then
-			any IncludeStatement encountered stands on its own and is not considered a part
-			of any JclStep and therefore must be added to the "owning" entity - either the
-			current Job, the current Proc, or the current InstreamProc.  Whether there is
-			a currently extant JclStep is reset on encountering a PROC or PEND statement.
+			An IncludeStatement is considered to be part of the current "owning" entity - 
+			either the current Job or the current Proc.
 
 			Consider...
 
@@ -92,26 +118,32 @@ public class JobListener extends JCLParserBaseListener {
 			//JS01  EXEC PROC=RYGEL
 			//      INCLUDE MEMBER=AERYN
 
-			...the IncludeStatement CHIANA is standalone and attached to Job ZHANN.  The
-			IncludeStatement DARGO is standalone and attached to InstreamProc RYGEL.  The
-			IncludeStatement TALYN is attached to JclStep PS01.  The IncludeStatement
-			CRICHTON is standalone and attached to Job ZHANN.  The IncludeStatement AERYN
-			is attached to JS01.
+			...the IncludeStatement CHIANA is attached to Job ZHANN.  The
+			IncludeStatement DARGO is standalone and attached to Proc RYGEL.  The
+			IncludeStatement TALYN is also attached to Proc RYGEL.  The IncludeStatement
+			CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
+			is also attached to Job ZHANN.
 		*/
-		if (this.currJclStep == null) {
-			if (this.currProc == null) {
-				this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
-			} else {
-				this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName));
-			}
+		if (this.currProc == null && this.currJob == null) {
+			this.currProc = new Proc(this.fileName, this.LOGGER, this.CLI);
+			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.currProc.getProcName(), this.LOGGER, this.CLI));
+		} else if (this.currProc == null) {
+			this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+		} else {
+			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		}
 	}
 
 	@Override public void enterJclStep(JCLParser.JclStepContext ctx) {
-		this.currJclStep = new JclStep(ctx, this.fileName, this.procName);
-		if (this.currProc == null) {
+		if (this.currProc == null && this.currJob == null) {
+			this.currProc = new Proc(this.fileName, this.LOGGER, this.CLI);
+			this.currJclStep = new JclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
+			this.currProc.addJclStep(this.currJclStep);
+		} else if (this.currProc == null) {
+			this.currJclStep = new JclStep(ctx, this.fileName, this.currJob, this.LOGGER, this.CLI);
 			this.currJob.addJclStep(this.currJclStep);
 		} else {
+			this.currJclStep = new JclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
 			this.currProc.addJclStep(this.currJclStep);
 		}
 	}
@@ -121,7 +153,11 @@ public class JobListener extends JCLParserBaseListener {
 			if (this.currProc == null) {
 			} else {
 				this.currProc.setEndLine(ctx.getStop().getLine());
-				this.procs.add(this.currProc);
+				if (this.procs == null) {
+					this.LOGGER.warning(this.myName + " ignoring proc " + currProc);
+				} else {
+					this.procs.add(this.currProc);
+				}
 			}
 		} else {
 			this.currJob.setEndLine(ctx.getStop().getLine());
