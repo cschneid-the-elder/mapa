@@ -514,7 +514,14 @@ public class PPProc {
 				if (end < outLine.length() && outLine.substring(end, end + 1).equals(".")) {
 					end++;
 				}
-				outLine.replace(start, end, s.getResolvedText());
+				if (s.getResolvedText() == null) {
+					/*
+					Particularly if PROCs without execution JCL are being processed, 
+					encountering a symbolic without its resolved text is possible.
+					*/
+				} else {
+					outLine.replace(start, end, s.getResolvedText());
+				}
 			}
 			this.LOGGER.finest(this.myName + " outLine after  = |" + outLine + "|");
 			out.println(outLine);
