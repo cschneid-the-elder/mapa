@@ -29,7 +29,7 @@ procJCL : commandStatement? procStatement? (commandStatement | commentStatement 
 
 procStatement : SS procName? PROC definedSymbolicParameters* ;
 
-defineSymbolicParameter : PROC_PARM_NAME EQUAL keywordOrSymbolic? ;
+defineSymbolicParameter : (PROC_PARM_NAME EQUAL keywordOrSymbolic?) ;
 
 definedSymbolicParameters : defineSymbolicParameter+ ;
 
