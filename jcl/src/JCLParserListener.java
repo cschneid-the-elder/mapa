@@ -1367,6 +1367,16 @@ public interface JCLParserListener extends ParseTreeListener {
 	 */
 	void exitDdParmSEGMENT(JCLParser.DdParmSEGMENTContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link JCLParser#ddParmSEP}.
+	 * @param ctx the parse tree
+	 */
+	void enterDdParmSEP(JCLParser.DdParmSEPContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#ddParmSEP}.
+	 * @param ctx the parse tree
+	 */
+	void exitDdParmSEP(JCLParser.DdParmSEPContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link JCLParser#ddParmSPACE}.
 	 * @param ctx the parse tree
 	 */

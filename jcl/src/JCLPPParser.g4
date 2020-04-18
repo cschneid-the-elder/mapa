@@ -313,6 +313,7 @@ ddParmRLS : RLS EQUAL keywordOrSymbolic ;
 ddParmROACCESS : ROACCESS EQUAL singleOrMultipleValue ;
 ddParmSECMODEL : SECMODEL EQUAL singleOrMultipleValue ;
 ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
+ddParmSEP : SEP EQUAL singleOrMultipleValue ;
 ddParmSPACE : SPACE EQUAL (
     (LPAREN
         ddParmSPACE_unit? (
@@ -410,6 +411,10 @@ ddParmUNIT : UNIT EQUAL (
             ddParmUNIT_count? 
                 ddParmUNIT_defer? 
                     ddParmUNIT_smshonor?
+    RPAREN) |
+	(LPAREN
+        ddParmUNIT_unit? 
+            ddParmSEP
     RPAREN)
   ) ;
 

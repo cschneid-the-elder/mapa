@@ -1647,6 +1647,18 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDdParmSEP(JCLParser.DdParmSEPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDdParmSEP(JCLParser.DdParmSEPContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDdParmSPACE(JCLParser.DdParmSPACEContext ctx) { }
 	/**
 	 * {@inheritDoc}
