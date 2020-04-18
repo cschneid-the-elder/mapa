@@ -27,9 +27,12 @@ public class PPSetSymbolValue {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		LOGGER.fine(this.getClass().getName() + " instantiation with " + ctx.getClass().getName());
 		this.ctx = ctx;
 		this.setType = SetTypeOfSymbolValue.SYS;
 		if (ctx.keywordOrSymbolic() == null) {
+			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
+			LOGGER.finest(this.getClass().getName() + " SET_PARM_NAME().getSymbol().getText() = |" + ctx.SET_PARM_NAME().getSymbol().getText() + "|");
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -43,12 +46,15 @@ public class PPSetSymbolValue {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		LOGGER.fine(this.getClass().getName() + " instantiation with " + ctx.getClass().getName());
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
 		this.setType = SetTypeOfSymbolValue.SET;
 		if (ctx.keywordOrSymbolic() == null) {
+			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
+			LOGGER.finest(this.getClass().getName() + " SET_PARM_NAME().getSymbol().getText() = |" + ctx.SET_PARM_NAME().getSymbol().getText() + "|");
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -63,6 +69,7 @@ public class PPSetSymbolValue {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		LOGGER.fine(this.getClass().getName() + " instantiation with " + ctx.getClass().getName());
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
@@ -70,6 +77,8 @@ public class PPSetSymbolValue {
 		this.procBeingExecuted = procBeingExecuted;
 		this.setType = SetTypeOfSymbolValue.EXEC;
 		if (ctx.keywordOrSymbolic() == null) {
+			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
+			LOGGER.finest(this.getClass().getName() + " EXEC_PROC_PARM().getSymbol().getText() = |" + ctx.EXEC_PROC_PARM().getSymbol().getText() + "|");
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -83,12 +92,15 @@ public class PPSetSymbolValue {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		LOGGER.fine(this.getClass().getName() + " instantiation with " + ctx.getClass().getName());
 		this.ctx = ctx;
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
 		this.setType = SetTypeOfSymbolValue.PROC;
 		if (ctx.keywordOrSymbolic() == null) {
+			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
+			LOGGER.finest(this.getClass().getName() + " PROC_PARM_NAME().getSymbol().getText() = |" + ctx.PROC_PARM_NAME().getSymbol().getText() + "|");
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -109,11 +121,19 @@ public class PPSetSymbolValue {
 
 		this.LOGGER.finest(myName + " resolveParms notThisSet = |" + notThisSet + "|");
 
-		this.kywd.resolveParms(notThisSet);
+		if (this.kywd == null) {
+			this.LOGGER.finest(myName + " this.kywd == null");
+		} else {
+			this.kywd.resolveParms(notThisSet);
+		}
 	}
 
 	public Boolean isParameterized() {
-		return this.kywd.isParameterized();
+		if (this.kywd == null) {
+			return false;
+		} else {
+			return this.kywd.isParameterized();
+		}
 	}
 
 	public SetTypeOfSymbolValue getSetType() {
@@ -218,7 +238,11 @@ public class PPSetSymbolValue {
 	}
 
 	public String getResolvedValue() {
-		return kywd.getResolvedValue();
+		if (this.kywd == null) {
+			return new String();
+		} else {
+			return kywd.getResolvedValue();
+		}
 	}
 
 	private String getParmNameForSetOperationContext() {
