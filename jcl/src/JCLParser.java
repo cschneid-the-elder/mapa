@@ -200,12 +200,14 @@ public class JCLParser extends Parser {
 		VOL_PRIVATE=725, VOL_RETAIN=726, VOL_SER=727, VOL_REF=728, VOL_SER_NB=729, 
 		VOL_SER1_SQUOTE=730, VOL_SER1_PAREN_SQUOTE=731, VOL_SER1_PAREN_WS=732, 
 		VOL_SER1_PAREN_NEWLINE=733, VOL_RETAIN_WS=734, VOL_RETAIN_NEWLINE=735, 
-		VOL_SEQ_NB=736, VOL_SEQ_NB_WS=737, VOL_SEQ_NB_NEWLINE=738, VOL_COUNT=739, 
-		VOL_COUNT_WS=740, VOL_COUNT_NEWLINE=741, VOL_SER2_WS=742, VOL_SER2_NEWLINE=743, 
-		VOL_SER3_SQUOTE=744, VOL_SER3_PAREN_SQUOTE=745, VOL_SER3_PAREN_WS=746, 
-		VOL_SER3_PAREN_NEWLINE=747, VOL_REF1_SQUOTE=748, VOL_REF1_NEWLINE=749, 
-		VOL_REF1_COMMA_NEWLINE=750, VOL_REF1_COMMA_WS=751, VOL_REF1_WS=752, VOL_REF2_SQUOTE=753, 
-		DOT_DFLT=754, EQUAL_DFLT=755, LPAREN_DFLT=756, RPAREN_DFLT=757;
+		VOL_SEQ_NB=736, VOL_SEQ_NB_WS=737, VOL_SEQ_NB_NEWLINE=738, VOL_SER4_SQUOTE=739, 
+		VOL_SER4_PAREN_SQUOTE=740, VOL_SER4_PAREN_WS=741, VOL_SER4_PAREN_NEWLINE=742, 
+		VOL_COUNT=743, VOL_COUNT_WS=744, VOL_COUNT_NEWLINE=745, VOL_SER2_WS=746, 
+		VOL_SER2_NEWLINE=747, VOL_SER3_SQUOTE=748, VOL_SER3_PAREN_SQUOTE=749, 
+		VOL_SER3_PAREN_WS=750, VOL_SER3_PAREN_NEWLINE=751, VOL_REF1_SQUOTE=752, 
+		VOL_REF1_NEWLINE=753, VOL_REF1_COMMA_NEWLINE=754, VOL_REF1_COMMA_WS=755, 
+		VOL_REF1_WS=756, VOL_REF2_SQUOTE=757, DOT_DFLT=758, EQUAL_DFLT=759, LPAREN_DFLT=760, 
+		RPAREN_DFLT=761;
 	public static final int
 		RULE_startRule = 0, RULE_jcl = 1, RULE_execJCL = 2, RULE_procJCL = 3, 
 		RULE_procStatement = 4, RULE_defineSymbolicParameter = 5, RULE_definedSymbolicParameters = 6, 
@@ -541,8 +543,8 @@ public class JCLParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, "'.'", "'='", 
-			"'('", "')'"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, "'.'", "'='", "'('", "')'"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -713,7 +715,8 @@ public class JCLParser extends Parser {
 			"VOL_RETAIN", "VOL_SER", "VOL_REF", "VOL_SER_NB", "VOL_SER1_SQUOTE", 
 			"VOL_SER1_PAREN_SQUOTE", "VOL_SER1_PAREN_WS", "VOL_SER1_PAREN_NEWLINE", 
 			"VOL_RETAIN_WS", "VOL_RETAIN_NEWLINE", "VOL_SEQ_NB", "VOL_SEQ_NB_WS", 
-			"VOL_SEQ_NB_NEWLINE", "VOL_COUNT", "VOL_COUNT_WS", "VOL_COUNT_NEWLINE", 
+			"VOL_SEQ_NB_NEWLINE", "VOL_SER4_SQUOTE", "VOL_SER4_PAREN_SQUOTE", "VOL_SER4_PAREN_WS", 
+			"VOL_SER4_PAREN_NEWLINE", "VOL_COUNT", "VOL_COUNT_WS", "VOL_COUNT_NEWLINE", 
 			"VOL_SER2_WS", "VOL_SER2_NEWLINE", "VOL_SER3_SQUOTE", "VOL_SER3_PAREN_SQUOTE", 
 			"VOL_SER3_PAREN_WS", "VOL_SER3_PAREN_NEWLINE", "VOL_REF1_SQUOTE", "VOL_REF1_NEWLINE", 
 			"VOL_REF1_COMMA_NEWLINE", "VOL_REF1_COMMA_WS", "VOL_REF1_WS", "VOL_REF2_SQUOTE", 
@@ -32250,7 +32253,7 @@ public class JCLParser extends Parser {
 
 	private static final int _serializedATNSegments = 2;
 	private static final String _serializedATNSegment0 =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u02f7\u0f93\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u02fb\u0f93\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -32706,7 +32709,7 @@ public class JCLParser extends Parser {
 		"\2\u00bc\u00bc\u02c8\u02c9\4\2\u00bc\u00bc\u02ca\u02ca\4\2\u00bc\u00bc"+
 		"\u02cb\u02cb\4\2\u00bc\u00bc\u02cc\u02cc\4\2\u00bc\u00bc\u02cd\u02cd\3"+
 		"\2bc\4\2\u00bc\u00bc\u02d7\u02d7\4\2\u00bc\u00bc\u02d8\u02d8\4\2\u00bc"+
-		"\u00bc\u02e2\u02e2\4\2\u00bc\u00bc\u02e5\u02e5\3\2\u010b\u0112\4\2efj"+
+		"\u00bc\u02e2\u02e2\4\2\u00bc\u00bc\u02e9\u02e9\3\2\u010b\u0112\4\2efj"+
 		"k\5\2hipp\u00c5\u00c5\3\2\u01db\u01e2\2\u10ca\2\u0382\3\2\2\2\4\u038a"+
 		"\3\2\2\2\6\u038c\3\2\2\2\b\u03b8\3\2\2\2\n\u03d7\3\2\2\2\f\u03e2\3\2\2"+
 		"\2\16\u03e8\3\2\2\2\20\u03ec\3\2\2\2\22\u03f1\3\2\2\2\24\u03f5\3\2\2\2"+
