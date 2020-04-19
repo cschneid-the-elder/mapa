@@ -1410,6 +1410,10 @@ QS_SQUOTE : SQUOTE
             popMode();
             popMode();
             break;
+        case VOL_SER4_MODE :
+			popMode();
+			popMode();
+			break;
         default :
             popMode();
             break;
@@ -2248,12 +2252,38 @@ VOL_RETAIN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_SEQ_NB_MODE ;
 
+/*
+I am unhappy with this VOL_SEQ_NB_SER and VOL_SER4_MODE.  It seems contrary
+to the IBM documentation for the VOL parameter of the DD statement, but 
+the Hercules emulator has JCL in SYS1.PROCLIB(DLBALLOC) that contains 
+VOL=(,RETAIN,SER=&DLIB1) and volume 8 of the ABCs of z/OS System Programming 
+has JCL that contains VOL=(,RETAIN,SER=SHARK) so here we are.
+*/
+VOL_SEQ_NB_SER : VOL_SER ->type(VOL_SER),pushMode(VOL_SER4_MODE) ;
 VOL_SEQ_NB_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN),pushMode(VOL_COUNT_MODE) ;
 VOL_SEQ_NB : NUM_LIT_DFLT ;
 VOL_SEQ_NB_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 VOL_SEQ_NB_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode,popMode,popMode ;
 VOL_SEQ_NB_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
 VOL_SEQ_NB_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
+
+mode VOL_SER4_MODE ;
+
+VOL_SER4_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
+VOL_SER4_NB : VOL_SER_NB ->type(VOL_SER_NB),popMode ;
+VOL_SER4_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC),popMode ;
+VOL_SER4_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
+VOL_SER4_LPAREN : LPAREN_DFLT ->type(LPAREN),pushMode(VOL_SER4_PAREN_MODE) ;
+
+mode VOL_SER4_PAREN_MODE ;
+
+VOL_SER4_PAREN : VOL_SER_NB ->type(VOL_SER_NB) ;
+VOL_SER4_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
+VOL_SER4_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
+VOL_SER4_PAREN_RPAREN : RPAREN_DFLT ->type(RPAREN),popMode,popMode ;
+VOL_SER4_PAREN_COMMA : COMMA_DFLT ->type(COMMA),channel(HIDDEN) ;
+VOL_SER4_PAREN_WS : [ ]+ ->channel(HIDDEN),pushMode(COMMA_WS_MODE) ;
+VOL_SER4_PAREN_NEWLINE : NEWLINE ->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE) ;
 
 mode VOL_COUNT_MODE ;
 
