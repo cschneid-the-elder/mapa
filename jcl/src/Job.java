@@ -129,8 +129,11 @@ public class Job {
 		Handle single entry non-parenthesized JCLLIB...
 		// JCLLIB ORDER=SIKOZU
 		*/
-		List<JCLParser.KeywordOrSymbolicContext> kywdCtxList = 
-			ctx.singleOrMultipleValue().keywordOrSymbolic();
+		ArrayList<JCLParser.KeywordOrSymbolicContext> kywdCtxList = new ArrayList<>();
+		if (ctx.singleOrMultipleValue().keywordOrSymbolic() == null) {
+		} else {
+			kywdCtxList.addAll(ctx.singleOrMultipleValue().keywordOrSymbolic());
+		}
 
 		this.LOGGER.finest(
 			this.myName 
@@ -140,20 +143,16 @@ public class Job {
 			);
 
 		this.jcllibCtx = ctx;
-		if (kywdCtxList == null || kywdCtxList.size() == 0) {
+		if (kywdCtxList.size() == 0) {
 			/*
 			Handle parenthesized JCLLIB
 			// JCLLIB ORDER=(SIKOZU)
 			...or...
 			// JCLLIB ORDER=(SIKOZU,JOOL)
 			*/
-			kywdCtxList = ctx.singleOrMultipleValue().parenList().keywordOrSymbolic();
-			this.LOGGER.finest(
-				this.myName 
-				+ " addJcllib ctx.singleOrMultipleValue().parenList().keywordOrSymbolic() = |" 
-				+ ctx.singleOrMultipleValue().parenList().keywordOrSymbolic()
-				+ "|"
-				);
+			for (JCLParser.ParenListContext p: ctx.singleOrMultipleValue().parenList()) {
+				kywdCtxList.addAll(p.keywordOrSymbolic());
+			}
 		}
 
 		for (JCLParser.KeywordOrSymbolicContext k: kywdCtxList) {

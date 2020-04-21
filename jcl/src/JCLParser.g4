@@ -205,16 +205,19 @@ ddParmDEST : DEST EQUAL  (
   )
   ;
 ddParmDIAGNS : DIAGNS EQUAL keywordOrSymbolic ;
-ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? ddParmDISP_NORMAL_TERM? ddParmDISP_ABNORMAL_TERM? RPAREN? ;
+ddParmDISP : DISP EQUAL singleOrMultipleValue ;
 ddParmDISP_STATUS : DISP_MOD | DISP_NEW | DISP_OLD | DISP_SHR | SYMBOLIC ;
 ddParmDISP_NORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDISP_ABNORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDLM : DLM EQUAL keywordOrSymbolic ;
+/*
 ddParmDSID : DSID EQUAL (
     DSID_VALUE | 
     SYMBOLIC |
     (LPAREN (DSID_VALUE | SYMBOLIC) (DSID_VERIFIED | SYMBOLIC)? RPAREN)
   ) ;
+*/
+ddParmDSID : DSID EQUAL singleOrMultipleValue ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL keywordOrSymbolic ;
 ddParmDSNAME : (DSNAME | DSN) EQUAL datasetName ;
 ddParmDSNTYPE : DSNTYPE EQUAL singleOrMultipleValue ;
@@ -310,6 +313,7 @@ ddParmROACCESS : ROACCESS EQUAL singleOrMultipleValue ;
 ddParmSECMODEL : SECMODEL EQUAL singleOrMultipleValue ;
 ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
 ddParmSEP : SEP EQUAL singleOrMultipleValue ;
+/*
 ddParmSPACE : SPACE EQUAL (
     (LPAREN
         ddParmSPACE_unit? (
@@ -339,7 +343,8 @@ ddParmSPACE_track_address : (NUM_LIT | SYMBOLIC) ;
 ddParmSPACE_rlse : (RLSE | SYMBOLIC) ;
 ddParmSPACE_characteristics : (CONTIG | MXIG | ALX | SYMBOLIC) ;
 ddParmSPACE_round : (ROUND | SYMBOLIC) ;
-
+*/
+ddParmSPACE : SPACE EQUAL singleOrMultipleValue ; 
 
 ddParmSPIN : SPIN EQUAL singleOrMultipleValue ;
 
@@ -376,6 +381,15 @@ ddParmUCS_code : (UCS_CODE | SYMBOLIC) ;
 ddParmUCS_fold : (UCS_FOLD | SYMBOLIC) ;
 ddParmUCS_verify : (UCS_VERIFY | SYMBOLIC) ;
 
+ddParmUNIT : UNIT EQUAL 
+    singleOrMultipleValue
+  ;
+
+ddParmVOLUME : (VOL | VOLUME) EQUAL
+    singleOrMultipleValue
+  ;
+
+
 /*
 Here's the thing with symbolic parameters: they can be abused because
 their values are substituted early in the interpretation process.
@@ -397,7 +411,6 @@ UNIT=(CART,3,DEFER)
 ...which is syntactically correct.  And so this sort of behavior
 must be allowed for herein, however much we may wish otherwise.
 
-*/
 
 ddParmUNIT : UNIT EQUAL (
     ddParmUNIT_unit |
@@ -418,7 +431,8 @@ ddParmUNIT_unit : (UNIT_NUMBER | UNIT_DEVICE_TYPE | UNIT_GROUP_NAME | SYMBOLIC+)
 ddParmUNIT_count : (UNIT_COUNT | UNIT_ALLOC | SYMBOLIC+) ;
 ddParmUNIT_defer : (UNIT_DEFER | SYMBOLIC+) ;
 ddParmUNIT_smshonor : (UNIT_SMSHONOR | SYMBOLIC+) ;
-
+*/
+/*
 ddParmVOLUME : (VOL | VOLUME) EQUAL (
     ddParmVOLUME_private |
     ddParmVOLUME_SER |
@@ -445,6 +459,7 @@ ddParmVOLUME_private : (VOL_PRIVATE | SYMBOLIC) ;
 ddParmVOLUME_retain : (VOL_RETAIN | SYMBOLIC) ;
 ddParmVOLUME_seq_nb : (VOL_SEQ_NB | SYMBOLIC) ;
 ddParmVOLUME_count : (VOL_COUNT | SYMBOLIC) ;
+*/
 
 joblibStatement : SS JOBLIB DD joblibParameter+ ;
 
@@ -836,6 +851,12 @@ PARM=(VAL)
 PARM=(VAL,VAL,VAL)
 PARM=((VAL,VAL),VAL)
 PARM=(VAL,(VAL,VAL))
+PARM=(,(,VAL))
+PARM=A=B
+PARM=(VAL,A=B)
+PARM=(VAL,,A=B)
+PARM=(,,,A=B)
+PARM=(,VAL,,A=B)
 
 */
 singleOrMultipleValue : (
@@ -844,18 +865,26 @@ singleOrMultipleValue : (
     (LPAREN
       keywordOrSymbolic?
       COMMA
-      parenList
+      (parenList | embeddedEquality)*
+      (COMMA+ keywordOrSymbolic)*
     RPAREN) |
     (LPAREN
       keywordOrSymbolic? (COMMA keywordOrSymbolic)+
     RPAREN) |
     (LPAREN+
       keywordOrSymbolic (COMMA keywordOrSymbolic RPAREN?)*
-    RPAREN+)
-
+    RPAREN+) |
+    (LPAREN
+      COMMA*
+      (keywordOrSymbolic | embeddedEquality)
+      (COMMA+ (keywordOrSymbolic | embeddedEquality))*
+    RPAREN) | 
+	embeddedEquality
   ) ;
 
-parenList : (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN) ;
+parenList : (LPAREN COMMA* keywordOrSymbolic (COMMA+ keywordOrSymbolic)* RPAREN) ;
+/*parenList : (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN) ;*/
+embeddedEquality : (keywordOrSymbolic EQUAL singleOrMultipleValue) ;
 
 jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement | jes2SetupStatement | jes2SignoffStatement |  jes2SignonStatement | jes2XEQStatement | jes2XMITStatement) ;
 
