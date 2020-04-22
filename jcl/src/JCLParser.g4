@@ -245,6 +245,8 @@ ddParmKEYENCD1 : KEYENCD1 EQUAL keywordOrSymbolic ;
 ddParmKEYENCD2 : KEYENCD2 EQUAL keywordOrSymbolic ;
 ddParmKEYLEN : KEYLEN EQUAL keywordOrSymbolic ;
 ddParmKEYOFF : KEYOFF EQUAL keywordOrSymbolic ;
+ddParmLABEL : LABEL EQUAL singleOrMultipleValue ;
+/*
 ddParmLABEL : LABEL EQUAL (
     LABEL_SEQUENCE |
     ddParmRETPD |
@@ -261,7 +263,7 @@ ddParmLABEL : LABEL EQUAL (
         (ddParmRETPD | ddParmEXPDT)?
     RPAREN)
   ) ;
-
+*/
 /*
 It's not really a dataset name in the LGSTREAM parameter, but it
 does match the same pattern.
