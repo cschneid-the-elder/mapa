@@ -257,18 +257,19 @@ public class PPJclStep {
 		this.LOGGER.finer(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
 
 		this.incomingSetSym.addAll(setSym);
-		// TODO procExecuted & pgmExecuted resolveParms(mergedSetSym)
 
-		if (this.proc != null) {
+		if (this.proc == null) {
+			this.pgmExecuted.resolveParms(setSym);
+			for (PPDdStatementAmalgamation dda: ddStatements) {
+				dda.resolveParms(setSym);
+			}
+		} else {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);
+			this.procExecuted.resolveParms(this.incomingSetSym);
 			this.proc.resolveParms(mergedSetSym);
 			for (PPDdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(mergedSetSym);
-			}
-		} else {
-			for (PPDdStatementAmalgamation dda: ddStatements) {
-				dda.resolveParms(setSym);
 			}
 		}
 	}

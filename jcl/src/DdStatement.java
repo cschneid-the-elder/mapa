@@ -27,6 +27,7 @@ public class DdStatement {
 	private Hashtable<String, DatasetNameWrapper> dsnParms = new Hashtable<>();
 	private DispWrapper dispw = null;
 	private DsidWrapper dsidw = null;
+	private int ordNb = 0;
 
 	public static ArrayList<DdStatement> bunchOfThese(
 			JCLParser.DdStatementAmalgamationContext ddStmtAmlgnCtx
@@ -37,16 +38,19 @@ public class DdStatement {
 			, TheCLI CLI
 			) {
 		ArrayList<DdStatement> dds = new ArrayList<>();
+		int count = 0;
 
 		if (ddStmtAmlgnCtx.ddStatement() == null) {
 		} else {
-			dds.add(new DdStatement(ddStmtAmlgnCtx.ddStatement(), procName, ddName, fileName, LOGGER, CLI));
+			count++;
+			dds.add(new DdStatement(ddStmtAmlgnCtx.ddStatement(), procName, ddName, fileName, LOGGER, CLI, count));
 		}
 
 		if (ddStmtAmlgnCtx.ddStatementConcatenation() == null) {
 		} else {
 			for (JCLParser.DdStatementConcatenationContext ddcCtx: ddStmtAmlgnCtx.ddStatementConcatenation()) {
-				dds.add(new DdStatement(ddcCtx, procName, ddName, fileName, LOGGER, CLI));
+				count++;
+				dds.add(new DdStatement(ddcCtx, procName, ddName, fileName, LOGGER, CLI, count));
 			}
 		}
 
@@ -60,10 +64,11 @@ public class DdStatement {
 			, String fileName
 			, Logger LOGGER
 			, TheCLI CLI
+			, int ordNb
 			) {
 		this.ddStmtCtx = ddStmtCtx;
 		this.ddSplatCtx = ddStmtCtx.ddParmASTERISK_DATA();
-		this.initialize(procName, ddName, fileName, LOGGER, CLI);
+		this.initialize(procName, ddName, fileName, LOGGER, CLI, ordNb);
 		this.initializeTediously(this.ddStmtCtx.ddParameter());
 	}
 
@@ -74,10 +79,11 @@ public class DdStatement {
 			, String fileName
 			, Logger LOGGER
 			, TheCLI CLI
+			, int ordNb
 			) {
 		this.ddStmtConcatCtx = ddStmtConcatCtx;
 		this.ddSplatCtx = ddStmtConcatCtx.ddParmASTERISK_DATA();
-		this.initialize(procName, ddName, fileName, LOGGER, CLI);
+		this.initialize(procName, ddName, fileName, LOGGER, CLI, ordNb);
 		this.initializeTediously(this.ddStmtConcatCtx.ddParameter());
 	}
 
@@ -87,6 +93,7 @@ public class DdStatement {
 			, String fileName
 			, Logger LOGGER
 			, TheCLI CLI
+			, int ordNb
 			) {
 		this.myName = this.getClass().getName();
 		this.procName = procName;
@@ -95,6 +102,7 @@ public class DdStatement {
 		this.ddName = ddName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
+		this.ordNb = ordNb;
 	}
 
 	private void initializeTediously(List<JCLParser.DdParameterContext> ddParms) {
@@ -751,18 +759,22 @@ public class DdStatement {
 		csvOut.append(",");
 		csvOut.append(this.uuid.toString());
 		csvOut.append(",");
+		csvOut.append(Integer.valueOf(this.ordNb).toString());
+		csvOut.append(",");
 
 		if (dsnParms.get("DSNAME") != null) {
 			csvOut.append(dsnParms.get("DSNAME").getResolvedValue());
 		} else if (this.ddStmtSysoutCtx != null) {
 			csvOut.append("SYSOUT");
-		} else if (this.ddSplatCtx != null) {
+		} else if (this.ddSplatCtx != null && this.ddSplatCtx.size() != 0) {
 			csvOut.append("*");
 		} else {
 			csvOut.append("_NONAME_");
 		}
 
-		if (this.dispw != null) {
+		if (this.dispw == null) {
+			csvOut.append(",NEW,DELETE,DELETE");
+		} else {
 			csvOut.append(",");
 			csvOut.append(this.dispw.getStatus());
 			csvOut.append(",");
