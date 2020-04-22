@@ -514,7 +514,7 @@ public class PPProc {
 				if (end < outLine.length() && outLine.substring(end, end + 1).equals(".")) {
 					end++;
 				}
-				if (s.getResolvedText() == null) {
+				if (s.getResolvedText() == null || s.getResolvedText().length() == 0) {
 					/*
 					Particularly if PROCs without execution JCL are being processed, 
 					encountering a symbolic without its resolved text is possible.

@@ -532,7 +532,7 @@ DD_DATACLAS : D A T A C L A S ->type(DATACLAS),channel(HIDDEN),pushMode(KYWD_VAL
 DD_DCB : D C B ->type(DCB),channel(HIDDEN),pushMode(DCB_MODE) ;
 DD_DDNAME : D D N A M E ->type(DDNAME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DEST : D E S T ->type(DEST),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DD_DISP : D I S P ->type(DISP),channel(HIDDEN),pushMode(DISP_MODE) ;
+DD_DISP : D I S P ->type(DISP),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DLM : D L M ->type(DLM),channel(HIDDEN),pushMode(DLM_MODE) ;
 DD_DSID : D S I D ->type(DSID),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_DSKEYLBL : D S K E Y L B L ->type(DSKEYLBL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -612,9 +612,9 @@ DD_SYMLIST : S Y M L I S T
 DD_SYSOUT : S Y S O U T ->type(SYSOUT),channel(HIDDEN),pushMode(SYSOUT_MODE) ;
 DD_TERM : T E R M ->type(TERM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_UCS : U C S ->type(UCS),channel(HIDDEN),pushMode(UCS_MODE) ;
-DD_UNIT : U N I T ->type(UNIT),channel(HIDDEN),pushMode(UNIT_MODE) ;
-DD_VOL : V O L ->type(VOL),channel(HIDDEN),pushMode(VOL_MODE) ;
-DD_VOLUME : V O L U M E ->type(VOLUME),channel(HIDDEN),pushMode(VOL_MODE) ;
+DD_UNIT : U N I T ->type(UNIT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_VOL : V O L ->type(VOL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DD_VOLUME : V O L U M E ->type(VOLUME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 
 DD_BFALN : B F A L N ->type(BFALN),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_BFTEK : B F T E K ->type(BFTEK),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
@@ -1587,8 +1587,8 @@ DATA_PARM_MODE_LIKE : DD_LIKE ->type(LIKE),channel(HIDDEN),pushMode(KYWD_VAL_MOD
 DATA_PARM_MODE_LRECL : DD_LRECL ->type(LRECL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_REFDD : DD_REFDD ->type(REFDD),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_MODE : DD_MODE ->type(MODE),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-DATA_PARM_MODE_VOL : DD_VOL ->type(VOL),channel(HIDDEN),pushMode(VOL_MODE) ;
-DATA_PARM_MODE_VOLUME : DD_VOLUME ->type(VOLUME),channel(HIDDEN),pushMode(VOL_MODE) ;
+DATA_PARM_MODE_VOL : DD_VOL ->type(VOL),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_VOLUME : DD_VOLUME ->type(VOLUME),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL),channel(HIDDEN) ;
 DATA_PARM_MODE_SYMBOLS : DD_SYMBOLS
     {

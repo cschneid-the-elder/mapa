@@ -8,9 +8,8 @@ public class DispWrapper {
 	private TheCLI CLI = null;
 	private String myName = null;
 	private JCLParser.DdParmDISPContext ctx = null;
-	private JCLParser.DdParmDISP_STATUSContext statusCtx = null;
-	private JCLParser.DdParmDISP_NORMAL_TERMContext normalTermCtx = null;
-	private JCLParser.DdParmDISP_ABNORMAL_TERMContext abnormalTermCtx = null;
+	private JCLParser.SingleOrMultipleValueContext somvCtx = null;
+	private SingleOrMultipleValueWrapper somv = null;
 	private String procName = null;
 	private Boolean inProc = null;
 	private String status = null;
@@ -33,71 +32,179 @@ public class DispWrapper {
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.statusCtx = this.ctx.ddParmDISP_STATUS();
-		this.normalTermCtx = this.ctx.ddParmDISP_NORMAL_TERM();
-		this.abnormalTermCtx = this.ctx.ddParmDISP_ABNORMAL_TERM();
+		if (this.ctx == null) {
+		} else {
+			this.somvCtx = this.ctx.singleOrMultipleValue();
+			this.somv = new SingleOrMultipleValueWrapper(this.somvCtx, this.procName, this.LOGGER, this.CLI);
+		}
 		this.setStatus();
 		this.setNormalTerm();
 		this.setAbnormalTerm();
 	}
 
 	private void setStatus() {
-		if (this.statusCtx == null) {
+
+		if (this.somvCtx == null) {
 			this.status = "NEW";
-		} else if (this.statusCtx.DISP_MOD() != null) {
-			this.status = this.statusCtx.DISP_MOD().getSymbol().getText();
-		} else if (this.statusCtx.DISP_NEW() != null) {
-			this.status = this.statusCtx.DISP_NEW().getSymbol().getText();
-		} else if (this.statusCtx.DISP_OLD() != null) {
-			this.status = this.statusCtx.DISP_OLD().getSymbol().getText();
-		} else if (this.statusCtx.DISP_SHR() != null) {
-			this.status = this.statusCtx.DISP_SHR().getSymbol().getText();
-		} else if (this.statusCtx.SYMBOLIC() != null) {
-			this.status = this.statusCtx.SYMBOLIC().getSymbol().getText();
+			return;
 		}
 
+		/*
+		1	DISP=something
+		3	DISP=(something)
+		4	DISP=(,something)
+		5	DISP=(something,something)
+		5	DISP=(,,something)
+		6	DISP=(,something,something)
+		6	DISP=(something,,something)
+		7	DISP=(something,something,something)
+		*/
+
+		ArrayList<ParameterString> ps = this.somv.getParameterStrings();
+		switch(ps.size()) {
+			case 1 :
+				this.status = ps.get(0).getValue();
+				break;
+			case 3 :
+				this.status = ps.get(1).getValue();
+				break;
+			case 4 :
+				this.status = "NEW";
+				break;
+			case 5 :
+			case 6 :
+				if (ps.get(1).getValue().equals(",")) {
+					this.status = "NEW";
+				} else {
+					this.status = ps.get(1).getValue();
+				}
+				break;
+			case 7 :
+				this.status = ps.get(1).getValue();
+				break;
+			default :
+				this.LOGGER.severe(
+					this.myName 
+					+ " setStatus() ps.size() = " 
+					+ ps.size() 
+					+ " must be {1,3,4,5,6,7} ps = |" 
+					+ ps 
+					+ "|"
+					);
+				break;
+		}
 	}
 
 	private void setNormalTerm() {
-		if (this.normalTermCtx == null) {
-			if (this.status.equals("NEW")) {
-				this.normalTerm = "DELETE";
-			} else {
-				this.normalTerm = "KEEP";
-			}
-		} else if (this.normalTermCtx.DISP_CATLG() != null) {
-			this.normalTerm = this.normalTermCtx.DISP_CATLG().getSymbol().getText();
-		} else if (this.normalTermCtx.DISP_DELETE() != null) {
-			this.normalTerm = this.normalTermCtx.DISP_DELETE().getSymbol().getText();
-		} else if (this.normalTermCtx.DISP_KEEP() != null) {
-			this.normalTerm = this.normalTermCtx.DISP_KEEP().getSymbol().getText();
-		} else if (this.normalTermCtx.DISP_PASS() != null) {
-			this.normalTerm = this.normalTermCtx.DISP_PASS().getSymbol().getText();
-		} else if (this.normalTermCtx.DISP_UNCATLG() != null) {
-			this.normalTerm = this.normalTermCtx.DISP_UNCATLG().getSymbol().getText();
-		} else if (this.normalTermCtx.SYMBOLIC() != null) {
-			this.normalTerm = this.normalTermCtx.SYMBOLIC().getSymbol().getText();
+		if (this.somvCtx == null) {
+			this.normalTerm = "DELETE";
+			return;
 		}
 
+		/*
+		1	DISP=something
+		3	DISP=(something)
+		4	DISP=(,something)
+		5	DISP=(something,something)
+		5	DISP=(,,something)
+		6	DISP=(,something,something)
+		6	DISP=(something,,something)
+		7	DISP=(something,something,something)
+		*/
+
+		ArrayList<ParameterString> ps = this.somv.getParameterStrings();
+		switch(ps.size()) {
+			case 1 :
+			case 3 :
+				if (this.status.equals("NEW")) {
+					this.normalTerm = "DELETE";
+				} else {
+					this.normalTerm = "KEEP";
+				}
+				break;
+			case 4 :
+				this.normalTerm = ps.get(2).getValue();
+				break;
+			case 5 :
+				if (ps.get(1).getValue().equals(",")) {
+					if (ps.get(2).getValue().equals(",")) {
+						this.normalTerm = "DELETE";
+					}
+				} else {
+					this.normalTerm = ps.get(3).getValue();
+				}
+				break;
+			case 6 :
+				if (ps.get(2).getValue().equals(",")) {
+					if (this.status.equals("NEW")) {
+						this.normalTerm = "DELETE";
+					} else {
+						this.normalTerm = "KEEP";
+					}
+				} else {
+					this.normalTerm = ps.get(2).getValue();
+				}
+				break;
+			case 7 :
+				this.normalTerm = ps.get(3).getValue();
+				break;
+			default :
+				this.LOGGER.severe(
+					this.myName 
+					+ " setNormalTerm() ps.size() = " 
+					+ ps.size() 
+					+ " must be {1,3,4,5,6,7} ps = |" 
+					+ ps 
+					+ "|"
+					);
+				break;
+		}
 	}
 
 	private void setAbnormalTerm() {
-		if (this.abnormalTermCtx == null) {
-			this.abnormalTerm = this.normalTerm;
-		} else if (this.abnormalTermCtx.DISP_CATLG() != null) {
-			this.abnormalTerm = this.abnormalTermCtx.DISP_CATLG().getSymbol().getText();
-		} else if (this.abnormalTermCtx.DISP_DELETE() != null) {
-			this.abnormalTerm = this.abnormalTermCtx.DISP_DELETE().getSymbol().getText();
-		} else if (this.abnormalTermCtx.DISP_KEEP() != null) {
-			this.abnormalTerm = this.abnormalTermCtx.DISP_KEEP().getSymbol().getText();
-		} else if (this.abnormalTermCtx.DISP_PASS() != null) {
-			this.abnormalTerm = this.abnormalTermCtx.DISP_PASS().getSymbol().getText();
-		} else if (this.abnormalTermCtx.DISP_UNCATLG() != null) {
-			this.abnormalTerm = this.abnormalTermCtx.DISP_UNCATLG().getSymbol().getText();
-		} else if (this.abnormalTermCtx.SYMBOLIC() != null) {
-			this.abnormalTerm = this.abnormalTermCtx.SYMBOLIC().getSymbol().getText();
+		if (this.somvCtx == null) {
+			this.abnormalTerm = "DELETE";
+			return;
 		}
 
+		/*
+		1	DISP=something
+		3	DISP=(something)
+		4	DISP=(,something)
+		5	DISP=(something,something)
+		5	DISP=(,,something)
+		6	DISP=(,something,something)
+		6	DISP=(something,,something)
+		7	DISP=(something,something,something)
+		*/
+
+		ArrayList<ParameterString> ps = this.somv.getParameterStrings();
+		switch(ps.size()) {
+			case 1 :
+			case 3 :
+			case 4 :
+				this.abnormalTerm = this.normalTerm;
+				break;
+			case 5 :
+				this.abnormalTerm = ps.get(3).getValue();
+				break;
+			case 6 :
+				this.abnormalTerm = ps.get(4).getValue();
+				break;
+			case 7 :
+				this.abnormalTerm = ps.get(5).getValue();
+				break;
+			default :
+				this.LOGGER.severe(
+					this.myName 
+					+ " setAbnormalTerm() ps.size() = " 
+					+ ps.size() 
+					+ " must be {1,3,4,5,6,7} ps = |" 
+					+ ps 
+					+ "|"
+					);
+				break;
+		}
 	}
 
 	public String getStatus() {
@@ -113,7 +220,17 @@ public class DispWrapper {
 	}
 
 	public String toString() {
-		StringBuffer buf = new StringBuffer(this.myName + " status = |" + this.status + "| normalTerm = |" + this.normalTerm + "| abnormalTerm = |" + this.abnormalTerm + "|");
+		StringBuffer buf = 
+			new StringBuffer(
+				this.myName 
+				+ " status = |" 
+				+ this.status 
+				+ "| normalTerm = |" 
+				+ this.normalTerm 
+				+ "| abnormalTerm = |" 
+				+ this.abnormalTerm 
+				+ "|"
+				);
 
 		return buf.toString();
 	}

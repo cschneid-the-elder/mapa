@@ -119,6 +119,10 @@ public class KeywordOrSymbolicWrapper {
 		kvw.sort(Comparator.comparingLong(KeywordValueWrapper::getSortKey));
 	}
 
+	public ArrayList<KeywordValueWrapper> getKeywordValueWrappers() {
+		return this.kvw;
+	}
+
 	public String getValue() {
 		StringBuffer buf = new StringBuffer();
 
@@ -162,6 +166,10 @@ public class KeywordOrSymbolicWrapper {
 		}
 
 		return buf.toString();
+	}
+
+	public long getSortKey() {
+		return this.kvw.get(0).getSortKey();
 	}
 
 	public String toString() {

@@ -475,9 +475,9 @@ DD_DATACLAS : D A T A C L A S ->type(DATACLAS),pushMode(KYWD_VAL_MODE) ;
 DD_DCB : D C B ->type(DCB),pushMode(DCB_MODE) ;
 DD_DDNAME : D D N A M E ->type(DDNAME),pushMode(KYWD_VAL_MODE) ;
 DD_DEST : D E S T ->type(DEST),pushMode(KYWD_VAL_MODE) ;
-DD_DISP : D I S P ->type(DISP),pushMode(DISP_MODE) ;
+DD_DISP : D I S P ->type(DISP),pushMode(KYWD_VAL_MODE) ;
 DD_DLM : D L M ->type(DLM),pushMode(DLM_MODE) ;
-DD_DSID : D S I D ->type(DSID),pushMode(DSID_MODE) ;
+DD_DSID : D S I D ->type(DSID),pushMode(KYWD_VAL_MODE) ;
 DD_DSKEYLBL : D S K E Y L B L ->type(DSKEYLBL),pushMode(KYWD_VAL_MODE) ;
 DD_DSN : D S N ->type(DSN),pushMode(KYWD_VAL_MODE) ;
 DD_DSNAME : D S N A M E ->type(DSNAME),pushMode(KYWD_VAL_MODE) ;
@@ -538,7 +538,7 @@ much now.  But still tolerated by the JCL interpreter.
 
 */
 DD_SEP : S E P ->type(SEP),pushMode(KYWD_VAL_MODE) ;
-DD_SPACE : S P A C E ->type(SPACE),pushMode(SPACE_MODE) ;
+DD_SPACE : S P A C E ->type(SPACE),pushMode(KYWD_VAL_MODE) ;
 DD_SPIN : S P I N ->type(SPIN),pushMode(KYWD_VAL_MODE) ;
 DD_STORCLAS : S T O R C L A S ->type(STORCLAS),pushMode(KYWD_VAL_MODE) ;
 DD_SUBSYS : S U B S Y S ->type(SUBSYS),pushMode(KYWD_VAL_MODE) ;
@@ -547,9 +547,9 @@ DD_SYMLIST : S Y M L I S T ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 DD_SYSOUT : S Y S O U T ->type(SYSOUT),pushMode(SYSOUT_MODE) ;
 DD_TERM : T E R M ->type(TERM),pushMode(KYWD_VAL_MODE) ;
 DD_UCS : U C S ->type(UCS),pushMode(UCS_MODE) ;
-DD_UNIT : U N I T ->type(UNIT),pushMode(UNIT_MODE) ;
-DD_VOL : V O L ->type(VOL),pushMode(VOL_MODE) ;
-DD_VOLUME : V O L U M E ->type(VOLUME),pushMode(VOL_MODE) ;
+DD_UNIT : U N I T ->type(UNIT),pushMode(KYWD_VAL_MODE) ;
+DD_VOL : V O L ->type(VOL),pushMode(KYWD_VAL_MODE) ;
+DD_VOLUME : V O L U M E ->type(VOLUME),pushMode(KYWD_VAL_MODE) ;
 
 DD_BFALN : B F A L N ->type(BFALN),pushMode(KYWD_VAL_MODE) ;
 DD_BFTEK : B F T E K ->type(BFTEK),pushMode(KYWD_VAL_MODE) ;
@@ -1294,15 +1294,15 @@ DATA_PARM_MODE_BUFNO : DD_BUFNO ->type(BUFNO),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DCB : DD_DCB ->type(DCB),pushMode(DCB_MODE) ;
 DATA_PARM_MODE_DIAGNS : DD_DIAGNS ->type(DIAGNS),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DLM : DD_DLM ->type(DLM),pushMode(DLM_MODE) ;
-DATA_PARM_MODE_DSID : DD_DSID ->type(DSID),pushMode(DSID_MODE) ;
+DATA_PARM_MODE_DSID : DD_DSID ->type(DSID),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DSN : DD_DSN ->type(DSNAME),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_DSNAME : DD_DSNAME ->type(DSNAME),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_LIKE : DD_LIKE ->type(LIKE),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_LRECL : DD_LRECL ->type(LRECL),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_REFDD : DD_REFDD ->type(REFDD),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_MODE : DD_MODE ->type(MODE),pushMode(KYWD_VAL_MODE) ;
-DATA_PARM_MODE_VOL : DD_VOL ->type(VOL),pushMode(VOL_MODE) ;
-DATA_PARM_MODE_VOLUME : DD_VOLUME ->type(VOLUME),pushMode(VOL_MODE) ;
+DATA_PARM_MODE_VOL : DD_VOL ->type(VOL),pushMode(KYWD_VAL_MODE) ;
+DATA_PARM_MODE_VOLUME : DD_VOLUME ->type(VOLUME),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 DATA_PARM_MODE_SYMBOLS : DD_SYMBOLS ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ;
 DATA_PARM_MODE_SYMLIST : DD_SYMLIST ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
@@ -1850,6 +1850,7 @@ KYWD_VAL_WS : [ ]+
 mode KYWD_VAL_PAREN_MODE ;
 
 KYWD_VAL_PAREN_COMMA : COMMA_DFLT ->type(COMMA) ;
+KYWD_VAL_PAREN_EQUAL : EQUAL_DFLT ->type(EQUAL) ;
 KYWD_VAL_PAREN_SYMBOLIC : SYMBOLIC ->type(SYMBOLIC) ;
 KYWD_VAL_PAREN_VALUE : KEYWORD_VALUE ->type(KEYWORD_VALUE) ;
 KYWD_VAL_PAREN_SQUOTE : '\'' ->channel(HIDDEN),pushMode(QS_MODE) ;
