@@ -499,7 +499,7 @@ DD_KEYENCD1 : K E Y E N C D '1' ->type(KEYENCD1),pushMode(KYWD_VAL_MODE) ;
 DD_KEYENCD2 : K E Y E N C D '2' ->type(KEYENCD2),pushMode(KYWD_VAL_MODE) ;
 DD_KEYLEN : K E Y L E N ->type(KEYLEN),pushMode(KYWD_VAL_MODE) ;
 DD_KEYOFF : K E Y O F F ->type(KEYOFF),pushMode(KYWD_VAL_MODE) ;
-DD_LABEL : L A B E L ->type(LABEL),pushMode(LABEL_MODE) ;
+DD_LABEL : L A B E L ->type(LABEL),pushMode(KYWD_VAL_MODE) ;
 DD_LGSTREAM : L G S T R E A M ->type(LGSTREAM),pushMode(KYWD_VAL_MODE) ;
 DD_LIKE : L I K E ->type(LIKE),pushMode(KYWD_VAL_MODE) ;
 DD_LRECL : L R E C L ->type(LRECL),pushMode(KYWD_VAL_MODE) ;
