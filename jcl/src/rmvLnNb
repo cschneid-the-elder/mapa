@@ -1,11 +1,12 @@
 #! /usr/bin/awk -f
 
-# example of removing line numbers from JCL
+# example of removing line numbers and extraneous continuation
+# characters in column 72 from JCL
 
 {
 
 if (length($0) == 80 && $1 != "/*SIGNON") {
-    new = substr($0, 1, 72) "        ";
+    new = substr($0, 1, 71) "         ";
     print new;
 } else {
     print $0 ;

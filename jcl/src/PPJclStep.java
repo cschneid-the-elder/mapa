@@ -258,7 +258,7 @@ public class PPJclStep {
 
 		this.incomingSetSym.addAll(setSym);
 
-		if (this.proc == null) {
+		if (this.isExecPgm()) {
 			this.pgmExecuted.resolveParms(setSym);
 			for (PPDdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(setSym);
@@ -267,7 +267,7 @@ public class PPJclStep {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);
 			this.procExecuted.resolveParms(this.incomingSetSym);
-			this.proc.resolveParms(mergedSetSym);
+			//this.proc.resolveParms(mergedSetSym);
 			for (PPDdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(mergedSetSym);
 			}
