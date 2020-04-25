@@ -256,6 +256,8 @@ public static void main(String[] args) throws Exception {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
+			Path aPath = baseDir.toPath();
+			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
 		*/
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =

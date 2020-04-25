@@ -293,7 +293,7 @@ public class SetSymbolValue {
 
 				In this instance the parm TALYN is set to nothing.
 			*/
-			theText = new String();
+			theText = "";
 		} else {
 			theText = kywd.getValue();
 		}
@@ -314,7 +314,7 @@ public class SetSymbolValue {
 				set in the PROC statement for the proc MOYA is nullified.  Any value
 				set in a SET statement prior to this EXEC statement is nullified.
 			*/
-			theText = new String();
+			theText = "";
 		} else {
 			theText = kywd.getValue();
 		}
@@ -334,7 +334,7 @@ public class SetSymbolValue {
 				In this instance the parm TALYN is set to nothing.  Any value
 				set in a SET statement prior to execution of the proc MOYA is nullified.
 			*/
-			theText = new String();
+			theText = "";
 		} else {
 			theText = kywd.getValue();
 		}

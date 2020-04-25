@@ -8,8 +8,8 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents a JCL PPJob which is
-used in PreProcessing to resolve parms and INCLUDEs.
+This class represents a JCL PPJob which is used in PreProcessing to 
+resolve parms and INCLUDEs.
 
 <p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
 may be nested and may contain SET statements for symbolics.  On most (all?) 
@@ -32,7 +32,8 @@ those in ASET.  And the member being INCLUDEd may be parameterized.
 
 <p>Code is included to iteratively resolve INCLUDE statements by resolving 
 symbolics to the extent known, rewrite the JCL, and then to re-lex-and-parse 
-the rewritten JCL, continuing until all INCLUDEs are resolved.
+the rewritten JCL, continuing until all INCLUDEs are resolved or the only
+remaining INCLUDEs cannot be resolved.
 
 <p>This is accomplished via two separate grammars, one used by the preprocessing 
 code to resolve symbolics and INCLUDEs, the other to lex and parse the 
@@ -50,6 +51,11 @@ public class PPJob {
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private JCLPPParser.JobCardContext jobCardCtx = null;
+	/**
+	The jcllibCtx variable is used in setting the value(s) in the jcllib
+	variable.  It is preserved because it may be useful for other purposes
+	as yet undreamt of.
+	*/
 	private JCLPPParser.JcllibStatementContext jcllibCtx = null;
 	private ArrayList<PPKeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private ArrayList<PPProc> procs  = new ArrayList<>();
@@ -58,8 +64,7 @@ public class PPJob {
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
 	private ArrayList<PPSymbolic> sym = new ArrayList<>();
 	/**
-	This collection of PPOp instances is only used in the generated PPJob
-	class;  PPOp is a generic representation of most JCL statements that are
+	PPOp is a generic representation of most JCL statements that are
 	not needed in preprocessing other than for resolving INCLUDEs and 
 	symbolics;  The primary function of PPOp is to hold symbolics that must be
 	iteratively resolved as the JCL is rewritten. 
@@ -84,6 +89,7 @@ public class PPJob {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		// TODO add new constructor with just baseDir, and another with that and tmpJobDir, tmpProcDir
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
 		this.ordNb = ordNb;
@@ -257,18 +263,30 @@ public class PPJob {
 		}
 	}
 
+	/**
+	Used by listeners to add instream procs encountered to this "owning" job.
+	*/
 	public void addInstreamProc(PPProc iProc) {
 		this.procs.add(iProc);
 	}
 
+	/**
+	Used by listeners to add SET statements to this "owning" job.
+	*/
 	public void addSetSym(PPSetSymbolValue setSym) {
 		this.setSym.add(setSym);
 	}
 
+	/**
+	Used by listeners to add INCLUDE statements encountered to this "owning" job.
+	*/
 	public void addInclude(PPIncludeStatement include) {
 		this.includes.add(include);
 	}
 
+	/**
+	Used by listeners to add JCL steps encountered to this "owning" job.
+	*/
 	public void addJclStep(PPJclStep step) {
 		this.nbSteps++;
 		step.setOrdNb(this.nbSteps);
@@ -277,6 +295,9 @@ public class PPJob {
 		step.setJcllib(this.jcllib);
 	}
 
+	/**
+	Used by listeners to add generic JCL operations encountered to this "owning" job.
+	*/
 	public void addOp(PPOp anOp) {
 		this.op.add(anOp);
 	}
@@ -800,6 +821,8 @@ public class PPJob {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
+			Path aPath = baseDir.toPath();
+			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
 		*/
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =
