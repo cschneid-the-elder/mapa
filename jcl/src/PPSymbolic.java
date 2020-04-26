@@ -4,7 +4,13 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-
+/**
+This class represents a single symbolic parameter, encapsulating
+the logic necessary to correctly substitute its resolved value
+given a list of system symbolics, symbolics whose value is set by
+a SET statement, symbolics whose value is set on an EXEC statement,
+and symbolics whose value is set on a PROC statement.
+*/
 public class PPSymbolic {
 
 	private Logger LOGGER = null;
@@ -92,7 +98,15 @@ public class PPSymbolic {
 	}
 
 	public void setResolvedValue(PPSetSymbolValue s) {
-		this.LOGGER.finer(myName + " setResolvedValue text = |" + this.getText() + "| setResolvedValue(" + s.getParmValue() + ")");
+		//TODO make private
+		this.LOGGER.finer(
+			myName 
+			+ " setResolvedValue text = |" 
+			+ this.getText() 
+			+ "| setResolvedValue(" 
+			+ s.getParmValue() 
+			+ ")"
+			);
 		this.resolvedText = s.getParmValue();
 		this.ssv = s;
 	}
@@ -105,6 +119,13 @@ public class PPSymbolic {
 		}
 	}
 
+	/**
+	Resolve the value of this PPSymbolic according to the collection of
+	PPSetSymbolValue instances passed in.
+
+	<p>This is complex because the JCL rules for symbolic substitution are
+	complex.
+	*/
 	public void resolve(ArrayList<PPSetSymbolValue> sets) {
 		this.LOGGER.finer(myName + " resolve this: |" + this + "| sets: " + sets + "|");
 

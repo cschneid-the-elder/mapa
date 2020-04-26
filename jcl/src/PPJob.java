@@ -302,6 +302,13 @@ public class PPJob {
 		this.op.add(anOp);
 	}
 
+	/**
+	Used in iterativelyResolveIncludes() to set the newly parsed PPJob instance
+	ordNb to this PPJob instance's ordNb.
+
+	<p>The ordNb is used in the job name suffix which allows subsequent
+	instances to iteratively resolve parameters.
+	*/
 	public void setOrdNb(int ordNb) {
 		this.ordNb = ordNb;
 	}
@@ -325,17 +332,20 @@ public class PPJob {
 		return sb;
 	}
 
+	/**
+	Resolve INCLUDE statements that are parameterized, i.e. that take the
+	form <code>INCLUDE MEMBER=LIB&ENV</code> where the value of the symbolic
+	parameter ENV is set at execution time.
+
+	<p>The symbolics in CLI used by this method come from a list provided at
+	execution time.  These would typically be static and/or dynamic system
+	symbols such as SYSCLONE or SYSUID.
+	
+	<p>These symbolics are merged with the relevant symbolics (those whose SET
+	statement come before the include being processed) from this job.
+	*/
 	public void resolveParmedIncludes() {
 		this.LOGGER.finer(this.myName + " resolveParmedIncludes " + this);
-
-		/*
-			The symbolics (setSym) in CLI used by this method come from a list provided at
-			execution time.  These would typically be static and/or dynamic system
-			symbols such as SYSCLONE or SYSUID.
-
-			These symbolics are merged with the relevant symbolics (those whose SET
-			statement come before the include being processed) from this job.
-		*/
 
 		for (PPIncludeStatement i: this.includes) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
@@ -493,9 +503,14 @@ public class PPJob {
 		return libs;
 	}
 
+	/**
+	This method is a final transition step between preprocessing, in which
+	INCLUDEs, symbolic parameters, and PROCs are resolved through an iterative
+	process, and processing the rewritten resolved JCL into objects which
+	can be queried and write themselves in a hopefully meaningful fashion
+	to a stream.
+	*/
 	public File rewriteWithParmsResolved() throws IOException {
-		/*
-		*/
 		this.LOGGER.finer(
 			this.myName 
 			+ " rewriteWithParmsResolved job = |" 
@@ -509,6 +524,7 @@ public class PPJob {
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		//TODO set file attributes if posix conforming
 		File tmp = new File(
 			this.tmpJobDir.toString() 
 			+ File.separator 
@@ -568,6 +584,10 @@ public class PPJob {
 		return tmp;
 	}
 
+	/**
+	Return a collection of PPSymbolic to be used when rewriting this
+	PPJob with each of its symbolic parameters resolved to their set value.
+	*/
 	private ArrayList<PPSymbolic> collectSymbolics() {
 		this.LOGGER.finer(this.myName + " collectSymbolics");
 
@@ -589,6 +609,20 @@ public class PPJob {
 		return symbolics;
 	}
 
+	/**
+	Iteratively lex/parse, resolve INCLUDE statement symbolic parameters, 
+	and rewrite this job until all INCLUDEs are resolved or all that
+	remains are unresolvable INCLUDEs.
+
+	<p>A JCL INCLUDE member can contain an INCLUDE statement; further, a JCL
+	INCLUDE member can be composed of symbolic parameters; further yet, a
+	JCL INCLUDE member can contain SET statements for symbolic parameters;
+	and so parameterized JCL INCLUDE statements have their symbolic parameters
+	resolved, are rewritten to a temporary file which is lexed and parsed and
+	has its parameterized JCL INCLUDE statements' symbolic parameters resolved,
+	and so on, iteratively, until all INCLUDEs are resolved or all that
+	remains are unresolvable INCLUDEs.
+	*/
 	public PPJob iterativelyResolveIncludes(File initialJobFile) throws IOException {
 		this.LOGGER.finer(
 			this.myName 
@@ -639,7 +673,16 @@ public class PPJob {
 		return aJob;
 	}
 
-	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
+	/**
+	The generated ANTLR lexer does its lexing, then the ANTLR generated
+	parser does its parsing, and then the listener walks the parse tree
+	looking for items of interest.
+	*/
+	public void lexAndParse(
+				ArrayList<PPJob> jobs
+				, ArrayList<PPProc> procs
+				, String fileName
+				) throws IOException {
 		this.LOGGER.finer(
 			this.myName 
 			+ " lexAndParse jobs = |" 
@@ -667,16 +710,33 @@ public class PPJob {
 
 	}
 
+	/**
+	This method rewrites the job represented by this instance with any
+	INCLUDE statements replaced by the contents of the member they point to.
+
+	TODO make private.
+	*/
 	public File rewriteJobWithIncludesResolved() throws IOException {
-		/*
-			At this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		this.LOGGER.finer(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " rewriteJobWithIncludesResolved job = |" 
+			+ this 
+			+ "| tmpJobDir = |" 
+			+ this.tmpJobDir 
+			+ "|"
+			);
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
+		//TODO set file attributes if posix conforming
+		File tmp = new File(
+			this.tmpJobDir.toString() 
+			+ File.separator 
+			+ this.myName 
+			+ "-" 
+			+ this.getJobName() 
+			+ "-" + this.getUUID()
+			);
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -700,36 +760,36 @@ public class PPJob {
 		return tmp;
 	}
 
+	/**
+	Rewrite one job from the current file, separating any instream procs into
+	their own files to be processed later.
+
+	<p>An initial file could contain multiple jobs, each of which could
+	contain multiple instream procs.
+	*/
 	public File rewriteJobAndSeparateInstreamProcs(File baseDir) throws IOException {
-		/*
-			Rewrite one job from the current file, separating any instream procs into their own
-			files to be processed later.
-
-			After this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		/*
-			the plan...
-
-			for each job, read a record from its file
-				if the record number resides in an instream proc, skip it
-				if the record number corresponds to a resolved include,
-					skip writing the include, instead read the file it
-					refers to and add that to the output in place of the include
-				if the record number corresponds to a jclstep _not_ in stepsInNeedOfProc,
-					open a new LineNumberReader on the jclstep's file
-					read the proc, writing records to a new file
-					if the record number corresponds to a resolved include,
-						skip writing the include, instead read the file it
-						refers to and add that to the output in place of the include
-				write the record read to output
-		*/
-		this.LOGGER.finer(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " rewriteJobAndSeparateInstreamProcs job = |" 
+			+ this 
+			+ "| baseDir = |" 
+			+ baseDir 
+			+ "|"
+			);
 
 		this.setTmpDirs(baseDir);
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
+		//TODO set file attributes if posix conforming
+		File tmp = new File(
+			this.tmpJobDir.toString() 
+			+ File.separator 
+			+ this.myName 
+			+ "-" 
+			+ this.getJobName() 
+			+ "-" 
+			+ this.getUUID()
+			);
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -773,6 +833,12 @@ public class PPJob {
 		return tmp;
 	}
 
+	/**
+	Locate the file pointed to by the passed INCLUDE statement and write
+	its contents to the passed PrintWriter.
+
+	TODO make private.
+	*/
 	public Boolean writeTheIncludeContent(
 							PPIncludeStatement i
 							, PrintWriter out
@@ -802,6 +868,22 @@ public class PPJob {
 		return foundIt;
 	}
 
+	/**
+	Search what corresponds to the libraries that JES would search for
+	the passed file name.
+
+	<p>The first location being searched is contrived - it's where the
+	instream procs were written by rewriteJobAndSeparateInstreamProcs().
+
+	<p>The second set of locations are what correspond to the JCLLIB
+	ORDER= libraries (if any were supplied).
+
+	<p>The last set of locations are what correspond to the various PROCxx
+	statements used at JES startup.
+
+	<p>Processing continues if the passed file name cannot be found, but
+	a warning is issued which should indicate the results will be incomplete.
+	*/
 	public String searchProcPathsFor(String fileName) throws IOException {
 		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 		if (aFile.exists()) {

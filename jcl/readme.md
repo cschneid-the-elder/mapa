@@ -61,6 +61,58 @@ This was built on ubuntu 16.04 LTS with ANTLR 4.7.2, openjdk version "1.8.0_252"
 
 Much of my career was spent doing mainframe development and developer support.  If the Java looks odd, well I last used Java 1.2 for development.  If the ANTLR grammar looks odd, I'm not a compiler person nor am I an ANTLR person; I've never created a grammar before and JCL is _weird_ even to those of us who spent many years coding in it.
 
+### Why This Is Complicated
+
+Consider a job...
+
+    //PLURALZA JOB NOTIFY=&SYSUID
+    //*
+    // JCLLIB ORDER=(LIB1,LIB2)
+    //*
+    //PROC1    PROC ENV=P
+    //*
+    //PS01     EXEC PGM=BILLING&TYPE
+    //STEPLIB  INCLUDE MEMBER=EXLIB&ENV
+    //INPUT01  DD  DISP=SHR,DSN=&ENV.BILLING&TYPE..INPUT
+    //OUTPUT01 DD  DISP=(,CATLG),
+    //             DSN=&ENV.BILLING&TYPE..OUTPUT,
+    //             LRECL=80,
+    //             AVGREC=K,
+    //             RECFM=FB,
+    //             SPACE=(80,(1,1),RLSE)
+    //*
+    //         PEND
+    //*
+    //JS01     EXEC PROC=PROC1,ENV=S,TYPE=01
+    //*
+    //JS02     EXEC PROC=PROC1,ENV=Q,TYPE=01
+    //*
+    //JS03     EXEC PROC=PROC2,PROCNB=1
+    //*
+
+...where EXLIBS contains...
+
+    //STEPLIB  DD  DISP=SHR,DSN=S.LOADLIB
+    //         INCLUDE MEMBER=EEXLIBQ
+
+...and EEXLIBQ contains...
+
+    //STEPLIB  DD  DISP=SHR,DSN=Q.LOADLIB
+    //         INCLUDE MEMBER=EEXLIBP
+
+...and EEXLIBP contains...
+
+    //         DD  DISP=SHR,DSN=P.LOADLIB
+
+...and PROC2 contains...
+
+    //AEIOU    PROC
+    //*
+    //PS01     EXEC PROC=PROC&PROCNB
+    //*
+
+This is a relatively simple example.
+
 ### What This Won't Do
 
 Currently unsupported is the exerable JCL construct...

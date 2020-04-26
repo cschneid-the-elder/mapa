@@ -420,7 +420,8 @@ public class PPProc {
 	symbols such as SYSCLONE or SYSUID.
 	
 	<p>These symbolics are merged with the relevant symbolics (those whose SET
-	statement come before the include being processed) from this job.
+	statement come before the include being processed or are set on the PROC
+	statement) from this proc.
 	*/
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> execSetSym) {
 		this.LOGGER.finer(
