@@ -250,6 +250,11 @@ public class PPProc {
 		}
 	}
 
+	/**
+	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
+
+	TODO make private.
+	*/
 	public ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
@@ -453,6 +458,12 @@ public class PPProc {
 	<p>These values may be set as command line parameters or may be in the
 	SET statements in the execution JCL.  INCLUDE members may also contain
 	SET statements.
+
+	<p>There is a great deal of delegation resulting from the relatively
+	complex logic to resolve symbolics being encapsulated in the PPSymbolic 
+	class.  PPSymbolic is contained in PPKeywordValueWrapper which is contained
+	in PPKeywordOrSymbolicWrapper which may be contained in 
+	PPSingleOrMultipleValueWrapper.
 	*/
 	public void resolveParms(ArrayList<PPSetSymbolValue> execSetSym) {
 		LOGGER.finer(this.myName + " resolveParms " + this);
@@ -479,9 +490,9 @@ public class PPProc {
 
 	}
 
+	/**
+	*/
 	public File rewriteWithParmsResolved() throws IOException {
-		/*
-		*/
 		this.LOGGER.finer(
 			this.myName 
 			+ " "

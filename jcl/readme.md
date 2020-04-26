@@ -59,7 +59,7 @@ This was built on ubuntu 16.04 LTS with ANTLR 4.7.2, openjdk version "1.8.0_252"
 
 ### I Am Not A Java Person
 
-Much of my career was spent doing mainframe development and developer support.  If the Java looks odd, well I last used Java 1.2 for development.  If the ANTLR grammar looks odd, I've never created a grammar before and JCL is _weird_ even to those of us who spent many years coding in it.
+Much of my career was spent doing mainframe development and developer support.  If the Java looks odd, well I last used Java 1.2 for development.  If the ANTLR grammar looks odd, I'm not a compiler person nor am I an ANTLR person; I've never created a grammar before and JCL is _weird_ even to those of us who spent many years coding in it.
 
 ### What This Won't Do
 

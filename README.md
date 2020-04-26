@@ -19,7 +19,7 @@ _could_ happen, not what _does_ happen.  Consider...
 
     if a = b then call subroutine x
 
-...static analysis has no way of knowing if a is never equal to b and thus subroutine x is never called.
+...static analysis has no way of knowing if a is never equal to b due to some business rule and thus subroutine x is never called.
 
 ### Runtime Behavior Analysis
 
@@ -27,7 +27,7 @@ Runtime behavior analysis looks at what actually happens as code executes, often
 
     if a = b then call subroutine x
 
-...runtime behavior analysis only knows that a was never equal to b _in any of the runs analyzed_ and thus subroutine x was never called.
+...runtime behavior analysis only knows that a was never equal to b _in any of the runs analyzed_ and thus subroutine x was never called.  No assertion can be made that subroutine x will never be called.
 
 ### Both Have Their Uses
 

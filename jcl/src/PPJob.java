@@ -352,17 +352,27 @@ public class PPJob {
 		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
+	/**
+	To the extent possible, resolve symbolic parameters to their values
+	as indicated by corresponding PPSetSymbolValue instances.
+
+	<p>The symbolics (setSym) in CLI used by this method come from a list 
+	provided at execution time.  These would typically be static and/or 
+	dynamic system symbols such as SYSCLONE or SYSUID.
+
+	<p>These symbolics are merged with the relevant symbolics (those whose 
+	SET statement come before the step being processed) from this job.
+
+	<p>There is a great deal of delegation resulting from the relatively
+	complex logic to resolve symbolics being encapsulated in the PPSymbolic 
+	class.  PPSymbolic is contained in PPKeywordValueWrapper which is contained
+	in PPKeywordOrSymbolicWrapper which may be contained in 
+	PPSingleOrMultipleValueWrapper.
+
+	TODO make private, remove from Demo01, execute from this.rewriteWithParmsResolved()
+	*/
 	public void resolveParms() {
 		this.LOGGER.finer(this.myName + " resolveParms " + this);
-
-		/*
-			The symbolics (setSym) in CLI used by this method come from a list provided at
-			execution time.  These would typically be static and/or dynamic system
-			symbols such as SYSCLONE or SYSUID.
-
-			These symbolics are merged with the relevant symbolics (those whose SET
-			statement come before the step being processed) from this job.
-		*/
 
 		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(this.CLI.PPsetSym);
 		allSym.addAll(this.setSym);
@@ -468,6 +478,11 @@ public class PPJob {
 		return new ArrayList<PPIncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
+	/**
+	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
+
+	TODO make private.
+	*/
 	public ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
