@@ -256,6 +256,8 @@ ddParmKEYENCD1 : KEYENCD1 EQUAL keywordOrSymbolic ;
 ddParmKEYENCD2 : KEYENCD2 EQUAL keywordOrSymbolic ;
 ddParmKEYLEN : KEYLEN EQUAL keywordOrSymbolic ;
 ddParmKEYOFF : KEYOFF EQUAL keywordOrSymbolic ;
+ddParmLABEL : LABEL EQUAL singleOrMultipleValue ;
+/*
 ddParmLABEL : LABEL EQUAL (
     LABEL_SEQUENCE |
     ddParmRETPD |
@@ -272,7 +274,7 @@ ddParmLABEL : LABEL EQUAL (
         (ddParmRETPD | ddParmEXPDT)?
     RPAREN)
   ) ;
-
+*/
 /*
 It's not really a dataset name in the LGSTREAM parameter, but it
 does match the same pattern.
@@ -291,6 +293,10 @@ ddParmOPTCD : OPTCD EQUAL keywordOrSymbolic ;
 ddParmOUTLIM : OUTLIM EQUAL keywordOrSymbolic ;
 ddParmOUTPUT : OUTPUT EQUAL singleOrMultipleValue ;
 ddParmPATH : PATH EQUAL keywordOrSymbolic ;
+ddParmPATHDISP : PATHDISP EQUAL singleOrMultipleValue ;
+ddParmPATHMODE : PATHMODE EQUAL singleOrMultipleValue ;
+ddParmPATHOPTS : PATHOPTS EQUAL singleOrMultipleValue ;
+/*
 ddParmPATHDISP : PATHDISP EQUAL (
     PATHDISP_NORMAL | 
     (LPAREN PATHDISP_NORMAL PATHDISP_ABNORMAL? RPAREN) |
@@ -310,6 +316,7 @@ ddParmPATHOPTS : PATHOPTS EQUAL  (
         (PATHOPTS_VALUE | SYMBOLIC)+
     RPAREN)
   ) ;
+*/
 ddParmPCI : PCI EQUAL singleOrMultipleValue ;
 ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;

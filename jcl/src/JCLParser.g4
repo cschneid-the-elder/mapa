@@ -282,6 +282,10 @@ ddParmOPTCD : OPTCD EQUAL keywordOrSymbolic ;
 ddParmOUTLIM : OUTLIM EQUAL keywordOrSymbolic ;
 ddParmOUTPUT : OUTPUT EQUAL singleOrMultipleValue ;
 ddParmPATH : PATH EQUAL keywordOrSymbolic ;
+ddParmPATHDISP : PATHDISP EQUAL singleOrMultipleValue ;
+ddParmPATHMODE : PATHMODE EQUAL singleOrMultipleValue ;
+ddParmPATHOPTS : PATHOPTS EQUAL singleOrMultipleValue ;
+/*
 ddParmPATHDISP : PATHDISP EQUAL (
     PATHDISP_NORMAL | 
     (LPAREN PATHDISP_NORMAL PATHDISP_ABNORMAL? RPAREN) |
@@ -301,6 +305,7 @@ ddParmPATHOPTS : PATHOPTS EQUAL  (
         (PATHOPTS_VALUE | SYMBOLIC)+
     RPAREN)
   ) ;
+*/
 ddParmPCI : PCI EQUAL singleOrMultipleValue ;
 ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
