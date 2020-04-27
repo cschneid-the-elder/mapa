@@ -119,6 +119,14 @@ public class PPKeywordOrSymbolicWrapper {
 		kvw.sort(Comparator.comparingLong(PPKeywordValueWrapper::getSortKey));
 	}
 
+	/**
+	Given a collection of PPSetSymbolValue instances, apply them to the 
+	PPSymbolic instances kept in PPKeywordValueWrapper instances to resolve
+	them to their intended values.
+
+	<p>The real work is all done in PPSymbolic, between here and there is
+	just delegation.
+	*/
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
 		this.LOGGER.fine(myName + " resolveParms this = |" + this + "| sets = |" + sets + "|");
 

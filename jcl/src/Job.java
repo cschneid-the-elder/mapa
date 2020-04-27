@@ -36,7 +36,8 @@ those in ASET.  And the member being INCLUDEd may be parameterized.
 
 <p>Code is included to iteratively resolve INCLUDE statements by resolving 
 symbolics to the extent known, rewrite the JCL, and then to re-lex-and-parse 
-the rewritten JCL, continuing until all INCLUDEs are resolved.
+the rewritten JCL, continuing until all INCLUDEs are resolved or the only
+remaining INCLUDEs cannot be resolved.
 
 <p>This is accomplished via two separate grammars, one used by the preprocessing 
 code to resolve symbolics and INCLUDEs, the other to lex and parse the 
@@ -61,14 +62,6 @@ public class Job {
 	private ArrayList<IncludeStatement> includes = new ArrayList<>();
 	private ArrayList<JclStep> steps = new ArrayList<>();
 	private ArrayList<Symbolic> sym = new ArrayList<>();
-	/**
-	This collection of PPOp instances is only used in the generated PPJob
-	class;  PPOp is a generic representation of most JCL statements that are
-	not needed in preprocessing other than for resolving INCLUDEs and 
-	symbolics;  The primary function of PPOp is to hold symbolics that must be
-	iteratively resolved as the JCL is rewritten. 
-	*/
-	private ArrayList<PPOp> op = new ArrayList<>();
 	private String fileName = null;
 	private String jobName = null;
 	private int startLine = -1;

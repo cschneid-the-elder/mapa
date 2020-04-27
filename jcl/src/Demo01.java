@@ -1,3 +1,9 @@
+
+/*
+THIS SOFTWARE IS PROVIDED "AS IS" AND ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*/
+
 import java.util.*;
 import java.time.*;
 import java.time.format.*;
@@ -256,6 +262,8 @@ public static void main(String[] args) throws Exception {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
+			Path aPath = baseDir.toPath();
+			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
 		*/
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =

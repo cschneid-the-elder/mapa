@@ -14,6 +14,8 @@ The demonstration application is just that, an attempt to demonstrate that the g
 
 ### How To Run
 
+Download the .jar files.
+
     usage: Demo01 [-file <arg>] [-fileList <arg>] [-help] [-include <arg>]
            [-includeList <arg>] [-logLevel <arg>] [-outcsv <arg>] [-outtree
            <arg>] [-sanity <arg>] [-saveTemp] [-set <arg>] [-setList <arg>]
@@ -51,6 +53,70 @@ So, you might execute...
 
 ...after downloading the contents of SYS1.PROCLIB to some directory and running them through the src/rmvLnNb awk script, and storing the output in directory /home/cschneid/SYS1.PROCLIB.
 
+### Bear In Mind
+
+The Demo01 application will create several temporary files for each JCL member you parse.  Unless you specify the `-saveTemp` option, and it's just there for debugging purposes, these files will be deleted automatically on normal termination of the JVM.
+
+### Build/Execution Environment
+
+This was built on ubuntu 16.04 LTS with ANTLR 4.7.2, openjdk version "1.8.0_252", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+
+### I Am Not A Java Person
+
+Much of my career was spent doing mainframe development and developer support.  If the Java looks odd, well I last used Java 1.2 for development.  If the ANTLR grammar looks odd, I'm not a compiler person nor am I an ANTLR person; I've never created a grammar before and JCL is _weird_ even to those of us who spent many years coding in it.
+
+### Why This Is Complicated
+
+Consider a job...
+
+    //PLURALZA JOB NOTIFY=&SYSUID
+    //*
+    // JCLLIB ORDER=(LIB1,LIB2)
+    //*
+    //PROC1    PROC ENV=P
+    //*
+    //PS01     EXEC PGM=BILLING&TYPE
+    //STEPLIB  INCLUDE MEMBER=EXLIB&ENV
+    //INPUT01  DD  DISP=SHR,DSN=&ENV.BILLING&TYPE..INPUT
+    //OUTPUT01 DD  DISP=(,CATLG),
+    //             DSN=&ENV.BILLING&TYPE..OUTPUT,
+    //             LRECL=80,
+    //             AVGREC=K,
+    //             RECFM=FB,
+    //             SPACE=(80,(1,1),RLSE)
+    //*
+    //         PEND
+    //*
+    //JS01     EXEC PROC=PROC1,ENV=S,TYPE=01
+    //*
+    //JS02     EXEC PROC=PROC1,ENV=Q,TYPE=01
+    //*
+    //JS03     EXEC PROC=PROC2,PROCNB=1
+    //*
+
+...where EXLIBS contains...
+
+    //STEPLIB  DD  DISP=SHR,DSN=S.LOADLIB
+    //         INCLUDE MEMBER=EEXLIBQ
+
+...and EEXLIBQ contains...
+
+    //STEPLIB  DD  DISP=SHR,DSN=Q.LOADLIB
+    //         INCLUDE MEMBER=EEXLIBP
+
+...and EEXLIBP contains...
+
+    //         DD  DISP=SHR,DSN=P.LOADLIB
+
+...and PROC2 contains...
+
+    //AEIOU    PROC
+    //*
+    //PS01     EXEC PROC=PROC&PROCNB
+    //*
+
+This is a relatively simple example.
+
 ### What This Won't Do
 
 Currently unsupported is the exerable JCL construct...
@@ -59,7 +125,7 @@ Currently unsupported is the exerable JCL construct...
     // ON THE NEXT LINE VIA THE 'X' IN COLUMN 72.  IN FACT, THIS CAN       X
     // CONTINUE OVER MULTIPLE LINES.  I AM SHOCKED AND APPALLED.
 
-... which I'm simply declaring should be dealt with via normal comment notation, and the obsolete...
+... which I'm simply declaring should be dealt with via normal JCL comment notation, and the obsolete...
 
     //SYSUT3  DD  DSNAME=&&SYSUT3,UNIT=SYSDA,SPACE=(80,(250,250)),         *00000500
     //             DCB=BLKSIZE=80                                           00000600

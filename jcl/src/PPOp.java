@@ -18,6 +18,8 @@ public class PPOp {
 	private String fileName = null;
 	private String originalText = null;
 	private String resolvedText = null;
+	/*TODO this probably can be an ArrayList, eliminating the need for
+	the equals() and hashCode() methods in PPSymbolic*/
 	private HashMap<PPSymbolic, String> symbolics = new HashMap<>();
 	private Boolean inProc = false;
 	private String procName = null;
@@ -109,11 +111,6 @@ public class PPOp {
 	/**
 	Using the collection of SetSymbolValue passed in, resolve the Symbolic
 	values, then store the resolved value locally.
-
-	<p>The unused PPJob is to differentiate this method from the illegal (so
-	to speak) method of the same name using non-preprocessing types.  If javac
-	didn't throw away the type of a collection before resolving methods then
-	the unused PPJob reference wouldn't be necessary.
 	*/
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
 		this.LOGGER.finer(this.myName + " " + this.myType + " resolveParms");
@@ -126,11 +123,6 @@ public class PPOp {
 
 	/**
 	Return the local collection of symbolics.
-
-	<p>The unused PPJob is to differentiate this method from the illegal (so
-	to speak) method of the same name using non-preprocessing types.  If javac
-	didn't throw away the type of a collection before resolving methods then
-	the unused PPJob reference wouldn't be necessary.
 	*/
 	public ArrayList<PPSymbolic> collectSymbolics() {
 		this.LOGGER.finer(this.myName + " " + this.myType + " collectSymbolics");

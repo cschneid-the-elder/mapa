@@ -216,6 +216,11 @@ public class PPJclStep {
 		this.jcllib = jcllib;
 	}
 
+	/**
+	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
+
+	TODO make private.
+	*/
 	public ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
@@ -244,16 +249,28 @@ public class PPJclStep {
 		return symbolics;
 	}
 
-	public void resolveParms(ArrayList<PPSetSymbolValue> setSym) {
-		/*
-			PPSymbolics come from SET statements and dynamic system symbols defined
-			on the command line.
+	/**
+	To the extent possible, resolve symbolic parameters to their values
+	as indicated by corresponding PPSetSymbolValue instances.
 
-			The mergedSetSym are only created and used when executing a proc, and
-			would be empty anyway if just executing a program.  We do have to take
-			them into account when resolving DD statements as those are overrides or
-			additions to the executed proc.
-		*/
+	<p>PPSetSymbolValue come from SET statements and dynamic system symbols defined
+	on the command line.
+
+	<p>These symbolics are merged with the relevant symbolics (those whose 
+	SET statement come before the step being processed) from this job.
+
+	<p>The mergedSetSym are only created and used when executing a proc, and
+	would be empty anyway if just executing a program.  We do have to take
+	them into account when resolving DD statements as those are overrides or
+	additions to the executed proc.
+
+	<p>There is a great deal of delegation resulting from the relatively
+	complex logic to resolve symbolics being encapsulated in the PPSymbolic 
+	class.  PPSymbolic is contained in PPKeywordValueWrapper which is contained
+	in PPKeywordOrSymbolicWrapper which may be contained in 
+	PPSingleOrMultipleValueWrapper.
+	*/
+	public void resolveParms(ArrayList<PPSetSymbolValue> setSym) {
 		this.LOGGER.finer(myName + " " + this.stepName + " resolveParms setSym = |" + setSym + "|");
 
 		this.incomingSetSym.addAll(setSym);

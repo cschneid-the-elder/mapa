@@ -28,6 +28,7 @@ public class PPListener extends JCLPPParserBaseListener {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		// TODO pass along the base directory for temp files
 		super();
 		if (jobs == null) {
 		} else {
@@ -181,6 +182,9 @@ public class PPListener extends JCLPPParserBaseListener {
 			IncludeStatement TALYN is also attached to Proc RYGEL.  The IncludeStatement
 			CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
 			is also attached to Job ZHANN.
+
+		TODO make this work like enterJclStep and instantiate a PPProc if both
+		currProc and currJob are null.
 		*/
 		if (this.currProc == null) {
 			this.currJob.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));

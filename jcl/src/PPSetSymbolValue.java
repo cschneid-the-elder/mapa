@@ -4,6 +4,15 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class represents a symbolic being set to a value, whether it be via
+a SET statement, a system symbol (as simulated by the CLI options -set
+or -setList), an EXEC statement, or a PROC statement.
+
+<p>Instances of this class are used to resolve symbolics "owned" by other
+classes, which are represented by instances of the PPSymbolic class.
+
+*/
 
 public class PPSetSymbolValue {
 
@@ -32,7 +41,12 @@ public class PPSetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.SYS;
 		if (ctx.keywordOrSymbolic() == null) {
 			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
-			LOGGER.finest(this.getClass().getName() + " SET_PARM_NAME().getSymbol().getText() = |" + ctx.SET_PARM_NAME().getSymbol().getText() + "|");
+			LOGGER.finest(
+				this.getClass().getName() 
+				+ " SET_PARM_NAME().getSymbol().getText() = |" 
+				+ ctx.SET_PARM_NAME().getSymbol().getText() 
+				+ "|"
+				);
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -54,7 +68,12 @@ public class PPSetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.SET;
 		if (ctx.keywordOrSymbolic() == null) {
 			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
-			LOGGER.finest(this.getClass().getName() + " SET_PARM_NAME().getSymbol().getText() = |" + ctx.SET_PARM_NAME().getSymbol().getText() + "|");
+			LOGGER.finest(
+				this.getClass().getName() 
+				+ " SET_PARM_NAME().getSymbol().getText() = |" 
+				+ ctx.SET_PARM_NAME().getSymbol().getText() 
+				+ "|"
+				);
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -78,7 +97,12 @@ public class PPSetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.EXEC;
 		if (ctx.keywordOrSymbolic() == null) {
 			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
-			LOGGER.finest(this.getClass().getName() + " EXEC_PROC_PARM().getSymbol().getText() = |" + ctx.EXEC_PROC_PARM().getSymbol().getText() + "|");
+			LOGGER.finest(
+				this.getClass().getName() 
+				+ " EXEC_PROC_PARM().getSymbol().getText() = |" 
+				+ ctx.EXEC_PROC_PARM().getSymbol().getText() 
+				+ "|"
+				);
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -100,7 +124,12 @@ public class PPSetSymbolValue {
 		this.setType = SetTypeOfSymbolValue.PROC;
 		if (ctx.keywordOrSymbolic() == null) {
 			LOGGER.finest(this.getClass().getName() + " ctx.keywordOrSymbolic() == null");
-			LOGGER.finest(this.getClass().getName() + " PROC_PARM_NAME().getSymbol().getText() = |" + ctx.PROC_PARM_NAME().getSymbol().getText() + "|");
+			LOGGER.finest(
+				this.getClass().getName() 
+				+ " PROC_PARM_NAME().getSymbol().getText() = |" 
+				+ ctx.PROC_PARM_NAME().getSymbol().getText() 
+				+ "|"
+				);
 		} else {
 			this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), procName, LOGGER, CLI);
 		}
@@ -140,6 +169,10 @@ public class PPSetSymbolValue {
 		return this.setType;
 	}
 
+	/**
+	Return the name of the symbolic whose value is set, used to match
+	with symbolic parameters when resolving their value.
+	*/
 	public String getParmName() {
 
 		if (this.parmName == null) {
@@ -172,6 +205,11 @@ public class PPSetSymbolValue {
 		return this.parmName;
 	}
 
+	/**
+	Return the line on which the value for this symbol was set, used
+	in determining which instances are relevant when resolving symbolic 
+	parameters.
+	*/
 	public int getLine() {
 
 		if (this.line == -1) {
@@ -206,6 +244,7 @@ public class PPSetSymbolValue {
 	}
 
 	public String getParmValue() {
+	//TODO make private and simplify
 
 		if (this.parmValue == null) {
 			switch(this.setType) {
@@ -237,9 +276,16 @@ public class PPSetSymbolValue {
 		return this.parmValue;
 	}
 
+	/**
+	Return the value to which this symbol is set, used when resolving
+	the values of symbolic parameters.
+
+	<p>This is distinct from <code>getValue()</code> in that a symbolic
+	can be set to another symbolic.
+	*/
 	public String getResolvedValue() {
 		if (this.kywd == null) {
-			return new String();
+			return "";
 		} else {
 			return kywd.getResolvedValue();
 		}
@@ -328,7 +374,7 @@ public class PPSetSymbolValue {
 
 				In this instance the parm TALYN is set to nothing.
 			*/
-			theText = new String();
+			theText = "";
 		} else {
 			theText = kywd.getValue();
 		}
@@ -349,7 +395,7 @@ public class PPSetSymbolValue {
 				set in the PROC statement for the proc MOYA is nullified.  Any value
 				set in a SET statement prior to this EXEC statement is nullified.
 			*/
-			theText = new String();
+			theText = "";
 		} else {
 			theText = kywd.getValue();
 		}
@@ -369,7 +415,7 @@ public class PPSetSymbolValue {
 				In this instance the parm TALYN is set to nothing.  Any value
 				set in a SET statement prior to execution of the proc MOYA is nullified.
 			*/
-			theText = new String();
+			theText = "";
 		} else {
 			theText = kywd.getValue();
 		}
@@ -381,6 +427,12 @@ public class PPSetSymbolValue {
 		return this.procBeingExecuted;
 	}
 
+	/**
+	Used by PPSymbolic in resolution of the value of a symbolic parameter.
+
+	<p>What is being determined is if the value set on this EXEC statement
+	is applicable to setting the value of a symbolic.
+	*/
 	public Boolean parmSetByExec(ArrayList<PPSetSymbolValue> sets, String procName) {
 		Boolean rc = false;
 
@@ -398,6 +450,12 @@ public class PPSetSymbolValue {
 		return rc;
 	}
 
+	/**
+	Used by PPSymbolic in resolution of the value of a symbolic parameter.
+
+	<p>What is being determined is if the value set on this EXEC statement
+	is applicable to setting the value of a symbolic.
+	*/
 	public Boolean parmDefinedByProc(ArrayList<PPSetSymbolValue> sets) {
 		Boolean rc = false;
 

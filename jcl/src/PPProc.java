@@ -8,7 +8,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents a JCL PPProcedure - cataloged or instream - which is
+This class represents a JCL Procedure - cataloged or instream - which is
 used in PreProcessing to resolve parms and INCLUDEs.
 
 <p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
@@ -33,7 +33,8 @@ those in ASET.  And the member being INCLUDEd may be parameterized.
 
 <p>Code is included to iteratively resolve INCLUDE statements by resolving 
 symbolics to the extent known, rewrite the JCL, and then to re-lex-and-parse 
-the rewritten JCL, continuing until all INCLUDEs are resolved.
+the rewritten JCL, continuing until all INCLUDEs are resolved or the only
+remaining INCLUDEs cannot be resolved.
 
 <p>This is accomplished via two separate grammars, one used by the preprocessing 
 code to resolve symbolics and INCLUDEs, the other to lex and parse the 
@@ -77,12 +78,20 @@ public class PPProc {
 	private File tmpProcDir = null;
 	private PPJclStep parentJclStep = null;
 
+	/**
+	This constructor is used when a cataloged proc is encountered by
+	a listener but no PROC statement exists.
+
+	<p>Instream procs must have a PROC statement and a PEND statement,
+	cataloged procs can have one, the other, both, or neither.
+	*/
 	public PPProc(
 				String fileName
 				, int fileNb
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
+		// TODO add base directory for temp files
 		this.myName = this.getClass().getName();
 		this.fileName = fileName;
 		this.fileNb = fileNb;
@@ -93,6 +102,10 @@ public class PPProc {
 		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
 	}
 
+	/**
+	This constructor is used when a PROC statement is encountered by 
+	a listener.
+	*/
 	public PPProc(
 				JCLPPParser.ProcStatementContext procCtx
 				, String fileName
@@ -100,6 +113,7 @@ public class PPProc {
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
+		// TODO add base directory for temp files and new constructor with that and tmpProcDir
 		this.procCtx = procCtx;
 		this.fileName = fileName;
 		this.fileNb = fileNb;
@@ -140,7 +154,7 @@ public class PPProc {
 	is optional; this is not true for an instream proc, where the PROC
 	statement is required and must contain a name field.
 
-	So the proc name is set from the value returned by this method, which is
+	<p>So the proc name is set from the value returned by this method, which is
 	dependent on the naming convention used for temp files.  Which I invented.
 	*/
 	private String procNameFromFileName() {
@@ -236,6 +250,11 @@ public class PPProc {
 		}
 	}
 
+	/**
+	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
+
+	TODO make private.
+	*/
 	public ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
@@ -316,7 +335,7 @@ public class PPProc {
 	version of this PPProc.  If there is a parent JCL step, then defer to
 	its resolved suffix, otherwise construct our own.
 
-	A predictable file name is needed so the transition from preprocessing
+	<p>A predictable file name is needed so the transition from preprocessing
 	to "normal" lexing/parsing works seamlessly.
 	*/
 	public StringBuffer getResolvedSuffix() {
@@ -401,7 +420,8 @@ public class PPProc {
 	symbols such as SYSCLONE or SYSUID.
 	
 	<p>These symbolics are merged with the relevant symbolics (those whose SET
-	statement come before the include being processed) from this job.
+	statement come before the include being processed or are set on the PROC
+	statement) from this proc.
 	*/
 	public void resolveParmedIncludes(ArrayList<PPSetSymbolValue> execSetSym) {
 		this.LOGGER.finer(
@@ -439,6 +459,12 @@ public class PPProc {
 	<p>These values may be set as command line parameters or may be in the
 	SET statements in the execution JCL.  INCLUDE members may also contain
 	SET statements.
+
+	<p>There is a great deal of delegation resulting from the relatively
+	complex logic to resolve symbolics being encapsulated in the PPSymbolic 
+	class.  PPSymbolic is contained in PPKeywordValueWrapper which is contained
+	in PPKeywordOrSymbolicWrapper which may be contained in 
+	PPSingleOrMultipleValueWrapper.
 	*/
 	public void resolveParms(ArrayList<PPSetSymbolValue> execSetSym) {
 		LOGGER.finer(this.myName + " resolveParms " + this);
@@ -465,9 +491,9 @@ public class PPProc {
 
 	}
 
+	/**
+	*/
 	public File rewriteWithParmsResolved() throws IOException {
-		/*
-		*/
 		this.LOGGER.finer(
 			this.myName 
 			+ " "
@@ -744,6 +770,8 @@ public class PPProc {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
+			Path aPath = baseDir.toPath();
+			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
 		*/
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =

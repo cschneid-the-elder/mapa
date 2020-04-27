@@ -8,8 +8,8 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents a JCL PPJob which is
-used in PreProcessing to resolve parms and INCLUDEs.
+This class represents a JCL PPJob which is used in PreProcessing to 
+resolve parms and INCLUDEs.
 
 <p>The tricky bit of parsing JCL is that you must do it iteratively.  INCLUDEs 
 may be nested and may contain SET statements for symbolics.  On most (all?) 
@@ -32,7 +32,8 @@ those in ASET.  And the member being INCLUDEd may be parameterized.
 
 <p>Code is included to iteratively resolve INCLUDE statements by resolving 
 symbolics to the extent known, rewrite the JCL, and then to re-lex-and-parse 
-the rewritten JCL, continuing until all INCLUDEs are resolved.
+the rewritten JCL, continuing until all INCLUDEs are resolved or the only
+remaining INCLUDEs cannot be resolved.
 
 <p>This is accomplished via two separate grammars, one used by the preprocessing 
 code to resolve symbolics and INCLUDEs, the other to lex and parse the 
@@ -50,6 +51,11 @@ public class PPJob {
 	private UUID uuid = UUID.randomUUID();
 	private String myName = null;
 	private JCLPPParser.JobCardContext jobCardCtx = null;
+	/**
+	The jcllibCtx variable is used in setting the value(s) in the jcllib
+	variable.  It is preserved because it may be useful for other purposes
+	as yet undreamt of.
+	*/
 	private JCLPPParser.JcllibStatementContext jcllibCtx = null;
 	private ArrayList<PPKeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
 	private ArrayList<PPProc> procs  = new ArrayList<>();
@@ -58,8 +64,7 @@ public class PPJob {
 	private ArrayList<PPJclStep> steps = new ArrayList<>();
 	private ArrayList<PPSymbolic> sym = new ArrayList<>();
 	/**
-	This collection of PPOp instances is only used in the generated PPJob
-	class;  PPOp is a generic representation of most JCL statements that are
+	PPOp is a generic representation of most JCL statements that are
 	not needed in preprocessing other than for resolving INCLUDEs and 
 	symbolics;  The primary function of PPOp is to hold symbolics that must be
 	iteratively resolved as the JCL is rewritten. 
@@ -84,6 +89,7 @@ public class PPJob {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
+		// TODO add new constructor with just baseDir, and another with that and tmpJobDir, tmpProcDir
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
 		this.ordNb = ordNb;
@@ -257,18 +263,30 @@ public class PPJob {
 		}
 	}
 
+	/**
+	Used by listeners to add instream procs encountered to this "owning" job.
+	*/
 	public void addInstreamProc(PPProc iProc) {
 		this.procs.add(iProc);
 	}
 
+	/**
+	Used by listeners to add SET statements to this "owning" job.
+	*/
 	public void addSetSym(PPSetSymbolValue setSym) {
 		this.setSym.add(setSym);
 	}
 
+	/**
+	Used by listeners to add INCLUDE statements encountered to this "owning" job.
+	*/
 	public void addInclude(PPIncludeStatement include) {
 		this.includes.add(include);
 	}
 
+	/**
+	Used by listeners to add JCL steps encountered to this "owning" job.
+	*/
 	public void addJclStep(PPJclStep step) {
 		this.nbSteps++;
 		step.setOrdNb(this.nbSteps);
@@ -277,10 +295,20 @@ public class PPJob {
 		step.setJcllib(this.jcllib);
 	}
 
+	/**
+	Used by listeners to add generic JCL operations encountered to this "owning" job.
+	*/
 	public void addOp(PPOp anOp) {
 		this.op.add(anOp);
 	}
 
+	/**
+	Used in iterativelyResolveIncludes() to set the newly parsed PPJob instance
+	ordNb to this PPJob instance's ordNb.
+
+	<p>The ordNb is used in the job name suffix which allows subsequent
+	instances to iteratively resolve parameters.
+	*/
 	public void setOrdNb(int ordNb) {
 		this.ordNb = ordNb;
 	}
@@ -304,17 +332,20 @@ public class PPJob {
 		return sb;
 	}
 
+	/**
+	Resolve INCLUDE statements that are parameterized, i.e. that take the
+	form <code>INCLUDE MEMBER=LIB&ENV</code> where the value of the symbolic
+	parameter ENV is set at execution time.
+
+	<p>The symbolics in CLI used by this method come from a list provided at
+	execution time.  These would typically be static and/or dynamic system
+	symbols such as SYSCLONE or SYSUID.
+	
+	<p>These symbolics are merged with the relevant symbolics (those whose SET
+	statement come before the include being processed) from this job.
+	*/
 	public void resolveParmedIncludes() {
 		this.LOGGER.finer(this.myName + " resolveParmedIncludes " + this);
-
-		/*
-			The symbolics (setSym) in CLI used by this method come from a list provided at
-			execution time.  These would typically be static and/or dynamic system
-			symbols such as SYSCLONE or SYSUID.
-
-			These symbolics are merged with the relevant symbolics (those whose SET
-			statement come before the include being processed) from this job.
-		*/
 
 		for (PPIncludeStatement i: this.includes) {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(this.CLI.PPsetSym);
@@ -331,17 +362,27 @@ public class PPJob {
 		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
 	}
 
+	/**
+	To the extent possible, resolve symbolic parameters to their values
+	as indicated by corresponding PPSetSymbolValue instances.
+
+	<p>The symbolics (setSym) in CLI used by this method come from a list 
+	provided at execution time.  These would typically be static and/or 
+	dynamic system symbols such as SYSCLONE or SYSUID.
+
+	<p>These symbolics are merged with the relevant symbolics (those whose 
+	SET statement come before the step being processed) from this job.
+
+	<p>There is a great deal of delegation resulting from the relatively
+	complex logic to resolve symbolics being encapsulated in the PPSymbolic 
+	class.  PPSymbolic is contained in PPKeywordValueWrapper which is contained
+	in PPKeywordOrSymbolicWrapper which may be contained in 
+	PPSingleOrMultipleValueWrapper.
+
+	TODO make private, remove from Demo01, execute from this.rewriteWithParmsResolved()
+	*/
 	public void resolveParms() {
 		this.LOGGER.finer(this.myName + " resolveParms " + this);
-
-		/*
-			The symbolics (setSym) in CLI used by this method come from a list provided at
-			execution time.  These would typically be static and/or dynamic system
-			symbols such as SYSCLONE or SYSUID.
-
-			These symbolics are merged with the relevant symbolics (those whose SET
-			statement come before the step being processed) from this job.
-		*/
 
 		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(this.CLI.PPsetSym);
 		allSym.addAll(this.setSym);
@@ -447,6 +488,11 @@ public class PPJob {
 		return new ArrayList<PPIncludeStatement>(Arrays.asList(unresolved_includes));
 	}
 
+	/**
+	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
+
+	TODO make private.
+	*/
 	public ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
@@ -457,9 +503,14 @@ public class PPJob {
 		return libs;
 	}
 
+	/**
+	This method is a final transition step between preprocessing, in which
+	INCLUDEs, symbolic parameters, and PROCs are resolved through an iterative
+	process, and processing the rewritten resolved JCL into objects which
+	can be queried and write themselves in a hopefully meaningful fashion
+	to a stream.
+	*/
 	public File rewriteWithParmsResolved() throws IOException {
-		/*
-		*/
 		this.LOGGER.finer(
 			this.myName 
 			+ " rewriteWithParmsResolved job = |" 
@@ -473,6 +524,7 @@ public class PPJob {
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		//TODO set file attributes if posix conforming
 		File tmp = new File(
 			this.tmpJobDir.toString() 
 			+ File.separator 
@@ -532,6 +584,10 @@ public class PPJob {
 		return tmp;
 	}
 
+	/**
+	Return a collection of PPSymbolic to be used when rewriting this
+	PPJob with each of its symbolic parameters resolved to their set value.
+	*/
 	private ArrayList<PPSymbolic> collectSymbolics() {
 		this.LOGGER.finer(this.myName + " collectSymbolics");
 
@@ -553,6 +609,20 @@ public class PPJob {
 		return symbolics;
 	}
 
+	/**
+	Iteratively lex/parse, resolve INCLUDE statement symbolic parameters, 
+	and rewrite this job until all INCLUDEs are resolved or all that
+	remains are unresolvable INCLUDEs.
+
+	<p>A JCL INCLUDE member can contain an INCLUDE statement; further, a JCL
+	INCLUDE member can be composed of symbolic parameters; further yet, a
+	JCL INCLUDE member can contain SET statements for symbolic parameters;
+	and so parameterized JCL INCLUDE statements have their symbolic parameters
+	resolved, are rewritten to a temporary file which is lexed and parsed and
+	has its parameterized JCL INCLUDE statements' symbolic parameters resolved,
+	and so on, iteratively, until all INCLUDEs are resolved or all that
+	remains are unresolvable INCLUDEs.
+	*/
 	public PPJob iterativelyResolveIncludes(File initialJobFile) throws IOException {
 		this.LOGGER.finer(
 			this.myName 
@@ -603,7 +673,16 @@ public class PPJob {
 		return aJob;
 	}
 
-	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
+	/**
+	The generated ANTLR lexer does its lexing, then the ANTLR generated
+	parser does its parsing, and then the listener walks the parse tree
+	looking for items of interest.
+	*/
+	public void lexAndParse(
+				ArrayList<PPJob> jobs
+				, ArrayList<PPProc> procs
+				, String fileName
+				) throws IOException {
 		this.LOGGER.finer(
 			this.myName 
 			+ " lexAndParse jobs = |" 
@@ -631,16 +710,33 @@ public class PPJob {
 
 	}
 
+	/**
+	This method rewrites the job represented by this instance with any
+	INCLUDE statements replaced by the contents of the member they point to.
+
+	TODO make private.
+	*/
 	public File rewriteJobWithIncludesResolved() throws IOException {
-		/*
-			At this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		this.LOGGER.finer(this.myName + " rewriteJobWithIncludesResolved job = |" + this + "| tmpJobDir = |" + this.tmpJobDir + "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " rewriteJobWithIncludesResolved job = |" 
+			+ this 
+			+ "| tmpJobDir = |" 
+			+ this.tmpJobDir 
+			+ "|"
+			);
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
+		//TODO set file attributes if posix conforming
+		File tmp = new File(
+			this.tmpJobDir.toString() 
+			+ File.separator 
+			+ this.myName 
+			+ "-" 
+			+ this.getJobName() 
+			+ "-" + this.getUUID()
+			);
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -664,36 +760,36 @@ public class PPJob {
 		return tmp;
 	}
 
+	/**
+	Rewrite one job from the current file, separating any instream procs into
+	their own files to be processed later.
+
+	<p>An initial file could contain multiple jobs, each of which could
+	contain multiple instream procs.
+	*/
 	public File rewriteJobAndSeparateInstreamProcs(File baseDir) throws IOException {
-		/*
-			Rewrite one job from the current file, separating any instream procs into their own
-			files to be processed later.
-
-			After this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
-		/*
-			the plan...
-
-			for each job, read a record from its file
-				if the record number resides in an instream proc, skip it
-				if the record number corresponds to a resolved include,
-					skip writing the include, instead read the file it
-					refers to and add that to the output in place of the include
-				if the record number corresponds to a jclstep _not_ in stepsInNeedOfProc,
-					open a new LineNumberReader on the jclstep's file
-					read the proc, writing records to a new file
-					if the record number corresponds to a resolved include,
-						skip writing the include, instead read the file it
-						refers to and add that to the output in place of the include
-				write the record read to output
-		*/
-		this.LOGGER.finer(this.myName + " rewriteJobAndSeparateInstreamProcs job = |" + this + "| baseDir = |" + baseDir + "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " rewriteJobAndSeparateInstreamProcs job = |" 
+			+ this 
+			+ "| baseDir = |" 
+			+ baseDir 
+			+ "|"
+			);
 
 		this.setTmpDirs(baseDir);
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpJobDir.toString() + File.separator + this.myName + "-" + this.getJobName() + "-" + this.getUUID());
+		//TODO set file attributes if posix conforming
+		File tmp = new File(
+			this.tmpJobDir.toString() 
+			+ File.separator 
+			+ this.myName 
+			+ "-" 
+			+ this.getJobName() 
+			+ "-" 
+			+ this.getUUID()
+			);
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();
@@ -737,6 +833,12 @@ public class PPJob {
 		return tmp;
 	}
 
+	/**
+	Locate the file pointed to by the passed INCLUDE statement and write
+	its contents to the passed PrintWriter.
+
+	TODO make private.
+	*/
 	public Boolean writeTheIncludeContent(
 							PPIncludeStatement i
 							, PrintWriter out
@@ -766,6 +868,22 @@ public class PPJob {
 		return foundIt;
 	}
 
+	/**
+	Search what corresponds to the libraries that JES would search for
+	the passed file name.
+
+	<p>The first location being searched is contrived - it's where the
+	instream procs were written by rewriteJobAndSeparateInstreamProcs().
+
+	<p>The second set of locations are what correspond to the JCLLIB
+	ORDER= libraries (if any were supplied).
+
+	<p>The last set of locations are what correspond to the various PROCxx
+	statements used at JES startup.
+
+	<p>Processing continues if the passed file name cannot be found, but
+	a warning is issued which should indicate the results will be incomplete.
+	*/
 	public String searchProcPathsFor(String fileName) throws IOException {
 		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 		if (aFile.exists()) {
@@ -800,6 +918,8 @@ public class PPJob {
 		/*
 			It's possible the file permissions are superfluous.  The code would be more
 			portable without them.  TODO maybe remove the code setting file permissions.
+			Path aPath = baseDir.toPath();
+			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
 		*/
 		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
 		FileAttribute<Set<PosixFilePermission>> attr =
