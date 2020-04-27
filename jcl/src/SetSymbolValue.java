@@ -4,6 +4,12 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class represents a symbolic being set to a value, whether it be via
+a SET statement, a system symbol (as simulated by the CLI options -set
+or -setList), an EXEC statement, or a PROC statement.
+
+*/
 
 public class SetSymbolValue {
 
