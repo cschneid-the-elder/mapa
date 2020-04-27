@@ -26,6 +26,7 @@ public class DdStatement {
 	private Hashtable<String, SingleOrMultipleValueWrapper> somvParms = new Hashtable<>();
 	private Hashtable<String, DatasetNameWrapper> dsnParms = new Hashtable<>();
 	private DispWrapper dispw = null;
+	private PathDispWrapper pdispw = null;
 	private DsidWrapper dsidw = null;
 	private int ordNb = 0;
 
@@ -297,6 +298,12 @@ public class DdStatement {
 				continue;
 			}
 
+			if (ddParm.ddParmLABEL() != null) {
+				SingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmLABEL().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
+				this.somvParms.put("LABEL", somvw);
+				continue;
+			}
+
 			if (ddParm.ddParmLGSTREAM() != null) {
 				DatasetNameWrapper dsnw = new DatasetNameWrapper(ddParm.ddParmLGSTREAM().datasetName(), this.procName, this.LOGGER, this.CLI);
 				this.dsnParms.put("LGSTREAM", dsnw);
@@ -336,6 +343,24 @@ public class DdStatement {
 			if (ddParm.ddParmPATH() != null) {
 				KeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.ddParmPATH().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 				this.kosParms.put("PATH", kosw);
+				continue;
+			}
+
+			if (ddParm.ddParmPATHDISP() != null) {
+				this.pdispw = new PathDispWrapper(ddParm.ddParmPATHDISP(), this.procName, this.LOGGER, this.CLI);
+				continue;
+			}
+
+			if (ddParm.ddParmPATHMODE() != null) {
+				SingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmPATHMODE().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
+				this.somvParms.put("PATHMODE", somvw);
+				continue;
+			}
+
+
+			if (ddParm.ddParmPATHOPTS() != null) {
+				SingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmPATHOPTS().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
+				this.somvParms.put("PATHOPTS", somvw);
 				continue;
 			}
 
@@ -749,6 +774,9 @@ public class DdStatement {
 	}
 
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		Boolean isUnix = false;
+		Boolean isSysout = false;
+
 		this.LOGGER.fine(this.myName + " " + this.ddName + " toCSV");
 
 		csvOut.append("DD");
@@ -763,24 +791,58 @@ public class DdStatement {
 		csvOut.append(",");
 
 		if (dsnParms.get("DSNAME") != null) {
+			csvOut.append("Z");
+			csvOut.append(",\"");
 			csvOut.append(dsnParms.get("DSNAME").getResolvedValue());
+			csvOut.append("\"");
 		} else if (this.ddStmtSysoutCtx != null) {
+			isSysout = true;
+			csvOut.append("O");
+			csvOut.append(",\"");
 			csvOut.append("SYSOUT");
+			csvOut.append("\"");
+		} else if (this.kosParms.get("PATH") != null) {
+			isUnix = true;
+			csvOut.append("U");
+			csvOut.append(",\"");
+			csvOut.append(this.kosParms.get("PATH").getValue());
+			csvOut.append("\"");
 		} else if (this.ddSplatCtx != null && this.ddSplatCtx.size() != 0) {
+			csvOut.append("N");
+			csvOut.append(",\"");
 			csvOut.append("*");
+			csvOut.append("\"");
 		} else {
-			csvOut.append("_NONAME_");
+			csvOut.append("\"_NONAME_\"");
 		}
 
-		if (this.dispw == null) {
-			csvOut.append(",NEW,DELETE,DELETE");
+		if (isUnix) {
+			/*
+			The double commas are not a typo, the PATHDISP for Unix System 
+			Services files does not have a "status" field.
+			*/
+			if (this.pdispw == null) {
+				csvOut.append(",,KEEP,KEEP");
+			} else {
+				csvOut.append(",");
+				csvOut.append(",");
+				csvOut.append(this.pdispw.getNormalTerm());
+				csvOut.append(",");
+				csvOut.append(this.pdispw.getAbnormalTerm());
+			}
 		} else {
-			csvOut.append(",");
-			csvOut.append(this.dispw.getStatus());
-			csvOut.append(",");
-			csvOut.append(this.dispw.getNormalTerm());
-			csvOut.append(",");
-			csvOut.append(this.dispw.getAbnormalTerm());
+			if (isSysout) {
+				csvOut.append(",,,");
+			} else if (this.dispw == null) {
+				csvOut.append(",NEW,DELETE,DELETE");
+			} else {
+				csvOut.append(",");
+				csvOut.append(this.dispw.getStatus());
+				csvOut.append(",");
+				csvOut.append(this.dispw.getNormalTerm());
+				csvOut.append(",");
+				csvOut.append(this.dispw.getAbnormalTerm());
+			}
 		}
 
 	}
