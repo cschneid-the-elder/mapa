@@ -454,24 +454,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmDISP(JCLParser.DdParmDISPContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmDISP_STATUS}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmDISP_STATUS(JCLParser.DdParmDISP_STATUSContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmDISP_NORMAL_TERM}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmDISP_NORMAL_TERM(JCLParser.DdParmDISP_NORMAL_TERMContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmDISP_ABNORMAL_TERM}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmDISP_ABNORMAL_TERM(JCLParser.DdParmDISP_ABNORMAL_TERMContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmDLM}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -880,24 +862,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmSYSOUT(JCLParser.DdParmSYSOUTContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link JCLParser#sysoutClass}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSysoutClass(JCLParser.SysoutClassContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#sysoutWriter}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSysoutWriter(JCLParser.SysoutWriterContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#sysoutFormOrCase}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSysoutFormOrCase(JCLParser.SysoutFormOrCaseContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmTERM}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -921,24 +885,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDdParmUCS(JCLParser.DdParmUCSContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmUCS_code}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmUCS_code(JCLParser.DdParmUCS_codeContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmUCS_fold}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmUCS_fold(JCLParser.DdParmUCS_foldContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#ddParmUCS_verify}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDdParmUCS_verify(JCLParser.DdParmUCS_verifyContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmUNIT}.
 	 * @param ctx the parse tree
@@ -1491,12 +1437,6 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitOutputStatementDEST(JCLParser.OutputStatementDESTContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link JCLParser#destValue}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDestValue(JCLParser.DestValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link JCLParser#outputStatementDPAGELBL}.
 	 * @param ctx the parse tree

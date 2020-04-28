@@ -216,18 +216,7 @@ ddParmDEST : DEST EQUAL  (
   ;
 ddParmDIAGNS : DIAGNS EQUAL keywordOrSymbolic ;
 ddParmDISP : DISP EQUAL singleOrMultipleValue ;
-/*ddParmDISP : DISP EQUAL LPAREN? ddParmDISP_STATUS? ddParmDISP_NORMAL_TERM? ddParmDISP_ABNORMAL_TERM? RPAREN? ;*/
-ddParmDISP_STATUS : DISP_MOD | DISP_NEW | DISP_OLD | DISP_SHR | SYMBOLIC ;
-ddParmDISP_NORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
-ddParmDISP_ABNORMAL_TERM : DISP_CATLG | DISP_DELETE | DISP_KEEP | DISP_PASS | DISP_UNCATLG | SYMBOLIC ;
 ddParmDLM : DLM EQUAL keywordOrSymbolic ;
-/*
-ddParmDSID : DSID EQUAL (
-    DSID_VALUE | 
-    SYMBOLIC |
-    (LPAREN (DSID_VALUE | SYMBOLIC) (DSID_VERIFIED | SYMBOLIC)? RPAREN)
-  ) ;
-*/
 ddParmDSID : DSID EQUAL singleOrMultipleValue ;
 ddParmDSKEYLBL : DSKEYLBL EQUAL keywordOrSymbolic ;
 ddParmDSNAME : (DSNAME | DSN) EQUAL datasetName ;
@@ -258,24 +247,6 @@ ddParmKEYLEN : KEYLEN EQUAL keywordOrSymbolic ;
 ddParmKEYOFF : KEYOFF EQUAL keywordOrSymbolic ;
 ddParmLABEL : LABEL EQUAL singleOrMultipleValue ;
 /*
-ddParmLABEL : LABEL EQUAL (
-    LABEL_SEQUENCE |
-    ddParmRETPD |
-    ddParmEXPDT |
-    LABEL_SEQUENCE_SYMBOLIC |
-    (LPAREN (LABEL_SEQUENCE | LABEL_SEQUENCE_SYMBOLIC) RPAREN) |
-    (LPAREN ddParmRETPD RPAREN) |
-    (LPAREN ddParmEXPDT RPAREN) |
-    (LPAREN
-        (LABEL_SEQUENCE | LABEL_SEQUENCE_SYMBOLIC)? 
-        (LABEL_TYPE | LABEL_TYPE_SYMBOLIC)? 
-        (LABEL_PASSWORD_PROTECT | LABEL_PASSWORD_PROTECT_SYMBOLIC)? 
-        (LABEL_I_O | LABEL_I_O_SYMBOLIC)?
-        (ddParmRETPD | ddParmEXPDT)?
-    RPAREN)
-  ) ;
-*/
-/*
 It's not really a dataset name in the LGSTREAM parameter, but it
 does match the same pattern.
 */
@@ -296,27 +267,6 @@ ddParmPATH : PATH EQUAL keywordOrSymbolic ;
 ddParmPATHDISP : PATHDISP EQUAL singleOrMultipleValue ;
 ddParmPATHMODE : PATHMODE EQUAL singleOrMultipleValue ;
 ddParmPATHOPTS : PATHOPTS EQUAL singleOrMultipleValue ;
-/*
-ddParmPATHDISP : PATHDISP EQUAL (
-    PATHDISP_NORMAL | 
-    (LPAREN PATHDISP_NORMAL PATHDISP_ABNORMAL? RPAREN) |
-    (LPAREN PATHDISP_NORMAL? PATHDISP_ABNORMAL RPAREN)
-  ) ;
-ddParmPATHMODE : PATHMODE EQUAL (
-    PATHMODE_VALUE |
-    SYMBOLIC |
-    (LPAREN 
-        (PATHMODE_VALUE | SYMBOLIC)+
-    RPAREN)
-  ) ;
-ddParmPATHOPTS : PATHOPTS EQUAL  (
-    PATHOPTS_VALUE |
-    SYMBOLIC |
-    (LPAREN 
-        (PATHOPTS_VALUE | SYMBOLIC)+
-    RPAREN)
-  ) ;
-*/
 ddParmPCI : PCI EQUAL singleOrMultipleValue ;
 ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
 ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
@@ -332,38 +282,6 @@ ddParmSECMODEL : SECMODEL EQUAL singleOrMultipleValue ;
 ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
 ddParmSEP : SEP EQUAL singleOrMultipleValue ;
 
-/*
-ddParmSPACE : SPACE EQUAL (
-    (LPAREN
-        ddParmSPACE_unit? (
-            ddParmSPACE_primary |
-            (LPAREN
-               ddParmSPACE_primary?
-               ddParmSPACE_secondary? 
-               ddParmSPACE_directory? 
-             RPAREN)
-            )
-        ddParmSPACE_rlse? ddParmSPACE_characteristics? ddParmSPACE_round?
-    RPAREN) |
-    (LPAREN ABSTR 
-      LPAREN
-        ddParmSPACE_primary 
-        ddParmSPACE_track_address?
-        ddParmSPACE_directory?
-      RPAREN
-    RPAREN) |
-    SYMBOLIC
-  ) ;
-ddParmSPACE_unit : (CYL | TRK | NUM_LIT | SYMBOLIC) ;
-ddParmSPACE_primary : (NUM_LIT | SYMBOLIC) ;
-ddParmSPACE_secondary : (NUM_LIT | SYMBOLIC) ;
-ddParmSPACE_directory : (NUM_LIT | SYMBOLIC) ;
-ddParmSPACE_track_address : (NUM_LIT | SYMBOLIC) ;
-ddParmSPACE_rlse : (RLSE | SYMBOLIC) ;
-ddParmSPACE_characteristics : (CONTIG | MXIG | ALX | SYMBOLIC) ;
-ddParmSPACE_round : (ROUND | SYMBOLIC) ;
-
-*/
 ddParmSPACE : SPACE EQUAL singleOrMultipleValue ; 
 
 
@@ -378,18 +296,10 @@ ddParmSYMBOLS : SYMBOLS EQUAL singleOrMultipleValue ;
 ddParmSYMLIST : SYMLIST EQUAL singleOrMultipleValue ;
 ddParmSYSOUT : SYSOUT singleOrMultipleValue ;
 
-sysoutClass : (SYSOUT_CLASS | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | SYMBOLIC+) ;
-sysoutWriter : (SYSOUT_WRITER | SYSOUT_INTRDR | SYMBOLIC) ;
-sysoutFormOrCase : (SYSOUT_FORM | SYMBOLIC) ;
-
 ddParmTERM : TERM EQUAL keywordOrSymbolic ;
 ddParmTHRESH : THRESH EQUAL keywordOrSymbolic ;
 ddParmTRTCH : TRTCH EQUAL keywordOrSymbolic ;
 ddParmUCS : UCS EQUAL singleOrMultipleValue ;
-
-ddParmUCS_code : (UCS_CODE | SYMBOLIC) ;
-ddParmUCS_fold : (UCS_FOLD | SYMBOLIC) ;
-ddParmUCS_verify : (UCS_VERIFY | SYMBOLIC) ;
 
 ddParmUNIT : UNIT EQUAL 
     singleOrMultipleValue
@@ -399,76 +309,6 @@ ddParmVOLUME : (VOL | VOLUME) EQUAL
     singleOrMultipleValue
   ;
 
-
-/*
-Here's the thing with symbolic parameters: they can be abused because
-their values are substituted early in the interpretation process.
-
-Thus...
-
-UNIT=(&UNIT&COUNT&DEFER)
-
-...where, earlier in the job...
-
-SET UNIT=CART
-SET COUNT=
-SET DEFER=',3,DEFER'
-
-...resulting in, after conversion...
-
-UNIT=(CART,3,DEFER)
-
-...which is syntactically correct.  And so this sort of behavior
-must be allowed for herein, however much we may wish otherwise.
-
-
-ddParmUNIT : UNIT EQUAL (
-    ddParmUNIT_unit |
-    (UNIT_AFF EQUAL UNIT_DDNAME) |
-    (LPAREN 
-        ddParmUNIT_unit? 
-            ddParmUNIT_count? 
-                ddParmUNIT_defer? 
-                    ddParmUNIT_smshonor?
-    RPAREN) |
-	(LPAREN
-        ddParmUNIT_unit? 
-            ddParmSEP
-    RPAREN)
-  ) ;
-
-ddParmUNIT_unit : (UNIT_NUMBER | UNIT_DEVICE_TYPE | UNIT_GROUP_NAME | SYMBOLIC+) ;
-ddParmUNIT_count : (UNIT_COUNT | UNIT_ALLOC | SYMBOLIC+) ;
-ddParmUNIT_defer : (UNIT_DEFER | SYMBOLIC+) ;
-ddParmUNIT_smshonor : (UNIT_SMSHONOR | SYMBOLIC+) ;
-
-ddParmVOLUME : (VOL | VOLUME) EQUAL (
-    ddParmVOLUME_private |
-    ddParmVOLUME_SER |
-    ddParmVOLUME_REF |
-    (LPAREN
-        ddParmVOLUME_private?
-        ddParmVOLUME_retain?
-        ddParmVOLUME_seq_nb?
-        ddParmVOLUME_count?
-        ddParmVOLUME_SER? 
-        ddParmVOLUME_REF? 
-    RPAREN)
-  ) ;
-
-ddParmVolSer : (VOL_SER_NB | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | SYMBOLIC+) ;
-ddParmVOLUME_SER : (
-    (VOL_SER EQUAL ddParmVolSer) |
-    (VOL_SER EQUAL LPAREN  ddParmVolSer+ RPAREN)
-  ) ;
-
-ddParmVOLUME_REF : VOL_REF EQUAL keywordOrSymbolic ;
-
-ddParmVOLUME_private : (VOL_PRIVATE | SYMBOLIC) ;
-ddParmVOLUME_retain : (VOL_RETAIN | SYMBOLIC) ;
-ddParmVOLUME_seq_nb : (VOL_SEQ_NB | SYMBOLIC) ;
-ddParmVOLUME_count : (VOL_COUNT | SYMBOLIC) ;
-*/
 
 joblibStatement : SS JOBLIB DD SYMBOLIC* ;
 
@@ -945,7 +785,7 @@ jes2RoutePRINT : JES2_ROUTE_PRINT JES2_ROUTE_VALUE ;
 jes2RoutePUNCH : JES2_ROUTE_PUNCH JES2_ROUTE_VALUE ;
 jes2RouteXEQ : JES2_ROUTE_XEQ JES2_ROUTE_VALUE ;
 
-jes2SetupStatement : SA JES2_SETUP VOL_SER_NB+ ;
+jes2SetupStatement : SA JES2_SETUP keywordOrSymbolic (COMMA keywordOrSymbolic)* ;
 
 jes2SignoffStatement : SA JES2_SIGNOFF ;
 

@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (23-Apr-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (28-Apr-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -53,9 +53,26 @@ So, you might execute...
 
 ...after downloading the contents of SYS1.PROCLIB to some directory and running them through the src/rmvLnNb awk script, and storing the output in directory /home/cschneid/SYS1.PROCLIB.
 
+More generically, I would suggest...
+
+ + Create directories corresponding to each of your libraries containing cataloged procedures, INCLUDEs, and execution JCL
+ + Download the contents of each library into a temporary directory 
+ + Run each member through the rmvLnNb awk script, placing the output in the directory that corresponds to the library in which these members originally resided
+ + Create a file list (to use with the `-fileList` option) containing the names of the files in each of your execution JCL directories, maybe call it myList
+ + Create a list of cataloged procedure and INCLUDE libraries and their corresponding directories (to use with the `-includeList` option) where each line is a library name followed by a comma followed by its corresponding directory - this will be used in resolving cataloged procedures and INCLUDEs by mapping the libraries on a job's JCLLIB statement to a directory.  You can also include directories corresponding to libraries in the JES PROCxx concatenation by not coding a comma or a library name on that line.  Maybe call this file myLibs.
+ + Execute `java -jar JCLParser.jar -fileList myList -includeList myLibs -outtree myOutput.tsv -outcsv myOutput.csv`
+
 ### Bear In Mind
 
-The Demo01 application will create several temporary files for each JCL member you parse.  Unless you specify the `-saveTemp` option, and it's just there for debugging purposes, these files will be deleted automatically on normal termination of the JVM.
+The Demo01 application will create several temporary files for each JCL member you parse.  Unless you specify the `-saveTemp` option, and it's just there for debugging purposes, these files will be deleted automatically on normal termination of the JVM.  These files will, however, persist for the length of the run, and there are several created for each piece of execution JCL and procedure, so make sure you're not short of space for temporary files.
+
+A log file will be created in the current directory with messages about the current run.  If you use the `-logLevel` option, it applies to these messages.  The log messages output to the screen are at the INFO level or above.
+
+### Output File Formats
+
+The outtree file is formatted with tab characters to give, once imported into LibreOffice Calc or similar, a tree view of steps executing programs or procedures and the steps in those procedures which may execute other procedures.
+
+The outcsv file has identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a job or jobs, a job to its steps, a step to its DD statements, a step to a PROC it may execute, a PROC to its steps, and so on.
 
 ### Build/Execution Environment
 
@@ -111,6 +128,8 @@ Consider a job...
 ...and PROC2 contains...
 
     //AEIOU    PROC
+    //*
+    // SET TYPE=01
     //*
     //PS01     EXEC PROC=PROC&PROCNB
     //*
