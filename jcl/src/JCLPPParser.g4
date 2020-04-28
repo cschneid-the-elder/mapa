@@ -376,11 +376,7 @@ ddParmSUBSYS : SUBSYS EQUAL singleOrMultipleValue ;
 ddParmSYMBOLS : SYMBOLS EQUAL singleOrMultipleValue ;
 
 ddParmSYMLIST : SYMLIST EQUAL singleOrMultipleValue ;
-ddParmSYSOUT : SYSOUT EQUAL (
-    sysoutClass |
-    (LPAREN RPAREN ) |
-    (LPAREN sysoutClass sysoutWriter? sysoutFormOrCase? RPAREN)
-  ) ;
+ddParmSYSOUT : SYSOUT singleOrMultipleValue ;
 
 sysoutClass : (SYSOUT_CLASS | QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | SYMBOLIC+) ;
 sysoutWriter : (SYSOUT_WRITER | SYSOUT_INTRDR | SYMBOLIC) ;

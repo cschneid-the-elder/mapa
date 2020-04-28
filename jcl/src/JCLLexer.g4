@@ -544,7 +544,7 @@ DD_STORCLAS : S T O R C L A S ->type(STORCLAS),pushMode(KYWD_VAL_MODE) ;
 DD_SUBSYS : S U B S Y S ->type(SUBSYS),pushMode(KYWD_VAL_MODE) ;
 DD_SYMBOLS : S Y M B O L S ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ;
 DD_SYMLIST : S Y M L I S T ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
-DD_SYSOUT : S Y S O U T ->type(SYSOUT),pushMode(SYSOUT_MODE) ;
+DD_SYSOUT : S Y S O U T ->type(SYSOUT),pushMode(KYWD_VAL_MODE) ;
 DD_TERM : T E R M ->type(TERM),pushMode(KYWD_VAL_MODE) ;
 DD_UCS : U C S ->type(UCS),pushMode(UCS_MODE) ;
 DD_UNIT : U N I T ->type(UNIT),pushMode(KYWD_VAL_MODE) ;
