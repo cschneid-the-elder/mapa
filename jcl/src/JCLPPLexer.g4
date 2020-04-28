@@ -609,7 +609,7 @@ DD_SYMLIST : S Y M L I S T
       hide = false;
     }
  ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
-DD_SYSOUT : S Y S O U T ->type(SYSOUT),channel(HIDDEN),pushMode(SYSOUT_MODE) ;
+DD_SYSOUT : S Y S O U T ->type(SYSOUT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_TERM : T E R M ->type(TERM),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
 DD_UCS : U C S ->type(UCS),channel(HIDDEN),pushMode(UCS_MODE) ;
 DD_UNIT : U N I T ->type(UNIT),channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
