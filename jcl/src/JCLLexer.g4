@@ -546,7 +546,7 @@ DD_SYMBOLS : S Y M B O L S ->type(SYMBOLS),pushMode(KYWD_VAL_MODE) ;
 DD_SYMLIST : S Y M L I S T ->type(SYMLIST),pushMode(KYWD_VAL_MODE) ;
 DD_SYSOUT : S Y S O U T ->type(SYSOUT),pushMode(KYWD_VAL_MODE) ;
 DD_TERM : T E R M ->type(TERM),pushMode(KYWD_VAL_MODE) ;
-DD_UCS : U C S ->type(UCS),pushMode(UCS_MODE) ;
+DD_UCS : U C S ->type(UCS),pushMode(KYWD_VAL_MODE) ;
 DD_UNIT : U N I T ->type(UNIT),pushMode(KYWD_VAL_MODE) ;
 DD_VOL : V O L ->type(VOL),pushMode(KYWD_VAL_MODE) ;
 DD_VOLUME : V O L U M E ->type(VOLUME),pushMode(KYWD_VAL_MODE) ;

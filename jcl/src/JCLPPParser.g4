@@ -385,14 +385,7 @@ sysoutFormOrCase : (SYSOUT_FORM | SYMBOLIC) ;
 ddParmTERM : TERM EQUAL keywordOrSymbolic ;
 ddParmTHRESH : THRESH EQUAL keywordOrSymbolic ;
 ddParmTRTCH : TRTCH EQUAL keywordOrSymbolic ;
-ddParmUCS : UCS EQUAL (
-    ddParmUCS_code |
-    (LPAREN 
-        ddParmUCS_code 
-        ddParmUCS_fold? 
-        ddParmUCS_verify?
-    RPAREN)
-  ) ;
+ddParmUCS : UCS EQUAL singleOrMultipleValue ;
 
 ddParmUCS_code : (UCS_CODE | SYMBOLIC) ;
 ddParmUCS_fold : (UCS_FOLD | SYMBOLIC) ;
