@@ -173,7 +173,7 @@ ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
 ddParmCHARS : CHARS EQUAL singleOrMultipleValue ;
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL keywordOrSymbolic ;
-ddParmCOPIES : COPIES EQUAL copiesPayload ;
+ddParmCOPIES : COPIES EQUAL singleOrMultipleValue ;
 ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
 ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
 ddParmDATA : DATA ;
@@ -633,18 +633,7 @@ outputStatementCOLORMAP : OUTPUT_STMT_COLORMAP EQUAL keywordOrSymbolic ;
 outputStatementCOMPACT : OUTPUT_STMT_COMPACT EQUAL keywordOrSymbolic ;
 outputStatementCOMSETUP : OUTPUT_STMT_COMSETUP EQUAL keywordOrSymbolic ;
 outputStatementCONTROL : OUTPUT_STMT_CONTROL EQUAL keywordOrSymbolic ;
-outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL copiesPayload ;
-copiesPayload : (
-    copiesValueOrSymbolic |
-    (LPAREN copiesValueOrSymbolic RPAREN) |
-    (LPAREN
-      copiesValueOrSymbolic?
-      LPAREN
-        (COPIES_GROUP_VALUE | SYMBOLIC)+
-      RPAREN
-    RPAREN)
-  ) ;
-copiesValueOrSymbolic : (COPIES_VALUE | SYMBOLIC) ;
+outputStatementCOPIES : OUTPUT_STMT_COPIES EQUAL singleOrMultipleValue ;
 outputStatementCOPYCNT : OUTPUT_STMT_COPYCNT EQUAL keywordOrSymbolic ;
 outputStatementDATACK : OUTPUT_STMT_DATACK EQUAL keywordOrSymbolic ;
 outputStatementDDNAME : OUTPUT_STMT_DDNAME EQUAL keywordOrSymbolic ;
@@ -666,13 +655,7 @@ IP address below.
 outputStatementDPAGELBL : OUTPUT_STMT_DPAGELBL EQUAL keywordOrSymbolic ;
 outputStatementDUPLEX : OUTPUT_STMT_DUPLEX EQUAL keywordOrSymbolic ;
 outputStatementFCB : OUTPUT_STMT_FCB EQUAL keywordOrSymbolic ;
-outputStatementFLASH : OUTPUT_STMT_FLASH EQUAL (
-    OUTPUT_FLASH_OVERLAY |
-    (LPAREN OUTPUT_FLASH_OVERLAY OUTPUT_FLASH_COUNT RPAREN) |
-    (LPAREN OUTPUT_FLASH_OVERLAY? OUTPUT_FLASH_COUNT RPAREN) |
-    (LPAREN OUTPUT_FLASH_OVERLAY OUTPUT_FLASH_COUNT? RPAREN) |
-  )
-  ;
+outputStatementFLASH : OUTPUT_STMT_FLASH EQUAL singleOrMultipleValue ;
 
 outputStatementFORMDEF : OUTPUT_STMT_FORMDEF EQUAL keywordOrSymbolic ;
 outputStatementFORMLEN : OUTPUT_STMT_FORMLEN EQUAL keywordOrSymbolic ;
@@ -690,12 +673,7 @@ outputStatementMAILFILE : OUTPUT_STMT_MAILFILE EQUAL keywordOrSymbolic ;
 outputStatementMAILFROM : OUTPUT_STMT_MAILFROM EQUAL keywordOrSymbolic ;
 outputStatementMAILTO : OUTPUT_STMT_MAILTO EQUAL singleOrMultipleValue ;
 outputStatementMERGE : OUTPUT_STMT_MERGE EQUAL keywordOrSymbolic ;
-outputStatementMODIFY : OUTPUT_STMT_MODIFY EQUAL (
-    OUTPUT_MODIFY_MODULE |
-    (LPAREN OUTPUT_MODIFY_MODULE OUTPUT_MODIFY_TRC RPAREN) |
-    (LPAREN OUTPUT_MODIFY_MODULE? OUTPUT_MODIFY_TRC RPAREN) |
-    (LPAREN OUTPUT_MODIFY_MODULE OUTPUT_MODIFY_TRC? RPAREN)
-  ) ;
+outputStatementMODIFY : OUTPUT_STMT_MODIFY EQUAL singleOrMultipleValue ;
 outputStatementNAME : OUTPUT_STMT_NAME EQUAL keywordOrSymbolic ;
 outputStatementNOTIFY : OUTPUT_STMT_NOTIFY EQUAL singleOrMultipleValue ;
 outputStatementOFFSETXB : OUTPUT_STMT_OFFSETXB EQUAL keywordOrSymbolic ;
@@ -703,12 +681,7 @@ outputStatementOFFSETXF : OUTPUT_STMT_OFFSETXF EQUAL keywordOrSymbolic ;
 outputStatementOFFSETYB : OUTPUT_STMT_OFFSETYB EQUAL keywordOrSymbolic ;
 outputStatementOFFSETYF : OUTPUT_STMT_OFFSETYF EQUAL keywordOrSymbolic ;
 outputStatementOUTBIN : OUTPUT_STMT_OUTBIN EQUAL keywordOrSymbolic ;
-outputStatementOUTDISP : OUTPUT_STMT_OUTDISP EQUAL (
-    OUTPUT_OUTDISP_NORMAL |
-    (LPAREN OUTPUT_OUTDISP_NORMAL OUTPUT_OUTDISP_ABNORMAL RPAREN) |
-    (LPAREN OUTPUT_OUTDISP_NORMAL? OUTPUT_OUTDISP_ABNORMAL RPAREN) |
-    (LPAREN OUTPUT_OUTDISP_NORMAL OUTPUT_OUTDISP_ABNORMAL? RPAREN)
-  ) ;
+outputStatementOUTDISP : OUTPUT_STMT_OUTDISP EQUAL singleOrMultipleValue ;
 outputStatementOVERLAYB : OUTPUT_STMT_OVERLAYB EQUAL keywordOrSymbolic ;
 outputStatementOVERLAYF : OUTPUT_STMT_OVERLAYF EQUAL keywordOrSymbolic ;
 outputStatementOVFL : OUTPUT_STMT_OVFL EQUAL keywordOrSymbolic ;
