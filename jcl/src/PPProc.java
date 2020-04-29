@@ -559,6 +559,10 @@ public class PPProc {
 		}
 		src.close();
 		out.close();
+		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Files.setPosixFilePermissions(tmp.toPath(), perms);
+		}
 		return tmp;
 	}
 
@@ -717,6 +721,10 @@ public class PPProc {
 		}
 		src.close();
 		out.close();
+		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Files.setPosixFilePermissions(tmp.toPath(), perms);
+		}
 		return tmp;
 	}
 
@@ -782,16 +790,11 @@ public class PPProc {
 	}
 
 	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
-		/*
-			It's possible the file permissions are superfluous.  The code would be more
-			portable without them.  TODO maybe remove the code setting file permissions.
-			Path aPath = baseDir.toPath();
-			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
-		*/
-		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
-		FileAttribute<Set<PosixFilePermission>> attr =
-			PosixFilePermissions.asFileAttribute(perms);
-		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx, attr).toFile();
+		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
+		if (tmpDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Files.setPosixFilePermissions(tmpDir.toPath(), perms);
+		}
 
 		if (saveTemp) {
 		} else {
