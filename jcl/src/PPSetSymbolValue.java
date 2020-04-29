@@ -244,32 +244,18 @@ public class PPSetSymbolValue {
 	}
 
 	public String getParmValue() {
-	//TODO make private and simplify
-
 		if (this.parmValue == null) {
-			switch(this.setType) {
-				case SET:
-					this.parmValue = getParmValueForSetOperationContext();
-					break;
-				case EXEC:
-					this.parmValue = getParmValueForExecProcParmContext();
-					break;
-				case PROC:
-					this.parmValue = getParmValueForDefineSymbolicParameterContext();
-					break;
-				case SYS:
-					this.parmValue = getParmValueForSetOperationContext();
-					break;
-				default:
-					this.LOGGER.severe(
-						this.myName
-						+ " getParmValue() found " 
-						+ this.ctx.getClass().getName()
-						+ " "
-						+ this.setType
-					);
-					this.parmValue = new String();
-					break;
+			if (this.kywd == null) {
+				/*
+				It's legal for this to be null.  The following is syntactically correct.
+
+				// SET TALYN=
+
+				In this instance the parm TALYN is set to nothing.
+				*/
+				this.parmValue = "";
+			} else {
+				this.parmValue = kywd.getValue();
 			}
 		}
 
@@ -361,66 +347,6 @@ public class PPSetSymbolValue {
 		}
 
 		return theLine;
-	}
-
-	private String getParmValueForSetOperationContext() {
-		String theText = null;
-
-		if (this.kywd == null) {
-			/*
-				It's legal for this to be null.  The following is syntactically correct.
-
-				// SET TALYN=
-
-				In this instance the parm TALYN is set to nothing.
-			*/
-			theText = "";
-		} else {
-			theText = kywd.getValue();
-		}
-
-		return theText;
-	}
-
-	private String getParmValueForExecProcParmContext() {
-		String theText = null;
-
-		if (this.kywd == null) {
-			/*
-				It's legal for this to be null.  The following is syntactically correct.
-
-				//JS01 EXEC PROC=MOYA,TALYN=
-
-				In this instance the parm TALYN is set to nothing.  Any default value
-				set in the PROC statement for the proc MOYA is nullified.  Any value
-				set in a SET statement prior to this EXEC statement is nullified.
-			*/
-			theText = "";
-		} else {
-			theText = kywd.getValue();
-		}
-
-		return theText;
-	}
-
-	private String getParmValueForDefineSymbolicParameterContext() {
-		String theText = null;
-
-		if (this.kywd == null) {
-			/*
-				It's legal for this to be null.  The following is syntactically correct.
-
-				//MOYA PROC TALYN=
-
-				In this instance the parm TALYN is set to nothing.  Any value
-				set in a SET statement prior to execution of the proc MOYA is nullified.
-			*/
-			theText = "";
-		} else {
-			theText = kywd.getValue();
-		}
-
-		return theText;
 	}
 
 	public String getProcBeingExecuted() {
