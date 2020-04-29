@@ -262,16 +262,11 @@ public static void main(String[] args) throws Exception {
 	}
 
 	public static File newTempDir() throws IOException {
-		/*
-			It's possible the file permissions are superfluous.  The code would be more
-			portable without them.  TODO maybe remove the code setting file permissions.
-			Path aPath = baseDir.toPath();
-			if (baseDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix"));
-		*/
-		Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
-		FileAttribute<Set<PosixFilePermission>> attr =
-			PosixFilePermissions.asFileAttribute(perms);
-		File tmpDir = Files.createTempDirectory("Demo01-", attr).toFile();
+		File tmpDir = Files.createTempDirectory("Demo01-").toFile();
+		if (tmpDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Files.setPosixFilePermissions(tmpDir.toPath(), perms);
+		}
 
 		if (CLI.saveTemp) {
 		} else {
