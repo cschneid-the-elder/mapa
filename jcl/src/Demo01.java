@@ -77,6 +77,9 @@ public static void main(String[] args) throws Exception {
 		int jobNb = 0;
 		UUID uuid = UUID.randomUUID(); //identify a file
 		lexAndParsePP(jobsPP, procsPP, aFileName, fileNb);
+		if (jobsPP.size() == 0 && procsPP.size() == 0) {
+			LOGGER.info(aFileName + " contains neither jobs nor procs - not JCL?");
+		}
 		for (PPJob j: jobsPP) {
 			jobNb++;
 			LOGGER.info("Processing job " + j);
@@ -93,7 +96,7 @@ public static void main(String[] args) throws Exception {
 				so only now the INCLUDEs have been resolved can the symbolics 
 				be resolved.
 			*/
-			rJob.resolveParms();
+			//rJob.resolveParms();
 			/*
 				Now must rewrite job with resolved values for parms substituted.
 			*/

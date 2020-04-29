@@ -251,11 +251,10 @@ public class PPProc {
 	}
 
 	/**
-	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
-
-	TODO make private.
+	<code>searchProcPathsFor()</code> uses this in its search for PROCs 
+	and INCLUDEs.
 	*/
-	public ArrayList<String> getJcllibStrings() {
+	private ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
 		for (PPKeywordOrSymbolicWrapper k: jcllib) {
@@ -265,10 +264,16 @@ public class PPProc {
 		return libs;
 	}
 
+	/**
+	Used by listeners in construction of instances of this class.
+	*/
 	public void addInclude(PPIncludeStatement include) {
 		this.includes.add(include);
 	}
 
+	/**
+	Used by listeners in construction of instances of this class.
+	*/
 	public void addSetSym(PPSetSymbolValue setSym) {
 		this.setSym.add(setSym);
 	}
@@ -574,14 +579,24 @@ public class PPProc {
 		return symbolics;
 	}
 
+	/**
+	Iteratively lex/parse, resolve INCLUDE statement symbolic parameters, 
+	and rewrite this proc until all INCLUDEs are resolved or all that
+	remains are unresolvable INCLUDEs.
+
+	<p>A JCL INCLUDE member can contain an INCLUDE statement; further, a JCL
+	INCLUDE member can be composed of symbolic parameters; further yet, a
+	JCL INCLUDE member can contain SET statements for symbolic parameters;
+	and so parameterized JCL INCLUDE statements have their symbolic parameters
+	resolved, are rewritten to a temporary file which is lexed and parsed and
+	has its parameterized JCL INCLUDE statements' symbolic parameters resolved,
+	and so on, iteratively, until all INCLUDEs are resolved or all that
+	remains are unresolvable INCLUDEs.
+	*/
 	public PPProc iterativelyResolveIncludes(
 					ArrayList<PPSetSymbolValue> execSetSym
 					, File initialFile
 					) throws IOException {
-		/*
-			At this point the intent is to iteratively process the job until all INCLUDEs are
-			resolved.  Potentially, an INCLUDE can contain other INCLUDEs, SETs, and EXECs.
-		*/
 		this.LOGGER.finer(
 			this.myName 
 			+ " iterativelyResolveIncludes this = |" 

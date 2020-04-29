@@ -378,10 +378,8 @@ public class PPJob {
 	class.  PPSymbolic is contained in PPKeywordValueWrapper which is contained
 	in PPKeywordOrSymbolicWrapper which may be contained in 
 	PPSingleOrMultipleValueWrapper.
-
-	TODO make private, remove from Demo01, execute from this.rewriteWithParmsResolved()
 	*/
-	public void resolveParms() {
+	private void resolveParms() {
 		this.LOGGER.finer(this.myName + " resolveParms " + this);
 
 		ArrayList<PPSetSymbolValue> allSym = new ArrayList<>(this.CLI.PPsetSym);
@@ -489,11 +487,10 @@ public class PPJob {
 	}
 
 	/**
-	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
-
-	TODO make private.
+	<code>searchProcPathsFor()</code> uses this in its search for PROCs 
+	and INCLUDEs.
 	*/
-	public ArrayList<String> getJcllibStrings() {
+	private ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
 		for (PPKeywordOrSymbolicWrapper k: jcllib) {
@@ -520,6 +517,7 @@ public class PPJob {
 			+ "|"
 			);
 
+		this.resolveParms();
 		this.sym = this.collectSymbolics();
 		this.LOGGER.finest(this.myName + " sym = |" + this.sym + "|");
 		File aFile = new File(this.getFileName());
@@ -713,10 +711,8 @@ public class PPJob {
 	/**
 	This method rewrites the job represented by this instance with any
 	INCLUDE statements replaced by the contents of the member they point to.
-
-	TODO make private.
 	*/
-	public File rewriteJobWithIncludesResolved() throws IOException {
+	private File rewriteJobWithIncludesResolved() throws IOException {
 		this.LOGGER.finer(
 			this.myName 
 			+ " rewriteJobWithIncludesResolved job = |" 
@@ -836,10 +832,8 @@ public class PPJob {
 	/**
 	Locate the file pointed to by the passed INCLUDE statement and write
 	its contents to the passed PrintWriter.
-
-	TODO make private.
 	*/
-	public Boolean writeTheIncludeContent(
+	private Boolean writeTheIncludeContent(
 							PPIncludeStatement i
 							, PrintWriter out
 							)

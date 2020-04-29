@@ -97,8 +97,7 @@ public class PPSymbolic {
 		return (this.resolvedText != null && !this.ssv.isParameterized());
 	}
 
-	public void setResolvedValue(PPSetSymbolValue s) {
-		//TODO make private
+	private void setResolvedValue(PPSetSymbolValue s) {
 		this.LOGGER.finer(
 			myName 
 			+ " setResolvedValue text = |" 

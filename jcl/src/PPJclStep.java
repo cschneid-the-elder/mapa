@@ -120,7 +120,13 @@ public class PPJclStep {
 			} else {
 				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.pgmExecuted = new PPKeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
+			this.pgmExecuted = 
+				new PPKeywordOrSymbolicWrapper(
+					this.execPgmStmtCtx.keywordOrSymbolic()
+					, this.procName
+					, this.LOGGER
+					, this.CLI
+					);
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execProcStmtCtx.stepName() == null) {
@@ -128,34 +134,79 @@ public class PPJclStep {
 			} else {
 				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.procExecuted = new PPKeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
+			this.procExecuted = 
+				new PPKeywordOrSymbolicWrapper(
+					this.execProcStmtCtx.keywordOrSymbolic()
+					, this.procName
+					, this.LOGGER
+					, this.CLI
+					);
 			for (JCLPPParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
-				this.setSym.add(new PPSetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted(), this.LOGGER, this.CLI));
+				this.setSym.add(
+					new PPSetSymbolValue(
+						epp
+						, this.fileName
+						, this.procName
+						, this.getProcExecuted()
+						, this.LOGGER
+						, this.CLI
+						)
+					);
 			}
 		}
 
 		if (this.ddStmtAmlgnCtxs == null) {
 		} else {
 			for (JCLPPParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
-				this.ddStatements.add(new PPDdStatementAmalgamation(d, this.procName, this.fileName, this.LOGGER, this.CLI));
+				this.ddStatements.add(
+					new PPDdStatementAmalgamation(
+						d
+						, this.procName
+						, this.fileName
+						, this.LOGGER
+						, this.CLI
+						)
+					);
 			}
 		}	
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finer(this.myName + " " + this.stepName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		this.LOGGER.finer(
+			this.myName 
+			+ " " 
+			+ this.stepName 
+			+ " setTmpDirs(" 
+			+ baseDir 
+			+ "," 
+			+ tmpProcDir 
+			+ ")"
+			);
+
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " " 
+				+ this.stepName 
+				+ " setTmpDirs baseDir set to |" 
+				+ this.baseDir 
+				+ "|"
+				);
 		}
 
 		if (this.tmpProcDir == null) {
 			this.tmpProcDir = tmpProcDir;
-			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " " 
+				+ this.stepName 
+				+ " setTmpDirs tmpProcDir set to |" 
+				+ this.tmpProcDir 
+				+ "|"
+				);
 		}
 
-		this.LOGGER.fine(this.myName +  " " + this.stepName + " setTmpDirs procExecuted = |" + this.procExecuted + "|");
-		
 	}
 
 	public Boolean isExecProc() {
@@ -217,11 +268,10 @@ public class PPJclStep {
 	}
 
 	/**
-	<code>searchProcPathsFor()</code> uses this to search for PROCs and INCLUDEs.
-
-	TODO make private.
+	<code>searchProcPathsFor()</code> uses this in its search for PROCs 
+	and INCLUDEs.
 	*/
-	public ArrayList<String> getJcllibStrings() {
+	private ArrayList<String> getJcllibStrings() {
 		ArrayList<String> libs = new ArrayList<>();
 
 		for (PPKeywordOrSymbolicWrapper k: jcllib) {
@@ -231,6 +281,9 @@ public class PPJclStep {
 		return libs;
 	}
 
+	/**
+	Used in symbolic substitution in PPJob and PPProc.
+	*/
 	public ArrayList<PPSymbolic> collectSymbolics() {
 		this.LOGGER.finer(this.myName + " collectSymbolics");
 
