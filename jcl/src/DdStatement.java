@@ -6,6 +6,9 @@ import org.antlr.v4.runtime.tree.*;
 /**
 Instances of this class represent a DD statement.
 
+<p>Applications may wish to create their own wrapper classes modeled
+on DispWrapper, PathDispWrapper, or DsidWrapper.  These were all that
+was necessary for the Demo01 application.
 */
 public class DdStatement {
 
@@ -106,11 +109,11 @@ public class DdStatement {
 		this.ordNb = ordNb;
 	}
 
+	/**
+	The following bad idea is brought to you by the dozens of parameters of
+	the DD statement.
+	*/
 	private void initializeTediously(List<JCLParser.DdParameterContext> ddParms) {
-		/*
-			The following bad idea is brought to you by the dozens of parameters of
-			the DD statement.
-		*/
 		for (JCLParser.DdParameterContext ddParm: ddParms) {
 			if (ddParm.ddParmACCODE() != null) {
 				KeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.ddParmACCODE().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);

@@ -4,6 +4,41 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class represents individual TerminalNode instances that compose the parser
+construct keywordOrSymbolic.  These are stored separately, as the original JCL
+may be...
+
+<code>//STEPNAME EXEC PGM=A&B&C.D&E.FG</code>
+
+<p>...where the values of &B, &C, and &E are set elsewhere.  In this case 
+there will exist an instance of KeywordOrSymbolicWrapper which 
+will have an ArrayList called kvw containing instances of KeywordValueWrapper
+(this class) whose values are...
+
+<p><ul>
+<li>A
+<li>&B
+<li>&C
+<li>.
+<li>D
+<li>&E
+<li>.
+<li>F
+<li>G
+</ul>
+
+<p>...which facilitates substituting the values for &B, &C, and &E and then
+assembling the intended value for the PGM= parameter of the EXEC statement.
+
+<p>There are rules governing the substitution.  Values assigned or nullified
+on SET statements are overridden by values assigned or nullified on EXEC
+or PROC statements.  See the IBM documentation for the SET statement for
+examples.
+
+TODO resolve whether this is sufficient and ParameterString is superfluous
+
+*/
 
 public class KeywordValueWrapper {
 
@@ -109,7 +144,7 @@ public class KeywordValueWrapper {
 		this.CLI = CLI;
 		this.procName = procName;
 
-
+		//TODO? EQUAL COMMA LPAREN RPAREN
 		switch(this.type) {
 			case AMPERSAND :
 				this.setResolvedValue("&");

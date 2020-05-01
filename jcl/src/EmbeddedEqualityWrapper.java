@@ -2,6 +2,17 @@
 import java.util.*;
 import java.util.logging.*;
 
+/**
+This class represents the parser construct embeddedEquality, which 
+attempts to capture constructs such as...
+
+<p><ul>
+<li><code>UNIT=AFF=DDNAME01</code>
+<li><code>UNIT=(SYSDA,SEP=(SYSLIN,SYSLMOD))</code>
+</ul>
+
+*/
+
 public class EmbeddedEqualityWrapper {
 
 	private Logger LOGGER = null;

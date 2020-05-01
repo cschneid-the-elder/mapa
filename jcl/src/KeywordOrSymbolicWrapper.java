@@ -5,38 +5,42 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
+This class represents the parser construct keywordOrSymbolic which encapsulates
+a quoted string, a string, or a symbolic parameter.
 
-This may be confusing.  A KeywordOrSymbolicContext instance contains zero
+<p>This may be confusing.  A KeywordOrSymbolicContext instance contains zero
 or more collections of each of three flavors of TerminalNode instances.
 
-Each of those TerminalNode instances has attributes we store in an instance
+<p>Each of those TerminalNode instances has attributes we store in an instance
 of KeywordValueWrapper.
 
-All of these TerminalNode instances combined are what we think of as the
+<p>All of these TerminalNode instances combined are what we think of as the
 "value" of this instance of KeywordOrSymbolicWrapper.
 
-The original JCL may look like...
+<p>The original JCL may look like...
 
-//STEPNAME EXEC PGM=A&B&C.D&E.FG
+<code>//STEPNAME EXEC PGM=A&B&C.D&E.FG</code>
 
-...where the values of &B, &C, and &E are set elsewhere.  In this case we
+<p>...where the values of &B, &C, and &E are set elsewhere.  In this case we
 will have an ArrayList called kvw containing instances of KeywordValueWrapper
 whose values are...
 
-A
-&B
-&C
-.
-D
-&E
-.
-F
-G
+<p><ul>
+<li>A
+<li>&B
+<li>&C
+<li>.
+<li>D
+<li>&E
+<li>.
+<li>F
+<li>G
+</ul>
 
-...which facilitates substituting the values for &B, &C, and &E and then
+<p>...which facilitates substituting the values for &B, &C, and &E and then
 assembling the intended value for the PGM= parameter of the EXEC statement.
 
-There are rules governing the substitution.  Values assigned or nullified
+<p>There are rules governing the substitution.  Values assigned or nullified
 on SET statements are overridden by values assigned or nullified on EXEC
 or PROC statements.  See the IBM documentation for the SET statement for
 examples.
@@ -69,6 +73,11 @@ public class KeywordOrSymbolicWrapper {
 		return kywdList;
 	}
 
+	/**
+	Factory method to return a bunch of instances of this class given 
+	a List of KeywordOrSymbolicContext instances from which to instantiate 
+	them.
+	*/
 	public static ArrayList<KeywordOrSymbolicWrapper> bunchOfThese(
 			List<JCLParser.KeywordOrSymbolicContext> ctxList
 			, String procName
@@ -168,6 +177,11 @@ public class KeywordOrSymbolicWrapper {
 		return buf.toString();
 	}
 
+	/**
+	Return the sortKey of the first element of this instance's collection of
+	KeywordValueWrappers.  The collection is a continuous set of values 
+	from the JCL, so the sortKey of the first element is sufficient to task.
+	*/
 	public long getSortKey() {
 		return this.kvw.get(0).getSortKey();
 	}

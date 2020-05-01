@@ -4,6 +4,12 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class represents individual components of a JCL statement parameter,
+including any commas and parentheses.
+
+TODO resolve whether KeywordValueWrapper is sufficient and this is superfluous
+*/
 
 public class ParameterString {
 
