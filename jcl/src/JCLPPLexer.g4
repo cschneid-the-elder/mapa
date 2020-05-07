@@ -407,22 +407,86 @@ mode EXEC2_MODE ;
 
 EXEC_EQUAL : EQUAL_DFLT ->type(EQUAL),pushMode(KYWD_VAL_MODE) ;
 
-EXEC_ACCT : A C C T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_ADDRSPC : A D D R S P C (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_CCSID : C C S I D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_COND : C O N D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_DYNAMNBR : D Y N A M N B R (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_MEMLIMIT : M E M L I M I T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_PARM : P A R M (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_PARMDD : P A R M D D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_PERFORM : P E R F O R M (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_RD : R D (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_REGION : R E G I O N (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_REGIONX : R E G I O N X (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_RLSTMOUT : R L S T M O U T (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_TIME : T I M E (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_TVSMSG : T V S M S G (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
-EXEC_TVSAMCOM : T V S A M C O M (DOT_DFLT NM_PART)? ->channel(HIDDEN),pushMode(KYWD_VAL_MODE) ;
+EXEC_ACCT : A C C T (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_ADDRSPC : A D D R S P C (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_CCSID : C C S I D (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_COND : C O N D (DOT_DFLT NM_PART)? 
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_DYNAMNBR : D Y N A M N B R (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_MEMLIMIT : M E M L I M I T (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_PARM : P A R M (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_PARMDD : P A R M D D (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_PERFORM : P E R F O R M (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_RD : R D (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_REGION : R E G I O N (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_REGIONX : R E G I O N X (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_RLSTMOUT : R L S T M O U T (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_TIME : T I M E (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_TVSMSG : T V S M S G (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
+EXEC_TVSAMCOM : T V S A M C O M (DOT_DFLT NM_PART)?
+    {
+      hide = false;
+    }
+ ->pushMode(KYWD_VAL_MODE) ;
 
 EXEC_PROC_PARM : NAME
     {

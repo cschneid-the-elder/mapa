@@ -106,7 +106,21 @@ public class KeywordOrSymbolicWrapper {
 		this.inProc = !(procName == null);
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
-		this.initialize();
+		if (this.ctx == null) {
+			StringBuffer sb = new StringBuffer();
+			for (StackTraceElement ste: new Throwable().getStackTrace()) {
+				sb.append(ste.toString());
+				sb.append(System.getProperty("line.separator"));
+			}
+			this.LOGGER.warning(
+				this.getClass().getName()
+				+ " KeywordOrSymbolicContext supplied is null, arriving via..."
+				+ System.getProperty("line.separator")
+				+ sb.toString()
+				);
+		} else {
+			this.initialize();
+		}
 	}
 
 	private void initialize() {

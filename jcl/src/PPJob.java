@@ -579,7 +579,7 @@ public class PPJob {
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;
@@ -756,7 +756,7 @@ public class PPJob {
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;
@@ -803,6 +803,7 @@ public class PPJob {
 		PrintWriter procOut = null;
 		while ((inLine = src.readLine()) != null) {
 			if (this.lineIsInThisJob(src.getLineNumber())) {
+				this.LOGGER.finest(this.myName + " line " + src.getLineNumber() + " is not in this job");
 			} else {
 				continue;
 			}
@@ -815,6 +816,7 @@ public class PPJob {
 					procOut = null;
 				}
 				out.println(inLine);
+				this.LOGGER.finest(this.myName + " output to job  = |" + inLine + "|");
 			} else {
 				if (procOut == null) {
 					procTmp = new File(this.tmpProcDir.toString() + File.separator + aProc.getProcName());
@@ -826,13 +828,14 @@ public class PPJob {
 					this.LOGGER.finest(this.myName + " procTmp = |" + procTmp.getName() + "|");
 				}
 				procOut.println(inLine);
+				this.LOGGER.finest(this.myName + " output to proc = |" + inLine + "|");
 			}
 			if (src.getLineNumber() == this.getEndLine()) break; //end of this job in this file
 		}
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;

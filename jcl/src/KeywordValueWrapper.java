@@ -36,8 +36,6 @@ on SET statements are overridden by values assigned or nullified on EXEC
 or PROC statements.  See the IBM documentation for the SET statement for
 examples.
 
-TODO resolve whether this is sufficient and ParameterString is superfluous
-
 */
 
 public class KeywordValueWrapper {
