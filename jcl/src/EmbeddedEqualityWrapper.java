@@ -1,6 +1,8 @@
 
 import java.util.*;
 import java.util.logging.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 /**
 This class represents the parser construct embeddedEquality, which 
@@ -20,10 +22,15 @@ public class EmbeddedEqualityWrapper {
 	private String myName = null;
 	private JCLParser.EmbeddedEqualityContext ctx = null;
 	private KeywordOrSymbolicWrapper kywd = null;
+	private TerminalNode equal = null;
 	private SingleOrMultipleValueWrapper val = null;
 	private String procName = null;
 	private Boolean inProc = null;
 
+	/**
+	Factory method to construct a collection of instances of this class
+	from a List obtained from the parser.
+	*/
 	public static ArrayList<EmbeddedEqualityWrapper> bunchOfThese(
 			List<JCLParser.EmbeddedEqualityContext> ctxList
 			, String procName
@@ -57,8 +64,24 @@ public class EmbeddedEqualityWrapper {
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		this.kywd = new KeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
-		this.val = new SingleOrMultipleValueWrapper(ctx.singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
+
+		this.kywd = 
+			new KeywordOrSymbolicWrapper(
+				ctx.keywordOrSymbolic()
+				, this.procName
+				, this.LOGGER
+				, this.CLI
+				);
+
+		this.val = 
+			new SingleOrMultipleValueWrapper(
+				ctx.singleOrMultipleValue()
+				, this.procName
+				, this.LOGGER
+				, this.CLI
+				);
+
+		this.equal = ctx.EQUAL();
 	}
 
 	public String getResolvedKywd() {
@@ -75,6 +98,22 @@ public class EmbeddedEqualityWrapper {
 		buf.append(this.val.getResolvedValue());
 
 		return buf.toString();
+	}
+
+	public long getKywdSortKey() {
+		return this.kywd.getSortKey();
+	}
+
+	public KeywordOrSymbolicWrapper getKeywordOrSymbolicWrapper() {
+		return this.kywd;
+	}
+
+	public SingleOrMultipleValueWrapper getSingleOrMultipleValueWrapper() {
+		return this.val;
+	}
+
+	public TerminalNode getEqual() {
+		return this.equal;
 	}
 
 	public String toString() {

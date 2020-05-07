@@ -8,7 +8,8 @@ import org.antlr.v4.runtime.tree.*;
 This class represents individual components of a JCL statement parameter,
 including any commas and parentheses.
 
-TODO resolve whether KeywordValueWrapper is sufficient and this is superfluous
+<p>KeywordValueWrapper is insufficient to task as it does not and cannot
+know about COMMA, LPAREN, and RPAREN.
 */
 
 public class ParameterString {

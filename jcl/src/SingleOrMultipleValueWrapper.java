@@ -117,8 +117,37 @@ public class SingleOrMultipleValueWrapper {
 			this.addTerminalNodeToParameterStrings(p.RPAREN());
 		}
 
-		//TODO add this.eew
-		
+		for (EmbeddedEqualityWrapper e: this.eew) {
+			this.parameterStrings.add(
+				new ParameterString(
+					e.getResolvedKywd()
+					, e.getKywdSortKey()
+					, this.LOGGER
+					, this.CLI
+				)
+			);
+			for (KeywordOrSymbolicWrapper k: e.
+											getSingleOrMultipleValueWrapper().
+											getKeywordOrSymbolicWrappers()) {
+				this.parameterStrings.add(
+					new ParameterString(
+						k.getResolvedValue()
+						, k.getSortKey()
+						, this.LOGGER
+						, this.CLI
+					)
+				);
+			}
+			this.parameterStrings.add(
+				new ParameterString(
+					e.getEqual()
+					, this.LOGGER
+					, this.CLI
+				)
+			);
+		}
+
+
 		this.parameterStrings.sort(Comparator.comparingLong(ParameterString::getSortKey));
 	}
 
@@ -151,6 +180,10 @@ public class SingleOrMultipleValueWrapper {
 		}
 
 		return buf.toString();
+	}
+
+	public ArrayList<KeywordOrSymbolicWrapper> getKeywordOrSymbolicWrappers() {
+		return this.kosw;
 	}
 
 	/**

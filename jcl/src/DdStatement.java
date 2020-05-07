@@ -794,29 +794,32 @@ public class DdStatement {
 		csvOut.append(",");
 
 		if (dsnParms.get("DSNAME") != null) {
-			csvOut.append("Z");
+			csvOut.append("Z"); //"classic" z/OS dataset
 			csvOut.append(",\"");
 			csvOut.append(dsnParms.get("DSNAME").getResolvedValue());
 			csvOut.append("\"");
 		} else if (this.ddStmtSysoutCtx != null) {
 			isSysout = true;
-			csvOut.append("O");
+			csvOut.append("O"); //spool or sysout
 			csvOut.append(",\"");
 			csvOut.append("SYSOUT");
 			csvOut.append("\"");
 		} else if (this.kosParms.get("PATH") != null) {
 			isUnix = true;
-			csvOut.append("U");
+			csvOut.append("U"); //Unix System Services
 			csvOut.append(",\"");
 			csvOut.append(this.kosParms.get("PATH").getValue());
 			csvOut.append("\"");
-		} else if (this.ddSplatCtx != null && this.ddSplatCtx.size() != 0) {
-			csvOut.append("N");
+		} else if (this.ddSplatCtx != null) {
+			csvOut.append("N"); //"Nathan" or DD splat
 			csvOut.append(",\"");
 			csvOut.append("*");
 			csvOut.append("\"");
 		} else {
-			csvOut.append("\"_NONAME_\"");
+			csvOut.append("?"); //unknown, possibly a bug
+			csvOut.append(",\"");
+			csvOut.append("_NONAME_");
+			csvOut.append("\"");
 		}
 
 		if (isUnix) {
