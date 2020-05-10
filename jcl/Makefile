@@ -63,8 +63,13 @@ testrigpp:
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCLPP startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testdemo:
+ifeq ($(strip $(n)),)
+	echo `date` testdemo >> build.log
+	java -jar JCLParser.jar -fileList testdata.lst -include testdata -set SYSUID=CSCHNEID -outtree testdata.tsv -outcsv testdata.csv
+else
 	echo `date` testdemo $(n) >> build.log
 	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -outtree test$(n).tsv -outcsv test$(n).csv -logLevel FINEST -saveTemp
+endif
 
 ziplogs:
 	echo `date` ziplogs >> build.log
