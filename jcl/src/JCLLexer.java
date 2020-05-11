@@ -721,9 +721,9 @@ public class JCLLexer extends Lexer {
 	}
 
 
-	    public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
-	    public String dlmString = null;
-	    public int myMode = DEFAULT_MODE;
+		public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
+		public String dlmString = null;
+		public int myMode = DEFAULT_MODE;
 
 
 	public JCLLexer(CharStream input) {
@@ -875,10 +875,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 0:
 
-			      /*
-			      System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());
-			      */
-			    
+					/*
+					System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText());
+					*/
+				
 			break;
 		}
 	}
@@ -886,8 +886,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 1:
 
-			      mode(myMode);
-			    
+					mode(myMode);
+				
 			break;
 		}
 	}
@@ -902,10 +902,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 3:
 
-			      dlmVals.add("/*");
-			      dlmVals.add("//");
-			      myMode = DATA_MODE;
-			    
+					dlmVals.add("/*");
+					dlmVals.add("//");
+					myMode = DATA_MODE;
+				
 			break;
 		}
 	}
@@ -913,8 +913,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 4:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -922,8 +922,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 5:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -931,8 +931,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 6:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -940,8 +940,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 7:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -949,8 +949,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 8:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -958,11 +958,11 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 9:
 
-			      dlmVals = new java.util.ArrayList();
-			      dlmVals.add("/*");
-			      dlmVals.add("//");
-			      myMode = DATA_MODE;
-			    
+					dlmVals = new java.util.ArrayList();
+					dlmVals.add("/*");
+					dlmVals.add("//");
+					myMode = DATA_MODE;
+				
 			break;
 		}
 	}
@@ -970,10 +970,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 10:
 
-			      dlmVals = new java.util.ArrayList();
-			      dlmVals.add("/*");
-			      myMode = DATA_MODE;
-			    
+					dlmVals = new java.util.ArrayList();
+					dlmVals.add("/*");
+					myMode = DATA_MODE;
+				
 			break;
 		}
 	}
@@ -981,8 +981,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 11:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -990,8 +990,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 12:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -999,8 +999,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 13:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1008,8 +1008,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 14:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1017,8 +1017,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 15:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1026,8 +1026,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 16:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1035,8 +1035,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 17:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1044,8 +1044,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 18:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1053,8 +1053,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 19:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1062,8 +1062,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 20:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1071,9 +1071,9 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 21:
 
-			      dlmVals = new java.util.ArrayList();
-			      dlmVals.add("/*");
-			    
+					dlmVals = new java.util.ArrayList();
+					dlmVals.add("/*");
+				
 			break;
 		}
 	}
@@ -1081,9 +1081,9 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 22:
 
-			      dlmVals = new java.util.ArrayList();
-			      dlmVals.add("/*");
-			    
+					dlmVals = new java.util.ArrayList();
+					dlmVals.add("/*");
+				
 			break;
 		}
 	}
@@ -1091,8 +1091,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 23:
 
-			      dlmString = new String();
-			    
+					dlmString = new String();
+				
 			break;
 		}
 	}
@@ -1100,9 +1100,9 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 24:
 
-			        dlmVals = new java.util.ArrayList();
-			        dlmVals.add(getText());
-			    
+						dlmVals = new java.util.ArrayList();
+						dlmVals.add(getText());
+				
 			break;
 		}
 	}
@@ -1110,10 +1110,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 25:
 
-			      dlmVals = new java.util.ArrayList();
-			      _modeStack.clear();
-			      myMode = DEFAULT_MODE;
-			    
+					dlmVals = new java.util.ArrayList();
+					_modeStack.clear();
+					myMode = DEFAULT_MODE;
+				
 			break;
 		}
 	}
@@ -1121,10 +1121,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 26:
 
-			      dlmVals = new java.util.ArrayList();
-			      _modeStack.clear();
-			      myMode = DEFAULT_MODE;
-			    
+					dlmVals = new java.util.ArrayList();
+					_modeStack.clear();
+					myMode = DEFAULT_MODE;
+				
 			break;
 		}
 	}
@@ -1132,10 +1132,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 27:
 
-			      dlmVals = new java.util.ArrayList();
-			      _modeStack.clear();
-			      myMode = DEFAULT_MODE;
-			    
+					dlmVals = new java.util.ArrayList();
+					_modeStack.clear();
+					myMode = DEFAULT_MODE;
+				
 			break;
 		}
 	}
@@ -1143,10 +1143,10 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 28:
 
-			      dlmVals = new java.util.ArrayList();
-			      _modeStack.clear();
-			      myMode = DEFAULT_MODE;
-			    
+					dlmVals = new java.util.ArrayList();
+					_modeStack.clear();
+					myMode = DEFAULT_MODE;
+				
 			break;
 		}
 	}
@@ -1154,23 +1154,23 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 29:
 
-			      switch(_modeStack.peek()) {
-			        case KYWD_VAL_MODE :
-			        case DCB_MODE :
-			            popMode();
-			            popMode();
-			            break;
-			        case DLM_MODE :
-			            dlmVals = new java.util.ArrayList();
-			            dlmVals.add(dlmString);
-			            popMode();
-			            popMode();
-			            break;
-			        default :
-			            popMode();
-			            break;
-			      }
-			    
+					switch(_modeStack.peek()) {
+						case KYWD_VAL_MODE :
+						case DCB_MODE :
+							popMode();
+							popMode();
+							break;
+						case DLM_MODE :
+							dlmVals = new java.util.ArrayList();
+							dlmVals.add(dlmString);
+							popMode();
+							popMode();
+							break;
+						default :
+							popMode();
+							break;
+					}
+				
 			break;
 		}
 	}
@@ -1178,20 +1178,20 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 30:
 
-			      switch(_modeStack.peek()) {
-			        case JOB_PROGRAMMER_NAME_MODE :
-			            setType(QUOTED_STRING_PROGRAMMER_NAME);
-			            break;
-			        case JOBGROUP_PROGRAMMER_NAME_MODE :
-			            setType(QUOTED_STRING_PROGRAMMER_NAME);
-			            break;
-			        case DLM_MODE :
-			            dlmString = dlmString.concat(getText());
-			            break;
-			        default :
-			            break;
-			      }
-			    
+					switch(_modeStack.peek()) {
+						case JOB_PROGRAMMER_NAME_MODE :
+							setType(QUOTED_STRING_PROGRAMMER_NAME);
+							break;
+						case JOBGROUP_PROGRAMMER_NAME_MODE :
+							setType(QUOTED_STRING_PROGRAMMER_NAME);
+							break;
+						case DLM_MODE :
+							dlmString = dlmString.concat(getText());
+							break;
+						default :
+							break;
+					}
+				
 			break;
 		}
 	}
@@ -1199,8 +1199,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 31:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1208,8 +1208,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 32:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1217,8 +1217,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 33:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1226,8 +1226,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 34:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1235,8 +1235,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 35:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1244,15 +1244,15 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 36:
 
-			      if (_modeStack.peek() == DCB_PAREN_MODE) {
-			          popMode();
-			          popMode();
-			          popMode();
-			      } else {
-			          popMode();
-			          popMode();
-			      }
-			    
+					if (_modeStack.peek() == DCB_PAREN_MODE) {
+						popMode();
+						popMode();
+						popMode();
+					} else {
+						popMode();
+						popMode();
+					}
+				
 			break;
 		}
 	}
@@ -1260,9 +1260,9 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 37:
 
-			      _modeStack.clear();
-			      mode(myMode);
-			    
+					_modeStack.clear();
+					mode(myMode);
+				
 			break;
 		}
 	}
@@ -1270,8 +1270,8 @@ public class JCLLexer extends Lexer {
 		switch (actionIndex) {
 		case 38:
 
-			      _modeStack.clear();
-			    
+					_modeStack.clear();
+				
 			break;
 		}
 	}
@@ -1337,8 +1337,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 0:
 			return 
-		      getCharPositionInLine() == 2
-		    ;
+				getCharPositionInLine() == 2
+			;
 		}
 		return true;
 	}
@@ -1346,8 +1346,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 1:
 			return 
-		      getCharPositionInLine() == 2
-		    ;
+				getCharPositionInLine() == 2
+			;
 		}
 		return true;
 	}
@@ -1355,8 +1355,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 2:
 			return 
-		      getCharPositionInLine() == 3
-		    ;
+				getCharPositionInLine() == 3
+			;
 		}
 		return true;
 	}
@@ -1364,8 +1364,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 3:
 			return 
-		      getText().length() <= 9
-		    ;
+				getText().length() <= 9
+			;
 		}
 		return true;
 	}
@@ -1380,8 +1380,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 5:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1389,8 +1389,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 6:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1398,8 +1398,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 7:
 			return 
-		      getText().length() <= 13
-		    ;
+				getText().length() <= 13
+			;
 		}
 		return true;
 	}
@@ -1407,8 +1407,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 8:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1416,8 +1416,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 9:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1425,8 +1425,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 10:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1434,8 +1434,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 11:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1443,8 +1443,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 12:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1459,8 +1459,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 14:
 			return 
-		      getCharPositionInLine() == 24
-		    ;
+				getCharPositionInLine() == 24
+			;
 		}
 		return true;
 	}
@@ -1468,8 +1468,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 15:
 			return 
-		      getCharPositionInLine() == 32
-		    ;
+				getCharPositionInLine() == 32
+			;
 		}
 		return true;
 	}
@@ -1477,8 +1477,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 16:
 			return 
-		      getCharPositionInLine() == 42
-		    ;
+				getCharPositionInLine() == 42
+			;
 		}
 		return true;
 	}
@@ -1486,8 +1486,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 17:
 			return 
-		      getCharPositionInLine() == 80
-		    ;
+				getCharPositionInLine() == 80
+			;
 		}
 		return true;
 	}
@@ -1523,8 +1523,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 22:
 			return 
-		      getCharPositionInLine() == 2
-		    ;
+				getCharPositionInLine() == 2
+			;
 		}
 		return true;
 	}
@@ -1532,8 +1532,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 23:
 			return 
-		      getText().length() <= 13
-		    ;
+				getText().length() <= 13
+			;
 		}
 		return true;
 	}
@@ -1541,8 +1541,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 24:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
@@ -1550,8 +1550,8 @@ public class JCLLexer extends Lexer {
 		switch (predIndex) {
 		case 25:
 			return 
-		      getText().length() <= 15
-		    ;
+				getText().length() <= 15
+			;
 		}
 		return true;
 	}
