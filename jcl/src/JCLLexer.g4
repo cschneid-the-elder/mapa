@@ -61,29 +61,6 @@ Sometimes a parameter and an operation look identical, e.g. NOTIFY.
 
 JES3 control statements are not currently supported.
 
-You must strip the line numbers from your JCL before processing with this
-grammar.  Line numbers are in byte positions 73 - 80 of each JCL record
-and have served no purpose since the demise of the punched card deck.
-
-The following awk script will remove your line numbers.
-
-----------8<snip----------
-#! /usr/bin/awk -f
-
-# example of removing line numbers from JCL
-
-{
-
-if (length($0) == 80 && $1 != "/*SIGNON") {
-	new = substr($0, 1, 72) "        ";
-	print new;
-} else {
-	print $0
-	;
-}
-
-}
-----------8<snip----------
 
 {System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText() + "/");}
 {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));}

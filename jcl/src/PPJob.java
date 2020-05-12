@@ -890,7 +890,7 @@ public class PPJob {
 	<p>Processing continues if the passed file name cannot be found, but
 	a warning is issued which should indicate the results will be incomplete.
 	*/
-	public String searchProcPathsFor(String fileName) throws IOException {
+	private String searchProcPathsFor(String fileName) throws IOException {
 		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 		if (aFile.exists()) {
 			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
