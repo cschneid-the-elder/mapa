@@ -503,7 +503,7 @@ public class PPProc {
 			this.myName 
 			+ " "
 			+ this.procName
-			+ " rewriteWithParmsResolved job = |" 
+			+ " rewriteWithParmsResolved proc = |" 
 			+ this 
 			+ "| tmpProcDir = |" 
 			+ this.tmpProcDir 
@@ -560,14 +560,14 @@ public class PPProc {
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;
 	}
 
 	private ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " " + this.procName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics proc = " + this.procName);
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
@@ -722,7 +722,7 @@ public class PPProc {
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;

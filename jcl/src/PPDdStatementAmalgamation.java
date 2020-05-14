@@ -69,7 +69,7 @@ public class PPDdStatementAmalgamation {
 	}
 
 	public ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.finest(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics ddName = " + this.ddName);
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 

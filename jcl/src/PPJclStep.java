@@ -287,7 +287,7 @@ public class PPJclStep {
 	Used in symbolic substitution in PPJob and PPProc.
 	*/
 	public ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics step = " + this.stepName);
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 

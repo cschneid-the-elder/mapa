@@ -86,9 +86,10 @@ lexer grammar JCLPPLexer;
 	public String dlmString = null;
 	public int myMode = DEFAULT_MODE;
 	public Boolean hide = true;
-	public static Boolean ckCol72 = true;
+	public static Boolean ckCol72 = false; //set to true if using test rig
 	public Boolean cmContinued = false;
 	public Boolean stmtContinued = false;
+	public Boolean cmFlag = false;
 	public StringBuilder currCm = new StringBuilder();
 }
 
@@ -129,6 +130,9 @@ IGNORED_CONTINUATION
 
 COMMENT_FLAG_DFLT
 	: SLASH SLASH ASTERISK
+	{
+		cmFlag = true;
+	}
 	{
 		getCharPositionInLine() == 3
 	}?
@@ -281,7 +285,7 @@ mode CM_MODE
 CM_COL72
 	: ANYCHAR
 	{
-		if (currCm.length() > 0) {
+		if (!cmFlag && currCm.length() > 0 && getText().trim().length() > 0) {
 			cmContinued = true;
 			//System.out.println("currCm.length() > 0 @ " + getLine());
 		}
@@ -299,30 +303,39 @@ CM_NEWLINE
 			mode(myMode);
 		}
 		cmContinued = false;
+		cmFlag = false;
 		currCm = new StringBuilder();
 	}
 	->channel(COMMENTS)
 	;
 
 CM_COMMENT_TEXT
-	: (' ' | ANYCHAR)+?
+	: (' ' | ANYCHAR)+
 	{
 		if (ckCol72) {
 			currCm.append(getText().trim());
 		}
 	}
 	{
-		((ckCol72 && getCharPositionInLine() < 72) || !ckCol72)
+		//((ckCol72 && getCharPositionInLine() < 72) || !ckCol72)
+		((ckCol72 
+			&& (getCharPositionInLine() < 72 
+				&& getText().length() <= 72 - getCharPositionInLine())) 
+		|| !ckCol72)
 	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
 
 CM_COMMENT_TEXT_73
 	: (' ' | ANYCHAR)+
 	{
-		(ckCol72 && getCharPositionInLine() > 72)
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
 	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
 
 /*
@@ -344,7 +357,8 @@ mode COMMA_WS_MODE
 COMMA_WS_COL72
 	: ANYCHAR
 	{
-		if (currCm.length() > 0) {
+		if (!cmFlag && currCm.length() > 0 && getText().trim().length() > 0) {
+		//if (currCm.length() > 0) {
 			cmContinued = true;
 		}
 	}
@@ -355,24 +369,32 @@ COMMA_WS_COL72
 	;
 
 COMMA_WS_COMMENT_TEXT
-	: (' ' | ANYCHAR)+?
+	: (' ' | ANYCHAR)+
 	{
 		if (ckCol72) {
 			currCm.append(getText().trim());
 		}
 	}
 	{
-		((ckCol72 && getCharPositionInLine() < 72) || !ckCol72)
+		((ckCol72 
+			&& (getCharPositionInLine() < 72 
+				&& getText().length() <= 72 - getCharPositionInLine())) 
+		|| !ckCol72)
 	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
 
 COMMA_WS_COMMENT_TEXT_73
 	: (' ' | ANYCHAR)+
 	{
-		(ckCol72 && getCharPositionInLine() > 72)
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
+
 	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
 
 COMMA_WS_NEWLINE
@@ -1080,6 +1102,9 @@ mode DD_MODE
 
 DD_WS
 	: [ ]+
+	{
+		hide = true;
+	}
 	->channel(HIDDEN),mode(DD_PARM_MODE)
 	;
 DD_NEWLINE1
@@ -1733,7 +1758,9 @@ mode PROC_PARM_MODE
 PROC_COMMENT_TEXT_73
 	: (' ' | ANYCHAR)+
 	{
-		(ckCol72 && getCharPositionInLine() > 72)
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
 	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
 	;

@@ -151,7 +151,7 @@ public class PPDdStatement {
 	}
 
 	public ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.finest(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics");
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 

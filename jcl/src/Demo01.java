@@ -250,7 +250,9 @@ public static void main(String[] args) throws Exception {
 		CommonTokenStream cmtokens = new CommonTokenStream(jcllexer, JCLPPLexer.COMMENTS); //scan stream for tokens
 		ArrayList<Token> tokens = new ArrayList<>();
 		while (cmtokens.LA(1) != CommonTokenStream.EOF) {
-			if (cmtokens.LT(1).getType() == JCLPPLexer.COL_72 || cmtokens.LT(1).getType() == JCLPPLexer.COMMENT_TEXT) {
+			if (cmtokens.LT(1).getType() == JCLPPLexer.COL_72 
+			|| cmtokens.LT(1).getType() == JCLPPLexer.COMMENT_TEXT
+			|| cmtokens.LT(1).getType() == JCLPPLexer.COMMENT_FLAG) {
 				tokens.add(cmtokens.LT(1));
 			}
 			cmtokens.consume();
@@ -330,9 +332,13 @@ public static void main(String[] args) throws Exception {
 			Token col72 = null;
 			Token cmBefore72 = null;
 			Token cmAfter72 = null;
+			Token cmFlag = null;
 			for (Token t: tokens) {
 				if (t.getLine() == src.getLineNumber()) {
 					onThisLine.add(t);
+					if (t.getType() == JCLPPLexer.COMMENT_FLAG) {
+						cmFlag = t;
+					}
 					if (t.getType() == JCLPPLexer.COMMENT_TEXT) {
 						if (t.getText().trim().length() > 0) {
 							if (t.getCharPositionInLine() < 71) {
@@ -342,7 +348,11 @@ public static void main(String[] args) throws Exception {
 							}
 						}
 					}
-					if (t.getType() == JCLPPLexer.COL_72) {
+					if (cmFlag == null && t.getType() == JCLPPLexer.COL_72 && t.getText().trim().length() > 0) {
+						/*
+						Column 72 being non-blank on a line that begins with 
+						"//*" does not indicate a continuation of a comment.
+						*/
 						col72 = t;
 					}
 				}
