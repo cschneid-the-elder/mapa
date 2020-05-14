@@ -36,7 +36,13 @@ public class PPJclStep {
 	private String procName = null;
 	private String stepName = null;
 	private int line = -1;
+	/**
+	Ordinal number of this step's "owning" PPJob in its file.
+	*/
 	private int jobOrdNb = 0;
+	/**
+	Ordinal number of this step within its "owning" PPJob or PPProc.
+	*/
 	private int ordNb = 0;
 	private PPKeywordOrSymbolicWrapper procExecuted = null;
 	private PPKeywordOrSymbolicWrapper pgmExecuted = null;

@@ -4,11 +4,11 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (28-Apr-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (14-May-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
-"Work in progress" means I've got more than a bit of cleanup to do along with documentation.
+"Work in progress" means I've got more than a bit of cleanup to do along with documentation.  Likely some refactoring is in order.
 
 The demonstration application is just that, an attempt to demonstrate that the grammar can be used to do something useful.
 
@@ -56,8 +56,7 @@ So, you might execute...
 More generically, I would suggest...
 
  + Create directories corresponding to each of your libraries containing cataloged procedures, INCLUDEs, and execution JCL
- + Download the contents of each library into a temporary directory 
- + Run each member through the rmvLnNb awk script, placing the output in the directory that corresponds to the library in which these members originally resided
+ + Download the contents of each library into their respective directory 
  + Create a file list (to use with the `-fileList` option) containing the names of the files in each of your execution JCL directories, maybe call it myList
  + Create a list of cataloged procedure and INCLUDE libraries and their corresponding directories (to use with the `-includeList` option) where each line is a library name followed by a comma followed by its corresponding directory - this will be used in resolving cataloged procedures and INCLUDEs by mapping the libraries on a job's JCLLIB statement to a directory.  You can also include directories corresponding to libraries in the JES PROCxx concatenation by not coding a comma or a library name on that line.  Maybe call this file myLibs.
  + Execute `java -jar JCLParser.jar -fileList myList -includeList myLibs -outtree myOutput.tsv -outcsv myOutput.csv`

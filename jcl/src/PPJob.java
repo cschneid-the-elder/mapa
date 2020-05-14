@@ -413,22 +413,6 @@ public class PPJob {
 		}
 	}
 
-	public ArrayList<PPJclStep> stepsInNeedOfProc() {
-		ArrayList<PPJclStep> stepsInNeed = new ArrayList<>();
-
-		for (PPJclStep step: this.steps) {
-			if (step.isExecProc()) {
-				if (step.needsProc()) {
-					stepsInNeed.add(step);
-				} else {
-					stepsInNeed.addAll(step.getProc().stepsInNeedOfProc());
-				} 
-			}
-		}
-
-		return stepsInNeed;
-	}
-
 	public PPProc instreamProcThisLineIsIn(int aLine) {
 		PPProc aProc = null;
 
