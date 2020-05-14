@@ -376,22 +376,6 @@ public class PPProc {
 		return this.includes;
 	}
 
-	public ArrayList<PPJclStep> stepsInNeedOfProc() {
-		ArrayList<PPJclStep> stepsInNeed = new ArrayList<>();
-
-		for (PPJclStep step: this.steps) {
-			if (step.isExecProc()) {
-				if (step.needsProc()) {
-					stepsInNeed.add(step);
-				} else {
-					stepsInNeed.addAll(step.getProc().stepsInNeedOfProc());
-				} 
-			}
-		}
-
-		return stepsInNeed;
-	}
-
 	public Boolean containsLine(int aLine) {
 		if (this.endLine <= this.startLine) {
 			this.LOGGER.severe(
@@ -497,6 +481,11 @@ public class PPProc {
 	}
 
 	/**
+	This method is a final transition step between preprocessing, in which
+	INCLUDEs, symbolic parameters, and PROCs are resolved through an iterative
+	process, and processing the rewritten resolved JCL into objects which
+	can be queried and write themselves in a hopefully meaningful fashion
+	to a stream.
 	*/
 	public File rewriteWithParmsResolved() throws IOException {
 		this.LOGGER.finer(

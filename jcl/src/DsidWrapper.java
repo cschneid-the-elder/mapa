@@ -2,6 +2,13 @@
 import java.util.*;
 import java.util.logging.*;
 
+/**
+This class represents the DSID parameter of the DD statement.
+
+<p>The very fact that you are unlikely to encounter this parameter
+makes it interesting.  It may serve as a flag for obsolete JCL.
+*/
+
 public class DsidWrapper {
 
 	private Logger LOGGER = null;
@@ -31,11 +38,8 @@ public class DsidWrapper {
 
 	private void initialize() {
 		myName = this.getClass().getName();
-		if (this.ctx == null) {
-		} else {
-			this.somvCtx = this.ctx.singleOrMultipleValue();
-			this.somv = new SingleOrMultipleValueWrapper(this.somvCtx, this.procName, this.LOGGER, this.CLI);
-		}
+		this.somvCtx = this.ctx.singleOrMultipleValue();
+		this.somv = new SingleOrMultipleValueWrapper(this.somvCtx, this.procName, this.LOGGER, this.CLI);
 
 		/*
 		1	DSID=AEIOU

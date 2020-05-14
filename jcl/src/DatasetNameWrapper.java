@@ -2,6 +2,16 @@
 import java.util.*;
 import java.util.logging.*;
 
+/**
+Wrapper for the KeywordorSymbolicWrappers representing a dataset
+name and member name.
+
+Dataset name and member name are represented by instances of
+KeywordOrSymbolicWrapper, which serves as a wrapper itself around
+characters and/or symbolic parameters.
+
+*/
+
 public class DatasetNameWrapper {
 
 	private Logger LOGGER = null;
@@ -36,6 +46,9 @@ public class DatasetNameWrapper {
 		}
 	}
 
+	/**
+	Return a String comprised of the dataset name and its member, if extant.
+	*/
 	public String getResolvedValue() {
 		StringBuffer buf = new StringBuffer(this.dsn.getResolvedValue());
 

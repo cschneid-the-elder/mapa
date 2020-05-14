@@ -112,7 +112,7 @@ public class KeywordOrSymbolicWrapper {
 				sb.append(ste.toString());
 				sb.append(System.getProperty("line.separator"));
 			}
-			this.LOGGER.warning(
+			this.LOGGER.finest(
 				this.getClass().getName()
 				+ " KeywordOrSymbolicContext supplied is null, arriving via..."
 				+ System.getProperty("line.separator")

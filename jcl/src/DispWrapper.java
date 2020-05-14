@@ -2,6 +2,14 @@
 import java.util.*;
 import java.util.logging.*;
 
+/**
+This class represents the DISP parameter of a DD statement, including
+its status, normal termination disposition, and abnormal termination
+disposition.
+
+<p>This might serve as a template for constructing other such wrappers
+as may be of interest, e.g. VOLUME or LABEL.
+*/
 public class DispWrapper {
 
 	private Logger LOGGER = null;

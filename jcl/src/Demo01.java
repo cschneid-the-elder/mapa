@@ -86,19 +86,12 @@ public static void main(String[] args) throws Exception {
 			jobNb++;
 			LOGGER.info("Processing job " + j.getJobName());
 			j.resolveParmedIncludes();
-			LOGGER.finest(j + " stepsInNeedOfProc = " + j.stepsInNeedOfProc());
 			File jobFile = j.rewriteJobAndSeparateInstreamProcs(baseDir);
 			/*
 				Now must iteratively parse this job until all INCLUDEs 
 				are resolved.  Unresolvable INCLUDEs generate a warning.
 			*/
 			PPJob rJob = j.iterativelyResolveIncludes(jobFile);
-			/*
-				Symbolic parms may have had values SET inside an INCLUDE,
-				so only now the INCLUDEs have been resolved can the symbolics 
-				be resolved.
-			*/
-			//rJob.resolveParms();
 			/*
 				Now must rewrite job with resolved values for parms substituted.
 			*/
@@ -213,6 +206,15 @@ public static void main(String[] args) throws Exception {
 	LOGGER.info("Processing complete");
 }
 
+	/**
+	Parse the incoming JCL for purposes of preprocessing, which means
+	instream procs will be separated, INCLUDEs will be incorporated,
+	and symbolics will be substituted.
+
+	<p>That preprocessing is everything that happens between the
+	first execution of this method and the first execution of the
+	lexAndParse method.
+	*/
 	public static void lexAndParsePP(
 					ArrayList<PPJob> jobs
 					, ArrayList<PPProc> procs
@@ -239,6 +241,11 @@ public static void main(String[] args) throws Exception {
 
 	}
 
+	/**
+	Return a collection of tokens placed on the COMMENTS channel
+	by the lexer.  Note that this is an example of how the output
+	from the lexer can be useful on its own.
+	*/
 	public static ArrayList<Token> lex(
 					String fileName
 					) throws IOException {
@@ -273,6 +280,10 @@ public static void main(String[] args) throws Exception {
 		return tokens;
 	}
 
+	/**
+	Parse the JCL which has now had procs, INCLUDEs, and symbolics
+	resolved into objects which are hopefully useful for analysis.
+	*/
 	public static void lexAndParse(
 					ArrayList<Job> jobs
 					, ArrayList<Proc> procs
@@ -395,6 +406,9 @@ public static void main(String[] args) throws Exception {
 		return tmp;
 	}
 
+	/**
+	Create a directory to hold temporary files used in processing.
+	*/
 	public static File newTempDir() throws IOException {
 		File tmpDir = Files.createTempDirectory("Demo01-").toFile();
 		if (tmpDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
