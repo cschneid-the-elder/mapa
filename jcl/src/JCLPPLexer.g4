@@ -72,29 +72,6 @@ Sometimes a parameter and an operation look identical, e.g. NOTIFY.
 
 JES3 control statements are not currently supported.
 
-You must strip the line numbers from your JCL before processing with this
-grammar.  Line numbers are in byte positions 73 - 80 of each JCL record
-and have served no purpose since the demise of the punched card deck.
-
-The following awk script will remove your line numbers.
-
-----------8<snip----------
-#! /usr/bin/awk -f
-
-# example of removing line numbers from JCL
-
-{
-
-if (length($0) == 80 && $1 != "/*SIGNON") {
-	new = substr($0, 1, 72) "        ";
-	print new;
-} else {
-	print $0
-	;
-}
-
-}
-----------8<snip----------
 
 {System.out.println(getLine() + ":" + getCharPositionInLine() + " / " + getText() + "/");}
 {System.out.println("NAME_FIELD found " + getVocabulary().getSymbolicName(myTerminalNode.getSymbol().getType()));}
@@ -109,9 +86,14 @@ lexer grammar JCLPPLexer;
 	public String dlmString = null;
 	public int myMode = DEFAULT_MODE;
 	public Boolean hide = true;
+	public static Boolean ckCol72 = false; //set to true if using test rig
+	public Boolean cmContinued = false;
+	public Boolean stmtContinued = false;
+	public Boolean cmFlag = false;
+	public StringBuilder currCm = new StringBuilder();
 }
 
-tokens { COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME , SUBCHARS , SEP }
+tokens { COL_72 , COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFSIZE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME , SUBCHARS , SEP }
 
 channels { COMMENTS }
 
@@ -138,16 +120,30 @@ SA
 	->mode(JES2_CNTL_MODE)
 	;
 
+IGNORED_CONTINUATION
+	: ANYCHAR
+	{
+		ckCol72 && getCharPositionInLine() == 72
+	}?
+	->channel(HIDDEN)
+	;
+
 COMMENT_FLAG_DFLT
 	: SLASH SLASH ASTERISK
 	{
+		cmFlag = true;
+	}
+	{
 		getCharPositionInLine() == 3
 	}?
-	->type(COMMENT_FLAG),channel(COMMENTS),mode(CM_MODE);
+	->type(COMMENT_FLAG),channel(COMMENTS),mode(CM_MODE)
+	;
+
 COMMENT_FLAG_INLINE
-	:COMMA_DFLT ' '
+	: COMMA_DFLT ' '
 	->channel(COMMENTS),mode(CM_MODE)
 	;
+
 SYMBOLIC
 	: AMPERSAND [A-Z0-9@#$]+
 	{
@@ -158,9 +154,11 @@ SYMBOLIC
 ALPHA
 	: [A-Z]
 	;
+
 AMPERSAND
 	: '&'
 	;
+
 ASTERISK
 	: '*'
 	;
@@ -169,18 +167,22 @@ COMMA_DFLT
 	: ','
 	->type(COMMA),channel(HIDDEN)
 	;
+
 DOT_DFLT
 	: '.'
 	->type(DOT)
 	;
+
 EQUAL_DFLT
 	: '='
 	->type(EQUAL)
 	;
+
 LPAREN_DFLT
 	: '('
 	->type(LPAREN)
 	;
+
 fragment NATL
 	: [@#$]
 	;
@@ -189,16 +191,20 @@ NEWLINE
 	: [\n\r]
 	->channel(HIDDEN)
 	;
+
 NOT_SYMBOL_DFLT
 	: [^!]
 	->type(NOT_SYMBOL)
 	;
+
 NULLFILE
 	: N U L L F I L E
 	;
+
 fragment NUM
 	: [0-9]
 	;
+
 RPAREN_DFLT
 	: ')'
 	->type(RPAREN)
@@ -207,10 +213,12 @@ RPAREN_DFLT
 SLASH
 	: '/'
 	;
+
 SQUOTE
 	: '\''
 	->channel(HIDDEN),pushMode(QS_MODE)
 	;
+
 fragment SQUOTE2
 	: SQUOTE SQUOTE
 	;
@@ -223,16 +231,20 @@ WS
 fragment ANYCHAR
 	: ~[\n\r]
 	;
+
 NAME
 	: (NATL | ALPHA) (ALPHA | NATL | NUM)* {getText().length() < 9}?
 	;
+
 NUM_LIT_DFLT
 	: NUM+
 	->type(NUM_LIT)
 	;
+
 ALNUMNAT
 	: (ALPHA | NATL | NUM)+
 	;
+
 UNQUOTED_STRING
 	: (~['\n\r] | SQUOTE2)+?
 	;
@@ -270,16 +282,60 @@ fragment Z:'Z';
 mode CM_MODE
 	;
 
+CM_COL72
+	: ANYCHAR
+	{
+		if (!cmFlag && currCm.length() > 0 && getText().trim().length() > 0) {
+			cmContinued = true;
+			//System.out.println("currCm.length() > 0 @ " + getLine());
+		}
+	}
+	{
+		ckCol72 && getCharPositionInLine() == 72
+	}?
+	->type(COL_72),channel(COMMENTS)
+	;
+
 CM_NEWLINE
 	: NEWLINE
 	{
-		mode(myMode);
+		if (!cmContinued) {
+			mode(myMode);
+		}
+		cmContinued = false;
+		cmFlag = false;
+		currCm = new StringBuilder();
 	}
-	->channel(HIDDEN)
+	->channel(COMMENTS)
 	;
+
 CM_COMMENT_TEXT
 	: (' ' | ANYCHAR)+
+	{
+		if (ckCol72) {
+			currCm.append(getText().trim());
+		}
+	}
+	{
+		//((ckCol72 && getCharPositionInLine() < 72) || !ckCol72)
+		((ckCol72 
+			&& (getCharPositionInLine() < 72 
+				&& getText().length() <= 72 - getCharPositionInLine())) 
+		|| !ckCol72)
+	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
+	;
+
+CM_COMMENT_TEXT_73
+	: (' ' | ANYCHAR)+
+	{
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
+	}?
+	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
 
 /*
@@ -298,13 +354,59 @@ double popMode to return to the "invoking" mode.
 mode COMMA_WS_MODE
 	;
 
+COMMA_WS_COL72
+	: ANYCHAR
+	{
+		if (!cmFlag && currCm.length() > 0 && getText().trim().length() > 0) {
+		//if (currCm.length() > 0) {
+			cmContinued = true;
+		}
+	}
+	{
+		(ckCol72 && getCharPositionInLine() == 72)
+	}?
+	->type(COL_72),channel(COMMENTS)
+	;
+
 COMMA_WS_COMMENT_TEXT
 	: (' ' | ANYCHAR)+
+	{
+		if (ckCol72) {
+			currCm.append(getText().trim());
+		}
+	}
+	{
+		((ckCol72 
+			&& (getCharPositionInLine() < 72 
+				&& getText().length() <= 72 - getCharPositionInLine())) 
+		|| !ckCol72)
+	}?
 	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
+
+COMMA_WS_COMMENT_TEXT_73
+	: (' ' | ANYCHAR)+
+	{
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
+
+	}?
+	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
+	;
+
 COMMA_WS_NEWLINE
 	: NEWLINE
-	->channel(HIDDEN),pushMode(COMMA_WS_NEWLINE_MODE)
+	{
+		if (!cmContinued) {
+			pushMode(COMMA_WS_NEWLINE_MODE);
+		}
+		cmContinued = false;
+		currCm = new StringBuilder();
+	}
+	->channel(COMMENTS)
 	;
 
 mode COMMA_WS_NEWLINE_MODE
@@ -1000,6 +1102,9 @@ mode DD_MODE
 
 DD_WS
 	: [ ]+
+	{
+		hide = true;
+	}
 	->channel(HIDDEN),mode(DD_PARM_MODE)
 	;
 DD_NEWLINE1
@@ -1011,6 +1116,17 @@ DD_NEWLINE1
 	;
 
 mode DD_PARM_MODE
+	;
+
+DD_COL72
+	: ANYCHAR
+	{
+		stmtContinued = true;
+	}
+	{
+		ckCol72 && getCharPositionInLine() == 72
+	}?
+	->type(COL_72),channel(COMMENTS)
 	;
 
 DD_CONTINUED
@@ -1031,9 +1147,18 @@ DD_PARM_WS
 DD_NEWLINE
 	: NEWLINE
 	{
-		_modeStack.clear();
+		/*
+		Testing for a very specific condition where a DD statement
+		extends to column 71 and is continued on the next line.
+		*/
+		if (stmtContinued) {
+		} else {
+			_modeStack.clear();
+			mode(DEFAULT_MODE);
+		}
+		stmtContinued = false;
 	}
-	->channel(HIDDEN),mode(DEFAULT_MODE)
+	->channel(HIDDEN)
 	;
 DD_COMMA
 	: COMMA_DFLT
@@ -1630,10 +1755,29 @@ PROC_WS_NEWLINE
 mode PROC_PARM_MODE
 	;
 
+PROC_COMMENT_TEXT_73
+	: (' ' | ANYCHAR)+
+	{
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
+	}?
+	->type(COMMENT_TEXT),channel(COMMENTS)
+	;
+
+PROC_PARM_NEWLINE
+	: NEWLINE
+	{
+		_modeStack.clear();
+	}
+	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
 PROC_PARM_EQUAL
 	: EQUAL_DFLT
 	->type(EQUAL),pushMode(PROC_PARM_VALUE_MODE)
 	;
+
 PROC_PARM_NAME
 	: NM_PART
 	;
@@ -3127,6 +3271,14 @@ is to hit either a newline or some whitespace and proceed through the
 DATA_MODE to get back to DEFAULT_MODE.
 */
 
+DATA_PARM_COL72
+	: ANYCHAR
+	{
+		ckCol72 && getCharPositionInLine() == 72
+	}?
+	->type(COL_72),channel(COMMENTS)
+	;
+
 NEWLINE_DATA_PARM_MODE
 	: [\n\r]
 	->channel(HIDDEN),mode(DATA_MODE)
@@ -3431,6 +3583,14 @@ QS_SS_COMMENT_FLAG
 mode DCB_MODE
 	;
 
+DCB_COL72
+	: ANYCHAR
+	{
+		ckCol72 && getCharPositionInLine() == 72
+	}?
+	->type(COL_72),channel(COMMENTS)
+	;
+
 DCB_LPAREN
 	: LPAREN_DFLT
 	->type(LPAREN),channel(HIDDEN),pushMode(DCB_PAREN_MODE)
@@ -3621,6 +3781,14 @@ DCB_KEYWORD_VALUE
 	;
 
 mode DCB_PAREN_MODE
+	;
+
+DCB_PAREN_COL72
+	: ANYCHAR
+	{
+		ckCol72 && getCharPositionInLine() == 72
+	}?
+	->type(COL_72),channel(COMMENTS)
 	;
 
 DCB_PAREN_RPAREN

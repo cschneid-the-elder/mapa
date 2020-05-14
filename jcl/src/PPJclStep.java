@@ -2,6 +2,8 @@
 import java.util.*;
 import java.util.logging.*;
 import java.io.*;
+import java.nio.file.*;
+import java.nio.file.attribute.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -285,7 +287,7 @@ public class PPJclStep {
 	Used in symbolic substitution in PPJob and PPProc.
 	*/
 	public ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics step = " + this.stepName);
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
@@ -352,8 +354,9 @@ public class PPJclStep {
 			if (aProcFile == null) {
 				this.LOGGER.warning(this + " proc not found");
 			} else {
+				File aFileRewritten = rewriteWithoutCol72to80(aProcFile, tmpProcDir);
 				ArrayList<PPProc> procs = new ArrayList<>();
-				this.lexAndParse(procs, aProcFile);
+				this.lexAndParse(procs, aFileRewritten.getPath());
 				procs.get(0).setJcllib(this.jcllib);
 				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
 				procs.get(0).setOrdNb(this.ordNb);
@@ -368,6 +371,132 @@ public class PPJclStep {
 			}
 
 		}
+	}
+
+	/**
+	This method rewrites a file without the troublesome columns 72 
+	through 80.
+	*/
+	private File rewriteWithoutCol72to80(String aFileName, File baseDir) throws IOException {
+		LOGGER.finer(
+			this.myName 
+			+ " rewriteWithoutCol72to80 aFileName = |"
+			+ aFileName
+			+ "| baseDir = |"
+			+ baseDir
+			+ "|"
+			);
+
+		ArrayList<Token> tokens = lex(aFileName);
+		File aFile = new File(aFileName);
+		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
+		File tmp = new File(
+			baseDir.toString() 
+			+ File.separator 
+			+ aFile.getName()
+			+ "-" 
+			+ UUID.randomUUID()
+			);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		PrintWriter out = new PrintWriter(tmp);
+		LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
+		String inLine = new String();
+		Boolean addSplat = false;
+		while ((inLine = src.readLine()) != null) {
+			StringBuilder newLine = new StringBuilder(inLine);
+			ArrayList<Token> onThisLine = new ArrayList<>();
+			Token col72 = null;
+			Token cmBefore72 = null;
+			Token cmAfter72 = null;
+			for (Token t: tokens) {
+				if (t.getLine() == src.getLineNumber()) {
+					onThisLine.add(t);
+					if (t.getType() == JCLPPLexer.COMMENT_TEXT) {
+						if (t.getText().trim().length() > 0) {
+							if (t.getCharPositionInLine() < 71) {
+								cmBefore72 = t;
+							} else {
+								cmAfter72 = t;
+							}
+						}
+					}
+					if (t.getType() == JCLPPLexer.COL_72) {
+						col72 = t;
+					}
+				}
+			}
+			if (addSplat) {
+				/*
+				Note that the splat is added to the line _after_ the column 72
+				comment continuation was found.
+				*/
+				newLine.setCharAt(2, '*');
+			}
+			if (onThisLine.size() > 0) {
+				if (cmBefore72 != null && col72 != null) {
+					/*
+					Next line is a comment because this line has a comment
+					_and_ a continuation indicator in column 72.
+					*/
+					addSplat = true;
+				} else {
+					addSplat = false;
+				}
+				if (cmAfter72 != null) {
+					int start = cmAfter72.getCharPositionInLine();
+					int end = start + cmAfter72.getText().length();
+					String spaces = String.format("%1$"+ ((end - start) + 1) + "s", " ");
+					newLine.replace(start, end, spaces);
+				}
+				if (col72 != null) {
+					newLine.setCharAt(71, ' ');
+				}
+			}
+			out.println(newLine.toString());
+		}
+		src.close();
+		out.close();
+		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
+			Files.setPosixFilePermissions(tmp.toPath(), perms);
+		}
+		return tmp;
+	}
+
+	public ArrayList<Token> lex(
+					String fileName
+					) throws IOException {
+		LOGGER.fine(this.myName + " lex fileName = |" + fileName + "|");
+
+		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
+		JCLPPLexer.ckCol72 = true;
+		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
+		CommonTokenStream cmtokens = new CommonTokenStream(jcllexer, JCLPPLexer.COMMENTS); //scan stream for tokens
+		ArrayList<Token> tokens = new ArrayList<>();
+		while (cmtokens.LA(1) != CommonTokenStream.EOF) {
+			if (cmtokens.LT(1).getType() == JCLPPLexer.COL_72 || cmtokens.LT(1).getType() == JCLPPLexer.COMMENT_TEXT) {
+				tokens.add(cmtokens.LT(1));
+			}
+			cmtokens.consume();
+		}
+		for (Token t: tokens) {
+			LOGGER.fine(
+				this.myName
+				+ "token |" 
+				+ t.getText()
+				+ "| @ "
+				+ t.getCharPositionInLine()
+				+ " on "
+				+ t.getLine()
+				+ " of type "
+				+ t.getType()
+				);
+		}
+
+		return tokens;
 	}
 
 	public void lexAndParse(ArrayList<PPProc> procs, String fileName) throws IOException {
@@ -394,7 +523,23 @@ public class PPJclStep {
 		return this.uuid;
 	}
 
-	public String searchProcPathsFor(String fileName) throws IOException {
+	/**
+	Search what corresponds to the libraries that JES would search for
+	the passed file name.
+
+	<p>The first location being searched is contrived - it's where the
+	instream procs were written by PPJob.rewriteJobAndSeparateInstreamProcs().
+
+	<p>The second set of locations are what correspond to the JCLLIB
+	ORDER= libraries (if any were supplied).
+
+	<p>The last set of locations are what correspond to the various PROCxx
+	statements used at JES startup.
+
+	<p>Processing continues if the passed file name cannot be found, but
+	a warning is issued which should indicate the results will be incomplete.
+	*/
+	private String searchProcPathsFor(String fileName) throws IOException {
 		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 
 		this.LOGGER.finer(this.myName + " " + this.stepName + " searchProcPaths searching " + tmpProcDir);

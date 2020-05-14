@@ -503,7 +503,7 @@ public class PPProc {
 			this.myName 
 			+ " "
 			+ this.procName
-			+ " rewriteWithParmsResolved job = |" 
+			+ " rewriteWithParmsResolved proc = |" 
 			+ this 
 			+ "| tmpProcDir = |" 
 			+ this.tmpProcDir 
@@ -560,14 +560,14 @@ public class PPProc {
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;
 	}
 
 	private ArrayList<PPSymbolic> collectSymbolics() {
-		this.LOGGER.finer(this.myName + " " + this.procName + " collectSymbolics");
+		this.LOGGER.finer(this.myName + " collectSymbolics proc = " + this.procName);
 
 		ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 
@@ -722,7 +722,7 @@ public class PPProc {
 		src.close();
 		out.close();
 		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
 			Files.setPosixFilePermissions(tmp.toPath(), perms);
 		}
 		return tmp;
@@ -759,8 +759,40 @@ public class PPProc {
 		return foundIt;
 	}
 
-	public String searchProcPathsFor(String fileName) throws IOException {
-		File aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
+	/**
+	Search what corresponds to the libraries that JES would search for
+	the passed file name.
+
+	<p>The first location being searched is contrived - it's where the Demo01
+	application writes the initial file, removing the troublesome contents
+	of columns 72 - 80 in a semi-intelligent fashion.
+
+	<p>The second location being searched is contrived - it's where the
+	instream procs were written by PPJob.rewriteJobAndSeparateInstreamProcs().
+
+	<p>The third set of locations are what correspond to the JCLLIB
+	ORDER= libraries (if any were supplied).
+
+	<p>The last set of locations are what correspond to the various PROCxx
+	statements used at JES startup.
+
+	<p>Processing continues if the passed file name cannot be found, but
+	a warning is issued which should indicate the results will be incomplete.
+	*/
+	private String searchProcPathsFor(String fileName) throws IOException {
+		/*
+		The baseDir is searched because the first thing done in the Demo01
+		application is to rewrite the initial file removing the troublesome
+		columns 72 - 80 in a semi-intelligent manner.  At that point it is
+		not known if this is a proc or a job.
+		*/
+		File aFile = new File(this.baseDir.getPath() + File.separator + fileName);
+		if (aFile.exists()) {
+			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
+			return aFile.getPath();
+		}
+
+		aFile = new File(this.tmpProcDir.getPath() + File.separator + fileName);
 		if (aFile.exists()) {
 			this.LOGGER.finer(this.myName + " searchProcPathsFor() found " + aFile.getPath());
 			return aFile.getPath();

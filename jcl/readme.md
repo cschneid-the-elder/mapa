@@ -158,16 +158,5 @@ This is a relatively simple example.  Now consider...
 
 ### What This Won't Do
 
-Currently unsupported is the exerable JCL construct...
-
-    //JS0103   EXEC PGM=IEFBR14,PARM='&X' THIS-INLINE-COMMENT-IS-CONTINUED X
-    // ON THE NEXT LINE VIA THE 'X' IN COLUMN 72.  IN FACT, THIS CAN       X
-    // CONTINUE OVER MULTIPLE LINES.  I AM SHOCKED AND APPALLED.
-
-... which I'm simply declaring should be dealt with via normal JCL comment notation, and the obsolete...
-
-    //SYSUT3  DD  DSNAME=&&SYSUT3,UNIT=SYSDA,SPACE=(80,(250,250)),         *00000500
-    //             DCB=BLKSIZE=80                                           00000600
-
-...as those line numbers in columns 73 through 80 haven't served a useful purpose since we all stopped using punched cards circa Y2K, and the continuation symbol in column 72 is just more trouble than it's worth.  The src/rmvLnNb awk script will get rid of these.
+JES3 control statements.  Probably some elderly syntax that is no longer documented, like the SEP parameter of the DD statement except I sussed that one.
 
