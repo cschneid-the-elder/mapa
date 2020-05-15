@@ -146,168 +146,12 @@ are symbolics that need to be resolved and parameters that affect parsing.
 */
 ddParameter : ddParmASTERISK | ddParmDATA | ddParmDLM | ddParmSYMBOLS | ddParmSYMLIST | SYMBOLIC+ ;
 
-/*
-TODO get rid of parameters not needed for preprocessing.
-
-ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDDNAME | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter;
-*/
-
-ddParmACCODE : ACCODE EQUAL keywordOrSymbolic;
-ddParmAMP : AMP EQUAL singleOrMultipleValue ;
 ddParmASTERISK : ASTERISK ;
-ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
-ddParmAVGREC : AVGREC EQUAL keywordOrSymbolic ;
-ddParmBFALN : BFALN EQUAL keywordOrSymbolic ;
-ddParmBFTEK : BFTEK EQUAL keywordOrSymbolic ;
-ddParmBLKSIZE : BLKSIZE EQUAL keywordOrSymbolic ;
-ddParmBLKSZLIM : BLKSZLIM EQUAL keywordOrSymbolic ;
-ddParmBUFIN : BUFIN EQUAL keywordOrSymbolic ;
-ddParmBUFL : BUFL EQUAL keywordOrSymbolic ;
-ddParmBUFMAX : BUFMAX EQUAL keywordOrSymbolic ;
-ddParmBUFNO : BUFNO EQUAL keywordOrSymbolic ;
-ddParmBUFOFF : BUFOFF EQUAL keywordOrSymbolic ;
-ddParmBUFOUT : BUFOUT EQUAL keywordOrSymbolic ;
-ddParmBUFSIZE : BUFSIZE EQUAL keywordOrSymbolic ;
-ddParmBURST : BURST EQUAL keywordOrSymbolic ;
-ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
-ddParmCHARS : CHARS EQUAL singleOrMultipleValue ;
-ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
-ddParmCNTL : CNTL EQUAL keywordOrSymbolic ;
-ddParmCOPIES : COPIES EQUAL singleOrMultipleValue ;
-ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
-ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
 ddParmDATA : DATA ;
-ddParmDATACLAS : DATACLAS EQUAL keywordOrSymbolic? ;
-
-/*
-At some point in the past, the DCB parameter was the only place you
-could specify LRECL and BLKSIZE and RECFM and DEN and, well, all the
-other Data Control Block parameters attached to the ddParmDCB_Parameter
-token below.
-
-Some time after that, LRECL and BLKSIZE and RECFM became independent
-of the DCB parameter.  In the 1990s, maybe?
-
-In writing this grammar I stumbled across a note in the syntax for the
-DCB parameter...
-
-  Alternate syntax for DCB keyword subparameters: All of the DCB keyword 
-  subparameters can be specified without the need to code DCB=.
-
-...which was a surprise to me.
-
-*/
-ddParmDCB : DCB EQUAL (
-    ddParmDCB_Parameter | 
-    (LPAREN 
-        ddParmDCB_Parameter+
-    RPAREN) 
-  ) ;
-
-ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | datasetName ;
-
-
-ddParmDDNAME : DDNAME EQUAL keywordOrSymbolic? ;
-ddParmDEN : DEN EQUAL keywordOrSymbolic ;
-ddParmDEST : DEST EQUAL  (
-    keywordOrSymbolic |
-    (LPAREN keywordOrSymbolic RPAREN)
-  )
-  ;
-ddParmDIAGNS : DIAGNS EQUAL keywordOrSymbolic ;
-ddParmDISP : DISP EQUAL singleOrMultipleValue ;
 ddParmDLM : DLM EQUAL keywordOrSymbolic ;
-ddParmDSID : DSID EQUAL singleOrMultipleValue ;
-ddParmDSKEYLBL : DSKEYLBL EQUAL keywordOrSymbolic ;
-ddParmDSNAME : (DSNAME | DSN) EQUAL datasetName ;
-ddParmDSNTYPE : DSNTYPE EQUAL singleOrMultipleValue ;
-
-ddParmDSORG : DSORG EQUAL keywordOrSymbolic ;
-ddParmDUMMY : DUMMY ;
-ddParmDYNAM : DYNAM ;
-ddParmEATTR : EATTR EQUAL keywordOrSymbolic ;
-ddParmEROPT : EROPT EQUAL keywordOrSymbolic ;
-ddParmEXPDT : EXPDT EQUAL keywordOrSymbolic ;
-ddParmFCB : FCB EQUAL singleOrMultipleValue ;
-ddParmFILEDATA : FILEDATA EQUAL keywordOrSymbolic ;
-ddParmFLASH : FLASH EQUAL singleOrMultipleValue ;
-ddParmFREE : FREE EQUAL keywordOrSymbolic ;
-ddParmFREEVOL : FREEVOL EQUAL keywordOrSymbolic ;
-ddParmFUNC : FUNC EQUAL keywordOrSymbolic ;
-ddParmGDGORDER : GDGORDER EQUAL keywordOrSymbolic ;
-ddParmGNCP : GNCP EQUAL keywordOrSymbolic ;
-ddParmHOLD : HOLD EQUAL keywordOrSymbolic ;
-ddParmINTVL : INTVL EQUAL keywordOrSymbolic ;
-ddParmIPLTXID : IPLTXID EQUAL keywordOrSymbolic ;
-ddParmKEYLABL1 : KEYLABL1 EQUAL keywordOrSymbolic ;
-ddParmKEYLABL2 : KEYLABL2 EQUAL keywordOrSymbolic ;
-ddParmKEYENCD1 : KEYENCD1 EQUAL keywordOrSymbolic ;
-ddParmKEYENCD2 : KEYENCD2 EQUAL keywordOrSymbolic ;
-ddParmKEYLEN : KEYLEN EQUAL keywordOrSymbolic ;
-ddParmKEYOFF : KEYOFF EQUAL keywordOrSymbolic ;
-ddParmLABEL : LABEL EQUAL singleOrMultipleValue ;
-/*
-It's not really a dataset name in the LGSTREAM parameter, but it
-does match the same pattern.
-*/
-ddParmLGSTREAM : LGSTREAM EQUAL datasetName ;
-ddParmLIKE : LIKE EQUAL datasetName ;
-ddParmLIMCT: LIMCT EQUAL keywordOrSymbolic ;
-ddParmLRECL : LRECL EQUAL keywordOrSymbolic ;
-ddParmMAXGENS : MAXGENS EQUAL keywordOrSymbolic ;
-ddParmMGMTCLAS : MGMTCLAS EQUAL keywordOrSymbolic? ;
-ddParmMODE : MODE EQUAL keywordOrSymbolic ; 
-ddParmMODIFY : MODIFY EQUAL singleOrMultipleValue ;
-ddParmNCP : NCP EQUAL keywordOrSymbolic ;
-ddParmNTM : NTM EQUAL keywordOrSymbolic ;
-ddParmOPTCD : OPTCD EQUAL keywordOrSymbolic ;
-ddParmOUTLIM : OUTLIM EQUAL keywordOrSymbolic ;
-ddParmOUTPUT : OUTPUT EQUAL singleOrMultipleValue ;
-ddParmPATH : PATH EQUAL keywordOrSymbolic ;
-ddParmPATHDISP : PATHDISP EQUAL singleOrMultipleValue ;
-ddParmPATHMODE : PATHMODE EQUAL singleOrMultipleValue ;
-ddParmPATHOPTS : PATHOPTS EQUAL singleOrMultipleValue ;
-ddParmPCI : PCI EQUAL singleOrMultipleValue ;
-ddParmPROTECT : PROTECT EQUAL keywordOrSymbolic ;
-ddParmPRTSP : PRTSP EQUAL keywordOrSymbolic ;
-ddParmRECFM : RECFM EQUAL keywordOrSymbolic ;
-ddParmRECORG : RECORG EQUAL keywordOrSymbolic ;
-ddParmREFDD : REFDD EQUAL keywordOrSymbolic ;
-ddParmRESERVE : RESERVE EQUAL parenList ;
-ddParmRETPD : RETPD EQUAL keywordOrSymbolic ;
-ddParmRKP : RKP EQUAL keywordOrSymbolic ;
-ddParmRLS : RLS EQUAL keywordOrSymbolic ;
-ddParmROACCESS : ROACCESS EQUAL singleOrMultipleValue ;
-ddParmSECMODEL : SECMODEL EQUAL singleOrMultipleValue ;
-ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
-ddParmSEP : SEP EQUAL singleOrMultipleValue ;
-
-ddParmSPACE : SPACE EQUAL singleOrMultipleValue ; 
-
-
-ddParmSPIN : SPIN EQUAL singleOrMultipleValue ;
-
-ddParmSTACK : STACK EQUAL keywordOrSymbolic ;
-ddParmSTORCLAS : STORCLAS EQUAL keywordOrSymbolic? ;
-ddParmSUBSYS : SUBSYS EQUAL singleOrMultipleValue ;
-
 ddParmSYMBOLS : SYMBOLS EQUAL singleOrMultipleValue ;
-
 ddParmSYMLIST : SYMLIST EQUAL singleOrMultipleValue ;
-ddParmSYSOUT : SYSOUT singleOrMultipleValue ;
-
-ddParmTERM : TERM EQUAL keywordOrSymbolic ;
-ddParmTHRESH : THRESH EQUAL keywordOrSymbolic ;
-ddParmTRTCH : TRTCH EQUAL keywordOrSymbolic ;
-ddParmUCS : UCS EQUAL singleOrMultipleValue ;
-
-ddParmUNIT : UNIT EQUAL 
-    singleOrMultipleValue
-  ;
-
-ddParmVOLUME : (VOL | VOLUME) EQUAL
-    singleOrMultipleValue
-  ;
+ddParmASTERISK_DATA : DD_ASTERISK_DATA+ (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)? ;
 
 
 joblibStatement : SS JOBLIB DD SYMBOLIC* ;
@@ -316,16 +160,12 @@ joblibConcatenation : SS DD SYMBOLIC* ;
 
 joblibAmalgamation : joblibStatement joblibConcatenation* ;
 
-joblibParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
 
+syschkStatement : SS SYSCHK DD SYMBOLIC* ;
 
-syschkStatement : SS SYSCHK DD syschkParameter+ ;
-
-syschkConcatenation : SS DD syschkParameter+ ;
+syschkConcatenation : SS DD SYMBOLIC* ;
 
 syschkAmalgamation : syschkStatement syschkConcatenation* ;
-
-syschkParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
 
 
 jobCard : SS jobName JOB SYMBOLIC* ;
@@ -367,11 +207,6 @@ jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL singleOrMultiple
 
 notifyStatement : SS NAME_FIELD? NOTIFY_OP SYMBOLIC* ;
 
-notifyParms : notifyEMAIL | notifyUSER | notifyTYPE | notifyWHEN ;
-notifyEMAIL : NOTIFY_STMT_PARM_EMAIL EQUAL keywordOrSymbolic ;
-notifyUSER : NOTIFY_STMT_PARM_USER EQUAL keywordOrSymbolic ;
-notifyTYPE : NOTIFY_STMT_PARM_TYPE EQUAL keywordOrSymbolic ;
-notifyWHEN : NOTIFY_STMT_PARM_WHEN EQUAL keywordOrSymbolic ;
 
 outputStatement : SS NAME_FIELD? OUTPUT SYMBOLIC* ;
 
@@ -380,15 +215,6 @@ pendStatement : SS NAME_FIELD? PEND inlineComment? ;
 
 scheduleStatement : SS NAME_FIELD? SCHEDULE SYMBOLIC* ;
 
-scheduleParameters : (scheduleParmAFTER | scheduleParmBEFORE | scheduleParmDELAY | scheduleParmHOLDUNTIL | scheduleParmJOBGROUP | scheduleParmSTARTBY | scheduleParmWITH) ;
-
-scheduleParmAFTER : SCHEDULE_PARM_AFTER EQUAL keywordOrSymbolic ;
-scheduleParmBEFORE : SCHEDULE_PARM_BEFORE EQUAL keywordOrSymbolic  ;
-scheduleParmDELAY : SCHEDULE_PARM_DELAY EQUAL keywordOrSymbolic  ;
-scheduleParmHOLDUNTIL : SCHEDULE_PARM_HOLDUNTIL EQUAL singleOrMultipleValue ;
-scheduleParmJOBGROUP : SCHEDULE_PARM_JOBGROUP EQUAL keywordOrSymbolic  ;
-scheduleParmSTARTBY : SCHEDULE_PARM_STARTBY EQUAL singleOrMultipleValue ;
-scheduleParmWITH : SCHEDULE_PARM_WITH EQUAL keywordOrSymbolic  ;
 
 setStatement : SS NAME_FIELD? SET setOperation+ ;
 
@@ -396,74 +222,17 @@ setOperation : (SET_PARM_NAME EQUAL keywordOrSymbolic?) ;
 
 xmitStatement : SS NAME_FIELD? XMIT SYMBOLIC* ddParmASTERISK_DATA* ;
 
-xmitParameters : (xmitParmDEST | xmitParmDLM | xmitParmSUBCHARS | commentStatement) ;
-
-xmitParmDEST : DEST EQUAL keywordOrSymbolic ;
-
-xmitParmDLM : DLM EQUAL keywordOrSymbolic ;
-
-xmitParmSUBCHARS : SUBCHARS EQUAL keywordOrSymbolic ;
 
 jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetStatement | sJobStatement | endSetStatement | endGroupStatement | afterStatement | beforeStatement | concurrentStatement)* ;
 
 jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP SYMBOLIC* ;
 
-jobGroupAccountingString : (QUOTED_STRING_FRAGMENT+ | QS_AMPERSAND+ | QS_SQUOTE2+ | JOBGROUP_ACCT_UNQUOTED_STRING+) ;
-
-jobGroupAccountingInformation : jobGroupAccountingInformationSimple | jobGroupAccountingInformationMultiLine ;
-
-jobGroupAccountingInformationSimple : jobGroupAccountingString+ ;
-jobGroupAccountingInformationMultiLine : jobGroupAccountingString (COMMA jobGroupAccountingString)* ;
-jobGroupProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | QS_AMPERSAND+ | QS_SQUOTE2+ | JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING+) ;
-
-jobGroupParameters : (jobGroupEMAIL | jobGroupOWNER | jobGroupGROUP | jobGroupPASSWORD | jobGroupSECLABEL | jobGroupTYPE | jobGroupHOLD | jobGroupERROR | jobGroupONERROR | jobGroupSYSAFF | jobGroupSYSTEM | jobGroupSCHENV) ;
-
-jobGroupEMAIL : JOBGROUP_EMAIL EQUAL keywordOrSymbolic ;
-jobGroupOWNER : JOBGROUP_OWNER EQUAL keywordOrSymbolic ;
-jobGroupGROUP : JOBGROUP_GROUP EQUAL keywordOrSymbolic ;
-jobGroupPASSWORD : JOBGROUP_PASSWORD EQUAL keywordOrSymbolic ;
-jobGroupSECLABEL : JOBGROUP_SECLABEL EQUAL keywordOrSymbolic ;
-jobGroupTYPE : JOBGROUP_TYPE EQUAL keywordOrSymbolic ;
-jobGroupHOLD : JOBGROUP_HOLD EQUAL keywordOrSymbolic ;
-
-jobGroupERROR : JOBGROUP_ERROR EQUAL jobGroupCondition ;
-
-jobGroupCondition :
-    LPAREN*
-      NOT_SYMBOL* jobGroupERROR_Test 
-        (JOBGROUP_ERROR_LOGICAL NOT_SYMBOL* LPAREN* jobGroupERROR_Test RPAREN*)*
-    RPAREN*
-  ;
-jobGroupERROR_RelOp : (
-    JOBGROUP_ERROR_EQ | 
-    JOBGROUP_ERROR_GE | 
-    JOBGROUP_ERROR_LE | 
-    JOBGROUP_ERROR_NE | 
-    JOBGROUP_ERROR_NG | 
-    JOBGROUP_ERROR_NL | 
-    JOBGROUP_ERROR_GT | 
-    JOBGROUP_ERROR_LT
-  ) ;
-jobGroupERROR_Keyword : (ABEND | ABENDCC | RUN | RC) ;
-jobGroupERROR_Test : NOT_SYMBOL* jobGroupERROR_Keyword
-    (NOT_SYMBOL* jobGroupERROR_RelOp (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
-
-jobGroupONERROR : JOBGROUP_ONERROR EQUAL keywordOrSymbolic ;
-jobGroupSYSAFF : JOBGROUP_SYSAFF EQUAL keywordOrSymbolic ;
-jobGroupSYSTEM : JOBGROUP_SYSTEM EQUAL keywordOrSymbolic ;
-jobGroupSCHENV : JOBGROUP_SCHENV EQUAL keywordOrSymbolic ;
 
 gJobStatement : SS NAME_FIELD? GJOB_OP SYMBOLIC* ;
 
-gJobParameters : (gJobFLUSHTYP) ;
-
-gJobFLUSHTYP : GJOB_PARM_FLUSHTYP EQUAL keywordOrSymbolic ;
 
 jobSetStatement : SS NAME_FIELD? JOBSET_OP SYMBOLIC* ;
 
-jobSetParameters : (jobSetFLUSHTYP) ;
-
-jobSetFLUSHTYP : JOBSET_PARM_FLUSHTYP EQUAL keywordOrSymbolic ;
 
 sJobStatement : SS NAME_FIELD? SJOB_OP ;
 
@@ -473,27 +242,12 @@ endGroupStatement : SS NAME_FIELD? ENDGROUP_OP ;
 
 afterStatement : SS AFTER_OP SYMBOLIC* ;
 
-afterParameters : (afterNAME | afterACTION | afterOTHERWISE | afterWHEN) ;
-
-afterNAME : AFTER_PARM_NAME EQUAL singleOrMultipleValue ;
-afterACTION : AFTER_PARM_ACTION EQUAL keywordOrSymbolic ;
-afterOTHERWISE : AFTER_PARM_OTHERWISE EQUAL keywordOrSymbolic ;
-afterWHEN : AFTER_PARM_WHEN EQUAL jobGroupCondition ;
 
 beforeStatement : SS BEFORE_OP SYMBOLIC* ;
 
-beforeParameters : (beforeNAME | beforeACTION | beforeOTHERWISE | beforeWHEN) ;
-
-beforeNAME : BEFORE_PARM_NAME EQUAL singleOrMultipleValue ;
-beforeACTION : BEFORE_PARM_ACTION EQUAL keywordOrSymbolic ;
-beforeOTHERWISE : BEFORE_PARM_OTHERWISE EQUAL keywordOrSymbolic ;
-beforeWHEN : BEFORE_PARM_WHEN EQUAL jobGroupCondition ;
 
 concurrentStatement : SS CONCURRENT_OP SYMBOLIC* ;
 
-concurrentParameters : (concurrentNAME) ;
-
-concurrentNAME : CONCURRENT_PARM_NAME EQUAL singleOrMultipleValue ;
 
 /*
 Trying to accomodate...
@@ -535,7 +289,6 @@ singleOrMultipleValue : (
   ) ;
 
 parenList : (LPAREN COMMA* keywordOrSymbolic (COMMA+ keywordOrSymbolic)* RPAREN) ;
-/*parenList : (LPAREN keywordOrSymbolic (COMMA keywordOrSymbolic)* RPAREN) ;*/
 embeddedEquality : (keywordOrSymbolic EQUAL singleOrMultipleValue) ;
 
 jes2CntlStatement : (jes2JobParmStatement | jes2MessageStatement | jes2NetAcctStatement | jes2NotifyStatement | jes2OutputStatement | jes2PriorityStatement | jes2RouteStatement | jes2SetupStatement | jes2SignoffStatement |  jes2SignonStatement | jes2XEQStatement | jes2XMITStatement) ;
