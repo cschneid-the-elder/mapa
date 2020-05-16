@@ -632,9 +632,9 @@ public class PPProc {
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) 
-			this.LOGGER.severe(
+			this.LOGGER.warning(
 				this.myName 
-				+ " sanity check failed in iterativelyResolveIncludes for " 
+				+ " sanity check failed in iterativelyResolveIncludes for proc " 
 				+ this
 				);
 

@@ -218,6 +218,7 @@ public class PPJob {
 	contain more than one JOB statement.
 	*/
 	public void setEndLine(int aLine) {
+		this.LOGGER.finest(this.myName + " setEndLine(" + aLine + ")");
 		this.endLine = aLine;
 	}
 
@@ -361,7 +362,7 @@ public class PPJob {
 			i.resolveParms(mergedSetSym);
 		}
 
-		this.LOGGER.finest(this.myName + " includes (after resolving): " + this.includes);
+		this.LOGGER.finest(this.myName + " resolveParmedIncludes includes (after resolving): " + this.includes);
 	}
 
 	/**
@@ -429,6 +430,7 @@ public class PPJob {
 	}
 
 	public Boolean lineIsInThisJob(int aLine) {
+		this.LOGGER.finest(this.myName + " lineIsInThisJob(" + aLine + ")");
 		return ((aLine >= this.startLine) && (aLine <= this.endLine));
 	}
 
@@ -630,7 +632,6 @@ public class PPJob {
 			lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
 			thisJob.get(0).resolveParmedIncludes();
 			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
-			//are all includes from before still there after? yes = stop iterating
 			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);
 			aJob = thisJob.get(0);
 			aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
@@ -651,9 +652,9 @@ public class PPJob {
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
 		if (sanity >= CLI.getSanity()) 
-			this.LOGGER.severe(
+			this.LOGGER.warning(
 				this.myName 
-				+ " sanity check failed in iterativelyResolveIncludes for " 
+				+ " sanity check failed in iterativelyResolveIncludes for job " 
 				+ this
 				);
 
@@ -789,8 +790,8 @@ public class PPJob {
 		PrintWriter procOut = null;
 		while ((inLine = src.readLine()) != null) {
 			if (this.lineIsInThisJob(src.getLineNumber())) {
-				this.LOGGER.finest(this.myName + " line " + src.getLineNumber() + " is not in this job");
 			} else {
+				this.LOGGER.finest(this.myName + " line " + src.getLineNumber() + " is not in this job");
 				continue;
 			}
 			aProc = this.instreamProcThisLineIsIn(src.getLineNumber());
