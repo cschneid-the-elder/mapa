@@ -6,6 +6,13 @@ import java.util.*;
 import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Preprocessor listener, used to instantiate objects of interest
+found by the parser.
+
+<p>This listener is used extensively in preprocessing, where symbolics
+are resolved according to arcane rules.
+*/
 public class PPListener extends JCLPPParserBaseListener {
 
 	private Logger LOGGER = null;
@@ -63,7 +70,6 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.currProc = null;
 		this.currJclStep = null;
 		this.currJob.addOp(new PPOp(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
-		//this.currJob.setOrdNb(this.nbJobs);
 	}
 
 	@Override public void enterJcllibStatement(JCLPPParser.JcllibStatementContext ctx) {
@@ -117,12 +123,11 @@ public class PPListener extends JCLPPParserBaseListener {
 
 	}
 
+	/**
+	A SET statement is considered to be part of the current "owning" entity - 
+	either the current Job or the current Proc.
+	*/
 	@Override public void enterSetOperation(JCLPPParser.SetOperationContext ctx) {
-		/**
-			A SET statement is considered to be part of the current "owning" entity - 
-			either the current Job or the current Proc.
-
-		*/
 
 		if (this.currProc == null) {
 			this.currJob.addSetSym(new PPSetSymbolValue(ctx, this.fileName, null, this.LOGGER, this.CLI));
@@ -161,13 +166,12 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.currJclStep = null;
 	}
 
-	@Override public void enterIncludeStatement(JCLPPParser.IncludeStatementContext ctx) {
-		/**
-			An IncludeStatement is considered to be part of the current "owning" entity - 
-			either the current Job or the current Proc.
+	/**
+	An IncludeStatement is considered to be part of the current "owning" entity - 
+	either the current Job or the current Proc.
 
-			Consider...
-
+	<p>Consider...<p>
+	<code>
 			//ZHANN JOB
 			//      INCLUDE MEMBER=CHIANA
 			//RYGEL PROC
@@ -178,16 +182,18 @@ public class PPListener extends JCLPPParserBaseListener {
 			//      INCLUDE MEMBER=CRICHTON
 			//JS01  EXEC PROC=RYGEL
 			//      INCLUDE MEMBER=AERYN
+	</code>
 
-			...the IncludeStatement CHIANA is attached to Job ZHANN.  The
-			IncludeStatement DARGO is standalone and attached to Proc RYGEL.  The
-			IncludeStatement TALYN is also attached to Proc RYGEL.  The IncludeStatement
-			CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
-			is also attached to Job ZHANN.
+	<p>...the IncludeStatement CHIANA is attached to Job ZHANN.  The
+	IncludeStatement DARGO is standalone and attached to Proc RYGEL.  The
+	IncludeStatement TALYN is also attached to Proc RYGEL.  The IncludeStatement
+	CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
+	is also attached to Job ZHANN.
 
-		TODO make this work like enterJclStep and instantiate a PPProc if both
-		currProc and currJob are null.
-		*/
+	<p>TODO make this work like enterJclStep and instantiate a PPProc if both
+	currProc and currJob are null.
+	*/
+	@Override public void enterIncludeStatement(JCLPPParser.IncludeStatementContext ctx) {
 		if (this.currProc == null) {
 			this.currJob.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
 		} else {
@@ -195,12 +201,11 @@ public class PPListener extends JCLPPParserBaseListener {
 		}
 	}
 
+	/**
+	A JCL step is considered to be part of the current "owning" entity - 
+	either the current Job or the current Proc.
+	*/
 	@Override public void enterJclStep(JCLPPParser.JclStepContext ctx) {
-		/**
-			A JCL step is considered to be part of the current "owning" entity - 
-			either the current Job or the current Proc.
-
-		*/
 
 		if (this.currProc == null && this.currJob == null) {
 			this.currProc = new PPProc(this.fileName, this.fileNb, this.LOGGER, this.CLI);
@@ -215,11 +220,11 @@ public class PPListener extends JCLPPParserBaseListener {
 		}
 	}
 
+	/**
+	It is convenient to have the end line of the current Job or Proc.
+	<p>In-stream procs will have been ended by their PEND statement.
+	*/
 	@Override public void exitStartRule(JCLPPParser.StartRuleContext ctx) {
-		/**
-			It is convenient to have the end line of the current Job or Proc.
-			In-stream procs will have been ended by their PEND statement.
-		*/
 
 		if (this.currJob == null) {
 			if (this.currProc == null) {
