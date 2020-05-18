@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (14-May-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (18-May-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -51,7 +51,7 @@ So, you might execute...
 
     java -jar JCLParser.jar -fileList sys1.proclib.lst -include /home/cschneid/SYS1.PROCLIB -set SYSUID=CSCHNEID -outtree sys1.proclib.tsv -outcsv sys1.proclib.csv
 
-...after downloading the contents of SYS1.PROCLIB to some directory and running them through the src/rmvLnNb awk script, and storing the output in directory /home/cschneid/SYS1.PROCLIB.
+...after downloading the contents of SYS1.PROCLIB to the directory /home/cschneid/SYS1.PROCLIB.
 
 More generically, I would suggest...
 
@@ -67,11 +67,24 @@ The Demo01 application will create several temporary files for each JCL member y
 
 A log file will be created in the current directory with messages about the current run.  If you use the `-logLevel` option, it applies to these messages.  The log messages output to the screen are at the INFO level or above.
 
+Warnings will be logged for PROCs and INCLUDEs that cannot be located.  This may be okay for your purposes, I'm not here to judge, but you may also get a warning indicating a sanity check has failed meaning the demo application tried as hard as it could to resolve something and failed.
+
 ### Output File Formats
 
 The outtree file is formatted with tab characters to give, once imported into LibreOffice Calc or similar, a tree view of steps executing programs or procedures and the steps in those procedures which may execute other procedures.
 
 The outcsv file has identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a job or jobs, a job to its steps, a step to its DD statements, a step to a PROC it may execute, a PROC to its steps, and so on.
+
+More generically...
+
+| Type | Fields|
+| --- | --- |
+| FILE | file being processed, date / time stamp, UUID |
+| JOB | job name, ordinal number of job in file, file UUID, job UUID |
+| PROC | proc name, file UUID, proc UUID |
+| STEP | step name, ordinal number of step in job or proc, job or proc UUID, step UUID, PGM or PROC, what is being executed |
+| DD | ddname, step UUID, dd statement UUID, concatenation number within ddname, file type (Z = z/OS, O = SYSOUT, U = Unix, N = DD *), file or DSN, disp status, disp normal termination disposition, disp abnormal termination disposition |
+
 
 ### Build/Execution Environment
 
