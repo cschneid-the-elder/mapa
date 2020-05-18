@@ -688,6 +688,12 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDdParmNTM(JCLParser.DdParmNTMContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link JCLParser#ddParmNULLOVRD}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDdParmNULLOVRD(JCLParser.DdParmNULLOVRDContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link JCLParser#ddParmOPTCD}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

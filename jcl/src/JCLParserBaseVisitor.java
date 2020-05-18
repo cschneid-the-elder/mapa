@@ -807,6 +807,13 @@ public class JCLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> impleme
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitDdParmNULLOVRD(JCLParser.DdParmNULLOVRDContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitDdParmOPTCD(JCLParser.DdParmOPTCDContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

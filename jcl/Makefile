@@ -75,33 +75,6 @@ ziplogs:
 	echo `date` ziplogs >> build.log
 	zip -DjmTv9 demologs Demo01-*.log
 
-#pptransform:
-# This is no longer needed.  Upon discovery that PreProcessor versions
-# of these classes were necessary, they were generated.  As the application
-# evolved, the preprocessor versions diverges sufficiently from the 
-# originals that they are now maintained separately instead of being
-# generated in this fashion.
-#
-# The preprocessor versions of these wrapper classes are simple transforms
-# performed against the "normal" parser versions.
-# The absence of PPDdStatement is intentional, it is custom code, not 
-# transformed from the original via sed.
-#	echo `date` pptransform >> build.log
-#	sed -r -f ./src/pptransform ./src/IncludeStatement.java > ./src/PPIncludeStatement.java
-#	sed -r -f ./src/pptransform ./src/JclStep.java > ./src/PPJclStep.java
-#	sed -r -f ./src/pptransform ./src/Job.java > ./src/PPJob.java
-#	sed -r -f ./src/pptransform ./src/KeywordOrSymbolicWrapper.java > ./src/PPKeywordOrSymbolicWrapper.java
-#	sed -r -f ./src/pptransform ./src/KeywordValueWrapper.java > ./src/PPKeywordValueWrapper.java
-#	sed -r -f ./src/pptransform ./src/SingleOrMultipleValueWrapper.java > ./src/PPSingleOrMultipleValueWrapper.java
-#	sed -r -f ./src/pptransform ./src/Proc.java > ./src/PPProc.java
-#	sed -r -f ./src/pptransform ./src/SetSymbolValue.java > ./src/PPSetSymbolValue.java
-#	sed -r -f ./src/pptransform ./src/DdStatementAmalgamation.java > ./src/PPDdStatementAmalgamation.java
-#	sed -r -f ./src/pptransform ./src/Symbolic.java > ./src/PPSymbolic.java
-#	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java
-
-#pp:
-#	$(JC) $(JCOPT) ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java
-
 javadoc:
 	javadoc -private -d ~/Documents/jcl ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java ./src/Symbolic.java ./src/EmbeddedEqualityWrapper.java ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java ./src/PPEmbeddedEqualityWrapper.java ./src/ParameterString.java ./src/PathDispWrapper.java
 
