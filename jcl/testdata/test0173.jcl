@@ -1,0 +1,8 @@
+//NULLSTM1 JOB
+//*
+//JOOL     EXEC PGM=NORANTI
+//
+//NULLSTM2 JOB
+//*
+//MOYA     EXEC PGM=TALYN
+//
