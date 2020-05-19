@@ -21,9 +21,38 @@ options {tokenVocab=JCLLexer;}
 
 startRule : jcl | EOF ;
 
-jcl : execJCL+ | procJCL ;
+jcl : (execJCL+ SS?) | (procJCL SS?) ;
 
-execJCL : jesExecutionControlStatements (jobCard (jclCommandStatement | jes2CntlStatement | commandStatement | commentStatement | joblibAmalgamation | syschkAmalgamation | jcllibStatement | cntlStatementAmalgamation | notifyStatement | xmitStatement)* (jclCommandStatement | commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | procStatement | pendStatement | scheduleStatement | setStatement)*)+ EOF?;
+execJCL 
+	: jesExecutionControlStatements 
+		(jobCard 
+			(jclCommandStatement 
+			| jes2CntlStatement 
+			| commandStatement 
+			| commentStatement 
+			| joblibAmalgamation 
+			| syschkAmalgamation 
+			| jcllibStatement 
+			| cntlStatementAmalgamation 
+			| notifyStatement 
+			| xmitStatement)* 
+			(jclCommandStatement 
+			| commandStatement 
+			| commentStatement 
+			| jclStep 
+			| ifStatement 
+			| elseStatement 
+			| endifStatement 
+			| includeStatement 
+			| exportStatement 
+			| outputStatement 
+			| procStatement 
+			| pendStatement 
+			| scheduleStatement 
+			| setStatement)*
+			nullStatement* jes2CntlStatement*)+ 
+	EOF?
+	;
 
 procJCL : commandStatement? procStatement? (commandStatement | commentStatement | jclStep | ifStatement | elseStatement | endifStatement | includeStatement | exportStatement | outputStatement | setStatement)+ pendStatement? commentStatement* EOF? ;
 
@@ -780,4 +809,8 @@ jes2XMITStatement : SA JES2_XMIT JES2_XMIT_NODE
     DD_ASTERISK_DATA+
     (DATA_MODE_TERMINATOR3 | DATA_MODE_TERMINATORX)?
   ;
+
+nullStatement
+	: SS
+	;
 

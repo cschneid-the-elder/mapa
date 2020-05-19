@@ -317,7 +317,6 @@ CM_COMMENT_TEXT
 		}
 	}
 	{
-		//((ckCol72 && getCharPositionInLine() < 72) || !ckCol72)
 		((ckCol72 
 			&& (getCharPositionInLine() < 72 
 				&& getText().length() <= 72 - getCharPositionInLine())) 
@@ -510,17 +509,24 @@ JOBLIB
 	: J O B L I B
 	->mode(OP_MODE)
 	;
+
 SYSCHK
 	: S Y S C H K
 	->mode(OP_MODE)
 	;
+
 fragment NM_PART
 	: [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]?
 	;
+
 NAME_FIELD
-	: NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();}
+	: NM_PART (DOT_DFLT NM_PART)?
+	{
+		_modeStack.clear();
+	}
 	->mode(OP_MODE)
 	;
+
 CONTINUATION_WS
 	: ' '+
 	{
@@ -529,7 +535,23 @@ CONTINUATION_WS
 	->channel(HIDDEN),mode(OP_MODE)
 	;
 
+NM_NEWLINE
+	: NEWLINE
+	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
 mode OP_MODE
+	;
+
+OP_COMMENT_TEXT_73
+	: (' ' | ANYCHAR)+
+	{
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
+	}?
+	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
 	;
 
 CNTL_OP
@@ -675,6 +697,7 @@ OP_PARM1_NEWLINE
 	}
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
+
 OP_PARM1_WS
 	: [ ]+
 	->channel(HIDDEN),mode(OP_PARM_MODE)
@@ -683,18 +706,32 @@ OP_PARM1_WS
 mode OP_PARM_MODE
 	;
 
+OP_PARM_COMMENT_TEXT_73
+	: (' ' | ANYCHAR)+
+	{
+		(ckCol72 
+			&& (getCharPositionInLine() > 72 
+				&& getText().length() <= getCharPositionInLine() - 72)) 
+	}?
+	->type(COMMENT_TEXT),channel(COMMENTS)
+//	->channel(COMMENTS)
+	;
+
 OP_PARM_SYMBOLIC
 	: SYMBOLIC
 	->type(SYMBOLIC)
 	;
+
 OP_PARM_CONTINUED
 	: COMMA_DFLT NEWLINE
 	->channel(HIDDEN),pushMode(COMMA_NEWLINE_MODE)
 	;
+
 OP_PARM_COMMENT_FLAG_INLINE
 	: COMMENT_FLAG_INLINE
 	->channel(HIDDEN),pushMode(COMMA_WS_MODE)
 	;
+
 OP_PARM_WS
 	: [ ]+
 	{
@@ -702,6 +739,7 @@ OP_PARM_WS
 	}
 	->channel(HIDDEN),mode(CM_MODE)
 	;
+
 OP_PARM_NEWLINE
 	: NEWLINE
 	{
@@ -709,14 +747,17 @@ OP_PARM_NEWLINE
 	}
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
+
 OP_PARM_COMMA
 	: COMMA_DFLT
 	->type(COMMA),channel(HIDDEN)
 	;
+
 OP_PARM_COMMENT_FLAG
 	: COMMENT_FLAG_DFLT
 	->type(COMMENT_FLAG),channel(COMMENTS),pushMode(COMMA_NEWLINE_CM_MODE)
 	;
+
 OP_PARM_SS_WS
 	: SS ' '+
 	{
@@ -724,10 +765,12 @@ OP_PARM_SS_WS
 	}?
 	->channel(HIDDEN)
 	;
+
 OP_PARM_SQUOTE
 	: SQUOTE
 	->channel(HIDDEN),pushMode(QS_MODE)
 	;
+
 OP_PARM_ANYCHAR
 	: ANYCHAR
 	->channel(HIDDEN)
