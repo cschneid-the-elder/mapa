@@ -1,0 +1,44 @@
+DCLGEN TABLE(VEMPL) -
+       LIBRARY('
+prefix
+.SRCLIB.DATA(DSN8MPEM)') -
+       LANGUAGE(PLI) -
+       APOST
+
+DCLGEN TABLE(VEMPL) -
+       LIBRARY('
+prefix
+.SRCLIB.DATA(DSN8MPEM)') -
+       LANGUAGE(PLI) -
+       NAMES(FIELD) -
+       STRUCTURE(EMPRECORD) -
+       APOST
+
+-DISPLAY TRACE (AUDIT) -
+         DETAIL (2) -
+         DEST (GTF) +
+         AUDTPLCY (AUDITADMIN)
+
+DCLGEN TABLE(MYTABLE)
+       LIBRARY('prefix.SRCLIB.DATA(MYTABLE)')
+       LANGUAGE(COBOL)
+       APOST
+       DCLBIT(YES) 
+
+-DISPLAY DATABASE(DB65309) SPACENAM(*) RESTRICT
+
+DCLGEN TABLE (CANTERBURY)     -
+       LIBRARY(DCLGEN.COPY(THECANT)/AMOSB)   -
+       AT(CERES)              +
+       ACTION(REPLACE)        +
+       LANGUAGE(COBOL)        -
+       APOST                  -
+       DCLBIT(YES)            -
+       RMARGIN(STD)           -
+       INDVAR(YES)            -
+       COLSUFFIX(YES)         -
+       DBCSDELIM(YES)         -
+       DBCSSYMBOL(G)          -
+       LABEL(YES)             -
+       STRUCTURE(REMEMBER-THE-CANT) +
+       NAMES(THE-CANT)
