@@ -32,7 +32,7 @@ analysis by making it possible to construct an inventory of programs,
 procedures, et. al.
 
 An application might make use of this grammar by detecting execution of
-IKJEFT1B and parsing its SYSTSIN to obtain the actual program(s) being
+TSO and parsing its SYSTSIN to obtain the actual program(s) being
 executed under the TSO monitor program running the DSN command processor.
 
 */

@@ -1,0 +1,54 @@
+allocate da(*) file(ft01f001)
+allocate da(input.data) old
+alloc dataset('sys1.ptimac.am') file(syslib) +
+volume(b99rs2) shr
+alloc da(new.data) like(model.data)
+alloc da(new2.data) space(10,5) tracks like(model.data)
+alloc da(ex1.data) dsorg(ps) space(2,0) tracks lrecl(80) +  
+blksize(8000) recfm(f,b) new
+alloc da(ex2.data) dsorg(po) block(200) space(10,10) +
+lrecl(100) blksize(200) dir(2) recfm(f,b) new
+alloc da(ex3.data) block(800) lrecl(80) dsorg(ps) +  
+recfm(f,b) new
+alloc dataset(out.data) file(output) new space(10,2) +  
+tracks release
+alloc dataset('moser7.multivol.data') old parallel +  
+file(syslib) volume(d95vl1,d95vl2,d95vl3) +  
+unit(sysda)
+alloc dataset('moser7.tape1.data') label(sl) +  
+unit(3480) volume(tapevl) position(2)
+alloc file(output) sysout fcb(std1) copies(10)
+alloc da(tape2.data) unit(3490) label(sl) position(1) +  
+volume(tapev2) protect new
+alloc da(disk.data) dsorg(ps) space(2,0) tracks +  
+lrecl(80) blksize(8000) recfm(f,b) protect new
+alloc file(sysproc) dataset(a.clist,b.clist,c.clist) +  
+shr reuse
+alloc f(payroll) sysout forms(chek) outdes(printer1)
+alloc f(reporta) sysout writer(ourwrit) outdes(descript)
+alloc f(reportb) sysout ucs(goth) outdes(descript)
+alloc f(sysprint) sysout spin(unalloc)
+alloc f(sysprint) sysout da(*) segment(500)
+alloc f(freedom) sysout dest(newyork.liberty)
+alloc da('sms.pds.obj') new dataclas(obj) storclas(standard)+ 
+mgmtclas(tso)
+alloc da('sms.new.obj') dataclas(pds) storclas(general) + 
+mgmtclas(temp) new
+alloc file(x) da('my.data.set') reuse shr
+alloc file(x) da('my.data.set') reuse shr /*comment
+alloc file(x) da('my.data.set') /*reuse*/ shr
+alloc file(x) da('my.data.set') reuse shr vol(stor99)
+alloc file(x) da('my.data.set') reuse shr
+alloc ds('k9345p.report2') new dsorg(ps) recfm(f,b,a) +
+lrecl(133) avblock(133) avgrec(u) space(5000,500) release
+alloc ds('k9345p.report2') new dsorg(ps) recfm(f,b,a) /* this is+
+a continued comment */lrecl(133) avblock(133) avgrec(u) space(5000,500) release
+DSN SYSTEM(DB2P)
+RUN PROGRAM(J8675309)
+END
+alloc path('/u/userid/file.dbp')    +
+      pathdisp(keep,keep)           +
+      pathopts(owronly,ocreat)      +
+      pathmode(sirwxu)              +
+      file(output)
+

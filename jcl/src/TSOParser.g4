@@ -1,0 +1,274 @@
+/*
+Copyright (C) 2020 Craig Schneiderwent.  All rights reserved.  I accept
+no liability for damages of any kind resulting from the use of this 
+software.  Use at your own risk.
+
+This software may be modified and distributed under the terms
+of the MIT license. See the LICENSE file for details.
+
+This is intended to be a minimal ANTLR4 grammar for TSO commands.
+
+In parsing JCL, one may encounter an execution of IKJEFT01, IKJEFT1A, or
+IKJEFT1B, all of which are entry points in TSO.  It is common to execute
+applications with embedded SQL accessing DB2 via the TSO Attachment Facility,
+with the SYSTSIN DD pointing at statements such as...
+
+DSN SYSTEM(DB2P)
+RUN PROGRAM(J8675309) PLAN(J8675309) -
+  PARMS('ABLEBAKERCHARLIEDOGEASYFOX')
+END
+
+...causing the execution of the application.  DSN, the DB2 command processor
+that runs as a TSO command processor, may have its commands embedded along
+with other TSO commands.
+
+This grammar is part of a project to parse JCL, which itself is part of
+a larger project whose aim is to assist in mainframe application portfolio
+analysis by making it possible to construct an inventory of programs,
+procedures, et. al.
+
+An application might make use of this grammar by detecting execution of
+TSO and parsing its SYSTSIN to obtain any DSN commands, parse those using
+the DSNTSO parser which is also part of this project, and thus obtain the
+actual program(s) being executed under the TSO monitor program running 
+the DSN command processor.
+
+*/
+
+parser grammar TSOParser;
+
+options {tokenVocab=TSOLexer;}
+
+startRule : tsoCmd* | EOF ;
+
+tsoCmd
+	: (allocate
+	| dsnStream
+	| altlib
+	| attrib
+	| attr
+	| call
+	| cancel
+	| delete
+	| edit
+	| end
+	| exec
+	| executil
+	| free
+	| help
+	| link
+	| listalc
+	| listbc
+	| listcat
+	| listds
+	| loadgo
+	| logoff
+	| logon
+	| outdes
+	| output
+	| printds
+	| profile
+	| protect
+	| receive
+	| rename
+	| run
+	| send
+	| smcopy
+	| smfind
+	| smput
+	| status
+	| submit
+	| terminal
+	| test
+	| time
+	| transmit
+	| tsoexec
+	| tsolib
+	| vlfnote
+	| when)
+	;
+
+arg
+	: LPAREN (LPAREN | ARG+ | QUOTED_STRING_FRAGMENT+ | SQUOTE2+ | RPAREN)* RPAREN
+	;
+
+cmdParm
+	: CMD_PARM_WS? (CMD_PARM+ (CMD_PARM_WS | arg)*)
+	;
+
+allocate
+	: (ALLOCATE | ALLOC) cmdParm*
+	;
+
+dsnStream
+	: DSN DSN_CMD_STREAM+ DSN_END
+	;
+
+altlib
+	: ALTLIB cmdParm*
+	;
+
+attrib
+	: ATTRIB cmdParm*
+	;
+
+attr
+	: ATTR cmdParm*
+	;
+
+call
+	: CALL cmdParm*
+	;
+
+cancel
+	: CANCEL cmdParm*
+	;
+
+delete
+	: (DELETE | DEL) cmdParm*
+	;
+
+edit
+	: (EDIT | E_) cmdParm*
+	;
+
+end
+	: END cmdParm*
+	;
+
+exec
+	: (EXEC | EX) cmdParm*
+	;
+
+executil
+	: EXECUTIL cmdParm*
+	;
+
+free
+	: FREE cmdParm*
+	;
+
+help
+	: (HELP | H_) cmdParm*
+	;
+
+link
+	: LINK cmdParm*
+	;
+
+listalc
+	: (LISTALC | LISTA) cmdParm*
+	;
+
+listbc
+	: (LISTBC | LISTB) cmdParm*
+	;
+
+listcat
+	: (LISTCAT | LISTC) cmdParm*
+	;
+
+listds
+	: LISTDS cmdParm*
+	;
+
+loadgo
+	: (LOADGO | LOAD) cmdParm*
+	;
+
+logoff
+	: LOGOFF cmdParm*
+	;
+
+logon
+	: LOGON cmdParm*
+	;
+
+outdes
+	: OUTDES cmdParm*
+	;
+
+output
+	: (OUTPUT | OUT) cmdParm*
+	;
+
+printds
+	: (PRINTDS | PR) cmdParm*
+	;
+
+profile
+	: (PROFILE | PROF) cmdParm*
+	;
+
+protect
+	: (PROTECT | PROT) cmdParm*
+	;
+
+receive
+	: RECEIVE cmdParm*
+	;
+
+rename
+	: (RENAME | REN) cmdParm*
+	;
+
+run
+	: (RUN | R_) cmdParm*
+	;
+
+send
+	: (SEND | SE) cmdParm*
+	;
+
+smcopy
+	: (SMCOPY | SMC) cmdParm*
+	;
+
+smfind
+	: (SMFIND | SMF) cmdParm*
+	;
+
+smput
+	: (SMPUT | SMP) cmdParm*
+	;
+
+status
+	: (STATUS | ST) cmdParm*
+	;
+
+submit
+	: (SUBMIT | SUB) cmdParm*
+	;
+
+terminal
+	: (TERMINAL | TERM) cmdParm*
+	;
+
+test
+	: TEST cmdParm*
+	;
+
+time
+	: TIME cmdParm*
+	;
+
+transmit
+	: (TRANSMIT | XMIT) cmdParm*
+	;
+
+tsoexec
+	: TSOEXEC cmdParm*
+	;
+
+tsolib
+	: TSOLIB cmdParm*
+	;
+
+vlfnote
+	: VLFNOTE cmdParm*
+	;
+
+when
+	: WHEN cmdParm*
+	;
+
