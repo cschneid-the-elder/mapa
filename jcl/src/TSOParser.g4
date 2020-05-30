@@ -6,7 +6,9 @@ software.  Use at your own risk.
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
 
-This is intended to be a minimal ANTLR4 grammar for TSO commands.
+This is intended to be a minimal ANTLR4 grammar for TSO commands.  The primary
+purpose is to allow a listener to obtain any DSN commands without too much
+tumult being caused by any surrounding TSO commands.
 
 In parsing JCL, one may encounter an execution of IKJEFT01, IKJEFT1A, or
 IKJEFT1B, all of which are entry points in TSO.  It is common to execute
@@ -49,6 +51,7 @@ tsoCmd
 	| attr
 	| call
 	| cancel
+	| clist
 	| delete
 	| edit
 	| end
@@ -92,8 +95,20 @@ arg
 	: LPAREN (LPAREN | ARG+ | QUOTED_STRING_FRAGMENT+ | SQUOTE2+ | RPAREN)* RPAREN
 	;
 
+parenthesizedArg
+	: CMD_PARM_WS? (CMD_PARM_WS | LPAREN | ARG+ | QUOTED_STRING_FRAGMENT+ | SQUOTE2+ | RPAREN)+
+	;
+
 cmdParm
-	: CMD_PARM_WS? (CMD_PARM+ (CMD_PARM_WS | arg)*)
+	: CMD_PARM_WS? (CMD_PARM+ (COMMA | CMD_PARM+ | CMD_PARM_WS | arg)*)
+	;
+
+pgm
+	: CMD_PARM_WS? ((CMD_PARM+ (LPAREN ARG+ RPAREN)?) | QUOTED_STRING_FRAGMENT+)
+	;
+
+pgmParm
+	: (CMD_PARM_WS? QUOTED_STRING_FRAGMENT+)
 	;
 
 allocate
@@ -117,19 +132,23 @@ attr
 	;
 
 call
-	: CALL cmdParm*
+	: CALL pgm pgmParm? cmdParm*
 	;
 
 cancel
-	: CANCEL cmdParm*
+	: CANCEL (parenthesizedArg* | cmdParm*)
+	;
+
+clist
+	: CLIST (cmdParm | parenthesizedArg)*
 	;
 
 delete
-	: (DELETE | DEL) cmdParm*
+	: (DELETE | DEL) CMD_PARM_WS? (arg | cmdParm*)
 	;
 
 edit
-	: (EDIT | E_) cmdParm*
+	: (EDIT | E_) EDIT_CMD_STREAM+ EDIT_END
 	;
 
 end
@@ -137,7 +156,7 @@ end
 	;
 
 exec
-	: (EXEC | EX) cmdParm*
+	: (EXEC | EX) pgm (cmdParm | parenthesizedArg)*
 	;
 
 executil

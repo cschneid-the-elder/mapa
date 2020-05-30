@@ -1,0 +1,29 @@
+edit parts new cobol
+change 57 XparameterXoperand
+change 57 'parameter' 'operand'
+CKPOINT
+change 24 82 !i.e. !e.g. ! all
+change 103 m315 h.p. at 2400
+change * //the end of the world
+CKP
+up 3
+INSERT UCBFLG DS AL1 CONTROL FLAGS
+END
+edit hydrlics new fortgi nonum scan
+delete *
+delete
+del *
+del
+*
+end
+e manhrs.data
+top
+move  10  30  100  incr(5)
+end
+e cmdproc new clist
+down 24
+insert
+00281 j.w.house 13-244831 24.73
+00282 t.n.howard 24-782095 3.05
+00283 b.h.ireland 40-007830 104.56
+end

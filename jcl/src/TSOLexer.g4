@@ -6,7 +6,9 @@ software.  Use at your own risk.
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
 
-This is intended to be a minimal ANTLR4 grammar for TSO commands.
+This is intended to be a minimal ANTLR4 grammar for TSO commands.  The primary
+purpose is to allow a listener to obtain any DSN commands without too much
+tumult being caused by any surrounding TSO commands.
 
 In parsing JCL, one may encounter an execution of IKJEFT01, IKJEFT1A, or
 IKJEFT1B, all of which are entry points in TSO.  It is common to execute
@@ -179,7 +181,7 @@ DEL
 
 EDIT
 	: E D I T 
-	->pushMode(CMD_PARM_MODE)
+	->pushMode(EDIT_CMD_MODE)
 	;
 
 END
@@ -447,9 +449,19 @@ WHEN
 	->pushMode(CMD_PARM_MODE)
 	;
 
+CLIST
+	: '%' [a-zA-Z0-9@#$]+
+	->pushMode(CMD_PARM_MODE)
+	;
+
+IMPLICIT_CLIST
+	: [a-zA-Z0-9@#$]+
+	->type(CLIST),pushMode(CMD_PARM_MODE)
+	;
+
 E_
 	: E 
-	->pushMode(CMD_PARM_MODE)
+	->pushMode(EDIT_CMD_MODE)
 	;
 
 H_
@@ -460,16 +472,6 @@ H_
 R_
 	: R 
 	->pushMode(CMD_PARM_MODE)
-	;
-
-CLIST
-	: '%' [A-Z0-9@#$]+
-	->pushMode(CMD_PARM_MODE)
-	;
-
-IMPLICIT_CLIST
-	: [A-Z0-9@#$]+
-	->type(CLIST),pushMode(CMD_PARM_MODE)
 	;
 
 mode CMD_PARM_MODE ;
@@ -606,6 +608,17 @@ DSN_END
 	;
 
 DSN_CMD_STREAM
+	: .+?
+	;
+
+mode EDIT_CMD_MODE ;
+
+EDIT_END
+	: NEWLINE E N D
+	->popMode
+	;
+
+EDIT_CMD_STREAM
 	: .+?
 	;
 

@@ -1,0 +1,32 @@
+ex 'slk27.user.clist(member)'
+ free file(sysin,sysprint)
+ delete (&name..list,&name..obj)
+ allocate dataset(&name...asm) file(sysin) SHR  keep
+ allocate dataset(&name..list) file(sysprint) -
+  block(132) space(300,100)
+ allocate dataset(&name..obj) file(syspunch) block(80) -
+  space(100,50)
+ allocate file(sysut1) space(3,1) cylinders new delete
+ allocate file(sysut2) space(3,1) cylinders new delete
+ allocate file(sysut3) space(3,1) cylinders new delete
+ allocate file(syslib) da('d82ljp1.tso.macro',
+  'sys1.maclib') shr
+ call '*(ASMA90)' 'deck,noobj,rent'
+ free file(sysut1,sysin,sysprint, -
+  syspunch,syslib)
+ allocate file(sysin) da(*)
+ allocate file(sysprint) da(*)
+exec fasm 'tgetasis' list
+fasm2 tgetasis
+exec 'master.clist(switch)' +  
+  'dsn1(''''''master.backup'''''') +  
+  dsn2(goodcopy)'
+%switch dsn1('''master.backup''') dsn2(goodcopy)
+ex 'lmw18.user.exec(member)' exec
+member
+exec 'master.exec(switch)' '''master.backup'' goodcopy' exec
+%switch 'master.backup' goodcopy
+GETARG 1,2
+%GETARG 1,2
+ex 'REXX.EXEC(GETARG)' '1,2'
+
