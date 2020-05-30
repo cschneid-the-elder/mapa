@@ -454,9 +454,31 @@ CLIST
 	->pushMode(CMD_PARM_MODE)
 	;
 
+/*
+If E_, H_, and R_ are defined prior to IMPLICIT_CLIST then any
+otherwise unrecognized command containing any of those characters
+is recognized as that character and the rest of the token is
+unrecognized.
+
+Unfortunately, that means that E_, H_, and R_ will be recognized
+by the lexer as a CLIST token.  I can live with that.  Hopefully
+you can too.
+
+Also, using setType() to force the type of token emitted doesn't
+seem to work.  getType() shows it's being done, but the parser
+still sees CLIST as the token type.
+*/
+
 IMPLICIT_CLIST
 	: [a-zA-Z0-9@#$]+
-	->type(CLIST),pushMode(CMD_PARM_MODE)
+	{
+		if (getText().equalsIgnoreCase("E")) {
+			pushMode(EDIT_CMD_MODE);
+		} else {
+			pushMode(CMD_PARM_MODE);
+		}
+	}
+	->type(CLIST)
 	;
 
 E_
@@ -540,6 +562,11 @@ ARG_SQUOTE
 	->channel(HIDDEN),pushMode(QS_MODE)
 	;
 
+ARG_CONTINUATION
+	: (DASH | PLUS) WS? NEWLINE
+	->channel(HIDDEN)
+	;
+
 ARG
 	: ~[\n\r]
 	;
@@ -593,6 +620,11 @@ QS_NEWLINE
 
 QS_WS
 	: WS
+	->channel(HIDDEN)
+	;
+
+QS_CONTINUATION
+	: (DASH | PLUS) QS_WS? NEWLINE
 	->channel(HIDDEN)
 	;
 

@@ -1,0 +1,5 @@
+link (gsalesa,gsalesb,nsales) load(salesrpt) print(*) -
+xref list
+link(m33thrus,*) load(m33perfo(mod2)) print(*) -
+  plilib map list
+link mon load(mine(newmod))amode(31) rmode(any)

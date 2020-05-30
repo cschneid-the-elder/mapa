@@ -1,0 +1,6 @@
+help
+help allocate
+h link operands(xref,map,coblib,ovly)
+h listbc function syntax
+help attrib positional(1)
+help renum positional(3)

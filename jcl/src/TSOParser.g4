@@ -139,8 +139,15 @@ cancel
 	: CANCEL (parenthesizedArg* | cmdParm*)
 	;
 
+/*
+Try as I might, I am unable to get the lexer to emit the E_ token
+without breaking its ability to recognize arbitrary otherwise
+unrecognized text as the CLIST token.  So we are left with the
+unfortunate situation where the E_ token must be handled here
+as if it were a CLIST token.
+*/
 clist
-	: CLIST (cmdParm | parenthesizedArg)*
+	: CLIST ((EDIT_CMD_STREAM+ EDIT_END) | cmdParm | parenthesizedArg)*
 	;
 
 delete
@@ -172,7 +179,7 @@ help
 	;
 
 link
-	: LINK cmdParm*
+	: LINK (parenthesizedArg | cmdParm)+
 	;
 
 listalc
