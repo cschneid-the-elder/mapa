@@ -71,6 +71,14 @@ fragment AMPERSAND
 	: '&'
 	;
 
+LPAREN
+	: '('
+	;
+
+RPAREN
+	: ')'
+	;
+
 NEWLINE
 	: [\n\r]
 	->channel(HIDDEN)
@@ -79,15 +87,6 @@ NEWLINE
 WS
 	: [ ]+
 	->channel(HIDDEN)
-	;
-
-LPAREN
-	:  '('
-	->pushMode(ARG_MODE)
-	;
-
-RPAREN
-	:  ')'
 	;
 
 DASH
@@ -504,16 +503,6 @@ about the end of a CMD_PARM token if it is.
 */
 CMD_PARM_WS
 	: WS
-	;
-
-CMD_PARM_LPAREN
-	:  LPAREN
-	->type(LPAREN),pushMode(ARG_MODE)
-	;
-
-CMD_PARM_COMMA
-	: COMMA
-	->type(COMMA)
 	;
 
 CMD_PARM_CONTINUATION

@@ -6,8 +6,11 @@
 rc = 0;
 
 input = $0;
-
-while(getline <"./src/treeCount-jcl.db" > 0) {
+type = tolower(ruleType);
+if (type == "jclpp") type = "jcl";
+dbFile = "./src/treeCount-"type".db";
+print "dbFile = " dbFile
+while(getline <dbFile > 0) {
 	if ($1 == "#") {}
 	if ($1 == "=") {
 				nbStrings = 0;
@@ -26,8 +29,9 @@ while(getline <"./src/treeCount-jcl.db" > 0) {
 }
 
 if (nbStrings == 0) {
-	print "./src/treeCount-jcl.db not found"
-	EXIT 24
+	print dbFile " not found"
+	rc = 24
+	EXIT rc
 }
 
 for (i = 1; i <= nbStrings; i++) {

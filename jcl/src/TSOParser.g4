@@ -48,7 +48,6 @@ tsoCmd
 	| dsnStream
 	| altlib
 	| attrib
-	| attr
 	| call
 	| cancel
 	| clist
@@ -99,8 +98,16 @@ parenthesizedArg
 	: CMD_PARM_WS? (CMD_PARM_WS | LPAREN | ARG+ | QUOTED_STRING_FRAGMENT+ | SQUOTE2+ | RPAREN)+
 	;
 
+/*
+Interestingly, if there is CMD_PARM_WS on either side of a comment it shows
+up in the parser as two separate tokens.
+*/
 cmdParm
-	: CMD_PARM_WS? (CMD_PARM+ (COMMA | CMD_PARM+ | CMD_PARM_WS | arg)*)
+	: CMD_PARM_WS? CMD_PARM_WS? (CMD_PARM+ (COMMA | CMD_PARM+ | CMD_PARM_WS | arg)*)
+	;
+
+cmdParm1
+	: CMD_PARM_WS? CMD_PARM_WS? (LPAREN | RPAREN | COMMA | CMD_PARM+ | CMD_PARM_WS | QUOTED_STRING_FRAGMENT+ | SQUOTE2+)*
 	;
 
 pgm
@@ -112,7 +119,7 @@ pgmParm
 	;
 
 allocate
-	: (ALLOCATE | ALLOC) cmdParm*
+	: (ALLOCATE | ALLOC) cmdParm1
 	;
 
 dsnStream
@@ -120,23 +127,19 @@ dsnStream
 	;
 
 altlib
-	: ALTLIB cmdParm*
+	: ALTLIB cmdParm1
 	;
 
 attrib
-	: ATTRIB cmdParm*
-	;
-
-attr
-	: ATTR cmdParm*
+	: (ATTRIB | ATTR) cmdParm1
 	;
 
 call
-	: CALL pgm pgmParm? cmdParm*
+	: CALL cmdParm1
 	;
 
 cancel
-	: CANCEL (parenthesizedArg* | cmdParm*)
+	: CANCEL cmdParm1
 	;
 
 /*
@@ -147,11 +150,11 @@ unfortunate situation where the E_ token must be handled here
 as if it were a CLIST token.
 */
 clist
-	: CLIST ((EDIT_CMD_STREAM+ EDIT_END) | cmdParm | parenthesizedArg)*
+	: CLIST ((EDIT_CMD_STREAM+ EDIT_END) | cmdParm1)
 	;
 
 delete
-	: (DELETE | DEL) CMD_PARM_WS? (arg | cmdParm*)
+	: (DELETE | DEL) cmdParm1
 	;
 
 edit
@@ -159,27 +162,27 @@ edit
 	;
 
 end
-	: END cmdParm*
+	: END cmdParm1
 	;
 
 exec
-	: (EXEC | EX) pgm (cmdParm | parenthesizedArg)*
+	: (EXEC | EX) cmdParm1
 	;
 
 executil
-	: EXECUTIL cmdParm*
+	: EXECUTIL cmdParm1
 	;
 
 free
-	: FREE cmdParm*
+	: FREE cmdParm1
 	;
 
 help
-	: (HELP | H_) cmdParm*
+	: (HELP | H_) cmdParm1
 	;
 
 link
-	: LINK (parenthesizedArg | cmdParm)+
+	: LINK cmdParm1 //LINK (parenthesizedArg | cmdParm)+
 	;
 
 listalc
@@ -195,11 +198,11 @@ listcat
 	;
 
 listds
-	: LISTDS cmdParm*
+	: LISTDS cmdParm1
 	;
 
 loadgo
-	: (LOADGO | LOAD) cmdParm*
+	: (LOADGO | LOAD) cmdParm1
 	;
 
 logoff
