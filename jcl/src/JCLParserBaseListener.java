@@ -5050,6 +5050,18 @@ public class JCLParserBaseListener implements JCLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJes2XMITStatement(JCLParser.Jes2XMITStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNullStatement(JCLParser.NullStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNullStatement(JCLParser.NullStatementContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

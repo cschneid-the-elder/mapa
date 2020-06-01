@@ -373,23 +373,35 @@ JOBLIB
 	: J O B L I B
 	->mode(OP_MODE)
 	;
+
 SYSCHK
 	: S Y S C H K
 	->mode(OP_MODE)
 	;
+
 fragment NM_PART
 	: [A-Z@#$] [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]? [A-Z0-9@#$]?
 	;
+
 NAME_FIELD
-	: NM_PART (DOT_DFLT NM_PART)? {_modeStack.clear();}
+	: NM_PART (DOT_DFLT NM_PART)?
+	{
+		_modeStack.clear();
+	}
 	->mode(OP_MODE)
 	;
+
 CONTINUATION_WS
 	: ' '+
 	{
 		getText().length() <= 13
 	}?
 	->channel(HIDDEN),mode(OP_MODE)
+	;
+
+NM_NEWLINE
+	: NEWLINE
+	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
 mode OP_MODE
