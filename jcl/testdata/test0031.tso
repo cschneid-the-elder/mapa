@@ -1,0 +1,16 @@
+status
+st
+status chiana
+st chiana
+status (chiana,zhaan)
+st (chiana,zhaan)
+status (chiana,zhaan,crichton,jool,-
+noranti,dargo,pilot,moya,talyn,stark)
+st (chiana,zhaan,crichton,jool,-
+noranti,dargo,pilot,moya,talyn,stark,aeryn)
+status aeryn (stc1)
+st aeryn (stc1)
+status (talyn (job1),crais (job2))
+st (talyn (job1),+
+    crais (job2))
+

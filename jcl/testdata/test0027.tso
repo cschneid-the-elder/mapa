@@ -1,0 +1,8 @@
+send 'what is the weekend schedule?'
+send 'if you have data set "mylib.load" allocated, -
+please free it. i need it to run my program.' -
+user(janet5,lynn6) wait
+send 'is your version of the simulator ready?' -
+user(betty7) logon
+send 'Please mount tape number A021. I need -
+it to run my program.'  CN(TAPELIB)

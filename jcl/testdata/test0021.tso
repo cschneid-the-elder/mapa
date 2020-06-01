@@ -1,0 +1,7 @@
+printds dsname(jcl.cntl) members fold(72)
+printds dataset(names.text) lines(1:250) hold
+printds da(foil.text(status)) outdes(foilout)
+printds ds(memo.text(notice))
+printds da(document.text(approval)) chars(gt12,gt15)
+printds fi(sysproc)
+printds da('sys1.tso.clist','tools.clist','my.clist')

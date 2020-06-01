@@ -1,0 +1,7 @@
+output smith2 class(x) print(*) next pause
+output (jana,janb) class(r,s,t) print(augpp)
+output kean1 class(s) newclass(t)
+out kean1 class(s) delete
+free file(sysut2) sysout(x)
+status smith
+output smith(tsu0001)

@@ -1,0 +1,6 @@
+profile char(#) line(attn) prompt nointercom pause nomsgid
+profile line(@)
+profile line(&) char(!)
+profile planguage(japan)
+profile slanguage(fra)
+prof nointercom

@@ -186,15 +186,15 @@ link
 	;
 
 listalc
-	: (LISTALC | LISTA) cmdParm*
+	: (LISTALC | LISTA) cmdParm1
 	;
 
 listbc
-	: (LISTBC | LISTB) cmdParm*
+	: (LISTBC | LISTB) cmdParm1
 	;
 
 listcat
-	: (LISTCAT | LISTC) cmdParm*
+	: (LISTCAT | LISTC) cmdParm1
 	;
 
 listds
@@ -206,98 +206,98 @@ loadgo
 	;
 
 logoff
-	: LOGOFF cmdParm*
+	: LOGOFF cmdParm1
 	;
 
 logon
-	: LOGON cmdParm*
+	: LOGON cmdParm1
 	;
 
 outdes
-	: OUTDES cmdParm*
+	: OUTDES cmdParm1
 	;
 
 output
-	: (OUTPUT | OUT) cmdParm*
+	: (OUTPUT | OUT) cmdParm1
 	;
 
 printds
-	: (PRINTDS | PR) cmdParm*
+	: (PRINTDS | PR) cmdParm1
 	;
 
 profile
-	: (PROFILE | PROF) cmdParm*
+	: (PROFILE | PROF) cmdParm1
 	;
 
 protect
-	: (PROTECT | PROT) cmdParm*
+	: (PROTECT | PROT) cmdParm1
 	;
 
 receive
-	: RECEIVE cmdParm*
+	: RECEIVE cmdParm1
 	;
 
 rename
-	: (RENAME | REN) cmdParm*
+	: (RENAME | REN) cmdParm1
 	;
 
 run
-	: (RUN | R_) cmdParm*
+	: (RUN | R_) cmdParm1
 	;
 
 send
-	: (SEND | SE) cmdParm*
+	: (SEND | SE) cmdParm1
 	;
 
 smcopy
-	: (SMCOPY | SMC) cmdParm*
+	: (SMCOPY | SMC) cmdParm1
 	;
 
 smfind
-	: (SMFIND | SMF) cmdParm*
+	: (SMFIND | SMF) cmdParm1
 	;
 
 smput
-	: (SMPUT | SMP) cmdParm*
+	: (SMPUT | SMP) cmdParm1
 	;
 
 status
-	: (STATUS | ST) cmdParm*
+	: (STATUS | ST) cmdParm1
 	;
 
 submit
-	: (SUBMIT | SUB) cmdParm*
+	: (SUBMIT | SUB) cmdParm1
 	;
 
 terminal
-	: (TERMINAL | TERM) cmdParm*
+	: (TERMINAL | TERM) cmdParm1
 	;
 
 test
-	: TEST cmdParm*
+	: TEST cmdParm1
 	;
 
 time
-	: TIME cmdParm*
+	: TIME cmdParm1
 	;
 
 transmit
-	: (TRANSMIT | XMIT) cmdParm*
+	: (TRANSMIT | XMIT) cmdParm1
 	;
 
 tsoexec
-	: TSOEXEC cmdParm*
+	: TSOEXEC cmdParm1
 	;
 
 tsolib
-	: TSOLIB cmdParm*
+	: TSOLIB cmdParm1
 	;
 
 vlfnote
-	: VLFNOTE cmdParm*
+	: VLFNOTE cmdParm1
 	;
 
 when
-	: WHEN cmdParm*
+	: WHEN cmdParm1
 	;
 
