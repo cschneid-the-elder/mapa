@@ -1,0 +1,5 @@
+vlfnote delete dataset(‘common.tools.clist(makememo)’)
+vlfnote delete dataset(tailored.clist(X))
+vlfnote add dataset(tailored.clist(newx))
+vlfnote delete class(myclass1) major(major1) minor(minor1)
+vlfnote delete class(myclass) major(notice)

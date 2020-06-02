@@ -94,19 +94,12 @@ arg
 	: LPAREN (LPAREN | ARG+ | QUOTED_STRING_FRAGMENT+ | SQUOTE2+ | RPAREN)* RPAREN
 	;
 
-parenthesizedArg
-	: CMD_PARM_WS? (CMD_PARM_WS | LPAREN | ARG+ | QUOTED_STRING_FRAGMENT+ | SQUOTE2+ | RPAREN)+
-	;
-
 /*
 Interestingly, if there is CMD_PARM_WS on either side of a comment it shows
 up in the parser as two separate tokens.
 */
-cmdParm
-	: CMD_PARM_WS? CMD_PARM_WS? (CMD_PARM+ (COMMA | CMD_PARM+ | CMD_PARM_WS | arg)*)
-	;
 
-cmdParm1
+cmdParm
 	: CMD_PARM_WS? CMD_PARM_WS? (LPAREN | RPAREN | COMMA | CMD_PARM+ | CMD_PARM_WS | QUOTED_STRING_FRAGMENT+ | SQUOTE2+)*
 	;
 
@@ -119,7 +112,7 @@ pgmParm
 	;
 
 allocate
-	: (ALLOCATE | ALLOC) cmdParm1
+	: (ALLOCATE | ALLOC) cmdParm
 	;
 
 dsnStream
@@ -127,19 +120,19 @@ dsnStream
 	;
 
 altlib
-	: ALTLIB cmdParm1
+	: ALTLIB cmdParm
 	;
 
 attrib
-	: (ATTRIB | ATTR) cmdParm1
+	: (ATTRIB | ATTR) cmdParm
 	;
 
 call
-	: CALL cmdParm1
+	: CALL cmdParm
 	;
 
 cancel
-	: CANCEL cmdParm1
+	: CANCEL cmdParm
 	;
 
 /*
@@ -150,11 +143,11 @@ unfortunate situation where the E_ token must be handled here
 as if it were a CLIST token.
 */
 clist
-	: CLIST ((EDIT_CMD_STREAM+ EDIT_END) | cmdParm1)
+	: CLIST ((EDIT_CMD_STREAM+ EDIT_END) | cmdParm)
 	;
 
 delete
-	: (DELETE | DEL) cmdParm1
+	: (DELETE | DEL) cmdParm
 	;
 
 edit
@@ -162,142 +155,142 @@ edit
 	;
 
 end
-	: END cmdParm1
+	: END cmdParm
 	;
 
 exec
-	: (EXEC | EX) cmdParm1
+	: (EXEC | EX) cmdParm
 	;
 
 executil
-	: EXECUTIL cmdParm1
+	: EXECUTIL cmdParm
 	;
 
 free
-	: FREE cmdParm1
+	: FREE cmdParm
 	;
 
 help
-	: (HELP | H_) cmdParm1
+	: (HELP | H_) cmdParm
 	;
 
 link
-	: LINK cmdParm1 //LINK (parenthesizedArg | cmdParm)+
+	: LINK cmdParm
 	;
 
 listalc
-	: (LISTALC | LISTA) cmdParm1
+	: (LISTALC | LISTA) cmdParm
 	;
 
 listbc
-	: (LISTBC | LISTB) cmdParm1
+	: (LISTBC | LISTB) cmdParm
 	;
 
 listcat
-	: (LISTCAT | LISTC) cmdParm1
+	: (LISTCAT | LISTC) cmdParm
 	;
 
 listds
-	: LISTDS cmdParm1
+	: LISTDS cmdParm
 	;
 
 loadgo
-	: (LOADGO | LOAD) cmdParm1
+	: (LOADGO | LOAD) cmdParm
 	;
 
 logoff
-	: LOGOFF cmdParm1
+	: LOGOFF cmdParm
 	;
 
 logon
-	: LOGON cmdParm1
+	: LOGON cmdParm
 	;
 
 outdes
-	: OUTDES cmdParm1
+	: OUTDES cmdParm
 	;
 
 output
-	: (OUTPUT | OUT) cmdParm1
+	: (OUTPUT | OUT) cmdParm
 	;
 
 printds
-	: (PRINTDS | PR) cmdParm1
+	: (PRINTDS | PR) cmdParm
 	;
 
 profile
-	: (PROFILE | PROF) cmdParm1
+	: (PROFILE | PROF) cmdParm
 	;
 
 protect
-	: (PROTECT | PROT) cmdParm1
+	: (PROTECT | PROT) cmdParm
 	;
 
 receive
-	: RECEIVE cmdParm1
+	: RECEIVE cmdParm
 	;
 
 rename
-	: (RENAME | REN) cmdParm1
+	: (RENAME | REN) cmdParm
 	;
 
 run
-	: (RUN | R_) cmdParm1
+	: (RUN | R_) cmdParm
 	;
 
 send
-	: (SEND | SE) cmdParm1
+	: (SEND | SE) cmdParm
 	;
 
 smcopy
-	: (SMCOPY | SMC) cmdParm1
+	: (SMCOPY | SMC) cmdParm
 	;
 
 smfind
-	: (SMFIND | SMF) cmdParm1
+	: (SMFIND | SMF) cmdParm
 	;
 
 smput
-	: (SMPUT | SMP) cmdParm1
+	: (SMPUT | SMP) cmdParm
 	;
 
 status
-	: (STATUS | ST) cmdParm1
+	: (STATUS | ST) cmdParm
 	;
 
 submit
-	: (SUBMIT | SUB) cmdParm1
+	: (SUBMIT | SUB) cmdParm
 	;
 
 terminal
-	: (TERMINAL | TERM) cmdParm1
+	: (TERMINAL | TERM) cmdParm
 	;
 
 test
-	: TEST cmdParm1
+	: TEST cmdParm
 	;
 
 time
-	: TIME cmdParm1
+	: TIME cmdParm
 	;
 
 transmit
-	: (TRANSMIT | XMIT) cmdParm1
+	: (TRANSMIT | XMIT) cmdParm
 	;
 
 tsoexec
-	: TSOEXEC cmdParm1
+	: TSOEXEC cmdParm
 	;
 
 tsolib
-	: TSOLIB cmdParm1
+	: TSOLIB cmdParm
 	;
 
 vlfnote
-	: VLFNOTE cmdParm1
+	: VLFNOTE cmdParm
 	;
 
 when
-	: WHEN cmdParm1
+	: WHEN cmdParm
 	;
 

@@ -1,0 +1,4 @@
+CALL     compiler
+WHEN     SYSRC(= 0) EXEC LNKED
+WHEN     SYSRC(= 4) EXEC LNKED
+WHEN     SYSRC(= 8) EXEC ERROR
