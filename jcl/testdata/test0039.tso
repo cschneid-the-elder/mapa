@@ -2,3 +2,49 @@ CALL     compiler
 WHEN     SYSRC(= 0) EXEC LNKED
 WHEN     SYSRC(= 4) EXEC LNKED
 WHEN     SYSRC(= 8) EXEC ERROR
+CALL     IFOX00
+WHEN     SYSRC (< 8) CALL *IEWL 'LIST,XREF'
+WHEN     SYSRC (GE 8) CALL ABNDS806
+CALL     IEBIBALL
+WHEN SYSRC(EQ 0) SE 'IEBIBALL ENDED W/RC=0' USER(HERC03)
+WHEN SYSRC(=  1) REN OLD.DSN NEW.DSN
+WHEN SYSRC(NE 2) RUN 'MY.ASM.PGM' ASM
+WHEN SYSRC(^=3) FREE DA('MY_ASM_PGM')
+WHEN SYSRC(>4) CALL *IEBGENER
+WHEN  SYSRC(GT 5) CALL *IEFBR14
+WHEN SYSRC   (LT    6) CALL THE.EXPANSE '127,0,0,1'
+WHEN SYSRC (< 7 ) CANCEL (JOB001 JOB002 JOB003)
+WHEN SYSRC ( GE  8 ) delete example.nonvsam scratch nonvsam
+WHEN SYSRC ( >=  9 ) %FOOBAR
+WHEN SYSRC(NG   10  ) allocate da(input.data) old
+WHEN SYSRC ( ^>  11   ) altlib display
+WHEN SYSRC(LE 12) attrib dsattrs expdt(99365) blksize(24000)
+WHEN SYSRC(<= 13) END
+WHEN SYSRC(NL 14) link (gsalesa,gsalesb,nsales) load(salesrpt) -
+print(*) -
+xref list
+WHEN SYSRC(^< 15) load csine print(*)
+/**/
+CALL     IEBIBALL
+WHEN SYSRC(EQ 0) /*SE 'IEBIBALL ENDED W/RC=0' USER(HERC03)
+WHEN SYSRC(=  1) REN OLD.DSN /*NEW.DSN*/ NEWER.DSN
+WHEN SYSRC(/*NE*/^= 2) RUN 'MY.ASM.PGM' ASM
+WHEN SYSRC(^=3) -
+FREE DA('MY_ASM_PGM')
+WHEN SYSRC(>/*4*/44) CALL *IEBGENER
+WHEN  SYSRC(GT 5) CALL *IEFBR14
+WHEN SYSRC   (LT /*HOWDY*/   6) CALL THE.EXPANSE '127,0,0,1'
+WHEN SYSRC (< 7 ) CANCEL (JOB001 JOB002 JOB003)
+WHEN SYSRC ( GE  8 ) delete example.nonvsam scratch /*nonvsam
+WHEN SYSRC ( >=  9 ) /*%FOOBAR
+WHEN SYSRC(NG   10 /* ) allocate da(input.data) old*/ )
+WHEN/* SYSRC ( ^>  11   ) altlib display*/ SYSRC(^=11) END
+WHEN SYSRC(LE 12) attrib dsattrs /*expdt(99365)*/ blksize(24000)
+WHEN SYSRC(<= 13) END
+WHEN SYSRC(NL 14) link (gsalesa,gsalesb,nsales) load(salesrpt) -
+print(*) -
+xref list
+WHEN SYSRC(^< 15) load csine print(*)
+
+
+

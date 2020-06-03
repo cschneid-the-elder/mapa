@@ -310,6 +310,57 @@ vlfnote
 	;
 
 when
-	: WHEN cmdParm
+	: WHEN sysrc whenTsoCmd?
 	;
+
+sysrc
+	: WHEN_SYSRC LPAREN WHEN_SYSRC_OP WHEN_SYSRC_INT RPAREN
+	;
+
+whenTsoCmd
+	: (allocate
+	| dsnStream
+	| altlib
+	| attrib
+	| call
+	| cancel
+	| clist
+	| delete
+	| edit
+	| end
+	| exec
+	| executil
+	| free
+	| help
+	| link
+	| listalc
+	| listbc
+	| listcat
+	| listds
+	| loadgo
+	| logoff
+	| logon
+	| outdes
+	| output
+	| printds
+	| profile
+	| protect
+	| receive
+	| rename
+	| run
+	| send
+	| smcopy
+	| smfind
+	| smput
+	| status
+	| submit
+	| terminal
+	| test
+	| time
+	| transmit
+	| tsoexec
+	| tsolib
+	| vlfnote)
+	;
+
 

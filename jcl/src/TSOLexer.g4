@@ -71,6 +71,38 @@ fragment AMPERSAND
 	: '&'
 	;
 
+fragment OP_EQ
+	: ((E Q) | '=')
+	;
+
+fragment OP_NE
+	: ((N E) | '^=')
+	;
+
+fragment OP_GT
+	: ((G T) | '>')
+	;
+
+fragment OP_LT
+	: ((L T) | '<')
+	;
+
+fragment OP_GE
+	: ((G E) | '>=')
+	;
+
+fragment OP_NG
+	: ((N G) | '^>')
+	;
+
+fragment OP_LE
+	: ((L E) | '<=')
+	;
+
+fragment OP_NL
+	: ((N L) | '^<')
+	;
+
 LPAREN
 	: '('
 	;
@@ -445,7 +477,7 @@ VLFNOTE
 
 WHEN
 	: W H E N 
-	->pushMode(CMD_PARM_MODE)
+	->pushMode(WHEN_WS_MODE)
 	;
 
 CLIST
@@ -786,5 +818,94 @@ CALL_PARM_WS
 	->channel(HIDDEN)
 	;
 
+mode WHEN_WS_MODE ;
+
+WHEN_WS_WS
+	: WS
+	->channel(HIDDEN),mode(WHEN_SYSRC_MODE)
+	;
+
+WHEN_WS_CONTINUATION
+	: (DASH | PLUS) WS? NEWLINE
+	->channel(HIDDEN),mode(WHEN_SYSRC_MODE)
+	;
+
+WHEN_WS_NEWLINE
+	: NEWLINE
+	->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+WHEN_WS_COMMENT_START
+	: SLASH ASTERISK
+	->type(COMMENT_START),channel(COMMENTS),pushMode(CM_MODE)
+	;
+
+mode WHEN_SYSRC_MODE ;
+
+WHEN_SYSRC
+	: S Y S R C
+	;
+
+WHEN_SYSRC_LPAREN
+	: LPAREN
+	->type(LPAREN)
+	;
+
+WHEN_SYSRC_OP
+	: (OP_EQ
+	| OP_NE
+	| OP_GT
+	| OP_LT
+	| OP_GE
+	| OP_NG
+	| OP_LE
+	| OP_NL)
+	;
+
+WHEN_SYSRC_WS
+	: WS
+	->channel(HIDDEN)
+	;
+
+WHEN_SYSRC_INT
+	: [0-9]+
+	;
+
+WHEN_SYSRC_RPAREN
+	: RPAREN
+	->type(RPAREN),mode(WHEN_WS_CMD_MODE)
+	;
+
+WHEN_SYSRC_CONTINUATION
+	: (DASH | PLUS) WS? NEWLINE
+	->channel(HIDDEN)
+	;
+
+WHEN_SYSRC_NEWLINE
+	: NEWLINE
+	->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+WHEN_SYSRC_COMMENT_START
+	: SLASH ASTERISK
+	->type(COMMENT_START),channel(COMMENTS),pushMode(CM_MODE)
+	;
+
+mode WHEN_WS_CMD_MODE ;
+
+WHEN_WS_CMD_CONTINUATION
+	: WS? (DASH | PLUS) WS? NEWLINE
+	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+WHEN_WS_CMD_WS
+	: WS
+	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+WHEN_WS_CMD_NEWLINE
+	: NEWLINE
+	->type(NEWLINE),channel(HIDDEN),mode(DEFAULT_MODE)
+	;
 
 
