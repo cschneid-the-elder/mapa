@@ -741,6 +741,15 @@ CALL_MEMBER_COMMENT_START
 
 mode CALL_PARM_MODE ;
 
+/*
+Check for single quote in case we find ourselves here due to
+whitespace in CALL_PGM_PARM_MODE prior to the program parms.
+*/
+CALL_PARM_SQUOTE
+	: SQUOTE
+	->channel(HIDDEN),pushMode(QS_MODE)
+	;
+
 CALL_PARM_CAPS
 	: C A P S
 	;

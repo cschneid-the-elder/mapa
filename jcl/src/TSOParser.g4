@@ -128,7 +128,7 @@ attrib
 	;
 
 call
-	: CALL callDsname? callMember? callDsname? callPgmParm? callParms?
+	: CALL callDsname? callMember? callDsname? callPgmParm? callParms*
 	;
 
 callParms
