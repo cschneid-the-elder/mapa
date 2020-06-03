@@ -35,6 +35,30 @@ the DSNTSO parser which is also part of this project, and thus obtain the
 actual program(s) being executed under the TSO monitor program running 
 the DSN command processor.
 
+Additionally, and this only became apparent as this grammar was being coded,
+an application might make use of this grammar to detect execution of 
+arbitrary z/OS applications via the CALL command, and arbitrary allocation
+of datasets via the ALLOCATE command.  Yes, it is possible to code...
+
+//STEP0001 EXEC PGM=IKJEFT01
+//SYSTSPRT DD  SYSOUT=*
+//SYSTSIN  DD  *
+ALLOCATE DDNAME(MASTER) DA('PAYROLL.MASTER') SHR
+ALLOCATE DDNAME(NEWMAST) DA('NEW.PAYROLL.MASTER') -
+         LIKE('PAYROLL.MASTER')
+ALLOCATE DDNAME(TRANFILE) DA('CURRENT.PAYROLL.TRANSACT') SHR
+ALLOCATE DDNAME(REPORT01) SYSOUT
+CALL *PAYUPDAT
+WHEN SYSRC(= 0) SE 'NEW PAYROLL MASTER CREATED SUCCESSFULLY' -
+     USER(HR001) LOGON
+WHEN SYSRC(> 0) SE 'ERROR IN CREATING NEW PAYROLL MASTER' -
+     USER(HR001) LOGON
+FREE DDNAME(MASTER NEWMAST TRANSFILE REPORT01)
+//* This could continue, executing other programs
+
+...and you can hide all those TSO commands inside a file with other
+control statements, thus ensuring JCL analysis to be incomplete.
+
 */
 
 parser grammar TSOParser;
