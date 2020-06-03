@@ -128,7 +128,26 @@ attrib
 	;
 
 call
-	: CALL cmdParm
+	: CALL callDsname? callMember? callDsname? callPgmParm? callParms?
+	;
+
+callParms
+	: (CALL_PARM_ASIS
+	| CALL_PARM_CAPS
+	| CALL_PARM_NOENVB
+	| CALL_PARM_PASSENVB)
+	;
+
+callDsname
+	: (CALL_DSNAME+)
+	;
+
+callMember
+	: (LPAREN CALL_MEMBER RPAREN)
+	;
+
+callPgmParm
+	: (QUOTED_STRING_FRAGMENT+)
 	;
 
 cancel
