@@ -1,0 +1,6 @@
+smcopy
+smcopy fromdataset('sys1.clist(zlogon)') +
+       todataset(test.clist(zlogon))
+smcopy fromdataset('sample.commands.data') +
+       tostream(tsoin)
+smc

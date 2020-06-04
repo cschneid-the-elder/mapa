@@ -1,0 +1,11 @@
+logoff
+logoff disconnect
+logon wrrid/23xa$mbt
+logon wrrid/mo@ acct(288104) proc(ts951)-
+ size(90) nonotices nomail
+logon wrrid/xtd18 acct(347971) proc(rs832)-
+ size(90) seclabel(confdntl)
+logon cschneid
+logon cschneid/dargo
+logon cschneid/dargo/rygel
+

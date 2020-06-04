@@ -1,0 +1,40 @@
+listcat catalog(farscape1/scape) outfile(moya) -
+  level(crichton) -
+  cluster data -
+  ix spc nvsam ucat -
+  generationdatagroup -
+  pgspc alias -
+  creation(300) -
+  expiration(21)-
+  all-
+  dataclas+
+  mgmtclas+
+  storclas
+
+listcat catalog(farscape1/scape) outfile(moya) -
+  level(crichton) -
+  cluster data -
+/*  ix spc nvsam ucat -
+  generationdatagroup*/ -
+  pgspc alias -
+  creation(300) -
+  expiration(21)-
+  all-
+  dataclas+
+  mgmtclas+
+  storclas
+
+listcat catalog(farscape1/scape) outfile(moya) -
+  level(crichton) -
+  /* cluster data -*/+
+  ix spc nvsam ucat -
+  generationdatagroup -
+  pgspc alias -
+  creation(300) -
+  expiration(21)-
+  all-
+  dataclas+
+  mgmtclas+
+  storclas
+
+

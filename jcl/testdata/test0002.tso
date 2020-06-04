@@ -1,0 +1,7 @@
+allocate fi(sysuproc) da('id.clist') shr reu
+
+altlib activate user(clist)
+
+altlib display
+
+altlib activate application(clist) dataset(clist.name) uncond quiet

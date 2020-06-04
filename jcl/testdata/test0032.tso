@@ -1,0 +1,3 @@
+submit (stress, strain)
+submit (jcl(asmfclg) mydata)
+sub jcl.cntl(iefbr14) jobchar(1) notify

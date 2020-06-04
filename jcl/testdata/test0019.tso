@@ -1,0 +1,15 @@
+outdes multcopy copies(3) burst class(i) new
+allocate file(sysprint) new outdes(multcopy)
+free file(sysprint) outdes(multcopy)
+outdes onecopy copies(1) nodpagelbl burst new
+outdes multcopy copies(3) nosysarea reuse
+outdes newdest("_") -
+address('IBM Corporation','P.O. Box 950','Poughkeepsie, NY, 12602') -
+building(510) outdisp(keep,purge) dept(Payroll) -
+name('J. Plant') room('Conference Room ''A''') -
+title(OVER-TIME)
+outdes desta outdisp(,purge)
+outdes destb outdisp(purge)
+outdes destc outdisp(purge,hold)
+outdes newdesc new pagedef(stndrd)("_") +
+userlib('user.private.resource','group.private.resource')

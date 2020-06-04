@@ -1,0 +1,30 @@
+call pearl '10,18,23'
+call mylib(cos1)
+call 'd58abc.pcp.load(mod1)' '/abc'
+call 'C58abc.c.load(mod1)' 'a BcD' asis
+call 'C58abc.c.load(mod1)' 'NOTEST /a bcd'
+call *(IEBDG)
+call 'C58abc.c.load(mod1)' 'NOTEST /a bcd' asis noenvb
+call 'C58abc.c.load(mod1)' 'NOTEST /a bcd' asis /*noenvb
+call 'C58abc.c.load(mod1)' 'NOTEST /a bcd' /*asis noenvb
+call 'C58abc.c.load(mod1)' /*'NOTEST /a bcd' asis noenvb
+call 'C58abc.c.load(mod1)' 'NOTEST /a bcd' asis /*noenvb*/
+call 'C58abc.c.load(mod1)' 'NOTEST /a bcd' /*asis*/ noenvb
+call 'C58abc.c.load(mod1)' /*'NOTEST /a bcd'*/ asis noenvb
+call 'C58abc.c.load(mod1)' - 
+     'NOTEST /a bcd' - 
+     asis - 
+     noenvb
+call 'C58abc.c.load(mod1)' - 
+     /*'NOTEST /a bcd'*/ - 
+     asis - 
+     noenvb
+call 'C58abc.c.load(mod1)' - 
+     /*'NOTEST /a bcd' - 
+     asis*/ - 
+     noenvb
+call 'C58abc.c.load(mod1)' - 
+     'NOTEST /a bcd' - 
+     asis/* - 
+     noenvb*/
+
