@@ -163,6 +163,20 @@ public class JclStep {
 		return this.execPgmStmtCtx != null;
 	}
 
+	/**
+	IKJEFT01, IKJEFT1A, and IKJEFT1B are all entry points in the TSO
+	command processor.  If this JclStep is executing TSO in batch, then
+	it may be <i>secretly</i> executing other programs via the TSO CALL
+	command or the RUN command of the DB2 DSN command processor.
+	*/
+	public Boolean isTSO() {
+		return 
+			this.isExecPgm() 
+			&& (this.pgmExecuted.getValue().equals("IKJEFT01")
+				|| this.pgmExecuted.getValue().equals("IKJEFT1A")
+				|| this.pgmExecuted.getValue().equals("IKJEFT1B"));
+	}
+
 	public String getProcExecuted() {
 		return this.procExecuted.getValue();
 	}

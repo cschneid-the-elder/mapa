@@ -1,7 +1,6 @@
 
 import java.util.*;
 import java.util.logging.*;
-//import java.lang.reflect.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -58,6 +57,10 @@ public class DdStatementAmalgamation {
 		}
 
 		this.ddName = buf.toString();
+	}
+
+	public String getDdName() {
+		return this.ddName;
 	}
 
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
