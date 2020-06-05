@@ -783,7 +783,17 @@ public class DdStatement {
 
 		DatasetNameWrapper dsnw = this.dsnParms.get("DSNAME");
 		if (dsnw == null) {
-			this.LOGGER.finer(this.myName + " " + this.ddName + " DSNAME not found");
+			this.LOGGER.finer(this.myName + " " + this.ddName + " DSNAME not found, checking for ddSplatCtx");
+			if (this.ddSplatCtx == null) {
+				this.LOGGER.finer(this.myName + " " + this.ddName + " ddSplatCtx not found");
+			} else {
+				this.LOGGER.finer(this.myName + " " + this.ddName + " ddSplatCtx found, processing");
+				for (JCLParser.DdParmASTERISK_DATAContext ddSplat: this.ddSplatCtx) {
+					for (TerminalNode t: ddSplat.DD_ASTERISK_DATA()) {
+						contents.append(t.getText());
+					}
+				}
+			}
 			return;
 		}
 
@@ -816,6 +826,13 @@ public class DdStatement {
 					+ this.ddName 
 					+ " unable to find path corresponding to " 
 					+ dsName);
+			this.LOGGER.finest(
+					this.myName 
+					+ " " 
+					+ this.ddName 
+					+ " CLI.mappedCntlPaths = |" 
+					+ this.CLI.mappedCntlPaths
+					+ "|");
 			return;
 		}
 
@@ -825,7 +842,7 @@ public class DdStatement {
 				this.myName 
 				+ " "
 				+ this.ddName
-				+ " reading "
+				+ " processing "
 				+ aPath);
 			List<String> list = Files.readAllLines(aPath);
 			for (String s: list) {

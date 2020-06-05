@@ -277,7 +277,8 @@ public class Job {
 		return this.jobName;
 	}
 
-	public void processSYSTSIN() throws IOException {
+	public void processSYSTSIN() {
+		this.LOGGER.fine(this.myName + " " + this.jobName + " processSYSTSIN");
 		for (JclStep s: this.steps) {
 			s.processSYSTSIN();
 		}

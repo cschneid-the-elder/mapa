@@ -69,7 +69,7 @@ public class DdStatementAmalgamation {
 							, ArrayList<String> tsoDSNPgms
 							, ArrayList<String> tsoDSNPlans) {
 
-		this.LOGGER.fine(this.myName + " processSYSTSIN");
+		this.LOGGER.fine(this.myName + " " + this.getDdName() + " processSYSTSIN");
 
 		if (this.getDdName().equals("SYSTSIN")) {
 		} else {

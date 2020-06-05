@@ -245,12 +245,31 @@ public class JclStep {
 	}
 
 	public void processSYSTSIN() {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " processSYSTSIN");
 		if (this.isTSO()) {
 			for (DdStatementAmalgamation dda: ddStatements){
 				if (dda.getDdName().equals("SYSTSIN")) {
 					dda.processSYSTSIN(tsoCallPgms, tsoDSNPgms, tsoDSNPlans);
 				}
 			}			
+		} else {
+			if (this.isExecPgm()) {
+				this.LOGGER.finest(
+						this.myName 
+						+ " " 
+						+ this.stepName 
+						+ " not executing TSO, pgm = |" 
+						+ this.pgmExecuted.getValue() 
+						+ "|");
+			} else {
+				this.LOGGER.finest(
+						this.myName 
+						+ " " 
+						+ this.stepName 
+						+ " not executing TSO, proc = |" 
+						+ this.procExecuted.getValue() 
+						+ "|");
+			}
 		}
 	}
 
