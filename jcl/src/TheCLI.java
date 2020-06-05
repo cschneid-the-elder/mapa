@@ -18,6 +18,7 @@ public class TheCLI{
 	public ArrayList<String> fileNamesToProcess = new ArrayList<>();
 	public ArrayList<String> staticProcPaths = new ArrayList<>();
 	public Hashtable<String, String> mappedProcPaths = new Hashtable<>();
+	public Hashtable<String, String> mappedCntlPaths = new Hashtable<>();
 	public String outcsvFileName = null;
 	public String outtreeFileName = null;
 	public Boolean unitTest = false;
@@ -43,6 +44,8 @@ public class TheCLI{
 			, "symbol=value to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
 		Option setList = new Option("setList", true
 			, "name of a file containing symbol=value pairs (one per line) to be used in resolving symbolics (ex: SYSUID=IBMUSER)");
+		Option cntlList = new Option("cntlList", true
+			, "name of a comma-delimited file containing a list of paths in which to locate control statement members and the PDS(E)s to which they correspond");
 		Option outcsv = new Option("outcsv", true
 			, "name of a file in which to store the gathered information in csv format");
 		Option outtree = new Option("outtree", true
@@ -63,6 +66,7 @@ public class TheCLI{
 		this.options.addOption(includeList);
 		this.options.addOption(set);
 		this.options.addOption(setList);
+		this.options.addOption(cntlList);
 		this.options.addOption(outcsv);
 		this.options.addOption(outtree);
 		this.options.addOption(logLevel);
@@ -116,6 +120,20 @@ public class TheCLI{
 			this.setFile = this.writeSet();
 		} else if (this.line.hasOption("setList")) {
 			this.setFile = this.writeSetFile();
+		}
+
+		if (this.line.hasOption("cntlList")) {
+			List<String> list = Files.readAllLines(Paths.get(this.line.getOptionValue("cntlList")));
+			for (String rec: list) {
+				if (rec.contains(",")) {
+					String[] kv = rec.split(",");
+					mappedCntlPaths.put(kv[1], kv[0]);
+				} else {
+					this.staticProcPaths.add(rec);
+				}
+			}
+		} else {
+			this.LOGGER.info("Control statements will not be processed");
 		}
 
 		if (this.line.hasOption("outcsv")) {

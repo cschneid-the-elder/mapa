@@ -63,6 +63,9 @@ public class JclStep {
 	private File tmpProcDir = null;
 	private Job parentJob = null;
 	private Proc parentProc = null;
+	private ArrayList<String> tsoCallPgms = new ArrayList<>();
+	private ArrayList<String> tsoDSNPgms = new ArrayList<>();
+	private ArrayList<String> tsoDSNPlans = new ArrayList<>();
 
 	public JclStep(
 			JCLParser.JclStepContext jclStepCtx
@@ -239,6 +242,16 @@ public class JclStep {
 
 	public void setJcllib(ArrayList<KeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
+	}
+
+	public void processSYSTSIN() {
+		if (this.isTSO()) {
+			for (DdStatementAmalgamation dda: ddStatements){
+				if (dda.getDdName().equals("SYSTSIN")) {
+					dda.processSYSTSIN(tsoCallPgms, tsoDSNPgms, tsoDSNPlans);
+				}
+			}			
+		}
 	}
 
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {

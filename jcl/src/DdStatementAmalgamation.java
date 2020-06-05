@@ -1,6 +1,8 @@
 
 import java.util.*;
 import java.util.logging.*;
+import java.io.*;
+import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -61,6 +63,38 @@ public class DdStatementAmalgamation {
 
 	public String getDdName() {
 		return this.ddName;
+	}
+
+	public void processSYSTSIN(ArrayList<String> tsoCallPgms
+							, ArrayList<String> tsoDSNPgms
+							, ArrayList<String> tsoDSNPlans) {
+
+		this.LOGGER.fine(this.myName + " processSYSTSIN");
+
+		if (this.getDdName().equals("SYSTSIN")) {
+		} else {
+			this.LOGGER.fine(this.myName + " ddName = |" + this.getDdName() + "| returning...");
+			return;
+		}
+
+		try {
+			String contents = this.getDatasetContents();
+			this.LOGGER.finest(this.myName + " processSYSTSIN contents = |" + contents + "|"); 
+		} catch (Exception e) {
+			this.LOGGER.warning(this.myName + " exception " + e + " processing SYSTSIN");
+			return;
+		}
+
+	}
+
+	private String getDatasetContents() throws Exception {
+		StringBuilder contents = new StringBuilder();
+
+		for (DdStatement dd: dds) {
+			dd.getDatasetContents(contents);
+		}
+
+		return contents.toString();
 	}
 
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {

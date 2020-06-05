@@ -1,6 +1,8 @@
 
 import java.util.*;
 import java.util.logging.*;
+import java.io.*;
+import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -773,6 +775,74 @@ public class DdStatement {
 			return dsnParms.get(key).getResolvedValue();
 		} else {
 			return key + " not found";
+		}
+	}
+
+	public void getDatasetContents(StringBuilder contents) throws Exception {
+		this.LOGGER.fine(this.myName + " " + this.ddName + " getDatasetContents");
+
+		DatasetNameWrapper dsnw = this.dsnParms.get("DSNAME");
+		if (dsnw == null) {
+			this.LOGGER.finer(this.myName + " " + this.ddName + " DSNAME not found");
+			return;
+		}
+
+		String dsName = dsnw.getJustDSN();
+		if (dsName.startsWith("*.")) {
+			this.LOGGER.info(
+					this.myName 
+					+ " " 
+					+ this.ddName 
+					+ " not processing referback " 
+					+ dsName);
+			return;
+		}
+
+		if (dsName.startsWith("&&")) {
+			this.LOGGER.info(
+					this.myName 
+					+ " " 
+					+ this.ddName 
+					+ " not processing temporary file " 
+					+ dsName);
+			return;
+		}
+
+		String pathName = this.CLI.mappedCntlPaths.get(dsName);
+		if (pathName == null) {
+			this.LOGGER.warning(
+					this.myName 
+					+ " " 
+					+ this.ddName 
+					+ " unable to find path corresponding to " 
+					+ dsName);
+			return;
+		}
+
+		Path aPath = Paths.get(pathName, dsnw.getJustMember());
+		if (Files.exists(aPath)) {
+			this.LOGGER.finest(
+				this.myName 
+				+ " "
+				+ this.ddName
+				+ " reading "
+				+ aPath);
+			List<String> list = Files.readAllLines(aPath);
+			for (String s: list) {
+				contents.append(s);
+				contents.append(System.getProperty("line.separator"));
+			}
+		} else {
+			this.LOGGER.warning(
+					this.myName 
+					+ " " 
+					+ this.ddName 
+					+ " path corresponding to " 
+					+ dsnw.getResolvedValue()
+					+ " is "
+					+ aPath
+					+ " which does not exist"
+					);
 		}
 	}
 

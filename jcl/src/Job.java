@@ -277,6 +277,12 @@ public class Job {
 		return this.jobName;
 	}
 
+	public void processSYSTSIN() throws IOException {
+		for (JclStep s: this.steps) {
+			s.processSYSTSIN();
+		}
+	}
+
 	public void lexAndParseProcs() throws IOException {
 		for (JclStep s: this.steps) {
 			s.lexAndParseProc();
