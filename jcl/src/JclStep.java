@@ -63,6 +63,9 @@ public class JclStep {
 	private File tmpProcDir = null;
 	private Job parentJob = null;
 	private Proc parentProc = null;
+	private ArrayList<String> tsoCallPgms = new ArrayList<>();
+	private ArrayList<String> tsoDSNPgms = new ArrayList<>();
+	private ArrayList<String> tsoDSNPlans = new ArrayList<>();
 
 	public JclStep(
 			JCLParser.JclStepContext jclStepCtx
@@ -163,6 +166,20 @@ public class JclStep {
 		return this.execPgmStmtCtx != null;
 	}
 
+	/**
+	IKJEFT01, IKJEFT1A, and IKJEFT1B are all entry points in the TSO
+	command processor.  If this JclStep is executing TSO in batch, then
+	it may be <i>secretly</i> executing other programs via the TSO CALL
+	command or the RUN command of the DB2 DSN command processor.
+	*/
+	public Boolean isTSO() {
+		return 
+			this.isExecPgm() 
+			&& (this.pgmExecuted.getValue().equals("IKJEFT01")
+				|| this.pgmExecuted.getValue().equals("IKJEFT1A")
+				|| this.pgmExecuted.getValue().equals("IKJEFT1B"));
+	}
+
 	public String getProcExecuted() {
 		return this.procExecuted.getValue();
 	}
@@ -225,6 +242,35 @@ public class JclStep {
 
 	public void setJcllib(ArrayList<KeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
+	}
+
+	public void processSYSTSIN() {
+		this.LOGGER.fine(this.myName + " " + this.stepName + " processSYSTSIN");
+		if (this.isTSO()) {
+			for (DdStatementAmalgamation dda: ddStatements){
+				if (dda.getDdName().equals("SYSTSIN")) {
+					dda.processSYSTSIN(tsoCallPgms, tsoDSNPgms, tsoDSNPlans);
+				}
+			}			
+		} else {
+			if (this.isExecPgm()) {
+				this.LOGGER.finest(
+						this.myName 
+						+ " " 
+						+ this.stepName 
+						+ " not executing TSO, pgm = |" 
+						+ this.pgmExecuted.getValue() 
+						+ "|");
+			} else {
+				this.LOGGER.finest(
+						this.myName 
+						+ " " 
+						+ this.stepName 
+						+ " not executing TSO, proc = |" 
+						+ this.procExecuted.getValue() 
+						+ "|");
+			}
+		}
 	}
 
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
@@ -346,6 +392,32 @@ public class JclStep {
 			csvOut.append("PGM");
 			csvOut.append(",");
 			csvOut.append(this.pgmExecuted.getValue());
+			if (this.isTSO()) {
+				for (String s: this.tsoCallPgms) {
+					csvOut.append(System.getProperty("line.separator"));
+					csvOut.append("TSOCALL");
+					csvOut.append(",");
+					csvOut.append(this.uuid.toString());
+					csvOut.append(",");
+					csvOut.append(UUID.randomUUID().toString());
+					csvOut.append(",");
+					csvOut.append(s);
+				}
+				int i = 0;
+				for (String s: this.tsoDSNPgms) {
+					csvOut.append(System.getProperty("line.separator"));
+					csvOut.append("DSNRUN");
+					csvOut.append(",");
+					csvOut.append(this.uuid.toString());
+					csvOut.append(",");
+					csvOut.append(UUID.randomUUID().toString());
+					csvOut.append(",");
+					csvOut.append(s);
+					csvOut.append(",");
+					csvOut.append(tsoDSNPlans.get(i));
+					i++;
+				}
+			}
 			for (DdStatementAmalgamation dda: ddStatements) {
 				dda.toCSV(csvOut, this.uuid);
 			}

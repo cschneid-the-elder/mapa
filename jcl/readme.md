@@ -4,22 +4,27 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (18-May-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (06-Jun-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
 "Work in progress" means I've got more than a bit of cleanup to do along with documentation.  Likely some refactoring is in order.
 
-The demonstration application is just that, an attempt to demonstrate that the grammar can be used to do something useful.
+The demonstration application is just that, an attempt to demonstrate that the grammars can be used to do something useful.
+
+Grammars for TSO commands and the DSN command processor are now included.
 
 ### How To Run
 
 Download the .jar files.
 
-    usage: Demo01 [-file <arg>] [-fileList <arg>] [-help] [-include <arg>]
-           [-includeList <arg>] [-logLevel <arg>] [-outcsv <arg>] [-outtree
-           <arg>] [-sanity <arg>] [-saveTemp] [-set <arg>] [-setList <arg>]
-           [-unitTest]
+    usage: Demo01 [-cntlList <arg>] [-file <arg>] [-fileList <arg>] [-help]
+           [-include <arg>] [-includeList <arg>] [-logLevel <arg>] [-outcsv
+           <arg>] [-outtree <arg>] [-sanity <arg>] [-saveTemp] [-set <arg>]
+           [-setList <arg>] [-unitTest]
+     -cntlList <arg>      name of a comma-delimited file containing a list of
+                          paths in which to locate control statement members
+                          and the PDS(E)s to which they correspond
      -file <arg>          name of a single file to process, takes precedence
                           over the fileList option
      -fileList <arg>      name of a file containing a list of files to process
@@ -55,11 +60,12 @@ So, you might execute...
 
 More generically, I would suggest...
 
- + Create directories corresponding to each of your libraries containing cataloged procedures, INCLUDEs, and execution JCL
+ + Create directories corresponding to each of your libraries containing cataloged procedures, INCLUDEs, SYSTSIN control statements, and execution JCL
  + Download the contents of each library into their respective directory 
  + Create a file list (to use with the `-fileList` option) containing the names of the files in each of your execution JCL directories, maybe call it myList
  + Create a list of cataloged procedure and INCLUDE libraries and their corresponding directories (to use with the `-includeList` option) where each line is a library name followed by a comma followed by its corresponding directory - this will be used in resolving cataloged procedures and INCLUDEs by mapping the libraries on a job's JCLLIB statement to a directory.  You can also include directories corresponding to libraries in the JES PROCxx concatenation by not coding a comma or a library name on that line.  Maybe call this file myLibs.
- + Execute `java -jar JCLParser.jar -fileList myList -includeList myLibs -outtree myOutput.tsv -outcsv myOutput.csv`
+ + Create a list of control statement libraries used in SYSTSIN DDs and their corresponding directories ( to use with the `-cntlList` option) where each line is a library name followed by a comma followed by its corresponding directory - this will be used in resolving SYSTSIN input.  Maybe call this file cntlList1.
+ + Execute `java -jar JCLParser.jar -fileList myList -includeList myLibs -cntlList cntlList1 -outtree myOutput.tsv -outcsv myOutput.csv`
 
 ### Bear In Mind
 
@@ -69,7 +75,7 @@ A log file will be created in the current directory with messages about the curr
 
 Warnings will be logged for PROCs and INCLUDEs that cannot be located.  This may be okay for your purposes, I'm not here to judge, but you may also get a warning indicating a sanity check has failed meaning the demo application tried as hard as it could to resolve something and failed.
 
-### Output File Formats
+### Output File Formats From The Demo
 
 The outtree file is formatted with tab characters to give, once imported into LibreOffice Calc or similar, a tree view of steps executing programs or procedures and the steps in those procedures which may execute other procedures.
 
@@ -84,7 +90,8 @@ More generically...
 | PROC | proc name, file UUID, proc UUID |
 | STEP | step name, ordinal number of step in job or proc, job or proc UUID, step UUID, PGM or PROC, what is being executed |
 | DD | ddname, step UUID, dd statement UUID, concatenation number within ddname, file type (Z = z/OS, O = SYSOUT, U = Unix, N = DD *), file or DSN, disp status, disp normal termination disposition, disp abnormal termination disposition |
-
+| TSOCALL | step UUID, TSO CALL statement UUID, program being executed |
+| DSNRUN | step UUID, DSN RUN statement UUID, program being executed, DB2 plan for program being executed |
 
 ### Build/Execution Environment
 

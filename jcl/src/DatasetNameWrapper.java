@@ -51,14 +51,26 @@ public class DatasetNameWrapper {
 	Return a String comprised of the dataset name and its member, if extant.
 	*/
 	public String getResolvedValue() {
-		StringBuffer buf = new StringBuffer(this.dsn.getResolvedValue());
+		StringBuffer buf = new StringBuffer(this.getJustDSN());
 
 		if (this.mem == null) {
 		} else {
-			buf.append("(" + this.mem.getResolvedValue() + ")");
+			buf.append("(" + this.getJustMember() + ")");
 		}
 
 		return buf.toString();
+	}
+
+	public String getJustDSN() {
+		return this.dsn.getResolvedValue();
+	}
+
+	public String getJustMember() {
+		if (this.mem == null) {
+			return null;
+		} else {
+			return this.mem.getResolvedValue();
+		}
 	}
 
 	public String toString() {

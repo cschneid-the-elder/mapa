@@ -108,6 +108,7 @@ public static void main(String[] args) throws Exception {
 			jobs.get(0).setTmpDirs(baseDir, rJob.getJobDir(), rJob.getProcDir());
 			jobs.get(0).setOrdNb(rJob.getOrdNb());
 			jobs.get(0).lexAndParseProcs();
+			jobs.get(0).processSYSTSIN();
 			if (CLI.outtreeFileName == null) {
 			} else {
 				StringBuffer sb = new StringBuffer();
