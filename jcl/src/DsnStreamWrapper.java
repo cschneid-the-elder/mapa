@@ -9,7 +9,11 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-
+Currently the purpose of this class is to obtain the program and
+plan values for any DSN RUN commands.  Instantiation is via a stream
+of DSN commands obtained from the TSO command parser, so really any
+other DSN commands of interest could be obtained here with the
+appropriate listener.
 */
 public class DsnStreamWrapper {
 
@@ -30,7 +34,7 @@ public class DsnStreamWrapper {
 	options, which is where the PROGRAM() and PLAN() reside.
 	*/
 	private StringBuilder sb = new StringBuilder();
-	private ArrayList<DSNTSOParser.RunOptionsContext> runOpts = new ArrayList<>();
+	private ArrayList<DSNTSOParser.RunContext> runCtxs = new ArrayList<>();
 	private ArrayList<String> pgms = new ArrayList<>();
 	private ArrayList<String> plans = new ArrayList<>();
 	private ArrayList<UUID> uuids = new ArrayList<>();
@@ -97,9 +101,14 @@ public class DsnStreamWrapper {
 	*/
 	private void parsePgmsAndPlans() {
 		this.LOGGER.finer(myName + " parsePgmsAndPlans");
-		this.lexAndParse(this.runOpts);
+		this.lexAndParse(this.runCtxs);
 
-		for (DSNTSOParser.RunOptionsContext roc: this.runOpts) {
+		for (DSNTSOParser.RunContext runc: this.runCtxs) {
+			if (runc.runOptions() == null) {
+				this.LOGGER.finest(myName + " parsePgmsAndPlans runc.runOptions() == null");
+				continue;
+			}
+			DSNTSOParser.RunOptionsContext roc = runc.runOptions();
 			if (roc.program() == null) {
 				this.LOGGER.finest(myName + " parsePgmsAndPlans roc.program() == null");
 				continue;
@@ -111,6 +120,7 @@ public class DsnStreamWrapper {
 			this.pgms.add(pgmName.toString());
 			StringBuilder planName = new StringBuilder();
 			if (roc.plan() == null) {
+				this.LOGGER.finest(myName + " parsePgmsAndPlans roc.plan() == null");
 				planName = new StringBuilder(pgmName.toString());
 			} else {
 				for (TerminalNode t: roc.plan().arg().ARG()) {
@@ -136,9 +146,9 @@ public class DsnStreamWrapper {
 	SYSTSIN DD, obtaining any programs and plans.
 	*/
 	private void lexAndParse(
-					ArrayList<DSNTSOParser.RunOptionsContext> runOpts
+					ArrayList<DSNTSOParser.RunContext> runCtxs
 					) {
-		LOGGER.fine("lexAndParse runOpts = |" + runOpts + "|");
+		LOGGER.fine("lexAndParse runCtxs = |" + runCtxs + "|");
 
 		CharStream cs = CharStreams.fromString(this.sb.toString());  //data to be parsed
 		DSNTSOLexer lexer = new DSNTSOLexer(cs);  //instantiate a lexer
@@ -149,7 +159,7 @@ public class DsnStreamWrapper {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		RunOptionsListener listener = new RunOptionsListener(runOpts, this.LOGGER, this.CLI);
+		DsnRunListener listener = new DsnRunListener(runCtxs, this.LOGGER, this.CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
@@ -163,26 +173,6 @@ public class DsnStreamWrapper {
 
 	public ArrayList<String> getPlans() {
 		return this.plans;
-	}
-
-	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
-		int i = 0;
-		this.LOGGER.fine(this.myName + " toCSV");
-
-		for (String pgm: this.pgms) {
-			csvOut.append(System.getProperty("line.separator"));
-			csvOut.append("DSNRUN");
-			csvOut.append(",");
-			csvOut.append(parentUUID.toString());
-			csvOut.append(",");
-			csvOut.append(this.uuids.get(i).toString());
-			csvOut.append(",");
-			csvOut.append(pgm);
-			csvOut.append(",");
-			csvOut.append(this.plans.get(i));
-			i++;
-		}
-
 	}
 
 	public String toString() {

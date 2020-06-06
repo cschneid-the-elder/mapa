@@ -644,9 +644,10 @@ rebindTrigger
 	;
 
 run
-	: RUN (runOptions continuation?)+
+	: RUN runOptions
 	;
 
+/*
 runOptions
 	: (program
 	| plan
@@ -654,13 +655,18 @@ runOptions
 	| library
 	| parms)
 	;
+*/
+
+runOptions
+	: ((program continuation? plan?) | cp) continuation? library? continuation? parms?
+	;
 
 program
 	: PROGRAM arg
 	;
 
 cp
-	: CP
+	: CP continuation? plan
 	;
 
 parms

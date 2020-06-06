@@ -392,6 +392,32 @@ public class JclStep {
 			csvOut.append("PGM");
 			csvOut.append(",");
 			csvOut.append(this.pgmExecuted.getValue());
+			if (this.isTSO()) {
+				for (String s: this.tsoCallPgms) {
+					csvOut.append(System.getProperty("line.separator"));
+					csvOut.append("TSOCALL");
+					csvOut.append(",");
+					csvOut.append(this.uuid.toString());
+					csvOut.append(",");
+					csvOut.append(UUID.randomUUID().toString());
+					csvOut.append(",");
+					csvOut.append(s);
+				}
+				int i = 0;
+				for (String s: this.tsoDSNPgms) {
+					csvOut.append(System.getProperty("line.separator"));
+					csvOut.append("DSNRUN");
+					csvOut.append(",");
+					csvOut.append(this.uuid.toString());
+					csvOut.append(",");
+					csvOut.append(UUID.randomUUID().toString());
+					csvOut.append(",");
+					csvOut.append(s);
+					csvOut.append(",");
+					csvOut.append(tsoDSNPlans.get(i));
+					i++;
+				}
+			}
 			for (DdStatementAmalgamation dda: ddStatements) {
 				dda.toCSV(csvOut, this.uuid);
 			}

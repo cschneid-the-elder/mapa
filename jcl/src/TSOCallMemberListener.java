@@ -6,26 +6,26 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class RunOptionsListener extends DSNTSOParserBaseListener {
+public class TSOCallMemberListener extends TSOParserBaseListener {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	public ArrayList<DSNTSOParser.RunOptionsContext> runOpts = null;
+	public ArrayList<TSOParser.CallMemberContext> callMemberCtxs = null;
 	public String fileName = null;
 
-	public RunOptionsListener(
-			ArrayList<DSNTSOParser.RunOptionsContext> sets
+	public TSOCallMemberListener(
+			ArrayList<TSOParser.CallMemberContext> callMemberCtxs
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
 		super();
-		this.runOpts = runOpts;
+		this.callMemberCtxs = callMemberCtxs;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 	}
 
-	@Override public void enterRunOptions(DSNTSOParser.RunOptionsContext ctx) { 
-		this.runOpts.add(ctx);
+	@Override public void enterCallMember(TSOParser.CallMemberContext ctx) {
+		this.callMemberCtxs.add(ctx);
 	}
 
 }
