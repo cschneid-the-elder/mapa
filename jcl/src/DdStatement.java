@@ -10,7 +10,7 @@ Instances of this class represent a DD statement.
 
 <p>Applications may wish to create their own wrapper classes modeled
 on DispWrapper, PathDispWrapper, or DsidWrapper.  These were all that
-was necessary for the Demo01 application.
+were necessary for the Demo01 application.
 */
 public class DdStatement {
 
@@ -33,6 +33,7 @@ public class DdStatement {
 	private DispWrapper dispw = null;
 	private PathDispWrapper pdispw = null;
 	private DsidWrapper dsidw = null;
+	private AmpWrapper ampw = null;
 	private int ordNb = 0;
 
 	public static ArrayList<DdStatement> bunchOfThese(
@@ -126,6 +127,7 @@ public class DdStatement {
 			if (ddParm.ddParmAMP() != null) {
 				SingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmAMP().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
 				this.somvParms.put("AMP", somvw);
+				this.ampw = new AmpWrapper(ddParm.ddParmAMP(), this.procName, this.LOGGER, this.CLI);
 				continue;
 			}
 
