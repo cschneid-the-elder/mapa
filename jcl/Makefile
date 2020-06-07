@@ -16,13 +16,13 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./src/DSNTSOLexer.tokens ./src/DSNTSOParser.tokens ./src/TSOLexer.tokens ./src/TSOParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/TSOCallMemberListener.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/JclStep.class ./class/Symbolic.class ./class/EmbeddedEqualityWrapper.class ./class/PPIncludeStatement.class ./class/PPJclStep.class ./class/PPJob.class ./class/PPKeywordValueWrapper.class ./class/PPKeywordOrSymbolicWrapper.class ./class/PPProc.class ./class/PPSetSymbolValue.class ./class/PPDdStatementAmalgamation.class ./class/PPSingleOrMultipleValueWrapper.class ./class/PPSymbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class ./class/PPEmbeddedEqualityWrapper.class ./class/ParameterString.class ./class/PathDispWrapper.class ./class/DsnRunListener.class ./class/DsnStreamListener.class ./class/DsnStreamWrapper.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./src/DSNTSOLexer.tokens ./src/DSNTSOParser.tokens ./src/TSOLexer.tokens ./src/TSOParser.tokens ./src/JCLDDAMPLexer.tokens ./src/JCLDDAMPParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/TSOCallMemberListener.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/JclStep.class ./class/Symbolic.class ./class/EmbeddedEqualityWrapper.class ./class/PPIncludeStatement.class ./class/PPJclStep.class ./class/PPJob.class ./class/PPKeywordValueWrapper.class ./class/PPKeywordOrSymbolicWrapper.class ./class/PPProc.class ./class/PPSetSymbolValue.class ./class/PPDdStatementAmalgamation.class ./class/PPSingleOrMultipleValueWrapper.class ./class/PPSymbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class ./class/PPEmbeddedEqualityWrapper.class ./class/ParameterString.class ./class/PathDispWrapper.class ./class/DsnRunListener.class ./class/DsnStreamListener.class ./class/DsnStreamWrapper.class
 
 .PHONY: all clean cleanmine mine jar testrig test testpp testrigpp testdemo ziplogs javadoc lint
 
 clean:
 	echo `date` $@ >> build.log
-	rm -f ./src/JCLLexer*.java ./class/JCLLexer*.class ./src/JCLLexer*.tokens ./src/JCLLexer*.interp ./src/JCLParser*.java ./class/JCLParser*.class ./src/JCLParser.tokens ./src/JCLParser.interp ./src/JCLPPLexer*.java ./class/JCLPPLexer*.class ./src/JCLPPLexer*.tokens ./src/JCLPPLexer*.interp ./src/JCLPPParser*.java ./class/JCLPPParser*.class ./src/JCLPPParser.tokens ./src/JCLPPParser.interp ./src/DSNTSOLexer*.java ./class/DSNTSOLexer*.class ./src/DSNTSOLexer*.tokens ./src/DSNTSOLexer*.interp ./src/DSNTSOParser*.java ./class/DSNTSOParser*.class ./src/DSNTSOParser.tokens ./src/DSNTSOParser.interp ./src/TSOLexer*.java ./class/TSOLexer*.class ./src/TSOLexer*.tokens ./src/TSOLexer*.interp ./src/TSOParser*.java ./class/TSOParser*.class ./src/TSOParser.tokens ./src/TSOParser.interp
+	rm -f ./src/JCLLexer*.java ./class/JCLLexer*.class ./src/JCLLexer*.tokens ./src/JCLLexer*.interp ./src/JCLParser*.java ./class/JCLParser*.class ./src/JCLParser.tokens ./src/JCLParser.interp ./src/JCLPPLexer*.java ./class/JCLPPLexer*.class ./src/JCLPPLexer*.tokens ./src/JCLPPLexer*.interp ./src/JCLPPParser*.java ./class/JCLPPParser*.class ./src/JCLPPParser.tokens ./src/JCLPPParser.interp ./src/DSNTSOLexer*.java ./class/DSNTSOLexer*.class ./src/DSNTSOLexer*.tokens ./src/DSNTSOLexer*.interp ./src/DSNTSOParser*.java ./class/DSNTSOParser*.class ./src/DSNTSOParser.tokens ./src/DSNTSOParser.interp ./src/TSOLexer*.java ./class/TSOLexer*.class ./src/TSOLexer*.tokens ./src/TSOLexer*.interp ./src/TSOParser*.java ./class/TSOParser*.class ./src/TSOParser.tokens ./src/TSOParser.interp ./src/JCLDDAMPLexer*.java ./class/JCLDDAMPLexer*.class ./src/JCLDDAMPLexer*.tokens ./src/JCLDDAMPLexer*.interp ./src/JCLDDAMPParser*.java ./class/JCLDDAMPParser*.class ./src/JCLDDAMPParser.tokens ./src/JCLDDAMPParser.interp
 
 cleanmine:
 	echo `date` $@ >> build.log
@@ -70,6 +70,10 @@ testrigdsn:
 	echo `date` $@ $(n) >> build.log
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig DSNTSO startRule -gui -tokens < ./testdata/test$(n).dsn
 
+testrigamp:
+	echo `date` $@ $(n) >> build.log
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig JCLDDAMP startRule -gui -tokens < ./testdata/test$(n).amp
+
 testtso:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
@@ -109,6 +113,8 @@ lint:
 ./src/DSNTSOParser.tokens: ./src/DSNTSOLexer.tokens
 
 ./src/TSOParser.tokens: ./src/TSOLexer.tokens
+
+./src/JCLDDAMPParser.tokens: ./src/JCLDDAMPLexer.tokens
 
 ./class/TheCLI.class: 
 
