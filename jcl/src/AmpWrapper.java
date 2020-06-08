@@ -3,6 +3,8 @@
 
 import java.util.*;
 import java.util.logging.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 /**
 This class represents the DISP parameter of a DD statement, including
@@ -21,7 +23,6 @@ public class AmpWrapper {
 	private JCLParser.SingleOrMultipleValueContext somvCtx = null;
 	private SingleOrMultipleValueWrapper somv = null;
 	private String procName = null;
-	private Boolean inProc = null;
 	private String accbias = null;
 	private String amorg = null;
 	private String bufnd = null;
@@ -49,7 +50,6 @@ public class AmpWrapper {
 			) {
 		this.ctx = ctx;
 		this.procName = procName;
-		this.inProc = !(procName == null);
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
@@ -63,6 +63,7 @@ public class AmpWrapper {
 			this.somv = new SingleOrMultipleValueWrapper(this.somvCtx, this.procName, this.LOGGER, this.CLI);
 		}
 		String toParse = this.getStringForParsing();
+		this.LOGGER.finest(myName + " toParse = |" + toParse + "|");
 	}
 
 	private String getStringForParsing() {
@@ -73,6 +74,29 @@ public class AmpWrapper {
 		}
 
 		return sb.toString();
+	}
+
+	private void lexAndParseDsnStreams(
+					String toParse
+					, ArrayList<TSOParser.DsnStreamContext> dsnStreams
+					) {
+		LOGGER.fine("lexAndParseDsnStreams toParse = |" + toParse + "|");
+
+		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
+		JCLDDAMPLexer lexer = new JCLDDAMPLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		JCLDDAMPParser parser = new JCLDDAMPParser(tokens);  //parse the tokens	
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker walker = new ParseTreeWalker();
+	
+		DsnStreamListener listener = new DsnStreamListener(dsnStreams, this.LOGGER, this.CLI);
+	
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+	
+		walker.walk(listener, tree);
+
 	}
 
 	public String toString() {

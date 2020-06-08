@@ -54,16 +54,7 @@ ampParameter
 
 
 accbias
-	: ACCBIAS EQUAL accbiasParameter
-	;
-
-accbiasParameter
-	: (USER
-	| SYSTEM
-	| DO
-	| DW
-	| SO
-	| SW)
+	: ACCBIAS EQUAL KEYWORD_VALUE+
 	;
 
 amorg
@@ -71,100 +62,63 @@ amorg
 	;
 
 bufnd
-	: BUFND EQUAL NUM_LIT
+	: BUFND EQUAL KEYWORD_VALUE+
 	;
 
 bufni
-	: BUFNI EQUAL NUM_LIT
+	: BUFNI EQUAL KEYWORD_VALUE+
 	;
 
 bufsp
-	: BUFSP EQUAL NUM_LIT
+	: BUFSP EQUAL KEYWORD_VALUE+
 	;
 
 crops
-	: CROPS EQUAL cropsParameter
-	;
-
-cropsParameter
-	: (RCK
-	| NCK
-	| NRE
-	| NRC)
+	: CROPS EQUAL KEYWORD_VALUE+
 	;
 
 frlog
-	: FRLOG EQUAL frlogParameter
-	;
-
-frlogParameter
-	: (NONE
-	| REDO)
+	: FRLOG EQUAL KEYWORD_VALUE+
 	;
 
 msg
-	: MSG EQUAL SMBBIAS
+	: MSG EQUAL KEYWORD_VALUE+
 	;
 
 optcd
-	: OPTCD EQUAL optcdParameter
-	;
-
-optcdParameter
-	: (OPTCD_I
-	| OPTCD_L 
-	| OPTCD_IL)
+	: OPTCD EQUAL KEYWORD_VALUE+
 	;
 
 recfm
-	: RECFM EQUAL recfmParameter
-	;
-
-recfmParameter
-	: (RECFM_F
-	| RECFM_FB
-	| RECFM_V
-	| RECFM_VB)
+	: RECFM EQUAL KEYWORD_VALUE+
 	;
 
 rmode31
-	: RMODE31 EQUAL rmode31Parameter
-	;
-
-rmode31Parameter
-	: (ALL
-	| BUFF
-	| CB
-	| NONE)
+	: RMODE31 EQUAL KEYWORD_VALUE+
 	;
 
 smbdfr
-	: SMBDFR EQUAL smbdfrParameter
-	;
-
-smbdfrParameter
-	: (SMBDFR_Y
-	| SMBDFR_N)
+	: SMBDFR EQUAL KEYWORD_VALUE+
 	;
 
 smbhwt
-	: SMBHWT EQUAL NUM_LIT
+	: SMBHWT EQUAL KEYWORD_VALUE+
 	;
 
 smbvsp
-	: SMBVSP EQUAL NUM_MEM_VAL
+	: SMBVSP EQUAL KEYWORD_VALUE+
 	;
 
 smbvspi
-	: SMBVSPI EQUAL NUM_MEM_VAL
+	: SMBVSPI EQUAL KEYWORD_VALUE+
 	;
 
 strno
-	: STRNO EQUAL NUM_LIT
+	: STRNO EQUAL KEYWORD_VALUE+
 	;
 
 synad
-	: SYNAD EQUAL MODULE_NAME
+	: SYNAD EQUAL KEYWORD_VALUE+
 	;
 
 /*
@@ -196,30 +150,24 @@ traceParameter
 	| traceParm2)
 	;
 
-
 traceHook
-	: HOOK EQUAL LPAREN NUM_LIT (COMMA NUM_LIT)* RPAREN
+	: HOOK EQUAL LPAREN KEYWORD_VALUE+ (COMMA KEYWORD_VALUE+)* RPAREN
 	;
 
 traceEcode
-	: ECODE EQUAL traceEcodeParameter
-	;
-
-traceEcodeParameter
-	: (ANY
-	| NUM_LIT)
+	: ECODE EQUAL KEYWORD_VALUE+
 	;
 
 traceKey
-	: KEY EQUAL HEX_STRING (DASH HEX_STRING)?
+	: KEY EQUAL KEYWORD_VALUE+ (DASH KEYWORD_VALUE+)?
 	;
 
 traceParm1
-	: PARM1 EQUAL HEX_STRING
+	: PARM1 EQUAL KEYWORD_VALUE+
 	;
 
 traceParm2
-	: PARM2 EQUAL HEX_STRING
+	: PARM2 EQUAL KEYWORD_VALUE+
 	;
 
 

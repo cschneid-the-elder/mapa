@@ -78,6 +78,7 @@ DASH
 
 ACCBIAS
 	: A C C B I A S
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 ALL
@@ -98,14 +99,17 @@ BUFF
 
 BUFND
 	: B U F N D
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 BUFNI
 	: B U F N I
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 BUFSP
 	: B U F S P
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 CB
@@ -114,6 +118,7 @@ CB
 
 CROPS
 	: C R O P S
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 DO
@@ -124,24 +129,14 @@ DW
 	: D W
 	;
 
-ECODE
-	: E C O D E
-	;
-
 FRLOG
 	: F R L O G
-	;
-
-HOOK
-	: H O O K
-	;
-
-KEY
-	: K E Y
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 MSG
 	: M S G
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 NC
@@ -166,6 +161,7 @@ NRE
 
 OPTCD
 	: O P T C D
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 OPTCD_I
@@ -180,20 +176,13 @@ OPTCD_IL
 	: I L
 	;
 
-PARM1
-	: P A R M '1'
-	;
-
-PARM2
-	: P A R M '2'
-	;
-
 RCK
 	: R C K
 	;
 
 RECFM
 	: R E C F M
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 RECFM_F
@@ -218,14 +207,17 @@ REDO
 
 RMODE31
 	: R M O D E '3' '1'
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SMBBIAS
 	: S M B B I A S
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SMBDFR
 	: S M B D F R
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SMBDFR_Y
@@ -238,14 +230,17 @@ SMBDFR_N
 
 SMBHWT
 	: S M B H W T
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SMBVSP
 	: S M B V S P
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SMBVSPI
 	: S M B V S P I
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SO
@@ -254,6 +249,7 @@ SO
 
 STRNO
 	: S T R N O
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SW
@@ -262,7 +258,7 @@ SW
 
 SYNAD
 	: S Y N A D
-	->pushMode(SYNAD_MODE)
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 SYSTEM
@@ -271,6 +267,31 @@ SYSTEM
 
 TRACE
 	: T R A C E
+	;
+
+ECODE
+	: E C O D E
+	->pushMode(KEYWORD_VALUE_MODE)
+	;
+
+HOOK
+	: H O O K
+	->pushMode(HOOK_MODE)
+	;
+
+KEY
+	: K E Y
+	->pushMode(KEYWORD_VALUE_MODE)
+	;
+
+PARM1
+	: P A R M '1'
+	->pushMode(KEYWORD_VALUE_MODE)
+	;
+
+PARM2
+	: P A R M '2'
+	->pushMode(KEYWORD_VALUE_MODE)
 	;
 
 USER
@@ -289,34 +310,77 @@ NUM_MEM_VAL
 	: NUM_LIT MEM_UNIT
 	;
 
-HEX_STRING
-	: [a-zA-Z0-9]+
-	;
+mode KEYWORD_VALUE_MODE ;
 
-mode SYNAD_MODE ;
-
-SYNAD_WS
+KEYWORD_VALUE_WS
 	: WS
-	->skip
+	->skip,popMode
 	;
 
-SYNAD_NEWLINE
+KEYWORD_VALUE_NEWLINE
 	: NEWLINE
-	->skip
+	->skip,popMode
 	;
 
-SYNAD_COMMA
+KEYWORD_VALUE_COMMA
 	: COMMA
-	->type(COMMA)
+	->type(COMMA),popMode
 	;
 
-SYNAD_EQUAL
+KEYWORD_VALUE_EQUAL
 	: EQUAL
 	->type(EQUAL)
 	;
 
-MODULE_NAME
-	: [A-Z0-9@#$]+
-	->popMode
+KEYWORD_VALUE_LPAREN
+	: LPAREN
+	->type(LPAREN),pushMode(KEYWORD_VALUE_MODE)
 	;
+
+KEYWORD_VALUE_RPAREN
+	: RPAREN
+	->type(RPAREN),popMode
+	;
+
+KEYWORD_VALUE
+	: ([a-zA-Z0-9&@#$_\-.]+?)
+	;
+
+mode HOOK_MODE ;
+
+HOOK_LPAREN
+	: LPAREN
+	->type(LPAREN)
+	;
+
+HOOK_RPAREN
+	: RPAREN
+	->type(RPAREN),popMode
+	;
+
+HOOK_WS
+	: WS
+	->skip
+	;
+
+HOOK_NEWLINE
+	: NEWLINE
+	->skip
+	;
+
+HOOK_COMMA
+	: COMMA
+	->type(COMMA)
+	;
+
+HOOK_EQUAL
+	: EQUAL
+	->type(EQUAL)
+	;
+
+HOOK_KEYWORD_VALUE
+	: KEYWORD_VALUE
+	->type(KEYWORD_VALUE)
+	;
+
 
