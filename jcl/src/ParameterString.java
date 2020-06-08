@@ -23,6 +23,18 @@ public class ParameterString {
 	private long sortKey = -1;
 	private int len = -1;
 
+	public static ArrayList<ParameterString> bunchOfThese(
+			List<TerminalNode> listOfT
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		ArrayList<ParameterString> ps = new ArrayList<>();
+		for (TerminalNode t: listOfT) {
+			ps.add(new ParameterString(t, LOGGER, CLI));
+		}
+		return ps;
+	}
+
 	public ParameterString(
 			TerminalNode t
 			, Logger LOGGER

@@ -7,12 +7,10 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents the DISP parameter of a DD statement, including
-its status, normal termination disposition, and abnormal termination
-disposition.
+This class represents the AMP parameter of a DD statement, which is
+relatively complex in syntax, such that I've decided it must be 
+processed via its own grammar.
 
-<p>This might serve as a template for constructing other such wrappers
-as may be of interest, e.g. VOLUME or LABEL.
 */
 public class AmpWrapper {
 
@@ -23,24 +21,7 @@ public class AmpWrapper {
 	private JCLParser.SingleOrMultipleValueContext somvCtx = null;
 	private SingleOrMultipleValueWrapper somv = null;
 	private String procName = null;
-	private String accbias = null;
-	private String amorg = null;
-	private String bufnd = null;
-	private String bufni = null;
-	private String bufsp = null;
-	private String crops = null;
-	private String frlog = null;
-	private String msg = null;
-	private String optcd = null;
-	private String recfm = null;
-	private String rmode31 = null;
-	private String smbdfr = null;
-	private String smbhwt = null;
-	private String smbvsp = null;
-	private String smbvspi = null;
-	private String strno = null;
-	private String synad = null;
-	private String trace = null;
+	private ArrayList<AmpParmWrapper> ampws = new ArrayList<>();
 
 	public AmpWrapper(
 			JCLParser.DdParmAMPContext ctx
@@ -63,7 +44,9 @@ public class AmpWrapper {
 			this.somv = new SingleOrMultipleValueWrapper(this.somvCtx, this.procName, this.LOGGER, this.CLI);
 		}
 		String toParse = this.getStringForParsing();
-		this.LOGGER.finest(myName + " toParse = |" + toParse + "|");
+		this.LOGGER.finest(this.myName + " toParse = |" + toParse + "|");
+		this.lexAndParseAmpParms(toParse, this.ampws);
+		this.LOGGER.finest(this.myName + " ampws = |" + this.ampws + "|");
 	}
 
 	private String getStringForParsing() {
@@ -76,11 +59,11 @@ public class AmpWrapper {
 		return sb.toString();
 	}
 
-	private void lexAndParseDsnStreams(
+	private void lexAndParseAmpParms(
 					String toParse
-					, ArrayList<TSOParser.DsnStreamContext> dsnStreams
+					, ArrayList<AmpParmWrapper> ampws
 					) {
-		LOGGER.fine("lexAndParseDsnStreams toParse = |" + toParse + "|");
+		LOGGER.fine("lexAndParseAmpParms toParse = |" + toParse + "|");
 
 		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
 		JCLDDAMPLexer lexer = new JCLDDAMPLexer(cs);  //instantiate a lexer
@@ -91,7 +74,7 @@ public class AmpWrapper {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		DsnStreamListener listener = new DsnStreamListener(dsnStreams, this.LOGGER, this.CLI);
+		AmpParmListener listener = new AmpParmListener(ampws, this.LOGGER, this.CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
