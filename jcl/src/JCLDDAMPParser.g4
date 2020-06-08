@@ -27,37 +27,37 @@ startRule
 	;
 
 amp
-	: ((LPAREN ddParmAMP_Parameter (COMMA ddParmAMP_Parameter)* RPAREN)
-	| (ddParmAMP_Parameter (COMMA ddParmAMP_Parameter)*))
+	: ((LPAREN ampParameter (COMMA ampParameter)* RPAREN)
+	| (ampParameter (COMMA ampParameter)*))
 	;
 
-ddParmAMP_Parameter
-	: (ddParmAMP_ACCBIAS
-	| ddParmAMP_AMORG
-	| ddParmAMP_BUFND
-	| ddParmAMP_BUFNI
-	| ddParmAMP_BUFSP
-	| ddParmAMP_CROPS
-	| ddParmAMP_FRLOG
-	| ddParmAMP_MSG
-	| ddParmAMP_OPTCD
-	| ddParmAMP_RECFM
-	| ddParmAMP_RMODE31
-	| ddParmAMP_SMBDFR
-	| ddParmAMP_SMBHWT
-	| ddParmAMP_SMBVSP
-	| ddParmAMP_SMBVSPI
-	| ddParmAMP_STRNO
-	| ddParmAMP_SYNAD
-	| ddParmAMP_TRACE)+
+ampParameter
+	: (accbias
+	| amorg
+	| bufnd
+	| bufni
+	| bufsp
+	| crops
+	| frlog
+	| msg
+	| optcd
+	| recfm
+	| rmode31
+	| smbdfr
+	| smbhwt
+	| smbvsp
+	| smbvspi
+	| strno
+	| synad
+	| trace)
 	;
 
 
-ddParmAMP_ACCBIAS
-	: ACCBIAS EQUAL ddParmAMP_ACCBIAS_Parameter
+accbias
+	: ACCBIAS EQUAL accbiasParameter
 	;
 
-ddParmAMP_ACCBIAS_Parameter
+accbiasParameter
 	: (USER
 	| SYSTEM
 	| DO
@@ -66,104 +66,104 @@ ddParmAMP_ACCBIAS_Parameter
 	| SW)
 	;
 
-ddParmAMP_AMORG
+amorg
 	: AMORG
 	;
 
-ddParmAMP_BUFND
+bufnd
 	: BUFND EQUAL NUM_LIT
 	;
 
-ddParmAMP_BUFNI
+bufni
 	: BUFNI EQUAL NUM_LIT
 	;
 
-ddParmAMP_BUFSP
+bufsp
 	: BUFSP EQUAL NUM_LIT
 	;
 
-ddParmAMP_CROPS
-	: CROPS EQUAL ddParmAMP_CROPS_Parameter
+crops
+	: CROPS EQUAL cropsParameter
 	;
 
-ddParmAMP_CROPS_Parameter
+cropsParameter
 	: (RCK
 	| NCK
 	| NRE
 	| NRC)
 	;
 
-ddParmAMP_FRLOG
-	: FRLOG EQUAL ddParmAMP_FRLOG_Parameter
+frlog
+	: FRLOG EQUAL frlogParameter
 	;
 
-ddParmAMP_FRLOG_Parameter
+frlogParameter
 	: (NONE
 	| REDO)
 	;
 
-ddParmAMP_MSG
+msg
 	: MSG EQUAL SMBBIAS
 	;
 
-ddParmAMP_OPTCD
-	: OPTCD EQUAL ddParmAMP_OPTCD_Parameter
+optcd
+	: OPTCD EQUAL optcdParameter
 	;
 
-ddParmAMP_OPTCD_Parameter
+optcdParameter
 	: (OPTCD_I
 	| OPTCD_L 
 	| OPTCD_IL)
 	;
 
-ddParmAMP_RECFM
-	: RECFM EQUAL ddParmAMP_RECFM_Parameter
+recfm
+	: RECFM EQUAL recfmParameter
 	;
 
-ddParmAMP_RECFM_Parameter
+recfmParameter
 	: (RECFM_F
 	| RECFM_FB
 	| RECFM_V
 	| RECFM_VB)
 	;
 
-ddParmAMP_RMODE31
-	: RMODE31 EQUAL ddParmAMP_RMODE31_Parameter
+rmode31
+	: RMODE31 EQUAL rmode31Parameter
 	;
 
-ddParmAMP_RMODE31_Parameter
+rmode31Parameter
 	: (ALL
 	| BUFF
 	| CB
 	| NONE)
 	;
 
-ddParmAMP_SMBDFR
-	: SMBDFR EQUAL ddParmAMP_SMBDFR_Parameter
+smbdfr
+	: SMBDFR EQUAL smbdfrParameter
 	;
 
-ddParmAMP_SMBDFR_Parameter
+smbdfrParameter
 	: (SMBDFR_Y
 	| SMBDFR_N)
 	;
 
-ddParmAMP_SMBHWT
+smbhwt
 	: SMBHWT EQUAL NUM_LIT
 	;
 
-ddParmAMP_SMBVSP
+smbvsp
 	: SMBVSP EQUAL NUM_MEM_VAL
 	;
 
-ddParmAMP_SMBVSPI
+smbvspi
 	: SMBVSPI EQUAL NUM_MEM_VAL
 	;
 
-ddParmAMP_STRNO
+strno
 	: STRNO EQUAL NUM_LIT
 	;
 
-ddParmAMP_SYNAD
+synad
 	: SYNAD EQUAL MODULE_NAME
 	;
 
@@ -181,44 +181,44 @@ Home > z/OS 2.4.0 > z/OS DFSMS > z/OS DFSMSdfp Diagnosis > VSAM diagnostic aids 
 
 */
 
-ddParmAMP_TRACE
+trace
 	: TRACE EQUAL 
     LPAREN
-        ddParmAMP_TRACE_Parameter (COMMA ddParmAMP_TRACE_Parameter)*
+        traceParameter (COMMA traceParameter)*
     RPAREN
 	;
 
-ddParmAMP_TRACE_Parameter
-	: (ddParmAMP_TRACE_HOOK
-	| ddParmAMP_TRACE_ECODE
-	| ddParmAMP_TRACE_KEY
-	| ddParmAMP_TRACE_PARM1
-	| ddParmAMP_TRACE_PARM2)
+traceParameter
+	: (traceHook
+	| traceEcode
+	| traceKey
+	| traceParm1
+	| traceParm2)
 	;
 
 
-ddParmAMP_TRACE_HOOK
+traceHook
 	: HOOK EQUAL LPAREN NUM_LIT (COMMA NUM_LIT)* RPAREN
 	;
 
-ddParmAMP_TRACE_ECODE
-	: ECODE EQUAL ddParmAMP_TRACE_ECODE_Parameter
+traceEcode
+	: ECODE EQUAL traceEcodeParameter
 	;
 
-ddParmAMP_TRACE_ECODE_Parameter
+traceEcodeParameter
 	: (ANY
 	| NUM_LIT)
 	;
 
-ddParmAMP_TRACE_KEY
+traceKey
 	: KEY EQUAL HEX_STRING (DASH HEX_STRING)?
 	;
 
-ddParmAMP_TRACE_PARM1
+traceParm1
 	: PARM1 EQUAL HEX_STRING
 	;
 
-ddParmAMP_TRACE_PARM2
+traceParm2
 	: PARM2 EQUAL HEX_STRING
 	;
 

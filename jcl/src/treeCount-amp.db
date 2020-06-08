@@ -1,0 +1,43 @@
+# data file for treeCount awk script
+# each *.jcl file has a corresponding record here
+# fields are...
+# file
+# accbias
+# amorg
+# bufnd
+# bufni
+# bufsp
+# crops
+# frlog
+# msg
+# optcd
+# recfm
+# rmode31
+# smbdfr
+# smbhwt
+# smbvsp
+# smbvspi
+# strno
+# synad
+# trace
+# ...and are tab delimited
+=	accbias	amorg	bufnd	bufni	bufsp	crops	frlog	msg	optcd	recfm	rmode31	smbdfr	smbhwt	smbvsp	smbvspi	strno	synad	trace
++	test0001	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0002	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0003	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0004	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0005	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0006	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0007	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0008	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0009	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0010	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0011	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0012	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0013	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0014	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0015	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0016	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0017	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	test0018	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
+
