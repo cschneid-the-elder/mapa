@@ -83,6 +83,15 @@ else
 	./src/tester $(n) tso
 endif
 
+testamp:
+ifeq ($(strip $(n)),)
+	echo `date` $@ >> build.log
+	./src/tester all amp
+else
+	echo `date` $@ $(n) >> build.log
+	./src/tester $(n) amp
+endif
+
 testdemo:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
