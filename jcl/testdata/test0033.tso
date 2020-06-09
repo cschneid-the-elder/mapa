@@ -1,9 +1,9 @@
 test
-test payer(thrust) '2048,80'
-test payer.load(thrust) '2048,80'
-test payload object
+test dargo(thrust) '2048,80'
+test dargo.load(thrust) '2048,80'
+test chrisjen object
 test cmds(output) cp
 test cmds.load(output) cp
 test (output) cp
-test appctp.load(myprog) tp(’MAIL’) keeptp
-test appctp.load(myprog) tp('MAIL') lu('LUA')
+test drummer.load(myprog) tp(’MAIL’) keeptp
+test drummer.load(myprog) tp('MAIL') lu('LUA')

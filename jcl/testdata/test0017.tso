@@ -1,12 +1,12 @@
 load csine print(*)
-load (hindsite thermos(cold)) print(*) +  
+load (hindsite thermos(warm)) print(*) +  
 lib('sys1.sortlib') +  
-nores map size (44k) ep (start23) name(thermsit)
+nores map size (44k) ep (start23) name(therms)
 load (sub1 sub2 'my.prog.load(main)') print (*) amode(31) -
 rmode(any)
 loadgo csine print(*)
-loadgo (hindsite thermos(cold)) print(*) +  
+loadgo (hindsite thermos(warm)) print(*) +  
 lib('sys1.sortlib') +  
-nores map size (44k) ep (start23) name(thermsit)
+nores map size (44k) ep (start23) name(therms)
 loadgo (sub1 sub2 'my.prog.load(main)') print (*) amode(31) -
 rmode(any)

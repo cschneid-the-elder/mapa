@@ -1,4 +1,4 @@
-allocate fi(sysuproc) da('id.clist') shr reu
+allocate fi(sysuproc) da('cschneid.clist') shr reu
 
 altlib activate user(clist)
 

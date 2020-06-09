@@ -7,7 +7,7 @@ bftek(a)
 allocate dataset(format.input) new block(80) -
 space(1,1) volume(111111) using(dsattrs)
 
-alloc da(traject.input) old bl(80) volume(111111) -
+alloc da(traject.input) old bl(80) volume(123456) -
 using(dsattrs)
 
 free attrlist(dsattrs)

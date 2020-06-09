@@ -1,29 +1,29 @@
-edit parts new cobol
+edit roci new cobol
 change 57 XparameterXoperand
 change 57 'parameter' 'operand'
 CKPOINT
 change 24 82 !i.e. !e.g. ! all
 change 103 m315 h.p. at 2400
-change * //the end of the world
+change * //teotwawki
 CKP
 up 3
 INSERT UCBFLG DS AL1 CONTROL FLAGS
 END
-edit hydrlics new fortgi nonum scan
+edit tachi new fortgi nonum scan
 delete *
 delete
 del *
 del
 *
 end
-e manhrs.data
+e hrs.data
 top
 move  10  30  100  incr(5)
 end
-e cmdproc new clist
+e myproc new clist
 down 24
 insert
-00281 j.w.house 13-244831 24.73
-00282 t.n.howard 24-782095 3.05
-00283 b.h.ireland 40-007830 104.56
+00281 j.t.kirk 24-256831 34.93
+00282 j.l.picard 35-893096 3.07
+00283 j..holden 45-081730 54.56
 end
