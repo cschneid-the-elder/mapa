@@ -29,7 +29,7 @@ public class SingleOrMultipleValueWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.SingleOrMultipleValueContext ctx = null;
 	private ArrayList<KeywordOrSymbolicWrapper> kosw = new ArrayList<>();
 	private ArrayList<EmbeddedEqualityWrapper> eew = new ArrayList<>();
@@ -61,7 +61,7 @@ public class SingleOrMultipleValueWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
+		this.LOGGER.fine(this.myName + " initialize()");
 
 		this.kosw.addAll(
 			KeywordOrSymbolicWrapper.bunchOfThese(
@@ -95,9 +95,20 @@ public class SingleOrMultipleValueWrapper {
 		this.buildParameterStrings();
 	}
 
+
+	/**
+	The ParameterString class is handy for reconstructing tokens separated
+	by the ANTLR lexer +? operator.  The addToParameterStringsIfAbsent method
+	to deduplicate these tokens is necessary but I have no idea why there ended
+	up being duplicate tokens.  Possibly it's due to the complex nested
+	nature of this class.
+	*/
 	private void buildParameterStrings() {
+		this.LOGGER.fine(this.myName + " buildParameterStrings()");
+
+		this.LOGGER.finest(this.myName + " buildParameterStrings() KeywordOrSymbolicWrapper");
 		for (KeywordOrSymbolicWrapper k: this.kosw) {
-			this.parameterStrings.add(
+			this.addToParameterStringsIfAbsent(
 				new ParameterString(
 					k.getResolvedValue()
 					, k.getSortKey()
@@ -111,6 +122,7 @@ public class SingleOrMultipleValueWrapper {
 		this.addTerminalNodesToParameterStrings(this.ctx.LPAREN());
 		this.addTerminalNodesToParameterStrings(this.ctx.RPAREN());
 
+		this.LOGGER.finest(this.myName + " buildParameterStrings() ParenListContext");
 		for (JCLParser.ParenListContext p: this.ctx.parenList()) {
 			for (TerminalNode t: p.COMMA()) {
 				this.addTerminalNodeToParameterStrings(t);
@@ -119,8 +131,9 @@ public class SingleOrMultipleValueWrapper {
 			this.addTerminalNodeToParameterStrings(p.RPAREN());
 		}
 
+		this.LOGGER.finest(this.myName + " buildParameterStrings() EmbeddedEqualityWrapper");
 		for (EmbeddedEqualityWrapper e: this.eew) {
-			this.parameterStrings.add(
+			this.addToParameterStringsIfAbsent(
 				new ParameterString(
 					e.getResolvedKywd()
 					, e.getKywdSortKey()
@@ -128,10 +141,11 @@ public class SingleOrMultipleValueWrapper {
 					, this.CLI
 				)
 			);
+			this.LOGGER.finest(this.myName + " buildParameterStrings() e.getSingleOrMultipleValueWrapper().getKeywordOrSymbolicWrapper()");
 			for (KeywordOrSymbolicWrapper k: e.
 											getSingleOrMultipleValueWrapper().
 											getKeywordOrSymbolicWrappers()) {
-				this.parameterStrings.add(
+				this.addToParameterStringsIfAbsent(
 					new ParameterString(
 						k.getResolvedValue()
 						, k.getSortKey()
@@ -140,7 +154,12 @@ public class SingleOrMultipleValueWrapper {
 					)
 				);
 			}
-			this.parameterStrings.add(
+			this.LOGGER.finest(this.myName + " buildParameterStrings() e.getSingleOrMultipleValueWrapper().getParameterStrings()");
+			for (ParameterString ps: e.getSingleOrMultipleValueWrapper().getParameterStrings()) {
+				this.addToParameterStringsIfAbsent(ps);
+			}
+			this.LOGGER.finest(this.myName + " buildParameterStrings() e.getEqual()");
+			this.addToParameterStringsIfAbsent(
 				new ParameterString(
 					e.getEqual()
 					, this.LOGGER
@@ -148,7 +167,6 @@ public class SingleOrMultipleValueWrapper {
 				)
 			);
 		}
-
 
 		this.parameterStrings.sort(Comparator.comparingLong(ParameterString::getSortKey));
 	}
@@ -164,13 +182,30 @@ public class SingleOrMultipleValueWrapper {
 	private void addTerminalNodeToParameterStrings(TerminalNode t) {
 		this.LOGGER.finer(this.myName + " addTerminalNodeToParameterStrings()");
 
-		this.parameterStrings.add(
+		this.addToParameterStringsIfAbsent(
 			new ParameterString(
 				t
 				, this.LOGGER
 				, this.CLI
 			)
 		);
+	}
+
+	/**
+	Yes, this is a manual reimplementation of Collection.contains().  When I 
+	named isProbablyTheSameAs() equals() in ParameterString and tried using
+	contains(), it didn't work.  The equals() method was never executed.  When
+	I used a HashSet to attempt deduplication, it didn't work.
+	<p>I have neither the time nor the patience to debug further, I just want 
+	something that works.
+	*/
+	private void addToParameterStringsIfAbsent(ParameterString ps) {
+		this.LOGGER.finest(this.myName + "addToParameterStringsIfAbsent() ps = |" + ps + "|");
+		for (ParameterString ps0: this.parameterStrings) {
+			if (ps0.isProbablyTheSameAs(ps)) return;
+		}
+
+		this.parameterStrings.add(ps);
 	}
 
 	public String getResolvedValue() {

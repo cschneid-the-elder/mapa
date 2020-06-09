@@ -16,7 +16,7 @@ public class DdStatementAmalgamation {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String ddName = null;
 	private String procName = null;
 	private String fileName = null;
@@ -41,14 +41,14 @@ public class DdStatementAmalgamation {
 	}
 
 	private void initialize() {
-		this.myName = this.getClass().getName();
-		this.LOGGER.finest(this.myName + " initialize");
+		this.LOGGER.fine(this.myName + " initialize()");
 		this.setDdName(this.ddStmtAmlgnCtx.ddStatement().ddName().DOT()
 			, this.ddStmtAmlgnCtx.ddStatement().ddName().NAME_FIELD());
 		this.dds = DdStatement.bunchOfThese(this.ddStmtAmlgnCtx, this.procName, this.ddName, this.fileName, this.LOGGER, this.CLI);
 	}
 
 	private void setDdName(TerminalNode dot, List<TerminalNode> name_field) {
+		this.LOGGER.fine(this.myName + " setDdName()");
 		StringBuffer buf = new StringBuffer();
 
 		if (dot == null) {
@@ -129,7 +129,7 @@ public class DdStatementAmalgamation {
 					String toParse
 					, ArrayList<TSOParser.DsnStreamContext> dsnStreams
 					) {
-		LOGGER.fine("lexAndParseDsnStreams toParse = |" + toParse + "|");
+		LOGGER.fine(this.myName + " lexAndParseDsnStreams() toParse = |" + toParse + "|");
 
 		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
 		TSOLexer lexer = new TSOLexer(cs);  //instantiate a lexer
@@ -152,7 +152,7 @@ public class DdStatementAmalgamation {
 					String toParse
 					, ArrayList<TSOParser.CallMemberContext> callMemberCtxs
 					) {
-		LOGGER.fine("lexAndParseTSOCalls toParse = |" + toParse + "|");
+		LOGGER.fine(this.myName + " lexAndParseTSOCalls() toParse = |" + toParse + "|");
 
 		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
 		TSOLexer lexer = new TSOLexer(cs);  //instantiate a lexer

@@ -23,4 +23,10 @@
 //DD0016   DD  AMP=(AMORG)   AMORG
 //DD0017   DD  AMP='AMORG'   AMORG
 //DD0018   DD  AMP=('AMORG') AMORG
+//DD0019   DD  AMP=(TRACE=(HOOK=(1)))
+//DD0020   DD  AMP=('TRACE=(HOOK=(1,2,3,4,5,6,7,8,9)',
+//            'ECODE=ANY',
+//            'KEY=F1F2F3F4F5F6',
+//            'PARM1=A1B2C3D4E5F6',
+//            'PARM2=F1E2D3C4B5A6)')
 

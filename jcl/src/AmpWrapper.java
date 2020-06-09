@@ -16,7 +16,7 @@ public class AmpWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.DdParmAMPContext ctx = null;
 	private JCLParser.SingleOrMultipleValueContext somvCtx = null;
 	private SingleOrMultipleValueWrapper somv = null;
@@ -37,7 +37,7 @@ public class AmpWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
+		this.LOGGER.fine(this.myName + " initialize()");
 		if (this.ctx == null) {
 		} else {
 			this.somvCtx = this.ctx.singleOrMultipleValue();
@@ -80,6 +80,12 @@ public class AmpWrapper {
 	
 		walker.walk(listener, tree);
 
+	}
+
+	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+		for (AmpParmWrapper apw: this.ampws) {
+			apw.toCSV(csvOut, parentUUID);
+		}
 	}
 
 	public String toString() {
