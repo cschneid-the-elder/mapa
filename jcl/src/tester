@@ -10,6 +10,9 @@ x)		export kind="JCL"
 tso)	export kind="TSO"
 		export sufx="tso"
   ;;
+amp)	export kind="JCLDDAMP"
+		export sufx="amp"
+  ;;
 *)   echo "I am baffled as to what to do with $2"
      exit 16
   ;;

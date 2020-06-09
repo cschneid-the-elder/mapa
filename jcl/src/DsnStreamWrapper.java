@@ -65,7 +65,9 @@ public class DsnStreamWrapper {
 	private void buildParameterStrings() {
 		this.addTerminalNodeToParameterStrings(this.ctx.DSN());
 		this.addTerminalNodesToParameterStrings(this.ctx.DSN_CMD_STREAM());
-		this.addTerminalNodeToParameterStrings(this.ctx.DSN_END());
+		if (this.ctx.DSN_END() != null) {
+			this.addTerminalNodeToParameterStrings(this.ctx.DSN_END());
+		}
 
 		this.parameterStrings.sort(Comparator.comparingLong(ParameterString::getSortKey));
 	}

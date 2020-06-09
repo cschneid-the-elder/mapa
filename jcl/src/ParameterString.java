@@ -23,6 +23,18 @@ public class ParameterString {
 	private long sortKey = -1;
 	private int len = -1;
 
+	public static ArrayList<ParameterString> bunchOfThese(
+			List<TerminalNode> listOfT
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		ArrayList<ParameterString> ps = new ArrayList<>();
+		for (TerminalNode t: listOfT) {
+			ps.add(new ParameterString(t, LOGGER, CLI));
+		}
+		return ps;
+	}
+
 	public ParameterString(
 			TerminalNode t
 			, Logger LOGGER
@@ -38,14 +50,7 @@ public class ParameterString {
 		long posn = t.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 
-		this.LOGGER.fine(
-			this.myName 
-			+ " value = |" 
-			+ this.value 
-			+ "| sortKey = |" 
-			+ this.sortKey 
-			+ "|"
-			);
+		this.LOGGER.fine(this.toString());
 	}
 
 	public ParameterString(
@@ -57,17 +62,11 @@ public class ParameterString {
 		this.value = s;
 		this.len = this.value.length();
 		this.sortKey = sortKey;
+		this.myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 
-		this.LOGGER.fine(
-			this.myName 
-			+ " value = |" 
-			+ this.value 
-			+ "| sortKey = |" 
-			+ this.sortKey 
-			+ "|"
-			);
+		this.LOGGER.fine(this.toString());
 	}
 
 	public long getSortKey() {
@@ -76,5 +75,28 @@ public class ParameterString {
 
 	public String getValue() {
 		return this.value;
+	}
+
+	/**
+	This isn't an equals() method because, well, if it returns true there's
+	a non-zero probability that the same value is in the same place in a 
+	different file.  This method is only intended to be used in the
+	buildParameterStrings() method in class SingleOrMultipleValueWrapper.
+	*/
+	public Boolean isProbablyTheSameAs(ParameterString ps) {
+		if (ps == null) return false;
+
+		return (this.getValue().equals(ps.getValue()) && (this.getSortKey() == ps.getSortKey()));
+	}
+
+	public String toString() {
+		return 
+			this.myName 
+			+ " value = |" 
+			+ this.value 
+			+ "| sortKey = |" 
+			+ this.sortKey 
+			+ "|"
+			;
 	}
 }

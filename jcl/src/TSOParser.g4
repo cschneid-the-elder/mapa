@@ -140,7 +140,7 @@ allocate
 	;
 
 dsnStream
-	: DSN DSN_CMD_STREAM+ DSN_END
+	: DSN DSN_CMD_STREAM+ (DSN_END | EOF)
 	;
 
 altlib

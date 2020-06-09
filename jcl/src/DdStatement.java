@@ -10,14 +10,14 @@ Instances of this class represent a DD statement.
 
 <p>Applications may wish to create their own wrapper classes modeled
 on DispWrapper, PathDispWrapper, or DsidWrapper.  These were all that
-was necessary for the Demo01 application.
+were necessary for the Demo01 application.
 */
 public class DdStatement {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String ddName = null;
 	private String procName = null;
 	private String fileName = null;
@@ -33,6 +33,7 @@ public class DdStatement {
 	private DispWrapper dispw = null;
 	private PathDispWrapper pdispw = null;
 	private DsidWrapper dsidw = null;
+	private AmpWrapper ampw = null;
 	private int ordNb = 0;
 
 	public static ArrayList<DdStatement> bunchOfThese(
@@ -101,13 +102,13 @@ public class DdStatement {
 			, TheCLI CLI
 			, int ordNb
 			) {
-		this.myName = this.getClass().getName();
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.LOGGER.fine(this.myName + " initialize()");
 		this.procName = procName;
 		this.inProc = !(procName == null);
 		this.fileName = fileName;
 		this.ddName = ddName;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
 		this.ordNb = ordNb;
 	}
 
@@ -116,6 +117,7 @@ public class DdStatement {
 	the DD statement.
 	*/
 	private void initializeTediously(List<JCLParser.DdParameterContext> ddParms) {
+		this.LOGGER.fine(this.myName + " initializeTediously()");
 		for (JCLParser.DdParameterContext ddParm: ddParms) {
 			if (ddParm.ddParmACCODE() != null) {
 				KeywordOrSymbolicWrapper kosw = new KeywordOrSymbolicWrapper(ddParm.ddParmACCODE().keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
@@ -126,6 +128,7 @@ public class DdStatement {
 			if (ddParm.ddParmAMP() != null) {
 				SingleOrMultipleValueWrapper somvw = new SingleOrMultipleValueWrapper(ddParm.ddParmAMP().singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
 				this.somvParms.put("AMP", somvw);
+				this.ampw = new AmpWrapper(ddParm.ddParmAMP(), this.procName, this.LOGGER, this.CLI);
 				continue;
 			}
 
@@ -938,6 +941,9 @@ public class DdStatement {
 			}
 		}
 
+		if (this.ampw != null) {
+			this.ampw.toCSV(csvOut, this.uuid);
+		}
 	}
 
 }
