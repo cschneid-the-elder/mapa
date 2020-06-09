@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (06-Jun-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (09-Jun-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -92,6 +92,7 @@ More generically...
 | DD | ddname, step UUID, dd statement UUID, concatenation number within ddname, file type (Z = z/OS, O = SYSOUT, U = Unix, N = DD *), file or DSN, disp status, disp normal termination disposition, disp abnormal termination disposition |
 | TSOCALL | step UUID, TSO CALL statement UUID, program being executed |
 | DSNRUN | step UUID, DSN RUN statement UUID, program being executed, DB2 plan for program being executed |
+| AMP | dd statement UUID, AMP subparameter UUID, AMP subparameter, AMP subparameter value |
 
 ### Build/Execution Environment
 
