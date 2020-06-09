@@ -1,7 +1,7 @@
 transmit nodeb.user2 da('sys1.parmlib')
-transmit joe da('sys1.parmlib') mem(ieasys00)
-transmit nodeb.joe msgds(memo.text(meetings))  logda(cnfdntl.mylog)
+transmit ashford da('sys1.parmlib') mem(ieasys00)
+transmit nodeb.ashford msgds(memo.text(meetings))  logda(cnfdntl.mylog)
 xmit nodeb.user2 da('sys1.parmlib')
-xmit joe da('sys1.parmlib') mem(ieasys00)
-xmit nodeb.joe msgds(memo.text(meetings))  logda(cnfdntl.mylog)
+xmit ashford da('sys1.parmlib') mem(ieasys00)
+xmit nodeb.ashford msgds(memo.text(meetings))  logda(cnfdntl.mylog)
 

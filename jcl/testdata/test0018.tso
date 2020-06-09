@@ -1,9 +1,9 @@
 logoff
 logoff disconnect
-logon wrrid/23xa$mbt
-logon wrrid/mo@ acct(288104) proc(ts951)-
+logon cschneid/#1@2$4
+logon cschneid/mo@ acct(11511) proc(tso01)-
  size(90) nonotices nomail
-logon wrrid/xtd18 acct(347971) proc(rs832)-
+logon cschneid/xtd18 acct(347971) proc(tso02)-
  size(90) seclabel(confdntl)
 logon cschneid
 logon cschneid/dargo

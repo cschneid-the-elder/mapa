@@ -1,2 +1,2 @@
-run mnhrs.vsbasic
+run veryold.vsbasic
 run 'payroll.final.asm' 'update' lib('payroll.subrlib')

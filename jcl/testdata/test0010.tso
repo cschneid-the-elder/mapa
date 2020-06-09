@@ -1,11 +1,11 @@
-free dataset(proga.load)
-free dataset(pb99cy.asm,firstqtr.data,'may.desk.msg')
-free dataset(march.fort) file(sysut1,sysut3,sysin,+
+free dataset(cschneid.load)
+free dataset(cschneid.asm,firstqtr.data,'may.desk.txt')
+free dataset(cschneid.fort) file(sysut1,sysut3,sysin,+
   sysprint) sysout(b)
 free attrlist(dsbparms attribut)
 free all
 free file(sysprint) outdes(multcopy)
 free file(sysprint) spin(unalloc)
-free path('/u/userid/file.dbp')                      +
+free path('/u/cschneid/file.dbp')                      +
      pathdisp(delete)
 

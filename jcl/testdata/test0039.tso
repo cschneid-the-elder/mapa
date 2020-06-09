@@ -20,7 +20,7 @@ WHEN SYSRC(NG   10  ) allocate da(input.data) old
 WHEN SYSRC ( ^>  11   ) altlib display
 WHEN SYSRC(LE 12) attrib dsattrs expdt(99365) blksize(24000)
 WHEN SYSRC(<= 13) END
-WHEN SYSRC(NL 14) link (gsalesa,gsalesb,nsales) load(salesrpt) -
+WHEN SYSRC(NL 14) link (filea,fileb,nfile) load(filerpt) -
 print(*) -
 xref list
 WHEN SYSRC(^< 15) load csine print(*)
@@ -41,7 +41,7 @@ WHEN SYSRC(NG   10 /* ) allocate da(input.data) old*/ )
 WHEN/* SYSRC ( ^>  11   ) altlib display*/ SYSRC(^=11) END
 WHEN SYSRC(LE 12) attrib dsattrs /*expdt(99365)*/ blksize(24000)
 WHEN SYSRC(<= 13) END
-WHEN SYSRC(NL 14) link (gsalesa,gsalesb,nsales) load(salesrpt) -
+WHEN SYSRC(NL 14) link (filea,fileb,nfile) load(filerpt) -
 print(*) -
 xref list
 WHEN SYSRC(^< 15) load csine print(*)

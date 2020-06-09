@@ -1,4 +1,4 @@
-ex 'slk27.user.clist(member)'
+ex 'cschneid.user.clist(member)'
  free file(sysin,sysprint)
  delete (&name..list,&name..obj)
  allocate dataset(&name...asm) file(sysin) SHR  keep
@@ -9,7 +9,7 @@ ex 'slk27.user.clist(member)'
  allocate file(sysut1) space(3,1) cylinders new delete
  allocate file(sysut2) space(3,1) cylinders new delete
  allocate file(sysut3) space(3,1) cylinders new delete
- allocate file(syslib) da('d82ljp1.tso.macro',+
+ allocate file(syslib) da('cschneid.tso.macro',+
   'sys1.maclib') shr
  call '*(ASMA90)' 'deck,noobj,rent'
  free file(sysut1,sysin,sysprint, -
