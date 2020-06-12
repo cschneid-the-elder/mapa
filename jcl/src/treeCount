@@ -44,7 +44,7 @@ for (i = 1; i <= nbStrings; i++) {
 
 if (rc == 0) print ruleName " OK";
 
-EXIT rc
+exit rc
 }
 
 function countThese(mString) {
