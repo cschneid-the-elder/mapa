@@ -277,19 +277,23 @@ public class JclStep {
 		this.LOGGER.finer(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+		JCLLexer lexer = new JCLLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		JCLParser parser = new JCLParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
+		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(null, procs, fileName, this.getFileNb(), LOGGER, CLI);
+		JobListener listener = new JobListener(null, procs, fileName, this.getFileNb(), LOGGER, CLI);
 	
-		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
+		this.LOGGER.finer(this.myName + " ----------walking tree with " + listener.getClass().getName());
 	
-		jclwalker.walk(jobListener, jcltree);
+		walker.walk(listener, tree);
 
 	}
 

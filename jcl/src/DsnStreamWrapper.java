@@ -154,8 +154,12 @@ public class DsnStreamWrapper {
 
 		CharStream cs = CharStreams.fromString(this.sb.toString());  //data to be parsed
 		DSNTSOLexer lexer = new DSNTSOLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		DSNTSOParser parser = new DSNTSOParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	

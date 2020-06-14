@@ -670,19 +670,23 @@ public class PPProc {
 			);
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
+		JCLPPLexer lexer = new JCLPPLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		JCLPPParser parser = new JCLPPParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
+		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, fileName, this.getFileNb(), LOGGER, CLI);
+		PPListener listener = new PPListener(jobs, procs, fileName, this.getFileNb(), LOGGER, CLI);
 	
-		this.LOGGER.finer(this.myName + " ----------walking tree with " + jobListener.getClass().getName());
+		this.LOGGER.finer(this.myName + " ----------walking tree with " + listener.getClass().getName());
 	
-		jclwalker.walk(jobListener, jcltree);
+		walker.walk(listener, tree);
 
 	}
 

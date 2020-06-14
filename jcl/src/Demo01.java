@@ -224,23 +224,34 @@ public static void main(String[] args) throws Exception {
 					, String fileName
 					, int fileNb
 					) throws IOException {
-		LOGGER.fine("lexAndParsePP jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
+		LOGGER.fine(
+				"lexAndParsePP jobs = |" 
+				+ jobs 
+				+ "| procs = |" 
+				+ procs 
+				+ "| fileName = |" 
+				+ fileName 
+				+ "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLPPLexer.ckCol72 = false;
-		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLPPParser jclparser = new JCLPPParser(jcltokens);  //parse the tokens	
+		JCLPPLexer lexer = new JCLPPLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		JCLPPParser parser = new JCLPPParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
+		ParseTreeWalker walker = new ParseTreeWalker();
 	
 		PPListener jobListener = new PPListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
 	
-		jclwalker.walk(jobListener, jcltree);
+		walker.walk(jobListener, tree);
 
 	}
 
@@ -256,8 +267,10 @@ public static void main(String[] args) throws Exception {
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLPPLexer.ckCol72 = true;
-		JCLPPLexer jcllexer = new JCLPPLexer(cs);  //instantiate a lexer
-		CommonTokenStream cmtokens = new CommonTokenStream(jcllexer, JCLPPLexer.COMMENTS); //scan stream for tokens
+		JCLPPLexer lexer = new JCLPPLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
+		CommonTokenStream cmtokens = new CommonTokenStream(lexer, JCLPPLexer.COMMENTS); //scan stream for tokens
 		ArrayList<Token> tokens = new ArrayList<>();
 		while (cmtokens.LA(1) != CommonTokenStream.EOF) {
 			if (cmtokens.LT(1).getType() == JCLPPLexer.COL_72 
@@ -296,19 +309,23 @@ public static void main(String[] args) throws Exception {
 		LOGGER.fine("lexAndParse jobs = |" + jobs + "| procs = |" + procs + "| fileName = |" + fileName + "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+		JCLLexer lexer = new JCLLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		JCLParser parser = new JCLParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
+		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		JobListener jobListener = new JobListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
+		JobListener listener = new JobListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
 	
-		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		jclwalker.walk(jobListener, jcltree);
+		walker.walk(listener, tree);
 
 	}
 
