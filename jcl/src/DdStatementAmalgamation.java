@@ -133,8 +133,12 @@ public class DdStatementAmalgamation {
 
 		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
 		TSOLexer lexer = new TSOLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		TSOParser parser = new TSOParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	
@@ -156,8 +160,12 @@ public class DdStatementAmalgamation {
 
 		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
 		TSOLexer lexer = new TSOLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		TSOParser parser = new TSOParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	

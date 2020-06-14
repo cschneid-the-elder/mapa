@@ -1,5 +1,45 @@
 #!/bin/bash
 
+function testLexAndParse {
+
+	while read line
+	do
+		java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tokens < $line 1>/dev/null 2>$tmp02
+		grep -v '^\[' $tmp02
+		if [ "$?" -eq 0 ]
+		then
+			export myRC=12
+		else
+		echo $line " OK"
+		fi
+		export filePart=${line: -8}
+		export numPart=${filePart:0:4}
+		java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tree < $line | ./src/treeCount -vruleName=test$numPart -vruleType=$kind
+		export myRC1=$?
+		if [ "$myRC1" -gt "$myRC" ]
+		then
+			export myRC=$myRC1
+		fi
+	done < $tmp01
+
+}
+
+function testDemo {
+
+	if [ "$nval" = "*" ]
+	then
+		java -jar JCLParser.jar -fileList "$tmp01" -include testdata -set SYSUID=CSCHNEID -outtree testdata.tsv -outcsv testdata.csv -cntlList cntlList1 1>"$tmp02"
+	else
+		java -jar JCLParser.jar -fileList "$tmp01" -include testdata -set SYSUID=CSCHNEID -outtree test"$nval".tsv -outcsv test"$nval".csv -cntlList cntlList1 -logLevel FINEST -saveTemp 1>"$tmp02"
+	fi
+	if [ -s "$tmp02" ]
+	then
+		export myRC=12
+		cat "$tmp02"
+	fi
+
+}
+
 case $2 in
 pp)		export kind="JCLPP"
 		export sufx="jcl"
@@ -12,6 +52,10 @@ tso)	export kind="TSO"
   ;;
 amp)	export kind="JCLDDAMP"
 		export sufx="amp"
+  ;;
+demo)	export kind="DEMO"
+		export sufx="jcl"
+		export nval="$1"
   ;;
 *)   echo "I am baffled as to what to do with $2"
      exit 16
@@ -30,25 +74,12 @@ else
   ls -Al testdata/test$1.$sufx | awk '{print $9}' > $tmp01
 fi
 
-while read line
-do
-  java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tokens < $line 1>/dev/null 2>$tmp02
-  grep -v '^\[' $tmp02
-  if [ "$?" -eq 0 ]
-  then
-    export myRC=12
-  else
-    echo $line " OK"
-  fi
-  export filePart=${line: -8}
-  export numPart=${filePart:0:4}
-  java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tree < $line | ./src/treeCount -vruleName=test$numPart -vruleType=$kind
-  export myRC1=$?
-  if [ "$myRC1" -gt "$myRC" ]
-  then
-    export myRC=$myRC1
-  fi
-done < $tmp01
+if [ "$kind" = "DEMO" ]
+then
+	testDemo
+else
+	testLexAndParse
+fi
 
 rm $tmp01
 rm $tmp02

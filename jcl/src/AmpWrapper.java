@@ -67,8 +67,12 @@ public class AmpWrapper {
 
 		CharStream cs = CharStreams.fromString(toParse);  //data to be parsed
 		JCLDDAMPLexer lexer = new JCLDDAMPLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		JCLDDAMPParser parser = new JCLDDAMPParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	

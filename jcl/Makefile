@@ -1,4 +1,25 @@
 
+#
+# Makefile for JCL parser which includes several ANTLR grammars and
+# attendant Java code for a demonstration application.
+#
+# make all        - generate lexer/parser code and compile all java code
+# make clean      - delete all generated code
+# make cleanmine  - delete non-generated code
+# make mine       - compile non-generated java code
+# make jar        - create jar file comprising all class files
+# make test       - run tests ensuring JCL lexing/parsing seems to work
+# make testpp     - run tests ensuring JCL preprocessor lexing/parsing seems to work
+# make testtso    - run tests ensuring TSO command lexing/parsing seems to work
+# make testamp    - run tests ensuring AMP parm lexing/parsing seems to work
+# make testdemo   - run tests ensuring demo app seems to work
+# make testrig    - run ANTLR test rig with JCL lexer/parser
+# make testrigpp  - run ANTLR test rig with JCL preprocessor lexer/parser
+# make testrigtso - run ANTLR test rig with TSO command lexer/parser
+# make testrigdsn - run ANTLR test rig with DSN command lexer/parser
+# make testrigamp - run ANTLR test rig with AMP parm lexer/parser
+#
+
 JC = javac
 CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.7.2-complete.jar"
 JCOPT = -d ./class -g -Xlint:all -cp $(CP)
@@ -16,7 +37,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./src/DSNTSOLexer.tokens ./src/DSNTSOParser.tokens ./src/TSOLexer.tokens ./src/TSOParser.tokens ./src/JCLDDAMPLexer.tokens ./src/JCLDDAMPParser.tokens ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/TSOCallMemberListener.class ./class/AmpParmWrapper.class ./class/AmpParmListener.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/JclStep.class ./class/Symbolic.class ./class/EmbeddedEqualityWrapper.class ./class/PPIncludeStatement.class ./class/PPJclStep.class ./class/PPJob.class ./class/PPKeywordValueWrapper.class ./class/PPKeywordOrSymbolicWrapper.class ./class/PPProc.class ./class/PPSetSymbolValue.class ./class/PPDdStatementAmalgamation.class ./class/PPSingleOrMultipleValueWrapper.class ./class/PPSymbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class ./class/PPEmbeddedEqualityWrapper.class ./class/ParameterString.class ./class/PathDispWrapper.class ./class/DsnRunListener.class ./class/DsnStreamListener.class ./class/DsnStreamWrapper.class ./class/AmpWrapper.class
+all: ./src/JCLLexer.tokens ./src/JCLParser.tokens ./src/JCLPPLexer.tokens ./src/JCLPPParser.tokens ./src/DSNTSOLexer.tokens ./src/DSNTSOParser.tokens ./src/TSOLexer.tokens ./src/TSOParser.tokens ./src/JCLDDAMPLexer.tokens ./src/JCLDDAMPParser.tokens ./class/StdoutLexerErrorListener.class ./class/StdoutParserErrorListener.class ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/TSOCallMemberListener.class ./class/AmpParmWrapper.class ./class/AmpParmListener.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/JclStep.class ./class/Symbolic.class ./class/EmbeddedEqualityWrapper.class ./class/PPIncludeStatement.class ./class/PPJclStep.class ./class/PPJob.class ./class/PPKeywordValueWrapper.class ./class/PPKeywordOrSymbolicWrapper.class ./class/PPProc.class ./class/PPSetSymbolValue.class ./class/PPDdStatementAmalgamation.class ./class/PPSingleOrMultipleValueWrapper.class ./class/PPSymbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class ./class/PPEmbeddedEqualityWrapper.class ./class/ParameterString.class ./class/PathDispWrapper.class ./class/DsnRunListener.class ./class/DsnStreamListener.class ./class/DsnStreamWrapper.class ./class/AmpWrapper.class
 
 .PHONY: all clean cleanmine mine jar testrig test testpp testrigpp testdemo ziplogs javadoc lint
 
@@ -26,11 +47,11 @@ clean:
 
 cleanmine:
 	echo `date` $@ >> build.log
-	rm -f ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.java ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/TSOCallMemberListener.class ./class/AmpParmWrapper.class ./class/AmpParmListener.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/Symbolic.class ./class/EmbeddedEqualityWrapper.class ./class/PPIncludeStatement.class ./class/PPJclStep.class ./class/PPJob.class ./class/PPKeywordValueWrapper.class ./class/PPKeywordOrSymbolicWrapper.class ./class/PPProc.class ./class/PPSetSymbolValue.class ./class/PPDdStatementAmalgamation.class ./class/PPSingleOrMultipleValueWrapper.class ./class/PPSymbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class ./class/PPEmbeddedEqualityWrapper.class ./class/ParameterString.class ./class/PathDispWrapper.class ./class/DsnRunListener.class ./class/DsnStreamListener.class ./class/DsnStreamWrapper.class ./class/AmpWrapper.class
+	rm -f ./class/StdoutLexerErrorListener.class ./class/StdoutParserErrorListener.class ./class/Demo01.class ./class/TheCLI.class ./class/SetTypeOfSymbolValue.class ./class/KeywordValueType.class ./class/SetSymbolValue.class ./class/KeywordValueWrapper.class ./class/KeywordOrSymbolicWrapper.class ./class/IncludeStatement.class ./class/JobCardWrapper.class ./class/Job.class ./class/Proc.class ./class/SetSymbolValueListener.class ./class/JobListener.class ./class/JclStep.java ./class/SingleOrMultipleValueWrapper.class ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/DsidWrapper.class ./class/TSOCallMemberListener.class ./class/AmpParmWrapper.class ./class/AmpParmListener.class ./class/DdStatement.class ./class/DdStatementAmalgamation.class ./class/Symbolic.class ./class/EmbeddedEqualityWrapper.class ./class/PPIncludeStatement.class ./class/PPJclStep.class ./class/PPJob.class ./class/PPKeywordValueWrapper.class ./class/PPKeywordOrSymbolicWrapper.class ./class/PPProc.class ./class/PPSetSymbolValue.class ./class/PPDdStatementAmalgamation.class ./class/PPSingleOrMultipleValueWrapper.class ./class/PPSymbolic.class ./class/PPOpType.class ./class/PPOp.class ./class/PPDdStatement.class ./class/PPListener.class ./class/PPSetSymbolValueListener.class ./class/PPEmbeddedEqualityWrapper.class ./class/ParameterString.class ./class/PathDispWrapper.class ./class/DsnRunListener.class ./class/DsnStreamListener.class ./class/DsnStreamWrapper.class ./class/AmpWrapper.class
 
 mine:
 	echo `date` $@ >> build.log
-	$(JC) $(JCOPT) ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/TSOCallMemberListener.java ./src/AmpParmWrapper.java ./src/AmpParmListener.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java ./src/Symbolic.java ./src/EmbeddedEqualityWrapper.java ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java ./src/PPEmbeddedEqualityWrapper.java ./src/ParameterString.java ./src/PathDispWrapper.java ./src/DsnRunListener.java ./src/DsnStreamListener.java ./src/DsnStreamWrapper.java ./src/AmpWrapper.java
+	$(JC) $(JCOPT) ./src/StdoutLexerErrorListener.java ./src/StdoutParserErrorListener.java ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/TSOCallMemberListener.java ./src/AmpParmWrapper.java ./src/AmpParmListener.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java ./src/Symbolic.java ./src/EmbeddedEqualityWrapper.java ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java ./src/PPEmbeddedEqualityWrapper.java ./src/ParameterString.java ./src/PathDispWrapper.java ./src/DsnRunListener.java ./src/DsnStreamListener.java ./src/DsnStreamWrapper.java ./src/AmpWrapper.java
 
 jar:
 	echo `date` $@ >> build.log
@@ -95,10 +116,12 @@ endif
 testdemo:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
-	java -jar JCLParser.jar -fileList testdata.lst -include testdata -set SYSUID=CSCHNEID -outtree testdata.tsv -outcsv testdata.csv -cntlList cntlList1
+#	java -jar JCLParser.jar -fileList testdata.lst -include testdata -set SYSUID=CSCHNEID -outtree testdata.tsv -outcsv testdata.csv -cntlList cntlList1
+	./src/tester "*" demo
 else
 	echo `date` $@ $(n) >> build.log
-	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -outtree test$(n).tsv -outcsv test$(n).csv -logLevel FINEST -cntlList cntlList1 -saveTemp
+#	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -outtree test$(n).tsv -outcsv test$(n).csv -logLevel FINEST -cntlList cntlList1 -saveTemp
+	./src/tester $(n) demo
 endif
 
 ziplogs:
