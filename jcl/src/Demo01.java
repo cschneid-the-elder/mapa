@@ -419,10 +419,7 @@ public static void main(String[] args) throws Exception {
 		}
 		src.close();
 		out.close();
-		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
-			Files.setPosixFilePermissions(tmp.toPath(), perms);
-		}
+		CLI.setPosixAttributes(tmp);
 		return tmp;
 	}
 
@@ -431,10 +428,7 @@ public static void main(String[] args) throws Exception {
 	*/
 	public static File newTempDir() throws IOException {
 		File tmpDir = Files.createTempDirectory("Demo01-").toFile();
-		if (tmpDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
-			Files.setPosixFilePermissions(tmpDir.toPath(), perms);
-		}
+		CLI.setPosixAttributes(tmpDir);
 
 		if (CLI.saveTemp) {
 		} else {

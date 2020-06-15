@@ -3,11 +3,18 @@
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
+import java.nio.file.attribute.*;
 import java.util.logging.*;
 import org.apache.commons.cli.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This class serves two purposes, it encapsulates the parsing of command
+line options and it gets passed around as a global repositor of those
+option values.  It is growing into a utility class, which may bear
+future refactoring.  Or not.
+*/
 public class TheCLI{
 	public final Logger LOGGER = Logger.getLogger(Demo01.class.getName());
 	public String[] args = null;
@@ -305,4 +312,36 @@ public class TheCLI{
 		
 	}
 
+	/**
+	Used to create temporary directories.  Global.
+	*/
+	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
+		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
+		this.setPosixAttributes(tmpDir);
+
+		if (saveTemp) {
+		} else {
+			tmpDir.deleteOnExit();
+		}
+
+		return tmpDir;
+	}
+
+	/**
+	Used to set file attributes if necessary.  Global.
+	*/
+	public void setPosixAttributes(File aFile) throws IOException {
+		String attr = null;
+
+		if (aFile.isDirectory()) {
+			attr = "rwxr-x---";
+		} else {
+			attr = "rw-r-----";
+		}
+
+		if (aFile.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString(attr);
+			Files.setPosixFilePermissions(aFile.toPath(), perms);
+		}
+	}
 }
