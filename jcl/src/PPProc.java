@@ -52,7 +52,7 @@ public class PPProc {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLPPParser.ProcStatementContext procCtx = null;
 	private JCLPPParser.PendStatementContext pendCtx = null;
 	private ArrayList<PPSetSymbolValue> setSym = new ArrayList<>();
@@ -94,14 +94,18 @@ public class PPProc {
 				, TheCLI CLI
 				) {
 		// TODO add base directory for temp files
-		this.myName = this.getClass().getName();
 		this.fileName = fileName;
 		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.procName = this.procNameFromFileName();
 		this.initialize();
-		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+		LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.procName 
+			+ " instantiated from " 
+			+ this.fileName);
 	}
 
 	/**
@@ -122,7 +126,12 @@ public class PPProc {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
-		LOGGER.fine(this.myName + " " + this.procName + " instantiated from " + this.fileName);
+		LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.procName 
+			+ " instantiated from " 
+			+ this.fileName);
 	}
 
 	private void initialize() {
@@ -170,8 +179,18 @@ public class PPProc {
 			i = this.fileName.indexOf('-');
 		}
 
-		this.LOGGER.finer(this.myName + " procNameFromFileName fileName = |" + this.fileName + "|");
-		this.LOGGER.finer(this.myName + " procNameFromFileName s = |" + s + "| i = |" + i + "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " procNameFromFileName fileName = |" 
+			+ this.fileName 
+			+ "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " procNameFromFileName s = |" 
+			+ s 
+			+ "| i = |" 
+			+ i 
+			+ "|");
 
 		if (s == -1 && i == -1) {
 			return this.fileName;
@@ -188,12 +207,28 @@ public class PPProc {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " setTmpDirs baseDir set to |" 
+				+ this.baseDir 
+				+ "|");
 		}
 
 		if (this.tmpProcDir == null) {
-			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.procName + "-" + this.uuid, this.CLI.saveTemp);
-			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+			this.tmpProcDir = 
+				this.newTempDir(
+					baseDir
+					, this.myName 
+						+ "-" 
+						+ this.procName 
+						+ "-" 
+						+ this.uuid
+					, this.CLI.saveTemp);
+			this.LOGGER.finest(
+				this.myName 
+				+ " setTmpDirs tmpProcDir set to |" 
+				+ this.tmpProcDir 
+				+ "|");
 		}
 		
 		for (PPJclStep step: this.steps) {
@@ -202,15 +237,29 @@ public class PPProc {
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		this.LOGGER.finer(
+			this.myName 
+			+ " setTmpDirs(" 
+			+ baseDir 
+			+ "," 
+			+ tmpProcDir 
+			+ ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " setTmpDirs baseDir set to |" 
+				+ this.baseDir 
+				+ "|");
 		}
 
 		if (this.tmpProcDir == null) {
 			this.tmpProcDir = tmpProcDir;
-			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " setTmpDirs tmpProcDir set to |" 
+				+ this.tmpProcDir 
+				+ "|");
 		}
 		
 		for (PPJclStep step: this.steps) {
@@ -641,7 +690,10 @@ public class PPProc {
 		return aProc;
 	}
 
-	private PPProc lexAndParseAndStuff(File procFile, ArrayList<PPSetSymbolValue> execSetSym) throws IOException {
+	private PPProc lexAndParseAndStuff(
+				File procFile
+				, ArrayList<PPSetSymbolValue> execSetSym
+				) throws IOException {
 		this.LOGGER.finer(this.myName + " " + this.procName + " lexAndParseAndStuff");
 
 		String procFileFull = searchProcPathsFor(procFile.getName());
@@ -658,7 +710,11 @@ public class PPProc {
 		return aProc;
 	}
 
-	public void lexAndParse(ArrayList<PPJob> jobs, ArrayList<PPProc> procs, String fileName) throws IOException {
+	public void lexAndParse(
+				ArrayList<PPJob> jobs
+				, ArrayList<PPProc> procs
+				, String fileName
+				) throws IOException {
 		this.LOGGER.finer(
 			this.myName 
 			+ " lexAndParse jobs = |" 
@@ -695,7 +751,13 @@ public class PPProc {
 
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
-		File tmp = new File(this.tmpProcDir.toString() + File.separator + this.procName + "-" + this.getUUID());
+		File tmp = 
+			new File(
+				this.tmpProcDir.toString() 
+				+ File.separator 
+				+ this.procName 
+				+ "-" 
+				+ this.getUUID());
 		if (this.CLI.saveTemp) {
 		} else {
 			tmp.deleteOnExit();

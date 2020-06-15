@@ -17,7 +17,7 @@ public class PPListener extends JCLPPParserBaseListener {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	public ArrayList<PPJob> jobs = null;
 	public ArrayList<PPProc> procs = null;
 	public ArrayList<PPSetSymbolValue> sets = null;
@@ -51,7 +51,6 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
-		this.myName = this.getClass().getName();
 	}
 
 	@Override public void enterJobCard(JCLPPParser.JobCardContext ctx) {

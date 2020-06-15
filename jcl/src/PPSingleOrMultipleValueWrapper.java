@@ -8,7 +8,7 @@ public class PPSingleOrMultipleValueWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLPPParser.SingleOrMultipleValueContext ctx = null;
 	private ArrayList<PPKeywordOrSymbolicWrapper> kosw = new ArrayList<>();
 	private ArrayList<PPEmbeddedEqualityWrapper> eew = new ArrayList<>();
@@ -30,7 +30,6 @@ public class PPSingleOrMultipleValueWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		this.kosw.addAll(PPKeywordOrSymbolicWrapper.bunchOfThese(this.ctx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI));
 		for (JCLPPParser.ParenListContext p: this.ctx.parenList()) {
 			this.kosw.addAll(PPKeywordOrSymbolicWrapper.bunchOfThese(p.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI));

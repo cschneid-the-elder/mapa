@@ -15,7 +15,7 @@ public class DsidWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.DdParmDSIDContext ctx = null;
 	private JCLParser.SingleOrMultipleValueContext somvCtx = null;
 	private SingleOrMultipleValueWrapper somv = null;
@@ -39,7 +39,6 @@ public class DsidWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		this.somvCtx = this.ctx.singleOrMultipleValue();
 		this.somv = new SingleOrMultipleValueWrapper(this.somvCtx, this.procName, this.LOGGER, this.CLI);
 

@@ -55,7 +55,7 @@ public class Job {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.JobCardContext jobCardCtx = null;
 	private JCLParser.JcllibStatementContext jcllibCtx = null;
 	private ArrayList<KeywordOrSymbolicWrapper> jcllib = new ArrayList<>();
@@ -100,7 +100,6 @@ public class Job {
 	}
 
 	private void initialize() {
-		this.myName = this.getClass().getName();
 		this.startLine = this.jobCardCtx.JOB().getSymbol().getLine();
 		this.jobName = this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}

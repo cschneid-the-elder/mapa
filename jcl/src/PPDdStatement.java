@@ -14,7 +14,7 @@ public class PPDdStatement {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String ddName = null;
 	private String procName = null;
 	private String fileName = null;
@@ -87,7 +87,6 @@ public class PPDdStatement {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
-		this.myName = this.getClass().getName();
 		this.procName = procName;
 		this.inProc = !(procName == null);
 		this.fileName = fileName;

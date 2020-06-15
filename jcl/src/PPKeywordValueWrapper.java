@@ -11,7 +11,7 @@ public class PPKeywordValueWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String value = null;
 	private String resolvedValue = null;
 	private String procName = null;
@@ -27,7 +27,9 @@ public class PPKeywordValueWrapper {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
-		LOGGER.finest("PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " + ctxList.size());
+		LOGGER.finest(
+			"PPKeywordOrSymbolicWrapper bunchOfThese ctxList.size(): " 
+			+ ctxList.size());
 
 		ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
 
@@ -49,45 +51,85 @@ public class PPKeywordValueWrapper {
 		if (ctx.QUOTED_STRING_FRAGMENT() == null 
 		|| ctx.QUOTED_STRING_FRAGMENT().size() == 0) {
 		} else {
-			LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.QUOTED_STRING_FRAGMENT().size(): " + ctx.QUOTED_STRING_FRAGMENT().size());
+			LOGGER.finest(
+				"PPKeywordValueWrapper bunchOfThese ctx.QUOTED_STRING_FRAGMENT().size(): " 
+				+ ctx.QUOTED_STRING_FRAGMENT().size());
 			for (TerminalNode t: ctx.QUOTED_STRING_FRAGMENT()) {
-				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.QUOTED_STRING, procName, LOGGER, CLI));
+				kvw.add(
+					new PPKeywordValueWrapper(
+						t
+						, KeywordValueType.QUOTED_STRING
+						, procName
+						, LOGGER
+						, CLI));
 			}
 		}
 
 		if (ctx.KEYWORD_VALUE() == null 
 		|| ctx.KEYWORD_VALUE().size() == 0) {
 		} else {
-			LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.KEYWORD_VALUE().size(): " + ctx.KEYWORD_VALUE().size());
+			LOGGER.finest(
+				"PPKeywordValueWrapper bunchOfThese ctx.KEYWORD_VALUE().size(): " 
+				+ ctx.KEYWORD_VALUE().size());
 			for (TerminalNode t: ctx.KEYWORD_VALUE()) {
-				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.UNQUOTED_STRING, procName, LOGGER, CLI));
+				kvw.add(
+					new PPKeywordValueWrapper(
+						t
+						, KeywordValueType.UNQUOTED_STRING
+						, procName
+						, LOGGER
+						, CLI));
 			}
 		}
 
 		if (ctx.SYMBOLIC() == null 
 		|| ctx.SYMBOLIC().size() == 0) {
 		} else {
-			LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.SYMBOLIC().size(): " + ctx.SYMBOLIC().size());
+			LOGGER.finest(
+				"PPKeywordValueWrapper bunchOfThese ctx.SYMBOLIC().size(): " 
+				+ ctx.SYMBOLIC().size());
 			for (TerminalNode t: ctx.SYMBOLIC()) {
-				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.SYMBOLIC, procName, LOGGER, CLI));
+				kvw.add(
+					new PPKeywordValueWrapper(
+						t
+						, KeywordValueType.SYMBOLIC
+						, procName
+						, LOGGER
+						, CLI));
 			}
 		}
 
 		if (ctx.QS_AMPERSAND() == null 
 		|| ctx.QS_AMPERSAND().size() == 0) {
 		} else {
-			LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.QS_AMPERSAND().size(): " + ctx.QS_AMPERSAND().size());
+			LOGGER.finest(
+				"PPKeywordValueWrapper bunchOfThese ctx.QS_AMPERSAND().size(): " 
+				+ ctx.QS_AMPERSAND().size());
 			for (TerminalNode t: ctx.QS_AMPERSAND()) {
-				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.AMPERSAND, procName, LOGGER, CLI));
+				kvw.add(
+					new PPKeywordValueWrapper(
+						t
+						, KeywordValueType.AMPERSAND
+						, procName
+						, LOGGER
+						, CLI));
 			}
 		}
 
 		if (ctx.QS_SQUOTE2() == null 
 		|| ctx.QS_SQUOTE2().size() == 0) {
 		} else {
-			LOGGER.finest("PPKeywordValueWrapper bunchOfThese ctx.QS_SQUOTE2().size(): " + ctx.QS_SQUOTE2().size());
+			LOGGER.finest(
+				"PPKeywordValueWrapper bunchOfThese ctx.QS_SQUOTE2().size(): " 
+				+ ctx.QS_SQUOTE2().size());
 			for (TerminalNode t: ctx.QS_SQUOTE2()) {
-				kvw.add(new PPKeywordValueWrapper(t, KeywordValueType.SINGLE_QUOTE, procName, LOGGER, CLI));
+				kvw.add(
+					new PPKeywordValueWrapper(
+						t
+						, KeywordValueType.SINGLE_QUOTE
+						, procName
+						, LOGGER
+						, CLI));
 			}
 		}
 
@@ -106,7 +148,6 @@ public class PPKeywordValueWrapper {
 		this.posn = t.getSymbol().getCharPositionInLine();
 		this.len = this.value.length();
 		this.type = type;
-		this.myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.procName = procName;
@@ -190,7 +231,13 @@ public class PPKeywordValueWrapper {
 	}
 
 	public void setResolvedValue(String resolvedValue) {
-		this.LOGGER.fine(this.myName + " setResolvedValue this = |" + this + "| resolvedValue = |" + resolvedValue + "|");
+		this.LOGGER.fine(
+			this.myName 
+			+ " setResolvedValue this = |" 
+			+ this 
+			+ "| resolvedValue = |" 
+			+ resolvedValue + "|");
+
 		this.resolvedValue = resolvedValue;
 	}
 

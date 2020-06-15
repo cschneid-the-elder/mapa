@@ -7,12 +7,10 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
-This class represents a JCL INCLUDE statement.
-
-<p>-->NOTE This class is used as a base to create another class via a sed script 
-executed in the Makefile.  The resulting file has the name of this file with 
-"PP" prepended.
-
+This class represents a JCL INCLUDE statement.  Note that the Demo01
+application resolves INCLUDE statements and removes them, instances
+of this class will represent INCLUDE statements that could not be
+resolved in preprocessing.
 
 */
 
@@ -20,7 +18,7 @@ public class IncludeStatement {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.IncludeStatementContext ctx = null;
 	private String fileName = null;
 	private String originalText = null;
@@ -49,7 +47,6 @@ public class IncludeStatement {
 	}
 
 	private void initialize(Logger LOGGER, TheCLI CLI) {
-		myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		if (this.ctx.NAME_FIELD() == null) {

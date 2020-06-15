@@ -19,7 +19,7 @@ public class DsnStreamWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private TSOParser.DsnStreamContext ctx = null;
 	/**
 	The ParameterString ArrayList in DsnStreamWrapper is intended to
@@ -51,8 +51,6 @@ public class DsnStreamWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
-
 		this.buildParameterStrings();
 
 		for (ParameterString ps: this.parameterStrings) {

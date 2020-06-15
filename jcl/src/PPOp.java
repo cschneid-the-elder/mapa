@@ -15,7 +15,7 @@ public class PPOp {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String myType = null;
 	private String fileName = null;
 	private String originalText = null;
@@ -99,7 +99,6 @@ public class PPOp {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
-		this.myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.fileName = fileName;

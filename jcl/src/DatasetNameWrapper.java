@@ -17,7 +17,7 @@ public class DatasetNameWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.DatasetNameContext ctx = null;
 	private KeywordOrSymbolicWrapper dsn = null;
 	private KeywordOrSymbolicWrapper mem = null;
@@ -39,7 +39,6 @@ public class DatasetNameWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		this.dsn = new KeywordOrSymbolicWrapper(this.ctx.keywordOrSymbolic(0), this.procName, this.LOGGER, this.CLI);
 		if (this.ctx.keywordOrSymbolic(1) == null) {
 		} else {

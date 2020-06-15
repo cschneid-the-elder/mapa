@@ -283,19 +283,23 @@ public class TheCLI{
 		this.LOGGER.fine("lookForSetSymbols");
 		ArrayList<SetSymbolValue> sets = new ArrayList<>();
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
-		JCLLexer jcllexer = new JCLLexer(cs);  //instantiate a lexer
-		CommonTokenStream jcltokens = new CommonTokenStream(jcllexer); //scan stream for tokens
-		JCLParser jclparser = new JCLParser(jcltokens);  //parse the tokens	
+		JCLLexer lexer = new JCLLexer(cs);  //instantiate a lexer
+		lexer.removeErrorListeners();
+		lexer.addErrorListener(new StdoutLexerErrorListener());
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		JCLParser parser = new JCLParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners();
+		parser.addErrorListener(new StdoutParserErrorListener());
 
-		ParseTree jcltree = jclparser.startRule(); // parse the content and get the tree
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
 	
-		ParseTreeWalker jclwalker = new ParseTreeWalker();
+		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		SetSymbolValueListener setSymbolValueListener = new SetSymbolValueListener(sets, fileName, this.LOGGER, this);
+		SetSymbolValueListener listener = new SetSymbolValueListener(sets, fileName, this.LOGGER, this);
 	
-		this.LOGGER.finer("----------walking tree with " + setSymbolValueListener.getClass().getName());
+		this.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		jclwalker.walk(setSymbolValueListener, jcltree);
+		walker.walk(listener, tree);
 
 		return sets;
 		
