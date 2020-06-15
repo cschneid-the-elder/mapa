@@ -565,10 +565,7 @@ public class PPJob {
 		}
 		src.close();
 		out.close();
-		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
-			Files.setPosixFilePermissions(tmp.toPath(), perms);
-		}
+		this.CLI.setPosixAttributes(tmp);
 		return tmp;
 	}
 
@@ -745,10 +742,7 @@ public class PPJob {
 		}
 		src.close();
 		out.close();
-		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
-			Files.setPosixFilePermissions(tmp.toPath(), perms);
-		}
+		this.CLI.setPosixAttributes(tmp);
 		return tmp;
 	}
 
@@ -824,10 +818,7 @@ public class PPJob {
 		}
 		src.close();
 		out.close();
-		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
-			Files.setPosixFilePermissions(tmp.toPath(), perms);
-		}
+		this.CLI.setPosixAttributes(tmp);
 		return tmp;
 	}
 
@@ -911,18 +902,7 @@ public class PPJob {
 	}
 
 	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
-		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
-		if (tmpDir.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rwxr-x---");
-			Files.setPosixFilePermissions(tmpDir.toPath(), perms);
-		}
-
-		if (saveTemp) {
-		} else {
-			tmpDir.deleteOnExit();
-		}
-
-		return tmpDir;
+		return this.CLI.newTempDir(baseDir, prfx, saveTemp);
 	}
 
 	public String toString() {

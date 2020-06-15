@@ -466,10 +466,7 @@ public class PPJclStep {
 		}
 		src.close();
 		out.close();
-		if (tmp.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
-			Set<PosixFilePermission> perms = PosixFilePermissions.fromString("rw-r-----");
-			Files.setPosixFilePermissions(tmp.toPath(), perms);
-		}
+		this.CLI.setPosixAttributes(tmp);
 		return tmp;
 	}
 
@@ -486,7 +483,8 @@ public class PPJclStep {
 		CommonTokenStream cmtokens = new CommonTokenStream(lexer, JCLPPLexer.COMMENTS); //scan stream for tokens
 		ArrayList<Token> tokens = new ArrayList<>();
 		while (cmtokens.LA(1) != CommonTokenStream.EOF) {
-			if (cmtokens.LT(1).getType() == JCLPPLexer.COL_72 || cmtokens.LT(1).getType() == JCLPPLexer.COMMENT_TEXT) {
+			if (cmtokens.LT(1).getType() == JCLPPLexer.COL_72 
+			|| cmtokens.LT(1).getType() == JCLPPLexer.COMMENT_TEXT) {
 				tokens.add(cmtokens.LT(1));
 			}
 			cmtokens.consume();
