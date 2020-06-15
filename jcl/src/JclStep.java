@@ -30,7 +30,7 @@ public class JclStep {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String fileName = null;
 	private String procName = null;
 	private String stepName = null;
@@ -103,7 +103,6 @@ public class JclStep {
 	}
 
 	private void initialize() {
-		this.myName = this.getClass().getName();
 		this.execStmtCtx = this.jclStepCtx.execStatement();
 		this.execPgmStmtCtx = this.execStmtCtx.execPgmStatement();
 		this.execProcStmtCtx = this.execStmtCtx.execProcStatement();
@@ -122,7 +121,12 @@ public class JclStep {
 			} else {
 				this.stepName = this.execPgmStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.pgmExecuted = new KeywordOrSymbolicWrapper(this.execPgmStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
+			this.pgmExecuted = 
+				new KeywordOrSymbolicWrapper(
+					this.execPgmStmtCtx.keywordOrSymbolic()
+					, this.procName
+					, this.LOGGER
+					, this.CLI);
 		} else {
 			this.line = this.execProcStmtCtx.EXEC().getSymbol().getLine();
 			if (this.execProcStmtCtx.stepName() == null) {
@@ -130,30 +134,64 @@ public class JclStep {
 			} else {
 				this.stepName = this.execProcStmtCtx.stepName().NAME_FIELD().getSymbol().getText();
 			}
-			this.procExecuted = new KeywordOrSymbolicWrapper(this.execProcStmtCtx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
+			this.procExecuted = 
+				new KeywordOrSymbolicWrapper(
+					this.execProcStmtCtx.keywordOrSymbolic()
+					, this.procName
+					, this.LOGGER
+					, this.CLI);
 			for (JCLParser.ExecProcParmContext epp: this.execProcStmtCtx.execProcParm()) {
-				this.setSym.add(new SetSymbolValue(epp, this.fileName, this.procName, this.getProcExecuted(), this.LOGGER, this.CLI));
+				this.setSym.add(
+					new SetSymbolValue(
+						epp
+						, this.fileName
+						, this.procName
+						, this.getProcExecuted()
+						, this.LOGGER
+						, this.CLI));
 			}
 		}
 
 		if (this.ddStmtAmlgnCtxs == null) {
 		} else {
 			for (JCLParser.DdStatementAmalgamationContext d: this.ddStmtAmlgnCtxs) {
-				this.ddStatements.add(new DdStatementAmalgamation(d, this.procName, this.fileName, this.LOGGER, this.CLI));
+				this.ddStatements.add(
+					new DdStatementAmalgamation(
+						d, this.procName, this.fileName, this.LOGGER, this.CLI));
 			}
 		}	
 	}
 
 	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
-		this.LOGGER.finer(this.myName + " " + this.stepName + " setTmpDirs(" + baseDir + "," + tmpProcDir + ")");
+		this.LOGGER.finer(
+			this.myName 
+			+ " " 
+			+ this.stepName 
+			+ " setTmpDirs(" 
+			+ baseDir 
+			+ "," 
+			+ tmpProcDir 
+			+ ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
-			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs baseDir set to |" + this.baseDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " " 
+				+ this.stepName 
+				+ " setTmpDirs baseDir set to |" 
+				+ this.baseDir 
+				+ "|");
 		}
 
 		if (this.tmpProcDir == null) {
 			this.tmpProcDir = tmpProcDir;
-			this.LOGGER.finest(this.myName + " " + this.stepName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
+			this.LOGGER.finest(
+				this.myName 
+				+ " " 
+				+ this.stepName 
+				+ " setTmpDirs tmpProcDir set to |" 
+				+ this.tmpProcDir 
+				+ "|");
 		}
 
 	}
@@ -274,7 +312,13 @@ public class JclStep {
 	}
 
 	public void lexAndParse(ArrayList<Proc> procs, String fileName) throws IOException {
-		this.LOGGER.finer(this.myName + " lexAndParse procs = |" + procs + "| fileName = |" + fileName + "|");
+		this.LOGGER.finer(
+			this.myName 
+			+ " lexAndParse procs = |" 
+			+ procs 
+			+ "| fileName = |" 
+			+ fileName 
+			+ "|");
 
 		CharStream cs = CharStreams.fromFileName(fileName);  //load the file
 		JCLLexer lexer = new JCLLexer(cs);  //instantiate a lexer

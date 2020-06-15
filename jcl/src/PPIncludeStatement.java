@@ -18,7 +18,7 @@ public class PPIncludeStatement {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLPPParser.IncludeStatementContext ctx = null;
 	private String fileName = null;
 	private String originalText = null;
@@ -47,7 +47,6 @@ public class PPIncludeStatement {
 	}
 
 	private void initialize(Logger LOGGER, TheCLI CLI) {
-		myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		if (this.ctx.NAME_FIELD() == null) {

@@ -6,6 +6,10 @@ import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+This listener is used by TheCLI to obtain the values of Symbols whose
+value is/are set via command line parameter.
+*/
 public class SetSymbolValueListener extends JCLParserBaseListener {
 
 	private Logger LOGGER = null;

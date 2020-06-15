@@ -21,7 +21,7 @@ public class EmbeddedEqualityWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.EmbeddedEqualityContext ctx = null;
 	private KeywordOrSymbolicWrapper kywd = null;
 	private TerminalNode equal = null;
@@ -65,8 +65,6 @@ public class EmbeddedEqualityWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
-
 		this.kywd = 
 			new KeywordOrSymbolicWrapper(
 				ctx.keywordOrSymbolic()

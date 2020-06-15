@@ -50,7 +50,7 @@ public class Proc {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.ProcStatementContext procCtx = null;
 	private JCLParser.PendStatementContext pendCtx = null;
 	private ArrayList<SetSymbolValue> setSym = new ArrayList<>();
@@ -75,7 +75,6 @@ public class Proc {
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
-		this.myName = this.getClass().getName();
 		this.fileName = fileName;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;

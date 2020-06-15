@@ -11,7 +11,7 @@ public class Symbolic {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String fileName = null;
 	private String text = null;
 	private String resolvedText = null;
@@ -46,7 +46,6 @@ public class Symbolic {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
-		this.myName = this.getClass().getName();
 		this.terminalNode = tn;
 		this.token = tn.getSymbol();
 		this.fileName = fileName;

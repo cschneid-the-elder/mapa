@@ -18,7 +18,7 @@ public class ParameterString {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String value = null;
 	private long sortKey = -1;
 	private int len = -1;
@@ -42,7 +42,6 @@ public class ParameterString {
 			) {
 		this.value = t.getSymbol().getText();
 		this.len = this.value.length();
-		this.myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 

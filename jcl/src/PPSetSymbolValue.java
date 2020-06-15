@@ -20,7 +20,7 @@ public class PPSetSymbolValue {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private ParserRuleContext ctx = null;
 	private String fileName = null;
 	private String parentFileName = null;
@@ -139,7 +139,6 @@ public class PPSetSymbolValue {
 	}
 
 	private void initialize(Logger LOGGER, TheCLI CLI) {
-		myName = this.getClass().getName();
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 	}

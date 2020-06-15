@@ -8,7 +8,7 @@ public class PPEmbeddedEqualityWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLPPParser.EmbeddedEqualityContext ctx = null;
 	private PPKeywordOrSymbolicWrapper kywd = null;
 	private PPSingleOrMultipleValueWrapper val = null;
@@ -47,7 +47,6 @@ public class PPEmbeddedEqualityWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		this.kywd = new PPKeywordOrSymbolicWrapper(ctx.keywordOrSymbolic(), this.procName, this.LOGGER, this.CLI);
 		this.val = new PPSingleOrMultipleValueWrapper(ctx.singleOrMultipleValue(), this.procName, this.LOGGER, this.CLI);
 	}

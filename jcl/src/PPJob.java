@@ -51,7 +51,7 @@ public class PPJob {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLPPParser.JobCardContext jobCardCtx = null;
 	/**
 	The jcllibCtx variable is used in setting the value(s) in the jcllib
@@ -109,7 +109,6 @@ public class PPJob {
 	}
 
 	private void initialize() {
-		this.myName = this.getClass().getName();
 		this.startLine = this.jobCardCtx.JOB().getSymbol().getLine();
 		this.jobName = this.jobCardCtx.jobName().NAME_FIELD().getSymbol().getText();
 	}

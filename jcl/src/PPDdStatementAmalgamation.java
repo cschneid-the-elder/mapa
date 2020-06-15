@@ -16,7 +16,7 @@ public class PPDdStatementAmalgamation {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String ddName = null;
 	private String procName = null;
 	private String fileName = null;
@@ -41,7 +41,6 @@ public class PPDdStatementAmalgamation {
 	}
 
 	private void initialize() {
-		this.myName = this.getClass().getName();
 		this.LOGGER.finest(this.myName + " initialize");
 		this.setDdName(this.ddStmtAmlgnCtx.ddStatement().ddName().DOT()
 			, this.ddStmtAmlgnCtx.ddStatement().ddName().NAME_FIELD());

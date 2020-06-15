@@ -16,7 +16,7 @@ public class DispWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.DdParmDISPContext ctx = null;
 	private JCLParser.SingleOrMultipleValueContext somvCtx = null;
 	private SingleOrMultipleValueWrapper somv = null;
@@ -41,7 +41,6 @@ public class DispWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		if (this.ctx == null) {
 		} else {
 			this.somvCtx = this.ctx.singleOrMultipleValue();

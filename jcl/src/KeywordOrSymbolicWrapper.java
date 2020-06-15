@@ -52,7 +52,7 @@ public class KeywordOrSymbolicWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLParser.KeywordOrSymbolicContext ctx = null;
 	private ArrayList<KeywordValueWrapper> kvw = new ArrayList<>();
 	private String procName = null;
@@ -126,7 +126,6 @@ public class KeywordOrSymbolicWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		this.kvw.addAll(KeywordValueWrapper.bunchOfThese(this.ctx, this.procName, this.LOGGER, this.CLI));
 
 		if (this.ctx.SYMBOLIC() == null 

@@ -48,7 +48,7 @@ public class PPKeywordOrSymbolicWrapper {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private JCLPPParser.KeywordOrSymbolicContext ctx = null;
 	private ArrayList<PPKeywordValueWrapper> kvw = new ArrayList<>();
 	private String procName = null;
@@ -103,7 +103,6 @@ public class PPKeywordOrSymbolicWrapper {
 	}
 
 	private void initialize() {
-		myName = this.getClass().getName();
 		this.kvw.addAll(PPKeywordValueWrapper.bunchOfThese(this.ctx, this.procName, this.LOGGER, this.CLI));
 
 		if (this.ctx.SYMBOLIC() == null 

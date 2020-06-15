@@ -1,16 +1,18 @@
 /*Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.*/
 
-
-
 import java.util.*;
 import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Once preprocessing is complete, this listener is used to obtain
+the relevant components of the JCL being processed.
+*/
 public class JobListener extends JCLParserBaseListener {
 
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	public ArrayList<Job> jobs = null;
 	public ArrayList<Proc> procs = null;
 	public String fileName = null;
@@ -42,7 +44,6 @@ public class JobListener extends JCLParserBaseListener {
 		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
-		this.myName = this.getClass().getName();
 	}
 
 	@Override public void enterJobCard(JCLParser.JobCardContext ctx) {
@@ -68,9 +69,21 @@ public class JobListener extends JCLParserBaseListener {
 
 	@Override public void enterSetOperation(JCLParser.SetOperationContext ctx) { 
 		if (this.currProc == null) {
-			this.currJob.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+			this.currJob.addSetSym(
+				new SetSymbolValue(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
 		} else {
-			this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+			this.currProc.addSetSym(
+				new SetSymbolValue(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
 		}
 	}
 
@@ -85,7 +98,13 @@ public class JobListener extends JCLParserBaseListener {
 	}
 
 	@Override public void enterDefineSymbolicParameter(JCLParser.DefineSymbolicParameterContext ctx) {
-		this.currProc.addSetSym(new SetSymbolValue(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+		this.currProc.addSetSym(
+			new SetSymbolValue(
+				ctx
+				, this.fileName
+				, this.procName
+				, this.LOGGER
+				, this.CLI));
 	}
 
 	@Override public void enterPendStatement(JCLParser.PendStatementContext ctx) {
@@ -128,11 +147,29 @@ public class JobListener extends JCLParserBaseListener {
 		*/
 		if (this.currProc == null && this.currJob == null) {
 			this.currProc = new Proc(this.fileName, this.LOGGER, this.CLI);
-			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.currProc.getProcName(), this.LOGGER, this.CLI));
+			this.currProc.addInclude(
+				new IncludeStatement(
+					ctx
+					, this.fileName
+					, this.currProc.getProcName()
+					, this.LOGGER
+					, this.CLI));
 		} else if (this.currProc == null) {
-			this.currJob.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+			this.currJob.addInclude(
+				new IncludeStatement(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
 		} else {
-			this.currProc.addInclude(new IncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+			this.currProc.addInclude(
+				new IncludeStatement(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
 		}
 	}
 

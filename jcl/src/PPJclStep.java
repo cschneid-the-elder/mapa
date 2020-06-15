@@ -33,7 +33,7 @@ public class PPJclStep {
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
-	private String myName = null;
+	private String myName = this.getClass().getName();
 	private String fileName = null;
 	private String procName = null;
 	private String stepName = null;
@@ -111,7 +111,6 @@ public class PPJclStep {
 	}
 
 	private void initialize() {
-		this.myName = this.getClass().getName();
 		this.execStmtCtx = this.jclStepCtx.execStatement();
 		this.execPgmStmtCtx = this.execStmtCtx.execPgmStatement();
 		this.execProcStmtCtx = this.execStmtCtx.execProcStatement();
