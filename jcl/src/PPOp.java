@@ -20,9 +20,7 @@ public class PPOp {
 	private String fileName = null;
 	private String originalText = null;
 	private String resolvedText = null;
-	/*TODO this probably can be an ArrayList, eliminating the need for
-	the equals() and hashCode() methods in PPSymbolic*/
-	private HashMap<PPSymbolic, String> symbolics = new HashMap<>();
+	private ArrayList<PPSymbolic> symbolics = new ArrayList<>();
 	private Boolean inProc = false;
 	private String procName = null;
 
@@ -104,9 +102,7 @@ public class PPOp {
 		this.fileName = fileName;
 		this.inProc = !(procName == null);
 		this.procName = procName;
-		for (PPSymbolic s: PPSymbolic.bunchOfThese(tn, fileName, procName, LOGGER, CLI)) {
-			symbolics.put(s, null);
-		}
+		symbolics.addAll(PPSymbolic.bunchOfThese(tn, fileName, procName, LOGGER, CLI));
 	}
 
 	/**
@@ -116,9 +112,8 @@ public class PPOp {
 	public void resolveParms(ArrayList<PPSetSymbolValue> sets) {
 		this.LOGGER.finer(this.myName + " " + this.myType + " resolveParms");
 
-		for (PPSymbolic s: this.symbolics.keySet()) {
+		for (PPSymbolic s: this.symbolics) {
 			s.resolve(sets);
-			this.symbolics.put(s, s.getResolvedText());
 		}
 	}
 
@@ -128,7 +123,7 @@ public class PPOp {
 	public ArrayList<PPSymbolic> collectSymbolics() {
 		this.LOGGER.finer(this.myName + " " + this.myType + " collectSymbolics");
 
-		return new ArrayList<>(this.symbolics.keySet());
+		return this.symbolics;
 	}
 
 	public String toString() {

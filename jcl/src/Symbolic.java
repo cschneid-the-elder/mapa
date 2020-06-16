@@ -108,23 +108,5 @@ public class Symbolic {
 			+ "|";
 	}
 
-	public Boolean equals(Symbolic s) {
-		return
-			this.getText().equals(s.getText())
-			&& this.getLine() == s.getLine()
-			&& this.getPosn() == s.getPosn()
-			&& this.getFileName().equals(s.getFileName())
-			&& this.getProcName().equals(s.getProcName())
-		;
-	}
-
-	public int hashCode() {
-		StringBuffer buf = new StringBuffer(this.getText() + this.getFileName() + this.getProcName());
-
-		buf.append(String.valueOf(this.getLine()));
-		buf.append(String.valueOf(this.getPosn()));
-
-		return buf.toString().hashCode();
-	}
 }
 
