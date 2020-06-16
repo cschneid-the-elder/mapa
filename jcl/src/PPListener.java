@@ -188,15 +188,43 @@ public class PPListener extends JCLPPParserBaseListener {
 	IncludeStatement TALYN is also attached to Proc RYGEL.  The IncludeStatement
 	CRICHTON is attached to Job ZHANN.  The IncludeStatement AERYN
 	is also attached to Job ZHANN.
-
-	<p>TODO make this work like enterJclStep and instantiate a PPProc if both
-	currProc and currJob are null.
 	*/
 	@Override public void enterIncludeStatement(JCLPPParser.IncludeStatementContext ctx) {
-		if (this.currProc == null) {
-			this.currJob.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+		if (this.currProc == null && this.currJob == null) {
+			/*
+			Not sure how we'd get here, but I left a note to myself to 
+			handle this situation.  Don't want to be caught out by an
+			edge case.
+			*/
+			this.LOGGER.warning(
+				this.myName 
+				+ " INCLUDE at line " 
+				+ ctx.SS().getSymbol().getLine() 
+				+ " encountered with this.currProc == null && this.currJob == null");
+			this.currProc = new PPProc(this.fileName, this.fileNb, this.LOGGER, this.CLI);
+			this.currProc.addInclude(
+				new PPIncludeStatement(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
+		} else if (this.currProc == null) {
+			this.currJob.addInclude(
+				new PPIncludeStatement(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
 		} else {
-			this.currProc.addInclude(new PPIncludeStatement(ctx, this.fileName, this.procName, this.LOGGER, this.CLI));
+			this.currProc.addInclude(
+				new PPIncludeStatement(
+					ctx
+					, this.fileName
+					, this.procName
+					, this.LOGGER
+					, this.CLI));
 		}
 	}
 
