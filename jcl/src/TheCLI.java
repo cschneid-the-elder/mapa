@@ -34,6 +34,7 @@ public class TheCLI{
 	public File setFile = null;
 	public ArrayList<SetSymbolValue> setSym = new ArrayList<>();
 	public ArrayList<PPSetSymbolValue> PPsetSym = new ArrayList<>();
+	private String myName = this.getClass().getName();
 
 	public TheCLI(String[] args) throws Exception {
 
@@ -315,8 +316,16 @@ public class TheCLI{
 	/**
 	Used to create temporary directories.  Global.
 	*/
-	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
-		File tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
+	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) {
+		File tmpDir = null;
+		try {
+			tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
+		} catch (Exception e) {
+			this.LOGGER.severe(this.myName + " Exception " + e + " encountered in newTempDir");
+			e.printStackTrace();
+			System.exit(16);
+		}
+
 		this.setPosixAttributes(tmpDir);
 
 		if (saveTemp) {
@@ -330,7 +339,7 @@ public class TheCLI{
 	/**
 	Used to set file attributes if necessary.  Global.
 	*/
-	public void setPosixAttributes(File aFile) throws IOException {
+	public void setPosixAttributes(File aFile) {
 		String attr = null;
 
 		if (aFile.isDirectory()) {
@@ -341,7 +350,13 @@ public class TheCLI{
 
 		if (aFile.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
 			Set<PosixFilePermission> perms = PosixFilePermissions.fromString(attr);
-			Files.setPosixFilePermissions(aFile.toPath(), perms);
+			try {
+				Files.setPosixFilePermissions(aFile.toPath(), perms);
+			} catch (Exception e) {
+				this.LOGGER.severe(this.myName + " Exception " + e + " encountered in setPosixAttributes");
+				e.printStackTrace();
+				System.exit(16);
+			}
 		}
 	}
 }

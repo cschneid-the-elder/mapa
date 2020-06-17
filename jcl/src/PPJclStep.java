@@ -180,7 +180,7 @@ public class PPJclStep {
 		}	
 	}
 
-	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
+	public void setTmpDirs(File baseDir, File tmpProcDir) {
 		this.LOGGER.finer(
 			this.myName 
 			+ " " 

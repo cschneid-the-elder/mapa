@@ -1,9 +1,8 @@
 /*Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.*/
 
-
-
 import java.util.*;
 import java.util.logging.Logger;
+import java.io.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
@@ -28,6 +27,9 @@ public class PPListener extends JCLPPParserBaseListener {
 	public PPJclStep currJclStep = null;
 	public int nbJobs = 0;
 	public int fileNb = 0;
+	public File baseDir = null;
+	public File tmpJobDir = null;
+	public File tmpProcDir = null;
 
 	public PPListener(
 			ArrayList<PPJob> jobs
@@ -53,13 +55,65 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.CLI = CLI;
 	}
 
+	public PPListener(
+			ArrayList<PPJob> jobs
+			, ArrayList<PPProc> procs
+			, String fileName
+			, int fileNb
+			, File baseDir
+			, File tmpJobDir
+			, File tmpProcDir
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		// TODO pass along the base directory for temp files
+		super();
+		if (jobs == null) {
+		} else {
+			this.jobs = jobs;
+		}
+		if (procs == null) {
+		} else {
+			this.procs = procs;
+		}
+		this.fileName = fileName;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.baseDir = baseDir;
+		this.tmpJobDir = tmpJobDir;
+		this.tmpProcDir = tmpProcDir;
+	}
+
 	@Override public void enterJobCard(JCLPPParser.JobCardContext ctx) {
 		if (this.currJob == null) {
 		} else {
 			this.currJob.setEndLine(ctx.JOB().getSymbol().getLine() - 1);
 		}
 		this.nbJobs++;
-		this.currJob = new PPJob(ctx, this.fileName, this.nbJobs, this.fileNb, this.LOGGER, this.CLI);
+		if (tmpJobDir == null && tmpProcDir == null) {
+			this.currJob = 
+				new PPJob(
+					ctx
+					, this.fileName
+					, this.nbJobs
+					, this.fileNb
+					, this.baseDir
+					, this.LOGGER
+					, this.CLI);
+		} else {
+			this.currJob = 
+				new PPJob(
+					ctx
+					, this.fileName
+					, this.nbJobs
+					, this.fileNb
+					, this.baseDir
+					, this.tmpJobDir
+					, this.tmpProcDir
+					, this.LOGGER
+					, this.CLI);
+		}
 		if (this.jobs == null) {
 			this.LOGGER.warning(this.myName + " ignoring job " + currJob);
 		} else {

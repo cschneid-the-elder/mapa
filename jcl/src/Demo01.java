@@ -80,7 +80,7 @@ public static void main(String[] args) throws Exception {
 		int jobNb = 0;
 		UUID uuid = UUID.randomUUID(); //identify a file
 		File aFileRewritten = rewriteWithoutCol72to80(aFileName, baseDir);
-		lexAndParsePP(jobsPP, procsPP, aFileRewritten.getPath(), fileNb);
+		lexAndParsePP(jobsPP, procsPP, aFileRewritten.getPath(), fileNb, baseDir);
 		if (jobsPP.size() == 0 && procsPP.size() == 0) {
 			LOGGER.info(aFileName + " contains neither jobs nor procs - not JCL?");
 		}
@@ -223,6 +223,7 @@ public static void main(String[] args) throws Exception {
 					, ArrayList<PPProc> procs
 					, String fileName
 					, int fileNb
+					, File baseDir
 					) throws IOException {
 		LOGGER.fine(
 				"lexAndParsePP jobs = |" 
@@ -247,11 +248,11 @@ public static void main(String[] args) throws Exception {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		PPListener jobListener = new PPListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
+		PPListener listener = new PPListener(jobs, procs, fileName, fileNb, baseDir, null, null, LOGGER, CLI);
 	
-		LOGGER.finer("----------walking tree with " + jobListener.getClass().getName());
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		walker.walk(jobListener, tree);
+		walker.walk(listener, tree);
 
 	}
 
