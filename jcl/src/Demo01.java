@@ -88,7 +88,7 @@ public static void main(String[] args) throws Exception {
 			jobNb++;
 			LOGGER.info("Processing job " + j.getJobName());
 			j.resolveParmedIncludes();
-			File jobFile = j.rewriteJobAndSeparateInstreamProcs(baseDir);
+			File jobFile = j.rewriteJobAndSeparateInstreamProcs();
 			/*
 				Now must iteratively parse this job until all INCLUDEs 
 				are resolved.  Unresolvable INCLUDEs generate a warning.
@@ -138,7 +138,7 @@ public static void main(String[] args) throws Exception {
 		}
 		for (PPProc p: procsPP) {
 			LOGGER.info("Processing proc " + p.getProcName());
-			p.setTmpDirs(baseDir);
+			//p.setTmpDirs(baseDir);
 			File procFile = new File(p.getFileName());
 			/*
 				Now must iteratively parse this proc until all INCLUDEs 

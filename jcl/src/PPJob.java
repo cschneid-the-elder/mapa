@@ -790,13 +790,11 @@ public class PPJob {
 	<p>An initial file could contain multiple jobs, each of which could
 	contain multiple instream procs.
 	*/
-	public File rewriteJobAndSeparateInstreamProcs(File baseDir) throws IOException {
+	public File rewriteJobAndSeparateInstreamProcs() throws IOException {
 		this.LOGGER.finer(
 			this.myName 
 			+ " rewriteJobAndSeparateInstreamProcs job = |" 
 			+ this 
-			+ "| baseDir = |" 
-			+ baseDir 
 			+ "|"
 			);
 

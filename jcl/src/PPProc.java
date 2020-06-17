@@ -109,6 +109,67 @@ public class PPProc {
 	}
 
 	/**
+	This constructor is used when a cataloged proc is encountered by
+	a listener but no PROC statement exists.
+
+	<p>Instream procs must have a PROC statement and a PEND statement,
+	cataloged procs can have one, the other, both, or neither.
+	*/
+	public PPProc(
+				String fileName
+				, int fileNb
+				, File baseDir
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		// TODO add base directory for temp files
+		this.fileName = fileName;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.procName = this.procNameFromFileName();
+		this.initialize();
+		this.setTmpDirs(baseDir);
+		LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.procName 
+			+ " instantiated from " 
+			+ this.fileName);
+	}
+
+	/**
+	This constructor is used when a cataloged proc is encountered by
+	a listener but no PROC statement exists.
+
+	<p>Instream procs must have a PROC statement and a PEND statement,
+	cataloged procs can have one, the other, both, or neither.
+	*/
+	public PPProc(
+				String fileName
+				, int fileNb
+				, File baseDir
+				, File tmpProcDir
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		// TODO add base directory for temp files
+		this.fileName = fileName;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.procName = this.procNameFromFileName();
+		this.initialize();
+		this.setTmpDirs(baseDir, tmpProcDir);
+		LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.procName 
+			+ " instantiated from " 
+			+ this.fileName);
+	}
+
+	/**
 	This constructor is used when a PROC statement is encountered by 
 	a listener.
 	*/
@@ -126,6 +187,63 @@ public class PPProc {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
+		LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.procName 
+			+ " instantiated from " 
+			+ this.fileName);
+	}
+
+	/**
+	This constructor is used when a PROC statement is encountered by 
+	a listener.
+	*/
+	public PPProc(
+				JCLPPParser.ProcStatementContext procCtx
+				, String fileName
+				, int fileNb
+				, File baseDir
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		// TODO add base directory for temp files and new constructor with that and tmpProcDir
+		this.procCtx = procCtx;
+		this.fileName = fileName;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.initialize();
+		this.setTmpDirs(baseDir);
+		LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.procName 
+			+ " instantiated from " 
+			+ this.fileName);
+	}
+
+	/**
+	This constructor is used when a PROC statement is encountered by 
+	a listener.
+	*/
+	public PPProc(
+				JCLPPParser.ProcStatementContext procCtx
+				, String fileName
+				, int fileNb
+				, File baseDir
+				, File tmpProcDir
+				, Logger LOGGER
+				, TheCLI CLI
+				) {
+		// TODO add base directory for temp files and new constructor with that and tmpProcDir
+		this.procCtx = procCtx;
+		this.fileName = fileName;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.initialize();
+		this.setTmpDirs(baseDir, tmpProcDir);
 		LOGGER.fine(
 			this.myName 
 			+ " " 
@@ -203,7 +321,7 @@ public class PPProc {
 		}
 	}
 
-	public void setTmpDirs(File baseDir) throws IOException {
+	public void setTmpDirs(File baseDir) {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
@@ -230,13 +348,9 @@ public class PPProc {
 				+ this.tmpProcDir 
 				+ "|");
 		}
-		
-		for (PPJclStep step: this.steps) {
-			step.setTmpDirs(this.baseDir, this.tmpProcDir);
-		}
 	}
 
-	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
+	public void setTmpDirs(File baseDir, File tmpProcDir) {
 		this.LOGGER.finer(
 			this.myName 
 			+ " setTmpDirs(" 
@@ -260,10 +374,6 @@ public class PPProc {
 				+ " setTmpDirs tmpProcDir set to |" 
 				+ this.tmpProcDir 
 				+ "|");
-		}
-		
-		for (PPJclStep step: this.steps) {
-			step.setTmpDirs(this.baseDir, this.tmpProcDir);
 		}
 	}
 
@@ -341,6 +451,7 @@ public class PPProc {
 		this.nbSteps++;
 		step.setOrdNb(this.nbSteps);
 		this.steps.add(step);
+		step.setTmpDirs(this.baseDir, this.tmpProcDir);
 	}
 
 	public void addOp(PPOp anOp) {
@@ -698,7 +809,7 @@ public class PPProc {
 		lexAndParse(null, thisProc, procFileFull);
 		thisProc.get(0).resolveParmedIncludes(execSetSym);
 		PPProc aProc = thisProc.get(0);
-		aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
+		//aProc.setTmpDirs(this.baseDir, this.tmpProcDir);
 		aProc.setJcllib(this.jcllib);
 		aProc.setOrdNb(this.ordNb);
 		aProc.setJobOrdNb(this.jobOrdNb);
@@ -735,7 +846,7 @@ public class PPProc {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		PPListener listener = new PPListener(jobs, procs, fileName, this.getFileNb(), LOGGER, CLI);
+		PPListener listener = new PPListener(jobs, procs, fileName, this.getFileNb(), this.baseDir, null, this.tmpProcDir, LOGGER, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + listener.getClass().getName());
 	
@@ -872,7 +983,7 @@ public class PPProc {
 		return null;
 	}
 
-	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
+	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) {
 		return this.CLI.newTempDir(baseDir, prfx, saveTemp);
 	}
 

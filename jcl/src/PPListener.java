@@ -31,7 +31,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	public File tmpJobDir = null;
 	public File tmpProcDir = null;
 
-	public PPListener(
+/*	public PPListener(
 			ArrayList<PPJob> jobs
 			, ArrayList<PPProc> procs
 			, String fileName
@@ -54,7 +54,7 @@ public class PPListener extends JCLPPParserBaseListener {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 	}
-
+*/
 	public PPListener(
 			ArrayList<PPJob> jobs
 			, ArrayList<PPProc> procs
@@ -192,7 +192,7 @@ public class PPListener extends JCLPPParserBaseListener {
 	@Override public void enterProcStatement(JCLPPParser.ProcStatementContext ctx) {
 		this.procName = ctx.procName().NAME_FIELD().getSymbol().getText();
 		this.currJclStep = null;
-		this.currProc = new PPProc(ctx, this.fileName, this.fileNb, this.LOGGER, this.CLI);
+		this.currProc = this.createCurrProc(ctx);
 		if (this.currJob == null) {
 		} else {
 			this.currJob.addInstreamProc(this.currProc);
@@ -245,17 +245,17 @@ public class PPListener extends JCLPPParserBaseListener {
 	*/
 	@Override public void enterIncludeStatement(JCLPPParser.IncludeStatementContext ctx) {
 		if (this.currProc == null && this.currJob == null) {
-			/*
-			Not sure how we'd get here, but I left a note to myself to 
-			handle this situation.  Don't want to be caught out by an
-			edge case.
+			/**
+			A cataloged proc need not have a PROC statement.  Thus it is
+			possible to encounter an INCLUDE without having an owning
+			entity.
 			*/
 			this.LOGGER.warning(
 				this.myName 
 				+ " INCLUDE at line " 
 				+ ctx.SS().getSymbol().getLine() 
 				+ " encountered with this.currProc == null && this.currJob == null");
-			this.currProc = new PPProc(this.fileName, this.fileNb, this.LOGGER, this.CLI);
+			this.currProc = this.createCurrProc();
 			this.currProc.addInclude(
 				new PPIncludeStatement(
 					ctx
@@ -289,7 +289,12 @@ public class PPListener extends JCLPPParserBaseListener {
 	@Override public void enterJclStep(JCLPPParser.JclStepContext ctx) {
 
 		if (this.currProc == null && this.currJob == null) {
-			this.currProc = new PPProc(this.fileName, this.fileNb, this.LOGGER, this.CLI);
+			/**
+			A cataloged proc need not have a PROC statement.  Thus it is
+			possible to encounter a JclStep without having an owning
+			entity.
+			*/
+			this.currProc = this.createCurrProc();
 			this.currJclStep = new PPJclStep(ctx, this.fileName, this.currProc, this.LOGGER, this.CLI);
 			this.currProc.addJclStep(this.currJclStep);
 		} else if (this.currProc == null) {
@@ -321,5 +326,54 @@ public class PPListener extends JCLPPParserBaseListener {
 			this.currJob.setEndLine(ctx.getStop().getLine());
 		}
 	}
+
+	private PPProc createCurrProc() {
+		PPProc aProc = null;
+
+		if (this.tmpProcDir == null) {
+			aProc = new PPProc(
+						this.fileName
+						, this.fileNb
+						, this.baseDir
+						, this.LOGGER
+						, this.CLI);
+		} else {
+			aProc = new PPProc(
+						this.fileName
+						, this.fileNb
+						, this.baseDir
+						, this.tmpProcDir
+						, this.LOGGER
+						, this.CLI);
+		}
+
+		return aProc;
+	}
+
+	private PPProc createCurrProc(JCLPPParser.ProcStatementContext ctx) {
+		PPProc aProc = null;
+
+		if (this.tmpProcDir == null) {
+			aProc = new PPProc(
+						ctx
+						, this.fileName
+						, this.fileNb
+						, this.baseDir
+						, this.LOGGER
+						, this.CLI);
+		} else {
+			aProc = new PPProc(
+						ctx
+						, this.fileName
+						, this.fileNb
+						, this.baseDir
+						, this.tmpProcDir
+						, this.LOGGER
+						, this.CLI);
+		}
+
+		return aProc;
+	}
+
 
 }

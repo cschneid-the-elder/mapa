@@ -180,6 +180,10 @@ public class PPJclStep {
 		}	
 	}
 
+	/**
+	PPJob and PPProc use this method to set the working directories
+	for the PPJclStep instances they "own."
+	*/
 	public void setTmpDirs(File baseDir, File tmpProcDir) {
 		this.LOGGER.finer(
 			this.myName 
@@ -522,7 +526,7 @@ public class PPJclStep {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		PPListener listener = new PPListener(null, procs, fileName, this.getFileNb(), LOGGER, CLI);
+		PPListener listener = new PPListener(null, procs, fileName, this.getFileNb(), this.baseDir, null, this.tmpProcDir, LOGGER, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + listener.getClass().getName());
 	
