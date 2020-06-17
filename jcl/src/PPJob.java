@@ -83,15 +83,18 @@ public class PPJob {
 	private File tmpJobDir = null;
 	private File tmpProcDir = null;
 
+	/**
+	Constructor for use by PPListener as this PPJob is initially parsed.
+	*/
 	public PPJob(
 			JCLPPParser.JobCardContext ctx
 			, String fileName
 			, int ordNb
 			, int fileNb
+			, File baseDir
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
-		// TODO add new constructor with just baseDir, and another with that and tmpJobDir, tmpProcDir
 		this.jobCardCtx = ctx;
 		this.fileName = fileName;
 		this.ordNb = ordNb;
@@ -99,6 +102,38 @@ public class PPJob {
 		this.LOGGER = LOGGER;
 		this.CLI = CLI;
 		this.initialize();
+		this.setTmpDirs(baseDir);
+		this.LOGGER.fine(
+			this.myName 
+			+ " " 
+			+ this.jobName 
+			+ " instantiated from " 
+			+ this.fileName
+			);
+	}
+
+	/**
+	Constructor for use by PPListener as this job is iteratively parsed.
+	*/
+	public PPJob(
+			JCLPPParser.JobCardContext ctx
+			, String fileName
+			, int ordNb
+			, int fileNb
+			, File baseDir
+			, File tmpJobDir
+			, File tmpProcDir
+			, Logger LOGGER
+			, TheCLI CLI
+			) {
+		this.jobCardCtx = ctx;
+		this.fileName = fileName;
+		this.ordNb = ordNb;
+		this.fileNb = fileNb;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.initialize();
+		this.setTmpDirs(baseDir, tmpJobDir, tmpProcDir);
 		this.LOGGER.fine(
 			this.myName 
 			+ " " 
@@ -221,7 +256,7 @@ public class PPJob {
 		this.endLine = aLine;
 	}
 
-	private void setTmpDirs(File baseDir) throws IOException {
+	private void setTmpDirs(File baseDir) {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
@@ -237,13 +272,9 @@ public class PPJob {
 			this.tmpProcDir = this.newTempDir(baseDir, this.myName + "-" + this.getJobName() + "-instreamprocs-", this.CLI.saveTemp);
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
 		}
-		
-		for (PPJclStep step: this.steps) {
-			step.setTmpDirs(this.baseDir, this.tmpProcDir);
-		}
 	}
 
-	public void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) throws IOException {
+	private void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
@@ -258,10 +289,6 @@ public class PPJob {
 		if (this.tmpProcDir == null) {
 			this.tmpProcDir = tmpProcDir;
 			this.LOGGER.finest(this.myName + " setTmpDirs tmpProcDir set to |" + this.tmpProcDir + "|");
-		}
-		
-		for (PPJclStep step: this.steps) {
-			step.setTmpDirs(this.baseDir, this.tmpProcDir);
 		}
 	}
 
@@ -295,6 +322,7 @@ public class PPJob {
 		step.setJobOrdNb(this.ordNb);
 		this.steps.add(step);
 		step.setJcllib(this.jcllib);
+		step.setTmpDirs(this.baseDir, this.tmpProcDir);
 	}
 
 	/**
@@ -625,12 +653,12 @@ public class PPJob {
 		do {
 			this.LOGGER.finest(this.myName + " jobFile = |" + jobFile.getName() + "|");
 			ArrayList<PPJob> thisJob = new ArrayList<>();
-			lexAndParse(thisJob, null, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName());
+			String fileToParse = this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName();
+			lexAndParse(thisJob, null, fileToParse);
 			thisJob.get(0).resolveParmedIncludes();
 			ArrayList<PPIncludeStatement> includes_after = thisJob.get(0).getAllUnresolvedIncludes();
 			this.LOGGER.finest(this.myName + " includes_after  = " + includes_after);
 			aJob = thisJob.get(0);
-			aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 			jobFile = aJob.rewriteJobWithIncludesResolved();
 			sanity++;
 			if (includes_after.size() == 0) {
@@ -643,7 +671,6 @@ public class PPJob {
 					, this.tmpJobDir.getCanonicalPath() + File.separator + jobFile.getName()
 					);
 				aJob = thisJob.get(0);
-				aJob.setTmpDirs(this.baseDir, this.tmpJobDir, this.tmpProcDir);
 				aJob.setOrdNb(this.ordNb);
 			}
 		} while(iterating && (sanity < CLI.getSanity()));
@@ -690,7 +717,17 @@ public class PPJob {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		PPListener listener = new PPListener(jobs, procs, fileName, this.fileNb, LOGGER, CLI);
+		PPListener listener = 
+			new PPListener(
+				jobs
+				, procs
+				, fileName
+				, this.fileNb
+				, this.baseDir
+				, this.tmpJobDir
+				, this.tmpProcDir
+				, LOGGER
+				, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + listener.getClass().getName());
 	
@@ -753,17 +790,14 @@ public class PPJob {
 	<p>An initial file could contain multiple jobs, each of which could
 	contain multiple instream procs.
 	*/
-	public File rewriteJobAndSeparateInstreamProcs(File baseDir) throws IOException {
+	public File rewriteJobAndSeparateInstreamProcs() throws IOException {
 		this.LOGGER.finer(
 			this.myName 
 			+ " rewriteJobAndSeparateInstreamProcs job = |" 
 			+ this 
-			+ "| baseDir = |" 
-			+ baseDir 
 			+ "|"
 			);
 
-		this.setTmpDirs(baseDir);
 		File aFile = new File(this.getFileName());
 		LineNumberReader src = new LineNumberReader(new FileReader(aFile));
 		File tmp = new File(
@@ -901,7 +935,7 @@ public class PPJob {
 		return null;
 	}
 
-	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) throws IOException {
+	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) {
 		return this.CLI.newTempDir(baseDir, prfx, saveTemp);
 	}
 

@@ -180,7 +180,11 @@ public class PPJclStep {
 		}	
 	}
 
-	public void setTmpDirs(File baseDir, File tmpProcDir) throws IOException {
+	/**
+	PPJob and PPProc use this method to set the working directories
+	for the PPJclStep instances they "own."
+	*/
+	public void setTmpDirs(File baseDir, File tmpProcDir) {
 		this.LOGGER.finer(
 			this.myName 
 			+ " " 
@@ -346,7 +350,6 @@ public class PPJclStep {
 			ArrayList<PPSetSymbolValue> mergedSetSym = new ArrayList<>(setSym);
 			mergedSetSym.addAll(this.setSym);
 			this.procExecuted.resolveParms(this.incomingSetSym);
-			//this.proc.resolveParms(mergedSetSym);
 			for (PPDdStatementAmalgamation dda: ddStatements) {
 				dda.resolveParms(mergedSetSym);
 			}
@@ -365,7 +368,6 @@ public class PPJclStep {
 				ArrayList<PPProc> procs = new ArrayList<>();
 				this.lexAndParse(procs, aFileRewritten.getPath());
 				procs.get(0).setJcllib(this.jcllib);
-				procs.get(0).setTmpDirs(this.baseDir, this.tmpProcDir);
 				procs.get(0).setOrdNb(this.ordNb);
 				procs.get(0).setJobOrdNb(this.jobOrdNb);
 				procs.get(0).setParentJclStep(this);
@@ -522,7 +524,17 @@ public class PPJclStep {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		PPListener listener = new PPListener(null, procs, fileName, this.getFileNb(), LOGGER, CLI);
+		PPListener listener = 
+			new PPListener(
+				null
+				, procs
+				, fileName
+				, this.getFileNb()
+				, this.baseDir
+				, null
+				, this.tmpProcDir
+				, LOGGER
+				, CLI);
 	
 		this.LOGGER.finer(this.myName + " ----------walking tree with " + listener.getClass().getName());
 	

@@ -18,6 +18,8 @@
 # make testrigtso - run ANTLR test rig with TSO command lexer/parser
 # make testrigdsn - run ANTLR test rig with DSN command lexer/parser
 # make testrigamp - run ANTLR test rig with AMP parm lexer/parser
+# make testsys1   - run tests against downloaded SYS1.PROCLIB - probably only works on my machine
+# make testsys2   - run tests against downloaded SYS2.PROCLIB - probably only works on my machine
 #
 
 JC = javac
@@ -123,6 +125,14 @@ else
 #	java -jar JCLParser.jar -file testdata/test$(n).jcl -include testdata -set SYSUID=CSCHNEID -outtree test$(n).tsv -outcsv test$(n).csv -logLevel FINEST -cntlList cntlList1 -saveTemp
 	./src/tester $(n) demo
 endif
+
+testsys1:
+	echo `date` $@ >> build.log
+	java -jar JCLParser.jar -fileList sys1.proclib.download.lst -include ~/craig/SYS1.PROCLIB.DOWNLOAD -set SYSUID=CSCHNEID -outtree sys1.proclib.tsv -outcsv sys1.proclib.csv -cntlList cntlList1
+
+testsys2:
+	echo `date` $@ >> build.log
+	java -jar JCLParser.jar -fileList sys2.proclib.download.lst -include ~/craig/SYS2.PROCLIB.DOWNLOAD -set SYSUID=CSCHNEID -outtree sys2.proclib.tsv -outcsv sys2.proclib.csv -cntlList cntlList1
 
 ziplogs:
 	echo `date` $@ >> build.log
