@@ -90,39 +90,10 @@ public class PPProc {
 	public PPProc(
 				String fileName
 				, int fileNb
-				, Logger LOGGER
-				, TheCLI CLI
-				) {
-		// TODO add base directory for temp files
-		this.fileName = fileName;
-		this.fileNb = fileNb;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.procName = this.procNameFromFileName();
-		this.initialize();
-		LOGGER.fine(
-			this.myName 
-			+ " " 
-			+ this.procName 
-			+ " instantiated from " 
-			+ this.fileName);
-	}
-
-	/**
-	This constructor is used when a cataloged proc is encountered by
-	a listener but no PROC statement exists.
-
-	<p>Instream procs must have a PROC statement and a PEND statement,
-	cataloged procs can have one, the other, both, or neither.
-	*/
-	public PPProc(
-				String fileName
-				, int fileNb
 				, File baseDir
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
-		// TODO add base directory for temp files
 		this.fileName = fileName;
 		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
@@ -153,7 +124,6 @@ public class PPProc {
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
-		// TODO add base directory for temp files
 		this.fileName = fileName;
 		this.fileNb = fileNb;
 		this.LOGGER = LOGGER;
@@ -177,37 +147,10 @@ public class PPProc {
 				JCLPPParser.ProcStatementContext procCtx
 				, String fileName
 				, int fileNb
-				, Logger LOGGER
-				, TheCLI CLI
-				) {
-		// TODO add base directory for temp files and new constructor with that and tmpProcDir
-		this.procCtx = procCtx;
-		this.fileName = fileName;
-		this.fileNb = fileNb;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-		this.initialize();
-		LOGGER.fine(
-			this.myName 
-			+ " " 
-			+ this.procName 
-			+ " instantiated from " 
-			+ this.fileName);
-	}
-
-	/**
-	This constructor is used when a PROC statement is encountered by 
-	a listener.
-	*/
-	public PPProc(
-				JCLPPParser.ProcStatementContext procCtx
-				, String fileName
-				, int fileNb
 				, File baseDir
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
-		// TODO add base directory for temp files and new constructor with that and tmpProcDir
 		this.procCtx = procCtx;
 		this.fileName = fileName;
 		this.fileNb = fileNb;
@@ -236,7 +179,6 @@ public class PPProc {
 				, Logger LOGGER
 				, TheCLI CLI
 				) {
-		// TODO add base directory for temp files and new constructor with that and tmpProcDir
 		this.procCtx = procCtx;
 		this.fileName = fileName;
 		this.fileNb = fileNb;
@@ -321,7 +263,7 @@ public class PPProc {
 		}
 	}
 
-	public void setTmpDirs(File baseDir) {
+	private void setTmpDirs(File baseDir) {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;
@@ -350,7 +292,7 @@ public class PPProc {
 		}
 	}
 
-	public void setTmpDirs(File baseDir, File tmpProcDir) {
+	private void setTmpDirs(File baseDir, File tmpProcDir) {
 		this.LOGGER.finer(
 			this.myName 
 			+ " setTmpDirs(" 

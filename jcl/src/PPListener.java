@@ -31,30 +31,6 @@ public class PPListener extends JCLPPParserBaseListener {
 	public File tmpJobDir = null;
 	public File tmpProcDir = null;
 
-/*	public PPListener(
-			ArrayList<PPJob> jobs
-			, ArrayList<PPProc> procs
-			, String fileName
-			, int fileNb
-			, Logger LOGGER
-			, TheCLI CLI
-			) {
-		// TODO pass along the base directory for temp files
-		super();
-		if (jobs == null) {
-		} else {
-			this.jobs = jobs;
-		}
-		if (procs == null) {
-		} else {
-			this.procs = procs;
-		}
-		this.fileName = fileName;
-		this.fileNb = fileNb;
-		this.LOGGER = LOGGER;
-		this.CLI = CLI;
-	}
-*/
 	public PPListener(
 			ArrayList<PPJob> jobs
 			, ArrayList<PPProc> procs
@@ -66,7 +42,6 @@ public class PPListener extends JCLPPParserBaseListener {
 			, Logger LOGGER
 			, TheCLI CLI
 			) {
-		// TODO pass along the base directory for temp files
 		super();
 		if (jobs == null) {
 		} else {

@@ -274,7 +274,7 @@ public class PPJob {
 		}
 	}
 
-	public void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) {
+	private void setTmpDirs(File baseDir, File tmpJobDir, File tmpProcDir) {
 		this.LOGGER.finer(this.myName + " setTmpDirs(" + baseDir + "," + tmpJobDir + "," + tmpProcDir + ")");
 		if (this.baseDir == null) {
 			this.baseDir = baseDir;

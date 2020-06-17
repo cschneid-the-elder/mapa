@@ -138,7 +138,6 @@ public static void main(String[] args) throws Exception {
 		}
 		for (PPProc p: procsPP) {
 			LOGGER.info("Processing proc " + p.getProcName());
-			//p.setTmpDirs(baseDir);
 			File procFile = new File(p.getFileName());
 			/*
 				Now must iteratively parse this proc until all INCLUDEs 
