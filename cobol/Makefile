@@ -46,6 +46,10 @@ testLocal:
 testNist:
 	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 
+testrigpp:
+	echo `date` $@ $(n) >> build.log
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+
 ./src/CobolLexer.tokens: 
 
 ./src/CobolParser.tokens: ./src/CobolLexer.tokens

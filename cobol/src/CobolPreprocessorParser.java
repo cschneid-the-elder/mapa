@@ -20,72 +20,91 @@ public class CobolPreprocessorParser extends Parser {
 		NIST_SEMI_COMMENT_A=5, NIST_SEMI_COMMENT_B=6, NIST_SEMI_COMMENT_C=7, NIST_SEMI_COMMENT_G=8, 
 		NIST_SEMI_COMMENT_J=9, NIST_SEMI_COMMENT_P=10, NIST_SEMI_COMMENT_S=11, 
 		NIST_SEMI_COMMENT_T=12, NIST_SEMI_COMMENT_U=13, NIST_SEMI_COMMENT_X=14, 
-		NIST_SEMI_COMMENT_Y=15, ADATA=16, ADV=17, ALIAS=18, ANSI=19, ANY=20, APOST=21, 
-		AR=22, ARITH=23, AUTO=24, AWO=25, BIN=26, BLOCK0=27, BUF=28, BUFSIZE=29, 
-		BY=30, CBL=31, CBLCARD=32, CICS=33, CO=34, COBOL2=35, COBOL3=36, CODEPAGE=37, 
-		COMPAT=38, COMPILE=39, COPY=40, CP=41, CPP=42, CPSM=43, CS=44, CURR=45, 
-		CURRENCY=46, DATA=47, DATEPROC=48, DBCS=49, DD=50, DEBUG=51, DECK=52, 
-		DIAGTRUNC=53, DIVISION=54, DLI=55, DLL=56, DP=57, DTR=58, DU=59, DUMP=60, 
-		DYN=61, DYNAM=62, EDF=63, EJECT=64, EJPD=65, EN=66, ENGLISH=67, END_EXEC=68, 
-		EPILOG=69, EXCI=70, EXEC=71, EXIT=72, EXP=73, EXPORTALL=74, EXTEND=75, 
-		FASTSRT=76, FEPI=77, FLAG=78, FLAGSTD=79, FSRT=80, FULL=81, GDS=82, GRAPHIC=83, 
-		HOOK=84, ID=85, IDENTIFICATION=86, IN=87, INTDATE=88, JA=89, JP=90, KA=91, 
-		LANG=92, LANGUAGE=93, LC=94, LEASM=95, LENGTH=96, LIB=97, LILIAN=98, LIN=99, 
-		LINECOUNT=100, LINKAGE=101, LIST=102, LM=103, LONGMIXED=104, LONGUPPER=105, 
-		LPARENCHAR=106, LU=107, MAP=108, MARGINS=109, MAX=110, MD=111, MDECK=112, 
-		MIG=113, MIXED=114, NAME=115, NAT=116, NATIONAL=117, NATLANG=118, NN=119, 
-		NO=120, NOADATA=121, NOADV=122, NOALIAS=123, NOAWO=124, NOBLOCK0=125, 
-		NOC=126, NOCBLCARD=127, NOCICS=128, NOCMPR2=129, NOCOMPILE=130, NOCPSM=131, 
-		NOCURR=132, NOCURRENCY=133, NOD=134, NODATEPROC=135, NODBCS=136, NODE=137, 
-		NODEBUG=138, NODECK=139, NODIAGTRUNC=140, NODLL=141, NODU=142, NODUMP=143, 
-		NODP=144, NODTR=145, NODYN=146, NODYNAM=147, NOEDF=148, NOEJPD=149, NOEPILOG=150, 
-		NOEXIT=151, NOEXP=152, NOEXPORTALL=153, NOF=154, NOFASTSRT=155, NOFEPI=156, 
-		NOFLAG=157, NOFLAGMIG=158, NOFLAGSTD=159, NOFSRT=160, NOGRAPHIC=161, NOHOOK=162, 
-		NOLENGTH=163, NOLIB=164, NOLINKAGE=165, NOLIST=166, NOMAP=167, NOMD=168, 
-		NOMDECK=169, NONAME=170, NONUM=171, NONUMBER=172, NOOBJ=173, NOOBJECT=174, 
-		NOOFF=175, NOOFFSET=176, NOOPSEQUENCE=177, NOOPT=178, NOOPTIMIZE=179, 
-		NOOPTIONS=180, NOP=181, NOPFD=182, NOPROLOG=183, NORENT=184, NOS=185, 
-		NOSEP=186, NOSEPARATE=187, NOSEQ=188, NOSOURCE=189, NOSPIE=190, NOSQL=191, 
-		NOSQLC=192, NOSQLCCSID=193, NOSSR=194, NOSSRANGE=195, NOSTDTRUNC=196, 
-		NOSEQUENCE=197, NOTERM=198, NOTERMINAL=199, NOTEST=200, NOTHREAD=201, 
-		NOTRIG=202, NOVBREF=203, NOWD=204, NOWORD=205, NOX=206, NOXREF=207, NOZWB=208, 
-		NS=209, NSEQ=210, NSYMBOL=211, NUM=212, NUMBER=213, NUMPROC=214, OBJ=215, 
-		OBJECT=216, OF=217, OFF=218, OFFSET=219, ON=220, OP=221, OPMARGINS=222, 
-		OPSEQUENCE=223, OPT=224, OPTFILE=225, OPTIMIZE=226, OPTIONS=227, OUT=228, 
-		OUTDD=229, PFD=230, PPTDBG=231, PGMN=232, PGMNAME=233, PROCESS=234, PROLOG=235, 
-		QUOTE=236, RENT=237, REPLACE=238, REPLACING=239, RMODE=240, RPARENCHAR=241, 
-		SEP=242, SEPARATE=243, SEQ=244, SEQUENCE=245, SHORT=246, SIZE=247, SOURCE=248, 
-		SP=249, SPACE=250, SPIE=251, SQL=252, SQLC=253, SQLCCSID=254, SQLIMS=255, 
-		SKIP1=256, SKIP2=257, SKIP3=258, SS=259, SSR=260, SSRANGE=261, STD=262, 
-		SUPPRESS=263, SYSEIB=264, SZ=265, TERM=266, TERMINAL=267, TEST=268, THREAD=269, 
-		TITLE=270, TRIG=271, TRUNC=272, UE=273, UPPER=274, VBREF=275, WD=276, 
-		WORD=277, XMLPARSE=278, XMLSS=279, XOPTS=280, XP=281, XREF=282, YEARWINDOW=283, 
-		YW=284, ZWB=285, C_CHAR=286, D_CHAR=287, E_CHAR=288, F_CHAR=289, H_CHAR=290, 
-		I_CHAR=291, M_CHAR=292, N_CHAR=293, Q_CHAR=294, S_CHAR=295, U_CHAR=296, 
-		W_CHAR=297, X_CHAR=298, COMMENTTAG=299, COMMACHAR=300, DOT=301, DOUBLEEQUALCHAR=302, 
-		NONNUMERICLITERAL=303, NUMERICLITERAL=304, IDENTIFIER=305, FILENAME=306, 
-		PSEUDOTEXTIDENTIFIER=307, NEWLINE=308, MULTINEWLINE=309, COMMENTLINE=310, 
-		WS=311, TEXT=312, BOL=313;
+		NIST_SEMI_COMMENT_Y=15, ABD=16, ADATA=17, ADV=18, AFP=19, ALIAS=20, ALPHNUM=21, 
+		ANSI=22, ANY=23, APOST=24, AR=25, ARCH=26, ARITH=27, AUTO=28, AWO=29, 
+		BIN=30, BLOCK0=31, BUF=32, BUFSIZE=33, BY=34, CBL=35, CBLCARD=36, CICS=37, 
+		CO=38, COBOL2=39, COBOL3=40, CODEPAGE=41, COMPAT=42, COMPILE=43, COPY=44, 
+		COPYLOC=45, COPYRIGHT=46, CP=47, CPLC=48, CPP=49, CPSM=50, CPYR=51, CS=52, 
+		CURR=53, CURRENCY=54, DATA=55, DATEPROC=56, DBCS=57, DD=58, DEBUG=59, 
+		DEC=60, DECK=61, DEFINE=62, DEF=63, DIAGTRUNC=64, DISPSIGN=65, DIVISION=66, 
+		DLI=67, DLL=68, DP=69, DS=70, DSN=71, DSNAME=72, DTR=73, DU=74, DUMP=75, 
+		DWARF=76, DYN=77, DYNAM=78, EDF=79, EJECT=80, EJPD=81, EN=82, ENDP=83, 
+		ENDPERIOD=84, ENGLISH=85, END_EXEC=86, EPILOG=87, EVENP=88, EVENPACK=89, 
+		EXCI=90, EXEC=91, EXIT=92, EXP=93, EXPORTALL=94, EXTEND=95, FASTSRT=96, 
+		FEPI=97, FLAG=98, FLAGSTD=99, FSRT=100, FULL=101, GDS=102, GRAPHIC=103, 
+		HEX=104, HGPR=105, HOOK=106, IC=107, ID=108, IDENTIFICATION=109, IN=110, 
+		INITCHECK=111, INTDATE=112, INITIAL=113, INLINE=114, INL=115, JA=116, 
+		JP=117, KA=118, LANG=119, LANGUAGE=120, LAX=121, LAXPERF=122, LC=123, 
+		LEASM=124, LENGTH=125, LIB=126, LILIAN=127, LIN=128, LINECOUNT=129, LINKAGE=130, 
+		LIST=131, LM=132, LONGMIXED=133, LONGUPPER=134, LP=135, LPARENCHAR=136, 
+		LU=137, LXPRF=138, MAP=139, MARGINS=140, MAX=141, MD=142, MDECK=143, MIG=144, 
+		MIXED=145, MAXPCF=146, MSG=147, NAME=148, NAT=149, NATIONAL=150, NATLANG=151, 
+		NC=152, NN=153, NO=154, NOADATA=155, NOADV=156, NOALIAS=157, NOALPHNUM=158, 
+		NOAWO=159, NOBIN=160, NOBLOCK0=161, NOC=162, NOCBLCARD=163, NOCICS=164, 
+		NOCMPR2=165, NOCOMPILE=166, NOCOPYLOC=167, NOCOPYRIGHT=168, NOCPLC=169, 
+		NOCPSM=170, NOCPYR=171, NOCURR=172, NOCURRENCY=173, NOD=174, NODATEPROC=175, 
+		NODBCS=176, NODE=177, NODEBUG=178, NODECK=179, NODEFINE=180, NODEF=181, 
+		NODIAGTRUNC=182, NODLL=183, NODSNAME=184, NODU=185, NODUMP=186, NODP=187, 
+		NODTR=188, NODWARF=189, NODYN=190, NODYNAM=191, NOEDF=192, NOEJPD=193, 
+		NOENDPERIOD=194, NOEPILOG=195, NOEVENPACK=196, NOEXIT=197, NOEXP=198, 
+		NOEXPORTALL=199, NOF=200, NOFASTSRT=201, NOFEPI=202, NOFLAG=203, NOFLAGMIG=204, 
+		NOFLAGSTD=205, NOFSRT=206, NOGRAPHIC=207, NOHOOK=208, NOINITCHECK=209, 
+		NOIC=210, NOINITIAL=211, NOINLINE=212, NOINL=213, NOLAXPERF=214, NOLENGTH=215, 
+		NOLIB=216, NOLINKAGE=217, NOLIST=218, NOMAP=219, NOMD=220, NOMDECK=221, 
+		NONAME=222, NONUM=223, NONUMBER=224, NOOBJ=225, NOOBJECT=226, NOOMITODOMIN=227, 
+		NOOFF=228, NOOFFSET=229, NOOPSEQUENCE=230, NOOPT=231, NOOPTIMIZE=232, 
+		NOOPTIONS=233, NOP=234, NOPAC=235, NOPARMCHECK=236, NOPFD=237, NOPRESERVE=238, 
+		NOPROLOG=239, NORENT=240, NORULES=241, NOS=242, NOSEP=243, NOSEPARATE=244, 
+		NOSEQ=245, NOSERV=246, NOSERVICE=247, NOSLACKBYTES=248, NOSO=249, NOSOURCE=250, 
+		NOSPIE=251, NOSQL=252, NOSQLC=253, NOSQLCCSID=254, NOSQLIMS=255, NOSSR=256, 
+		NOSSRANGE=257, NOSTDTRUNC=258, NOSEQUENCE=259, NOSTGOPT=260, NOSUPP=261, 
+		NOSUPPRESS=262, NOTERM=263, NOTERMINAL=264, NOTEST=265, NOTHREAD=266, 
+		NOTRIG=267, NOUNRA=268, NOUNREFALL=269, NOUNREFSOURCE=270, NOUNRS=271, 
+		NOVBREF=272, NOVOLATILE=273, NOWD=274, NOWORD=275, NOX=276, NOXREF=277, 
+		NOZC=278, NOZON=279, NOZONECHECK=280, NOZWB=281, NS=282, NSEQ=283, NSYMBOL=284, 
+		NUM=285, NUMBER=286, NUMCHECK=287, NUMPROC=288, OBJ=289, OBJECT=290, OF=291, 
+		OFF=292, OFFSET=293, ON=294, OMITODOMIN=295, OOM=296, OP=297, OPMARGINS=298, 
+		OPSEQUENCE=299, OPT=300, OPTFILE=301, OPTIMIZE=302, OPTIONS=303, OUT=304, 
+		OUTDD=305, PAC=306, PARMCHECK=307, PATH=308, PC=309, PFD=310, PPTDBG=311, 
+		PGMN=312, PGMNAME=313, PRESERVE=314, PROCESS=315, PROLOG=316, QUALIFY=317, 
+		QUA=318, QUOTE=319, RENT=320, REPLACE=321, REPLACING=322, RMODE=323, RPARENCHAR=324, 
+		RULES=325, SEP=326, SEPARATE=327, SEQ=328, SEQUENCE=329, SERV=330, SERVICE=331, 
+		SHORT=332, SIZE=333, SLACKBYTES=334, SLCKB=335, SOURCE=336, SP=337, SPACE=338, 
+		SPIE=339, SQL=340, SQLC=341, SQLCCSID=342, SQLIMS=343, SKIP1=344, SKIP2=345, 
+		SKIP3=346, SO=347, SS=348, SSR=349, SSRANGE=350, STANDARD=351, STD=352, 
+		STGOPT=353, STRICT=354, SUCC=355, SUPP=356, SUPPRESS=357, SYSEIB=358, 
+		SZ=359, TERM=360, TERMINAL=361, TEST=362, THREAD=363, TITLE=364, TRIG=365, 
+		TRUNC=366, UE=367, UNREF=368, UPPER=369, VBREF=370, VLR=371, VOLATILE=372, 
+		VS=373, VSAMOPENFS=374, WD=375, WORD=376, XMLPARSE=377, XMLSS=378, XOPTS=379, 
+		XP=380, XREF=381, YEARWINDOW=382, YW=383, ZC=384, ZD=385, ZON=386, ZONECHECK=387, 
+		ZONEDATA=388, ZWB=389, C_CHAR=390, D_CHAR=391, E_CHAR=392, F_CHAR=393, 
+		H_CHAR=394, I_CHAR=395, M_CHAR=396, N_CHAR=397, Q_CHAR=398, S_CHAR=399, 
+		U_CHAR=400, W_CHAR=401, X_CHAR=402, COMMENTTAG=403, COMMACHAR=404, DOT=405, 
+		DOUBLEEQUALCHAR=406, EQUALCHAR=407, NONNUMERICLITERAL=408, NUMERICLITERAL=409, 
+		IDENTIFIER=410, FILENAME=411, PSEUDOTEXTIDENTIFIER=412, NEWLINE=413, MULTINEWLINE=414, 
+		COMMENTLINE=415, WS=416, TEXT=417, BOL=418, O_CHAR=419;
 	public static final int
 		RULE_startRule = 0, RULE_identificationDivisionTag = 1, RULE_compilerOptions = 2, 
-		RULE_compilerXOpts = 3, RULE_compilerOption = 4, RULE_classicCommentEntry = 5, 
-		RULE_execCicsStatement = 6, RULE_execSqlStatement = 7, RULE_execSqlImsStatement = 8, 
-		RULE_copyStatement = 9, RULE_copySource = 10, RULE_copyLibrary = 11, RULE_replacingPhrase = 12, 
-		RULE_replaceArea = 13, RULE_replaceByStatement = 14, RULE_replaceOffStatement = 15, 
-		RULE_replaceClause = 16, RULE_directoryPhrase = 17, RULE_familyPhrase = 18, 
-		RULE_replaceable = 19, RULE_replacement = 20, RULE_ejectStatement = 21, 
-		RULE_skipStatement = 22, RULE_titleStatement = 23, RULE_pseudoText = 24, 
-		RULE_charData = 25, RULE_charDataSql = 26, RULE_charDataLine = 27, RULE_cobolWord = 28, 
-		RULE_literal = 29, RULE_filename = 30, RULE_charDataKeyword = 31;
+		RULE_compilerXOpts = 3, RULE_compilerOption = 4, RULE_rules_opts = 5, 
+		RULE_test_opts = 6, RULE_classicCommentEntry = 7, RULE_execCicsStatement = 8, 
+		RULE_execSqlStatement = 9, RULE_execSqlImsStatement = 10, RULE_copyStatement = 11, 
+		RULE_copySource = 12, RULE_copyLibrary = 13, RULE_replacingPhrase = 14, 
+		RULE_replaceArea = 15, RULE_replaceByStatement = 16, RULE_replaceOffStatement = 17, 
+		RULE_replaceClause = 18, RULE_directoryPhrase = 19, RULE_familyPhrase = 20, 
+		RULE_replaceable = 21, RULE_replacement = 22, RULE_ejectStatement = 23, 
+		RULE_skipStatement = 24, RULE_titleStatement = 25, RULE_pseudoText = 26, 
+		RULE_charData = 27, RULE_charDataSql = 28, RULE_charDataLine = 29, RULE_cobolWord = 30, 
+		RULE_literal = 31, RULE_filename = 32, RULE_charDataKeyword = 33;
 	private static String[] makeRuleNames() {
 		return new String[] {
 			"startRule", "identificationDivisionTag", "compilerOptions", "compilerXOpts", 
-			"compilerOption", "classicCommentEntry", "execCicsStatement", "execSqlStatement", 
-			"execSqlImsStatement", "copyStatement", "copySource", "copyLibrary", 
-			"replacingPhrase", "replaceArea", "replaceByStatement", "replaceOffStatement", 
-			"replaceClause", "directoryPhrase", "familyPhrase", "replaceable", "replacement", 
-			"ejectStatement", "skipStatement", "titleStatement", "pseudoText", "charData", 
-			"charDataSql", "charDataLine", "cobolWord", "literal", "filename", "charDataKeyword"
+			"compilerOption", "rules_opts", "test_opts", "classicCommentEntry", "execCicsStatement", 
+			"execSqlStatement", "execSqlImsStatement", "copyStatement", "copySource", 
+			"copyLibrary", "replacingPhrase", "replaceArea", "replaceByStatement", 
+			"replaceOffStatement", "replaceClause", "directoryPhrase", "familyPhrase", 
+			"replaceable", "replacement", "ejectStatement", "skipStatement", "titleStatement", 
+			"pseudoText", "charData", "charDataSql", "charDataLine", "cobolWord", 
+			"literal", "filename", "charDataKeyword"
 		};
 	}
 	public static final String[] ruleNames = makeRuleNames();
@@ -100,7 +119,10 @@ public class CobolPreprocessorParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, "'('", null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, "'('", null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
@@ -112,12 +134,18 @@ public class CobolPreprocessorParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, "')'", null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, null, null, null, null, null, null, null, null, "'*>'", 
-			"','", "'.'", "'=='"
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			"')'", null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, null, null, null, null, null, 
+			null, null, null, null, null, null, null, "'*>'", "','", "'.'", "'=='", 
+			"'='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -127,46 +155,61 @@ public class CobolPreprocessorParser extends Parser {
 			"ID_DIVISION_TAG", "NIST_SEMI_COMMENT_A", "NIST_SEMI_COMMENT_B", "NIST_SEMI_COMMENT_C", 
 			"NIST_SEMI_COMMENT_G", "NIST_SEMI_COMMENT_J", "NIST_SEMI_COMMENT_P", 
 			"NIST_SEMI_COMMENT_S", "NIST_SEMI_COMMENT_T", "NIST_SEMI_COMMENT_U", 
-			"NIST_SEMI_COMMENT_X", "NIST_SEMI_COMMENT_Y", "ADATA", "ADV", "ALIAS", 
-			"ANSI", "ANY", "APOST", "AR", "ARITH", "AUTO", "AWO", "BIN", "BLOCK0", 
-			"BUF", "BUFSIZE", "BY", "CBL", "CBLCARD", "CICS", "CO", "COBOL2", "COBOL3", 
-			"CODEPAGE", "COMPAT", "COMPILE", "COPY", "CP", "CPP", "CPSM", "CS", "CURR", 
-			"CURRENCY", "DATA", "DATEPROC", "DBCS", "DD", "DEBUG", "DECK", "DIAGTRUNC", 
-			"DIVISION", "DLI", "DLL", "DP", "DTR", "DU", "DUMP", "DYN", "DYNAM", 
-			"EDF", "EJECT", "EJPD", "EN", "ENGLISH", "END_EXEC", "EPILOG", "EXCI", 
-			"EXEC", "EXIT", "EXP", "EXPORTALL", "EXTEND", "FASTSRT", "FEPI", "FLAG", 
-			"FLAGSTD", "FSRT", "FULL", "GDS", "GRAPHIC", "HOOK", "ID", "IDENTIFICATION", 
-			"IN", "INTDATE", "JA", "JP", "KA", "LANG", "LANGUAGE", "LC", "LEASM", 
-			"LENGTH", "LIB", "LILIAN", "LIN", "LINECOUNT", "LINKAGE", "LIST", "LM", 
-			"LONGMIXED", "LONGUPPER", "LPARENCHAR", "LU", "MAP", "MARGINS", "MAX", 
-			"MD", "MDECK", "MIG", "MIXED", "NAME", "NAT", "NATIONAL", "NATLANG", 
-			"NN", "NO", "NOADATA", "NOADV", "NOALIAS", "NOAWO", "NOBLOCK0", "NOC", 
-			"NOCBLCARD", "NOCICS", "NOCMPR2", "NOCOMPILE", "NOCPSM", "NOCURR", "NOCURRENCY", 
-			"NOD", "NODATEPROC", "NODBCS", "NODE", "NODEBUG", "NODECK", "NODIAGTRUNC", 
-			"NODLL", "NODU", "NODUMP", "NODP", "NODTR", "NODYN", "NODYNAM", "NOEDF", 
-			"NOEJPD", "NOEPILOG", "NOEXIT", "NOEXP", "NOEXPORTALL", "NOF", "NOFASTSRT", 
+			"NIST_SEMI_COMMENT_X", "NIST_SEMI_COMMENT_Y", "ABD", "ADATA", "ADV", 
+			"AFP", "ALIAS", "ALPHNUM", "ANSI", "ANY", "APOST", "AR", "ARCH", "ARITH", 
+			"AUTO", "AWO", "BIN", "BLOCK0", "BUF", "BUFSIZE", "BY", "CBL", "CBLCARD", 
+			"CICS", "CO", "COBOL2", "COBOL3", "CODEPAGE", "COMPAT", "COMPILE", "COPY", 
+			"COPYLOC", "COPYRIGHT", "CP", "CPLC", "CPP", "CPSM", "CPYR", "CS", "CURR", 
+			"CURRENCY", "DATA", "DATEPROC", "DBCS", "DD", "DEBUG", "DEC", "DECK", 
+			"DEFINE", "DEF", "DIAGTRUNC", "DISPSIGN", "DIVISION", "DLI", "DLL", "DP", 
+			"DS", "DSN", "DSNAME", "DTR", "DU", "DUMP", "DWARF", "DYN", "DYNAM", 
+			"EDF", "EJECT", "EJPD", "EN", "ENDP", "ENDPERIOD", "ENGLISH", "END_EXEC", 
+			"EPILOG", "EVENP", "EVENPACK", "EXCI", "EXEC", "EXIT", "EXP", "EXPORTALL", 
+			"EXTEND", "FASTSRT", "FEPI", "FLAG", "FLAGSTD", "FSRT", "FULL", "GDS", 
+			"GRAPHIC", "HEX", "HGPR", "HOOK", "IC", "ID", "IDENTIFICATION", "IN", 
+			"INITCHECK", "INTDATE", "INITIAL", "INLINE", "INL", "JA", "JP", "KA", 
+			"LANG", "LANGUAGE", "LAX", "LAXPERF", "LC", "LEASM", "LENGTH", "LIB", 
+			"LILIAN", "LIN", "LINECOUNT", "LINKAGE", "LIST", "LM", "LONGMIXED", "LONGUPPER", 
+			"LP", "LPARENCHAR", "LU", "LXPRF", "MAP", "MARGINS", "MAX", "MD", "MDECK", 
+			"MIG", "MIXED", "MAXPCF", "MSG", "NAME", "NAT", "NATIONAL", "NATLANG", 
+			"NC", "NN", "NO", "NOADATA", "NOADV", "NOALIAS", "NOALPHNUM", "NOAWO", 
+			"NOBIN", "NOBLOCK0", "NOC", "NOCBLCARD", "NOCICS", "NOCMPR2", "NOCOMPILE", 
+			"NOCOPYLOC", "NOCOPYRIGHT", "NOCPLC", "NOCPSM", "NOCPYR", "NOCURR", "NOCURRENCY", 
+			"NOD", "NODATEPROC", "NODBCS", "NODE", "NODEBUG", "NODECK", "NODEFINE", 
+			"NODEF", "NODIAGTRUNC", "NODLL", "NODSNAME", "NODU", "NODUMP", "NODP", 
+			"NODTR", "NODWARF", "NODYN", "NODYNAM", "NOEDF", "NOEJPD", "NOENDPERIOD", 
+			"NOEPILOG", "NOEVENPACK", "NOEXIT", "NOEXP", "NOEXPORTALL", "NOF", "NOFASTSRT", 
 			"NOFEPI", "NOFLAG", "NOFLAGMIG", "NOFLAGSTD", "NOFSRT", "NOGRAPHIC", 
-			"NOHOOK", "NOLENGTH", "NOLIB", "NOLINKAGE", "NOLIST", "NOMAP", "NOMD", 
-			"NOMDECK", "NONAME", "NONUM", "NONUMBER", "NOOBJ", "NOOBJECT", "NOOFF", 
+			"NOHOOK", "NOINITCHECK", "NOIC", "NOINITIAL", "NOINLINE", "NOINL", "NOLAXPERF", 
+			"NOLENGTH", "NOLIB", "NOLINKAGE", "NOLIST", "NOMAP", "NOMD", "NOMDECK", 
+			"NONAME", "NONUM", "NONUMBER", "NOOBJ", "NOOBJECT", "NOOMITODOMIN", "NOOFF", 
 			"NOOFFSET", "NOOPSEQUENCE", "NOOPT", "NOOPTIMIZE", "NOOPTIONS", "NOP", 
-			"NOPFD", "NOPROLOG", "NORENT", "NOS", "NOSEP", "NOSEPARATE", "NOSEQ", 
-			"NOSOURCE", "NOSPIE", "NOSQL", "NOSQLC", "NOSQLCCSID", "NOSSR", "NOSSRANGE", 
-			"NOSTDTRUNC", "NOSEQUENCE", "NOTERM", "NOTERMINAL", "NOTEST", "NOTHREAD", 
-			"NOTRIG", "NOVBREF", "NOWD", "NOWORD", "NOX", "NOXREF", "NOZWB", "NS", 
-			"NSEQ", "NSYMBOL", "NUM", "NUMBER", "NUMPROC", "OBJ", "OBJECT", "OF", 
-			"OFF", "OFFSET", "ON", "OP", "OPMARGINS", "OPSEQUENCE", "OPT", "OPTFILE", 
-			"OPTIMIZE", "OPTIONS", "OUT", "OUTDD", "PFD", "PPTDBG", "PGMN", "PGMNAME", 
-			"PROCESS", "PROLOG", "QUOTE", "RENT", "REPLACE", "REPLACING", "RMODE", 
-			"RPARENCHAR", "SEP", "SEPARATE", "SEQ", "SEQUENCE", "SHORT", "SIZE", 
+			"NOPAC", "NOPARMCHECK", "NOPFD", "NOPRESERVE", "NOPROLOG", "NORENT", 
+			"NORULES", "NOS", "NOSEP", "NOSEPARATE", "NOSEQ", "NOSERV", "NOSERVICE", 
+			"NOSLACKBYTES", "NOSO", "NOSOURCE", "NOSPIE", "NOSQL", "NOSQLC", "NOSQLCCSID", 
+			"NOSQLIMS", "NOSSR", "NOSSRANGE", "NOSTDTRUNC", "NOSEQUENCE", "NOSTGOPT", 
+			"NOSUPP", "NOSUPPRESS", "NOTERM", "NOTERMINAL", "NOTEST", "NOTHREAD", 
+			"NOTRIG", "NOUNRA", "NOUNREFALL", "NOUNREFSOURCE", "NOUNRS", "NOVBREF", 
+			"NOVOLATILE", "NOWD", "NOWORD", "NOX", "NOXREF", "NOZC", "NOZON", "NOZONECHECK", 
+			"NOZWB", "NS", "NSEQ", "NSYMBOL", "NUM", "NUMBER", "NUMCHECK", "NUMPROC", 
+			"OBJ", "OBJECT", "OF", "OFF", "OFFSET", "ON", "OMITODOMIN", "OOM", "OP", 
+			"OPMARGINS", "OPSEQUENCE", "OPT", "OPTFILE", "OPTIMIZE", "OPTIONS", "OUT", 
+			"OUTDD", "PAC", "PARMCHECK", "PATH", "PC", "PFD", "PPTDBG", "PGMN", "PGMNAME", 
+			"PRESERVE", "PROCESS", "PROLOG", "QUALIFY", "QUA", "QUOTE", "RENT", "REPLACE", 
+			"REPLACING", "RMODE", "RPARENCHAR", "RULES", "SEP", "SEPARATE", "SEQ", 
+			"SEQUENCE", "SERV", "SERVICE", "SHORT", "SIZE", "SLACKBYTES", "SLCKB", 
 			"SOURCE", "SP", "SPACE", "SPIE", "SQL", "SQLC", "SQLCCSID", "SQLIMS", 
-			"SKIP1", "SKIP2", "SKIP3", "SS", "SSR", "SSRANGE", "STD", "SUPPRESS", 
-			"SYSEIB", "SZ", "TERM", "TERMINAL", "TEST", "THREAD", "TITLE", "TRIG", 
-			"TRUNC", "UE", "UPPER", "VBREF", "WD", "WORD", "XMLPARSE", "XMLSS", "XOPTS", 
-			"XP", "XREF", "YEARWINDOW", "YW", "ZWB", "C_CHAR", "D_CHAR", "E_CHAR", 
-			"F_CHAR", "H_CHAR", "I_CHAR", "M_CHAR", "N_CHAR", "Q_CHAR", "S_CHAR", 
-			"U_CHAR", "W_CHAR", "X_CHAR", "COMMENTTAG", "COMMACHAR", "DOT", "DOUBLEEQUALCHAR", 
-			"NONNUMERICLITERAL", "NUMERICLITERAL", "IDENTIFIER", "FILENAME", "PSEUDOTEXTIDENTIFIER", 
-			"NEWLINE", "MULTINEWLINE", "COMMENTLINE", "WS", "TEXT", "BOL"
+			"SKIP1", "SKIP2", "SKIP3", "SO", "SS", "SSR", "SSRANGE", "STANDARD", 
+			"STD", "STGOPT", "STRICT", "SUCC", "SUPP", "SUPPRESS", "SYSEIB", "SZ", 
+			"TERM", "TERMINAL", "TEST", "THREAD", "TITLE", "TRIG", "TRUNC", "UE", 
+			"UNREF", "UPPER", "VBREF", "VLR", "VOLATILE", "VS", "VSAMOPENFS", "WD", 
+			"WORD", "XMLPARSE", "XMLSS", "XOPTS", "XP", "XREF", "YEARWINDOW", "YW", 
+			"ZC", "ZD", "ZON", "ZONECHECK", "ZONEDATA", "ZWB", "C_CHAR", "D_CHAR", 
+			"E_CHAR", "F_CHAR", "H_CHAR", "I_CHAR", "M_CHAR", "N_CHAR", "Q_CHAR", 
+			"S_CHAR", "U_CHAR", "W_CHAR", "X_CHAR", "COMMENTTAG", "COMMACHAR", "DOT", 
+			"DOUBLEEQUALCHAR", "EQUALCHAR", "NONNUMERICLITERAL", "NUMERICLITERAL", 
+			"IDENTIFIER", "FILENAME", "PSEUDOTEXTIDENTIFIER", "NEWLINE", "MULTINEWLINE", 
+			"COMMENTLINE", "WS", "TEXT", "BOL", "O_CHAR"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -330,105 +373,105 @@ public class CobolPreprocessorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(80);
+			setState(84);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASSIC_COMMENTLINE) | (1L << ADATA) | (1L << ADV) | (1L << ALIAS) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << COPY) | (1L << CP) | (1L << CPP) | (1L << CPSM) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DECK) | (1L << DIAGTRUNC) | (1L << DIVISION) | (1L << DLI) | (1L << DLL) | (1L << DP) | (1L << DTR) | (1L << DU) | (1L << DUMP) | (1L << DYN) | (1L << DYNAM) | (1L << EDF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EXCI - 64)) | (1L << (EXEC - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HOOK - 64)) | (1L << (ID - 64)) | (1L << (IDENTIFICATION - 64)) | (1L << (IN - 64)) | (1L << (INTDATE - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)) | (1L << (LIN - 64)) | (1L << (LINECOUNT - 64)) | (1L << (LINKAGE - 64)) | (1L << (LIST - 64)) | (1L << (LM - 64)) | (1L << (LONGMIXED - 64)) | (1L << (LONGUPPER - 64)) | (1L << (LPARENCHAR - 64)) | (1L << (LU - 64)) | (1L << (MAP - 64)) | (1L << (MARGINS - 64)) | (1L << (MAX - 64)) | (1L << (MD - 64)) | (1L << (MDECK - 64)) | (1L << (MIG - 64)) | (1L << (MIXED - 64)) | (1L << (NAME - 64)) | (1L << (NAT - 64)) | (1L << (NATIONAL - 64)) | (1L << (NATLANG - 64)) | (1L << (NN - 64)) | (1L << (NO - 64)) | (1L << (NOADATA - 64)) | (1L << (NOADV - 64)) | (1L << (NOALIAS - 64)) | (1L << (NOAWO - 64)) | (1L << (NOBLOCK0 - 64)) | (1L << (NOC - 64)) | (1L << (NOCBLCARD - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)) | (1L << (NOEDF - 128)) | (1L << (NOEJPD - 128)) | (1L << (NOEPILOG - 128)) | (1L << (NOEXIT - 128)) | (1L << (NOEXP - 128)) | (1L << (NOEXPORTALL - 128)) | (1L << (NOF - 128)) | (1L << (NOFASTSRT - 128)) | (1L << (NOFEPI - 128)) | (1L << (NOFLAG - 128)) | (1L << (NOFLAGMIG - 128)) | (1L << (NOFLAGSTD - 128)) | (1L << (NOFSRT - 128)) | (1L << (NOGRAPHIC - 128)) | (1L << (NOHOOK - 128)) | (1L << (NOLENGTH - 128)) | (1L << (NOLIB - 128)) | (1L << (NOLINKAGE - 128)) | (1L << (NOLIST - 128)) | (1L << (NOMAP - 128)) | (1L << (NOMD - 128)) | (1L << (NOMDECK - 128)) | (1L << (NONAME - 128)) | (1L << (NONUM - 128)) | (1L << (NONUMBER - 128)) | (1L << (NOOBJ - 128)) | (1L << (NOOBJECT - 128)) | (1L << (NOOFF - 128)) | (1L << (NOOFFSET - 128)) | (1L << (NOOPSEQUENCE - 128)) | (1L << (NOOPT - 128)) | (1L << (NOOPTIMIZE - 128)) | (1L << (NOOPTIONS - 128)) | (1L << (NOP - 128)) | (1L << (NOPFD - 128)) | (1L << (NOPROLOG - 128)) | (1L << (NORENT - 128)) | (1L << (NOS - 128)) | (1L << (NOSEP - 128)) | (1L << (NOSEPARATE - 128)) | (1L << (NOSEQ - 128)) | (1L << (NOSOURCE - 128)) | (1L << (NOSPIE - 128)) | (1L << (NOSQL - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSSR - 192)) | (1L << (NOSSRANGE - 192)) | (1L << (NOSTDTRUNC - 192)) | (1L << (NOSEQUENCE - 192)) | (1L << (NOTERM - 192)) | (1L << (NOTERMINAL - 192)) | (1L << (NOTEST - 192)) | (1L << (NOTHREAD - 192)) | (1L << (NOTRIG - 192)) | (1L << (NOVBREF - 192)) | (1L << (NOWORD - 192)) | (1L << (NOX - 192)) | (1L << (NOXREF - 192)) | (1L << (NOZWB - 192)) | (1L << (NS - 192)) | (1L << (NSEQ - 192)) | (1L << (NSYMBOL - 192)) | (1L << (NUM - 192)) | (1L << (NUMBER - 192)) | (1L << (NUMPROC - 192)) | (1L << (OBJ - 192)) | (1L << (OBJECT - 192)) | (1L << (OF - 192)) | (1L << (OFF - 192)) | (1L << (OFFSET - 192)) | (1L << (ON - 192)) | (1L << (OP - 192)) | (1L << (OPMARGINS - 192)) | (1L << (OPSEQUENCE - 192)) | (1L << (OPT - 192)) | (1L << (OPTFILE - 192)) | (1L << (OPTIMIZE - 192)) | (1L << (OPTIONS - 192)) | (1L << (OUT - 192)) | (1L << (OUTDD - 192)) | (1L << (PFD - 192)) | (1L << (PPTDBG - 192)) | (1L << (PGMN - 192)) | (1L << (PGMNAME - 192)) | (1L << (PROCESS - 192)) | (1L << (PROLOG - 192)) | (1L << (QUOTE - 192)) | (1L << (RENT - 192)) | (1L << (REPLACE - 192)) | (1L << (REPLACING - 192)) | (1L << (RMODE - 192)) | (1L << (RPARENCHAR - 192)) | (1L << (SEP - 192)) | (1L << (SEPARATE - 192)) | (1L << (SEQ - 192)) | (1L << (SEQUENCE - 192)) | (1L << (SHORT - 192)) | (1L << (SIZE - 192)) | (1L << (SOURCE - 192)) | (1L << (SP - 192)) | (1L << (SPACE - 192)) | (1L << (SPIE - 192)) | (1L << (SQL - 192)) | (1L << (SQLC - 192)) | (1L << (SQLCCSID - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (SKIP1 - 256)) | (1L << (SKIP2 - 256)) | (1L << (SKIP3 - 256)) | (1L << (SS - 256)) | (1L << (SSR - 256)) | (1L << (SSRANGE - 256)) | (1L << (STD - 256)) | (1L << (SYSEIB - 256)) | (1L << (SZ - 256)) | (1L << (TERM - 256)) | (1L << (TERMINAL - 256)) | (1L << (TEST - 256)) | (1L << (THREAD - 256)) | (1L << (TITLE - 256)) | (1L << (TRIG - 256)) | (1L << (TRUNC - 256)) | (1L << (UE - 256)) | (1L << (UPPER - 256)) | (1L << (VBREF - 256)) | (1L << (WD - 256)) | (1L << (XMLPARSE - 256)) | (1L << (XMLSS - 256)) | (1L << (XOPTS - 256)) | (1L << (XREF - 256)) | (1L << (YEARWINDOW - 256)) | (1L << (YW - 256)) | (1L << (ZWB - 256)) | (1L << (C_CHAR - 256)) | (1L << (D_CHAR - 256)) | (1L << (E_CHAR - 256)) | (1L << (F_CHAR - 256)) | (1L << (H_CHAR - 256)) | (1L << (I_CHAR - 256)) | (1L << (M_CHAR - 256)) | (1L << (N_CHAR - 256)) | (1L << (Q_CHAR - 256)) | (1L << (S_CHAR - 256)) | (1L << (U_CHAR - 256)) | (1L << (W_CHAR - 256)) | (1L << (X_CHAR - 256)) | (1L << (COMMACHAR - 256)) | (1L << (DOT - 256)) | (1L << (NONNUMERICLITERAL - 256)) | (1L << (NUMERICLITERAL - 256)) | (1L << (IDENTIFIER - 256)) | (1L << (FILENAME - 256)) | (1L << (PSEUDOTEXTIDENTIFIER - 256)) | (1L << (NEWLINE - 256)) | (1L << (TEXT - 256)))) != 0)) {
+			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << CLASSIC_COMMENTLINE) | (1L << ABD) | (1L << ADATA) | (1L << ADV) | (1L << AFP) | (1L << ALIAS) | (1L << ALPHNUM) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARCH) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << COPY) | (1L << COPYLOC) | (1L << COPYRIGHT) | (1L << CP) | (1L << CPLC) | (1L << CPP) | (1L << CPSM) | (1L << CPYR) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DEC) | (1L << DECK) | (1L << DEFINE) | (1L << DEF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (DIAGTRUNC - 64)) | (1L << (DISPSIGN - 64)) | (1L << (DIVISION - 64)) | (1L << (DLI - 64)) | (1L << (DLL - 64)) | (1L << (DP - 64)) | (1L << (DS - 64)) | (1L << (DSN - 64)) | (1L << (DSNAME - 64)) | (1L << (DTR - 64)) | (1L << (DU - 64)) | (1L << (DUMP - 64)) | (1L << (DWARF - 64)) | (1L << (DYN - 64)) | (1L << (DYNAM - 64)) | (1L << (EDF - 64)) | (1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENDP - 64)) | (1L << (ENDPERIOD - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EVENP - 64)) | (1L << (EVENPACK - 64)) | (1L << (EXCI - 64)) | (1L << (EXEC - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HEX - 64)) | (1L << (HGPR - 64)) | (1L << (HOOK - 64)) | (1L << (IC - 64)) | (1L << (ID - 64)) | (1L << (IDENTIFICATION - 64)) | (1L << (IN - 64)) | (1L << (INITCHECK - 64)) | (1L << (INTDATE - 64)) | (1L << (INITIAL - 64)) | (1L << (INLINE - 64)) | (1L << (INL - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LAXPERF - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (LIN - 128)) | (1L << (LINECOUNT - 128)) | (1L << (LINKAGE - 128)) | (1L << (LIST - 128)) | (1L << (LM - 128)) | (1L << (LONGMIXED - 128)) | (1L << (LONGUPPER - 128)) | (1L << (LP - 128)) | (1L << (LPARENCHAR - 128)) | (1L << (LU - 128)) | (1L << (LXPRF - 128)) | (1L << (MAP - 128)) | (1L << (MARGINS - 128)) | (1L << (MAX - 128)) | (1L << (MD - 128)) | (1L << (MDECK - 128)) | (1L << (MIG - 128)) | (1L << (MIXED - 128)) | (1L << (MAXPCF - 128)) | (1L << (NAME - 128)) | (1L << (NAT - 128)) | (1L << (NATIONAL - 128)) | (1L << (NATLANG - 128)) | (1L << (NC - 128)) | (1L << (NN - 128)) | (1L << (NO - 128)) | (1L << (NOADATA - 128)) | (1L << (NOADV - 128)) | (1L << (NOALIAS - 128)) | (1L << (NOALPHNUM - 128)) | (1L << (NOAWO - 128)) | (1L << (NOBIN - 128)) | (1L << (NOBLOCK0 - 128)) | (1L << (NOC - 128)) | (1L << (NOCBLCARD - 128)) | (1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCOPYLOC - 128)) | (1L << (NOCOPYRIGHT - 128)) | (1L << (NOCPLC - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCPYR - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODEFINE - 128)) | (1L << (NODEF - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODSNAME - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODWARF - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOEDF - 192)) | (1L << (NOEJPD - 192)) | (1L << (NOENDPERIOD - 192)) | (1L << (NOEPILOG - 192)) | (1L << (NOEVENPACK - 192)) | (1L << (NOEXIT - 192)) | (1L << (NOEXP - 192)) | (1L << (NOEXPORTALL - 192)) | (1L << (NOF - 192)) | (1L << (NOFASTSRT - 192)) | (1L << (NOFEPI - 192)) | (1L << (NOFLAG - 192)) | (1L << (NOFLAGMIG - 192)) | (1L << (NOFLAGSTD - 192)) | (1L << (NOFSRT - 192)) | (1L << (NOGRAPHIC - 192)) | (1L << (NOHOOK - 192)) | (1L << (NOINITCHECK - 192)) | (1L << (NOIC - 192)) | (1L << (NOINITIAL - 192)) | (1L << (NOINLINE - 192)) | (1L << (NOINL - 192)) | (1L << (NOLAXPERF - 192)) | (1L << (NOLENGTH - 192)) | (1L << (NOLIB - 192)) | (1L << (NOLINKAGE - 192)) | (1L << (NOLIST - 192)) | (1L << (NOMAP - 192)) | (1L << (NOMD - 192)) | (1L << (NOMDECK - 192)) | (1L << (NONAME - 192)) | (1L << (NONUM - 192)) | (1L << (NONUMBER - 192)) | (1L << (NOOBJ - 192)) | (1L << (NOOBJECT - 192)) | (1L << (NOOMITODOMIN - 192)) | (1L << (NOOFF - 192)) | (1L << (NOOFFSET - 192)) | (1L << (NOOPSEQUENCE - 192)) | (1L << (NOOPT - 192)) | (1L << (NOOPTIMIZE - 192)) | (1L << (NOOPTIONS - 192)) | (1L << (NOP - 192)) | (1L << (NOPAC - 192)) | (1L << (NOPARMCHECK - 192)) | (1L << (NOPFD - 192)) | (1L << (NOPROLOG - 192)) | (1L << (NORENT - 192)) | (1L << (NORULES - 192)) | (1L << (NOS - 192)) | (1L << (NOSEP - 192)) | (1L << (NOSEPARATE - 192)) | (1L << (NOSEQ - 192)) | (1L << (NOSERVICE - 192)) | (1L << (NOSLACKBYTES - 192)) | (1L << (NOSOURCE - 192)) | (1L << (NOSPIE - 192)) | (1L << (NOSQL - 192)) | (1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSQLIMS - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (NOSSR - 256)) | (1L << (NOSSRANGE - 256)) | (1L << (NOSTDTRUNC - 256)) | (1L << (NOSEQUENCE - 256)) | (1L << (NOSTGOPT - 256)) | (1L << (NOSUPP - 256)) | (1L << (NOSUPPRESS - 256)) | (1L << (NOTERM - 256)) | (1L << (NOTERMINAL - 256)) | (1L << (NOTEST - 256)) | (1L << (NOTHREAD - 256)) | (1L << (NOTRIG - 256)) | (1L << (NOUNREFALL - 256)) | (1L << (NOUNREFSOURCE - 256)) | (1L << (NOVBREF - 256)) | (1L << (NOVOLATILE - 256)) | (1L << (NOWORD - 256)) | (1L << (NOX - 256)) | (1L << (NOXREF - 256)) | (1L << (NOZC - 256)) | (1L << (NOZON - 256)) | (1L << (NOZONECHECK - 256)) | (1L << (NOZWB - 256)) | (1L << (NS - 256)) | (1L << (NSEQ - 256)) | (1L << (NSYMBOL - 256)) | (1L << (NUM - 256)) | (1L << (NUMBER - 256)) | (1L << (NUMCHECK - 256)) | (1L << (NUMPROC - 256)) | (1L << (OBJ - 256)) | (1L << (OBJECT - 256)) | (1L << (OF - 256)) | (1L << (OFF - 256)) | (1L << (OFFSET - 256)) | (1L << (ON - 256)) | (1L << (OMITODOMIN - 256)) | (1L << (OOM - 256)) | (1L << (OP - 256)) | (1L << (OPMARGINS - 256)) | (1L << (OPSEQUENCE - 256)) | (1L << (OPT - 256)) | (1L << (OPTFILE - 256)) | (1L << (OPTIMIZE - 256)) | (1L << (OPTIONS - 256)) | (1L << (OUT - 256)) | (1L << (OUTDD - 256)) | (1L << (PARMCHECK - 256)) | (1L << (PATH - 256)) | (1L << (PFD - 256)) | (1L << (PPTDBG - 256)) | (1L << (PGMN - 256)) | (1L << (PGMNAME - 256)) | (1L << (PROCESS - 256)) | (1L << (PROLOG - 256)) | (1L << (QUALIFY - 256)) | (1L << (QUA - 256)) | (1L << (QUOTE - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (RENT - 320)) | (1L << (REPLACE - 320)) | (1L << (REPLACING - 320)) | (1L << (RMODE - 320)) | (1L << (RPARENCHAR - 320)) | (1L << (RULES - 320)) | (1L << (SEP - 320)) | (1L << (SEPARATE - 320)) | (1L << (SEQ - 320)) | (1L << (SEQUENCE - 320)) | (1L << (SERVICE - 320)) | (1L << (SHORT - 320)) | (1L << (SIZE - 320)) | (1L << (SLACKBYTES - 320)) | (1L << (SLCKB - 320)) | (1L << (SOURCE - 320)) | (1L << (SP - 320)) | (1L << (SPACE - 320)) | (1L << (SPIE - 320)) | (1L << (SQL - 320)) | (1L << (SQLC - 320)) | (1L << (SQLCCSID - 320)) | (1L << (SQLIMS - 320)) | (1L << (SKIP1 - 320)) | (1L << (SKIP2 - 320)) | (1L << (SKIP3 - 320)) | (1L << (SS - 320)) | (1L << (SSR - 320)) | (1L << (SSRANGE - 320)) | (1L << (STD - 320)) | (1L << (STGOPT - 320)) | (1L << (SUCC - 320)) | (1L << (SUPP - 320)) | (1L << (SUPPRESS - 320)) | (1L << (SYSEIB - 320)) | (1L << (SZ - 320)) | (1L << (TERM - 320)) | (1L << (TERMINAL - 320)) | (1L << (TEST - 320)) | (1L << (THREAD - 320)) | (1L << (TITLE - 320)) | (1L << (TRIG - 320)) | (1L << (TRUNC - 320)) | (1L << (UE - 320)) | (1L << (UNREF - 320)) | (1L << (UPPER - 320)) | (1L << (VBREF - 320)) | (1L << (VOLATILE - 320)) | (1L << (VS - 320)) | (1L << (VSAMOPENFS - 320)) | (1L << (WD - 320)) | (1L << (XMLPARSE - 320)) | (1L << (XMLSS - 320)) | (1L << (XOPTS - 320)) | (1L << (XREF - 320)) | (1L << (YEARWINDOW - 320)) | (1L << (YW - 320)))) != 0) || ((((_la - 384)) & ~0x3f) == 0 && ((1L << (_la - 384)) & ((1L << (ZC - 384)) | (1L << (ZD - 384)) | (1L << (ZON - 384)) | (1L << (ZONECHECK - 384)) | (1L << (ZONEDATA - 384)) | (1L << (ZWB - 384)) | (1L << (C_CHAR - 384)) | (1L << (D_CHAR - 384)) | (1L << (E_CHAR - 384)) | (1L << (F_CHAR - 384)) | (1L << (H_CHAR - 384)) | (1L << (I_CHAR - 384)) | (1L << (M_CHAR - 384)) | (1L << (N_CHAR - 384)) | (1L << (Q_CHAR - 384)) | (1L << (S_CHAR - 384)) | (1L << (U_CHAR - 384)) | (1L << (W_CHAR - 384)) | (1L << (X_CHAR - 384)) | (1L << (COMMACHAR - 384)) | (1L << (DOT - 384)) | (1L << (NONNUMERICLITERAL - 384)) | (1L << (NUMERICLITERAL - 384)) | (1L << (IDENTIFIER - 384)) | (1L << (FILENAME - 384)) | (1L << (PSEUDOTEXTIDENTIFIER - 384)) | (1L << (NEWLINE - 384)) | (1L << (TEXT - 384)))) != 0)) {
 				{
-				setState(78);
+				setState(82);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,0,_ctx) ) {
 				case 1:
 					{
-					setState(64);
+					setState(68);
 					identificationDivisionTag();
 					}
 					break;
 				case 2:
 					{
-					setState(65);
+					setState(69);
 					compilerOptions();
 					}
 					break;
 				case 3:
 					{
-					setState(66);
+					setState(70);
 					classicCommentEntry();
 					}
 					break;
 				case 4:
 					{
-					setState(67);
+					setState(71);
 					copyStatement();
 					}
 					break;
 				case 5:
 					{
-					setState(68);
+					setState(72);
 					execCicsStatement();
 					}
 					break;
 				case 6:
 					{
-					setState(69);
+					setState(73);
 					execSqlStatement();
 					}
 					break;
 				case 7:
 					{
-					setState(70);
+					setState(74);
 					execSqlImsStatement();
 					}
 					break;
 				case 8:
 					{
-					setState(71);
+					setState(75);
 					replaceOffStatement();
 					}
 					break;
 				case 9:
 					{
-					setState(72);
+					setState(76);
 					replaceArea();
 					}
 					break;
 				case 10:
 					{
-					setState(73);
+					setState(77);
 					ejectStatement();
 					}
 					break;
 				case 11:
 					{
-					setState(74);
+					setState(78);
 					skipStatement();
 					}
 					break;
 				case 12:
 					{
-					setState(75);
+					setState(79);
 					titleStatement();
 					}
 					break;
 				case 13:
 					{
-					setState(76);
+					setState(80);
 					charDataLine();
 					}
 					break;
 				case 14:
 					{
-					setState(77);
+					setState(81);
 					match(NEWLINE);
 					}
 					break;
 				}
 				}
-				setState(82);
+				setState(86);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(83);
+			setState(87);
 			match(EOF);
 			}
 		}
@@ -473,7 +516,7 @@ public class CobolPreprocessorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(89);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==IDENTIFICATION) ) {
 			_errHandler.recoverInline(this);
@@ -483,7 +526,7 @@ public class CobolPreprocessorParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(86);
+			setState(90);
 			match(DIVISION);
 			}
 		}
@@ -544,7 +587,7 @@ public class CobolPreprocessorParser extends Parser {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(88);
+			setState(92);
 			_la = _input.LA(1);
 			if ( !(_la==CBL || _la==PROCESS) ) {
 			_errHandler.recoverInline(this);
@@ -554,20 +597,22 @@ public class CobolPreprocessorParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(94); 
+			setState(98); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					setState(94);
+					setState(98);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case ADATA:
 					case ADV:
+					case AFP:
 					case APOST:
 					case AR:
+					case ARCH:
 					case ARITH:
 					case AWO:
 					case BLOCK0:
@@ -579,9 +624,13 @@ public class CobolPreprocessorParser extends Parser {
 					case COBOL3:
 					case CODEPAGE:
 					case COMPILE:
+					case COPYLOC:
+					case COPYRIGHT:
 					case CP:
+					case CPLC:
 					case CPP:
 					case CPSM:
+					case CPYR:
 					case CURR:
 					case CURRENCY:
 					case DATA:
@@ -589,9 +638,13 @@ public class CobolPreprocessorParser extends Parser {
 					case DBCS:
 					case DEBUG:
 					case DECK:
+					case DEFINE:
+					case DEF:
 					case DIAGTRUNC:
+					case DISPSIGN:
 					case DLL:
 					case DP:
+					case DS:
 					case DTR:
 					case DU:
 					case DUMP:
@@ -609,7 +662,13 @@ public class CobolPreprocessorParser extends Parser {
 					case FSRT:
 					case GDS:
 					case GRAPHIC:
+					case HGPR:
+					case IC:
+					case INITCHECK:
 					case INTDATE:
+					case INITIAL:
+					case INLINE:
+					case INL:
 					case LANG:
 					case LANGUAGE:
 					case LC:
@@ -620,12 +679,15 @@ public class CobolPreprocessorParser extends Parser {
 					case LINECOUNT:
 					case LINKAGE:
 					case LIST:
+					case LP:
 					case MAP:
 					case MARGINS:
 					case MD:
 					case MDECK:
+					case MAXPCF:
 					case NAME:
 					case NATLANG:
+					case NC:
 					case NOADATA:
 					case NOADV:
 					case NOAWO:
@@ -635,7 +697,11 @@ public class CobolPreprocessorParser extends Parser {
 					case NOCICS:
 					case NOCMPR2:
 					case NOCOMPILE:
+					case NOCOPYLOC:
+					case NOCOPYRIGHT:
+					case NOCPLC:
 					case NOCPSM:
+					case NOCPYR:
 					case NOCURR:
 					case NOCURRENCY:
 					case NOD:
@@ -644,6 +710,8 @@ public class CobolPreprocessorParser extends Parser {
 					case NODE:
 					case NODEBUG:
 					case NODECK:
+					case NODEFINE:
+					case NODEF:
 					case NODIAGTRUNC:
 					case NODLL:
 					case NODU:
@@ -665,6 +733,11 @@ public class CobolPreprocessorParser extends Parser {
 					case NOFLAGSTD:
 					case NOFSRT:
 					case NOGRAPHIC:
+					case NOINITCHECK:
+					case NOIC:
+					case NOINITIAL:
+					case NOINLINE:
+					case NOINL:
 					case NOLENGTH:
 					case NOLIB:
 					case NOLINKAGE:
@@ -684,19 +757,27 @@ public class CobolPreprocessorParser extends Parser {
 					case NOOPTIMIZE:
 					case NOOPTIONS:
 					case NOP:
+					case NOPARMCHECK:
 					case NOPROLOG:
 					case NORENT:
+					case NORULES:
 					case NOS:
 					case NOSEQ:
+					case NOSERV:
+					case NOSERVICE:
 					case NOSOURCE:
 					case NOSPIE:
 					case NOSQL:
 					case NOSQLC:
 					case NOSQLCCSID:
+					case NOSQLIMS:
 					case NOSSR:
 					case NOSSRANGE:
 					case NOSTDTRUNC:
 					case NOSEQUENCE:
+					case NOSTGOPT:
+					case NOSUPP:
+					case NOSUPPRESS:
 					case NOTERM:
 					case NOTERMINAL:
 					case NOTEST:
@@ -706,12 +787,15 @@ public class CobolPreprocessorParser extends Parser {
 					case NOWORD:
 					case NOX:
 					case NOXREF:
+					case NOZC:
+					case NOZONECHECK:
 					case NOZWB:
 					case NS:
 					case NSEQ:
 					case NSYMBOL:
 					case NUM:
 					case NUMBER:
+					case NUMCHECK:
 					case NUMPROC:
 					case OBJ:
 					case OBJECT:
@@ -726,14 +810,21 @@ public class CobolPreprocessorParser extends Parser {
 					case OPTIONS:
 					case OUT:
 					case OUTDD:
+					case PARMCHECK:
+					case PC:
 					case PGMN:
 					case PGMNAME:
 					case PROLOG:
+					case QUALIFY:
+					case QUA:
 					case QUOTE:
 					case RENT:
 					case RMODE:
+					case RULES:
 					case SEQ:
 					case SEQUENCE:
+					case SERV:
+					case SERVICE:
 					case SIZE:
 					case SOURCE:
 					case SP:
@@ -742,8 +833,12 @@ public class CobolPreprocessorParser extends Parser {
 					case SQL:
 					case SQLC:
 					case SQLCCSID:
+					case SQLIMS:
 					case SSR:
 					case SSRANGE:
+					case STGOPT:
+					case SUPP:
+					case SUPPRESS:
 					case SYSEIB:
 					case SZ:
 					case TERM:
@@ -752,6 +847,9 @@ public class CobolPreprocessorParser extends Parser {
 					case THREAD:
 					case TRUNC:
 					case VBREF:
+					case VLR:
+					case VS:
+					case VSAMOPENFS:
 					case WD:
 					case WORD:
 					case XMLPARSE:
@@ -759,6 +857,10 @@ public class CobolPreprocessorParser extends Parser {
 					case XREF:
 					case YEARWINDOW:
 					case YW:
+					case ZC:
+					case ZD:
+					case ZONECHECK:
+					case ZONEDATA:
 					case ZWB:
 					case C_CHAR:
 					case D_CHAR:
@@ -768,23 +870,23 @@ public class CobolPreprocessorParser extends Parser {
 					case X_CHAR:
 					case COMMACHAR:
 						{
-						setState(90);
+						setState(94);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						if (_la==COMMACHAR) {
 							{
-							setState(89);
+							setState(93);
 							match(COMMACHAR);
 							}
 						}
 
-						setState(92);
+						setState(96);
 						compilerOption();
 						}
 						break;
 					case XOPTS:
 						{
-						setState(93);
+						setState(97);
 						compilerXOpts();
 						}
 						break;
@@ -796,7 +898,7 @@ public class CobolPreprocessorParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(96); 
+				setState(100); 
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,4,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
@@ -853,37 +955,37 @@ public class CobolPreprocessorParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(98);
+			setState(102);
 			match(XOPTS);
-			setState(99);
+			setState(103);
 			match(LPARENCHAR);
-			setState(100);
+			setState(104);
 			compilerOption();
-			setState(107);
+			setState(111);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ADATA) | (1L << ADV) | (1L << APOST) | (1L << AR) | (1L << ARITH) | (1L << AWO) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << CBLCARD) | (1L << CICS) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPILE) | (1L << CP) | (1L << CPP) | (1L << CPSM) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DEBUG) | (1L << DECK) | (1L << DIAGTRUNC) | (1L << DLL) | (1L << DP) | (1L << DTR) | (1L << DU) | (1L << DUMP) | (1L << DYN) | (1L << DYNAM) | (1L << EDF))) != 0) || ((((_la - 69)) & ~0x3f) == 0 && ((1L << (_la - 69)) & ((1L << (EPILOG - 69)) | (1L << (EXIT - 69)) | (1L << (EXP - 69)) | (1L << (EXPORTALL - 69)) | (1L << (FASTSRT - 69)) | (1L << (FEPI - 69)) | (1L << (FLAG - 69)) | (1L << (FLAGSTD - 69)) | (1L << (FSRT - 69)) | (1L << (GDS - 69)) | (1L << (GRAPHIC - 69)) | (1L << (INTDATE - 69)) | (1L << (LANG - 69)) | (1L << (LANGUAGE - 69)) | (1L << (LC - 69)) | (1L << (LEASM - 69)) | (1L << (LENGTH - 69)) | (1L << (LIB - 69)) | (1L << (LIN - 69)) | (1L << (LINECOUNT - 69)) | (1L << (LINKAGE - 69)) | (1L << (LIST - 69)) | (1L << (MAP - 69)) | (1L << (MARGINS - 69)) | (1L << (MD - 69)) | (1L << (MDECK - 69)) | (1L << (NAME - 69)) | (1L << (NATLANG - 69)) | (1L << (NOADATA - 69)) | (1L << (NOADV - 69)) | (1L << (NOAWO - 69)) | (1L << (NOBLOCK0 - 69)) | (1L << (NOC - 69)) | (1L << (NOCBLCARD - 69)) | (1L << (NOCICS - 69)) | (1L << (NOCMPR2 - 69)) | (1L << (NOCOMPILE - 69)) | (1L << (NOCPSM - 69)) | (1L << (NOCURR - 69)))) != 0) || ((((_la - 133)) & ~0x3f) == 0 && ((1L << (_la - 133)) & ((1L << (NOCURRENCY - 133)) | (1L << (NOD - 133)) | (1L << (NODATEPROC - 133)) | (1L << (NODBCS - 133)) | (1L << (NODE - 133)) | (1L << (NODEBUG - 133)) | (1L << (NODECK - 133)) | (1L << (NODIAGTRUNC - 133)) | (1L << (NODLL - 133)) | (1L << (NODU - 133)) | (1L << (NODUMP - 133)) | (1L << (NODP - 133)) | (1L << (NODTR - 133)) | (1L << (NODYN - 133)) | (1L << (NODYNAM - 133)) | (1L << (NOEDF - 133)) | (1L << (NOEPILOG - 133)) | (1L << (NOEXIT - 133)) | (1L << (NOEXP - 133)) | (1L << (NOEXPORTALL - 133)) | (1L << (NOF - 133)) | (1L << (NOFASTSRT - 133)) | (1L << (NOFEPI - 133)) | (1L << (NOFLAG - 133)) | (1L << (NOFLAGMIG - 133)) | (1L << (NOFLAGSTD - 133)) | (1L << (NOFSRT - 133)) | (1L << (NOGRAPHIC - 133)) | (1L << (NOLENGTH - 133)) | (1L << (NOLIB - 133)) | (1L << (NOLINKAGE - 133)) | (1L << (NOLIST - 133)) | (1L << (NOMAP - 133)) | (1L << (NOMD - 133)) | (1L << (NOMDECK - 133)) | (1L << (NONAME - 133)) | (1L << (NONUM - 133)) | (1L << (NONUMBER - 133)) | (1L << (NOOBJ - 133)) | (1L << (NOOBJECT - 133)) | (1L << (NOOFF - 133)) | (1L << (NOOFFSET - 133)) | (1L << (NOOPSEQUENCE - 133)) | (1L << (NOOPT - 133)) | (1L << (NOOPTIMIZE - 133)) | (1L << (NOOPTIONS - 133)) | (1L << (NOP - 133)) | (1L << (NOPROLOG - 133)) | (1L << (NORENT - 133)) | (1L << (NOS - 133)) | (1L << (NOSEQ - 133)) | (1L << (NOSOURCE - 133)) | (1L << (NOSPIE - 133)) | (1L << (NOSQL - 133)) | (1L << (NOSQLC - 133)) | (1L << (NOSQLCCSID - 133)) | (1L << (NOSSR - 133)) | (1L << (NOSSRANGE - 133)) | (1L << (NOSTDTRUNC - 133)))) != 0) || ((((_la - 197)) & ~0x3f) == 0 && ((1L << (_la - 197)) & ((1L << (NOSEQUENCE - 197)) | (1L << (NOTERM - 197)) | (1L << (NOTERMINAL - 197)) | (1L << (NOTEST - 197)) | (1L << (NOTHREAD - 197)) | (1L << (NOVBREF - 197)) | (1L << (NOWD - 197)) | (1L << (NOWORD - 197)) | (1L << (NOX - 197)) | (1L << (NOXREF - 197)) | (1L << (NOZWB - 197)) | (1L << (NS - 197)) | (1L << (NSEQ - 197)) | (1L << (NSYMBOL - 197)) | (1L << (NUM - 197)) | (1L << (NUMBER - 197)) | (1L << (NUMPROC - 197)) | (1L << (OBJ - 197)) | (1L << (OBJECT - 197)) | (1L << (OFF - 197)) | (1L << (OFFSET - 197)) | (1L << (OP - 197)) | (1L << (OPMARGINS - 197)) | (1L << (OPSEQUENCE - 197)) | (1L << (OPT - 197)) | (1L << (OPTFILE - 197)) | (1L << (OPTIMIZE - 197)) | (1L << (OPTIONS - 197)) | (1L << (OUT - 197)) | (1L << (OUTDD - 197)) | (1L << (PGMN - 197)) | (1L << (PGMNAME - 197)) | (1L << (PROLOG - 197)) | (1L << (QUOTE - 197)) | (1L << (RENT - 197)) | (1L << (RMODE - 197)) | (1L << (SEQ - 197)) | (1L << (SEQUENCE - 197)) | (1L << (SIZE - 197)) | (1L << (SOURCE - 197)) | (1L << (SP - 197)) | (1L << (SPACE - 197)) | (1L << (SPIE - 197)) | (1L << (SQL - 197)) | (1L << (SQLC - 197)) | (1L << (SQLCCSID - 197)) | (1L << (SSR - 197)))) != 0) || ((((_la - 261)) & ~0x3f) == 0 && ((1L << (_la - 261)) & ((1L << (SSRANGE - 261)) | (1L << (SYSEIB - 261)) | (1L << (SZ - 261)) | (1L << (TERM - 261)) | (1L << (TERMINAL - 261)) | (1L << (TEST - 261)) | (1L << (THREAD - 261)) | (1L << (TRUNC - 261)) | (1L << (VBREF - 261)) | (1L << (WD - 261)) | (1L << (WORD - 261)) | (1L << (XMLPARSE - 261)) | (1L << (XP - 261)) | (1L << (XREF - 261)) | (1L << (YEARWINDOW - 261)) | (1L << (YW - 261)) | (1L << (ZWB - 261)) | (1L << (C_CHAR - 261)) | (1L << (D_CHAR - 261)) | (1L << (F_CHAR - 261)) | (1L << (Q_CHAR - 261)) | (1L << (S_CHAR - 261)) | (1L << (X_CHAR - 261)) | (1L << (COMMACHAR - 261)))) != 0)) {
+			while (((((_la - 17)) & ~0x3f) == 0 && ((1L << (_la - 17)) & ((1L << (ADATA - 17)) | (1L << (ADV - 17)) | (1L << (AFP - 17)) | (1L << (APOST - 17)) | (1L << (AR - 17)) | (1L << (ARCH - 17)) | (1L << (ARITH - 17)) | (1L << (AWO - 17)) | (1L << (BLOCK0 - 17)) | (1L << (BUF - 17)) | (1L << (BUFSIZE - 17)) | (1L << (CBLCARD - 17)) | (1L << (CICS - 17)) | (1L << (COBOL2 - 17)) | (1L << (COBOL3 - 17)) | (1L << (CODEPAGE - 17)) | (1L << (COMPILE - 17)) | (1L << (COPYLOC - 17)) | (1L << (COPYRIGHT - 17)) | (1L << (CP - 17)) | (1L << (CPLC - 17)) | (1L << (CPP - 17)) | (1L << (CPSM - 17)) | (1L << (CPYR - 17)) | (1L << (CURR - 17)) | (1L << (CURRENCY - 17)) | (1L << (DATA - 17)) | (1L << (DATEPROC - 17)) | (1L << (DBCS - 17)) | (1L << (DEBUG - 17)) | (1L << (DECK - 17)) | (1L << (DEFINE - 17)) | (1L << (DEF - 17)) | (1L << (DIAGTRUNC - 17)) | (1L << (DISPSIGN - 17)) | (1L << (DLL - 17)) | (1L << (DP - 17)) | (1L << (DS - 17)) | (1L << (DTR - 17)) | (1L << (DU - 17)) | (1L << (DUMP - 17)) | (1L << (DYN - 17)) | (1L << (DYNAM - 17)) | (1L << (EDF - 17)))) != 0) || ((((_la - 87)) & ~0x3f) == 0 && ((1L << (_la - 87)) & ((1L << (EPILOG - 87)) | (1L << (EXIT - 87)) | (1L << (EXP - 87)) | (1L << (EXPORTALL - 87)) | (1L << (FASTSRT - 87)) | (1L << (FEPI - 87)) | (1L << (FLAG - 87)) | (1L << (FLAGSTD - 87)) | (1L << (FSRT - 87)) | (1L << (GDS - 87)) | (1L << (GRAPHIC - 87)) | (1L << (HGPR - 87)) | (1L << (IC - 87)) | (1L << (INITCHECK - 87)) | (1L << (INTDATE - 87)) | (1L << (INITIAL - 87)) | (1L << (INLINE - 87)) | (1L << (INL - 87)) | (1L << (LANG - 87)) | (1L << (LANGUAGE - 87)) | (1L << (LC - 87)) | (1L << (LEASM - 87)) | (1L << (LENGTH - 87)) | (1L << (LIB - 87)) | (1L << (LIN - 87)) | (1L << (LINECOUNT - 87)) | (1L << (LINKAGE - 87)) | (1L << (LIST - 87)) | (1L << (LP - 87)) | (1L << (MAP - 87)) | (1L << (MARGINS - 87)) | (1L << (MD - 87)) | (1L << (MDECK - 87)) | (1L << (MAXPCF - 87)) | (1L << (NAME - 87)))) != 0) || ((((_la - 151)) & ~0x3f) == 0 && ((1L << (_la - 151)) & ((1L << (NATLANG - 151)) | (1L << (NC - 151)) | (1L << (NOADATA - 151)) | (1L << (NOADV - 151)) | (1L << (NOAWO - 151)) | (1L << (NOBLOCK0 - 151)) | (1L << (NOC - 151)) | (1L << (NOCBLCARD - 151)) | (1L << (NOCICS - 151)) | (1L << (NOCMPR2 - 151)) | (1L << (NOCOMPILE - 151)) | (1L << (NOCOPYLOC - 151)) | (1L << (NOCOPYRIGHT - 151)) | (1L << (NOCPLC - 151)) | (1L << (NOCPSM - 151)) | (1L << (NOCPYR - 151)) | (1L << (NOCURR - 151)) | (1L << (NOCURRENCY - 151)) | (1L << (NOD - 151)) | (1L << (NODATEPROC - 151)) | (1L << (NODBCS - 151)) | (1L << (NODE - 151)) | (1L << (NODEBUG - 151)) | (1L << (NODECK - 151)) | (1L << (NODEFINE - 151)) | (1L << (NODEF - 151)) | (1L << (NODIAGTRUNC - 151)) | (1L << (NODLL - 151)) | (1L << (NODU - 151)) | (1L << (NODUMP - 151)) | (1L << (NODP - 151)) | (1L << (NODTR - 151)) | (1L << (NODYN - 151)) | (1L << (NODYNAM - 151)) | (1L << (NOEDF - 151)) | (1L << (NOEPILOG - 151)) | (1L << (NOEXIT - 151)) | (1L << (NOEXP - 151)) | (1L << (NOEXPORTALL - 151)) | (1L << (NOF - 151)) | (1L << (NOFASTSRT - 151)) | (1L << (NOFEPI - 151)) | (1L << (NOFLAG - 151)) | (1L << (NOFLAGMIG - 151)) | (1L << (NOFLAGSTD - 151)) | (1L << (NOFSRT - 151)) | (1L << (NOGRAPHIC - 151)) | (1L << (NOINITCHECK - 151)) | (1L << (NOIC - 151)) | (1L << (NOINITIAL - 151)) | (1L << (NOINLINE - 151)) | (1L << (NOINL - 151)))) != 0) || ((((_la - 215)) & ~0x3f) == 0 && ((1L << (_la - 215)) & ((1L << (NOLENGTH - 215)) | (1L << (NOLIB - 215)) | (1L << (NOLINKAGE - 215)) | (1L << (NOLIST - 215)) | (1L << (NOMAP - 215)) | (1L << (NOMD - 215)) | (1L << (NOMDECK - 215)) | (1L << (NONAME - 215)) | (1L << (NONUM - 215)) | (1L << (NONUMBER - 215)) | (1L << (NOOBJ - 215)) | (1L << (NOOBJECT - 215)) | (1L << (NOOFF - 215)) | (1L << (NOOFFSET - 215)) | (1L << (NOOPSEQUENCE - 215)) | (1L << (NOOPT - 215)) | (1L << (NOOPTIMIZE - 215)) | (1L << (NOOPTIONS - 215)) | (1L << (NOP - 215)) | (1L << (NOPARMCHECK - 215)) | (1L << (NOPROLOG - 215)) | (1L << (NORENT - 215)) | (1L << (NORULES - 215)) | (1L << (NOS - 215)) | (1L << (NOSEQ - 215)) | (1L << (NOSERV - 215)) | (1L << (NOSERVICE - 215)) | (1L << (NOSOURCE - 215)) | (1L << (NOSPIE - 215)) | (1L << (NOSQL - 215)) | (1L << (NOSQLC - 215)) | (1L << (NOSQLCCSID - 215)) | (1L << (NOSQLIMS - 215)) | (1L << (NOSSR - 215)) | (1L << (NOSSRANGE - 215)) | (1L << (NOSTDTRUNC - 215)) | (1L << (NOSEQUENCE - 215)) | (1L << (NOSTGOPT - 215)) | (1L << (NOSUPP - 215)) | (1L << (NOSUPPRESS - 215)) | (1L << (NOTERM - 215)) | (1L << (NOTERMINAL - 215)) | (1L << (NOTEST - 215)) | (1L << (NOTHREAD - 215)) | (1L << (NOVBREF - 215)) | (1L << (NOWD - 215)) | (1L << (NOWORD - 215)) | (1L << (NOX - 215)) | (1L << (NOXREF - 215)) | (1L << (NOZC - 215)))) != 0) || ((((_la - 280)) & ~0x3f) == 0 && ((1L << (_la - 280)) & ((1L << (NOZONECHECK - 280)) | (1L << (NOZWB - 280)) | (1L << (NS - 280)) | (1L << (NSEQ - 280)) | (1L << (NSYMBOL - 280)) | (1L << (NUM - 280)) | (1L << (NUMBER - 280)) | (1L << (NUMCHECK - 280)) | (1L << (NUMPROC - 280)) | (1L << (OBJ - 280)) | (1L << (OBJECT - 280)) | (1L << (OFF - 280)) | (1L << (OFFSET - 280)) | (1L << (OP - 280)) | (1L << (OPMARGINS - 280)) | (1L << (OPSEQUENCE - 280)) | (1L << (OPT - 280)) | (1L << (OPTFILE - 280)) | (1L << (OPTIMIZE - 280)) | (1L << (OPTIONS - 280)) | (1L << (OUT - 280)) | (1L << (OUTDD - 280)) | (1L << (PARMCHECK - 280)) | (1L << (PC - 280)) | (1L << (PGMN - 280)) | (1L << (PGMNAME - 280)) | (1L << (PROLOG - 280)) | (1L << (QUALIFY - 280)) | (1L << (QUA - 280)) | (1L << (QUOTE - 280)) | (1L << (RENT - 280)) | (1L << (RMODE - 280)) | (1L << (RULES - 280)) | (1L << (SEQ - 280)) | (1L << (SEQUENCE - 280)) | (1L << (SERV - 280)) | (1L << (SERVICE - 280)) | (1L << (SIZE - 280)) | (1L << (SOURCE - 280)) | (1L << (SP - 280)) | (1L << (SPACE - 280)) | (1L << (SPIE - 280)) | (1L << (SQL - 280)) | (1L << (SQLC - 280)) | (1L << (SQLCCSID - 280)) | (1L << (SQLIMS - 280)))) != 0) || ((((_la - 349)) & ~0x3f) == 0 && ((1L << (_la - 349)) & ((1L << (SSR - 349)) | (1L << (SSRANGE - 349)) | (1L << (STGOPT - 349)) | (1L << (SUPP - 349)) | (1L << (SUPPRESS - 349)) | (1L << (SYSEIB - 349)) | (1L << (SZ - 349)) | (1L << (TERM - 349)) | (1L << (TERMINAL - 349)) | (1L << (TEST - 349)) | (1L << (THREAD - 349)) | (1L << (TRUNC - 349)) | (1L << (VBREF - 349)) | (1L << (VLR - 349)) | (1L << (VS - 349)) | (1L << (VSAMOPENFS - 349)) | (1L << (WD - 349)) | (1L << (WORD - 349)) | (1L << (XMLPARSE - 349)) | (1L << (XP - 349)) | (1L << (XREF - 349)) | (1L << (YEARWINDOW - 349)) | (1L << (YW - 349)) | (1L << (ZC - 349)) | (1L << (ZD - 349)) | (1L << (ZONECHECK - 349)) | (1L << (ZONEDATA - 349)) | (1L << (ZWB - 349)) | (1L << (C_CHAR - 349)) | (1L << (D_CHAR - 349)) | (1L << (F_CHAR - 349)) | (1L << (Q_CHAR - 349)) | (1L << (S_CHAR - 349)) | (1L << (X_CHAR - 349)) | (1L << (COMMACHAR - 349)))) != 0)) {
 				{
 				{
-				setState(102);
+				setState(106);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==COMMACHAR) {
 					{
-					setState(101);
+					setState(105);
 					match(COMMACHAR);
 					}
 				}
 
-				setState(104);
+				setState(108);
 				compilerOption();
 				}
 				}
-				setState(109);
+				setState(113);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(110);
+			setState(114);
 			match(RPARENCHAR);
 			}
 		}
@@ -901,9 +1003,25 @@ public class CobolPreprocessorParser extends Parser {
 	public static class CompilerOptionContext extends ParserRuleContext {
 		public TerminalNode ADATA() { return getToken(CobolPreprocessorParser.ADATA, 0); }
 		public TerminalNode ADV() { return getToken(CobolPreprocessorParser.ADV, 0); }
+		public TerminalNode AFP() { return getToken(CobolPreprocessorParser.AFP, 0); }
+		public List<TerminalNode> LPARENCHAR() { return getTokens(CobolPreprocessorParser.LPARENCHAR); }
+		public TerminalNode LPARENCHAR(int i) {
+			return getToken(CobolPreprocessorParser.LPARENCHAR, i);
+		}
+		public List<TerminalNode> RPARENCHAR() { return getTokens(CobolPreprocessorParser.RPARENCHAR); }
+		public TerminalNode RPARENCHAR(int i) {
+			return getToken(CobolPreprocessorParser.RPARENCHAR, i);
+		}
+		public TerminalNode NOVOLATILE() { return getToken(CobolPreprocessorParser.NOVOLATILE, 0); }
+		public TerminalNode VOLATILE() { return getToken(CobolPreprocessorParser.VOLATILE, 0); }
 		public TerminalNode APOST() { return getToken(CobolPreprocessorParser.APOST, 0); }
-		public TerminalNode LPARENCHAR() { return getToken(CobolPreprocessorParser.LPARENCHAR, 0); }
-		public TerminalNode RPARENCHAR() { return getToken(CobolPreprocessorParser.RPARENCHAR, 0); }
+		public TerminalNode ARCH() { return getToken(CobolPreprocessorParser.ARCH, 0); }
+		public List<LiteralContext> literal() {
+			return getRuleContexts(LiteralContext.class);
+		}
+		public LiteralContext literal(int i) {
+			return getRuleContext(LiteralContext.class,i);
+		}
 		public TerminalNode ARITH() { return getToken(CobolPreprocessorParser.ARITH, 0); }
 		public TerminalNode AR() { return getToken(CobolPreprocessorParser.AR, 0); }
 		public TerminalNode EXTEND() { return getToken(CobolPreprocessorParser.EXTEND, 0); }
@@ -915,12 +1033,6 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode C_CHAR() { return getToken(CobolPreprocessorParser.C_CHAR, 0); }
 		public TerminalNode AWO() { return getToken(CobolPreprocessorParser.AWO, 0); }
 		public TerminalNode BLOCK0() { return getToken(CobolPreprocessorParser.BLOCK0, 0); }
-		public List<LiteralContext> literal() {
-			return getRuleContexts(LiteralContext.class);
-		}
-		public LiteralContext literal(int i) {
-			return getRuleContext(LiteralContext.class,i);
-		}
 		public TerminalNode BUFSIZE() { return getToken(CobolPreprocessorParser.BUFSIZE, 0); }
 		public TerminalNode BUF() { return getToken(CobolPreprocessorParser.BUF, 0); }
 		public TerminalNode CBLCARD() { return getToken(CobolPreprocessorParser.CBLCARD, 0); }
@@ -930,6 +1042,16 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode CODEPAGE() { return getToken(CobolPreprocessorParser.CODEPAGE, 0); }
 		public TerminalNode CP() { return getToken(CobolPreprocessorParser.CP, 0); }
 		public TerminalNode COMPILE() { return getToken(CobolPreprocessorParser.COMPILE, 0); }
+		public TerminalNode COPYLOC() { return getToken(CobolPreprocessorParser.COPYLOC, 0); }
+		public TerminalNode CPLC() { return getToken(CobolPreprocessorParser.CPLC, 0); }
+		public List<TerminalNode> COMMACHAR() { return getTokens(CobolPreprocessorParser.COMMACHAR); }
+		public TerminalNode COMMACHAR(int i) {
+			return getToken(CobolPreprocessorParser.COMMACHAR, i);
+		}
+		public TerminalNode DSN() { return getToken(CobolPreprocessorParser.DSN, 0); }
+		public TerminalNode PATH() { return getToken(CobolPreprocessorParser.PATH, 0); }
+		public TerminalNode COPYRIGHT() { return getToken(CobolPreprocessorParser.COPYRIGHT, 0); }
+		public TerminalNode CPYR() { return getToken(CobolPreprocessorParser.CPYR, 0); }
 		public TerminalNode CPP() { return getToken(CobolPreprocessorParser.CPP, 0); }
 		public TerminalNode CPSM() { return getToken(CobolPreprocessorParser.CPSM, 0); }
 		public TerminalNode CURRENCY() { return getToken(CobolPreprocessorParser.CURRENCY, 0); }
@@ -937,10 +1059,6 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode DATA() { return getToken(CobolPreprocessorParser.DATA, 0); }
 		public TerminalNode DATEPROC() { return getToken(CobolPreprocessorParser.DATEPROC, 0); }
 		public TerminalNode DP() { return getToken(CobolPreprocessorParser.DP, 0); }
-		public List<TerminalNode> COMMACHAR() { return getTokens(CobolPreprocessorParser.COMMACHAR); }
-		public TerminalNode COMMACHAR(int i) {
-			return getToken(CobolPreprocessorParser.COMMACHAR, i);
-		}
 		public TerminalNode FLAG() { return getToken(CobolPreprocessorParser.FLAG, 0); }
 		public TerminalNode NOFLAG() { return getToken(CobolPreprocessorParser.NOFLAG, 0); }
 		public TerminalNode TRIG() { return getToken(CobolPreprocessorParser.TRIG, 0); }
@@ -949,8 +1067,19 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode DECK() { return getToken(CobolPreprocessorParser.DECK, 0); }
 		public TerminalNode D_CHAR() { return getToken(CobolPreprocessorParser.D_CHAR, 0); }
 		public TerminalNode DEBUG() { return getToken(CobolPreprocessorParser.DEBUG, 0); }
+		public TerminalNode IDENTIFIER() { return getToken(CobolPreprocessorParser.IDENTIFIER, 0); }
+		public TerminalNode DEFINE() { return getToken(CobolPreprocessorParser.DEFINE, 0); }
+		public TerminalNode DEF() { return getToken(CobolPreprocessorParser.DEF, 0); }
+		public TerminalNode EQUALCHAR() { return getToken(CobolPreprocessorParser.EQUALCHAR, 0); }
 		public TerminalNode DIAGTRUNC() { return getToken(CobolPreprocessorParser.DIAGTRUNC, 0); }
 		public TerminalNode DTR() { return getToken(CobolPreprocessorParser.DTR, 0); }
+		public TerminalNode DISPSIGN() { return getToken(CobolPreprocessorParser.DISPSIGN, 0); }
+		public TerminalNode DS() { return getToken(CobolPreprocessorParser.DS, 0); }
+		public TerminalNode SEP() { return getToken(CobolPreprocessorParser.SEP, 0); }
+		public List<TerminalNode> S_CHAR() { return getTokens(CobolPreprocessorParser.S_CHAR); }
+		public TerminalNode S_CHAR(int i) {
+			return getToken(CobolPreprocessorParser.S_CHAR, i);
+		}
 		public TerminalNode DLL() { return getToken(CobolPreprocessorParser.DLL, 0); }
 		public TerminalNode DUMP() { return getToken(CobolPreprocessorParser.DUMP, 0); }
 		public TerminalNode DU() { return getToken(CobolPreprocessorParser.DU, 0); }
@@ -969,10 +1098,6 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode I_CHAR(int i) {
 			return getToken(CobolPreprocessorParser.I_CHAR, i);
 		}
-		public List<TerminalNode> S_CHAR() { return getTokens(CobolPreprocessorParser.S_CHAR); }
-		public TerminalNode S_CHAR(int i) {
-			return getToken(CobolPreprocessorParser.S_CHAR, i);
-		}
 		public List<TerminalNode> U_CHAR() { return getTokens(CobolPreprocessorParser.U_CHAR); }
 		public TerminalNode U_CHAR(int i) {
 			return getToken(CobolPreprocessorParser.U_CHAR, i);
@@ -984,15 +1109,26 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode FLAGSTD() { return getToken(CobolPreprocessorParser.FLAGSTD, 0); }
 		public TerminalNode M_CHAR() { return getToken(CobolPreprocessorParser.M_CHAR, 0); }
 		public TerminalNode H_CHAR() { return getToken(CobolPreprocessorParser.H_CHAR, 0); }
+		public TerminalNode O_CHAR() { return getToken(CobolPreprocessorParser.O_CHAR, 0); }
 		public TerminalNode DD() { return getToken(CobolPreprocessorParser.DD, 0); }
 		public TerminalNode N_CHAR() { return getToken(CobolPreprocessorParser.N_CHAR, 0); }
 		public TerminalNode NN() { return getToken(CobolPreprocessorParser.NN, 0); }
 		public TerminalNode SS() { return getToken(CobolPreprocessorParser.SS, 0); }
 		public TerminalNode GDS() { return getToken(CobolPreprocessorParser.GDS, 0); }
 		public TerminalNode GRAPHIC() { return getToken(CobolPreprocessorParser.GRAPHIC, 0); }
+		public TerminalNode HGPR() { return getToken(CobolPreprocessorParser.HGPR, 0); }
+		public TerminalNode PRESERVE() { return getToken(CobolPreprocessorParser.PRESERVE, 0); }
+		public TerminalNode NOPRESERVE() { return getToken(CobolPreprocessorParser.NOPRESERVE, 0); }
 		public TerminalNode INTDATE() { return getToken(CobolPreprocessorParser.INTDATE, 0); }
 		public TerminalNode ANSI() { return getToken(CobolPreprocessorParser.ANSI, 0); }
 		public TerminalNode LILIAN() { return getToken(CobolPreprocessorParser.LILIAN, 0); }
+		public TerminalNode INITCHECK() { return getToken(CobolPreprocessorParser.INITCHECK, 0); }
+		public TerminalNode IC() { return getToken(CobolPreprocessorParser.IC, 0); }
+		public TerminalNode LAX() { return getToken(CobolPreprocessorParser.LAX, 0); }
+		public TerminalNode STRICT() { return getToken(CobolPreprocessorParser.STRICT, 0); }
+		public TerminalNode INITIAL() { return getToken(CobolPreprocessorParser.INITIAL, 0); }
+		public TerminalNode INLINE() { return getToken(CobolPreprocessorParser.INLINE, 0); }
+		public TerminalNode INL() { return getToken(CobolPreprocessorParser.INL, 0); }
 		public TerminalNode LANGUAGE() { return getToken(CobolPreprocessorParser.LANGUAGE, 0); }
 		public TerminalNode LANG() { return getToken(CobolPreprocessorParser.LANG, 0); }
 		public TerminalNode ENGLISH() { return getToken(CobolPreprocessorParser.ENGLISH, 0); }
@@ -1010,8 +1146,12 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode LC() { return getToken(CobolPreprocessorParser.LC, 0); }
 		public TerminalNode LINKAGE() { return getToken(CobolPreprocessorParser.LINKAGE, 0); }
 		public TerminalNode LIST() { return getToken(CobolPreprocessorParser.LIST, 0); }
+		public TerminalNode LP() { return getToken(CobolPreprocessorParser.LP, 0); }
 		public TerminalNode MAP() { return getToken(CobolPreprocessorParser.MAP, 0); }
+		public TerminalNode HEX() { return getToken(CobolPreprocessorParser.HEX, 0); }
+		public TerminalNode DEC() { return getToken(CobolPreprocessorParser.DEC, 0); }
 		public TerminalNode MARGINS() { return getToken(CobolPreprocessorParser.MARGINS, 0); }
+		public TerminalNode MAXPCF() { return getToken(CobolPreprocessorParser.MAXPCF, 0); }
 		public TerminalNode MDECK() { return getToken(CobolPreprocessorParser.MDECK, 0); }
 		public TerminalNode MD() { return getToken(CobolPreprocessorParser.MD, 0); }
 		public TerminalNode NOC() { return getToken(CobolPreprocessorParser.NOC, 0); }
@@ -1027,6 +1167,10 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NOCBLCARD() { return getToken(CobolPreprocessorParser.NOCBLCARD, 0); }
 		public TerminalNode NOCICS() { return getToken(CobolPreprocessorParser.NOCICS, 0); }
 		public TerminalNode NOCMPR2() { return getToken(CobolPreprocessorParser.NOCMPR2, 0); }
+		public TerminalNode NOCOPYLOC() { return getToken(CobolPreprocessorParser.NOCOPYLOC, 0); }
+		public TerminalNode NOCPLC() { return getToken(CobolPreprocessorParser.NOCPLC, 0); }
+		public TerminalNode NOCOPYRIGHT() { return getToken(CobolPreprocessorParser.NOCOPYRIGHT, 0); }
+		public TerminalNode NOCPYR() { return getToken(CobolPreprocessorParser.NOCPYR, 0); }
 		public TerminalNode NOCPSM() { return getToken(CobolPreprocessorParser.NOCPSM, 0); }
 		public TerminalNode NOCURRENCY() { return getToken(CobolPreprocessorParser.NOCURRENCY, 0); }
 		public TerminalNode NOCURR() { return getToken(CobolPreprocessorParser.NOCURR, 0); }
@@ -1036,6 +1180,8 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NODEBUG() { return getToken(CobolPreprocessorParser.NODEBUG, 0); }
 		public TerminalNode NODECK() { return getToken(CobolPreprocessorParser.NODECK, 0); }
 		public TerminalNode NOD() { return getToken(CobolPreprocessorParser.NOD, 0); }
+		public TerminalNode NODEFINE() { return getToken(CobolPreprocessorParser.NODEFINE, 0); }
+		public TerminalNode NODEF() { return getToken(CobolPreprocessorParser.NODEF, 0); }
 		public TerminalNode NODLL() { return getToken(CobolPreprocessorParser.NODLL, 0); }
 		public TerminalNode NODE() { return getToken(CobolPreprocessorParser.NODE, 0); }
 		public TerminalNode NODUMP() { return getToken(CobolPreprocessorParser.NODUMP, 0); }
@@ -1056,6 +1202,11 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NOFLAGMIG() { return getToken(CobolPreprocessorParser.NOFLAGMIG, 0); }
 		public TerminalNode NOFLAGSTD() { return getToken(CobolPreprocessorParser.NOFLAGSTD, 0); }
 		public TerminalNode NOGRAPHIC() { return getToken(CobolPreprocessorParser.NOGRAPHIC, 0); }
+		public TerminalNode NOINITCHECK() { return getToken(CobolPreprocessorParser.NOINITCHECK, 0); }
+		public TerminalNode NOIC() { return getToken(CobolPreprocessorParser.NOIC, 0); }
+		public TerminalNode NOINITIAL() { return getToken(CobolPreprocessorParser.NOINITIAL, 0); }
+		public TerminalNode NOINLINE() { return getToken(CobolPreprocessorParser.NOINLINE, 0); }
+		public TerminalNode NOINL() { return getToken(CobolPreprocessorParser.NOINL, 0); }
 		public TerminalNode NOLENGTH() { return getToken(CobolPreprocessorParser.NOLENGTH, 0); }
 		public TerminalNode NOLIB() { return getToken(CobolPreprocessorParser.NOLIB, 0); }
 		public TerminalNode NOLINKAGE() { return getToken(CobolPreprocessorParser.NOLINKAGE, 0); }
@@ -1075,19 +1226,27 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NOOPT() { return getToken(CobolPreprocessorParser.NOOPT, 0); }
 		public TerminalNode NOOPTIONS() { return getToken(CobolPreprocessorParser.NOOPTIONS, 0); }
 		public TerminalNode NOP() { return getToken(CobolPreprocessorParser.NOP, 0); }
+		public TerminalNode NOPARMCHECK() { return getToken(CobolPreprocessorParser.NOPARMCHECK, 0); }
 		public TerminalNode NOPROLOG() { return getToken(CobolPreprocessorParser.NOPROLOG, 0); }
 		public TerminalNode NORENT() { return getToken(CobolPreprocessorParser.NORENT, 0); }
+		public TerminalNode NORULES() { return getToken(CobolPreprocessorParser.NORULES, 0); }
 		public TerminalNode NOSEQUENCE() { return getToken(CobolPreprocessorParser.NOSEQUENCE, 0); }
 		public TerminalNode NOSEQ() { return getToken(CobolPreprocessorParser.NOSEQ, 0); }
+		public TerminalNode NOSERVICE() { return getToken(CobolPreprocessorParser.NOSERVICE, 0); }
+		public TerminalNode NOSERV() { return getToken(CobolPreprocessorParser.NOSERV, 0); }
 		public TerminalNode NOSOURCE() { return getToken(CobolPreprocessorParser.NOSOURCE, 0); }
 		public TerminalNode NOS() { return getToken(CobolPreprocessorParser.NOS, 0); }
 		public TerminalNode NOSPIE() { return getToken(CobolPreprocessorParser.NOSPIE, 0); }
 		public TerminalNode NOSQL() { return getToken(CobolPreprocessorParser.NOSQL, 0); }
+		public TerminalNode NOSQLIMS() { return getToken(CobolPreprocessorParser.NOSQLIMS, 0); }
 		public TerminalNode NOSQLCCSID() { return getToken(CobolPreprocessorParser.NOSQLCCSID, 0); }
 		public TerminalNode NOSQLC() { return getToken(CobolPreprocessorParser.NOSQLC, 0); }
 		public TerminalNode NOSSRANGE() { return getToken(CobolPreprocessorParser.NOSSRANGE, 0); }
 		public TerminalNode NOSSR() { return getToken(CobolPreprocessorParser.NOSSR, 0); }
 		public TerminalNode NOSTDTRUNC() { return getToken(CobolPreprocessorParser.NOSTDTRUNC, 0); }
+		public TerminalNode NOSTGOPT() { return getToken(CobolPreprocessorParser.NOSTGOPT, 0); }
+		public TerminalNode NOSUPP() { return getToken(CobolPreprocessorParser.NOSUPP, 0); }
+		public TerminalNode NOSUPPRESS() { return getToken(CobolPreprocessorParser.NOSUPPRESS, 0); }
 		public TerminalNode NOTERMINAL() { return getToken(CobolPreprocessorParser.NOTERMINAL, 0); }
 		public TerminalNode NOTERM() { return getToken(CobolPreprocessorParser.NOTERM, 0); }
 		public TerminalNode NOTEST() { return getToken(CobolPreprocessorParser.NOTEST, 0); }
@@ -1102,9 +1261,23 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NAT() { return getToken(CobolPreprocessorParser.NAT, 0); }
 		public TerminalNode NOXREF() { return getToken(CobolPreprocessorParser.NOXREF, 0); }
 		public TerminalNode NOX() { return getToken(CobolPreprocessorParser.NOX, 0); }
+		public TerminalNode NOZC() { return getToken(CobolPreprocessorParser.NOZC, 0); }
+		public TerminalNode NOZONECHECK() { return getToken(CobolPreprocessorParser.NOZONECHECK, 0); }
 		public TerminalNode NOZWB() { return getToken(CobolPreprocessorParser.NOZWB, 0); }
 		public TerminalNode NUMBER() { return getToken(CobolPreprocessorParser.NUMBER, 0); }
 		public TerminalNode NUM() { return getToken(CobolPreprocessorParser.NUM, 0); }
+		public TerminalNode NUMCHECK() { return getToken(CobolPreprocessorParser.NUMCHECK, 0); }
+		public TerminalNode NC() { return getToken(CobolPreprocessorParser.NC, 0); }
+		public TerminalNode ZON() { return getToken(CobolPreprocessorParser.ZON, 0); }
+		public TerminalNode NOZON() { return getToken(CobolPreprocessorParser.NOZON, 0); }
+		public TerminalNode PAC() { return getToken(CobolPreprocessorParser.PAC, 0); }
+		public TerminalNode NOPAC() { return getToken(CobolPreprocessorParser.NOPAC, 0); }
+		public TerminalNode BIN() { return getToken(CobolPreprocessorParser.BIN, 0); }
+		public TerminalNode NOBIN() { return getToken(CobolPreprocessorParser.NOBIN, 0); }
+		public TerminalNode MSG() { return getToken(CobolPreprocessorParser.MSG, 0); }
+		public TerminalNode ABD() { return getToken(CobolPreprocessorParser.ABD, 0); }
+		public TerminalNode ALPHNUM() { return getToken(CobolPreprocessorParser.ALPHNUM, 0); }
+		public TerminalNode NOALPHNUM() { return getToken(CobolPreprocessorParser.NOALPHNUM, 0); }
 		public TerminalNode NUMPROC() { return getToken(CobolPreprocessorParser.NUMPROC, 0); }
 		public TerminalNode MIG() { return getToken(CobolPreprocessorParser.MIG, 0); }
 		public TerminalNode NOPFD() { return getToken(CobolPreprocessorParser.NOPFD, 0); }
@@ -1127,6 +1300,8 @@ public class CobolPreprocessorParser extends Parser {
 		}
 		public TerminalNode OUTDD() { return getToken(CobolPreprocessorParser.OUTDD, 0); }
 		public TerminalNode OUT() { return getToken(CobolPreprocessorParser.OUT, 0); }
+		public TerminalNode PARMCHECK() { return getToken(CobolPreprocessorParser.PARMCHECK, 0); }
+		public TerminalNode PC() { return getToken(CobolPreprocessorParser.PC, 0); }
 		public TerminalNode PGMNAME() { return getToken(CobolPreprocessorParser.PGMNAME, 0); }
 		public TerminalNode PGMN() { return getToken(CobolPreprocessorParser.PGMN, 0); }
 		public TerminalNode CO() { return getToken(CobolPreprocessorParser.CO, 0); }
@@ -1137,14 +1312,25 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode MIXED() { return getToken(CobolPreprocessorParser.MIXED, 0); }
 		public TerminalNode UPPER() { return getToken(CobolPreprocessorParser.UPPER, 0); }
 		public TerminalNode PROLOG() { return getToken(CobolPreprocessorParser.PROLOG, 0); }
+		public TerminalNode QUALIFY() { return getToken(CobolPreprocessorParser.QUALIFY, 0); }
+		public TerminalNode QUA() { return getToken(CobolPreprocessorParser.QUA, 0); }
 		public TerminalNode QUOTE() { return getToken(CobolPreprocessorParser.QUOTE, 0); }
 		public TerminalNode Q_CHAR() { return getToken(CobolPreprocessorParser.Q_CHAR, 0); }
 		public TerminalNode RENT() { return getToken(CobolPreprocessorParser.RENT, 0); }
 		public TerminalNode RMODE() { return getToken(CobolPreprocessorParser.RMODE, 0); }
 		public TerminalNode ANY() { return getToken(CobolPreprocessorParser.ANY, 0); }
 		public TerminalNode AUTO() { return getToken(CobolPreprocessorParser.AUTO, 0); }
+		public TerminalNode RULES() { return getToken(CobolPreprocessorParser.RULES, 0); }
+		public List<Rules_optsContext> rules_opts() {
+			return getRuleContexts(Rules_optsContext.class);
+		}
+		public Rules_optsContext rules_opts(int i) {
+			return getRuleContext(Rules_optsContext.class,i);
+		}
 		public TerminalNode SEQUENCE() { return getToken(CobolPreprocessorParser.SEQUENCE, 0); }
 		public TerminalNode SEQ() { return getToken(CobolPreprocessorParser.SEQ, 0); }
+		public TerminalNode SERVICE() { return getToken(CobolPreprocessorParser.SERVICE, 0); }
+		public TerminalNode SERV() { return getToken(CobolPreprocessorParser.SERV, 0); }
 		public TerminalNode SIZE() { return getToken(CobolPreprocessorParser.SIZE, 0); }
 		public TerminalNode SZ() { return getToken(CobolPreprocessorParser.SZ, 0); }
 		public TerminalNode MAX() { return getToken(CobolPreprocessorParser.MAX, 0); }
@@ -1155,24 +1341,37 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode SQL() { return getToken(CobolPreprocessorParser.SQL, 0); }
 		public TerminalNode SQLCCSID() { return getToken(CobolPreprocessorParser.SQLCCSID, 0); }
 		public TerminalNode SQLC() { return getToken(CobolPreprocessorParser.SQLC, 0); }
+		public TerminalNode SQLIMS() { return getToken(CobolPreprocessorParser.SQLIMS, 0); }
 		public TerminalNode SSRANGE() { return getToken(CobolPreprocessorParser.SSRANGE, 0); }
 		public TerminalNode SSR() { return getToken(CobolPreprocessorParser.SSR, 0); }
+		public TerminalNode STGOPT() { return getToken(CobolPreprocessorParser.STGOPT, 0); }
+		public TerminalNode SUPP() { return getToken(CobolPreprocessorParser.SUPP, 0); }
+		public TerminalNode SUPPRESS() { return getToken(CobolPreprocessorParser.SUPPRESS, 0); }
 		public TerminalNode SYSEIB() { return getToken(CobolPreprocessorParser.SYSEIB, 0); }
 		public TerminalNode TERMINAL() { return getToken(CobolPreprocessorParser.TERMINAL, 0); }
 		public TerminalNode TERM() { return getToken(CobolPreprocessorParser.TERM, 0); }
 		public TerminalNode TEST() { return getToken(CobolPreprocessorParser.TEST, 0); }
 		public TerminalNode HOOK() { return getToken(CobolPreprocessorParser.HOOK, 0); }
 		public TerminalNode NOHOOK() { return getToken(CobolPreprocessorParser.NOHOOK, 0); }
-		public TerminalNode SEP() { return getToken(CobolPreprocessorParser.SEP, 0); }
 		public TerminalNode SEPARATE() { return getToken(CobolPreprocessorParser.SEPARATE, 0); }
 		public TerminalNode NOSEP() { return getToken(CobolPreprocessorParser.NOSEP, 0); }
 		public TerminalNode NOSEPARATE() { return getToken(CobolPreprocessorParser.NOSEPARATE, 0); }
 		public TerminalNode EJPD() { return getToken(CobolPreprocessorParser.EJPD, 0); }
 		public TerminalNode NOEJPD() { return getToken(CobolPreprocessorParser.NOEJPD, 0); }
+		public List<Test_optsContext> test_opts() {
+			return getRuleContexts(Test_optsContext.class);
+		}
+		public Test_optsContext test_opts(int i) {
+			return getRuleContext(Test_optsContext.class,i);
+		}
 		public TerminalNode THREAD() { return getToken(CobolPreprocessorParser.THREAD, 0); }
 		public TerminalNode TRUNC() { return getToken(CobolPreprocessorParser.TRUNC, 0); }
-		public TerminalNode BIN() { return getToken(CobolPreprocessorParser.BIN, 0); }
 		public TerminalNode VBREF() { return getToken(CobolPreprocessorParser.VBREF, 0); }
+		public TerminalNode VLR() { return getToken(CobolPreprocessorParser.VLR, 0); }
+		public TerminalNode STANDARD() { return getToken(CobolPreprocessorParser.STANDARD, 0); }
+		public TerminalNode VSAMOPENFS() { return getToken(CobolPreprocessorParser.VSAMOPENFS, 0); }
+		public TerminalNode VS() { return getToken(CobolPreprocessorParser.VS, 0); }
+		public TerminalNode SUCC() { return getToken(CobolPreprocessorParser.SUCC, 0); }
 		public TerminalNode WORD() { return getToken(CobolPreprocessorParser.WORD, 0); }
 		public TerminalNode WD() { return getToken(CobolPreprocessorParser.WD, 0); }
 		public TerminalNode XMLPARSE() { return getToken(CobolPreprocessorParser.XMLPARSE, 0); }
@@ -1183,6 +1382,10 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode SHORT() { return getToken(CobolPreprocessorParser.SHORT, 0); }
 		public TerminalNode YEARWINDOW() { return getToken(CobolPreprocessorParser.YEARWINDOW, 0); }
 		public TerminalNode YW() { return getToken(CobolPreprocessorParser.YW, 0); }
+		public TerminalNode ZC() { return getToken(CobolPreprocessorParser.ZC, 0); }
+		public TerminalNode ZONECHECK() { return getToken(CobolPreprocessorParser.ZONECHECK, 0); }
+		public TerminalNode ZD() { return getToken(CobolPreprocessorParser.ZD, 0); }
+		public TerminalNode ZONEDATA() { return getToken(CobolPreprocessorParser.ZONEDATA, 0); }
 		public TerminalNode ZWB() { return getToken(CobolPreprocessorParser.ZWB, 0); }
 		public CompilerOptionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1208,34 +1411,72 @@ public class CobolPreprocessorParser extends Parser {
 		enterRule(_localctx, 8, RULE_compilerOption);
 		int _la;
 		try {
-			setState(454);
+			setState(661);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,56,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(112);
+				setState(116);
 				match(ADATA);
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(113);
+				setState(117);
 				match(ADV);
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(114);
-				match(APOST);
+				{
+				setState(118);
+				match(AFP);
+				setState(119);
+				match(LPARENCHAR);
+				setState(120);
+				_la = _input.LA(1);
+				if ( !(_la==NOVOLATILE || _la==VOLATILE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(121);
+				match(RPARENCHAR);
+				}
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(115);
+				setState(122);
+				match(APOST);
+				}
+				break;
+			case 5:
+				enterOuterAlt(_localctx, 5);
+				{
+				{
+				setState(123);
+				match(ARCH);
+				setState(124);
+				match(LPARENCHAR);
+				setState(125);
+				literal();
+				setState(126);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 6:
+				enterOuterAlt(_localctx, 6);
+				{
+				setState(128);
 				_la = _input.LA(1);
 				if ( !(_la==AR || _la==ARITH) ) {
 				_errHandler.recoverInline(this);
@@ -1245,9 +1486,9 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(116);
+				setState(129);
 				match(LPARENCHAR);
-				setState(117);
+				setState(130);
 				_la = _input.LA(1);
 				if ( !(_la==COMPAT || _la==EXTEND || _la==C_CHAR || _la==E_CHAR) ) {
 				_errHandler.recoverInline(this);
@@ -1257,28 +1498,28 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(118);
+				setState(131);
 				match(RPARENCHAR);
-				}
-				break;
-			case 5:
-				enterOuterAlt(_localctx, 5);
-				{
-				setState(119);
-				match(AWO);
-				}
-				break;
-			case 6:
-				enterOuterAlt(_localctx, 6);
-				{
-				setState(120);
-				match(BLOCK0);
 				}
 				break;
 			case 7:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(121);
+				setState(132);
+				match(AWO);
+				}
+				break;
+			case 8:
+				enterOuterAlt(_localctx, 8);
+				{
+				setState(133);
+				match(BLOCK0);
+				}
+				break;
+			case 9:
+				enterOuterAlt(_localctx, 9);
+				{
+				setState(134);
 				_la = _input.LA(1);
 				if ( !(_la==BUF || _la==BUFSIZE) ) {
 				_errHandler.recoverInline(this);
@@ -1288,60 +1529,60 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(122);
+				setState(135);
 				match(LPARENCHAR);
-				setState(123);
+				setState(136);
 				literal();
-				setState(124);
+				setState(137);
 				match(RPARENCHAR);
 				}
 				break;
-			case 8:
-				enterOuterAlt(_localctx, 8);
+			case 10:
+				enterOuterAlt(_localctx, 10);
 				{
-				setState(126);
+				setState(139);
 				match(CBLCARD);
 				}
 				break;
-			case 9:
-				enterOuterAlt(_localctx, 9);
+			case 11:
+				enterOuterAlt(_localctx, 11);
 				{
-				setState(127);
+				setState(140);
 				match(CICS);
-				setState(132);
+				setState(145);
 				_errHandler.sync(this);
 				switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
 				case 1:
 					{
-					setState(128);
+					setState(141);
 					match(LPARENCHAR);
-					setState(129);
+					setState(142);
 					literal();
-					setState(130);
+					setState(143);
 					match(RPARENCHAR);
 					}
 					break;
 				}
 				}
 				break;
-			case 10:
-				enterOuterAlt(_localctx, 10);
-				{
-				setState(134);
-				match(COBOL2);
-				}
-				break;
-			case 11:
-				enterOuterAlt(_localctx, 11);
-				{
-				setState(135);
-				match(COBOL3);
-				}
-				break;
 			case 12:
 				enterOuterAlt(_localctx, 12);
 				{
-				setState(136);
+				setState(147);
+				match(COBOL2);
+				}
+				break;
+			case 13:
+				enterOuterAlt(_localctx, 13);
+				{
+				setState(148);
+				match(COBOL3);
+				}
+				break;
+			case 14:
+				enterOuterAlt(_localctx, 14);
+				{
+				setState(149);
 				_la = _input.LA(1);
 				if ( !(_la==CODEPAGE || _la==CP) ) {
 				_errHandler.recoverInline(this);
@@ -1351,18 +1592,18 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(137);
+				setState(150);
 				match(LPARENCHAR);
-				setState(138);
+				setState(151);
 				literal();
-				setState(139);
+				setState(152);
 				match(RPARENCHAR);
 				}
 				break;
-			case 13:
-				enterOuterAlt(_localctx, 13);
+			case 15:
+				enterOuterAlt(_localctx, 15);
 				{
-				setState(141);
+				setState(154);
 				_la = _input.LA(1);
 				if ( !(_la==COMPILE || _la==C_CHAR) ) {
 				_errHandler.recoverInline(this);
@@ -1374,24 +1615,106 @@ public class CobolPreprocessorParser extends Parser {
 				}
 				}
 				break;
-			case 14:
-				enterOuterAlt(_localctx, 14);
-				{
-				setState(142);
-				match(CPP);
-				}
-				break;
-			case 15:
-				enterOuterAlt(_localctx, 15);
-				{
-				setState(143);
-				match(CPSM);
-				}
-				break;
 			case 16:
 				enterOuterAlt(_localctx, 16);
 				{
-				setState(144);
+				{
+				setState(155);
+				_la = _input.LA(1);
+				if ( !(_la==COPYLOC || _la==CPLC) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(156);
+				match(LPARENCHAR);
+				setState(157);
+				literal();
+				setState(164);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
+				case 1:
+					{
+					setState(158);
+					match(COMMACHAR);
+					setState(159);
+					match(DSN);
+					setState(160);
+					match(LPARENCHAR);
+					setState(161);
+					literal();
+					setState(162);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				setState(172);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==COMMACHAR) {
+					{
+					setState(166);
+					match(COMMACHAR);
+					setState(167);
+					match(PATH);
+					setState(168);
+					match(LPARENCHAR);
+					setState(169);
+					literal();
+					setState(170);
+					match(RPARENCHAR);
+					}
+				}
+
+				setState(174);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 17:
+				enterOuterAlt(_localctx, 17);
+				{
+				{
+				setState(176);
+				_la = _input.LA(1);
+				if ( !(_la==COPYRIGHT || _la==CPYR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(177);
+				match(LPARENCHAR);
+				setState(178);
+				literal();
+				setState(179);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 18:
+				enterOuterAlt(_localctx, 18);
+				{
+				setState(181);
+				match(CPP);
+				}
+				break;
+			case 19:
+				enterOuterAlt(_localctx, 19);
+				{
+				setState(182);
+				match(CPSM);
+				}
+				break;
+			case 20:
+				enterOuterAlt(_localctx, 20);
+				{
+				setState(183);
 				_la = _input.LA(1);
 				if ( !(_la==CURR || _la==CURRENCY) ) {
 				_errHandler.recoverInline(this);
@@ -1401,31 +1724,31 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(145);
+				setState(184);
 				match(LPARENCHAR);
-				setState(146);
+				setState(185);
 				literal();
-				setState(147);
+				setState(186);
 				match(RPARENCHAR);
 				}
 				break;
-			case 17:
-				enterOuterAlt(_localctx, 17);
+			case 21:
+				enterOuterAlt(_localctx, 21);
 				{
-				setState(149);
+				setState(188);
 				match(DATA);
-				setState(150);
+				setState(189);
 				match(LPARENCHAR);
-				setState(151);
+				setState(190);
 				literal();
-				setState(152);
+				setState(191);
 				match(RPARENCHAR);
 				}
 				break;
-			case 18:
-				enterOuterAlt(_localctx, 18);
+			case 22:
+				enterOuterAlt(_localctx, 22);
 				{
-				setState(154);
+				setState(193);
 				_la = _input.LA(1);
 				if ( !(_la==DATEPROC || _la==DP) ) {
 				_errHandler.recoverInline(this);
@@ -1435,19 +1758,19 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(166);
+				setState(205);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,11,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,13,_ctx) ) {
 				case 1:
 					{
-					setState(155);
+					setState(194);
 					match(LPARENCHAR);
-					setState(157);
+					setState(196);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==FLAG || _la==NOFLAG) {
 						{
-						setState(156);
+						setState(195);
 						_la = _input.LA(1);
 						if ( !(_la==FLAG || _la==NOFLAG) ) {
 						_errHandler.recoverInline(this);
@@ -1460,22 +1783,22 @@ public class CobolPreprocessorParser extends Parser {
 						}
 					}
 
-					setState(160);
+					setState(199);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==COMMACHAR) {
 						{
-						setState(159);
+						setState(198);
 						match(COMMACHAR);
 						}
 					}
 
-					setState(163);
+					setState(202);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==NOTRIG || _la==TRIG) {
 						{
-						setState(162);
+						setState(201);
 						_la = _input.LA(1);
 						if ( !(_la==NOTRIG || _la==TRIG) ) {
 						_errHandler.recoverInline(this);
@@ -1488,70 +1811,26 @@ public class CobolPreprocessorParser extends Parser {
 						}
 					}
 
-					setState(165);
+					setState(204);
 					match(RPARENCHAR);
 					}
 					break;
 				}
 				}
 				break;
-			case 19:
-				enterOuterAlt(_localctx, 19);
-				{
-				setState(168);
-				match(DBCS);
-				}
-				break;
-			case 20:
-				enterOuterAlt(_localctx, 20);
-				{
-				setState(169);
-				_la = _input.LA(1);
-				if ( !(_la==DECK || _la==D_CHAR) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 21:
-				enterOuterAlt(_localctx, 21);
-				{
-				setState(170);
-				match(DEBUG);
-				}
-				break;
-			case 22:
-				enterOuterAlt(_localctx, 22);
-				{
-				setState(171);
-				_la = _input.LA(1);
-				if ( !(_la==DIAGTRUNC || _la==DTR) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
 			case 23:
 				enterOuterAlt(_localctx, 23);
 				{
-				setState(172);
-				match(DLL);
+				setState(207);
+				match(DBCS);
 				}
 				break;
 			case 24:
 				enterOuterAlt(_localctx, 24);
 				{
-				setState(173);
+				setState(208);
 				_la = _input.LA(1);
-				if ( !(_la==DU || _la==DUMP) ) {
+				if ( !(_la==DECK || _la==D_CHAR) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1564,45 +1843,59 @@ public class CobolPreprocessorParser extends Parser {
 			case 25:
 				enterOuterAlt(_localctx, 25);
 				{
-				setState(174);
-				_la = _input.LA(1);
-				if ( !(_la==DYN || _la==DYNAM) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(209);
+				match(DEBUG);
 				}
 				break;
 			case 26:
 				enterOuterAlt(_localctx, 26);
 				{
-				setState(175);
-				match(EDF);
+				{
+				setState(210);
+				_la = _input.LA(1);
+				if ( !(_la==DEFINE || _la==DEF) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(211);
+				match(LPARENCHAR);
+				setState(212);
+				match(IDENTIFIER);
+				setState(215);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==COMMACHAR || _la==EQUALCHAR) {
+					{
+					setState(213);
+					_la = _input.LA(1);
+					if ( !(_la==COMMACHAR || _la==EQUALCHAR) ) {
+					_errHandler.recoverInline(this);
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					setState(214);
+					literal();
+					}
+				}
+
+				setState(217);
+				match(RPARENCHAR);
+				}
 				}
 				break;
 			case 27:
 				enterOuterAlt(_localctx, 27);
 				{
-				setState(176);
-				match(EPILOG);
-				}
-				break;
-			case 28:
-				enterOuterAlt(_localctx, 28);
-				{
-				setState(177);
-				match(EXIT);
-				}
-				break;
-			case 29:
-				enterOuterAlt(_localctx, 29);
-				{
-				setState(178);
+				setState(218);
 				_la = _input.LA(1);
-				if ( !(_la==EXP || _la==EXPORTALL) ) {
+				if ( !(_la==DIAGTRUNC || _la==DTR) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1612,12 +1905,50 @@ public class CobolPreprocessorParser extends Parser {
 				}
 				}
 				break;
+			case 28:
+				enterOuterAlt(_localctx, 28);
+				{
+				{
+				setState(219);
+				_la = _input.LA(1);
+				if ( !(_la==DISPSIGN || _la==DS) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(220);
+				match(LPARENCHAR);
+				setState(221);
+				_la = _input.LA(1);
+				if ( !(_la==COMPAT || _la==SEP || _la==C_CHAR || _la==S_CHAR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(222);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 29:
+				enterOuterAlt(_localctx, 29);
+				{
+				setState(223);
+				match(DLL);
+				}
+				break;
 			case 30:
 				enterOuterAlt(_localctx, 30);
 				{
-				setState(179);
+				setState(224);
 				_la = _input.LA(1);
-				if ( !(_la==FASTSRT || _la==FSRT) ) {
+				if ( !(_la==DU || _la==DUMP) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1630,14 +1961,80 @@ public class CobolPreprocessorParser extends Parser {
 			case 31:
 				enterOuterAlt(_localctx, 31);
 				{
-				setState(180);
-				match(FEPI);
+				setState(225);
+				_la = _input.LA(1);
+				if ( !(_la==DYN || _la==DYNAM) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 32:
 				enterOuterAlt(_localctx, 32);
 				{
-				setState(181);
+				setState(226);
+				match(EDF);
+				}
+				break;
+			case 33:
+				enterOuterAlt(_localctx, 33);
+				{
+				setState(227);
+				match(EPILOG);
+				}
+				break;
+			case 34:
+				enterOuterAlt(_localctx, 34);
+				{
+				setState(228);
+				match(EXIT);
+				}
+				break;
+			case 35:
+				enterOuterAlt(_localctx, 35);
+				{
+				setState(229);
+				_la = _input.LA(1);
+				if ( !(_la==EXP || _la==EXPORTALL) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 36:
+				enterOuterAlt(_localctx, 36);
+				{
+				setState(230);
+				_la = _input.LA(1);
+				if ( !(_la==FASTSRT || _la==FSRT) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 37:
+				enterOuterAlt(_localctx, 37);
+				{
+				setState(231);
+				match(FEPI);
+				}
+				break;
+			case 38:
+				enterOuterAlt(_localctx, 38);
+				{
+				setState(232);
 				_la = _input.LA(1);
 				if ( !(_la==FLAG || _la==F_CHAR) ) {
 				_errHandler.recoverInline(this);
@@ -1647,11 +2044,11 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(182);
+				setState(233);
 				match(LPARENCHAR);
-				setState(183);
+				setState(234);
 				_la = _input.LA(1);
-				if ( !(((((_la - 288)) & ~0x3f) == 0 && ((1L << (_la - 288)) & ((1L << (E_CHAR - 288)) | (1L << (I_CHAR - 288)) | (1L << (S_CHAR - 288)) | (1L << (U_CHAR - 288)) | (1L << (W_CHAR - 288)))) != 0)) ) {
+				if ( !(((((_la - 392)) & ~0x3f) == 0 && ((1L << (_la - 392)) & ((1L << (E_CHAR - 392)) | (1L << (I_CHAR - 392)) | (1L << (S_CHAR - 392)) | (1L << (U_CHAR - 392)) | (1L << (W_CHAR - 392)))) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1659,16 +2056,16 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(186);
+				setState(237);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==COMMACHAR) {
 					{
-					setState(184);
+					setState(235);
 					match(COMMACHAR);
-					setState(185);
+					setState(236);
 					_la = _input.LA(1);
-					if ( !(((((_la - 288)) & ~0x3f) == 0 && ((1L << (_la - 288)) & ((1L << (E_CHAR - 288)) | (1L << (I_CHAR - 288)) | (1L << (S_CHAR - 288)) | (1L << (U_CHAR - 288)) | (1L << (W_CHAR - 288)))) != 0)) ) {
+					if ( !(((((_la - 392)) & ~0x3f) == 0 && ((1L << (_la - 392)) & ((1L << (E_CHAR - 392)) | (1L << (I_CHAR - 392)) | (1L << (S_CHAR - 392)) | (1L << (U_CHAR - 392)) | (1L << (W_CHAR - 392)))) != 0)) ) {
 					_errHandler.recoverInline(this);
 					}
 					else {
@@ -1679,20 +2076,20 @@ public class CobolPreprocessorParser extends Parser {
 					}
 				}
 
-				setState(188);
+				setState(239);
 				match(RPARENCHAR);
 				}
 				break;
-			case 33:
-				enterOuterAlt(_localctx, 33);
+			case 39:
+				enterOuterAlt(_localctx, 39);
 				{
-				setState(189);
+				setState(240);
 				match(FLAGSTD);
-				setState(190);
+				setState(241);
 				match(LPARENCHAR);
-				setState(191);
+				setState(242);
 				_la = _input.LA(1);
-				if ( !(((((_la - 290)) & ~0x3f) == 0 && ((1L << (_la - 290)) & ((1L << (H_CHAR - 290)) | (1L << (I_CHAR - 290)) | (1L << (M_CHAR - 290)))) != 0)) ) {
+				if ( !(((((_la - 394)) & ~0x3f) == 0 && ((1L << (_la - 394)) & ((1L << (H_CHAR - 394)) | (1L << (I_CHAR - 394)) | (1L << (M_CHAR - 394)))) != 0)) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1700,16 +2097,16 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(194);
+				setState(245);
 				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==COMMACHAR) {
+				switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
+				case 1:
 					{
-					setState(192);
+					setState(243);
 					match(COMMACHAR);
-					setState(193);
+					setState(244);
 					_la = _input.LA(1);
-					if ( !(_la==DD || _la==NN || ((((_la - 259)) & ~0x3f) == 0 && ((1L << (_la - 259)) & ((1L << (SS - 259)) | (1L << (D_CHAR - 259)) | (1L << (N_CHAR - 259)) | (1L << (S_CHAR - 259)))) != 0)) ) {
+					if ( !(_la==DD || _la==NN || ((((_la - 348)) & ~0x3f) == 0 && ((1L << (_la - 348)) & ((1L << (SS - 348)) | (1L << (D_CHAR - 348)) | (1L << (N_CHAR - 348)) | (1L << (S_CHAR - 348)))) != 0)) ) {
 					_errHandler.recoverInline(this);
 					}
 					else {
@@ -1718,34 +2115,69 @@ public class CobolPreprocessorParser extends Parser {
 						consume();
 					}
 					}
+					break;
+				}
+				setState(249);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==COMMACHAR) {
+					{
+					setState(247);
+					match(COMMACHAR);
+					setState(248);
+					match(O_CHAR);
+					}
 				}
 
-				setState(196);
+				setState(251);
 				match(RPARENCHAR);
 				}
 				break;
-			case 34:
-				enterOuterAlt(_localctx, 34);
+			case 40:
+				enterOuterAlt(_localctx, 40);
 				{
-				setState(197);
+				setState(252);
 				match(GDS);
 				}
 				break;
-			case 35:
-				enterOuterAlt(_localctx, 35);
+			case 41:
+				enterOuterAlt(_localctx, 41);
 				{
-				setState(198);
+				setState(253);
 				match(GRAPHIC);
 				}
 				break;
-			case 36:
-				enterOuterAlt(_localctx, 36);
+			case 42:
+				enterOuterAlt(_localctx, 42);
 				{
-				setState(199);
-				match(INTDATE);
-				setState(200);
+				{
+				setState(254);
+				match(HGPR);
+				setState(255);
 				match(LPARENCHAR);
-				setState(201);
+				setState(256);
+				_la = _input.LA(1);
+				if ( !(_la==NOPRESERVE || _la==PRESERVE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(257);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 43:
+				enterOuterAlt(_localctx, 43);
+				{
+				setState(258);
+				match(INTDATE);
+				setState(259);
+				match(LPARENCHAR);
+				setState(260);
 				_la = _input.LA(1);
 				if ( !(_la==ANSI || _la==LILIAN) ) {
 				_errHandler.recoverInline(this);
@@ -1755,14 +2187,74 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(202);
+				setState(261);
 				match(RPARENCHAR);
 				}
 				break;
-			case 37:
-				enterOuterAlt(_localctx, 37);
+			case 44:
+				enterOuterAlt(_localctx, 44);
 				{
-				setState(203);
+				{
+				setState(262);
+				_la = _input.LA(1);
+				if ( !(_la==IC || _la==INITCHECK) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(266);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,18,_ctx) ) {
+				case 1:
+					{
+					setState(263);
+					match(LPARENCHAR);
+					setState(264);
+					_la = _input.LA(1);
+					if ( !(_la==LAX || _la==STRICT) ) {
+					_errHandler.recoverInline(this);
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					setState(265);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				}
+				break;
+			case 45:
+				enterOuterAlt(_localctx, 45);
+				{
+				setState(268);
+				match(INITIAL);
+				}
+				break;
+			case 46:
+				enterOuterAlt(_localctx, 46);
+				{
+				setState(269);
+				match(INLINE);
+				}
+				break;
+			case 47:
+				enterOuterAlt(_localctx, 47);
+				{
+				setState(270);
+				match(INL);
+				}
+				break;
+			case 48:
+				enterOuterAlt(_localctx, 48);
+				{
+				setState(271);
 				_la = _input.LA(1);
 				if ( !(_la==LANG || _la==LANGUAGE) ) {
 				_errHandler.recoverInline(this);
@@ -1772,11 +2264,11 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(204);
+				setState(272);
 				match(LPARENCHAR);
-				setState(205);
+				setState(273);
 				_la = _input.LA(1);
-				if ( !(((((_la - 44)) & ~0x3f) == 0 && ((1L << (_la - 44)) & ((1L << (CS - 44)) | (1L << (EN - 44)) | (1L << (ENGLISH - 44)) | (1L << (JA - 44)) | (1L << (JP - 44)) | (1L << (KA - 44)))) != 0) || _la==UE) ) {
+				if ( !(_la==CS || ((((_la - 82)) & ~0x3f) == 0 && ((1L << (_la - 82)) & ((1L << (EN - 82)) | (1L << (ENGLISH - 82)) | (1L << (JA - 82)) | (1L << (JP - 82)) | (1L << (KA - 82)))) != 0) || _la==UE) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1784,42 +2276,42 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(206);
+				setState(274);
 				match(RPARENCHAR);
 				}
 				break;
-			case 38:
-				enterOuterAlt(_localctx, 38);
+			case 49:
+				enterOuterAlt(_localctx, 49);
 				{
-				setState(207);
+				setState(275);
 				match(LEASM);
 				}
 				break;
-			case 39:
-				enterOuterAlt(_localctx, 39);
+			case 50:
+				enterOuterAlt(_localctx, 50);
 				{
-				setState(208);
+				setState(276);
 				match(LENGTH);
 				}
 				break;
-			case 40:
-				enterOuterAlt(_localctx, 40);
+			case 51:
+				enterOuterAlt(_localctx, 51);
 				{
-				setState(209);
+				setState(277);
 				match(LIB);
 				}
 				break;
-			case 41:
-				enterOuterAlt(_localctx, 41);
+			case 52:
+				enterOuterAlt(_localctx, 52);
 				{
-				setState(210);
+				setState(278);
 				match(LIN);
 				}
 				break;
-			case 42:
-				enterOuterAlt(_localctx, 42);
+			case 53:
+				enterOuterAlt(_localctx, 53);
 				{
-				setState(211);
+				setState(279);
 				_la = _input.LA(1);
 				if ( !(_la==LC || _la==LINECOUNT) ) {
 				_errHandler.recoverInline(this);
@@ -1829,68 +2321,122 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(212);
+				setState(280);
 				match(LPARENCHAR);
-				setState(213);
+				setState(281);
 				literal();
-				setState(214);
+				setState(282);
 				match(RPARENCHAR);
 				}
 				break;
-			case 43:
-				enterOuterAlt(_localctx, 43);
+			case 54:
+				enterOuterAlt(_localctx, 54);
 				{
-				setState(216);
+				setState(284);
 				match(LINKAGE);
 				}
 				break;
-			case 44:
-				enterOuterAlt(_localctx, 44);
+			case 55:
+				enterOuterAlt(_localctx, 55);
 				{
-				setState(217);
+				setState(285);
 				match(LIST);
 				}
 				break;
-			case 45:
-				enterOuterAlt(_localctx, 45);
+			case 56:
+				enterOuterAlt(_localctx, 56);
 				{
-				setState(218);
-				match(MAP);
+				{
+				setState(286);
+				match(LP);
+				setState(287);
+				match(LPARENCHAR);
+				setState(288);
+				literal();
+				setState(289);
+				match(RPARENCHAR);
+				}
 				}
 				break;
-			case 46:
-				enterOuterAlt(_localctx, 46);
+			case 57:
+				enterOuterAlt(_localctx, 57);
 				{
-				setState(219);
+				{
+				setState(291);
+				match(MAP);
+				setState(295);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
+				case 1:
+					{
+					setState(292);
+					match(LPARENCHAR);
+					setState(293);
+					_la = _input.LA(1);
+					if ( !(_la==DEC || _la==HEX) ) {
+					_errHandler.recoverInline(this);
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					setState(294);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				}
+				break;
+			case 58:
+				enterOuterAlt(_localctx, 58);
+				{
+				setState(297);
 				match(MARGINS);
-				setState(220);
+				setState(298);
 				match(LPARENCHAR);
-				setState(221);
+				setState(299);
 				literal();
-				setState(222);
+				setState(300);
 				match(COMMACHAR);
-				setState(223);
+				setState(301);
 				literal();
-				setState(226);
+				setState(304);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==COMMACHAR) {
 					{
-					setState(224);
+					setState(302);
 					match(COMMACHAR);
-					setState(225);
+					setState(303);
 					literal();
 					}
 				}
 
-				setState(228);
+				setState(306);
 				match(RPARENCHAR);
 				}
 				break;
-			case 47:
-				enterOuterAlt(_localctx, 47);
+			case 59:
+				enterOuterAlt(_localctx, 59);
 				{
-				setState(230);
+				{
+				setState(308);
+				match(MAXPCF);
+				setState(309);
+				match(LPARENCHAR);
+				setState(310);
+				literal();
+				setState(311);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 60:
+				enterOuterAlt(_localctx, 60);
+				{
+				setState(313);
 				_la = _input.LA(1);
 				if ( !(_la==MD || _la==MDECK) ) {
 				_errHandler.recoverInline(this);
@@ -1900,14 +2446,14 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(234);
+				setState(317);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,15,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
 				case 1:
 					{
-					setState(231);
+					setState(314);
 					match(LPARENCHAR);
-					setState(232);
+					setState(315);
 					_la = _input.LA(1);
 					if ( !(_la==COMPILE || _la==NOC || _la==NOCOMPILE || _la==C_CHAR) ) {
 					_errHandler.recoverInline(this);
@@ -1917,26 +2463,26 @@ public class CobolPreprocessorParser extends Parser {
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					setState(233);
+					setState(316);
 					match(RPARENCHAR);
 					}
 					break;
 				}
 				}
 				break;
-			case 48:
-				enterOuterAlt(_localctx, 48);
+			case 61:
+				enterOuterAlt(_localctx, 61);
 				{
-				setState(236);
+				setState(319);
 				match(NAME);
-				setState(240);
+				setState(323);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,16,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,22,_ctx) ) {
 				case 1:
 					{
-					setState(237);
+					setState(320);
 					match(LPARENCHAR);
-					setState(238);
+					setState(321);
 					_la = _input.LA(1);
 					if ( !(_la==ALIAS || _la==NOALIAS) ) {
 					_errHandler.recoverInline(this);
@@ -1946,23 +2492,23 @@ public class CobolPreprocessorParser extends Parser {
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					setState(239);
+					setState(322);
 					match(RPARENCHAR);
 					}
 					break;
 				}
 				}
 				break;
-			case 49:
-				enterOuterAlt(_localctx, 49);
+			case 62:
+				enterOuterAlt(_localctx, 62);
 				{
-				setState(242);
+				setState(325);
 				match(NATLANG);
-				setState(243);
+				setState(326);
 				match(LPARENCHAR);
-				setState(244);
+				setState(327);
 				_la = _input.LA(1);
-				if ( !(((((_la - 44)) & ~0x3f) == 0 && ((1L << (_la - 44)) & ((1L << (CS - 44)) | (1L << (EN - 44)) | (1L << (KA - 44)))) != 0)) ) {
+				if ( !(_la==CS || _la==EN || _la==KA) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -1970,63 +2516,63 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(245);
+				setState(328);
 				match(RPARENCHAR);
 				}
 				break;
-			case 50:
-				enterOuterAlt(_localctx, 50);
+			case 63:
+				enterOuterAlt(_localctx, 63);
 				{
-				setState(246);
+				setState(329);
 				match(NOADATA);
 				}
 				break;
-			case 51:
-				enterOuterAlt(_localctx, 51);
+			case 64:
+				enterOuterAlt(_localctx, 64);
 				{
-				setState(247);
+				setState(330);
 				match(NOADV);
 				}
 				break;
-			case 52:
-				enterOuterAlt(_localctx, 52);
+			case 65:
+				enterOuterAlt(_localctx, 65);
 				{
-				setState(248);
+				setState(331);
 				match(NOAWO);
 				}
 				break;
-			case 53:
-				enterOuterAlt(_localctx, 53);
+			case 66:
+				enterOuterAlt(_localctx, 66);
 				{
-				setState(249);
+				setState(332);
 				match(NOBLOCK0);
 				}
 				break;
-			case 54:
-				enterOuterAlt(_localctx, 54);
+			case 67:
+				enterOuterAlt(_localctx, 67);
 				{
-				setState(250);
+				setState(333);
 				match(NOCBLCARD);
 				}
 				break;
-			case 55:
-				enterOuterAlt(_localctx, 55);
+			case 68:
+				enterOuterAlt(_localctx, 68);
 				{
-				setState(251);
+				setState(334);
 				match(NOCICS);
 				}
 				break;
-			case 56:
-				enterOuterAlt(_localctx, 56);
+			case 69:
+				enterOuterAlt(_localctx, 69);
 				{
-				setState(252);
+				setState(335);
 				match(NOCMPR2);
 				}
 				break;
-			case 57:
-				enterOuterAlt(_localctx, 57);
+			case 70:
+				enterOuterAlt(_localctx, 70);
 				{
-				setState(253);
+				setState(336);
 				_la = _input.LA(1);
 				if ( !(_la==NOC || _la==NOCOMPILE) ) {
 				_errHandler.recoverInline(this);
@@ -2036,16 +2582,16 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(257);
+				setState(340);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,17,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
 				case 1:
 					{
-					setState(254);
+					setState(337);
 					match(LPARENCHAR);
-					setState(255);
+					setState(338);
 					_la = _input.LA(1);
-					if ( !(((((_la - 288)) & ~0x3f) == 0 && ((1L << (_la - 288)) & ((1L << (E_CHAR - 288)) | (1L << (S_CHAR - 288)) | (1L << (W_CHAR - 288)))) != 0)) ) {
+					if ( !(((((_la - 392)) & ~0x3f) == 0 && ((1L << (_la - 392)) & ((1L << (E_CHAR - 392)) | (1L << (S_CHAR - 392)) | (1L << (W_CHAR - 392)))) != 0)) ) {
 					_errHandler.recoverInline(this);
 					}
 					else {
@@ -2053,24 +2599,52 @@ public class CobolPreprocessorParser extends Parser {
 						_errHandler.reportMatch(this);
 						consume();
 					}
-					setState(256);
+					setState(339);
 					match(RPARENCHAR);
 					}
 					break;
 				}
 				}
 				break;
-			case 58:
-				enterOuterAlt(_localctx, 58);
+			case 71:
+				enterOuterAlt(_localctx, 71);
 				{
-				setState(259);
+				setState(342);
+				match(NOCOPYLOC);
+				}
+				break;
+			case 72:
+				enterOuterAlt(_localctx, 72);
+				{
+				setState(343);
+				match(NOCPLC);
+				}
+				break;
+			case 73:
+				enterOuterAlt(_localctx, 73);
+				{
+				setState(344);
+				match(NOCOPYRIGHT);
+				}
+				break;
+			case 74:
+				enterOuterAlt(_localctx, 74);
+				{
+				setState(345);
+				match(NOCPYR);
+				}
+				break;
+			case 75:
+				enterOuterAlt(_localctx, 75);
+				{
+				setState(346);
 				match(NOCPSM);
 				}
 				break;
-			case 59:
-				enterOuterAlt(_localctx, 59);
+			case 76:
+				enterOuterAlt(_localctx, 76);
 				{
-				setState(260);
+				setState(347);
 				_la = _input.LA(1);
 				if ( !(_la==NOCURR || _la==NOCURRENCY) ) {
 				_errHandler.recoverInline(this);
@@ -2082,10 +2656,10 @@ public class CobolPreprocessorParser extends Parser {
 				}
 				}
 				break;
-			case 60:
-				enterOuterAlt(_localctx, 60);
+			case 77:
+				enterOuterAlt(_localctx, 77);
 				{
-				setState(261);
+				setState(348);
 				_la = _input.LA(1);
 				if ( !(_la==NODATEPROC || _la==NODP) ) {
 				_errHandler.recoverInline(this);
@@ -2097,24 +2671,24 @@ public class CobolPreprocessorParser extends Parser {
 				}
 				}
 				break;
-			case 61:
-				enterOuterAlt(_localctx, 61);
+			case 78:
+				enterOuterAlt(_localctx, 78);
 				{
-				setState(262);
+				setState(349);
 				match(NODBCS);
 				}
 				break;
-			case 62:
-				enterOuterAlt(_localctx, 62);
+			case 79:
+				enterOuterAlt(_localctx, 79);
 				{
-				setState(263);
+				setState(350);
 				match(NODEBUG);
 				}
 				break;
-			case 63:
-				enterOuterAlt(_localctx, 63);
+			case 80:
+				enterOuterAlt(_localctx, 80);
 				{
-				setState(264);
+				setState(351);
 				_la = _input.LA(1);
 				if ( !(_la==NOD || _la==NODECK) ) {
 				_errHandler.recoverInline(this);
@@ -2126,200 +2700,41 @@ public class CobolPreprocessorParser extends Parser {
 				}
 				}
 				break;
-			case 64:
-				enterOuterAlt(_localctx, 64);
-				{
-				setState(265);
-				match(NODLL);
-				}
-				break;
-			case 65:
-				enterOuterAlt(_localctx, 65);
-				{
-				setState(266);
-				match(NODE);
-				}
-				break;
-			case 66:
-				enterOuterAlt(_localctx, 66);
-				{
-				setState(267);
-				_la = _input.LA(1);
-				if ( !(_la==NODU || _la==NODUMP) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 67:
-				enterOuterAlt(_localctx, 67);
-				{
-				setState(268);
-				_la = _input.LA(1);
-				if ( !(_la==NODIAGTRUNC || _la==NODTR) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 68:
-				enterOuterAlt(_localctx, 68);
-				{
-				setState(269);
-				_la = _input.LA(1);
-				if ( !(_la==NODYN || _la==NODYNAM) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 69:
-				enterOuterAlt(_localctx, 69);
-				{
-				setState(270);
-				match(NOEDF);
-				}
-				break;
-			case 70:
-				enterOuterAlt(_localctx, 70);
-				{
-				setState(271);
-				match(NOEPILOG);
-				}
-				break;
-			case 71:
-				enterOuterAlt(_localctx, 71);
-				{
-				setState(272);
-				match(NOEXIT);
-				}
-				break;
-			case 72:
-				enterOuterAlt(_localctx, 72);
-				{
-				setState(273);
-				_la = _input.LA(1);
-				if ( !(_la==NOEXP || _la==NOEXPORTALL) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 73:
-				enterOuterAlt(_localctx, 73);
-				{
-				setState(274);
-				_la = _input.LA(1);
-				if ( !(_la==NOFASTSRT || _la==NOFSRT) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 74:
-				enterOuterAlt(_localctx, 74);
-				{
-				setState(275);
-				match(NOFEPI);
-				}
-				break;
-			case 75:
-				enterOuterAlt(_localctx, 75);
-				{
-				setState(276);
-				_la = _input.LA(1);
-				if ( !(_la==NOF || _la==NOFLAG) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				}
-				break;
-			case 76:
-				enterOuterAlt(_localctx, 76);
-				{
-				setState(277);
-				match(NOFLAGMIG);
-				}
-				break;
-			case 77:
-				enterOuterAlt(_localctx, 77);
-				{
-				setState(278);
-				match(NOFLAGSTD);
-				}
-				break;
-			case 78:
-				enterOuterAlt(_localctx, 78);
-				{
-				setState(279);
-				match(NOGRAPHIC);
-				}
-				break;
-			case 79:
-				enterOuterAlt(_localctx, 79);
-				{
-				setState(280);
-				match(NOLENGTH);
-				}
-				break;
-			case 80:
-				enterOuterAlt(_localctx, 80);
-				{
-				setState(281);
-				match(NOLIB);
-				}
-				break;
 			case 81:
 				enterOuterAlt(_localctx, 81);
 				{
-				setState(282);
-				match(NOLINKAGE);
+				setState(352);
+				_la = _input.LA(1);
+				if ( !(_la==NODEFINE || _la==NODEF) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 82:
 				enterOuterAlt(_localctx, 82);
 				{
-				setState(283);
-				match(NOLIST);
+				setState(353);
+				match(NODLL);
 				}
 				break;
 			case 83:
 				enterOuterAlt(_localctx, 83);
 				{
-				setState(284);
-				match(NOMAP);
+				setState(354);
+				match(NODE);
 				}
 				break;
 			case 84:
 				enterOuterAlt(_localctx, 84);
 				{
-				setState(285);
+				setState(355);
 				_la = _input.LA(1);
-				if ( !(_la==NOMD || _la==NOMDECK) ) {
+				if ( !(_la==NODU || _la==NODUMP) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2332,16 +2747,24 @@ public class CobolPreprocessorParser extends Parser {
 			case 85:
 				enterOuterAlt(_localctx, 85);
 				{
-				setState(286);
-				match(NONAME);
+				setState(356);
+				_la = _input.LA(1);
+				if ( !(_la==NODIAGTRUNC || _la==NODTR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 86:
 				enterOuterAlt(_localctx, 86);
 				{
-				setState(287);
+				setState(357);
 				_la = _input.LA(1);
-				if ( !(_la==NONUM || _la==NONUMBER) ) {
+				if ( !(_la==NODYN || _la==NODYNAM) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2354,46 +2777,30 @@ public class CobolPreprocessorParser extends Parser {
 			case 87:
 				enterOuterAlt(_localctx, 87);
 				{
-				setState(288);
-				_la = _input.LA(1);
-				if ( !(_la==NOOBJ || _la==NOOBJECT) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(358);
+				match(NOEDF);
 				}
 				break;
 			case 88:
 				enterOuterAlt(_localctx, 88);
 				{
-				setState(289);
-				_la = _input.LA(1);
-				if ( !(_la==NOOFF || _la==NOOFFSET) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(359);
+				match(NOEPILOG);
 				}
 				break;
 			case 89:
 				enterOuterAlt(_localctx, 89);
 				{
-				setState(290);
-				match(NOOPSEQUENCE);
+				setState(360);
+				match(NOEXIT);
 				}
 				break;
 			case 90:
 				enterOuterAlt(_localctx, 90);
 				{
-				setState(291);
+				setState(361);
 				_la = _input.LA(1);
-				if ( !(_la==NOOPT || _la==NOOPTIMIZE) ) {
+				if ( !(_la==NOEXP || _la==NOEXPORTALL) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2406,154 +2813,138 @@ public class CobolPreprocessorParser extends Parser {
 			case 91:
 				enterOuterAlt(_localctx, 91);
 				{
-				setState(292);
-				match(NOOPTIONS);
+				setState(362);
+				_la = _input.LA(1);
+				if ( !(_la==NOFASTSRT || _la==NOFSRT) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 92:
 				enterOuterAlt(_localctx, 92);
 				{
-				setState(293);
-				match(NOP);
+				setState(363);
+				match(NOFEPI);
 				}
 				break;
 			case 93:
 				enterOuterAlt(_localctx, 93);
 				{
-				setState(294);
-				match(NOPROLOG);
+				setState(364);
+				_la = _input.LA(1);
+				if ( !(_la==NOF || _la==NOFLAG) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 94:
 				enterOuterAlt(_localctx, 94);
 				{
-				setState(295);
-				match(NORENT);
+				setState(365);
+				match(NOFLAGMIG);
 				}
 				break;
 			case 95:
 				enterOuterAlt(_localctx, 95);
 				{
-				setState(296);
-				_la = _input.LA(1);
-				if ( !(_la==NOSEQ || _la==NOSEQUENCE) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(366);
+				match(NOFLAGSTD);
 				}
 				break;
 			case 96:
 				enterOuterAlt(_localctx, 96);
 				{
-				setState(297);
-				_la = _input.LA(1);
-				if ( !(_la==NOS || _la==NOSOURCE) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(367);
+				match(NOGRAPHIC);
 				}
 				break;
 			case 97:
 				enterOuterAlt(_localctx, 97);
 				{
-				setState(298);
-				match(NOSPIE);
+				setState(368);
+				_la = _input.LA(1);
+				if ( !(_la==NOINITCHECK || _la==NOIC) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 98:
 				enterOuterAlt(_localctx, 98);
 				{
-				setState(299);
-				match(NOSQL);
+				setState(369);
+				match(NOINITIAL);
 				}
 				break;
 			case 99:
 				enterOuterAlt(_localctx, 99);
 				{
-				setState(300);
-				_la = _input.LA(1);
-				if ( !(_la==NOSQLC || _la==NOSQLCCSID) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(370);
+				match(NOINLINE);
 				}
 				break;
 			case 100:
 				enterOuterAlt(_localctx, 100);
 				{
-				setState(301);
-				_la = _input.LA(1);
-				if ( !(_la==NOSSR || _la==NOSSRANGE) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(371);
+				match(NOINL);
 				}
 				break;
 			case 101:
 				enterOuterAlt(_localctx, 101);
 				{
-				setState(302);
-				match(NOSTDTRUNC);
+				setState(372);
+				match(NOLENGTH);
 				}
 				break;
 			case 102:
 				enterOuterAlt(_localctx, 102);
 				{
-				setState(303);
-				_la = _input.LA(1);
-				if ( !(_la==NOTERM || _la==NOTERMINAL) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(373);
+				match(NOLIB);
 				}
 				break;
 			case 103:
 				enterOuterAlt(_localctx, 103);
 				{
-				setState(304);
-				match(NOTEST);
+				setState(374);
+				match(NOLINKAGE);
 				}
 				break;
 			case 104:
 				enterOuterAlt(_localctx, 104);
 				{
-				setState(305);
-				match(NOTHREAD);
+				setState(375);
+				match(NOLIST);
 				}
 				break;
 			case 105:
 				enterOuterAlt(_localctx, 105);
 				{
-				setState(306);
-				match(NOVBREF);
+				setState(376);
+				match(NOMAP);
 				}
 				break;
 			case 106:
 				enterOuterAlt(_localctx, 106);
 				{
-				setState(307);
+				setState(377);
 				_la = _input.LA(1);
-				if ( !(_la==NOWD || _la==NOWORD) ) {
+				if ( !(_la==NOMD || _la==NOMDECK) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2566,16 +2957,16 @@ public class CobolPreprocessorParser extends Parser {
 			case 107:
 				enterOuterAlt(_localctx, 107);
 				{
-				setState(308);
-				match(NSEQ);
+				setState(378);
+				match(NONAME);
 				}
 				break;
 			case 108:
 				enterOuterAlt(_localctx, 108);
 				{
-				setState(309);
+				setState(379);
 				_la = _input.LA(1);
-				if ( !(_la==NS || _la==NSYMBOL) ) {
+				if ( !(_la==NONUM || _la==NONUMBER) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2583,35 +2974,29 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(310);
-				match(LPARENCHAR);
-				setState(311);
-				_la = _input.LA(1);
-				if ( !(_la==DBCS || _la==NAT || _la==NATIONAL) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(312);
-				match(RPARENCHAR);
 				}
 				break;
 			case 109:
 				enterOuterAlt(_localctx, 109);
 				{
-				setState(313);
-				match(NOVBREF);
+				setState(380);
+				_la = _input.LA(1);
+				if ( !(_la==NOOBJ || _la==NOOBJECT) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 110:
 				enterOuterAlt(_localctx, 110);
 				{
-				setState(314);
+				setState(381);
 				_la = _input.LA(1);
-				if ( !(_la==NOX || _la==NOXREF) ) {
+				if ( !(_la==NOOFF || _la==NOOFFSET) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2624,16 +3009,16 @@ public class CobolPreprocessorParser extends Parser {
 			case 111:
 				enterOuterAlt(_localctx, 111);
 				{
-				setState(315);
-				match(NOZWB);
+				setState(382);
+				match(NOOPSEQUENCE);
 				}
 				break;
 			case 112:
 				enterOuterAlt(_localctx, 112);
 				{
-				setState(316);
+				setState(383);
 				_la = _input.LA(1);
-				if ( !(_la==NUM || _la==NUMBER) ) {
+				if ( !(_la==NOOPT || _la==NOOPTIMIZE) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2646,221 +3031,117 @@ public class CobolPreprocessorParser extends Parser {
 			case 113:
 				enterOuterAlt(_localctx, 113);
 				{
-				setState(317);
-				match(NUMPROC);
-				setState(318);
-				match(LPARENCHAR);
-				setState(319);
-				_la = _input.LA(1);
-				if ( !(_la==MIG || _la==NOPFD || _la==PFD) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(320);
-				match(RPARENCHAR);
+				setState(384);
+				match(NOOPTIONS);
 				}
 				break;
 			case 114:
 				enterOuterAlt(_localctx, 114);
 				{
-				setState(321);
-				_la = _input.LA(1);
-				if ( !(_la==OBJ || _la==OBJECT) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(385);
+				match(NOP);
 				}
 				break;
 			case 115:
 				enterOuterAlt(_localctx, 115);
 				{
-				setState(322);
-				_la = _input.LA(1);
-				if ( !(_la==OFF || _la==OFFSET) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(386);
+				match(NOPARMCHECK);
 				}
 				break;
 			case 116:
 				enterOuterAlt(_localctx, 116);
 				{
-				setState(323);
-				match(OPMARGINS);
-				setState(324);
-				match(LPARENCHAR);
-				setState(325);
-				literal();
-				setState(326);
-				match(COMMACHAR);
-				setState(327);
-				literal();
-				setState(330);
-				_errHandler.sync(this);
-				_la = _input.LA(1);
-				if (_la==COMMACHAR) {
-					{
-					setState(328);
-					match(COMMACHAR);
-					setState(329);
-					literal();
-					}
-				}
-
-				setState(332);
-				match(RPARENCHAR);
+				setState(387);
+				match(NOPROLOG);
 				}
 				break;
 			case 117:
 				enterOuterAlt(_localctx, 117);
 				{
-				setState(334);
-				match(OPSEQUENCE);
-				setState(335);
-				match(LPARENCHAR);
-				setState(336);
-				literal();
-				setState(337);
-				match(COMMACHAR);
-				setState(338);
-				literal();
-				setState(339);
-				match(RPARENCHAR);
+				setState(388);
+				match(NORENT);
 				}
 				break;
 			case 118:
 				enterOuterAlt(_localctx, 118);
 				{
-				setState(341);
-				_la = _input.LA(1);
-				if ( !(_la==OPT || _la==OPTIMIZE) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(345);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,19,_ctx) ) {
-				case 1:
-					{
-					setState(342);
-					match(LPARENCHAR);
-					setState(343);
-					_la = _input.LA(1);
-					if ( !(_la==FULL || _la==STD) ) {
-					_errHandler.recoverInline(this);
-					}
-					else {
-						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-						_errHandler.reportMatch(this);
-						consume();
-					}
-					setState(344);
-					match(RPARENCHAR);
-					}
-					break;
-				}
+				setState(389);
+				match(NORULES);
 				}
 				break;
 			case 119:
 				enterOuterAlt(_localctx, 119);
 				{
-				setState(347);
-				match(OPTFILE);
+				setState(390);
+				_la = _input.LA(1);
+				if ( !(_la==NOSEQ || _la==NOSEQUENCE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 120:
 				enterOuterAlt(_localctx, 120);
 				{
-				setState(348);
-				match(OPTIONS);
+				setState(391);
+				_la = _input.LA(1);
+				if ( !(_la==NOSERV || _la==NOSERVICE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 121:
 				enterOuterAlt(_localctx, 121);
 				{
-				setState(349);
-				match(OP);
+				setState(392);
+				_la = _input.LA(1);
+				if ( !(_la==NOS || _la==NOSOURCE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 122:
 				enterOuterAlt(_localctx, 122);
 				{
-				setState(350);
-				_la = _input.LA(1);
-				if ( !(_la==OUT || _la==OUTDD) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(351);
-				match(LPARENCHAR);
-				setState(352);
-				cobolWord();
-				setState(353);
-				match(RPARENCHAR);
+				setState(393);
+				match(NOSPIE);
 				}
 				break;
 			case 123:
 				enterOuterAlt(_localctx, 123);
 				{
-				setState(355);
-				_la = _input.LA(1);
-				if ( !(_la==PGMN || _la==PGMNAME) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(356);
-				match(LPARENCHAR);
-				setState(357);
-				_la = _input.LA(1);
-				if ( !(_la==CO || _la==COMPAT || ((((_la - 103)) & ~0x3f) == 0 && ((1L << (_la - 103)) & ((1L << (LM - 103)) | (1L << (LONGMIXED - 103)) | (1L << (LONGUPPER - 103)) | (1L << (LU - 103)) | (1L << (MIXED - 103)))) != 0) || ((((_la - 274)) & ~0x3f) == 0 && ((1L << (_la - 274)) & ((1L << (UPPER - 274)) | (1L << (M_CHAR - 274)) | (1L << (U_CHAR - 274)))) != 0)) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(358);
-				match(RPARENCHAR);
+				setState(394);
+				match(NOSQL);
 				}
 				break;
 			case 124:
 				enterOuterAlt(_localctx, 124);
 				{
-				setState(359);
-				match(PROLOG);
+				setState(395);
+				match(NOSQLIMS);
 				}
 				break;
 			case 125:
 				enterOuterAlt(_localctx, 125);
 				{
-				setState(360);
+				setState(396);
 				_la = _input.LA(1);
-				if ( !(_la==QUOTE || _la==Q_CHAR) ) {
+				if ( !(_la==NOSQLC || _la==NOSQLCCSID) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2873,85 +3154,38 @@ public class CobolPreprocessorParser extends Parser {
 			case 126:
 				enterOuterAlt(_localctx, 126);
 				{
-				setState(361);
-				match(RENT);
+				setState(397);
+				_la = _input.LA(1);
+				if ( !(_la==NOSSR || _la==NOSSRANGE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
 				}
 				break;
 			case 127:
 				enterOuterAlt(_localctx, 127);
 				{
-				setState(362);
-				match(RMODE);
-				setState(363);
-				match(LPARENCHAR);
-				setState(367);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case ANY:
-					{
-					setState(364);
-					match(ANY);
-					}
-					break;
-				case AUTO:
-					{
-					setState(365);
-					match(AUTO);
-					}
-					break;
-				case NONNUMERICLITERAL:
-				case NUMERICLITERAL:
-					{
-					setState(366);
-					literal();
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				setState(369);
-				match(RPARENCHAR);
+				setState(398);
+				match(NOSTDTRUNC);
 				}
 				break;
 			case 128:
 				enterOuterAlt(_localctx, 128);
 				{
-				setState(370);
-				_la = _input.LA(1);
-				if ( !(_la==SEQ || _la==SEQUENCE) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(377);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,21,_ctx) ) {
-				case 1:
-					{
-					setState(371);
-					match(LPARENCHAR);
-					setState(372);
-					literal();
-					setState(373);
-					match(COMMACHAR);
-					setState(374);
-					literal();
-					setState(375);
-					match(RPARENCHAR);
-					}
-					break;
-				}
+				setState(399);
+				match(NOSTGOPT);
 				}
 				break;
 			case 129:
 				enterOuterAlt(_localctx, 129);
 				{
-				setState(379);
+				setState(400);
 				_la = _input.LA(1);
-				if ( !(_la==SIZE || _la==SZ) ) {
+				if ( !(_la==NOSUPP || _la==NOSUPPRESS) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -2959,37 +3193,14 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(380);
-				match(LPARENCHAR);
-				setState(383);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case MAX:
-					{
-					setState(381);
-					match(MAX);
-					}
-					break;
-				case NONNUMERICLITERAL:
-				case NUMERICLITERAL:
-					{
-					setState(382);
-					literal();
-					}
-					break;
-				default:
-					throw new NoViableAltException(this);
-				}
-				setState(385);
-				match(RPARENCHAR);
 				}
 				break;
 			case 130:
 				enterOuterAlt(_localctx, 130);
 				{
-				setState(386);
+				setState(401);
 				_la = _input.LA(1);
-				if ( !(_la==SOURCE || _la==S_CHAR) ) {
+				if ( !(_la==NOTERM || _la==NOTERMINAL) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3002,72 +3213,52 @@ public class CobolPreprocessorParser extends Parser {
 			case 131:
 				enterOuterAlt(_localctx, 131);
 				{
-				setState(387);
-				match(SP);
+				setState(402);
+				match(NOTEST);
 				}
 				break;
 			case 132:
 				enterOuterAlt(_localctx, 132);
 				{
-				setState(388);
-				match(SPACE);
-				setState(389);
-				match(LPARENCHAR);
-				setState(390);
-				literal();
-				setState(391);
-				match(RPARENCHAR);
+				setState(403);
+				match(NOTHREAD);
 				}
 				break;
 			case 133:
 				enterOuterAlt(_localctx, 133);
 				{
-				setState(393);
-				match(SPIE);
+				setState(404);
+				match(NOVBREF);
 				}
 				break;
 			case 134:
 				enterOuterAlt(_localctx, 134);
 				{
-				setState(394);
-				match(SQL);
-				setState(399);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,23,_ctx) ) {
-				case 1:
-					{
-					setState(395);
-					match(LPARENCHAR);
-					setState(396);
-					literal();
-					setState(397);
-					match(RPARENCHAR);
-					}
-					break;
+				setState(405);
+				_la = _input.LA(1);
+				if ( !(_la==NOWD || _la==NOWORD) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
 				}
 				}
 				break;
 			case 135:
 				enterOuterAlt(_localctx, 135);
 				{
-				setState(401);
-				_la = _input.LA(1);
-				if ( !(_la==SQLC || _la==SQLCCSID) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
+				setState(406);
+				match(NSEQ);
 				}
 				break;
 			case 136:
 				enterOuterAlt(_localctx, 136);
 				{
-				setState(402);
+				setState(407);
 				_la = _input.LA(1);
-				if ( !(_la==SSR || _la==SSRANGE) ) {
+				if ( !(_la==NS || _la==NSYMBOL) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3075,21 +3266,35 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
+				setState(408);
+				match(LPARENCHAR);
+				setState(409);
+				_la = _input.LA(1);
+				if ( !(_la==DBCS || _la==NAT || _la==NATIONAL) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(410);
+				match(RPARENCHAR);
 				}
 				break;
 			case 137:
 				enterOuterAlt(_localctx, 137);
 				{
-				setState(403);
-				match(SYSEIB);
+				setState(411);
+				match(NOVBREF);
 				}
 				break;
 			case 138:
 				enterOuterAlt(_localctx, 138);
 				{
-				setState(404);
+				setState(412);
 				_la = _input.LA(1);
-				if ( !(_la==TERM || _la==TERMINAL) ) {
+				if ( !(_la==NOX || _la==NOXREF) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3102,113 +3307,31 @@ public class CobolPreprocessorParser extends Parser {
 			case 139:
 				enterOuterAlt(_localctx, 139);
 				{
-				setState(405);
-				match(TEST);
-				setState(423);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
-				case 1:
-					{
-					setState(406);
-					match(LPARENCHAR);
-					setState(408);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (_la==HOOK || _la==NOHOOK) {
-						{
-						setState(407);
-						_la = _input.LA(1);
-						if ( !(_la==HOOK || _la==NOHOOK) ) {
-						_errHandler.recoverInline(this);
-						}
-						else {
-							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-							_errHandler.reportMatch(this);
-							consume();
-						}
-						}
-					}
-
-					setState(411);
-					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,25,_ctx) ) {
-					case 1:
-						{
-						setState(410);
-						match(COMMACHAR);
-						}
-						break;
-					}
-					setState(414);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (((((_la - 186)) & ~0x3f) == 0 && ((1L << (_la - 186)) & ((1L << (NOSEP - 186)) | (1L << (NOSEPARATE - 186)) | (1L << (SEP - 186)) | (1L << (SEPARATE - 186)))) != 0)) {
-						{
-						setState(413);
-						_la = _input.LA(1);
-						if ( !(((((_la - 186)) & ~0x3f) == 0 && ((1L << (_la - 186)) & ((1L << (NOSEP - 186)) | (1L << (NOSEPARATE - 186)) | (1L << (SEP - 186)) | (1L << (SEPARATE - 186)))) != 0)) ) {
-						_errHandler.recoverInline(this);
-						}
-						else {
-							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-							_errHandler.reportMatch(this);
-							consume();
-						}
-						}
-					}
-
-					setState(417);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (_la==COMMACHAR) {
-						{
-						setState(416);
-						match(COMMACHAR);
-						}
-					}
-
-					setState(420);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					if (_la==EJPD || _la==NOEJPD) {
-						{
-						setState(419);
-						_la = _input.LA(1);
-						if ( !(_la==EJPD || _la==NOEJPD) ) {
-						_errHandler.recoverInline(this);
-						}
-						else {
-							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-							_errHandler.reportMatch(this);
-							consume();
-						}
-						}
-					}
-
-					setState(422);
-					match(RPARENCHAR);
-					}
-					break;
+				setState(413);
+				_la = _input.LA(1);
+				if ( !(_la==NOZC || _la==NOZONECHECK) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
 				}
 				}
 				break;
 			case 140:
 				enterOuterAlt(_localctx, 140);
 				{
-				setState(425);
-				match(THREAD);
+				setState(414);
+				match(NOZWB);
 				}
 				break;
 			case 141:
 				enterOuterAlt(_localctx, 141);
 				{
-				setState(426);
-				match(TRUNC);
-				setState(427);
-				match(LPARENCHAR);
-				setState(428);
+				setState(415);
 				_la = _input.LA(1);
-				if ( !(_la==BIN || _la==OPT || _la==STD) ) {
+				if ( !(_la==NUM || _la==NUMBER) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3216,73 +3339,15 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(429);
-				match(RPARENCHAR);
 				}
 				break;
 			case 142:
 				enterOuterAlt(_localctx, 142);
 				{
-				setState(430);
-				match(VBREF);
-				}
-				break;
-			case 143:
-				enterOuterAlt(_localctx, 143);
 				{
-				setState(431);
+				setState(416);
 				_la = _input.LA(1);
-				if ( !(_la==WD || _la==WORD) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(432);
-				match(LPARENCHAR);
-				setState(433);
-				cobolWord();
-				setState(434);
-				match(RPARENCHAR);
-				}
-				break;
-			case 144:
-				enterOuterAlt(_localctx, 144);
-				{
-				setState(436);
-				_la = _input.LA(1);
-				if ( !(_la==XMLPARSE || _la==XP) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(437);
-				match(LPARENCHAR);
-				setState(438);
-				_la = _input.LA(1);
-				if ( !(_la==COMPAT || ((((_la - 279)) & ~0x3f) == 0 && ((1L << (_la - 279)) & ((1L << (XMLSS - 279)) | (1L << (C_CHAR - 279)) | (1L << (X_CHAR - 279)))) != 0)) ) {
-				_errHandler.recoverInline(this);
-				}
-				else {
-					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
-					_errHandler.reportMatch(this);
-					consume();
-				}
-				setState(439);
-				match(RPARENCHAR);
-				}
-				break;
-			case 145:
-				enterOuterAlt(_localctx, 145);
-				{
-				setState(440);
-				_la = _input.LA(1);
-				if ( !(_la==XREF || _la==X_CHAR) ) {
+				if ( !(_la==NC || _la==NUMCHECK) ) {
 				_errHandler.recoverInline(this);
 				}
 				else {
@@ -3292,19 +3357,125 @@ public class CobolPreprocessorParser extends Parser {
 				}
 				setState(446);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,31,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,32,_ctx) ) {
 				case 1:
 					{
-					setState(441);
+					setState(417);
 					match(LPARENCHAR);
+					setState(425);
+					_errHandler.sync(this);
+					switch (_input.LA(1)) {
+					case ZON:
+						{
+						setState(418);
+						match(ZON);
+						setState(422);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+						if (_la==LPARENCHAR) {
+							{
+							setState(419);
+							match(LPARENCHAR);
+							setState(420);
+							_la = _input.LA(1);
+							if ( !(_la==ALPHNUM || _la==NOALPHNUM) ) {
+							_errHandler.recoverInline(this);
+							}
+							else {
+								if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+								_errHandler.reportMatch(this);
+								consume();
+							}
+							setState(421);
+							match(RPARENCHAR);
+							}
+						}
+
+						}
+						break;
+					case NOZON:
+						{
+						setState(424);
+						match(NOZON);
+						}
+						break;
+					default:
+						throw new NoViableAltException(this);
+					}
+					setState(431);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,27,_ctx) ) {
+					case 1:
+						{
+						setState(428);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+						if (_la==COMMACHAR) {
+							{
+							setState(427);
+							match(COMMACHAR);
+							}
+						}
+
+						setState(430);
+						_la = _input.LA(1);
+						if ( !(_la==NOPAC || _la==PAC) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+						break;
+					}
+					setState(437);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,29,_ctx) ) {
+					case 1:
+						{
+						setState(434);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+						if (_la==COMMACHAR) {
+							{
+							setState(433);
+							match(COMMACHAR);
+							}
+						}
+
+						setState(436);
+						_la = _input.LA(1);
+						if ( !(_la==BIN || _la==NOBIN) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+						break;
+					}
 					setState(443);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
-					if (_la==FULL || _la==SHORT) {
+					if (_la==ABD || _la==MSG || _la==COMMACHAR) {
 						{
+						setState(440);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+						if (_la==COMMACHAR) {
+							{
+							setState(439);
+							match(COMMACHAR);
+							}
+						}
+
 						setState(442);
 						_la = _input.LA(1);
-						if ( !(_la==FULL || _la==SHORT) ) {
+						if ( !(_la==ABD || _la==MSG) ) {
 						_errHandler.recoverInline(this);
 						}
 						else {
@@ -3321,11 +3492,987 @@ public class CobolPreprocessorParser extends Parser {
 					break;
 				}
 				}
+				}
+				break;
+			case 143:
+				enterOuterAlt(_localctx, 143);
+				{
+				setState(448);
+				match(NUMPROC);
+				setState(449);
+				match(LPARENCHAR);
+				setState(450);
+				_la = _input.LA(1);
+				if ( !(_la==MIG || _la==NOPFD || _la==PFD) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(451);
+				match(RPARENCHAR);
+				}
+				break;
+			case 144:
+				enterOuterAlt(_localctx, 144);
+				{
+				setState(452);
+				_la = _input.LA(1);
+				if ( !(_la==OBJ || _la==OBJECT) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 145:
+				enterOuterAlt(_localctx, 145);
+				{
+				setState(453);
+				_la = _input.LA(1);
+				if ( !(_la==OFF || _la==OFFSET) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
 				break;
 			case 146:
 				enterOuterAlt(_localctx, 146);
 				{
-				setState(448);
+				setState(454);
+				match(OPMARGINS);
+				setState(455);
+				match(LPARENCHAR);
+				setState(456);
+				literal();
+				setState(457);
+				match(COMMACHAR);
+				setState(458);
+				literal();
+				setState(461);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==COMMACHAR) {
+					{
+					setState(459);
+					match(COMMACHAR);
+					setState(460);
+					literal();
+					}
+				}
+
+				setState(463);
+				match(RPARENCHAR);
+				}
+				break;
+			case 147:
+				enterOuterAlt(_localctx, 147);
+				{
+				setState(465);
+				match(OPSEQUENCE);
+				setState(466);
+				match(LPARENCHAR);
+				setState(467);
+				literal();
+				setState(468);
+				match(COMMACHAR);
+				setState(469);
+				literal();
+				setState(470);
+				match(RPARENCHAR);
+				}
+				break;
+			case 148:
+				enterOuterAlt(_localctx, 148);
+				{
+				setState(472);
+				_la = _input.LA(1);
+				if ( !(_la==OPT || _la==OPTIMIZE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(476);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
+				case 1:
+					{
+					setState(473);
+					match(LPARENCHAR);
+					setState(474);
+					_la = _input.LA(1);
+					if ( !(_la==FULL || _la==STD) ) {
+					_errHandler.recoverInline(this);
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					setState(475);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				break;
+			case 149:
+				enterOuterAlt(_localctx, 149);
+				{
+				setState(478);
+				match(OPTFILE);
+				}
+				break;
+			case 150:
+				enterOuterAlt(_localctx, 150);
+				{
+				setState(479);
+				match(OPTIONS);
+				}
+				break;
+			case 151:
+				enterOuterAlt(_localctx, 151);
+				{
+				setState(480);
+				match(OP);
+				}
+				break;
+			case 152:
+				enterOuterAlt(_localctx, 152);
+				{
+				setState(481);
+				_la = _input.LA(1);
+				if ( !(_la==OUT || _la==OUTDD) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(482);
+				match(LPARENCHAR);
+				setState(483);
+				cobolWord();
+				setState(484);
+				match(RPARENCHAR);
+				}
+				break;
+			case 153:
+				enterOuterAlt(_localctx, 153);
+				{
+				{
+				setState(486);
+				_la = _input.LA(1);
+				if ( !(_la==PARMCHECK || _la==PC) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(498);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,38,_ctx) ) {
+				case 1:
+					{
+					setState(487);
+					match(LPARENCHAR);
+					setState(489);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==ABD || _la==MSG) {
+						{
+						setState(488);
+						_la = _input.LA(1);
+						if ( !(_la==ABD || _la==MSG) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+					}
+
+					setState(495);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (((((_la - 404)) & ~0x3f) == 0 && ((1L << (_la - 404)) & ((1L << (COMMACHAR - 404)) | (1L << (NONNUMERICLITERAL - 404)) | (1L << (NUMERICLITERAL - 404)))) != 0)) {
+						{
+						setState(492);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+						if (_la==COMMACHAR) {
+							{
+							setState(491);
+							match(COMMACHAR);
+							}
+						}
+
+						setState(494);
+						literal();
+						}
+					}
+
+					setState(497);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				}
+				break;
+			case 154:
+				enterOuterAlt(_localctx, 154);
+				{
+				setState(500);
+				_la = _input.LA(1);
+				if ( !(_la==PGMN || _la==PGMNAME) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(501);
+				match(LPARENCHAR);
+				setState(502);
+				_la = _input.LA(1);
+				if ( !(_la==CO || _la==COMPAT || ((((_la - 132)) & ~0x3f) == 0 && ((1L << (_la - 132)) & ((1L << (LM - 132)) | (1L << (LONGMIXED - 132)) | (1L << (LONGUPPER - 132)) | (1L << (LU - 132)) | (1L << (MIXED - 132)))) != 0) || ((((_la - 369)) & ~0x3f) == 0 && ((1L << (_la - 369)) & ((1L << (UPPER - 369)) | (1L << (M_CHAR - 369)) | (1L << (U_CHAR - 369)))) != 0)) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(503);
+				match(RPARENCHAR);
+				}
+				break;
+			case 155:
+				enterOuterAlt(_localctx, 155);
+				{
+				setState(504);
+				match(PROLOG);
+				}
+				break;
+			case 156:
+				enterOuterAlt(_localctx, 156);
+				{
+				{
+				setState(505);
+				_la = _input.LA(1);
+				if ( !(_la==QUALIFY || _la==QUA) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(506);
+				match(LPARENCHAR);
+				setState(507);
+				_la = _input.LA(1);
+				if ( !(_la==COMPAT || _la==EXTEND || _la==C_CHAR || _la==E_CHAR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(508);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 157:
+				enterOuterAlt(_localctx, 157);
+				{
+				setState(509);
+				_la = _input.LA(1);
+				if ( !(_la==QUOTE || _la==Q_CHAR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 158:
+				enterOuterAlt(_localctx, 158);
+				{
+				setState(510);
+				match(RENT);
+				}
+				break;
+			case 159:
+				enterOuterAlt(_localctx, 159);
+				{
+				setState(511);
+				match(RMODE);
+				setState(512);
+				match(LPARENCHAR);
+				setState(516);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case ANY:
+					{
+					setState(513);
+					match(ANY);
+					}
+					break;
+				case AUTO:
+					{
+					setState(514);
+					match(AUTO);
+					}
+					break;
+				case NONNUMERICLITERAL:
+				case NUMERICLITERAL:
+					{
+					setState(515);
+					literal();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				setState(518);
+				match(RPARENCHAR);
+				}
+				break;
+			case 160:
+				enterOuterAlt(_localctx, 160);
+				{
+				{
+				setState(519);
+				match(RULES);
+				setState(531);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,41,_ctx) ) {
+				case 1:
+					{
+					setState(520);
+					match(LPARENCHAR);
+					setState(521);
+					rules_opts();
+					setState(526);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					while (_la==COMMACHAR) {
+						{
+						{
+						setState(522);
+						match(COMMACHAR);
+						setState(523);
+						rules_opts();
+						}
+						}
+						setState(528);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					}
+					setState(529);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				}
+				break;
+			case 161:
+				enterOuterAlt(_localctx, 161);
+				{
+				setState(533);
+				_la = _input.LA(1);
+				if ( !(_la==SEQ || _la==SEQUENCE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(540);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,42,_ctx) ) {
+				case 1:
+					{
+					setState(534);
+					match(LPARENCHAR);
+					setState(535);
+					literal();
+					setState(536);
+					match(COMMACHAR);
+					setState(537);
+					literal();
+					setState(538);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				break;
+			case 162:
+				enterOuterAlt(_localctx, 162);
+				{
+				{
+				setState(542);
+				_la = _input.LA(1);
+				if ( !(_la==SERV || _la==SERVICE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(543);
+				match(LPARENCHAR);
+				setState(544);
+				literal();
+				setState(545);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 163:
+				enterOuterAlt(_localctx, 163);
+				{
+				setState(547);
+				_la = _input.LA(1);
+				if ( !(_la==SIZE || _la==SZ) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(548);
+				match(LPARENCHAR);
+				setState(551);
+				_errHandler.sync(this);
+				switch (_input.LA(1)) {
+				case MAX:
+					{
+					setState(549);
+					match(MAX);
+					}
+					break;
+				case NONNUMERICLITERAL:
+				case NUMERICLITERAL:
+					{
+					setState(550);
+					literal();
+					}
+					break;
+				default:
+					throw new NoViableAltException(this);
+				}
+				setState(553);
+				match(RPARENCHAR);
+				}
+				break;
+			case 164:
+				enterOuterAlt(_localctx, 164);
+				{
+				setState(554);
+				_la = _input.LA(1);
+				if ( !(_la==SOURCE || _la==S_CHAR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 165:
+				enterOuterAlt(_localctx, 165);
+				{
+				setState(555);
+				match(SP);
+				}
+				break;
+			case 166:
+				enterOuterAlt(_localctx, 166);
+				{
+				setState(556);
+				match(SPACE);
+				setState(557);
+				match(LPARENCHAR);
+				setState(558);
+				literal();
+				setState(559);
+				match(RPARENCHAR);
+				}
+				break;
+			case 167:
+				enterOuterAlt(_localctx, 167);
+				{
+				setState(561);
+				match(SPIE);
+				}
+				break;
+			case 168:
+				enterOuterAlt(_localctx, 168);
+				{
+				setState(562);
+				match(SQL);
+				setState(567);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,44,_ctx) ) {
+				case 1:
+					{
+					setState(563);
+					match(LPARENCHAR);
+					setState(564);
+					literal();
+					setState(565);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				break;
+			case 169:
+				enterOuterAlt(_localctx, 169);
+				{
+				setState(569);
+				_la = _input.LA(1);
+				if ( !(_la==SQLC || _la==SQLCCSID) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 170:
+				enterOuterAlt(_localctx, 170);
+				{
+				setState(570);
+				match(SQLIMS);
+				setState(575);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,45,_ctx) ) {
+				case 1:
+					{
+					setState(571);
+					match(LPARENCHAR);
+					setState(572);
+					literal();
+					setState(573);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				break;
+			case 171:
+				enterOuterAlt(_localctx, 171);
+				{
+				setState(577);
+				_la = _input.LA(1);
+				if ( !(_la==SSR || _la==SSRANGE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 172:
+				enterOuterAlt(_localctx, 172);
+				{
+				setState(578);
+				match(STGOPT);
+				}
+				break;
+			case 173:
+				enterOuterAlt(_localctx, 173);
+				{
+				setState(579);
+				_la = _input.LA(1);
+				if ( !(_la==SUPP || _la==SUPPRESS) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 174:
+				enterOuterAlt(_localctx, 174);
+				{
+				setState(580);
+				match(SYSEIB);
+				}
+				break;
+			case 175:
+				enterOuterAlt(_localctx, 175);
+				{
+				setState(581);
+				_la = _input.LA(1);
+				if ( !(_la==TERM || _la==TERMINAL) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				}
+				break;
+			case 176:
+				enterOuterAlt(_localctx, 176);
+				{
+				setState(582);
+				match(TEST);
+				setState(600);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,51,_ctx) ) {
+				case 1:
+					{
+					setState(583);
+					match(LPARENCHAR);
+					setState(585);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==HOOK || _la==NOHOOK) {
+						{
+						setState(584);
+						_la = _input.LA(1);
+						if ( !(_la==HOOK || _la==NOHOOK) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+					}
+
+					setState(588);
+					_errHandler.sync(this);
+					switch ( getInterpreter().adaptivePredict(_input,47,_ctx) ) {
+					case 1:
+						{
+						setState(587);
+						match(COMMACHAR);
+						}
+						break;
+					}
+					setState(591);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==NOSEP || _la==NOSEPARATE || _la==SEP || _la==SEPARATE) {
+						{
+						setState(590);
+						_la = _input.LA(1);
+						if ( !(_la==NOSEP || _la==NOSEPARATE || _la==SEP || _la==SEPARATE) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+					}
+
+					setState(594);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==COMMACHAR) {
+						{
+						setState(593);
+						match(COMMACHAR);
+						}
+					}
+
+					setState(597);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==EJPD || _la==NOEJPD) {
+						{
+						setState(596);
+						_la = _input.LA(1);
+						if ( !(_la==EJPD || _la==NOEJPD) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+					}
+
+					setState(599);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				break;
+			case 177:
+				enterOuterAlt(_localctx, 177);
+				{
+				{
+				setState(602);
+				match(TEST);
+				setState(614);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,53,_ctx) ) {
+				case 1:
+					{
+					setState(603);
+					match(LPARENCHAR);
+					setState(604);
+					test_opts();
+					setState(609);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					while (_la==COMMACHAR) {
+						{
+						{
+						setState(605);
+						match(COMMACHAR);
+						setState(606);
+						test_opts();
+						}
+						}
+						setState(611);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					}
+					setState(612);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				}
+				break;
+			case 178:
+				enterOuterAlt(_localctx, 178);
+				{
+				setState(616);
+				match(THREAD);
+				}
+				break;
+			case 179:
+				enterOuterAlt(_localctx, 179);
+				{
+				setState(617);
+				match(TRUNC);
+				setState(618);
+				match(LPARENCHAR);
+				setState(619);
+				_la = _input.LA(1);
+				if ( !(_la==BIN || _la==OPT || _la==STD) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(620);
+				match(RPARENCHAR);
+				}
+				break;
+			case 180:
+				enterOuterAlt(_localctx, 180);
+				{
+				setState(621);
+				match(VBREF);
+				}
+				break;
+			case 181:
+				enterOuterAlt(_localctx, 181);
+				{
+				{
+				setState(622);
+				match(VLR);
+				setState(623);
+				match(LPARENCHAR);
+				setState(624);
+				_la = _input.LA(1);
+				if ( !(_la==COMPAT || ((((_la - 351)) & ~0x3f) == 0 && ((1L << (_la - 351)) & ((1L << (STANDARD - 351)) | (1L << (C_CHAR - 351)) | (1L << (S_CHAR - 351)))) != 0)) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(625);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 182:
+				enterOuterAlt(_localctx, 182);
+				{
+				{
+				setState(626);
+				_la = _input.LA(1);
+				if ( !(_la==VS || _la==VSAMOPENFS) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(627);
+				match(LPARENCHAR);
+				setState(628);
+				_la = _input.LA(1);
+				if ( !(_la==COMPAT || ((((_la - 355)) & ~0x3f) == 0 && ((1L << (_la - 355)) & ((1L << (SUCC - 355)) | (1L << (C_CHAR - 355)) | (1L << (S_CHAR - 355)))) != 0)) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(629);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 183:
+				enterOuterAlt(_localctx, 183);
+				{
+				setState(630);
+				_la = _input.LA(1);
+				if ( !(_la==WD || _la==WORD) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(631);
+				match(LPARENCHAR);
+				setState(632);
+				cobolWord();
+				setState(633);
+				match(RPARENCHAR);
+				}
+				break;
+			case 184:
+				enterOuterAlt(_localctx, 184);
+				{
+				setState(635);
+				_la = _input.LA(1);
+				if ( !(_la==XMLPARSE || _la==XP) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(636);
+				match(LPARENCHAR);
+				setState(637);
+				_la = _input.LA(1);
+				if ( !(_la==COMPAT || ((((_la - 378)) & ~0x3f) == 0 && ((1L << (_la - 378)) & ((1L << (XMLSS - 378)) | (1L << (C_CHAR - 378)) | (1L << (X_CHAR - 378)))) != 0)) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(638);
+				match(RPARENCHAR);
+				}
+				break;
+			case 185:
+				enterOuterAlt(_localctx, 185);
+				{
+				setState(639);
+				_la = _input.LA(1);
+				if ( !(_la==XREF || _la==X_CHAR) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(645);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,55,_ctx) ) {
+				case 1:
+					{
+					setState(640);
+					match(LPARENCHAR);
+					setState(642);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					if (_la==FULL || _la==SHORT) {
+						{
+						setState(641);
+						_la = _input.LA(1);
+						if ( !(_la==FULL || _la==SHORT) ) {
+						_errHandler.recoverInline(this);
+						}
+						else {
+							if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+							_errHandler.reportMatch(this);
+							consume();
+						}
+						}
+					}
+
+					setState(644);
+					match(RPARENCHAR);
+					}
+					break;
+				}
+				}
+				break;
+			case 186:
+				enterOuterAlt(_localctx, 186);
+				{
+				setState(647);
 				_la = _input.LA(1);
 				if ( !(_la==YEARWINDOW || _la==YW) ) {
 				_errHandler.recoverInline(this);
@@ -3335,21 +4482,314 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(449);
+				setState(648);
 				match(LPARENCHAR);
-				setState(450);
+				setState(649);
 				literal();
-				setState(451);
+				setState(650);
 				match(RPARENCHAR);
 				}
 				break;
-			case 147:
-				enterOuterAlt(_localctx, 147);
+			case 187:
+				enterOuterAlt(_localctx, 187);
 				{
-				setState(453);
+				{
+				setState(652);
+				_la = _input.LA(1);
+				if ( !(_la==ZC || _la==ZONECHECK) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(653);
+				match(LPARENCHAR);
+				setState(654);
+				_la = _input.LA(1);
+				if ( !(_la==ABD || _la==MSG) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(655);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 188:
+				enterOuterAlt(_localctx, 188);
+				{
+				{
+				setState(656);
+				_la = _input.LA(1);
+				if ( !(_la==ZD || _la==ZONEDATA) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(657);
+				match(LPARENCHAR);
+				setState(658);
+				_la = _input.LA(1);
+				if ( !(_la==MIG || _la==NOPFD || _la==PFD) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(659);
+				match(RPARENCHAR);
+				}
+				}
+				break;
+			case 189:
+				enterOuterAlt(_localctx, 189);
+				{
+				setState(660);
 				match(ZWB);
 				}
 				break;
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Rules_optsContext extends ParserRuleContext {
+		public TerminalNode ENDPERIOD() { return getToken(CobolPreprocessorParser.ENDPERIOD, 0); }
+		public TerminalNode ENDP() { return getToken(CobolPreprocessorParser.ENDP, 0); }
+		public TerminalNode NOENDPERIOD() { return getToken(CobolPreprocessorParser.NOENDPERIOD, 0); }
+		public TerminalNode EVENPACK() { return getToken(CobolPreprocessorParser.EVENPACK, 0); }
+		public TerminalNode EVENP() { return getToken(CobolPreprocessorParser.EVENP, 0); }
+		public TerminalNode NOEVENPACK() { return getToken(CobolPreprocessorParser.NOEVENPACK, 0); }
+		public TerminalNode LAXPERF() { return getToken(CobolPreprocessorParser.LAXPERF, 0); }
+		public TerminalNode LXPRF() { return getToken(CobolPreprocessorParser.LXPRF, 0); }
+		public TerminalNode NOLAXPERF() { return getToken(CobolPreprocessorParser.NOLAXPERF, 0); }
+		public TerminalNode SLACKBYTES() { return getToken(CobolPreprocessorParser.SLACKBYTES, 0); }
+		public TerminalNode SLCKB() { return getToken(CobolPreprocessorParser.SLCKB, 0); }
+		public TerminalNode NOSLACKBYTES() { return getToken(CobolPreprocessorParser.NOSLACKBYTES, 0); }
+		public TerminalNode OMITODOMIN() { return getToken(CobolPreprocessorParser.OMITODOMIN, 0); }
+		public TerminalNode OOM() { return getToken(CobolPreprocessorParser.OOM, 0); }
+		public TerminalNode NOOMITODOMIN() { return getToken(CobolPreprocessorParser.NOOMITODOMIN, 0); }
+		public TerminalNode UNREF() { return getToken(CobolPreprocessorParser.UNREF, 0); }
+		public TerminalNode NOUNREFALL() { return getToken(CobolPreprocessorParser.NOUNREFALL, 0); }
+		public TerminalNode NOUNRA() { return getToken(CobolPreprocessorParser.NOUNRA, 0); }
+		public TerminalNode NOUNREFSOURCE() { return getToken(CobolPreprocessorParser.NOUNREFSOURCE, 0); }
+		public TerminalNode NOUNRS() { return getToken(CobolPreprocessorParser.NOUNRS, 0); }
+		public Rules_optsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_rules_opts; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CobolPreprocessorListener ) ((CobolPreprocessorListener)listener).enterRules_opts(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CobolPreprocessorListener ) ((CobolPreprocessorListener)listener).exitRules_opts(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CobolPreprocessorVisitor ) return ((CobolPreprocessorVisitor<? extends T>)visitor).visitRules_opts(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Rules_optsContext rules_opts() throws RecognitionException {
+		Rules_optsContext _localctx = new Rules_optsContext(_ctx, getState());
+		enterRule(_localctx, 10, RULE_rules_opts);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(663);
+			_la = _input.LA(1);
+			if ( !(((((_la - 83)) & ~0x3f) == 0 && ((1L << (_la - 83)) & ((1L << (ENDP - 83)) | (1L << (ENDPERIOD - 83)) | (1L << (EVENP - 83)) | (1L << (EVENPACK - 83)) | (1L << (LAXPERF - 83)) | (1L << (LXPRF - 83)))) != 0) || ((((_la - 194)) & ~0x3f) == 0 && ((1L << (_la - 194)) & ((1L << (NOENDPERIOD - 194)) | (1L << (NOEVENPACK - 194)) | (1L << (NOLAXPERF - 194)) | (1L << (NOOMITODOMIN - 194)) | (1L << (NOSLACKBYTES - 194)))) != 0) || ((((_la - 268)) & ~0x3f) == 0 && ((1L << (_la - 268)) & ((1L << (NOUNRA - 268)) | (1L << (NOUNREFALL - 268)) | (1L << (NOUNREFSOURCE - 268)) | (1L << (NOUNRS - 268)) | (1L << (OMITODOMIN - 268)) | (1L << (OOM - 268)))) != 0) || ((((_la - 334)) & ~0x3f) == 0 && ((1L << (_la - 334)) & ((1L << (SLACKBYTES - 334)) | (1L << (SLCKB - 334)) | (1L << (UNREF - 334)))) != 0)) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
+	public static class Test_optsContext extends ParserRuleContext {
+		public TerminalNode DWARF() { return getToken(CobolPreprocessorParser.DWARF, 0); }
+		public TerminalNode NODWARF() { return getToken(CobolPreprocessorParser.NODWARF, 0); }
+		public TerminalNode NOSEP() { return getToken(CobolPreprocessorParser.NOSEP, 0); }
+		public TerminalNode NOSEPARATE() { return getToken(CobolPreprocessorParser.NOSEPARATE, 0); }
+		public TerminalNode SO() { return getToken(CobolPreprocessorParser.SO, 0); }
+		public TerminalNode SOURCE() { return getToken(CobolPreprocessorParser.SOURCE, 0); }
+		public TerminalNode NOSO() { return getToken(CobolPreprocessorParser.NOSO, 0); }
+		public TerminalNode NOSOURCE() { return getToken(CobolPreprocessorParser.NOSOURCE, 0); }
+		public TerminalNode EJPD() { return getToken(CobolPreprocessorParser.EJPD, 0); }
+		public TerminalNode NOEJPD() { return getToken(CobolPreprocessorParser.NOEJPD, 0); }
+		public TerminalNode SEP() { return getToken(CobolPreprocessorParser.SEP, 0); }
+		public TerminalNode SEPARATE() { return getToken(CobolPreprocessorParser.SEPARATE, 0); }
+		public TerminalNode LPARENCHAR() { return getToken(CobolPreprocessorParser.LPARENCHAR, 0); }
+		public TerminalNode RPARENCHAR() { return getToken(CobolPreprocessorParser.RPARENCHAR, 0); }
+		public TerminalNode DSNAME() { return getToken(CobolPreprocessorParser.DSNAME, 0); }
+		public TerminalNode NODSNAME() { return getToken(CobolPreprocessorParser.NODSNAME, 0); }
+		public Test_optsContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_test_opts; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof CobolPreprocessorListener ) ((CobolPreprocessorListener)listener).enterTest_opts(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof CobolPreprocessorListener ) ((CobolPreprocessorListener)listener).exitTest_opts(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof CobolPreprocessorVisitor ) return ((CobolPreprocessorVisitor<? extends T>)visitor).visitTest_opts(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final Test_optsContext test_opts() throws RecognitionException {
+		Test_optsContext _localctx = new Test_optsContext(_ctx, getState());
+		enterRule(_localctx, 12, RULE_test_opts);
+		int _la;
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(681);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case DWARF:
+				{
+				setState(665);
+				match(DWARF);
+				}
+				break;
+			case NODWARF:
+				{
+				setState(666);
+				match(NODWARF);
+				}
+				break;
+			case SEP:
+			case SEPARATE:
+				{
+				{
+				setState(667);
+				_la = _input.LA(1);
+				if ( !(_la==SEP || _la==SEPARATE) ) {
+				_errHandler.recoverInline(this);
+				}
+				else {
+					if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+					_errHandler.reportMatch(this);
+					consume();
+				}
+				setState(671);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==LPARENCHAR) {
+					{
+					setState(668);
+					match(LPARENCHAR);
+					setState(669);
+					_la = _input.LA(1);
+					if ( !(_la==DSNAME || _la==NODSNAME) ) {
+					_errHandler.recoverInline(this);
+					}
+					else {
+						if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+						_errHandler.reportMatch(this);
+						consume();
+					}
+					setState(670);
+					match(RPARENCHAR);
+					}
+				}
+
+				}
+				}
+				break;
+			case NOSEP:
+				{
+				setState(673);
+				match(NOSEP);
+				}
+				break;
+			case NOSEPARATE:
+				{
+				setState(674);
+				match(NOSEPARATE);
+				}
+				break;
+			case SO:
+				{
+				setState(675);
+				match(SO);
+				}
+				break;
+			case SOURCE:
+				{
+				setState(676);
+				match(SOURCE);
+				}
+				break;
+			case NOSO:
+				{
+				setState(677);
+				match(NOSO);
+				}
+				break;
+			case NOSOURCE:
+				{
+				setState(678);
+				match(NOSOURCE);
+				}
+				break;
+			case EJPD:
+				{
+				setState(679);
+				match(EJPD);
+				}
+				break;
+			case NOEJPD:
+				{
+				setState(680);
+				match(NOEJPD);
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -3386,11 +4826,11 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ClassicCommentEntryContext classicCommentEntry() throws RecognitionException {
 		ClassicCommentEntryContext _localctx = new ClassicCommentEntryContext(_ctx, getState());
-		enterRule(_localctx, 10, RULE_classicCommentEntry);
+		enterRule(_localctx, 14, RULE_classicCommentEntry);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(456);
+			setState(683);
 			match(CLASSIC_COMMENTLINE);
 			}
 		}
@@ -3434,24 +4874,24 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ExecCicsStatementContext execCicsStatement() throws RecognitionException {
 		ExecCicsStatementContext _localctx = new ExecCicsStatementContext(_ctx, getState());
-		enterRule(_localctx, 12, RULE_execCicsStatement);
+		enterRule(_localctx, 16, RULE_execCicsStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(458);
+			setState(685);
 			match(EXEC);
-			setState(459);
+			setState(686);
 			match(CICS);
-			setState(460);
+			setState(687);
 			charData();
-			setState(461);
+			setState(688);
 			match(END_EXEC);
-			setState(463);
+			setState(690);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,33,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,59,_ctx) ) {
 			case 1:
 				{
-				setState(462);
+				setState(689);
 				match(DOT);
 				}
 				break;
@@ -3498,24 +4938,24 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ExecSqlStatementContext execSqlStatement() throws RecognitionException {
 		ExecSqlStatementContext _localctx = new ExecSqlStatementContext(_ctx, getState());
-		enterRule(_localctx, 14, RULE_execSqlStatement);
+		enterRule(_localctx, 18, RULE_execSqlStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(465);
+			setState(692);
 			match(EXEC);
-			setState(466);
+			setState(693);
 			match(SQL);
-			setState(467);
+			setState(694);
 			charDataSql();
-			setState(468);
+			setState(695);
 			match(END_EXEC);
-			setState(470);
+			setState(697);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,34,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,60,_ctx) ) {
 			case 1:
 				{
-				setState(469);
+				setState(696);
 				match(DOT);
 				}
 				break;
@@ -3562,24 +5002,24 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ExecSqlImsStatementContext execSqlImsStatement() throws RecognitionException {
 		ExecSqlImsStatementContext _localctx = new ExecSqlImsStatementContext(_ctx, getState());
-		enterRule(_localctx, 16, RULE_execSqlImsStatement);
+		enterRule(_localctx, 20, RULE_execSqlImsStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(472);
+			setState(699);
 			match(EXEC);
-			setState(473);
+			setState(700);
 			match(SQLIMS);
-			setState(474);
+			setState(701);
 			charData();
-			setState(475);
+			setState(702);
 			match(END_EXEC);
-			setState(477);
+			setState(704);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,35,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,61,_ctx) ) {
 			case 1:
 				{
-				setState(476);
+				setState(703);
 				match(DOT);
 				}
 				break;
@@ -3650,62 +5090,62 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CopyStatementContext copyStatement() throws RecognitionException {
 		CopyStatementContext _localctx = new CopyStatementContext(_ctx, getState());
-		enterRule(_localctx, 18, RULE_copyStatement);
+		enterRule(_localctx, 22, RULE_copyStatement);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(479);
+			setState(706);
 			match(COPY);
-			setState(480);
+			setState(707);
 			copySource();
-			setState(495);
+			setState(722);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,38,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,64,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(484);
+					setState(711);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==NEWLINE) {
 						{
 						{
-						setState(481);
+						setState(708);
 						match(NEWLINE);
 						}
 						}
-						setState(486);
+						setState(713);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(491);
+					setState(718);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case IN:
 					case OF:
 						{
-						setState(487);
+						setState(714);
 						directoryPhrase();
 						}
 						break;
 					case ON:
 						{
-						setState(488);
+						setState(715);
 						familyPhrase();
 						}
 						break;
 					case REPLACING:
 						{
-						setState(489);
+						setState(716);
 						replacingPhrase();
 						}
 						break;
 					case SUPPRESS:
 						{
-						setState(490);
+						setState(717);
 						match(SUPPRESS);
 						}
 						break;
@@ -3715,25 +5155,25 @@ public class CobolPreprocessorParser extends Parser {
 					}
 					} 
 				}
-				setState(497);
+				setState(724);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,38,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,64,_ctx);
 			}
-			setState(501);
+			setState(728);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(498);
+				setState(725);
 				match(NEWLINE);
 				}
 				}
-				setState(503);
+				setState(730);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(504);
+			setState(731);
 			match(DOT);
 			}
 		}
@@ -3784,28 +5224,32 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CopySourceContext copySource() throws RecognitionException {
 		CopySourceContext _localctx = new CopySourceContext(_ctx, getState());
-		enterRule(_localctx, 20, RULE_copySource);
+		enterRule(_localctx, 24, RULE_copySource);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(509);
+			setState(736);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NONNUMERICLITERAL:
 			case NUMERICLITERAL:
 				{
-				setState(506);
+				setState(733);
 				literal();
 				}
 				break;
+			case ABD:
 			case ADATA:
 			case ADV:
+			case AFP:
 			case ALIAS:
+			case ALPHNUM:
 			case ANSI:
 			case ANY:
 			case APOST:
 			case AR:
+			case ARCH:
 			case ARITH:
 			case AUTO:
 			case AWO:
@@ -3822,9 +5266,13 @@ public class CobolPreprocessorParser extends Parser {
 			case CODEPAGE:
 			case COMPAT:
 			case COMPILE:
+			case COPYLOC:
+			case COPYRIGHT:
 			case CP:
+			case CPLC:
 			case CPP:
 			case CPSM:
+			case CPYR:
 			case CS:
 			case CURR:
 			case CURRENCY:
@@ -3833,23 +5281,35 @@ public class CobolPreprocessorParser extends Parser {
 			case DBCS:
 			case DD:
 			case DEBUG:
+			case DEC:
 			case DECK:
+			case DEFINE:
+			case DEF:
 			case DIAGTRUNC:
+			case DISPSIGN:
 			case DIVISION:
 			case DLI:
 			case DLL:
 			case DP:
+			case DS:
+			case DSN:
+			case DSNAME:
 			case DTR:
 			case DU:
 			case DUMP:
+			case DWARF:
 			case DYN:
 			case DYNAM:
 			case EDF:
 			case EJECT:
 			case EJPD:
 			case EN:
+			case ENDP:
+			case ENDPERIOD:
 			case ENGLISH:
 			case EPILOG:
+			case EVENP:
+			case EVENPACK:
 			case EXCI:
 			case EXIT:
 			case EXP:
@@ -3862,14 +5322,22 @@ public class CobolPreprocessorParser extends Parser {
 			case FULL:
 			case GDS:
 			case GRAPHIC:
+			case HEX:
+			case HGPR:
 			case HOOK:
+			case IC:
 			case IN:
+			case INITCHECK:
 			case INTDATE:
+			case INITIAL:
+			case INLINE:
+			case INL:
 			case JA:
 			case JP:
 			case KA:
 			case LANG:
 			case LANGUAGE:
+			case LAXPERF:
 			case LC:
 			case LENGTH:
 			case LIB:
@@ -3881,7 +5349,9 @@ public class CobolPreprocessorParser extends Parser {
 			case LM:
 			case LONGMIXED:
 			case LONGUPPER:
+			case LP:
 			case LU:
+			case LXPRF:
 			case MAP:
 			case MARGINS:
 			case MAX:
@@ -3889,23 +5359,31 @@ public class CobolPreprocessorParser extends Parser {
 			case MDECK:
 			case MIG:
 			case MIXED:
+			case MAXPCF:
 			case NAME:
 			case NAT:
 			case NATIONAL:
 			case NATLANG:
+			case NC:
 			case NN:
 			case NO:
 			case NOADATA:
 			case NOADV:
 			case NOALIAS:
+			case NOALPHNUM:
 			case NOAWO:
+			case NOBIN:
 			case NOBLOCK0:
 			case NOC:
 			case NOCBLCARD:
 			case NOCICS:
 			case NOCMPR2:
 			case NOCOMPILE:
+			case NOCOPYLOC:
+			case NOCOPYRIGHT:
+			case NOCPLC:
 			case NOCPSM:
+			case NOCPYR:
 			case NOCURR:
 			case NOCURRENCY:
 			case NOD:
@@ -3914,17 +5392,23 @@ public class CobolPreprocessorParser extends Parser {
 			case NODE:
 			case NODEBUG:
 			case NODECK:
+			case NODEFINE:
+			case NODEF:
 			case NODIAGTRUNC:
 			case NODLL:
+			case NODSNAME:
 			case NODU:
 			case NODUMP:
 			case NODP:
 			case NODTR:
+			case NODWARF:
 			case NODYN:
 			case NODYNAM:
 			case NOEDF:
 			case NOEJPD:
+			case NOENDPERIOD:
 			case NOEPILOG:
+			case NOEVENPACK:
 			case NOEXIT:
 			case NOEXP:
 			case NOEXPORTALL:
@@ -3937,6 +5421,12 @@ public class CobolPreprocessorParser extends Parser {
 			case NOFSRT:
 			case NOGRAPHIC:
 			case NOHOOK:
+			case NOINITCHECK:
+			case NOIC:
+			case NOINITIAL:
+			case NOINLINE:
+			case NOINL:
+			case NOLAXPERF:
 			case NOLENGTH:
 			case NOLIB:
 			case NOLINKAGE:
@@ -3949,6 +5439,7 @@ public class CobolPreprocessorParser extends Parser {
 			case NONUMBER:
 			case NOOBJ:
 			case NOOBJECT:
+			case NOOMITODOMIN:
 			case NOOFF:
 			case NOOFFSET:
 			case NOOPSEQUENCE:
@@ -3956,37 +5447,53 @@ public class CobolPreprocessorParser extends Parser {
 			case NOOPTIMIZE:
 			case NOOPTIONS:
 			case NOP:
+			case NOPAC:
+			case NOPARMCHECK:
 			case NOPFD:
 			case NOPROLOG:
 			case NORENT:
+			case NORULES:
 			case NOS:
 			case NOSEP:
 			case NOSEPARATE:
 			case NOSEQ:
+			case NOSERVICE:
+			case NOSLACKBYTES:
 			case NOSOURCE:
 			case NOSPIE:
 			case NOSQL:
 			case NOSQLC:
 			case NOSQLCCSID:
+			case NOSQLIMS:
 			case NOSSR:
 			case NOSSRANGE:
 			case NOSTDTRUNC:
 			case NOSEQUENCE:
+			case NOSTGOPT:
+			case NOSUPP:
+			case NOSUPPRESS:
 			case NOTERM:
 			case NOTERMINAL:
 			case NOTEST:
 			case NOTHREAD:
 			case NOTRIG:
+			case NOUNREFALL:
+			case NOUNREFSOURCE:
 			case NOVBREF:
+			case NOVOLATILE:
 			case NOWORD:
 			case NOX:
 			case NOXREF:
+			case NOZC:
+			case NOZON:
+			case NOZONECHECK:
 			case NOZWB:
 			case NS:
 			case NSEQ:
 			case NSYMBOL:
 			case NUM:
 			case NUMBER:
+			case NUMCHECK:
 			case NUMPROC:
 			case OBJ:
 			case OBJECT:
@@ -3994,6 +5501,8 @@ public class CobolPreprocessorParser extends Parser {
 			case OFF:
 			case OFFSET:
 			case ON:
+			case OMITODOMIN:
+			case OOM:
 			case OP:
 			case OPMARGINS:
 			case OPSEQUENCE:
@@ -4003,22 +5512,30 @@ public class CobolPreprocessorParser extends Parser {
 			case OPTIONS:
 			case OUT:
 			case OUTDD:
+			case PARMCHECK:
+			case PATH:
 			case PFD:
 			case PPTDBG:
 			case PGMN:
 			case PGMNAME:
 			case PROCESS:
 			case PROLOG:
+			case QUALIFY:
+			case QUA:
 			case QUOTE:
 			case RENT:
 			case REPLACING:
 			case RMODE:
+			case RULES:
 			case SEP:
 			case SEPARATE:
 			case SEQ:
 			case SEQUENCE:
+			case SERVICE:
 			case SHORT:
 			case SIZE:
+			case SLACKBYTES:
+			case SLCKB:
 			case SOURCE:
 			case SP:
 			case SPACE:
@@ -4026,10 +5543,15 @@ public class CobolPreprocessorParser extends Parser {
 			case SQL:
 			case SQLC:
 			case SQLCCSID:
+			case SQLIMS:
 			case SS:
 			case SSR:
 			case SSRANGE:
 			case STD:
+			case STGOPT:
+			case SUCC:
+			case SUPP:
+			case SUPPRESS:
 			case SYSEIB:
 			case SZ:
 			case TERM:
@@ -4040,8 +5562,12 @@ public class CobolPreprocessorParser extends Parser {
 			case TRIG:
 			case TRUNC:
 			case UE:
+			case UNREF:
 			case UPPER:
 			case VBREF:
+			case VOLATILE:
+			case VS:
+			case VSAMOPENFS:
 			case WD:
 			case XMLPARSE:
 			case XMLSS:
@@ -4049,6 +5575,11 @@ public class CobolPreprocessorParser extends Parser {
 			case XREF:
 			case YEARWINDOW:
 			case YW:
+			case ZC:
+			case ZD:
+			case ZON:
+			case ZONECHECK:
+			case ZONEDATA:
 			case ZWB:
 			case C_CHAR:
 			case D_CHAR:
@@ -4066,25 +5597,25 @@ public class CobolPreprocessorParser extends Parser {
 			case COMMACHAR:
 			case IDENTIFIER:
 				{
-				setState(507);
+				setState(734);
 				cobolWord();
 				}
 				break;
 			case FILENAME:
 				{
-				setState(508);
+				setState(735);
 				filename();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(513);
+			setState(740);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,41,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,67,_ctx) ) {
 			case 1:
 				{
-				setState(511);
+				setState(738);
 				_la = _input.LA(1);
 				if ( !(_la==IN || _la==OF) ) {
 				_errHandler.recoverInline(this);
@@ -4094,7 +5625,7 @@ public class CobolPreprocessorParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(512);
+				setState(739);
 				copyLibrary();
 				}
 				break;
@@ -4140,26 +5671,30 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CopyLibraryContext copyLibrary() throws RecognitionException {
 		CopyLibraryContext _localctx = new CopyLibraryContext(_ctx, getState());
-		enterRule(_localctx, 22, RULE_copyLibrary);
+		enterRule(_localctx, 26, RULE_copyLibrary);
 		try {
-			setState(517);
+			setState(744);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NONNUMERICLITERAL:
 			case NUMERICLITERAL:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(515);
+				setState(742);
 				literal();
 				}
 				break;
+			case ABD:
 			case ADATA:
 			case ADV:
+			case AFP:
 			case ALIAS:
+			case ALPHNUM:
 			case ANSI:
 			case ANY:
 			case APOST:
 			case AR:
+			case ARCH:
 			case ARITH:
 			case AUTO:
 			case AWO:
@@ -4176,9 +5711,13 @@ public class CobolPreprocessorParser extends Parser {
 			case CODEPAGE:
 			case COMPAT:
 			case COMPILE:
+			case COPYLOC:
+			case COPYRIGHT:
 			case CP:
+			case CPLC:
 			case CPP:
 			case CPSM:
+			case CPYR:
 			case CS:
 			case CURR:
 			case CURRENCY:
@@ -4187,23 +5726,35 @@ public class CobolPreprocessorParser extends Parser {
 			case DBCS:
 			case DD:
 			case DEBUG:
+			case DEC:
 			case DECK:
+			case DEFINE:
+			case DEF:
 			case DIAGTRUNC:
+			case DISPSIGN:
 			case DIVISION:
 			case DLI:
 			case DLL:
 			case DP:
+			case DS:
+			case DSN:
+			case DSNAME:
 			case DTR:
 			case DU:
 			case DUMP:
+			case DWARF:
 			case DYN:
 			case DYNAM:
 			case EDF:
 			case EJECT:
 			case EJPD:
 			case EN:
+			case ENDP:
+			case ENDPERIOD:
 			case ENGLISH:
 			case EPILOG:
+			case EVENP:
+			case EVENPACK:
 			case EXCI:
 			case EXIT:
 			case EXP:
@@ -4216,14 +5767,22 @@ public class CobolPreprocessorParser extends Parser {
 			case FULL:
 			case GDS:
 			case GRAPHIC:
+			case HEX:
+			case HGPR:
 			case HOOK:
+			case IC:
 			case IN:
+			case INITCHECK:
 			case INTDATE:
+			case INITIAL:
+			case INLINE:
+			case INL:
 			case JA:
 			case JP:
 			case KA:
 			case LANG:
 			case LANGUAGE:
+			case LAXPERF:
 			case LC:
 			case LENGTH:
 			case LIB:
@@ -4235,7 +5794,9 @@ public class CobolPreprocessorParser extends Parser {
 			case LM:
 			case LONGMIXED:
 			case LONGUPPER:
+			case LP:
 			case LU:
+			case LXPRF:
 			case MAP:
 			case MARGINS:
 			case MAX:
@@ -4243,23 +5804,31 @@ public class CobolPreprocessorParser extends Parser {
 			case MDECK:
 			case MIG:
 			case MIXED:
+			case MAXPCF:
 			case NAME:
 			case NAT:
 			case NATIONAL:
 			case NATLANG:
+			case NC:
 			case NN:
 			case NO:
 			case NOADATA:
 			case NOADV:
 			case NOALIAS:
+			case NOALPHNUM:
 			case NOAWO:
+			case NOBIN:
 			case NOBLOCK0:
 			case NOC:
 			case NOCBLCARD:
 			case NOCICS:
 			case NOCMPR2:
 			case NOCOMPILE:
+			case NOCOPYLOC:
+			case NOCOPYRIGHT:
+			case NOCPLC:
 			case NOCPSM:
+			case NOCPYR:
 			case NOCURR:
 			case NOCURRENCY:
 			case NOD:
@@ -4268,17 +5837,23 @@ public class CobolPreprocessorParser extends Parser {
 			case NODE:
 			case NODEBUG:
 			case NODECK:
+			case NODEFINE:
+			case NODEF:
 			case NODIAGTRUNC:
 			case NODLL:
+			case NODSNAME:
 			case NODU:
 			case NODUMP:
 			case NODP:
 			case NODTR:
+			case NODWARF:
 			case NODYN:
 			case NODYNAM:
 			case NOEDF:
 			case NOEJPD:
+			case NOENDPERIOD:
 			case NOEPILOG:
+			case NOEVENPACK:
 			case NOEXIT:
 			case NOEXP:
 			case NOEXPORTALL:
@@ -4291,6 +5866,12 @@ public class CobolPreprocessorParser extends Parser {
 			case NOFSRT:
 			case NOGRAPHIC:
 			case NOHOOK:
+			case NOINITCHECK:
+			case NOIC:
+			case NOINITIAL:
+			case NOINLINE:
+			case NOINL:
+			case NOLAXPERF:
 			case NOLENGTH:
 			case NOLIB:
 			case NOLINKAGE:
@@ -4303,6 +5884,7 @@ public class CobolPreprocessorParser extends Parser {
 			case NONUMBER:
 			case NOOBJ:
 			case NOOBJECT:
+			case NOOMITODOMIN:
 			case NOOFF:
 			case NOOFFSET:
 			case NOOPSEQUENCE:
@@ -4310,37 +5892,53 @@ public class CobolPreprocessorParser extends Parser {
 			case NOOPTIMIZE:
 			case NOOPTIONS:
 			case NOP:
+			case NOPAC:
+			case NOPARMCHECK:
 			case NOPFD:
 			case NOPROLOG:
 			case NORENT:
+			case NORULES:
 			case NOS:
 			case NOSEP:
 			case NOSEPARATE:
 			case NOSEQ:
+			case NOSERVICE:
+			case NOSLACKBYTES:
 			case NOSOURCE:
 			case NOSPIE:
 			case NOSQL:
 			case NOSQLC:
 			case NOSQLCCSID:
+			case NOSQLIMS:
 			case NOSSR:
 			case NOSSRANGE:
 			case NOSTDTRUNC:
 			case NOSEQUENCE:
+			case NOSTGOPT:
+			case NOSUPP:
+			case NOSUPPRESS:
 			case NOTERM:
 			case NOTERMINAL:
 			case NOTEST:
 			case NOTHREAD:
 			case NOTRIG:
+			case NOUNREFALL:
+			case NOUNREFSOURCE:
 			case NOVBREF:
+			case NOVOLATILE:
 			case NOWORD:
 			case NOX:
 			case NOXREF:
+			case NOZC:
+			case NOZON:
+			case NOZONECHECK:
 			case NOZWB:
 			case NS:
 			case NSEQ:
 			case NSYMBOL:
 			case NUM:
 			case NUMBER:
+			case NUMCHECK:
 			case NUMPROC:
 			case OBJ:
 			case OBJECT:
@@ -4348,6 +5946,8 @@ public class CobolPreprocessorParser extends Parser {
 			case OFF:
 			case OFFSET:
 			case ON:
+			case OMITODOMIN:
+			case OOM:
 			case OP:
 			case OPMARGINS:
 			case OPSEQUENCE:
@@ -4357,22 +5957,30 @@ public class CobolPreprocessorParser extends Parser {
 			case OPTIONS:
 			case OUT:
 			case OUTDD:
+			case PARMCHECK:
+			case PATH:
 			case PFD:
 			case PPTDBG:
 			case PGMN:
 			case PGMNAME:
 			case PROCESS:
 			case PROLOG:
+			case QUALIFY:
+			case QUA:
 			case QUOTE:
 			case RENT:
 			case REPLACING:
 			case RMODE:
+			case RULES:
 			case SEP:
 			case SEPARATE:
 			case SEQ:
 			case SEQUENCE:
+			case SERVICE:
 			case SHORT:
 			case SIZE:
+			case SLACKBYTES:
+			case SLCKB:
 			case SOURCE:
 			case SP:
 			case SPACE:
@@ -4380,10 +5988,15 @@ public class CobolPreprocessorParser extends Parser {
 			case SQL:
 			case SQLC:
 			case SQLCCSID:
+			case SQLIMS:
 			case SS:
 			case SSR:
 			case SSRANGE:
 			case STD:
+			case STGOPT:
+			case SUCC:
+			case SUPP:
+			case SUPPRESS:
 			case SYSEIB:
 			case SZ:
 			case TERM:
@@ -4394,8 +6007,12 @@ public class CobolPreprocessorParser extends Parser {
 			case TRIG:
 			case TRUNC:
 			case UE:
+			case UNREF:
 			case UPPER:
 			case VBREF:
+			case VOLATILE:
+			case VS:
+			case VSAMOPENFS:
 			case WD:
 			case XMLPARSE:
 			case XMLSS:
@@ -4403,6 +6020,11 @@ public class CobolPreprocessorParser extends Parser {
 			case XREF:
 			case YEARWINDOW:
 			case YW:
+			case ZC:
+			case ZD:
+			case ZON:
+			case ZONECHECK:
+			case ZONEDATA:
 			case ZWB:
 			case C_CHAR:
 			case D_CHAR:
@@ -4421,7 +6043,7 @@ public class CobolPreprocessorParser extends Parser {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(516);
+				setState(743);
 				cobolWord();
 				}
 				break;
@@ -4473,59 +6095,59 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplacingPhraseContext replacingPhrase() throws RecognitionException {
 		ReplacingPhraseContext _localctx = new ReplacingPhraseContext(_ctx, getState());
-		enterRule(_localctx, 24, RULE_replacingPhrase);
+		enterRule(_localctx, 28, RULE_replacingPhrase);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(519);
+			setState(746);
 			match(REPLACING);
-			setState(523);
+			setState(750);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(520);
+				setState(747);
 				match(NEWLINE);
 				}
 				}
-				setState(525);
+				setState(752);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(526);
+			setState(753);
 			replaceClause();
-			setState(535);
+			setState(762);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,45,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,71,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(528); 
+					setState(755); 
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					do {
 						{
 						{
-						setState(527);
+						setState(754);
 						match(NEWLINE);
 						}
 						}
-						setState(530); 
+						setState(757); 
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					} while ( _la==NEWLINE );
-					setState(532);
+					setState(759);
 					replaceClause();
 					}
 					} 
 				}
-				setState(537);
+				setState(764);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,45,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,71,_ctx);
 			}
 			}
 		}
@@ -4580,35 +6202,39 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplaceAreaContext replaceArea() throws RecognitionException {
 		ReplaceAreaContext _localctx = new ReplaceAreaContext(_ctx, getState());
-		enterRule(_localctx, 26, RULE_replaceArea);
+		enterRule(_localctx, 30, RULE_replaceArea);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(538);
+			setState(765);
 			replaceByStatement();
-			setState(543);
+			setState(770);
 			_errHandler.sync(this);
-			_alt = getInterpreter().adaptivePredict(_input,47,_ctx);
+			_alt = getInterpreter().adaptivePredict(_input,73,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
-					setState(541);
+					setState(768);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
 					case COPY:
 						{
-						setState(539);
+						setState(766);
 						copyStatement();
 						}
 						break;
+					case ABD:
 					case ADATA:
 					case ADV:
+					case AFP:
 					case ALIAS:
+					case ALPHNUM:
 					case ANSI:
 					case ANY:
 					case APOST:
 					case AR:
+					case ARCH:
 					case ARITH:
 					case AUTO:
 					case AWO:
@@ -4625,9 +6251,13 @@ public class CobolPreprocessorParser extends Parser {
 					case CODEPAGE:
 					case COMPAT:
 					case COMPILE:
+					case COPYLOC:
+					case COPYRIGHT:
 					case CP:
+					case CPLC:
 					case CPP:
 					case CPSM:
+					case CPYR:
 					case CS:
 					case CURR:
 					case CURRENCY:
@@ -4636,23 +6266,35 @@ public class CobolPreprocessorParser extends Parser {
 					case DBCS:
 					case DD:
 					case DEBUG:
+					case DEC:
 					case DECK:
+					case DEFINE:
+					case DEF:
 					case DIAGTRUNC:
+					case DISPSIGN:
 					case DIVISION:
 					case DLI:
 					case DLL:
 					case DP:
+					case DS:
+					case DSN:
+					case DSNAME:
 					case DTR:
 					case DU:
 					case DUMP:
+					case DWARF:
 					case DYN:
 					case DYNAM:
 					case EDF:
 					case EJECT:
 					case EJPD:
 					case EN:
+					case ENDP:
+					case ENDPERIOD:
 					case ENGLISH:
 					case EPILOG:
+					case EVENP:
+					case EVENPACK:
 					case EXCI:
 					case EXIT:
 					case EXP:
@@ -4665,14 +6307,22 @@ public class CobolPreprocessorParser extends Parser {
 					case FULL:
 					case GDS:
 					case GRAPHIC:
+					case HEX:
+					case HGPR:
 					case HOOK:
+					case IC:
 					case IN:
+					case INITCHECK:
 					case INTDATE:
+					case INITIAL:
+					case INLINE:
+					case INL:
 					case JA:
 					case JP:
 					case KA:
 					case LANG:
 					case LANGUAGE:
+					case LAXPERF:
 					case LC:
 					case LENGTH:
 					case LIB:
@@ -4684,8 +6334,10 @@ public class CobolPreprocessorParser extends Parser {
 					case LM:
 					case LONGMIXED:
 					case LONGUPPER:
+					case LP:
 					case LPARENCHAR:
 					case LU:
+					case LXPRF:
 					case MAP:
 					case MARGINS:
 					case MAX:
@@ -4693,23 +6345,31 @@ public class CobolPreprocessorParser extends Parser {
 					case MDECK:
 					case MIG:
 					case MIXED:
+					case MAXPCF:
 					case NAME:
 					case NAT:
 					case NATIONAL:
 					case NATLANG:
+					case NC:
 					case NN:
 					case NO:
 					case NOADATA:
 					case NOADV:
 					case NOALIAS:
+					case NOALPHNUM:
 					case NOAWO:
+					case NOBIN:
 					case NOBLOCK0:
 					case NOC:
 					case NOCBLCARD:
 					case NOCICS:
 					case NOCMPR2:
 					case NOCOMPILE:
+					case NOCOPYLOC:
+					case NOCOPYRIGHT:
+					case NOCPLC:
 					case NOCPSM:
+					case NOCPYR:
 					case NOCURR:
 					case NOCURRENCY:
 					case NOD:
@@ -4718,17 +6378,23 @@ public class CobolPreprocessorParser extends Parser {
 					case NODE:
 					case NODEBUG:
 					case NODECK:
+					case NODEFINE:
+					case NODEF:
 					case NODIAGTRUNC:
 					case NODLL:
+					case NODSNAME:
 					case NODU:
 					case NODUMP:
 					case NODP:
 					case NODTR:
+					case NODWARF:
 					case NODYN:
 					case NODYNAM:
 					case NOEDF:
 					case NOEJPD:
+					case NOENDPERIOD:
 					case NOEPILOG:
+					case NOEVENPACK:
 					case NOEXIT:
 					case NOEXP:
 					case NOEXPORTALL:
@@ -4741,6 +6407,12 @@ public class CobolPreprocessorParser extends Parser {
 					case NOFSRT:
 					case NOGRAPHIC:
 					case NOHOOK:
+					case NOINITCHECK:
+					case NOIC:
+					case NOINITIAL:
+					case NOINLINE:
+					case NOINL:
+					case NOLAXPERF:
 					case NOLENGTH:
 					case NOLIB:
 					case NOLINKAGE:
@@ -4753,6 +6425,7 @@ public class CobolPreprocessorParser extends Parser {
 					case NONUMBER:
 					case NOOBJ:
 					case NOOBJECT:
+					case NOOMITODOMIN:
 					case NOOFF:
 					case NOOFFSET:
 					case NOOPSEQUENCE:
@@ -4760,37 +6433,53 @@ public class CobolPreprocessorParser extends Parser {
 					case NOOPTIMIZE:
 					case NOOPTIONS:
 					case NOP:
+					case NOPAC:
+					case NOPARMCHECK:
 					case NOPFD:
 					case NOPROLOG:
 					case NORENT:
+					case NORULES:
 					case NOS:
 					case NOSEP:
 					case NOSEPARATE:
 					case NOSEQ:
+					case NOSERVICE:
+					case NOSLACKBYTES:
 					case NOSOURCE:
 					case NOSPIE:
 					case NOSQL:
 					case NOSQLC:
 					case NOSQLCCSID:
+					case NOSQLIMS:
 					case NOSSR:
 					case NOSSRANGE:
 					case NOSTDTRUNC:
 					case NOSEQUENCE:
+					case NOSTGOPT:
+					case NOSUPP:
+					case NOSUPPRESS:
 					case NOTERM:
 					case NOTERMINAL:
 					case NOTEST:
 					case NOTHREAD:
 					case NOTRIG:
+					case NOUNREFALL:
+					case NOUNREFSOURCE:
 					case NOVBREF:
+					case NOVOLATILE:
 					case NOWORD:
 					case NOX:
 					case NOXREF:
+					case NOZC:
+					case NOZON:
+					case NOZONECHECK:
 					case NOZWB:
 					case NS:
 					case NSEQ:
 					case NSYMBOL:
 					case NUM:
 					case NUMBER:
+					case NUMCHECK:
 					case NUMPROC:
 					case OBJ:
 					case OBJECT:
@@ -4798,6 +6487,8 @@ public class CobolPreprocessorParser extends Parser {
 					case OFF:
 					case OFFSET:
 					case ON:
+					case OMITODOMIN:
+					case OOM:
 					case OP:
 					case OPMARGINS:
 					case OPSEQUENCE:
@@ -4807,23 +6498,31 @@ public class CobolPreprocessorParser extends Parser {
 					case OPTIONS:
 					case OUT:
 					case OUTDD:
+					case PARMCHECK:
+					case PATH:
 					case PFD:
 					case PPTDBG:
 					case PGMN:
 					case PGMNAME:
 					case PROCESS:
 					case PROLOG:
+					case QUALIFY:
+					case QUA:
 					case QUOTE:
 					case RENT:
 					case REPLACING:
 					case RMODE:
 					case RPARENCHAR:
+					case RULES:
 					case SEP:
 					case SEPARATE:
 					case SEQ:
 					case SEQUENCE:
+					case SERVICE:
 					case SHORT:
 					case SIZE:
+					case SLACKBYTES:
+					case SLCKB:
 					case SOURCE:
 					case SP:
 					case SPACE:
@@ -4831,10 +6530,15 @@ public class CobolPreprocessorParser extends Parser {
 					case SQL:
 					case SQLC:
 					case SQLCCSID:
+					case SQLIMS:
 					case SS:
 					case SSR:
 					case SSRANGE:
 					case STD:
+					case STGOPT:
+					case SUCC:
+					case SUPP:
+					case SUPPRESS:
 					case SYSEIB:
 					case SZ:
 					case TERM:
@@ -4845,8 +6549,12 @@ public class CobolPreprocessorParser extends Parser {
 					case TRIG:
 					case TRUNC:
 					case UE:
+					case UNREF:
 					case UPPER:
 					case VBREF:
+					case VOLATILE:
+					case VS:
+					case VSAMOPENFS:
 					case WD:
 					case XMLPARSE:
 					case XMLSS:
@@ -4854,6 +6562,11 @@ public class CobolPreprocessorParser extends Parser {
 					case XREF:
 					case YEARWINDOW:
 					case YW:
+					case ZC:
+					case ZD:
+					case ZON:
+					case ZONECHECK:
+					case ZONEDATA:
 					case ZWB:
 					case C_CHAR:
 					case D_CHAR:
@@ -4878,7 +6591,7 @@ public class CobolPreprocessorParser extends Parser {
 					case NEWLINE:
 					case TEXT:
 						{
-						setState(540);
+						setState(767);
 						charData();
 						}
 						break;
@@ -4887,16 +6600,16 @@ public class CobolPreprocessorParser extends Parser {
 					}
 					} 
 				}
-				setState(545);
+				setState(772);
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,47,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,73,_ctx);
 			}
-			setState(547);
+			setState(774);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,48,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,74,_ctx) ) {
 			case 1:
 				{
-				setState(546);
+				setState(773);
 				replaceOffStatement();
 				}
 				break;
@@ -4948,15 +6661,15 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplaceByStatementContext replaceByStatement() throws RecognitionException {
 		ReplaceByStatementContext _localctx = new ReplaceByStatementContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_replaceByStatement);
+		enterRule(_localctx, 32, RULE_replaceByStatement);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(549);
+			setState(776);
 			match(REPLACE);
-			setState(557); 
+			setState(784); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
@@ -4964,21 +6677,21 @@ public class CobolPreprocessorParser extends Parser {
 				case 1:
 					{
 					{
-					setState(553);
+					setState(780);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==NEWLINE) {
 						{
 						{
-						setState(550);
+						setState(777);
 						match(NEWLINE);
 						}
 						}
-						setState(555);
+						setState(782);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(556);
+					setState(783);
 					replaceClause();
 					}
 					}
@@ -4986,25 +6699,25 @@ public class CobolPreprocessorParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(559); 
+				setState(786); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,50,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,76,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
-			setState(564);
+			setState(791);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(561);
+				setState(788);
 				match(NEWLINE);
 				}
 				}
-				setState(566);
+				setState(793);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(567);
+			setState(794);
 			match(DOT);
 			}
 		}
@@ -5048,30 +6761,30 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplaceOffStatementContext replaceOffStatement() throws RecognitionException {
 		ReplaceOffStatementContext _localctx = new ReplaceOffStatementContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_replaceOffStatement);
+		enterRule(_localctx, 34, RULE_replaceOffStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(569);
+			setState(796);
 			match(REPLACE);
-			setState(570);
+			setState(797);
 			match(OFF);
-			setState(574);
+			setState(801);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(571);
+				setState(798);
 				match(NEWLINE);
 				}
 				}
-				setState(576);
+				setState(803);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(577);
+			setState(804);
 			match(DOT);
 			}
 		}
@@ -5125,89 +6838,89 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplaceClauseContext replaceClause() throws RecognitionException {
 		ReplaceClauseContext _localctx = new ReplaceClauseContext(_ctx, getState());
-		enterRule(_localctx, 32, RULE_replaceClause);
+		enterRule(_localctx, 36, RULE_replaceClause);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(579);
+			setState(806);
 			replaceable();
-			setState(583);
+			setState(810);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(580);
+				setState(807);
 				match(NEWLINE);
 				}
 				}
-				setState(585);
+				setState(812);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(586);
+			setState(813);
 			match(BY);
-			setState(590);
+			setState(817);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(587);
+				setState(814);
 				match(NEWLINE);
 				}
 				}
-				setState(592);
+				setState(819);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(593);
+			setState(820);
 			replacement();
-			setState(601);
+			setState(828);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,56,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,82,_ctx) ) {
 			case 1:
 				{
-				setState(597);
+				setState(824);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==NEWLINE) {
 					{
 					{
-					setState(594);
+					setState(821);
 					match(NEWLINE);
 					}
 					}
-					setState(599);
+					setState(826);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(600);
+				setState(827);
 				directoryPhrase();
 				}
 				break;
 			}
-			setState(610);
+			setState(837);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,58,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,84,_ctx) ) {
 			case 1:
 				{
-				setState(606);
+				setState(833);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==NEWLINE) {
 					{
 					{
-					setState(603);
+					setState(830);
 					match(NEWLINE);
 					}
 					}
-					setState(608);
+					setState(835);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(609);
+				setState(836);
 				familyPhrase();
 				}
 				break;
@@ -5259,12 +6972,12 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final DirectoryPhraseContext directoryPhrase() throws RecognitionException {
 		DirectoryPhraseContext _localctx = new DirectoryPhraseContext(_ctx, getState());
-		enterRule(_localctx, 34, RULE_directoryPhrase);
+		enterRule(_localctx, 38, RULE_directoryPhrase);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(612);
+			setState(839);
 			_la = _input.LA(1);
 			if ( !(_la==IN || _la==OF) ) {
 			_errHandler.recoverInline(this);
@@ -5274,37 +6987,41 @@ public class CobolPreprocessorParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(616);
+			setState(843);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(613);
+				setState(840);
 				match(NEWLINE);
 				}
 				}
-				setState(618);
+				setState(845);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(621);
+			setState(848);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NONNUMERICLITERAL:
 			case NUMERICLITERAL:
 				{
-				setState(619);
+				setState(846);
 				literal();
 				}
 				break;
+			case ABD:
 			case ADATA:
 			case ADV:
+			case AFP:
 			case ALIAS:
+			case ALPHNUM:
 			case ANSI:
 			case ANY:
 			case APOST:
 			case AR:
+			case ARCH:
 			case ARITH:
 			case AUTO:
 			case AWO:
@@ -5321,9 +7038,13 @@ public class CobolPreprocessorParser extends Parser {
 			case CODEPAGE:
 			case COMPAT:
 			case COMPILE:
+			case COPYLOC:
+			case COPYRIGHT:
 			case CP:
+			case CPLC:
 			case CPP:
 			case CPSM:
+			case CPYR:
 			case CS:
 			case CURR:
 			case CURRENCY:
@@ -5332,23 +7053,35 @@ public class CobolPreprocessorParser extends Parser {
 			case DBCS:
 			case DD:
 			case DEBUG:
+			case DEC:
 			case DECK:
+			case DEFINE:
+			case DEF:
 			case DIAGTRUNC:
+			case DISPSIGN:
 			case DIVISION:
 			case DLI:
 			case DLL:
 			case DP:
+			case DS:
+			case DSN:
+			case DSNAME:
 			case DTR:
 			case DU:
 			case DUMP:
+			case DWARF:
 			case DYN:
 			case DYNAM:
 			case EDF:
 			case EJECT:
 			case EJPD:
 			case EN:
+			case ENDP:
+			case ENDPERIOD:
 			case ENGLISH:
 			case EPILOG:
+			case EVENP:
+			case EVENPACK:
 			case EXCI:
 			case EXIT:
 			case EXP:
@@ -5361,14 +7094,22 @@ public class CobolPreprocessorParser extends Parser {
 			case FULL:
 			case GDS:
 			case GRAPHIC:
+			case HEX:
+			case HGPR:
 			case HOOK:
+			case IC:
 			case IN:
+			case INITCHECK:
 			case INTDATE:
+			case INITIAL:
+			case INLINE:
+			case INL:
 			case JA:
 			case JP:
 			case KA:
 			case LANG:
 			case LANGUAGE:
+			case LAXPERF:
 			case LC:
 			case LENGTH:
 			case LIB:
@@ -5380,7 +7121,9 @@ public class CobolPreprocessorParser extends Parser {
 			case LM:
 			case LONGMIXED:
 			case LONGUPPER:
+			case LP:
 			case LU:
+			case LXPRF:
 			case MAP:
 			case MARGINS:
 			case MAX:
@@ -5388,23 +7131,31 @@ public class CobolPreprocessorParser extends Parser {
 			case MDECK:
 			case MIG:
 			case MIXED:
+			case MAXPCF:
 			case NAME:
 			case NAT:
 			case NATIONAL:
 			case NATLANG:
+			case NC:
 			case NN:
 			case NO:
 			case NOADATA:
 			case NOADV:
 			case NOALIAS:
+			case NOALPHNUM:
 			case NOAWO:
+			case NOBIN:
 			case NOBLOCK0:
 			case NOC:
 			case NOCBLCARD:
 			case NOCICS:
 			case NOCMPR2:
 			case NOCOMPILE:
+			case NOCOPYLOC:
+			case NOCOPYRIGHT:
+			case NOCPLC:
 			case NOCPSM:
+			case NOCPYR:
 			case NOCURR:
 			case NOCURRENCY:
 			case NOD:
@@ -5413,17 +7164,23 @@ public class CobolPreprocessorParser extends Parser {
 			case NODE:
 			case NODEBUG:
 			case NODECK:
+			case NODEFINE:
+			case NODEF:
 			case NODIAGTRUNC:
 			case NODLL:
+			case NODSNAME:
 			case NODU:
 			case NODUMP:
 			case NODP:
 			case NODTR:
+			case NODWARF:
 			case NODYN:
 			case NODYNAM:
 			case NOEDF:
 			case NOEJPD:
+			case NOENDPERIOD:
 			case NOEPILOG:
+			case NOEVENPACK:
 			case NOEXIT:
 			case NOEXP:
 			case NOEXPORTALL:
@@ -5436,6 +7193,12 @@ public class CobolPreprocessorParser extends Parser {
 			case NOFSRT:
 			case NOGRAPHIC:
 			case NOHOOK:
+			case NOINITCHECK:
+			case NOIC:
+			case NOINITIAL:
+			case NOINLINE:
+			case NOINL:
+			case NOLAXPERF:
 			case NOLENGTH:
 			case NOLIB:
 			case NOLINKAGE:
@@ -5448,6 +7211,7 @@ public class CobolPreprocessorParser extends Parser {
 			case NONUMBER:
 			case NOOBJ:
 			case NOOBJECT:
+			case NOOMITODOMIN:
 			case NOOFF:
 			case NOOFFSET:
 			case NOOPSEQUENCE:
@@ -5455,37 +7219,53 @@ public class CobolPreprocessorParser extends Parser {
 			case NOOPTIMIZE:
 			case NOOPTIONS:
 			case NOP:
+			case NOPAC:
+			case NOPARMCHECK:
 			case NOPFD:
 			case NOPROLOG:
 			case NORENT:
+			case NORULES:
 			case NOS:
 			case NOSEP:
 			case NOSEPARATE:
 			case NOSEQ:
+			case NOSERVICE:
+			case NOSLACKBYTES:
 			case NOSOURCE:
 			case NOSPIE:
 			case NOSQL:
 			case NOSQLC:
 			case NOSQLCCSID:
+			case NOSQLIMS:
 			case NOSSR:
 			case NOSSRANGE:
 			case NOSTDTRUNC:
 			case NOSEQUENCE:
+			case NOSTGOPT:
+			case NOSUPP:
+			case NOSUPPRESS:
 			case NOTERM:
 			case NOTERMINAL:
 			case NOTEST:
 			case NOTHREAD:
 			case NOTRIG:
+			case NOUNREFALL:
+			case NOUNREFSOURCE:
 			case NOVBREF:
+			case NOVOLATILE:
 			case NOWORD:
 			case NOX:
 			case NOXREF:
+			case NOZC:
+			case NOZON:
+			case NOZONECHECK:
 			case NOZWB:
 			case NS:
 			case NSEQ:
 			case NSYMBOL:
 			case NUM:
 			case NUMBER:
+			case NUMCHECK:
 			case NUMPROC:
 			case OBJ:
 			case OBJECT:
@@ -5493,6 +7273,8 @@ public class CobolPreprocessorParser extends Parser {
 			case OFF:
 			case OFFSET:
 			case ON:
+			case OMITODOMIN:
+			case OOM:
 			case OP:
 			case OPMARGINS:
 			case OPSEQUENCE:
@@ -5502,22 +7284,30 @@ public class CobolPreprocessorParser extends Parser {
 			case OPTIONS:
 			case OUT:
 			case OUTDD:
+			case PARMCHECK:
+			case PATH:
 			case PFD:
 			case PPTDBG:
 			case PGMN:
 			case PGMNAME:
 			case PROCESS:
 			case PROLOG:
+			case QUALIFY:
+			case QUA:
 			case QUOTE:
 			case RENT:
 			case REPLACING:
 			case RMODE:
+			case RULES:
 			case SEP:
 			case SEPARATE:
 			case SEQ:
 			case SEQUENCE:
+			case SERVICE:
 			case SHORT:
 			case SIZE:
+			case SLACKBYTES:
+			case SLCKB:
 			case SOURCE:
 			case SP:
 			case SPACE:
@@ -5525,10 +7315,15 @@ public class CobolPreprocessorParser extends Parser {
 			case SQL:
 			case SQLC:
 			case SQLCCSID:
+			case SQLIMS:
 			case SS:
 			case SSR:
 			case SSRANGE:
 			case STD:
+			case STGOPT:
+			case SUCC:
+			case SUPP:
+			case SUPPRESS:
 			case SYSEIB:
 			case SZ:
 			case TERM:
@@ -5539,8 +7334,12 @@ public class CobolPreprocessorParser extends Parser {
 			case TRIG:
 			case TRUNC:
 			case UE:
+			case UNREF:
 			case UPPER:
 			case VBREF:
+			case VOLATILE:
+			case VS:
+			case VSAMOPENFS:
 			case WD:
 			case XMLPARSE:
 			case XMLSS:
@@ -5548,6 +7347,11 @@ public class CobolPreprocessorParser extends Parser {
 			case XREF:
 			case YEARWINDOW:
 			case YW:
+			case ZC:
+			case ZD:
+			case ZON:
+			case ZONECHECK:
+			case ZONEDATA:
 			case ZWB:
 			case C_CHAR:
 			case D_CHAR:
@@ -5565,7 +7369,7 @@ public class CobolPreprocessorParser extends Parser {
 			case COMMACHAR:
 			case IDENTIFIER:
 				{
-				setState(620);
+				setState(847);
 				cobolWord();
 				}
 				break;
@@ -5618,44 +7422,48 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final FamilyPhraseContext familyPhrase() throws RecognitionException {
 		FamilyPhraseContext _localctx = new FamilyPhraseContext(_ctx, getState());
-		enterRule(_localctx, 36, RULE_familyPhrase);
+		enterRule(_localctx, 40, RULE_familyPhrase);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(623);
+			setState(850);
 			match(ON);
-			setState(627);
+			setState(854);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==NEWLINE) {
 				{
 				{
-				setState(624);
+				setState(851);
 				match(NEWLINE);
 				}
 				}
-				setState(629);
+				setState(856);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
-			setState(632);
+			setState(859);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NONNUMERICLITERAL:
 			case NUMERICLITERAL:
 				{
-				setState(630);
+				setState(857);
 				literal();
 				}
 				break;
+			case ABD:
 			case ADATA:
 			case ADV:
+			case AFP:
 			case ALIAS:
+			case ALPHNUM:
 			case ANSI:
 			case ANY:
 			case APOST:
 			case AR:
+			case ARCH:
 			case ARITH:
 			case AUTO:
 			case AWO:
@@ -5672,9 +7480,13 @@ public class CobolPreprocessorParser extends Parser {
 			case CODEPAGE:
 			case COMPAT:
 			case COMPILE:
+			case COPYLOC:
+			case COPYRIGHT:
 			case CP:
+			case CPLC:
 			case CPP:
 			case CPSM:
+			case CPYR:
 			case CS:
 			case CURR:
 			case CURRENCY:
@@ -5683,23 +7495,35 @@ public class CobolPreprocessorParser extends Parser {
 			case DBCS:
 			case DD:
 			case DEBUG:
+			case DEC:
 			case DECK:
+			case DEFINE:
+			case DEF:
 			case DIAGTRUNC:
+			case DISPSIGN:
 			case DIVISION:
 			case DLI:
 			case DLL:
 			case DP:
+			case DS:
+			case DSN:
+			case DSNAME:
 			case DTR:
 			case DU:
 			case DUMP:
+			case DWARF:
 			case DYN:
 			case DYNAM:
 			case EDF:
 			case EJECT:
 			case EJPD:
 			case EN:
+			case ENDP:
+			case ENDPERIOD:
 			case ENGLISH:
 			case EPILOG:
+			case EVENP:
+			case EVENPACK:
 			case EXCI:
 			case EXIT:
 			case EXP:
@@ -5712,14 +7536,22 @@ public class CobolPreprocessorParser extends Parser {
 			case FULL:
 			case GDS:
 			case GRAPHIC:
+			case HEX:
+			case HGPR:
 			case HOOK:
+			case IC:
 			case IN:
+			case INITCHECK:
 			case INTDATE:
+			case INITIAL:
+			case INLINE:
+			case INL:
 			case JA:
 			case JP:
 			case KA:
 			case LANG:
 			case LANGUAGE:
+			case LAXPERF:
 			case LC:
 			case LENGTH:
 			case LIB:
@@ -5731,7 +7563,9 @@ public class CobolPreprocessorParser extends Parser {
 			case LM:
 			case LONGMIXED:
 			case LONGUPPER:
+			case LP:
 			case LU:
+			case LXPRF:
 			case MAP:
 			case MARGINS:
 			case MAX:
@@ -5739,23 +7573,31 @@ public class CobolPreprocessorParser extends Parser {
 			case MDECK:
 			case MIG:
 			case MIXED:
+			case MAXPCF:
 			case NAME:
 			case NAT:
 			case NATIONAL:
 			case NATLANG:
+			case NC:
 			case NN:
 			case NO:
 			case NOADATA:
 			case NOADV:
 			case NOALIAS:
+			case NOALPHNUM:
 			case NOAWO:
+			case NOBIN:
 			case NOBLOCK0:
 			case NOC:
 			case NOCBLCARD:
 			case NOCICS:
 			case NOCMPR2:
 			case NOCOMPILE:
+			case NOCOPYLOC:
+			case NOCOPYRIGHT:
+			case NOCPLC:
 			case NOCPSM:
+			case NOCPYR:
 			case NOCURR:
 			case NOCURRENCY:
 			case NOD:
@@ -5764,17 +7606,23 @@ public class CobolPreprocessorParser extends Parser {
 			case NODE:
 			case NODEBUG:
 			case NODECK:
+			case NODEFINE:
+			case NODEF:
 			case NODIAGTRUNC:
 			case NODLL:
+			case NODSNAME:
 			case NODU:
 			case NODUMP:
 			case NODP:
 			case NODTR:
+			case NODWARF:
 			case NODYN:
 			case NODYNAM:
 			case NOEDF:
 			case NOEJPD:
+			case NOENDPERIOD:
 			case NOEPILOG:
+			case NOEVENPACK:
 			case NOEXIT:
 			case NOEXP:
 			case NOEXPORTALL:
@@ -5787,6 +7635,12 @@ public class CobolPreprocessorParser extends Parser {
 			case NOFSRT:
 			case NOGRAPHIC:
 			case NOHOOK:
+			case NOINITCHECK:
+			case NOIC:
+			case NOINITIAL:
+			case NOINLINE:
+			case NOINL:
+			case NOLAXPERF:
 			case NOLENGTH:
 			case NOLIB:
 			case NOLINKAGE:
@@ -5799,6 +7653,7 @@ public class CobolPreprocessorParser extends Parser {
 			case NONUMBER:
 			case NOOBJ:
 			case NOOBJECT:
+			case NOOMITODOMIN:
 			case NOOFF:
 			case NOOFFSET:
 			case NOOPSEQUENCE:
@@ -5806,37 +7661,53 @@ public class CobolPreprocessorParser extends Parser {
 			case NOOPTIMIZE:
 			case NOOPTIONS:
 			case NOP:
+			case NOPAC:
+			case NOPARMCHECK:
 			case NOPFD:
 			case NOPROLOG:
 			case NORENT:
+			case NORULES:
 			case NOS:
 			case NOSEP:
 			case NOSEPARATE:
 			case NOSEQ:
+			case NOSERVICE:
+			case NOSLACKBYTES:
 			case NOSOURCE:
 			case NOSPIE:
 			case NOSQL:
 			case NOSQLC:
 			case NOSQLCCSID:
+			case NOSQLIMS:
 			case NOSSR:
 			case NOSSRANGE:
 			case NOSTDTRUNC:
 			case NOSEQUENCE:
+			case NOSTGOPT:
+			case NOSUPP:
+			case NOSUPPRESS:
 			case NOTERM:
 			case NOTERMINAL:
 			case NOTEST:
 			case NOTHREAD:
 			case NOTRIG:
+			case NOUNREFALL:
+			case NOUNREFSOURCE:
 			case NOVBREF:
+			case NOVOLATILE:
 			case NOWORD:
 			case NOX:
 			case NOXREF:
+			case NOZC:
+			case NOZON:
+			case NOZONECHECK:
 			case NOZWB:
 			case NS:
 			case NSEQ:
 			case NSYMBOL:
 			case NUM:
 			case NUMBER:
+			case NUMCHECK:
 			case NUMPROC:
 			case OBJ:
 			case OBJECT:
@@ -5844,6 +7715,8 @@ public class CobolPreprocessorParser extends Parser {
 			case OFF:
 			case OFFSET:
 			case ON:
+			case OMITODOMIN:
+			case OOM:
 			case OP:
 			case OPMARGINS:
 			case OPSEQUENCE:
@@ -5853,22 +7726,30 @@ public class CobolPreprocessorParser extends Parser {
 			case OPTIONS:
 			case OUT:
 			case OUTDD:
+			case PARMCHECK:
+			case PATH:
 			case PFD:
 			case PPTDBG:
 			case PGMN:
 			case PGMNAME:
 			case PROCESS:
 			case PROLOG:
+			case QUALIFY:
+			case QUA:
 			case QUOTE:
 			case RENT:
 			case REPLACING:
 			case RMODE:
+			case RULES:
 			case SEP:
 			case SEPARATE:
 			case SEQ:
 			case SEQUENCE:
+			case SERVICE:
 			case SHORT:
 			case SIZE:
+			case SLACKBYTES:
+			case SLCKB:
 			case SOURCE:
 			case SP:
 			case SPACE:
@@ -5876,10 +7757,15 @@ public class CobolPreprocessorParser extends Parser {
 			case SQL:
 			case SQLC:
 			case SQLCCSID:
+			case SQLIMS:
 			case SS:
 			case SSR:
 			case SSRANGE:
 			case STD:
+			case STGOPT:
+			case SUCC:
+			case SUPP:
+			case SUPPRESS:
 			case SYSEIB:
 			case SZ:
 			case TERM:
@@ -5890,8 +7776,12 @@ public class CobolPreprocessorParser extends Parser {
 			case TRIG:
 			case TRUNC:
 			case UE:
+			case UNREF:
 			case UPPER:
 			case VBREF:
+			case VOLATILE:
+			case VS:
+			case VSAMOPENFS:
 			case WD:
 			case XMLPARSE:
 			case XMLSS:
@@ -5899,6 +7789,11 @@ public class CobolPreprocessorParser extends Parser {
 			case XREF:
 			case YEARWINDOW:
 			case YW:
+			case ZC:
+			case ZD:
+			case ZON:
+			case ZONECHECK:
+			case ZONEDATA:
 			case ZWB:
 			case C_CHAR:
 			case D_CHAR:
@@ -5916,7 +7811,7 @@ public class CobolPreprocessorParser extends Parser {
 			case COMMACHAR:
 			case IDENTIFIER:
 				{
-				setState(631);
+				setState(858);
 				cobolWord();
 				}
 				break;
@@ -5970,36 +7865,36 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplaceableContext replaceable() throws RecognitionException {
 		ReplaceableContext _localctx = new ReplaceableContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_replaceable);
+		enterRule(_localctx, 42, RULE_replaceable);
 		try {
-			setState(638);
+			setState(865);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,63,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,89,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(634);
+				setState(861);
 				literal();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(635);
+				setState(862);
 				cobolWord();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(636);
+				setState(863);
 				pseudoText();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(637);
+				setState(864);
 				charDataLine();
 				}
 				break;
@@ -6050,36 +7945,36 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final ReplacementContext replacement() throws RecognitionException {
 		ReplacementContext _localctx = new ReplacementContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_replacement);
+		enterRule(_localctx, 44, RULE_replacement);
 		try {
-			setState(644);
+			setState(871);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,64,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,90,_ctx) ) {
 			case 1:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(640);
+				setState(867);
 				literal();
 				}
 				break;
 			case 2:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(641);
+				setState(868);
 				cobolWord();
 				}
 				break;
 			case 3:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(642);
+				setState(869);
 				pseudoText();
 				}
 				break;
 			case 4:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(643);
+				setState(870);
 				charDataLine();
 				}
 				break;
@@ -6120,18 +8015,18 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final EjectStatementContext ejectStatement() throws RecognitionException {
 		EjectStatementContext _localctx = new EjectStatementContext(_ctx, getState());
-		enterRule(_localctx, 42, RULE_ejectStatement);
+		enterRule(_localctx, 46, RULE_ejectStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(646);
+			setState(873);
 			match(EJECT);
-			setState(648);
+			setState(875);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,65,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,91,_ctx) ) {
 			case 1:
 				{
-				setState(647);
+				setState(874);
 				match(DOT);
 				}
 				break;
@@ -6175,14 +8070,14 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final SkipStatementContext skipStatement() throws RecognitionException {
 		SkipStatementContext _localctx = new SkipStatementContext(_ctx, getState());
-		enterRule(_localctx, 44, RULE_skipStatement);
+		enterRule(_localctx, 48, RULE_skipStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(650);
+			setState(877);
 			_la = _input.LA(1);
-			if ( !(((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (SKIP1 - 256)) | (1L << (SKIP2 - 256)) | (1L << (SKIP3 - 256)))) != 0)) ) {
+			if ( !(((((_la - 344)) & ~0x3f) == 0 && ((1L << (_la - 344)) & ((1L << (SKIP1 - 344)) | (1L << (SKIP2 - 344)) | (1L << (SKIP3 - 344)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -6190,12 +8085,12 @@ public class CobolPreprocessorParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(652);
+			setState(879);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,66,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,92,_ctx) ) {
 			case 1:
 				{
-				setState(651);
+				setState(878);
 				match(DOT);
 				}
 				break;
@@ -6240,20 +8135,20 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final TitleStatementContext titleStatement() throws RecognitionException {
 		TitleStatementContext _localctx = new TitleStatementContext(_ctx, getState());
-		enterRule(_localctx, 46, RULE_titleStatement);
+		enterRule(_localctx, 50, RULE_titleStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(654);
+			setState(881);
 			match(TITLE);
-			setState(655);
+			setState(882);
 			literal();
-			setState(657);
+			setState(884);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,67,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,93,_ctx) ) {
 			case 1:
 				{
-				setState(656);
+				setState(883);
 				match(DOT);
 				}
 				break;
@@ -6300,24 +8195,24 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final PseudoTextContext pseudoText() throws RecognitionException {
 		PseudoTextContext _localctx = new PseudoTextContext(_ctx, getState());
-		enterRule(_localctx, 48, RULE_pseudoText);
+		enterRule(_localctx, 52, RULE_pseudoText);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(659);
+			setState(886);
 			match(DOUBLEEQUALCHAR);
-			setState(661);
+			setState(888);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ADATA) | (1L << ADV) | (1L << ALIAS) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << CP) | (1L << CPP) | (1L << CPSM) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DECK) | (1L << DIAGTRUNC) | (1L << DIVISION) | (1L << DLI) | (1L << DLL) | (1L << DP) | (1L << DTR) | (1L << DU) | (1L << DUMP) | (1L << DYN) | (1L << DYNAM) | (1L << EDF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EXCI - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HOOK - 64)) | (1L << (IN - 64)) | (1L << (INTDATE - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)) | (1L << (LIN - 64)) | (1L << (LINECOUNT - 64)) | (1L << (LINKAGE - 64)) | (1L << (LIST - 64)) | (1L << (LM - 64)) | (1L << (LONGMIXED - 64)) | (1L << (LONGUPPER - 64)) | (1L << (LPARENCHAR - 64)) | (1L << (LU - 64)) | (1L << (MAP - 64)) | (1L << (MARGINS - 64)) | (1L << (MAX - 64)) | (1L << (MD - 64)) | (1L << (MDECK - 64)) | (1L << (MIG - 64)) | (1L << (MIXED - 64)) | (1L << (NAME - 64)) | (1L << (NAT - 64)) | (1L << (NATIONAL - 64)) | (1L << (NATLANG - 64)) | (1L << (NN - 64)) | (1L << (NO - 64)) | (1L << (NOADATA - 64)) | (1L << (NOADV - 64)) | (1L << (NOALIAS - 64)) | (1L << (NOAWO - 64)) | (1L << (NOBLOCK0 - 64)) | (1L << (NOC - 64)) | (1L << (NOCBLCARD - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)) | (1L << (NOEDF - 128)) | (1L << (NOEJPD - 128)) | (1L << (NOEPILOG - 128)) | (1L << (NOEXIT - 128)) | (1L << (NOEXP - 128)) | (1L << (NOEXPORTALL - 128)) | (1L << (NOF - 128)) | (1L << (NOFASTSRT - 128)) | (1L << (NOFEPI - 128)) | (1L << (NOFLAG - 128)) | (1L << (NOFLAGMIG - 128)) | (1L << (NOFLAGSTD - 128)) | (1L << (NOFSRT - 128)) | (1L << (NOGRAPHIC - 128)) | (1L << (NOHOOK - 128)) | (1L << (NOLENGTH - 128)) | (1L << (NOLIB - 128)) | (1L << (NOLINKAGE - 128)) | (1L << (NOLIST - 128)) | (1L << (NOMAP - 128)) | (1L << (NOMD - 128)) | (1L << (NOMDECK - 128)) | (1L << (NONAME - 128)) | (1L << (NONUM - 128)) | (1L << (NONUMBER - 128)) | (1L << (NOOBJ - 128)) | (1L << (NOOBJECT - 128)) | (1L << (NOOFF - 128)) | (1L << (NOOFFSET - 128)) | (1L << (NOOPSEQUENCE - 128)) | (1L << (NOOPT - 128)) | (1L << (NOOPTIMIZE - 128)) | (1L << (NOOPTIONS - 128)) | (1L << (NOP - 128)) | (1L << (NOPFD - 128)) | (1L << (NOPROLOG - 128)) | (1L << (NORENT - 128)) | (1L << (NOS - 128)) | (1L << (NOSEP - 128)) | (1L << (NOSEPARATE - 128)) | (1L << (NOSEQ - 128)) | (1L << (NOSOURCE - 128)) | (1L << (NOSPIE - 128)) | (1L << (NOSQL - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSSR - 192)) | (1L << (NOSSRANGE - 192)) | (1L << (NOSTDTRUNC - 192)) | (1L << (NOSEQUENCE - 192)) | (1L << (NOTERM - 192)) | (1L << (NOTERMINAL - 192)) | (1L << (NOTEST - 192)) | (1L << (NOTHREAD - 192)) | (1L << (NOTRIG - 192)) | (1L << (NOVBREF - 192)) | (1L << (NOWORD - 192)) | (1L << (NOX - 192)) | (1L << (NOXREF - 192)) | (1L << (NOZWB - 192)) | (1L << (NS - 192)) | (1L << (NSEQ - 192)) | (1L << (NSYMBOL - 192)) | (1L << (NUM - 192)) | (1L << (NUMBER - 192)) | (1L << (NUMPROC - 192)) | (1L << (OBJ - 192)) | (1L << (OBJECT - 192)) | (1L << (OF - 192)) | (1L << (OFF - 192)) | (1L << (OFFSET - 192)) | (1L << (ON - 192)) | (1L << (OP - 192)) | (1L << (OPMARGINS - 192)) | (1L << (OPSEQUENCE - 192)) | (1L << (OPT - 192)) | (1L << (OPTFILE - 192)) | (1L << (OPTIMIZE - 192)) | (1L << (OPTIONS - 192)) | (1L << (OUT - 192)) | (1L << (OUTDD - 192)) | (1L << (PFD - 192)) | (1L << (PPTDBG - 192)) | (1L << (PGMN - 192)) | (1L << (PGMNAME - 192)) | (1L << (PROCESS - 192)) | (1L << (PROLOG - 192)) | (1L << (QUOTE - 192)) | (1L << (RENT - 192)) | (1L << (REPLACING - 192)) | (1L << (RMODE - 192)) | (1L << (RPARENCHAR - 192)) | (1L << (SEP - 192)) | (1L << (SEPARATE - 192)) | (1L << (SEQ - 192)) | (1L << (SEQUENCE - 192)) | (1L << (SHORT - 192)) | (1L << (SIZE - 192)) | (1L << (SOURCE - 192)) | (1L << (SP - 192)) | (1L << (SPACE - 192)) | (1L << (SPIE - 192)) | (1L << (SQL - 192)) | (1L << (SQLC - 192)) | (1L << (SQLCCSID - 192)))) != 0) || ((((_la - 259)) & ~0x3f) == 0 && ((1L << (_la - 259)) & ((1L << (SS - 259)) | (1L << (SSR - 259)) | (1L << (SSRANGE - 259)) | (1L << (STD - 259)) | (1L << (SYSEIB - 259)) | (1L << (SZ - 259)) | (1L << (TERM - 259)) | (1L << (TERMINAL - 259)) | (1L << (TEST - 259)) | (1L << (THREAD - 259)) | (1L << (TITLE - 259)) | (1L << (TRIG - 259)) | (1L << (TRUNC - 259)) | (1L << (UE - 259)) | (1L << (UPPER - 259)) | (1L << (VBREF - 259)) | (1L << (WD - 259)) | (1L << (XMLPARSE - 259)) | (1L << (XMLSS - 259)) | (1L << (XOPTS - 259)) | (1L << (XREF - 259)) | (1L << (YEARWINDOW - 259)) | (1L << (YW - 259)) | (1L << (ZWB - 259)) | (1L << (C_CHAR - 259)) | (1L << (D_CHAR - 259)) | (1L << (E_CHAR - 259)) | (1L << (F_CHAR - 259)) | (1L << (H_CHAR - 259)) | (1L << (I_CHAR - 259)) | (1L << (M_CHAR - 259)) | (1L << (N_CHAR - 259)) | (1L << (Q_CHAR - 259)) | (1L << (S_CHAR - 259)) | (1L << (U_CHAR - 259)) | (1L << (W_CHAR - 259)) | (1L << (X_CHAR - 259)) | (1L << (COMMACHAR - 259)) | (1L << (DOT - 259)) | (1L << (NONNUMERICLITERAL - 259)) | (1L << (NUMERICLITERAL - 259)) | (1L << (IDENTIFIER - 259)) | (1L << (FILENAME - 259)) | (1L << (PSEUDOTEXTIDENTIFIER - 259)) | (1L << (NEWLINE - 259)) | (1L << (TEXT - 259)))) != 0)) {
+			if ((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABD) | (1L << ADATA) | (1L << ADV) | (1L << AFP) | (1L << ALIAS) | (1L << ALPHNUM) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARCH) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << COPYLOC) | (1L << COPYRIGHT) | (1L << CP) | (1L << CPLC) | (1L << CPP) | (1L << CPSM) | (1L << CPYR) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DEC) | (1L << DECK) | (1L << DEFINE) | (1L << DEF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (DIAGTRUNC - 64)) | (1L << (DISPSIGN - 64)) | (1L << (DIVISION - 64)) | (1L << (DLI - 64)) | (1L << (DLL - 64)) | (1L << (DP - 64)) | (1L << (DS - 64)) | (1L << (DSN - 64)) | (1L << (DSNAME - 64)) | (1L << (DTR - 64)) | (1L << (DU - 64)) | (1L << (DUMP - 64)) | (1L << (DWARF - 64)) | (1L << (DYN - 64)) | (1L << (DYNAM - 64)) | (1L << (EDF - 64)) | (1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENDP - 64)) | (1L << (ENDPERIOD - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EVENP - 64)) | (1L << (EVENPACK - 64)) | (1L << (EXCI - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HEX - 64)) | (1L << (HGPR - 64)) | (1L << (HOOK - 64)) | (1L << (IC - 64)) | (1L << (IN - 64)) | (1L << (INITCHECK - 64)) | (1L << (INTDATE - 64)) | (1L << (INITIAL - 64)) | (1L << (INLINE - 64)) | (1L << (INL - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LAXPERF - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (LIN - 128)) | (1L << (LINECOUNT - 128)) | (1L << (LINKAGE - 128)) | (1L << (LIST - 128)) | (1L << (LM - 128)) | (1L << (LONGMIXED - 128)) | (1L << (LONGUPPER - 128)) | (1L << (LP - 128)) | (1L << (LPARENCHAR - 128)) | (1L << (LU - 128)) | (1L << (LXPRF - 128)) | (1L << (MAP - 128)) | (1L << (MARGINS - 128)) | (1L << (MAX - 128)) | (1L << (MD - 128)) | (1L << (MDECK - 128)) | (1L << (MIG - 128)) | (1L << (MIXED - 128)) | (1L << (MAXPCF - 128)) | (1L << (NAME - 128)) | (1L << (NAT - 128)) | (1L << (NATIONAL - 128)) | (1L << (NATLANG - 128)) | (1L << (NC - 128)) | (1L << (NN - 128)) | (1L << (NO - 128)) | (1L << (NOADATA - 128)) | (1L << (NOADV - 128)) | (1L << (NOALIAS - 128)) | (1L << (NOALPHNUM - 128)) | (1L << (NOAWO - 128)) | (1L << (NOBIN - 128)) | (1L << (NOBLOCK0 - 128)) | (1L << (NOC - 128)) | (1L << (NOCBLCARD - 128)) | (1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCOPYLOC - 128)) | (1L << (NOCOPYRIGHT - 128)) | (1L << (NOCPLC - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCPYR - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODEFINE - 128)) | (1L << (NODEF - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODSNAME - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODWARF - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOEDF - 192)) | (1L << (NOEJPD - 192)) | (1L << (NOENDPERIOD - 192)) | (1L << (NOEPILOG - 192)) | (1L << (NOEVENPACK - 192)) | (1L << (NOEXIT - 192)) | (1L << (NOEXP - 192)) | (1L << (NOEXPORTALL - 192)) | (1L << (NOF - 192)) | (1L << (NOFASTSRT - 192)) | (1L << (NOFEPI - 192)) | (1L << (NOFLAG - 192)) | (1L << (NOFLAGMIG - 192)) | (1L << (NOFLAGSTD - 192)) | (1L << (NOFSRT - 192)) | (1L << (NOGRAPHIC - 192)) | (1L << (NOHOOK - 192)) | (1L << (NOINITCHECK - 192)) | (1L << (NOIC - 192)) | (1L << (NOINITIAL - 192)) | (1L << (NOINLINE - 192)) | (1L << (NOINL - 192)) | (1L << (NOLAXPERF - 192)) | (1L << (NOLENGTH - 192)) | (1L << (NOLIB - 192)) | (1L << (NOLINKAGE - 192)) | (1L << (NOLIST - 192)) | (1L << (NOMAP - 192)) | (1L << (NOMD - 192)) | (1L << (NOMDECK - 192)) | (1L << (NONAME - 192)) | (1L << (NONUM - 192)) | (1L << (NONUMBER - 192)) | (1L << (NOOBJ - 192)) | (1L << (NOOBJECT - 192)) | (1L << (NOOMITODOMIN - 192)) | (1L << (NOOFF - 192)) | (1L << (NOOFFSET - 192)) | (1L << (NOOPSEQUENCE - 192)) | (1L << (NOOPT - 192)) | (1L << (NOOPTIMIZE - 192)) | (1L << (NOOPTIONS - 192)) | (1L << (NOP - 192)) | (1L << (NOPAC - 192)) | (1L << (NOPARMCHECK - 192)) | (1L << (NOPFD - 192)) | (1L << (NOPROLOG - 192)) | (1L << (NORENT - 192)) | (1L << (NORULES - 192)) | (1L << (NOS - 192)) | (1L << (NOSEP - 192)) | (1L << (NOSEPARATE - 192)) | (1L << (NOSEQ - 192)) | (1L << (NOSERVICE - 192)) | (1L << (NOSLACKBYTES - 192)) | (1L << (NOSOURCE - 192)) | (1L << (NOSPIE - 192)) | (1L << (NOSQL - 192)) | (1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSQLIMS - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (NOSSR - 256)) | (1L << (NOSSRANGE - 256)) | (1L << (NOSTDTRUNC - 256)) | (1L << (NOSEQUENCE - 256)) | (1L << (NOSTGOPT - 256)) | (1L << (NOSUPP - 256)) | (1L << (NOSUPPRESS - 256)) | (1L << (NOTERM - 256)) | (1L << (NOTERMINAL - 256)) | (1L << (NOTEST - 256)) | (1L << (NOTHREAD - 256)) | (1L << (NOTRIG - 256)) | (1L << (NOUNREFALL - 256)) | (1L << (NOUNREFSOURCE - 256)) | (1L << (NOVBREF - 256)) | (1L << (NOVOLATILE - 256)) | (1L << (NOWORD - 256)) | (1L << (NOX - 256)) | (1L << (NOXREF - 256)) | (1L << (NOZC - 256)) | (1L << (NOZON - 256)) | (1L << (NOZONECHECK - 256)) | (1L << (NOZWB - 256)) | (1L << (NS - 256)) | (1L << (NSEQ - 256)) | (1L << (NSYMBOL - 256)) | (1L << (NUM - 256)) | (1L << (NUMBER - 256)) | (1L << (NUMCHECK - 256)) | (1L << (NUMPROC - 256)) | (1L << (OBJ - 256)) | (1L << (OBJECT - 256)) | (1L << (OF - 256)) | (1L << (OFF - 256)) | (1L << (OFFSET - 256)) | (1L << (ON - 256)) | (1L << (OMITODOMIN - 256)) | (1L << (OOM - 256)) | (1L << (OP - 256)) | (1L << (OPMARGINS - 256)) | (1L << (OPSEQUENCE - 256)) | (1L << (OPT - 256)) | (1L << (OPTFILE - 256)) | (1L << (OPTIMIZE - 256)) | (1L << (OPTIONS - 256)) | (1L << (OUT - 256)) | (1L << (OUTDD - 256)) | (1L << (PARMCHECK - 256)) | (1L << (PATH - 256)) | (1L << (PFD - 256)) | (1L << (PPTDBG - 256)) | (1L << (PGMN - 256)) | (1L << (PGMNAME - 256)) | (1L << (PROCESS - 256)) | (1L << (PROLOG - 256)) | (1L << (QUALIFY - 256)) | (1L << (QUA - 256)) | (1L << (QUOTE - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (RENT - 320)) | (1L << (REPLACING - 320)) | (1L << (RMODE - 320)) | (1L << (RPARENCHAR - 320)) | (1L << (RULES - 320)) | (1L << (SEP - 320)) | (1L << (SEPARATE - 320)) | (1L << (SEQ - 320)) | (1L << (SEQUENCE - 320)) | (1L << (SERVICE - 320)) | (1L << (SHORT - 320)) | (1L << (SIZE - 320)) | (1L << (SLACKBYTES - 320)) | (1L << (SLCKB - 320)) | (1L << (SOURCE - 320)) | (1L << (SP - 320)) | (1L << (SPACE - 320)) | (1L << (SPIE - 320)) | (1L << (SQL - 320)) | (1L << (SQLC - 320)) | (1L << (SQLCCSID - 320)) | (1L << (SQLIMS - 320)) | (1L << (SS - 320)) | (1L << (SSR - 320)) | (1L << (SSRANGE - 320)) | (1L << (STD - 320)) | (1L << (STGOPT - 320)) | (1L << (SUCC - 320)) | (1L << (SUPP - 320)) | (1L << (SUPPRESS - 320)) | (1L << (SYSEIB - 320)) | (1L << (SZ - 320)) | (1L << (TERM - 320)) | (1L << (TERMINAL - 320)) | (1L << (TEST - 320)) | (1L << (THREAD - 320)) | (1L << (TITLE - 320)) | (1L << (TRIG - 320)) | (1L << (TRUNC - 320)) | (1L << (UE - 320)) | (1L << (UNREF - 320)) | (1L << (UPPER - 320)) | (1L << (VBREF - 320)) | (1L << (VOLATILE - 320)) | (1L << (VS - 320)) | (1L << (VSAMOPENFS - 320)) | (1L << (WD - 320)) | (1L << (XMLPARSE - 320)) | (1L << (XMLSS - 320)) | (1L << (XOPTS - 320)) | (1L << (XREF - 320)) | (1L << (YEARWINDOW - 320)) | (1L << (YW - 320)))) != 0) || ((((_la - 384)) & ~0x3f) == 0 && ((1L << (_la - 384)) & ((1L << (ZC - 384)) | (1L << (ZD - 384)) | (1L << (ZON - 384)) | (1L << (ZONECHECK - 384)) | (1L << (ZONEDATA - 384)) | (1L << (ZWB - 384)) | (1L << (C_CHAR - 384)) | (1L << (D_CHAR - 384)) | (1L << (E_CHAR - 384)) | (1L << (F_CHAR - 384)) | (1L << (H_CHAR - 384)) | (1L << (I_CHAR - 384)) | (1L << (M_CHAR - 384)) | (1L << (N_CHAR - 384)) | (1L << (Q_CHAR - 384)) | (1L << (S_CHAR - 384)) | (1L << (U_CHAR - 384)) | (1L << (W_CHAR - 384)) | (1L << (X_CHAR - 384)) | (1L << (COMMACHAR - 384)) | (1L << (DOT - 384)) | (1L << (NONNUMERICLITERAL - 384)) | (1L << (NUMERICLITERAL - 384)) | (1L << (IDENTIFIER - 384)) | (1L << (FILENAME - 384)) | (1L << (PSEUDOTEXTIDENTIFIER - 384)) | (1L << (NEWLINE - 384)) | (1L << (TEXT - 384)))) != 0)) {
 				{
-				setState(660);
+				setState(887);
 				charData();
 				}
 			}
 
-			setState(663);
+			setState(890);
 			match(DOUBLEEQUALCHAR);
 			}
 		}
@@ -6364,28 +8259,32 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CharDataContext charData() throws RecognitionException {
 		CharDataContext _localctx = new CharDataContext(_ctx, getState());
-		enterRule(_localctx, 50, RULE_charData);
+		enterRule(_localctx, 54, RULE_charData);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(667); 
+			setState(894); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					setState(667);
+					setState(894);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
+					case ABD:
 					case ADATA:
 					case ADV:
+					case AFP:
 					case ALIAS:
+					case ALPHNUM:
 					case ANSI:
 					case ANY:
 					case APOST:
 					case AR:
+					case ARCH:
 					case ARITH:
 					case AUTO:
 					case AWO:
@@ -6402,9 +8301,13 @@ public class CobolPreprocessorParser extends Parser {
 					case CODEPAGE:
 					case COMPAT:
 					case COMPILE:
+					case COPYLOC:
+					case COPYRIGHT:
 					case CP:
+					case CPLC:
 					case CPP:
 					case CPSM:
+					case CPYR:
 					case CS:
 					case CURR:
 					case CURRENCY:
@@ -6413,23 +8316,35 @@ public class CobolPreprocessorParser extends Parser {
 					case DBCS:
 					case DD:
 					case DEBUG:
+					case DEC:
 					case DECK:
+					case DEFINE:
+					case DEF:
 					case DIAGTRUNC:
+					case DISPSIGN:
 					case DIVISION:
 					case DLI:
 					case DLL:
 					case DP:
+					case DS:
+					case DSN:
+					case DSNAME:
 					case DTR:
 					case DU:
 					case DUMP:
+					case DWARF:
 					case DYN:
 					case DYNAM:
 					case EDF:
 					case EJECT:
 					case EJPD:
 					case EN:
+					case ENDP:
+					case ENDPERIOD:
 					case ENGLISH:
 					case EPILOG:
+					case EVENP:
+					case EVENPACK:
 					case EXCI:
 					case EXIT:
 					case EXP:
@@ -6442,14 +8357,22 @@ public class CobolPreprocessorParser extends Parser {
 					case FULL:
 					case GDS:
 					case GRAPHIC:
+					case HEX:
+					case HGPR:
 					case HOOK:
+					case IC:
 					case IN:
+					case INITCHECK:
 					case INTDATE:
+					case INITIAL:
+					case INLINE:
+					case INL:
 					case JA:
 					case JP:
 					case KA:
 					case LANG:
 					case LANGUAGE:
+					case LAXPERF:
 					case LC:
 					case LENGTH:
 					case LIB:
@@ -6461,8 +8384,10 @@ public class CobolPreprocessorParser extends Parser {
 					case LM:
 					case LONGMIXED:
 					case LONGUPPER:
+					case LP:
 					case LPARENCHAR:
 					case LU:
+					case LXPRF:
 					case MAP:
 					case MARGINS:
 					case MAX:
@@ -6470,23 +8395,31 @@ public class CobolPreprocessorParser extends Parser {
 					case MDECK:
 					case MIG:
 					case MIXED:
+					case MAXPCF:
 					case NAME:
 					case NAT:
 					case NATIONAL:
 					case NATLANG:
+					case NC:
 					case NN:
 					case NO:
 					case NOADATA:
 					case NOADV:
 					case NOALIAS:
+					case NOALPHNUM:
 					case NOAWO:
+					case NOBIN:
 					case NOBLOCK0:
 					case NOC:
 					case NOCBLCARD:
 					case NOCICS:
 					case NOCMPR2:
 					case NOCOMPILE:
+					case NOCOPYLOC:
+					case NOCOPYRIGHT:
+					case NOCPLC:
 					case NOCPSM:
+					case NOCPYR:
 					case NOCURR:
 					case NOCURRENCY:
 					case NOD:
@@ -6495,17 +8428,23 @@ public class CobolPreprocessorParser extends Parser {
 					case NODE:
 					case NODEBUG:
 					case NODECK:
+					case NODEFINE:
+					case NODEF:
 					case NODIAGTRUNC:
 					case NODLL:
+					case NODSNAME:
 					case NODU:
 					case NODUMP:
 					case NODP:
 					case NODTR:
+					case NODWARF:
 					case NODYN:
 					case NODYNAM:
 					case NOEDF:
 					case NOEJPD:
+					case NOENDPERIOD:
 					case NOEPILOG:
+					case NOEVENPACK:
 					case NOEXIT:
 					case NOEXP:
 					case NOEXPORTALL:
@@ -6518,6 +8457,12 @@ public class CobolPreprocessorParser extends Parser {
 					case NOFSRT:
 					case NOGRAPHIC:
 					case NOHOOK:
+					case NOINITCHECK:
+					case NOIC:
+					case NOINITIAL:
+					case NOINLINE:
+					case NOINL:
+					case NOLAXPERF:
 					case NOLENGTH:
 					case NOLIB:
 					case NOLINKAGE:
@@ -6530,6 +8475,7 @@ public class CobolPreprocessorParser extends Parser {
 					case NONUMBER:
 					case NOOBJ:
 					case NOOBJECT:
+					case NOOMITODOMIN:
 					case NOOFF:
 					case NOOFFSET:
 					case NOOPSEQUENCE:
@@ -6537,37 +8483,53 @@ public class CobolPreprocessorParser extends Parser {
 					case NOOPTIMIZE:
 					case NOOPTIONS:
 					case NOP:
+					case NOPAC:
+					case NOPARMCHECK:
 					case NOPFD:
 					case NOPROLOG:
 					case NORENT:
+					case NORULES:
 					case NOS:
 					case NOSEP:
 					case NOSEPARATE:
 					case NOSEQ:
+					case NOSERVICE:
+					case NOSLACKBYTES:
 					case NOSOURCE:
 					case NOSPIE:
 					case NOSQL:
 					case NOSQLC:
 					case NOSQLCCSID:
+					case NOSQLIMS:
 					case NOSSR:
 					case NOSSRANGE:
 					case NOSTDTRUNC:
 					case NOSEQUENCE:
+					case NOSTGOPT:
+					case NOSUPP:
+					case NOSUPPRESS:
 					case NOTERM:
 					case NOTERMINAL:
 					case NOTEST:
 					case NOTHREAD:
 					case NOTRIG:
+					case NOUNREFALL:
+					case NOUNREFSOURCE:
 					case NOVBREF:
+					case NOVOLATILE:
 					case NOWORD:
 					case NOX:
 					case NOXREF:
+					case NOZC:
+					case NOZON:
+					case NOZONECHECK:
 					case NOZWB:
 					case NS:
 					case NSEQ:
 					case NSYMBOL:
 					case NUM:
 					case NUMBER:
+					case NUMCHECK:
 					case NUMPROC:
 					case OBJ:
 					case OBJECT:
@@ -6575,6 +8537,8 @@ public class CobolPreprocessorParser extends Parser {
 					case OFF:
 					case OFFSET:
 					case ON:
+					case OMITODOMIN:
+					case OOM:
 					case OP:
 					case OPMARGINS:
 					case OPSEQUENCE:
@@ -6584,23 +8548,31 @@ public class CobolPreprocessorParser extends Parser {
 					case OPTIONS:
 					case OUT:
 					case OUTDD:
+					case PARMCHECK:
+					case PATH:
 					case PFD:
 					case PPTDBG:
 					case PGMN:
 					case PGMNAME:
 					case PROCESS:
 					case PROLOG:
+					case QUALIFY:
+					case QUA:
 					case QUOTE:
 					case RENT:
 					case REPLACING:
 					case RMODE:
 					case RPARENCHAR:
+					case RULES:
 					case SEP:
 					case SEPARATE:
 					case SEQ:
 					case SEQUENCE:
+					case SERVICE:
 					case SHORT:
 					case SIZE:
+					case SLACKBYTES:
+					case SLCKB:
 					case SOURCE:
 					case SP:
 					case SPACE:
@@ -6608,10 +8580,15 @@ public class CobolPreprocessorParser extends Parser {
 					case SQL:
 					case SQLC:
 					case SQLCCSID:
+					case SQLIMS:
 					case SS:
 					case SSR:
 					case SSRANGE:
 					case STD:
+					case STGOPT:
+					case SUCC:
+					case SUPP:
+					case SUPPRESS:
 					case SYSEIB:
 					case SZ:
 					case TERM:
@@ -6622,8 +8599,12 @@ public class CobolPreprocessorParser extends Parser {
 					case TRIG:
 					case TRUNC:
 					case UE:
+					case UNREF:
 					case UPPER:
 					case VBREF:
+					case VOLATILE:
+					case VS:
+					case VSAMOPENFS:
 					case WD:
 					case XMLPARSE:
 					case XMLSS:
@@ -6631,6 +8612,11 @@ public class CobolPreprocessorParser extends Parser {
 					case XREF:
 					case YEARWINDOW:
 					case YW:
+					case ZC:
+					case ZD:
+					case ZON:
+					case ZONECHECK:
+					case ZONEDATA:
 					case ZWB:
 					case C_CHAR:
 					case D_CHAR:
@@ -6654,13 +8640,13 @@ public class CobolPreprocessorParser extends Parser {
 					case PSEUDOTEXTIDENTIFIER:
 					case TEXT:
 						{
-						setState(665);
+						setState(892);
 						charDataLine();
 						}
 						break;
 					case NEWLINE:
 						{
-						setState(666);
+						setState(893);
 						match(NEWLINE);
 						}
 						break;
@@ -6672,9 +8658,9 @@ public class CobolPreprocessorParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(669); 
+				setState(896); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,70,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,96,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -6729,26 +8715,30 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CharDataSqlContext charDataSql() throws RecognitionException {
 		CharDataSqlContext _localctx = new CharDataSqlContext(_ctx, getState());
-		enterRule(_localctx, 52, RULE_charDataSql);
+		enterRule(_localctx, 56, RULE_charDataSql);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(675); 
+			setState(902); 
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			do {
 				{
-				setState(675);
+				setState(902);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
+				case ABD:
 				case ADATA:
 				case ADV:
+				case AFP:
 				case ALIAS:
+				case ALPHNUM:
 				case ANSI:
 				case ANY:
 				case APOST:
 				case AR:
+				case ARCH:
 				case ARITH:
 				case AUTO:
 				case AWO:
@@ -6765,9 +8755,13 @@ public class CobolPreprocessorParser extends Parser {
 				case CODEPAGE:
 				case COMPAT:
 				case COMPILE:
+				case COPYLOC:
+				case COPYRIGHT:
 				case CP:
+				case CPLC:
 				case CPP:
 				case CPSM:
+				case CPYR:
 				case CS:
 				case CURR:
 				case CURRENCY:
@@ -6776,23 +8770,35 @@ public class CobolPreprocessorParser extends Parser {
 				case DBCS:
 				case DD:
 				case DEBUG:
+				case DEC:
 				case DECK:
+				case DEFINE:
+				case DEF:
 				case DIAGTRUNC:
+				case DISPSIGN:
 				case DIVISION:
 				case DLI:
 				case DLL:
 				case DP:
+				case DS:
+				case DSN:
+				case DSNAME:
 				case DTR:
 				case DU:
 				case DUMP:
+				case DWARF:
 				case DYN:
 				case DYNAM:
 				case EDF:
 				case EJECT:
 				case EJPD:
 				case EN:
+				case ENDP:
+				case ENDPERIOD:
 				case ENGLISH:
 				case EPILOG:
+				case EVENP:
+				case EVENPACK:
 				case EXCI:
 				case EXIT:
 				case EXP:
@@ -6805,14 +8811,22 @@ public class CobolPreprocessorParser extends Parser {
 				case FULL:
 				case GDS:
 				case GRAPHIC:
+				case HEX:
+				case HGPR:
 				case HOOK:
+				case IC:
 				case IN:
+				case INITCHECK:
 				case INTDATE:
+				case INITIAL:
+				case INLINE:
+				case INL:
 				case JA:
 				case JP:
 				case KA:
 				case LANG:
 				case LANGUAGE:
+				case LAXPERF:
 				case LC:
 				case LENGTH:
 				case LIB:
@@ -6824,8 +8838,10 @@ public class CobolPreprocessorParser extends Parser {
 				case LM:
 				case LONGMIXED:
 				case LONGUPPER:
+				case LP:
 				case LPARENCHAR:
 				case LU:
+				case LXPRF:
 				case MAP:
 				case MARGINS:
 				case MAX:
@@ -6833,23 +8849,31 @@ public class CobolPreprocessorParser extends Parser {
 				case MDECK:
 				case MIG:
 				case MIXED:
+				case MAXPCF:
 				case NAME:
 				case NAT:
 				case NATIONAL:
 				case NATLANG:
+				case NC:
 				case NN:
 				case NO:
 				case NOADATA:
 				case NOADV:
 				case NOALIAS:
+				case NOALPHNUM:
 				case NOAWO:
+				case NOBIN:
 				case NOBLOCK0:
 				case NOC:
 				case NOCBLCARD:
 				case NOCICS:
 				case NOCMPR2:
 				case NOCOMPILE:
+				case NOCOPYLOC:
+				case NOCOPYRIGHT:
+				case NOCPLC:
 				case NOCPSM:
+				case NOCPYR:
 				case NOCURR:
 				case NOCURRENCY:
 				case NOD:
@@ -6858,17 +8882,23 @@ public class CobolPreprocessorParser extends Parser {
 				case NODE:
 				case NODEBUG:
 				case NODECK:
+				case NODEFINE:
+				case NODEF:
 				case NODIAGTRUNC:
 				case NODLL:
+				case NODSNAME:
 				case NODU:
 				case NODUMP:
 				case NODP:
 				case NODTR:
+				case NODWARF:
 				case NODYN:
 				case NODYNAM:
 				case NOEDF:
 				case NOEJPD:
+				case NOENDPERIOD:
 				case NOEPILOG:
+				case NOEVENPACK:
 				case NOEXIT:
 				case NOEXP:
 				case NOEXPORTALL:
@@ -6881,6 +8911,12 @@ public class CobolPreprocessorParser extends Parser {
 				case NOFSRT:
 				case NOGRAPHIC:
 				case NOHOOK:
+				case NOINITCHECK:
+				case NOIC:
+				case NOINITIAL:
+				case NOINLINE:
+				case NOINL:
+				case NOLAXPERF:
 				case NOLENGTH:
 				case NOLIB:
 				case NOLINKAGE:
@@ -6893,6 +8929,7 @@ public class CobolPreprocessorParser extends Parser {
 				case NONUMBER:
 				case NOOBJ:
 				case NOOBJECT:
+				case NOOMITODOMIN:
 				case NOOFF:
 				case NOOFFSET:
 				case NOOPSEQUENCE:
@@ -6900,37 +8937,53 @@ public class CobolPreprocessorParser extends Parser {
 				case NOOPTIMIZE:
 				case NOOPTIONS:
 				case NOP:
+				case NOPAC:
+				case NOPARMCHECK:
 				case NOPFD:
 				case NOPROLOG:
 				case NORENT:
+				case NORULES:
 				case NOS:
 				case NOSEP:
 				case NOSEPARATE:
 				case NOSEQ:
+				case NOSERVICE:
+				case NOSLACKBYTES:
 				case NOSOURCE:
 				case NOSPIE:
 				case NOSQL:
 				case NOSQLC:
 				case NOSQLCCSID:
+				case NOSQLIMS:
 				case NOSSR:
 				case NOSSRANGE:
 				case NOSTDTRUNC:
 				case NOSEQUENCE:
+				case NOSTGOPT:
+				case NOSUPP:
+				case NOSUPPRESS:
 				case NOTERM:
 				case NOTERMINAL:
 				case NOTEST:
 				case NOTHREAD:
 				case NOTRIG:
+				case NOUNREFALL:
+				case NOUNREFSOURCE:
 				case NOVBREF:
+				case NOVOLATILE:
 				case NOWORD:
 				case NOX:
 				case NOXREF:
+				case NOZC:
+				case NOZON:
+				case NOZONECHECK:
 				case NOZWB:
 				case NS:
 				case NSEQ:
 				case NSYMBOL:
 				case NUM:
 				case NUMBER:
+				case NUMCHECK:
 				case NUMPROC:
 				case OBJ:
 				case OBJECT:
@@ -6938,6 +8991,8 @@ public class CobolPreprocessorParser extends Parser {
 				case OFF:
 				case OFFSET:
 				case ON:
+				case OMITODOMIN:
+				case OOM:
 				case OP:
 				case OPMARGINS:
 				case OPSEQUENCE:
@@ -6947,23 +9002,31 @@ public class CobolPreprocessorParser extends Parser {
 				case OPTIONS:
 				case OUT:
 				case OUTDD:
+				case PARMCHECK:
+				case PATH:
 				case PFD:
 				case PPTDBG:
 				case PGMN:
 				case PGMNAME:
 				case PROCESS:
 				case PROLOG:
+				case QUALIFY:
+				case QUA:
 				case QUOTE:
 				case RENT:
 				case REPLACING:
 				case RMODE:
 				case RPARENCHAR:
+				case RULES:
 				case SEP:
 				case SEPARATE:
 				case SEQ:
 				case SEQUENCE:
+				case SERVICE:
 				case SHORT:
 				case SIZE:
+				case SLACKBYTES:
+				case SLCKB:
 				case SOURCE:
 				case SP:
 				case SPACE:
@@ -6971,10 +9034,15 @@ public class CobolPreprocessorParser extends Parser {
 				case SQL:
 				case SQLC:
 				case SQLCCSID:
+				case SQLIMS:
 				case SS:
 				case SSR:
 				case SSRANGE:
 				case STD:
+				case STGOPT:
+				case SUCC:
+				case SUPP:
+				case SUPPRESS:
 				case SYSEIB:
 				case SZ:
 				case TERM:
@@ -6985,8 +9053,12 @@ public class CobolPreprocessorParser extends Parser {
 				case TRIG:
 				case TRUNC:
 				case UE:
+				case UNREF:
 				case UPPER:
 				case VBREF:
+				case VOLATILE:
+				case VS:
+				case VSAMOPENFS:
 				case WD:
 				case XMLPARSE:
 				case XMLSS:
@@ -6994,6 +9066,11 @@ public class CobolPreprocessorParser extends Parser {
 				case XREF:
 				case YEARWINDOW:
 				case YW:
+				case ZC:
+				case ZD:
+				case ZON:
+				case ZONECHECK:
+				case ZONEDATA:
 				case ZWB:
 				case C_CHAR:
 				case D_CHAR:
@@ -7017,25 +9094,25 @@ public class CobolPreprocessorParser extends Parser {
 				case PSEUDOTEXTIDENTIFIER:
 				case TEXT:
 					{
-					setState(671);
+					setState(898);
 					charDataLine();
 					}
 					break;
 				case COPY:
 					{
-					setState(672);
+					setState(899);
 					match(COPY);
 					}
 					break;
 				case REPLACE:
 					{
-					setState(673);
+					setState(900);
 					match(REPLACE);
 					}
 					break;
 				case NEWLINE:
 					{
-					setState(674);
+					setState(901);
 					match(NEWLINE);
 					}
 					break;
@@ -7043,10 +9120,10 @@ public class CobolPreprocessorParser extends Parser {
 					throw new NoViableAltException(this);
 				}
 				}
-				setState(677); 
+				setState(904); 
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ADATA) | (1L << ADV) | (1L << ALIAS) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << COPY) | (1L << CP) | (1L << CPP) | (1L << CPSM) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DECK) | (1L << DIAGTRUNC) | (1L << DIVISION) | (1L << DLI) | (1L << DLL) | (1L << DP) | (1L << DTR) | (1L << DU) | (1L << DUMP) | (1L << DYN) | (1L << DYNAM) | (1L << EDF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EXCI - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HOOK - 64)) | (1L << (IN - 64)) | (1L << (INTDATE - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)) | (1L << (LIN - 64)) | (1L << (LINECOUNT - 64)) | (1L << (LINKAGE - 64)) | (1L << (LIST - 64)) | (1L << (LM - 64)) | (1L << (LONGMIXED - 64)) | (1L << (LONGUPPER - 64)) | (1L << (LPARENCHAR - 64)) | (1L << (LU - 64)) | (1L << (MAP - 64)) | (1L << (MARGINS - 64)) | (1L << (MAX - 64)) | (1L << (MD - 64)) | (1L << (MDECK - 64)) | (1L << (MIG - 64)) | (1L << (MIXED - 64)) | (1L << (NAME - 64)) | (1L << (NAT - 64)) | (1L << (NATIONAL - 64)) | (1L << (NATLANG - 64)) | (1L << (NN - 64)) | (1L << (NO - 64)) | (1L << (NOADATA - 64)) | (1L << (NOADV - 64)) | (1L << (NOALIAS - 64)) | (1L << (NOAWO - 64)) | (1L << (NOBLOCK0 - 64)) | (1L << (NOC - 64)) | (1L << (NOCBLCARD - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)) | (1L << (NOEDF - 128)) | (1L << (NOEJPD - 128)) | (1L << (NOEPILOG - 128)) | (1L << (NOEXIT - 128)) | (1L << (NOEXP - 128)) | (1L << (NOEXPORTALL - 128)) | (1L << (NOF - 128)) | (1L << (NOFASTSRT - 128)) | (1L << (NOFEPI - 128)) | (1L << (NOFLAG - 128)) | (1L << (NOFLAGMIG - 128)) | (1L << (NOFLAGSTD - 128)) | (1L << (NOFSRT - 128)) | (1L << (NOGRAPHIC - 128)) | (1L << (NOHOOK - 128)) | (1L << (NOLENGTH - 128)) | (1L << (NOLIB - 128)) | (1L << (NOLINKAGE - 128)) | (1L << (NOLIST - 128)) | (1L << (NOMAP - 128)) | (1L << (NOMD - 128)) | (1L << (NOMDECK - 128)) | (1L << (NONAME - 128)) | (1L << (NONUM - 128)) | (1L << (NONUMBER - 128)) | (1L << (NOOBJ - 128)) | (1L << (NOOBJECT - 128)) | (1L << (NOOFF - 128)) | (1L << (NOOFFSET - 128)) | (1L << (NOOPSEQUENCE - 128)) | (1L << (NOOPT - 128)) | (1L << (NOOPTIMIZE - 128)) | (1L << (NOOPTIONS - 128)) | (1L << (NOP - 128)) | (1L << (NOPFD - 128)) | (1L << (NOPROLOG - 128)) | (1L << (NORENT - 128)) | (1L << (NOS - 128)) | (1L << (NOSEP - 128)) | (1L << (NOSEPARATE - 128)) | (1L << (NOSEQ - 128)) | (1L << (NOSOURCE - 128)) | (1L << (NOSPIE - 128)) | (1L << (NOSQL - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSSR - 192)) | (1L << (NOSSRANGE - 192)) | (1L << (NOSTDTRUNC - 192)) | (1L << (NOSEQUENCE - 192)) | (1L << (NOTERM - 192)) | (1L << (NOTERMINAL - 192)) | (1L << (NOTEST - 192)) | (1L << (NOTHREAD - 192)) | (1L << (NOTRIG - 192)) | (1L << (NOVBREF - 192)) | (1L << (NOWORD - 192)) | (1L << (NOX - 192)) | (1L << (NOXREF - 192)) | (1L << (NOZWB - 192)) | (1L << (NS - 192)) | (1L << (NSEQ - 192)) | (1L << (NSYMBOL - 192)) | (1L << (NUM - 192)) | (1L << (NUMBER - 192)) | (1L << (NUMPROC - 192)) | (1L << (OBJ - 192)) | (1L << (OBJECT - 192)) | (1L << (OF - 192)) | (1L << (OFF - 192)) | (1L << (OFFSET - 192)) | (1L << (ON - 192)) | (1L << (OP - 192)) | (1L << (OPMARGINS - 192)) | (1L << (OPSEQUENCE - 192)) | (1L << (OPT - 192)) | (1L << (OPTFILE - 192)) | (1L << (OPTIMIZE - 192)) | (1L << (OPTIONS - 192)) | (1L << (OUT - 192)) | (1L << (OUTDD - 192)) | (1L << (PFD - 192)) | (1L << (PPTDBG - 192)) | (1L << (PGMN - 192)) | (1L << (PGMNAME - 192)) | (1L << (PROCESS - 192)) | (1L << (PROLOG - 192)) | (1L << (QUOTE - 192)) | (1L << (RENT - 192)) | (1L << (REPLACE - 192)) | (1L << (REPLACING - 192)) | (1L << (RMODE - 192)) | (1L << (RPARENCHAR - 192)) | (1L << (SEP - 192)) | (1L << (SEPARATE - 192)) | (1L << (SEQ - 192)) | (1L << (SEQUENCE - 192)) | (1L << (SHORT - 192)) | (1L << (SIZE - 192)) | (1L << (SOURCE - 192)) | (1L << (SP - 192)) | (1L << (SPACE - 192)) | (1L << (SPIE - 192)) | (1L << (SQL - 192)) | (1L << (SQLC - 192)) | (1L << (SQLCCSID - 192)))) != 0) || ((((_la - 259)) & ~0x3f) == 0 && ((1L << (_la - 259)) & ((1L << (SS - 259)) | (1L << (SSR - 259)) | (1L << (SSRANGE - 259)) | (1L << (STD - 259)) | (1L << (SYSEIB - 259)) | (1L << (SZ - 259)) | (1L << (TERM - 259)) | (1L << (TERMINAL - 259)) | (1L << (TEST - 259)) | (1L << (THREAD - 259)) | (1L << (TITLE - 259)) | (1L << (TRIG - 259)) | (1L << (TRUNC - 259)) | (1L << (UE - 259)) | (1L << (UPPER - 259)) | (1L << (VBREF - 259)) | (1L << (WD - 259)) | (1L << (XMLPARSE - 259)) | (1L << (XMLSS - 259)) | (1L << (XOPTS - 259)) | (1L << (XREF - 259)) | (1L << (YEARWINDOW - 259)) | (1L << (YW - 259)) | (1L << (ZWB - 259)) | (1L << (C_CHAR - 259)) | (1L << (D_CHAR - 259)) | (1L << (E_CHAR - 259)) | (1L << (F_CHAR - 259)) | (1L << (H_CHAR - 259)) | (1L << (I_CHAR - 259)) | (1L << (M_CHAR - 259)) | (1L << (N_CHAR - 259)) | (1L << (Q_CHAR - 259)) | (1L << (S_CHAR - 259)) | (1L << (U_CHAR - 259)) | (1L << (W_CHAR - 259)) | (1L << (X_CHAR - 259)) | (1L << (COMMACHAR - 259)) | (1L << (DOT - 259)) | (1L << (NONNUMERICLITERAL - 259)) | (1L << (NUMERICLITERAL - 259)) | (1L << (IDENTIFIER - 259)) | (1L << (FILENAME - 259)) | (1L << (PSEUDOTEXTIDENTIFIER - 259)) | (1L << (NEWLINE - 259)) | (1L << (TEXT - 259)))) != 0) );
+			} while ( (((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABD) | (1L << ADATA) | (1L << ADV) | (1L << AFP) | (1L << ALIAS) | (1L << ALPHNUM) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARCH) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << COPY) | (1L << COPYLOC) | (1L << COPYRIGHT) | (1L << CP) | (1L << CPLC) | (1L << CPP) | (1L << CPSM) | (1L << CPYR) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DEC) | (1L << DECK) | (1L << DEFINE) | (1L << DEF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (DIAGTRUNC - 64)) | (1L << (DISPSIGN - 64)) | (1L << (DIVISION - 64)) | (1L << (DLI - 64)) | (1L << (DLL - 64)) | (1L << (DP - 64)) | (1L << (DS - 64)) | (1L << (DSN - 64)) | (1L << (DSNAME - 64)) | (1L << (DTR - 64)) | (1L << (DU - 64)) | (1L << (DUMP - 64)) | (1L << (DWARF - 64)) | (1L << (DYN - 64)) | (1L << (DYNAM - 64)) | (1L << (EDF - 64)) | (1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENDP - 64)) | (1L << (ENDPERIOD - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EVENP - 64)) | (1L << (EVENPACK - 64)) | (1L << (EXCI - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HEX - 64)) | (1L << (HGPR - 64)) | (1L << (HOOK - 64)) | (1L << (IC - 64)) | (1L << (IN - 64)) | (1L << (INITCHECK - 64)) | (1L << (INTDATE - 64)) | (1L << (INITIAL - 64)) | (1L << (INLINE - 64)) | (1L << (INL - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LAXPERF - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (LIN - 128)) | (1L << (LINECOUNT - 128)) | (1L << (LINKAGE - 128)) | (1L << (LIST - 128)) | (1L << (LM - 128)) | (1L << (LONGMIXED - 128)) | (1L << (LONGUPPER - 128)) | (1L << (LP - 128)) | (1L << (LPARENCHAR - 128)) | (1L << (LU - 128)) | (1L << (LXPRF - 128)) | (1L << (MAP - 128)) | (1L << (MARGINS - 128)) | (1L << (MAX - 128)) | (1L << (MD - 128)) | (1L << (MDECK - 128)) | (1L << (MIG - 128)) | (1L << (MIXED - 128)) | (1L << (MAXPCF - 128)) | (1L << (NAME - 128)) | (1L << (NAT - 128)) | (1L << (NATIONAL - 128)) | (1L << (NATLANG - 128)) | (1L << (NC - 128)) | (1L << (NN - 128)) | (1L << (NO - 128)) | (1L << (NOADATA - 128)) | (1L << (NOADV - 128)) | (1L << (NOALIAS - 128)) | (1L << (NOALPHNUM - 128)) | (1L << (NOAWO - 128)) | (1L << (NOBIN - 128)) | (1L << (NOBLOCK0 - 128)) | (1L << (NOC - 128)) | (1L << (NOCBLCARD - 128)) | (1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCOPYLOC - 128)) | (1L << (NOCOPYRIGHT - 128)) | (1L << (NOCPLC - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCPYR - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODEFINE - 128)) | (1L << (NODEF - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODSNAME - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODWARF - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOEDF - 192)) | (1L << (NOEJPD - 192)) | (1L << (NOENDPERIOD - 192)) | (1L << (NOEPILOG - 192)) | (1L << (NOEVENPACK - 192)) | (1L << (NOEXIT - 192)) | (1L << (NOEXP - 192)) | (1L << (NOEXPORTALL - 192)) | (1L << (NOF - 192)) | (1L << (NOFASTSRT - 192)) | (1L << (NOFEPI - 192)) | (1L << (NOFLAG - 192)) | (1L << (NOFLAGMIG - 192)) | (1L << (NOFLAGSTD - 192)) | (1L << (NOFSRT - 192)) | (1L << (NOGRAPHIC - 192)) | (1L << (NOHOOK - 192)) | (1L << (NOINITCHECK - 192)) | (1L << (NOIC - 192)) | (1L << (NOINITIAL - 192)) | (1L << (NOINLINE - 192)) | (1L << (NOINL - 192)) | (1L << (NOLAXPERF - 192)) | (1L << (NOLENGTH - 192)) | (1L << (NOLIB - 192)) | (1L << (NOLINKAGE - 192)) | (1L << (NOLIST - 192)) | (1L << (NOMAP - 192)) | (1L << (NOMD - 192)) | (1L << (NOMDECK - 192)) | (1L << (NONAME - 192)) | (1L << (NONUM - 192)) | (1L << (NONUMBER - 192)) | (1L << (NOOBJ - 192)) | (1L << (NOOBJECT - 192)) | (1L << (NOOMITODOMIN - 192)) | (1L << (NOOFF - 192)) | (1L << (NOOFFSET - 192)) | (1L << (NOOPSEQUENCE - 192)) | (1L << (NOOPT - 192)) | (1L << (NOOPTIMIZE - 192)) | (1L << (NOOPTIONS - 192)) | (1L << (NOP - 192)) | (1L << (NOPAC - 192)) | (1L << (NOPARMCHECK - 192)) | (1L << (NOPFD - 192)) | (1L << (NOPROLOG - 192)) | (1L << (NORENT - 192)) | (1L << (NORULES - 192)) | (1L << (NOS - 192)) | (1L << (NOSEP - 192)) | (1L << (NOSEPARATE - 192)) | (1L << (NOSEQ - 192)) | (1L << (NOSERVICE - 192)) | (1L << (NOSLACKBYTES - 192)) | (1L << (NOSOURCE - 192)) | (1L << (NOSPIE - 192)) | (1L << (NOSQL - 192)) | (1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSQLIMS - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (NOSSR - 256)) | (1L << (NOSSRANGE - 256)) | (1L << (NOSTDTRUNC - 256)) | (1L << (NOSEQUENCE - 256)) | (1L << (NOSTGOPT - 256)) | (1L << (NOSUPP - 256)) | (1L << (NOSUPPRESS - 256)) | (1L << (NOTERM - 256)) | (1L << (NOTERMINAL - 256)) | (1L << (NOTEST - 256)) | (1L << (NOTHREAD - 256)) | (1L << (NOTRIG - 256)) | (1L << (NOUNREFALL - 256)) | (1L << (NOUNREFSOURCE - 256)) | (1L << (NOVBREF - 256)) | (1L << (NOVOLATILE - 256)) | (1L << (NOWORD - 256)) | (1L << (NOX - 256)) | (1L << (NOXREF - 256)) | (1L << (NOZC - 256)) | (1L << (NOZON - 256)) | (1L << (NOZONECHECK - 256)) | (1L << (NOZWB - 256)) | (1L << (NS - 256)) | (1L << (NSEQ - 256)) | (1L << (NSYMBOL - 256)) | (1L << (NUM - 256)) | (1L << (NUMBER - 256)) | (1L << (NUMCHECK - 256)) | (1L << (NUMPROC - 256)) | (1L << (OBJ - 256)) | (1L << (OBJECT - 256)) | (1L << (OF - 256)) | (1L << (OFF - 256)) | (1L << (OFFSET - 256)) | (1L << (ON - 256)) | (1L << (OMITODOMIN - 256)) | (1L << (OOM - 256)) | (1L << (OP - 256)) | (1L << (OPMARGINS - 256)) | (1L << (OPSEQUENCE - 256)) | (1L << (OPT - 256)) | (1L << (OPTFILE - 256)) | (1L << (OPTIMIZE - 256)) | (1L << (OPTIONS - 256)) | (1L << (OUT - 256)) | (1L << (OUTDD - 256)) | (1L << (PARMCHECK - 256)) | (1L << (PATH - 256)) | (1L << (PFD - 256)) | (1L << (PPTDBG - 256)) | (1L << (PGMN - 256)) | (1L << (PGMNAME - 256)) | (1L << (PROCESS - 256)) | (1L << (PROLOG - 256)) | (1L << (QUALIFY - 256)) | (1L << (QUA - 256)) | (1L << (QUOTE - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (RENT - 320)) | (1L << (REPLACE - 320)) | (1L << (REPLACING - 320)) | (1L << (RMODE - 320)) | (1L << (RPARENCHAR - 320)) | (1L << (RULES - 320)) | (1L << (SEP - 320)) | (1L << (SEPARATE - 320)) | (1L << (SEQ - 320)) | (1L << (SEQUENCE - 320)) | (1L << (SERVICE - 320)) | (1L << (SHORT - 320)) | (1L << (SIZE - 320)) | (1L << (SLACKBYTES - 320)) | (1L << (SLCKB - 320)) | (1L << (SOURCE - 320)) | (1L << (SP - 320)) | (1L << (SPACE - 320)) | (1L << (SPIE - 320)) | (1L << (SQL - 320)) | (1L << (SQLC - 320)) | (1L << (SQLCCSID - 320)) | (1L << (SQLIMS - 320)) | (1L << (SS - 320)) | (1L << (SSR - 320)) | (1L << (SSRANGE - 320)) | (1L << (STD - 320)) | (1L << (STGOPT - 320)) | (1L << (SUCC - 320)) | (1L << (SUPP - 320)) | (1L << (SUPPRESS - 320)) | (1L << (SYSEIB - 320)) | (1L << (SZ - 320)) | (1L << (TERM - 320)) | (1L << (TERMINAL - 320)) | (1L << (TEST - 320)) | (1L << (THREAD - 320)) | (1L << (TITLE - 320)) | (1L << (TRIG - 320)) | (1L << (TRUNC - 320)) | (1L << (UE - 320)) | (1L << (UNREF - 320)) | (1L << (UPPER - 320)) | (1L << (VBREF - 320)) | (1L << (VOLATILE - 320)) | (1L << (VS - 320)) | (1L << (VSAMOPENFS - 320)) | (1L << (WD - 320)) | (1L << (XMLPARSE - 320)) | (1L << (XMLSS - 320)) | (1L << (XOPTS - 320)) | (1L << (XREF - 320)) | (1L << (YEARWINDOW - 320)) | (1L << (YW - 320)))) != 0) || ((((_la - 384)) & ~0x3f) == 0 && ((1L << (_la - 384)) & ((1L << (ZC - 384)) | (1L << (ZD - 384)) | (1L << (ZON - 384)) | (1L << (ZONECHECK - 384)) | (1L << (ZONEDATA - 384)) | (1L << (ZWB - 384)) | (1L << (C_CHAR - 384)) | (1L << (D_CHAR - 384)) | (1L << (E_CHAR - 384)) | (1L << (F_CHAR - 384)) | (1L << (H_CHAR - 384)) | (1L << (I_CHAR - 384)) | (1L << (M_CHAR - 384)) | (1L << (N_CHAR - 384)) | (1L << (Q_CHAR - 384)) | (1L << (S_CHAR - 384)) | (1L << (U_CHAR - 384)) | (1L << (W_CHAR - 384)) | (1L << (X_CHAR - 384)) | (1L << (COMMACHAR - 384)) | (1L << (DOT - 384)) | (1L << (NONNUMERICLITERAL - 384)) | (1L << (NUMERICLITERAL - 384)) | (1L << (IDENTIFIER - 384)) | (1L << (FILENAME - 384)) | (1L << (PSEUDOTEXTIDENTIFIER - 384)) | (1L << (NEWLINE - 384)) | (1L << (TEXT - 384)))) != 0) );
 			}
 		}
 		catch (RecognitionException re) {
@@ -7120,28 +9197,32 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CharDataLineContext charDataLine() throws RecognitionException {
 		CharDataLineContext _localctx = new CharDataLineContext(_ctx, getState());
-		enterRule(_localctx, 54, RULE_charDataLine);
+		enterRule(_localctx, 58, RULE_charDataLine);
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(687); 
+			setState(914); 
 			_errHandler.sync(this);
 			_alt = 1;
 			do {
 				switch (_alt) {
 				case 1:
 					{
-					setState(687);
+					setState(914);
 					_errHandler.sync(this);
 					switch (_input.LA(1)) {
+					case ABD:
 					case ADATA:
 					case ADV:
+					case AFP:
 					case ALIAS:
+					case ALPHNUM:
 					case ANSI:
 					case ANY:
 					case APOST:
 					case AR:
+					case ARCH:
 					case ARITH:
 					case AUTO:
 					case AWO:
@@ -7158,9 +9239,13 @@ public class CobolPreprocessorParser extends Parser {
 					case CODEPAGE:
 					case COMPAT:
 					case COMPILE:
+					case COPYLOC:
+					case COPYRIGHT:
 					case CP:
+					case CPLC:
 					case CPP:
 					case CPSM:
+					case CPYR:
 					case CS:
 					case CURR:
 					case CURRENCY:
@@ -7169,23 +9254,35 @@ public class CobolPreprocessorParser extends Parser {
 					case DBCS:
 					case DD:
 					case DEBUG:
+					case DEC:
 					case DECK:
+					case DEFINE:
+					case DEF:
 					case DIAGTRUNC:
+					case DISPSIGN:
 					case DIVISION:
 					case DLI:
 					case DLL:
 					case DP:
+					case DS:
+					case DSN:
+					case DSNAME:
 					case DTR:
 					case DU:
 					case DUMP:
+					case DWARF:
 					case DYN:
 					case DYNAM:
 					case EDF:
 					case EJECT:
 					case EJPD:
 					case EN:
+					case ENDP:
+					case ENDPERIOD:
 					case ENGLISH:
 					case EPILOG:
+					case EVENP:
+					case EVENPACK:
 					case EXCI:
 					case EXIT:
 					case EXP:
@@ -7198,14 +9295,22 @@ public class CobolPreprocessorParser extends Parser {
 					case FULL:
 					case GDS:
 					case GRAPHIC:
+					case HEX:
+					case HGPR:
 					case HOOK:
+					case IC:
 					case IN:
+					case INITCHECK:
 					case INTDATE:
+					case INITIAL:
+					case INLINE:
+					case INL:
 					case JA:
 					case JP:
 					case KA:
 					case LANG:
 					case LANGUAGE:
+					case LAXPERF:
 					case LC:
 					case LENGTH:
 					case LIB:
@@ -7217,7 +9322,9 @@ public class CobolPreprocessorParser extends Parser {
 					case LM:
 					case LONGMIXED:
 					case LONGUPPER:
+					case LP:
 					case LU:
+					case LXPRF:
 					case MAP:
 					case MARGINS:
 					case MAX:
@@ -7225,23 +9332,31 @@ public class CobolPreprocessorParser extends Parser {
 					case MDECK:
 					case MIG:
 					case MIXED:
+					case MAXPCF:
 					case NAME:
 					case NAT:
 					case NATIONAL:
 					case NATLANG:
+					case NC:
 					case NN:
 					case NO:
 					case NOADATA:
 					case NOADV:
 					case NOALIAS:
+					case NOALPHNUM:
 					case NOAWO:
+					case NOBIN:
 					case NOBLOCK0:
 					case NOC:
 					case NOCBLCARD:
 					case NOCICS:
 					case NOCMPR2:
 					case NOCOMPILE:
+					case NOCOPYLOC:
+					case NOCOPYRIGHT:
+					case NOCPLC:
 					case NOCPSM:
+					case NOCPYR:
 					case NOCURR:
 					case NOCURRENCY:
 					case NOD:
@@ -7250,17 +9365,23 @@ public class CobolPreprocessorParser extends Parser {
 					case NODE:
 					case NODEBUG:
 					case NODECK:
+					case NODEFINE:
+					case NODEF:
 					case NODIAGTRUNC:
 					case NODLL:
+					case NODSNAME:
 					case NODU:
 					case NODUMP:
 					case NODP:
 					case NODTR:
+					case NODWARF:
 					case NODYN:
 					case NODYNAM:
 					case NOEDF:
 					case NOEJPD:
+					case NOENDPERIOD:
 					case NOEPILOG:
+					case NOEVENPACK:
 					case NOEXIT:
 					case NOEXP:
 					case NOEXPORTALL:
@@ -7273,6 +9394,12 @@ public class CobolPreprocessorParser extends Parser {
 					case NOFSRT:
 					case NOGRAPHIC:
 					case NOHOOK:
+					case NOINITCHECK:
+					case NOIC:
+					case NOINITIAL:
+					case NOINLINE:
+					case NOINL:
+					case NOLAXPERF:
 					case NOLENGTH:
 					case NOLIB:
 					case NOLINKAGE:
@@ -7285,6 +9412,7 @@ public class CobolPreprocessorParser extends Parser {
 					case NONUMBER:
 					case NOOBJ:
 					case NOOBJECT:
+					case NOOMITODOMIN:
 					case NOOFF:
 					case NOOFFSET:
 					case NOOPSEQUENCE:
@@ -7292,37 +9420,53 @@ public class CobolPreprocessorParser extends Parser {
 					case NOOPTIMIZE:
 					case NOOPTIONS:
 					case NOP:
+					case NOPAC:
+					case NOPARMCHECK:
 					case NOPFD:
 					case NOPROLOG:
 					case NORENT:
+					case NORULES:
 					case NOS:
 					case NOSEP:
 					case NOSEPARATE:
 					case NOSEQ:
+					case NOSERVICE:
+					case NOSLACKBYTES:
 					case NOSOURCE:
 					case NOSPIE:
 					case NOSQL:
 					case NOSQLC:
 					case NOSQLCCSID:
+					case NOSQLIMS:
 					case NOSSR:
 					case NOSSRANGE:
 					case NOSTDTRUNC:
 					case NOSEQUENCE:
+					case NOSTGOPT:
+					case NOSUPP:
+					case NOSUPPRESS:
 					case NOTERM:
 					case NOTERMINAL:
 					case NOTEST:
 					case NOTHREAD:
 					case NOTRIG:
+					case NOUNREFALL:
+					case NOUNREFSOURCE:
 					case NOVBREF:
+					case NOVOLATILE:
 					case NOWORD:
 					case NOX:
 					case NOXREF:
+					case NOZC:
+					case NOZON:
+					case NOZONECHECK:
 					case NOZWB:
 					case NS:
 					case NSEQ:
 					case NSYMBOL:
 					case NUM:
 					case NUMBER:
+					case NUMCHECK:
 					case NUMPROC:
 					case OBJ:
 					case OBJECT:
@@ -7330,6 +9474,8 @@ public class CobolPreprocessorParser extends Parser {
 					case OFF:
 					case OFFSET:
 					case ON:
+					case OMITODOMIN:
+					case OOM:
 					case OP:
 					case OPMARGINS:
 					case OPSEQUENCE:
@@ -7339,22 +9485,30 @@ public class CobolPreprocessorParser extends Parser {
 					case OPTIONS:
 					case OUT:
 					case OUTDD:
+					case PARMCHECK:
+					case PATH:
 					case PFD:
 					case PPTDBG:
 					case PGMN:
 					case PGMNAME:
 					case PROCESS:
 					case PROLOG:
+					case QUALIFY:
+					case QUA:
 					case QUOTE:
 					case RENT:
 					case REPLACING:
 					case RMODE:
+					case RULES:
 					case SEP:
 					case SEPARATE:
 					case SEQ:
 					case SEQUENCE:
+					case SERVICE:
 					case SHORT:
 					case SIZE:
+					case SLACKBYTES:
+					case SLCKB:
 					case SOURCE:
 					case SP:
 					case SPACE:
@@ -7362,10 +9516,15 @@ public class CobolPreprocessorParser extends Parser {
 					case SQL:
 					case SQLC:
 					case SQLCCSID:
+					case SQLIMS:
 					case SS:
 					case SSR:
 					case SSRANGE:
 					case STD:
+					case STGOPT:
+					case SUCC:
+					case SUPP:
+					case SUPPRESS:
 					case SYSEIB:
 					case SZ:
 					case TERM:
@@ -7376,8 +9535,12 @@ public class CobolPreprocessorParser extends Parser {
 					case TRIG:
 					case TRUNC:
 					case UE:
+					case UNREF:
 					case UPPER:
 					case VBREF:
+					case VOLATILE:
+					case VS:
+					case VSAMOPENFS:
 					case WD:
 					case XMLPARSE:
 					case XMLSS:
@@ -7385,6 +9548,11 @@ public class CobolPreprocessorParser extends Parser {
 					case XREF:
 					case YEARWINDOW:
 					case YW:
+					case ZC:
+					case ZD:
+					case ZON:
+					case ZONECHECK:
+					case ZONEDATA:
 					case ZWB:
 					case C_CHAR:
 					case D_CHAR:
@@ -7402,50 +9570,50 @@ public class CobolPreprocessorParser extends Parser {
 					case COMMACHAR:
 					case IDENTIFIER:
 						{
-						setState(679);
+						setState(906);
 						cobolWord();
 						}
 						break;
 					case NONNUMERICLITERAL:
 					case NUMERICLITERAL:
 						{
-						setState(680);
+						setState(907);
 						literal();
 						}
 						break;
 					case FILENAME:
 						{
-						setState(681);
+						setState(908);
 						filename();
 						}
 						break;
 					case PSEUDOTEXTIDENTIFIER:
 						{
-						setState(682);
+						setState(909);
 						match(PSEUDOTEXTIDENTIFIER);
 						}
 						break;
 					case TEXT:
 						{
-						setState(683);
+						setState(910);
 						match(TEXT);
 						}
 						break;
 					case DOT:
 						{
-						setState(684);
+						setState(911);
 						match(DOT);
 						}
 						break;
 					case LPARENCHAR:
 						{
-						setState(685);
+						setState(912);
 						match(LPARENCHAR);
 						}
 						break;
 					case RPARENCHAR:
 						{
-						setState(686);
+						setState(913);
 						match(RPARENCHAR);
 						}
 						break;
@@ -7457,9 +9625,9 @@ public class CobolPreprocessorParser extends Parser {
 				default:
 					throw new NoViableAltException(this);
 				}
-				setState(689); 
+				setState(916); 
 				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,74,_ctx);
+				_alt = getInterpreter().adaptivePredict(_input,100,_ctx);
 			} while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER );
 			}
 		}
@@ -7500,25 +9668,29 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CobolWordContext cobolWord() throws RecognitionException {
 		CobolWordContext _localctx = new CobolWordContext(_ctx, getState());
-		enterRule(_localctx, 56, RULE_cobolWord);
+		enterRule(_localctx, 60, RULE_cobolWord);
 		try {
-			setState(693);
+			setState(920);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case IDENTIFIER:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(691);
+				setState(918);
 				match(IDENTIFIER);
 				}
 				break;
+			case ABD:
 			case ADATA:
 			case ADV:
+			case AFP:
 			case ALIAS:
+			case ALPHNUM:
 			case ANSI:
 			case ANY:
 			case APOST:
 			case AR:
+			case ARCH:
 			case ARITH:
 			case AUTO:
 			case AWO:
@@ -7535,9 +9707,13 @@ public class CobolPreprocessorParser extends Parser {
 			case CODEPAGE:
 			case COMPAT:
 			case COMPILE:
+			case COPYLOC:
+			case COPYRIGHT:
 			case CP:
+			case CPLC:
 			case CPP:
 			case CPSM:
+			case CPYR:
 			case CS:
 			case CURR:
 			case CURRENCY:
@@ -7546,23 +9722,35 @@ public class CobolPreprocessorParser extends Parser {
 			case DBCS:
 			case DD:
 			case DEBUG:
+			case DEC:
 			case DECK:
+			case DEFINE:
+			case DEF:
 			case DIAGTRUNC:
+			case DISPSIGN:
 			case DIVISION:
 			case DLI:
 			case DLL:
 			case DP:
+			case DS:
+			case DSN:
+			case DSNAME:
 			case DTR:
 			case DU:
 			case DUMP:
+			case DWARF:
 			case DYN:
 			case DYNAM:
 			case EDF:
 			case EJECT:
 			case EJPD:
 			case EN:
+			case ENDP:
+			case ENDPERIOD:
 			case ENGLISH:
 			case EPILOG:
+			case EVENP:
+			case EVENPACK:
 			case EXCI:
 			case EXIT:
 			case EXP:
@@ -7575,14 +9763,22 @@ public class CobolPreprocessorParser extends Parser {
 			case FULL:
 			case GDS:
 			case GRAPHIC:
+			case HEX:
+			case HGPR:
 			case HOOK:
+			case IC:
 			case IN:
+			case INITCHECK:
 			case INTDATE:
+			case INITIAL:
+			case INLINE:
+			case INL:
 			case JA:
 			case JP:
 			case KA:
 			case LANG:
 			case LANGUAGE:
+			case LAXPERF:
 			case LC:
 			case LENGTH:
 			case LIB:
@@ -7594,7 +9790,9 @@ public class CobolPreprocessorParser extends Parser {
 			case LM:
 			case LONGMIXED:
 			case LONGUPPER:
+			case LP:
 			case LU:
+			case LXPRF:
 			case MAP:
 			case MARGINS:
 			case MAX:
@@ -7602,23 +9800,31 @@ public class CobolPreprocessorParser extends Parser {
 			case MDECK:
 			case MIG:
 			case MIXED:
+			case MAXPCF:
 			case NAME:
 			case NAT:
 			case NATIONAL:
 			case NATLANG:
+			case NC:
 			case NN:
 			case NO:
 			case NOADATA:
 			case NOADV:
 			case NOALIAS:
+			case NOALPHNUM:
 			case NOAWO:
+			case NOBIN:
 			case NOBLOCK0:
 			case NOC:
 			case NOCBLCARD:
 			case NOCICS:
 			case NOCMPR2:
 			case NOCOMPILE:
+			case NOCOPYLOC:
+			case NOCOPYRIGHT:
+			case NOCPLC:
 			case NOCPSM:
+			case NOCPYR:
 			case NOCURR:
 			case NOCURRENCY:
 			case NOD:
@@ -7627,17 +9833,23 @@ public class CobolPreprocessorParser extends Parser {
 			case NODE:
 			case NODEBUG:
 			case NODECK:
+			case NODEFINE:
+			case NODEF:
 			case NODIAGTRUNC:
 			case NODLL:
+			case NODSNAME:
 			case NODU:
 			case NODUMP:
 			case NODP:
 			case NODTR:
+			case NODWARF:
 			case NODYN:
 			case NODYNAM:
 			case NOEDF:
 			case NOEJPD:
+			case NOENDPERIOD:
 			case NOEPILOG:
+			case NOEVENPACK:
 			case NOEXIT:
 			case NOEXP:
 			case NOEXPORTALL:
@@ -7650,6 +9862,12 @@ public class CobolPreprocessorParser extends Parser {
 			case NOFSRT:
 			case NOGRAPHIC:
 			case NOHOOK:
+			case NOINITCHECK:
+			case NOIC:
+			case NOINITIAL:
+			case NOINLINE:
+			case NOINL:
+			case NOLAXPERF:
 			case NOLENGTH:
 			case NOLIB:
 			case NOLINKAGE:
@@ -7662,6 +9880,7 @@ public class CobolPreprocessorParser extends Parser {
 			case NONUMBER:
 			case NOOBJ:
 			case NOOBJECT:
+			case NOOMITODOMIN:
 			case NOOFF:
 			case NOOFFSET:
 			case NOOPSEQUENCE:
@@ -7669,37 +9888,53 @@ public class CobolPreprocessorParser extends Parser {
 			case NOOPTIMIZE:
 			case NOOPTIONS:
 			case NOP:
+			case NOPAC:
+			case NOPARMCHECK:
 			case NOPFD:
 			case NOPROLOG:
 			case NORENT:
+			case NORULES:
 			case NOS:
 			case NOSEP:
 			case NOSEPARATE:
 			case NOSEQ:
+			case NOSERVICE:
+			case NOSLACKBYTES:
 			case NOSOURCE:
 			case NOSPIE:
 			case NOSQL:
 			case NOSQLC:
 			case NOSQLCCSID:
+			case NOSQLIMS:
 			case NOSSR:
 			case NOSSRANGE:
 			case NOSTDTRUNC:
 			case NOSEQUENCE:
+			case NOSTGOPT:
+			case NOSUPP:
+			case NOSUPPRESS:
 			case NOTERM:
 			case NOTERMINAL:
 			case NOTEST:
 			case NOTHREAD:
 			case NOTRIG:
+			case NOUNREFALL:
+			case NOUNREFSOURCE:
 			case NOVBREF:
+			case NOVOLATILE:
 			case NOWORD:
 			case NOX:
 			case NOXREF:
+			case NOZC:
+			case NOZON:
+			case NOZONECHECK:
 			case NOZWB:
 			case NS:
 			case NSEQ:
 			case NSYMBOL:
 			case NUM:
 			case NUMBER:
+			case NUMCHECK:
 			case NUMPROC:
 			case OBJ:
 			case OBJECT:
@@ -7707,6 +9942,8 @@ public class CobolPreprocessorParser extends Parser {
 			case OFF:
 			case OFFSET:
 			case ON:
+			case OMITODOMIN:
+			case OOM:
 			case OP:
 			case OPMARGINS:
 			case OPSEQUENCE:
@@ -7716,22 +9953,30 @@ public class CobolPreprocessorParser extends Parser {
 			case OPTIONS:
 			case OUT:
 			case OUTDD:
+			case PARMCHECK:
+			case PATH:
 			case PFD:
 			case PPTDBG:
 			case PGMN:
 			case PGMNAME:
 			case PROCESS:
 			case PROLOG:
+			case QUALIFY:
+			case QUA:
 			case QUOTE:
 			case RENT:
 			case REPLACING:
 			case RMODE:
+			case RULES:
 			case SEP:
 			case SEPARATE:
 			case SEQ:
 			case SEQUENCE:
+			case SERVICE:
 			case SHORT:
 			case SIZE:
+			case SLACKBYTES:
+			case SLCKB:
 			case SOURCE:
 			case SP:
 			case SPACE:
@@ -7739,10 +9984,15 @@ public class CobolPreprocessorParser extends Parser {
 			case SQL:
 			case SQLC:
 			case SQLCCSID:
+			case SQLIMS:
 			case SS:
 			case SSR:
 			case SSRANGE:
 			case STD:
+			case STGOPT:
+			case SUCC:
+			case SUPP:
+			case SUPPRESS:
 			case SYSEIB:
 			case SZ:
 			case TERM:
@@ -7753,8 +10003,12 @@ public class CobolPreprocessorParser extends Parser {
 			case TRIG:
 			case TRUNC:
 			case UE:
+			case UNREF:
 			case UPPER:
 			case VBREF:
+			case VOLATILE:
+			case VS:
+			case VSAMOPENFS:
 			case WD:
 			case XMLPARSE:
 			case XMLSS:
@@ -7762,6 +10016,11 @@ public class CobolPreprocessorParser extends Parser {
 			case XREF:
 			case YEARWINDOW:
 			case YW:
+			case ZC:
+			case ZD:
+			case ZON:
+			case ZONECHECK:
+			case ZONEDATA:
 			case ZWB:
 			case C_CHAR:
 			case D_CHAR:
@@ -7779,7 +10038,7 @@ public class CobolPreprocessorParser extends Parser {
 			case COMMACHAR:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(692);
+				setState(919);
 				charDataKeyword();
 				}
 				break;
@@ -7822,12 +10081,12 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final LiteralContext literal() throws RecognitionException {
 		LiteralContext _localctx = new LiteralContext(_ctx, getState());
-		enterRule(_localctx, 58, RULE_literal);
+		enterRule(_localctx, 62, RULE_literal);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(695);
+			setState(922);
 			_la = _input.LA(1);
 			if ( !(_la==NONNUMERICLITERAL || _la==NUMERICLITERAL) ) {
 			_errHandler.recoverInline(this);
@@ -7873,11 +10132,11 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final FilenameContext filename() throws RecognitionException {
 		FilenameContext _localctx = new FilenameContext(_ctx, getState());
-		enterRule(_localctx, 60, RULE_filename);
+		enterRule(_localctx, 64, RULE_filename);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(697);
+			setState(924);
 			match(FILENAME);
 			}
 		}
@@ -7893,13 +10152,17 @@ public class CobolPreprocessorParser extends Parser {
 	}
 
 	public static class CharDataKeywordContext extends ParserRuleContext {
+		public TerminalNode ABD() { return getToken(CobolPreprocessorParser.ABD, 0); }
 		public TerminalNode ADATA() { return getToken(CobolPreprocessorParser.ADATA, 0); }
 		public TerminalNode ADV() { return getToken(CobolPreprocessorParser.ADV, 0); }
+		public TerminalNode AFP() { return getToken(CobolPreprocessorParser.AFP, 0); }
 		public TerminalNode ALIAS() { return getToken(CobolPreprocessorParser.ALIAS, 0); }
+		public TerminalNode ALPHNUM() { return getToken(CobolPreprocessorParser.ALPHNUM, 0); }
 		public TerminalNode ANSI() { return getToken(CobolPreprocessorParser.ANSI, 0); }
 		public TerminalNode ANY() { return getToken(CobolPreprocessorParser.ANY, 0); }
 		public TerminalNode APOST() { return getToken(CobolPreprocessorParser.APOST, 0); }
 		public TerminalNode AR() { return getToken(CobolPreprocessorParser.AR, 0); }
+		public TerminalNode ARCH() { return getToken(CobolPreprocessorParser.ARCH, 0); }
 		public TerminalNode ARITH() { return getToken(CobolPreprocessorParser.ARITH, 0); }
 		public TerminalNode AUTO() { return getToken(CobolPreprocessorParser.AUTO, 0); }
 		public TerminalNode AWO() { return getToken(CobolPreprocessorParser.AWO, 0); }
@@ -7917,9 +10180,13 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode COMMACHAR() { return getToken(CobolPreprocessorParser.COMMACHAR, 0); }
 		public TerminalNode COMPAT() { return getToken(CobolPreprocessorParser.COMPAT, 0); }
 		public TerminalNode COMPILE() { return getToken(CobolPreprocessorParser.COMPILE, 0); }
+		public TerminalNode COPYLOC() { return getToken(CobolPreprocessorParser.COPYLOC, 0); }
+		public TerminalNode COPYRIGHT() { return getToken(CobolPreprocessorParser.COPYRIGHT, 0); }
 		public TerminalNode CP() { return getToken(CobolPreprocessorParser.CP, 0); }
+		public TerminalNode CPLC() { return getToken(CobolPreprocessorParser.CPLC, 0); }
 		public TerminalNode CPP() { return getToken(CobolPreprocessorParser.CPP, 0); }
 		public TerminalNode CPSM() { return getToken(CobolPreprocessorParser.CPSM, 0); }
+		public TerminalNode CPYR() { return getToken(CobolPreprocessorParser.CPYR, 0); }
 		public TerminalNode CS() { return getToken(CobolPreprocessorParser.CS, 0); }
 		public TerminalNode CURR() { return getToken(CobolPreprocessorParser.CURR, 0); }
 		public TerminalNode CURRENCY() { return getToken(CobolPreprocessorParser.CURRENCY, 0); }
@@ -7928,22 +10195,34 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode DBCS() { return getToken(CobolPreprocessorParser.DBCS, 0); }
 		public TerminalNode DD() { return getToken(CobolPreprocessorParser.DD, 0); }
 		public TerminalNode DEBUG() { return getToken(CobolPreprocessorParser.DEBUG, 0); }
+		public TerminalNode DEC() { return getToken(CobolPreprocessorParser.DEC, 0); }
 		public TerminalNode DECK() { return getToken(CobolPreprocessorParser.DECK, 0); }
+		public TerminalNode DEFINE() { return getToken(CobolPreprocessorParser.DEFINE, 0); }
+		public TerminalNode DEF() { return getToken(CobolPreprocessorParser.DEF, 0); }
 		public TerminalNode DIAGTRUNC() { return getToken(CobolPreprocessorParser.DIAGTRUNC, 0); }
+		public TerminalNode DISPSIGN() { return getToken(CobolPreprocessorParser.DISPSIGN, 0); }
 		public TerminalNode DLI() { return getToken(CobolPreprocessorParser.DLI, 0); }
 		public TerminalNode DLL() { return getToken(CobolPreprocessorParser.DLL, 0); }
 		public TerminalNode DP() { return getToken(CobolPreprocessorParser.DP, 0); }
+		public TerminalNode DS() { return getToken(CobolPreprocessorParser.DS, 0); }
+		public TerminalNode DSN() { return getToken(CobolPreprocessorParser.DSN, 0); }
+		public TerminalNode DSNAME() { return getToken(CobolPreprocessorParser.DSNAME, 0); }
 		public TerminalNode DTR() { return getToken(CobolPreprocessorParser.DTR, 0); }
 		public TerminalNode DU() { return getToken(CobolPreprocessorParser.DU, 0); }
 		public TerminalNode DUMP() { return getToken(CobolPreprocessorParser.DUMP, 0); }
+		public TerminalNode DWARF() { return getToken(CobolPreprocessorParser.DWARF, 0); }
 		public TerminalNode DYN() { return getToken(CobolPreprocessorParser.DYN, 0); }
 		public TerminalNode DYNAM() { return getToken(CobolPreprocessorParser.DYNAM, 0); }
 		public TerminalNode EDF() { return getToken(CobolPreprocessorParser.EDF, 0); }
 		public TerminalNode EJECT() { return getToken(CobolPreprocessorParser.EJECT, 0); }
 		public TerminalNode EJPD() { return getToken(CobolPreprocessorParser.EJPD, 0); }
 		public TerminalNode EN() { return getToken(CobolPreprocessorParser.EN, 0); }
+		public TerminalNode ENDP() { return getToken(CobolPreprocessorParser.ENDP, 0); }
+		public TerminalNode ENDPERIOD() { return getToken(CobolPreprocessorParser.ENDPERIOD, 0); }
 		public TerminalNode ENGLISH() { return getToken(CobolPreprocessorParser.ENGLISH, 0); }
 		public TerminalNode EPILOG() { return getToken(CobolPreprocessorParser.EPILOG, 0); }
+		public TerminalNode EVENPACK() { return getToken(CobolPreprocessorParser.EVENPACK, 0); }
+		public TerminalNode EVENP() { return getToken(CobolPreprocessorParser.EVENP, 0); }
 		public TerminalNode EXCI() { return getToken(CobolPreprocessorParser.EXCI, 0); }
 		public TerminalNode EXIT() { return getToken(CobolPreprocessorParser.EXIT, 0); }
 		public TerminalNode EXP() { return getToken(CobolPreprocessorParser.EXP, 0); }
@@ -7956,14 +10235,22 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode FSRT() { return getToken(CobolPreprocessorParser.FSRT, 0); }
 		public TerminalNode GDS() { return getToken(CobolPreprocessorParser.GDS, 0); }
 		public TerminalNode GRAPHIC() { return getToken(CobolPreprocessorParser.GRAPHIC, 0); }
+		public TerminalNode HEX() { return getToken(CobolPreprocessorParser.HEX, 0); }
+		public TerminalNode HGPR() { return getToken(CobolPreprocessorParser.HGPR, 0); }
 		public TerminalNode HOOK() { return getToken(CobolPreprocessorParser.HOOK, 0); }
 		public TerminalNode IN() { return getToken(CobolPreprocessorParser.IN, 0); }
+		public TerminalNode INITCHECK() { return getToken(CobolPreprocessorParser.INITCHECK, 0); }
+		public TerminalNode IC() { return getToken(CobolPreprocessorParser.IC, 0); }
 		public TerminalNode INTDATE() { return getToken(CobolPreprocessorParser.INTDATE, 0); }
+		public TerminalNode INITIAL() { return getToken(CobolPreprocessorParser.INITIAL, 0); }
+		public TerminalNode INLINE() { return getToken(CobolPreprocessorParser.INLINE, 0); }
+		public TerminalNode INL() { return getToken(CobolPreprocessorParser.INL, 0); }
 		public TerminalNode JA() { return getToken(CobolPreprocessorParser.JA, 0); }
 		public TerminalNode JP() { return getToken(CobolPreprocessorParser.JP, 0); }
 		public TerminalNode KA() { return getToken(CobolPreprocessorParser.KA, 0); }
 		public TerminalNode LANG() { return getToken(CobolPreprocessorParser.LANG, 0); }
 		public TerminalNode LANGUAGE() { return getToken(CobolPreprocessorParser.LANGUAGE, 0); }
+		public TerminalNode LAXPERF() { return getToken(CobolPreprocessorParser.LAXPERF, 0); }
 		public TerminalNode LC() { return getToken(CobolPreprocessorParser.LC, 0); }
 		public TerminalNode LENGTH() { return getToken(CobolPreprocessorParser.LENGTH, 0); }
 		public TerminalNode LIB() { return getToken(CobolPreprocessorParser.LIB, 0); }
@@ -7975,10 +10262,13 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode LM() { return getToken(CobolPreprocessorParser.LM, 0); }
 		public TerminalNode LONGMIXED() { return getToken(CobolPreprocessorParser.LONGMIXED, 0); }
 		public TerminalNode LONGUPPER() { return getToken(CobolPreprocessorParser.LONGUPPER, 0); }
+		public TerminalNode LP() { return getToken(CobolPreprocessorParser.LP, 0); }
 		public TerminalNode LU() { return getToken(CobolPreprocessorParser.LU, 0); }
+		public TerminalNode LXPRF() { return getToken(CobolPreprocessorParser.LXPRF, 0); }
 		public TerminalNode MAP() { return getToken(CobolPreprocessorParser.MAP, 0); }
 		public TerminalNode MARGINS() { return getToken(CobolPreprocessorParser.MARGINS, 0); }
 		public TerminalNode MAX() { return getToken(CobolPreprocessorParser.MAX, 0); }
+		public TerminalNode MAXPCF() { return getToken(CobolPreprocessorParser.MAXPCF, 0); }
 		public TerminalNode MD() { return getToken(CobolPreprocessorParser.MD, 0); }
 		public TerminalNode MDECK() { return getToken(CobolPreprocessorParser.MDECK, 0); }
 		public TerminalNode MIG() { return getToken(CobolPreprocessorParser.MIG, 0); }
@@ -7987,19 +10277,26 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NAT() { return getToken(CobolPreprocessorParser.NAT, 0); }
 		public TerminalNode NATIONAL() { return getToken(CobolPreprocessorParser.NATIONAL, 0); }
 		public TerminalNode NATLANG() { return getToken(CobolPreprocessorParser.NATLANG, 0); }
+		public TerminalNode NC() { return getToken(CobolPreprocessorParser.NC, 0); }
 		public TerminalNode NN() { return getToken(CobolPreprocessorParser.NN, 0); }
 		public TerminalNode NO() { return getToken(CobolPreprocessorParser.NO, 0); }
 		public TerminalNode NOADATA() { return getToken(CobolPreprocessorParser.NOADATA, 0); }
 		public TerminalNode NOADV() { return getToken(CobolPreprocessorParser.NOADV, 0); }
 		public TerminalNode NOALIAS() { return getToken(CobolPreprocessorParser.NOALIAS, 0); }
+		public TerminalNode NOALPHNUM() { return getToken(CobolPreprocessorParser.NOALPHNUM, 0); }
 		public TerminalNode NOAWO() { return getToken(CobolPreprocessorParser.NOAWO, 0); }
+		public TerminalNode NOBIN() { return getToken(CobolPreprocessorParser.NOBIN, 0); }
 		public TerminalNode NOBLOCK0() { return getToken(CobolPreprocessorParser.NOBLOCK0, 0); }
 		public TerminalNode NOC() { return getToken(CobolPreprocessorParser.NOC, 0); }
 		public TerminalNode NOCBLCARD() { return getToken(CobolPreprocessorParser.NOCBLCARD, 0); }
 		public TerminalNode NOCICS() { return getToken(CobolPreprocessorParser.NOCICS, 0); }
 		public TerminalNode NOCMPR2() { return getToken(CobolPreprocessorParser.NOCMPR2, 0); }
 		public TerminalNode NOCOMPILE() { return getToken(CobolPreprocessorParser.NOCOMPILE, 0); }
+		public TerminalNode NOCOPYLOC() { return getToken(CobolPreprocessorParser.NOCOPYLOC, 0); }
+		public TerminalNode NOCOPYRIGHT() { return getToken(CobolPreprocessorParser.NOCOPYRIGHT, 0); }
+		public TerminalNode NOCPLC() { return getToken(CobolPreprocessorParser.NOCPLC, 0); }
 		public TerminalNode NOCPSM() { return getToken(CobolPreprocessorParser.NOCPSM, 0); }
+		public TerminalNode NOCPYR() { return getToken(CobolPreprocessorParser.NOCPYR, 0); }
 		public TerminalNode NOCURR() { return getToken(CobolPreprocessorParser.NOCURR, 0); }
 		public TerminalNode NOCURRENCY() { return getToken(CobolPreprocessorParser.NOCURRENCY, 0); }
 		public TerminalNode NOD() { return getToken(CobolPreprocessorParser.NOD, 0); }
@@ -8008,17 +10305,23 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NODE() { return getToken(CobolPreprocessorParser.NODE, 0); }
 		public TerminalNode NODEBUG() { return getToken(CobolPreprocessorParser.NODEBUG, 0); }
 		public TerminalNode NODECK() { return getToken(CobolPreprocessorParser.NODECK, 0); }
+		public TerminalNode NODEFINE() { return getToken(CobolPreprocessorParser.NODEFINE, 0); }
+		public TerminalNode NODEF() { return getToken(CobolPreprocessorParser.NODEF, 0); }
 		public TerminalNode NODIAGTRUNC() { return getToken(CobolPreprocessorParser.NODIAGTRUNC, 0); }
 		public TerminalNode NODLL() { return getToken(CobolPreprocessorParser.NODLL, 0); }
+		public TerminalNode NODSNAME() { return getToken(CobolPreprocessorParser.NODSNAME, 0); }
 		public TerminalNode NODU() { return getToken(CobolPreprocessorParser.NODU, 0); }
 		public TerminalNode NODUMP() { return getToken(CobolPreprocessorParser.NODUMP, 0); }
 		public TerminalNode NODP() { return getToken(CobolPreprocessorParser.NODP, 0); }
 		public TerminalNode NODTR() { return getToken(CobolPreprocessorParser.NODTR, 0); }
+		public TerminalNode NODWARF() { return getToken(CobolPreprocessorParser.NODWARF, 0); }
 		public TerminalNode NODYN() { return getToken(CobolPreprocessorParser.NODYN, 0); }
 		public TerminalNode NODYNAM() { return getToken(CobolPreprocessorParser.NODYNAM, 0); }
 		public TerminalNode NOEDF() { return getToken(CobolPreprocessorParser.NOEDF, 0); }
 		public TerminalNode NOEJPD() { return getToken(CobolPreprocessorParser.NOEJPD, 0); }
+		public TerminalNode NOENDPERIOD() { return getToken(CobolPreprocessorParser.NOENDPERIOD, 0); }
 		public TerminalNode NOEPILOG() { return getToken(CobolPreprocessorParser.NOEPILOG, 0); }
+		public TerminalNode NOEVENPACK() { return getToken(CobolPreprocessorParser.NOEVENPACK, 0); }
 		public TerminalNode NOEXIT() { return getToken(CobolPreprocessorParser.NOEXIT, 0); }
 		public TerminalNode NOEXP() { return getToken(CobolPreprocessorParser.NOEXP, 0); }
 		public TerminalNode NOEXPORTALL() { return getToken(CobolPreprocessorParser.NOEXPORTALL, 0); }
@@ -8031,6 +10334,12 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NOFSRT() { return getToken(CobolPreprocessorParser.NOFSRT, 0); }
 		public TerminalNode NOGRAPHIC() { return getToken(CobolPreprocessorParser.NOGRAPHIC, 0); }
 		public TerminalNode NOHOOK() { return getToken(CobolPreprocessorParser.NOHOOK, 0); }
+		public TerminalNode NOINITCHECK() { return getToken(CobolPreprocessorParser.NOINITCHECK, 0); }
+		public TerminalNode NOIC() { return getToken(CobolPreprocessorParser.NOIC, 0); }
+		public TerminalNode NOINITIAL() { return getToken(CobolPreprocessorParser.NOINITIAL, 0); }
+		public TerminalNode NOINLINE() { return getToken(CobolPreprocessorParser.NOINLINE, 0); }
+		public TerminalNode NOINL() { return getToken(CobolPreprocessorParser.NOINL, 0); }
+		public TerminalNode NOLAXPERF() { return getToken(CobolPreprocessorParser.NOLAXPERF, 0); }
 		public TerminalNode NOLENGTH() { return getToken(CobolPreprocessorParser.NOLENGTH, 0); }
 		public TerminalNode NOLIB() { return getToken(CobolPreprocessorParser.NOLIB, 0); }
 		public TerminalNode NOLINKAGE() { return getToken(CobolPreprocessorParser.NOLINKAGE, 0); }
@@ -8043,6 +10352,7 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NONUMBER() { return getToken(CobolPreprocessorParser.NONUMBER, 0); }
 		public TerminalNode NOOBJ() { return getToken(CobolPreprocessorParser.NOOBJ, 0); }
 		public TerminalNode NOOBJECT() { return getToken(CobolPreprocessorParser.NOOBJECT, 0); }
+		public TerminalNode NOOMITODOMIN() { return getToken(CobolPreprocessorParser.NOOMITODOMIN, 0); }
 		public TerminalNode NOOFF() { return getToken(CobolPreprocessorParser.NOOFF, 0); }
 		public TerminalNode NOOFFSET() { return getToken(CobolPreprocessorParser.NOOFFSET, 0); }
 		public TerminalNode NOOPSEQUENCE() { return getToken(CobolPreprocessorParser.NOOPSEQUENCE, 0); }
@@ -8050,37 +10360,53 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode NOOPTIMIZE() { return getToken(CobolPreprocessorParser.NOOPTIMIZE, 0); }
 		public TerminalNode NOOPTIONS() { return getToken(CobolPreprocessorParser.NOOPTIONS, 0); }
 		public TerminalNode NOP() { return getToken(CobolPreprocessorParser.NOP, 0); }
+		public TerminalNode NOPAC() { return getToken(CobolPreprocessorParser.NOPAC, 0); }
+		public TerminalNode NOPARMCHECK() { return getToken(CobolPreprocessorParser.NOPARMCHECK, 0); }
 		public TerminalNode NOPFD() { return getToken(CobolPreprocessorParser.NOPFD, 0); }
 		public TerminalNode NOPROLOG() { return getToken(CobolPreprocessorParser.NOPROLOG, 0); }
 		public TerminalNode NORENT() { return getToken(CobolPreprocessorParser.NORENT, 0); }
+		public TerminalNode NORULES() { return getToken(CobolPreprocessorParser.NORULES, 0); }
 		public TerminalNode NOS() { return getToken(CobolPreprocessorParser.NOS, 0); }
 		public TerminalNode NOSEP() { return getToken(CobolPreprocessorParser.NOSEP, 0); }
 		public TerminalNode NOSEPARATE() { return getToken(CobolPreprocessorParser.NOSEPARATE, 0); }
 		public TerminalNode NOSEQ() { return getToken(CobolPreprocessorParser.NOSEQ, 0); }
 		public TerminalNode NOSEQUENCE() { return getToken(CobolPreprocessorParser.NOSEQUENCE, 0); }
+		public TerminalNode NOSERVICE() { return getToken(CobolPreprocessorParser.NOSERVICE, 0); }
+		public TerminalNode NOSLACKBYTES() { return getToken(CobolPreprocessorParser.NOSLACKBYTES, 0); }
 		public TerminalNode NOSOURCE() { return getToken(CobolPreprocessorParser.NOSOURCE, 0); }
 		public TerminalNode NOSPIE() { return getToken(CobolPreprocessorParser.NOSPIE, 0); }
 		public TerminalNode NOSQL() { return getToken(CobolPreprocessorParser.NOSQL, 0); }
 		public TerminalNode NOSQLC() { return getToken(CobolPreprocessorParser.NOSQLC, 0); }
 		public TerminalNode NOSQLCCSID() { return getToken(CobolPreprocessorParser.NOSQLCCSID, 0); }
+		public TerminalNode NOSQLIMS() { return getToken(CobolPreprocessorParser.NOSQLIMS, 0); }
 		public TerminalNode NOSSR() { return getToken(CobolPreprocessorParser.NOSSR, 0); }
 		public TerminalNode NOSSRANGE() { return getToken(CobolPreprocessorParser.NOSSRANGE, 0); }
 		public TerminalNode NOSTDTRUNC() { return getToken(CobolPreprocessorParser.NOSTDTRUNC, 0); }
+		public TerminalNode NOSTGOPT() { return getToken(CobolPreprocessorParser.NOSTGOPT, 0); }
+		public TerminalNode NOSUPP() { return getToken(CobolPreprocessorParser.NOSUPP, 0); }
+		public TerminalNode NOSUPPRESS() { return getToken(CobolPreprocessorParser.NOSUPPRESS, 0); }
 		public TerminalNode NOTERM() { return getToken(CobolPreprocessorParser.NOTERM, 0); }
 		public TerminalNode NOTERMINAL() { return getToken(CobolPreprocessorParser.NOTERMINAL, 0); }
 		public TerminalNode NOTEST() { return getToken(CobolPreprocessorParser.NOTEST, 0); }
 		public TerminalNode NOTHREAD() { return getToken(CobolPreprocessorParser.NOTHREAD, 0); }
 		public TerminalNode NOTRIG() { return getToken(CobolPreprocessorParser.NOTRIG, 0); }
+		public TerminalNode NOUNREFALL() { return getToken(CobolPreprocessorParser.NOUNREFALL, 0); }
+		public TerminalNode NOUNREFSOURCE() { return getToken(CobolPreprocessorParser.NOUNREFSOURCE, 0); }
 		public TerminalNode NOVBREF() { return getToken(CobolPreprocessorParser.NOVBREF, 0); }
+		public TerminalNode NOVOLATILE() { return getToken(CobolPreprocessorParser.NOVOLATILE, 0); }
 		public TerminalNode NOWORD() { return getToken(CobolPreprocessorParser.NOWORD, 0); }
 		public TerminalNode NOX() { return getToken(CobolPreprocessorParser.NOX, 0); }
 		public TerminalNode NOXREF() { return getToken(CobolPreprocessorParser.NOXREF, 0); }
+		public TerminalNode NOZC() { return getToken(CobolPreprocessorParser.NOZC, 0); }
+		public TerminalNode NOZON() { return getToken(CobolPreprocessorParser.NOZON, 0); }
+		public TerminalNode NOZONECHECK() { return getToken(CobolPreprocessorParser.NOZONECHECK, 0); }
 		public TerminalNode NOZWB() { return getToken(CobolPreprocessorParser.NOZWB, 0); }
 		public TerminalNode NSEQ() { return getToken(CobolPreprocessorParser.NSEQ, 0); }
 		public TerminalNode NSYMBOL() { return getToken(CobolPreprocessorParser.NSYMBOL, 0); }
 		public TerminalNode NS() { return getToken(CobolPreprocessorParser.NS, 0); }
 		public TerminalNode NUM() { return getToken(CobolPreprocessorParser.NUM, 0); }
 		public TerminalNode NUMBER() { return getToken(CobolPreprocessorParser.NUMBER, 0); }
+		public TerminalNode NUMCHECK() { return getToken(CobolPreprocessorParser.NUMCHECK, 0); }
 		public TerminalNode NUMPROC() { return getToken(CobolPreprocessorParser.NUMPROC, 0); }
 		public TerminalNode OBJ() { return getToken(CobolPreprocessorParser.OBJ, 0); }
 		public TerminalNode OBJECT() { return getToken(CobolPreprocessorParser.OBJECT, 0); }
@@ -8088,6 +10414,8 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode OF() { return getToken(CobolPreprocessorParser.OF, 0); }
 		public TerminalNode OFF() { return getToken(CobolPreprocessorParser.OFF, 0); }
 		public TerminalNode OFFSET() { return getToken(CobolPreprocessorParser.OFFSET, 0); }
+		public TerminalNode OMITODOMIN() { return getToken(CobolPreprocessorParser.OMITODOMIN, 0); }
+		public TerminalNode OOM() { return getToken(CobolPreprocessorParser.OOM, 0); }
 		public TerminalNode OPMARGINS() { return getToken(CobolPreprocessorParser.OPMARGINS, 0); }
 		public TerminalNode OPSEQUENCE() { return getToken(CobolPreprocessorParser.OPSEQUENCE, 0); }
 		public TerminalNode OPTIMIZE() { return getToken(CobolPreprocessorParser.OPTIMIZE, 0); }
@@ -8097,22 +10425,30 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode OPTIONS() { return getToken(CobolPreprocessorParser.OPTIONS, 0); }
 		public TerminalNode OUT() { return getToken(CobolPreprocessorParser.OUT, 0); }
 		public TerminalNode OUTDD() { return getToken(CobolPreprocessorParser.OUTDD, 0); }
+		public TerminalNode PARMCHECK() { return getToken(CobolPreprocessorParser.PARMCHECK, 0); }
+		public TerminalNode PATH() { return getToken(CobolPreprocessorParser.PATH, 0); }
 		public TerminalNode PFD() { return getToken(CobolPreprocessorParser.PFD, 0); }
 		public TerminalNode PGMN() { return getToken(CobolPreprocessorParser.PGMN, 0); }
 		public TerminalNode PGMNAME() { return getToken(CobolPreprocessorParser.PGMNAME, 0); }
 		public TerminalNode PPTDBG() { return getToken(CobolPreprocessorParser.PPTDBG, 0); }
 		public TerminalNode PROCESS() { return getToken(CobolPreprocessorParser.PROCESS, 0); }
 		public TerminalNode PROLOG() { return getToken(CobolPreprocessorParser.PROLOG, 0); }
+		public TerminalNode QUALIFY() { return getToken(CobolPreprocessorParser.QUALIFY, 0); }
+		public TerminalNode QUA() { return getToken(CobolPreprocessorParser.QUA, 0); }
 		public TerminalNode QUOTE() { return getToken(CobolPreprocessorParser.QUOTE, 0); }
 		public TerminalNode RENT() { return getToken(CobolPreprocessorParser.RENT, 0); }
 		public TerminalNode REPLACING() { return getToken(CobolPreprocessorParser.REPLACING, 0); }
 		public TerminalNode RMODE() { return getToken(CobolPreprocessorParser.RMODE, 0); }
+		public TerminalNode RULES() { return getToken(CobolPreprocessorParser.RULES, 0); }
 		public TerminalNode SEQ() { return getToken(CobolPreprocessorParser.SEQ, 0); }
 		public TerminalNode SEQUENCE() { return getToken(CobolPreprocessorParser.SEQUENCE, 0); }
 		public TerminalNode SEP() { return getToken(CobolPreprocessorParser.SEP, 0); }
 		public TerminalNode SEPARATE() { return getToken(CobolPreprocessorParser.SEPARATE, 0); }
+		public TerminalNode SERVICE() { return getToken(CobolPreprocessorParser.SERVICE, 0); }
 		public TerminalNode SHORT() { return getToken(CobolPreprocessorParser.SHORT, 0); }
 		public TerminalNode SIZE() { return getToken(CobolPreprocessorParser.SIZE, 0); }
+		public TerminalNode SLACKBYTES() { return getToken(CobolPreprocessorParser.SLACKBYTES, 0); }
+		public TerminalNode SLCKB() { return getToken(CobolPreprocessorParser.SLCKB, 0); }
 		public TerminalNode SOURCE() { return getToken(CobolPreprocessorParser.SOURCE, 0); }
 		public TerminalNode SP() { return getToken(CobolPreprocessorParser.SP, 0); }
 		public TerminalNode SPACE() { return getToken(CobolPreprocessorParser.SPACE, 0); }
@@ -8120,10 +10456,15 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode SQL() { return getToken(CobolPreprocessorParser.SQL, 0); }
 		public TerminalNode SQLC() { return getToken(CobolPreprocessorParser.SQLC, 0); }
 		public TerminalNode SQLCCSID() { return getToken(CobolPreprocessorParser.SQLCCSID, 0); }
+		public TerminalNode SQLIMS() { return getToken(CobolPreprocessorParser.SQLIMS, 0); }
 		public TerminalNode SS() { return getToken(CobolPreprocessorParser.SS, 0); }
 		public TerminalNode SSR() { return getToken(CobolPreprocessorParser.SSR, 0); }
 		public TerminalNode SSRANGE() { return getToken(CobolPreprocessorParser.SSRANGE, 0); }
 		public TerminalNode STD() { return getToken(CobolPreprocessorParser.STD, 0); }
+		public TerminalNode STGOPT() { return getToken(CobolPreprocessorParser.STGOPT, 0); }
+		public TerminalNode SUCC() { return getToken(CobolPreprocessorParser.SUCC, 0); }
+		public TerminalNode SUPP() { return getToken(CobolPreprocessorParser.SUPP, 0); }
+		public TerminalNode SUPPRESS() { return getToken(CobolPreprocessorParser.SUPPRESS, 0); }
 		public TerminalNode SYSEIB() { return getToken(CobolPreprocessorParser.SYSEIB, 0); }
 		public TerminalNode SZ() { return getToken(CobolPreprocessorParser.SZ, 0); }
 		public TerminalNode TERM() { return getToken(CobolPreprocessorParser.TERM, 0); }
@@ -8134,8 +10475,12 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode TRIG() { return getToken(CobolPreprocessorParser.TRIG, 0); }
 		public TerminalNode TRUNC() { return getToken(CobolPreprocessorParser.TRUNC, 0); }
 		public TerminalNode UE() { return getToken(CobolPreprocessorParser.UE, 0); }
+		public TerminalNode UNREF() { return getToken(CobolPreprocessorParser.UNREF, 0); }
 		public TerminalNode UPPER() { return getToken(CobolPreprocessorParser.UPPER, 0); }
 		public TerminalNode VBREF() { return getToken(CobolPreprocessorParser.VBREF, 0); }
+		public TerminalNode VOLATILE() { return getToken(CobolPreprocessorParser.VOLATILE, 0); }
+		public TerminalNode VS() { return getToken(CobolPreprocessorParser.VS, 0); }
+		public TerminalNode VSAMOPENFS() { return getToken(CobolPreprocessorParser.VSAMOPENFS, 0); }
 		public TerminalNode WD() { return getToken(CobolPreprocessorParser.WD, 0); }
 		public TerminalNode XMLPARSE() { return getToken(CobolPreprocessorParser.XMLPARSE, 0); }
 		public TerminalNode XMLSS() { return getToken(CobolPreprocessorParser.XMLSS, 0); }
@@ -8143,6 +10488,11 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode XREF() { return getToken(CobolPreprocessorParser.XREF, 0); }
 		public TerminalNode YEARWINDOW() { return getToken(CobolPreprocessorParser.YEARWINDOW, 0); }
 		public TerminalNode YW() { return getToken(CobolPreprocessorParser.YW, 0); }
+		public TerminalNode ZC() { return getToken(CobolPreprocessorParser.ZC, 0); }
+		public TerminalNode ZD() { return getToken(CobolPreprocessorParser.ZD, 0); }
+		public TerminalNode ZON() { return getToken(CobolPreprocessorParser.ZON, 0); }
+		public TerminalNode ZONECHECK() { return getToken(CobolPreprocessorParser.ZONECHECK, 0); }
+		public TerminalNode ZONEDATA() { return getToken(CobolPreprocessorParser.ZONEDATA, 0); }
 		public TerminalNode ZWB() { return getToken(CobolPreprocessorParser.ZWB, 0); }
 		public TerminalNode C_CHAR() { return getToken(CobolPreprocessorParser.C_CHAR, 0); }
 		public TerminalNode D_CHAR() { return getToken(CobolPreprocessorParser.D_CHAR, 0); }
@@ -8179,14 +10529,14 @@ public class CobolPreprocessorParser extends Parser {
 
 	public final CharDataKeywordContext charDataKeyword() throws RecognitionException {
 		CharDataKeywordContext _localctx = new CharDataKeywordContext(_ctx, getState());
-		enterRule(_localctx, 62, RULE_charDataKeyword);
+		enterRule(_localctx, 66, RULE_charDataKeyword);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(699);
+			setState(926);
 			_la = _input.LA(1);
-			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ADATA) | (1L << ADV) | (1L << ALIAS) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << CP) | (1L << CPP) | (1L << CPSM) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DECK) | (1L << DIAGTRUNC) | (1L << DIVISION) | (1L << DLI) | (1L << DLL) | (1L << DP) | (1L << DTR) | (1L << DU) | (1L << DUMP) | (1L << DYN) | (1L << DYNAM) | (1L << EDF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EXCI - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HOOK - 64)) | (1L << (IN - 64)) | (1L << (INTDATE - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)) | (1L << (LIN - 64)) | (1L << (LINECOUNT - 64)) | (1L << (LINKAGE - 64)) | (1L << (LIST - 64)) | (1L << (LM - 64)) | (1L << (LONGMIXED - 64)) | (1L << (LONGUPPER - 64)) | (1L << (LU - 64)) | (1L << (MAP - 64)) | (1L << (MARGINS - 64)) | (1L << (MAX - 64)) | (1L << (MD - 64)) | (1L << (MDECK - 64)) | (1L << (MIG - 64)) | (1L << (MIXED - 64)) | (1L << (NAME - 64)) | (1L << (NAT - 64)) | (1L << (NATIONAL - 64)) | (1L << (NATLANG - 64)) | (1L << (NN - 64)) | (1L << (NO - 64)) | (1L << (NOADATA - 64)) | (1L << (NOADV - 64)) | (1L << (NOALIAS - 64)) | (1L << (NOAWO - 64)) | (1L << (NOBLOCK0 - 64)) | (1L << (NOC - 64)) | (1L << (NOCBLCARD - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)) | (1L << (NOEDF - 128)) | (1L << (NOEJPD - 128)) | (1L << (NOEPILOG - 128)) | (1L << (NOEXIT - 128)) | (1L << (NOEXP - 128)) | (1L << (NOEXPORTALL - 128)) | (1L << (NOF - 128)) | (1L << (NOFASTSRT - 128)) | (1L << (NOFEPI - 128)) | (1L << (NOFLAG - 128)) | (1L << (NOFLAGMIG - 128)) | (1L << (NOFLAGSTD - 128)) | (1L << (NOFSRT - 128)) | (1L << (NOGRAPHIC - 128)) | (1L << (NOHOOK - 128)) | (1L << (NOLENGTH - 128)) | (1L << (NOLIB - 128)) | (1L << (NOLINKAGE - 128)) | (1L << (NOLIST - 128)) | (1L << (NOMAP - 128)) | (1L << (NOMD - 128)) | (1L << (NOMDECK - 128)) | (1L << (NONAME - 128)) | (1L << (NONUM - 128)) | (1L << (NONUMBER - 128)) | (1L << (NOOBJ - 128)) | (1L << (NOOBJECT - 128)) | (1L << (NOOFF - 128)) | (1L << (NOOFFSET - 128)) | (1L << (NOOPSEQUENCE - 128)) | (1L << (NOOPT - 128)) | (1L << (NOOPTIMIZE - 128)) | (1L << (NOOPTIONS - 128)) | (1L << (NOP - 128)) | (1L << (NOPFD - 128)) | (1L << (NOPROLOG - 128)) | (1L << (NORENT - 128)) | (1L << (NOS - 128)) | (1L << (NOSEP - 128)) | (1L << (NOSEPARATE - 128)) | (1L << (NOSEQ - 128)) | (1L << (NOSOURCE - 128)) | (1L << (NOSPIE - 128)) | (1L << (NOSQL - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSSR - 192)) | (1L << (NOSSRANGE - 192)) | (1L << (NOSTDTRUNC - 192)) | (1L << (NOSEQUENCE - 192)) | (1L << (NOTERM - 192)) | (1L << (NOTERMINAL - 192)) | (1L << (NOTEST - 192)) | (1L << (NOTHREAD - 192)) | (1L << (NOTRIG - 192)) | (1L << (NOVBREF - 192)) | (1L << (NOWORD - 192)) | (1L << (NOX - 192)) | (1L << (NOXREF - 192)) | (1L << (NOZWB - 192)) | (1L << (NS - 192)) | (1L << (NSEQ - 192)) | (1L << (NSYMBOL - 192)) | (1L << (NUM - 192)) | (1L << (NUMBER - 192)) | (1L << (NUMPROC - 192)) | (1L << (OBJ - 192)) | (1L << (OBJECT - 192)) | (1L << (OF - 192)) | (1L << (OFF - 192)) | (1L << (OFFSET - 192)) | (1L << (ON - 192)) | (1L << (OP - 192)) | (1L << (OPMARGINS - 192)) | (1L << (OPSEQUENCE - 192)) | (1L << (OPT - 192)) | (1L << (OPTFILE - 192)) | (1L << (OPTIMIZE - 192)) | (1L << (OPTIONS - 192)) | (1L << (OUT - 192)) | (1L << (OUTDD - 192)) | (1L << (PFD - 192)) | (1L << (PPTDBG - 192)) | (1L << (PGMN - 192)) | (1L << (PGMNAME - 192)) | (1L << (PROCESS - 192)) | (1L << (PROLOG - 192)) | (1L << (QUOTE - 192)) | (1L << (RENT - 192)) | (1L << (REPLACING - 192)) | (1L << (RMODE - 192)) | (1L << (SEP - 192)) | (1L << (SEPARATE - 192)) | (1L << (SEQ - 192)) | (1L << (SEQUENCE - 192)) | (1L << (SHORT - 192)) | (1L << (SIZE - 192)) | (1L << (SOURCE - 192)) | (1L << (SP - 192)) | (1L << (SPACE - 192)) | (1L << (SPIE - 192)) | (1L << (SQL - 192)) | (1L << (SQLC - 192)) | (1L << (SQLCCSID - 192)))) != 0) || ((((_la - 259)) & ~0x3f) == 0 && ((1L << (_la - 259)) & ((1L << (SS - 259)) | (1L << (SSR - 259)) | (1L << (SSRANGE - 259)) | (1L << (STD - 259)) | (1L << (SYSEIB - 259)) | (1L << (SZ - 259)) | (1L << (TERM - 259)) | (1L << (TERMINAL - 259)) | (1L << (TEST - 259)) | (1L << (THREAD - 259)) | (1L << (TITLE - 259)) | (1L << (TRIG - 259)) | (1L << (TRUNC - 259)) | (1L << (UE - 259)) | (1L << (UPPER - 259)) | (1L << (VBREF - 259)) | (1L << (WD - 259)) | (1L << (XMLPARSE - 259)) | (1L << (XMLSS - 259)) | (1L << (XOPTS - 259)) | (1L << (XREF - 259)) | (1L << (YEARWINDOW - 259)) | (1L << (YW - 259)) | (1L << (ZWB - 259)) | (1L << (C_CHAR - 259)) | (1L << (D_CHAR - 259)) | (1L << (E_CHAR - 259)) | (1L << (F_CHAR - 259)) | (1L << (H_CHAR - 259)) | (1L << (I_CHAR - 259)) | (1L << (M_CHAR - 259)) | (1L << (N_CHAR - 259)) | (1L << (Q_CHAR - 259)) | (1L << (S_CHAR - 259)) | (1L << (U_CHAR - 259)) | (1L << (W_CHAR - 259)) | (1L << (X_CHAR - 259)) | (1L << (COMMACHAR - 259)))) != 0)) ) {
+			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << ABD) | (1L << ADATA) | (1L << ADV) | (1L << AFP) | (1L << ALIAS) | (1L << ALPHNUM) | (1L << ANSI) | (1L << ANY) | (1L << APOST) | (1L << AR) | (1L << ARCH) | (1L << ARITH) | (1L << AUTO) | (1L << AWO) | (1L << BIN) | (1L << BLOCK0) | (1L << BUF) | (1L << BUFSIZE) | (1L << BY) | (1L << CBL) | (1L << CBLCARD) | (1L << CO) | (1L << COBOL2) | (1L << COBOL3) | (1L << CODEPAGE) | (1L << COMPAT) | (1L << COMPILE) | (1L << COPYLOC) | (1L << COPYRIGHT) | (1L << CP) | (1L << CPLC) | (1L << CPP) | (1L << CPSM) | (1L << CPYR) | (1L << CS) | (1L << CURR) | (1L << CURRENCY) | (1L << DATA) | (1L << DATEPROC) | (1L << DBCS) | (1L << DD) | (1L << DEBUG) | (1L << DEC) | (1L << DECK) | (1L << DEFINE) | (1L << DEF))) != 0) || ((((_la - 64)) & ~0x3f) == 0 && ((1L << (_la - 64)) & ((1L << (DIAGTRUNC - 64)) | (1L << (DISPSIGN - 64)) | (1L << (DIVISION - 64)) | (1L << (DLI - 64)) | (1L << (DLL - 64)) | (1L << (DP - 64)) | (1L << (DS - 64)) | (1L << (DSN - 64)) | (1L << (DSNAME - 64)) | (1L << (DTR - 64)) | (1L << (DU - 64)) | (1L << (DUMP - 64)) | (1L << (DWARF - 64)) | (1L << (DYN - 64)) | (1L << (DYNAM - 64)) | (1L << (EDF - 64)) | (1L << (EJECT - 64)) | (1L << (EJPD - 64)) | (1L << (EN - 64)) | (1L << (ENDP - 64)) | (1L << (ENDPERIOD - 64)) | (1L << (ENGLISH - 64)) | (1L << (EPILOG - 64)) | (1L << (EVENP - 64)) | (1L << (EVENPACK - 64)) | (1L << (EXCI - 64)) | (1L << (EXIT - 64)) | (1L << (EXP - 64)) | (1L << (EXPORTALL - 64)) | (1L << (EXTEND - 64)) | (1L << (FASTSRT - 64)) | (1L << (FLAG - 64)) | (1L << (FLAGSTD - 64)) | (1L << (FSRT - 64)) | (1L << (FULL - 64)) | (1L << (GDS - 64)) | (1L << (GRAPHIC - 64)) | (1L << (HEX - 64)) | (1L << (HGPR - 64)) | (1L << (HOOK - 64)) | (1L << (IC - 64)) | (1L << (IN - 64)) | (1L << (INITCHECK - 64)) | (1L << (INTDATE - 64)) | (1L << (INITIAL - 64)) | (1L << (INLINE - 64)) | (1L << (INL - 64)) | (1L << (JA - 64)) | (1L << (JP - 64)) | (1L << (KA - 64)) | (1L << (LANG - 64)) | (1L << (LANGUAGE - 64)) | (1L << (LAXPERF - 64)) | (1L << (LC - 64)) | (1L << (LENGTH - 64)) | (1L << (LIB - 64)) | (1L << (LILIAN - 64)))) != 0) || ((((_la - 128)) & ~0x3f) == 0 && ((1L << (_la - 128)) & ((1L << (LIN - 128)) | (1L << (LINECOUNT - 128)) | (1L << (LINKAGE - 128)) | (1L << (LIST - 128)) | (1L << (LM - 128)) | (1L << (LONGMIXED - 128)) | (1L << (LONGUPPER - 128)) | (1L << (LP - 128)) | (1L << (LU - 128)) | (1L << (LXPRF - 128)) | (1L << (MAP - 128)) | (1L << (MARGINS - 128)) | (1L << (MAX - 128)) | (1L << (MD - 128)) | (1L << (MDECK - 128)) | (1L << (MIG - 128)) | (1L << (MIXED - 128)) | (1L << (MAXPCF - 128)) | (1L << (NAME - 128)) | (1L << (NAT - 128)) | (1L << (NATIONAL - 128)) | (1L << (NATLANG - 128)) | (1L << (NC - 128)) | (1L << (NN - 128)) | (1L << (NO - 128)) | (1L << (NOADATA - 128)) | (1L << (NOADV - 128)) | (1L << (NOALIAS - 128)) | (1L << (NOALPHNUM - 128)) | (1L << (NOAWO - 128)) | (1L << (NOBIN - 128)) | (1L << (NOBLOCK0 - 128)) | (1L << (NOC - 128)) | (1L << (NOCBLCARD - 128)) | (1L << (NOCICS - 128)) | (1L << (NOCMPR2 - 128)) | (1L << (NOCOMPILE - 128)) | (1L << (NOCOPYLOC - 128)) | (1L << (NOCOPYRIGHT - 128)) | (1L << (NOCPLC - 128)) | (1L << (NOCPSM - 128)) | (1L << (NOCPYR - 128)) | (1L << (NOCURR - 128)) | (1L << (NOCURRENCY - 128)) | (1L << (NOD - 128)) | (1L << (NODATEPROC - 128)) | (1L << (NODBCS - 128)) | (1L << (NODE - 128)) | (1L << (NODEBUG - 128)) | (1L << (NODECK - 128)) | (1L << (NODEFINE - 128)) | (1L << (NODEF - 128)) | (1L << (NODIAGTRUNC - 128)) | (1L << (NODLL - 128)) | (1L << (NODSNAME - 128)) | (1L << (NODU - 128)) | (1L << (NODUMP - 128)) | (1L << (NODP - 128)) | (1L << (NODTR - 128)) | (1L << (NODWARF - 128)) | (1L << (NODYN - 128)) | (1L << (NODYNAM - 128)))) != 0) || ((((_la - 192)) & ~0x3f) == 0 && ((1L << (_la - 192)) & ((1L << (NOEDF - 192)) | (1L << (NOEJPD - 192)) | (1L << (NOENDPERIOD - 192)) | (1L << (NOEPILOG - 192)) | (1L << (NOEVENPACK - 192)) | (1L << (NOEXIT - 192)) | (1L << (NOEXP - 192)) | (1L << (NOEXPORTALL - 192)) | (1L << (NOF - 192)) | (1L << (NOFASTSRT - 192)) | (1L << (NOFEPI - 192)) | (1L << (NOFLAG - 192)) | (1L << (NOFLAGMIG - 192)) | (1L << (NOFLAGSTD - 192)) | (1L << (NOFSRT - 192)) | (1L << (NOGRAPHIC - 192)) | (1L << (NOHOOK - 192)) | (1L << (NOINITCHECK - 192)) | (1L << (NOIC - 192)) | (1L << (NOINITIAL - 192)) | (1L << (NOINLINE - 192)) | (1L << (NOINL - 192)) | (1L << (NOLAXPERF - 192)) | (1L << (NOLENGTH - 192)) | (1L << (NOLIB - 192)) | (1L << (NOLINKAGE - 192)) | (1L << (NOLIST - 192)) | (1L << (NOMAP - 192)) | (1L << (NOMD - 192)) | (1L << (NOMDECK - 192)) | (1L << (NONAME - 192)) | (1L << (NONUM - 192)) | (1L << (NONUMBER - 192)) | (1L << (NOOBJ - 192)) | (1L << (NOOBJECT - 192)) | (1L << (NOOMITODOMIN - 192)) | (1L << (NOOFF - 192)) | (1L << (NOOFFSET - 192)) | (1L << (NOOPSEQUENCE - 192)) | (1L << (NOOPT - 192)) | (1L << (NOOPTIMIZE - 192)) | (1L << (NOOPTIONS - 192)) | (1L << (NOP - 192)) | (1L << (NOPAC - 192)) | (1L << (NOPARMCHECK - 192)) | (1L << (NOPFD - 192)) | (1L << (NOPROLOG - 192)) | (1L << (NORENT - 192)) | (1L << (NORULES - 192)) | (1L << (NOS - 192)) | (1L << (NOSEP - 192)) | (1L << (NOSEPARATE - 192)) | (1L << (NOSEQ - 192)) | (1L << (NOSERVICE - 192)) | (1L << (NOSLACKBYTES - 192)) | (1L << (NOSOURCE - 192)) | (1L << (NOSPIE - 192)) | (1L << (NOSQL - 192)) | (1L << (NOSQLC - 192)) | (1L << (NOSQLCCSID - 192)) | (1L << (NOSQLIMS - 192)))) != 0) || ((((_la - 256)) & ~0x3f) == 0 && ((1L << (_la - 256)) & ((1L << (NOSSR - 256)) | (1L << (NOSSRANGE - 256)) | (1L << (NOSTDTRUNC - 256)) | (1L << (NOSEQUENCE - 256)) | (1L << (NOSTGOPT - 256)) | (1L << (NOSUPP - 256)) | (1L << (NOSUPPRESS - 256)) | (1L << (NOTERM - 256)) | (1L << (NOTERMINAL - 256)) | (1L << (NOTEST - 256)) | (1L << (NOTHREAD - 256)) | (1L << (NOTRIG - 256)) | (1L << (NOUNREFALL - 256)) | (1L << (NOUNREFSOURCE - 256)) | (1L << (NOVBREF - 256)) | (1L << (NOVOLATILE - 256)) | (1L << (NOWORD - 256)) | (1L << (NOX - 256)) | (1L << (NOXREF - 256)) | (1L << (NOZC - 256)) | (1L << (NOZON - 256)) | (1L << (NOZONECHECK - 256)) | (1L << (NOZWB - 256)) | (1L << (NS - 256)) | (1L << (NSEQ - 256)) | (1L << (NSYMBOL - 256)) | (1L << (NUM - 256)) | (1L << (NUMBER - 256)) | (1L << (NUMCHECK - 256)) | (1L << (NUMPROC - 256)) | (1L << (OBJ - 256)) | (1L << (OBJECT - 256)) | (1L << (OF - 256)) | (1L << (OFF - 256)) | (1L << (OFFSET - 256)) | (1L << (ON - 256)) | (1L << (OMITODOMIN - 256)) | (1L << (OOM - 256)) | (1L << (OP - 256)) | (1L << (OPMARGINS - 256)) | (1L << (OPSEQUENCE - 256)) | (1L << (OPT - 256)) | (1L << (OPTFILE - 256)) | (1L << (OPTIMIZE - 256)) | (1L << (OPTIONS - 256)) | (1L << (OUT - 256)) | (1L << (OUTDD - 256)) | (1L << (PARMCHECK - 256)) | (1L << (PATH - 256)) | (1L << (PFD - 256)) | (1L << (PPTDBG - 256)) | (1L << (PGMN - 256)) | (1L << (PGMNAME - 256)) | (1L << (PROCESS - 256)) | (1L << (PROLOG - 256)) | (1L << (QUALIFY - 256)) | (1L << (QUA - 256)) | (1L << (QUOTE - 256)))) != 0) || ((((_la - 320)) & ~0x3f) == 0 && ((1L << (_la - 320)) & ((1L << (RENT - 320)) | (1L << (REPLACING - 320)) | (1L << (RMODE - 320)) | (1L << (RULES - 320)) | (1L << (SEP - 320)) | (1L << (SEPARATE - 320)) | (1L << (SEQ - 320)) | (1L << (SEQUENCE - 320)) | (1L << (SERVICE - 320)) | (1L << (SHORT - 320)) | (1L << (SIZE - 320)) | (1L << (SLACKBYTES - 320)) | (1L << (SLCKB - 320)) | (1L << (SOURCE - 320)) | (1L << (SP - 320)) | (1L << (SPACE - 320)) | (1L << (SPIE - 320)) | (1L << (SQL - 320)) | (1L << (SQLC - 320)) | (1L << (SQLCCSID - 320)) | (1L << (SQLIMS - 320)) | (1L << (SS - 320)) | (1L << (SSR - 320)) | (1L << (SSRANGE - 320)) | (1L << (STD - 320)) | (1L << (STGOPT - 320)) | (1L << (SUCC - 320)) | (1L << (SUPP - 320)) | (1L << (SUPPRESS - 320)) | (1L << (SYSEIB - 320)) | (1L << (SZ - 320)) | (1L << (TERM - 320)) | (1L << (TERMINAL - 320)) | (1L << (TEST - 320)) | (1L << (THREAD - 320)) | (1L << (TITLE - 320)) | (1L << (TRIG - 320)) | (1L << (TRUNC - 320)) | (1L << (UE - 320)) | (1L << (UNREF - 320)) | (1L << (UPPER - 320)) | (1L << (VBREF - 320)) | (1L << (VOLATILE - 320)) | (1L << (VS - 320)) | (1L << (VSAMOPENFS - 320)) | (1L << (WD - 320)) | (1L << (XMLPARSE - 320)) | (1L << (XMLSS - 320)) | (1L << (XOPTS - 320)) | (1L << (XREF - 320)) | (1L << (YEARWINDOW - 320)) | (1L << (YW - 320)))) != 0) || ((((_la - 384)) & ~0x3f) == 0 && ((1L << (_la - 384)) & ((1L << (ZC - 384)) | (1L << (ZD - 384)) | (1L << (ZON - 384)) | (1L << (ZONECHECK - 384)) | (1L << (ZONEDATA - 384)) | (1L << (ZWB - 384)) | (1L << (C_CHAR - 384)) | (1L << (D_CHAR - 384)) | (1L << (E_CHAR - 384)) | (1L << (F_CHAR - 384)) | (1L << (H_CHAR - 384)) | (1L << (I_CHAR - 384)) | (1L << (M_CHAR - 384)) | (1L << (N_CHAR - 384)) | (1L << (Q_CHAR - 384)) | (1L << (S_CHAR - 384)) | (1L << (U_CHAR - 384)) | (1L << (W_CHAR - 384)) | (1L << (X_CHAR - 384)) | (1L << (COMMACHAR - 384)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -8208,342 +10558,467 @@ public class CobolPreprocessorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u013b\u02c0\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u01a5\u03a3\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
 		"\4\32\t\32\4\33\t\33\4\34\t\34\4\35\t\35\4\36\t\36\4\37\t\37\4 \t \4!"+
-		"\t!\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\7\2Q\n\2\f"+
-		"\2\16\2T\13\2\3\2\3\2\3\3\3\3\3\3\3\4\3\4\5\4]\n\4\3\4\3\4\6\4a\n\4\r"+
-		"\4\16\4b\3\5\3\5\3\5\3\5\5\5i\n\5\3\5\7\5l\n\5\f\5\16\5o\13\5\3\5\3\5"+
+		"\t!\4\"\t\"\4#\t#\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2\3\2"+
+		"\3\2\7\2U\n\2\f\2\16\2X\13\2\3\2\3\2\3\3\3\3\3\3\3\4\3\4\5\4a\n\4\3\4"+
+		"\3\4\6\4e\n\4\r\4\16\4f\3\5\3\5\3\5\3\5\5\5m\n\5\3\5\7\5p\n\5\f\5\16\5"+
+		"s\13\5\3\5\3\5\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0094"+
+		"\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
+		"\6\5\6\u00a7\n\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00af\n\6\3\6\3\6\3\6\3\6"+
 		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\5\6\u0087\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00a0\n\6\3\6\5\6\u00a3"+
-		"\n\6\3\6\5\6\u00a6\n\6\3\6\5\6\u00a9\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00bd\n\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\5\6\u00c5\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
+		"\6\5\6\u00c7\n\6\3\6\5\6\u00ca\n\6\3\6\5\6\u00cd\n\6\3\6\5\6\u00d0\n\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00da\n\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00f0\n\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00f8\n\6\3\6\3\6\5\6\u00fc\n\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u010d\n\6\3\6\3"+
 		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\5\6\u00e5\n\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u00ed\n\6\3\6\3\6\3\6\3"+
-		"\6\5\6\u00f3\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
-		"\6\3\6\5\6\u0104\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u012a\n\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\5\6\u0133\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0140"+
+		"\n\6\3\6\3\6\3\6\3\6\5\6\u0146\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0157\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
 		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
 		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3"+
 		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u014d\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\3\6\3\6\5\6\u015c\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0172\n\6\3\6\3\6\3\6"+
-		"\3\6\3\6\3\6\3\6\3\6\5\6\u017c\n\6\3\6\3\6\3\6\3\6\5\6\u0182\n\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0192\n\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\5\6\u019b\n\6\3\6\5\6\u019e\n\6\3\6\5\6\u01a1\n"+
-		"\6\3\6\5\6\u01a4\n\6\3\6\5\6\u01a7\n\6\3\6\5\6\u01aa\n\6\3\6\3\6\3\6\3"+
-		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u01be\n"+
-		"\6\3\6\5\6\u01c1\n\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u01c9\n\6\3\7\3\7\3\b"+
-		"\3\b\3\b\3\b\3\b\5\b\u01d2\n\b\3\t\3\t\3\t\3\t\3\t\5\t\u01d9\n\t\3\n\3"+
-		"\n\3\n\3\n\3\n\5\n\u01e0\n\n\3\13\3\13\3\13\7\13\u01e5\n\13\f\13\16\13"+
-		"\u01e8\13\13\3\13\3\13\3\13\3\13\5\13\u01ee\n\13\7\13\u01f0\n\13\f\13"+
-		"\16\13\u01f3\13\13\3\13\7\13\u01f6\n\13\f\13\16\13\u01f9\13\13\3\13\3"+
-		"\13\3\f\3\f\3\f\5\f\u0200\n\f\3\f\3\f\5\f\u0204\n\f\3\r\3\r\5\r\u0208"+
-		"\n\r\3\16\3\16\7\16\u020c\n\16\f\16\16\16\u020f\13\16\3\16\3\16\6\16\u0213"+
-		"\n\16\r\16\16\16\u0214\3\16\7\16\u0218\n\16\f\16\16\16\u021b\13\16\3\17"+
-		"\3\17\3\17\7\17\u0220\n\17\f\17\16\17\u0223\13\17\3\17\5\17\u0226\n\17"+
-		"\3\20\3\20\7\20\u022a\n\20\f\20\16\20\u022d\13\20\3\20\6\20\u0230\n\20"+
-		"\r\20\16\20\u0231\3\20\7\20\u0235\n\20\f\20\16\20\u0238\13\20\3\20\3\20"+
-		"\3\21\3\21\3\21\7\21\u023f\n\21\f\21\16\21\u0242\13\21\3\21\3\21\3\22"+
-		"\3\22\7\22\u0248\n\22\f\22\16\22\u024b\13\22\3\22\3\22\7\22\u024f\n\22"+
-		"\f\22\16\22\u0252\13\22\3\22\3\22\7\22\u0256\n\22\f\22\16\22\u0259\13"+
-		"\22\3\22\5\22\u025c\n\22\3\22\7\22\u025f\n\22\f\22\16\22\u0262\13\22\3"+
-		"\22\5\22\u0265\n\22\3\23\3\23\7\23\u0269\n\23\f\23\16\23\u026c\13\23\3"+
-		"\23\3\23\5\23\u0270\n\23\3\24\3\24\7\24\u0274\n\24\f\24\16\24\u0277\13"+
-		"\24\3\24\3\24\5\24\u027b\n\24\3\25\3\25\3\25\3\25\5\25\u0281\n\25\3\26"+
-		"\3\26\3\26\3\26\5\26\u0287\n\26\3\27\3\27\5\27\u028b\n\27\3\30\3\30\5"+
-		"\30\u028f\n\30\3\31\3\31\3\31\5\31\u0294\n\31\3\32\3\32\5\32\u0298\n\32"+
-		"\3\32\3\32\3\33\3\33\6\33\u029e\n\33\r\33\16\33\u029f\3\34\3\34\3\34\3"+
-		"\34\6\34\u02a6\n\34\r\34\16\34\u02a7\3\35\3\35\3\35\3\35\3\35\3\35\3\35"+
-		"\3\35\6\35\u02b2\n\35\r\35\16\35\u02b3\3\36\3\36\5\36\u02b8\n\36\3\37"+
-		"\3\37\3 \3 \3!\3!\3!\2\2\"\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36 \"$"+
-		"&(*,.\60\62\64\668:<>@\2V\3\2WX\4\2!!\u00ec\u00ec\3\2\30\31\6\2((MM\u0120"+
-		"\u0120\u0122\u0122\3\2\36\37\4\2\'\'++\4\2))\u0120\u0120\3\2/\60\4\2\62"+
-		"\62;;\4\2PP\u009f\u009f\4\2\u00cc\u00cc\u0111\u0111\4\2\66\66\u0121\u0121"+
-		"\4\2\67\67<<\3\2=>\3\2?@\3\2KL\4\2NNRR\4\2PP\u0123\u0123\5\2\u0122\u0122"+
-		"\u0125\u0125\u0129\u012b\3\2\u0124\u0126\b\2\64\64yy\u0105\u0105\u0121"+
-		"\u0121\u0127\u0127\u0129\u0129\4\2\25\25dd\3\2^_\6\2..DE[]\u0113\u0113"+
-		"\4\2``ff\3\2qr\6\2))\u0080\u0080\u0084\u0084\u0120\u0120\4\2\24\24}}\5"+
-		"\2..DD]]\4\2\u0080\u0080\u0084\u0084\5\2\u0122\u0122\u0129\u0129\u012b"+
-		"\u012b\3\2\u0086\u0087\4\2\u0089\u0089\u0092\u0092\4\2\u0088\u0088\u008d"+
-		"\u008d\3\2\u0090\u0091\4\2\u008e\u008e\u0093\u0093\3\2\u0094\u0095\3\2"+
-		"\u009a\u009b\4\2\u009d\u009d\u00a2\u00a2\4\2\u009c\u009c\u009f\u009f\3"+
-		"\2\u00aa\u00ab\3\2\u00ad\u00ae\3\2\u00af\u00b0\3\2\u00b1\u00b2\3\2\u00b4"+
-		"\u00b5\4\2\u00be\u00be\u00c7\u00c7\4\2\u00bb\u00bb\u00bf\u00bf\3\2\u00c2"+
-		"\u00c3\3\2\u00c4\u00c5\3\2\u00c8\u00c9\3\2\u00ce\u00cf\4\2\u00d3\u00d3"+
-		"\u00d5\u00d5\4\2\63\63vw\3\2\u00d0\u00d1\3\2\u00d6\u00d7\5\2ss\u00b8\u00b8"+
-		"\u00e8\u00e8\3\2\u00d9\u00da\3\2\u00dc\u00dd\4\2\u00e2\u00e2\u00e4\u00e4"+
-		"\4\2SS\u0108\u0108\3\2\u00e6\u00e7\3\2\u00ea\u00eb\n\2$$((ikmmtt\u0114"+
-		"\u0114\u0126\u0126\u012a\u012a\4\2\u00ee\u00ee\u0128\u0128\3\2\u00f6\u00f7"+
-		"\4\2\u00f9\u00f9\u010b\u010b\4\2\u00fa\u00fa\u0129\u0129\3\2\u00ff\u0100"+
-		"\3\2\u0106\u0107\3\2\u010c\u010d\4\2VV\u00a4\u00a4\4\2\u00bc\u00bd\u00f4"+
-		"\u00f5\4\2CC\u0097\u0097\5\2\34\34\u00e2\u00e2\u0108\u0108\3\2\u0116\u0117"+
-		"\4\2\u0118\u0118\u011b\u011b\6\2((\u0119\u0119\u0120\u0120\u012c\u012c"+
-		"\4\2\u011c\u011c\u012c\u012c\4\2SS\u00f8\u00f8\3\2\u011d\u011e\4\2YY\u00db"+
-		"\u00db\3\2\u0102\u0104\3\2\u0131\u0132\23\2\22\"$)+EGHJNPVY`bkm\u00cd"+
-		"\u00cf\u00ef\u00f1\u00f2\u00f4\u0100\u0105\u0108\u010a\u0116\u0118\u011a"+
-		"\u011c\u012c\u012e\u012e\2\u0398\2R\3\2\2\2\4W\3\2\2\2\6Z\3\2\2\2\bd\3"+
-		"\2\2\2\n\u01c8\3\2\2\2\f\u01ca\3\2\2\2\16\u01cc\3\2\2\2\20\u01d3\3\2\2"+
-		"\2\22\u01da\3\2\2\2\24\u01e1\3\2\2\2\26\u01ff\3\2\2\2\30\u0207\3\2\2\2"+
-		"\32\u0209\3\2\2\2\34\u021c\3\2\2\2\36\u0227\3\2\2\2 \u023b\3\2\2\2\"\u0245"+
-		"\3\2\2\2$\u0266\3\2\2\2&\u0271\3\2\2\2(\u0280\3\2\2\2*\u0286\3\2\2\2,"+
-		"\u0288\3\2\2\2.\u028c\3\2\2\2\60\u0290\3\2\2\2\62\u0295\3\2\2\2\64\u029d"+
-		"\3\2\2\2\66\u02a5\3\2\2\28\u02b1\3\2\2\2:\u02b7\3\2\2\2<\u02b9\3\2\2\2"+
-		">\u02bb\3\2\2\2@\u02bd\3\2\2\2BQ\5\4\3\2CQ\5\6\4\2DQ\5\f\7\2EQ\5\24\13"+
-		"\2FQ\5\16\b\2GQ\5\20\t\2HQ\5\22\n\2IQ\5 \21\2JQ\5\34\17\2KQ\5,\27\2LQ"+
-		"\5.\30\2MQ\5\60\31\2NQ\58\35\2OQ\7\u0136\2\2PB\3\2\2\2PC\3\2\2\2PD\3\2"+
-		"\2\2PE\3\2\2\2PF\3\2\2\2PG\3\2\2\2PH\3\2\2\2PI\3\2\2\2PJ\3\2\2\2PK\3\2"+
-		"\2\2PL\3\2\2\2PM\3\2\2\2PN\3\2\2\2PO\3\2\2\2QT\3\2\2\2RP\3\2\2\2RS\3\2"+
-		"\2\2SU\3\2\2\2TR\3\2\2\2UV\7\2\2\3V\3\3\2\2\2WX\t\2\2\2XY\78\2\2Y\5\3"+
-		"\2\2\2Z`\t\3\2\2[]\7\u012e\2\2\\[\3\2\2\2\\]\3\2\2\2]^\3\2\2\2^a\5\n\6"+
-		"\2_a\5\b\5\2`\\\3\2\2\2`_\3\2\2\2ab\3\2\2\2b`\3\2\2\2bc\3\2\2\2c\7\3\2"+
-		"\2\2de\7\u011a\2\2ef\7l\2\2fm\5\n\6\2gi\7\u012e\2\2hg\3\2\2\2hi\3\2\2"+
-		"\2ij\3\2\2\2jl\5\n\6\2kh\3\2\2\2lo\3\2\2\2mk\3\2\2\2mn\3\2\2\2np\3\2\2"+
-		"\2om\3\2\2\2pq\7\u00f3\2\2q\t\3\2\2\2r\u01c9\7\22\2\2s\u01c9\7\23\2\2"+
-		"t\u01c9\7\27\2\2uv\t\4\2\2vw\7l\2\2wx\t\5\2\2x\u01c9\7\u00f3\2\2y\u01c9"+
-		"\7\33\2\2z\u01c9\7\35\2\2{|\t\6\2\2|}\7l\2\2}~\5<\37\2~\177\7\u00f3\2"+
-		"\2\177\u01c9\3\2\2\2\u0080\u01c9\7\"\2\2\u0081\u0086\7#\2\2\u0082\u0083"+
-		"\7l\2\2\u0083\u0084\5<\37\2\u0084\u0085\7\u00f3\2\2\u0085\u0087\3\2\2"+
-		"\2\u0086\u0082\3\2\2\2\u0086\u0087\3\2\2\2\u0087\u01c9\3\2\2\2\u0088\u01c9"+
-		"\7%\2\2\u0089\u01c9\7&\2\2\u008a\u008b\t\7\2\2\u008b\u008c\7l\2\2\u008c"+
-		"\u008d\5<\37\2\u008d\u008e\7\u00f3\2\2\u008e\u01c9\3\2\2\2\u008f\u01c9"+
-		"\t\b\2\2\u0090\u01c9\7,\2\2\u0091\u01c9\7-\2\2\u0092\u0093\t\t\2\2\u0093"+
-		"\u0094\7l\2\2\u0094\u0095\5<\37\2\u0095\u0096\7\u00f3\2\2\u0096\u01c9"+
-		"\3\2\2\2\u0097\u0098\7\61\2\2\u0098\u0099\7l\2\2\u0099\u009a\5<\37\2\u009a"+
-		"\u009b\7\u00f3\2\2\u009b\u01c9\3\2\2\2\u009c\u00a8\t\n\2\2\u009d\u009f"+
-		"\7l\2\2\u009e\u00a0\t\13\2\2\u009f\u009e\3\2\2\2\u009f\u00a0\3\2\2\2\u00a0"+
-		"\u00a2\3\2\2\2\u00a1\u00a3\7\u012e\2\2\u00a2\u00a1\3\2\2\2\u00a2\u00a3"+
-		"\3\2\2\2\u00a3\u00a5\3\2\2\2\u00a4\u00a6\t\f\2\2\u00a5\u00a4\3\2\2\2\u00a5"+
-		"\u00a6\3\2\2\2\u00a6\u00a7\3\2\2\2\u00a7\u00a9\7\u00f3\2\2\u00a8\u009d"+
-		"\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\u01c9\3\2\2\2\u00aa\u01c9\7\63\2\2"+
-		"\u00ab\u01c9\t\r\2\2\u00ac\u01c9\7\65\2\2\u00ad\u01c9\t\16\2\2\u00ae\u01c9"+
-		"\7:\2\2\u00af\u01c9\t\17\2\2\u00b0\u01c9\t\20\2\2\u00b1\u01c9\7A\2\2\u00b2"+
-		"\u01c9\7G\2\2\u00b3\u01c9\7J\2\2\u00b4\u01c9\t\21\2\2\u00b5\u01c9\t\22"+
-		"\2\2\u00b6\u01c9\7O\2\2\u00b7\u00b8\t\23\2\2\u00b8\u00b9\7l\2\2\u00b9"+
-		"\u00bc\t\24\2\2\u00ba\u00bb\7\u012e\2\2\u00bb\u00bd\t\24\2\2\u00bc\u00ba"+
-		"\3\2\2\2\u00bc\u00bd\3\2\2\2\u00bd\u00be\3\2\2\2\u00be\u01c9\7\u00f3\2"+
-		"\2\u00bf\u00c0\7Q\2\2\u00c0\u00c1\7l\2\2\u00c1\u00c4\t\25\2\2\u00c2\u00c3"+
-		"\7\u012e\2\2\u00c3\u00c5\t\26\2\2\u00c4\u00c2\3\2\2\2\u00c4\u00c5\3\2"+
-		"\2\2\u00c5\u00c6\3\2\2\2\u00c6\u01c9\7\u00f3\2\2\u00c7\u01c9\7T\2\2\u00c8"+
-		"\u01c9\7U\2\2\u00c9\u00ca\7Z\2\2\u00ca\u00cb\7l\2\2\u00cb\u00cc\t\27\2"+
-		"\2\u00cc\u01c9\7\u00f3\2\2\u00cd\u00ce\t\30\2\2\u00ce\u00cf\7l\2\2\u00cf"+
-		"\u00d0\t\31\2\2\u00d0\u01c9\7\u00f3\2\2\u00d1\u01c9\7a\2\2\u00d2\u01c9"+
-		"\7b\2\2\u00d3\u01c9\7c\2\2\u00d4\u01c9\7e\2\2\u00d5\u00d6\t\32\2\2\u00d6"+
-		"\u00d7\7l\2\2\u00d7\u00d8\5<\37\2\u00d8\u00d9\7\u00f3\2\2\u00d9\u01c9"+
-		"\3\2\2\2\u00da\u01c9\7g\2\2\u00db\u01c9\7h\2\2\u00dc\u01c9\7n\2\2\u00dd"+
-		"\u00de\7o\2\2\u00de\u00df\7l\2\2\u00df\u00e0\5<\37\2\u00e0\u00e1\7\u012e"+
-		"\2\2\u00e1\u00e4\5<\37\2\u00e2\u00e3\7\u012e\2\2\u00e3\u00e5\5<\37\2\u00e4"+
-		"\u00e2\3\2\2\2\u00e4\u00e5\3\2\2\2\u00e5\u00e6\3\2\2\2\u00e6\u00e7\7\u00f3"+
-		"\2\2\u00e7\u01c9\3\2\2\2\u00e8\u00ec\t\33\2\2\u00e9\u00ea\7l\2\2\u00ea"+
-		"\u00eb\t\34\2\2\u00eb\u00ed\7\u00f3\2\2\u00ec\u00e9\3\2\2\2\u00ec\u00ed"+
-		"\3\2\2\2\u00ed\u01c9\3\2\2\2\u00ee\u00f2\7u\2\2\u00ef\u00f0\7l\2\2\u00f0"+
-		"\u00f1\t\35\2\2\u00f1\u00f3\7\u00f3\2\2\u00f2\u00ef\3\2\2\2\u00f2\u00f3"+
-		"\3\2\2\2\u00f3\u01c9\3\2\2\2\u00f4\u00f5\7x\2\2\u00f5\u00f6\7l\2\2\u00f6"+
-		"\u00f7\t\36\2\2\u00f7\u01c9\7\u00f3\2\2\u00f8\u01c9\7{\2\2\u00f9\u01c9"+
-		"\7|\2\2\u00fa\u01c9\7~\2\2\u00fb\u01c9\7\177\2\2\u00fc\u01c9\7\u0081\2"+
-		"\2\u00fd\u01c9\7\u0082\2\2\u00fe\u01c9\7\u0083\2\2\u00ff\u0103\t\37\2"+
-		"\2\u0100\u0101\7l\2\2\u0101\u0102\t \2\2\u0102\u0104\7\u00f3\2\2\u0103"+
-		"\u0100\3\2\2\2\u0103\u0104\3\2\2\2\u0104\u01c9\3\2\2\2\u0105\u01c9\7\u0085"+
-		"\2\2\u0106\u01c9\t!\2\2\u0107\u01c9\t\"\2\2\u0108\u01c9\7\u008a\2\2\u0109"+
-		"\u01c9\7\u008c\2\2\u010a\u01c9\t#\2\2\u010b\u01c9\7\u008f\2\2\u010c\u01c9"+
-		"\7\u008b\2\2\u010d\u01c9\t$\2\2\u010e\u01c9\t%\2\2\u010f\u01c9\t&\2\2"+
-		"\u0110\u01c9\7\u0096\2\2\u0111\u01c9\7\u0098\2\2\u0112\u01c9\7\u0099\2"+
-		"\2\u0113\u01c9\t\'\2\2\u0114\u01c9\t(\2\2\u0115\u01c9\7\u009e\2\2\u0116"+
-		"\u01c9\t)\2\2\u0117\u01c9\7\u00a0\2\2\u0118\u01c9\7\u00a1\2\2\u0119\u01c9"+
-		"\7\u00a3\2\2\u011a\u01c9\7\u00a5\2\2\u011b\u01c9\7\u00a6\2\2\u011c\u01c9"+
-		"\7\u00a7\2\2\u011d\u01c9\7\u00a8\2\2\u011e\u01c9\7\u00a9\2\2\u011f\u01c9"+
-		"\t*\2\2\u0120\u01c9\7\u00ac\2\2\u0121\u01c9\t+\2\2\u0122\u01c9\t,\2\2"+
-		"\u0123\u01c9\t-\2\2\u0124\u01c9\7\u00b3\2\2\u0125\u01c9\t.\2\2\u0126\u01c9"+
-		"\7\u00b6\2\2\u0127\u01c9\7\u00b7\2\2\u0128\u01c9\7\u00b9\2\2\u0129\u01c9"+
-		"\7\u00ba\2\2\u012a\u01c9\t/\2\2\u012b\u01c9\t\60\2\2\u012c\u01c9\7\u00c0"+
-		"\2\2\u012d\u01c9\7\u00c1\2\2\u012e\u01c9\t\61\2\2\u012f\u01c9\t\62\2\2"+
-		"\u0130\u01c9\7\u00c6\2\2\u0131\u01c9\t\63\2\2\u0132\u01c9\7\u00ca\2\2"+
-		"\u0133\u01c9\7\u00cb\2\2\u0134\u01c9\7\u00cd\2\2\u0135\u01c9\t\64\2\2"+
-		"\u0136\u01c9\7\u00d4\2\2\u0137\u0138\t\65\2\2\u0138\u0139\7l\2\2\u0139"+
-		"\u013a\t\66\2\2\u013a\u01c9\7\u00f3\2\2\u013b\u01c9\7\u00cd\2\2\u013c"+
-		"\u01c9\t\67\2\2\u013d\u01c9\7\u00d2\2\2\u013e\u01c9\t8\2\2\u013f\u0140"+
-		"\7\u00d8\2\2\u0140\u0141\7l\2\2\u0141\u0142\t9\2\2\u0142\u01c9\7\u00f3"+
-		"\2\2\u0143\u01c9\t:\2\2\u0144\u01c9\t;\2\2\u0145\u0146\7\u00e0\2\2\u0146"+
-		"\u0147\7l\2\2\u0147\u0148\5<\37\2\u0148\u0149\7\u012e\2\2\u0149\u014c"+
-		"\5<\37\2\u014a\u014b\7\u012e\2\2\u014b\u014d\5<\37\2\u014c\u014a\3\2\2"+
-		"\2\u014c\u014d\3\2\2\2\u014d\u014e\3\2\2\2\u014e\u014f\7\u00f3\2\2\u014f"+
-		"\u01c9\3\2\2\2\u0150\u0151\7\u00e1\2\2\u0151\u0152\7l\2\2\u0152\u0153"+
-		"\5<\37\2\u0153\u0154\7\u012e\2\2\u0154\u0155\5<\37\2\u0155\u0156\7\u00f3"+
-		"\2\2\u0156\u01c9\3\2\2\2\u0157\u015b\t<\2\2\u0158\u0159\7l\2\2\u0159\u015a"+
-		"\t=\2\2\u015a\u015c\7\u00f3\2\2\u015b\u0158\3\2\2\2\u015b\u015c\3\2\2"+
-		"\2\u015c\u01c9\3\2\2\2\u015d\u01c9\7\u00e3\2\2\u015e\u01c9\7\u00e5\2\2"+
-		"\u015f\u01c9\7\u00df\2\2\u0160\u0161\t>\2\2\u0161\u0162\7l\2\2\u0162\u0163"+
-		"\5:\36\2\u0163\u0164\7\u00f3\2\2\u0164\u01c9\3\2\2\2\u0165\u0166\t?\2"+
-		"\2\u0166\u0167\7l\2\2\u0167\u0168\t@\2\2\u0168\u01c9\7\u00f3\2\2\u0169"+
-		"\u01c9\7\u00ed\2\2\u016a\u01c9\tA\2\2\u016b\u01c9\7\u00ef\2\2\u016c\u016d"+
-		"\7\u00f2\2\2\u016d\u0171\7l\2\2\u016e\u0172\7\26\2\2\u016f\u0172\7\32"+
-		"\2\2\u0170\u0172\5<\37\2\u0171\u016e\3\2\2\2\u0171\u016f\3\2\2\2\u0171"+
-		"\u0170\3\2\2\2\u0172\u0173\3\2\2\2\u0173\u01c9\7\u00f3\2\2\u0174\u017b"+
-		"\tB\2\2\u0175\u0176\7l\2\2\u0176\u0177\5<\37\2\u0177\u0178\7\u012e\2\2"+
-		"\u0178\u0179\5<\37\2\u0179\u017a\7\u00f3\2\2\u017a\u017c\3\2\2\2\u017b"+
-		"\u0175\3\2\2\2\u017b\u017c\3\2\2\2\u017c\u01c9\3\2\2\2\u017d\u017e\tC"+
-		"\2\2\u017e\u0181\7l\2\2\u017f\u0182\7p\2\2\u0180\u0182\5<\37\2\u0181\u017f"+
-		"\3\2\2\2\u0181\u0180\3\2\2\2\u0182\u0183\3\2\2\2\u0183\u01c9\7\u00f3\2"+
-		"\2\u0184\u01c9\tD\2\2\u0185\u01c9\7\u00fb\2\2\u0186\u0187\7\u00fc\2\2"+
-		"\u0187\u0188\7l\2\2\u0188\u0189\5<\37\2\u0189\u018a\7\u00f3\2\2\u018a"+
-		"\u01c9\3\2\2\2\u018b\u01c9\7\u00fd\2\2\u018c\u0191\7\u00fe\2\2\u018d\u018e"+
-		"\7l\2\2\u018e\u018f\5<\37\2\u018f\u0190\7\u00f3\2\2\u0190\u0192\3\2\2"+
-		"\2\u0191\u018d\3\2\2\2\u0191\u0192\3\2\2\2\u0192\u01c9\3\2\2\2\u0193\u01c9"+
-		"\tE\2\2\u0194\u01c9\tF\2\2\u0195\u01c9\7\u010a\2\2\u0196\u01c9\tG\2\2"+
-		"\u0197\u01a9\7\u010e\2\2\u0198\u019a\7l\2\2\u0199\u019b\tH\2\2\u019a\u0199"+
-		"\3\2\2\2\u019a\u019b\3\2\2\2\u019b\u019d\3\2\2\2\u019c\u019e\7\u012e\2"+
-		"\2\u019d\u019c\3\2\2\2\u019d\u019e\3\2\2\2\u019e\u01a0\3\2\2\2\u019f\u01a1"+
-		"\tI\2\2\u01a0\u019f\3\2\2\2\u01a0\u01a1\3\2\2\2\u01a1\u01a3\3\2\2\2\u01a2"+
-		"\u01a4\7\u012e\2\2\u01a3\u01a2\3\2\2\2\u01a3\u01a4\3\2\2\2\u01a4\u01a6"+
-		"\3\2\2\2\u01a5\u01a7\tJ\2\2\u01a6\u01a5\3\2\2\2\u01a6\u01a7\3\2\2\2\u01a7"+
-		"\u01a8\3\2\2\2\u01a8\u01aa\7\u00f3\2\2\u01a9\u0198\3\2\2\2\u01a9\u01aa"+
-		"\3\2\2\2\u01aa\u01c9\3\2\2\2\u01ab\u01c9\7\u010f\2\2\u01ac\u01ad\7\u0112"+
-		"\2\2\u01ad\u01ae\7l\2\2\u01ae\u01af\tK\2\2\u01af\u01c9\7\u00f3\2\2\u01b0"+
-		"\u01c9\7\u0115\2\2\u01b1\u01b2\tL\2\2\u01b2\u01b3\7l\2\2\u01b3\u01b4\5"+
-		":\36\2\u01b4\u01b5\7\u00f3\2\2\u01b5\u01c9\3\2\2\2\u01b6\u01b7\tM\2\2"+
-		"\u01b7\u01b8\7l\2\2\u01b8\u01b9\tN\2\2\u01b9\u01c9\7\u00f3\2\2\u01ba\u01c0"+
-		"\tO\2\2\u01bb\u01bd\7l\2\2\u01bc\u01be\tP\2\2\u01bd\u01bc\3\2\2\2\u01bd"+
-		"\u01be\3\2\2\2\u01be\u01bf\3\2\2\2\u01bf\u01c1\7\u00f3\2\2\u01c0\u01bb"+
-		"\3\2\2\2\u01c0\u01c1\3\2\2\2\u01c1\u01c9\3\2\2\2\u01c2\u01c3\tQ\2\2\u01c3"+
-		"\u01c4\7l\2\2\u01c4\u01c5\5<\37\2\u01c5\u01c6\7\u00f3\2\2\u01c6\u01c9"+
-		"\3\2\2\2\u01c7\u01c9\7\u011f\2\2\u01c8r\3\2\2\2\u01c8s\3\2\2\2\u01c8t"+
-		"\3\2\2\2\u01c8u\3\2\2\2\u01c8y\3\2\2\2\u01c8z\3\2\2\2\u01c8{\3\2\2\2\u01c8"+
-		"\u0080\3\2\2\2\u01c8\u0081\3\2\2\2\u01c8\u0088\3\2\2\2\u01c8\u0089\3\2"+
-		"\2\2\u01c8\u008a\3\2\2\2\u01c8\u008f\3\2\2\2\u01c8\u0090\3\2\2\2\u01c8"+
-		"\u0091\3\2\2\2\u01c8\u0092\3\2\2\2\u01c8\u0097\3\2\2\2\u01c8\u009c\3\2"+
-		"\2\2\u01c8\u00aa\3\2\2\2\u01c8\u00ab\3\2\2\2\u01c8\u00ac\3\2\2\2\u01c8"+
-		"\u00ad\3\2\2\2\u01c8\u00ae\3\2\2\2\u01c8\u00af\3\2\2\2\u01c8\u00b0\3\2"+
-		"\2\2\u01c8\u00b1\3\2\2\2\u01c8\u00b2\3\2\2\2\u01c8\u00b3\3\2\2\2\u01c8"+
-		"\u00b4\3\2\2\2\u01c8\u00b5\3\2\2\2\u01c8\u00b6\3\2\2\2\u01c8\u00b7\3\2"+
-		"\2\2\u01c8\u00bf\3\2\2\2\u01c8\u00c7\3\2\2\2\u01c8\u00c8\3\2\2\2\u01c8"+
-		"\u00c9\3\2\2\2\u01c8\u00cd\3\2\2\2\u01c8\u00d1\3\2\2\2\u01c8\u00d2\3\2"+
-		"\2\2\u01c8\u00d3\3\2\2\2\u01c8\u00d4\3\2\2\2\u01c8\u00d5\3\2\2\2\u01c8"+
-		"\u00da\3\2\2\2\u01c8\u00db\3\2\2\2\u01c8\u00dc\3\2\2\2\u01c8\u00dd\3\2"+
-		"\2\2\u01c8\u00e8\3\2\2\2\u01c8\u00ee\3\2\2\2\u01c8\u00f4\3\2\2\2\u01c8"+
-		"\u00f8\3\2\2\2\u01c8\u00f9\3\2\2\2\u01c8\u00fa\3\2\2\2\u01c8\u00fb\3\2"+
-		"\2\2\u01c8\u00fc\3\2\2\2\u01c8\u00fd\3\2\2\2\u01c8\u00fe\3\2\2\2\u01c8"+
-		"\u00ff\3\2\2\2\u01c8\u0105\3\2\2\2\u01c8\u0106\3\2\2\2\u01c8\u0107\3\2"+
-		"\2\2\u01c8\u0108\3\2\2\2\u01c8\u0109\3\2\2\2\u01c8\u010a\3\2\2\2\u01c8"+
-		"\u010b\3\2\2\2\u01c8\u010c\3\2\2\2\u01c8\u010d\3\2\2\2\u01c8\u010e\3\2"+
-		"\2\2\u01c8\u010f\3\2\2\2\u01c8\u0110\3\2\2\2\u01c8\u0111\3\2\2\2\u01c8"+
-		"\u0112\3\2\2\2\u01c8\u0113\3\2\2\2\u01c8\u0114\3\2\2\2\u01c8\u0115\3\2"+
-		"\2\2\u01c8\u0116\3\2\2\2\u01c8\u0117\3\2\2\2\u01c8\u0118\3\2\2\2\u01c8"+
-		"\u0119\3\2\2\2\u01c8\u011a\3\2\2\2\u01c8\u011b\3\2\2\2\u01c8\u011c\3\2"+
-		"\2\2\u01c8\u011d\3\2\2\2\u01c8\u011e\3\2\2\2\u01c8\u011f\3\2\2\2\u01c8"+
-		"\u0120\3\2\2\2\u01c8\u0121\3\2\2\2\u01c8\u0122\3\2\2\2\u01c8\u0123\3\2"+
-		"\2\2\u01c8\u0124\3\2\2\2\u01c8\u0125\3\2\2\2\u01c8\u0126\3\2\2\2\u01c8"+
-		"\u0127\3\2\2\2\u01c8\u0128\3\2\2\2\u01c8\u0129\3\2\2\2\u01c8\u012a\3\2"+
-		"\2\2\u01c8\u012b\3\2\2\2\u01c8\u012c\3\2\2\2\u01c8\u012d\3\2\2\2\u01c8"+
-		"\u012e\3\2\2\2\u01c8\u012f\3\2\2\2\u01c8\u0130\3\2\2\2\u01c8\u0131\3\2"+
-		"\2\2\u01c8\u0132\3\2\2\2\u01c8\u0133\3\2\2\2\u01c8\u0134\3\2\2\2\u01c8"+
-		"\u0135\3\2\2\2\u01c8\u0136\3\2\2\2\u01c8\u0137\3\2\2\2\u01c8\u013b\3\2"+
-		"\2\2\u01c8\u013c\3\2\2\2\u01c8\u013d\3\2\2\2\u01c8\u013e\3\2\2\2\u01c8"+
-		"\u013f\3\2\2\2\u01c8\u0143\3\2\2\2\u01c8\u0144\3\2\2\2\u01c8\u0145\3\2"+
-		"\2\2\u01c8\u0150\3\2\2\2\u01c8\u0157\3\2\2\2\u01c8\u015d\3\2\2\2\u01c8"+
-		"\u015e\3\2\2\2\u01c8\u015f\3\2\2\2\u01c8\u0160\3\2\2\2\u01c8\u0165\3\2"+
-		"\2\2\u01c8\u0169\3\2\2\2\u01c8\u016a\3\2\2\2\u01c8\u016b\3\2\2\2\u01c8"+
-		"\u016c\3\2\2\2\u01c8\u0174\3\2\2\2\u01c8\u017d\3\2\2\2\u01c8\u0184\3\2"+
-		"\2\2\u01c8\u0185\3\2\2\2\u01c8\u0186\3\2\2\2\u01c8\u018b\3\2\2\2\u01c8"+
-		"\u018c\3\2\2\2\u01c8\u0193\3\2\2\2\u01c8\u0194\3\2\2\2\u01c8\u0195\3\2"+
-		"\2\2\u01c8\u0196\3\2\2\2\u01c8\u0197\3\2\2\2\u01c8\u01ab\3\2\2\2\u01c8"+
-		"\u01ac\3\2\2\2\u01c8\u01b0\3\2\2\2\u01c8\u01b1\3\2\2\2\u01c8\u01b6\3\2"+
-		"\2\2\u01c8\u01ba\3\2\2\2\u01c8\u01c2\3\2\2\2\u01c8\u01c7\3\2\2\2\u01c9"+
-		"\13\3\2\2\2\u01ca\u01cb\7\3\2\2\u01cb\r\3\2\2\2\u01cc\u01cd\7I\2\2\u01cd"+
-		"\u01ce\7#\2\2\u01ce\u01cf\5\64\33\2\u01cf\u01d1\7F\2\2\u01d0\u01d2\7\u012f"+
-		"\2\2\u01d1\u01d0\3\2\2\2\u01d1\u01d2\3\2\2\2\u01d2\17\3\2\2\2\u01d3\u01d4"+
-		"\7I\2\2\u01d4\u01d5\7\u00fe\2\2\u01d5\u01d6\5\66\34\2\u01d6\u01d8\7F\2"+
-		"\2\u01d7\u01d9\7\u012f\2\2\u01d8\u01d7\3\2\2\2\u01d8\u01d9\3\2\2\2\u01d9"+
-		"\21\3\2\2\2\u01da\u01db\7I\2\2\u01db\u01dc\7\u0101\2\2\u01dc\u01dd\5\64"+
-		"\33\2\u01dd\u01df\7F\2\2\u01de\u01e0\7\u012f\2\2\u01df\u01de\3\2\2\2\u01df"+
-		"\u01e0\3\2\2\2\u01e0\23\3\2\2\2\u01e1\u01e2\7*\2\2\u01e2\u01f1\5\26\f"+
-		"\2\u01e3\u01e5\7\u0136\2\2\u01e4\u01e3\3\2\2\2\u01e5\u01e8\3\2\2\2\u01e6"+
-		"\u01e4\3\2\2\2\u01e6\u01e7\3\2\2\2\u01e7\u01ed\3\2\2\2\u01e8\u01e6\3\2"+
-		"\2\2\u01e9\u01ee\5$\23\2\u01ea\u01ee\5&\24\2\u01eb\u01ee\5\32\16\2\u01ec"+
-		"\u01ee\7\u0109\2\2\u01ed\u01e9\3\2\2\2\u01ed\u01ea\3\2\2\2\u01ed\u01eb"+
-		"\3\2\2\2\u01ed\u01ec\3\2\2\2\u01ee\u01f0\3\2\2\2\u01ef\u01e6\3\2\2\2\u01f0"+
-		"\u01f3\3\2\2\2\u01f1\u01ef\3\2\2\2\u01f1\u01f2\3\2\2\2\u01f2\u01f7\3\2"+
-		"\2\2\u01f3\u01f1\3\2\2\2\u01f4\u01f6\7\u0136\2\2\u01f5\u01f4\3\2\2\2\u01f6"+
-		"\u01f9\3\2\2\2\u01f7\u01f5\3\2\2\2\u01f7\u01f8\3\2\2\2\u01f8\u01fa\3\2"+
-		"\2\2\u01f9\u01f7\3\2\2\2\u01fa\u01fb\7\u012f\2\2\u01fb\25\3\2\2\2\u01fc"+
-		"\u0200\5<\37\2\u01fd\u0200\5:\36\2\u01fe\u0200\5> \2\u01ff\u01fc\3\2\2"+
-		"\2\u01ff\u01fd\3\2\2\2\u01ff\u01fe\3\2\2\2\u0200\u0203\3\2\2\2\u0201\u0202"+
-		"\tR\2\2\u0202\u0204\5\30\r\2\u0203\u0201\3\2\2\2\u0203\u0204\3\2\2\2\u0204"+
-		"\27\3\2\2\2\u0205\u0208\5<\37\2\u0206\u0208\5:\36\2\u0207\u0205\3\2\2"+
-		"\2\u0207\u0206\3\2\2\2\u0208\31\3\2\2\2\u0209\u020d\7\u00f1\2\2\u020a"+
-		"\u020c\7\u0136\2\2\u020b\u020a\3\2\2\2\u020c\u020f\3\2\2\2\u020d\u020b"+
-		"\3\2\2\2\u020d\u020e\3\2\2\2\u020e\u0210\3\2\2\2\u020f\u020d\3\2\2\2\u0210"+
-		"\u0219\5\"\22\2\u0211\u0213\7\u0136\2\2\u0212\u0211\3\2\2\2\u0213\u0214"+
-		"\3\2\2\2\u0214\u0212\3\2\2\2\u0214\u0215\3\2\2\2\u0215\u0216\3\2\2\2\u0216"+
-		"\u0218\5\"\22\2\u0217\u0212\3\2\2\2\u0218\u021b\3\2\2\2\u0219\u0217\3"+
-		"\2\2\2\u0219\u021a\3\2\2\2\u021a\33\3\2\2\2\u021b\u0219\3\2\2\2\u021c"+
-		"\u0221\5\36\20\2\u021d\u0220\5\24\13\2\u021e\u0220\5\64\33\2\u021f\u021d"+
-		"\3\2\2\2\u021f\u021e\3\2\2\2\u0220\u0223\3\2\2\2\u0221\u021f\3\2\2\2\u0221"+
-		"\u0222\3\2\2\2\u0222\u0225\3\2\2\2\u0223\u0221\3\2\2\2\u0224\u0226\5 "+
-		"\21\2\u0225\u0224\3\2\2\2\u0225\u0226\3\2\2\2\u0226\35\3\2\2\2\u0227\u022f"+
-		"\7\u00f0\2\2\u0228\u022a\7\u0136\2\2\u0229\u0228\3\2\2\2\u022a\u022d\3"+
-		"\2\2\2\u022b\u0229\3\2\2\2\u022b\u022c\3\2\2\2\u022c\u022e\3\2\2\2\u022d"+
-		"\u022b\3\2\2\2\u022e\u0230\5\"\22\2\u022f\u022b\3\2\2\2\u0230\u0231\3"+
-		"\2\2\2\u0231\u022f\3\2\2\2\u0231\u0232\3\2\2\2\u0232\u0236\3\2\2\2\u0233"+
-		"\u0235\7\u0136\2\2\u0234\u0233\3\2\2\2\u0235\u0238\3\2\2\2\u0236\u0234"+
-		"\3\2\2\2\u0236\u0237\3\2\2\2\u0237\u0239\3\2\2\2\u0238\u0236\3\2\2\2\u0239"+
-		"\u023a\7\u012f\2\2\u023a\37\3\2\2\2\u023b\u023c\7\u00f0\2\2\u023c\u0240"+
-		"\7\u00dc\2\2\u023d\u023f\7\u0136\2\2\u023e\u023d\3\2\2\2\u023f\u0242\3"+
-		"\2\2\2\u0240\u023e\3\2\2\2\u0240\u0241\3\2\2\2\u0241\u0243\3\2\2\2\u0242"+
-		"\u0240\3\2\2\2\u0243\u0244\7\u012f\2\2\u0244!\3\2\2\2\u0245\u0249\5(\25"+
-		"\2\u0246\u0248\7\u0136\2\2\u0247\u0246\3\2\2\2\u0248\u024b\3\2\2\2\u0249"+
-		"\u0247\3\2\2\2\u0249\u024a\3\2\2\2\u024a\u024c\3\2\2\2\u024b\u0249\3\2"+
-		"\2\2\u024c\u0250\7 \2\2\u024d\u024f\7\u0136\2\2\u024e\u024d\3\2\2\2\u024f"+
-		"\u0252\3\2\2\2\u0250\u024e\3\2\2\2\u0250\u0251\3\2\2\2\u0251\u0253\3\2"+
-		"\2\2\u0252\u0250\3\2\2\2\u0253\u025b\5*\26\2\u0254\u0256\7\u0136\2\2\u0255"+
-		"\u0254\3\2\2\2\u0256\u0259\3\2\2\2\u0257\u0255\3\2\2\2\u0257\u0258\3\2"+
-		"\2\2\u0258\u025a\3\2\2\2\u0259\u0257\3\2\2\2\u025a\u025c\5$\23\2\u025b"+
-		"\u0257\3\2\2\2\u025b\u025c\3\2\2\2\u025c\u0264\3\2\2\2\u025d\u025f\7\u0136"+
-		"\2\2\u025e\u025d\3\2\2\2\u025f\u0262\3\2\2\2\u0260\u025e\3\2\2\2\u0260"+
-		"\u0261\3\2\2\2\u0261\u0263\3\2\2\2\u0262\u0260\3\2\2\2\u0263\u0265\5&"+
-		"\24\2\u0264\u0260\3\2\2\2\u0264\u0265\3\2\2\2\u0265#\3\2\2\2\u0266\u026a"+
-		"\tR\2\2\u0267\u0269\7\u0136\2\2\u0268\u0267\3\2\2\2\u0269\u026c\3\2\2"+
-		"\2\u026a\u0268\3\2\2\2\u026a\u026b\3\2\2\2\u026b\u026f\3\2\2\2\u026c\u026a"+
-		"\3\2\2\2\u026d\u0270\5<\37\2\u026e\u0270\5:\36\2\u026f\u026d\3\2\2\2\u026f"+
-		"\u026e\3\2\2\2\u0270%\3\2\2\2\u0271\u0275\7\u00de\2\2\u0272\u0274\7\u0136"+
-		"\2\2\u0273\u0272\3\2\2\2\u0274\u0277\3\2\2\2\u0275\u0273\3\2\2\2\u0275"+
-		"\u0276\3\2\2\2\u0276\u027a\3\2\2\2\u0277\u0275\3\2\2\2\u0278\u027b\5<"+
-		"\37\2\u0279\u027b\5:\36\2\u027a\u0278\3\2\2\2\u027a\u0279\3\2\2\2\u027b"+
-		"\'\3\2\2\2\u027c\u0281\5<\37\2\u027d\u0281\5:\36\2\u027e\u0281\5\62\32"+
-		"\2\u027f\u0281\58\35\2\u0280\u027c\3\2\2\2\u0280\u027d\3\2\2\2\u0280\u027e"+
-		"\3\2\2\2\u0280\u027f\3\2\2\2\u0281)\3\2\2\2\u0282\u0287\5<\37\2\u0283"+
-		"\u0287\5:\36\2\u0284\u0287\5\62\32\2\u0285\u0287\58\35\2\u0286\u0282\3"+
-		"\2\2\2\u0286\u0283\3\2\2\2\u0286\u0284\3\2\2\2\u0286\u0285\3\2\2\2\u0287"+
-		"+\3\2\2\2\u0288\u028a\7B\2\2\u0289\u028b\7\u012f\2\2\u028a\u0289\3\2\2"+
-		"\2\u028a\u028b\3\2\2\2\u028b-\3\2\2\2\u028c\u028e\tS\2\2\u028d\u028f\7"+
-		"\u012f\2\2\u028e\u028d\3\2\2\2\u028e\u028f\3\2\2\2\u028f/\3\2\2\2\u0290"+
-		"\u0291\7\u0110\2\2\u0291\u0293\5<\37\2\u0292\u0294\7\u012f\2\2\u0293\u0292"+
-		"\3\2\2\2\u0293\u0294\3\2\2\2\u0294\61\3\2\2\2\u0295\u0297\7\u0130\2\2"+
-		"\u0296\u0298\5\64\33\2\u0297\u0296\3\2\2\2\u0297\u0298\3\2\2\2\u0298\u0299"+
-		"\3\2\2\2\u0299\u029a\7\u0130\2\2\u029a\63\3\2\2\2\u029b\u029e\58\35\2"+
-		"\u029c\u029e\7\u0136\2\2\u029d\u029b\3\2\2\2\u029d\u029c\3\2\2\2\u029e"+
-		"\u029f\3\2\2\2\u029f\u029d\3\2\2\2\u029f\u02a0\3\2\2\2\u02a0\65\3\2\2"+
-		"\2\u02a1\u02a6\58\35\2\u02a2\u02a6\7*\2\2\u02a3\u02a6\7\u00f0\2\2\u02a4"+
-		"\u02a6\7\u0136\2\2\u02a5\u02a1\3\2\2\2\u02a5\u02a2\3\2\2\2\u02a5\u02a3"+
-		"\3\2\2\2\u02a5\u02a4\3\2\2\2\u02a6\u02a7\3\2\2\2\u02a7\u02a5\3\2\2\2\u02a7"+
-		"\u02a8\3\2\2\2\u02a8\67\3\2\2\2\u02a9\u02b2\5:\36\2\u02aa\u02b2\5<\37"+
-		"\2\u02ab\u02b2\5> \2\u02ac\u02b2\7\u0135\2\2\u02ad\u02b2\7\u013a\2\2\u02ae"+
-		"\u02b2\7\u012f\2\2\u02af\u02b2\7l\2\2\u02b0\u02b2\7\u00f3\2\2\u02b1\u02a9"+
-		"\3\2\2\2\u02b1\u02aa\3\2\2\2\u02b1\u02ab\3\2\2\2\u02b1\u02ac\3\2\2\2\u02b1"+
-		"\u02ad\3\2\2\2\u02b1\u02ae\3\2\2\2\u02b1\u02af\3\2\2\2\u02b1\u02b0\3\2"+
-		"\2\2\u02b2\u02b3\3\2\2\2\u02b3\u02b1\3\2\2\2\u02b3\u02b4\3\2\2\2\u02b4"+
-		"9\3\2\2\2\u02b5\u02b8\7\u0133\2\2\u02b6\u02b8\5@!\2\u02b7\u02b5\3\2\2"+
-		"\2\u02b7\u02b6\3\2\2\2\u02b8;\3\2\2\2\u02b9\u02ba\tT\2\2\u02ba=\3\2\2"+
-		"\2\u02bb\u02bc\7\u0134\2\2\u02bc?\3\2\2\2\u02bd\u02be\tU\2\2\u02beA\3"+
-		"\2\2\2NPR\\`bhm\u0086\u009f\u00a2\u00a5\u00a8\u00bc\u00c4\u00e4\u00ec"+
-		"\u00f2\u0103\u014c\u015b\u0171\u017b\u0181\u0191\u019a\u019d\u01a0\u01a3"+
-		"\u01a6\u01a9\u01bd\u01c0\u01c8\u01d1\u01d8\u01df\u01e6\u01ed\u01f1\u01f7"+
-		"\u01ff\u0203\u0207\u020d\u0214\u0219\u021f\u0221\u0225\u022b\u0231\u0236"+
-		"\u0240\u0249\u0250\u0257\u025b\u0260\u0264\u026a\u026f\u0275\u027a\u0280"+
-		"\u0286\u028a\u028e\u0293\u0297\u029d\u029f\u02a5\u02a7\u02b1\u02b3\u02b7";
+		"\3\6\3\6\5\6\u01a9\n\6\3\6\5\6\u01ac\n\6\3\6\5\6\u01af\n\6\3\6\5\6\u01b2"+
+		"\n\6\3\6\5\6\u01b5\n\6\3\6\5\6\u01b8\n\6\3\6\5\6\u01bb\n\6\3\6\5\6\u01be"+
+		"\n\6\3\6\5\6\u01c1\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\5\6\u01d0\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\5\6\u01df\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u01ec\n"+
+		"\6\3\6\5\6\u01ef\n\6\3\6\5\6\u01f2\n\6\3\6\5\6\u01f5\n\6\3\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0207\n\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\7\6\u020f\n\6\f\6\16\6\u0212\13\6\3\6\3\6\5\6\u0216"+
+		"\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u021f\n\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\5\6\u022a\n\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\5\6\u023a\n\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0242\n\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u024c\n\6\3\6\5\6\u024f\n\6\3\6\5\6\u0252"+
+		"\n\6\3\6\5\6\u0255\n\6\3\6\5\6\u0258\n\6\3\6\5\6\u025b\n\6\3\6\3\6\3\6"+
+		"\3\6\3\6\7\6\u0262\n\6\f\6\16\6\u0265\13\6\3\6\3\6\5\6\u0269\n\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6"+
+		"\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0285\n\6\3\6\5\6\u0288\n\6\3\6\3\6\3"+
+		"\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\3\6\5\6\u0298\n\6\3\7\3\7\3"+
+		"\b\3\b\3\b\3\b\3\b\3\b\5\b\u02a2\n\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\3\b\5"+
+		"\b\u02ac\n\b\3\t\3\t\3\n\3\n\3\n\3\n\3\n\5\n\u02b5\n\n\3\13\3\13\3\13"+
+		"\3\13\3\13\5\13\u02bc\n\13\3\f\3\f\3\f\3\f\3\f\5\f\u02c3\n\f\3\r\3\r\3"+
+		"\r\7\r\u02c8\n\r\f\r\16\r\u02cb\13\r\3\r\3\r\3\r\3\r\5\r\u02d1\n\r\7\r"+
+		"\u02d3\n\r\f\r\16\r\u02d6\13\r\3\r\7\r\u02d9\n\r\f\r\16\r\u02dc\13\r\3"+
+		"\r\3\r\3\16\3\16\3\16\5\16\u02e3\n\16\3\16\3\16\5\16\u02e7\n\16\3\17\3"+
+		"\17\5\17\u02eb\n\17\3\20\3\20\7\20\u02ef\n\20\f\20\16\20\u02f2\13\20\3"+
+		"\20\3\20\6\20\u02f6\n\20\r\20\16\20\u02f7\3\20\7\20\u02fb\n\20\f\20\16"+
+		"\20\u02fe\13\20\3\21\3\21\3\21\7\21\u0303\n\21\f\21\16\21\u0306\13\21"+
+		"\3\21\5\21\u0309\n\21\3\22\3\22\7\22\u030d\n\22\f\22\16\22\u0310\13\22"+
+		"\3\22\6\22\u0313\n\22\r\22\16\22\u0314\3\22\7\22\u0318\n\22\f\22\16\22"+
+		"\u031b\13\22\3\22\3\22\3\23\3\23\3\23\7\23\u0322\n\23\f\23\16\23\u0325"+
+		"\13\23\3\23\3\23\3\24\3\24\7\24\u032b\n\24\f\24\16\24\u032e\13\24\3\24"+
+		"\3\24\7\24\u0332\n\24\f\24\16\24\u0335\13\24\3\24\3\24\7\24\u0339\n\24"+
+		"\f\24\16\24\u033c\13\24\3\24\5\24\u033f\n\24\3\24\7\24\u0342\n\24\f\24"+
+		"\16\24\u0345\13\24\3\24\5\24\u0348\n\24\3\25\3\25\7\25\u034c\n\25\f\25"+
+		"\16\25\u034f\13\25\3\25\3\25\5\25\u0353\n\25\3\26\3\26\7\26\u0357\n\26"+
+		"\f\26\16\26\u035a\13\26\3\26\3\26\5\26\u035e\n\26\3\27\3\27\3\27\3\27"+
+		"\5\27\u0364\n\27\3\30\3\30\3\30\3\30\5\30\u036a\n\30\3\31\3\31\5\31\u036e"+
+		"\n\31\3\32\3\32\5\32\u0372\n\32\3\33\3\33\3\33\5\33\u0377\n\33\3\34\3"+
+		"\34\5\34\u037b\n\34\3\34\3\34\3\35\3\35\6\35\u0381\n\35\r\35\16\35\u0382"+
+		"\3\36\3\36\3\36\3\36\6\36\u0389\n\36\r\36\16\36\u038a\3\37\3\37\3\37\3"+
+		"\37\3\37\3\37\3\37\3\37\6\37\u0395\n\37\r\37\16\37\u0396\3 \3 \5 \u039b"+
+		"\n \3!\3!\3\"\3\"\3#\3#\3#\2\2$\2\4\6\b\n\f\16\20\22\24\26\30\32\34\36"+
+		" \"$&(*,.\60\62\64\668:<>@BD\2w\3\2no\4\2%%\u013d\u013d\4\2\u0113\u0113"+
+		"\u0176\u0176\4\2\33\33\35\35\6\2,,aa\u0188\u0188\u018a\u018a\3\2\"#\4"+
+		"\2++\61\61\4\2--\u0188\u0188\4\2//\62\62\4\2\60\60\65\65\3\2\678\4\2:"+
+		":GG\4\2dd\u00cd\u00cd\4\2\u010d\u010d\u016f\u016f\4\2??\u0189\u0189\3"+
+		"\2@A\4\2\u0196\u0196\u0199\u0199\4\2BBKK\4\2CCHH\6\2,,\u0148\u0148\u0188"+
+		"\u0188\u0191\u0191\3\2LM\3\2OP\3\2_`\4\2bbff\4\2dd\u018b\u018b\5\2\u018a"+
+		"\u018a\u018d\u018d\u0191\u0193\3\2\u018c\u018e\b\2<<\u009b\u009b\u015e"+
+		"\u015e\u0189\u0189\u018f\u018f\u0191\u0191\4\2\u00f0\u00f0\u013c\u013c"+
+		"\4\2\30\30\u0081\u0081\4\2mmqq\4\2{{\u0164\u0164\3\2yz\7\2\66\66TTWWv"+
+		"x\u0171\u0171\4\2}}\u0083\u0083\4\2>>jj\3\2\u0090\u0091\6\2--\u00a4\u00a4"+
+		"\u00a8\u00a8\u0188\u0188\4\2\26\26\u009f\u009f\5\2\66\66TTxx\4\2\u00a4"+
+		"\u00a4\u00a8\u00a8\5\2\u018a\u018a\u0191\u0191\u0193\u0193\3\2\u00ae\u00af"+
+		"\4\2\u00b1\u00b1\u00bd\u00bd\4\2\u00b0\u00b0\u00b5\u00b5\3\2\u00b6\u00b7"+
+		"\3\2\u00bb\u00bc\4\2\u00b8\u00b8\u00be\u00be\3\2\u00c0\u00c1\3\2\u00c8"+
+		"\u00c9\4\2\u00cb\u00cb\u00d0\u00d0\4\2\u00ca\u00ca\u00cd\u00cd\3\2\u00d3"+
+		"\u00d4\3\2\u00de\u00df\3\2\u00e1\u00e2\3\2\u00e3\u00e4\3\2\u00e6\u00e7"+
+		"\3\2\u00e9\u00ea\4\2\u00f7\u00f7\u0105\u0105\3\2\u00f8\u00f9\4\2\u00f4"+
+		"\u00f4\u00fc\u00fc\3\2\u00ff\u0100\3\2\u0102\u0103\3\2\u0107\u0108\3\2"+
+		"\u0109\u010a\3\2\u0114\u0115\4\2\u011c\u011c\u011e\u011e\4\2;;\u0097\u0098"+
+		"\3\2\u0116\u0117\4\2\u0118\u0118\u011a\u011a\3\2\u011f\u0120\4\2\u009a"+
+		"\u009a\u0121\u0121\4\2\27\27\u00a0\u00a0\4\2\u00ed\u00ed\u0134\u0134\4"+
+		"\2  \u00a2\u00a2\4\2\22\22\u0095\u0095\5\2\u0092\u0092\u00ef\u00ef\u0138"+
+		"\u0138\3\2\u0123\u0124\3\2\u0126\u0127\4\2\u012e\u012e\u0130\u0130\4\2"+
+		"gg\u0162\u0162\3\2\u0132\u0133\4\2\u0135\u0135\u0137\u0137\3\2\u013a\u013b"+
+		"\n\2((,,\u0086\u0088\u008b\u008b\u0093\u0093\u0173\u0173\u018e\u018e\u0192"+
+		"\u0192\3\2\u013f\u0140\4\2\u0141\u0141\u0190\u0190\3\2\u014a\u014b\3\2"+
+		"\u014c\u014d\4\2\u014f\u014f\u0169\u0169\4\2\u0152\u0152\u0191\u0191\3"+
+		"\2\u0157\u0158\3\2\u015f\u0160\3\2\u0166\u0167\3\2\u016a\u016b\4\2ll\u00d2"+
+		"\u00d2\4\2\u00f5\u00f6\u0148\u0149\4\2SS\u00c3\u00c3\5\2  \u012e\u012e"+
+		"\u0162\u0162\6\2,,\u0161\u0161\u0188\u0188\u0191\u0191\3\2\u0177\u0178"+
+		"\6\2,,\u0165\u0165\u0188\u0188\u0191\u0191\3\2\u0179\u017a\4\2\u017b\u017b"+
+		"\u017e\u017e\6\2,,\u017c\u017c\u0188\u0188\u0194\u0194\4\2\u017f\u017f"+
+		"\u0194\u0194\4\2gg\u014e\u014e\3\2\u0180\u0181\4\2\u0182\u0182\u0185\u0185"+
+		"\4\2\u0183\u0183\u0186\u0186\17\2UVZ[||\u008c\u008c\u00c4\u00c4\u00c6"+
+		"\u00c6\u00d8\u00d8\u00e5\u00e5\u00fa\u00fa\u010e\u0111\u0129\u012a\u0150"+
+		"\u0151\u0172\u0172\3\2\u0148\u0149\4\2JJ\u00ba\u00ba\4\2pp\u0125\u0125"+
+		"\3\2\u015a\u015c\3\2\u019a\u019b \2\22&(-/WY\\^bdmpz|}\177\u0089\u008b"+
+		"\u0094\u0096\u00ef\u00f1\u00f7\u00f9\u00fa\u00fc\u010d\u010f\u0110\u0112"+
+		"\u0113\u0115\u0133\u0135\u0136\u0138\u013b\u013d\u0142\u0144\u0145\u0147"+
+		"\u014b\u014d\u0159\u015e\u0160\u0162\u0163\u0165\u0174\u0176\u0179\u017b"+
+		"\u017d\u017f\u0194\u0196\u0196\2\u04c6\2V\3\2\2\2\4[\3\2\2\2\6^\3\2\2"+
+		"\2\bh\3\2\2\2\n\u0297\3\2\2\2\f\u0299\3\2\2\2\16\u02ab\3\2\2\2\20\u02ad"+
+		"\3\2\2\2\22\u02af\3\2\2\2\24\u02b6\3\2\2\2\26\u02bd\3\2\2\2\30\u02c4\3"+
+		"\2\2\2\32\u02e2\3\2\2\2\34\u02ea\3\2\2\2\36\u02ec\3\2\2\2 \u02ff\3\2\2"+
+		"\2\"\u030a\3\2\2\2$\u031e\3\2\2\2&\u0328\3\2\2\2(\u0349\3\2\2\2*\u0354"+
+		"\3\2\2\2,\u0363\3\2\2\2.\u0369\3\2\2\2\60\u036b\3\2\2\2\62\u036f\3\2\2"+
+		"\2\64\u0373\3\2\2\2\66\u0378\3\2\2\28\u0380\3\2\2\2:\u0388\3\2\2\2<\u0394"+
+		"\3\2\2\2>\u039a\3\2\2\2@\u039c\3\2\2\2B\u039e\3\2\2\2D\u03a0\3\2\2\2F"+
+		"U\5\4\3\2GU\5\6\4\2HU\5\20\t\2IU\5\30\r\2JU\5\22\n\2KU\5\24\13\2LU\5\26"+
+		"\f\2MU\5$\23\2NU\5 \21\2OU\5\60\31\2PU\5\62\32\2QU\5\64\33\2RU\5<\37\2"+
+		"SU\7\u019f\2\2TF\3\2\2\2TG\3\2\2\2TH\3\2\2\2TI\3\2\2\2TJ\3\2\2\2TK\3\2"+
+		"\2\2TL\3\2\2\2TM\3\2\2\2TN\3\2\2\2TO\3\2\2\2TP\3\2\2\2TQ\3\2\2\2TR\3\2"+
+		"\2\2TS\3\2\2\2UX\3\2\2\2VT\3\2\2\2VW\3\2\2\2WY\3\2\2\2XV\3\2\2\2YZ\7\2"+
+		"\2\3Z\3\3\2\2\2[\\\t\2\2\2\\]\7D\2\2]\5\3\2\2\2^d\t\3\2\2_a\7\u0196\2"+
+		"\2`_\3\2\2\2`a\3\2\2\2ab\3\2\2\2be\5\n\6\2ce\5\b\5\2d`\3\2\2\2dc\3\2\2"+
+		"\2ef\3\2\2\2fd\3\2\2\2fg\3\2\2\2g\7\3\2\2\2hi\7\u017d\2\2ij\7\u008a\2"+
+		"\2jq\5\n\6\2km\7\u0196\2\2lk\3\2\2\2lm\3\2\2\2mn\3\2\2\2np\5\n\6\2ol\3"+
+		"\2\2\2ps\3\2\2\2qo\3\2\2\2qr\3\2\2\2rt\3\2\2\2sq\3\2\2\2tu\7\u0146\2\2"+
+		"u\t\3\2\2\2v\u0298\7\23\2\2w\u0298\7\24\2\2xy\7\25\2\2yz\7\u008a\2\2z"+
+		"{\t\4\2\2{\u0298\7\u0146\2\2|\u0298\7\32\2\2}~\7\34\2\2~\177\7\u008a\2"+
+		"\2\177\u0080\5@!\2\u0080\u0081\7\u0146\2\2\u0081\u0298\3\2\2\2\u0082\u0083"+
+		"\t\5\2\2\u0083\u0084\7\u008a\2\2\u0084\u0085\t\6\2\2\u0085\u0298\7\u0146"+
+		"\2\2\u0086\u0298\7\37\2\2\u0087\u0298\7!\2\2\u0088\u0089\t\7\2\2\u0089"+
+		"\u008a\7\u008a\2\2\u008a\u008b\5@!\2\u008b\u008c\7\u0146\2\2\u008c\u0298"+
+		"\3\2\2\2\u008d\u0298\7&\2\2\u008e\u0093\7\'\2\2\u008f\u0090\7\u008a\2"+
+		"\2\u0090\u0091\5@!\2\u0091\u0092\7\u0146\2\2\u0092\u0094\3\2\2\2\u0093"+
+		"\u008f\3\2\2\2\u0093\u0094\3\2\2\2\u0094\u0298\3\2\2\2\u0095\u0298\7)"+
+		"\2\2\u0096\u0298\7*\2\2\u0097\u0098\t\b\2\2\u0098\u0099\7\u008a\2\2\u0099"+
+		"\u009a\5@!\2\u009a\u009b\7\u0146\2\2\u009b\u0298\3\2\2\2\u009c\u0298\t"+
+		"\t\2\2\u009d\u009e\t\n\2\2\u009e\u009f\7\u008a\2\2\u009f\u00a6\5@!\2\u00a0"+
+		"\u00a1\7\u0196\2\2\u00a1\u00a2\7I\2\2\u00a2\u00a3\7\u008a\2\2\u00a3\u00a4"+
+		"\5@!\2\u00a4\u00a5\7\u0146\2\2\u00a5\u00a7\3\2\2\2\u00a6\u00a0\3\2\2\2"+
+		"\u00a6\u00a7\3\2\2\2\u00a7\u00ae\3\2\2\2\u00a8\u00a9\7\u0196\2\2\u00a9"+
+		"\u00aa\7\u0136\2\2\u00aa\u00ab\7\u008a\2\2\u00ab\u00ac\5@!\2\u00ac\u00ad"+
+		"\7\u0146\2\2\u00ad\u00af\3\2\2\2\u00ae\u00a8\3\2\2\2\u00ae\u00af\3\2\2"+
+		"\2\u00af\u00b0\3\2\2\2\u00b0\u00b1\7\u0146\2\2\u00b1\u0298\3\2\2\2\u00b2"+
+		"\u00b3\t\13\2\2\u00b3\u00b4\7\u008a\2\2\u00b4\u00b5\5@!\2\u00b5\u00b6"+
+		"\7\u0146\2\2\u00b6\u0298\3\2\2\2\u00b7\u0298\7\63\2\2\u00b8\u0298\7\64"+
+		"\2\2\u00b9\u00ba\t\f\2\2\u00ba\u00bb\7\u008a\2\2\u00bb\u00bc\5@!\2\u00bc"+
+		"\u00bd\7\u0146\2\2\u00bd\u0298\3\2\2\2\u00be\u00bf\79\2\2\u00bf\u00c0"+
+		"\7\u008a\2\2\u00c0\u00c1\5@!\2\u00c1\u00c2\7\u0146\2\2\u00c2\u0298\3\2"+
+		"\2\2\u00c3\u00cf\t\r\2\2\u00c4\u00c6\7\u008a\2\2\u00c5\u00c7\t\16\2\2"+
+		"\u00c6\u00c5\3\2\2\2\u00c6\u00c7\3\2\2\2\u00c7\u00c9\3\2\2\2\u00c8\u00ca"+
+		"\7\u0196\2\2\u00c9\u00c8\3\2\2\2\u00c9\u00ca\3\2\2\2\u00ca\u00cc\3\2\2"+
+		"\2\u00cb\u00cd\t\17\2\2\u00cc\u00cb\3\2\2\2\u00cc\u00cd\3\2\2\2\u00cd"+
+		"\u00ce\3\2\2\2\u00ce\u00d0\7\u0146\2\2\u00cf\u00c4\3\2\2\2\u00cf\u00d0"+
+		"\3\2\2\2\u00d0\u0298\3\2\2\2\u00d1\u0298\7;\2\2\u00d2\u0298\t\20\2\2\u00d3"+
+		"\u0298\7=\2\2\u00d4\u00d5\t\21\2\2\u00d5\u00d6\7\u008a\2\2\u00d6\u00d9"+
+		"\7\u019c\2\2\u00d7\u00d8\t\22\2\2\u00d8\u00da\5@!\2\u00d9\u00d7\3\2\2"+
+		"\2\u00d9\u00da\3\2\2\2\u00da\u00db\3\2\2\2\u00db\u0298\7\u0146\2\2\u00dc"+
+		"\u0298\t\23\2\2\u00dd\u00de\t\24\2\2\u00de\u00df\7\u008a\2\2\u00df\u00e0"+
+		"\t\25\2\2\u00e0\u0298\7\u0146\2\2\u00e1\u0298\7F\2\2\u00e2\u0298\t\26"+
+		"\2\2\u00e3\u0298\t\27\2\2\u00e4\u0298\7Q\2\2\u00e5\u0298\7Y\2\2\u00e6"+
+		"\u0298\7^\2\2\u00e7\u0298\t\30\2\2\u00e8\u0298\t\31\2\2\u00e9\u0298\7"+
+		"c\2\2\u00ea\u00eb\t\32\2\2\u00eb\u00ec\7\u008a\2\2\u00ec\u00ef\t\33\2"+
+		"\2\u00ed\u00ee\7\u0196\2\2\u00ee\u00f0\t\33\2\2\u00ef\u00ed\3\2\2\2\u00ef"+
+		"\u00f0\3\2\2\2\u00f0\u00f1\3\2\2\2\u00f1\u0298\7\u0146\2\2\u00f2\u00f3"+
+		"\7e\2\2\u00f3\u00f4\7\u008a\2\2\u00f4\u00f7\t\34\2\2\u00f5\u00f6\7\u0196"+
+		"\2\2\u00f6\u00f8\t\35\2\2\u00f7\u00f5\3\2\2\2\u00f7\u00f8\3\2\2\2\u00f8"+
+		"\u00fb\3\2\2\2\u00f9\u00fa\7\u0196\2\2\u00fa\u00fc\7\u01a5\2\2\u00fb\u00f9"+
+		"\3\2\2\2\u00fb\u00fc\3\2\2\2\u00fc\u00fd\3\2\2\2\u00fd\u0298\7\u0146\2"+
+		"\2\u00fe\u0298\7h\2\2\u00ff\u0298\7i\2\2\u0100\u0101\7k\2\2\u0101\u0102"+
+		"\7\u008a\2\2\u0102\u0103\t\36\2\2\u0103\u0298\7\u0146\2\2\u0104\u0105"+
+		"\7r\2\2\u0105\u0106\7\u008a\2\2\u0106\u0107\t\37\2\2\u0107\u0298\7\u0146"+
+		"\2\2\u0108\u010c\t \2\2\u0109\u010a\7\u008a\2\2\u010a\u010b\t!\2\2\u010b"+
+		"\u010d\7\u0146\2\2\u010c\u0109\3\2\2\2\u010c\u010d\3\2\2\2\u010d\u0298"+
+		"\3\2\2\2\u010e\u0298\7s\2\2\u010f\u0298\7t\2\2\u0110\u0298\7u\2\2\u0111"+
+		"\u0112\t\"\2\2\u0112\u0113\7\u008a\2\2\u0113\u0114\t#\2\2\u0114\u0298"+
+		"\7\u0146\2\2\u0115\u0298\7~\2\2\u0116\u0298\7\177\2\2\u0117\u0298\7\u0080"+
+		"\2\2\u0118\u0298\7\u0082\2\2\u0119\u011a\t$\2\2\u011a\u011b\7\u008a\2"+
+		"\2\u011b\u011c\5@!\2\u011c\u011d\7\u0146\2\2\u011d\u0298\3\2\2\2\u011e"+
+		"\u0298\7\u0084\2\2\u011f\u0298\7\u0085\2\2\u0120\u0121\7\u0089\2\2\u0121"+
+		"\u0122\7\u008a\2\2\u0122\u0123\5@!\2\u0123\u0124\7\u0146\2\2\u0124\u0298"+
+		"\3\2\2\2\u0125\u0129\7\u008d\2\2\u0126\u0127\7\u008a\2\2\u0127\u0128\t"+
+		"%\2\2\u0128\u012a\7\u0146\2\2\u0129\u0126\3\2\2\2\u0129\u012a\3\2\2\2"+
+		"\u012a\u0298\3\2\2\2\u012b\u012c\7\u008e\2\2\u012c\u012d\7\u008a\2\2\u012d"+
+		"\u012e\5@!\2\u012e\u012f\7\u0196\2\2\u012f\u0132\5@!\2\u0130\u0131\7\u0196"+
+		"\2\2\u0131\u0133\5@!\2\u0132\u0130\3\2\2\2\u0132\u0133\3\2\2\2\u0133\u0134"+
+		"\3\2\2\2\u0134\u0135\7\u0146\2\2\u0135\u0298\3\2\2\2\u0136\u0137\7\u0094"+
+		"\2\2\u0137\u0138\7\u008a\2\2\u0138\u0139\5@!\2\u0139\u013a\7\u0146\2\2"+
+		"\u013a\u0298\3\2\2\2\u013b\u013f\t&\2\2\u013c\u013d\7\u008a\2\2\u013d"+
+		"\u013e\t\'\2\2\u013e\u0140\7\u0146\2\2\u013f\u013c\3\2\2\2\u013f\u0140"+
+		"\3\2\2\2\u0140\u0298\3\2\2\2\u0141\u0145\7\u0096\2\2\u0142\u0143\7\u008a"+
+		"\2\2\u0143\u0144\t(\2\2\u0144\u0146\7\u0146\2\2\u0145\u0142\3\2\2\2\u0145"+
+		"\u0146\3\2\2\2\u0146\u0298\3\2\2\2\u0147\u0148\7\u0099\2\2\u0148\u0149"+
+		"\7\u008a\2\2\u0149\u014a\t)\2\2\u014a\u0298\7\u0146\2\2\u014b\u0298\7"+
+		"\u009d\2\2\u014c\u0298\7\u009e\2\2\u014d\u0298\7\u00a1\2\2\u014e\u0298"+
+		"\7\u00a3\2\2\u014f\u0298\7\u00a5\2\2\u0150\u0298\7\u00a6\2\2\u0151\u0298"+
+		"\7\u00a7\2\2\u0152\u0156\t*\2\2\u0153\u0154\7\u008a\2\2\u0154\u0155\t"+
+		"+\2\2\u0155\u0157\7\u0146\2\2\u0156\u0153\3\2\2\2\u0156\u0157\3\2\2\2"+
+		"\u0157\u0298\3\2\2\2\u0158\u0298\7\u00a9\2\2\u0159\u0298\7\u00ab\2\2\u015a"+
+		"\u0298\7\u00aa\2\2\u015b\u0298\7\u00ad\2\2\u015c\u0298\7\u00ac\2\2\u015d"+
+		"\u0298\t,\2\2\u015e\u0298\t-\2\2\u015f\u0298\7\u00b2\2\2\u0160\u0298\7"+
+		"\u00b4\2\2\u0161\u0298\t.\2\2\u0162\u0298\t/\2\2\u0163\u0298\7\u00b9\2"+
+		"\2\u0164\u0298\7\u00b3\2\2\u0165\u0298\t\60\2\2\u0166\u0298\t\61\2\2\u0167"+
+		"\u0298\t\62\2\2\u0168\u0298\7\u00c2\2\2\u0169\u0298\7\u00c5\2\2\u016a"+
+		"\u0298\7\u00c7\2\2\u016b\u0298\t\63\2\2\u016c\u0298\t\64\2\2\u016d\u0298"+
+		"\7\u00cc\2\2\u016e\u0298\t\65\2\2\u016f\u0298\7\u00ce\2\2\u0170\u0298"+
+		"\7\u00cf\2\2\u0171\u0298\7\u00d1\2\2\u0172\u0298\t\66\2\2\u0173\u0298"+
+		"\7\u00d5\2\2\u0174\u0298\7\u00d6\2\2\u0175\u0298\7\u00d7\2\2\u0176\u0298"+
+		"\7\u00d9\2\2\u0177\u0298\7\u00da\2\2\u0178\u0298\7\u00db\2\2\u0179\u0298"+
+		"\7\u00dc\2\2\u017a\u0298\7\u00dd\2\2\u017b\u0298\t\67\2\2\u017c\u0298"+
+		"\7\u00e0\2\2\u017d\u0298\t8\2\2\u017e\u0298\t9\2\2\u017f\u0298\t:\2\2"+
+		"\u0180\u0298\7\u00e8\2\2\u0181\u0298\t;\2\2\u0182\u0298\7\u00eb\2\2\u0183"+
+		"\u0298\7\u00ec\2\2\u0184\u0298\7\u00ee\2\2\u0185\u0298\7\u00f1\2\2\u0186"+
+		"\u0298\7\u00f2\2\2\u0187\u0298\7\u00f3\2\2\u0188\u0298\t<\2\2\u0189\u0298"+
+		"\t=\2\2\u018a\u0298\t>\2\2\u018b\u0298\7\u00fd\2\2\u018c\u0298\7\u00fe"+
+		"\2\2\u018d\u0298\7\u0101\2\2\u018e\u0298\t?\2\2\u018f\u0298\t@\2\2\u0190"+
+		"\u0298\7\u0104\2\2\u0191\u0298\7\u0106\2\2\u0192\u0298\tA\2\2\u0193\u0298"+
+		"\tB\2\2\u0194\u0298\7\u010b\2\2\u0195\u0298\7\u010c\2\2\u0196\u0298\7"+
+		"\u0112\2\2\u0197\u0298\tC\2\2\u0198\u0298\7\u011d\2\2\u0199\u019a\tD\2"+
+		"\2\u019a\u019b\7\u008a\2\2\u019b\u019c\tE\2\2\u019c\u0298\7\u0146\2\2"+
+		"\u019d\u0298\7\u0112\2\2\u019e\u0298\tF\2\2\u019f\u0298\tG\2\2\u01a0\u0298"+
+		"\7\u011b\2\2\u01a1\u0298\tH\2\2\u01a2\u01c0\tI\2\2\u01a3\u01ab\7\u008a"+
+		"\2\2\u01a4\u01a8\7\u0184\2\2\u01a5\u01a6\7\u008a\2\2\u01a6\u01a7\tJ\2"+
+		"\2\u01a7\u01a9\7\u0146\2\2\u01a8\u01a5\3\2\2\2\u01a8\u01a9\3\2\2\2\u01a9"+
+		"\u01ac\3\2\2\2\u01aa\u01ac\7\u0119\2\2\u01ab\u01a4\3\2\2\2\u01ab\u01aa"+
+		"\3\2\2\2\u01ac\u01b1\3\2\2\2\u01ad\u01af\7\u0196\2\2\u01ae\u01ad\3\2\2"+
+		"\2\u01ae\u01af\3\2\2\2\u01af\u01b0\3\2\2\2\u01b0\u01b2\tK\2\2\u01b1\u01ae"+
+		"\3\2\2\2\u01b1\u01b2\3\2\2\2\u01b2\u01b7\3\2\2\2\u01b3\u01b5\7\u0196\2"+
+		"\2\u01b4\u01b3\3\2\2\2\u01b4\u01b5\3\2\2\2\u01b5\u01b6\3\2\2\2\u01b6\u01b8"+
+		"\tL\2\2\u01b7\u01b4\3\2\2\2\u01b7\u01b8\3\2\2\2\u01b8\u01bd\3\2\2\2\u01b9"+
+		"\u01bb\7\u0196\2\2\u01ba\u01b9\3\2\2\2\u01ba\u01bb\3\2\2\2\u01bb\u01bc"+
+		"\3\2\2\2\u01bc\u01be\tM\2\2\u01bd\u01ba\3\2\2\2\u01bd\u01be\3\2\2\2\u01be"+
+		"\u01bf\3\2\2\2\u01bf\u01c1\7\u0146\2\2\u01c0\u01a3\3\2\2\2\u01c0\u01c1"+
+		"\3\2\2\2\u01c1\u0298\3\2\2\2\u01c2\u01c3\7\u0122\2\2\u01c3\u01c4\7\u008a"+
+		"\2\2\u01c4\u01c5\tN\2\2\u01c5\u0298\7\u0146\2\2\u01c6\u0298\tO\2\2\u01c7"+
+		"\u0298\tP\2\2\u01c8\u01c9\7\u012c\2\2\u01c9\u01ca\7\u008a\2\2\u01ca\u01cb"+
+		"\5@!\2\u01cb\u01cc\7\u0196\2\2\u01cc\u01cf\5@!\2\u01cd\u01ce\7\u0196\2"+
+		"\2\u01ce\u01d0\5@!\2\u01cf\u01cd\3\2\2\2\u01cf\u01d0\3\2\2\2\u01d0\u01d1"+
+		"\3\2\2\2\u01d1\u01d2\7\u0146\2\2\u01d2\u0298\3\2\2\2\u01d3\u01d4\7\u012d"+
+		"\2\2\u01d4\u01d5\7\u008a\2\2\u01d5\u01d6\5@!\2\u01d6\u01d7\7\u0196\2\2"+
+		"\u01d7\u01d8\5@!\2\u01d8\u01d9\7\u0146\2\2\u01d9\u0298\3\2\2\2\u01da\u01de"+
+		"\tQ\2\2\u01db\u01dc\7\u008a\2\2\u01dc\u01dd\tR\2\2\u01dd\u01df\7\u0146"+
+		"\2\2\u01de\u01db\3\2\2\2\u01de\u01df\3\2\2\2\u01df\u0298\3\2\2\2\u01e0"+
+		"\u0298\7\u012f\2\2\u01e1\u0298\7\u0131\2\2\u01e2\u0298\7\u012b\2\2\u01e3"+
+		"\u01e4\tS\2\2\u01e4\u01e5\7\u008a\2\2\u01e5\u01e6\5> \2\u01e6\u01e7\7"+
+		"\u0146\2\2\u01e7\u0298\3\2\2\2\u01e8\u01f4\tT\2\2\u01e9\u01eb\7\u008a"+
+		"\2\2\u01ea\u01ec\tM\2\2\u01eb\u01ea\3\2\2\2\u01eb\u01ec\3\2\2\2\u01ec"+
+		"\u01f1\3\2\2\2\u01ed\u01ef\7\u0196\2\2\u01ee\u01ed\3\2\2\2\u01ee\u01ef"+
+		"\3\2\2\2\u01ef\u01f0\3\2\2\2\u01f0\u01f2\5@!\2\u01f1\u01ee\3\2\2\2\u01f1"+
+		"\u01f2\3\2\2\2\u01f2\u01f3\3\2\2\2\u01f3\u01f5\7\u0146\2\2\u01f4\u01e9"+
+		"\3\2\2\2\u01f4\u01f5\3\2\2\2\u01f5\u0298\3\2\2\2\u01f6\u01f7\tU\2\2\u01f7"+
+		"\u01f8\7\u008a\2\2\u01f8\u01f9\tV\2\2\u01f9\u0298\7\u0146\2\2\u01fa\u0298"+
+		"\7\u013e\2\2\u01fb\u01fc\tW\2\2\u01fc\u01fd\7\u008a\2\2\u01fd\u01fe\t"+
+		"\6\2\2\u01fe\u0298\7\u0146\2\2\u01ff\u0298\tX\2\2\u0200\u0298\7\u0142"+
+		"\2\2\u0201\u0202\7\u0145\2\2\u0202\u0206\7\u008a\2\2\u0203\u0207\7\31"+
+		"\2\2\u0204\u0207\7\36\2\2\u0205\u0207\5@!\2\u0206\u0203\3\2\2\2\u0206"+
+		"\u0204\3\2\2\2\u0206\u0205\3\2\2\2\u0207\u0208\3\2\2\2\u0208\u0298\7\u0146"+
+		"\2\2\u0209\u0215\7\u0147\2\2\u020a\u020b\7\u008a\2\2\u020b\u0210\5\f\7"+
+		"\2\u020c\u020d\7\u0196\2\2\u020d\u020f\5\f\7\2\u020e\u020c\3\2\2\2\u020f"+
+		"\u0212\3\2\2\2\u0210\u020e\3\2\2\2\u0210\u0211\3\2\2\2\u0211\u0213\3\2"+
+		"\2\2\u0212\u0210\3\2\2\2\u0213\u0214\7\u0146\2\2\u0214\u0216\3\2\2\2\u0215"+
+		"\u020a\3\2\2\2\u0215\u0216\3\2\2\2\u0216\u0298\3\2\2\2\u0217\u021e\tY"+
+		"\2\2\u0218\u0219\7\u008a\2\2\u0219\u021a\5@!\2\u021a\u021b\7\u0196\2\2"+
+		"\u021b\u021c\5@!\2\u021c\u021d\7\u0146\2\2\u021d\u021f\3\2\2\2\u021e\u0218"+
+		"\3\2\2\2\u021e\u021f\3\2\2\2\u021f\u0298\3\2\2\2\u0220\u0221\tZ\2\2\u0221"+
+		"\u0222\7\u008a\2\2\u0222\u0223\5@!\2\u0223\u0224\7\u0146\2\2\u0224\u0298"+
+		"\3\2\2\2\u0225\u0226\t[\2\2\u0226\u0229\7\u008a\2\2\u0227\u022a\7\u008f"+
+		"\2\2\u0228\u022a\5@!\2\u0229\u0227\3\2\2\2\u0229\u0228\3\2\2\2\u022a\u022b"+
+		"\3\2\2\2\u022b\u0298\7\u0146\2\2\u022c\u0298\t\\\2\2\u022d\u0298\7\u0153"+
+		"\2\2\u022e\u022f\7\u0154\2\2\u022f\u0230\7\u008a\2\2\u0230\u0231\5@!\2"+
+		"\u0231\u0232\7\u0146\2\2\u0232\u0298\3\2\2\2\u0233\u0298\7\u0155\2\2\u0234"+
+		"\u0239\7\u0156\2\2\u0235\u0236\7\u008a\2\2\u0236\u0237\5@!\2\u0237\u0238"+
+		"\7\u0146\2\2\u0238\u023a\3\2\2\2\u0239\u0235\3\2\2\2\u0239\u023a\3\2\2"+
+		"\2\u023a\u0298\3\2\2\2\u023b\u0298\t]\2\2\u023c\u0241\7\u0159\2\2\u023d"+
+		"\u023e\7\u008a\2\2\u023e\u023f\5@!\2\u023f\u0240\7\u0146\2\2\u0240\u0242"+
+		"\3\2\2\2\u0241\u023d\3\2\2\2\u0241\u0242\3\2\2\2\u0242\u0298\3\2\2\2\u0243"+
+		"\u0298\t^\2\2\u0244\u0298\7\u0163\2\2\u0245\u0298\t_\2\2\u0246\u0298\7"+
+		"\u0168\2\2\u0247\u0298\t`\2\2\u0248\u025a\7\u016c\2\2\u0249\u024b\7\u008a"+
+		"\2\2\u024a\u024c\ta\2\2\u024b\u024a\3\2\2\2\u024b\u024c\3\2\2\2\u024c"+
+		"\u024e\3\2\2\2\u024d\u024f\7\u0196\2\2\u024e\u024d\3\2\2\2\u024e\u024f"+
+		"\3\2\2\2\u024f\u0251\3\2\2\2\u0250\u0252\tb\2\2\u0251\u0250\3\2\2\2\u0251"+
+		"\u0252\3\2\2\2\u0252\u0254\3\2\2\2\u0253\u0255\7\u0196\2\2\u0254\u0253"+
+		"\3\2\2\2\u0254\u0255\3\2\2\2\u0255\u0257\3\2\2\2\u0256\u0258\tc\2\2\u0257"+
+		"\u0256\3\2\2\2\u0257\u0258\3\2\2\2\u0258\u0259\3\2\2\2\u0259\u025b\7\u0146"+
+		"\2\2\u025a\u0249\3\2\2\2\u025a\u025b\3\2\2\2\u025b\u0298\3\2\2\2\u025c"+
+		"\u0268\7\u016c\2\2\u025d\u025e\7\u008a\2\2\u025e\u0263\5\16\b\2\u025f"+
+		"\u0260\7\u0196\2\2\u0260\u0262\5\16\b\2\u0261\u025f\3\2\2\2\u0262\u0265"+
+		"\3\2\2\2\u0263\u0261\3\2\2\2\u0263\u0264\3\2\2\2\u0264\u0266\3\2\2\2\u0265"+
+		"\u0263\3\2\2\2\u0266\u0267\7\u0146\2\2\u0267\u0269\3\2\2\2\u0268\u025d"+
+		"\3\2\2\2\u0268\u0269\3\2\2\2\u0269\u0298\3\2\2\2\u026a\u0298\7\u016d\2"+
+		"\2\u026b\u026c\7\u0170\2\2\u026c\u026d\7\u008a\2\2\u026d\u026e\td\2\2"+
+		"\u026e\u0298\7\u0146\2\2\u026f\u0298\7\u0174\2\2\u0270\u0271\7\u0175\2"+
+		"\2\u0271\u0272\7\u008a\2\2\u0272\u0273\te\2\2\u0273\u0298\7\u0146\2\2"+
+		"\u0274\u0275\tf\2\2\u0275\u0276\7\u008a\2\2\u0276\u0277\tg\2\2\u0277\u0298"+
+		"\7\u0146\2\2\u0278\u0279\th\2\2\u0279\u027a\7\u008a\2\2\u027a\u027b\5"+
+		"> \2\u027b\u027c\7\u0146\2\2\u027c\u0298\3\2\2\2\u027d\u027e\ti\2\2\u027e"+
+		"\u027f\7\u008a\2\2\u027f\u0280\tj\2\2\u0280\u0298\7\u0146\2\2\u0281\u0287"+
+		"\tk\2\2\u0282\u0284\7\u008a\2\2\u0283\u0285\tl\2\2\u0284\u0283\3\2\2\2"+
+		"\u0284\u0285\3\2\2\2\u0285\u0286\3\2\2\2\u0286\u0288\7\u0146\2\2\u0287"+
+		"\u0282\3\2\2\2\u0287\u0288\3\2\2\2\u0288\u0298\3\2\2\2\u0289\u028a\tm"+
+		"\2\2\u028a\u028b\7\u008a\2\2\u028b\u028c\5@!\2\u028c\u028d\7\u0146\2\2"+
+		"\u028d\u0298\3\2\2\2\u028e\u028f\tn\2\2\u028f\u0290\7\u008a\2\2\u0290"+
+		"\u0291\tM\2\2\u0291\u0298\7\u0146\2\2\u0292\u0293\to\2\2\u0293\u0294\7"+
+		"\u008a\2\2\u0294\u0295\tN\2\2\u0295\u0298\7\u0146\2\2\u0296\u0298\7\u0187"+
+		"\2\2\u0297v\3\2\2\2\u0297w\3\2\2\2\u0297x\3\2\2\2\u0297|\3\2\2\2\u0297"+
+		"}\3\2\2\2\u0297\u0082\3\2\2\2\u0297\u0086\3\2\2\2\u0297\u0087\3\2\2\2"+
+		"\u0297\u0088\3\2\2\2\u0297\u008d\3\2\2\2\u0297\u008e\3\2\2\2\u0297\u0095"+
+		"\3\2\2\2\u0297\u0096\3\2\2\2\u0297\u0097\3\2\2\2\u0297\u009c\3\2\2\2\u0297"+
+		"\u009d\3\2\2\2\u0297\u00b2\3\2\2\2\u0297\u00b7\3\2\2\2\u0297\u00b8\3\2"+
+		"\2\2\u0297\u00b9\3\2\2\2\u0297\u00be\3\2\2\2\u0297\u00c3\3\2\2\2\u0297"+
+		"\u00d1\3\2\2\2\u0297\u00d2\3\2\2\2\u0297\u00d3\3\2\2\2\u0297\u00d4\3\2"+
+		"\2\2\u0297\u00dc\3\2\2\2\u0297\u00dd\3\2\2\2\u0297\u00e1\3\2\2\2\u0297"+
+		"\u00e2\3\2\2\2\u0297\u00e3\3\2\2\2\u0297\u00e4\3\2\2\2\u0297\u00e5\3\2"+
+		"\2\2\u0297\u00e6\3\2\2\2\u0297\u00e7\3\2\2\2\u0297\u00e8\3\2\2\2\u0297"+
+		"\u00e9\3\2\2\2\u0297\u00ea\3\2\2\2\u0297\u00f2\3\2\2\2\u0297\u00fe\3\2"+
+		"\2\2\u0297\u00ff\3\2\2\2\u0297\u0100\3\2\2\2\u0297\u0104\3\2\2\2\u0297"+
+		"\u0108\3\2\2\2\u0297\u010e\3\2\2\2\u0297\u010f\3\2\2\2\u0297\u0110\3\2"+
+		"\2\2\u0297\u0111\3\2\2\2\u0297\u0115\3\2\2\2\u0297\u0116\3\2\2\2\u0297"+
+		"\u0117\3\2\2\2\u0297\u0118\3\2\2\2\u0297\u0119\3\2\2\2\u0297\u011e\3\2"+
+		"\2\2\u0297\u011f\3\2\2\2\u0297\u0120\3\2\2\2\u0297\u0125\3\2\2\2\u0297"+
+		"\u012b\3\2\2\2\u0297\u0136\3\2\2\2\u0297\u013b\3\2\2\2\u0297\u0141\3\2"+
+		"\2\2\u0297\u0147\3\2\2\2\u0297\u014b\3\2\2\2\u0297\u014c\3\2\2\2\u0297"+
+		"\u014d\3\2\2\2\u0297\u014e\3\2\2\2\u0297\u014f\3\2\2\2\u0297\u0150\3\2"+
+		"\2\2\u0297\u0151\3\2\2\2\u0297\u0152\3\2\2\2\u0297\u0158\3\2\2\2\u0297"+
+		"\u0159\3\2\2\2\u0297\u015a\3\2\2\2\u0297\u015b\3\2\2\2\u0297\u015c\3\2"+
+		"\2\2\u0297\u015d\3\2\2\2\u0297\u015e\3\2\2\2\u0297\u015f\3\2\2\2\u0297"+
+		"\u0160\3\2\2\2\u0297\u0161\3\2\2\2\u0297\u0162\3\2\2\2\u0297\u0163\3\2"+
+		"\2\2\u0297\u0164\3\2\2\2\u0297\u0165\3\2\2\2\u0297\u0166\3\2\2\2\u0297"+
+		"\u0167\3\2\2\2\u0297\u0168\3\2\2\2\u0297\u0169\3\2\2\2\u0297\u016a\3\2"+
+		"\2\2\u0297\u016b\3\2\2\2\u0297\u016c\3\2\2\2\u0297\u016d\3\2\2\2\u0297"+
+		"\u016e\3\2\2\2\u0297\u016f\3\2\2\2\u0297\u0170\3\2\2\2\u0297\u0171\3\2"+
+		"\2\2\u0297\u0172\3\2\2\2\u0297\u0173\3\2\2\2\u0297\u0174\3\2\2\2\u0297"+
+		"\u0175\3\2\2\2\u0297\u0176\3\2\2\2\u0297\u0177\3\2\2\2\u0297\u0178\3\2"+
+		"\2\2\u0297\u0179\3\2\2\2\u0297\u017a\3\2\2\2\u0297\u017b\3\2\2\2\u0297"+
+		"\u017c\3\2\2\2\u0297\u017d\3\2\2\2\u0297\u017e\3\2\2\2\u0297\u017f\3\2"+
+		"\2\2\u0297\u0180\3\2\2\2\u0297\u0181\3\2\2\2\u0297\u0182\3\2\2\2\u0297"+
+		"\u0183\3\2\2\2\u0297\u0184\3\2\2\2\u0297\u0185\3\2\2\2\u0297\u0186\3\2"+
+		"\2\2\u0297\u0187\3\2\2\2\u0297\u0188\3\2\2\2\u0297\u0189\3\2\2\2\u0297"+
+		"\u018a\3\2\2\2\u0297\u018b\3\2\2\2\u0297\u018c\3\2\2\2\u0297\u018d\3\2"+
+		"\2\2\u0297\u018e\3\2\2\2\u0297\u018f\3\2\2\2\u0297\u0190\3\2\2\2\u0297"+
+		"\u0191\3\2\2\2\u0297\u0192\3\2\2\2\u0297\u0193\3\2\2\2\u0297\u0194\3\2"+
+		"\2\2\u0297\u0195\3\2\2\2\u0297\u0196\3\2\2\2\u0297\u0197\3\2\2\2\u0297"+
+		"\u0198\3\2\2\2\u0297\u0199\3\2\2\2\u0297\u019d\3\2\2\2\u0297\u019e\3\2"+
+		"\2\2\u0297\u019f\3\2\2\2\u0297\u01a0\3\2\2\2\u0297\u01a1\3\2\2\2\u0297"+
+		"\u01a2\3\2\2\2\u0297\u01c2\3\2\2\2\u0297\u01c6\3\2\2\2\u0297\u01c7\3\2"+
+		"\2\2\u0297\u01c8\3\2\2\2\u0297\u01d3\3\2\2\2\u0297\u01da\3\2\2\2\u0297"+
+		"\u01e0\3\2\2\2\u0297\u01e1\3\2\2\2\u0297\u01e2\3\2\2\2\u0297\u01e3\3\2"+
+		"\2\2\u0297\u01e8\3\2\2\2\u0297\u01f6\3\2\2\2\u0297\u01fa\3\2\2\2\u0297"+
+		"\u01fb\3\2\2\2\u0297\u01ff\3\2\2\2\u0297\u0200\3\2\2\2\u0297\u0201\3\2"+
+		"\2\2\u0297\u0209\3\2\2\2\u0297\u0217\3\2\2\2\u0297\u0220\3\2\2\2\u0297"+
+		"\u0225\3\2\2\2\u0297\u022c\3\2\2\2\u0297\u022d\3\2\2\2\u0297\u022e\3\2"+
+		"\2\2\u0297\u0233\3\2\2\2\u0297\u0234\3\2\2\2\u0297\u023b\3\2\2\2\u0297"+
+		"\u023c\3\2\2\2\u0297\u0243\3\2\2\2\u0297\u0244\3\2\2\2\u0297\u0245\3\2"+
+		"\2\2\u0297\u0246\3\2\2\2\u0297\u0247\3\2\2\2\u0297\u0248\3\2\2\2\u0297"+
+		"\u025c\3\2\2\2\u0297\u026a\3\2\2\2\u0297\u026b\3\2\2\2\u0297\u026f\3\2"+
+		"\2\2\u0297\u0270\3\2\2\2\u0297\u0274\3\2\2\2\u0297\u0278\3\2\2\2\u0297"+
+		"\u027d\3\2\2\2\u0297\u0281\3\2\2\2\u0297\u0289\3\2\2\2\u0297\u028e\3\2"+
+		"\2\2\u0297\u0292\3\2\2\2\u0297\u0296\3\2\2\2\u0298\13\3\2\2\2\u0299\u029a"+
+		"\tp\2\2\u029a\r\3\2\2\2\u029b\u02ac\7N\2\2\u029c\u02ac\7\u00bf\2\2\u029d"+
+		"\u02a1\tq\2\2\u029e\u029f\7\u008a\2\2\u029f\u02a0\tr\2\2\u02a0\u02a2\7"+
+		"\u0146\2\2\u02a1\u029e\3\2\2\2\u02a1\u02a2\3\2\2\2\u02a2\u02ac\3\2\2\2"+
+		"\u02a3\u02ac\7\u00f5\2\2\u02a4\u02ac\7\u00f6\2\2\u02a5\u02ac\7\u015d\2"+
+		"\2\u02a6\u02ac\7\u0152\2\2\u02a7\u02ac\7\u00fb\2\2\u02a8\u02ac\7\u00fc"+
+		"\2\2\u02a9\u02ac\7S\2\2\u02aa\u02ac\7\u00c3\2\2\u02ab\u029b\3\2\2\2\u02ab"+
+		"\u029c\3\2\2\2\u02ab\u029d\3\2\2\2\u02ab\u02a3\3\2\2\2\u02ab\u02a4\3\2"+
+		"\2\2\u02ab\u02a5\3\2\2\2\u02ab\u02a6\3\2\2\2\u02ab\u02a7\3\2\2\2\u02ab"+
+		"\u02a8\3\2\2\2\u02ab\u02a9\3\2\2\2\u02ab\u02aa\3\2\2\2\u02ac\17\3\2\2"+
+		"\2\u02ad\u02ae\7\3\2\2\u02ae\21\3\2\2\2\u02af\u02b0\7]\2\2\u02b0\u02b1"+
+		"\7\'\2\2\u02b1\u02b2\58\35\2\u02b2\u02b4\7X\2\2\u02b3\u02b5\7\u0197\2"+
+		"\2\u02b4\u02b3\3\2\2\2\u02b4\u02b5\3\2\2\2\u02b5\23\3\2\2\2\u02b6\u02b7"+
+		"\7]\2\2\u02b7\u02b8\7\u0156\2\2\u02b8\u02b9\5:\36\2\u02b9\u02bb\7X\2\2"+
+		"\u02ba\u02bc\7\u0197\2\2\u02bb\u02ba\3\2\2\2\u02bb\u02bc\3\2\2\2\u02bc"+
+		"\25\3\2\2\2\u02bd\u02be\7]\2\2\u02be\u02bf\7\u0159\2\2\u02bf\u02c0\58"+
+		"\35\2\u02c0\u02c2\7X\2\2\u02c1\u02c3\7\u0197\2\2\u02c2\u02c1\3\2\2\2\u02c2"+
+		"\u02c3\3\2\2\2\u02c3\27\3\2\2\2\u02c4\u02c5\7.\2\2\u02c5\u02d4\5\32\16"+
+		"\2\u02c6\u02c8\7\u019f\2\2\u02c7\u02c6\3\2\2\2\u02c8\u02cb\3\2\2\2\u02c9"+
+		"\u02c7\3\2\2\2\u02c9\u02ca\3\2\2\2\u02ca\u02d0\3\2\2\2\u02cb\u02c9\3\2"+
+		"\2\2\u02cc\u02d1\5(\25\2\u02cd\u02d1\5*\26\2\u02ce\u02d1\5\36\20\2\u02cf"+
+		"\u02d1\7\u0167\2\2\u02d0\u02cc\3\2\2\2\u02d0\u02cd\3\2\2\2\u02d0\u02ce"+
+		"\3\2\2\2\u02d0\u02cf\3\2\2\2\u02d1\u02d3\3\2\2\2\u02d2\u02c9\3\2\2\2\u02d3"+
+		"\u02d6\3\2\2\2\u02d4\u02d2\3\2\2\2\u02d4\u02d5\3\2\2\2\u02d5\u02da\3\2"+
+		"\2\2\u02d6\u02d4\3\2\2\2\u02d7\u02d9\7\u019f\2\2\u02d8\u02d7\3\2\2\2\u02d9"+
+		"\u02dc\3\2\2\2\u02da\u02d8\3\2\2\2\u02da\u02db\3\2\2\2\u02db\u02dd\3\2"+
+		"\2\2\u02dc\u02da\3\2\2\2\u02dd\u02de\7\u0197\2\2\u02de\31\3\2\2\2\u02df"+
+		"\u02e3\5@!\2\u02e0\u02e3\5> \2\u02e1\u02e3\5B\"\2\u02e2\u02df\3\2\2\2"+
+		"\u02e2\u02e0\3\2\2\2\u02e2\u02e1\3\2\2\2\u02e3\u02e6\3\2\2\2\u02e4\u02e5"+
+		"\ts\2\2\u02e5\u02e7\5\34\17\2\u02e6\u02e4\3\2\2\2\u02e6\u02e7\3\2\2\2"+
+		"\u02e7\33\3\2\2\2\u02e8\u02eb\5@!\2\u02e9\u02eb\5> \2\u02ea\u02e8\3\2"+
+		"\2\2\u02ea\u02e9\3\2\2\2\u02eb\35\3\2\2\2\u02ec\u02f0\7\u0144\2\2\u02ed"+
+		"\u02ef\7\u019f\2\2\u02ee\u02ed\3\2\2\2\u02ef\u02f2\3\2\2\2\u02f0\u02ee"+
+		"\3\2\2\2\u02f0\u02f1\3\2\2\2\u02f1\u02f3\3\2\2\2\u02f2\u02f0\3\2\2\2\u02f3"+
+		"\u02fc\5&\24\2\u02f4\u02f6\7\u019f\2\2\u02f5\u02f4\3\2\2\2\u02f6\u02f7"+
+		"\3\2\2\2\u02f7\u02f5\3\2\2\2\u02f7\u02f8\3\2\2\2\u02f8\u02f9\3\2\2\2\u02f9"+
+		"\u02fb\5&\24\2\u02fa\u02f5\3\2\2\2\u02fb\u02fe\3\2\2\2\u02fc\u02fa\3\2"+
+		"\2\2\u02fc\u02fd\3\2\2\2\u02fd\37\3\2\2\2\u02fe\u02fc\3\2\2\2\u02ff\u0304"+
+		"\5\"\22\2\u0300\u0303\5\30\r\2\u0301\u0303\58\35\2\u0302\u0300\3\2\2\2"+
+		"\u0302\u0301\3\2\2\2\u0303\u0306\3\2\2\2\u0304\u0302\3\2\2\2\u0304\u0305"+
+		"\3\2\2\2\u0305\u0308\3\2\2\2\u0306\u0304\3\2\2\2\u0307\u0309\5$\23\2\u0308"+
+		"\u0307\3\2\2\2\u0308\u0309\3\2\2\2\u0309!\3\2\2\2\u030a\u0312\7\u0143"+
+		"\2\2\u030b\u030d\7\u019f\2\2\u030c\u030b\3\2\2\2\u030d\u0310\3\2\2\2\u030e"+
+		"\u030c\3\2\2\2\u030e\u030f\3\2\2\2\u030f\u0311\3\2\2\2\u0310\u030e\3\2"+
+		"\2\2\u0311\u0313\5&\24\2\u0312\u030e\3\2\2\2\u0313\u0314\3\2\2\2\u0314"+
+		"\u0312\3\2\2\2\u0314\u0315\3\2\2\2\u0315\u0319\3\2\2\2\u0316\u0318\7\u019f"+
+		"\2\2\u0317\u0316\3\2\2\2\u0318\u031b\3\2\2\2\u0319\u0317\3\2\2\2\u0319"+
+		"\u031a\3\2\2\2\u031a\u031c\3\2\2\2\u031b\u0319\3\2\2\2\u031c\u031d\7\u0197"+
+		"\2\2\u031d#\3\2\2\2\u031e\u031f\7\u0143\2\2\u031f\u0323\7\u0126\2\2\u0320"+
+		"\u0322\7\u019f\2\2\u0321\u0320\3\2\2\2\u0322\u0325\3\2\2\2\u0323\u0321"+
+		"\3\2\2\2\u0323\u0324\3\2\2\2\u0324\u0326\3\2\2\2\u0325\u0323\3\2\2\2\u0326"+
+		"\u0327\7\u0197\2\2\u0327%\3\2\2\2\u0328\u032c\5,\27\2\u0329\u032b\7\u019f"+
+		"\2\2\u032a\u0329\3\2\2\2\u032b\u032e\3\2\2\2\u032c\u032a\3\2\2\2\u032c"+
+		"\u032d\3\2\2\2\u032d\u032f\3\2\2\2\u032e\u032c\3\2\2\2\u032f\u0333\7$"+
+		"\2\2\u0330\u0332\7\u019f\2\2\u0331\u0330\3\2\2\2\u0332\u0335\3\2\2\2\u0333"+
+		"\u0331\3\2\2\2\u0333\u0334\3\2\2\2\u0334\u0336\3\2\2\2\u0335\u0333\3\2"+
+		"\2\2\u0336\u033e\5.\30\2\u0337\u0339\7\u019f\2\2\u0338\u0337\3\2\2\2\u0339"+
+		"\u033c\3\2\2\2\u033a\u0338\3\2\2\2\u033a\u033b\3\2\2\2\u033b\u033d\3\2"+
+		"\2\2\u033c\u033a\3\2\2\2\u033d\u033f\5(\25\2\u033e\u033a\3\2\2\2\u033e"+
+		"\u033f\3\2\2\2\u033f\u0347\3\2\2\2\u0340\u0342\7\u019f\2\2\u0341\u0340"+
+		"\3\2\2\2\u0342\u0345\3\2\2\2\u0343\u0341\3\2\2\2\u0343\u0344\3\2\2\2\u0344"+
+		"\u0346\3\2\2\2\u0345\u0343\3\2\2\2\u0346\u0348\5*\26\2\u0347\u0343\3\2"+
+		"\2\2\u0347\u0348\3\2\2\2\u0348\'\3\2\2\2\u0349\u034d\ts\2\2\u034a\u034c"+
+		"\7\u019f\2\2\u034b\u034a\3\2\2\2\u034c\u034f\3\2\2\2\u034d\u034b\3\2\2"+
+		"\2\u034d\u034e\3\2\2\2\u034e\u0352\3\2\2\2\u034f\u034d\3\2\2\2\u0350\u0353"+
+		"\5@!\2\u0351\u0353\5> \2\u0352\u0350\3\2\2\2\u0352\u0351\3\2\2\2\u0353"+
+		")\3\2\2\2\u0354\u0358\7\u0128\2\2\u0355\u0357\7\u019f\2\2\u0356\u0355"+
+		"\3\2\2\2\u0357\u035a\3\2\2\2\u0358\u0356\3\2\2\2\u0358\u0359\3\2\2\2\u0359"+
+		"\u035d\3\2\2\2\u035a\u0358\3\2\2\2\u035b\u035e\5@!\2\u035c\u035e\5> \2"+
+		"\u035d\u035b\3\2\2\2\u035d\u035c\3\2\2\2\u035e+\3\2\2\2\u035f\u0364\5"+
+		"@!\2\u0360\u0364\5> \2\u0361\u0364\5\66\34\2\u0362\u0364\5<\37\2\u0363"+
+		"\u035f\3\2\2\2\u0363\u0360\3\2\2\2\u0363\u0361\3\2\2\2\u0363\u0362\3\2"+
+		"\2\2\u0364-\3\2\2\2\u0365\u036a\5@!\2\u0366\u036a\5> \2\u0367\u036a\5"+
+		"\66\34\2\u0368\u036a\5<\37\2\u0369\u0365\3\2\2\2\u0369\u0366\3\2\2\2\u0369"+
+		"\u0367\3\2\2\2\u0369\u0368\3\2\2\2\u036a/\3\2\2\2\u036b\u036d\7R\2\2\u036c"+
+		"\u036e\7\u0197\2\2\u036d\u036c\3\2\2\2\u036d\u036e\3\2\2\2\u036e\61\3"+
+		"\2\2\2\u036f\u0371\tt\2\2\u0370\u0372\7\u0197\2\2\u0371\u0370\3\2\2\2"+
+		"\u0371\u0372\3\2\2\2\u0372\63\3\2\2\2\u0373\u0374\7\u016e\2\2\u0374\u0376"+
+		"\5@!\2\u0375\u0377\7\u0197\2\2\u0376\u0375\3\2\2\2\u0376\u0377\3\2\2\2"+
+		"\u0377\65\3\2\2\2\u0378\u037a\7\u0198\2\2\u0379\u037b\58\35\2\u037a\u0379"+
+		"\3\2\2\2\u037a\u037b\3\2\2\2\u037b\u037c\3\2\2\2\u037c\u037d\7\u0198\2"+
+		"\2\u037d\67\3\2\2\2\u037e\u0381\5<\37\2\u037f\u0381\7\u019f\2\2\u0380"+
+		"\u037e\3\2\2\2\u0380\u037f\3\2\2\2\u0381\u0382\3\2\2\2\u0382\u0380\3\2"+
+		"\2\2\u0382\u0383\3\2\2\2\u03839\3\2\2\2\u0384\u0389\5<\37\2\u0385\u0389"+
+		"\7.\2\2\u0386\u0389\7\u0143\2\2\u0387\u0389\7\u019f\2\2\u0388\u0384\3"+
+		"\2\2\2\u0388\u0385\3\2\2\2\u0388\u0386\3\2\2\2\u0388\u0387\3\2\2\2\u0389"+
+		"\u038a\3\2\2\2\u038a\u0388\3\2\2\2\u038a\u038b\3\2\2\2\u038b;\3\2\2\2"+
+		"\u038c\u0395\5> \2\u038d\u0395\5@!\2\u038e\u0395\5B\"\2\u038f\u0395\7"+
+		"\u019e\2\2\u0390\u0395\7\u01a3\2\2\u0391\u0395\7\u0197\2\2\u0392\u0395"+
+		"\7\u008a\2\2\u0393\u0395\7\u0146\2\2\u0394\u038c\3\2\2\2\u0394\u038d\3"+
+		"\2\2\2\u0394\u038e\3\2\2\2\u0394\u038f\3\2\2\2\u0394\u0390\3\2\2\2\u0394"+
+		"\u0391\3\2\2\2\u0394\u0392\3\2\2\2\u0394\u0393\3\2\2\2\u0395\u0396\3\2"+
+		"\2\2\u0396\u0394\3\2\2\2\u0396\u0397\3\2\2\2\u0397=\3\2\2\2\u0398\u039b"+
+		"\7\u019c\2\2\u0399\u039b\5D#\2\u039a\u0398\3\2\2\2\u039a\u0399\3\2\2\2"+
+		"\u039b?\3\2\2\2\u039c\u039d\tu\2\2\u039dA\3\2\2\2\u039e\u039f\7\u019d"+
+		"\2\2\u039fC\3\2\2\2\u03a0\u03a1\tv\2\2\u03a1E\3\2\2\2hTV`dflq\u0093\u00a6"+
+		"\u00ae\u00c6\u00c9\u00cc\u00cf\u00d9\u00ef\u00f7\u00fb\u010c\u0129\u0132"+
+		"\u013f\u0145\u0156\u01a8\u01ab\u01ae\u01b1\u01b4\u01b7\u01ba\u01bd\u01c0"+
+		"\u01cf\u01de\u01eb\u01ee\u01f1\u01f4\u0206\u0210\u0215\u021e\u0229\u0239"+
+		"\u0241\u024b\u024e\u0251\u0254\u0257\u025a\u0263\u0268\u0284\u0287\u0297"+
+		"\u02a1\u02ab\u02b4\u02bb\u02c2\u02c9\u02d0\u02d4\u02da\u02e2\u02e6\u02ea"+
+		"\u02f0\u02f7\u02fc\u0302\u0304\u0308\u030e\u0314\u0319\u0323\u032c\u0333"+
+		"\u033a\u033e\u0343\u0347\u034d\u0352\u0358\u035d\u0363\u0369\u036d\u0371"+
+		"\u0376\u037a\u0380\u0382\u0388\u038a\u0394\u0396\u039a";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {
