@@ -75,6 +75,18 @@ public class CobolPreprocessorBaseListener implements CobolPreprocessorListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNumcheck_opts(CobolPreprocessorParser.Numcheck_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNumcheck_opts(CobolPreprocessorParser.Numcheck_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRules_opts(CobolPreprocessorParser.Rules_optsContext ctx) { }
 	/**
 	 * {@inheritDoc}

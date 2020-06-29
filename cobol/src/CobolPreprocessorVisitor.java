@@ -40,6 +40,12 @@ public interface CobolPreprocessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCompilerOption(CobolPreprocessorParser.CompilerOptionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolPreprocessorParser#numcheck_opts}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumcheck_opts(CobolPreprocessorParser.Numcheck_optsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolPreprocessorParser#rules_opts}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

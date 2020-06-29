@@ -51,6 +51,13 @@ public class CobolPreprocessorBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitNumcheck_opts(CobolPreprocessorParser.Numcheck_optsContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitRules_opts(CobolPreprocessorParser.Rules_optsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
