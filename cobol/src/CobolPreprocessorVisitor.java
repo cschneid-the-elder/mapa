@@ -52,6 +52,12 @@ public interface CobolPreprocessorVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRules_opts(CobolPreprocessorParser.Rules_optsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolPreprocessorParser#ssrange_opts}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSsrange_opts(CobolPreprocessorParser.Ssrange_optsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolPreprocessorParser#test_opts}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

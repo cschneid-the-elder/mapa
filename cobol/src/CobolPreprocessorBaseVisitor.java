@@ -65,6 +65,13 @@ public class CobolPreprocessorBaseVisitor<T> extends AbstractParseTreeVisitor<T>
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitSsrange_opts(CobolPreprocessorParser.Ssrange_optsContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitTest_opts(CobolPreprocessorParser.Test_optsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

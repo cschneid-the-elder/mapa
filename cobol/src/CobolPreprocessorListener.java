@@ -77,6 +77,16 @@ public interface CobolPreprocessorListener extends ParseTreeListener {
 	 */
 	void exitRules_opts(CobolPreprocessorParser.Rules_optsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolPreprocessorParser#ssrange_opts}.
+	 * @param ctx the parse tree
+	 */
+	void enterSsrange_opts(CobolPreprocessorParser.Ssrange_optsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolPreprocessorParser#ssrange_opts}.
+	 * @param ctx the parse tree
+	 */
+	void exitSsrange_opts(CobolPreprocessorParser.Ssrange_optsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolPreprocessorParser#test_opts}.
 	 * @param ctx the parse tree
 	 */
