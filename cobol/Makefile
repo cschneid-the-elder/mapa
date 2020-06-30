@@ -21,29 +21,27 @@ all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessor.to
 .PHONY: all clean cleanmine mine jar testLocal testNist
 
 clean:
-	echo `date` clean >> build.log
-	cd ./class
-	rm -f CobolLexer*.java CobolLexer*.class CobolLexer*.tokens CobolLexer*.interp CobolParser*.java CobolParser*.class CobolParser.tokens CobolParser.interp CobolPreprocessor*.java CobolPreprocessor*.class CobolPreprocessor.tokens CobolPreprocessor.interp
-	cd ..
+	echo `date` $@ >> build.log
+	rm -f ./class/CobolLexer*.java ./class/CobolLexer*.class ./class/CobolLexer*.tokens ./class/CobolLexer*.interp ./class/CobolParser*.java ./class/CobolParser*.class ./class/CobolParser.tokens ./class/CobolParser.interp ./class/CobolPreprocessor*.java ./class/CobolPreprocessor*.class ./class/CobolPreprocessor.tokens ./class/CobolPreprocessor.interp
 
 cleanmine:
-	echo `date` cleanmine >> build.log
-	cd ./class
-	rm -f CallEtAlListener.class DataDescriptionEntryListener.class SetListener.class DDNode.class CallWrapper.class CopyListener.class ReplaceListener.class TheCLI.class TestIntegration.class CallType.class IdDivListener.class CopyStatementContextWrapper.class ReplaceStatementContextWrapper.class
-	cd ..
+	echo `date` $@ >> build.log
+	rm -f ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class
 
 mine:
-	echo `date` mine >> build.log
+	echo `date` $@ >> build.log
 	$(JC) $(JCOPT) ./src/CallEtAlListener.java ./src/DataDescriptionEntryListener.java ./src/SetListener.java ./src/DDNode.java ./src/CallWrapper.java ./src/CopyListener.java ./src/ReplaceListener.java ./src/TheCLI.java ./src/TestIntegration.java ./src/CallType.java ./src/IdDivListener.java ./src/CopyStatementContextWrapper.java ./src/ReplaceStatementContextWrapper.java
 
 jar:
-	echo `date` jar >> build.log
+	echo `date` $@ >> build.log
 	jar cfm CallTree.jar manifest -C class .
 
 testLocal:
+	echo `date` $@ >> build.log
 	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
 
 testNist:
+	echo `date` $@ >> build.log
 	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 
 testrigpp:
