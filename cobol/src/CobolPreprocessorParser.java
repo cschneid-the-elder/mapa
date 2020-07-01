@@ -81,9 +81,9 @@ public class CobolPreprocessorParser extends Parser {
 		ZWB=396, C_CHAR=397, D_CHAR=398, E_CHAR=399, F_CHAR=400, H_CHAR=401, I_CHAR=402, 
 		M_CHAR=403, N_CHAR=404, O_CHAR=405, Q_CHAR=406, S_CHAR=407, U_CHAR=408, 
 		W_CHAR=409, X_CHAR=410, COMMENTTAG=411, COMMACHAR=412, DOT=413, DOUBLEEQUALCHAR=414, 
-		EQUALCHAR=415, NONNUMERICLITERAL=416, NUMERICLITERAL=417, IDENTIFIER=418, 
-		FILENAME=419, PSEUDOTEXTIDENTIFIER=420, NEWLINE=421, MULTINEWLINE=422, 
-		COMMENTLINE=423, WS=424, TEXT=425, BOL=426;
+		NONNUMERICLITERAL=415, NUMERICLITERAL=416, IDENTIFIER=417, FILENAME=418, 
+		PSEUDOTEXTIDENTIFIER=419, NEWLINE=420, MULTINEWLINE=421, COMMENTLINE=422, 
+		WS=423, TEXT=424, BOL=425;
 	public static final int
 		RULE_startRule = 0, RULE_identificationDivisionTag = 1, RULE_compilerOptions = 2, 
 		RULE_compilerXOpts = 3, RULE_compilerOption = 4, RULE_numcheck_opts = 5, 
@@ -146,7 +146,7 @@ public class CobolPreprocessorParser extends Parser {
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
 			null, null, null, null, null, null, null, null, null, null, null, null, 
-			null, null, null, "'*>'", "','", "'.'", "'=='", "'='"
+			null, null, null, "'*>'", "','", "'.'", "'=='"
 		};
 	}
 	private static final String[] _LITERAL_NAMES = makeLiteralNames();
@@ -209,9 +209,9 @@ public class CobolPreprocessorParser extends Parser {
 			"ZC", "ZD", "ZLEN", "ZON", "ZONECHECK", "ZONEDATA", "ZWB", "C_CHAR", 
 			"D_CHAR", "E_CHAR", "F_CHAR", "H_CHAR", "I_CHAR", "M_CHAR", "N_CHAR", 
 			"O_CHAR", "Q_CHAR", "S_CHAR", "U_CHAR", "W_CHAR", "X_CHAR", "COMMENTTAG", 
-			"COMMACHAR", "DOT", "DOUBLEEQUALCHAR", "EQUALCHAR", "NONNUMERICLITERAL", 
-			"NUMERICLITERAL", "IDENTIFIER", "FILENAME", "PSEUDOTEXTIDENTIFIER", "NEWLINE", 
-			"MULTINEWLINE", "COMMENTLINE", "WS", "TEXT", "BOL"
+			"COMMACHAR", "DOT", "DOUBLEEQUALCHAR", "NONNUMERICLITERAL", "NUMERICLITERAL", 
+			"IDENTIFIER", "FILENAME", "PSEUDOTEXTIDENTIFIER", "NEWLINE", "MULTINEWLINE", 
+			"COMMENTLINE", "WS", "TEXT", "BOL"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -1079,7 +1079,6 @@ public class CobolPreprocessorParser extends Parser {
 		public TerminalNode DEBUG() { return getToken(CobolPreprocessorParser.DEBUG, 0); }
 		public TerminalNode DEFINE() { return getToken(CobolPreprocessorParser.DEFINE, 0); }
 		public TerminalNode DEF() { return getToken(CobolPreprocessorParser.DEF, 0); }
-		public TerminalNode EQUALCHAR() { return getToken(CobolPreprocessorParser.EQUALCHAR, 0); }
 		public TerminalNode DIAGTRUNC() { return getToken(CobolPreprocessorParser.DIAGTRUNC, 0); }
 		public TerminalNode DTR() { return getToken(CobolPreprocessorParser.DTR, 0); }
 		public TerminalNode DISPSIGN() { return getToken(CobolPreprocessorParser.DISPSIGN, 0); }
@@ -1923,11 +1922,11 @@ public class CobolPreprocessorParser extends Parser {
 				setState(223);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
-				if (_la==COMMACHAR || _la==EQUALCHAR) {
+				if (_la==COMMACHAR || _la==TEXT) {
 					{
 					setState(221);
 					_la = _input.LA(1);
-					if ( !(_la==COMMACHAR || _la==EQUALCHAR) ) {
+					if ( !(_la==COMMACHAR || _la==TEXT) ) {
 					_errHandler.recoverInline(this);
 					}
 					else {
@@ -11047,7 +11046,7 @@ public class CobolPreprocessorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u01ac\u03bc\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u01ab\u03bc\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -11120,8 +11119,8 @@ public class CobolPreprocessorParser extends Parser {
 		"@BDFH\2x\3\2no\4\2%%\u0143\u0143\4\2\u0118\u0118\u017c\u017c\4\2\33\33"+
 		"\35\35\6\2,,aa\u018f\u018f\u0191\u0191\3\2\"#\4\2++\61\61\4\2--\u018f"+
 		"\u018f\4\2//\62\62\4\2\60\60\65\65\3\2\678\4\2::GG\4\2dd\u00cf\u00cf\4"+
-		"\2\u0112\u0112\u0175\u0175\4\2??\u0190\u0190\3\2@A\4\2\u019e\u019e\u01a1"+
-		"\u01a1\4\2BBKK\4\2CCHH\6\2,,\u014e\u014e\u018f\u018f\u0199\u0199\3\2L"+
+		"\2\u0112\u0112\u0175\u0175\4\2??\u0190\u0190\3\2@A\4\2\u019e\u019e\u01aa"+
+		"\u01aa\4\2BBKK\4\2CCHH\6\2,,\u014e\u014e\u018f\u018f\u0199\u0199\3\2L"+
 		"M\3\2OP\3\2_`\4\2bbff\4\2dd\u0192\u0192\5\2\u0191\u0191\u0194\u0194\u0199"+
 		"\u019b\3\2\u0193\u0195\b\2<<\u009b\u009b\u0164\u0164\u0190\u0190\u0196"+
 		"\u0196\u0199\u0199\4\2\u00f4\u00f4\u0142\u0142\4\2\30\30\u0081\u0081\4"+
@@ -11138,7 +11137,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\u010e\u010f\3\2\u0119\u011a\4\2\u0122\u0122\u0124\u0124\4\2;;\u0097\u0098"+
 		"\3\2\u011b\u011c\4\2\u011d\u011d\u0120\u0120\3\2\u0125\u0126\4\2\u009a"+
 		"\u009a\u0127\u0127\5\2\u0092\u0092\u00f3\u00f3\u013e\u013e\3\2\u0129\u012a"+
-		"\3\2\u012c\u012d\4\2\u0134\u0134\u0136\u0136\5\2gg\u0168\u0168\u01a3\u01a3"+
+		"\3\2\u012c\u012d\4\2\u0134\u0134\u0136\u0136\5\2gg\u0168\u0168\u01a2\u01a2"+
 		"\3\2\u0138\u0139\4\2\u013b\u013b\u013d\u013d\4\2\22\22\u0095\u0095\3\2"+
 		"\u0140\u0141\n\2((,,\u0086\u0088\u008b\u008b\u0093\u0093\u0179\u0179\u0195"+
 		"\u0195\u019a\u019a\3\2\u0145\u0146\4\2\u0147\u0147\u0198\u0198\3\2\u0150"+
@@ -11154,7 +11153,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\u00df\u00df\u00e8\u00e8\u00eb\u00eb\u00fe\u00ff\u0113\u0116\u012f\u0130"+
 		"\u0156\u0157\u0178\u0178\6\2\22\22\u0095\u0095\u011e\u011e\u018a\u018a"+
 		"\3\2\u014e\u014f\4\2JJ\u00ba\u00ba\4\2pp\u012b\u012b\3\2\u0160\u0162\3"+
-		"\2\u01a2\u01a3,\2\22-/IKMORTWY\\^bdmpz|}\177\u0089\u008b\u0094\u0096\u00b9"+
+		"\2\u01a1\u01a2,\2\22-/IKMORTWY\\^bdmpz|}\177\u0089\u008b\u0094\u0096\u00b9"+
 		"\u00bb\u00be\u00c0\u00c2\u00c5\u00c6\u00c8\u00de\u00e0\u00ea\u00ec\u00f3"+
 		"\u00f5\u00fb\u00fd\u00fe\u0102\u0112\u0114\u0115\u0117\u0118\u011a\u011d"+
 		"\u011f\u0139\u013b\u013c\u013e\u0141\u0143\u0148\u014a\u014b\u014d\u0151"+
@@ -11169,7 +11168,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\3\2\2\2:\u0391\3\2\2\2<\u0399\3\2\2\2>\u03a1\3\2\2\2@\u03ad\3\2\2\2B"+
 		"\u03b3\3\2\2\2D\u03b5\3\2\2\2F\u03b7\3\2\2\2H\u03b9\3\2\2\2JY\5\4\3\2"+
 		"KY\5\6\4\2LY\5\24\13\2MY\5\34\17\2NY\5\26\f\2OY\5\30\r\2PY\5\32\16\2Q"+
-		"Y\5(\25\2RY\5$\23\2SY\5\64\33\2TY\5\66\34\2UY\58\35\2VY\5@!\2WY\7\u01a7"+
+		"Y\5(\25\2RY\5$\23\2SY\5\64\33\2TY\5\66\34\2UY\58\35\2VY\5@!\2WY\7\u01a6"+
 		"\2\2XJ\3\2\2\2XK\3\2\2\2XL\3\2\2\2XM\3\2\2\2XN\3\2\2\2XO\3\2\2\2XP\3\2"+
 		"\2\2XQ\3\2\2\2XR\3\2\2\2XS\3\2\2\2XT\3\2\2\2XU\3\2\2\2XV\3\2\2\2XW\3\2"+
 		"\2\2Y\\\3\2\2\2ZX\3\2\2\2Z[\3\2\2\2[]\3\2\2\2\\Z\3\2\2\2]^\7\2\2\3^\3"+
@@ -11190,10 +11189,10 @@ public class CobolPreprocessorParser extends Parser {
 		"\2\2\u0099\u02a1\7)\2\2\u009a\u02a1\7*\2\2\u009b\u009c\t\b\2\2\u009c\u009d"+
 		"\7\u008a\2\2\u009d\u009e\5D#\2\u009e\u009f\7\u014c\2\2\u009f\u02a1\3\2"+
 		"\2\2\u00a0\u02a1\t\t\2\2\u00a1\u00a2\t\n\2\2\u00a2\u00a5\7\u008a\2\2\u00a3"+
-		"\u00a6\7\u01a4\2\2\u00a4\u00a6\5D#\2\u00a5\u00a3\3\2\2\2\u00a5\u00a4\3"+
+		"\u00a6\7\u01a3\2\2\u00a4\u00a6\5D#\2\u00a5\u00a3\3\2\2\2\u00a5\u00a4\3"+
 		"\2\2\2\u00a5\u00a6\3\2\2\2\u00a6\u00ae\3\2\2\2\u00a7\u00a9\7\u019e\2\2"+
 		"\u00a8\u00a7\3\2\2\2\u00a8\u00a9\3\2\2\2\u00a9\u00aa\3\2\2\2\u00aa\u00ab"+
-		"\7I\2\2\u00ab\u00ac\7\u008a\2\2\u00ac\u00ad\7\u01a5\2\2\u00ad\u00af\7"+
+		"\7I\2\2\u00ab\u00ac\7\u008a\2\2\u00ac\u00ad\7\u01a4\2\2\u00ad\u00af\7"+
 		"\u014c\2\2\u00ae\u00a8\3\2\2\2\u00ae\u00af\3\2\2\2\u00af\u00b8\3\2\2\2"+
 		"\u00b0\u00b2\7\u019e\2\2\u00b1\u00b0\3\2\2\2\u00b1\u00b2\3\2\2\2\u00b2"+
 		"\u00b3\3\2\2\2\u00b3\u00b4\7\u013c\2\2\u00b4\u00b5\7\u008a\2\2\u00b5\u00b6"+
@@ -11201,7 +11200,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\u00b8\u00b9\3\2\2\2\u00b9\u00ba\3\2\2\2\u00ba\u02a1\7\u014c\2\2\u00bb"+
 		"\u00bc\t\13\2\2\u00bc\u00bd\7\u008a\2\2\u00bd\u00be\5D#\2\u00be\u00bf"+
 		"\7\u014c\2\2\u00bf\u02a1\3\2\2\2\u00c0\u02a1\7\63\2\2\u00c1\u02a1\7\64"+
-		"\2\2\u00c2\u00c3\t\f\2\2\u00c3\u00c4\7\u008a\2\2\u00c4\u00c5\7\u01ab\2"+
+		"\2\2\u00c2\u00c3\t\f\2\2\u00c3\u00c4\7\u008a\2\2\u00c4\u00c5\7\u01aa\2"+
 		"\2\u00c5\u02a1\7\u014c\2\2\u00c6\u00c7\79\2\2\u00c7\u00c8\7\u008a\2\2"+
 		"\u00c8\u00c9\5D#\2\u00c9\u00ca\7\u014c\2\2\u00ca\u02a1\3\2\2\2\u00cb\u00d7"+
 		"\t\r\2\2\u00cc\u00ce\7\u008a\2\2\u00cd\u00cf\t\16\2\2\u00ce\u00cd\3\2"+
@@ -11210,7 +11209,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\2\2\u00d4\u00d3\3\2\2\2\u00d4\u00d5\3\2\2\2\u00d5\u00d6\3\2\2\2\u00d6"+
 		"\u00d8\7\u014c\2\2\u00d7\u00cc\3\2\2\2\u00d7\u00d8\3\2\2\2\u00d8\u02a1"+
 		"\3\2\2\2\u00d9\u02a1\7;\2\2\u00da\u02a1\t\20\2\2\u00db\u02a1\7=\2\2\u00dc"+
-		"\u00dd\t\21\2\2\u00dd\u00de\7\u008a\2\2\u00de\u00e1\7\u01a4\2\2\u00df"+
+		"\u00dd\t\21\2\2\u00dd\u00de\7\u008a\2\2\u00de\u00e1\7\u01a3\2\2\u00df"+
 		"\u00e0\t\22\2\2\u00e0\u00e2\5D#\2\u00e1\u00df\3\2\2\2\u00e1\u00e2\3\2"+
 		"\2\2\u00e2\u00e3\3\2\2\2\u00e3\u02a1\7\u014c\2\2\u00e4\u02a1\t\23\2\2"+
 		"\u00e5\u00e6\t\24\2\2\u00e6\u00e7\7\u008a\2\2\u00e7\u00e8\t\25\2\2\u00e8"+
@@ -11347,7 +11346,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\7\u017b\2\2\u0274\u0275\7\u008a\2\2\u0275\u0276\td\2\2\u0276\u02a1\7"+
 		"\u014c\2\2\u0277\u0278\te\2\2\u0278\u0279\7\u008a\2\2\u0279\u027a\tf\2"+
 		"\2\u027a\u02a1\7\u014c\2\2\u027b\u027c\tg\2\2\u027c\u0283\7\u008a\2\2"+
-		"\u027d\u0284\5B\"\2\u027e\u0280\7\u01ab\2\2\u027f\u027e\3\2\2\2\u0280"+
+		"\u027d\u0284\5B\"\2\u027e\u0280\7\u01aa\2\2\u027f\u027e\3\2\2\2\u0280"+
 		"\u0281\3\2\2\2\u0281\u027f\3\2\2\2\u0281\u0282\3\2\2\2\u0282\u0284\3\2"+
 		"\2\2\u0283\u027d\3\2\2\2\u0283\u027f\3\2\2\2\u0284\u0285\3\2\2\2\u0285"+
 		"\u02a1\7\u014c\2\2\u0286\u0287\th\2\2\u0287\u0288\7\u008a\2\2\u0288\u0289"+
@@ -11437,23 +11436,23 @@ public class CobolPreprocessorParser extends Parser {
 		"\2\2\2\u02d6\u02d7\7]\2\2\u02d7\u02d8\7\u015f\2\2\u02d8\u02d9\5<\37\2"+
 		"\u02d9\u02db\7X\2\2\u02da\u02dc\7\u019f\2\2\u02db\u02da\3\2\2\2\u02db"+
 		"\u02dc\3\2\2\2\u02dc\33\3\2\2\2\u02dd\u02de\7.\2\2\u02de\u02ed\5\36\20"+
-		"\2\u02df\u02e1\7\u01a7\2\2\u02e0\u02df\3\2\2\2\u02e1\u02e4\3\2\2\2\u02e2"+
+		"\2\u02df\u02e1\7\u01a6\2\2\u02e0\u02df\3\2\2\2\u02e1\u02e4\3\2\2\2\u02e2"+
 		"\u02e0\3\2\2\2\u02e2\u02e3\3\2\2\2\u02e3\u02e9\3\2\2\2\u02e4\u02e2\3\2"+
 		"\2\2\u02e5\u02ea\5,\27\2\u02e6\u02ea\5.\30\2\u02e7\u02ea\5\"\22\2\u02e8"+
 		"\u02ea\7\u016d\2\2\u02e9\u02e5\3\2\2\2\u02e9\u02e6\3\2\2\2\u02e9\u02e7"+
 		"\3\2\2\2\u02e9\u02e8\3\2\2\2\u02ea\u02ec\3\2\2\2\u02eb\u02e2\3\2\2\2\u02ec"+
 		"\u02ef\3\2\2\2\u02ed\u02eb\3\2\2\2\u02ed\u02ee\3\2\2\2\u02ee\u02f3\3\2"+
-		"\2\2\u02ef\u02ed\3\2\2\2\u02f0\u02f2\7\u01a7\2\2\u02f1\u02f0\3\2\2\2\u02f2"+
+		"\2\2\u02ef\u02ed\3\2\2\2\u02f0\u02f2\7\u01a6\2\2\u02f1\u02f0\3\2\2\2\u02f2"+
 		"\u02f5\3\2\2\2\u02f3\u02f1\3\2\2\2\u02f3\u02f4\3\2\2\2\u02f4\u02f6\3\2"+
 		"\2\2\u02f5\u02f3\3\2\2\2\u02f6\u02f7\7\u019f\2\2\u02f7\35\3\2\2\2\u02f8"+
 		"\u02fc\5D#\2\u02f9\u02fc\5B\"\2\u02fa\u02fc\5F$\2\u02fb\u02f8\3\2\2\2"+
 		"\u02fb\u02f9\3\2\2\2\u02fb\u02fa\3\2\2\2\u02fc\u02ff\3\2\2\2\u02fd\u02fe"+
 		"\tt\2\2\u02fe\u0300\5 \21\2\u02ff\u02fd\3\2\2\2\u02ff\u0300\3\2\2\2\u0300"+
 		"\37\3\2\2\2\u0301\u0304\5D#\2\u0302\u0304\5B\"\2\u0303\u0301\3\2\2\2\u0303"+
-		"\u0302\3\2\2\2\u0304!\3\2\2\2\u0305\u0309\7\u014a\2\2\u0306\u0308\7\u01a7"+
+		"\u0302\3\2\2\2\u0304!\3\2\2\2\u0305\u0309\7\u014a\2\2\u0306\u0308\7\u01a6"+
 		"\2\2\u0307\u0306\3\2\2\2\u0308\u030b\3\2\2\2\u0309\u0307\3\2\2\2\u0309"+
 		"\u030a\3\2\2\2\u030a\u030c\3\2\2\2\u030b\u0309\3\2\2\2\u030c\u0315\5*"+
-		"\26\2\u030d\u030f\7\u01a7\2\2\u030e\u030d\3\2\2\2\u030f\u0310\3\2\2\2"+
+		"\26\2\u030d\u030f\7\u01a6\2\2\u030e\u030d\3\2\2\2\u030f\u0310\3\2\2\2"+
 		"\u0310\u030e\3\2\2\2\u0310\u0311\3\2\2\2\u0311\u0312\3\2\2\2\u0312\u0314"+
 		"\5*\26\2\u0313\u030e\3\2\2\2\u0314\u0317\3\2\2\2\u0315\u0313\3\2\2\2\u0315"+
 		"\u0316\3\2\2\2\u0316#\3\2\2\2\u0317\u0315\3\2\2\2\u0318\u031d\5&\24\2"+
@@ -11461,31 +11460,31 @@ public class CobolPreprocessorParser extends Parser {
 		"\3\2\2\2\u031c\u031f\3\2\2\2\u031d\u031b\3\2\2\2\u031d\u031e\3\2\2\2\u031e"+
 		"\u0321\3\2\2\2\u031f\u031d\3\2\2\2\u0320\u0322\5(\25\2\u0321\u0320\3\2"+
 		"\2\2\u0321\u0322\3\2\2\2\u0322%\3\2\2\2\u0323\u032b\7\u0149\2\2\u0324"+
-		"\u0326\7\u01a7\2\2\u0325\u0324\3\2\2\2\u0326\u0329\3\2\2\2\u0327\u0325"+
+		"\u0326\7\u01a6\2\2\u0325\u0324\3\2\2\2\u0326\u0329\3\2\2\2\u0327\u0325"+
 		"\3\2\2\2\u0327\u0328\3\2\2\2\u0328\u032a\3\2\2\2\u0329\u0327\3\2\2\2\u032a"+
 		"\u032c\5*\26\2\u032b\u0327\3\2\2\2\u032c\u032d\3\2\2\2\u032d\u032b\3\2"+
-		"\2\2\u032d\u032e\3\2\2\2\u032e\u0332\3\2\2\2\u032f\u0331\7\u01a7\2\2\u0330"+
+		"\2\2\u032d\u032e\3\2\2\2\u032e\u0332\3\2\2\2\u032f\u0331\7\u01a6\2\2\u0330"+
 		"\u032f\3\2\2\2\u0331\u0334\3\2\2\2\u0332\u0330\3\2\2\2\u0332\u0333\3\2"+
 		"\2\2\u0333\u0335\3\2\2\2\u0334\u0332\3\2\2\2\u0335\u0336\7\u019f\2\2\u0336"+
 		"\'\3\2\2\2\u0337\u0338\7\u0149\2\2\u0338\u033c\7\u012c\2\2\u0339\u033b"+
-		"\7\u01a7\2\2\u033a\u0339\3\2\2\2\u033b\u033e\3\2\2\2\u033c\u033a\3\2\2"+
+		"\7\u01a6\2\2\u033a\u0339\3\2\2\2\u033b\u033e\3\2\2\2\u033c\u033a\3\2\2"+
 		"\2\u033c\u033d\3\2\2\2\u033d\u033f\3\2\2\2\u033e\u033c\3\2\2\2\u033f\u0340"+
-		"\7\u019f\2\2\u0340)\3\2\2\2\u0341\u0345\5\60\31\2\u0342\u0344\7\u01a7"+
+		"\7\u019f\2\2\u0340)\3\2\2\2\u0341\u0345\5\60\31\2\u0342\u0344\7\u01a6"+
 		"\2\2\u0343\u0342\3\2\2\2\u0344\u0347\3\2\2\2\u0345\u0343\3\2\2\2\u0345"+
 		"\u0346\3\2\2\2\u0346\u0348\3\2\2\2\u0347\u0345\3\2\2\2\u0348\u034c\7$"+
-		"\2\2\u0349\u034b\7\u01a7\2\2\u034a\u0349\3\2\2\2\u034b\u034e\3\2\2\2\u034c"+
+		"\2\2\u0349\u034b\7\u01a6\2\2\u034a\u0349\3\2\2\2\u034b\u034e\3\2\2\2\u034c"+
 		"\u034a\3\2\2\2\u034c\u034d\3\2\2\2\u034d\u034f\3\2\2\2\u034e\u034c\3\2"+
-		"\2\2\u034f\u0357\5\62\32\2\u0350\u0352\7\u01a7\2\2\u0351\u0350\3\2\2\2"+
+		"\2\2\u034f\u0357\5\62\32\2\u0350\u0352\7\u01a6\2\2\u0351\u0350\3\2\2\2"+
 		"\u0352\u0355\3\2\2\2\u0353\u0351\3\2\2\2\u0353\u0354\3\2\2\2\u0354\u0356"+
 		"\3\2\2\2\u0355\u0353\3\2\2\2\u0356\u0358\5,\27\2\u0357\u0353\3\2\2\2\u0357"+
-		"\u0358\3\2\2\2\u0358\u0360\3\2\2\2\u0359\u035b\7\u01a7\2\2\u035a\u0359"+
+		"\u0358\3\2\2\2\u0358\u0360\3\2\2\2\u0359\u035b\7\u01a6\2\2\u035a\u0359"+
 		"\3\2\2\2\u035b\u035e\3\2\2\2\u035c\u035a\3\2\2\2\u035c\u035d\3\2\2\2\u035d"+
 		"\u035f\3\2\2\2\u035e\u035c\3\2\2\2\u035f\u0361\5.\30\2\u0360\u035c\3\2"+
 		"\2\2\u0360\u0361\3\2\2\2\u0361+\3\2\2\2\u0362\u0366\tt\2\2\u0363\u0365"+
-		"\7\u01a7\2\2\u0364\u0363\3\2\2\2\u0365\u0368\3\2\2\2\u0366\u0364\3\2\2"+
+		"\7\u01a6\2\2\u0364\u0363\3\2\2\2\u0365\u0368\3\2\2\2\u0366\u0364\3\2\2"+
 		"\2\u0366\u0367\3\2\2\2\u0367\u036b\3\2\2\2\u0368\u0366\3\2\2\2\u0369\u036c"+
 		"\5D#\2\u036a\u036c\5B\"\2\u036b\u0369\3\2\2\2\u036b\u036a\3\2\2\2\u036c"+
-		"-\3\2\2\2\u036d\u0371\7\u012e\2\2\u036e\u0370\7\u01a7\2\2\u036f\u036e"+
+		"-\3\2\2\2\u036d\u0371\7\u012e\2\2\u036e\u0370\7\u01a6\2\2\u036f\u036e"+
 		"\3\2\2\2\u0370\u0373\3\2\2\2\u0371\u036f\3\2\2\2\u0371\u0372\3\2\2\2\u0372"+
 		"\u0376\3\2\2\2\u0373\u0371\3\2\2\2\u0374\u0377\5D#\2\u0375\u0377\5B\""+
 		"\2\u0376\u0374\3\2\2\2\u0376\u0375\3\2\2\2\u0377/\3\2\2\2\u0378\u037d"+
@@ -11500,20 +11499,20 @@ public class CobolPreprocessorParser extends Parser {
 		"\u038f\5D#\2\u038e\u0390\7\u019f\2\2\u038f\u038e\3\2\2\2\u038f\u0390\3"+
 		"\2\2\2\u03909\3\2\2\2\u0391\u0393\7\u01a0\2\2\u0392\u0394\5<\37\2\u0393"+
 		"\u0392\3\2\2\2\u0393\u0394\3\2\2\2\u0394\u0395\3\2\2\2\u0395\u0396\7\u01a0"+
-		"\2\2\u0396;\3\2\2\2\u0397\u039a\5@!\2\u0398\u039a\7\u01a7\2\2\u0399\u0397"+
+		"\2\2\u0396;\3\2\2\2\u0397\u039a\5@!\2\u0398\u039a\7\u01a6\2\2\u0399\u0397"+
 		"\3\2\2\2\u0399\u0398\3\2\2\2\u039a\u039b\3\2\2\2\u039b\u0399\3\2\2\2\u039b"+
 		"\u039c\3\2\2\2\u039c=\3\2\2\2\u039d\u03a2\5@!\2\u039e\u03a2\7.\2\2\u039f"+
-		"\u03a2\7\u0149\2\2\u03a0\u03a2\7\u01a7\2\2\u03a1\u039d\3\2\2\2\u03a1\u039e"+
+		"\u03a2\7\u0149\2\2\u03a0\u03a2\7\u01a6\2\2\u03a1\u039d\3\2\2\2\u03a1\u039e"+
 		"\3\2\2\2\u03a1\u039f\3\2\2\2\u03a1\u03a0\3\2\2\2\u03a2\u03a3\3\2\2\2\u03a3"+
 		"\u03a1\3\2\2\2\u03a3\u03a4\3\2\2\2\u03a4?\3\2\2\2\u03a5\u03ae\5B\"\2\u03a6"+
-		"\u03ae\5D#\2\u03a7\u03ae\5F$\2\u03a8\u03ae\7\u01a6\2\2\u03a9\u03ae\7\u01ab"+
+		"\u03ae\5D#\2\u03a7\u03ae\5F$\2\u03a8\u03ae\7\u01a5\2\2\u03a9\u03ae\7\u01aa"+
 		"\2\2\u03aa\u03ae\7\u019f\2\2\u03ab\u03ae\7\u008a\2\2\u03ac\u03ae\7\u014c"+
 		"\2\2\u03ad\u03a5\3\2\2\2\u03ad\u03a6\3\2\2\2\u03ad\u03a7\3\2\2\2\u03ad"+
 		"\u03a8\3\2\2\2\u03ad\u03a9\3\2\2\2\u03ad\u03aa\3\2\2\2\u03ad\u03ab\3\2"+
 		"\2\2\u03ad\u03ac\3\2\2\2\u03ae\u03af\3\2\2\2\u03af\u03ad\3\2\2\2\u03af"+
-		"\u03b0\3\2\2\2\u03b0A\3\2\2\2\u03b1\u03b4\7\u01a4\2\2\u03b2\u03b4\5H%"+
+		"\u03b0\3\2\2\2\u03b0A\3\2\2\2\u03b1\u03b4\7\u01a3\2\2\u03b2\u03b4\5H%"+
 		"\2\u03b3\u03b1\3\2\2\2\u03b3\u03b2\3\2\2\2\u03b4C\3\2\2\2\u03b5\u03b6"+
-		"\tv\2\2\u03b6E\3\2\2\2\u03b7\u03b8\7\u01a5\2\2\u03b8G\3\2\2\2\u03b9\u03ba"+
+		"\tv\2\2\u03b6E\3\2\2\2\u03b7\u03b8\7\u01a4\2\2\u03b8G\3\2\2\2\u03b9\u03ba"+
 		"\tw\2\2\u03baI\3\2\2\2iXZdhjpu\u0097\u00a5\u00a8\u00ae\u00b1\u00b8\u00ce"+
 		"\u00d1\u00d4\u00d7\u00e1\u00f7\u00ff\u0103\u0114\u0131\u013a\u0147\u014d"+
 		"\u015e\u01b1\u01b6\u01c5\u01d4\u01e1\u01e4\u01e7\u01ea\u01fc\u0206\u020b"+

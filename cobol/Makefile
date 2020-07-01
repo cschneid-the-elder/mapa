@@ -37,12 +37,21 @@ jar:
 	jar cfm CallTree.jar manifest -C class .
 
 testLocal:
+ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
 	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
+else
+	echo `date` $@ $(n) >> build.log
+	java -jar CallTree.jar -unitTest -file testdata/local/testantlr$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -logLevel FINEST -out callListLocal$(n).log
+endif
 
 testNist:
 	echo `date` $@ >> build.log
 	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
+
+testrig:
+	echo `date` $@ $(n) >> build.log
+	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigpp:
 	echo `date` $@ $(n) >> build.log
