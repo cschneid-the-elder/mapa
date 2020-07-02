@@ -86,6 +86,7 @@ public static void main(String[] args) throws Exception {
 		if (idDivFound) {
 			fileName = lookForCopyStatements(aFileName);
 			fileName = lookForReplaceStatements(fileName);
+			fileName = lookForCompilerOptions(fileName);
 			calledNodes = assembleDataNodeTree(fileName);
 			allTheCalledNodes.addAll(calledNodes);
 			if (CLI.unitTest) {
@@ -430,6 +431,68 @@ public static void main(String[] args) throws Exception {
 		}
 		//System.out.println("newLine = " + newLine);
 		return newLine;
+	}
+
+	public static String lookForCompilerOptions(String fileName) throws Exception {
+		LOGGER.fine("lookForCompilerOptions");
+		ArrayList<CompilerOptionsWrapper> compileOpts = new ArrayList<>();
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CompilerOptionsListener listener = new CompilerOptionsListener(compileOpts);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("compileOpts: " + compileOpts);
+
+		fileName = rewriteWithoutCompileOptionsStatements(compileOpts, fileName);
+
+		return fileName;
+	}
+
+	public static String rewriteWithoutCompileOptionsStatements(
+			ArrayList<CompilerOptionsWrapper> compileOpts
+			, String fileName
+			) throws IOException {
+		LOGGER.fine("rewriteWithoutCompileOptionsStatements");
+
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+		File tmp = File.createTempFile("CallTree-", "-cbl", new File("./"));
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		String inLine = src.readLine();
+
+		while (inLine != null) {
+			Boolean isCompileOptLine = false;
+			for (CompilerOptionsWrapper cow: compileOpts) {
+				if (cow.line() == src.getLineNumber()) {
+					isCompileOptLine = true;
+					break;
+				}
+			}
+			if (!isCompileOptLine) {
+				out.println(inLine);
+			}
+			inLine = src.readLine();
+		}
+
+		src.close();
+		out.close();
+		fileName = tmp.getPath();
+		return fileName;
 	}
 
 	public static ArrayList<CallWrapper> assembleDataNodeTree(String fileName) throws IOException {
