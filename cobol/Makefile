@@ -18,7 +18,7 @@ AOPT = -visitor -listener
 
 all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessor.tokens ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/DataLocation.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class
 
-.PHONY: all clean cleanmine mine jar testLocal testNist
+.PHONY: all clean cleanmine mine jar testLocal testNist testrig testrigpp testrigppnist
 
 clean:
 	echo `date` $@ >> build.log

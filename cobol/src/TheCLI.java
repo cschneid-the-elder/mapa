@@ -1,12 +1,14 @@
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
+import java.nio.file.attribute.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.cli.*;
 
 public class TheCLI{
 	public String[] args = null;
+	private String myName = this.getClass().getName();
 	public Options options = new Options();
 	public CommandLineParser parser = new DefaultParser();
 	public CommandLine line = null;
@@ -139,4 +141,51 @@ public class TheCLI{
 		}
 
 	}
+
+	/**
+	Used to create temporary directories.  Global.
+	*/
+	public File newTempDir(File baseDir, String prfx, Boolean saveTemp) {
+		File tmpDir = null;
+		try {
+			tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
+		} catch (Exception e) {
+			TestIntegration.LOGGER.severe(this.myName + " Exception " + e + " encountered in newTempDir");
+			e.printStackTrace();
+			System.exit(16);
+		}
+
+		this.setPosixAttributes(tmpDir);
+
+		if (saveTemp) {
+		} else {
+			tmpDir.deleteOnExit();
+		}
+
+		return tmpDir;
+	}
+
+	/**
+	Used to set file attributes if necessary.  Global.
+	*/
+	public void setPosixAttributes(File aFile) {
+		String attr = null;
+
+		if (aFile.isDirectory()) {
+			attr = "rwxr-x---";
+		} else {
+			attr = "rw-r-----";
+		}
+
+		if (aFile.toPath().getFileSystem().supportedFileAttributeViews().contains("posix")) {
+			Set<PosixFilePermission> perms = PosixFilePermissions.fromString(attr);
+			try {
+				Files.setPosixFilePermissions(aFile.toPath(), perms);
+			} catch (Exception e) {
+				TestIntegration.LOGGER.severe(this.myName + " Exception " + e + " encountered in setPosixAttributes");
+				e.printStackTrace();
+				System.exit(16);
+			}
+		}
+	}	
 }
