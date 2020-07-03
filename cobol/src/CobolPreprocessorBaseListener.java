@@ -75,6 +75,54 @@ public class CobolPreprocessorBaseListener implements CobolPreprocessorListener 
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNumcheck_opts(CobolPreprocessorParser.Numcheck_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNumcheck_opts(CobolPreprocessorParser.Numcheck_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRules_opts(CobolPreprocessorParser.Rules_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRules_opts(CobolPreprocessorParser.Rules_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSsrange_opts(CobolPreprocessorParser.Ssrange_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSsrange_opts(CobolPreprocessorParser.Ssrange_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTest_opts(CobolPreprocessorParser.Test_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTest_opts(CobolPreprocessorParser.Test_optsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterClassicCommentEntry(CobolPreprocessorParser.ClassicCommentEntryContext ctx) { }
 	/**
 	 * {@inheritDoc}
