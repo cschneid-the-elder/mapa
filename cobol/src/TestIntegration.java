@@ -39,7 +39,7 @@ assigned at run time.
 Finally, store calling module, called module (to the extent it can be
 determined) and anything else that seems useful.
 <p><p>
-Syntax: <code>java -cp ".:antlr-4.7.2-complete.jar:commons-cli-1.4.jar" TestIntegration -help</code>
+Syntax: <code>java -jar CallTree.jar -help</code>
 
 
 */
@@ -117,6 +117,11 @@ public static void main(String[] args) throws Exception {
 	LOGGER.info("Processing complete");
 }
 
+	/**
+	It turns out little is required of a COBOL program qua being a
+	COBOL program other than the Identification Division.  So we look
+	for that, and if absent we do not proceed.
+	*/
 	public static Boolean lookForIdDiv(String initFileName) throws Exception {
 		LOGGER.fine("lookForIdDiv");
 		CharStream cs = fromFileName(initFileName);  //load the file
@@ -138,6 +143,11 @@ public static void main(String[] args) throws Exception {
 		
 	}
 
+	/**
+	Iteratively look for COPY statements and resolve them, rewriting
+	the source file with the content of the target of the COPY statements
+	each time.  COPY statements can contain other nested COPY statements.
+	*/
 	public static String lookForCopyStatements(
 						String initFileName
 						, File baseDir
@@ -180,6 +190,29 @@ public static void main(String[] args) throws Exception {
 		return fileName;
 	}
 
+	/**
+	Here we expand the COPY statements, applying the REPLACING phrase(s).
+	Input may look like this...
+	<code>
+	01  WORK-AREAS.   COPY 'work-areas.cpy'
+	REPLACING ==:PRFX:== BY ==ZZ-==
+	          ==:SUFX:== BY ==-IN==
+	.
+	</code>
+	...or like this...
+	<code>
+	01  WORK-AREAS.
+	COPY 'work-areas.cpy' REPLACING ==:PRFX:== BY ==ZZ-== ==:SUFX:== BY ==-IN==.
+	</code>
+	...or like this...
+	<code>
+	01  WORK-AREAS. COPY 'work-areas1.cpy'.
+	</code>
+	We need to preserve and write out bytes up to but not including the 'C' in COPY, 
+	discard all bytes from (and including) the 'C' in COPY through the terminating
+	'.' at the end of the COPY statement.
+
+	*/	
 	public static String applyCopyStatements(
 							ArrayList<CopyStatementContextWrapper> copies
 							, String fileName
@@ -200,30 +233,6 @@ public static void main(String[] args) throws Exception {
 
 		LOGGER.finer("Applying COPY statements to " + fileName);
 
-		/**
-			Here we expand the COPY statements, applying the REPLACING phrase(s).
-
-			Input may look like this...
-
-			01  WORK-AREAS.   COPY 'work-areas.cpy'
-			REPLACING ==:PRFX:== BY ==ZZ-==
-			          ==:SUFX:== BY ==-IN==
-			.
-
-			...or like this...
-
-			01  WORK-AREAS.
-			COPY 'work-areas.cpy' REPLACING ==:PRFX:== BY ==ZZ-== ==:SUFX:== BY ==-IN==.
-
-			...or like this...
-
-			01  WORK-AREAS. COPY 'work-areas1.cpy'.
-
-			We need to preserve and write out bytes up to but not including the 'C' in COPY, 
-			discard all bytes from (and including) the 'C' in COPY through the terminating
-			'.' at the end of the COPY statement.
-
-		*/	
 		Hashtable<CopyStatementContextWrapper, Boolean> copyDone = new Hashtable<>();
 		for (CopyStatementContextWrapper copy: copies) copyDone.put(copy, false);
 
