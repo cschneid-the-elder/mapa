@@ -460,6 +460,10 @@ public static void main(String[] args) throws Exception {
 		return newLine;
 	}
 
+	/**
+	Find compiler options embedded in source, rewrite file without
+	them if any are found.
+	*/
 	public static String lookForCompilerOptions(
 			String fileName
 			, File baseDir
@@ -485,11 +489,16 @@ public static void main(String[] args) throws Exception {
 
 		LOGGER.finest("compileOpts: " + compileOpts);
 
-		fileName = rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
+		if (compileOpts.size() == 0) return fileName;
 
-		return fileName;
+		return rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
+
 	}
 
+	/**
+	Return the name of a temporary file containing the source (as preprocessed
+	up to this point) without any compile options (PROCESS or CBL statements).
+	*/
 	public static String rewriteWithoutCompileOptionsStatements(
 			ArrayList<CompilerOptionsWrapper> compileOpts
 			, String fileName
@@ -547,11 +556,11 @@ public static void main(String[] args) throws Exception {
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		DataDescriptionEntryListener dataListener = new DataDescriptionEntryListener(dataNodes);
+		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(dataNodes);
 
-		LOGGER.finer("----------walking tree with DataDescriptionEntryListener");
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
-		walker.walk(dataListener, tree);
+		walker.walk(listener, tree);
 
 		LOGGER.finest("dataNodes: " + dataNodes);
 
@@ -648,7 +657,9 @@ public static void main(String[] args) throws Exception {
 	}
 
 	/**
-	Create a directory to hold temporary files used in processing.
+	Create a directory to hold temporary files used in processing.  This way,
+	they're all confined together and can be easily disposed of if the
+	-saveTemp option was requested.
 	*/
 	public static File newTempDir() throws IOException {
 		File tmpDir = Files.createTempDirectory("CallTree-").toFile();
@@ -662,6 +673,17 @@ public static void main(String[] args) throws Exception {
 		return tmpDir;
 	}
 
+	/**
+	This method is executed if the -unitTest option is requested.  It may
+	not meet your definition of unit test, but it serves mine.
+
+	<p>The goal is to examine the results of all processing for given
+	modules and compare them to known correct results.  Those known correct
+	results are hard-coded here.
+
+	<p>It's awful, I know, but try not to look at it.  Or think about it.
+	You're thinking about it now aren't you?
+	*/
 	public static Boolean testFor(String fileName
 						, ArrayList<DDNode> dataNodes
 						, ArrayList<CallWrapper> calledNodes
