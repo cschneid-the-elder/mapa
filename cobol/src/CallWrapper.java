@@ -22,28 +22,49 @@ class CallWrapper {
 	public CobolParser.ExecSqlCallStatementContext ctxSqlCall = null;
 	public DDNode dataNode = null;
 	public int line = -1;
+	public String aLib = null;
 
-	public CallWrapper(CobolParser.CallStatementContext ctx, String callingModuleName) {
+	public CallWrapper(
+			CobolParser.CallStatementContext ctx
+			, String callingModuleName
+			, String aLib
+			) {
 		this.ctxCall = ctx;
 		this.callingModuleName = callingModuleName;
+		this.aLib = aLib;
 		this.initialize(ctx);
 	}
 
-	public CallWrapper(CobolParser.ExecCicsLinkStatementContext ctx, String callingModuleName) {
+	public CallWrapper(
+			CobolParser.ExecCicsLinkStatementContext ctx
+			, String callingModuleName
+			, String aLib
+			) {
 		this.ctxLink = ctx;
 		this.callingModuleName = callingModuleName;
+		this.aLib = aLib;
 		this.initialize(ctx);
 	}
 
-	public CallWrapper(CobolParser.ExecCicsXctlStatementContext ctx, String callingModuleName) {
+	public CallWrapper(
+			CobolParser.ExecCicsXctlStatementContext ctx
+			, String callingModuleName
+			, String aLib
+			) {
 		this.ctxXctl = ctx;
 		this.callingModuleName = callingModuleName;
+		this.aLib = aLib;
 		this.initialize(ctx);
 	}
 
-	public CallWrapper(CobolParser.ExecSqlCallStatementContext ctx, String callingModuleName) {
+	public CallWrapper(
+			CobolParser.ExecSqlCallStatementContext ctx
+			, String callingModuleName
+			, String aLib
+			) {
 		this.ctxSqlCall = ctx;
 		this.callingModuleName = callingModuleName;
+		this.aLib = aLib;
 		this.initialize(ctx);
 	}
 
@@ -62,6 +83,7 @@ class CallWrapper {
 		/*
 			Only unique CALLs (et. al.) are interesting.  If the source contains
 			multiple CALLs to the same identifier, it's not necessary to record that.
+
 		*/
 		Boolean is = this.callingModuleName.equals(cw.callingModuleName);
 		is = is && this.callType == cw.callType;
@@ -72,7 +94,9 @@ class CallWrapper {
 					) {
 			is = is && this.calledModuleNames.equals(cw.calledModuleNames);
 		} else {
-			if (this.identifier != null && identifier != null) is = is && this.identifier.equals(cw.identifier);
+			if (this.identifier != null && identifier != null) {
+				is = is && this.identifier.equals(cw.identifier);
+			}
 		}
 		is = is && this.ofs.equals(cw.ofs);
 		return is; 
@@ -122,15 +146,26 @@ class CallWrapper {
 		}
 
 		if (this.dataNode == null) {
-			TestIntegration.LOGGER.warning("identifier " + this.identifier + " not found in " + this.callingModuleName);
+			TestIntegration.LOGGER.warning(
+				"identifier " 
+				+ this.identifier 
+				+ " not found in " 
+				+ this.callingModuleName);
 		} else {
-			TestIntegration.LOGGER.fine("valueInValueClause = |" + this.dataNode.valueInValueClause + "|");
+			TestIntegration.LOGGER.fine(
+				"valueInValueClause = |" +
+				 this.dataNode.valueInValueClause + "|");
 			if (this.dataNode.valueInValueClause == null) {
 				TestIntegration.LOGGER.fine("valueInValueClause == null");
 				if (this.dataNode.redefinesIdentifier != null) {
-					TestIntegration.LOGGER.fine("redefinesIdentifier = " + this.dataNode.redefinesIdentifier);
+					TestIntegration.LOGGER.fine(
+						"redefinesIdentifier = " 
+						+ this.dataNode.redefinesIdentifier);
 					List<DDNode> list = 
-						this.dataNode.parent.findChildrenNamed(this.dataNode.redefinesIdentifier);
+						this.dataNode.parent.findChildrenNamed(
+							this
+							.dataNode
+							.redefinesIdentifier);
 					TestIntegration.LOGGER.fine("list.size() = " + list.size());
 					if (list.size() > 0) {
 						this.addCalledModuleName(list.get(0).valueInValueClause);
@@ -144,124 +179,130 @@ class CallWrapper {
 
 	private void initialize(CobolParser.CallStatementContext ctx) {
 		this.line = ctx.start.getLine();
-		if ( ctx.identifier() == null ) {
-			// CALL literal syntax
-			this.addCalledModuleName(ctx.literal().NONNUMERICLITERAL().toString());
-			this.callType = CallType.CALLBYLITERAL;
-		} else {
-			this.callType = CallType.CALLBYIDENTIFIER;
-			if (ctx.identifier().qualifiedDataName() == null ) {
-				// CALL identifier(subscript) syntax (sneaky)
-				this.identifier = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				subctxs = ctx.identifier().tableCall().subscript();
-				this.subNames = new ArrayList<>();
-				for (CobolParser.SubscriptContext sub: subctxs) {
-					this.subNames.add(sub.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString());
-				}
-				this.inDataCtxs = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
-			} else {
-				// CALL identifier syntax
-				this.identifier = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				this.inDataCtxs = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
-				if (this.inDataCtxs != null) {
-					for (CobolParser.QualifiedInDataContext qindc: this.inDataCtxs) {
-						this.ofs.add(qindc.inData().dataName().cobolWord().IDENTIFIER().toString());
-					}
-				}
-			}
-		}
+		this.initialize(
+			ctx.literal()
+			, ctx.identifier()
+			, CallType.CALLBYLITERAL
+			, CallType.CALLBYIDENTIFIER
+			);
 	}
 
 	public void initialize(CobolParser.ExecCicsLinkStatementContext ctx) {
 		this.line = ctx.start.getLine();
-		if ( ctx.identifier() == null ) {
-			// CALL literal syntax
-			this.addCalledModuleName(ctx.literal().NONNUMERICLITERAL().toString());
-			this.callType = CallType.CICSLINKBYLITERAL;
-		} else {
-			this.callType = CallType.CICSLINKBYIDENTIFIER;
-			if (ctx.identifier().qualifiedDataName() == null ) {
-				// CALL identifier(subscript) syntax (sneaky)
-				this.identifier = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				subctxs = ctx.identifier().tableCall().subscript();
-				this.subNames = new ArrayList<>();
-				for (CobolParser.SubscriptContext sub: subctxs) {
-					this.subNames.add(sub.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString());
-				}
-				this.inDataCtxs = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
-			} else {
-				// CALL identifier syntax
-				this.identifier = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				this.inDataCtxs = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
-				if (this.inDataCtxs != null) {
-					for (CobolParser.QualifiedInDataContext qindc: this.inDataCtxs) {
-						this.ofs.add(qindc.inData().dataName().cobolWord().IDENTIFIER().toString());
-					}
-				}
-			}
-		}
-
+		this.initialize(
+			ctx.literal()
+			, ctx.identifier()
+			, CallType.CICSLINKBYLITERAL
+			, CallType.CICSLINKBYIDENTIFIER
+			);
 	}
 
 	public void initialize(CobolParser.ExecCicsXctlStatementContext ctx) {
 		this.line = ctx.start.getLine();
-		if ( ctx.identifier() == null ) {
-			// CALL literal syntax
-			this.addCalledModuleName(ctx.literal().NONNUMERICLITERAL().toString());
-			this.callType = CallType.CICSXCTLBYLITERAL;
-		} else {
-			this.callType = CallType.CICSXCTLBYIDENTIFIER;
-			if (ctx.identifier().qualifiedDataName() == null ) {
-				// CALL identifier(subscript) syntax (sneaky)
-				this.identifier = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				subctxs = ctx.identifier().tableCall().subscript();
-				this.subNames = new ArrayList<>();
-				for (CobolParser.SubscriptContext sub: subctxs) {
-					this.subNames.add(sub.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString());
-				}
-				this.inDataCtxs = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
-			} else {
-				// CALL identifier syntax
-				this.identifier = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				this.inDataCtxs = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
-				if (this.inDataCtxs != null) {
-					for (CobolParser.QualifiedInDataContext qindc: this.inDataCtxs) {
-						this.ofs.add(qindc.inData().dataName().cobolWord().IDENTIFIER().toString());
-					}
-				}
-			}
-		}
-
+		this.initialize(
+			ctx.literal()
+			, ctx.identifier()
+			, CallType.CICSXCTLBYLITERAL
+			, CallType.CICSXCTLBYIDENTIFIER
+			);
 	}
 
 	public void initialize(CobolParser.ExecSqlCallStatementContext ctx) {
 		this.line = ctx.start.getLine();
 		if ( ctx.identifier() == null ) {
 			// CALL literal syntax
-			this.addCalledModuleName(ctx.IDENTIFIER(0).toString());
+			this.addCalledModuleName(
+				ctx
+				.IDENTIFIER(0)
+				.toString());
 			this.callType = CallType.SQLCALLBYLITERAL;
 		} else {
-			this.callType = CallType.SQLCALLBYIDENTIFIER;
-			if (ctx.identifier().qualifiedDataName() == null ) {
+			this.initialize(
+				null
+				, ctx.identifier()
+				, CallType.SQLCALLBYLITERAL
+				, CallType.SQLCALLBYIDENTIFIER
+				);
+		}
+	}
+
+	private void initialize(
+			CobolParser.LiteralContext litCtx
+			, CobolParser.IdentifierContext idCtx
+			, CallType litCallType
+			, CallType idCallType
+			) {
+		if ( idCtx == null ) {
+			// CALL literal syntax
+			if (litCtx == null) {
+				// ExecSqlCallStatementContext is handled on its own
+			} else {
+				this.addCalledModuleName(
+					litCtx
+					.NONNUMERICLITERAL()
+					.toString());
+				this.callType = litCallType;
+			}
+		} else {
+			this.callType = idCallType;
+			if (idCtx.qualifiedDataName() == null ) {
 				// CALL identifier(subscript) syntax (sneaky)
-				this.identifier = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				subctxs = ctx.identifier().tableCall().subscript();
+				this.identifier = 
+					idCtx
+					.tableCall()
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.dataName()
+					.cobolWord()
+					.IDENTIFIER()
+					.toString();
+				this.subctxs = idCtx.tableCall().subscript();
 				this.subNames = new ArrayList<>();
 				for (CobolParser.SubscriptContext sub: subctxs) {
-					this.subNames.add(sub.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString());
+					this.subNames.add(
+						sub
+						.qualifiedDataName()
+						.qualifiedDataNameFormat1()
+						.dataName()
+						.cobolWord()
+						.IDENTIFIER()
+						.toString());
 				}
-				this.inDataCtxs = ctx.identifier().tableCall().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
+				this.inDataCtxs = 
+					idCtx
+					.tableCall()
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.qualifiedInData();
 			} else {
 				// CALL identifier syntax
-				this.identifier = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString();
-				this.inDataCtxs = ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().qualifiedInData();
+				this.identifier = 
+					idCtx
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.dataName()
+					.cobolWord()
+					.IDENTIFIER()
+					.toString();
+				this.inDataCtxs = 
+					idCtx
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.qualifiedInData();
 				if (this.inDataCtxs != null) {
 					for (CobolParser.QualifiedInDataContext qindc: this.inDataCtxs) {
-						this.ofs.add(qindc.inData().dataName().cobolWord().IDENTIFIER().toString());
+						this.ofs.add(
+							qindc
+							.inData()
+							.dataName()
+							.cobolWord()
+							.IDENTIFIER()
+							.toString());
 					}
 				}
 			}
 		}
+
 
 	}
 
@@ -270,21 +311,27 @@ class CallWrapper {
 	}
 
 	public Boolean includes(String caller, String callee) {
-		return (this.calledModuleNames.contains(callee) && this.callingModuleName.equals(caller));
+		return (this.calledModuleNames.contains(callee) 
+				&& this.callingModuleName.equals(caller));
 	}
 
 	public Boolean includes(String caller, String callee, CallType ty) {
 		/**/
-		TestIntegration.LOGGER.fine("this.calledModuleNames.contains(callee) = " + this.calledModuleNames.contains(callee));
+		TestIntegration.LOGGER.fine(
+			"this.calledModuleNames.contains(callee) = " 
+			+ this.calledModuleNames.contains(callee));
 		TestIntegration.LOGGER.fine("calledModuleNames = " + calledModuleNames);
-		TestIntegration.LOGGER.fine("this.callingModuleName.equals(caller) = " + this.callingModuleName.equals(caller));
+		TestIntegration.LOGGER.fine(
+			"this.callingModuleName.equals(caller) = " 
+			+ this.callingModuleName.equals(caller));
 		TestIntegration.LOGGER.fine("callingModuleName = " + callingModuleName);
 		TestIntegration.LOGGER.fine("caller = " + caller);
 		TestIntegration.LOGGER.fine("this.callType = " + this.callType);
 		TestIntegration.LOGGER.fine("ty = " + ty);
 		/**/
 
-		return (this.calledModuleNames.contains(callee) && this.callingModuleName.equals(caller) && this.callType == ty);
+		return (this.calledModuleNames.contains(callee) 
+				&& this.callingModuleName.equals(caller) && this.callType == ty);
 	}
 
 	public String toString() {
@@ -327,9 +374,17 @@ class CallWrapper {
 	}
 
 	public void writeOn(PrintWriter out) throws IOException {
-
+		/*
+		uuid doesn't really mean much, it should uniquely identify
+		a CALL but it doesn't
+		*/
 		for (String cm: calledModuleNames) {
-			out.printf("%s\t%s\t%s\t%s\n", uuid.toString(), callingModuleName, callType, cm);
+			out.printf(
+				"%s,%s,%s,%s\n"
+				, this.aLib
+				, this.callingModuleName
+				, this.callType
+				, cm);
 		}
 
 	}
