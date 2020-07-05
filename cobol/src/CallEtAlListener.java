@@ -7,10 +7,12 @@ import org.antlr.v4.runtime.tree.*;
 public class CallEtAlListener extends CobolParserBaseListener {
 	public ArrayList<CallWrapper> calledNodes = null;
 	public String callingModuleName = null;
+	public String aLib = null;
 
-	public CallEtAlListener(ArrayList<CallWrapper> al) {
+	public CallEtAlListener(ArrayList<CallWrapper> al, String aLib) {
 		super();
-		calledNodes = al;
+		this.calledNodes = al;
+		this.aLib = aLib;
 	}
 
 	@Override public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
@@ -23,7 +25,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	@Override public void enterCallStatement(CobolParser.CallStatementContext ctx) {
 		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib);
 		for (CallWrapper cw: calledNodes) {
 			if (cw.seemsLike(aCall)) {
 				found = true;
@@ -35,7 +37,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	@Override public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
 		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib);
 		for (CallWrapper cw: calledNodes) {
 			if (cw.seemsLike(aCall)) {
 				found = true;
@@ -47,7 +49,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	@Override public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
 		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib);
 		for (CallWrapper cw: calledNodes) {
 			if (cw.seemsLike(aCall)) {
 				found = true;
@@ -59,7 +61,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	@Override public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
 		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, callingModuleName);
+		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib);
 		for (CallWrapper cw: calledNodes) {
 			if (cw.seemsLike(aCall)) {
 				found = true;

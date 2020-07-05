@@ -89,7 +89,7 @@ public static void main(String[] args) throws Exception {
 			fileName = lookForCopyStatements(aFileName, baseDir, initFileNm);
 			fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 			fileName = lookForCompilerOptions(fileName, baseDir, initFileNm);
-			calledNodes = assembleDataNodeTree(fileName);
+			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 			allTheCalledNodes.addAll(calledNodes);
 			if (CLI.unitTest) {
 				if (!testFor(aFileName, dataNodes, calledNodes)) failCount++;
@@ -108,7 +108,9 @@ public static void main(String[] args) throws Exception {
 		LOGGER.info("writing to " + CLI.outFileName);
 		File outFile = new File(CLI.outFileName);
 		PrintWriter pw = new PrintWriter(outFile);
+		LOGGER.finest("writing output");
 		for (CallWrapper cw: allTheCalledNodes) {
+			LOGGER.finest(cw.callingModuleName + " " + cw.uuid.toString());
 			cw.writeOn(pw);
 		}
 		pw.close();
@@ -116,6 +118,33 @@ public static void main(String[] args) throws Exception {
 
 	LOGGER.info("Processing complete");
 }
+
+	/**
+	The intent here is to return the last directory in the path to the
+	file named in the argument, on the theory that the path is named
+	for the library in which the file originally resided.
+
+	<p>If the file is /home/cschneid/cobol/PROD.PAYROLL.SOURCE/UPDATE then
+	this method should return "PROD.PAYROLL.SOURCE".
+	*/
+	public static String getLib(String aFileName) {
+		String absPath = new File(aFileName).getAbsolutePath();
+		int lastSep = absPath.lastIndexOf(File.separatorChar);
+		int nextToLastSep = -1;
+		String lib = null;
+
+		if (lastSep > 0) {
+			nextToLastSep = absPath.lastIndexOf(File.separatorChar, lastSep - 1);
+		}
+
+		if (nextToLastSep > 0) {
+			lib = absPath.substring(nextToLastSep + 1, lastSep);
+		} else {
+			lib = "";
+		}
+
+		return lib;
+	}
 
 	/**
 	It turns out little is required of a COBOL program qua being a
@@ -538,7 +567,10 @@ public static void main(String[] args) throws Exception {
 		return fileName;
 	}
 
-	public static ArrayList<CallWrapper> assembleDataNodeTree(String fileName) throws IOException {
+	public static ArrayList<CallWrapper> assembleDataNodeTree(
+				String fileName
+				, String aLib
+				) throws IOException {
 		LOGGER.fine("assembleDataNodeTree");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 
@@ -564,7 +596,7 @@ public static void main(String[] args) throws Exception {
 
 		LOGGER.finest("dataNodes: " + dataNodes);
 
-		calledNodes = lookForCalledRoutines(tree, walker);
+		calledNodes = lookForCalledRoutines(tree, walker, aLib);
 		calledNodes = resolveCalledNodes(tree, walker, calledNodes, dataNodes);
 
 		return calledNodes;
@@ -572,10 +604,11 @@ public static void main(String[] args) throws Exception {
 	}
 
 	public static ArrayList<CallWrapper> lookForCalledRoutines(ParseTree tree
-					, ParseTreeWalker walker) {
+					, ParseTreeWalker walker
+					, String aLib) {
 		LOGGER.fine("lookForCalledRoutines");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
-		CallEtAlListener callListener = new CallEtAlListener(calledNodes);
+		CallEtAlListener callListener = new CallEtAlListener(calledNodes, aLib);
 
 		LOGGER.finer("----------walking tree with CallEtAlListener");
 
@@ -619,11 +652,11 @@ public static void main(String[] args) throws Exception {
 
 		LOGGER.finest("calledNodes: " + calledNodes);
 
-		SetListener setListener = new SetListener(calledNodes, LOGGER);
+		SetListener listener = new SetListener(calledNodes, LOGGER);
 
-		LOGGER.finer("----------walking tree with SetListener");
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
-		walker.walk(setListener, tree);
+		walker.walk(listener, tree);
 
 		LOGGER.finest("calledNodes: " + calledNodes);
 

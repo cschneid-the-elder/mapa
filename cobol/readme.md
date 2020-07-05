@@ -1,10 +1,10 @@
 ## COBOL Call Tree Analysis
 
-This is not intended to be a validating parser, but an analyzing parser; feed it valid COBOL and it will create a file of "callers" and "callees" to enable you to learn things of interest.
+This is not intended to be a validating parser, but an analyzing parser; feed it valid COBOL and it will create a file of "callers" and "callees" to enable you to learn things of possible interest.
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (04-Jul-2020) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a TSV (which may become a CSV, I'm still thinking) to be loaded into a persistent store seems to be working.
+Currently (05-Jul-2020) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with much (but not all) of the NIST COBOL test suite.
 
@@ -47,20 +47,53 @@ More generically, I would suggest...
  + Create a list of copybook directories (to use with the `-copyList` option) where each line is a directory name containing copybook members you have downloaded.  Maybe call this file myLibs.
  + Execute `java -jar CallTree.jar -fileList myList -copyList myLibs -out myOutput.tsv`
 
+Depending on your build environment, you may want to construct several file lists for your source and copybooks, corresponding to your concatenations.
+
 ### Bear In Mind
 
 This application will create several temporary files for each COBOL member you parse.  Unless you specify the `-saveTemp` option, and it's just there for debugging purposes, these files will be deleted automatically on normal termination of the JVM.  These files will, however, persist for the length of the run, and there are several created for each piece of source code, so make sure you're not short of space for temporary files.
 
 A log file will be created in the current directory with messages about the current run.  If you use the `-logLevel` option, it applies to these messages.  The log messages output to the screen are at the INFO level or above.
 
+### Output File Format
+
+The file indicated by the `-out` option is a comma separated value (CSV) file containing the "library", caller name, type of call, and called module name.  "Library" in this context is the last node of the path to the file, which I would hope has been named for the library from which the members have been downloaded.
+
+Please note that the type of call may be CALLBYIDENTIFIER which may be a static call or a dynamic call depending on your compile options.
+
 ### Build/Execution Environment
 
 This was built on ubuntu 16.04 LTS with ANTLR 4.7.2, openjdk version "1.8.0_252", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+
+### Why This Is Complicated
+
+Consider a program...
+
+       Identification Division.
+       Program-ID. MOYA.
+       Data Division.
+       Working-Storage Section.
+
+       01  CONSTANTS.
+           05  MYNAME               PIC X(008) VALUE 'MOYA'.
+
+       COPY TALYN.
+
+       Procedure Division.
+           CALL PGM-0001
+           GOBACK.
+
+...where there exists _more than one_ copybook named TALYN, residing in different libraries, containing different VALUE clauses for a variable named `PGM-0001`.  At compile time, the copybook is resolved according to the compiler invocation.
+
+So now what?  Well, my intention is for _you_ to deal with this by naming the directories containing your source and copybooks as the libraries from whence their contents were downloaded, and assemble your source and copybook file lists accordingly.  Separate runs with these lists _should_ give you the same results as your compile invocation.
+
+Worse, of course, is that in a dynamic call environment, which modules you invoke are controlled by your runtime environment.  Static code analysis, which is what this all is, cannot help you with that.
 
 ### What This Won't Do
 
  + `BASIS` statement.
  + `COPY REPLACING` and `REPLACE` statements that piss me off.  Take a look in SM206A and SM208A in testdata/nist for examples.
+ + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
  + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
  + Conditional compilation statements.  At least, not yet.
  + Some of the more recent XML and JSON notation.  At least, not yet.
