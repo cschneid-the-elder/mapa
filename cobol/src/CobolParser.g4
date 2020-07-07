@@ -2265,6 +2265,97 @@ writeNotAtEndOfPagePhrase
    : NOT AT? (END_OF_PAGE | EOP) statement*
    ;
 
+// xml generate statement
+
+xmlGenerateStatement
+   : XML_GENERATE identifier FROM identifier 
+     xmlGenerateCountInPhrase?
+     xmlGenerateEncodingPhrase?
+     xmlGenerateDeclarationPhrase?
+     xmlGenerateAttributesPhrase?
+     xmlGenerateNamespacePhrase?
+     xmlGenerateNamespacePrefixPhrase?
+     xmlGenerateNamePhrase?
+     xmlGenerateTypePhrase?
+     xmlGenerateSuppressPhrase?
+     onExceptionClause?
+     notOnExceptionClause?
+     xmlGenerateEndXmlPhrase
+   ;
+
+xmlGenerateCountInPhrase
+   : COUNT IN? identifier
+   ;
+
+xmlGenerateEncodingPhrase
+   : WITH? ENCODING (identifier | literal)
+   ;
+
+xmlGenerateDeclarationPhrase
+   : WITH? XML_DECLARATION
+   ;
+
+xmlGenerateAttributesPhrase
+   : WITH? ATTRIBUTES
+   ;
+
+xmlGenerateNamespacePhrase
+   : NAMESPACE IS? (identifier | literal)
+   ;
+
+xmlGenerateNamespacePrefixPhrase
+   : NAMESPACE_PREFIX IS? (identifier | literal)
+   ;
+
+xmlGenerateNamePhrase
+   : NAME OF? identifier IS? literal
+   ;
+
+xmlGenerateTypePhrase
+   : TYPE OF? identifier IS? xmlGenerateType
+   ;
+
+xmlGenerateSuppressPhrase
+   : SUPPRESS ((identifier xmlGenerateWhenPhrase) | xmlGenerateGenericSuppressionPhrase)+
+   ;
+
+xmlGenerateWhenPhrase
+   : WHEN xmlGenerateFigurativeConstant (OR xmlGenerateFigurativeConstant)*
+   ;
+
+xmlGenerateGenericSuppressionPhrase
+   : (EVERY (xmlGenerateGenericSuppressionNumericPhrase | xmlGenerateGenericSuppressionNonNumericPhrase | xmlGenerateType) xmlGenerateWhenPhrase)
+   ;
+
+xmlGenerateGenericSuppressionNumericPhrase
+   : (NUMERIC xmlGenerateType?)
+   ;
+
+xmlGenerateGenericSuppressionNonNumericPhrase
+   : (NONNUMERIC xmlGenerateType?)
+   ;
+
+xmlGenerateEndXmlPhrase
+   : END_XML
+   ;
+
+xmlGenerateFigurativeConstant
+   : (ZERO
+   | ZEROES
+   | SPACE
+   | SPACES
+   | LOW_VALUE
+   | LOW_VALUES
+   | HIGH_VALUE
+   | HIGH_VALUES)
+   ;
+
+xmlGenerateType
+   : (ATTRIBUTE
+   | ELEMENT
+   | CONTENT)
+   ;
+
 // statement phrases ----------------------------------
 
 atEndPhrase

@@ -3124,6 +3124,108 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateStatement(CobolParser.XmlGenerateStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateCountInPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateCountInPhrase(CobolParser.XmlGenerateCountInPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateEncodingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateEncodingPhrase(CobolParser.XmlGenerateEncodingPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateDeclarationPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateDeclarationPhrase(CobolParser.XmlGenerateDeclarationPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateAttributesPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateAttributesPhrase(CobolParser.XmlGenerateAttributesPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateNamespacePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateNamespacePhrase(CobolParser.XmlGenerateNamespacePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateNamespacePrefixPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateNamespacePrefixPhrase(CobolParser.XmlGenerateNamespacePrefixPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateNamePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateNamePhrase(CobolParser.XmlGenerateNamePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateTypePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateTypePhrase(CobolParser.XmlGenerateTypePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateSuppressPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateSuppressPhrase(CobolParser.XmlGenerateSuppressPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateWhenPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateWhenPhrase(CobolParser.XmlGenerateWhenPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateGenericSuppressionPhrase(CobolParser.XmlGenerateGenericSuppressionPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionNumericPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateGenericSuppressionNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNumericPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionNonNumericPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateGenericSuppressionNonNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNonNumericPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateEndXmlPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateEndXmlPhrase(CobolParser.XmlGenerateEndXmlPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateFigurativeConstant}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateFigurativeConstant(CobolParser.XmlGenerateFigurativeConstantContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#atEndPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
