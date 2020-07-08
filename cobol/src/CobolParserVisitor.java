@@ -328,6 +328,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSymbolicCharacters(CobolParser.SymbolicCharactersContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlSchemaClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#inputOutputSection}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3076,54 +3082,6 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUseDebugOn(CobolParser.UseDebugOnContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteStatement(CobolParser.WriteStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeFromPhrase}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteFromPhrase(CobolParser.WriteFromPhraseContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingPhrase}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteAdvancingPhrase(CobolParser.WriteAdvancingPhraseContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingPage}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteAdvancingPage(CobolParser.WriteAdvancingPageContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingLines}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteAdvancingLines(CobolParser.WriteAdvancingLinesContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingMnemonic}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteAdvancingMnemonic(CobolParser.WriteAdvancingMnemonicContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeAtEndOfPagePhrase}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteAtEndOfPagePhrase(CobolParser.WriteAtEndOfPagePhraseContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#writeNotAtEndOfPagePhrase}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3225,6 +3183,90 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlParseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseStatement(CobolParser.XmlParseStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlParseEncodingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseEncodingPhrase(CobolParser.XmlParseEncodingPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlParseReturningNationalPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseReturningNationalPhrase(CobolParser.XmlParseReturningNationalPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlParseValidatingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseValidatingPhrase(CobolParser.XmlParseValidatingPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlParseProcessingProcedurePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseProcessingProcedurePhrase(CobolParser.XmlParseProcessingProcedurePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#xmlParseEndXmlPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseEndXmlPhrase(CobolParser.XmlParseEndXmlPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteStatement(CobolParser.WriteStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeFromPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteFromPhrase(CobolParser.WriteFromPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteAdvancingPhrase(CobolParser.WriteAdvancingPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingPage}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteAdvancingPage(CobolParser.WriteAdvancingPageContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingLines}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteAdvancingLines(CobolParser.WriteAdvancingLinesContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeAdvancingMnemonic}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteAdvancingMnemonic(CobolParser.WriteAdvancingMnemonicContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeAtEndOfPagePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteAtEndOfPagePhrase(CobolParser.WriteAtEndOfPagePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#writeNotAtEndOfPagePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#atEndPhrase}.
 	 * @param ctx the parse tree

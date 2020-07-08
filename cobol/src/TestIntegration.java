@@ -1065,6 +1065,10 @@ public static void main(String[] args) throws Exception {
 			case "testantlr130":
 			case "testantlr230":
 			case "testantlr330":
+			case "testantlr031":
+			case "testantlr131":
+			case "testantlr231":
+			case "testantlr331":
 				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "CEE3ABD", CallType.CALLBYLITERAL, calledNodes, 1)) failCount++;

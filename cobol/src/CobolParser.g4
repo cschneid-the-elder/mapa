@@ -176,7 +176,7 @@ specialNamesParagraph
    ;
 
 specialNameClause
-   : channelClause | odtClause | alphabetClause | classClause | currencySignClause | decimalPointClause | symbolicCharactersClause | environmentSwitchNameClause | defaultDisplaySignClause | defaultComputationalSignClause | reserveNetworkClause
+   : channelClause | odtClause | alphabetClause | classClause | currencySignClause | decimalPointClause | symbolicCharactersClause | environmentSwitchNameClause | defaultDisplaySignClause | defaultComputationalSignClause | reserveNetworkClause | xmlSchemaClause
    ;
 
 alphabetClause
@@ -261,6 +261,10 @@ symbolicCharactersClause
 
 symbolicCharacters
    : symbolicCharacter+ (IS | ARE)? integerLiteral+
+   ;
+
+xmlSchemaClause
+   : XML_SCHEMA identifier IS? (identifier | literal)
    ;
 
 // -- input output section ----------------------------------
@@ -1178,7 +1182,7 @@ sentence
    ;
 
 statement
-   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | writeStatement
+   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
    ;
 
 // accept statement
@@ -2231,40 +2235,6 @@ useDebugOn
    : ALL PROCEDURES | ALL REFERENCES? OF? identifier | procedureName | fileName
    ;
 
-// write statement
-
-writeStatement
-   : WRITE recordName writeFromPhrase? writeAdvancingPhrase? writeAtEndOfPagePhrase? writeNotAtEndOfPagePhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_WRITE?
-   ;
-
-writeFromPhrase
-   : FROM (identifier | literal)
-   ;
-
-writeAdvancingPhrase
-   : (BEFORE | AFTER) ADVANCING? (writeAdvancingPage | writeAdvancingLines | writeAdvancingMnemonic)
-   ;
-
-writeAdvancingPage
-   : PAGE
-   ;
-
-writeAdvancingLines
-   : (identifier | literal) (LINE | LINES)?
-   ;
-
-writeAdvancingMnemonic
-   : mnemonicName
-   ;
-
-writeAtEndOfPagePhrase
-   : AT? (END_OF_PAGE | EOP) statement*
-   ;
-
-writeNotAtEndOfPagePhrase
-   : NOT AT? (END_OF_PAGE | EOP) statement*
-   ;
-
 // xml generate statement
 
 xmlGenerateStatement
@@ -2355,6 +2325,73 @@ xmlGenerateType
    : (ATTRIBUTE
    | ELEMENT
    | CONTENT)
+   ;
+
+// xml parse statement
+
+xmlParseStatement
+   : XML_PARSE identifier
+     xmlParseEncodingPhrase?
+     xmlParseReturningNationalPhrase?
+     xmlParseValidatingPhrase?
+     xmlParseProcessingProcedurePhrase
+     onExceptionClause?
+     notOnExceptionClause?
+     xmlParseEndXmlPhrase
+   ;
+
+xmlParseEncodingPhrase
+   : (WITH? ENCODING (identifier | literal))
+   ;
+
+xmlParseReturningNationalPhrase
+   : (RETURNING NATIONAL)
+   ;
+
+xmlParseValidatingPhrase
+   : (VALIDATING WITH? (identifier | (FILE identifier)))
+   ;
+
+xmlParseProcessingProcedurePhrase
+   : (PROCESSING PROCEDURE IS? identifier ((THROUGH | THRU) identifier)?)
+   ;
+
+xmlParseEndXmlPhrase
+   : END_XML
+   ;
+
+// write statement
+
+writeStatement
+   : WRITE recordName writeFromPhrase? writeAdvancingPhrase? writeAtEndOfPagePhrase? writeNotAtEndOfPagePhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_WRITE?
+   ;
+
+writeFromPhrase
+   : FROM (identifier | literal)
+   ;
+
+writeAdvancingPhrase
+   : (BEFORE | AFTER) ADVANCING? (writeAdvancingPage | writeAdvancingLines | writeAdvancingMnemonic)
+   ;
+
+writeAdvancingPage
+   : PAGE
+   ;
+
+writeAdvancingLines
+   : (identifier | literal) (LINE | LINES)?
+   ;
+
+writeAdvancingMnemonic
+   : mnemonicName
+   ;
+
+writeAtEndOfPagePhrase
+   : AT? (END_OF_PAGE | EOP) statement*
+   ;
+
+writeNotAtEndOfPagePhrase
+   : NOT AT? (END_OF_PAGE | EOP) statement*
    ;
 
 // statement phrases ----------------------------------
