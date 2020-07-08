@@ -5197,6 +5197,176 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateStatement(CobolParser.XmlGenerateStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateStatement(CobolParser.XmlGenerateStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateCountInPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateCountInPhrase(CobolParser.XmlGenerateCountInPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateCountInPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateCountInPhrase(CobolParser.XmlGenerateCountInPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateEncodingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateEncodingPhrase(CobolParser.XmlGenerateEncodingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateEncodingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateEncodingPhrase(CobolParser.XmlGenerateEncodingPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateDeclarationPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateDeclarationPhrase(CobolParser.XmlGenerateDeclarationPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateDeclarationPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateDeclarationPhrase(CobolParser.XmlGenerateDeclarationPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateAttributesPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateAttributesPhrase(CobolParser.XmlGenerateAttributesPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateAttributesPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateAttributesPhrase(CobolParser.XmlGenerateAttributesPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateNamespacePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateNamespacePhrase(CobolParser.XmlGenerateNamespacePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateNamespacePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateNamespacePhrase(CobolParser.XmlGenerateNamespacePhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateNamespacePrefixPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateNamespacePrefixPhrase(CobolParser.XmlGenerateNamespacePrefixPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateNamespacePrefixPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateNamespacePrefixPhrase(CobolParser.XmlGenerateNamespacePrefixPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateNamePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateNamePhrase(CobolParser.XmlGenerateNamePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateNamePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateNamePhrase(CobolParser.XmlGenerateNamePhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateTypePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateTypePhrase(CobolParser.XmlGenerateTypePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateTypePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateTypePhrase(CobolParser.XmlGenerateTypePhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateSuppressPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateSuppressPhrase(CobolParser.XmlGenerateSuppressPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateSuppressPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateSuppressPhrase(CobolParser.XmlGenerateSuppressPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateWhenPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateWhenPhrase(CobolParser.XmlGenerateWhenPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateWhenPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateWhenPhrase(CobolParser.XmlGenerateWhenPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateGenericSuppressionPhrase(CobolParser.XmlGenerateGenericSuppressionPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateGenericSuppressionPhrase(CobolParser.XmlGenerateGenericSuppressionPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionNumericPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateGenericSuppressionNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNumericPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionNumericPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateGenericSuppressionNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNumericPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionNonNumericPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateGenericSuppressionNonNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNonNumericPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateGenericSuppressionNonNumericPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateGenericSuppressionNonNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNonNumericPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateEndXmlPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateEndXmlPhrase(CobolParser.XmlGenerateEndXmlPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateEndXmlPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateEndXmlPhrase(CobolParser.XmlGenerateEndXmlPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateFigurativeConstant}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateFigurativeConstant(CobolParser.XmlGenerateFigurativeConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateFigurativeConstant}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateFigurativeConstant(CobolParser.XmlGenerateFigurativeConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateType}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlGenerateType}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#atEndPhrase}.
 	 * @param ctx the parse tree
 	 */

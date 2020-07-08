@@ -6243,6 +6243,210 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterXmlGenerateStatement(CobolParser.XmlGenerateStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateStatement(CobolParser.XmlGenerateStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateCountInPhrase(CobolParser.XmlGenerateCountInPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateCountInPhrase(CobolParser.XmlGenerateCountInPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateEncodingPhrase(CobolParser.XmlGenerateEncodingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateEncodingPhrase(CobolParser.XmlGenerateEncodingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateDeclarationPhrase(CobolParser.XmlGenerateDeclarationPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateDeclarationPhrase(CobolParser.XmlGenerateDeclarationPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateAttributesPhrase(CobolParser.XmlGenerateAttributesPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateAttributesPhrase(CobolParser.XmlGenerateAttributesPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateNamespacePhrase(CobolParser.XmlGenerateNamespacePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateNamespacePhrase(CobolParser.XmlGenerateNamespacePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateNamespacePrefixPhrase(CobolParser.XmlGenerateNamespacePrefixPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateNamespacePrefixPhrase(CobolParser.XmlGenerateNamespacePrefixPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateNamePhrase(CobolParser.XmlGenerateNamePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateNamePhrase(CobolParser.XmlGenerateNamePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateTypePhrase(CobolParser.XmlGenerateTypePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateTypePhrase(CobolParser.XmlGenerateTypePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateSuppressPhrase(CobolParser.XmlGenerateSuppressPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateSuppressPhrase(CobolParser.XmlGenerateSuppressPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateWhenPhrase(CobolParser.XmlGenerateWhenPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateWhenPhrase(CobolParser.XmlGenerateWhenPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateGenericSuppressionPhrase(CobolParser.XmlGenerateGenericSuppressionPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateGenericSuppressionPhrase(CobolParser.XmlGenerateGenericSuppressionPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateGenericSuppressionNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNumericPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateGenericSuppressionNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNumericPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateGenericSuppressionNonNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNonNumericPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateGenericSuppressionNonNumericPhrase(CobolParser.XmlGenerateGenericSuppressionNonNumericPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateEndXmlPhrase(CobolParser.XmlGenerateEndXmlPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateEndXmlPhrase(CobolParser.XmlGenerateEndXmlPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateFigurativeConstant(CobolParser.XmlGenerateFigurativeConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateFigurativeConstant(CobolParser.XmlGenerateFigurativeConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAtEndPhrase(CobolParser.AtEndPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
