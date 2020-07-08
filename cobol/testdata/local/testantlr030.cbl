@@ -32,10 +32,34 @@
                NAMESPACE-PREFIX 'ZZ9PLURALZA'
                NAME SD-001 'ARTHUR'
                     SD-002 'DENT'
-               TYPE SD-003 ELEMENT
+               TYPE SD-003 ELEMENT SD-002-A ATTRIBUTE SD-002-B CONTENT
                SUPPRESS EVERY NONNUMERIC ELEMENT WHEN LOW-VALUES
+                        EVERY NUMERIC ELEMENT 
+                              WHEN LOW-VALUES OR HIGH-VALUES
                ON EXCEPTION PERFORM 1000-para
-               NOT ON EXCEPTION CALL CEE3ABD
+               NOT ON EXCEPTION CALL 'CEE3ABD'
+           END-XML
+
+           XML GENERATE
+               WS-BUF FROM SOME-DATA
+               COUNT IN WS-COUNT
+               WITH ENCODING 37
+               WITH XML-DECLARATION
+               WITH ATTRIBUTES
+               NAMESPACE IS 'AEIOU'
+               NAMESPACE-PREFIX IS 'ZZ9PLURALZA'
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS 'DENT'
+               TYPE OF SD-003 IS ELEMENT
+                       SD-002-A IS ATTRIBUTE
+                       SD-002-B IS CONTENT
+               SUPPRESS EVERY NONNUMERIC ELEMENT WHEN LOW-VALUES
+                        SD-001 WHEN ZERO OR ZEROES OR ZEROS
+                        EVERY NUMERIC ELEMENT 
+                              WHEN LOW-VALUES OR HIGH-VALUES
+                        SD-003 WHEN HIGH-VALUES
+               ON EXCEPTION PERFORM 1000-para
+               NOT ON EXCEPTION CALL 'CEE3ABD'
            END-XML
 
 

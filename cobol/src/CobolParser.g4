@@ -2342,6 +2342,7 @@ xmlGenerateEndXmlPhrase
 xmlGenerateFigurativeConstant
    : (ZERO
    | ZEROES
+   | ZEROS
    | SPACE
    | SPACES
    | LOW_VALUE

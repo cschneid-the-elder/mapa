@@ -47816,6 +47816,7 @@ public class CobolParser extends Parser {
 	public static class XmlGenerateFigurativeConstantContext extends ParserRuleContext {
 		public TerminalNode ZERO() { return getToken(CobolParser.ZERO, 0); }
 		public TerminalNode ZEROES() { return getToken(CobolParser.ZEROES, 0); }
+		public TerminalNode ZEROS() { return getToken(CobolParser.ZEROS, 0); }
 		public TerminalNode SPACE() { return getToken(CobolParser.SPACE, 0); }
 		public TerminalNode SPACES() { return getToken(CobolParser.SPACES, 0); }
 		public TerminalNode LOW_VALUE() { return getToken(CobolParser.LOW_VALUE, 0); }
@@ -47850,7 +47851,7 @@ public class CobolParser extends Parser {
 			{
 			setState(6146);
 			_la = _input.LA(1);
-			if ( !(((((_la - 280)) & ~0x3f) == 0 && ((1L << (_la - 280)) & ((1L << (HIGH_VALUE - 280)) | (1L << (HIGH_VALUES - 280)) | (1L << (LOW_VALUE - 280)))) != 0) || _la==LOW_VALUES || _la==SPACE || _la==SPACES || _la==ZERO || _la==ZEROES) ) {
+			if ( !(((((_la - 280)) & ~0x3f) == 0 && ((1L << (_la - 280)) & ((1L << (HIGH_VALUE - 280)) | (1L << (HIGH_VALUES - 280)) | (1L << (LOW_VALUE - 280)))) != 0) || _la==LOW_VALUES || _la==SPACE || _la==SPACES || ((((_la - 593)) & ~0x3f) == 0 && ((1L << (_la - 593)) & ((1L << (ZERO - 593)) | (1L << (ZEROS - 593)) | (1L << (ZEROES - 593)))) != 0)) ) {
 			_errHandler.recoverInline(this);
 			}
 			else {
@@ -55923,7 +55924,7 @@ public class CobolParser extends Parser {
 		"\u013f\5\2**\u0106\u0106\u013f\u013f\4\2((II\4\2\u0137\u0137\u016f\u016f"+
 		"\4\2\u015d\u015d\u01e5\u01e5\4\2SS\u0232\u0232\4\2\u00ef\u00ef\u00f7\u00f7"+
 		"\4\2\u00d8\u00d8\u00ec\u00ec\7\2\u011a\u011b\u0159\u015a\u0207\u0208\u0253"+
-		"\u0253\u0256\u0256\5\2@@\u0084\u0084\u00c6\u00c6\4\2\u0269\u0269\u026d"+
+		"\u0253\u0255\u0256\5\2@@\u0084\u0084\u00c6\u00c6\4\2\u0269\u0269\u026d"+
 		"\u026d\4\2\u0258\u0258\u0270\u0270\4\2\64\64\u0184\u0184\5\2\u016c\u016c"+
 		"\u019a\u019a\u0253\u0253\4\2\u0123\u0123\u017e\u017e[\2\"\"99;;=>@@CF"+
 		"HHKMOPRRYZ_`ffijrr\u0087\u0087\u0089\u0089\u0090\u0090\u0092\u0092\u009f"+

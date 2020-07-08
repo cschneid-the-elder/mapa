@@ -1,0 +1,41 @@
+#! /usr/bin/awk -f
+
+# add cobol line numbers to input
+# syntax: numit -v type=[prefix | suffix | both] cobolFile
+# type=prefix adds 6 digit numbers to beginning of each record
+# type=suffix adds 8 digit numbers to end of each record
+# type=both adds both
+# prefix destroys first 6 bytes of each record
+# suffix destroys any bytes after column 72
+# both destroys both
+
+{
+
+input = $0
+
+if (type == "prefix") {
+	output = substr(input, 7)
+	printf("%06d%s\n", FNR, output)
+} else if (type == "suffix") {
+	if (length(input) < 72) {
+		output = sprintf("%-72s", input)
+	} else {
+		output = substr(input, 1, 72)
+	}
+	printf("%s%08d\n", output, FNR)
+} else if (type == "both") {
+	if (length(input) < 72) {
+		output = sprintf("%-72s", input)
+	} else {
+		output = substr(input, 1, 72)
+	}
+	output = substr(output, 7, 66)
+	printf("%06d%s%08d\n", FNR, output, FNR)
+} else {
+	print "I am at a loss as to what to do with " type > "/dev/stderr"
+	print "try prefix, suffix, or both" > "/dev/stderr"
+	exit 8
+}
+
+}
+
