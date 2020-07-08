@@ -537,6 +537,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitSymbolicCharacters(CobolParser.SymbolicCharactersContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlSchemaClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlSchemaClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#inputOutputSection}.
 	 * @param ctx the parse tree
 	 */
@@ -5117,86 +5127,6 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitUseDebugOn(CobolParser.UseDebugOnContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteStatement(CobolParser.WriteStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteStatement(CobolParser.WriteStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeFromPhrase}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteFromPhrase(CobolParser.WriteFromPhraseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeFromPhrase}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteFromPhrase(CobolParser.WriteFromPhraseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingPhrase}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteAdvancingPhrase(CobolParser.WriteAdvancingPhraseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingPhrase}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteAdvancingPhrase(CobolParser.WriteAdvancingPhraseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingPage}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteAdvancingPage(CobolParser.WriteAdvancingPageContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingPage}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteAdvancingPage(CobolParser.WriteAdvancingPageContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingLines}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteAdvancingLines(CobolParser.WriteAdvancingLinesContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingLines}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteAdvancingLines(CobolParser.WriteAdvancingLinesContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingMnemonic}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteAdvancingMnemonic(CobolParser.WriteAdvancingMnemonicContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingMnemonic}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteAdvancingMnemonic(CobolParser.WriteAdvancingMnemonicContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeAtEndOfPagePhrase}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteAtEndOfPagePhrase(CobolParser.WriteAtEndOfPagePhraseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeAtEndOfPagePhrase}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteAtEndOfPagePhrase(CobolParser.WriteAtEndOfPagePhraseContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#writeNotAtEndOfPagePhrase}.
-	 * @param ctx the parse tree
-	 */
-	void enterWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#writeNotAtEndOfPagePhrase}.
-	 * @param ctx the parse tree
-	 */
-	void exitWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -5366,6 +5296,146 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXmlGenerateType(CobolParser.XmlGenerateTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlParseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseStatement(CobolParser.XmlParseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlParseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseStatement(CobolParser.XmlParseStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlParseEncodingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseEncodingPhrase(CobolParser.XmlParseEncodingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlParseEncodingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseEncodingPhrase(CobolParser.XmlParseEncodingPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlParseReturningNationalPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseReturningNationalPhrase(CobolParser.XmlParseReturningNationalPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlParseReturningNationalPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseReturningNationalPhrase(CobolParser.XmlParseReturningNationalPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlParseValidatingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseValidatingPhrase(CobolParser.XmlParseValidatingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlParseValidatingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseValidatingPhrase(CobolParser.XmlParseValidatingPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlParseProcessingProcedurePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseProcessingProcedurePhrase(CobolParser.XmlParseProcessingProcedurePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlParseProcessingProcedurePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseProcessingProcedurePhrase(CobolParser.XmlParseProcessingProcedurePhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#xmlParseEndXmlPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseEndXmlPhrase(CobolParser.XmlParseEndXmlPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#xmlParseEndXmlPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseEndXmlPhrase(CobolParser.XmlParseEndXmlPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteStatement(CobolParser.WriteStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteStatement(CobolParser.WriteStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeFromPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteFromPhrase(CobolParser.WriteFromPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeFromPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteFromPhrase(CobolParser.WriteFromPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteAdvancingPhrase(CobolParser.WriteAdvancingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteAdvancingPhrase(CobolParser.WriteAdvancingPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingPage}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteAdvancingPage(CobolParser.WriteAdvancingPageContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingPage}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteAdvancingPage(CobolParser.WriteAdvancingPageContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingLines}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteAdvancingLines(CobolParser.WriteAdvancingLinesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingLines}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteAdvancingLines(CobolParser.WriteAdvancingLinesContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeAdvancingMnemonic}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteAdvancingMnemonic(CobolParser.WriteAdvancingMnemonicContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeAdvancingMnemonic}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteAdvancingMnemonic(CobolParser.WriteAdvancingMnemonicContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeAtEndOfPagePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteAtEndOfPagePhrase(CobolParser.WriteAtEndOfPagePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeAtEndOfPagePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteAtEndOfPagePhrase(CobolParser.WriteAtEndOfPagePhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#writeNotAtEndOfPagePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#writeNotAtEndOfPagePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitWriteNotAtEndOfPagePhrase(CobolParser.WriteNotAtEndOfPagePhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#atEndPhrase}.
 	 * @param ctx the parse tree
