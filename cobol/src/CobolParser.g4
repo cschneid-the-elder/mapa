@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019, 2020, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -1182,7 +1182,7 @@ sentence
    ;
 
 statement
-   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
+   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
    ;
 
 // accept statement
@@ -1663,6 +1663,34 @@ inspectTo
 
 inspectBeforeAfter
    : (BEFORE | AFTER) INITIAL? (identifier | literal)
+   ;
+
+// json generate statement
+
+jsonGenerateStatement
+   : JSON_GENERATE identifier FROM identifier
+     jsonGenerateCountPhrase?
+     jsonGenerateNamePhrase?
+     jsonGenerateSuppressPhrase?
+     onExceptionClause?
+     notOnExceptionClause?
+     jsonGenerateEndJsonPhrase
+   ;
+
+jsonGenerateCountPhrase
+   : (COUNT IN? identifier)
+   ;
+
+jsonGenerateNamePhrase
+   : (NAME OF? (identifier IS? (literal | OMITTED))+)
+   ;
+
+jsonGenerateSuppressPhrase
+   : (SUPPRESS identifier+)
+   ;
+
+jsonGenerateEndJsonPhrase
+   : END_JSON
    ;
 
 // merge statement

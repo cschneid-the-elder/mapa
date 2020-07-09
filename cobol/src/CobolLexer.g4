@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019, 2020, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -251,6 +251,7 @@ END_DIVIDE : E N D MINUSCHAR D I V I D E;
 END_EVALUATE : E N D MINUSCHAR E V A L U A T E;
 END_EXEC : E N D MINUSCHAR E X E C;
 END_IF : E N D MINUSCHAR I F;
+END_JSON : E N D MINUSCHAR J S O N;
 END_MULTIPLY : E N D MINUSCHAR M U L T I P L Y;
 END_OF_PAGE : E N D MINUSCHAR O F MINUSCHAR P A G E;
 END_PERFORM : E N D MINUSCHAR P E R F O R M;
@@ -344,6 +345,7 @@ INTO : I N T O;
 INVALID : I N V A L I D;
 INVOKE : I N V O K E;
 IS : I S;
+JSON_GENERATE : J S O N ' ' G E N E R A T E;
 JUST : J U S T;
 JUSTIFIED : J U S T I F I E D;
 KANJI : K A N J I;

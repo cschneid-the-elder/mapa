@@ -412,3 +412,15 @@ Wed Jul 8 18:24:20 CDT 2020 testNist
 Wed Jul 8 18:40:12 CDT 2020 testrig 031
 Wed Jul 8 18:41:04 CDT 2020 testLocal 031
 Wed Jul 8 18:43:56 CDT 2020 testLocal
+Thu Jul 9 12:49:07 CDT 2020 src/CobolLexer.g4
+Thu Jul 9 12:49:10 CDT 2020 src/CobolParser.g4
+Thu Jul 9 12:49:21 CDT 2020 src/TestIntegration.java
+Thu Jul 9 12:56:31 CDT 2020 testrig 032
+Thu Jul 9 12:56:54 CDT 2020 testrig 032
+Thu Jul 9 13:03:12 CDT 2020 src/TestIntegration.java
+Thu Jul 9 13:03:26 CDT 2020 testrigpp 032
+Thu Jul 9 13:04:32 CDT 2020 jar
+Thu Jul 9 13:04:43 CDT 2020 testLocal 032
+Thu Jul 9 13:04:53 CDT 2020 testLocal
+Thu Jul 9 13:06:35 CDT 2020 testLocal
+Thu Jul 9 13:07:40 CDT 2020 testNist
