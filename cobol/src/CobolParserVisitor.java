@@ -2326,6 +2326,36 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJsonGenerateEndJsonPhrase(CobolParser.JsonGenerateEndJsonPhraseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseStatement(CobolParser.JsonParseStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseWithDetailPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseWithDetailPhrase(CobolParser.JsonParseWithDetailPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseNamePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseNamePhrase(CobolParser.JsonParseNamePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseSuppressPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseSuppressPhrase(CobolParser.JsonParseSuppressPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseEndJsonPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseEndJsonPhrase(CobolParser.JsonParseEndJsonPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#mergeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
