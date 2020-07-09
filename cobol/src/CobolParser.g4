@@ -1182,7 +1182,7 @@ sentence
    ;
 
 statement
-   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
+   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
    ;
 
 // accept statement
@@ -1690,6 +1690,35 @@ jsonGenerateSuppressPhrase
    ;
 
 jsonGenerateEndJsonPhrase
+   : END_JSON
+   ;
+
+// json parse statement
+
+
+jsonParseStatement
+   : JSON_PARSE identifier INTO identifier
+     jsonParseWithDetailPhrase?
+     jsonParseNamePhrase?
+     jsonParseSuppressPhrase?
+     onExceptionClause?
+     notOnExceptionClause?
+     jsonParseEndJsonPhrase
+   ;
+
+jsonParseWithDetailPhrase
+   : (WITH? DETAIL)
+   ;
+
+jsonParseNamePhrase
+   : (NAME OF? (identifier IS? (literal | OMITTED))+)
+   ;
+
+jsonParseSuppressPhrase
+   : (SUPPRESS identifier+)
+   ;
+
+jsonParseEndJsonPhrase
    : END_JSON
    ;
 
