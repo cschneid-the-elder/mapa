@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class CompilerOptionsListener extends CobolPreprocessorBaseListener {
+public class CompilerOptionsListener extends CobolPreprocessorParserBaseListener {
 	public ArrayList<CompilerOptionsWrapper> compilerOpts = null;
 
 	public CompilerOptionsListener(
