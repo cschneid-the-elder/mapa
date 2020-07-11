@@ -401,11 +401,11 @@ conditionalCompilationStatement
    ;
 
 compilerDirectiveCallInterface
-   : (COMPILER_DIRECTIVE_TAG (CALLINTERFACE | CALLINT) (STATIC | DYNAMIC | DLL))
+   : (COMPILER_DIRECTIVE_TAG (CALLINTERFACE | CALLINT) (STATIC | DYNAMIC | DLL_INTERFACE)?)
    ;
 
 compilerDirectiveInline
-   : (COMPILER_DIRECTIVE_TAG INLINE (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG INLINE (INLINE_ON | INLINE_OFF))
    ;
 
 conditionalCompilationDefine
@@ -420,14 +420,14 @@ conditionalCompilationDefinePredicate
    ;
 
 compileTimeArithmeticExpression
-   : (LPARENCHAR* compileTimeSimpleArithmeticExpression (LPARENCHAR* arithmeticOperator LPARENCHAR* compileTimeSimpleArithmeticExpression RPARENCHAR*)* RPARENCHAR*)
+   : (LPARENCHAR* compileTimeSimpleArithmeticExpression (LPARENCHAR* compileTimeArithmeticOp LPARENCHAR* compileTimeSimpleArithmeticExpression RPARENCHAR*)* RPARENCHAR*)
    ;
 
 compileTimeSimpleArithmeticExpression
-   : ((cobolWord | literal) arithmeticOperator (cobolWord | literal))
+   : ((cobolWord | literal) compileTimeArithmeticOp (cobolWord | literal))
    ;
 
-arithmeticOperator
+compileTimeArithmeticOp
    : (ASTERISKCHAR
    | MINUSCHAR
    | PLUSCHAR
@@ -435,7 +435,7 @@ arithmeticOperator
    ;
 
 conditionalCompilationIf
-   : (COMPILER_DIRECTIVE_TAG IF relationalCondition)
+   : (COMPILER_DIRECTIVE_TAG IF conditionalCompilationRelationalCondition)
    ;
 
 conditionalCompilationElse
@@ -451,30 +451,30 @@ conditionalCompilationEvaluate
    ;
 
 conditionalCompilationWhen
-   : COMPILER_DIRECTIVE_TAG WHEN (compileTimeArithmeticExpression | cobolWord | literal | OTHER) ((THROUGH | THRU) (compileTimeArithmeticExpression | cobolWord | literal))?
+   : COMPILER_DIRECTIVE_TAG WHEN (((compileTimeArithmeticExpression | cobolWord | literal | OTHER) ((THROUGH | THRU) (compileTimeArithmeticExpression | cobolWord | literal))?) | conditionalCompilationRelationalCondition)
    ;
 
 conditionalCompilationEndEvaluate
    : COMPILER_DIRECTIVE_TAG END_EVALUATE
    ;
 
-comparisonOp
+conditionalCompilationComparisonOp
    : (IS? NOT? (EQUAL | EQUALCHAR | (LESSTHANCHAR GREATERTHANCHAR) | LESSTHANCHAR | (GREATER THAN?) | GREATERTHANCHAR | (LESS THAN?) | (LESSTHANCHAR EQUALCHAR) | (LESS THAN? OR EQUAL) | (GREATERTHANCHAR EQUALCHAR)) TO?)
    ;
 
-relationalCondition
-   : (LPARENCHAR* condition ((AND | OR) LPARENCHAR* condition RPARENCHAR*)* RPARENCHAR*)
+conditionalCompilationRelationalCondition
+   : (LPARENCHAR* conditionalCompilationCondition ((AND | OR) LPARENCHAR* conditionalCompilationCondition RPARENCHAR*)* RPARENCHAR*)
    ;
 
-condition
-   : (binaryCondition | simpleRelationalCondition)
+conditionalCompilationCondition
+   : (conditionalCompilationBinaryCondition | conditionalCompilationSimpleRelationalCondition)
    ;
 
-simpleRelationalCondition
-   : ((cobolWord | literal) comparisonOp (cobolWord | literal))
+conditionalCompilationSimpleRelationalCondition
+   : ((cobolWord | literal) conditionalCompilationComparisonOp (cobolWord | literal))
    ;
 
-binaryCondition
+conditionalCompilationBinaryCondition
    : cobolWord
    ;
 

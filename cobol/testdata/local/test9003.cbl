@@ -1,0 +1,57 @@
+       ID Division.
+       Program-ID. test9003.
+       Data Division.
+       Working-Storage Section.
+           >>EVALUATE TRUE
+           >>WHEN IGY-CICS AND IGY-SQL AND IGY-SQLIMS
+           COPY DFHATTRS.
+           COPY SQLCA.
+           COPY IMSSTUFF.
+           >>WHEN IGY-CICS AND IGY-SQL
+           COPY DFHATTRS.
+           COPY SQLCA.
+           >>WHEN IGY-CICS
+           COPY DFHATTRS.
+           >>END-EVALUATE
+       Procedure Division.
+           >>EVALUATE IGY-ARCH
+           >>WHEN 8
+           DISPLAY "IGY-ARCH = 8"
+           >>WHEN 9
+           DISPLAY "IGY-ARCH = 9"
+           >>WHEN 10
+           DISPLAY "IGY-ARCH = 10"
+           >>WHEN 11
+           DISPLAY "IGY-ARCH = 11"
+           >>WHEN 12
+           DISPLAY "IGY-ARCH = 12"
+           >>WHEN 13
+           DISPLAY "IGY-ARCH = 13"
+           >>WHEN OTHER
+           DISPLAY "Something new!"
+           >>END-EVALUATE
+
+           >>EVALUATE IGY-ARCH
+           >>WHEN 8 THRU 10
+           DISPLAY "IGY-ARCH = 8 THRU 10"
+           >>WHEN 11 THROUGH 13
+           DISPLAY "IGY-ARCH = 11 THROUGH 13"
+           >>WHEN OTHER
+           DISPLAY "Something new!"
+           >>END-EVALUATE
+
+           >>EVALUATE TRUE
+           >>WHEN IGY-CICS AND IGY-ARCH < 10
+           DISPLAY "Some workaround"
+           >>WHEN IGY-CICS AND (IGY-ARCH = 11 OR IGY-ARCH=13)
+           >>WHEN (IGY-CICS AND IGY-ARCH = 11) OR IGY-ARCH=13
+           >>WHEN (IGY-CICS AND (IGY-ARCH = 11 OR IGY-ARCH=13))
+           DISPLAY "Some other workaround"
+           >>WHEN OTHER
+           DISPLAY "I am surprised"
+           >>END-EVALUATE
+
+
+           GOBACK.
+
+
