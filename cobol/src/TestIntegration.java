@@ -692,7 +692,7 @@ public static void main(String[] args) throws Exception {
 	/**
 	Create a directory to hold temporary files used in processing.  This way,
 	they're all confined together and can be easily disposed of if the
-	-saveTemp option was requested.
+	<code>-saveTemp</code> option was requested.
 	*/
 	public static File newTempDir() throws IOException {
 		File tmpDir = Files.createTempDirectory("CallTree-").toFile();

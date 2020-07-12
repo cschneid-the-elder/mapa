@@ -51,6 +51,20 @@
            DISPLAY "I am surprised"
            >>END-EVALUATE
 
+           >>EVALUATE TRUE
+           >>WHEN X DEFINED
+           >>WHEN X IS DEFINED
+           >>WHEN X NOT DEFINED
+           >>WHEN X IS NOT DEFINED
+           >>WHEN X DEFINED AND Y DEFINED
+           >>WHEN X IS DEFINED OR Y IS DEFINED
+           >>WHEN X NOT DEFINED AND Y NOT DEFINED
+           >>WHEN X IS NOT DEFINED OR Y IS NOT DEFINED
+           >>WHEN X DEFINED AND (Y DEFINED OR Z DEFINED)
+           >>WHEN X IS DEFINED OR (Y IS DEFINED AND Z IS DEFINED)
+           >>WHEN X NOT DEFINED OR (IGY-CICS AND IGY-SQL)
+           >>WHEN X IS NOT DEFINED AND (Y OR Z AND (A AND B))
+           >>END-EVALUATE
 
            GOBACK.
 

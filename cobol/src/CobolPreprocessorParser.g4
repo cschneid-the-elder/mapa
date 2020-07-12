@@ -409,14 +409,13 @@ compilerDirectiveInline
    ;
 
 conditionalCompilationDefine
-   : (COMPILER_DIRECTIVE_TAG DEFINE cobolWord AS? (conditionalCompilationDefinePredicate | OFF))
+   : (COMPILER_DIRECTIVE_TAG DEFINE cobolWord AS? (conditionalCompilationDefinePredicate | INLINE_OFF)?  OVERRIDE?)
    ;
 
 conditionalCompilationDefinePredicate
-   : ((compileTimeArithmeticExpression
+   : (compileTimeArithmeticExpression
    | literal
    | PARAMETER)
-     OVERRIDE?)
    ;
 
 compileTimeArithmeticExpression
@@ -467,7 +466,7 @@ conditionalCompilationRelationalCondition
    ;
 
 conditionalCompilationCondition
-   : (conditionalCompilationBinaryCondition | conditionalCompilationSimpleRelationalCondition)
+   : (conditionalCompilationBinaryCondition | conditionalCompilationSimpleRelationalCondition | conditionalCompilationDefinedCondition)
    ;
 
 conditionalCompilationSimpleRelationalCondition
@@ -476,6 +475,10 @@ conditionalCompilationSimpleRelationalCondition
 
 conditionalCompilationBinaryCondition
    : cobolWord
+   ;
+
+conditionalCompilationDefinedCondition
+   : (cobolWord IS? NOT? DEFINED)
    ;
 
 // keywords ----------------------------------
@@ -489,7 +492,7 @@ charDataKeyword
    | FASTSRT | FLAG | FLAGSTD | FULL | FSRT
    | GDS | GRAPHIC
    | HEX | HGPR | HOOK
-   | IN | INITCHECK | IC | INTDATE | INITIAL | INL | IS
+   | IN | INITCHECK | IC | INTDATE | INITIAL | INL
    | JA | JP
    | KA
    | LANG | LANGUAGE | LAX | LAXPERF | LC | LENGTH | LIB | LILIAN | LIN | LINECOUNT | LINKAGE | LIST | LM | LONGMIXED | LONGUPPER | LP | LU | LXPRF
@@ -523,7 +526,7 @@ charDataKeyword
    | NOZC | NOZLEN | NOZON | NOZONECHECK | NOZWB
    | NSEQ | NSYMBOL | NS
    | NUM | NUMBER | NUMCHECK | NUMPROC
-   | OBJ | OBJECT | ON | OF | OFF | OFFSET | OMITODOMIN | OOM | OPMARGINS | OPSEQUENCE | OPTIMIZE | OP | OPT | OPTFILE | OPTIONS | OR | OUT | OUTDD | OVERRIDE
+   | OBJ | OBJECT | ON | OF | OFF | OFFSET | OMITODOMIN | OOM | OPMARGINS | OPSEQUENCE | OPTIMIZE | OP | OPT | OPTFILE | OPTIONS | OR | OUT | OUTDD
    | PAC | PARMCHECK | PATH | PFD | PGMN | PGMNAME | PLUSCHAR | PPTDBG | PRESERVE | PROCESS | PROLOG
    | QUALIFY | QUA | QUOTE
    | RENT | REPLACING | RMODE | RULES

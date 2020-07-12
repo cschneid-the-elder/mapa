@@ -22,4 +22,22 @@
            >>END-IF
            >>END-IF
 
+           >>IF X DEFINED
+           DISPLAY "X DEFINED"
+           >>END-IF
+
+           >>IF X IS DEFINED
+           DISPLAY "X DEFINED"
+           >>END-IF
+
+           >>IF X NOT DEFINED
+           DISPLAY "X NOT DEFINED"
+           >>END-IF
+
+           >>IF X IS NOT DEFINED
+           DISPLAY "X NOT DEFINED"
+           >>END-IF
+
+
+
            GOBACK.
