@@ -409,7 +409,7 @@ compilerDirectiveInline
    ;
 
 conditionalCompilationDefine
-   : (COMPILER_DIRECTIVE_TAG DEFINE cobolWord AS? (conditionalCompilationDefinePredicate | INLINE_OFF)?  OVERRIDE?)
+   : (COMPILER_DIRECTIVE_TAG DEFINE IDENTIFIER AS? (conditionalCompilationDefinePredicate | INLINE_OFF)?  OVERRIDE?)
    ;
 
 conditionalCompilationDefinePredicate
@@ -423,7 +423,7 @@ compileTimeArithmeticExpression
    ;
 
 compileTimeSimpleArithmeticExpression
-   : ((cobolWord | literal) compileTimeArithmeticOp (cobolWord | literal))
+   : ((IDENTIFIER | literal) compileTimeArithmeticOp (IDENTIFIER | literal))
    ;
 
 compileTimeArithmeticOp
@@ -446,11 +446,11 @@ conditionalCompilationEndIf
    ;
 
 conditionalCompilationEvaluate
-   : COMPILER_DIRECTIVE_TAG EVALUATE (TRUE | compileTimeArithmeticExpression | cobolWord | literal)
+   : COMPILER_DIRECTIVE_TAG EVALUATE (TRUE | compileTimeArithmeticExpression | IDENTIFIER | literal)
    ;
 
 conditionalCompilationWhen
-   : COMPILER_DIRECTIVE_TAG WHEN (((compileTimeArithmeticExpression | cobolWord | literal | OTHER) ((THROUGH | THRU) (compileTimeArithmeticExpression | cobolWord | literal))?) | conditionalCompilationRelationalCondition)
+   : COMPILER_DIRECTIVE_TAG WHEN (((compileTimeArithmeticExpression | IDENTIFIER | literal | OTHER) ((THROUGH | THRU) (compileTimeArithmeticExpression | IDENTIFIER | literal))?) | conditionalCompilationRelationalCondition)
    ;
 
 conditionalCompilationEndEvaluate
@@ -458,7 +458,7 @@ conditionalCompilationEndEvaluate
    ;
 
 conditionalCompilationComparisonOp
-   : (IS? NOT? (EQUAL | EQUALCHAR | (LESSTHANCHAR GREATERTHANCHAR) | LESSTHANCHAR | (GREATER THAN?) | GREATERTHANCHAR | (LESS THAN?) | (LESSTHANCHAR EQUALCHAR) | (LESS THAN? OR EQUAL) | (GREATERTHANCHAR EQUALCHAR)) TO?)
+   : (IS? NOT? (EQUAL | EQUALCHAR | NOTEQUALCHAR | LESSTHANCHAR | (GREATER THAN?) | GREATERTHANCHAR | (LESS THAN?) | LESSOREQUALCHAR | (LESS THAN? OR EQUAL) | GREATEROREQUALCHAR) TO?)
    ;
 
 conditionalCompilationRelationalCondition
@@ -470,15 +470,15 @@ conditionalCompilationCondition
    ;
 
 conditionalCompilationSimpleRelationalCondition
-   : ((cobolWord | literal) conditionalCompilationComparisonOp (cobolWord | literal))
+   : ((IDENTIFIER | literal) conditionalCompilationComparisonOp (IDENTIFIER | literal))
    ;
 
 conditionalCompilationBinaryCondition
-   : cobolWord
+   : IDENTIFIER
    ;
 
 conditionalCompilationDefinedCondition
-   : (cobolWord IS? NOT? DEFINED)
+   : (IDENTIFIER IS? NOT? DEFINED)
    ;
 
 // keywords ----------------------------------

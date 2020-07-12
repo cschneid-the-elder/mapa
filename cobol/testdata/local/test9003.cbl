@@ -12,6 +12,12 @@
            COPY SQLCA.
            >>WHEN IGY-CICS
            COPY DFHATTRS.
+           >>WHEN IGY-ARCH <> 10
+           DISPLAY "IGY-ARCH <> 10"
+           >>WHEN IGY-ARCH <= 10
+           DISPLAY "IGY-ARCH <= 10"
+           >>WHEN IGY-ARCH >= 10
+           DISPLAY "IGY-ARCH >= 10"
            >>END-EVALUATE
        Procedure Division.
            >>EVALUATE IGY-ARCH
