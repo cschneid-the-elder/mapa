@@ -34,6 +34,10 @@
            >>END-IF
            >>END-IF
 
+           >>IF IGY-ARCH NOT GREATER THAN OR EQUAL TO 10
+           DISPLAY "3"
+           >>END-IF
+
            >>IF X DEFINED
            DISPLAY "X DEFINED"
            >>END-IF

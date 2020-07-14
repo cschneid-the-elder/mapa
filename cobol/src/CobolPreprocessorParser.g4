@@ -458,11 +458,11 @@ conditionalCompilationEndEvaluate
    ;
 
 conditionalCompilationComparisonOp
-   : (IS? NOT? (EQUAL | EQUALCHAR | NOTEQUALCHAR | LESSTHANCHAR | (GREATER THAN?) | GREATERTHANCHAR | (LESS THAN?) | LESSOREQUALCHAR | (LESS THAN? OR EQUAL) | GREATEROREQUALCHAR) TO?)
+   : (IS? NOT? (EQUAL | EQUALCHAR | NOTEQUALCHAR | LESSTHANCHAR | (GREATER THAN?) | GREATERTHANCHAR | (LESS THAN?) | LESSOREQUALCHAR | (LESS THAN? OR EQUAL) | GREATEROREQUALCHAR | (GREATER THAN? OR EQUAL)) TO?)
    ;
 
 conditionalCompilationRelationalCondition
-   : (LPARENCHAR* conditionalCompilationCondition ((AND | OR) LPARENCHAR* conditionalCompilationCondition RPARENCHAR*)* RPARENCHAR*)
+   : (LPARENCHAR* conditionalCompilationCondition ((AND | OR) LPARENCHAR* conditionalCompilationCondition RPARENCHAR*)* RPARENCHAR*)+
    ;
 
 conditionalCompilationCondition
