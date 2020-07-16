@@ -413,20 +413,21 @@ conditionalCompilationDefine
    ;
 
 conditionalCompilationDefinePredicate
-   : (compileTimeArithmeticExpression
+   : (conditionalCompilationArithmeticExpression
    | literal
+   | IDENTIFIER
    | PARAMETER)
    ;
 
-compileTimeArithmeticExpression
-   : (LPARENCHAR* compileTimeSimpleArithmeticExpression (LPARENCHAR* compileTimeArithmeticOp LPARENCHAR* compileTimeSimpleArithmeticExpression RPARENCHAR*)* RPARENCHAR*)
+conditionalCompilationArithmeticExpression
+   : (LPARENCHAR* conditionalCompilationSimpleArithmeticExpression (LPARENCHAR* conditionalCompilationArithmeticOp LPARENCHAR* conditionalCompilationSimpleArithmeticExpression RPARENCHAR*)* RPARENCHAR*)
    ;
 
-compileTimeSimpleArithmeticExpression
-   : ((IDENTIFIER | literal) compileTimeArithmeticOp (IDENTIFIER | literal))
+conditionalCompilationSimpleArithmeticExpression
+   : ((IDENTIFIER | literal) conditionalCompilationArithmeticOp (IDENTIFIER | literal))
    ;
 
-compileTimeArithmeticOp
+conditionalCompilationArithmeticOp
    : (ASTERISKCHAR
    | MINUSCHAR
    | PLUSCHAR
@@ -446,11 +447,11 @@ conditionalCompilationEndIf
    ;
 
 conditionalCompilationEvaluate
-   : COMPILER_DIRECTIVE_TAG EVALUATE (TRUE | compileTimeArithmeticExpression | IDENTIFIER | literal)
+   : COMPILER_DIRECTIVE_TAG EVALUATE (TRUE | conditionalCompilationArithmeticExpression | IDENTIFIER | literal)
    ;
 
 conditionalCompilationWhen
-   : COMPILER_DIRECTIVE_TAG WHEN (((compileTimeArithmeticExpression | IDENTIFIER | literal | OTHER) ((THROUGH | THRU) (compileTimeArithmeticExpression | IDENTIFIER | literal))?) | conditionalCompilationRelationalCondition)
+   : COMPILER_DIRECTIVE_TAG WHEN (((conditionalCompilationArithmeticExpression | IDENTIFIER | literal | OTHER) ((THROUGH | THRU) (conditionalCompilationArithmeticExpression | IDENTIFIER | literal))?) | conditionalCompilationRelationalCondition)
    ;
 
 conditionalCompilationEndEvaluate

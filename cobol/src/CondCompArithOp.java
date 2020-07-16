@@ -8,22 +8,22 @@ class CondCompArithOp implements CondCompToken {
 
 	private String myName = this.getClass().getName();
 	private CondCompTokenType type = null;
-	private CobolPreprocessorParser.CompileTimeArithmeticOpContext ctx = null;
+	private CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctx = null;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
 
 	public static List<CondCompArithOp> bunchOfThese(
-					List<CobolPreprocessorParser.CompileTimeArithmeticOpContext> list) {
+					List<CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext> list) {
 		ArrayList<CondCompArithOp> ccaoList = new ArrayList<>();
 
-		for (CobolPreprocessorParser.CompileTimeArithmeticOpContext ctaoc: list) {
+		for (CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctaoc: list) {
 			ccaoList.add(new CondCompArithOp(ctaoc);
 		}
 
 		return ccaoList;
 	}
 
-	public CondCompArithOp(CobolPreprocessorParser.CompileTimeArithmeticOpContext ctaoc) {
+	public CondCompArithOp(CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctaoc) {
 		this.ctx = ctaoc;
 		if (this.ctx.ASTERISKCHAR() != null) {
 			this.tn = this.ctx.ASTERISKCHAR();

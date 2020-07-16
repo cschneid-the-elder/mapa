@@ -14,16 +14,17 @@ class CondCompVar implements CondCompToken {
 	private CondCompTokenType type = null;
 	private CobolPreprocessorParser.ConditionalCompilationDefinePredicate predicate = null;
 	private CobolPreprocessorParser.LiteralContext literalCtx = null;
-
-}	private CobolPreprocessorParser.CompileTimeArithmeticOpContext ctx = null;
+	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpression expression = null;
+	private CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctx = null;
+	private Boolean parameter = false;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
 
 	public static List<CondCompArithOp> bunchOfThese(
-					List<CobolPreprocessorParser.CompileTimeArithmeticOpContext> list) {
+					List<CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext> list) {
 		ArrayList<CondCompArithOp> ccaoList = new ArrayList<>();
 
-		for (CobolPreprocessorParser.CompileTimeArithmeticOpContext ctaoc: list) {
+		for (CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctaoc: list) {
 			ccaoList.add(new CondCompArithOp(ctaoc);
 		}
 
@@ -40,8 +41,13 @@ class CondCompVar implements CondCompToken {
 			// >>DEFINE only
 		} else {
 			this.literalCtx = this.predicate.literal();
+			if (this.predicate.PARAMETER() != null) {
+				this.parameter = true;
+			}
 			if (this.literalCtx == null) {
 				// set to an expression
+				this.expression = this.predicate.conditionalCompilationArithmeticExpression();
+				
 			} else {
 				if (this.literalCtx.NONNUMERICLITERAL() == null) {
 					if (this.literalCtx.NUMERICLITERAL() == null) {
