@@ -47,6 +47,7 @@ class CondCompVar implements CondCompToken {
 					if (this.literalCtx.NUMERICLITERAL() == null) {
 						// this is very bad
 					} else {
+						this.type = CondCompTokenType.VAR_INTEGER;
 						this.setValue(this.literalCtx.NUMERICLITERAL());
 					}
 				} else {
@@ -59,6 +60,23 @@ class CondCompVar implements CondCompToken {
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 
+	}
+
+	private void setValue(TerminalNode t) {
+		String aString = t.getSymbol().getText();
+		if (this.type == CondCompTokenType.VAR_INTEGER) {
+			this.intValue = new Integer(aString);
+		} else if (aString.toUpper().startsWith("B'")) {
+			this.type = CondCompTokenType.VAR_BOOLEAN;
+			if (aString.toUpper().equals("B'0'")) {
+				this.boolValue = false;
+			} else {
+				this.boolValue = true;
+			}
+		} else {
+			this.type = CondCompTokenType.VAR_ALPHANUM;
+			this.alnumValue = aString;
+		}
 	}
 
 	public long getSortKey() {
