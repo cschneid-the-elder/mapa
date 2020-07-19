@@ -2,8 +2,11 @@ public interface CondCompToken {
 
 	public long getSortKey();
 
+	public int getType();
+
 	enum CondCompTokenType {
-			VAR_INTEGER
+			DEFINE_ONLY
+			, VAR_INTEGER
 			, VAR_BOOLEAN
 			, VAR_ALPHANUM
 			, NUMOP_ADD
@@ -20,6 +23,7 @@ public interface CondCompToken {
 			, COMPAREOP_LE
 			, COMPAREOP_GT
 			, COMPAREOP_GE
+			, SIMPLE_RELATION
 	}
 
 

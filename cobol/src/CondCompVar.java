@@ -20,38 +20,51 @@ class CondCompVar implements CondCompToken {
 	private TerminalNode tn = null;
 	private long sortKey = -1;
 
-	public static List<CondCompArithOp> bunchOfThese(
-					List<CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext> list) {
-		ArrayList<CondCompArithOp> ccaoList = new ArrayList<>();
+	public static List<CondCompVar> bunchOfThese(
+					List<CobolPreprocessorParser.ConditionalCompilationDefineContext> list) {
+		ArrayList<CondCompVar> ccVarList = new ArrayList<>();
 
-		for (CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctaoc: list) {
-			ccaoList.add(new CondCompArithOp(ctaoc);
+		for (CobolPreprocessorParser.ConditionalCompilationDefineContext ccVar: list) {
+			ccVarList.add(new CondCompVar(ccVar);
 		}
 
-		return ccaoList;
+		return ccVarList;
 	}
 
 	public CondCompArithOp(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc) {
 		this.ctx = ccdc;
 		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
-		this.tn = this.ctx.COMPILER_DIRECTIVE_TAG();
+		this.tn = this.ctx.IDENTIFIER();
+
+		long line = this.tn.getSymbol().getLine();
+		long posn = this.tn.getSymbol().getCharPositionInLine();
+		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 
 		this.predicate = this.ctx.conditionalCompilationDefinePredicate()
 		if (this.predicate == null) {
-			// >>DEFINE only
+			this.type = CondCompTokenType.DEFINE_ONLY;
 		} else {
 			this.literalCtx = this.predicate.literal();
 			if (this.predicate.PARAMETER() != null) {
 				this.parameter = true;
 			}
 			if (this.literalCtx == null) {
-				// set to an expression
-				this.expression = this.predicate.conditionalCompilationArithmeticExpression();
-				
+				if (this.predicate.IDENTIFIER() == null) {
+					// set to an expression
+					this.expression = this.predicate.conditionalCompilationArithmeticExpression();
+				} else {
+					//set to the value of another variable
+				}
 			} else {
 				if (this.literalCtx.NONNUMERICLITERAL() == null) {
 					if (this.literalCtx.NUMERICLITERAL() == null) {
-						// this is very bad
+						throw new IllegalArgumentException(
+							"@ " + line + " var " + this.varName
+							+ " ConditionalCompilationDefineContext"
+							+ ".ConditionalCompilationDefinePredicateContext"
+							+ ".LiteralContext"
+							+ " NONNUMERICLITERAL() == null"
+							+ " && NUMERICLITERAL() == null");
 					} else {
 						this.type = CondCompTokenType.VAR_INTEGER;
 						this.setValue(this.literalCtx.NUMERICLITERAL());
@@ -61,10 +74,6 @@ class CondCompVar implements CondCompToken {
 				}
 			}
 		}
-
-		long line = this.tn.getSymbol().getLine();
-		long posn = this.tn.getSymbol().getCharPositionInLine();
-		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 
 	}
 
@@ -89,4 +98,104 @@ class CondCompVar implements CondCompToken {
 		return this.sortKey;
 	}
 
+	public Boolean varNameIs(TerminalNode identifier) {
+		return this.varName.equals(identifier.getSymbol().getText());
+	}
 
+	public String getVarName() {
+		return this.varName;
+	}
+
+	public int getType() {
+		return this.type;
+	}
+
+	public Integer getIntValue() {
+		return this.intValue;
+	}
+
+	public String getAlnumValue() {
+		return this.alnumValue;
+	}
+
+	public Boolean getBoolValue() {
+		return this.boolValue;
+	}
+
+	public Boolean compareTo(CondCompVar var, CondCompComparisonOp op) {
+		int comparison = 0;
+		Boolean rc = null;
+
+		if (this.type != var.type) {
+			throw new IllegalArgumentException(
+						this.getVarName()
+						+ " is of type "
+						+ this.getType()
+						+ " and var "
+						+ var.getVarName()
+						+ " is of type "
+						+ var.getType()
+						+ "and #compareTo() is thus invalid");
+		}
+
+		switch(this.type) {
+			case VAR_INTEGER:
+				comparison = this.intValue.compareTo(var.getIntValue());
+				break;
+			case VAR_ALPHANUM:
+				comparison = this.alnumValue.compareTo(var.getAlnumValue());
+				break;
+			default:
+				throw new IllegalArgumentException(
+							this.getVarName
+							+ " is of type "
+							+ this.getType
+							+ " and #compareTo() is thus invalid");
+		}
+
+		switch(op.getType()) {
+			case COMPAREOP_EQ:
+				if (comparison == 0) {
+					rc = true;
+				} else {
+					rc = false;
+				}
+			case COMPAREOP_NE:
+				if (comparison == 0) {
+					rc = false;
+				} else {
+					rc = true;
+				}
+			case COMPAREOP_LT:
+				if (comparison < 0) {
+					rc = true;
+				} else {
+					rc = false;
+				}
+			case COMPAREOP_LE:
+				if (comparison <= 0) {
+					rc = true;
+				} else {
+					rc = false;
+				}
+			case COMPAREOP_GT:
+				if (comparison > 0) {
+					rc = true;
+				} else {
+					rc = false;
+				}
+			case COMPAREOP_GE:
+				if (comparison >= 0) {
+					rc = true;
+				} else {
+					rc = false;
+				}
+			default:
+				throw new IllegalArgumentException(
+							"comparison operator is of unknown type");
+		}
+
+		return rc;
+	}
+
+}

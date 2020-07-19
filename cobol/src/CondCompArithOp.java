@@ -49,4 +49,7 @@ class CondCompArithOp implements CondCompToken {
 		return this.sortKey;
 	}
 
+	public int getType() {
+		return this.type;
+	}
 }
