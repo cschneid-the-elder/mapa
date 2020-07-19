@@ -122,7 +122,16 @@ class CondCompVar implements CondCompToken {
 		return this.boolValue;
 	}
 
-	public Boolean compareTo(CondCompVar var, CondCompComparisonOp op) {
+	/**
+	This method returns a Boolean indicating whether the comparison,
+	indicated by the first argument, is true with respect to the second
+	argument.
+
+	>>IF this op var
+
+	...if you will.
+	*/
+	public Boolean compareTo(CondCompComparisonOp op, CondCompVar var) {
 		int comparison = 0;
 		Boolean rc = null;
 
@@ -152,6 +161,117 @@ class CondCompVar implements CondCompToken {
 							+ this.getType
 							+ " and #compareTo() is thus invalid");
 		}
+
+		return this.compare(comparison, op);
+	}
+
+	/**
+	This method returns a Boolean indicating whether the comparison,
+	indicated by the second argument, is true with respect to the first
+	argument.
+
+	>>IF var op this
+
+	...if you will.
+	*/
+	public Boolean compareTo(CondCompVar var, CondCompComparisonOp op) {
+		int comparison = 0;
+		Boolean rc = null;
+
+		if (this.type != var.type) {
+			throw new IllegalArgumentException(
+						this.getVarName()
+						+ " is of type "
+						+ this.getType()
+						+ " and var "
+						+ var.getVarName()
+						+ " is of type "
+						+ var.getType()
+						+ "and #compareTo() is thus invalid");
+		}
+
+		switch(this.type) {
+			case VAR_INTEGER:
+				comparison = var.getIntValue().compareTo(this.intValue);
+				break;
+			case VAR_ALPHANUM:
+				comparison = var.getAlnumValue().compareTo(this.alnumValue);
+				break;
+			default:
+				throw new IllegalArgumentException(
+							this.getVarName
+							+ " is of type "
+							+ this.getType
+							+ " and #compareTo() is thus invalid");
+		}
+
+		return this.compare(comparison, op);
+	}
+
+	/**
+	This method returns a Boolean indicating whether the comparison,
+	indicated by the first argument, is true with respect to the second
+	argument.
+
+	>>IF this op t
+
+	...if you will.
+	*/
+	public Boolean compareTo(CondCompComparisonOp op, TerminalNode t) {
+		int comparison = 0;
+		String tText = t.var.getSymbol().getText();
+
+		switch(this.type) {
+			case VAR_INTEGER:
+				comparison = this.intValue.compareTo(new Integer(tText));
+				break;
+			case VAR_ALPHANUM:
+				comparison = this.alnumValue.compareTo(tText);
+				break;
+			default:
+				throw new IllegalArgumentException(
+							this.getVarName()
+							+ " is of type "
+							+ this.getType()
+							+ " and #compareTo() is thus invalid");
+		}
+
+		return this.compare(comparison, op);
+	}
+
+	/**
+	This method returns a Boolean indicating whether the comparison,
+	indicated by the first argument, is true with respect to the second
+	argument.
+
+	>>IF t op this
+
+	...if you will.
+	*/
+	public Boolean compareTo(TerminalNode t, CondCompComparisonOp op) {
+		int comparison = 0;
+		String tText = t.var.getSymbol().getText();
+
+		switch(this.type) {
+			case VAR_INTEGER:
+				comparison = new Integer(tText).compareTo(this.intValue);
+				break;
+			case VAR_ALPHANUM:
+				comparison = tText.compareTo(this.alnumValue);
+				break;
+			default:
+				throw new IllegalArgumentException(
+							this.getVarName()
+							+ " is of type "
+							+ this.getType()
+							+ " and #compareTo() is thus invalid");
+		}
+
+		return this.compare(comparison, op);
+	}
+
+	private Boolean compare(int comparison, CondCompComparisonOp op) {
+		Boolean rc = null;
 
 		switch(op.getType()) {
 			case COMPAREOP_EQ:
