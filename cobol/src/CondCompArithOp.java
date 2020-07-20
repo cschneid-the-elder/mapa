@@ -17,7 +17,7 @@ class CondCompArithOp implements CondCompToken {
 		ArrayList<CondCompArithOp> ccaoList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctaoc: list) {
-			ccaoList.add(new CondCompArithOp(ctaoc);
+			ccaoList.add(new CondCompArithOp(ctaoc));
 		}
 
 		return ccaoList;
@@ -49,7 +49,7 @@ class CondCompArithOp implements CondCompToken {
 		return this.sortKey;
 	}
 
-	public int getType() {
+	public CondCompTokenType getType() {
 		return this.type;
 	}
 }

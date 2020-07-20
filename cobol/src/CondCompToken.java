@@ -2,7 +2,7 @@ public interface CondCompToken {
 
 	public long getSortKey();
 
-	public int getType();
+	public CondCompTokenType getType();
 
 	enum CondCompTokenType {
 			DEFINE_ONLY
@@ -24,6 +24,8 @@ public interface CondCompToken {
 			, COMPAREOP_GT
 			, COMPAREOP_GE
 			, SIMPLE_RELATION
+			, BINARY_CONDITION
+			, DEFINED_CONDITION
 	}
 
 

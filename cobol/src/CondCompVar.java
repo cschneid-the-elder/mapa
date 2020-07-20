@@ -12,10 +12,10 @@ class CondCompVar implements CondCompToken {
 	private Boolean boolValue = null;
 	private String alnumValue = null;
 	private CondCompTokenType type = null;
-	private CobolPreprocessorParser.ConditionalCompilationDefinePredicate predicate = null;
+	private CobolPreprocessorParser.ConditionalCompilationDefinePredicateContext predicate = null;
 	private CobolPreprocessorParser.LiteralContext literalCtx = null;
-	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpression expression = null;
-	private CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctx = null;
+	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext expression = null;
+	private CobolPreprocessorParser.ConditionalCompilationDefineContext ctx = null;
 	private Boolean parameter = false;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
@@ -25,13 +25,13 @@ class CondCompVar implements CondCompToken {
 		ArrayList<CondCompVar> ccVarList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.ConditionalCompilationDefineContext ccVar: list) {
-			ccVarList.add(new CondCompVar(ccVar);
+			ccVarList.add(new CondCompVar(ccVar));
 		}
 
 		return ccVarList;
 	}
 
-	public CondCompArithOp(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc) {
+	public CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc) {
 		this.ctx = ccdc;
 		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.ctx.IDENTIFIER();
@@ -40,7 +40,7 @@ class CondCompVar implements CondCompToken {
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 
-		this.predicate = this.ctx.conditionalCompilationDefinePredicate()
+		this.predicate = this.ctx.conditionalCompilationDefinePredicate();
 		if (this.predicate == null) {
 			this.type = CondCompTokenType.DEFINE_ONLY;
 		} else {
@@ -81,9 +81,9 @@ class CondCompVar implements CondCompToken {
 		String aString = t.getSymbol().getText();
 		if (this.type == CondCompTokenType.VAR_INTEGER) {
 			this.intValue = new Integer(aString);
-		} else if (aString.toUpper().startsWith("B'")) {
+		} else if (aString.toUpperCase().startsWith("B'")) {
 			this.type = CondCompTokenType.VAR_BOOLEAN;
-			if (aString.toUpper().equals("B'0'")) {
+			if (aString.toUpperCase().equals("B'0'")) {
 				this.boolValue = false;
 			} else {
 				this.boolValue = true;
@@ -106,7 +106,7 @@ class CondCompVar implements CondCompToken {
 		return this.varName;
 	}
 
-	public int getType() {
+	public CondCompTokenType getType() {
 		return this.type;
 	}
 
@@ -156,9 +156,9 @@ class CondCompVar implements CondCompToken {
 				break;
 			default:
 				throw new IllegalArgumentException(
-							this.getVarName
+							this.getVarName()
 							+ " is of type "
-							+ this.getType
+							+ this.getType()
 							+ " and #compareTo() is thus invalid");
 		}
 
@@ -172,7 +172,7 @@ class CondCompVar implements CondCompToken {
 
 	>>IF var op this
 
-	...if you will.
+	...if you will.  It's possible this isn't used.
 	*/
 	public Boolean compareTo(CondCompVar var, CondCompComparisonOp op) {
 		int comparison = 0;
@@ -192,16 +192,16 @@ class CondCompVar implements CondCompToken {
 
 		switch(this.type) {
 			case VAR_INTEGER:
-				comparison = var.getIntValue().compareTo(this.intValue);
+				comparison = var.getIntValue().compareTo(this.getIntValue());
 				break;
 			case VAR_ALPHANUM:
-				comparison = var.getAlnumValue().compareTo(this.alnumValue);
+				comparison = var.getAlnumValue().compareTo(this.getAlnumValue());
 				break;
 			default:
 				throw new IllegalArgumentException(
-							this.getVarName
+							this.getVarName()
 							+ " is of type "
-							+ this.getType
+							+ this.getType()
 							+ " and #compareTo() is thus invalid");
 		}
 
@@ -219,7 +219,7 @@ class CondCompVar implements CondCompToken {
 	*/
 	public Boolean compareTo(CondCompComparisonOp op, TerminalNode t) {
 		int comparison = 0;
-		String tText = t.var.getSymbol().getText();
+		String tText = t.getSymbol().getText();
 
 		switch(this.type) {
 			case VAR_INTEGER:
@@ -250,7 +250,7 @@ class CondCompVar implements CondCompToken {
 	*/
 	public Boolean compareTo(TerminalNode t, CondCompComparisonOp op) {
 		int comparison = 0;
-		String tText = t.var.getSymbol().getText();
+		String tText = t.getSymbol().getText();
 
 		switch(this.type) {
 			case VAR_INTEGER:
@@ -280,36 +280,42 @@ class CondCompVar implements CondCompToken {
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_NE:
 				if (comparison == 0) {
 					rc = false;
 				} else {
 					rc = true;
 				}
+				break;
 			case COMPAREOP_LT:
 				if (comparison < 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_LE:
 				if (comparison <= 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_GT:
 				if (comparison > 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_GE:
 				if (comparison >= 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			default:
 				throw new IllegalArgumentException(
 							"comparison operator is of unknown type");

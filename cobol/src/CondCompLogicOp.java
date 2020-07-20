@@ -41,7 +41,7 @@ class CondCompLogicOp implements CondCompToken {
 		return this.sortKey;
 	}
 
-	public int getType() {
+	public CondCompTokenType getType() {
 		return this.type;
 	}
 }

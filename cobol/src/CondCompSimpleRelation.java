@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
 
-class CondCompSimpleRelation implements CondCompToken {
+class CondCompSimpleRelation implements CondCompToken, CondCompCondition {
 
 	private String myName = this.getClass().getName();
 	private CondCompTokenType type = null;
@@ -23,7 +23,7 @@ class CondCompSimpleRelation implements CondCompToken {
 		ArrayList<CondCompSimpleRelation> ccsrList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext ccsrc: ctxList) {
-			ccsrList.add(new CondCompSimpleRelation(ccsrc, varList);
+			ccsrList.add(new CondCompSimpleRelation(ccsrc, varList));
 		}
 
 		return ccsrList;
@@ -82,8 +82,8 @@ class CondCompSimpleRelation implements CondCompToken {
 			this.arg2 = this.literalValue(ccsrc.literal(1));
 		} else {
 			if (ccsrc.IDENTIFIER().size() == 2) {
-				this.arg1 == ccsrc.IDENTIFIER(0);
-				this.arg2 == ccsrc.IDENTIFIER(1);
+				this.arg1 = ccsrc.IDENTIFIER(0);
+				this.arg2 = ccsrc.IDENTIFIER(1);
 				this.var1 = this.varFromList(this.arg1, varList);
 				this.var2 = this.varFromList(this.arg2, varList);
 			} else {
@@ -108,7 +108,7 @@ class CondCompSimpleRelation implements CondCompToken {
 
 	}
 
-	private TerminalNode literalValue(LiteralContext lit) {
+	private TerminalNode literalValue(CobolPreprocessorParser.LiteralContext lit) {
 		if (lit.NONNUMERICLITERAL() == null) {
 			return lit.NUMERICLITERAL();
 		} else {
@@ -120,7 +120,8 @@ class CondCompSimpleRelation implements CondCompToken {
 		ArrayList<CondCompVar> revList = new ArrayList<>(varList.size());
 
 		Collections.copy(revList, varList);
-		for(CondCompVar v: Collections.reverse(revList)) {
+		Collections.reverse(revList);
+		for (CondCompVar v: revList) {
 			if (v.varNameIs(t)) {
 				return v;
 			}
@@ -133,7 +134,7 @@ class CondCompSimpleRelation implements CondCompToken {
 		return this.sortKey;
 	}
 
-	public int getType() {
+	public CondCompTokenType getType() {
 		return this.type;
 	}
 
@@ -170,36 +171,42 @@ class CondCompSimpleRelation implements CondCompToken {
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_NE:
 				if (comparison == 0) {
 					rc = false;
 				} else {
 					rc = true;
 				}
+				break;
 			case COMPAREOP_LT:
 				if (comparison < 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_LE:
 				if (comparison <= 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_GT:
 				if (comparison > 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			case COMPAREOP_GE:
 				if (comparison >= 0) {
 					rc = true;
 				} else {
 					rc = false;
 				}
+				break;
 			default:
 				throw new IllegalArgumentException(
 							"comparison operator is of unknown type");

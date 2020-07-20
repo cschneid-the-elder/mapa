@@ -17,10 +17,10 @@ class CondCompComparisonOp implements CondCompToken {
 		ArrayList<CondCompComparisonOp> cccoList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.ConditionalCompilationComparisonOpContext cccoc: list) {
-			ccaoList.add(new CondCompComparisonOp(cccoc);
+			cccoList.add(new CondCompComparisonOp(cccoc));
 		}
 
-		return ccaoList;
+		return cccoList;
 	}
 
 	public CondCompComparisonOp(CobolPreprocessorParser.ConditionalCompilationComparisonOpContext cccoc) {
@@ -105,7 +105,7 @@ class CondCompComparisonOp implements CondCompToken {
 		return this.sortKey;
 	}
 
-	public int getType() {
+	public CondCompTokenType getType() {
 		return this.type;
 	}
 }
