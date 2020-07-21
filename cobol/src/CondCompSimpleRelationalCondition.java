@@ -4,7 +4,7 @@ import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
 
-class CondCompSimpleRelation implements CondCompToken, CondCompCondition {
+class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondition {
 
 	private String myName = this.getClass().getName();
 	private CondCompTokenType type = null;
@@ -17,23 +17,23 @@ class CondCompSimpleRelation implements CondCompToken, CondCompCondition {
 	private CondCompVar var2 = null;
 	private long sortKey = -1;
 
-	public static List<CondCompSimpleRelation> bunchOfThese(
+	public static List<CondCompSimpleRelationalCondition> bunchOfThese(
 				List<CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext> ctxList
 				, ArrayList<CondCompVar> varList) {
-		ArrayList<CondCompSimpleRelation> ccsrList = new ArrayList<>();
+		ArrayList<CondCompSimpleRelationalCondition> ccsrList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext ccsrc: ctxList) {
-			ccsrList.add(new CondCompSimpleRelation(ccsrc, varList));
+			ccsrList.add(new CondCompSimpleRelationalCondition(ccsrc, varList));
 		}
 
 		return ccsrList;
 	}
 
-	public CondCompSimpleRelation(
+	public CondCompSimpleRelationalCondition(
 				CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext ccsrc
 				, ArrayList<CondCompVar> varList) {
 		this.ctx = ccsrc;
-		this.type = CondCompTokenType.SIMPLE_RELATION;
+		this.type = CondCompTokenType.SIMPLE_RELATIONAL_CONDITION;
 
 		this.op = new CondCompComparisonOp(this.ctx.conditionalCompilationComparisonOp());
 
