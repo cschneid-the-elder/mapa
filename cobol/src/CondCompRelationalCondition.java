@@ -68,19 +68,46 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 	}
 
 	public Boolean evaluate() {
-		return this.evaluate(0);
-	}
+		ArrayDeque<Boolean> groupStack = new ArrayDeque<>();
+		Boolean rc = true;
 
-	private Boolean evaluate(int i) {
-		Boolean rc = null;
-
-		switch(this.conditions.get(i).getType()) {
-			case GROUPOP_BEGIN:
-				rc = this.evaluate(++i);
-				break;
-			case GROUPOP_END:
-				return rc;
-				break;
+		for (CondCompToken token: this.conditions) {
+			switch(token.getType()) {
+				case GROUPOP_BEGIN:
+					try {
+						groupStack.push(new Boolean(rc));
+						rc = true;
+					} catch (Exception e) {
+						TestIntegration.LOGGER.severe("Exception " + e + " encountered");
+						e.printStackTrace();
+						System.exit(16);
+					}
+					break;
+				case GROUPOP_END:
+					try {
+						rc = rc && groupStack.pop();
+					} catch (Exception e) {
+						TestIntegration.LOGGER.severe("Exception " + e + " encountered");
+						e.printStackTrace();
+						System.exit(16);
+					}
+					break;
+				case SIMPLE_RELATIONAL_CONDITION:
+					rc = rc && ((CondCompCondition)token).evaluate();
+					break;
+				case BINARY_CONDITION:
+					rc = rc && ((CondCompCondition)token).evaluate();
+					break;
+				case DEFINED_CONDITION:
+					rc = rc && ((CondCompCondition)token).evaluate();
+					break;
+				case RELATIONAL_CONDITION:
+					rc = rc && ((CondCompCondition)token).evaluate();
+					break;
+			}
 		}
+
+		return rc;
 	}
+
 }
