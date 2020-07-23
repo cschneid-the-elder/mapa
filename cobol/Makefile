@@ -16,7 +16,7 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
-all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessorLexer.tokens ./src/CobolPreprocessorParser.tokens ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/DataLocation.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CondCompToken.class ./class/CondCompCondition.class ./class/CondCompLogicOp.class ./class/CondCompArithOp.class ./class/CondCompGroupOp.class ./class/CondCompVar.class ./class/CondCompComparisonOp.class ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class
+all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessorLexer.tokens ./src/CobolPreprocessorParser.tokens ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/DataLocation.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CondCompToken.class ./class/CondCompCondition.class ./class/CondCompLogicOp.class ./class/CondCompArithOp.class ./class/CondCompGroupOp.class ./class/CondCompVar.class ./class/CondCompComparisonOp.class ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class ./class/CondCompStmt.class ./class/CondCompStmtIf.class ./class/CondCompStmtCond.class
 
 .PHONY: all clean cleanmine mine jar testLocal testNist testrig testrigpp testrigppnist
 
@@ -26,11 +26,11 @@ clean:
 
 cleanmine:
 	echo `date` $@ >> build.log
-	rm -f ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CondCompToken.class ./class/CondCompCondition.class ./class/CondCompLogicOp.class ./class/CondCompArithOp.class ./class/CondCompGroupOp.class ./class/CondCompVar.class ./class/CondCompComparisonOp.class ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class
+	rm -f ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CondCompToken.class ./class/CondCompCondition.class ./class/CondCompLogicOp.class ./class/CondCompArithOp.class ./class/CondCompGroupOp.class ./class/CondCompVar.class ./class/CondCompComparisonOp.class ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class ./class/CondCompStmt.class ./class/CondCompStmtIf.class ./class/CondCompStmtCond.class
 
 mine:
 	echo `date` $@ >> build.log
-	$(JC) $(JCOPT) ./src/CallEtAlListener.java ./src/DataDescriptionEntryListener.java ./src/SetListener.java ./src/DDNode.java ./src/CallWrapper.java ./src/CopyListener.java ./src/ReplaceListener.java ./src/TheCLI.java ./src/CompilerOptionsWrapper.java ./src/CompilerOptionsListener.java ./src/TestIntegration.java ./src/CallType.java ./src/IdDivListener.java ./src/CopyStatementContextWrapper.java ./src/ReplaceStatementContextWrapper.java ./src/CondCompToken.java ./src/CondCompCondition.java ./src/CondCompLogicOp.java ./src/CondCompArithOp.java ./src/CondCompGroupOp.java ./src/CondCompVar.java ./src/CondCompComparisonOp.java ./src/CondCompSimpleRelationalCondition.java ./src/CondCompBinaryCondition.java ./src/CondCompDefinedCondition.java ./src/CondCompRelationalCondition.java
+	$(JC) $(JCOPT) ./src/CallEtAlListener.java ./src/DataDescriptionEntryListener.java ./src/SetListener.java ./src/DDNode.java ./src/CallWrapper.java ./src/CopyListener.java ./src/ReplaceListener.java ./src/TheCLI.java ./src/CompilerOptionsWrapper.java ./src/CompilerOptionsListener.java ./src/TestIntegration.java ./src/CallType.java ./src/IdDivListener.java ./src/CopyStatementContextWrapper.java ./src/ReplaceStatementContextWrapper.java ./src/CondCompToken.java ./src/CondCompCondition.java ./src/CondCompLogicOp.java ./src/CondCompArithOp.java ./src/CondCompGroupOp.java ./src/CondCompVar.java ./src/CondCompComparisonOp.java ./src/CondCompSimpleRelationalCondition.java ./src/CondCompBinaryCondition.java ./src/CondCompDefinedCondition.java ./src/CondCompRelationalCondition.java  ./src/CondCompStmt.java ./src/CondCompStmtIf.java ./src/CondCompStmtCond.java
 
 jar:
 	echo `date` $@ >> build.log
@@ -43,6 +43,15 @@ ifeq ($(strip $(n)),)
 else
 	echo `date` $@ $(n) >> build.log
 	java -jar CallTree.jar -unitTest -file testdata/local/testantlr$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -logLevel FINEST -saveTemp -out callListLocal$(n).log
+endif
+
+testLocalx:
+ifeq ($(strip $(n)),)
+	#echo `date` $@ >> build.log
+	#java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
+else
+	echo `date` $@ $(n) >> build.log
+	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -logLevel FINEST -saveTemp -out callListLocalx$(n).log
 endif
 
 testNist:
@@ -113,4 +122,6 @@ testrigppnist:
 ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class : ./class/CondCompCondition.class
 
 ./class/CondCompVar.class : ./class/CondCompComparisonOp.class
+
+./class/CondCompStmtIf.class: ./class/CondCompStmt.class ./class/CondCompStmtCond.class
 

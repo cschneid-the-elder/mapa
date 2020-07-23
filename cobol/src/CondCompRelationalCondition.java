@@ -11,6 +11,7 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 	private CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext ctx = null;
 	private long sortKey = -1;
 	private ArrayList<CondCompToken> conditions = new ArrayList<>();
+	private ArrayDeque<CondCompToken> evals = new ArrayDeque<>();
 
 	public static List<CondCompRelationalCondition> bunchOfThese(
 				List<CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext> ctxList
@@ -57,6 +58,26 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 		this.conditions.sort(Comparator.comparingLong(CondCompToken::getSortKey));
 		this.sortKey = this.conditions.get(0).getSortKey();
 
+		/*
+		Set up for evaluate(), which wants a stack of tokens in the
+		order they are to be evaluated.
+		*/
+		
+		ArrayList<CondCompToken> revConditions = new ArrayList<>(this.conditions.size());
+		Collections.copy(revConditions, this.conditions);
+		Collections.reverse(revConditions);
+		for (CondCompToken token: revConditions) {
+			try {
+				evals.push(token);
+			} catch (Exception e) {
+				TestIntegration.LOGGER.severe(
+					"Exception " + e + " encountered"
+					+ " in CondCompRelationalCondition constructor");
+				e.printStackTrace();
+				System.exit(16);
+			}
+		}
+
 	}
 
 	public long getSortKey() {
@@ -67,47 +88,148 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 		return this.type;
 	}
 
+	/**
+	>>DEFINE A B'1'
+	>>DEFINE B B'0'
+	>>DEFINE C B'1'
+	>>DEFINE D B'0'
+	>>IF A AND B --> false
+	>>IF (((((A AND B))))) --> false
+	>>IF A AND (B OR C)  --> true
+	>>IF (A AND B) OR D  --> false
+	>>IF A AND (B AND (C OR D)) --> false
+	>>IF B AND (C OR D)  --> false
+	>>IF (B AND C) OR D  --> false
+	>>IF A AND (B OR C) AND D --> false
+	*/
 	public Boolean evaluate() {
-		ArrayDeque<Boolean> groupStack = new ArrayDeque<>();
-		Boolean rc = true;
+		CondCompToken token = null;
+		CondCompToken logicalOp = null;
+		Boolean result = null;
 
-		for (CondCompToken token: this.conditions) {
+		TestIntegration.LOGGER.fine(this.myName + " evaluate()");
+
+		while(this.evals.peek() != null) {
+			try {
+				token = this.evals.pop();
+			} catch (Exception e) {
+				TestIntegration.LOGGER.severe(
+					"Exception " + e + " encountered"
+					+ " in CondCompRelationalCondition::evaluate()");
+				e.printStackTrace();
+				System.exit(16);
+			}
+			TestIntegration.LOGGER.finest(this.myName + " evaluate()" + " token.getType() = " + token.getType());
 			switch(token.getType()) {
 				case GROUPOP_BEGIN:
-					try {
-						groupStack.push(new Boolean(rc));
-						rc = true;
-					} catch (Exception e) {
-						TestIntegration.LOGGER.severe("Exception " + e + " encountered");
-						e.printStackTrace();
-						System.exit(16);
+					if (logicalOp == null) {
+						result = this.evaluate();
+					} else {
+						if (logicalOp.getType() == CondCompTokenType.LOGICOP_AND) {
+							result = result && this.evaluate();
+						} else {
+							result = result || this.evaluate();
+						}
 					}
+					TestIntegration.LOGGER.finest(this.myName + " evaluate()" + " result = " + result);
 					break;
 				case GROUPOP_END:
-					try {
-						rc = rc && groupStack.pop();
-					} catch (Exception e) {
-						TestIntegration.LOGGER.severe("Exception " + e + " encountered");
-						e.printStackTrace();
-						System.exit(16);
-					}
-					break;
+					return(result);
 				case SIMPLE_RELATIONAL_CONDITION:
-					rc = rc && ((CondCompCondition)token).evaluate();
-					break;
 				case BINARY_CONDITION:
-					rc = rc && ((CondCompCondition)token).evaluate();
-					break;
 				case DEFINED_CONDITION:
-					rc = rc && ((CondCompCondition)token).evaluate();
-					break;
 				case RELATIONAL_CONDITION:
-					rc = rc && ((CondCompCondition)token).evaluate();
+					if (logicalOp == null) {
+						result = ((CondCompCondition)token).evaluate();
+					} else {
+						if (logicalOp.getType() == CondCompTokenType.LOGICOP_AND) {
+							result = result && ((CondCompCondition)token).evaluate();
+						} else {
+							result = result || ((CondCompCondition)token).evaluate();
+						}
+					}
+					TestIntegration.LOGGER.finest(this.myName + " evaluate()" + " result = " + result);
+					break;
+				case LOGICOP_AND:
+				case LOGICOP_OR:
+					logicalOp = token;
 					break;
 			}
 		}
 
-		return rc;
+		return result;
 	}
 
+	/*
+	public Boolean evaluate() {
+		ArrayDeque<Boolean> groupStack = new ArrayDeque<>();
+		ArrayDeque<CondCompToken> logicalOpStack = new ArrayDeque<>();
+		Boolean rc = null;
+		int groupLevel = 0;
+		CondCompToken token = null;
+
+		for (CondCompToken token: this.conditions) {
+			switch(token.getType()) {
+				case GROUPOP_BEGIN:
+					if (rc != null) {
+						try {
+							groupStack.push(new Boolean(rc));
+							rc = null;
+						} catch (Exception e) {
+							TestIntegration.LOGGER.severe("Exception " + e + " encountered");
+							e.printStackTrace();
+							System.exit(16);
+							}
+					}
+					groupLevel++;
+					break;
+				case GROUPOP_END:
+					if (groupStack.peek() != null) {
+						try {
+							rc = rc && groupStack.pop();
+						} catch (Exception e) {
+							TestIntegration.LOGGER.severe("Exception " + e + " encountered");
+							e.printStackTrace();
+							System.exit(16);
+							}
+					}
+					groupLevel--;
+					break;
+				case SIMPLE_RELATIONAL_CONDITION:
+					if (rc == null) {
+						rc = ((CondCompCondition)token).evaluate();
+					} else {
+						rc = rc && ((CondCompCondition)token).evaluate();
+					}
+					break;
+				case BINARY_CONDITION:
+					if (rc == null) {
+						rc = ((CondCompCondition)token).evaluate();
+					} else {
+						rc = rc && ((CondCompCondition)token).evaluate();
+					}
+					break;
+				case DEFINED_CONDITION:
+					if (rc == null) {
+						rc = ((CondCompCondition)token).evaluate();
+					} else {
+						rc = rc && ((CondCompCondition)token).evaluate();
+					}
+					break;
+				case RELATIONAL_CONDITION:
+					if (rc == null) {
+						rc = ((CondCompCondition)token).evaluate();
+					} else {
+						rc = rc && ((CondCompCondition)token).evaluate();
+					}
+					break;
+				case LOGICOP_AND:
+					logicOpStack.push(token);
+					break;
+				case LOGICOP_OR:
+					logicOpStack.push(token);
+					break;
+			}
+		}
+	*/
 }

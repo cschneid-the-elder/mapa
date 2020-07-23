@@ -18,4 +18,14 @@ public class CompilerOptionsWrapper {
 			return this.coCtx.PROCESS().getSymbol().getLine();
 		}
 	}
+
+	public Boolean hasDefine() {
+		for (CompilerOptionContext co: this.coCtx.compilerOption()) {
+			if (co.DEFINE() != null) {
+				return true;
+			}
+		}
+
+		return false;
+	}
 }
