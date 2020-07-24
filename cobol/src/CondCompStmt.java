@@ -1,6 +1,6 @@
 public interface CondCompStmt {
 
-	public long getLine();
+	public int getLine();
 
 	public CondCompStmtType getType();
 

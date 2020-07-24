@@ -4,28 +4,23 @@ import org.antlr.v4.runtime.tree.*;
 public class CompilerOptionsWrapper {
 
 	private String myName = this.getClass().getName();
-	public ParserRuleContext ctx = null;
-	public CobolPreprocessorParser.CompilerOptionsContext coCtx = null;
+	private CobolPreprocessorParser.CompilerOptionsContext coCtx = null;
+	private int line = -1;
 
 	CompilerOptionsWrapper(CobolPreprocessorParser.CompilerOptionsContext ctx) {
 		this.coCtx = ctx;
 	}
 
-	public int line() {
-		if (this.coCtx.PROCESS() == null) {
-			return this.coCtx.CBL().getSymbol().getLine();
-		} else {
-			return this.coCtx.PROCESS().getSymbol().getLine();
-		}
-	}
-
-	public Boolean hasDefine() {
-		for (CompilerOptionContext co: this.coCtx.compilerOption()) {
-			if (co.DEFINE() != null) {
-				return true;
+	public int getLine() {
+		if (this.line < 0) {
+			if (this.coCtx.PROCESS() == null) {
+				this.line = this.coCtx.CBL().getSymbol().getLine();
+			} else {
+				this.line = this.coCtx.PROCESS().getSymbol().getLine();
 			}
 		}
 
-		return false;
+		return this.line;
 	}
+
 }

@@ -4,32 +4,39 @@ import org.antlr.v4.runtime.tree.*;
 public class ReplaceStatementContextWrapper {
 
 	private String myName = this.getClass().getName();
-	public ParserRuleContext ctx = null;
 	public CobolPreprocessorParser.ReplaceByStatementContext rbsc = null;
 	public CobolPreprocessorParser.ReplaceOffStatementContext rosc = null;
 
-	ReplaceStatementContextWrapper(ParserRuleContext ctx) {
-		this.ctx = ctx;
-		if (isReplaceByStatement())
-			this.rbsc = (CobolPreprocessorParser.ReplaceByStatementContext)ctx;
-		if (isReplaceOffStatement())
-			this.rosc = (CobolPreprocessorParser.ReplaceOffStatementContext)ctx;
+	ReplaceStatementContextWrapper(CobolPreprocessorParser.ReplaceByStatementContext ctx) {
+		this.rbsc = ctx;
+	}
+
+	ReplaceStatementContextWrapper(CobolPreprocessorParser.ReplaceOffStatementContext ctx) {
+		this.rosc = ctx;
 	}
 
 	Boolean isReplaceByStatement() {
-		return (this.ctx.getRuleIndex() == CobolPreprocessorParser.RULE_replaceByStatement);
+		return (this.rbsc != null);
 	}
 
 	Boolean isReplaceOffStatement() {
-		return (this.ctx.getRuleIndex() == CobolPreprocessorParser.RULE_replaceOffStatement);
+		return (this.rosc != null);
 	}
 
 	int startLine() {
-		return this.ctx.start.getLine();
+		if (this.isReplaceByStatement()) {
+			return this.rbsc.start.getLine();
+		} else {
+			return this.rosc.start.getLine();
+		}
 	}
 
 	int endLine() {
-		return this.ctx.stop.getLine();
+		if (this.isReplaceByStatement()) {
+			return this.rbsc.stop.getLine();
+		} else {
+			return this.rosc.stop.getLine();
+		}
 	}
 
 	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
@@ -180,7 +187,7 @@ public class ReplaceStatementContextWrapper {
 		String aString = null;
 
 		if (this.isReplaceByStatement()) {
-			aString = new String(myName + " replace BY @" + this.startLine() + ": " + this.ctx.getText());
+			aString = new String(myName + " replace BY @" + this.startLine() + ": " + this.rbsc.getText());
 			if (this.rbsc.replaceClause() == null) {
 				aString = aString.concat("\n\treplaceClause() == null");
 			} else {
@@ -195,7 +202,7 @@ public class ReplaceStatementContextWrapper {
 				}
 			}		
 		} else if (this.isReplaceOffStatement()) {
-			aString = new String(myName + " replace OFF @" + this.startLine() + ": " + this.ctx.getText());
+			aString = new String(myName + " replace OFF @" + this.startLine() + ": " + this.rosc.getText());
 		}
 
 		return aString;

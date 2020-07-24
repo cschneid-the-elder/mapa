@@ -12,7 +12,7 @@ class CondCompStmtIf implements CondCompStmt, CondCompStmtCond {
 	private CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext ccrcCtx = null;
 	private CondCompRelationalCondition ccrc = null;
 	private Boolean strewth = null;
-	private long line = -1;
+	private int line = -1;
 
 	public CondCompStmtIf(
 				CobolPreprocessorParser.ConditionalCompilationIfContext ccic
@@ -32,7 +32,7 @@ class CondCompStmtIf implements CondCompStmt, CondCompStmtCond {
 		return this.strewth;
 	}
 
-	public long getLine() {
+	public int getLine() {
 		return this.line;
 	}
 

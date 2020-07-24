@@ -82,13 +82,14 @@ public static void main(String[] args) throws Exception {
 		LOGGER.info("Processing " + aFileName);
 		dataNodes = new ArrayList<>();
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+		ArrayList<CompOptDefine> defines = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 
 		idDivFound = lookForIdDiv(aFileName);
 		if (idDivFound) {
 			fileName = lookForCopyStatements(aFileName, baseDir, initFileNm);
 			fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
-			fileName = lookForCompilerOptions(fileName, baseDir, initFileNm);
+			fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, defines);
 			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 			allTheCalledNodes.addAll(calledNodes);
 			if (CLI.unitTest) {
@@ -497,6 +498,7 @@ public static void main(String[] args) throws Exception {
 			String fileName
 			, File baseDir
 			, String initFileNm
+			, ArrayList<CompOptDefine> defines
 			) throws Exception {
 		LOGGER.fine("lookForCompilerOptions");
 		ArrayList<CompilerOptionsWrapper> compileOpts = new ArrayList<>();
@@ -510,7 +512,7 @@ public static void main(String[] args) throws Exception {
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		CompilerOptionsListener listener = new CompilerOptionsListener(compileOpts);
+		CompilerOptionsListener listener = new CompilerOptionsListener(compileOpts, defines);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
@@ -550,7 +552,7 @@ public static void main(String[] args) throws Exception {
 		while (inLine != null) {
 			Boolean isCompileOptLine = false;
 			for (CompilerOptionsWrapper cow: compileOpts) {
-				if (cow.line() == src.getLineNumber()) {
+				if (cow.getLine() == src.getLineNumber()) {
 					isCompileOptLine = true;
 					break;
 				}
