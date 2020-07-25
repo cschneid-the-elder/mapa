@@ -18,7 +18,7 @@ AOPT = -visitor -listener
 
 all: ./src/CobolLexer.tokens ./src/CobolParser.tokens ./src/CobolPreprocessorLexer.tokens ./src/CobolPreprocessorParser.tokens ./class/CallEtAlListener.class ./class/DataDescriptionEntryListener.class ./class/SetListener.class ./class/DDNode.class ./class/CallWrapper.class ./class/CopyListener.class ./class/ReplaceListener.class ./class/TheCLI.class ./class/TestIntegration.class ./class/CallType.class ./class/IdDivListener.class ./class/CopyStatementContextWrapper.class ./class/ReplaceStatementContextWrapper.class ./class/DataLocation.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CondCompToken.class ./class/CondCompCondition.class ./class/CondCompLogicOp.class ./class/CondCompArithOp.class ./class/CondCompGroupOp.class ./class/CondCompVar.class ./class/CondCompComparisonOp.class ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class ./class/CondCompStmt.class ./class/CondCompStmtIf.class ./class/CondCompStmtCond.class ./class/CompOptDefine.class
 
-.PHONY: all clean cleanmine mine jar testLocal testNist testrig testrigpp testrigppnist
+.PHONY: all clean cleanmine mine jar testLocal testLocalx testNist testrig testrigpp testrigppx testrigppnist ziplogs
 
 clean:
 	echo `date` $@ >> build.log
@@ -71,13 +71,17 @@ testrigpp:
 	echo `date` $@ $(n) >> build.log
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
-testrigpp1:
+testrigppx:
 	echo `date` $@ $(n) >> build.log
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrigppnist:
 	echo `date` $@ $(n) >> build.log
 	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
+
+ziplogs:
+	echo `date` $@ >> build.log
+	zip -DjmTv9 testintegrationlogs TestIntegration-*.log
 
 ./src/CobolLexer.tokens: 
 
@@ -113,9 +117,9 @@ testrigppnist:
 
 ./class/TheCLI.class: 
 
-./class/TestIntegration.class: ./class/CopyStatementContextWrapper.class ./class/TheCLI.class ./class/ReplaceListener.class ./class/CopyListener.class ./class/IdDivListener.class ./class/ReplaceStatementContextWrapper.class ./class/DDNode.class ./class/SetListener.class ./class/DataDescriptionEntryListener.class ./class/CallEtAlListener.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CompOptDefine.class
+./class/TestIntegration.class: ./class/CopyStatementContextWrapper.class ./class/TheCLI.class ./class/ReplaceListener.class ./class/CopyListener.class ./class/IdDivListener.class ./class/ReplaceStatementContextWrapper.class ./class/DDNode.class ./class/SetListener.class ./class/DataDescriptionEntryListener.class ./class/CallEtAlListener.class ./class/CompilerOptionsListener.class ./class/CompilerOptionsWrapper.class ./class/CondCompVar.class
 
-./class/CompilerOptionsListener.class: ./class/CompilerOptionsWrapper.class ./class/CompOptDefine.class
+./class/CompilerOptionsListener.class: ./class/CompilerOptionsWrapper.class ./class/CondCompVar.class
 
 ./class/CondCompLogicOp.class ./class/CondCompArithOp.class ./class/CondCompGroupOp.class ./class/CondCompVar.class ./class/CondCompComparisonOp.class ./class/CondCompSimpleRelationalCondition.class ./class/CondCompBinaryCondition.class ./class/CondCompDefinedCondition.class ./class/CondCompRelationalCondition.class : ./class/CondCompToken.class
 

@@ -16,6 +16,7 @@ class CondCompVar implements CondCompToken {
 	private CobolPreprocessorParser.LiteralContext literalCtx = null;
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext expression = null;
 	private CobolPreprocessorParser.ConditionalCompilationDefineContext ctx = null;
+	private CobolPreprocessorParser.Define_optContext defCtx = null;
 	private Boolean parameter = false;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
@@ -77,6 +78,47 @@ class CondCompVar implements CondCompToken {
 
 	}
 
+	public CondCompVar(CobolPreprocessorParser.Define_optContext ctx) {
+		this.defCtx = ctx;
+		this.varName = this.defCtx.IDENTIFIER().getSymbol().getText();
+		this.tn = this.defCtx.IDENTIFIER();
+
+		long line = this.tn.getSymbol().getLine();
+		long posn = this.tn.getSymbol().getCharPositionInLine();
+		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+
+		this.literalCtx = this.defCtx.literal();
+		if (this.literalCtx == null) {
+			/*
+			As per https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/pg/ui/up4011.html
+			"If literal-1 is not specified, a value of B'1' will be assigned to the 
+			compilation variable."
+			If that link has gone stale, it's..
+				Enterprise COBOL for z/OS > Programming Guide
+				> Compiling and debugging your program > Compiler options > DEBUG
+			*/
+			this.boolValue = true;
+		} else {
+			if (this.literalCtx.NONNUMERICLITERAL() == null) {
+				if (this.literalCtx.NUMERICLITERAL() == null) {
+					throw new IllegalArgumentException(
+						"@ " + line + " var " + this.varName
+						+ " ConditionalCompilationDefineContext"
+						+ ".ConditionalCompilationDefinePredicateContext"
+						+ ".LiteralContext"
+						+ " NONNUMERICLITERAL() == null"
+						+ " && NUMERICLITERAL() == null");
+				} else {
+					this.type = CondCompTokenType.VAR_INTEGER;
+					this.setValue(this.literalCtx.NUMERICLITERAL());
+				}
+			} else {
+				this.setValue(this.literalCtx.NONNUMERICLITERAL());
+			}
+		}
+
+	}
+
 	private void setValue(TerminalNode t) {
 		String aString = t.getSymbol().getText();
 		if (this.type == CondCompTokenType.VAR_INTEGER) {
@@ -108,6 +150,10 @@ class CondCompVar implements CondCompToken {
 
 	public CondCompTokenType getType() {
 		return this.type;
+	}
+
+	public Boolean fromCompileOption() {
+		return (this.ctx == null);
 	}
 
 	public Integer getIntValue() {
@@ -324,4 +370,29 @@ class CondCompVar implements CondCompToken {
 		return rc;
 	}
 
+	public String toString() {
+		StringBuilder sb = new StringBuilder(this.getVarName());
+
+		sb.append(" ");
+
+		switch(this.getType()) {
+			case VAR_INTEGER:
+				sb.append(this.getIntValue());
+				break;
+			case VAR_ALPHANUM:
+				sb.append(this.getAlnumValue());
+				break;
+			case VAR_BOOLEAN:
+				sb.append(this.getBoolValue());
+				break;
+			default:
+				sb.append("<value not yet set>");
+		}
+
+		if (this.fromCompileOption()) {
+			sb.append(" <from compile option>");
+		}
+
+		return sb.toString();
+	}
 }
