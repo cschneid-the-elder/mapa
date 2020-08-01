@@ -95,7 +95,7 @@ class CondCompVar implements CondCompToken {
 			compilation variable."
 			If that link has gone stale, it's..
 				Enterprise COBOL for z/OS > Programming Guide
-				> Compiling and debugging your program > Compiler options > DEBUG
+				> Compiling and debugging your program > Compiler options > DEFINE
 			*/
 			this.boolValue = true;
 		} else {

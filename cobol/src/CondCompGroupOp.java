@@ -10,6 +10,7 @@ class CondCompGroupOp implements CondCompToken {
 	private CondCompTokenType type = null;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
+	private text = null;
 
 	public static List<CondCompGroupOp> bunchOfThese(List<TerminalNode> list) {
 		ArrayList<CondCompGroupOp> ccgoList = new ArrayList<>();
@@ -32,6 +33,7 @@ class CondCompGroupOp implements CondCompToken {
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+		this.text = this.tn.getSymbol().getText();
 
 	}
 
@@ -41,5 +43,9 @@ class CondCompGroupOp implements CondCompToken {
 
 	public CondCompTokenType getType() {
 		return this.type;
+	}
+
+	public String toString() {
+		return this.text;
 	}
 }

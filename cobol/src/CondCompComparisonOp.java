@@ -11,6 +11,7 @@ class CondCompComparisonOp implements CondCompToken {
 	private CobolPreprocessorParser.ConditionalCompilationComparisonOpContext ctx = null;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
+	private String text = null;
 
 	public static List<CondCompComparisonOp> bunchOfThese(
 					List<CobolPreprocessorParser.ConditionalCompilationComparisonOpContext> list) {
@@ -98,6 +99,7 @@ class CondCompComparisonOp implements CondCompToken {
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+		this.text = this.tn.getSymbol().getText();
 
 	}
 
@@ -107,5 +109,9 @@ class CondCompComparisonOp implements CondCompToken {
 
 	public CondCompTokenType getType() {
 		return this.type;
+	}
+
+	public String toString() {
+		return this.text;
 	}
 }

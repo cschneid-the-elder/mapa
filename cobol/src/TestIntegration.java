@@ -83,10 +83,17 @@ public static void main(String[] args) throws Exception {
 		dataNodes = new ArrayList<>();
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 		ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
+		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 
 		idDivFound = lookForIdDiv(aFileName);
 		if (idDivFound) {
+			fileName = lookForCompilerDirectingStatements(
+							aFileName
+							, baseDir
+							, initFileNm
+							, compDirStmts
+							, compOptDefines);
 			fileName = lookForCopyStatements(aFileName, baseDir, initFileNm);
 			fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 			fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
@@ -172,6 +179,38 @@ public static void main(String[] args) throws Exception {
 
 		return listener.idDivFound;
 		
+	}
+
+	public static String lookForCompilerDirectingStatements(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			, ArrayList<CompilerDirectingStatement> compDirStmts
+			, ArrayList<CondCompVar> compOptDefines
+			) throws Exception {
+		LOGGER.fine("lookForCompilerDirectingStatements");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CompilerDirectingStatementListener listener = 
+			new CompilerDirectingStatementListener(compDirStmts, compOptDefines);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("compDirStmts: " + compDirStmts);
+		LOGGER.finest("compOptDefines: " + compOptDefines);
+
+		return rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
+
 	}
 
 	/**

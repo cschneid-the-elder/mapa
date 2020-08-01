@@ -9,9 +9,9 @@ class CondCompLogicOp implements CondCompToken {
 	private String myName = this.getClass().getName();
 	private Boolean value = null;
 	private CondCompTokenType type = null;
-
 	private TerminalNode tn = null;
 	private long sortKey = -1;
+	private String text = null;
 
 	public static List<CondCompLogicOp> bunchOfThese(List<TerminalNode> list) {
 		ArrayList<CondCompLogicOp> ccloList = new ArrayList<>();
@@ -34,6 +34,7 @@ class CondCompLogicOp implements CondCompToken {
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+		this.text = this.tn.getSymbol().getText();
 
 	}
 

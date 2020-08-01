@@ -12,6 +12,7 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 	private long sortKey = -1;
 	private ArrayList<CondCompToken> conditions = new ArrayList<>();
 	private ArrayDeque<CondCompToken> evals = new ArrayDeque<>();
+	private String text = null;
 
 	public static List<CondCompRelationalCondition> bunchOfThese(
 				List<CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext> ctxList
@@ -57,10 +58,16 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 
 		this.conditions.sort(Comparator.comparingLong(CondCompToken::getSortKey));
 		this.sortKey = this.conditions.get(0).getSortKey();
+		StringBuilder sb = new StringBuilder();
+		for (CondCompToken cct: conditions) {
+			sb.append(cct);
+		}
+		this.text = sb.toString();
 
 		/*
 		Set up for evaluate(), which wants a stack of tokens in the
-		order they are to be evaluated.
+		order they are to be evaluated, i.e. first token should be 
+		on top of the stack.
 		*/
 		
 		ArrayList<CondCompToken> revConditions = new ArrayList<>(this.conditions.size());
@@ -232,4 +239,8 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 			}
 		}
 	*/
+
+	public String toString() {
+		return this.text;
+	}
 }

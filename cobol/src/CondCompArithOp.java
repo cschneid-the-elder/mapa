@@ -11,6 +11,7 @@ class CondCompArithOp implements CondCompToken {
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctx = null;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
+	private long text = null;
 
 	public static List<CondCompArithOp> bunchOfThese(
 					List<CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext> list) {
@@ -42,6 +43,7 @@ class CondCompArithOp implements CondCompToken {
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+		this.text = this.tn.getSymbol().getText();
 
 	}
 
@@ -51,5 +53,9 @@ class CondCompArithOp implements CondCompToken {
 
 	public CondCompTokenType getType() {
 		return this.type;
+	}
+
+	public String toString() {
+		return this.text;
 	}
 }

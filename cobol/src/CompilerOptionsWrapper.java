@@ -1,10 +1,11 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class CompilerOptionsWrapper {
+public class CompilerOptionsWrapper implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.CompilerOptionsContext coCtx = null;
+	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COMPILE_OPTION;
 	private int line = -1;
 
 	CompilerOptionsWrapper(CobolPreprocessorParser.CompilerOptionsContext ctx) {
@@ -21,6 +22,10 @@ public class CompilerOptionsWrapper {
 		}
 
 		return this.line;
+	}
+
+	public CompilerDirectingStatementType getType() {
+		return this.type;
 	}
 
 }

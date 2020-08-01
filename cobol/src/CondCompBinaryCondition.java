@@ -12,6 +12,7 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 	private TerminalNode tn = null;
 	private CondCompVar var = null;
 	private long sortKey = -1;
+	private String text = null;
 
 	public static List<CondCompBinaryCondition> bunchOfThese(
 				List<CobolPreprocessorParser.ConditionalCompilationBinaryConditionContext> ctxList
@@ -37,6 +38,7 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+		this.text = this.tn.getSymbol().getText();
 
 	}
 
@@ -66,4 +68,7 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 		return this.var.getBoolValue();
 	}
 
+	public String toString() {
+		return this.text;
+	}
 }

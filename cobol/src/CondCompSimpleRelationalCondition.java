@@ -16,6 +16,7 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 	private CondCompVar var1 = null;
 	private CondCompVar var2 = null;
 	private long sortKey = -1;
+	private String text = null;
 
 	public static List<CondCompSimpleRelationalCondition> bunchOfThese(
 				List<CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext> ctxList
@@ -105,6 +106,12 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+		this.text =
+				this.arg1.getSymbol().getText()
+				+ " "
+				+ this.op
+				+ " "
+				+ this.arg2.getSymbol().getText();
 
 	}
 
@@ -213,5 +220,9 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 		}
 
 		return rc;
+	}
+
+	public String toString() {
+		return this.text;
 	}
 }
