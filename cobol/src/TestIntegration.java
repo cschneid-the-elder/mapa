@@ -94,9 +94,9 @@ public static void main(String[] args) throws Exception {
 							, initFileNm
 							, compDirStmts
 							, compOptDefines);
-			fileName = lookForCopyStatements(aFileName, baseDir, initFileNm);
+			fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
 			fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
-			fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
+			//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
 			LOGGER.finest("compOptDefines = " + compOptDefines);
 			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 			allTheCalledNodes.addAll(calledNodes);
@@ -209,7 +209,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("compDirStmts: " + compDirStmts);
 		LOGGER.finest("compOptDefines: " + compOptDefines);
 
-		return rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
+		return rewriteWithoutCompileOptionsStatements(compDirStmts, fileName, baseDir, initFileNm);
 
 	}
 
@@ -533,7 +533,6 @@ public static void main(String[] args) throws Exception {
 	/**
 	Find compiler options embedded in source, rewrite file without
 	them if any are found.
-	*/
 	public static String lookForCompilerOptions(
 			String fileName
 			, File baseDir
@@ -565,13 +564,14 @@ public static void main(String[] args) throws Exception {
 		return rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
 
 	}
+	*/
 
 	/**
 	Return the name of a temporary file containing the source (as preprocessed
 	up to this point) without any compile options (PROCESS or CBL statements).
 	*/
 	public static String rewriteWithoutCompileOptionsStatements(
-			ArrayList<CompilerOptionsWrapper> compileOpts
+			ArrayList<CompilerDirectingStatement> compDirStmts
 			, String fileName
 			, File baseDir
 			, String initFileNm
@@ -591,14 +591,18 @@ public static void main(String[] args) throws Exception {
 
 		while (inLine != null) {
 			Boolean isCompileOptLine = false;
-			for (CompilerOptionsWrapper cow: compileOpts) {
-				if (cow.getLine() == src.getLineNumber()) {
+			for (CompilerDirectingStatement cds: compDirStmts) {
+				LOGGER.finest("cds.getType() = " + cds.getType());
+				if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COMPILE_OPTION 
+				&& cds.getLine() == src.getLineNumber()) {
 					isCompileOptLine = true;
 					break;
 				}
 			}
+			LOGGER.finest("isCompileOptLine = " + isCompileOptLine);
 			if (!isCompileOptLine) {
 				out.println(inLine);
+				LOGGER.finest("output line = |" + inLine + "|");
 			}
 			inLine = src.readLine();
 		}
@@ -606,6 +610,7 @@ public static void main(String[] args) throws Exception {
 		src.close();
 		out.close();
 		fileName = tmp.getPath();
+		LOGGER.finest("rewritten w/o compile option statements to " + fileName);
 		return fileName;
 	}
 

@@ -43,9 +43,11 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 	}
 
 	private CondCompVar varFromList(TerminalNode t, ArrayList<CondCompVar> varList) {
-		ArrayList<CondCompVar> revList = new ArrayList<>(varList.size());
+		ArrayList<CondCompVar> revList = new ArrayList<>(varList);
 
-		Collections.copy(revList, varList);
+		TestIntegration.LOGGER.finest(myName + " varFromList varList.size() = " + varList.size());
+		TestIntegration.LOGGER.finest(myName + " varFromList varList = |" + varList + "|");
+
 		Collections.reverse(revList);
 		for (CondCompVar v: revList) {
 			if (v.varNameIs(t)) {

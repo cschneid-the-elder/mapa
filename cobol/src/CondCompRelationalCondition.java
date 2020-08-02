@@ -70,8 +70,7 @@ class CondCompRelationalCondition implements CondCompToken, CondCompCondition {
 		on top of the stack.
 		*/
 		
-		ArrayList<CondCompToken> revConditions = new ArrayList<>(this.conditions.size());
-		Collections.copy(revConditions, this.conditions);
+		ArrayList<CondCompToken> revConditions = new ArrayList<>(this.conditions);
 		Collections.reverse(revConditions);
 		for (CondCompToken token: revConditions) {
 			try {

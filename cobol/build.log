@@ -801,3 +801,58 @@ Sat Aug 1 18:15:59 CDT 2020 src/CondCompStmtIf.java
 Sat Aug 1 18:16:15 CDT 2020 src/CondCompStmtIf.java
 Sat Aug 1 18:16:15 CDT 2020 src/CompilerDirectingStatementListener.java
 Sat Aug 1 18:16:16 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:08:48 CDT 2020 src/CondCompStmtElse.java
+Sun Aug 2 15:08:49 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 2 15:08:50 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:31:07 CDT 2020 src/CondCompStmtEndIf.java
+Sun Aug 2 15:31:07 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 2 15:31:08 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:36:11 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:38:39 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:38:55 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:40:29 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:41:27 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:42:38 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:44:18 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:03:36 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:04:10 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:04:11 CDT 2020 src/CondCompLogicOp.java
+Sun Aug 2 16:04:12 CDT 2020 src/CondCompArithOp.java
+Sun Aug 2 16:04:50 CDT 2020 src/CondCompArithOp.java
+Sun Aug 2 16:04:51 CDT 2020 src/CondCompGroupOp.java
+Sun Aug 2 16:05:22 CDT 2020 src/CondCompGroupOp.java
+Sun Aug 2 16:05:23 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Sun Aug 2 16:05:24 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:05:24 CDT 2020 src/CondCompRelationalCondition.java
+Sun Aug 2 16:11:37 CDT 2020 jar
+Sun Aug 2 16:11:49 CDT 2020 testLocalx 9009
+Sun Aug 2 16:13:38 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:13:41 CDT 2020 jar
+Sun Aug 2 16:13:45 CDT 2020 testLocalx 9009
+Sun Aug 2 16:18:36 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:18:39 CDT 2020 jar
+Sun Aug 2 16:18:43 CDT 2020 testLocalx 9009
+Sun Aug 2 16:20:43 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:20:45 CDT 2020 jar
+Sun Aug 2 16:20:50 CDT 2020 testLocalx 9009
+Sun Aug 2 16:21:25 CDT 2020 jar
+Sun Aug 2 16:21:28 CDT 2020 jar
+Sun Aug 2 16:21:39 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:21:42 CDT 2020 jar
+Sun Aug 2 16:21:45 CDT 2020 testLocalx 9009
+Sun Aug 2 16:23:26 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:23:29 CDT 2020 jar
+Sun Aug 2 16:23:32 CDT 2020 testLocalx 9009
+Sun Aug 2 16:25:57 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:25:58 CDT 2020 src/CondCompRelationalCondition.java
+Sun Aug 2 16:26:01 CDT 2020 jar
+Sun Aug 2 16:26:05 CDT 2020 testLocalx 9009
+Sun Aug 2 16:36:20 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:36:23 CDT 2020 jar
+Sun Aug 2 16:36:26 CDT 2020 testLocalx 9009
+Sun Aug 2 16:40:28 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:40:31 CDT 2020 jar
+Sun Aug 2 16:40:35 CDT 2020 testLocalx 9009
+Sun Aug 2 16:45:07 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:45:10 CDT 2020 jar
+Sun Aug 2 16:45:14 CDT 2020 testLocalx 9009

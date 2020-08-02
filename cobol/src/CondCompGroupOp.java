@@ -10,7 +10,7 @@ class CondCompGroupOp implements CondCompToken {
 	private CondCompTokenType type = null;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
-	private text = null;
+	private String text = null;
 
 	public static List<CondCompGroupOp> bunchOfThese(List<TerminalNode> list) {
 		ArrayList<CondCompGroupOp> ccgoList = new ArrayList<>();

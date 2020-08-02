@@ -11,7 +11,7 @@ class CondCompArithOp implements CondCompToken {
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext ctx = null;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
-	private long text = null;
+	private String text = null;
 
 	public static List<CondCompArithOp> bunchOfThese(
 					List<CobolPreprocessorParser.ConditionalCompilationArithmeticOpContext> list) {
