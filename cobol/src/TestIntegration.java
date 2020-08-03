@@ -47,7 +47,7 @@ Syntax: <code>java -jar CallTree.jar -help</code>
 public class TestIntegration{
 
 public static final Logger LOGGER = Logger.getLogger(TestIntegration.class.getName());
-public static ArrayList<CopyStatementContextWrapper> copiesForFile = new ArrayList<>();
+public static ArrayList<CopyStatementContextWrapper> copiesForFile = new ArrayList<>(); //TODO needed?
 public static ArrayList<DDNode> dataNodes = new ArrayList<>();
 public static TheCLI CLI = null;
 
@@ -88,14 +88,47 @@ public static void main(String[] args) throws Exception {
 
 		idDivFound = lookForIdDiv(aFileName);
 		if (idDivFound) {
+			ArrayList<CopyStatement> copies = new ArrayList<>();
+			do {
 			fileName = lookForCompilerDirectingStatements(
 							aFileName
 							, baseDir
 							, initFileNm
 							, compDirStmts
 							, compOptDefines);
-			fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
-			fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
+			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+			CLI.setPosixAttributes(tmp);
+			if (CLI.saveTemp) {
+			} else {
+				tmp.deleteOnExit();
+			}
+
+			PrintWriter out = new PrintWriter(tmp);
+			String inLine = src.readLine();
+
+			while (inLine != null) {
+				Boolean inConditional = false;
+				for (CompilerDirectingStatement cds: compDirStmts) {
+					if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_IF
+					|| cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_ELSE
+					|| cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_WHEN) {
+						if (src.getLineNumber() > cds.getLine() && src.getLineNumber() < ((CondCompStmtCond)cds).getEndLine()) {
+							if (((CondCompStmtCond)cds).strewth()) {
+							} else {
+								if (inLine.length() > 6) {
+									StringBuilder sb = new StringBuilder(inLine);
+									sb.setCharAt(6, '*');
+									inLine = sb.toString();
+								}
+							}
+						}
+					}
+				}
+				fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
+				fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+			}
+			} while (copies.size() > 0);
 			//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
 			LOGGER.finest("compOptDefines = " + compOptDefines);
 			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));

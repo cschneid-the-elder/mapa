@@ -9,6 +9,8 @@ class CondCompStmtIf implements CompilerDirectingStatement, CondCompStmtCond {
 	private CobolPreprocessorParser.ConditionalCompilationIfContext ctx = null;
 	private CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext ccrcCtx = null;
 	private CondCompRelationalCondition ccrc = null;
+	private CondCompStmtElse elseStmt = null;
+	private CondCompStmtEndIf endIfStmt = null;
 	private Boolean truthiness = null;
 	private int line = -1;
 	private String text = null;
@@ -36,8 +38,27 @@ class CondCompStmtIf implements CompilerDirectingStatement, CondCompStmtCond {
 		return this.line;
 	}
 
+	public int getEndLine() {
+		if (this.elseStmt == null) {
+			return this.endIfStmt.getLine();
+		} else {
+			return this.elseStmt.getLine();
+		}
+	}
+
 	public CompilerDirectingStatementType getType() {
 		return this.type;
+	}
+
+	public void setElse(CondCompStmtElse stmt) {
+		this.elseStmt = stmt;
+	}
+
+	public void setEndIf(CondCompStmtEndIf stmt) {
+		this.endIfStmt = stmt;
+		if (this.elseStmt != null) {
+			this.elseStmt.setEndIf(stmt);
+		}
 	}
 
 	public String toString() {

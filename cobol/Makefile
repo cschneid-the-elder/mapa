@@ -127,5 +127,7 @@ ziplogs:
 
 ./class/CondCompStmtIf.class ./class/CondCompStmtElse.class ./class/CondCompStmtEndIf.class: ./class/CompilerDirectingStatement.class ./class/CondCompStmtCond.class
 
+./class/CondCompStmtIf.class: ./class/CondCompStmtElse.class
+
 ./class/CompilerOptionsWrapper.class ./class/ReplaceStatement.class ./class/ReplaceOffStatement.class ./class/CopyStatement.class ./class/CondCompStmtDefine.class: ./class/CompilerDirectingStatement.class
 
