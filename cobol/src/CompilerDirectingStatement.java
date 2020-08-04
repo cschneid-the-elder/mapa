@@ -2,6 +2,8 @@ public interface CompilerDirectingStatement {
 
 	public int getLine();
 
+	public int getEndLine();
+
 	public CompilerDirectingStatementType getType();
 
 	enum CompilerDirectingStatementType {

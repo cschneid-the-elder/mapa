@@ -2,7 +2,7 @@
 import java.util.*;
 import org.antlr.v4.runtime.tree.*;
 
-class CondCompStmtElse implements CompilerDirectingStatement, CondCompStmtCond {
+class CondCompStmtElse implements ConditionalCompilationStatement {
 
 	private String myName = this.getClass().getName();
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_ELSE;

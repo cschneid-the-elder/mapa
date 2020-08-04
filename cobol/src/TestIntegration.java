@@ -106,15 +106,24 @@ public static void main(String[] args) throws Exception {
 
 			PrintWriter out = new PrintWriter(tmp);
 			String inLine = src.readLine();
+			Boolean justWriteTheRest = false;
 
 			while (inLine != null) {
-				Boolean inConditional = false;
+				if (justWriteTheRest) {
+				} else {
 				for (CompilerDirectingStatement cds: compDirStmts) {
 					if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_IF
 					|| cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_ELSE
 					|| cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_WHEN) {
-						if (src.getLineNumber() > cds.getLine() && src.getLineNumber() < ((CondCompStmtCond)cds).getEndLine()) {
-							if (((CondCompStmtCond)cds).strewth()) {
+						if (src.getLineNumber() > cds.getLine() && src.getLineNumber() < cds.getEndLine()) {
+							if (((ConditionalCompilationStatement)cds).strewth()) {
+								CompilerDirectingStatement cds1 = cdsInList(src.getLineNumber(), compDirStmts);
+								if (cds1 != null) {
+									if (cds1.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
+										((CopyStatement)cds1).apply(src, out);
+										justWriteTheRest = true;
+									}
+								}
 							} else {
 								if (inLine.length() > 6) {
 									StringBuilder sb = new StringBuilder(inLine);
@@ -125,10 +134,12 @@ public static void main(String[] args) throws Exception {
 						}
 					}
 				}
-				fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
+				}
+				out.println(inLine);
 				fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+				inLine = src.readLine();
 			}
-			} while (copies.size() > 0);
+			} while (copies.size() > 0); //this isn't right
 			//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
 			LOGGER.finest("compOptDefines = " + compOptDefines);
 			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
@@ -186,6 +197,16 @@ public static void main(String[] args) throws Exception {
 		}
 
 		return lib;
+	}
+
+	public static CompilerDirectingStatement cdsInList(
+			int line
+			, ArrayList<CompilerDirectingStatement> compDirStmts) {
+		for (CompilerDirectingStatement cds: compDirStmts) {
+			if (line == cds.getLine()) return cds;
+		}
+
+		return null;
 	}
 
 	/**
@@ -316,6 +337,27 @@ public static void main(String[] args) throws Exception {
 	'.' at the end of the COPY statement.
 
 	*/	
+	public static String applyCopyStatement(
+							CopyStatement copyStmt
+							, String fileName
+							, File baseDir
+							, String initFileNm
+							) throws IOException {
+		LOGGER.fine("applyCopyStatement()");
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+
+		copyStmt.apply(src, out);
+		return tmp.getPath();
+	}
+
 	public static String applyCopyStatements(
 							ArrayList<CopyStatementContextWrapper> copies
 							, String fileName

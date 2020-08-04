@@ -1,19 +1,34 @@
+import java.util.*;
+import java.io.*;
+import java.nio.file.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 public class CopyStatement implements CompilerDirectingStatement {
 
+	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.CopyStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COPY;
-	private int line = -1;
+	private int startLine = -1;
+	private int endLine = -1;
+	private int startPosn = -1;
+	private int endPosn = -1;
 
 	CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
-		this.line = this.ctx.COPY().getSymbol().getLine();
+		//this.startLine = this.ctx.COPY().getSymbol().getLine();
+		this.startLine = this.ctx.start.getLine();
+		this.endLine = this.ctx.stop.getLine();
+		this.startPosn = this.ctx.start.getCharPositionInLine();
+		this.endPosn = this.ctx.stop.getCharPositionInLine();
 	}
 
 	public int getLine() {
-		return this.line;
+		return this.startLine;
+	}
+
+	public int getEndLine() {
+		return this.endLine;
 	}
 
 	public CompilerDirectingStatementType getType() {
@@ -38,6 +53,113 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 	String getText() {
 		return this.ctx.getText();
+	}
+
+	public void apply(
+			LineNumberReader src
+			, PrintWriter out
+			) throws IOException {
+		TestIntegration.LOGGER.fine(myName + " apply()");
+		String inLine = src.readLine();
+		Boolean pleaseWrite = true;
+		while (inLine != null) {
+			pleaseWrite = true;
+			if (src.getLineNumber() < this.getLine() || src.getLineNumber() > this.getEndLine()) {
+					// outside of this COPY statement
+					TestIntegration.LOGGER.finer("outside this COPY statement");
+					if (pleaseWrite) {
+						TestIntegration.LOGGER.finer("out = |" + inLine + "|");
+						out.println(inLine);
+						pleaseWrite = false;
+					}
+				} else if (src.getLineNumber() > this.getLine() && src.getLineNumber() < this.getEndLine()) {
+					// inside of a multi-line COPY statement - we just discard these
+					TestIntegration.LOGGER.finer("inside multi-line COPY statement");
+					TestIntegration.LOGGER.finer("discarding " + inLine);
+					pleaseWrite = false;
+				} else if (src.getLineNumber() == this.getLine() && this.getLine() == this.getEndLine()) {
+					// single line COPY statement
+					TestIntegration.LOGGER.finer("single-line COPY statement");
+					String aLine = inLine.substring(0, this.startPosn - 1);
+					for (int i = this.startPosn; i <= this.endPosn + 1; i++) aLine = aLine.concat(" "); 
+					aLine = aLine.concat(inLine.substring(this.endPosn + 1));
+					TestIntegration.LOGGER.finer("startPosn = " + this.startPosn);
+					TestIntegration.LOGGER.finer("endPosn   = " + this.endPosn);
+					TestIntegration.LOGGER.finer("in  = |" + inLine + "|");
+					TestIntegration.LOGGER.finer("out = |" + aLine + "|");
+					out.println(aLine);
+					pleaseWrite = false;
+					writeTheCopyContent(out);
+				} else if (src.getLineNumber() == this.getLine() && this.getLine() < this.getEndLine()) {
+					// first line of a multi-line COPY statement
+					TestIntegration.LOGGER.finer("first line of a multi-line COPY statement");
+					int endPosn = 71;
+					if (inLine.length() <= endPosn) endPosn = inLine.length() - 1;
+					String aLine = inLine.substring(0, this.startPosn - 1);
+					for (int i = this.startPosn; i <= endPosn + 1; i++) {
+						aLine = aLine.concat(" ");
+						TestIntegration.LOGGER.finer("i = " + i);
+						TestIntegration.LOGGER.finer("aLine = |" + aLine + "|");
+					} 
+					aLine = aLine.concat(inLine.substring(endPosn + 1));
+					TestIntegration.LOGGER.finer("startPosn = " + this.startPosn);
+					TestIntegration.LOGGER.finer("endPosn   = " + endPosn);
+					TestIntegration.LOGGER.finer("in  = |" + inLine + "|");
+					TestIntegration.LOGGER.finer("out = |" + aLine + "|");
+					out.println(aLine);
+					pleaseWrite = false;
+					writeTheCopyContent(out);
+				} else if (src.getLineNumber() == this.getEndLine()) {
+					// last line of a multi-line COPY statement
+					TestIntegration.LOGGER.finer("last line of a multi-line COPY statement");
+					int startPosn = 7;
+					String aLine = inLine.substring(0, startPosn - 1);
+					for (int i = startPosn; i <= this.endPosn + 1; i++) {
+						aLine = aLine.concat(" ");
+						TestIntegration.LOGGER.finer("i = " + i);
+						TestIntegration.LOGGER.finer("aLine = |" + aLine + "|");
+					} 
+					aLine = aLine.concat(inLine.substring(this.endPosn + 1));
+					TestIntegration.LOGGER.finer("startPosn = " + startPosn);
+					TestIntegration.LOGGER.finer("endPosn   = " + this.endPosn);
+					TestIntegration.LOGGER.finer("in  = |" + inLine + "|");
+					TestIntegration.LOGGER.finer("out = |" + aLine + "|");
+					out.println(aLine);
+					pleaseWrite = false;
+				}
+			if (pleaseWrite) {
+				TestIntegration.LOGGER.finer("out = |" + inLine + "|");
+				out.println(inLine);
+			}
+			inLine = src.readLine();
+		}
+
+	}
+
+	public void writeTheCopyContent(
+							PrintWriter out)
+						throws IOException {
+
+		TestIntegration.LOGGER.fine("writeTheCopyContent");
+		String copyFileFull = null;
+		String copyFile = this.getCopyFile();
+
+		for (String path: TestIntegration.CLI.copyPaths) {
+			File aFile = new File(path + "/" + copyFile);
+			if (aFile.exists()) {
+				copyFileFull = path + "/" + copyFile;
+				break;
+			}
+		}
+
+		if (copyFileFull == null) {
+			TestIntegration.LOGGER.warning(copyFile + " not found in any path specified");
+			//throw new FileNotFoundException(copyFile + " not found in any path specified");
+		} else {
+			List<String> list = 
+				Files.readAllLines(Paths.get(copyFileFull));
+			for (String line: list) out.println(this.applyReplacingPhrases(line));
+		}
 	}
 
 	public String getCopyFile() {
