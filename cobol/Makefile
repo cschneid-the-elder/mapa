@@ -2,6 +2,7 @@
 JC = javac
 CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.7.2-complete.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
+#JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
 AOPT = -visitor -listener
 #AOPT = -o ./src -lib ./src -visitor -listener

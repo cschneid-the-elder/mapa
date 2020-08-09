@@ -87,15 +87,24 @@ public static void main(String[] args) throws Exception {
 		String initFileNm = new File(aFileName).getName();
 
 		idDivFound = lookForIdDiv(aFileName);
-		if (idDivFound) {
-			ArrayList<CopyStatement> copies = new ArrayList<>();
-			do {
+		if (!idDivFound) {
+			LOGGER.info(aFileName + " not COBOL?");
+			continue;
+		}
+		int nbCopies = 0;
+		fileName = aFileName;
+		do {
 			fileName = lookForCompilerDirectingStatements(
-							aFileName
+							fileName
 							, baseDir
 							, initFileNm
 							, compDirStmts
 							, compOptDefines);
+			for (CompilerDirectingStatement copy: compDirStmts) {
+				if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
+					nbCopies++;
+				}
+			}
 			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
 			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
 			CLI.setPosixAttributes(tmp);
@@ -107,50 +116,31 @@ public static void main(String[] args) throws Exception {
 			PrintWriter out = new PrintWriter(tmp);
 			String inLine = src.readLine();
 			Boolean justWriteTheRest = false;
+			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
 
 			while (inLine != null) {
-				if (justWriteTheRest) {
+				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
+				if (cds == null || justWriteTheRest) {
 				} else {
-				for (CompilerDirectingStatement cds: compDirStmts) {
-					if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_IF
-					|| cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_ELSE
-					|| cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_WHEN) {
-						if (src.getLineNumber() > cds.getLine() && src.getLineNumber() < cds.getEndLine()) {
-							if (((ConditionalCompilationStatement)cds).strewth()) {
-								CompilerDirectingStatement cds1 = cdsInList(src.getLineNumber(), compDirStmts);
-								if (cds1 != null) {
-									if (cds1.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
-										((CopyStatement)cds1).apply(src, out);
-										justWriteTheRest = true;
-									}
-								}
-							} else {
-								if (inLine.length() > 6) {
-									StringBuilder sb = new StringBuilder(inLine);
-									sb.setCharAt(6, '*');
-									inLine = sb.toString();
-								}
-							}
-						}
-					}
+					StringBuilder inLineSB = new StringBuilder(inLine);
+					justWriteTheRest = interpretCDSforCopy(cds, truthiness, src, out, inLineSB);
+					inLine = inLineSB.toString();
 				}
+				if (truthiness.peek() == null || truthiness.peek()) {
+					out.println(inLine);
 				}
-				out.println(inLine);
 				fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 				inLine = src.readLine();
 			}
-			} while (copies.size() > 0); //this isn't right
-			//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
-			LOGGER.finest("compOptDefines = " + compOptDefines);
-			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
-			allTheCalledNodes.addAll(calledNodes);
-			if (CLI.unitTest) {
-				if (!testFor(aFileName, dataNodes, calledNodes)) failCount++;
-			}
-			LOGGER.fine(aFileName + " calls " + calledNodes.size() + " modules");
-		} else {
-			LOGGER.info(aFileName + " not COBOL?");
+		} while (nbCopies > 0);
+		//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
+		LOGGER.finest("compOptDefines = " + compOptDefines);
+		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
+		allTheCalledNodes.addAll(calledNodes);
+		if (CLI.unitTest) {
+			if (!testFor(aFileName, dataNodes, calledNodes)) failCount++;
 		}
+		LOGGER.fine(aFileName + " calls " + calledNodes.size() + " modules");
 	}
 
 	LOGGER.fine("allTheCalledNodes: " + allTheCalledNodes);
@@ -207,6 +197,55 @@ public static void main(String[] args) throws Exception {
 		}
 
 		return null;
+	}
+
+	@SuppressWarnings("FallThrough")
+	public static Boolean interpretCDSforCopy(
+			CompilerDirectingStatement cds
+			, ArrayDeque<Boolean> truthiness
+			, LineNumberReader src
+			, PrintWriter out
+			, StringBuilder inLineSB
+			) throws IOException {
+		LOGGER.fine("interpretCDSforCopy()");
+
+		Boolean justWriteTheRest = false;
+
+		switch(cds.getType()) {
+			case STMT_ELSE:
+			case STMT_WHEN:
+				truthiness.pop();
+				// intentional fall-through!
+			case STMT_IF:
+				Boolean prevTruth = true;
+				if (truthiness.peek() != null) {
+					prevTruth = truthiness.peek();
+				}
+				truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth);
+				break;
+			case STMT_COPY:
+				if (truthiness.peek() == null || truthiness.peek()) {
+					((CopyStatement)cds).apply(src, out);
+					justWriteTheRest = true;
+				} else {
+					if (inLineSB.length() > 6) {
+						inLineSB.setCharAt(6, '*');
+					}
+				}
+				break;
+			case STMT_REPLACE:
+				if (truthiness.peek() == null || truthiness.peek()) {
+				}
+				break;
+			case STMT_END_IF:
+			case STMT_END_EVALUATE:
+				truthiness.pop();
+				break;
+			default:
+				break;
+		}
+
+		return justWriteTheRest;
 	}
 
 	/**

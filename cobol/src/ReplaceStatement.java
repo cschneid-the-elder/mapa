@@ -8,7 +8,8 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_REPLACE;
 	//private int line = -1;
 	private int startLine = -1;
-	private int endLine = -1;
+	private int endLine = -1; //end of this REPLACE statement
+	private int stopLine = -1; //end of the scope of this REPLACE statement
 
 	ReplaceStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) {
 		this.ctx = ctx;
@@ -25,6 +26,10 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		return this.endLine;
 	}
 
+	public int getStopLine() {
+		return this.stopLine;
+	}
+
 	public CompilerDirectingStatementType getType() {
 		return this.type;
 	}
@@ -35,6 +40,10 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 
 	int endLine() {
 		return this.ctx.stop.getLine();
+	}
+
+	public void setStopLine(int stopLine) {
+		this.stopLine = stopLine;
 	}
 
 	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {

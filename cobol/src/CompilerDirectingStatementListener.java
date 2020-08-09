@@ -8,6 +8,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	public ArrayList<CompilerDirectingStatement> compDirStmts = null;
 	public ArrayList<CondCompVar> compOptDefines = null;
 	public ArrayDeque<CondCompStmtIf> ifStmts = new ArrayDeque<>();
+	public ArrayList<ReplaceStatement> replaceStmts = new ArrayList<>();
 
 	public CompilerDirectingStatementListener(
 			ArrayList<CompilerDirectingStatement> compDirStmts
@@ -83,11 +84,30 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterReplaceByStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) { 
-		this.compDirStmts.add(new ReplaceStatement(ctx));
+		ReplaceStatement rs = new ReplaceStatement(ctx);
+		int last = replaceStmts.size();
+
+		this.compDirStmts.add(rs);
+
+		if (last == 0) {
+		} else {
+			ReplaceStatement rs1 = replaceStmts.get(last - 1);
+			rs1.setStopLine(rs.getLine());
+		}
+		this.replaceStmts.add(rs);
 	}
 
 	public void enterReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) { 
-		this.compDirStmts.add(new ReplaceOffStatement(ctx));
+		ReplaceOffStatement ros = new ReplaceOffStatement(ctx);
+		int last = replaceStmts.size();
+
+		this.compDirStmts.add(ros);
+
+		if (last == 0) {
+		} else {
+			ReplaceStatement rs1 = replaceStmts.get(last - 1);
+			rs1.setStopLine(ros.getLine());
+		}
 	}
 
 }
