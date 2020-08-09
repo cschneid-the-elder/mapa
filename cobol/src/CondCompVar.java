@@ -22,17 +22,18 @@ class CondCompVar implements CondCompToken {
 	private long sortKey = -1;
 
 	public static List<CondCompVar> bunchOfThese(
-					List<CobolPreprocessorParser.ConditionalCompilationDefineContext> list) {
+					List<CobolPreprocessorParser.ConditionalCompilationDefineContext> list
+					, ArrayList<CondCompVar> compOptDefines) {
 		ArrayList<CondCompVar> ccVarList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.ConditionalCompilationDefineContext ccVar: list) {
-			ccVarList.add(new CondCompVar(ccVar));
+			ccVarList.add(new CondCompVar(ccVar, compOptDefines));
 		}
 
 		return ccVarList;
 	}
 
-	public CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc) {
+	public CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc, ArrayList<CondCompVar> compOptDefines) {
 		this.ctx = ccdc;
 		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.ctx.IDENTIFIER();
@@ -48,6 +49,11 @@ class CondCompVar implements CondCompToken {
 			this.literalCtx = this.predicate.literal();
 			if (this.predicate.PARAMETER() != null) {
 				this.parameter = true;
+				for (CondCompVar ccv: compOptDefines) {
+					if (this.varName.equals(ccv.getVarName())) {
+						this.type = ccv.getType();
+					}
+				}
 			}
 			if (this.literalCtx == null) {
 				if (this.predicate.IDENTIFIER() == null) {
@@ -372,6 +378,8 @@ class CondCompVar implements CondCompToken {
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder(this.getVarName());
+
+		TestIntegration.LOGGER.fine(this.myName + " toString() " + this.getVarName());
 
 		sb.append(" ");
 

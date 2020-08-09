@@ -9,6 +9,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	public ArrayList<CondCompVar> compOptDefines = null;
 	public ArrayDeque<CondCompStmtIf> ifStmts = new ArrayDeque<>();
 	public ArrayList<ReplaceStatement> replaceStmts = new ArrayList<>();
+	public ArrayList<CondCompVar> defines = new ArrayList<>();
 
 	public CompilerDirectingStatementListener(
 			ArrayList<CompilerDirectingStatement> compDirStmts
@@ -17,6 +18,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		super();
 		this.compDirStmts = compDirStmts;
 		this.compOptDefines = compOptDefines;
+		this.defines.addAll(compOptDefines);
 	}
 
 	public void enterCompilerOptions(CobolPreprocessorParser.CompilerOptionsContext ctx) { 
@@ -24,7 +26,13 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterDefine_opt(CobolPreprocessorParser.Define_optContext ctx) {
-		this.compOptDefines.add(new CondCompVar(ctx));
+		CondCompVar var = new CondCompVar(ctx);
+		this.compOptDefines.add(var);
+		this.defines.add(var);
+	}
+
+	public void enterConditionalCompilationDefine(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx) {
+		this.defines.add(new CondCompVar(ctx, this.compOptDefines));
 	}
 
 	public void enterCopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) { 
@@ -32,7 +40,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterConditionalCompilationIf(CobolPreprocessorParser.ConditionalCompilationIfContext ctx) {
-		CondCompStmtIf ifStmt = new CondCompStmtIf(ctx, compOptDefines);
+		CondCompStmtIf ifStmt = new CondCompStmtIf(ctx, defines);
 		this.compDirStmts.add(ifStmt);
 		this.ifStmts.push(ifStmt);
 	}

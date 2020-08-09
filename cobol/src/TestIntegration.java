@@ -93,8 +93,15 @@ public static void main(String[] args) throws Exception {
 		}
 		int nbCopies = 0;
 		fileName = aFileName;
+		lookForCompilerDirectingStatements(
+						fileName
+						, baseDir
+						, initFileNm
+						, compDirStmts
+						, compOptDefines);
+		fileName = rewriteWithoutCompileOptionsStatements(compDirStmts, fileName, baseDir, initFileNm);
 		do {
-			fileName = lookForCompilerDirectingStatements(
+			lookForCompilerDirectingStatements(
 							fileName
 							, baseDir
 							, initFileNm
@@ -129,9 +136,10 @@ public static void main(String[] args) throws Exception {
 				if (truthiness.peek() == null || truthiness.peek()) {
 					out.println(inLine);
 				}
-				fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 				inLine = src.readLine();
 			}
+			fileName = tmp.getPath();
 		} while (nbCopies > 0);
 		//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
 		LOGGER.finest("compOptDefines = " + compOptDefines);
@@ -225,7 +233,7 @@ public static void main(String[] args) throws Exception {
 				break;
 			case STMT_COPY:
 				if (truthiness.peek() == null || truthiness.peek()) {
-					((CopyStatement)cds).apply(src, out);
+					((CopyStatement)cds).apply(src, out, inLineSB.toString());
 					justWriteTheRest = true;
 				} else {
 					if (inLineSB.length() > 6) {
@@ -274,7 +282,7 @@ public static void main(String[] args) throws Exception {
 		
 	}
 
-	public static String lookForCompilerDirectingStatements(
+	public static void lookForCompilerDirectingStatements(
 			String fileName
 			, File baseDir
 			, String initFileNm
@@ -302,15 +310,12 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("compDirStmts: " + compDirStmts);
 		LOGGER.finest("compOptDefines: " + compOptDefines);
 
-		return rewriteWithoutCompileOptionsStatements(compDirStmts, fileName, baseDir, initFileNm);
-
 	}
 
 	/**
 	Iteratively look for COPY statements and resolve them, rewriting
 	the source file with the content of the target of the COPY statements
 	each time.  COPY statements can contain other nested COPY statements.
-	*/
 	public static String lookForCopyStatements(
 						String initFileName
 						, File baseDir
@@ -352,6 +357,7 @@ public static void main(String[] args) throws Exception {
 
 		return fileName;
 	}
+	*/
 
 	/**
 	Here we expand the COPY statements, applying the REPLACING phrase(s).
@@ -375,7 +381,6 @@ public static void main(String[] args) throws Exception {
 	discard all bytes from (and including) the 'C' in COPY through the terminating
 	'.' at the end of the COPY statement.
 
-	*/	
 	public static String applyCopyStatement(
 							CopyStatement copyStmt
 							, String fileName
@@ -428,11 +433,11 @@ public static void main(String[] args) throws Exception {
 				int startLine = copy.startLine();
 				int endLine = copy.endLine();
 				if (copyDone.get(copy)) {
-					/*
-					 already processed this COPY statement, no need for further action
-					 unless all COPY statements have been processed, see code following
-					 this for () loop
-					*/
+					//
+					// already processed this COPY statement, no need for further action
+					// unless all COPY statements have been processed, see code following
+					// this for () loop
+					//
 					LOGGER.finer("already processed this COPY statement");
 				} else if (src.getLineNumber() < startLine || src.getLineNumber() > endLine) {
 					// outside of this COPY statement
@@ -549,6 +554,7 @@ public static void main(String[] args) throws Exception {
 			for (String line: list) out.println(copy.applyReplacingPhrases(line));
 		}
 	}
+	*/
 
 	public static String lookForReplaceStatements(
 						String fileName
@@ -706,7 +712,7 @@ public static void main(String[] args) throws Exception {
 		while (inLine != null) {
 			Boolean isCompileOptLine = false;
 			for (CompilerDirectingStatement cds: compDirStmts) {
-				LOGGER.finest("cds.getType() = " + cds.getType());
+				//LOGGER.finest("cds.getType() = " + cds.getType());
 				if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COMPILE_OPTION 
 				&& cds.getLine() == src.getLineNumber()) {
 					isCompileOptLine = true;

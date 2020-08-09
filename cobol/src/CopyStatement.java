@@ -21,6 +21,15 @@ public class CopyStatement implements CompilerDirectingStatement {
 		this.endLine = this.ctx.stop.getLine();
 		this.startPosn = this.ctx.start.getCharPositionInLine();
 		this.endPosn = this.ctx.stop.getCharPositionInLine();
+		TestIntegration.LOGGER.fine(myName + " " + this.getCopyFile());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.start.getLine() = " + this.ctx.start.getLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getLine() = " + this.ctx.COPY().getSymbol().getLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.stop.getLine() = " + this.ctx.stop.getLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getLine() = " + this.ctx.DOT().getSymbol().getLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.start.getCharPositionInLine() = " + this.ctx.start.getCharPositionInLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getCharPositionInLine() = " + this.ctx.COPY().getSymbol().getCharPositionInLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.stop.getCharPositionInLine() = " + this.ctx.stop.getCharPositionInLine());
+		TestIntegration.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getCharPositionInLine() = " + this.ctx.DOT().getSymbol().getCharPositionInLine());
 	}
 
 	public int getLine() {
@@ -58,9 +67,10 @@ public class CopyStatement implements CompilerDirectingStatement {
 	public void apply(
 			LineNumberReader src
 			, PrintWriter out
+			, String currLine
 			) throws IOException {
-		TestIntegration.LOGGER.fine(myName + " apply()");
-		String inLine = src.readLine();
+		TestIntegration.LOGGER.fine(myName + " apply() " + this.getCopyFile());
+		String inLine = currLine;
 		Boolean pleaseWrite = true;
 		while (inLine != null) {
 			pleaseWrite = true;
@@ -80,11 +90,13 @@ public class CopyStatement implements CompilerDirectingStatement {
 				} else if (src.getLineNumber() == this.getLine() && this.getLine() == this.getEndLine()) {
 					// single line COPY statement
 					TestIntegration.LOGGER.finer("single-line COPY statement");
-					String aLine = inLine.substring(0, this.startPosn - 1);
-					for (int i = this.startPosn; i <= this.endPosn + 1; i++) aLine = aLine.concat(" "); 
-					aLine = aLine.concat(inLine.substring(this.endPosn + 1));
 					TestIntegration.LOGGER.finer("startPosn = " + this.startPosn);
 					TestIntegration.LOGGER.finer("endPosn   = " + this.endPosn);
+					String aLine = inLine.substring(0, this.startPosn - 1);
+					for (int i = this.startPosn; i <= this.endPosn + 1; i++) aLine = aLine.concat(" "); 
+					if (inLine.length() > this.endPosn) {
+						aLine = aLine.concat(inLine.substring(this.endPosn + 1));
+					}
 					TestIntegration.LOGGER.finer("in  = |" + inLine + "|");
 					TestIntegration.LOGGER.finer("out = |" + aLine + "|");
 					out.println(aLine);
