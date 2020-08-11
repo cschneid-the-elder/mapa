@@ -77,11 +77,12 @@ public class CopyStatement implements CompilerDirectingStatement {
 			if (src.getLineNumber() < this.getLine() || src.getLineNumber() > this.getEndLine()) {
 					// outside of this COPY statement
 					TestIntegration.LOGGER.finer("outside this COPY statement");
-					if (pleaseWrite) {
-						TestIntegration.LOGGER.finer("out = |" + inLine + "|");
-						out.println(inLine);
-						pleaseWrite = false;
-					}
+					return;
+					//if (pleaseWrite) {
+					//	TestIntegration.LOGGER.finer("out = |" + inLine + "|");
+					//	out.println(inLine);
+					//	pleaseWrite = false;
+					//}
 				} else if (src.getLineNumber() > this.getLine() && src.getLineNumber() < this.getEndLine()) {
 					// inside of a multi-line COPY statement - we just discard these
 					TestIntegration.LOGGER.finer("inside multi-line COPY statement");

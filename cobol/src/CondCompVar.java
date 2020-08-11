@@ -52,6 +52,23 @@ class CondCompVar implements CondCompToken {
 				for (CondCompVar ccv: compOptDefines) {
 					if (this.varName.equals(ccv.getVarName())) {
 						this.type = ccv.getType();
+						switch(this.type) {
+							case VAR_INTEGER:
+								this.intValue = ccv.getIntValue();
+								break;
+							case VAR_ALPHANUM:
+								this.alnumValue = ccv.getAlnumValue();
+								break;
+							case VAR_BOOLEAN:
+								this.boolValue = ccv.getBoolValue();
+								break;
+							default:
+								throw new IllegalArgumentException(
+											ccv.getVarName()
+											+ " is of type "
+											+ ccv.getType()
+											+ " and value has not been set in CondCompVar constructor");
+						}
 					}
 				}
 			}

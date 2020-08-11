@@ -92,6 +92,7 @@ public static void main(String[] args) throws Exception {
 			continue;
 		}
 		int nbCopies = 0;
+		int sanityCheck = 0;
 		fileName = aFileName;
 		lookForCompilerDirectingStatements(
 						fileName
@@ -101,12 +102,25 @@ public static void main(String[] args) throws Exception {
 						, compOptDefines);
 		fileName = rewriteWithoutCompileOptionsStatements(compDirStmts, fileName, baseDir, initFileNm);
 		do {
+			sanityCheck++;
+			LOGGER.finest("sanityCheck = " + sanityCheck);
+			if (sanityCheck > 100) {
+				throw new IllegalArgumentException(
+					"sanity check exceeded ("
+					+ sanityCheck
+					+ ") processing "
+					+ aFileName
+					+ " into "
+					+ fileName);
+			}
+			compDirStmts.clear();
 			lookForCompilerDirectingStatements(
 							fileName
 							, baseDir
 							, initFileNm
 							, compDirStmts
 							, compOptDefines);
+			nbCopies = 0;
 			for (CompilerDirectingStatement copy: compDirStmts) {
 				if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
 					nbCopies++;
@@ -119,7 +133,7 @@ public static void main(String[] args) throws Exception {
 			} else {
 				tmp.deleteOnExit();
 			}
-
+			LOGGER.finest("writing to " + tmp.getPath());
 			PrintWriter out = new PrintWriter(tmp);
 			String inLine = src.readLine();
 			Boolean justWriteTheRest = false;
@@ -133,12 +147,13 @@ public static void main(String[] args) throws Exception {
 					justWriteTheRest = interpretCDSforCopy(cds, truthiness, src, out, inLineSB);
 					inLine = inLineSB.toString();
 				}
-				if (truthiness.peek() == null || truthiness.peek()) {
-					out.println(inLine);
-				}
+				LOGGER.finest("writing  |" + inLine + "|");
+				out.println(inLine);
 				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 				inLine = src.readLine();
 			}
+			src.close();
+			out.close();
 			fileName = tmp.getPath();
 		} while (nbCopies > 0);
 		//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
@@ -218,6 +233,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.fine("interpretCDSforCopy()");
 
 		Boolean justWriteTheRest = false;
+		LOGGER.finest("interpretCDSforCopy() truthiness = |" + truthiness + "|");
 
 		switch(cds.getType()) {
 			case STMT_ELSE:
@@ -235,6 +251,7 @@ public static void main(String[] args) throws Exception {
 				if (truthiness.peek() == null || truthiness.peek()) {
 					((CopyStatement)cds).apply(src, out, inLineSB.toString());
 					justWriteTheRest = true;
+					inLineSB.delete(0, inLineSB.length());
 				} else {
 					if (inLineSB.length() > 6) {
 						inLineSB.setCharAt(6, '*');
