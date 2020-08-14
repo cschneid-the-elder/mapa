@@ -101,7 +101,12 @@ public static void main(String[] args) throws Exception {
 						, compDirStmts
 						, compOptDefines);
 		fileName = rewriteWithoutCompileOptionsStatements(compDirStmts, fileName, baseDir, initFileNm);
-		do {
+		for (CompilerDirectingStatement copy: compDirStmts) {
+			if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
+				nbCopies++;
+			}
+		}
+		while (nbCopies > 0) {
 			sanityCheck++;
 			LOGGER.finest("sanityCheck = " + sanityCheck);
 			if (sanityCheck > 100) {
@@ -141,7 +146,10 @@ public static void main(String[] args) throws Exception {
 
 			while (inLine != null) {
 				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
-				if (cds == null || justWriteTheRest) {
+				if (cds == null 
+				|| cds.getType() == STMT_REPLACE 
+				|| cds.getType() == STMT_REPLACE_OFF 
+				|| justWriteTheRest) {
 				} else {
 					StringBuilder inLineSB = new StringBuilder(inLine);
 					justWriteTheRest = interpretCDSforCopy(cds, truthiness, src, out, inLineSB);
@@ -155,8 +163,68 @@ public static void main(String[] args) throws Exception {
 			src.close();
 			out.close();
 			fileName = tmp.getPath();
-		} while (nbCopies > 0);
-		//fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
+		}
+		int nbReplaces = 0;
+		for (CompilerDirectingStatement copy: compDirStmts) {
+			if (copy.getType() == STMT_REPLACE) {
+				nbReplaces++;
+			}
+		}
+		while (nbReplaces > 0) {
+			sanityCheck++;
+			LOGGER.finest("sanityCheck = " + sanityCheck);
+			if (sanityCheck > 100) {
+				throw new IllegalArgumentException(
+					"sanity check exceeded ("
+					+ sanityCheck
+					+ ") processing "
+					+ aFileName
+					+ " into "
+					+ fileName);
+			}
+			compDirStmts.clear();
+			lookForCompilerDirectingStatements(
+							fileName
+							, baseDir
+							, initFileNm
+							, compDirStmts
+							, compOptDefines);
+			nbReplaces = 0;
+			for (CompilerDirectingStatement copy: compDirStmts) {
+				if (copy.getType() == STMT_REPLACE) {
+					nbReplaces++;
+				}
+			}
+			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
+			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+			CLI.setPosixAttributes(tmp);
+			if (CLI.saveTemp) {
+			} else {
+				tmp.deleteOnExit();
+			}
+			LOGGER.finest("writing to " + tmp.getPath());
+			PrintWriter out = new PrintWriter(tmp);
+			String inLine = src.readLine();
+			Boolean justWriteTheRest = false;
+			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
+			ReplaceStatement currReplace = null;
+
+			while (inLine != null) {
+				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
+				if (cds == null) {
+				} else {
+					StringBuilder inLineSB = new StringBuilder(inLine);
+					interpretCDSforReplace(cds, truthiness, src, out, inLineSB);
+					inLine = inLineSB.toString();
+				}
+				LOGGER.finest("writing  |" + inLine + "|");
+				out.println(inLine);
+				inLine = src.readLine();
+			}
+			src.close();
+			out.close();
+			fileName = tmp.getPath();
+		}
 		LOGGER.finest("compOptDefines = " + compOptDefines);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
@@ -258,8 +326,50 @@ public static void main(String[] args) throws Exception {
 					}
 				}
 				break;
+			case STMT_END_IF:
+			case STMT_END_EVALUATE:
+				truthiness.pop();
+				break;
+			default:
+				break;
+		}
+
+		return justWriteTheRest;
+	}
+
+	@SuppressWarnings("FallThrough")
+	public static void interpretCDSforReplace(
+			CompilerDirectingStatement cds
+			, ArrayDeque<Boolean> truthiness
+			, LineNumberReader src
+			, PrintWriter out
+			, StringBuilder inLineSB
+			) throws IOException {
+		LOGGER.fine("interpretCDSforReplace()");
+
+		Boolean justWriteTheRest = false;
+		LOGGER.finest("interpretCDSforReplace() truthiness = |" + truthiness + "|");
+
+		switch(cds.getType()) {
+			case STMT_ELSE:
+			case STMT_WHEN:
+				truthiness.pop();
+				// intentional fall-through!
+			case STMT_IF:
+				Boolean prevTruth = true;
+				if (truthiness.peek() != null) {
+					prevTruth = truthiness.peek();
+				}
+				truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth);
+				break;
+			case STMT_COPY:
+				throw new IllegalArgumentException("interpretCDSforReplace() found " + cds);
+				break;
 			case STMT_REPLACE:
 				if (truthiness.peek() == null || truthiness.peek()) {
+					String newLine = ((ReplaceStatement)cds).applyTo(inLineSB.toString());
+					inLineSB.delete(0, inLineSB.length());
+					inLineSB.append(newLine);
 				}
 				break;
 			case STMT_END_IF:
@@ -270,7 +380,7 @@ public static void main(String[] args) throws Exception {
 				break;
 		}
 
-		return justWriteTheRest;
+		return;
 	}
 
 	/**

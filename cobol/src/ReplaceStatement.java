@@ -10,6 +10,8 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 	private int startLine = -1;
 	private int endLine = -1; //end of this REPLACE statement
 	private int stopLine = -1; //end of the scope of this REPLACE statement
+	private String replaceable = null;
+	private String replacement = null;
 
 	ReplaceStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) {
 		this.ctx = ctx;
@@ -48,6 +50,9 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 
 	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.fine(myName + " getReplaceable");
+
+		if (this.replaceable != null) return this.replaceable;
+
 		String replaceable = new String();
 
 		if (rcc.replaceable().pseudoText() == null) {
@@ -90,11 +95,15 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		}
 
 		TestIntegration.LOGGER.finest(myName + " getReplacement replaceable = |" + replaceable + "|");
+		this.replaceable = replaceable;
 		return replaceable;
 	}
 
 	public String getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.fine(myName + " getReplacement");
+
+		if (this.replacement == null) return this.replacement;
+
 		String replacement = new String();
 
 		if (rcc.replacement().pseudoText() == null) {
@@ -137,6 +146,7 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		}
 
 		TestIntegration.LOGGER.finest(myName + " getReplacement replacement = |" + replacement + "|");
+		this.replacement = replacement;
 		return replacement;
 	}
 

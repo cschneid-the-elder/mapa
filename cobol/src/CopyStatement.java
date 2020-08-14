@@ -13,6 +13,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 	private int endLine = -1;
 	private int startPosn = -1;
 	private int endPosn = -1;
+	private String replaceable = null;
+	private String replacement = null;
 
 	CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
@@ -103,6 +105,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 					out.println(aLine);
 					pleaseWrite = false;
 					writeTheCopyContent(out);
+					return;
 				} else if (src.getLineNumber() == this.getLine() && this.getLine() < this.getEndLine()) {
 					// first line of a multi-line COPY statement
 					TestIntegration.LOGGER.finer("first line of a multi-line COPY statement");
@@ -139,6 +142,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 					TestIntegration.LOGGER.finer("out = |" + aLine + "|");
 					out.println(aLine);
 					pleaseWrite = false;
+					return;
 				}
 			if (pleaseWrite) {
 				TestIntegration.LOGGER.finer("out = |" + inLine + "|");
@@ -212,6 +216,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 	}
 
 	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
+		if (this.replaceable != null) return this.replaceable;
+
 		String replaceable = new String();
 
 		if (rcc.replaceable().pseudoText() == null) {
@@ -243,10 +249,13 @@ public class CopyStatement implements CompilerDirectingStatement {
 			replaceable = rcc.replaceable().pseudoText().charData().getText();
 		}
 
+		this.replaceable = replaceable;
 		return replaceable;
 	}
 
 	public String getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
+		if (this.replacement == null) return this.replacement;
+
 		String replacement = new String();
 
 		if (rcc.replacement().pseudoText() == null) {
@@ -278,6 +287,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 			replacement = rcc.replacement().pseudoText().charData().getText();
 		}
 
+		this.replacement = replacement;
 		return replacement;
 	}
 
