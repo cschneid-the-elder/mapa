@@ -91,141 +91,7 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info(aFileName + " not COBOL?");
 			continue;
 		}
-		int nbCopies = 0;
-		int sanityCheck = 0;
-		fileName = aFileName;
-		lookForCompilerDirectingStatements(
-						fileName
-						, baseDir
-						, initFileNm
-						, compDirStmts
-						, compOptDefines);
-		fileName = rewriteWithoutCompileOptionsStatements(compDirStmts, fileName, baseDir, initFileNm);
-		for (CompilerDirectingStatement copy: compDirStmts) {
-			if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
-				nbCopies++;
-			}
-		}
-		while (nbCopies > 0) {
-			sanityCheck++;
-			LOGGER.finest("sanityCheck = " + sanityCheck);
-			if (sanityCheck > 100) {
-				throw new IllegalArgumentException(
-					"sanity check exceeded ("
-					+ sanityCheck
-					+ ") processing "
-					+ aFileName
-					+ " into "
-					+ fileName);
-			}
-			compDirStmts.clear();
-			lookForCompilerDirectingStatements(
-							fileName
-							, baseDir
-							, initFileNm
-							, compDirStmts
-							, compOptDefines);
-			nbCopies = 0;
-			for (CompilerDirectingStatement copy: compDirStmts) {
-				if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
-					nbCopies++;
-				}
-			}
-			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
-			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
-			CLI.setPosixAttributes(tmp);
-			if (CLI.saveTemp) {
-			} else {
-				tmp.deleteOnExit();
-			}
-			LOGGER.finest("writing to " + tmp.getPath());
-			PrintWriter out = new PrintWriter(tmp);
-			String inLine = src.readLine();
-			Boolean justWriteTheRest = false;
-			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
-
-			while (inLine != null) {
-				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
-				if (cds == null 
-				|| cds.getType() == STMT_REPLACE 
-				|| cds.getType() == STMT_REPLACE_OFF 
-				|| justWriteTheRest) {
-				} else {
-					StringBuilder inLineSB = new StringBuilder(inLine);
-					justWriteTheRest = interpretCDSforCopy(cds, truthiness, src, out, inLineSB);
-					inLine = inLineSB.toString();
-				}
-				LOGGER.finest("writing  |" + inLine + "|");
-				out.println(inLine);
-				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
-				inLine = src.readLine();
-			}
-			src.close();
-			out.close();
-			fileName = tmp.getPath();
-		}
-		int nbReplaces = 0;
-		for (CompilerDirectingStatement copy: compDirStmts) {
-			if (copy.getType() == STMT_REPLACE) {
-				nbReplaces++;
-			}
-		}
-		while (nbReplaces > 0) {
-			sanityCheck++;
-			LOGGER.finest("sanityCheck = " + sanityCheck);
-			if (sanityCheck > 100) {
-				throw new IllegalArgumentException(
-					"sanity check exceeded ("
-					+ sanityCheck
-					+ ") processing "
-					+ aFileName
-					+ " into "
-					+ fileName);
-			}
-			compDirStmts.clear();
-			lookForCompilerDirectingStatements(
-							fileName
-							, baseDir
-							, initFileNm
-							, compDirStmts
-							, compOptDefines);
-			nbReplaces = 0;
-			for (CompilerDirectingStatement copy: compDirStmts) {
-				if (copy.getType() == STMT_REPLACE) {
-					nbReplaces++;
-				}
-			}
-			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
-			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
-			CLI.setPosixAttributes(tmp);
-			if (CLI.saveTemp) {
-			} else {
-				tmp.deleteOnExit();
-			}
-			LOGGER.finest("writing to " + tmp.getPath());
-			PrintWriter out = new PrintWriter(tmp);
-			String inLine = src.readLine();
-			Boolean justWriteTheRest = false;
-			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
-			ReplaceStatement currReplace = null;
-
-			while (inLine != null) {
-				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
-				if (cds == null) {
-				} else {
-					StringBuilder inLineSB = new StringBuilder(inLine);
-					interpretCDSforReplace(cds, truthiness, src, out, inLineSB);
-					inLine = inLineSB.toString();
-				}
-				LOGGER.finest("writing  |" + inLine + "|");
-				out.println(inLine);
-				inLine = src.readLine();
-			}
-			src.close();
-			out.close();
-			fileName = tmp.getPath();
-		}
-		LOGGER.finest("compOptDefines = " + compOptDefines);
+		fileName = processCDS(aFileName, baseDir);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
 		if (CLI.unitTest) {
@@ -290,97 +156,157 @@ public static void main(String[] args) throws Exception {
 		return null;
 	}
 
-	@SuppressWarnings("FallThrough")
-	public static Boolean interpretCDSforCopy(
-			CompilerDirectingStatement cds
-			, ArrayDeque<Boolean> truthiness
-			, LineNumberReader src
-			, PrintWriter out
-			, StringBuilder inLineSB
-			) throws IOException {
-		LOGGER.fine("interpretCDSforCopy()");
+	@SuppressWarnings({"fallthrough"})
+	public static String processCDS(
+			String aFileName
+			, File baseDir
+			) throws Exception {
+		LOGGER.fine("processCDS()");
 
-		Boolean justWriteTheRest = false;
-		LOGGER.finest("interpretCDSforCopy() truthiness = |" + truthiness + "|");
+		ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
+		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
+		String initFileNm = new File(aFileName).getName();
+		String fileName = initFileNm;
+		Boolean done = false;
+		int nbCopies = 0;
+		int sanityCheck = 0;
 
-		switch(cds.getType()) {
-			case STMT_ELSE:
-			case STMT_WHEN:
-				truthiness.pop();
-				// intentional fall-through!
-			case STMT_IF:
-				Boolean prevTruth = true;
-				if (truthiness.peek() != null) {
-					prevTruth = truthiness.peek();
+		lookForCompilerDirectingStatements(
+						aFileName
+						, baseDir
+						, initFileNm
+						, compDirStmts
+						, compOptDefines);
+		LOGGER.finest("compOptDefines = " + compOptDefines);
+		fileName = rewriteWithoutCompileOptionsStatements(compDirStmts, aFileName, baseDir, initFileNm);
+		while (!done) {
+			sanityCheck++;
+			LOGGER.finest("sanityCheck = " + sanityCheck);
+			if (sanityCheck > 100) {
+				throw new IllegalArgumentException(
+					"sanity check exceeded ("
+					+ sanityCheck
+					+ ") processing "
+					+ aFileName
+					+ " into "
+					+ fileName);
+			}
+			compDirStmts.clear();
+			lookForCompilerDirectingStatements(
+							fileName
+							, baseDir
+							, initFileNm
+							, compDirStmts
+							, compOptDefines);
+			nbCopies = countCopyCDS(compDirStmts);
+			/*for (CompilerDirectingStatement copy: compDirStmts) {
+				if (copy.getType() == STMT_COPY) {
+					nbCopies++;
 				}
-				truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth);
-				break;
-			case STMT_COPY:
-				if (truthiness.peek() == null || truthiness.peek()) {
-					((CopyStatement)cds).apply(src, out, inLineSB.toString());
-					justWriteTheRest = true;
-					inLineSB.delete(0, inLineSB.length());
+			}*/
+			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
+			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+			CLI.setPosixAttributes(tmp);
+			if (CLI.saveTemp) {
+			} else {
+				tmp.deleteOnExit();
+			}
+			LOGGER.finest("reading from " + fileName);
+			LOGGER.finest("writing to " + tmp.getPath());
+			PrintWriter out = new PrintWriter(tmp);
+			Boolean justWriteTheRest = false;
+			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
+			ReplaceStatement currReplace = null;
+
+			String inLine = src.readLine();
+			while (inLine != null) {
+				StringBuilder inLineSB = new StringBuilder(inLine);
+				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
+				if (justWriteTheRest) {
+				} else if (cds == null) {
+					if (nbCopies == 0) {
+						if (truthiness.peek() == null || truthiness.peek()) {
+						} else {
+							if (inLineSB.length() > 6) {
+								inLineSB.setCharAt(6, '*');
+							}
+						}
+						if (currReplace == null) {
+							inLine = inLineSB.toString();
+						} else {
+							inLine = currReplace.applyTo(inLineSB.toString());
+						}
+					}
 				} else {
-					if (inLineSB.length() > 6) {
-						inLineSB.setCharAt(6, '*');
+					switch(cds.getType()) {
+						case STMT_ELSE:
+						case STMT_WHEN:
+							truthiness.pop();
+						case STMT_IF: // intentional fall-through!
+							Boolean prevTruth = true;
+							if (truthiness.peek() != null) {
+								prevTruth = truthiness.peek();
+							}
+							truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth);
+							break;
+						case STMT_COPY:
+							if (truthiness.peek() == null || truthiness.peek()) {
+								((CopyStatement)cds).apply(src, out, inLineSB.toString());
+								justWriteTheRest = true;
+								inLineSB.delete(0, inLineSB.length());
+							} else {
+								if (inLineSB.length() > 6) {
+									inLineSB.setCharAt(6, '*');
+								}
+							}
+							inLine = inLineSB.toString();
+							break;
+						case STMT_REPLACE:
+							if (nbCopies == 0) {
+								if (truthiness.peek() == null || truthiness.peek()) {
+									currReplace = (ReplaceStatement)cds;
+								}
+							}
+							break;
+						case STMT_REPLACE_OFF:
+							if (nbCopies == 0) {
+								if (truthiness.peek() == null || truthiness.peek()) {
+									currReplace = null;
+								}
+							}
+							break;
+						case STMT_END_IF:
+						case STMT_END_EVALUATE:
+							truthiness.pop();
+							break;
+						default:
+							break;
 					}
 				}
-				break;
-			case STMT_END_IF:
-			case STMT_END_EVALUATE:
-				truthiness.pop();
-				break;
-			default:
-				break;
+				LOGGER.finest("writing  |" + inLine + "|");
+				out.println(inLine);
+				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+				inLine = src.readLine();
+			}
+			src.close();
+			out.close();
+			fileName = tmp.getPath();
+			sanityCheck = 0;
+			if (nbCopies == 0) done = true;
 		}
 
-		return justWriteTheRest;
+		return fileName;
 	}
 
-	@SuppressWarnings("FallThrough")
-	public static void interpretCDSforReplace(
-			CompilerDirectingStatement cds
-			, ArrayDeque<Boolean> truthiness
-			, LineNumberReader src
-			, PrintWriter out
-			, StringBuilder inLineSB
-			) throws IOException {
-		LOGGER.fine("interpretCDSforReplace()");
-
-		Boolean justWriteTheRest = false;
-		LOGGER.finest("interpretCDSforReplace() truthiness = |" + truthiness + "|");
-
-		switch(cds.getType()) {
-			case STMT_ELSE:
-			case STMT_WHEN:
-				truthiness.pop();
-				// intentional fall-through!
-			case STMT_IF:
-				Boolean prevTruth = true;
-				if (truthiness.peek() != null) {
-					prevTruth = truthiness.peek();
-				}
-				truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth);
-				break;
-			case STMT_COPY:
-				throw new IllegalArgumentException("interpretCDSforReplace() found " + cds);
-				break;
-			case STMT_REPLACE:
-				if (truthiness.peek() == null || truthiness.peek()) {
-					String newLine = ((ReplaceStatement)cds).applyTo(inLineSB.toString());
-					inLineSB.delete(0, inLineSB.length());
-					inLineSB.append(newLine);
-				}
-				break;
-			case STMT_END_IF:
-			case STMT_END_EVALUATE:
-				truthiness.pop();
-				break;
-			default:
-				break;
+	public static int countCopyCDS(ArrayList<CompilerDirectingStatement> compDirStmts) {
+		int nbCopies = 0;
+		for (CompilerDirectingStatement copy: compDirStmts) {
+			if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
+				nbCopies++;
+			}
 		}
 
-		return;
+		return nbCopies;
 	}
 
 	/**
