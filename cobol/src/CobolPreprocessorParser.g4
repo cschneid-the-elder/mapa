@@ -428,7 +428,13 @@ conditionalCompilationArithmeticExpression
    ;
 
 conditionalCompilationSimpleArithmeticExpression
-   : ((IDENTIFIER | literal) conditionalCompilationArithmeticOp (IDENTIFIER | literal))
+   : (conditionalCompilationArithmeticAtom (conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom)?)
+   ;
+
+conditionalCompilationArithmeticAtom
+   : (IDENTIFIER
+   | ZERO
+   | literal)
    ;
 
 conditionalCompilationArithmeticOp
@@ -450,12 +456,18 @@ conditionalCompilationEndIf
    : COMPILER_DIRECTIVE_TAG END_IF
    ;
 
+conditionalCompilationEvaluateSelection
+   : (conditionalCompilationArithmeticExpression
+   | IDENTIFIER
+   | literal)
+   ;
+
 conditionalCompilationEvaluate
-   : COMPILER_DIRECTIVE_TAG EVALUATE (TRUE | conditionalCompilationArithmeticExpression | IDENTIFIER | literal)
+   : COMPILER_DIRECTIVE_TAG EVALUATE (TRUE | conditionalCompilationEvaluateSelection)
    ;
 
 conditionalCompilationWhen
-   : COMPILER_DIRECTIVE_TAG WHEN (((conditionalCompilationArithmeticExpression | IDENTIFIER | literal | OTHER) ((THROUGH | THRU) (conditionalCompilationArithmeticExpression | IDENTIFIER | literal))?) | conditionalCompilationRelationalCondition)
+   : COMPILER_DIRECTIVE_TAG WHEN ((conditionalCompilationEvaluateSelection ((THROUGH | THRU) conditionalCompilationEvaluateSelection)?) | conditionalCompilationRelationalCondition | OTHER)
    ;
 
 conditionalCompilationEndEvaluate

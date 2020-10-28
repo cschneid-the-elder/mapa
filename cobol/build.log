@@ -1047,3 +1047,20 @@ Sun Aug 16 15:10:35 CDT 2020 jar
 Sun Aug 16 15:10:37 CDT 2020 src/TestIntegration.java
 Sun Aug 16 15:10:40 CDT 2020 jar
 Sun Aug 16 15:10:44 CDT 2020 testLocalx 9009
+Sun Aug 16 16:10:37 CDT 2020 src/CobolPreprocessorParser.g4
+Mon Aug 17 17:31:01 CDT 2020 src/CobolPreprocessorParser.g4
+Mon Aug 17 17:31:06 CDT 2020 src/CondCompToken.java
+Mon Aug 17 17:31:07 CDT 2020 src/CondCompComparisonOp.java
+Mon Aug 17 17:31:07 CDT 2020 src/CondCompVar.java
+Mon Aug 17 17:31:08 CDT 2020 src/CompilerDirectingStatementListener.java
+Mon Aug 17 17:31:09 CDT 2020 src/TestIntegration.java
+Mon Aug 17 17:31:10 CDT 2020 src/CondCompLogicOp.java
+Mon Aug 17 17:31:11 CDT 2020 src/CondCompArithOp.java
+Mon Aug 17 17:31:12 CDT 2020 src/CondCompGroupOp.java
+Mon Aug 17 17:31:12 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Mon Aug 17 17:31:13 CDT 2020 src/CondCompBinaryCondition.java
+Mon Aug 17 17:31:14 CDT 2020 src/CondCompDefinedCondition.java
+Mon Aug 17 17:31:15 CDT 2020 src/CondCompRelationalCondition.java
+Mon Aug 17 17:33:26 CDT 2020 testrigppx 9001
+Mon Aug 17 17:33:45 CDT 2020 testrigppx 9002
+Mon Aug 17 17:35:15 CDT 2020 testrigppx 9003

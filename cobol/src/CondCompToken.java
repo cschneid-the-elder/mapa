@@ -27,7 +27,7 @@ public interface CondCompToken {
 			, BINARY_CONDITION
 			, DEFINED_CONDITION
 			, RELATIONAL_CONDITION
+			, SIMPLE_ARITHMETIC_EXPRESSION
 	}
-
 
 }
