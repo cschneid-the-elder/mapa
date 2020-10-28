@@ -4216,4 +4216,14 @@ public interface JCLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNullStatement(JCLParser.NullStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link JCLParser#delimiterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDelimiterStatement(JCLParser.DelimiterStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link JCLParser#delimiterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDelimiterStatement(JCLParser.DelimiterStatementContext ctx);
 }
