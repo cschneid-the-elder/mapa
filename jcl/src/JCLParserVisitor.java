@@ -2535,4 +2535,10 @@ public interface JCLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNullStatement(JCLParser.NullStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link JCLParser#delimiterStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDelimiterStatement(JCLParser.DelimiterStatementContext ctx);
 }

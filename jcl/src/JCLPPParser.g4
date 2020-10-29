@@ -50,7 +50,7 @@ execJCL
 			| pendStatement 
 			| scheduleStatement 
 			| setStatement)*
-			nullStatement* jes2CntlStatement*)+ 
+			nullStatement* jes2CntlStatement* delimiterStatement*)+ 
 	EOF?
 	;
 
@@ -405,5 +405,9 @@ jes2XMITStatement : SA JES2_XMIT SYMBOLIC*
 
 nullStatement
 	: SS
+	;
+
+delimiterStatement
+	: DELIMITER_STATEMENT
 	;
 
