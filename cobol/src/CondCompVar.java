@@ -101,6 +101,53 @@ class CondCompVar implements CondCompToken {
 
 	}
 
+	public CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx) {
+		this.ctx = ctx;
+		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
+		this.tn = this.ctx.IDENTIFIER();
+
+		long line = this.tn.getSymbol().getLine();
+		long posn = this.tn.getSymbol().getCharPositionInLine();
+		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+
+		this.predicate = ctx.conditionalCompilationDefinePredicate();
+
+		if (predicate == null) {
+			this.literalCtx = null;
+		} else {
+			this.literalCtx = this.predicate.literal();
+		}
+		if (this.literalCtx == null) {
+			/*
+			As per https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/pg/ui/up4011.html
+			"If literal-1 is not specified, a value of B'1' will be assigned to the 
+			compilation variable."
+			If that link has gone stale, it's..
+				Enterprise COBOL for z/OS > Programming Guide
+				> Compiling and debugging your program > Compiler options > DEFINE
+			*/
+			this.boolValue = true;
+		} else {
+			if (this.literalCtx.NONNUMERICLITERAL() == null) {
+				if (this.literalCtx.NUMERICLITERAL() == null) {
+					throw new IllegalArgumentException(
+						"@ " + line + " var " + this.varName
+						+ " ConditionalCompilationDefineContext"
+						+ ".ConditionalCompilationDefinePredicateContext"
+						+ ".LiteralContext"
+						+ " NONNUMERICLITERAL() == null"
+						+ " && NUMERICLITERAL() == null");
+				} else {
+					this.type = CondCompTokenType.VAR_INTEGER;
+					this.setValue(this.literalCtx.NUMERICLITERAL());
+				}
+			} else {
+				this.setValue(this.literalCtx.NONNUMERICLITERAL());
+			}
+		}
+
+	}
+
 	public CondCompVar(CobolPreprocessorParser.Define_optContext ctx) {
 		this.defCtx = ctx;
 		this.varName = this.defCtx.IDENTIFIER().getSymbol().getText();
@@ -400,18 +447,22 @@ class CondCompVar implements CondCompToken {
 
 		sb.append(" ");
 
-		switch(this.getType()) {
-			case VAR_INTEGER:
-				sb.append(this.getIntValue());
-				break;
-			case VAR_ALPHANUM:
-				sb.append(this.getAlnumValue());
-				break;
-			case VAR_BOOLEAN:
-				sb.append(this.getBoolValue());
-				break;
-			default:
-				sb.append("<value not yet set>");
+		if (this.getType() == null) {
+			sb.append("<type is null>");
+		} else {
+			switch(this.getType()) {
+				case VAR_INTEGER:
+					sb.append(this.getIntValue());
+					break;
+				case VAR_ALPHANUM:
+					sb.append(this.getAlnumValue());
+					break;
+				case VAR_BOOLEAN:
+					sb.append(this.getBoolValue());
+					break;
+				default:
+					sb.append("<value not yet set>");
+			}
 		}
 
 		if (this.fromCompileOption()) {

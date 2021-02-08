@@ -24,10 +24,18 @@ class CondCompGroupOp implements CondCompToken {
 
 	public CondCompGroupOp(TerminalNode tn) {
 		this.tn = tn;
-		if (this.tn.getSymbol().getText() == "(") {
+		if (this.tn.getSymbol().getText().equals("(")) {
 			this.type = CondCompTokenType.GROUPOP_BEGIN;
-		} else if (this.tn.getSymbol().getText() == ")") {
+		} else if (this.tn.getSymbol().getText().equals(")")) {
 			this.type = CondCompTokenType.GROUPOP_END;
+		} else {
+			throw new IllegalArgumentException(
+				"CondCompGroupOp"
+				+ " without a recognizable group operator"
+				+ " at "
+				+ this.tn.getSymbol().getText()
+				+ " on line "
+				+ this.tn.getSymbol().getLine());
 		}
 
 		long line = this.tn.getSymbol().getLine();

@@ -21,6 +21,10 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		this.defines.addAll(compOptDefines);
 	}
 
+	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+		TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+	}
+
 	public void enterCompilerOptions(CobolPreprocessorParser.CompilerOptionsContext ctx) { 
 		this.compDirStmts.add(new CompilerOptionsWrapper(ctx));
 	}
@@ -32,7 +36,10 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterConditionalCompilationDefine(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx) {
-		this.defines.add(new CondCompVar(ctx, this.compOptDefines));
+		/*this.defines.add(new CondCompVar(ctx, this.compOptDefines));*/
+		CondCompVar var = new CondCompVar(ctx, this.compOptDefines);
+		this.compOptDefines.add(var);
+		this.defines.add(var);
 	}
 
 	public void enterCopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) { 

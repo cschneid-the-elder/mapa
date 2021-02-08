@@ -19,6 +19,7 @@
 
 lexer grammar CobolLexer;
 
+channels { COMPILER_DIRECTIVES }
 
 // lexer rules --------------------------------------------------------------------------------
 
@@ -651,6 +652,7 @@ COLONCHAR : ':';
 COMMACHAR : ',';
 COMMENTENTRYTAG : '*>CE';
 COMMENTTAG : '*>';
+COMPILER_DIRECTIVE : '>>' TEXTA+ -> channel(COMPILER_DIRECTIVES);
 DOLLARCHAR : '$';
 DOUBLEQUOTE : '"';
 // period full stop
@@ -867,4 +869,5 @@ NEWLINE_FFT : '\r'? '\n' -> channel(HIDDEN);
 WS_FFT : [ \t\f;]+ -> channel(HIDDEN);
 CLASSIC_LINE_NUMBER_FFT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
 CLASSIC_COMMENT_LINE_FFT : CLASSIC_LINE_NUMBER_FFT (ASTERISKCHAR | SLASHCHAR) TEXTA* -> skip;
+
 

@@ -25,10 +25,18 @@ class CondCompLogicOp implements CondCompToken {
 
 	public CondCompLogicOp(TerminalNode tn) {
 		this.tn = tn;
-		if (this.tn.getSymbol().getText().toUpperCase() == "AND") {
+		if (this.tn.getSymbol().getText().toUpperCase().equals("AND")) {
 			this.type = CondCompTokenType.LOGICOP_AND;
-		} else if (this.tn.getSymbol().getText().toUpperCase() == "OR") {
+		} else if (this.tn.getSymbol().getText().toUpperCase().equals("OR")) {
 			this.type = CondCompTokenType.LOGICOP_OR;
+		} else {
+			throw new IllegalArgumentException(
+				"CondCompLogicOp"
+				+ " without a recognizable logical operator"
+				+ " at "
+				+ this.tn.getSymbol().getText()
+				+ " on line "
+				+ this.tn.getSymbol().getLine());
 		}
 
 		long line = this.tn.getSymbol().getLine();

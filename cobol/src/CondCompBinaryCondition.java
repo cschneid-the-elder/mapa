@@ -67,6 +67,10 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 	}
 
 	public Boolean evaluate() {
+		if (this.var == null) {
+			return false;
+		}
+
 		return this.var.getBoolValue();
 	}
 

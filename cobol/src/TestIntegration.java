@@ -92,6 +92,11 @@ public static void main(String[] args) throws Exception {
 			continue;
 		}
 		fileName = processCDS(aFileName, baseDir);
+		/*
+		fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
+		fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+		fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
+		*/
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
 		if (CLI.unitTest) {

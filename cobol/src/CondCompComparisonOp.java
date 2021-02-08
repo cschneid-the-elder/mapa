@@ -68,8 +68,22 @@ class CondCompComparisonOp implements CondCompToken {
 			} else {
 				this.type = CondCompTokenType.COMPAREOP_GE;
 			}
+		} else if (this.ctx.LESS() != null) {
+			this.tn = this.ctx.LESS();
+			if (this.ctx.NOT() == null) {
+				this.type = CondCompTokenType.COMPAREOP_LT;
+			} else {
+				this.type = CondCompTokenType.COMPAREOP_GE;
+			}
 		} else if (this.ctx.GREATERTHANCHAR() != null) {
 			this.tn = this.ctx.GREATERTHANCHAR();
+			if (this.ctx.NOT() == null) {
+				this.type = CondCompTokenType.COMPAREOP_GT;
+			} else {
+				this.type = CondCompTokenType.COMPAREOP_LE;
+			}
+		} else if (this.ctx.GREATER() != null) {
+			this.tn = this.ctx.GREATER();
 			if (this.ctx.NOT() == null) {
 				this.type = CondCompTokenType.COMPAREOP_GT;
 			} else {
@@ -92,7 +106,11 @@ class CondCompComparisonOp implements CondCompToken {
 		} else {
 			throw new IllegalArgumentException(
 				"ConditionalCompilationComparisonOpContext"
-				+ " without a recognizable comparison operator");
+				+ " without a recognizable comparison operator"
+				+ " at "
+				+ this.ctx.getStart().getText()
+				+ " on line "
+				+ this.ctx.getStart().getLine());
 		}
 
 
@@ -100,6 +118,16 @@ class CondCompComparisonOp implements CondCompToken {
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 		this.text = this.tn.getSymbol().getText();
+
+		if (this.type == null) {
+			throw new IllegalArgumentException(
+				"ConditionalCompilationComparisonOpContext"
+				+ " type not set"
+				+ " at "
+				+ this.ctx.getStart().getText()
+				+ " on line "
+				+ this.ctx.getStart().getLine());
+		}
 
 	}
 

@@ -52,7 +52,7 @@ ifeq ($(strip $(n)),)
 	#java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
 else
 	echo `date` $@ $(n) >> build.log
-	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -logLevel FINEST -saveTemp -out callListLocalx$(n).log
+	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -defList /home/craig/mapa/cobol/testdata/local/test$(n).def -logLevel FINEST -saveTemp -out callListLocalx$(n).log
 endif
 
 testNist:
