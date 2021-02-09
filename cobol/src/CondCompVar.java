@@ -34,6 +34,8 @@ class CondCompVar implements CondCompToken {
 	}
 
 	public CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc, ArrayList<CondCompVar> compOptDefines) {
+		TestIntegration.LOGGER.fine("CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc, ArrayList<CondCompVar> compOptDefines)");
+
 		this.ctx = ccdc;
 		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.ctx.IDENTIFIER();
@@ -44,10 +46,25 @@ class CondCompVar implements CondCompToken {
 
 		this.predicate = this.ctx.conditionalCompilationDefinePredicate();
 		if (this.predicate == null) {
-			this.type = CondCompTokenType.DEFINE_ONLY;
+			TestIntegration.LOGGER.finest("this.predicate == null");
+			/*this.type = CondCompTokenType.DEFINE_ONLY;*/
+			this.literalCtx = null;
+			/*
+			As per https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/pg/ui/up4011.html
+			"If literal-1 is not specified, a value of B'1' will be assigned to the 
+			compilation variable."
+			If that link has gone stale, it's..
+				Enterprise COBOL for z/OS > Programming Guide
+				> Compiling and debugging your program > Compiler options > DEFINE
+			*/
+			this.setValue("B'1'");
+			/*this.type = CondCompTokenType.VAR_BOOLEAN;
+			this.boolValue = true;*/
 		} else {
+			TestIntegration.LOGGER.finest("this.predicate != null");
 			this.literalCtx = this.predicate.literal();
 			if (this.predicate.PARAMETER() != null) {
+				TestIntegration.LOGGER.finest("this.predicate.PARAMETER() != null");
 				this.parameter = true;
 				for (CondCompVar ccv: compOptDefines) {
 					if (this.varName.equals(ccv.getVarName())) {
@@ -73,13 +90,17 @@ class CondCompVar implements CondCompToken {
 				}
 			}
 			if (this.literalCtx == null) {
+				TestIntegration.LOGGER.finest("this.literalCtx == null");
 				if (this.predicate.IDENTIFIER() == null) {
+					TestIntegration.LOGGER.finest("this.predicate.IDENTIFIER() == null");
 					// set to an expression
 					this.expression = this.predicate.conditionalCompilationArithmeticExpression();
 				} else {
+					TestIntegration.LOGGER.finest("this.predicate.IDENTIFIER() != null");
 					//set to the value of another variable
 				}
 			} else {
+				TestIntegration.LOGGER.finest("this.literalCtx != null");
 				if (this.literalCtx.NONNUMERICLITERAL() == null) {
 					if (this.literalCtx.NUMERICLITERAL() == null) {
 						throw new IllegalArgumentException(
@@ -90,7 +111,6 @@ class CondCompVar implements CondCompToken {
 							+ " NONNUMERICLITERAL() == null"
 							+ " && NUMERICLITERAL() == null");
 					} else {
-						this.type = CondCompTokenType.VAR_INTEGER;
 						this.setValue(this.literalCtx.NUMERICLITERAL());
 					}
 				} else {
@@ -102,6 +122,8 @@ class CondCompVar implements CondCompToken {
 	}
 
 	public CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx) {
+		TestIntegration.LOGGER.fine("CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx)");
+
 		this.ctx = ctx;
 		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.ctx.IDENTIFIER();
@@ -126,7 +148,9 @@ class CondCompVar implements CondCompToken {
 				Enterprise COBOL for z/OS > Programming Guide
 				> Compiling and debugging your program > Compiler options > DEFINE
 			*/
-			this.boolValue = true;
+			this.setValue("B'1'");
+			/*this.type = CondCompTokenType.VAR_BOOLEAN;
+			this.boolValue = true;*/
 		} else {
 			if (this.literalCtx.NONNUMERICLITERAL() == null) {
 				if (this.literalCtx.NUMERICLITERAL() == null) {
@@ -138,7 +162,6 @@ class CondCompVar implements CondCompToken {
 						+ " NONNUMERICLITERAL() == null"
 						+ " && NUMERICLITERAL() == null");
 				} else {
-					this.type = CondCompTokenType.VAR_INTEGER;
 					this.setValue(this.literalCtx.NUMERICLITERAL());
 				}
 			} else {
@@ -149,6 +172,8 @@ class CondCompVar implements CondCompToken {
 	}
 
 	public CondCompVar(CobolPreprocessorParser.Define_optContext ctx) {
+		TestIntegration.LOGGER.fine("CondCompVar(CobolPreprocessorParser.Define_optContext ctx)");
+
 		this.defCtx = ctx;
 		this.varName = this.defCtx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.defCtx.IDENTIFIER();
@@ -167,7 +192,9 @@ class CondCompVar implements CondCompToken {
 				Enterprise COBOL for z/OS > Programming Guide
 				> Compiling and debugging your program > Compiler options > DEFINE
 			*/
-			this.boolValue = true;
+			this.setValue("B'1'");
+			/*this.type = CondCompTokenType.VAR_BOOLEAN;
+			this.boolValue = true;*/
 		} else {
 			if (this.literalCtx.NONNUMERICLITERAL() == null) {
 				if (this.literalCtx.NUMERICLITERAL() == null) {
@@ -179,7 +206,6 @@ class CondCompVar implements CondCompToken {
 						+ " NONNUMERICLITERAL() == null"
 						+ " && NUMERICLITERAL() == null");
 				} else {
-					this.type = CondCompTokenType.VAR_INTEGER;
 					this.setValue(this.literalCtx.NUMERICLITERAL());
 				}
 			} else {
@@ -190,19 +216,30 @@ class CondCompVar implements CondCompToken {
 	}
 
 	private void setValue(TerminalNode t) {
-		String aString = t.getSymbol().getText();
-		if (this.type == CondCompTokenType.VAR_INTEGER) {
-			this.intValue = new Integer(aString);
-		} else if (aString.toUpperCase().startsWith("B'")) {
+		TestIntegration.LOGGER.finest("setValue(TerminalNode t)");
+
+		this.setValue(t.getSymbol().getText());
+
+	}
+
+	private void setValue(String s) {
+		TestIntegration.LOGGER.finest("setValue(String s)");
+		if (s.toUpperCase().startsWith("B'")) {
+			TestIntegration.LOGGER.finest("s.toUpperCase().startsWith(\"B\'\")");
 			this.type = CondCompTokenType.VAR_BOOLEAN;
-			if (aString.toUpperCase().equals("B'0'")) {
+			if (s.toUpperCase().equals("B'0'")) {
 				this.boolValue = false;
 			} else {
 				this.boolValue = true;
 			}
+		} else if (s.chars().allMatch(Character::isDigit)) {
+			TestIntegration.LOGGER.finest("s.chars().allMatch(Character::isDigit)");
+			this.type = CondCompTokenType.VAR_INTEGER;
+			this.intValue = new Integer(s);
 		} else {
+			TestIntegration.LOGGER.finest("else must be alphanum");
 			this.type = CondCompTokenType.VAR_ALPHANUM;
-			this.alnumValue = aString;
+			this.alnumValue = s;
 		}
 	}
 
@@ -248,6 +285,7 @@ class CondCompVar implements CondCompToken {
 	...if you will.
 	*/
 	public Boolean compareTo(CondCompComparisonOp op, CondCompVar var) {
+		TestIntegration.LOGGER.finest(this.myName + " compareTo(CondCompComparisonOp op, CondCompVar var)");
 		int comparison = 0;
 		Boolean rc = null;
 
@@ -291,6 +329,7 @@ class CondCompVar implements CondCompToken {
 	...if you will.  It's possible this isn't used.
 	*/
 	public Boolean compareTo(CondCompVar var, CondCompComparisonOp op) {
+		TestIntegration.LOGGER.finest(this.myName + " compareTo(CondCompVar var, CondCompComparisonOp op)");
 		int comparison = 0;
 		Boolean rc = null;
 
@@ -334,6 +373,7 @@ class CondCompVar implements CondCompToken {
 	...if you will.
 	*/
 	public Boolean compareTo(CondCompComparisonOp op, TerminalNode t) {
+		TestIntegration.LOGGER.finest(this.myName + " compareTo(CondCompComparisonOp op, TerminalNode t)");
 		int comparison = 0;
 		String tText = t.getSymbol().getText();
 
@@ -365,6 +405,7 @@ class CondCompVar implements CondCompToken {
 	...if you will.
 	*/
 	public Boolean compareTo(TerminalNode t, CondCompComparisonOp op) {
+		TestIntegration.LOGGER.finest(this.myName + " compareTo(TerminalNode t, CondCompComparisonOp op)");
 		int comparison = 0;
 		String tText = t.getSymbol().getText();
 
@@ -387,6 +428,9 @@ class CondCompVar implements CondCompToken {
 	}
 
 	private Boolean compare(int comparison, CondCompComparisonOp op) {
+		TestIntegration.LOGGER.finest(this.myName + " compare(int comparison, CondCompComparisonOp op)");
+		TestIntegration.LOGGER.finest("    comparison = |" + comparison + "|");
+		TestIntegration.LOGGER.finest("    op = |" + op + "|");
 		Boolean rc = null;
 
 		switch(op.getType()) {
@@ -437,6 +481,7 @@ class CondCompVar implements CondCompToken {
 							"comparison operator is of unknown type");
 		}
 
+		TestIntegration.LOGGER.finest("    returning " + rc);
 		return rc;
 	}
 
@@ -460,8 +505,11 @@ class CondCompVar implements CondCompToken {
 				case VAR_BOOLEAN:
 					sb.append(this.getBoolValue());
 					break;
+				case DEFINE_ONLY:
+					sb.append("<define only>");
+					break;
 				default:
-					sb.append("<value not yet set>");
+					sb.append("<unhandled type>");
 			}
 		}
 

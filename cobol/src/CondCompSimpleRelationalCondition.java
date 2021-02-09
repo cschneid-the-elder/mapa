@@ -7,7 +7,7 @@ import org.antlr.v4.runtime.tree.*;
 class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondition {
 
 	private String myName = this.getClass().getName();
-	private CondCompTokenType type = null;
+	private CondCompTokenType type = CondCompTokenType.SIMPLE_RELATIONAL_CONDITION;
 	private CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext ctx = null;
 	private CondCompComparisonOp op = null;
 	private TerminalNode tn = null;
@@ -34,7 +34,6 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 				CobolPreprocessorParser.ConditionalCompilationSimpleRelationalConditionContext ccsrc
 				, ArrayList<CondCompVar> varList) {
 		this.ctx = ccsrc;
-		this.type = CondCompTokenType.SIMPLE_RELATIONAL_CONDITION;
 
 		this.op = new CondCompComparisonOp(this.ctx.conditionalCompilationComparisonOp());
 
@@ -124,9 +123,9 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 	}
 
 	private CondCompVar varFromList(TerminalNode t, ArrayList<CondCompVar> varList) {
-		ArrayList<CondCompVar> revList = new ArrayList<>(varList.size());
+		ArrayList<CondCompVar> revList = new ArrayList<>();
 
-		Collections.copy(revList, varList);
+		revList.addAll(varList);
 		Collections.reverse(revList);
 		for (CondCompVar v: revList) {
 			if (v.varNameIs(t)) {
@@ -146,16 +145,23 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 	}
 
 	public Boolean evaluate() {
+		TestIntegration.LOGGER.finer(this.myName + " evaluate()");
 		if (this.var1 == null) {
+			TestIntegration.LOGGER.finer("    this.var1 == null");
 			if (this.var2 == null) {
+				TestIntegration.LOGGER.finer("        this.var2 == null");
 				return this.compareTN(this.arg1, this.arg2);
 			} else {
+				TestIntegration.LOGGER.finer("        this.var2 != null");
 				return this.var2.compareTo(this.arg1, this.op);
 			}
 		} else {
+			TestIntegration.LOGGER.finer("    this.var1 != null");
 			if (this.var2 == null) {
+				TestIntegration.LOGGER.finer("        this.var2 == null");
 				return this.var1.compareTo(this.op, this.arg2);
 			} else {
+				TestIntegration.LOGGER.finer("        this.var2 != null");
 				return this.var1.compareTo(this.op, this.var2);
 			}
 		}
@@ -168,6 +174,7 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 	some difficulty coming up with a reason to get more involved.
 	*/
 	private Boolean compareTN(TerminalNode tn1, TerminalNode tn2) {
+		TestIntegration.LOGGER.finer(this.myName + " compareTN(TerminalNode tn1, TerminalNode tn2)");
 		int comparison = tn1.getSymbol().getText().toUpperCase().compareTo(tn2.getSymbol().getText().toUpperCase());
 		Boolean rc = null;
 

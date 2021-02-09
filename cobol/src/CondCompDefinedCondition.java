@@ -43,9 +43,9 @@ class CondCompDefinedCondition implements CondCompToken, CondCompCondition {
 	}
 
 	private CondCompVar varFromList(TerminalNode t, ArrayList<CondCompVar> varList) {
-		ArrayList<CondCompVar> revList = new ArrayList<>(varList.size());
+		ArrayList<CondCompVar> revList = new ArrayList<>();
 
-		Collections.copy(revList, varList);
+		revList.addAll(varList);
 		Collections.reverse(revList);
 		for (CondCompVar v: revList) {
 			if (v.varNameIs(t)) {

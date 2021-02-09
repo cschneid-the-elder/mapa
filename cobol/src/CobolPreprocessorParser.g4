@@ -417,8 +417,8 @@ conditionalCompilationDefine
    ;
 
 conditionalCompilationDefinePredicate
-   : (conditionalCompilationArithmeticExpression
-   | literal
+   : (literal
+   | conditionalCompilationArithmeticExpression
    | IDENTIFIER
    | PARAMETER)
    ;

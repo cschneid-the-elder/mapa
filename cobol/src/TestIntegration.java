@@ -168,7 +168,7 @@ public static void main(String[] args) throws Exception {
 			) throws Exception {
 		LOGGER.fine("processCDS()");
 
-		ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
+		ArrayList<CondCompVar> compOptDefines = CLI.compOptDefines;
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
