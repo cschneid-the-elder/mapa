@@ -243,6 +243,7 @@ public static void main(String[] args) throws Exception {
 						}
 					}
 				} else {
+					LOGGER.finest("cds.getType() = " + cds.getType());
 					switch(cds.getType()) {
 						case STMT_ELSE:
 						case STMT_WHEN:
@@ -313,6 +314,7 @@ public static void main(String[] args) throws Exception {
 
 		return nbCopies;
 	}
+
 
 	/**
 	It turns out little is required of a COBOL program qua being a
