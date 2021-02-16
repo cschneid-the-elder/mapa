@@ -8,6 +8,8 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	public ArrayList<CompilerDirectingStatement> compDirStmts = null;
 	public ArrayList<CondCompVar> compOptDefines = null;
 	public ArrayDeque<CondCompStmtIf> ifStmts = new ArrayDeque<>();
+	public ArrayDeque<CondCompStmtEvaluate> evaluateStmts = new ArrayDeque<>();
+	public ArrayDeque<CondCompStmtWhen> whenStmts = new ArrayDeque<>();
 	public ArrayList<ReplaceStatement> replaceStmts = new ArrayList<>();
 	public ArrayList<CondCompVar> defines = new ArrayList<>();
 
@@ -21,7 +23,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		this.defines.addAll(compOptDefines);
 	}
 
-	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+	public void enterEveryRule(ParserRuleContext ctx) {
 		TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
@@ -98,9 +100,39 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		this.compDirStmts.add(new CondCompStmtEndIf(ctx, ifStmts.pop()));
 	}
 
+	public void exitConditionalCompilationEvaluate(CobolPreprocessorParser.ConditionalCompilationEvaluateContext ctx) {
+		evaluateStmts.push(new CondCompStmtEvaluate(ctx, this.defines));
+	}
+
+	public void enterConditionalCompilationEndEvaluate(CobolPreprocessorParser.ConditionalCompilationEndEvaluateContext ctx) {
+		CondCompStmtEvaluate currEvaluate = evaluateStmts.pop();
+
+		currEvaluate.setEndEvaluate(new CondCompStmtEndEvaluate(ctx, currEvaluate));
+
+		whenStmts.clear();
+		if (evaluateStmts.peek() == null) {
+			// this EVALUATE was not nested inside another EVALUATE
+		} else {
+			for (CondCompStmtWhen aWhenStmt: evaluateStmts.peek().getWhenStmts()) {
+				whenStmts.push(aWhenStmt);
+			}
+		}
+	}
+
+	public void enterConditionalCompilationWhen(CobolPreprocessorParser.ConditionalCompilationWhenContext ctx) {
+		CondCompStmtWhen currWhen = new CondCompStmtWhen(ctx, evaluateStmts.peek(), this.defines);
+		evaluateStmts.peek().addWhen(currWhen);
+		CondCompStmtWhen prevWhen = whenStmts.peek();
+		if (prevWhen == null) {
+			// this is the first WHEN of an EVALUATE
+		} else {
+			prevWhen.setEndLine(currWhen.getLine() - 1);
+		}
+	}
+
 	public void enterReplaceByStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) { 
 		ReplaceStatement rs = new ReplaceStatement(ctx);
-		int last = replaceStmts.size();
+		int last = this.replaceStmts.size();
 
 		this.compDirStmts.add(rs);
 
@@ -114,7 +146,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 
 	public void enterReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) { 
 		ReplaceOffStatement ros = new ReplaceOffStatement(ctx);
-		int last = replaceStmts.size();
+		int last = this.replaceStmts.size();
 
 		this.compDirStmts.add(ros);
 

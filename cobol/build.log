@@ -1269,3 +1269,16 @@ Thu Feb 11 17:01:56 CST 2021 testLocalx 9003
 Thu Feb 11 17:06:39 CST 2021 testLocalx 9002
 Sat Feb 13 16:33:25 CST 2021 testLocalx 9002
 Sat Feb 13 16:34:01 CST 2021 testLocalx 9004
+Tue Feb 16 14:22:33 CST 2021 src/CondCompStmtEvaluate.java
+Tue Feb 16 14:26:23 CST 2021 evaluate
+Tue Feb 16 14:27:53 CST 2021 evaluate
+Tue Feb 16 14:34:38 CST 2021 evaluate
+Tue Feb 16 14:35:26 CST 2021 evaluate
+Tue Feb 16 15:02:57 CST 2021 evaluate
+Tue Feb 16 15:04:19 CST 2021 evaluate
+Tue Feb 16 15:04:48 CST 2021 evaluate
+Tue Feb 16 15:05:14 CST 2021 evaluate
+Tue Feb 16 15:06:09 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 16 15:08:13 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 16 15:08:14 CST 2021 src/TestIntegration.java
+Tue Feb 16 15:08:38 CST 2021 jar
