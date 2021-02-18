@@ -15,6 +15,18 @@ class CondCompSimpleArithmeticExpression implements CondCompToken {
 	private long sortKey = -1;
 	private Integer value = null;
 
+	public static List<CondCompSimpleArithmeticExpression> bunchOfThese(
+					List<CobolPreprocessorParser.ConditionalCompilationSimpleArithmeticExpressionContext> list
+					, ArrayList<CondCompVar> varList) {
+		ArrayList<CondCompSimpleArithmeticExpression> aList = new ArrayList<>();
+
+		for (CobolPreprocessorParser.ConditionalCompilationSimpleArithmeticExpressionContext ctx: list) {
+			aList.add(new CondCompSimpleArithmeticExpression(ctx, varList));
+		}
+
+		return aList;
+	}
+
 	public CondCompSimpleArithmeticExpression(
 			CobolPreprocessorParser.ConditionalCompilationSimpleArithmeticExpressionContext ctx
 			, ArrayList<CondCompVar> varList) {
