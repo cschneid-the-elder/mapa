@@ -2,7 +2,7 @@
 import java.util.*;
 import org.antlr.v4.runtime.tree.*;
 
-class CondCompStmtEvaluate implements ConditionalCompilationStatement {
+class CondCompStmtEvaluate implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_EVALUATE;
@@ -10,7 +10,7 @@ class CondCompStmtEvaluate implements ConditionalCompilationStatement {
 	private CobolPreprocessorParser.ConditionalCompilationEvaluateSelectionContext ccesCtx = null;
 	private ArrayList<CondCompStmtWhen> whenStmts = new ArrayList<>();
 	private CondCompStmtEndEvaluate endEvaluateStmt = null;
-	private Boolean truthiness = true;
+	private CondCompEvaluateSelection evaluateSelection = null;
 	private int line = -1;
 	private String text = null;
 
@@ -19,13 +19,12 @@ class CondCompStmtEvaluate implements ConditionalCompilationStatement {
 				, ArrayList<CondCompVar> varList) {
 		this.ctx = ccec;
 		this.ccesCtx = this.ctx.conditionalCompilationEvaluateSelection();
+		if (this.ccesCtx != null) {
+			this.evaluateSelection = new CondCompEvaluateSelection(this.ccesCtx, varList);
+		}
 		this.line = this.ctx.COMPILER_DIRECTIVE_TAG().getSymbol().getLine();
 		this.text = "@ " + this.getLine() + " " + this.getType();
 
-	}
-
-	public Boolean strewth() {
-		return this.truthiness;
 	}
 
 	public int getLine() {

@@ -9,10 +9,13 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private CobolPreprocessorParser.ConditionalCompilationWhenContext ctx = null;
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ccaeCtx1 = null;
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ccaeCtx2 = null;
-	private CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext ccrc = null;
+	private CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext ccrcCtx = null;
+	private List<CobolPreprocessorParser.ConditionalCompilationEvaluateSelectionContext> ccesCtxList = null;
 	private CondCompRelationalCondition relCond = null;
 	private CondCompStmtEvaluate evaluateStmt = null;
 	private CondCompStmtEndEvaluate endEvaluateStmt = null;
+	private CondCompEvaluateSelection evaluateSelection1 = null;
+	private CondCompEvaluateSelection evaluateSelection2 = null;
 	private Boolean truthiness = null;
 	private int line = -1;
 	private int endLine = -1;
@@ -24,8 +27,24 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 				, ArrayList<CondCompVar> varList) {
 		this.ctx = ccwc;
 		this.evaluateStmt = evaluateStmt;
-		this.ccrc = this.ctx.conditionalCompilationRelationalCondition();
-		this.relCond = new CondCompRelationalCondition(this.ccrc, varList);
+		this.ccrcCtx = this.ctx.conditionalCompilationRelationalCondition();
+		if (this.ccrcCtx != null) {
+			this.relCond = new CondCompRelationalCondition(this.ccrcCtx, varList);
+		}
+		this.ccesCtxList = this.ctx.conditionalCompilationEvaluateSelection();
+		if (this.ccesCtxList != null) {
+			this.evaluateSelection1 = new CondCompEvaluateSelection(this.ccesCtxList.get(0), varList);
+			if (this.ccesCtxList.size() > 1) {
+				this.evaluateSelection2 = new CondCompEvaluateSelection(this.ccesCtxList.get(1), varList);
+				if (this.ctx.THRU() == null && this.ctx.THROUGH() == null) {
+					throw new IllegalArgumentException(
+						this.myName
+						+ " this.ctx.conditionalCompilationEvaluateSelection().size = "
+						+ this.ccesCtxList.size()
+						+ " and this.ctx.THRU() == null && this.ctx.THROUGH() == null");
+				}
+			}
+		}
 		this.line = this.ctx.COMPILER_DIRECTIVE_TAG().getSymbol().getLine();
 		this.text = "@ " + this.getLine() + " " + this.getType();
 
