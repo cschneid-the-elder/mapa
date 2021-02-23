@@ -59,6 +59,18 @@ class CondCompStmtEvaluate implements CompilerDirectingStatement {
 		return (this.ctx.TRUE() != null);
 	}
 
+	public CondCompVar getVar() {
+		return this.evaluateSelection.getVar();
+	}
+
+	public TerminalNode getTerminalNode() {
+		return this.evaluateSelection.getTerminalNode();
+	}
+
+	public CondCompEvaluateSelection getEvaluateSelection() {
+		return this.evaluateSelection;
+	}
+
 	public String toString() {
 		return this.text;
 	}

@@ -131,6 +131,39 @@ class CondCompComparisonOp implements CondCompToken {
 
 	}
 
+	/**
+	This is a little dangerous and very ugly, but the best I can do
+	for now.
+
+	CondCompVar wants an instance of CondCompComparisonOp in order
+	to do comparisons.  The WHEN phrase of an EVALUATE statement
+	needs that functionality, but there is no ConditionalCompilationComparisonOpContext
+	available.  Hence, this.
+	*/
+	public CondCompComparisonOp(String s) {
+		switch(s) {
+			case ">":
+				this.type = CondCompTokenType.COMPAREOP_GT;
+				break;
+			case "<":
+				this.type = CondCompTokenType.COMPAREOP_LT;
+				break;
+			case "=":
+				this.type = CondCompTokenType.COMPAREOP_EQ;
+				break;
+			case ">=":
+				this.type = CondCompTokenType.COMPAREOP_GE;
+				break;
+			case "<=":
+				this.type = CondCompTokenType.COMPAREOP_LE;
+				break;
+			default:
+				throw new IllegalArgumentException(
+					"ConditionalCompilationComparisonOpContext"
+					+ " unrecognized type " + s);
+		}
+	}
+
 	public long getSortKey() {
 		return this.sortKey;
 	}

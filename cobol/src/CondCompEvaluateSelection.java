@@ -11,6 +11,10 @@ class CondCompEvaluateSelection {
 	private TerminalNode numericLiteral = null;
 	private TerminalNode nonNumericLiteral = null;
 	private CondCompArithmeticExpression ccae = null;
+	private CondCompVar var = null;
+	private TerminalNode tn = null;
+	private Integer numericValue = null;
+	private String nonNumericValue = null;
 	private String text = null;
 
 	public CondCompEvaluateSelection (
@@ -18,7 +22,9 @@ class CondCompEvaluateSelection {
 				, ArrayList<CondCompVar> varList) {
 		this.ctx = ctx;
 		this.ccaeCtx = ctx.conditionalCompilationArithmeticExpression();
-		this.ccae = new CondCompArithmeticExpression(this.ccaeCtx, varList);
+		if (this.ccaeCtx != null) {
+			this.ccae = new CondCompArithmeticExpression(this.ccaeCtx, varList);
+		}
 		this.identifier = this.ctx.IDENTIFIER();
 		this.literalCtx = this.ctx.literal();
 		if (this.literalCtx != null) {
@@ -26,6 +32,76 @@ class CondCompEvaluateSelection {
 			this.nonNumericLiteral = this.literalCtx.NONNUMERICLITERAL();
 		}
 
+		this.setValue(varList);
 	}
 
+	public getTerminalNode() {
+		return this.tn;
+	}
+
+	public getVar() {
+		return this.var;
+	}
+
+	public Integer getIntValue() {
+		if (this.ccae == null) {
+			return null;
+		} else {
+			return this.ccae.getValue();
+		}
+	}
+
+	public Integer getNumericValue() {
+		return this.numericValue;
+	}
+
+	public String getNonNumericValue() {
+		return this.nonNumericValue;
+	}
+
+	private void setValue(ArrayList<CondCompVar> varList) {
+		if (this.ccae != null) {
+			this.numericValue = this.ccae.getValue();
+		} else if (this.identifier != null) {
+			for (CondCompVar ccv: varList) {
+				if (this.identifier.getSymbol().getText().equals(ccv.getVarName())) {
+					this.var = ccv;
+					break;
+				}
+			}
+			if (this.var == null) {
+				throw new IllegalArgumentException(
+					this.myName
+					+ " identifier "
+					+ this.identifier.getSymbol().getText()
+					+ " not found in variable list "
+					+ varList);
+			} else {
+				switch(this.var.getType()) {
+					case VAR_INTEGER:
+						this.numericValue = this.var.getIntValue();
+						break;
+					case VAR_ALPHANUM:
+						this.nonNumericValue = this.var.getAlnumValue();
+						break;
+					default:
+						throw new IllegalArgumentException(
+									this.var.getVarName()
+									+ " is of type "
+									+ this.var.getType()
+									+ " and is invalid in this context");
+				}
+			}
+		} else if (this.numericLiteral != null) {
+			this.tn = this.numericLiteral;
+			this.numericValue = new Integer(this.numericLiteral.getSymbol().getText());
+		} else if (this.nonNumericLiteral != null) {
+			this.tn = this.nonNumericLiteral;
+			this.nonNumericValue = this.nonNumericLiteral.getSymbol().getText());
+		} else {
+				throw new IllegalArgumentException(
+					this.myName
+					+ " syntax error - no value found);
+		}
+	}
 }
