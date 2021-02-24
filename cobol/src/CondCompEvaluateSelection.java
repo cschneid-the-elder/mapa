@@ -15,12 +15,14 @@ class CondCompEvaluateSelection {
 	private TerminalNode tn = null;
 	private Integer numericValue = null;
 	private String nonNumericValue = null;
+	private int line = -1;
 	private String text = null;
 
 	public CondCompEvaluateSelection (
 				CobolPreprocessorParser.ConditionalCompilationEvaluateSelectionContext ctx
 				, ArrayList<CondCompVar> varList) {
 		this.ctx = ctx;
+		this.line = this.ctx.getStart().getLine();
 		this.ccaeCtx = ctx.conditionalCompilationArithmeticExpression();
 		if (this.ccaeCtx != null) {
 			this.ccae = new CondCompArithmeticExpression(this.ccaeCtx, varList);
@@ -33,6 +35,16 @@ class CondCompEvaluateSelection {
 		}
 
 		this.setValue(varList);
+
+		if (this.var != null) {
+			this.text = "@ " + this.line + " " + this.myName + " " + this.var;
+		} else if (this.numericValue != null) {
+			this.text = "@ " + this.line + " " + this.myName + " " + this.numericValue;
+		} else if (this.nonNumericValue != null) {
+			this.text = "@ " + this.line + " " + this.myName + " " + this.nonNumericValue;
+		} else {
+			this.text = "@ " + this.line + " " + this.myName + " <unknown value>";
+		}
 	}
 
 	public getTerminalNode() {
@@ -103,5 +115,9 @@ class CondCompEvaluateSelection {
 					this.myName
 					+ " syntax error - no value found);
 		}
+	}
+
+	public String toString() {
+		return this.text;
 	}
 }

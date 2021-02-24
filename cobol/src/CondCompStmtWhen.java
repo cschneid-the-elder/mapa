@@ -128,6 +128,18 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareWithEvaluate(CondCompVar evaluateVar, CondCompComparisonOp op)");
+		TestIntegration.LOGGER.finest(
+			"  evaluateVar = |" + evaluateVar + "|");
+		TestIntegration.LOGGER.finest(
+			"  op = |" + op + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar1 = |" + whenVar1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn1 = |" + whenTn1 + "|");
+
 		if (whenVar1 == null) {
 			return evaluateVar.compareTo(op, whenTn1);
 		} else {
@@ -140,6 +152,24 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 		CondCompVar whenVar2 = this.evaluateSelection2.getVar();
 		TerminalNode whenTn2 = this.evaluateSelection2.getTerminalNode();
+
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareWithEvaluate(CondCompVar evaluateVar, CondCompComparisonOp op1, CondCompComparisonOp op2)");
+		TestIntegration.LOGGER.finest(
+			"  evaluateVar = |" + evaluateVar + "|");
+		TestIntegration.LOGGER.finest(
+			"  op1 = |" + op1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  op2 = |" + op2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar1 = |" + whenVar1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar2 = |" + whenVar2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn1 = |" + whenTn1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn2 = |" + whenTn2 + "|");
 
 		if (whenVar1 == null) {
 			if (whenVar2 == null) {
@@ -161,14 +191,27 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareWithEvaluate(CondCompEvaluateSelection evaluateStmtSelection, CondCompComparisonOp op1)");
+		TestIntegration.LOGGER.finest(
+			"  evaluateStmtSelection = |" + evaluateStmtSelection + "|");
+		TestIntegration.LOGGER.finest(
+			"  op = |" + op + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar1 = |" + whenVar1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn1 = |" + whenTn1 + "|");
+
 		if (whenVar1 == null) {
 			if (evaluateStmtSelection.getNumericValue() == null) {
 				int cmp = whenTn1.getSymbol().getText().compareTo(evaluateStmtSelection.getNonNumericValue());
 				return this.compare(cmp, op);
 			} else {
 				Integer anInt = new Integer(whenTn1.getSymbol().getText());
-				int cmp = anInt.compareTo(evaluateStmtSelection.getNumericValue())
+				int cmp = anInt.compareTo(evaluateStmtSelection.getNumericValue());
 				return this.compare(cmp, op);
+			}
 		} else {
 			return whenVar1.compareTo(evaluateStmtSelection.getTerminalNode(), op);
 		}
@@ -179,7 +222,55 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 		CondCompVar whenVar2 = this.evaluateSelection2.getVar();
 		TerminalNode whenTn2 = this.evaluateSelection2.getTerminalNode();
+		int cmp1 = 0;
+		int cmp2 = 0;
+		Boolean rc1 = null;
+		Boolean rc2 = null;
 
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareWithEvaluate(CondCompEvaluateSelection evaluateStmtSelection, CondCompComparisonOp op1, CondCompComparisonOp op2)");
+		TestIntegration.LOGGER.finest(
+			"  evaluateStmtSelection = |" + evaluateStmtSelection + "|");
+		TestIntegration.LOGGER.finest(
+			"  op1 = |" + op1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  op2 = |" + op2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar1 = |" + whenVar1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar2 = |" + whenVar2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn1 = |" + whenTn1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn2 = |" + whenTn2 + "|");
+
+
+		if (whenVar1 == null) {
+			if (evaluateStmtSelection.getNumericValue() == null) {
+				cmp1 = whenTn1.getSymbol().getText().compareTo(evaluateStmtSelection.getNonNumericValue());
+			} else {
+				Integer anInt = new Integer(whenTn1.getSymbol().getText());
+				cmp1 = anInt.compareTo(evaluateStmtSelection.getNumericValue());
+			}
+			rc1 = compare(cmp1, op);
+		} else {
+			rc1 = whenVar1.compareTo(evaluateStmtSelection.getTerminalNode(), op);
+		}
+
+		if (whenVar2 == null) {
+			if (evaluateStmtSelection.getNumericValue() == null) {
+				cmp2 = whenTn2.getSymbol().getText().compareTo(evaluateStmtSelection.getNonNumericValue());
+			} else {
+				Integer anInt = new Integer(whenTn2.getSymbol().getText());
+				cmp2 = anInt.compareTo(evaluateStmtSelection.getNumericValue());
+			}
+			rc2 = compare(cmp2, op);
+		} else {
+			rc2 = whenVar2.compareTo(evaluateStmtSelection.getTerminalNode(), op);
+		}
+
+		return rc1 && rc2;
 	}
 
 	private Boolean compare(int comparison, CondCompComparisonOp op) {
