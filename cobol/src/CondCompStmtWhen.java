@@ -7,8 +7,6 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private String myName = this.getClass().getName();
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_WHEN;
 	private CobolPreprocessorParser.ConditionalCompilationWhenContext ctx = null;
-	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ccaeCtx1 = null;
-	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ccaeCtx2 = null;
 	private CobolPreprocessorParser.ConditionalCompilationRelationalConditionContext ccrcCtx = null;
 	private List<CobolPreprocessorParser.ConditionalCompilationEvaluateSelectionContext> ccesCtxList = null;
 	private CondCompRelationalCondition relCond = null;
@@ -58,6 +56,12 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 
 	}
 
+	/**
+	When interpreting the conditional compilation statements, it is
+	the responsibility of the caller to keep track of which WHEN
+	statement is being evaluated and its truthiness.  Interpretation
+	must stop when the first strewth() == true condition is encountered.
+	*/
 	public Boolean strewth() {
 		if (this.truthiness == null) {
 			this.truthiness = this.evaluate();
@@ -83,38 +87,97 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			return relCond.evaluate();
 		}
 
+		CondCompVar evaluateVar = this.evaluateStmt.getVar();
+		if (evaluateVar != null && evaluateVar.getType() == CondCompTokenType.VAR_BOOLEAN) {
+			return evaluateVar.getBoolValue();
+		}
+
 		TestIntegration.LOGGER.warning(
 			this.myName
 			+ " "
 			+ this
-			+ " "
-			+ "this.ctx.OTHER() == null && this.relCond == null"
+			+ " this.ctx.OTHER() == null && this.relCond == null"
+			+ " && (evaluateVar == null || evaluateVar.getType() != CondCompTokenType.VAR_BOOLEAN)"
 			);
 
 		return false;		
 	}
 
+	/**
+	This is more complicated than I'd like.  The options, as I see them...
+
+	>>DEFINE VAR1 1
+	*>scenario 1
+	>>EVALUATE TRUE
+	>>WHEN IGY-CICS
+	>>WHEN IGY-ARCH > 10
+	>>WHEN VAR2 IS DEFINED
+	>>WHEN VAR1 + 1 = 2
+	>>WHEN OTHER
+	>>END-EVALUATE
+
+	*>scenario 2
+	>>EVALUATE IGY-ARCH
+	>>WHEN 8
+	>>WHEN 9
+	>>WHEN 10 THRU 13
+	>>WHEN OTHER
+	>>END-EVALUATE
+
+	>>DEFINE VAR2 2
+	*>scenario 3
+	>>EVALUATE VAR1 + 2
+	>>WHEN VAR2 + 1
+	>>WHEN 3
+	>>WHEN 4 - 1
+	>>WHEN VAR1 - 1 THROUGH VAR2 + 2
+	>>WHEN OTHER
+	>>END-EVALUATE
+
+	>>DEFINE VAR2 2
+	*>scenario 4
+	>>EVALUATE VAR1 + VAR2
+	>>WHEN VAR2 + 1
+	>>WHEN 3
+	>>WHEN 4 - 1
+	>>WHEN VAR1 - 1 THROUGH VAR2 + 2
+	>>WHEN OTHER
+	>>END-EVALUATE
+
+	>>DEFINE VAR3 AS 'TOOTINGBEC'
+	>>scenario 5
+	>>EVALUATE VAR3
+	>>WHEN 'KENSINGTON'
+	>>WHEN 'TOOTINGBEB' THRU 'TOOTINGBEE'
+	>>END-EVALUATE
+
+	...which, for our purposes, means...
+
+	scenario 1 is handled in the evaluateWhen() method.
+	scenario 2 means evaluateVar != null && evaluateInt == null
+	scenario 3 means evaluateVar == null && evaluateInt != null
+	scenario 4 means evaluateVar == null && evaluateInt != null
+	scenario 5 means evaluateVar != null && evaluateInt == null
+
+	*/
 	private Boolean compareWithEvaluate() {
 		CondCompVar evaluateVar = this.evaluateStmt.getVar();
-		TerminalNode evaluateTn = this.evaluateStmt.getTerminalNode();
-		Integer evaluateInt = this.evaluateStmt.getIntValue();
+		Integer evaluateInt = this.evaluateStmt.getEvaluateSelection().getNumericValue();
 
 		if (evaluateVar == null) {
-			if (evaluateTn == null) {
-				if (evaluateInt == null) {
-					throw new IllegalArgumentException(
-						this.myName
-						+ " "
-						+ this.evaluateStmt
-						+ " getVar() getTerminalNode() getIntValue() are all null");
-				} else {
-				}
+			if (evaluateInt == null) {
+				throw new IllegalArgumentException(
+					this.myName
+					+ " "
+					+ this.evaluateStmt
+					+ " getVar() && getEvaluateSelection().getNumericValue() are null");
 			} else {
 				if (this.op2 == null) {
-					return this.compareWithEvaluate(this.evaluateStmt.getEvaluateSelection(), this.op1);
+					return this.compareWithEvaluate(evaluateInt, this.op1);
 				} else {
-					return this.compareWithEvaluate(this.evaluateStmt.getEvaluateSelection(), this.op1, this.op2);
+					return this.compareWithEvaluate(evaluateInt, this.op1, this.op2);
 				}
+			}
 		} else {
 			if (this.op2 == null) {
 				return this.compareWithEvaluate(evaluateVar, this.op1);
@@ -187,7 +250,11 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 
 	}
 
-	private Boolean compareWithEvaluate(CondCompEvaluateSelection evaluateStmtSelection, CondCompComparisonOp op) {
+	/**
+	We are here because this.op2 == null indicating there is no THRU option
+	and the >>EVALUATE subject can be resolved to a numeric value.
+	*/
+	private Boolean compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op) {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 
@@ -204,16 +271,11 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			"  whenTn1 = |" + whenTn1 + "|");
 
 		if (whenVar1 == null) {
-			if (evaluateStmtSelection.getNumericValue() == null) {
-				int cmp = whenTn1.getSymbol().getText().compareTo(evaluateStmtSelection.getNonNumericValue());
-				return this.compare(cmp, op);
-			} else {
-				Integer anInt = new Integer(whenTn1.getSymbol().getText());
-				int cmp = anInt.compareTo(evaluateStmtSelection.getNumericValue());
-				return this.compare(cmp, op);
-			}
+			Integer anInt = new Integer(whenTn1.getSymbol().getText());
+			int cmp = anInt.compareTo(evaluateInt);
+			return this.compare(cmp, op);
 		} else {
-			return whenVar1.compareTo(evaluateStmtSelection.getTerminalNode(), op);
+			return whenVar1.compareTo(evaluateInt, op);
 		}
 	}
 

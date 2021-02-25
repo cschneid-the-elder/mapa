@@ -55,7 +55,7 @@ class CondCompEvaluateSelection {
 		return this.var;
 	}
 
-	public Integer getIntValue() {
+	private Integer getIntValue() {
 		if (this.ccae == null) {
 			return null;
 		} else {

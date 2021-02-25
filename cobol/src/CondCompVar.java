@@ -427,6 +427,34 @@ class CondCompVar implements CondCompToken {
 		return this.compare(comparison, op);
 	}
 
+	/**
+	This method returns a Boolean indicating whether the comparison,
+	indicated by the first argument, is true with respect to the second
+	argument.
+
+	>>IF i op this
+
+	...if you will.
+	*/
+	public Boolean compareTo(Integer i, CondCompComparisonOp op) {
+		TestIntegration.LOGGER.finest(this.myName + " compareTo(Integer i, CondCompComparisonOp op)");
+		int comparison = 0;
+
+		switch(this.type) {
+			case VAR_INTEGER:
+				comparison = i.compareTo(this.intValue);
+				break;
+			default:
+				throw new IllegalArgumentException(
+							this.getVarName()
+							+ " is of type "
+							+ this.getType()
+							+ " and #compareTo(Integer, CondCompComparisonOp) is thus invalid");
+		}
+
+		return this.compare(comparison, op);
+	}
+
 	private Boolean compare(int comparison, CondCompComparisonOp op) {
 		TestIntegration.LOGGER.finest(this.myName + " compare(int comparison, CondCompComparisonOp op)");
 		TestIntegration.LOGGER.finest("    comparison = |" + comparison + "|");
