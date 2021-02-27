@@ -457,8 +457,8 @@ conditionalCompilationEndIf
    ;
 
 conditionalCompilationEvaluateSelection
-   : (conditionalCompilationArithmeticExpression
-   | IDENTIFIER
+   : (IDENTIFIER
+   | conditionalCompilationArithmeticExpression
    | literal)
    ;
 

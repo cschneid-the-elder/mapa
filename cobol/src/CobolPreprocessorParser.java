@@ -12050,10 +12050,10 @@ public class CobolPreprocessorParser extends Parser {
 	}
 
 	public static class ConditionalCompilationEvaluateSelectionContext extends ParserRuleContext {
+		public TerminalNode IDENTIFIER() { return getToken(CobolPreprocessorParser.IDENTIFIER, 0); }
 		public ConditionalCompilationArithmeticExpressionContext conditionalCompilationArithmeticExpression() {
 			return getRuleContext(ConditionalCompilationArithmeticExpressionContext.class,0);
 		}
-		public TerminalNode IDENTIFIER() { return getToken(CobolPreprocessorParser.IDENTIFIER, 0); }
 		public LiteralContext literal() {
 			return getRuleContext(LiteralContext.class,0);
 		}
@@ -12088,13 +12088,13 @@ public class CobolPreprocessorParser extends Parser {
 			case 1:
 				{
 				setState(1093);
-				conditionalCompilationArithmeticExpression();
+				match(IDENTIFIER);
 				}
 				break;
 			case 2:
 				{
 				setState(1094);
-				match(IDENTIFIER);
+				conditionalCompilationArithmeticExpression();
 				}
 				break;
 			case 3:
@@ -13956,8 +13956,8 @@ public class CobolPreprocessorParser extends Parser {
 		"\2\u043a]\3\2\2\2\u043b\u043c\tw\2\2\u043c_\3\2\2\2\u043d\u043e\7\u019e"+
 		"\2\2\u043e\u043f\7\u01c4\2\2\u043f\u0440\5p9\2\u0440a\3\2\2\2\u0441\u0442"+
 		"\7\u019e\2\2\u0442\u0443\7\u01be\2\2\u0443c\3\2\2\2\u0444\u0445\7\u019e"+
-		"\2\2\u0445\u0446\7\u01c0\2\2\u0446e\3\2\2\2\u0447\u044b\5X-\2\u0448\u044b"+
-		"\7\u01a3\2\2\u0449\u044b\5F$\2\u044a\u0447\3\2\2\2\u044a\u0448\3\2\2\2"+
+		"\2\2\u0445\u0446\7\u01c0\2\2\u0446e\3\2\2\2\u0447\u044b\7\u01a3\2\2\u0448"+
+		"\u044b\5X-\2\u0449\u044b\5F$\2\u044a\u0447\3\2\2\2\u044a\u0448\3\2\2\2"+
 		"\u044a\u0449\3\2\2\2\u044bg\3\2\2\2\u044c\u044d\7\u019e\2\2\u044d\u0450"+
 		"\7\u01c2\2\2\u044e\u0451\7\u01d4\2\2\u044f\u0451\5f\64\2\u0450\u044e\3"+
 		"\2\2\2\u0450\u044f\3\2\2\2\u0451i\3\2\2\2\u0452\u0453\7\u019e\2\2\u0453"+

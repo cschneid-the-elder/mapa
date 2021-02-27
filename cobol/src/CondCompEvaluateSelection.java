@@ -15,6 +15,7 @@ class CondCompEvaluateSelection {
 	private TerminalNode tn = null;
 	private Integer numericValue = null;
 	private String nonNumericValue = null;
+	private Boolean booleanValue = null;
 	private int line = -1;
 	private String text = null;
 
@@ -47,11 +48,11 @@ class CondCompEvaluateSelection {
 		}
 	}
 
-	public getTerminalNode() {
+	public TerminalNode getTerminalNode() {
 		return this.tn;
 	}
 
-	public getVar() {
+	public CondCompVar getVar() {
 		return this.var;
 	}
 
@@ -69,6 +70,10 @@ class CondCompEvaluateSelection {
 
 	public String getNonNumericValue() {
 		return this.nonNumericValue;
+	}
+
+	public Boolean getBooleanValue() {
+		return this.booleanValue;
 	}
 
 	private void setValue(ArrayList<CondCompVar> varList) {
@@ -96,7 +101,11 @@ class CondCompEvaluateSelection {
 					case VAR_ALPHANUM:
 						this.nonNumericValue = this.var.getAlnumValue();
 						break;
+					case VAR_BOOLEAN:
+						this.booleanValue = this.var.getBoolValue();
+						break;
 					default:
+						// not sure we can get here, but it doesn't cost any extra
 						throw new IllegalArgumentException(
 									this.var.getVarName()
 									+ " is of type "
@@ -109,11 +118,11 @@ class CondCompEvaluateSelection {
 			this.numericValue = new Integer(this.numericLiteral.getSymbol().getText());
 		} else if (this.nonNumericLiteral != null) {
 			this.tn = this.nonNumericLiteral;
-			this.nonNumericValue = this.nonNumericLiteral.getSymbol().getText());
+			this.nonNumericValue = this.nonNumericLiteral.getSymbol().getText();
 		} else {
-				throw new IllegalArgumentException(
-					this.myName
-					+ " syntax error - no value found);
+			throw new IllegalArgumentException(
+				this.myName
+				+ " syntax error - no value found");
 		}
 	}
 

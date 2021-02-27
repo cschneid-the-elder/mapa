@@ -34,16 +34,16 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			this.relCond = new CondCompRelationalCondition(this.ccrcCtx, varList);
 		}
 		this.ccesCtxList = this.ctx.conditionalCompilationEvaluateSelection();
-		if (this.ccesCtxList != null) {
+		if (this.ccesCtxList != null && this.ccesCtxList.size() > 0) {
 			this.evaluateSelection1 = new CondCompEvaluateSelection(this.ccesCtxList.get(0), varList);
 			if (this.ccesCtxList.size() > 1) {
 				this.evaluateSelection2 = new CondCompEvaluateSelection(this.ccesCtxList.get(1), varList);
-				if (this.ctx.THRU() == null || this.ctx.THROUGH() == null) {
+				if (this.ctx.THRU() == null && this.ctx.THROUGH() == null) {
 					throw new IllegalArgumentException(
 						this.myName
 						+ " this.ctx.conditionalCompilationEvaluateSelection().size = "
 						+ this.ccesCtxList.size()
-						+ " and this.ctx.THRU() == null || this.ctx.THROUGH() == null"
+						+ " and this.ctx.THRU() == null && this.ctx.THROUGH() == null"
 						+ " @ line "
 						+ this.getLine());
 				}
@@ -88,7 +88,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		}
 
 		CondCompVar evaluateVar = this.evaluateStmt.getVar();
-		if (evaluateVar != null && evaluateVar.getType() == CondCompTokenType.VAR_BOOLEAN) {
+		if (evaluateVar != null && evaluateVar.isBoolean()) {
 			return evaluateVar.getBoolValue();
 		}
 
@@ -163,14 +163,23 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private Boolean compareWithEvaluate() {
 		CondCompVar evaluateVar = this.evaluateStmt.getVar();
 		Integer evaluateInt = this.evaluateStmt.getEvaluateSelection().getNumericValue();
+		String evaluateText = this.evaluateStmt.getEvaluateSelection().getNonNumericValue();
 
 		if (evaluateVar == null) {
 			if (evaluateInt == null) {
-				throw new IllegalArgumentException(
-					this.myName
-					+ " "
-					+ this.evaluateStmt
-					+ " getVar() && getEvaluateSelection().getNumericValue() are null");
+				if (evaluateText == null) {
+					throw new IllegalArgumentException(
+						this.myName
+						+ " "
+						+ this.evaluateStmt
+						+ " getVar() && getEvaluateSelection().getNumericValue() are null");
+				} else {
+					if (this.op2 == null) {
+						return this.compareWithEvaluate(evaluateText, this.op1);
+					} else {
+						return this.compareWithEvaluate(evaluateText, this.op1, this.op2);
+					}
+				}
 			} else {
 				if (this.op2 == null) {
 					return this.compareWithEvaluate(evaluateInt, this.op1);
@@ -260,9 +269,9 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 
 		TestIntegration.LOGGER.finer(
 			this.myName 
-			+ " compareWithEvaluate(CondCompEvaluateSelection evaluateStmtSelection, CondCompComparisonOp op1)");
+			+ " compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op1)");
 		TestIntegration.LOGGER.finest(
-			"  evaluateStmtSelection = |" + evaluateStmtSelection + "|");
+			"  evaluateInt = |" + evaluateInt + "|");
 		TestIntegration.LOGGER.finest(
 			"  op = |" + op + "|");
 		TestIntegration.LOGGER.finest(
@@ -279,7 +288,11 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		}
 	}
 
-	private Boolean compareWithEvaluate(CondCompEvaluateSelection evaluateStmtSelection, CondCompComparisonOp op1, CondCompComparisonOp op2) {
+	/**
+	We are here because this.op2 != null indicating there is a THRU option
+	and the >>EVALUATE subject can be resolved to a numeric value.
+	*/
+	private Boolean compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op1, CondCompComparisonOp op2) {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 		CondCompVar whenVar2 = this.evaluateSelection2.getVar();
@@ -291,9 +304,9 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 
 		TestIntegration.LOGGER.finer(
 			this.myName 
-			+ " compareWithEvaluate(CondCompEvaluateSelection evaluateStmtSelection, CondCompComparisonOp op1, CondCompComparisonOp op2)");
+			+ " compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op1, CondCompComparisonOp op2)");
 		TestIntegration.LOGGER.finest(
-			"  evaluateStmtSelection = |" + evaluateStmtSelection + "|");
+			"  evaluateInt = |" + evaluateInt + "|");
 		TestIntegration.LOGGER.finest(
 			"  op1 = |" + op1 + "|");
 		TestIntegration.LOGGER.finest(
@@ -309,27 +322,100 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 
 
 		if (whenVar1 == null) {
-			if (evaluateStmtSelection.getNumericValue() == null) {
-				cmp1 = whenTn1.getSymbol().getText().compareTo(evaluateStmtSelection.getNonNumericValue());
-			} else {
-				Integer anInt = new Integer(whenTn1.getSymbol().getText());
-				cmp1 = anInt.compareTo(evaluateStmtSelection.getNumericValue());
-			}
-			rc1 = compare(cmp1, op);
+			Integer anInt = new Integer(whenTn1.getSymbol().getText());
+			cmp1 = anInt.compareTo(evaluateInt);
+			rc1 = compare(cmp1, op1);
 		} else {
-			rc1 = whenVar1.compareTo(evaluateStmtSelection.getTerminalNode(), op);
+			rc1 = whenVar1.compareTo(evaluateInt, op1);
 		}
 
 		if (whenVar2 == null) {
-			if (evaluateStmtSelection.getNumericValue() == null) {
-				cmp2 = whenTn2.getSymbol().getText().compareTo(evaluateStmtSelection.getNonNumericValue());
-			} else {
-				Integer anInt = new Integer(whenTn2.getSymbol().getText());
-				cmp2 = anInt.compareTo(evaluateStmtSelection.getNumericValue());
-			}
-			rc2 = compare(cmp2, op);
+			Integer anInt = new Integer(whenTn2.getSymbol().getText());
+			cmp2 = anInt.compareTo(evaluateInt);
+			rc2 = compare(cmp2, op2);
 		} else {
-			rc2 = whenVar2.compareTo(evaluateStmtSelection.getTerminalNode(), op);
+			rc2 = whenVar2.compareTo(evaluateInt, op2);
+		}
+
+		return rc1 && rc2;
+	}
+
+	/**
+	We are here because this.op2 == null indicating there is no THRU option
+	and the >>EVALUATE subject can be resolved to a text value.
+	*/
+	private Boolean compareWithEvaluate(String evaluateText, CondCompComparisonOp op) {
+		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
+		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
+
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareWithEvaluate(String evaluateText, CondCompComparisonOp op1)");
+		TestIntegration.LOGGER.finest(
+			"  evaluateText = |" + evaluateText + "|");
+		TestIntegration.LOGGER.finest(
+			"  op = |" + op + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar1 = |" + whenVar1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn1 = |" + whenTn1 + "|");
+
+		if (whenVar1 == null) {
+			String aString = whenTn1.getSymbol().getText();
+			int cmp = aString.compareTo(evaluateText);
+			return this.compare(cmp, op);
+		} else {
+			return whenVar1.compareTo(evaluateText, op);
+		}
+	}
+
+	/**
+	We are here because this.op2 != null indicating there is a THRU option
+	and the >>EVALUATE subject can be resolved to a text value.
+	*/
+	private Boolean compareWithEvaluate(String evaluateText, CondCompComparisonOp op1, CondCompComparisonOp op2) {
+		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
+		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
+		CondCompVar whenVar2 = this.evaluateSelection2.getVar();
+		TerminalNode whenTn2 = this.evaluateSelection2.getTerminalNode();
+		int cmp1 = 0;
+		int cmp2 = 0;
+		Boolean rc1 = null;
+		Boolean rc2 = null;
+
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareWithEvaluate(String evaluateText, CondCompComparisonOp op1, CondCompComparisonOp op2)");
+		TestIntegration.LOGGER.finest(
+			"  evaluateText = |" + evaluateText + "|");
+		TestIntegration.LOGGER.finest(
+			"  op1 = |" + op1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  op2 = |" + op2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar1 = |" + whenVar1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenVar2 = |" + whenVar2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn1 = |" + whenTn1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenTn2 = |" + whenTn2 + "|");
+
+
+		if (whenVar1 == null) {
+			String aString = whenTn1.getSymbol().getText();
+			cmp1 = aString.compareTo(evaluateText);
+			rc1 = compare(cmp1, op1);
+		} else {
+			rc1 = whenVar1.compareTo(evaluateText, op1);
+		}
+
+		if (whenVar2 == null) {
+			String aString = whenTn2.getSymbol().getText();
+			cmp2 = aString.compareTo(evaluateText);
+			rc2 = compare(cmp2, op2);
+		} else {
+			rc2 = whenVar2.compareTo(evaluateText, op2);
 		}
 
 		return rc1 && rc2;

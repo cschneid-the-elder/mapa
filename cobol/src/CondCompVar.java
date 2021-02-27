@@ -263,6 +263,18 @@ class CondCompVar implements CondCompToken {
 		return (this.ctx == null);
 	}
 
+	public Boolean isBoolean() {
+		return this.getType() == CondCompTokenType.VAR_BOOLEAN;
+	}
+
+	public Boolean isInteger() {
+		return this.getType() == CondCompTokenType.VAR_INTEGER;
+	}
+
+	public Boolean isAlphanum() {
+		return this.getType() == CondCompTokenType.VAR_ALPHANUM;
+	}
+
 	public Integer getIntValue() {
 		return this.intValue;
 	}
@@ -450,6 +462,34 @@ class CondCompVar implements CondCompToken {
 							+ " is of type "
 							+ this.getType()
 							+ " and #compareTo(Integer, CondCompComparisonOp) is thus invalid");
+		}
+
+		return this.compare(comparison, op);
+	}
+
+	/**
+	This method returns a Boolean indicating whether the comparison,
+	indicated by the first argument, is true with respect to the second
+	argument.
+
+	>>IF s op this
+
+	...if you will.
+	*/
+	public Boolean compareTo(String s, CondCompComparisonOp op) {
+		TestIntegration.LOGGER.finest(this.myName + " compareTo(String s, CondCompComparisonOp op)");
+		int comparison = 0;
+
+		switch(this.type) {
+			case VAR_ALPHANUM:
+				comparison = s.compareTo(this.alnumValue);
+				break;
+			default:
+				throw new IllegalArgumentException(
+							this.getVarName()
+							+ " is of type "
+							+ this.getType()
+							+ " and #compareTo(String, CondCompComparisonOp) is thus invalid");
 		}
 
 		return this.compare(comparison, op);

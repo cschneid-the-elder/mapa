@@ -116,21 +116,25 @@ class CondCompArithmeticExpression {
 					TestIntegration.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
 					return(result);
 				case SIMPLE_ARITHMETIC_EXPRESSION:
-					switch(arithmeticOp.getType()) {
-						case NUMOP_MULTIPLY:
-							result = result * ((CondCompSimpleArithmeticExpression)token).getValue();
-							break;
-						case NUMOP_SUBTRACT:
-							result = result - ((CondCompSimpleArithmeticExpression)token).getValue();
-							break;
-						case NUMOP_ADD:
-							result = result + ((CondCompSimpleArithmeticExpression)token).getValue();
-							break;
-						case NUMOP_DIVIDE:
-							result = result / ((CondCompSimpleArithmeticExpression)token).getValue();
-							break;
-						default:
-							break;
+					if (arithmeticOp == null) {
+						result = ((CondCompSimpleArithmeticExpression)token).getValue();
+					} else {
+						switch(arithmeticOp.getType()) {
+							case NUMOP_MULTIPLY:
+								result = result * ((CondCompSimpleArithmeticExpression)token).getValue();
+								break;
+							case NUMOP_SUBTRACT:
+								result = result - ((CondCompSimpleArithmeticExpression)token).getValue();
+								break;
+							case NUMOP_ADD:
+								result = result + ((CondCompSimpleArithmeticExpression)token).getValue();
+								break;
+							case NUMOP_DIVIDE:
+								result = result / ((CondCompSimpleArithmeticExpression)token).getValue();
+								break;
+							default:
+								break;
+						}
 					}
 					break;
 				case NUMOP_MULTIPLY:
