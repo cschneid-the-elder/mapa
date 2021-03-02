@@ -28,6 +28,8 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		this.ctx = ccwc;
 		this.line = this.ctx.COMPILER_DIRECTIVE_TAG().getSymbol().getLine();
 		this.text = "@ " + this.getLine() + " " + this.getType();
+		TestIntegration.LOGGER.fine(
+			this.myName + " " + this.toString());
 		this.evaluateStmt = evaluateStmt;
 		this.ccrcCtx = this.ctx.conditionalCompilationRelationalCondition();
 		if (this.ccrcCtx != null) {
@@ -87,6 +89,9 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			return relCond.evaluate();
 		}
 
+		return this.evaluateSelection1.getBooleanValue();
+
+		/*
 		CondCompVar evaluateVar = this.evaluateStmt.getVar();
 		if (evaluateVar != null && evaluateVar.isBoolean()) {
 			return evaluateVar.getBoolValue();
@@ -101,6 +106,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			);
 
 		return false;		
+		*/
 	}
 
 	/**

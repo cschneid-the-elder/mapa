@@ -155,6 +155,7 @@ public static void main(String[] args) throws Exception {
 			int line
 			, ArrayList<CompilerDirectingStatement> compDirStmts) {
 		for (CompilerDirectingStatement cds: compDirStmts) {
+			LOGGER.finest("cds = " + cds + " line = " + line);
 			if (line == cds.getLine()) return cds;
 		}
 
@@ -175,6 +176,7 @@ public static void main(String[] args) throws Exception {
 		Boolean done = false;
 		int nbCopies = 0;
 		int sanityCheck = 0;
+		int iteration = 0;
 
 		lookForCompilerDirectingStatements(
 						aFileName
@@ -210,7 +212,8 @@ public static void main(String[] args) throws Exception {
 				}
 			}*/
 			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
-			File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+			File tmp = File.createTempFile("CallTree-" + initFileNm + "-" + String.format("%05d", iteration) + "-", "-cbl", baseDir);
+			iteration++;
 			CLI.setPosixAttributes(tmp);
 			if (CLI.saveTemp) {
 			} else {
@@ -221,12 +224,14 @@ public static void main(String[] args) throws Exception {
 			PrintWriter out = new PrintWriter(tmp);
 			Boolean justWriteTheRest = false;
 			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
+			ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
 			ReplaceStatement currReplace = null;
 
 			String inLine = src.readLine();
 			while (inLine != null) {
 				StringBuilder inLineSB = new StringBuilder(inLine);
 				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
+				LOGGER.finest("  justWriteTheRest = |" + justWriteTheRest + "|" + "  cds = |" + cds + "|" + "  truthiness.peek() = |" + truthiness.peek() + "|");
 				if (justWriteTheRest) {
 				} else if (cds == null) {
 					if (nbCopies == 0) {
@@ -245,15 +250,40 @@ public static void main(String[] args) throws Exception {
 				} else {
 					LOGGER.finest("cds.getType() = " + cds.getType());
 					switch(cds.getType()) {
-						case STMT_ELSE:
+						case STMT_EVALUATE:
+							whenStrewth.push(new ArrayList<Boolean>());
+							break;
 						case STMT_WHEN:
+							if (truthiness.peek() != null) {
+								truthiness.pop();
+							}
+							Boolean prevTruth1 = true;
+							if (truthiness.peek() != null) {
+								prevTruth1 = truthiness.peek();
+							}
+							Boolean strewth = ((ConditionalCompilationStatement)cds).strewth();
+							if (whenStrewth.peek().contains(true)) {
+								truthiness.push(false);
+							} else {
+								truthiness.push(strewth && prevTruth1);
+							}
+							whenStrewth.peek().add(strewth);
+							break;
+						case STMT_END_EVALUATE:
+							whenStrewth.pop();
+							truthiness.pop();
+							break;
+						case STMT_ELSE:
 							truthiness.pop();
 						case STMT_IF: // intentional fall-through!
-							Boolean prevTruth = true;
+							Boolean prevTruth2 = true;
 							if (truthiness.peek() != null) {
-								prevTruth = truthiness.peek();
+								prevTruth2 = truthiness.peek();
 							}
-							truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth);
+							truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth2);
+							break;
+						case STMT_END_IF:
+							truthiness.pop();
 							break;
 						case STMT_COPY:
 							if (truthiness.peek() == null || truthiness.peek()) {
@@ -280,10 +310,6 @@ public static void main(String[] args) throws Exception {
 									currReplace = null;
 								}
 							}
-							break;
-						case STMT_END_IF:
-						case STMT_END_EVALUATE:
-							truthiness.pop();
 							break;
 						default:
 							break;

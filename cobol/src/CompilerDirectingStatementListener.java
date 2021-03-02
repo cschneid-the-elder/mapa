@@ -101,13 +101,17 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void exitConditionalCompilationEvaluate(CobolPreprocessorParser.ConditionalCompilationEvaluateContext ctx) {
-		evaluateStmts.push(new CondCompStmtEvaluate(ctx, this.defines));
+		CondCompStmtEvaluate anEvaluate = new CondCompStmtEvaluate(ctx, this.defines);
+		evaluateStmts.push(anEvaluate);
+		this.compDirStmts.add(anEvaluate);
 	}
 
 	public void enterConditionalCompilationEndEvaluate(CobolPreprocessorParser.ConditionalCompilationEndEvaluateContext ctx) {
 		CondCompStmtEvaluate currEvaluate = evaluateStmts.pop();
+		CondCompStmtEndEvaluate anEndEvaluate = new CondCompStmtEndEvaluate(ctx, currEvaluate);
 
-		currEvaluate.setEndEvaluate(new CondCompStmtEndEvaluate(ctx, currEvaluate));
+		currEvaluate.setEndEvaluate(anEndEvaluate);
+		this.compDirStmts.add(anEndEvaluate);
 
 		whenStmts.clear();
 		if (evaluateStmts.peek() == null) {
@@ -128,6 +132,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		} else {
 			prevWhen.setEndLine(currWhen.getLine() - 1);
 		}
+		this.compDirStmts.add(currWhen);
 	}
 
 	public void enterReplaceByStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) { 
