@@ -155,7 +155,7 @@ public static void main(String[] args) throws Exception {
 			int line
 			, ArrayList<CompilerDirectingStatement> compDirStmts) {
 		for (CompilerDirectingStatement cds: compDirStmts) {
-			LOGGER.finest("cds = " + cds + " line = " + line);
+			/*LOGGER.finest("cds = " + cds + " line = " + line);*/
 			if (line == cds.getLine()) return cds;
 		}
 
@@ -234,7 +234,7 @@ public static void main(String[] args) throws Exception {
 				LOGGER.finest("  justWriteTheRest = |" + justWriteTheRest + "|" + "  cds = |" + cds + "|" + "  truthiness.peek() = |" + truthiness.peek() + "|");
 				if (justWriteTheRest) {
 				} else if (cds == null) {
-					if (nbCopies == 0) {
+					/*if (nbCopies == 0) {*/
 						if (truthiness.peek() == null || truthiness.peek()) {
 						} else {
 							if (inLineSB.length() > 6) {
@@ -246,7 +246,7 @@ public static void main(String[] args) throws Exception {
 						} else {
 							inLine = currReplace.applyTo(inLineSB.toString());
 						}
-					}
+					/*}*/
 				} else {
 					LOGGER.finest("cds.getType() = " + cds.getType());
 					switch(cds.getType()) {
@@ -263,6 +263,7 @@ public static void main(String[] args) throws Exception {
 							}
 							Boolean strewth = ((ConditionalCompilationStatement)cds).strewth();
 							if (whenStrewth.peek().contains(true)) {
+								LOGGER.finest("this WHEN is disregarded because a previous WHEN tested TRUE");
 								truthiness.push(false);
 							} else {
 								truthiness.push(strewth && prevTruth1);

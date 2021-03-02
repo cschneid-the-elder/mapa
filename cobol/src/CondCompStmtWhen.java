@@ -49,8 +49,8 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 						+ " @ line "
 						+ this.getLine());
 				}
-				this.op1 = new CondCompComparisonOp(">=");
-				this.op2 = new CondCompComparisonOp("<=");
+				this.op1 = new CondCompComparisonOp("<=");
+				this.op2 = new CondCompComparisonOp(">=");
 			} else {
 				this.op1 = new CondCompComparisonOp("=");
 			}
@@ -73,6 +73,10 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	}
 
 	private Boolean evaluate() {
+		if (this.ctx.OTHER() != null) {
+			return true;
+		}
+
 		if (this.evaluateStmt.isJustTrue()) {
 			return this.evaluateWhen();
 		}
@@ -81,10 +85,6 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	}
 
 	private Boolean evaluateWhen() {
-		if (this.ctx.OTHER() != null) {
-			return true;
-		}
-
 		if (this.relCond != null) {
 			return relCond.evaluate();
 		}
@@ -169,21 +169,21 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private Boolean compareWithEvaluate() {
 		CondCompVar evaluateVar = this.evaluateStmt.getVar();
 		Integer evaluateInt = this.evaluateStmt.getEvaluateSelection().getNumericValue();
-		String evaluateText = this.evaluateStmt.getEvaluateSelection().getNonNumericValue();
+		String evaluateString = this.evaluateStmt.getEvaluateSelection().getNonNumericValue();
 
 		if (evaluateVar == null) {
 			if (evaluateInt == null) {
-				if (evaluateText == null) {
+				if (evaluateString == null) {
 					throw new IllegalArgumentException(
 						this.myName
 						+ " "
 						+ this.evaluateStmt
-						+ " getVar() && getEvaluateSelection().getNumericValue() are null");
+						+ " getVar() && getEvaluateSelection().getNumericValue() && getEvaluateSelection().getNonNumericValue() are null");
 				} else {
 					if (this.op2 == null) {
-						return this.compareWithEvaluate(evaluateText, this.op1);
+						return this.compareWithEvaluate(evaluateString, this.op1);
 					} else {
-						return this.compareWithEvaluate(evaluateText, this.op1, this.op2);
+						return this.compareWithEvaluate(evaluateString, this.op1, this.op2);
 					}
 				}
 			} else {
@@ -205,6 +205,8 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private Boolean compareWithEvaluate(CondCompVar evaluateVar, CondCompComparisonOp op) {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
+		Integer whenInt1 = this.evaluateSelection1.getNumericValue();
+		String whenString1 = this.evaluateSelection1.getNonNumericValue();
 
 		TestIntegration.LOGGER.finer(
 			this.myName 
@@ -217,9 +219,31 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			"  whenVar1 = |" + whenVar1 + "|");
 		TestIntegration.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenInt1 = |" + whenInt1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenString1 = |" + whenString1 + "|");
 
 		if (whenVar1 == null) {
-			return evaluateVar.compareTo(op, whenTn1);
+			if (whenTn1 == null) {
+				if (whenInt1 == null) {
+					if (whenString1 == null) {
+						throw new IllegalArgumentException(
+							this.myName
+							+ " "
+							+ this.evaluateStmt
+							+ " "
+							+ this
+							+ " whenVar1 && whenTn1 && whenInt1 && whenString1 are null");
+					} else {
+						return evaluateVar.compareTo(whenString1, op);
+					}
+				} else {
+					return evaluateVar.compareTo(whenInt1, op);
+				}
+			} else {
+				return evaluateVar.compareTo(op, whenTn1);
+			}
 		} else {
 			return whenVar1.compareTo(evaluateVar, op);
 		}
@@ -228,8 +252,14 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private Boolean compareWithEvaluate(CondCompVar evaluateVar, CondCompComparisonOp op1, CondCompComparisonOp op2) {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
+		Integer whenInt1 = this.evaluateSelection1.getNumericValue();
+		String whenString1 = this.evaluateSelection1.getNonNumericValue();
 		CondCompVar whenVar2 = this.evaluateSelection2.getVar();
 		TerminalNode whenTn2 = this.evaluateSelection2.getTerminalNode();
+		Integer whenInt2 = this.evaluateSelection2.getNumericValue();
+		String whenString2 = this.evaluateSelection2.getNonNumericValue();
+		Boolean cmp1 = null;
+		Boolean cmp2 = null;
 
 		TestIntegration.LOGGER.finer(
 			this.myName 
@@ -248,21 +278,48 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			"  whenTn1 = |" + whenTn1 + "|");
 		TestIntegration.LOGGER.finest(
 			"  whenTn2 = |" + whenTn2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenInt1 = |" + whenInt1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenInt2 = |" + whenInt2 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenString1 = |" + whenString1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenString2 = |" + whenString2 + "|");
 
-		if (whenVar1 == null) {
-			if (whenVar2 == null) {
-				return evaluateVar.compareTo(op1, whenTn1) && evaluateVar.compareTo(op2, whenTn2);
-			} else {
-				return evaluateVar.compareTo(op1, whenTn1) && evaluateVar.compareTo(op2, whenVar2);
-			}
-		} else {
-			if (whenVar2 == null) {
-				return evaluateVar.compareTo(op1, whenVar1) && evaluateVar.compareTo(op2, whenTn2);
-			} else {
-				return evaluateVar.compareTo(op1, whenVar1) && evaluateVar.compareTo(op2, whenVar2);
-			}
+		if (whenVar1 != null) {
+			cmp1 = evaluateVar.compareTo(op1, whenVar1);
 		}
 
+		if (whenTn1 != null) {
+			cmp1 = evaluateVar.compareTo(op1, whenTn1);
+		}
+
+		if (whenInt1 != null) {
+			cmp1 = evaluateVar.compareTo(whenInt1, op1);
+		}
+
+		if (whenString1 != null) {
+			cmp1 = evaluateVar.compareTo(whenString1, op1);
+		}
+
+		if (whenVar2 != null) {
+			cmp2 = evaluateVar.compareTo(op2, whenVar2);
+		}
+
+		if (whenTn2 != null) {
+			cmp2 = evaluateVar.compareTo(op2, whenTn2);
+		}
+
+		if (whenInt2 != null) {
+			cmp2 = evaluateVar.compareTo(whenInt2, op2);
+		}
+
+		if (whenString2 != null) {
+			cmp2 = evaluateVar.compareTo(whenString2, op2);
+		}
+
+		return cmp1 && cmp2;
 	}
 
 	/**
