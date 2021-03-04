@@ -9,6 +9,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.SimpleFormatter;
+import java.util.concurrent.atomic.AtomicReference;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
@@ -233,7 +234,22 @@ public static void main(String[] args) throws Exception {
 				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
 				LOGGER.finest("  justWriteTheRest = |" + justWriteTheRest + "|" + "  cds = |" + cds + "|" + "  truthiness.peek() = |" + truthiness.peek() + "|");
 				if (justWriteTheRest) {
+					/*
+					A COPY statement has been encountered and its contents have been
+					incorporated into the output file.  Just write the rest of the
+					input file to the output file.  This is done because the contents
+					of the COPY member may contain compiler directing statements which
+					have not been parsed and are not present in compDirStmts.  These
+					will be caught in the next iteration.
+					*/
 				} else if (cds == null) {
+					/*
+					cds == null indicates the current line is not a compiler directing
+					statement.  If the current compiler directing statement (IF or WHEN)
+					is true, or there is no current compiler directing statement then
+					just leave the input as is, otherwise comment it out.  Apply the
+					current REPLACE statement if it exists.
+					*/
 					/*if (nbCopies == 0) {*/
 						if (truthiness.peek() == null || truthiness.peek()) {
 						} else {
@@ -299,18 +315,18 @@ public static void main(String[] args) throws Exception {
 							inLine = inLineSB.toString();
 							break;
 						case STMT_REPLACE:
-							if (nbCopies == 0) {
+							/*if (nbCopies == 0) {*/
 								if (truthiness.peek() == null || truthiness.peek()) {
 									currReplace = (ReplaceStatement)cds;
 								}
-							}
+							/*}*/
 							break;
 						case STMT_REPLACE_OFF:
-							if (nbCopies == 0) {
+							/*if (nbCopies == 0) {*/
 								if (truthiness.peek() == null || truthiness.peek()) {
 									currReplace = null;
 								}
-							}
+							/*}*/
 							break;
 						default:
 							break;
@@ -330,7 +346,6 @@ public static void main(String[] args) throws Exception {
 
 		return fileName;
 	}
-
 	public static int countCopyCDS(ArrayList<CompilerDirectingStatement> compDirStmts) {
 		int nbCopies = 0;
 		for (CompilerDirectingStatement copy: compDirStmts) {
@@ -341,7 +356,6 @@ public static void main(String[] args) throws Exception {
 
 		return nbCopies;
 	}
-
 
 	/**
 	It turns out little is required of a COBOL program qua being a

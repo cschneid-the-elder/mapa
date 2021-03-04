@@ -264,7 +264,7 @@ test_opts
     ;
 
 classicCommentEntry
-    : CLASSIC_COMMENTLINE
+    : CLASSIC_COMMENT_TAG CLASSIC_COMMENT_TEXT* NEWLINE
     ;
 
 // exec cics statement
