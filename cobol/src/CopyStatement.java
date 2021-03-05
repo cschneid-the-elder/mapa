@@ -254,7 +254,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 	}
 
 	public String getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
-		if (this.replacement == null) return this.replacement;
+		if (this.replacement != null) return this.replacement;
 
 		String replacement = new String();
 
@@ -294,6 +294,16 @@ public class CopyStatement implements CompilerDirectingStatement {
 	public String newLineWithReplacingApplied(String replaceable
 							, String replacement
 							, String aLine) {
+
+		TestIntegration.LOGGER.finer(
+			this.myName
+			+ " newLineWithReplacingApplied(|"
+			+ replaceable
+			+ "|, |"
+			+ replacement
+			+ "|, |"
+			+ aLine
+			+ "|");
 		String newLine = new String(aLine);
 
 		if (replaceable != null && replacement != null) {

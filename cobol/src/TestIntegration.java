@@ -227,6 +227,8 @@ public static void main(String[] args) throws Exception {
 			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
 			ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
 			ReplaceStatement currReplace = null;
+			int replaceStart = -1;
+			int replaceStop = -1;
 
 			String inLine = src.readLine();
 			while (inLine != null) {
@@ -248,22 +250,26 @@ public static void main(String[] args) throws Exception {
 					statement.  If the current compiler directing statement (IF or WHEN)
 					is true, or there is no current compiler directing statement then
 					just leave the input as is, otherwise comment it out.  Apply the
-					current REPLACE statement if it exists.
+					current REPLACE statement if it exists and all COPY statements have
+					been resolved.
 					*/
-					/*if (nbCopies == 0) {*/
-						if (truthiness.peek() == null || truthiness.peek()) {
-						} else {
-							if (inLineSB.length() > 6) {
-								inLineSB.setCharAt(6, '*');
-							}
+					if (truthiness.peek() == null || truthiness.peek()) {
+					} else {
+						if (inLineSB.length() > 6) {
+							inLineSB.setCharAt(6, '*');
 						}
+					}
+					inLine = inLineSB.toString();
+					if (nbCopies == 0) {
 						if (currReplace == null) {
-							inLine = inLineSB.toString();
 						} else {
 							inLine = currReplace.applyTo(inLineSB.toString());
 						}
-					/*}*/
+					}
 				} else {
+					/*
+					State machine for interpreting compiler directing statements.
+					*/
 					LOGGER.finest("cds.getType() = " + cds.getType());
 					switch(cds.getType()) {
 						case STMT_EVALUATE:
@@ -315,25 +321,34 @@ public static void main(String[] args) throws Exception {
 							inLine = inLineSB.toString();
 							break;
 						case STMT_REPLACE:
-							/*if (nbCopies == 0) {*/
+							if (nbCopies == 0) {
 								if (truthiness.peek() == null || truthiness.peek()) {
 									currReplace = (ReplaceStatement)cds;
+									replaceStart = cds.getLine();
+									replaceStop = cds.getEndLine();
 								}
-							/*}*/
+							}
 							break;
 						case STMT_REPLACE_OFF:
-							/*if (nbCopies == 0) {*/
+							if (nbCopies == 0) {
 								if (truthiness.peek() == null || truthiness.peek()) {
 									currReplace = null;
+									replaceStart = cds.getLine();
+									replaceStop = cds.getEndLine();
 								}
-							/*}*/
+							}
 							break;
 						default:
 							break;
 					}
 				}
-				LOGGER.finest("writing  |" + inLine + "|");
-				out.println(inLine);
+				if (nbCopies == 0 
+				&& (src.getLineNumber() >= replaceStart && src.getLineNumber() <= replaceStop)) {
+					LOGGER.finest("not writing |" + inLine + "| as it seems to be part of a REPLACE [OFF] statement");
+				} else {
+					LOGGER.finest("writing  |" + inLine + "|");
+					out.println(inLine);
+				}
 				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 				inLine = src.readLine();
 			}
@@ -346,6 +361,7 @@ public static void main(String[] args) throws Exception {
 
 		return fileName;
 	}
+ 
 	public static int countCopyCDS(ArrayList<CompilerDirectingStatement> compDirStmts) {
 		int nbCopies = 0;
 		for (CompilerDirectingStatement copy: compDirStmts) {

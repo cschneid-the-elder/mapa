@@ -102,7 +102,7 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 	public String getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.fine(myName + " getReplacement");
 
-		if (this.replacement == null) return this.replacement;
+		if (this.replacement != null) return this.replacement;
 
 		String replacement = new String();
 
@@ -204,8 +204,10 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		StringBuilder sb = 
 			new StringBuilder(
 					myName 
-					+ " replace BY @" 
-					+ this.startLine() 
+					+ " replace BY startLine = " 
+					+ this.startLine()
+					+ " endLine = "
+					+ this.endLine()
 					+ ": " 
 					+ this.ctx.getText());
 
