@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, Craig Schneiderwent.
+ Portions copyright (C) 2019 - 2021 Craig Schneiderwent.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -527,6 +527,7 @@ SLASHCHAR : '/';
 NOTEQUALCHAR : '<>';
 GREATEROREQUALCHAR : '>=';
 LESSOREQUALCHAR : '<=';
+ZERO : Z E R O;
 
 CD_LPARENCHAR : LPARENCHAR ->type(LPARENCHAR);
 CD_RPARENCHAR : RPARENCHAR ->type(RPARENCHAR);

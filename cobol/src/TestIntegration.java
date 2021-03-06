@@ -170,7 +170,7 @@ public static void main(String[] args) throws Exception {
 			) throws Exception {
 		LOGGER.fine("processCDS()");
 
-		ArrayList<CondCompVar> compOptDefines = CLI.compOptDefines;
+		ArrayList<CondCompVar> compOptDefines = new ArrayList<>(CLI.compOptDefines);
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
@@ -1364,6 +1364,22 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "CEE3ABD", CallType.CALLBYLITERAL, calledNodes, 1)) failCount++;
+				break;
+			case "testantlr034":
+			case "testantlr134":
+			case "testantlr234":
+			case "testantlr334":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr035":
+			case "testantlr135":
+			case "testantlr235":
+			case "testantlr335":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			default:
 				LOGGER.info("NONE " + fileName);

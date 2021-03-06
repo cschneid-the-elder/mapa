@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, Craig Schneiderwent.
+ Portions copyright (C) 2019 - 2021, Craig Schneiderwent.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -197,8 +197,27 @@ compilerOption
    ;
 
 define_opt
-   : ((DEFINE | DEF) LPARENCHAR IDENTIFIER ((TEXT | COMMACHAR) literal)? RPARENCHAR)
+   : ((DEFINE | DEF) LPARENCHAR identifier_et_al ((TEXT+ | COMMACHAR) literal)? RPARENCHAR)
    ;
+
+identifier_et_al
+   : (IDENTIFIER
+   | C_CHAR
+   | D_CHAR
+   | E_CHAR
+   | F_CHAR
+   | H_CHAR
+   | I_CHAR
+   | M_CHAR
+   | N_CHAR
+   | O_CHAR
+   | Q_CHAR
+   | S_CHAR
+   | U_CHAR
+   | W_CHAR
+   | X_CHAR)
+   ;
+
 
 numcheck_opts
    : (ZON
@@ -503,7 +522,7 @@ conditionalCompilationDefinedCondition
 charDataKeyword
    : ABD | ADATA | ADV | AFP | ALIAS | ALPHNUM | ANSI | ANY | APOST | AR | ARCH | ARITH | AUTO | AWO
    | BIN | BLOCK0 | BUF | BUFSIZE | BY
-   | CBL | CBLCARD | CICS | CO | COBOL2 | COBOL3 | CODEPAGE | COMMACHAR | COMPAT | COMPILE | COPYLOC | COPYRIGHT | CP | CPLC | CPP | CPSM | CPYR | CS | CURR | CURRENCY
+   | CBLCARD | CICS | CO | COBOL2 | COBOL3 | CODEPAGE | COMMACHAR | COMPAT | COMPILE | COPYLOC | COPYRIGHT | CP | CPLC | CPP | CPSM | CPYR | CS | CURR | CURRENCY
    | DATA | DATEPROC | DBCS | DD | DEBUG | DEC | DECK | DEF | DEFINE | DIAGTRUNC | DISPSIGN | DLI | DLL | DP | DS | DSN | DSNAME | DTR | DU | DUMP | DYN | DYNAM | DWARF
    | EDF | EJECT | EJPD | EN | ENDP | ENDPERIOD | ENGLISH | EPILOG | EVENPACK | EVENP | EXCI | EXIT | EXP | EXPORTALL | EXTEND
    | FASTSRT | FLAG | FLAGSTD | FULL | FSRT
@@ -544,7 +563,7 @@ charDataKeyword
    | NSEQ | NSYMBOL | NS
    | NUM | NUMBER | NUMCHECK | NUMPROC
    | OBJ | OBJECT | ON | OF | OFF | OFFSET | OMITODOMIN | OOM | OPMARGINS | OPSEQUENCE | OPTIMIZE | OP | OPT | OPTFILE | OPTIONS | OR | OUT | OUTDD
-   | PAC | PARMCHECK | PATH | PFD | PGMN | PGMNAME | PLUSCHAR | PPTDBG | PRESERVE | PROCESS | PROLOG
+   | PAC | PARMCHECK | PATH | PFD | PGMN | PGMNAME | PLUSCHAR | PPTDBG | PRESERVE | PROLOG
    | QUALIFY | QUA | QUOTE
    | RENT | REPLACING | RMODE | RULES
    | SEQ | SEQUENCE | SEP | SEPARATE | SERV | SERVICE | SHORT | SIZE | SLACKBYTES | SLCKB | SO | SOURCE | SP | SPACE | SPIE | SQL | SQLC | SQLCCSID | SQLIMS | SS | SSR | SSRANGE | STD | STANDARD | STATIC | STGOPT | STRICT | SUCC | SUPP | SUPPRESS | SYSEIB | SZ

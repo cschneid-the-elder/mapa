@@ -37,8 +37,8 @@ class CondCompVar implements CondCompToken {
 		TestIntegration.LOGGER.fine("CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc, ArrayList<CondCompVar> compOptDefines)");
 
 		this.ctx = ccdc;
-		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.ctx.IDENTIFIER();
+		this.varName = this.tn.getSymbol().getText();
 
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
@@ -125,8 +125,8 @@ class CondCompVar implements CondCompToken {
 		TestIntegration.LOGGER.fine("CondCompVar(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx)");
 
 		this.ctx = ctx;
-		this.varName = this.ctx.IDENTIFIER().getSymbol().getText();
 		this.tn = this.ctx.IDENTIFIER();
+		this.varName = this.tn.getSymbol().getText();
 
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
@@ -175,8 +175,8 @@ class CondCompVar implements CondCompToken {
 		TestIntegration.LOGGER.fine("CondCompVar(CobolPreprocessorParser.Define_optContext ctx)");
 
 		this.defCtx = ctx;
-		this.varName = this.defCtx.IDENTIFIER().getSymbol().getText();
-		this.tn = this.defCtx.IDENTIFIER();
+		this.tn = this.getIdentifierTerminalNode(this.defCtx.identifier_et_al());
+		this.varName = this.tn.getSymbol().getText();
 
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
@@ -213,6 +213,45 @@ class CondCompVar implements CondCompToken {
 			}
 		}
 
+	}
+
+	private TerminalNode getIdentifierTerminalNode(CobolPreprocessorParser.Identifier_et_alContext iCtx) {
+		if (iCtx.IDENTIFIER() != null) {
+			return iCtx.IDENTIFIER();
+		} else if (iCtx.C_CHAR() != null) {
+			return iCtx.C_CHAR();
+		} else if (iCtx.D_CHAR() != null) {
+			return iCtx.D_CHAR();
+		} else if (iCtx.E_CHAR() != null) {
+			return iCtx.E_CHAR();
+		} else if (iCtx.F_CHAR() != null) {
+			return iCtx.F_CHAR();
+		} else if (iCtx.H_CHAR() != null) {
+			return iCtx.H_CHAR();
+		} else if (iCtx.I_CHAR() != null) {
+			return iCtx.I_CHAR();
+		} else if (iCtx.M_CHAR() != null) {
+			return iCtx.M_CHAR();
+		} else if (iCtx.N_CHAR() != null) {
+			return iCtx.N_CHAR();
+		} else if (iCtx.O_CHAR() != null) {
+			return iCtx.O_CHAR();
+		} else if (iCtx.Q_CHAR() != null) {
+			return iCtx.Q_CHAR();
+		} else if (iCtx.S_CHAR() != null) {
+			return iCtx.S_CHAR();
+		} else if (iCtx.U_CHAR() != null) {
+			return iCtx.U_CHAR();
+		} else if (iCtx.W_CHAR() != null) {
+			return iCtx.W_CHAR();
+		} else if (iCtx.X_CHAR() != null) {
+			return iCtx.X_CHAR();
+		} else {
+			throw new IllegalArgumentException(
+				this.myName
+				+ " instantiation error - Identifier_et_alContext"
+				+ " contains no recognizable identifier");
+		}
 	}
 
 	private void setValue(TerminalNode t) {
