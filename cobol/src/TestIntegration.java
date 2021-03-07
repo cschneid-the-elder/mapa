@@ -283,14 +283,19 @@ public static void main(String[] args) throws Exception {
 							if (truthiness.peek() != null) {
 								prevTruth1 = truthiness.peek();
 							}
-							Boolean strewth = ((ConditionalCompilationStatement)cds).strewth();
-							if (whenStrewth.peek().contains(true)) {
-								LOGGER.finest("this WHEN is disregarded because a previous WHEN tested TRUE");
-								truthiness.push(false);
+							if (prevTruth1) {
+								Boolean strewth = ((ConditionalCompilationStatement)cds).strewth();
+								if (whenStrewth.peek().contains(true)) {
+									LOGGER.finest("this WHEN is disregarded because a previous WHEN tested TRUE");
+									truthiness.push(false);
+								} else {
+									truthiness.push(strewth && prevTruth1);
+								}
+								whenStrewth.peek().add(strewth);
 							} else {
-								truthiness.push(strewth && prevTruth1);
+								LOGGER.finest("prevTruth1 == false so " + cds + " strewth() not executed");
+								truthiness.push(false);
 							}
-							whenStrewth.peek().add(strewth);
 							break;
 						case STMT_END_EVALUATE:
 							whenStrewth.pop();
@@ -303,7 +308,12 @@ public static void main(String[] args) throws Exception {
 							if (truthiness.peek() != null) {
 								prevTruth2 = truthiness.peek();
 							}
-							truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth2);
+							if (prevTruth2) {
+								truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth2);
+							} else {
+								LOGGER.finest("prevTruth2 == false so " + cds + " strewth() not executed");
+								truthiness.push(false);
+							}
 							break;
 						case STMT_END_IF:
 							truthiness.pop();
@@ -1380,6 +1390,70 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr036":
+			case "testantlr136":
+			case "testantlr236":
+			case "testantlr336":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr037":
+			case "testantlr137":
+			case "testantlr237":
+			case "testantlr337":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr038":
+			case "testantlr138":
+			case "testantlr238":
+			case "testantlr338":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr039":
+			case "testantlr139":
+			case "testantlr239":
+			case "testantlr339":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr040":
+			case "testantlr140":
+			case "testantlr240":
+			case "testantlr340":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr041":
+			case "testantlr141":
+			case "testantlr241":
+			case "testantlr341":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr042":
+			case "testantlr142":
+			case "testantlr242":
+			case "testantlr342":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr043":
+			case "testantlr143":
+			case "testantlr243":
+			case "testantlr343":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			default:
 				LOGGER.info("NONE " + fileName);

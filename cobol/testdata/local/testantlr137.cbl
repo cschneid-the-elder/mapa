@@ -1,0 +1,25 @@
+000001 Identification Division.
+000002 Program-ID. testantlr137.
+000003 Data Division.
+000004 Working-Storage Section.
+000005
+000006 01  CONSTANTS.
+000007     05  MYNAME               PIC X(012) VALUE 'testantlr137'.
+000008     >>IF X = 3
+000009     05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+000010     >>ELSE
+000011     05  PGM-0001             PIC X(008) VALUE 'PGMA0002'.
+000012     >>END-IF
+000013
+000014*
+000015
+000016 Procedure Division.
+000017     DISPLAY MYNAME ' Begin'
+000018     CALL PGM-0001
+000019
+000020     DISPLAY MYNAME ' End'
+000021     
+000022     GOBACK
+000023     .
+000024
+000025

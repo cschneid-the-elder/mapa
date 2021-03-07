@@ -86,13 +86,13 @@ class CondCompEvaluateSelection {
 					break;
 				}
 			}
-			if (this.var == null) {
+			if (this.var == null) {/*
 				throw new IllegalArgumentException(
 					this.myName
 					+ " identifier "
 					+ this.identifier.getSymbol().getText()
 					+ " not found in variable list "
-					+ varList);
+					+ varList);*/
 			} else {
 				switch(this.var.getType()) {
 					case VAR_INTEGER:

@@ -1572,3 +1572,32 @@ Sat Mar 6 16:06:00 CST 2021 src/TestIntegration.java
 Sat Mar 6 16:06:03 CST 2021 jar
 Sat Mar 6 16:06:11 CST 2021 testLocal
 Sat Mar 6 16:06:33 CST 2021 testNist
+Sun Mar 7 11:21:31 CST 2021 testLocal 038
+Sun Mar 7 11:21:53 CST 2021 testLocal 036
+Sun Mar 7 11:22:23 CST 2021 testLocal 040
+Sun Mar 7 11:22:50 CST 2021 testLocal 042
+Sun Mar 7 11:27:38 CST 2021 testLocal 043
+Sun Mar 7 12:57:38 CST 2021 testLocal 037
+Sun Mar 7 16:01:31 CST 2021 testrigpp 037
+Sun Mar 7 16:01:58 CST 2021 testrigpp 039
+Sun Mar 7 16:03:33 CST 2021 testrigpp 043
+Sun Mar 7 16:05:08 CST 2021 src/CobolPreprocessorParser.g4
+Sun Mar 7 16:05:15 CST 2021 jar
+Sun Mar 7 16:05:46 CST 2021 testLocal
+Sun Mar 7 16:15:48 CST 2021 src/CondCompSimpleRelationalCondition.java
+Sun Mar 7 16:15:51 CST 2021 jar
+Sun Mar 7 16:16:05 CST 2021 testLocal 037
+Sun Mar 7 16:18:25 CST 2021 testLocal 039
+Sun Mar 7 16:21:45 CST 2021 src/CondCompEvaluateSelection.java
+Sun Mar 7 16:21:48 CST 2021 jar
+Sun Mar 7 16:21:52 CST 2021 testLocal 039
+Sun Mar 7 16:24:04 CST 2021 src/CondCompStmtWhen.java
+Sun Mar 7 16:24:05 CST 2021 src/CompilerDirectingStatementListener.java
+Sun Mar 7 16:24:06 CST 2021 src/TestIntegration.java
+Sun Mar 7 16:24:09 CST 2021 jar
+Sun Mar 7 16:24:13 CST 2021 testLocal 039
+Sun Mar 7 16:37:52 CST 2021 src/TestIntegration.java
+Sun Mar 7 16:37:55 CST 2021 jar
+Sun Mar 7 16:49:31 CST 2021 testLocal
+Sun Mar 7 16:52:23 CST 2021 testLocal
+Sun Mar 7 16:55:54 CST 2021 testLocal

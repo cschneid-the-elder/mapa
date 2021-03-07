@@ -174,7 +174,13 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 	some difficulty coming up with a reason to get more involved.
 	*/
 	private Boolean compareTN(TerminalNode tn1, TerminalNode tn2) {
-		TestIntegration.LOGGER.finer(this.myName + " compareTN(TerminalNode tn1, TerminalNode tn2)");
+		TestIntegration.LOGGER.finer(
+			this.myName 
+			+ " compareTN(TerminalNode tn1 |"
+			+ tn1.getSymbol().getText()
+			+ "|, TerminalNode tn2 |"
+			+ tn2.getSymbol().getText()
+			+ "|)");
 		int comparison = tn1.getSymbol().getText().toUpperCase().compareTo(tn2.getSymbol().getText().toUpperCase());
 		Boolean rc = null;
 

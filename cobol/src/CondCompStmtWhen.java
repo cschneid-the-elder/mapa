@@ -174,11 +174,14 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		if (evaluateVar == null) {
 			if (evaluateInt == null) {
 				if (evaluateString == null) {
+					/*
 					throw new IllegalArgumentException(
 						this.myName
 						+ " "
 						+ this.evaluateStmt
 						+ " getVar() && getEvaluateSelection().getNumericValue() && getEvaluateSelection().getNonNumericValue() are null");
+					*/
+					return false;
 				} else {
 					if (this.op2 == null) {
 						return this.compareWithEvaluate(evaluateString, this.op1);
