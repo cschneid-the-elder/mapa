@@ -17,6 +17,7 @@ class CondCompVar implements CondCompToken {
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext expression = null;
 	private CobolPreprocessorParser.ConditionalCompilationDefineContext ctx = null;
 	private CobolPreprocessorParser.Define_optContext defCtx = null;
+	private CondCompArithmeticExpression ccae = null;
 	private Boolean parameter = false;
 	private TerminalNode tn = null;
 	private long sortKey = -1;
@@ -95,6 +96,9 @@ class CondCompVar implements CondCompToken {
 					TestIntegration.LOGGER.finest("this.predicate.IDENTIFIER() == null");
 					// set to an expression
 					this.expression = this.predicate.conditionalCompilationArithmeticExpression();
+					this.ccae = new CondCompArithmeticExpression(this.expression, compOptDefines);
+					this.type = CondCompTokenType.VAR_INTEGER;
+					this.intValue = this.ccae.getValue();
 				} else {
 					TestIntegration.LOGGER.finest("this.predicate.IDENTIFIER() != null");
 					//set to the value of another variable

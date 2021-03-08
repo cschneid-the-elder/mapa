@@ -19,6 +19,7 @@ class CondCompArithmeticExpression {
 			CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ctx
 			, ArrayList<CondCompVar> varList) {
 		this.ctx = ctx;
+		TestIntegration.LOGGER.finer(this.myName + " varList = |" + varList + "|");
 		if (this.ctx.conditionalCompilationSimpleArithmeticExpression() != null) {
 			List<CondCompSimpleArithmeticExpression> ccsaeList = 
 				CondCompSimpleArithmeticExpression.bunchOfThese(

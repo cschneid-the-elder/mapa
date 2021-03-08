@@ -31,6 +31,7 @@ class CondCompSimpleArithmeticExpression implements CondCompToken {
 			CobolPreprocessorParser.ConditionalCompilationSimpleArithmeticExpressionContext ctx
 			, ArrayList<CondCompVar> varList) {
 		this.ctx = ctx;
+		TestIntegration.LOGGER.finer(this.myName + " varList = |" + varList + "|");
 		if (this.ctx.conditionalCompilationArithmeticOp() != null) {
 			this.op = new CondCompArithOp(this.ctx.conditionalCompilationArithmeticOp());
 		}
@@ -143,8 +144,19 @@ class CondCompSimpleArithmeticExpression implements CondCompToken {
 			return new Integer(0);
 		} else {
 			for (CondCompVar aVar: this.varList) {
-				if (aVar.getVarName().equals(this.atoms.get(i).IDENTIFIER())) {
+				if (aVar.getVarName().equals(this.atoms.get(i).IDENTIFIER().getSymbol().getText())) {
+					TestIntegration.LOGGER.finest(
+						this.myName
+						+ " getAtomValue(" + i + ") found "
+						+ aVar.getVarName());
 					return aVar.getIntValue();
+				} else {
+					TestIntegration.LOGGER.finest(
+						this.myName
+						+ " getAtomValue(" + i + ") aVar.getVarName() |" 
+						+ aVar.getVarName() 
+						+ "| !=  this.atoms.get(i).IDENTIFIER() |"
+						+ this.atoms.get(i).IDENTIFIER() + "|");
 				}
 			}
 			throw new IllegalArgumentException(

@@ -1455,6 +1455,32 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
+			case "testantlr044":
+			case "testantlr144":
+			case "testantlr244":
+			case "testantlr344":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				break;
+			case "testantlr045":
+			case "testantlr145":
+			case "testantlr245":
+			case "testantlr345":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr046":
+			case "testantlr146":
+			case "testantlr246":
+			case "testantlr346":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
