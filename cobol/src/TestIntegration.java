@@ -1481,6 +1481,43 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
+			case "testantlr047":
+			case "testantlr147":
+			case "testantlr247":
+			case "testantlr347":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
+				break;
+			case "testantlr048":
+			case "testantlr148":
+			case "testantlr248":
+			case "testantlr348":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr049":
+			case "testantlr149":
+			case "testantlr249":
+			case "testantlr349":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0004", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0005", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0006", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0007", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0008", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "JULIA", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "ELIOT", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PENNY", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "MARGOT", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "ALICE", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
