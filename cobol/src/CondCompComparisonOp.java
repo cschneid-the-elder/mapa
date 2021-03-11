@@ -162,6 +162,8 @@ class CondCompComparisonOp implements CondCompToken {
 					"ConditionalCompilationComparisonOpContext"
 					+ " unrecognized type " + s);
 		}
+
+		this.text = s;
 	}
 
 	public long getSortKey() {

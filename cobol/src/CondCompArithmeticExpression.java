@@ -54,8 +54,14 @@ class CondCompArithmeticExpression {
 		on top of the stack.
 		*/
 		
+		TestIntegration.LOGGER.finest(this.myName + " tokens    = |" + this.tokens + "|");
 		ArrayList<CondCompToken> revTokens = new ArrayList<>(this.tokens);
 		Collections.reverse(revTokens);
+		TestIntegration.LOGGER.finest(this.myName + " revTokens = |" + revTokens + "|");
+		evals.push(new CondCompGroupOp(")"));
+		evals.push(new CondCompGroupOp(")"));
+		evals.push(new CondCompGroupOp(")"));
+		evals.push(new CondCompGroupOp(")"));
 		for (CondCompToken token: revTokens) {
 			try {
 				switch(token.getType()) {
@@ -71,17 +77,17 @@ class CondCompArithmeticExpression {
 						break;
 					case NUMOP_MULTIPLY:
 					case NUMOP_DIVIDE:
-						evals.push(new CondCompGroupOp(")"));
-						evals.push(token);
 						evals.push(new CondCompGroupOp("("));
+						evals.push(token);
+						evals.push(new CondCompGroupOp(")"));
 						break;
 					case NUMOP_SUBTRACT:
 					case NUMOP_ADD:
-						evals.push(new CondCompGroupOp(")"));
-						evals.push(new CondCompGroupOp(")"));
+						evals.push(new CondCompGroupOp("("));
+						evals.push(new CondCompGroupOp("("));
 						evals.push(token);
-						evals.push(new CondCompGroupOp("("));
-						evals.push(new CondCompGroupOp("("));
+						evals.push(new CondCompGroupOp(")"));
+						evals.push(new CondCompGroupOp(")"));
 						break;
 					default:
 						evals.push(token);
@@ -99,6 +105,10 @@ class CondCompArithmeticExpression {
 				System.exit(16);
 			}
 		}
+		evals.push(new CondCompGroupOp("("));
+		evals.push(new CondCompGroupOp("("));
+		evals.push(new CondCompGroupOp("("));
+		evals.push(new CondCompGroupOp("("));
 
 		this.value = this.setValue();
 	}

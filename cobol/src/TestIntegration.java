@@ -1518,6 +1518,14 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "MARGOT", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
 				if (!testCall001(fileName, bareName, "ALICE", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
 				break;
+			case "testantlr050":
+			case "testantlr150":
+			case "testantlr250":
+			case "testantlr350":
+				if (!testCall001(fileName, bareName, "D#IS#7", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "E#IS#9", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "F#IS#7", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

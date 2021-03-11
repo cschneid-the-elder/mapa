@@ -80,10 +80,20 @@ class CondCompEvaluateSelection {
 		if (this.ccae != null) {
 			this.numericValue = this.ccae.getValue();
 		} else if (this.identifier != null) {
-			for (CondCompVar ccv: varList) {
-				if (this.identifier.getSymbol().getText().equals(ccv.getVarName())) {
-					this.var = ccv;
-					break;
+			long aLine = this.identifier.getSymbol().getLine();
+			long posn = this.identifier.getSymbol().getCharPositionInLine();
+			long sortKey = (aLine * (long)Integer.MAX_VALUE) + posn;
+			/*
+			Iterate backwards through varList so we get the most recent
+			value set for this variable.
+			*/
+			for (int i = varList.size() - 1; i >= 0; i--) {
+				CondCompVar currVar = varList.get(i);
+				if (currVar.varNameIs(this.identifier)) {
+					if (currVar.getSortKey() < sortKey) {
+						this.var = currVar;
+						break;
+					}
 				}
 			}
 			if (this.var == null) {/*

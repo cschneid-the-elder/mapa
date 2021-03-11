@@ -56,6 +56,18 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			}
 		}
 
+		TestIntegration.LOGGER.finest(
+			this.myName 
+			+ " relCond = |" 
+			+ this.relCond 
+			+ "| evaluateSelection1 = |"
+			+ this.evaluateSelection1
+			+ "| evaluateSelection2 = |"
+			+ this.evaluateSelection2
+			+ "| op1 = |"
+			+ this.op1
+			+ "| op2 = |"
+			+ this.op2 + "|");
 	}
 
 	/**
