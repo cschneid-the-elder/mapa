@@ -8,7 +8,7 @@ class CondCompArithmeticExpression {
 
 	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ctx = null;
-	private List<CondCompSimpleArithmeticExpression> ccsaeList = null;
+	private List<CobolPreprocessorParser.ConditionalCompilationArithmeticAtomContext> atoms = null;
 	private ArrayList<CondCompToken> tokens = new ArrayList<>();
 	private ArrayDeque<CondCompToken> evals = new ArrayDeque<>();
 	private ArrayList<CondCompVar> varList = null;
@@ -19,42 +19,27 @@ class CondCompArithmeticExpression {
 			CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ctx
 			, ArrayList<CondCompVar> varList) {
 		this.ctx = ctx;
+		this.varList = varList;
 		TestIntegration.LOGGER.finer(this.myName + " varList = |" + varList + "|");
-		if (this.ctx.conditionalCompilationSimpleArithmeticExpression() != null) {
-			List<CondCompSimpleArithmeticExpression> ccsaeList = 
-				CondCompSimpleArithmeticExpression.bunchOfThese(
-					this.ctx.conditionalCompilationSimpleArithmeticExpression()
-					, varList);
-			for (CondCompSimpleArithmeticExpression ccsae: ccsaeList) {
-				tokens.add(ccsae);
-			}
+		if (this.ctx.conditionalCompilationArithmeticAtom() != null) {
+			tokens.addAll( 
+				CondCompArithmeticAtom.bunchOfThese(
+					this.ctx.conditionalCompilationArithmeticAtom()
+					, varList));
 		}
 
 		if (this.ctx.LPARENCHAR() != null) {
-			List<CondCompGroupOp> ccgoList = 
-				CondCompGroupOp.bunchOfThese(this.ctx.LPARENCHAR());
-			for (CondCompGroupOp ccgo: ccgoList) {
-				tokens.add(ccgo);
-			}
+			tokens.addAll(CondCompGroupOp.bunchOfThese(this.ctx.LPARENCHAR()));
 		}
 
 		if (this.ctx.RPARENCHAR() != null) {
-			List<CondCompGroupOp> ccgoList = 
-				CondCompGroupOp.bunchOfThese(this.ctx.RPARENCHAR());
-			for (CondCompGroupOp ccgo: ccgoList) {
-				tokens.add(ccgo);
-			}
+			tokens.addAll(CondCompGroupOp.bunchOfThese(this.ctx.RPARENCHAR()));
 		}
 
 		if (this.ctx.conditionalCompilationArithmeticOp() != null) {
-			List<CondCompArithOp> ccaoList = 
-				CondCompArithOp.bunchOfThese(this.ctx.conditionalCompilationArithmeticOp());
-			for (CondCompArithOp ccao: ccaoList) {
-				tokens.add(ccao);
-			}
+			tokens.addAll(CondCompArithOp.bunchOfThese(this.ctx.conditionalCompilationArithmeticOp()));
 		}
 
-		this.varList = varList;
 		this.tokens.sort(Comparator.comparingLong(CondCompToken::getSortKey));
 
 		StringBuilder sb = new StringBuilder();
@@ -73,13 +58,43 @@ class CondCompArithmeticExpression {
 		Collections.reverse(revTokens);
 		for (CondCompToken token: revTokens) {
 			try {
-				evals.push(token);
+				switch(token.getType()) {
+					case GROUPOP_BEGIN:
+						evals.push(new CondCompGroupOp("("));
+						evals.push(new CondCompGroupOp("("));
+						evals.push(token);
+						break;
+					case GROUPOP_END:
+						evals.push(token);
+						evals.push(new CondCompGroupOp(")"));
+						evals.push(new CondCompGroupOp(")"));
+						break;
+					case NUMOP_MULTIPLY:
+					case NUMOP_DIVIDE:
+						evals.push(new CondCompGroupOp(")"));
+						evals.push(token);
+						evals.push(new CondCompGroupOp("("));
+						break;
+					case NUMOP_SUBTRACT:
+					case NUMOP_ADD:
+						evals.push(new CondCompGroupOp(")"));
+						evals.push(new CondCompGroupOp(")"));
+						evals.push(token);
+						evals.push(new CondCompGroupOp("("));
+						evals.push(new CondCompGroupOp("("));
+						break;
+					default:
+						evals.push(token);
+						break;
+				}
 			} catch (Exception e) {
 				TestIntegration.LOGGER.severe(
 					"Exception " + e + " encountered"
 					+ " in "
 					+ this.myName
-					+ " constructor");
+					+ " constructor whilst pushing token "
+                    + token
+                    + " on to evals ArrayDeque");
 				e.printStackTrace();
 				System.exit(16);
 			}
@@ -94,7 +109,7 @@ class CondCompArithmeticExpression {
 		CondCompToken arithmeticOp = null;
 		Integer result = null;
 
-		TestIntegration.LOGGER.fine(this.myName + " setValue()");
+		TestIntegration.LOGGER.fine(this.myName + " setValue() evals = |" + this.evals + "|");
 
 		while(this.evals.peek() != null) {
 			try {
@@ -111,27 +126,47 @@ class CondCompArithmeticExpression {
 			TestIntegration.LOGGER.finest(this.myName + " setValue()" + " token.getType() = " + token.getType());
 			switch(token.getType()) {
 				case GROUPOP_BEGIN:
-					result = this.setValue();
+					Integer groupResult = this.setValue();
+					if (arithmeticOp == null) {
+						result = groupResult;
+					} else {
+						switch(arithmeticOp.getType()) {
+							case NUMOP_MULTIPLY:
+								result = result * groupResult;
+								break;
+							case NUMOP_SUBTRACT:
+								result = result - groupResult;
+								break;
+							case NUMOP_ADD:
+								result = result + groupResult;
+								break;
+							case NUMOP_DIVIDE:
+								result = result / groupResult;
+								break;
+							default:
+								break;
+						}
+					}
 					break;
 				case GROUPOP_END:
 					TestIntegration.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
 					return(result);
-				case SIMPLE_ARITHMETIC_EXPRESSION:
+				case ARITHMETIC_ATOM:
 					if (arithmeticOp == null) {
-						result = ((CondCompSimpleArithmeticExpression)token).getValue();
+						result = ((CondCompArithmeticAtom)token).getValue();
 					} else {
 						switch(arithmeticOp.getType()) {
 							case NUMOP_MULTIPLY:
-								result = result * ((CondCompSimpleArithmeticExpression)token).getValue();
+								result = result * ((CondCompArithmeticAtom)token).getValue();
 								break;
 							case NUMOP_SUBTRACT:
-								result = result - ((CondCompSimpleArithmeticExpression)token).getValue();
+								result = result - ((CondCompArithmeticAtom)token).getValue();
 								break;
 							case NUMOP_ADD:
-								result = result + ((CondCompSimpleArithmeticExpression)token).getValue();
+								result = result + ((CondCompArithmeticAtom)token).getValue();
 								break;
 							case NUMOP_DIVIDE:
-								result = result / ((CondCompSimpleArithmeticExpression)token).getValue();
+								result = result / ((CondCompArithmeticAtom)token).getValue();
 								break;
 							default:
 								break;
@@ -157,4 +192,7 @@ class CondCompArithmeticExpression {
 		return this.value;
 	}
 
+	public String toString() {
+		return this.text;
+	}
 }

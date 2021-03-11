@@ -45,6 +45,22 @@ class CondCompGroupOp implements CondCompToken {
 
 	}
 
+	public CondCompGroupOp(String s) {
+		if (s.equals("(")) {
+			this.type = CondCompTokenType.GROUPOP_BEGIN;
+		} else if (s.equals(")")) {
+			this.type = CondCompTokenType.GROUPOP_END;
+		} else {
+			throw new IllegalArgumentException(
+				"CondCompGroupOp"
+				+ " without a recognizable group operator"
+				+ " in |" + s + "|");
+		}
+
+		this.text = s;
+
+	}
+
 	public long getSortKey() {
 		return this.sortKey;
 	}

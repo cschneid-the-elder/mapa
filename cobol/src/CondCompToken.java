@@ -28,6 +28,7 @@ public interface CondCompToken {
 			, DEFINED_CONDITION
 			, RELATIONAL_CONDITION
 			, SIMPLE_ARITHMETIC_EXPRESSION
+			, ARITHMETIC_ATOM
 	}
 
 }

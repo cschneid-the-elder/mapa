@@ -85,12 +85,11 @@ class CondCompVar implements CondCompToken {
 											ccv.getVarName()
 											+ " is of type "
 											+ ccv.getType()
-											+ " and value has not been set in CondCompVar constructor");
+											+ " AS PARAMETER has been indicated and value has not been set in PROCESS or CBL DEFINE()");
 						}
 					}
 				}
-			}
-			if (this.literalCtx == null) {
+			} else if (this.literalCtx == null) {
 				TestIntegration.LOGGER.finest("this.literalCtx == null");
 				if (this.predicate.IDENTIFIER() == null) {
 					TestIntegration.LOGGER.finest("this.predicate.IDENTIFIER() == null");

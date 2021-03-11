@@ -181,4 +181,8 @@ class CondCompSimpleArithmeticExpression implements CondCompToken {
 	public Integer getValue() {
 		return this.value;
 	}
+
+	public String toString() {
+		return this.myName + " " + this.getValue();
+	}
 }
