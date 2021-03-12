@@ -68,7 +68,7 @@ class CondCompVar implements CondCompToken {
 				TestIntegration.LOGGER.finest("this.predicate.PARAMETER() != null");
 				this.parameter = true;
 				for (CondCompVar ccv: compOptDefines) {
-					if (this.varName.equals(ccv.getVarName())) {
+					if (this.varName.equals(ccv.getVarName()) && ccv.fromCompileOption()) {
 						this.type = ccv.getType();
 						switch(this.type) {
 							case VAR_INTEGER:
@@ -88,6 +88,11 @@ class CondCompVar implements CondCompToken {
 											+ " AS PARAMETER has been indicated and value has not been set in PROCESS or CBL DEFINE()");
 						}
 					}
+				}
+				if (this.type == null) {
+					throw new IllegalArgumentException(
+								this.getVarName()
+								+ " AS PARAMETER has been indicated and value has not been set in PROCESS or CBL DEFINE()");
 				}
 			} else if (this.literalCtx == null) {
 				TestIntegration.LOGGER.finest("this.literalCtx == null");
@@ -152,8 +157,6 @@ class CondCompVar implements CondCompToken {
 				> Compiling and debugging your program > Compiler options > DEFINE
 			*/
 			this.setValue("B'1'");
-			/*this.type = CondCompTokenType.VAR_BOOLEAN;
-			this.boolValue = true;*/
 		} else {
 			if (this.literalCtx.NONNUMERICLITERAL() == null) {
 				if (this.literalCtx.NUMERICLITERAL() == null) {
@@ -196,8 +199,6 @@ class CondCompVar implements CondCompToken {
 				> Compiling and debugging your program > Compiler options > DEFINE
 			*/
 			this.setValue("B'1'");
-			/*this.type = CondCompTokenType.VAR_BOOLEAN;
-			this.boolValue = true;*/
 		} else {
 			if (this.literalCtx.NONNUMERICLITERAL() == null) {
 				if (this.literalCtx.NUMERICLITERAL() == null) {

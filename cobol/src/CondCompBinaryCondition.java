@@ -33,12 +33,14 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 		this.type = CondCompTokenType.BINARY_CONDITION;
 
 		this.tn = this.ctx.IDENTIFIER();
-		this.var = this.varFromList(this.tn, varList);
 
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
+
 		this.text = this.tn.getSymbol().getText();
+
+		this.var = this.varFromList(this.tn, varList);
 
 	}
 
@@ -51,7 +53,9 @@ class CondCompBinaryCondition implements CondCompToken, CondCompCondition {
 		Collections.reverse(revList);
 		for (CondCompVar v: revList) {
 			if (v.varNameIs(t)) {
-				return v;
+				if (v.getSortKey() < this.getSortKey()) {
+					return v;
+				}
 			}
 		}
 

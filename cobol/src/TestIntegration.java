@@ -1526,6 +1526,15 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "E#IS#9", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "F#IS#7", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
 				break;
+			case "testantlr051":
+			case "testantlr151":
+			case "testantlr251":
+			case "testantlr351":
+				if (!testCall001(fileName, bareName, "PGM0001A", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM0001D", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM0001E", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM0001G", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
