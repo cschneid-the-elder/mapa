@@ -1757,3 +1757,63 @@ Fri Mar 12 12:05:21 CST 2021 jar
 Fri Mar 12 12:05:27 CST 2021 testLocal
 Fri Mar 12 12:06:06 CST 2021 testNist
 Fri Mar 12 12:31:38 CST 2021 testLocal
+Fri Mar 12 13:49:22 CST 2021 testLocal 052
+Fri Mar 12 13:52:59 CST 2021 testrigpp 052
+Fri Mar 12 13:57:56 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 12 13:58:10 CST 2021 jar
+Fri Mar 12 13:58:15 CST 2021 testrigpp 052
+Fri Mar 12 14:01:43 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 12 14:01:50 CST 2021 jar
+Fri Mar 12 14:01:53 CST 2021 testrigpp 052
+Fri Mar 12 14:02:34 CST 2021 testLocal
+Fri Mar 12 14:03:02 CST 2021 testLocal 052
+Fri Mar 12 14:12:07 CST 2021 testrigpp 052
+Fri Mar 12 14:20:54 CST 2021 src/CondCompArithmeticExpression.java
+Fri Mar 12 16:15:40 CST 2021 src/CondCompVar.java
+Fri Mar 12 16:15:41 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 16:15:42 CST 2021 src/TestIntegration.java
+Fri Mar 12 16:15:43 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:33:16 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:33:29 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:34:12 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:34:36 CST 2021 src/CondCompArithmeticExpression.java
+Fri Mar 12 16:34:41 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:36:22 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:37:34 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:47:45 CST 2021 src/CondCompComparisonOp.java
+Fri Mar 12 16:47:46 CST 2021 src/CondCompVar.java
+Fri Mar 12 16:47:47 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 16:47:48 CST 2021 src/TestIntegration.java
+Fri Mar 12 17:17:20 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 17:19:09 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 17:19:15 CST 2021 jar
+Fri Mar 12 17:19:27 CST 2021 testLocal 052
+Fri Mar 12 17:19:48 CST 2021 testrigpp 052
+Fri Mar 12 17:23:35 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 17:23:37 CST 2021 jar
+Fri Mar 12 17:23:41 CST 2021 testLocal 052
+Fri Mar 12 17:27:13 CST 2021 testLocal 052
+Fri Mar 12 17:38:25 CST 2021 testrigpp 052
+Fri Mar 12 17:40:13 CST 2021 src/CondCompStmtWhen.java
+Fri Mar 12 17:40:14 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 17:40:15 CST 2021 src/TestIntegration.java
+Fri Mar 12 17:40:18 CST 2021 jar
+Fri Mar 12 17:40:22 CST 2021 testLocal 052
+Fri Mar 12 17:43:39 CST 2021 testLocal 052
+Fri Mar 12 17:51:30 CST 2021 src/CondCompDefinedCondition.java
+Fri Mar 12 17:51:33 CST 2021 jar
+Fri Mar 12 17:51:38 CST 2021 testLocal 052
+Fri Mar 12 17:52:57 CST 2021 testLocal
+Fri Mar 12 17:58:51 CST 2021 src/TestIntegration.java
+Fri Mar 12 17:58:56 CST 2021 jar
+Fri Mar 12 18:00:29 CST 2021 testLocal
+Fri Mar 12 18:01:35 CST 2021 testLocal 252
+Fri Mar 12 18:09:39 CST 2021 testLocal 152
+Fri Mar 12 18:12:28 CST 2021 testLocal 352
+Fri Mar 12 18:14:04 CST 2021 src/CobolPreprocessorLexer.g4
+Fri Mar 12 18:14:07 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 12 18:14:14 CST 2021 jar
+Fri Mar 12 18:14:24 CST 2021 testLocal 352
+Fri Mar 12 18:14:34 CST 2021 testLocal 152
+Fri Mar 12 18:14:41 CST 2021 testLocal
+Fri Mar 12 18:15:28 CST 2021 testNist

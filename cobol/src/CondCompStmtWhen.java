@@ -101,6 +101,10 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			return relCond.evaluate();
 		}
 
+		if (this.evaluateSelection1.getBooleanValue() == null) {
+			return false;
+		}
+
 		return this.evaluateSelection1.getBooleanValue();
 
 		/*

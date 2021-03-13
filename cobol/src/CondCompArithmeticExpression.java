@@ -14,6 +14,19 @@ class CondCompArithmeticExpression {
 	private ArrayList<CondCompVar> varList = null;
 	private Integer value = null;
 	private String text = null;
+	private long sortKey = -1;
+
+	public static List<CondCompArithmeticExpression> bunchOfThese(
+				List<CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext> ctxList
+				, ArrayList<CondCompVar> varList) {
+		ArrayList<CondCompArithmeticExpression> ccaeList = new ArrayList<>();
+
+		for (CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ccae: ctxList) {
+			ccaeList.add(new CondCompArithmeticExpression(ccae, varList));
+		}
+
+		return ccaeList;
+	}
 
 	public CondCompArithmeticExpression(
 			CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext ctx
@@ -47,6 +60,7 @@ class CondCompArithmeticExpression {
 			sb.append(cct);
 		}
 		this.text = sb.toString();
+		this.sortKey = tokens.get(0).getSortKey();
 
 		/*
 		Set up for setValue(), which wants a stack of tokens in the
@@ -200,6 +214,10 @@ class CondCompArithmeticExpression {
 
 	public Integer getValue() {
 		return this.value;
+	}
+
+	public long getSortKey() {
+		return this.sortKey;
 	}
 
 	public String toString() {

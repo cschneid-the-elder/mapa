@@ -34,12 +34,12 @@ class CondCompDefinedCondition implements CondCompToken, CondCompCondition {
 
 		this.tn = this.ctx.IDENTIFIER();
 		this.negated = (this.ctx.NOT() != null);
-		this.var = this.varFromList(this.tn, varList);
 
 		long line = this.tn.getSymbol().getLine();
 		long posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
 
+		this.var = this.varFromList(this.tn, varList);
 	}
 
 	private CondCompVar varFromList(TerminalNode t, ArrayList<CondCompVar> varList) {
@@ -49,7 +49,9 @@ class CondCompDefinedCondition implements CondCompToken, CondCompCondition {
 		Collections.reverse(revList);
 		for (CondCompVar v: revList) {
 			if (v.varNameIs(t)) {
-				return v;
+				if (v.getSortKey() < this.getSortKey()) {
+					return v;
+				}
 			}
 		}
 

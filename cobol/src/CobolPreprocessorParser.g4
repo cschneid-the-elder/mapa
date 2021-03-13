@@ -508,11 +508,11 @@ conditionalCompilationRelationalCondition
    ;
 
 conditionalCompilationCondition
-   : (conditionalCompilationBinaryCondition | conditionalCompilationSimpleRelationalCondition | conditionalCompilationDefinedCondition)
+   : (conditionalCompilationSimpleRelationalCondition | conditionalCompilationDefinedCondition | conditionalCompilationBinaryCondition)
    ;
 
 conditionalCompilationSimpleRelationalCondition
-   : ((IDENTIFIER | literal) conditionalCompilationComparisonOp (IDENTIFIER | literal))
+   : ((IDENTIFIER | literal | conditionalCompilationArithmeticExpression) conditionalCompilationComparisonOp (IDENTIFIER | literal | conditionalCompilationArithmeticExpression))
    ;
 
 conditionalCompilationBinaryCondition
