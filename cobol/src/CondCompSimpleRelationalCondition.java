@@ -46,11 +46,15 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 			+ " with IDENTIFIER() == null && literal() == null");
 		}
 
-		if (ccsrc.IDENTIFIER() != null && ccsrc.literal() != null) {
-			if (ccsrc.IDENTIFIER().size() == 0 && ccsrc.literal().size() == 0) {
-				throw new IllegalArgumentException(
-					"ConditionalCompilationSimpleRelationalConditionContext"
-				+ " with IDENTIFIER().size() == 0 && literal().size() == 0");
+		if (ccsrc.conditionalCompilationArithmeticExpression() == null || ccsrc.conditionalCompilationArithmeticExpression().size() == 0) {
+			if (ccsrc.IDENTIFIER() != null && ccsrc.literal() != null) {
+				if (ccsrc.IDENTIFIER().size() == 0 && ccsrc.literal().size() == 0) {
+					throw new IllegalArgumentException(
+						"ConditionalCompilationSimpleRelationalConditionContext with"
+					+ " (ccsrc.conditionalCompilationArithmeticExpression() == null || ccsrc.conditionalCompilationArithmeticExpression().size() == 0)"
+					+ " && (ccsrc.IDENTIFIER() != null && ccsrc.literal() != null)"
+					+ " && (ccsrc.IDENTIFIER().size() == 0 && ccsrc.literal().size() == 0)");
+				}
 			}
 		}
 
@@ -261,8 +265,9 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 		int comparison = 0;
 		Integer exp1Value = this.exp1.getValue();
 
-		if (exp2 != null) {
-			Integer exp2Value = this.exp1.getValue();
+		if (this.exp2 != null) {
+			TestIntegration.LOGGER.finer("    this.exp2 != null");
+			Integer exp2Value = this.exp2.getValue();
 			comparison = exp1Value.compareTo(exp2Value);
 			return this.compare(comparison);
 		}

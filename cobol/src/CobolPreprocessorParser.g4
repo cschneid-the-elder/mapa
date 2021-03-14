@@ -452,8 +452,18 @@ conditionalCompilationSimpleArithmeticExpression
    ;
 */
 
+/*
 conditionalCompilationArithmeticExpression
    : ((conditionalCompilationArithmeticOp | LPARENCHAR)* (conditionalCompilationArithmeticAtom RPARENCHAR* (conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom)?) (LPARENCHAR* conditionalCompilationArithmeticOp LPARENCHAR* (conditionalCompilationArithmeticAtom (conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom)?) RPARENCHAR*)* RPARENCHAR*)
+   ;
+
+conditionalCompilationArithmeticExpression
+   : (LPARENCHAR* (conditionalCompilationArithmeticAtom conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom?) RPARENCHAR* (conditionalCompilationArithmeticOp LPARENCHAR* conditionalCompilationArithmeticAtom RPARENCHAR*)* RPARENCHAR*)
+   ;
+*/
+
+conditionalCompilationArithmeticExpression
+   : ((LPARENCHAR* conditionalCompilationArithmeticAtom conditionalCompilationArithmeticOp)+ (LPARENCHAR* conditionalCompilationArithmeticAtom RPARENCHAR* conditionalCompilationArithmeticOp)* conditionalCompilationArithmeticAtom RPARENCHAR*)
    ;
 
 conditionalCompilationArithmeticAtom
@@ -482,8 +492,8 @@ conditionalCompilationEndIf
    ;
 
 conditionalCompilationEvaluateSelection
-   : (IDENTIFIER
-   | conditionalCompilationArithmeticExpression
+   : (conditionalCompilationArithmeticExpression
+   | IDENTIFIER
    | literal)
    ;
 
@@ -512,7 +522,7 @@ conditionalCompilationCondition
    ;
 
 conditionalCompilationSimpleRelationalCondition
-   : ((IDENTIFIER | literal | conditionalCompilationArithmeticExpression) conditionalCompilationComparisonOp (IDENTIFIER | literal | conditionalCompilationArithmeticExpression))
+   : ((conditionalCompilationArithmeticExpression | IDENTIFIER | literal) conditionalCompilationComparisonOp (conditionalCompilationArithmeticExpression | IDENTIFIER | literal))
    ;
 
 conditionalCompilationBinaryCondition

@@ -178,6 +178,8 @@ class CondCompArithmeticExpression {
 				case ARITHMETIC_ATOM:
 					if (arithmeticOp == null) {
 						result = ((CondCompArithmeticAtom)token).getValue();
+						//TestIntegration.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
+						//return(result);
 					} else {
 						switch(arithmeticOp.getType()) {
 							case NUMOP_MULTIPLY:

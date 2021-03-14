@@ -1545,6 +1545,24 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "IGYARCH4", CallType.CALLBYLITERAL, calledNodes, 5)) failCount++;
 				if (!testCall001(fileName, bareName, "IGYCICS5", CallType.CICSXCTLBYLITERAL, calledNodes, 5)) failCount++;
 				break;
+			case "testantlr053":
+			case "testantlr153":
+			case "testantlr253":
+			case "testantlr353":
+				if (!testCall001(fileName, bareName, "PGM00003", CallType.CALLBYLITERAL, calledNodes, 2)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00009", CallType.CALLBYLITERAL, calledNodes, 2)) failCount++;
+				break;
+			case "testantlr054":
+			case "testantlr154":
+			case "testantlr254":
+			case "testantlr354":
+				if (!testCall001(fileName, bareName, "PGM00004", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00005", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00009", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00011", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00016", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00018", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

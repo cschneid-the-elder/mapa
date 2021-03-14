@@ -48,6 +48,15 @@ class CondCompArithmeticAtom implements CondCompToken {
 					}
 				}
 			}
+			if (this.value == null) {
+				TestIntegration.LOGGER.fine(
+					this.myName
+					+ " unable to find identifier "
+					+ this.tn.getSymbol().getText()
+					+ " in current list of variables "
+					+ this.varList);
+				this.value = Integer.MIN_VALUE;
+			}
 		} else if (this.ctx.ZERO() != null) {
 			this.tn = this.ctx.ZERO();
 			this.setSortKey();

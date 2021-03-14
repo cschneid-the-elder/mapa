@@ -348,6 +348,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private Boolean compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op) {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
+		Integer whenInt1 = this.evaluateSelection1.getNumericValue();
 
 		TestIntegration.LOGGER.finer(
 			this.myName 
@@ -360,11 +361,18 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			"  whenVar1 = |" + whenVar1 + "|");
 		TestIntegration.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
+		TestIntegration.LOGGER.finest(
+			"  whenInt1 = |" + whenInt1 + "|");
 
 		if (whenVar1 == null) {
-			Integer anInt = new Integer(whenTn1.getSymbol().getText());
-			int cmp = anInt.compareTo(evaluateInt);
-			return this.compare(cmp, op);
+			if (whenTn1 == null) {
+				int cmp = whenInt1.compareTo(evaluateInt);
+				return this.compare(cmp, op);
+			} else {
+				Integer anInt = new Integer(whenTn1.getSymbol().getText());
+				int cmp = anInt.compareTo(evaluateInt);
+				return this.compare(cmp, op);
+			}
 		} else {
 			return whenVar1.compareTo(evaluateInt, op);
 		}
