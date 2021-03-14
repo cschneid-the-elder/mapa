@@ -103,7 +103,9 @@ class CondCompEvaluateSelection {
 					+ this.identifier.getSymbol().getText()
 					+ " not found in variable list "
 					+ varList);*/
+				TestIntegration.LOGGER.finest(this.myName + " " + this.var + " is null");
 			} else {
+				TestIntegration.LOGGER.finest(this.myName + " " + this.var + " is not null");
 				switch(this.var.getType()) {
 					case VAR_INTEGER:
 						this.numericValue = this.var.getIntValue();

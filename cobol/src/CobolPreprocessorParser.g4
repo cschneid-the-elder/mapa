@@ -442,26 +442,6 @@ conditionalCompilationDefinePredicate
    | PARAMETER)
    ;
 
-/*
-conditionalCompilationArithmeticExpression
-   : (LPARENCHAR* conditionalCompilationSimpleArithmeticExpression (LPARENCHAR* conditionalCompilationArithmeticOp LPARENCHAR* conditionalCompilationSimpleArithmeticExpression RPARENCHAR*)* RPARENCHAR*)
-   ;
-
-conditionalCompilationSimpleArithmeticExpression
-   : (conditionalCompilationArithmeticAtom (conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom)?)
-   ;
-*/
-
-/*
-conditionalCompilationArithmeticExpression
-   : ((conditionalCompilationArithmeticOp | LPARENCHAR)* (conditionalCompilationArithmeticAtom RPARENCHAR* (conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom)?) (LPARENCHAR* conditionalCompilationArithmeticOp LPARENCHAR* (conditionalCompilationArithmeticAtom (conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom)?) RPARENCHAR*)* RPARENCHAR*)
-   ;
-
-conditionalCompilationArithmeticExpression
-   : (LPARENCHAR* (conditionalCompilationArithmeticAtom conditionalCompilationArithmeticOp conditionalCompilationArithmeticAtom?) RPARENCHAR* (conditionalCompilationArithmeticOp LPARENCHAR* conditionalCompilationArithmeticAtom RPARENCHAR*)* RPARENCHAR*)
-   ;
-*/
-
 conditionalCompilationArithmeticExpression
    : ((LPARENCHAR* conditionalCompilationArithmeticAtom conditionalCompilationArithmeticOp)+ (LPARENCHAR* conditionalCompilationArithmeticAtom RPARENCHAR* conditionalCompilationArithmeticOp)* conditionalCompilationArithmeticAtom RPARENCHAR*)
    ;

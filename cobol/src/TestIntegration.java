@@ -1563,6 +1563,16 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "PGM00016", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
 				if (!testCall001(fileName, bareName, "PGM00018", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
 				break;
+			case "testantlr055":
+			case "testantlr155":
+			case "testantlr255":
+			case "testantlr355":
+				if (!testCall001(fileName, bareName, "PGM00004", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00005", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00010", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00011", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00013", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
