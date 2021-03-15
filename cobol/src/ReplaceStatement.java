@@ -6,7 +6,6 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 	private String myName = this.getClass().getName();
 	public CobolPreprocessorParser.ReplaceByStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_REPLACE;
-	//private int line = -1;
 	private int startLine = -1;
 	private int endLine = -1; //end of this REPLACE statement
 	private int stopLine = -1; //end of the scope of this REPLACE statement
@@ -15,7 +14,6 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 
 	ReplaceStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) {
 		this.ctx = ctx;
-		//this.line = this.ctx.REPLACE().getSymbol().getLine();
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
 	}

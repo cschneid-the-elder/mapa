@@ -106,23 +106,6 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		}
 
 		return this.evaluateSelection1.getBooleanValue();
-
-		/*
-		CondCompVar evaluateVar = this.evaluateStmt.getVar();
-		if (evaluateVar != null && evaluateVar.isBoolean()) {
-			return evaluateVar.getBoolValue();
-		}
-
-		TestIntegration.LOGGER.warning(
-			this.myName
-			+ " "
-			+ this
-			+ " this.ctx.OTHER() == null && this.relCond == null"
-			+ " && (evaluateVar == null || evaluateVar.getType() != CondCompTokenType.VAR_BOOLEAN)"
-			);
-
-		return false;		
-		*/
 	}
 
 	/**

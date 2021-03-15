@@ -96,13 +96,7 @@ class CondCompEvaluateSelection {
 					}
 				}
 			}
-			if (this.var == null) {/*
-				throw new IllegalArgumentException(
-					this.myName
-					+ " identifier "
-					+ this.identifier.getSymbol().getText()
-					+ " not found in variable list "
-					+ varList);*/
+			if (this.var == null) {
 				TestIntegration.LOGGER.finest(this.myName + " " + this.var + " is null");
 			} else {
 				TestIntegration.LOGGER.finest(this.myName + " " + this.var + " is not null");
