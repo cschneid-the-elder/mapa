@@ -9,6 +9,7 @@ import java.util.logging.ConsoleHandler;
 import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.SimpleFormatter;
+import java.util.concurrent.atomic.AtomicReference;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
@@ -47,7 +48,7 @@ Syntax: <code>java -jar CallTree.jar -help</code>
 public class TestIntegration{
 
 public static final Logger LOGGER = Logger.getLogger(TestIntegration.class.getName());
-public static ArrayList<CopyStatementContextWrapper> copiesForFile = new ArrayList<>();
+public static ArrayList<CopyStatementContextWrapper> copiesForFile = new ArrayList<>(); //TODO needed?
 public static ArrayList<DDNode> dataNodes = new ArrayList<>();
 public static TheCLI CLI = null;
 
@@ -82,22 +83,27 @@ public static void main(String[] args) throws Exception {
 		LOGGER.info("Processing " + aFileName);
 		dataNodes = new ArrayList<>();
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+		ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
+		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 
 		idDivFound = lookForIdDiv(aFileName);
-		if (idDivFound) {
-			fileName = lookForCopyStatements(aFileName, baseDir, initFileNm);
-			fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
-			fileName = lookForCompilerOptions(fileName, baseDir, initFileNm);
-			calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
-			allTheCalledNodes.addAll(calledNodes);
-			if (CLI.unitTest) {
-				if (!testFor(aFileName, dataNodes, calledNodes)) failCount++;
-			}
-			LOGGER.fine(aFileName + " calls " + calledNodes.size() + " modules");
-		} else {
+		if (!idDivFound) {
 			LOGGER.info(aFileName + " not COBOL?");
+			continue;
 		}
+		fileName = processCDS(aFileName, baseDir);
+		/*
+		fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
+		fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+		fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
+		*/
+		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
+		allTheCalledNodes.addAll(calledNodes);
+		if (CLI.unitTest) {
+			if (!testFor(aFileName, dataNodes, calledNodes)) failCount++;
+		}
+		LOGGER.fine(aFileName + " calls " + calledNodes.size() + " modules");
 	}
 
 	LOGGER.fine("allTheCalledNodes: " + allTheCalledNodes);
@@ -146,6 +152,237 @@ public static void main(String[] args) throws Exception {
 		return lib;
 	}
 
+	public static CompilerDirectingStatement cdsInList(
+			int line
+			, ArrayList<CompilerDirectingStatement> compDirStmts) {
+		for (CompilerDirectingStatement cds: compDirStmts) {
+			/*LOGGER.finest("cds = " + cds + " line = " + line);*/
+			if (line == cds.getLine()) return cds;
+		}
+
+		return null;
+	}
+
+	@SuppressWarnings({"fallthrough"})
+	public static String processCDS(
+			String aFileName
+			, File baseDir
+			) throws Exception {
+		LOGGER.fine("processCDS()");
+
+		ArrayList<CondCompVar> compOptDefines = new ArrayList<>(CLI.compOptDefines);
+		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
+		String initFileNm = new File(aFileName).getName();
+		String fileName = initFileNm;
+		Boolean done = false;
+		int nbCopies = 0;
+		int sanityCheck = 0;
+		int iteration = 0;
+
+		lookForCompilerDirectingStatements(
+						aFileName
+						, baseDir
+						, initFileNm
+						, compDirStmts
+						, compOptDefines);
+		LOGGER.finest("compOptDefines = " + compOptDefines);
+		fileName = rewriteWithoutCompileOptionsStatements(compDirStmts, aFileName, baseDir, initFileNm);
+		while (!done) {
+			sanityCheck++;
+			LOGGER.finest("sanityCheck = " + sanityCheck);
+			if (sanityCheck > 100) {
+				throw new IllegalArgumentException(
+					"sanity check exceeded ("
+					+ sanityCheck
+					+ ") processing "
+					+ aFileName
+					+ " into "
+					+ fileName);
+			}
+			compDirStmts.clear();
+			lookForCompilerDirectingStatements(
+							fileName
+							, baseDir
+							, initFileNm
+							, compDirStmts
+							, compOptDefines);
+			nbCopies = countCopyCDS(compDirStmts);
+			/*for (CompilerDirectingStatement copy: compDirStmts) {
+				if (copy.getType() == STMT_COPY) {
+					nbCopies++;
+				}
+			}*/
+			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
+			File tmp = File.createTempFile("CallTree-" + initFileNm + "-" + String.format("%05d", iteration) + "-", "-cbl", baseDir);
+			iteration++;
+			CLI.setPosixAttributes(tmp);
+			if (CLI.saveTemp) {
+			} else {
+				tmp.deleteOnExit();
+			}
+			LOGGER.finest("reading from " + fileName);
+			LOGGER.finest("writing to " + tmp.getPath());
+			PrintWriter out = new PrintWriter(tmp);
+			Boolean justWriteTheRest = false;
+			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
+			ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
+			ReplaceStatement currReplace = null;
+			int replaceStart = -1;
+			int replaceStop = -1;
+
+			String inLine = src.readLine();
+			while (inLine != null) {
+				StringBuilder inLineSB = new StringBuilder(inLine);
+				CompilerDirectingStatement cds = cdsInList(src.getLineNumber(), compDirStmts);
+				LOGGER.finest("  justWriteTheRest = |" + justWriteTheRest + "|" + "  cds = |" + cds + "|" + "  truthiness.peek() = |" + truthiness.peek() + "|");
+				if (justWriteTheRest) {
+					/*
+					A COPY statement has been encountered and its contents have been
+					incorporated into the output file.  Just write the rest of the
+					input file to the output file.  This is done because the contents
+					of the COPY member may contain compiler directing statements which
+					have not been parsed and are not present in compDirStmts.  These
+					will be caught in the next iteration.
+					*/
+				} else if (cds == null) {
+					/*
+					cds == null indicates the current line is not a compiler directing
+					statement.  If the current compiler directing statement (IF or WHEN)
+					is true, or there is no current compiler directing statement then
+					just leave the input as is, otherwise comment it out.  Apply the
+					current REPLACE statement if it exists and all COPY statements have
+					been resolved.
+					*/
+					if (truthiness.peek() == null || truthiness.peek()) {
+					} else {
+						if (inLineSB.length() > 6) {
+							inLineSB.setCharAt(6, '*');
+						}
+					}
+					inLine = inLineSB.toString();
+					if (nbCopies == 0) {
+						if (currReplace == null) {
+						} else {
+							inLine = currReplace.applyTo(inLineSB.toString());
+						}
+					}
+				} else {
+					/*
+					State machine for interpreting compiler directing statements.
+					*/
+					LOGGER.finest("cds.getType() = " + cds.getType());
+					switch(cds.getType()) {
+						case STMT_EVALUATE:
+							whenStrewth.push(new ArrayList<Boolean>());
+							break;
+						case STMT_WHEN:
+							if (truthiness.peek() != null) {
+								truthiness.pop();
+							}
+							Boolean prevTruth1 = true;
+							if (truthiness.peek() != null) {
+								prevTruth1 = truthiness.peek();
+							}
+							if (prevTruth1) {
+								Boolean strewth = ((ConditionalCompilationStatement)cds).strewth();
+								if (whenStrewth.peek().contains(true)) {
+									LOGGER.finest("this WHEN is disregarded because a previous WHEN tested TRUE");
+									truthiness.push(false);
+								} else {
+									truthiness.push(strewth && prevTruth1);
+								}
+								whenStrewth.peek().add(strewth);
+							} else {
+								LOGGER.finest("prevTruth1 == false so " + cds + " strewth() not executed");
+								truthiness.push(false);
+							}
+							break;
+						case STMT_END_EVALUATE:
+							whenStrewth.pop();
+							truthiness.pop();
+							break;
+						case STMT_ELSE:
+							truthiness.pop();
+						case STMT_IF: // intentional fall-through!
+							Boolean prevTruth2 = true;
+							if (truthiness.peek() != null) {
+								prevTruth2 = truthiness.peek();
+							}
+							if (prevTruth2) {
+								truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth2);
+							} else {
+								LOGGER.finest("prevTruth2 == false so " + cds + " strewth() not executed");
+								truthiness.push(false);
+							}
+							break;
+						case STMT_END_IF:
+							truthiness.pop();
+							break;
+						case STMT_COPY:
+							if (truthiness.peek() == null || truthiness.peek()) {
+								((CopyStatement)cds).apply(src, out, inLineSB.toString());
+								justWriteTheRest = true;
+								inLineSB.delete(0, inLineSB.length());
+							} else {
+								if (inLineSB.length() > 6) {
+									inLineSB.setCharAt(6, '*');
+								}
+							}
+							inLine = inLineSB.toString();
+							break;
+						case STMT_REPLACE:
+							if (nbCopies == 0) {
+								if (truthiness.peek() == null || truthiness.peek()) {
+									currReplace = (ReplaceStatement)cds;
+									replaceStart = cds.getLine();
+									replaceStop = cds.getEndLine();
+								}
+							}
+							break;
+						case STMT_REPLACE_OFF:
+							if (nbCopies == 0) {
+								if (truthiness.peek() == null || truthiness.peek()) {
+									currReplace = null;
+									replaceStart = cds.getLine();
+									replaceStop = cds.getEndLine();
+								}
+							}
+							break;
+						default:
+							break;
+					}
+				}
+				if (nbCopies == 0 
+				&& (src.getLineNumber() >= replaceStart && src.getLineNumber() <= replaceStop)) {
+					LOGGER.finest("not writing |" + inLine + "| as it seems to be part of a REPLACE [OFF] statement");
+				} else {
+					LOGGER.finest("writing  |" + inLine + "|");
+					out.println(inLine);
+				}
+				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
+				inLine = src.readLine();
+			}
+			src.close();
+			out.close();
+			fileName = tmp.getPath();
+			sanityCheck = 0;
+			if (nbCopies == 0) done = true;
+		}
+
+		return fileName;
+	}
+ 
+	public static int countCopyCDS(ArrayList<CompilerDirectingStatement> compDirStmts) {
+		int nbCopies = 0;
+		for (CompilerDirectingStatement copy: compDirStmts) {
+			if (copy.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COPY) {
+				nbCopies++;
+			}
+		}
+
+		return nbCopies;
+	}
+
 	/**
 	It turns out little is required of a COBOL program qua being a
 	COBOL program other than the Identification Division.  So we look
@@ -172,11 +409,40 @@ public static void main(String[] args) throws Exception {
 		
 	}
 
+	public static void lookForCompilerDirectingStatements(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			, ArrayList<CompilerDirectingStatement> compDirStmts
+			, ArrayList<CondCompVar> compOptDefines
+			) throws Exception {
+		LOGGER.fine("lookForCompilerDirectingStatements");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CompilerDirectingStatementListener listener = 
+			new CompilerDirectingStatementListener(compDirStmts, compOptDefines);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("compDirStmts: " + compDirStmts);
+		LOGGER.finest("compOptDefines: " + compOptDefines);
+
+	}
+
 	/**
 	Iteratively look for COPY statements and resolve them, rewriting
 	the source file with the content of the target of the COPY statements
 	each time.  COPY statements can contain other nested COPY statements.
-	*/
 	public static String lookForCopyStatements(
 						String initFileName
 						, File baseDir
@@ -218,6 +484,7 @@ public static void main(String[] args) throws Exception {
 
 		return fileName;
 	}
+	*/
 
 	/**
 	Here we expand the COPY statements, applying the REPLACING phrase(s).
@@ -241,7 +508,27 @@ public static void main(String[] args) throws Exception {
 	discard all bytes from (and including) the 'C' in COPY through the terminating
 	'.' at the end of the COPY statement.
 
-	*/	
+	public static String applyCopyStatement(
+							CopyStatement copyStmt
+							, String fileName
+							, File baseDir
+							, String initFileNm
+							) throws IOException {
+		LOGGER.fine("applyCopyStatement()");
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+
+		copyStmt.apply(src, out);
+		return tmp.getPath();
+	}
+
 	public static String applyCopyStatements(
 							ArrayList<CopyStatementContextWrapper> copies
 							, String fileName
@@ -273,11 +560,11 @@ public static void main(String[] args) throws Exception {
 				int startLine = copy.startLine();
 				int endLine = copy.endLine();
 				if (copyDone.get(copy)) {
-					/*
-					 already processed this COPY statement, no need for further action
-					 unless all COPY statements have been processed, see code following
-					 this for () loop
-					*/
+					//
+					// already processed this COPY statement, no need for further action
+					// unless all COPY statements have been processed, see code following
+					// this for () loop
+					//
 					LOGGER.finer("already processed this COPY statement");
 				} else if (src.getLineNumber() < startLine || src.getLineNumber() > endLine) {
 					// outside of this COPY statement
@@ -394,6 +681,7 @@ public static void main(String[] args) throws Exception {
 			for (String line: list) out.println(copy.applyReplacingPhrases(line));
 		}
 	}
+	*/
 
 	public static String lookForReplaceStatements(
 						String fileName
@@ -492,11 +780,11 @@ public static void main(String[] args) throws Exception {
 	/**
 	Find compiler options embedded in source, rewrite file without
 	them if any are found.
-	*/
 	public static String lookForCompilerOptions(
 			String fileName
 			, File baseDir
 			, String initFileNm
+			, ArrayList<CondCompVar> compOptDefines
 			) throws Exception {
 		LOGGER.fine("lookForCompilerOptions");
 		ArrayList<CompilerOptionsWrapper> compileOpts = new ArrayList<>();
@@ -510,7 +798,7 @@ public static void main(String[] args) throws Exception {
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		CompilerOptionsListener listener = new CompilerOptionsListener(compileOpts);
+		CompilerOptionsListener listener = new CompilerOptionsListener(compileOpts, compOptDefines);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
@@ -523,13 +811,14 @@ public static void main(String[] args) throws Exception {
 		return rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
 
 	}
+	*/
 
 	/**
 	Return the name of a temporary file containing the source (as preprocessed
 	up to this point) without any compile options (PROCESS or CBL statements).
 	*/
 	public static String rewriteWithoutCompileOptionsStatements(
-			ArrayList<CompilerOptionsWrapper> compileOpts
+			ArrayList<CompilerDirectingStatement> compDirStmts
 			, String fileName
 			, File baseDir
 			, String initFileNm
@@ -549,14 +838,18 @@ public static void main(String[] args) throws Exception {
 
 		while (inLine != null) {
 			Boolean isCompileOptLine = false;
-			for (CompilerOptionsWrapper cow: compileOpts) {
-				if (cow.line() == src.getLineNumber()) {
+			for (CompilerDirectingStatement cds: compDirStmts) {
+				//LOGGER.finest("cds.getType() = " + cds.getType());
+				if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COMPILE_OPTION 
+				&& cds.getLine() == src.getLineNumber()) {
 					isCompileOptLine = true;
 					break;
 				}
 			}
+			LOGGER.finest("isCompileOptLine = " + isCompileOptLine);
 			if (!isCompileOptLine) {
 				out.println(inLine);
+				LOGGER.finest("output line = |" + inLine + "|");
 			}
 			inLine = src.readLine();
 		}
@@ -564,6 +857,7 @@ public static void main(String[] args) throws Exception {
 		src.close();
 		out.close();
 		fileName = tmp.getPath();
+		LOGGER.finest("rewritten w/o compile option statements to " + fileName);
 		return fileName;
 	}
 
@@ -692,7 +986,7 @@ public static void main(String[] args) throws Exception {
 	/**
 	Create a directory to hold temporary files used in processing.  This way,
 	they're all confined together and can be easily disposed of if the
-	-saveTemp option was requested.
+	<code>-saveTemp</code> option was requested.
 	*/
 	public static File newTempDir() throws IOException {
 		File tmpDir = Files.createTempDirectory("CallTree-").toFile();
@@ -1080,6 +1374,204 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "CEE3ABD", CallType.CALLBYLITERAL, calledNodes, 1)) failCount++;
+				break;
+			case "testantlr034":
+			case "testantlr134":
+			case "testantlr234":
+			case "testantlr334":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr035":
+			case "testantlr135":
+			case "testantlr235":
+			case "testantlr335":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr036":
+			case "testantlr136":
+			case "testantlr236":
+			case "testantlr336":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr037":
+			case "testantlr137":
+			case "testantlr237":
+			case "testantlr337":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr038":
+			case "testantlr138":
+			case "testantlr238":
+			case "testantlr338":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr039":
+			case "testantlr139":
+			case "testantlr239":
+			case "testantlr339":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr040":
+			case "testantlr140":
+			case "testantlr240":
+			case "testantlr340":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr041":
+			case "testantlr141":
+			case "testantlr241":
+			case "testantlr341":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr042":
+			case "testantlr142":
+			case "testantlr242":
+			case "testantlr342":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr043":
+			case "testantlr143":
+			case "testantlr243":
+			case "testantlr343":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr044":
+			case "testantlr144":
+			case "testantlr244":
+			case "testantlr344":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				break;
+			case "testantlr045":
+			case "testantlr145":
+			case "testantlr245":
+			case "testantlr345":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr046":
+			case "testantlr146":
+			case "testantlr246":
+			case "testantlr346":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr047":
+			case "testantlr147":
+			case "testantlr247":
+			case "testantlr347":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
+				break;
+			case "testantlr048":
+			case "testantlr148":
+			case "testantlr248":
+			case "testantlr348":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr049":
+			case "testantlr149":
+			case "testantlr249":
+			case "testantlr349":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0004", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0005", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0006", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0007", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0008", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "JULIA", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "ELIOT", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "PENNY", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "MARGOT", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				if (!testCall001(fileName, bareName, "ALICE", CallType.CALLBYLITERAL, calledNodes, 13)) failCount++;
+				break;
+			case "testantlr050":
+			case "testantlr150":
+			case "testantlr250":
+			case "testantlr350":
+				if (!testCall001(fileName, bareName, "D#IS#7", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "E#IS#9", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "F#IS#7", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
+				break;
+			case "testantlr051":
+			case "testantlr151":
+			case "testantlr251":
+			case "testantlr351":
+				if (!testCall001(fileName, bareName, "PGM0001A", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM0001D", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM0001E", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM0001G", CallType.CALLBYLITERAL, calledNodes, 4)) failCount++;
+				break;
+			case "testantlr052":
+			case "testantlr152":
+			case "testantlr252":
+			case "testantlr352":
+				if (!testCall001(fileName, bareName, "OTHER#1", CallType.CALLBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "VAR1#2", CallType.CALLBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "VAR2#3", CallType.CALLBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "IGYARCH4", CallType.CALLBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "IGYCICS5", CallType.CICSXCTLBYLITERAL, calledNodes, 5)) failCount++;
+				break;
+			case "testantlr053":
+			case "testantlr153":
+			case "testantlr253":
+			case "testantlr353":
+				if (!testCall001(fileName, bareName, "PGM00003", CallType.CALLBYLITERAL, calledNodes, 2)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00009", CallType.CALLBYLITERAL, calledNodes, 2)) failCount++;
+				break;
+			case "testantlr054":
+			case "testantlr154":
+			case "testantlr254":
+			case "testantlr354":
+				if (!testCall001(fileName, bareName, "PGM00004", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00005", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00009", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00011", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00016", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00018", CallType.CICSLINKBYLITERAL, calledNodes, 6)) failCount++;
+				break;
+			case "testantlr055":
+			case "testantlr155":
+			case "testantlr255":
+			case "testantlr355":
+				if (!testCall001(fileName, bareName, "PGM00004", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00005", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00010", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00011", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00013", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
 				break;
 			default:
 				LOGGER.info("NONE " + fileName);

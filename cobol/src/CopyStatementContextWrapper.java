@@ -1,12 +1,23 @@
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class CopyStatementContextWrapper {
+public class CopyStatementContextWrapper implements CompilerDirectingStatement {
 
-	public CobolPreprocessorParser.CopyStatementContext ctx = null;
+	private CobolPreprocessorParser.CopyStatementContext ctx = null;
+	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COPY;
+	private int line = -1;
 
 	CopyStatementContextWrapper(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
+		this.line = this.ctx.COPY().getSymbol().getLine();
+	}
+
+	public int getLine() {
+		return this.line;
+	}
+
+	public CompilerDirectingStatementType getType() {
+		return this.type;
 	}
 
 	int startLine() {
@@ -169,140 +180,140 @@ public class CopyStatementContextWrapper {
 	}
 
 	public String toString() {
-		String aString = new String("copy @" + this.ctx.start.getLine() + ": " + this.ctx.getText());
-		aString = aString.concat("\n\tstop = " + this.ctx.stop.getLine());
-		aString = aString.concat("\n\tcopySource = " + this.ctx.copySource().getText());
+		StringBuilder sb = new StringBuilder("copy @" + this.ctx.start.getLine() + ": " + this.ctx.getText());
+		sb.append("\n\tstop = " + this.ctx.stop.getLine());
+		sb.append("\n\tcopySource = " + this.ctx.copySource().getText());
 		if (this.ctx.copySource().literal() != null) {
-			aString = aString.concat("\n\tcopySource.literal = " + this.ctx.copySource().literal().getText());
+			sb.append("\n\tcopySource.literal = " + this.ctx.copySource().literal().getText());
 		} else if (this.ctx.copySource().cobolWord() != null) {
-			aString = aString.concat("\n\tcopySource.cobolWord = " + this.ctx.copySource().cobolWord().getText());
+			sb.append("\n\tcopySource.cobolWord = " + this.ctx.copySource().cobolWord().getText());
 		} else if (this.ctx.copySource().filename() != null) {
-			aString = aString.concat("\n\tcopySource.filename = " + this.ctx.copySource().filename().getText());
+			sb.append("\n\tcopySource.filename = " + this.ctx.copySource().filename().getText());
 		}
 
 		if (this.ctx.replacingPhrase() == null) {
-			aString = aString.concat("\n\tcopy.replacingPhrase() = null");
+			sb.append("\n\tcopy.replacingPhrase() = null");
 		} else {
 			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
 				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
 					if (rcc.replaceable().pseudoText() == null) {
-						aString = aString.concat("\n\treplaceable().pseudoText() = null");
+						sb.append("\n\treplaceable().pseudoText() = null");
 					} else {
 						if (rcc.replaceable().pseudoText().charData() == null) {
-							aString = aString.concat("\n\treplaceable().pseudoText().charData() = null");
+							sb.append("\n\treplaceable().pseudoText().charData() = null");
 						} else {
 							if (rcc.replaceable().pseudoText().charData().charDataLine() == null) {
-								aString = aString.concat("\n\treplaceable().pseudoText().charData().charDataLine() = null");
+								sb.append("\n\treplaceable().pseudoText().charData().charDataLine() = null");
 							} else {
 								if (rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() == null) {
-									aString = aString.concat("\n\treplaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() = null");
+									sb.append("\n\treplaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() = null");
 								} else {
 									if (rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) == null) {
-										aString = aString.concat("\n\treplaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) = null");
+										sb.append("\n\treplaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) = null");
 									} else {
-										aString = aString.concat("\n\treplaceable().pseudoText() = " + rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0).getText());
+										sb.append("\n\treplaceable().pseudoText() = " + rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0).getText());
 									}
 								}
 							}
 						}
 					}
 					if (rcc.replacement().pseudoText() == null) {
-						aString = aString.concat("\n\treplacement().pseudoText() = null");
+						sb.append("\n\treplacement().pseudoText() = null");
 					} else {
 						if (rcc.replacement().pseudoText().charData() == null) {
-							aString = aString.concat("\n\treplacement().pseudoText().charData() = null");
+							sb.append("\n\treplacement().pseudoText().charData() = null");
 						} else {
 							if (rcc.replacement().pseudoText().charData().charDataLine() == null) {
-								aString = aString.concat("\n\treplacement().pseudoText().charData().charDataLine() = null");
+								sb.append("\n\treplacement().pseudoText().charData().charDataLine() = null");
 							} else {
 								if (rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() == null) {
-									aString = aString.concat("\n\treplacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() = null");
+									sb.append("\n\treplacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() = null");
 								} else {
 									if (rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) == null) {
-										aString = aString.concat("\n\treplacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) = null");
+										sb.append("\n\treplacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) = null");
 									} else {
-										aString = aString.concat("\n\treplacement().pseudoText() = " + rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0).getText());
+										sb.append("\n\treplacement().pseudoText() = " + rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0).getText());
 									}
 								}
 							}
 						}
 					}
 					if (rcc.replaceable().cobolWord() == null) {
-						aString = aString.concat("\n\treplaceable().cobolWord() = null");
+						sb.append("\n\treplaceable().cobolWord() = null");
 					} else {
-						aString = aString.concat("\n\treplaceable().cobolWord() = " + rcc.replaceable().cobolWord().IDENTIFIER().getText());
+						sb.append("\n\treplaceable().cobolWord() = " + rcc.replaceable().cobolWord().IDENTIFIER().getText());
 					}
 					if (rcc.replacement().cobolWord() == null) {
-						aString = aString.concat("\n\treplacement().cobolWord() = null");
+						sb.append("\n\treplacement().cobolWord() = null");
 					} else {
-						aString = aString.concat("\n\treplacement().cobolWord() = " + rcc.replacement().cobolWord().IDENTIFIER().getText());
+						sb.append("\n\treplacement().cobolWord() = " + rcc.replacement().cobolWord().IDENTIFIER().getText());
 					}
 					if (rcc.replaceable().literal() == null) {
-						aString = aString.concat("\n\treplaceable().literal() = null");
+						sb.append("\n\treplaceable().literal() = null");
 					} else {
 						if (rcc.replaceable().literal().NONNUMERICLITERAL() == null) {
-							aString = aString.concat("\n\treplaceable().literal().NONNUMERICLITERAL() = null");
+							sb.append("\n\treplaceable().literal().NONNUMERICLITERAL() = null");
 						} else {
-							aString = aString.concat("\n\treplaceable().literal() = " + rcc.replaceable().literal().NONNUMERICLITERAL().getText());
+							sb.append("\n\treplaceable().literal() = " + rcc.replaceable().literal().NONNUMERICLITERAL().getText());
 						}
 					}
 					if (rcc.replacement().literal() == null) {
-						aString = aString.concat("\n\treplacement().literal() = null");
+						sb.append("\n\treplacement().literal() = null");
 					} else {
 						if (rcc.replacement().literal().NONNUMERICLITERAL() == null) {
-							aString = aString.concat("\n\treplacement).literal().NONNUMERICLITERAL() = null");
+							sb.append("\n\treplacement).literal().NONNUMERICLITERAL() = null");
 						} else {
-							aString = aString.concat("\n\treplacement().literal() = " + rcc.replacement().literal().NONNUMERICLITERAL().getText());
+							sb.append("\n\treplacement().literal() = " + rcc.replacement().literal().NONNUMERICLITERAL().getText());
 						}
 					}
 					if (rcc.replaceable().literal() == null) {
-						aString = aString.concat("\n\treplaceable().literal() = null");
+						sb.append("\n\treplaceable().literal() = null");
 					} else {
 						if (rcc.replaceable().literal().NUMERICLITERAL() == null) {
-							aString = aString.concat("\n\treplaceable().literal().NUMERICLITERAL() = null");
+							sb.append("\n\treplaceable().literal().NUMERICLITERAL() = null");
 						} else {
-							aString = aString.concat("\n\treplaceable().literal() = " + rcc.replaceable().literal().NUMERICLITERAL().getText());
+							sb.append("\n\treplaceable().literal() = " + rcc.replaceable().literal().NUMERICLITERAL().getText());
 						}
 					}
 					if (rcc.replacement().literal() == null) {
-						aString = aString.concat("\n\treplacement().literal() = null");
+						sb.append("\n\treplacement().literal() = null");
 					} else {
 						if (rcc.replacement().literal().NUMERICLITERAL() == null) {
-							aString = aString.concat("\n\treplacement).literal().NUMERICLITERAL() = null");
+							sb.append("\n\treplacement).literal().NUMERICLITERAL() = null");
 						} else {
-							aString = aString.concat("\n\treplacement().literal() = " + rcc.replacement().literal().NUMERICLITERAL().getText());
+							sb.append("\n\treplacement().literal() = " + rcc.replacement().literal().NUMERICLITERAL().getText());
 						}
 					}
 					if (rcc.replaceable().charDataLine() == null) {
-						aString = aString.concat("\n\treplaceable().charDataLine() = null");
+						sb.append("\n\treplaceable().charDataLine() = null");
 					} else {
 						if (rcc.replaceable().charDataLine().cobolWord() == null) {
-							aString = aString.concat("\n\treplaceable().charDataLine().cobolWord() = null");
+							sb.append("\n\treplaceable().charDataLine().cobolWord() = null");
 						} else {
 							if (rcc.replaceable().charDataLine().cobolWord(0) == null) {
-								aString = aString.concat("\n\treplaceable().charDataLine().cobolWord(0) = null");
+								sb.append("\n\treplaceable().charDataLine().cobolWord(0) = null");
 							} else {
 								if (rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER() == null) {
-									aString = aString.concat("\n\treplaceable().charDataLine().cobolWord(0).IDENTIFIER() = null");
+									sb.append("\n\treplaceable().charDataLine().cobolWord(0).IDENTIFIER() = null");
 								} else {
-									aString = aString.concat("\n\treplaceable().charDataLine() = " + rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER().getText());
+									sb.append("\n\treplaceable().charDataLine() = " + rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER().getText());
 								}
 							}
 						}
 					}
 					if (rcc.replacement().charDataLine() == null) {
-						aString = aString.concat("\n\treplacement().charDataLine() = null");
+						sb.append("\n\treplacement().charDataLine() = null");
 					} else {
 						if (rcc.replacement().charDataLine().cobolWord() == null) {
-							aString = aString.concat("\n\treplacement().charDataLine().cobolWord() = null");
+							sb.append("\n\treplacement().charDataLine().cobolWord() = null");
 						} else {
 							if (rcc.replacement().charDataLine().cobolWord(0) == null) {
-								aString = aString.concat("\n\treplacement().charDataLine().cobolWord(0) = null");
+								sb.append("\n\treplacement().charDataLine().cobolWord(0) = null");
 							} else {
 								if (rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER() == null) {
-									aString = aString.concat("\n\treplacement().charDataLine().cobolWord(0).IDENTIFIER() = null");
+									sb.append("\n\treplacement().charDataLine().cobolWord(0).IDENTIFIER() = null");
 								} else {
-									aString = aString.concat("\n\treplacement().charDataLine() = " + rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER().getText());
+									sb.append("\n\treplacement().charDataLine() = " + rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER().getText());
 								}
 							}
 						}
@@ -311,7 +322,7 @@ public class CopyStatementContextWrapper {
 			}
 		}
 
-		return aString;
+		return sb.toString();
 	}
 
 }

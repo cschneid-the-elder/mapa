@@ -1,0 +1,4 @@
+       >>DEFINE IGY-CICS
+       >>DEFINE IGY-ARCH 9
+       >>DEFINE IGY-SQLIMS B'0'
+

@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class CopyListener extends CobolPreprocessorBaseListener {
+public class CopyListener extends CobolPreprocessorParserBaseListener {
 	public ArrayList<CopyStatementContextWrapper> copies = null;
 	public String callingModuleName = null;
 

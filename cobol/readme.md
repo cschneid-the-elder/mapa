@@ -95,6 +95,5 @@ Worse, of course, is that in a dynamic call environment, which modules you invok
  + `COPY REPLACING` and `REPLACE` statements that piss me off.  Take a look in SM206A and SM208A in testdata/nist for examples.
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
  + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
- + Conditional compilation statements.  At least, not yet.
 
 

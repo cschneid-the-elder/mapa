@@ -5,6 +5,9 @@ import java.nio.file.attribute.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.commons.cli.*;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class TheCLI{
 	public String[] args = null;
@@ -18,6 +21,7 @@ public class TheCLI{
 	public String outFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
+	public ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
 
 	public TheCLI(String[] args) throws Exception {
 
@@ -31,6 +35,8 @@ public class TheCLI{
 			, "name of a single path in which to locate copybooks, takes precedence over the copyList option");
 		Option copyList = new Option("copyList", true
 			, "name of a file containing a list of paths in which to locate copybooks");
+		Option defList = new Option("defList", true
+			, "name of a file containing a list of >>DEFINE statements for conditional compilation variables and their values");
 		Option out = new Option("out", true
 			, "name of a file in which to store the CALLs, EXEC CICS LINKs, EXEC CICS XCTLs, and EXEC SQL CALLs");
 		Option logLevel = new Option("logLevel", true
@@ -45,6 +51,7 @@ public class TheCLI{
 		this.options.addOption(fileList);
 		this.options.addOption(copy);
 		this.options.addOption(copyList);
+		this.options.addOption(defList);
 		this.options.addOption(out);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
@@ -83,6 +90,10 @@ public class TheCLI{
 			TestIntegration.LOGGER.config("Either the copy or the copyList option must be provided");
 			this.formatter.printHelp( "CallTree", options, true );
 			System.exit(16);
+		}
+
+		if (this.line.hasOption("defList")) {
+			this.parseDefines(this.line.getOptionValue("defList"));
 		}
 
 		if (this.line.hasOption("out")) {
@@ -139,6 +150,31 @@ public class TheCLI{
 			this.saveTemp = true;
 			TestIntegration.LOGGER.info("temporary files will be preserved");
 		}
+
+	}
+
+	private void parseDefines(String fileName) throws Exception {
+		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
+
+		TestIntegration.LOGGER.fine("parseDefines");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CompilerDirectingStatementListener listener = 
+			new CompilerDirectingStatementListener(compDirStmts, this.compOptDefines);
+
+		TestIntegration.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		TestIntegration.LOGGER.finest("compOptDefines: " + this.compOptDefines);
 
 	}
 

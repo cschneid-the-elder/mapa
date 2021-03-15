@@ -4,7 +4,7 @@ import java.util.logging.Logger;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class ReplaceListener extends CobolPreprocessorBaseListener {
+public class ReplaceListener extends CobolPreprocessorParserBaseListener {
 	public ArrayList<ReplaceStatementContextWrapper> replaces = null;
 	public String callingModuleName = null;
 

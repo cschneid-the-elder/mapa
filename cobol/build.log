@@ -436,3 +436,1485 @@ Thu Jul 9 15:49:27 CDT 2020 src/TestIntegration.java
 Thu Jul 9 15:49:33 CDT 2020 jar
 Thu Jul 9 15:49:42 CDT 2020 testLocal
 Thu Jul 9 15:53:01 CDT 2020 testNist
+Thu Jul 9 16:59:47 CDT 2020 src/CobolPreprocessor.g4
+Thu Jul 9 16:59:52 CDT 2020 src/TestIntegration.java
+Thu Jul 9 17:00:08 CDT 2020 testrigpp 033
+Thu Jul 9 17:06:12 CDT 2020 testrigpp 9002
+Thu Jul 9 17:14:20 CDT 2020 testrigpp1 9002
+Thu Jul 9 17:17:53 CDT 2020 src/CobolPreprocessor.g4
+Thu Jul 9 17:18:04 CDT 2020 testrigpp1 9002
+Fri Jul 10 15:19:02 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:19:39 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:20:11 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:22:51 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:23:31 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:24:03 CDT 2020 testrigpp1 9002
+Fri Jul 10 15:26:40 CDT 2020 testrigpp1 9002
+Fri Jul 10 15:28:02 CDT 2020 testrigpp1 9002
+Fri Jul 10 15:34:46 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:34:52 CDT 2020 testrigpp1 9002
+Fri Jul 10 15:40:55 CDT 2020 testrigpp1 9002
+Fri Jul 10 15:45:28 CDT 2020 testrigpp 030
+Fri Jul 10 15:50:30 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 15:50:43 CDT 2020 testrigpp 030
+Fri Jul 10 15:52:05 CDT 2020 jar
+Fri Jul 10 15:52:14 CDT 2020 testLocal
+Fri Jul 10 15:54:30 CDT 2020 testLocal 025
+Fri Jul 10 16:13:14 CDT 2020 testrigpp 025
+Fri Jul 10 16:16:28 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:16:35 CDT 2020 testrigpp 025
+Fri Jul 10 16:17:08 CDT 2020 testLocal 025
+Fri Jul 10 16:17:20 CDT 2020 jar
+Fri Jul 10 16:17:23 CDT 2020 testLocal 025
+Fri Jul 10 16:17:32 CDT 2020 testLocal
+Fri Jul 10 16:18:43 CDT 2020 testLocal 027
+Fri Jul 10 16:18:59 CDT 2020 testrigpp 027
+Fri Jul 10 16:25:38 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:25:49 CDT 2020 jar
+Fri Jul 10 16:25:54 CDT 2020 testrigpp 027
+Fri Jul 10 16:27:20 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:27:27 CDT 2020 jar
+Fri Jul 10 16:27:30 CDT 2020 testrigpp 027
+Fri Jul 10 16:28:32 CDT 2020 testLocal 027
+Fri Jul 10 16:28:38 CDT 2020 testLocal
+Fri Jul 10 16:29:08 CDT 2020 testrigpp1 9002
+Fri Jul 10 16:34:05 CDT 2020 jar
+Fri Jul 10 16:34:07 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:34:15 CDT 2020 jar
+Fri Jul 10 16:34:22 CDT 2020 testrigpp1 9002
+Fri Jul 10 16:36:57 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:37:05 CDT 2020 jar
+Fri Jul 10 16:39:28 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:39:39 CDT 2020 testrigpp1 9002
+Fri Jul 10 16:47:31 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:48:06 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 16:48:15 CDT 2020 testrigpp1 9002
+Fri Jul 10 16:49:26 CDT 2020 testrigpp1 9002
+Fri Jul 10 16:57:55 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 17:05:11 CDT 2020 src/CobolPreprocessor.g4
+Fri Jul 10 17:08:07 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 10 17:08:09 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 10 17:26:59 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 10 17:27:01 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 10 17:27:20 CDT 2020 testrigpp1 9002
+Fri Jul 10 17:28:42 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 10 17:28:45 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 10 17:28:51 CDT 2020 testrigpp1 9002
+Fri Jul 10 17:30:53 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 10 17:30:55 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 10 17:31:02 CDT 2020 testrigpp1 9002
+Fri Jul 10 17:32:07 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 10 17:32:10 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 10 17:32:16 CDT 2020 testrigpp1 9002
+Fri Jul 10 17:39:20 CDT 2020 src/CopyListener.java
+Fri Jul 10 17:39:21 CDT 2020 src/ReplaceListener.java
+Fri Jul 10 17:39:22 CDT 2020 src/IdDivListener.java
+Fri Jul 10 17:39:22 CDT 2020 src/CompilerOptionsListener.java
+Fri Jul 10 17:39:23 CDT 2020 src/TestIntegration.java
+Fri Jul 10 17:43:44 CDT 2020 clean
+Fri Jul 10 17:47:23 CDT 2020 clean
+Fri Jul 10 17:47:27 CDT 2020 src/CobolLexer.g4
+Fri Jul 10 17:47:29 CDT 2020 src/CobolParser.g4
+Fri Jul 10 17:47:41 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 10 17:47:43 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 10 17:48:03 CDT 2020 testrigpp1 9002
+Fri Jul 10 17:48:54 CDT 2020 jar
+Fri Jul 10 17:49:09 CDT 2020 testLocal 001
+Fri Jul 10 17:49:20 CDT 2020 testLocal 025
+Fri Jul 10 17:49:28 CDT 2020 testLocal 027
+Fri Jul 10 17:49:35 CDT 2020 testLocal
+Fri Jul 10 17:50:30 CDT 2020 testNist
+Sat Jul 11 11:02:37 CDT 2020 testrigpp1 9003
+Sat Jul 11 11:06:28 CDT 2020 src/CobolPreprocessorParser.g4
+Sat Jul 11 11:06:42 CDT 2020 testrigpp1 9003
+Sat Jul 11 11:20:21 CDT 2020 testrigpp1 9003
+Sat Jul 11 15:44:44 CDT 2020 testrigpp1 9003
+Sat Jul 11 15:53:08 CDT 2020 src/CobolPreprocessorParser.g4
+Sat Jul 11 15:53:20 CDT 2020 testrigpp1 9003
+Sat Jul 11 16:02:20 CDT 2020 testrigpp1 9004
+Sat Jul 11 16:03:36 CDT 2020 src/CobolPreprocessorParser.g4
+Sat Jul 11 16:03:45 CDT 2020 testrigpp1 9004
+Sat Jul 11 16:06:03 CDT 2020 src/CobolPreprocessorLexer.g4
+Sat Jul 11 16:06:06 CDT 2020 src/CobolPreprocessorParser.g4
+Sat Jul 11 16:06:14 CDT 2020 testrigpp1 9004
+Sat Jul 11 16:09:53 CDT 2020 testrigpp1 9004
+Sat Jul 11 16:13:18 CDT 2020 testrigpp1 9005
+Sat Jul 11 16:14:38 CDT 2020 src/CobolPreprocessorLexer.g4
+Sat Jul 11 16:14:40 CDT 2020 src/CobolPreprocessorParser.g4
+Sat Jul 11 16:14:49 CDT 2020 testrigpp1 9005
+Sat Jul 11 16:18:08 CDT 2020 jar
+Sat Jul 11 16:18:19 CDT 2020 testLocal
+Sat Jul 11 16:18:46 CDT 2020 testNist
+Sat Jul 11 16:48:25 CDT 2020 src/CobolPreprocessorLexer.g4
+Sat Jul 11 16:48:28 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 09:23:14 CDT 2020 testrigpp1 9002
+Sun Jul 12 09:29:18 CDT 2020 testrigpp1 9003
+Sun Jul 12 09:58:27 CDT 2020 testrigpp1 9006
+Sun Jul 12 10:01:37 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 10:01:41 CDT 2020 src/TestIntegration.java
+Sun Jul 12 10:01:47 CDT 2020 testrigpp1 9006
+Sun Jul 12 10:02:53 CDT 2020 src/CobolPreprocessorLexer.g4
+Sun Jul 12 10:02:56 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 10:03:01 CDT 2020 testrigpp1 9006
+Sun Jul 12 10:04:05 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 10:04:16 CDT 2020 testrigpp1 9006
+Sun Jul 12 10:06:41 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 10:06:47 CDT 2020 testrigpp1 9006
+Sun Jul 12 10:11:25 CDT 2020 jar
+Sun Jul 12 10:11:32 CDT 2020 testLocal
+Sun Jul 12 10:13:07 CDT 2020 testNist
+Sun Jul 12 17:01:03 CDT 2020 src/CobolPreprocessorLexer.g4
+Sun Jul 12 17:01:05 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 17:03:13 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 17:12:10 CDT 2020 testrigpp1 9002
+Sun Jul 12 17:15:03 CDT 2020 testrigpp1 9003
+Sun Jul 12 17:21:09 CDT 2020 src/CobolPreprocessorParser.g4
+Sun Jul 12 17:22:28 CDT 2020 testrigpp1 9002
+Sun Jul 12 17:24:08 CDT 2020 testrigpp1 9003
+Sun Jul 12 17:24:57 CDT 2020 jar
+Sun Jul 12 17:25:01 CDT 2020 testLocal
+Sun Jul 12 17:26:02 CDT 2020 testNist
+Tue Jul 14 16:46:54 CDT 2020 testrigpp1 9003
+Tue Jul 14 16:48:25 CDT 2020 testrigpp1 9004
+Tue Jul 14 16:50:21 CDT 2020 testrigpp1 9002
+Tue Jul 14 16:54:24 CDT 2020 src/CobolPreprocessorParser.g4
+Tue Jul 14 16:54:44 CDT 2020 testrigpp1 9002
+Tue Jul 14 17:29:14 CDT 2020 src/CobolPreprocessorParser.g4
+Tue Jul 14 17:29:24 CDT 2020 testrigpp1 9002
+Tue Jul 14 17:30:56 CDT 2020 testrigpp1 9002
+Tue Jul 14 17:41:57 CDT 2020 jar
+Tue Jul 14 17:42:02 CDT 2020 testLocal
+Tue Jul 14 17:42:29 CDT 2020 testNist
+Thu Jul 16 11:13:24 CDT 2020 src/CobolPreprocessorParser.g4
+Thu Jul 16 14:55:09 CDT 2020 testrigpp1 9006
+Thu Jul 16 14:57:09 CDT 2020 src/CobolPreprocessorParser.g4
+Thu Jul 16 14:57:16 CDT 2020 testrigpp1 9006
+Thu Jul 16 14:59:28 CDT 2020 jar
+Thu Jul 16 14:59:34 CDT 2020 testLocal
+Thu Jul 16 15:00:27 CDT 2020 testNist
+Mon Jul 20 16:37:25 CDT 2020 src/CondCompToken.java
+Mon Jul 20 16:39:15 CDT 2020 src/CondCompCondition.java
+Mon Jul 20 16:39:16 CDT 2020 src/CondCompLogicOp.java
+Mon Jul 20 16:40:50 CDT 2020 src/CondCompToken.java
+Mon Jul 20 16:40:51 CDT 2020 src/CondCompLogicOp.java
+Mon Jul 20 16:40:52 CDT 2020 src/CondCompArithOp.java
+Mon Jul 20 16:41:11 CDT 2020 src/CondCompArithOp.java
+Mon Jul 20 16:41:12 CDT 2020 src/CondCompGroupOp.java
+Mon Jul 20 16:41:33 CDT 2020 src/CondCompGroupOp.java
+Mon Jul 20 16:41:33 CDT 2020 src/CondCompVar.java
+Mon Jul 20 16:43:14 CDT 2020 src/CondCompVar.java
+Mon Jul 20 16:44:18 CDT 2020 src/CondCompVar.java
+Mon Jul 20 16:45:26 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:03:08 CDT 2020 src/CondCompComparisonOp.java
+Mon Jul 20 17:03:36 CDT 2020 src/CondCompComparisonOp.java
+Mon Jul 20 17:04:02 CDT 2020 src/CondCompComparisonOp.java
+Mon Jul 20 17:04:03 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:06:07 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:06:28 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:08:01 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:08:38 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:09:43 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:10:43 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:10:44 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:11:35 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:12:23 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:13:34 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:14:20 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:14:58 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:20:50 CDT 2020 src/CondCompBinaryCondition.java
+Mon Jul 20 17:21:06 CDT 2020 src/CondCompBinaryCondition.java
+Mon Jul 20 17:21:46 CDT 2020 src/CondCompBinaryCondition.java
+Mon Jul 20 17:22:49 CDT 2020 src/CondCompBinaryCondition.java
+Mon Jul 20 17:23:44 CDT 2020 src/CondCompBinaryCondition.java
+Mon Jul 20 17:30:14 CDT 2020 src/CondCompToken.java
+Mon Jul 20 17:30:15 CDT 2020 src/CondCompLogicOp.java
+Mon Jul 20 17:30:15 CDT 2020 src/CondCompArithOp.java
+Mon Jul 20 17:30:16 CDT 2020 src/CondCompGroupOp.java
+Mon Jul 20 17:30:17 CDT 2020 src/CondCompComparisonOp.java
+Mon Jul 20 17:30:17 CDT 2020 src/CondCompVar.java
+Mon Jul 20 17:30:18 CDT 2020 src/CondCompSimpleRelation.java
+Mon Jul 20 17:30:19 CDT 2020 src/CondCompBinaryCondition.java
+Mon Jul 20 17:30:20 CDT 2020 src/CondCompDefinedCondition.java
+Mon Jul 20 17:30:43 CDT 2020 src/CondCompDefinedCondition.java
+Mon Jul 20 17:42:40 CDT 2020 src/CondCompDefinedCondition.java
+Tue Jul 21 11:15:01 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Tue Jul 21 17:07:05 CDT 2020 src/CondCompToken.java
+Tue Jul 21 17:07:06 CDT 2020 src/CondCompLogicOp.java
+Tue Jul 21 17:07:07 CDT 2020 src/CondCompArithOp.java
+Tue Jul 21 17:07:08 CDT 2020 src/CondCompGroupOp.java
+Tue Jul 21 17:07:08 CDT 2020 src/CondCompComparisonOp.java
+Tue Jul 21 17:07:09 CDT 2020 src/CondCompVar.java
+Tue Jul 21 17:07:10 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Tue Jul 21 17:07:11 CDT 2020 src/CondCompBinaryCondition.java
+Tue Jul 21 17:07:11 CDT 2020 src/CondCompDefinedCondition.java
+Tue Jul 21 17:07:12 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:07:49 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:08:16 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:09:35 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:12:25 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:13:09 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:14:45 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:15:33 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:15:55 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:20:24 CDT 2020 src/CondCompRelationalCondition.java
+Tue Jul 21 17:27:09 CDT 2020 src/CondCompRelationalCondition.java
+Wed Jul 22 09:55:32 CDT 2020 src/CondCompRelationalCondition.java
+Wed Jul 22 09:56:35 CDT 2020 src/CondCompRelationalCondition.java
+Wed Jul 22 09:57:17 CDT 2020 src/CondCompRelationalCondition.java
+Wed Jul 22 09:58:22 CDT 2020 src/CondCompRelationalCondition.java
+Wed Jul 22 09:58:56 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 14:51:10 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 14:52:08 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 14:55:51 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 14:56:35 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 15:06:12 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 15:59:40 CDT 2020 src/CondCompToken.java
+Thu Jul 23 15:59:40 CDT 2020 src/CondCompLogicOp.java
+Thu Jul 23 15:59:41 CDT 2020 src/CondCompArithOp.java
+Thu Jul 23 15:59:42 CDT 2020 src/CondCompGroupOp.java
+Thu Jul 23 15:59:43 CDT 2020 src/CondCompComparisonOp.java
+Thu Jul 23 15:59:43 CDT 2020 src/CondCompVar.java
+Thu Jul 23 15:59:44 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Thu Jul 23 15:59:45 CDT 2020 src/CondCompBinaryCondition.java
+Thu Jul 23 15:59:46 CDT 2020 src/CondCompDefinedCondition.java
+Thu Jul 23 15:59:46 CDT 2020 src/CondCompRelationalCondition.java
+Thu Jul 23 15:59:47 CDT 2020 src/CondCompStmt.java
+Thu Jul 23 15:59:48 CDT 2020 src/CondCompStmtIf.java
+Thu Jul 23 16:00:59 CDT 2020 src/CondCompStmtIf.java
+Thu Jul 23 16:01:18 CDT 2020 src/CondCompStmtIf.java
+Thu Jul 23 16:15:37 CDT 2020 src/CondCompStmt.java
+Thu Jul 23 16:15:37 CDT 2020 src/CondCompStmtCond.java
+Thu Jul 23 16:15:38 CDT 2020 src/CondCompStmtIf.java
+Fri Jul 24 15:43:02 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 24 15:43:07 CDT 2020 src/CompilerOptionsWrapper.java
+Fri Jul 24 15:44:27 CDT 2020 src/CompilerOptionsWrapper.java
+Fri Jul 24 15:44:28 CDT 2020 src/CompilerOptionsListener.java
+Fri Jul 24 15:44:28 CDT 2020 src/TestIntegration.java
+Fri Jul 24 15:45:00 CDT 2020 testrigpp1 9006
+Fri Jul 24 15:45:44 CDT 2020 testrigpp1 9005
+Fri Jul 24 15:45:59 CDT 2020 testrigpp1 9004
+Fri Jul 24 15:46:10 CDT 2020 testrigpp1 9003
+Fri Jul 24 15:46:23 CDT 2020 testrigpp1 9002
+Fri Jul 24 15:46:46 CDT 2020 testrigpp1 9001
+Fri Jul 24 15:52:29 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 24 15:52:43 CDT 2020 testrigpp1 9001
+Fri Jul 24 16:02:06 CDT 2020 testrigpp1 9008
+Fri Jul 24 16:03:06 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 24 16:05:30 CDT 2020 src/CobolPreprocessorLexer.g4
+Fri Jul 24 16:05:32 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 24 16:05:40 CDT 2020 testrigpp1 9008
+Fri Jul 24 16:05:57 CDT 2020 testrigpp1 9007
+Fri Jul 24 16:06:49 CDT 2020 jar
+Fri Jul 24 16:06:59 CDT 2020 testLocal
+Fri Jul 24 16:07:35 CDT 2020 testNist
+Fri Jul 24 16:22:52 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 24 16:24:14 CDT 2020 jar
+Fri Jul 24 16:24:35 CDT 2020 testNist IX208A
+Fri Jul 24 16:24:53 CDT 2020 testNist RL205A
+Fri Jul 24 16:25:10 CDT 2020 testLocal
+Fri Jul 24 16:25:54 CDT 2020 testrigpp1 9008
+Fri Jul 24 16:26:09 CDT 2020 testNist
+Fri Jul 24 16:44:38 CDT 2020 src/CobolPreprocessorParser.g4
+Fri Jul 24 16:44:51 CDT 2020 testrigpp1 9008
+Fri Jul 24 16:45:34 CDT 2020 testrigpp1 9007
+Fri Jul 24 16:45:54 CDT 2020 testrigpp1 9006
+Fri Jul 24 16:46:12 CDT 2020 testrigpp1 9005
+Fri Jul 24 16:46:44 CDT 2020 testrigpp1 9004
+Fri Jul 24 16:47:22 CDT 2020 testrigpp1 9003
+Fri Jul 24 16:48:49 CDT 2020 testrigpp1 9002
+Fri Jul 24 16:49:02 CDT 2020 testrigpp1 9001
+Fri Jul 24 16:49:47 CDT 2020 testLocal
+Fri Jul 24 16:50:21 CDT 2020 jar
+Fri Jul 24 16:50:29 CDT 2020 testLocal
+Fri Jul 24 16:51:30 CDT 2020 testrigpp 021
+Fri Jul 24 17:02:18 CDT 2020 src/ReplaceStatementContextWrapper.java
+Fri Jul 24 17:03:18 CDT 2020 src/ReplaceStatementContextWrapper.java
+Fri Jul 24 17:03:19 CDT 2020 src/TestIntegration.java
+Fri Jul 24 17:03:30 CDT 2020 jar
+Fri Jul 24 17:03:39 CDT 2020 testLocal
+Fri Jul 24 17:06:20 CDT 2020 src/ReplaceListener.java
+Fri Jul 24 17:06:21 CDT 2020 src/TestIntegration.java
+Fri Jul 24 17:06:26 CDT 2020 jar
+Fri Jul 24 17:06:34 CDT 2020 testLocal 021
+Fri Jul 24 17:06:44 CDT 2020 testLocal 021
+Fri Jul 24 17:06:49 CDT 2020 testLocal
+Fri Jul 24 17:07:17 CDT 2020 testNist
+Fri Jul 24 18:11:44 CDT 2020 src/CompilerOptionsWrapper.java
+Fri Jul 24 18:14:08 CDT 2020 src/CompilerOptionsWrapper.java
+Fri Jul 24 18:14:54 CDT 2020 src/CompilerOptionsWrapper.java
+Fri Jul 24 18:14:55 CDT 2020 src/CompOptDefine.java
+Fri Jul 24 18:16:00 CDT 2020 src/CompOptDefine.java
+Fri Jul 24 18:19:57 CDT 2020 src/CompOptDefine.java
+Fri Jul 24 18:20:11 CDT 2020 src/CompOptDefine.java
+Fri Jul 24 18:20:36 CDT 2020 src/CompOptDefine.java
+Fri Jul 24 18:20:36 CDT 2020 src/CompilerOptionsListener.java
+Fri Jul 24 18:21:28 CDT 2020 src/CompilerOptionsListener.java
+Fri Jul 24 18:21:29 CDT 2020 src/TestIntegration.java
+Fri Jul 24 18:21:30 CDT 2020 src/CondCompStmtIf.java
+Fri Jul 24 18:21:53 CDT 2020 src/CondCompStmt.java
+Fri Jul 24 18:21:54 CDT 2020 src/CondCompStmtIf.java
+Sat Jul 25 10:01:58 CDT 2020 testLocalx 9008
+Sat Jul 25 11:17:50 CDT 2020 testLocalx 9009
+Sat Jul 25 11:29:33 CDT 2020 testLocalx 9009
+Sat Jul 25 11:34:02 CDT 2020 src/CompOptDefine.java
+Sat Jul 25 11:34:03 CDT 2020 src/CompilerOptionsListener.java
+Sat Jul 25 11:34:03 CDT 2020 src/TestIntegration.java
+Sat Jul 25 11:34:14 CDT 2020 jar
+Sat Jul 25 11:34:20 CDT 2020 testLocalx 9009
+Sat Jul 25 16:37:27 CDT 2020 src/CompilerOptionsListener.java
+Sat Jul 25 16:38:36 CDT 2020 src/CondCompVar.java
+Sat Jul 25 16:39:27 CDT 2020 src/CondCompVar.java
+Sat Jul 25 16:39:28 CDT 2020 src/CompilerOptionsListener.java
+Sat Jul 25 16:39:28 CDT 2020 src/TestIntegration.java
+Sat Jul 25 16:40:26 CDT 2020 src/TestIntegration.java
+Sat Jul 25 16:40:29 CDT 2020 jar
+Sat Jul 25 16:40:34 CDT 2020 testLocalx 9009
+Sat Jul 25 16:44:42 CDT 2020 ziplogs
+Sun Jul 26 10:09:55 CDT 2020 src/CondCompStmt.java
+Sun Jul 26 10:10:16 CDT 2020 src/CondCompStmt.java
+Sun Jul 26 10:10:16 CDT 2020 src/CondCompStmtIf.java
+Sun Jul 26 10:11:30 CDT 2020 src/CondCompStmtDefine.java
+Sun Jul 26 10:13:23 CDT 2020 src/CondCompStmtDefine.java
+Sun Jul 26 12:13:05 CDT 2020 src/CondCompStmtCond.java
+Sun Jul 26 12:13:06 CDT 2020 src/CondCompStmtIf.java
+Sat Aug 1 18:03:07 CDT 2020 src/CompilerDirectingStatement.java
+Sat Aug 1 18:03:07 CDT 2020 src/CopyStatement.java
+Sat Aug 1 18:03:08 CDT 2020 src/CondCompComparisonOp.java
+Sat Aug 1 18:03:09 CDT 2020 src/CondCompVar.java
+Sat Aug 1 18:03:10 CDT 2020 src/CompilerDirectingStatementListener.java
+Sat Aug 1 18:05:28 CDT 2020 src/CompilerOptionsWrapper.java
+Sat Aug 1 18:05:29 CDT 2020 src/ReplaceStatement.java
+Sat Aug 1 18:06:01 CDT 2020 src/ReplaceStatement.java
+Sat Aug 1 18:06:21 CDT 2020 src/ReplaceStatement.java
+Sat Aug 1 18:09:28 CDT 2020 src/ReplaceStatement.java
+Sat Aug 1 18:10:08 CDT 2020 src/ReplaceStatement.java
+Sat Aug 1 18:10:09 CDT 2020 src/ReplaceOffStatement.java
+Sat Aug 1 18:10:40 CDT 2020 src/ReplaceOffStatement.java
+Sat Aug 1 18:10:41 CDT 2020 src/CondCompStmtDefine.java
+Sat Aug 1 18:11:24 CDT 2020 src/CondCompStmtDefine.java
+Sat Aug 1 18:11:25 CDT 2020 src/CompilerDirectingStatementListener.java
+Sat Aug 1 18:12:45 CDT 2020 src/CompilerDirectingStatementListener.java
+Sat Aug 1 18:13:33 CDT 2020 src/CompilerDirectingStatementListener.java
+Sat Aug 1 18:14:12 CDT 2020 src/CondCompStmtIf.java
+Sat Aug 1 18:14:56 CDT 2020 src/CondCompStmtIf.java
+Sat Aug 1 18:15:59 CDT 2020 src/CondCompStmtIf.java
+Sat Aug 1 18:16:15 CDT 2020 src/CondCompStmtIf.java
+Sat Aug 1 18:16:15 CDT 2020 src/CompilerDirectingStatementListener.java
+Sat Aug 1 18:16:16 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:08:48 CDT 2020 src/CondCompStmtElse.java
+Sun Aug 2 15:08:49 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 2 15:08:50 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:31:07 CDT 2020 src/CondCompStmtEndIf.java
+Sun Aug 2 15:31:07 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 2 15:31:08 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:36:11 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:38:39 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:38:55 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:40:29 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:41:27 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:42:38 CDT 2020 src/TestIntegration.java
+Sun Aug 2 15:44:18 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:03:36 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:04:10 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:04:11 CDT 2020 src/CondCompLogicOp.java
+Sun Aug 2 16:04:12 CDT 2020 src/CondCompArithOp.java
+Sun Aug 2 16:04:50 CDT 2020 src/CondCompArithOp.java
+Sun Aug 2 16:04:51 CDT 2020 src/CondCompGroupOp.java
+Sun Aug 2 16:05:22 CDT 2020 src/CondCompGroupOp.java
+Sun Aug 2 16:05:23 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Sun Aug 2 16:05:24 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:05:24 CDT 2020 src/CondCompRelationalCondition.java
+Sun Aug 2 16:11:37 CDT 2020 jar
+Sun Aug 2 16:11:49 CDT 2020 testLocalx 9009
+Sun Aug 2 16:13:38 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:13:41 CDT 2020 jar
+Sun Aug 2 16:13:45 CDT 2020 testLocalx 9009
+Sun Aug 2 16:18:36 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:18:39 CDT 2020 jar
+Sun Aug 2 16:18:43 CDT 2020 testLocalx 9009
+Sun Aug 2 16:20:43 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:20:45 CDT 2020 jar
+Sun Aug 2 16:20:50 CDT 2020 testLocalx 9009
+Sun Aug 2 16:21:25 CDT 2020 jar
+Sun Aug 2 16:21:28 CDT 2020 jar
+Sun Aug 2 16:21:39 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:21:42 CDT 2020 jar
+Sun Aug 2 16:21:45 CDT 2020 testLocalx 9009
+Sun Aug 2 16:23:26 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:23:29 CDT 2020 jar
+Sun Aug 2 16:23:32 CDT 2020 testLocalx 9009
+Sun Aug 2 16:25:57 CDT 2020 src/CondCompBinaryCondition.java
+Sun Aug 2 16:25:58 CDT 2020 src/CondCompRelationalCondition.java
+Sun Aug 2 16:26:01 CDT 2020 jar
+Sun Aug 2 16:26:05 CDT 2020 testLocalx 9009
+Sun Aug 2 16:36:20 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:36:23 CDT 2020 jar
+Sun Aug 2 16:36:26 CDT 2020 testLocalx 9009
+Sun Aug 2 16:40:28 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:40:31 CDT 2020 jar
+Sun Aug 2 16:40:35 CDT 2020 testLocalx 9009
+Sun Aug 2 16:45:07 CDT 2020 src/TestIntegration.java
+Sun Aug 2 16:45:10 CDT 2020 jar
+Sun Aug 2 16:45:14 CDT 2020 testLocalx 9009
+Sun Aug 2 16:50:56 CDT 2020 ziplogs
+Sun Aug 2 19:44:14 CDT 2020 src/TestIntegration.java
+Sun Aug 2 19:44:51 CDT 2020 src/TestIntegration.java
+Sun Aug 2 19:45:05 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:29:30 CDT 2020 src/CondCompStmtCond.java
+Sun Aug 2 20:29:31 CDT 2020 src/CondCompStmtIf.java
+Sun Aug 2 20:29:32 CDT 2020 src/CondCompStmtElse.java
+Sun Aug 2 20:32:54 CDT 2020 src/CondCompStmtIf.java
+Sun Aug 2 20:33:35 CDT 2020 src/CondCompStmtIf.java
+Sun Aug 2 20:34:28 CDT 2020 src/CondCompStmtElse.java
+Sun Aug 2 20:34:29 CDT 2020 src/CondCompStmtIf.java
+Sun Aug 2 20:34:30 CDT 2020 src/CondCompStmtEndIf.java
+Sun Aug 2 20:34:31 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 2 20:34:31 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:49:14 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:50:32 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:53:34 CDT 2020 src/CondCompStmtCond.java
+Sun Aug 2 20:53:35 CDT 2020 src/CondCompStmtElse.java
+Sun Aug 2 20:53:36 CDT 2020 src/CondCompStmtIf.java
+Sun Aug 2 20:53:37 CDT 2020 src/CondCompStmtEndIf.java
+Sun Aug 2 20:53:37 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 2 20:53:38 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:54:14 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:54:57 CDT 2020 src/TestIntegration.java
+Sun Aug 2 20:55:48 CDT 2020 src/TestIntegration.java
+Tue Aug 4 15:50:08 CDT 2020 src/ConditionalCompilationStatement.java
+Tue Aug 4 15:50:10 CDT 2020 src/CondCompStmtElse.java
+Tue Aug 4 15:50:11 CDT 2020 src/CondCompStmtIf.java
+Tue Aug 4 15:50:12 CDT 2020 src/CondCompStmtEndIf.java
+Tue Aug 4 15:50:13 CDT 2020 src/CompilerDirectingStatementListener.java
+Tue Aug 4 15:50:14 CDT 2020 src/TestIntegration.java
+Tue Aug 4 15:50:47 CDT 2020 src/CondCompStmtIf.java
+Tue Aug 4 15:51:32 CDT 2020 src/CondCompStmtIf.java
+Tue Aug 4 15:52:18 CDT 2020 src/CondCompStmtIf.java
+Tue Aug 4 15:52:53 CDT 2020 src/CondCompStmtIf.java
+Tue Aug 4 15:52:54 CDT 2020 src/CompilerDirectingStatementListener.java
+Tue Aug 4 15:52:54 CDT 2020 src/TestIntegration.java
+Tue Aug 4 16:40:35 CDT 2020 src/CompilerDirectingStatement.java
+Tue Aug 4 16:40:36 CDT 2020 src/CopyStatement.java
+Tue Aug 4 16:40:37 CDT 2020 src/CompilerOptionsWrapper.java
+Tue Aug 4 16:43:03 CDT 2020 src/CompilerOptionsWrapper.java
+Tue Aug 4 16:43:42 CDT 2020 src/CompilerOptionsWrapper.java
+Tue Aug 4 16:43:43 CDT 2020 src/ReplaceStatement.java
+Tue Aug 4 16:43:44 CDT 2020 src/ReplaceOffStatement.java
+Tue Aug 4 16:43:45 CDT 2020 src/CondCompStmtDefine.java
+Tue Aug 4 16:45:39 CDT 2020 src/CondCompStmtDefine.java
+Tue Aug 4 16:45:39 CDT 2020 src/ConditionalCompilationStatement.java
+Tue Aug 4 16:45:40 CDT 2020 src/CondCompStmtElse.java
+Tue Aug 4 16:45:40 CDT 2020 src/CondCompStmtIf.java
+Tue Aug 4 16:45:41 CDT 2020 src/CondCompStmtEndIf.java
+Tue Aug 4 16:45:42 CDT 2020 src/CompilerDirectingStatementListener.java
+Tue Aug 4 16:45:43 CDT 2020 src/TestIntegration.java
+Tue Aug 4 17:51:36 CDT 2020 src/CopyStatement.java
+Tue Aug 4 17:53:59 CDT 2020 src/CopyStatement.java
+Tue Aug 4 17:56:22 CDT 2020 src/CopyStatement.java
+Tue Aug 4 17:57:11 CDT 2020 src/CopyStatement.java
+Tue Aug 4 18:00:00 CDT 2020 src/CopyStatement.java
+Tue Aug 4 18:00:30 CDT 2020 src/CopyStatement.java
+Tue Aug 4 18:00:54 CDT 2020 src/CopyStatement.java
+Tue Aug 4 18:00:55 CDT 2020 src/CompilerDirectingStatementListener.java
+Tue Aug 4 18:00:55 CDT 2020 src/TestIntegration.java
+Tue Aug 4 18:03:02 CDT 2020 src/TestIntegration.java
+Tue Aug 4 18:03:58 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:34:43 CDT 2020 src/ReplaceStatement.java
+Sun Aug 9 10:34:44 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 10:34:44 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:35:18 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:36:18 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:37:24 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:37:38 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:38:51 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:46:39 CDT 2020 src/TestIntegration.java
+Sun Aug 9 10:49:07 CDT 2020 src/TestIntegration.java
+Sun Aug 9 14:33:01 CDT 2020 src/TestIntegration.java
+Sun Aug 9 14:34:40 CDT 2020 jar
+Sun Aug 9 14:35:25 CDT 2020 testLocalx 9009
+Sun Aug 9 14:53:14 CDT 2020 src/CopyStatement.java
+Sun Aug 9 14:53:15 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 14:53:16 CDT 2020 src/TestIntegration.java
+Sun Aug 9 14:56:16 CDT 2020 src/TestIntegration.java
+Sun Aug 9 14:57:06 CDT 2020 src/TestIntegration.java
+Sun Aug 9 14:57:11 CDT 2020 jar
+Sun Aug 9 14:57:25 CDT 2020 testLocalx 9009
+Sun Aug 9 15:10:23 CDT 2020 src/CopyStatement.java
+Sun Aug 9 15:10:24 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 15:10:25 CDT 2020 src/TestIntegration.java
+Sun Aug 9 15:10:28 CDT 2020 jar
+Sun Aug 9 15:10:33 CDT 2020 testLocalx 9009
+Sun Aug 9 15:13:58 CDT 2020 src/CopyStatement.java
+Sun Aug 9 15:13:59 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 15:14:00 CDT 2020 src/TestIntegration.java
+Sun Aug 9 15:14:14 CDT 2020 jar
+Sun Aug 9 15:14:19 CDT 2020 testLocalx 9009
+Sun Aug 9 15:21:12 CDT 2020 src/CopyStatement.java
+Sun Aug 9 15:21:13 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 15:21:14 CDT 2020 src/TestIntegration.java
+Sun Aug 9 15:21:17 CDT 2020 jar
+Sun Aug 9 15:21:22 CDT 2020 testLocalx 9009
+Sun Aug 9 15:41:00 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 15:41:01 CDT 2020 src/TestIntegration.java
+Sun Aug 9 15:41:04 CDT 2020 jar
+Sun Aug 9 15:41:10 CDT 2020 testLocalx 9009
+Sun Aug 9 15:43:30 CDT 2020 src/TestIntegration.java
+Sun Aug 9 15:43:33 CDT 2020 jar
+Sun Aug 9 15:43:38 CDT 2020 testLocalx 9009
+Sun Aug 9 15:45:10 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 15:45:11 CDT 2020 src/TestIntegration.java
+Sun Aug 9 15:45:14 CDT 2020 jar
+Sun Aug 9 15:45:26 CDT 2020 testLocalx 9009
+Sun Aug 9 16:12:33 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 16:12:34 CDT 2020 src/TestIntegration.java
+Sun Aug 9 16:12:37 CDT 2020 jar
+Sun Aug 9 16:12:41 CDT 2020 testLocalx 9009
+Sun Aug 9 16:22:06 CDT 2020 src/CondCompVar.java
+Sun Aug 9 16:22:07 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 16:22:08 CDT 2020 src/TestIntegration.java
+Sun Aug 9 16:22:11 CDT 2020 jar
+Sun Aug 9 16:22:15 CDT 2020 testLocalx 9009
+Sun Aug 9 16:34:06 CDT 2020 src/CondCompVar.java
+Sun Aug 9 16:34:07 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 9 16:34:07 CDT 2020 src/TestIntegration.java
+Sun Aug 9 16:34:15 CDT 2020 jar
+Sun Aug 9 16:34:20 CDT 2020 testLocalx 9009
+Tue Aug 11 15:00:53 CDT 2020 src/TestIntegration.java
+Tue Aug 11 15:00:58 CDT 2020 jar
+Tue Aug 11 15:01:02 CDT 2020 testLocalx 9009
+Tue Aug 11 15:19:33 CDT 2020 src/CondCompVar.java
+Tue Aug 11 15:19:34 CDT 2020 src/CompilerDirectingStatementListener.java
+Tue Aug 11 15:19:34 CDT 2020 src/TestIntegration.java
+Tue Aug 11 15:19:38 CDT 2020 jar
+Tue Aug 11 15:19:41 CDT 2020 testLocalx 9009
+Tue Aug 11 15:32:57 CDT 2020 src/TestIntegration.java
+Tue Aug 11 15:33:01 CDT 2020 jar
+Tue Aug 11 15:33:05 CDT 2020 testLocalx 9009
+Tue Aug 11 15:43:29 CDT 2020 src/TestIntegration.java
+Tue Aug 11 15:43:33 CDT 2020 jar
+Tue Aug 11 15:43:41 CDT 2020 testLocalx 9009
+Tue Aug 11 15:56:59 CDT 2020 src/TestIntegration.java
+Tue Aug 11 15:57:05 CDT 2020 jar
+Tue Aug 11 15:57:14 CDT 2020 testLocalx 9009
+Tue Aug 11 16:04:37 CDT 2020 src/TestIntegration.java
+Tue Aug 11 16:04:40 CDT 2020 jar
+Tue Aug 11 16:04:45 CDT 2020 testLocalx 9009
+Tue Aug 11 16:38:30 CDT 2020 src/TestIntegration.java
+Tue Aug 11 16:38:33 CDT 2020 jar
+Tue Aug 11 16:38:38 CDT 2020 testLocalx 9009
+Tue Aug 11 16:39:55 CDT 2020 src/TestIntegration.java
+Tue Aug 11 16:39:58 CDT 2020 jar
+Tue Aug 11 16:40:01 CDT 2020 testLocalx 9009
+Tue Aug 11 16:47:19 CDT 2020 src/CopyStatement.java
+Tue Aug 11 16:47:20 CDT 2020 src/CompilerDirectingStatementListener.java
+Tue Aug 11 16:47:21 CDT 2020 src/TestIntegration.java
+Tue Aug 11 16:47:24 CDT 2020 jar
+Tue Aug 11 16:47:29 CDT 2020 testLocalx 9009
+Tue Aug 11 16:54:42 CDT 2020 jar
+Tue Aug 11 16:54:44 CDT 2020 src/TestIntegration.java
+Tue Aug 11 16:54:47 CDT 2020 jar
+Tue Aug 11 16:54:51 CDT 2020 testLocalx 9009
+Fri Aug 14 16:33:40 CDT 2020 src/CopyStatement.java
+Fri Aug 14 16:33:41 CDT 2020 src/CompilerDirectingStatementListener.java
+Fri Aug 14 16:33:42 CDT 2020 src/TestIntegration.java
+Fri Aug 14 16:33:46 CDT 2020 jar
+Fri Aug 14 16:33:59 CDT 2020 testLocalx 9009
+Sat Aug 15 11:33:50 CDT 2020 ziplogs
+Sun Aug 16 14:28:07 CDT 2020 src/CopyStatement.java
+Sun Aug 16 14:28:08 CDT 2020 src/ReplaceStatement.java
+Sun Aug 16 14:28:09 CDT 2020 src/CompilerDirectingStatementListener.java
+Sun Aug 16 14:28:10 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:30:26 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:33:35 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:35:43 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:36:12 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:37:58 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:39:19 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:39:34 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:39:45 CDT 2020 jar
+Sun Aug 16 14:40:05 CDT 2020 testLocalx 9009
+Sun Aug 16 14:55:01 CDT 2020 src/TestIntegration.java
+Sun Aug 16 14:55:05 CDT 2020 jar
+Sun Aug 16 14:55:11 CDT 2020 testLocalx 9009
+Sun Aug 16 15:00:47 CDT 2020 src/TestIntegration.java
+Sun Aug 16 15:03:08 CDT 2020 src/TestIntegration.java
+Sun Aug 16 15:03:14 CDT 2020 jar
+Sun Aug 16 15:03:31 CDT 2020 testLocalx 9009
+Sun Aug 16 15:08:14 CDT 2020 src/TestIntegration.java
+Sun Aug 16 15:08:18 CDT 2020 jar
+Sun Aug 16 15:08:24 CDT 2020 testLocalx 9009
+Sun Aug 16 15:10:35 CDT 2020 jar
+Sun Aug 16 15:10:37 CDT 2020 src/TestIntegration.java
+Sun Aug 16 15:10:40 CDT 2020 jar
+Sun Aug 16 15:10:44 CDT 2020 testLocalx 9009
+Sun Aug 16 16:10:37 CDT 2020 src/CobolPreprocessorParser.g4
+Mon Aug 17 17:31:01 CDT 2020 src/CobolPreprocessorParser.g4
+Mon Aug 17 17:31:06 CDT 2020 src/CondCompToken.java
+Mon Aug 17 17:31:07 CDT 2020 src/CondCompComparisonOp.java
+Mon Aug 17 17:31:07 CDT 2020 src/CondCompVar.java
+Mon Aug 17 17:31:08 CDT 2020 src/CompilerDirectingStatementListener.java
+Mon Aug 17 17:31:09 CDT 2020 src/TestIntegration.java
+Mon Aug 17 17:31:10 CDT 2020 src/CondCompLogicOp.java
+Mon Aug 17 17:31:11 CDT 2020 src/CondCompArithOp.java
+Mon Aug 17 17:31:12 CDT 2020 src/CondCompGroupOp.java
+Mon Aug 17 17:31:12 CDT 2020 src/CondCompSimpleRelationalCondition.java
+Mon Aug 17 17:31:13 CDT 2020 src/CondCompBinaryCondition.java
+Mon Aug 17 17:31:14 CDT 2020 src/CondCompDefinedCondition.java
+Mon Aug 17 17:31:15 CDT 2020 src/CondCompRelationalCondition.java
+Mon Aug 17 17:33:26 CDT 2020 testrigppx 9001
+Mon Aug 17 17:33:45 CDT 2020 testrigppx 9002
+Mon Aug 17 17:35:15 CDT 2020 testrigppx 9003
+Sat Feb 6 15:33:46 CST 2021 testLocalx 9002
+Sat Feb 6 15:49:45 CST 2021 src/CobolPreprocessorParser.g4
+Sat Feb 6 15:49:51 CST 2021 src/CopyListener.java
+Sat Feb 6 15:49:51 CST 2021 src/ReplaceListener.java
+Sat Feb 6 15:49:52 CST 2021 src/CompilerDirectingStatement.java
+Sat Feb 6 15:49:53 CST 2021 src/CopyStatement.java
+Sat Feb 6 15:49:54 CST 2021 src/IdDivListener.java
+Sat Feb 6 15:49:55 CST 2021 src/CondCompToken.java
+Sat Feb 6 15:49:55 CST 2021 src/CondCompComparisonOp.java
+Sat Feb 6 15:49:56 CST 2021 src/CondCompVar.java
+Sat Feb 6 15:49:57 CST 2021 src/CompilerOptionsWrapper.java
+Sat Feb 6 15:49:57 CST 2021 src/ReplaceStatement.java
+Sat Feb 6 15:49:58 CST 2021 src/ReplaceOffStatement.java
+Sat Feb 6 15:49:59 CST 2021 src/CondCompStmtDefine.java
+Sat Feb 6 16:27:01 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:31:23 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:32:39 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:33:55 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:34:08 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:34:09 CST 2021 src/CondCompStmtDefine.java
+Sat Feb 6 16:34:10 CST 2021 src/ConditionalCompilationStatement.java
+Sat Feb 6 16:34:10 CST 2021 src/CondCompStmtElse.java
+Sat Feb 6 16:34:11 CST 2021 src/CondCompStmtIf.java
+Sat Feb 6 16:34:12 CST 2021 src/CondCompStmtEndIf.java
+Sat Feb 6 16:34:13 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 6 16:35:39 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:35:40 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 6 16:35:41 CST 2021 src/TestIntegration.java
+Sat Feb 6 16:35:43 CST 2021 src/CondCompCondition.java
+Sat Feb 6 16:35:43 CST 2021 src/CondCompLogicOp.java
+Sat Feb 6 16:35:44 CST 2021 src/CondCompArithOp.java
+Sat Feb 6 16:35:45 CST 2021 src/CondCompGroupOp.java
+Sat Feb 6 16:35:45 CST 2021 src/CondCompSimpleRelationalCondition.java
+Sat Feb 6 16:35:46 CST 2021 src/CondCompBinaryCondition.java
+Sat Feb 6 16:35:47 CST 2021 src/CondCompDefinedCondition.java
+Sat Feb 6 16:35:48 CST 2021 src/CondCompRelationalCondition.java
+Sat Feb 6 16:36:05 CST 2021 jar
+Sat Feb 6 16:36:17 CST 2021 testLocalx 9002
+Sat Feb 6 16:38:48 CST 2021 src/CondCompComparisonOp.java
+Sat Feb 6 16:38:49 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:38:50 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 6 16:38:50 CST 2021 src/TestIntegration.java
+Sat Feb 6 16:38:54 CST 2021 jar
+Sat Feb 6 16:38:58 CST 2021 testLocalx 9002
+Sat Feb 6 16:52:41 CST 2021 src/CondCompComparisonOp.java
+Sat Feb 6 16:52:42 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:52:43 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 6 16:52:44 CST 2021 src/TestIntegration.java
+Sat Feb 6 16:52:49 CST 2021 jar
+Sat Feb 6 16:52:53 CST 2021 testLocalx 9002
+Sat Feb 6 16:58:26 CST 2021 src/CondCompComparisonOp.java
+Sat Feb 6 16:58:27 CST 2021 src/CondCompVar.java
+Sat Feb 6 16:58:28 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 6 16:58:28 CST 2021 src/TestIntegration.java
+Sat Feb 6 16:58:33 CST 2021 jar
+Sat Feb 6 16:58:37 CST 2021 testLocalx 9002
+Sat Feb 6 17:07:54 CST 2021 src/CondCompLogicOp.java
+Sat Feb 6 17:08:01 CST 2021 jar
+Sat Feb 6 17:08:05 CST 2021 testLocalx 9002
+Sat Feb 6 17:08:58 CST 2021 src/CondCompLogicOp.java
+Sat Feb 6 17:09:01 CST 2021 jar
+Sat Feb 6 17:09:08 CST 2021 testLocalx 9002
+Sat Feb 6 17:12:08 CST 2021 src/CondCompLogicOp.java
+Sat Feb 6 17:12:09 CST 2021 src/CondCompGroupOp.java
+Sat Feb 6 17:12:11 CST 2021 jar
+Sat Feb 6 17:12:14 CST 2021 testLocalx 9002
+Sat Feb 6 17:12:56 CST 2021 src/CondCompGroupOp.java
+Sat Feb 6 17:12:59 CST 2021 jar
+Sat Feb 6 17:13:01 CST 2021 testLocalx 9002
+Sat Feb 6 17:39:07 CST 2021 src/CondCompBinaryCondition.java
+Sat Feb 6 17:39:12 CST 2021 jar
+Sat Feb 6 17:39:16 CST 2021 testLocalx 9002
+Sun Feb 7 15:40:31 CST 2021 src/CobolLexer.g4
+Sun Feb 7 15:40:34 CST 2021 src/CobolParser.g4
+Sun Feb 7 15:41:02 CST 2021 src/CobolLexer.g4
+Sun Feb 7 15:41:04 CST 2021 src/CobolParser.g4
+Sun Feb 7 15:41:18 CST 2021 jar
+Sun Feb 7 15:41:26 CST 2021 testLocalx 9002
+Sun Feb 7 15:43:12 CST 2021 src/CobolLexer.g4
+Sun Feb 7 15:43:14 CST 2021 src/CobolParser.g4
+Sun Feb 7 15:43:28 CST 2021 jar
+Sun Feb 7 15:43:31 CST 2021 testLocalx 9002
+Sun Feb 7 15:45:35 CST 2021 src/CobolLexer.g4
+Sun Feb 7 15:45:37 CST 2021 src/CobolParser.g4
+Sun Feb 7 15:45:51 CST 2021 jar
+Sun Feb 7 15:45:54 CST 2021 testLocalx 9002
+Sun Feb 7 15:58:40 CST 2021 src/CobolLexer.g4
+Sun Feb 7 15:58:42 CST 2021 src/CobolParser.g4
+Sun Feb 7 15:58:57 CST 2021 jar
+Sun Feb 7 15:58:59 CST 2021 testLocalx 9002
+Sun Feb 7 16:01:06 CST 2021 src/CobolLexer.g4
+Sun Feb 7 16:01:09 CST 2021 src/CobolParser.g4
+Sun Feb 7 16:01:23 CST 2021 jar
+Sun Feb 7 16:02:48 CST 2021 testLocal
+Sun Feb 7 16:05:23 CST 2021 testLocal 021
+Sun Feb 7 16:10:59 CST 2021 testrig 021
+Sun Feb 7 16:11:32 CST 2021 testrigpp 021
+Sun Feb 7 16:12:08 CST 2021 testrig 021
+Sun Feb 7 16:13:45 CST 2021 testrigpp 021
+Sun Feb 7 16:34:22 CST 2021 src/TestIntegration.java
+Sun Feb 7 16:49:23 CST 2021 src/TestIntegration.java
+Sun Feb 7 16:50:40 CST 2021 src/TestIntegration.java
+Sun Feb 7 16:51:04 CST 2021 src/TestIntegration.java
+Sun Feb 7 16:52:32 CST 2021 src/TestIntegration.java
+Sun Feb 7 16:53:44 CST 2021 src/TestIntegration.java
+Mon Feb 8 17:12:26 CST 2021 src/TheCLI.java
+Mon Feb 8 17:13:13 CST 2021 src/TheCLI.java
+Mon Feb 8 17:13:56 CST 2021 src/TheCLI.java
+Mon Feb 8 17:14:13 CST 2021 src/TheCLI.java
+Mon Feb 8 17:15:11 CST 2021 src/TheCLI.java
+Mon Feb 8 17:16:21 CST 2021 src/TheCLI.java
+Mon Feb 8 17:16:22 CST 2021 src/TestIntegration.java
+Mon Feb 8 17:16:28 CST 2021 jar
+Mon Feb 8 17:18:53 CST 2021 testLocalx 9002
+Mon Feb 8 17:20:17 CST 2021 src/TheCLI.java
+Mon Feb 8 17:20:18 CST 2021 src/TestIntegration.java
+Mon Feb 8 17:20:22 CST 2021 jar
+Mon Feb 8 17:20:24 CST 2021 testLocalx 9002
+Mon Feb 8 17:25:14 CST 2021 src/TheCLI.java
+Mon Feb 8 17:25:15 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Feb 8 17:25:16 CST 2021 src/TestIntegration.java
+Mon Feb 8 17:25:26 CST 2021 jar
+Mon Feb 8 17:25:29 CST 2021 testLocalx 9002
+Mon Feb 8 17:26:50 CST 2021 testLocalx 9002
+Mon Feb 8 17:29:55 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Feb 8 17:29:56 CST 2021 src/TestIntegration.java
+Mon Feb 8 17:29:59 CST 2021 jar
+Mon Feb 8 17:30:02 CST 2021 testLocalx 9002
+Mon Feb 8 17:38:22 CST 2021 src/CondCompVar.java
+Mon Feb 8 17:38:23 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Feb 8 17:38:24 CST 2021 src/TestIntegration.java
+Mon Feb 8 17:38:28 CST 2021 jar
+Mon Feb 8 17:38:35 CST 2021 testLocalx 9002
+Tue Feb 9 14:40:28 CST 2021 src/CondCompVar.java
+Tue Feb 9 14:40:29 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 9 14:40:30 CST 2021 src/TestIntegration.java
+Tue Feb 9 14:41:19 CST 2021 src/CondCompVar.java
+Tue Feb 9 14:41:20 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 9 14:41:21 CST 2021 src/TestIntegration.java
+Tue Feb 9 14:41:25 CST 2021 jar
+Tue Feb 9 14:41:34 CST 2021 testLocalx 9002
+Tue Feb 9 15:05:35 CST 2021 src/CondCompVar.java
+Tue Feb 9 15:06:20 CST 2021 src/CondCompVar.java
+Tue Feb 9 15:06:50 CST 2021 src/CondCompVar.java
+Tue Feb 9 15:06:51 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 9 15:06:52 CST 2021 src/TestIntegration.java
+Tue Feb 9 15:06:56 CST 2021 jar
+Tue Feb 9 15:06:58 CST 2021 testLocalx 9002
+Tue Feb 9 15:13:28 CST 2021 src/CondCompVar.java
+Tue Feb 9 15:13:29 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 9 15:13:30 CST 2021 src/TestIntegration.java
+Tue Feb 9 15:13:33 CST 2021 jar
+Tue Feb 9 15:13:35 CST 2021 testLocalx 9002
+Tue Feb 9 15:23:33 CST 2021 src/CondCompVar.java
+Tue Feb 9 15:23:34 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 9 15:23:34 CST 2021 src/TestIntegration.java
+Tue Feb 9 15:23:38 CST 2021 jar
+Tue Feb 9 15:23:40 CST 2021 testLocalx 9002
+Tue Feb 9 15:35:20 CST 2021 src/CobolPreprocessorParser.g4
+Tue Feb 9 15:35:36 CST 2021 jar
+Tue Feb 9 15:36:29 CST 2021 testLocalx 9002
+Tue Feb 9 15:48:43 CST 2021 src/CondCompVar.java
+Tue Feb 9 15:48:45 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 9 15:48:45 CST 2021 src/TestIntegration.java
+Tue Feb 9 15:48:49 CST 2021 jar
+Tue Feb 9 15:48:57 CST 2021 testLocalx 9002
+Tue Feb 9 16:16:09 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:16:14 CST 2021 jar
+Tue Feb 9 16:16:17 CST 2021 testLocalx 9002
+Tue Feb 9 16:21:08 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:24:15 CST 2021 src/TestIntegration.java
+Tue Feb 9 16:24:19 CST 2021 jar
+Tue Feb 9 16:24:21 CST 2021 testLocalx 9002
+Tue Feb 9 16:28:04 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:28:07 CST 2021 jar
+Tue Feb 9 16:28:09 CST 2021 testLocalx 9002
+Tue Feb 9 16:29:08 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:29:10 CST 2021 jar
+Tue Feb 9 16:29:13 CST 2021 testLocalx 9002
+Tue Feb 9 16:29:30 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:29:33 CST 2021 jar
+Tue Feb 9 16:29:35 CST 2021 testLocalx 9002
+Tue Feb 9 16:30:09 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:30:11 CST 2021 jar
+Tue Feb 9 16:30:13 CST 2021 testLocalx 9002
+Tue Feb 9 16:31:03 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:31:06 CST 2021 jar
+Tue Feb 9 16:31:08 CST 2021 testLocalx 9002
+Tue Feb 9 16:36:44 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:36:50 CST 2021 jar
+Tue Feb 9 16:36:54 CST 2021 testLocalx 9002
+Tue Feb 9 16:37:49 CST 2021 src/CondCompDefinedCondition.java
+Tue Feb 9 16:37:51 CST 2021 jar
+Tue Feb 9 16:37:53 CST 2021 testLocalx 9002
+Tue Feb 9 16:38:59 CST 2021 src/CondCompSimpleRelationalCondition.java
+Tue Feb 9 16:39:00 CST 2021 src/CondCompDefinedCondition.java
+Tue Feb 9 16:39:03 CST 2021 jar
+Tue Feb 9 16:39:05 CST 2021 testLocalx 9002
+Thu Feb 11 16:25:55 CST 2021 testLocalx 9003
+Thu Feb 11 17:01:45 CST 2021 src/TestIntegration.java
+Thu Feb 11 17:01:51 CST 2021 jar
+Thu Feb 11 17:01:56 CST 2021 testLocalx 9003
+Thu Feb 11 17:06:39 CST 2021 testLocalx 9002
+Sat Feb 13 16:33:25 CST 2021 testLocalx 9002
+Sat Feb 13 16:34:01 CST 2021 testLocalx 9004
+Tue Feb 16 14:22:33 CST 2021 src/CondCompStmtEvaluate.java
+Tue Feb 16 14:26:23 CST 2021 evaluate
+Tue Feb 16 14:27:53 CST 2021 evaluate
+Tue Feb 16 14:34:38 CST 2021 evaluate
+Tue Feb 16 14:35:26 CST 2021 evaluate
+Tue Feb 16 15:02:57 CST 2021 evaluate
+Tue Feb 16 15:04:19 CST 2021 evaluate
+Tue Feb 16 15:04:48 CST 2021 evaluate
+Tue Feb 16 15:05:14 CST 2021 evaluate
+Tue Feb 16 15:06:09 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 16 15:08:13 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Feb 16 15:08:14 CST 2021 src/TestIntegration.java
+Tue Feb 16 15:08:38 CST 2021 jar
+Wed Feb 17 16:55:09 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Feb 17 17:05:48 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Feb 17 17:06:56 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Feb 17 17:09:15 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Feb 17 17:10:15 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Feb 17 17:12:26 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Feb 17 17:12:52 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Thu Feb 18 17:01:54 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Thu Feb 18 17:02:27 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Thu Feb 18 17:03:10 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Sat Feb 20 15:46:39 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:50:22 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:50:44 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:51:43 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:52:29 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:53:03 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:53:42 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:54:30 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:55:22 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:55:54 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:56:09 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:56:56 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 15:57:29 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 16:01:20 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 20 16:44:40 CST 2021 src/CondCompEvaluateSelection.java
+Sat Feb 20 16:45:06 CST 2021 src/CondCompEvaluateSelection.java
+Sat Feb 20 16:46:15 CST 2021 src/CondCompEvaluateSelection.java
+Sat Feb 20 16:50:08 CST 2021 src/CondCompEvaluateSelection.java
+Sat Feb 20 16:51:21 CST 2021 evaluate
+Sat Feb 20 17:02:14 CST 2021 evaluate
+Sat Feb 20 17:02:49 CST 2021 evaluate
+Sat Feb 27 15:12:26 CST 2021 src/CondCompComparisonOp.java
+Sat Feb 27 15:12:29 CST 2021 src/CondCompVar.java
+Sat Feb 27 15:12:58 CST 2021 evaluate
+Sat Feb 27 15:14:07 CST 2021 evaluate
+Sat Feb 27 15:14:53 CST 2021 evaluate
+Sat Feb 27 15:16:43 CST 2021 evaluate
+Sat Feb 27 15:18:42 CST 2021 evaluate
+Sat Feb 27 15:24:16 CST 2021 src/CondCompVar.java
+Sat Feb 27 15:25:23 CST 2021 src/CondCompVar.java
+Sat Feb 27 15:25:28 CST 2021 evaluate
+Sat Feb 27 15:25:36 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 27 15:25:37 CST 2021 src/TestIntegration.java
+Sat Feb 27 15:25:46 CST 2021 jar
+Sat Feb 27 15:26:42 CST 2021 testLocalx 9003
+Sat Feb 27 15:28:19 CST 2021 src/CondCompStmtWhen.java
+Sat Feb 27 15:28:20 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 27 15:28:21 CST 2021 src/TestIntegration.java
+Sat Feb 27 15:28:26 CST 2021 jar
+Sat Feb 27 15:28:29 CST 2021 testLocalx 9003
+Sat Feb 27 15:44:05 CST 2021 src/CobolPreprocessorParser.g4
+Sat Feb 27 15:44:16 CST 2021 jar
+Sat Feb 27 15:44:24 CST 2021 testLocalx 9003
+Sat Feb 27 16:05:40 CST 2021 src/CondCompEvaluateSelection.java
+Sat Feb 27 16:05:43 CST 2021 jar
+Sat Feb 27 16:05:47 CST 2021 testLocalx 9003
+Sat Feb 27 16:20:44 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 27 16:23:34 CST 2021 src/CondCompArithmeticExpression.java
+Sat Feb 27 16:23:38 CST 2021 jar
+Sat Feb 27 16:23:41 CST 2021 testLocalx 9003
+Sat Feb 27 16:26:19 CST 2021 testrigppx 9003
+Sat Feb 27 16:31:59 CST 2021 src/CondCompStmtWhen.java
+Sat Feb 27 16:32:00 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Feb 27 16:32:00 CST 2021 src/TestIntegration.java
+Sat Feb 27 16:32:05 CST 2021 jar
+Sat Feb 27 16:32:09 CST 2021 testLocalx 9003
+Sat Feb 27 16:38:17 CST 2021 testLocalx 9003
+Mon Mar 1 16:32:06 CST 2021 src/TestIntegration.java
+Mon Mar 1 16:32:11 CST 2021 jar
+Mon Mar 1 16:33:00 CST 2021 testLocalx 9003
+Mon Mar 1 17:30:39 CST 2021 src/CondCompStmtWhen.java
+Mon Mar 1 17:30:40 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Mar 1 17:30:41 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:31:38 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:34:24 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:35:58 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:36:01 CST 2021 jar
+Mon Mar 1 17:36:18 CST 2021 testLocalx 9003
+Mon Mar 1 17:42:19 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:42:22 CST 2021 jar
+Mon Mar 1 17:42:27 CST 2021 testLocalx 9003
+Mon Mar 1 17:48:58 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:49:01 CST 2021 jar
+Mon Mar 1 17:49:04 CST 2021 testLocalx 9003
+Mon Mar 1 17:53:28 CST 2021 src/TestIntegration.java
+Mon Mar 1 17:53:31 CST 2021 jar
+Mon Mar 1 17:53:36 CST 2021 testLocalx 9003
+Mon Mar 1 18:03:25 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Mar 1 18:03:44 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Mar 1 18:03:45 CST 2021 src/TestIntegration.java
+Mon Mar 1 18:03:50 CST 2021 jar
+Mon Mar 1 18:03:55 CST 2021 testLocalx 9003
+Mon Mar 1 18:17:36 CST 2021 src/CondCompStmtWhen.java
+Mon Mar 1 18:18:05 CST 2021 src/CondCompStmtWhen.java
+Mon Mar 1 18:18:06 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Mar 1 18:18:07 CST 2021 src/TestIntegration.java
+Mon Mar 1 18:18:10 CST 2021 jar
+Mon Mar 1 18:18:14 CST 2021 testLocalx 9003
+Tue Mar 2 15:50:50 CST 2021 src/CondCompStmtWhen.java
+Tue Mar 2 15:50:51 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Mar 2 15:50:52 CST 2021 src/TestIntegration.java
+Tue Mar 2 15:50:56 CST 2021 jar
+Tue Mar 2 15:51:11 CST 2021 testLocalx 9003
+Tue Mar 2 16:14:05 CST 2021 src/CondCompStmtWhen.java
+Tue Mar 2 16:14:06 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Mar 2 16:14:07 CST 2021 src/TestIntegration.java
+Tue Mar 2 16:14:10 CST 2021 jar
+Tue Mar 2 16:14:14 CST 2021 testLocalx 9003
+Tue Mar 2 16:38:59 CST 2021 src/CondCompStmtWhen.java
+Tue Mar 2 16:39:00 CST 2021 src/CompilerDirectingStatementListener.java
+Tue Mar 2 16:39:01 CST 2021 src/TestIntegration.java
+Tue Mar 2 16:39:05 CST 2021 jar
+Tue Mar 2 16:39:09 CST 2021 testLocalx 9003
+Tue Mar 2 16:53:01 CST 2021 src/TestIntegration.java
+Tue Mar 2 16:53:05 CST 2021 jar
+Tue Mar 2 16:53:16 CST 2021 testLocalx 9003
+Wed Mar 3 17:35:56 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:37:27 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:38:35 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:39:25 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:40:21 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:43:26 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:44:53 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:49:23 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:49:50 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:51:13 CST 2021 src/TestIntegration.java
+Wed Mar 3 17:53:08 CST 2021 src/TestIntegration.java
+Wed Mar 3 18:10:21 CST 2021 src/TestIntegration.java
+Wed Mar 3 18:17:14 CST 2021 src/TestIntegration.java
+Wed Mar 3 18:17:29 CST 2021 jar
+Thu Mar 4 14:34:41 CST 2021 src/TestIntegration.java
+Thu Mar 4 14:34:45 CST 2021 jar
+Thu Mar 4 14:35:24 CST 2021 ziplogs
+Thu Mar 4 14:35:31 CST 2021 testLocalx 9003
+Thu Mar 4 15:01:03 CST 2021 src/CobolPreprocessorLexer.g4
+Thu Mar 4 15:02:02 CST 2021 src/CobolPreprocessorLexer.g4
+Thu Mar 4 15:02:05 CST 2021 src/CobolPreprocessorParser.g4
+Thu Mar 4 15:02:52 CST 2021 jar
+Thu Mar 4 15:03:59 CST 2021 testLocalx 9003
+Thu Mar 4 15:05:00 CST 2021 testLocalx 9002
+Thu Mar 4 15:07:14 CST 2021 testLocal 0005
+Thu Mar 4 15:08:25 CST 2021 testLocal 005
+Thu Mar 4 15:11:12 CST 2021 testLocal
+Thu Mar 4 15:13:56 CST 2021 src/CobolPreprocessorLexer.g4
+Thu Mar 4 15:13:59 CST 2021 src/CobolPreprocessorParser.g4
+Thu Mar 4 15:14:54 CST 2021 src/CobolPreprocessorLexer.g4
+Thu Mar 4 15:14:56 CST 2021 src/CobolPreprocessorParser.g4
+Thu Mar 4 15:15:05 CST 2021 jar
+Thu Mar 4 15:15:16 CST 2021 testLocalx 9003
+Thu Mar 4 15:15:23 CST 2021 testLocalx 9002
+Thu Mar 4 15:15:29 CST 2021 testLocal 005
+Thu Mar 4 15:15:38 CST 2021 testLocal
+Thu Mar 4 15:17:29 CST 2021 testLocal 021
+Thu Mar 4 15:23:09 CST 2021 testrig 021
+Fri Mar 5 13:26:59 CST 2021 src/TestIntegration.java
+Fri Mar 5 13:55:05 CST 2021 src/TestIntegration.java
+Fri Mar 5 13:55:28 CST 2021 src/TestIntegration.java
+Fri Mar 5 13:56:34 CST 2021 src/TestIntegration.java
+Fri Mar 5 13:57:07 CST 2021 src/TestIntegration.java
+Fri Mar 5 13:57:17 CST 2021 jar
+Fri Mar 5 13:57:25 CST 2021 testLocal 021
+Fri Mar 5 14:02:15 CST 2021 src/ReplaceStatement.java
+Fri Mar 5 14:02:16 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 5 14:02:17 CST 2021 src/TestIntegration.java
+Fri Mar 5 14:02:20 CST 2021 jar
+Fri Mar 5 14:02:25 CST 2021 testLocal 021
+Fri Mar 5 14:12:48 CST 2021 src/ReplaceStatement.java
+Fri Mar 5 14:12:49 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 5 14:12:50 CST 2021 src/TestIntegration.java
+Fri Mar 5 14:12:53 CST 2021 jar
+Fri Mar 5 14:12:57 CST 2021 testLocal 021
+Fri Mar 5 14:23:14 CST 2021 src/TestIntegration.java
+Fri Mar 5 14:23:30 CST 2021 src/TestIntegration.java
+Fri Mar 5 14:23:33 CST 2021 jar
+Fri Mar 5 14:23:37 CST 2021 testLocal 021
+Fri Mar 5 14:30:58 CST 2021 src/ReplaceStatement.java
+Fri Mar 5 14:30:59 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 5 14:31:00 CST 2021 src/TestIntegration.java
+Fri Mar 5 14:31:03 CST 2021 jar
+Fri Mar 5 14:31:09 CST 2021 testLocal 021
+Fri Mar 5 14:34:53 CST 2021 testLocal
+Fri Mar 5 14:36:07 CST 2021 testLocal 022
+Fri Mar 5 14:44:12 CST 2021 src/CopyStatement.java
+Fri Mar 5 14:44:13 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 5 14:44:14 CST 2021 src/TestIntegration.java
+Fri Mar 5 14:44:17 CST 2021 jar
+Fri Mar 5 14:44:22 CST 2021 testLocal 022
+Fri Mar 5 14:44:30 CST 2021 testLocal
+Fri Mar 5 14:44:58 CST 2021 testLocalx 9002
+Fri Mar 5 14:45:04 CST 2021 testLocalx 9003
+Fri Mar 5 15:03:39 CST 2021 testNist
+Fri Mar 5 16:02:02 CST 2021 testLocal 034
+Fri Mar 5 16:04:04 CST 2021 testLocal 034
+Fri Mar 5 16:04:29 CST 2021 testLocal 034
+Fri Mar 5 16:04:50 CST 2021 testLocal 034
+Fri Mar 5 16:10:05 CST 2021 testrigpp 034
+Fri Mar 5 16:16:14 CST 2021 testrigpp 034
+Fri Mar 5 16:21:06 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 5 16:21:14 CST 2021 jar
+Fri Mar 5 16:21:20 CST 2021 testrigpp 034
+Fri Mar 5 16:21:46 CST 2021 testrigpp 034
+Fri Mar 5 16:25:39 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 5 16:25:46 CST 2021 jar
+Fri Mar 5 16:25:49 CST 2021 testrigpp 034
+Fri Mar 5 16:32:32 CST 2021 testrigpp 034
+Fri Mar 5 16:32:52 CST 2021 testLocal 034
+Fri Mar 5 16:35:08 CST 2021 src/CobolPreprocessorLexer.g4
+Fri Mar 5 16:35:11 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 5 16:35:18 CST 2021 jar
+Fri Mar 5 16:35:26 CST 2021 testLocal 034
+Fri Mar 5 16:35:42 CST 2021 testLocal
+Fri Mar 5 16:36:08 CST 2021 testNist
+Sat Mar 6 13:27:24 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 6 13:28:35 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 6 13:28:47 CST 2021 jar
+Sat Mar 6 13:28:59 CST 2021 testrigpp 034
+Sat Mar 6 13:29:22 CST 2021 testrigpp 034
+Sat Mar 6 13:29:50 CST 2021 testLocal
+Sat Mar 6 13:30:23 CST 2021 testNist
+Sat Mar 6 13:46:50 CST 2021 testLocal 034
+Sat Mar 6 14:03:38 CST 2021 src/CondCompVar.java
+Sat Mar 6 14:04:07 CST 2021 src/CondCompVar.java
+Sat Mar 6 14:04:08 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 6 14:04:08 CST 2021 src/TestIntegration.java
+Sat Mar 6 14:04:19 CST 2021 testLocal 034
+Sat Mar 6 14:04:31 CST 2021 jar
+Sat Mar 6 14:04:35 CST 2021 testLocal 034
+Sat Mar 6 14:05:46 CST 2021 testLocal 034
+Sat Mar 6 14:06:22 CST 2021 testLocal 035
+Sat Mar 6 14:06:52 CST 2021 testLocalx 9002
+Sat Mar 6 14:09:26 CST 2021 src/CondCompVar.java
+Sat Mar 6 14:09:27 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 6 14:09:28 CST 2021 src/TestIntegration.java
+Sat Mar 6 14:09:31 CST 2021 jar
+Sat Mar 6 14:09:36 CST 2021 testLocalx 9002
+Sat Mar 6 14:09:43 CST 2021 testLocalx 9003
+Sat Mar 6 14:11:35 CST 2021 src/CobolPreprocessorLexer.g4
+Sat Mar 6 14:11:37 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 6 14:11:45 CST 2021 jar
+Sat Mar 6 14:11:50 CST 2021 testLocalx 9003
+Sat Mar 6 14:12:10 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 6 14:12:16 CST 2021 jar
+Sat Mar 6 14:12:19 CST 2021 testLocalx 9003
+Sat Mar 6 14:12:27 CST 2021 testLocalx 9002
+Sat Mar 6 14:12:38 CST 2021 testLocal 035
+Sat Mar 6 14:12:50 CST 2021 testLocal 034
+Sat Mar 6 14:13:12 CST 2021 testLocal
+Sat Mar 6 14:14:02 CST 2021 testLocal 030
+Sat Mar 6 14:14:25 CST 2021 testrigppx 030
+Sat Mar 6 14:14:33 CST 2021 testrigpp 030
+Sat Mar 6 14:16:54 CST 2021 src/CobolPreprocessorLexer.g4
+Sat Mar 6 14:16:57 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 6 14:17:09 CST 2021 testrigpp 030
+Sat Mar 6 14:17:52 CST 2021 testLocal
+Sat Mar 6 14:18:07 CST 2021 jar
+Sat Mar 6 14:18:11 CST 2021 testLocal
+Sat Mar 6 14:18:34 CST 2021 testLocal 034
+Sat Mar 6 14:18:41 CST 2021 testLocal 035
+Sat Mar 6 14:18:53 CST 2021 testLocalx 9002
+Sat Mar 6 14:18:58 CST 2021 testLocalx 9003
+Sat Mar 6 14:19:16 CST 2021 testNist
+Sat Mar 6 14:47:02 CST 2021 src/TestIntegration.java
+Sat Mar 6 14:47:06 CST 2021 jar
+Sat Mar 6 14:47:12 CST 2021 testLocal
+Sat Mar 6 14:47:29 CST 2021 testLocal 034
+Sat Mar 6 14:47:41 CST 2021 testLocal 035
+Sat Mar 6 14:47:56 CST 2021 src/TestIntegration.java
+Sat Mar 6 14:48:00 CST 2021 jar
+Sat Mar 6 14:48:03 CST 2021 testLocal 035
+Sat Mar 6 14:49:49 CST 2021 testLocal
+Sat Mar 6 14:53:16 CST 2021 testLocal 035
+Sat Mar 6 15:04:16 CST 2021 testLocal 035
+Sat Mar 6 15:04:29 CST 2021 testLocal 135
+Sat Mar 6 15:04:40 CST 2021 testLocal
+Sat Mar 6 15:06:58 CST 2021 testLocal 034
+Sat Mar 6 15:07:20 CST 2021 testLocal 035
+Sat Mar 6 15:17:12 CST 2021 src/TestIntegration.java
+Sat Mar 6 15:17:47 CST 2021 src/TestIntegration.java
+Sat Mar 6 15:17:51 CST 2021 jar
+Sat Mar 6 15:17:57 CST 2021 testLocal 035
+Sat Mar 6 15:18:11 CST 2021 testLocal
+Sat Mar 6 15:21:54 CST 2021 testLocal 035
+Sat Mar 6 15:23:01 CST 2021 testLocal 335
+Sat Mar 6 16:03:52 CST 2021 src/TestIntegration.java
+Sat Mar 6 16:03:56 CST 2021 jar
+Sat Mar 6 16:04:24 CST 2021 testLocal
+Sat Mar 6 16:06:00 CST 2021 src/TestIntegration.java
+Sat Mar 6 16:06:03 CST 2021 jar
+Sat Mar 6 16:06:11 CST 2021 testLocal
+Sat Mar 6 16:06:33 CST 2021 testNist
+Sun Mar 7 11:21:31 CST 2021 testLocal 038
+Sun Mar 7 11:21:53 CST 2021 testLocal 036
+Sun Mar 7 11:22:23 CST 2021 testLocal 040
+Sun Mar 7 11:22:50 CST 2021 testLocal 042
+Sun Mar 7 11:27:38 CST 2021 testLocal 043
+Sun Mar 7 12:57:38 CST 2021 testLocal 037
+Sun Mar 7 16:01:31 CST 2021 testrigpp 037
+Sun Mar 7 16:01:58 CST 2021 testrigpp 039
+Sun Mar 7 16:03:33 CST 2021 testrigpp 043
+Sun Mar 7 16:05:08 CST 2021 src/CobolPreprocessorParser.g4
+Sun Mar 7 16:05:15 CST 2021 jar
+Sun Mar 7 16:05:46 CST 2021 testLocal
+Sun Mar 7 16:15:48 CST 2021 src/CondCompSimpleRelationalCondition.java
+Sun Mar 7 16:15:51 CST 2021 jar
+Sun Mar 7 16:16:05 CST 2021 testLocal 037
+Sun Mar 7 16:18:25 CST 2021 testLocal 039
+Sun Mar 7 16:21:45 CST 2021 src/CondCompEvaluateSelection.java
+Sun Mar 7 16:21:48 CST 2021 jar
+Sun Mar 7 16:21:52 CST 2021 testLocal 039
+Sun Mar 7 16:24:04 CST 2021 src/CondCompStmtWhen.java
+Sun Mar 7 16:24:05 CST 2021 src/CompilerDirectingStatementListener.java
+Sun Mar 7 16:24:06 CST 2021 src/TestIntegration.java
+Sun Mar 7 16:24:09 CST 2021 jar
+Sun Mar 7 16:24:13 CST 2021 testLocal 039
+Sun Mar 7 16:37:52 CST 2021 src/TestIntegration.java
+Sun Mar 7 16:37:55 CST 2021 jar
+Sun Mar 7 16:49:31 CST 2021 testLocal
+Sun Mar 7 16:52:23 CST 2021 testLocal
+Sun Mar 7 16:55:54 CST 2021 testLocal
+Mon Mar 8 15:45:52 CST 2021 testLocal 044
+Mon Mar 8 15:52:47 CST 2021 testrigpp 044
+Mon Mar 8 16:24:01 CST 2021 src/CondCompVar.java
+Mon Mar 8 16:24:03 CST 2021 src/CompilerDirectingStatementListener.java
+Mon Mar 8 16:24:03 CST 2021 src/TestIntegration.java
+Mon Mar 8 16:24:07 CST 2021 jar
+Mon Mar 8 16:24:17 CST 2021 testLocal 044
+Mon Mar 8 16:31:56 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Mon Mar 8 16:31:57 CST 2021 src/CondCompArithmeticExpression.java
+Mon Mar 8 16:31:59 CST 2021 jar
+Mon Mar 8 16:32:03 CST 2021 testLocal 044
+Mon Mar 8 16:39:54 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Mon Mar 8 16:39:57 CST 2021 jar
+Mon Mar 8 16:40:01 CST 2021 testLocal 044
+Mon Mar 8 16:46:33 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Mon Mar 8 16:46:36 CST 2021 jar
+Mon Mar 8 16:46:42 CST 2021 testLocal 044
+Mon Mar 8 16:52:16 CST 2021 testLocal 044
+Mon Mar 8 16:53:39 CST 2021 testLocal 045
+Mon Mar 8 16:58:06 CST 2021 testLocal 046
+Mon Mar 8 17:09:15 CST 2021 testLocal
+Mon Mar 8 17:09:41 CST 2021 src/TestIntegration.java
+Mon Mar 8 17:09:44 CST 2021 jar
+Mon Mar 8 17:09:50 CST 2021 testLocal
+Mon Mar 8 17:10:39 CST 2021 testLocal 044
+Mon Mar 8 17:14:15 CST 2021 src/TestIntegration.java
+Mon Mar 8 17:14:18 CST 2021 jar
+Mon Mar 8 17:14:22 CST 2021 testLocal 044
+Mon Mar 8 17:14:30 CST 2021 testLocal
+Mon Mar 8 17:16:30 CST 2021 testNist
+Tue Mar 9 17:03:48 CST 2021 testLocal 047
+Tue Mar 9 17:04:52 CST 2021 testLocal 047
+Tue Mar 9 17:05:02 CST 2021 src/TestIntegration.java
+Tue Mar 9 17:05:05 CST 2021 jar
+Tue Mar 9 17:05:09 CST 2021 testLocal 047
+Tue Mar 9 17:08:26 CST 2021 testLocal
+Tue Mar 9 17:21:11 CST 2021 testLocal 048
+Tue Mar 9 17:21:42 CST 2021 testrigpp 048
+Tue Mar 9 17:23:48 CST 2021 testrigpp 048
+Tue Mar 9 17:24:09 CST 2021 testLocal 048
+Tue Mar 9 17:27:32 CST 2021 testrigpp 049
+Tue Mar 9 17:28:17 CST 2021 testLocal 049
+Tue Mar 9 17:47:23 CST 2021 testLocal 049
+Tue Mar 9 17:47:37 CST 2021 testrigpp 049
+Tue Mar 9 17:51:58 CST 2021 testLocal 049
+Tue Mar 9 18:01:20 CST 2021 testLocal
+Tue Mar 9 18:01:46 CST 2021 src/TestIntegration.java
+Tue Mar 9 18:01:49 CST 2021 jar
+Tue Mar 9 18:01:52 CST 2021 testLocal
+Wed Mar 10 09:20:15 CST 2021 testLocalx 9009
+Wed Mar 10 09:25:33 CST 2021 testLocalx 9010
+Wed Mar 10 09:34:49 CST 2021 src/CondCompArithmeticExpression.java
+Wed Mar 10 09:34:52 CST 2021 jar
+Wed Mar 10 09:34:58 CST 2021 testLocalx 9010
+Wed Mar 10 09:44:08 CST 2021 testLocalx 9009
+Wed Mar 10 09:44:34 CST 2021 testrigpp 9009
+Wed Mar 10 09:44:41 CST 2021 testrigppx 9009
+Wed Mar 10 09:53:56 CST 2021 src/CondCompVar.java
+Wed Mar 10 09:53:57 CST 2021 src/CompilerDirectingStatementListener.java
+Wed Mar 10 09:53:58 CST 2021 src/TestIntegration.java
+Wed Mar 10 09:54:01 CST 2021 jar
+Wed Mar 10 09:54:11 CST 2021 testLocalx 9009
+Wed Mar 10 09:57:56 CST 2021 testLocal
+Wed Mar 10 14:04:57 CST 2021 src/CondCompArithmeticExpression.java
+Wed Mar 10 14:06:25 CST 2021 src/CondCompArithmeticExpression.java
+Wed Mar 10 14:06:46 CST 2021 src/CondCompGroupOp.java
+Wed Mar 10 14:06:47 CST 2021 src/CondCompArithmeticExpression.java
+Wed Mar 10 14:06:51 CST 2021 jar
+Wed Mar 10 14:07:12 CST 2021 testLocalx 9010
+Wed Mar 10 14:11:16 CST 2021 src/CondCompSimpleArithmeticExpression.java
+Wed Mar 10 14:11:19 CST 2021 jar
+Wed Mar 10 14:11:29 CST 2021 testLocalx 9010
+Wed Mar 10 14:13:53 CST 2021 testrigppx 9010
+Thu Mar 11 10:04:42 CST 2021 src/CobolPreprocessorParser.g4
+Thu Mar 11 10:21:06 CST 2021 src/CobolPreprocessorParser.g4
+Thu Mar 11 10:21:11 CST 2021 src/CondCompToken.java
+Thu Mar 11 10:21:11 CST 2021 src/CondCompComparisonOp.java
+Thu Mar 11 10:21:12 CST 2021 src/CondCompVar.java
+Thu Mar 11 10:21:13 CST 2021 src/CompilerDirectingStatementListener.java
+Thu Mar 11 10:21:14 CST 2021 src/TestIntegration.java
+Thu Mar 11 10:21:15 CST 2021 src/CondCompLogicOp.java
+Thu Mar 11 10:21:16 CST 2021 src/CondCompArithOp.java
+Thu Mar 11 10:21:17 CST 2021 src/CondCompGroupOp.java
+Thu Mar 11 10:21:18 CST 2021 src/CondCompSimpleRelationalCondition.java
+Thu Mar 11 10:21:18 CST 2021 src/CondCompBinaryCondition.java
+Thu Mar 11 10:21:19 CST 2021 src/CondCompDefinedCondition.java
+Thu Mar 11 10:21:20 CST 2021 src/CondCompRelationalCondition.java
+Thu Mar 11 11:49:50 CST 2021 src/CondCompArithmeticAtom.java
+Thu Mar 11 11:51:50 CST 2021 src/CondCompArithmeticAtom.java
+Thu Mar 11 11:52:24 CST 2021 src/CondCompArithmeticAtom.java
+Thu Mar 11 13:01:34 CST 2021 src/CondCompArithmeticAtom.java
+Thu Mar 11 13:01:35 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:02:26 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:06:05 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:07:26 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:08:19 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:08:32 CST 2021 jar
+Thu Mar 11 13:08:58 CST 2021 testLocalx 9010
+Thu Mar 11 13:12:43 CST 2021 testrigppx 9010
+Thu Mar 11 13:24:34 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:25:38 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 13:25:42 CST 2021 jar
+Thu Mar 11 13:25:52 CST 2021 testLocalx 9010
+Thu Mar 11 16:21:16 CST 2021 testLocalx 9010
+Thu Mar 11 16:21:25 CST 2021 testrigppx 9010
+Thu Mar 11 16:26:55 CST 2021 src/CondCompStmtWhen.java
+Thu Mar 11 16:26:56 CST 2021 src/CompilerDirectingStatementListener.java
+Thu Mar 11 16:26:56 CST 2021 src/TestIntegration.java
+Thu Mar 11 16:26:58 CST 2021 src/CondCompEvaluateSelection.java
+Thu Mar 11 16:28:04 CST 2021 src/CondCompEvaluateSelection.java
+Thu Mar 11 16:28:12 CST 2021 jar
+Thu Mar 11 16:28:23 CST 2021 testLocalx 9010
+Thu Mar 11 16:29:34 CST 2021 src/CondCompEvaluateSelection.java
+Thu Mar 11 16:29:36 CST 2021 jar
+Thu Mar 11 16:29:40 CST 2021 testLocalx 9010
+Thu Mar 11 16:37:36 CST 2021 src/CondCompComparisonOp.java
+Thu Mar 11 16:37:37 CST 2021 src/CondCompVar.java
+Thu Mar 11 16:37:38 CST 2021 src/CompilerDirectingStatementListener.java
+Thu Mar 11 16:37:39 CST 2021 src/TestIntegration.java
+Thu Mar 11 16:37:42 CST 2021 jar
+Thu Mar 11 16:37:47 CST 2021 testLocalx 9010
+Thu Mar 11 16:45:30 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 16:45:48 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 16:45:51 CST 2021 jar
+Thu Mar 11 16:45:56 CST 2021 testLocalx 9010
+Thu Mar 11 16:54:22 CST 2021 src/CondCompArithmeticExpression.java
+Thu Mar 11 16:54:25 CST 2021 jar
+Thu Mar 11 16:54:29 CST 2021 testLocalx 9010
+Thu Mar 11 16:57:24 CST 2021 testLocal
+Thu Mar 11 17:01:17 CST 2021 src/TestIntegration.java
+Thu Mar 11 17:01:20 CST 2021 jar
+Thu Mar 11 17:01:24 CST 2021 testLocal 050
+Thu Mar 11 17:01:53 CST 2021 src/TestIntegration.java
+Thu Mar 11 17:01:57 CST 2021 jar
+Thu Mar 11 17:02:00 CST 2021 testLocal 050
+Thu Mar 11 17:04:59 CST 2021 testLocal
+Thu Mar 11 17:06:12 CST 2021 testLocal
+Thu Mar 11 17:15:25 CST 2021 testNist
+Fri Mar 12 11:29:15 CST 2021 testLocalx 9009
+Fri Mar 12 11:37:04 CST 2021 src/CondCompBinaryCondition.java
+Fri Mar 12 11:37:45 CST 2021 src/CondCompBinaryCondition.java
+Fri Mar 12 11:37:50 CST 2021 jar
+Fri Mar 12 11:37:56 CST 2021 testLocalx 9009
+Fri Mar 12 11:39:40 CST 2021 ziplogs
+Fri Mar 12 11:39:56 CST 2021 testLocalx 9009
+Fri Mar 12 11:46:36 CST 2021 testrigppx 9009
+Fri Mar 12 11:56:08 CST 2021 src/CondCompVar.java
+Fri Mar 12 11:56:09 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 11:56:10 CST 2021 src/TestIntegration.java
+Fri Mar 12 11:56:14 CST 2021 jar
+Fri Mar 12 11:56:20 CST 2021 testLocalx 9009
+Fri Mar 12 12:05:17 CST 2021 src/TestIntegration.java
+Fri Mar 12 12:05:21 CST 2021 jar
+Fri Mar 12 12:05:27 CST 2021 testLocal
+Fri Mar 12 12:06:06 CST 2021 testNist
+Fri Mar 12 12:31:38 CST 2021 testLocal
+Fri Mar 12 13:49:22 CST 2021 testLocal 052
+Fri Mar 12 13:52:59 CST 2021 testrigpp 052
+Fri Mar 12 13:57:56 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 12 13:58:10 CST 2021 jar
+Fri Mar 12 13:58:15 CST 2021 testrigpp 052
+Fri Mar 12 14:01:43 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 12 14:01:50 CST 2021 jar
+Fri Mar 12 14:01:53 CST 2021 testrigpp 052
+Fri Mar 12 14:02:34 CST 2021 testLocal
+Fri Mar 12 14:03:02 CST 2021 testLocal 052
+Fri Mar 12 14:12:07 CST 2021 testrigpp 052
+Fri Mar 12 14:20:54 CST 2021 src/CondCompArithmeticExpression.java
+Fri Mar 12 16:15:40 CST 2021 src/CondCompVar.java
+Fri Mar 12 16:15:41 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 16:15:42 CST 2021 src/TestIntegration.java
+Fri Mar 12 16:15:43 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:33:16 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:33:29 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:34:12 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:34:36 CST 2021 src/CondCompArithmeticExpression.java
+Fri Mar 12 16:34:41 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:36:22 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:37:34 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 16:47:45 CST 2021 src/CondCompComparisonOp.java
+Fri Mar 12 16:47:46 CST 2021 src/CondCompVar.java
+Fri Mar 12 16:47:47 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 16:47:48 CST 2021 src/TestIntegration.java
+Fri Mar 12 17:17:20 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 17:19:09 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 17:19:15 CST 2021 jar
+Fri Mar 12 17:19:27 CST 2021 testLocal 052
+Fri Mar 12 17:19:48 CST 2021 testrigpp 052
+Fri Mar 12 17:23:35 CST 2021 src/CondCompSimpleRelationalCondition.java
+Fri Mar 12 17:23:37 CST 2021 jar
+Fri Mar 12 17:23:41 CST 2021 testLocal 052
+Fri Mar 12 17:27:13 CST 2021 testLocal 052
+Fri Mar 12 17:38:25 CST 2021 testrigpp 052
+Fri Mar 12 17:40:13 CST 2021 src/CondCompStmtWhen.java
+Fri Mar 12 17:40:14 CST 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 12 17:40:15 CST 2021 src/TestIntegration.java
+Fri Mar 12 17:40:18 CST 2021 jar
+Fri Mar 12 17:40:22 CST 2021 testLocal 052
+Fri Mar 12 17:43:39 CST 2021 testLocal 052
+Fri Mar 12 17:51:30 CST 2021 src/CondCompDefinedCondition.java
+Fri Mar 12 17:51:33 CST 2021 jar
+Fri Mar 12 17:51:38 CST 2021 testLocal 052
+Fri Mar 12 17:52:57 CST 2021 testLocal
+Fri Mar 12 17:58:51 CST 2021 src/TestIntegration.java
+Fri Mar 12 17:58:56 CST 2021 jar
+Fri Mar 12 18:00:29 CST 2021 testLocal
+Fri Mar 12 18:01:35 CST 2021 testLocal 252
+Fri Mar 12 18:09:39 CST 2021 testLocal 152
+Fri Mar 12 18:12:28 CST 2021 testLocal 352
+Fri Mar 12 18:14:04 CST 2021 src/CobolPreprocessorLexer.g4
+Fri Mar 12 18:14:07 CST 2021 src/CobolPreprocessorParser.g4
+Fri Mar 12 18:14:14 CST 2021 jar
+Fri Mar 12 18:14:24 CST 2021 testLocal 352
+Fri Mar 12 18:14:34 CST 2021 testLocal 152
+Fri Mar 12 18:14:41 CST 2021 testLocal
+Fri Mar 12 18:15:28 CST 2021 testNist
+Sat Mar 13 16:32:40 CST 2021 testLocal 053
+Sat Mar 13 16:36:35 CST 2021 src/TestIntegration.java
+Sat Mar 13 16:36:39 CST 2021 jar
+Sat Mar 13 16:36:44 CST 2021 testLocal
+Sat Mar 13 16:37:50 CST 2021 testLocal
+Sat Mar 13 16:51:17 CST 2021 testLocal 054
+Sat Mar 13 16:53:31 CST 2021 testrigpp 054
+Sat Mar 13 16:57:18 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 13 16:57:27 CST 2021 jar
+Sat Mar 13 16:57:32 CST 2021 testrigpp 054
+Sat Mar 13 16:57:51 CST 2021 testLocal 054
+Sat Mar 13 17:02:49 CST 2021 src/CondCompSimpleRelationalCondition.java
+Sat Mar 13 17:02:51 CST 2021 jar
+Sat Mar 13 17:02:54 CST 2021 testLocal 054
+Sat Mar 13 17:04:44 CST 2021 testrigpp 054
+Sat Mar 13 17:08:02 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 13 17:08:08 CST 2021 jar
+Sat Mar 13 17:08:15 CST 2021 testLocal 054
+Sat Mar 13 17:08:24 CST 2021 testrigpp 054
+Sat Mar 13 17:09:38 CST 2021 testLocal 054
+Sat Mar 13 17:13:24 CST 2021 testrigpp 054
+Sat Mar 13 17:25:46 CST 2021 src/CondCompStmtWhen.java
+Sat Mar 13 17:26:31 CST 2021 src/CondCompStmtWhen.java
+Sat Mar 13 17:26:46 CST 2021 src/CondCompStmtWhen.java
+Sat Mar 13 17:26:48 CST 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 13 17:26:48 CST 2021 src/TestIntegration.java
+Sat Mar 13 17:26:52 CST 2021 jar
+Sat Mar 13 17:27:10 CST 2021 testLocal 054
+Sat Mar 13 17:28:27 CST 2021 testrigpp 054
+Sat Mar 13 17:33:48 CST 2021 src/CondCompSimpleRelationalCondition.java
+Sat Mar 13 17:33:51 CST 2021 jar
+Sat Mar 13 17:33:57 CST 2021 testLocal 054
+Sat Mar 13 17:35:10 CST 2021 src/CondCompSimpleRelationalCondition.java
+Sat Mar 13 17:35:13 CST 2021 jar
+Sat Mar 13 17:35:17 CST 2021 testLocal 054
+Sat Mar 13 17:35:55 CST 2021 testLocal
+Sat Mar 13 17:36:49 CST 2021 testrigpp 037
+Sat Mar 13 17:45:54 CST 2021 src/CondCompArithmeticExpression.java
+Sat Mar 13 17:45:58 CST 2021 jar
+Sat Mar 13 17:46:18 CST 2021 testLocal 037
+Sat Mar 13 17:58:29 CST 2021 src/CondCompArithmeticAtom.java
+Sat Mar 13 17:58:31 CST 2021 jar
+Sat Mar 13 17:58:38 CST 2021 testLocal 037
+Sat Mar 13 18:05:53 CST 2021 src/CondCompArithmeticAtom.java
+Sat Mar 13 18:05:58 CST 2021 jar
+Sat Mar 13 18:06:07 CST 2021 testLocal 037
+Sat Mar 13 18:06:19 CST 2021 testLocal
+Sat Mar 13 18:22:10 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 13 18:22:17 CST 2021 jar
+Sat Mar 13 18:22:23 CST 2021 testLocal
+Sat Mar 13 18:23:45 CST 2021 testrigpp 044
+Sat Mar 13 18:26:11 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 13 18:26:17 CST 2021 jar
+Sat Mar 13 18:26:22 CST 2021 testrigpp 044
+Sat Mar 13 18:27:03 CST 2021 testLocal
+Sat Mar 13 18:27:53 CST 2021 testrigpp 050
+Sat Mar 13 18:39:58 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 13 18:40:04 CST 2021 jar
+Sat Mar 13 18:40:10 CST 2021 testrigpp 050
+Sat Mar 13 18:52:56 CST 2021 src/CobolPreprocessorParser.g4
+Sat Mar 13 18:53:02 CST 2021 jar
+Sat Mar 13 18:53:08 CST 2021 testrigpp 050
+Sat Mar 13 18:53:49 CST 2021 testrigpp 044
+Sat Mar 13 18:54:05 CST 2021 testLocal
+Sat Mar 13 18:55:02 CST 2021 testLocal 050
+Sat Mar 13 19:01:04 CST 2021 src/CondCompArithmeticExpression.java
+Sat Mar 13 19:01:06 CST 2021 jar
+Sat Mar 13 19:01:12 CST 2021 testLocal 050
+Sat Mar 13 19:01:27 CST 2021 testLocal
+Sat Mar 13 19:01:54 CST 2021 testLocal 054
+Sat Mar 13 19:06:05 CST 2021 src/TestIntegration.java
+Sat Mar 13 19:06:08 CST 2021 jar
+Sat Mar 13 19:06:15 CST 2021 testLocal
+Sat Mar 13 19:07:29 CST 2021 testLocal
+Sat Mar 13 19:08:20 CST 2021 src/TestIntegration.java
+Sat Mar 13 19:08:23 CST 2021 jar
+Sat Mar 13 19:08:30 CST 2021 testLocal
+Sat Mar 13 19:09:25 CST 2021 testNist
+Sun Mar 14 14:43:59 CDT 2021 testLocal 055
+Sun Mar 14 14:45:01 CDT 2021 testrigpp 055
+Sun Mar 14 15:04:02 CDT 2021 src/CondCompEvaluateSelection.java
+Sun Mar 14 15:04:04 CDT 2021 jar
+Sun Mar 14 15:04:09 CDT 2021 testLocal 055
+Sun Mar 14 15:06:54 CDT 2021 testrigpp 055
+Sun Mar 14 15:12:31 CDT 2021 testLocal 055
+Sun Mar 14 15:15:35 CDT 2021 src/TestIntegration.java
+Sun Mar 14 15:15:38 CDT 2021 jar
+Sun Mar 14 15:18:22 CDT 2021 testLocal 055
+Sun Mar 14 15:19:23 CDT 2021 testLocal 055
+Sun Mar 14 15:19:53 CDT 2021 src/TestIntegration.java
+Sun Mar 14 15:19:57 CDT 2021 jar
+Sun Mar 14 15:20:01 CDT 2021 testLocal 055
+Sun Mar 14 15:22:26 CDT 2021 testLocal
+Sun Mar 14 15:28:04 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 14 15:28:11 CDT 2021 jar
+Sun Mar 14 15:28:18 CDT 2021 testLocal
+Sun Mar 14 15:29:10 CDT 2021 testNist
+Mon Mar 15 13:50:48 CDT 2021 src/CondCompArithmeticExpression.java
+Mon Mar 15 13:50:53 CDT 2021 jar
+Mon Mar 15 13:51:00 CDT 2021 testLocal
+Mon Mar 15 13:51:31 CDT 2021 testNist
