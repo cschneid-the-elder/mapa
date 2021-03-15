@@ -48,7 +48,6 @@ class CondCompVar implements CondCompToken {
 		this.predicate = this.ctx.conditionalCompilationDefinePredicate();
 		if (this.predicate == null) {
 			TestIntegration.LOGGER.finest("this.predicate == null");
-			/*this.type = CondCompTokenType.DEFINE_ONLY;*/
 			this.literalCtx = null;
 			/*
 			As per https://www.ibm.com/support/knowledgecenter/SS6SG3_6.3.0/pg/ui/up4011.html
@@ -59,8 +58,6 @@ class CondCompVar implements CondCompToken {
 				> Compiling and debugging your program > Compiler options > DEFINE
 			*/
 			this.setValue("B'1'");
-			/*this.type = CondCompTokenType.VAR_BOOLEAN;
-			this.boolValue = true;*/
 		} else {
 			TestIntegration.LOGGER.finest("this.predicate != null");
 			this.literalCtx = this.predicate.literal();

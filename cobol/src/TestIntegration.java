@@ -93,11 +93,6 @@ public static void main(String[] args) throws Exception {
 			continue;
 		}
 		fileName = processCDS(aFileName, baseDir);
-		/*
-		fileName = lookForCopyStatements(fileName, baseDir, initFileNm);
-		fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
-		fileName = lookForCompilerOptions(fileName, baseDir, initFileNm, compOptDefines);
-		*/
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
 		if (CLI.unitTest) {
@@ -156,7 +151,6 @@ public static void main(String[] args) throws Exception {
 			int line
 			, ArrayList<CompilerDirectingStatement> compDirStmts) {
 		for (CompilerDirectingStatement cds: compDirStmts) {
-			/*LOGGER.finest("cds = " + cds + " line = " + line);*/
 			if (line == cds.getLine()) return cds;
 		}
 
@@ -207,11 +201,6 @@ public static void main(String[] args) throws Exception {
 							, compDirStmts
 							, compOptDefines);
 			nbCopies = countCopyCDS(compDirStmts);
-			/*for (CompilerDirectingStatement copy: compDirStmts) {
-				if (copy.getType() == STMT_COPY) {
-					nbCopies++;
-				}
-			}*/
 			LineNumberReader src = new LineNumberReader(new FileReader(new File(fileName)));
 			File tmp = File.createTempFile("CallTree-" + initFileNm + "-" + String.format("%05d", iteration) + "-", "-cbl", baseDir);
 			iteration++;
@@ -359,7 +348,6 @@ public static void main(String[] args) throws Exception {
 					LOGGER.finest("writing  |" + inLine + "|");
 					out.println(inLine);
 				}
-				//fileName = lookForReplaceStatements(fileName, baseDir, initFileNm);
 				inLine = src.readLine();
 			}
 			src.close();
@@ -438,250 +426,6 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("compOptDefines: " + compOptDefines);
 
 	}
-
-	/**
-	Iteratively look for COPY statements and resolve them, rewriting
-	the source file with the content of the target of the COPY statements
-	each time.  COPY statements can contain other nested COPY statements.
-	public static String lookForCopyStatements(
-						String initFileName
-						, File baseDir
-						, String initFileNm
-						) throws Exception {
-		LOGGER.fine("lookForCopyStatements");
-		ArrayList<CopyStatementContextWrapper> copies = null;
-		String fileName = copyWithBOL(initFileName, baseDir, initFileNm);
-
-
-		do {
-			LOGGER.finer("fileName = " + fileName);
-			copies = new ArrayList<>();
-			copiesForFile = new ArrayList<>();
-			CharStream cs = fromFileName(fileName);  //load the file
-			CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
-			CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
-			CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
-
-			ParseTree tree = parser.startRule(); // parse the content and get the tree
-	
-			ParseTreeWalker walker = new ParseTreeWalker();
-	
-			CopyListener listener = new CopyListener(copies);
-	
-			LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-	
-			walker.walk(listener, tree);
-	
-			LOGGER.finest("copies: " + copies);
-
-			if (copies.size() > 0) {
-				fileName = applyCopyStatements(copies, fileName, baseDir, initFileNm);
-			}
-
-			copiesForFile.addAll(copies);
-	
-		} while(copies.size() > 0);
-
-		return fileName;
-	}
-	*/
-
-	/**
-	Here we expand the COPY statements, applying the REPLACING phrase(s).
-	Input may look like this...
-	<code>
-	01  WORK-AREAS.   COPY 'work-areas.cpy'
-	REPLACING ==:PRFX:== BY ==ZZ-==
-	          ==:SUFX:== BY ==-IN==
-	.
-	</code>
-	...or like this...
-	<code>
-	01  WORK-AREAS.
-	COPY 'work-areas.cpy' REPLACING ==:PRFX:== BY ==ZZ-== ==:SUFX:== BY ==-IN==.
-	</code>
-	...or like this...
-	<code>
-	01  WORK-AREAS. COPY 'work-areas1.cpy'.
-	</code>
-	We need to preserve and write out bytes up to but not including the 'C' in COPY, 
-	discard all bytes from (and including) the 'C' in COPY through the terminating
-	'.' at the end of the COPY statement.
-
-	public static String applyCopyStatement(
-							CopyStatement copyStmt
-							, String fileName
-							, File baseDir
-							, String initFileNm
-							) throws IOException {
-		LOGGER.fine("applyCopyStatement()");
-		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
-		CLI.setPosixAttributes(tmp);
-		if (CLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-
-		PrintWriter out = new PrintWriter(tmp);
-
-		copyStmt.apply(src, out);
-		return tmp.getPath();
-	}
-
-	public static String applyCopyStatements(
-							ArrayList<CopyStatementContextWrapper> copies
-							, String fileName
-							, File baseDir
-							, String initFileNm
-							) throws IOException {
-		LOGGER.fine("applyCopyStatements");
-		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
-		CLI.setPosixAttributes(tmp);
-		if (CLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-
-		PrintWriter out = new PrintWriter(tmp);
-		String inLine = src.readLine();
-
-		LOGGER.finer("Applying COPY statements to " + fileName);
-
-		Hashtable<CopyStatementContextWrapper, Boolean> copyDone = new Hashtable<>();
-		for (CopyStatementContextWrapper copy: copies) copyDone.put(copy, false);
-
-		Boolean pleaseWrite = true;
-		while (inLine != null) {
-			pleaseWrite = true;
-			for (CopyStatementContextWrapper copy: copies) {
-				LOGGER.finer("copy @" + copy.startLine() + ": " + copy.getText());
-				int startLine = copy.startLine();
-				int endLine = copy.endLine();
-				if (copyDone.get(copy)) {
-					//
-					// already processed this COPY statement, no need for further action
-					// unless all COPY statements have been processed, see code following
-					// this for () loop
-					//
-					LOGGER.finer("already processed this COPY statement");
-				} else if (src.getLineNumber() < startLine || src.getLineNumber() > endLine) {
-					// outside of this COPY statement
-					LOGGER.finer("outside this COPY statement");
-					if (pleaseWrite) {
-						LOGGER.finer("out = |" + inLine + "|");
-						out.println(inLine);
-						pleaseWrite = false;
-					}
-				} else if (src.getLineNumber() > startLine && src.getLineNumber() < endLine) {
-					// inside of a multi-line COPY statement - we just discard these
-					LOGGER.finer("inside multi-line COPY statement");
-					LOGGER.finer("discarding " + inLine);
-					pleaseWrite = false;
-				} else if (src.getLineNumber() == startLine && startLine == endLine) {
-					// single line COPY statement
-					LOGGER.finer("single-line COPY statement");
-					int startPosn = copy.startPositionInLine();
-					int endPosn = copy.endPositionInLine();
-					String aLine = inLine.substring(0,startPosn - 1);
-					for (int i = startPosn; i <= endPosn + 1; i++) aLine = aLine.concat(" "); 
-					aLine = aLine.concat(inLine.substring(endPosn + 1));
-					LOGGER.finer("startPosn = " + startPosn);
-					LOGGER.finer("endPosn   = " + endPosn);
-					LOGGER.finer("in  = |" + inLine + "|");
-					LOGGER.finer("out = |" + aLine + "|");
-					out.println(aLine);
-					pleaseWrite = false;
-					copyDone.put(copy, true);
-					writeTheCopyContent(copy, out);
-				} else if (src.getLineNumber() == startLine && startLine < endLine) {
-					// first line of a multi-line COPY statement
-					LOGGER.finer("first line of a multi-line COPY statement");
-					int startPosn = copy.startPositionInLine();
-					int endPosn = 71;
-					if (inLine.length() <= endPosn) endPosn = inLine.length() - 1;
-					String aLine = inLine.substring(0,startPosn - 1);
-					for (int i = startPosn; i <= endPosn + 1; i++) {
-						aLine = aLine.concat(" ");
-						LOGGER.finer("i = " + i);
-						LOGGER.finer("aLine = |" + aLine + "|");
-					} 
-					aLine = aLine.concat(inLine.substring(endPosn + 1));
-					LOGGER.finer("startPosn = " + startPosn);
-					LOGGER.finer("endPosn   = " + endPosn);
-					LOGGER.finer("in  = |" + inLine + "|");
-					LOGGER.finer("out = |" + aLine + "|");
-					out.println(aLine);
-					pleaseWrite = false;
-					writeTheCopyContent(copy, out);
-				} else if (src.getLineNumber() == endLine) {
-					// last line of a multi-line COPY statement
-					LOGGER.finer("last line of a multi-line COPY statement");
-					int startPosn = 7;
-					int endPosn = copy.endPositionInLine();
-					String aLine = inLine.substring(0,startPosn - 1);
-					for (int i = startPosn; i <= endPosn + 1; i++) {
-						aLine = aLine.concat(" ");
-						LOGGER.finer("i = " + i);
-						LOGGER.finer("aLine = |" + aLine + "|");
-					} 
-					aLine = aLine.concat(inLine.substring(endPosn + 1));
-					LOGGER.finer("startPosn = " + startPosn);
-					LOGGER.finer("endPosn   = " + endPosn);
-					LOGGER.finer("in  = |" + inLine + "|");
-					LOGGER.finer("out = |" + aLine + "|");
-					out.println(aLine);
-					pleaseWrite = false;
-					copyDone.put(copy, true);
-				}
-			}
-			if (copyDone.containsValue(false)) {
-				// there's still at least one COPY statement to process
-			} else {
-				LOGGER.finer("all COPY statements have been processed");
-				if (pleaseWrite) {
-					LOGGER.finer("out = |" + inLine + "|");
-					out.println(inLine);
-				}
-			}
-			inLine = src.readLine();
-		}
-
-		src.close();
-		out.close();
-		fileName = tmp.getPath();
-		return fileName;
-
-	}
-
-	public static void writeTheCopyContent(
-							CopyStatementContextWrapper copy
-							, PrintWriter out)
-						throws IOException {
-
-		LOGGER.fine("writeTheCopyContent");
-		String copyFileFull = null;
-		String copyFile = copy.getCopyFile();
-
-		for (String path: CLI.copyPaths) {
-			File aFile = new File(path + "/" + copyFile);
-			if (aFile.exists()) {
-				copyFileFull = path + "/" + copyFile;
-				break;
-			}
-		}
-
-		if (copyFileFull == null) {
-			LOGGER.warning(copyFile + " not found in any path specified");
-			//throw new FileNotFoundException(copyFile + " not found in any path specified");
-		} else {
-			List<String> list = 
-				Files.readAllLines(Paths.get(copyFileFull));
-			for (String line: list) out.println(copy.applyReplacingPhrases(line));
-		}
-	}
-	*/
 
 	public static String lookForReplaceStatements(
 						String fileName
@@ -773,45 +517,8 @@ public static void main(String[] args) throws Exception {
 				}
 			}
 		}
-		//System.out.println("newLine = " + newLine);
 		return newLine;
 	}
-
-	/**
-	Find compiler options embedded in source, rewrite file without
-	them if any are found.
-	public static String lookForCompilerOptions(
-			String fileName
-			, File baseDir
-			, String initFileNm
-			, ArrayList<CondCompVar> compOptDefines
-			) throws Exception {
-		LOGGER.fine("lookForCompilerOptions");
-		ArrayList<CompilerOptionsWrapper> compileOpts = new ArrayList<>();
-
-		CharStream aCharStream = fromFileName(fileName);  //load the file
-		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
-		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
-		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
-
-		ParseTree tree = parser.startRule(); // parse the content and get the tree
-
-		ParseTreeWalker walker = new ParseTreeWalker();
-
-		CompilerOptionsListener listener = new CompilerOptionsListener(compileOpts, compOptDefines);
-
-		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-
-		walker.walk(listener, tree);
-
-		LOGGER.finest("compileOpts: " + compileOpts);
-
-		if (compileOpts.size() == 0) return fileName;
-
-		return rewriteWithoutCompileOptionsStatements(compileOpts, fileName, baseDir, initFileNm);
-
-	}
-	*/
 
 	/**
 	Return the name of a temporary file containing the source (as preprocessed
@@ -839,7 +546,6 @@ public static void main(String[] args) throws Exception {
 		while (inLine != null) {
 			Boolean isCompileOptLine = false;
 			for (CompilerDirectingStatement cds: compDirStmts) {
-				//LOGGER.finest("cds.getType() = " + cds.getType());
 				if (cds.getType() == CompilerDirectingStatement.CompilerDirectingStatementType.STMT_COMPILE_OPTION 
 				&& cds.getLine() == src.getLineNumber()) {
 					isCompileOptLine = true;

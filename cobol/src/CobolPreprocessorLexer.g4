@@ -19,7 +19,6 @@ lexer grammar CobolPreprocessorLexer;
 
 // lexer rules --------------------------------------------------------------------------------
 
-/*CLASSIC_COMMENTLINE : (BOL TEXT TEXT TEXT TEXT TEXT TEXT '*' TEXT* NEWLINE?)+;*/
 CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
 CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
 CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine()==80}? -> skip;

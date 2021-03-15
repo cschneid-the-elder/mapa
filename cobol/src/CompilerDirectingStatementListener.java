@@ -38,7 +38,6 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterConditionalCompilationDefine(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx) {
-		/*this.defines.add(new CondCompVar(ctx, this.compOptDefines));*/
 		CondCompVar var = new CondCompVar(ctx, this.compOptDefines);
 		this.compOptDefines.add(var);
 		this.defines.add(var);
