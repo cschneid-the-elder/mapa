@@ -1914,3 +1914,7 @@ Sun Mar 14 15:28:04 CDT 2021 src/CobolPreprocessorParser.g4
 Sun Mar 14 15:28:11 CDT 2021 jar
 Sun Mar 14 15:28:18 CDT 2021 testLocal
 Sun Mar 14 15:29:10 CDT 2021 testNist
+Mon Mar 15 13:50:48 CDT 2021 src/CondCompArithmeticExpression.java
+Mon Mar 15 13:50:53 CDT 2021 jar
+Mon Mar 15 13:51:00 CDT 2021 testLocal
+Mon Mar 15 13:51:31 CDT 2021 testNist

@@ -72,6 +72,24 @@ class CondCompArithmeticExpression {
 		ArrayList<CondCompToken> revTokens = new ArrayList<>(this.tokens);
 		Collections.reverse(revTokens);
 		TestIntegration.LOGGER.finest(this.myName + " revTokens = |" + revTokens + "|");
+
+		/*
+		Quoting part of Wikipedia from https://en.wikipedia.org/wiki/Operator-precedence_parser#Alternative_methods
+
+		Another approach is to first fully parenthesize the expression, inserting a number of parentheses around each operator, such that they lead to the correct precedence even when parsed with a linear, left-to-right parser. This algorithm was used in the early FORTRAN I compiler:[7]
+
+		The Fortran I compiler would expand each operator with a sequence of parentheses. In a simplified form of the algorithm, it would
+
+		. replace + and – with ))+(( and ))-((, respectively;
+		. replace * and / with )*( and )/(, respectively;
+		. add (( at the beginning of each expression and after each left parenthesis in the original expression; and
+		. add )) at the end of the expression and before each right parenthesis in the original expression.
+
+		Although not obvious, the algorithm was correct, and, in the words of Knuth, “The resulting formula is properly parenthesized, believe it or not.”[8]
+
+		[7] Padua, David (2000). "The Fortran I Compiler" (PDF) <http://polaris.cs.uiuc.edu/publications/c1070.pdf>. Computing in Science & Engineering. 2 (1): 70–75. Bibcode:2000CSE.....2a..70P. <https://ui.adsabs.harvard.edu/abs/2000CSE.....2a..70P> doi:10.1109/5992.814661. <https://doi.org/10.1109%2F5992.814661>
+
+		*/
 		evals.push(new CondCompGroupOp(")"));
 		evals.push(new CondCompGroupOp(")"));
 		evals.push(new CondCompGroupOp(")"));
@@ -178,8 +196,6 @@ class CondCompArithmeticExpression {
 				case ARITHMETIC_ATOM:
 					if (arithmeticOp == null) {
 						result = ((CondCompArithmeticAtom)token).getValue();
-						//TestIntegration.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
-						//return(result);
 					} else {
 						switch(arithmeticOp.getType()) {
 							case NUMOP_MULTIPLY:
