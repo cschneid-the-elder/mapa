@@ -1182,7 +1182,7 @@ sentence
    ;
 
 statement
-   : acceptStatement | addStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
+   : acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
    ;
 
 // accept statement
@@ -1239,6 +1239,12 @@ addToGiving
 
 addGiving
    : identifier ROUNDED?
+   ;
+
+// allocate statement
+
+allocateStatement
+   : ALLOCATE ((identifier CHARACTERS) | arithmeticExpression) INITIALIZED? (LOC literal)? (RETURNING identifier)?
    ;
 
 // altered go to statement
@@ -1541,6 +1547,12 @@ exhibitOperand
 
 exitStatement
    : EXIT (PROGRAM | (PERFORM CYCLE?) | METHOD | PARAGRAPH | SECTION)?
+   ;
+
+// free statement
+
+freeStatement
+   : FREE identifier+
    ;
 
 // generate statement
