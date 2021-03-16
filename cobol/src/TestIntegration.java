@@ -1279,6 +1279,13 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "PGM00011", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
 				if (!testCall001(fileName, bareName, "PGM00013", CallType.CICSLINKBYLITERAL, calledNodes, 5)) failCount++;
 				break;
+			case "testantlr056":
+			case "testantlr156":
+			case "testantlr256":
+			case "testantlr356":
+				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "WS-COUNT", dataNodes)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

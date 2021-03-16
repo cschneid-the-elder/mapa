@@ -1540,7 +1540,7 @@ exhibitOperand
 // exit statement
 
 exitStatement
-   : EXIT PROGRAM?
+   : EXIT (PROGRAM | (PERFORM CYCLE?) | METHOD | PARAGRAPH | SECTION)?
    ;
 
 // generate statement
