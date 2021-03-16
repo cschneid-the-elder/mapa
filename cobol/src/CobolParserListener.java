@@ -2887,6 +2887,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitAddGiving(CobolParser.AddGivingContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#allocateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAllocateStatement(CobolParser.AllocateStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#allocateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAllocateStatement(CobolParser.AllocateStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#alteredGoTo}.
 	 * @param ctx the parse tree
 	 */
@@ -3546,6 +3556,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExitStatement(CobolParser.ExitStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#freeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterFreeStatement(CobolParser.FreeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#freeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitFreeStatement(CobolParser.FreeStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#generateStatement}.
 	 * @param ctx the parse tree

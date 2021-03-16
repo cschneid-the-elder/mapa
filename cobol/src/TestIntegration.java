@@ -1286,6 +1286,15 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "WS-COUNT", dataNodes)) failCount++;
 				break;
+			case "testantlr057":
+			case "testantlr157":
+			case "testantlr257":
+			case "testantlr357":
+				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "WS-POINTER", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "WS-COUNT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(01), "SOME-DATA", dataNodes)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
