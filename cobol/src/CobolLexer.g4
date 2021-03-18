@@ -61,14 +61,15 @@ CLASSIC_SKIP : (SKIP1 | SKIP2 | SKIP3) DOT? -> skip;
 CLASSIC_TITLE : TITLE NONNUMERICLITERAL DOT? -> skip;
 CLASSIC_CONTINUATION : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA MINUSCHAR;
 
+
 AUTHOR_TAG : AUTHOR DOT {getCharPositionInLine() == 14}? -> pushMode(FFT);
-INSTALLATION_TAG : (INSTALLATION | NSTALLATION) DOT {getCharPositionInLine() == 20}? -> pushMode(FFT);
-DATE_WRITTEN_TAG : (DATE_WRITTEN | ATE_WRITTEN) DOT {getCharPositionInLine() == 20}? -> pushMode(FFT);
-DATE_COMPILED_TAG : (DATE_COMPILED | ATE_COMPILED) DOT {getCharPositionInLine() == 21}? -> pushMode(FFT);
-SECURITY_TAG : (SECURITY | ECURITY) DOT {getCharPositionInLine() == 16}? -> pushMode(FFT);
-REMARKS_TAG : (REMARKS | EMARKS) DOT {getCharPositionInLine() == 15}? -> pushMode(FFT);
-ENVIRONMENT_TAG : (ENVIRONMENT | NVIRONMENT) {getCharPositionInLine() == 18}?;
-DATA_TAG : (DATA | ATA) {getCharPositionInLine() == 11}?;
+INSTALLATION_TAG : INSTALLATION DOT {getCharPositionInLine() == 20}? -> pushMode(FFT);
+DATE_WRITTEN_TAG : DATE_WRITTEN DOT {getCharPositionInLine() == 20}? -> pushMode(FFT);
+DATE_COMPILED_TAG : DATE_COMPILED DOT {getCharPositionInLine() == 21}? -> pushMode(FFT);
+SECURITY_TAG : SECURITY DOT {getCharPositionInLine() == 16}? -> pushMode(FFT);
+REMARKS_TAG : REMARKS DOT {getCharPositionInLine() == 15}? -> pushMode(FFT);
+ENVIRONMENT_TAG : ENVIRONMENT {getCharPositionInLine() == 18}?;
+DATA_TAG : DATA {getCharPositionInLine() == 11}?;
 
 // keywords
 ABORT : A B O R T;
@@ -187,13 +188,10 @@ CURRENCY : C U R R E N C Y;
 CURSOR : C U R S O R;
 CYCLE : C Y C L E;
 DATA : D A T A;
-ATA : A T A;
 DATA_BASE : D A T A MINUSCHAR B A S E;
 DATE : D A T E;
 DATE_COMPILED : D A T E MINUSCHAR C O M P I L E D;
-ATE_COMPILED : A T E MINUSCHAR C O M P I L E D;
 DATE_WRITTEN : D A T E MINUSCHAR W R I T T E N;
-ATE_WRITTEN : A T E MINUSCHAR W R I T T E N;
 DAY : D A Y;
 DAY_OF_WEEK : D A Y MINUSCHAR O F MINUSCHAR W E E K;
 DB : D B;
@@ -275,7 +273,6 @@ ENTER : E N T E R;
 ENTRY : E N T R Y;
 ENTRY_PROCEDURE : E N T R Y MINUSCHAR P R O C E D U R E;
 ENVIRONMENT : E N V I R O N M E N T;
-NVIRONMENT : N V I R O N M E N T;
 EOP : E O P;
 EQUAL : E Q U A L;
 ERASE : E R A S E;
@@ -344,7 +341,6 @@ INPUT : I N P U T;
 INPUT_OUTPUT : I N P U T MINUSCHAR O U T P U T;
 INSPECT : I N S P E C T;
 INSTALLATION : I N S T A L L A T I O N;
-NSTALLATION : N S T A L L A T I O N;
 INTEGER : I N T E G E R;
 INTO : I N T O;
 INVALID : I N V A L I D;
@@ -498,7 +494,6 @@ RELATIVE : R E L A T I V E;
 RELEASE : R E L E A S E;
 REMAINDER : R E M A I N D E R;
 REMARKS : R E M A R K S;
-EMARKS : E M A R K S;
 REMOVAL : R E M O V A L;
 REMOVE : R E M O V E;
 RENAMES : R E N A M E S;
@@ -532,7 +527,6 @@ SEARCH : S E A R C H;
 SECTION : S E C T I O N;
 SECURE : S E C U R E;
 SECURITY : S E C U R I T Y;
-ECURITY : E C U R I T Y;
 SEGMENT : S E G M E N T;
 SEGMENT_LIMIT : S E G M E N T MINUSCHAR L I M I T;
 SELECT : S E L E C T;
@@ -851,30 +845,17 @@ CLASSIC_EOL_COMMENT_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCh
 
 mode FFT;
 
-/*
-when END_FFT_FLAG pos == 8 and FREE_FORM_TEXT pos > 7, this doesn't work - the END_FFT_FLAG isn't matched.  well, it isn't triggering the popMode, it's hard to say if it isn't matched, the I in INSTALLATION doesn't show up in the lexer output.  removing the more command doesn't fix it, but now I see that the lexer output has nothing for column 8 (which it confusingly calls column 7) which is where the first I in INSTALLATION appears.  changing FREE_FORM_TEXT pos to > 8 doesn't fix it.
-
-changing FREE_FORM_TEXT pos to > 9 makes the lexer output show nothing prior to what it calls column 16 which is where the ION in INSTALLATION appears.  same for 10, 11, and 12.
-
-setting END_FFT_FLAT pos == 8 and FREE_FORM_TEXT pos > 8 and commenting out CLASSIC_EOL_COMMENT_FFT works.
-
-with END_FFT_FLAG pos == 9 and FREE_FORM_TEXT pos >  8 it almost works, but we match the N in INSTALLATION (I think) and then popMode,more to get us to match the IDENTIFIER 'NSTALLATION'
-
-It seems chars don't get pushed back on the token-matching stack if they're outside the
-{} range.  Or something.
-
-***THE FIX*** the fix appears to be commenting out CLASSIC_EOL_COMMENT_FFT and making the INSTALLATION_TAG et. al. match both what you'd think i.e. INSTALLATION and also NSTALLATION because the more command, whilst making the data available to another token, doesn't seem to actually include that data in the other token.  Also eliminating the getCharPositionInLine() < 73 on FREE_FORM_TEXT to eat the now-commented-out CLASSIC_EOL_COMMENT_FFT tokens.
-
-*/
-END_FFT_FLAG : [a-zA-Z] {getCharPositionInLine() == 8}? ->more, popMode;
-//CLASSIC_LINE_NUMBER_FFT : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA -> skip;
-//CLASSIC_LINE_NUMBER_FFT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
-//CLASSIC_EOL_COMMENT_FFT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine()==80}? ;
-//DOT_FFT : '.';
-FREE_FORM_TEXT : ~('\n' | '\r') {getCharPositionInLine() > 8}?;
-NEWLINE_FFT : '\r'? '\n' -> channel(HIDDEN);
-WS_FFT : [ \t\f;]+ -> channel(HIDDEN);
-CLASSIC_LINE_NUMBER_FFT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
-CLASSIC_COMMENT_LINE_FFT : CLASSIC_LINE_NUMBER_FFT (ASTERISKCHAR | SLASHCHAR) TEXTA* -> skip;
+FFT_INSTALLATION_TAG : INSTALLATION DOT {getCharPositionInLine() == 20}? -> type(INSTALLATION_TAG);
+FFT_DATE_WRITTEN_TAG : DATE_WRITTEN DOT {getCharPositionInLine() == 20}? -> type(DATE_WRITTEN_TAG);
+FFT_DATE_COMPILED_TAG : DATE_COMPILED DOT {getCharPositionInLine() == 21}? -> type(DATE_COMPILED_TAG);
+FFT_SECURITY_TAG : SECURITY DOT {getCharPositionInLine() == 16}? -> type(SECURITY_TAG);
+FFT_REMARKS_TAG : REMARKS DOT {getCharPositionInLine() == 15}? -> type(REMARKS_TAG);
+FFT_ENVIRONMENT_TAG : ENVIRONMENT {getCharPositionInLine() == 18}? -> type(ENVIRONMENT_TAG), popMode;
+FFT_DATA_TAG : DATA {getCharPositionInLine() == 11}? -> type(DATA_TAG), popMode;
+FFT_PROCEDURE_TAG : PROCEDURE {getCharPositionInLine() == 16}? -> type(PROCEDURE), popMode;
+FREE_FORM_TEXT : (TEXTA)+?;
+FFT_NEWLINE : '\r'? '\n' -> channel(HIDDEN);
+FFT_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
+FFT_CLASSIC_COMMENT_LINE : FFT_CLASSIC_LINE_NUMBER (ASTERISKCHAR | SLASHCHAR) TEXTA* -> skip;
 
 
