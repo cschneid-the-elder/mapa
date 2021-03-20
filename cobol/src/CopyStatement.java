@@ -13,8 +13,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 	private int endLine = -1;
 	private int startPosn = -1;
 	private int endPosn = -1;
-	private String replaceable = null;
-	private String replacement = null;
+	private ArrayList<String> replaceable = new ArrayList<>();
+	private ArrayList<String> replacement = new ArrayList<>();
 
 	CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
@@ -23,6 +23,17 @@ public class CopyStatement implements CompilerDirectingStatement {
 		this.endLine = this.ctx.stop.getLine();
 		this.startPosn = this.ctx.start.getCharPositionInLine();
 		this.endPosn = this.ctx.stop.getCharPositionInLine();
+
+		if (this.ctx.replacingPhrase() == null) {
+		} else {
+			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
+				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
+					this.replaceable.add(getReplaceable(rcc));
+					this.replacement.add(getReplacement(rcc));
+				}
+			}
+		}
+
 		TestIntegration.LOGGER.fine(myName + " " + this.getCopyFile());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.start.getLine() = " + this.ctx.start.getLine());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getLine() = " + this.ctx.COPY().getSymbol().getLine());
@@ -32,6 +43,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getCharPositionInLine() = " + this.ctx.COPY().getSymbol().getCharPositionInLine());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.stop.getCharPositionInLine() = " + this.ctx.stop.getCharPositionInLine());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getCharPositionInLine() = " + this.ctx.DOT().getSymbol().getCharPositionInLine());
+		TestIntegration.LOGGER.fine(myName + " this.replaceable = " + this.replaceable);
+		TestIntegration.LOGGER.fine(myName + " this.replacement = " + this.replacement);
 	}
 
 	public int getLine() {
@@ -180,6 +193,17 @@ public class CopyStatement implements CompilerDirectingStatement {
 	}
 
 	public String getCopyFile() {
+		String copyFile = this.getCopyFileRaw();
+
+		if (copyFile.indexOf("'") != -1) {
+			copyFile = 
+				copyFile.substring(copyFile.indexOf("'") + 1, copyFile.lastIndexOf("'"));
+		}
+
+		return copyFile;
+	}
+
+	private String getCopyFileRaw() {
 		String copyFile = null;
 
 		if (this.ctx.copySource().literal() != null) {
@@ -190,104 +214,116 @@ public class CopyStatement implements CompilerDirectingStatement {
 			copyFile = this.ctx.copySource().filename().getText();
 		}
 
-		if (copyFile.indexOf("'") != -1) {
-			copyFile = 
-				copyFile.substring(copyFile.indexOf("'") + 1, copyFile.lastIndexOf("'"));
-		}
-
 		return copyFile;
 	}
 
 	public String applyReplacingPhrases(String line) {
 		String newLine = new String(line);
 
-		if (this.ctx.replacingPhrase() == null) {
-		} else {
-			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
-				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
-					String replaceable = getReplaceable(rcc);
-					String replacement = getReplacement(rcc);
-					newLine = newLineWithReplacingApplied(replaceable, replacement, newLine);
-				}
-			}
+		for (int i = 0; i < this.replaceable.size(); i++) {
+			newLine = newLineWithReplacingApplied(this.replaceable.get(i), this.replacement.get(i), newLine);
 		}
 
 		return newLine;
 	}
 
 	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
-		if (this.replaceable != null) return this.replaceable;
-
+		TestIntegration.LOGGER.finest(this.myName + " getReplaceable()");
 		String replaceable = new String();
 
 		if (rcc.replaceable().pseudoText() == null) {
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText() == null");
 			if (rcc.replaceable().cobolWord() == null) {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().cobolWord() == null");
 				if (rcc.replaceable().literal() == null) {
+					TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().literal() == null");
 					if (rcc.replaceable().charDataLine() == null) {
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().charDataLine() == null");
 						TestIntegration.LOGGER.warning("replacing phrase found with no replaceable content replaceable().charDataLine() == null");
 					} else {
+						//it is not clear that this branch is reachable, despite what the grammar says
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().charDataLine() != null");
 						// cheating, there's more than one  TODO: don't cheat
 						//replaceable = rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER().getText();
 						// still cheating
 						replaceable = rcc.replaceable().charDataLine().getText();
 					}
 				} else {
+					TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().literal() != null");
 					if (rcc.replaceable().literal().NONNUMERICLITERAL() == null) {
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().literal().NONNUMERICLITERAL() == null");
 						if (rcc.replaceable().literal().NUMERICLITERAL() == null) {
 							TestIntegration.LOGGER.warning("replacing phrase found with no replaceable content replaceable().literal().NUMERICLITERAL() == null");
 						} else {
+							TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().literal().NUMERICLITERAL() != null");
 							replaceable = rcc.replaceable().literal().NUMERICLITERAL().getText();
 						}
 					} else {
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().literal().NONNUMERICLITERAL() != null");
 						replaceable = rcc.replaceable().literal().NONNUMERICLITERAL().getText();
 					}
 				}
 			} else {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().cobolWord() != null");
 				replaceable = rcc.replaceable().cobolWord().IDENTIFIER().getText();
 			}
 		} else {
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText() != null");
 			replaceable = rcc.replaceable().pseudoText().charData().getText();
 		}
 
-		this.replaceable = replaceable;
 		return replaceable;
 	}
 
 	public String getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
-		if (this.replacement != null) return this.replacement;
+		TestIntegration.LOGGER.finest(this.myName + " getReplacement()");
 
 		String replacement = new String();
 
 		if (rcc.replacement().pseudoText() == null) {
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText() == null");
 			if (rcc.replacement().cobolWord() == null) {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().cobolWord() == null");
 				if (rcc.replacement().literal() == null) {
+					TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().literal() == null");
 					if (rcc.replacement().charDataLine() == null) {
 						TestIntegration.LOGGER.warning("replacing phrase found with no replacement content replacement().charDataLine() == null");
 					} else {
+						//it is not clear that this branch is reachable, despite what the grammar says
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().charDataLine() != null");
 						// cheating, there's more than one  TODO: don't cheat
 						//replacement = rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER().getText();
 						// still cheating
 						replacement = rcc.replacement().charDataLine().getText();
 					}
 				} else {
+					TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().literal() != null");
 					if (rcc.replacement().literal().NONNUMERICLITERAL() == null) {
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().literal().NONNUMERICLITERAL() == null");
 						if (rcc.replacement().literal().NUMERICLITERAL() == null) {
 							TestIntegration.LOGGER.warning("replacing phrase found with no replacement content replacement().literal().NUMERICLITERAL() == null");
 						} else {
+							TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().literal().NUMERICLITERAL() != null");
 							replacement = rcc.replacement().literal().NUMERICLITERAL().getText();
 						}
 					} else {
+						TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().literal().NONNUMERICLITERAL() != null");
 						replacement = rcc.replacement().literal().NONNUMERICLITERAL().getText();
 					}
 				}
 			} else {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().cobolWord() != null");
 				replacement = rcc.replacement().cobolWord().IDENTIFIER().getText();
 			}
 		} else {
-			replacement = rcc.replacement().pseudoText().charData().getText();
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText() != null");
+			if (rcc.replacement().pseudoText().charData() == null) {
+				replacement = "";
+			} else {
+				replacement = rcc.replacement().pseudoText().charData().getText();
+			}
 		}
 
-		this.replacement = replacement;
 		return replacement;
 	}
 
