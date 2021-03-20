@@ -463,9 +463,9 @@ fragment STRINGLITERAL :
 	| '\'' (~['\n\r] | '\'\'' | '"')* '\''
 ;
 
-IDENTIFIER : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)* {getCharPositionInLine() < 73}? ;
-FILENAME : [a-zA-Z0-9]+ '.' [a-zA-Z0-9]+ {getCharPositionInLine() < 73}? ;
-PSEUDOTEXTIDENTIFIER : [:a-zA-Z0-9]+ ([-_]+ [:a-zA-Z0-9]*)* {getCharPositionInLine() < 73}? ;
+IDENTIFIER : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)* {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ;
+FILENAME : [a-zA-Z0-9]+ '.' [a-zA-Z0-9]+ {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ;
+PSEUDOTEXTIDENTIFIER : [:a-zA-Z0-9]+ ([-_]+ [:a-zA-Z0-9]*)* {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ;
 
 
 // whitespace, line breaks, comments, ...

@@ -3,6 +3,7 @@ import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class CopyStatement implements CompilerDirectingStatement {
 
@@ -171,25 +172,32 @@ public class CopyStatement implements CompilerDirectingStatement {
 						throws IOException {
 
 		TestIntegration.LOGGER.fine("writeTheCopyContent");
-		String copyFileFull = null;
-		String copyFile = this.getCopyFile();
-
-		for (String path: TestIntegration.CLI.copyPaths) {
-			File aFile = new File(path + "/" + copyFile);
-			if (aFile.exists()) {
-				copyFileFull = path + "/" + copyFile;
-				break;
-			}
-		}
+		String copyFileFull = this.getCopyFileFull();
 
 		if (copyFileFull == null) {
-			TestIntegration.LOGGER.warning(copyFile + " not found in any path specified");
+			TestIntegration.LOGGER.warning(this.getCopyFile() + " not found in any path specified");
 			//throw new FileNotFoundException(copyFile + " not found in any path specified");
-		} else {
+		} else if (this.ctx.replacingPhrase() == null) {
 			List<String> list = 
 				Files.readAllLines(Paths.get(copyFileFull));
-			for (String line: list) out.println(this.applyReplacingPhrases(line));
+			for (String line: list) out.println(line);
+		} else {
+			this.writeTheCopyContentWithReplacing(out, copyFileFull);
 		}
+	}
+
+	private void writeTheCopyContentWithReplacing(PrintWriter out, String copyFileFull) {
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		try {
+			tNodes = this.parseCopybook(copyFileFull);
+		} catch (Exception e) {
+			TestIntegration.LOGGER.severe("Exception " + e + " encountered parsing " + copyFileFull);
+			e.printStackTrace();
+			return;
+		}
+
+		
 	}
 
 	public String getCopyFile() {
@@ -217,6 +225,21 @@ public class CopyStatement implements CompilerDirectingStatement {
 		return copyFile;
 	}
 
+	private String getCopyFileFull() {
+		String copyFileFull = null;
+		String copyFile = this.getCopyFile();
+
+		for (String path: TestIntegration.CLI.copyPaths) {
+			File aFile = new File(path + "/" + copyFile);
+			if (aFile.exists()) {
+				copyFileFull = path + "/" + copyFile;
+				break;
+			}
+		}
+
+		return copyFileFull;
+	}
+
 	public String applyReplacingPhrases(String line) {
 		String newLine = new String(line);
 
@@ -225,6 +248,35 @@ public class CopyStatement implements CompilerDirectingStatement {
 		}
 
 		return newLine;
+	}
+
+	public ArrayList<TerminalNodeWrapper> parseCopybook(
+				String fileName
+				) throws IOException {
+		TestIntegration.LOGGER.fine(this.myName + " parseCopybook()");
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		CharStream cs = fromFileName(fileName);  //load the file
+
+		TestIntegration.LOGGER.finer(this.myName + " lexing " + fileName);
+
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+
+		TestIntegration.LOGGER.finer(this.myName + " parsing with CobolPreprocessorParser");
+
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserTerminalNodeListener listener = new CobolPreprocessorParserTerminalNodeListener(tNodes);
+
+		TestIntegration.LOGGER.finer(this.myName + " walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		return tNodes;
 	}
 
 	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {

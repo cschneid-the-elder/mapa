@@ -538,21 +538,21 @@ public class CobolPreprocessorLexer extends Lexer {
 	private boolean IDENTIFIER_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 19:
-			return getCharPositionInLine() < 73;
+			return getCharPositionInLine() > 7 && getCharPositionInLine() < 73;
 		}
 		return true;
 	}
 	private boolean FILENAME_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 20:
-			return getCharPositionInLine() < 73;
+			return getCharPositionInLine() > 7 && getCharPositionInLine() < 73;
 		}
 		return true;
 	}
 	private boolean PSEUDOTEXTIDENTIFIER_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 21:
-			return getCharPositionInLine() < 73;
+			return getCharPositionInLine() > 7 && getCharPositionInLine() < 73;
 		}
 		return true;
 	}

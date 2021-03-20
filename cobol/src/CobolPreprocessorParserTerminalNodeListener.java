@@ -5,16 +5,16 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 public class CobolPreprocessorParserTerminalNodeListener extends CobolPreprocessorParserBaseListener {
-	public ArrayList<TerminalNode> tNodes = null;
+	public ArrayList<TerminalNodeWrapper> tNodes = null;
 
-	public CompilerDirectingStatementListener(
-			ArrayList<TerminalNode> tNodes
+	public CobolPreprocessorParserTerminalNodeListener(
+			ArrayList<TerminalNodeWrapper> tNodes
 			) {
 		super();
 		this.tNodes = tNodes;
 	}
 
 	@Override public void visitTerminal(TerminalNode node) {
-		this.tNodes.add(node);
+		this.tNodes.add(new TerminalNodeWrapper(node));
 	}
 }
