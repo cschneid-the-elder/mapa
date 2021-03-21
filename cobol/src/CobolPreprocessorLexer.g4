@@ -348,8 +348,8 @@ QUALIFY : Q U A L I F Y;
 QUA : Q U A;
 QUOTE : Q U O T E;
 RENT : R E N T;
-REPLACE : R E P L A C E;
-REPLACING : R E P L A C I N G;
+REPLACE : R E P L A C E ->pushMode(REPLACE_MODE);
+REPLACING : R E P L A C I N G ->pushMode(REPLACE_MODE);
 RMODE : R M O D E;
 RPARENCHAR : ')';
 RULES : R U L E S;
@@ -445,8 +445,8 @@ DOUBLEEQUALCHAR : '==';
 
 
 // literals
-NONNUMERICLITERAL : STRINGLITERAL | HEXNUMBER | BINNUMBER {getCharPositionInLine() > 7}? ;
-NUMERICLITERAL : [0-9]+ {getCharPositionInLine() > 7}? ;
+NONNUMERICLITERAL : STRINGLITERAL | HEXNUMBER | BINNUMBER {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ;
+NUMERICLITERAL : [0-9]+ {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ;
 
 fragment BINNUMBER :
 	B '"' [01]+ '"'
@@ -568,4 +568,37 @@ WHEN : W H E N;
 CD_NONNUMERICLITERAL : NONNUMERICLITERAL ->type(NONNUMERICLITERAL);
 CD_NUMERICLITERAL : NUMERICLITERAL ->type(NUMERICLITERAL);
 CD_IDENTIFIER : IDENTIFIER ->type(IDENTIFIER);
+
+mode REPLACE_MODE;
+
+REPLACE_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+REPLACE_CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
+REPLACE_NEWLINE : NEWLINE ->type(NEWLINE);
+REPLACE_WS : WS ->channel(HIDDEN);
+REPLACE_CONTINUATION : '-' {getCharPositionInLine()==7}?;
+REPLACE_CLASSIC_EOL_COMMENT : CLASSIC_EOL_COMMENT {getCharPositionInLine()==80}? -> skip;
+REPLACE_BY : BY ->type(BY);
+REPLACE_DOT : DOT ->type(DOT), popMode;
+REPLACE_DOUBLEEQUALCHAR : DOUBLEEQUALCHAR ->type(DOUBLEEQUALCHAR), pushMode(PSEUDOTEXT_MODE);
+REPLACE_TEXT : ([a-zA-Z0-9!@#$%^&*)(+,;<>?\-"'_]+) {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}?;
+//REPLACE_TEXT : ~('\n' | '\r' | '\t' | '\f' | ' ' | '.')+? {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}?;
+//REPLACE_NONNUMERICLITERAL : NONNUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NONNUMERICLITERAL);
+//REPLACE_NUMERICLITERAL : NUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NUMERICLITERAL);
+//REPLACE_IDENTIFIER : IDENTIFIER {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(IDENTIFIER);
+//REPLACE_PSEUDOTEXTIDENTIFIER : ([a-zA-Z0-9)(+\-"'_]+) {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(PSEUDOTEXTIDENTIFIER);
+
+mode PSEUDOTEXT_MODE;
+
+PSEUDOTEXT_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+PSEUDOTEXT_NEWLINE : NEWLINE ->channel(HIDDEN);
+PSEUDOTEXT_WS : WS ->channel(HIDDEN);
+PSEUDOTEXT_CONTINUATION : '-' {getCharPositionInLine()==7}? -> skip;
+PSEUDOTEXT_CLASSIC_EOL_COMMENT : CLASSIC_EOL_COMMENT {getCharPositionInLine()==80}? -> skip;
+//PSEUDOTEXT_NONNUMERICLITERAL : NONNUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NONNUMERICLITERAL);
+//PSEUDOTEXT_NUMERICLITERAL : NUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NUMERICLITERAL);
+//PSEUDOTEXT_IDENTIFIER : IDENTIFIER {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(IDENTIFIER);
+PSEUDOTEXT_DOUBLEEQUALCHAR : DOUBLEEQUALCHAR ->type(DOUBLEEQUALCHAR), popMode;
+PSEUDOTEXT_PSEUDOTEXTIDENTIFIER : ([a-zA-Z0-9!@#$%^&*)(+,;:.<>?\-"'_]+) {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(PSEUDOTEXTIDENTIFIER);
+//PSEUDOTEXT_PSEUDOTEXTIDENTIFIER : ~('\n' | '\r' | '\t' | '\f' | ' ')+? {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(PSEUDOTEXTIDENTIFIER);
+
 

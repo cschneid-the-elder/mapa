@@ -33,6 +33,10 @@ class TerminalNodeWrapper {
 		return this.posn;
 	}
 
+	public String getText() {
+		return this.tn.getSymbol().getText();
+	}
+
 	public String toString() {
 		return this.text;
 	}

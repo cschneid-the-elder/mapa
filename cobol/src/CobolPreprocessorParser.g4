@@ -348,12 +348,26 @@ familyPhrase
    : ON NEWLINE* (literal | cobolWord)
    ;
 
+/*
 replaceable
    : literal | cobolWord | pseudoText | charDataLine
    ;
 
 replacement
    : literal | cobolWord | pseudoText | charDataLine
+   ;
+*/
+
+replaceText
+   : (REPLACE_TEXT (NEWLINE REPLACE_CONTINUATION REPLACE_TEXT)*)+
+   ;
+
+replaceable
+   : replaceText | pseudoText
+   ;
+
+replacement
+   : replaceText | pseudoText
    ;
 
 // eject statement
