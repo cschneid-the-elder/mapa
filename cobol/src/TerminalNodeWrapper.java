@@ -11,6 +11,15 @@ class TerminalNodeWrapper {
 	private long sortKey = -1;
 	private String text = null;
 
+	public static ArrayList<TerminalNodeWrapper> bunchOfThese(List<TerminalNode> tnList) {
+		ArrayList<TerminalNodeWrapper> tnwList = null;
+		for (TerminalNode tn: tnList) {
+			tnwList.add(new TerminalNodeWrapper(tn));
+		}
+
+		return tnwList;
+	}
+
 	public TerminalNodeWrapper(TerminalNode tn) {
 		this.tn = tn;
 
