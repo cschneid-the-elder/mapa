@@ -9,6 +9,7 @@ class CharDataLineWrapper {
 	private CobolPreprocessorParser.CharDataLineContext ctx = null;
 	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
 	private long line = -1;
+	private long lastLine = -1;
 	private long posn = -1;
 	private long sortKey = -1;
 	private String text = null;
@@ -90,14 +91,48 @@ class CharDataLineWrapper {
 			}
 		}
 
-		/*
-		this.tn = tn;
+		this.tnwList.sort(Comparator.comparingLong(TerminalNodeWrapper::getSortKey));
 
-		this.line = this.tn.getSymbol().getLine();
-		this.posn = this.tn.getSymbol().getCharPositionInLine();
+		this.line = this.tnwList.get(0).getLine();
+		this.posn = this.tnwList.get(0).getPosn();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
-		this.text = "@ " + this.line + " @ " + this.posn + " " + this.tn.getSymbol().getText();
-		*/
+		this.text = this.myName + " @ " + this.line + " @ " + this.posn + " " + this.tnwList.get(0).getText();
+		this.lastLine = this.tnwList.get(this.tnwList.size() - 1).getLine();
+
+		this.buildConcatenatedText();
+	}
+
+	@SuppressWarnings({"fallthrough"})
+	private void buildConcatenatedText() {
+		TerminalNodeWrapper token = null;
+		Boolean newline = false;
+		Boolean continuation = false;
+
+		for (int i = 0; i < this.tnwList.size(); i++) {
+			token = tnwList.get(i);
+			TestIntegration.LOGGER.finest(this.myName + " buildConcatenatedText()" + " token = |" + token + "|");
+			switch(token.getType()) {
+				case CobolPreprocessorParser.NEWLINE:
+					newline = true;
+					break;
+				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION: // intentional fall-through!
+					continuation = true;
+					break;
+				default:
+					if (newline && continuation) {
+						this.concatenatedText.append(token.getText());
+					} else {
+						if (i > 0) {
+							this.concatenatedText.append(" ");
+						}
+						this.concatenatedText.append(token.getText());
+					}
+					newline = false;
+					continuation = false;
+			}
+		}
 	}
 
 	public long getSortKey() {
@@ -106,6 +141,10 @@ class CharDataLineWrapper {
 
 	public long getLine() {
 		return this.line;
+	}
+
+	public long getLastLine() {
+		return this.lastLine;
 	}
 
 	public long getPosn() {

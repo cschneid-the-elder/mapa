@@ -86,12 +86,14 @@ public static void main(String[] args) throws Exception {
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 
-		idDivFound = lookForIdDiv(aFileName);
+		fileName = copyWithout73to80(aFileName, baseDir, initFileNm);
+		idDivFound = lookForIdDiv(fileName);
 		if (!idDivFound) {
 			LOGGER.info(aFileName + " not COBOL?");
 			continue;
 		}
-		fileName = processCDS(aFileName, baseDir);
+		fileName = copyCompressingContinuations(fileName);
+		fileName = processCDS(fileName, baseDir);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
 		if (CLI.unitTest) {
@@ -572,17 +574,15 @@ public static void main(String[] args) throws Exception {
 	}
 
 	/**
-	Create a copy of the original file with a '\n' prepended in order
-	to make the CLASSIC_LINE_NUMBER lexer token match.  Also remove 
-	the troublesome columns 73 - 80 if they are present.
+	Remove the troublesome columns 73 - 80 if they are present.
 	*/
-	public static String copyWithBOL(
+	public static String copyWithout73to80(
 			String fileName
 			, File baseDir
 			, String initFileNm
 			) throws IOException {
 		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-without73to80-", "-cbl", baseDir);
 		CLI.setPosixAttributes(tmp);
 		if (CLI.saveTemp) {
 		} else {
@@ -591,7 +591,6 @@ public static void main(String[] args) throws Exception {
 
 		PrintWriter out = new PrintWriter(tmp);
 		List<String> list = Files.readAllLines(Paths.get(fileName));
-		out.println('\n');
 		for (String line: list) {
 			int length = line.length();
 			String outLine = new String(line);
@@ -602,6 +601,99 @@ public static void main(String[] args) throws Exception {
 		}
 		out.close();
 		return tmp.getAbsolutePath();
+
+	}
+
+	/**
+	The intent of this method is to compress some of the syntactically correct
+	but awful constructs such as...
+
+	000028     ADD 
+	000029                                                                 1
+	000030-                                                                0
+	000031
+	000032     TO
+	000033                                                                 C
+	000034-                                                                O
+	000035-                                                                U
+	000036-                                                                N
+	000037-                                                                T
+	000038-                                                                E
+	000039-                                                                R
+	000040
+	000041
+	000042                                                               DIS
+	000043-                                                             PLAY 
+	000044     COUNTER
+
+
+	*/
+	public static String copyCompressingContinuations(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			) throws IOException {
+		ArrayList<CharDataLineWrapper> charDataLines = new ArrayList<>();
+
+		lookForCharDataLines(fileName, charDataLines);
+
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		String inLine = src.readLine();
+		int i = 0;
+
+		while (inLine != null) {
+			currLineNb = src.getLineNumber();
+			while (i < charDataLines.size() && charDataLines.get(i).getLine() < currLineNb) {
+				i++;
+			}
+			if (charDataLines.get(i).getLine() == currLineNb) {
+				out.println(charDataLines.get(i).getText());
+				while (inLine != null && src.getLineNumber() <= charDataLines.get(i).getLastLine()) {
+					inLine = src.readLine();
+				}
+			} else {
+				out.println(inLine);
+				inLine = src.readLine();
+			}
+		}
+		out.close();
+		return tmp.getAbsolutePath();
+
+	}
+
+
+	public static void lookForCharDataLines(
+			String fileName
+			, ArrayList<CharDataLineWrapper> charDataLines
+			) throws Exception {
+		LOGGER.fine("lookForCharDataLines");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserCharDataLineListener listener = 
+			new CobolPreprocessorParserCharDataLineListener(charDataLines);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("charDataLines: " + charDataLines);
 
 	}
 

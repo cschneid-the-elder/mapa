@@ -26,7 +26,7 @@ class TerminalNodeWrapper {
 		this.line = this.tn.getSymbol().getLine();
 		this.posn = this.tn.getSymbol().getCharPositionInLine();
 		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
-		this.text = "@ " + this.line + " @ " + this.posn + " " + this.tn.getSymbol().getText();
+		this.text = "@ " + this.line + " @ " + this.posn + " " + this.tn.getSymbol().getText() + " type = " + this.tn.getSymbol().getType();
 
 	}
 
@@ -44,6 +44,10 @@ class TerminalNodeWrapper {
 
 	public String getText() {
 		return this.tn.getSymbol().getText();
+	}
+
+	public int getType() {
+		return this.tn.getSymbol().getType();
 	}
 
 	public String toString() {
