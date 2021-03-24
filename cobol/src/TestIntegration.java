@@ -48,7 +48,6 @@ Syntax: <code>java -jar CallTree.jar -help</code>
 public class TestIntegration{
 
 public static final Logger LOGGER = Logger.getLogger(TestIntegration.class.getName());
-public static ArrayList<CopyStatementContextWrapper> copiesForFile = new ArrayList<>(); //TODO needed?
 public static ArrayList<DDNode> dataNodes = new ArrayList<>();
 public static TheCLI CLI = null;
 
@@ -379,6 +378,7 @@ public static void main(String[] args) throws Exception {
 	public static Boolean lookForIdDiv(String initFileName) throws Exception {
 		LOGGER.fine("lookForIdDiv");
 		CharStream cs = fromFileName(initFileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -407,6 +407,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.fine("lookForCompilerDirectingStatements");
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
@@ -425,99 +426,6 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("compDirStmts: " + compDirStmts);
 		LOGGER.finest("compOptDefines: " + compOptDefines);
 
-	}
-
-	public static String lookForReplaceStatements(
-						String fileName
-						, File baseDir
-						, String initFileNm
-						) throws Exception {
-		LOGGER.fine("lookForReplacementStatements");
-		ArrayList<ReplaceStatementContextWrapper> replaces = new ArrayList<>();
-
-		CharStream cs = fromFileName(fileName);  //load the file
-		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
-		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
-		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
-
-		ParseTree tree = parser.startRule(); // parse the content and get the tree
-
-		ParseTreeWalker walker = new ParseTreeWalker();
-
-		ReplaceListener listener = new ReplaceListener(replaces);
-
-		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-
-		walker.walk(listener, tree);
-
-		LOGGER.finest("replaces: " + replaces);
-
-		fileName = rewriteApplyingReplaceStatements(replaces, fileName, baseDir, initFileNm);
-
-		return fileName;
-	}
-
-	public static String rewriteApplyingReplaceStatements(
-						ArrayList<ReplaceStatementContextWrapper> replaces
-						, String fileName
-						, File baseDir
-						, String initFileNm
-						) throws IOException {
-		LOGGER.fine("rewriteApplyingReplaceStatements");
-		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
-		CLI.setPosixAttributes(tmp);
-		if (CLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-
-		PrintWriter out = new PrintWriter(tmp);
-		String inLine = src.readLine();
-
-		LOGGER.finer("Applying REPLACE statements to " + fileName);
-
-		/**
-			Here we apply the REPLACE statements.
-		*/	
-		while (inLine != null) {
-			for (ReplaceStatementContextWrapper repl: replaces) {
-				while (repl.startLine() <= src.getLineNumber() 
-					&& src.getLineNumber() <= repl.endLine()
-					&& inLine != null) {
-						inLine = src.readLine();
-						//System.out.println("eating line " + src.getLineNumber());
-				}
-			}
-			out.println(applyReplaceStatements(replaces, inLine, src.getLineNumber()));
-			inLine = src.readLine();
-		}
-
-		src.close();
-		out.close();
-		fileName = tmp.getPath();
-		return fileName;
-
-	}
-
-	public static String applyReplaceStatements(
-						ArrayList<ReplaceStatementContextWrapper> replaces
-						, String line
-						, int lineNb) {
-		LOGGER.fine("applyReplaceStatements");
-		String newLine = new String(line);
-		int i = 0;
-
-		for (i = 0; i < replaces.size(); i++) {
-			if (replaces.get(i).isReplaceByStatement()) {
-				if (lineNb > replaces.get(i).startLine()) {
-					if (i < replaces.size() - 1 && lineNb < replaces.get(i+1).startLine()) {
-						newLine = replaces.get(i).applyTo(newLine);
-					}
-				}
-			}
-		}
-		return newLine;
 	}
 
 	/**
@@ -665,7 +573,8 @@ public static void main(String[] args) throws Exception {
 
 	/**
 	Create a copy of the original file with a '\n' prepended in order
-	to make the CLASSIC_LINE_NUMBER lexer token match.
+	to make the CLASSIC_LINE_NUMBER lexer token match.  Also remove 
+	the troublesome columns 73 - 80 if they are present.
 	*/
 	public static String copyWithBOL(
 			String fileName
@@ -683,7 +592,14 @@ public static void main(String[] args) throws Exception {
 		PrintWriter out = new PrintWriter(tmp);
 		List<String> list = Files.readAllLines(Paths.get(fileName));
 		out.println('\n');
-		for (String line: list) out.println(line);
+		for (String line: list) {
+			int length = line.length();
+			String outLine = new String(line);
+			if (length > 72) {
+				outLine = line.substring(0, 71);
+			}
+			out.println(outLine);
+		}
 		out.close();
 		return tmp.getAbsolutePath();
 

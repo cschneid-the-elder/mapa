@@ -19,6 +19,16 @@
 
 lexer grammar CobolLexer;
 
+@lexer::members {
+	/*
+	This Boolean is set to true to make the ANTLR testrig work.  The
+	file being parsed is rewritten without columns 73 - 80 if it is
+	being processed via an application.  Under those circumstances,
+	the lexing code must set this variable to false.
+	*/
+	public static Boolean testRig = true; 
+}
+
 channels { COMPILER_DIRECTIVES }
 
 // lexer rules --------------------------------------------------------------------------------
@@ -54,7 +64,7 @@ NIST_SEMI_COMMENT_Y : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA Y {getCharPosition
 
 
 
-CLASSIC_EOL_COMMENT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine()==80}? -> skip;
+CLASSIC_EOL_COMMENT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {testRig && getCharPositionInLine()==80}? -> skip;
 
 CLASSIC_EJECT: EJECT DOT? -> skip;
 CLASSIC_SKIP : (SKIP1 | SKIP2 | SKIP3) DOT? -> skip;
@@ -733,11 +743,33 @@ LEVEL_NUMBER_88 : '88';
 added {getCharPositionInLine() > 7  && getCharPositionInLine() < 73}? to INTEGERLITERAL,
 NUMERICLITERAL, and IDENTIFIER
 */
-INTEGERLITERAL : (PLUSCHAR | MINUSCHAR)? [0-9]+ {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ;
+INTEGERLITERAL
+   : (PLUSCHAR | MINUSCHAR)? [0-9]+
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
 
-NUMERICLITERAL : (PLUSCHAR | MINUSCHAR)? [0-9]* (DOT | COMMACHAR) [0-9]+ (('e' | 'E') (PLUSCHAR | MINUSCHAR)? [0-9]+)? {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}?;
+NUMERICLITERAL
+   : (PLUSCHAR | MINUSCHAR)? [0-9]* (DOT | COMMACHAR) [0-9]+ (('e' | 'E') (PLUSCHAR | MINUSCHAR)? [0-9]+)?
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
 
-IDENTIFIER : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)* {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}?;
+
+IDENTIFIER
+   : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)*
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
 
 // whitespace, line breaks, comments, ...
 NEWLINE : '\r'? '\n' -> channel(HIDDEN);
@@ -841,7 +873,7 @@ NEWLINE_PIC : '\r'? '\n' -> channel(HIDDEN);
 CLASSIC_COMMENTLINE_PIC : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR | SLASHCHAR) TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
 CLASSIC_LINE_NUMBER_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
 CLASSIC_DEBUG_LINE_PIC : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA D TEXTA* {getCharPositionInLine() < 73}? -> skip;
-CLASSIC_EOL_COMMENT_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine()==80}? -> skip;
+CLASSIC_EOL_COMMENT_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {testRig && getCharPositionInLine()==80}? -> skip;
 
 mode FFT;
 

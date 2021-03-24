@@ -503,6 +503,15 @@ public class CobolLexer extends Lexer {
 	}
 
 
+		/*
+		This Boolean is set to true to make the ANTLR testrig work.  The
+		file being parsed is rewritten without columns 73 - 80 if it is
+		being processed via an application.  Under those circumstances,
+		the lexing code must set this variable to false.
+		*/
+		public static Boolean testRig = true; 
+
+
 	public CobolLexer(CharStream input) {
 		super(input);
 		_interp = new LexerATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
@@ -755,7 +764,7 @@ public class CobolLexer extends Lexer {
 	private boolean CLASSIC_EOL_COMMENT_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 18:
-			return getCharPositionInLine()==80;
+			return testRig && getCharPositionInLine()==80;
 		}
 		return true;
 	}
@@ -846,21 +855,33 @@ public class CobolLexer extends Lexer {
 	private boolean INTEGERLITERAL_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 31:
-			return getCharPositionInLine() > 7 && getCharPositionInLine() < 73;
+			return 
+		    (getCharPositionInLine() > 7 && !testRig)
+		    ||
+		    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+		   ;
 		}
 		return true;
 	}
 	private boolean NUMERICLITERAL_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 32:
-			return getCharPositionInLine() > 7 && getCharPositionInLine() < 73;
+			return 
+		    (getCharPositionInLine() > 7 && !testRig)
+		    ||
+		    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+		   ;
 		}
 		return true;
 	}
 	private boolean IDENTIFIER_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 33:
-			return getCharPositionInLine() > 7 && getCharPositionInLine() < 73;
+			return 
+		    (getCharPositionInLine() > 7 && !testRig)
+		    ||
+		    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+		   ;
 		}
 		return true;
 	}
@@ -888,7 +909,7 @@ public class CobolLexer extends Lexer {
 	private boolean CLASSIC_EOL_COMMENT_PIC_sempred(RuleContext _localctx, int predIndex) {
 		switch (predIndex) {
 		case 37:
-			return getCharPositionInLine()==80;
+			return testRig && getCharPositionInLine()==80;
 		}
 		return true;
 	}
