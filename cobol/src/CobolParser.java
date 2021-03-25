@@ -1352,12 +1352,16 @@ public class CobolParser extends Parser {
 
 	public static class ProgramIdParagraphContext extends ParserRuleContext {
 		public TerminalNode PROGRAM_ID() { return getToken(CobolParser.PROGRAM_ID, 0); }
+		public ProgramNameContext programName() {
+			return getRuleContext(ProgramNameContext.class,0);
+		}
 		public List<TerminalNode> DOT() { return getTokens(CobolParser.DOT); }
 		public TerminalNode DOT(int i) {
 			return getToken(CobolParser.DOT, i);
 		}
-		public ProgramNameContext programName() {
-			return getRuleContext(ProgramNameContext.class,0);
+		public List<TerminalNode> DOT_FS() { return getTokens(CobolParser.DOT_FS); }
+		public TerminalNode DOT_FS(int i) {
+			return getToken(CobolParser.DOT_FS, i);
 		}
 		public CommentEntryContext commentEntry() {
 			return getRuleContext(CommentEntryContext.class,0);
@@ -1367,7 +1371,6 @@ public class CobolParser extends Parser {
 		public TerminalNode LIBRARY() { return getToken(CobolParser.LIBRARY, 0); }
 		public TerminalNode DEFINITION() { return getToken(CobolParser.DEFINITION, 0); }
 		public TerminalNode RECURSIVE() { return getToken(CobolParser.RECURSIVE, 0); }
-		public TerminalNode DOT_FS() { return getToken(CobolParser.DOT_FS, 0); }
 		public TerminalNode IS() { return getToken(CobolParser.IS, 0); }
 		public TerminalNode PROGRAM() { return getToken(CobolParser.PROGRAM, 0); }
 		public ProgramIdParagraphContext(ParserRuleContext parent, int invokingState) {
@@ -1399,7 +1402,15 @@ public class CobolParser extends Parser {
 			setState(1351);
 			match(PROGRAM_ID);
 			setState(1352);
-			match(DOT);
+			_la = _input.LA(1);
+			if ( !(_la==DOT_FS || _la==DOT) ) {
+			_errHandler.recoverInline(this);
+			}
+			else {
+				if ( _input.LA(1)==Token.EOF ) matchedEOF = true;
+				_errHandler.reportMatch(this);
+				consume();
+			}
 			setState(1353);
 			programName();
 			setState(1361);
@@ -58043,21 +58054,21 @@ public class CobolParser extends Parser {
 		"\u0548\5\32\16\2\u0544\u0548\5\34\17\2\u0545\u0548\5\36\20\2\u0546\u0548"+
 		"\5 \21\2\u0547\u0541\3\2\2\2\u0547\u0542\3\2\2\2\u0547\u0543\3\2\2\2\u0547"+
 		"\u0544\3\2\2\2\u0547\u0545\3\2\2\2\u0547\u0546\3\2\2\2\u0548\17\3\2\2"+
-		"\2\u0549\u054a\7\u01ab\2\2\u054a\u054b\7\u0269\2\2\u054b\u0553\5\u04e4"+
-		"\u0273\2\u054c\u054e\7\u0133\2\2\u054d\u054c\3\2\2\2\u054d\u054e\3\2\2"+
-		"\2\u054e\u054f\3\2\2\2\u054f\u0551\t\4\2\2\u0550\u0552\7\u01aa\2\2\u0551"+
-		"\u0550\3\2\2\2\u0551\u0552\3\2\2\2\u0552\u0554\3\2\2\2\u0553\u054d\3\2"+
-		"\2\2\u0553\u0554\3\2\2\2\u0554\u0556\3\2\2\2\u0555\u0557\t\3\2\2\u0556"+
-		"\u0555\3\2\2\2\u0556\u0557\3\2\2\2\u0557\u0559\3\2\2\2\u0558\u055a\5\u050a"+
-		"\u0286\2\u0559\u0558\3\2\2\2\u0559\u055a\3\2\2\2\u055a\21\3\2\2\2\u055b"+
-		"\u055f\5\24\13\2\u055c\u055e\5\26\f\2\u055d\u055c\3\2\2\2\u055e\u0561"+
-		"\3\2\2\2\u055f\u055d\3\2\2\2\u055f\u0560\3\2\2\2\u0560\23\3\2\2\2\u0561"+
-		"\u055f\3\2\2\2\u0562\u0563\7\32\2\2\u0563\25\3\2\2\2\u0564\u0565\5\u050c"+
-		"\u0287\2\u0565\27\3\2\2\2\u0566\u056a\7\33\2\2\u0567\u0569\5\u050c\u0287"+
-		"\2\u0568\u0567\3\2\2\2\u0569\u056c\3\2\2\2\u056a\u0568\3\2\2\2\u056a\u056b"+
-		"\3\2\2\2\u056b\31\3\2\2\2\u056c\u056a\3\2\2\2\u056d\u0571\7\34\2\2\u056e"+
-		"\u0570\5\u050c\u0287\2\u056f\u056e\3\2\2\2\u0570\u0573\3\2\2\2\u0571\u056f"+
-		"\3\2\2\2\u0571\u0572\3\2\2\2\u0572\33\3\2\2\2\u0573\u0571\3\2\2\2\u0574"+
+		"\2\u0549\u054a\7\u01ab\2\2\u054a\u054b\t\3\2\2\u054b\u0553\5\u04e4\u0273"+
+		"\2\u054c\u054e\7\u0133\2\2\u054d\u054c\3\2\2\2\u054d\u054e\3\2\2\2\u054e"+
+		"\u054f\3\2\2\2\u054f\u0551\t\4\2\2\u0550\u0552\7\u01aa\2\2\u0551\u0550"+
+		"\3\2\2\2\u0551\u0552\3\2\2\2\u0552\u0554\3\2\2\2\u0553\u054d\3\2\2\2\u0553"+
+		"\u0554\3\2\2\2\u0554\u0556\3\2\2\2\u0555\u0557\t\3\2\2\u0556\u0555\3\2"+
+		"\2\2\u0556\u0557\3\2\2\2\u0557\u0559\3\2\2\2\u0558\u055a\5\u050a\u0286"+
+		"\2\u0559\u0558\3\2\2\2\u0559\u055a\3\2\2\2\u055a\21\3\2\2\2\u055b\u055f"+
+		"\5\24\13\2\u055c\u055e\5\26\f\2\u055d\u055c\3\2\2\2\u055e\u0561\3\2\2"+
+		"\2\u055f\u055d\3\2\2\2\u055f\u0560\3\2\2\2\u0560\23\3\2\2\2\u0561\u055f"+
+		"\3\2\2\2\u0562\u0563\7\32\2\2\u0563\25\3\2\2\2\u0564\u0565\5\u050c\u0287"+
+		"\2\u0565\27\3\2\2\2\u0566\u056a\7\33\2\2\u0567\u0569\5\u050c\u0287\2\u0568"+
+		"\u0567\3\2\2\2\u0569\u056c\3\2\2\2\u056a\u0568\3\2\2\2\u056a\u056b\3\2"+
+		"\2\2\u056b\31\3\2\2\2\u056c\u056a\3\2\2\2\u056d\u0571\7\34\2\2\u056e\u0570"+
+		"\5\u050c\u0287\2\u056f\u056e\3\2\2\2\u0570\u0573\3\2\2\2\u0571\u056f\3"+
+		"\2\2\2\u0571\u0572\3\2\2\2\u0572\33\3\2\2\2\u0573\u0571\3\2\2\2\u0574"+
 		"\u0578\7\35\2\2\u0575\u0577\5\u050c\u0287\2\u0576\u0575\3\2\2\2\u0577"+
 		"\u057a\3\2\2\2\u0578\u0576\3\2\2\2\u0578\u0579\3\2\2\2\u0579\35\3\2\2"+
 		"\2\u057a\u0578\3\2\2\2\u057b\u057f\7\36\2\2\u057c\u057e\5\u050c\u0287"+

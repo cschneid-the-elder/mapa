@@ -69,7 +69,7 @@ ifeq ($(strip $(n)),)
 	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 else
 	echo `date` $@ $(n) >> build.log
-	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -out callListNist$(n).log
+	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
 endif
 
 testrig:

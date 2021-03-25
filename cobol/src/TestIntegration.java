@@ -488,6 +488,7 @@ public static void main(String[] args) throws Exception {
 
 		LOGGER.finer("lexing " + fileName);
 
+		CobolLexer.testRig = false;
 		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 
@@ -681,7 +682,11 @@ public static void main(String[] args) throws Exception {
 					break;
 				default:
 					if (newline && continuation) {
-						sb.append(token.getText());
+						if (token.getText().startsWith("\"")) {
+							sb.append(token.getText().substring(1));
+						} else {
+							sb.append(token.getText());
+						}
 					} else if (newline) {
 						sb.append("\n");
 						sb.append(padLeft(token.getText(), token.getTextLength() + token.getPosn()));
