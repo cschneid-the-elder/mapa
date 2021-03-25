@@ -92,7 +92,7 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info(aFileName + " not COBOL?");
 			continue;
 		}
-		fileName = copyCompressingContinuations(fileName);
+		fileName = copyCompressingContinuations(fileName, baseDir, initFileNm);
 		fileName = processCDS(fileName, baseDir);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
@@ -595,9 +595,11 @@ public static void main(String[] args) throws Exception {
 			int length = line.length();
 			String outLine = new String(line);
 			if (length > 72) {
-				outLine = line.substring(0, 71);
+				outLine = line.substring(0, 72);
 			}
 			out.println(outLine);
+			LOGGER.finest("line  in = |" + line + "|");
+			LOGGER.finest("line out = |" + outLine + "|");
 		}
 		out.close();
 		return tmp.getAbsolutePath();
@@ -633,6 +635,82 @@ public static void main(String[] args) throws Exception {
 			, File baseDir
 			, String initFileNm
 			) throws IOException {
+		LOGGER.finest(" copyCompressingContinuations()");
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		lookForTerminalNodes(fileName, tNodes);
+
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		StringBuilder sb = new StringBuilder();
+		TerminalNodeWrapper token = null;
+		Boolean newline = false;
+		Boolean continuation = false;
+		long prevLine = -1;
+		int prevTextLength = -1;
+		long prevPosn = -1;
+
+		for (int i = 0; i < tNodes.size(); i++) {
+			token = tNodes.get(i);
+			TestIntegration.LOGGER.finest(" token = |" + token + "|");
+			switch(token.getType()) {
+				case CobolPreprocessorParser.NEWLINE:
+					newline = true;
+					/*
+					if (i < tNodes.size() 
+					&& (tNodes.get(i+1).getType() == CobolPreprocessorParser.CLASSIC_CONTINUATION
+					||  tNodes.get(i+1).getType() == CobolPreprocessorParser.REPLACE_CONTINUATION
+					||  tNodes.get(i+1).getType() == CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION)) {
+					} else {
+						sb.append(token.getText());
+					}
+					*/
+					break;
+				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION: // intentional fall-through!
+					continuation = true;
+					break;
+				case Token.EOF:
+					break;
+				default:
+					if (newline && continuation) {
+						sb.append(token.getText());
+					} else if (newline) {
+						sb.append("\n");
+						sb.append(padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					} else if (token.getLine() == prevLine) {
+						long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+						sb.append(padLeft(token.getText(), token.getTextLength() + extraPadding));
+					} else {
+						sb.append(padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					}
+					prevLine = token.getLine();
+					prevTextLength = token.getTextLength();
+					prevPosn = token.getPosn();
+					newline = false;
+					continuation = false;
+			}
+		}
+
+		out.println(sb);
+		out.close();
+		return tmp.getAbsolutePath();
+
+	}
+
+	/*
+	public static String copyCompressingContinuations(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			) throws IOException {
 		ArrayList<CharDataLineWrapper> charDataLines = new ArrayList<>();
 
 		lookForCharDataLines(fileName, charDataLines);
@@ -648,14 +726,15 @@ public static void main(String[] args) throws Exception {
 		PrintWriter out = new PrintWriter(tmp);
 		String inLine = src.readLine();
 		int i = 0;
+		int currLineNb = -1;
 
 		while (inLine != null) {
 			currLineNb = src.getLineNumber();
 			while (i < charDataLines.size() && charDataLines.get(i).getLine() < currLineNb) {
 				i++;
 			}
-			if (charDataLines.get(i).getLine() == currLineNb) {
-				out.println(charDataLines.get(i).getText());
+			if (i < charDataLines.size() && charDataLines.get(i).getLine() == currLineNb) {
+				out.println(padLeft(charDataLines.get(i).getText(), charDataLines.get(i).getPosn()));
 				while (inLine != null && src.getLineNumber() <= charDataLines.get(i).getLastLine()) {
 					inLine = src.readLine();
 				}
@@ -668,12 +747,52 @@ public static void main(String[] args) throws Exception {
 		return tmp.getAbsolutePath();
 
 	}
+	*/
 
+	public static String padLeft(String aString, long length) {
+		if (aString.length() >= length) {
+			return aString;
+		}
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < length - aString.length()) {
+			sb.append(' ');
+		}
+		sb.append(aString);
+
+		return sb.toString();
+	}
+
+	public static void lookForTerminalNodes(
+			String fileName
+			, ArrayList<TerminalNodeWrapper> tNodes
+			) throws IOException {
+		LOGGER.fine("lookForTerminalNodes");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserTerminalNodeListener listener = 
+			new CobolPreprocessorParserTerminalNodeListener(tNodes);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("tNodes: " + tNodes);
+
+	}
 
 	public static void lookForCharDataLines(
 			String fileName
 			, ArrayList<CharDataLineWrapper> charDataLines
-			) throws Exception {
+			) throws IOException {
 		LOGGER.fine("lookForCharDataLines");
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file

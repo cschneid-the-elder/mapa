@@ -12,7 +12,8 @@ class TerminalNodeWrapper {
 	private String text = null;
 
 	public static ArrayList<TerminalNodeWrapper> bunchOfThese(List<TerminalNode> tnList) {
-		ArrayList<TerminalNodeWrapper> tnwList = null;
+		ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
+
 		for (TerminalNode tn: tnList) {
 			tnwList.add(new TerminalNodeWrapper(tn));
 		}
@@ -44,6 +45,10 @@ class TerminalNodeWrapper {
 
 	public String getText() {
 		return this.tn.getSymbol().getText();
+	}
+
+	public int getTextLength() {
+		return this.getText().length();
 	}
 
 	public int getType() {

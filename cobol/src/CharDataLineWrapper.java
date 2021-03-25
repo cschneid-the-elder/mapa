@@ -18,31 +18,31 @@ class CharDataLineWrapper {
 	public CharDataLineWrapper(CobolPreprocessorParser.CharDataLineContext ctx) {
 		this.ctx = ctx;
 
-		if (this.ctx.PSEUDOTEXTIDENTIFIER() != null) {
+		if (this.ctx.PSEUDOTEXTIDENTIFIER() != null && this.ctx.PSEUDOTEXTIDENTIFIER().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.PSEUDOTEXTIDENTIFIER()));
 		}
 
-		if (this.ctx.TEXT() != null) {
+		if (this.ctx.TEXT() != null && this.ctx.TEXT().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.TEXT()));
 		}
 
-		if (this.ctx.DOT() != null) {
+		if (this.ctx.DOT() != null && this.ctx.DOT().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.DOT()));
 		}
 
-		if (this.ctx.LPARENCHAR() != null) {
+		if (this.ctx.LPARENCHAR() != null && this.ctx.LPARENCHAR().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.LPARENCHAR()));
 		}
 
-		if (this.ctx.RPARENCHAR() != null) {
+		if (this.ctx.RPARENCHAR() != null && this.ctx.RPARENCHAR().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.RPARENCHAR()));
 		}
 
-		if (this.ctx.NEWLINE() != null) {
+		if (this.ctx.NEWLINE() != null && this.ctx.NEWLINE().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.NEWLINE()));
 		}
 
-		if (this.ctx.CLASSIC_CONTINUATION() != null) {
+		if (this.ctx.CLASSIC_CONTINUATION() != null && this.ctx.CLASSIC_CONTINUATION().size() > 0) {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.CLASSIC_CONTINUATION()));
 		}
 
@@ -122,6 +122,9 @@ class CharDataLineWrapper {
 					break;
 				default:
 					if (newline && continuation) {
+						this.concatenatedText.append(token.getText());
+					} else if (newline) {
+						this.concatenatedText.append("\n");
 						this.concatenatedText.append(token.getText());
 					} else {
 						if (i > 0) {

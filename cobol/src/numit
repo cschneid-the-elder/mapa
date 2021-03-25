@@ -1,7 +1,7 @@
 #! /usr/bin/awk -f
 
 # add cobol line numbers to input
-# syntax: numit -v type=[prefix | suffix | both] cobolFile
+# syntax: numit -v type=[prefix | suffix | both] < inputFile > outputFile
 # type=prefix adds 6 digit numbers to beginning of each record
 # type=suffix adds 8 digit numbers to end of each record
 # type=both adds both
