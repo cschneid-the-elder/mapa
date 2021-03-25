@@ -7,6 +7,14 @@
                                                  copy testantlr058c.cpy
        replacing ==%comp1le error%== by ====
                                                                       .
+                                                 copy testantlr058c.cpy
+       replacing % by ====
+        comp1le by ====
+        error by ====
+        ADD by SUBTRACT
+        ==MULTIPLY== BY ==DIVIDE==
+        ONE AND TWO AND THREE BY FOUR AND FIVE AND SIX
+                                                                      .
                                                  copy testantlr058d.cpy
        replacing ==%comp1le error1%== by ====
                  ==%comp1le error2%== by ====
