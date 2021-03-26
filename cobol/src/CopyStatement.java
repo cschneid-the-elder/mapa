@@ -60,23 +60,23 @@ public class CopyStatement implements CompilerDirectingStatement {
 		return this.type;
 	}
 
-	int startLine() {
+	public int startLine() {
 		return this.ctx.COPY().getSymbol().getLine();
 	}
 
-	int endLine() {
+	public int endLine() {
 		return this.ctx.DOT().getSymbol().getLine();
 	}
 
-	int startPositionInLine() {
+	public int startPositionInLine() {
 		return this.ctx.COPY().getSymbol().getCharPositionInLine();
 	}
 
-	int endPositionInLine() {
+	public int endPositionInLine() {
 		return this.ctx.DOT().getSymbol().getCharPositionInLine();
 	}
 
-	String getText() {
+	public String getText() {
 		return this.ctx.getText();
 	}
 
@@ -85,7 +85,45 @@ public class CopyStatement implements CompilerDirectingStatement {
 			, PrintWriter out
 			, String currLine
 			) throws IOException {
-		TestIntegration.LOGGER.fine(myName + " apply() " + this.getCopyFile());
+		TestIntegration.LOGGER.fine(this.myName + " apply() " + this.getCopyFile());
+
+		int lastLine = src.getLineNumber() + (this.endLine - this.startLine);
+		TestIntegration.LOGGER.fine("current line = " + src.getLineNumber() + " lastLine = " + lastLine);
+		while (src.getLineNumber() < lastLine) src.readLine();
+
+		/*
+		The COPY statement need not be alone on the source line, e.g.
+
+		DISPLAY 'Julia'. COPY 'copybook'. DISPLAY 'Wicker'.
+
+		Thus we must write the source line up to the COPY statement and later
+		write the rest of the source line following the COPY statement.
+		*/
+		int startPosn = this.startPositionInLine() - 1;
+		out.println(currLine.substring(0, startPosn));
+
+		String copyFile = null;
+
+		try {
+			copyFile = TestIntegration.CLI.copyCompressingContinuations(
+					this.getCopyFileFull()
+					, TestIntegration.baseDir
+					, this.getCopyFile()
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+
+		if (this.replaceable.size() == 0) {
+			List<String> list = 
+				Files.readAllLines(Paths.get(this.getCopyFileFull()));
+			for (String line: list) out.println(line);			
+		} else {
+			ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+			TestIntegration.CLI.lookForTerminalNodes(copyFile, tNodes);
+		}
+
 		/*
 		String inLine = currLine;
 		Boolean pleaseWrite = true;
@@ -166,6 +204,12 @@ public class CopyStatement implements CompilerDirectingStatement {
 			inLine = src.readLine();
 		}
 		*/
+
+		/*
+		Writing the rest of the source line following the COPY statement.
+		*/
+		int endPosn = this.endPositionInLine() + 1;
+		out.println(TestIntegration.CLI.padLeft(currLine.substring(endPosn), currLine.length()));
 	}
 
 	/*

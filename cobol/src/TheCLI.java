@@ -223,5 +223,149 @@ public class TheCLI{
 				System.exit(16);
 			}
 		}
-	}	
+	}
+
+	/**
+	The intent of this method is to compress some of the syntactically correct
+	but awful constructs such as...
+
+	000028     ADD 
+	000029                                                                 1
+	000030-                                                                0
+	000031
+	000032     TO
+	000033                                                                 C
+	000034-                                                                O
+	000035-                                                                U
+	000036-                                                                N
+	000037-                                                                T
+	000038-                                                                E
+	000039-                                                                R
+	000040
+	000041
+	000042                                                               DIS
+	000043-                                                             PLAY 
+	000044     COUNTER
+
+	There is a need for this code in multiple places and this was the
+	most convenient place to locate it.
+
+	Global.
+	*/
+	@SuppressWarnings({"fallthrough"})
+	public String copyCompressingContinuations(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			) throws IOException {
+		TestIntegration.LOGGER.finest(this.myName + " copyCompressingContinuations()");
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		this.lookForTerminalNodes(fileName, tNodes);
+
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
+		this.setPosixAttributes(tmp);
+		if (this.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		StringBuilder sb = new StringBuilder();
+		TerminalNodeWrapper token = null;
+		Boolean newline = false;
+		Boolean continuation = false;
+		long prevLine = -1;
+		int prevTextLength = -1;
+		long prevPosn = -1;
+
+		for (int i = 0; i < tNodes.size(); i++) {
+			token = tNodes.get(i);
+			TestIntegration.LOGGER.finest(" token = |" + token + "|");
+			switch(token.getType()) {
+				case CobolPreprocessorParser.NEWLINE:
+					newline = true;
+					break;
+				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION: // intentional fall-through!
+					continuation = true;
+					break;
+				case Token.EOF:
+					break;
+				default:
+					if (newline && continuation) {
+						if (token.getText().startsWith("\"")) {
+							sb.append(token.getText().substring(1));
+						} else {
+							sb.append(token.getText());
+						}
+					} else if (newline) {
+						sb.append("\n");
+						sb.append(this.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					} else if (token.getLine() == prevLine) {
+						long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+						sb.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
+					} else {
+						sb.append(this.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					}
+					prevLine = token.getLine();
+					prevTextLength = token.getTextLength();
+					prevPosn = token.getPosn();
+					newline = false;
+					continuation = false;
+			}
+		}
+
+		out.println(sb);
+		out.close();
+		return tmp.getAbsolutePath();
+
+	}
+
+	public String padLeft(String aString, long length) {
+		if (aString.length() >= length) {
+			return aString;
+		}
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < length - aString.length()) {
+			sb.append(' ');
+		}
+		sb.append(aString);
+
+		return sb.toString();
+	}
+
+	/**
+	In multiple places there is a need for a collection of TerminalNode 
+	instances that comprise source code text.  This was the most convenient
+	place to locate the code.  Global.
+	*/
+	public void lookForTerminalNodes(
+			String fileName
+			, ArrayList<TerminalNodeWrapper> tNodes
+			) throws IOException {
+		TestIntegration.LOGGER.fine(this.myName + " lookForTerminalNodes()");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserTerminalNodeListener listener = 
+			new CobolPreprocessorParserTerminalNodeListener(tNodes);
+
+		TestIntegration.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		TestIntegration.LOGGER.finest("tNodes: " + tNodes);
+
+	}
+
 }

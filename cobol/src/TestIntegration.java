@@ -50,6 +50,7 @@ public class TestIntegration{
 public static final Logger LOGGER = Logger.getLogger(TestIntegration.class.getName());
 public static ArrayList<DDNode> dataNodes = new ArrayList<>();
 public static TheCLI CLI = null;
+public static File baseDir = null; // keep all temp files contained here
 
 public static void main(String[] args) throws Exception {
 
@@ -71,7 +72,7 @@ public static void main(String[] args) throws Exception {
 	}
 
 	CLI = new TheCLI(args);
-	File baseDir = newTempDir(); // keep all temp files contained here
+	baseDir = newTempDir(); // keep all temp files contained here
 	String fileName = null;
 	ArrayList<CallWrapper> allTheCalledNodes = new ArrayList<>();
 	Boolean pass = true;
@@ -92,7 +93,7 @@ public static void main(String[] args) throws Exception {
 			LOGGER.info(aFileName + " not COBOL?");
 			continue;
 		}
-		fileName = copyCompressingContinuations(fileName, baseDir, initFileNm);
+		fileName = CLI.copyCompressingContinuations(fileName, baseDir, initFileNm);
 		fileName = processCDS(fileName, baseDir);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
@@ -158,6 +159,10 @@ public static void main(String[] args) throws Exception {
 		return null;
 	}
 
+	/**
+	This is an interpreter for Compiler Directing Statements, and thus is
+	a bit strange.  And long.  Because there is a state machine therein.
+	*/
 	@SuppressWarnings({"fallthrough"})
 	public static String processCDS(
 			String aFileName
@@ -214,6 +219,7 @@ public static void main(String[] args) throws Exception {
 			LOGGER.finest("writing to " + tmp.getPath());
 			PrintWriter out = new PrintWriter(tmp);
 			Boolean justWriteTheRest = false;
+			Boolean butDontWriteThisOne = false;
 			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
 			ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
 			ReplaceStatement currReplace = null;
@@ -312,7 +318,7 @@ public static void main(String[] args) throws Exception {
 							if (truthiness.peek() == null || truthiness.peek()) {
 								((CopyStatement)cds).apply(src, out, inLineSB.toString());
 								justWriteTheRest = true;
-								inLineSB.delete(0, inLineSB.length());
+								butDontWriteThisOne = true;
 							} else {
 								if (inLineSB.length() > 6) {
 									inLineSB.setCharAt(6, '*');
@@ -345,6 +351,9 @@ public static void main(String[] args) throws Exception {
 				if (nbCopies == 0 
 				&& (src.getLineNumber() >= replaceStart && src.getLineNumber() <= replaceStop)) {
 					LOGGER.finest("not writing |" + inLine + "| as it seems to be part of a REPLACE [OFF] statement");
+				} else if (butDontWriteThisOne) {
+					LOGGER.finest("not writing |" + inLine + "| as it has been processed by a COPY statement");
+					butDontWriteThisOne = false;
 				} else {
 					LOGGER.finest("writing  |" + inLine + "|");
 					out.println(inLine);
@@ -631,6 +640,7 @@ public static void main(String[] args) throws Exception {
 
 
 	*/
+	/*
 	public static String copyCompressingContinuations(
 			String fileName
 			, File baseDir
@@ -663,15 +673,6 @@ public static void main(String[] args) throws Exception {
 			switch(token.getType()) {
 				case CobolPreprocessorParser.NEWLINE:
 					newline = true;
-					/*
-					if (i < tNodes.size() 
-					&& (tNodes.get(i+1).getType() == CobolPreprocessorParser.CLASSIC_CONTINUATION
-					||  tNodes.get(i+1).getType() == CobolPreprocessorParser.REPLACE_CONTINUATION
-					||  tNodes.get(i+1).getType() == CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION)) {
-					} else {
-						sb.append(token.getText());
-					}
-					*/
 					break;
 				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
 				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
@@ -709,7 +710,7 @@ public static void main(String[] args) throws Exception {
 		return tmp.getAbsolutePath();
 
 	}
-
+	*/
 	/*
 	public static String copyCompressingContinuations(
 			String fileName
@@ -753,7 +754,7 @@ public static void main(String[] args) throws Exception {
 
 	}
 	*/
-
+	/*
 	public static String padLeft(String aString, long length) {
 		if (aString.length() >= length) {
 			return aString;
@@ -820,7 +821,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("charDataLines: " + charDataLines);
 
 	}
-
+	*/
 	/**
 	Create a directory to hold temporary files used in processing.  This way,
 	they're all confined together and can be easily disposed of if the
