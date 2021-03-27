@@ -87,9 +87,10 @@ public class CopyStatement implements CompilerDirectingStatement {
 			) throws IOException {
 		TestIntegration.LOGGER.fine(this.myName + " apply() " + this.getCopyFile());
 
-		int lastLine = src.getLineNumber() + (this.endLine - this.startLine);
-		TestIntegration.LOGGER.fine("current line = " + src.getLineNumber() + " lastLine = " + lastLine);
-		while (src.getLineNumber() < lastLine) src.readLine();
+		String lastLine = null;
+		int lastLineNb = src.getLineNumber() + (this.endLine - this.startLine);
+		TestIntegration.LOGGER.fine("current line = " + src.getLineNumber() + " lastLine = " + lastLineNb);
+		while (src.getLineNumber() < lastLineNb) lastLine = src.readLine();
 
 		/*
 		The COPY statement need not be alone on the source line, e.g.
@@ -100,6 +101,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 		write the rest of the source line following the COPY statement.
 		*/
 		int startPosn = this.startPositionInLine() - 1;
+		TestIntegration.LOGGER.fine("startPosn = " + startPosn);
 		out.println(currLine.substring(0, startPosn));
 
 		String copyFile = null;
@@ -209,7 +211,15 @@ public class CopyStatement implements CompilerDirectingStatement {
 		Writing the rest of the source line following the COPY statement.
 		*/
 		int endPosn = this.endPositionInLine() + 1;
-		out.println(TestIntegration.CLI.padLeft(currLine.substring(endPosn), currLine.length()));
+		TestIntegration.LOGGER.fine("endPosn = " + endPosn);
+		String outLine = null;
+		if (this.getLine() == this.getEndLine()) {
+			outLine = TestIntegration.CLI.padLeft(currLine.substring(endPosn), currLine.length());
+		} else {
+			outLine = TestIntegration.CLI.padLeft(lastLine.substring(endPosn), lastLine.length());
+		}
+		TestIntegration.LOGGER.fine("outLine = |" + outLine + "|");
+		out.println(outLine);
 	}
 
 	/*
