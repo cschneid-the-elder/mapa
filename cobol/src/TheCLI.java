@@ -226,6 +226,31 @@ public class TheCLI{
 	}
 
 	/**
+	Convenience method used from multiple locations.
+
+	Global.
+	*/
+	public String copyCompressingContinuations(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			) throws IOException {
+		TestIntegration.LOGGER.finest(this.myName + " copyCompressingContinuations()");
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		this.lookForTerminalNodes(fileName, tNodes);
+
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
+		this.setPosixAttributes(tmp);
+		if (this.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		return(this.writeOutTerminalNodes(tmp, tNodes));
+	}
+
+	/**
 	The intent of this method is to compress some of the syntactically correct
 	but awful constructs such as...
 
@@ -253,22 +278,11 @@ public class TheCLI{
 	Global.
 	*/
 	@SuppressWarnings({"fallthrough"})
-	public String copyCompressingContinuations(
-			String fileName
-			, File baseDir
-			, String initFileNm
+	public String writeOutTerminalNodes(
+			File tmp
+			, ArrayList<TerminalNodeWrapper> tNodes
 			) throws IOException {
-		TestIntegration.LOGGER.finest(this.myName + " copyCompressingContinuations()");
-		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
-
-		this.lookForTerminalNodes(fileName, tNodes);
-
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
-		this.setPosixAttributes(tmp);
-		if (this.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
+		TestIntegration.LOGGER.finest(this.myName + " writeOutTerminalNodes()");
 
 		PrintWriter out = new PrintWriter(tmp);
 		StringBuilder sb = new StringBuilder();
