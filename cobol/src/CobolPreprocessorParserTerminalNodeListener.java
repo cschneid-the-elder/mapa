@@ -15,6 +15,8 @@ public class CobolPreprocessorParserTerminalNodeListener extends CobolPreprocess
 	}
 
 	@Override public void visitTerminal(TerminalNode node) {
-		this.tNodes.add(new TerminalNodeWrapper(node));
+		if (node.getSymbol().getType() != Token.EOF) {
+			this.tNodes.add(new TerminalNodeWrapper(node));
+		}
 	}
 }

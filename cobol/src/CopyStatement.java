@@ -14,8 +14,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 	private int endLine = -1;
 	private int startPosn = -1;
 	private int endPosn = -1;
-	private ArrayList<ArrayList<TerminalNode>> replaceable = new ArrayList<>();
-	private ArrayList<ArrayList<TerminalNode>> replacement = new ArrayList<>();
+	private ArrayList<ArrayList<TerminalNodeWrapper>> replaceable = new ArrayList<>();
+	private ArrayList<ArrayList<TerminalNodeWrapper>> replacement = new ArrayList<>();
 
 	CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
@@ -122,8 +122,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 				Files.readAllLines(Paths.get(this.getCopyFileFull()));
 			for (String line: list) out.println(line);			
 		} else {
-			ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
-			TestIntegration.CLI.lookForTerminalNodes(copyFile, tNodes);
+			TestIntegration.CLI.applyReplacingPhrase(out, copyFile, replaceable, replacement);
 		}
 
 		/*
@@ -337,9 +336,9 @@ public class CopyStatement implements CompilerDirectingStatement {
 		return tNodes;
 	}
 
-	public ArrayList<TerminalNode> getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
+	public ArrayList<TerminalNodeWrapper> getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.finest(this.myName + " getReplacement()");
-		ArrayList<TerminalNode> replacement = new ArrayList<>();
+		ArrayList<TerminalNodeWrapper> replacement = new ArrayList<>();
 
 		if (rcc.replacement().pseudoText() == null) {
 			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText() == null");
@@ -348,19 +347,19 @@ public class CopyStatement implements CompilerDirectingStatement {
 				TestIntegration.LOGGER.warning("replacing phrase found with no replacement content replacement().literal().NUMERICLITERAL() == null");
 			} else {
 				TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().replaceText().REPLACE_TEXT() = " + rcc.replacement().replaceText().REPLACE_TEXT());
-				replacement.addAll(rcc.replacement().replaceText().REPLACE_TEXT());
+				replacement.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replacement().replaceText().REPLACE_TEXT()));
 			}
 		} else {
 			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER() = " + rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER());
-			replacement.addAll(rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER());
+			replacement.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER()));
 		}
 
 		return replacement;
 	}
 
-	public ArrayList<TerminalNode> getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
+	public ArrayList<TerminalNodeWrapper> getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.finest(this.myName + " getReplaceable()");
-		ArrayList<TerminalNode> replaceable = new ArrayList<>();
+		ArrayList<TerminalNodeWrapper> replaceable = new ArrayList<>();
 
 		if (rcc.replaceable().pseudoText() == null) {
 			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText() == null");
@@ -369,11 +368,11 @@ public class CopyStatement implements CompilerDirectingStatement {
 				TestIntegration.LOGGER.warning("replacing phrase found with no replaceable content replaceable().literal().NUMERICLITERAL() == null");
 			} else {
 				TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().replaceText().REPLACE_TEXT() = " + rcc.replaceable().replaceText().REPLACE_TEXT());
-				replaceable.addAll(rcc.replaceable().replaceText().REPLACE_TEXT());
+				replaceable.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replaceable().replaceText().REPLACE_TEXT()));
 			}
 		} else {
 			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER() = " + rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER());
-			replaceable.addAll(rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER());
+			replaceable.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER()));
 		}
 
 		return replaceable;

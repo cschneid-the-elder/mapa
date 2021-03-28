@@ -382,4 +382,50 @@ public class TheCLI{
 
 	}
 
+	public void applyReplacingPhrase(
+			PrintWriter out
+			, String copyFile
+			, ArrayList<ArrayList<TerminalNodeWrapper>> replaceable
+			, ArrayList<ArrayList<TerminalNodeWrapper>> replacement
+			) throws IOException {
+		TestIntegration.LOGGER.fine(this.myName + " applyReplacingPhrase() ");
+
+		StringBuilder outLine = new StringBuilder();
+		ArrayList<TerminalNodeWrapper> copyFileNodes = new ArrayList<>();
+		this.lookForTerminalNodes(copyFile, copyFileNodes);
+		int from = 0;
+		int to = -1;
+		int matchedIndex = 0;
+
+		while (from < copyFileNodes.size()) {
+			Boolean matched = false;
+			matchLoop:
+			for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
+				if (copyFileNodes.size() - from >= matchList.size()) {
+					to = from + matchList.size();
+					int i = 0;
+					matched = true;
+					for (TerminalNodeWrapper copyFileNode: copyFileNodes.subList(from, to)) {
+						if (!matchList.get(i).textIsEqual(copyFileNode)) {
+							matched = false;
+							break matchLoop;
+						}
+						i++;
+					}
+				}
+				matchedIndex++;
+			}
+			if (matched) {
+				for (TerminalNodeWrapper replaceBy: replacement.get(matchedIndex)) {
+					outLine.append(replaceBy.getText());
+				}
+				from = to;
+			} else {
+				outLine.append(copyFileNodes.get(from).getText());
+				from++;
+			}
+		}
+
+		out.println(outLine);
+	}
 }
