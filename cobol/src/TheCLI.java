@@ -378,6 +378,13 @@ public class TheCLI{
 
 		walker.walk(listener, tree);
 
+		for (int i = 0; i < tNodes.size(); i++) {
+			if (i == 0) {
+				tNodes.get(i).setIsFirst(true);
+			} else {
+				tNodes.get(i).setPrecededByNewline(tNodes.get(i - 1).isNewline());
+			}
+		}
 		TestIntegration.LOGGER.finest("tNodes: " + tNodes);
 
 	}
@@ -398,22 +405,34 @@ public class TheCLI{
 		int matchedIndex = 0;
 
 		while (from < copyFileNodes.size()) {
+			TestIntegration.LOGGER.finest(" while (" + from + " < " + copyFileNodes.size() + ")");
 			Boolean matched = false;
 			matchLoop:
 			for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
+				TestIntegration.LOGGER.finest(" matchList = " + matchList);
 				if (copyFileNodes.size() - from >= matchList.size()) {
 					to = from + matchList.size();
 					int i = 0;
-					matched = true;
-					for (TerminalNodeWrapper copyFileNode: copyFileNodes.subList(from, to)) {
-						if (!matchList.get(i).textIsEqual(copyFileNode)) {
-							matched = false;
-							break matchLoop;
+					ArrayList<TerminalNodeWrapper> subList = this.subListTerminalNodeWrapper(copyFileNodes, from, matchList.size());
+					TestIntegration.LOGGER.finest(" subList = " + subList);
+					if (subList.size() == matchList.size()) {
+						matched = true;
+						for (TerminalNodeWrapper copyFileNode: subList) {
+							if (!matchList.get(i).textIsEqual(copyFileNode)) {
+								matched = false;
+								break matchLoop;
+							}
+							i++;
 						}
-						i++;
+					} else {
+						matched = false;
 					}
 				}
 				matchedIndex++;
+			}
+			if (copyFileNodes.get(from).isFirst() || copyFileNodes.get(from).precededByNewline()) {
+				outLine.append('\n');
+				outLine.append(this.padLeft(" ", copyFileNodes.get(from).getPosn()));
 			}
 			if (matched) {
 				for (TerminalNodeWrapper replaceBy: replacement.get(matchedIndex)) {
@@ -424,8 +443,29 @@ public class TheCLI{
 				outLine.append(copyFileNodes.get(from).getText());
 				from++;
 			}
+			outLine.append(" ");
 		}
 
 		out.println(outLine);
 	}
+
+	private ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
+			ArrayList<TerminalNodeWrapper> tnwList
+			, int from
+			, int size
+			) {
+		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
+		int i = from;
+		int j = 0;
+
+		while (i < tnwList.size() && j < size) {
+			if (!tnwList.get(i).isNewline()) {
+				newList.add(tnwList.get(i));
+				j++;
+			}
+			i++;
+		}
+
+		return newList;
+	} 
 }

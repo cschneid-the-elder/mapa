@@ -9,6 +9,8 @@ class TerminalNodeWrapper {
 	private long line = -1;
 	private long posn = -1;
 	private long sortKey = -1;
+	private Boolean isFirst = false;
+	private Boolean precededByNewline = false;
 	private String text = null;
 
 	public static ArrayList<TerminalNodeWrapper> bunchOfThese(List<TerminalNode> tnList) {
@@ -53,6 +55,26 @@ class TerminalNodeWrapper {
 
 	public int getType() {
 		return this.tn.getSymbol().getType();
+	}
+
+	public Boolean isNewline() {
+		return (this.getType() == CobolPreprocessorParser.NEWLINE);
+	}
+
+	public void setIsFirst(Boolean isFirst) {
+		this.isFirst = isFirst;
+	}
+
+	public Boolean isFirst() {
+		return this.isFirst;
+	}
+
+	public void setPrecededByNewline(Boolean precededByNewline) {
+		this.precededByNewline = precededByNewline;
+	}
+
+	public Boolean precededByNewline() {
+		return this.precededByNewline;
 	}
 
 	public Boolean textIsEqual(TerminalNodeWrapper tnw) {
