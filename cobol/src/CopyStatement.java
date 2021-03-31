@@ -338,7 +338,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 	public ArrayList<TerminalNodeWrapper> getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.finest(this.myName + " getReplacement()");
-		ArrayList<TerminalNodeWrapper> replacement = new ArrayList<>();
+		ArrayList<TerminalNode> replacement = new ArrayList<>();
 
 		if (rcc.replacement().pseudoText() == null) {
 			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText() == null");
@@ -359,7 +359,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 	public ArrayList<TerminalNodeWrapper> getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.finest(this.myName + " getReplaceable()");
-		ArrayList<TerminalNodeWrapper> replaceable = new ArrayList<>();
+		ArrayList<TerminalNode> replaceable = new ArrayList<>();
 
 		if (rcc.replaceable().pseudoText() == null) {
 			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText() == null");

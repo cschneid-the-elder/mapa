@@ -85,6 +85,12 @@ class TerminalNodeWrapper {
 		return this.getText().equals(tn.getSymbol().getText());
 	}
 
+	public Boolean textAndLocAreEqual(TerminalNode tn) {
+		return (this.getLine() == tn.getSymbol().getLine()
+				&& this.getPosn() == tn.getSymbol().getCharPositionInLine()
+				&& this.textIsEqual(tn));
+	}
+
 	public String toString() {
 		return this.text;
 	}

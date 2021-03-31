@@ -348,7 +348,7 @@ familyPhrase
    : ON NEWLINE* (literal | cobolWord)
    ;
 
-/*
+
 replaceable
    : literal | cobolWord | pseudoText | charDataLine
    ;
@@ -356,8 +356,8 @@ replaceable
 replacement
    : literal | cobolWord | pseudoText | charDataLine
    ;
-*/
 
+/*
 replaceText
    : (REPLACE_TEXT (NEWLINE REPLACE_CONTINUATION REPLACE_TEXT)*)+
    ;
@@ -369,6 +369,7 @@ replaceable
 replacement
    : replaceText | pseudoText
    ;
+*/
 
 // eject statement
 
@@ -390,8 +391,14 @@ titleStatement
 
 // literal ----------------------------------
 
+/*
 pseudoText
    : DOUBLEEQUALCHAR PSEUDOTEXTIDENTIFIER* (NEWLINE PSEUDOTEXT_CONTINUATION PSEUDOTEXTIDENTIFIER+)* DOUBLEEQUALCHAR
+   ;
+*/
+
+pseudoText
+   : DOUBLEEQUALCHAR charData? DOUBLEEQUALCHAR
    ;
 
 charData

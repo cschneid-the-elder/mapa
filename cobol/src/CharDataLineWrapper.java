@@ -7,6 +7,9 @@ class CharDataLineWrapper {
 
 	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.CharDataLineContext ctx = null;
+	private ArrayList<CobolWordWrapper> cobolWords = null;
+	private ArrayList<LiteralWrapper> literals = null;
+	private ArrayList<FilenameWrapper> filenames = null;
 	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
 	private long line = -1;
 	private long lastLine = -1;
@@ -14,6 +17,16 @@ class CharDataLineWrapper {
 	private long sortKey = -1;
 	private String text = null;
 	private StringBuilder concatenatedText = new StringBuilder();
+
+	public static ArrayList<CharDataLineWrapper> bunchOfThese(List<CobolPreprocessorParser.CharDataLineContext> ctxList) {
+		ArrayList<CharDataLineWrapper> aList = new ArrayList<>();
+
+		for (CobolPreprocessorParser.CharDataLineContext aCtx: ctxList) {
+			aList.add(new CharDataLineWrapper(aCtx));
+		}
+
+		return aList;
+	}
 
 	public CharDataLineWrapper(CobolPreprocessorParser.CharDataLineContext ctx) {
 		this.ctx = ctx;
@@ -46,48 +59,24 @@ class CharDataLineWrapper {
 			tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.CLASSIC_CONTINUATION()));
 		}
 
-		if (this.ctx.cobolWord() != null) {
-			for (CobolPreprocessorParser.CobolWordContext cwCtx: this.ctx.cobolWord()) {
-				if (cwCtx.IDENTIFIER() != null) {
-					tnwList.add(new TerminalNodeWrapper(cwCtx.IDENTIFIER()));
-				}
-				CobolPreprocessorParser.CharDataKeywordContext cdkCtx = cwCtx.charDataKeyword();
-				if (cdkCtx != null) {
-					/*
-					There are a _lot_ of methods of the type we're interested in, and
-					they are subject to change.  This is the most future-proof way I
-					could think of to deal with the requirement.
-					*/
-					Method[] allMethods = cdkCtx.getClass().getDeclaredMethods();
-					for (Method method : allMethods) {
-					    if (Modifier.isPublic(method.getModifiers())) {
-							if (method.getReturnType() == TerminalNode.class) {
-								TerminalNode tn = null;
-								try {
-									tn = (TerminalNode)method.invoke(cdkCtx);
-								} catch(Exception e) {
-									TestIntegration.LOGGER.severe("Exception " + e + " encountered instantiating "+ this.myName);
-									e.printStackTrace();
-									System.exit(16);
-								}
-								if (tn != null) {
-									tnwList.add(new TerminalNodeWrapper(tn));
-								}
-							}
-					    }
-					}
-				}
+		if (this.ctx.cobolWord() != null && this.ctx.cobolWord().size() > 0) {
+			this.cobolWords = CobolWordWrapper.bunchOfThese(this.ctx.cobolWord());
+			for (CobolWordWrapper w: this.cobolWords) {
+				this.tnwList.addAll(w.getTerminalNodeWrappers());
 			}
 		}
 
-		if (this.ctx.literal() != null) {
-			for (CobolPreprocessorParser.LiteralContext litCtx: this.ctx.literal()) {
-				if (litCtx.NONNUMERICLITERAL() != null) {
-					tnwList.add(new TerminalNodeWrapper(litCtx.NONNUMERICLITERAL()));
-				}
-				if (litCtx.NUMERICLITERAL() != null) {
-					tnwList.add(new TerminalNodeWrapper(litCtx.NUMERICLITERAL()));
-				}
+		if (this.ctx.literal() != null && this.ctx.literal().size() > 0) {
+			this.literals = LiteralWrapper.bunchOfThese(this.ctx.literal());
+			for (LiteralWrapper w: this.literals) {
+				this.tnwList.addAll(w.getTerminalNodeWrappers());
+			}
+		}
+
+		if (this.ctx.filename() != null && this.ctx.filename().size() > 0) {
+			this.filenames = FilenameWrapper.bunchOfThese(this.ctx.filename());
+			for (FilenameWrapper w: this.filenames) {
+				this.tnwList.addAll(w.getTerminalNodeWrappers());
 			}
 		}
 
@@ -136,6 +125,10 @@ class CharDataLineWrapper {
 					continuation = false;
 			}
 		}
+	}
+
+	public ArrayList<TerminalNodeWrapper> getTerminalNodeWrappers() {
+		return this.tnwList;
 	}
 
 	public long getSortKey() {
