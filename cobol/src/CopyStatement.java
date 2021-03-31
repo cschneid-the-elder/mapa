@@ -10,6 +10,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.CopyStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COPY;
+	private ArrayList<ReplaceClause> replaceClauses = new ArrayList<>();
 	private int startLine = -1;
 	private int endLine = -1;
 	private int startPosn = -1;
@@ -17,7 +18,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 	private ArrayList<ArrayList<TerminalNodeWrapper>> replaceable = new ArrayList<>();
 	private ArrayList<ArrayList<TerminalNodeWrapper>> replacement = new ArrayList<>();
 
-	CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
+	public CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
 		//this.startLine = this.ctx.COPY().getSymbol().getLine();
 		this.startLine = this.ctx.start.getLine();
@@ -29,8 +30,10 @@ public class CopyStatement implements CompilerDirectingStatement {
 		} else {
 			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
 				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
-					this.replaceable.add(getReplaceable(rcc));
-					this.replacement.add(getReplacement(rcc));
+					ReplaceClause replaceClause = new ReplaceClause(rcc);
+					this.replaceClauses.add(replaceClause);
+					this.replaceable.add(replaceClause.getReplaceable());
+					this.replacement.add(replaceClause.getReplacement());
 				}
 			}
 		}
@@ -336,6 +339,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 		return tNodes;
 	}
 
+	/*
 	public ArrayList<TerminalNodeWrapper> getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
 		TestIntegration.LOGGER.finest(this.myName + " getReplacement()");
 		ArrayList<TerminalNode> replacement = new ArrayList<>();
@@ -377,6 +381,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 		return replaceable;
 	}
+	*/
 
 	/*
 	public String newLineWithReplacingApplied(String replaceable
