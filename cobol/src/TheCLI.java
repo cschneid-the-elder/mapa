@@ -396,6 +396,8 @@ public class TheCLI{
 			, ArrayList<ArrayList<TerminalNodeWrapper>> replacement
 			) throws IOException {
 		TestIntegration.LOGGER.fine(this.myName + " applyReplacingPhrase() ");
+		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
+		TestIntegration.LOGGER.finest(" replacement = " + replacement);
 
 		StringBuilder outLine = new StringBuilder();
 		ArrayList<TerminalNodeWrapper> copyFileNodes = new ArrayList<>();
@@ -410,6 +412,7 @@ public class TheCLI{
 			matchLoop:
 			for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
 				TestIntegration.LOGGER.finest(" matchList = " + matchList);
+				matchedIndex = replaceable.indexOf(matchList);
 				if (copyFileNodes.size() - from >= matchList.size()) {
 					to = from + matchList.size();
 					int i = 0;
@@ -428,13 +431,14 @@ public class TheCLI{
 						matched = false;
 					}
 				}
-				matchedIndex++;
 			}
+			TestIntegration.LOGGER.finest(" matched = " + matched);
 			if (copyFileNodes.get(from).isFirst() || copyFileNodes.get(from).precededByNewline()) {
 				outLine.append('\n');
 				outLine.append(this.padLeft(" ", copyFileNodes.get(from).getPosn()));
 			}
 			if (matched) {
+				TestIntegration.LOGGER.finest(" matchedIndex = " + matchedIndex);
 				for (TerminalNodeWrapper replaceBy: replacement.get(matchedIndex)) {
 					outLine.append(replaceBy.getText());
 				}

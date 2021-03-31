@@ -89,6 +89,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 			, String currLine
 			) throws IOException {
 		TestIntegration.LOGGER.fine(this.myName + " apply() " + this.getCopyFile());
+		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
+		TestIntegration.LOGGER.finest(" replacement = " + replacement);
 
 		String lastLine = null;
 		int lastLineNb = src.getLineNumber() + (this.endLine - this.startLine);
@@ -125,7 +127,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 				Files.readAllLines(Paths.get(this.getCopyFileFull()));
 			for (String line: list) out.println(line);			
 		} else {
-			TestIntegration.CLI.applyReplacingPhrase(out, copyFile, replaceable, replacement);
+			TestIntegration.CLI.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);
 		}
 
 		/*
