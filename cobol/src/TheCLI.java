@@ -4,6 +4,7 @@ import java.nio.file.*;
 import java.nio.file.attribute.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.apache.commons.cli.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
@@ -400,8 +401,9 @@ public class TheCLI{
 		TestIntegration.LOGGER.finest(" replacement = " + replacement);
 
 		StringBuilder outLine = new StringBuilder();
-		ArrayList<TerminalNodeWrapper> copyFileNodes = new ArrayList<>();
-		this.lookForTerminalNodes(copyFile, copyFileNodes);
+		ArrayList<TerminalNodeWrapper> copyFileNodes1 = new ArrayList<>();
+		this.lookForTerminalNodes(copyFile, copyFileNodes1);
+		CopyOnWriteArrayList<TerminalNodeWrapper> copyFileNodes = new CopyOnWriteArrayList<>(copyFileNodes1);
 		int from = 0;
 		int to = -1;
 		int matchedIndex = 0;
@@ -409,30 +411,57 @@ public class TheCLI{
 		while (from < copyFileNodes.size()) {
 			TestIntegration.LOGGER.finest(" while (" + from + " < " + copyFileNodes.size() + ")");
 			Boolean matched = false;
+			ArrayList<TerminalNodeWrapper> subList = null;
 			matchLoop:
 			for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
 				TestIntegration.LOGGER.finest(" matchList = " + matchList);
 				matchedIndex = replaceable.indexOf(matchList);
 				if (copyFileNodes.size() - from >= matchList.size()) {
+					TestIntegration.LOGGER.finest(" copyFileNodes.size() |" + copyFileNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
 					to = from + matchList.size();
 					int i = 0;
-					ArrayList<TerminalNodeWrapper> subList = this.subListTerminalNodeWrapper(copyFileNodes, from, matchList.size());
+					subList = this.subListTerminalNodeWrapper(copyFileNodes, from, matchList.size());
 					TestIntegration.LOGGER.finest(" subList = " + subList);
 					if (subList.size() == matchList.size()) {
+						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
 						matched = true;
 						for (TerminalNodeWrapper copyFileNode: subList) {
+							TestIntegration.LOGGER.finest(" copyFileNode = |" + copyFileNode + "|");
 							if (!matchList.get(i).textIsEqual(copyFileNode)) {
+								TestIntegration.LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(copyFileNode) i.e. |" + matchList.get(i) + "| != |" + copyFileNode + "|");
 								matched = false;
 								break matchLoop;
 							}
 							i++;
 						}
 					} else {
+						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
 						matched = false;
 					}
 				}
+				if (matched) break matchLoop;
 			}
 			TestIntegration.LOGGER.finest(" matched = " + matched);
+			if (matched) {
+	/**
+	Need to replace in copyFileNodes the contents of subList with the contents of
+	the member of replacement corresponding to the member in replaceable that 
+	matched subList.  But...
+	The replaced content need not be the same number of tokens, may be zero tokens,
+	and each token needs its posn altered so it "lines up" with the original.  "Lines
+	up" is kind of spongy.  Word wrap would be easy compared to this, and I hate
+	writing word wrap logic.
+	*/
+				copyFileNodes.removeAll(subList);
+				TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
+
+				copyFileNodes.addAll(from, replacement.get(matchedIndex));
+				TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
+				from = from + replacement.get(matchedIndex).size();
+			} else {
+				from++;
+			}
+			/*
 			if (copyFileNodes.get(from).isFirst() || copyFileNodes.get(from).precededByNewline()) {
 				outLine.append('\n');
 				outLine.append(this.padLeft(" ", copyFileNodes.get(from).getPosn()));
@@ -448,13 +477,17 @@ public class TheCLI{
 				from++;
 			}
 			outLine.append(" ");
+			*/
 		}
 
+		for (TerminalNodeWrapper node: copyFileNodes) {
+			outLine.append(node.getText());
+		}
 		out.println(outLine);
 	}
 
 	private ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
-			ArrayList<TerminalNodeWrapper> tnwList
+			CopyOnWriteArrayList<TerminalNodeWrapper> tnwList
 			, int from
 			, int size
 			) {
@@ -472,4 +505,21 @@ public class TheCLI{
 
 		return newList;
 	} 
+
+	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(ArrayList<TerminalNodeWrapper> source, ArrayList<TerminalNodeWrapper> fudge) {
+		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
+		int i = 0;
+
+		for (TerminalNodeWrapper tnw: source) {
+			TerminalNodeWrapper newNode = new TerminalNodeWrapper(tnw);
+			newList.add(newNode);
+			if (i < fudge.size()) {
+				newNode.setLine(fudge.get(i).getLine();
+				newNode.setPrecededByNewline(fudge.get(i).precededByNewline());
+			}
+			i++;
+		}
+
+		return newList;
+	}
 }

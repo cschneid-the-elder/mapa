@@ -28,8 +28,18 @@ class TerminalNodeWrapper {
 
 		this.line = this.tn.getSymbol().getLine();
 		this.posn = this.tn.getSymbol().getCharPositionInLine();
-		this.sortKey = (line * (long)Integer.MAX_VALUE) + posn;
-		this.text = "@ " + this.line + " @ " + this.posn + " " + this.tn.getSymbol().getText() + " type = " + this.tn.getSymbol().getType();
+		this.setSortKey();
+		this.setText();
+
+	}
+
+	public TerminalNodeWrapper(TerminalNodeWrapper tnw) {
+		this.tn = tnw.getTerminalNode();
+
+		this.line = this.tn.getSymbol().getLine();
+		this.posn = this.tn.getSymbol().getCharPositionInLine();
+		this.setSortKey();
+		this.setText();
 
 	}
 
@@ -43,6 +53,28 @@ class TerminalNodeWrapper {
 
 	public long getPosn() {
 		return this.posn;
+	}
+
+	public TerminalNode getTerminalNode() {
+		return this.tn;
+	}
+
+	public void setLine(long aLine) {
+		this.line = aLine;
+		this.setSortKey();
+	}
+
+	public void setPosn(long aPosn) {
+		this.posn = aPosn;
+		this.setSortKey();
+	}
+
+	private void setSortKey() {
+		this.sortKey = (this.line * (long)Integer.MAX_VALUE) + this.posn;
+	}
+
+	private void setText() {
+		this.text = "@ " + this.line + " @ " + this.posn + " " + this.tn.getSymbol().getText() + " type = " + this.tn.getSymbol().getType();
 	}
 
 	public String getText() {
