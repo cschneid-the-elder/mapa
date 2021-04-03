@@ -443,19 +443,10 @@ public class TheCLI{
 			}
 			TestIntegration.LOGGER.finest(" matched = " + matched);
 			if (matched) {
-	/**
-	Need to replace in copyFileNodes the contents of subList with the contents of
-	the member of replacement corresponding to the member in replaceable that 
-	matched subList.  But...
-	The replaced content need not be the same number of tokens, may be zero tokens,
-	and each token needs its posn altered so it "lines up" with the original.  "Lines
-	up" is kind of spongy.  Word wrap would be easy compared to this, and I hate
-	writing word wrap logic.
-	*/
 				copyFileNodes.removeAll(subList);
 				TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
 
-				copyFileNodes.addAll(from, replacement.get(matchedIndex));
+				copyFileNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
 				TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
 				from = from + replacement.get(matchedIndex).size();
 			} else {
@@ -480,8 +471,38 @@ public class TheCLI{
 			*/
 		}
 
-		for (TerminalNodeWrapper node: copyFileNodes) {
-			outLine.append(node.getText());
+	/**
+	This is, in conjunction with subListTerminalNodeWrapper()
+	and cloneTerminalNodeWrapperList(), an attempt to account
+	for the replacement of subList by replacement.get(matchedIndex)
+	the latter of which need not have the same number of elements
+	and almost certainly has different posn, line, and text.
+	*/
+		long prevLine = -1;
+		int prevTextLength = -1;
+		long prevPosn = -1;
+
+		for (TerminalNodeWrapper token: copyFileNodes) {
+			long clonedPosn = token.getClonedPosn();
+			if (token.isPrecededByNewline()) {
+				outLine.append('\n');
+				if (token.getClonedPosn() == -1) {
+					outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				} else {
+					outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+				}
+			} else if (token.getClonedLine() == prevLine) {
+				long extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
+				outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
+			} else if (token.getClonedLine() == -1) {
+				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
+			} else {
+				outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+			}
+			prevLine = token.getClonedLine();
+			prevTextLength = token.getTextLength();
+			prevPosn = token.getClonedPosn();
 		}
 		out.println(outLine);
 	}
@@ -509,15 +530,23 @@ public class TheCLI{
 	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(ArrayList<TerminalNodeWrapper> source, ArrayList<TerminalNodeWrapper> fudge) {
 		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
 		int i = 0;
+		long clonedLine = -1;
+		long clonedPosn = -1;
+		TerminalNodeWrapper prevTNW = null;
 
 		for (TerminalNodeWrapper tnw: source) {
-			TerminalNodeWrapper newNode = new TerminalNodeWrapper(tnw);
-			newList.add(newNode);
+			Boolean precededByNewline = false;
 			if (i < fudge.size()) {
-				newNode.setLine(fudge.get(i).getLine();
-				newNode.setPrecededByNewline(fudge.get(i).precededByNewline());
+				clonedLine = fudge.get(i).getLine();
+				clonedPosn = fudge.get(i).getPosn();
+				precededByNewline = fudge.get(i).isPrecededByNewline();
+			} else {
+				clonedPosn = clonedPosn + tnw.getTextLength();
 			}
+			TerminalNodeWrapper newNode = new TerminalNodeWrapper(tnw, clonedLine, clonedPosn, precededByNewline);
+			newList.add(newNode);
 			i++;
+			prevTNW = tnw;
 		}
 
 		return newList;

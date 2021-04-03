@@ -8,6 +8,8 @@ class TerminalNodeWrapper {
 	private TerminalNode tn = null;
 	private long line = -1;
 	private long posn = -1;
+	private long clonedLine = -1;
+	private long clonedPosn = -1;
 	private long sortKey = -1;
 	private Boolean isFirst = false;
 	private Boolean precededByNewline = false;
@@ -33,11 +35,14 @@ class TerminalNodeWrapper {
 
 	}
 
-	public TerminalNodeWrapper(TerminalNodeWrapper tnw) {
+	public TerminalNodeWrapper(TerminalNodeWrapper tnw, long clonedLine, long clonedPosn, Boolean precededByNewline) {
 		this.tn = tnw.getTerminalNode();
 
 		this.line = this.tn.getSymbol().getLine();
 		this.posn = this.tn.getSymbol().getCharPositionInLine();
+		this.precededByNewline = precededByNewline;
+		this.clonedLine = clonedLine;
+		this.clonedPosn = clonedPosn;
 		this.setSortKey();
 		this.setText();
 
@@ -55,10 +60,18 @@ class TerminalNodeWrapper {
 		return this.posn;
 	}
 
+	public long getClonedLine() {
+		return this.clonedLine;
+	}
+
+	public long getClonedPosn() {
+		return this.clonedPosn;
+	}
+
 	public TerminalNode getTerminalNode() {
 		return this.tn;
 	}
-
+/*
 	public void setLine(long aLine) {
 		this.line = aLine;
 		this.setSortKey();
@@ -68,7 +81,7 @@ class TerminalNodeWrapper {
 		this.posn = aPosn;
 		this.setSortKey();
 	}
-
+*/
 	private void setSortKey() {
 		this.sortKey = (this.line * (long)Integer.MAX_VALUE) + this.posn;
 	}
@@ -105,7 +118,7 @@ class TerminalNodeWrapper {
 		this.precededByNewline = precededByNewline;
 	}
 
-	public Boolean precededByNewline() {
+	public Boolean isPrecededByNewline() {
 		return this.precededByNewline;
 	}
 
