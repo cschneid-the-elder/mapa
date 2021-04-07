@@ -384,7 +384,14 @@ public class TheCLI{
 				tNodes.get(i).setIsFirst(true);
 			} else {
 				tNodes.get(i).setPrecededByNewline(tNodes.get(i - 1).isNewline());
+				long posn1 = tNodes.get(i - 1).getPosn();
+				int textLength = tNodes.get(i - 1).getTextLength();
+				long posn2 = tNodes.get(i).getPosn();
+				Boolean precededByWhitespace = !(tNodes.get(i - 1).getPosn() + tNodes.get(i - 1).getTextLength() == tNodes.get(i).getPosn());
+				TestIntegration.LOGGER.finest(" posn1 = " + posn1 + " textLength = " + textLength + " posn2 = " + posn2 + " precededByWhitespace = " + precededByWhitespace);
+				tNodes.get(i).setPrecededByWhitespace(precededByWhitespace);
 			}
+			TestIntegration.LOGGER.finest(" tNodes.get(" + i + ").isPrecededByWhitespace() = " + tNodes.get(i).isPrecededByWhitespace());
 		}
 		TestIntegration.LOGGER.finest("tNodes: " + tNodes);
 
@@ -404,18 +411,18 @@ public class TheCLI{
 		ArrayList<TerminalNodeWrapper> copyFileNodes1 = new ArrayList<>();
 		this.lookForTerminalNodes(copyFile, copyFileNodes1);
 		CopyOnWriteArrayList<TerminalNodeWrapper> copyFileNodes = new CopyOnWriteArrayList<>(copyFileNodes1);
-		int from = 0;
-		int to = -1;
 		int matchedIndex = 0;
 
-		while (from < copyFileNodes.size()) {
-			TestIntegration.LOGGER.finest(" while (" + from + " < " + copyFileNodes.size() + ")");
-			Boolean matched = false;
-			ArrayList<TerminalNodeWrapper> subList = null;
+		for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
+			TestIntegration.LOGGER.finest(" matchList = " + matchList);
+			matchedIndex = replaceable.indexOf(matchList);
+			int from = 0;
+			int to = -1;
 			matchLoop:
-			for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
-				TestIntegration.LOGGER.finest(" matchList = " + matchList);
-				matchedIndex = replaceable.indexOf(matchList);
+			while (from < copyFileNodes.size()) {
+				TestIntegration.LOGGER.finest(" while (" + from + " < " + copyFileNodes.size() + ")");
+				Boolean matched = false;
+				ArrayList<TerminalNodeWrapper> subList = null;
 				if (copyFileNodes.size() - from >= matchList.size()) {
 					TestIntegration.LOGGER.finest(" copyFileNodes.size() |" + copyFileNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
 					to = from + matchList.size();
@@ -430,7 +437,7 @@ public class TheCLI{
 							if (!matchList.get(i).textIsEqual(copyFileNode)) {
 								TestIntegration.LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(copyFileNode) i.e. |" + matchList.get(i) + "| != |" + copyFileNode + "|");
 								matched = false;
-								break matchLoop;
+								break;
 							}
 							i++;
 						}
@@ -439,36 +446,17 @@ public class TheCLI{
 						matched = false;
 					}
 				}
-				if (matched) break matchLoop;
-			}
-			TestIntegration.LOGGER.finest(" matched = " + matched);
-			if (matched) {
-				copyFileNodes.removeAll(subList);
-				TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
-
-				copyFileNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-				TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
-				from = from + replacement.get(matchedIndex).size();
-			} else {
-				from++;
-			}
-			/*
-			if (copyFileNodes.get(from).isFirst() || copyFileNodes.get(from).precededByNewline()) {
-				outLine.append('\n');
-				outLine.append(this.padLeft(" ", copyFileNodes.get(from).getPosn()));
-			}
-			if (matched) {
-				TestIntegration.LOGGER.finest(" matchedIndex = " + matchedIndex);
-				for (TerminalNodeWrapper replaceBy: replacement.get(matchedIndex)) {
-					outLine.append(replaceBy.getText());
+				TestIntegration.LOGGER.finest(" matched = " + matched);
+				if (matched) {
+					copyFileNodes.removeAll(subList);
+					TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
+					copyFileNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
+					TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
+					from = from + replacement.get(matchedIndex).size();
+				} else {
+					from++;
 				}
-				from = to;
-			} else {
-				outLine.append(copyFileNodes.get(from).getText());
-				from++;
 			}
-			outLine.append(" ");
-			*/
 		}
 
 	/**
@@ -483,8 +471,10 @@ public class TheCLI{
 		long prevPosn = -1;
 
 		for (TerminalNodeWrapper token: copyFileNodes) {
+			TestIntegration.LOGGER.finest(" token = " + token);
 			long clonedPosn = token.getClonedPosn();
-			if (token.isPrecededByNewline()) {
+			if (token.isPrecededByNewline() || token.isFirst()) {
+				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
 				outLine.append('\n');
 				if (token.getClonedPosn() == -1) {
 					outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
@@ -492,12 +482,18 @@ public class TheCLI{
 					outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
 				}
 			} else if (token.getClonedLine() == prevLine) {
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine");
+				if (token.isPrecededByWhitespace()) {
+					outLine.append(" ");
+				}
 				long extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
 				outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
 			} else if (token.getClonedLine() == -1) {
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
 				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
 				outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
 			} else {
+				TestIntegration.LOGGER.finest(" else");
 				outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
 			}
 			prevLine = token.getClonedLine();
@@ -527,7 +523,9 @@ public class TheCLI{
 		return newList;
 	} 
 
-	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(ArrayList<TerminalNodeWrapper> source, ArrayList<TerminalNodeWrapper> fudge) {
+	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(
+				ArrayList<TerminalNodeWrapper> source
+				, ArrayList<TerminalNodeWrapper> fudge) {
 		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
 		int i = 0;
 		long clonedLine = -1;
@@ -536,6 +534,7 @@ public class TheCLI{
 
 		for (TerminalNodeWrapper tnw: source) {
 			Boolean precededByNewline = false;
+			Boolean precededByWhitespace = false;
 			if (i < fudge.size()) {
 				clonedLine = fudge.get(i).getLine();
 				clonedPosn = fudge.get(i).getPosn();
@@ -543,7 +542,18 @@ public class TheCLI{
 			} else {
 				clonedPosn = clonedPosn + tnw.getTextLength();
 			}
-			TerminalNodeWrapper newNode = new TerminalNodeWrapper(tnw, clonedLine, clonedPosn, precededByNewline);
+			if (i == 0) {
+				precededByWhitespace = fudge.get(i).isPrecededByWhitespace();
+			} else {
+				precededByWhitespace = tnw.isPrecededByWhitespace();
+			}
+			TerminalNodeWrapper newNode = 
+				new TerminalNodeWrapper(
+					tnw
+					, clonedLine
+					, clonedPosn
+					, precededByNewline
+					, precededByWhitespace);
 			newList.add(newNode);
 			i++;
 			prevTNW = tnw;

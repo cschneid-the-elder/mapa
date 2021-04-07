@@ -13,6 +13,7 @@ class TerminalNodeWrapper {
 	private long sortKey = -1;
 	private Boolean isFirst = false;
 	private Boolean precededByNewline = false;
+	private Boolean precededByWhitespace = false;
 	private String text = null;
 
 	public static ArrayList<TerminalNodeWrapper> bunchOfThese(List<TerminalNode> tnList) {
@@ -35,12 +36,18 @@ class TerminalNodeWrapper {
 
 	}
 
-	public TerminalNodeWrapper(TerminalNodeWrapper tnw, long clonedLine, long clonedPosn, Boolean precededByNewline) {
+	public TerminalNodeWrapper(
+			TerminalNodeWrapper tnw
+			, long clonedLine
+			, long clonedPosn
+			, Boolean precededByNewline
+			, Boolean precededByWhitespace) {
 		this.tn = tnw.getTerminalNode();
 
 		this.line = this.tn.getSymbol().getLine();
 		this.posn = this.tn.getSymbol().getCharPositionInLine();
 		this.precededByNewline = precededByNewline;
+		this.precededByWhitespace = precededByWhitespace;
 		this.clonedLine = clonedLine;
 		this.clonedPosn = clonedPosn;
 		this.setSortKey();
@@ -87,7 +94,31 @@ class TerminalNodeWrapper {
 	}
 
 	private void setText() {
-		this.text = "@ " + this.line + " @ " + this.posn + " " + this.tn.getSymbol().getText() + " type = " + this.tn.getSymbol().getType();
+		this.text = 
+			"@ " 
+			+ this.line 
+			+ " ["
+			+ this.clonedLine
+			+ "]"
+			+ " @ " 
+			+ this.posn 
+			+ " ["
+			+ this.clonedPosn
+			+ "]"
+			+ " " 
+			+ this.getText() 
+			+ " ["
+			+ this.getTextLength()
+			+ "]"
+			+ " type = " 
+			+ this.getType()
+			+ " nl = "
+			+ this.isPrecededByNewline()
+			+ " ws = "
+			+ this.isPrecededByWhitespace()
+			+ " 1st = "
+			+ this.isFirst();
+			;
 	}
 
 	public String getText() {
@@ -108,6 +139,7 @@ class TerminalNodeWrapper {
 
 	public void setIsFirst(Boolean isFirst) {
 		this.isFirst = isFirst;
+		this.setText();
 	}
 
 	public Boolean isFirst() {
@@ -116,10 +148,20 @@ class TerminalNodeWrapper {
 
 	public void setPrecededByNewline(Boolean precededByNewline) {
 		this.precededByNewline = precededByNewline;
+		this.setText();
 	}
 
 	public Boolean isPrecededByNewline() {
 		return this.precededByNewline;
+	}
+
+	public void setPrecededByWhitespace(Boolean precededByWhitespace) {
+		this.precededByWhitespace = precededByWhitespace;
+		this.setText();
+	}
+
+	public Boolean isPrecededByWhitespace() {
+		return this.precededByWhitespace;
 	}
 
 	public Boolean textIsEqual(TerminalNodeWrapper tnw) {
