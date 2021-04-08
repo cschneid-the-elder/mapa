@@ -112,8 +112,19 @@ public class CopyStatement implements CompilerDirectingStatement {
 		String copyFile = null;
 
 		try {
-			copyFile = TestIntegration.CLI.copyCompressingContinuations(
+			copyFile = TestIntegration.copyWithout73to80(
 					this.getCopyFileFull()
+					, TestIntegration.baseDir
+					, this.getCopyFile()
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+
+		try {
+			copyFile = TestIntegration.CLI.copyCompressingContinuations(
+					copyFile
 					, TestIntegration.baseDir
 					, this.getCopyFile()
 					);
@@ -124,7 +135,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 		if (this.replaceable.size() == 0) {
 			List<String> list = 
-				Files.readAllLines(Paths.get(this.getCopyFileFull()));
+				Files.readAllLines(Paths.get(copyFile));
 			for (String line: list) out.println(line);			
 		} else {
 			TestIntegration.CLI.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);

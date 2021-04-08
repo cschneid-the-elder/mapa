@@ -310,7 +310,7 @@ public class TheCLI{
 					break;
 				default:
 					if (newline && continuation) {
-						if (token.getText().startsWith("\"")) {
+						if (token.getText().startsWith("\"") || token.getText().startsWith("\'")) {
 							sb.append(token.getText().substring(1));
 						} else {
 							sb.append(token.getText());
