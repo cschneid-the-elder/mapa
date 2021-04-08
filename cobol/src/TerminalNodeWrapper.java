@@ -11,12 +11,25 @@ class TerminalNodeWrapper {
 	private long clonedLine = -1;
 	private long clonedPosn = -1;
 	private long sortKey = -1;
+	private Boolean leading = false;
+	private Boolean trailing = false;
 	private Boolean isFirst = false;
 	private Boolean precededByNewline = false;
 	private Boolean precededByWhitespace = false;
 	private String text = null;
+	private String replacementText = null;
 
 	public static ArrayList<TerminalNodeWrapper> bunchOfThese(List<TerminalNode> tnList) {
+		ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
+
+		for (TerminalNode tn: tnList) {
+			tnwList.add(new TerminalNodeWrapper(tn));
+		}
+
+		return tnwList;
+	}
+
+	public static ArrayList<TerminalNodeWrapper> bunchOfThese(List<TerminalNode> tnList, Boolean leading, Boolean trailing) {
 		ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
 
 		for (TerminalNode tn: tnList) {
@@ -36,6 +49,18 @@ class TerminalNodeWrapper {
 
 	}
 
+	public TerminalNodeWrapper(TerminalNode tn, Boolean leading, Boolean trailing) {
+		this.tn = tn;
+		this.leading = leading;
+		this.trailing = trailing;
+
+		this.line = this.tn.getSymbol().getLine();
+		this.posn = this.tn.getSymbol().getCharPositionInLine();
+		this.setSortKey();
+		this.setText();
+
+	}
+
 	public TerminalNodeWrapper(
 			TerminalNodeWrapper tnw
 			, long clonedLine
@@ -43,6 +68,8 @@ class TerminalNodeWrapper {
 			, Boolean precededByNewline
 			, Boolean precededByWhitespace) {
 		this.tn = tnw.getTerminalNode();
+		this.leading = tnw.isLeading();
+		this.trailing = tnw.isTrailing();
 
 		this.line = this.tn.getSymbol().getLine();
 		this.posn = this.tn.getSymbol().getCharPositionInLine();
@@ -78,17 +105,7 @@ class TerminalNodeWrapper {
 	public TerminalNode getTerminalNode() {
 		return this.tn;
 	}
-/*
-	public void setLine(long aLine) {
-		this.line = aLine;
-		this.setSortKey();
-	}
 
-	public void setPosn(long aPosn) {
-		this.posn = aPosn;
-		this.setSortKey();
-	}
-*/
 	private void setSortKey() {
 		this.sortKey = (this.line * (long)Integer.MAX_VALUE) + this.posn;
 	}
@@ -122,7 +139,11 @@ class TerminalNodeWrapper {
 	}
 
 	public String getText() {
-		return this.tn.getSymbol().getText();
+		if (this.replacementText == null) {
+			return this.tn.getSymbol().getText();
+		}
+
+		return this.replacementText;
 	}
 
 	public int getTextLength() {
@@ -164,18 +185,50 @@ class TerminalNodeWrapper {
 		return this.precededByWhitespace;
 	}
 
+	public Boolean isLeading() {
+		return this.leading;
+	}
+
+	public Boolean isTrailing() {
+		return this.trailing;
+	}
+
+	public Boolean isDelimited() {
+		return this.getText().startsWith(":") && this.getText().endsWith(":");
+	}
+
 	public Boolean textIsEqual(TerminalNodeWrapper tnw) {
-		return this.getText().equals(tnw.getText());
+		if (this.isLeading()) {
+			return tnw.getText().startsWith(this.getText());
+		} else if (this.isTrailing()) {
+			return tnw.getText().endsWith(this.getText());
+		} else if (this.getText().startsWith(":") && this.getText().endsWith(":")) {
+			return tnw.getText().contains(this.getText());
+		} else {
+			return this.getText().equals(tnw.getText());
+		}
 	}
 
 	public Boolean textIsEqual(TerminalNode tn) {
-		return this.getText().equals(tn.getSymbol().getText());
+		if (this.isLeading()) {
+			return tn.getSymbol().getText().startsWith(this.getText());
+		} else if (this.isTrailing()) {
+			return tn.getSymbol().getText().endsWith(this.getText());
+		} else if (this.isDelimited()) {
+			return tn.getSymbol().getText().contains(this.getText());
+		} else {
+			return this.getText().equals(tn.getSymbol().getText());
+		}
 	}
 
 	public Boolean textAndLocAreEqual(TerminalNode tn) {
 		return (this.getLine() == tn.getSymbol().getLine()
 				&& this.getPosn() == tn.getSymbol().getCharPositionInLine()
 				&& this.textIsEqual(tn));
+	}
+
+	public void alterText(TerminalNodeWrapper replaceable, TerminalNodeWrapper replacement) {
+		this.replacementText = this.getText().replace(replaceable.getText(), replacement.getText());
 	}
 
 	public String toString() {

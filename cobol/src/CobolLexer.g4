@@ -33,8 +33,9 @@ channels { COMPILER_DIRECTIVES }
 
 // lexer rules --------------------------------------------------------------------------------
 
-
-CLASSIC_COMMENTLINE : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR | SLASHCHAR) TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
+CLASSIC_COMMENT_INDICATOR : (ASTERISKCHAR | SLASHCHAR) {getCharPositionInLine() == 7}? ;
+CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_INDICATOR TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
+//CLASSIC_COMMENTLINE : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR | SLASHCHAR) TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
 
 CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
 CLASSIC_DEBUG_LINE : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA D TEXTA* {getCharPositionInLine() < 73}? -> skip;

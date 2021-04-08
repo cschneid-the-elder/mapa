@@ -449,7 +449,6 @@ X_CHAR : X;
 
 
 // symbols
-//COLONCHAR : ':';
 COMMENTTAG : '*>';
 COMMACHAR : ',';
 COMPILER_DIRECTIVE_TAG : '>>' -> pushMode(COMPILER_DIRECTIVE_MODE);

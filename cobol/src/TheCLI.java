@@ -448,10 +448,14 @@ public class TheCLI{
 				}
 				TestIntegration.LOGGER.finest(" matched = " + matched);
 				if (matched) {
-					copyFileNodes.removeAll(subList);
-					TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
-					copyFileNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-					TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
+					if (matchList.get(0).isDelimited()) {
+						subList.get(0).alterText(matchList.get(0), replacement.get(matchedIndex).get(0));
+					} else {
+						copyFileNodes.removeAll(subList);
+						TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
+						copyFileNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
+						TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
+					}
 					from = from + replacement.get(matchedIndex).size();
 				} else {
 					from++;
