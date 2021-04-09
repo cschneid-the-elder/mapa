@@ -387,11 +387,9 @@ public class TheCLI{
 				long posn1 = tNodes.get(i - 1).getPosn();
 				int textLength = tNodes.get(i - 1).getTextLength();
 				long posn2 = tNodes.get(i).getPosn();
-				Boolean precededByWhitespace = !(tNodes.get(i - 1).getPosn() + tNodes.get(i - 1).getTextLength() == tNodes.get(i).getPosn());
-				TestIntegration.LOGGER.finest(" posn1 = " + posn1 + " textLength = " + textLength + " posn2 = " + posn2 + " precededByWhitespace = " + precededByWhitespace);
+				Boolean precededByWhitespace = !(posn1 + textLength == posn2);
 				tNodes.get(i).setPrecededByWhitespace(precededByWhitespace);
 			}
-			TestIntegration.LOGGER.finest(" tNodes.get(" + i + ").isPrecededByWhitespace() = " + tNodes.get(i).isPrecededByWhitespace());
 		}
 		TestIntegration.LOGGER.finest("tNodes: " + tNodes);
 

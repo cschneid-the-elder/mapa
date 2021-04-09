@@ -30,15 +30,15 @@
 003000     XXXXX082.                                                    NC1744.2
 003100 OBJECT-COMPUTER.                                                 NC1744.2
 003200     XXXXX083.                                                    NC1744.2
-003300ASPECIAL-NAMES.                                                   NC1744.2
-003400A    XXXXX051                                                     NC1744.2
-003500A    IS SW-1                                                      NC1744.2
-003600A        ON STATUS IS ON-SWITCH-1                                 NC1744.2
-003700A        OFF STATUS IS OFF-SWITCH-1                               NC1744.2
-003800A    XXXXX052                                                     NC1744.2
-003900A    IS SW-2                                                      NC1744.2
-004000A          ON IS ON-SWITCH-2                                      NC1744.2
-004100A          OFF IS OFF-SWITCH-2                                    NC1744.2
+003300 SPECIAL-NAMES.                                                   NC1744.2
+003400     XXXXX051                                                     NC1744.2
+003500     IS SW-1                                                      NC1744.2
+003600         ON STATUS IS ON-SWITCH-1                                 NC1744.2
+003700         OFF STATUS IS OFF-SWITCH-1                               NC1744.2
+003800     XXXXX052                                                     NC1744.2
+003900     IS SW-2                                                      NC1744.2
+004000           ON IS ON-SWITCH-2                                      NC1744.2
+004100           OFF IS OFF-SWITCH-2                                    NC1744.2
 004200     CLASS   ORDINAL-A-ONLY IS                                    NC1744.2
 004300     XXXXX090                                                     NC1744.2
 004400     CLASS   ORDINAL-A-THROUGH-D IS                               NC1744.2
@@ -413,8 +413,8 @@
 041300 CLOSE-FILES.                                                     NC1744.2
 041400     PERFORM END-ROUTINE THRU END-ROUTINE-13. CLOSE PRINT-FILE.   NC1744.2
 041500 TERMINATE-CCVS.                                                  NC1744.2
-041600S    EXIT PROGRAM.                                                NC1744.2
-041700STERMINATE-CALL.                                                  NC1744.2
+041600     EXIT PROGRAM.                                                NC1744.2
+041700 TERMINATE-CALL.                                                  NC1744.2
 041800     STOP     RUN.                                                NC1744.2
 041900 INSPT. MOVE "INSPT" TO P-OR-F. ADD 1 TO INSPECT-COUNTER.         NC1744.2
 042000 PASS.  MOVE "PASS " TO P-OR-F.  ADD 1 TO PASS-COUNTER.           NC1744.2
@@ -477,19 +477,19 @@
 047700     MOVE CCVS-E-3 TO DUMMY-RECORD. PERFORM WRITE-LINE.           NC1744.2
 047800 WRITE-LINE.                                                      NC1744.2
 047900     ADD 1 TO RECORD-COUNT.                                       NC1744.2
-048000Y    IF RECORD-COUNT GREATER 42                                   NC1744.2
-048100Y        MOVE DUMMY-RECORD TO DUMMY-HOLD                          NC1744.2
-048200Y        MOVE SPACE TO DUMMY-RECORD                               NC1744.2
-048300Y        WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  NC1744.2
-048400Y        MOVE CCVS-H-1  TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC1744.2
-048500Y        MOVE CCVS-H-2A TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC1744.2
-048600Y        MOVE CCVS-H-2B TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC1744.2
-048700Y        MOVE CCVS-H-3  TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC1744.2
-048800Y        MOVE CCVS-C-1  TO DUMMY-RECORD  PERFORM WRT-LN           NC1744.2
-048900Y        MOVE CCVS-C-2  TO DUMMY-RECORD  PERFORM WRT-LN           NC1744.2
-049000Y        MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          NC1744.2
-049100Y        MOVE DUMMY-HOLD TO DUMMY-RECORD                          NC1744.2
-049200Y        MOVE ZERO TO RECORD-COUNT.                               NC1744.2
+048000     IF RECORD-COUNT GREATER 42                                   NC1744.2
+048100         MOVE DUMMY-RECORD TO DUMMY-HOLD                          NC1744.2
+048200         MOVE SPACE TO DUMMY-RECORD                               NC1744.2
+048300         WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  NC1744.2
+048400         MOVE CCVS-H-1  TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC1744.2
+048500         MOVE CCVS-H-2A TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC1744.2
+048600         MOVE CCVS-H-2B TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC1744.2
+048700         MOVE CCVS-H-3  TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC1744.2
+048800         MOVE CCVS-C-1  TO DUMMY-RECORD  PERFORM WRT-LN           NC1744.2
+048900         MOVE CCVS-C-2  TO DUMMY-RECORD  PERFORM WRT-LN           NC1744.2
+049000         MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          NC1744.2
+049100         MOVE DUMMY-HOLD TO DUMMY-RECORD                          NC1744.2
+049200         MOVE ZERO TO RECORD-COUNT.                               NC1744.2
 049300     PERFORM WRT-LN.                                              NC1744.2
 049400 WRT-LN.                                                          NC1744.2
 049500     WRITE    DUMMY-RECORD AFTER ADVANCING 1 LINES.               NC1744.2
@@ -557,11 +557,11 @@
 055700     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC1744.2
 055800     MOVE "SWITCH-STATUS" TO FEATURE.                             NC1744.2
 055900 SWH-TEST-GF-1.                                                   NC1744.2
-056000A    IF      ON-SWITCH-1                                          NC1744.2
-056100A            PERFORM PASS                                         NC1744.2
-056200A    ELSE                                                         NC1744.2
-056300A            PERFORM FAIL.                                        NC1744.2
-056400A    GO TO   SWH-WRITE-GF-1.                                      NC1744.2
+056000     IF      ON-SWITCH-1                                          NC1744.2
+056100             PERFORM PASS                                         NC1744.2
+056200     ELSE                                                         NC1744.2
+056300             PERFORM FAIL.                                        NC1744.2
+056400     GO TO   SWH-WRITE-GF-1.                                      NC1744.2
 056500 SWH-DELETE-GF-1.                                                 NC1744.2
 056600B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 056700     PERFORM  DE-LETE.                                            NC1744.2
@@ -571,11 +571,11 @@
 057100 SWH-INIT-GF-2.                                                   NC1744.2
 057200     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC1744.2
 057300 SWH-TEST-GF-2.                                                   NC1744.2
-057400A    IF       OFF-SWITCH-1                                        NC1744.2
-057500A             PERFORM FAIL                                        NC1744.2
-057600A             ELSE                                                NC1744.2
-057700A             PERFORM PASS.                                       NC1744.2
-057800A    GO TO    SWH-WRITE-GF-2.                                     NC1744.2
+057400     IF       OFF-SWITCH-1                                        NC1744.2
+057500              PERFORM FAIL                                        NC1744.2
+057600              ELSE                                                NC1744.2
+057700              PERFORM PASS.                                       NC1744.2
+057800     GO TO    SWH-WRITE-GF-2.                                     NC1744.2
 057900 SWH-DELETE-GF-2.                                                 NC1744.2
 058000B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 058100     PERFORM  DE-LETE.                                            NC1744.2
@@ -585,11 +585,11 @@
 058500 SWH-INIT-GF-3.                                                   NC1744.2
 058600     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC1744.2
 058700 SWH-TEST-GF-3.                                                   NC1744.2
-058800A    IF       OFF-SWITCH-2                                        NC1744.2
-058900A             PERFORM PASS                                        NC1744.2
-059000A             ELSE                                                NC1744.2
-059100A             PERFORM FAIL.                                       NC1744.2
-059200A    GO TO    SWH-WRITE-GF-3.                                     NC1744.2
+058800     IF       OFF-SWITCH-2                                        NC1744.2
+058900              PERFORM PASS                                        NC1744.2
+059000              ELSE                                                NC1744.2
+059100              PERFORM FAIL.                                       NC1744.2
+059200     GO TO    SWH-WRITE-GF-3.                                     NC1744.2
 059300 SWH-DELETE-GF-3.                                                 NC1744.2
 059400B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 059500     PERFORM  DE-LETE.                                            NC1744.2
@@ -599,11 +599,11 @@
 059900 SWH-INIT-GF-4.                                                   NC1744.2
 060000     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC1744.2
 060100 SWH-TEST-GF-4.                                                   NC1744.2
-060200A    IF       ON-SWITCH-2                                         NC1744.2
-060300A             PERFORM FAIL                                        NC1744.2
-060400A             ELSE                                                NC1744.2
-060500A             PERFORM PASS.                                       NC1744.2
-060600A    GO TO    SWH-WRITE-GF-4.                                     NC1744.2
+060200     IF       ON-SWITCH-2                                         NC1744.2
+060300              PERFORM FAIL                                        NC1744.2
+060400              ELSE                                                NC1744.2
+060500              PERFORM PASS.                                       NC1744.2
+060600     GO TO    SWH-WRITE-GF-4.                                     NC1744.2
 060700 SWH-DELETE-GF-4.                                                 NC1744.2
 060800B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 060900     PERFORM  DE-LETE.                                            NC1744.2
@@ -616,13 +616,13 @@
 061600 SWH-TEST-5-A.                                                    NC1744.2
 061700     GO TO SWH-DELETE-5.                                          NC1744.2
 061800 SWH-TEST-5-B.                                                    NC1744.2
-061900A    IF NOT ON-SWITCH-1                                           NC1744.2
-062000A        MOVE "SWITCH-1  OFF " TO COMPUTED-A                      NC1744.2
-062100A        MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A                 NC1744.2
-062200A        PERFORM FAIL                                             NC1744.2
-062300A        GO TO SWH-WRITE-5.                                       NC1744.2
-062400A    PERFORM PASS.                                                NC1744.2
-062500A    GO TO SWH-WRITE-5.                                           NC1744.2
+061900     IF NOT ON-SWITCH-1                                           NC1744.2
+062000         MOVE "SWITCH-1  OFF " TO COMPUTED-A                      NC1744.2
+062100         MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A                 NC1744.2
+062200         PERFORM FAIL                                             NC1744.2
+062300         GO TO SWH-WRITE-5.                                       NC1744.2
+062400     PERFORM PASS.                                                NC1744.2
+062500     GO TO SWH-WRITE-5.                                           NC1744.2
 062600 SWH-DELETE-5.                                                    NC1744.2
 062700B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 062800     PERFORM DE-LETE.                                             NC1744.2
@@ -635,13 +635,13 @@
 063500 SWH-TEST-6-A.                                                    NC1744.2
 063600     GO TO SWH-DELETE-6.                                          NC1744.2
 063700 SWH-TEST-6-B.                                                    NC1744.2
-063800A    IF NOT OFF-SWITCH-1                                          NC1744.2
-063900A        PERFORM PASS                                             NC1744.2
-064000A        GO TO SWH-WRITE-6.                                       NC1744.2
-064100A    MOVE "SWITCH-1  OFF " TO COMPUTED-A.                         NC1744.2
-064200A    MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A.                    NC1744.2
-064300A    PERFORM FAIL.                                                NC1744.2
-064400A    GO TO SWH-WRITE-6.                                           NC1744.2
+063800     IF NOT OFF-SWITCH-1                                          NC1744.2
+063900         PERFORM PASS                                             NC1744.2
+064000         GO TO SWH-WRITE-6.                                       NC1744.2
+064100     MOVE "SWITCH-1  OFF " TO COMPUTED-A.                         NC1744.2
+064200     MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A.                    NC1744.2
+064300     PERFORM FAIL.                                                NC1744.2
+064400     GO TO SWH-WRITE-6.                                           NC1744.2
 064500 SWH-DELETE-6.                                                    NC1744.2
 064600B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 064700     PERFORM DE-LETE.                                             NC1744.2
@@ -650,13 +650,13 @@
 065000     PERFORM PRINT-DETAIL.                                        NC1744.2
 065100 SWH-TEST-7.                                                      NC1744.2
 065200     GO TO SWH-DELETE-7.                                          NC1744.2
-065300A    IF NOT ON-SWITCH-2                                           NC1744.2
-065400A        PERFORM PASS                                             NC1744.2
-065500A        GO TO SWH-WRITE-7.                                       NC1744.2
-065600A    MOVE "SWITCH-2  ON " TO COMPUTED-A.                          NC1744.2
-065700A    MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A.                    NC1744.2
-065800A    PERFORM FAIL.                                                NC1744.2
-065900A    GO TO SWH-WRITE-7.                                           NC1744.2
+065300     IF NOT ON-SWITCH-2                                           NC1744.2
+065400         PERFORM PASS                                             NC1744.2
+065500         GO TO SWH-WRITE-7.                                       NC1744.2
+065600     MOVE "SWITCH-2  ON " TO COMPUTED-A.                          NC1744.2
+065700     MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A.                    NC1744.2
+065800     PERFORM FAIL.                                                NC1744.2
+065900     GO TO SWH-WRITE-7.                                           NC1744.2
 066000 SWH-DELETE-7.                                                    NC1744.2
 066100B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC1744.2
 066200     PERFORM DE-LETE.                                             NC1744.2
@@ -669,13 +669,13 @@
 066900 SWH-TEST-8-A.                                                    NC1744.2
 067000     GO TO SWH-DELETE-8.                                          NC1744.2
 067100 SWH-TEST-8-B.                                                    NC1744.2
-067200A    IF NOT OFF-SWITCH-2                                          NC1744.2
-067300A        MOVE "SWITCH-2  ON " TO COMPUTED-A                       NC1744.2
-067400A        MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A                 NC1744.2
-067500A        PERFORM FAIL                                             NC1744.2
-067600A        GO TO SWH-WRITE-8.                                       NC1744.2
-067700A    PERFORM PASS.                                                NC1744.2
-067800A    GO TO  SWH-WRITE-8.                                          NC1744.2
+067200     IF NOT OFF-SWITCH-2                                          NC1744.2
+067300         MOVE "SWITCH-2  ON " TO COMPUTED-A                       NC1744.2
+067400         MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A                 NC1744.2
+067500         PERFORM FAIL                                             NC1744.2
+067600         GO TO SWH-WRITE-8.                                       NC1744.2
+067700     PERFORM PASS.                                                NC1744.2
+067800     GO TO  SWH-WRITE-8.                                          NC1744.2
 067900 SWH-DELETE-8.                                                    NC1744.2
 068000B    MOVE  "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                 NC1744.2
 068100     PERFORM DE-LETE.                                             NC1744.2
@@ -689,11 +689,11 @@
 068900     MOVE   "V1-126 6.22.1(2)"  TO ANSI-REFERENCE.                NC1744.2
 069000     SET     SW-1 TO ON.                                          NC1744.2
 069100 SWH-TEST-GF-9.                                                   NC1744.2
-069200A    IF      ON-SWITCH-1                                          NC1744.2
-069300A            PERFORM PASS                                         NC1744.2
-069400A    ELSE                                                         NC1744.2
-069500A            PERFORM FAIL.                                        NC1744.2
-069600A    GO TO   SWH-WRITE-GF-9.                                      NC1744.2
+069200     IF      ON-SWITCH-1                                          NC1744.2
+069300             PERFORM PASS                                         NC1744.2
+069400     ELSE                                                         NC1744.2
+069500             PERFORM FAIL.                                        NC1744.2
+069600     GO TO   SWH-WRITE-GF-9.                                      NC1744.2
 069700 SWH-DELETE-GF-9.                                                 NC1744.2
 069800B    MOVE   "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                NC1744.2
 069900     PERFORM DE-LETE.                                             NC1744.2
@@ -707,11 +707,11 @@
 070700     MOVE   "V1-126 6.22.1(2)"  TO ANSI-REFERENCE.                NC1744.2
 070800     SET     SW-1 SW-2 TO OFF.                                    NC1744.2
 070900 SWH-TEST-GF-10-1.                                                NC1744.2
-071000A    IF      OFF-SWITCH-1                                         NC1744.2
-071100A            PERFORM PASS                                         NC1744.2
-071200A    ELSE                                                         NC1744.2
-071300A            PERFORM FAIL.                                        NC1744.2
-071400A    GO TO   SWH-WRITE-GF-10-1.                                   NC1744.2
+071000     IF      OFF-SWITCH-1                                         NC1744.2
+071100             PERFORM PASS                                         NC1744.2
+071200     ELSE                                                         NC1744.2
+071300             PERFORM FAIL.                                        NC1744.2
+071400     GO TO   SWH-WRITE-GF-10-1.                                   NC1744.2
 071500 SWH-DELETE-GF-10-1.                                              NC1744.2
 071600B    MOVE   "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                NC1744.2
 071700     PERFORM DE-LETE.                                             NC1744.2
@@ -719,11 +719,11 @@
 071900     MOVE   "SWH-TEST-GF-10-1" TO PAR-NAME.                       NC1744.2
 072000     PERFORM PRINT-DETAIL.                                        NC1744.2
 072100 SWH-TEST-GF-10-2.                                                NC1744.2
-072200A    IF      OFF-SWITCH-2                                         NC1744.2
-072300A            PERFORM PASS                                         NC1744.2
-072400A    ELSE                                                         NC1744.2
-072500A            PERFORM FAIL.                                        NC1744.2
-072600A    GO TO   SWH-WRITE-GF-10-2.                                   NC1744.2
+072200     IF      OFF-SWITCH-2                                         NC1744.2
+072300             PERFORM PASS                                         NC1744.2
+072400     ELSE                                                         NC1744.2
+072500             PERFORM FAIL.                                        NC1744.2
+072600     GO TO   SWH-WRITE-GF-10-2.                                   NC1744.2
 072700 SWH-DELETE-GF-10-2.                                              NC1744.2
 072800B    MOVE   "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                NC1744.2
 072900     PERFORM DE-LETE.                                             NC1744.2
@@ -738,11 +738,11 @@
 073800     SET     SW-1 TO ON                                           NC1744.2
 073900             SW-2 TO OFF.                                         NC1744.2
 074000 SWH-TEST-GF-11-1.                                                NC1744.2
-074100A    IF      ON-SWITCH-1                                          NC1744.2
-074200A            PERFORM PASS                                         NC1744.2
-074300A    ELSE                                                         NC1744.2
-074400A            PERFORM FAIL.                                        NC1744.2
-074500A    GO TO   SWH-WRITE-GF-11-1.                                   NC1744.2
+074100     IF      ON-SWITCH-1                                          NC1744.2
+074200             PERFORM PASS                                         NC1744.2
+074300     ELSE                                                         NC1744.2
+074400             PERFORM FAIL.                                        NC1744.2
+074500     GO TO   SWH-WRITE-GF-11-1.                                   NC1744.2
 074600 SWH-DELETE-GF-11-1.                                              NC1744.2
 074700B    MOVE   "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                NC1744.2
 074800     PERFORM DE-LETE.                                             NC1744.2
@@ -750,11 +750,11 @@
 075000     MOVE   "SWH-TEST-GF-11-1" TO PAR-NAME.                       NC1744.2
 075100     PERFORM PRINT-DETAIL.                                        NC1744.2
 075200 SWH-TEST-GF-11-2.                                                NC1744.2
-075300A    IF      OFF-SWITCH-2                                         NC1744.2
-075400A            PERFORM PASS                                         NC1744.2
-075500A    ELSE                                                         NC1744.2
-075600A            PERFORM FAIL.                                        NC1744.2
-075700A    GO TO   SWH-WRITE-GF-11-2.                                   NC1744.2
+075300     IF      OFF-SWITCH-2                                         NC1744.2
+075400             PERFORM PASS                                         NC1744.2
+075500     ELSE                                                         NC1744.2
+075600             PERFORM FAIL.                                        NC1744.2
+075700     GO TO   SWH-WRITE-GF-11-2.                                   NC1744.2
 075800 SWH-DELETE-GF-11-2.                                              NC1744.2
 075900B    MOVE   "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                NC1744.2
 076000     PERFORM DE-LETE.                                             NC1744.2
@@ -768,11 +768,11 @@
 076800     MOVE   "V1-126 6.22.1(2)"  TO ANSI-REFERENCE.                NC1744.2
 076900     SET     SW-2 TO OFF.                                         NC1744.2
 077000 SWH-TEST-GF-12.                                                  NC1744.2
-077100A    IF      OFF-SWITCH-2                                         NC1744.2
-077200A            PERFORM PASS                                         NC1744.2
-077300A    ELSE                                                         NC1744.2
-077400A            PERFORM FAIL.                                        NC1744.2
-077500A    GO TO   SWH-WRITE-GF-12.                                     NC1744.2
+077100     IF      OFF-SWITCH-2                                         NC1744.2
+077200             PERFORM PASS                                         NC1744.2
+077300     ELSE                                                         NC1744.2
+077400             PERFORM FAIL.                                        NC1744.2
+077500     GO TO   SWH-WRITE-GF-12.                                     NC1744.2
 077600 SWH-DELETE-GF-12.                                                NC1744.2
 077700B    MOVE   "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                NC1744.2
 077800     PERFORM DE-LETE.                                             NC1744.2

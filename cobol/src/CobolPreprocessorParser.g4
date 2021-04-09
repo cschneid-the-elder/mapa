@@ -307,11 +307,12 @@ execSqlImsStatement
 // copy statement
 
 copyStatement
-   : COPY copySource (NEWLINE* (directoryPhrase | familyPhrase | replacingPhrase | SUPPRESS))* NEWLINE* DOT
+   : COPY copySource (NEWLINE* (replacingPhrase | SUPPRESS))* NEWLINE* DOT
+//   : COPY copySource (NEWLINE* (directoryPhrase | familyPhrase | replacingPhrase | SUPPRESS))* NEWLINE* DOT
    ;
 
 copySource
-   : (literal | cobolWord | filename) ((OF | IN) copyLibrary)?
+   : (literal | cobolWord | filename) (NEWLINE* (OF | IN) NEWLINE* copyLibrary)?
    ;
 
 copyLibrary
@@ -337,9 +338,11 @@ replaceOffStatement
    ;
 
 replaceClause
-   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
+   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement
+//   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
    ;
 
+/*
 directoryPhrase
    : (OF | IN) NEWLINE* (literal | cobolWord)
    ;
@@ -347,7 +350,7 @@ directoryPhrase
 familyPhrase
    : ON NEWLINE* (literal | cobolWord)
    ;
-
+*/
 
 replaceable
    : literal | cobolWord | pseudoText | charDataLine
@@ -600,6 +603,7 @@ charDataKeyword
    | ZWB
    | C_CHAR | D_CHAR | E_CHAR | F_CHAR | H_CHAR | I_CHAR | M_CHAR | N_CHAR | O_CHAR | Q_CHAR | S_CHAR | U_CHAR | W_CHAR | X_CHAR
    | DIVISION
+   | LEADING | TRAILING
    ;
 
 

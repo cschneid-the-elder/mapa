@@ -38,7 +38,8 @@ CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_
 //CLASSIC_COMMENTLINE : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR | SLASHCHAR) TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
 
 CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
-CLASSIC_DEBUG_LINE : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA D TEXTA* {getCharPositionInLine() < 73}? -> skip;
+CLASSIC_DEBUG_INDICATOR : D {getCharPositionInLine() == 7}? ;
+CLASSIC_DEBUG_LINE : BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_DEBUG_INDICATOR TEXTA* {getCharPositionInLine() < 73}? -> skip;
 
 /*
 The NIST test suite has lines with A, C, G, J, P, X, and Y in the indicator area.
@@ -856,7 +857,7 @@ SYNCHRONIZED_PIC : S Y N C H R O N I Z E D ->popMode;
 USAGE_PIC : U S A G E ->popMode;
 
 VALUE_PIC : V A L U E ->popMode;
-DOT_FS_PIC : DOT_FS ->popMode;
+DOT_FS_PIC : DOT_FS ->type(DOT_FS),popMode;
 DOT_WS : '. ' ->popMode;
 
 IS_PIC : I S;

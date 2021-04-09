@@ -36,17 +36,9 @@ CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {testRig && getCha
 
 ID_DIVISION_TAG : ID DIVISION {getCharPositionInLine()==18}?;
 
-NIST_SEMI_COMMENT_A : BOL TEXT TEXT TEXT TEXT TEXT TEXT A {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_B : BOL TEXT TEXT TEXT TEXT TEXT TEXT B {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_C : BOL TEXT TEXT TEXT TEXT TEXT TEXT C {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_G : BOL TEXT TEXT TEXT TEXT TEXT TEXT G TEXT* {getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_J : BOL TEXT TEXT TEXT TEXT TEXT TEXT J TEXT* {getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_P : BOL TEXT TEXT TEXT TEXT TEXT TEXT P {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_S : BOL TEXT TEXT TEXT TEXT TEXT TEXT S {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_T : BOL TEXT TEXT TEXT TEXT TEXT TEXT T {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_U : BOL TEXT TEXT TEXT TEXT TEXT TEXT U {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_X : BOL TEXT TEXT TEXT TEXT TEXT TEXT X {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_Y : BOL TEXT TEXT TEXT TEXT TEXT TEXT Y {getCharPositionInLine() == 7}? -> skip;
+NIST_FLAG1 : (A | B | C | F | H | I | P | S | T | U | X | Y) {getCharPositionInLine() == 7}? -> skip;
+NIST_FLAG2 : (G | J) {getCharPositionInLine() == 7}? ;
+NIST_IGNORED_LINE : TEXT TEXT TEXT TEXT TEXT TEXT (NIST_FLAG1 | NIST_FLAG2) TEXT* {getCharPositionInLine() < 73}? -> skip;
 
 // keywords
 ABD : A B D;

@@ -39,7 +39,7 @@ classicCommentEntry
     ;
 
 endProgramStatement
-   : END PROGRAM programName DOT
+   : END PROGRAM programName (DOT_FS | DOT)
    ;
 
 // --- identification division --------------------------------------------------------------------
@@ -368,7 +368,7 @@ rerunEveryClock
    ;
 
 sameClause
-   : SAME (RECORD | SORT | SORT_MERGE)? AREA? FOR? fileName+
+   : SAME (RECORD | SORT | SORT_MERGE)? AREA? FOR? (fileName COMMACHAR?)+
    ;
 
 multipleFileClause
@@ -376,7 +376,7 @@ multipleFileClause
    ;
 
 multipleFilePosition
-   : fileName (POSITION integerLiteral)?
+   : fileName COMMACHAR? (POSITION integerLiteral COMMACHAR?)?
    ;
 
 commitmentControlClause
@@ -970,7 +970,7 @@ dataDescriptionEntry
    ;
 
 dataDescriptionEntryFormat1
-   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause)* (DOT_FS_PIC |DOT_WS | DOT_FS | DOT)
+   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause)* (DOT_WS | DOT_FS | DOT)
    ;
 
 dataDescriptionEntryFormat2
@@ -1030,7 +1030,7 @@ dataOccursSort
    ;
 
 dataOccursIndexed
-   : INDEXED BY? LOCAL? indexName+
+   : INDEXED BY? LOCAL? (indexName COMMACHAR?)+
    ;
 
 dataPictureClause
@@ -1182,7 +1182,7 @@ sentence
    ;
 
 statement
-   : acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -1230,7 +1230,7 @@ addFrom
    ;
 
 addTo
-   : identifier ROUNDED?
+   : identifier ROUNDED? COMMACHAR?
    ;
 
 addToGiving
@@ -1260,7 +1260,7 @@ alterStatement
    ;
 
 alterProceedTo
-   : procedureName TO (PROCEED TO)? procedureName
+   : procedureName TO (PROCEED TO)? procedureName COMMACHAR?
    ;
 
 // call statement
@@ -1282,7 +1282,7 @@ callByReferencePhrase
    ;
 
 callByReference
-   : ((ADDRESS OF | INTEGER | STRING)? identifier | literal | fileName) | OMITTED
+   : (((ADDRESS OF | INTEGER | STRING)? identifier | literal | fileName) | OMITTED) COMMACHAR?
    ;
 
 callByValuePhrase
@@ -1290,7 +1290,7 @@ callByValuePhrase
    ;
 
 callByValue
-   : (ADDRESS OF | LENGTH OF?)? (identifier | literal)
+   : ((ADDRESS OF | LENGTH OF?)? (identifier | literal)) COMMACHAR?
    ;
 
 callByContentPhrase
@@ -1298,7 +1298,7 @@ callByContentPhrase
    ;
 
 callByContent
-   : (ADDRESS OF | LENGTH OF?)? identifier | literal | OMITTED
+   : ((ADDRESS OF | LENGTH OF?)? identifier | literal | OMITTED) COMMACHAR?
    ;
 
 callGivingPhrase
@@ -1318,7 +1318,7 @@ cancelCall
 // close statement
 
 closeStatement
-   : CLOSE closeFile+
+   : CLOSE (closeFile COMMACHAR?)+
    ;
 
 closeFile
@@ -1783,7 +1783,7 @@ moveStatement
    ;
 
 moveToStatement
-   : moveToSendingArea TO identifier+
+   : moveToSendingArea TO (identifier COMMACHAR?)+
    ;
 
 moveToSendingArea
@@ -1791,7 +1791,7 @@ moveToSendingArea
    ;
 
 moveCorrespondingToStatement
-   : (CORRESPONDING | CORR) moveCorrespondingToSendingArea TO identifier+
+   : (CORRESPONDING | CORR) moveCorrespondingToSendingArea TO (identifier COMMACHAR?)+
    ;
 
 moveCorrespondingToSendingArea
@@ -1837,7 +1837,7 @@ openStatement
    ;
 
 openInputStatement
-   : INPUT openInput+
+   : INPUT (openInput COMMACHAR?)+
    ;
 
 openInput
@@ -1845,7 +1845,7 @@ openInput
    ;
 
 openOutputStatement
-   : OUTPUT openOutput+
+   : OUTPUT (openOutput COMMACHAR?)+
    ;
 
 openOutput
@@ -1853,11 +1853,11 @@ openOutput
    ;
 
 openIOStatement
-   : I_O fileName+
+   : I_O (fileName COMMACHAR?)+
    ;
 
 openExtendStatement
-   : EXTEND fileName+
+   : EXTEND (fileName COMMACHAR?)+
    ;
 
 // perform statement

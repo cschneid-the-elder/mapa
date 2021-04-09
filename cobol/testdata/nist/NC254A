@@ -28,15 +28,15 @@
 002800     XXXXX082.                                                    NC2544.2
 002900 OBJECT-COMPUTER.                                                 NC2544.2
 003000     XXXXX083.                                                    NC2544.2
-003100ASPECIAL-NAMES.                                                   NC2544.2
-003200A    XXXXX051                                                     NC2544.2
-003300A    IS SW-1                                                      NC2544.2
-003400A        ON STATUS IS ON-SWITCH-1                                 NC2544.2
-003500A        OFF STATUS IS OFF-SWITCH-1                               NC2544.2
-003600A    XXXXX052                                                     NC2544.2
-003700A    IS SW-2                                                      NC2544.2
-003800A          ON IS ON-SWITCH-2                                      NC2544.2
-003900A          OFF IS OFF-SWITCH-2                                    NC2544.2
+003100 SPECIAL-NAMES.                                                   NC2544.2
+003200     XXXXX051                                                     NC2544.2
+003300     IS SW-1                                                      NC2544.2
+003400         ON STATUS IS ON-SWITCH-1                                 NC2544.2
+003500         OFF STATUS IS OFF-SWITCH-1                               NC2544.2
+003600     XXXXX052                                                     NC2544.2
+003700     IS SW-2                                                      NC2544.2
+003800           ON IS ON-SWITCH-2                                      NC2544.2
+003900           OFF IS OFF-SWITCH-2                                    NC2544.2
 004000     CLASS   ORDINAL-A-ONLY IS                                    NC2544.2
 004100     XXXXX090                                                     NC2544.2
 004200     CLASS   ORDINAL-A-THROUGH-D IS                               NC2544.2
@@ -475,19 +475,19 @@
 047500     MOVE CCVS-E-3 TO DUMMY-RECORD. PERFORM WRITE-LINE.           NC2544.2
 047600 WRITE-LINE.                                                      NC2544.2
 047700     ADD 1 TO RECORD-COUNT.                                       NC2544.2
-047800Y    IF RECORD-COUNT GREATER 42                                   NC2544.2
-047900Y        MOVE DUMMY-RECORD TO DUMMY-HOLD                          NC2544.2
-048000Y        MOVE SPACE TO DUMMY-RECORD                               NC2544.2
-048100Y        WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  NC2544.2
-048200Y        MOVE CCVS-H-1  TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC2544.2
-048300Y        MOVE CCVS-H-2A TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC2544.2
-048400Y        MOVE CCVS-H-2B TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC2544.2
-048500Y        MOVE CCVS-H-3  TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC2544.2
-048600Y        MOVE CCVS-C-1  TO DUMMY-RECORD  PERFORM WRT-LN           NC2544.2
-048700Y        MOVE CCVS-C-2  TO DUMMY-RECORD  PERFORM WRT-LN           NC2544.2
-048800Y        MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          NC2544.2
-048900Y        MOVE DUMMY-HOLD TO DUMMY-RECORD                          NC2544.2
-049000Y        MOVE ZERO TO RECORD-COUNT.                               NC2544.2
+047800     IF RECORD-COUNT GREATER 42                                   NC2544.2
+047900         MOVE DUMMY-RECORD TO DUMMY-HOLD                          NC2544.2
+048000         MOVE SPACE TO DUMMY-RECORD                               NC2544.2
+048100         WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  NC2544.2
+048200         MOVE CCVS-H-1  TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC2544.2
+048300         MOVE CCVS-H-2A TO DUMMY-RECORD  PERFORM WRT-LN 2 TIMES   NC2544.2
+048400         MOVE CCVS-H-2B TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC2544.2
+048500         MOVE CCVS-H-3  TO DUMMY-RECORD  PERFORM WRT-LN 3 TIMES   NC2544.2
+048600         MOVE CCVS-C-1  TO DUMMY-RECORD  PERFORM WRT-LN           NC2544.2
+048700         MOVE CCVS-C-2  TO DUMMY-RECORD  PERFORM WRT-LN           NC2544.2
+048800         MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          NC2544.2
+048900         MOVE DUMMY-HOLD TO DUMMY-RECORD                          NC2544.2
+049000         MOVE ZERO TO RECORD-COUNT.                               NC2544.2
 049100     PERFORM WRT-LN.                                              NC2544.2
 049200 WRT-LN.                                                          NC2544.2
 049300     WRITE    DUMMY-RECORD AFTER ADVANCING 1 LINES.               NC2544.2
@@ -555,11 +555,11 @@
 055500     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC2544.2
 055600     MOVE "SWITCH-STATUS" TO FEATURE.                             NC2544.2
 055700 SWH-TEST-GF-1.                                                   NC2544.2
-055800A    IF      ON-SWITCH-1                                          NC2544.2
-055900A            PERFORM PASS                                         NC2544.2
-056000A    ELSE                                                         NC2544.2
-056100A            PERFORM FAIL.                                        NC2544.2
-056200A    GO TO   SWH-WRITE-GF-1.                                      NC2544.2
+055800     IF      ON-SWITCH-1                                          NC2544.2
+055900             PERFORM PASS                                         NC2544.2
+056000     ELSE                                                         NC2544.2
+056100             PERFORM FAIL.                                        NC2544.2
+056200     GO TO   SWH-WRITE-GF-1.                                      NC2544.2
 056300 SWH-DELETE-GF-1.                                                 NC2544.2
 056400B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 056500     PERFORM  DE-LETE.                                            NC2544.2
@@ -569,11 +569,11 @@
 056900 SWH-INIT-GF-2.                                                   NC2544.2
 057000     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC2544.2
 057100 SWH-TEST-GF-2.                                                   NC2544.2
-057200A    IF       OFF-SWITCH-1                                        NC2544.2
-057300A             PERFORM FAIL                                        NC2544.2
-057400A             ELSE                                                NC2544.2
-057500A             PERFORM PASS.                                       NC2544.2
-057600A    GO TO    SWH-WRITE-GF-2.                                     NC2544.2
+057200     IF       OFF-SWITCH-1                                        NC2544.2
+057300              PERFORM FAIL                                        NC2544.2
+057400              ELSE                                                NC2544.2
+057500              PERFORM PASS.                                       NC2544.2
+057600     GO TO    SWH-WRITE-GF-2.                                     NC2544.2
 057700 SWH-DELETE-GF-2.                                                 NC2544.2
 057800B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 057900     PERFORM  DE-LETE.                                            NC2544.2
@@ -583,11 +583,11 @@
 058300 SWH-INIT-GF-3.                                                   NC2544.2
 058400     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC2544.2
 058500 SWH-TEST-GF-3.                                                   NC2544.2
-058600A    IF       OFF-SWITCH-2                                        NC2544.2
-058700A             PERFORM PASS                                        NC2544.2
-058800A             ELSE                                                NC2544.2
-058900A             PERFORM FAIL.                                       NC2544.2
-059000A    GO TO    SWH-WRITE-GF-3.                                     NC2544.2
+058600     IF       OFF-SWITCH-2                                        NC2544.2
+058700              PERFORM PASS                                        NC2544.2
+058800              ELSE                                                NC2544.2
+058900              PERFORM FAIL.                                       NC2544.2
+059000     GO TO    SWH-WRITE-GF-3.                                     NC2544.2
 059100 SWH-DELETE-GF-3.                                                 NC2544.2
 059200B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 059300     PERFORM  DE-LETE.                                            NC2544.2
@@ -597,11 +597,11 @@
 059700 SWH-INIT-GF-4.                                                   NC2544.2
 059800     MOVE   "V1-13 4.5.2" TO ANSI-REFERENCE.                      NC2544.2
 059900 SWH-TEST-GF-4.                                                   NC2544.2
-060000A    IF       ON-SWITCH-2                                         NC2544.2
-060100A             PERFORM FAIL                                        NC2544.2
-060200A             ELSE                                                NC2544.2
-060300A             PERFORM PASS.                                       NC2544.2
-060400A    GO TO    SWH-WRITE-GF-4.                                     NC2544.2
+060000     IF       ON-SWITCH-2                                         NC2544.2
+060100              PERFORM FAIL                                        NC2544.2
+060200              ELSE                                                NC2544.2
+060300              PERFORM PASS.                                       NC2544.2
+060400     GO TO    SWH-WRITE-GF-4.                                     NC2544.2
 060500 SWH-DELETE-GF-4.                                                 NC2544.2
 060600B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 060700     PERFORM  DE-LETE.                                            NC2544.2
@@ -609,13 +609,13 @@
 060900     MOVE "SWH-TEST-GF-4" TO PAR-NAME.                            NC2544.2
 061000     PERFORM  PRINT-DETAIL.                                       NC2544.2
 061100 SWH-TEST-5.                                                      NC2544.2
-061200A    IF NOT ON-SWITCH-1                                           NC2544.2
-061300A        MOVE "SWITCH-1  OFF " TO COMPUTED-A                      NC2544.2
-061400A        MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A                 NC2544.2
-061500A        PERFORM FAIL                                             NC2544.2
-061600A        GO TO SWH-WRITE-5.                                       NC2544.2
-061700A    PERFORM PASS.                                                NC2544.2
-061800A    GO TO SWH-WRITE-5.                                           NC2544.2
+061200     IF NOT ON-SWITCH-1                                           NC2544.2
+061300         MOVE "SWITCH-1  OFF " TO COMPUTED-A                      NC2544.2
+061400         MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A                 NC2544.2
+061500         PERFORM FAIL                                             NC2544.2
+061600         GO TO SWH-WRITE-5.                                       NC2544.2
+061700     PERFORM PASS.                                                NC2544.2
+061800     GO TO SWH-WRITE-5.                                           NC2544.2
 061900 SWH-DELETE-5.                                                    NC2544.2
 062000B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 062100     PERFORM DE-LETE.                                             NC2544.2
@@ -623,13 +623,13 @@
 062300     MOVE "SWH-TEST-5" TO PAR-NAME.                               NC2544.2
 062400     PERFORM PRINT-DETAIL.                                        NC2544.2
 062500 SWH-TEST-6.                                                      NC2544.2
-062600A    IF NOT OFF-SWITCH-1                                          NC2544.2
-062700A        PERFORM PASS                                             NC2544.2
-062800A        GO TO SWH-WRITE-6.                                       NC2544.2
-062900A    MOVE "SWITCH-1  OFF " TO COMPUTED-A.                         NC2544.2
-063000A    MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A.                    NC2544.2
-063100A    PERFORM FAIL.                                                NC2544.2
-063200A    GO TO SWH-WRITE-6.                                           NC2544.2
+062600     IF NOT OFF-SWITCH-1                                          NC2544.2
+062700         PERFORM PASS                                             NC2544.2
+062800         GO TO SWH-WRITE-6.                                       NC2544.2
+062900     MOVE "SWITCH-1  OFF " TO COMPUTED-A.                         NC2544.2
+063000     MOVE "SWITCH-1 EXPECTED ON" TO CORRECT-A.                    NC2544.2
+063100     PERFORM FAIL.                                                NC2544.2
+063200     GO TO SWH-WRITE-6.                                           NC2544.2
 063300 SWH-DELETE-6.                                                    NC2544.2
 063400B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 063500     PERFORM DE-LETE.                                             NC2544.2
@@ -637,13 +637,13 @@
 063700     MOVE "SWH-TEST-6" TO PAR-NAME.                               NC2544.2
 063800     PERFORM PRINT-DETAIL.                                        NC2544.2
 063900 SWH-TEST-7.                                                      NC2544.2
-064000A    IF NOT ON-SWITCH-2                                           NC2544.2
-064100A        PERFORM PASS                                             NC2544.2
-064200A        GO TO SWH-WRITE-7.                                       NC2544.2
-064300A    MOVE "SWITCH-2  ON " TO COMPUTED-A.                          NC2544.2
-064400A    MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A.                    NC2544.2
-064500A    PERFORM FAIL.                                                NC2544.2
-064600A    GO TO SWH-WRITE-7.                                           NC2544.2
+064000     IF NOT ON-SWITCH-2                                           NC2544.2
+064100         PERFORM PASS                                             NC2544.2
+064200         GO TO SWH-WRITE-7.                                       NC2544.2
+064300     MOVE "SWITCH-2  ON " TO COMPUTED-A.                          NC2544.2
+064400     MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A.                    NC2544.2
+064500     PERFORM FAIL.                                                NC2544.2
+064600     GO TO SWH-WRITE-7.                                           NC2544.2
 064700 SWH-DELETE-7.                                                    NC2544.2
 064800B    MOVE "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                  NC2544.2
 064900     PERFORM DE-LETE.                                             NC2544.2
@@ -651,13 +651,13 @@
 065100     MOVE "SWH-TEST-7" TO PAR-NAME.                               NC2544.2
 065200     PERFORM PRINT-DETAIL.                                        NC2544.2
 065300 SWH-TEST-8.                                                      NC2544.2
-065400A    IF NOT OFF-SWITCH-2                                          NC2544.2
-065500A        MOVE "SWITCH-2  ON " TO COMPUTED-A                       NC2544.2
-065600A        MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A                 NC2544.2
-065700A        PERFORM FAIL                                             NC2544.2
-065800A        GO TO SWH-WRITE-8.                                       NC2544.2
-065900A    PERFORM PASS.                                                NC2544.2
-066000A    GO TO  SWH-WRITE-8.                                          NC2544.2
+065400     IF NOT OFF-SWITCH-2                                          NC2544.2
+065500         MOVE "SWITCH-2  ON " TO COMPUTED-A                       NC2544.2
+065600         MOVE "SWITCH2 EXPECTED OFF" TO CORRECT-A                 NC2544.2
+065700         PERFORM FAIL                                             NC2544.2
+065800         GO TO SWH-WRITE-8.                                       NC2544.2
+065900     PERFORM PASS.                                                NC2544.2
+066000     GO TO  SWH-WRITE-8.                                          NC2544.2
 066100 SWH-DELETE-8.                                                    NC2544.2
 066200B    MOVE  "SWITCHES NOT IMPLEMENTED" TO RE-MARK.                 NC2544.2
 066300     PERFORM DE-LETE.                                             NC2544.2
