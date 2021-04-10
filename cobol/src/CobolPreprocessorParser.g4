@@ -338,11 +338,11 @@ replaceOffStatement
    ;
 
 replaceClause
-   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement
-//   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
+//   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement
+   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
    ;
 
-/*
+
 directoryPhrase
    : (OF | IN) NEWLINE* (literal | cobolWord)
    ;
@@ -350,7 +350,7 @@ directoryPhrase
 familyPhrase
    : ON NEWLINE* (literal | cobolWord)
    ;
-*/
+
 
 replaceable
    : literal | cobolWord | pseudoText | charDataLine
