@@ -485,10 +485,15 @@ public class TheCLI{
 					outLine.append(this.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
 				}
 			} else if (token.getClonedLine() == prevLine) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine");
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
 				if (token.isPrecededByWhitespace()) {
 					outLine.append(" ");
-					long extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
+					long extraPadding = 0;
+					if (token.getClonedPosn() == -1) {
+						extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+					} else {
+						extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
+					}
 					outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
 				} else {
 					outLine.append(token.getText());
