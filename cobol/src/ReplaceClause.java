@@ -27,6 +27,9 @@ public class ReplaceClause {
 		}
 		this.setReplacement();
 		this.setReplaceable();
+		this.setNewlineAndWhitespaceFlags(this.getReplacement());
+		this.setNewlineAndWhitespaceFlags(this.getReplaceable());
+
 	}
 
 	private void setReplacement() {
@@ -35,6 +38,7 @@ public class ReplaceClause {
 		CobolWordWrapper cobolWord = null;
 		PseudoTextWrapper pseudoText = null;
 		CharDataLineWrapper charDataLine = null;
+		DirectoryPhrase directoryPhrase = null;
 
 		CobolPreprocessorParser.ReplacementContext rCtx = this.ctx.replacement();
 		if (rCtx != null) {
@@ -42,6 +46,7 @@ public class ReplaceClause {
 			CobolPreprocessorParser.CobolWordContext cwCtx = rCtx.cobolWord();
 			CobolPreprocessorParser.PseudoTextContext ptCtx = rCtx.pseudoText();
 			CobolPreprocessorParser.CharDataLineContext cdlCtx = rCtx.charDataLine();
+			CobolPreprocessorParser.DirectoryPhraseContext dCtx = this.ctx.directoryPhrase();
 			if (lCtx != null) {
 				literal = new LiteralWrapper(lCtx);
 				this.replacement.addAll(literal.getTerminalNodeWrappers());
@@ -57,6 +62,10 @@ public class ReplaceClause {
 			if (cdlCtx != null) {
 				charDataLine = new CharDataLineWrapper(cdlCtx);
 				this.replacement.addAll(charDataLine.getTerminalNodeWrappers());
+			}
+			if (dCtx != null) {
+				directoryPhrase = new DirectoryPhrase(dCtx);
+				this.replacement.addAll(directoryPhrase.getTerminalNodeWrappers());
 			}
 		}
 
@@ -95,6 +104,21 @@ public class ReplaceClause {
 		}
 
 		this.replaceable.sort(Comparator.comparingLong(TerminalNodeWrapper::getSortKey));
+	}
+
+	private void setNewlineAndWhitespaceFlags(ArrayList<TerminalNodeWrapper> tNodes) {
+		for (int i = 0; i < tNodes.size(); i++) {
+			if (i == 0) {
+				tNodes.get(i).setIsFirst(true);
+			} else {
+				tNodes.get(i).setPrecededByNewline(tNodes.get(i - 1).isNewline());
+				long posn1 = tNodes.get(i - 1).getPosn();
+				int textLength = tNodes.get(i - 1).getTextLength();
+				long posn2 = tNodes.get(i).getPosn();
+				Boolean precededByWhitespace = !(posn1 + textLength == posn2);
+				tNodes.get(i).setPrecededByWhitespace(precededByWhitespace);
+			}
+		}
 	}
 
 	public ArrayList<TerminalNodeWrapper> getReplacement() {

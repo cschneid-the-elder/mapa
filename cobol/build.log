@@ -2997,3 +2997,53 @@ Sat Apr 10 09:53:10 CDT 2021 testrigppnist SM202A
 Sat Apr 10 09:54:38 CDT 2021 jar
 Sat Apr 10 09:54:45 CDT 2021 testLocal
 Sat Apr 10 09:55:23 CDT 2021 testNist
+Sat Apr 10 10:23:29 CDT 2021 testNist SM202A
+Sat Apr 10 10:36:06 CDT 2021 ziplogs
+Sun Apr 11 14:45:11 CDT 2021 testrigppnist SM202A
+Sun Apr 11 14:48:12 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Apr 11 14:48:16 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 11 14:48:17 CDT 2021 src/CharDataLineWrapper.java
+Sun Apr 11 14:48:18 CDT 2021 src/TheCLI.java
+Sun Apr 11 14:48:19 CDT 2021 src/TestIntegration.java
+Sun Apr 11 14:48:49 CDT 2021 testrigppnist SM202A
+Sun Apr 11 14:51:44 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Apr 11 14:51:49 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 11 14:51:50 CDT 2021 src/CharDataLineWrapper.java
+Sun Apr 11 14:51:51 CDT 2021 src/TheCLI.java
+Sun Apr 11 14:51:52 CDT 2021 src/TestIntegration.java
+Sun Apr 11 14:53:22 CDT 2021 testrigppnist SM202A
+Sun Apr 11 15:06:30 CDT 2021 src/DirectoryPhrase.java
+Sun Apr 11 15:07:29 CDT 2021 src/DirectoryPhrase.java
+Sun Apr 11 15:10:20 CDT 2021 src/ReplaceClause.java
+Sun Apr 11 15:11:18 CDT 2021 src/ReplaceClause.java
+Sun Apr 11 15:11:27 CDT 2021 jar
+Sun Apr 11 15:11:56 CDT 2021 testNist SM202A
+Sun Apr 11 15:19:44 CDT 2021 testrigppx 9012
+Sun Apr 11 15:21:04 CDT 2021 testLocalx 9012
+Sun Apr 11 15:34:33 CDT 2021 src/CompilerDirectingStatementListener.java
+Sun Apr 11 15:34:34 CDT 2021 src/TestIntegration.java
+Sun Apr 11 15:34:38 CDT 2021 jar
+Sun Apr 11 15:35:07 CDT 2021 testLocalx 9012
+Sun Apr 11 15:49:44 CDT 2021 src/ReplaceClause.java
+Sun Apr 11 15:49:47 CDT 2021 jar
+Sun Apr 11 15:49:55 CDT 2021 testLocalx 9012
+Sun Apr 11 16:25:48 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:25:49 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:25:52 CDT 2021 jar
+Sun Apr 11 16:25:58 CDT 2021 testLocalx 9012
+Sun Apr 11 16:26:52 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:26:53 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:26:56 CDT 2021 jar
+Sun Apr 11 16:27:00 CDT 2021 testLocalx 9012
+Sun Apr 11 16:39:53 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:39:54 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:39:57 CDT 2021 jar
+Sun Apr 11 16:40:02 CDT 2021 testLocalx 9012
+Sun Apr 11 16:43:35 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:43:36 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:43:40 CDT 2021 jar
+Sun Apr 11 16:43:43 CDT 2021 testLocalx 9012
+Sun Apr 11 16:44:31 CDT 2021 testLocal
+Sun Apr 11 16:45:10 CDT 2021 testNist
+Sun Apr 11 17:01:36 CDT 2021 testNist SM206A
+Sun Apr 11 17:02:00 CDT 2021 testNist SM208A

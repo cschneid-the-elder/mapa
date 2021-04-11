@@ -471,6 +471,7 @@ public class TheCLI{
 		long prevLine = -1;
 		int prevTextLength = -1;
 		long prevPosn = -1;
+		TerminalNodeWrapper prevToken = null;
 
 		for (TerminalNodeWrapper token: copyFileNodes) {
 			TestIntegration.LOGGER.finest(" token = " + token);
@@ -487,11 +488,18 @@ public class TheCLI{
 				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine");
 				if (token.isPrecededByWhitespace()) {
 					outLine.append(" ");
+					long extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
+					outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				} else {
+					outLine.append(token.getText());
 				}
-				long extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
-				outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
 			} else if (token.getClonedLine() == -1) {
 				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
+				if (prevToken != null && prevToken.getClonedLine() != -1) {
+					if (token.isPrecededByWhitespace()) {
+						outLine.append(" ");
+					}
+				}
 				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
 				outLine.append(this.padLeft(token.getText(), token.getTextLength() + extraPadding));
 			} else {
@@ -501,6 +509,7 @@ public class TheCLI{
 			prevLine = token.getClonedLine();
 			prevTextLength = token.getTextLength();
 			prevPosn = token.getClonedPosn();
+			prevToken = token;
 		}
 		out.println(outLine);
 	}

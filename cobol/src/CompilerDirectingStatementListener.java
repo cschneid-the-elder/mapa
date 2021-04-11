@@ -24,7 +24,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {
-		TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+		//TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
 	public void enterCompilerOptions(CobolPreprocessorParser.CompilerOptionsContext ctx) { 
