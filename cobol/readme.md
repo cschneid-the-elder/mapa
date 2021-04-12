@@ -4,9 +4,9 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (05-Jul-2020) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (12-Apr-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
-"Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with much (but not all) of the NIST COBOL test suite.
+"Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with all but one of the NIST COBOL test suite.
 
 "Work in progress" means I'm adding to this as it suits me.  It's a hobby, not intended to ever be finished.
 
@@ -21,6 +21,8 @@ Download the .jar files.
                        takes precedence over the copyList option
      -copyList <arg>   name of a file containing a list of paths in which to
                        locate copybooks
+     -defList <arg>    name of a file containing a list of >>DEFINE statements
+                       for conditional compilation variables and their values
      -file <arg>       name of a single file to process, takes precedence over
                        the fileList option
      -fileList <arg>   name of a file containing a list of files to process
@@ -48,6 +50,8 @@ More generically, I would suggest...
  + Execute `java -jar CallTree.jar -fileList myList -copyList myLibs -out myOutput.tsv`
 
 Depending on your build environment, you may want to construct several file lists for your source and copybooks, corresponding to your concatenations.
+
+Note that the content of the file specified with the -defList option must contain `>>DEFINE` statements beginning in area A or area B.
 
 ### Bear In Mind
 
@@ -92,7 +96,7 @@ Worse, of course, is that in a dynamic call environment, which modules you invok
 ### What This Won't Do
 
  + `BASIS` statement.
- + `COPY REPLACING` and `REPLACE` statements that piss me off.  Take a look in SM206A and SM208A in testdata/nist for examples.
+ + `REPLACE` statements that piss me off.  Specifically SM208A in testdata/nist.
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
  + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
 

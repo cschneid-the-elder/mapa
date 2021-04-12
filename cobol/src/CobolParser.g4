@@ -180,11 +180,11 @@ specialNameClause
    ;
 
 alphabetClause
-   : alphabetClauseFormat1 | alphabetClauseFormat2
+   : alphabetClauseFormat1+ | alphabetClauseFormat2
    ;
 
 alphabetClauseFormat1
-   : ALPHABET alphabetName (FOR ALPHANUMERIC)? IS? (EBCDIC | ASCII | STANDARD_1 | STANDARD_2 | NATIVE | cobolWord | alphabetLiterals+)
+   : ALPHABET alphabetName (FOR ALPHANUMERIC)? IS? (EBCDIC | ASCII | STANDARD_1 | STANDARD_2 | NATIVE | cobolWord | alphabetLiterals+) COMMACHAR?
    ;
 
 alphabetLiterals
