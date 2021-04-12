@@ -307,11 +307,12 @@ execSqlImsStatement
 // copy statement
 
 copyStatement
-   : COPY copySource (NEWLINE* (directoryPhrase | familyPhrase | replacingPhrase | SUPPRESS))* NEWLINE* DOT
+   : COPY copySource (NEWLINE* (replacingPhrase | SUPPRESS))* NEWLINE* DOT
+//   : COPY copySource (NEWLINE* (directoryPhrase | familyPhrase | replacingPhrase | SUPPRESS))* NEWLINE* DOT
    ;
 
 copySource
-   : (literal | cobolWord | filename) ((OF | IN) copyLibrary)?
+   : (literal | cobolWord | filename) (NEWLINE* (OF | IN) NEWLINE* copyLibrary)?
    ;
 
 copyLibrary
@@ -337,8 +338,10 @@ replaceOffStatement
    ;
 
 replaceClause
-   : replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
+//   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement
+   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
    ;
+
 
 directoryPhrase
    : (OF | IN) NEWLINE* (literal | cobolWord)
@@ -348,6 +351,7 @@ familyPhrase
    : ON NEWLINE* (literal | cobolWord)
    ;
 
+
 replaceable
    : literal | cobolWord | pseudoText | charDataLine
    ;
@@ -355,6 +359,20 @@ replaceable
 replacement
    : literal | cobolWord | pseudoText | charDataLine
    ;
+
+/*
+replaceText
+   : (REPLACE_TEXT (NEWLINE REPLACE_CONTINUATION REPLACE_TEXT)*)+
+   ;
+
+replaceable
+   : replaceText | pseudoText
+   ;
+
+replacement
+   : replaceText | pseudoText
+   ;
+*/
 
 // eject statement
 
@@ -376,6 +394,12 @@ titleStatement
 
 // literal ----------------------------------
 
+/*
+pseudoText
+   : DOUBLEEQUALCHAR PSEUDOTEXTIDENTIFIER* (NEWLINE PSEUDOTEXT_CONTINUATION PSEUDOTEXTIDENTIFIER+)* DOUBLEEQUALCHAR
+   ;
+*/
+
 pseudoText
    : DOUBLEEQUALCHAR charData? DOUBLEEQUALCHAR
    ;
@@ -389,7 +413,7 @@ charDataSql
    ;
 
 charDataLine
-   : (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+
+   : (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+ (NEWLINE CLASSIC_CONTINUATION (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+)*
    ;
 
 cobolWord
@@ -579,6 +603,7 @@ charDataKeyword
    | ZWB
    | C_CHAR | D_CHAR | E_CHAR | F_CHAR | H_CHAR | I_CHAR | M_CHAR | N_CHAR | O_CHAR | Q_CHAR | S_CHAR | U_CHAR | W_CHAR | X_CHAR
    | DIVISION
+   | LEADING | TRAILING
    ;
 
 

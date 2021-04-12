@@ -32,14 +32,14 @@
 003200     XXXXX082.                                                    NC2114.2
 003300 OBJECT-COMPUTER.                                                 NC2114.2
 003400     XXXXX083.                                                    NC2114.2
-003500ASPECIAL-NAMES.                                                   NC2114.2
-003600A    XXXXX051                                                     NC2114.2
-003700A    IS WRK-SWITCH-1                                              NC2114.2
-003800A    ON STATUS IS ON-WRK-SWITCH-1                                 NC2114.2
-003900A    OFF STATUS IS OFF-WRK-SWITCH-1                               NC2114.2
-004000A    XXXXX052                                                     NC2114.2
-004100A    IS WRK-SWITCH-2                                              NC2114.2
-004200A    OFF STATUS IS OFF-WRK-SWITCH-2.                              NC2114.2
+003500 SPECIAL-NAMES.                                                   NC2114.2
+003600     XXXXX051                                                     NC2114.2
+003700     IS WRK-SWITCH-1                                              NC2114.2
+003800     ON STATUS IS ON-WRK-SWITCH-1                                 NC2114.2
+003900     OFF STATUS IS OFF-WRK-SWITCH-1                               NC2114.2
+004000     XXXXX052                                                     NC2114.2
+004100     IS WRK-SWITCH-2                                              NC2114.2
+004200     OFF STATUS IS OFF-WRK-SWITCH-2.                              NC2114.2
 004300 INPUT-OUTPUT SECTION.                                            NC2114.2
 004400 FILE-CONTROL.                                                    NC2114.2
 004500     SELECT PRINT-FILE ASSIGN TO                                  NC2114.2
@@ -544,15 +544,15 @@
 054400     MOVE CCVS-E-3 TO DUMMY-RECORD. PERFORM WRITE-LINE.           NC2114.2
 054500 WRITE-LINE.                                                      NC2114.2
 054600     ADD 1 TO RECORD-COUNT.                                       NC2114.2
-054700Y    IF RECORD-COUNT GREATER 50                                   NC2114.2
-054800Y        MOVE DUMMY-RECORD TO DUMMY-HOLD                          NC2114.2
-054900Y        MOVE SPACE TO DUMMY-RECORD                               NC2114.2
-055000Y        WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  NC2114.2
-055100Y        MOVE CCVS-C-1 TO DUMMY-RECORD PERFORM WRT-LN             NC2114.2
-055200Y        MOVE CCVS-C-2 TO DUMMY-RECORD PERFORM WRT-LN 2 TIMES     NC2114.2
-055300Y        MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          NC2114.2
-055400Y        MOVE DUMMY-HOLD TO DUMMY-RECORD                          NC2114.2
-055500Y        MOVE ZERO TO RECORD-COUNT.                               NC2114.2
+054700     IF RECORD-COUNT GREATER 50                                   NC2114.2
+054800         MOVE DUMMY-RECORD TO DUMMY-HOLD                          NC2114.2
+054900         MOVE SPACE TO DUMMY-RECORD                               NC2114.2
+055000         WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  NC2114.2
+055100         MOVE CCVS-C-1 TO DUMMY-RECORD PERFORM WRT-LN             NC2114.2
+055200         MOVE CCVS-C-2 TO DUMMY-RECORD PERFORM WRT-LN 2 TIMES     NC2114.2
+055300         MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          NC2114.2
+055400         MOVE DUMMY-HOLD TO DUMMY-RECORD                          NC2114.2
+055500         MOVE ZERO TO RECORD-COUNT.                               NC2114.2
 055600     PERFORM WRT-LN.                                              NC2114.2
 055700 WRT-LN.                                                          NC2114.2
 055800     WRITE    DUMMY-RECORD AFTER ADVANCING 1 LINES.               NC2114.2

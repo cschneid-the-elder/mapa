@@ -3,26 +3,41 @@ import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class CopyStatement implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.CopyStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COPY;
+	private ArrayList<ReplaceClause> replaceClauses = new ArrayList<>();
 	private int startLine = -1;
 	private int endLine = -1;
 	private int startPosn = -1;
 	private int endPosn = -1;
-	private String replaceable = null;
-	private String replacement = null;
+	private ArrayList<ArrayList<TerminalNodeWrapper>> replaceable = new ArrayList<>();
+	private ArrayList<ArrayList<TerminalNodeWrapper>> replacement = new ArrayList<>();
 
-	CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
+	public CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
 		this.ctx = ctx;
 		//this.startLine = this.ctx.COPY().getSymbol().getLine();
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
 		this.startPosn = this.ctx.start.getCharPositionInLine();
 		this.endPosn = this.ctx.stop.getCharPositionInLine();
+
+		if (this.ctx.replacingPhrase() == null) {
+		} else {
+			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
+				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
+					ReplaceClause replaceClause = new ReplaceClause(rcc);
+					this.replaceClauses.add(replaceClause);
+					this.replaceable.add(replaceClause.getReplaceable());
+					this.replacement.add(replaceClause.getReplacement());
+				}
+			}
+		}
+
 		TestIntegration.LOGGER.fine(myName + " " + this.getCopyFile());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.start.getLine() = " + this.ctx.start.getLine());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getLine() = " + this.ctx.COPY().getSymbol().getLine());
@@ -32,6 +47,8 @@ public class CopyStatement implements CompilerDirectingStatement {
 		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getCharPositionInLine() = " + this.ctx.COPY().getSymbol().getCharPositionInLine());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.stop.getCharPositionInLine() = " + this.ctx.stop.getCharPositionInLine());
 		TestIntegration.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getCharPositionInLine() = " + this.ctx.DOT().getSymbol().getCharPositionInLine());
+		TestIntegration.LOGGER.fine(myName + " this.replaceable = " + this.replaceable);
+		TestIntegration.LOGGER.fine(myName + " this.replacement = " + this.replacement);
 	}
 
 	public int getLine() {
@@ -46,23 +63,23 @@ public class CopyStatement implements CompilerDirectingStatement {
 		return this.type;
 	}
 
-	int startLine() {
+	public int startLine() {
 		return this.ctx.COPY().getSymbol().getLine();
 	}
 
-	int endLine() {
+	public int endLine() {
 		return this.ctx.DOT().getSymbol().getLine();
 	}
 
-	int startPositionInLine() {
+	public int startPositionInLine() {
 		return this.ctx.COPY().getSymbol().getCharPositionInLine();
 	}
 
-	int endPositionInLine() {
+	public int endPositionInLine() {
 		return this.ctx.DOT().getSymbol().getCharPositionInLine();
 	}
 
-	String getText() {
+	public String getText() {
 		return this.ctx.getText();
 	}
 
@@ -71,7 +88,60 @@ public class CopyStatement implements CompilerDirectingStatement {
 			, PrintWriter out
 			, String currLine
 			) throws IOException {
-		TestIntegration.LOGGER.fine(myName + " apply() " + this.getCopyFile());
+		TestIntegration.LOGGER.fine(this.myName + " apply() " + this.getCopyFile());
+		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
+		TestIntegration.LOGGER.finest(" replacement = " + replacement);
+
+		String lastLine = null;
+		int lastLineNb = src.getLineNumber() + (this.endLine - this.startLine);
+		TestIntegration.LOGGER.fine("current line = " + src.getLineNumber() + " lastLine = " + lastLineNb);
+		while (src.getLineNumber() < lastLineNb) lastLine = src.readLine();
+
+		/*
+		The COPY statement need not be alone on the source line, e.g.
+
+		DISPLAY 'Julia'. COPY 'copybook'. DISPLAY 'Wicker'.
+
+		Thus we must write the source line up to the COPY statement and later
+		write the rest of the source line following the COPY statement.
+		*/
+		int startPosn = this.startPositionInLine() - 1;
+		TestIntegration.LOGGER.fine("startPosn = " + startPosn);
+		out.println(currLine.substring(0, startPosn));
+
+		String copyFile = null;
+
+		try {
+			copyFile = TestIntegration.copyWithout73to80(
+					this.getCopyFileFull()
+					, TestIntegration.baseDir
+					, this.getCopyFile()
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+
+		try {
+			copyFile = TestIntegration.CLI.copyCompressingContinuations(
+					copyFile
+					, TestIntegration.baseDir
+					, this.getCopyFile()
+					);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+
+		if (this.replaceable.size() == 0) {
+			List<String> list = 
+				Files.readAllLines(Paths.get(copyFile));
+			for (String line: list) out.println(line);			
+		} else {
+			TestIntegration.CLI.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);
+		}
+
+		/*
 		String inLine = currLine;
 		Boolean pleaseWrite = true;
 		while (inLine != null) {
@@ -150,14 +220,83 @@ public class CopyStatement implements CompilerDirectingStatement {
 			}
 			inLine = src.readLine();
 		}
+		*/
 
+		/*
+		Writing the rest of the source line following the COPY statement.
+		*/
+		int endPosn = this.endPositionInLine() + 1;
+		TestIntegration.LOGGER.fine("endPosn = " + endPosn);
+		String outLine = null;
+		if (this.getLine() == this.getEndLine()) {
+			outLine = TestIntegration.CLI.padLeft(currLine.substring(endPosn), currLine.length());
+		} else {
+			outLine = TestIntegration.CLI.padLeft(lastLine.substring(endPosn), lastLine.length());
+		}
+		TestIntegration.LOGGER.fine("outLine = |" + outLine + "|");
+		out.println(outLine);
 	}
 
+	/*
 	public void writeTheCopyContent(
 							PrintWriter out)
 						throws IOException {
 
 		TestIntegration.LOGGER.fine("writeTheCopyContent");
+		String copyFileFull = this.getCopyFileFull();
+
+		if (copyFileFull == null) {
+			TestIntegration.LOGGER.warning(this.getCopyFile() + " not found in any path specified");
+			//throw new FileNotFoundException(copyFile + " not found in any path specified");
+		} else if (this.ctx.replacingPhrase() == null) {
+			List<String> list = 
+				Files.readAllLines(Paths.get(copyFileFull));
+			for (String line: list) out.println(line);
+		} else {
+			this.writeTheCopyContentWithReplacing(out, copyFileFull);
+		}
+	}
+	*/
+
+	private void writeTheCopyContentWithReplacing(PrintWriter out, String copyFileFull) {
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		try {
+			tNodes = this.parseCopybook(copyFileFull);
+		} catch (Exception e) {
+			TestIntegration.LOGGER.severe("Exception " + e + " encountered parsing " + copyFileFull);
+			e.printStackTrace();
+			return;
+		}
+		
+	}
+
+	public String getCopyFile() {
+		String copyFile = this.getCopyFileRaw();
+
+		if (copyFile.indexOf("'") != -1) {
+			copyFile = 
+				copyFile.substring(copyFile.indexOf("'") + 1, copyFile.lastIndexOf("'"));
+		}
+
+		return copyFile;
+	}
+
+	private String getCopyFileRaw() {
+		String copyFile = null;
+
+		if (this.ctx.copySource().literal() != null) {
+			copyFile = this.ctx.copySource().literal().getText();
+		} else if (this.ctx.copySource().cobolWord() != null) {
+			copyFile = this.ctx.copySource().cobolWord().getText();
+		} else if (this.ctx.copySource().filename() != null) {
+			copyFile = this.ctx.copySource().filename().getText();
+		}
+
+		return copyFile;
+	}
+
+	private String getCopyFileFull() {
 		String copyFileFull = null;
 		String copyFile = this.getCopyFile();
 
@@ -169,128 +308,95 @@ public class CopyStatement implements CompilerDirectingStatement {
 			}
 		}
 
-		if (copyFileFull == null) {
-			TestIntegration.LOGGER.warning(copyFile + " not found in any path specified");
-			//throw new FileNotFoundException(copyFile + " not found in any path specified");
-		} else {
-			List<String> list = 
-				Files.readAllLines(Paths.get(copyFileFull));
-			for (String line: list) out.println(this.applyReplacingPhrases(line));
-		}
+		return copyFileFull;
 	}
 
-	public String getCopyFile() {
-		String copyFile = null;
-
-		if (this.ctx.copySource().literal() != null) {
-			copyFile = this.ctx.copySource().literal().getText();
-		} else if (this.ctx.copySource().cobolWord() != null) {
-			copyFile = this.ctx.copySource().cobolWord().getText();
-		} else if (this.ctx.copySource().filename() != null) {
-			copyFile = this.ctx.copySource().filename().getText();
-		}
-
-		if (copyFile.indexOf("'") != -1) {
-			copyFile = 
-				copyFile.substring(copyFile.indexOf("'") + 1, copyFile.lastIndexOf("'"));
-		}
-
-		return copyFile;
-	}
-
+	/*
 	public String applyReplacingPhrases(String line) {
 		String newLine = new String(line);
 
-		if (this.ctx.replacingPhrase() == null) {
-		} else {
-			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
-				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
-					String replaceable = getReplaceable(rcc);
-					String replacement = getReplacement(rcc);
-					newLine = newLineWithReplacingApplied(replaceable, replacement, newLine);
-				}
-			}
+		for (int i = 0; i < this.replaceable.size(); i++) {
+			newLine = newLineWithReplacingApplied(this.replaceable.get(i), this.replacement.get(i), newLine);
 		}
 
 		return newLine;
 	}
+	*/
 
-	public String getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
-		if (this.replaceable != null) return this.replaceable;
+	public ArrayList<TerminalNodeWrapper> parseCopybook(
+				String fileName
+				) throws IOException {
+		TestIntegration.LOGGER.fine(this.myName + " parseCopybook()");
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
 
-		String replaceable = new String();
+		CharStream cs = fromFileName(fileName);  //load the file
 
-		if (rcc.replaceable().pseudoText() == null) {
-			if (rcc.replaceable().cobolWord() == null) {
-				if (rcc.replaceable().literal() == null) {
-					if (rcc.replaceable().charDataLine() == null) {
-						TestIntegration.LOGGER.warning("replacing phrase found with no replaceable content replaceable().charDataLine() == null");
-					} else {
-						// cheating, there's more than one  TODO: don't cheat
-						//replaceable = rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER().getText();
-						// still cheating
-						replaceable = rcc.replaceable().charDataLine().getText();
-					}
-				} else {
-					if (rcc.replaceable().literal().NONNUMERICLITERAL() == null) {
-						if (rcc.replaceable().literal().NUMERICLITERAL() == null) {
-							TestIntegration.LOGGER.warning("replacing phrase found with no replaceable content replaceable().literal().NUMERICLITERAL() == null");
-						} else {
-							replaceable = rcc.replaceable().literal().NUMERICLITERAL().getText();
-						}
-					} else {
-						replaceable = rcc.replaceable().literal().NONNUMERICLITERAL().getText();
-					}
-				}
-			} else {
-				replaceable = rcc.replaceable().cobolWord().IDENTIFIER().getText();
-			}
-		} else {
-			replaceable = rcc.replaceable().pseudoText().charData().getText();
-		}
+		TestIntegration.LOGGER.finer(this.myName + " lexing " + fileName);
 
-		this.replaceable = replaceable;
-		return replaceable;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+
+		TestIntegration.LOGGER.finer(this.myName + " parsing with CobolPreprocessorParser");
+
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserTerminalNodeListener listener = new CobolPreprocessorParserTerminalNodeListener(tNodes);
+
+		TestIntegration.LOGGER.finer(this.myName + " walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		return tNodes;
 	}
 
-	public String getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
-		if (this.replacement != null) return this.replacement;
-
-		String replacement = new String();
+	/*
+	public ArrayList<TerminalNodeWrapper> getReplacement(CobolPreprocessorParser.ReplaceClauseContext rcc) {
+		TestIntegration.LOGGER.finest(this.myName + " getReplacement()");
+		ArrayList<TerminalNode> replacement = new ArrayList<>();
 
 		if (rcc.replacement().pseudoText() == null) {
-			if (rcc.replacement().cobolWord() == null) {
-				if (rcc.replacement().literal() == null) {
-					if (rcc.replacement().charDataLine() == null) {
-						TestIntegration.LOGGER.warning("replacing phrase found with no replacement content replacement().charDataLine() == null");
-					} else {
-						// cheating, there's more than one  TODO: don't cheat
-						//replacement = rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER().getText();
-						// still cheating
-						replacement = rcc.replacement().charDataLine().getText();
-					}
-				} else {
-					if (rcc.replacement().literal().NONNUMERICLITERAL() == null) {
-						if (rcc.replacement().literal().NUMERICLITERAL() == null) {
-							TestIntegration.LOGGER.warning("replacing phrase found with no replacement content replacement().literal().NUMERICLITERAL() == null");
-						} else {
-							replacement = rcc.replacement().literal().NUMERICLITERAL().getText();
-						}
-					} else {
-						replacement = rcc.replacement().literal().NONNUMERICLITERAL().getText();
-					}
-				}
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText() == null");
+			if (rcc.replacement().replaceText() == null) {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().replaceText() == null");
+				TestIntegration.LOGGER.warning("replacing phrase found with no replacement content replacement().literal().NUMERICLITERAL() == null");
 			} else {
-				replacement = rcc.replacement().cobolWord().IDENTIFIER().getText();
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().replaceText().REPLACE_TEXT() = " + rcc.replacement().replaceText().REPLACE_TEXT());
+				replacement.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replacement().replaceText().REPLACE_TEXT()));
 			}
 		} else {
-			replacement = rcc.replacement().pseudoText().charData().getText();
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER() = " + rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER());
+			replacement.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replacement().pseudoText().PSEUDOTEXTIDENTIFIER()));
 		}
 
-		this.replacement = replacement;
 		return replacement;
 	}
 
+	public ArrayList<TerminalNodeWrapper> getReplaceable(CobolPreprocessorParser.ReplaceClauseContext rcc) {
+		TestIntegration.LOGGER.finest(this.myName + " getReplaceable()");
+		ArrayList<TerminalNode> replaceable = new ArrayList<>();
+
+		if (rcc.replaceable().pseudoText() == null) {
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText() == null");
+			if (rcc.replaceable().replaceText() == null) {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().replaceText() == null");
+				TestIntegration.LOGGER.warning("replacing phrase found with no replaceable content replaceable().literal().NUMERICLITERAL() == null");
+			} else {
+				TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().replaceText().REPLACE_TEXT() = " + rcc.replaceable().replaceText().REPLACE_TEXT());
+				replaceable.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replaceable().replaceText().REPLACE_TEXT()));
+			}
+		} else {
+			TestIntegration.LOGGER.finest(this.myName + " rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER() = " + rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER());
+			replaceable.addAll(TerminalNodeWrapper.bunchOfThese(rcc.replaceable().pseudoText().PSEUDOTEXTIDENTIFIER()));
+		}
+
+		return replaceable;
+	}
+	*/
+
+	/*
 	public String newLineWithReplacingApplied(String replaceable
 							, String replacement
 							, String aLine) {
@@ -333,149 +439,12 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 		return newLine;
 	}
+	*/
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder("copy @" + this.ctx.start.getLine() + ": " + this.ctx.getText());
 		sb.append("\n\tstop = " + this.ctx.stop.getLine());
 		sb.append("\n\tcopySource = " + this.ctx.copySource().getText());
-		if (this.ctx.copySource().literal() != null) {
-			sb.append("\n\tcopySource.literal = " + this.ctx.copySource().literal().getText());
-		} else if (this.ctx.copySource().cobolWord() != null) {
-			sb.append("\n\tcopySource.cobolWord = " + this.ctx.copySource().cobolWord().getText());
-		} else if (this.ctx.copySource().filename() != null) {
-			sb.append("\n\tcopySource.filename = " + this.ctx.copySource().filename().getText());
-		}
-
-		if (this.ctx.replacingPhrase() == null) {
-			sb.append("\n\tcopy.replacingPhrase() = null");
-		} else {
-			for (CobolPreprocessorParser.ReplacingPhraseContext rpc: this.ctx.replacingPhrase()) {
-				for (CobolPreprocessorParser.ReplaceClauseContext rcc: rpc.replaceClause()) {
-					if (rcc.replaceable().pseudoText() == null) {
-						sb.append("\n\treplaceable().pseudoText() = null");
-					} else {
-						if (rcc.replaceable().pseudoText().charData() == null) {
-							sb.append("\n\treplaceable().pseudoText().charData() = null");
-						} else {
-							if (rcc.replaceable().pseudoText().charData().charDataLine() == null) {
-								sb.append("\n\treplaceable().pseudoText().charData().charDataLine() = null");
-							} else {
-								if (rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() == null) {
-									sb.append("\n\treplaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() = null");
-								} else {
-									if (rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) == null) {
-										sb.append("\n\treplaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) = null");
-									} else {
-										sb.append("\n\treplaceable().pseudoText() = " + rcc.replaceable().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0).getText());
-									}
-								}
-							}
-						}
-					}
-					if (rcc.replacement().pseudoText() == null) {
-						sb.append("\n\treplacement().pseudoText() = null");
-					} else {
-						if (rcc.replacement().pseudoText().charData() == null) {
-							sb.append("\n\treplacement().pseudoText().charData() = null");
-						} else {
-							if (rcc.replacement().pseudoText().charData().charDataLine() == null) {
-								sb.append("\n\treplacement().pseudoText().charData().charDataLine() = null");
-							} else {
-								if (rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() == null) {
-									sb.append("\n\treplacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER() = null");
-								} else {
-									if (rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) == null) {
-										sb.append("\n\treplacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0) = null");
-									} else {
-										sb.append("\n\treplacement().pseudoText() = " + rcc.replacement().pseudoText().charData().charDataLine(0).PSEUDOTEXTIDENTIFIER(0).getText());
-									}
-								}
-							}
-						}
-					}
-					if (rcc.replaceable().cobolWord() == null) {
-						sb.append("\n\treplaceable().cobolWord() = null");
-					} else {
-						sb.append("\n\treplaceable().cobolWord() = " + rcc.replaceable().cobolWord().IDENTIFIER().getText());
-					}
-					if (rcc.replacement().cobolWord() == null) {
-						sb.append("\n\treplacement().cobolWord() = null");
-					} else {
-						sb.append("\n\treplacement().cobolWord() = " + rcc.replacement().cobolWord().IDENTIFIER().getText());
-					}
-					if (rcc.replaceable().literal() == null) {
-						sb.append("\n\treplaceable().literal() = null");
-					} else {
-						if (rcc.replaceable().literal().NONNUMERICLITERAL() == null) {
-							sb.append("\n\treplaceable().literal().NONNUMERICLITERAL() = null");
-						} else {
-							sb.append("\n\treplaceable().literal() = " + rcc.replaceable().literal().NONNUMERICLITERAL().getText());
-						}
-					}
-					if (rcc.replacement().literal() == null) {
-						sb.append("\n\treplacement().literal() = null");
-					} else {
-						if (rcc.replacement().literal().NONNUMERICLITERAL() == null) {
-							sb.append("\n\treplacement).literal().NONNUMERICLITERAL() = null");
-						} else {
-							sb.append("\n\treplacement().literal() = " + rcc.replacement().literal().NONNUMERICLITERAL().getText());
-						}
-					}
-					if (rcc.replaceable().literal() == null) {
-						sb.append("\n\treplaceable().literal() = null");
-					} else {
-						if (rcc.replaceable().literal().NUMERICLITERAL() == null) {
-							sb.append("\n\treplaceable().literal().NUMERICLITERAL() = null");
-						} else {
-							sb.append("\n\treplaceable().literal() = " + rcc.replaceable().literal().NUMERICLITERAL().getText());
-						}
-					}
-					if (rcc.replacement().literal() == null) {
-						sb.append("\n\treplacement().literal() = null");
-					} else {
-						if (rcc.replacement().literal().NUMERICLITERAL() == null) {
-							sb.append("\n\treplacement).literal().NUMERICLITERAL() = null");
-						} else {
-							sb.append("\n\treplacement().literal() = " + rcc.replacement().literal().NUMERICLITERAL().getText());
-						}
-					}
-					if (rcc.replaceable().charDataLine() == null) {
-						sb.append("\n\treplaceable().charDataLine() = null");
-					} else {
-						if (rcc.replaceable().charDataLine().cobolWord() == null) {
-							sb.append("\n\treplaceable().charDataLine().cobolWord() = null");
-						} else {
-							if (rcc.replaceable().charDataLine().cobolWord(0) == null) {
-								sb.append("\n\treplaceable().charDataLine().cobolWord(0) = null");
-							} else {
-								if (rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER() == null) {
-									sb.append("\n\treplaceable().charDataLine().cobolWord(0).IDENTIFIER() = null");
-								} else {
-									sb.append("\n\treplaceable().charDataLine() = " + rcc.replaceable().charDataLine().cobolWord(0).IDENTIFIER().getText());
-								}
-							}
-						}
-					}
-					if (rcc.replacement().charDataLine() == null) {
-						sb.append("\n\treplacement().charDataLine() = null");
-					} else {
-						if (rcc.replacement().charDataLine().cobolWord() == null) {
-							sb.append("\n\treplacement().charDataLine().cobolWord() = null");
-						} else {
-							if (rcc.replacement().charDataLine().cobolWord(0) == null) {
-								sb.append("\n\treplacement().charDataLine().cobolWord(0) = null");
-							} else {
-								if (rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER() == null) {
-									sb.append("\n\treplacement().charDataLine().cobolWord(0).IDENTIFIER() = null");
-								} else {
-									sb.append("\n\treplacement().charDataLine() = " + rcc.replacement().charDataLine().cobolWord(0).IDENTIFIER().getText());
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 
 		return sb.toString();
 	}

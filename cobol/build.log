@@ -2074,3 +2074,1007 @@ Thu Mar 18 12:20:22 CDT 2021 src/CobolParser.g4
 Thu Mar 18 12:20:36 CDT 2021 jar
 Thu Mar 18 12:20:39 CDT 2021 testLocal
 Thu Mar 18 12:23:26 CDT 2021 testNist
+Thu Mar 18 17:52:37 CDT 2021 testLocal 058
+Thu Mar 18 17:53:20 CDT 2021 testrigpp 058
+Thu Mar 18 18:04:21 CDT 2021 testrigpp 058
+Thu Mar 18 18:05:48 CDT 2021 testrigpp 058
+Thu Mar 18 18:07:36 CDT 2021 testrigpp 058
+Thu Mar 18 18:10:31 CDT 2021 testrigpp 058
+Fri Mar 19 15:32:42 CDT 2021 ziplogs
+Fri Mar 19 16:07:03 CDT 2021 testrigpp 058
+Fri Mar 19 16:11:04 CDT 2021 testrigpp 058
+Fri Mar 19 16:12:22 CDT 2021 testrigpp 058
+Fri Mar 19 16:14:13 CDT 2021 testLocal 058
+Fri Mar 19 16:18:20 CDT 2021 testrigpp 058
+Fri Mar 19 16:32:20 CDT 2021 src/CopyStatement.java
+Fri Mar 19 16:32:22 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 19 16:32:23 CDT 2021 src/TestIntegration.java
+Fri Mar 19 16:32:26 CDT 2021 jar
+Fri Mar 19 16:32:31 CDT 2021 testLocal 058
+Fri Mar 19 16:41:34 CDT 2021 testLocal 058
+Fri Mar 19 17:35:00 CDT 2021 testrigpp 058
+Fri Mar 19 17:46:28 CDT 2021 src/CopyStatement.java
+Fri Mar 19 17:46:54 CDT 2021 src/CopyStatement.java
+Fri Mar 19 17:46:55 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 19 17:46:56 CDT 2021 src/TestIntegration.java
+Fri Mar 19 17:46:59 CDT 2021 jar
+Fri Mar 19 17:47:04 CDT 2021 testLocal 058
+Fri Mar 19 17:56:06 CDT 2021 testrigpp 058
+Sat Mar 20 16:59:15 CDT 2021 src/TerminalNodeWrapper.java
+Sat Mar 20 17:11:42 CDT 2021 src/CopyStatement.java
+Sat Mar 20 17:14:32 CDT 2021 src/CopyStatement.java
+Sat Mar 20 17:15:43 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Sat Mar 20 17:16:08 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Sat Mar 20 17:16:42 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Sat Mar 20 17:16:43 CDT 2021 src/CopyStatement.java
+Sat Mar 20 17:16:44 CDT 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 20 17:16:45 CDT 2021 src/TestIntegration.java
+Sat Mar 20 17:26:26 CDT 2021 src/CopyStatement.java
+Sat Mar 20 17:26:27 CDT 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 20 17:26:28 CDT 2021 src/TestIntegration.java
+Sat Mar 20 17:53:17 CDT 2021 testrignist
+Sat Mar 20 17:53:30 CDT 2021 testrigppnist
+Sat Mar 20 17:53:47 CDT 2021 testrigppnist SM206A
+Sat Mar 20 18:07:22 CDT 2021 src/CobolPreprocessorLexer.g4
+Sat Mar 20 18:07:25 CDT 2021 src/CobolPreprocessorParser.g4
+Sat Mar 20 18:07:29 CDT 2021 src/TerminalNodeWrapper.java
+Sat Mar 20 18:08:00 CDT 2021 src/TerminalNodeWrapper.java
+Sat Mar 20 18:08:01 CDT 2021 src/CopyStatement.java
+Sat Mar 20 18:08:02 CDT 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 20 18:08:03 CDT 2021 src/TestIntegration.java
+Sat Mar 20 18:08:17 CDT 2021 testrigppnist SM206A
+Sun Mar 21 13:11:43 CDT 2021 src/TerminalNodeWrapper.java
+Sun Mar 21 13:50:03 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 13:50:05 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 13:50:21 CDT 2021 testrigppnist SM206A
+Sun Mar 21 13:59:39 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 13:59:42 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 13:59:50 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:13:52 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:14:59 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:15:01 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:15:11 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:22:35 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:23:06 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:23:08 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:23:13 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:40:30 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:40:47 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:41:10 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:41:12 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:41:32 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:42:37 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:42:39 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:42:46 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:43:36 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:43:48 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:47:01 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:47:04 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:47:14 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:48:38 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:48:40 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:48:51 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:50:48 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:50:50 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:50:55 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:53:11 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:53:13 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:53:19 CDT 2021 testrigppnist SM206A
+Sun Mar 21 14:56:52 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:57:19 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:57:48 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 14:57:50 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 14:57:58 CDT 2021 testrigppnist SM206A
+Sun Mar 21 15:00:18 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 15:00:21 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 15:00:29 CDT 2021 testrigppnist SM206A
+Sun Mar 21 15:23:34 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 15:23:36 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 15:23:46 CDT 2021 testrigppnist SM206A
+Sun Mar 21 15:24:26 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 15:24:28 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 15:24:34 CDT 2021 testrigppnist SM206A
+Sun Mar 21 15:44:39 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 15:44:41 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 15:44:48 CDT 2021 testrigppnist SM206A
+Sun Mar 21 15:49:40 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 15:50:02 CDT 2021 testrigppnist SM206A
+Sun Mar 21 15:55:14 CDT 2021 testrigpp 058
+Sun Mar 21 15:59:39 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:02:20 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:02:48 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:02:50 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:02:59 CDT 2021 testrigpp 058
+Sun Mar 21 16:04:51 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:22:20 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:23:17 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:26:35 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:26:37 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:26:48 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:29:29 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:29:31 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:29:41 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:30:50 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:30:52 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:31:00 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:34:31 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:34:34 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:34:47 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:36:19 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:36:21 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:36:28 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:39:09 CDT 2021 src/CobolPreprocessorLexer.g4
+Sun Mar 21 16:39:12 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Mar 21 16:39:25 CDT 2021 testrigppnist SM206A
+Sun Mar 21 16:40:10 CDT 2021 testrigpp 058
+Sun Mar 21 16:42:40 CDT 2021 jar
+Sun Mar 21 16:42:52 CDT 2021 testLocal
+Tue Mar 23 13:29:30 CDT 2021 src/CobolPreprocessorLexer.g4
+Tue Mar 23 13:29:33 CDT 2021 src/CobolPreprocessorParser.g4
+Tue Mar 23 13:36:31 CDT 2021 src/CobolPreprocessorParser.g4
+Tue Mar 23 13:40:55 CDT 2021 src/CobolPreprocessorParser.g4
+Tue Mar 23 13:43:32 CDT 2021 testNist CM101A
+Tue Mar 23 13:44:05 CDT 2021 testrigppnist SM206A
+Tue Mar 23 17:54:09 CDT 2021 src/CobolPreprocessorLexer.g4
+Tue Mar 23 17:54:12 CDT 2021 src/CobolPreprocessorParser.g4
+Tue Mar 23 17:54:16 CDT 2021 src/TestIntegration.java
+Tue Mar 23 17:54:33 CDT 2021 src/TestIntegration.java
+Tue Mar 23 18:03:05 CDT 2021 src/CobolLexer.g4
+Tue Mar 23 18:03:08 CDT 2021 src/CobolParser.g4
+Tue Mar 23 18:06:01 CDT 2021 src/TestIntegration.java
+Wed Mar 24 09:30:49 CDT 2021 src/TestIntegration.java
+Wed Mar 24 09:31:52 CDT 2021 src/TestIntegration.java
+Wed Mar 24 09:33:09 CDT 2021 src/TestIntegration.java
+Wed Mar 24 09:53:55 CDT 2021 testrigpp 022
+Wed Mar 24 09:56:34 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Mar 24 09:56:36 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Mar 24 09:56:45 CDT 2021 testrigpp 022
+Wed Mar 24 10:04:05 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Mar 24 10:04:08 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Mar 24 13:15:57 CDT 2021 src/TerminalNodeWrapper.java
+Wed Mar 24 13:54:29 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 13:55:42 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 13:56:03 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 13:58:57 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:00:41 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:01:58 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:04:38 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:05:47 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:06:23 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:08:42 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:09:00 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:14:01 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:14:40 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:14:58 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:17:07 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:18:45 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:23:56 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:24:23 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:30:54 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:33:01 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:34:16 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 14:38:17 CDT 2021 testrigpp IC201A
+Wed Mar 24 14:38:23 CDT 2021 testrigppnist IC201A
+Wed Mar 24 16:34:22 CDT 2021 src/TerminalNodeWrapper.java
+Wed Mar 24 17:29:20 CDT 2021 src/TerminalNodeWrapper.java
+Wed Mar 24 17:29:20 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 17:29:39 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 17:31:24 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 17:39:21 CDT 2021 testrigppnist IC201A
+Wed Mar 24 17:50:02 CDT 2021 testrigpp 010
+Wed Mar 24 17:51:17 CDT 2021 testrigpp 013
+Wed Mar 24 17:54:47 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 21:56:54 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 21:56:55 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:01:48 CDT 2021 src/CobolPreprocessorParserCharDataLineListener.java
+Wed Mar 24 22:02:25 CDT 2021 src/CobolPreprocessorParserCharDataLineListener.java
+Wed Mar 24 22:02:26 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:02:36 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:04:05 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:05:18 CDT 2021 jar
+Wed Mar 24 22:06:57 CDT 2021 testLocal 059
+Wed Mar 24 22:09:02 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 22:09:05 CDT 2021 jar
+Wed Mar 24 22:09:09 CDT 2021 testLocal 059
+Wed Mar 24 22:12:31 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 22:12:34 CDT 2021 jar
+Wed Mar 24 22:12:38 CDT 2021 testLocal 059
+Wed Mar 24 22:13:55 CDT 2021 src/TerminalNodeWrapper.java
+Wed Mar 24 22:13:58 CDT 2021 jar
+Wed Mar 24 22:14:02 CDT 2021 testLocal 059
+Wed Mar 24 22:16:59 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:17:02 CDT 2021 jar
+Wed Mar 24 22:17:07 CDT 2021 testLocal 059
+Wed Mar 24 22:25:38 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 24 22:25:39 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:25:42 CDT 2021 jar
+Wed Mar 24 22:25:46 CDT 2021 testLocal 059
+Wed Mar 24 22:31:11 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:31:14 CDT 2021 jar
+Wed Mar 24 22:31:21 CDT 2021 testLocal 059
+Wed Mar 24 22:35:35 CDT 2021 testrigpp 059
+Wed Mar 24 22:46:52 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:47:18 CDT 2021 src/TestIntegration.java
+Wed Mar 24 22:47:21 CDT 2021 jar
+Wed Mar 24 22:47:27 CDT 2021 testLocal 059
+Thu Mar 25 10:02:29 CDT 2021 ziplogs
+Thu Mar 25 10:19:58 CDT 2021 src/TerminalNodeWrapper.java
+Thu Mar 25 10:34:13 CDT 2021 src/TestIntegration.java
+Thu Mar 25 10:34:34 CDT 2021 src/TestIntegration.java
+Thu Mar 25 10:34:59 CDT 2021 src/TestIntegration.java
+Thu Mar 25 10:35:03 CDT 2021 jar
+Thu Mar 25 10:35:07 CDT 2021 testLocal 059
+Thu Mar 25 10:42:01 CDT 2021 src/TestIntegration.java
+Thu Mar 25 10:42:04 CDT 2021 jar
+Thu Mar 25 10:42:09 CDT 2021 testLocal 059
+Thu Mar 25 10:48:26 CDT 2021 src/TestIntegration.java
+Thu Mar 25 10:48:30 CDT 2021 jar
+Thu Mar 25 10:48:37 CDT 2021 testLocal 059
+Thu Mar 25 10:51:10 CDT 2021 src/TestIntegration.java
+Thu Mar 25 10:51:13 CDT 2021 jar
+Thu Mar 25 10:51:17 CDT 2021 testLocal 059
+Thu Mar 25 12:34:11 CDT 2021 src/CobolPreprocessorLexer.g4
+Thu Mar 25 12:34:13 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Mar 25 12:34:57 CDT 2021 src/CobolPreprocessorLexer.g4
+Thu Mar 25 12:34:59 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Mar 25 12:37:16 CDT 2021 src/TestIntegration.java
+Thu Mar 25 12:37:21 CDT 2021 jar
+Thu Mar 25 12:37:26 CDT 2021 testLocal 059
+Thu Mar 25 13:33:04 CDT 2021 src/CobolParser.g4
+Thu Mar 25 13:33:18 CDT 2021 jar
+Thu Mar 25 13:33:23 CDT 2021 testLocal 059
+Thu Mar 25 13:33:58 CDT 2021 testNist CM101A
+Thu Mar 25 13:34:25 CDT 2021 testNist CM101M
+Thu Mar 25 13:40:14 CDT 2021 src/TestIntegration.java
+Thu Mar 25 13:40:17 CDT 2021 jar
+Thu Mar 25 13:40:27 CDT 2021 testNist CM101M
+Thu Mar 25 13:42:07 CDT 2021 testNist CM101M
+Thu Mar 25 13:44:41 CDT 2021 testLocal 055
+Thu Mar 25 13:48:28 CDT 2021 testLocal 058
+Thu Mar 25 16:53:29 CDT 2021 src/CopyStatement.java
+Thu Mar 25 16:56:09 CDT 2021 testrigpp 058
+Thu Mar 25 17:00:22 CDT 2021 testrigpp 058
+Thu Mar 25 17:05:03 CDT 2021 testrigpp 058
+Thu Mar 25 17:05:46 CDT 2021 testrigpp 058
+Thu Mar 25 17:12:55 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Mar 25 17:13:00 CDT 2021 src/CopyStatement.java
+Thu Mar 25 17:13:07 CDT 2021 testrigpp 058
+Thu Mar 25 17:13:49 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Mar 25 17:13:53 CDT 2021 src/CopyStatement.java
+Thu Mar 25 17:13:57 CDT 2021 testrigpp 058
+Thu Mar 25 17:16:07 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Mar 25 17:16:11 CDT 2021 src/CopyStatement.java
+Thu Mar 25 17:16:14 CDT 2021 testrigpp 058
+Thu Mar 25 17:26:44 CDT 2021 testrigpp 058
+Thu Mar 25 17:58:03 CDT 2021 src/CopyStatement.java
+Thu Mar 25 17:58:04 CDT 2021 src/CompilerDirectingStatementListener.java
+Thu Mar 25 17:58:05 CDT 2021 src/TestIntegration.java
+Thu Mar 25 17:59:27 CDT 2021 jar
+Thu Mar 25 17:59:35 CDT 2021 testLocal 058
+Fri Mar 26 15:19:27 CDT 2021 src/TheCLI.java
+Fri Mar 26 15:20:16 CDT 2021 src/TheCLI.java
+Fri Mar 26 15:20:17 CDT 2021 src/TestIntegration.java
+Fri Mar 26 15:23:52 CDT 2021 src/TestIntegration.java
+Fri Mar 26 15:26:29 CDT 2021 jar
+Fri Mar 26 15:26:44 CDT 2021 testLocal 055
+Fri Mar 26 15:28:21 CDT 2021 testLocal 059
+Fri Mar 26 15:31:38 CDT 2021 src/TestIntegration.java
+Fri Mar 26 15:31:41 CDT 2021 jar
+Fri Mar 26 15:31:45 CDT 2021 testLocal 059
+Fri Mar 26 16:24:49 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:25:19 CDT 2021 jar
+Fri Mar 26 16:25:21 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:25:38 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:25:39 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 26 16:25:40 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:41:36 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:42:00 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:42:14 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:42:15 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 26 16:42:16 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:43:26 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:44:11 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:47:31 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:53:15 CDT 2021 src/CopyStatement.java
+Fri Mar 26 16:53:16 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 26 16:53:17 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:53:39 CDT 2021 jar
+Fri Mar 26 16:53:52 CDT 2021 testLocal 059
+Fri Mar 26 16:54:30 CDT 2021 src/TestIntegration.java
+Fri Mar 26 16:54:34 CDT 2021 jar
+Fri Mar 26 16:54:38 CDT 2021 testLocal 059
+Fri Mar 26 16:55:39 CDT 2021 testLocal 058
+Fri Mar 26 17:00:40 CDT 2021 src/CopyStatement.java
+Fri Mar 26 17:00:41 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 26 17:00:42 CDT 2021 src/TestIntegration.java
+Fri Mar 26 17:00:45 CDT 2021 jar
+Fri Mar 26 17:00:51 CDT 2021 testLocal 058
+Fri Mar 26 17:26:36 CDT 2021 src/CopyStatement.java
+Fri Mar 26 17:26:37 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Mar 26 17:26:38 CDT 2021 src/TestIntegration.java
+Fri Mar 26 17:26:41 CDT 2021 jar
+Fri Mar 26 17:26:46 CDT 2021 testLocal 058
+Fri Mar 26 17:36:45 CDT 2021 src/TestIntegration.java
+Fri Mar 26 17:36:49 CDT 2021 jar
+Fri Mar 26 17:36:54 CDT 2021 testLocal 058
+Sat Mar 27 17:27:31 CDT 2021 src/CopyStatement.java
+Sat Mar 27 17:27:35 CDT 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 27 17:27:36 CDT 2021 src/TestIntegration.java
+Sat Mar 27 17:27:41 CDT 2021 jar
+Sat Mar 27 17:27:47 CDT 2021 testLocal 058
+Sat Mar 27 17:39:13 CDT 2021 src/CopyStatement.java
+Sat Mar 27 17:39:47 CDT 2021 src/CopyStatement.java
+Sat Mar 27 17:39:48 CDT 2021 src/CompilerDirectingStatementListener.java
+Sat Mar 27 17:39:49 CDT 2021 src/TestIntegration.java
+Sat Mar 27 17:39:56 CDT 2021 jar
+Sat Mar 27 17:40:02 CDT 2021 testLocal 058
+Sat Mar 27 17:50:00 CDT 2021 src/TheCLI.java
+Sat Mar 27 17:50:19 CDT 2021 src/TheCLI.java
+Sat Mar 27 17:52:21 CDT 2021 src/TheCLI.java
+Sat Mar 27 17:52:31 CDT 2021 src/TheCLI.java
+Sat Mar 27 17:52:32 CDT 2021 src/TestIntegration.java
+Sat Mar 27 17:52:38 CDT 2021 jar
+Sat Mar 27 17:52:41 CDT 2021 testLocal 058
+Sat Mar 27 17:54:12 CDT 2021 src/TheCLI.java
+Sat Mar 27 17:54:13 CDT 2021 src/TestIntegration.java
+Sat Mar 27 17:54:17 CDT 2021 jar
+Sat Mar 27 17:54:25 CDT 2021 testLocal 058
+Sun Mar 28 15:50:57 CDT 2021 src/TerminalNodeWrapper.java
+Sun Mar 28 16:01:47 CDT 2021 src/TheCLI.java
+Sun Mar 28 16:01:48 CDT 2021 src/TestIntegration.java
+Sun Mar 28 16:37:06 CDT 2021 src/CopyStatement.java
+Sun Mar 28 16:37:20 CDT 2021 src/CopyStatement.java
+Sun Mar 28 16:39:51 CDT 2021 src/CopyStatement.java
+Sun Mar 28 16:39:52 CDT 2021 src/CompilerDirectingStatementListener.java
+Sun Mar 28 16:39:53 CDT 2021 src/TestIntegration.java
+Sun Mar 28 17:31:39 CDT 2021 src/TheCLI.java
+Sun Mar 28 17:32:13 CDT 2021 src/TheCLI.java
+Sun Mar 28 17:32:14 CDT 2021 src/TestIntegration.java
+Sun Mar 28 17:33:53 CDT 2021 src/TheCLI.java
+Sun Mar 28 17:33:54 CDT 2021 src/TestIntegration.java
+Sun Mar 28 17:33:57 CDT 2021 jar
+Sun Mar 28 17:34:25 CDT 2021 testLocal 058
+Sun Mar 28 17:36:47 CDT 2021 src/TheCLI.java
+Sun Mar 28 17:36:48 CDT 2021 src/TestIntegration.java
+Sun Mar 28 17:36:51 CDT 2021 jar
+Sun Mar 28 17:37:01 CDT 2021 testLocal 058
+Sun Mar 28 17:52:01 CDT 2021 src/TheCLI.java
+Sun Mar 28 17:52:02 CDT 2021 src/TestIntegration.java
+Sun Mar 28 17:52:06 CDT 2021 jar
+Sun Mar 28 17:52:13 CDT 2021 testLocal 058
+Sun Mar 28 17:57:47 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Sun Mar 28 17:58:30 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Sun Mar 28 17:58:33 CDT 2021 jar
+Sun Mar 28 17:58:40 CDT 2021 testLocal 058
+Mon Mar 29 15:44:40 CDT 2021 src/TerminalNodeWrapper.java
+Mon Mar 29 16:03:01 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:03:35 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:03:57 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:03:58 CDT 2021 src/TestIntegration.java
+Mon Mar 29 16:36:07 CDT 2021 src/TerminalNodeWrapper.java
+Mon Mar 29 16:41:58 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:42:35 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:42:59 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:43:00 CDT 2021 src/TestIntegration.java
+Mon Mar 29 16:43:04 CDT 2021 jar
+Mon Mar 29 16:43:13 CDT 2021 testLocal 058
+Mon Mar 29 16:50:26 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:51:21 CDT 2021 src/TheCLI.java
+Mon Mar 29 16:51:22 CDT 2021 src/TestIntegration.java
+Mon Mar 29 16:51:25 CDT 2021 jar
+Mon Mar 29 16:51:31 CDT 2021 testLocal 058
+Tue Mar 30 15:26:30 CDT 2021 src/CobolPreprocessorLexer.g4
+Tue Mar 30 15:26:32 CDT 2021 src/CobolPreprocessorParser.g4
+Tue Mar 30 15:27:36 CDT 2021 jar
+Tue Mar 30 15:27:44 CDT 2021 testLocal 059
+Tue Mar 30 17:02:01 CDT 2021 src/TerminalNodeWrapper.java
+Tue Mar 30 17:02:02 CDT 2021 src/HasTerminalNode.java
+Tue Mar 30 17:05:40 CDT 2021 src/HasTerminalNode.java
+Tue Mar 30 17:07:33 CDT 2021 src/CopyStatement.java
+Wed Mar 31 08:48:15 CDT 2021 src/HasTerminalNode.java
+Wed Mar 31 08:48:16 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 08:48:46 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 08:48:47 CDT 2021 src/CopyStatement.java
+Wed Mar 31 09:10:14 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 09:10:15 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:10:40 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:11:13 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:12:38 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:13:19 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:13:20 CDT 2021 src/CopyStatement.java
+Wed Mar 31 09:37:35 CDT 2021 src/HasTerminalNode.java
+Wed Mar 31 09:38:48 CDT 2021 src/HasTerminalNode.java
+Wed Mar 31 09:38:49 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 09:38:49 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:38:50 CDT 2021 src/CopyStatement.java
+Wed Mar 31 09:40:12 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 09:40:41 CDT 2021 src/HasTerminalNode.java
+Wed Mar 31 09:40:42 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 09:40:42 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 10:00:00 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 10:00:01 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 10:00:17 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 10:00:51 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 10:00:52 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 10:00:53 CDT 2021 src/CopyStatement.java
+Wed Mar 31 11:42:49 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 11:43:09 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 11:43:51 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 11:43:52 CDT 2021 src/CopyStatement.java
+Wed Mar 31 11:49:13 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 11:49:22 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 11:49:23 CDT 2021 src/CopyStatement.java
+Wed Mar 31 13:27:04 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 13:28:00 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 13:35:00 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 13:35:26 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 13:35:31 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 13:36:01 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 13:36:06 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 13:36:07 CDT 2021 src/FilenameWrapper.java
+Wed Mar 31 13:36:08 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 31 13:39:08 CDT 2021 src/LiteralWrapper.java
+Wed Mar 31 13:39:09 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 31 13:41:36 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 31 13:42:15 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 31 13:42:16 CDT 2021 src/CopyStatement.java
+Wed Mar 31 13:57:54 CDT 2021 src/CharDataLineWrapper.java
+Wed Mar 31 13:57:54 CDT 2021 src/CopyStatement.java
+Wed Mar 31 14:49:46 CDT 2021 src/CopyStatement.java
+Wed Mar 31 14:50:55 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 14:51:38 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 14:52:50 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 14:54:42 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 14:55:45 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 15:08:00 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 15:08:21 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 15:08:55 CDT 2021 src/ReplaceClause.java
+Wed Mar 31 15:08:56 CDT 2021 src/CopyStatement.java
+Wed Mar 31 15:09:44 CDT 2021 src/CopyStatement.java
+Wed Mar 31 15:09:45 CDT 2021 src/CompilerDirectingStatementListener.java
+Wed Mar 31 15:09:46 CDT 2021 src/TestIntegration.java
+Wed Mar 31 15:09:56 CDT 2021 jar
+Wed Mar 31 15:10:11 CDT 2021 testLocal 059
+Wed Mar 31 15:10:46 CDT 2021 testLocal 058
+Wed Mar 31 15:13:37 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 15:13:40 CDT 2021 jar
+Wed Mar 31 15:13:44 CDT 2021 testLocal 058
+Wed Mar 31 15:21:29 CDT 2021 src/LiteralWrapper.java
+Wed Mar 31 15:21:30 CDT 2021 src/CharDataKeywordWrapper.java
+Wed Mar 31 15:21:30 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 15:21:31 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 15:21:32 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 15:26:40 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 15:27:55 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 15:27:56 CDT 2021 src/FilenameWrapper.java
+Wed Mar 31 15:28:01 CDT 2021 jar
+Wed Mar 31 15:28:05 CDT 2021 testLocal 058
+Wed Mar 31 15:30:32 CDT 2021 src/CobolWordWrapper.java
+Wed Mar 31 15:30:33 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 15:30:33 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 15:30:36 CDT 2021 jar
+Wed Mar 31 15:30:39 CDT 2021 testLocal 058
+Wed Mar 31 15:32:51 CDT 2021 jar
+Wed Mar 31 15:32:54 CDT 2021 src/CharDataWrapper.java
+Wed Mar 31 15:32:56 CDT 2021 jar
+Wed Mar 31 15:33:00 CDT 2021 testLocal 058
+Wed Mar 31 17:05:57 CDT 2021 src/PseudoTextWrapper.java
+Wed Mar 31 17:06:00 CDT 2021 jar
+Wed Mar 31 17:06:07 CDT 2021 testLocal 058
+Wed Mar 31 17:21:53 CDT 2021 src/TheCLI.java
+Wed Mar 31 17:22:05 CDT 2021 src/TheCLI.java
+Wed Mar 31 17:22:06 CDT 2021 src/TestIntegration.java
+Wed Mar 31 17:22:10 CDT 2021 jar
+Wed Mar 31 17:22:14 CDT 2021 testLocal 058
+Wed Mar 31 17:26:56 CDT 2021 src/CopyStatement.java
+Wed Mar 31 17:26:57 CDT 2021 src/CompilerDirectingStatementListener.java
+Wed Mar 31 17:26:58 CDT 2021 src/TestIntegration.java
+Wed Mar 31 17:27:01 CDT 2021 jar
+Wed Mar 31 17:27:05 CDT 2021 testLocal 058
+Wed Mar 31 17:29:42 CDT 2021 src/CopyStatement.java
+Wed Mar 31 17:29:43 CDT 2021 src/CompilerDirectingStatementListener.java
+Wed Mar 31 17:29:44 CDT 2021 src/TestIntegration.java
+Wed Mar 31 17:29:47 CDT 2021 jar
+Wed Mar 31 17:29:50 CDT 2021 testLocal 058
+Wed Mar 31 17:40:49 CDT 2021 src/TheCLI.java
+Wed Mar 31 17:40:50 CDT 2021 src/TestIntegration.java
+Wed Mar 31 17:40:54 CDT 2021 jar
+Wed Mar 31 17:40:59 CDT 2021 testLocal 058
+Wed Mar 31 17:51:03 CDT 2021 src/TheCLI.java
+Wed Mar 31 17:51:05 CDT 2021 src/TestIntegration.java
+Wed Mar 31 17:51:07 CDT 2021 jar
+Wed Mar 31 17:51:14 CDT 2021 testLocal 058
+Thu Apr 1 13:05:22 CDT 2021 src/TheCLI.java
+Thu Apr 1 13:05:23 CDT 2021 src/TestIntegration.java
+Thu Apr 1 13:05:28 CDT 2021 jar
+Thu Apr 1 13:05:32 CDT 2021 testLocal 058
+Thu Apr 1 13:08:46 CDT 2021 src/TheCLI.java
+Thu Apr 1 13:08:47 CDT 2021 src/TestIntegration.java
+Thu Apr 1 13:08:50 CDT 2021 jar
+Thu Apr 1 13:08:55 CDT 2021 testLocal 058
+Thu Apr 1 14:58:22 CDT 2021 src/TheCLI.java
+Thu Apr 1 14:58:23 CDT 2021 src/TestIntegration.java
+Thu Apr 1 14:58:28 CDT 2021 jar
+Thu Apr 1 14:58:34 CDT 2021 testLocal 058
+Thu Apr 1 15:40:09 CDT 2021 src/TheCLI.java
+Thu Apr 1 15:41:17 CDT 2021 src/TheCLI.java
+Thu Apr 1 15:42:10 CDT 2021 src/TheCLI.java
+Thu Apr 1 15:43:47 CDT 2021 src/TheCLI.java
+Thu Apr 1 15:44:40 CDT 2021 src/TheCLI.java
+Thu Apr 1 15:44:41 CDT 2021 src/TestIntegration.java
+Thu Apr 1 15:44:45 CDT 2021 jar
+Thu Apr 1 15:44:52 CDT 2021 testLocal 058
+Thu Apr 1 15:49:38 CDT 2021 src/TheCLI.java
+Thu Apr 1 15:49:39 CDT 2021 src/TestIntegration.java
+Thu Apr 1 15:49:43 CDT 2021 jar
+Thu Apr 1 15:49:50 CDT 2021 testLocal 058
+Thu Apr 1 16:07:14 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 1 16:12:54 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 1 16:17:07 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 1 16:17:07 CDT 2021 src/TheCLI.java
+Thu Apr 1 16:17:35 CDT 2021 src/TheCLI.java
+Thu Apr 1 16:17:45 CDT 2021 src/TheCLI.java
+Thu Apr 1 16:17:57 CDT 2021 src/TheCLI.java
+Thu Apr 1 16:17:58 CDT 2021 src/TestIntegration.java
+Sat Apr 3 17:28:34 CDT 2021 src/TerminalNodeWrapper.java
+Sat Apr 3 17:28:37 CDT 2021 src/TheCLI.java
+Sat Apr 3 17:36:42 CDT 2021 src/TerminalNodeWrapper.java
+Sat Apr 3 17:36:43 CDT 2021 src/TheCLI.java
+Sat Apr 3 18:07:00 CDT 2021 src/TheCLI.java
+Sat Apr 3 18:08:32 CDT 2021 src/TerminalNodeWrapper.java
+Sat Apr 3 18:08:33 CDT 2021 src/TheCLI.java
+Sat Apr 3 18:10:47 CDT 2021 src/TheCLI.java
+Sat Apr 3 18:10:48 CDT 2021 src/TestIntegration.java
+Sat Apr 3 18:11:17 CDT 2021 jar
+Sat Apr 3 18:11:22 CDT 2021 testLocal 058
+Sun Apr 4 16:33:40 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 4 16:34:41 CDT 2021 src/TheCLI.java
+Sun Apr 4 16:34:42 CDT 2021 src/TestIntegration.java
+Sun Apr 4 16:35:38 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 4 16:40:04 CDT 2021 src/TheCLI.java
+Sun Apr 4 16:40:05 CDT 2021 src/TestIntegration.java
+Sun Apr 4 16:40:50 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 4 16:47:38 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 4 16:51:04 CDT 2021 src/TheCLI.java
+Sun Apr 4 16:51:05 CDT 2021 src/TestIntegration.java
+Sun Apr 4 16:51:08 CDT 2021 jar
+Sun Apr 4 16:51:14 CDT 2021 testLocal 058
+Sun Apr 4 17:03:50 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 4 17:05:15 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 4 17:05:17 CDT 2021 jar
+Sun Apr 4 17:05:26 CDT 2021 testLocal 058
+Wed Apr 7 15:29:30 CDT 2021 src/TheCLI.java
+Wed Apr 7 15:29:49 CDT 2021 src/TheCLI.java
+Wed Apr 7 15:29:50 CDT 2021 src/TestIntegration.java
+Wed Apr 7 15:29:53 CDT 2021 jar
+Wed Apr 7 15:30:00 CDT 2021 testLocal 058
+Wed Apr 7 15:34:55 CDT 2021 src/TheCLI.java
+Wed Apr 7 15:34:56 CDT 2021 src/TestIntegration.java
+Wed Apr 7 15:35:00 CDT 2021 jar
+Wed Apr 7 15:35:08 CDT 2021 testLocal 058
+Wed Apr 7 15:41:27 CDT 2021 src/TheCLI.java
+Wed Apr 7 15:41:28 CDT 2021 src/TestIntegration.java
+Wed Apr 7 15:41:31 CDT 2021 jar
+Wed Apr 7 15:41:38 CDT 2021 testLocal 058
+Wed Apr 7 15:49:47 CDT 2021 src/TheCLI.java
+Wed Apr 7 15:49:48 CDT 2021 src/TestIntegration.java
+Wed Apr 7 15:49:53 CDT 2021 jar
+Wed Apr 7 15:50:00 CDT 2021 testLocal 058
+Wed Apr 7 15:53:25 CDT 2021 src/TerminalNodeWrapper.java
+Wed Apr 7 15:53:31 CDT 2021 jar
+Wed Apr 7 15:53:35 CDT 2021 testLocal 058
+Wed Apr 7 16:29:53 CDT 2021 src/TheCLI.java
+Wed Apr 7 16:29:54 CDT 2021 src/TestIntegration.java
+Wed Apr 7 16:29:57 CDT 2021 jar
+Wed Apr 7 16:30:02 CDT 2021 testLocal 058
+Wed Apr 7 16:33:58 CDT 2021 src/TheCLI.java
+Wed Apr 7 16:33:59 CDT 2021 src/TestIntegration.java
+Wed Apr 7 16:34:02 CDT 2021 jar
+Wed Apr 7 16:34:06 CDT 2021 testLocal 058
+Wed Apr 7 17:01:43 CDT 2021 src/TheCLI.java
+Wed Apr 7 17:01:44 CDT 2021 src/TestIntegration.java
+Wed Apr 7 17:01:49 CDT 2021 jar
+Wed Apr 7 17:02:01 CDT 2021 testLocal 058
+Wed Apr 7 17:21:41 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Apr 7 17:21:44 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Apr 7 17:23:21 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Apr 7 17:24:42 CDT 2021 jar
+Wed Apr 7 17:24:55 CDT 2021 testLocal 001
+Wed Apr 7 17:25:03 CDT 2021 testLocal 002
+Wed Apr 7 17:25:08 CDT 2021 testLocal 003
+Wed Apr 7 17:25:16 CDT 2021 testLocal 103
+Wed Apr 7 17:25:22 CDT 2021 testLocal 203
+Wed Apr 7 17:25:27 CDT 2021 testLocal 303
+Wed Apr 7 17:26:35 CDT 2021 testLocal
+Wed Apr 7 17:27:23 CDT 2021 testLocal 022
+Wed Apr 7 17:28:48 CDT 2021 testLocal 051
+Wed Apr 7 18:01:23 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Apr 7 18:01:26 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Apr 7 18:01:38 CDT 2021 jar
+Wed Apr 7 18:01:46 CDT 2021 testLocal 058
+Wed Apr 7 18:02:54 CDT 2021 testrigpp 058
+Wed Apr 7 18:07:01 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Apr 7 18:07:04 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Apr 7 18:07:10 CDT 2021 jar
+Wed Apr 7 18:07:19 CDT 2021 testrigpp 058
+Wed Apr 7 18:07:50 CDT 2021 testLocal 058
+Wed Apr 7 18:09:56 CDT 2021 testrigpp 058
+Wed Apr 7 18:28:40 CDT 2021 jar
+Wed Apr 7 18:28:53 CDT 2021 testLocal 058
+Wed Apr 7 18:32:37 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Apr 7 18:32:39 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Apr 7 18:32:46 CDT 2021 jar
+Wed Apr 7 18:32:50 CDT 2021 testLocal 058
+Wed Apr 7 18:34:08 CDT 2021 testrigpp 058
+Wed Apr 7 18:35:49 CDT 2021 src/CobolPreprocessorLexer.g4
+Wed Apr 7 18:35:51 CDT 2021 src/CobolPreprocessorParser.g4
+Wed Apr 7 18:35:58 CDT 2021 jar
+Wed Apr 7 18:36:04 CDT 2021 testrigpp 058
+Thu Apr 8 11:53:36 CDT 2021 src/CharDataLineWrapper.java
+Thu Apr 8 11:53:37 CDT 2021 src/TheCLI.java
+Thu Apr 8 11:53:38 CDT 2021 src/TestIntegration.java
+Thu Apr 8 11:53:44 CDT 2021 jar
+Thu Apr 8 11:54:20 CDT 2021 testLocal 058
+Thu Apr 8 11:55:18 CDT 2021 src/CobolPreprocessorLexer.g4
+Thu Apr 8 11:55:20 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Apr 8 11:55:24 CDT 2021 src/CharDataLineWrapper.java
+Thu Apr 8 11:55:25 CDT 2021 src/TheCLI.java
+Thu Apr 8 11:55:26 CDT 2021 src/TestIntegration.java
+Thu Apr 8 11:55:39 CDT 2021 jar
+Thu Apr 8 11:55:43 CDT 2021 testLocal 058
+Thu Apr 8 11:56:02 CDT 2021 testrigpp 058
+Thu Apr 8 11:58:37 CDT 2021 src/CobolPreprocessorLexer.g4
+Thu Apr 8 11:58:39 CDT 2021 src/CobolPreprocessorParser.g4
+Thu Apr 8 11:58:44 CDT 2021 src/CharDataLineWrapper.java
+Thu Apr 8 11:58:45 CDT 2021 src/TheCLI.java
+Thu Apr 8 11:58:46 CDT 2021 src/TestIntegration.java
+Thu Apr 8 11:58:50 CDT 2021 jar
+Thu Apr 8 12:11:10 CDT 2021 src/ReplaceClause.java
+Thu Apr 8 13:56:27 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 8 13:56:28 CDT 2021 src/LiteralWrapper.java
+Thu Apr 8 13:56:29 CDT 2021 src/CharDataKeywordWrapper.java
+Thu Apr 8 13:56:30 CDT 2021 src/CobolWordWrapper.java
+Thu Apr 8 13:56:31 CDT 2021 src/PseudoTextWrapper.java
+Thu Apr 8 13:56:32 CDT 2021 src/CharDataWrapper.java
+Thu Apr 8 13:56:32 CDT 2021 src/FilenameWrapper.java
+Thu Apr 8 13:56:33 CDT 2021 src/CharDataLineWrapper.java
+Thu Apr 8 14:02:06 CDT 2021 src/ReplaceClause.java
+Thu Apr 8 14:07:30 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 8 14:10:55 CDT 2021 src/CharDataLineWrapper.java
+Thu Apr 8 14:14:40 CDT 2021 src/LiteralWrapper.java
+Thu Apr 8 14:14:41 CDT 2021 src/CharDataKeywordWrapper.java
+Thu Apr 8 14:14:42 CDT 2021 src/CobolWordWrapper.java
+Thu Apr 8 14:14:43 CDT 2021 src/PseudoTextWrapper.java
+Thu Apr 8 14:14:43 CDT 2021 src/CharDataWrapper.java
+Thu Apr 8 14:14:44 CDT 2021 src/FilenameWrapper.java
+Thu Apr 8 14:19:49 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 8 14:32:20 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 8 14:42:57 CDT 2021 src/TerminalNodeWrapper.java
+Thu Apr 8 14:43:36 CDT 2021 src/TheCLI.java
+Thu Apr 8 14:44:11 CDT 2021 src/TheCLI.java
+Thu Apr 8 14:44:12 CDT 2021 src/TestIntegration.java
+Thu Apr 8 14:45:42 CDT 2021 jar
+Thu Apr 8 14:45:55 CDT 2021 testLocal 058
+Thu Apr 8 14:47:19 CDT 2021 testLocal
+Thu Apr 8 14:47:54 CDT 2021 testrigpp 001
+Thu Apr 8 14:49:23 CDT 2021 testrig 001
+Thu Apr 8 14:49:54 CDT 2021 testLocal 001
+Thu Apr 8 15:01:48 CDT 2021 src/CobolLexer.g4
+Thu Apr 8 15:01:51 CDT 2021 src/CobolParser.g4
+Thu Apr 8 15:02:36 CDT 2021 jar
+Thu Apr 8 15:02:43 CDT 2021 testLocal 001
+Thu Apr 8 15:02:51 CDT 2021 testLocal
+Thu Apr 8 15:07:21 CDT 2021 testLocal 027
+Thu Apr 8 17:05:32 CDT 2021 src/CopyStatement.java
+Thu Apr 8 17:05:49 CDT 2021 src/CopyStatement.java
+Thu Apr 8 17:05:50 CDT 2021 src/CompilerDirectingStatementListener.java
+Thu Apr 8 17:05:51 CDT 2021 src/TestIntegration.java
+Thu Apr 8 17:05:55 CDT 2021 jar
+Thu Apr 8 17:06:28 CDT 2021 testLocal 251
+Thu Apr 8 17:08:51 CDT 2021 src/CopyStatement.java
+Thu Apr 8 17:08:52 CDT 2021 src/CompilerDirectingStatementListener.java
+Thu Apr 8 17:08:53 CDT 2021 src/TestIntegration.java
+Thu Apr 8 17:08:56 CDT 2021 jar
+Thu Apr 8 17:09:01 CDT 2021 testLocal 251
+Thu Apr 8 17:11:33 CDT 2021 src/CopyStatement.java
+Thu Apr 8 17:11:34 CDT 2021 src/CompilerDirectingStatementListener.java
+Thu Apr 8 17:11:35 CDT 2021 src/TestIntegration.java
+Thu Apr 8 17:11:39 CDT 2021 jar
+Thu Apr 8 17:11:44 CDT 2021 testLocal 251
+Thu Apr 8 17:11:51 CDT 2021 testLocal 351
+Thu Apr 8 17:12:07 CDT 2021 testLocal 027
+Thu Apr 8 17:14:08 CDT 2021 testrigpp 027
+Thu Apr 8 17:16:59 CDT 2021 src/TheCLI.java
+Thu Apr 8 17:17:13 CDT 2021 src/TheCLI.java
+Thu Apr 8 17:17:14 CDT 2021 src/TestIntegration.java
+Thu Apr 8 17:17:17 CDT 2021 jar
+Thu Apr 8 17:17:23 CDT 2021 testLocal 027
+Thu Apr 8 17:17:44 CDT 2021 testLocal
+Thu Apr 8 17:18:35 CDT 2021 testLocal 058
+Thu Apr 8 17:24:22 CDT 2021 testNist
+Thu Apr 8 17:28:04 CDT 2021 testNist DB101A
+Thu Apr 8 17:31:22 CDT 2021 src/CobolLexer.g4
+Thu Apr 8 17:31:24 CDT 2021 src/CobolParser.g4
+Thu Apr 8 17:31:39 CDT 2021 jar
+Thu Apr 8 17:31:48 CDT 2021 testNist DB101A
+Thu Apr 8 17:32:18 CDT 2021 testLocal
+Thu Apr 8 17:32:43 CDT 2021 testNist
+Thu Apr 8 17:35:15 CDT 2021 testNist
+Thu Apr 8 17:35:26 CDT 2021 testNist IC201A
+Thu Apr 8 17:55:04 CDT 2021 src/CobolParser.g4
+Thu Apr 8 17:55:17 CDT 2021 jar
+Thu Apr 8 17:55:30 CDT 2021 testNist IC201A
+Thu Apr 8 17:55:49 CDT 2021 testNist DB101A
+Thu Apr 8 17:56:16 CDT 2021 testNist
+Fri Apr 9 11:13:00 CDT 2021 testNist ICC222A
+Fri Apr 9 11:13:16 CDT 2021 testNist IC222A
+Fri Apr 9 11:38:15 CDT 2021 src/CobolPreprocessorLexer.g4
+Fri Apr 9 11:38:18 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 11:38:22 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 11:38:23 CDT 2021 src/TheCLI.java
+Fri Apr 9 11:38:24 CDT 2021 src/TestIntegration.java
+Fri Apr 9 11:38:38 CDT 2021 jar
+Fri Apr 9 11:38:48 CDT 2021 testNist IC222A
+Fri Apr 9 11:41:38 CDT 2021 src/CobolParser.g4
+Fri Apr 9 11:41:53 CDT 2021 jar
+Fri Apr 9 11:41:58 CDT 2021 testNist IC222A
+Fri Apr 9 11:42:45 CDT 2021 testNist IC225A
+Fri Apr 9 11:52:34 CDT 2021 src/CobolParser.g4
+Fri Apr 9 11:52:50 CDT 2021 jar
+Fri Apr 9 11:53:07 CDT 2021 testNist IC225A
+Fri Apr 9 11:53:55 CDT 2021 testNist
+Fri Apr 9 11:58:02 CDT 2021 testNist IX101A
+Fri Apr 9 12:56:51 CDT 2021 testrigppnist IX101A
+Fri Apr 9 13:07:21 CDT 2021 src/CobolPreprocessorLexer.g4
+Fri Apr 9 13:07:23 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 13:07:28 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 13:07:29 CDT 2021 src/TheCLI.java
+Fri Apr 9 13:07:30 CDT 2021 src/TestIntegration.java
+Fri Apr 9 13:07:34 CDT 2021 jar
+Fri Apr 9 13:07:48 CDT 2021 testrigppnist IX101A
+Fri Apr 9 13:15:39 CDT 2021 src/CobolPreprocessorLexer.g4
+Fri Apr 9 13:15:58 CDT 2021 src/CobolPreprocessorLexer.g4
+Fri Apr 9 13:16:00 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 13:16:04 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 13:16:05 CDT 2021 src/TheCLI.java
+Fri Apr 9 13:16:06 CDT 2021 src/TestIntegration.java
+Fri Apr 9 13:16:13 CDT 2021 jar
+Fri Apr 9 13:16:30 CDT 2021 testNist IX101A
+Fri Apr 9 13:16:52 CDT 2021 testNist
+Fri Apr 9 13:20:34 CDT 2021 testNist IX212A
+Fri Apr 9 13:25:21 CDT 2021 src/CobolParser.g4
+Fri Apr 9 13:25:36 CDT 2021 jar
+Fri Apr 9 13:25:42 CDT 2021 testNist IX212A
+Fri Apr 9 13:26:06 CDT 2021 testNist
+Fri Apr 9 13:35:45 CDT 2021 testNist NC114M
+Fri Apr 9 13:56:39 CDT 2021 src/TheCLI.java
+Fri Apr 9 13:56:40 CDT 2021 src/TestIntegration.java
+Fri Apr 9 13:56:43 CDT 2021 jar
+Fri Apr 9 13:59:18 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 13:59:33 CDT 2021 jar
+Fri Apr 9 13:59:45 CDT 2021 testNist NC114M
+Fri Apr 9 14:08:09 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Fri Apr 9 14:08:11 CDT 2021 jar
+Fri Apr 9 14:08:17 CDT 2021 testNist NC114M
+Fri Apr 9 14:10:53 CDT 2021 testrigppnist NC114M
+Fri Apr 9 14:13:47 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 14:13:51 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 14:13:52 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 14:13:53 CDT 2021 src/TheCLI.java
+Fri Apr 9 14:13:54 CDT 2021 src/TestIntegration.java
+Fri Apr 9 14:14:16 CDT 2021 src/CobolPreprocessorParserTerminalNodeListener.java
+Fri Apr 9 14:14:21 CDT 2021 jar
+Fri Apr 9 14:14:31 CDT 2021 testNist NC114M
+Fri Apr 9 14:15:10 CDT 2021 testNist
+Fri Apr 9 14:21:25 CDT 2021 testNist NC174A
+Fri Apr 9 14:46:51 CDT 2021 testNist NC174A
+Fri Apr 9 14:47:10 CDT 2021 testNist NC211A
+Fri Apr 9 14:47:27 CDT 2021 testNist NC254A
+Fri Apr 9 14:47:45 CDT 2021 testNist SM203A
+Fri Apr 9 14:48:04 CDT 2021 testNist
+Fri Apr 9 14:59:45 CDT 2021 testNist NC176A
+Fri Apr 9 15:03:50 CDT 2021 src/CobolParser.g4
+Fri Apr 9 15:04:05 CDT 2021 jar
+Fri Apr 9 15:04:10 CDT 2021 testNist NC176A
+Fri Apr 9 15:04:51 CDT 2021 testNist
+Fri Apr 9 15:12:50 CDT 2021 testNist NC245A
+Fri Apr 9 15:14:44 CDT 2021 src/CobolParser.g4
+Fri Apr 9 15:14:56 CDT 2021 jar
+Fri Apr 9 15:15:01 CDT 2021 testNist NC245A
+Fri Apr 9 15:15:25 CDT 2021 testNist
+Fri Apr 9 15:25:13 CDT 2021 testNist NC303M
+Fri Apr 9 15:27:27 CDT 2021 src/CobolParser.g4
+Fri Apr 9 15:27:40 CDT 2021 jar
+Fri Apr 9 15:27:46 CDT 2021 testNist NC303M
+Fri Apr 9 15:28:13 CDT 2021 testNist
+Fri Apr 9 15:38:28 CDT 2021 testNist OBSQ3A
+Fri Apr 9 15:42:17 CDT 2021 src/CobolParser.g4
+Fri Apr 9 15:42:31 CDT 2021 jar
+Fri Apr 9 15:42:36 CDT 2021 testNist OBSQ3A
+Fri Apr 9 15:42:58 CDT 2021 testNist OBSQ4A
+Fri Apr 9 15:43:09 CDT 2021 testNist OBSQ5A
+Fri Apr 9 15:43:27 CDT 2021 testNist
+Fri Apr 9 16:06:41 CDT 2021 testNist RW104A
+Fri Apr 9 16:18:37 CDT 2021 src/CobolLexer.g4
+Fri Apr 9 16:18:39 CDT 2021 src/CobolParser.g4
+Fri Apr 9 16:18:53 CDT 2021 jar
+Fri Apr 9 16:19:00 CDT 2021 testNist RW104A
+Fri Apr 9 16:19:26 CDT 2021 testNist SM202A
+Fri Apr 9 16:32:04 CDT 2021 testrigppnist SM202A
+Fri Apr 9 16:37:16 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 16:37:20 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 16:37:21 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 16:37:22 CDT 2021 src/TheCLI.java
+Fri Apr 9 16:37:23 CDT 2021 src/TestIntegration.java
+Fri Apr 9 16:37:48 CDT 2021 jar
+Fri Apr 9 16:37:54 CDT 2021 testNist SM202A
+Fri Apr 9 16:41:32 CDT 2021 testrigppnist SM202A
+Fri Apr 9 16:45:21 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 16:45:25 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 16:45:26 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 16:45:27 CDT 2021 src/TheCLI.java
+Fri Apr 9 16:45:28 CDT 2021 src/TestIntegration.java
+Fri Apr 9 16:45:34 CDT 2021 testrigppnist SM202A
+Fri Apr 9 16:54:13 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 16:54:18 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 16:54:19 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 16:54:20 CDT 2021 src/TheCLI.java
+Fri Apr 9 16:54:21 CDT 2021 src/TestIntegration.java
+Fri Apr 9 16:54:38 CDT 2021 testrigppnist SM202A
+Fri Apr 9 16:56:22 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 16:56:27 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 16:56:28 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 16:56:29 CDT 2021 src/TheCLI.java
+Fri Apr 9 16:56:30 CDT 2021 src/TestIntegration.java
+Fri Apr 9 16:56:34 CDT 2021 testrigppnist SM202A
+Fri Apr 9 16:59:21 CDT 2021 jar
+Fri Apr 9 16:59:34 CDT 2021 testNist SQ109M
+Fri Apr 9 17:01:54 CDT 2021 src/CobolPreprocessorLexer.g4
+Fri Apr 9 17:01:57 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 17:02:01 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 17:02:02 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 17:02:03 CDT 2021 src/TheCLI.java
+Fri Apr 9 17:02:04 CDT 2021 src/TestIntegration.java
+Fri Apr 9 17:02:08 CDT 2021 jar
+Fri Apr 9 17:02:12 CDT 2021 testNist SQ109M
+Fri Apr 9 17:02:29 CDT 2021 testNist SQ110M
+Fri Apr 9 17:04:00 CDT 2021 src/CobolPreprocessorLexer.g4
+Fri Apr 9 17:04:03 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 17:04:07 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 17:04:08 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 17:04:09 CDT 2021 src/TheCLI.java
+Fri Apr 9 17:04:10 CDT 2021 src/TestIntegration.java
+Fri Apr 9 17:04:13 CDT 2021 jar
+Fri Apr 9 17:04:16 CDT 2021 testNist SQ110M
+Fri Apr 9 17:04:33 CDT 2021 testNist SQ128A
+Fri Apr 9 17:07:42 CDT 2021 src/CobolParser.g4
+Fri Apr 9 17:07:59 CDT 2021 jar
+Fri Apr 9 17:08:06 CDT 2021 testNist SQ128A
+Fri Apr 9 17:11:00 CDT 2021 src/CobolParser.g4
+Fri Apr 9 17:11:13 CDT 2021 jar
+Fri Apr 9 17:11:18 CDT 2021 testNist SQ128A
+Fri Apr 9 17:11:50 CDT 2021 testNist ST112M
+Fri Apr 9 17:12:20 CDT 2021 testNist ST132A
+Fri Apr 9 17:12:35 CDT 2021 testNist ST140A
+Fri Apr 9 17:14:52 CDT 2021 src/CobolParser.g4
+Fri Apr 9 17:15:05 CDT 2021 jar
+Fri Apr 9 17:15:12 CDT 2021 testNist ST140A
+Fri Apr 9 17:15:45 CDT 2021 testNist ST144A
+Fri Apr 9 17:16:37 CDT 2021 testLocal
+Fri Apr 9 17:17:29 CDT 2021 testNist
+Fri Apr 9 17:38:56 CDT 2021 testNist SM207A
+Fri Apr 9 17:43:44 CDT 2021 testrigppnist SM207A
+Fri Apr 9 17:47:32 CDT 2021 src/CobolPreprocessorParser.g4
+Fri Apr 9 17:47:36 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 9 17:47:37 CDT 2021 src/CharDataLineWrapper.java
+Fri Apr 9 17:47:38 CDT 2021 src/TheCLI.java
+Fri Apr 9 17:47:39 CDT 2021 src/TestIntegration.java
+Fri Apr 9 17:47:43 CDT 2021 jar
+Fri Apr 9 17:47:59 CDT 2021 testNist SM207A
+Fri Apr 9 17:49:36 CDT 2021 testNist
+Fri Apr 9 18:19:06 CDT 2021 testLocal
+Sat Apr 10 09:44:01 CDT 2021 testrigppnist
+Sat Apr 10 09:44:18 CDT 2021 testrigppnist SM202A
+Sat Apr 10 09:48:08 CDT 2021 src/CobolPreprocessorParser.g4
+Sat Apr 10 09:48:13 CDT 2021 src/TerminalNodeWrapper.java
+Sat Apr 10 09:48:14 CDT 2021 src/CharDataLineWrapper.java
+Sat Apr 10 09:48:16 CDT 2021 src/TheCLI.java
+Sat Apr 10 09:48:17 CDT 2021 src/TestIntegration.java
+Sat Apr 10 09:48:23 CDT 2021 testrigppnist SM202A
+Sat Apr 10 09:51:29 CDT 2021 src/CobolPreprocessorParser.g4
+Sat Apr 10 09:51:48 CDT 2021 src/CobolPreprocessorParser.g4
+Sat Apr 10 09:51:52 CDT 2021 src/TerminalNodeWrapper.java
+Sat Apr 10 09:51:53 CDT 2021 src/CharDataLineWrapper.java
+Sat Apr 10 09:51:54 CDT 2021 src/TheCLI.java
+Sat Apr 10 09:51:55 CDT 2021 src/TestIntegration.java
+Sat Apr 10 09:52:01 CDT 2021 testrigppnist SM202A
+Sat Apr 10 09:53:00 CDT 2021 src/CobolPreprocessorParser.g4
+Sat Apr 10 09:53:05 CDT 2021 src/TerminalNodeWrapper.java
+Sat Apr 10 09:53:05 CDT 2021 src/CharDataLineWrapper.java
+Sat Apr 10 09:53:06 CDT 2021 src/TheCLI.java
+Sat Apr 10 09:53:07 CDT 2021 src/TestIntegration.java
+Sat Apr 10 09:53:10 CDT 2021 testrigppnist SM202A
+Sat Apr 10 09:54:38 CDT 2021 jar
+Sat Apr 10 09:54:45 CDT 2021 testLocal
+Sat Apr 10 09:55:23 CDT 2021 testNist
+Sat Apr 10 10:23:29 CDT 2021 testNist SM202A
+Sat Apr 10 10:36:06 CDT 2021 ziplogs
+Sun Apr 11 14:45:11 CDT 2021 testrigppnist SM202A
+Sun Apr 11 14:48:12 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Apr 11 14:48:16 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 11 14:48:17 CDT 2021 src/CharDataLineWrapper.java
+Sun Apr 11 14:48:18 CDT 2021 src/TheCLI.java
+Sun Apr 11 14:48:19 CDT 2021 src/TestIntegration.java
+Sun Apr 11 14:48:49 CDT 2021 testrigppnist SM202A
+Sun Apr 11 14:51:44 CDT 2021 src/CobolPreprocessorParser.g4
+Sun Apr 11 14:51:49 CDT 2021 src/TerminalNodeWrapper.java
+Sun Apr 11 14:51:50 CDT 2021 src/CharDataLineWrapper.java
+Sun Apr 11 14:51:51 CDT 2021 src/TheCLI.java
+Sun Apr 11 14:51:52 CDT 2021 src/TestIntegration.java
+Sun Apr 11 14:53:22 CDT 2021 testrigppnist SM202A
+Sun Apr 11 15:06:30 CDT 2021 src/DirectoryPhrase.java
+Sun Apr 11 15:07:29 CDT 2021 src/DirectoryPhrase.java
+Sun Apr 11 15:10:20 CDT 2021 src/ReplaceClause.java
+Sun Apr 11 15:11:18 CDT 2021 src/ReplaceClause.java
+Sun Apr 11 15:11:27 CDT 2021 jar
+Sun Apr 11 15:11:56 CDT 2021 testNist SM202A
+Sun Apr 11 15:19:44 CDT 2021 testrigppx 9012
+Sun Apr 11 15:21:04 CDT 2021 testLocalx 9012
+Sun Apr 11 15:34:33 CDT 2021 src/CompilerDirectingStatementListener.java
+Sun Apr 11 15:34:34 CDT 2021 src/TestIntegration.java
+Sun Apr 11 15:34:38 CDT 2021 jar
+Sun Apr 11 15:35:07 CDT 2021 testLocalx 9012
+Sun Apr 11 15:49:44 CDT 2021 src/ReplaceClause.java
+Sun Apr 11 15:49:47 CDT 2021 jar
+Sun Apr 11 15:49:55 CDT 2021 testLocalx 9012
+Sun Apr 11 16:25:48 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:25:49 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:25:52 CDT 2021 jar
+Sun Apr 11 16:25:58 CDT 2021 testLocalx 9012
+Sun Apr 11 16:26:52 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:26:53 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:26:56 CDT 2021 jar
+Sun Apr 11 16:27:00 CDT 2021 testLocalx 9012
+Sun Apr 11 16:39:53 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:39:54 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:39:57 CDT 2021 jar
+Sun Apr 11 16:40:02 CDT 2021 testLocalx 9012
+Sun Apr 11 16:43:35 CDT 2021 src/TheCLI.java
+Sun Apr 11 16:43:36 CDT 2021 src/TestIntegration.java
+Sun Apr 11 16:43:40 CDT 2021 jar
+Sun Apr 11 16:43:43 CDT 2021 testLocalx 9012
+Sun Apr 11 16:44:31 CDT 2021 testLocal
+Sun Apr 11 16:45:10 CDT 2021 testNist
+Sun Apr 11 17:01:36 CDT 2021 testNist SM206A
+Sun Apr 11 17:02:00 CDT 2021 testNist SM208A
+Sun Apr 11 17:29:18 CDT 2021 src/TheCLI.java
+Sun Apr 11 17:29:19 CDT 2021 src/TestIntegration.java
+Sun Apr 11 17:29:25 CDT 2021 jar
+Sun Apr 11 17:29:35 CDT 2021 testNist SM206A
+Sun Apr 11 17:34:41 CDT 2021 src/TheCLI.java
+Sun Apr 11 17:34:42 CDT 2021 src/TestIntegration.java
+Sun Apr 11 17:34:45 CDT 2021 jar
+Sun Apr 11 17:34:50 CDT 2021 testNist SM206A
+Sun Apr 11 17:40:09 CDT 2021 src/TheCLI.java
+Sun Apr 11 17:40:27 CDT 2021 src/TheCLI.java
+Sun Apr 11 17:40:28 CDT 2021 src/TestIntegration.java
+Sun Apr 11 17:40:35 CDT 2021 jar
+Sun Apr 11 17:40:40 CDT 2021 testNist SM206A
+Sun Apr 11 17:41:52 CDT 2021 testNist SM207A
+Sun Apr 11 17:42:05 CDT 2021 testLocal
+Sun Apr 11 17:42:35 CDT 2021 testNist
+Sun Apr 11 18:07:08 CDT 2021 ziplogs
+Mon Apr 12 17:27:56 CDT 2021 testNist SM205A
+Mon Apr 12 17:28:20 CDT 2021 testNist NC205A
+Mon Apr 12 17:28:35 CDT 2021 testNist NC215A
+Mon Apr 12 17:30:53 CDT 2021 testrigppnist NC215A
+Mon Apr 12 17:31:14 CDT 2021 testrignist NC215A
+Mon Apr 12 17:47:26 CDT 2021 src/CobolParser.g4
+Mon Apr 12 17:50:43 CDT 2021 testNist NC215A
+Mon Apr 12 17:51:02 CDT 2021 jar
+Mon Apr 12 17:51:08 CDT 2021 testNist NC215A
+Mon Apr 12 17:52:15 CDT 2021 testNist SM101A
+Mon Apr 12 17:53:10 CDT 2021 testNist SQ401M
+Mon Apr 12 18:05:20 CDT 2021 testNist SQ401M
+Mon Apr 12 18:06:48 CDT 2021 testLocal
+Mon Apr 12 18:07:27 CDT 2021 testNist

@@ -31,10 +31,10 @@
 003100     XXXXX082.                                                    SM2034.2
 003200 OBJECT-COMPUTER.                                                 SM2034.2
 003300     XXXXX083.                                                    SM2034.2
-003400ASPECIAL-NAMES.                                        COPY K3SNB SM2034.2
-003500A             REPLACING DUMMY-SW-1 BY SW-1                        SM2034.2
-003600A                       DUMMY-ON BY SWITCH-ON                     SM2034.2
-003700A                       DUMMY-OFF BY SWITCH-OFF.                  SM2034.2
+003400 SPECIAL-NAMES.                                        COPY K3SNB SM2034.2
+003500              REPLACING DUMMY-SW-1 BY SW-1                        SM2034.2
+003600                        DUMMY-ON BY SWITCH-ON                     SM2034.2
+003700                        DUMMY-OFF BY SWITCH-OFF.                  SM2034.2
 003800 INPUT-OUTPUT SECTION.                                            SM2034.2
 003900                                                                  SM2034.2
 004000                                                                  SM2034.2
@@ -73,10 +73,10 @@
 007300 01  DUMMY-RECORD PICTURE X(120).                                 SM2034.2
 007400 FD  TEST-FILE                                                    SM2034.2
 007500     LABEL RECORD STANDARD                                        SM2034.2
-007600C    VALUE OF                                                     SM2034.2
-007700C    XXXXX074                                                     SM2034.2
-007800C    IS                                                           SM2034.2
-007900C    XXXXX077                                                     SM2034.2
+007600     VALUE OF                                                     SM2034.2
+007700     XXXXX074                                                     SM2034.2
+007800     IS                                                           SM2034.2
+007900     XXXXX077                                                     SM2034.2
 008000G    XXXXX069                                                     SM2034.2
 008100     DATA RECORD IS PROOF-REC.                                    SM2034.2
 008200 01  PROOF-REC.                                                   SM2034.2
@@ -306,15 +306,15 @@
 030600     MOVE CCVS-E-3 TO DUMMY-RECORD. PERFORM WRITE-LINE.           SM2034.2
 030700 WRITE-LINE.                                                      SM2034.2
 030800     ADD 1 TO RECORD-COUNT.                                       SM2034.2
-030900Y    IF RECORD-COUNT GREATER 50                                   SM2034.2
-031000Y        MOVE DUMMY-RECORD TO DUMMY-HOLD                          SM2034.2
-031100Y        MOVE SPACE TO DUMMY-RECORD                               SM2034.2
-031200Y        WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  SM2034.2
-031300Y        MOVE CCVS-C-1 TO DUMMY-RECORD PERFORM WRT-LN             SM2034.2
-031400Y        MOVE CCVS-C-2 TO DUMMY-RECORD PERFORM WRT-LN 2 TIMES     SM2034.2
-031500Y        MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          SM2034.2
-031600Y        MOVE DUMMY-HOLD TO DUMMY-RECORD                          SM2034.2
-031700Y        MOVE ZERO TO RECORD-COUNT.                               SM2034.2
+030900     IF RECORD-COUNT GREATER 50                                   SM2034.2
+031000         MOVE DUMMY-RECORD TO DUMMY-HOLD                          SM2034.2
+031100         MOVE SPACE TO DUMMY-RECORD                               SM2034.2
+031200         WRITE DUMMY-RECORD AFTER ADVANCING PAGE                  SM2034.2
+031300         MOVE CCVS-C-1 TO DUMMY-RECORD PERFORM WRT-LN             SM2034.2
+031400         MOVE CCVS-C-2 TO DUMMY-RECORD PERFORM WRT-LN 2 TIMES     SM2034.2
+031500         MOVE HYPHEN-LINE TO DUMMY-RECORD PERFORM WRT-LN          SM2034.2
+031600         MOVE DUMMY-HOLD TO DUMMY-RECORD                          SM2034.2
+031700         MOVE ZERO TO RECORD-COUNT.                               SM2034.2
 031800     PERFORM WRT-LN.                                              SM2034.2
 031900 WRT-LN.                                                          SM2034.2
 032000     WRITE    DUMMY-RECORD AFTER ADVANCING 1 LINES.               SM2034.2

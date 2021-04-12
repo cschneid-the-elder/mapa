@@ -48,9 +48,9 @@ Syntax: <code>java -jar CallTree.jar -help</code>
 public class TestIntegration{
 
 public static final Logger LOGGER = Logger.getLogger(TestIntegration.class.getName());
-public static ArrayList<CopyStatementContextWrapper> copiesForFile = new ArrayList<>(); //TODO needed?
 public static ArrayList<DDNode> dataNodes = new ArrayList<>();
 public static TheCLI CLI = null;
+public static File baseDir = null; // keep all temp files contained here
 
 public static void main(String[] args) throws Exception {
 
@@ -72,7 +72,7 @@ public static void main(String[] args) throws Exception {
 	}
 
 	CLI = new TheCLI(args);
-	File baseDir = newTempDir(); // keep all temp files contained here
+	baseDir = newTempDir(); // keep all temp files contained here
 	String fileName = null;
 	ArrayList<CallWrapper> allTheCalledNodes = new ArrayList<>();
 	Boolean pass = true;
@@ -87,12 +87,14 @@ public static void main(String[] args) throws Exception {
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 		String initFileNm = new File(aFileName).getName();
 
-		idDivFound = lookForIdDiv(aFileName);
+		fileName = copyWithout73to80(aFileName, baseDir, initFileNm);
+		idDivFound = lookForIdDiv(fileName);
 		if (!idDivFound) {
 			LOGGER.info(aFileName + " not COBOL?");
 			continue;
 		}
-		fileName = processCDS(aFileName, baseDir);
+		fileName = CLI.copyCompressingContinuations(fileName, baseDir, initFileNm);
+		fileName = processCDS(fileName, baseDir);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
 		if (CLI.unitTest) {
@@ -157,6 +159,10 @@ public static void main(String[] args) throws Exception {
 		return null;
 	}
 
+	/**
+	This is an interpreter for Compiler Directing Statements, and thus is
+	a bit strange.  And long.  Because there is a state machine therein.
+	*/
 	@SuppressWarnings({"fallthrough"})
 	public static String processCDS(
 			String aFileName
@@ -213,6 +219,7 @@ public static void main(String[] args) throws Exception {
 			LOGGER.finest("writing to " + tmp.getPath());
 			PrintWriter out = new PrintWriter(tmp);
 			Boolean justWriteTheRest = false;
+			Boolean butDontWriteThisOne = false;
 			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
 			ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
 			ReplaceStatement currReplace = null;
@@ -311,7 +318,7 @@ public static void main(String[] args) throws Exception {
 							if (truthiness.peek() == null || truthiness.peek()) {
 								((CopyStatement)cds).apply(src, out, inLineSB.toString());
 								justWriteTheRest = true;
-								inLineSB.delete(0, inLineSB.length());
+								butDontWriteThisOne = true;
 							} else {
 								if (inLineSB.length() > 6) {
 									inLineSB.setCharAt(6, '*');
@@ -344,6 +351,9 @@ public static void main(String[] args) throws Exception {
 				if (nbCopies == 0 
 				&& (src.getLineNumber() >= replaceStart && src.getLineNumber() <= replaceStop)) {
 					LOGGER.finest("not writing |" + inLine + "| as it seems to be part of a REPLACE [OFF] statement");
+				} else if (butDontWriteThisOne) {
+					LOGGER.finest("not writing |" + inLine + "| as it has been processed by a COPY statement");
+					butDontWriteThisOne = false;
 				} else {
 					LOGGER.finest("writing  |" + inLine + "|");
 					out.println(inLine);
@@ -379,6 +389,7 @@ public static void main(String[] args) throws Exception {
 	public static Boolean lookForIdDiv(String initFileName) throws Exception {
 		LOGGER.fine("lookForIdDiv");
 		CharStream cs = fromFileName(initFileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -407,6 +418,7 @@ public static void main(String[] args) throws Exception {
 		LOGGER.fine("lookForCompilerDirectingStatements");
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
@@ -425,99 +437,6 @@ public static void main(String[] args) throws Exception {
 		LOGGER.finest("compDirStmts: " + compDirStmts);
 		LOGGER.finest("compOptDefines: " + compOptDefines);
 
-	}
-
-	public static String lookForReplaceStatements(
-						String fileName
-						, File baseDir
-						, String initFileNm
-						) throws Exception {
-		LOGGER.fine("lookForReplacementStatements");
-		ArrayList<ReplaceStatementContextWrapper> replaces = new ArrayList<>();
-
-		CharStream cs = fromFileName(fileName);  //load the file
-		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
-		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
-		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
-
-		ParseTree tree = parser.startRule(); // parse the content and get the tree
-
-		ParseTreeWalker walker = new ParseTreeWalker();
-
-		ReplaceListener listener = new ReplaceListener(replaces);
-
-		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-
-		walker.walk(listener, tree);
-
-		LOGGER.finest("replaces: " + replaces);
-
-		fileName = rewriteApplyingReplaceStatements(replaces, fileName, baseDir, initFileNm);
-
-		return fileName;
-	}
-
-	public static String rewriteApplyingReplaceStatements(
-						ArrayList<ReplaceStatementContextWrapper> replaces
-						, String fileName
-						, File baseDir
-						, String initFileNm
-						) throws IOException {
-		LOGGER.fine("rewriteApplyingReplaceStatements");
-		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
-		CLI.setPosixAttributes(tmp);
-		if (CLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-
-		PrintWriter out = new PrintWriter(tmp);
-		String inLine = src.readLine();
-
-		LOGGER.finer("Applying REPLACE statements to " + fileName);
-
-		/**
-			Here we apply the REPLACE statements.
-		*/	
-		while (inLine != null) {
-			for (ReplaceStatementContextWrapper repl: replaces) {
-				while (repl.startLine() <= src.getLineNumber() 
-					&& src.getLineNumber() <= repl.endLine()
-					&& inLine != null) {
-						inLine = src.readLine();
-						//System.out.println("eating line " + src.getLineNumber());
-				}
-			}
-			out.println(applyReplaceStatements(replaces, inLine, src.getLineNumber()));
-			inLine = src.readLine();
-		}
-
-		src.close();
-		out.close();
-		fileName = tmp.getPath();
-		return fileName;
-
-	}
-
-	public static String applyReplaceStatements(
-						ArrayList<ReplaceStatementContextWrapper> replaces
-						, String line
-						, int lineNb) {
-		LOGGER.fine("applyReplaceStatements");
-		String newLine = new String(line);
-		int i = 0;
-
-		for (i = 0; i < replaces.size(); i++) {
-			if (replaces.get(i).isReplaceByStatement()) {
-				if (lineNb > replaces.get(i).startLine()) {
-					if (i < replaces.size() - 1 && lineNb < replaces.get(i+1).startLine()) {
-						newLine = replaces.get(i).applyTo(newLine);
-					}
-				}
-			}
-		}
-		return newLine;
 	}
 
 	/**
@@ -578,6 +497,7 @@ public static void main(String[] args) throws Exception {
 
 		LOGGER.finer("lexing " + fileName);
 
+		CobolLexer.testRig = false;
 		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 
@@ -664,16 +584,15 @@ public static void main(String[] args) throws Exception {
 	}
 
 	/**
-	Create a copy of the original file with a '\n' prepended in order
-	to make the CLASSIC_LINE_NUMBER lexer token match.
+	Remove the troublesome columns 73 - 80 if they are present.
 	*/
-	public static String copyWithBOL(
+	public static String copyWithout73to80(
 			String fileName
 			, File baseDir
 			, String initFileNm
 			) throws IOException {
 		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-", "-cbl", baseDir);
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-without73to80-", "-cbl", baseDir);
 		CLI.setPosixAttributes(tmp);
 		if (CLI.saveTemp) {
 		} else {
@@ -682,13 +601,227 @@ public static void main(String[] args) throws Exception {
 
 		PrintWriter out = new PrintWriter(tmp);
 		List<String> list = Files.readAllLines(Paths.get(fileName));
-		out.println('\n');
-		for (String line: list) out.println(line);
+		for (String line: list) {
+			int length = line.length();
+			String outLine = new String(line);
+			if (length > 72) {
+				outLine = line.substring(0, 72);
+			}
+			out.println(outLine);
+			LOGGER.finest("line  in = |" + line + "|");
+			LOGGER.finest("line out = |" + outLine + "|");
+		}
 		out.close();
 		return tmp.getAbsolutePath();
 
 	}
 
+	/**
+	The intent of this method is to compress some of the syntactically correct
+	but awful constructs such as...
+
+	000028     ADD 
+	000029                                                                 1
+	000030-                                                                0
+	000031
+	000032     TO
+	000033                                                                 C
+	000034-                                                                O
+	000035-                                                                U
+	000036-                                                                N
+	000037-                                                                T
+	000038-                                                                E
+	000039-                                                                R
+	000040
+	000041
+	000042                                                               DIS
+	000043-                                                             PLAY 
+	000044     COUNTER
+
+
+	*/
+	/*
+	public static String copyCompressingContinuations(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			) throws IOException {
+		LOGGER.finest(" copyCompressingContinuations()");
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
+
+		lookForTerminalNodes(fileName, tNodes);
+
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		StringBuilder sb = new StringBuilder();
+		TerminalNodeWrapper token = null;
+		Boolean newline = false;
+		Boolean continuation = false;
+		long prevLine = -1;
+		int prevTextLength = -1;
+		long prevPosn = -1;
+
+		for (int i = 0; i < tNodes.size(); i++) {
+			token = tNodes.get(i);
+			TestIntegration.LOGGER.finest(" token = |" + token + "|");
+			switch(token.getType()) {
+				case CobolPreprocessorParser.NEWLINE:
+					newline = true;
+					break;
+				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION: // intentional fall-through!
+					continuation = true;
+					break;
+				case Token.EOF:
+					break;
+				default:
+					if (newline && continuation) {
+						if (token.getText().startsWith("\"")) {
+							sb.append(token.getText().substring(1));
+						} else {
+							sb.append(token.getText());
+						}
+					} else if (newline) {
+						sb.append("\n");
+						sb.append(padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					} else if (token.getLine() == prevLine) {
+						long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+						sb.append(padLeft(token.getText(), token.getTextLength() + extraPadding));
+					} else {
+						sb.append(padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					}
+					prevLine = token.getLine();
+					prevTextLength = token.getTextLength();
+					prevPosn = token.getPosn();
+					newline = false;
+					continuation = false;
+			}
+		}
+
+		out.println(sb);
+		out.close();
+		return tmp.getAbsolutePath();
+
+	}
+	*/
+	/*
+	public static String copyCompressingContinuations(
+			String fileName
+			, File baseDir
+			, String initFileNm
+			) throws IOException {
+		ArrayList<CharDataLineWrapper> charDataLines = new ArrayList<>();
+
+		lookForCharDataLines(fileName, charDataLines);
+
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		String inLine = src.readLine();
+		int i = 0;
+		int currLineNb = -1;
+
+		while (inLine != null) {
+			currLineNb = src.getLineNumber();
+			while (i < charDataLines.size() && charDataLines.get(i).getLine() < currLineNb) {
+				i++;
+			}
+			if (i < charDataLines.size() && charDataLines.get(i).getLine() == currLineNb) {
+				out.println(padLeft(charDataLines.get(i).getText(), charDataLines.get(i).getPosn()));
+				while (inLine != null && src.getLineNumber() <= charDataLines.get(i).getLastLine()) {
+					inLine = src.readLine();
+				}
+			} else {
+				out.println(inLine);
+				inLine = src.readLine();
+			}
+		}
+		out.close();
+		return tmp.getAbsolutePath();
+
+	}
+	*/
+	/*
+	public static String padLeft(String aString, long length) {
+		if (aString.length() >= length) {
+			return aString;
+		}
+		StringBuilder sb = new StringBuilder();
+		while (sb.length() < length - aString.length()) {
+			sb.append(' ');
+		}
+		sb.append(aString);
+
+		return sb.toString();
+	}
+
+	public static void lookForTerminalNodes(
+			String fileName
+			, ArrayList<TerminalNodeWrapper> tNodes
+			) throws IOException {
+		LOGGER.fine("lookForTerminalNodes");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserTerminalNodeListener listener = 
+			new CobolPreprocessorParserTerminalNodeListener(tNodes);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("tNodes: " + tNodes);
+
+	}
+
+	public static void lookForCharDataLines(
+			String fileName
+			, ArrayList<CharDataLineWrapper> charDataLines
+			) throws IOException {
+		LOGGER.fine("lookForCharDataLines");
+
+		CharStream aCharStream = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CobolPreprocessorParserCharDataLineListener listener = 
+			new CobolPreprocessorParserCharDataLineListener(charDataLines);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		LOGGER.finest("charDataLines: " + charDataLines);
+
+	}
+	*/
 	/**
 	Create a directory to hold temporary files used in processing.  This way,
 	they're all confined together and can be easily disposed of if the

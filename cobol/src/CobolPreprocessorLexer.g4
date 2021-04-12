@@ -17,25 +17,28 @@
 
 lexer grammar CobolPreprocessorLexer;
 
+@lexer::members {
+	/*
+	This Boolean is set to true to make the ANTLR testrig work.  The
+	file being parsed is rewritten without columns 73 - 80 if it is
+	being processed via an application.  Under those circumstances,
+	the lexing code must set this variable to false.
+	*/
+	public static Boolean testRig = true; 
+}
+
 // lexer rules --------------------------------------------------------------------------------
 
 CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
+CLASSIC_CONTINUATION : '-' {getCharPositionInLine()==7}?;
 CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
-CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine()==80}? -> skip;
+CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {testRig && getCharPositionInLine()==80}? -> skip;
 
 ID_DIVISION_TAG : ID DIVISION {getCharPositionInLine()==18}?;
 
-NIST_SEMI_COMMENT_A : BOL TEXT TEXT TEXT TEXT TEXT TEXT A {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_B : BOL TEXT TEXT TEXT TEXT TEXT TEXT B {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_C : BOL TEXT TEXT TEXT TEXT TEXT TEXT C {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_G : BOL TEXT TEXT TEXT TEXT TEXT TEXT G TEXT* {getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_J : BOL TEXT TEXT TEXT TEXT TEXT TEXT J TEXT* {getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_P : BOL TEXT TEXT TEXT TEXT TEXT TEXT P {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_S : BOL TEXT TEXT TEXT TEXT TEXT TEXT S {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_T : BOL TEXT TEXT TEXT TEXT TEXT TEXT T {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_U : BOL TEXT TEXT TEXT TEXT TEXT TEXT U {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_X : BOL TEXT TEXT TEXT TEXT TEXT TEXT X {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_Y : BOL TEXT TEXT TEXT TEXT TEXT TEXT Y {getCharPositionInLine() == 7}? -> skip;
+NIST_FLAG1 : (A | B | C | F | H | I | P | S | T | U | X | Y) {getCharPositionInLine() == 7}? -> skip;
+NIST_FLAG2 : (G | J) {getCharPositionInLine() == 7}? ;
+NIST_IGNORED_LINE : TEXT TEXT TEXT TEXT TEXT TEXT (NIST_FLAG1 | NIST_FLAG2) TEXT* {getCharPositionInLine() < 73}? -> skip;
 
 // keywords
 ABD : A B D;
@@ -145,6 +148,7 @@ LANGUAGE : L A N G U A G E;
 LAX : L A X;
 LAXPERF : L A X P E R F;
 LC : L C;
+LEADING : L E A D I N G;
 LEASM : L E A S M;
 LENGTH : L E N G T H;
 LIB : L I B;
@@ -392,6 +396,7 @@ TERMINAL : T E R M I N A L;
 TEST : T E S T;
 THREAD : T H R E A D;
 TITLE : T I T L E;
+TRAILING : T R A I L I N G;
 TRIG : T R I G;
 TRUNC : T R U N C;
 UE : U E;
@@ -436,7 +441,6 @@ X_CHAR : X;
 
 
 // symbols
-//COLONCHAR : ':';
 COMMENTTAG : '*>';
 COMMACHAR : ',';
 COMPILER_DIRECTIVE_TAG : '>>' -> pushMode(COMPILER_DIRECTIVE_MODE);
@@ -445,8 +449,23 @@ DOUBLEEQUALCHAR : '==';
 
 
 // literals
-NONNUMERICLITERAL : STRINGLITERAL | HEXNUMBER | BINNUMBER {getCharPositionInLine() > 7}? ;
-NUMERICLITERAL : [0-9]+ {getCharPositionInLine() > 7}? ;
+NONNUMERICLITERAL
+   : STRINGLITERAL | HEXNUMBER | BINNUMBER
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
+
+NUMERICLITERAL
+   : [0-9]+
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
 
 fragment BINNUMBER :
 	B '"' [01]+ '"'
@@ -463,14 +482,38 @@ fragment STRINGLITERAL :
 	| '\'' (~['\n\r] | '\'\'' | '"')* '\''
 ;
 
-IDENTIFIER : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)* {getCharPositionInLine() < 73}? ;
-FILENAME : [a-zA-Z0-9]+ '.' [a-zA-Z0-9]+ {getCharPositionInLine() < 73}? ;
-PSEUDOTEXTIDENTIFIER : [:a-zA-Z0-9]+ ([-_]+ [:a-zA-Z0-9]*)* {getCharPositionInLine() < 73}? ;
+IDENTIFIER
+   : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)*
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
+
+FILENAME
+   : [a-zA-Z0-9]+ '.' [a-zA-Z0-9]+
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
+
+PSEUDOTEXTIDENTIFIER
+   : [:a-zA-Z0-9]+ ([-_]+ [:a-zA-Z0-9]*)*
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
+
 
 
 // whitespace, line breaks, comments, ...
 NEWLINE : '\r'? '\n';
-MULTINEWLINE : ('\n' | '\r')+ -> skip;
+MULTINEWLINE : ('\n' | '\r')+ -> type(NEWLINE);
 COMMENTLINE : COMMENTTAG ~('\n' | '\r')* -> channel(HIDDEN);
 WS : [ \t\f;]+ -> channel(HIDDEN);
 TEXT : ~('\n' | '\r');
@@ -515,7 +558,7 @@ mode COMPILER_DIRECTIVE_MODE;
 
 CD_NEWLINE : NEWLINE ->type(NEWLINE),popMode;
 CD_WS : WS ->channel(HIDDEN);
-CD_CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine()==80}? -> skip;
+CD_CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {testRig && getCharPositionInLine()==80}? -> skip;
 
 ASTERISKCHAR : '*';
 EQUALCHAR : '=';
@@ -568,4 +611,54 @@ WHEN : W H E N;
 CD_NONNUMERICLITERAL : NONNUMERICLITERAL ->type(NONNUMERICLITERAL);
 CD_NUMERICLITERAL : NUMERICLITERAL ->type(NUMERICLITERAL);
 CD_IDENTIFIER : IDENTIFIER ->type(IDENTIFIER);
+
+mode REPLACE_MODE;
+
+REPLACE_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+REPLACE_CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
+REPLACE_NEWLINE : NEWLINE ->type(NEWLINE);
+REPLACE_WS : WS ->channel(HIDDEN);
+REPLACE_CONTINUATION : '-' {getCharPositionInLine()==7}?;
+REPLACE_CLASSIC_EOL_COMMENT : CLASSIC_EOL_COMMENT {testRig && getCharPositionInLine()==80}? -> skip;
+REPLACE_BY : BY ->type(BY);
+REPLACE_DOT : DOT ->type(DOT), popMode;
+REPLACE_DOUBLEEQUALCHAR : DOUBLEEQUALCHAR ->type(DOUBLEEQUALCHAR), pushMode(PSEUDOTEXT_MODE);
+REPLACE_TEXT
+   : ([a-zA-Z0-9!@#$%^&*)(+,;<>?\-"'_]+)
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ;
+
+//REPLACE_TEXT : ~('\n' | '\r' | '\t' | '\f' | ' ' | '.')+? {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}?;
+//REPLACE_NONNUMERICLITERAL : NONNUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NONNUMERICLITERAL);
+//REPLACE_NUMERICLITERAL : NUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NUMERICLITERAL);
+//REPLACE_IDENTIFIER : IDENTIFIER {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(IDENTIFIER);
+//REPLACE_PSEUDOTEXTIDENTIFIER : ([a-zA-Z0-9)(+\-"'_]+) {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(PSEUDOTEXTIDENTIFIER);
+
+mode PSEUDOTEXT_MODE;
+
+PSEUDOTEXT_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+PSEUDOTEXT_NEWLINE : NEWLINE ->channel(HIDDEN);
+PSEUDOTEXT_WS : WS ->channel(HIDDEN);
+PSEUDOTEXT_CONTINUATION : '-' {getCharPositionInLine()==7}? -> skip;
+PSEUDOTEXT_CLASSIC_EOL_COMMENT : CLASSIC_EOL_COMMENT {testRig && getCharPositionInLine()==80}? -> skip;
+//PSEUDOTEXT_NONNUMERICLITERAL : NONNUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NONNUMERICLITERAL);
+//PSEUDOTEXT_NUMERICLITERAL : NUMERICLITERAL {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(NUMERICLITERAL);
+//PSEUDOTEXT_IDENTIFIER : IDENTIFIER {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(IDENTIFIER);
+PSEUDOTEXT_DOUBLEEQUALCHAR : DOUBLEEQUALCHAR ->type(DOUBLEEQUALCHAR), popMode;
+PSEUDOTEXT_PSEUDOTEXTIDENTIFIER
+   : ([a-zA-Z0-9!@#$%^&*)(+,;:.<>?\-"'_]+)
+   {
+    (getCharPositionInLine() > 7 && !testRig)
+    ||
+    (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+   }? 
+   ->type(PSEUDOTEXTIDENTIFIER)
+   ;
+
+//PSEUDOTEXT_PSEUDOTEXTIDENTIFIER : ~('\n' | '\r' | '\t' | '\f' | ' ')+? {getCharPositionInLine() > 7 && getCharPositionInLine() < 73}? ->type(PSEUDOTEXTIDENTIFIER);
+
 
