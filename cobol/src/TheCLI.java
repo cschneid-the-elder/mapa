@@ -237,9 +237,7 @@ public class TheCLI{
 			, String initFileNm
 			) throws IOException {
 		TestIntegration.LOGGER.finest(this.myName + " copyCompressingContinuations()");
-		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
-
-		this.lookForTerminalNodes(fileName, tNodes);
+		ArrayList<TerminalNodeWrapper> tNodes = this.lookForTerminalNodes(fileName);
 
 		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
 		this.setPosixAttributes(tmp);
@@ -278,7 +276,6 @@ public class TheCLI{
 
 	Global.
 	*/
-	@SuppressWarnings({"fallthrough"})
 	public String writeOutTerminalNodes(
 			File tmp
 			, ArrayList<TerminalNodeWrapper> tNodes
@@ -301,9 +298,7 @@ public class TheCLI{
 				case CobolPreprocessorParser.NEWLINE:
 					newline = true;
 					break;
-				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
-				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
-				case CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.CLASSIC_CONTINUATION:
 					continuation = true;
 					break;
 				case Token.EOF:
@@ -356,12 +351,12 @@ public class TheCLI{
 	instances that comprise source code text.  This was the most convenient
 	place to locate the code.  Global.
 	*/
-	public void lookForTerminalNodes(
+	public ArrayList<TerminalNodeWrapper> lookForTerminalNodes(
 			String fileName
-			, ArrayList<TerminalNodeWrapper> tNodes
 			) throws IOException {
 		TestIntegration.LOGGER.fine(this.myName + " lookForTerminalNodes()");
 
+		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
 		CharStream aCharStream = fromFileName(fileName);  //load the file
 		CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
@@ -393,6 +388,7 @@ public class TheCLI{
 		}
 		TestIntegration.LOGGER.finest("tNodes: " + tNodes);
 
+		return tNodes;
 	}
 
 	public void applyReplacingPhrase(
@@ -406,8 +402,7 @@ public class TheCLI{
 		TestIntegration.LOGGER.finest(" replacement = " + replacement);
 
 		StringBuilder outLine = new StringBuilder();
-		ArrayList<TerminalNodeWrapper> copyFileNodes1 = new ArrayList<>();
-		this.lookForTerminalNodes(copyFile, copyFileNodes1);
+		ArrayList<TerminalNodeWrapper> copyFileNodes1 = this.lookForTerminalNodes(copyFile);
 		CopyOnWriteArrayList<TerminalNodeWrapper> copyFileNodes = new CopyOnWriteArrayList<>(copyFileNodes1);
 		int matchedIndex = 0;
 

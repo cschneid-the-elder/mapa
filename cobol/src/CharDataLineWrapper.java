@@ -168,7 +168,6 @@ class CharDataLineWrapper {
 		this.buildConcatenatedText();
 	}
 
-	@SuppressWarnings({"fallthrough"})
 	private void buildConcatenatedText() {
 		TerminalNodeWrapper token = null;
 		Boolean newline = false;
@@ -181,9 +180,7 @@ class CharDataLineWrapper {
 				case CobolPreprocessorParser.NEWLINE:
 					newline = true;
 					break;
-				case CobolPreprocessorParser.CLASSIC_CONTINUATION: // intentional fall-through!
-				case CobolPreprocessorParser.REPLACE_CONTINUATION: // intentional fall-through!
-				case CobolPreprocessorParser.PSEUDOTEXT_CONTINUATION: // intentional fall-through!
+				case CobolPreprocessorParser.CLASSIC_CONTINUATION:
 					continuation = true;
 					break;
 				default:

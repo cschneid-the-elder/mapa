@@ -308,7 +308,6 @@ execSqlImsStatement
 
 copyStatement
    : COPY copySource (NEWLINE* (replacingPhrase | SUPPRESS))* NEWLINE* DOT
-//   : COPY copySource (NEWLINE* (directoryPhrase | familyPhrase | replacingPhrase | SUPPRESS))* NEWLINE* DOT
    ;
 
 copySource
@@ -338,7 +337,6 @@ replaceOffStatement
    ;
 
 replaceClause
-//   : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement
    : (LEADING | TRAILING)? replaceable NEWLINE* BY NEWLINE* replacement (NEWLINE* directoryPhrase)? (NEWLINE* familyPhrase)?
    ;
 
@@ -360,20 +358,6 @@ replacement
    : literal | cobolWord | pseudoText | charDataLine
    ;
 
-/*
-replaceText
-   : (REPLACE_TEXT (NEWLINE REPLACE_CONTINUATION REPLACE_TEXT)*)+
-   ;
-
-replaceable
-   : replaceText | pseudoText
-   ;
-
-replacement
-   : replaceText | pseudoText
-   ;
-*/
-
 // eject statement
 
 ejectStatement
@@ -393,12 +377,6 @@ titleStatement
    ;
 
 // literal ----------------------------------
-
-/*
-pseudoText
-   : DOUBLEEQUALCHAR PSEUDOTEXTIDENTIFIER* (NEWLINE PSEUDOTEXT_CONTINUATION PSEUDOTEXTIDENTIFIER+)* DOUBLEEQUALCHAR
-   ;
-*/
 
 pseudoText
    : DOUBLEEQUALCHAR charData? DOUBLEEQUALCHAR
