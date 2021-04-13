@@ -256,12 +256,12 @@ public static void main(String[] args) throws Exception {
 						}
 					}
 					inLine = inLineSB.toString();
-					if (nbCopies == 0) {
+					/*if (nbCopies == 0) {
 						if (currReplace == null) {
 						} else {
 							inLine = currReplace.applyTo(inLineSB.toString());
 						}
-					}
+					}*/
 				} else {
 					/*
 					State machine for interpreting compiler directing statements.
@@ -329,9 +329,7 @@ public static void main(String[] args) throws Exception {
 						case STMT_REPLACE:
 							if (nbCopies == 0) {
 								if (truthiness.peek() == null || truthiness.peek()) {
-									currReplace = (ReplaceStatement)cds;
-									replaceStart = cds.getLine();
-									replaceStop = cds.getEndLine();
+									((ReplaceStatement)cds).setEnabled(true);
 								}
 							}
 							break;
