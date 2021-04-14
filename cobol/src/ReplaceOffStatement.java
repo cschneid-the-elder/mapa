@@ -9,12 +9,21 @@ public class ReplaceOffStatement implements CompilerDirectingStatement {
 	//private int line = -1;
 	private int startLine = -1;
 	private int endLine = -1;
+	private Boolean enabled = false;
 
 	ReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) {
 		this.ctx = ctx;
 		//this.line = this.ctx.REPLACE().getSymbol().getLine();
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Boolean isEnabled() {
+		return this.enabled;
 	}
 
 	public int getLine() {

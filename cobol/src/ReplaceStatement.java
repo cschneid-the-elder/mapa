@@ -17,6 +17,8 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 	private ArrayList<ArrayList<TerminalNodeWrapper>> replacement = new ArrayList<>();
 	private Boolean enabled = false;
 	private ArrayList<ReplaceClause> replaceClauses = new ArrayList<>();
+	private ReplaceOffStatement replaceOffStatement = null;
+	private ReplaceStatement nextReplaceStatement = null;
 
 	ReplaceStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) {
 		this.ctx = ctx;
@@ -37,6 +39,22 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 
 	public void setEnabled(Boolean enabled) {
 		this.enabled = enabled;
+	}
+
+	public void setReplaceOffStatement(ReplaceOffStatement replaceOffStatement) {
+		this.replaceOffStatement = replaceOffStatement;
+	}
+
+	public void setNextReplaceStatement(ReplaceStatement nextReplaceStatement) {
+		this.nextReplaceStatement = nextReplaceStatement;
+	}
+
+	public ReplaceStatement getNextReplaceStatement() {
+		return this.nextReplaceStatement;
+	}
+
+	public ReplaceOffStatement getReplaceOffStatement() {
+		return this.replaceOffStatement;
 	}
 
 	public Boolean isEnabled() {
@@ -67,11 +85,67 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		return this.ctx.stop.getLine();
 	}
 
-	/**
-	This is used in CompilerDirectingStatementListener.
-	*/
-	public void setStopLine(int stopLine) {
-		this.stopLine = stopLine;
+	private void setStopLine() {
+
+		if (this.replaceOffStatement == null && this.nextReplaceStatement == null) {
+			/*
+			This REPLACE statement was not followed by neither a REPLACE OFF
+			statement nor another REPLACE statement.
+			*/
+			this.stopLine = Integer.MAX_VALUE;
+		} else if (this.replaceOffStatement == null && this.nextReplaceStatement.isEnabled()) {
+			/*
+			This REPLACE statement was followed by another REPLACE statement.
+			*/
+			this.stopLine = this.nextReplaceStatement.getLine();
+		} else if (this.nextReplaceStatement == null && this.replaceOffStatement.isEnabled()) {
+			/*
+			This REPLACE statement was followed by a REPLACE OFF statement.
+			*/
+			this.stopLine = this.replaceOffStatement.getLine();
+		} else if (this.replaceOffStatement.isEnabled() && this.nextReplaceStatement.isEnabled()) {
+			/*
+			This REPLACE statement was followed by both a REPLACE OFF
+			statement and another REPLACE statement.  Whichever comes first
+			determines the scope of this statement.
+			*/
+			if (this.replaceOffStatement.getLine() > this.nextReplaceStatement.getLine()) {
+				this.stopLine = this.nextReplaceStatement.getLine();
+			} else {
+				this.stopLine = this.replaceOffStatement.getLine();
+			}
+		} else if (this.replaceOffStatement.isEnabled()) {
+			/*
+			This REPLACE statement was followed by both a REPLACE OFF
+			statement and another REPLACE statement, but the REPLACE statement
+			is disabled.
+			*/
+			this.stopLine = this.replaceOffStatement.getLine();
+		} else if (this.nextReplaceStatement.isEnabled()) {
+			/*
+			This REPLACE statement was followed by both a REPLACE OFF
+			statement and another REPLACE statement, but the REPLACE OFF statement
+			is disabled.
+			*/
+			this.stopLine = this.nextReplaceStatement.getLine();
+		} else {
+			/*
+			This REPLACE statement was followed by both a REPLACE OFF
+			statement and another REPLACE statement, but both are
+			disabled.  Follow the chain of nextReplaceStatements until
+			it either ends or an enabled one is found.
+			*/
+			ReplaceStatement rs = this.nextReplaceStatement;
+			while (rs != null && !rs.isEnabled()) {
+				rs = rs.getNextReplaceStatement();
+			}
+			if (rs == null) {
+				this.stopLine = Integer.MAX_VALUE;
+			} else {
+				this.stopLine = rs.getLine();
+			}
+		}
+
 	}
 
 	public String toString() {

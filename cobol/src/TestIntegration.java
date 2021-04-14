@@ -222,9 +222,6 @@ public static void main(String[] args) throws Exception {
 			Boolean butDontWriteThisOne = false;
 			ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
 			ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
-			ReplaceStatement currReplace = null;
-			int replaceStart = -1;
-			int replaceStop = -1;
 
 			String inLine = src.readLine();
 			while (inLine != null) {
@@ -256,12 +253,6 @@ public static void main(String[] args) throws Exception {
 						}
 					}
 					inLine = inLineSB.toString();
-					/*if (nbCopies == 0) {
-						if (currReplace == null) {
-						} else {
-							inLine = currReplace.applyTo(inLineSB.toString());
-						}
-					}*/
 				} else {
 					/*
 					State machine for interpreting compiler directing statements.
@@ -327,29 +318,14 @@ public static void main(String[] args) throws Exception {
 							inLine = inLineSB.toString();
 							break;
 						case STMT_REPLACE:
-							if (nbCopies == 0) {
-								if (truthiness.peek() == null || truthiness.peek()) {
-									((ReplaceStatement)cds).setEnabled(true);
-								}
-							}
 							break;
 						case STMT_REPLACE_OFF:
-							if (nbCopies == 0) {
-								if (truthiness.peek() == null || truthiness.peek()) {
-									currReplace = null;
-									replaceStart = cds.getLine();
-									replaceStop = cds.getEndLine();
-								}
-							}
 							break;
 						default:
 							break;
 					}
 				}
-				if (nbCopies == 0 
-				&& (src.getLineNumber() >= replaceStart && src.getLineNumber() <= replaceStop)) {
-					LOGGER.finest("not writing |" + inLine + "| as it seems to be part of a REPLACE [OFF] statement");
-				} else if (butDontWriteThisOne) {
+				if (butDontWriteThisOne) {
 					LOGGER.finest("not writing |" + inLine + "| as it has been processed by a COPY statement");
 					butDontWriteThisOne = false;
 				} else {
@@ -377,6 +353,107 @@ public static void main(String[] args) throws Exception {
 		}
 
 		return nbCopies;
+	}
+
+	@SuppressWarnings({"fallthrough"})
+	public static String processReplaceStatements(
+			String aFileName
+			, File baseDir
+			) throws Exception {
+		LOGGER.fine("processReplaceStatements()");
+
+		ArrayList<CondCompVar> compOptDefines = new ArrayList<>(CLI.compOptDefines);
+		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
+		ArrayList<TerminalNodeWrapper> tnwList = null;
+		String initFileNm = new File(aFileName).getName();
+		String fileName = initFileNm;
+
+		lookForCompilerDirectingStatements(
+						fileName
+						, baseDir
+						, initFileNm
+						, compDirStmts
+						, compOptDefines);
+
+		ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
+		ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
+		ArrayList<ReplaceStatement> replaceStatements = new ArrayList<>();
+
+		for (CompilerDirectingStatement cds: compDirStmts) {
+			/*
+			State machine for interpreting compiler directing statements.
+			*/
+			LOGGER.finest("cds.getType() = " + cds.getType());
+			switch(cds.getType()) {
+				case STMT_EVALUATE:
+					whenStrewth.push(new ArrayList<Boolean>());
+					break;
+				case STMT_WHEN:
+					if (truthiness.peek() != null) {
+						truthiness.pop();
+					}
+					Boolean prevTruth1 = true;
+					if (truthiness.peek() != null) {
+						prevTruth1 = truthiness.peek();
+					}
+					if (prevTruth1) {
+						Boolean strewth = ((ConditionalCompilationStatement)cds).strewth();
+						if (whenStrewth.peek().contains(true)) {
+							LOGGER.finest("this WHEN is disregarded because a previous WHEN tested TRUE");
+							truthiness.push(false);
+						} else {
+							truthiness.push(strewth && prevTruth1);
+						}
+						whenStrewth.peek().add(strewth);
+					} else {
+						LOGGER.finest("prevTruth1 == false so " + cds + " strewth() not executed");
+						truthiness.push(false);
+					}
+					break;
+				case STMT_END_EVALUATE:
+					whenStrewth.pop();
+					truthiness.pop();
+					break;
+				case STMT_ELSE:
+					truthiness.pop();
+				case STMT_IF: // intentional fall-through!
+					Boolean prevTruth2 = true;
+					if (truthiness.peek() != null) {
+						prevTruth2 = truthiness.peek();
+					}
+					if (prevTruth2) {
+						truthiness.push(((ConditionalCompilationStatement)cds).strewth() && prevTruth2);
+					} else {
+						LOGGER.finest("prevTruth2 == false so " + cds + " strewth() not executed");
+						truthiness.push(false);
+					}
+					break;
+				case STMT_END_IF:
+					truthiness.pop();
+					break;
+				case STMT_COPY:
+					throw new IllegalArgumentException("COPY statement found where it shouldn't be");
+				case STMT_REPLACE:
+					if (truthiness.peek() == null || truthiness.peek()) {
+						((ReplaceStatement)cds).setEnabled(true);
+						replaceStatements.add((ReplaceStatement)cds);
+					}
+					break;
+				case STMT_REPLACE_OFF:
+					if (truthiness.peek() == null || truthiness.peek()) {
+						((ReplaceStatement)cds).setEnabled(true);
+					}
+					break;
+				default:
+					break;
+			}
+		}
+
+
+
+		tnwList = CLI.lookForTerminalNodes(fileName);
+
+		return new String();
 	}
 
 	/**
