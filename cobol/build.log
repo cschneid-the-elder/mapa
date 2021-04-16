@@ -3159,3 +3159,96 @@ Wed Apr 14 18:04:01 CDT 2021 src/ReplaceStatement.java
 Wed Apr 14 18:04:16 CDT 2021 src/ReplaceStatement.java
 Wed Apr 14 18:04:17 CDT 2021 src/CompilerDirectingStatementListener.java
 Wed Apr 14 18:04:18 CDT 2021 src/TestIntegration.java
+Thu Apr 15 13:03:06 CDT 2021 src/TestIntegration.java
+Thu Apr 15 13:09:43 CDT 2021 src/TestIntegration.java
+Thu Apr 15 13:11:41 CDT 2021 src/TestIntegration.java
+Thu Apr 15 13:39:47 CDT 2021 src/ReplaceStatement.java
+Thu Apr 15 13:39:48 CDT 2021 src/CompilerDirectingStatementListener.java
+Thu Apr 15 13:39:49 CDT 2021 src/TestIntegration.java
+Thu Apr 15 14:01:39 CDT 2021 src/TheCLI.java
+Thu Apr 15 14:01:40 CDT 2021 src/CopyStatement.java
+Thu Apr 15 14:01:57 CDT 2021 src/CopyStatement.java
+Thu Apr 15 14:03:27 CDT 2021 src/CopyStatement.java
+Thu Apr 15 14:03:49 CDT 2021 src/TheCLI.java
+Thu Apr 15 14:03:50 CDT 2021 src/CopyStatement.java
+Thu Apr 15 14:03:51 CDT 2021 src/CompilerDirectingStatementListener.java
+Thu Apr 15 14:03:52 CDT 2021 src/TestIntegration.java
+Fri Apr 16 14:28:19 CDT 2021 src/TestIntegration.java
+Fri Apr 16 14:29:11 CDT 2021 src/TestIntegration.java
+Fri Apr 16 14:58:06 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 14:58:45 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 14:58:46 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 14:58:46 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:05:18 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:07:26 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:08:28 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:08:37 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 15:08:38 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 15:08:39 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:10:42 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:13:33 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 15:13:34 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 15:13:35 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:13:56 CDT 2021 jar
+Fri Apr 16 15:14:04 CDT 2021 testLocal
+Fri Apr 16 15:16:42 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:16:45 CDT 2021 jar
+Fri Apr 16 15:16:48 CDT 2021 testLocal
+Fri Apr 16 15:17:48 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:17:51 CDT 2021 jar
+Fri Apr 16 15:17:55 CDT 2021 testLocal
+Fri Apr 16 15:21:32 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:21:35 CDT 2021 jar
+Fri Apr 16 15:21:41 CDT 2021 testLocal
+Fri Apr 16 15:30:44 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:30:46 CDT 2021 jar
+Fri Apr 16 15:30:50 CDT 2021 testLocal
+Fri Apr 16 15:31:48 CDT 2021 testLocal 021
+Fri Apr 16 15:42:12 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 15:42:13 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 15:42:14 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:42:17 CDT 2021 jar
+Fri Apr 16 15:42:21 CDT 2021 testLocal 021
+Fri Apr 16 15:47:49 CDT 2021 src/TestIntegration.java
+Fri Apr 16 15:47:52 CDT 2021 jar
+Fri Apr 16 15:47:57 CDT 2021 testLocal 021
+Fri Apr 16 16:08:33 CDT 2021 src/ReplaceClause.java
+Fri Apr 16 16:15:37 CDT 2021 src/ReplaceClause.java
+Fri Apr 16 16:30:12 CDT 2021 src/TerminalNodeWrapper.java
+Fri Apr 16 16:30:13 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 16:30:14 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 16:30:15 CDT 2021 src/TestIntegration.java
+Fri Apr 16 16:32:09 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 16:32:10 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 16:32:10 CDT 2021 src/TestIntegration.java
+Fri Apr 16 16:34:59 CDT 2021 src/ReplaceOffStatement.java
+Fri Apr 16 16:35:27 CDT 2021 src/ReplaceOffStatement.java
+Fri Apr 16 16:35:28 CDT 2021 src/ReplaceStatement.java
+Fri Apr 16 16:35:29 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 16:35:29 CDT 2021 src/TestIntegration.java
+Fri Apr 16 16:37:58 CDT 2021 src/TestIntegration.java
+Fri Apr 16 16:38:02 CDT 2021 jar
+Fri Apr 16 16:38:08 CDT 2021 testLocal 021
+Fri Apr 16 16:42:31 CDT 2021 src/ReplaceClause.java
+Fri Apr 16 16:42:58 CDT 2021 src/ReplaceClause.java
+Fri Apr 16 16:43:01 CDT 2021 jar
+Fri Apr 16 16:43:05 CDT 2021 testLocal 021
+Fri Apr 16 16:43:23 CDT 2021 testLocal
+Fri Apr 16 16:43:54 CDT 2021 testLocal 021
+Fri Apr 16 16:44:25 CDT 2021 testLocal 121
+Fri Apr 16 16:46:34 CDT 2021 testLocal
+Fri Apr 16 16:51:10 CDT 2021 src/TestIntegration.java
+Fri Apr 16 16:51:14 CDT 2021 jar
+Fri Apr 16 16:51:20 CDT 2021 testLocal 021
+Fri Apr 16 16:59:29 CDT 2021 src/TestIntegration.java
+Fri Apr 16 16:59:32 CDT 2021 jar
+Fri Apr 16 16:59:36 CDT 2021 testLocal 021
+Fri Apr 16 17:00:41 CDT 2021 testLocal
+Fri Apr 16 17:01:26 CDT 2021 testNist SM206A
+Fri Apr 16 17:02:01 CDT 2021 testNist SM208A
+Fri Apr 16 17:03:31 CDT 2021 testLocal 058
+Fri Apr 16 17:04:14 CDT 2021 src/CopyStatement.java
+Fri Apr 16 17:04:15 CDT 2021 src/CompilerDirectingStatementListener.java
+Fri Apr 16 17:04:16 CDT 2021 src/TestIntegration.java
+Fri Apr 16 17:04:20 CDT 2021 jar
+Fri Apr 16 17:04:23 CDT 2021 testLocal 058

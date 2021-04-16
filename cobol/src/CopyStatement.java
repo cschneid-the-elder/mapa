@@ -1,6 +1,7 @@
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
@@ -137,7 +138,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 				Files.readAllLines(Paths.get(copyFile));
 			for (String line: list) out.println(line);			
 		} else {
-			TestIntegration.CLI.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);
+			this.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);
 		}
 
 
@@ -194,6 +195,193 @@ public class CopyStatement implements CompilerDirectingStatement {
 		}
 
 		return copyFileFull;
+	}
+
+	public void applyReplacingPhrase(
+			PrintWriter out
+			, String copyFile
+			, ArrayList<ArrayList<TerminalNodeWrapper>> replaceable
+			, ArrayList<ArrayList<TerminalNodeWrapper>> replacement
+			) throws IOException {
+		TestIntegration.LOGGER.fine(this.myName + " applyReplacingPhrase() ");
+		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
+		TestIntegration.LOGGER.finest(" replacement = " + replacement);
+
+		StringBuilder outLine = new StringBuilder();
+		ArrayList<TerminalNodeWrapper> copyFileNodes1 = TestIntegration.CLI.lookForTerminalNodes(copyFile);
+		CopyOnWriteArrayList<TerminalNodeWrapper> copyFileNodes = new CopyOnWriteArrayList<>(copyFileNodes1);
+		int matchedIndex = 0;
+
+		for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
+			TestIntegration.LOGGER.finest(" matchList = " + matchList);
+			matchedIndex = replaceable.indexOf(matchList);
+			int from = 0;
+			int to = -1;
+			matchLoop:
+			while (from < copyFileNodes.size()) {
+				TestIntegration.LOGGER.finest(" while (" + from + " < " + copyFileNodes.size() + ")");
+				Boolean matched = false;
+				ArrayList<TerminalNodeWrapper> subList = null;
+				if (copyFileNodes.size() - from >= matchList.size()) {
+					TestIntegration.LOGGER.finest(" copyFileNodes.size() |" + copyFileNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
+					to = from + matchList.size();
+					int i = 0;
+					subList = this.subListTerminalNodeWrapper(copyFileNodes, from, matchList.size());
+					TestIntegration.LOGGER.finest(" subList = " + subList);
+					if (subList.size() == matchList.size()) {
+						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
+						matched = true;
+						for (TerminalNodeWrapper copyFileNode: subList) {
+							TestIntegration.LOGGER.finest(" copyFileNode = |" + copyFileNode + "|");
+							if (!matchList.get(i).textIsEqual(copyFileNode)) {
+								TestIntegration.LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(copyFileNode) i.e. |" + matchList.get(i) + "| != |" + copyFileNode + "|");
+								matched = false;
+								break;
+							}
+							i++;
+						}
+					} else {
+						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
+						matched = false;
+					}
+				}
+				TestIntegration.LOGGER.finest(" matched = " + matched);
+				if (matched) {
+					if (matchList.get(0).isDelimited()) {
+						subList.get(0).alterText(matchList.get(0), replacement.get(matchedIndex).get(0));
+					} else {
+						copyFileNodes.removeAll(subList);
+						TestIntegration.LOGGER.finest(" copyFileNodes after removeAll = " + copyFileNodes);
+						copyFileNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
+						TestIntegration.LOGGER.finest(" copyFileNodes after addAll    = " + copyFileNodes);
+					}
+					from = from + replacement.get(matchedIndex).size();
+				} else {
+					from++;
+				}
+			}
+		}
+
+	/**
+	This is, in conjunction with subListTerminalNodeWrapper()
+	and cloneTerminalNodeWrapperList(), an attempt to account
+	for the replacement of subList by replacement.get(matchedIndex)
+	the latter of which need not have the same number of elements
+	and almost certainly has different posn, line, and text.
+	*/
+		long prevLine = -1;
+		int prevTextLength = -1;
+		long prevPosn = -1;
+		TerminalNodeWrapper prevToken = null;
+
+		for (TerminalNodeWrapper token: copyFileNodes) {
+			TestIntegration.LOGGER.finest(" token = " + token);
+			long clonedPosn = token.getClonedPosn();
+			if (token.isPrecededByNewline() || token.isFirst()) {
+				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
+				outLine.append('\n');
+				if (token.getClonedPosn() == -1) {
+					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				} else {
+					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+				}
+			} else if (token.getClonedLine() == prevLine) {
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
+				if (token.isPrecededByWhitespace()) {
+					outLine.append(" ");
+					long extraPadding = 0;
+					if (token.getClonedPosn() == -1) {
+						extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+					} else {
+						extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
+					}
+					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				} else {
+					outLine.append(token.getText());
+				}
+			} else if (token.getClonedLine() == -1) {
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
+				if (prevToken != null && prevToken.getClonedLine() != -1) {
+					if (token.isPrecededByWhitespace()) {
+						outLine.append(" ");
+					}
+				}
+				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+			} else {
+				TestIntegration.LOGGER.finest(" else");
+				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+			}
+			if (token.getClonedLine() == -1) {
+				prevLine = token.getLine();
+				prevPosn = token.getPosn();
+			} else {
+				prevLine = token.getClonedLine();
+				prevPosn = token.getClonedPosn();
+			}
+			prevTextLength = token.getTextLength();
+			prevToken = token;
+		}
+		out.println(outLine);
+	}
+
+	private ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
+			CopyOnWriteArrayList<TerminalNodeWrapper> tnwList
+			, int from
+			, int size
+			) {
+		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
+		int i = from;
+		int j = 0;
+
+		while (i < tnwList.size() && j < size) {
+			if (!tnwList.get(i).isNewline()) {
+				newList.add(tnwList.get(i));
+				j++;
+			}
+			i++;
+		}
+
+		return newList;
+	} 
+
+	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(
+				ArrayList<TerminalNodeWrapper> source
+				, ArrayList<TerminalNodeWrapper> fudge) {
+		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
+		int i = 0;
+		long clonedLine = -1;
+		long clonedPosn = -1;
+		TerminalNodeWrapper prevTNW = null;
+
+		for (TerminalNodeWrapper tnw: source) {
+			Boolean precededByNewline = false;
+			Boolean precededByWhitespace = false;
+			if (i < fudge.size()) {
+				clonedLine = fudge.get(i).getLine();
+				clonedPosn = fudge.get(i).getPosn();
+				precededByNewline = fudge.get(i).isPrecededByNewline();
+			} else {
+				clonedPosn = clonedPosn + tnw.getTextLength();
+			}
+			if (i == 0) {
+				precededByWhitespace = fudge.get(i).isPrecededByWhitespace();
+			} else {
+				precededByWhitespace = tnw.isPrecededByWhitespace();
+			}
+			TerminalNodeWrapper newNode = 
+				new TerminalNodeWrapper(
+					tnw
+					, clonedLine
+					, clonedPosn
+					, precededByNewline
+					, precededByWhitespace);
+			newList.add(newNode);
+			i++;
+			prevTNW = tnw;
+		}
+
+		return newList;
 	}
 
 	public String toString() {

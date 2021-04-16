@@ -10,6 +10,7 @@ import java.util.logging.FileHandler;
 import java.util.logging.Handler;
 import java.util.logging.SimpleFormatter;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
@@ -94,7 +95,7 @@ public static void main(String[] args) throws Exception {
 			continue;
 		}
 		fileName = CLI.copyCompressingContinuations(fileName, baseDir, initFileNm);
-		fileName = processCDS(fileName, baseDir);
+		fileName = processCDS(fileName, baseDir, initFileNm);
 		calledNodes = assembleDataNodeTree(fileName, getLib(aFileName));
 		allTheCalledNodes.addAll(calledNodes);
 		if (CLI.unitTest) {
@@ -167,12 +168,13 @@ public static void main(String[] args) throws Exception {
 	public static String processCDS(
 			String aFileName
 			, File baseDir
+			, String initFileNm
 			) throws Exception {
 		LOGGER.fine("processCDS()");
 
 		ArrayList<CondCompVar> compOptDefines = new ArrayList<>(CLI.compOptDefines);
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-		String initFileNm = new File(aFileName).getName();
+		//String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
 		Boolean done = false;
 		int nbCopies = 0;
@@ -181,8 +183,6 @@ public static void main(String[] args) throws Exception {
 
 		lookForCompilerDirectingStatements(
 						aFileName
-						, baseDir
-						, initFileNm
 						, compDirStmts
 						, compOptDefines);
 		LOGGER.finest("compOptDefines = " + compOptDefines);
@@ -202,8 +202,6 @@ public static void main(String[] args) throws Exception {
 			compDirStmts.clear();
 			lookForCompilerDirectingStatements(
 							fileName
-							, baseDir
-							, initFileNm
 							, compDirStmts
 							, compOptDefines);
 			nbCopies = countCopyCDS(compDirStmts);
@@ -341,6 +339,8 @@ public static void main(String[] args) throws Exception {
 			if (nbCopies == 0) done = true;
 		}
 
+		fileName = processReplaceStatements(fileName, baseDir, initFileNm, compOptDefines);
+
 		return fileName;
 	}
  
@@ -359,25 +359,24 @@ public static void main(String[] args) throws Exception {
 	public static String processReplaceStatements(
 			String aFileName
 			, File baseDir
+			, String initFileNm
+			, ArrayList<CondCompVar> compOptDefines
 			) throws Exception {
 		LOGGER.fine("processReplaceStatements()");
 
-		ArrayList<CondCompVar> compOptDefines = new ArrayList<>(CLI.compOptDefines);
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-		ArrayList<TerminalNodeWrapper> tnwList = null;
-		String initFileNm = new File(aFileName).getName();
+		//String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
 
 		lookForCompilerDirectingStatements(
-						fileName
-						, baseDir
-						, initFileNm
+						aFileName
 						, compDirStmts
 						, compOptDefines);
 
 		ArrayDeque<Boolean> truthiness = new ArrayDeque<>();
 		ArrayDeque<ArrayList<Boolean>> whenStrewth = new ArrayDeque<>();
 		ArrayList<ReplaceStatement> replaceStatements = new ArrayList<>();
+		ArrayList<ReplaceOffStatement> replaceOffStatements = new ArrayList<>();
 
 		for (CompilerDirectingStatement cds: compDirStmts) {
 			/*
@@ -441,7 +440,8 @@ public static void main(String[] args) throws Exception {
 					break;
 				case STMT_REPLACE_OFF:
 					if (truthiness.peek() == null || truthiness.peek()) {
-						((ReplaceStatement)cds).setEnabled(true);
+						((ReplaceOffStatement)cds).setEnabled(true);
+						replaceOffStatements.add((ReplaceOffStatement)cds);
 					}
 					break;
 				default:
@@ -449,11 +449,102 @@ public static void main(String[] args) throws Exception {
 			}
 		}
 
+		if (replaceStatements.size() == 0) {
+			LOGGER.finest("replaceStatements.size() == " + replaceStatements.size());
+			return aFileName;
+		}
 
+		for (ReplaceStatement rs: replaceStatements) rs.setStopLine();
 
-		tnwList = CLI.lookForTerminalNodes(fileName);
+		ArrayList<TerminalNodeWrapper> tnwList = null;
+		tnwList = CLI.lookForTerminalNodes(aFileName);
+		CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes = new CopyOnWriteArrayList<>(tnwList);
 
-		return new String();
+		for (ReplaceStatement rs: replaceStatements) {
+			rs.apply(sourceNodes);
+		}
+
+		for (ReplaceOffStatement ros: replaceOffStatements) {
+			ros.apply(sourceNodes);
+		}
+
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withreplacingapplied-", "-cbl", baseDir);
+		CLI.setPosixAttributes(tmp);
+		if (CLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+
+	/**
+	This is, in conjunction with subListTerminalNodeWrapper()
+	and cloneTerminalNodeWrapperList(), an attempt to account
+	for the replacement of subList by replacement.get(matchedIndex)
+	the latter of which need not have the same number of elements
+	and almost certainly has different posn, line, and text.
+	*/
+		long prevLine = -1;
+		int prevTextLength = -1;
+		long prevPosn = -1;
+		TerminalNodeWrapper prevToken = null;
+		StringBuilder outLine = new StringBuilder();
+
+		for (TerminalNodeWrapper token: sourceNodes) {
+			TestIntegration.LOGGER.finest(" token = " + token);
+			TestIntegration.LOGGER.finest(" prevLine = " + prevLine);
+			TestIntegration.LOGGER.finest(" prevPosn = " + prevPosn);
+			TestIntegration.LOGGER.finest(" prevTextLength = " + prevTextLength);
+			long clonedPosn = token.getClonedPosn();
+			if (token.isPrecededByNewline() || token.isFirst()) {
+				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
+				outLine.append('\n');
+				if (token.getClonedPosn() == -1) {
+					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				} else {
+					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+				}
+			} else if (token.getClonedLine() == prevLine) {
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
+				if (token.isPrecededByWhitespace()) {
+					outLine.append(" ");
+					long extraPadding = 0;
+					if (token.getClonedPosn() == -1) {
+						extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+					} else {
+						extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
+					}
+					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				} else {
+					outLine.append(token.getText());
+				}
+			} else if (token.getClonedLine() == -1) {
+				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
+				if (prevToken != null && prevToken.getClonedLine() != -1) {
+					if (token.isPrecededByWhitespace()) {
+						outLine.append(" ");
+					}
+				}
+				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+			} else {
+				TestIntegration.LOGGER.finest(" else");
+				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+			}
+			if (token.getClonedLine() == -1) {
+				prevLine = token.getLine();
+				prevPosn = token.getPosn();
+			} else {
+				prevLine = token.getClonedLine();
+				prevPosn = token.getClonedPosn();
+			}
+			prevTextLength = token.getTextLength();
+			prevToken = token;
+		}
+		out.println(outLine);
+		out.close();
+
+		return tmp.getPath();
 	}
 
 	/**
@@ -485,8 +576,6 @@ public static void main(String[] args) throws Exception {
 
 	public static void lookForCompilerDirectingStatements(
 			String fileName
-			, File baseDir
-			, String initFileNm
 			, ArrayList<CompilerDirectingStatement> compDirStmts
 			, ArrayList<CondCompVar> compOptDefines
 			) throws Exception {
@@ -1326,8 +1415,10 @@ public static void main(String[] args) throws Exception {
 		} else {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
-			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
-			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+			if (calledNodes.size() > 0) {
+				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
+				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+			}
 		} 
 
 		if (rc) {
