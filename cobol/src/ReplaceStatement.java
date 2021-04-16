@@ -192,8 +192,8 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 				from++;
 			}
 			matchLoop:
-			while (from < sourceNodes.size()) {
-				TestIntegration.LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + ")");
+			while (from < sourceNodes.size() && sourceNodes.get(from).getLine() < this.getStopLine()) {
+				TestIntegration.LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + this.getStopLine() + ")");
 				Boolean matched = false;
 				ArrayList<TerminalNodeWrapper> subList = null;
 				if (sourceNodes.size() - from >= matchList.size()) {

@@ -276,6 +276,9 @@ public class CopyStatement implements CompilerDirectingStatement {
 
 		for (TerminalNodeWrapper token: copyFileNodes) {
 			TestIntegration.LOGGER.finest(" token = " + token);
+			TestIntegration.LOGGER.finest(" prevLine = " + prevLine);
+			TestIntegration.LOGGER.finest(" prevPosn = " + prevPosn);
+			TestIntegration.LOGGER.finest(" prevTextLength = " + prevTextLength);
 			long clonedPosn = token.getClonedPosn();
 			if (token.isPrecededByNewline() || token.isFirst()) {
 				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
@@ -306,7 +309,12 @@ public class CopyStatement implements CompilerDirectingStatement {
 						outLine.append(" ");
 					}
 				}
-				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				long extraPadding = 0;
+				if (prevToken.getType() == CobolPreprocessorParser.NEWLINE) {
+					extraPadding = token.getPosn();
+				} else {
+					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				}
 				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
 			} else {
 				TestIntegration.LOGGER.finest(" else");

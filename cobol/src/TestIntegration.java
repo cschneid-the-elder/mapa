@@ -449,8 +449,13 @@ public static void main(String[] args) throws Exception {
 			}
 		}
 
-		if (replaceStatements.size() == 0) {
-			LOGGER.finest("replaceStatements.size() == " + replaceStatements.size());
+		if (replaceStatements.size() == 0 && replaceOffStatements.size() == 0) {
+			LOGGER.finest(
+				"replaceStatements.size() == " 
+				+ replaceStatements.size()
+				+ "replaceOffStatements.size() == " 
+				+ replaceOffStatements.size()
+				);
 			return aFileName;
 		}
 

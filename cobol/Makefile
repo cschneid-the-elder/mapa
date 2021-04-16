@@ -130,7 +130,7 @@ ziplogs:
 
 ./class/ReplaceListener.class: 
 
-./class/TheCLI.class ./class/CharDataLineWrapper.class ./class/TerminalNodeWrapper.class: ./src/CobolPreprocessorParser.java
+./class/TheCLI.class ./class/CharDataLineWrapper.class ./class/TerminalNodeWrapper.class ./class/CopyStatement.class: ./src/CobolPreprocessorParser.java
 
 #./class/CondCompSimpleArithmeticExpression.class:
 
