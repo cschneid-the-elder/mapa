@@ -4,11 +4,11 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (12-Apr-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (17-Apr-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
-"Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with all but one of the NIST COBOL test suite.
+"Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
-"Work in progress" means I'm adding to this as it suits me.  It's a hobby, not intended to ever be finished.
+"Work in progress" means I'm adding to this as it suits me.  It's a hobby, not intended to ever be finished.  But you might find it useful.
 
 ### How To Run
 
@@ -63,7 +63,7 @@ A log file will be created in the current directory with messages about the curr
 
 The file indicated by the `-out` option is a comma separated value (CSV) file containing the "library", caller name, type of call, and called module name.  "Library" in this context is the last node of the path to the file, which I would hope has been named for the library from which the members have been downloaded.
 
-Please note that the type of call may be CALLBYIDENTIFIER which may be a static call or a dynamic call depending on your compile options.
+Please note that the type of call may be CALLBYLITERAL which may be a static call or a dynamic call depending on your compile options.
 
 ### Build/Execution Environment
 
@@ -96,7 +96,6 @@ Worse, of course, is that in a dynamic call environment, which modules you invok
 ### What This Won't Do
 
  + `BASIS` statement.
- + `REPLACE` statements that piss me off.  Specifically SM208A in testdata/nist.
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
  + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
 

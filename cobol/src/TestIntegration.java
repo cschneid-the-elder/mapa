@@ -530,7 +530,12 @@ public static void main(String[] args) throws Exception {
 						outLine.append(" ");
 					}
 				}
-				long extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				long extraPadding = 0;
+				if (prevToken.getType() == CobolPreprocessorParser.NEWLINE) {
+					extraPadding = token.getPosn();
+				} else {
+					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+				}
 				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
 			} else {
 				TestIntegration.LOGGER.finest(" else");
@@ -1387,6 +1392,26 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, new Integer(05), "WS-POINTER", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(05), "WS-COUNT", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, new Integer(01), "SOME-DATA", dataNodes)) failCount++;
+				break;
+			case "testantlr058":
+			case "testantlr158":
+			case "testantlr258":
+			case "testantlr358":
+				if (!testDD002(fileName, bareName, new Integer(77), "PENNY-ADIYODI", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(77), "KADY-ORLOFF-DIAZ", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(77), "ZELDA-SCHIFF", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(77), "HENRY-FOGG", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(01), "WS-WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "W1-TEXT01", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "WS-TEXT02", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "W1-TEXT03", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				break;
+			case "testantlr059":
+			case "testantlr159":
+			case "testantlr259":
+			case "testantlr359":
+				if (!testDD002(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, new Integer(05), "COUNTER", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
 				break;
 			default:
 				LOGGER.info("NONE " + fileName);

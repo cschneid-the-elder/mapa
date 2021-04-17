@@ -171,6 +171,7 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		sourceNodes.removeAll(toRemove);
 	}
 
+	/* TODO compare and contrast with CopyStatement.applyReplacing() */
 	public void apply(
 			CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 			) throws IOException {
@@ -182,9 +183,15 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 
 		int matchedIndex = 0;
 
-		for (ArrayList<TerminalNodeWrapper> matchList: this.replaceable) {
+		for (ArrayList<TerminalNodeWrapper> matchList1: this.replaceable) {
+			ArrayList<TerminalNodeWrapper> matchList = new ArrayList<>(matchList1);
+			ArrayList<TerminalNodeWrapper> toRemove = new ArrayList<>();
+			for (TerminalNodeWrapper tnw: matchList) {
+				if (tnw.getType() == CobolPreprocessorParser.NEWLINE) toRemove.add(tnw);
+			}
+			matchList.removeAll(toRemove);
 			TestIntegration.LOGGER.finest(" matchList = " + matchList);
-			matchedIndex = replaceable.indexOf(matchList);
+			matchedIndex = replaceable.indexOf(matchList1);
 			int from = 0;
 			int to = -1;
 			for (TerminalNodeWrapper sourceNode: sourceNodes) {
@@ -225,9 +232,9 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 						subList.get(0).alterText(matchList.get(0), this.replacement.get(matchedIndex).get(0));
 					} else {
 						sourceNodes.removeAll(subList);
-						TestIntegration.LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
+						//TestIntegration.LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
 						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-						TestIntegration.LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
+						//TestIntegration.LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
 					}
 					from = from + this.replacement.get(matchedIndex).size();
 				} else {

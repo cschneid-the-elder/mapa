@@ -197,6 +197,7 @@ public class CopyStatement implements CompilerDirectingStatement {
 		return copyFileFull;
 	}
 
+	/* TODO compare and contrast with ReplaceStatement.apply() */
 	public void applyReplacingPhrase(
 			PrintWriter out
 			, String copyFile
@@ -212,9 +213,15 @@ public class CopyStatement implements CompilerDirectingStatement {
 		CopyOnWriteArrayList<TerminalNodeWrapper> copyFileNodes = new CopyOnWriteArrayList<>(copyFileNodes1);
 		int matchedIndex = 0;
 
-		for (ArrayList<TerminalNodeWrapper> matchList: replaceable) {
+		for (ArrayList<TerminalNodeWrapper> matchList1: replaceable) {
+			ArrayList<TerminalNodeWrapper> matchList = new ArrayList<>(matchList1);
+			ArrayList<TerminalNodeWrapper> toRemove = new ArrayList<>();
+			for (TerminalNodeWrapper tnw: matchList) {
+				if (tnw.getType() == CobolPreprocessorParser.NEWLINE) toRemove.add(tnw);
+			}
+			matchList.removeAll(toRemove);
 			TestIntegration.LOGGER.finest(" matchList = " + matchList);
-			matchedIndex = replaceable.indexOf(matchList);
+			matchedIndex = replaceable.indexOf(matchList1);
 			int from = 0;
 			int to = -1;
 			matchLoop:
