@@ -143,7 +143,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		if (last == 0) {
 		} else {
 			ReplaceStatement rs1 = replaceStmts.get(last - 1);
-			rs1.setStopLine(rs.getLine());
+			rs1.setNextReplaceStatement(rs);
 		}
 		this.replaceStmts.add(rs);
 	}
@@ -157,7 +157,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		if (last == 0) {
 		} else {
 			ReplaceStatement rs1 = replaceStmts.get(last - 1);
-			rs1.setStopLine(ros.getLine());
+			rs1.setReplaceOffStatement(ros);
 		}
 	}
 

@@ -1,3 +1,5 @@
+import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
@@ -9,12 +11,50 @@ public class ReplaceOffStatement implements CompilerDirectingStatement {
 	//private int line = -1;
 	private int startLine = -1;
 	private int endLine = -1;
+	private Boolean enabled = false;
+	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
 
 	ReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) {
 		this.ctx = ctx;
 		//this.line = this.ctx.REPLACE().getSymbol().getLine();
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
+		this.tnwList.add(new TerminalNodeWrapper(this.ctx.REPLACE()));
+		this.tnwList.add(new TerminalNodeWrapper(this.ctx.OFF()));
+		this.tnwList.add(new TerminalNodeWrapper(this.ctx.DOT()));
+		if (this.ctx.NEWLINE() != null && this.ctx.NEWLINE().size() > 0) {
+			this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.NEWLINE()));
+		}
+		this.tnwList.sort(Comparator.comparingLong(TerminalNodeWrapper::getSortKey));
+	}
+
+	private void iWasNeverHere(CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes) {
+		ArrayList<TerminalNodeWrapper> toRemove = new ArrayList<>();
+		for (TerminalNodeWrapper sourceNode: sourceNodes) {
+			for (TerminalNodeWrapper tnw: this.tnwList) {
+				if (sourceNode.textAndLocAreEqual(tnw)) {
+					toRemove.add(sourceNode);
+					break;
+				}
+			}
+		}
+		sourceNodes.removeAll(toRemove);
+	}
+
+	public void apply(
+			CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
+			) {
+		TestIntegration.LOGGER.fine(this.myName + " apply() ");
+
+		this.iWasNeverHere(sourceNodes);
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
+	public Boolean isEnabled() {
+		return this.enabled;
 	}
 
 	public int getLine() {

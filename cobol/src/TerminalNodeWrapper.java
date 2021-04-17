@@ -221,10 +221,10 @@ class TerminalNodeWrapper {
 		}
 	}
 
-	public Boolean textAndLocAreEqual(TerminalNode tn) {
-		return (this.getLine() == tn.getSymbol().getLine()
-				&& this.getPosn() == tn.getSymbol().getCharPositionInLine()
-				&& this.textIsEqual(tn));
+	public Boolean textAndLocAreEqual(TerminalNodeWrapper tnw) {
+		return (this.getLine() == tnw.getLine()
+				&& this.getPosn() == tnw.getPosn()
+				&& this.textIsEqual(tnw));
 	}
 
 	public void alterText(TerminalNodeWrapper replaceable, TerminalNodeWrapper replacement) {

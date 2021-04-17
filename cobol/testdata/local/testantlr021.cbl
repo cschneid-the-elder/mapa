@@ -4,8 +4,8 @@
        Working-Storage Section.
 
        REPLACE 
-         ==PGMA0001== BY ==PGMB0001==
-         ==PGMA0002== BY ==PGMB0002==
+         =='PGMA0001'== BY =='PGMB0001'==
+         =='PGMA0002'== BY =='PGMB0002'==
          .
 
       *

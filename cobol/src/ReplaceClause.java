@@ -9,27 +9,41 @@ public class ReplaceClause {
 
 	private String myName = this.getClass().getName();
 	private CobolPreprocessorParser.ReplaceClauseContext ctx = null;
-	private int startLine = -1;
-	private int endLine = -1;
-	private int startPosn = -1;
-	private int endPosn = -1;
 	private Boolean leading = false;
 	private Boolean trailing = false;
 	private ArrayList<TerminalNodeWrapper> replaceable = new ArrayList<>();
 	private ArrayList<TerminalNodeWrapper> replacement = new ArrayList<>();
+	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
 
 	public ReplaceClause (CobolPreprocessorParser.ReplaceClauseContext ctx) {
 		this.ctx = ctx;
 		if (this.ctx.LEADING() != null) {
 			this.leading = true;
+			this.tnwList.add(new TerminalNodeWrapper(this.ctx.LEADING()));
 		} else if (this.ctx.TRAILING() != null) {
 			this.trailing = true;
+			this.tnwList.add(new TerminalNodeWrapper(this.ctx.TRAILING()));
 		}
+
+		if (this.leading && this.trailing) {
+			throw new IllegalArgumentException(
+				"LEADING and TRAILING cannot both be specified @ "
+				+ this.ctx.LEADING().getSymbol().getLine());
+		}
+
+		this.tnwList.add(new TerminalNodeWrapper(this.ctx.BY()));
+		if (this.ctx.NEWLINE() != null && this.ctx.NEWLINE().size() > 0) {
+			this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.NEWLINE()));
+		}
+
 		this.setReplacement();
 		this.setReplaceable();
 		this.setNewlineAndWhitespaceFlags(this.getReplacement());
 		this.setNewlineAndWhitespaceFlags(this.getReplaceable());
 
+		this.tnwList.addAll(this.replaceable);
+		this.tnwList.addAll(this.replacement);
+		this.tnwList.sort(Comparator.comparingLong(TerminalNodeWrapper::getSortKey));
 	}
 
 	private void setReplacement() {
@@ -58,6 +72,7 @@ public class ReplaceClause {
 			if (ptCtx != null) {
 				pseudoText = new PseudoTextWrapper(ptCtx);
 				this.replacement.addAll(pseudoText.getTerminalNodeWrappers());
+				this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(ptCtx.DOUBLEEQUALCHAR()));
 			}
 			if (cdlCtx != null) {
 				charDataLine = new CharDataLineWrapper(cdlCtx);
@@ -96,6 +111,7 @@ public class ReplaceClause {
 			if (ptCtx != null) {
 				pseudoText = new PseudoTextWrapper(ptCtx, this.leading, this.trailing);
 				this.replaceable.addAll(pseudoText.getTerminalNodeWrappers());
+				this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(ptCtx.DOUBLEEQUALCHAR()));
 			}
 			if (cdlCtx != null) {
 				charDataLine = new CharDataLineWrapper(cdlCtx, this.leading, this.trailing);
@@ -127,6 +143,10 @@ public class ReplaceClause {
 
 	public ArrayList<TerminalNodeWrapper> getReplaceable() {
 		return this.replaceable;
+	}
+
+	public ArrayList<TerminalNodeWrapper> getTnwList() {
+		return this.tnwList;
 	}
 
 }
