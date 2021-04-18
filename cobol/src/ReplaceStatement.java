@@ -6,7 +6,7 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
-public class ReplaceStatement implements CompilerDirectingStatement {
+public class ReplaceStatement extends CopyReplaceParent implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
 	public CobolPreprocessorParser.ReplaceByStatementContext ctx = null;
@@ -171,7 +171,6 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 		sourceNodes.removeAll(toRemove);
 	}
 
-	/* TODO compare and contrast with CopyStatement.applyReplacing() */
 	public void apply(
 			CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 			) throws IOException {
@@ -181,127 +180,8 @@ public class ReplaceStatement implements CompilerDirectingStatement {
 
 		this.iWasNeverHere(sourceNodes);
 
-		int matchedIndex = 0;
+		super.applyReplacingPhrase(sourceNodes, this.replaceable, this.replacement, true, this.getEndLine(), this.getStopLine());
 
-		for (ArrayList<TerminalNodeWrapper> matchList1: this.replaceable) {
-			ArrayList<TerminalNodeWrapper> matchList = new ArrayList<>(matchList1);
-			ArrayList<TerminalNodeWrapper> toRemove = new ArrayList<>();
-			for (TerminalNodeWrapper tnw: matchList) {
-				if (tnw.getType() == CobolPreprocessorParser.NEWLINE) toRemove.add(tnw);
-			}
-			matchList.removeAll(toRemove);
-			TestIntegration.LOGGER.finest(" matchList = " + matchList);
-			matchedIndex = replaceable.indexOf(matchList1);
-			int from = 0;
-			int to = -1;
-			for (TerminalNodeWrapper sourceNode: sourceNodes) {
-				if (sourceNode.getLine() > this.getEndLine()) break;
-				from++;
-			}
-			matchLoop:
-			while (from < sourceNodes.size() && sourceNodes.get(from).getLine() < this.getStopLine()) {
-				TestIntegration.LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + this.getStopLine() + ")");
-				Boolean matched = false;
-				ArrayList<TerminalNodeWrapper> subList = null;
-				if (sourceNodes.size() - from >= matchList.size()) {
-					TestIntegration.LOGGER.finest(" sourceNodes.size() |" + sourceNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
-					to = from + matchList.size();
-					int i = 0;
-					subList = this.subListTerminalNodeWrapper(sourceNodes, from, matchList.size());
-					TestIntegration.LOGGER.finest(" subList = " + subList);
-					if (subList.size() == matchList.size()) {
-						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
-						matched = true;
-						for (TerminalNodeWrapper copyFileNode: subList) {
-							TestIntegration.LOGGER.finest(" copyFileNode = |" + copyFileNode + "|");
-							if (!matchList.get(i).textIsEqual(copyFileNode)) {
-								TestIntegration.LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(copyFileNode) i.e. |" + matchList.get(i) + "| != |" + copyFileNode + "|");
-								matched = false;
-								break;
-							}
-							i++;
-						}
-					} else {
-						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
-						matched = false;
-					}
-				}
-				TestIntegration.LOGGER.finest(" matched = " + matched);
-				if (matched) {
-					if (matchList.get(0).isDelimited()) {
-						subList.get(0).alterText(matchList.get(0), this.replacement.get(matchedIndex).get(0));
-					} else {
-						sourceNodes.removeAll(subList);
-						//TestIntegration.LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
-						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-						//TestIntegration.LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
-					}
-					from = from + this.replacement.get(matchedIndex).size();
-				} else {
-					from++;
-				}
-			}
-		}
-
-	}
-
-	private ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
-			CopyOnWriteArrayList<TerminalNodeWrapper> tnwList
-			, int from
-			, int size
-			) {
-		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
-		int i = from;
-		int j = 0;
-
-		while (i < tnwList.size() && j < size) {
-			if (!tnwList.get(i).isNewline()) {
-				newList.add(tnwList.get(i));
-				j++;
-			}
-			i++;
-		}
-
-		return newList;
-	} 
-
-	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(
-				ArrayList<TerminalNodeWrapper> source
-				, ArrayList<TerminalNodeWrapper> fudge) {
-		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
-		int i = 0;
-		long clonedLine = -1;
-		long clonedPosn = -1;
-		TerminalNodeWrapper prevTNW = null;
-
-		for (TerminalNodeWrapper tnw: source) {
-			Boolean precededByNewline = false;
-			Boolean precededByWhitespace = false;
-			if (i < fudge.size()) {
-				clonedLine = fudge.get(i).getLine();
-				clonedPosn = fudge.get(i).getPosn();
-				precededByNewline = fudge.get(i).isPrecededByNewline();
-			} else {
-				clonedPosn = clonedPosn + tnw.getTextLength();
-			}
-			if (i == 0) {
-				precededByWhitespace = fudge.get(i).isPrecededByWhitespace();
-			} else {
-				precededByWhitespace = tnw.isPrecededByWhitespace();
-			}
-			TerminalNodeWrapper newNode = 
-				new TerminalNodeWrapper(
-					tnw
-					, clonedLine
-					, clonedPosn
-					, precededByNewline
-					, precededByWhitespace);
-			newList.add(newNode);
-			i++;
-			prevTNW = tnw;
-		}
-
-		return newList;
 	}
 
 	public String toString() {
