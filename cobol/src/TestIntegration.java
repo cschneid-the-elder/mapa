@@ -482,75 +482,8 @@ public static void main(String[] args) throws Exception {
 
 		PrintWriter out = new PrintWriter(tmp);
 
-	/**
-	This is, in conjunction with subListTerminalNodeWrapper()
-	and cloneTerminalNodeWrapperList(), an attempt to account
-	for the replacement of subList by replacement.get(matchedIndex)
-	the latter of which need not have the same number of elements
-	and almost certainly has different posn, line, and text.
-	*/
-		long prevLine = -1;
-		int prevTextLength = -1;
-		long prevPosn = -1;
-		TerminalNodeWrapper prevToken = null;
-		StringBuilder outLine = new StringBuilder();
+		StringBuilder outLine = CopyReplaceParent.createStringBuilderFromTerminalNodeWrappers(sourceNodes);
 
-		for (TerminalNodeWrapper token: sourceNodes) {
-			TestIntegration.LOGGER.finest(" token = " + token);
-			TestIntegration.LOGGER.finest(" prevLine = " + prevLine);
-			TestIntegration.LOGGER.finest(" prevPosn = " + prevPosn);
-			TestIntegration.LOGGER.finest(" prevTextLength = " + prevTextLength);
-			long clonedPosn = token.getClonedPosn();
-			if (token.isPrecededByNewline() || token.isFirst()) {
-				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
-				outLine.append('\n');
-				if (token.getClonedPosn() == -1) {
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
-				} else {
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
-				}
-			} else if (token.getClonedLine() == prevLine) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
-				if (token.isPrecededByWhitespace()) {
-					outLine.append(" ");
-					long extraPadding = 0;
-					if (token.getClonedPosn() == -1) {
-						extraPadding = token.getPosn() - (prevPosn + prevTextLength);
-					} else {
-						extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
-					}
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
-				} else {
-					outLine.append(token.getText());
-				}
-			} else if (token.getClonedLine() == -1) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
-				if (prevToken != null && prevToken.getClonedLine() != -1) {
-					if (token.isPrecededByWhitespace()) {
-						outLine.append(" ");
-					}
-				}
-				long extraPadding = 0;
-				if (prevToken.getType() == CobolPreprocessorParser.NEWLINE) {
-					extraPadding = token.getPosn();
-				} else {
-					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
-				}
-				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
-			} else {
-				TestIntegration.LOGGER.finest(" else");
-				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
-			}
-			if (token.getClonedLine() == -1) {
-				prevLine = token.getLine();
-				prevPosn = token.getPosn();
-			} else {
-				prevLine = token.getClonedLine();
-				prevPosn = token.getClonedPosn();
-			}
-			prevTextLength = token.getTextLength();
-			prevToken = token;
-		}
 		out.println(outLine);
 		out.close();
 
