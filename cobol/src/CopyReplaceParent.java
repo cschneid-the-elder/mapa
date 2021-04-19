@@ -26,7 +26,6 @@ abstract class CopyReplaceParent {
 			long clonedPosn = token.getClonedPosn();
 			if (token.isPrecededByNewline() || token.isFirst()) {
 				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
-				outLine.append('\n');
 				if (token.getClonedPosn() == -1) {
 					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
 				} else {
@@ -54,7 +53,7 @@ abstract class CopyReplaceParent {
 					}
 				}
 				long extraPadding = 0;
-				if (prevToken.getType() == CobolPreprocessorParser.NEWLINE) {
+				if (prevToken.isNewline()) {
 					extraPadding = token.getPosn();
 				} else {
 					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
@@ -158,7 +157,7 @@ abstract class CopyReplaceParent {
 			ArrayList<TerminalNodeWrapper> matchList = new ArrayList<>(matchList1);
 			ArrayList<TerminalNodeWrapper> toRemove = new ArrayList<>();
 			for (TerminalNodeWrapper tnw: matchList) {
-				if (tnw.getType() == CobolPreprocessorParser.NEWLINE) toRemove.add(tnw);
+				if (tnw.isNewline()) toRemove.add(tnw);
 			}
 			matchList.removeAll(toRemove);
 			TestIntegration.LOGGER.finest(" matchList = " + matchList);
