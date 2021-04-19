@@ -12,15 +12,21 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	public ArrayDeque<CondCompStmtWhen> whenStmts = new ArrayDeque<>();
 	public ArrayList<ReplaceStatement> replaceStmts = new ArrayList<>();
 	public ArrayList<CondCompVar> defines = new ArrayList<>();
+	public Logger LOGGER = null;
+	public TheCLI CLI = null;
 
 	public CompilerDirectingStatementListener(
 			ArrayList<CompilerDirectingStatement> compDirStmts
 			, ArrayList<CondCompVar> compOptDefines
+			, Logger LOGGER
+			, TheCLI CLI
 			) {
 		super();
 		this.compDirStmts = compDirStmts;
 		this.compOptDefines = compOptDefines;
 		this.defines.addAll(compOptDefines);
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {
@@ -44,7 +50,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterCopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) { 
-		this.compDirStmts.add(new CopyStatement(ctx));
+		this.compDirStmts.add(new CopyStatement(ctx, this.LOGGER, this.CLI));
 	}
 
 	public void enterConditionalCompilationIf(CobolPreprocessorParser.ConditionalCompilationIfContext ctx) {
