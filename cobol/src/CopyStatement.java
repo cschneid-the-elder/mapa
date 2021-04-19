@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
@@ -9,6 +10,8 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 public class CopyStatement extends CopyReplaceParent implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
+	private Logger LOGGER = null;
+	private TheCLI CLI = null;
 	private CobolPreprocessorParser.CopyStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COPY;
 	private ArrayList<ReplaceClause> replaceClauses = new ArrayList<>();
@@ -19,8 +22,13 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 	private ArrayList<ArrayList<TerminalNodeWrapper>> replaceable = new ArrayList<>();
 	private ArrayList<ArrayList<TerminalNodeWrapper>> replacement = new ArrayList<>();
 
-	public CopyStatement(CobolPreprocessorParser.CopyStatementContext ctx) {
+	public CopyStatement(
+			CobolPreprocessorParser.CopyStatementContext ctx 
+			, Logger LOGGER
+			, TheCLI CLI) {
 		this.ctx = ctx;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
 		this.startPosn = this.ctx.start.getCharPositionInLine();
@@ -38,17 +46,17 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 			}
 		}
 
-		TestIntegration.LOGGER.fine(myName + " " + this.getCopyFile());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.start.getLine() = " + this.ctx.start.getLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getLine() = " + this.ctx.COPY().getSymbol().getLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.stop.getLine() = " + this.ctx.stop.getLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getLine() = " + this.ctx.DOT().getSymbol().getLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.start.getCharPositionInLine() = " + this.ctx.start.getCharPositionInLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getCharPositionInLine() = " + this.ctx.COPY().getSymbol().getCharPositionInLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.stop.getCharPositionInLine() = " + this.ctx.stop.getCharPositionInLine());
-		TestIntegration.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getCharPositionInLine() = " + this.ctx.DOT().getSymbol().getCharPositionInLine());
-		TestIntegration.LOGGER.fine(myName + " this.replaceable = " + this.replaceable);
-		TestIntegration.LOGGER.fine(myName + " this.replacement = " + this.replacement);
+		this.LOGGER.fine(myName + " " + this.getCopyFile());
+		this.LOGGER.fine(myName + " this.ctx.start.getLine() = " + this.ctx.start.getLine());
+		this.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getLine() = " + this.ctx.COPY().getSymbol().getLine());
+		this.LOGGER.fine(myName + " this.ctx.stop.getLine() = " + this.ctx.stop.getLine());
+		this.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getLine() = " + this.ctx.DOT().getSymbol().getLine());
+		this.LOGGER.fine(myName + " this.ctx.start.getCharPositionInLine() = " + this.ctx.start.getCharPositionInLine());
+		this.LOGGER.fine(myName + " this.ctx.COPY().getSymbol().getCharPositionInLine() = " + this.ctx.COPY().getSymbol().getCharPositionInLine());
+		this.LOGGER.fine(myName + " this.ctx.stop.getCharPositionInLine() = " + this.ctx.stop.getCharPositionInLine());
+		this.LOGGER.fine(myName + " this.ctx.DOT().getSymbol().getCharPositionInLine() = " + this.ctx.DOT().getSymbol().getCharPositionInLine());
+		this.LOGGER.fine(myName + " this.replaceable = " + this.replaceable);
+		this.LOGGER.fine(myName + " this.replacement = " + this.replacement);
 	}
 
 	public int getLine() {
@@ -88,13 +96,13 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 			, PrintWriter out
 			, String currLine
 			) throws IOException {
-		TestIntegration.LOGGER.fine(this.myName + " apply() " + this.getCopyFile());
-		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
-		TestIntegration.LOGGER.finest(" replacement = " + replacement);
+		this.LOGGER.fine(this.myName + " apply() " + this.getCopyFile());
+		this.LOGGER.finest(" replaceable = " + replaceable);
+		this.LOGGER.finest(" replacement = " + replacement);
 
 		String lastLine = null;
 		int lastLineNb = src.getLineNumber() + (this.endLine - this.startLine);
-		TestIntegration.LOGGER.fine("current line = " + src.getLineNumber() + " lastLine = " + lastLineNb);
+		this.LOGGER.fine("current line = " + src.getLineNumber() + " lastLine = " + lastLineNb);
 		while (src.getLineNumber() < lastLineNb) lastLine = src.readLine();
 
 		/*
@@ -106,13 +114,13 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		write the rest of the source line following the COPY statement.
 		*/
 		int startPosn = this.startPositionInLine() - 1;
-		TestIntegration.LOGGER.fine("startPosn = " + startPosn);
+		this.LOGGER.fine("startPosn = " + startPosn);
 		out.println(currLine.substring(0, startPosn));
 
 		String copyFile = null;
 
 		try {
-			copyFile = TestIntegration.copyWithout73to80(
+			copyFile = CobolSource.copyWithout73to80(
 					this.getCopyFileFull()
 					, TestIntegration.baseDir
 					, this.getCopyFile()
@@ -123,7 +131,7 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		}
 
 		try {
-			copyFile = TestIntegration.CLI.copyCompressingContinuations(
+			copyFile = this.CLI.copyCompressingContinuations(
 					copyFile
 					, TestIntegration.baseDir
 					, this.getCopyFile()
@@ -146,14 +154,14 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		Writing the rest of the source line following the COPY statement.
 		*/
 		int endPosn = this.endPositionInLine() + 1;
-		TestIntegration.LOGGER.fine("endPosn = " + endPosn);
+		this.LOGGER.fine("endPosn = " + endPosn);
 		String outLine = null;
 		if (this.getLine() == this.getEndLine()) {
-			outLine = TestIntegration.CLI.padLeft(currLine.substring(endPosn), currLine.length());
+			outLine = this.CLI.padLeft(currLine.substring(endPosn), currLine.length());
 		} else {
-			outLine = TestIntegration.CLI.padLeft(lastLine.substring(endPosn), lastLine.length());
+			outLine = this.CLI.padLeft(lastLine.substring(endPosn), lastLine.length());
 		}
-		TestIntegration.LOGGER.fine("outLine = |" + outLine + "|");
+		this.LOGGER.fine("outLine = |" + outLine + "|");
 		out.println(outLine);
 	}
 
@@ -186,7 +194,7 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		String copyFileFull = null;
 		String copyFile = this.getCopyFile();
 
-		for (String path: TestIntegration.CLI.copyPaths) {
+		for (String path: this.CLI.copyPaths) {
 			File aFile = new File(path + "/" + copyFile);
 			if (aFile.exists()) {
 				copyFileFull = path + "/" + copyFile;
@@ -203,11 +211,11 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 			, ArrayList<ArrayList<TerminalNodeWrapper>> replaceable
 			, ArrayList<ArrayList<TerminalNodeWrapper>> replacement
 			) throws IOException {
-		TestIntegration.LOGGER.fine(this.myName + " applyReplacingPhrase() ");
-		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
-		TestIntegration.LOGGER.finest(" replacement = " + replacement);
+		this.LOGGER.fine(this.myName + " applyReplacingPhrase() ");
+		this.LOGGER.finest(" replaceable = " + replaceable);
+		this.LOGGER.finest(" replacement = " + replacement);
 
-		ArrayList<TerminalNodeWrapper> copyFileNodes1 = TestIntegration.CLI.lookForTerminalNodes(copyFile);
+		ArrayList<TerminalNodeWrapper> copyFileNodes1 = this.CLI.lookForTerminalNodes(copyFile);
 		CopyOnWriteArrayList<TerminalNodeWrapper> copyFileNodes = new CopyOnWriteArrayList<>(copyFileNodes1);
 
 		super.applyReplacingPhrase(copyFileNodes, replaceable, replacement, false, this.getEndLine(), Integer.MAX_VALUE);

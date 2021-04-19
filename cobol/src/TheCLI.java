@@ -12,6 +12,7 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 public class TheCLI{
 	public String[] args = null;
 	private String myName = this.getClass().getName();
+	private Logger LOGGER = null;
 	public Options options = new Options();
 	public CommandLineParser parser = new DefaultParser();
 	public CommandLine line = null;
@@ -23,9 +24,10 @@ public class TheCLI{
 	public Boolean saveTemp = false;
 	public ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
 
-	public TheCLI(String[] args) throws Exception {
+	public TheCLI(String[] args, Logger LOGGER) throws Exception {
 
 		this.args = args;
+		this.LOGGER = LOGGER;
 
 		Option file = new Option("file", true
 			, "name of a single file to process, takes precedence over the fileList option");
@@ -61,7 +63,7 @@ public class TheCLI{
 		try {
 			this.line = parser.parse( options, args );
 		} catch( ParseException exp ) {
-			TestIntegration.LOGGER.severe( "Command line parsing failed.  Reason: " + exp.getMessage() );
+			this.LOGGER.severe( "Command line parsing failed.  Reason: " + exp.getMessage() );
 			System.exit(16);
 		}
 
@@ -76,7 +78,7 @@ public class TheCLI{
 			List<String> list = Files.readAllLines(Paths.get(this.line.getOptionValue("fileList")));
 			this.fileNamesToProcess.addAll(list);
 		} else {
-			TestIntegration.LOGGER.config("Either the file or the fileList option must be provided");
+			this.LOGGER.config("Either the file or the fileList option must be provided");
 			this.formatter.printHelp( "CallTree", options, true );
 			System.exit(16);
 		}
@@ -87,7 +89,7 @@ public class TheCLI{
 			List<String> list = Files.readAllLines(Paths.get(this.line.getOptionValue("copyList")));
 			this.copyPaths.addAll(list);
 		} else {
-			TestIntegration.LOGGER.config("Either the copy or the copyList option must be provided");
+			this.LOGGER.config("Either the copy or the copyList option must be provided");
 			this.formatter.printHelp( "CallTree", options, true );
 			System.exit(16);
 		}
@@ -103,31 +105,31 @@ public class TheCLI{
 		if (this.line.hasOption("logLevel")) {
 			switch(this.line.getOptionValue("logLevel")) {
 				case "SEVERE":
-					TestIntegration.LOGGER.setLevel(Level.SEVERE);
+					this.LOGGER.setLevel(Level.SEVERE);
 					break;
 				case "WARNING":
-					TestIntegration.LOGGER.setLevel(Level.WARNING);
+					this.LOGGER.setLevel(Level.WARNING);
 					break;
 				case "INFO":
-					TestIntegration.LOGGER.setLevel(Level.INFO);
+					this.LOGGER.setLevel(Level.INFO);
 					break;
 				case "CONFIG":
-					TestIntegration.LOGGER.setLevel(Level.CONFIG);
+					this.LOGGER.setLevel(Level.CONFIG);
 					break;
 				case "FINE":
-					TestIntegration.LOGGER.setLevel(Level.FINE);
+					this.LOGGER.setLevel(Level.FINE);
 					break;
 				case "FINER":
-					TestIntegration.LOGGER.setLevel(Level.FINER);
+					this.LOGGER.setLevel(Level.FINER);
 					break;
 				case "FINEST":
-					TestIntegration.LOGGER.setLevel(Level.FINEST);
+					this.LOGGER.setLevel(Level.FINEST);
 					break;
 				default:
-					TestIntegration.LOGGER.config("Unrecognized logLevel option " + this.line.getOptionValue("LogLevel"));
+					this.LOGGER.config("Unrecognized logLevel option " + this.line.getOptionValue("LogLevel"));
 			}
 		} else {
-			TestIntegration.LOGGER.setLevel(Level.INFO);
+			this.LOGGER.setLevel(Level.INFO);
 		}
 
 		if (this.line.hasOption("unitTest")) {
@@ -137,18 +139,18 @@ public class TheCLI{
 				||  this.line.getOptionValue("logLevel").equals("FINER")
 				||  this.line.getOptionValue("logLevel").equals("FINEST")) {
 				} else {
-					TestIntegration.LOGGER.setLevel(Level.FINE);
-					TestIntegration.LOGGER.info("overriding logLevel");
+					this.LOGGER.setLevel(Level.FINE);
+					this.LOGGER.info("overriding logLevel");
 				}
 			} else {
-				TestIntegration.LOGGER.setLevel(Level.FINE);
+				this.LOGGER.setLevel(Level.FINE);
 			}
-			TestIntegration.LOGGER.info("unit testing is in effect");
+			this.LOGGER.info("unit testing is in effect");
 		}
 
 		if (this.line.hasOption("saveTemp")) {
 			this.saveTemp = true;
-			TestIntegration.LOGGER.info("temporary files will be preserved");
+			this.LOGGER.info("temporary files will be preserved");
 		}
 
 	}
@@ -156,7 +158,7 @@ public class TheCLI{
 	private void parseDefines(String fileName) throws Exception {
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 
-		TestIntegration.LOGGER.fine("parseDefines");
+		this.LOGGER.fine("parseDefines");
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
@@ -168,13 +170,13 @@ public class TheCLI{
 		ParseTreeWalker walker = new ParseTreeWalker();
 
 		CompilerDirectingStatementListener listener = 
-			new CompilerDirectingStatementListener(compDirStmts, this.compOptDefines);
+			new CompilerDirectingStatementListener(compDirStmts, this.compOptDefines, this.LOGGER, this);
 
-		TestIntegration.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+		this.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
 
-		TestIntegration.LOGGER.finest("compOptDefines: " + this.compOptDefines);
+		this.LOGGER.finest("compOptDefines: " + this.compOptDefines);
 
 	}
 
@@ -186,7 +188,7 @@ public class TheCLI{
 		try {
 			tmpDir = Files.createTempDirectory(baseDir.toPath(), prfx).toFile();
 		} catch (Exception e) {
-			TestIntegration.LOGGER.severe(this.myName + " Exception " + e + " encountered in newTempDir");
+			this.LOGGER.severe(this.myName + " Exception " + e + " encountered in newTempDir");
 			e.printStackTrace();
 			System.exit(16);
 		}
@@ -218,7 +220,7 @@ public class TheCLI{
 			try {
 				Files.setPosixFilePermissions(aFile.toPath(), perms);
 			} catch (Exception e) {
-				TestIntegration.LOGGER.severe(this.myName + " Exception " + e + " encountered in setPosixAttributes");
+				this.LOGGER.severe(this.myName + " Exception " + e + " encountered in setPosixAttributes");
 				e.printStackTrace();
 				System.exit(16);
 			}
@@ -235,7 +237,7 @@ public class TheCLI{
 			, File baseDir
 			, String initFileNm
 			) throws IOException {
-		TestIntegration.LOGGER.finest(this.myName + " copyCompressingContinuations()");
+		this.LOGGER.finest(this.myName + " copyCompressingContinuations()");
 		ArrayList<TerminalNodeWrapper> tNodes = this.lookForTerminalNodes(fileName);
 
 		File tmp = File.createTempFile("CallTree-" + initFileNm + "-withoutcontinuations-", "-cbl", baseDir);
@@ -279,7 +281,7 @@ public class TheCLI{
 			File tmp
 			, ArrayList<TerminalNodeWrapper> tNodes
 			) throws IOException {
-		TestIntegration.LOGGER.finest(this.myName + " writeOutTerminalNodes()");
+		this.LOGGER.finest(this.myName + " writeOutTerminalNodes()");
 
 		PrintWriter out = new PrintWriter(tmp);
 		StringBuilder sb = new StringBuilder();
@@ -292,7 +294,7 @@ public class TheCLI{
 
 		for (int i = 0; i < tNodes.size(); i++) {
 			token = tNodes.get(i);
-			TestIntegration.LOGGER.finest(" token = |" + token + "|");
+			this.LOGGER.finest(" token = |" + token + "|");
 			switch(token.getType()) {
 				case CobolPreprocessorParser.NEWLINE:
 					newline = true;
@@ -353,7 +355,7 @@ public class TheCLI{
 	public ArrayList<TerminalNodeWrapper> lookForTerminalNodes(
 			String fileName
 			) throws IOException {
-		TestIntegration.LOGGER.fine(this.myName + " lookForTerminalNodes()");
+		this.LOGGER.fine(this.myName + " lookForTerminalNodes()");
 
 		ArrayList<TerminalNodeWrapper> tNodes = new ArrayList<>();
 		CharStream aCharStream = fromFileName(fileName);  //load the file
@@ -369,7 +371,7 @@ public class TheCLI{
 		CobolPreprocessorParserTerminalNodeListener listener = 
 			new CobolPreprocessorParserTerminalNodeListener(tNodes);
 
-		TestIntegration.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+		this.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
 
@@ -385,7 +387,7 @@ public class TheCLI{
 				tNodes.get(i).setPrecededByWhitespace(precededByWhitespace);
 			}
 		}
-		TestIntegration.LOGGER.finest("tNodes: " + tNodes);
+		this.LOGGER.finest("tNodes: " + tNodes);
 
 		return tNodes;
 	}
