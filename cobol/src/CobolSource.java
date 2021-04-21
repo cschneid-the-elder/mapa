@@ -23,6 +23,8 @@ class CobolSource {
 	private ArrayList<DDNode> dataNodes = new ArrayList<>();
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
+	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
+	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
 	private Boolean isCobol = true;
 
 	public CobolSource(
@@ -176,7 +178,6 @@ class CobolSource {
 
 		ArrayList<CondCompVar> compOptDefines = new ArrayList<>(CLI.compOptDefines);
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-		//String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
 		Boolean done = false;
 		int nbCopies = 0;
@@ -307,6 +308,7 @@ class CobolSource {
 							break;
 						case STMT_COPY:
 							if (truthiness.peek() == null || truthiness.peek()) {
+								this.copyStatements.add((CopyStatement)cds);
 								((CopyStatement)cds).apply(src, out, inLineSB.toString());
 								justWriteTheRest = true;
 								butDontWriteThisOne = true;
@@ -610,13 +612,18 @@ class CobolSource {
 					, String aLib) {
 		LOGGER.fine(this.myName + " lookForCalledRoutines()");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
-		CallEtAlListener callListener = new CallEtAlListener(calledNodes, aLib);
+		CallEtAlListener listener = 
+			new CallEtAlListener(
+					calledNodes
+					, this.assignClauses
+					, aLib
+					, this.LOGGER);
 
-		LOGGER.finer("----------walking tree with CallEtAlListener");
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		LOGGER.finest("tree = " + tree);
 
-		walker.walk(callListener, tree);
+		walker.walk(listener, tree);
 
 		LOGGER.finest("calledNodes: " + calledNodes);
 
@@ -662,4 +669,23 @@ class CobolSource {
 		return calledNodes;
 	}
 
+	public void writeOn(PrintWriter out) throws IOException {
+		out.printf(
+			"FILE,%s,%s,%s\n"
+			, this.getUUID().toString()
+			, this.sourceFileName
+			, this.initFileNm);
+
+		for (CopyStatement cs: this.copyStatements) {
+			cs.writeOn(out, this.getUUID());
+		}
+
+		for (CallWrapper cw: this.calledNodes) {
+			cw.writeOn(out, this.getUUID());
+		}
+	}
+
+	public String toString() {
+		return this.sourceFileName;
+	}
 }

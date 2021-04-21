@@ -9,6 +9,7 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
 public class CopyStatement extends CopyReplaceParent implements CompilerDirectingStatement {
 
+	private UUID uuid = UUID.randomUUID();
 	private String myName = this.getClass().getName();
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
@@ -89,6 +90,10 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 
 	public String getText() {
 		return this.ctx.getText();
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
 	}
 
 	public void apply(
@@ -223,6 +228,14 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		StringBuilder outLine = CopyReplaceParent.createStringBuilderFromTerminalNodeWrappers(copyFileNodes);
 
 		out.println(outLine);
+	}
+
+	public void writeOn(PrintWriter out, UUID parentUUID) {
+		out.printf(
+			"COPY,%s,%s,%s\n"
+			, this.getUUID().toString()
+			, parentUUID.toString()
+			, this.getCopyFile());
 	}
 
 	public String toString() {

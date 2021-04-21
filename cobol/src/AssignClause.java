@@ -2,6 +2,7 @@
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
 class AssignClause {
@@ -16,8 +17,10 @@ class AssignClause {
 
 	public AssignClause(
 			CobolParser.AssignClauseContext ctx
+			, Logger LOGGER
 			) {
 		this.ctx = ctx;
+		this.LOGGER = LOGGER;
 
 		if (this.ctx.assignmentName() == null) {
 			CobolParser.LiteralContext lc = this.ctx.literal();

@@ -9,14 +9,9 @@ class CobolWord {
 	private CobolParser.CobolWordContext ctx = null;
 	private TerminalNode tn = null;
 
-	public CobolWord(CobolPreprocessorParser.CobolWordContext ctx) {
-		this.ctx = ctx;
-		this.populateTerminalNode();
-	}
-
 	public CobolWord(CobolParser.CobolWordContext ctx) {
 		this.ctx = ctx;
-		this.populateTerminalNodeWrapperList();
+		this.populateTerminalNode();
 	}
 
 	public TerminalNode getTerminalNode() {

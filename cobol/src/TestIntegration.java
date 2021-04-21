@@ -75,7 +75,7 @@ public static void main(String[] args) throws Exception {
 	CLI = new TheCLI(args, LOGGER);
 	baseDir = newTempDir(); // keep all temp files contained here
 	String fileName = null;
-	ArrayList<CallWrapper> allTheCalledNodes = new ArrayList<>();
+	ArrayList<CobolSource> allTheCobolSource = new ArrayList<>();
 	Boolean pass = true;
 	Boolean idDivFound = false;
 	int failCount = 0;
@@ -84,15 +84,13 @@ public static void main(String[] args) throws Exception {
 		LOGGER.info("Processing " + aFileName);
 		CobolSource cblSrc = new CobolSource(aFileName, baseDir, LOGGER, CLI);
 		if (cblSrc.isCobol()) {
-			allTheCalledNodes.addAll(cblSrc.getCalledNodes());
+			allTheCobolSource.add(cblSrc);
 			if (CLI.unitTest) {
 				if (!testFor(aFileName, cblSrc.getDataNodes(), cblSrc.getCalledNodes())) failCount++;
 			}
 		}
 		LOGGER.fine(aFileName + " calls " + cblSrc.getCalledNodes().size() + " modules");
 	}
-
-	LOGGER.fine("allTheCalledNodes: " + allTheCalledNodes);
 
 	if (failCount > 0) LOGGER.info("----> At least one unit test failed");
 
@@ -101,9 +99,9 @@ public static void main(String[] args) throws Exception {
 		File outFile = new File(CLI.outFileName);
 		PrintWriter pw = new PrintWriter(outFile);
 		LOGGER.finest("writing output");
-		for (CallWrapper cw: allTheCalledNodes) {
-			LOGGER.finest(cw.callingModuleName + " " + cw.uuid.toString());
-			cw.writeOn(pw);
+		for (CobolSource cs: allTheCobolSource) {
+			LOGGER.finest(cs.toString());
+			cs.writeOn(pw);
 		}
 		pw.close();
 	}
