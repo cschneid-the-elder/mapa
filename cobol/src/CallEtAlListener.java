@@ -71,4 +71,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		if (!found) calledNodes.add(aCall);
 	}
 
+	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
+
+	}
 }

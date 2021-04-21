@@ -12,6 +12,7 @@ import static org.antlr.v4.runtime.CharStreams.fromFileName;
 class CobolSource {
 
 	private String myName = this.getClass().getName();
+	private UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private static TheCLI staticCLI = null;
@@ -60,6 +61,10 @@ class CobolSource {
 
 	public ArrayList<DDNode> getDataNodes() {
 		return this.dataNodes;
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
 	}
 
 	/**
