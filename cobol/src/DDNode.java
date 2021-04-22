@@ -21,6 +21,7 @@ class DDNode {
 	public List<String> valuesSet = new ArrayList<>();
 	public String programName = null;
 	public DataLocation locn = null;
+	public Boolean global = false;
 	public CobolParser.DataDescriptionEntryContext ddeCtx = null;
 	public CobolParser.DataDescriptionEntryFormat1Context dde1Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat2Context dde2Ctx = null;
@@ -65,6 +66,9 @@ class DDNode {
 			this.setLevelFromDDE1CTX();
 			this.setValueFromDDE1CTX();
 			this.setRedefinesFromDDE1CTX();
+			if (dde1Ctx.dataGlobalClause() != null && dde1Ctx.dataGlobalClause().size() > 0) {
+				this.global = true;
+			}
 		}
 	}
 
@@ -177,6 +181,7 @@ class DDNode {
 				break;
 			default:
 				this.children.add(child);
+				child.setGlobal(this.isGlobal());
 		}
 	}
 
@@ -194,6 +199,14 @@ class DDNode {
 
 	public Boolean isCondition() {
 		return(this.level.intValue() == 88);
+	}
+
+	public Boolean isGlobal() {
+		return this.global;
+	}
+
+	public void setGlobal(Boolean global) {
+		this.global = global;
 	}
 
 	public DDNode findChild(DDNode child) {

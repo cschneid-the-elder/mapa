@@ -21,10 +21,11 @@ class CobolSource {
 	private String sourceFileName = null;
 	private String currTempFile = null;
 	private ArrayList<DDNode> dataNodes = new ArrayList<>();
-	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+	private ArrayList<CobolProgram> programs = new ArrayList<>();
 	private ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
 	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
+	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private Boolean isCobol = true;
 
 	public CobolSource(
@@ -614,8 +615,7 @@ class CobolSource {
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 		CallEtAlListener listener = 
 			new CallEtAlListener(
-					calledNodes
-					, this.assignClauses
+					this.programs
 					, aLib
 					, this.LOGGER);
 
@@ -625,7 +625,7 @@ class CobolSource {
 
 		walker.walk(listener, tree);
 
-		LOGGER.finest("calledNodes: " + calledNodes);
+		LOGGER.finest("programs: " + this.programs);
 
 		return calledNodes;
 	}
@@ -680,13 +680,6 @@ class CobolSource {
 			cs.writeOn(out, this.getUUID());
 		}
 
-		for (CallWrapper cw: this.calledNodes) {
-			cw.writeOn(out, this.getUUID());
-		}
-
-		for (AssignClause ac: this.assignClauses) {
-			ac.writeOn(out, this.getUUID());
-		}
 	}
 
 	public String toString() {

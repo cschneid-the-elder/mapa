@@ -6,21 +6,19 @@ import org.antlr.v4.runtime.tree.*;
 
 public class CallEtAlListener extends CobolParserBaseListener {
 	private Logger LOGGER = null;
-	public ArrayList<CallWrapper> calledNodes = null;
-	public ArrayList<AssignClause> assignClauses = null;
+	public ArrayList<CobolProgram> programs = null;
 	public String callingModuleName = null;
 	public String aLib = null;
+	public CobolProgram currProgram = null;
 
 	public CallEtAlListener(
-			ArrayList<CallWrapper> al
-			, ArrayList<AssignClause> assignClauses
+			ArrayList<CobolProgram> programs
 			, String aLib
 			, Logger LOGGER) {
 		super();
-		this.calledNodes = al;
 		this.aLib = aLib;
 		this.LOGGER = LOGGER;
-		this.assignClauses = assignClauses;
+		this.programs = programs;
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
@@ -33,57 +31,35 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
 		callingModuleName = ctx.getText();
+		this.currProgram = new CobolProgram(callingModuleName, LOGGER);
+		programs.add(currProgram);
+	}
+
+	public void enterStatement(CobolParser.StatementContext ctx) {
+		currProgram.incrementStatementCounter(ctx);
 	}
 
 	public void enterCallStatement(CobolParser.CallStatementContext ctx) {
-		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
-		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
-		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
-		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
-		assignClauses.add(new AssignClause(ctx, this.LOGGER));
+		this.currProgram.addAssignClause(new AssignClause(ctx, this.LOGGER));
 	}
 }

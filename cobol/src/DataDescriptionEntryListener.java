@@ -16,31 +16,31 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		dataNodes = al;
 	}
 
-	@Override public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
-		TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+		//TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	@Override public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
+	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
 		callingModuleName = ctx.getText();
 	}
 
-	@Override public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
+	public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
 		this.locn = DataLocation.FILEDESCRIPTION;
 	}
 
-	@Override public void enterWorkingStorageSection(CobolParser.WorkingStorageSectionContext ctx) {
+	public void enterWorkingStorageSection(CobolParser.WorkingStorageSectionContext ctx) {
 		this.locn = DataLocation.WORKINGSTORAGE;
 	}
 
-	@Override public void enterLocalStorageSection(CobolParser.LocalStorageSectionContext ctx) {
+	public void enterLocalStorageSection(CobolParser.LocalStorageSectionContext ctx) {
 		this.locn = DataLocation.LOCALSTORAGE;
 	}
 
-	@Override public void enterLinkageSection(CobolParser.LinkageSectionContext ctx) {
+	public void enterLinkageSection(CobolParser.LinkageSectionContext ctx) {
 		this.locn = DataLocation.LINKAGE;
 	}
 
-	@Override public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
+	public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
 		/**
 		*/
 		DDNode node = new DDNode(callingModuleName, ctx, locn);
