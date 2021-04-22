@@ -5,15 +5,20 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 public class DataDescriptionEntryListener extends CobolParserBaseListener {
-	public ArrayList<DDNode> dataNodes = null;
-	public String callingModuleName = null;
+	public ArrayList<CobolProgram> programs = null;
+	public CobolProgram currProgram = null;
+	public Logger LOGGER = null;
 	public DDNode parent = null;
 	public DDNode prev = null;
 	public DataLocation locn = null;
 
-	public DataDescriptionEntryListener(ArrayList<DDNode> al) {
+	public DataDescriptionEntryListener(
+			ArrayList<CobolProgram> programs
+			, Logger LOGGER
+			) {
 		super();
-		dataNodes = al;
+		this.programs = programs;
+		this.LOGGER = LOGGER;
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
@@ -21,7 +26,20 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	}
 
 	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		callingModuleName = ctx.getText();
+		String callingModuleName = ctx.getText();
+		currProgram = null;
+
+		for (CobolProgram pgm: this.programs) {
+			if (pgm.hasThisProgramName(callingModuleName)) {
+				currProgram = pgm;
+				break;
+			}
+		}
+
+		if (currProgram == null) {
+			this.currProgram = new CobolProgram(callingModuleName, LOGGER);
+			programs.add(this.currProgram);
+		}
 	}
 
 	public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
@@ -43,6 +61,7 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
 		/**
 		*/
+		String callingModuleName = this.currProgram.getProgramName();
 		DDNode node = new DDNode(callingModuleName, ctx, locn);
 
 		TestIntegration.LOGGER.finer(callingModuleName + " " + node);
@@ -76,7 +95,8 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 					prev = node;
 				}
 		}
-		dataNodes.add(node);
+
+		this.currProgram.addDDNode(node);
 	}
 
 }

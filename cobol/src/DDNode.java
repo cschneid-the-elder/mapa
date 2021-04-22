@@ -22,6 +22,7 @@ class DDNode {
 	public String programName = null;
 	public DataLocation locn = null;
 	public Boolean global = false;
+	public Boolean external = false;
 	public CobolParser.DataDescriptionEntryContext ddeCtx = null;
 	public CobolParser.DataDescriptionEntryFormat1Context dde1Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat2Context dde2Ctx = null;
@@ -68,6 +69,9 @@ class DDNode {
 			this.setRedefinesFromDDE1CTX();
 			if (dde1Ctx.dataGlobalClause() != null && dde1Ctx.dataGlobalClause().size() > 0) {
 				this.global = true;
+			}
+			if (dde1Ctx.dataExternalClause() != null && dde1Ctx.dataExternalClause().size() > 0) {
+				this.external = true;
 			}
 		}
 	}
@@ -182,6 +186,7 @@ class DDNode {
 			default:
 				this.children.add(child);
 				child.setGlobal(this.isGlobal());
+				child.setExternal(this.isExternal());
 		}
 	}
 
@@ -205,8 +210,16 @@ class DDNode {
 		return this.global;
 	}
 
+	public Boolean isExternal() {
+		return this.external;
+	}
+
 	public void setGlobal(Boolean global) {
 		this.global = global;
+	}
+
+	public void setExternal(Boolean external) {
+		this.external = external;
 	}
 
 	public DDNode findChild(DDNode child) {

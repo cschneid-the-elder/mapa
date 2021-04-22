@@ -30,9 +30,20 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	}
 
 	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		callingModuleName = ctx.getText();
-		this.currProgram = new CobolProgram(callingModuleName, LOGGER);
-		programs.add(currProgram);
+		String callingModuleName = ctx.getText();
+		currProgram = null;
+
+		for (CobolProgram pgm: this.programs) {
+			if (pgm.hasThisProgramName(callingModuleName)) {
+				currProgram = pgm;
+				break;
+			}
+		}
+
+		if (currProgram == null) {
+			this.currProgram = new CobolProgram(callingModuleName, LOGGER);
+			programs.add(this.currProgram);
+		}
 	}
 
 	public void enterStatement(CobolParser.StatementContext ctx) {
@@ -40,22 +51,22 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	}
 
 	public void enterCallStatement(CobolParser.CallStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 		this.currProgram.addCall(aCall);
 	}
 

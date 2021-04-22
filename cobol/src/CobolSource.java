@@ -593,13 +593,11 @@ class CobolSource {
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(dataNodes);
+		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
-
-		LOGGER.finest("dataNodes: " + dataNodes);
 
 		calledNodes = lookForCalledRoutines(tree, walker, aLib);
 		calledNodes = resolveCalledNodes(tree, walker, calledNodes, dataNodes);
