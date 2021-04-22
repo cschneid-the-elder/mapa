@@ -2,13 +2,16 @@
 import java.util.*;
 import java.io.*;
 import java.nio.file.*;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
 class CallWrapper {
 
 	public UUID uuid = UUID.randomUUID();
+	private Logger LOGGER = null;
 	public CallType callType = null;
 	public String identifier = null; //COBOL identifier
+	private ArrayList<UUID> calledModuleUUIDs = new ArrayList<>();
 	public List<String> calledModuleNames = new ArrayList<>();
 	public String callingModuleName = null;
 	public List<DDNode> eightyEights = new ArrayList<>();
@@ -28,8 +31,10 @@ class CallWrapper {
 			CobolParser.CallStatementContext ctx
 			, String callingModuleName
 			, String aLib
+			, Logger LOGGER
 			) {
 		this.ctxCall = ctx;
+		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
 		this.initialize(ctx);
@@ -39,8 +44,10 @@ class CallWrapper {
 			CobolParser.ExecCicsLinkStatementContext ctx
 			, String callingModuleName
 			, String aLib
+			, Logger LOGGER
 			) {
 		this.ctxLink = ctx;
+		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
 		this.initialize(ctx);
@@ -50,8 +57,10 @@ class CallWrapper {
 			CobolParser.ExecCicsXctlStatementContext ctx
 			, String callingModuleName
 			, String aLib
+			, Logger LOGGER
 			) {
 		this.ctxXctl = ctx;
+		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
 		this.initialize(ctx);
@@ -61,8 +70,10 @@ class CallWrapper {
 			CobolParser.ExecSqlCallStatementContext ctx
 			, String callingModuleName
 			, String aLib
+			, Logger LOGGER
 			) {
 		this.ctxSqlCall = ctx;
+		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
 		this.initialize(ctx);
@@ -74,6 +85,7 @@ class CallWrapper {
 			aString = aString.replace("\"", "");
 			if (!this.includes(calledModuleName)) {
 				this.calledModuleNames.add(aString);
+				this.calledModuleUUIDs.add(UUID.randomUUID());
 			}
 		}
 		return;
@@ -146,19 +158,19 @@ class CallWrapper {
 		}
 
 		if (this.dataNode == null) {
-			TestIntegration.LOGGER.warning(
+			this.LOGGER.warning(
 				"identifier " 
 				+ this.identifier 
 				+ " not found in " 
 				+ this.callingModuleName);
 		} else {
-			TestIntegration.LOGGER.fine(
+			this.LOGGER.fine(
 				"valueInValueClause = |" +
 				 this.dataNode.valueInValueClause + "|");
 			if (this.dataNode.valueInValueClause == null) {
-				TestIntegration.LOGGER.fine("valueInValueClause == null");
+				this.LOGGER.fine("valueInValueClause == null");
 				if (this.dataNode.redefinesIdentifier != null) {
-					TestIntegration.LOGGER.fine(
+					this.LOGGER.fine(
 						"redefinesIdentifier = " 
 						+ this.dataNode.redefinesIdentifier);
 					List<DDNode> list = 
@@ -166,7 +178,7 @@ class CallWrapper {
 							this
 							.dataNode
 							.redefinesIdentifier);
-					TestIntegration.LOGGER.fine("list.size() = " + list.size());
+					this.LOGGER.fine("list.size() = " + list.size());
 					if (list.size() > 0) {
 						this.addCalledModuleName(list.get(0).valueInValueClause);
 					}
@@ -317,17 +329,17 @@ class CallWrapper {
 
 	public Boolean includes(String caller, String callee, CallType ty) {
 		/**/
-		TestIntegration.LOGGER.fine(
+		this.LOGGER.fine(
 			"this.calledModuleNames.contains(callee) = " 
 			+ this.calledModuleNames.contains(callee));
-		TestIntegration.LOGGER.fine("calledModuleNames = " + calledModuleNames);
-		TestIntegration.LOGGER.fine(
+		this.LOGGER.fine("calledModuleNames = " + calledModuleNames);
+		this.LOGGER.fine(
 			"this.callingModuleName.equals(caller) = " 
 			+ this.callingModuleName.equals(caller));
-		TestIntegration.LOGGER.fine("callingModuleName = " + callingModuleName);
-		TestIntegration.LOGGER.fine("caller = " + caller);
-		TestIntegration.LOGGER.fine("this.callType = " + this.callType);
-		TestIntegration.LOGGER.fine("ty = " + ty);
+		this.LOGGER.fine("callingModuleName = " + callingModuleName);
+		this.LOGGER.fine("caller = " + caller);
+		this.LOGGER.fine("this.callType = " + this.callType);
+		this.LOGGER.fine("ty = " + ty);
 		/**/
 
 		return (this.calledModuleNames.contains(callee) 
@@ -373,18 +385,20 @@ class CallWrapper {
 		}
 	}
 
-	public void writeOn(PrintWriter out) throws IOException {
-		/*
-		uuid doesn't really mean much, it should uniquely identify
-		a CALL but it doesn't
-		*/
-		for (String cm: calledModuleNames) {
+	public UUID getUUID() {
+		return this.uuid;
+	}
+
+	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
+		for (int i = 0; i < calledModuleNames.size(); i++) {
 			out.printf(
-				"%s,%s,%s,%s\n"
+				"CALL,%s,%s,%s,%s,%s,%s\n"
+				, calledModuleUUIDs.get(i)
+				, parentUUID.toString()
 				, this.aLib
 				, this.callingModuleName
 				, this.callType
-				, cm);
+				, calledModuleNames.get(i));
 		}
 
 	}
