@@ -683,6 +683,10 @@ class CobolSource {
 		for (CallWrapper cw: this.calledNodes) {
 			cw.writeOn(out, this.getUUID());
 		}
+
+		for (AssignClause ac: this.assignClauses) {
+			ac.writeOn(out, this.getUUID());
+		}
 	}
 
 	public String toString() {

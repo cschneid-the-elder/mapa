@@ -30,6 +30,16 @@ class AssignClause {
 			context of an ASSIGN clause is the non-numeric literal.
 			*/
 			this.assignName = lc.NONNUMERICLITERAL().getSymbol().getText();
+			int apos1 = this.assignName.indexOf('\'');
+			int apos2 = this.assignName.lastIndexOf('\'');
+			if (apos1 != -1 && apos2 != -1 && apos1 != apos2) {
+				this.assignName = this.assignName.substring(++apos1, apos2);
+			}
+			int quot1 = this.assignName.indexOf('\"');
+			int quot2 = this.assignName.lastIndexOf('\"');
+			if (quot1 != -1 && quot2 != -1 && quot1 != quot2) {
+				this.assignName = this.assignName.substring(++quot1, quot2);
+			}
 		} else {
 			CobolParser.AssignmentNameContext anc = this.ctx.assignmentName();
 			CobolParser.SystemNameContext snc = anc.systemName();
@@ -38,13 +48,23 @@ class AssignClause {
 		}
 
 		int i = this.assignName.lastIndexOf('-');
-		if (i != -1) {
+		if (i == -1) {
+			this.ddName = this.assignName;
+		} else {
 			this.ddName = this.assignName.substring(++i);
 		}
 	}
 
 	public String getDDname() {
 		return this.ddName;
+	}
+
+	public void writeOn(PrintWriter out, UUID parentUUID) {
+		out.printf(
+			"DD,%s,%s,%s\n"
+			, this.uuid.toString()
+			, parentUUID.toString()
+			, this.getDDname());
 	}
 
 }
