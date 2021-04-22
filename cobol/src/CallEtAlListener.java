@@ -23,15 +23,19 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.assignClauses = assignClauses;
 	}
 
-	@Override public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
 		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	@Override public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
+	public void enterProgramUnit(CobolParser.ProgramUnitContext ctx) {
+		//not clear this is needed
+	}
+
+	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
 		callingModuleName = ctx.getText();
 	}
 
-	@Override public void enterCallStatement(CobolParser.CallStatementContext ctx) {
+	public void enterCallStatement(CobolParser.CallStatementContext ctx) {
 		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
 		for (CallWrapper cw: calledNodes) {
@@ -43,7 +47,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		if (!found) calledNodes.add(aCall);
 	}
 
-	@Override public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
+	public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
 		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
 		for (CallWrapper cw: calledNodes) {
@@ -55,7 +59,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		if (!found) calledNodes.add(aCall);
 	}
 
-	@Override public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
+	public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
 		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
 		for (CallWrapper cw: calledNodes) {
@@ -67,7 +71,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		if (!found) calledNodes.add(aCall);
 	}
 
-	@Override public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
+	public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
 		Boolean found = false;
 		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
 		for (CallWrapper cw: calledNodes) {
