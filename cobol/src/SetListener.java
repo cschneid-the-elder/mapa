@@ -5,26 +5,47 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 public class SetListener extends CobolParserBaseListener {
-	private static Logger LOGGER = null;
-	public ArrayList<CallWrapper> calls = null;
-	public String callingModuleName = null;
+	private Logger LOGGER = null;
+	public ArrayList<CobolProgram> programs = null;
+	public CobolProgram currProgram = null;
 
-	public SetListener( ArrayList<CallWrapper> al, Logger logger ) {
+	public SetListener(
+			ArrayList<CobolProgram> programs
+			, Logger LOGGER ) {
 		super();
-		calls = al;
-		LOGGER = logger;
+		this.LOGGER = LOGGER;
 	}
 
-	@Override public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+	public void enterEveryRule(ParserRuleContext ctx) {
 		//LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	@Override public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
- 		callingModuleName = ctx.getText();
+	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
+		String newProgramName = ctx.getText();
+		this.currProgram = null;
 
+		for (CobolProgram pgm: this.programs) {
+			if (pgm.hasThisProgramName(newProgramName)) {
+				this.currProgram = pgm;
+				break;
+			}
+			CobolProgram newPgm = pgm.nestedProgramNamed(newProgramName);
+			if (newPgm != null) {
+				this.currProgram = newPgm;
+				break;
+			}
+		}
+
+		if (this.currProgram == null) {
+			throw new IllegalArgumentException(
+				"program "
+				+ newProgramName
+				+ " not found in "
+				+ this.programs);
+		}
 	}
 
-	@Override public void enterMoveToStatement(CobolParser.MoveToStatementContext ctx) { 
+	public void enterMoveToStatement(CobolParser.MoveToStatementContext ctx) { 
 		/**
 			Possibilities:
 			MOVE literal    TO identifier
@@ -35,9 +56,9 @@ public class SetListener extends CobolParserBaseListener {
 			Usually it's the first one.
 		*/
 		//System.out.println("enterMoveToStatement: " + ctx.getClass().getName() + ": " + ctx.getText()); 
-		for (CallWrapper call: calls) {
+		for (CallWrapper call: this.currProgram.getCalledNodes()) {
 			if (call.identifier == null) continue; 
-			if (!callingModuleName.equals(call.callingModuleName)) continue;
+			//if (!currProgram.hasThisProgramName(call)) continue;
 			for (CobolParser.IdentifierContext idCtx: ctx.identifier()) {
 				LOGGER.finest("    idCtx: " + idCtx.getText());
 				if (call.identifier.equals(idCtx.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString())) {
@@ -56,13 +77,12 @@ public class SetListener extends CobolParserBaseListener {
 
 	}
 
-	@Override public void enterSetTo(CobolParser.SetToContext ctx) { 
+	public void enterSetTo(CobolParser.SetToContext ctx) { 
 		LOGGER.finest("enterSetTo: " + ctx.getClass().getName() + ": " + ctx.getText()); 
-		for (CallWrapper call: calls) {
+		for (CallWrapper call: this.currProgram.getCalledNodes()) {
 			LOGGER.finest("  call.identifier = " + call.identifier);
-			if (!callingModuleName.equals(call.callingModuleName)) continue;
+			//if (!currProgram.hasThisProgramName(call)) continue;
 			if (call.dataNode == null) continue;
-			if (call.dataNode.children.size() == 0) continue;
 			for (DDNode ee: call.dataNode.children) {
 				if (!ee.isCondition()) continue;
 				LOGGER.finest("    call.eightyEight = " + ee);

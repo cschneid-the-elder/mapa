@@ -7,7 +7,6 @@ import org.antlr.v4.runtime.tree.*;
 public class CallEtAlListener extends CobolParserBaseListener {
 	private Logger LOGGER = null;
 	public ArrayList<CobolProgram> programs = null;
-	public String callingModuleName = null;
 	public String aLib = null;
 	public CobolProgram currProgram = null;
 
@@ -30,19 +29,27 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	}
 
 	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		String callingModuleName = ctx.getText();
-		currProgram = null;
+		String newProgramName = ctx.getText();
+		this.currProgram = null;
 
 		for (CobolProgram pgm: this.programs) {
-			if (pgm.hasThisProgramName(callingModuleName)) {
-				currProgram = pgm;
+			if (pgm.hasThisProgramName(newProgramName)) {
+				this.currProgram = pgm;
+				break;
+			}
+			CobolProgram newPgm = pgm.nestedProgramNamed(newProgramName);
+			if (newPgm != null) {
+				this.currProgram = newPgm;
 				break;
 			}
 		}
 
-		if (currProgram == null) {
-			this.currProgram = new CobolProgram(callingModuleName, LOGGER);
-			programs.add(this.currProgram);
+		if (this.currProgram == null) {
+			throw new IllegalArgumentException(
+				"program "
+				+ newProgramName
+				+ " not found in "
+				+ this.programs);
 		}
 	}
 

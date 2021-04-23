@@ -599,6 +599,24 @@ class CobolSource {
 
 		walker.walk(listener, tree);
 
+		/*
+		If an O1 level is GLOBAL or EXTERNAL it and all its children are visible
+		to nested programs.
+
+		I think I can get around this by implementing nested programs instead of
+		simply trying to accomodate > 1 program in a source code member.
+
+		for (CobolProgram pgm: this.programs) {
+			for (DDNode ddNode: pgm.getDataNodes()) {
+				if (ddNode.getLevel() == 1 && (ddNode.isGlobal() || ddNode.isExternal())) {
+					if (!pgm.hasThisDDNode01(ddNode)) {
+						pgm.adopt(ddNode);
+					}
+				}
+			}
+		}
+		*/
+
 		calledNodes = lookForCalledRoutines(tree, walker, aLib);
 		calledNodes = resolveCalledNodes(tree, walker, calledNodes, dataNodes);
 
@@ -656,7 +674,7 @@ class CobolSource {
 
 		LOGGER.finest("calledNodes: " + calledNodes);
 
-		SetListener listener = new SetListener(calledNodes, LOGGER);
+		SetListener listener = new SetListener(programs, LOGGER);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 

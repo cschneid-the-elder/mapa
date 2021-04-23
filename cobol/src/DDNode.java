@@ -222,6 +222,14 @@ class DDNode {
 		this.external = external;
 	}
 
+	public UUID getUUID() {
+		return this.uuid;
+	}
+
+	public int getLevel() {
+		return this.level;
+	}
+
 	public DDNode findChild(DDNode child) {
 		DDNode result = null;
 
