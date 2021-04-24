@@ -50,7 +50,7 @@ class CobolSource {
 		} else {
 			currTempFile = CLI.copyCompressingContinuations(currTempFile, baseDir, initFileNm);
 			currTempFile = processCDS(currTempFile, baseDir, initFileNm);
-			this.calledNodes = assembleDataNodeTree(currTempFile, getLib(sourceFileName));
+			this.assembleDataNodeTree(currTempFile, getLib(sourceFileName));
 		}
 	}
 
@@ -617,14 +617,14 @@ class CobolSource {
 		}
 		*/
 
-		calledNodes = lookForCalledRoutines(tree, walker, aLib);
-		calledNodes = resolveCalledNodes(tree, walker, calledNodes, dataNodes);
+		this.lookForCalledRoutines(tree, walker, aLib);
+		this.resolveCalledNodes(tree, walker, calledNodes, dataNodes);
 
 		return calledNodes;
 
 	}
 
-	public ArrayList<CallWrapper> lookForCalledRoutines(ParseTree tree
+	private void lookForCalledRoutines(ParseTree tree
 					, ParseTreeWalker walker
 					, String aLib) {
 		LOGGER.fine(this.myName + " lookForCalledRoutines()");
@@ -642,11 +642,9 @@ class CobolSource {
 		walker.walk(listener, tree);
 
 		LOGGER.finest("programs: " + this.programs);
-
-		return calledNodes;
 	}
 
-	public ArrayList<CallWrapper> resolveCalledNodes(ParseTree tree
+	private void resolveCalledNodes(ParseTree tree
 						, ParseTreeWalker walker
 						, ArrayList<CallWrapper> calledNodes
 						, ArrayList<DDNode> dataNodes) {
@@ -654,6 +652,10 @@ class CobolSource {
 		LOGGER.fine(this.myName + " resolveCalledNodes");
 		ArrayList<DDNode> calledDataNodes = new ArrayList<>();
 
+		for (CobolProgram pgm: this.programs) {
+			pgm.resolveCalledNodes();
+		}
+		/*
 		for (CallWrapper call: calledNodes) {
 			LOGGER.finest("  call.identifier = " + call.identifier);
 			if (call.identifier == null) {
@@ -665,24 +667,19 @@ class CobolSource {
 					}
 				}
 				LOGGER.finest("  all node children named " + call.identifier + " = " + calledDataNodes);
-				if (!call.selectDataNode(calledDataNodes, dataNodes)) {
+				if (!call.selectDataNode(calledDataNodes)) {
 					LOGGER.warning("!no data node selected");
 				}
 				LOGGER.finest("call.dataNode = " + call.dataNode);
 			}
 		}
-
-		LOGGER.finest("calledNodes: " + calledNodes);
+		*/
 
 		SetListener listener = new SetListener(programs, LOGGER);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
-
-		LOGGER.finest("calledNodes: " + calledNodes);
-
-		return calledNodes;
 	}
 
 	public void writeOn(PrintWriter out) throws IOException {

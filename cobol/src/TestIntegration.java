@@ -846,12 +846,12 @@ public static void main(String[] args) throws Exception {
 		Boolean rc = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.level.equals(level) && node.identifier.equals(identifier)) {
+			if (node.getLevel().equals(level) && node.getIdentifier().equals(identifier)) {
 				rc = true;
 				LOGGER.fine(identifier + " node found");
 				break;
 			} else {
-				LOGGER.fine(node.level + " != " + level + " || " + node.identifier + " != " + identifier);
+				LOGGER.fine(node.getLevel() + " != " + level + " || " + node.getIdentifier() + " != " + identifier);
 			}
 		}
 
@@ -873,12 +873,12 @@ public static void main(String[] args) throws Exception {
 		Boolean rc = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.level.equals(level) && node.identifier.equals(identifier) && node.locn == locn) {
+			if (node.getLevel().equals(level) && node.getIdentifier().equals(identifier) && node.getLocn() == locn) {
 				rc = true;
 				LOGGER.fine(identifier + " node found");
 				break;
 			} else {
-				LOGGER.finest(node.level + " != " + level + " || " + node.identifier + " != " + identifier + " || " + node.locn + " != " + locn);
+				LOGGER.finest(node.getLevel() + " != " + level + " || " + node.getIdentifier() + " != " + identifier + " || " + node.getLocn() + " != " + locn);
 			}
 		}
 

@@ -106,15 +106,15 @@ class CallWrapper {
 					) {
 			is = is && this.calledModuleNames.equals(cw.calledModuleNames);
 		} else {
-			if (this.identifier != null && identifier != null) {
-				is = is && this.identifier.equals(cw.identifier);
+			if (this.identifier != null && cw.getIdentifier() != null) {
+				is = is && this.identifier.equals(cw.getIdentifier());
 			}
 		}
 		is = is && this.ofs.equals(cw.ofs);
 		return is; 
 	}
 
-	public Boolean selectDataNode(List<DDNode> dataNodes, ArrayList<DDNode> allDataNodes) {
+	public Boolean selectDataNode(List<DDNode> dataNodes) {
 		/**
 			The CALL statement represented by this instance may be of the form
 			CALL <identifier> where <identifier> is a field name possibly qualified
@@ -129,7 +129,7 @@ class CallWrapper {
 		Boolean found = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.identifier.equals(this.identifier)) {
+			if (node.getIdentifier().equals(this.identifier)) {
 				if (this.ofs.size() == 0) {
 					found = true;
 					this.dataNode = node;
@@ -139,7 +139,7 @@ class CallWrapper {
 					DDNode parent = node.parent;
 					Boolean foundOf = true;
 					for (String of: this.ofs) {
-						while (parent != null && !parent.identifier.equals(of)) {
+						while (parent != null && !parent.getIdentifier().equals(of)) {
 							parent = parent.parent;
 						}
 						if (parent == null) {
@@ -387,6 +387,14 @@ class CallWrapper {
 
 	public UUID getUUID() {
 		return this.uuid;
+	}
+
+	public String getIdentifier() {
+		return this.identifier;
+	}
+
+	public DDNode getDataNode() {
+		return this.dataNode;
 	}
 
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {

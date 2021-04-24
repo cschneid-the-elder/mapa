@@ -226,8 +226,28 @@ class DDNode {
 		return this.uuid;
 	}
 
-	public int getLevel() {
+	public Integer getLevel() {
 		return this.level;
+	}
+
+	public DDNode getParent() {
+		return this.parent;
+	}
+
+	public String getIdentifier() {
+		return this.identifier;
+	}
+
+	public List<DDNode> getChildren() {
+		return this.children;
+	}
+
+	public String getValueInValueClause() {
+		return this.valueInValueClause;
+	}
+
+	public DataLocation getLocn() {
+		return this.locn;
 	}
 
 	public DDNode findChild(DDNode child) {
@@ -236,7 +256,7 @@ class DDNode {
 		if (this.uuid.equals(child.uuid)) {return(this);}
 
 		for (DDNode node: this.children) {
-			if (node.uuid.equals(child.uuid)) {
+			if (node.getUUID().equals(child.getUUID())) {
 				result = node;
 				break;
 			} else {
@@ -255,7 +275,7 @@ class DDNode {
 			result.add(this);
 		} else {
 			for (DDNode node: this.children) {
-				if (node.identifier.equals(identifier)) {
+				if (node.getIdentifier().equals(identifier)) {
 					result.add(node);
 				} else {
 					result.addAll(node.findChildrenNamed(identifier));

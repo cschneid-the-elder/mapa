@@ -57,11 +57,11 @@ public class SetListener extends CobolParserBaseListener {
 		*/
 		//System.out.println("enterMoveToStatement: " + ctx.getClass().getName() + ": " + ctx.getText()); 
 		for (CallWrapper call: this.currProgram.getCalledNodes()) {
-			if (call.identifier == null) continue; 
+			if (call.getIdentifier() == null) continue; 
 			//if (!currProgram.hasThisProgramName(call)) continue;
 			for (CobolParser.IdentifierContext idCtx: ctx.identifier()) {
 				LOGGER.finest("    idCtx: " + idCtx.getText());
-				if (call.identifier.equals(idCtx.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString())) {
+				if (call.getIdentifier().equals(idCtx.qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString())) {
 					LOGGER.finest("      call.identifier: " + call.identifier);
 					if (ctx.moveToSendingArea().literal() == null) {
 						/**
@@ -80,16 +80,16 @@ public class SetListener extends CobolParserBaseListener {
 	public void enterSetTo(CobolParser.SetToContext ctx) { 
 		LOGGER.finest("enterSetTo: " + ctx.getClass().getName() + ": " + ctx.getText()); 
 		for (CallWrapper call: this.currProgram.getCalledNodes()) {
-			LOGGER.finest("  call.identifier = " + call.identifier);
+			LOGGER.finest("  call.identifier = " + call.getIdentifier());
 			//if (!currProgram.hasThisProgramName(call)) continue;
 			if (call.dataNode == null) continue;
-			for (DDNode ee: call.dataNode.children) {
+			for (DDNode ee: call.getDataNode().getChildren()) {
 				if (!ee.isCondition()) continue;
 				LOGGER.finest("    call.eightyEight = " + ee);
 				LOGGER.finest("    ctx...IDENTIFIER() = " + ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER());
-				if (ee.identifier.equals(ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString())) {
+				if (ee.getIdentifier().equals(ctx.identifier().qualifiedDataName().qualifiedDataNameFormat1().dataName().cobolWord().IDENTIFIER().toString())) {
 					LOGGER.finest( "    ee.name.equals(ctx...IDENTIFIER())");
-					call.addCalledModuleName(ee.valueInValueClause);
+					call.addCalledModuleName(ee.getValueInValueClause());
 				}
 			}
 		}

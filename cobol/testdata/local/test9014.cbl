@@ -24,6 +24,7 @@
            05  PGM4                  PIC X(008) VALUE SPACES.
 
        Procedure Division.
+           CALL PGM1
            MOVE 'PGMA0004' TO PGM4
            CALL 'test9014a'
            EXIT PROGRAM.
@@ -40,8 +41,10 @@
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
+           05  PGM1                  PIC X(008) VALUE 'PGMB0001'.
            05  PGM5                  PIC X(008) VALUE SPACES.
        Procedure Division.
+           CALL PGM1
            CALL 'test9014b'
            CALL PGM4
            MOVE 'PGMB0004' TO PGM4
@@ -59,10 +62,12 @@
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
+           05  PGM1                  PIC X(008) VALUE 'PGMC0001'.
            05  PGM6                  PIC X(008) VALUE SPACES.
                88  PGM6-B                       VALUE 'PGMB0006'.
                88  PGM6-C                       VALUE 'PGMC0006'.
        Procedure Division.
+           CALL PGM1
            CALL PGM4
            CALL PGM3 OF JKL
            MOVE 'PGMA0006' TO PGM6
@@ -84,10 +89,12 @@
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
+           05  PGM1                  PIC X(008) VALUE 'PGMD0001'.
            05  PGM6                  PIC X(008) VALUE SPACES.
                88  PGM6-B                       VALUE 'PGMB0006'.
                88  PGM6-C                       VALUE 'PGMC0006'.
        Procedure Division.
+           CALL PGM1
            SET PGM6-B TO TRUE
            CALL PGM6
            CALL PGM3 OF GHI OF DEF OF ABC
@@ -99,16 +106,18 @@
        Environment Division.
        Input-Output Section.
        File-Control.
-           Select B001 Assign UT-S-DD000012.
-           Select B002 Assign S-DD000022.
-           Select B003 Assign DD000023.
-           Select B004 Assign ABORT.
-           Select B005 Assign 'PASSWORD'.
+           Select E001 Assign UT-S-DD000012.
+           Select E002 Assign S-DD000022.
+           Select E003 Assign DD000023.
+           Select E004 Assign ABORT.
+           Select E005 Assign 'PASSWORD'.
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
+           05  PGM1                  PIC X(008) VALUE 'PGME0001'.
            05  PGM5                  PIC X(008) VALUE SPACES.
        Procedure Division.
+           CALL PGM1
            CALL 'test9014b'
            CALL PGM4
            MOVE 'PGMB0004' TO PGM4
@@ -118,18 +127,20 @@
        Environment Division.
        Input-Output Section.
        File-Control.
-           Select C001 Assign UT-S-DD000121.
-           Select C002 Assign S-DD000122.
-           Select C003 Assign DD000123.
-           Select C004 Assign ASCII.
-           Select C005 Assign 'EBCDIC'.
+           Select F001 Assign UT-S-DD000121.
+           Select F002 Assign S-DD000122.
+           Select F003 Assign DD000123.
+           Select F004 Assign ASCII.
+           Select F005 Assign 'EBCDIC'.
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
+           05  PGM1                  PIC X(008) VALUE 'PGMF0001'.
            05  PGM6                  PIC X(008) VALUE SPACES.
                88  PGM6-B                       VALUE 'PGMB0006'.
                88  PGM6-C                       VALUE 'PGMC0006'.
        Procedure Division.
+           CALL PGM1
            CALL PGM2
            CALL PGM3 OF JKL
            MOVE 'PGMD0006' TO PGM6
@@ -143,18 +154,20 @@
        Environment Division.
        Input-Output Section.
        File-Control.
-           Select D001 Assign UT-S-DD000221.
-           Select D002 Assign S-DD000222.
-           Select D003 Assign DD000223.
-           Select D004 Assign BLURN.
-           Select D005 Assign 'BLERGH'.
+           Select G001 Assign UT-S-DD000221.
+           Select G002 Assign S-DD000222.
+           Select G003 Assign DD000223.
+           Select G004 Assign BLURN.
+           Select G005 Assign 'BLERGH'.
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
+           05  PGM1                  PIC X(008) VALUE 'PGMG0001'.
            05  PGM6                  PIC X(008) VALUE SPACES.
                88  PGM6-B                       VALUE 'PGMB0006'.
                88  PGM6-C                       VALUE 'PGMC0006'.
        Procedure Division.
+           CALL PGM1
            SET PGM6-B TO TRUE
            CALL PGM6
            CALL PGM3 OF GHI OF DEF OF ABC

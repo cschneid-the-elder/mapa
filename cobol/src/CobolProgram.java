@@ -45,6 +45,28 @@ class CobolProgram {
 		return false;
 	}
 
+	public void resolveCalledNodes() {
+		LOGGER.fine(this.myName + " resolveCalledNodes");
+
+		for (CallWrapper call: this.calledNodes) {
+			LOGGER.finest("  call.identifier = " + call.getIdentifier());
+			if (call.getIdentifier() == null) {
+			} else {
+				ArrayList<DDNode> calledDataNodes = new ArrayList<>();
+				for (DDNode node: this.dataNodes) {
+					if (node.getParent() == null) {
+						calledDataNodes.addAll(node.findChildrenNamed(call.getIdentifier()));
+					}
+				}
+				LOGGER.finest("  all node children named " + call.getIdentifier() + " = " + calledDataNodes);
+				if (!call.selectDataNode(calledDataNodes)) {
+					LOGGER.warning("!no data node selected");
+				}
+				LOGGER.finest("call.dataNode = " + call.dataNode);
+			}
+		}
+	}
+
 	public UUID getUUID() {
 		return this.uuid;
 	}
