@@ -31,6 +31,7 @@ public class ProgramListener extends CobolParserBaseListener {
 			this.programs.add(newPgm);
 		} else {
 			currProgram.addProgram(newPgm);
+			newPgm.setParent(currProgram);
 		}
 		this.pgmStack.push(newPgm);
 		LOGGER.finest(" enterProgramName exit pgmStack = " + this.pgmStack);

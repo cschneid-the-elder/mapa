@@ -57,6 +57,7 @@ class CobolProgram {
 				while (pgm != null && !resolved) {
 					resolved = this.resolveCalledNode(call, pgm);
 					pgm = pgm.getParent();
+					LOGGER.finest(" parent = " + pgm);
 				}
 				/*
 				ArrayList<DDNode> calledDataNodes = new ArrayList<>();
