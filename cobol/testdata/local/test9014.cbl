@@ -109,8 +109,8 @@
            Select E001 Assign UT-S-DD000012.
            Select E002 Assign S-DD000022.
            Select E003 Assign DD000023.
-           Select E004 Assign ABORT.
-           Select E005 Assign 'PASSWORD'.
+           Select E004 Assign MAGIC.
+           Select E005 Assign 'CLAMBAKE'.
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
@@ -130,8 +130,8 @@
            Select F001 Assign UT-S-DD000121.
            Select F002 Assign S-DD000122.
            Select F003 Assign DD000123.
-           Select F004 Assign ASCII.
-           Select F005 Assign 'EBCDIC'.
+           Select F004 Assign ASCDIC.
+           Select F005 Assign 'EBCII'.
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.

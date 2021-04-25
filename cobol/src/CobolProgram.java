@@ -46,12 +46,19 @@ class CobolProgram {
 	}
 
 	public void resolveCalledNodes() {
-		LOGGER.fine(this.myName + " resolveCalledNodes");
+		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCalledNodes");
 
 		for (CallWrapper call: this.calledNodes) {
 			LOGGER.finest("  call.identifier = " + call.getIdentifier());
 			if (call.getIdentifier() == null) {
 			} else {
+				Boolean resolved = false;
+				CobolProgram pgm = this;
+				while (pgm != null && !resolved) {
+					resolved = this.resolveCalledNode(call, pgm);
+					pgm = pgm.getParent();
+				}
+				/*
 				ArrayList<DDNode> calledDataNodes = new ArrayList<>();
 				for (DDNode node: this.dataNodes) {
 					if (node.getParent() == null) {
@@ -63,8 +70,34 @@ class CobolProgram {
 					LOGGER.warning("!no data node selected");
 				}
 				LOGGER.finest("call.dataNode = " + call.dataNode);
+				*/
 			}
 		}
+
+		for (CobolProgram pgm: this.programs) {
+			pgm.resolveCalledNodes();
+		}
+	}
+
+	private Boolean resolveCalledNode(CallWrapper call, CobolProgram pgm) {
+		this.LOGGER.fine(this.myName + " resolveCalledNode(" + call + ", " + pgm + ")");
+		Boolean rc = false;
+		ArrayList<DDNode> calledDataNodes = new ArrayList<>();
+		ArrayList<DDNode> localDataNodes = null;
+		if (pgm == this) {
+			localDataNodes = this.getDataNodes();
+		} else {
+			localDataNodes = pgm.getPublicDataNodes();
+		}
+		for (DDNode node: localDataNodes) {
+			if (node.getParent() == null) {
+				calledDataNodes.addAll(node.findChildrenNamed(call.getIdentifier()));
+			}
+		}
+		LOGGER.finest("  all node children named " + call.getIdentifier() + " = " + calledDataNodes);
+		rc = call.selectDataNode(calledDataNodes);
+		LOGGER.finest("call.dataNode = " + call.getDataNode());
+		return rc;
 	}
 
 	public UUID getUUID() {
@@ -83,12 +116,27 @@ class CobolProgram {
 		return this.dataNodes;
 	}
 
+	public ArrayList<DDNode> getPublicDataNodes() {
+		ArrayList<DDNode> publicDataNodes = new ArrayList<>();
+		for (DDNode dataNode: this.getDataNodes()) {
+			if (dataNode.isGlobal() || dataNode.isExternal()) {
+				publicDataNodes.add(dataNode);
+			}
+		}
+
+		return publicDataNodes;
+	}
+
 	public void addProgram(CobolProgram pgm) {
 		this.programs.add(pgm);
 	}
 
 	public void setParent(CobolProgram parent) {
 		this.parent = parent;
+	}
+
+	public CobolProgram getParent() {
+		return this.parent;
 	}
 
 	public CobolProgram nestedProgramNamed(String nestedProgramName) {

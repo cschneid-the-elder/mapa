@@ -19,6 +19,26 @@ public class ProgramListener extends CobolParserBaseListener {
 		this.LOGGER = LOGGER;
 	}
 
+	public void enterEveryRule(ParserRuleContext ctx) {
+		//LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+	}
+
+	public void enterProgramIdParagraph(CobolParser.ProgramIdParagraphContext ctx) {
+		String newPgmName = ctx.programName().getText();
+		CobolProgram newPgm = new CobolProgram(newPgmName, this.LOGGER);
+		CobolProgram currProgram = pgmStack.peek();
+		if (currProgram == null) {
+			this.programs.add(newPgm);
+		} else {
+			currProgram.addProgram(newPgm);
+		}
+		this.pgmStack.push(newPgm);
+		LOGGER.finest(" enterProgramName exit pgmStack = " + this.pgmStack);
+		LOGGER.finest(" enterProgramName exit newPgm = " + newPgm);
+		LOGGER.finest(" enterProgramName exit currProgram = " + currProgram);
+	}
+
+	/*
 	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
 		String newPgmName = ctx.getText();
 		CobolProgram newPgm = new CobolProgram(newPgmName, this.LOGGER);
@@ -29,9 +49,14 @@ public class ProgramListener extends CobolParserBaseListener {
 			currProgram.addProgram(newPgm);
 		}
 		this.pgmStack.push(newPgm);
+		LOGGER.finest(" enterProgramName exit pgmStack = " + this.pgmStack);
+		LOGGER.finest(" enterProgramName exit newPgm = " + newPgm);
+		LOGGER.finest(" enterProgramName exit currProgram = " + currProgram);
 	}
+	*/
 
 	public void enterEndProgramStatement(CobolParser.EndProgramStatementContext ctx) {
 		this.pgmStack.pop();
+		LOGGER.finest(" enterEndProgramStatement exit pgmStack = " + this.pgmStack);
 	}
 }

@@ -7,6 +7,7 @@ import org.antlr.v4.runtime.tree.*;
 
 class CallWrapper {
 
+	private String myName = this.getClass().getName();
 	public UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	public CallType callType = null;
@@ -126,6 +127,8 @@ class CallWrapper {
 			the <identifier> and its optional QualifiedInDataContext.
 		*/
 
+		this.LOGGER.fine(this.myName + " " + this.callType + " @ " + this.line + " selectDataNode()");
+		this.LOGGER.finest("  dataNodes = " + dataNodes);
 		Boolean found = false;
 
 		for (DDNode node: dataNodes) {
