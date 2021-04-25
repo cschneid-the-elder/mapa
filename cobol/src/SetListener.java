@@ -13,6 +13,7 @@ public class SetListener extends CobolParserBaseListener {
 			ArrayList<CobolProgram> programs
 			, Logger LOGGER ) {
 		super();
+		this.programs = programs;
 		this.LOGGER = LOGGER;
 	}
 

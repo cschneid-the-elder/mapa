@@ -95,7 +95,7 @@ class CobolProgram {
 		CobolProgram pgm = null;
 		for (CobolProgram nestedProgram: this.programs) {
 			if (nestedProgram.hasThisProgramName(nestedProgramName)) return nestedProgram;
-			pgm = nestedProgram.nestedProgramNamed(nestedProgram.getProgramName());
+			pgm = nestedProgram.nestedProgramNamed(nestedProgramName);
 			if (pgm != null) break;
 		}
 		return pgm;
@@ -150,6 +150,10 @@ class CobolProgram {
 			, this.programName
 			, this.statementCount
 			, this.conditionalStatementCount);
+
+		for (CobolProgram pgm: this.programs) {
+			pgm.writeOn(out, this.getUUID());
+		}
 
 		for (CallWrapper cw: this.calledNodes) {
 			cw.writeOn(out, this.getUUID());

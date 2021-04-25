@@ -50,6 +50,7 @@ class CobolSource {
 		} else {
 			currTempFile = CLI.copyCompressingContinuations(currTempFile, baseDir, initFileNm);
 			currTempFile = processCDS(currTempFile, baseDir, initFileNm);
+			this.lookForCobolPrograms(currTempFile);
 			this.assembleDataNodeTree(currTempFile, getLib(sourceFileName));
 		}
 	}
@@ -58,12 +59,8 @@ class CobolSource {
 		return this.isCobol;
 	}
 
-	public ArrayList<CallWrapper> getCalledNodes() {
-		return this.calledNodes;
-	}
-
-	public ArrayList<DDNode> getDataNodes() {
-		return this.dataNodes;
+	public ArrayList<CobolProgram> getPrograms() {
+		return this.programs;
 	}
 
 	public UUID getUUID() {
@@ -571,7 +568,52 @@ class CobolSource {
 		return fileName;
 	}
 
-	public ArrayList<CallWrapper> assembleDataNodeTree(
+	public void lookForCobolPrograms(
+				String fileName
+				) throws IOException {
+		LOGGER.fine(this.myName + " lookForCobolPrograms()");
+
+		CharStream cs = fromFileName(fileName);  //load the file
+
+		LOGGER.finer("lexing " + fileName);
+
+		CobolLexer.testRig = false;
+		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+
+		LOGGER.finer("parsing with CobolParser");
+
+		CobolParser parser = new CobolParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		ProgramListener listener = new ProgramListener(this.programs, this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		/*
+		If an O1 level is GLOBAL or EXTERNAL it and all its children are visible
+		to nested programs.
+
+		I think I can get around this by implementing nested programs instead of
+		simply trying to accomodate > 1 program in a source code member.
+
+		for (CobolProgram pgm: this.programs) {
+			for (DDNode ddNode: pgm.getDataNodes()) {
+				if (ddNode.getLevel() == 1 && (ddNode.isGlobal() || ddNode.isExternal())) {
+					if (!pgm.hasThisDDNode01(ddNode)) {
+						pgm.adopt(ddNode);
+					}
+				}
+			}
+		}
+		*/
+	}
+
+	public void assembleDataNodeTree(
 				String fileName
 				, String aLib
 				) throws IOException {
@@ -619,9 +661,6 @@ class CobolSource {
 
 		this.lookForCalledRoutines(tree, walker, aLib);
 		this.resolveCalledNodes(tree, walker, calledNodes, dataNodes);
-
-		return calledNodes;
-
 	}
 
 	private void lookForCalledRoutines(ParseTree tree
@@ -691,6 +730,10 @@ class CobolSource {
 
 		for (CopyStatement cs: this.copyStatements) {
 			cs.writeOn(out, this.getUUID());
+		}
+
+		for (CobolProgram pgm: this.programs) {
+			pgm.writeOn(out, this.getUUID());
 		}
 
 	}

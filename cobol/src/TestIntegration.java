@@ -86,10 +86,9 @@ public static void main(String[] args) throws Exception {
 		if (cblSrc.isCobol()) {
 			allTheCobolSource.add(cblSrc);
 			if (CLI.unitTest) {
-				if (!testFor(aFileName, cblSrc.getDataNodes(), cblSrc.getCalledNodes())) failCount++;
+				if (!testFor(aFileName, cblSrc.getPrograms().get(0).getDataNodes(), cblSrc.getPrograms().get(0).getCalledNodes())) failCount++;
 			}
 		}
-		LOGGER.fine(aFileName + " calls " + cblSrc.getCalledNodes().size() + " modules");
 	}
 
 	if (failCount > 0) LOGGER.info("----> At least one unit test failed");
