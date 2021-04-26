@@ -70,7 +70,7 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		/**
 		*/
 		String callingModuleName = this.currProgram.getProgramName();
-		DDNode node = new DDNode(callingModuleName, ctx, locn);
+		DDNode node = new DDNode(this.currProgram, ctx, locn);
 
 		TestIntegration.LOGGER.finer(callingModuleName + " " + node);
 

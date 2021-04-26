@@ -86,6 +86,6 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	}
 
 	public void enterSetTo(CobolParser.SetToContext ctx) {
-		this.currProgram.addSetTo(new Identifier(ctx.identifier()));
+		this.currProgram.addSetTo(new Identifier(ctx.identifier(), this.LOGGER));
 	}
 }
