@@ -13,6 +13,8 @@ class Identifier {
 	private CobolParser.TableCallContext tcCtx = null;
 	private CobolParser.FunctionCallContext fcCtx = null;
 	private CobolParser.SpecialRegisterContext srCtx = null;
+	private QualifiedDataName qdn = null;
+	private TableCall tableCall = null;
 
 	/**
 	Ultimately, in the context important to this application, an 
@@ -32,6 +34,14 @@ class Identifier {
 		this.tcCtx = this.ctx.tableCall();
 		this.fcCtx = this.ctx.functionCall();
 		this.srCtx = this.ctx.specialRegister();
+
+		if (this.qdnCtx != null) {
+			this.qdn = new QualifiedDataName(this.qdnCtx, LOGGER);
+		}
+
+		if (this.tcCtx != null) {
+			this.tableCall = new TableCall(this.tcCtx, LOGGER);
+		}
 
 	}
 

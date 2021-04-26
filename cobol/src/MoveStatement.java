@@ -22,14 +22,14 @@ class MoveStatement {
 		this.ctx = ctx;
 		this.LOGGER = LOGGER;
 
-		mcCtx = this.ctx.moveToStatement();
+		mtCtx = this.ctx.moveToStatement();
 		mctCtx = this.ctx.moveCorrespondingToStatement();
-		if (mcCtx == null) {
+		if (mtCtx == null) {
 		} else {
-			mtsaCtx = mcCtx.moveToSendingArea();
+			mtsaCtx = mtCtx.moveToSendingArea();
 			CobolParser.LiteralContext lCtx = mtsaCtx.literal();
-			this.literalText = lCtx.NONNUMERICLITERAL();
-			this.idCtxList = mcCtx.identifier();
+			this.literalText = lCtx.NONNUMERICLITERAL().getSymbol().getText();
+			this.idCtxList = mtCtx.identifier();
 		}
 	}
 

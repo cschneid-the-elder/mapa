@@ -50,8 +50,8 @@ class CobolSource {
 		} else {
 			currTempFile = CLI.copyCompressingContinuations(currTempFile, baseDir, initFileNm);
 			currTempFile = processCDS(currTempFile, baseDir, initFileNm);
-			this.lookForCobolPrograms(currTempFile);
-			this.assembleDataNodeTree(currTempFile, getLib(sourceFileName));
+			ParseTree tree = this.lookForCobolPrograms(currTempFile);
+			this.assembleDataNodeTree(tree, currTempFile, getLib(sourceFileName));
 		}
 	}
 
@@ -568,7 +568,7 @@ class CobolSource {
 		return fileName;
 	}
 
-	public void lookForCobolPrograms(
+	public ParseTree lookForCobolPrograms(
 				String fileName
 				) throws IOException {
 		LOGGER.fine(this.myName + " lookForCobolPrograms()");
@@ -594,6 +594,8 @@ class CobolSource {
 
 		walker.walk(listener, tree);
 
+		return tree;
+
 		/*
 		If an O1 level is GLOBAL or EXTERNAL it and all its children are visible
 		to nested programs.
@@ -614,12 +616,14 @@ class CobolSource {
 	}
 
 	public void assembleDataNodeTree(
-				String fileName
+				ParseTree tree
+				, String fileName
 				, String aLib
 				) throws IOException {
 		LOGGER.fine(this.myName + " assembleDataNodeTree()");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 
+		/*
 		CharStream cs = fromFileName(fileName);  //load the file
 
 		LOGGER.finer("lexing " + fileName);
@@ -633,6 +637,7 @@ class CobolSource {
 		CobolParser parser = new CobolParser(tokens);  //parse the tokens
 
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		*/
 		ParseTreeWalker walker = new ParseTreeWalker();
 
 		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER);

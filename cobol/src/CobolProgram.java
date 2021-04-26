@@ -14,6 +14,8 @@ class CobolProgram {
 	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
 	public ArrayList<DDNode> dataNodes = new ArrayList<>();
 	public ArrayList<CobolProgram> programs = new ArrayList<>();
+	private ArrayList<MoveStatement> moves = new ArrayList<>();
+	private ArrayList<Identifier> sets = new ArrayList<>();
 	private CobolProgram parent = null;
 	private int conditionalStatementCount = 0;
 	private int statementCount = 0;
@@ -167,6 +169,14 @@ class CobolProgram {
 
 	public void addAssignClause(AssignClause assignClause) {
 		this.assignClauses.add(assignClause);
+	}
+
+	public void addMoveStatement(MoveStatement move) {
+		this.moves.add(move);
+	}
+
+	public void addSetTo(Identifier identifier) {
+		this.sets.add(identifier);
 	}
 
 	public void incrementStatementCounter(CobolParser.StatementContext ctx) {

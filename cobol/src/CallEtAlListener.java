@@ -80,4 +80,12 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
 		this.currProgram.addAssignClause(new AssignClause(ctx, this.LOGGER));
 	}
+
+	public void enterMoveStatement(CobolParser.MoveStatementContext ctx) {
+		this.currProgram.addMoveStatement(new MoveStatement(ctx, this.LOGGER));
+	}
+
+	public void enterSetTo(CobolParser.SetToContext ctx) {
+		this.currProgram.addSetTo(new Identifier(ctx.identifier()));
+	}
 }
