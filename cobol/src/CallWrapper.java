@@ -12,8 +12,9 @@ class CallWrapper {
 	private Logger LOGGER = null;
 	public CallType callType = null;
 	public String identifier = null; //COBOL identifier
+	private Identifier id = null;
 	private ArrayList<UUID> calledModuleUUIDs = new ArrayList<>();
-	public List<String> calledModuleNames = new ArrayList<>();
+	private List<String> calledModuleNames = new ArrayList<>();
 	public String callingModuleName = null;
 	public List<DDNode> eightyEights = new ArrayList<>();
 	public ArrayList<String> subNames = null;
@@ -24,6 +25,7 @@ class CallWrapper {
 	public CobolParser.ExecCicsLinkStatementContext ctxLink = null;
 	public CobolParser.ExecCicsXctlStatementContext ctxXctl = null;
 	public CobolParser.ExecSqlCallStatementContext ctxSqlCall = null;
+	public CobolParser.IdentifierContext idCtx = null;
 	public DDNode dataNode = null;
 	public int line = -1;
 	public String aLib = null;
@@ -161,11 +163,6 @@ class CallWrapper {
 		}
 
 		if (this.dataNode == null) {
-			this.LOGGER.warning(
-				"identifier " 
-				+ this.identifier 
-				+ " not found in " 
-				+ this.callingModuleName);
 		} else {
 			this.LOGGER.fine(
 				"valueInValueClause = |" +
@@ -190,6 +187,10 @@ class CallWrapper {
 		}
 
 		return found;
+	}
+
+	public Boolean identifierMatches(Identifier identifier) {
+		return this.id.seemsToMatch(identifier);
 	}
 
 	private void initialize(CobolParser.CallStatementContext ctx) {
@@ -259,6 +260,8 @@ class CallWrapper {
 				this.callType = litCallType;
 			}
 		} else {
+			this.idCtx = idCtx;
+			this.id = new Identifier(idCtx, this.LOGGER);
 			this.callType = idCallType;
 			if (idCtx.qualifiedDataName() == null ) {
 				// CALL identifier(subscript) syntax (sneaky)
@@ -392,12 +395,24 @@ class CallWrapper {
 		return this.uuid;
 	}
 
+	public String getCallingModuleName() {
+		return this.callingModuleName;
+	}
+
 	public String getIdentifier() {
 		return this.identifier;
 	}
 
 	public DDNode getDataNode() {
 		return this.dataNode;
+	}
+
+	public Identifier getId() {
+		return this.id;
+	}
+
+	public List<String> getCalledModuleNames() {
+		return this.calledModuleNames;
 	}
 
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {

@@ -25,5 +25,8 @@ class InTable {
 		this.tableCall = new TableCall(this.tcCtx, LOGGER);
 	}
 
+	public String getDataNameText() {
+		return this.tableCall.getDataNameText();
+	}
 
 }

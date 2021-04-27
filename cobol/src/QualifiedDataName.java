@@ -28,5 +28,19 @@ class QualifiedDataName {
 
 	}
 
+	public String getDataNameText() {
+		if (this.qdnf1 == null) {
+			return null;
+		} else {
+			return this.qdnf1.getDataNameText();
+		}
+	}
 
+	public ArrayList<String> getInDataText() {
+		if (this.qdnf1 == null) {
+			return null;
+		} else {
+			return this.qdnf1.getInDataText();
+		}
+	}
 }

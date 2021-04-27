@@ -25,5 +25,8 @@ class InData {
 		this.dataName = new DataName(this.dnCtx, LOGGER);
 	}
 
+	public String getDataNameText() {
+		return this.dataName.getText();
+	}
 
 }

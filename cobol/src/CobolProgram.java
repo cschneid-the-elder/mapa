@@ -61,19 +61,19 @@ class CobolProgram {
 					pgm = pgm.getParent();
 					LOGGER.finest(" parent = " + pgm);
 				}
-				/*
-				ArrayList<DDNode> calledDataNodes = new ArrayList<>();
-				for (DDNode node: this.dataNodes) {
-					if (node.getParent() == null) {
-						calledDataNodes.addAll(node.findChildrenNamed(call.getIdentifier()));
-					}
+				if (resolved) {
+					this.findAllTheRightMoves(call);
+				} else {
+					this.LOGGER.warning(
+						"identifier " 
+						+ call.getIdentifier()
+						+ " not found in " 
+						+ call.getCallingModuleName()
+						+ " or any program in which it is nested");
 				}
-				LOGGER.finest("  all node children named " + call.getIdentifier() + " = " + calledDataNodes);
-				if (!call.selectDataNode(calledDataNodes)) {
-					LOGGER.warning("!no data node selected");
+				if (call.getDataNode() != null) {
+					this.findAllTheRightSets(call);
 				}
-				LOGGER.finest("call.dataNode = " + call.dataNode);
-				*/
 			}
 		}
 
@@ -103,12 +103,45 @@ class CobolProgram {
 		return rc;
 	}
 
+	private void findAllTheRightMoves(CallWrapper call) {
+		CobolProgram pgm = this;
+		while (pgm != null) {
+			for (MoveStatement move: pgm.getMoves()) {
+				for (Identifier identifier: move.getIdentifiers()) {
+					if (identifier.seemsToMatch(call.getId())) {
+						call.addCalledModuleName(move.getText());
+					}
+				}
+			}
+			pgm = pgm.getParent();
+		}
+
+	}
+
+	private void findAllTheRightSets(CallWrapper call) {
+		for (DDNode ee: call.getDataNode().getChildren()) {
+			if (!ee.isCondition()) continue;
+			this.LOGGER.finest("    call.eightyEight = " + ee);
+			for (Identifier identifier: this.sets) {
+				this.LOGGER.finest("    identifier.getDataNameText() = " + identifier.getDataNameText());
+				if (ee.getIdentifier().equals(identifier.getDataNameText())) {
+					this.LOGGER.finest( "    ee.name.equals(ctx...IDENTIFIER())");
+					call.addCalledModuleName(ee.getValueInValueClause());
+				}
+			}
+		}
+	}
+
 	public UUID getUUID() {
 		return this.uuid;
 	}
 
 	public String getProgramName() {
 		return this.programName;
+	}
+
+	public ArrayList<MoveStatement> getMoves() {
+		return this.moves;
 	}
 
 	public ArrayList<CallWrapper> getCalledNodes() {

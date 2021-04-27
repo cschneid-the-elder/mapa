@@ -18,6 +18,10 @@ class CobolWord {
 		return this.tn;
 	}
 
+	public String getText() {
+		return this.tn.getSymbol().getText();
+	}
+
 	public void populateTerminalNode() {
 		/*
 		There are a _lot_ of methods of the type we're interested in, and

@@ -23,6 +23,19 @@ class Identifier {
 	which are themselves IDENTIFIERs or INTEGERLITERALs.  In either case
 	the most important thing is the initial IDENTIFIER.
 	*/
+	public static ArrayList<Identifier> bunchOfThese(
+			List<CobolParser.IdentifierContext> ctxList
+			, Logger LOGGER
+			) {
+		ArrayList<Identifier> aList = new ArrayList<>();
+
+		for (CobolParser.IdentifierContext ctx: ctxList) {
+			aList.add(new Identifier(ctx, LOGGER));
+		}
+
+		return aList;
+	}
+
 	public Identifier(
 			CobolParser.IdentifierContext ctx
 			, Logger LOGGER
@@ -45,5 +58,39 @@ class Identifier {
 
 	}
 
+	public Boolean seemsToMatch(Identifier anIdentifier) {
+		Boolean match = false;
+		QualifiedDataName qdn = anIdentifier.getQualifiedDataName();
+		TableCall tableCall = anIdentifier.getTableCall();
 
+		if (this.qdn == null && qdn != null) {
+		} else if (this.qdn != null && qdn == null) {
+		} else if (this.tableCall == null && tableCall != null) {
+		} else if (this.tableCall != null && tableCall == null) {
+		} else if (this.qdn != null && qdn != null) {
+			match = (this.qdn.getDataNameText().equals(qdn.getDataNameText())
+					&& this.qdn.getInDataText().equals(qdn.getInDataText()));
+		} else if (this.tableCall != null && tableCall != null) {
+			match = (this.tableCall.getDataNameText().equals(tableCall.getDataNameText())
+					&& this.tableCall.getInDataText().equals(tableCall.getInDataText()));
+		}
+
+		return match;
+	}
+
+	public String getDataNameText() {
+		if (this.getQualifiedDataName() == null) {
+			return null;
+		} else {
+			return this.getQualifiedDataName().getDataNameText();
+		}
+	}
+
+	public QualifiedDataName getQualifiedDataName() {
+		return this.qdn;
+	}
+
+	public TableCall getTableCall() {
+		return this.tableCall;
+	}
 }

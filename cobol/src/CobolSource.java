@@ -717,13 +717,13 @@ class CobolSource {
 				LOGGER.finest("call.dataNode = " + call.dataNode);
 			}
 		}
-		*/
 
 		SetListener listener = new SetListener(programs, LOGGER);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
+		*/
 	}
 
 	public void writeOn(PrintWriter out) throws IOException {

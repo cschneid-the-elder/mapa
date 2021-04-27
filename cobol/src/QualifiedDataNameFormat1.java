@@ -34,5 +34,19 @@ class QualifiedDataNameFormat1 {
 		}
 	}
 
+	public String getDataNameText() {
+		return this.dataName.getText();
+	}
 
+	public ArrayList<String> getInDataText() {
+		ArrayList<String> inDataText = new ArrayList<>();
+
+		if (this.qidList != null) {
+			for (QualifiedInData qid: this.qidList) {
+				inDataText.add(qid.getInDataText());
+			}
+		}
+
+		return inDataText;
+	}
 }

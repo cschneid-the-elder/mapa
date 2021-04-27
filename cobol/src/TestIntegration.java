@@ -761,14 +761,14 @@ public static void main(String[] args) throws Exception {
 			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
 		} 
 
-		if (rc && calledNodes.get(0).calledModuleNames.size() == 1) {
+		if (rc && calledNodes.get(0).getCalledModuleNames().size() == 1) {
 			rc = true;
 		} else {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
 			if (calledNodes.size() > 0) {
-				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
-				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).getCalledModuleNames().size());
+				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).getCalledModuleNames());
 			}
 		} 
 
@@ -809,13 +809,13 @@ public static void main(String[] args) throws Exception {
 			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
 		} 
 
-		if (rc && calledNodes.get(0).calledModuleNames.size() == 1) {
+		if (rc && calledNodes.get(0).getCalledModuleNames().size() == 1) {
 			rc = true;
 		} else {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
-			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
-			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).getCalledModuleNames().size());
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).getCalledModuleNames());
 		} 
 
 		if (rc) {

@@ -38,9 +38,28 @@ class QualifiedInData {
 		this.idCtx = this.ctx.inData();
 		this.itCtx = this.ctx.inTable();
 
-		this.inData = new InData(this.idCtx, LOGGER);
-		this.inTable = new InTable(this.itCtx, LOGGER);
+		if (this.idCtx != null) {
+			this.inData = new InData(this.idCtx, LOGGER);
+		}
+
+		if (this.itCtx != null) {
+			this.inTable = new InTable(this.itCtx, LOGGER);
+		}
 	}
 
+	public String getInDataText() {
+		if (this.inData == null) {
+			return null;
+		} else {
+			return this.inData.getDataNameText();
+		}
+	}
 
+	public String getInTableText() {
+		if (this.inTable == null) {
+			return null;
+		} else {
+			return this.inTable.getDataNameText();
+		}
+	}
 }
