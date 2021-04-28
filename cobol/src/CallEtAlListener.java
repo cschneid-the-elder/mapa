@@ -24,10 +24,6 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	public void enterProgramUnit(CobolParser.ProgramUnitContext ctx) {
-		//not clear this is needed
-	}
-
 	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
 		String newProgramName = ctx.getText();
 		this.currProgram = null;

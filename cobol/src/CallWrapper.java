@@ -418,10 +418,9 @@ class CallWrapper {
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
 		for (int i = 0; i < calledModuleNames.size(); i++) {
 			out.printf(
-				"CALL,%s,%s,%s,%s,%s,%s\n"
+				"CALL,%s,%s,%s,%s,%s\n"
 				, calledModuleUUIDs.get(i)
 				, parentUUID.toString()
-				, this.aLib
 				, this.callingModuleName
 				, this.callType
 				, calledModuleNames.get(i));

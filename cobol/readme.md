@@ -1,10 +1,10 @@
 ## COBOL Call Tree Analysis
 
-This is not intended to be a validating parser, but an analyzing parser; feed it valid COBOL and it will create a file of "callers" and "callees" to enable you to learn things of possible interest.
+This is not intended to be a validating parser, but an analyzing parser; feed it valid COBOL and it will create a file of "callers" and "callees" and various other bits of data about your source code to enable you to learn things of possible interest.
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (17-Apr-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (28-Apr-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -47,7 +47,7 @@ More generically, I would suggest...
  + Download the contents of each library into their respective directory 
  + Create a file list (to use with the `-fileList` option) containing the names of the files in each of your COBOL source code directories, maybe call it myList
  + Create a list of copybook directories (to use with the `-copyList` option) where each line is a directory name containing copybook members you have downloaded.  Maybe call this file myLibs.
- + Execute `java -jar CallTree.jar -fileList myList -copyList myLibs -out myOutput.tsv`
+ + Execute `java -jar CallTree.jar -fileList myList -copyList myLibs -out myOutput.csv`
 
 Depending on your build environment, you may want to construct several file lists for your source and copybooks, corresponding to your concatenations.
 
@@ -59,11 +59,25 @@ This application will create several temporary files for each COBOL member you p
 
 A log file will be created in the current directory with messages about the current run.  If you use the `-logLevel` option, it applies to these messages.  The log messages output to the screen are at the INFO level or above.
 
+This is free software, developed by an old man trying to keep busy.  There are no doubt edge cases not handled correctly, and static code analysis is never going to provide a definitive answer.  But we try.
+
 ### Output File Format
 
-The file indicated by the `-out` option is a comma separated value (CSV) file containing the "library", caller name, type of call, and called module name.  "Library" in this context is the last node of the path to the file, which I would hope has been named for the library from which the members have been downloaded.
+The file indicated by the `-out` option is a comma separated value (CSV) file containing identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a program, a program to its CALLs and DDNames, and so on.
 
-Please note that the type of call may be CALLBYLITERAL which may be a static call or a dynamic call depending on your compile options.
+More generically...
+
+| Type | Fields|
+| --- | --- |
+| FILE | UUID, file being processed, date / time stamp |
+| COPY | UUID, file UUID, copybook name |
+| PGM | UUID, file UUID, program name, statement count, conditional statement count |
+| CALL | UUID, program UUID, calling program name, call type (see below), called program name |
+| DD | UUID, program UUID, ddname (see below) |
+
+Call types may be CALLBYLITERAL, CALLBYIDENTIFIER, CICSLINKBYLITERAL, CICSLINKBYIDENTIFIER, CICSXCTLBYLITERAL, CICSXCTLBYIDENTIFIER, SQLCALLBYLITERAL, SQLCALLBYIDENTIFIER.  Please note that CALLBYLITERAL may be a static call or a dynamic call depending on your compile options.
+
+The ddname is my mainframe bias showing.  The assignment name in the various flavors of IBM COBOL consists of an optional label followed by a hyphen followed by an optional organization field followed by a hyphen followed by a name.  So everything except the name is optional.  The name usually translates to a DDName in the JCL, except when it translates to an environment variable.
 
 ### Build/Execution Environment
 
@@ -92,6 +106,61 @@ Consider a program...
 So now what?  Well, my intention is for _you_ to deal with this by naming the directories containing your source and copybooks as the libraries from whence their contents were downloaded, and assemble your source and copybook file lists accordingly.  Separate runs with these lists _should_ give you the same results as your compile invocation.
 
 Worse, of course, is that in a dynamic call environment, which modules you invoke are controlled by your runtime environment.  Static code analysis, which is what this all is, cannot help you with that.
+
+Even worse, and why simply doing scans of your source code may be unrevealing, consider a program...
+
+       Identification Division.
+       Program-ID. CRAIS.
+       Data Division.
+       Working-Storage Section.
+
+       01                                                              C
+      -                                                                O
+      -                                                                N
+      -                                                                S
+      -                                                                T
+      -                                                                A
+      -                                                                N
+      -                                                                T
+      -                                                               S.
+           05                                                          P
+      -                                                                G
+      -                                                                M
+                                                                       P
+      -                                                                I
+      -                                                                C
+                                                                       X
+      -                                                                (
+      -                                                                8
+      -                                                                )
+                                                                       V
+      -                                                                A
+      -                                                                L
+      -                                                                U
+      -                                                                E
+                                                                      'B
+      -                                                               'R
+      -                                                               'A
+      -                                                               'C
+      -                                                              'A'
+           .
+       Procedure Division.
+                                                                       C
+      -                                                                A
+      -                                                                L
+      -                                                                L
+                                                                       P
+      -                                                                G
+      -                                                                M
+                                                                       G
+      -                                                                O
+      -                                                                B
+      -                                                                A
+      -                                                                C
+      -                                                                K
+           .
+
+...which is syntactically correct.
 
 ### What This Won't Do
 

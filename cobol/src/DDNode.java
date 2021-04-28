@@ -29,23 +29,6 @@ class DDNode {
 	public CobolParser.DataDescriptionEntryFormat2Context dde2Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat3Context dde3Ctx = null;
 	
-	/*
-	public DDNode(String programName, DDNode parent, CobolParser.DataDescriptionEntryContext ctx) {
-		this.programName = programName;
-		this.parent = parent;
-		this.ddeCtx = ctx;
-		this.locn = parent.locn;
-		this.initialize();
-	}
-
-	public DDNode(String programName, CobolParser.DataDescriptionEntryContext ctx, DataLocation locn) {
-		this.programName = programName;
-		this.ddeCtx = ctx;
-		this.locn = locn;
-		this.initialize();
-	}
-	*/
-
 	public DDNode(
 			CobolProgram program
 			, CobolParser.DataDescriptionEntryContext ctx

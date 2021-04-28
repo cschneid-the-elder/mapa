@@ -39,23 +39,6 @@ public class ProgramListener extends CobolParserBaseListener {
 		LOGGER.finest(" enterProgramName exit currProgram = " + currProgram);
 	}
 
-	/*
-	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		String newPgmName = ctx.getText();
-		CobolProgram newPgm = new CobolProgram(newPgmName, this.LOGGER);
-		CobolProgram currProgram = pgmStack.peek();
-		if (currProgram == null) {
-			this.programs.add(newPgm);
-		} else {
-			currProgram.addProgram(newPgm);
-		}
-		this.pgmStack.push(newPgm);
-		LOGGER.finest(" enterProgramName exit pgmStack = " + this.pgmStack);
-		LOGGER.finest(" enterProgramName exit newPgm = " + newPgm);
-		LOGGER.finest(" enterProgramName exit currProgram = " + currProgram);
-	}
-	*/
-
 	public void enterEndProgramStatement(CobolParser.EndProgramStatementContext ctx) {
 		this.pgmStack.pop();
 		LOGGER.finest(" enterEndProgramStatement exit pgmStack = " + this.pgmStack);

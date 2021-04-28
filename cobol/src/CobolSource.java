@@ -1,5 +1,7 @@
 
 import java.util.*;
+import java.time.*;
+import java.time.format.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.logging.Logger;
@@ -367,7 +369,6 @@ class CobolSource {
 		LOGGER.fine(this.myName + " processReplaceStatements()");
 
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-		//String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
 
 		lookForCompilerDirectingStatements(
@@ -595,24 +596,6 @@ class CobolSource {
 		walker.walk(listener, tree);
 
 		return tree;
-
-		/*
-		If an O1 level is GLOBAL or EXTERNAL it and all its children are visible
-		to nested programs.
-
-		I think I can get around this by implementing nested programs instead of
-		simply trying to accomodate > 1 program in a source code member.
-
-		for (CobolProgram pgm: this.programs) {
-			for (DDNode ddNode: pgm.getDataNodes()) {
-				if (ddNode.getLevel() == 1 && (ddNode.isGlobal() || ddNode.isExternal())) {
-					if (!pgm.hasThisDDNode01(ddNode)) {
-						pgm.adopt(ddNode);
-					}
-				}
-			}
-		}
-		*/
 	}
 
 	public void assembleDataNodeTree(
@@ -623,21 +606,6 @@ class CobolSource {
 		LOGGER.fine(this.myName + " assembleDataNodeTree()");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 
-		/*
-		CharStream cs = fromFileName(fileName);  //load the file
-
-		LOGGER.finer("lexing " + fileName);
-
-		CobolLexer.testRig = false;
-		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
-		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
-
-		LOGGER.finer("parsing with CobolParser");
-
-		CobolParser parser = new CobolParser(tokens);  //parse the tokens
-
-		ParseTree tree = parser.startRule(); // parse the content and get the tree
-		*/
 		ParseTreeWalker walker = new ParseTreeWalker();
 
 		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER);
@@ -645,24 +613,6 @@ class CobolSource {
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
-
-		/*
-		If an O1 level is GLOBAL or EXTERNAL it and all its children are visible
-		to nested programs.
-
-		I think I can get around this by implementing nested programs instead of
-		simply trying to accomodate > 1 program in a source code member.
-
-		for (CobolProgram pgm: this.programs) {
-			for (DDNode ddNode: pgm.getDataNodes()) {
-				if (ddNode.getLevel() == 1 && (ddNode.isGlobal() || ddNode.isExternal())) {
-					if (!pgm.hasThisDDNode01(ddNode)) {
-						pgm.adopt(ddNode);
-					}
-				}
-			}
-		}
-		*/
 
 		this.lookForCalledRoutines(tree, walker, aLib);
 		this.resolveCalledNodes(tree, walker, calledNodes, dataNodes);
@@ -699,39 +649,17 @@ class CobolSource {
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
 		}
-		/*
-		for (CallWrapper call: calledNodes) {
-			LOGGER.finest("  call.identifier = " + call.identifier);
-			if (call.identifier == null) {
-			} else {
-				calledDataNodes = new ArrayList<>();
-				for (DDNode node: dataNodes) {
-					if (node.parent == null) {
-						calledDataNodes.addAll(node.findChildrenNamed(call.identifier));
-					}
-				}
-				LOGGER.finest("  all node children named " + call.identifier + " = " + calledDataNodes);
-				if (!call.selectDataNode(calledDataNodes)) {
-					LOGGER.warning("!no data node selected");
-				}
-				LOGGER.finest("call.dataNode = " + call.dataNode);
-			}
-		}
-
-		SetListener listener = new SetListener(programs, LOGGER);
-
-		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-
-		walker.walk(listener, tree);
-		*/
 	}
 
 	public void writeOn(PrintWriter out) throws IOException {
+		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		String dateTimeStamp = LocalDateTime.now().format(df).toString();
+
 		out.printf(
 			"FILE,%s,%s,%s\n"
 			, this.getUUID().toString()
 			, this.sourceFileName
-			, this.initFileNm);
+			, dateTimeStamp);
 
 		for (CopyStatement cs: this.copyStatements) {
 			cs.writeOn(out, this.getUUID());
