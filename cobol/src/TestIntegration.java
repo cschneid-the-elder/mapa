@@ -86,10 +86,9 @@ public static void main(String[] args) throws Exception {
 		if (cblSrc.isCobol()) {
 			allTheCobolSource.add(cblSrc);
 			if (CLI.unitTest) {
-				if (!testFor(aFileName, cblSrc.getDataNodes(), cblSrc.getCalledNodes())) failCount++;
+				if (!testFor(aFileName, cblSrc.getPrograms().get(0).getDataNodes(), cblSrc.getPrograms().get(0).getCalledNodes())) failCount++;
 			}
 		}
-		LOGGER.fine(aFileName + " calls " + cblSrc.getCalledNodes().size() + " modules");
 	}
 
 	if (failCount > 0) LOGGER.info("----> At least one unit test failed");
@@ -762,14 +761,14 @@ public static void main(String[] args) throws Exception {
 			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
 		} 
 
-		if (rc && calledNodes.get(0).calledModuleNames.size() == 1) {
+		if (rc && calledNodes.get(0).getCalledModuleNames().size() == 1) {
 			rc = true;
 		} else {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
 			if (calledNodes.size() > 0) {
-				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
-				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).getCalledModuleNames().size());
+				LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).getCalledModuleNames());
 			}
 		} 
 
@@ -810,13 +809,13 @@ public static void main(String[] args) throws Exception {
 			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
 		} 
 
-		if (rc && calledNodes.get(0).calledModuleNames.size() == 1) {
+		if (rc && calledNodes.get(0).getCalledModuleNames().size() == 1) {
 			rc = true;
 		} else {
 			LOGGER.info("FAIL " + fileName);
 			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
-			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).calledModuleNames.size());
-			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).calledModuleNames);
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).getCalledModuleNames().size());
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).getCalledModuleNames());
 		} 
 
 		if (rc) {
@@ -846,12 +845,12 @@ public static void main(String[] args) throws Exception {
 		Boolean rc = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.level.equals(level) && node.identifier.equals(identifier)) {
+			if (node.getLevel().equals(level) && node.getIdentifier().equals(identifier)) {
 				rc = true;
 				LOGGER.fine(identifier + " node found");
 				break;
 			} else {
-				LOGGER.fine(node.level + " != " + level + " || " + node.identifier + " != " + identifier);
+				LOGGER.fine(node.getLevel() + " != " + level + " || " + node.getIdentifier() + " != " + identifier);
 			}
 		}
 
@@ -873,12 +872,12 @@ public static void main(String[] args) throws Exception {
 		Boolean rc = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.level.equals(level) && node.identifier.equals(identifier) && node.locn == locn) {
+			if (node.getLevel().equals(level) && node.getIdentifier().equals(identifier) && node.getLocn() == locn) {
 				rc = true;
 				LOGGER.fine(identifier + " node found");
 				break;
 			} else {
-				LOGGER.finest(node.level + " != " + level + " || " + node.identifier + " != " + identifier + " || " + node.locn + " != " + locn);
+				LOGGER.finest(node.getLevel() + " != " + level + " || " + node.getIdentifier() + " != " + identifier + " || " + node.getLocn() + " != " + locn);
 			}
 		}
 

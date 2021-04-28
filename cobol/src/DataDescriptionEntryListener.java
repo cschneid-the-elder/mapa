@@ -5,45 +5,72 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 public class DataDescriptionEntryListener extends CobolParserBaseListener {
-	public ArrayList<DDNode> dataNodes = null;
-	public String callingModuleName = null;
+	public ArrayList<CobolProgram> programs = null;
+	public CobolProgram currProgram = null;
+	public Logger LOGGER = null;
 	public DDNode parent = null;
 	public DDNode prev = null;
 	public DataLocation locn = null;
 
-	public DataDescriptionEntryListener(ArrayList<DDNode> al) {
+	public DataDescriptionEntryListener(
+			ArrayList<CobolProgram> programs
+			, Logger LOGGER
+			) {
 		super();
-		dataNodes = al;
+		this.programs = programs;
+		this.LOGGER = LOGGER;
 	}
 
-	@Override public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
-		TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+		//TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	@Override public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		callingModuleName = ctx.getText();
+	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
+		String newProgramName = ctx.getText();
+		this.currProgram = null;
+
+		for (CobolProgram pgm: this.programs) {
+			if (pgm.hasThisProgramName(newProgramName)) {
+				this.currProgram = pgm;
+				break;
+			}
+			CobolProgram newPgm = pgm.nestedProgramNamed(newProgramName);
+			if (newPgm != null) {
+				this.currProgram = newPgm;
+				break;
+			}
+		}
+
+		if (this.currProgram == null) {
+			throw new IllegalArgumentException(
+				"program "
+				+ newProgramName
+				+ " not found in "
+				+ this.programs);
+		}
 	}
 
-	@Override public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
+	public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
 		this.locn = DataLocation.FILEDESCRIPTION;
 	}
 
-	@Override public void enterWorkingStorageSection(CobolParser.WorkingStorageSectionContext ctx) {
+	public void enterWorkingStorageSection(CobolParser.WorkingStorageSectionContext ctx) {
 		this.locn = DataLocation.WORKINGSTORAGE;
 	}
 
-	@Override public void enterLocalStorageSection(CobolParser.LocalStorageSectionContext ctx) {
+	public void enterLocalStorageSection(CobolParser.LocalStorageSectionContext ctx) {
 		this.locn = DataLocation.LOCALSTORAGE;
 	}
 
-	@Override public void enterLinkageSection(CobolParser.LinkageSectionContext ctx) {
+	public void enterLinkageSection(CobolParser.LinkageSectionContext ctx) {
 		this.locn = DataLocation.LINKAGE;
 	}
 
-	@Override public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
+	public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
 		/**
 		*/
-		DDNode node = new DDNode(callingModuleName, ctx, locn);
+		String callingModuleName = this.currProgram.getProgramName();
+		DDNode node = new DDNode(this.currProgram, ctx, locn);
 
 		TestIntegration.LOGGER.finer(callingModuleName + " " + node);
 
@@ -76,7 +103,8 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 					prev = node;
 				}
 		}
-		dataNodes.add(node);
+
+		this.currProgram.addDDNode(node);
 	}
 
 }

@@ -7,12 +7,14 @@ import org.antlr.v4.runtime.tree.*;
 
 class CallWrapper {
 
+	private String myName = this.getClass().getName();
 	public UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	public CallType callType = null;
 	public String identifier = null; //COBOL identifier
+	private Identifier id = null;
 	private ArrayList<UUID> calledModuleUUIDs = new ArrayList<>();
-	public List<String> calledModuleNames = new ArrayList<>();
+	private List<String> calledModuleNames = new ArrayList<>();
 	public String callingModuleName = null;
 	public List<DDNode> eightyEights = new ArrayList<>();
 	public ArrayList<String> subNames = null;
@@ -23,6 +25,7 @@ class CallWrapper {
 	public CobolParser.ExecCicsLinkStatementContext ctxLink = null;
 	public CobolParser.ExecCicsXctlStatementContext ctxXctl = null;
 	public CobolParser.ExecSqlCallStatementContext ctxSqlCall = null;
+	public CobolParser.IdentifierContext idCtx = null;
 	public DDNode dataNode = null;
 	public int line = -1;
 	public String aLib = null;
@@ -106,15 +109,15 @@ class CallWrapper {
 					) {
 			is = is && this.calledModuleNames.equals(cw.calledModuleNames);
 		} else {
-			if (this.identifier != null && identifier != null) {
-				is = is && this.identifier.equals(cw.identifier);
+			if (this.identifier != null && cw.getIdentifier() != null) {
+				is = is && this.identifier.equals(cw.getIdentifier());
 			}
 		}
 		is = is && this.ofs.equals(cw.ofs);
 		return is; 
 	}
 
-	public Boolean selectDataNode(List<DDNode> dataNodes, ArrayList<DDNode> allDataNodes) {
+	public Boolean selectDataNode(List<DDNode> dataNodes) {
 		/**
 			The CALL statement represented by this instance may be of the form
 			CALL <identifier> where <identifier> is a field name possibly qualified
@@ -126,10 +129,12 @@ class CallWrapper {
 			the <identifier> and its optional QualifiedInDataContext.
 		*/
 
+		this.LOGGER.fine(this.myName + " " + this.callType + " @ " + this.line + " selectDataNode()");
+		this.LOGGER.finest("  dataNodes = " + dataNodes);
 		Boolean found = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.identifier.equals(this.identifier)) {
+			if (node.getIdentifier().equals(this.identifier)) {
 				if (this.ofs.size() == 0) {
 					found = true;
 					this.dataNode = node;
@@ -139,7 +144,7 @@ class CallWrapper {
 					DDNode parent = node.parent;
 					Boolean foundOf = true;
 					for (String of: this.ofs) {
-						while (parent != null && !parent.identifier.equals(of)) {
+						while (parent != null && !parent.getIdentifier().equals(of)) {
 							parent = parent.parent;
 						}
 						if (parent == null) {
@@ -158,11 +163,6 @@ class CallWrapper {
 		}
 
 		if (this.dataNode == null) {
-			this.LOGGER.warning(
-				"identifier " 
-				+ this.identifier 
-				+ " not found in " 
-				+ this.callingModuleName);
 		} else {
 			this.LOGGER.fine(
 				"valueInValueClause = |" +
@@ -187,6 +187,10 @@ class CallWrapper {
 		}
 
 		return found;
+	}
+
+	public Boolean identifierMatches(Identifier identifier) {
+		return this.id.seemsToMatch(identifier);
 	}
 
 	private void initialize(CobolParser.CallStatementContext ctx) {
@@ -256,6 +260,8 @@ class CallWrapper {
 				this.callType = litCallType;
 			}
 		} else {
+			this.idCtx = idCtx;
+			this.id = new Identifier(idCtx, this.LOGGER);
 			this.callType = idCallType;
 			if (idCtx.qualifiedDataName() == null ) {
 				// CALL identifier(subscript) syntax (sneaky)
@@ -389,13 +395,32 @@ class CallWrapper {
 		return this.uuid;
 	}
 
+	public String getCallingModuleName() {
+		return this.callingModuleName;
+	}
+
+	public String getIdentifier() {
+		return this.identifier;
+	}
+
+	public DDNode getDataNode() {
+		return this.dataNode;
+	}
+
+	public Identifier getId() {
+		return this.id;
+	}
+
+	public List<String> getCalledModuleNames() {
+		return this.calledModuleNames;
+	}
+
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
 		for (int i = 0; i < calledModuleNames.size(); i++) {
 			out.printf(
-				"CALL,%s,%s,%s,%s,%s,%s\n"
+				"CALL,%s,%s,%s,%s,%s\n"
 				, calledModuleUUIDs.get(i)
 				, parentUUID.toString()
-				, this.aLib
 				, this.callingModuleName
 				, this.callType
 				, calledModuleNames.get(i));

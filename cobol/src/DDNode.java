@@ -19,24 +19,23 @@ class DDNode {
 	public Integer level = null;
 	public String valueInValueClause = null;
 	public List<String> valuesSet = new ArrayList<>();
+	public CobolProgram program = null;
 	public String programName = null;
 	public DataLocation locn = null;
+	public Boolean global = false;
+	public Boolean external = false;
 	public CobolParser.DataDescriptionEntryContext ddeCtx = null;
 	public CobolParser.DataDescriptionEntryFormat1Context dde1Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat2Context dde2Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat3Context dde3Ctx = null;
 	
-
-	public DDNode(String programName, DDNode parent, CobolParser.DataDescriptionEntryContext ctx) {
-		this.programName = programName;
-		this.parent = parent;
-		this.ddeCtx = ctx;
-		this.locn = parent.locn;
-		this.initialize();
-	}
-
-	public DDNode(String programName, CobolParser.DataDescriptionEntryContext ctx, DataLocation locn) {
-		this.programName = programName;
+	public DDNode(
+			CobolProgram program
+			, CobolParser.DataDescriptionEntryContext ctx
+			, DataLocation locn
+			) {
+		this.program = program;
+		this.programName = program.getProgramName();
 		this.ddeCtx = ctx;
 		this.locn = locn;
 		this.initialize();
@@ -65,6 +64,12 @@ class DDNode {
 			this.setLevelFromDDE1CTX();
 			this.setValueFromDDE1CTX();
 			this.setRedefinesFromDDE1CTX();
+			if (dde1Ctx.dataGlobalClause() != null && dde1Ctx.dataGlobalClause().size() > 0) {
+				this.global = true;
+			}
+			if (dde1Ctx.dataExternalClause() != null && dde1Ctx.dataExternalClause().size() > 0) {
+				this.external = true;
+			}
 		}
 	}
 
@@ -177,6 +182,8 @@ class DDNode {
 				break;
 			default:
 				this.children.add(child);
+				child.setGlobal(this.isGlobal());
+				child.setExternal(this.isExternal());
 		}
 	}
 
@@ -196,13 +203,57 @@ class DDNode {
 		return(this.level.intValue() == 88);
 	}
 
+	public Boolean isGlobal() {
+		return this.global;
+	}
+
+	public Boolean isExternal() {
+		return this.external;
+	}
+
+	public void setGlobal(Boolean global) {
+		this.global = global;
+	}
+
+	public void setExternal(Boolean external) {
+		this.external = external;
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
+	}
+
+	public Integer getLevel() {
+		return this.level;
+	}
+
+	public DDNode getParent() {
+		return this.parent;
+	}
+
+	public String getIdentifier() {
+		return this.identifier;
+	}
+
+	public List<DDNode> getChildren() {
+		return this.children;
+	}
+
+	public String getValueInValueClause() {
+		return this.valueInValueClause;
+	}
+
+	public DataLocation getLocn() {
+		return this.locn;
+	}
+
 	public DDNode findChild(DDNode child) {
 		DDNode result = null;
 
 		if (this.uuid.equals(child.uuid)) {return(this);}
 
 		for (DDNode node: this.children) {
-			if (node.uuid.equals(child.uuid)) {
+			if (node.getUUID().equals(child.getUUID())) {
 				result = node;
 				break;
 			} else {
@@ -221,7 +272,7 @@ class DDNode {
 			result.add(this);
 		} else {
 			for (DDNode node: this.children) {
-				if (node.identifier.equals(identifier)) {
+				if (node.getIdentifier().equals(identifier)) {
 					result.add(node);
 				} else {
 					result.addAll(node.findChildrenNamed(identifier));

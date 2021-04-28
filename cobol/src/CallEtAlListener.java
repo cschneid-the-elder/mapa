@@ -6,84 +6,82 @@ import org.antlr.v4.runtime.tree.*;
 
 public class CallEtAlListener extends CobolParserBaseListener {
 	private Logger LOGGER = null;
-	public ArrayList<CallWrapper> calledNodes = null;
-	public ArrayList<AssignClause> assignClauses = null;
-	public String callingModuleName = null;
+	public ArrayList<CobolProgram> programs = null;
 	public String aLib = null;
+	public CobolProgram currProgram = null;
 
 	public CallEtAlListener(
-			ArrayList<CallWrapper> al
-			, ArrayList<AssignClause> assignClauses
+			ArrayList<CobolProgram> programs
 			, String aLib
 			, Logger LOGGER) {
 		super();
-		this.calledNodes = al;
 		this.aLib = aLib;
 		this.LOGGER = LOGGER;
-		this.assignClauses = assignClauses;
+		this.programs = programs;
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
 		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	public void enterProgramUnit(CobolParser.ProgramUnitContext ctx) {
-		//not clear this is needed
+	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
+		String newProgramName = ctx.getText();
+		this.currProgram = null;
+
+		for (CobolProgram pgm: this.programs) {
+			if (pgm.hasThisProgramName(newProgramName)) {
+				this.currProgram = pgm;
+				break;
+			}
+			CobolProgram newPgm = pgm.nestedProgramNamed(newProgramName);
+			if (newPgm != null) {
+				this.currProgram = newPgm;
+				break;
+			}
+		}
+
+		if (this.currProgram == null) {
+			throw new IllegalArgumentException(
+				"program "
+				+ newProgramName
+				+ " not found in "
+				+ this.programs);
+		}
 	}
 
-	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		callingModuleName = ctx.getText();
+	public void enterStatement(CobolParser.StatementContext ctx) {
+		currProgram.incrementStatementCounter(ctx);
 	}
 
 	public void enterCallStatement(CobolParser.CallStatementContext ctx) {
-		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
-		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
-		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
-		Boolean found = false;
-		CallWrapper aCall = new CallWrapper(ctx, this.callingModuleName, this.aLib, this.LOGGER);
-		for (CallWrapper cw: calledNodes) {
-			if (cw.seemsLike(aCall)) {
-				found = true;
-				break;
-			}
-		}
-		if (!found) calledNodes.add(aCall);
+		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+		this.currProgram.addCall(aCall);
 	}
 
 	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
-		assignClauses.add(new AssignClause(ctx, this.LOGGER));
+		this.currProgram.addAssignClause(new AssignClause(ctx, this.LOGGER));
+	}
+
+	public void enterMoveStatement(CobolParser.MoveStatementContext ctx) {
+		this.currProgram.addMoveStatement(new MoveStatement(ctx, this.LOGGER));
+	}
+
+	public void enterSetTo(CobolParser.SetToContext ctx) {
+		this.currProgram.addSetTo(new Identifier(ctx.identifier(), this.LOGGER));
 	}
 }

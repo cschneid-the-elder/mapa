@@ -1,5 +1,7 @@
 
 import java.util.*;
+import java.time.*;
+import java.time.format.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.logging.Logger;
@@ -21,10 +23,11 @@ class CobolSource {
 	private String sourceFileName = null;
 	private String currTempFile = null;
 	private ArrayList<DDNode> dataNodes = new ArrayList<>();
-	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+	private ArrayList<CobolProgram> programs = new ArrayList<>();
 	private ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
 	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
 	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
+	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private Boolean isCobol = true;
 
 	public CobolSource(
@@ -49,7 +52,8 @@ class CobolSource {
 		} else {
 			currTempFile = CLI.copyCompressingContinuations(currTempFile, baseDir, initFileNm);
 			currTempFile = processCDS(currTempFile, baseDir, initFileNm);
-			this.calledNodes = assembleDataNodeTree(currTempFile, getLib(sourceFileName));
+			ParseTree tree = this.lookForCobolPrograms(currTempFile);
+			this.assembleDataNodeTree(tree, currTempFile, getLib(sourceFileName));
 		}
 	}
 
@@ -57,12 +61,8 @@ class CobolSource {
 		return this.isCobol;
 	}
 
-	public ArrayList<CallWrapper> getCalledNodes() {
-		return this.calledNodes;
-	}
-
-	public ArrayList<DDNode> getDataNodes() {
-		return this.dataNodes;
+	public ArrayList<CobolProgram> getPrograms() {
+		return this.programs;
 	}
 
 	public UUID getUUID() {
@@ -369,7 +369,6 @@ class CobolSource {
 		LOGGER.fine(this.myName + " processReplaceStatements()");
 
 		ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-		//String initFileNm = new File(aFileName).getName();
 		String fileName = initFileNm;
 
 		lookForCompilerDirectingStatements(
@@ -570,12 +569,10 @@ class CobolSource {
 		return fileName;
 	}
 
-	public ArrayList<CallWrapper> assembleDataNodeTree(
+	public ParseTree lookForCobolPrograms(
 				String fileName
-				, String aLib
 				) throws IOException {
-		LOGGER.fine(this.myName + " assembleDataNodeTree()");
-		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+		LOGGER.fine(this.myName + " lookForCobolPrograms()");
 
 		CharStream cs = fromFileName(fileName);  //load the file
 
@@ -592,30 +589,43 @@ class CobolSource {
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(dataNodes);
+		ProgramListener listener = new ProgramListener(this.programs, this.LOGGER);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
 
-		LOGGER.finest("dataNodes: " + dataNodes);
-
-		calledNodes = lookForCalledRoutines(tree, walker, aLib);
-		calledNodes = resolveCalledNodes(tree, walker, calledNodes, dataNodes);
-
-		return calledNodes;
-
+		return tree;
 	}
 
-	public ArrayList<CallWrapper> lookForCalledRoutines(ParseTree tree
+	public void assembleDataNodeTree(
+				ParseTree tree
+				, String fileName
+				, String aLib
+				) throws IOException {
+		LOGGER.fine(this.myName + " assembleDataNodeTree()");
+		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		this.lookForCalledRoutines(tree, walker, aLib);
+		this.resolveCalledNodes(tree, walker, calledNodes, dataNodes);
+	}
+
+	private void lookForCalledRoutines(ParseTree tree
 					, ParseTreeWalker walker
 					, String aLib) {
 		LOGGER.fine(this.myName + " lookForCalledRoutines()");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 		CallEtAlListener listener = 
 			new CallEtAlListener(
-					calledNodes
-					, this.assignClauses
+					this.programs
 					, aLib
 					, this.LOGGER);
 
@@ -625,12 +635,10 @@ class CobolSource {
 
 		walker.walk(listener, tree);
 
-		LOGGER.finest("calledNodes: " + calledNodes);
-
-		return calledNodes;
+		LOGGER.finest("programs: " + this.programs);
 	}
 
-	public ArrayList<CallWrapper> resolveCalledNodes(ParseTree tree
+	private void resolveCalledNodes(ParseTree tree
 						, ParseTreeWalker walker
 						, ArrayList<CallWrapper> calledNodes
 						, ArrayList<DDNode> dataNodes) {
@@ -638,55 +646,29 @@ class CobolSource {
 		LOGGER.fine(this.myName + " resolveCalledNodes");
 		ArrayList<DDNode> calledDataNodes = new ArrayList<>();
 
-		for (CallWrapper call: calledNodes) {
-			LOGGER.finest("  call.identifier = " + call.identifier);
-			if (call.identifier == null) {
-			} else {
-				calledDataNodes = new ArrayList<>();
-				for (DDNode node: dataNodes) {
-					if (node.parent == null) {
-						calledDataNodes.addAll(node.findChildrenNamed(call.identifier));
-					}
-				}
-				LOGGER.finest("  all node children named " + call.identifier + " = " + calledDataNodes);
-				if (!call.selectDataNode(calledDataNodes, dataNodes)) {
-					LOGGER.warning("!no data node selected");
-				}
-				LOGGER.finest("call.dataNode = " + call.dataNode);
-			}
+		for (CobolProgram pgm: this.programs) {
+			pgm.resolveCalledNodes();
 		}
-
-		LOGGER.finest("calledNodes: " + calledNodes);
-
-		SetListener listener = new SetListener(calledNodes, LOGGER);
-
-		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-
-		walker.walk(listener, tree);
-
-		LOGGER.finest("calledNodes: " + calledNodes);
-
-		return calledNodes;
 	}
 
 	public void writeOn(PrintWriter out) throws IOException {
+		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
+		String dateTimeStamp = LocalDateTime.now().format(df).toString();
+
 		out.printf(
 			"FILE,%s,%s,%s\n"
 			, this.getUUID().toString()
 			, this.sourceFileName
-			, this.initFileNm);
+			, dateTimeStamp);
 
 		for (CopyStatement cs: this.copyStatements) {
 			cs.writeOn(out, this.getUUID());
 		}
 
-		for (CallWrapper cw: this.calledNodes) {
-			cw.writeOn(out, this.getUUID());
+		for (CobolProgram pgm: this.programs) {
+			pgm.writeOn(out, this.getUUID());
 		}
 
-		for (AssignClause ac: this.assignClauses) {
-			ac.writeOn(out, this.getUUID());
-		}
 	}
 
 	public String toString() {
