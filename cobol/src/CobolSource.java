@@ -11,6 +11,28 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
+/**
+This class represents a source file containing one or more COBOL
+programs, each of which is represented by an instance of the
+<code>CobolProgram</code> class.
+
+<p>It is possible, though rare in the mainframe environment, to 
+have a single source code member comprised of multiple COBOL
+programs, each with its own Identification Division.  These might
+be nested programs, possibly for performance reasons.
+
+<p>The <code>dataNodes</code> and <code>calledNodes</code> are only
+here to make the admittedly kludgy unit tests in TestIntegration work.
+
+<p>Note that the <code>copyStatements</code> are kept here and not at
+the <code>CobolProgram</code> level.  The rules for constructing the
+COBOL code to be compiled from source are interesting, and state that
+the source cannot be determined until after all COPY and REPLACE 
+statements have been processed.  A COPY might bring in another program
+in its entirety.
+
+<p>Instantiating one of these is _expensive_.
+*/
 class CobolSource {
 
 	private String myName = this.getClass().getName();
@@ -25,7 +47,7 @@ class CobolSource {
 	private ArrayList<DDNode> dataNodes = new ArrayList<>();
 	private ArrayList<CobolProgram> programs = new ArrayList<>();
 	private ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
+	private ArrayList<AssignClause> assignClauses = new ArrayList<>(); //TODO remove
 	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private Boolean isCobol = true;
@@ -98,6 +120,9 @@ class CobolSource {
 
 	/**
 	Remove the troublesome columns 73 - 80 if they are present.
+
+	<p>I was never able to find a way in the lexer grammar to simply and
+	easily ignore these columns.  So I just get rid of them.
 	*/
 	public static String copyWithout73to80(
 			String fileName
@@ -154,6 +179,13 @@ class CobolSource {
 		return lib;
 	}
 
+	/**
+	Return the compiler directing statement on the indicated line,
+	if there is one.  If not, return null.
+
+	<p>This method makes the logic in <code>processCDS()</code> below
+	just a <i>bit</i> easier to read.
+	*/
 	public static CompilerDirectingStatement cdsInList(
 			int line
 			, ArrayList<CompilerDirectingStatement> compDirStmts) {
@@ -167,6 +199,81 @@ class CobolSource {
 	/**
 	This is an interpreter for Compiler Directing Statements, and thus is
 	a bit strange.  And long.  Because there is a state machine therein.
+
+	<p>The general ugliness herein is contributed to by the fact that the
+	input file is being rewritten as the compiler directing statements
+	it contains are being interpreted.
+
+	<p>The idea is to iteratively process the input file, which may contain
+	compiler directing statements, and the compiler directing statements may
+	optionally include COPY statements which may in turn insert code which
+	includes more compiler directing statements.
+
+	<p>So, given...
+	<code>
+	       PROCESS DEFINE(A=B'1'),DEFINE(B=B'0')
+	       ID Division.
+	       Program-ID. test9009.
+	       Procedure Division.
+	           >>IF A
+	           CALL 'PGM0001A'
+	           >>END-IF
+	
+	           >>IF B
+	           CALL 'PGM0001B'
+	           >>END-IF
+	
+	           >>DEFINE A B'0' OVERRIDE
+	           >>DEFINE B B'1' OVERRIDE
+	
+	           >>IF A
+	           CALL 'PGM0001C'
+	           >>END-IF
+	
+	           >>IF B
+	           CALL 'PGM0001D'
+	           >>END-IF
+	
+	           >>DEFINE A AS PARAMETER
+	           >>DEFINE B AS PARAMETER
+	
+	           >>IF A
+	           CALL 'PGM0001E'
+	           >>END-IF
+	
+	           >>IF B
+	           CALL 'PGM0001F'
+	           >>END-IF
+	
+	           >>IF A
+	           COPY test9009.cpy.
+	           >>END-IF
+	
+	           >>IF B
+	           CALL 'PGM0001G'
+	           >>END-IF
+	
+	           >>DEFINE B AS PARAMETER
+	
+	           >>IF B
+	           CALL 'PGM0001H'
+	           >>END-IF
+	
+	           GOBACK.
+	</code>
+	<p>...where test9009.cpy contains...
+	<code>
+	           >>DEFINE B B'1' OVERRIDE
+	</code>
+	<p>...you can see that test9009.cpy contains a compiler directing
+	statement that must be parsed and interpreted but it hasn't been
+	because it wasn't in the original input stream.
+
+	<p>Thus the iterative nature of the algorithm.  Parse, rewrite and
+	interpret, if a COPY statement is encountered then process it and just
+	rewrite the rest of the file from that point on and go back to the 
+	beginning and parse, rewrite, interpret.  Iterate until there are no
+	more COPY statements.
 	*/
 	@SuppressWarnings({"fallthrough"})
 	public String processCDS(
@@ -348,6 +455,12 @@ class CobolSource {
 		return fileName;
 	}
  
+	/**
+	Return the number of COPY statements found in the latest parse.
+
+	<p>This method makes the logic in <code>processCDS()</code> above
+	just a <i>bit</i> easier to read.
+	*/
 	public int countCopyCDS(ArrayList<CompilerDirectingStatement> compDirStmts) {
 		int nbCopies = 0;
 		for (CompilerDirectingStatement copy: compDirStmts) {
@@ -359,6 +472,17 @@ class CobolSource {
 		return nbCopies;
 	}
 
+	/**
+	IBM's documentation is quite clear that REPLACE statements are not
+	processed until after all COPY statements have been resolved.  So
+	this method includes a similar but not identical state machine to
+	the <code>processCDS()</code> method for
+	interpreting compiler directing statements to determine which, if
+	any, of the REPLACE statements are enabled and should be applied
+	to the source.
+
+	<p>The source is again rewritten with the REPLACE statements applied.
+	*/
 	@SuppressWarnings({"fallthrough"})
 	public String processReplaceStatements(
 			String aFileName
@@ -493,6 +617,15 @@ class CobolSource {
 		return tmp.getPath();
 	}
 
+	/**
+	Parse the input and find all the compiler directing statements.  
+
+	<p>Note that
+	this must also take into account any additional DEFINE statements provided
+	on the command line to this application - those are in <code>compOptDefines</code>.
+
+	<p>Also note that this is the preprocesser lexer and parser.
+	*/
 	public void lookForCompilerDirectingStatements(
 			String fileName
 			, ArrayList<CompilerDirectingStatement> compDirStmts
@@ -569,6 +702,13 @@ class CobolSource {
 		return fileName;
 	}
 
+	/**
+	Parse the input and find all COBOL programs contained therein.
+
+	<p>Note that this is where instances of CobolProgram are created.
+
+	<p>Also note that this is no longer the preprocessor lexer and parser.
+	*/
 	public ParseTree lookForCobolPrograms(
 				String fileName
 				) throws IOException {
@@ -598,6 +738,13 @@ class CobolSource {
 		return tree;
 	}
 
+	/**
+	The <code>DataDescriptionEntryListener</code> creates instances of DDNode which
+	describe the data identifiers in each <code>CobolProgram</code>.
+
+	<p>Note that the input hasn't changed, so the parse tree hasn't changed, and thus
+	the input does not need to be parsed again.
+	*/
 	public void assembleDataNodeTree(
 				ParseTree tree
 				, String fileName
@@ -618,6 +765,13 @@ class CobolSource {
 		this.resolveCalledNodes(tree, walker, calledNodes, dataNodes);
 	}
 
+	/**
+	The <code>CallEtAlListener</code> creates instances of CallWrapper which
+	describe the different sorts of CALLs in each <code>CobolProgram</code>.
+
+	<p>Note that the input hasn't changed, so the parse tree hasn't changed, and thus
+	the input does not need to be parsed again.
+	*/
 	private void lookForCalledRoutines(ParseTree tree
 					, ParseTreeWalker walker
 					, String aLib) {
@@ -638,19 +792,30 @@ class CobolSource {
 		LOGGER.finest("programs: " + this.programs);
 	}
 
+	/**
+	Instruct each <code>CobolProgram</code> to resolve its called programs.
+
+	<p>For each CALL statement that references DDNode, the values that are
+	assigned to that DDNode, via MOVE or SET statements, are determined.
+	*/
 	private void resolveCalledNodes(ParseTree tree
 						, ParseTreeWalker walker
 						, ArrayList<CallWrapper> calledNodes
 						, ArrayList<DDNode> dataNodes) {
 
 		LOGGER.fine(this.myName + " resolveCalledNodes");
-		ArrayList<DDNode> calledDataNodes = new ArrayList<>();
+		ArrayList<DDNode> calledDataNodes = new ArrayList<>(); //TODO remove
 
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
 		}
 	}
 
+	/**
+	Output is produced here.  Each CobolSource instance can be asked
+	to produce a report of data of interest to be written on the 
+	passed PrintWriter.
+	*/
 	public void writeOn(PrintWriter out) throws IOException {
 		DateTimeFormatter df = DateTimeFormatter.ofPattern("yyyyMMddHHmmssSSS");
 		String dateTimeStamp = LocalDateTime.now().format(df).toString();
