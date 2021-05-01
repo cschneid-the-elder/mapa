@@ -2,6 +2,38 @@
 import java.util.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+A wrapper around ANTLR's TerminalNode, instances of this class are used
+when comparing source code text in the context of COPY REPLACING and
+REPLACE statements.
+
+<p>The comparison rules are... interesting.  Straightforward string
+compares are insufficient as the rules state that whitespace is not
+significant and neither are COBOL continuations.  Nor commas.  Nor
+semicolons.
+
+<code>
+           REPLACE 
+               ==COMPUTE A = B + C== 
+             BY
+               ==COMPUTE D = E + F==
+           .
+
+                                                                    COMP
+      -    UTE                A               =
+                              B               +                     C
+
+           REPLACE OFF.
+</code>
+
+<p>This sort of thing will drive you mad until you drop the idea of 
+working with strings and adopt the idea of working with TerminalNodes.
+
+<p>The purpose of this application is to mimic the behavior of a COBOL
+compiler, which is not operating on strings, but tokens.  It requires
+a shift in thinking.
+*/
+
 class TerminalNodeWrapper {
 
 	private String myName = this.getClass().getName();

@@ -5,6 +5,14 @@ import java.nio.file.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+CharDataKeywordWrapper, CharDataLineWrapper, CharDataWrapper, CobolWordWrapper (not
+to be confused with CobolWord), DirectoryPhrase, FilenameWrapper, LiteralWrapper,
+and PseudoTextWrapper are all in service to the preprocessing that resolves COPY
+REPLACING and REPLACE statements.  Their primary purpose is to create a collection
+of TerminalNodeWrapper instances which are used in CopyReplaceParent::applyReplacingPhrase().
+*/
+
 public class DirectoryPhrase {
 
 	private String myName = this.getClass().getName();

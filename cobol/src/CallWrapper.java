@@ -5,6 +5,31 @@ import java.nio.file.*;
 import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Despite its name, this class is a wrapper around several different
+types of "call," a COBOL CALL (static or dynamic), an EXEC SQL CALL, 
+an EXEC CICS LINK or XCTL.
+
+Much code is devoted to dealing with constructs such as...
+<code>
+01  CALLED-PROGRAMS.
+    05  PGM1 PIC X(8) VALUE 'ZHAAN'.
+        88  PGM1-A    VALUE 'STARK'.
+    05  PGM2 PIC X(8) VALUE 'RYGEL'.
+    05  PGM3 PIC X(8) VALUE 'PILOT'.
+
+    CALL PGM1
+    EXEC CICS LINK PROGRAM(PGM2) END-EXEC
+    EXEC CICS XCTL PROGRAM(PGM3) END-EXEC
+    SET PGM1-A TO TRUE
+    MOVE 'NORANTI' TO PGM2
+    MOVE 'JOOL' TO PGM3
+    CALL PGM2
+    EXEC CICS LINK PROGRAM(PGM3) END-EXEC
+    EXEC CICS XCTL PROGRAM(PGM1) END-EXEC
+</code>
+*/
+
 class CallWrapper {
 
 	private String myName = this.getClass().getName();
@@ -94,12 +119,15 @@ class CallWrapper {
 		return;
 	}
 
-	public Boolean seemsLike(CallWrapper cw) {
-		/*
-			Only unique CALLs (et. al.) are interesting.  If the source contains
-			multiple CALLs to the same identifier, it's not necessary to record that.
+	/**
+	Only unique CALLs (et. al.) are interesting.  If the source contains
+	multiple CALLs to the same identifier, it's not necessary to record that.
 
-		*/
+	<p>Determining if the identifier is the same in this context means 
+	verifying the call type is the same, the identifier has the same name,
+	and its qualifiers (the "ofs" such as X OF Y OF Z) are the same.
+	*/
+	public Boolean seemsLike(CallWrapper cw) {
 		Boolean is = this.callingModuleName.equals(cw.callingModuleName);
 		is = is && this.callType == cw.callType;
 		if (is && (this.callType == CallType.CALLBYLITERAL
@@ -117,18 +145,18 @@ class CallWrapper {
 		return is; 
 	}
 
+	/**
+	The CALL statement represented by this instance may be of the form
+	CALL <i>identifier</i> where <i>identifier</i> is a field name possibly qualified
+	by a QualifiedInDataContext.  A concrete example might take the form
+	CALL PGM OF ACCOUNT OF SAVINGS.
+
+	<p>This method runs through a List of DDNode instances, each of which
+	represents an identifier in the Data Division, attempting to match
+	the <i>identifier</i> and its optional QualifiedInDataContext.
+	*/
+
 	public Boolean selectDataNode(List<DDNode> dataNodes) {
-		/**
-			The CALL statement represented by this instance may be of the form
-			CALL <identifier> where <identifier> is a field name possibly qualified
-			by a QualifiedInDataContext.  A concrete example might take the form
-			CALL PGM OF ACCOUNT OF SAVINGS.
-
-			This method runs through a List of DDNode instances, each of which
-			represents an identifier in the Data Division, attempting to match
-			the <identifier> and its optional QualifiedInDataContext.
-		*/
-
 		this.LOGGER.fine(this.myName + " " + this.callType + " @ " + this.line + " selectDataNode()");
 		this.LOGGER.finest("  dataNodes = " + dataNodes);
 		Boolean found = false;
