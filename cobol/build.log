@@ -3860,3 +3860,13 @@ Sat May 1 14:10:46 CDT 2021 src/TableCall.java
 Sat May 1 14:10:50 CDT 2021 jar
 Sat May 1 14:10:56 CDT 2021 testLocal
 Sat May 1 14:11:37 CDT 2021 testNist
+Sat May 1 17:45:18 CDT 2021 src/ReplaceClause.java
+Sat May 1 17:45:19 CDT 2021 src/CopyReplaceParent.java
+Sat May 1 17:45:20 CDT 2021 src/CopyStatement.java
+Sat May 1 17:45:21 CDT 2021 src/ReplaceOffStatement.java
+Sat May 1 17:45:22 CDT 2021 src/ReplaceStatement.java
+Sat May 1 17:45:23 CDT 2021 src/CompilerDirectingStatementListener.java
+Sat May 1 17:45:24 CDT 2021 src/TestIntegration.java
+Sat May 1 17:45:29 CDT 2021 jar
+Sat May 1 17:45:36 CDT 2021 testLocal
+Sat May 1 17:46:31 CDT 2021 testNist
