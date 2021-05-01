@@ -6,6 +6,20 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
+/**
+Instances of this class represent a REPLACE statement.  IBM Documentation
+indicates REPLACE statements are processed only after all COPY statements
+have been processed to assemble the source code.  I'm going to take that
+as normal behavior.
+
+<p>ReplaceClause is used to obtain each collection of text to be replaced
+and the collection of text with which to replace it.
+
+<p>Determining scope is dependent on processing of compiler directing
+statements.  It is possible that a REPLACE or REPLACE OFF statement is
+disabled due to being inside conditional processing that takes place at
+compile time.  Hence, the <code>enabled</code> instance variable.
+*/
 public class ReplaceStatement extends CopyReplaceParent implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
@@ -99,7 +113,7 @@ public class ReplaceStatement extends CopyReplaceParent implements CompilerDirec
 
 		if (this.replaceOffStatement == null && this.nextReplaceStatement == null) {
 			/*
-			This REPLACE statement was not followed by neither a REPLACE OFF
+			This REPLACE statement was followed by neither a REPLACE OFF
 			statement nor another REPLACE statement.
 			*/
 			this.stopLine = Integer.MAX_VALUE;

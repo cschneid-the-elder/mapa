@@ -6,8 +6,35 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
+/**
+Encapsulating code common to the processing of the REPLACING phrase
+of the COPY statement and the REPLACE statement, believe me when I
+tell you this was far worse in previous incarnations.  
+*/
+
 abstract class CopyReplaceParent {
-	
+
+	/**
+	Needed in both CobolSource for processing REPLACE statements and
+	CopyStatement for the REPLACING phrase, this method constructs a
+	StringBuilder from a collection of TerminalNodeWrappers, some of
+	which may have been swapped with replacements via the code in
+	applyReplacingPhrase() below.
+
+	<p>The complexity comes from having to account for positioning of
+	text which need not be the same length as that which was replaced.
+	<code>
+	REPLACE
+	    ==ADD A TO==
+	  BY
+	    ==SUBTRACT B FROM==
+	.
+	ADD A TO C GIVING X, DIVIDE X BY E GIVING Y REMAINDER Z, DISPLAY Z.
+	REPLACE OFF.
+	</code>
+	<p>Further complicating matters, is the TerminalNodeWrapper being
+	written preceded by a newline?  Whitespace?
+	*/
 	public static StringBuilder createStringBuilderFromTerminalNodeWrappers(
 		CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 		) {
@@ -77,7 +104,14 @@ abstract class CopyReplaceParent {
 		return outLine;
 	}
 
-	public ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
+	/**
+	This exists because the rules for comparison governing text replacement
+	state that all whitespace between text elements is treated as a single 
+	space.  Whitespace is eliminated by the lexer, except newlines for reasons
+	too arcane to get into.  So this is a filtered subList() method, removing
+	TerminalNodeWrappers representing newlines.
+	*/
+	public ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper( //TODO make private
 			CopyOnWriteArrayList<TerminalNodeWrapper> tnwList
 			, int from
 			, int size
@@ -97,7 +131,15 @@ abstract class CopyReplaceParent {
 		return newList;
 	} 
 
-	public ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(
+	/**
+	Create a new collection of TerminalNodeWrappers which have been "cloned"
+	from the replacement text and potentially altered ("fudged" - do people
+	still use the term "fudge factor?") by the original source.  This is an
+	attempt to make the createStringBuilderFromTerminalNodeWrappers() logic
+	work better.
+	*/
+
+	public ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList( //TODO make private
 				ArrayList<TerminalNodeWrapper> source
 				, ArrayList<TerminalNodeWrapper> fudge) {
 		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
@@ -136,6 +178,17 @@ abstract class CopyReplaceParent {
 		return newList;
 	}
 
+	/**
+	Walk through <i>sourceNodes</i> looking for occurrences of <i>replaceable</i>
+	and replacing them with <i>replacement</i>.
+
+	<p>Sounds easy, until you realize <i>replaceable</i> and <i>replacement</i> are
+	both collections and need not be the same size.
+
+	<p>Note that towards the end of this method the collection over which iteration
+	is occurring is altered.
+	*/
+
 	public void applyReplacingPhrase(
 			CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 			, ArrayList<ArrayList<TerminalNodeWrapper>> replaceable
@@ -170,7 +223,7 @@ abstract class CopyReplaceParent {
 					from++;
 				}
 			}
-			matchLoop:
+			matchLoop: //TODO remove label
 			while (from < sourceNodes.size() && sourceNodes.get(from).getLine() < thisStopLine) {
 				TestIntegration.LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
 				Boolean matched = false;

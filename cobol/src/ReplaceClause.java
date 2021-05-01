@@ -5,6 +5,13 @@ import java.nio.file.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Representing the REPLACING clause of a COPY statement, the primary purpose
+of instances of this class is to create collections of TerminalNodeWrapper
+instances corresponding to the text to be replaced and the text with which
+it is to be replaced.
+*/
+
 public class ReplaceClause {
 
 	private String myName = this.getClass().getName();

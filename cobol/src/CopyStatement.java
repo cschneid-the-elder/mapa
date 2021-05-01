@@ -7,6 +7,13 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
 
+/**
+Instances of this class represent the COPY compiler directing statement.
+
+<p>Processing can be complex, the REPLACING phrase has rules best expressed
+as... unique.
+*/
+
 public class CopyStatement extends CopyReplaceParent implements CompilerDirectingStatement {
 
 	private UUID uuid = UUID.randomUUID();
@@ -95,6 +102,15 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 	public UUID getUUID() {
 		return this.uuid;
 	}
+
+	/**
+	Reposition the LineNumberReader after this COPY statement, keeping in
+	mind that the COPY statement can occur on a line with other code.  Apply 
+	this COPY statement to the PrintWriter.
+
+	<p>The code being copied is itself COBOL code, so must be processed much
+	like the original source code in which this COPY statement was found.
+	*/
 
 	public void apply(
 			LineNumberReader src
