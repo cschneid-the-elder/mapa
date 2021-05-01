@@ -3,6 +3,22 @@ import java.util.*;
 import java.io.*;
 import java.util.logging.Logger;
 
+/**
+Ultimately, in the context important to this application, an 
+Identifier is either an IDENTIFIER followed by a list of qualifying
+IDENTIFIERs -or- an IDENTIFIER followed by a list of subscripts
+which are themselves IDENTIFIERs or INTEGERLITERALs.
+
+<p>The primary function of instances of this class is to assist in
+determining if one instances matches another.
+
+<p>QualifiedDataName, QualifiedDataNameFormat1, DataName, QualifiedInData, 
+InData, TableCall, InTable, and CobolWord all assist Identifier in performing
+its primary function of being able to equate one instance of Identifier with
+another.
+
+*/
+
 class Identifier {
 
 	private String myName = this.getClass().getName();
@@ -16,13 +32,6 @@ class Identifier {
 	private QualifiedDataName qdn = null;
 	private TableCall tableCall = null;
 
-	/**
-	Ultimately, in the context important to this application, an 
-	Identifier is either an IDENTIFIER followed by a list of qualifying
-	IDENTIFIERs -or- an IDENTIFIER followed by a list of subscripts
-	which are themselves IDENTIFIERs or INTEGERLITERALs.  In either case
-	the most important thing is the initial IDENTIFIER.
-	*/
 	public static ArrayList<Identifier> bunchOfThese(
 			List<CobolParser.IdentifierContext> ctxList
 			, Logger LOGGER

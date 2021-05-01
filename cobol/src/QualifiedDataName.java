@@ -3,6 +3,13 @@ import java.util.*;
 import java.io.*;
 import java.util.logging.Logger;
 
+/**
+QualifiedDataName, QualifiedDataNameFormat1, DataName, QualifiedInData, 
+InData, TableCall, InTable, and CobolWord all assist Identifier in performing
+its primary function of being able to equate one instance of Identifier with
+another.
+*/
+
 class QualifiedDataName {
 
 	private String myName = this.getClass().getName();
@@ -12,8 +19,6 @@ class QualifiedDataName {
 	private CobolParser.QualifiedDataNameFormat1Context qdnf1Ctx = null;
 	private QualifiedDataNameFormat1 qdnf1 = null;
 
-	/**
-	*/
 	public QualifiedDataName(
 			CobolParser.QualifiedDataNameContext ctx
 			, Logger LOGGER
