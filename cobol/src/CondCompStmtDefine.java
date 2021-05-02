@@ -8,20 +8,20 @@ class CondCompStmtDefine implements CompilerDirectingStatement {
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_DEFINE;
 	private CobolPreprocessorParser.ConditionalCompilationDefineContext ctx = null;
 	private CondCompVar var = null;
-	//private int line = -1;
+	//private int line = -1; //TODO remove
 	private int startLine = -1;
 	private int endLine = -1;
 
 	public CondCompStmtDefine(
 				CobolPreprocessorParser.ConditionalCompilationDefineContext ccdc) {
 		this.ctx = ccdc;
-		//this.line = this.ctx.COMPILER_DIRECTIVE_TAG().getSymbol().getLine();
+		//this.line = this.ctx.COMPILER_DIRECTIVE_TAG().getSymbol().getLine(); // TODO remove
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
 		this.var = new CondCompVar(this.ctx);
 	}
 
-	/*
+	/* TODO remove
 	public int getLine() {
 		return this.line;
 	}

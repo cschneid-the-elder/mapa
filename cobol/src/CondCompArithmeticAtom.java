@@ -2,6 +2,12 @@
 import java.util.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Instances of this class represent either a variable or a
+numeric constant in a conditional compile statement which
+is evaluated in the preprocessor.
+*/
+
 class CondCompArithmeticAtom implements CondCompToken {
 
 	private String myName = this.getClass().getName();

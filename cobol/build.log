@@ -3870,3 +3870,11 @@ Sat May 1 17:45:24 CDT 2021 src/TestIntegration.java
 Sat May 1 17:45:29 CDT 2021 jar
 Sat May 1 17:45:36 CDT 2021 testLocal
 Sat May 1 17:46:31 CDT 2021 testNist
+Sun May 2 13:21:45 CDT 2021 src/CondCompStmtDefine.java
+Sun May 2 13:21:46 CDT 2021 src/CompilerDirectingStatementListener.java
+Sun May 2 13:21:47 CDT 2021 src/TestIntegration.java
+Sun May 2 13:21:48 CDT 2021 src/CondCompArithmeticAtom.java
+Sun May 2 13:21:49 CDT 2021 src/CondCompArithmeticExpression.java
+Sun May 2 13:21:54 CDT 2021 jar
+Sun May 2 13:22:00 CDT 2021 testLocal
+Sun May 2 13:23:24 CDT 2021 testNist

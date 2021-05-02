@@ -4,6 +4,19 @@ import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Instances of this class represent an arithmetic expression in a
+conditional compilation statement.
+
+<p>Two things of note: First, the initialization which includes
+creation of a stack (an ArrayDeque) containing all the tokens in
+the expression with the addition of grouping symbols to ensure
+operator precedence, that is to say that 2 + 3 * 4 is 14 and not 20.
+
+<p>Second, there is a state machine for evaluating the expression
+and determining its value.
+*/
+
 class CondCompArithmeticExpression {
 
 	private String myName = this.getClass().getName();
@@ -90,6 +103,43 @@ class CondCompArithmeticExpression {
 		[7] Padua, David (2000). "The Fortran I Compiler" (PDF) <http://polaris.cs.uiuc.edu/publications/c1070.pdf>. Computing in Science & Engineering. 2 (1): 70–75. Bibcode:2000CSE.....2a..70P. <https://ui.adsabs.harvard.edu/abs/2000CSE.....2a..70P> doi:10.1109/5992.814661. <https://doi.org/10.1109%2F5992.814661>
 
 		*/
+
+//		A C implementation...
+
+//		#include <stdio.h>
+//		#include <string.h>
+//
+//		int main(int argc, char *argv[]) {
+//			int i;
+//			printf("((((");
+//			for (i=1;i!=argc;i++) {
+//				if (argv[i] && !argv[i][1]) {
+//					switch (*argv[i]) {
+//					case '(': printf("(((("); continue;
+//					case ')': printf("))))"); continue;
+//					case '^': printf(")^("); continue;
+//					case '*': printf("))*(("); continue;
+//					case '/': printf("))/(("); continue;
+//					case '+':
+//						if (i == 1 || strchr("(^*/+-", *argv[i-1]))
+//							printf("+");
+//						else
+//							printf(")))+(((");
+//						continue;
+//					case '-':
+//						if (i == 1 || strchr("(^*/+-", *argv[i-1]))
+//							printf("-");
+//						else
+//							printf(")))-(((");
+//						continue;
+//					}
+//				}
+//				printf("%s", argv[i]);
+//			}
+//			printf("))))\n");
+//			return 0;
+//		}
+
 		evals.push(new CondCompGroupOp(")"));
 		evals.push(new CondCompGroupOp(")"));
 		evals.push(new CondCompGroupOp(")"));
