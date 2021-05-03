@@ -2068,29 +2068,29 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitEvaluateValue(CobolParser.EvaluateValueContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CobolParser#execCicsLinkStatement}.
+	 * Visit a parse tree produced by {@link CobolParser#cicsCmdStart}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx);
+	T visitCicsCmdStart(CobolParser.CicsCmdStartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CobolParser#execCicsXctlStatement}.
+	 * Visit a parse tree produced by {@link CobolParser#cicsCmdEnd}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx);
+	T visitCicsCmdEnd(CobolParser.CicsCmdEndContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CobolParser#execCicsInvokeServiceStatement}.
+	 * Visit a parse tree produced by {@link CobolParser#cicsKeyword}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExecCicsInvokeServiceStatement(CobolParser.ExecCicsInvokeServiceStatementContext ctx);
+	T visitCicsKeyword(CobolParser.CicsKeywordContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CobolParser#execCicsCatchAllStatement}.
+	 * Visit a parse tree produced by {@link CobolParser#cicsKeywordWithArg}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExecCicsCatchAllStatement(CobolParser.ExecCicsCatchAllStatementContext ctx);
+	T visitCicsKeywordWithArg(CobolParser.CicsKeywordWithArgContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#execCicsStatement}.
 	 * @param ctx the parse tree

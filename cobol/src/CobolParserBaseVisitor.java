@@ -2417,28 +2417,28 @@ public class CobolParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCicsCmdStart(CobolParser.CicsCmdStartContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCicsCmdEnd(CobolParser.CicsCmdEndContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExecCicsInvokeServiceStatement(CobolParser.ExecCicsInvokeServiceStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCicsKeyword(CobolParser.CicsKeywordContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExecCicsCatchAllStatement(CobolParser.ExecCicsCatchAllStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCicsKeywordWithArg(CobolParser.CicsKeywordWithArgContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -3437,45 +3437,45 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitEvaluateValue(CobolParser.EvaluateValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CobolParser#execCicsLinkStatement}.
+	 * Enter a parse tree produced by {@link CobolParser#cicsCmdStart}.
 	 * @param ctx the parse tree
 	 */
-	void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx);
+	void enterCicsCmdStart(CobolParser.CicsCmdStartContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CobolParser#execCicsLinkStatement}.
+	 * Exit a parse tree produced by {@link CobolParser#cicsCmdStart}.
 	 * @param ctx the parse tree
 	 */
-	void exitExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx);
+	void exitCicsCmdStart(CobolParser.CicsCmdStartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CobolParser#execCicsXctlStatement}.
+	 * Enter a parse tree produced by {@link CobolParser#cicsCmdEnd}.
 	 * @param ctx the parse tree
 	 */
-	void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx);
+	void enterCicsCmdEnd(CobolParser.CicsCmdEndContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CobolParser#execCicsXctlStatement}.
+	 * Exit a parse tree produced by {@link CobolParser#cicsCmdEnd}.
 	 * @param ctx the parse tree
 	 */
-	void exitExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx);
+	void exitCicsCmdEnd(CobolParser.CicsCmdEndContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CobolParser#execCicsInvokeServiceStatement}.
+	 * Enter a parse tree produced by {@link CobolParser#cicsKeyword}.
 	 * @param ctx the parse tree
 	 */
-	void enterExecCicsInvokeServiceStatement(CobolParser.ExecCicsInvokeServiceStatementContext ctx);
+	void enterCicsKeyword(CobolParser.CicsKeywordContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CobolParser#execCicsInvokeServiceStatement}.
+	 * Exit a parse tree produced by {@link CobolParser#cicsKeyword}.
 	 * @param ctx the parse tree
 	 */
-	void exitExecCicsInvokeServiceStatement(CobolParser.ExecCicsInvokeServiceStatementContext ctx);
+	void exitCicsKeyword(CobolParser.CicsKeywordContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CobolParser#execCicsCatchAllStatement}.
+	 * Enter a parse tree produced by {@link CobolParser#cicsKeywordWithArg}.
 	 * @param ctx the parse tree
 	 */
-	void enterExecCicsCatchAllStatement(CobolParser.ExecCicsCatchAllStatementContext ctx);
+	void enterCicsKeywordWithArg(CobolParser.CicsKeywordWithArgContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link CobolParser#execCicsCatchAllStatement}.
+	 * Exit a parse tree produced by {@link CobolParser#cicsKeywordWithArg}.
 	 * @param ctx the parse tree
 	 */
-	void exitExecCicsCatchAllStatement(CobolParser.ExecCicsCatchAllStatementContext ctx);
+	void exitCicsKeywordWithArg(CobolParser.CicsKeywordWithArgContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#execCicsStatement}.
 	 * @param ctx the parse tree

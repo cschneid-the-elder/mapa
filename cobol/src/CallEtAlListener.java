@@ -58,14 +58,17 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.addCall(aCall);
 	}
 
-	public void enterExecCicsLinkStatement(CobolParser.ExecCicsLinkStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
-		this.currProgram.addCall(aCall);
-	}
-
-	public void enterExecCicsXctlStatement(CobolParser.ExecCicsXctlStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
-		this.currProgram.addCall(aCall);
+	@SuppressWarnings({"fallthrough"})
+	public void enterExecCicsStatement(CobolParser.ExecCicsStatementContext ctx) {
+		switch(ctx.cicsKeyword(0).toUpperCase()) {
+			case "LINK":
+			case "XCTL": //intentional fall through
+				CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+				this.currProgram.addCall(aCall);
+				break;
+			default:
+				break;
+		}
 	}
 
 	public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
