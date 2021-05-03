@@ -3,6 +3,14 @@ import java.util.*;
 import java.lang.reflect.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+CharDataKeywordWrapper, CharDataLineWrapper, CharDataWrapper, CobolWordWrapper (not
+to be confused with CobolWord), DirectoryPhrase, FilenameWrapper, LiteralWrapper,
+and PseudoTextWrapper are all in service to the preprocessing that resolves COPY
+REPLACING and REPLACE statements.  Their primary purpose is to create a collection
+of TerminalNodeWrapper instances which are used in CopyReplaceParent::applyReplacingPhrase().
+*/
+
 class PseudoTextWrapper {
 
 	private String myName = this.getClass().getName();
@@ -34,7 +42,7 @@ class PseudoTextWrapper {
 
 	public PseudoTextWrapper(CobolPreprocessorParser.PseudoTextContext ctx) {
 		this.ctx = ctx;
-/*
+/*TODO remove
 		if (this.ctx.DOUBLEEQUALCHAR() != null && this.ctx.DOUBLEEQUALCHAR().size() > 0) {
 			this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.DOUBLEEQUALCHAR()));
 		}

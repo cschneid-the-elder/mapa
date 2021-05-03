@@ -3,12 +3,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Instances of this class serve two purposes.  First, act as an end point
+for the scope of a REPLACE statement.  Second, remove itself from a
+collection of TerminalNodeWrappers representing the source code being
+processed.
+*/
+
 public class ReplaceOffStatement implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
 	public CobolPreprocessorParser.ReplaceOffStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_REPLACE_OFF;
-	//private int line = -1;
+	//private int line = -1; //TODO remove
 	private int startLine = -1;
 	private int endLine = -1;
 	private Boolean enabled = false;
@@ -16,7 +23,7 @@ public class ReplaceOffStatement implements CompilerDirectingStatement {
 
 	ReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) {
 		this.ctx = ctx;
-		//this.line = this.ctx.REPLACE().getSymbol().getLine();
+		//this.line = this.ctx.REPLACE().getSymbol().getLine(); //TODO remove
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
 		this.tnwList.add(new TerminalNodeWrapper(this.ctx.REPLACE()));

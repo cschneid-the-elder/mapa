@@ -3,6 +3,22 @@ import java.util.*;
 import java.io.*;
 import java.util.logging.Logger;
 
+/**
+Instances of this class represent a COBOL program.  One or more
+COBOL programs may be present in each COBOL source file.  COBOL
+programs may be nested within other COBOL programs.
+
+<p>An attempt is made to resolve dynamic CALLs of the CALL identifier
+(or data-name, if you prefer) form.  This entails tracking down
+references to the identifier in MOVE an SET statements in addition
+to the original VALUE clause, should there be one.
+
+<p>Complicating this is the possibility that the identifier may be
+marked GLOBAL or EXTERNAL and thus may not be contained in this
+program at all, but in a program in which this program has been
+nested.
+*/
+
 class CobolProgram {
 
 	private String myName = this.getClass().getName();
@@ -12,8 +28,8 @@ class CobolProgram {
 	private String programName = null;
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
-	public ArrayList<DDNode> dataNodes = new ArrayList<>();
-	public ArrayList<CobolProgram> programs = new ArrayList<>();
+	public ArrayList<DDNode> dataNodes = new ArrayList<>(); //TODO make private
+	public ArrayList<CobolProgram> programs = new ArrayList<>(); //TODO make private
 	private ArrayList<MoveStatement> moves = new ArrayList<>();
 	private ArrayList<Identifier> sets = new ArrayList<>();
 	private CobolProgram parent = null;
@@ -36,7 +52,7 @@ class CobolProgram {
 		return this.hasThisProgramName(pgm.getProgramName());
 	}
 
-	public Boolean hasThisDDNode01(DDNode ddNode) {
+	public Boolean hasThisDDNode01(DDNode ddNode) { //TODO remove
 		for (DDNode dataNode: this.dataNodes) {
 			if (dataNode.getLevel() != 1) continue;
 			if (dataNode.getUUID() == ddNode.getUUID()) {
@@ -47,6 +63,16 @@ class CobolProgram {
 		return false;
 	}
 
+	/**
+	For each CALL, if it is of the form CALL identifier, locate the
+	identifier in the list of DDNodes for this program and any programs
+	in which this program is nested.
+
+	<p>Once the DDNode has been found, locate any MOVE or SET statements
+	that alter its contents.
+
+	<p>Finally, instruct any nested programs to do the same.
+	*/
 	public void resolveCalledNodes() {
 		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCalledNodes");
 
@@ -82,6 +108,10 @@ class CobolProgram {
 		}
 	}
 
+	/**
+	Search the <code>DDNodes</code> in the passed program for the one that matches the
+	identifier in the passed <code>CallWrapper</code>.
+	*/
 	private Boolean resolveCalledNode(CallWrapper call, CobolProgram pgm) {
 		this.LOGGER.fine(this.myName + " resolveCalledNode(" + call + ", " + pgm + ")");
 		Boolean rc = false;
@@ -103,6 +133,23 @@ class CobolProgram {
 		return rc;
 	}
 
+	/**
+	Find MOVE statements that seem to reference the identifier in
+	the passed CALL statement.
+
+	<code>
+	[...]
+	       01  CALLED-PROGRAMS.
+	           05  PGM1 PIC X(008) VALUE 'CRICHTON'.
+	               88  PGM-ZHAAN   VALUE 'ZHAAN'.
+	               88  PGM-CHIANA  VALUE 'CHIANA'.
+	               88  PGM-DARGO   VALUE 'DARGO'.
+	[...]
+	           CALL PGM1
+	           MOVE 'AERYN' TO PGM1
+	           CALL PGM1
+	</code>
+	*/
 	private void findAllTheRightMoves(CallWrapper call) {
 		CobolProgram pgm = this;
 		while (pgm != null) {
@@ -118,6 +165,24 @@ class CobolProgram {
 
 	}
 
+	/**
+	Find SET statements that seem to reference the identifier in
+	the passed CALL statement.
+
+	<code>
+	[...]
+	       01  CALLED-PROGRAMS.
+	           05  PGM1 PIC X(008) VALUE 'CRICHTON'.
+	               88  PGM-ZHAAN   VALUE 'ZHAAN'.
+	               88  PGM-CHIANA  VALUE 'CHIANA'.
+	               88  PGM-DARGO   VALUE 'DARGO'.
+	[...]
+	           SET PGM-CHIANA TO TRUE
+	           CALL PGM1
+	           SET PGM-DARGO TO TRUE
+	           CALL PGM1
+	</code>
+	*/
 	private void findAllTheRightSets(CallWrapper call) {
 		for (DDNode ee: call.getDataNode().getChildren()) {
 			if (!ee.isCondition()) continue;
@@ -152,6 +217,10 @@ class CobolProgram {
 		return this.dataNodes;
 	}
 
+	/**
+	Return DDNodes marked GLOBAL or EXTERNAL as these may be
+	referenced in CALL statements by nested programs.
+	*/
 	public ArrayList<DDNode> getPublicDataNodes() {
 		ArrayList<DDNode> publicDataNodes = new ArrayList<>();
 		for (DDNode dataNode: this.getDataNodes()) {
@@ -175,6 +244,13 @@ class CobolProgram {
 		return this.parent;
 	}
 
+	/**
+	Return the nested program with the indicated name.  It is possible that
+	the nested program is nested inside a program nested inside this one.
+
+	<p>This is used in the <code>DataDescriptionEntryListener</code> to
+	establish the owning program for each <code>DDNode</code>.
+	*/
 	public CobolProgram nestedProgramNamed(String nestedProgramName) {
 		CobolProgram pgm = null;
 		for (CobolProgram nestedProgram: this.programs) {
@@ -212,6 +288,11 @@ class CobolProgram {
 		this.sets.add(identifier);
 	}
 
+	/**
+	Increment counters for different types of statements that may be
+	of interest.  This could grow over time, for example CICS or SQL
+	statements could be counted here.
+	*/
 	public void incrementStatementCounter(CobolParser.StatementContext ctx) {
 		this.statementCount++;
 
@@ -234,6 +315,10 @@ class CobolProgram {
 		}
 	}
 
+	/**
+	Write data of interest on the passed PrintWriter.  Instruct nested programs
+	to do the same.
+	*/
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
 		out.printf(
 			"PGM,%s,%s,%s,%d,%d\n"

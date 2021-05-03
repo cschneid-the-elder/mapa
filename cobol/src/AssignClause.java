@@ -5,6 +5,11 @@ import java.nio.file.*;
 import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+Representing the ASSIGN clause of the SELECT statement, the primary
+purpose of this class is to encapsulate the parsing out of the 
+DDName which someone might want to match up with the JCL.
+*/
 class AssignClause {
 
 	private Logger LOGGER = null;

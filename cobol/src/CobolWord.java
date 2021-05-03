@@ -3,6 +3,13 @@ import java.util.*;
 import java.lang.reflect.*;
 import org.antlr.v4.runtime.tree.*;
 
+/**
+QualifiedDataName, QualifiedDataNameFormat1, DataName, QualifiedInData, 
+InData, TableCall, InTable, and CobolWord all assist Identifier in performing
+its primary function of being able to equate one instance of Identifier with
+another.
+*/
+
 class CobolWord {
 
 	private String myName = this.getClass().getName();
