@@ -74,12 +74,12 @@ class CallWrapper {
 			, String aLib
 			, Logger LOGGER
 			) {
-		this.ctxLink = ctx;
+		this.ctxCics = ctx;
 		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
 		this.execCicsStmt = new ExecCicsStatement(ctx, LOGGER);
-		this.initialize(this.execCicsStmt);
+		this.initialize(ctx);
 	}
 
 	public CallWrapper(
@@ -224,7 +224,7 @@ class CallWrapper {
 		CallType lit = null;
 		CallType id = null;
 
-		if (this.execCicsStmt.getType() == CICSLINK) {
+		if (this.execCicsStmt.getType() == ExecCicsStatementType.CICSLINK) {
 			lit = CallType.CICSLINKBYLITERAL;
 			id = CallType.CICSLINKBYIDENTIFIER;
 		} else {

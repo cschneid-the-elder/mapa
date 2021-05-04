@@ -60,7 +60,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	@SuppressWarnings({"fallthrough"})
 	public void enterExecCicsStatement(CobolParser.ExecCicsStatementContext ctx) {
-		switch(ctx.cicsKeyword(0).toUpperCase()) {
+		switch(ctx.cicsKeyword(0).getText().toUpperCase()) {
 			case "LINK":
 			case "XCTL": //intentional fall through
 				CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
