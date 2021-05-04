@@ -47,8 +47,8 @@ class CallWrapper {
 	public List<CobolParser.QualifiedInDataContext> inDataCtxs = null;
 	public ArrayList<String> ofs = new ArrayList<>();
 	public CobolParser.CallStatementContext ctxCall = null;
-	public CobolParser.ExecCicsLinkStatementContext ctxLink = null;
-	public CobolParser.ExecCicsXctlStatementContext ctxXctl = null;
+	public CobolParser.ExecCicsStatementContext ctxCics = null;
+	private ExecCicsStatement execCicsStmt = null;
 	public CobolParser.ExecSqlCallStatementContext ctxSqlCall = null;
 	public CobolParser.IdentifierContext idCtx = null;
 	public DDNode dataNode = null;
@@ -69,7 +69,7 @@ class CallWrapper {
 	}
 
 	public CallWrapper(
-			CobolParser.ExecCicsLinkStatementContext ctx
+			CobolParser.ExecCicsStatementContext ctx
 			, String callingModuleName
 			, String aLib
 			, Logger LOGGER
@@ -78,20 +78,8 @@ class CallWrapper {
 		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
-		this.initialize(ctx);
-	}
-
-	public CallWrapper(
-			CobolParser.ExecCicsXctlStatementContext ctx
-			, String callingModuleName
-			, String aLib
-			, Logger LOGGER
-			) {
-		this.ctxXctl = ctx;
-		this.LOGGER = LOGGER;
-		this.callingModuleName = callingModuleName;
-		this.aLib = aLib;
-		this.initialize(ctx);
+		this.execCicsStmt = new ExecCicsStatement(ctx, LOGGER);
+		this.initialize(this.execCicsStmt);
 	}
 
 	public CallWrapper(
@@ -231,23 +219,23 @@ class CallWrapper {
 			);
 	}
 
-	public void initialize(CobolParser.ExecCicsLinkStatementContext ctx) {
+	public void initialize(CobolParser.ExecCicsStatementContext ctx) {
 		this.line = ctx.start.getLine();
-		this.initialize(
-			ctx.literal()
-			, ctx.identifier()
-			, CallType.CICSLINKBYLITERAL
-			, CallType.CICSLINKBYIDENTIFIER
-			);
-	}
+		CallType lit = null;
+		CallType id = null;
 
-	public void initialize(CobolParser.ExecCicsXctlStatementContext ctx) {
-		this.line = ctx.start.getLine();
+		if (this.execCicsStmt.getType() == CICSLINK) {
+			lit = CallType.CICSLINKBYLITERAL;
+			id = CallType.CICSLINKBYIDENTIFIER;
+		} else {
+			lit = CallType.CICSXCTLBYLITERAL;
+			id = CallType.CICSXCTLBYIDENTIFIER;
+		}
 		this.initialize(
-			ctx.literal()
-			, ctx.identifier()
-			, CallType.CICSXCTLBYLITERAL
-			, CallType.CICSXCTLBYIDENTIFIER
+			this.execCicsStmt.getProgram().getLiteralContext()
+			, this.execCicsStmt.getProgram().getIdentifierContext()
+			, lit
+			, id
 			);
 	}
 
