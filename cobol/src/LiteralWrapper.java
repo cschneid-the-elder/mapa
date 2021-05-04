@@ -57,6 +57,10 @@ class LiteralWrapper {
 		return this.tnwList;
 	}
 
+	public String getText() {
+		return this.tnwList.get(0).getText();
+	}
+
 	public void populateTerminalNodeWrapperList() {
 		/*
 		There are a _lot_ of methods of the type we're interested in, and

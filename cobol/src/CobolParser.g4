@@ -1489,25 +1489,28 @@ evaluateValue
 
 // exec cics statement
 
-execCicsLinkStatement
-   : EXEC CICS NEWLINE* LINK NEWLINE* PROGRAM LPARENCHAR (identifier | literal) RPARENCHAR (IDENTIFIER (LPARENCHAR IDENTIFIER RPARENCHAR)*)*  END_EXEC DOT?
-   ;
+cicsCmdStart
+	: EXEC_CICS
+	;
 
-execCicsXctlStatement
-   : EXEC CICS NEWLINE* XCTL NEWLINE* PROGRAM LPARENCHAR (identifier | literal) RPARENCHAR (IDENTIFIER (LPARENCHAR IDENTIFIER RPARENCHAR)*)*  END_EXEC DOT?
-   ;
+cicsCmdEnd
+	: END_EXEC
+	;
 
-execCicsInvokeServiceStatement
-   : EXEC CICS NEWLINE* INVOKE (SERVICE | WEBSERVICE) NEWLINE* LPARENCHAR (identifier | literal) RPARENCHAR (IDENTIFIER (LPARENCHAR IDENTIFIER RPARENCHAR)*)*  END_EXEC DOT?
-   ;
+cicsKeyword
+	: cobolWord
+	;
 
-execCicsCatchAllStatement
-   : EXEC CICS (IDENTIFIER (LPARENCHAR IDENTIFIER RPARENCHAR)*)* END_EXEC DOT?
-   ;
+cicsKeywordWithArg
+	: cobolWord
+	LPARENCHAR (identifier | literal) RPARENCHAR
+	;
 
 execCicsStatement
-   : execCicsLinkStatement | execCicsXctlStatement | execCicsInvokeServiceStatement | execCicsCatchAllStatement
-   ;
+	: cicsCmdStart
+	(cicsKeyword | cicsKeywordWithArg)+
+	cicsCmdEnd
+	;
 
 // exec sql statement
 
@@ -2805,7 +2808,7 @@ cobolWord
    | FOREGROUND_COLOR | FOREGROUND_COLOUR | FULL | FUNCTIONNAME | FUNCTION_POINTER
    | GRID
    | HIGHLIGHT
-   | IMPLICIT | IMPORT | INTEGER
+   | IMPLICIT | IMPORT | INTEGER | INVOKE
    | KEPT | KEYBOARD
    | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
    | MMDDYYYY
