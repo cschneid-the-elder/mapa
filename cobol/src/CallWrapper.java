@@ -36,8 +36,8 @@ class CallWrapper {
 	public UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	public CallType callType = null;
-	public String identifier = null; //COBOL identifier
-	private Identifier id = null;
+	public String cobolIdentifier = null;
+	private Identifier identifier = null;
 	private ArrayList<UUID> calledModuleUUIDs = new ArrayList<>();
 	private List<String> calledModuleNames = new ArrayList<>();
 	public String callingModuleName = null;
@@ -125,8 +125,8 @@ class CallWrapper {
 					) {
 			is = is && this.calledModuleNames.equals(cw.calledModuleNames);
 		} else {
-			if (this.identifier != null && cw.getIdentifier() != null) {
-				is = is && this.identifier.equals(cw.getIdentifier());
+			if (this.getCobolIdentifier() != null && cw.getCobolIdentifier() != null) {
+				is = is && this.getCobolIdentifier().equals(cw.getCobolIdentifier());
 			}
 		}
 		is = is && this.ofs.equals(cw.ofs);
@@ -150,7 +150,7 @@ class CallWrapper {
 		Boolean found = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.getIdentifier().equals(this.identifier)) {
+			if (node.getIdentifier().equals(this.getCobolIdentifier())) {
 				if (this.ofs.size() == 0) {
 					found = true;
 					this.dataNode = node;
@@ -206,7 +206,7 @@ class CallWrapper {
 	}
 
 	public Boolean identifierMatches(Identifier identifier) {
-		return this.id.seemsToMatch(identifier);
+		return this.getIdentifier().seemsToMatch(identifier);
 	}
 
 	private void initialize(CobolParser.CallStatementContext ctx) {
@@ -277,11 +277,11 @@ class CallWrapper {
 			}
 		} else {
 			this.idCtx = idCtx;
-			this.id = new Identifier(idCtx, this.LOGGER);
+			this.identifier = new Identifier(idCtx, this.LOGGER);
 			this.callType = idCallType;
 			if (idCtx.qualifiedDataName() == null ) {
 				// CALL identifier(subscript) syntax (sneaky)
-				this.identifier = 
+				this.cobolIdentifier = 
 					idCtx
 					.tableCall()
 					.qualifiedDataName()
@@ -310,7 +310,7 @@ class CallWrapper {
 					.qualifiedInData();
 			} else {
 				// CALL identifier syntax
-				this.identifier = 
+				this.cobolIdentifier = 
 					idCtx
 					.qualifiedDataName()
 					.qualifiedDataNameFormat1()
@@ -380,27 +380,27 @@ class CallWrapper {
 				return callingModuleName + " SQL CALL literal @" + this.line + ": " + this.calledModuleNames;
 			case CALLBYIDENTIFIER:
 				if (this.subNames == null) {
-					return callingModuleName + " CALL identifier @" + this.line + ": " + this.identifier + " " + this.calledModuleNames;
+					return callingModuleName + " CALL identifier @" + this.line + ": " + this.getCobolIdentifier() + " " + this.calledModuleNames;
 				} else {
-					return callingModuleName + " CALL identifier @" + this.line + ": " + this.identifier + " subs " + this.subNames;
+					return callingModuleName + " CALL identifier @" + this.line + ": " + this.getCobolIdentifier() + " subs " + this.subNames;
 				}
 			case CICSLINKBYIDENTIFIER:
 				if (this.subNames == null) {
-					return callingModuleName + " CICS LINK identifier @" + this.line + ": " + this.identifier + " " + this.calledModuleNames;
+					return callingModuleName + " CICS LINK identifier @" + this.line + ": " + this.getCobolIdentifier() + " " + this.calledModuleNames;
 				} else {
-					return callingModuleName + " CICS LINK identifier @" + this.line + ": " + this.identifier + " subs " + this.subNames;
+					return callingModuleName + " CICS LINK identifier @" + this.line + ": " + this.getCobolIdentifier() + " subs " + this.subNames;
 				}
 			case CICSXCTLBYIDENTIFIER:
 				if (this.subNames == null) {
-					return callingModuleName + " CICS XCTL identifier @" + this.line + ": " + this.identifier + " " + this.calledModuleNames;
+					return callingModuleName + " CICS XCTL identifier @" + this.line + ": " + this.getCobolIdentifier() + " " + this.calledModuleNames;
 				} else {
-					return callingModuleName + " CICS XCTL identifier @" + this.line + ": " + this.identifier + " subs " + this.subNames;
+					return callingModuleName + " CICS XCTL identifier @" + this.line + ": " + this.getCobolIdentifier() + " subs " + this.subNames;
 				}
 			case SQLCALLBYIDENTIFIER:
 				if (this.subNames == null) {
-					return callingModuleName + " SQL CALL identifier @" + this.line + ": " + this.identifier + " " + this.calledModuleNames;
+					return callingModuleName + " SQL CALL identifier @" + this.line + ": " + this.getCobolIdentifier() + " " + this.calledModuleNames;
 				} else {
-					return callingModuleName + " SQL CALL identifier @" + this.line + ": " + this.identifier + " subs " + this.subNames;
+					return callingModuleName + " SQL CALL identifier @" + this.line + ": " + this.getCobolIdentifier() + " subs " + this.subNames;
 				}
 			default:
 				return callingModuleName + " CALL of indeterminate nature";
@@ -415,16 +415,16 @@ class CallWrapper {
 		return this.callingModuleName;
 	}
 
-	public String getIdentifier() {
-		return this.identifier;
+	public String getCobolIdentifier() {
+		return this.cobolIdentifier;
 	}
 
 	public DDNode getDataNode() {
 		return this.dataNode;
 	}
 
-	public Identifier getId() {
-		return this.id;
+	public Identifier getIdentifier() {
+		return this.identifier;
 	}
 
 	public List<String> getCalledModuleNames() {
