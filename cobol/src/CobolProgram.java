@@ -77,8 +77,8 @@ class CobolProgram {
 		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCalledNodes");
 
 		for (CallWrapper call: this.calledNodes) {
-			LOGGER.finest("  call.identifier = " + call.getIdentifier());
-			if (call.getIdentifier() == null) {
+			LOGGER.finest("  call.identifier = " + call.getCobolIdentifier());
+			if (call.getCobolIdentifier() == null) {
 			} else {
 				Boolean resolved = false;
 				CobolProgram pgm = this;
@@ -92,7 +92,7 @@ class CobolProgram {
 				} else {
 					this.LOGGER.warning(
 						"identifier " 
-						+ call.getIdentifier()
+						+ call.getCobolIdentifier()
 						+ " not found in " 
 						+ call.getCallingModuleName()
 						+ " or any program in which it is nested");
@@ -124,10 +124,10 @@ class CobolProgram {
 		}
 		for (DDNode node: localDataNodes) {
 			if (node.getParent() == null) {
-				calledDataNodes.addAll(node.findChildrenNamed(call.getIdentifier()));
+				calledDataNodes.addAll(node.findChildrenNamed(call.getCobolIdentifier()));
 			}
 		}
-		LOGGER.finest("  all node children named " + call.getIdentifier() + " = " + calledDataNodes);
+		LOGGER.finest("  all node children named " + call.getCobolIdentifier() + " = " + calledDataNodes);
 		rc = call.selectDataNode(calledDataNodes);
 		LOGGER.finest("call.dataNode = " + call.getDataNode());
 		return rc;
@@ -155,7 +155,7 @@ class CobolProgram {
 		while (pgm != null) {
 			for (MoveStatement move: pgm.getMoves()) {
 				for (Identifier identifier: move.getIdentifiers()) {
-					if (identifier.seemsToMatch(call.getId())) {
+					if (identifier.seemsToMatch(call.getIdentifier())) {
 						call.addCalledModuleName(move.getText());
 					}
 				}
