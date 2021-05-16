@@ -1,4 +1,4 @@
-// Generated from src/SQLParser.g4 by ANTLR 4.9.2
+// Generated from src/DB2zSQLParser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -9,8 +9,8 @@ import java.util.Iterator;
 import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
-public class SQLParser extends Parser {
-	static { RuntimeMetaData.checkVersion("4.9.2", RuntimeMetaData.VERSION); }
+public class DB2zSQLParser extends Parser {
+	static { RuntimeMetaData.checkVersion("4.7.2", RuntimeMetaData.VERSION); }
 
 	protected static final DFA[] _decisionToDFA;
 	protected static final PredictionContextCache _sharedContextCache =
@@ -465,7 +465,7 @@ public class SQLParser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "SQLParser.g4"; }
+	public String getGrammarFileName() { return "DB2zSQLParser.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
@@ -476,7 +476,7 @@ public class SQLParser extends Parser {
 	@Override
 	public ATN getATN() { return _ATN; }
 
-	public SQLParser(TokenStream input) {
+	public DB2zSQLParser(TokenStream input) {
 		super(input);
 		_interp = new ParserATNSimulator(this,_ATN,_decisionToDFA,_sharedContextCache);
 	}
@@ -488,22 +488,22 @@ public class SQLParser extends Parser {
 		public SqlStatementContext sqlStatement(int i) {
 			return getRuleContext(SqlStatementContext.class,i);
 		}
-		public TerminalNode EOF() { return getToken(SQLParser.EOF, 0); }
+		public TerminalNode EOF() { return getToken(DB2zSQLParser.EOF, 0); }
 		public StartRuleContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_startRule; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterStartRule(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterStartRule(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitStartRule(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitStartRule(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitStartRule(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitStartRule(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -598,26 +598,26 @@ public class SQLParser extends Parser {
 		public UpdateStatementContext updateStatement() {
 			return getRuleContext(UpdateStatementContext.class,0);
 		}
-		public TerminalNode SEMICOLON() { return getToken(SQLParser.SEMICOLON, 0); }
-		public TerminalNode EOF() { return getToken(SQLParser.EOF, 0); }
-		public TerminalNode EXEC_SQL() { return getToken(SQLParser.EXEC_SQL, 0); }
-		public TerminalNode END_EXEC() { return getToken(SQLParser.END_EXEC, 0); }
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode SEMICOLON() { return getToken(DB2zSQLParser.SEMICOLON, 0); }
+		public TerminalNode EOF() { return getToken(DB2zSQLParser.EOF, 0); }
+		public TerminalNode EXEC_SQL() { return getToken(DB2zSQLParser.EXEC_SQL, 0); }
+		public TerminalNode END_EXEC() { return getToken(DB2zSQLParser.END_EXEC, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public SqlStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sqlStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSqlStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSqlStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSqlStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSqlStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSqlStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSqlStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -795,15 +795,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_query; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterQuery(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterQuery(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitQuery(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitQuery(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitQuery(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitQuery(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -856,12 +856,12 @@ public class SQLParser extends Parser {
 	}
 
 	public static class DeclareCursorStatementContext extends ParserRuleContext {
-		public TerminalNode DECLARE() { return getToken(SQLParser.DECLARE, 0); }
+		public TerminalNode DECLARE() { return getToken(DB2zSQLParser.DECLARE, 0); }
 		public CursorNameContext cursorName() {
 			return getRuleContext(CursorNameContext.class,0);
 		}
-		public TerminalNode CURSOR() { return getToken(SQLParser.CURSOR, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
+		public TerminalNode CURSOR() { return getToken(DB2zSQLParser.CURSOR, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
 		public SelectStatementContext selectStatement() {
 			return getRuleContext(SelectStatementContext.class,0);
 		}
@@ -886,28 +886,28 @@ public class SQLParser extends Parser {
 		public RowsetPositioningContext rowsetPositioning(int i) {
 			return getRuleContext(RowsetPositioningContext.class,i);
 		}
-		public TerminalNode NO() { return getToken(SQLParser.NO, 0); }
-		public TerminalNode SCROLL() { return getToken(SQLParser.SCROLL, 0); }
-		public TerminalNode ASENSITIVE() { return getToken(SQLParser.ASENSITIVE, 0); }
-		public TerminalNode INSENSITIVE() { return getToken(SQLParser.INSENSITIVE, 0); }
-		public TerminalNode SENSITIVE() { return getToken(SQLParser.SENSITIVE, 0); }
-		public TerminalNode DYNAMIC() { return getToken(SQLParser.DYNAMIC, 0); }
-		public TerminalNode STATIC() { return getToken(SQLParser.STATIC, 0); }
+		public TerminalNode NO() { return getToken(DB2zSQLParser.NO, 0); }
+		public TerminalNode SCROLL() { return getToken(DB2zSQLParser.SCROLL, 0); }
+		public TerminalNode ASENSITIVE() { return getToken(DB2zSQLParser.ASENSITIVE, 0); }
+		public TerminalNode INSENSITIVE() { return getToken(DB2zSQLParser.INSENSITIVE, 0); }
+		public TerminalNode SENSITIVE() { return getToken(DB2zSQLParser.SENSITIVE, 0); }
+		public TerminalNode DYNAMIC() { return getToken(DB2zSQLParser.DYNAMIC, 0); }
+		public TerminalNode STATIC() { return getToken(DB2zSQLParser.STATIC, 0); }
 		public DeclareCursorStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_declareCursorStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDeclareCursorStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDeclareCursorStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDeclareCursorStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDeclareCursorStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDeclareCursorStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDeclareCursorStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1064,15 +1064,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_cursorName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCursorName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCursorName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCursorName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCursorName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCursorName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCursorName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1108,15 +1108,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_statementName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterStatementName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterStatementName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitStatementName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitStatementName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitStatementName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitStatementName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1143,24 +1143,24 @@ public class SQLParser extends Parser {
 	}
 
 	public static class HoldabilityContext extends ParserRuleContext {
-		public TerminalNode WITHOUT() { return getToken(SQLParser.WITHOUT, 0); }
-		public TerminalNode HOLD() { return getToken(SQLParser.HOLD, 0); }
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
+		public TerminalNode WITHOUT() { return getToken(DB2zSQLParser.WITHOUT, 0); }
+		public TerminalNode HOLD() { return getToken(DB2zSQLParser.HOLD, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
 		public HoldabilityContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_holdability; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterHoldability(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterHoldability(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitHoldability(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitHoldability(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitHoldability(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitHoldability(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1211,27 +1211,27 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ReturnabilityContext extends ParserRuleContext {
-		public TerminalNode WITHOUT() { return getToken(SQLParser.WITHOUT, 0); }
-		public TerminalNode RETURN() { return getToken(SQLParser.RETURN, 0); }
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
-		public TerminalNode TO() { return getToken(SQLParser.TO, 0); }
-		public TerminalNode CALLER() { return getToken(SQLParser.CALLER, 0); }
-		public TerminalNode CLIENT() { return getToken(SQLParser.CLIENT, 0); }
+		public TerminalNode WITHOUT() { return getToken(DB2zSQLParser.WITHOUT, 0); }
+		public TerminalNode RETURN() { return getToken(DB2zSQLParser.RETURN, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
+		public TerminalNode TO() { return getToken(DB2zSQLParser.TO, 0); }
+		public TerminalNode CALLER() { return getToken(DB2zSQLParser.CALLER, 0); }
+		public TerminalNode CLIENT() { return getToken(DB2zSQLParser.CLIENT, 0); }
 		public ReturnabilityContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_returnability; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterReturnability(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterReturnability(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitReturnability(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitReturnability(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitReturnability(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitReturnability(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1306,25 +1306,25 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RowsetPositioningContext extends ParserRuleContext {
-		public TerminalNode WITHOUT() { return getToken(SQLParser.WITHOUT, 0); }
-		public TerminalNode ROWSET() { return getToken(SQLParser.ROWSET, 0); }
-		public TerminalNode POSITIONING() { return getToken(SQLParser.POSITIONING, 0); }
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
+		public TerminalNode WITHOUT() { return getToken(DB2zSQLParser.WITHOUT, 0); }
+		public TerminalNode ROWSET() { return getToken(DB2zSQLParser.ROWSET, 0); }
+		public TerminalNode POSITIONING() { return getToken(DB2zSQLParser.POSITIONING, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
 		public RowsetPositioningContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rowsetPositioning; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRowsetPositioning(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRowsetPositioning(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRowsetPositioning(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRowsetPositioning(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRowsetPositioning(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRowsetPositioning(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1379,13 +1379,13 @@ public class SQLParser extends Parser {
 	}
 
 	public static class DeclareTableStatementContext extends ParserRuleContext {
-		public TerminalNode DECLARE() { return getToken(SQLParser.DECLARE, 0); }
+		public TerminalNode DECLARE() { return getToken(DB2zSQLParser.DECLARE, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode TABLE() { return getToken(SQLParser.TABLE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode TABLE() { return getToken(DB2zSQLParser.TABLE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
 		}
@@ -1398,9 +1398,9 @@ public class SQLParser extends Parser {
 		public DataTypeContext dataType(int i) {
 			return getRuleContext(DataTypeContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public List<NotNullPhraseContext> notNullPhrase() {
 			return getRuleContexts(NotNullPhraseContext.class);
@@ -1414,15 +1414,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declareTableStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDeclareTableStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDeclareTableStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDeclareTableStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDeclareTableStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDeclareTableStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDeclareTableStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1504,25 +1504,25 @@ public class SQLParser extends Parser {
 	}
 
 	public static class NotNullPhraseContext extends ParserRuleContext {
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
 		public NotNullPhraseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_notNullPhrase; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNotNullPhrase(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNotNullPhrase(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNotNullPhrase(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNotNullPhrase(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNotNullPhrase(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNotNullPhrase(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1575,17 +1575,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class DeclareStatementStatementContext extends ParserRuleContext {
-		public TerminalNode DECLARE() { return getToken(SQLParser.DECLARE, 0); }
+		public TerminalNode DECLARE() { return getToken(DB2zSQLParser.DECLARE, 0); }
 		public List<StatementNameContext> statementName() {
 			return getRuleContexts(StatementNameContext.class);
 		}
 		public StatementNameContext statementName(int i) {
 			return getRuleContext(StatementNameContext.class,i);
 		}
-		public TerminalNode STATEMENT() { return getToken(SQLParser.STATEMENT, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode STATEMENT() { return getToken(DB2zSQLParser.STATEMENT, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public DeclareStatementStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1593,15 +1593,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_declareStatementStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDeclareStatementStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDeclareStatementStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDeclareStatementStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDeclareStatementStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDeclareStatementStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDeclareStatementStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1651,14 +1651,14 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AllocateCursorStatementContext extends ParserRuleContext {
-		public TerminalNode ALLOCATE() { return getToken(SQLParser.ALLOCATE, 0); }
+		public TerminalNode ALLOCATE() { return getToken(DB2zSQLParser.ALLOCATE, 0); }
 		public CursorNameContext cursorName() {
 			return getRuleContext(CursorNameContext.class,0);
 		}
-		public TerminalNode CURSOR() { return getToken(SQLParser.CURSOR, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode RESULT() { return getToken(SQLParser.RESULT, 0); }
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
+		public TerminalNode CURSOR() { return getToken(DB2zSQLParser.CURSOR, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode RESULT() { return getToken(DB2zSQLParser.RESULT, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
 		public RsLocatorVariableContext rsLocatorVariable() {
 			return getRuleContext(RsLocatorVariableContext.class,0);
 		}
@@ -1668,15 +1668,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_allocateCursorStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAllocateCursorStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAllocateCursorStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAllocateCursorStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAllocateCursorStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAllocateCursorStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAllocateCursorStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1726,15 +1726,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_rsLocatorVariable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRsLocatorVariable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRsLocatorVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRsLocatorVariable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRsLocatorVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRsLocatorVariable(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRsLocatorVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1761,14 +1761,14 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AlterDatabaseStatementContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
-		public TerminalNode DATABASE() { return getToken(SQLParser.DATABASE, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
+		public TerminalNode DATABASE() { return getToken(DB2zSQLParser.DATABASE, 0); }
 		public DatabaseNameContext databaseName() {
 			return getRuleContext(DatabaseNameContext.class,0);
 		}
-		public List<TerminalNode> BUFFERPOOL() { return getTokens(SQLParser.BUFFERPOOL); }
+		public List<TerminalNode> BUFFERPOOL() { return getTokens(DB2zSQLParser.BUFFERPOOL); }
 		public TerminalNode BUFFERPOOL(int i) {
-			return getToken(SQLParser.BUFFERPOOL, i);
+			return getToken(DB2zSQLParser.BUFFERPOOL, i);
 		}
 		public List<BpNameContext> bpName() {
 			return getRuleContexts(BpNameContext.class);
@@ -1776,13 +1776,13 @@ public class SQLParser extends Parser {
 		public BpNameContext bpName(int i) {
 			return getRuleContext(BpNameContext.class,i);
 		}
-		public List<TerminalNode> INDEXBP() { return getTokens(SQLParser.INDEXBP); }
+		public List<TerminalNode> INDEXBP() { return getTokens(DB2zSQLParser.INDEXBP); }
 		public TerminalNode INDEXBP(int i) {
-			return getToken(SQLParser.INDEXBP, i);
+			return getToken(DB2zSQLParser.INDEXBP, i);
 		}
-		public List<TerminalNode> STOGROUP() { return getTokens(SQLParser.STOGROUP); }
+		public List<TerminalNode> STOGROUP() { return getTokens(DB2zSQLParser.STOGROUP); }
 		public TerminalNode STOGROUP(int i) {
-			return getToken(SQLParser.STOGROUP, i);
+			return getToken(DB2zSQLParser.STOGROUP, i);
 		}
 		public List<StogroupNameContext> stogroupName() {
 			return getRuleContexts(StogroupNameContext.class);
@@ -1790,9 +1790,9 @@ public class SQLParser extends Parser {
 		public StogroupNameContext stogroupName(int i) {
 			return getRuleContext(StogroupNameContext.class,i);
 		}
-		public List<TerminalNode> CCSID() { return getTokens(SQLParser.CCSID); }
+		public List<TerminalNode> CCSID() { return getTokens(DB2zSQLParser.CCSID); }
 		public TerminalNode CCSID(int i) {
-			return getToken(SQLParser.CCSID, i);
+			return getToken(DB2zSQLParser.CCSID, i);
 		}
 		public List<CcsidValueContext> ccsidValue() {
 			return getRuleContexts(CcsidValueContext.class);
@@ -1806,15 +1806,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_alterDatabaseStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterDatabaseStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterDatabaseStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterDatabaseStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterDatabaseStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterDatabaseStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterDatabaseStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -1904,33 +1904,33 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AlterFunctionStatementContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
-		public TerminalNode RESTRICT() { return getToken(SQLParser.RESTRICT, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
+		public TerminalNode RESTRICT() { return getToken(DB2zSQLParser.RESTRICT, 0); }
 		public List<OptionListContext> optionList() {
 			return getRuleContexts(OptionListContext.class);
 		}
 		public OptionListContext optionList(int i) {
 			return getRuleContext(OptionListContext.class,i);
 		}
-		public TerminalNode FUNCTION() { return getToken(SQLParser.FUNCTION, 0); }
+		public TerminalNode FUNCTION() { return getToken(DB2zSQLParser.FUNCTION, 0); }
 		public FunctionNameContext functionName() {
 			return getRuleContext(FunctionNameContext.class,0);
 		}
-		public TerminalNode SPECIFIC() { return getToken(SQLParser.SPECIFIC, 0); }
+		public TerminalNode SPECIFIC() { return getToken(DB2zSQLParser.SPECIFIC, 0); }
 		public SpecificNameContext specificName() {
 			return getRuleContext(SpecificNameContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ParameterTypeContext> parameterType() {
 			return getRuleContexts(ParameterTypeContext.class);
 		}
 		public ParameterTypeContext parameterType(int i) {
 			return getRuleContext(ParameterTypeContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public AlterFunctionStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -1938,15 +1938,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_alterFunctionStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterFunctionStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterFunctionStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterFunctionStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2058,8 +2058,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AlterIndexStatementContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
-		public TerminalNode INDEX() { return getToken(SQLParser.INDEX, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
+		public TerminalNode INDEX() { return getToken(DB2zSQLParser.INDEX, 0); }
 		public IndexNameContext indexName() {
 			return getRuleContext(IndexNameContext.class,0);
 		}
@@ -2078,9 +2078,9 @@ public class SQLParser extends Parser {
 		public AlterIndexPartitionOptionsContext alterIndexPartitionOptions(int i) {
 			return getRuleContext(AlterIndexPartitionOptionsContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public AlterIndexStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2088,15 +2088,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_alterIndexStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterIndexStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterIndexStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterIndexStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterIndexStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterIndexStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterIndexStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2180,13 +2180,13 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AlterMaskStatementContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
-		public TerminalNode MASK() { return getToken(SQLParser.MASK, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
+		public TerminalNode MASK() { return getToken(DB2zSQLParser.MASK, 0); }
 		public MaskNameContext maskName() {
 			return getRuleContext(MaskNameContext.class,0);
 		}
-		public TerminalNode ENABLE() { return getToken(SQLParser.ENABLE, 0); }
-		public TerminalNode DISABLE() { return getToken(SQLParser.DISABLE, 0); }
+		public TerminalNode ENABLE() { return getToken(DB2zSQLParser.ENABLE, 0); }
+		public TerminalNode DISABLE() { return getToken(DB2zSQLParser.DISABLE, 0); }
 		public RegenerateClauseContext regenerateClause() {
 			return getRuleContext(RegenerateClauseContext.class,0);
 		}
@@ -2196,15 +2196,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_alterMaskStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterMaskStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterMaskStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterMaskStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterMaskStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterMaskStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterMaskStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2261,13 +2261,13 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AlterPermissionStatementContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
-		public TerminalNode PERMISSION() { return getToken(SQLParser.PERMISSION, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
+		public TerminalNode PERMISSION() { return getToken(DB2zSQLParser.PERMISSION, 0); }
 		public PermissionNameContext permissionName() {
 			return getRuleContext(PermissionNameContext.class,0);
 		}
-		public TerminalNode ENABLE() { return getToken(SQLParser.ENABLE, 0); }
-		public TerminalNode DISABLE() { return getToken(SQLParser.DISABLE, 0); }
+		public TerminalNode ENABLE() { return getToken(DB2zSQLParser.ENABLE, 0); }
+		public TerminalNode DISABLE() { return getToken(DB2zSQLParser.DISABLE, 0); }
 		public RegenerateClauseContext regenerateClause() {
 			return getRuleContext(RegenerateClauseContext.class,0);
 		}
@@ -2277,15 +2277,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_alterPermissionStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterPermissionStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterPermissionStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterPermissionStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterPermissionStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterPermissionStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterPermissionStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2342,12 +2342,12 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SearchedDeleteContext extends ParserRuleContext {
-		public TerminalNode DELETE() { return getToken(SQLParser.DELETE, 0); }
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
+		public TerminalNode DELETE() { return getToken(DB2zSQLParser.DELETE, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode WHERE() { return getToken(SQLParser.WHERE, 0); }
+		public TerminalNode WHERE() { return getToken(DB2zSQLParser.WHERE, 0); }
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
 		}
@@ -2360,7 +2360,7 @@ public class SQLParser extends Parser {
 		public IncludeColumnsContext includeColumns() {
 			return getRuleContext(IncludeColumnsContext.class,0);
 		}
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
 		public AssignmentClauseContext assignmentClause() {
 			return getRuleContext(AssignmentClauseContext.class,0);
 		}
@@ -2379,23 +2379,23 @@ public class SQLParser extends Parser {
 		public SkipLockedDataClauseContext skipLockedDataClause(int i) {
 			return getRuleContext(SkipLockedDataClauseContext.class,i);
 		}
-		public TerminalNode QUERYNO() { return getToken(SQLParser.QUERYNO, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode QUERYNO() { return getToken(DB2zSQLParser.QUERYNO, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public SearchedDeleteContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_searchedDelete; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSearchedDelete(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSearchedDelete(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSearchedDelete(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSearchedDelete(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSearchedDelete(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSearchedDelete(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2530,16 +2530,16 @@ public class SQLParser extends Parser {
 	}
 
 	public static class PositionedDeleteContext extends ParserRuleContext {
-		public TerminalNode DELETE() { return getToken(SQLParser.DELETE, 0); }
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
+		public TerminalNode DELETE() { return getToken(DB2zSQLParser.DELETE, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode WHERE() { return getToken(SQLParser.WHERE, 0); }
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public List<TerminalNode> OF() { return getTokens(SQLParser.OF); }
+		public TerminalNode WHERE() { return getToken(DB2zSQLParser.WHERE, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public List<TerminalNode> OF() { return getTokens(DB2zSQLParser.OF); }
 		public TerminalNode OF(int i) {
-			return getToken(SQLParser.OF, i);
+			return getToken(DB2zSQLParser.OF, i);
 		}
 		public CursorNameContext cursorName() {
 			return getRuleContext(CursorNameContext.class,0);
@@ -2547,28 +2547,28 @@ public class SQLParser extends Parser {
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
 		}
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode ROWSET() { return getToken(SQLParser.ROWSET, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode ROWSET() { return getToken(DB2zSQLParser.ROWSET, 0); }
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public PositionedDeleteContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_positionedDelete; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPositionedDelete(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPositionedDelete(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPositionedDelete(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPositionedDelete(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPositionedDelete(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPositionedDelete(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2666,15 +2666,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_deleteStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDeleteStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDeleteStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDeleteStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDeleteStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDeleteStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDeleteStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2715,17 +2715,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class InsertStatementContext extends ParserRuleContext {
-		public TerminalNode INSERT() { return getToken(SQLParser.INSERT, 0); }
-		public TerminalNode INTO() { return getToken(SQLParser.INTO, 0); }
+		public TerminalNode INSERT() { return getToken(DB2zSQLParser.INSERT, 0); }
+		public TerminalNode INTO() { return getToken(DB2zSQLParser.INTO, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
 		public MultipleRowInsertContext multipleRowInsert() {
 			return getRuleContext(MultipleRowInsertContext.class,0);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
@@ -2733,23 +2733,23 @@ public class SQLParser extends Parser {
 		public ColumnNameContext columnName(int i) {
 			return getRuleContext(ColumnNameContext.class,i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
 		public IncludeColumnsContext includeColumns() {
 			return getRuleContext(IncludeColumnsContext.class,0);
 		}
-		public TerminalNode OVERRIDING() { return getToken(SQLParser.OVERRIDING, 0); }
-		public TerminalNode USER() { return getToken(SQLParser.USER, 0); }
-		public TerminalNode VALUE() { return getToken(SQLParser.VALUE, 0); }
-		public TerminalNode VALUES() { return getToken(SQLParser.VALUES, 0); }
+		public TerminalNode OVERRIDING() { return getToken(DB2zSQLParser.OVERRIDING, 0); }
+		public TerminalNode USER() { return getToken(DB2zSQLParser.USER, 0); }
+		public TerminalNode VALUE() { return getToken(DB2zSQLParser.VALUE, 0); }
+		public TerminalNode VALUES() { return getToken(DB2zSQLParser.VALUES, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public List<ValuesList1Context> valuesList1() {
 			return getRuleContexts(ValuesList1Context.class);
@@ -2757,7 +2757,7 @@ public class SQLParser extends Parser {
 		public ValuesList1Context valuesList1(int i) {
 			return getRuleContext(ValuesList1Context.class,i);
 		}
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
 		public List<CommonTableExpressionContext> commonTableExpression() {
 			return getRuleContexts(CommonTableExpressionContext.class);
 		}
@@ -2767,23 +2767,23 @@ public class SQLParser extends Parser {
 		public IsolationClauseContext isolationClause() {
 			return getRuleContext(IsolationClauseContext.class,0);
 		}
-		public TerminalNode QUERYNO() { return getToken(SQLParser.QUERYNO, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode QUERYNO() { return getToken(DB2zSQLParser.QUERYNO, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public InsertStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_insertStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterInsertStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterInsertStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitInsertStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitInsertStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitInsertStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitInsertStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -2985,15 +2985,15 @@ public class SQLParser extends Parser {
 	}
 
 	public static class MergeStatementContext extends ParserRuleContext {
-		public TerminalNode MERGE() { return getToken(SQLParser.MERGE, 0); }
-		public TerminalNode INTO() { return getToken(SQLParser.INTO, 0); }
+		public TerminalNode MERGE() { return getToken(DB2zSQLParser.MERGE, 0); }
+		public TerminalNode INTO() { return getToken(DB2zSQLParser.INTO, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode USING() { return getToken(SQLParser.USING, 0); }
-		public List<TerminalNode> ON() { return getTokens(SQLParser.ON); }
+		public TerminalNode USING() { return getToken(DB2zSQLParser.USING, 0); }
+		public List<TerminalNode> ON() { return getTokens(DB2zSQLParser.ON); }
 		public TerminalNode ON(int i) {
-			return getToken(SQLParser.ON, i);
+			return getToken(DB2zSQLParser.ON, i);
 		}
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
@@ -3007,9 +3007,9 @@ public class SQLParser extends Parser {
 		public IncludeColumnsContext includeColumns() {
 			return getRuleContext(IncludeColumnsContext.class,0);
 		}
-		public List<TerminalNode> WHEN() { return getTokens(SQLParser.WHEN); }
+		public List<TerminalNode> WHEN() { return getTokens(DB2zSQLParser.WHEN); }
 		public TerminalNode WHEN(int i) {
-			return getToken(SQLParser.WHEN, i);
+			return getToken(DB2zSQLParser.WHEN, i);
 		}
 		public List<MatchingConditionContext> matchingCondition() {
 			return getRuleContexts(MatchingConditionContext.class);
@@ -3017,18 +3017,18 @@ public class SQLParser extends Parser {
 		public MatchingConditionContext matchingCondition(int i) {
 			return getRuleContext(MatchingConditionContext.class,i);
 		}
-		public List<TerminalNode> THEN() { return getTokens(SQLParser.THEN); }
+		public List<TerminalNode> THEN() { return getTokens(DB2zSQLParser.THEN); }
 		public TerminalNode THEN(int i) {
-			return getToken(SQLParser.THEN, i);
+			return getToken(DB2zSQLParser.THEN, i);
 		}
-		public TerminalNode ELSE() { return getToken(SQLParser.ELSE, 0); }
-		public TerminalNode IGNORE() { return getToken(SQLParser.IGNORE, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode ATOMIC() { return getToken(SQLParser.ATOMIC, 0); }
-		public TerminalNode CONTINUE() { return getToken(SQLParser.CONTINUE, 0); }
-		public TerminalNode SQLEXCEPTION() { return getToken(SQLParser.SQLEXCEPTION, 0); }
-		public TerminalNode QUERYNO() { return getToken(SQLParser.QUERYNO, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode ELSE() { return getToken(DB2zSQLParser.ELSE, 0); }
+		public TerminalNode IGNORE() { return getToken(DB2zSQLParser.IGNORE, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode ATOMIC() { return getToken(DB2zSQLParser.ATOMIC, 0); }
+		public TerminalNode CONTINUE() { return getToken(DB2zSQLParser.CONTINUE, 0); }
+		public TerminalNode SQLEXCEPTION() { return getToken(DB2zSQLParser.SQLEXCEPTION, 0); }
+		public TerminalNode QUERYNO() { return getToken(DB2zSQLParser.QUERYNO, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public TableReferenceContext tableReference() {
 			return getRuleContext(TableReferenceContext.class,0);
 		}
@@ -3044,13 +3044,13 @@ public class SQLParser extends Parser {
 		public SignalStatementContext signalStatement(int i) {
 			return getRuleContext(SignalStatementContext.class,i);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
 		public MergeStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3058,15 +3058,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_mergeStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterMergeStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterMergeStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitMergeStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitMergeStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitMergeStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitMergeStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3255,11 +3255,11 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SearchedUpdateContext extends ParserRuleContext {
-		public TerminalNode UPDATE() { return getToken(SQLParser.UPDATE, 0); }
+		public TerminalNode UPDATE() { return getToken(DB2zSQLParser.UPDATE, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
 		public AssignmentClauseContext assignmentClause() {
 			return getRuleContext(AssignmentClauseContext.class,0);
 		}
@@ -3272,7 +3272,7 @@ public class SQLParser extends Parser {
 		public IncludeColumnsContext includeColumns() {
 			return getRuleContext(IncludeColumnsContext.class,0);
 		}
-		public TerminalNode WHERE() { return getToken(SQLParser.WHERE, 0); }
+		public TerminalNode WHERE() { return getToken(DB2zSQLParser.WHERE, 0); }
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
 		}
@@ -3288,23 +3288,23 @@ public class SQLParser extends Parser {
 		public SkipLockedDataClauseContext skipLockedDataClause(int i) {
 			return getRuleContext(SkipLockedDataClauseContext.class,i);
 		}
-		public TerminalNode QUERYNO() { return getToken(SQLParser.QUERYNO, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode QUERYNO() { return getToken(DB2zSQLParser.QUERYNO, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public SearchedUpdateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_searchedUpdate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSearchedUpdate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSearchedUpdate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSearchedUpdate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSearchedUpdate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSearchedUpdate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSearchedUpdate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3425,19 +3425,19 @@ public class SQLParser extends Parser {
 	}
 
 	public static class PositionedUpdateContext extends ParserRuleContext {
-		public TerminalNode UPDATE() { return getToken(SQLParser.UPDATE, 0); }
+		public TerminalNode UPDATE() { return getToken(DB2zSQLParser.UPDATE, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
 		public AssignmentClauseContext assignmentClause() {
 			return getRuleContext(AssignmentClauseContext.class,0);
 		}
-		public TerminalNode WHERE() { return getToken(SQLParser.WHERE, 0); }
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public List<TerminalNode> OF() { return getTokens(SQLParser.OF); }
+		public TerminalNode WHERE() { return getToken(DB2zSQLParser.WHERE, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public List<TerminalNode> OF() { return getTokens(DB2zSQLParser.OF); }
 		public TerminalNode OF(int i) {
-			return getToken(SQLParser.OF, i);
+			return getToken(DB2zSQLParser.OF, i);
 		}
 		public CursorNameContext cursorName() {
 			return getRuleContext(CursorNameContext.class,0);
@@ -3445,28 +3445,28 @@ public class SQLParser extends Parser {
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
 		}
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode ROWSET() { return getToken(SQLParser.ROWSET, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode ROWSET() { return getToken(DB2zSQLParser.ROWSET, 0); }
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public PositionedUpdateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_positionedUpdate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPositionedUpdate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPositionedUpdate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPositionedUpdate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPositionedUpdate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPositionedUpdate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPositionedUpdate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3566,15 +3566,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_updateStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUpdateStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUpdateStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUpdateStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUpdateStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUpdateStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUpdateStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3615,14 +3615,14 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SourceValuesContext extends ParserRuleContext {
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
-		public TerminalNode VALUES() { return getToken(SQLParser.VALUES, 0); }
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public TerminalNode VALUES() { return getToken(DB2zSQLParser.VALUES, 0); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
@@ -3639,10 +3639,10 @@ public class SQLParser extends Parser {
 		public ValuesMultipleRowContext valuesMultipleRow() {
 			return getRuleContext(ValuesMultipleRowContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public SourceValuesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3650,15 +3650,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_sourceValues; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSourceValues(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSourceValues(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSourceValues(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSourceValues(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSourceValues(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSourceValues(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3748,11 +3748,11 @@ public class SQLParser extends Parser {
 		public ValuesList3Context valuesList3(int i) {
 			return getRuleContext(ValuesList3Context.class,i);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public ValuesSingleRowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3760,15 +3760,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_valuesSingleRow; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesSingleRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesSingleRow(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesSingleRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesSingleRow(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesSingleRow(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesSingleRow(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3838,17 +3838,17 @@ public class SQLParser extends Parser {
 		public ValuesList4Context valuesList4(int i) {
 			return getRuleContext(ValuesList4Context.class,i);
 		}
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public ValuesMultipleRowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -3856,15 +3856,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_valuesMultipleRow; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesMultipleRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesMultipleRow(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesMultipleRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesMultipleRow(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesMultipleRow(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesMultipleRow(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -3950,9 +3950,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class MatchingConditionContext extends ParserRuleContext {
-		public TerminalNode MATCHED() { return getToken(SQLParser.MATCHED, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
+		public TerminalNode MATCHED() { return getToken(DB2zSQLParser.MATCHED, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
 		}
@@ -3962,15 +3962,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_matchingCondition; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterMatchingCondition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterMatchingCondition(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitMatchingCondition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitMatchingCondition(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitMatchingCondition(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitMatchingCondition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4037,15 +4037,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_modificationOperation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterModificationOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterModificationOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitModificationOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitModificationOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitModificationOperation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitModificationOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4094,9 +4094,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AssignmentClauseContext extends ParserRuleContext {
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
@@ -4104,9 +4104,9 @@ public class SQLParser extends Parser {
 		public ColumnNameContext columnName(int i) {
 			return getRuleContext(ColumnNameContext.class,i);
 		}
-		public List<TerminalNode> EQ() { return getTokens(SQLParser.EQ); }
+		public List<TerminalNode> EQ() { return getTokens(DB2zSQLParser.EQ); }
 		public TerminalNode EQ(int i) {
-			return getToken(SQLParser.EQ, i);
+			return getToken(DB2zSQLParser.EQ, i);
 		}
 		public List<ValuesList1Context> valuesList1() {
 			return getRuleContexts(ValuesList1Context.class);
@@ -4114,16 +4114,16 @@ public class SQLParser extends Parser {
 		public ValuesList1Context valuesList1(int i) {
 			return getRuleContext(ValuesList1Context.class,i);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public AssignmentClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4131,15 +4131,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_assignmentClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAssignmentClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAssignmentClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAssignmentClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAssignmentClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAssignmentClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAssignmentClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4270,17 +4270,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class UpdateOperationContext extends ParserRuleContext {
-		public TerminalNode UPDATE() { return getToken(SQLParser.UPDATE, 0); }
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
+		public TerminalNode UPDATE() { return getToken(DB2zSQLParser.UPDATE, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
 		public List<AssignmentClauseContext> assignmentClause() {
 			return getRuleContexts(AssignmentClauseContext.class);
 		}
 		public AssignmentClauseContext assignmentClause(int i) {
 			return getRuleContext(AssignmentClauseContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public UpdateOperationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4288,15 +4288,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_updateOperation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUpdateOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUpdateOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUpdateOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUpdateOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUpdateOperation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUpdateOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4348,22 +4348,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class DeleteOperationContext extends ParserRuleContext {
-		public TerminalNode DELETE() { return getToken(SQLParser.DELETE, 0); }
+		public TerminalNode DELETE() { return getToken(DB2zSQLParser.DELETE, 0); }
 		public DeleteOperationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_deleteOperation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDeleteOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDeleteOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDeleteOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDeleteOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDeleteOperation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDeleteOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4392,10 +4392,10 @@ public class SQLParser extends Parser {
 	}
 
 	public static class InsertOperationContext extends ParserRuleContext {
-		public TerminalNode INSERT() { return getToken(SQLParser.INSERT, 0); }
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public TerminalNode INSERT() { return getToken(DB2zSQLParser.INSERT, 0); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
@@ -4403,20 +4403,20 @@ public class SQLParser extends Parser {
 		public ColumnNameContext columnName(int i) {
 			return getRuleContext(ColumnNameContext.class,i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public TerminalNode VALUES() { return getToken(SQLParser.VALUES, 0); }
+		public TerminalNode VALUES() { return getToken(DB2zSQLParser.VALUES, 0); }
 		public List<ValuesList1Context> valuesList1() {
 			return getRuleContexts(ValuesList1Context.class);
 		}
 		public ValuesList1Context valuesList1(int i) {
 			return getRuleContext(ValuesList1Context.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public InsertOperationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -4424,15 +4424,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_insertOperation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterInsertOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterInsertOperation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitInsertOperation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitInsertOperation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitInsertOperation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitInsertOperation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4524,10 +4524,10 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SignalStatementContext extends ParserRuleContext {
-		public TerminalNode SIGNAL() { return getToken(SQLParser.SIGNAL, 0); }
-		public TerminalNode SQLSTATE() { return getToken(SQLParser.SQLSTATE, 0); }
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
-		public TerminalNode VALUE() { return getToken(SQLParser.VALUE, 0); }
+		public TerminalNode SIGNAL() { return getToken(DB2zSQLParser.SIGNAL, 0); }
+		public TerminalNode SQLSTATE() { return getToken(DB2zSQLParser.SQLSTATE, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode VALUE() { return getToken(DB2zSQLParser.VALUE, 0); }
 		public SignalInformationContext signalInformation() {
 			return getRuleContext(SignalInformationContext.class,0);
 		}
@@ -4537,15 +4537,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_signalStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSignalStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSignalStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSignalStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSignalStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSignalStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSignalStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4599,9 +4599,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SignalInformationContext extends ParserRuleContext {
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
-		public TerminalNode MESSAGE_TEXT() { return getToken(SQLParser.MESSAGE_TEXT, 0); }
-		public TerminalNode EQ() { return getToken(SQLParser.EQ, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
+		public TerminalNode MESSAGE_TEXT() { return getToken(DB2zSQLParser.MESSAGE_TEXT, 0); }
+		public TerminalNode EQ() { return getToken(DB2zSQLParser.EQ, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -4620,15 +4620,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_signalInformation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSignalInformation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSignalInformation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSignalInformation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSignalInformation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSignalInformation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSignalInformation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4680,8 +4680,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ValuesList1Context extends ParserRuleContext {
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -4700,15 +4700,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_valuesList1; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesList1(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesList1(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesList1(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesList1(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesList1(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesList1(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4780,23 +4780,23 @@ public class SQLParser extends Parser {
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public ValuesList2Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_valuesList2; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesList2(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesList2(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesList2(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesList2(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesList2(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesList2(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4852,22 +4852,22 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public ValuesList3Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_valuesList3; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesList3(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesList3(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesList3(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesList3(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesList3(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesList3(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4914,22 +4914,22 @@ public class SQLParser extends Parser {
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public ValuesList4Context(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_valuesList4; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesList4(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesList4(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesList4(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesList4(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesList4(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesList4(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -4976,8 +4976,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class IncludeColumnsContext extends ParserRuleContext {
-		public TerminalNode INCLUDE() { return getToken(SQLParser.INCLUDE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode INCLUDE() { return getToken(DB2zSQLParser.INCLUDE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
 		}
@@ -4990,10 +4990,10 @@ public class SQLParser extends Parser {
 		public DataTypeContext dataType(int i) {
 			return getRuleContext(DataTypeContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public IncludeColumnsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -5001,15 +5001,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_includeColumns; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterIncludeColumns(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterIncludeColumns(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitIncludeColumns(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitIncludeColumns(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitIncludeColumns(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitIncludeColumns(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5065,29 +5065,29 @@ public class SQLParser extends Parser {
 	}
 
 	public static class MultipleRowInsertContext extends ParserRuleContext {
-		public TerminalNode VALUES() { return getToken(SQLParser.VALUES, 0); }
+		public TerminalNode VALUES() { return getToken(DB2zSQLParser.VALUES, 0); }
 		public List<ValuesList2Context> valuesList2() {
 			return getRuleContexts(ValuesList2Context.class);
 		}
 		public ValuesList2Context valuesList2(int i) {
 			return getRuleContext(ValuesList2Context.class,i);
 		}
-		public TerminalNode ATOMIC() { return getToken(SQLParser.ATOMIC, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode CONTINUE() { return getToken(SQLParser.CONTINUE, 0); }
-		public TerminalNode ON() { return getToken(SQLParser.ON, 0); }
-		public TerminalNode SQLEXCEPTION() { return getToken(SQLParser.SQLEXCEPTION, 0); }
+		public TerminalNode ATOMIC() { return getToken(DB2zSQLParser.ATOMIC, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode CONTINUE() { return getToken(DB2zSQLParser.CONTINUE, 0); }
+		public TerminalNode ON() { return getToken(DB2zSQLParser.ON, 0); }
+		public TerminalNode SQLEXCEPTION() { return getToken(DB2zSQLParser.SQLEXCEPTION, 0); }
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public MultipleRowInsertContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -5095,15 +5095,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_multipleRowInsert; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterMultipleRowInsert(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterMultipleRowInsert(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitMultipleRowInsert(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitMultipleRowInsert(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitMultipleRowInsert(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitMultipleRowInsert(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5229,10 +5229,10 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RegenerateClauseContext extends ParserRuleContext {
-		public TerminalNode REGENERATE() { return getToken(SQLParser.REGENERATE, 0); }
-		public TerminalNode USING() { return getToken(SQLParser.USING, 0); }
-		public TerminalNode APPLICATION() { return getToken(SQLParser.APPLICATION, 0); }
-		public TerminalNode COMPATIBILITY() { return getToken(SQLParser.COMPATIBILITY, 0); }
+		public TerminalNode REGENERATE() { return getToken(DB2zSQLParser.REGENERATE, 0); }
+		public TerminalNode USING() { return getToken(DB2zSQLParser.USING, 0); }
+		public TerminalNode APPLICATION() { return getToken(DB2zSQLParser.APPLICATION, 0); }
+		public TerminalNode COMPATIBILITY() { return getToken(DB2zSQLParser.COMPATIBILITY, 0); }
 		public ApplCompatValueContext applCompatValue() {
 			return getRuleContext(ApplCompatValueContext.class,0);
 		}
@@ -5242,15 +5242,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_regenerateClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRegenerateClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRegenerateClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRegenerateClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRegenerateClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRegenerateClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRegenerateClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5304,47 +5304,47 @@ public class SQLParser extends Parser {
 		public GbpcacheSpecificationContext gbpcacheSpecification() {
 			return getRuleContext(GbpcacheSpecificationContext.class,0);
 		}
-		public TerminalNode BUFFERPOOL() { return getToken(SQLParser.BUFFERPOOL, 0); }
+		public TerminalNode BUFFERPOOL() { return getToken(DB2zSQLParser.BUFFERPOOL, 0); }
 		public BpNameContext bpName() {
 			return getRuleContext(BpNameContext.class,0);
 		}
-		public TerminalNode CLOSE() { return getToken(SQLParser.CLOSE, 0); }
-		public TerminalNode COPY() { return getToken(SQLParser.COPY, 0); }
-		public TerminalNode DSSIZE() { return getToken(SQLParser.DSSIZE, 0); }
-		public TerminalNode SQLIDENTIFIER() { return getToken(SQLParser.SQLIDENTIFIER, 0); }
-		public TerminalNode PIECESIZE() { return getToken(SQLParser.PIECESIZE, 0); }
-		public TerminalNode CLUSTER() { return getToken(SQLParser.CLUSTER, 0); }
-		public TerminalNode PADDED() { return getToken(SQLParser.PADDED, 0); }
-		public TerminalNode COMPRESS() { return getToken(SQLParser.COMPRESS, 0); }
-		public TerminalNode ADD() { return getToken(SQLParser.ADD, 0); }
-		public TerminalNode YES() { return getToken(SQLParser.YES, 0); }
-		public TerminalNode NO() { return getToken(SQLParser.NO, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode COLUMN() { return getToken(SQLParser.COLUMN, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode CLOSE() { return getToken(DB2zSQLParser.CLOSE, 0); }
+		public TerminalNode COPY() { return getToken(DB2zSQLParser.COPY, 0); }
+		public TerminalNode DSSIZE() { return getToken(DB2zSQLParser.DSSIZE, 0); }
+		public TerminalNode SQLIDENTIFIER() { return getToken(DB2zSQLParser.SQLIDENTIFIER, 0); }
+		public TerminalNode PIECESIZE() { return getToken(DB2zSQLParser.PIECESIZE, 0); }
+		public TerminalNode CLUSTER() { return getToken(DB2zSQLParser.CLUSTER, 0); }
+		public TerminalNode PADDED() { return getToken(DB2zSQLParser.PADDED, 0); }
+		public TerminalNode COMPRESS() { return getToken(DB2zSQLParser.COMPRESS, 0); }
+		public TerminalNode ADD() { return getToken(DB2zSQLParser.ADD, 0); }
+		public TerminalNode YES() { return getToken(DB2zSQLParser.YES, 0); }
+		public TerminalNode NO() { return getToken(DB2zSQLParser.NO, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode COLUMN() { return getToken(DB2zSQLParser.COLUMN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ColumnNameContext columnName() {
 			return getRuleContext(ColumnNameContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode INCLUDE() { return getToken(SQLParser.INCLUDE, 0); }
-		public TerminalNode ASC() { return getToken(SQLParser.ASC, 0); }
-		public TerminalNode DESC() { return getToken(SQLParser.DESC, 0); }
-		public TerminalNode RANDOM() { return getToken(SQLParser.RANDOM, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode INCLUDE() { return getToken(DB2zSQLParser.INCLUDE, 0); }
+		public TerminalNode ASC() { return getToken(DB2zSQLParser.ASC, 0); }
+		public TerminalNode DESC() { return getToken(DB2zSQLParser.DESC, 0); }
+		public TerminalNode RANDOM() { return getToken(DB2zSQLParser.RANDOM, 0); }
 		public AlterIndexOptionsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_alterIndexOptions; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterIndexOptions(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterIndexOptions(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterIndexOptions(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterIndexOptions(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterIndexOptions(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterIndexOptions(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5574,7 +5574,7 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AlterIndexPartitionOptionsContext extends ParserRuleContext {
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
 		public PartitionElementContext partitionElement() {
 			return getRuleContext(PartitionElementContext.class,0);
 		}
@@ -5584,13 +5584,13 @@ public class SQLParser extends Parser {
 		public GbpcacheSpecificationContext gbpcacheSpecification(int i) {
 			return getRuleContext(GbpcacheSpecificationContext.class,i);
 		}
-		public List<TerminalNode> DSSIZE() { return getTokens(SQLParser.DSSIZE); }
+		public List<TerminalNode> DSSIZE() { return getTokens(DB2zSQLParser.DSSIZE); }
 		public TerminalNode DSSIZE(int i) {
-			return getToken(SQLParser.DSSIZE, i);
+			return getToken(DB2zSQLParser.DSSIZE, i);
 		}
-		public List<TerminalNode> SQLIDENTIFIER() { return getTokens(SQLParser.SQLIDENTIFIER); }
+		public List<TerminalNode> SQLIDENTIFIER() { return getTokens(DB2zSQLParser.SQLIDENTIFIER); }
 		public TerminalNode SQLIDENTIFIER(int i) {
-			return getToken(SQLParser.SQLIDENTIFIER, i);
+			return getToken(DB2zSQLParser.SQLIDENTIFIER, i);
 		}
 		public List<UsingSpecificationContext> usingSpecification() {
 			return getRuleContexts(UsingSpecificationContext.class);
@@ -5610,15 +5610,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_alterIndexPartitionOptions; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAlterIndexPartitionOptions(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterIndexPartitionOptions(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAlterIndexPartitionOptions(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterIndexPartitionOptions(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAlterIndexPartitionOptions(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterIndexPartitionOptions(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5735,18 +5735,18 @@ public class SQLParser extends Parser {
 	}
 
 	public static class UsingSpecificationContext extends ParserRuleContext {
-		public TerminalNode USING() { return getToken(SQLParser.USING, 0); }
-		public TerminalNode PRIQTY() { return getToken(SQLParser.PRIQTY, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode SEQTY() { return getToken(SQLParser.SEQTY, 0); }
-		public TerminalNode ERASE() { return getToken(SQLParser.ERASE, 0); }
-		public TerminalNode YES() { return getToken(SQLParser.YES, 0); }
-		public TerminalNode NO() { return getToken(SQLParser.NO, 0); }
-		public TerminalNode VCAT() { return getToken(SQLParser.VCAT, 0); }
+		public TerminalNode USING() { return getToken(DB2zSQLParser.USING, 0); }
+		public TerminalNode PRIQTY() { return getToken(DB2zSQLParser.PRIQTY, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode SEQTY() { return getToken(DB2zSQLParser.SEQTY, 0); }
+		public TerminalNode ERASE() { return getToken(DB2zSQLParser.ERASE, 0); }
+		public TerminalNode YES() { return getToken(DB2zSQLParser.YES, 0); }
+		public TerminalNode NO() { return getToken(DB2zSQLParser.NO, 0); }
+		public TerminalNode VCAT() { return getToken(DB2zSQLParser.VCAT, 0); }
 		public CatalogNameContext catalogName() {
 			return getRuleContext(CatalogNameContext.class,0);
 		}
-		public TerminalNode STOGROUP() { return getToken(SQLParser.STOGROUP, 0); }
+		public TerminalNode STOGROUP() { return getToken(DB2zSQLParser.STOGROUP, 0); }
 		public StogroupNameContext stogroupName() {
 			return getRuleContext(StogroupNameContext.class,0);
 		}
@@ -5756,15 +5756,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_usingSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUsingSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUsingSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUsingSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUsingSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUsingSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUsingSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5868,24 +5868,24 @@ public class SQLParser extends Parser {
 	}
 
 	public static class FreeSpecificationContext extends ParserRuleContext {
-		public TerminalNode FREEPAGE() { return getToken(SQLParser.FREEPAGE, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode PCTFREE() { return getToken(SQLParser.PCTFREE, 0); }
+		public TerminalNode FREEPAGE() { return getToken(DB2zSQLParser.FREEPAGE, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode PCTFREE() { return getToken(DB2zSQLParser.PCTFREE, 0); }
 		public FreeSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_freeSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFreeSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFreeSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFreeSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFreeSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFreeSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFreeSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5936,25 +5936,25 @@ public class SQLParser extends Parser {
 	}
 
 	public static class GbpcacheSpecificationContext extends ParserRuleContext {
-		public TerminalNode GBPCACHE() { return getToken(SQLParser.GBPCACHE, 0); }
-		public TerminalNode CHANGED() { return getToken(SQLParser.CHANGED, 0); }
-		public TerminalNode ALL() { return getToken(SQLParser.ALL, 0); }
-		public TerminalNode NONE() { return getToken(SQLParser.NONE, 0); }
+		public TerminalNode GBPCACHE() { return getToken(DB2zSQLParser.GBPCACHE, 0); }
+		public TerminalNode CHANGED() { return getToken(DB2zSQLParser.CHANGED, 0); }
+		public TerminalNode ALL() { return getToken(DB2zSQLParser.ALL, 0); }
+		public TerminalNode NONE() { return getToken(DB2zSQLParser.NONE, 0); }
 		public GbpcacheSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_gbpcacheSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGbpcacheSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGbpcacheSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGbpcacheSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGbpcacheSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGbpcacheSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGbpcacheSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -5994,46 +5994,46 @@ public class SQLParser extends Parser {
 	}
 
 	public static class PartitionElementContext extends ParserRuleContext {
-		public TerminalNode PARTITION() { return getToken(SQLParser.PARTITION, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode ENDING() { return getToken(SQLParser.ENDING, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode PARTITION() { return getToken(DB2zSQLParser.PARTITION, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode ENDING() { return getToken(DB2zSQLParser.ENDING, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public List<LiteralContext> literal() {
 			return getRuleContexts(LiteralContext.class);
 		}
 		public LiteralContext literal(int i) {
 			return getRuleContext(LiteralContext.class,i);
 		}
-		public List<TerminalNode> MAXVALUE() { return getTokens(SQLParser.MAXVALUE); }
+		public List<TerminalNode> MAXVALUE() { return getTokens(DB2zSQLParser.MAXVALUE); }
 		public TerminalNode MAXVALUE(int i) {
-			return getToken(SQLParser.MAXVALUE, i);
+			return getToken(DB2zSQLParser.MAXVALUE, i);
 		}
-		public List<TerminalNode> MINVALUE() { return getTokens(SQLParser.MINVALUE); }
+		public List<TerminalNode> MINVALUE() { return getTokens(DB2zSQLParser.MINVALUE); }
 		public TerminalNode MINVALUE(int i) {
-			return getToken(SQLParser.MINVALUE, i);
+			return getToken(DB2zSQLParser.MINVALUE, i);
 		}
-		public TerminalNode AT() { return getToken(SQLParser.AT, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode AT() { return getToken(DB2zSQLParser.AT, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public TerminalNode INCLUSIVE() { return getToken(SQLParser.INCLUSIVE, 0); }
+		public TerminalNode INCLUSIVE() { return getToken(DB2zSQLParser.INCLUSIVE, 0); }
 		public PartitionElementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_partitionElement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPartitionElement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPartitionElement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPartitionElement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPartitionElement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPartitionElement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPartitionElement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6174,15 +6174,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_applCompatValue; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterApplCompatValue(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterApplCompatValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitApplCompatValue(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitApplCompatValue(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitApplCompatValue(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitApplCompatValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6211,22 +6211,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class FunctionLevelContext extends ParserRuleContext {
-		public TerminalNode SQLIDENTIFIER() { return getToken(SQLParser.SQLIDENTIFIER, 0); }
+		public TerminalNode SQLIDENTIFIER() { return getToken(DB2zSQLParser.SQLIDENTIFIER, 0); }
 		public FunctionLevelContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionLevel; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFunctionLevel(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFunctionLevel(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFunctionLevel(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFunctionLevel(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFunctionLevel(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFunctionLevel(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6256,23 +6256,23 @@ public class SQLParser extends Parser {
 		public DataTypeContext dataType() {
 			return getRuleContext(DataTypeContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
-		public TerminalNode LOCATOR() { return getToken(SQLParser.LOCATOR, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
+		public TerminalNode LOCATOR() { return getToken(DB2zSQLParser.LOCATOR, 0); }
 		public ParameterTypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parameterType; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterParameterType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterParameterType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitParameterType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitParameterType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitParameterType(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitParameterType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -6314,112 +6314,112 @@ public class SQLParser extends Parser {
 	}
 
 	public static class OptionListContext extends ParserRuleContext {
-		public TerminalNode SPECIFIC() { return getToken(SQLParser.SPECIFIC, 0); }
-		public TerminalNode EXTERNAL() { return getToken(SQLParser.EXTERNAL, 0); }
-		public TerminalNode NAME() { return getToken(SQLParser.NAME, 0); }
-		public TerminalNode LANGUAGE() { return getToken(SQLParser.LANGUAGE, 0); }
-		public TerminalNode PARAMETER() { return getToken(SQLParser.PARAMETER, 0); }
-		public TerminalNode STYLE() { return getToken(SQLParser.STYLE, 0); }
-		public TerminalNode DETERMINISTIC() { return getToken(SQLParser.DETERMINISTIC, 0); }
-		public TerminalNode VARIANT() { return getToken(SQLParser.VARIANT, 0); }
-		public TerminalNode ON() { return getToken(SQLParser.ON, 0); }
-		public List<TerminalNode> NULL() { return getTokens(SQLParser.NULL); }
+		public TerminalNode SPECIFIC() { return getToken(DB2zSQLParser.SPECIFIC, 0); }
+		public TerminalNode EXTERNAL() { return getToken(DB2zSQLParser.EXTERNAL, 0); }
+		public TerminalNode NAME() { return getToken(DB2zSQLParser.NAME, 0); }
+		public TerminalNode LANGUAGE() { return getToken(DB2zSQLParser.LANGUAGE, 0); }
+		public TerminalNode PARAMETER() { return getToken(DB2zSQLParser.PARAMETER, 0); }
+		public TerminalNode STYLE() { return getToken(DB2zSQLParser.STYLE, 0); }
+		public TerminalNode DETERMINISTIC() { return getToken(DB2zSQLParser.DETERMINISTIC, 0); }
+		public TerminalNode VARIANT() { return getToken(DB2zSQLParser.VARIANT, 0); }
+		public TerminalNode ON() { return getToken(DB2zSQLParser.ON, 0); }
+		public List<TerminalNode> NULL() { return getTokens(DB2zSQLParser.NULL); }
 		public TerminalNode NULL(int i) {
-			return getToken(SQLParser.NULL, i);
+			return getToken(DB2zSQLParser.NULL, i);
 		}
-		public TerminalNode INPUT() { return getToken(SQLParser.INPUT, 0); }
-		public TerminalNode CALL() { return getToken(SQLParser.CALL, 0); }
-		public TerminalNode ACTION() { return getToken(SQLParser.ACTION, 0); }
-		public TerminalNode FINAL() { return getToken(SQLParser.FINAL, 0); }
-		public TerminalNode PARALLEL() { return getToken(SQLParser.PARALLEL, 0); }
-		public TerminalNode DBINFO() { return getToken(SQLParser.DBINFO, 0); }
-		public TerminalNode CARDINALITY() { return getToken(SQLParser.CARDINALITY, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode WLM() { return getToken(SQLParser.WLM, 0); }
-		public TerminalNode ENVIRONMENT() { return getToken(SQLParser.ENVIRONMENT, 0); }
-		public TerminalNode ASUTIME() { return getToken(SQLParser.ASUTIME, 0); }
-		public TerminalNode STAY() { return getToken(SQLParser.STAY, 0); }
-		public TerminalNode RESIDENT() { return getToken(SQLParser.RESIDENT, 0); }
-		public TerminalNode PROGRAM() { return getToken(SQLParser.PROGRAM, 0); }
-		public TerminalNode TYPE() { return getToken(SQLParser.TYPE, 0); }
-		public TerminalNode SECURITY() { return getToken(SQLParser.SECURITY, 0); }
-		public TerminalNode RUN() { return getToken(SQLParser.RUN, 0); }
-		public TerminalNode OPTIONS() { return getToken(SQLParser.OPTIONS, 0); }
+		public TerminalNode INPUT() { return getToken(DB2zSQLParser.INPUT, 0); }
+		public TerminalNode CALL() { return getToken(DB2zSQLParser.CALL, 0); }
+		public TerminalNode ACTION() { return getToken(DB2zSQLParser.ACTION, 0); }
+		public TerminalNode FINAL() { return getToken(DB2zSQLParser.FINAL, 0); }
+		public TerminalNode PARALLEL() { return getToken(DB2zSQLParser.PARALLEL, 0); }
+		public TerminalNode DBINFO() { return getToken(DB2zSQLParser.DBINFO, 0); }
+		public TerminalNode CARDINALITY() { return getToken(DB2zSQLParser.CARDINALITY, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode WLM() { return getToken(DB2zSQLParser.WLM, 0); }
+		public TerminalNode ENVIRONMENT() { return getToken(DB2zSQLParser.ENVIRONMENT, 0); }
+		public TerminalNode ASUTIME() { return getToken(DB2zSQLParser.ASUTIME, 0); }
+		public TerminalNode STAY() { return getToken(DB2zSQLParser.STAY, 0); }
+		public TerminalNode RESIDENT() { return getToken(DB2zSQLParser.RESIDENT, 0); }
+		public TerminalNode PROGRAM() { return getToken(DB2zSQLParser.PROGRAM, 0); }
+		public TerminalNode TYPE() { return getToken(DB2zSQLParser.TYPE, 0); }
+		public TerminalNode SECURITY() { return getToken(DB2zSQLParser.SECURITY, 0); }
+		public TerminalNode RUN() { return getToken(DB2zSQLParser.RUN, 0); }
+		public TerminalNode OPTIONS() { return getToken(DB2zSQLParser.OPTIONS, 0); }
 		public RunTimeOptionsContext runTimeOptions() {
 			return getRuleContext(RunTimeOptionsContext.class,0);
 		}
-		public TerminalNode SPECIAL() { return getToken(SQLParser.SPECIAL, 0); }
-		public TerminalNode REGISTERS() { return getToken(SQLParser.REGISTERS, 0); }
-		public TerminalNode STATIC() { return getToken(SQLParser.STATIC, 0); }
-		public TerminalNode DISPATCH() { return getToken(SQLParser.DISPATCH, 0); }
-		public TerminalNode SECURED() { return getToken(SQLParser.SECURED, 0); }
-		public TerminalNode CCSID() { return getToken(SQLParser.CCSID, 0); }
-		public TerminalNode ASSEMBLE() { return getToken(SQLParser.ASSEMBLE, 0); }
-		public TerminalNode C_() { return getToken(SQLParser.C_, 0); }
-		public TerminalNode COBOL() { return getToken(SQLParser.COBOL, 0); }
-		public TerminalNode JAVA() { return getToken(SQLParser.JAVA, 0); }
-		public TerminalNode PLI() { return getToken(SQLParser.PLI, 0); }
-		public TerminalNode SQL() { return getToken(SQLParser.SQL, 0); }
-		public TerminalNode ALLOW() { return getToken(SQLParser.ALLOW, 0); }
-		public TerminalNode DISALLOW() { return getToken(SQLParser.DISALLOW, 0); }
-		public TerminalNode NO() { return getToken(SQLParser.NO, 0); }
-		public TerminalNode YES() { return getToken(SQLParser.YES, 0); }
-		public TerminalNode SUB() { return getToken(SQLParser.SUB, 0); }
-		public TerminalNode MAIN() { return getToken(SQLParser.MAIN, 0); }
-		public TerminalNode DB2() { return getToken(SQLParser.DB2, 0); }
-		public TerminalNode USER() { return getToken(SQLParser.USER, 0); }
-		public TerminalNode DEFINER() { return getToken(SQLParser.DEFINER, 0); }
-		public TerminalNode INHERIT() { return getToken(SQLParser.INHERIT, 0); }
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
+		public TerminalNode SPECIAL() { return getToken(DB2zSQLParser.SPECIAL, 0); }
+		public TerminalNode REGISTERS() { return getToken(DB2zSQLParser.REGISTERS, 0); }
+		public TerminalNode STATIC() { return getToken(DB2zSQLParser.STATIC, 0); }
+		public TerminalNode DISPATCH() { return getToken(DB2zSQLParser.DISPATCH, 0); }
+		public TerminalNode SECURED() { return getToken(DB2zSQLParser.SECURED, 0); }
+		public TerminalNode CCSID() { return getToken(DB2zSQLParser.CCSID, 0); }
+		public TerminalNode ASSEMBLE() { return getToken(DB2zSQLParser.ASSEMBLE, 0); }
+		public TerminalNode C_() { return getToken(DB2zSQLParser.C_, 0); }
+		public TerminalNode COBOL() { return getToken(DB2zSQLParser.COBOL, 0); }
+		public TerminalNode JAVA() { return getToken(DB2zSQLParser.JAVA, 0); }
+		public TerminalNode PLI() { return getToken(DB2zSQLParser.PLI, 0); }
+		public TerminalNode SQL() { return getToken(DB2zSQLParser.SQL, 0); }
+		public TerminalNode ALLOW() { return getToken(DB2zSQLParser.ALLOW, 0); }
+		public TerminalNode DISALLOW() { return getToken(DB2zSQLParser.DISALLOW, 0); }
+		public TerminalNode NO() { return getToken(DB2zSQLParser.NO, 0); }
+		public TerminalNode YES() { return getToken(DB2zSQLParser.YES, 0); }
+		public TerminalNode SUB() { return getToken(DB2zSQLParser.SUB, 0); }
+		public TerminalNode MAIN() { return getToken(DB2zSQLParser.MAIN, 0); }
+		public TerminalNode DB2() { return getToken(DB2zSQLParser.DB2, 0); }
+		public TerminalNode USER() { return getToken(DB2zSQLParser.USER, 0); }
+		public TerminalNode DEFINER() { return getToken(DB2zSQLParser.DEFINER, 0); }
+		public TerminalNode INHERIT() { return getToken(DB2zSQLParser.INHERIT, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
 		public ExternalProgramNameContext externalProgramName() {
 			return getRuleContext(ExternalProgramNameContext.class,0);
 		}
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
 		}
-		public TerminalNode CALLED() { return getToken(SQLParser.CALLED, 0); }
-		public TerminalNode MODIFIES() { return getToken(SQLParser.MODIFIES, 0); }
-		public TerminalNode DATA() { return getToken(SQLParser.DATA, 0); }
-		public TerminalNode READS() { return getToken(SQLParser.READS, 0); }
-		public TerminalNode CONTAINS() { return getToken(SQLParser.CONTAINS, 0); }
-		public TerminalNode PACKAGE() { return getToken(SQLParser.PACKAGE, 0); }
-		public TerminalNode PATH() { return getToken(SQLParser.PATH, 0); }
+		public TerminalNode CALLED() { return getToken(DB2zSQLParser.CALLED, 0); }
+		public TerminalNode MODIFIES() { return getToken(DB2zSQLParser.MODIFIES, 0); }
+		public TerminalNode DATA() { return getToken(DB2zSQLParser.DATA, 0); }
+		public TerminalNode READS() { return getToken(DB2zSQLParser.READS, 0); }
+		public TerminalNode CONTAINS() { return getToken(DB2zSQLParser.CONTAINS, 0); }
+		public TerminalNode PACKAGE() { return getToken(DB2zSQLParser.PACKAGE, 0); }
+		public TerminalNode PATH() { return getToken(DB2zSQLParser.PATH, 0); }
 		public PackagePathContext packagePath() {
 			return getRuleContext(PackagePathContext.class,0);
 		}
-		public TerminalNode SCRATCHPAD() { return getToken(SQLParser.SCRATCHPAD, 0); }
-		public TerminalNode COLLID() { return getToken(SQLParser.COLLID, 0); }
+		public TerminalNode SCRATCHPAD() { return getToken(DB2zSQLParser.SCRATCHPAD, 0); }
+		public TerminalNode COLLID() { return getToken(DB2zSQLParser.COLLID, 0); }
 		public CollectionIDContext collectionID() {
 			return getRuleContext(CollectionIDContext.class,0);
 		}
-		public TerminalNode STOP() { return getToken(SQLParser.STOP, 0); }
-		public TerminalNode AFTER() { return getToken(SQLParser.AFTER, 0); }
-		public TerminalNode SYSTEM() { return getToken(SQLParser.SYSTEM, 0); }
-		public TerminalNode FAILURES() { return getToken(SQLParser.FAILURES, 0); }
-		public TerminalNode CONTINUE() { return getToken(SQLParser.CONTINUE, 0); }
-		public TerminalNode FAILURE() { return getToken(SQLParser.FAILURE, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode RETURNS() { return getToken(SQLParser.RETURNS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode COMMA() { return getToken(SQLParser.COMMA, 0); }
-		public TerminalNode SPLAT() { return getToken(SQLParser.SPLAT, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode LIMIT() { return getToken(SQLParser.LIMIT, 0); }
+		public TerminalNode STOP() { return getToken(DB2zSQLParser.STOP, 0); }
+		public TerminalNode AFTER() { return getToken(DB2zSQLParser.AFTER, 0); }
+		public TerminalNode SYSTEM() { return getToken(DB2zSQLParser.SYSTEM, 0); }
+		public TerminalNode FAILURES() { return getToken(DB2zSQLParser.FAILURES, 0); }
+		public TerminalNode CONTINUE() { return getToken(DB2zSQLParser.CONTINUE, 0); }
+		public TerminalNode FAILURE() { return getToken(DB2zSQLParser.FAILURE, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode RETURNS() { return getToken(DB2zSQLParser.RETURNS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode COMMA() { return getToken(DB2zSQLParser.COMMA, 0); }
+		public TerminalNode SPLAT() { return getToken(DB2zSQLParser.SPLAT, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode LIMIT() { return getToken(DB2zSQLParser.LIMIT, 0); }
 		public OptionListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_optionList; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOptionList(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOptionList(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOptionList(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOptionList(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOptionList(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOptionList(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -7805,22 +7805,22 @@ public class SQLParser extends Parser {
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
 		}
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
 		public ExternalProgramNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_externalProgramName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterExternalProgramName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterExternalProgramName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitExternalProgramName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitExternalProgramName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitExternalProgramName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitExternalProgramName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8585,30 +8585,30 @@ public class SQLParser extends Parser {
 		public CollectionIDContext collectionID() {
 			return getRuleContext(CollectionIDContext.class,0);
 		}
-		public TerminalNode SESSION_USER() { return getToken(SQLParser.SESSION_USER, 0); }
-		public TerminalNode USER() { return getToken(SQLParser.USER, 0); }
+		public TerminalNode SESSION_USER() { return getToken(DB2zSQLParser.SESSION_USER, 0); }
+		public TerminalNode USER() { return getToken(DB2zSQLParser.USER, 0); }
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public TerminalNode PACKAGE() { return getToken(SQLParser.PACKAGE, 0); }
-		public TerminalNode PATH() { return getToken(SQLParser.PATH, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public TerminalNode PACKAGE() { return getToken(DB2zSQLParser.PACKAGE, 0); }
+		public TerminalNode PATH() { return getToken(DB2zSQLParser.PATH, 0); }
 		public PackagePathContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_packagePath; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPackagePath(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPackagePath(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPackagePath(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPackagePath(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPackagePath(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPackagePath(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8698,15 +8698,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_collectionID; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCollectionID(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCollectionID(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCollectionID(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCollectionID(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCollectionID(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCollectionID(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8733,22 +8733,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RunTimeOptionsContext extends ParserRuleContext {
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
 		public RunTimeOptionsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_runTimeOptions; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRunTimeOptions(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRunTimeOptions(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRunTimeOptions(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRunTimeOptions(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRunTimeOptions(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRunTimeOptions(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8775,27 +8775,27 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ComparisonOperatorContext extends ParserRuleContext {
-		public TerminalNode EQ() { return getToken(SQLParser.EQ, 0); }
-		public TerminalNode GT() { return getToken(SQLParser.GT, 0); }
-		public TerminalNode LT() { return getToken(SQLParser.LT, 0); }
-		public TerminalNode GE() { return getToken(SQLParser.GE, 0); }
-		public TerminalNode LE() { return getToken(SQLParser.LE, 0); }
-		public TerminalNode NE() { return getToken(SQLParser.NE, 0); }
+		public TerminalNode EQ() { return getToken(DB2zSQLParser.EQ, 0); }
+		public TerminalNode GT() { return getToken(DB2zSQLParser.GT, 0); }
+		public TerminalNode LT() { return getToken(DB2zSQLParser.LT, 0); }
+		public TerminalNode GE() { return getToken(DB2zSQLParser.GE, 0); }
+		public TerminalNode LE() { return getToken(DB2zSQLParser.LE, 0); }
+		public TerminalNode NE() { return getToken(DB2zSQLParser.NE, 0); }
 		public ComparisonOperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_comparisonOperator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterComparisonOperator(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterComparisonOperator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitComparisonOperator(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitComparisonOperator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitComparisonOperator(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitComparisonOperator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8831,27 +8831,27 @@ public class SQLParser extends Parser {
 	}
 
 	public static class OperatorContext extends ParserRuleContext {
-		public TerminalNode SPLAT() { return getToken(SQLParser.SPLAT, 0); }
-		public TerminalNode PLUS() { return getToken(SQLParser.PLUS, 0); }
-		public TerminalNode MINUS() { return getToken(SQLParser.MINUS, 0); }
-		public TerminalNode SLASH() { return getToken(SQLParser.SLASH, 0); }
-		public TerminalNode CONCAT() { return getToken(SQLParser.CONCAT, 0); }
-		public TerminalNode CONCATOP() { return getToken(SQLParser.CONCATOP, 0); }
+		public TerminalNode SPLAT() { return getToken(DB2zSQLParser.SPLAT, 0); }
+		public TerminalNode PLUS() { return getToken(DB2zSQLParser.PLUS, 0); }
+		public TerminalNode MINUS() { return getToken(DB2zSQLParser.MINUS, 0); }
+		public TerminalNode SLASH() { return getToken(DB2zSQLParser.SLASH, 0); }
+		public TerminalNode CONCAT() { return getToken(DB2zSQLParser.CONCAT, 0); }
+		public TerminalNode CONCATOP() { return getToken(DB2zSQLParser.CONCATOP, 0); }
 		public OperatorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_operator; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOperator(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOperator(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOperator(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOperator(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOperator(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOperator(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -8941,15 +8941,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_expression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9074,29 +9074,29 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RowChangeExpressionContext extends ParserRuleContext {
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode CHANGE() { return getToken(SQLParser.CHANGE, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode CHANGE() { return getToken(DB2zSQLParser.CHANGE, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode TIMESTAMP() { return getToken(SQLParser.TIMESTAMP, 0); }
-		public TerminalNode TOKEN() { return getToken(SQLParser.TOKEN, 0); }
+		public TerminalNode TIMESTAMP() { return getToken(DB2zSQLParser.TIMESTAMP, 0); }
+		public TerminalNode TOKEN() { return getToken(DB2zSQLParser.TOKEN, 0); }
 		public RowChangeExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rowChangeExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRowChangeExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRowChangeExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRowChangeExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRowChangeExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRowChangeExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRowChangeExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9140,28 +9140,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SequenceReferenceContext extends ParserRuleContext {
-		public TerminalNode VALUE() { return getToken(SQLParser.VALUE, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
+		public TerminalNode VALUE() { return getToken(DB2zSQLParser.VALUE, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode NEXT() { return getToken(SQLParser.NEXT, 0); }
-		public TerminalNode PREVIOUS() { return getToken(SQLParser.PREVIOUS, 0); }
+		public TerminalNode NEXT() { return getToken(DB2zSQLParser.NEXT, 0); }
+		public TerminalNode PREVIOUS() { return getToken(DB2zSQLParser.PREVIOUS, 0); }
 		public SequenceReferenceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sequenceReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSequenceReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSequenceReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSequenceReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSequenceReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSequenceReference(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSequenceReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9221,15 +9221,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_functionInvocation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFunctionInvocation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFunctionInvocation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFunctionInvocation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFunctionInvocation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9285,21 +9285,21 @@ public class SQLParser extends Parser {
 		public ScalarFunctionContext scalarFunction() {
 			return getRuleContext(ScalarFunctionContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public ScalarFunctionInvocationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -9307,15 +9307,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_scalarFunctionInvocation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterScalarFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterScalarFunctionInvocation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitScalarFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitScalarFunctionInvocation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitScalarFunctionInvocation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitScalarFunctionInvocation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -9382,32 +9382,32 @@ public class SQLParser extends Parser {
 		public AggregateFunctionContext aggregateFunction() {
 			return getRuleContext(AggregateFunctionContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode SPLAT() { return getToken(SQLParser.SPLAT, 0); }
+		public TerminalNode SPLAT() { return getToken(DB2zSQLParser.SPLAT, 0); }
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
-		public TerminalNode DISTINCT() { return getToken(SQLParser.DISTINCT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
+		public TerminalNode DISTINCT() { return getToken(DB2zSQLParser.DISTINCT, 0); }
 		public AggregateFunctionInvocationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_aggregateFunctionInvocation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAggregateFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAggregateFunctionInvocation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAggregateFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAggregateFunctionInvocation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAggregateFunctionInvocation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAggregateFunctionInvocation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10207,34 +10207,34 @@ public class SQLParser extends Parser {
 		public RegressionFunctionContext regressionFunction() {
 			return getRuleContext(RegressionFunctionContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode COMMA() { return getToken(SQLParser.COMMA, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode COMMA() { return getToken(DB2zSQLParser.COMMA, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public RegressionFunctionInvocationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_regressionFunctionInvocation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRegressionFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRegressionFunctionInvocation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRegressionFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRegressionFunctionInvocation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRegressionFunctionInvocation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRegressionFunctionInvocation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10285,22 +10285,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ExternalFunctionInvocationContext extends ParserRuleContext {
-		public TerminalNode SQLIDENTIFIER() { return getToken(SQLParser.SQLIDENTIFIER, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode SQLIDENTIFIER() { return getToken(DB2zSQLParser.SQLIDENTIFIER, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public ExternalFunctionInvocationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -10308,15 +10308,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_externalFunctionInvocation; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterExternalFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterExternalFunctionInvocation(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitExternalFunctionInvocation(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitExternalFunctionInvocation(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitExternalFunctionInvocation(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitExternalFunctionInvocation(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10380,50 +10380,50 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LabeledDurationContext extends ParserRuleContext {
-		public TerminalNode YEAR() { return getToken(SQLParser.YEAR, 0); }
-		public TerminalNode YEARS() { return getToken(SQLParser.YEARS, 0); }
-		public TerminalNode MONTH() { return getToken(SQLParser.MONTH, 0); }
-		public TerminalNode MONTHS() { return getToken(SQLParser.MONTHS, 0); }
-		public TerminalNode DAY() { return getToken(SQLParser.DAY, 0); }
-		public TerminalNode DAYS() { return getToken(SQLParser.DAYS, 0); }
-		public TerminalNode HOUR() { return getToken(SQLParser.HOUR, 0); }
-		public TerminalNode HOURS() { return getToken(SQLParser.HOURS, 0); }
-		public TerminalNode MINUTE() { return getToken(SQLParser.MINUTE, 0); }
-		public TerminalNode MINUTES() { return getToken(SQLParser.MINUTES, 0); }
-		public TerminalNode SECOND() { return getToken(SQLParser.SECOND, 0); }
-		public TerminalNode SECONDS() { return getToken(SQLParser.SECONDS, 0); }
-		public TerminalNode MICROSECOND() { return getToken(SQLParser.MICROSECOND, 0); }
-		public TerminalNode MICROSECONDS() { return getToken(SQLParser.MICROSECONDS, 0); }
+		public TerminalNode YEAR() { return getToken(DB2zSQLParser.YEAR, 0); }
+		public TerminalNode YEARS() { return getToken(DB2zSQLParser.YEARS, 0); }
+		public TerminalNode MONTH() { return getToken(DB2zSQLParser.MONTH, 0); }
+		public TerminalNode MONTHS() { return getToken(DB2zSQLParser.MONTHS, 0); }
+		public TerminalNode DAY() { return getToken(DB2zSQLParser.DAY, 0); }
+		public TerminalNode DAYS() { return getToken(DB2zSQLParser.DAYS, 0); }
+		public TerminalNode HOUR() { return getToken(DB2zSQLParser.HOUR, 0); }
+		public TerminalNode HOURS() { return getToken(DB2zSQLParser.HOURS, 0); }
+		public TerminalNode MINUTE() { return getToken(DB2zSQLParser.MINUTE, 0); }
+		public TerminalNode MINUTES() { return getToken(DB2zSQLParser.MINUTES, 0); }
+		public TerminalNode SECOND() { return getToken(DB2zSQLParser.SECOND, 0); }
+		public TerminalNode SECONDS() { return getToken(DB2zSQLParser.SECONDS, 0); }
+		public TerminalNode MICROSECOND() { return getToken(DB2zSQLParser.MICROSECOND, 0); }
+		public TerminalNode MICROSECONDS() { return getToken(DB2zSQLParser.MICROSECONDS, 0); }
 		public FunctionInvocationContext functionInvocation() {
 			return getRuleContext(FunctionInvocationContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public ColumnNameContext columnName() {
 			return getRuleContext(ColumnNameContext.class,0);
 		}
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public LabeledDurationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_labeledDuration; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLabeledDuration(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLabeledDuration(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLabeledDuration(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLabeledDuration(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLabeledDuration(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLabeledDuration(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10501,15 +10501,15 @@ public class SQLParser extends Parser {
 	}
 
 	public static class XmlCastSpecificationContext extends ParserRuleContext {
-		public TerminalNode XMLCAST() { return getToken(SQLParser.XMLCAST, 0); }
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode XMLCAST() { return getToken(DB2zSQLParser.XMLCAST, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public DataTypeContext dataType() {
 			return getRuleContext(DataTypeContext.class,0);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public ParameterMarkerContext parameterMarker() {
 			return getRuleContext(ParameterMarkerContext.class,0);
 		}
@@ -10519,15 +10519,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xmlCastSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlCastSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlCastSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlCastSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlCastSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlCastSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlCastSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10583,26 +10583,26 @@ public class SQLParser extends Parser {
 		public ArrayExpressionContext arrayExpression() {
 			return getRuleContext(ArrayExpressionContext.class,0);
 		}
-		public TerminalNode OPENSQBRACKET() { return getToken(SQLParser.OPENSQBRACKET, 0); }
+		public TerminalNode OPENSQBRACKET() { return getToken(DB2zSQLParser.OPENSQBRACKET, 0); }
 		public ArrayIndexContext arrayIndex() {
 			return getRuleContext(ArrayIndexContext.class,0);
 		}
-		public TerminalNode CLOSESQBRACKET() { return getToken(SQLParser.CLOSESQBRACKET, 0); }
+		public TerminalNode CLOSESQBRACKET() { return getToken(DB2zSQLParser.CLOSESQBRACKET, 0); }
 		public ArrayElementSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayElementSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterArrayElementSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterArrayElementSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitArrayElementSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitArrayElementSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitArrayElementSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitArrayElementSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10653,15 +10653,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_arrayIndex; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterArrayIndex(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterArrayIndex(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitArrayIndex(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitArrayIndex(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitArrayIndex(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitArrayIndex(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10713,10 +10713,10 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ArrayConstructorContext extends ParserRuleContext {
-		public TerminalNode ARRAY() { return getToken(SQLParser.ARRAY, 0); }
-		public TerminalNode OPENSQBRACKET() { return getToken(SQLParser.OPENSQBRACKET, 0); }
-		public TerminalNode CLOSESQBRACKET() { return getToken(SQLParser.CLOSESQBRACKET, 0); }
-		public TerminalNode QUESTIONMARK() { return getToken(SQLParser.QUESTIONMARK, 0); }
+		public TerminalNode ARRAY() { return getToken(DB2zSQLParser.ARRAY, 0); }
+		public TerminalNode OPENSQBRACKET() { return getToken(DB2zSQLParser.OPENSQBRACKET, 0); }
+		public TerminalNode CLOSESQBRACKET() { return getToken(DB2zSQLParser.CLOSESQBRACKET, 0); }
+		public TerminalNode QUESTIONMARK() { return getToken(DB2zSQLParser.QUESTIONMARK, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
@@ -10726,13 +10726,13 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> NULL() { return getTokens(SQLParser.NULL); }
+		public List<TerminalNode> NULL() { return getTokens(DB2zSQLParser.NULL); }
 		public TerminalNode NULL(int i) {
-			return getToken(SQLParser.NULL, i);
+			return getToken(DB2zSQLParser.NULL, i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public ArrayConstructorContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -10740,15 +10740,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_arrayConstructor; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterArrayConstructor(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterArrayConstructor(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitArrayConstructor(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitArrayConstructor(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitArrayConstructor(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitArrayConstructor(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10863,15 +10863,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_olapSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOlapSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOlapSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOlapSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOlapSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOlapSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOlapSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10921,12 +10921,12 @@ public class SQLParser extends Parser {
 		public OlapSpecificationFunctionContext olapSpecificationFunction() {
 			return getRuleContext(OlapSpecificationFunctionContext.class,0);
 		}
-		public TerminalNode OVER() { return getToken(SQLParser.OVER, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode OVER() { return getToken(DB2zSQLParser.OVER, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public WindowOrderClauseContext windowOrderClause() {
 			return getRuleContext(WindowOrderClauseContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public WindowPartitionClauseContext windowPartitionClause() {
 			return getRuleContext(WindowPartitionClauseContext.class,0);
 		}
@@ -10936,15 +10936,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_orderedOlapSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOrderedOlapSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOrderedOlapSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOrderedOlapSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOrderedOlapSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOrderedOlapSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOrderedOlapSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -10996,13 +10996,13 @@ public class SQLParser extends Parser {
 		public LeadFunctionContext leadFunction() {
 			return getRuleContext(LeadFunctionContext.class,0);
 		}
-		public TerminalNode CUME_DIST() { return getToken(SQLParser.CUME_DIST, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode PERCENT_RANK() { return getToken(SQLParser.PERCENT_RANK, 0); }
-		public TerminalNode RANK() { return getToken(SQLParser.RANK, 0); }
-		public TerminalNode DENSE_RANK() { return getToken(SQLParser.DENSE_RANK, 0); }
-		public TerminalNode NTILE() { return getToken(SQLParser.NTILE, 0); }
+		public TerminalNode CUME_DIST() { return getToken(DB2zSQLParser.CUME_DIST, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode PERCENT_RANK() { return getToken(DB2zSQLParser.PERCENT_RANK, 0); }
+		public TerminalNode RANK() { return getToken(DB2zSQLParser.RANK, 0); }
+		public TerminalNode DENSE_RANK() { return getToken(DB2zSQLParser.DENSE_RANK, 0); }
+		public TerminalNode NTILE() { return getToken(DB2zSQLParser.NTILE, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -11012,15 +11012,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_olapSpecificationFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOlapSpecificationFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOlapSpecificationFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOlapSpecificationFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOlapSpecificationFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOlapSpecificationFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOlapSpecificationFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11125,38 +11125,38 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LagFunctionContext extends ParserRuleContext {
-		public TerminalNode LAG() { return getToken(SQLParser.LAG, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LAG() { return getToken(DB2zSQLParser.LAG, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode RESPECT() { return getToken(SQLParser.RESPECT, 0); }
-		public TerminalNode NULLS() { return getToken(SQLParser.NULLS, 0); }
-		public TerminalNode IGNORE() { return getToken(SQLParser.IGNORE, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode RESPECT() { return getToken(DB2zSQLParser.RESPECT, 0); }
+		public TerminalNode NULLS() { return getToken(DB2zSQLParser.NULLS, 0); }
+		public TerminalNode IGNORE() { return getToken(DB2zSQLParser.IGNORE, 0); }
 		public LagFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_lagFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLagFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLagFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLagFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLagFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLagFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLagFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11244,20 +11244,20 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LeadFunctionContext extends ParserRuleContext {
-		public TerminalNode LEAD() { return getToken(SQLParser.LEAD, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LEAD() { return getToken(DB2zSQLParser.LEAD, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public RespectNullsClauseContext respectNullsClause() {
 			return getRuleContext(RespectNullsClauseContext.class,0);
 		}
@@ -11267,15 +11267,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_leadFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLeadFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLeadFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLeadFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLeadFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLeadFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLeadFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11339,24 +11339,24 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RespectNullsClauseContext extends ParserRuleContext {
-		public TerminalNode RESPECT() { return getToken(SQLParser.RESPECT, 0); }
-		public TerminalNode NULLS() { return getToken(SQLParser.NULLS, 0); }
-		public TerminalNode IGNORE() { return getToken(SQLParser.IGNORE, 0); }
+		public TerminalNode RESPECT() { return getToken(DB2zSQLParser.RESPECT, 0); }
+		public TerminalNode NULLS() { return getToken(DB2zSQLParser.NULLS, 0); }
+		public TerminalNode IGNORE() { return getToken(DB2zSQLParser.IGNORE, 0); }
 		public RespectNullsClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_respectNullsClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRespectNullsClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRespectNullsClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRespectNullsClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRespectNullsClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRespectNullsClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRespectNullsClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11407,17 +11407,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class WindowPartitionClauseContext extends ParserRuleContext {
-		public TerminalNode PARTITION() { return getToken(SQLParser.PARTITION, 0); }
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
+		public TerminalNode PARTITION() { return getToken(DB2zSQLParser.PARTITION, 0); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public WindowPartitionClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -11425,15 +11425,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_windowPartitionClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterWindowPartitionClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterWindowPartitionClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitWindowPartitionClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitWindowPartitionClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitWindowPartitionClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitWindowPartitionClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11483,8 +11483,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class WindowOrderClauseContext extends ParserRuleContext {
-		public TerminalNode ORDER() { return getToken(SQLParser.ORDER, 0); }
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
+		public TerminalNode ORDER() { return getToken(DB2zSQLParser.ORDER, 0); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
@@ -11497,9 +11497,9 @@ public class SQLParser extends Parser {
 		public WindowOrderClauseQualifierContext windowOrderClauseQualifier(int i) {
 			return getRuleContext(WindowOrderClauseQualifierContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public WindowOrderClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -11507,15 +11507,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_windowOrderClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterWindowOrderClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterWindowOrderClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitWindowOrderClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitWindowOrderClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitWindowOrderClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitWindowOrderClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11583,26 +11583,26 @@ public class SQLParser extends Parser {
 	}
 
 	public static class WindowOrderClauseQualifierContext extends ParserRuleContext {
-		public TerminalNode ASC() { return getToken(SQLParser.ASC, 0); }
-		public TerminalNode DESC() { return getToken(SQLParser.DESC, 0); }
-		public TerminalNode NULLS() { return getToken(SQLParser.NULLS, 0); }
-		public TerminalNode FIRST() { return getToken(SQLParser.FIRST, 0); }
-		public TerminalNode LAST() { return getToken(SQLParser.LAST, 0); }
+		public TerminalNode ASC() { return getToken(DB2zSQLParser.ASC, 0); }
+		public TerminalNode DESC() { return getToken(DB2zSQLParser.DESC, 0); }
+		public TerminalNode NULLS() { return getToken(DB2zSQLParser.NULLS, 0); }
+		public TerminalNode FIRST() { return getToken(DB2zSQLParser.FIRST, 0); }
+		public TerminalNode LAST() { return getToken(DB2zSQLParser.LAST, 0); }
 		public WindowOrderClauseQualifierContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_windowOrderClauseQualifier; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterWindowOrderClauseQualifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterWindowOrderClauseQualifier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitWindowOrderClauseQualifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitWindowOrderClauseQualifier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitWindowOrderClauseQualifier(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitWindowOrderClauseQualifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11658,16 +11658,16 @@ public class SQLParser extends Parser {
 	}
 
 	public static class NumberingSpecificationContext extends ParserRuleContext {
-		public TerminalNode ROW_NUMBER() { return getToken(SQLParser.ROW_NUMBER, 0); }
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public TerminalNode ROW_NUMBER() { return getToken(DB2zSQLParser.ROW_NUMBER, 0); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public TerminalNode OVER() { return getToken(SQLParser.OVER, 0); }
+		public TerminalNode OVER() { return getToken(DB2zSQLParser.OVER, 0); }
 		public WindowPartitionClauseContext windowPartitionClause() {
 			return getRuleContext(WindowPartitionClauseContext.class,0);
 		}
@@ -11680,15 +11680,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_numberingSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNumberingSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNumberingSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNumberingSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNumberingSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNumberingSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNumberingSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11746,9 +11746,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AggregationSpecificationContext extends ParserRuleContext {
-		public TerminalNode OVER() { return getToken(SQLParser.OVER, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode OVER() { return getToken(DB2zSQLParser.OVER, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public AggregateFunctionInvocationContext aggregateFunctionInvocation() {
 			return getRuleContext(AggregateFunctionInvocationContext.class,0);
 		}
@@ -11758,38 +11758,38 @@ public class SQLParser extends Parser {
 		public WindowPartitionClauseContext windowPartitionClause() {
 			return getRuleContext(WindowPartitionClauseContext.class,0);
 		}
-		public TerminalNode RANGE() { return getToken(SQLParser.RANGE, 0); }
-		public TerminalNode BETWEEN() { return getToken(SQLParser.BETWEEN, 0); }
-		public List<TerminalNode> UNBOUNDED() { return getTokens(SQLParser.UNBOUNDED); }
+		public TerminalNode RANGE() { return getToken(DB2zSQLParser.RANGE, 0); }
+		public TerminalNode BETWEEN() { return getToken(DB2zSQLParser.BETWEEN, 0); }
+		public List<TerminalNode> UNBOUNDED() { return getTokens(DB2zSQLParser.UNBOUNDED); }
 		public TerminalNode UNBOUNDED(int i) {
-			return getToken(SQLParser.UNBOUNDED, i);
+			return getToken(DB2zSQLParser.UNBOUNDED, i);
 		}
-		public TerminalNode PRECEDING() { return getToken(SQLParser.PRECEDING, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
-		public TerminalNode FOLLOWING() { return getToken(SQLParser.FOLLOWING, 0); }
+		public TerminalNode PRECEDING() { return getToken(DB2zSQLParser.PRECEDING, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
+		public TerminalNode FOLLOWING() { return getToken(DB2zSQLParser.FOLLOWING, 0); }
 		public WindowOrderClauseContext windowOrderClause() {
 			return getRuleContext(WindowOrderClauseContext.class,0);
 		}
 		public WindowAggregationGroupClauseContext windowAggregationGroupClause() {
 			return getRuleContext(WindowAggregationGroupClauseContext.class,0);
 		}
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
 		public AggregationSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_aggregationSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAggregationSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAggregationSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAggregationSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAggregationSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAggregationSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAggregationSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11913,51 +11913,51 @@ public class SQLParser extends Parser {
 	}
 
 	public static class AggregateFunctionContext extends ParserRuleContext {
-		public TerminalNode ARRAY_AGG() { return getToken(SQLParser.ARRAY_AGG, 0); }
-		public TerminalNode AVG() { return getToken(SQLParser.AVG, 0); }
-		public TerminalNode CORR() { return getToken(SQLParser.CORR, 0); }
-		public TerminalNode CORRELATION() { return getToken(SQLParser.CORRELATION, 0); }
-		public TerminalNode COUNT() { return getToken(SQLParser.COUNT, 0); }
-		public TerminalNode COUNT_BIG() { return getToken(SQLParser.COUNT_BIG, 0); }
-		public TerminalNode COVAR_POP() { return getToken(SQLParser.COVAR_POP, 0); }
-		public TerminalNode COVARIANCE() { return getToken(SQLParser.COVARIANCE, 0); }
-		public TerminalNode COVAR() { return getToken(SQLParser.COVAR, 0); }
-		public TerminalNode COVAR_SAMP() { return getToken(SQLParser.COVAR_SAMP, 0); }
-		public TerminalNode COVARIANCE_SAMP() { return getToken(SQLParser.COVARIANCE_SAMP, 0); }
-		public TerminalNode CUME_DIST() { return getToken(SQLParser.CUME_DIST, 0); }
-		public TerminalNode GROUPING() { return getToken(SQLParser.GROUPING, 0); }
-		public TerminalNode LISTAGG() { return getToken(SQLParser.LISTAGG, 0); }
-		public TerminalNode MAX() { return getToken(SQLParser.MAX, 0); }
-		public TerminalNode MEDIAN() { return getToken(SQLParser.MEDIAN, 0); }
-		public TerminalNode MIN() { return getToken(SQLParser.MIN, 0); }
-		public TerminalNode PERCENTILE_CONT() { return getToken(SQLParser.PERCENTILE_CONT, 0); }
-		public TerminalNode PERCENTILE_DISC() { return getToken(SQLParser.PERCENTILE_DISC, 0); }
-		public TerminalNode PERCENT_RANK() { return getToken(SQLParser.PERCENT_RANK, 0); }
-		public TerminalNode STDDEV_POP() { return getToken(SQLParser.STDDEV_POP, 0); }
-		public TerminalNode STDDEV() { return getToken(SQLParser.STDDEV, 0); }
-		public TerminalNode STDDEV_SAMP() { return getToken(SQLParser.STDDEV_SAMP, 0); }
-		public TerminalNode SUM() { return getToken(SQLParser.SUM, 0); }
-		public TerminalNode VAR_POP() { return getToken(SQLParser.VAR_POP, 0); }
-		public TerminalNode VARIANCE() { return getToken(SQLParser.VARIANCE, 0); }
-		public TerminalNode VAR() { return getToken(SQLParser.VAR, 0); }
-		public TerminalNode VAR_SAMP() { return getToken(SQLParser.VAR_SAMP, 0); }
-		public TerminalNode VARIANCE_SAMP() { return getToken(SQLParser.VARIANCE_SAMP, 0); }
-		public TerminalNode XMLAGG() { return getToken(SQLParser.XMLAGG, 0); }
+		public TerminalNode ARRAY_AGG() { return getToken(DB2zSQLParser.ARRAY_AGG, 0); }
+		public TerminalNode AVG() { return getToken(DB2zSQLParser.AVG, 0); }
+		public TerminalNode CORR() { return getToken(DB2zSQLParser.CORR, 0); }
+		public TerminalNode CORRELATION() { return getToken(DB2zSQLParser.CORRELATION, 0); }
+		public TerminalNode COUNT() { return getToken(DB2zSQLParser.COUNT, 0); }
+		public TerminalNode COUNT_BIG() { return getToken(DB2zSQLParser.COUNT_BIG, 0); }
+		public TerminalNode COVAR_POP() { return getToken(DB2zSQLParser.COVAR_POP, 0); }
+		public TerminalNode COVARIANCE() { return getToken(DB2zSQLParser.COVARIANCE, 0); }
+		public TerminalNode COVAR() { return getToken(DB2zSQLParser.COVAR, 0); }
+		public TerminalNode COVAR_SAMP() { return getToken(DB2zSQLParser.COVAR_SAMP, 0); }
+		public TerminalNode COVARIANCE_SAMP() { return getToken(DB2zSQLParser.COVARIANCE_SAMP, 0); }
+		public TerminalNode CUME_DIST() { return getToken(DB2zSQLParser.CUME_DIST, 0); }
+		public TerminalNode GROUPING() { return getToken(DB2zSQLParser.GROUPING, 0); }
+		public TerminalNode LISTAGG() { return getToken(DB2zSQLParser.LISTAGG, 0); }
+		public TerminalNode MAX() { return getToken(DB2zSQLParser.MAX, 0); }
+		public TerminalNode MEDIAN() { return getToken(DB2zSQLParser.MEDIAN, 0); }
+		public TerminalNode MIN() { return getToken(DB2zSQLParser.MIN, 0); }
+		public TerminalNode PERCENTILE_CONT() { return getToken(DB2zSQLParser.PERCENTILE_CONT, 0); }
+		public TerminalNode PERCENTILE_DISC() { return getToken(DB2zSQLParser.PERCENTILE_DISC, 0); }
+		public TerminalNode PERCENT_RANK() { return getToken(DB2zSQLParser.PERCENT_RANK, 0); }
+		public TerminalNode STDDEV_POP() { return getToken(DB2zSQLParser.STDDEV_POP, 0); }
+		public TerminalNode STDDEV() { return getToken(DB2zSQLParser.STDDEV, 0); }
+		public TerminalNode STDDEV_SAMP() { return getToken(DB2zSQLParser.STDDEV_SAMP, 0); }
+		public TerminalNode SUM() { return getToken(DB2zSQLParser.SUM, 0); }
+		public TerminalNode VAR_POP() { return getToken(DB2zSQLParser.VAR_POP, 0); }
+		public TerminalNode VARIANCE() { return getToken(DB2zSQLParser.VARIANCE, 0); }
+		public TerminalNode VAR() { return getToken(DB2zSQLParser.VAR, 0); }
+		public TerminalNode VAR_SAMP() { return getToken(DB2zSQLParser.VAR_SAMP, 0); }
+		public TerminalNode VARIANCE_SAMP() { return getToken(DB2zSQLParser.VARIANCE_SAMP, 0); }
+		public TerminalNode XMLAGG() { return getToken(DB2zSQLParser.XMLAGG, 0); }
 		public AggregateFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_aggregateFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAggregateFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAggregateFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAggregateFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAggregateFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAggregateFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAggregateFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -11993,31 +11993,31 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RegressionFunctionContext extends ParserRuleContext {
-		public TerminalNode REGR_AVGX() { return getToken(SQLParser.REGR_AVGX, 0); }
-		public TerminalNode REGR_AVGY() { return getToken(SQLParser.REGR_AVGY, 0); }
-		public TerminalNode REGR_COUNT() { return getToken(SQLParser.REGR_COUNT, 0); }
-		public TerminalNode REGR_INTERCEPT() { return getToken(SQLParser.REGR_INTERCEPT, 0); }
-		public TerminalNode REGR_ICPT() { return getToken(SQLParser.REGR_ICPT, 0); }
-		public TerminalNode REGR_R2() { return getToken(SQLParser.REGR_R2, 0); }
-		public TerminalNode REGR_SLOPE() { return getToken(SQLParser.REGR_SLOPE, 0); }
-		public TerminalNode REGR_SXX() { return getToken(SQLParser.REGR_SXX, 0); }
-		public TerminalNode REGR_SXY() { return getToken(SQLParser.REGR_SXY, 0); }
-		public TerminalNode REGR_SYY() { return getToken(SQLParser.REGR_SYY, 0); }
+		public TerminalNode REGR_AVGX() { return getToken(DB2zSQLParser.REGR_AVGX, 0); }
+		public TerminalNode REGR_AVGY() { return getToken(DB2zSQLParser.REGR_AVGY, 0); }
+		public TerminalNode REGR_COUNT() { return getToken(DB2zSQLParser.REGR_COUNT, 0); }
+		public TerminalNode REGR_INTERCEPT() { return getToken(DB2zSQLParser.REGR_INTERCEPT, 0); }
+		public TerminalNode REGR_ICPT() { return getToken(DB2zSQLParser.REGR_ICPT, 0); }
+		public TerminalNode REGR_R2() { return getToken(DB2zSQLParser.REGR_R2, 0); }
+		public TerminalNode REGR_SLOPE() { return getToken(DB2zSQLParser.REGR_SLOPE, 0); }
+		public TerminalNode REGR_SXX() { return getToken(DB2zSQLParser.REGR_SXX, 0); }
+		public TerminalNode REGR_SXY() { return getToken(DB2zSQLParser.REGR_SXY, 0); }
+		public TerminalNode REGR_SYY() { return getToken(DB2zSQLParser.REGR_SYY, 0); }
 		public RegressionFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_regressionFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRegressionFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRegressionFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRegressionFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRegressionFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRegressionFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRegressionFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12071,15 +12071,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_olapColumnFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOlapColumnFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOlapColumnFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOlapColumnFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOlapColumnFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOlapColumnFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOlapColumnFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12134,13 +12134,13 @@ public class SQLParser extends Parser {
 	}
 
 	public static class FirstValueFunctionContext extends ParserRuleContext {
-		public TerminalNode FIRST_VALUE() { return getToken(SQLParser.FIRST_VALUE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode FIRST_VALUE() { return getToken(DB2zSQLParser.FIRST_VALUE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode COMMA() { return getToken(SQLParser.COMMA, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode COMMA() { return getToken(DB2zSQLParser.COMMA, 0); }
 		public RespectNullsClauseContext respectNullsClause() {
 			return getRuleContext(RespectNullsClauseContext.class,0);
 		}
@@ -12150,15 +12150,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_firstValueFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFirstValueFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFirstValueFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFirstValueFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFirstValueFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFirstValueFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFirstValueFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12204,13 +12204,13 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LastValueFunctionContext extends ParserRuleContext {
-		public TerminalNode LAST_VALUE() { return getToken(SQLParser.LAST_VALUE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LAST_VALUE() { return getToken(DB2zSQLParser.LAST_VALUE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode COMMA() { return getToken(SQLParser.COMMA, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode COMMA() { return getToken(DB2zSQLParser.COMMA, 0); }
 		public RespectNullsClauseContext respectNullsClause() {
 			return getRuleContext(RespectNullsClauseContext.class,0);
 		}
@@ -12220,15 +12220,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_lastValueFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLastValueFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLastValueFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLastValueFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLastValueFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLastValueFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLastValueFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12274,29 +12274,29 @@ public class SQLParser extends Parser {
 	}
 
 	public static class NthValueFunctionContext extends ParserRuleContext {
-		public TerminalNode NTH_VALUE() { return getToken(SQLParser.NTH_VALUE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode NTH_VALUE() { return getToken(DB2zSQLParser.NTH_VALUE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode COMMA() { return getToken(SQLParser.COMMA, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode COMMA() { return getToken(DB2zSQLParser.COMMA, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public NthValueFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_nthValueFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNthValueFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNthValueFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNthValueFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNthValueFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNthValueFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNthValueFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12333,27 +12333,27 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RatioToReportFunctionContext extends ParserRuleContext {
-		public TerminalNode RATIO_TO_REPORT() { return getToken(SQLParser.RATIO_TO_REPORT, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode RATIO_TO_REPORT() { return getToken(DB2zSQLParser.RATIO_TO_REPORT, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public RatioToReportFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ratioToReportFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRatioToReportFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRatioToReportFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRatioToReportFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRatioToReportFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRatioToReportFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRatioToReportFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12386,8 +12386,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class WindowAggregationGroupClauseContext extends ParserRuleContext {
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
-		public TerminalNode RANGE() { return getToken(SQLParser.RANGE, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
+		public TerminalNode RANGE() { return getToken(DB2zSQLParser.RANGE, 0); }
 		public GroupStartContext groupStart() {
 			return getRuleContext(GroupStartContext.class,0);
 		}
@@ -12403,15 +12403,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_windowAggregationGroupClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterWindowAggregationGroupClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterWindowAggregationGroupClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitWindowAggregationGroupClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitWindowAggregationGroupClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitWindowAggregationGroupClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitWindowAggregationGroupClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12484,15 +12484,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupStart; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupStart(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupStart(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupStart(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupStart(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupStart(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupStart(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12541,11 +12541,11 @@ public class SQLParser extends Parser {
 	}
 
 	public static class GroupBetweenContext extends ParserRuleContext {
-		public TerminalNode BETWEEN() { return getToken(SQLParser.BETWEEN, 0); }
+		public TerminalNode BETWEEN() { return getToken(DB2zSQLParser.BETWEEN, 0); }
 		public GroupBound1Context groupBound1() {
 			return getRuleContext(GroupBound1Context.class,0);
 		}
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
 		public GroupBound2Context groupBound2() {
 			return getRuleContext(GroupBound2Context.class,0);
 		}
@@ -12555,15 +12555,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupBetween; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupBetween(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupBetween(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupBetween(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupBetween(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupBetween(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupBetween(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12608,15 +12608,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupEnd; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupEnd(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupEnd(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupEnd(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupEnd(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupEnd(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupEnd(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12677,15 +12677,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupBound1; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupBound1(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupBound1(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupBound1(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupBound1(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupBound1(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupBound1(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12756,15 +12756,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupBound2; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupBound2(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupBound2(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupBound2(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupBound2(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupBound2(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupBound2(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12817,23 +12817,23 @@ public class SQLParser extends Parser {
 	}
 
 	public static class UnboundedPrecedingContext extends ParserRuleContext {
-		public TerminalNode UNBOUNDED() { return getToken(SQLParser.UNBOUNDED, 0); }
-		public TerminalNode PRECEDING() { return getToken(SQLParser.PRECEDING, 0); }
+		public TerminalNode UNBOUNDED() { return getToken(DB2zSQLParser.UNBOUNDED, 0); }
+		public TerminalNode PRECEDING() { return getToken(DB2zSQLParser.PRECEDING, 0); }
 		public UnboundedPrecedingContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unboundedPreceding; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUnboundedPreceding(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUnboundedPreceding(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUnboundedPreceding(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUnboundedPreceding(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUnboundedPreceding(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUnboundedPreceding(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12862,23 +12862,23 @@ public class SQLParser extends Parser {
 	}
 
 	public static class UnboundedFollowingContext extends ParserRuleContext {
-		public TerminalNode UNBOUNDED() { return getToken(SQLParser.UNBOUNDED, 0); }
-		public TerminalNode FOLLOWING() { return getToken(SQLParser.FOLLOWING, 0); }
+		public TerminalNode UNBOUNDED() { return getToken(DB2zSQLParser.UNBOUNDED, 0); }
+		public TerminalNode FOLLOWING() { return getToken(DB2zSQLParser.FOLLOWING, 0); }
 		public UnboundedFollowingContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_unboundedFollowing; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUnboundedFollowing(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUnboundedFollowing(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUnboundedFollowing(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUnboundedFollowing(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUnboundedFollowing(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUnboundedFollowing(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12907,23 +12907,23 @@ public class SQLParser extends Parser {
 	}
 
 	public static class BoundedPrecedingContext extends ParserRuleContext {
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode PRECEDING() { return getToken(SQLParser.PRECEDING, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode PRECEDING() { return getToken(DB2zSQLParser.PRECEDING, 0); }
 		public BoundedPrecedingContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_boundedPreceding; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterBoundedPreceding(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterBoundedPreceding(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitBoundedPreceding(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitBoundedPreceding(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitBoundedPreceding(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitBoundedPreceding(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12952,23 +12952,23 @@ public class SQLParser extends Parser {
 	}
 
 	public static class BoundedFollowingContext extends ParserRuleContext {
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode FOLLOWING() { return getToken(SQLParser.FOLLOWING, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode FOLLOWING() { return getToken(DB2zSQLParser.FOLLOWING, 0); }
 		public BoundedFollowingContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_boundedFollowing; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterBoundedFollowing(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterBoundedFollowing(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitBoundedFollowing(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitBoundedFollowing(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitBoundedFollowing(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitBoundedFollowing(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -12997,23 +12997,23 @@ public class SQLParser extends Parser {
 	}
 
 	public static class CurrentRowContext extends ParserRuleContext {
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
 		public CurrentRowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_currentRow; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCurrentRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCurrentRow(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCurrentRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCurrentRow(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCurrentRow(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCurrentRow(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13042,259 +13042,259 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ScalarFunctionContext extends ParserRuleContext {
-		public TerminalNode ABS() { return getToken(SQLParser.ABS, 0); }
-		public TerminalNode ABSVAL() { return getToken(SQLParser.ABSVAL, 0); }
-		public TerminalNode ACOS() { return getToken(SQLParser.ACOS, 0); }
-		public TerminalNode ADD_DAYS() { return getToken(SQLParser.ADD_DAYS, 0); }
-		public TerminalNode ADD_MONTHS() { return getToken(SQLParser.ADD_MONTHS, 0); }
-		public TerminalNode ARRAY_DELETE() { return getToken(SQLParser.ARRAY_DELETE, 0); }
-		public TerminalNode ARRAY_FIRST() { return getToken(SQLParser.ARRAY_FIRST, 0); }
-		public TerminalNode ARRAY_LAST() { return getToken(SQLParser.ARRAY_LAST, 0); }
-		public TerminalNode ARRAY_NEXT() { return getToken(SQLParser.ARRAY_NEXT, 0); }
-		public TerminalNode ARRAY_PRIOR() { return getToken(SQLParser.ARRAY_PRIOR, 0); }
-		public TerminalNode ARRAY_TRIM() { return getToken(SQLParser.ARRAY_TRIM, 0); }
-		public TerminalNode ASCII() { return getToken(SQLParser.ASCII, 0); }
-		public TerminalNode ASCII_CHR() { return getToken(SQLParser.ASCII_CHR, 0); }
-		public TerminalNode ASCIISTR() { return getToken(SQLParser.ASCIISTR, 0); }
-		public TerminalNode ASCII_STR() { return getToken(SQLParser.ASCII_STR, 0); }
-		public TerminalNode ASIN() { return getToken(SQLParser.ASIN, 0); }
-		public TerminalNode ATAN() { return getToken(SQLParser.ATAN, 0); }
-		public TerminalNode ATAN2() { return getToken(SQLParser.ATAN2, 0); }
-		public TerminalNode ATANH() { return getToken(SQLParser.ATANH, 0); }
-		public TerminalNode BIGINT() { return getToken(SQLParser.BIGINT, 0); }
-		public TerminalNode BINARY() { return getToken(SQLParser.BINARY, 0); }
-		public TerminalNode BITAND() { return getToken(SQLParser.BITAND, 0); }
-		public TerminalNode BITANDNOT() { return getToken(SQLParser.BITANDNOT, 0); }
-		public TerminalNode BITNOT() { return getToken(SQLParser.BITNOT, 0); }
-		public TerminalNode BITOR() { return getToken(SQLParser.BITOR, 0); }
-		public TerminalNode BITXOR() { return getToken(SQLParser.BITXOR, 0); }
-		public TerminalNode BLOB() { return getToken(SQLParser.BLOB, 0); }
-		public TerminalNode BTRIM() { return getToken(SQLParser.BTRIM, 0); }
-		public TerminalNode CARDINALITY() { return getToken(SQLParser.CARDINALITY, 0); }
-		public TerminalNode CCSID_ENCODING() { return getToken(SQLParser.CCSID_ENCODING, 0); }
-		public TerminalNode CEIL() { return getToken(SQLParser.CEIL, 0); }
-		public TerminalNode CEILING() { return getToken(SQLParser.CEILING, 0); }
-		public TerminalNode CHAR() { return getToken(SQLParser.CHAR, 0); }
-		public TerminalNode CHAR9() { return getToken(SQLParser.CHAR9, 0); }
-		public TerminalNode CHARACTER_LENGTH() { return getToken(SQLParser.CHARACTER_LENGTH, 0); }
-		public TerminalNode CHAR_LENGTH() { return getToken(SQLParser.CHAR_LENGTH, 0); }
-		public TerminalNode CHR() { return getToken(SQLParser.CHR, 0); }
-		public TerminalNode CLOB() { return getToken(SQLParser.CLOB, 0); }
-		public TerminalNode COALESCE() { return getToken(SQLParser.COALESCE, 0); }
-		public TerminalNode COLLATION_KEY() { return getToken(SQLParser.COLLATION_KEY, 0); }
-		public TerminalNode COMPARE_DECFLOAT() { return getToken(SQLParser.COMPARE_DECFLOAT, 0); }
-		public TerminalNode CONCAT() { return getToken(SQLParser.CONCAT, 0); }
-		public TerminalNode CONTAINS() { return getToken(SQLParser.CONTAINS, 0); }
-		public TerminalNode COS() { return getToken(SQLParser.COS, 0); }
-		public TerminalNode COSH() { return getToken(SQLParser.COSH, 0); }
-		public TerminalNode DATE() { return getToken(SQLParser.DATE, 0); }
-		public TerminalNode DAY() { return getToken(SQLParser.DAY, 0); }
-		public TerminalNode DAYOFMONTH() { return getToken(SQLParser.DAYOFMONTH, 0); }
-		public TerminalNode DAYOFWEEK() { return getToken(SQLParser.DAYOFWEEK, 0); }
-		public TerminalNode DAYOFWEEK_ISO() { return getToken(SQLParser.DAYOFWEEK_ISO, 0); }
-		public TerminalNode DAYOFYEAR() { return getToken(SQLParser.DAYOFYEAR, 0); }
-		public TerminalNode DAYS() { return getToken(SQLParser.DAYS, 0); }
-		public TerminalNode DAYS_BETWEEN() { return getToken(SQLParser.DAYS_BETWEEN, 0); }
-		public TerminalNode DBCLOB() { return getToken(SQLParser.DBCLOB, 0); }
-		public TerminalNode DEC() { return getToken(SQLParser.DEC, 0); }
-		public TerminalNode DECFLOAT() { return getToken(SQLParser.DECFLOAT, 0); }
-		public TerminalNode DECFLOAT_FORMAT() { return getToken(SQLParser.DECFLOAT_FORMAT, 0); }
-		public TerminalNode DECFLOAT_SORTKEY() { return getToken(SQLParser.DECFLOAT_SORTKEY, 0); }
-		public TerminalNode DECIMAL() { return getToken(SQLParser.DECIMAL, 0); }
-		public TerminalNode DECODE() { return getToken(SQLParser.DECODE, 0); }
-		public TerminalNode DECRYPT_BINARY() { return getToken(SQLParser.DECRYPT_BINARY, 0); }
-		public TerminalNode DECRYPT_BIT() { return getToken(SQLParser.DECRYPT_BIT, 0); }
-		public TerminalNode DECRYPT_CHAR() { return getToken(SQLParser.DECRYPT_CHAR, 0); }
-		public TerminalNode DECRYPT_DATAKEY_BIGINT() { return getToken(SQLParser.DECRYPT_DATAKEY_BIGINT, 0); }
-		public TerminalNode DECRYPT_DATAKEY_BIT() { return getToken(SQLParser.DECRYPT_DATAKEY_BIT, 0); }
-		public TerminalNode DECRYPT_DATAKEY_CLOB() { return getToken(SQLParser.DECRYPT_DATAKEY_CLOB, 0); }
-		public TerminalNode DECRYPT_DATAKEY_DBCLOB() { return getToken(SQLParser.DECRYPT_DATAKEY_DBCLOB, 0); }
-		public TerminalNode DECRYPT_DATAKEY_DECIMAL() { return getToken(SQLParser.DECRYPT_DATAKEY_DECIMAL, 0); }
-		public TerminalNode DECRYPT_DATAKEY_INTEGER() { return getToken(SQLParser.DECRYPT_DATAKEY_INTEGER, 0); }
-		public TerminalNode DECRYPT_DATAKEY_VARCHAR() { return getToken(SQLParser.DECRYPT_DATAKEY_VARCHAR, 0); }
-		public TerminalNode DECRYPT_DATAKEY_VARGRAPHIC() { return getToken(SQLParser.DECRYPT_DATAKEY_VARGRAPHIC, 0); }
-		public TerminalNode DECRYPT_DB() { return getToken(SQLParser.DECRYPT_DB, 0); }
-		public TerminalNode DEGREES() { return getToken(SQLParser.DEGREES, 0); }
-		public TerminalNode DIFFERENCE() { return getToken(SQLParser.DIFFERENCE, 0); }
-		public TerminalNode DIGITS() { return getToken(SQLParser.DIGITS, 0); }
-		public TerminalNode DOUBLE() { return getToken(SQLParser.DOUBLE, 0); }
-		public TerminalNode DOUBLE_PRECISION() { return getToken(SQLParser.DOUBLE_PRECISION, 0); }
-		public TerminalNode DSN_XMLVALIDATE() { return getToken(SQLParser.DSN_XMLVALIDATE, 0); }
-		public TerminalNode EBCDIC_CHR() { return getToken(SQLParser.EBCDIC_CHR, 0); }
-		public TerminalNode EBCDIC_STR() { return getToken(SQLParser.EBCDIC_STR, 0); }
-		public TerminalNode ENCRYPT_DATAKEY() { return getToken(SQLParser.ENCRYPT_DATAKEY, 0); }
-		public TerminalNode ENCRYPT_TDES() { return getToken(SQLParser.ENCRYPT_TDES, 0); }
-		public TerminalNode EXP() { return getToken(SQLParser.EXP, 0); }
-		public TerminalNode EXTRACT() { return getToken(SQLParser.EXTRACT, 0); }
-		public TerminalNode FLOAT() { return getToken(SQLParser.FLOAT, 0); }
-		public TerminalNode FLOOR() { return getToken(SQLParser.FLOOR, 0); }
-		public TerminalNode GENERATE_UNIQUE() { return getToken(SQLParser.GENERATE_UNIQUE, 0); }
-		public TerminalNode GENERATE_UNIQUE_BINARY() { return getToken(SQLParser.GENERATE_UNIQUE_BINARY, 0); }
-		public TerminalNode GETHINT() { return getToken(SQLParser.GETHINT, 0); }
-		public TerminalNode GETVARIABLE() { return getToken(SQLParser.GETVARIABLE, 0); }
-		public TerminalNode GRAPHIC() { return getToken(SQLParser.GRAPHIC, 0); }
-		public TerminalNode GREATEST() { return getToken(SQLParser.GREATEST, 0); }
-		public TerminalNode HASH() { return getToken(SQLParser.HASH, 0); }
-		public TerminalNode HASH_CRC32() { return getToken(SQLParser.HASH_CRC32, 0); }
-		public TerminalNode HASH_MD5() { return getToken(SQLParser.HASH_MD5, 0); }
-		public TerminalNode HASH_SHA1() { return getToken(SQLParser.HASH_SHA1, 0); }
-		public TerminalNode HASH_SHA256() { return getToken(SQLParser.HASH_SHA256, 0); }
-		public TerminalNode HEX() { return getToken(SQLParser.HEX, 0); }
-		public TerminalNode HOUR() { return getToken(SQLParser.HOUR, 0); }
-		public TerminalNode IDENTITY_VAL_LOCAL() { return getToken(SQLParser.IDENTITY_VAL_LOCAL, 0); }
-		public TerminalNode IFNULL() { return getToken(SQLParser.IFNULL, 0); }
-		public TerminalNode INSERT() { return getToken(SQLParser.INSERT, 0); }
-		public TerminalNode INSTR() { return getToken(SQLParser.INSTR, 0); }
-		public TerminalNode INT() { return getToken(SQLParser.INT, 0); }
-		public TerminalNode INTEGER() { return getToken(SQLParser.INTEGER, 0); }
-		public TerminalNode JULIAN_DAY() { return getToken(SQLParser.JULIAN_DAY, 0); }
-		public TerminalNode LAST_DAY() { return getToken(SQLParser.LAST_DAY, 0); }
-		public TerminalNode LCASE() { return getToken(SQLParser.LCASE, 0); }
-		public TerminalNode LEAST() { return getToken(SQLParser.LEAST, 0); }
-		public TerminalNode LEFT() { return getToken(SQLParser.LEFT, 0); }
-		public TerminalNode LENGTH() { return getToken(SQLParser.LENGTH, 0); }
-		public TerminalNode LN() { return getToken(SQLParser.LN, 0); }
-		public TerminalNode LOCATE() { return getToken(SQLParser.LOCATE, 0); }
-		public TerminalNode LOCATE_IN_STRING() { return getToken(SQLParser.LOCATE_IN_STRING, 0); }
-		public TerminalNode LOG10() { return getToken(SQLParser.LOG10, 0); }
-		public TerminalNode LOWER() { return getToken(SQLParser.LOWER, 0); }
-		public TerminalNode LPAD() { return getToken(SQLParser.LPAD, 0); }
-		public TerminalNode LTRIM() { return getToken(SQLParser.LTRIM, 0); }
-		public TerminalNode MAX_CARDINALITY() { return getToken(SQLParser.MAX_CARDINALITY, 0); }
-		public TerminalNode MICROSECOND() { return getToken(SQLParser.MICROSECOND, 0); }
-		public TerminalNode MIDNIGHT_SECONDS() { return getToken(SQLParser.MIDNIGHT_SECONDS, 0); }
-		public TerminalNode MINUTE() { return getToken(SQLParser.MINUTE, 0); }
-		public TerminalNode MOD() { return getToken(SQLParser.MOD, 0); }
-		public TerminalNode MONTH() { return getToken(SQLParser.MONTH, 0); }
-		public TerminalNode MONTHS_BETWEEN() { return getToken(SQLParser.MONTHS_BETWEEN, 0); }
-		public TerminalNode MQREAD() { return getToken(SQLParser.MQREAD, 0); }
-		public TerminalNode MQREADCLOB() { return getToken(SQLParser.MQREADCLOB, 0); }
-		public TerminalNode MQRECEIVE() { return getToken(SQLParser.MQRECEIVE, 0); }
-		public TerminalNode MQRECEIVECLOB() { return getToken(SQLParser.MQRECEIVECLOB, 0); }
-		public TerminalNode MQSEND() { return getToken(SQLParser.MQSEND, 0); }
-		public TerminalNode MULTIPLY_ALT() { return getToken(SQLParser.MULTIPLY_ALT, 0); }
-		public TerminalNode NEXT_DAY() { return getToken(SQLParser.NEXT_DAY, 0); }
-		public TerminalNode NEXT_MONTH() { return getToken(SQLParser.NEXT_MONTH, 0); }
-		public TerminalNode NORMALIZE_DECFLOAT() { return getToken(SQLParser.NORMALIZE_DECFLOAT, 0); }
-		public TerminalNode NORMALIZE_STRING() { return getToken(SQLParser.NORMALIZE_STRING, 0); }
-		public TerminalNode NULLIF() { return getToken(SQLParser.NULLIF, 0); }
-		public TerminalNode NVL() { return getToken(SQLParser.NVL, 0); }
-		public TerminalNode OVERLAY() { return getToken(SQLParser.OVERLAY, 0); }
-		public TerminalNode PACK() { return getToken(SQLParser.PACK, 0); }
-		public TerminalNode POSITION() { return getToken(SQLParser.POSITION, 0); }
-		public TerminalNode POSSTR() { return getToken(SQLParser.POSSTR, 0); }
-		public TerminalNode POW() { return getToken(SQLParser.POW, 0); }
-		public TerminalNode POWER() { return getToken(SQLParser.POWER, 0); }
-		public TerminalNode QUANTIZE() { return getToken(SQLParser.QUANTIZE, 0); }
-		public TerminalNode QUARTER() { return getToken(SQLParser.QUARTER, 0); }
-		public TerminalNode RADIANS() { return getToken(SQLParser.RADIANS, 0); }
-		public TerminalNode RAISE_ERROR() { return getToken(SQLParser.RAISE_ERROR, 0); }
-		public TerminalNode RAND() { return getToken(SQLParser.RAND, 0); }
-		public TerminalNode RANDOM() { return getToken(SQLParser.RANDOM, 0); }
-		public TerminalNode REAL() { return getToken(SQLParser.REAL, 0); }
-		public TerminalNode REGEXP_COUNT() { return getToken(SQLParser.REGEXP_COUNT, 0); }
-		public TerminalNode REGEXP_INSTR() { return getToken(SQLParser.REGEXP_INSTR, 0); }
-		public TerminalNode REGEXP_LIKE() { return getToken(SQLParser.REGEXP_LIKE, 0); }
-		public TerminalNode REGEXP_REPLACE() { return getToken(SQLParser.REGEXP_REPLACE, 0); }
-		public TerminalNode REGEXP_SUBSTR() { return getToken(SQLParser.REGEXP_SUBSTR, 0); }
-		public TerminalNode REPEAT() { return getToken(SQLParser.REPEAT, 0); }
-		public TerminalNode REPLACE() { return getToken(SQLParser.REPLACE, 0); }
-		public TerminalNode RID() { return getToken(SQLParser.RID, 0); }
-		public TerminalNode RIGHT() { return getToken(SQLParser.RIGHT, 0); }
-		public TerminalNode ROUND() { return getToken(SQLParser.ROUND, 0); }
-		public TerminalNode ROUND_TIMESTAMP() { return getToken(SQLParser.ROUND_TIMESTAMP, 0); }
-		public TerminalNode ROWID() { return getToken(SQLParser.ROWID, 0); }
-		public TerminalNode RPAD() { return getToken(SQLParser.RPAD, 0); }
-		public TerminalNode RTRIM() { return getToken(SQLParser.RTRIM, 0); }
-		public TerminalNode SCORE() { return getToken(SQLParser.SCORE, 0); }
-		public TerminalNode SECOND() { return getToken(SQLParser.SECOND, 0); }
-		public TerminalNode SIGN() { return getToken(SQLParser.SIGN, 0); }
-		public TerminalNode SIN() { return getToken(SQLParser.SIN, 0); }
-		public TerminalNode SINH() { return getToken(SQLParser.SINH, 0); }
-		public TerminalNode SMALLINT() { return getToken(SQLParser.SMALLINT, 0); }
-		public TerminalNode SOAPHTTPC() { return getToken(SQLParser.SOAPHTTPC, 0); }
-		public TerminalNode SOAPHTTPNC() { return getToken(SQLParser.SOAPHTTPNC, 0); }
-		public TerminalNode SOAPHTTPNV() { return getToken(SQLParser.SOAPHTTPNV, 0); }
-		public TerminalNode SOAPHTTPV() { return getToken(SQLParser.SOAPHTTPV, 0); }
-		public TerminalNode SOUNDEX() { return getToken(SQLParser.SOUNDEX, 0); }
-		public TerminalNode SPACE() { return getToken(SQLParser.SPACE, 0); }
-		public TerminalNode SQRT() { return getToken(SQLParser.SQRT, 0); }
-		public TerminalNode STRIP() { return getToken(SQLParser.STRIP, 0); }
-		public TerminalNode STRLEFT() { return getToken(SQLParser.STRLEFT, 0); }
-		public TerminalNode STRPOS() { return getToken(SQLParser.STRPOS, 0); }
-		public TerminalNode STRRIGHT() { return getToken(SQLParser.STRRIGHT, 0); }
-		public TerminalNode SUBSTR() { return getToken(SQLParser.SUBSTR, 0); }
-		public TerminalNode SUBSTRING() { return getToken(SQLParser.SUBSTRING, 0); }
-		public TerminalNode TAN() { return getToken(SQLParser.TAN, 0); }
-		public TerminalNode TANH() { return getToken(SQLParser.TANH, 0); }
-		public TerminalNode TIME() { return getToken(SQLParser.TIME, 0); }
-		public TerminalNode TIMESTAMP() { return getToken(SQLParser.TIMESTAMP, 0); }
-		public TerminalNode TIMESTAMPADD() { return getToken(SQLParser.TIMESTAMPADD, 0); }
-		public TerminalNode TIMESTAMPDIFF() { return getToken(SQLParser.TIMESTAMPDIFF, 0); }
-		public TerminalNode TIMESTAMP_FORMAT() { return getToken(SQLParser.TIMESTAMP_FORMAT, 0); }
-		public TerminalNode TIMESTAMP_ISO() { return getToken(SQLParser.TIMESTAMP_ISO, 0); }
-		public TerminalNode TIMESTAMP_TZ() { return getToken(SQLParser.TIMESTAMP_TZ, 0); }
-		public TerminalNode TO_CHAR() { return getToken(SQLParser.TO_CHAR, 0); }
-		public TerminalNode TO_CLOB() { return getToken(SQLParser.TO_CLOB, 0); }
-		public TerminalNode TO_DATE() { return getToken(SQLParser.TO_DATE, 0); }
-		public TerminalNode TO_NUMBER() { return getToken(SQLParser.TO_NUMBER, 0); }
-		public TerminalNode TOTALORDER() { return getToken(SQLParser.TOTALORDER, 0); }
-		public TerminalNode TO_TIMESTAMP() { return getToken(SQLParser.TO_TIMESTAMP, 0); }
-		public TerminalNode TRANSLATE() { return getToken(SQLParser.TRANSLATE, 0); }
-		public TerminalNode TRIM() { return getToken(SQLParser.TRIM, 0); }
-		public TerminalNode TRIM_ARRAY() { return getToken(SQLParser.TRIM_ARRAY, 0); }
-		public TerminalNode TRUNC() { return getToken(SQLParser.TRUNC, 0); }
-		public TerminalNode TRUNCATE() { return getToken(SQLParser.TRUNCATE, 0); }
-		public TerminalNode TRUNC_TIMESTAMP() { return getToken(SQLParser.TRUNC_TIMESTAMP, 0); }
-		public TerminalNode UCASE() { return getToken(SQLParser.UCASE, 0); }
-		public TerminalNode UNICODE() { return getToken(SQLParser.UNICODE, 0); }
-		public TerminalNode UNICODE_STR() { return getToken(SQLParser.UNICODE_STR, 0); }
-		public TerminalNode UNISTR() { return getToken(SQLParser.UNISTR, 0); }
-		public TerminalNode UPPER() { return getToken(SQLParser.UPPER, 0); }
-		public TerminalNode VALUE() { return getToken(SQLParser.VALUE, 0); }
-		public TerminalNode VARBINARY() { return getToken(SQLParser.VARBINARY, 0); }
-		public TerminalNode VARCHAR() { return getToken(SQLParser.VARCHAR, 0); }
-		public TerminalNode VARCHAR9() { return getToken(SQLParser.VARCHAR9, 0); }
-		public TerminalNode VARCHAR_BIT_FORMAT() { return getToken(SQLParser.VARCHAR_BIT_FORMAT, 0); }
-		public TerminalNode VARCHAR_FORMAT() { return getToken(SQLParser.VARCHAR_FORMAT, 0); }
-		public TerminalNode VARGRAPHIC() { return getToken(SQLParser.VARGRAPHIC, 0); }
-		public TerminalNode VERIFY_GROUP_FOR_USER() { return getToken(SQLParser.VERIFY_GROUP_FOR_USER, 0); }
-		public TerminalNode VERIFY_ROLE_FOR_USER() { return getToken(SQLParser.VERIFY_ROLE_FOR_USER, 0); }
-		public TerminalNode VERIFY_TRUSTED_CONTEXT_ROLE_FOR_USER() { return getToken(SQLParser.VERIFY_TRUSTED_CONTEXT_ROLE_FOR_USER, 0); }
-		public TerminalNode WEEK() { return getToken(SQLParser.WEEK, 0); }
-		public TerminalNode WEEK_ISO() { return getToken(SQLParser.WEEK_ISO, 0); }
-		public TerminalNode WRAP() { return getToken(SQLParser.WRAP, 0); }
-		public TerminalNode XMLATTRIBUTES() { return getToken(SQLParser.XMLATTRIBUTES, 0); }
-		public TerminalNode XMLCOMMENT() { return getToken(SQLParser.XMLCOMMENT, 0); }
-		public TerminalNode XMLCONCAT() { return getToken(SQLParser.XMLCONCAT, 0); }
-		public TerminalNode XMLDOCUMENT() { return getToken(SQLParser.XMLDOCUMENT, 0); }
-		public TerminalNode XMLELEMENT() { return getToken(SQLParser.XMLELEMENT, 0); }
-		public TerminalNode XMLFOREST() { return getToken(SQLParser.XMLFOREST, 0); }
-		public TerminalNode XMLMODIFY() { return getToken(SQLParser.XMLMODIFY, 0); }
-		public TerminalNode XMLNAMESPACES() { return getToken(SQLParser.XMLNAMESPACES, 0); }
-		public TerminalNode XMLPARSE() { return getToken(SQLParser.XMLPARSE, 0); }
-		public TerminalNode XMLPI() { return getToken(SQLParser.XMLPI, 0); }
-		public TerminalNode XMLQUERY() { return getToken(SQLParser.XMLQUERY, 0); }
-		public TerminalNode XMLSERIALIZE() { return getToken(SQLParser.XMLSERIALIZE, 0); }
-		public TerminalNode XMLTEXT() { return getToken(SQLParser.XMLTEXT, 0); }
-		public TerminalNode XMLXSROBJECTID() { return getToken(SQLParser.XMLXSROBJECTID, 0); }
-		public TerminalNode XSLTRANSFORM() { return getToken(SQLParser.XSLTRANSFORM, 0); }
-		public TerminalNode YEAR() { return getToken(SQLParser.YEAR, 0); }
+		public TerminalNode ABS() { return getToken(DB2zSQLParser.ABS, 0); }
+		public TerminalNode ABSVAL() { return getToken(DB2zSQLParser.ABSVAL, 0); }
+		public TerminalNode ACOS() { return getToken(DB2zSQLParser.ACOS, 0); }
+		public TerminalNode ADD_DAYS() { return getToken(DB2zSQLParser.ADD_DAYS, 0); }
+		public TerminalNode ADD_MONTHS() { return getToken(DB2zSQLParser.ADD_MONTHS, 0); }
+		public TerminalNode ARRAY_DELETE() { return getToken(DB2zSQLParser.ARRAY_DELETE, 0); }
+		public TerminalNode ARRAY_FIRST() { return getToken(DB2zSQLParser.ARRAY_FIRST, 0); }
+		public TerminalNode ARRAY_LAST() { return getToken(DB2zSQLParser.ARRAY_LAST, 0); }
+		public TerminalNode ARRAY_NEXT() { return getToken(DB2zSQLParser.ARRAY_NEXT, 0); }
+		public TerminalNode ARRAY_PRIOR() { return getToken(DB2zSQLParser.ARRAY_PRIOR, 0); }
+		public TerminalNode ARRAY_TRIM() { return getToken(DB2zSQLParser.ARRAY_TRIM, 0); }
+		public TerminalNode ASCII() { return getToken(DB2zSQLParser.ASCII, 0); }
+		public TerminalNode ASCII_CHR() { return getToken(DB2zSQLParser.ASCII_CHR, 0); }
+		public TerminalNode ASCIISTR() { return getToken(DB2zSQLParser.ASCIISTR, 0); }
+		public TerminalNode ASCII_STR() { return getToken(DB2zSQLParser.ASCII_STR, 0); }
+		public TerminalNode ASIN() { return getToken(DB2zSQLParser.ASIN, 0); }
+		public TerminalNode ATAN() { return getToken(DB2zSQLParser.ATAN, 0); }
+		public TerminalNode ATAN2() { return getToken(DB2zSQLParser.ATAN2, 0); }
+		public TerminalNode ATANH() { return getToken(DB2zSQLParser.ATANH, 0); }
+		public TerminalNode BIGINT() { return getToken(DB2zSQLParser.BIGINT, 0); }
+		public TerminalNode BINARY() { return getToken(DB2zSQLParser.BINARY, 0); }
+		public TerminalNode BITAND() { return getToken(DB2zSQLParser.BITAND, 0); }
+		public TerminalNode BITANDNOT() { return getToken(DB2zSQLParser.BITANDNOT, 0); }
+		public TerminalNode BITNOT() { return getToken(DB2zSQLParser.BITNOT, 0); }
+		public TerminalNode BITOR() { return getToken(DB2zSQLParser.BITOR, 0); }
+		public TerminalNode BITXOR() { return getToken(DB2zSQLParser.BITXOR, 0); }
+		public TerminalNode BLOB() { return getToken(DB2zSQLParser.BLOB, 0); }
+		public TerminalNode BTRIM() { return getToken(DB2zSQLParser.BTRIM, 0); }
+		public TerminalNode CARDINALITY() { return getToken(DB2zSQLParser.CARDINALITY, 0); }
+		public TerminalNode CCSID_ENCODING() { return getToken(DB2zSQLParser.CCSID_ENCODING, 0); }
+		public TerminalNode CEIL() { return getToken(DB2zSQLParser.CEIL, 0); }
+		public TerminalNode CEILING() { return getToken(DB2zSQLParser.CEILING, 0); }
+		public TerminalNode CHAR() { return getToken(DB2zSQLParser.CHAR, 0); }
+		public TerminalNode CHAR9() { return getToken(DB2zSQLParser.CHAR9, 0); }
+		public TerminalNode CHARACTER_LENGTH() { return getToken(DB2zSQLParser.CHARACTER_LENGTH, 0); }
+		public TerminalNode CHAR_LENGTH() { return getToken(DB2zSQLParser.CHAR_LENGTH, 0); }
+		public TerminalNode CHR() { return getToken(DB2zSQLParser.CHR, 0); }
+		public TerminalNode CLOB() { return getToken(DB2zSQLParser.CLOB, 0); }
+		public TerminalNode COALESCE() { return getToken(DB2zSQLParser.COALESCE, 0); }
+		public TerminalNode COLLATION_KEY() { return getToken(DB2zSQLParser.COLLATION_KEY, 0); }
+		public TerminalNode COMPARE_DECFLOAT() { return getToken(DB2zSQLParser.COMPARE_DECFLOAT, 0); }
+		public TerminalNode CONCAT() { return getToken(DB2zSQLParser.CONCAT, 0); }
+		public TerminalNode CONTAINS() { return getToken(DB2zSQLParser.CONTAINS, 0); }
+		public TerminalNode COS() { return getToken(DB2zSQLParser.COS, 0); }
+		public TerminalNode COSH() { return getToken(DB2zSQLParser.COSH, 0); }
+		public TerminalNode DATE() { return getToken(DB2zSQLParser.DATE, 0); }
+		public TerminalNode DAY() { return getToken(DB2zSQLParser.DAY, 0); }
+		public TerminalNode DAYOFMONTH() { return getToken(DB2zSQLParser.DAYOFMONTH, 0); }
+		public TerminalNode DAYOFWEEK() { return getToken(DB2zSQLParser.DAYOFWEEK, 0); }
+		public TerminalNode DAYOFWEEK_ISO() { return getToken(DB2zSQLParser.DAYOFWEEK_ISO, 0); }
+		public TerminalNode DAYOFYEAR() { return getToken(DB2zSQLParser.DAYOFYEAR, 0); }
+		public TerminalNode DAYS() { return getToken(DB2zSQLParser.DAYS, 0); }
+		public TerminalNode DAYS_BETWEEN() { return getToken(DB2zSQLParser.DAYS_BETWEEN, 0); }
+		public TerminalNode DBCLOB() { return getToken(DB2zSQLParser.DBCLOB, 0); }
+		public TerminalNode DEC() { return getToken(DB2zSQLParser.DEC, 0); }
+		public TerminalNode DECFLOAT() { return getToken(DB2zSQLParser.DECFLOAT, 0); }
+		public TerminalNode DECFLOAT_FORMAT() { return getToken(DB2zSQLParser.DECFLOAT_FORMAT, 0); }
+		public TerminalNode DECFLOAT_SORTKEY() { return getToken(DB2zSQLParser.DECFLOAT_SORTKEY, 0); }
+		public TerminalNode DECIMAL() { return getToken(DB2zSQLParser.DECIMAL, 0); }
+		public TerminalNode DECODE() { return getToken(DB2zSQLParser.DECODE, 0); }
+		public TerminalNode DECRYPT_BINARY() { return getToken(DB2zSQLParser.DECRYPT_BINARY, 0); }
+		public TerminalNode DECRYPT_BIT() { return getToken(DB2zSQLParser.DECRYPT_BIT, 0); }
+		public TerminalNode DECRYPT_CHAR() { return getToken(DB2zSQLParser.DECRYPT_CHAR, 0); }
+		public TerminalNode DECRYPT_DATAKEY_BIGINT() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_BIGINT, 0); }
+		public TerminalNode DECRYPT_DATAKEY_BIT() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_BIT, 0); }
+		public TerminalNode DECRYPT_DATAKEY_CLOB() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_CLOB, 0); }
+		public TerminalNode DECRYPT_DATAKEY_DBCLOB() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_DBCLOB, 0); }
+		public TerminalNode DECRYPT_DATAKEY_DECIMAL() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_DECIMAL, 0); }
+		public TerminalNode DECRYPT_DATAKEY_INTEGER() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_INTEGER, 0); }
+		public TerminalNode DECRYPT_DATAKEY_VARCHAR() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_VARCHAR, 0); }
+		public TerminalNode DECRYPT_DATAKEY_VARGRAPHIC() { return getToken(DB2zSQLParser.DECRYPT_DATAKEY_VARGRAPHIC, 0); }
+		public TerminalNode DECRYPT_DB() { return getToken(DB2zSQLParser.DECRYPT_DB, 0); }
+		public TerminalNode DEGREES() { return getToken(DB2zSQLParser.DEGREES, 0); }
+		public TerminalNode DIFFERENCE() { return getToken(DB2zSQLParser.DIFFERENCE, 0); }
+		public TerminalNode DIGITS() { return getToken(DB2zSQLParser.DIGITS, 0); }
+		public TerminalNode DOUBLE() { return getToken(DB2zSQLParser.DOUBLE, 0); }
+		public TerminalNode DOUBLE_PRECISION() { return getToken(DB2zSQLParser.DOUBLE_PRECISION, 0); }
+		public TerminalNode DSN_XMLVALIDATE() { return getToken(DB2zSQLParser.DSN_XMLVALIDATE, 0); }
+		public TerminalNode EBCDIC_CHR() { return getToken(DB2zSQLParser.EBCDIC_CHR, 0); }
+		public TerminalNode EBCDIC_STR() { return getToken(DB2zSQLParser.EBCDIC_STR, 0); }
+		public TerminalNode ENCRYPT_DATAKEY() { return getToken(DB2zSQLParser.ENCRYPT_DATAKEY, 0); }
+		public TerminalNode ENCRYPT_TDES() { return getToken(DB2zSQLParser.ENCRYPT_TDES, 0); }
+		public TerminalNode EXP() { return getToken(DB2zSQLParser.EXP, 0); }
+		public TerminalNode EXTRACT() { return getToken(DB2zSQLParser.EXTRACT, 0); }
+		public TerminalNode FLOAT() { return getToken(DB2zSQLParser.FLOAT, 0); }
+		public TerminalNode FLOOR() { return getToken(DB2zSQLParser.FLOOR, 0); }
+		public TerminalNode GENERATE_UNIQUE() { return getToken(DB2zSQLParser.GENERATE_UNIQUE, 0); }
+		public TerminalNode GENERATE_UNIQUE_BINARY() { return getToken(DB2zSQLParser.GENERATE_UNIQUE_BINARY, 0); }
+		public TerminalNode GETHINT() { return getToken(DB2zSQLParser.GETHINT, 0); }
+		public TerminalNode GETVARIABLE() { return getToken(DB2zSQLParser.GETVARIABLE, 0); }
+		public TerminalNode GRAPHIC() { return getToken(DB2zSQLParser.GRAPHIC, 0); }
+		public TerminalNode GREATEST() { return getToken(DB2zSQLParser.GREATEST, 0); }
+		public TerminalNode HASH() { return getToken(DB2zSQLParser.HASH, 0); }
+		public TerminalNode HASH_CRC32() { return getToken(DB2zSQLParser.HASH_CRC32, 0); }
+		public TerminalNode HASH_MD5() { return getToken(DB2zSQLParser.HASH_MD5, 0); }
+		public TerminalNode HASH_SHA1() { return getToken(DB2zSQLParser.HASH_SHA1, 0); }
+		public TerminalNode HASH_SHA256() { return getToken(DB2zSQLParser.HASH_SHA256, 0); }
+		public TerminalNode HEX() { return getToken(DB2zSQLParser.HEX, 0); }
+		public TerminalNode HOUR() { return getToken(DB2zSQLParser.HOUR, 0); }
+		public TerminalNode IDENTITY_VAL_LOCAL() { return getToken(DB2zSQLParser.IDENTITY_VAL_LOCAL, 0); }
+		public TerminalNode IFNULL() { return getToken(DB2zSQLParser.IFNULL, 0); }
+		public TerminalNode INSERT() { return getToken(DB2zSQLParser.INSERT, 0); }
+		public TerminalNode INSTR() { return getToken(DB2zSQLParser.INSTR, 0); }
+		public TerminalNode INT() { return getToken(DB2zSQLParser.INT, 0); }
+		public TerminalNode INTEGER() { return getToken(DB2zSQLParser.INTEGER, 0); }
+		public TerminalNode JULIAN_DAY() { return getToken(DB2zSQLParser.JULIAN_DAY, 0); }
+		public TerminalNode LAST_DAY() { return getToken(DB2zSQLParser.LAST_DAY, 0); }
+		public TerminalNode LCASE() { return getToken(DB2zSQLParser.LCASE, 0); }
+		public TerminalNode LEAST() { return getToken(DB2zSQLParser.LEAST, 0); }
+		public TerminalNode LEFT() { return getToken(DB2zSQLParser.LEFT, 0); }
+		public TerminalNode LENGTH() { return getToken(DB2zSQLParser.LENGTH, 0); }
+		public TerminalNode LN() { return getToken(DB2zSQLParser.LN, 0); }
+		public TerminalNode LOCATE() { return getToken(DB2zSQLParser.LOCATE, 0); }
+		public TerminalNode LOCATE_IN_STRING() { return getToken(DB2zSQLParser.LOCATE_IN_STRING, 0); }
+		public TerminalNode LOG10() { return getToken(DB2zSQLParser.LOG10, 0); }
+		public TerminalNode LOWER() { return getToken(DB2zSQLParser.LOWER, 0); }
+		public TerminalNode LPAD() { return getToken(DB2zSQLParser.LPAD, 0); }
+		public TerminalNode LTRIM() { return getToken(DB2zSQLParser.LTRIM, 0); }
+		public TerminalNode MAX_CARDINALITY() { return getToken(DB2zSQLParser.MAX_CARDINALITY, 0); }
+		public TerminalNode MICROSECOND() { return getToken(DB2zSQLParser.MICROSECOND, 0); }
+		public TerminalNode MIDNIGHT_SECONDS() { return getToken(DB2zSQLParser.MIDNIGHT_SECONDS, 0); }
+		public TerminalNode MINUTE() { return getToken(DB2zSQLParser.MINUTE, 0); }
+		public TerminalNode MOD() { return getToken(DB2zSQLParser.MOD, 0); }
+		public TerminalNode MONTH() { return getToken(DB2zSQLParser.MONTH, 0); }
+		public TerminalNode MONTHS_BETWEEN() { return getToken(DB2zSQLParser.MONTHS_BETWEEN, 0); }
+		public TerminalNode MQREAD() { return getToken(DB2zSQLParser.MQREAD, 0); }
+		public TerminalNode MQREADCLOB() { return getToken(DB2zSQLParser.MQREADCLOB, 0); }
+		public TerminalNode MQRECEIVE() { return getToken(DB2zSQLParser.MQRECEIVE, 0); }
+		public TerminalNode MQRECEIVECLOB() { return getToken(DB2zSQLParser.MQRECEIVECLOB, 0); }
+		public TerminalNode MQSEND() { return getToken(DB2zSQLParser.MQSEND, 0); }
+		public TerminalNode MULTIPLY_ALT() { return getToken(DB2zSQLParser.MULTIPLY_ALT, 0); }
+		public TerminalNode NEXT_DAY() { return getToken(DB2zSQLParser.NEXT_DAY, 0); }
+		public TerminalNode NEXT_MONTH() { return getToken(DB2zSQLParser.NEXT_MONTH, 0); }
+		public TerminalNode NORMALIZE_DECFLOAT() { return getToken(DB2zSQLParser.NORMALIZE_DECFLOAT, 0); }
+		public TerminalNode NORMALIZE_STRING() { return getToken(DB2zSQLParser.NORMALIZE_STRING, 0); }
+		public TerminalNode NULLIF() { return getToken(DB2zSQLParser.NULLIF, 0); }
+		public TerminalNode NVL() { return getToken(DB2zSQLParser.NVL, 0); }
+		public TerminalNode OVERLAY() { return getToken(DB2zSQLParser.OVERLAY, 0); }
+		public TerminalNode PACK() { return getToken(DB2zSQLParser.PACK, 0); }
+		public TerminalNode POSITION() { return getToken(DB2zSQLParser.POSITION, 0); }
+		public TerminalNode POSSTR() { return getToken(DB2zSQLParser.POSSTR, 0); }
+		public TerminalNode POW() { return getToken(DB2zSQLParser.POW, 0); }
+		public TerminalNode POWER() { return getToken(DB2zSQLParser.POWER, 0); }
+		public TerminalNode QUANTIZE() { return getToken(DB2zSQLParser.QUANTIZE, 0); }
+		public TerminalNode QUARTER() { return getToken(DB2zSQLParser.QUARTER, 0); }
+		public TerminalNode RADIANS() { return getToken(DB2zSQLParser.RADIANS, 0); }
+		public TerminalNode RAISE_ERROR() { return getToken(DB2zSQLParser.RAISE_ERROR, 0); }
+		public TerminalNode RAND() { return getToken(DB2zSQLParser.RAND, 0); }
+		public TerminalNode RANDOM() { return getToken(DB2zSQLParser.RANDOM, 0); }
+		public TerminalNode REAL() { return getToken(DB2zSQLParser.REAL, 0); }
+		public TerminalNode REGEXP_COUNT() { return getToken(DB2zSQLParser.REGEXP_COUNT, 0); }
+		public TerminalNode REGEXP_INSTR() { return getToken(DB2zSQLParser.REGEXP_INSTR, 0); }
+		public TerminalNode REGEXP_LIKE() { return getToken(DB2zSQLParser.REGEXP_LIKE, 0); }
+		public TerminalNode REGEXP_REPLACE() { return getToken(DB2zSQLParser.REGEXP_REPLACE, 0); }
+		public TerminalNode REGEXP_SUBSTR() { return getToken(DB2zSQLParser.REGEXP_SUBSTR, 0); }
+		public TerminalNode REPEAT() { return getToken(DB2zSQLParser.REPEAT, 0); }
+		public TerminalNode REPLACE() { return getToken(DB2zSQLParser.REPLACE, 0); }
+		public TerminalNode RID() { return getToken(DB2zSQLParser.RID, 0); }
+		public TerminalNode RIGHT() { return getToken(DB2zSQLParser.RIGHT, 0); }
+		public TerminalNode ROUND() { return getToken(DB2zSQLParser.ROUND, 0); }
+		public TerminalNode ROUND_TIMESTAMP() { return getToken(DB2zSQLParser.ROUND_TIMESTAMP, 0); }
+		public TerminalNode ROWID() { return getToken(DB2zSQLParser.ROWID, 0); }
+		public TerminalNode RPAD() { return getToken(DB2zSQLParser.RPAD, 0); }
+		public TerminalNode RTRIM() { return getToken(DB2zSQLParser.RTRIM, 0); }
+		public TerminalNode SCORE() { return getToken(DB2zSQLParser.SCORE, 0); }
+		public TerminalNode SECOND() { return getToken(DB2zSQLParser.SECOND, 0); }
+		public TerminalNode SIGN() { return getToken(DB2zSQLParser.SIGN, 0); }
+		public TerminalNode SIN() { return getToken(DB2zSQLParser.SIN, 0); }
+		public TerminalNode SINH() { return getToken(DB2zSQLParser.SINH, 0); }
+		public TerminalNode SMALLINT() { return getToken(DB2zSQLParser.SMALLINT, 0); }
+		public TerminalNode SOAPHTTPC() { return getToken(DB2zSQLParser.SOAPHTTPC, 0); }
+		public TerminalNode SOAPHTTPNC() { return getToken(DB2zSQLParser.SOAPHTTPNC, 0); }
+		public TerminalNode SOAPHTTPNV() { return getToken(DB2zSQLParser.SOAPHTTPNV, 0); }
+		public TerminalNode SOAPHTTPV() { return getToken(DB2zSQLParser.SOAPHTTPV, 0); }
+		public TerminalNode SOUNDEX() { return getToken(DB2zSQLParser.SOUNDEX, 0); }
+		public TerminalNode SPACE() { return getToken(DB2zSQLParser.SPACE, 0); }
+		public TerminalNode SQRT() { return getToken(DB2zSQLParser.SQRT, 0); }
+		public TerminalNode STRIP() { return getToken(DB2zSQLParser.STRIP, 0); }
+		public TerminalNode STRLEFT() { return getToken(DB2zSQLParser.STRLEFT, 0); }
+		public TerminalNode STRPOS() { return getToken(DB2zSQLParser.STRPOS, 0); }
+		public TerminalNode STRRIGHT() { return getToken(DB2zSQLParser.STRRIGHT, 0); }
+		public TerminalNode SUBSTR() { return getToken(DB2zSQLParser.SUBSTR, 0); }
+		public TerminalNode SUBSTRING() { return getToken(DB2zSQLParser.SUBSTRING, 0); }
+		public TerminalNode TAN() { return getToken(DB2zSQLParser.TAN, 0); }
+		public TerminalNode TANH() { return getToken(DB2zSQLParser.TANH, 0); }
+		public TerminalNode TIME() { return getToken(DB2zSQLParser.TIME, 0); }
+		public TerminalNode TIMESTAMP() { return getToken(DB2zSQLParser.TIMESTAMP, 0); }
+		public TerminalNode TIMESTAMPADD() { return getToken(DB2zSQLParser.TIMESTAMPADD, 0); }
+		public TerminalNode TIMESTAMPDIFF() { return getToken(DB2zSQLParser.TIMESTAMPDIFF, 0); }
+		public TerminalNode TIMESTAMP_FORMAT() { return getToken(DB2zSQLParser.TIMESTAMP_FORMAT, 0); }
+		public TerminalNode TIMESTAMP_ISO() { return getToken(DB2zSQLParser.TIMESTAMP_ISO, 0); }
+		public TerminalNode TIMESTAMP_TZ() { return getToken(DB2zSQLParser.TIMESTAMP_TZ, 0); }
+		public TerminalNode TO_CHAR() { return getToken(DB2zSQLParser.TO_CHAR, 0); }
+		public TerminalNode TO_CLOB() { return getToken(DB2zSQLParser.TO_CLOB, 0); }
+		public TerminalNode TO_DATE() { return getToken(DB2zSQLParser.TO_DATE, 0); }
+		public TerminalNode TO_NUMBER() { return getToken(DB2zSQLParser.TO_NUMBER, 0); }
+		public TerminalNode TOTALORDER() { return getToken(DB2zSQLParser.TOTALORDER, 0); }
+		public TerminalNode TO_TIMESTAMP() { return getToken(DB2zSQLParser.TO_TIMESTAMP, 0); }
+		public TerminalNode TRANSLATE() { return getToken(DB2zSQLParser.TRANSLATE, 0); }
+		public TerminalNode TRIM() { return getToken(DB2zSQLParser.TRIM, 0); }
+		public TerminalNode TRIM_ARRAY() { return getToken(DB2zSQLParser.TRIM_ARRAY, 0); }
+		public TerminalNode TRUNC() { return getToken(DB2zSQLParser.TRUNC, 0); }
+		public TerminalNode TRUNCATE() { return getToken(DB2zSQLParser.TRUNCATE, 0); }
+		public TerminalNode TRUNC_TIMESTAMP() { return getToken(DB2zSQLParser.TRUNC_TIMESTAMP, 0); }
+		public TerminalNode UCASE() { return getToken(DB2zSQLParser.UCASE, 0); }
+		public TerminalNode UNICODE() { return getToken(DB2zSQLParser.UNICODE, 0); }
+		public TerminalNode UNICODE_STR() { return getToken(DB2zSQLParser.UNICODE_STR, 0); }
+		public TerminalNode UNISTR() { return getToken(DB2zSQLParser.UNISTR, 0); }
+		public TerminalNode UPPER() { return getToken(DB2zSQLParser.UPPER, 0); }
+		public TerminalNode VALUE() { return getToken(DB2zSQLParser.VALUE, 0); }
+		public TerminalNode VARBINARY() { return getToken(DB2zSQLParser.VARBINARY, 0); }
+		public TerminalNode VARCHAR() { return getToken(DB2zSQLParser.VARCHAR, 0); }
+		public TerminalNode VARCHAR9() { return getToken(DB2zSQLParser.VARCHAR9, 0); }
+		public TerminalNode VARCHAR_BIT_FORMAT() { return getToken(DB2zSQLParser.VARCHAR_BIT_FORMAT, 0); }
+		public TerminalNode VARCHAR_FORMAT() { return getToken(DB2zSQLParser.VARCHAR_FORMAT, 0); }
+		public TerminalNode VARGRAPHIC() { return getToken(DB2zSQLParser.VARGRAPHIC, 0); }
+		public TerminalNode VERIFY_GROUP_FOR_USER() { return getToken(DB2zSQLParser.VERIFY_GROUP_FOR_USER, 0); }
+		public TerminalNode VERIFY_ROLE_FOR_USER() { return getToken(DB2zSQLParser.VERIFY_ROLE_FOR_USER, 0); }
+		public TerminalNode VERIFY_TRUSTED_CONTEXT_ROLE_FOR_USER() { return getToken(DB2zSQLParser.VERIFY_TRUSTED_CONTEXT_ROLE_FOR_USER, 0); }
+		public TerminalNode WEEK() { return getToken(DB2zSQLParser.WEEK, 0); }
+		public TerminalNode WEEK_ISO() { return getToken(DB2zSQLParser.WEEK_ISO, 0); }
+		public TerminalNode WRAP() { return getToken(DB2zSQLParser.WRAP, 0); }
+		public TerminalNode XMLATTRIBUTES() { return getToken(DB2zSQLParser.XMLATTRIBUTES, 0); }
+		public TerminalNode XMLCOMMENT() { return getToken(DB2zSQLParser.XMLCOMMENT, 0); }
+		public TerminalNode XMLCONCAT() { return getToken(DB2zSQLParser.XMLCONCAT, 0); }
+		public TerminalNode XMLDOCUMENT() { return getToken(DB2zSQLParser.XMLDOCUMENT, 0); }
+		public TerminalNode XMLELEMENT() { return getToken(DB2zSQLParser.XMLELEMENT, 0); }
+		public TerminalNode XMLFOREST() { return getToken(DB2zSQLParser.XMLFOREST, 0); }
+		public TerminalNode XMLMODIFY() { return getToken(DB2zSQLParser.XMLMODIFY, 0); }
+		public TerminalNode XMLNAMESPACES() { return getToken(DB2zSQLParser.XMLNAMESPACES, 0); }
+		public TerminalNode XMLPARSE() { return getToken(DB2zSQLParser.XMLPARSE, 0); }
+		public TerminalNode XMLPI() { return getToken(DB2zSQLParser.XMLPI, 0); }
+		public TerminalNode XMLQUERY() { return getToken(DB2zSQLParser.XMLQUERY, 0); }
+		public TerminalNode XMLSERIALIZE() { return getToken(DB2zSQLParser.XMLSERIALIZE, 0); }
+		public TerminalNode XMLTEXT() { return getToken(DB2zSQLParser.XMLTEXT, 0); }
+		public TerminalNode XMLXSROBJECTID() { return getToken(DB2zSQLParser.XMLXSROBJECTID, 0); }
+		public TerminalNode XSLTRANSFORM() { return getToken(DB2zSQLParser.XSLTRANSFORM, 0); }
+		public TerminalNode YEAR() { return getToken(DB2zSQLParser.YEAR, 0); }
 		public ScalarFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_scalarFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterScalarFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterScalarFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitScalarFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitScalarFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitScalarFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitScalarFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13330,30 +13330,30 @@ public class SQLParser extends Parser {
 	}
 
 	public static class TableFunctionContext extends ParserRuleContext {
-		public TerminalNode ADMIN_TASK_LIST() { return getToken(SQLParser.ADMIN_TASK_LIST, 0); }
-		public TerminalNode ADMIN_TASK_OUTPUT() { return getToken(SQLParser.ADMIN_TASK_OUTPUT, 0); }
-		public TerminalNode ADMIN_TASK_STATUS() { return getToken(SQLParser.ADMIN_TASK_STATUS, 0); }
-		public TerminalNode BLOCKING_THREADS() { return getToken(SQLParser.BLOCKING_THREADS, 0); }
-		public TerminalNode MQREADALL() { return getToken(SQLParser.MQREADALL, 0); }
-		public TerminalNode MQREADALLCLOB() { return getToken(SQLParser.MQREADALLCLOB, 0); }
-		public TerminalNode MQRECEIVEALL() { return getToken(SQLParser.MQRECEIVEALL, 0); }
-		public TerminalNode MQRECEIVEALLCLOB() { return getToken(SQLParser.MQRECEIVEALLCLOB, 0); }
-		public TerminalNode XMLTABLE() { return getToken(SQLParser.XMLTABLE, 0); }
+		public TerminalNode ADMIN_TASK_LIST() { return getToken(DB2zSQLParser.ADMIN_TASK_LIST, 0); }
+		public TerminalNode ADMIN_TASK_OUTPUT() { return getToken(DB2zSQLParser.ADMIN_TASK_OUTPUT, 0); }
+		public TerminalNode ADMIN_TASK_STATUS() { return getToken(DB2zSQLParser.ADMIN_TASK_STATUS, 0); }
+		public TerminalNode BLOCKING_THREADS() { return getToken(DB2zSQLParser.BLOCKING_THREADS, 0); }
+		public TerminalNode MQREADALL() { return getToken(DB2zSQLParser.MQREADALL, 0); }
+		public TerminalNode MQREADALLCLOB() { return getToken(DB2zSQLParser.MQREADALLCLOB, 0); }
+		public TerminalNode MQRECEIVEALL() { return getToken(DB2zSQLParser.MQRECEIVEALL, 0); }
+		public TerminalNode MQRECEIVEALLCLOB() { return getToken(DB2zSQLParser.MQRECEIVEALLCLOB, 0); }
+		public TerminalNode XMLTABLE() { return getToken(DB2zSQLParser.XMLTABLE, 0); }
 		public TableFunctionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tableFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTableFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTableFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTableFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTableFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTableFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTableFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13389,60 +13389,60 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SpecialRegisterContext extends ParserRuleContext {
-		public TerminalNode CURRENT_ACCELERATOR() { return getToken(SQLParser.CURRENT_ACCELERATOR, 0); }
-		public TerminalNode CURRENT_APPLICATION_COMPATIBILITY() { return getToken(SQLParser.CURRENT_APPLICATION_COMPATIBILITY, 0); }
-		public TerminalNode CURRENT_APPLICATION_ENCODING_SCHEME() { return getToken(SQLParser.CURRENT_APPLICATION_ENCODING_SCHEME, 0); }
-		public TerminalNode CURRENT_CLIENT_ACCTNG() { return getToken(SQLParser.CURRENT_CLIENT_ACCTNG, 0); }
-		public TerminalNode CURRENT_CLIENT_APPLNAME() { return getToken(SQLParser.CURRENT_CLIENT_APPLNAME, 0); }
-		public TerminalNode CURRENT_CLIENT_CORR_TOKEN() { return getToken(SQLParser.CURRENT_CLIENT_CORR_TOKEN, 0); }
-		public TerminalNode CURRENT_CLIENT_USERID() { return getToken(SQLParser.CURRENT_CLIENT_USERID, 0); }
-		public TerminalNode CURRENT_CLIENT_WRKSTNNAME() { return getToken(SQLParser.CURRENT_CLIENT_WRKSTNNAME, 0); }
-		public TerminalNode CURRENT_DATE() { return getToken(SQLParser.CURRENT_DATE, 0); }
-		public TerminalNode CURRENT_DEBUG_MODE() { return getToken(SQLParser.CURRENT_DEBUG_MODE, 0); }
-		public TerminalNode CURRENT_DECFLOAT_ROUNDING_MODE() { return getToken(SQLParser.CURRENT_DECFLOAT_ROUNDING_MODE, 0); }
-		public TerminalNode CURRENT_DEGREE() { return getToken(SQLParser.CURRENT_DEGREE, 0); }
-		public TerminalNode CURRENT_EXPLAIN_MODE() { return getToken(SQLParser.CURRENT_EXPLAIN_MODE, 0); }
-		public TerminalNode CURRENT_GET_ACCEL_ARCHIVE() { return getToken(SQLParser.CURRENT_GET_ACCEL_ARCHIVE, 0); }
-		public TerminalNode CURRENT_LOCALE_LC_CTYPE() { return getToken(SQLParser.CURRENT_LOCALE_LC_CTYPE, 0); }
-		public TerminalNode CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION() { return getToken(SQLParser.CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION, 0); }
-		public TerminalNode CURRENT_MEMBER() { return getToken(SQLParser.CURRENT_MEMBER, 0); }
-		public TerminalNode CURRENT_OPTIMIZATION_HINT() { return getToken(SQLParser.CURRENT_OPTIMIZATION_HINT, 0); }
-		public TerminalNode CURRENT_PACKAGE_PATH() { return getToken(SQLParser.CURRENT_PACKAGE_PATH, 0); }
-		public TerminalNode CURRENT_PACKAGESET() { return getToken(SQLParser.CURRENT_PACKAGESET, 0); }
-		public TerminalNode CURRENT_PATH() { return getToken(SQLParser.CURRENT_PATH, 0); }
-		public TerminalNode CURRENT_PRECISION() { return getToken(SQLParser.CURRENT_PRECISION, 0); }
-		public TerminalNode CURRENT_QUERY_ACCELERATION() { return getToken(SQLParser.CURRENT_QUERY_ACCELERATION, 0); }
-		public TerminalNode CURRENT_QUERY_ACCELERATION_WAITFORDATA() { return getToken(SQLParser.CURRENT_QUERY_ACCELERATION_WAITFORDATA, 0); }
-		public TerminalNode CURRENT_REFRESH_AGE() { return getToken(SQLParser.CURRENT_REFRESH_AGE, 0); }
-		public TerminalNode CURRENT_ROUTINE_VERSION() { return getToken(SQLParser.CURRENT_ROUTINE_VERSION, 0); }
-		public TerminalNode CURRENT_RULES() { return getToken(SQLParser.CURRENT_RULES, 0); }
-		public TerminalNode CURRENT_SCHEMA() { return getToken(SQLParser.CURRENT_SCHEMA, 0); }
-		public TerminalNode CURRENT_SERVER() { return getToken(SQLParser.CURRENT_SERVER, 0); }
-		public TerminalNode CURRENT_SQLID() { return getToken(SQLParser.CURRENT_SQLID, 0); }
-		public TerminalNode CURRENT_TEMPORAL_BUSINESS_TIME() { return getToken(SQLParser.CURRENT_TEMPORAL_BUSINESS_TIME, 0); }
-		public TerminalNode CURRENT_TEMPORAL_SYSTEM_TIME() { return getToken(SQLParser.CURRENT_TEMPORAL_SYSTEM_TIME, 0); }
-		public TerminalNode CURRENT_TIME() { return getToken(SQLParser.CURRENT_TIME, 0); }
-		public TerminalNode CURRENT_TIMESTAMP() { return getToken(SQLParser.CURRENT_TIMESTAMP, 0); }
-		public TerminalNode CURRENT_TIME_ZONE() { return getToken(SQLParser.CURRENT_TIME_ZONE, 0); }
-		public TerminalNode ENCRYPTION_PASSWORD() { return getToken(SQLParser.ENCRYPTION_PASSWORD, 0); }
-		public TerminalNode SESSION_TIME_ZONE() { return getToken(SQLParser.SESSION_TIME_ZONE, 0); }
-		public TerminalNode SESSION_USER() { return getToken(SQLParser.SESSION_USER, 0); }
-		public TerminalNode USER() { return getToken(SQLParser.USER, 0); }
+		public TerminalNode CURRENT_ACCELERATOR() { return getToken(DB2zSQLParser.CURRENT_ACCELERATOR, 0); }
+		public TerminalNode CURRENT_APPLICATION_COMPATIBILITY() { return getToken(DB2zSQLParser.CURRENT_APPLICATION_COMPATIBILITY, 0); }
+		public TerminalNode CURRENT_APPLICATION_ENCODING_SCHEME() { return getToken(DB2zSQLParser.CURRENT_APPLICATION_ENCODING_SCHEME, 0); }
+		public TerminalNode CURRENT_CLIENT_ACCTNG() { return getToken(DB2zSQLParser.CURRENT_CLIENT_ACCTNG, 0); }
+		public TerminalNode CURRENT_CLIENT_APPLNAME() { return getToken(DB2zSQLParser.CURRENT_CLIENT_APPLNAME, 0); }
+		public TerminalNode CURRENT_CLIENT_CORR_TOKEN() { return getToken(DB2zSQLParser.CURRENT_CLIENT_CORR_TOKEN, 0); }
+		public TerminalNode CURRENT_CLIENT_USERID() { return getToken(DB2zSQLParser.CURRENT_CLIENT_USERID, 0); }
+		public TerminalNode CURRENT_CLIENT_WRKSTNNAME() { return getToken(DB2zSQLParser.CURRENT_CLIENT_WRKSTNNAME, 0); }
+		public TerminalNode CURRENT_DATE() { return getToken(DB2zSQLParser.CURRENT_DATE, 0); }
+		public TerminalNode CURRENT_DEBUG_MODE() { return getToken(DB2zSQLParser.CURRENT_DEBUG_MODE, 0); }
+		public TerminalNode CURRENT_DECFLOAT_ROUNDING_MODE() { return getToken(DB2zSQLParser.CURRENT_DECFLOAT_ROUNDING_MODE, 0); }
+		public TerminalNode CURRENT_DEGREE() { return getToken(DB2zSQLParser.CURRENT_DEGREE, 0); }
+		public TerminalNode CURRENT_EXPLAIN_MODE() { return getToken(DB2zSQLParser.CURRENT_EXPLAIN_MODE, 0); }
+		public TerminalNode CURRENT_GET_ACCEL_ARCHIVE() { return getToken(DB2zSQLParser.CURRENT_GET_ACCEL_ARCHIVE, 0); }
+		public TerminalNode CURRENT_LOCALE_LC_CTYPE() { return getToken(DB2zSQLParser.CURRENT_LOCALE_LC_CTYPE, 0); }
+		public TerminalNode CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION() { return getToken(DB2zSQLParser.CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION, 0); }
+		public TerminalNode CURRENT_MEMBER() { return getToken(DB2zSQLParser.CURRENT_MEMBER, 0); }
+		public TerminalNode CURRENT_OPTIMIZATION_HINT() { return getToken(DB2zSQLParser.CURRENT_OPTIMIZATION_HINT, 0); }
+		public TerminalNode CURRENT_PACKAGE_PATH() { return getToken(DB2zSQLParser.CURRENT_PACKAGE_PATH, 0); }
+		public TerminalNode CURRENT_PACKAGESET() { return getToken(DB2zSQLParser.CURRENT_PACKAGESET, 0); }
+		public TerminalNode CURRENT_PATH() { return getToken(DB2zSQLParser.CURRENT_PATH, 0); }
+		public TerminalNode CURRENT_PRECISION() { return getToken(DB2zSQLParser.CURRENT_PRECISION, 0); }
+		public TerminalNode CURRENT_QUERY_ACCELERATION() { return getToken(DB2zSQLParser.CURRENT_QUERY_ACCELERATION, 0); }
+		public TerminalNode CURRENT_QUERY_ACCELERATION_WAITFORDATA() { return getToken(DB2zSQLParser.CURRENT_QUERY_ACCELERATION_WAITFORDATA, 0); }
+		public TerminalNode CURRENT_REFRESH_AGE() { return getToken(DB2zSQLParser.CURRENT_REFRESH_AGE, 0); }
+		public TerminalNode CURRENT_ROUTINE_VERSION() { return getToken(DB2zSQLParser.CURRENT_ROUTINE_VERSION, 0); }
+		public TerminalNode CURRENT_RULES() { return getToken(DB2zSQLParser.CURRENT_RULES, 0); }
+		public TerminalNode CURRENT_SCHEMA() { return getToken(DB2zSQLParser.CURRENT_SCHEMA, 0); }
+		public TerminalNode CURRENT_SERVER() { return getToken(DB2zSQLParser.CURRENT_SERVER, 0); }
+		public TerminalNode CURRENT_SQLID() { return getToken(DB2zSQLParser.CURRENT_SQLID, 0); }
+		public TerminalNode CURRENT_TEMPORAL_BUSINESS_TIME() { return getToken(DB2zSQLParser.CURRENT_TEMPORAL_BUSINESS_TIME, 0); }
+		public TerminalNode CURRENT_TEMPORAL_SYSTEM_TIME() { return getToken(DB2zSQLParser.CURRENT_TEMPORAL_SYSTEM_TIME, 0); }
+		public TerminalNode CURRENT_TIME() { return getToken(DB2zSQLParser.CURRENT_TIME, 0); }
+		public TerminalNode CURRENT_TIMESTAMP() { return getToken(DB2zSQLParser.CURRENT_TIMESTAMP, 0); }
+		public TerminalNode CURRENT_TIME_ZONE() { return getToken(DB2zSQLParser.CURRENT_TIME_ZONE, 0); }
+		public TerminalNode ENCRYPTION_PASSWORD() { return getToken(DB2zSQLParser.ENCRYPTION_PASSWORD, 0); }
+		public TerminalNode SESSION_TIME_ZONE() { return getToken(DB2zSQLParser.SESSION_TIME_ZONE, 0); }
+		public TerminalNode SESSION_USER() { return getToken(DB2zSQLParser.SESSION_USER, 0); }
+		public TerminalNode USER() { return getToken(DB2zSQLParser.USER, 0); }
 		public SpecialRegisterContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_specialRegister; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSpecialRegister(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSpecialRegister(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSpecialRegister(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSpecialRegister(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSpecialRegister(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSpecialRegister(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13478,27 +13478,27 @@ public class SQLParser extends Parser {
 	}
 
 	public static class XmltableFunctionSpecificationContext extends ParserRuleContext {
-		public TerminalNode XMLTABLE() { return getToken(SQLParser.XMLTABLE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode XMLTABLE() { return getToken(DB2zSQLParser.XMLTABLE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public RowXqueryExpressionConstantContext rowXqueryExpressionConstant() {
 			return getRuleContext(RowXqueryExpressionConstantContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public XmlnamespacesDeclarationContext xmlnamespacesDeclaration() {
 			return getRuleContext(XmlnamespacesDeclarationContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public TerminalNode PASSING() { return getToken(SQLParser.PASSING, 0); }
+		public TerminalNode PASSING() { return getToken(DB2zSQLParser.PASSING, 0); }
 		public List<RowXqueryArgumentContext> rowXqueryArgument() {
 			return getRuleContexts(RowXqueryArgumentContext.class);
 		}
 		public RowXqueryArgumentContext rowXqueryArgument(int i) {
 			return getRuleContext(RowXqueryArgumentContext.class,i);
 		}
-		public TerminalNode COLUMNS() { return getToken(SQLParser.COLUMNS, 0); }
+		public TerminalNode COLUMNS() { return getToken(DB2zSQLParser.COLUMNS, 0); }
 		public List<XmlTableRegularColumnDefinitionContext> xmlTableRegularColumnDefinition() {
 			return getRuleContexts(XmlTableRegularColumnDefinitionContext.class);
 		}
@@ -13511,23 +13511,23 @@ public class SQLParser extends Parser {
 		public XmlTableOrdinalityColumnDefinitionContext xmlTableOrdinalityColumnDefinition(int i) {
 			return getRuleContext(XmlTableOrdinalityColumnDefinitionContext.class,i);
 		}
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
-		public TerminalNode REF() { return getToken(SQLParser.REF, 0); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
+		public TerminalNode REF() { return getToken(DB2zSQLParser.REF, 0); }
 		public XmltableFunctionSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_xmltableFunctionSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmltableFunctionSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmltableFunctionSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmltableFunctionSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmltableFunctionSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmltableFunctionSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmltableFunctionSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13661,22 +13661,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RowXqueryExpressionConstantContext extends ParserRuleContext {
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
 		public RowXqueryExpressionConstantContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_rowXqueryExpressionConstant; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRowXqueryExpressionConstant(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRowXqueryExpressionConstant(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRowXqueryExpressionConstant(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRowXqueryExpressionConstant(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRowXqueryExpressionConstant(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRowXqueryExpressionConstant(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13711,7 +13711,7 @@ public class SQLParser extends Parser {
 		public XqueryVariableExpressionContext xqueryVariableExpression() {
 			return getRuleContext(XqueryVariableExpressionContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
 		}
@@ -13721,15 +13721,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_rowXqueryArgument; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRowXqueryArgument(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRowXqueryArgument(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRowXqueryArgument(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRowXqueryArgument(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRowXqueryArgument(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRowXqueryArgument(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13787,15 +13787,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xqueryContextItemExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXqueryContextItemExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXqueryContextItemExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXqueryContextItemExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXqueryContextItemExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXqueryContextItemExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXqueryContextItemExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13833,15 +13833,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xqueryVariableExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXqueryVariableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXqueryVariableExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXqueryVariableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXqueryVariableExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXqueryVariableExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXqueryVariableExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13879,7 +13879,7 @@ public class SQLParser extends Parser {
 		public DefaultClauseContext defaultClause() {
 			return getRuleContext(DefaultClauseContext.class,0);
 		}
-		public TerminalNode PATH() { return getToken(SQLParser.PATH, 0); }
+		public TerminalNode PATH() { return getToken(DB2zSQLParser.PATH, 0); }
 		public ColumnXqueryExpressionConstantContext columnXqueryExpressionConstant() {
 			return getRuleContext(ColumnXqueryExpressionConstantContext.class,0);
 		}
@@ -13889,15 +13889,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xmlTableRegularColumnDefinition; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlTableRegularColumnDefinition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlTableRegularColumnDefinition(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlTableRegularColumnDefinition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlTableRegularColumnDefinition(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlTableRegularColumnDefinition(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlTableRegularColumnDefinition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -13954,31 +13954,31 @@ public class SQLParser extends Parser {
 	}
 
 	public static class DefaultClauseContext extends ParserRuleContext {
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
 		public DefaultClauseAllowablesContext defaultClauseAllowables() {
 			return getRuleContext(DefaultClauseAllowablesContext.class,0);
 		}
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
 		public DistinctTypeCastFunctionNameContext distinctTypeCastFunctionName() {
 			return getRuleContext(DistinctTypeCastFunctionNameContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public DefaultClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defaultClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDefaultClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDefaultClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDefaultClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDefaultClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDefaultClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDefaultClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14045,26 +14045,26 @@ public class SQLParser extends Parser {
 		public LiteralContext literal() {
 			return getRuleContext(LiteralContext.class,0);
 		}
-		public TerminalNode SESSION_USER() { return getToken(SQLParser.SESSION_USER, 0); }
-		public TerminalNode USER() { return getToken(SQLParser.USER, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public TerminalNode SQLID() { return getToken(SQLParser.SQLID, 0); }
+		public TerminalNode SESSION_USER() { return getToken(DB2zSQLParser.SESSION_USER, 0); }
+		public TerminalNode USER() { return getToken(DB2zSQLParser.USER, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public TerminalNode SQLID() { return getToken(DB2zSQLParser.SQLID, 0); }
 		public DefaultClauseAllowablesContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_defaultClauseAllowables; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDefaultClauseAllowables(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDefaultClauseAllowables(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDefaultClauseAllowables(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDefaultClauseAllowables(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDefaultClauseAllowables(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDefaultClauseAllowables(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14137,22 +14137,22 @@ public class SQLParser extends Parser {
 		public IdentifierContext identifier(int i) {
 			return getRuleContext(IdentifierContext.class,i);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public DistinctTypeCastFunctionNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_distinctTypeCastFunctionName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDistinctTypeCastFunctionName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDistinctTypeCastFunctionName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDistinctTypeCastFunctionName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDistinctTypeCastFunctionName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDistinctTypeCastFunctionName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDistinctTypeCastFunctionName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14185,22 +14185,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ColumnXqueryExpressionConstantContext extends ParserRuleContext {
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
 		public ColumnXqueryExpressionConstantContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_columnXqueryExpressionConstant; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterColumnXqueryExpressionConstant(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterColumnXqueryExpressionConstant(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitColumnXqueryExpressionConstant(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitColumnXqueryExpressionConstant(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitColumnXqueryExpressionConstant(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitColumnXqueryExpressionConstant(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14232,23 +14232,23 @@ public class SQLParser extends Parser {
 		public ColumnNameContext columnName() {
 			return getRuleContext(ColumnNameContext.class,0);
 		}
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode ORDINALITY() { return getToken(SQLParser.ORDINALITY, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode ORDINALITY() { return getToken(DB2zSQLParser.ORDINALITY, 0); }
 		public XmlTableOrdinalityColumnDefinitionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_xmlTableOrdinalityColumnDefinition; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlTableOrdinalityColumnDefinition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlTableOrdinalityColumnDefinition(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlTableOrdinalityColumnDefinition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlTableOrdinalityColumnDefinition(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlTableOrdinalityColumnDefinition(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlTableOrdinalityColumnDefinition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14287,9 +14287,9 @@ public class SQLParser extends Parser {
 		public XmlnamespacesFunctionSpecificationContext xmlnamespacesFunctionSpecification(int i) {
 			return getRuleContext(XmlnamespacesFunctionSpecificationContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public XmlnamespacesDeclarationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -14297,15 +14297,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xmlnamespacesDeclaration; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlnamespacesDeclaration(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlnamespacesDeclaration(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlnamespacesDeclaration(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlnamespacesDeclaration(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlnamespacesDeclaration(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlnamespacesDeclaration(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14353,18 +14353,18 @@ public class SQLParser extends Parser {
 	}
 
 	public static class XmlnamespacesFunctionSpecificationContext extends ParserRuleContext {
-		public TerminalNode XMLNAMESPACES() { return getToken(SQLParser.XMLNAMESPACES, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode XMLNAMESPACES() { return getToken(DB2zSQLParser.XMLNAMESPACES, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<XmlnamespacesFunctionArgumentsContext> xmlnamespacesFunctionArguments() {
 			return getRuleContexts(XmlnamespacesFunctionArgumentsContext.class);
 		}
 		public XmlnamespacesFunctionArgumentsContext xmlnamespacesFunctionArguments(int i) {
 			return getRuleContext(XmlnamespacesFunctionArgumentsContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public XmlnamespacesFunctionSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -14372,15 +14372,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xmlnamespacesFunctionSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlnamespacesFunctionSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlnamespacesFunctionSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlnamespacesFunctionSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlnamespacesFunctionSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlnamespacesFunctionSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlnamespacesFunctionSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14435,27 +14435,27 @@ public class SQLParser extends Parser {
 		public NamespaceUriContext namespaceUri() {
 			return getRuleContext(NamespaceUriContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public NamespacePrefixContext namespacePrefix() {
 			return getRuleContext(NamespacePrefixContext.class,0);
 		}
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
-		public TerminalNode NO() { return getToken(SQLParser.NO, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
+		public TerminalNode NO() { return getToken(DB2zSQLParser.NO, 0); }
 		public XmlnamespacesFunctionArgumentsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_xmlnamespacesFunctionArguments; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlnamespacesFunctionArguments(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlnamespacesFunctionArguments(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlnamespacesFunctionArguments(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlnamespacesFunctionArguments(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlnamespacesFunctionArguments(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlnamespacesFunctionArguments(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14520,22 +14520,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class NamespaceUriContext extends ParserRuleContext {
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
 		public NamespaceUriContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_namespaceUri; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNamespaceUri(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNamespaceUri(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNamespaceUri(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNamespaceUri(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNamespaceUri(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNamespaceUri(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14562,22 +14562,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class NamespacePrefixContext extends ParserRuleContext {
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
 		public NamespacePrefixContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_namespacePrefix; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNamespacePrefix(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNamespacePrefix(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNamespacePrefix(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNamespacePrefix(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNamespacePrefix(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNamespacePrefix(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14610,25 +14610,25 @@ public class SQLParser extends Parser {
 		public TimeZoneExpressionSubsetContext timeZoneExpressionSubset(int i) {
 			return getRuleContext(TimeZoneExpressionSubsetContext.class,i);
 		}
-		public TerminalNode AT() { return getToken(SQLParser.AT, 0); }
-		public TerminalNode LOCAL() { return getToken(SQLParser.LOCAL, 0); }
-		public TerminalNode TIME() { return getToken(SQLParser.TIME, 0); }
-		public TerminalNode ZONE() { return getToken(SQLParser.ZONE, 0); }
+		public TerminalNode AT() { return getToken(DB2zSQLParser.AT, 0); }
+		public TerminalNode LOCAL() { return getToken(DB2zSQLParser.LOCAL, 0); }
+		public TerminalNode TIME() { return getToken(DB2zSQLParser.TIME, 0); }
+		public TerminalNode ZONE() { return getToken(DB2zSQLParser.ZONE, 0); }
 		public TimeZoneSpecificExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_timeZoneSpecificExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTimeZoneSpecificExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTimeZoneSpecificExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTimeZoneSpecificExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTimeZoneSpecificExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTimeZoneSpecificExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTimeZoneSpecificExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14713,15 +14713,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_timeZoneExpressionSubset; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTimeZoneExpressionSubset(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTimeZoneExpressionSubset(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTimeZoneExpressionSubset(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTimeZoneExpressionSubset(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTimeZoneExpressionSubset(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTimeZoneExpressionSubset(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14798,16 +14798,16 @@ public class SQLParser extends Parser {
 	}
 
 	public static class CaseExpressionContext extends ParserRuleContext {
-		public TerminalNode CASE() { return getToken(SQLParser.CASE, 0); }
-		public TerminalNode END() { return getToken(SQLParser.END, 0); }
+		public TerminalNode CASE() { return getToken(DB2zSQLParser.CASE, 0); }
+		public TerminalNode END() { return getToken(DB2zSQLParser.END, 0); }
 		public SearchedWhenClauseContext searchedWhenClause() {
 			return getRuleContext(SearchedWhenClauseContext.class,0);
 		}
 		public SimpleWhenClauseContext simpleWhenClause() {
 			return getRuleContext(SimpleWhenClauseContext.class,0);
 		}
-		public TerminalNode ELSE() { return getToken(SQLParser.ELSE, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode ELSE() { return getToken(DB2zSQLParser.ELSE, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public ResultExpressionContext resultExpression() {
 			return getRuleContext(ResultExpressionContext.class,0);
 		}
@@ -14817,15 +14817,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_caseExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCaseExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCaseExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCaseExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCaseExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCaseExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCaseExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14903,15 +14903,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_resultExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterResultExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterResultExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitResultExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitResultExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitResultExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitResultExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -14938,30 +14938,30 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SearchedWhenClauseContext extends ParserRuleContext {
-		public TerminalNode WHEN() { return getToken(SQLParser.WHEN, 0); }
+		public TerminalNode WHEN() { return getToken(DB2zSQLParser.WHEN, 0); }
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
 		}
-		public TerminalNode THEN() { return getToken(SQLParser.THEN, 0); }
+		public TerminalNode THEN() { return getToken(DB2zSQLParser.THEN, 0); }
 		public ResultExpressionContext resultExpression() {
 			return getRuleContext(ResultExpressionContext.class,0);
 		}
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public SearchedWhenClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_searchedWhenClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSearchedWhenClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSearchedWhenClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSearchedWhenClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSearchedWhenClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSearchedWhenClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSearchedWhenClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15014,27 +15014,27 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode WHEN() { return getToken(SQLParser.WHEN, 0); }
-		public TerminalNode THEN() { return getToken(SQLParser.THEN, 0); }
+		public TerminalNode WHEN() { return getToken(DB2zSQLParser.WHEN, 0); }
+		public TerminalNode THEN() { return getToken(DB2zSQLParser.THEN, 0); }
 		public ResultExpressionContext resultExpression() {
 			return getRuleContext(ResultExpressionContext.class,0);
 		}
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public SimpleWhenClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_simpleWhenClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSimpleWhenClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSimpleWhenClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSimpleWhenClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSimpleWhenClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSimpleWhenClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSimpleWhenClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15083,9 +15083,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SearchConditionContext extends ParserRuleContext {
-		public List<TerminalNode> NOT() { return getTokens(SQLParser.NOT); }
+		public List<TerminalNode> NOT() { return getTokens(DB2zSQLParser.NOT); }
 		public TerminalNode NOT(int i) {
-			return getToken(SQLParser.NOT, i);
+			return getToken(DB2zSQLParser.NOT, i);
 		}
 		public List<PredicateContext> predicate() {
 			return getRuleContexts(PredicateContext.class);
@@ -15093,9 +15093,9 @@ public class SQLParser extends Parser {
 		public PredicateContext predicate(int i) {
 			return getRuleContext(PredicateContext.class,i);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public List<SearchConditionContext> searchCondition() {
 			return getRuleContexts(SearchConditionContext.class);
@@ -15103,35 +15103,35 @@ public class SQLParser extends Parser {
 		public SearchConditionContext searchCondition(int i) {
 			return getRuleContext(SearchConditionContext.class,i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public List<TerminalNode> AND() { return getTokens(SQLParser.AND); }
+		public List<TerminalNode> AND() { return getTokens(DB2zSQLParser.AND); }
 		public TerminalNode AND(int i) {
-			return getToken(SQLParser.AND, i);
+			return getToken(DB2zSQLParser.AND, i);
 		}
-		public List<TerminalNode> OR() { return getTokens(SQLParser.OR); }
+		public List<TerminalNode> OR() { return getTokens(DB2zSQLParser.OR); }
 		public TerminalNode OR(int i) {
-			return getToken(SQLParser.OR, i);
+			return getToken(DB2zSQLParser.OR, i);
 		}
-		public TerminalNode SELECTIVITY() { return getToken(SQLParser.SELECTIVITY, 0); }
-		public TerminalNode NUMERICLITERAL() { return getToken(SQLParser.NUMERICLITERAL, 0); }
+		public TerminalNode SELECTIVITY() { return getToken(DB2zSQLParser.SELECTIVITY, 0); }
+		public TerminalNode NUMERICLITERAL() { return getToken(DB2zSQLParser.NUMERICLITERAL, 0); }
 		public SearchConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_searchCondition; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSearchCondition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSearchCondition(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSearchCondition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSearchCondition(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSearchCondition(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSearchCondition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15293,15 +15293,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_predicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15418,15 +15418,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_basicPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterBasicPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterBasicPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitBasicPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitBasicPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitBasicPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitBasicPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15479,17 +15479,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class RowValueExpressionContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public RowValueExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -15497,15 +15497,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_rowValueExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterRowValueExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterRowValueExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitRowValueExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitRowValueExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitRowValueExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitRowValueExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15559,34 +15559,34 @@ public class SQLParser extends Parser {
 		public ComparisonOperatorContext comparisonOperator() {
 			return getRuleContext(ComparisonOperatorContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public RowValueExpressionContext rowValueExpression() {
 			return getRuleContext(RowValueExpressionContext.class,0);
 		}
-		public TerminalNode EQ() { return getToken(SQLParser.EQ, 0); }
-		public TerminalNode NE() { return getToken(SQLParser.NE, 0); }
-		public TerminalNode ALL() { return getToken(SQLParser.ALL, 0); }
-		public TerminalNode SOME() { return getToken(SQLParser.SOME, 0); }
-		public TerminalNode ANY() { return getToken(SQLParser.ANY, 0); }
+		public TerminalNode EQ() { return getToken(DB2zSQLParser.EQ, 0); }
+		public TerminalNode NE() { return getToken(DB2zSQLParser.NE, 0); }
+		public TerminalNode ALL() { return getToken(DB2zSQLParser.ALL, 0); }
+		public TerminalNode SOME() { return getToken(DB2zSQLParser.SOME, 0); }
+		public TerminalNode ANY() { return getToken(DB2zSQLParser.ANY, 0); }
 		public QuantifiedPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_quantifiedPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterQuantifiedPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterQuantifiedPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitQuantifiedPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitQuantifiedPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitQuantifiedPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitQuantifiedPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15686,28 +15686,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ArrayExistsPredicateContext extends ParserRuleContext {
-		public TerminalNode ARRAY_EXISTS() { return getToken(SQLParser.ARRAY_EXISTS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode ARRAY_EXISTS() { return getToken(DB2zSQLParser.ARRAY_EXISTS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public ArrayExpressionContext arrayExpression() {
 			return getRuleContext(ArrayExpressionContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public ArrayExistsPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_arrayExistsPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterArrayExistsPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterArrayExistsPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitArrayExistsPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitArrayExistsPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitArrayExistsPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitArrayExistsPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15748,24 +15748,24 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode BETWEEN() { return getToken(SQLParser.BETWEEN, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
+		public TerminalNode BETWEEN() { return getToken(DB2zSQLParser.BETWEEN, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
 		public BetweenPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_betweenPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterBetweenPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterBetweenPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitBetweenPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitBetweenPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitBetweenPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitBetweenPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15817,25 +15817,25 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode IS() { return getToken(SQLParser.IS, 0); }
-		public TerminalNode DISTINCT() { return getToken(SQLParser.DISTINCT, 0); }
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
+		public TerminalNode IS() { return getToken(DB2zSQLParser.IS, 0); }
+		public TerminalNode DISTINCT() { return getToken(DB2zSQLParser.DISTINCT, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
 		public DistinctPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_distinctPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDistinctPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDistinctPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDistinctPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDistinctPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDistinctPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDistinctPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15881,27 +15881,27 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ExistsPredicateContext extends ParserRuleContext {
-		public TerminalNode EXISTS() { return getToken(SQLParser.EXISTS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode EXISTS() { return getToken(DB2zSQLParser.EXISTS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public ExistsPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_existsPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterExistsPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterExistsPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitExistsPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitExistsPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitExistsPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitExistsPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -15940,16 +15940,16 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode IN() { return getToken(SQLParser.IN, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode IN() { return getToken(DB2zSQLParser.IN, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public InPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -15957,15 +15957,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_inPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterInPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterInPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitInPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitInPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitInPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitInPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16055,24 +16055,24 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode LIKE() { return getToken(SQLParser.LIKE, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode ESCAPE() { return getToken(SQLParser.ESCAPE, 0); }
+		public TerminalNode LIKE() { return getToken(DB2zSQLParser.LIKE, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode ESCAPE() { return getToken(DB2zSQLParser.ESCAPE, 0); }
 		public LikePredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_likePredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLikePredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLikePredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLikePredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLikePredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLikePredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLikePredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16129,26 +16129,26 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode ISNULL() { return getToken(SQLParser.ISNULL, 0); }
-		public TerminalNode NOTNULL() { return getToken(SQLParser.NOTNULL, 0); }
-		public TerminalNode IS() { return getToken(SQLParser.IS, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
+		public TerminalNode ISNULL() { return getToken(DB2zSQLParser.ISNULL, 0); }
+		public TerminalNode NOTNULL() { return getToken(DB2zSQLParser.NOTNULL, 0); }
+		public TerminalNode IS() { return getToken(DB2zSQLParser.IS, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
 		public NullPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_nullPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNullPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNullPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNullPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNullPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNullPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNullPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16214,22 +16214,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class XmlExistsPredicateContext extends ParserRuleContext {
-		public TerminalNode XMLEXISTS() { return getToken(SQLParser.XMLEXISTS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode PASSING() { return getToken(SQLParser.PASSING, 0); }
+		public TerminalNode XMLEXISTS() { return getToken(DB2zSQLParser.XMLEXISTS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode PASSING() { return getToken(DB2zSQLParser.PASSING, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
-		public TerminalNode REF() { return getToken(SQLParser.REF, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
+		public TerminalNode REF() { return getToken(DB2zSQLParser.REF, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public XmlExistsPredicateContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -16237,15 +16237,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xmlExistsPredicate; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmlExistsPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmlExistsPredicate(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmlExistsPredicate(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmlExistsPredicate(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmlExistsPredicate(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmlExistsPredicate(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16331,15 +16331,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_arrayExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterArrayExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterArrayExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitArrayExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitArrayExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitArrayExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitArrayExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16379,17 +16379,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class CastSpecificationContext extends ParserRuleContext {
-		public TerminalNode CAST() { return getToken(SQLParser.CAST, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode CAST() { return getToken(DB2zSQLParser.CAST, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public DataTypeContext dataType() {
 			return getRuleContext(DataTypeContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
 		public ParameterMarkerContext parameterMarker() {
 			return getRuleContext(ParameterMarkerContext.class,0);
 		}
@@ -16399,15 +16399,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_castSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCastSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCastSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCastSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCastSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCastSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCastSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16464,22 +16464,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ParameterMarkerContext extends ParserRuleContext {
-		public TerminalNode QUESTIONMARK() { return getToken(SQLParser.QUESTIONMARK, 0); }
+		public TerminalNode QUESTIONMARK() { return getToken(DB2zSQLParser.QUESTIONMARK, 0); }
 		public ParameterMarkerContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_parameterMarker; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterParameterMarker(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterParameterMarker(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitParameterMarker(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitParameterMarker(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitParameterMarker(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitParameterMarker(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16521,15 +16521,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_dataType; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDataType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDataType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDataType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDataType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDataType(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDataType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -16576,67 +16576,67 @@ public class SQLParser extends Parser {
 	}
 
 	public static class BuiltInTypeContext extends ParserRuleContext {
-		public TerminalNode SMALLINT() { return getToken(SQLParser.SMALLINT, 0); }
-		public TerminalNode INTEGER() { return getToken(SQLParser.INTEGER, 0); }
-		public TerminalNode INT() { return getToken(SQLParser.INT, 0); }
-		public TerminalNode BIGINT() { return getToken(SQLParser.BIGINT, 0); }
-		public TerminalNode REAL() { return getToken(SQLParser.REAL, 0); }
-		public TerminalNode DATE() { return getToken(SQLParser.DATE, 0); }
-		public TerminalNode TIME() { return getToken(SQLParser.TIME, 0); }
-		public TerminalNode ROWID() { return getToken(SQLParser.ROWID, 0); }
-		public TerminalNode XML() { return getToken(SQLParser.XML, 0); }
-		public TerminalNode DECFLOAT() { return getToken(SQLParser.DECFLOAT, 0); }
-		public TerminalNode FLOAT() { return getToken(SQLParser.FLOAT, 0); }
-		public TerminalNode DOUBLE() { return getToken(SQLParser.DOUBLE, 0); }
-		public TerminalNode BINARY() { return getToken(SQLParser.BINARY, 0); }
-		public TerminalNode TIMESTAMP() { return getToken(SQLParser.TIMESTAMP, 0); }
-		public TerminalNode DECIMAL() { return getToken(SQLParser.DECIMAL, 0); }
-		public TerminalNode DEC() { return getToken(SQLParser.DEC, 0); }
-		public TerminalNode NUMERIC() { return getToken(SQLParser.NUMERIC, 0); }
-		public TerminalNode GRAPHIC() { return getToken(SQLParser.GRAPHIC, 0); }
-		public TerminalNode VARGRAPHIC() { return getToken(SQLParser.VARGRAPHIC, 0); }
-		public TerminalNode DBCLOB() { return getToken(SQLParser.DBCLOB, 0); }
+		public TerminalNode SMALLINT() { return getToken(DB2zSQLParser.SMALLINT, 0); }
+		public TerminalNode INTEGER() { return getToken(DB2zSQLParser.INTEGER, 0); }
+		public TerminalNode INT() { return getToken(DB2zSQLParser.INT, 0); }
+		public TerminalNode BIGINT() { return getToken(DB2zSQLParser.BIGINT, 0); }
+		public TerminalNode REAL() { return getToken(DB2zSQLParser.REAL, 0); }
+		public TerminalNode DATE() { return getToken(DB2zSQLParser.DATE, 0); }
+		public TerminalNode TIME() { return getToken(DB2zSQLParser.TIME, 0); }
+		public TerminalNode ROWID() { return getToken(DB2zSQLParser.ROWID, 0); }
+		public TerminalNode XML() { return getToken(DB2zSQLParser.XML, 0); }
+		public TerminalNode DECFLOAT() { return getToken(DB2zSQLParser.DECFLOAT, 0); }
+		public TerminalNode FLOAT() { return getToken(DB2zSQLParser.FLOAT, 0); }
+		public TerminalNode DOUBLE() { return getToken(DB2zSQLParser.DOUBLE, 0); }
+		public TerminalNode BINARY() { return getToken(DB2zSQLParser.BINARY, 0); }
+		public TerminalNode TIMESTAMP() { return getToken(DB2zSQLParser.TIMESTAMP, 0); }
+		public TerminalNode DECIMAL() { return getToken(DB2zSQLParser.DECIMAL, 0); }
+		public TerminalNode DEC() { return getToken(DB2zSQLParser.DEC, 0); }
+		public TerminalNode NUMERIC() { return getToken(DB2zSQLParser.NUMERIC, 0); }
+		public TerminalNode GRAPHIC() { return getToken(DB2zSQLParser.GRAPHIC, 0); }
+		public TerminalNode VARGRAPHIC() { return getToken(DB2zSQLParser.VARGRAPHIC, 0); }
+		public TerminalNode DBCLOB() { return getToken(DB2zSQLParser.DBCLOB, 0); }
 		public IntegerInParensContext integerInParens() {
 			return getRuleContext(IntegerInParensContext.class,0);
 		}
-		public TerminalNode VARCHAR() { return getToken(SQLParser.VARCHAR, 0); }
-		public TerminalNode CLOB() { return getToken(SQLParser.CLOB, 0); }
-		public TerminalNode VARBINARY() { return getToken(SQLParser.VARBINARY, 0); }
-		public TerminalNode BLOB() { return getToken(SQLParser.BLOB, 0); }
-		public TerminalNode ZONE() { return getToken(SQLParser.ZONE, 0); }
-		public TerminalNode PRECISION() { return getToken(SQLParser.PRECISION, 0); }
+		public TerminalNode VARCHAR() { return getToken(DB2zSQLParser.VARCHAR, 0); }
+		public TerminalNode CLOB() { return getToken(DB2zSQLParser.CLOB, 0); }
+		public TerminalNode VARBINARY() { return getToken(DB2zSQLParser.VARBINARY, 0); }
+		public TerminalNode BLOB() { return getToken(DB2zSQLParser.BLOB, 0); }
+		public TerminalNode ZONE() { return getToken(DB2zSQLParser.ZONE, 0); }
+		public TerminalNode PRECISION() { return getToken(DB2zSQLParser.PRECISION, 0); }
 		public LengthContext length() {
 			return getRuleContext(LengthContext.class,0);
 		}
 		public CcsidQualifierContext ccsidQualifier() {
 			return getRuleContext(CcsidQualifierContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
-		public TerminalNode WITHOUT() { return getToken(SQLParser.WITHOUT, 0); }
-		public TerminalNode LARGE() { return getToken(SQLParser.LARGE, 0); }
-		public TerminalNode OBJECT() { return getToken(SQLParser.OBJECT, 0); }
-		public TerminalNode CHARACTER() { return getToken(SQLParser.CHARACTER, 0); }
-		public TerminalNode CHAR() { return getToken(SQLParser.CHAR, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode SQLIDENTIFIER() { return getToken(SQLParser.SQLIDENTIFIER, 0); }
-		public TerminalNode VARYING() { return getToken(SQLParser.VARYING, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
+		public TerminalNode WITHOUT() { return getToken(DB2zSQLParser.WITHOUT, 0); }
+		public TerminalNode LARGE() { return getToken(DB2zSQLParser.LARGE, 0); }
+		public TerminalNode OBJECT() { return getToken(DB2zSQLParser.OBJECT, 0); }
+		public TerminalNode CHARACTER() { return getToken(DB2zSQLParser.CHARACTER, 0); }
+		public TerminalNode CHAR() { return getToken(DB2zSQLParser.CHAR, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode SQLIDENTIFIER() { return getToken(DB2zSQLParser.SQLIDENTIFIER, 0); }
+		public TerminalNode VARYING() { return getToken(DB2zSQLParser.VARYING, 0); }
 		public BuiltInTypeContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_builtInType; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterBuiltInType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterBuiltInType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitBuiltInType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitBuiltInType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitBuiltInType(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitBuiltInType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17186,28 +17186,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class IntegerInParensContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public List<TerminalNode> INTEGERLITERAL() { return getTokens(SQLParser.INTEGERLITERAL); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public List<TerminalNode> INTEGERLITERAL() { return getTokens(DB2zSQLParser.INTEGERLITERAL); }
 		public TerminalNode INTEGERLITERAL(int i) {
-			return getToken(SQLParser.INTEGERLITERAL, i);
+			return getToken(DB2zSQLParser.INTEGERLITERAL, i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode COMMA() { return getToken(SQLParser.COMMA, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode COMMA() { return getToken(DB2zSQLParser.COMMA, 0); }
 		public IntegerInParensContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_integerInParens; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterIntegerInParens(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterIntegerInParens(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitIntegerInParens(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitIntegerInParens(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitIntegerInParens(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitIntegerInParens(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17253,28 +17253,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LengthContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode SQLIDENTIFIER() { return getToken(SQLParser.SQLIDENTIFIER, 0); }
-		public TerminalNode CODEUNITS16() { return getToken(SQLParser.CODEUNITS16, 0); }
-		public TerminalNode CODEUNITS32() { return getToken(SQLParser.CODEUNITS32, 0); }
-		public TerminalNode OCTETS() { return getToken(SQLParser.OCTETS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode SQLIDENTIFIER() { return getToken(DB2zSQLParser.SQLIDENTIFIER, 0); }
+		public TerminalNode CODEUNITS16() { return getToken(DB2zSQLParser.CODEUNITS16, 0); }
+		public TerminalNode CODEUNITS32() { return getToken(DB2zSQLParser.CODEUNITS32, 0); }
+		public TerminalNode OCTETS() { return getToken(DB2zSQLParser.OCTETS, 0); }
 		public LengthContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_length; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLength(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLength(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLength(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLength(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLength(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLength(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17334,11 +17334,11 @@ public class SQLParser extends Parser {
 	}
 
 	public static class CcsidQualifierContext extends ParserRuleContext {
-		public TerminalNode CCSID() { return getToken(SQLParser.CCSID, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode ASCII() { return getToken(SQLParser.ASCII, 0); }
-		public TerminalNode EBCDIC() { return getToken(SQLParser.EBCDIC, 0); }
-		public TerminalNode UNICODE() { return getToken(SQLParser.UNICODE, 0); }
+		public TerminalNode CCSID() { return getToken(DB2zSQLParser.CCSID, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode ASCII() { return getToken(DB2zSQLParser.ASCII, 0); }
+		public TerminalNode EBCDIC() { return getToken(DB2zSQLParser.EBCDIC, 0); }
+		public TerminalNode UNICODE() { return getToken(DB2zSQLParser.UNICODE, 0); }
 		public ForDataQualfierContext forDataQualfier() {
 			return getRuleContext(ForDataQualfierContext.class,0);
 		}
@@ -17348,15 +17348,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_ccsidQualifier; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCcsidQualifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCcsidQualifier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCcsidQualifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCcsidQualifier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCcsidQualifier(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCcsidQualifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17426,26 +17426,26 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ForDataQualfierContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode DATA() { return getToken(SQLParser.DATA, 0); }
-		public TerminalNode SBCS() { return getToken(SQLParser.SBCS, 0); }
-		public TerminalNode MIXED() { return getToken(SQLParser.MIXED, 0); }
-		public TerminalNode BIT() { return getToken(SQLParser.BIT, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode DATA() { return getToken(DB2zSQLParser.DATA, 0); }
+		public TerminalNode SBCS() { return getToken(DB2zSQLParser.SBCS, 0); }
+		public TerminalNode MIXED() { return getToken(DB2zSQLParser.MIXED, 0); }
+		public TerminalNode BIT() { return getToken(DB2zSQLParser.BIT, 0); }
 		public ForDataQualfierContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_forDataQualfier; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterForDataQualfier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterForDataQualfier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitForDataQualfier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitForDataQualfier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitForDataQualfier(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitForDataQualfier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17496,15 +17496,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_distinctTypeName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDistinctTypeName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDistinctTypeName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDistinctTypeName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDistinctTypeName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDistinctTypeName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDistinctTypeName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17540,15 +17540,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_arrayType; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterArrayType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterArrayType(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitArrayType(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitArrayType(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitArrayType(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitArrayType(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17575,24 +17575,24 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LiteralContext extends ParserRuleContext {
-		public TerminalNode NUMERICLITERAL() { return getToken(SQLParser.NUMERICLITERAL, 0); }
-		public TerminalNode NONNUMERICLITERAL() { return getToken(SQLParser.NONNUMERICLITERAL, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode NUMERICLITERAL() { return getToken(DB2zSQLParser.NUMERICLITERAL, 0); }
+		public TerminalNode NONNUMERICLITERAL() { return getToken(DB2zSQLParser.NONNUMERICLITERAL, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public LiteralContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_literal; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLiteral(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLiteral(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLiteral(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLiteral(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLiteral(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLiteral(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17628,22 +17628,22 @@ public class SQLParser extends Parser {
 	}
 
 	public static class CcsidValueContext extends ParserRuleContext {
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public CcsidValueContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_ccsidValue; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCcsidValue(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCcsidValue(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCcsidValue(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCcsidValue(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCcsidValue(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCcsidValue(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17676,22 +17676,22 @@ public class SQLParser extends Parser {
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public ColumnNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_columnName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterColumnName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterColumnName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitColumnName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitColumnName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitColumnName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitColumnName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17739,15 +17739,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_newColumnName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNewColumnName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNewColumnName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNewColumnName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNewColumnName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNewColumnName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNewColumnName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17783,15 +17783,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_correlationName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCorrelationName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCorrelationName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCorrelationName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCorrelationName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCorrelationName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCorrelationName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17827,15 +17827,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_locationName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLocationName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLocationName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLocationName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLocationName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLocationName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLocationName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17871,15 +17871,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_schemaName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSchemaName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSchemaName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSchemaName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSchemaName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSchemaName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSchemaName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -17915,9 +17915,9 @@ public class SQLParser extends Parser {
 		public LocationNameContext locationName() {
 			return getRuleContext(LocationNameContext.class,0);
 		}
-		public List<TerminalNode> DOT() { return getTokens(SQLParser.DOT); }
+		public List<TerminalNode> DOT() { return getTokens(DB2zSQLParser.DOT); }
 		public TerminalNode DOT(int i) {
-			return getToken(SQLParser.DOT, i);
+			return getToken(DB2zSQLParser.DOT, i);
 		}
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
@@ -17928,15 +17928,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_tableName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTableName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTableName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTableName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTableName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTableName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTableName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18007,22 +18007,22 @@ public class SQLParser extends Parser {
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public IndexNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_indexName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterIndexName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterIndexName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitIndexName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitIndexName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitIndexName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitIndexName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18067,22 +18067,22 @@ public class SQLParser extends Parser {
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public MaskNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_maskName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterMaskName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterMaskName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitMaskName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitMaskName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitMaskName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitMaskName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18127,22 +18127,22 @@ public class SQLParser extends Parser {
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public PermissionNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_permissionName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPermissionName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPermissionName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPermissionName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPermissionName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPermissionName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPermissionName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18190,15 +18190,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_databaseName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDatabaseName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDatabaseName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDatabaseName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDatabaseName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDatabaseName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDatabaseName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18234,15 +18234,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_catalogName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCatalogName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCatalogName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCatalogName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCatalogName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCatalogName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCatalogName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18278,15 +18278,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_bpName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterBpName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterBpName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitBpName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitBpName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitBpName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitBpName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18322,15 +18322,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_stogroupName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterStogroupName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterStogroupName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitStogroupName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitStogroupName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitStogroupName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitStogroupName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18363,22 +18363,22 @@ public class SQLParser extends Parser {
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public FunctionNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_functionName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFunctionName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFunctionName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFunctionName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFunctionName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFunctionName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFunctionName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18423,22 +18423,22 @@ public class SQLParser extends Parser {
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public SpecificNameContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_specificName; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSpecificName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSpecificName(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSpecificName(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSpecificName(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSpecificName(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSpecificName(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18477,9 +18477,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class HostVariableContext extends ParserRuleContext {
-		public List<TerminalNode> COLON() { return getTokens(SQLParser.COLON); }
+		public List<TerminalNode> COLON() { return getTokens(DB2zSQLParser.COLON); }
 		public TerminalNode COLON(int i) {
-			return getToken(SQLParser.COLON, i);
+			return getToken(DB2zSQLParser.COLON, i);
 		}
 		public List<HostIdentifierContext> hostIdentifier() {
 			return getRuleContexts(HostIdentifierContext.class);
@@ -18493,26 +18493,26 @@ public class SQLParser extends Parser {
 		public HostStructureContext hostStructure(int i) {
 			return getRuleContext(HostStructureContext.class,i);
 		}
-		public List<TerminalNode> DOT() { return getTokens(SQLParser.DOT); }
+		public List<TerminalNode> DOT() { return getTokens(DB2zSQLParser.DOT); }
 		public TerminalNode DOT(int i) {
-			return getToken(SQLParser.DOT, i);
+			return getToken(DB2zSQLParser.DOT, i);
 		}
-		public TerminalNode INDICATOR() { return getToken(SQLParser.INDICATOR, 0); }
+		public TerminalNode INDICATOR() { return getToken(DB2zSQLParser.INDICATOR, 0); }
 		public HostVariableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_hostVariable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterHostVariable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterHostVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitHostVariable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitHostVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitHostVariable(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitHostVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18597,15 +18597,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_hostIdentifier; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterHostIdentifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterHostIdentifier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitHostIdentifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitHostIdentifier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitHostIdentifier(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitHostIdentifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18641,15 +18641,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_hostStructure; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterHostStructure(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterHostStructure(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitHostStructure(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitHostStructure(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitHostStructure(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitHostStructure(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -18682,7 +18682,7 @@ public class SQLParser extends Parser {
 		public SchemaNameContext schemaName() {
 			return getRuleContext(SchemaNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
 		public HostVariableContext hostVariable() {
 			return getRuleContext(HostVariableContext.class,0);
 		}
@@ -18692,15 +18692,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_variable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterVariable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterVariable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitVariable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitVariable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitVariable(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitVariable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -19475,7 +19475,7 @@ public class SQLParser extends Parser {
 	}
 
 	public static class IntoClauseContext extends ParserRuleContext {
-		public TerminalNode INTO() { return getToken(SQLParser.INTO, 0); }
+		public TerminalNode INTO() { return getToken(DB2zSQLParser.INTO, 0); }
 		public List<VariableContext> variable() {
 			return getRuleContexts(VariableContext.class);
 		}
@@ -19485,9 +19485,9 @@ public class SQLParser extends Parser {
 		public ArrayElementSpecificationContext arrayElementSpecification() {
 			return getRuleContext(ArrayElementSpecificationContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public IntoClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -19495,15 +19495,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_intoClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterIntoClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterIntoClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitIntoClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitIntoClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitIntoClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitIntoClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -19566,18 +19566,18 @@ public class SQLParser extends Parser {
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<NewColumnNameContext> newColumnName() {
 			return getRuleContexts(NewColumnNameContext.class);
 		}
 		public NewColumnNameContext newColumnName(int i) {
 			return getRuleContext(NewColumnNameContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public CorrelationClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -19585,15 +19585,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_correlationClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCorrelationClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCorrelationClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCorrelationClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCorrelationClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCorrelationClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCorrelationClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -19661,16 +19661,16 @@ public class SQLParser extends Parser {
 	}
 
 	public static class FromClauseContext extends ParserRuleContext {
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
 		public List<CollectionDerivedTableContext> collectionDerivedTable() {
 			return getRuleContexts(CollectionDerivedTableContext.class);
 		}
 		public CollectionDerivedTableContext collectionDerivedTable(int i) {
 			return getRuleContext(CollectionDerivedTableContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public List<TableReferenceContext> tableReference() {
 			return getRuleContexts(TableReferenceContext.class);
@@ -19678,13 +19678,13 @@ public class SQLParser extends Parser {
 		public TableReferenceContext tableReference(int i) {
 			return getRuleContext(TableReferenceContext.class,i);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
 		public FromClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -19692,15 +19692,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_fromClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFromClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFromClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFromClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFromClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFromClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFromClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -19866,9 +19866,9 @@ public class SQLParser extends Parser {
 		public CollectionDerivedTableContext collectionDerivedTable() {
 			return getRuleContext(CollectionDerivedTableContext.class,0);
 		}
-		public List<TerminalNode> JOIN() { return getTokens(SQLParser.JOIN); }
+		public List<TerminalNode> JOIN() { return getTokens(DB2zSQLParser.JOIN); }
 		public TerminalNode JOIN(int i) {
-			return getToken(SQLParser.JOIN, i);
+			return getToken(DB2zSQLParser.JOIN, i);
 		}
 		public List<TableReferenceContext> tableReference() {
 			return getRuleContexts(TableReferenceContext.class);
@@ -19876,9 +19876,9 @@ public class SQLParser extends Parser {
 		public TableReferenceContext tableReference(int i) {
 			return getRuleContext(TableReferenceContext.class,i);
 		}
-		public List<TerminalNode> ON() { return getTokens(SQLParser.ON); }
+		public List<TerminalNode> ON() { return getTokens(DB2zSQLParser.ON); }
 		public TerminalNode ON(int i) {
-			return getToken(SQLParser.ON, i);
+			return getToken(DB2zSQLParser.ON, i);
 		}
 		public List<JoinConditionContext> joinCondition() {
 			return getRuleContexts(JoinConditionContext.class);
@@ -19886,34 +19886,34 @@ public class SQLParser extends Parser {
 		public JoinConditionContext joinCondition(int i) {
 			return getRuleContext(JoinConditionContext.class,i);
 		}
-		public TerminalNode CROSS() { return getToken(SQLParser.CROSS, 0); }
-		public List<TerminalNode> INNER() { return getTokens(SQLParser.INNER); }
+		public TerminalNode CROSS() { return getToken(DB2zSQLParser.CROSS, 0); }
+		public List<TerminalNode> INNER() { return getTokens(DB2zSQLParser.INNER); }
 		public TerminalNode INNER(int i) {
-			return getToken(SQLParser.INNER, i);
+			return getToken(DB2zSQLParser.INNER, i);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public List<TerminalNode> LEFT() { return getTokens(SQLParser.LEFT); }
+		public List<TerminalNode> LEFT() { return getTokens(DB2zSQLParser.LEFT); }
 		public TerminalNode LEFT(int i) {
-			return getToken(SQLParser.LEFT, i);
+			return getToken(DB2zSQLParser.LEFT, i);
 		}
-		public List<TerminalNode> RIGHT() { return getTokens(SQLParser.RIGHT); }
+		public List<TerminalNode> RIGHT() { return getTokens(DB2zSQLParser.RIGHT); }
 		public TerminalNode RIGHT(int i) {
-			return getToken(SQLParser.RIGHT, i);
+			return getToken(DB2zSQLParser.RIGHT, i);
 		}
-		public List<TerminalNode> FULL() { return getTokens(SQLParser.FULL); }
+		public List<TerminalNode> FULL() { return getTokens(DB2zSQLParser.FULL); }
 		public TerminalNode FULL(int i) {
-			return getToken(SQLParser.FULL, i);
+			return getToken(DB2zSQLParser.FULL, i);
 		}
-		public List<TerminalNode> OUTER() { return getTokens(SQLParser.OUTER); }
+		public List<TerminalNode> OUTER() { return getTokens(DB2zSQLParser.OUTER); }
 		public TerminalNode OUTER(int i) {
-			return getToken(SQLParser.OUTER, i);
+			return getToken(DB2zSQLParser.OUTER, i);
 		}
 		public TableReferenceContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -19921,15 +19921,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_tableReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTableReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTableReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTableReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTableReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTableReference(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTableReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -20570,15 +20570,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_singleTableReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSingleTableReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSingleTableReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSingleTableReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSingleTableReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSingleTableReference(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSingleTableReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -20634,36 +20634,36 @@ public class SQLParser extends Parser {
 	}
 
 	public static class PeriodSpecificationContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode SYSTEM_TIME() { return getToken(SQLParser.SYSTEM_TIME, 0); }
-		public TerminalNode BUSINESS_TIME() { return getToken(SQLParser.BUSINESS_TIME, 0); }
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
-		public TerminalNode OF() { return getToken(SQLParser.OF, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode SYSTEM_TIME() { return getToken(DB2zSQLParser.SYSTEM_TIME, 0); }
+		public TerminalNode BUSINESS_TIME() { return getToken(DB2zSQLParser.BUSINESS_TIME, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
+		public TerminalNode OF() { return getToken(DB2zSQLParser.OF, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
-		public TerminalNode TO() { return getToken(SQLParser.TO, 0); }
-		public TerminalNode BETWEEN() { return getToken(SQLParser.BETWEEN, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
+		public TerminalNode TO() { return getToken(DB2zSQLParser.TO, 0); }
+		public TerminalNode BETWEEN() { return getToken(DB2zSQLParser.BETWEEN, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
 		public PeriodSpecificationContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_periodSpecification; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPeriodSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPeriodSpecification(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPeriodSpecification(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPeriodSpecification(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPeriodSpecification(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPeriodSpecification(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -20749,35 +20749,35 @@ public class SQLParser extends Parser {
 	}
 
 	public static class PeriodClauseContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode PORTION() { return getToken(SQLParser.PORTION, 0); }
-		public TerminalNode OF() { return getToken(SQLParser.OF, 0); }
-		public TerminalNode BUSINESS_TIME() { return getToken(SQLParser.BUSINESS_TIME, 0); }
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode PORTION() { return getToken(DB2zSQLParser.PORTION, 0); }
+		public TerminalNode OF() { return getToken(DB2zSQLParser.OF, 0); }
+		public TerminalNode BUSINESS_TIME() { return getToken(DB2zSQLParser.BUSINESS_TIME, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
 		}
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public TerminalNode TO() { return getToken(SQLParser.TO, 0); }
-		public TerminalNode BETWEEN() { return getToken(SQLParser.BETWEEN, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
+		public TerminalNode TO() { return getToken(DB2zSQLParser.TO, 0); }
+		public TerminalNode BETWEEN() { return getToken(DB2zSQLParser.BETWEEN, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
 		public PeriodClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_periodClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterPeriodClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterPeriodClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitPeriodClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitPeriodClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitPeriodClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitPeriodClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -20846,12 +20846,12 @@ public class SQLParser extends Parser {
 	}
 
 	public static class NestedTableExpressionContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode TABLE() { return getToken(SQLParser.TABLE, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode TABLE() { return getToken(DB2zSQLParser.TABLE, 0); }
 		public CorrelationClauseContext correlationClause() {
 			return getRuleContext(CorrelationClauseContext.class,0);
 		}
@@ -20861,15 +20861,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_nestedTableExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterNestedTableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterNestedTableExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitNestedTableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitNestedTableExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitNestedTableExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitNestedTableExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -20923,17 +20923,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class DataChangeTableReferenceContext extends ParserRuleContext {
-		public TerminalNode FINAL() { return getToken(SQLParser.FINAL, 0); }
-		public TerminalNode TABLE() { return getToken(SQLParser.TABLE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode FINAL() { return getToken(DB2zSQLParser.FINAL, 0); }
+		public TerminalNode TABLE() { return getToken(DB2zSQLParser.TABLE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public InsertStatementContext insertStatement() {
 			return getRuleContext(InsertStatementContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public SearchedUpdateContext searchedUpdate() {
 			return getRuleContext(SearchedUpdateContext.class,0);
 		}
-		public TerminalNode OLD() { return getToken(SQLParser.OLD, 0); }
+		public TerminalNode OLD() { return getToken(DB2zSQLParser.OLD, 0); }
 		public SearchedDeleteContext searchedDelete() {
 			return getRuleContext(SearchedDeleteContext.class,0);
 		}
@@ -20949,15 +20949,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_dataChangeTableReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterDataChangeTableReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterDataChangeTableReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitDataChangeTableReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitDataChangeTableReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitDataChangeTableReference(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitDataChangeTableReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21057,17 +21057,17 @@ public class SQLParser extends Parser {
 	}
 
 	public static class TableFunctionReferenceContext extends ParserRuleContext {
-		public List<TerminalNode> TABLE() { return getTokens(SQLParser.TABLE); }
+		public List<TerminalNode> TABLE() { return getTokens(DB2zSQLParser.TABLE); }
 		public TerminalNode TABLE(int i) {
-			return getToken(SQLParser.TABLE, i);
+			return getToken(DB2zSQLParser.TABLE, i);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
 		public ScalarFunctionContext scalarFunction() {
 			return getRuleContext(ScalarFunctionContext.class,0);
@@ -21087,9 +21087,9 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public TableUdfCardinalityClauseContext tableUdfCardinalityClause() {
 			return getRuleContext(TableUdfCardinalityClauseContext.class,0);
@@ -21112,15 +21112,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_tableFunctionReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTableFunctionReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTableFunctionReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTableFunctionReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTableFunctionReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTableFunctionReference(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTableFunctionReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21266,25 +21266,25 @@ public class SQLParser extends Parser {
 	}
 
 	public static class TableUdfCardinalityClauseContext extends ParserRuleContext {
-		public TerminalNode CARDINALITY() { return getToken(SQLParser.CARDINALITY, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode NUMERICLITERAL() { return getToken(SQLParser.NUMERICLITERAL, 0); }
-		public TerminalNode MULTIPLIER() { return getToken(SQLParser.MULTIPLIER, 0); }
+		public TerminalNode CARDINALITY() { return getToken(DB2zSQLParser.CARDINALITY, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode NUMERICLITERAL() { return getToken(DB2zSQLParser.NUMERICLITERAL, 0); }
+		public TerminalNode MULTIPLIER() { return getToken(DB2zSQLParser.MULTIPLIER, 0); }
 		public TableUdfCardinalityClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_tableUdfCardinalityClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTableUdfCardinalityClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTableUdfCardinalityClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTableUdfCardinalityClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTableUdfCardinalityClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTableUdfCardinalityClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTableUdfCardinalityClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21337,7 +21337,7 @@ public class SQLParser extends Parser {
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
 		}
@@ -21350,11 +21350,11 @@ public class SQLParser extends Parser {
 		public DataTypeContext dataType(int i) {
 			return getRuleContext(DataTypeContext.class,i);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public TypedCorrelationClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -21362,15 +21362,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_typedCorrelationClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTypedCorrelationClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTypedCorrelationClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTypedCorrelationClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTypedCorrelationClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTypedCorrelationClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTypedCorrelationClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21436,16 +21436,16 @@ public class SQLParser extends Parser {
 	}
 
 	public static class TableLocatorReferenceContext extends ParserRuleContext {
-		public TerminalNode TABLE() { return getToken(SQLParser.TABLE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode TABLE() { return getToken(DB2zSQLParser.TABLE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public IdentifierContext identifier() {
 			return getRuleContext(IdentifierContext.class,0);
 		}
-		public TerminalNode LIKE() { return getToken(SQLParser.LIKE, 0); }
+		public TerminalNode LIKE() { return getToken(DB2zSQLParser.LIKE, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public CorrelationNameContext correlationName() {
 			return getRuleContext(CorrelationNameContext.class,0);
 		}
@@ -21455,15 +21455,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_tableLocatorReference; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterTableLocatorReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterTableLocatorReference(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitTableLocatorReference(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitTableLocatorReference(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitTableLocatorReference(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitTableLocatorReference(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21524,15 +21524,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_xmltableExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterXmltableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterXmltableExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitXmltableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitXmltableExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitXmltableExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitXmltableExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21571,9 +21571,9 @@ public class SQLParser extends Parser {
 	}
 
 	public static class CollectionDerivedTableContext extends ParserRuleContext {
-		public TerminalNode UNNEST() { return getToken(SQLParser.UNNEST, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode UNNEST() { return getToken(DB2zSQLParser.UNNEST, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public List<OrdinaryArrayExpressionContext> ordinaryArrayExpression() {
 			return getRuleContexts(OrdinaryArrayExpressionContext.class);
 		}
@@ -21586,12 +21586,12 @@ public class SQLParser extends Parser {
 		public AssociativeArrayExpressionContext associativeArrayExpression(int i) {
 			return getRuleContext(AssociativeArrayExpressionContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
-		public TerminalNode ORDINALITY() { return getToken(SQLParser.ORDINALITY, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
+		public TerminalNode ORDINALITY() { return getToken(DB2zSQLParser.ORDINALITY, 0); }
 		public CorrelationClauseContext correlationClause() {
 			return getRuleContext(CorrelationClauseContext.class,0);
 		}
@@ -21601,15 +21601,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_collectionDerivedTable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCollectionDerivedTable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCollectionDerivedTable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCollectionDerivedTable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCollectionDerivedTable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCollectionDerivedTable(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCollectionDerivedTable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21720,22 +21720,22 @@ public class SQLParser extends Parser {
 		public FullJoinExpressionContext fullJoinExpression(int i) {
 			return getRuleContext(FullJoinExpressionContext.class,i);
 		}
-		public TerminalNode EQ() { return getToken(SQLParser.EQ, 0); }
+		public TerminalNode EQ() { return getToken(DB2zSQLParser.EQ, 0); }
 		public JoinConditionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_joinCondition; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterJoinCondition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterJoinCondition(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitJoinCondition(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitJoinCondition(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitJoinCondition(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitJoinCondition(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21794,12 +21794,12 @@ public class SQLParser extends Parser {
 		public CastFunctionContext castFunction(int i) {
 			return getRuleContext(CastFunctionContext.class,i);
 		}
-		public TerminalNode COALESCE() { return getToken(SQLParser.COALESCE, 0); }
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode COALESCE() { return getToken(DB2zSQLParser.COALESCE, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public FullJoinExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -21807,15 +21807,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_fullJoinExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFullJoinExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFullJoinExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFullJoinExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFullJoinExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFullJoinExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFullJoinExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21926,15 +21926,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_castFunction; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCastFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCastFunction(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCastFunction(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCastFunction(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCastFunction(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCastFunction(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -21972,15 +21972,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_ordinaryArrayExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOrdinaryArrayExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOrdinaryArrayExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOrdinaryArrayExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOrdinaryArrayExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOrdinaryArrayExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOrdinaryArrayExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -22018,15 +22018,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_associativeArrayExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterAssociativeArrayExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAssociativeArrayExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitAssociativeArrayExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAssociativeArrayExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitAssociativeArrayExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAssociativeArrayExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -22073,15 +22073,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_comparison; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterComparison(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterComparison(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitComparison(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitComparison(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitComparison(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitComparison(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -22849,7 +22849,7 @@ public class SQLParser extends Parser {
 	}
 
 	public static class WhereClauseContext extends ParserRuleContext {
-		public TerminalNode WHERE() { return getToken(SQLParser.WHERE, 0); }
+		public TerminalNode WHERE() { return getToken(DB2zSQLParser.WHERE, 0); }
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
 		}
@@ -22859,15 +22859,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_whereClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterWhereClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterWhereClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitWhereClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitWhereClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitWhereClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitWhereClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -22896,8 +22896,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class GroupByClauseContext extends ParserRuleContext {
-		public TerminalNode GROUP() { return getToken(SQLParser.GROUP, 0); }
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
+		public TerminalNode GROUP() { return getToken(DB2zSQLParser.GROUP, 0); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
 		public GroupingExpressionContext groupingExpression() {
 			return getRuleContext(GroupingExpressionContext.class,0);
 		}
@@ -22913,15 +22913,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupByClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupByClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupByClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupByClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupByClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupByClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupByClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -22972,7 +22972,7 @@ public class SQLParser extends Parser {
 	}
 
 	public static class HavingClauseContext extends ParserRuleContext {
-		public TerminalNode HAVING() { return getToken(SQLParser.HAVING, 0); }
+		public TerminalNode HAVING() { return getToken(DB2zSQLParser.HAVING, 0); }
 		public SearchConditionContext searchCondition() {
 			return getRuleContext(SearchConditionContext.class,0);
 		}
@@ -22982,15 +22982,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_havingClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterHavingClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterHavingClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitHavingClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitHavingClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitHavingClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitHavingClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23025,9 +23025,9 @@ public class SQLParser extends Parser {
 		public ExpressionContext expression(int i) {
 			return getRuleContext(ExpressionContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public GroupingExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -23035,15 +23035,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupingExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupingExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupingExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupingExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupingExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupingExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupingExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23091,8 +23091,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class GroupingSetsContext extends ParserRuleContext {
-		public TerminalNode GROUPING() { return getToken(SQLParser.GROUPING, 0); }
-		public TerminalNode SETS() { return getToken(SQLParser.SETS, 0); }
+		public TerminalNode GROUPING() { return getToken(DB2zSQLParser.GROUPING, 0); }
+		public TerminalNode SETS() { return getToken(DB2zSQLParser.SETS, 0); }
 		public GroupingSetsGroupContext groupingSetsGroup() {
 			return getRuleContext(GroupingSetsGroupContext.class,0);
 		}
@@ -23102,15 +23102,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupingSets; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupingSets(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupingSets(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupingSets(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupingSets(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupingSets(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupingSets(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23141,8 +23141,8 @@ public class SQLParser extends Parser {
 	}
 
 	public static class GroupingSetsGroupContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public List<GroupingSetsGroupContext> groupingSetsGroup() {
 			return getRuleContexts(GroupingSetsGroupContext.class);
 		}
@@ -23161,9 +23161,9 @@ public class SQLParser extends Parser {
 		public SuperGroupsContext superGroups(int i) {
 			return getRuleContext(SuperGroupsContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public GroupingSetsGroupContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -23171,15 +23171,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_groupingSetsGroup; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterGroupingSetsGroup(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterGroupingSetsGroup(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitGroupingSetsGroup(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitGroupingSetsGroup(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitGroupingSetsGroup(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitGroupingSetsGroup(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23267,28 +23267,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SuperGroupsContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public GroupingExpressionContext groupingExpression() {
 			return getRuleContext(GroupingExpressionContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public TerminalNode ROLLUP() { return getToken(SQLParser.ROLLUP, 0); }
-		public TerminalNode CUBE() { return getToken(SQLParser.CUBE, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public TerminalNode ROLLUP() { return getToken(DB2zSQLParser.ROLLUP, 0); }
+		public TerminalNode CUBE() { return getToken(DB2zSQLParser.CUBE, 0); }
 		public SuperGroupsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_superGroups; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSuperGroups(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSuperGroups(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSuperGroups(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSuperGroups(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSuperGroups(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSuperGroups(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23362,8 +23362,8 @@ public class SQLParser extends Parser {
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
-		public TerminalNode SPLAT() { return getToken(SQLParser.SPLAT, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
+		public TerminalNode SPLAT() { return getToken(DB2zSQLParser.SPLAT, 0); }
 		public UnpackedRowContext unpackedRow() {
 			return getRuleContext(UnpackedRowContext.class,0);
 		}
@@ -23376,22 +23376,22 @@ public class SQLParser extends Parser {
 		public NewColumnNameContext newColumnName() {
 			return getRuleContext(NewColumnNameContext.class,0);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public SelectColumnsContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_selectColumns; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSelectColumns(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSelectColumns(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSelectColumns(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSelectColumns(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSelectColumns(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSelectColumns(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23487,21 +23487,21 @@ public class SQLParser extends Parser {
 	}
 
 	public static class UnpackedRowContext extends ParserRuleContext {
-		public TerminalNode UNPACK() { return getToken(SQLParser.UNPACK, 0); }
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public TerminalNode UNPACK() { return getToken(DB2zSQLParser.UNPACK, 0); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public TerminalNode DOT() { return getToken(SQLParser.DOT, 0); }
-		public TerminalNode SPLAT() { return getToken(SQLParser.SPLAT, 0); }
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode DOT() { return getToken(DB2zSQLParser.DOT, 0); }
+		public TerminalNode SPLAT() { return getToken(DB2zSQLParser.SPLAT, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
 		}
@@ -23514,9 +23514,9 @@ public class SQLParser extends Parser {
 		public DataTypeContext dataType(int i) {
 			return getRuleContext(DataTypeContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public UnpackedRowContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -23524,15 +23524,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_unpackedRow; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUnpackedRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUnpackedRow(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUnpackedRow(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUnpackedRow(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUnpackedRow(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUnpackedRow(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -23598,19 +23598,19 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SelectClauseContext extends ParserRuleContext {
-		public TerminalNode SELECT() { return getToken(SQLParser.SELECT, 0); }
-		public TerminalNode SPLAT() { return getToken(SQLParser.SPLAT, 0); }
-		public TerminalNode ALL() { return getToken(SQLParser.ALL, 0); }
-		public TerminalNode DISTINCT() { return getToken(SQLParser.DISTINCT, 0); }
+		public TerminalNode SELECT() { return getToken(DB2zSQLParser.SELECT, 0); }
+		public TerminalNode SPLAT() { return getToken(DB2zSQLParser.SPLAT, 0); }
+		public TerminalNode ALL() { return getToken(DB2zSQLParser.ALL, 0); }
+		public TerminalNode DISTINCT() { return getToken(DB2zSQLParser.DISTINCT, 0); }
 		public List<SelectColumnsContext> selectColumns() {
 			return getRuleContexts(SelectColumnsContext.class);
 		}
 		public SelectColumnsContext selectColumns(int i) {
 			return getRuleContext(SelectColumnsContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public SelectClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -23618,15 +23618,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_selectClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSelectClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSelectClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSelectClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSelectClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSelectClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSelectClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -24462,15 +24462,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_subSelect; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSubSelect(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSubSelect(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSubSelect(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSubSelect(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSubSelect(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSubSelect(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -24569,7 +24569,7 @@ public class SQLParser extends Parser {
 		public FromClauseContext fromClause() {
 			return getRuleContext(FromClauseContext.class,0);
 		}
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
 		public List<CommonTableExpressionContext> commonTableExpression() {
 			return getRuleContexts(CommonTableExpressionContext.class);
 		}
@@ -24603,9 +24603,9 @@ public class SQLParser extends Parser {
 		public QuerynoClauseContext querynoClause() {
 			return getRuleContext(QuerynoClauseContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public SelectIntoStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -24613,15 +24613,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_selectIntoStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSelectIntoStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSelectIntoStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSelectIntoStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSelectIntoStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSelectIntoStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSelectIntoStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -24777,7 +24777,7 @@ public class SQLParser extends Parser {
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
 		public List<CommonTableExpressionContext> commonTableExpression() {
 			return getRuleContexts(CommonTableExpressionContext.class);
 		}
@@ -24820,9 +24820,9 @@ public class SQLParser extends Parser {
 		public QuerynoClauseContext querynoClause(int i) {
 			return getRuleContext(QuerynoClauseContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public SelectStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -24830,15 +24830,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_selectStatement; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSelectStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSelectStatement(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSelectStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSelectStatement(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSelectStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSelectStatement(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -24947,9 +24947,9 @@ public class SQLParser extends Parser {
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
@@ -24957,17 +24957,17 @@ public class SQLParser extends Parser {
 		public ColumnNameContext columnName(int i) {
 			return getRuleContext(ColumnNameContext.class,i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public CommonTableExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -24975,15 +24975,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_commonTableExpression; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterCommonTableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCommonTableExpression(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitCommonTableExpression(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCommonTableExpression(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitCommonTableExpression(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCommonTableExpression(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25041,18 +25041,18 @@ public class SQLParser extends Parser {
 	}
 
 	public static class UpdateClauseContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode UPDATE() { return getToken(SQLParser.UPDATE, 0); }
-		public TerminalNode OF() { return getToken(SQLParser.OF, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode UPDATE() { return getToken(DB2zSQLParser.UPDATE, 0); }
+		public TerminalNode OF() { return getToken(DB2zSQLParser.OF, 0); }
 		public List<ColumnNameContext> columnName() {
 			return getRuleContexts(ColumnNameContext.class);
 		}
 		public ColumnNameContext columnName(int i) {
 			return getRuleContext(ColumnNameContext.class,i);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public UpdateClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -25060,15 +25060,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_updateClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterUpdateClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterUpdateClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitUpdateClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitUpdateClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitUpdateClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitUpdateClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25128,24 +25128,24 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ReadOnlyClauseContext extends ParserRuleContext {
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode READ() { return getToken(SQLParser.READ, 0); }
-		public TerminalNode ONLY() { return getToken(SQLParser.ONLY, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode READ() { return getToken(DB2zSQLParser.READ, 0); }
+		public TerminalNode ONLY() { return getToken(DB2zSQLParser.ONLY, 0); }
 		public ReadOnlyClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_readOnlyClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterReadOnlyClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterReadOnlyClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitReadOnlyClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitReadOnlyClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitReadOnlyClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitReadOnlyClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25178,26 +25178,26 @@ public class SQLParser extends Parser {
 	}
 
 	public static class OptimizeClauseContext extends ParserRuleContext {
-		public TerminalNode OPTIMIZE() { return getToken(SQLParser.OPTIMIZE, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
+		public TerminalNode OPTIMIZE() { return getToken(DB2zSQLParser.OPTIMIZE, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
 		public OptimizeClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_optimizeClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOptimizeClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOptimizeClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOptimizeClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOptimizeClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOptimizeClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOptimizeClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25239,11 +25239,11 @@ public class SQLParser extends Parser {
 	}
 
 	public static class IsolationClauseContext extends ParserRuleContext {
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
-		public TerminalNode CS() { return getToken(SQLParser.CS, 0); }
-		public TerminalNode UR() { return getToken(SQLParser.UR, 0); }
-		public TerminalNode RR() { return getToken(SQLParser.RR, 0); }
-		public TerminalNode RS() { return getToken(SQLParser.RS, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
+		public TerminalNode CS() { return getToken(DB2zSQLParser.CS, 0); }
+		public TerminalNode UR() { return getToken(DB2zSQLParser.UR, 0); }
+		public TerminalNode RR() { return getToken(DB2zSQLParser.RR, 0); }
+		public TerminalNode RS() { return getToken(DB2zSQLParser.RS, 0); }
 		public LockClauseContext lockClause() {
 			return getRuleContext(LockClauseContext.class,0);
 		}
@@ -25253,15 +25253,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_isolationClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterIsolationClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterIsolationClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitIsolationClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitIsolationClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitIsolationClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitIsolationClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25343,28 +25343,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class LockClauseContext extends ParserRuleContext {
-		public TerminalNode USE() { return getToken(SQLParser.USE, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
-		public TerminalNode KEEP() { return getToken(SQLParser.KEEP, 0); }
-		public TerminalNode LOCKS() { return getToken(SQLParser.LOCKS, 0); }
-		public TerminalNode EXCLUSIVE() { return getToken(SQLParser.EXCLUSIVE, 0); }
-		public TerminalNode UPDATE() { return getToken(SQLParser.UPDATE, 0); }
-		public TerminalNode SHARE() { return getToken(SQLParser.SHARE, 0); }
+		public TerminalNode USE() { return getToken(DB2zSQLParser.USE, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
+		public TerminalNode KEEP() { return getToken(DB2zSQLParser.KEEP, 0); }
+		public TerminalNode LOCKS() { return getToken(DB2zSQLParser.LOCKS, 0); }
+		public TerminalNode EXCLUSIVE() { return getToken(DB2zSQLParser.EXCLUSIVE, 0); }
+		public TerminalNode UPDATE() { return getToken(DB2zSQLParser.UPDATE, 0); }
+		public TerminalNode SHARE() { return getToken(DB2zSQLParser.SHARE, 0); }
 		public LockClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_lockClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterLockClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterLockClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitLockClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitLockClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitLockClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitLockClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25410,24 +25410,24 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SkipLockedDataClauseContext extends ParserRuleContext {
-		public TerminalNode SKIP_() { return getToken(SQLParser.SKIP_, 0); }
-		public TerminalNode LOCKED() { return getToken(SQLParser.LOCKED, 0); }
-		public TerminalNode DATA() { return getToken(SQLParser.DATA, 0); }
+		public TerminalNode SKIP_() { return getToken(DB2zSQLParser.SKIP_, 0); }
+		public TerminalNode LOCKED() { return getToken(DB2zSQLParser.LOCKED, 0); }
+		public TerminalNode DATA() { return getToken(DB2zSQLParser.DATA, 0); }
 		public SkipLockedDataClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_skipLockedDataClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSkipLockedDataClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSkipLockedDataClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSkipLockedDataClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSkipLockedDataClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSkipLockedDataClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSkipLockedDataClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25460,23 +25460,23 @@ public class SQLParser extends Parser {
 	}
 
 	public static class QuerynoClauseContext extends ParserRuleContext {
-		public TerminalNode QUERYNO() { return getToken(SQLParser.QUERYNO, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode QUERYNO() { return getToken(DB2zSQLParser.QUERYNO, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public QuerynoClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_querynoClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterQuerynoClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterQuerynoClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitQuerynoClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitQuerynoClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitQuerynoClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitQuerynoClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25507,26 +25507,26 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ScalarFullSelectContext extends ParserRuleContext {
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
 		public FullSelectContext fullSelect() {
 			return getRuleContext(FullSelectContext.class,0);
 		}
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
 		public ScalarFullSelectContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_scalarFullSelect; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterScalarFullSelect(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterScalarFullSelect(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitScalarFullSelect(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitScalarFullSelect(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitScalarFullSelect(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitScalarFullSelect(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25575,9 +25575,9 @@ public class SQLParser extends Parser {
 		public FetchClauseContext fetchClause() {
 			return getRuleContext(FetchClauseContext.class,0);
 		}
-		public List<TerminalNode> LPAREN() { return getTokens(SQLParser.LPAREN); }
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
 		public TerminalNode LPAREN(int i) {
-			return getToken(SQLParser.LPAREN, i);
+			return getToken(DB2zSQLParser.LPAREN, i);
 		}
 		public List<FullSelectContext> fullSelect() {
 			return getRuleContexts(FullSelectContext.class);
@@ -25585,29 +25585,29 @@ public class SQLParser extends Parser {
 		public FullSelectContext fullSelect(int i) {
 			return getRuleContext(FullSelectContext.class,i);
 		}
-		public List<TerminalNode> RPAREN() { return getTokens(SQLParser.RPAREN); }
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
 		public TerminalNode RPAREN(int i) {
-			return getToken(SQLParser.RPAREN, i);
+			return getToken(DB2zSQLParser.RPAREN, i);
 		}
-		public List<TerminalNode> UNION() { return getTokens(SQLParser.UNION); }
+		public List<TerminalNode> UNION() { return getTokens(DB2zSQLParser.UNION); }
 		public TerminalNode UNION(int i) {
-			return getToken(SQLParser.UNION, i);
+			return getToken(DB2zSQLParser.UNION, i);
 		}
-		public List<TerminalNode> EXCEPT() { return getTokens(SQLParser.EXCEPT); }
+		public List<TerminalNode> EXCEPT() { return getTokens(DB2zSQLParser.EXCEPT); }
 		public TerminalNode EXCEPT(int i) {
-			return getToken(SQLParser.EXCEPT, i);
+			return getToken(DB2zSQLParser.EXCEPT, i);
 		}
-		public List<TerminalNode> INTERSECT() { return getTokens(SQLParser.INTERSECT); }
+		public List<TerminalNode> INTERSECT() { return getTokens(DB2zSQLParser.INTERSECT); }
 		public TerminalNode INTERSECT(int i) {
-			return getToken(SQLParser.INTERSECT, i);
+			return getToken(DB2zSQLParser.INTERSECT, i);
 		}
-		public List<TerminalNode> DISTINCT() { return getTokens(SQLParser.DISTINCT); }
+		public List<TerminalNode> DISTINCT() { return getTokens(DB2zSQLParser.DISTINCT); }
 		public TerminalNode DISTINCT(int i) {
-			return getToken(SQLParser.DISTINCT, i);
+			return getToken(DB2zSQLParser.DISTINCT, i);
 		}
-		public List<TerminalNode> ALL() { return getTokens(SQLParser.ALL); }
+		public List<TerminalNode> ALL() { return getTokens(DB2zSQLParser.ALL); }
 		public TerminalNode ALL(int i) {
-			return getToken(SQLParser.ALL, i);
+			return getToken(DB2zSQLParser.ALL, i);
 		}
 		public FullSelectContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -25615,15 +25615,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_fullSelect; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFullSelect(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFullSelect(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFullSelect(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFullSelect(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFullSelect(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFullSelect(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25773,18 +25773,18 @@ public class SQLParser extends Parser {
 	}
 
 	public static class ValuesClauseContext extends ParserRuleContext {
-		public TerminalNode VALUES() { return getToken(SQLParser.VALUES, 0); }
+		public TerminalNode VALUES() { return getToken(DB2zSQLParser.VALUES, 0); }
 		public List<SequenceReferenceContext> sequenceReference() {
 			return getRuleContexts(SequenceReferenceContext.class);
 		}
 		public SequenceReferenceContext sequenceReference(int i) {
 			return getRuleContext(SequenceReferenceContext.class,i);
 		}
-		public TerminalNode LPAREN() { return getToken(SQLParser.LPAREN, 0); }
-		public TerminalNode RPAREN() { return getToken(SQLParser.RPAREN, 0); }
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public TerminalNode LPAREN() { return getToken(DB2zSQLParser.LPAREN, 0); }
+		public TerminalNode RPAREN() { return getToken(DB2zSQLParser.RPAREN, 0); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
 		public ValuesClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -25792,15 +25792,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_valuesClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterValuesClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterValuesClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitValuesClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitValuesClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitValuesClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitValuesClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -25869,34 +25869,34 @@ public class SQLParser extends Parser {
 	}
 
 	public static class OrderByClauseContext extends ParserRuleContext {
-		public List<TerminalNode> ORDER() { return getTokens(SQLParser.ORDER); }
+		public List<TerminalNode> ORDER() { return getTokens(DB2zSQLParser.ORDER); }
 		public TerminalNode ORDER(int i) {
-			return getToken(SQLParser.ORDER, i);
+			return getToken(DB2zSQLParser.ORDER, i);
 		}
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
 		public List<SortKeyContext> sortKey() {
 			return getRuleContexts(SortKeyContext.class);
 		}
 		public SortKeyContext sortKey(int i) {
 			return getRuleContext(SortKeyContext.class,i);
 		}
-		public TerminalNode INPUT() { return getToken(SQLParser.INPUT, 0); }
-		public TerminalNode SEQUENCE() { return getToken(SQLParser.SEQUENCE, 0); }
-		public TerminalNode OF() { return getToken(SQLParser.OF, 0); }
+		public TerminalNode INPUT() { return getToken(DB2zSQLParser.INPUT, 0); }
+		public TerminalNode SEQUENCE() { return getToken(DB2zSQLParser.SEQUENCE, 0); }
+		public TerminalNode OF() { return getToken(DB2zSQLParser.OF, 0); }
 		public TableNameContext tableName() {
 			return getRuleContext(TableNameContext.class,0);
 		}
-		public List<TerminalNode> COMMA() { return getTokens(SQLParser.COMMA); }
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
 		public TerminalNode COMMA(int i) {
-			return getToken(SQLParser.COMMA, i);
+			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public List<TerminalNode> ASC() { return getTokens(SQLParser.ASC); }
+		public List<TerminalNode> ASC() { return getTokens(DB2zSQLParser.ASC); }
 		public TerminalNode ASC(int i) {
-			return getToken(SQLParser.ASC, i);
+			return getToken(DB2zSQLParser.ASC, i);
 		}
-		public List<TerminalNode> DESC() { return getTokens(SQLParser.DESC); }
+		public List<TerminalNode> DESC() { return getTokens(DB2zSQLParser.DESC); }
 		public TerminalNode DESC(int i) {
-			return getToken(SQLParser.DESC, i);
+			return getToken(DB2zSQLParser.DESC, i);
 		}
 		public OrderByClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -25904,15 +25904,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_orderByClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOrderByClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOrderByClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOrderByClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOrderByClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOrderByClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOrderByClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -26031,7 +26031,7 @@ public class SQLParser extends Parser {
 		public ColumnNameContext columnName() {
 			return getRuleContext(ColumnNameContext.class,0);
 		}
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public ExpressionContext expression() {
 			return getRuleContext(ExpressionContext.class,0);
 		}
@@ -26041,15 +26041,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_sortKey; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSortKey(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSortKey(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSortKey(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSortKey(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSortKey(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSortKey(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -26096,25 +26096,25 @@ public class SQLParser extends Parser {
 	}
 
 	public static class OffsetClauseContext extends ParserRuleContext {
-		public TerminalNode OFFSET() { return getToken(SQLParser.OFFSET, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
+		public TerminalNode OFFSET() { return getToken(DB2zSQLParser.OFFSET, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
 		public OffsetClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_offsetClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterOffsetClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterOffsetClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitOffsetClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitOffsetClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitOffsetClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitOffsetClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -26154,28 +26154,28 @@ public class SQLParser extends Parser {
 	}
 
 	public static class FetchClauseContext extends ParserRuleContext {
-		public TerminalNode FETCH() { return getToken(SQLParser.FETCH, 0); }
-		public TerminalNode ONLY() { return getToken(SQLParser.ONLY, 0); }
-		public TerminalNode FIRST() { return getToken(SQLParser.FIRST, 0); }
-		public TerminalNode NEXT() { return getToken(SQLParser.NEXT, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
-		public TerminalNode INTEGERLITERAL() { return getToken(SQLParser.INTEGERLITERAL, 0); }
+		public TerminalNode FETCH() { return getToken(DB2zSQLParser.FETCH, 0); }
+		public TerminalNode ONLY() { return getToken(DB2zSQLParser.ONLY, 0); }
+		public TerminalNode FIRST() { return getToken(DB2zSQLParser.FIRST, 0); }
+		public TerminalNode NEXT() { return getToken(DB2zSQLParser.NEXT, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
+		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public FetchClauseContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_fetchClause; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterFetchClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterFetchClause(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitFetchClause(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitFetchClause(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitFetchClause(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitFetchClause(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -26235,7 +26235,7 @@ public class SQLParser extends Parser {
 	}
 
 	public static class IdentifierContext extends ParserRuleContext {
-		public TerminalNode SQLIDENTIFIER() { return getToken(SQLParser.SQLIDENTIFIER, 0); }
+		public TerminalNode SQLIDENTIFIER() { return getToken(DB2zSQLParser.SQLIDENTIFIER, 0); }
 		public SqlKeywordContext sqlKeyword() {
 			return getRuleContext(SqlKeywordContext.class,0);
 		}
@@ -26260,15 +26260,15 @@ public class SQLParser extends Parser {
 		@Override public int getRuleIndex() { return RULE_identifier; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterIdentifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterIdentifier(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitIdentifier(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitIdentifier(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitIdentifier(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitIdentifier(this);
 			else return visitor.visitChildren(this);
 		}
 	}
@@ -26343,478 +26343,478 @@ public class SQLParser extends Parser {
 	}
 
 	public static class SqlKeywordContext extends ParserRuleContext {
-		public TerminalNode ADD() { return getToken(SQLParser.ADD, 0); }
-		public TerminalNode AFTER() { return getToken(SQLParser.AFTER, 0); }
-		public TerminalNode ALL() { return getToken(SQLParser.ALL, 0); }
-		public TerminalNode ALLOCATE() { return getToken(SQLParser.ALLOCATE, 0); }
-		public TerminalNode ALLOW() { return getToken(SQLParser.ALLOW, 0); }
-		public TerminalNode ALTERAND() { return getToken(SQLParser.ALTERAND, 0); }
-		public TerminalNode ANY() { return getToken(SQLParser.ANY, 0); }
-		public TerminalNode ARRAY() { return getToken(SQLParser.ARRAY, 0); }
-		public TerminalNode ARRAY_EXISTS() { return getToken(SQLParser.ARRAY_EXISTS, 0); }
-		public TerminalNode AS() { return getToken(SQLParser.AS, 0); }
-		public TerminalNode ASENSITIVE() { return getToken(SQLParser.ASENSITIVE, 0); }
-		public TerminalNode ASSOCIATE() { return getToken(SQLParser.ASSOCIATE, 0); }
-		public TerminalNode ASUTIME() { return getToken(SQLParser.ASUTIME, 0); }
-		public TerminalNode AT() { return getToken(SQLParser.AT, 0); }
-		public TerminalNode AUDIT() { return getToken(SQLParser.AUDIT, 0); }
-		public TerminalNode AUX() { return getToken(SQLParser.AUX, 0); }
-		public TerminalNode AUXILIARY() { return getToken(SQLParser.AUXILIARY, 0); }
-		public TerminalNode BEFORE() { return getToken(SQLParser.BEFORE, 0); }
-		public TerminalNode BEGIN() { return getToken(SQLParser.BEGIN, 0); }
-		public TerminalNode BETWEEN() { return getToken(SQLParser.BETWEEN, 0); }
-		public TerminalNode BUFFERPOOL() { return getToken(SQLParser.BUFFERPOOL, 0); }
-		public TerminalNode BY() { return getToken(SQLParser.BY, 0); }
-		public TerminalNode CALL() { return getToken(SQLParser.CALL, 0); }
-		public TerminalNode CAPTURE() { return getToken(SQLParser.CAPTURE, 0); }
-		public TerminalNode CASCADED() { return getToken(SQLParser.CASCADED, 0); }
-		public TerminalNode CASE() { return getToken(SQLParser.CASE, 0); }
-		public TerminalNode CAST() { return getToken(SQLParser.CAST, 0); }
-		public TerminalNode CCSID() { return getToken(SQLParser.CCSID, 0); }
-		public TerminalNode CHAR() { return getToken(SQLParser.CHAR, 0); }
-		public TerminalNode CHARACTER() { return getToken(SQLParser.CHARACTER, 0); }
-		public TerminalNode CHECK() { return getToken(SQLParser.CHECK, 0); }
-		public TerminalNode CLONE() { return getToken(SQLParser.CLONE, 0); }
-		public TerminalNode CLOSE() { return getToken(SQLParser.CLOSE, 0); }
-		public TerminalNode CLUSTER() { return getToken(SQLParser.CLUSTER, 0); }
-		public TerminalNode COLLECTION() { return getToken(SQLParser.COLLECTION, 0); }
-		public TerminalNode COLLID() { return getToken(SQLParser.COLLID, 0); }
-		public TerminalNode COLUMN() { return getToken(SQLParser.COLUMN, 0); }
-		public TerminalNode COMMENT() { return getToken(SQLParser.COMMENT, 0); }
-		public TerminalNode COMMIT() { return getToken(SQLParser.COMMIT, 0); }
-		public TerminalNode CONCAT() { return getToken(SQLParser.CONCAT, 0); }
-		public TerminalNode CONDITION() { return getToken(SQLParser.CONDITION, 0); }
-		public TerminalNode CONNECT() { return getToken(SQLParser.CONNECT, 0); }
-		public TerminalNode CONNECTION() { return getToken(SQLParser.CONNECTION, 0); }
-		public TerminalNode CONSTRAINT() { return getToken(SQLParser.CONSTRAINT, 0); }
-		public TerminalNode CONTAINS() { return getToken(SQLParser.CONTAINS, 0); }
-		public TerminalNode CONTENT() { return getToken(SQLParser.CONTENT, 0); }
-		public TerminalNode CONTINUE() { return getToken(SQLParser.CONTINUE, 0); }
-		public TerminalNode CREATE() { return getToken(SQLParser.CREATE, 0); }
-		public TerminalNode CUBE() { return getToken(SQLParser.CUBE, 0); }
-		public TerminalNode CURRENT() { return getToken(SQLParser.CURRENT, 0); }
-		public TerminalNode CURRENT_DATE() { return getToken(SQLParser.CURRENT_DATE, 0); }
-		public TerminalNode CURRENT_LC_CTYPE() { return getToken(SQLParser.CURRENT_LC_CTYPE, 0); }
-		public TerminalNode CURRENT_PATH() { return getToken(SQLParser.CURRENT_PATH, 0); }
-		public TerminalNode CURRENT_SCHEMA() { return getToken(SQLParser.CURRENT_SCHEMA, 0); }
-		public TerminalNode CURRENT_SERVER() { return getToken(SQLParser.CURRENT_SERVER, 0); }
-		public TerminalNode CURRENT_TIME() { return getToken(SQLParser.CURRENT_TIME, 0); }
-		public TerminalNode CURRENT_TIMESTAMP() { return getToken(SQLParser.CURRENT_TIMESTAMP, 0); }
-		public TerminalNode CURRENT_TIME_ZONE() { return getToken(SQLParser.CURRENT_TIME_ZONE, 0); }
-		public TerminalNode CURRVAL() { return getToken(SQLParser.CURRVAL, 0); }
-		public TerminalNode CURSOR() { return getToken(SQLParser.CURSOR, 0); }
-		public TerminalNode DATA() { return getToken(SQLParser.DATA, 0); }
-		public TerminalNode DATABASE() { return getToken(SQLParser.DATABASE, 0); }
-		public TerminalNode DAY() { return getToken(SQLParser.DAY, 0); }
-		public TerminalNode DAYS() { return getToken(SQLParser.DAYS, 0); }
-		public TerminalNode DBINFO() { return getToken(SQLParser.DBINFO, 0); }
-		public TerminalNode DECLARE() { return getToken(SQLParser.DECLARE, 0); }
-		public TerminalNode DEFAULT() { return getToken(SQLParser.DEFAULT, 0); }
-		public TerminalNode DELETE() { return getToken(SQLParser.DELETE, 0); }
-		public TerminalNode DESCRIPTOR() { return getToken(SQLParser.DESCRIPTOR, 0); }
-		public TerminalNode DETERMINISTIC() { return getToken(SQLParser.DETERMINISTIC, 0); }
-		public TerminalNode DISABLE() { return getToken(SQLParser.DISABLE, 0); }
-		public TerminalNode DISALLOW() { return getToken(SQLParser.DISALLOW, 0); }
-		public TerminalNode DISTINCT() { return getToken(SQLParser.DISTINCT, 0); }
-		public TerminalNode DO() { return getToken(SQLParser.DO, 0); }
-		public TerminalNode DOCUMENT() { return getToken(SQLParser.DOCUMENT, 0); }
-		public TerminalNode DOUBLE() { return getToken(SQLParser.DOUBLE, 0); }
-		public TerminalNode DROP() { return getToken(SQLParser.DROP, 0); }
-		public TerminalNode DSSIZE() { return getToken(SQLParser.DSSIZE, 0); }
-		public TerminalNode DYNAMIC() { return getToken(SQLParser.DYNAMIC, 0); }
-		public TerminalNode EDITPROC() { return getToken(SQLParser.EDITPROC, 0); }
-		public TerminalNode ELSE() { return getToken(SQLParser.ELSE, 0); }
-		public TerminalNode ELSEIF() { return getToken(SQLParser.ELSEIF, 0); }
-		public TerminalNode ENCODING() { return getToken(SQLParser.ENCODING, 0); }
-		public TerminalNode ENCRYPTION() { return getToken(SQLParser.ENCRYPTION, 0); }
-		public TerminalNode END() { return getToken(SQLParser.END, 0); }
-		public TerminalNode END_EXEC() { return getToken(SQLParser.END_EXEC, 0); }
-		public TerminalNode ENDING() { return getToken(SQLParser.ENDING, 0); }
-		public TerminalNode ERASE() { return getToken(SQLParser.ERASE, 0); }
-		public TerminalNode ESCAPE() { return getToken(SQLParser.ESCAPE, 0); }
-		public TerminalNode EXCEPT() { return getToken(SQLParser.EXCEPT, 0); }
-		public TerminalNode EXCEPTION() { return getToken(SQLParser.EXCEPTION, 0); }
-		public TerminalNode EXEC_SQL() { return getToken(SQLParser.EXEC_SQL, 0); }
-		public TerminalNode EXECUTE() { return getToken(SQLParser.EXECUTE, 0); }
-		public TerminalNode EXISTS() { return getToken(SQLParser.EXISTS, 0); }
-		public TerminalNode EXIT() { return getToken(SQLParser.EXIT, 0); }
-		public TerminalNode EXPLAIN() { return getToken(SQLParser.EXPLAIN, 0); }
-		public TerminalNode EXTERNAL() { return getToken(SQLParser.EXTERNAL, 0); }
-		public TerminalNode FENCED() { return getToken(SQLParser.FENCED, 0); }
-		public TerminalNode FETCH() { return getToken(SQLParser.FETCH, 0); }
-		public TerminalNode FIELDPROC() { return getToken(SQLParser.FIELDPROC, 0); }
-		public TerminalNode FINAL() { return getToken(SQLParser.FINAL, 0); }
-		public TerminalNode FIRST() { return getToken(SQLParser.FIRST, 0); }
-		public TerminalNode FOR() { return getToken(SQLParser.FOR, 0); }
-		public TerminalNode FREE() { return getToken(SQLParser.FREE, 0); }
-		public TerminalNode FROM() { return getToken(SQLParser.FROM, 0); }
-		public TerminalNode FULL() { return getToken(SQLParser.FULL, 0); }
-		public TerminalNode FUNCTION() { return getToken(SQLParser.FUNCTION, 0); }
-		public TerminalNode GENERATED() { return getToken(SQLParser.GENERATED, 0); }
-		public TerminalNode GET() { return getToken(SQLParser.GET, 0); }
-		public TerminalNode GLOBAL() { return getToken(SQLParser.GLOBAL, 0); }
-		public TerminalNode GO() { return getToken(SQLParser.GO, 0); }
-		public TerminalNode GOTO() { return getToken(SQLParser.GOTO, 0); }
-		public TerminalNode GRANT() { return getToken(SQLParser.GRANT, 0); }
-		public TerminalNode GROUP() { return getToken(SQLParser.GROUP, 0); }
-		public TerminalNode HANDLER() { return getToken(SQLParser.HANDLER, 0); }
-		public TerminalNode HAVING() { return getToken(SQLParser.HAVING, 0); }
-		public TerminalNode HOLD() { return getToken(SQLParser.HOLD, 0); }
-		public TerminalNode HOUR() { return getToken(SQLParser.HOUR, 0); }
-		public TerminalNode HOURS() { return getToken(SQLParser.HOURS, 0); }
-		public TerminalNode IF() { return getToken(SQLParser.IF, 0); }
-		public TerminalNode IMMEDIATE() { return getToken(SQLParser.IMMEDIATE, 0); }
-		public TerminalNode IN() { return getToken(SQLParser.IN, 0); }
-		public TerminalNode INCLUSIVE() { return getToken(SQLParser.INCLUSIVE, 0); }
-		public TerminalNode INDEX() { return getToken(SQLParser.INDEX, 0); }
-		public TerminalNode INHERIT() { return getToken(SQLParser.INHERIT, 0); }
-		public TerminalNode INNER() { return getToken(SQLParser.INNER, 0); }
-		public TerminalNode INOUT() { return getToken(SQLParser.INOUT, 0); }
-		public TerminalNode INSENSITIVE() { return getToken(SQLParser.INSENSITIVE, 0); }
-		public TerminalNode INSERT() { return getToken(SQLParser.INSERT, 0); }
-		public TerminalNode INTERSECT() { return getToken(SQLParser.INTERSECT, 0); }
-		public TerminalNode INTO() { return getToken(SQLParser.INTO, 0); }
-		public TerminalNode IS() { return getToken(SQLParser.IS, 0); }
-		public TerminalNode ISOBID() { return getToken(SQLParser.ISOBID, 0); }
-		public TerminalNode ITERATE() { return getToken(SQLParser.ITERATE, 0); }
-		public TerminalNode JAR() { return getToken(SQLParser.JAR, 0); }
-		public TerminalNode JOIN() { return getToken(SQLParser.JOIN, 0); }
-		public TerminalNode KEEP() { return getToken(SQLParser.KEEP, 0); }
-		public TerminalNode KEY() { return getToken(SQLParser.KEY, 0); }
-		public TerminalNode LABEL() { return getToken(SQLParser.LABEL, 0); }
-		public TerminalNode LANGUAGE() { return getToken(SQLParser.LANGUAGE, 0); }
-		public TerminalNode LAST() { return getToken(SQLParser.LAST, 0); }
-		public TerminalNode LC_CTYPE() { return getToken(SQLParser.LC_CTYPE, 0); }
-		public TerminalNode LEAVE() { return getToken(SQLParser.LEAVE, 0); }
-		public TerminalNode LEFT() { return getToken(SQLParser.LEFT, 0); }
-		public TerminalNode LIKE() { return getToken(SQLParser.LIKE, 0); }
-		public TerminalNode LIMIT() { return getToken(SQLParser.LIMIT, 0); }
-		public TerminalNode LOCAL() { return getToken(SQLParser.LOCAL, 0); }
-		public TerminalNode LOCALE() { return getToken(SQLParser.LOCALE, 0); }
-		public TerminalNode LOCATOR() { return getToken(SQLParser.LOCATOR, 0); }
-		public TerminalNode LOCATORS() { return getToken(SQLParser.LOCATORS, 0); }
-		public TerminalNode LOCK() { return getToken(SQLParser.LOCK, 0); }
-		public TerminalNode LOCKMAX() { return getToken(SQLParser.LOCKMAX, 0); }
-		public TerminalNode LOCKSIZE() { return getToken(SQLParser.LOCKSIZE, 0); }
-		public TerminalNode LONG() { return getToken(SQLParser.LONG, 0); }
-		public TerminalNode LOOP() { return getToken(SQLParser.LOOP, 0); }
-		public TerminalNode MAINTAINED() { return getToken(SQLParser.MAINTAINED, 0); }
-		public TerminalNode MATERIALIZED() { return getToken(SQLParser.MATERIALIZED, 0); }
-		public TerminalNode MICROSECOND() { return getToken(SQLParser.MICROSECOND, 0); }
-		public TerminalNode MICROSECONDS() { return getToken(SQLParser.MICROSECONDS, 0); }
-		public TerminalNode MINUTE() { return getToken(SQLParser.MINUTE, 0); }
-		public TerminalNode MINUTES() { return getToken(SQLParser.MINUTES, 0); }
-		public TerminalNode MODIFIES() { return getToken(SQLParser.MODIFIES, 0); }
-		public TerminalNode MONTH() { return getToken(SQLParser.MONTH, 0); }
-		public TerminalNode MONTHS() { return getToken(SQLParser.MONTHS, 0); }
-		public TerminalNode NEXT() { return getToken(SQLParser.NEXT, 0); }
-		public TerminalNode NEXTVAL() { return getToken(SQLParser.NEXTVAL, 0); }
-		public TerminalNode NO() { return getToken(SQLParser.NO, 0); }
-		public TerminalNode NONE() { return getToken(SQLParser.NONE, 0); }
-		public TerminalNode NOT() { return getToken(SQLParser.NOT, 0); }
-		public TerminalNode NULL() { return getToken(SQLParser.NULL, 0); }
-		public TerminalNode NULLS() { return getToken(SQLParser.NULLS, 0); }
-		public TerminalNode NUMPARTS() { return getToken(SQLParser.NUMPARTS, 0); }
-		public TerminalNode OBID() { return getToken(SQLParser.OBID, 0); }
-		public TerminalNode OF() { return getToken(SQLParser.OF, 0); }
-		public TerminalNode OFFSET() { return getToken(SQLParser.OFFSET, 0); }
-		public TerminalNode OLD() { return getToken(SQLParser.OLD, 0); }
-		public TerminalNode ON() { return getToken(SQLParser.ON, 0); }
-		public TerminalNode OPEN() { return getToken(SQLParser.OPEN, 0); }
-		public TerminalNode OPTIMIZATION() { return getToken(SQLParser.OPTIMIZATION, 0); }
-		public TerminalNode OPTIMIZE() { return getToken(SQLParser.OPTIMIZE, 0); }
-		public TerminalNode OR() { return getToken(SQLParser.OR, 0); }
-		public TerminalNode ORDER() { return getToken(SQLParser.ORDER, 0); }
-		public TerminalNode ORGANIZATION() { return getToken(SQLParser.ORGANIZATION, 0); }
-		public TerminalNode OUT() { return getToken(SQLParser.OUT, 0); }
-		public TerminalNode OUTER() { return getToken(SQLParser.OUTER, 0); }
-		public TerminalNode PACKAGE() { return getToken(SQLParser.PACKAGE, 0); }
-		public TerminalNode PADDED() { return getToken(SQLParser.PADDED, 0); }
-		public TerminalNode PARAMETER() { return getToken(SQLParser.PARAMETER, 0); }
-		public TerminalNode PART() { return getToken(SQLParser.PART, 0); }
-		public TerminalNode PARTITION() { return getToken(SQLParser.PARTITION, 0); }
-		public TerminalNode PARTITIONED() { return getToken(SQLParser.PARTITIONED, 0); }
-		public TerminalNode PARTITIONING() { return getToken(SQLParser.PARTITIONING, 0); }
-		public TerminalNode PATH() { return getToken(SQLParser.PATH, 0); }
-		public TerminalNode PERIOD() { return getToken(SQLParser.PERIOD, 0); }
-		public TerminalNode PIECESIZE() { return getToken(SQLParser.PIECESIZE, 0); }
-		public TerminalNode PLAN() { return getToken(SQLParser.PLAN, 0); }
-		public TerminalNode PRECISION() { return getToken(SQLParser.PRECISION, 0); }
-		public TerminalNode PREPARE() { return getToken(SQLParser.PREPARE, 0); }
-		public TerminalNode PREVVAL() { return getToken(SQLParser.PREVVAL, 0); }
-		public TerminalNode PRIOR() { return getToken(SQLParser.PRIOR, 0); }
-		public TerminalNode PRIQTY() { return getToken(SQLParser.PRIQTY, 0); }
-		public TerminalNode PRIVILEGES() { return getToken(SQLParser.PRIVILEGES, 0); }
-		public TerminalNode PROCEDURE() { return getToken(SQLParser.PROCEDURE, 0); }
-		public TerminalNode PROGRAM() { return getToken(SQLParser.PROGRAM, 0); }
-		public TerminalNode PSID() { return getToken(SQLParser.PSID, 0); }
-		public TerminalNode PUBLIC() { return getToken(SQLParser.PUBLIC, 0); }
-		public TerminalNode QUERY() { return getToken(SQLParser.QUERY, 0); }
-		public TerminalNode QUERYNO() { return getToken(SQLParser.QUERYNO, 0); }
-		public TerminalNode READS() { return getToken(SQLParser.READS, 0); }
-		public TerminalNode REFERENCES() { return getToken(SQLParser.REFERENCES, 0); }
-		public TerminalNode REFRESH() { return getToken(SQLParser.REFRESH, 0); }
-		public TerminalNode RELEASE() { return getToken(SQLParser.RELEASE, 0); }
-		public TerminalNode RENAME() { return getToken(SQLParser.RENAME, 0); }
-		public TerminalNode REPEAT() { return getToken(SQLParser.REPEAT, 0); }
-		public TerminalNode RESIGNAL() { return getToken(SQLParser.RESIGNAL, 0); }
-		public TerminalNode RESTRICT() { return getToken(SQLParser.RESTRICT, 0); }
-		public TerminalNode RESULT() { return getToken(SQLParser.RESULT, 0); }
-		public TerminalNode RESULT_SET_LOCATOR() { return getToken(SQLParser.RESULT_SET_LOCATOR, 0); }
-		public TerminalNode RETURN() { return getToken(SQLParser.RETURN, 0); }
-		public TerminalNode RETURNS() { return getToken(SQLParser.RETURNS, 0); }
-		public TerminalNode REVOKE() { return getToken(SQLParser.REVOKE, 0); }
-		public TerminalNode RIGHT() { return getToken(SQLParser.RIGHT, 0); }
-		public TerminalNode ROLE() { return getToken(SQLParser.ROLE, 0); }
-		public TerminalNode ROLLBACK() { return getToken(SQLParser.ROLLBACK, 0); }
-		public TerminalNode ROLLUP() { return getToken(SQLParser.ROLLUP, 0); }
-		public TerminalNode ROUND_CEILING() { return getToken(SQLParser.ROUND_CEILING, 0); }
-		public TerminalNode ROUND_DOWN() { return getToken(SQLParser.ROUND_DOWN, 0); }
-		public TerminalNode ROUND_FLOOR() { return getToken(SQLParser.ROUND_FLOOR, 0); }
-		public TerminalNode ROUND_HALF_DOWN() { return getToken(SQLParser.ROUND_HALF_DOWN, 0); }
-		public TerminalNode ROUND_HALF_EVEN() { return getToken(SQLParser.ROUND_HALF_EVEN, 0); }
-		public TerminalNode ROUND_HALF_UP() { return getToken(SQLParser.ROUND_HALF_UP, 0); }
-		public TerminalNode ROUND_UP() { return getToken(SQLParser.ROUND_UP, 0); }
-		public TerminalNode ROW() { return getToken(SQLParser.ROW, 0); }
-		public TerminalNode ROWSET() { return getToken(SQLParser.ROWSET, 0); }
-		public TerminalNode RUN() { return getToken(SQLParser.RUN, 0); }
-		public TerminalNode SAVEPOINT() { return getToken(SQLParser.SAVEPOINT, 0); }
-		public TerminalNode SCHEMA() { return getToken(SQLParser.SCHEMA, 0); }
-		public TerminalNode SCRATCHPAD() { return getToken(SQLParser.SCRATCHPAD, 0); }
-		public TerminalNode SECOND() { return getToken(SQLParser.SECOND, 0); }
-		public TerminalNode SECONDS() { return getToken(SQLParser.SECONDS, 0); }
-		public TerminalNode SECQTY() { return getToken(SQLParser.SECQTY, 0); }
-		public TerminalNode SECURITY() { return getToken(SQLParser.SECURITY, 0); }
-		public TerminalNode SELECT() { return getToken(SQLParser.SELECT, 0); }
-		public TerminalNode SENSITIVE() { return getToken(SQLParser.SENSITIVE, 0); }
-		public TerminalNode SEQUENCE() { return getToken(SQLParser.SEQUENCE, 0); }
-		public TerminalNode SESSION_USER() { return getToken(SQLParser.SESSION_USER, 0); }
-		public TerminalNode SET() { return getToken(SQLParser.SET, 0); }
-		public TerminalNode SIGNAL() { return getToken(SQLParser.SIGNAL, 0); }
-		public TerminalNode SIMPLE() { return getToken(SQLParser.SIMPLE, 0); }
-		public TerminalNode SOME() { return getToken(SQLParser.SOME, 0); }
-		public TerminalNode SOURCE() { return getToken(SQLParser.SOURCE, 0); }
-		public TerminalNode SPECIFIC() { return getToken(SQLParser.SPECIFIC, 0); }
-		public TerminalNode STANDARD() { return getToken(SQLParser.STANDARD, 0); }
-		public TerminalNode STATEMENT() { return getToken(SQLParser.STATEMENT, 0); }
-		public TerminalNode STATIC() { return getToken(SQLParser.STATIC, 0); }
-		public TerminalNode STAY() { return getToken(SQLParser.STAY, 0); }
-		public TerminalNode STOGROUP() { return getToken(SQLParser.STOGROUP, 0); }
-		public TerminalNode STORES() { return getToken(SQLParser.STORES, 0); }
-		public TerminalNode STYLE() { return getToken(SQLParser.STYLE, 0); }
-		public TerminalNode SUMMARY() { return getToken(SQLParser.SUMMARY, 0); }
-		public TerminalNode SYNONYM() { return getToken(SQLParser.SYNONYM, 0); }
-		public TerminalNode SYSDATE() { return getToken(SQLParser.SYSDATE, 0); }
-		public TerminalNode SYSTEM() { return getToken(SQLParser.SYSTEM, 0); }
-		public TerminalNode SYSTIMESTAMP() { return getToken(SQLParser.SYSTIMESTAMP, 0); }
-		public TerminalNode TABLE() { return getToken(SQLParser.TABLE, 0); }
-		public TerminalNode TABLESPACE() { return getToken(SQLParser.TABLESPACE, 0); }
-		public TerminalNode THEN() { return getToken(SQLParser.THEN, 0); }
-		public TerminalNode TO() { return getToken(SQLParser.TO, 0); }
-		public TerminalNode TRIGGER() { return getToken(SQLParser.TRIGGER, 0); }
-		public TerminalNode TRUNCATE() { return getToken(SQLParser.TRUNCATE, 0); }
-		public TerminalNode TYPE() { return getToken(SQLParser.TYPE, 0); }
-		public TerminalNode UNDO() { return getToken(SQLParser.UNDO, 0); }
-		public TerminalNode UNION() { return getToken(SQLParser.UNION, 0); }
-		public TerminalNode UNIQUE() { return getToken(SQLParser.UNIQUE, 0); }
-		public TerminalNode UNTIL() { return getToken(SQLParser.UNTIL, 0); }
-		public TerminalNode UPDATE() { return getToken(SQLParser.UPDATE, 0); }
-		public TerminalNode USER() { return getToken(SQLParser.USER, 0); }
-		public TerminalNode USING() { return getToken(SQLParser.USING, 0); }
-		public TerminalNode VALIDPROC() { return getToken(SQLParser.VALIDPROC, 0); }
-		public TerminalNode VALUE() { return getToken(SQLParser.VALUE, 0); }
-		public TerminalNode VALUES() { return getToken(SQLParser.VALUES, 0); }
-		public TerminalNode VARIABLE() { return getToken(SQLParser.VARIABLE, 0); }
-		public TerminalNode VARIANT() { return getToken(SQLParser.VARIANT, 0); }
-		public TerminalNode VCAT() { return getToken(SQLParser.VCAT, 0); }
-		public TerminalNode VERSIONING() { return getToken(SQLParser.VERSIONING, 0); }
-		public TerminalNode VIEW() { return getToken(SQLParser.VIEW, 0); }
-		public TerminalNode VOLATILE() { return getToken(SQLParser.VOLATILE, 0); }
-		public TerminalNode VOLUMES() { return getToken(SQLParser.VOLUMES, 0); }
-		public TerminalNode WHEN() { return getToken(SQLParser.WHEN, 0); }
-		public TerminalNode WHENEVER() { return getToken(SQLParser.WHENEVER, 0); }
-		public TerminalNode WHERE() { return getToken(SQLParser.WHERE, 0); }
-		public TerminalNode WHILE() { return getToken(SQLParser.WHILE, 0); }
-		public TerminalNode WITH() { return getToken(SQLParser.WITH, 0); }
-		public TerminalNode WLM() { return getToken(SQLParser.WLM, 0); }
-		public TerminalNode XMLCAST() { return getToken(SQLParser.XMLCAST, 0); }
-		public TerminalNode XMLEXISTS() { return getToken(SQLParser.XMLEXISTS, 0); }
-		public TerminalNode XMLNAMESPACES() { return getToken(SQLParser.XMLNAMESPACES, 0); }
-		public TerminalNode YEAR() { return getToken(SQLParser.YEAR, 0); }
-		public TerminalNode YEARS() { return getToken(SQLParser.YEARS, 0); }
-		public TerminalNode ZONE() { return getToken(SQLParser.ZONE, 0); }
-		public TerminalNode AND() { return getToken(SQLParser.AND, 0); }
-		public TerminalNode ARRAY_AGG() { return getToken(SQLParser.ARRAY_AGG, 0); }
-		public TerminalNode ASC() { return getToken(SQLParser.ASC, 0); }
-		public TerminalNode AVG() { return getToken(SQLParser.AVG, 0); }
-		public TerminalNode BIT() { return getToken(SQLParser.BIT, 0); }
-		public TerminalNode CHANGE() { return getToken(SQLParser.CHANGE, 0); }
-		public TerminalNode CODEUNITS16() { return getToken(SQLParser.CODEUNITS16, 0); }
-		public TerminalNode CODEUNITS32() { return getToken(SQLParser.CODEUNITS32, 0); }
-		public TerminalNode CORR() { return getToken(SQLParser.CORR, 0); }
-		public TerminalNode CORRELATION() { return getToken(SQLParser.CORRELATION, 0); }
-		public TerminalNode COVAR() { return getToken(SQLParser.COVAR, 0); }
-		public TerminalNode COVARIANCE() { return getToken(SQLParser.COVARIANCE, 0); }
-		public TerminalNode COVARIANCE_SAMP() { return getToken(SQLParser.COVARIANCE_SAMP, 0); }
-		public TerminalNode COVAR_POP() { return getToken(SQLParser.COVAR_POP, 0); }
-		public TerminalNode COVAR_SAMP() { return getToken(SQLParser.COVAR_SAMP, 0); }
-		public TerminalNode CS() { return getToken(SQLParser.CS, 0); }
-		public TerminalNode CUME_DIST() { return getToken(SQLParser.CUME_DIST, 0); }
-		public TerminalNode DENSE_RANK() { return getToken(SQLParser.DENSE_RANK, 0); }
-		public TerminalNode DESC() { return getToken(SQLParser.DESC, 0); }
-		public TerminalNode EBCDIC() { return getToken(SQLParser.EBCDIC, 0); }
-		public TerminalNode EXCLUSIVE() { return getToken(SQLParser.EXCLUSIVE, 0); }
-		public TerminalNode FIRST_VALUE() { return getToken(SQLParser.FIRST_VALUE, 0); }
-		public TerminalNode FOLLOWING() { return getToken(SQLParser.FOLLOWING, 0); }
-		public TerminalNode GROUPING() { return getToken(SQLParser.GROUPING, 0); }
-		public TerminalNode IGNORE() { return getToken(SQLParser.IGNORE, 0); }
-		public TerminalNode INDICATOR() { return getToken(SQLParser.INDICATOR, 0); }
-		public TerminalNode INPUT() { return getToken(SQLParser.INPUT, 0); }
-		public TerminalNode ISNULL() { return getToken(SQLParser.ISNULL, 0); }
-		public TerminalNode LAG() { return getToken(SQLParser.LAG, 0); }
-		public TerminalNode LARGE() { return getToken(SQLParser.LARGE, 0); }
-		public TerminalNode LAST_VALUE() { return getToken(SQLParser.LAST_VALUE, 0); }
-		public TerminalNode LEAD() { return getToken(SQLParser.LEAD, 0); }
-		public TerminalNode LISTAGG() { return getToken(SQLParser.LISTAGG, 0); }
-		public TerminalNode LOCKED() { return getToken(SQLParser.LOCKED, 0); }
-		public TerminalNode LOCKS() { return getToken(SQLParser.LOCKS, 0); }
-		public TerminalNode MEDIAN() { return getToken(SQLParser.MEDIAN, 0); }
-		public TerminalNode MIXED() { return getToken(SQLParser.MIXED, 0); }
-		public TerminalNode NOTNULL() { return getToken(SQLParser.NOTNULL, 0); }
-		public TerminalNode NTH_VALUE() { return getToken(SQLParser.NTH_VALUE, 0); }
-		public TerminalNode NTILE() { return getToken(SQLParser.NTILE, 0); }
-		public TerminalNode NUMERIC() { return getToken(SQLParser.NUMERIC, 0); }
-		public TerminalNode OBJECT() { return getToken(SQLParser.OBJECT, 0); }
-		public TerminalNode OCTETS() { return getToken(SQLParser.OCTETS, 0); }
-		public TerminalNode ONLY() { return getToken(SQLParser.ONLY, 0); }
-		public TerminalNode OVER() { return getToken(SQLParser.OVER, 0); }
-		public TerminalNode PASSING() { return getToken(SQLParser.PASSING, 0); }
-		public TerminalNode PERCENTILE_CONT() { return getToken(SQLParser.PERCENTILE_CONT, 0); }
-		public TerminalNode PERCENTILE_DISC() { return getToken(SQLParser.PERCENTILE_DISC, 0); }
-		public TerminalNode PERCENT_RANK() { return getToken(SQLParser.PERCENT_RANK, 0); }
-		public TerminalNode PRECEDING() { return getToken(SQLParser.PRECEDING, 0); }
-		public TerminalNode PREVIOUS() { return getToken(SQLParser.PREVIOUS, 0); }
-		public TerminalNode RANGE() { return getToken(SQLParser.RANGE, 0); }
-		public TerminalNode RANK() { return getToken(SQLParser.RANK, 0); }
-		public TerminalNode RATIO_TO_REPORT() { return getToken(SQLParser.RATIO_TO_REPORT, 0); }
-		public TerminalNode READ() { return getToken(SQLParser.READ, 0); }
-		public TerminalNode REF() { return getToken(SQLParser.REF, 0); }
-		public TerminalNode REGR_AVGX() { return getToken(SQLParser.REGR_AVGX, 0); }
-		public TerminalNode REGR_AVGY() { return getToken(SQLParser.REGR_AVGY, 0); }
-		public TerminalNode REGR_COUNT() { return getToken(SQLParser.REGR_COUNT, 0); }
-		public TerminalNode REGR_ICPT() { return getToken(SQLParser.REGR_ICPT, 0); }
-		public TerminalNode REGR_INTERCEPT() { return getToken(SQLParser.REGR_INTERCEPT, 0); }
-		public TerminalNode REGR_R2() { return getToken(SQLParser.REGR_R2, 0); }
-		public TerminalNode REGR_SLOPE() { return getToken(SQLParser.REGR_SLOPE, 0); }
-		public TerminalNode REGR_SXX() { return getToken(SQLParser.REGR_SXX, 0); }
-		public TerminalNode REGR_SXY() { return getToken(SQLParser.REGR_SXY, 0); }
-		public TerminalNode REGR_SYY() { return getToken(SQLParser.REGR_SYY, 0); }
-		public TerminalNode RESPECT() { return getToken(SQLParser.RESPECT, 0); }
-		public TerminalNode ROW_NUMBER() { return getToken(SQLParser.ROW_NUMBER, 0); }
-		public TerminalNode ROWS() { return getToken(SQLParser.ROWS, 0); }
-		public TerminalNode RR() { return getToken(SQLParser.RR, 0); }
-		public TerminalNode RS() { return getToken(SQLParser.RS, 0); }
-		public TerminalNode SBCS() { return getToken(SQLParser.SBCS, 0); }
-		public TerminalNode SELECTIVITY() { return getToken(SQLParser.SELECTIVITY, 0); }
-		public TerminalNode SETS() { return getToken(SQLParser.SETS, 0); }
-		public TerminalNode SHARE() { return getToken(SQLParser.SHARE, 0); }
-		public TerminalNode SKIP_() { return getToken(SQLParser.SKIP_, 0); }
-		public TerminalNode STDDEV() { return getToken(SQLParser.STDDEV, 0); }
-		public TerminalNode STDDEV_POP() { return getToken(SQLParser.STDDEV_POP, 0); }
-		public TerminalNode STDDEV_SAMP() { return getToken(SQLParser.STDDEV_SAMP, 0); }
-		public TerminalNode SUM() { return getToken(SQLParser.SUM, 0); }
-		public TerminalNode TOKEN() { return getToken(SQLParser.TOKEN, 0); }
-		public TerminalNode UNBOUNDED() { return getToken(SQLParser.UNBOUNDED, 0); }
-		public TerminalNode UNPACK() { return getToken(SQLParser.UNPACK, 0); }
-		public TerminalNode UR() { return getToken(SQLParser.UR, 0); }
-		public TerminalNode USE() { return getToken(SQLParser.USE, 0); }
-		public TerminalNode VAR() { return getToken(SQLParser.VAR, 0); }
-		public TerminalNode VARIANCE() { return getToken(SQLParser.VARIANCE, 0); }
-		public TerminalNode VARIANCE_SAMP() { return getToken(SQLParser.VARIANCE_SAMP, 0); }
-		public TerminalNode VAR_POP() { return getToken(SQLParser.VAR_POP, 0); }
-		public TerminalNode VAR_SAMP() { return getToken(SQLParser.VAR_SAMP, 0); }
-		public TerminalNode VARYING() { return getToken(SQLParser.VARYING, 0); }
-		public TerminalNode WITHOUT() { return getToken(SQLParser.WITHOUT, 0); }
-		public TerminalNode XML() { return getToken(SQLParser.XML, 0); }
-		public TerminalNode XMLAGG() { return getToken(SQLParser.XMLAGG, 0); }
-		public TerminalNode COLUMNS() { return getToken(SQLParser.COLUMNS, 0); }
-		public TerminalNode SQLID() { return getToken(SQLParser.SQLID, 0); }
-		public TerminalNode ORDINALITY() { return getToken(SQLParser.ORDINALITY, 0); }
-		public TerminalNode SYSTEM_TIME() { return getToken(SQLParser.SYSTEM_TIME, 0); }
-		public TerminalNode BUSINESS_TIME() { return getToken(SQLParser.BUSINESS_TIME, 0); }
-		public TerminalNode MULTIPLIER() { return getToken(SQLParser.MULTIPLIER, 0); }
-		public TerminalNode UNNEST() { return getToken(SQLParser.UNNEST, 0); }
-		public TerminalNode CROSS() { return getToken(SQLParser.CROSS, 0); }
-		public TerminalNode CALLER() { return getToken(SQLParser.CALLER, 0); }
-		public TerminalNode CLIENT() { return getToken(SQLParser.CLIENT, 0); }
-		public TerminalNode POSITIONING() { return getToken(SQLParser.POSITIONING, 0); }
-		public TerminalNode SCROLL() { return getToken(SQLParser.SCROLL, 0); }
-		public TerminalNode ALTER() { return getToken(SQLParser.ALTER, 0); }
-		public TerminalNode INDEXBP() { return getToken(SQLParser.INDEXBP, 0); }
-		public TerminalNode ACTION() { return getToken(SQLParser.ACTION, 0); }
-		public TerminalNode ASSEMBLE() { return getToken(SQLParser.ASSEMBLE, 0); }
-		public TerminalNode C_() { return getToken(SQLParser.C_, 0); }
-		public TerminalNode CALLED() { return getToken(SQLParser.CALLED, 0); }
-		public TerminalNode COBOL() { return getToken(SQLParser.COBOL, 0); }
-		public TerminalNode DB2() { return getToken(SQLParser.DB2, 0); }
-		public TerminalNode DEFINER() { return getToken(SQLParser.DEFINER, 0); }
-		public TerminalNode DISPATCH() { return getToken(SQLParser.DISPATCH, 0); }
-		public TerminalNode ENVIRONMENT() { return getToken(SQLParser.ENVIRONMENT, 0); }
-		public TerminalNode FAILURE() { return getToken(SQLParser.FAILURE, 0); }
-		public TerminalNode FAILURES() { return getToken(SQLParser.FAILURES, 0); }
-		public TerminalNode JAVA() { return getToken(SQLParser.JAVA, 0); }
-		public TerminalNode MAIN() { return getToken(SQLParser.MAIN, 0); }
-		public TerminalNode NAME() { return getToken(SQLParser.NAME, 0); }
-		public TerminalNode OPTIONS() { return getToken(SQLParser.OPTIONS, 0); }
-		public TerminalNode PARALLEL() { return getToken(SQLParser.PARALLEL, 0); }
-		public TerminalNode PLI() { return getToken(SQLParser.PLI, 0); }
-		public TerminalNode REGISTERS() { return getToken(SQLParser.REGISTERS, 0); }
-		public TerminalNode RESIDENT() { return getToken(SQLParser.RESIDENT, 0); }
-		public TerminalNode SECURED() { return getToken(SQLParser.SECURED, 0); }
-		public TerminalNode SPECIAL() { return getToken(SQLParser.SPECIAL, 0); }
-		public TerminalNode SQL() { return getToken(SQLParser.SQL, 0); }
-		public TerminalNode STOP() { return getToken(SQLParser.STOP, 0); }
-		public TerminalNode SUB() { return getToken(SQLParser.SUB, 0); }
-		public TerminalNode YES() { return getToken(SQLParser.YES, 0); }
-		public TerminalNode APPLICATION() { return getToken(SQLParser.APPLICATION, 0); }
-		public TerminalNode CHANGED() { return getToken(SQLParser.CHANGED, 0); }
-		public TerminalNode COMPATIBILITY() { return getToken(SQLParser.COMPATIBILITY, 0); }
-		public TerminalNode COMPRESS() { return getToken(SQLParser.COMPRESS, 0); }
-		public TerminalNode COPY() { return getToken(SQLParser.COPY, 0); }
-		public TerminalNode FREEPAGE() { return getToken(SQLParser.FREEPAGE, 0); }
-		public TerminalNode GBPCACHE() { return getToken(SQLParser.GBPCACHE, 0); }
-		public TerminalNode INCLUDE() { return getToken(SQLParser.INCLUDE, 0); }
-		public TerminalNode MAXVALUE() { return getToken(SQLParser.MAXVALUE, 0); }
-		public TerminalNode MINVALUE() { return getToken(SQLParser.MINVALUE, 0); }
-		public TerminalNode PCTFREE() { return getToken(SQLParser.PCTFREE, 0); }
-		public TerminalNode REGENERATE() { return getToken(SQLParser.REGENERATE, 0); }
-		public TerminalNode SEQTY() { return getToken(SQLParser.SEQTY, 0); }
-		public TerminalNode MASK() { return getToken(SQLParser.MASK, 0); }
-		public TerminalNode ENABLE() { return getToken(SQLParser.ENABLE, 0); }
-		public TerminalNode PERMISSION() { return getToken(SQLParser.PERMISSION, 0); }
-		public TerminalNode ATOMIC() { return getToken(SQLParser.ATOMIC, 0); }
-		public TerminalNode SQLEXCEPTION() { return getToken(SQLParser.SQLEXCEPTION, 0); }
-		public TerminalNode MERGE() { return getToken(SQLParser.MERGE, 0); }
-		public TerminalNode MATCHED() { return getToken(SQLParser.MATCHED, 0); }
-		public TerminalNode SQLSTATE() { return getToken(SQLParser.SQLSTATE, 0); }
-		public TerminalNode MESSAGE_TEXT() { return getToken(SQLParser.MESSAGE_TEXT, 0); }
-		public TerminalNode OVERRIDING() { return getToken(SQLParser.OVERRIDING, 0); }
-		public TerminalNode PORTION() { return getToken(SQLParser.PORTION, 0); }
+		public TerminalNode ADD() { return getToken(DB2zSQLParser.ADD, 0); }
+		public TerminalNode AFTER() { return getToken(DB2zSQLParser.AFTER, 0); }
+		public TerminalNode ALL() { return getToken(DB2zSQLParser.ALL, 0); }
+		public TerminalNode ALLOCATE() { return getToken(DB2zSQLParser.ALLOCATE, 0); }
+		public TerminalNode ALLOW() { return getToken(DB2zSQLParser.ALLOW, 0); }
+		public TerminalNode ALTERAND() { return getToken(DB2zSQLParser.ALTERAND, 0); }
+		public TerminalNode ANY() { return getToken(DB2zSQLParser.ANY, 0); }
+		public TerminalNode ARRAY() { return getToken(DB2zSQLParser.ARRAY, 0); }
+		public TerminalNode ARRAY_EXISTS() { return getToken(DB2zSQLParser.ARRAY_EXISTS, 0); }
+		public TerminalNode AS() { return getToken(DB2zSQLParser.AS, 0); }
+		public TerminalNode ASENSITIVE() { return getToken(DB2zSQLParser.ASENSITIVE, 0); }
+		public TerminalNode ASSOCIATE() { return getToken(DB2zSQLParser.ASSOCIATE, 0); }
+		public TerminalNode ASUTIME() { return getToken(DB2zSQLParser.ASUTIME, 0); }
+		public TerminalNode AT() { return getToken(DB2zSQLParser.AT, 0); }
+		public TerminalNode AUDIT() { return getToken(DB2zSQLParser.AUDIT, 0); }
+		public TerminalNode AUX() { return getToken(DB2zSQLParser.AUX, 0); }
+		public TerminalNode AUXILIARY() { return getToken(DB2zSQLParser.AUXILIARY, 0); }
+		public TerminalNode BEFORE() { return getToken(DB2zSQLParser.BEFORE, 0); }
+		public TerminalNode BEGIN() { return getToken(DB2zSQLParser.BEGIN, 0); }
+		public TerminalNode BETWEEN() { return getToken(DB2zSQLParser.BETWEEN, 0); }
+		public TerminalNode BUFFERPOOL() { return getToken(DB2zSQLParser.BUFFERPOOL, 0); }
+		public TerminalNode BY() { return getToken(DB2zSQLParser.BY, 0); }
+		public TerminalNode CALL() { return getToken(DB2zSQLParser.CALL, 0); }
+		public TerminalNode CAPTURE() { return getToken(DB2zSQLParser.CAPTURE, 0); }
+		public TerminalNode CASCADED() { return getToken(DB2zSQLParser.CASCADED, 0); }
+		public TerminalNode CASE() { return getToken(DB2zSQLParser.CASE, 0); }
+		public TerminalNode CAST() { return getToken(DB2zSQLParser.CAST, 0); }
+		public TerminalNode CCSID() { return getToken(DB2zSQLParser.CCSID, 0); }
+		public TerminalNode CHAR() { return getToken(DB2zSQLParser.CHAR, 0); }
+		public TerminalNode CHARACTER() { return getToken(DB2zSQLParser.CHARACTER, 0); }
+		public TerminalNode CHECK() { return getToken(DB2zSQLParser.CHECK, 0); }
+		public TerminalNode CLONE() { return getToken(DB2zSQLParser.CLONE, 0); }
+		public TerminalNode CLOSE() { return getToken(DB2zSQLParser.CLOSE, 0); }
+		public TerminalNode CLUSTER() { return getToken(DB2zSQLParser.CLUSTER, 0); }
+		public TerminalNode COLLECTION() { return getToken(DB2zSQLParser.COLLECTION, 0); }
+		public TerminalNode COLLID() { return getToken(DB2zSQLParser.COLLID, 0); }
+		public TerminalNode COLUMN() { return getToken(DB2zSQLParser.COLUMN, 0); }
+		public TerminalNode COMMENT() { return getToken(DB2zSQLParser.COMMENT, 0); }
+		public TerminalNode COMMIT() { return getToken(DB2zSQLParser.COMMIT, 0); }
+		public TerminalNode CONCAT() { return getToken(DB2zSQLParser.CONCAT, 0); }
+		public TerminalNode CONDITION() { return getToken(DB2zSQLParser.CONDITION, 0); }
+		public TerminalNode CONNECT() { return getToken(DB2zSQLParser.CONNECT, 0); }
+		public TerminalNode CONNECTION() { return getToken(DB2zSQLParser.CONNECTION, 0); }
+		public TerminalNode CONSTRAINT() { return getToken(DB2zSQLParser.CONSTRAINT, 0); }
+		public TerminalNode CONTAINS() { return getToken(DB2zSQLParser.CONTAINS, 0); }
+		public TerminalNode CONTENT() { return getToken(DB2zSQLParser.CONTENT, 0); }
+		public TerminalNode CONTINUE() { return getToken(DB2zSQLParser.CONTINUE, 0); }
+		public TerminalNode CREATE() { return getToken(DB2zSQLParser.CREATE, 0); }
+		public TerminalNode CUBE() { return getToken(DB2zSQLParser.CUBE, 0); }
+		public TerminalNode CURRENT() { return getToken(DB2zSQLParser.CURRENT, 0); }
+		public TerminalNode CURRENT_DATE() { return getToken(DB2zSQLParser.CURRENT_DATE, 0); }
+		public TerminalNode CURRENT_LC_CTYPE() { return getToken(DB2zSQLParser.CURRENT_LC_CTYPE, 0); }
+		public TerminalNode CURRENT_PATH() { return getToken(DB2zSQLParser.CURRENT_PATH, 0); }
+		public TerminalNode CURRENT_SCHEMA() { return getToken(DB2zSQLParser.CURRENT_SCHEMA, 0); }
+		public TerminalNode CURRENT_SERVER() { return getToken(DB2zSQLParser.CURRENT_SERVER, 0); }
+		public TerminalNode CURRENT_TIME() { return getToken(DB2zSQLParser.CURRENT_TIME, 0); }
+		public TerminalNode CURRENT_TIMESTAMP() { return getToken(DB2zSQLParser.CURRENT_TIMESTAMP, 0); }
+		public TerminalNode CURRENT_TIME_ZONE() { return getToken(DB2zSQLParser.CURRENT_TIME_ZONE, 0); }
+		public TerminalNode CURRVAL() { return getToken(DB2zSQLParser.CURRVAL, 0); }
+		public TerminalNode CURSOR() { return getToken(DB2zSQLParser.CURSOR, 0); }
+		public TerminalNode DATA() { return getToken(DB2zSQLParser.DATA, 0); }
+		public TerminalNode DATABASE() { return getToken(DB2zSQLParser.DATABASE, 0); }
+		public TerminalNode DAY() { return getToken(DB2zSQLParser.DAY, 0); }
+		public TerminalNode DAYS() { return getToken(DB2zSQLParser.DAYS, 0); }
+		public TerminalNode DBINFO() { return getToken(DB2zSQLParser.DBINFO, 0); }
+		public TerminalNode DECLARE() { return getToken(DB2zSQLParser.DECLARE, 0); }
+		public TerminalNode DEFAULT() { return getToken(DB2zSQLParser.DEFAULT, 0); }
+		public TerminalNode DELETE() { return getToken(DB2zSQLParser.DELETE, 0); }
+		public TerminalNode DESCRIPTOR() { return getToken(DB2zSQLParser.DESCRIPTOR, 0); }
+		public TerminalNode DETERMINISTIC() { return getToken(DB2zSQLParser.DETERMINISTIC, 0); }
+		public TerminalNode DISABLE() { return getToken(DB2zSQLParser.DISABLE, 0); }
+		public TerminalNode DISALLOW() { return getToken(DB2zSQLParser.DISALLOW, 0); }
+		public TerminalNode DISTINCT() { return getToken(DB2zSQLParser.DISTINCT, 0); }
+		public TerminalNode DO() { return getToken(DB2zSQLParser.DO, 0); }
+		public TerminalNode DOCUMENT() { return getToken(DB2zSQLParser.DOCUMENT, 0); }
+		public TerminalNode DOUBLE() { return getToken(DB2zSQLParser.DOUBLE, 0); }
+		public TerminalNode DROP() { return getToken(DB2zSQLParser.DROP, 0); }
+		public TerminalNode DSSIZE() { return getToken(DB2zSQLParser.DSSIZE, 0); }
+		public TerminalNode DYNAMIC() { return getToken(DB2zSQLParser.DYNAMIC, 0); }
+		public TerminalNode EDITPROC() { return getToken(DB2zSQLParser.EDITPROC, 0); }
+		public TerminalNode ELSE() { return getToken(DB2zSQLParser.ELSE, 0); }
+		public TerminalNode ELSEIF() { return getToken(DB2zSQLParser.ELSEIF, 0); }
+		public TerminalNode ENCODING() { return getToken(DB2zSQLParser.ENCODING, 0); }
+		public TerminalNode ENCRYPTION() { return getToken(DB2zSQLParser.ENCRYPTION, 0); }
+		public TerminalNode END() { return getToken(DB2zSQLParser.END, 0); }
+		public TerminalNode END_EXEC() { return getToken(DB2zSQLParser.END_EXEC, 0); }
+		public TerminalNode ENDING() { return getToken(DB2zSQLParser.ENDING, 0); }
+		public TerminalNode ERASE() { return getToken(DB2zSQLParser.ERASE, 0); }
+		public TerminalNode ESCAPE() { return getToken(DB2zSQLParser.ESCAPE, 0); }
+		public TerminalNode EXCEPT() { return getToken(DB2zSQLParser.EXCEPT, 0); }
+		public TerminalNode EXCEPTION() { return getToken(DB2zSQLParser.EXCEPTION, 0); }
+		public TerminalNode EXEC_SQL() { return getToken(DB2zSQLParser.EXEC_SQL, 0); }
+		public TerminalNode EXECUTE() { return getToken(DB2zSQLParser.EXECUTE, 0); }
+		public TerminalNode EXISTS() { return getToken(DB2zSQLParser.EXISTS, 0); }
+		public TerminalNode EXIT() { return getToken(DB2zSQLParser.EXIT, 0); }
+		public TerminalNode EXPLAIN() { return getToken(DB2zSQLParser.EXPLAIN, 0); }
+		public TerminalNode EXTERNAL() { return getToken(DB2zSQLParser.EXTERNAL, 0); }
+		public TerminalNode FENCED() { return getToken(DB2zSQLParser.FENCED, 0); }
+		public TerminalNode FETCH() { return getToken(DB2zSQLParser.FETCH, 0); }
+		public TerminalNode FIELDPROC() { return getToken(DB2zSQLParser.FIELDPROC, 0); }
+		public TerminalNode FINAL() { return getToken(DB2zSQLParser.FINAL, 0); }
+		public TerminalNode FIRST() { return getToken(DB2zSQLParser.FIRST, 0); }
+		public TerminalNode FOR() { return getToken(DB2zSQLParser.FOR, 0); }
+		public TerminalNode FREE() { return getToken(DB2zSQLParser.FREE, 0); }
+		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
+		public TerminalNode FULL() { return getToken(DB2zSQLParser.FULL, 0); }
+		public TerminalNode FUNCTION() { return getToken(DB2zSQLParser.FUNCTION, 0); }
+		public TerminalNode GENERATED() { return getToken(DB2zSQLParser.GENERATED, 0); }
+		public TerminalNode GET() { return getToken(DB2zSQLParser.GET, 0); }
+		public TerminalNode GLOBAL() { return getToken(DB2zSQLParser.GLOBAL, 0); }
+		public TerminalNode GO() { return getToken(DB2zSQLParser.GO, 0); }
+		public TerminalNode GOTO() { return getToken(DB2zSQLParser.GOTO, 0); }
+		public TerminalNode GRANT() { return getToken(DB2zSQLParser.GRANT, 0); }
+		public TerminalNode GROUP() { return getToken(DB2zSQLParser.GROUP, 0); }
+		public TerminalNode HANDLER() { return getToken(DB2zSQLParser.HANDLER, 0); }
+		public TerminalNode HAVING() { return getToken(DB2zSQLParser.HAVING, 0); }
+		public TerminalNode HOLD() { return getToken(DB2zSQLParser.HOLD, 0); }
+		public TerminalNode HOUR() { return getToken(DB2zSQLParser.HOUR, 0); }
+		public TerminalNode HOURS() { return getToken(DB2zSQLParser.HOURS, 0); }
+		public TerminalNode IF() { return getToken(DB2zSQLParser.IF, 0); }
+		public TerminalNode IMMEDIATE() { return getToken(DB2zSQLParser.IMMEDIATE, 0); }
+		public TerminalNode IN() { return getToken(DB2zSQLParser.IN, 0); }
+		public TerminalNode INCLUSIVE() { return getToken(DB2zSQLParser.INCLUSIVE, 0); }
+		public TerminalNode INDEX() { return getToken(DB2zSQLParser.INDEX, 0); }
+		public TerminalNode INHERIT() { return getToken(DB2zSQLParser.INHERIT, 0); }
+		public TerminalNode INNER() { return getToken(DB2zSQLParser.INNER, 0); }
+		public TerminalNode INOUT() { return getToken(DB2zSQLParser.INOUT, 0); }
+		public TerminalNode INSENSITIVE() { return getToken(DB2zSQLParser.INSENSITIVE, 0); }
+		public TerminalNode INSERT() { return getToken(DB2zSQLParser.INSERT, 0); }
+		public TerminalNode INTERSECT() { return getToken(DB2zSQLParser.INTERSECT, 0); }
+		public TerminalNode INTO() { return getToken(DB2zSQLParser.INTO, 0); }
+		public TerminalNode IS() { return getToken(DB2zSQLParser.IS, 0); }
+		public TerminalNode ISOBID() { return getToken(DB2zSQLParser.ISOBID, 0); }
+		public TerminalNode ITERATE() { return getToken(DB2zSQLParser.ITERATE, 0); }
+		public TerminalNode JAR() { return getToken(DB2zSQLParser.JAR, 0); }
+		public TerminalNode JOIN() { return getToken(DB2zSQLParser.JOIN, 0); }
+		public TerminalNode KEEP() { return getToken(DB2zSQLParser.KEEP, 0); }
+		public TerminalNode KEY() { return getToken(DB2zSQLParser.KEY, 0); }
+		public TerminalNode LABEL() { return getToken(DB2zSQLParser.LABEL, 0); }
+		public TerminalNode LANGUAGE() { return getToken(DB2zSQLParser.LANGUAGE, 0); }
+		public TerminalNode LAST() { return getToken(DB2zSQLParser.LAST, 0); }
+		public TerminalNode LC_CTYPE() { return getToken(DB2zSQLParser.LC_CTYPE, 0); }
+		public TerminalNode LEAVE() { return getToken(DB2zSQLParser.LEAVE, 0); }
+		public TerminalNode LEFT() { return getToken(DB2zSQLParser.LEFT, 0); }
+		public TerminalNode LIKE() { return getToken(DB2zSQLParser.LIKE, 0); }
+		public TerminalNode LIMIT() { return getToken(DB2zSQLParser.LIMIT, 0); }
+		public TerminalNode LOCAL() { return getToken(DB2zSQLParser.LOCAL, 0); }
+		public TerminalNode LOCALE() { return getToken(DB2zSQLParser.LOCALE, 0); }
+		public TerminalNode LOCATOR() { return getToken(DB2zSQLParser.LOCATOR, 0); }
+		public TerminalNode LOCATORS() { return getToken(DB2zSQLParser.LOCATORS, 0); }
+		public TerminalNode LOCK() { return getToken(DB2zSQLParser.LOCK, 0); }
+		public TerminalNode LOCKMAX() { return getToken(DB2zSQLParser.LOCKMAX, 0); }
+		public TerminalNode LOCKSIZE() { return getToken(DB2zSQLParser.LOCKSIZE, 0); }
+		public TerminalNode LONG() { return getToken(DB2zSQLParser.LONG, 0); }
+		public TerminalNode LOOP() { return getToken(DB2zSQLParser.LOOP, 0); }
+		public TerminalNode MAINTAINED() { return getToken(DB2zSQLParser.MAINTAINED, 0); }
+		public TerminalNode MATERIALIZED() { return getToken(DB2zSQLParser.MATERIALIZED, 0); }
+		public TerminalNode MICROSECOND() { return getToken(DB2zSQLParser.MICROSECOND, 0); }
+		public TerminalNode MICROSECONDS() { return getToken(DB2zSQLParser.MICROSECONDS, 0); }
+		public TerminalNode MINUTE() { return getToken(DB2zSQLParser.MINUTE, 0); }
+		public TerminalNode MINUTES() { return getToken(DB2zSQLParser.MINUTES, 0); }
+		public TerminalNode MODIFIES() { return getToken(DB2zSQLParser.MODIFIES, 0); }
+		public TerminalNode MONTH() { return getToken(DB2zSQLParser.MONTH, 0); }
+		public TerminalNode MONTHS() { return getToken(DB2zSQLParser.MONTHS, 0); }
+		public TerminalNode NEXT() { return getToken(DB2zSQLParser.NEXT, 0); }
+		public TerminalNode NEXTVAL() { return getToken(DB2zSQLParser.NEXTVAL, 0); }
+		public TerminalNode NO() { return getToken(DB2zSQLParser.NO, 0); }
+		public TerminalNode NONE() { return getToken(DB2zSQLParser.NONE, 0); }
+		public TerminalNode NOT() { return getToken(DB2zSQLParser.NOT, 0); }
+		public TerminalNode NULL() { return getToken(DB2zSQLParser.NULL, 0); }
+		public TerminalNode NULLS() { return getToken(DB2zSQLParser.NULLS, 0); }
+		public TerminalNode NUMPARTS() { return getToken(DB2zSQLParser.NUMPARTS, 0); }
+		public TerminalNode OBID() { return getToken(DB2zSQLParser.OBID, 0); }
+		public TerminalNode OF() { return getToken(DB2zSQLParser.OF, 0); }
+		public TerminalNode OFFSET() { return getToken(DB2zSQLParser.OFFSET, 0); }
+		public TerminalNode OLD() { return getToken(DB2zSQLParser.OLD, 0); }
+		public TerminalNode ON() { return getToken(DB2zSQLParser.ON, 0); }
+		public TerminalNode OPEN() { return getToken(DB2zSQLParser.OPEN, 0); }
+		public TerminalNode OPTIMIZATION() { return getToken(DB2zSQLParser.OPTIMIZATION, 0); }
+		public TerminalNode OPTIMIZE() { return getToken(DB2zSQLParser.OPTIMIZE, 0); }
+		public TerminalNode OR() { return getToken(DB2zSQLParser.OR, 0); }
+		public TerminalNode ORDER() { return getToken(DB2zSQLParser.ORDER, 0); }
+		public TerminalNode ORGANIZATION() { return getToken(DB2zSQLParser.ORGANIZATION, 0); }
+		public TerminalNode OUT() { return getToken(DB2zSQLParser.OUT, 0); }
+		public TerminalNode OUTER() { return getToken(DB2zSQLParser.OUTER, 0); }
+		public TerminalNode PACKAGE() { return getToken(DB2zSQLParser.PACKAGE, 0); }
+		public TerminalNode PADDED() { return getToken(DB2zSQLParser.PADDED, 0); }
+		public TerminalNode PARAMETER() { return getToken(DB2zSQLParser.PARAMETER, 0); }
+		public TerminalNode PART() { return getToken(DB2zSQLParser.PART, 0); }
+		public TerminalNode PARTITION() { return getToken(DB2zSQLParser.PARTITION, 0); }
+		public TerminalNode PARTITIONED() { return getToken(DB2zSQLParser.PARTITIONED, 0); }
+		public TerminalNode PARTITIONING() { return getToken(DB2zSQLParser.PARTITIONING, 0); }
+		public TerminalNode PATH() { return getToken(DB2zSQLParser.PATH, 0); }
+		public TerminalNode PERIOD() { return getToken(DB2zSQLParser.PERIOD, 0); }
+		public TerminalNode PIECESIZE() { return getToken(DB2zSQLParser.PIECESIZE, 0); }
+		public TerminalNode PLAN() { return getToken(DB2zSQLParser.PLAN, 0); }
+		public TerminalNode PRECISION() { return getToken(DB2zSQLParser.PRECISION, 0); }
+		public TerminalNode PREPARE() { return getToken(DB2zSQLParser.PREPARE, 0); }
+		public TerminalNode PREVVAL() { return getToken(DB2zSQLParser.PREVVAL, 0); }
+		public TerminalNode PRIOR() { return getToken(DB2zSQLParser.PRIOR, 0); }
+		public TerminalNode PRIQTY() { return getToken(DB2zSQLParser.PRIQTY, 0); }
+		public TerminalNode PRIVILEGES() { return getToken(DB2zSQLParser.PRIVILEGES, 0); }
+		public TerminalNode PROCEDURE() { return getToken(DB2zSQLParser.PROCEDURE, 0); }
+		public TerminalNode PROGRAM() { return getToken(DB2zSQLParser.PROGRAM, 0); }
+		public TerminalNode PSID() { return getToken(DB2zSQLParser.PSID, 0); }
+		public TerminalNode PUBLIC() { return getToken(DB2zSQLParser.PUBLIC, 0); }
+		public TerminalNode QUERY() { return getToken(DB2zSQLParser.QUERY, 0); }
+		public TerminalNode QUERYNO() { return getToken(DB2zSQLParser.QUERYNO, 0); }
+		public TerminalNode READS() { return getToken(DB2zSQLParser.READS, 0); }
+		public TerminalNode REFERENCES() { return getToken(DB2zSQLParser.REFERENCES, 0); }
+		public TerminalNode REFRESH() { return getToken(DB2zSQLParser.REFRESH, 0); }
+		public TerminalNode RELEASE() { return getToken(DB2zSQLParser.RELEASE, 0); }
+		public TerminalNode RENAME() { return getToken(DB2zSQLParser.RENAME, 0); }
+		public TerminalNode REPEAT() { return getToken(DB2zSQLParser.REPEAT, 0); }
+		public TerminalNode RESIGNAL() { return getToken(DB2zSQLParser.RESIGNAL, 0); }
+		public TerminalNode RESTRICT() { return getToken(DB2zSQLParser.RESTRICT, 0); }
+		public TerminalNode RESULT() { return getToken(DB2zSQLParser.RESULT, 0); }
+		public TerminalNode RESULT_SET_LOCATOR() { return getToken(DB2zSQLParser.RESULT_SET_LOCATOR, 0); }
+		public TerminalNode RETURN() { return getToken(DB2zSQLParser.RETURN, 0); }
+		public TerminalNode RETURNS() { return getToken(DB2zSQLParser.RETURNS, 0); }
+		public TerminalNode REVOKE() { return getToken(DB2zSQLParser.REVOKE, 0); }
+		public TerminalNode RIGHT() { return getToken(DB2zSQLParser.RIGHT, 0); }
+		public TerminalNode ROLE() { return getToken(DB2zSQLParser.ROLE, 0); }
+		public TerminalNode ROLLBACK() { return getToken(DB2zSQLParser.ROLLBACK, 0); }
+		public TerminalNode ROLLUP() { return getToken(DB2zSQLParser.ROLLUP, 0); }
+		public TerminalNode ROUND_CEILING() { return getToken(DB2zSQLParser.ROUND_CEILING, 0); }
+		public TerminalNode ROUND_DOWN() { return getToken(DB2zSQLParser.ROUND_DOWN, 0); }
+		public TerminalNode ROUND_FLOOR() { return getToken(DB2zSQLParser.ROUND_FLOOR, 0); }
+		public TerminalNode ROUND_HALF_DOWN() { return getToken(DB2zSQLParser.ROUND_HALF_DOWN, 0); }
+		public TerminalNode ROUND_HALF_EVEN() { return getToken(DB2zSQLParser.ROUND_HALF_EVEN, 0); }
+		public TerminalNode ROUND_HALF_UP() { return getToken(DB2zSQLParser.ROUND_HALF_UP, 0); }
+		public TerminalNode ROUND_UP() { return getToken(DB2zSQLParser.ROUND_UP, 0); }
+		public TerminalNode ROW() { return getToken(DB2zSQLParser.ROW, 0); }
+		public TerminalNode ROWSET() { return getToken(DB2zSQLParser.ROWSET, 0); }
+		public TerminalNode RUN() { return getToken(DB2zSQLParser.RUN, 0); }
+		public TerminalNode SAVEPOINT() { return getToken(DB2zSQLParser.SAVEPOINT, 0); }
+		public TerminalNode SCHEMA() { return getToken(DB2zSQLParser.SCHEMA, 0); }
+		public TerminalNode SCRATCHPAD() { return getToken(DB2zSQLParser.SCRATCHPAD, 0); }
+		public TerminalNode SECOND() { return getToken(DB2zSQLParser.SECOND, 0); }
+		public TerminalNode SECONDS() { return getToken(DB2zSQLParser.SECONDS, 0); }
+		public TerminalNode SECQTY() { return getToken(DB2zSQLParser.SECQTY, 0); }
+		public TerminalNode SECURITY() { return getToken(DB2zSQLParser.SECURITY, 0); }
+		public TerminalNode SELECT() { return getToken(DB2zSQLParser.SELECT, 0); }
+		public TerminalNode SENSITIVE() { return getToken(DB2zSQLParser.SENSITIVE, 0); }
+		public TerminalNode SEQUENCE() { return getToken(DB2zSQLParser.SEQUENCE, 0); }
+		public TerminalNode SESSION_USER() { return getToken(DB2zSQLParser.SESSION_USER, 0); }
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
+		public TerminalNode SIGNAL() { return getToken(DB2zSQLParser.SIGNAL, 0); }
+		public TerminalNode SIMPLE() { return getToken(DB2zSQLParser.SIMPLE, 0); }
+		public TerminalNode SOME() { return getToken(DB2zSQLParser.SOME, 0); }
+		public TerminalNode SOURCE() { return getToken(DB2zSQLParser.SOURCE, 0); }
+		public TerminalNode SPECIFIC() { return getToken(DB2zSQLParser.SPECIFIC, 0); }
+		public TerminalNode STANDARD() { return getToken(DB2zSQLParser.STANDARD, 0); }
+		public TerminalNode STATEMENT() { return getToken(DB2zSQLParser.STATEMENT, 0); }
+		public TerminalNode STATIC() { return getToken(DB2zSQLParser.STATIC, 0); }
+		public TerminalNode STAY() { return getToken(DB2zSQLParser.STAY, 0); }
+		public TerminalNode STOGROUP() { return getToken(DB2zSQLParser.STOGROUP, 0); }
+		public TerminalNode STORES() { return getToken(DB2zSQLParser.STORES, 0); }
+		public TerminalNode STYLE() { return getToken(DB2zSQLParser.STYLE, 0); }
+		public TerminalNode SUMMARY() { return getToken(DB2zSQLParser.SUMMARY, 0); }
+		public TerminalNode SYNONYM() { return getToken(DB2zSQLParser.SYNONYM, 0); }
+		public TerminalNode SYSDATE() { return getToken(DB2zSQLParser.SYSDATE, 0); }
+		public TerminalNode SYSTEM() { return getToken(DB2zSQLParser.SYSTEM, 0); }
+		public TerminalNode SYSTIMESTAMP() { return getToken(DB2zSQLParser.SYSTIMESTAMP, 0); }
+		public TerminalNode TABLE() { return getToken(DB2zSQLParser.TABLE, 0); }
+		public TerminalNode TABLESPACE() { return getToken(DB2zSQLParser.TABLESPACE, 0); }
+		public TerminalNode THEN() { return getToken(DB2zSQLParser.THEN, 0); }
+		public TerminalNode TO() { return getToken(DB2zSQLParser.TO, 0); }
+		public TerminalNode TRIGGER() { return getToken(DB2zSQLParser.TRIGGER, 0); }
+		public TerminalNode TRUNCATE() { return getToken(DB2zSQLParser.TRUNCATE, 0); }
+		public TerminalNode TYPE() { return getToken(DB2zSQLParser.TYPE, 0); }
+		public TerminalNode UNDO() { return getToken(DB2zSQLParser.UNDO, 0); }
+		public TerminalNode UNION() { return getToken(DB2zSQLParser.UNION, 0); }
+		public TerminalNode UNIQUE() { return getToken(DB2zSQLParser.UNIQUE, 0); }
+		public TerminalNode UNTIL() { return getToken(DB2zSQLParser.UNTIL, 0); }
+		public TerminalNode UPDATE() { return getToken(DB2zSQLParser.UPDATE, 0); }
+		public TerminalNode USER() { return getToken(DB2zSQLParser.USER, 0); }
+		public TerminalNode USING() { return getToken(DB2zSQLParser.USING, 0); }
+		public TerminalNode VALIDPROC() { return getToken(DB2zSQLParser.VALIDPROC, 0); }
+		public TerminalNode VALUE() { return getToken(DB2zSQLParser.VALUE, 0); }
+		public TerminalNode VALUES() { return getToken(DB2zSQLParser.VALUES, 0); }
+		public TerminalNode VARIABLE() { return getToken(DB2zSQLParser.VARIABLE, 0); }
+		public TerminalNode VARIANT() { return getToken(DB2zSQLParser.VARIANT, 0); }
+		public TerminalNode VCAT() { return getToken(DB2zSQLParser.VCAT, 0); }
+		public TerminalNode VERSIONING() { return getToken(DB2zSQLParser.VERSIONING, 0); }
+		public TerminalNode VIEW() { return getToken(DB2zSQLParser.VIEW, 0); }
+		public TerminalNode VOLATILE() { return getToken(DB2zSQLParser.VOLATILE, 0); }
+		public TerminalNode VOLUMES() { return getToken(DB2zSQLParser.VOLUMES, 0); }
+		public TerminalNode WHEN() { return getToken(DB2zSQLParser.WHEN, 0); }
+		public TerminalNode WHENEVER() { return getToken(DB2zSQLParser.WHENEVER, 0); }
+		public TerminalNode WHERE() { return getToken(DB2zSQLParser.WHERE, 0); }
+		public TerminalNode WHILE() { return getToken(DB2zSQLParser.WHILE, 0); }
+		public TerminalNode WITH() { return getToken(DB2zSQLParser.WITH, 0); }
+		public TerminalNode WLM() { return getToken(DB2zSQLParser.WLM, 0); }
+		public TerminalNode XMLCAST() { return getToken(DB2zSQLParser.XMLCAST, 0); }
+		public TerminalNode XMLEXISTS() { return getToken(DB2zSQLParser.XMLEXISTS, 0); }
+		public TerminalNode XMLNAMESPACES() { return getToken(DB2zSQLParser.XMLNAMESPACES, 0); }
+		public TerminalNode YEAR() { return getToken(DB2zSQLParser.YEAR, 0); }
+		public TerminalNode YEARS() { return getToken(DB2zSQLParser.YEARS, 0); }
+		public TerminalNode ZONE() { return getToken(DB2zSQLParser.ZONE, 0); }
+		public TerminalNode AND() { return getToken(DB2zSQLParser.AND, 0); }
+		public TerminalNode ARRAY_AGG() { return getToken(DB2zSQLParser.ARRAY_AGG, 0); }
+		public TerminalNode ASC() { return getToken(DB2zSQLParser.ASC, 0); }
+		public TerminalNode AVG() { return getToken(DB2zSQLParser.AVG, 0); }
+		public TerminalNode BIT() { return getToken(DB2zSQLParser.BIT, 0); }
+		public TerminalNode CHANGE() { return getToken(DB2zSQLParser.CHANGE, 0); }
+		public TerminalNode CODEUNITS16() { return getToken(DB2zSQLParser.CODEUNITS16, 0); }
+		public TerminalNode CODEUNITS32() { return getToken(DB2zSQLParser.CODEUNITS32, 0); }
+		public TerminalNode CORR() { return getToken(DB2zSQLParser.CORR, 0); }
+		public TerminalNode CORRELATION() { return getToken(DB2zSQLParser.CORRELATION, 0); }
+		public TerminalNode COVAR() { return getToken(DB2zSQLParser.COVAR, 0); }
+		public TerminalNode COVARIANCE() { return getToken(DB2zSQLParser.COVARIANCE, 0); }
+		public TerminalNode COVARIANCE_SAMP() { return getToken(DB2zSQLParser.COVARIANCE_SAMP, 0); }
+		public TerminalNode COVAR_POP() { return getToken(DB2zSQLParser.COVAR_POP, 0); }
+		public TerminalNode COVAR_SAMP() { return getToken(DB2zSQLParser.COVAR_SAMP, 0); }
+		public TerminalNode CS() { return getToken(DB2zSQLParser.CS, 0); }
+		public TerminalNode CUME_DIST() { return getToken(DB2zSQLParser.CUME_DIST, 0); }
+		public TerminalNode DENSE_RANK() { return getToken(DB2zSQLParser.DENSE_RANK, 0); }
+		public TerminalNode DESC() { return getToken(DB2zSQLParser.DESC, 0); }
+		public TerminalNode EBCDIC() { return getToken(DB2zSQLParser.EBCDIC, 0); }
+		public TerminalNode EXCLUSIVE() { return getToken(DB2zSQLParser.EXCLUSIVE, 0); }
+		public TerminalNode FIRST_VALUE() { return getToken(DB2zSQLParser.FIRST_VALUE, 0); }
+		public TerminalNode FOLLOWING() { return getToken(DB2zSQLParser.FOLLOWING, 0); }
+		public TerminalNode GROUPING() { return getToken(DB2zSQLParser.GROUPING, 0); }
+		public TerminalNode IGNORE() { return getToken(DB2zSQLParser.IGNORE, 0); }
+		public TerminalNode INDICATOR() { return getToken(DB2zSQLParser.INDICATOR, 0); }
+		public TerminalNode INPUT() { return getToken(DB2zSQLParser.INPUT, 0); }
+		public TerminalNode ISNULL() { return getToken(DB2zSQLParser.ISNULL, 0); }
+		public TerminalNode LAG() { return getToken(DB2zSQLParser.LAG, 0); }
+		public TerminalNode LARGE() { return getToken(DB2zSQLParser.LARGE, 0); }
+		public TerminalNode LAST_VALUE() { return getToken(DB2zSQLParser.LAST_VALUE, 0); }
+		public TerminalNode LEAD() { return getToken(DB2zSQLParser.LEAD, 0); }
+		public TerminalNode LISTAGG() { return getToken(DB2zSQLParser.LISTAGG, 0); }
+		public TerminalNode LOCKED() { return getToken(DB2zSQLParser.LOCKED, 0); }
+		public TerminalNode LOCKS() { return getToken(DB2zSQLParser.LOCKS, 0); }
+		public TerminalNode MEDIAN() { return getToken(DB2zSQLParser.MEDIAN, 0); }
+		public TerminalNode MIXED() { return getToken(DB2zSQLParser.MIXED, 0); }
+		public TerminalNode NOTNULL() { return getToken(DB2zSQLParser.NOTNULL, 0); }
+		public TerminalNode NTH_VALUE() { return getToken(DB2zSQLParser.NTH_VALUE, 0); }
+		public TerminalNode NTILE() { return getToken(DB2zSQLParser.NTILE, 0); }
+		public TerminalNode NUMERIC() { return getToken(DB2zSQLParser.NUMERIC, 0); }
+		public TerminalNode OBJECT() { return getToken(DB2zSQLParser.OBJECT, 0); }
+		public TerminalNode OCTETS() { return getToken(DB2zSQLParser.OCTETS, 0); }
+		public TerminalNode ONLY() { return getToken(DB2zSQLParser.ONLY, 0); }
+		public TerminalNode OVER() { return getToken(DB2zSQLParser.OVER, 0); }
+		public TerminalNode PASSING() { return getToken(DB2zSQLParser.PASSING, 0); }
+		public TerminalNode PERCENTILE_CONT() { return getToken(DB2zSQLParser.PERCENTILE_CONT, 0); }
+		public TerminalNode PERCENTILE_DISC() { return getToken(DB2zSQLParser.PERCENTILE_DISC, 0); }
+		public TerminalNode PERCENT_RANK() { return getToken(DB2zSQLParser.PERCENT_RANK, 0); }
+		public TerminalNode PRECEDING() { return getToken(DB2zSQLParser.PRECEDING, 0); }
+		public TerminalNode PREVIOUS() { return getToken(DB2zSQLParser.PREVIOUS, 0); }
+		public TerminalNode RANGE() { return getToken(DB2zSQLParser.RANGE, 0); }
+		public TerminalNode RANK() { return getToken(DB2zSQLParser.RANK, 0); }
+		public TerminalNode RATIO_TO_REPORT() { return getToken(DB2zSQLParser.RATIO_TO_REPORT, 0); }
+		public TerminalNode READ() { return getToken(DB2zSQLParser.READ, 0); }
+		public TerminalNode REF() { return getToken(DB2zSQLParser.REF, 0); }
+		public TerminalNode REGR_AVGX() { return getToken(DB2zSQLParser.REGR_AVGX, 0); }
+		public TerminalNode REGR_AVGY() { return getToken(DB2zSQLParser.REGR_AVGY, 0); }
+		public TerminalNode REGR_COUNT() { return getToken(DB2zSQLParser.REGR_COUNT, 0); }
+		public TerminalNode REGR_ICPT() { return getToken(DB2zSQLParser.REGR_ICPT, 0); }
+		public TerminalNode REGR_INTERCEPT() { return getToken(DB2zSQLParser.REGR_INTERCEPT, 0); }
+		public TerminalNode REGR_R2() { return getToken(DB2zSQLParser.REGR_R2, 0); }
+		public TerminalNode REGR_SLOPE() { return getToken(DB2zSQLParser.REGR_SLOPE, 0); }
+		public TerminalNode REGR_SXX() { return getToken(DB2zSQLParser.REGR_SXX, 0); }
+		public TerminalNode REGR_SXY() { return getToken(DB2zSQLParser.REGR_SXY, 0); }
+		public TerminalNode REGR_SYY() { return getToken(DB2zSQLParser.REGR_SYY, 0); }
+		public TerminalNode RESPECT() { return getToken(DB2zSQLParser.RESPECT, 0); }
+		public TerminalNode ROW_NUMBER() { return getToken(DB2zSQLParser.ROW_NUMBER, 0); }
+		public TerminalNode ROWS() { return getToken(DB2zSQLParser.ROWS, 0); }
+		public TerminalNode RR() { return getToken(DB2zSQLParser.RR, 0); }
+		public TerminalNode RS() { return getToken(DB2zSQLParser.RS, 0); }
+		public TerminalNode SBCS() { return getToken(DB2zSQLParser.SBCS, 0); }
+		public TerminalNode SELECTIVITY() { return getToken(DB2zSQLParser.SELECTIVITY, 0); }
+		public TerminalNode SETS() { return getToken(DB2zSQLParser.SETS, 0); }
+		public TerminalNode SHARE() { return getToken(DB2zSQLParser.SHARE, 0); }
+		public TerminalNode SKIP_() { return getToken(DB2zSQLParser.SKIP_, 0); }
+		public TerminalNode STDDEV() { return getToken(DB2zSQLParser.STDDEV, 0); }
+		public TerminalNode STDDEV_POP() { return getToken(DB2zSQLParser.STDDEV_POP, 0); }
+		public TerminalNode STDDEV_SAMP() { return getToken(DB2zSQLParser.STDDEV_SAMP, 0); }
+		public TerminalNode SUM() { return getToken(DB2zSQLParser.SUM, 0); }
+		public TerminalNode TOKEN() { return getToken(DB2zSQLParser.TOKEN, 0); }
+		public TerminalNode UNBOUNDED() { return getToken(DB2zSQLParser.UNBOUNDED, 0); }
+		public TerminalNode UNPACK() { return getToken(DB2zSQLParser.UNPACK, 0); }
+		public TerminalNode UR() { return getToken(DB2zSQLParser.UR, 0); }
+		public TerminalNode USE() { return getToken(DB2zSQLParser.USE, 0); }
+		public TerminalNode VAR() { return getToken(DB2zSQLParser.VAR, 0); }
+		public TerminalNode VARIANCE() { return getToken(DB2zSQLParser.VARIANCE, 0); }
+		public TerminalNode VARIANCE_SAMP() { return getToken(DB2zSQLParser.VARIANCE_SAMP, 0); }
+		public TerminalNode VAR_POP() { return getToken(DB2zSQLParser.VAR_POP, 0); }
+		public TerminalNode VAR_SAMP() { return getToken(DB2zSQLParser.VAR_SAMP, 0); }
+		public TerminalNode VARYING() { return getToken(DB2zSQLParser.VARYING, 0); }
+		public TerminalNode WITHOUT() { return getToken(DB2zSQLParser.WITHOUT, 0); }
+		public TerminalNode XML() { return getToken(DB2zSQLParser.XML, 0); }
+		public TerminalNode XMLAGG() { return getToken(DB2zSQLParser.XMLAGG, 0); }
+		public TerminalNode COLUMNS() { return getToken(DB2zSQLParser.COLUMNS, 0); }
+		public TerminalNode SQLID() { return getToken(DB2zSQLParser.SQLID, 0); }
+		public TerminalNode ORDINALITY() { return getToken(DB2zSQLParser.ORDINALITY, 0); }
+		public TerminalNode SYSTEM_TIME() { return getToken(DB2zSQLParser.SYSTEM_TIME, 0); }
+		public TerminalNode BUSINESS_TIME() { return getToken(DB2zSQLParser.BUSINESS_TIME, 0); }
+		public TerminalNode MULTIPLIER() { return getToken(DB2zSQLParser.MULTIPLIER, 0); }
+		public TerminalNode UNNEST() { return getToken(DB2zSQLParser.UNNEST, 0); }
+		public TerminalNode CROSS() { return getToken(DB2zSQLParser.CROSS, 0); }
+		public TerminalNode CALLER() { return getToken(DB2zSQLParser.CALLER, 0); }
+		public TerminalNode CLIENT() { return getToken(DB2zSQLParser.CLIENT, 0); }
+		public TerminalNode POSITIONING() { return getToken(DB2zSQLParser.POSITIONING, 0); }
+		public TerminalNode SCROLL() { return getToken(DB2zSQLParser.SCROLL, 0); }
+		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
+		public TerminalNode INDEXBP() { return getToken(DB2zSQLParser.INDEXBP, 0); }
+		public TerminalNode ACTION() { return getToken(DB2zSQLParser.ACTION, 0); }
+		public TerminalNode ASSEMBLE() { return getToken(DB2zSQLParser.ASSEMBLE, 0); }
+		public TerminalNode C_() { return getToken(DB2zSQLParser.C_, 0); }
+		public TerminalNode CALLED() { return getToken(DB2zSQLParser.CALLED, 0); }
+		public TerminalNode COBOL() { return getToken(DB2zSQLParser.COBOL, 0); }
+		public TerminalNode DB2() { return getToken(DB2zSQLParser.DB2, 0); }
+		public TerminalNode DEFINER() { return getToken(DB2zSQLParser.DEFINER, 0); }
+		public TerminalNode DISPATCH() { return getToken(DB2zSQLParser.DISPATCH, 0); }
+		public TerminalNode ENVIRONMENT() { return getToken(DB2zSQLParser.ENVIRONMENT, 0); }
+		public TerminalNode FAILURE() { return getToken(DB2zSQLParser.FAILURE, 0); }
+		public TerminalNode FAILURES() { return getToken(DB2zSQLParser.FAILURES, 0); }
+		public TerminalNode JAVA() { return getToken(DB2zSQLParser.JAVA, 0); }
+		public TerminalNode MAIN() { return getToken(DB2zSQLParser.MAIN, 0); }
+		public TerminalNode NAME() { return getToken(DB2zSQLParser.NAME, 0); }
+		public TerminalNode OPTIONS() { return getToken(DB2zSQLParser.OPTIONS, 0); }
+		public TerminalNode PARALLEL() { return getToken(DB2zSQLParser.PARALLEL, 0); }
+		public TerminalNode PLI() { return getToken(DB2zSQLParser.PLI, 0); }
+		public TerminalNode REGISTERS() { return getToken(DB2zSQLParser.REGISTERS, 0); }
+		public TerminalNode RESIDENT() { return getToken(DB2zSQLParser.RESIDENT, 0); }
+		public TerminalNode SECURED() { return getToken(DB2zSQLParser.SECURED, 0); }
+		public TerminalNode SPECIAL() { return getToken(DB2zSQLParser.SPECIAL, 0); }
+		public TerminalNode SQL() { return getToken(DB2zSQLParser.SQL, 0); }
+		public TerminalNode STOP() { return getToken(DB2zSQLParser.STOP, 0); }
+		public TerminalNode SUB() { return getToken(DB2zSQLParser.SUB, 0); }
+		public TerminalNode YES() { return getToken(DB2zSQLParser.YES, 0); }
+		public TerminalNode APPLICATION() { return getToken(DB2zSQLParser.APPLICATION, 0); }
+		public TerminalNode CHANGED() { return getToken(DB2zSQLParser.CHANGED, 0); }
+		public TerminalNode COMPATIBILITY() { return getToken(DB2zSQLParser.COMPATIBILITY, 0); }
+		public TerminalNode COMPRESS() { return getToken(DB2zSQLParser.COMPRESS, 0); }
+		public TerminalNode COPY() { return getToken(DB2zSQLParser.COPY, 0); }
+		public TerminalNode FREEPAGE() { return getToken(DB2zSQLParser.FREEPAGE, 0); }
+		public TerminalNode GBPCACHE() { return getToken(DB2zSQLParser.GBPCACHE, 0); }
+		public TerminalNode INCLUDE() { return getToken(DB2zSQLParser.INCLUDE, 0); }
+		public TerminalNode MAXVALUE() { return getToken(DB2zSQLParser.MAXVALUE, 0); }
+		public TerminalNode MINVALUE() { return getToken(DB2zSQLParser.MINVALUE, 0); }
+		public TerminalNode PCTFREE() { return getToken(DB2zSQLParser.PCTFREE, 0); }
+		public TerminalNode REGENERATE() { return getToken(DB2zSQLParser.REGENERATE, 0); }
+		public TerminalNode SEQTY() { return getToken(DB2zSQLParser.SEQTY, 0); }
+		public TerminalNode MASK() { return getToken(DB2zSQLParser.MASK, 0); }
+		public TerminalNode ENABLE() { return getToken(DB2zSQLParser.ENABLE, 0); }
+		public TerminalNode PERMISSION() { return getToken(DB2zSQLParser.PERMISSION, 0); }
+		public TerminalNode ATOMIC() { return getToken(DB2zSQLParser.ATOMIC, 0); }
+		public TerminalNode SQLEXCEPTION() { return getToken(DB2zSQLParser.SQLEXCEPTION, 0); }
+		public TerminalNode MERGE() { return getToken(DB2zSQLParser.MERGE, 0); }
+		public TerminalNode MATCHED() { return getToken(DB2zSQLParser.MATCHED, 0); }
+		public TerminalNode SQLSTATE() { return getToken(DB2zSQLParser.SQLSTATE, 0); }
+		public TerminalNode MESSAGE_TEXT() { return getToken(DB2zSQLParser.MESSAGE_TEXT, 0); }
+		public TerminalNode OVERRIDING() { return getToken(DB2zSQLParser.OVERRIDING, 0); }
+		public TerminalNode PORTION() { return getToken(DB2zSQLParser.PORTION, 0); }
 		public SqlKeywordContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_sqlKeyword; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).enterSqlKeyword(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSqlKeyword(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof SQLParserListener ) ((SQLParserListener)listener).exitSqlKeyword(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSqlKeyword(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof SQLParserVisitor ) return ((SQLParserVisitor<? extends T>)visitor).visitSqlKeyword(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSqlKeyword(this);
 			else return visitor.visitChildren(this);
 		}
 	}

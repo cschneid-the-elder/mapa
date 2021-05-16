@@ -1,2703 +1,2703 @@
-// Generated from src/SQLParser.g4 by ANTLR 4.9.2
+// Generated from src/DB2zSQLParser.g4 by ANTLR 4.7.2
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * This class provides an empty implementation of {@link SQLParserListener},
+ * This class provides an empty implementation of {@link DB2zSQLParserListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
-public class SQLParserBaseListener implements SQLParserListener {
+public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStartRule(SQLParser.StartRuleContext ctx) { }
+	@Override public void enterStartRule(DB2zSQLParser.StartRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStartRule(SQLParser.StartRuleContext ctx) { }
+	@Override public void exitStartRule(DB2zSQLParser.StartRuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSqlStatement(SQLParser.SqlStatementContext ctx) { }
+	@Override public void enterSqlStatement(DB2zSQLParser.SqlStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSqlStatement(SQLParser.SqlStatementContext ctx) { }
+	@Override public void exitSqlStatement(DB2zSQLParser.SqlStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuery(SQLParser.QueryContext ctx) { }
+	@Override public void enterQuery(DB2zSQLParser.QueryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuery(SQLParser.QueryContext ctx) { }
+	@Override public void exitQuery(DB2zSQLParser.QueryContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclareCursorStatement(SQLParser.DeclareCursorStatementContext ctx) { }
+	@Override public void enterDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclareCursorStatement(SQLParser.DeclareCursorStatementContext ctx) { }
+	@Override public void exitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCursorName(SQLParser.CursorNameContext ctx) { }
+	@Override public void enterCursorName(DB2zSQLParser.CursorNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCursorName(SQLParser.CursorNameContext ctx) { }
+	@Override public void exitCursorName(DB2zSQLParser.CursorNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStatementName(SQLParser.StatementNameContext ctx) { }
+	@Override public void enterStatementName(DB2zSQLParser.StatementNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStatementName(SQLParser.StatementNameContext ctx) { }
+	@Override public void exitStatementName(DB2zSQLParser.StatementNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHoldability(SQLParser.HoldabilityContext ctx) { }
+	@Override public void enterHoldability(DB2zSQLParser.HoldabilityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHoldability(SQLParser.HoldabilityContext ctx) { }
+	@Override public void exitHoldability(DB2zSQLParser.HoldabilityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReturnability(SQLParser.ReturnabilityContext ctx) { }
+	@Override public void enterReturnability(DB2zSQLParser.ReturnabilityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReturnability(SQLParser.ReturnabilityContext ctx) { }
+	@Override public void exitReturnability(DB2zSQLParser.ReturnabilityContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRowsetPositioning(SQLParser.RowsetPositioningContext ctx) { }
+	@Override public void enterRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRowsetPositioning(SQLParser.RowsetPositioningContext ctx) { }
+	@Override public void exitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclareTableStatement(SQLParser.DeclareTableStatementContext ctx) { }
+	@Override public void enterDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclareTableStatement(SQLParser.DeclareTableStatementContext ctx) { }
+	@Override public void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNotNullPhrase(SQLParser.NotNullPhraseContext ctx) { }
+	@Override public void enterNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNotNullPhrase(SQLParser.NotNullPhraseContext ctx) { }
+	@Override public void exitNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclareStatementStatement(SQLParser.DeclareStatementStatementContext ctx) { }
+	@Override public void enterDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeclareStatementStatement(SQLParser.DeclareStatementStatementContext ctx) { }
+	@Override public void exitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAllocateCursorStatement(SQLParser.AllocateCursorStatementContext ctx) { }
+	@Override public void enterAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAllocateCursorStatement(SQLParser.AllocateCursorStatementContext ctx) { }
+	@Override public void exitAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRsLocatorVariable(SQLParser.RsLocatorVariableContext ctx) { }
+	@Override public void enterRsLocatorVariable(DB2zSQLParser.RsLocatorVariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRsLocatorVariable(SQLParser.RsLocatorVariableContext ctx) { }
+	@Override public void exitRsLocatorVariable(DB2zSQLParser.RsLocatorVariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterDatabaseStatement(SQLParser.AlterDatabaseStatementContext ctx) { }
+	@Override public void enterAlterDatabaseStatement(DB2zSQLParser.AlterDatabaseStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterDatabaseStatement(SQLParser.AlterDatabaseStatementContext ctx) { }
+	@Override public void exitAlterDatabaseStatement(DB2zSQLParser.AlterDatabaseStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterFunctionStatement(SQLParser.AlterFunctionStatementContext ctx) { }
+	@Override public void enterAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterFunctionStatement(SQLParser.AlterFunctionStatementContext ctx) { }
+	@Override public void exitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterIndexStatement(SQLParser.AlterIndexStatementContext ctx) { }
+	@Override public void enterAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterIndexStatement(SQLParser.AlterIndexStatementContext ctx) { }
+	@Override public void exitAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterMaskStatement(SQLParser.AlterMaskStatementContext ctx) { }
+	@Override public void enterAlterMaskStatement(DB2zSQLParser.AlterMaskStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterMaskStatement(SQLParser.AlterMaskStatementContext ctx) { }
+	@Override public void exitAlterMaskStatement(DB2zSQLParser.AlterMaskStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterPermissionStatement(SQLParser.AlterPermissionStatementContext ctx) { }
+	@Override public void enterAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterPermissionStatement(SQLParser.AlterPermissionStatementContext ctx) { }
+	@Override public void exitAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSearchedDelete(SQLParser.SearchedDeleteContext ctx) { }
+	@Override public void enterSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSearchedDelete(SQLParser.SearchedDeleteContext ctx) { }
+	@Override public void exitSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPositionedDelete(SQLParser.PositionedDeleteContext ctx) { }
+	@Override public void enterPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPositionedDelete(SQLParser.PositionedDeleteContext ctx) { }
+	@Override public void exitPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeleteStatement(SQLParser.DeleteStatementContext ctx) { }
+	@Override public void enterDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeleteStatement(SQLParser.DeleteStatementContext ctx) { }
+	@Override public void exitDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInsertStatement(SQLParser.InsertStatementContext ctx) { }
+	@Override public void enterInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInsertStatement(SQLParser.InsertStatementContext ctx) { }
+	@Override public void exitInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMergeStatement(SQLParser.MergeStatementContext ctx) { }
+	@Override public void enterMergeStatement(DB2zSQLParser.MergeStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMergeStatement(SQLParser.MergeStatementContext ctx) { }
+	@Override public void exitMergeStatement(DB2zSQLParser.MergeStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSearchedUpdate(SQLParser.SearchedUpdateContext ctx) { }
+	@Override public void enterSearchedUpdate(DB2zSQLParser.SearchedUpdateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSearchedUpdate(SQLParser.SearchedUpdateContext ctx) { }
+	@Override public void exitSearchedUpdate(DB2zSQLParser.SearchedUpdateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPositionedUpdate(SQLParser.PositionedUpdateContext ctx) { }
+	@Override public void enterPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPositionedUpdate(SQLParser.PositionedUpdateContext ctx) { }
+	@Override public void exitPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUpdateStatement(SQLParser.UpdateStatementContext ctx) { }
+	@Override public void enterUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUpdateStatement(SQLParser.UpdateStatementContext ctx) { }
+	@Override public void exitUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSourceValues(SQLParser.SourceValuesContext ctx) { }
+	@Override public void enterSourceValues(DB2zSQLParser.SourceValuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSourceValues(SQLParser.SourceValuesContext ctx) { }
+	@Override public void exitSourceValues(DB2zSQLParser.SourceValuesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesSingleRow(SQLParser.ValuesSingleRowContext ctx) { }
+	@Override public void enterValuesSingleRow(DB2zSQLParser.ValuesSingleRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesSingleRow(SQLParser.ValuesSingleRowContext ctx) { }
+	@Override public void exitValuesSingleRow(DB2zSQLParser.ValuesSingleRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesMultipleRow(SQLParser.ValuesMultipleRowContext ctx) { }
+	@Override public void enterValuesMultipleRow(DB2zSQLParser.ValuesMultipleRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesMultipleRow(SQLParser.ValuesMultipleRowContext ctx) { }
+	@Override public void exitValuesMultipleRow(DB2zSQLParser.ValuesMultipleRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMatchingCondition(SQLParser.MatchingConditionContext ctx) { }
+	@Override public void enterMatchingCondition(DB2zSQLParser.MatchingConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMatchingCondition(SQLParser.MatchingConditionContext ctx) { }
+	@Override public void exitMatchingCondition(DB2zSQLParser.MatchingConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterModificationOperation(SQLParser.ModificationOperationContext ctx) { }
+	@Override public void enterModificationOperation(DB2zSQLParser.ModificationOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitModificationOperation(SQLParser.ModificationOperationContext ctx) { }
+	@Override public void exitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssignmentClause(SQLParser.AssignmentClauseContext ctx) { }
+	@Override public void enterAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssignmentClause(SQLParser.AssignmentClauseContext ctx) { }
+	@Override public void exitAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUpdateOperation(SQLParser.UpdateOperationContext ctx) { }
+	@Override public void enterUpdateOperation(DB2zSQLParser.UpdateOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUpdateOperation(SQLParser.UpdateOperationContext ctx) { }
+	@Override public void exitUpdateOperation(DB2zSQLParser.UpdateOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeleteOperation(SQLParser.DeleteOperationContext ctx) { }
+	@Override public void enterDeleteOperation(DB2zSQLParser.DeleteOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDeleteOperation(SQLParser.DeleteOperationContext ctx) { }
+	@Override public void exitDeleteOperation(DB2zSQLParser.DeleteOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInsertOperation(SQLParser.InsertOperationContext ctx) { }
+	@Override public void enterInsertOperation(DB2zSQLParser.InsertOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInsertOperation(SQLParser.InsertOperationContext ctx) { }
+	@Override public void exitInsertOperation(DB2zSQLParser.InsertOperationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSignalStatement(SQLParser.SignalStatementContext ctx) { }
+	@Override public void enterSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSignalStatement(SQLParser.SignalStatementContext ctx) { }
+	@Override public void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSignalInformation(SQLParser.SignalInformationContext ctx) { }
+	@Override public void enterSignalInformation(DB2zSQLParser.SignalInformationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSignalInformation(SQLParser.SignalInformationContext ctx) { }
+	@Override public void exitSignalInformation(DB2zSQLParser.SignalInformationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesList1(SQLParser.ValuesList1Context ctx) { }
+	@Override public void enterValuesList1(DB2zSQLParser.ValuesList1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesList1(SQLParser.ValuesList1Context ctx) { }
+	@Override public void exitValuesList1(DB2zSQLParser.ValuesList1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesList2(SQLParser.ValuesList2Context ctx) { }
+	@Override public void enterValuesList2(DB2zSQLParser.ValuesList2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesList2(SQLParser.ValuesList2Context ctx) { }
+	@Override public void exitValuesList2(DB2zSQLParser.ValuesList2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesList3(SQLParser.ValuesList3Context ctx) { }
+	@Override public void enterValuesList3(DB2zSQLParser.ValuesList3Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesList3(SQLParser.ValuesList3Context ctx) { }
+	@Override public void exitValuesList3(DB2zSQLParser.ValuesList3Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesList4(SQLParser.ValuesList4Context ctx) { }
+	@Override public void enterValuesList4(DB2zSQLParser.ValuesList4Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesList4(SQLParser.ValuesList4Context ctx) { }
+	@Override public void exitValuesList4(DB2zSQLParser.ValuesList4Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIncludeColumns(SQLParser.IncludeColumnsContext ctx) { }
+	@Override public void enterIncludeColumns(DB2zSQLParser.IncludeColumnsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIncludeColumns(SQLParser.IncludeColumnsContext ctx) { }
+	@Override public void exitIncludeColumns(DB2zSQLParser.IncludeColumnsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMultipleRowInsert(SQLParser.MultipleRowInsertContext ctx) { }
+	@Override public void enterMultipleRowInsert(DB2zSQLParser.MultipleRowInsertContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMultipleRowInsert(SQLParser.MultipleRowInsertContext ctx) { }
+	@Override public void exitMultipleRowInsert(DB2zSQLParser.MultipleRowInsertContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRegenerateClause(SQLParser.RegenerateClauseContext ctx) { }
+	@Override public void enterRegenerateClause(DB2zSQLParser.RegenerateClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRegenerateClause(SQLParser.RegenerateClauseContext ctx) { }
+	@Override public void exitRegenerateClause(DB2zSQLParser.RegenerateClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterIndexOptions(SQLParser.AlterIndexOptionsContext ctx) { }
+	@Override public void enterAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterIndexOptions(SQLParser.AlterIndexOptionsContext ctx) { }
+	@Override public void exitAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterIndexPartitionOptions(SQLParser.AlterIndexPartitionOptionsContext ctx) { }
+	@Override public void enterAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterIndexPartitionOptions(SQLParser.AlterIndexPartitionOptionsContext ctx) { }
+	@Override public void exitAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUsingSpecification(SQLParser.UsingSpecificationContext ctx) { }
+	@Override public void enterUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUsingSpecification(SQLParser.UsingSpecificationContext ctx) { }
+	@Override public void exitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFreeSpecification(SQLParser.FreeSpecificationContext ctx) { }
+	@Override public void enterFreeSpecification(DB2zSQLParser.FreeSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFreeSpecification(SQLParser.FreeSpecificationContext ctx) { }
+	@Override public void exitFreeSpecification(DB2zSQLParser.FreeSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGbpcacheSpecification(SQLParser.GbpcacheSpecificationContext ctx) { }
+	@Override public void enterGbpcacheSpecification(DB2zSQLParser.GbpcacheSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGbpcacheSpecification(SQLParser.GbpcacheSpecificationContext ctx) { }
+	@Override public void exitGbpcacheSpecification(DB2zSQLParser.GbpcacheSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPartitionElement(SQLParser.PartitionElementContext ctx) { }
+	@Override public void enterPartitionElement(DB2zSQLParser.PartitionElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPartitionElement(SQLParser.PartitionElementContext ctx) { }
+	@Override public void exitPartitionElement(DB2zSQLParser.PartitionElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterApplCompatValue(SQLParser.ApplCompatValueContext ctx) { }
+	@Override public void enterApplCompatValue(DB2zSQLParser.ApplCompatValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitApplCompatValue(SQLParser.ApplCompatValueContext ctx) { }
+	@Override public void exitApplCompatValue(DB2zSQLParser.ApplCompatValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionLevel(SQLParser.FunctionLevelContext ctx) { }
+	@Override public void enterFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionLevel(SQLParser.FunctionLevelContext ctx) { }
+	@Override public void exitFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParameterType(SQLParser.ParameterTypeContext ctx) { }
+	@Override public void enterParameterType(DB2zSQLParser.ParameterTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParameterType(SQLParser.ParameterTypeContext ctx) { }
+	@Override public void exitParameterType(DB2zSQLParser.ParameterTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOptionList(SQLParser.OptionListContext ctx) { }
+	@Override public void enterOptionList(DB2zSQLParser.OptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOptionList(SQLParser.OptionListContext ctx) { }
+	@Override public void exitOptionList(DB2zSQLParser.OptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExternalProgramName(SQLParser.ExternalProgramNameContext ctx) { }
+	@Override public void enterExternalProgramName(DB2zSQLParser.ExternalProgramNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExternalProgramName(SQLParser.ExternalProgramNameContext ctx) { }
+	@Override public void exitExternalProgramName(DB2zSQLParser.ExternalProgramNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPackagePath(SQLParser.PackagePathContext ctx) { }
+	@Override public void enterPackagePath(DB2zSQLParser.PackagePathContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPackagePath(SQLParser.PackagePathContext ctx) { }
+	@Override public void exitPackagePath(DB2zSQLParser.PackagePathContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCollectionID(SQLParser.CollectionIDContext ctx) { }
+	@Override public void enterCollectionID(DB2zSQLParser.CollectionIDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCollectionID(SQLParser.CollectionIDContext ctx) { }
+	@Override public void exitCollectionID(DB2zSQLParser.CollectionIDContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRunTimeOptions(SQLParser.RunTimeOptionsContext ctx) { }
+	@Override public void enterRunTimeOptions(DB2zSQLParser.RunTimeOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRunTimeOptions(SQLParser.RunTimeOptionsContext ctx) { }
+	@Override public void exitRunTimeOptions(DB2zSQLParser.RunTimeOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparisonOperator(SQLParser.ComparisonOperatorContext ctx) { }
+	@Override public void enterComparisonOperator(DB2zSQLParser.ComparisonOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparisonOperator(SQLParser.ComparisonOperatorContext ctx) { }
+	@Override public void exitComparisonOperator(DB2zSQLParser.ComparisonOperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOperator(SQLParser.OperatorContext ctx) { }
+	@Override public void enterOperator(DB2zSQLParser.OperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOperator(SQLParser.OperatorContext ctx) { }
+	@Override public void exitOperator(DB2zSQLParser.OperatorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpression(SQLParser.ExpressionContext ctx) { }
+	@Override public void enterExpression(DB2zSQLParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpression(SQLParser.ExpressionContext ctx) { }
+	@Override public void exitExpression(DB2zSQLParser.ExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRowChangeExpression(SQLParser.RowChangeExpressionContext ctx) { }
+	@Override public void enterRowChangeExpression(DB2zSQLParser.RowChangeExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRowChangeExpression(SQLParser.RowChangeExpressionContext ctx) { }
+	@Override public void exitRowChangeExpression(DB2zSQLParser.RowChangeExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSequenceReference(SQLParser.SequenceReferenceContext ctx) { }
+	@Override public void enterSequenceReference(DB2zSQLParser.SequenceReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSequenceReference(SQLParser.SequenceReferenceContext ctx) { }
+	@Override public void exitSequenceReference(DB2zSQLParser.SequenceReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionInvocation(SQLParser.FunctionInvocationContext ctx) { }
+	@Override public void enterFunctionInvocation(DB2zSQLParser.FunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionInvocation(SQLParser.FunctionInvocationContext ctx) { }
+	@Override public void exitFunctionInvocation(DB2zSQLParser.FunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterScalarFunctionInvocation(SQLParser.ScalarFunctionInvocationContext ctx) { }
+	@Override public void enterScalarFunctionInvocation(DB2zSQLParser.ScalarFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitScalarFunctionInvocation(SQLParser.ScalarFunctionInvocationContext ctx) { }
+	@Override public void exitScalarFunctionInvocation(DB2zSQLParser.ScalarFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAggregateFunctionInvocation(SQLParser.AggregateFunctionInvocationContext ctx) { }
+	@Override public void enterAggregateFunctionInvocation(DB2zSQLParser.AggregateFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAggregateFunctionInvocation(SQLParser.AggregateFunctionInvocationContext ctx) { }
+	@Override public void exitAggregateFunctionInvocation(DB2zSQLParser.AggregateFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRegressionFunctionInvocation(SQLParser.RegressionFunctionInvocationContext ctx) { }
+	@Override public void enterRegressionFunctionInvocation(DB2zSQLParser.RegressionFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRegressionFunctionInvocation(SQLParser.RegressionFunctionInvocationContext ctx) { }
+	@Override public void exitRegressionFunctionInvocation(DB2zSQLParser.RegressionFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExternalFunctionInvocation(SQLParser.ExternalFunctionInvocationContext ctx) { }
+	@Override public void enterExternalFunctionInvocation(DB2zSQLParser.ExternalFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExternalFunctionInvocation(SQLParser.ExternalFunctionInvocationContext ctx) { }
+	@Override public void exitExternalFunctionInvocation(DB2zSQLParser.ExternalFunctionInvocationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLabeledDuration(SQLParser.LabeledDurationContext ctx) { }
+	@Override public void enterLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLabeledDuration(SQLParser.LabeledDurationContext ctx) { }
+	@Override public void exitLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlCastSpecification(SQLParser.XmlCastSpecificationContext ctx) { }
+	@Override public void enterXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlCastSpecification(SQLParser.XmlCastSpecificationContext ctx) { }
+	@Override public void exitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayElementSpecification(SQLParser.ArrayElementSpecificationContext ctx) { }
+	@Override public void enterArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayElementSpecification(SQLParser.ArrayElementSpecificationContext ctx) { }
+	@Override public void exitArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayIndex(SQLParser.ArrayIndexContext ctx) { }
+	@Override public void enterArrayIndex(DB2zSQLParser.ArrayIndexContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayIndex(SQLParser.ArrayIndexContext ctx) { }
+	@Override public void exitArrayIndex(DB2zSQLParser.ArrayIndexContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayConstructor(SQLParser.ArrayConstructorContext ctx) { }
+	@Override public void enterArrayConstructor(DB2zSQLParser.ArrayConstructorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayConstructor(SQLParser.ArrayConstructorContext ctx) { }
+	@Override public void exitArrayConstructor(DB2zSQLParser.ArrayConstructorContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOlapSpecification(SQLParser.OlapSpecificationContext ctx) { }
+	@Override public void enterOlapSpecification(DB2zSQLParser.OlapSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOlapSpecification(SQLParser.OlapSpecificationContext ctx) { }
+	@Override public void exitOlapSpecification(DB2zSQLParser.OlapSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOrderedOlapSpecification(SQLParser.OrderedOlapSpecificationContext ctx) { }
+	@Override public void enterOrderedOlapSpecification(DB2zSQLParser.OrderedOlapSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOrderedOlapSpecification(SQLParser.OrderedOlapSpecificationContext ctx) { }
+	@Override public void exitOrderedOlapSpecification(DB2zSQLParser.OrderedOlapSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOlapSpecificationFunction(SQLParser.OlapSpecificationFunctionContext ctx) { }
+	@Override public void enterOlapSpecificationFunction(DB2zSQLParser.OlapSpecificationFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOlapSpecificationFunction(SQLParser.OlapSpecificationFunctionContext ctx) { }
+	@Override public void exitOlapSpecificationFunction(DB2zSQLParser.OlapSpecificationFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLagFunction(SQLParser.LagFunctionContext ctx) { }
+	@Override public void enterLagFunction(DB2zSQLParser.LagFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLagFunction(SQLParser.LagFunctionContext ctx) { }
+	@Override public void exitLagFunction(DB2zSQLParser.LagFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLeadFunction(SQLParser.LeadFunctionContext ctx) { }
+	@Override public void enterLeadFunction(DB2zSQLParser.LeadFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLeadFunction(SQLParser.LeadFunctionContext ctx) { }
+	@Override public void exitLeadFunction(DB2zSQLParser.LeadFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRespectNullsClause(SQLParser.RespectNullsClauseContext ctx) { }
+	@Override public void enterRespectNullsClause(DB2zSQLParser.RespectNullsClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRespectNullsClause(SQLParser.RespectNullsClauseContext ctx) { }
+	@Override public void exitRespectNullsClause(DB2zSQLParser.RespectNullsClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWindowPartitionClause(SQLParser.WindowPartitionClauseContext ctx) { }
+	@Override public void enterWindowPartitionClause(DB2zSQLParser.WindowPartitionClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWindowPartitionClause(SQLParser.WindowPartitionClauseContext ctx) { }
+	@Override public void exitWindowPartitionClause(DB2zSQLParser.WindowPartitionClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWindowOrderClause(SQLParser.WindowOrderClauseContext ctx) { }
+	@Override public void enterWindowOrderClause(DB2zSQLParser.WindowOrderClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWindowOrderClause(SQLParser.WindowOrderClauseContext ctx) { }
+	@Override public void exitWindowOrderClause(DB2zSQLParser.WindowOrderClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWindowOrderClauseQualifier(SQLParser.WindowOrderClauseQualifierContext ctx) { }
+	@Override public void enterWindowOrderClauseQualifier(DB2zSQLParser.WindowOrderClauseQualifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWindowOrderClauseQualifier(SQLParser.WindowOrderClauseQualifierContext ctx) { }
+	@Override public void exitWindowOrderClauseQualifier(DB2zSQLParser.WindowOrderClauseQualifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumberingSpecification(SQLParser.NumberingSpecificationContext ctx) { }
+	@Override public void enterNumberingSpecification(DB2zSQLParser.NumberingSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumberingSpecification(SQLParser.NumberingSpecificationContext ctx) { }
+	@Override public void exitNumberingSpecification(DB2zSQLParser.NumberingSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAggregationSpecification(SQLParser.AggregationSpecificationContext ctx) { }
+	@Override public void enterAggregationSpecification(DB2zSQLParser.AggregationSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAggregationSpecification(SQLParser.AggregationSpecificationContext ctx) { }
+	@Override public void exitAggregationSpecification(DB2zSQLParser.AggregationSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAggregateFunction(SQLParser.AggregateFunctionContext ctx) { }
+	@Override public void enterAggregateFunction(DB2zSQLParser.AggregateFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAggregateFunction(SQLParser.AggregateFunctionContext ctx) { }
+	@Override public void exitAggregateFunction(DB2zSQLParser.AggregateFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRegressionFunction(SQLParser.RegressionFunctionContext ctx) { }
+	@Override public void enterRegressionFunction(DB2zSQLParser.RegressionFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRegressionFunction(SQLParser.RegressionFunctionContext ctx) { }
+	@Override public void exitRegressionFunction(DB2zSQLParser.RegressionFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOlapColumnFunction(SQLParser.OlapColumnFunctionContext ctx) { }
+	@Override public void enterOlapColumnFunction(DB2zSQLParser.OlapColumnFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOlapColumnFunction(SQLParser.OlapColumnFunctionContext ctx) { }
+	@Override public void exitOlapColumnFunction(DB2zSQLParser.OlapColumnFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFirstValueFunction(SQLParser.FirstValueFunctionContext ctx) { }
+	@Override public void enterFirstValueFunction(DB2zSQLParser.FirstValueFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFirstValueFunction(SQLParser.FirstValueFunctionContext ctx) { }
+	@Override public void exitFirstValueFunction(DB2zSQLParser.FirstValueFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLastValueFunction(SQLParser.LastValueFunctionContext ctx) { }
+	@Override public void enterLastValueFunction(DB2zSQLParser.LastValueFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLastValueFunction(SQLParser.LastValueFunctionContext ctx) { }
+	@Override public void exitLastValueFunction(DB2zSQLParser.LastValueFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNthValueFunction(SQLParser.NthValueFunctionContext ctx) { }
+	@Override public void enterNthValueFunction(DB2zSQLParser.NthValueFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNthValueFunction(SQLParser.NthValueFunctionContext ctx) { }
+	@Override public void exitNthValueFunction(DB2zSQLParser.NthValueFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRatioToReportFunction(SQLParser.RatioToReportFunctionContext ctx) { }
+	@Override public void enterRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRatioToReportFunction(SQLParser.RatioToReportFunctionContext ctx) { }
+	@Override public void exitRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWindowAggregationGroupClause(SQLParser.WindowAggregationGroupClauseContext ctx) { }
+	@Override public void enterWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWindowAggregationGroupClause(SQLParser.WindowAggregationGroupClauseContext ctx) { }
+	@Override public void exitWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupStart(SQLParser.GroupStartContext ctx) { }
+	@Override public void enterGroupStart(DB2zSQLParser.GroupStartContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupStart(SQLParser.GroupStartContext ctx) { }
+	@Override public void exitGroupStart(DB2zSQLParser.GroupStartContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupBetween(SQLParser.GroupBetweenContext ctx) { }
+	@Override public void enterGroupBetween(DB2zSQLParser.GroupBetweenContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupBetween(SQLParser.GroupBetweenContext ctx) { }
+	@Override public void exitGroupBetween(DB2zSQLParser.GroupBetweenContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupEnd(SQLParser.GroupEndContext ctx) { }
+	@Override public void enterGroupEnd(DB2zSQLParser.GroupEndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupEnd(SQLParser.GroupEndContext ctx) { }
+	@Override public void exitGroupEnd(DB2zSQLParser.GroupEndContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupBound1(SQLParser.GroupBound1Context ctx) { }
+	@Override public void enterGroupBound1(DB2zSQLParser.GroupBound1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupBound1(SQLParser.GroupBound1Context ctx) { }
+	@Override public void exitGroupBound1(DB2zSQLParser.GroupBound1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupBound2(SQLParser.GroupBound2Context ctx) { }
+	@Override public void enterGroupBound2(DB2zSQLParser.GroupBound2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupBound2(SQLParser.GroupBound2Context ctx) { }
+	@Override public void exitGroupBound2(DB2zSQLParser.GroupBound2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnboundedPreceding(SQLParser.UnboundedPrecedingContext ctx) { }
+	@Override public void enterUnboundedPreceding(DB2zSQLParser.UnboundedPrecedingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnboundedPreceding(SQLParser.UnboundedPrecedingContext ctx) { }
+	@Override public void exitUnboundedPreceding(DB2zSQLParser.UnboundedPrecedingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnboundedFollowing(SQLParser.UnboundedFollowingContext ctx) { }
+	@Override public void enterUnboundedFollowing(DB2zSQLParser.UnboundedFollowingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnboundedFollowing(SQLParser.UnboundedFollowingContext ctx) { }
+	@Override public void exitUnboundedFollowing(DB2zSQLParser.UnboundedFollowingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBoundedPreceding(SQLParser.BoundedPrecedingContext ctx) { }
+	@Override public void enterBoundedPreceding(DB2zSQLParser.BoundedPrecedingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBoundedPreceding(SQLParser.BoundedPrecedingContext ctx) { }
+	@Override public void exitBoundedPreceding(DB2zSQLParser.BoundedPrecedingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBoundedFollowing(SQLParser.BoundedFollowingContext ctx) { }
+	@Override public void enterBoundedFollowing(DB2zSQLParser.BoundedFollowingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBoundedFollowing(SQLParser.BoundedFollowingContext ctx) { }
+	@Override public void exitBoundedFollowing(DB2zSQLParser.BoundedFollowingContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCurrentRow(SQLParser.CurrentRowContext ctx) { }
+	@Override public void enterCurrentRow(DB2zSQLParser.CurrentRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCurrentRow(SQLParser.CurrentRowContext ctx) { }
+	@Override public void exitCurrentRow(DB2zSQLParser.CurrentRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterScalarFunction(SQLParser.ScalarFunctionContext ctx) { }
+	@Override public void enterScalarFunction(DB2zSQLParser.ScalarFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitScalarFunction(SQLParser.ScalarFunctionContext ctx) { }
+	@Override public void exitScalarFunction(DB2zSQLParser.ScalarFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableFunction(SQLParser.TableFunctionContext ctx) { }
+	@Override public void enterTableFunction(DB2zSQLParser.TableFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableFunction(SQLParser.TableFunctionContext ctx) { }
+	@Override public void exitTableFunction(DB2zSQLParser.TableFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSpecialRegister(SQLParser.SpecialRegisterContext ctx) { }
+	@Override public void enterSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSpecialRegister(SQLParser.SpecialRegisterContext ctx) { }
+	@Override public void exitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmltableFunctionSpecification(SQLParser.XmltableFunctionSpecificationContext ctx) { }
+	@Override public void enterXmltableFunctionSpecification(DB2zSQLParser.XmltableFunctionSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmltableFunctionSpecification(SQLParser.XmltableFunctionSpecificationContext ctx) { }
+	@Override public void exitXmltableFunctionSpecification(DB2zSQLParser.XmltableFunctionSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRowXqueryExpressionConstant(SQLParser.RowXqueryExpressionConstantContext ctx) { }
+	@Override public void enterRowXqueryExpressionConstant(DB2zSQLParser.RowXqueryExpressionConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRowXqueryExpressionConstant(SQLParser.RowXqueryExpressionConstantContext ctx) { }
+	@Override public void exitRowXqueryExpressionConstant(DB2zSQLParser.RowXqueryExpressionConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRowXqueryArgument(SQLParser.RowXqueryArgumentContext ctx) { }
+	@Override public void enterRowXqueryArgument(DB2zSQLParser.RowXqueryArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRowXqueryArgument(SQLParser.RowXqueryArgumentContext ctx) { }
+	@Override public void exitRowXqueryArgument(DB2zSQLParser.RowXqueryArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXqueryContextItemExpression(SQLParser.XqueryContextItemExpressionContext ctx) { }
+	@Override public void enterXqueryContextItemExpression(DB2zSQLParser.XqueryContextItemExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXqueryContextItemExpression(SQLParser.XqueryContextItemExpressionContext ctx) { }
+	@Override public void exitXqueryContextItemExpression(DB2zSQLParser.XqueryContextItemExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXqueryVariableExpression(SQLParser.XqueryVariableExpressionContext ctx) { }
+	@Override public void enterXqueryVariableExpression(DB2zSQLParser.XqueryVariableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXqueryVariableExpression(SQLParser.XqueryVariableExpressionContext ctx) { }
+	@Override public void exitXqueryVariableExpression(DB2zSQLParser.XqueryVariableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlTableRegularColumnDefinition(SQLParser.XmlTableRegularColumnDefinitionContext ctx) { }
+	@Override public void enterXmlTableRegularColumnDefinition(DB2zSQLParser.XmlTableRegularColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlTableRegularColumnDefinition(SQLParser.XmlTableRegularColumnDefinitionContext ctx) { }
+	@Override public void exitXmlTableRegularColumnDefinition(DB2zSQLParser.XmlTableRegularColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDefaultClause(SQLParser.DefaultClauseContext ctx) { }
+	@Override public void enterDefaultClause(DB2zSQLParser.DefaultClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDefaultClause(SQLParser.DefaultClauseContext ctx) { }
+	@Override public void exitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDefaultClauseAllowables(SQLParser.DefaultClauseAllowablesContext ctx) { }
+	@Override public void enterDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDefaultClauseAllowables(SQLParser.DefaultClauseAllowablesContext ctx) { }
+	@Override public void exitDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDistinctTypeCastFunctionName(SQLParser.DistinctTypeCastFunctionNameContext ctx) { }
+	@Override public void enterDistinctTypeCastFunctionName(DB2zSQLParser.DistinctTypeCastFunctionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDistinctTypeCastFunctionName(SQLParser.DistinctTypeCastFunctionNameContext ctx) { }
+	@Override public void exitDistinctTypeCastFunctionName(DB2zSQLParser.DistinctTypeCastFunctionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnXqueryExpressionConstant(SQLParser.ColumnXqueryExpressionConstantContext ctx) { }
+	@Override public void enterColumnXqueryExpressionConstant(DB2zSQLParser.ColumnXqueryExpressionConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnXqueryExpressionConstant(SQLParser.ColumnXqueryExpressionConstantContext ctx) { }
+	@Override public void exitColumnXqueryExpressionConstant(DB2zSQLParser.ColumnXqueryExpressionConstantContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlTableOrdinalityColumnDefinition(SQLParser.XmlTableOrdinalityColumnDefinitionContext ctx) { }
+	@Override public void enterXmlTableOrdinalityColumnDefinition(DB2zSQLParser.XmlTableOrdinalityColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlTableOrdinalityColumnDefinition(SQLParser.XmlTableOrdinalityColumnDefinitionContext ctx) { }
+	@Override public void exitXmlTableOrdinalityColumnDefinition(DB2zSQLParser.XmlTableOrdinalityColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlnamespacesDeclaration(SQLParser.XmlnamespacesDeclarationContext ctx) { }
+	@Override public void enterXmlnamespacesDeclaration(DB2zSQLParser.XmlnamespacesDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlnamespacesDeclaration(SQLParser.XmlnamespacesDeclarationContext ctx) { }
+	@Override public void exitXmlnamespacesDeclaration(DB2zSQLParser.XmlnamespacesDeclarationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlnamespacesFunctionSpecification(SQLParser.XmlnamespacesFunctionSpecificationContext ctx) { }
+	@Override public void enterXmlnamespacesFunctionSpecification(DB2zSQLParser.XmlnamespacesFunctionSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlnamespacesFunctionSpecification(SQLParser.XmlnamespacesFunctionSpecificationContext ctx) { }
+	@Override public void exitXmlnamespacesFunctionSpecification(DB2zSQLParser.XmlnamespacesFunctionSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlnamespacesFunctionArguments(SQLParser.XmlnamespacesFunctionArgumentsContext ctx) { }
+	@Override public void enterXmlnamespacesFunctionArguments(DB2zSQLParser.XmlnamespacesFunctionArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlnamespacesFunctionArguments(SQLParser.XmlnamespacesFunctionArgumentsContext ctx) { }
+	@Override public void exitXmlnamespacesFunctionArguments(DB2zSQLParser.XmlnamespacesFunctionArgumentsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNamespaceUri(SQLParser.NamespaceUriContext ctx) { }
+	@Override public void enterNamespaceUri(DB2zSQLParser.NamespaceUriContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNamespaceUri(SQLParser.NamespaceUriContext ctx) { }
+	@Override public void exitNamespaceUri(DB2zSQLParser.NamespaceUriContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNamespacePrefix(SQLParser.NamespacePrefixContext ctx) { }
+	@Override public void enterNamespacePrefix(DB2zSQLParser.NamespacePrefixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNamespacePrefix(SQLParser.NamespacePrefixContext ctx) { }
+	@Override public void exitNamespacePrefix(DB2zSQLParser.NamespacePrefixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTimeZoneSpecificExpression(SQLParser.TimeZoneSpecificExpressionContext ctx) { }
+	@Override public void enterTimeZoneSpecificExpression(DB2zSQLParser.TimeZoneSpecificExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTimeZoneSpecificExpression(SQLParser.TimeZoneSpecificExpressionContext ctx) { }
+	@Override public void exitTimeZoneSpecificExpression(DB2zSQLParser.TimeZoneSpecificExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTimeZoneExpressionSubset(SQLParser.TimeZoneExpressionSubsetContext ctx) { }
+	@Override public void enterTimeZoneExpressionSubset(DB2zSQLParser.TimeZoneExpressionSubsetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTimeZoneExpressionSubset(SQLParser.TimeZoneExpressionSubsetContext ctx) { }
+	@Override public void exitTimeZoneExpressionSubset(DB2zSQLParser.TimeZoneExpressionSubsetContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCaseExpression(SQLParser.CaseExpressionContext ctx) { }
+	@Override public void enterCaseExpression(DB2zSQLParser.CaseExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCaseExpression(SQLParser.CaseExpressionContext ctx) { }
+	@Override public void exitCaseExpression(DB2zSQLParser.CaseExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterResultExpression(SQLParser.ResultExpressionContext ctx) { }
+	@Override public void enterResultExpression(DB2zSQLParser.ResultExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitResultExpression(SQLParser.ResultExpressionContext ctx) { }
+	@Override public void exitResultExpression(DB2zSQLParser.ResultExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSearchedWhenClause(SQLParser.SearchedWhenClauseContext ctx) { }
+	@Override public void enterSearchedWhenClause(DB2zSQLParser.SearchedWhenClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSearchedWhenClause(SQLParser.SearchedWhenClauseContext ctx) { }
+	@Override public void exitSearchedWhenClause(DB2zSQLParser.SearchedWhenClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSimpleWhenClause(SQLParser.SimpleWhenClauseContext ctx) { }
+	@Override public void enterSimpleWhenClause(DB2zSQLParser.SimpleWhenClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSimpleWhenClause(SQLParser.SimpleWhenClauseContext ctx) { }
+	@Override public void exitSimpleWhenClause(DB2zSQLParser.SimpleWhenClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSearchCondition(SQLParser.SearchConditionContext ctx) { }
+	@Override public void enterSearchCondition(DB2zSQLParser.SearchConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSearchCondition(SQLParser.SearchConditionContext ctx) { }
+	@Override public void exitSearchCondition(DB2zSQLParser.SearchConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPredicate(SQLParser.PredicateContext ctx) { }
+	@Override public void enterPredicate(DB2zSQLParser.PredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPredicate(SQLParser.PredicateContext ctx) { }
+	@Override public void exitPredicate(DB2zSQLParser.PredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBasicPredicate(SQLParser.BasicPredicateContext ctx) { }
+	@Override public void enterBasicPredicate(DB2zSQLParser.BasicPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBasicPredicate(SQLParser.BasicPredicateContext ctx) { }
+	@Override public void exitBasicPredicate(DB2zSQLParser.BasicPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterRowValueExpression(SQLParser.RowValueExpressionContext ctx) { }
+	@Override public void enterRowValueExpression(DB2zSQLParser.RowValueExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitRowValueExpression(SQLParser.RowValueExpressionContext ctx) { }
+	@Override public void exitRowValueExpression(DB2zSQLParser.RowValueExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuantifiedPredicate(SQLParser.QuantifiedPredicateContext ctx) { }
+	@Override public void enterQuantifiedPredicate(DB2zSQLParser.QuantifiedPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuantifiedPredicate(SQLParser.QuantifiedPredicateContext ctx) { }
+	@Override public void exitQuantifiedPredicate(DB2zSQLParser.QuantifiedPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayExistsPredicate(SQLParser.ArrayExistsPredicateContext ctx) { }
+	@Override public void enterArrayExistsPredicate(DB2zSQLParser.ArrayExistsPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayExistsPredicate(SQLParser.ArrayExistsPredicateContext ctx) { }
+	@Override public void exitArrayExistsPredicate(DB2zSQLParser.ArrayExistsPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBetweenPredicate(SQLParser.BetweenPredicateContext ctx) { }
+	@Override public void enterBetweenPredicate(DB2zSQLParser.BetweenPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBetweenPredicate(SQLParser.BetweenPredicateContext ctx) { }
+	@Override public void exitBetweenPredicate(DB2zSQLParser.BetweenPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDistinctPredicate(SQLParser.DistinctPredicateContext ctx) { }
+	@Override public void enterDistinctPredicate(DB2zSQLParser.DistinctPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDistinctPredicate(SQLParser.DistinctPredicateContext ctx) { }
+	@Override public void exitDistinctPredicate(DB2zSQLParser.DistinctPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExistsPredicate(SQLParser.ExistsPredicateContext ctx) { }
+	@Override public void enterExistsPredicate(DB2zSQLParser.ExistsPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExistsPredicate(SQLParser.ExistsPredicateContext ctx) { }
+	@Override public void exitExistsPredicate(DB2zSQLParser.ExistsPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterInPredicate(SQLParser.InPredicateContext ctx) { }
+	@Override public void enterInPredicate(DB2zSQLParser.InPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitInPredicate(SQLParser.InPredicateContext ctx) { }
+	@Override public void exitInPredicate(DB2zSQLParser.InPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLikePredicate(SQLParser.LikePredicateContext ctx) { }
+	@Override public void enterLikePredicate(DB2zSQLParser.LikePredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLikePredicate(SQLParser.LikePredicateContext ctx) { }
+	@Override public void exitLikePredicate(DB2zSQLParser.LikePredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNullPredicate(SQLParser.NullPredicateContext ctx) { }
+	@Override public void enterNullPredicate(DB2zSQLParser.NullPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNullPredicate(SQLParser.NullPredicateContext ctx) { }
+	@Override public void exitNullPredicate(DB2zSQLParser.NullPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmlExistsPredicate(SQLParser.XmlExistsPredicateContext ctx) { }
+	@Override public void enterXmlExistsPredicate(DB2zSQLParser.XmlExistsPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmlExistsPredicate(SQLParser.XmlExistsPredicateContext ctx) { }
+	@Override public void exitXmlExistsPredicate(DB2zSQLParser.XmlExistsPredicateContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayExpression(SQLParser.ArrayExpressionContext ctx) { }
+	@Override public void enterArrayExpression(DB2zSQLParser.ArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayExpression(SQLParser.ArrayExpressionContext ctx) { }
+	@Override public void exitArrayExpression(DB2zSQLParser.ArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCastSpecification(SQLParser.CastSpecificationContext ctx) { }
+	@Override public void enterCastSpecification(DB2zSQLParser.CastSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCastSpecification(SQLParser.CastSpecificationContext ctx) { }
+	@Override public void exitCastSpecification(DB2zSQLParser.CastSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParameterMarker(SQLParser.ParameterMarkerContext ctx) { }
+	@Override public void enterParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParameterMarker(SQLParser.ParameterMarkerContext ctx) { }
+	@Override public void exitParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDataType(SQLParser.DataTypeContext ctx) { }
+	@Override public void enterDataType(DB2zSQLParser.DataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDataType(SQLParser.DataTypeContext ctx) { }
+	@Override public void exitDataType(DB2zSQLParser.DataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBuiltInType(SQLParser.BuiltInTypeContext ctx) { }
+	@Override public void enterBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBuiltInType(SQLParser.BuiltInTypeContext ctx) { }
+	@Override public void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntegerInParens(SQLParser.IntegerInParensContext ctx) { }
+	@Override public void enterIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIntegerInParens(SQLParser.IntegerInParensContext ctx) { }
+	@Override public void exitIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLength(SQLParser.LengthContext ctx) { }
+	@Override public void enterLength(DB2zSQLParser.LengthContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLength(SQLParser.LengthContext ctx) { }
+	@Override public void exitLength(DB2zSQLParser.LengthContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCcsidQualifier(SQLParser.CcsidQualifierContext ctx) { }
+	@Override public void enterCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCcsidQualifier(SQLParser.CcsidQualifierContext ctx) { }
+	@Override public void exitCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterForDataQualfier(SQLParser.ForDataQualfierContext ctx) { }
+	@Override public void enterForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitForDataQualfier(SQLParser.ForDataQualfierContext ctx) { }
+	@Override public void exitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDistinctTypeName(SQLParser.DistinctTypeNameContext ctx) { }
+	@Override public void enterDistinctTypeName(DB2zSQLParser.DistinctTypeNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDistinctTypeName(SQLParser.DistinctTypeNameContext ctx) { }
+	@Override public void exitDistinctTypeName(DB2zSQLParser.DistinctTypeNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterArrayType(SQLParser.ArrayTypeContext ctx) { }
+	@Override public void enterArrayType(DB2zSQLParser.ArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitArrayType(SQLParser.ArrayTypeContext ctx) { }
+	@Override public void exitArrayType(DB2zSQLParser.ArrayTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLiteral(SQLParser.LiteralContext ctx) { }
+	@Override public void enterLiteral(DB2zSQLParser.LiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLiteral(SQLParser.LiteralContext ctx) { }
+	@Override public void exitLiteral(DB2zSQLParser.LiteralContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCcsidValue(SQLParser.CcsidValueContext ctx) { }
+	@Override public void enterCcsidValue(DB2zSQLParser.CcsidValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCcsidValue(SQLParser.CcsidValueContext ctx) { }
+	@Override public void exitCcsidValue(DB2zSQLParser.CcsidValueContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnName(SQLParser.ColumnNameContext ctx) { }
+	@Override public void enterColumnName(DB2zSQLParser.ColumnNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnName(SQLParser.ColumnNameContext ctx) { }
+	@Override public void exitColumnName(DB2zSQLParser.ColumnNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNewColumnName(SQLParser.NewColumnNameContext ctx) { }
+	@Override public void enterNewColumnName(DB2zSQLParser.NewColumnNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNewColumnName(SQLParser.NewColumnNameContext ctx) { }
+	@Override public void exitNewColumnName(DB2zSQLParser.NewColumnNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCorrelationName(SQLParser.CorrelationNameContext ctx) { }
+	@Override public void enterCorrelationName(DB2zSQLParser.CorrelationNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCorrelationName(SQLParser.CorrelationNameContext ctx) { }
+	@Override public void exitCorrelationName(DB2zSQLParser.CorrelationNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLocationName(SQLParser.LocationNameContext ctx) { }
+	@Override public void enterLocationName(DB2zSQLParser.LocationNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLocationName(SQLParser.LocationNameContext ctx) { }
+	@Override public void exitLocationName(DB2zSQLParser.LocationNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSchemaName(SQLParser.SchemaNameContext ctx) { }
+	@Override public void enterSchemaName(DB2zSQLParser.SchemaNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSchemaName(SQLParser.SchemaNameContext ctx) { }
+	@Override public void exitSchemaName(DB2zSQLParser.SchemaNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableName(SQLParser.TableNameContext ctx) { }
+	@Override public void enterTableName(DB2zSQLParser.TableNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableName(SQLParser.TableNameContext ctx) { }
+	@Override public void exitTableName(DB2zSQLParser.TableNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIndexName(SQLParser.IndexNameContext ctx) { }
+	@Override public void enterIndexName(DB2zSQLParser.IndexNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIndexName(SQLParser.IndexNameContext ctx) { }
+	@Override public void exitIndexName(DB2zSQLParser.IndexNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterMaskName(SQLParser.MaskNameContext ctx) { }
+	@Override public void enterMaskName(DB2zSQLParser.MaskNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitMaskName(SQLParser.MaskNameContext ctx) { }
+	@Override public void exitMaskName(DB2zSQLParser.MaskNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPermissionName(SQLParser.PermissionNameContext ctx) { }
+	@Override public void enterPermissionName(DB2zSQLParser.PermissionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPermissionName(SQLParser.PermissionNameContext ctx) { }
+	@Override public void exitPermissionName(DB2zSQLParser.PermissionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDatabaseName(SQLParser.DatabaseNameContext ctx) { }
+	@Override public void enterDatabaseName(DB2zSQLParser.DatabaseNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDatabaseName(SQLParser.DatabaseNameContext ctx) { }
+	@Override public void exitDatabaseName(DB2zSQLParser.DatabaseNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCatalogName(SQLParser.CatalogNameContext ctx) { }
+	@Override public void enterCatalogName(DB2zSQLParser.CatalogNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCatalogName(SQLParser.CatalogNameContext ctx) { }
+	@Override public void exitCatalogName(DB2zSQLParser.CatalogNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBpName(SQLParser.BpNameContext ctx) { }
+	@Override public void enterBpName(DB2zSQLParser.BpNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBpName(SQLParser.BpNameContext ctx) { }
+	@Override public void exitBpName(DB2zSQLParser.BpNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterStogroupName(SQLParser.StogroupNameContext ctx) { }
+	@Override public void enterStogroupName(DB2zSQLParser.StogroupNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitStogroupName(SQLParser.StogroupNameContext ctx) { }
+	@Override public void exitStogroupName(DB2zSQLParser.StogroupNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionName(SQLParser.FunctionNameContext ctx) { }
+	@Override public void enterFunctionName(DB2zSQLParser.FunctionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionName(SQLParser.FunctionNameContext ctx) { }
+	@Override public void exitFunctionName(DB2zSQLParser.FunctionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSpecificName(SQLParser.SpecificNameContext ctx) { }
+	@Override public void enterSpecificName(DB2zSQLParser.SpecificNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSpecificName(SQLParser.SpecificNameContext ctx) { }
+	@Override public void exitSpecificName(DB2zSQLParser.SpecificNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHostVariable(SQLParser.HostVariableContext ctx) { }
+	@Override public void enterHostVariable(DB2zSQLParser.HostVariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHostVariable(SQLParser.HostVariableContext ctx) { }
+	@Override public void exitHostVariable(DB2zSQLParser.HostVariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHostIdentifier(SQLParser.HostIdentifierContext ctx) { }
+	@Override public void enterHostIdentifier(DB2zSQLParser.HostIdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHostIdentifier(SQLParser.HostIdentifierContext ctx) { }
+	@Override public void exitHostIdentifier(DB2zSQLParser.HostIdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHostStructure(SQLParser.HostStructureContext ctx) { }
+	@Override public void enterHostStructure(DB2zSQLParser.HostStructureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHostStructure(SQLParser.HostStructureContext ctx) { }
+	@Override public void exitHostStructure(DB2zSQLParser.HostStructureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterVariable(SQLParser.VariableContext ctx) { }
+	@Override public void enterVariable(DB2zSQLParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitVariable(SQLParser.VariableContext ctx) { }
+	@Override public void exitVariable(DB2zSQLParser.VariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIntoClause(SQLParser.IntoClauseContext ctx) { }
+	@Override public void enterIntoClause(DB2zSQLParser.IntoClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIntoClause(SQLParser.IntoClauseContext ctx) { }
+	@Override public void exitIntoClause(DB2zSQLParser.IntoClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCorrelationClause(SQLParser.CorrelationClauseContext ctx) { }
+	@Override public void enterCorrelationClause(DB2zSQLParser.CorrelationClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCorrelationClause(SQLParser.CorrelationClauseContext ctx) { }
+	@Override public void exitCorrelationClause(DB2zSQLParser.CorrelationClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFromClause(SQLParser.FromClauseContext ctx) { }
+	@Override public void enterFromClause(DB2zSQLParser.FromClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFromClause(SQLParser.FromClauseContext ctx) { }
+	@Override public void exitFromClause(DB2zSQLParser.FromClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableReference(SQLParser.TableReferenceContext ctx) { }
+	@Override public void enterTableReference(DB2zSQLParser.TableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableReference(SQLParser.TableReferenceContext ctx) { }
+	@Override public void exitTableReference(DB2zSQLParser.TableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSingleTableReference(SQLParser.SingleTableReferenceContext ctx) { }
+	@Override public void enterSingleTableReference(DB2zSQLParser.SingleTableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSingleTableReference(SQLParser.SingleTableReferenceContext ctx) { }
+	@Override public void exitSingleTableReference(DB2zSQLParser.SingleTableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPeriodSpecification(SQLParser.PeriodSpecificationContext ctx) { }
+	@Override public void enterPeriodSpecification(DB2zSQLParser.PeriodSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPeriodSpecification(SQLParser.PeriodSpecificationContext ctx) { }
+	@Override public void exitPeriodSpecification(DB2zSQLParser.PeriodSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterPeriodClause(SQLParser.PeriodClauseContext ctx) { }
+	@Override public void enterPeriodClause(DB2zSQLParser.PeriodClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitPeriodClause(SQLParser.PeriodClauseContext ctx) { }
+	@Override public void exitPeriodClause(DB2zSQLParser.PeriodClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNestedTableExpression(SQLParser.NestedTableExpressionContext ctx) { }
+	@Override public void enterNestedTableExpression(DB2zSQLParser.NestedTableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNestedTableExpression(SQLParser.NestedTableExpressionContext ctx) { }
+	@Override public void exitNestedTableExpression(DB2zSQLParser.NestedTableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDataChangeTableReference(SQLParser.DataChangeTableReferenceContext ctx) { }
+	@Override public void enterDataChangeTableReference(DB2zSQLParser.DataChangeTableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDataChangeTableReference(SQLParser.DataChangeTableReferenceContext ctx) { }
+	@Override public void exitDataChangeTableReference(DB2zSQLParser.DataChangeTableReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableFunctionReference(SQLParser.TableFunctionReferenceContext ctx) { }
+	@Override public void enterTableFunctionReference(DB2zSQLParser.TableFunctionReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableFunctionReference(SQLParser.TableFunctionReferenceContext ctx) { }
+	@Override public void exitTableFunctionReference(DB2zSQLParser.TableFunctionReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableUdfCardinalityClause(SQLParser.TableUdfCardinalityClauseContext ctx) { }
+	@Override public void enterTableUdfCardinalityClause(DB2zSQLParser.TableUdfCardinalityClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableUdfCardinalityClause(SQLParser.TableUdfCardinalityClauseContext ctx) { }
+	@Override public void exitTableUdfCardinalityClause(DB2zSQLParser.TableUdfCardinalityClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTypedCorrelationClause(SQLParser.TypedCorrelationClauseContext ctx) { }
+	@Override public void enterTypedCorrelationClause(DB2zSQLParser.TypedCorrelationClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTypedCorrelationClause(SQLParser.TypedCorrelationClauseContext ctx) { }
+	@Override public void exitTypedCorrelationClause(DB2zSQLParser.TypedCorrelationClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableLocatorReference(SQLParser.TableLocatorReferenceContext ctx) { }
+	@Override public void enterTableLocatorReference(DB2zSQLParser.TableLocatorReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableLocatorReference(SQLParser.TableLocatorReferenceContext ctx) { }
+	@Override public void exitTableLocatorReference(DB2zSQLParser.TableLocatorReferenceContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterXmltableExpression(SQLParser.XmltableExpressionContext ctx) { }
+	@Override public void enterXmltableExpression(DB2zSQLParser.XmltableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitXmltableExpression(SQLParser.XmltableExpressionContext ctx) { }
+	@Override public void exitXmltableExpression(DB2zSQLParser.XmltableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCollectionDerivedTable(SQLParser.CollectionDerivedTableContext ctx) { }
+	@Override public void enterCollectionDerivedTable(DB2zSQLParser.CollectionDerivedTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCollectionDerivedTable(SQLParser.CollectionDerivedTableContext ctx) { }
+	@Override public void exitCollectionDerivedTable(DB2zSQLParser.CollectionDerivedTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterJoinCondition(SQLParser.JoinConditionContext ctx) { }
+	@Override public void enterJoinCondition(DB2zSQLParser.JoinConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitJoinCondition(SQLParser.JoinConditionContext ctx) { }
+	@Override public void exitJoinCondition(DB2zSQLParser.JoinConditionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFullJoinExpression(SQLParser.FullJoinExpressionContext ctx) { }
+	@Override public void enterFullJoinExpression(DB2zSQLParser.FullJoinExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFullJoinExpression(SQLParser.FullJoinExpressionContext ctx) { }
+	@Override public void exitFullJoinExpression(DB2zSQLParser.FullJoinExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCastFunction(SQLParser.CastFunctionContext ctx) { }
+	@Override public void enterCastFunction(DB2zSQLParser.CastFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCastFunction(SQLParser.CastFunctionContext ctx) { }
+	@Override public void exitCastFunction(DB2zSQLParser.CastFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOrdinaryArrayExpression(SQLParser.OrdinaryArrayExpressionContext ctx) { }
+	@Override public void enterOrdinaryArrayExpression(DB2zSQLParser.OrdinaryArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOrdinaryArrayExpression(SQLParser.OrdinaryArrayExpressionContext ctx) { }
+	@Override public void exitOrdinaryArrayExpression(DB2zSQLParser.OrdinaryArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAssociativeArrayExpression(SQLParser.AssociativeArrayExpressionContext ctx) { }
+	@Override public void enterAssociativeArrayExpression(DB2zSQLParser.AssociativeArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAssociativeArrayExpression(SQLParser.AssociativeArrayExpressionContext ctx) { }
+	@Override public void exitAssociativeArrayExpression(DB2zSQLParser.AssociativeArrayExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterComparison(SQLParser.ComparisonContext ctx) { }
+	@Override public void enterComparison(DB2zSQLParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitComparison(SQLParser.ComparisonContext ctx) { }
+	@Override public void exitComparison(DB2zSQLParser.ComparisonContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterWhereClause(SQLParser.WhereClauseContext ctx) { }
+	@Override public void enterWhereClause(DB2zSQLParser.WhereClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitWhereClause(SQLParser.WhereClauseContext ctx) { }
+	@Override public void exitWhereClause(DB2zSQLParser.WhereClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupByClause(SQLParser.GroupByClauseContext ctx) { }
+	@Override public void enterGroupByClause(DB2zSQLParser.GroupByClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupByClause(SQLParser.GroupByClauseContext ctx) { }
+	@Override public void exitGroupByClause(DB2zSQLParser.GroupByClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterHavingClause(SQLParser.HavingClauseContext ctx) { }
+	@Override public void enterHavingClause(DB2zSQLParser.HavingClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitHavingClause(SQLParser.HavingClauseContext ctx) { }
+	@Override public void exitHavingClause(DB2zSQLParser.HavingClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupingExpression(SQLParser.GroupingExpressionContext ctx) { }
+	@Override public void enterGroupingExpression(DB2zSQLParser.GroupingExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupingExpression(SQLParser.GroupingExpressionContext ctx) { }
+	@Override public void exitGroupingExpression(DB2zSQLParser.GroupingExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupingSets(SQLParser.GroupingSetsContext ctx) { }
+	@Override public void enterGroupingSets(DB2zSQLParser.GroupingSetsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupingSets(SQLParser.GroupingSetsContext ctx) { }
+	@Override public void exitGroupingSets(DB2zSQLParser.GroupingSetsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGroupingSetsGroup(SQLParser.GroupingSetsGroupContext ctx) { }
+	@Override public void enterGroupingSetsGroup(DB2zSQLParser.GroupingSetsGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGroupingSetsGroup(SQLParser.GroupingSetsGroupContext ctx) { }
+	@Override public void exitGroupingSetsGroup(DB2zSQLParser.GroupingSetsGroupContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSuperGroups(SQLParser.SuperGroupsContext ctx) { }
+	@Override public void enterSuperGroups(DB2zSQLParser.SuperGroupsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSuperGroups(SQLParser.SuperGroupsContext ctx) { }
+	@Override public void exitSuperGroups(DB2zSQLParser.SuperGroupsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSelectColumns(SQLParser.SelectColumnsContext ctx) { }
+	@Override public void enterSelectColumns(DB2zSQLParser.SelectColumnsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSelectColumns(SQLParser.SelectColumnsContext ctx) { }
+	@Override public void exitSelectColumns(DB2zSQLParser.SelectColumnsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUnpackedRow(SQLParser.UnpackedRowContext ctx) { }
+	@Override public void enterUnpackedRow(DB2zSQLParser.UnpackedRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUnpackedRow(SQLParser.UnpackedRowContext ctx) { }
+	@Override public void exitUnpackedRow(DB2zSQLParser.UnpackedRowContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSelectClause(SQLParser.SelectClauseContext ctx) { }
+	@Override public void enterSelectClause(DB2zSQLParser.SelectClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSelectClause(SQLParser.SelectClauseContext ctx) { }
+	@Override public void exitSelectClause(DB2zSQLParser.SelectClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSubSelect(SQLParser.SubSelectContext ctx) { }
+	@Override public void enterSubSelect(DB2zSQLParser.SubSelectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSubSelect(SQLParser.SubSelectContext ctx) { }
+	@Override public void exitSubSelect(DB2zSQLParser.SubSelectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSelectIntoStatement(SQLParser.SelectIntoStatementContext ctx) { }
+	@Override public void enterSelectIntoStatement(DB2zSQLParser.SelectIntoStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSelectIntoStatement(SQLParser.SelectIntoStatementContext ctx) { }
+	@Override public void exitSelectIntoStatement(DB2zSQLParser.SelectIntoStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSelectStatement(SQLParser.SelectStatementContext ctx) { }
+	@Override public void enterSelectStatement(DB2zSQLParser.SelectStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSelectStatement(SQLParser.SelectStatementContext ctx) { }
+	@Override public void exitSelectStatement(DB2zSQLParser.SelectStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCommonTableExpression(SQLParser.CommonTableExpressionContext ctx) { }
+	@Override public void enterCommonTableExpression(DB2zSQLParser.CommonTableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCommonTableExpression(SQLParser.CommonTableExpressionContext ctx) { }
+	@Override public void exitCommonTableExpression(DB2zSQLParser.CommonTableExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUpdateClause(SQLParser.UpdateClauseContext ctx) { }
+	@Override public void enterUpdateClause(DB2zSQLParser.UpdateClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUpdateClause(SQLParser.UpdateClauseContext ctx) { }
+	@Override public void exitUpdateClause(DB2zSQLParser.UpdateClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterReadOnlyClause(SQLParser.ReadOnlyClauseContext ctx) { }
+	@Override public void enterReadOnlyClause(DB2zSQLParser.ReadOnlyClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitReadOnlyClause(SQLParser.ReadOnlyClauseContext ctx) { }
+	@Override public void exitReadOnlyClause(DB2zSQLParser.ReadOnlyClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOptimizeClause(SQLParser.OptimizeClauseContext ctx) { }
+	@Override public void enterOptimizeClause(DB2zSQLParser.OptimizeClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOptimizeClause(SQLParser.OptimizeClauseContext ctx) { }
+	@Override public void exitOptimizeClause(DB2zSQLParser.OptimizeClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIsolationClause(SQLParser.IsolationClauseContext ctx) { }
+	@Override public void enterIsolationClause(DB2zSQLParser.IsolationClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIsolationClause(SQLParser.IsolationClauseContext ctx) { }
+	@Override public void exitIsolationClause(DB2zSQLParser.IsolationClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterLockClause(SQLParser.LockClauseContext ctx) { }
+	@Override public void enterLockClause(DB2zSQLParser.LockClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitLockClause(SQLParser.LockClauseContext ctx) { }
+	@Override public void exitLockClause(DB2zSQLParser.LockClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSkipLockedDataClause(SQLParser.SkipLockedDataClauseContext ctx) { }
+	@Override public void enterSkipLockedDataClause(DB2zSQLParser.SkipLockedDataClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSkipLockedDataClause(SQLParser.SkipLockedDataClauseContext ctx) { }
+	@Override public void exitSkipLockedDataClause(DB2zSQLParser.SkipLockedDataClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterQuerynoClause(SQLParser.QuerynoClauseContext ctx) { }
+	@Override public void enterQuerynoClause(DB2zSQLParser.QuerynoClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitQuerynoClause(SQLParser.QuerynoClauseContext ctx) { }
+	@Override public void exitQuerynoClause(DB2zSQLParser.QuerynoClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterScalarFullSelect(SQLParser.ScalarFullSelectContext ctx) { }
+	@Override public void enterScalarFullSelect(DB2zSQLParser.ScalarFullSelectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitScalarFullSelect(SQLParser.ScalarFullSelectContext ctx) { }
+	@Override public void exitScalarFullSelect(DB2zSQLParser.ScalarFullSelectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFullSelect(SQLParser.FullSelectContext ctx) { }
+	@Override public void enterFullSelect(DB2zSQLParser.FullSelectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFullSelect(SQLParser.FullSelectContext ctx) { }
+	@Override public void exitFullSelect(DB2zSQLParser.FullSelectContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterValuesClause(SQLParser.ValuesClauseContext ctx) { }
+	@Override public void enterValuesClause(DB2zSQLParser.ValuesClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitValuesClause(SQLParser.ValuesClauseContext ctx) { }
+	@Override public void exitValuesClause(DB2zSQLParser.ValuesClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOrderByClause(SQLParser.OrderByClauseContext ctx) { }
+	@Override public void enterOrderByClause(DB2zSQLParser.OrderByClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOrderByClause(SQLParser.OrderByClauseContext ctx) { }
+	@Override public void exitOrderByClause(DB2zSQLParser.OrderByClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSortKey(SQLParser.SortKeyContext ctx) { }
+	@Override public void enterSortKey(DB2zSQLParser.SortKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSortKey(SQLParser.SortKeyContext ctx) { }
+	@Override public void exitSortKey(DB2zSQLParser.SortKeyContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOffsetClause(SQLParser.OffsetClauseContext ctx) { }
+	@Override public void enterOffsetClause(DB2zSQLParser.OffsetClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOffsetClause(SQLParser.OffsetClauseContext ctx) { }
+	@Override public void exitOffsetClause(DB2zSQLParser.OffsetClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFetchClause(SQLParser.FetchClauseContext ctx) { }
+	@Override public void enterFetchClause(DB2zSQLParser.FetchClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFetchClause(SQLParser.FetchClauseContext ctx) { }
+	@Override public void exitFetchClause(DB2zSQLParser.FetchClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterIdentifier(SQLParser.IdentifierContext ctx) { }
+	@Override public void enterIdentifier(DB2zSQLParser.IdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitIdentifier(SQLParser.IdentifierContext ctx) { }
+	@Override public void exitIdentifier(DB2zSQLParser.IdentifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterSqlKeyword(SQLParser.SqlKeywordContext ctx) { }
+	@Override public void enterSqlKeyword(DB2zSQLParser.SqlKeywordContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitSqlKeyword(SQLParser.SqlKeywordContext ctx) { }
+	@Override public void exitSqlKeyword(DB2zSQLParser.SqlKeywordContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

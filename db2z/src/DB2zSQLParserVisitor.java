@@ -1,1356 +1,1356 @@
-// Generated from src/SQLParser.g4 by ANTLR 4.9.2
+// Generated from src/DB2zSQLParser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 
 /**
  * This interface defines a complete generic visitor for a parse tree produced
- * by {@link SQLParser}.
+ * by {@link DB2zSQLParser}.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public interface SQLParserVisitor<T> extends ParseTreeVisitor<T> {
+public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#startRule}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#startRule}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStartRule(SQLParser.StartRuleContext ctx);
+	T visitStartRule(DB2zSQLParser.StartRuleContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#sqlStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSqlStatement(SQLParser.SqlStatementContext ctx);
+	T visitSqlStatement(DB2zSQLParser.SqlStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#query}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#query}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitQuery(SQLParser.QueryContext ctx);
+	T visitQuery(DB2zSQLParser.QueryContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#declareCursorStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclareCursorStatement(SQLParser.DeclareCursorStatementContext ctx);
+	T visitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#cursorName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cursorName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCursorName(SQLParser.CursorNameContext ctx);
+	T visitCursorName(DB2zSQLParser.CursorNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#statementName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#statementName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatementName(SQLParser.StatementNameContext ctx);
+	T visitStatementName(DB2zSQLParser.StatementNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#holdability}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#holdability}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHoldability(SQLParser.HoldabilityContext ctx);
+	T visitHoldability(DB2zSQLParser.HoldabilityContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#returnability}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#returnability}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReturnability(SQLParser.ReturnabilityContext ctx);
+	T visitReturnability(DB2zSQLParser.ReturnabilityContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#rowsetPositioning}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowsetPositioning}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRowsetPositioning(SQLParser.RowsetPositioningContext ctx);
+	T visitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#declareTableStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclareTableStatement(SQLParser.DeclareTableStatementContext ctx);
+	T visitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#notNullPhrase}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#notNullPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNotNullPhrase(SQLParser.NotNullPhraseContext ctx);
+	T visitNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#declareStatementStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeclareStatementStatement(SQLParser.DeclareStatementStatementContext ctx);
+	T visitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#allocateCursorStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#allocateCursorStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAllocateCursorStatement(SQLParser.AllocateCursorStatementContext ctx);
+	T visitAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#rsLocatorVariable}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rsLocatorVariable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRsLocatorVariable(SQLParser.RsLocatorVariableContext ctx);
+	T visitRsLocatorVariable(DB2zSQLParser.RsLocatorVariableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterDatabaseStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterDatabaseStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterDatabaseStatement(SQLParser.AlterDatabaseStatementContext ctx);
+	T visitAlterDatabaseStatement(DB2zSQLParser.AlterDatabaseStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterFunctionStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterFunctionStatement(SQLParser.AlterFunctionStatementContext ctx);
+	T visitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterIndexStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterIndexStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterIndexStatement(SQLParser.AlterIndexStatementContext ctx);
+	T visitAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterMaskStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterMaskStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterMaskStatement(SQLParser.AlterMaskStatementContext ctx);
+	T visitAlterMaskStatement(DB2zSQLParser.AlterMaskStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterPermissionStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterPermissionStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterPermissionStatement(SQLParser.AlterPermissionStatementContext ctx);
+	T visitAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#searchedDelete}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSearchedDelete(SQLParser.SearchedDeleteContext ctx);
+	T visitSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#positionedDelete}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#positionedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPositionedDelete(SQLParser.PositionedDeleteContext ctx);
+	T visitPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#deleteStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#deleteStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeleteStatement(SQLParser.DeleteStatementContext ctx);
+	T visitDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#insertStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInsertStatement(SQLParser.InsertStatementContext ctx);
+	T visitInsertStatement(DB2zSQLParser.InsertStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#mergeStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMergeStatement(SQLParser.MergeStatementContext ctx);
+	T visitMergeStatement(DB2zSQLParser.MergeStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#searchedUpdate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedUpdate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSearchedUpdate(SQLParser.SearchedUpdateContext ctx);
+	T visitSearchedUpdate(DB2zSQLParser.SearchedUpdateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#positionedUpdate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#positionedUpdate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPositionedUpdate(SQLParser.PositionedUpdateContext ctx);
+	T visitPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#updateStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUpdateStatement(SQLParser.UpdateStatementContext ctx);
+	T visitUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#sourceValues}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sourceValues}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSourceValues(SQLParser.SourceValuesContext ctx);
+	T visitSourceValues(DB2zSQLParser.SourceValuesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesSingleRow}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesSingleRow}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesSingleRow(SQLParser.ValuesSingleRowContext ctx);
+	T visitValuesSingleRow(DB2zSQLParser.ValuesSingleRowContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesMultipleRow}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesMultipleRow}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesMultipleRow(SQLParser.ValuesMultipleRowContext ctx);
+	T visitValuesMultipleRow(DB2zSQLParser.ValuesMultipleRowContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#matchingCondition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#matchingCondition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMatchingCondition(SQLParser.MatchingConditionContext ctx);
+	T visitMatchingCondition(DB2zSQLParser.MatchingConditionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#modificationOperation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#modificationOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitModificationOperation(SQLParser.ModificationOperationContext ctx);
+	T visitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#assignmentClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssignmentClause(SQLParser.AssignmentClauseContext ctx);
+	T visitAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#updateOperation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#updateOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUpdateOperation(SQLParser.UpdateOperationContext ctx);
+	T visitUpdateOperation(DB2zSQLParser.UpdateOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#deleteOperation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#deleteOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDeleteOperation(SQLParser.DeleteOperationContext ctx);
+	T visitDeleteOperation(DB2zSQLParser.DeleteOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#insertOperation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#insertOperation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInsertOperation(SQLParser.InsertOperationContext ctx);
+	T visitInsertOperation(DB2zSQLParser.InsertOperationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#signalStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSignalStatement(SQLParser.SignalStatementContext ctx);
+	T visitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#signalInformation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#signalInformation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSignalInformation(SQLParser.SignalInformationContext ctx);
+	T visitSignalInformation(DB2zSQLParser.SignalInformationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesList1}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesList1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesList1(SQLParser.ValuesList1Context ctx);
+	T visitValuesList1(DB2zSQLParser.ValuesList1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesList2}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesList2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesList2(SQLParser.ValuesList2Context ctx);
+	T visitValuesList2(DB2zSQLParser.ValuesList2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesList3}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesList3}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesList3(SQLParser.ValuesList3Context ctx);
+	T visitValuesList3(DB2zSQLParser.ValuesList3Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesList4}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesList4}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesList4(SQLParser.ValuesList4Context ctx);
+	T visitValuesList4(DB2zSQLParser.ValuesList4Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#includeColumns}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#includeColumns}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIncludeColumns(SQLParser.IncludeColumnsContext ctx);
+	T visitIncludeColumns(DB2zSQLParser.IncludeColumnsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#multipleRowInsert}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#multipleRowInsert}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMultipleRowInsert(SQLParser.MultipleRowInsertContext ctx);
+	T visitMultipleRowInsert(DB2zSQLParser.MultipleRowInsertContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#regenerateClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#regenerateClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRegenerateClause(SQLParser.RegenerateClauseContext ctx);
+	T visitRegenerateClause(DB2zSQLParser.RegenerateClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterIndexOptions}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterIndexOptions}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterIndexOptions(SQLParser.AlterIndexOptionsContext ctx);
+	T visitAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#alterIndexPartitionOptions}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterIndexPartitionOptions}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterIndexPartitionOptions(SQLParser.AlterIndexPartitionOptionsContext ctx);
+	T visitAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#usingSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#usingSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUsingSpecification(SQLParser.UsingSpecificationContext ctx);
+	T visitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#freeSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#freeSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFreeSpecification(SQLParser.FreeSpecificationContext ctx);
+	T visitFreeSpecification(DB2zSQLParser.FreeSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#gbpcacheSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#gbpcacheSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGbpcacheSpecification(SQLParser.GbpcacheSpecificationContext ctx);
+	T visitGbpcacheSpecification(DB2zSQLParser.GbpcacheSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#partitionElement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#partitionElement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPartitionElement(SQLParser.PartitionElementContext ctx);
+	T visitPartitionElement(DB2zSQLParser.PartitionElementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#applCompatValue}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#applCompatValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitApplCompatValue(SQLParser.ApplCompatValueContext ctx);
+	T visitApplCompatValue(DB2zSQLParser.ApplCompatValueContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#functionLevel}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionLevel}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionLevel(SQLParser.FunctionLevelContext ctx);
+	T visitFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#parameterType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParameterType(SQLParser.ParameterTypeContext ctx);
+	T visitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#optionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#optionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOptionList(SQLParser.OptionListContext ctx);
+	T visitOptionList(DB2zSQLParser.OptionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#externalProgramName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExternalProgramName(SQLParser.ExternalProgramNameContext ctx);
+	T visitExternalProgramName(DB2zSQLParser.ExternalProgramNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#packagePath}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#packagePath}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPackagePath(SQLParser.PackagePathContext ctx);
+	T visitPackagePath(DB2zSQLParser.PackagePathContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#collectionID}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#collectionID}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCollectionID(SQLParser.CollectionIDContext ctx);
+	T visitCollectionID(DB2zSQLParser.CollectionIDContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#runTimeOptions}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#runTimeOptions}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRunTimeOptions(SQLParser.RunTimeOptionsContext ctx);
+	T visitRunTimeOptions(DB2zSQLParser.RunTimeOptionsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#comparisonOperator}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#comparisonOperator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparisonOperator(SQLParser.ComparisonOperatorContext ctx);
+	T visitComparisonOperator(DB2zSQLParser.ComparisonOperatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#operator}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#operator}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOperator(SQLParser.OperatorContext ctx);
+	T visitOperator(DB2zSQLParser.OperatorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#expression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#expression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExpression(SQLParser.ExpressionContext ctx);
+	T visitExpression(DB2zSQLParser.ExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#rowChangeExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowChangeExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRowChangeExpression(SQLParser.RowChangeExpressionContext ctx);
+	T visitRowChangeExpression(DB2zSQLParser.RowChangeExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#sequenceReference}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSequenceReference(SQLParser.SequenceReferenceContext ctx);
+	T visitSequenceReference(DB2zSQLParser.SequenceReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#functionInvocation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionInvocation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionInvocation(SQLParser.FunctionInvocationContext ctx);
+	T visitFunctionInvocation(DB2zSQLParser.FunctionInvocationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#scalarFunctionInvocation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#scalarFunctionInvocation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitScalarFunctionInvocation(SQLParser.ScalarFunctionInvocationContext ctx);
+	T visitScalarFunctionInvocation(DB2zSQLParser.ScalarFunctionInvocationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#aggregateFunctionInvocation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateFunctionInvocation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAggregateFunctionInvocation(SQLParser.AggregateFunctionInvocationContext ctx);
+	T visitAggregateFunctionInvocation(DB2zSQLParser.AggregateFunctionInvocationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#regressionFunctionInvocation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#regressionFunctionInvocation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRegressionFunctionInvocation(SQLParser.RegressionFunctionInvocationContext ctx);
+	T visitRegressionFunctionInvocation(DB2zSQLParser.RegressionFunctionInvocationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#externalFunctionInvocation}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#externalFunctionInvocation}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExternalFunctionInvocation(SQLParser.ExternalFunctionInvocationContext ctx);
+	T visitExternalFunctionInvocation(DB2zSQLParser.ExternalFunctionInvocationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#labeledDuration}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#labeledDuration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLabeledDuration(SQLParser.LabeledDurationContext ctx);
+	T visitLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlCastSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlCastSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlCastSpecification(SQLParser.XmlCastSpecificationContext ctx);
+	T visitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#arrayElementSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayElementSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayElementSpecification(SQLParser.ArrayElementSpecificationContext ctx);
+	T visitArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#arrayIndex}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayIndex}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayIndex(SQLParser.ArrayIndexContext ctx);
+	T visitArrayIndex(DB2zSQLParser.ArrayIndexContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#arrayConstructor}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayConstructor}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayConstructor(SQLParser.ArrayConstructorContext ctx);
+	T visitArrayConstructor(DB2zSQLParser.ArrayConstructorContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#olapSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#olapSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOlapSpecification(SQLParser.OlapSpecificationContext ctx);
+	T visitOlapSpecification(DB2zSQLParser.OlapSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#orderedOlapSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#orderedOlapSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOrderedOlapSpecification(SQLParser.OrderedOlapSpecificationContext ctx);
+	T visitOrderedOlapSpecification(DB2zSQLParser.OrderedOlapSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#olapSpecificationFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#olapSpecificationFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOlapSpecificationFunction(SQLParser.OlapSpecificationFunctionContext ctx);
+	T visitOlapSpecificationFunction(DB2zSQLParser.OlapSpecificationFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#lagFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#lagFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLagFunction(SQLParser.LagFunctionContext ctx);
+	T visitLagFunction(DB2zSQLParser.LagFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#leadFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#leadFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLeadFunction(SQLParser.LeadFunctionContext ctx);
+	T visitLeadFunction(DB2zSQLParser.LeadFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#respectNullsClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#respectNullsClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRespectNullsClause(SQLParser.RespectNullsClauseContext ctx);
+	T visitRespectNullsClause(DB2zSQLParser.RespectNullsClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#windowPartitionClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#windowPartitionClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWindowPartitionClause(SQLParser.WindowPartitionClauseContext ctx);
+	T visitWindowPartitionClause(DB2zSQLParser.WindowPartitionClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#windowOrderClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#windowOrderClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWindowOrderClause(SQLParser.WindowOrderClauseContext ctx);
+	T visitWindowOrderClause(DB2zSQLParser.WindowOrderClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#windowOrderClauseQualifier}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#windowOrderClauseQualifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWindowOrderClauseQualifier(SQLParser.WindowOrderClauseQualifierContext ctx);
+	T visitWindowOrderClauseQualifier(DB2zSQLParser.WindowOrderClauseQualifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#numberingSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#numberingSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNumberingSpecification(SQLParser.NumberingSpecificationContext ctx);
+	T visitNumberingSpecification(DB2zSQLParser.NumberingSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#aggregationSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregationSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAggregationSpecification(SQLParser.AggregationSpecificationContext ctx);
+	T visitAggregationSpecification(DB2zSQLParser.AggregationSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#aggregateFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAggregateFunction(SQLParser.AggregateFunctionContext ctx);
+	T visitAggregateFunction(DB2zSQLParser.AggregateFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#regressionFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#regressionFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRegressionFunction(SQLParser.RegressionFunctionContext ctx);
+	T visitRegressionFunction(DB2zSQLParser.RegressionFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#olapColumnFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#olapColumnFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOlapColumnFunction(SQLParser.OlapColumnFunctionContext ctx);
+	T visitOlapColumnFunction(DB2zSQLParser.OlapColumnFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#firstValueFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#firstValueFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFirstValueFunction(SQLParser.FirstValueFunctionContext ctx);
+	T visitFirstValueFunction(DB2zSQLParser.FirstValueFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#lastValueFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#lastValueFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLastValueFunction(SQLParser.LastValueFunctionContext ctx);
+	T visitLastValueFunction(DB2zSQLParser.LastValueFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#nthValueFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nthValueFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNthValueFunction(SQLParser.NthValueFunctionContext ctx);
+	T visitNthValueFunction(DB2zSQLParser.NthValueFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#ratioToReportFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ratioToReportFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRatioToReportFunction(SQLParser.RatioToReportFunctionContext ctx);
+	T visitRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#windowAggregationGroupClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWindowAggregationGroupClause(SQLParser.WindowAggregationGroupClauseContext ctx);
+	T visitWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupStart}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupStart}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupStart(SQLParser.GroupStartContext ctx);
+	T visitGroupStart(DB2zSQLParser.GroupStartContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupBetween}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupBetween}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupBetween(SQLParser.GroupBetweenContext ctx);
+	T visitGroupBetween(DB2zSQLParser.GroupBetweenContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupEnd}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupEnd}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupEnd(SQLParser.GroupEndContext ctx);
+	T visitGroupEnd(DB2zSQLParser.GroupEndContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupBound1}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupBound1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupBound1(SQLParser.GroupBound1Context ctx);
+	T visitGroupBound1(DB2zSQLParser.GroupBound1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupBound2}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupBound2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupBound2(SQLParser.GroupBound2Context ctx);
+	T visitGroupBound2(DB2zSQLParser.GroupBound2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#unboundedPreceding}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#unboundedPreceding}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnboundedPreceding(SQLParser.UnboundedPrecedingContext ctx);
+	T visitUnboundedPreceding(DB2zSQLParser.UnboundedPrecedingContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#unboundedFollowing}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#unboundedFollowing}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnboundedFollowing(SQLParser.UnboundedFollowingContext ctx);
+	T visitUnboundedFollowing(DB2zSQLParser.UnboundedFollowingContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#boundedPreceding}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#boundedPreceding}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBoundedPreceding(SQLParser.BoundedPrecedingContext ctx);
+	T visitBoundedPreceding(DB2zSQLParser.BoundedPrecedingContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#boundedFollowing}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#boundedFollowing}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBoundedFollowing(SQLParser.BoundedFollowingContext ctx);
+	T visitBoundedFollowing(DB2zSQLParser.BoundedFollowingContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#currentRow}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#currentRow}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCurrentRow(SQLParser.CurrentRowContext ctx);
+	T visitCurrentRow(DB2zSQLParser.CurrentRowContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#scalarFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#scalarFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitScalarFunction(SQLParser.ScalarFunctionContext ctx);
+	T visitScalarFunction(DB2zSQLParser.ScalarFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#tableFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableFunction(SQLParser.TableFunctionContext ctx);
+	T visitTableFunction(DB2zSQLParser.TableFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#specialRegister}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#specialRegister}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSpecialRegister(SQLParser.SpecialRegisterContext ctx);
+	T visitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmltableFunctionSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmltableFunctionSpecification(SQLParser.XmltableFunctionSpecificationContext ctx);
+	T visitXmltableFunctionSpecification(DB2zSQLParser.XmltableFunctionSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#rowXqueryExpressionConstant}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowXqueryExpressionConstant}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRowXqueryExpressionConstant(SQLParser.RowXqueryExpressionConstantContext ctx);
+	T visitRowXqueryExpressionConstant(DB2zSQLParser.RowXqueryExpressionConstantContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#rowXqueryArgument}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowXqueryArgument}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRowXqueryArgument(SQLParser.RowXqueryArgumentContext ctx);
+	T visitRowXqueryArgument(DB2zSQLParser.RowXqueryArgumentContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xqueryContextItemExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xqueryContextItemExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXqueryContextItemExpression(SQLParser.XqueryContextItemExpressionContext ctx);
+	T visitXqueryContextItemExpression(DB2zSQLParser.XqueryContextItemExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xqueryVariableExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xqueryVariableExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXqueryVariableExpression(SQLParser.XqueryVariableExpressionContext ctx);
+	T visitXqueryVariableExpression(DB2zSQLParser.XqueryVariableExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlTableRegularColumnDefinition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlTableRegularColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlTableRegularColumnDefinition(SQLParser.XmlTableRegularColumnDefinitionContext ctx);
+	T visitXmlTableRegularColumnDefinition(DB2zSQLParser.XmlTableRegularColumnDefinitionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#defaultClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDefaultClause(SQLParser.DefaultClauseContext ctx);
+	T visitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#defaultClauseAllowables}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDefaultClauseAllowables(SQLParser.DefaultClauseAllowablesContext ctx);
+	T visitDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#distinctTypeCastFunctionName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#distinctTypeCastFunctionName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDistinctTypeCastFunctionName(SQLParser.DistinctTypeCastFunctionNameContext ctx);
+	T visitDistinctTypeCastFunctionName(DB2zSQLParser.DistinctTypeCastFunctionNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#columnXqueryExpressionConstant}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#columnXqueryExpressionConstant}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColumnXqueryExpressionConstant(SQLParser.ColumnXqueryExpressionConstantContext ctx);
+	T visitColumnXqueryExpressionConstant(DB2zSQLParser.ColumnXqueryExpressionConstantContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlTableOrdinalityColumnDefinition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlTableOrdinalityColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlTableOrdinalityColumnDefinition(SQLParser.XmlTableOrdinalityColumnDefinitionContext ctx);
+	T visitXmlTableOrdinalityColumnDefinition(DB2zSQLParser.XmlTableOrdinalityColumnDefinitionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlnamespacesDeclaration}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlnamespacesDeclaration}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlnamespacesDeclaration(SQLParser.XmlnamespacesDeclarationContext ctx);
+	T visitXmlnamespacesDeclaration(DB2zSQLParser.XmlnamespacesDeclarationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlnamespacesFunctionSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlnamespacesFunctionSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlnamespacesFunctionSpecification(SQLParser.XmlnamespacesFunctionSpecificationContext ctx);
+	T visitXmlnamespacesFunctionSpecification(DB2zSQLParser.XmlnamespacesFunctionSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlnamespacesFunctionArguments}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlnamespacesFunctionArguments}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlnamespacesFunctionArguments(SQLParser.XmlnamespacesFunctionArgumentsContext ctx);
+	T visitXmlnamespacesFunctionArguments(DB2zSQLParser.XmlnamespacesFunctionArgumentsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#namespaceUri}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#namespaceUri}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNamespaceUri(SQLParser.NamespaceUriContext ctx);
+	T visitNamespaceUri(DB2zSQLParser.NamespaceUriContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#namespacePrefix}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#namespacePrefix}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNamespacePrefix(SQLParser.NamespacePrefixContext ctx);
+	T visitNamespacePrefix(DB2zSQLParser.NamespacePrefixContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#timeZoneSpecificExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#timeZoneSpecificExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTimeZoneSpecificExpression(SQLParser.TimeZoneSpecificExpressionContext ctx);
+	T visitTimeZoneSpecificExpression(DB2zSQLParser.TimeZoneSpecificExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#timeZoneExpressionSubset}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#timeZoneExpressionSubset}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTimeZoneExpressionSubset(SQLParser.TimeZoneExpressionSubsetContext ctx);
+	T visitTimeZoneExpressionSubset(DB2zSQLParser.TimeZoneExpressionSubsetContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#caseExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#caseExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCaseExpression(SQLParser.CaseExpressionContext ctx);
+	T visitCaseExpression(DB2zSQLParser.CaseExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#resultExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#resultExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitResultExpression(SQLParser.ResultExpressionContext ctx);
+	T visitResultExpression(DB2zSQLParser.ResultExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#searchedWhenClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedWhenClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSearchedWhenClause(SQLParser.SearchedWhenClauseContext ctx);
+	T visitSearchedWhenClause(DB2zSQLParser.SearchedWhenClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#simpleWhenClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#simpleWhenClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSimpleWhenClause(SQLParser.SimpleWhenClauseContext ctx);
+	T visitSimpleWhenClause(DB2zSQLParser.SimpleWhenClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#searchCondition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#searchCondition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSearchCondition(SQLParser.SearchConditionContext ctx);
+	T visitSearchCondition(DB2zSQLParser.SearchConditionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#predicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#predicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPredicate(SQLParser.PredicateContext ctx);
+	T visitPredicate(DB2zSQLParser.PredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#basicPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#basicPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBasicPredicate(SQLParser.BasicPredicateContext ctx);
+	T visitBasicPredicate(DB2zSQLParser.BasicPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#rowValueExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowValueExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitRowValueExpression(SQLParser.RowValueExpressionContext ctx);
+	T visitRowValueExpression(DB2zSQLParser.RowValueExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#quantifiedPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#quantifiedPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitQuantifiedPredicate(SQLParser.QuantifiedPredicateContext ctx);
+	T visitQuantifiedPredicate(DB2zSQLParser.QuantifiedPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#arrayExistsPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayExistsPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayExistsPredicate(SQLParser.ArrayExistsPredicateContext ctx);
+	T visitArrayExistsPredicate(DB2zSQLParser.ArrayExistsPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#betweenPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#betweenPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBetweenPredicate(SQLParser.BetweenPredicateContext ctx);
+	T visitBetweenPredicate(DB2zSQLParser.BetweenPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#distinctPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#distinctPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDistinctPredicate(SQLParser.DistinctPredicateContext ctx);
+	T visitDistinctPredicate(DB2zSQLParser.DistinctPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#existsPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#existsPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExistsPredicate(SQLParser.ExistsPredicateContext ctx);
+	T visitExistsPredicate(DB2zSQLParser.ExistsPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#inPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#inPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitInPredicate(SQLParser.InPredicateContext ctx);
+	T visitInPredicate(DB2zSQLParser.InPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#likePredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#likePredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLikePredicate(SQLParser.LikePredicateContext ctx);
+	T visitLikePredicate(DB2zSQLParser.LikePredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#nullPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nullPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNullPredicate(SQLParser.NullPredicateContext ctx);
+	T visitNullPredicate(DB2zSQLParser.NullPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmlExistsPredicate}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlExistsPredicate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmlExistsPredicate(SQLParser.XmlExistsPredicateContext ctx);
+	T visitXmlExistsPredicate(DB2zSQLParser.XmlExistsPredicateContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#arrayExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayExpression(SQLParser.ArrayExpressionContext ctx);
+	T visitArrayExpression(DB2zSQLParser.ArrayExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#castSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#castSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCastSpecification(SQLParser.CastSpecificationContext ctx);
+	T visitCastSpecification(DB2zSQLParser.CastSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#parameterMarker}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterMarker}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParameterMarker(SQLParser.ParameterMarkerContext ctx);
+	T visitParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#dataType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dataType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDataType(SQLParser.DataTypeContext ctx);
+	T visitDataType(DB2zSQLParser.DataTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#builtInType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#builtInType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBuiltInType(SQLParser.BuiltInTypeContext ctx);
+	T visitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#integerInParens}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#integerInParens}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIntegerInParens(SQLParser.IntegerInParensContext ctx);
+	T visitIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#length}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#length}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLength(SQLParser.LengthContext ctx);
+	T visitLength(DB2zSQLParser.LengthContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#ccsidQualifier}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ccsidQualifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCcsidQualifier(SQLParser.CcsidQualifierContext ctx);
+	T visitCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#forDataQualfier}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#forDataQualfier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitForDataQualfier(SQLParser.ForDataQualfierContext ctx);
+	T visitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#distinctTypeName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#distinctTypeName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDistinctTypeName(SQLParser.DistinctTypeNameContext ctx);
+	T visitDistinctTypeName(DB2zSQLParser.DistinctTypeNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#arrayType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitArrayType(SQLParser.ArrayTypeContext ctx);
+	T visitArrayType(DB2zSQLParser.ArrayTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#literal}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLiteral(SQLParser.LiteralContext ctx);
+	T visitLiteral(DB2zSQLParser.LiteralContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#ccsidValue}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ccsidValue}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCcsidValue(SQLParser.CcsidValueContext ctx);
+	T visitCcsidValue(DB2zSQLParser.CcsidValueContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#columnName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#columnName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColumnName(SQLParser.ColumnNameContext ctx);
+	T visitColumnName(DB2zSQLParser.ColumnNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#newColumnName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#newColumnName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNewColumnName(SQLParser.NewColumnNameContext ctx);
+	T visitNewColumnName(DB2zSQLParser.NewColumnNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#correlationName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#correlationName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCorrelationName(SQLParser.CorrelationNameContext ctx);
+	T visitCorrelationName(DB2zSQLParser.CorrelationNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#locationName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#locationName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLocationName(SQLParser.LocationNameContext ctx);
+	T visitLocationName(DB2zSQLParser.LocationNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#schemaName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#schemaName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSchemaName(SQLParser.SchemaNameContext ctx);
+	T visitSchemaName(DB2zSQLParser.SchemaNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#tableName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableName(SQLParser.TableNameContext ctx);
+	T visitTableName(DB2zSQLParser.TableNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#indexName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#indexName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIndexName(SQLParser.IndexNameContext ctx);
+	T visitIndexName(DB2zSQLParser.IndexNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#maskName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#maskName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitMaskName(SQLParser.MaskNameContext ctx);
+	T visitMaskName(DB2zSQLParser.MaskNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#permissionName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#permissionName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPermissionName(SQLParser.PermissionNameContext ctx);
+	T visitPermissionName(DB2zSQLParser.PermissionNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#databaseName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDatabaseName(SQLParser.DatabaseNameContext ctx);
+	T visitDatabaseName(DB2zSQLParser.DatabaseNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#catalogName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCatalogName(SQLParser.CatalogNameContext ctx);
+	T visitCatalogName(DB2zSQLParser.CatalogNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#bpName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBpName(SQLParser.BpNameContext ctx);
+	T visitBpName(DB2zSQLParser.BpNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#stogroupName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#stogroupName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStogroupName(SQLParser.StogroupNameContext ctx);
+	T visitStogroupName(DB2zSQLParser.StogroupNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#functionName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionName(SQLParser.FunctionNameContext ctx);
+	T visitFunctionName(DB2zSQLParser.FunctionNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#specificName}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#specificName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSpecificName(SQLParser.SpecificNameContext ctx);
+	T visitSpecificName(DB2zSQLParser.SpecificNameContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#hostVariable}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#hostVariable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHostVariable(SQLParser.HostVariableContext ctx);
+	T visitHostVariable(DB2zSQLParser.HostVariableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#hostIdentifier}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#hostIdentifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHostIdentifier(SQLParser.HostIdentifierContext ctx);
+	T visitHostIdentifier(DB2zSQLParser.HostIdentifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#hostStructure}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#hostStructure}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHostStructure(SQLParser.HostStructureContext ctx);
+	T visitHostStructure(DB2zSQLParser.HostStructureContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#variable}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#variable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitVariable(SQLParser.VariableContext ctx);
+	T visitVariable(DB2zSQLParser.VariableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#intoClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#intoClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIntoClause(SQLParser.IntoClauseContext ctx);
+	T visitIntoClause(DB2zSQLParser.IntoClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#correlationClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#correlationClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCorrelationClause(SQLParser.CorrelationClauseContext ctx);
+	T visitCorrelationClause(DB2zSQLParser.CorrelationClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#fromClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fromClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFromClause(SQLParser.FromClauseContext ctx);
+	T visitFromClause(DB2zSQLParser.FromClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#tableReference}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableReference(SQLParser.TableReferenceContext ctx);
+	T visitTableReference(DB2zSQLParser.TableReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#singleTableReference}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#singleTableReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSingleTableReference(SQLParser.SingleTableReferenceContext ctx);
+	T visitSingleTableReference(DB2zSQLParser.SingleTableReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#periodSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#periodSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPeriodSpecification(SQLParser.PeriodSpecificationContext ctx);
+	T visitPeriodSpecification(DB2zSQLParser.PeriodSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#periodClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#periodClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitPeriodClause(SQLParser.PeriodClauseContext ctx);
+	T visitPeriodClause(DB2zSQLParser.PeriodClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#nestedTableExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nestedTableExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitNestedTableExpression(SQLParser.NestedTableExpressionContext ctx);
+	T visitNestedTableExpression(DB2zSQLParser.NestedTableExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#dataChangeTableReference}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dataChangeTableReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDataChangeTableReference(SQLParser.DataChangeTableReferenceContext ctx);
+	T visitDataChangeTableReference(DB2zSQLParser.DataChangeTableReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#tableFunctionReference}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableFunctionReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableFunctionReference(SQLParser.TableFunctionReferenceContext ctx);
+	T visitTableFunctionReference(DB2zSQLParser.TableFunctionReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#tableUdfCardinalityClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableUdfCardinalityClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableUdfCardinalityClause(SQLParser.TableUdfCardinalityClauseContext ctx);
+	T visitTableUdfCardinalityClause(DB2zSQLParser.TableUdfCardinalityClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#typedCorrelationClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#typedCorrelationClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTypedCorrelationClause(SQLParser.TypedCorrelationClauseContext ctx);
+	T visitTypedCorrelationClause(DB2zSQLParser.TypedCorrelationClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#tableLocatorReference}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableLocatorReference}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableLocatorReference(SQLParser.TableLocatorReferenceContext ctx);
+	T visitTableLocatorReference(DB2zSQLParser.TableLocatorReferenceContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#xmltableExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmltableExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitXmltableExpression(SQLParser.XmltableExpressionContext ctx);
+	T visitXmltableExpression(DB2zSQLParser.XmltableExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#collectionDerivedTable}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#collectionDerivedTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCollectionDerivedTable(SQLParser.CollectionDerivedTableContext ctx);
+	T visitCollectionDerivedTable(DB2zSQLParser.CollectionDerivedTableContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#joinCondition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#joinCondition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitJoinCondition(SQLParser.JoinConditionContext ctx);
+	T visitJoinCondition(DB2zSQLParser.JoinConditionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#fullJoinExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fullJoinExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFullJoinExpression(SQLParser.FullJoinExpressionContext ctx);
+	T visitFullJoinExpression(DB2zSQLParser.FullJoinExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#castFunction}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#castFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCastFunction(SQLParser.CastFunctionContext ctx);
+	T visitCastFunction(DB2zSQLParser.CastFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#ordinaryArrayExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ordinaryArrayExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOrdinaryArrayExpression(SQLParser.OrdinaryArrayExpressionContext ctx);
+	T visitOrdinaryArrayExpression(DB2zSQLParser.OrdinaryArrayExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#associativeArrayExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#associativeArrayExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAssociativeArrayExpression(SQLParser.AssociativeArrayExpressionContext ctx);
+	T visitAssociativeArrayExpression(DB2zSQLParser.AssociativeArrayExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#comparison}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#comparison}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitComparison(SQLParser.ComparisonContext ctx);
+	T visitComparison(DB2zSQLParser.ComparisonContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#whereClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#whereClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitWhereClause(SQLParser.WhereClauseContext ctx);
+	T visitWhereClause(DB2zSQLParser.WhereClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupByClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupByClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupByClause(SQLParser.GroupByClauseContext ctx);
+	T visitGroupByClause(DB2zSQLParser.GroupByClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#havingClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#havingClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitHavingClause(SQLParser.HavingClauseContext ctx);
+	T visitHavingClause(DB2zSQLParser.HavingClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupingExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupingExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupingExpression(SQLParser.GroupingExpressionContext ctx);
+	T visitGroupingExpression(DB2zSQLParser.GroupingExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupingSets}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupingSets}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupingSets(SQLParser.GroupingSetsContext ctx);
+	T visitGroupingSets(DB2zSQLParser.GroupingSetsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#groupingSetsGroup}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#groupingSetsGroup}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGroupingSetsGroup(SQLParser.GroupingSetsGroupContext ctx);
+	T visitGroupingSetsGroup(DB2zSQLParser.GroupingSetsGroupContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#superGroups}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#superGroups}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSuperGroups(SQLParser.SuperGroupsContext ctx);
+	T visitSuperGroups(DB2zSQLParser.SuperGroupsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#selectColumns}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#selectColumns}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSelectColumns(SQLParser.SelectColumnsContext ctx);
+	T visitSelectColumns(DB2zSQLParser.SelectColumnsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#unpackedRow}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#unpackedRow}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUnpackedRow(SQLParser.UnpackedRowContext ctx);
+	T visitUnpackedRow(DB2zSQLParser.UnpackedRowContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#selectClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#selectClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSelectClause(SQLParser.SelectClauseContext ctx);
+	T visitSelectClause(DB2zSQLParser.SelectClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#subSelect}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#subSelect}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSubSelect(SQLParser.SubSelectContext ctx);
+	T visitSubSelect(DB2zSQLParser.SubSelectContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#selectIntoStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#selectIntoStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSelectIntoStatement(SQLParser.SelectIntoStatementContext ctx);
+	T visitSelectIntoStatement(DB2zSQLParser.SelectIntoStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#selectStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#selectStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSelectStatement(SQLParser.SelectStatementContext ctx);
+	T visitSelectStatement(DB2zSQLParser.SelectStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#commonTableExpression}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#commonTableExpression}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCommonTableExpression(SQLParser.CommonTableExpressionContext ctx);
+	T visitCommonTableExpression(DB2zSQLParser.CommonTableExpressionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#updateClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#updateClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUpdateClause(SQLParser.UpdateClauseContext ctx);
+	T visitUpdateClause(DB2zSQLParser.UpdateClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#readOnlyClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#readOnlyClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitReadOnlyClause(SQLParser.ReadOnlyClauseContext ctx);
+	T visitReadOnlyClause(DB2zSQLParser.ReadOnlyClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#optimizeClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#optimizeClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOptimizeClause(SQLParser.OptimizeClauseContext ctx);
+	T visitOptimizeClause(DB2zSQLParser.OptimizeClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#isolationClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#isolationClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIsolationClause(SQLParser.IsolationClauseContext ctx);
+	T visitIsolationClause(DB2zSQLParser.IsolationClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#lockClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#lockClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitLockClause(SQLParser.LockClauseContext ctx);
+	T visitLockClause(DB2zSQLParser.LockClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#skipLockedDataClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#skipLockedDataClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSkipLockedDataClause(SQLParser.SkipLockedDataClauseContext ctx);
+	T visitSkipLockedDataClause(DB2zSQLParser.SkipLockedDataClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#querynoClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#querynoClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitQuerynoClause(SQLParser.QuerynoClauseContext ctx);
+	T visitQuerynoClause(DB2zSQLParser.QuerynoClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#scalarFullSelect}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#scalarFullSelect}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitScalarFullSelect(SQLParser.ScalarFullSelectContext ctx);
+	T visitScalarFullSelect(DB2zSQLParser.ScalarFullSelectContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#fullSelect}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fullSelect}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFullSelect(SQLParser.FullSelectContext ctx);
+	T visitFullSelect(DB2zSQLParser.FullSelectContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#valuesClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitValuesClause(SQLParser.ValuesClauseContext ctx);
+	T visitValuesClause(DB2zSQLParser.ValuesClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#orderByClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#orderByClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOrderByClause(SQLParser.OrderByClauseContext ctx);
+	T visitOrderByClause(DB2zSQLParser.OrderByClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#sortKey}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sortKey}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSortKey(SQLParser.SortKeyContext ctx);
+	T visitSortKey(DB2zSQLParser.SortKeyContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#offsetClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#offsetClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOffsetClause(SQLParser.OffsetClauseContext ctx);
+	T visitOffsetClause(DB2zSQLParser.OffsetClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#fetchClause}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fetchClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFetchClause(SQLParser.FetchClauseContext ctx);
+	T visitFetchClause(DB2zSQLParser.FetchClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#identifier}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#identifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitIdentifier(SQLParser.IdentifierContext ctx);
+	T visitIdentifier(DB2zSQLParser.IdentifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link SQLParser#sqlKeyword}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSqlKeyword(SQLParser.SqlKeywordContext ctx);
+	T visitSqlKeyword(DB2zSQLParser.SqlKeywordContext ctx);
 }

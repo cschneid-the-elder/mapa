@@ -1,1581 +1,1581 @@
-// Generated from src/SQLParser.g4 by ANTLR 4.9.2
+// Generated from src/DB2zSQLParser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**
- * This class provides an empty implementation of {@link SQLParserVisitor},
+ * This class provides an empty implementation of {@link DB2zSQLParserVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
  * of the available methods.
  *
  * @param <T> The return type of the visit operation. Use {@link Void} for
  * operations with no return type.
  */
-public class SQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements SQLParserVisitor<T> {
+public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements DB2zSQLParserVisitor<T> {
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStartRule(SQLParser.StartRuleContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStartRule(DB2zSQLParser.StartRuleContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSqlStatement(SQLParser.SqlStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSqlStatement(DB2zSQLParser.SqlStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitQuery(SQLParser.QueryContext ctx) { return visitChildren(ctx); }
+	@Override public T visitQuery(DB2zSQLParser.QueryContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeclareCursorStatement(SQLParser.DeclareCursorStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCursorName(SQLParser.CursorNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCursorName(DB2zSQLParser.CursorNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStatementName(SQLParser.StatementNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStatementName(DB2zSQLParser.StatementNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHoldability(SQLParser.HoldabilityContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHoldability(DB2zSQLParser.HoldabilityContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitReturnability(SQLParser.ReturnabilityContext ctx) { return visitChildren(ctx); }
+	@Override public T visitReturnability(DB2zSQLParser.ReturnabilityContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRowsetPositioning(SQLParser.RowsetPositioningContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeclareTableStatement(SQLParser.DeclareTableStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNotNullPhrase(SQLParser.NotNullPhraseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeclareStatementStatement(SQLParser.DeclareStatementStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAllocateCursorStatement(SQLParser.AllocateCursorStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRsLocatorVariable(SQLParser.RsLocatorVariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRsLocatorVariable(DB2zSQLParser.RsLocatorVariableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterDatabaseStatement(SQLParser.AlterDatabaseStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterDatabaseStatement(DB2zSQLParser.AlterDatabaseStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterFunctionStatement(SQLParser.AlterFunctionStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterIndexStatement(SQLParser.AlterIndexStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterMaskStatement(SQLParser.AlterMaskStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterMaskStatement(DB2zSQLParser.AlterMaskStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterPermissionStatement(SQLParser.AlterPermissionStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSearchedDelete(SQLParser.SearchedDeleteContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPositionedDelete(SQLParser.PositionedDeleteContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeleteStatement(SQLParser.DeleteStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInsertStatement(SQLParser.InsertStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMergeStatement(SQLParser.MergeStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMergeStatement(DB2zSQLParser.MergeStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSearchedUpdate(SQLParser.SearchedUpdateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSearchedUpdate(DB2zSQLParser.SearchedUpdateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPositionedUpdate(SQLParser.PositionedUpdateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUpdateStatement(SQLParser.UpdateStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSourceValues(SQLParser.SourceValuesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSourceValues(DB2zSQLParser.SourceValuesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesSingleRow(SQLParser.ValuesSingleRowContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesSingleRow(DB2zSQLParser.ValuesSingleRowContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesMultipleRow(SQLParser.ValuesMultipleRowContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesMultipleRow(DB2zSQLParser.ValuesMultipleRowContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMatchingCondition(SQLParser.MatchingConditionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMatchingCondition(DB2zSQLParser.MatchingConditionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitModificationOperation(SQLParser.ModificationOperationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssignmentClause(SQLParser.AssignmentClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUpdateOperation(SQLParser.UpdateOperationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUpdateOperation(DB2zSQLParser.UpdateOperationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDeleteOperation(SQLParser.DeleteOperationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDeleteOperation(DB2zSQLParser.DeleteOperationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInsertOperation(SQLParser.InsertOperationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitInsertOperation(DB2zSQLParser.InsertOperationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSignalStatement(SQLParser.SignalStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSignalInformation(SQLParser.SignalInformationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSignalInformation(DB2zSQLParser.SignalInformationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesList1(SQLParser.ValuesList1Context ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesList1(DB2zSQLParser.ValuesList1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesList2(SQLParser.ValuesList2Context ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesList2(DB2zSQLParser.ValuesList2Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesList3(SQLParser.ValuesList3Context ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesList3(DB2zSQLParser.ValuesList3Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesList4(SQLParser.ValuesList4Context ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesList4(DB2zSQLParser.ValuesList4Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIncludeColumns(SQLParser.IncludeColumnsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIncludeColumns(DB2zSQLParser.IncludeColumnsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMultipleRowInsert(SQLParser.MultipleRowInsertContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMultipleRowInsert(DB2zSQLParser.MultipleRowInsertContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRegenerateClause(SQLParser.RegenerateClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRegenerateClause(DB2zSQLParser.RegenerateClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterIndexOptions(SQLParser.AlterIndexOptionsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterIndexPartitionOptions(SQLParser.AlterIndexPartitionOptionsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUsingSpecification(SQLParser.UsingSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFreeSpecification(SQLParser.FreeSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFreeSpecification(DB2zSQLParser.FreeSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGbpcacheSpecification(SQLParser.GbpcacheSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGbpcacheSpecification(DB2zSQLParser.GbpcacheSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPartitionElement(SQLParser.PartitionElementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPartitionElement(DB2zSQLParser.PartitionElementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitApplCompatValue(SQLParser.ApplCompatValueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitApplCompatValue(DB2zSQLParser.ApplCompatValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunctionLevel(SQLParser.FunctionLevelContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParameterType(SQLParser.ParameterTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParameterType(DB2zSQLParser.ParameterTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOptionList(SQLParser.OptionListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOptionList(DB2zSQLParser.OptionListContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExternalProgramName(SQLParser.ExternalProgramNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExternalProgramName(DB2zSQLParser.ExternalProgramNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPackagePath(SQLParser.PackagePathContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPackagePath(DB2zSQLParser.PackagePathContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCollectionID(SQLParser.CollectionIDContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCollectionID(DB2zSQLParser.CollectionIDContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRunTimeOptions(SQLParser.RunTimeOptionsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRunTimeOptions(DB2zSQLParser.RunTimeOptionsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitComparisonOperator(SQLParser.ComparisonOperatorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitComparisonOperator(DB2zSQLParser.ComparisonOperatorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOperator(SQLParser.OperatorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOperator(DB2zSQLParser.OperatorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExpression(SQLParser.ExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExpression(DB2zSQLParser.ExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRowChangeExpression(SQLParser.RowChangeExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRowChangeExpression(DB2zSQLParser.RowChangeExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSequenceReference(SQLParser.SequenceReferenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSequenceReference(DB2zSQLParser.SequenceReferenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunctionInvocation(SQLParser.FunctionInvocationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionInvocation(DB2zSQLParser.FunctionInvocationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitScalarFunctionInvocation(SQLParser.ScalarFunctionInvocationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitScalarFunctionInvocation(DB2zSQLParser.ScalarFunctionInvocationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAggregateFunctionInvocation(SQLParser.AggregateFunctionInvocationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAggregateFunctionInvocation(DB2zSQLParser.AggregateFunctionInvocationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRegressionFunctionInvocation(SQLParser.RegressionFunctionInvocationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRegressionFunctionInvocation(DB2zSQLParser.RegressionFunctionInvocationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExternalFunctionInvocation(SQLParser.ExternalFunctionInvocationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExternalFunctionInvocation(DB2zSQLParser.ExternalFunctionInvocationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLabeledDuration(SQLParser.LabeledDurationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlCastSpecification(SQLParser.XmlCastSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayElementSpecification(SQLParser.ArrayElementSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayIndex(SQLParser.ArrayIndexContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArrayIndex(DB2zSQLParser.ArrayIndexContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayConstructor(SQLParser.ArrayConstructorContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArrayConstructor(DB2zSQLParser.ArrayConstructorContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOlapSpecification(SQLParser.OlapSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOlapSpecification(DB2zSQLParser.OlapSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOrderedOlapSpecification(SQLParser.OrderedOlapSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOrderedOlapSpecification(DB2zSQLParser.OrderedOlapSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOlapSpecificationFunction(SQLParser.OlapSpecificationFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOlapSpecificationFunction(DB2zSQLParser.OlapSpecificationFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLagFunction(SQLParser.LagFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLagFunction(DB2zSQLParser.LagFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLeadFunction(SQLParser.LeadFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLeadFunction(DB2zSQLParser.LeadFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRespectNullsClause(SQLParser.RespectNullsClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRespectNullsClause(DB2zSQLParser.RespectNullsClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWindowPartitionClause(SQLParser.WindowPartitionClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWindowPartitionClause(DB2zSQLParser.WindowPartitionClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWindowOrderClause(SQLParser.WindowOrderClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWindowOrderClause(DB2zSQLParser.WindowOrderClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWindowOrderClauseQualifier(SQLParser.WindowOrderClauseQualifierContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWindowOrderClauseQualifier(DB2zSQLParser.WindowOrderClauseQualifierContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNumberingSpecification(SQLParser.NumberingSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNumberingSpecification(DB2zSQLParser.NumberingSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAggregationSpecification(SQLParser.AggregationSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAggregationSpecification(DB2zSQLParser.AggregationSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAggregateFunction(SQLParser.AggregateFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAggregateFunction(DB2zSQLParser.AggregateFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRegressionFunction(SQLParser.RegressionFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRegressionFunction(DB2zSQLParser.RegressionFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOlapColumnFunction(SQLParser.OlapColumnFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOlapColumnFunction(DB2zSQLParser.OlapColumnFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFirstValueFunction(SQLParser.FirstValueFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFirstValueFunction(DB2zSQLParser.FirstValueFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLastValueFunction(SQLParser.LastValueFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLastValueFunction(DB2zSQLParser.LastValueFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNthValueFunction(SQLParser.NthValueFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNthValueFunction(DB2zSQLParser.NthValueFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRatioToReportFunction(SQLParser.RatioToReportFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWindowAggregationGroupClause(SQLParser.WindowAggregationGroupClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupStart(SQLParser.GroupStartContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupStart(DB2zSQLParser.GroupStartContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupBetween(SQLParser.GroupBetweenContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupBetween(DB2zSQLParser.GroupBetweenContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupEnd(SQLParser.GroupEndContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupEnd(DB2zSQLParser.GroupEndContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupBound1(SQLParser.GroupBound1Context ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupBound1(DB2zSQLParser.GroupBound1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupBound2(SQLParser.GroupBound2Context ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupBound2(DB2zSQLParser.GroupBound2Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUnboundedPreceding(SQLParser.UnboundedPrecedingContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnboundedPreceding(DB2zSQLParser.UnboundedPrecedingContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUnboundedFollowing(SQLParser.UnboundedFollowingContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnboundedFollowing(DB2zSQLParser.UnboundedFollowingContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBoundedPreceding(SQLParser.BoundedPrecedingContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBoundedPreceding(DB2zSQLParser.BoundedPrecedingContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBoundedFollowing(SQLParser.BoundedFollowingContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBoundedFollowing(DB2zSQLParser.BoundedFollowingContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCurrentRow(SQLParser.CurrentRowContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCurrentRow(DB2zSQLParser.CurrentRowContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitScalarFunction(SQLParser.ScalarFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitScalarFunction(DB2zSQLParser.ScalarFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableFunction(SQLParser.TableFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTableFunction(DB2zSQLParser.TableFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSpecialRegister(SQLParser.SpecialRegisterContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmltableFunctionSpecification(SQLParser.XmltableFunctionSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmltableFunctionSpecification(DB2zSQLParser.XmltableFunctionSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRowXqueryExpressionConstant(SQLParser.RowXqueryExpressionConstantContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRowXqueryExpressionConstant(DB2zSQLParser.RowXqueryExpressionConstantContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRowXqueryArgument(SQLParser.RowXqueryArgumentContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRowXqueryArgument(DB2zSQLParser.RowXqueryArgumentContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXqueryContextItemExpression(SQLParser.XqueryContextItemExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXqueryContextItemExpression(DB2zSQLParser.XqueryContextItemExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXqueryVariableExpression(SQLParser.XqueryVariableExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXqueryVariableExpression(DB2zSQLParser.XqueryVariableExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlTableRegularColumnDefinition(SQLParser.XmlTableRegularColumnDefinitionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlTableRegularColumnDefinition(DB2zSQLParser.XmlTableRegularColumnDefinitionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDefaultClause(SQLParser.DefaultClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDefaultClauseAllowables(SQLParser.DefaultClauseAllowablesContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDistinctTypeCastFunctionName(SQLParser.DistinctTypeCastFunctionNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDistinctTypeCastFunctionName(DB2zSQLParser.DistinctTypeCastFunctionNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitColumnXqueryExpressionConstant(SQLParser.ColumnXqueryExpressionConstantContext ctx) { return visitChildren(ctx); }
+	@Override public T visitColumnXqueryExpressionConstant(DB2zSQLParser.ColumnXqueryExpressionConstantContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlTableOrdinalityColumnDefinition(SQLParser.XmlTableOrdinalityColumnDefinitionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlTableOrdinalityColumnDefinition(DB2zSQLParser.XmlTableOrdinalityColumnDefinitionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlnamespacesDeclaration(SQLParser.XmlnamespacesDeclarationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlnamespacesDeclaration(DB2zSQLParser.XmlnamespacesDeclarationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlnamespacesFunctionSpecification(SQLParser.XmlnamespacesFunctionSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlnamespacesFunctionSpecification(DB2zSQLParser.XmlnamespacesFunctionSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlnamespacesFunctionArguments(SQLParser.XmlnamespacesFunctionArgumentsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlnamespacesFunctionArguments(DB2zSQLParser.XmlnamespacesFunctionArgumentsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNamespaceUri(SQLParser.NamespaceUriContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNamespaceUri(DB2zSQLParser.NamespaceUriContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNamespacePrefix(SQLParser.NamespacePrefixContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNamespacePrefix(DB2zSQLParser.NamespacePrefixContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTimeZoneSpecificExpression(SQLParser.TimeZoneSpecificExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTimeZoneSpecificExpression(DB2zSQLParser.TimeZoneSpecificExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTimeZoneExpressionSubset(SQLParser.TimeZoneExpressionSubsetContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTimeZoneExpressionSubset(DB2zSQLParser.TimeZoneExpressionSubsetContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCaseExpression(SQLParser.CaseExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCaseExpression(DB2zSQLParser.CaseExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitResultExpression(SQLParser.ResultExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitResultExpression(DB2zSQLParser.ResultExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSearchedWhenClause(SQLParser.SearchedWhenClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSearchedWhenClause(DB2zSQLParser.SearchedWhenClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSimpleWhenClause(SQLParser.SimpleWhenClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSimpleWhenClause(DB2zSQLParser.SimpleWhenClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSearchCondition(SQLParser.SearchConditionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSearchCondition(DB2zSQLParser.SearchConditionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPredicate(SQLParser.PredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPredicate(DB2zSQLParser.PredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBasicPredicate(SQLParser.BasicPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBasicPredicate(DB2zSQLParser.BasicPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitRowValueExpression(SQLParser.RowValueExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitRowValueExpression(DB2zSQLParser.RowValueExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitQuantifiedPredicate(SQLParser.QuantifiedPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitQuantifiedPredicate(DB2zSQLParser.QuantifiedPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayExistsPredicate(SQLParser.ArrayExistsPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArrayExistsPredicate(DB2zSQLParser.ArrayExistsPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBetweenPredicate(SQLParser.BetweenPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBetweenPredicate(DB2zSQLParser.BetweenPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDistinctPredicate(SQLParser.DistinctPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDistinctPredicate(DB2zSQLParser.DistinctPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitExistsPredicate(SQLParser.ExistsPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitExistsPredicate(DB2zSQLParser.ExistsPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitInPredicate(SQLParser.InPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitInPredicate(DB2zSQLParser.InPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLikePredicate(SQLParser.LikePredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLikePredicate(DB2zSQLParser.LikePredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNullPredicate(SQLParser.NullPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNullPredicate(DB2zSQLParser.NullPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmlExistsPredicate(SQLParser.XmlExistsPredicateContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmlExistsPredicate(DB2zSQLParser.XmlExistsPredicateContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayExpression(SQLParser.ArrayExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArrayExpression(DB2zSQLParser.ArrayExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCastSpecification(SQLParser.CastSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCastSpecification(DB2zSQLParser.CastSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitParameterMarker(SQLParser.ParameterMarkerContext ctx) { return visitChildren(ctx); }
+	@Override public T visitParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDataType(SQLParser.DataTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDataType(DB2zSQLParser.DataTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBuiltInType(SQLParser.BuiltInTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntegerInParens(SQLParser.IntegerInParensContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLength(SQLParser.LengthContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLength(DB2zSQLParser.LengthContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCcsidQualifier(SQLParser.CcsidQualifierContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitForDataQualfier(SQLParser.ForDataQualfierContext ctx) { return visitChildren(ctx); }
+	@Override public T visitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDistinctTypeName(SQLParser.DistinctTypeNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDistinctTypeName(DB2zSQLParser.DistinctTypeNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitArrayType(SQLParser.ArrayTypeContext ctx) { return visitChildren(ctx); }
+	@Override public T visitArrayType(DB2zSQLParser.ArrayTypeContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLiteral(SQLParser.LiteralContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLiteral(DB2zSQLParser.LiteralContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCcsidValue(SQLParser.CcsidValueContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCcsidValue(DB2zSQLParser.CcsidValueContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitColumnName(SQLParser.ColumnNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitColumnName(DB2zSQLParser.ColumnNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNewColumnName(SQLParser.NewColumnNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNewColumnName(DB2zSQLParser.NewColumnNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCorrelationName(SQLParser.CorrelationNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCorrelationName(DB2zSQLParser.CorrelationNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLocationName(SQLParser.LocationNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLocationName(DB2zSQLParser.LocationNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSchemaName(SQLParser.SchemaNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSchemaName(DB2zSQLParser.SchemaNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableName(SQLParser.TableNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTableName(DB2zSQLParser.TableNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIndexName(SQLParser.IndexNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIndexName(DB2zSQLParser.IndexNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitMaskName(SQLParser.MaskNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitMaskName(DB2zSQLParser.MaskNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPermissionName(SQLParser.PermissionNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPermissionName(DB2zSQLParser.PermissionNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDatabaseName(SQLParser.DatabaseNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDatabaseName(DB2zSQLParser.DatabaseNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCatalogName(SQLParser.CatalogNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCatalogName(DB2zSQLParser.CatalogNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitBpName(SQLParser.BpNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitBpName(DB2zSQLParser.BpNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitStogroupName(SQLParser.StogroupNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitStogroupName(DB2zSQLParser.StogroupNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFunctionName(SQLParser.FunctionNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFunctionName(DB2zSQLParser.FunctionNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSpecificName(SQLParser.SpecificNameContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSpecificName(DB2zSQLParser.SpecificNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHostVariable(SQLParser.HostVariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHostVariable(DB2zSQLParser.HostVariableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHostIdentifier(SQLParser.HostIdentifierContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHostIdentifier(DB2zSQLParser.HostIdentifierContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHostStructure(SQLParser.HostStructureContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHostStructure(DB2zSQLParser.HostStructureContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitVariable(SQLParser.VariableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitVariable(DB2zSQLParser.VariableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIntoClause(SQLParser.IntoClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIntoClause(DB2zSQLParser.IntoClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCorrelationClause(SQLParser.CorrelationClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCorrelationClause(DB2zSQLParser.CorrelationClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFromClause(SQLParser.FromClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFromClause(DB2zSQLParser.FromClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableReference(SQLParser.TableReferenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTableReference(DB2zSQLParser.TableReferenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSingleTableReference(SQLParser.SingleTableReferenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSingleTableReference(DB2zSQLParser.SingleTableReferenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPeriodSpecification(SQLParser.PeriodSpecificationContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPeriodSpecification(DB2zSQLParser.PeriodSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitPeriodClause(SQLParser.PeriodClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitPeriodClause(DB2zSQLParser.PeriodClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitNestedTableExpression(SQLParser.NestedTableExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitNestedTableExpression(DB2zSQLParser.NestedTableExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDataChangeTableReference(SQLParser.DataChangeTableReferenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitDataChangeTableReference(DB2zSQLParser.DataChangeTableReferenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableFunctionReference(SQLParser.TableFunctionReferenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTableFunctionReference(DB2zSQLParser.TableFunctionReferenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableUdfCardinalityClause(SQLParser.TableUdfCardinalityClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTableUdfCardinalityClause(DB2zSQLParser.TableUdfCardinalityClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTypedCorrelationClause(SQLParser.TypedCorrelationClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTypedCorrelationClause(DB2zSQLParser.TypedCorrelationClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableLocatorReference(SQLParser.TableLocatorReferenceContext ctx) { return visitChildren(ctx); }
+	@Override public T visitTableLocatorReference(DB2zSQLParser.TableLocatorReferenceContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitXmltableExpression(SQLParser.XmltableExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitXmltableExpression(DB2zSQLParser.XmltableExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCollectionDerivedTable(SQLParser.CollectionDerivedTableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCollectionDerivedTable(DB2zSQLParser.CollectionDerivedTableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitJoinCondition(SQLParser.JoinConditionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitJoinCondition(DB2zSQLParser.JoinConditionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFullJoinExpression(SQLParser.FullJoinExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFullJoinExpression(DB2zSQLParser.FullJoinExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCastFunction(SQLParser.CastFunctionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCastFunction(DB2zSQLParser.CastFunctionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOrdinaryArrayExpression(SQLParser.OrdinaryArrayExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOrdinaryArrayExpression(DB2zSQLParser.OrdinaryArrayExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAssociativeArrayExpression(SQLParser.AssociativeArrayExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAssociativeArrayExpression(DB2zSQLParser.AssociativeArrayExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitComparison(SQLParser.ComparisonContext ctx) { return visitChildren(ctx); }
+	@Override public T visitComparison(DB2zSQLParser.ComparisonContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitWhereClause(SQLParser.WhereClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitWhereClause(DB2zSQLParser.WhereClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupByClause(SQLParser.GroupByClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupByClause(DB2zSQLParser.GroupByClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitHavingClause(SQLParser.HavingClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitHavingClause(DB2zSQLParser.HavingClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupingExpression(SQLParser.GroupingExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupingExpression(DB2zSQLParser.GroupingExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupingSets(SQLParser.GroupingSetsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupingSets(DB2zSQLParser.GroupingSetsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitGroupingSetsGroup(SQLParser.GroupingSetsGroupContext ctx) { return visitChildren(ctx); }
+	@Override public T visitGroupingSetsGroup(DB2zSQLParser.GroupingSetsGroupContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSuperGroups(SQLParser.SuperGroupsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSuperGroups(DB2zSQLParser.SuperGroupsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSelectColumns(SQLParser.SelectColumnsContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSelectColumns(DB2zSQLParser.SelectColumnsContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUnpackedRow(SQLParser.UnpackedRowContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUnpackedRow(DB2zSQLParser.UnpackedRowContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSelectClause(SQLParser.SelectClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSelectClause(DB2zSQLParser.SelectClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSubSelect(SQLParser.SubSelectContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSubSelect(DB2zSQLParser.SubSelectContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSelectIntoStatement(SQLParser.SelectIntoStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSelectIntoStatement(DB2zSQLParser.SelectIntoStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSelectStatement(SQLParser.SelectStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSelectStatement(DB2zSQLParser.SelectStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCommonTableExpression(SQLParser.CommonTableExpressionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCommonTableExpression(DB2zSQLParser.CommonTableExpressionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitUpdateClause(SQLParser.UpdateClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitUpdateClause(DB2zSQLParser.UpdateClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitReadOnlyClause(SQLParser.ReadOnlyClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitReadOnlyClause(DB2zSQLParser.ReadOnlyClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOptimizeClause(SQLParser.OptimizeClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOptimizeClause(DB2zSQLParser.OptimizeClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIsolationClause(SQLParser.IsolationClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIsolationClause(DB2zSQLParser.IsolationClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitLockClause(SQLParser.LockClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitLockClause(DB2zSQLParser.LockClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSkipLockedDataClause(SQLParser.SkipLockedDataClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSkipLockedDataClause(DB2zSQLParser.SkipLockedDataClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitQuerynoClause(SQLParser.QuerynoClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitQuerynoClause(DB2zSQLParser.QuerynoClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitScalarFullSelect(SQLParser.ScalarFullSelectContext ctx) { return visitChildren(ctx); }
+	@Override public T visitScalarFullSelect(DB2zSQLParser.ScalarFullSelectContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFullSelect(SQLParser.FullSelectContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFullSelect(DB2zSQLParser.FullSelectContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitValuesClause(SQLParser.ValuesClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitValuesClause(DB2zSQLParser.ValuesClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOrderByClause(SQLParser.OrderByClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOrderByClause(DB2zSQLParser.OrderByClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSortKey(SQLParser.SortKeyContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSortKey(DB2zSQLParser.SortKeyContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitOffsetClause(SQLParser.OffsetClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitOffsetClause(DB2zSQLParser.OffsetClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitFetchClause(SQLParser.FetchClauseContext ctx) { return visitChildren(ctx); }
+	@Override public T visitFetchClause(DB2zSQLParser.FetchClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitIdentifier(SQLParser.IdentifierContext ctx) { return visitChildren(ctx); }
+	@Override public T visitIdentifier(DB2zSQLParser.IdentifierContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitSqlKeyword(SQLParser.SqlKeywordContext ctx) { return visitChildren(ctx); }
+	@Override public T visitSqlKeyword(DB2zSQLParser.SqlKeywordContext ctx) { return visitChildren(ctx); }
 }

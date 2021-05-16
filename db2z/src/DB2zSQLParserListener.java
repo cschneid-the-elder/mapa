@@ -1,2249 +1,2249 @@
-// Generated from src/SQLParser.g4 by ANTLR 4.9.2
+// Generated from src/DB2zSQLParser.g4 by ANTLR 4.7.2
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**
  * This interface defines a complete listener for a parse tree produced by
- * {@link SQLParser}.
+ * {@link DB2zSQLParser}.
  */
-public interface SQLParserListener extends ParseTreeListener {
+public interface DB2zSQLParserListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#startRule}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#startRule}.
 	 * @param ctx the parse tree
 	 */
-	void enterStartRule(SQLParser.StartRuleContext ctx);
+	void enterStartRule(DB2zSQLParser.StartRuleContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#startRule}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#startRule}.
 	 * @param ctx the parse tree
 	 */
-	void exitStartRule(SQLParser.StartRuleContext ctx);
+	void exitStartRule(DB2zSQLParser.StartRuleContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#sqlStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterSqlStatement(SQLParser.SqlStatementContext ctx);
+	void enterSqlStatement(DB2zSQLParser.SqlStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#sqlStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitSqlStatement(SQLParser.SqlStatementContext ctx);
+	void exitSqlStatement(DB2zSQLParser.SqlStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#query}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#query}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuery(SQLParser.QueryContext ctx);
+	void enterQuery(DB2zSQLParser.QueryContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#query}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#query}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuery(SQLParser.QueryContext ctx);
+	void exitQuery(DB2zSQLParser.QueryContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#declareCursorStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclareCursorStatement(SQLParser.DeclareCursorStatementContext ctx);
+	void enterDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#declareCursorStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclareCursorStatement(SQLParser.DeclareCursorStatementContext ctx);
+	void exitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#cursorName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#cursorName}.
 	 * @param ctx the parse tree
 	 */
-	void enterCursorName(SQLParser.CursorNameContext ctx);
+	void enterCursorName(DB2zSQLParser.CursorNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#cursorName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#cursorName}.
 	 * @param ctx the parse tree
 	 */
-	void exitCursorName(SQLParser.CursorNameContext ctx);
+	void exitCursorName(DB2zSQLParser.CursorNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#statementName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#statementName}.
 	 * @param ctx the parse tree
 	 */
-	void enterStatementName(SQLParser.StatementNameContext ctx);
+	void enterStatementName(DB2zSQLParser.StatementNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#statementName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#statementName}.
 	 * @param ctx the parse tree
 	 */
-	void exitStatementName(SQLParser.StatementNameContext ctx);
+	void exitStatementName(DB2zSQLParser.StatementNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#holdability}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#holdability}.
 	 * @param ctx the parse tree
 	 */
-	void enterHoldability(SQLParser.HoldabilityContext ctx);
+	void enterHoldability(DB2zSQLParser.HoldabilityContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#holdability}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#holdability}.
 	 * @param ctx the parse tree
 	 */
-	void exitHoldability(SQLParser.HoldabilityContext ctx);
+	void exitHoldability(DB2zSQLParser.HoldabilityContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#returnability}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#returnability}.
 	 * @param ctx the parse tree
 	 */
-	void enterReturnability(SQLParser.ReturnabilityContext ctx);
+	void enterReturnability(DB2zSQLParser.ReturnabilityContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#returnability}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#returnability}.
 	 * @param ctx the parse tree
 	 */
-	void exitReturnability(SQLParser.ReturnabilityContext ctx);
+	void exitReturnability(DB2zSQLParser.ReturnabilityContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#rowsetPositioning}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowsetPositioning}.
 	 * @param ctx the parse tree
 	 */
-	void enterRowsetPositioning(SQLParser.RowsetPositioningContext ctx);
+	void enterRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#rowsetPositioning}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowsetPositioning}.
 	 * @param ctx the parse tree
 	 */
-	void exitRowsetPositioning(SQLParser.RowsetPositioningContext ctx);
+	void exitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#declareTableStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclareTableStatement(SQLParser.DeclareTableStatementContext ctx);
+	void enterDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#declareTableStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclareTableStatement(SQLParser.DeclareTableStatementContext ctx);
+	void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#notNullPhrase}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#notNullPhrase}.
 	 * @param ctx the parse tree
 	 */
-	void enterNotNullPhrase(SQLParser.NotNullPhraseContext ctx);
+	void enterNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#notNullPhrase}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#notNullPhrase}.
 	 * @param ctx the parse tree
 	 */
-	void exitNotNullPhrase(SQLParser.NotNullPhraseContext ctx);
+	void exitNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#declareStatementStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeclareStatementStatement(SQLParser.DeclareStatementStatementContext ctx);
+	void enterDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#declareStatementStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeclareStatementStatement(SQLParser.DeclareStatementStatementContext ctx);
+	void exitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#allocateCursorStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#allocateCursorStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAllocateCursorStatement(SQLParser.AllocateCursorStatementContext ctx);
+	void enterAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#allocateCursorStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#allocateCursorStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAllocateCursorStatement(SQLParser.AllocateCursorStatementContext ctx);
+	void exitAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#rsLocatorVariable}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rsLocatorVariable}.
 	 * @param ctx the parse tree
 	 */
-	void enterRsLocatorVariable(SQLParser.RsLocatorVariableContext ctx);
+	void enterRsLocatorVariable(DB2zSQLParser.RsLocatorVariableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#rsLocatorVariable}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rsLocatorVariable}.
 	 * @param ctx the parse tree
 	 */
-	void exitRsLocatorVariable(SQLParser.RsLocatorVariableContext ctx);
+	void exitRsLocatorVariable(DB2zSQLParser.RsLocatorVariableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterDatabaseStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterDatabaseStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterDatabaseStatement(SQLParser.AlterDatabaseStatementContext ctx);
+	void enterAlterDatabaseStatement(DB2zSQLParser.AlterDatabaseStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterDatabaseStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterDatabaseStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterDatabaseStatement(SQLParser.AlterDatabaseStatementContext ctx);
+	void exitAlterDatabaseStatement(DB2zSQLParser.AlterDatabaseStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterFunctionStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterFunctionStatement(SQLParser.AlterFunctionStatementContext ctx);
+	void enterAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterFunctionStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterFunctionStatement(SQLParser.AlterFunctionStatementContext ctx);
+	void exitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterIndexStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterIndexStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterIndexStatement(SQLParser.AlterIndexStatementContext ctx);
+	void enterAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterIndexStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterIndexStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterIndexStatement(SQLParser.AlterIndexStatementContext ctx);
+	void exitAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterMaskStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterMaskStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterMaskStatement(SQLParser.AlterMaskStatementContext ctx);
+	void enterAlterMaskStatement(DB2zSQLParser.AlterMaskStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterMaskStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterMaskStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterMaskStatement(SQLParser.AlterMaskStatementContext ctx);
+	void exitAlterMaskStatement(DB2zSQLParser.AlterMaskStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterPermissionStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterPermissionStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterPermissionStatement(SQLParser.AlterPermissionStatementContext ctx);
+	void enterAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterPermissionStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterPermissionStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterPermissionStatement(SQLParser.AlterPermissionStatementContext ctx);
+	void exitAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#searchedDelete}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
-	void enterSearchedDelete(SQLParser.SearchedDeleteContext ctx);
+	void enterSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#searchedDelete}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
-	void exitSearchedDelete(SQLParser.SearchedDeleteContext ctx);
+	void exitSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#positionedDelete}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#positionedDelete}.
 	 * @param ctx the parse tree
 	 */
-	void enterPositionedDelete(SQLParser.PositionedDeleteContext ctx);
+	void enterPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#positionedDelete}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#positionedDelete}.
 	 * @param ctx the parse tree
 	 */
-	void exitPositionedDelete(SQLParser.PositionedDeleteContext ctx);
+	void exitPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#deleteStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#deleteStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeleteStatement(SQLParser.DeleteStatementContext ctx);
+	void enterDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#deleteStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#deleteStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeleteStatement(SQLParser.DeleteStatementContext ctx);
+	void exitDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#insertStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterInsertStatement(SQLParser.InsertStatementContext ctx);
+	void enterInsertStatement(DB2zSQLParser.InsertStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#insertStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitInsertStatement(SQLParser.InsertStatementContext ctx);
+	void exitInsertStatement(DB2zSQLParser.InsertStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#mergeStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterMergeStatement(SQLParser.MergeStatementContext ctx);
+	void enterMergeStatement(DB2zSQLParser.MergeStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#mergeStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitMergeStatement(SQLParser.MergeStatementContext ctx);
+	void exitMergeStatement(DB2zSQLParser.MergeStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#searchedUpdate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedUpdate}.
 	 * @param ctx the parse tree
 	 */
-	void enterSearchedUpdate(SQLParser.SearchedUpdateContext ctx);
+	void enterSearchedUpdate(DB2zSQLParser.SearchedUpdateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#searchedUpdate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#searchedUpdate}.
 	 * @param ctx the parse tree
 	 */
-	void exitSearchedUpdate(SQLParser.SearchedUpdateContext ctx);
+	void exitSearchedUpdate(DB2zSQLParser.SearchedUpdateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#positionedUpdate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#positionedUpdate}.
 	 * @param ctx the parse tree
 	 */
-	void enterPositionedUpdate(SQLParser.PositionedUpdateContext ctx);
+	void enterPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#positionedUpdate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#positionedUpdate}.
 	 * @param ctx the parse tree
 	 */
-	void exitPositionedUpdate(SQLParser.PositionedUpdateContext ctx);
+	void exitPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#updateStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterUpdateStatement(SQLParser.UpdateStatementContext ctx);
+	void enterUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#updateStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitUpdateStatement(SQLParser.UpdateStatementContext ctx);
+	void exitUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#sourceValues}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sourceValues}.
 	 * @param ctx the parse tree
 	 */
-	void enterSourceValues(SQLParser.SourceValuesContext ctx);
+	void enterSourceValues(DB2zSQLParser.SourceValuesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#sourceValues}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sourceValues}.
 	 * @param ctx the parse tree
 	 */
-	void exitSourceValues(SQLParser.SourceValuesContext ctx);
+	void exitSourceValues(DB2zSQLParser.SourceValuesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesSingleRow}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesSingleRow}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesSingleRow(SQLParser.ValuesSingleRowContext ctx);
+	void enterValuesSingleRow(DB2zSQLParser.ValuesSingleRowContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesSingleRow}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesSingleRow}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesSingleRow(SQLParser.ValuesSingleRowContext ctx);
+	void exitValuesSingleRow(DB2zSQLParser.ValuesSingleRowContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesMultipleRow}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesMultipleRow}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesMultipleRow(SQLParser.ValuesMultipleRowContext ctx);
+	void enterValuesMultipleRow(DB2zSQLParser.ValuesMultipleRowContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesMultipleRow}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesMultipleRow}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesMultipleRow(SQLParser.ValuesMultipleRowContext ctx);
+	void exitValuesMultipleRow(DB2zSQLParser.ValuesMultipleRowContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#matchingCondition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#matchingCondition}.
 	 * @param ctx the parse tree
 	 */
-	void enterMatchingCondition(SQLParser.MatchingConditionContext ctx);
+	void enterMatchingCondition(DB2zSQLParser.MatchingConditionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#matchingCondition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#matchingCondition}.
 	 * @param ctx the parse tree
 	 */
-	void exitMatchingCondition(SQLParser.MatchingConditionContext ctx);
+	void exitMatchingCondition(DB2zSQLParser.MatchingConditionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#modificationOperation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#modificationOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterModificationOperation(SQLParser.ModificationOperationContext ctx);
+	void enterModificationOperation(DB2zSQLParser.ModificationOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#modificationOperation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#modificationOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitModificationOperation(SQLParser.ModificationOperationContext ctx);
+	void exitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#assignmentClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssignmentClause(SQLParser.AssignmentClauseContext ctx);
+	void enterAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#assignmentClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssignmentClause(SQLParser.AssignmentClauseContext ctx);
+	void exitAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#updateOperation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#updateOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterUpdateOperation(SQLParser.UpdateOperationContext ctx);
+	void enterUpdateOperation(DB2zSQLParser.UpdateOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#updateOperation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#updateOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitUpdateOperation(SQLParser.UpdateOperationContext ctx);
+	void exitUpdateOperation(DB2zSQLParser.UpdateOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#deleteOperation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#deleteOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterDeleteOperation(SQLParser.DeleteOperationContext ctx);
+	void enterDeleteOperation(DB2zSQLParser.DeleteOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#deleteOperation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#deleteOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitDeleteOperation(SQLParser.DeleteOperationContext ctx);
+	void exitDeleteOperation(DB2zSQLParser.DeleteOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#insertOperation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#insertOperation}.
 	 * @param ctx the parse tree
 	 */
-	void enterInsertOperation(SQLParser.InsertOperationContext ctx);
+	void enterInsertOperation(DB2zSQLParser.InsertOperationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#insertOperation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#insertOperation}.
 	 * @param ctx the parse tree
 	 */
-	void exitInsertOperation(SQLParser.InsertOperationContext ctx);
+	void exitInsertOperation(DB2zSQLParser.InsertOperationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#signalStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#signalStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterSignalStatement(SQLParser.SignalStatementContext ctx);
+	void enterSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#signalStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitSignalStatement(SQLParser.SignalStatementContext ctx);
+	void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#signalInformation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#signalInformation}.
 	 * @param ctx the parse tree
 	 */
-	void enterSignalInformation(SQLParser.SignalInformationContext ctx);
+	void enterSignalInformation(DB2zSQLParser.SignalInformationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#signalInformation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#signalInformation}.
 	 * @param ctx the parse tree
 	 */
-	void exitSignalInformation(SQLParser.SignalInformationContext ctx);
+	void exitSignalInformation(DB2zSQLParser.SignalInformationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesList1}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesList1}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesList1(SQLParser.ValuesList1Context ctx);
+	void enterValuesList1(DB2zSQLParser.ValuesList1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesList1}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesList1}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesList1(SQLParser.ValuesList1Context ctx);
+	void exitValuesList1(DB2zSQLParser.ValuesList1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesList2}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesList2}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesList2(SQLParser.ValuesList2Context ctx);
+	void enterValuesList2(DB2zSQLParser.ValuesList2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesList2}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesList2}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesList2(SQLParser.ValuesList2Context ctx);
+	void exitValuesList2(DB2zSQLParser.ValuesList2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesList3}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesList3}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesList3(SQLParser.ValuesList3Context ctx);
+	void enterValuesList3(DB2zSQLParser.ValuesList3Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesList3}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesList3}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesList3(SQLParser.ValuesList3Context ctx);
+	void exitValuesList3(DB2zSQLParser.ValuesList3Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesList4}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesList4}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesList4(SQLParser.ValuesList4Context ctx);
+	void enterValuesList4(DB2zSQLParser.ValuesList4Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesList4}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesList4}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesList4(SQLParser.ValuesList4Context ctx);
+	void exitValuesList4(DB2zSQLParser.ValuesList4Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#includeColumns}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#includeColumns}.
 	 * @param ctx the parse tree
 	 */
-	void enterIncludeColumns(SQLParser.IncludeColumnsContext ctx);
+	void enterIncludeColumns(DB2zSQLParser.IncludeColumnsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#includeColumns}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#includeColumns}.
 	 * @param ctx the parse tree
 	 */
-	void exitIncludeColumns(SQLParser.IncludeColumnsContext ctx);
+	void exitIncludeColumns(DB2zSQLParser.IncludeColumnsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#multipleRowInsert}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#multipleRowInsert}.
 	 * @param ctx the parse tree
 	 */
-	void enterMultipleRowInsert(SQLParser.MultipleRowInsertContext ctx);
+	void enterMultipleRowInsert(DB2zSQLParser.MultipleRowInsertContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#multipleRowInsert}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#multipleRowInsert}.
 	 * @param ctx the parse tree
 	 */
-	void exitMultipleRowInsert(SQLParser.MultipleRowInsertContext ctx);
+	void exitMultipleRowInsert(DB2zSQLParser.MultipleRowInsertContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#regenerateClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#regenerateClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterRegenerateClause(SQLParser.RegenerateClauseContext ctx);
+	void enterRegenerateClause(DB2zSQLParser.RegenerateClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#regenerateClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#regenerateClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitRegenerateClause(SQLParser.RegenerateClauseContext ctx);
+	void exitRegenerateClause(DB2zSQLParser.RegenerateClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterIndexOptions}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterIndexOptions}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterIndexOptions(SQLParser.AlterIndexOptionsContext ctx);
+	void enterAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterIndexOptions}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterIndexOptions}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterIndexOptions(SQLParser.AlterIndexOptionsContext ctx);
+	void exitAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#alterIndexPartitionOptions}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterIndexPartitionOptions}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterIndexPartitionOptions(SQLParser.AlterIndexPartitionOptionsContext ctx);
+	void enterAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#alterIndexPartitionOptions}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterIndexPartitionOptions}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterIndexPartitionOptions(SQLParser.AlterIndexPartitionOptionsContext ctx);
+	void exitAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#usingSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#usingSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterUsingSpecification(SQLParser.UsingSpecificationContext ctx);
+	void enterUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#usingSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#usingSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitUsingSpecification(SQLParser.UsingSpecificationContext ctx);
+	void exitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#freeSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#freeSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterFreeSpecification(SQLParser.FreeSpecificationContext ctx);
+	void enterFreeSpecification(DB2zSQLParser.FreeSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#freeSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#freeSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitFreeSpecification(SQLParser.FreeSpecificationContext ctx);
+	void exitFreeSpecification(DB2zSQLParser.FreeSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#gbpcacheSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#gbpcacheSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterGbpcacheSpecification(SQLParser.GbpcacheSpecificationContext ctx);
+	void enterGbpcacheSpecification(DB2zSQLParser.GbpcacheSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#gbpcacheSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#gbpcacheSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitGbpcacheSpecification(SQLParser.GbpcacheSpecificationContext ctx);
+	void exitGbpcacheSpecification(DB2zSQLParser.GbpcacheSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#partitionElement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#partitionElement}.
 	 * @param ctx the parse tree
 	 */
-	void enterPartitionElement(SQLParser.PartitionElementContext ctx);
+	void enterPartitionElement(DB2zSQLParser.PartitionElementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#partitionElement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#partitionElement}.
 	 * @param ctx the parse tree
 	 */
-	void exitPartitionElement(SQLParser.PartitionElementContext ctx);
+	void exitPartitionElement(DB2zSQLParser.PartitionElementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#applCompatValue}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#applCompatValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterApplCompatValue(SQLParser.ApplCompatValueContext ctx);
+	void enterApplCompatValue(DB2zSQLParser.ApplCompatValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#applCompatValue}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#applCompatValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitApplCompatValue(SQLParser.ApplCompatValueContext ctx);
+	void exitApplCompatValue(DB2zSQLParser.ApplCompatValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#functionLevel}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#functionLevel}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionLevel(SQLParser.FunctionLevelContext ctx);
+	void enterFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#functionLevel}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#functionLevel}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionLevel(SQLParser.FunctionLevelContext ctx);
+	void exitFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#parameterType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterType}.
 	 * @param ctx the parse tree
 	 */
-	void enterParameterType(SQLParser.ParameterTypeContext ctx);
+	void enterParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#parameterType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterType}.
 	 * @param ctx the parse tree
 	 */
-	void exitParameterType(SQLParser.ParameterTypeContext ctx);
+	void exitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#optionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#optionList}.
 	 * @param ctx the parse tree
 	 */
-	void enterOptionList(SQLParser.OptionListContext ctx);
+	void enterOptionList(DB2zSQLParser.OptionListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#optionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#optionList}.
 	 * @param ctx the parse tree
 	 */
-	void exitOptionList(SQLParser.OptionListContext ctx);
+	void exitOptionList(DB2zSQLParser.OptionListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#externalProgramName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
 	 */
-	void enterExternalProgramName(SQLParser.ExternalProgramNameContext ctx);
+	void enterExternalProgramName(DB2zSQLParser.ExternalProgramNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#externalProgramName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
 	 */
-	void exitExternalProgramName(SQLParser.ExternalProgramNameContext ctx);
+	void exitExternalProgramName(DB2zSQLParser.ExternalProgramNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#packagePath}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#packagePath}.
 	 * @param ctx the parse tree
 	 */
-	void enterPackagePath(SQLParser.PackagePathContext ctx);
+	void enterPackagePath(DB2zSQLParser.PackagePathContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#packagePath}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#packagePath}.
 	 * @param ctx the parse tree
 	 */
-	void exitPackagePath(SQLParser.PackagePathContext ctx);
+	void exitPackagePath(DB2zSQLParser.PackagePathContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#collectionID}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#collectionID}.
 	 * @param ctx the parse tree
 	 */
-	void enterCollectionID(SQLParser.CollectionIDContext ctx);
+	void enterCollectionID(DB2zSQLParser.CollectionIDContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#collectionID}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#collectionID}.
 	 * @param ctx the parse tree
 	 */
-	void exitCollectionID(SQLParser.CollectionIDContext ctx);
+	void exitCollectionID(DB2zSQLParser.CollectionIDContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#runTimeOptions}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#runTimeOptions}.
 	 * @param ctx the parse tree
 	 */
-	void enterRunTimeOptions(SQLParser.RunTimeOptionsContext ctx);
+	void enterRunTimeOptions(DB2zSQLParser.RunTimeOptionsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#runTimeOptions}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#runTimeOptions}.
 	 * @param ctx the parse tree
 	 */
-	void exitRunTimeOptions(SQLParser.RunTimeOptionsContext ctx);
+	void exitRunTimeOptions(DB2zSQLParser.RunTimeOptionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#comparisonOperator}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#comparisonOperator}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparisonOperator(SQLParser.ComparisonOperatorContext ctx);
+	void enterComparisonOperator(DB2zSQLParser.ComparisonOperatorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#comparisonOperator}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#comparisonOperator}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparisonOperator(SQLParser.ComparisonOperatorContext ctx);
+	void exitComparisonOperator(DB2zSQLParser.ComparisonOperatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#operator}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#operator}.
 	 * @param ctx the parse tree
 	 */
-	void enterOperator(SQLParser.OperatorContext ctx);
+	void enterOperator(DB2zSQLParser.OperatorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#operator}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#operator}.
 	 * @param ctx the parse tree
 	 */
-	void exitOperator(SQLParser.OperatorContext ctx);
+	void exitOperator(DB2zSQLParser.OperatorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#expression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpression(SQLParser.ExpressionContext ctx);
+	void enterExpression(DB2zSQLParser.ExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#expression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#expression}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpression(SQLParser.ExpressionContext ctx);
+	void exitExpression(DB2zSQLParser.ExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#rowChangeExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowChangeExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterRowChangeExpression(SQLParser.RowChangeExpressionContext ctx);
+	void enterRowChangeExpression(DB2zSQLParser.RowChangeExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#rowChangeExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowChangeExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitRowChangeExpression(SQLParser.RowChangeExpressionContext ctx);
+	void exitRowChangeExpression(DB2zSQLParser.RowChangeExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#sequenceReference}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterSequenceReference(SQLParser.SequenceReferenceContext ctx);
+	void enterSequenceReference(DB2zSQLParser.SequenceReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#sequenceReference}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitSequenceReference(SQLParser.SequenceReferenceContext ctx);
+	void exitSequenceReference(DB2zSQLParser.SequenceReferenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#functionInvocation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#functionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionInvocation(SQLParser.FunctionInvocationContext ctx);
+	void enterFunctionInvocation(DB2zSQLParser.FunctionInvocationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#functionInvocation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#functionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionInvocation(SQLParser.FunctionInvocationContext ctx);
+	void exitFunctionInvocation(DB2zSQLParser.FunctionInvocationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#scalarFunctionInvocation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#scalarFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void enterScalarFunctionInvocation(SQLParser.ScalarFunctionInvocationContext ctx);
+	void enterScalarFunctionInvocation(DB2zSQLParser.ScalarFunctionInvocationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#scalarFunctionInvocation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#scalarFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void exitScalarFunctionInvocation(SQLParser.ScalarFunctionInvocationContext ctx);
+	void exitScalarFunctionInvocation(DB2zSQLParser.ScalarFunctionInvocationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#aggregateFunctionInvocation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregateFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void enterAggregateFunctionInvocation(SQLParser.AggregateFunctionInvocationContext ctx);
+	void enterAggregateFunctionInvocation(DB2zSQLParser.AggregateFunctionInvocationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#aggregateFunctionInvocation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aggregateFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void exitAggregateFunctionInvocation(SQLParser.AggregateFunctionInvocationContext ctx);
+	void exitAggregateFunctionInvocation(DB2zSQLParser.AggregateFunctionInvocationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#regressionFunctionInvocation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#regressionFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void enterRegressionFunctionInvocation(SQLParser.RegressionFunctionInvocationContext ctx);
+	void enterRegressionFunctionInvocation(DB2zSQLParser.RegressionFunctionInvocationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#regressionFunctionInvocation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#regressionFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void exitRegressionFunctionInvocation(SQLParser.RegressionFunctionInvocationContext ctx);
+	void exitRegressionFunctionInvocation(DB2zSQLParser.RegressionFunctionInvocationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#externalFunctionInvocation}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#externalFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void enterExternalFunctionInvocation(SQLParser.ExternalFunctionInvocationContext ctx);
+	void enterExternalFunctionInvocation(DB2zSQLParser.ExternalFunctionInvocationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#externalFunctionInvocation}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#externalFunctionInvocation}.
 	 * @param ctx the parse tree
 	 */
-	void exitExternalFunctionInvocation(SQLParser.ExternalFunctionInvocationContext ctx);
+	void exitExternalFunctionInvocation(DB2zSQLParser.ExternalFunctionInvocationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#labeledDuration}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#labeledDuration}.
 	 * @param ctx the parse tree
 	 */
-	void enterLabeledDuration(SQLParser.LabeledDurationContext ctx);
+	void enterLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#labeledDuration}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#labeledDuration}.
 	 * @param ctx the parse tree
 	 */
-	void exitLabeledDuration(SQLParser.LabeledDurationContext ctx);
+	void exitLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlCastSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlCastSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlCastSpecification(SQLParser.XmlCastSpecificationContext ctx);
+	void enterXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlCastSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlCastSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlCastSpecification(SQLParser.XmlCastSpecificationContext ctx);
+	void exitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#arrayElementSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayElementSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayElementSpecification(SQLParser.ArrayElementSpecificationContext ctx);
+	void enterArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#arrayElementSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayElementSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayElementSpecification(SQLParser.ArrayElementSpecificationContext ctx);
+	void exitArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#arrayIndex}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayIndex}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayIndex(SQLParser.ArrayIndexContext ctx);
+	void enterArrayIndex(DB2zSQLParser.ArrayIndexContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#arrayIndex}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayIndex}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayIndex(SQLParser.ArrayIndexContext ctx);
+	void exitArrayIndex(DB2zSQLParser.ArrayIndexContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#arrayConstructor}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayConstructor}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayConstructor(SQLParser.ArrayConstructorContext ctx);
+	void enterArrayConstructor(DB2zSQLParser.ArrayConstructorContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#arrayConstructor}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayConstructor}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayConstructor(SQLParser.ArrayConstructorContext ctx);
+	void exitArrayConstructor(DB2zSQLParser.ArrayConstructorContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#olapSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#olapSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterOlapSpecification(SQLParser.OlapSpecificationContext ctx);
+	void enterOlapSpecification(DB2zSQLParser.OlapSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#olapSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#olapSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitOlapSpecification(SQLParser.OlapSpecificationContext ctx);
+	void exitOlapSpecification(DB2zSQLParser.OlapSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#orderedOlapSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#orderedOlapSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrderedOlapSpecification(SQLParser.OrderedOlapSpecificationContext ctx);
+	void enterOrderedOlapSpecification(DB2zSQLParser.OrderedOlapSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#orderedOlapSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#orderedOlapSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrderedOlapSpecification(SQLParser.OrderedOlapSpecificationContext ctx);
+	void exitOrderedOlapSpecification(DB2zSQLParser.OrderedOlapSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#olapSpecificationFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#olapSpecificationFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterOlapSpecificationFunction(SQLParser.OlapSpecificationFunctionContext ctx);
+	void enterOlapSpecificationFunction(DB2zSQLParser.OlapSpecificationFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#olapSpecificationFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#olapSpecificationFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitOlapSpecificationFunction(SQLParser.OlapSpecificationFunctionContext ctx);
+	void exitOlapSpecificationFunction(DB2zSQLParser.OlapSpecificationFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#lagFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#lagFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterLagFunction(SQLParser.LagFunctionContext ctx);
+	void enterLagFunction(DB2zSQLParser.LagFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#lagFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#lagFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitLagFunction(SQLParser.LagFunctionContext ctx);
+	void exitLagFunction(DB2zSQLParser.LagFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#leadFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#leadFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterLeadFunction(SQLParser.LeadFunctionContext ctx);
+	void enterLeadFunction(DB2zSQLParser.LeadFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#leadFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#leadFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitLeadFunction(SQLParser.LeadFunctionContext ctx);
+	void exitLeadFunction(DB2zSQLParser.LeadFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#respectNullsClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#respectNullsClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterRespectNullsClause(SQLParser.RespectNullsClauseContext ctx);
+	void enterRespectNullsClause(DB2zSQLParser.RespectNullsClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#respectNullsClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#respectNullsClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitRespectNullsClause(SQLParser.RespectNullsClauseContext ctx);
+	void exitRespectNullsClause(DB2zSQLParser.RespectNullsClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#windowPartitionClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#windowPartitionClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterWindowPartitionClause(SQLParser.WindowPartitionClauseContext ctx);
+	void enterWindowPartitionClause(DB2zSQLParser.WindowPartitionClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#windowPartitionClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#windowPartitionClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitWindowPartitionClause(SQLParser.WindowPartitionClauseContext ctx);
+	void exitWindowPartitionClause(DB2zSQLParser.WindowPartitionClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#windowOrderClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#windowOrderClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterWindowOrderClause(SQLParser.WindowOrderClauseContext ctx);
+	void enterWindowOrderClause(DB2zSQLParser.WindowOrderClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#windowOrderClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#windowOrderClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitWindowOrderClause(SQLParser.WindowOrderClauseContext ctx);
+	void exitWindowOrderClause(DB2zSQLParser.WindowOrderClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#windowOrderClauseQualifier}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#windowOrderClauseQualifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterWindowOrderClauseQualifier(SQLParser.WindowOrderClauseQualifierContext ctx);
+	void enterWindowOrderClauseQualifier(DB2zSQLParser.WindowOrderClauseQualifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#windowOrderClauseQualifier}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#windowOrderClauseQualifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitWindowOrderClauseQualifier(SQLParser.WindowOrderClauseQualifierContext ctx);
+	void exitWindowOrderClauseQualifier(DB2zSQLParser.WindowOrderClauseQualifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#numberingSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#numberingSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterNumberingSpecification(SQLParser.NumberingSpecificationContext ctx);
+	void enterNumberingSpecification(DB2zSQLParser.NumberingSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#numberingSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#numberingSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitNumberingSpecification(SQLParser.NumberingSpecificationContext ctx);
+	void exitNumberingSpecification(DB2zSQLParser.NumberingSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#aggregationSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregationSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterAggregationSpecification(SQLParser.AggregationSpecificationContext ctx);
+	void enterAggregationSpecification(DB2zSQLParser.AggregationSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#aggregationSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aggregationSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitAggregationSpecification(SQLParser.AggregationSpecificationContext ctx);
+	void exitAggregationSpecification(DB2zSQLParser.AggregationSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#aggregateFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregateFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterAggregateFunction(SQLParser.AggregateFunctionContext ctx);
+	void enterAggregateFunction(DB2zSQLParser.AggregateFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#aggregateFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aggregateFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitAggregateFunction(SQLParser.AggregateFunctionContext ctx);
+	void exitAggregateFunction(DB2zSQLParser.AggregateFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#regressionFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#regressionFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterRegressionFunction(SQLParser.RegressionFunctionContext ctx);
+	void enterRegressionFunction(DB2zSQLParser.RegressionFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#regressionFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#regressionFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitRegressionFunction(SQLParser.RegressionFunctionContext ctx);
+	void exitRegressionFunction(DB2zSQLParser.RegressionFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#olapColumnFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#olapColumnFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterOlapColumnFunction(SQLParser.OlapColumnFunctionContext ctx);
+	void enterOlapColumnFunction(DB2zSQLParser.OlapColumnFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#olapColumnFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#olapColumnFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitOlapColumnFunction(SQLParser.OlapColumnFunctionContext ctx);
+	void exitOlapColumnFunction(DB2zSQLParser.OlapColumnFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#firstValueFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#firstValueFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterFirstValueFunction(SQLParser.FirstValueFunctionContext ctx);
+	void enterFirstValueFunction(DB2zSQLParser.FirstValueFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#firstValueFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#firstValueFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitFirstValueFunction(SQLParser.FirstValueFunctionContext ctx);
+	void exitFirstValueFunction(DB2zSQLParser.FirstValueFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#lastValueFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#lastValueFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterLastValueFunction(SQLParser.LastValueFunctionContext ctx);
+	void enterLastValueFunction(DB2zSQLParser.LastValueFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#lastValueFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#lastValueFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitLastValueFunction(SQLParser.LastValueFunctionContext ctx);
+	void exitLastValueFunction(DB2zSQLParser.LastValueFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#nthValueFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#nthValueFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterNthValueFunction(SQLParser.NthValueFunctionContext ctx);
+	void enterNthValueFunction(DB2zSQLParser.NthValueFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#nthValueFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#nthValueFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitNthValueFunction(SQLParser.NthValueFunctionContext ctx);
+	void exitNthValueFunction(DB2zSQLParser.NthValueFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#ratioToReportFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ratioToReportFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterRatioToReportFunction(SQLParser.RatioToReportFunctionContext ctx);
+	void enterRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#ratioToReportFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ratioToReportFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitRatioToReportFunction(SQLParser.RatioToReportFunctionContext ctx);
+	void exitRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#windowAggregationGroupClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterWindowAggregationGroupClause(SQLParser.WindowAggregationGroupClauseContext ctx);
+	void enterWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#windowAggregationGroupClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitWindowAggregationGroupClause(SQLParser.WindowAggregationGroupClauseContext ctx);
+	void exitWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupStart}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupStart}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupStart(SQLParser.GroupStartContext ctx);
+	void enterGroupStart(DB2zSQLParser.GroupStartContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupStart}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupStart}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupStart(SQLParser.GroupStartContext ctx);
+	void exitGroupStart(DB2zSQLParser.GroupStartContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupBetween}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupBetween}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupBetween(SQLParser.GroupBetweenContext ctx);
+	void enterGroupBetween(DB2zSQLParser.GroupBetweenContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupBetween}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupBetween}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupBetween(SQLParser.GroupBetweenContext ctx);
+	void exitGroupBetween(DB2zSQLParser.GroupBetweenContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupEnd}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupEnd}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupEnd(SQLParser.GroupEndContext ctx);
+	void enterGroupEnd(DB2zSQLParser.GroupEndContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupEnd}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupEnd}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupEnd(SQLParser.GroupEndContext ctx);
+	void exitGroupEnd(DB2zSQLParser.GroupEndContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupBound1}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupBound1}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupBound1(SQLParser.GroupBound1Context ctx);
+	void enterGroupBound1(DB2zSQLParser.GroupBound1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupBound1}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupBound1}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupBound1(SQLParser.GroupBound1Context ctx);
+	void exitGroupBound1(DB2zSQLParser.GroupBound1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupBound2}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupBound2}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupBound2(SQLParser.GroupBound2Context ctx);
+	void enterGroupBound2(DB2zSQLParser.GroupBound2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupBound2}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupBound2}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupBound2(SQLParser.GroupBound2Context ctx);
+	void exitGroupBound2(DB2zSQLParser.GroupBound2Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#unboundedPreceding}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#unboundedPreceding}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnboundedPreceding(SQLParser.UnboundedPrecedingContext ctx);
+	void enterUnboundedPreceding(DB2zSQLParser.UnboundedPrecedingContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#unboundedPreceding}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#unboundedPreceding}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnboundedPreceding(SQLParser.UnboundedPrecedingContext ctx);
+	void exitUnboundedPreceding(DB2zSQLParser.UnboundedPrecedingContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#unboundedFollowing}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#unboundedFollowing}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnboundedFollowing(SQLParser.UnboundedFollowingContext ctx);
+	void enterUnboundedFollowing(DB2zSQLParser.UnboundedFollowingContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#unboundedFollowing}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#unboundedFollowing}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnboundedFollowing(SQLParser.UnboundedFollowingContext ctx);
+	void exitUnboundedFollowing(DB2zSQLParser.UnboundedFollowingContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#boundedPreceding}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#boundedPreceding}.
 	 * @param ctx the parse tree
 	 */
-	void enterBoundedPreceding(SQLParser.BoundedPrecedingContext ctx);
+	void enterBoundedPreceding(DB2zSQLParser.BoundedPrecedingContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#boundedPreceding}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#boundedPreceding}.
 	 * @param ctx the parse tree
 	 */
-	void exitBoundedPreceding(SQLParser.BoundedPrecedingContext ctx);
+	void exitBoundedPreceding(DB2zSQLParser.BoundedPrecedingContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#boundedFollowing}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#boundedFollowing}.
 	 * @param ctx the parse tree
 	 */
-	void enterBoundedFollowing(SQLParser.BoundedFollowingContext ctx);
+	void enterBoundedFollowing(DB2zSQLParser.BoundedFollowingContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#boundedFollowing}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#boundedFollowing}.
 	 * @param ctx the parse tree
 	 */
-	void exitBoundedFollowing(SQLParser.BoundedFollowingContext ctx);
+	void exitBoundedFollowing(DB2zSQLParser.BoundedFollowingContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#currentRow}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#currentRow}.
 	 * @param ctx the parse tree
 	 */
-	void enterCurrentRow(SQLParser.CurrentRowContext ctx);
+	void enterCurrentRow(DB2zSQLParser.CurrentRowContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#currentRow}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#currentRow}.
 	 * @param ctx the parse tree
 	 */
-	void exitCurrentRow(SQLParser.CurrentRowContext ctx);
+	void exitCurrentRow(DB2zSQLParser.CurrentRowContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#scalarFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#scalarFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterScalarFunction(SQLParser.ScalarFunctionContext ctx);
+	void enterScalarFunction(DB2zSQLParser.ScalarFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#scalarFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#scalarFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitScalarFunction(SQLParser.ScalarFunctionContext ctx);
+	void exitScalarFunction(DB2zSQLParser.ScalarFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#tableFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableFunction(SQLParser.TableFunctionContext ctx);
+	void enterTableFunction(DB2zSQLParser.TableFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#tableFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableFunction(SQLParser.TableFunctionContext ctx);
+	void exitTableFunction(DB2zSQLParser.TableFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#specialRegister}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#specialRegister}.
 	 * @param ctx the parse tree
 	 */
-	void enterSpecialRegister(SQLParser.SpecialRegisterContext ctx);
+	void enterSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#specialRegister}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#specialRegister}.
 	 * @param ctx the parse tree
 	 */
-	void exitSpecialRegister(SQLParser.SpecialRegisterContext ctx);
+	void exitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmltableFunctionSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmltableFunctionSpecification(SQLParser.XmltableFunctionSpecificationContext ctx);
+	void enterXmltableFunctionSpecification(DB2zSQLParser.XmltableFunctionSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmltableFunctionSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmltableFunctionSpecification(SQLParser.XmltableFunctionSpecificationContext ctx);
+	void exitXmltableFunctionSpecification(DB2zSQLParser.XmltableFunctionSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#rowXqueryExpressionConstant}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowXqueryExpressionConstant}.
 	 * @param ctx the parse tree
 	 */
-	void enterRowXqueryExpressionConstant(SQLParser.RowXqueryExpressionConstantContext ctx);
+	void enterRowXqueryExpressionConstant(DB2zSQLParser.RowXqueryExpressionConstantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#rowXqueryExpressionConstant}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowXqueryExpressionConstant}.
 	 * @param ctx the parse tree
 	 */
-	void exitRowXqueryExpressionConstant(SQLParser.RowXqueryExpressionConstantContext ctx);
+	void exitRowXqueryExpressionConstant(DB2zSQLParser.RowXqueryExpressionConstantContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#rowXqueryArgument}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowXqueryArgument}.
 	 * @param ctx the parse tree
 	 */
-	void enterRowXqueryArgument(SQLParser.RowXqueryArgumentContext ctx);
+	void enterRowXqueryArgument(DB2zSQLParser.RowXqueryArgumentContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#rowXqueryArgument}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowXqueryArgument}.
 	 * @param ctx the parse tree
 	 */
-	void exitRowXqueryArgument(SQLParser.RowXqueryArgumentContext ctx);
+	void exitRowXqueryArgument(DB2zSQLParser.RowXqueryArgumentContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xqueryContextItemExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xqueryContextItemExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterXqueryContextItemExpression(SQLParser.XqueryContextItemExpressionContext ctx);
+	void enterXqueryContextItemExpression(DB2zSQLParser.XqueryContextItemExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xqueryContextItemExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xqueryContextItemExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitXqueryContextItemExpression(SQLParser.XqueryContextItemExpressionContext ctx);
+	void exitXqueryContextItemExpression(DB2zSQLParser.XqueryContextItemExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xqueryVariableExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xqueryVariableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterXqueryVariableExpression(SQLParser.XqueryVariableExpressionContext ctx);
+	void enterXqueryVariableExpression(DB2zSQLParser.XqueryVariableExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xqueryVariableExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xqueryVariableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitXqueryVariableExpression(SQLParser.XqueryVariableExpressionContext ctx);
+	void exitXqueryVariableExpression(DB2zSQLParser.XqueryVariableExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlTableRegularColumnDefinition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlTableRegularColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlTableRegularColumnDefinition(SQLParser.XmlTableRegularColumnDefinitionContext ctx);
+	void enterXmlTableRegularColumnDefinition(DB2zSQLParser.XmlTableRegularColumnDefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlTableRegularColumnDefinition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlTableRegularColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlTableRegularColumnDefinition(SQLParser.XmlTableRegularColumnDefinitionContext ctx);
+	void exitXmlTableRegularColumnDefinition(DB2zSQLParser.XmlTableRegularColumnDefinitionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#defaultClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterDefaultClause(SQLParser.DefaultClauseContext ctx);
+	void enterDefaultClause(DB2zSQLParser.DefaultClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#defaultClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#defaultClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitDefaultClause(SQLParser.DefaultClauseContext ctx);
+	void exitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#defaultClauseAllowables}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree
 	 */
-	void enterDefaultClauseAllowables(SQLParser.DefaultClauseAllowablesContext ctx);
+	void enterDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#defaultClauseAllowables}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree
 	 */
-	void exitDefaultClauseAllowables(SQLParser.DefaultClauseAllowablesContext ctx);
+	void exitDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#distinctTypeCastFunctionName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#distinctTypeCastFunctionName}.
 	 * @param ctx the parse tree
 	 */
-	void enterDistinctTypeCastFunctionName(SQLParser.DistinctTypeCastFunctionNameContext ctx);
+	void enterDistinctTypeCastFunctionName(DB2zSQLParser.DistinctTypeCastFunctionNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#distinctTypeCastFunctionName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#distinctTypeCastFunctionName}.
 	 * @param ctx the parse tree
 	 */
-	void exitDistinctTypeCastFunctionName(SQLParser.DistinctTypeCastFunctionNameContext ctx);
+	void exitDistinctTypeCastFunctionName(DB2zSQLParser.DistinctTypeCastFunctionNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#columnXqueryExpressionConstant}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#columnXqueryExpressionConstant}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnXqueryExpressionConstant(SQLParser.ColumnXqueryExpressionConstantContext ctx);
+	void enterColumnXqueryExpressionConstant(DB2zSQLParser.ColumnXqueryExpressionConstantContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#columnXqueryExpressionConstant}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#columnXqueryExpressionConstant}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnXqueryExpressionConstant(SQLParser.ColumnXqueryExpressionConstantContext ctx);
+	void exitColumnXqueryExpressionConstant(DB2zSQLParser.ColumnXqueryExpressionConstantContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlTableOrdinalityColumnDefinition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlTableOrdinalityColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlTableOrdinalityColumnDefinition(SQLParser.XmlTableOrdinalityColumnDefinitionContext ctx);
+	void enterXmlTableOrdinalityColumnDefinition(DB2zSQLParser.XmlTableOrdinalityColumnDefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlTableOrdinalityColumnDefinition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlTableOrdinalityColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlTableOrdinalityColumnDefinition(SQLParser.XmlTableOrdinalityColumnDefinitionContext ctx);
+	void exitXmlTableOrdinalityColumnDefinition(DB2zSQLParser.XmlTableOrdinalityColumnDefinitionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlnamespacesDeclaration}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlnamespacesDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlnamespacesDeclaration(SQLParser.XmlnamespacesDeclarationContext ctx);
+	void enterXmlnamespacesDeclaration(DB2zSQLParser.XmlnamespacesDeclarationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlnamespacesDeclaration}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlnamespacesDeclaration}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlnamespacesDeclaration(SQLParser.XmlnamespacesDeclarationContext ctx);
+	void exitXmlnamespacesDeclaration(DB2zSQLParser.XmlnamespacesDeclarationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlnamespacesFunctionSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlnamespacesFunctionSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlnamespacesFunctionSpecification(SQLParser.XmlnamespacesFunctionSpecificationContext ctx);
+	void enterXmlnamespacesFunctionSpecification(DB2zSQLParser.XmlnamespacesFunctionSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlnamespacesFunctionSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlnamespacesFunctionSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlnamespacesFunctionSpecification(SQLParser.XmlnamespacesFunctionSpecificationContext ctx);
+	void exitXmlnamespacesFunctionSpecification(DB2zSQLParser.XmlnamespacesFunctionSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlnamespacesFunctionArguments}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlnamespacesFunctionArguments}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlnamespacesFunctionArguments(SQLParser.XmlnamespacesFunctionArgumentsContext ctx);
+	void enterXmlnamespacesFunctionArguments(DB2zSQLParser.XmlnamespacesFunctionArgumentsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlnamespacesFunctionArguments}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlnamespacesFunctionArguments}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlnamespacesFunctionArguments(SQLParser.XmlnamespacesFunctionArgumentsContext ctx);
+	void exitXmlnamespacesFunctionArguments(DB2zSQLParser.XmlnamespacesFunctionArgumentsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#namespaceUri}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#namespaceUri}.
 	 * @param ctx the parse tree
 	 */
-	void enterNamespaceUri(SQLParser.NamespaceUriContext ctx);
+	void enterNamespaceUri(DB2zSQLParser.NamespaceUriContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#namespaceUri}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#namespaceUri}.
 	 * @param ctx the parse tree
 	 */
-	void exitNamespaceUri(SQLParser.NamespaceUriContext ctx);
+	void exitNamespaceUri(DB2zSQLParser.NamespaceUriContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#namespacePrefix}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#namespacePrefix}.
 	 * @param ctx the parse tree
 	 */
-	void enterNamespacePrefix(SQLParser.NamespacePrefixContext ctx);
+	void enterNamespacePrefix(DB2zSQLParser.NamespacePrefixContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#namespacePrefix}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#namespacePrefix}.
 	 * @param ctx the parse tree
 	 */
-	void exitNamespacePrefix(SQLParser.NamespacePrefixContext ctx);
+	void exitNamespacePrefix(DB2zSQLParser.NamespacePrefixContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#timeZoneSpecificExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#timeZoneSpecificExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterTimeZoneSpecificExpression(SQLParser.TimeZoneSpecificExpressionContext ctx);
+	void enterTimeZoneSpecificExpression(DB2zSQLParser.TimeZoneSpecificExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#timeZoneSpecificExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#timeZoneSpecificExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitTimeZoneSpecificExpression(SQLParser.TimeZoneSpecificExpressionContext ctx);
+	void exitTimeZoneSpecificExpression(DB2zSQLParser.TimeZoneSpecificExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#timeZoneExpressionSubset}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#timeZoneExpressionSubset}.
 	 * @param ctx the parse tree
 	 */
-	void enterTimeZoneExpressionSubset(SQLParser.TimeZoneExpressionSubsetContext ctx);
+	void enterTimeZoneExpressionSubset(DB2zSQLParser.TimeZoneExpressionSubsetContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#timeZoneExpressionSubset}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#timeZoneExpressionSubset}.
 	 * @param ctx the parse tree
 	 */
-	void exitTimeZoneExpressionSubset(SQLParser.TimeZoneExpressionSubsetContext ctx);
+	void exitTimeZoneExpressionSubset(DB2zSQLParser.TimeZoneExpressionSubsetContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#caseExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#caseExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterCaseExpression(SQLParser.CaseExpressionContext ctx);
+	void enterCaseExpression(DB2zSQLParser.CaseExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#caseExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#caseExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitCaseExpression(SQLParser.CaseExpressionContext ctx);
+	void exitCaseExpression(DB2zSQLParser.CaseExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#resultExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#resultExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterResultExpression(SQLParser.ResultExpressionContext ctx);
+	void enterResultExpression(DB2zSQLParser.ResultExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#resultExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#resultExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitResultExpression(SQLParser.ResultExpressionContext ctx);
+	void exitResultExpression(DB2zSQLParser.ResultExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#searchedWhenClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedWhenClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterSearchedWhenClause(SQLParser.SearchedWhenClauseContext ctx);
+	void enterSearchedWhenClause(DB2zSQLParser.SearchedWhenClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#searchedWhenClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#searchedWhenClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitSearchedWhenClause(SQLParser.SearchedWhenClauseContext ctx);
+	void exitSearchedWhenClause(DB2zSQLParser.SearchedWhenClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#simpleWhenClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#simpleWhenClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterSimpleWhenClause(SQLParser.SimpleWhenClauseContext ctx);
+	void enterSimpleWhenClause(DB2zSQLParser.SimpleWhenClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#simpleWhenClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#simpleWhenClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitSimpleWhenClause(SQLParser.SimpleWhenClauseContext ctx);
+	void exitSimpleWhenClause(DB2zSQLParser.SimpleWhenClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#searchCondition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#searchCondition}.
 	 * @param ctx the parse tree
 	 */
-	void enterSearchCondition(SQLParser.SearchConditionContext ctx);
+	void enterSearchCondition(DB2zSQLParser.SearchConditionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#searchCondition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#searchCondition}.
 	 * @param ctx the parse tree
 	 */
-	void exitSearchCondition(SQLParser.SearchConditionContext ctx);
+	void exitSearchCondition(DB2zSQLParser.SearchConditionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#predicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#predicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterPredicate(SQLParser.PredicateContext ctx);
+	void enterPredicate(DB2zSQLParser.PredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#predicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#predicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitPredicate(SQLParser.PredicateContext ctx);
+	void exitPredicate(DB2zSQLParser.PredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#basicPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#basicPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterBasicPredicate(SQLParser.BasicPredicateContext ctx);
+	void enterBasicPredicate(DB2zSQLParser.BasicPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#basicPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#basicPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitBasicPredicate(SQLParser.BasicPredicateContext ctx);
+	void exitBasicPredicate(DB2zSQLParser.BasicPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#rowValueExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowValueExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterRowValueExpression(SQLParser.RowValueExpressionContext ctx);
+	void enterRowValueExpression(DB2zSQLParser.RowValueExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#rowValueExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowValueExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitRowValueExpression(SQLParser.RowValueExpressionContext ctx);
+	void exitRowValueExpression(DB2zSQLParser.RowValueExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#quantifiedPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#quantifiedPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuantifiedPredicate(SQLParser.QuantifiedPredicateContext ctx);
+	void enterQuantifiedPredicate(DB2zSQLParser.QuantifiedPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#quantifiedPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#quantifiedPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuantifiedPredicate(SQLParser.QuantifiedPredicateContext ctx);
+	void exitQuantifiedPredicate(DB2zSQLParser.QuantifiedPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#arrayExistsPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayExistsPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayExistsPredicate(SQLParser.ArrayExistsPredicateContext ctx);
+	void enterArrayExistsPredicate(DB2zSQLParser.ArrayExistsPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#arrayExistsPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayExistsPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayExistsPredicate(SQLParser.ArrayExistsPredicateContext ctx);
+	void exitArrayExistsPredicate(DB2zSQLParser.ArrayExistsPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#betweenPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#betweenPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterBetweenPredicate(SQLParser.BetweenPredicateContext ctx);
+	void enterBetweenPredicate(DB2zSQLParser.BetweenPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#betweenPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#betweenPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitBetweenPredicate(SQLParser.BetweenPredicateContext ctx);
+	void exitBetweenPredicate(DB2zSQLParser.BetweenPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#distinctPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#distinctPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterDistinctPredicate(SQLParser.DistinctPredicateContext ctx);
+	void enterDistinctPredicate(DB2zSQLParser.DistinctPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#distinctPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#distinctPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitDistinctPredicate(SQLParser.DistinctPredicateContext ctx);
+	void exitDistinctPredicate(DB2zSQLParser.DistinctPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#existsPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#existsPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterExistsPredicate(SQLParser.ExistsPredicateContext ctx);
+	void enterExistsPredicate(DB2zSQLParser.ExistsPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#existsPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#existsPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitExistsPredicate(SQLParser.ExistsPredicateContext ctx);
+	void exitExistsPredicate(DB2zSQLParser.ExistsPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#inPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#inPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterInPredicate(SQLParser.InPredicateContext ctx);
+	void enterInPredicate(DB2zSQLParser.InPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#inPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#inPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitInPredicate(SQLParser.InPredicateContext ctx);
+	void exitInPredicate(DB2zSQLParser.InPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#likePredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#likePredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterLikePredicate(SQLParser.LikePredicateContext ctx);
+	void enterLikePredicate(DB2zSQLParser.LikePredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#likePredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#likePredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitLikePredicate(SQLParser.LikePredicateContext ctx);
+	void exitLikePredicate(DB2zSQLParser.LikePredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#nullPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#nullPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterNullPredicate(SQLParser.NullPredicateContext ctx);
+	void enterNullPredicate(DB2zSQLParser.NullPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#nullPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#nullPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitNullPredicate(SQLParser.NullPredicateContext ctx);
+	void exitNullPredicate(DB2zSQLParser.NullPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmlExistsPredicate}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlExistsPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmlExistsPredicate(SQLParser.XmlExistsPredicateContext ctx);
+	void enterXmlExistsPredicate(DB2zSQLParser.XmlExistsPredicateContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmlExistsPredicate}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlExistsPredicate}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmlExistsPredicate(SQLParser.XmlExistsPredicateContext ctx);
+	void exitXmlExistsPredicate(DB2zSQLParser.XmlExistsPredicateContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#arrayExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayExpression(SQLParser.ArrayExpressionContext ctx);
+	void enterArrayExpression(DB2zSQLParser.ArrayExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#arrayExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayExpression(SQLParser.ArrayExpressionContext ctx);
+	void exitArrayExpression(DB2zSQLParser.ArrayExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#castSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#castSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterCastSpecification(SQLParser.CastSpecificationContext ctx);
+	void enterCastSpecification(DB2zSQLParser.CastSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#castSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#castSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitCastSpecification(SQLParser.CastSpecificationContext ctx);
+	void exitCastSpecification(DB2zSQLParser.CastSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#parameterMarker}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterMarker}.
 	 * @param ctx the parse tree
 	 */
-	void enterParameterMarker(SQLParser.ParameterMarkerContext ctx);
+	void enterParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#parameterMarker}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterMarker}.
 	 * @param ctx the parse tree
 	 */
-	void exitParameterMarker(SQLParser.ParameterMarkerContext ctx);
+	void exitParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#dataType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dataType}.
 	 * @param ctx the parse tree
 	 */
-	void enterDataType(SQLParser.DataTypeContext ctx);
+	void enterDataType(DB2zSQLParser.DataTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#dataType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dataType}.
 	 * @param ctx the parse tree
 	 */
-	void exitDataType(SQLParser.DataTypeContext ctx);
+	void exitDataType(DB2zSQLParser.DataTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#builtInType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#builtInType}.
 	 * @param ctx the parse tree
 	 */
-	void enterBuiltInType(SQLParser.BuiltInTypeContext ctx);
+	void enterBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#builtInType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#builtInType}.
 	 * @param ctx the parse tree
 	 */
-	void exitBuiltInType(SQLParser.BuiltInTypeContext ctx);
+	void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#integerInParens}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#integerInParens}.
 	 * @param ctx the parse tree
 	 */
-	void enterIntegerInParens(SQLParser.IntegerInParensContext ctx);
+	void enterIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#integerInParens}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#integerInParens}.
 	 * @param ctx the parse tree
 	 */
-	void exitIntegerInParens(SQLParser.IntegerInParensContext ctx);
+	void exitIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#length}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#length}.
 	 * @param ctx the parse tree
 	 */
-	void enterLength(SQLParser.LengthContext ctx);
+	void enterLength(DB2zSQLParser.LengthContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#length}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#length}.
 	 * @param ctx the parse tree
 	 */
-	void exitLength(SQLParser.LengthContext ctx);
+	void exitLength(DB2zSQLParser.LengthContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#ccsidQualifier}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ccsidQualifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterCcsidQualifier(SQLParser.CcsidQualifierContext ctx);
+	void enterCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#ccsidQualifier}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ccsidQualifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitCcsidQualifier(SQLParser.CcsidQualifierContext ctx);
+	void exitCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#forDataQualfier}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#forDataQualfier}.
 	 * @param ctx the parse tree
 	 */
-	void enterForDataQualfier(SQLParser.ForDataQualfierContext ctx);
+	void enterForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#forDataQualfier}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#forDataQualfier}.
 	 * @param ctx the parse tree
 	 */
-	void exitForDataQualfier(SQLParser.ForDataQualfierContext ctx);
+	void exitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#distinctTypeName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#distinctTypeName}.
 	 * @param ctx the parse tree
 	 */
-	void enterDistinctTypeName(SQLParser.DistinctTypeNameContext ctx);
+	void enterDistinctTypeName(DB2zSQLParser.DistinctTypeNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#distinctTypeName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#distinctTypeName}.
 	 * @param ctx the parse tree
 	 */
-	void exitDistinctTypeName(SQLParser.DistinctTypeNameContext ctx);
+	void exitDistinctTypeName(DB2zSQLParser.DistinctTypeNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#arrayType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void enterArrayType(SQLParser.ArrayTypeContext ctx);
+	void enterArrayType(DB2zSQLParser.ArrayTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#arrayType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayType}.
 	 * @param ctx the parse tree
 	 */
-	void exitArrayType(SQLParser.ArrayTypeContext ctx);
+	void exitArrayType(DB2zSQLParser.ArrayTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#literal}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#literal}.
 	 * @param ctx the parse tree
 	 */
-	void enterLiteral(SQLParser.LiteralContext ctx);
+	void enterLiteral(DB2zSQLParser.LiteralContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#literal}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#literal}.
 	 * @param ctx the parse tree
 	 */
-	void exitLiteral(SQLParser.LiteralContext ctx);
+	void exitLiteral(DB2zSQLParser.LiteralContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#ccsidValue}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ccsidValue}.
 	 * @param ctx the parse tree
 	 */
-	void enterCcsidValue(SQLParser.CcsidValueContext ctx);
+	void enterCcsidValue(DB2zSQLParser.CcsidValueContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#ccsidValue}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ccsidValue}.
 	 * @param ctx the parse tree
 	 */
-	void exitCcsidValue(SQLParser.CcsidValueContext ctx);
+	void exitCcsidValue(DB2zSQLParser.CcsidValueContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#columnName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#columnName}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnName(SQLParser.ColumnNameContext ctx);
+	void enterColumnName(DB2zSQLParser.ColumnNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#columnName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#columnName}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnName(SQLParser.ColumnNameContext ctx);
+	void exitColumnName(DB2zSQLParser.ColumnNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#newColumnName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#newColumnName}.
 	 * @param ctx the parse tree
 	 */
-	void enterNewColumnName(SQLParser.NewColumnNameContext ctx);
+	void enterNewColumnName(DB2zSQLParser.NewColumnNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#newColumnName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#newColumnName}.
 	 * @param ctx the parse tree
 	 */
-	void exitNewColumnName(SQLParser.NewColumnNameContext ctx);
+	void exitNewColumnName(DB2zSQLParser.NewColumnNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#correlationName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#correlationName}.
 	 * @param ctx the parse tree
 	 */
-	void enterCorrelationName(SQLParser.CorrelationNameContext ctx);
+	void enterCorrelationName(DB2zSQLParser.CorrelationNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#correlationName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#correlationName}.
 	 * @param ctx the parse tree
 	 */
-	void exitCorrelationName(SQLParser.CorrelationNameContext ctx);
+	void exitCorrelationName(DB2zSQLParser.CorrelationNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#locationName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#locationName}.
 	 * @param ctx the parse tree
 	 */
-	void enterLocationName(SQLParser.LocationNameContext ctx);
+	void enterLocationName(DB2zSQLParser.LocationNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#locationName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#locationName}.
 	 * @param ctx the parse tree
 	 */
-	void exitLocationName(SQLParser.LocationNameContext ctx);
+	void exitLocationName(DB2zSQLParser.LocationNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#schemaName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#schemaName}.
 	 * @param ctx the parse tree
 	 */
-	void enterSchemaName(SQLParser.SchemaNameContext ctx);
+	void enterSchemaName(DB2zSQLParser.SchemaNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#schemaName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#schemaName}.
 	 * @param ctx the parse tree
 	 */
-	void exitSchemaName(SQLParser.SchemaNameContext ctx);
+	void exitSchemaName(DB2zSQLParser.SchemaNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#tableName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableName}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableName(SQLParser.TableNameContext ctx);
+	void enterTableName(DB2zSQLParser.TableNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#tableName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableName}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableName(SQLParser.TableNameContext ctx);
+	void exitTableName(DB2zSQLParser.TableNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#indexName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#indexName}.
 	 * @param ctx the parse tree
 	 */
-	void enterIndexName(SQLParser.IndexNameContext ctx);
+	void enterIndexName(DB2zSQLParser.IndexNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#indexName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#indexName}.
 	 * @param ctx the parse tree
 	 */
-	void exitIndexName(SQLParser.IndexNameContext ctx);
+	void exitIndexName(DB2zSQLParser.IndexNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#maskName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#maskName}.
 	 * @param ctx the parse tree
 	 */
-	void enterMaskName(SQLParser.MaskNameContext ctx);
+	void enterMaskName(DB2zSQLParser.MaskNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#maskName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#maskName}.
 	 * @param ctx the parse tree
 	 */
-	void exitMaskName(SQLParser.MaskNameContext ctx);
+	void exitMaskName(DB2zSQLParser.MaskNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#permissionName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#permissionName}.
 	 * @param ctx the parse tree
 	 */
-	void enterPermissionName(SQLParser.PermissionNameContext ctx);
+	void enterPermissionName(DB2zSQLParser.PermissionNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#permissionName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#permissionName}.
 	 * @param ctx the parse tree
 	 */
-	void exitPermissionName(SQLParser.PermissionNameContext ctx);
+	void exitPermissionName(DB2zSQLParser.PermissionNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#databaseName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree
 	 */
-	void enterDatabaseName(SQLParser.DatabaseNameContext ctx);
+	void enterDatabaseName(DB2zSQLParser.DatabaseNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#databaseName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree
 	 */
-	void exitDatabaseName(SQLParser.DatabaseNameContext ctx);
+	void exitDatabaseName(DB2zSQLParser.DatabaseNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#catalogName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree
 	 */
-	void enterCatalogName(SQLParser.CatalogNameContext ctx);
+	void enterCatalogName(DB2zSQLParser.CatalogNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#catalogName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree
 	 */
-	void exitCatalogName(SQLParser.CatalogNameContext ctx);
+	void exitCatalogName(DB2zSQLParser.CatalogNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#bpName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree
 	 */
-	void enterBpName(SQLParser.BpNameContext ctx);
+	void enterBpName(DB2zSQLParser.BpNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#bpName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree
 	 */
-	void exitBpName(SQLParser.BpNameContext ctx);
+	void exitBpName(DB2zSQLParser.BpNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#stogroupName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#stogroupName}.
 	 * @param ctx the parse tree
 	 */
-	void enterStogroupName(SQLParser.StogroupNameContext ctx);
+	void enterStogroupName(DB2zSQLParser.StogroupNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#stogroupName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#stogroupName}.
 	 * @param ctx the parse tree
 	 */
-	void exitStogroupName(SQLParser.StogroupNameContext ctx);
+	void exitStogroupName(DB2zSQLParser.StogroupNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#functionName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#functionName}.
 	 * @param ctx the parse tree
 	 */
-	void enterFunctionName(SQLParser.FunctionNameContext ctx);
+	void enterFunctionName(DB2zSQLParser.FunctionNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#functionName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#functionName}.
 	 * @param ctx the parse tree
 	 */
-	void exitFunctionName(SQLParser.FunctionNameContext ctx);
+	void exitFunctionName(DB2zSQLParser.FunctionNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#specificName}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#specificName}.
 	 * @param ctx the parse tree
 	 */
-	void enterSpecificName(SQLParser.SpecificNameContext ctx);
+	void enterSpecificName(DB2zSQLParser.SpecificNameContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#specificName}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#specificName}.
 	 * @param ctx the parse tree
 	 */
-	void exitSpecificName(SQLParser.SpecificNameContext ctx);
+	void exitSpecificName(DB2zSQLParser.SpecificNameContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#hostVariable}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#hostVariable}.
 	 * @param ctx the parse tree
 	 */
-	void enterHostVariable(SQLParser.HostVariableContext ctx);
+	void enterHostVariable(DB2zSQLParser.HostVariableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#hostVariable}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#hostVariable}.
 	 * @param ctx the parse tree
 	 */
-	void exitHostVariable(SQLParser.HostVariableContext ctx);
+	void exitHostVariable(DB2zSQLParser.HostVariableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#hostIdentifier}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#hostIdentifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterHostIdentifier(SQLParser.HostIdentifierContext ctx);
+	void enterHostIdentifier(DB2zSQLParser.HostIdentifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#hostIdentifier}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#hostIdentifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitHostIdentifier(SQLParser.HostIdentifierContext ctx);
+	void exitHostIdentifier(DB2zSQLParser.HostIdentifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#hostStructure}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#hostStructure}.
 	 * @param ctx the parse tree
 	 */
-	void enterHostStructure(SQLParser.HostStructureContext ctx);
+	void enterHostStructure(DB2zSQLParser.HostStructureContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#hostStructure}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#hostStructure}.
 	 * @param ctx the parse tree
 	 */
-	void exitHostStructure(SQLParser.HostStructureContext ctx);
+	void exitHostStructure(DB2zSQLParser.HostStructureContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#variable}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void enterVariable(SQLParser.VariableContext ctx);
+	void enterVariable(DB2zSQLParser.VariableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#variable}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#variable}.
 	 * @param ctx the parse tree
 	 */
-	void exitVariable(SQLParser.VariableContext ctx);
+	void exitVariable(DB2zSQLParser.VariableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#intoClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#intoClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterIntoClause(SQLParser.IntoClauseContext ctx);
+	void enterIntoClause(DB2zSQLParser.IntoClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#intoClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#intoClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitIntoClause(SQLParser.IntoClauseContext ctx);
+	void exitIntoClause(DB2zSQLParser.IntoClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#correlationClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#correlationClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterCorrelationClause(SQLParser.CorrelationClauseContext ctx);
+	void enterCorrelationClause(DB2zSQLParser.CorrelationClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#correlationClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#correlationClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitCorrelationClause(SQLParser.CorrelationClauseContext ctx);
+	void exitCorrelationClause(DB2zSQLParser.CorrelationClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#fromClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fromClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterFromClause(SQLParser.FromClauseContext ctx);
+	void enterFromClause(DB2zSQLParser.FromClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#fromClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fromClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitFromClause(SQLParser.FromClauseContext ctx);
+	void exitFromClause(DB2zSQLParser.FromClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#tableReference}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableReference(SQLParser.TableReferenceContext ctx);
+	void enterTableReference(DB2zSQLParser.TableReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#tableReference}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableReference(SQLParser.TableReferenceContext ctx);
+	void exitTableReference(DB2zSQLParser.TableReferenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#singleTableReference}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#singleTableReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterSingleTableReference(SQLParser.SingleTableReferenceContext ctx);
+	void enterSingleTableReference(DB2zSQLParser.SingleTableReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#singleTableReference}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#singleTableReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitSingleTableReference(SQLParser.SingleTableReferenceContext ctx);
+	void exitSingleTableReference(DB2zSQLParser.SingleTableReferenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#periodSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#periodSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void enterPeriodSpecification(SQLParser.PeriodSpecificationContext ctx);
+	void enterPeriodSpecification(DB2zSQLParser.PeriodSpecificationContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#periodSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#periodSpecification}.
 	 * @param ctx the parse tree
 	 */
-	void exitPeriodSpecification(SQLParser.PeriodSpecificationContext ctx);
+	void exitPeriodSpecification(DB2zSQLParser.PeriodSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#periodClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#periodClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterPeriodClause(SQLParser.PeriodClauseContext ctx);
+	void enterPeriodClause(DB2zSQLParser.PeriodClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#periodClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#periodClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitPeriodClause(SQLParser.PeriodClauseContext ctx);
+	void exitPeriodClause(DB2zSQLParser.PeriodClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#nestedTableExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#nestedTableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterNestedTableExpression(SQLParser.NestedTableExpressionContext ctx);
+	void enterNestedTableExpression(DB2zSQLParser.NestedTableExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#nestedTableExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#nestedTableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitNestedTableExpression(SQLParser.NestedTableExpressionContext ctx);
+	void exitNestedTableExpression(DB2zSQLParser.NestedTableExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#dataChangeTableReference}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dataChangeTableReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterDataChangeTableReference(SQLParser.DataChangeTableReferenceContext ctx);
+	void enterDataChangeTableReference(DB2zSQLParser.DataChangeTableReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#dataChangeTableReference}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dataChangeTableReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitDataChangeTableReference(SQLParser.DataChangeTableReferenceContext ctx);
+	void exitDataChangeTableReference(DB2zSQLParser.DataChangeTableReferenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#tableFunctionReference}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableFunctionReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableFunctionReference(SQLParser.TableFunctionReferenceContext ctx);
+	void enterTableFunctionReference(DB2zSQLParser.TableFunctionReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#tableFunctionReference}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableFunctionReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableFunctionReference(SQLParser.TableFunctionReferenceContext ctx);
+	void exitTableFunctionReference(DB2zSQLParser.TableFunctionReferenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#tableUdfCardinalityClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableUdfCardinalityClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableUdfCardinalityClause(SQLParser.TableUdfCardinalityClauseContext ctx);
+	void enterTableUdfCardinalityClause(DB2zSQLParser.TableUdfCardinalityClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#tableUdfCardinalityClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableUdfCardinalityClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableUdfCardinalityClause(SQLParser.TableUdfCardinalityClauseContext ctx);
+	void exitTableUdfCardinalityClause(DB2zSQLParser.TableUdfCardinalityClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#typedCorrelationClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#typedCorrelationClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterTypedCorrelationClause(SQLParser.TypedCorrelationClauseContext ctx);
+	void enterTypedCorrelationClause(DB2zSQLParser.TypedCorrelationClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#typedCorrelationClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#typedCorrelationClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitTypedCorrelationClause(SQLParser.TypedCorrelationClauseContext ctx);
+	void exitTypedCorrelationClause(DB2zSQLParser.TypedCorrelationClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#tableLocatorReference}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableLocatorReference}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableLocatorReference(SQLParser.TableLocatorReferenceContext ctx);
+	void enterTableLocatorReference(DB2zSQLParser.TableLocatorReferenceContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#tableLocatorReference}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableLocatorReference}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableLocatorReference(SQLParser.TableLocatorReferenceContext ctx);
+	void exitTableLocatorReference(DB2zSQLParser.TableLocatorReferenceContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#xmltableExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmltableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterXmltableExpression(SQLParser.XmltableExpressionContext ctx);
+	void enterXmltableExpression(DB2zSQLParser.XmltableExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#xmltableExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmltableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitXmltableExpression(SQLParser.XmltableExpressionContext ctx);
+	void exitXmltableExpression(DB2zSQLParser.XmltableExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#collectionDerivedTable}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#collectionDerivedTable}.
 	 * @param ctx the parse tree
 	 */
-	void enterCollectionDerivedTable(SQLParser.CollectionDerivedTableContext ctx);
+	void enterCollectionDerivedTable(DB2zSQLParser.CollectionDerivedTableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#collectionDerivedTable}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#collectionDerivedTable}.
 	 * @param ctx the parse tree
 	 */
-	void exitCollectionDerivedTable(SQLParser.CollectionDerivedTableContext ctx);
+	void exitCollectionDerivedTable(DB2zSQLParser.CollectionDerivedTableContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#joinCondition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#joinCondition}.
 	 * @param ctx the parse tree
 	 */
-	void enterJoinCondition(SQLParser.JoinConditionContext ctx);
+	void enterJoinCondition(DB2zSQLParser.JoinConditionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#joinCondition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#joinCondition}.
 	 * @param ctx the parse tree
 	 */
-	void exitJoinCondition(SQLParser.JoinConditionContext ctx);
+	void exitJoinCondition(DB2zSQLParser.JoinConditionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#fullJoinExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fullJoinExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterFullJoinExpression(SQLParser.FullJoinExpressionContext ctx);
+	void enterFullJoinExpression(DB2zSQLParser.FullJoinExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#fullJoinExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fullJoinExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitFullJoinExpression(SQLParser.FullJoinExpressionContext ctx);
+	void exitFullJoinExpression(DB2zSQLParser.FullJoinExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#castFunction}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#castFunction}.
 	 * @param ctx the parse tree
 	 */
-	void enterCastFunction(SQLParser.CastFunctionContext ctx);
+	void enterCastFunction(DB2zSQLParser.CastFunctionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#castFunction}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#castFunction}.
 	 * @param ctx the parse tree
 	 */
-	void exitCastFunction(SQLParser.CastFunctionContext ctx);
+	void exitCastFunction(DB2zSQLParser.CastFunctionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#ordinaryArrayExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ordinaryArrayExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrdinaryArrayExpression(SQLParser.OrdinaryArrayExpressionContext ctx);
+	void enterOrdinaryArrayExpression(DB2zSQLParser.OrdinaryArrayExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#ordinaryArrayExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ordinaryArrayExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrdinaryArrayExpression(SQLParser.OrdinaryArrayExpressionContext ctx);
+	void exitOrdinaryArrayExpression(DB2zSQLParser.OrdinaryArrayExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#associativeArrayExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#associativeArrayExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterAssociativeArrayExpression(SQLParser.AssociativeArrayExpressionContext ctx);
+	void enterAssociativeArrayExpression(DB2zSQLParser.AssociativeArrayExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#associativeArrayExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#associativeArrayExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitAssociativeArrayExpression(SQLParser.AssociativeArrayExpressionContext ctx);
+	void exitAssociativeArrayExpression(DB2zSQLParser.AssociativeArrayExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#comparison}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void enterComparison(SQLParser.ComparisonContext ctx);
+	void enterComparison(DB2zSQLParser.ComparisonContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#comparison}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#comparison}.
 	 * @param ctx the parse tree
 	 */
-	void exitComparison(SQLParser.ComparisonContext ctx);
+	void exitComparison(DB2zSQLParser.ComparisonContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#whereClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#whereClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterWhereClause(SQLParser.WhereClauseContext ctx);
+	void enterWhereClause(DB2zSQLParser.WhereClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#whereClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#whereClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitWhereClause(SQLParser.WhereClauseContext ctx);
+	void exitWhereClause(DB2zSQLParser.WhereClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupByClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupByClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupByClause(SQLParser.GroupByClauseContext ctx);
+	void enterGroupByClause(DB2zSQLParser.GroupByClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupByClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupByClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupByClause(SQLParser.GroupByClauseContext ctx);
+	void exitGroupByClause(DB2zSQLParser.GroupByClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#havingClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#havingClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterHavingClause(SQLParser.HavingClauseContext ctx);
+	void enterHavingClause(DB2zSQLParser.HavingClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#havingClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#havingClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitHavingClause(SQLParser.HavingClauseContext ctx);
+	void exitHavingClause(DB2zSQLParser.HavingClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupingExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupingExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupingExpression(SQLParser.GroupingExpressionContext ctx);
+	void enterGroupingExpression(DB2zSQLParser.GroupingExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupingExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupingExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupingExpression(SQLParser.GroupingExpressionContext ctx);
+	void exitGroupingExpression(DB2zSQLParser.GroupingExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupingSets}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupingSets}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupingSets(SQLParser.GroupingSetsContext ctx);
+	void enterGroupingSets(DB2zSQLParser.GroupingSetsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupingSets}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupingSets}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupingSets(SQLParser.GroupingSetsContext ctx);
+	void exitGroupingSets(DB2zSQLParser.GroupingSetsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#groupingSetsGroup}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#groupingSetsGroup}.
 	 * @param ctx the parse tree
 	 */
-	void enterGroupingSetsGroup(SQLParser.GroupingSetsGroupContext ctx);
+	void enterGroupingSetsGroup(DB2zSQLParser.GroupingSetsGroupContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#groupingSetsGroup}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#groupingSetsGroup}.
 	 * @param ctx the parse tree
 	 */
-	void exitGroupingSetsGroup(SQLParser.GroupingSetsGroupContext ctx);
+	void exitGroupingSetsGroup(DB2zSQLParser.GroupingSetsGroupContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#superGroups}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#superGroups}.
 	 * @param ctx the parse tree
 	 */
-	void enterSuperGroups(SQLParser.SuperGroupsContext ctx);
+	void enterSuperGroups(DB2zSQLParser.SuperGroupsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#superGroups}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#superGroups}.
 	 * @param ctx the parse tree
 	 */
-	void exitSuperGroups(SQLParser.SuperGroupsContext ctx);
+	void exitSuperGroups(DB2zSQLParser.SuperGroupsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#selectColumns}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#selectColumns}.
 	 * @param ctx the parse tree
 	 */
-	void enterSelectColumns(SQLParser.SelectColumnsContext ctx);
+	void enterSelectColumns(DB2zSQLParser.SelectColumnsContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#selectColumns}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#selectColumns}.
 	 * @param ctx the parse tree
 	 */
-	void exitSelectColumns(SQLParser.SelectColumnsContext ctx);
+	void exitSelectColumns(DB2zSQLParser.SelectColumnsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#unpackedRow}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#unpackedRow}.
 	 * @param ctx the parse tree
 	 */
-	void enterUnpackedRow(SQLParser.UnpackedRowContext ctx);
+	void enterUnpackedRow(DB2zSQLParser.UnpackedRowContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#unpackedRow}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#unpackedRow}.
 	 * @param ctx the parse tree
 	 */
-	void exitUnpackedRow(SQLParser.UnpackedRowContext ctx);
+	void exitUnpackedRow(DB2zSQLParser.UnpackedRowContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#selectClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#selectClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterSelectClause(SQLParser.SelectClauseContext ctx);
+	void enterSelectClause(DB2zSQLParser.SelectClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#selectClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#selectClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitSelectClause(SQLParser.SelectClauseContext ctx);
+	void exitSelectClause(DB2zSQLParser.SelectClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#subSelect}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#subSelect}.
 	 * @param ctx the parse tree
 	 */
-	void enterSubSelect(SQLParser.SubSelectContext ctx);
+	void enterSubSelect(DB2zSQLParser.SubSelectContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#subSelect}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#subSelect}.
 	 * @param ctx the parse tree
 	 */
-	void exitSubSelect(SQLParser.SubSelectContext ctx);
+	void exitSubSelect(DB2zSQLParser.SubSelectContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#selectIntoStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#selectIntoStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterSelectIntoStatement(SQLParser.SelectIntoStatementContext ctx);
+	void enterSelectIntoStatement(DB2zSQLParser.SelectIntoStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#selectIntoStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#selectIntoStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitSelectIntoStatement(SQLParser.SelectIntoStatementContext ctx);
+	void exitSelectIntoStatement(DB2zSQLParser.SelectIntoStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#selectStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#selectStatement}.
 	 * @param ctx the parse tree
 	 */
-	void enterSelectStatement(SQLParser.SelectStatementContext ctx);
+	void enterSelectStatement(DB2zSQLParser.SelectStatementContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#selectStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#selectStatement}.
 	 * @param ctx the parse tree
 	 */
-	void exitSelectStatement(SQLParser.SelectStatementContext ctx);
+	void exitSelectStatement(DB2zSQLParser.SelectStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#commonTableExpression}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#commonTableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void enterCommonTableExpression(SQLParser.CommonTableExpressionContext ctx);
+	void enterCommonTableExpression(DB2zSQLParser.CommonTableExpressionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#commonTableExpression}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#commonTableExpression}.
 	 * @param ctx the parse tree
 	 */
-	void exitCommonTableExpression(SQLParser.CommonTableExpressionContext ctx);
+	void exitCommonTableExpression(DB2zSQLParser.CommonTableExpressionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#updateClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#updateClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterUpdateClause(SQLParser.UpdateClauseContext ctx);
+	void enterUpdateClause(DB2zSQLParser.UpdateClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#updateClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#updateClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitUpdateClause(SQLParser.UpdateClauseContext ctx);
+	void exitUpdateClause(DB2zSQLParser.UpdateClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#readOnlyClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#readOnlyClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterReadOnlyClause(SQLParser.ReadOnlyClauseContext ctx);
+	void enterReadOnlyClause(DB2zSQLParser.ReadOnlyClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#readOnlyClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#readOnlyClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitReadOnlyClause(SQLParser.ReadOnlyClauseContext ctx);
+	void exitReadOnlyClause(DB2zSQLParser.ReadOnlyClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#optimizeClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#optimizeClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterOptimizeClause(SQLParser.OptimizeClauseContext ctx);
+	void enterOptimizeClause(DB2zSQLParser.OptimizeClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#optimizeClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#optimizeClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitOptimizeClause(SQLParser.OptimizeClauseContext ctx);
+	void exitOptimizeClause(DB2zSQLParser.OptimizeClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#isolationClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#isolationClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterIsolationClause(SQLParser.IsolationClauseContext ctx);
+	void enterIsolationClause(DB2zSQLParser.IsolationClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#isolationClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#isolationClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitIsolationClause(SQLParser.IsolationClauseContext ctx);
+	void exitIsolationClause(DB2zSQLParser.IsolationClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#lockClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#lockClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterLockClause(SQLParser.LockClauseContext ctx);
+	void enterLockClause(DB2zSQLParser.LockClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#lockClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#lockClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitLockClause(SQLParser.LockClauseContext ctx);
+	void exitLockClause(DB2zSQLParser.LockClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#skipLockedDataClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#skipLockedDataClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterSkipLockedDataClause(SQLParser.SkipLockedDataClauseContext ctx);
+	void enterSkipLockedDataClause(DB2zSQLParser.SkipLockedDataClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#skipLockedDataClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#skipLockedDataClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitSkipLockedDataClause(SQLParser.SkipLockedDataClauseContext ctx);
+	void exitSkipLockedDataClause(DB2zSQLParser.SkipLockedDataClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#querynoClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#querynoClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterQuerynoClause(SQLParser.QuerynoClauseContext ctx);
+	void enterQuerynoClause(DB2zSQLParser.QuerynoClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#querynoClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#querynoClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitQuerynoClause(SQLParser.QuerynoClauseContext ctx);
+	void exitQuerynoClause(DB2zSQLParser.QuerynoClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#scalarFullSelect}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#scalarFullSelect}.
 	 * @param ctx the parse tree
 	 */
-	void enterScalarFullSelect(SQLParser.ScalarFullSelectContext ctx);
+	void enterScalarFullSelect(DB2zSQLParser.ScalarFullSelectContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#scalarFullSelect}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#scalarFullSelect}.
 	 * @param ctx the parse tree
 	 */
-	void exitScalarFullSelect(SQLParser.ScalarFullSelectContext ctx);
+	void exitScalarFullSelect(DB2zSQLParser.ScalarFullSelectContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#fullSelect}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fullSelect}.
 	 * @param ctx the parse tree
 	 */
-	void enterFullSelect(SQLParser.FullSelectContext ctx);
+	void enterFullSelect(DB2zSQLParser.FullSelectContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#fullSelect}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fullSelect}.
 	 * @param ctx the parse tree
 	 */
-	void exitFullSelect(SQLParser.FullSelectContext ctx);
+	void exitFullSelect(DB2zSQLParser.FullSelectContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#valuesClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterValuesClause(SQLParser.ValuesClauseContext ctx);
+	void enterValuesClause(DB2zSQLParser.ValuesClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#valuesClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitValuesClause(SQLParser.ValuesClauseContext ctx);
+	void exitValuesClause(DB2zSQLParser.ValuesClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#orderByClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#orderByClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterOrderByClause(SQLParser.OrderByClauseContext ctx);
+	void enterOrderByClause(DB2zSQLParser.OrderByClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#orderByClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#orderByClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitOrderByClause(SQLParser.OrderByClauseContext ctx);
+	void exitOrderByClause(DB2zSQLParser.OrderByClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#sortKey}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sortKey}.
 	 * @param ctx the parse tree
 	 */
-	void enterSortKey(SQLParser.SortKeyContext ctx);
+	void enterSortKey(DB2zSQLParser.SortKeyContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#sortKey}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sortKey}.
 	 * @param ctx the parse tree
 	 */
-	void exitSortKey(SQLParser.SortKeyContext ctx);
+	void exitSortKey(DB2zSQLParser.SortKeyContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#offsetClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#offsetClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterOffsetClause(SQLParser.OffsetClauseContext ctx);
+	void enterOffsetClause(DB2zSQLParser.OffsetClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#offsetClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#offsetClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitOffsetClause(SQLParser.OffsetClauseContext ctx);
+	void exitOffsetClause(DB2zSQLParser.OffsetClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#fetchClause}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fetchClause}.
 	 * @param ctx the parse tree
 	 */
-	void enterFetchClause(SQLParser.FetchClauseContext ctx);
+	void enterFetchClause(DB2zSQLParser.FetchClauseContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#fetchClause}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fetchClause}.
 	 * @param ctx the parse tree
 	 */
-	void exitFetchClause(SQLParser.FetchClauseContext ctx);
+	void exitFetchClause(DB2zSQLParser.FetchClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#identifier}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#identifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterIdentifier(SQLParser.IdentifierContext ctx);
+	void enterIdentifier(DB2zSQLParser.IdentifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#identifier}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#identifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitIdentifier(SQLParser.IdentifierContext ctx);
+	void exitIdentifier(DB2zSQLParser.IdentifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link SQLParser#sqlKeyword}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree
 	 */
-	void enterSqlKeyword(SQLParser.SqlKeywordContext ctx);
+	void enterSqlKeyword(DB2zSQLParser.SqlKeywordContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link SQLParser#sqlKeyword}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree
 	 */
-	void exitSqlKeyword(SQLParser.SqlKeywordContext ctx);
+	void exitSqlKeyword(DB2zSQLParser.SqlKeywordContext ctx);
 }
