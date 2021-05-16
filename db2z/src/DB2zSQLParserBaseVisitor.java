@@ -156,6 +156,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -409,6 +416,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1172,6 +1186,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitProcedureName(DB2zSQLParser.ProcedureNameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitSequenceName(DB2zSQLParser.SequenceNameContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

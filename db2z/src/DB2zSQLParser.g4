@@ -17,6 +17,8 @@ an application program.
 This grammar does not include SQL/PL or the following SQL statements.
 
 ALTER FUNCTION (compiled SQL scalar)
+ALTER PROCEDURE (SQL - external)
+ALTER PROCEDURE (SQL - native)
 
 */
 
@@ -38,6 +40,7 @@ sqlStatement
 	| alterMaskStatement
 	| alterPermissionStatement
 	| alterProcedureStatement
+	| alterSequenceStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -154,6 +157,12 @@ alterPermissionStatement
 alterProcedureStatement
 	: (
 	ALTER PROCEDURE procedureName procedureOptionList+
+	)
+	;
+
+alterSequenceStatement
+	: (
+	ALTER SEQUENCE sequenceName sequenceOptionList+
 	)
 	;
 
@@ -458,6 +467,18 @@ procedureOptionList
 	| (NULL CALL)
 	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
 	| ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
+	)
+	;
+
+sequenceOptionList
+	: (
+	(RESTART (WITH INTEGERLITERAL)?)
+	| (INCREMENT BY INTEGERLITERAL)
+	| ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
+	| ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
+	| (NO? CYCLE)
+	| ((NO CACHE) | (CACHE INTEGERLITERAL))
+	| (NO? ORDER)
 	)
 	;
 
@@ -1536,6 +1557,10 @@ procedureName
 	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier
 	;
 
+sequenceName
+	: (schemaName DOT)? identifier
+	;
+
 databaseName
 	: identifier
 	;
@@ -2458,6 +2483,10 @@ sqlKeyword
 	| GENERAL
 	| MODE_
 	| REXX
+	| CACHE
+	| CYCLE
+	| INCREMENT
+	| RESTART
 	)
 	;
 

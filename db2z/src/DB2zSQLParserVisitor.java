@@ -130,6 +130,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterSequenceStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -351,6 +357,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
@@ -1005,6 +1017,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProcedureName(DB2zSQLParser.ProcedureNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequenceName(DB2zSQLParser.SequenceNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree

@@ -1988,6 +1988,22 @@ REXX
 	: R E X X
 	;
 
+CACHE
+	: C A C H E
+	;
+
+CYCLE
+	: C Y C L E
+	;
+
+INCREMENT
+	: I N C R E M E N T
+	;
+
+RESTART
+	: R E S T A R T
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

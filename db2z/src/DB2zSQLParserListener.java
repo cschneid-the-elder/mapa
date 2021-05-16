@@ -207,6 +207,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterSequenceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterSequenceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -576,6 +586,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
@@ -1666,6 +1686,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProcedureName(DB2zSQLParser.ProcedureNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceName}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequenceName(DB2zSQLParser.SequenceNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceName}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequenceName(DB2zSQLParser.SequenceNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree

@@ -255,6 +255,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -694,6 +706,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2002,6 +2026,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProcedureName(DB2zSQLParser.ProcedureNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSequenceName(DB2zSQLParser.SequenceNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSequenceName(DB2zSQLParser.SequenceNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
