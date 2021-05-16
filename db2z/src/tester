@@ -25,8 +25,8 @@ function testLexAndParse {
 
 export kind=DB2zSQL
 export myRC=0
-export tmp01=/tmp/$(date +%Y%m%d%H%M%S).$$.mapajcl01
-export tmp02=/tmp/$(date +%Y%m%d%H%M%S).$$.mapajcl02
+export tmp01=/tmp/$(date +%Y%m%d%H%M%S).$$.mapadb2z01
+export tmp02=/tmp/$(date +%Y%m%d%H%M%S).$$.mapadb2z02
 if [ "$1" = "all" ]
 then
   ls -Al testdata/sql_* | awk '{print $9}' > $tmp01
