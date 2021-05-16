@@ -1,0 +1,26 @@
+#! /usr/bin/awk -f
+
+#generate ANTLR keywords
+#input:
+#ACOS
+#ATAN
+#output:
+#	: (
+#	ACOS
+#	| ATAN
+#	)
+#	;
+
+{
+	if (length($0) > 0) {
+		gsub(" ", "_")
+		if (NR == 1) {
+			printf("\t: (\n")
+			printf("\t%s\n", $0)
+		} else {
+			printf("\t| %s\n", $0)
+		}
+	}
+}
+
+END { printf("\t)\n\t;\n") }

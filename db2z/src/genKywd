@@ -1,0 +1,26 @@
+#! /usr/bin/awk -f
+
+#generate ANTLR keywords
+#input:
+#SELECT
+#output:
+#SELECT: S E L E C T ;
+
+{
+	if (length($0) > 0) {
+		split($0, chars, "")
+		t = $0;
+		gsub(" ", "_", t)
+		printf("%s\n\t:", t)
+		for (i=0; i<=length($0); i++) {
+			if (chars[i] == "_") {
+				printf("'_' ");
+			} else if (chars[i] == " ") {
+				printf("[ ]+ ");
+			} else {
+				printf("%s ", chars[i])
+			}
+		}
+		printf("\n\t;\n\n");
+	}
+}
