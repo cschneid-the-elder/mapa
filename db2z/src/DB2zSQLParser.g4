@@ -37,6 +37,7 @@ sqlStatement
 	| alterIndexStatement
 	| alterMaskStatement
 	| alterPermissionStatement
+	| alterProcedureStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -126,7 +127,7 @@ alterFunctionStatement
 		((FUNCTION functionName (LPAREN parameterType (COMMA parameterType)* RPAREN)?) 
 		| (SPECIFIC FUNCTION specificName))
 	RESTRICT?
-	optionList+
+	functionOptionList+
 	)
 	;
 
@@ -147,6 +148,12 @@ alterMaskStatement
 alterPermissionStatement
 	: (
 	ALTER PERMISSION permissionName (ENABLE | DISABLE | regenerateClause)
+	)
+	;
+
+alterProcedureStatement
+	: (
+	ALTER PROCEDURE procedureName procedureOptionList+
 	)
 	;
 
@@ -394,7 +401,7 @@ parameterType
 	: (dataType (AS LOCATOR)?)
 	;
 
-optionList
+functionOptionList
 	: (
 	(EXTERNAL NAME (externalProgramName | identifier))
 	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | SQL))
@@ -424,6 +431,33 @@ optionList
 	| (NOT? SECURED)
 	| SPECIFIC
 	| (PARAMETER CCSID)
+	)
+	;
+
+procedureOptionList
+	: (
+	(DYNAMIC? RESULT (SET |SETS) INTEGERLITERAL)
+	| (EXTERNAL NAME (externalProgramName | identifier))
+	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | REXX))
+	| (PARAMETER STYLE (SQL | DB2SQL | (STANDARD CALL) | GENERAL | (SIMPLE CALL) | ((GENERAL | (SIMPLE CALL)) WITH NULLS) | JAVA))
+	| (NOT? DETERMINISTIC)
+	| (NOT? VARIANT)
+	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
+	| ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
+	| (NO? DBINFO)
+	| ((NO COLLID) | (COLLID collectionID))
+	| (WLM ENVIRONMENT (identifier | (LPAREN identifier COMMA SPLAT RPAREN)))
+	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
+	| (STAY RESIDENT (NO | YES))
+	| (PROGRAM TYPE (SUB | MAIN))
+	| (SECURITY (DB2 | USER | DEFINER))
+	| (RUN OPTIONS runTimeOptions)
+	| (COMMIT ON RETURN (NO | YES))
+	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
+	| (CALLED ON NULL INPUT)
+	| (NULL CALL)
+	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
+	| ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
 	)
 	;
 
@@ -1498,6 +1532,10 @@ permissionName
 	: (schemaName DOT)? identifier
 	;
 
+procedureName
+	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier
+	;
+
 databaseName
 	: identifier
 	;
@@ -2415,6 +2453,11 @@ sqlKeyword
 	| MESSAGE_TEXT
 	| OVERRIDING
 	| PORTION
+	| DB2SQL
+	| DEBUG
+	| GENERAL
+	| MODE_
+	| REXX
 	)
 	;
 

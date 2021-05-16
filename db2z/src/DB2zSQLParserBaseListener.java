@@ -243,6 +243,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -663,13 +675,25 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterOptionList(DB2zSQLParser.OptionListContext ctx) { }
+	@Override public void enterFunctionOptionList(DB2zSQLParser.FunctionOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitOptionList(DB2zSQLParser.OptionListContext ctx) { }
+	@Override public void exitFunctionOptionList(DB2zSQLParser.FunctionOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1966,6 +1990,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitPermissionName(DB2zSQLParser.PermissionNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProcedureName(DB2zSQLParser.ProcedureNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProcedureName(DB2zSQLParser.ProcedureNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

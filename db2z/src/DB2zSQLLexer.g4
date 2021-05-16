@@ -1968,6 +1968,26 @@ PORTION
 	: P O R T I O N
 	;
 
+DB2SQL
+	: D B '2' S Q L
+	;
+
+DEBUG
+	: D E B U G
+	;
+
+GENERAL
+	: G E N E R A L
+	;
+
+MODE_
+	: M O D E
+	;
+
+REXX
+	: R E X X
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

@@ -124,6 +124,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterPermissionStatement(DB2zSQLParser.AlterPermissionStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterProcedureStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -334,11 +340,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#optionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitOptionList(DB2zSQLParser.OptionListContext ctx);
+	T visitFunctionOptionList(DB2zSQLParser.FunctionOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#procedureOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcedureOptionList(DB2zSQLParser.ProcedureOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
@@ -987,6 +999,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPermissionName(DB2zSQLParser.PermissionNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#procedureName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcedureName(DB2zSQLParser.ProcedureNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree
