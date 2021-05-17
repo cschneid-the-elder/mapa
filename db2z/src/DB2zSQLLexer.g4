@@ -2004,6 +2004,22 @@ RESTART
 	: R E S T A R T
 	;
 
+DATACLAS
+	: D A T A C L A S
+	;
+
+MGMTCLAS
+	: M G M T C L A S
+	;
+
+REMOVE
+	: R E M O V E
+	;
+
+STORCLAS
+	: S T O R C L A S
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

@@ -136,6 +136,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterStogroupStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterStogroupStatement(DB2zSQLParser.AlterStogroupStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -363,6 +369,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStogroupOptionList(DB2zSQLParser.StogroupOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
@@ -1047,6 +1059,36 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStogroupName(DB2zSQLParser.StogroupNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dcName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDcName(DB2zSQLParser.DcNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#mcName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMcName(DB2zSQLParser.McNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#scName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScName(DB2zSQLParser.ScNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#volumeID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVolumeID(DB2zSQLParser.VolumeIDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#keyLabelName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitKeyLabelName(DB2zSQLParser.KeyLabelNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#functionName}.
 	 * @param ctx the parse tree

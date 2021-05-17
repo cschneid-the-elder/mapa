@@ -217,6 +217,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterStogroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterStogroupStatement(DB2zSQLParser.AlterStogroupStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterStogroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterStogroupStatement(DB2zSQLParser.AlterStogroupStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -596,6 +606,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterStogroupOptionList(DB2zSQLParser.StogroupOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitStogroupOptionList(DB2zSQLParser.StogroupOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
@@ -1736,6 +1756,56 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStogroupName(DB2zSQLParser.StogroupNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dcName}.
+	 * @param ctx the parse tree
+	 */
+	void enterDcName(DB2zSQLParser.DcNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dcName}.
+	 * @param ctx the parse tree
+	 */
+	void exitDcName(DB2zSQLParser.DcNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#mcName}.
+	 * @param ctx the parse tree
+	 */
+	void enterMcName(DB2zSQLParser.McNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#mcName}.
+	 * @param ctx the parse tree
+	 */
+	void exitMcName(DB2zSQLParser.McNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#scName}.
+	 * @param ctx the parse tree
+	 */
+	void enterScName(DB2zSQLParser.ScNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#scName}.
+	 * @param ctx the parse tree
+	 */
+	void exitScName(DB2zSQLParser.ScNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#volumeID}.
+	 * @param ctx the parse tree
+	 */
+	void enterVolumeID(DB2zSQLParser.VolumeIDContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#volumeID}.
+	 * @param ctx the parse tree
+	 */
+	void exitVolumeID(DB2zSQLParser.VolumeIDContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#keyLabelName}.
+	 * @param ctx the parse tree
+	 */
+	void enterKeyLabelName(DB2zSQLParser.KeyLabelNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#keyLabelName}.
+	 * @param ctx the parse tree
+	 */
+	void exitKeyLabelName(DB2zSQLParser.KeyLabelNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#functionName}.
 	 * @param ctx the parse tree

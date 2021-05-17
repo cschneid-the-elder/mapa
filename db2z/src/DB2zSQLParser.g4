@@ -41,6 +41,7 @@ sqlStatement
 	| alterPermissionStatement
 	| alterProcedureStatement
 	| alterSequenceStatement
+	| alterStogroupStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -163,6 +164,12 @@ alterProcedureStatement
 alterSequenceStatement
 	: (
 	ALTER SEQUENCE sequenceName sequenceOptionList+
+	)
+	;
+
+alterStogroupStatement
+	: (
+	ALTER STOGROUP stogroupName stogroupOptionList+
 	)
 	;
 
@@ -479,6 +486,20 @@ sequenceOptionList
 	| (NO? CYCLE)
 	| ((NO CACHE) | (CACHE INTEGERLITERAL))
 	| (NO? ORDER)
+	)
+	;
+
+stogroupOptionList
+	: (
+	(ADD VOLUMES LPAREN volumeID (COMMA volumeID)* RPAREN)
+	| (ADD VOLUMES LPAREN NONNUMERICLITERAL (COMMA NONNUMERICLITERAL)* RPAREN)
+	| (REMOVE VOLUMES LPAREN volumeID (COMMA volumeID)* RPAREN)
+	| (REMOVE VOLUMES LPAREN NONNUMERICLITERAL (COMMA NONNUMERICLITERAL)* RPAREN)
+	| (NO KEY LABEL)
+	| (KEY LABEL keyLabelName)
+	| (DATACLAS dcName)
+	| (MGMTCLAS mcName)
+	| (STORCLAS scName)
 	)
 	;
 
@@ -1577,6 +1598,26 @@ stogroupName
 	: identifier
 	;
 
+dcName
+	: identifier
+	;
+
+mcName
+	: identifier
+	;
+
+scName
+	: identifier
+	;
+
+volumeID
+	: identifier
+	;
+
+keyLabelName
+	: (identifier | NONNUMERICLITERAL)
+	;
+
 functionName
 	: (schemaName DOT)? identifier
 	;
@@ -2487,6 +2528,10 @@ sqlKeyword
 	| CYCLE
 	| INCREMENT
 	| RESTART
+	| DATACLAS
+	| MGMTCLAS
+	| REMOVE
+	| STORCLAS
 	)
 	;
 
