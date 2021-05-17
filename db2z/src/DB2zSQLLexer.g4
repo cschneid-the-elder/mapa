@@ -2020,6 +2020,154 @@ STORCLAS
 	: S T O R C L A S
 	;
 
+ACCESS
+	: A C C E S S 
+	;
+
+ACTIVATE
+	: A C T I V A T E 
+	;
+
+ALWAYS
+	: A L W A Y S 
+	;
+
+APPEND
+	: A P P E N D 
+	;
+
+ARCHIVE
+	: A R C H I V E 
+	;
+
+BUSINESS
+	: B U S I N E S S 
+	;
+
+CASCADE
+	: C A S C A D E 
+	;
+
+CHAGES
+	: C H A G E S 
+	;
+
+CHANGES
+	: C H A N G E S 
+	;
+
+CONTROL
+	: C O N T R O L 
+	;
+
+DEACTIVATE
+	: D E A C T I V A T E 
+	;
+
+DEFERRED
+	: D E F E R R E D 
+	;
+
+EACH
+	: E A C H 
+	;
+
+ENFORCED
+	: E N F O R C E D 
+	;
+
+EXTRA
+	: E X T R A 
+	;
+
+FOREIGN
+	: F O R E I G N 
+	;
+
+HIDDEN_
+	: H I D D E N 
+	;
+
+HISTORY
+	: H I S T O R Y 
+	;
+
+ID
+	: I D 
+	;
+
+IDENTITY
+	: I D E N T I T Y 
+	;
+
+IMPLICITLY
+	: I M P L I C I T L Y 
+	;
+
+INITIALLY
+	: I N I T I A L L Y 
+	;
+
+INLINE
+	: I N L I N E 
+	;
+
+OPERATION
+	: O P E R A T I O N 
+	;
+
+ORGANIZE
+	: O R G A N I Z E 
+	;
+
+OVERLAPS
+	: O V E R L A P S 
+	;
+
+PACKAGE_NAME
+	: P A C K A G E '_' N A M E 
+	;
+
+PACKAGE_SCHEMA
+	: P A C K A G E '_' S C H E M A 
+	;
+
+PACKAGE_VERSION
+	: P A C K A G E '_' V E R S I O N 
+	;
+
+PARTITITION
+	: P A R T I T I T I O N 
+	;
+
+PRIMARY
+	: P R I M A R Y 
+	;
+
+RESET
+	: R E S E T 
+	;
+
+ROTATE
+	: R O T A T E 
+	;
+
+SECURITYLABEL
+	: S E C U R I T Y L A B E L 
+	;
+
+START
+	: S T A R T 
+	;
+
+SYSIBM
+	: S Y S I B M 
+	;
+
+TRANSACTION
+	: T R A N S A C T I O N 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

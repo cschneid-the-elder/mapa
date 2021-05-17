@@ -503,6 +503,297 @@ stogroupOptionList
 	)
 	;
 
+tableOptionList
+	: (
+	| (ADD COLUMN? columnDefinition)
+	| (ALTER COLUMN? columnDefinition)
+	| (RENAME COLUMN sourceColumnName TO targetColumnName)
+	| (DROP COLUMN? columnName RESTRICT)
+	| (ADD PERIOD FOR? periodDefinition)
+	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
+	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
+	| (ADD PARTITION BY partitioningClause)
+	| (ADD PARTITION partitionClause)
+	| (ALTER PARTITITION INTEGERLITERAL partitionClause)
+	| (ROTATE PARTITION (FIRST | INTEGERLITERAL) TO LAST rotatePartitionClause)
+	| (DROP ORGANIZATION)
+	| (alterHashOrganization)
+	| (ADD SYSTEM? VERSIONING USE HISTORY TABLE historyTableName extraRowOption?)
+	| (DROP SYSTEM? VERSIONING)
+	| (ADD MATERIALIZED? QUERY materializedQueryAlteration)
+	| (DROP MATERIALIZED? QUERY)
+	| (DATA CAPTURE (NONE | CHAGES))
+	| (NOT? VOLATILE CARDINALITY?)
+	| (ADD CLONE cloneTableName)
+	| (DROP CLONE)
+	| (ADD RESTRICT ON DROP)
+	| (DROP RESTRICT ON DROP)
+	| ((ACTIVATE | DEACTIVATE) ROW ACCESS CONTROL)
+	| ((ACTIVATE | DEACTIVATE) COLUMN ACCESS CONTROL)
+	| (APPEND (NO | YES))
+	| (AUDIT (NONE | CHANGES | ALL))
+	| (VALIDPROC (programName | NULL))
+	| (ENABLE ARCHIVE USE archiveTableName)
+	| (DISABLE ARCHIVE)
+	| (NO KEY LABEL)
+	| (KEY LABEL keyLabelName)
+	)
+	;
+
+columnDefinitionOptionList
+	: (
+	(defaultClause)
+	| (NOT NULL)
+	| (columnConstraint)
+	| (generatedClause)
+	| (IMPLICITLY HIDDEN_)
+	| (AS SECURITYLABEL)
+	| (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
+	| (INLINE LENGTH INTEGERLITERAL)
+	)
+	;
+
+columnConstraint
+	: (referencesClause | checkConstraint)
+	;
+
+generatedClause
+	: (
+	(GENERATED (ALWAYS | (BY DEFAULT)) (asIdentityClause | asRowChangeTimestampClause))
+	| (GENERATED ALWAYS?
+		(asRowTransactionStartIDClause 
+		| asRowTransactionTimestampClause 
+		| asGeneratedExpressionClause))
+	)
+	;
+
+asIdentityClause
+	: (
+	AS IDENTITY LPAREN 
+	asIdentityClauseOptionList (COMMA? asIdentityClauseOptionList)* 
+	RPAREN
+	)
+	;
+
+asIdentityClauseOptionList
+	: (
+	(START WITH INTEGERLITERAL)
+	| (INCREMENT BY INTEGERLITERAL)
+	| ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
+	| ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
+	| (NO? CYCLE)
+	| ((NO CACHE) | (CACHE INTEGERLITERAL))
+	| (NO? ORDER)
+	)
+	;
+
+asRowChangeTimestampClause
+	: (FOR EACH ROW ON UPDATE AS ROW CHANGE TIMESTAMP)
+	;
+
+asRowTransactionStartIDClause
+	: (AS TRANSACTION START ID)
+	;
+
+asRowTransactionTimestampClause
+	: (AS ROW (BEGIN | START | END))
+	;
+
+asGeneratedExpressionClause
+	: (AS LPAREN nonDeterministicExpression RPAREN)
+	;
+
+nonDeterministicExpression
+	: (
+	(DATA CHANGE OPERATION)
+	| specialRegister
+	| nonDeterministicExpressionSessionVariable
+	)
+	;
+
+nonDeterministicExpressionSessionVariable
+	: (
+	(SYSIBM DOT PACKAGE_NAME)
+	| (SYSIBM DOT PACKAGE_SCHEMA)
+	| (SYSIBM DOT PACKAGE_VERSION)
+	)
+	;
+
+columnAlteration
+	: (columnName columnAlterationOptionList+)
+	;
+
+columnAlterationOptionList
+	: (
+	(SET DATA TYPE alteredDataType (INLINE LENGTH INTEGERLITERAL)?)
+	| (SET defaultClause)
+	| (SET INLINE LENGTH INTEGERLITERAL)
+	| (SET GENERATED (ALWAYS | (BY DEFAULT)) identityAlteration?)
+	| (identityAlteration)
+	| (SET GENERATED ALWAYS? (asRowTransactionTimestampClause | asRowTransactionStartIDClause))
+	| (DROP DEFAULT)
+	)
+	;
+
+/*
+In the IBM documentation, alteredDataType differs from dataType in that
+it is a proper subset thereof.  The dataType rule includes a provision 
+for CCSID on CHAR, VARCHAR, CLOB, GRAPHIC, VARGRAPHIC, and DBCLOB types
+which is absent from the alteredDataType rule.  For purposes of this
+grammar, a difference which makes no difference is no difference.
+*/
+alteredDataType
+	: (dataType)
+	;
+
+identityAlteration
+	: (
+	(RESTART (WITH INTEGERLITERAL)?)
+	| (SET INCREMENT BY INTEGERLITERAL)
+	| (SET ((NO MINVALUE) | (MINVALUE INTEGERLITERAL)))
+	| (SET ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL)))
+	| (SET NO? CYCLE)
+	| (SET ((NO CACHE) | (CACHE INTEGERLITERAL)))
+	| (SET NO? ORDER)
+	)
+	;
+
+uniqueConstraint
+	: (
+	(CONSTRAINT constraintName)? 
+	((PRIMARY KEY) | UNIQUE) 
+	LPAREN
+	columnName (COMMA columnName)* 
+	(COMMA BUSINESS_TIME WITHOUT OVERLAPS)? 
+	RPAREN
+	)
+	;
+
+referentialConstraint
+	: (
+	((CONSTRAINT constraintName FOREIGN KEY) | (FOREIGN KEY constraintName?))
+	LPAREN
+	columnName (PERIOD BUSINESS TIME)? (COMMA columnName (PERIOD BUSINESS TIME)?)* 
+	RPAREN
+	referencesClause
+	)
+	;
+
+referencesClause
+	: (
+	REFERENCES tableName 
+	LPAREN
+	columnName (PERIOD BUSINESS TIME)? (COMMA columnName (PERIOD BUSINESS TIME)?)* 
+	RPAREN
+	(ON DELETE (RESTRICT | (NO ACTION) | CASCADE | (SET NULL)))? 
+	NOT? ENFORCED
+	(ENABLE QUERY OPTIMIZATION)?	
+	)
+	;
+
+checkConstraint
+	: (
+	(CONSTRAINT constraintName)? CHECK LPAREN checkCondition RPAREN
+	)
+	;
+
+partitioningClause
+	: (
+	RANGE? 
+	LPAREN 
+	partitionExpression (COMMA partitionExpression)* 
+	RPAREN
+	LPAREN
+	partitioningClauseElement (COMMA partitioningClauseElement)*
+	RPAREN
+	)
+	;
+
+partitionExpression
+	: (
+	columnName (NULLS LAST)? (ASC | DESC)
+	)
+	;
+
+partitionLimitKey
+	: (INTEGERLITERAL | MAXVALUE | MINVALUE)
+	;
+
+partitioningPhrase
+	: (ENDING AT? LPAREN partitionLimitKey (COMMA partitionLimitKey)* RPAREN INCLUSIVE?)
+	;
+
+//deprecated as of Db2 12
+partitionHashSpace
+	: (HASH SPACE SQLIDENTIFIER)
+	;
+
+//deprecated as of Db2 12
+alterHashOrganization
+	: (
+	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE SQLIDENTIFIER)
+	| (ALTER ORGANIZATION SET HASH SPACE SQLIDENTIFIER)
+	)
+	;
+
+partitioningClauseElement
+	: (
+	PARTITION INTEGERLITERAL partitioningPhrase partitionHashSpace?
+	)
+	;
+
+partitionClause
+	: (
+	partitioningPhrase | partitionHashSpace
+	)
+	;
+
+rotatePartitionClause
+	: (partitioningPhrase RESET)
+	;
+
+extraRowOption
+	: (ON DELETE ADD EXTRA ROW)
+	;
+
+materializedQueryDefinition
+	: (
+	LPAREN fullSelect RPAREN refreshableTableOptions
+	)
+	;
+
+materializedQueryAlteration
+	: (SET refreshableTableOptionsList+)
+	;
+
+refreshableTableOptions
+	: (DATA INITIALLY DEFERRED REFRESH DEFERRED refreshableTableOptionsList+)
+	;
+
+refreshableTableOptionsList
+	: (
+	(MAINTAINED BY (SYSTEM | USER))
+	| ((ENABLE | DISABLE) QUERY OPTIMIZATION)
+	)
+	;
+
+materializedQueryTableAlteration
+	: (SET refreshableTableOptionsList+)
+	;
+
+periodDefinition
+	: (
+	(SYSTEM_TIME LPAREN beginColumnName COMMA endColumnName RPAREN)
+	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName RPAREN (EXCLUSIVE | INCLUSIVE))
+	)
+	;
+
+columnDefinition
+	: (
+	columnName dataType columnDefinitionOptionList+
+	)
+	;
+
 externalProgramName
 	: (identifier | NONNUMERICLITERAL)
 	;
@@ -1368,6 +1659,10 @@ searchCondition
 	((AND | OR) NOT? (predicate | (LPAREN searchCondition RPAREN)))*
 	;
 
+checkCondition
+	: (searchCondition)
+	;
+
 predicate
 	: basicPredicate
 	| quantifiedPredicate
@@ -1542,7 +1837,23 @@ columnName
 	: (correlationName DOT)? identifier
 	;
 
+sourceColumnName
+	: columnName
+	;
+
+targetColumnName
+	: columnName
+	;
+
 newColumnName
+	: identifier
+	;
+
+beginColumnName
+	: identifier
+	;
+
+endColumnName
 	: identifier
 	;
 
@@ -1560,6 +1871,26 @@ schemaName
 
 tableName
 	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier correlationName?
+	;
+
+historyTableName
+	: tableName
+	;
+
+cloneTableName
+	: tableName
+	;
+
+archiveTableName
+	: tableName
+	;
+
+programName
+	: identifier
+	;
+
+constraintName
+	: identifier
 	;
 
 indexName
@@ -2532,6 +2863,43 @@ sqlKeyword
 	| MGMTCLAS
 	| REMOVE
 	| STORCLAS
+	| ACCESS
+	| ACTIVATE
+	| ALWAYS
+	| APPEND
+	| ARCHIVE
+	| BUSINESS
+	| CASCADE
+	| CHAGES
+	| CHANGES
+	| CONTROL
+	| DEACTIVATE
+	| DEFERRED
+	| EACH
+	| ENFORCED
+	| EXTRA
+	| FOREIGN
+	| HIDDEN_
+	| HISTORY
+	| ID
+	| IDENTITY
+	| IMPLICITLY
+	| INITIALLY
+	| INLINE
+	| OPERATION
+	| ORGANIZE
+	| OVERLAPS
+	| PACKAGE_NAME
+	| PACKAGE_SCHEMA
+	| PACKAGE_VERSION
+	| PARTITITION
+	| PRIMARY
+	| RESET
+	| ROTATE
+	| SECURITYLABEL
+	| START
+	| SYSIBM
+	| TRANSACTION
 	)
 	;
 
