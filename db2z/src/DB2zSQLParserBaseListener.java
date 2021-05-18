@@ -279,6 +279,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -687,13 +699,25 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterParameterType(DB2zSQLParser.ParameterTypeContext ctx) { }
+	@Override public void enterFunctionParameterType(DB2zSQLParser.FunctionParameterTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitParameterType(DB2zSQLParser.ParameterTypeContext ctx) { }
+	@Override public void exitFunctionParameterType(DB2zSQLParser.FunctionParameterTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionDataType(DB2zSQLParser.FunctionDataTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionDataType(DB2zSQLParser.FunctionDataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -922,6 +946,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAlteredDataType(DB2zSQLParser.AlteredDataTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataType(DB2zSQLParser.DataTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataType(DB2zSQLParser.DataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2271,25 +2307,25 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDataType(DB2zSQLParser.DataTypeContext ctx) { }
+	@Override public void enterCastDataType(DB2zSQLParser.CastDataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitDataType(DB2zSQLParser.DataTypeContext ctx) { }
+	@Override public void exitCastDataType(DB2zSQLParser.CastDataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
+	@Override public void enterCastBuiltInType(DB2zSQLParser.CastBuiltInTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
+	@Override public void exitCastBuiltInType(DB2zSQLParser.CastBuiltInTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2331,13 +2367,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx) { }
+	@Override public void enterForDataQualifier(DB2zSQLParser.ForDataQualifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx) { }
+	@Override public void exitForDataQualifier(DB2zSQLParser.ForDataQualifierContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2506,6 +2542,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTableName(DB2zSQLParser.TableNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterTableName(DB2zSQLParser.AlterTableNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterTableName(DB2zSQLParser.AlterTableNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

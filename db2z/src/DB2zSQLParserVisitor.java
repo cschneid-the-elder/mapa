@@ -142,6 +142,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterStogroupStatement(DB2zSQLParser.AlterStogroupStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -346,11 +352,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionParameterType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
+	T visitFunctionParameterType(DB2zSQLParser.FunctionParameterTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionDataType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDataType(DB2zSQLParser.FunctionDataTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
 	 * @param ctx the parse tree
@@ -465,6 +477,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAlteredDataType(DB2zSQLParser.AlteredDataTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dataType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataType(DB2zSQLParser.DataTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#identityAlteration}.
 	 * @param ctx the parse tree
@@ -1138,17 +1156,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#dataType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#castDataType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitDataType(DB2zSQLParser.DataTypeContext ctx);
+	T visitCastDataType(DB2zSQLParser.CastDataTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#builtInType}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#castBuiltInType}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	T visitCastBuiltInType(DB2zSQLParser.CastBuiltInTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#integerInParens}.
 	 * @param ctx the parse tree
@@ -1168,11 +1186,11 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#forDataQualfier}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#forDataQualifier}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx);
+	T visitForDataQualifier(DB2zSQLParser.ForDataQualifierContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#distinctTypeName}.
 	 * @param ctx the parse tree
@@ -1257,6 +1275,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTableName(DB2zSQLParser.TableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterTableName(DB2zSQLParser.AlterTableNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#historyTableName}.
 	 * @param ctx the parse tree

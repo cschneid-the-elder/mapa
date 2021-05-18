@@ -227,6 +227,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterStogroupStatement(DB2zSQLParser.AlterStogroupStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -567,15 +577,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionLevel(DB2zSQLParser.FunctionLevelContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#functionParameterType}.
 	 * @param ctx the parse tree
 	 */
-	void enterParameterType(DB2zSQLParser.ParameterTypeContext ctx);
+	void enterFunctionParameterType(DB2zSQLParser.FunctionParameterTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#functionParameterType}.
 	 * @param ctx the parse tree
 	 */
-	void exitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
+	void exitFunctionParameterType(DB2zSQLParser.FunctionParameterTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#functionDataType}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionDataType(DB2zSQLParser.FunctionDataTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#functionDataType}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionDataType(DB2zSQLParser.FunctionDataTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
 	 * @param ctx the parse tree
@@ -766,6 +786,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAlteredDataType(DB2zSQLParser.AlteredDataTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dataType}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataType(DB2zSQLParser.DataTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dataType}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataType(DB2zSQLParser.DataTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#identityAlteration}.
 	 * @param ctx the parse tree
@@ -1887,25 +1917,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitParameterMarker(DB2zSQLParser.ParameterMarkerContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#dataType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#castDataType}.
 	 * @param ctx the parse tree
 	 */
-	void enterDataType(DB2zSQLParser.DataTypeContext ctx);
+	void enterCastDataType(DB2zSQLParser.CastDataTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#dataType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#castDataType}.
 	 * @param ctx the parse tree
 	 */
-	void exitDataType(DB2zSQLParser.DataTypeContext ctx);
+	void exitCastDataType(DB2zSQLParser.CastDataTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#builtInType}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#castBuiltInType}.
 	 * @param ctx the parse tree
 	 */
-	void enterBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	void enterCastBuiltInType(DB2zSQLParser.CastBuiltInTypeContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#builtInType}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#castBuiltInType}.
 	 * @param ctx the parse tree
 	 */
-	void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	void exitCastBuiltInType(DB2zSQLParser.CastBuiltInTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#integerInParens}.
 	 * @param ctx the parse tree
@@ -1937,15 +1967,15 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCcsidQualifier(DB2zSQLParser.CcsidQualifierContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#forDataQualfier}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#forDataQualifier}.
 	 * @param ctx the parse tree
 	 */
-	void enterForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx);
+	void enterForDataQualifier(DB2zSQLParser.ForDataQualifierContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#forDataQualfier}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#forDataQualifier}.
 	 * @param ctx the parse tree
 	 */
-	void exitForDataQualfier(DB2zSQLParser.ForDataQualfierContext ctx);
+	void exitForDataQualifier(DB2zSQLParser.ForDataQualifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#distinctTypeName}.
 	 * @param ctx the parse tree
@@ -2086,6 +2116,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTableName(DB2zSQLParser.TableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterTableName(DB2zSQLParser.AlterTableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterTableName(DB2zSQLParser.AlterTableNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#historyTableName}.
 	 * @param ctx the parse tree

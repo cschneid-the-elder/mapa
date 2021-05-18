@@ -42,6 +42,7 @@ sqlStatement
 	| alterProcedureStatement
 	| alterSequenceStatement
 	| alterStogroupStatement
+	| alterTableStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -128,7 +129,7 @@ alterDatabaseStatement
 alterFunctionStatement
 	: (
 	ALTER 
-		((FUNCTION functionName (LPAREN parameterType (COMMA parameterType)* RPAREN)?) 
+		((FUNCTION functionName (LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?) 
 		| (SPECIFIC FUNCTION specificName))
 	RESTRICT?
 	functionOptionList+
@@ -170,6 +171,12 @@ alterSequenceStatement
 alterStogroupStatement
 	: (
 	ALTER STOGROUP stogroupName stogroupOptionList+
+	)
+	;
+
+alterTableStatement
+	: (
+	ALTER TABLE alterTableName tableOptionList+
 	)
 	;
 
@@ -413,8 +420,33 @@ functionLevel
 	: SQLIDENTIFIER
 	;
 
-parameterType
-	: (dataType (AS LOCATOR)?)
+functionParameterType
+	: (functionDataType (AS LOCATOR)?)
+	;
+
+functionDataType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
+	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| REAL
+	| (DOUBLE PRECISION?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))?)
+	| (BINARY (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| DATE
+	| TIME
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| ROWID
+	| XML
+	)
 	;
 
 functionOptionList
@@ -505,7 +537,7 @@ stogroupOptionList
 
 tableOptionList
 	: (
-	| (ADD COLUMN? columnDefinition)
+	(ADD COLUMN? columnDefinition)
 	| (ALTER COLUMN? columnDefinition)
 	| (RENAME COLUMN sourceColumnName TO targetColumnName)
 	| (DROP COLUMN? columnName RESTRICT)
@@ -643,7 +675,36 @@ which is absent from the alteredDataType rule.  For purposes of this
 grammar, a difference which makes no difference is no difference.
 */
 alteredDataType
-	: (dataType)
+	: dataType
+	;
+
+/*
+The difference between dataType and castDataType is in the coding
+of the CCSID and FOR ... DATA qualifiers.  Sneaky.
+*/
+dataType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
+	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| REAL
+	| (DOUBLE PRECISION?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (forDataQualifier | (CCSID INTEGERLITERAL))?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (forDataQualifier | (CCSID INTEGERLITERAL))?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID INTEGERLITERAL)?)
+	| (BINARY (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| DATE
+	| TIME
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| ROWID
+	| XML
+	)
 	;
 
 identityAlteration
@@ -1746,7 +1807,7 @@ castSpecification
 	LPAREN
 	(expression | NULL | parameterMarker)
 	AS
-	dataType
+	castDataType
 	RPAREN
 	;
 
@@ -1754,15 +1815,15 @@ parameterMarker
 	: QUESTIONMARK
 	;
 
-dataType
+castDataType
 	: (
-	builtInType
+	castBuiltInType
 	| distinctTypeName
 	| arrayType
 	)
 	;
 
-builtInType
+castBuiltInType
 	: (
 	SMALLINT
 	| INTEGER
@@ -1807,11 +1868,11 @@ length
 ccsidQualifier
 	: (
 	CCSID
-	(((ASCII | EBCDIC | UNICODE) forDataQualfier?) | INTEGERLITERAL)
+	(((ASCII | EBCDIC | UNICODE) forDataQualifier?) | INTEGERLITERAL)
 	)
 	;
 
-forDataQualfier
+forDataQualifier
 	: (FOR (SBCS | MIXED | BIT) DATA)
 	;
 
@@ -1871,6 +1932,10 @@ schemaName
 
 tableName
 	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier correlationName?
+	;
+
+alterTableName
+	: (((locationName DOT schemaName DOT) | (schemaName DOT))? identifier)
 	;
 
 historyTableName
