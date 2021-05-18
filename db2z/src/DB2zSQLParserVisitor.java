@@ -1198,6 +1198,42 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlTypeModifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlTypeModifier(DB2zSQLParser.XmlTypeModifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlSchemaSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlSchemaSpecification(DB2zSQLParser.XmlSchemaSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlElementName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlElementName(DB2zSQLParser.XmlElementNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#registeredXmlSchemaName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRegisteredXmlSchemaName(DB2zSQLParser.RegisteredXmlSchemaNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#targetNamespace}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTargetNamespace(DB2zSQLParser.TargetNamespaceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#schemaLocation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSchemaLocation(DB2zSQLParser.SchemaLocationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#length}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

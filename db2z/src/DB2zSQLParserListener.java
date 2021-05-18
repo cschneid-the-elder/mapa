@@ -1987,6 +1987,66 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitIntegerInParens(DB2zSQLParser.IntegerInParensContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlTypeModifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlTypeModifier(DB2zSQLParser.XmlTypeModifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlTypeModifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlTypeModifier(DB2zSQLParser.XmlTypeModifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlSchemaSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlSchemaSpecification(DB2zSQLParser.XmlSchemaSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlSchemaSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlSchemaSpecification(DB2zSQLParser.XmlSchemaSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlElementName}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlElementName(DB2zSQLParser.XmlElementNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlElementName}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlElementName(DB2zSQLParser.XmlElementNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#registeredXmlSchemaName}.
+	 * @param ctx the parse tree
+	 */
+	void enterRegisteredXmlSchemaName(DB2zSQLParser.RegisteredXmlSchemaNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#registeredXmlSchemaName}.
+	 * @param ctx the parse tree
+	 */
+	void exitRegisteredXmlSchemaName(DB2zSQLParser.RegisteredXmlSchemaNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#targetNamespace}.
+	 * @param ctx the parse tree
+	 */
+	void enterTargetNamespace(DB2zSQLParser.TargetNamespaceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#targetNamespace}.
+	 * @param ctx the parse tree
+	 */
+	void exitTargetNamespace(DB2zSQLParser.TargetNamespaceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#schemaLocation}.
+	 * @param ctx the parse tree
+	 */
+	void enterSchemaLocation(DB2zSQLParser.SchemaLocationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#schemaLocation}.
+	 * @param ctx the parse tree
+	 */
+	void exitSchemaLocation(DB2zSQLParser.SchemaLocationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#length}.
 	 * @param ctx the parse tree
 	 */

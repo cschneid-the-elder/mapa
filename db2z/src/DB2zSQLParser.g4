@@ -716,10 +716,10 @@ builtInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID INTEGERLITERAL)?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL | SQLIDENTIFIER) RPAREN)?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	| ROWID
 	| XML
 	)
@@ -1877,13 +1877,51 @@ castBuiltInType
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
 	| ROWID
-	| XML
+	| (XML (LPAREN xmlTypeModifier RPAREN)?)
 	)
 	;
 
 integerInParens
 	: (LPAREN INTEGERLITERAL (COMMA INTEGERLITERAL)? RPAREN)
 	;
+
+xmlTypeModifier
+	: (
+	XMLSCHEMA 
+	xmlSchemaSpecification (ELEMENT xmlElementName)?
+	(COMMA xmlSchemaSpecification (ELEMENT xmlElementName)?)*
+	)
+	;
+
+xmlSchemaSpecification
+	: (
+	(ID registeredXmlSchemaName)
+	| ((URL targetNamespace) | (NO NAMESPACE) (LOCATION schemaLocation))
+	)
+	;
+
+/*
+Documentation is a bit sketchy on details for the following
+four items.  Examples would be nice.
+*/
+xmlElementName
+	: (identifier)
+	;
+
+registeredXmlSchemaName
+	: (
+	SYSXSR DOT SQLIDENTIFIER
+	)
+	;
+
+targetNamespace
+	: (NONNUMERICLITERAL)
+	;
+
+schemaLocation
+	: (NONNUMERICLITERAL)
+	;
+
 
 /*
 It turns out the lengthQualifier of K or M or G gets lexed
@@ -2995,6 +3033,12 @@ sqlKeyword
 	| START
 	| SYSIBM
 	| TRANSACTION
+	| XMLSCHEMA
+	| ELEMENT
+	| URL
+	| NAMESPACE
+	| LOCATION
+	| SYSXSR
 	)
 	;
 

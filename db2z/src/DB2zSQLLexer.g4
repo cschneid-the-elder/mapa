@@ -2156,6 +2156,30 @@ TRANSACTION
 	: T R A N S A C T I O N 
 	;
 
+XMLSCHEMA
+	: X M L S C H E M A
+	;
+
+ELEMENT
+	: E L E M E N T
+	;
+
+URL
+	: U R L
+	;
+
+NAMESPACE
+	: N A M E S P A C E
+	;
+
+LOCATION
+	: L O C A T I O N
+	;
+
+SYSXSR
+	: S Y S X S R
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
