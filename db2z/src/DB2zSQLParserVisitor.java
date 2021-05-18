@@ -394,11 +394,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColumnDefinitionOptionList(DB2zSQLParser.ColumnDefinitionOptionListContext ctx);
+	T visitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#columnConstraint}.
 	 * @param ctx the parse tree
@@ -483,6 +489,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDataType(DB2zSQLParser.DataTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#builtInType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#identityAlteration}.
 	 * @param ctx the parse tree
@@ -963,6 +975,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClause1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClause2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree

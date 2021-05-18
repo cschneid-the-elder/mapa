@@ -647,15 +647,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnDefinitionOptionList(DB2zSQLParser.ColumnDefinitionOptionListContext ctx);
+	void enterColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnDefinitionOptionList(DB2zSQLParser.ColumnDefinitionOptionListContext ctx);
+	void exitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList2}.
+	 * @param ctx the parse tree
+	 */
+	void enterColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList2}.
+	 * @param ctx the parse tree
+	 */
+	void exitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#columnConstraint}.
 	 * @param ctx the parse tree
@@ -796,6 +806,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDataType(DB2zSQLParser.DataTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#builtInType}.
+	 * @param ctx the parse tree
+	 */
+	void enterBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#builtInType}.
+	 * @param ctx the parse tree
+	 */
+	void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#identityAlteration}.
 	 * @param ctx the parse tree
@@ -1596,6 +1616,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClause1}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#defaultClause1}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClause2}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#defaultClause2}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree

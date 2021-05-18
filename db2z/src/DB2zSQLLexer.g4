@@ -2048,10 +2048,6 @@ CASCADE
 	: C A S C A D E 
 	;
 
-CHAGES
-	: C H A G E S 
-	;
-
 CHANGES
 	: C H A N G E S 
 	;
@@ -2136,10 +2132,6 @@ PACKAGE_VERSION
 	: P A C K A G E '_' V E R S I O N 
 	;
 
-PARTITITION
-	: P A R T I T I T I O N 
-	;
-
 PRIMARY
 	: P R I M A R Y 
 	;
@@ -2150,10 +2142,6 @@ RESET
 
 ROTATE
 	: R O T A T E 
-	;
-
-SECURITYLABEL
-	: S E C U R I T Y L A B E L 
 	;
 
 START

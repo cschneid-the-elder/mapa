@@ -538,7 +538,7 @@ stogroupOptionList
 tableOptionList
 	: (
 	(ADD COLUMN? columnDefinition)
-	| (ALTER COLUMN? columnDefinition)
+	| (ALTER COLUMN? columnAlteration)
 	| (RENAME COLUMN sourceColumnName TO targetColumnName)
 	| (DROP COLUMN? columnName RESTRICT)
 	| (ADD PERIOD FOR? periodDefinition)
@@ -546,15 +546,16 @@ tableOptionList
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
 	| (ADD PARTITION BY partitioningClause)
 	| (ADD PARTITION partitionClause)
-	| (ALTER PARTITITION INTEGERLITERAL partitionClause)
+	| (ALTER PARTITION INTEGERLITERAL partitionClause)
 	| (ROTATE PARTITION (FIRST | INTEGERLITERAL) TO LAST rotatePartitionClause)
 	| (DROP ORGANIZATION)
 	| (alterHashOrganization)
 	| (ADD SYSTEM? VERSIONING USE HISTORY TABLE historyTableName extraRowOption?)
 	| (DROP SYSTEM? VERSIONING)
-	| (ADD MATERIALIZED? QUERY materializedQueryAlteration)
+	| (ADD ((MATERIALIZED QUERY) | QUERY)? materializedQueryDefinition)
+	| (ALTER MATERIALIZED? QUERY materializedQueryAlteration)
 	| (DROP MATERIALIZED? QUERY)
-	| (DATA CAPTURE (NONE | CHAGES))
+	| (DATA CAPTURE (NONE | CHANGES))
 	| (NOT? VOLATILE CARDINALITY?)
 	| (ADD CLONE cloneTableName)
 	| (DROP CLONE)
@@ -572,14 +573,27 @@ tableOptionList
 	)
 	;
 
-columnDefinitionOptionList
+columnDefinitionOptionList1
 	: (
-	(defaultClause)
+	(defaultClause1)
 	| (NOT NULL)
 	| (columnConstraint)
 	| (generatedClause)
 	| (IMPLICITLY HIDDEN_)
-	| (AS SECURITYLABEL)
+	| (AS SECURITY LABEL)
+	| (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
+	| (INLINE LENGTH INTEGERLITERAL)
+	)
+	;
+
+columnDefinitionOptionList2
+	: (
+	(defaultClause2)
+	| (NOT NULL)
+	| (columnConstraint)
+	| (generatedClause)
+	| (IMPLICITLY HIDDEN_)
+	| (AS SECURITY LABEL)
 	| (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
 	| (INLINE LENGTH INTEGERLITERAL)
 	)
@@ -683,6 +697,10 @@ The difference between dataType and castDataType is in the coding
 of the CCSID and FOR ... DATA qualifiers.  Sneaky.
 */
 dataType
+	: (builtInType | distinctTypeName)
+	;
+
+builtInType
 	: (
 	SMALLINT
 	| INTEGER
@@ -828,7 +846,7 @@ materializedQueryAlteration
 	;
 
 refreshableTableOptions
-	: (DATA INITIALLY DEFERRED REFRESH DEFERRED refreshableTableOptionsList+)
+	: (DATA INITIALLY DEFERRED REFRESH DEFERRED refreshableTableOptionsList*)
 	;
 
 refreshableTableOptionsList
@@ -845,13 +863,14 @@ materializedQueryTableAlteration
 periodDefinition
 	: (
 	(SYSTEM_TIME LPAREN beginColumnName COMMA endColumnName RPAREN)
-	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName RPAREN (EXCLUSIVE | INCLUSIVE))
+	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE) RPAREN)
 	)
 	;
 
 columnDefinition
 	: (
-	columnName dataType columnDefinitionOptionList+
+	(columnName builtInType columnDefinitionOptionList1*)
+	| (columnName distinctTypeName columnDefinitionOptionList2*)
 	)
 	;
 
@@ -1536,12 +1555,26 @@ defaultClause
 	)
 	;
 
+defaultClause1
+	: (
+	WITH? DEFAULT defaultClauseAllowables
+	)
+	;
+
+defaultClause2
+	: (
+	WITH? DEFAULT
+	(defaultClauseAllowables
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+	)
+	;
+
 defaultClauseAllowables
 	: (
 	literal
 	| SESSION_USER
 	| USER
-	| (CURRENT SQLID)
+	| CURRENT_SQLID
 	| NULL
 	)
 	;
@@ -1877,7 +1910,7 @@ forDataQualifier
 	;
 
 distinctTypeName
-	: identifier
+	: (correlationName DOT)? identifier
 	;
 
 arrayType
@@ -2935,7 +2968,6 @@ sqlKeyword
 	| ARCHIVE
 	| BUSINESS
 	| CASCADE
-	| CHAGES
 	| CHANGES
 	| CONTROL
 	| DEACTIVATE
@@ -2957,11 +2989,9 @@ sqlKeyword
 	| PACKAGE_NAME
 	| PACKAGE_SCHEMA
 	| PACKAGE_VERSION
-	| PARTITITION
 	| PRIMARY
 	| RESET
 	| ROTATE
-	| SECURITYLABEL
 	| START
 	| SYSIBM
 	| TRANSACTION

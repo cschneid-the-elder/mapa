@@ -783,13 +783,25 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnDefinitionOptionList(DB2zSQLParser.ColumnDefinitionOptionListContext ctx) { }
+	@Override public void enterColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnDefinitionOptionList(DB2zSQLParser.ColumnDefinitionOptionListContext ctx) { }
+	@Override public void exitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -958,6 +970,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDataType(DB2zSQLParser.DataTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1918,6 +1942,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDefaultClause(DB2zSQLParser.DefaultClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
