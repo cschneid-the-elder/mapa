@@ -257,6 +257,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterTriggerStatement(DB2zSQLParser.AlterTriggerStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTrustedContextStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterTrustedContextStatement(DB2zSQLParser.AlterTrustedContextStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTrustedContextStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterTrustedContextStatement(DB2zSQLParser.AlterTrustedContextStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -676,6 +686,96 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextOptionList(DB2zSQLParser.TrustedContextOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextOptionList(DB2zSQLParser.TrustedContextOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterAttributesOptions(DB2zSQLParser.AlterAttributesOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterAttributesOptions(DB2zSQLParser.AlterAttributesOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#addAttributesOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterAddAttributesOptions(DB2zSQLParser.AddAttributesOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#addAttributesOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitAddAttributesOptions(DB2zSQLParser.AddAttributesOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropAttributesOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropAttributesOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#userClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserClause(DB2zSQLParser.UserClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#userClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserClause(DB2zSQLParser.UserClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#userClauseAddOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserClauseAddOptions(DB2zSQLParser.UserClauseAddOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#userClauseAddOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserClauseAddOptions(DB2zSQLParser.UserClauseAddOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#userClauseReplaceOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserClauseReplaceOptions(DB2zSQLParser.UserClauseReplaceOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#userClauseReplaceOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserClauseReplaceOptions(DB2zSQLParser.UserClauseReplaceOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#userClauseDropOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserClauseDropOptions(DB2zSQLParser.UserClauseDropOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#userClauseDropOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserClauseDropOptions(DB2zSQLParser.UserClauseDropOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#useOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterUseOptions(DB2zSQLParser.UseOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#useOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitUseOptions(DB2zSQLParser.UseOptionsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#alterPartitionClause}.
 	 * @param ctx the parse tree
@@ -2446,6 +2546,96 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTriggerName(DB2zSQLParser.TriggerNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#contextName}.
+	 * @param ctx the parse tree
+	 */
+	void enterContextName(DB2zSQLParser.ContextNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#contextName}.
+	 * @param ctx the parse tree
+	 */
+	void exitContextName(DB2zSQLParser.ContextNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#authorizationName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAuthorizationName(DB2zSQLParser.AuthorizationNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#authorizationName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAuthorizationName(DB2zSQLParser.AuthorizationNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#profileName}.
+	 * @param ctx the parse tree
+	 */
+	void enterProfileName(DB2zSQLParser.ProfileNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#profileName}.
+	 * @param ctx the parse tree
+	 */
+	void exitProfileName(DB2zSQLParser.ProfileNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#roleName}.
+	 * @param ctx the parse tree
+	 */
+	void enterRoleName(DB2zSQLParser.RoleNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#roleName}.
+	 * @param ctx the parse tree
+	 */
+	void exitRoleName(DB2zSQLParser.RoleNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#seclabelName}.
+	 * @param ctx the parse tree
+	 */
+	void enterSeclabelName(DB2zSQLParser.SeclabelNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#seclabelName}.
+	 * @param ctx the parse tree
+	 */
+	void exitSeclabelName(DB2zSQLParser.SeclabelNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#addressValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterAddressValue(DB2zSQLParser.AddressValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#addressValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitAddressValue(DB2zSQLParser.AddressValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#jobnameValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterJobnameValue(DB2zSQLParser.JobnameValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#jobnameValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitJobnameValue(DB2zSQLParser.JobnameValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#servauthValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterServauthValue(DB2zSQLParser.ServauthValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#servauthValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitServauthValue(DB2zSQLParser.ServauthValueContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#encryptionValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterEncryptionValue(DB2zSQLParser.EncryptionValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#encryptionValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitEncryptionValue(DB2zSQLParser.EncryptionValueContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree

@@ -2240,6 +2240,50 @@ TRACKMOD
 	: T R A C K M O D 
 	;
 
+ADDRESS
+	: A D D R E S S 
+	;
+
+ATTRIBUTES
+	: A T T R I B U T E S 
+	;
+
+AUTHENTICATION
+	: A U T H E N T I C A T I O N 
+	;
+
+AUTHID
+	: A U T H I D 
+	;
+
+CONTEXT
+	: C O N T E X T 
+	;
+
+JOBNAME
+	: J O B N A M E 
+	;
+
+OWNER
+	: O W N E R 
+	;
+
+PROFILE
+	: P R O F I L E 
+	;
+
+QUALIFIER
+	: Q U A L I F I E R 
+	;
+
+SERVAUTH
+	: S E R V A U T H 
+	;
+
+TRUSTED
+	: T R U S T E D 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

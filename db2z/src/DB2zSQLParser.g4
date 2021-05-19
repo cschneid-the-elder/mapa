@@ -14,6 +14,9 @@ The rule signalStatement is not a full implementation of the syntax
 of the SIGNAL statement, but a subset that is possible to embed in
 an application program.
 
+The rule trustedContextOptionList does not strictly match its
+syntax diagram, for reasons documented with the rule.
+
 This grammar does not include SQL/PL or the following SQL statements.
 
 ALTER FUNCTION (compiled SQL scalar)
@@ -46,6 +49,7 @@ sqlStatement
 	| alterTableStatement
 	| alterTablespaceStatement
 	| alterTriggerStatement
+	| alterTrustedContextStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -195,6 +199,12 @@ alterTablespaceStatement
 alterTriggerStatement
 	: (
 	ALTER TRIGGER (schemaName DOT) triggerName NOT? SECURED
+	)
+	;
+
+alterTrustedContextStatement
+	: (
+	ALTER TRUSTED CONTEXT contextName trustedContextOptionList+
 	)
 	;
 
@@ -615,6 +625,89 @@ tablespaceOptionList
 	| (freeBlock)
 	| (gbpcacheBlock)
 	| (PAGENUM RELATIVE)
+	)
+	;
+
+/*
+This rule does not strictly follow the syntax diagram, as the diagram
+is at odds with at least one example and arguably with the narrative.
+
+More specifically, it is unclear where the ALTER keyword is required,
+and so this rule makes it optional where its use seems to me to be
+ambiguously documented.
+*/
+trustedContextOptionList
+	: (
+	(ALTER SYSTEM AUTHID authorizationName)
+	| (ALTER NO DEFAULT ROLE)
+	| (ALTER DEFAULT ROLE roleName 
+		((WITHOUT ROLE AS OBJECT OWNER) | (WITH ROLE AS OBJECT OWNER AND QUALIFIER))?)
+	| (ALTER? ENABLE)
+	| (ALTER? DISABLE)
+	| (ALTER? NO DEFAULT SECURITY LABEL)
+	| (ALTER? DEFAULT SECURITY LABEL seclabelName)
+	| (ALTER ATTRIBUTES LPAREN alterAttributesOptions (COMMA alterAttributesOptions)* RPAREN)
+	| (ADD ATTRIBUTES LPAREN addAttributesOptions (COMMA addAttributesOptions)* RPAREN)
+	| (DROP ATTRIBUTES LPAREN dropAttributesOptions (COMMA dropAttributesOptions)* RPAREN)
+	| userClause
+	)
+	;
+
+alterAttributesOptions
+	: (
+	(ADDRESS addressValue)
+	| (ENCRYPTION encryptionValue)
+	| (SERVAUTH servauthValue)
+	| (JOBNAME jobnameValue)
+	)
+	;
+
+addAttributesOptions
+	: (
+	(ADDRESS addressValue)
+	| (SERVAUTH servauthValue)
+	| (JOBNAME jobnameValue)
+	)
+	;
+
+dropAttributesOptions
+	: (
+	(ADDRESS addressValue?)
+	| (SERVAUTH servauthValue?)
+	| (JOBNAME jobnameValue?)
+	)
+	;
+
+userClause
+	: (
+	(ADD USE FOR userClauseAddOptions (COMMA userClauseAddOptions)*)
+	| (REPLACE USE FOR userClauseReplaceOptions (COMMA userClauseReplaceOptions)*)
+	| (DROP USE FOR userClauseDropOptions (COMMA userClauseDropOptions)*)
+	)
+	;
+
+userClauseAddOptions
+	: (
+	(authorizationName useOptions?)
+	| (EXTERNAL SECURITY PROFILE profileName useOptions?)
+	| (PUBLIC (WITH | WITHOUT) AUTHENTICATION)
+	)
+	;
+
+userClauseReplaceOptions
+	: (userClauseAddOptions);
+
+userClauseDropOptions
+	: (
+	(authorizationName)
+	| (EXTERNAL SECURITY PROFILE profileName)
+	| (PUBLIC)
+	)
+	;
+
+useOptions
+	: (
+	(ROLE roleName)? (SECURITY LABEL seclabelName)? (WITH | WITHOUT) AUTHENTICATION
 	)
 	;
 
@@ -2150,6 +2243,42 @@ triggerName
 	: identifier
 	;
 
+contextName
+	: identifier
+	;
+
+authorizationName
+	: identifier
+	;
+
+profileName
+	: identifier
+	;
+
+roleName
+	: identifier
+	;
+
+seclabelName
+	: identifier
+	;
+
+addressValue
+	: NONNUMERICLITERAL
+	;
+
+jobnameValue
+	: NONNUMERICLITERAL
+	;
+
+servauthValue
+	: NONNUMERICLITERAL
+	;
+
+encryptionValue
+	: NONNUMERICLITERAL
+	;
+
 bpName
 	: identifier
 	;
@@ -3146,7 +3275,19 @@ sqlKeyword
 	| PENDING
 	| RELATIVE
 	| SEGSIZE
-	| TRACKMOD	)
+	| TRACKMOD
+	| ADDRESS
+	| ATTRIBUTES
+	| AUTHENTICATION
+	| AUTHID
+	| CONTEXT
+	| JOBNAME
+	| OWNER
+	| PROFILE
+	| QUALIFIER
+	| SERVAUTH
+	| TRUSTED
+	)
 	;
 
 

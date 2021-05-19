@@ -160,6 +160,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterTriggerStatement(DB2zSQLParser.AlterTriggerStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTrustedContextStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterTrustedContextStatement(DB2zSQLParser.AlterTrustedContextStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -411,6 +417,60 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextOptionList(DB2zSQLParser.TrustedContextOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterAttributesOptions(DB2zSQLParser.AlterAttributesOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#addAttributesOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddAttributesOptions(DB2zSQLParser.AddAttributesOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropAttributesOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#userClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUserClause(DB2zSQLParser.UserClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#userClauseAddOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUserClauseAddOptions(DB2zSQLParser.UserClauseAddOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#userClauseReplaceOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUserClauseReplaceOptions(DB2zSQLParser.UserClauseReplaceOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#userClauseDropOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUserClauseDropOptions(DB2zSQLParser.UserClauseDropOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#useOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseOptions(DB2zSQLParser.UseOptionsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterPartitionClause}.
 	 * @param ctx the parse tree
@@ -1473,6 +1533,60 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTriggerName(DB2zSQLParser.TriggerNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#contextName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitContextName(DB2zSQLParser.ContextNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#authorizationName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAuthorizationName(DB2zSQLParser.AuthorizationNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#profileName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProfileName(DB2zSQLParser.ProfileNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#roleName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRoleName(DB2zSQLParser.RoleNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#seclabelName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSeclabelName(DB2zSQLParser.SeclabelNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#addressValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAddressValue(DB2zSQLParser.AddressValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#jobnameValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJobnameValue(DB2zSQLParser.JobnameValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#servauthValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitServauthValue(DB2zSQLParser.ServauthValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#encryptionValue}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEncryptionValue(DB2zSQLParser.EncryptionValueContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree
