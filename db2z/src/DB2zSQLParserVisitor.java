@@ -148,6 +148,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTablespaceStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterTablespaceStatement(DB2zSQLParser.AlterTablespaceStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -393,6 +399,42 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterPartitionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterPartitionClause(DB2zSQLParser.AlterPartitionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#usingBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUsingBlock(DB2zSQLParser.UsingBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#freeBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFreeBlock(DB2zSQLParser.FreeBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#moveTableClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMoveTableClause(DB2zSQLParser.MoveTableClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#gbpcacheBlock}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGbpcacheBlock(DB2zSQLParser.GbpcacheBlockContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
 	 * @param ctx the parse tree
@@ -1407,6 +1449,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDatabaseName(DB2zSQLParser.DatabaseNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tablespaceName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTablespaceName(DB2zSQLParser.TablespaceNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree

@@ -43,6 +43,7 @@ sqlStatement
 	| alterSequenceStatement
 	| alterStogroupStatement
 	| alterTableStatement
+	| alterTablespaceStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -177,6 +178,15 @@ alterStogroupStatement
 alterTableStatement
 	: (
 	ALTER TABLE alterTableName tableOptionList+
+	)
+	;
+
+alterTablespaceStatement
+	: (
+	ALTER TABLESPACE (databaseName DOT)? tablespaceName 
+	tablespaceOptionList* 
+	alterPartitionClause?
+	moveTableClause?
 	)
 	;
 
@@ -385,7 +395,7 @@ usingSpecification
 	: (
 	(USING ((VCAT catalogName) | (STOGROUP stogroupName)))
 	| (PRIQTY INTEGERLITERAL)
-	| (SEQTY INTEGERLITERAL)
+	| (SECQTY INTEGERLITERAL)
 	| (ERASE (YES | NO))
 	)
 	;
@@ -572,6 +582,74 @@ tableOptionList
 	| (KEY LABEL keyLabelName)
 	)
 	;
+
+tablespaceOptionList
+	: (
+	(BUFFERPOOL bpName)
+	| (CCSID INTEGERLITERAL)
+	| (CLOSE YES)
+	| (CLOSE NO)
+	| (COMPRESS YES (FIXEDLENGTH | HUFFMAN)?)
+	| (COMPRESS NO)
+	| (DROP PENDING CHANGES)
+	| (DSSIZE SQLIDENTIFIER)
+	| (INSERT ALGORITHM INTEGERLITERAL)
+	| (LOCKMAX (SYSTEM | INTEGERLITERAL))
+	| (LOCKSIZE (ANY | TABLESPACE | TABLE | PAGE | ROW | LOB))
+	| (NOT? LOGGED)
+	| ((LOG YES) | (LOG NO))
+	| (MAXROWS INTEGERLITERAL)
+	| (MAXPARTITIONS INTEGERLITERAL)
+	| (MEMBER CLUSTER (YES | NO))
+	| (SEGSIZE INTEGERLITERAL)
+	| (TRACKMOD (YES | NO))
+	| (usingBlock)
+	| (freeBlock)
+	| (gbpcacheBlock)
+	| (PAGENUM RELATIVE)
+	)
+	;
+
+alterPartitionClause
+	: (
+	((ALTER? PARTITION) | PART) INTEGERLITERAL
+		( (usingBlock)
+		| (freeBlock)
+		| (gbpcacheBlock)
+		| (COMPRESS (YES | NO))
+		| (DSSIZE SQLIDENTIFIER)
+		| (TRACKMOD (YES | NO))
+		)+
+	)
+	;
+
+usingBlock
+	: (
+	usingSpecification+
+	)
+	;
+
+freeBlock
+	: (
+	((FREEPAGE INTEGERLITERAL)
+	| (PCTFREE INTEGERLITERAL)
+	| (PCTFREE (INTEGERLITERAL? FOR UPDATE INTEGERLITERAL)?)
+	)+
+	)
+	;
+
+moveTableClause
+	: (
+	MOVE TABLE tableName TO TABLESPACE (databaseName DOT)? tablespaceName
+	)
+	;
+
+gbpcacheBlock
+	: (
+	GBPCACHE (CHANGED | ALL | SYSTEM | NONE)
+	)
+	;
+
 
 columnDefinitionOptionList1
 	: (
@@ -2052,6 +2130,10 @@ databaseName
 	: identifier
 	;
 
+tablespaceName
+	: identifier
+	;
+
 catalogName
 	: identifier
 	;
@@ -2973,7 +3055,6 @@ sqlKeyword
 	| MINVALUE
 	| PCTFREE
 	| REGENERATE
-	| SEQTY
 	| MASK
 	| ENABLE
 	| PERMISSION
@@ -3038,7 +3119,22 @@ sqlKeyword
 	| NAMESPACE
 	| LOCATION
 	| SYSXSR
-	)
+	| ALGORITHM
+	| FIXEDLENGTH
+	| HUFFMAN
+	| LOB
+	| LOG
+	| LOGGED
+	| MAXPARTITIONS
+	| MAXROWS
+	| MEMBER
+	| MOVE
+	| PAGE
+	| PAGENUM
+	| PENDING
+	| RELATIVE
+	| SEGSIZE
+	| TRACKMOD	)
 	;
 
 

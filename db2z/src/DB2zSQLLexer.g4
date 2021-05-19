@@ -1920,10 +1920,6 @@ REGENERATE
 	: R E G E N E R A T E 
 	;
 
-SEQTY
-	: S E Q T Y 
-	;
-
 MASK
 	: M A S K
 	;
@@ -2178,6 +2174,70 @@ LOCATION
 
 SYSXSR
 	: S Y S X S R
+	;
+
+ALGORITHM
+	: A L G O R I T H M 
+	;
+
+FIXEDLENGTH
+	: F I X E D L E N G T H 
+	;
+
+HUFFMAN
+	: H U F F M A N 
+	;
+
+LOB
+	: L O B 
+	;
+
+LOG
+	: L O G 
+	;
+
+LOGGED
+	: L O G G E D 
+	;
+
+MAXPARTITIONS
+	: M A X P A R T I T I O N S 
+	;
+
+MAXROWS
+	: M A X R O W S 
+	;
+
+MEMBER
+	: M E M B E R 
+	;
+
+MOVE
+	: M O V E 
+	;
+
+PAGE
+	: P A G E 
+	;
+
+PAGENUM
+	: P A G E N U M 
+	;
+
+PENDING
+	: P E N D I N G 
+	;
+
+RELATIVE
+	: R E L A T I V E 
+	;
+
+SEGSIZE
+	: S E G S I Z E 
+	;
+
+TRACKMOD
+	: T R A C K M O D 
 	;
 
 //end of generated sql keywords

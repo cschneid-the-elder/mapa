@@ -237,6 +237,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterTableStatement(DB2zSQLParser.AlterTableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTablespaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterTablespaceStatement(DB2zSQLParser.AlterTablespaceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTablespaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterTablespaceStatement(DB2zSQLParser.AlterTablespaceStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -646,6 +656,66 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterPartitionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterPartitionClause(DB2zSQLParser.AlterPartitionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterPartitionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterPartitionClause(DB2zSQLParser.AlterPartitionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#usingBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterUsingBlock(DB2zSQLParser.UsingBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#usingBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitUsingBlock(DB2zSQLParser.UsingBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#freeBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterFreeBlock(DB2zSQLParser.FreeBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#freeBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitFreeBlock(DB2zSQLParser.FreeBlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#moveTableClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterMoveTableClause(DB2zSQLParser.MoveTableClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#moveTableClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitMoveTableClause(DB2zSQLParser.MoveTableClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#gbpcacheBlock}.
+	 * @param ctx the parse tree
+	 */
+	void enterGbpcacheBlock(DB2zSQLParser.GbpcacheBlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#gbpcacheBlock}.
+	 * @param ctx the parse tree
+	 */
+	void exitGbpcacheBlock(DB2zSQLParser.GbpcacheBlockContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
 	 * @param ctx the parse tree
@@ -2336,6 +2406,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDatabaseName(DB2zSQLParser.DatabaseNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tablespaceName}.
+	 * @param ctx the parse tree
+	 */
+	void enterTablespaceName(DB2zSQLParser.TablespaceNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tablespaceName}.
+	 * @param ctx the parse tree
+	 */
+	void exitTablespaceName(DB2zSQLParser.TablespaceNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree
