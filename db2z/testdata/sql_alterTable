@@ -565,5 +565,166 @@ ALTER TABLE T1 ADD C001 XML
       (XMLSCHEMA ID SYSXSR.someSchemaName)
 ;
 ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA URL 'https://example.com')
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA URL 'https://example.com' LOCATION 'https://example.com')
+;
+ALTER TABLE T1 ADD C001 XML
       (XMLSCHEMA NO NAMESPACE)
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA NO NAMESPACE LOCATION 'https://example.com')
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA ID SYSXSR.someSchemaName
+      ,ID SYSXSR.someOtherSchemaName)
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA ID SYSXSR.someSchemaName ELEMENT someElementName)
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA ID SYSXSR.someSchemaName ELEMENT someElementName
+      , ID SYSXSR.someOtherSchemaName ELEMENT someOtherElementName)
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA ID SYSXSR.someSchemaName ELEMENT someElementName
+      , ID SYSXSR.someOtherSchemaName ELEMENT someOtherElementName
+      , NO NAMESPACE LOCATION 'https://example.com' ELEMENT yetAnotherElementName
+      , URL 'https://example.com')
+;
+ALTER TABLE T1 ADD C001 XML
+      (XMLSCHEMA ID SYSXSR.someSchemaName ELEMENT someElementName
+      , ID SYSXSR.someOtherSchemaName ELEMENT someOtherElementName
+      , NO NAMESPACE LOCATION 'https://example.com' ELEMENT yetAnotherElementName
+      , URL 'https://example.com' LOCATION 'https://example.com')
+;
+
+ALTER TABLE T1 ADD C001 INTEGER 
+               ADD C002 SMALLINT 
+               ADD C003 INT 
+               ADD C004 BIGINT 
+               ADD C005 DECIMAL 
+               ADD C006 DEC 
+               ADD C007 NUMERIC 
+               ADD C008 DECIMAL (5)
+               ADD C009 DEC (5)
+               ADD C010 NUMERIC (5)
+               ADD C011 DECIMAL (5,0)
+               ADD C012 DEC (5,0)
+               ADD C013 NUMERIC (5,0)
+               ADD C014 FLOAT 
+               ADD C015 REAL 
+               ADD C016 DOUBLE 
+               ADD C017 DOUBLE PRECISION 
+               ADD C018 FLOAT (21)
+               ADD C019 DECFLOAT 
+               ADD C020 DECFLOAT (24) 
+               ADD C021 CHARACTER 
+               ADD C022 CHARACTER (77) 
+               ADD C023 CHARACTER FOR SBCS DATA 
+               ADD C024 CHARACTER FOR MIXED DATA 
+               ADD C025 CHARACTER FOR BIT DATA 
+               ADD C026 CHARACTER CCSID 1208 
+               ADD C027 CHARACTER (77) FOR SBCS DATA 
+               ADD C028 CHARACTER (77) FOR MIXED DATA 
+               ADD C029 CHARACTER (77) FOR BIT DATA 
+               ADD C030 CHARACTER (77) CCSID 1208 
+               ADD C031 CHAR 
+               ADD C032 CHAR (77) 
+               ADD C033 CHAR FOR SBCS DATA 
+               ADD C034 CHAR FOR MIXED DATA 
+               ADD C035 CHAR FOR BIT DATA 
+               ADD C036 CHAR CCSID 1208 
+               ADD C037 CHAR (77) FOR SBCS DATA 
+               ADD C038 CHAR (77) FOR MIXED DATA 
+               ADD C039 CHAR (77) FOR BIT DATA 
+               ADD C040 CHAR (77) CCSID 1208 
+               ADD C041 CHARACTER VARYING (77) 
+               ADD C042 CHARACTER VARYING (77) FOR SBCS DATA 
+               ADD C043 CHARACTER VARYING (77) FOR MIXED DATA 
+               ADD C044 CHARACTER VARYING (77) FOR BIT DATA 
+               ADD C045 CHARACTER VARYING (77) CCSID 1208 
+               ADD C046 CHAR VARYING (77) 
+               ADD C047 CHAR VARYING (77) FOR SBCS DATA 
+               ADD C048 CHAR VARYING (77) FOR MIXED DATA 
+               ADD C049 CHAR VARYING (77) FOR BIT DATA 
+               ADD C050 CHAR VARYING (77) CCSID 1208 
+               ADD C051 VARCHAR (77) 
+               ADD C052 VARCHAR (77) FOR SBCS DATA 
+               ADD C053 VARCHAR (77) FOR MIXED DATA 
+               ADD C054 VARCHAR (77) FOR BIT DATA 
+               ADD C055 VARCHAR (77) CCSID 1208 
+               ADD C056 CHARACTER LARGE OBJECT 
+               ADD C057 CHARACTER LARGE OBJECT (10000) 
+               ADD C058 CHARACTER LARGE OBJECT (10K) 
+               ADD C059 CHARACTER LARGE OBJECT (10M) 
+               ADD C060 CHARACTER LARGE OBJECT (10G) 
+               ADD C061 CHARACTER LARGE OBJECT (10K) FOR SBCS DATA 
+               ADD C062 CHARACTER LARGE OBJECT (10K) FOR MIXED DATA 
+               ADD C063 CHARACTER LARGE OBJECT (10K) FOR BIT DATA 
+               ADD C064 CHARACTER LARGE OBJECT (10K) CCSID 1208 
+               ADD C065 CHAR LARGE OBJECT 
+               ADD C066 CHAR LARGE OBJECT (10000) 
+               ADD C067 CHAR LARGE OBJECT (10K) 
+               ADD C068 CHAR LARGE OBJECT (10M) 
+               ADD C069 CHAR LARGE OBJECT (10G) 
+               ADD C070 CHAR LARGE OBJECT (10K) FOR SBCS DATA 
+               ADD C071 CHAR LARGE OBJECT (10K) FOR MIXED DATA 
+               ADD C072 CHAR LARGE OBJECT (10K) FOR BIT DATA 
+               ADD C073 CHAR LARGE OBJECT (10K) CCSID 1208 
+               ADD C074 CLOB 
+               ADD C075 CLOB (10000) 
+               ADD C076 CLOB (10K) 
+               ADD C077 CLOB (10M) 
+               ADD C078 CLOB (10G) 
+               ADD C079 CLOB (10K) FOR SBCS DATA 
+               ADD C080 CLOB (10K) FOR MIXED DATA 
+               ADD C081 CLOB (10K) FOR BIT DATA 
+               ADD C082 CLOB (10K) CCSID 1208 
+               ADD C083 GRAPHIC 
+               ADD C084 GRAPHIC (3579) 
+               ADD C085 GRAPHIC (3579) CCSID 1200 
+               ADD C086 GRAPHIC CCSID 1200 
+               ADD C087 VARGRAPHIC (3579) 
+               ADD C088 VARGRAPHIC (3579) CCSID 1200 
+               ADD C089 DBCLOB 
+               ADD C090 DBCLOB (7) 
+               ADD C091 DBCLOB (7K) 
+               ADD C092 DBCLOB (7M) 
+               ADD C093 DBCLOB (7G) 
+               ADD C094 DBCLOB CCSID 1200 
+               ADD C095 DBCLOB (7) CCSID 1200 
+               ADD C096 DBCLOB (7K) CCSID 1200 
+               ADD C097 DBCLOB (7M) CCSID 1200 
+               ADD C098 DBCLOB (7G) CCSID 1200 
+               ADD C099 BINARY 
+               ADD C100 BINARY (1111) 
+               ADD C101 BINARY VARYING (1111) 
+               ADD C102 VARBINARY (1111) 
+               ADD C103 BINARY LARGE OBJECT 
+               ADD C104 BINARY LARGE OBJECT (13579) 
+               ADD C105 BINARY LARGE OBJECT (1K) 
+               ADD C106 BINARY LARGE OBJECT (1M) 
+               ADD C107 BINARY LARGE OBJECT (1G) 
+               ADD C108 BLOB 
+               ADD C109 BLOB (13579) 
+               ADD C110 BLOB (1K) 
+               ADD C111 BLOB (1M) 
+               ADD C112 BLOB (1G) 
+               ADD C113 DATE
+               ADD C114 TIME
+               ADD C115 TIMESTAMP
+               ADD C116 TIMESTAMP(7)
+               ADD C117 TIMESTAMP WITHOUT TIME ZONE
+               ADD C118 TIMESTAMP WITH TIME ZONE
+               ADD C119 TIMESTAMP(11) WITHOUT TIME ZONE
+               ADD C120 TIMESTAMP (14) WITH TIME ZONE
+               ADD C121 ROWID
+               ADD C121 XML
+               ADD C122 XML
+      (XMLSCHEMA ID SYSXSR.someSchemaName ELEMENT someElementName
+      , ID SYSXSR.someOtherSchemaName ELEMENT someOtherElementName
+      , NO NAMESPACE LOCATION 'https://example.com' ELEMENT yetAnotherElementName
+      , URL 'https://example.com' LOCATION 'https://example.com')
 ;
