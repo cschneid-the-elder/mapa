@@ -184,6 +184,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBeginDeclareSectionStatement(DB2zSQLParser.BeginDeclareSectionStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#callStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCallStatement(DB2zSQLParser.CallStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

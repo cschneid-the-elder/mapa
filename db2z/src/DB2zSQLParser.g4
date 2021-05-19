@@ -53,6 +53,7 @@ sqlStatement
 	| alterViewStatement
 	| associateLocatorsStatement
 	| beginDeclareSectionStatement
+	| callStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -230,6 +231,15 @@ beginDeclareSectionStatement
 	: (BEGIN DECLARE SECTION)
 	;
 
+callStatement
+	: (
+	CALL (procedureName | hostVariable)
+	LPAREN (
+		((expression | NULL | (TABLE tableName)) (COMMA (expression | NULL | (TABLE tableName)))*)
+		| (USING DESCRIPTOR hostVariable)
+	) RPAREN
+	)
+	;
 searchedDelete
 	: (
 	DELETE FROM tableName periodClause? correlationName? includeColumns?
