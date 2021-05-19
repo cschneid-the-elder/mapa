@@ -351,6 +351,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBeginDeclareSectionStatement(DB2zSQLParser.BeginDeclareSectionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBeginDeclareSectionStatement(DB2zSQLParser.BeginDeclareSectionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSearchedDelete(DB2zSQLParser.SearchedDeleteContext ctx) { }
 	/**
 	 * {@inheritDoc}

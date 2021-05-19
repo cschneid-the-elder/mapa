@@ -52,6 +52,7 @@ sqlStatement
 	| alterTrustedContextStatement
 	| alterViewStatement
 	| associateLocatorsStatement
+	| beginDeclareSectionStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -223,6 +224,10 @@ associateLocatorsStatement
 	LPAREN rsLocatorVariable (COMMA rsLocatorVariable)* RPAREN
 	WITH PROCEDURE (procedureName | hostVariable)
 	)
+	;
+
+beginDeclareSectionStatement
+	: (BEGIN DECLARE SECTION)
 	;
 
 searchedDelete
@@ -3308,6 +3313,7 @@ sqlKeyword
 	| QUALIFIER
 	| SERVAUTH
 	| TRUSTED
+	| SECTION
 	)
 	;
 

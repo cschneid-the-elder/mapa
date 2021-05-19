@@ -2284,6 +2284,10 @@ TRUSTED
 	: T R U S T E D 
 	;
 
+SECTION
+	: S E C T I O N
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
