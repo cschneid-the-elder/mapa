@@ -51,6 +51,7 @@ sqlStatement
 	| alterTriggerStatement
 	| alterTrustedContextStatement
 	| alterViewStatement
+	| associateLocatorsStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -213,6 +214,14 @@ alterViewStatement
 	: (
 	ALTER VIEW viewName REGENERATE
 	(USING APPLICATION COMPATIBILITY applCompatValue)?
+	)
+	;
+
+associateLocatorsStatement
+	: (
+	ASSOCIATE (RESULT SET)? (LOCATOR | LOCATORS) 
+	LPAREN rsLocatorVariable (COMMA rsLocatorVariable)* RPAREN
+	WITH PROCEDURE (procedureName | hostVariable)
 	)
 	;
 

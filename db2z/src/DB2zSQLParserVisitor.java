@@ -172,6 +172,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterViewStatement(DB2zSQLParser.AlterViewStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#associateLocatorsStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssociateLocatorsStatement(DB2zSQLParser.AssociateLocatorsStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
