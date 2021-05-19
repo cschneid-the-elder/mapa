@@ -154,6 +154,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterTablespaceStatement(DB2zSQLParser.AlterTablespaceStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTriggerStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterTriggerStatement(DB2zSQLParser.AlterTriggerStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1461,6 +1467,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCatalogName(DB2zSQLParser.CatalogNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggerName(DB2zSQLParser.TriggerNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree

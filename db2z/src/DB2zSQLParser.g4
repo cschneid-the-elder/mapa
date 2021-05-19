@@ -19,6 +19,7 @@ This grammar does not include SQL/PL or the following SQL statements.
 ALTER FUNCTION (compiled SQL scalar)
 ALTER PROCEDURE (SQL - external)
 ALTER PROCEDURE (SQL - native)
+ALTER TRIGGER (advanced)
 
 */
 
@@ -44,6 +45,7 @@ sqlStatement
 	| alterStogroupStatement
 	| alterTableStatement
 	| alterTablespaceStatement
+	| alterTriggerStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -187,6 +189,12 @@ alterTablespaceStatement
 	tablespaceOptionList* 
 	alterPartitionClause?
 	moveTableClause?
+	)
+	;
+
+alterTriggerStatement
+	: (
+	ALTER TRIGGER (schemaName DOT) triggerName NOT? SECURED
 	)
 	;
 
@@ -2135,6 +2143,10 @@ tablespaceName
 	;
 
 catalogName
+	: identifier
+	;
+
+triggerName
 	: identifier
 	;
 

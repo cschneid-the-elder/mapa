@@ -247,6 +247,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterTablespaceStatement(DB2zSQLParser.AlterTablespaceStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTriggerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterTriggerStatement(DB2zSQLParser.AlterTriggerStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTriggerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterTriggerStatement(DB2zSQLParser.AlterTriggerStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -2426,6 +2436,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCatalogName(DB2zSQLParser.CatalogNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerName}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggerName(DB2zSQLParser.TriggerNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggerName}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggerName(DB2zSQLParser.TriggerNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#bpName}.
 	 * @param ctx the parse tree
