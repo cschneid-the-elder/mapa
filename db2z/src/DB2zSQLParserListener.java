@@ -267,6 +267,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterTrustedContextStatement(DB2zSQLParser.AlterTrustedContextStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterViewStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterViewStatement(DB2zSQLParser.AlterViewStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterViewStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterViewStatement(DB2zSQLParser.AlterViewStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
@@ -2436,6 +2446,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitArchiveTableName(DB2zSQLParser.ArchiveTableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#viewName}.
+	 * @param ctx the parse tree
+	 */
+	void enterViewName(DB2zSQLParser.ViewNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#viewName}.
+	 * @param ctx the parse tree
+	 */
+	void exitViewName(DB2zSQLParser.ViewNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#programName}.
 	 * @param ctx the parse tree

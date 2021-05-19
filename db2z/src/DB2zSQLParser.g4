@@ -50,6 +50,7 @@ sqlStatement
 	| alterTablespaceStatement
 	| alterTriggerStatement
 	| alterTrustedContextStatement
+	| alterViewStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -205,6 +206,13 @@ alterTriggerStatement
 alterTrustedContextStatement
 	: (
 	ALTER TRUSTED CONTEXT contextName trustedContextOptionList+
+	)
+	;
+
+alterViewStatement
+	: (
+	ALTER VIEW viewName REGENERATE
+	(USING APPLICATION COMPATIBILITY applCompatValue)?
 	)
 	;
 
@@ -2197,6 +2205,10 @@ cloneTableName
 
 archiveTableName
 	: tableName
+	;
+
+viewName
+	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier correlationName?
 	;
 
 programName

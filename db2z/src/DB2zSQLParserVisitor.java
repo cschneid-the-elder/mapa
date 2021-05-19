@@ -166,6 +166,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterTrustedContextStatement(DB2zSQLParser.AlterTrustedContextStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterViewStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterViewStatement(DB2zSQLParser.AlterViewStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1467,6 +1473,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArchiveTableName(DB2zSQLParser.ArchiveTableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#viewName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitViewName(DB2zSQLParser.ViewNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#programName}.
 	 * @param ctx the parse tree
