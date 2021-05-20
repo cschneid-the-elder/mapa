@@ -54,6 +54,7 @@ sqlStatement
 	| associateLocatorsStatement
 	| beginDeclareSectionStatement
 	| callStatement
+	| closeStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -240,6 +241,11 @@ callStatement
 	) RPAREN
 	)
 	;
+
+closeStatement
+	: (CLOSE cursorName)
+	;
+
 searchedDelete
 	: (
 	DELETE FROM tableName periodClause? correlationName? includeColumns?

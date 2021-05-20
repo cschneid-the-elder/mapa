@@ -307,6 +307,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCallStatement(DB2zSQLParser.CallStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#closeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCloseStatement(DB2zSQLParser.CloseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#closeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCloseStatement(DB2zSQLParser.CloseStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 */
