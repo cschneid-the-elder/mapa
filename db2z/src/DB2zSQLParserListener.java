@@ -347,6 +347,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitConnectStatement(DB2zSQLParser.ConnectStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createAliasStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateAliasStatement(DB2zSQLParser.CreateAliasStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createAliasStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateAliasStatement(DB2zSQLParser.CreateAliasStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequenceAlias(DB2zSQLParser.SequenceAliasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequenceAlias(DB2zSQLParser.SequenceAliasContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#tableAlias}.
+	 * @param ctx the parse tree
+	 */
+	void enterTableAlias(DB2zSQLParser.TableAliasContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#tableAlias}.
+	 * @param ctx the parse tree
+	 */
+	void exitTableAlias(DB2zSQLParser.TableAliasContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#authorization}.
 	 * @param ctx the parse tree
 	 */

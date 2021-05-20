@@ -214,6 +214,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitConnectStatement(DB2zSQLParser.ConnectStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createAliasStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateAliasStatement(DB2zSQLParser.CreateAliasStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequenceAlias(DB2zSQLParser.SequenceAliasContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#tableAlias}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTableAlias(DB2zSQLParser.TableAliasContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#authorization}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

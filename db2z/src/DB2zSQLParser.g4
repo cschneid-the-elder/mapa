@@ -58,6 +58,7 @@ sqlStatement
 	| commitStatement
 	| commentStatement
 	| connectStatement
+	| createAliasStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -283,6 +284,24 @@ connectStatement
 	(TO (locationName | hostVariable) authorization?)
 	| RESET
 	| authorization)?
+	)
+	;
+
+createAliasStatement
+	: (
+	CREATE PUBLIC? ALIAS (sequenceAlias | tableAlias)
+	)
+	;
+
+sequenceAlias
+	: (
+	aliasName FOR SEQUENCE sequenceName
+	)
+	;
+
+tableAlias
+	: (
+	aliasName FOR TABLE? tableName
 	)
 	;
 
