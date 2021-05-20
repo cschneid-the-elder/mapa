@@ -59,6 +59,7 @@ sqlStatement
 	| commentStatement
 	| connectStatement
 	| createAliasStatement
+	| createAuxiliaryTableStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -290,6 +291,13 @@ connectStatement
 createAliasStatement
 	: (
 	CREATE PUBLIC? ALIAS (sequenceAlias | tableAlias)
+	)
+	;
+
+createAuxiliaryTableStatement
+	: (
+	CREATE (AUX | AUXILIARY) TABLE auxTableName IN databaseName? tablespaceName
+	STORES tableName (APPEND (YES | NO))? COLUMN columnName PART INTEGERLITERAL
 	)
 	;
 
@@ -2310,6 +2318,10 @@ tableName
 	;
 
 alterTableName
+	: (((locationName DOT schemaName DOT) | (schemaName DOT))? identifier)
+	;
+
+auxTableName
 	: (((locationName DOT schemaName DOT) | (schemaName DOT))? identifier)
 	;
 

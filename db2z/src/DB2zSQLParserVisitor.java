@@ -220,6 +220,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateAliasStatement(DB2zSQLParser.CreateAliasStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createAuxiliaryTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateAuxiliaryTableStatement(DB2zSQLParser.CreateAuxiliaryTableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1545,6 +1551,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAlterTableName(DB2zSQLParser.AlterTableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#auxTableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAuxTableName(DB2zSQLParser.AuxTableNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#historyTableName}.
 	 * @param ctx the parse tree

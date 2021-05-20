@@ -357,6 +357,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateAliasStatement(DB2zSQLParser.CreateAliasStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createAuxiliaryTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateAuxiliaryTableStatement(DB2zSQLParser.CreateAuxiliaryTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createAuxiliaryTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateAuxiliaryTableStatement(DB2zSQLParser.CreateAuxiliaryTableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
 	 * @param ctx the parse tree
 	 */
@@ -2566,6 +2576,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAlterTableName(DB2zSQLParser.AlterTableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#auxTableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAuxTableName(DB2zSQLParser.AuxTableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#auxTableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAuxTableName(DB2zSQLParser.AuxTableNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#historyTableName}.
 	 * @param ctx the parse tree
