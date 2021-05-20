@@ -2304,6 +2304,14 @@ WORK
 	: W O R K
 	;
 
+WORKFILE
+	: W O R K F I L E
+	;
+
+SYSDEFLT
+	: S Y S D E F L T
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

@@ -367,6 +367,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateAuxiliaryTableStatement(DB2zSQLParser.CreateAuxiliaryTableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createDatabaseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateDatabaseStatement(DB2zSQLParser.CreateDatabaseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createDatabaseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateDatabaseStatement(DB2zSQLParser.CreateDatabaseStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
 	 * @param ctx the parse tree
 	 */
@@ -826,6 +836,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTrustedContextOptionList(DB2zSQLParser.TrustedContextOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#databaseOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#databaseOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
 	 * @param ctx the parse tree
@@ -2766,6 +2786,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSequenceName(DB2zSQLParser.SequenceNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#memberName}.
+	 * @param ctx the parse tree
+	 */
+	void enterMemberName(DB2zSQLParser.MemberNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#memberName}.
+	 * @param ctx the parse tree
+	 */
+	void exitMemberName(DB2zSQLParser.MemberNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree

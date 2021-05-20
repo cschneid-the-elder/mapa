@@ -60,6 +60,7 @@ sqlStatement
 	| connectStatement
 	| createAliasStatement
 	| createAuxiliaryTableStatement
+	| createDatabaseStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -298,6 +299,12 @@ createAuxiliaryTableStatement
 	: (
 	CREATE (AUX | AUXILIARY) TABLE auxTableName IN databaseName? tablespaceName
 	STORES tableName (APPEND (YES | NO))? COLUMN columnName PART INTEGERLITERAL
+	)
+	;
+
+createDatabaseStatement
+	: (
+	CREATE DATABASE databaseName databaseOptionList*
 	)
 	;
 
@@ -759,6 +766,16 @@ trustedContextOptionList
 	| (ADD ATTRIBUTES LPAREN addAttributesOptions (COMMA addAttributesOptions)* RPAREN)
 	| (DROP ATTRIBUTES LPAREN dropAttributesOptions (COMMA dropAttributesOptions)* RPAREN)
 	| userClause
+	)
+	;
+
+databaseOptionList
+	: (
+	(BUFFERPOOL bpName)
+	| (INDEXBP bpName)
+	| (AS WORKFILE (FOR memberName)?)
+	| (STOGROUP ( SYSDEFLT | stogroupName)?)
+	| (CCSID (ASCII | EBCDIC | UNICODE))
 	)
 	;
 
@@ -2397,6 +2414,10 @@ sequenceName
 	: (schemaName DOT)? identifier
 	;
 
+memberName
+	: identifier
+	;
+
 databaseName
 	: identifier
 	;
@@ -3459,6 +3480,8 @@ sqlKeyword
 	| VERSION
 	| ALIAS
 	| WORK
+	| WORKFILE
+	| SYSDEFLT
 	)
 	;
 

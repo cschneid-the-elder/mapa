@@ -226,6 +226,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateAuxiliaryTableStatement(DB2zSQLParser.CreateAuxiliaryTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createDatabaseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateDatabaseStatement(DB2zSQLParser.CreateDatabaseStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceAlias}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -501,6 +507,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTrustedContextOptionList(DB2zSQLParser.TrustedContextOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#databaseOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
 	 * @param ctx the parse tree
@@ -1665,6 +1677,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSequenceName(DB2zSQLParser.SequenceNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#memberName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMemberName(DB2zSQLParser.MemberNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#databaseName}.
 	 * @param ctx the parse tree

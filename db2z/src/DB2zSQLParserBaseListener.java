@@ -447,6 +447,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateDatabaseStatement(DB2zSQLParser.CreateDatabaseStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateDatabaseStatement(DB2zSQLParser.CreateDatabaseStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSequenceAlias(DB2zSQLParser.SequenceAliasContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -994,6 +1006,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTrustedContextOptionList(DB2zSQLParser.TrustedContextOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3322,6 +3346,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSequenceName(DB2zSQLParser.SequenceNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMemberName(DB2zSQLParser.MemberNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMemberName(DB2zSQLParser.MemberNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
