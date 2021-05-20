@@ -208,6 +208,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommitStatement(DB2zSQLParser.CommitStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#connectStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConnectStatement(DB2zSQLParser.ConnectStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#authorization}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAuthorization(DB2zSQLParser.AuthorizationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

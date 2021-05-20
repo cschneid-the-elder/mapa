@@ -57,6 +57,7 @@ sqlStatement
 	| closeStatement
 	| commitStatement
 	| commentStatement
+	| connectStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -274,6 +275,19 @@ commentStatement
 
 commitStatement
 	: (COMMIT WORK?)
+	;
+
+connectStatement
+	: (
+	CONNECT (
+	(TO (locationName | hostVariable) authorization?)
+	| RESET
+	| authorization)?
+	)
+	;
+
+authorization
+	: (USER hostVariable USING hostVariable)
 	;
 
 searchedDelete
@@ -2265,7 +2279,7 @@ correlationName
 	;
 
 locationName
-	: identifier
+	: (identifier | NUMERICLITERAL | INTEGERLITERAL) (DOT? (identifier | NUMERICLITERAL | INTEGERLITERAL))*
 	;
 
 schemaName
