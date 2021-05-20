@@ -55,6 +55,7 @@ sqlStatement
 	| beginDeclareSectionStatement
 	| callStatement
 	| closeStatement
+	| commentStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -244,6 +245,30 @@ callStatement
 
 closeStatement
 	: (CLOSE cursorName)
+	;
+
+commentStatement
+	: (
+	COMMENT ON ((
+	(aliasDesignator
+	| (COLUMN tableName DOT columnName)
+	| (functionDesignator ((ACTIVE VERSION) | (VERSION routineVersionID))?)
+	| (INDEX indexName)
+	| (PACKAGE collectionID DOT packageName (VERSION? versionID)?)
+	| (PLAN planName)
+	| (PROCEDURE procedureName ((ACTIVE VERSION) | (VERSION routineVersionID))?)
+	| (ROLE roleName)
+	| (SEQUENCE sequenceName)
+	| (TABLE tableName)
+	| (TRIGGER triggerName ((ACTIVE VERSION) | (VERSION routineVersionID))?)
+	| (TRUSTED CONTEXT contextName)
+	| (TYPE typeName)
+	| (MASK maskName)
+	| (PERMISSION permissionName)
+	| (VARIABLE variableName))
+	IS NONNUMERICLITERAL)
+	| multipleColumnList)
+	)
 	;
 
 searchedDelete
@@ -789,6 +814,31 @@ gbpcacheBlock
 	)
 	;
 
+aliasDesignator
+	: (
+	PUBLIC? ALIAS aliasName FOR (TABLE | SEQUENCE)
+	)
+	;
+
+multipleColumnList
+	: (
+	tableName LPAREN
+	columnName IS NONNUMERICLITERAL
+	(COMMA columnName IS NONNUMERICLITERAL)*
+	RPAREN
+	)
+	;
+
+functionDesignator
+	: (
+	(FUNCTION functionName (LPAREN (parameterType (COMMA parameterType)*)? RPAREN)?)
+	| (SPECIFIC FUNCTION specificName)
+	)
+	;
+
+parameterType
+	: (dataType (AS LOCATOR)?)
+	;
 
 columnDefinitionOptionList1
 	: (
@@ -2245,8 +2295,36 @@ programName
 	: identifier
 	;
 
+packageName
+	: identifier
+	;
+
+planName
+	: identifier
+	;
+
+typeName
+	: identifier
+	;
+
+variableName
+	: identifier
+	;
+
+aliasName
+	: identifier
+	;
+
 constraintName
 	: identifier
+	;
+
+routineVersionID
+	: (identifier | NUMERICLITERAL | INTEGERLITERAL) (DOT? (identifier | NUMERICLITERAL | INTEGERLITERAL))*
+	;
+
+versionID
+	: (identifier | NUMERICLITERAL | INTEGERLITERAL) (DOT? (identifier | NUMERICLITERAL | INTEGERLITERAL))*
 	;
 
 indexName
@@ -2779,9 +2857,6 @@ fetchClause
 
 identifier
 	: SQLIDENTIFIER
-/*	| G_CHAR
-	| K_CHAR
-	| M_CHAR*/
 	| sqlKeyword
 	| specialRegister
 	| scalarFunction
@@ -3330,6 +3405,9 @@ sqlKeyword
 	| SERVAUTH
 	| TRUSTED
 	| SECTION
+	| ACTIVE
+	| VERSION
+	| ALIAS
 	)
 	;
 

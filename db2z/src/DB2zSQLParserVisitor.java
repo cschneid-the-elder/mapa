@@ -196,6 +196,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCloseStatement(DB2zSQLParser.CloseStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#commentStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommentStatement(DB2zSQLParser.CommentStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedDelete}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -531,6 +537,30 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGbpcacheBlock(DB2zSQLParser.GbpcacheBlockContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aliasDesignator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAliasDesignator(DB2zSQLParser.AliasDesignatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#multipleColumnList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultipleColumnList(DB2zSQLParser.MultipleColumnListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionDesignator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDesignator(DB2zSQLParser.FunctionDesignatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
 	 * @param ctx the parse tree
@@ -1510,11 +1540,53 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProgramName(DB2zSQLParser.ProgramNameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#packageName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPackageName(DB2zSQLParser.PackageNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#planName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPlanName(DB2zSQLParser.PlanNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#typeName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeName(DB2zSQLParser.TypeNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#variableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVariableName(DB2zSQLParser.VariableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aliasName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAliasName(DB2zSQLParser.AliasNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#constraintName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitConstraintName(DB2zSQLParser.ConstraintNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#routineVersionID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRoutineVersionID(DB2zSQLParser.RoutineVersionIDContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#versionID}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVersionID(DB2zSQLParser.VersionIDContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#indexName}.
 	 * @param ctx the parse tree

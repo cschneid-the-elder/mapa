@@ -2288,6 +2288,18 @@ SECTION
 	: S E C T I O N
 	;
 
+ACTIVE
+	: A C T I V E
+	;
+
+VERSION
+	: V E R S I O N
+	;
+
+ALIAS
+	: A L I A S
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
