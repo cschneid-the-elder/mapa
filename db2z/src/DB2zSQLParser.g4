@@ -55,6 +55,7 @@ sqlStatement
 	| beginDeclareSectionStatement
 	| callStatement
 	| closeStatement
+	| commitStatement
 	| commentStatement
 	| declareCursorStatement
 	| declareTableStatement
@@ -269,6 +270,10 @@ commentStatement
 	IS NONNUMERICLITERAL)
 	| multipleColumnList)
 	)
+	;
+
+commitStatement
+	: (COMMIT WORK?)
 	;
 
 searchedDelete
@@ -3408,6 +3413,7 @@ sqlKeyword
 	| ACTIVE
 	| VERSION
 	| ALIAS
+	| WORK
 	)
 	;
 

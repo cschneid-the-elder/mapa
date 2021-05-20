@@ -2300,6 +2300,10 @@ ALIAS
 	: A L I A S
 	;
 
+WORK
+	: W O R K
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
