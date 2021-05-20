@@ -23,6 +23,7 @@ ALTER FUNCTION (compiled SQL scalar)
 ALTER PROCEDURE (SQL - external)
 ALTER PROCEDURE (SQL - native)
 ALTER TRIGGER (advanced)
+CREATE FUNCTION (compiled SQL scalar)
 
 */
 
@@ -61,6 +62,7 @@ sqlStatement
 	| createAliasStatement
 	| createAuxiliaryTableStatement
 	| createDatabaseStatement
+	| createFunctionStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -305,6 +307,132 @@ createAuxiliaryTableStatement
 createDatabaseStatement
 	: (
 	CREATE DATABASE databaseName databaseOptionList*
+	)
+	;
+
+createFunctionStatement
+	: (
+	createFunctionStatementExternalScalar
+	| createFunctionStatementExternalTable
+	| createFunctionStatementSourced
+//	| createFunctionStatementInlineSqlScalar
+	)
+	;
+
+createFunctionStatementExternalScalar
+	: (
+	CREATE FUNCTION functionName
+	LPAREN parameterDeclaration (COMMA parameterDeclaration)* RPAREN
+	createFunctionStatementExternalScalarOptions+
+	)
+	;
+
+createFunctionStatementExternalTable
+	: (
+	CREATE FUNCTION functionName
+	LPAREN parameterDeclaration (COMMA parameterDeclaration)* RPAREN
+	createFunctionStatementExternalTableOptions+
+	)
+	;
+
+createFunctionStatementSourced
+	: (
+	CREATE FUNCTION functionName
+	LPAREN parameterDeclaration (COMMA parameterDeclaration)* RPAREN
+	createFunctionStatementSourcedOptions+
+	)
+	;
+
+parameterDeclaration
+	: (
+	parameterName ((dataType (AS LOCATOR)?) | (TABLE LIKE tableName AS LOCATOR))
+	)
+	;
+
+createFunctionStatementExternalScalarOptions
+	: (
+	(RETURNS 
+		((dataType (AS LOCATOR)?)
+		| (dataType CAST FROM dataType (AS LOCATOR)?)))
+	| (EXTERNAL NAME (externalProgramName | identifier))
+	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | SQL))
+	| (PARAMETER STYLE (SQL | JAVA))
+	| (NOT? DETERMINISTIC)
+	| (NOT? VARIANT)
+	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
+	| (NULL CALL) 
+	| ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
+	| (NO? EXTERNAL ACTION)
+	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
+	| ((NO SCRATCHPAD) | (SCRATCHPAD INTEGERLITERAL))
+	| (NO? FINAL CALL)
+	| ((ALLOW | DISALLOW) PARALLEL)
+	| (NO? DBINFO)
+	| (CARDINALITY INTEGERLITERAL)
+	| ((NO COLLID) | (COLLID collectionID))
+	| (WLM ENVIRONMENT (identifier | (LPAREN identifier RPAREN)))
+	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
+	| (STAY RESIDENT (NO | YES))
+	| (PROGRAM TYPE (SUB | MAIN))
+	| (SECURITY (DB2 | USER | DEFINER))
+	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
+	| (RUN OPTIONS runTimeOptions)
+	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
+	| (STATIC DISPATCH)
+	| (NOT? SECURED)
+	| SPECIFIC specificName?
+	| (PARAMETER 
+		((CCSID (ASCII | EBCDIC | UNICODE))
+		| (VARCHAR (NULTERM | STRUCTURE)))+)
+	)
+	;
+
+createFunctionStatementExternalTableOptions
+	: (
+	(RETURNS 
+		((TABLE LPAREN columnName dataType (AS LOCATOR)? (COMMA columnName dataType (AS LOCATOR)?)* RPAREN)
+		| (GENERIC TABLE)))
+	| (EXTERNAL NAME (externalProgramName | identifier))
+	| (LANGUAGE (ASSEMBLE | C_ | COBOL | PLI | SQL))
+	| (PARAMETER STYLE SQL)
+	| (NOT? DETERMINISTIC)
+	| (NOT? VARIANT)
+	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
+	| (NULL CALL) 
+	| ((READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
+	| (NO? EXTERNAL ACTION)
+	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
+	| ((NO SCRATCHPAD) | (SCRATCHPAD INTEGERLITERAL))
+	| (NO? FINAL CALL)
+	| (DISALLOW PARALLEL)
+	| (NO? DBINFO)
+	| (CARDINALITY INTEGERLITERAL)
+	| ((NO COLLID) | (COLLID collectionID))
+	| (WLM ENVIRONMENT (identifier | (LPAREN identifier RPAREN)))
+	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
+	| (STAY RESIDENT (NO | YES))
+	| (PROGRAM TYPE (SUB | MAIN))
+	| (SECURITY (DB2 | USER | DEFINER))
+	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
+	| (RUN OPTIONS runTimeOptions)
+	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
+	| (STATIC DISPATCH)
+	| (NOT? SECURED)
+	| SPECIFIC specificName?
+	| (PARAMETER 
+		((CCSID (ASCII | EBCDIC | UNICODE))
+		| (VARCHAR (NULTERM | STRUCTURE)))+)
+	)
+	;
+
+createFunctionStatementSourcedOptions
+	: (
+	(RETURNS dataType (AS LOCATOR)?)
+	| (SPECIFIC specificName)
+	| (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
+	| (SOURCE 
+		((functionName LPAREN parameterType (COMMA parameterType)* RPAREN)
+		| (SPECIFIC specificName)))
 	)
 	;
 
@@ -2454,6 +2582,10 @@ seclabelName
 	: identifier
 	;
 
+parameterName
+	: identifier
+	;
+
 addressValue
 	: NONNUMERICLITERAL
 	;
@@ -3482,6 +3614,9 @@ sqlKeyword
 	| WORK
 	| WORKFILE
 	| SYSDEFLT
+	| NULTERM
+	| STRUCTURE
+	| GENERIC
 	)
 	;
 

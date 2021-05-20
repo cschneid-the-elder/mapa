@@ -2312,6 +2312,18 @@ SYSDEFLT
 	: S Y S D E F L T
 	;
 
+NULTERM
+	: N U L T E R M
+	;
+
+STRUCTURE
+	: S T R U C T U R E
+	;
+
+GENERIC
+	: G E N E R I C
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
