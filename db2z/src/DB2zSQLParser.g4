@@ -315,14 +315,14 @@ createFunctionStatement
 	createFunctionStatementExternalScalar
 	| createFunctionStatementExternalTable
 	| createFunctionStatementSourced
-//	| createFunctionStatementInlineSqlScalar
+	| createFunctionStatementInlineSqlScalar
 	)
 	;
 
 createFunctionStatementExternalScalar
 	: (
 	CREATE FUNCTION functionName
-	LPAREN parameterDeclaration (COMMA parameterDeclaration)* RPAREN
+	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
 	createFunctionStatementExternalScalarOptions+
 	)
 	;
@@ -330,7 +330,7 @@ createFunctionStatementExternalScalar
 createFunctionStatementExternalTable
 	: (
 	CREATE FUNCTION functionName
-	LPAREN parameterDeclaration (COMMA parameterDeclaration)* RPAREN
+	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
 	createFunctionStatementExternalTableOptions+
 	)
 	;
@@ -338,14 +338,28 @@ createFunctionStatementExternalTable
 createFunctionStatementSourced
 	: (
 	CREATE FUNCTION functionName
-	LPAREN parameterDeclaration (COMMA parameterDeclaration)* RPAREN
+	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
 	createFunctionStatementSourcedOptions+
 	)
 	;
 
-parameterDeclaration
+createFunctionStatementInlineSqlScalar
 	: (
-	parameterName ((dataType (AS LOCATOR)?) | (TABLE LIKE tableName AS LOCATOR))
+	CREATE FUNCTION functionName
+	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
+	createFunctionStatementInlineSqlScalarOptions+
+	)
+	;
+
+parameterDeclaration1
+	: (
+	parameterName? ((functionDataType (AS LOCATOR)?) | (TABLE LIKE tableName (AS LOCATOR)?))
+	)
+	;
+
+parameterDeclaration2
+	: (
+	parameterName functionDataType
 	)
 	;
 
@@ -354,11 +368,12 @@ createFunctionStatementExternalScalarOptions
 	(RETURNS 
 		((dataType (AS LOCATOR)?)
 		| (dataType CAST FROM dataType (AS LOCATOR)?)))
-	| (EXTERNAL NAME (externalProgramName | identifier))
-	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | SQL))
+	| (EXTERNAL (NAME (externalProgramName | identifier))?)
+	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI))
 	| (PARAMETER STYLE (SQL | JAVA))
 	| (NOT? DETERMINISTIC)
 	| (NOT? VARIANT)
+	| (FENCED)
 	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
 	| (NULL CALL) 
 	| ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
@@ -390,13 +405,14 @@ createFunctionStatementExternalScalarOptions
 createFunctionStatementExternalTableOptions
 	: (
 	(RETURNS 
-		((TABLE LPAREN columnName dataType (AS LOCATOR)? (COMMA columnName dataType (AS LOCATOR)?)* RPAREN)
+		((TABLE LPAREN columnName functionDataType (AS LOCATOR)? (COMMA columnName functionDataType (AS LOCATOR)?)* RPAREN)
 		| (GENERIC TABLE)))
-	| (EXTERNAL NAME (externalProgramName | identifier))
-	| (LANGUAGE (ASSEMBLE | C_ | COBOL | PLI | SQL))
+	| (EXTERNAL (NAME (externalProgramName | identifier))?)
+	| (LANGUAGE (ASSEMBLE | C_ | COBOL | PLI))
 	| (PARAMETER STYLE SQL)
 	| (NOT? DETERMINISTIC)
 	| (NOT? VARIANT)
+	| (FENCED)
 	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
 	| (NULL CALL) 
 	| ((READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
@@ -427,12 +443,29 @@ createFunctionStatementExternalTableOptions
 
 createFunctionStatementSourcedOptions
 	: (
-	(RETURNS dataType (AS LOCATOR)?)
+	(RETURNS functionDataType (AS LOCATOR)?)
 	| (SPECIFIC specificName)
 	| (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
 	| (SOURCE 
 		((functionName LPAREN parameterType (COMMA parameterType)* RPAREN)
 		| (SPECIFIC specificName)))
+	)
+	;
+
+createFunctionStatementInlineSqlScalarOptions
+	: (
+	(RETURNS functionDataType (LANGUAGE SQL)?)
+	| (RETURN (expression | NULL | fullSelect))
+	| (NOT? DETERMINISTIC)
+	| (NOT? VARIANT)
+	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
+	| (NULL CALL) 
+	| ((READS SQL DATA) | (CONTAINS SQL))
+	| (NO? EXTERNAL ACTION)
+	| (STATIC DISPATCH)
+	| (NOT? SECURED)
+	| SPECIFIC specificName?
+	| (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
 	)
 	;
 
@@ -697,6 +730,10 @@ functionParameterType
 	;
 
 functionDataType
+	: (functionBuiltInType | distinctTypeName)
+	;
+
+functionBuiltInType
 	: (
 	SMALLINT
 	| INTEGER
@@ -1404,6 +1441,7 @@ operator
 expression
 	: (
 	functionInvocation
+	| LPAREN expression RPAREN
 	| literal
 	| columnName
 	| hostVariable
@@ -1419,6 +1457,24 @@ expression
 	| olapSpecification
 	| rowChangeExpression
 	| sequenceReference
+	| ((functionInvocation
+		| LPAREN expression RPAREN
+		| literal
+		| columnName
+		| hostVariable
+		| specialRegister
+		| scalarFullSelect
+		| timeZoneSpecificExpression
+		| labeledDuration
+		| caseExpression
+		| castSpecification
+		| xmlCastSpecification
+		| arrayElementSpecification
+		| arrayConstructor
+		| olapSpecification
+		| rowChangeExpression
+		| sequenceReference)
+		(operator expression)*)
 	)
 	;
 
