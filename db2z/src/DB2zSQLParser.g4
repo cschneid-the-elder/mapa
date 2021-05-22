@@ -63,6 +63,7 @@ sqlStatement
 	| createAuxiliaryTableStatement
 	| createDatabaseStatement
 	| createFunctionStatement
+	| createGlobalTemporaryTableStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -348,6 +349,21 @@ createFunctionStatementInlineSqlScalar
 	CREATE FUNCTION functionName
 	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
 	createFunctionStatementInlineSqlScalarOptions+
+	)
+	;
+
+createGlobalTemporaryTableStatement
+	: (
+	CREATE GLOBAL TEMPORARY TABLE tableName
+	((LPAREN globalTemporaryColumnDefinition (COMMA globalTemporaryColumnDefinition)* RPAREN)
+	| (LIKE tableName))
+	(CCSID (ASCII | EBCDIC | UNICODE))?
+	)
+	;
+
+globalTemporaryColumnDefinition
+	: (
+	columnName dataType (NOT NULL)?
 	)
 	;
 
@@ -3673,6 +3689,7 @@ sqlKeyword
 	| NULTERM
 	| STRUCTURE
 	| GENERIC
+	| TEMPORARY
 	)
 	;
 

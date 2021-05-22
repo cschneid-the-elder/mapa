@@ -2324,6 +2324,10 @@ GENERIC
 	: G E N E R I C
 	;
 
+TEMPORARY
+	: T E M P O R A R Y
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

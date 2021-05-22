@@ -427,6 +427,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateGlobalTemporaryTableStatement(DB2zSQLParser.CreateGlobalTemporaryTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateGlobalTemporaryTableStatement(DB2zSQLParser.CreateGlobalTemporaryTableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterDeclaration1}.
 	 * @param ctx the parse tree
 	 */

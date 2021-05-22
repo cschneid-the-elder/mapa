@@ -262,6 +262,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateGlobalTemporaryTableStatement(DB2zSQLParser.CreateGlobalTemporaryTableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterDeclaration1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
