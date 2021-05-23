@@ -119,6 +119,10 @@ COMMA
 	: ','
 	;
 
+ATSIGN
+	: '@'
+	;
+
 NONNUMERICLITERAL
 	: STRINGLITERAL
 	| HEXLITERAL
@@ -2326,6 +2330,30 @@ GENERIC
 
 TEMPORARY
 	: T E M P O R A R Y
+	;
+
+DEFER
+	: D E F E R 
+	;
+
+DEFINE
+	: D E F I N E 
+	;
+
+EXCLUDE
+	: E X C L U D E 
+	;
+
+GENERATE
+	: G E N E R A T E 
+	;
+
+KEYS
+	: K E Y S 
+	;
+
+XMLPATTERN
+	: X M L P A T T E R N 
 	;
 
 //end of generated sql keywords

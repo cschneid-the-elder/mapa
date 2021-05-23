@@ -268,6 +268,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateGlobalTemporaryTableStatement(DB2zSQLParser.CreateGlobalTemporaryTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createIndexStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -598,6 +604,30 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createIndexOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createIndexUsingSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlIndexSpecification(DB2zSQLParser.XmlIndexSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlPatternClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlPatternClause(DB2zSQLParser.XmlPatternClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -801,6 +831,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlDataType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlDataType(DB2zSQLParser.SqlDataTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlTypeModifier}.
 	 * @param ctx the parse tree
@@ -1011,6 +1047,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExpression(DB2zSQLParser.ExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#keyExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitKeyExpression(DB2zSQLParser.KeyExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#rowChangeExpression}.
 	 * @param ctx the parse tree

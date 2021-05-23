@@ -531,6 +531,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1191,6 +1203,54 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlIndexSpecification(DB2zSQLParser.XmlIndexSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlIndexSpecification(DB2zSQLParser.XmlIndexSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlPatternClause(DB2zSQLParser.XmlPatternClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlPatternClause(DB2zSQLParser.XmlPatternClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAlterAttributesOptions(DB2zSQLParser.AlterAttributesOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1594,6 +1654,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSqlDataType(DB2zSQLParser.SqlDataTypeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSqlDataType(DB2zSQLParser.SqlDataTypeContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2014,6 +2086,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExpression(DB2zSQLParser.ExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterKeyExpression(DB2zSQLParser.KeyExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitKeyExpression(DB2zSQLParser.KeyExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

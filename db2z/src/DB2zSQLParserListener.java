@@ -437,6 +437,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateGlobalTemporaryTableStatement(DB2zSQLParser.CreateGlobalTemporaryTableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createIndexStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createIndexStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
@@ -987,6 +997,46 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitDatabaseOptionList(DB2zSQLParser.DatabaseOptionListContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createIndexOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createIndexOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createIndexUsingSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createIndexUsingSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlIndexSpecification(DB2zSQLParser.XmlIndexSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlIndexSpecification(DB2zSQLParser.XmlIndexSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlPatternClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlPatternClause(DB2zSQLParser.XmlPatternClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlPatternClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlPatternClause(DB2zSQLParser.XmlPatternClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#alterAttributesOptions}.
 	 * @param ctx the parse tree
 	 */
@@ -1326,6 +1376,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlDataType}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlDataType(DB2zSQLParser.SqlDataTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlDataType}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlDataType(DB2zSQLParser.SqlDataTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlTypeModifier}.
 	 * @param ctx the parse tree
@@ -1676,6 +1736,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExpression(DB2zSQLParser.ExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#keyExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterKeyExpression(DB2zSQLParser.KeyExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#keyExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitKeyExpression(DB2zSQLParser.KeyExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#rowChangeExpression}.
 	 * @param ctx the parse tree

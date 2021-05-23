@@ -64,6 +64,7 @@ sqlStatement
 	| createDatabaseStatement
 	| createFunctionStatement
 	| createGlobalTemporaryTableStatement
+	| createIndexStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -358,6 +359,19 @@ createGlobalTemporaryTableStatement
 	((LPAREN globalTemporaryColumnDefinition (COMMA globalTemporaryColumnDefinition)* RPAREN)
 	| (LIKE tableName))
 	(CCSID (ASCII | EBCDIC | UNICODE))?
+	)
+	;
+
+createIndexStatement
+	: (
+	CREATE (UNIQUE (WHERE NOT NULL)?)? INDEX indexName ON
+		((tableName LPAREN 
+		(columnName | keyExpression) (ASC | DESC | RANDOM)?
+		(COMMA (columnName | keyExpression) (ASC | DESC | RANDOM)?)*
+		(COMMA BUSINESS_TIME (WITH | WITHOUT) OVERLAPS)?
+		RPAREN)
+		| (auxTableName))
+	createIndexOptionList*
 	)
 	;
 
@@ -960,6 +974,57 @@ databaseOptionList
 	)
 	;
 
+createIndexOptionList
+	: (
+	(xmlIndexSpecification)
+	| (INCLUDE LPAREN columnName (COMMA columnName)* RPAREN)
+	| (NOT? CLUSTER)
+	| (PARTITIONED)
+	| (NOT? PADDED)
+	| (COMPRESS (YES | NO))
+	| createIndexUsingSpecification
+	| freeSpecification
+	| gbpcacheSpecification
+	| (DEFINE (YES | NO))
+	| ((INCLUDE | EXCLUDE) NULL KEYS)
+	| (PARTITION BY RANGE? LPAREN
+		partitionElement (createIndexUsingSpecification | freeSpecification | gbpcacheSpecification | (DSSIZE SQLIDENTIFIER))*
+		(COMMA partitionElement (createIndexUsingSpecification | freeSpecification | gbpcacheSpecification | (DSSIZE SQLIDENTIFIER))*)* RPAREN)
+	| (BUFFERPOOL bpName)
+	| (CLOSE (YES | NO))
+	| (DEFER (NO | YES))
+	| (DSSIZE SQLIDENTIFIER)
+	| (PIECESIZE SQLIDENTIFIER)
+	| (COPY (NO | YES))
+	)
+	;
+
+createIndexUsingSpecification
+	: (
+	USING
+		((STOGROUP stogroupName
+			((PRIQTY INTEGERLITERAL)
+			| (SECQTY INTEGERLITERAL)
+			| (ERASE (NO | YES)))*)
+		| (VCAT catalogName))
+	)
+	;
+
+xmlIndexSpecification
+	: (
+	GENERATE (KEY | KEYS) USING XMLPATTERN xmlPatternClause AS SQL sqlDataType
+	)
+	;
+
+/*
+An xmlPatternClause has nontrivial syntax, but for purposes of this
+grammar it is simply a quoted string.  It probably warrants a grammar
+of its own.
+*/
+xmlPatternClause
+	: NONNUMERICLITERAL
+	;
+
 alterAttributesOptions
 	: (
 	(ADDRESS addressValue)
@@ -1002,7 +1067,8 @@ userClauseAddOptions
 	;
 
 userClauseReplaceOptions
-	: (userClauseAddOptions);
+	: (userClauseAddOptions)
+	;
 
 userClauseDropOptions
 	: (
@@ -1233,6 +1299,15 @@ builtInType
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	| ROWID
 	| (XML (LPAREN xmlTypeModifier RPAREN)?)
+	)
+	;
+
+sqlDataType
+	: (
+	(VARCHAR LPAREN INTEGERLITERAL RPAREN)
+	| (DECFLOAT (LPAREN INTEGERLITERAL RPAREN)?)
+	| DATE
+	| (TIMESTAMP (LPAREN INTEGERLITERAL RPAREN)?)
 	)
 	;
 
@@ -1492,6 +1567,10 @@ expression
 		| sequenceReference)
 		(operator expression)*)
 	)
+	;
+
+keyExpression
+	: (expression)
 	;
 
 rowChangeExpression
@@ -3690,6 +3769,12 @@ sqlKeyword
 	| STRUCTURE
 	| GENERIC
 	| TEMPORARY
+	| DEFER
+	| DEFINE
+	| EXCLUDE
+	| GENERATE
+	| KEYS
+	| XMLPATTERN
 	)
 	;
 
