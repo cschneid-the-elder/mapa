@@ -324,6 +324,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -639,6 +646,34 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitDefineOption(DB2zSQLParser.DefineOptionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitLocksizeOption(DB2zSQLParser.LocksizeOptionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitLoggedOption(DB2zSQLParser.LoggedOptionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -779,6 +814,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -815,6 +857,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitIncludeColumnPhrase(DB2zSQLParser.IncludeColumnPhraseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

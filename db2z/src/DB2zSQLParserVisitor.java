@@ -274,6 +274,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createLobTablespaceStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -544,6 +550,30 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCompressOption(DB2zSQLParser.CompressOptionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#defineOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefineOption(DB2zSQLParser.DefineOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#locksizeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocksizeOption(DB2zSQLParser.LocksizeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#lockmaxOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#loggedOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLoggedOption(DB2zSQLParser.LoggedOptionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#notAtomicPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -664,6 +694,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createLobTablespaceOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -699,6 +735,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#includeColumnPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncludeColumnPhrase(DB2zSQLParser.IncludeColumnPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#userClause}.
 	 * @param ctx the parse tree

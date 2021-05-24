@@ -543,6 +543,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1083,6 +1095,54 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDefineOption(DB2zSQLParser.DefineOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDefineOption(DB2zSQLParser.DefineOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLocksizeOption(DB2zSQLParser.LocksizeOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLocksizeOption(DB2zSQLParser.LocksizeOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoggedOption(DB2zSQLParser.LoggedOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoggedOption(DB2zSQLParser.LoggedOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1323,6 +1383,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1390,6 +1462,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterIncludeColumnPhrase(DB2zSQLParser.IncludeColumnPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitIncludeColumnPhrase(DB2zSQLParser.IncludeColumnPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

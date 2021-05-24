@@ -447,6 +447,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateIndexStatement(DB2zSQLParser.CreateIndexStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createLobTablespaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createLobTablespaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
@@ -897,6 +907,46 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCompressOption(DB2zSQLParser.CompressOptionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#defineOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefineOption(DB2zSQLParser.DefineOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#defineOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefineOption(DB2zSQLParser.DefineOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#locksizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocksizeOption(DB2zSQLParser.LocksizeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#locksizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocksizeOption(DB2zSQLParser.LocksizeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#lockmaxOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#lockmaxOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#loggedOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoggedOption(DB2zSQLParser.LoggedOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#loggedOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoggedOption(DB2zSQLParser.LoggedOptionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#notAtomicPhrase}.
 	 * @param ctx the parse tree
 	 */
@@ -1097,6 +1147,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createLobTablespaceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createLobTablespaceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree
 	 */
@@ -1156,6 +1216,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDropAttributesOptions(DB2zSQLParser.DropAttributesOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#includeColumnPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncludeColumnPhrase(DB2zSQLParser.IncludeColumnPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#includeColumnPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncludeColumnPhrase(DB2zSQLParser.IncludeColumnPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#userClause}.
 	 * @param ctx the parse tree

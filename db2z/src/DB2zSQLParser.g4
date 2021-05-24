@@ -65,6 +65,7 @@ sqlStatement
 	| createFunctionStatement
 	| createGlobalTemporaryTableStatement
 	| createIndexStatement
+	| createLobTablespaceStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -372,6 +373,12 @@ createIndexStatement
 		RPAREN)
 		| (auxTableName))
 	createIndexOptionList*
+	)
+	;
+
+createLobTablespaceStatement
+	: (
+	CREATE LOB TABLESPACE tablespaceName createLobTablespaceOptionList*
 	)
 	;
 
@@ -739,6 +746,26 @@ compressOption
 	: (COMPRESS ((YES (FIXEDLENGTH | HUFFMAN)?) | NO))
 	;
 
+defineOption
+	: (DEFINE (YES | NO))
+	;
+
+locksizeOption
+	: (LOCKSIZE (ANY | LOB))
+	;
+
+lockmaxOption
+	: (LOCKMAX (SYSTEM | INTEGERLITERAL))
+	;
+
+/*
+Although the latter two options are "supported as alternatives,
+they are not the preferred syntax."
+*/
+loggedOption
+	: ((NOT? LOGGED) | (LOG NO) | (LOG YES))
+	;
+
 notAtomicPhrase
 	: (NOT ATOMIC CONTINUE ON SQLEXCEPTION)
 	;
@@ -773,7 +800,7 @@ freeSpecification
 
 gbpcacheSpecification
 	: (
-	GBPCACHE (CHANGED | ALL | NONE)
+	GBPCACHE (CHANGED | ALL | SYSTEM | NONE)
 	)
 	;
 
@@ -1014,7 +1041,7 @@ databaseOptionList
 createIndexOptionList
 	: (
 	(xmlIndexSpecification)
-	| (INCLUDE LPAREN columnName (COMMA columnName)* RPAREN)
+	| includeColumnPhrase
 	| clusterOption
 	| (PARTITIONED)
 	| paddedOption
@@ -1022,7 +1049,7 @@ createIndexOptionList
 	| usingSpecification2
 	| freeSpecification
 	| gbpcacheSpecification
-	| (DEFINE (YES | NO))
+	| defineOption
 	| ((INCLUDE | EXCLUDE) NULL KEYS)
 	| (PARTITION BY RANGE? LPAREN
 		partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*
@@ -1033,6 +1060,22 @@ createIndexOptionList
 	| dssizeOption
 	| piecesizeOption
 	| copyOption
+	)
+	;
+
+createLobTablespaceOptionList
+	: (
+	(IN databaseName)
+	| bufferpoolOption
+	| closeOption
+	| compressOption
+	| defineOption
+	| dssizeOption
+	| gbpcacheSpecification
+	| lockmaxOption
+	| locksizeOption
+	| loggedOption
+	| usingSpecification2
 	)
 	;
 
@@ -1085,6 +1128,10 @@ dropAttributesOptions
 	| (SERVAUTH servauthValue?)
 	| (JOBNAME jobnameValue?)
 	)
+	;
+
+includeColumnPhrase
+	: (INCLUDE LPAREN columnName (COMMA columnName)* RPAREN)
 	;
 
 userClause
