@@ -496,17 +496,71 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#bufferpoolOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBufferpoolOption(DB2zSQLParser.BufferpoolOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#closeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCloseOption(DB2zSQLParser.CloseOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#copyOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCopyOption(DB2zSQLParser.CopyOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dssizeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDssizeOption(DB2zSQLParser.DssizeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#piecesizeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPiecesizeOption(DB2zSQLParser.PiecesizeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#clusterOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClusterOption(DB2zSQLParser.ClusterOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#paddedOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPaddedOption(DB2zSQLParser.PaddedOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#compressOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCompressOption(DB2zSQLParser.CompressOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#notAtomicPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterIndexPartitionOptions}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#usingSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#usingSpecification1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx);
+	T visitUsingSpecification1(DB2zSQLParser.UsingSpecification1Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#freeSpecification}.
 	 * @param ctx the parse tree
@@ -610,11 +664,11 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#createIndexUsingSpecification}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx);
+	T visitUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
 	 * @param ctx the parse tree

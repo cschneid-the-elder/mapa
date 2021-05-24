@@ -817,6 +817,96 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterIndexOptions(DB2zSQLParser.AlterIndexOptionsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#bufferpoolOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterBufferpoolOption(DB2zSQLParser.BufferpoolOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#bufferpoolOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitBufferpoolOption(DB2zSQLParser.BufferpoolOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#closeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCloseOption(DB2zSQLParser.CloseOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#closeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCloseOption(DB2zSQLParser.CloseOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#copyOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCopyOption(DB2zSQLParser.CopyOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#copyOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCopyOption(DB2zSQLParser.CopyOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dssizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDssizeOption(DB2zSQLParser.DssizeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dssizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDssizeOption(DB2zSQLParser.DssizeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#piecesizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterPiecesizeOption(DB2zSQLParser.PiecesizeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#piecesizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitPiecesizeOption(DB2zSQLParser.PiecesizeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#clusterOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterClusterOption(DB2zSQLParser.ClusterOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#clusterOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitClusterOption(DB2zSQLParser.ClusterOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#paddedOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterPaddedOption(DB2zSQLParser.PaddedOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#paddedOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitPaddedOption(DB2zSQLParser.PaddedOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#compressOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCompressOption(DB2zSQLParser.CompressOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#compressOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCompressOption(DB2zSQLParser.CompressOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#notAtomicPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#notAtomicPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#alterIndexPartitionOptions}.
 	 * @param ctx the parse tree
 	 */
@@ -827,15 +917,15 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#usingSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#usingSpecification1}.
 	 * @param ctx the parse tree
 	 */
-	void enterUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx);
+	void enterUsingSpecification1(DB2zSQLParser.UsingSpecification1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#usingSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#usingSpecification1}.
 	 * @param ctx the parse tree
 	 */
-	void exitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx);
+	void exitUsingSpecification1(DB2zSQLParser.UsingSpecification1Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#freeSpecification}.
 	 * @param ctx the parse tree
@@ -1007,15 +1097,15 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateIndexOptionList(DB2zSQLParser.CreateIndexOptionListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#createIndexUsingSpecification}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree
 	 */
-	void enterCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx);
+	void enterUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#createIndexUsingSpecification}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree
 	 */
-	void exitCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx);
+	void exitUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
 	 * @param ctx the parse tree

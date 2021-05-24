@@ -987,6 +987,114 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterBufferpoolOption(DB2zSQLParser.BufferpoolOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBufferpoolOption(DB2zSQLParser.BufferpoolOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCloseOption(DB2zSQLParser.CloseOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCloseOption(DB2zSQLParser.CloseOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCopyOption(DB2zSQLParser.CopyOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopyOption(DB2zSQLParser.CopyOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDssizeOption(DB2zSQLParser.DssizeOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDssizeOption(DB2zSQLParser.DssizeOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPiecesizeOption(DB2zSQLParser.PiecesizeOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPiecesizeOption(DB2zSQLParser.PiecesizeOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterClusterOption(DB2zSQLParser.ClusterOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClusterOption(DB2zSQLParser.ClusterOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPaddedOption(DB2zSQLParser.PaddedOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPaddedOption(DB2zSQLParser.PaddedOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompressOption(DB2zSQLParser.CompressOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompressOption(DB2zSQLParser.CompressOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNotAtomicPhrase(DB2zSQLParser.NotAtomicPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAlterIndexPartitionOptions(DB2zSQLParser.AlterIndexPartitionOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -999,13 +1107,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx) { }
+	@Override public void enterUsingSpecification1(DB2zSQLParser.UsingSpecification1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitUsingSpecification(DB2zSQLParser.UsingSpecificationContext ctx) { }
+	@Override public void exitUsingSpecification1(DB2zSQLParser.UsingSpecification1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1215,13 +1323,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx) { }
+	@Override public void enterUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCreateIndexUsingSpecification(DB2zSQLParser.CreateIndexUsingSpecificationContext ctx) { }
+	@Override public void exitUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

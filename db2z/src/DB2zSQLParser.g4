@@ -141,7 +141,7 @@ rsLocatorVariable
 alterDatabaseStatement
 	: (
 	ALTER DATABASE databaseName
-	((BUFFERPOOL bpName)
+	(bufferpoolOption
 	| (INDEXBP bpName)
 	| (STOGROUP stogroupName)
 	| (CCSID ccsidValue))+
@@ -519,7 +519,7 @@ searchedDelete
 	: (
 	DELETE FROM tableName periodClause? correlationName? includeColumns?
 	(SET assignmentClause)? (WHERE searchCondition) fetchClause?
-	(isolationClause | skipLockedDataClause)* (QUERYNO INTEGERLITERAL)?
+	(isolationClause | skipLockedDataClause)* querynoClause?
 	)
 	;
 
@@ -542,7 +542,7 @@ insertStatement
 	((VALUES (valuesList1 |
 		(LPAREN valuesList1 (COMMA valuesList1)* RPAREN)))
 	| ((WITH commonTableExpression (COMMA commonTableExpression)*)?
-		fullSelect isolationClause? (QUERYNO INTEGERLITERAL)?)
+		fullSelect isolationClause? querynoClause?)
 	| multipleRowInsert)
 	)
 	;
@@ -552,8 +552,8 @@ mergeStatement
 	MERGE INTO tableName correlationClause? includeColumns?
 	USING ((LPAREN* tableReference RPAREN*) | sourceValues) ON searchCondition
 	(WHEN matchingCondition THEN (modificationOperation | signalStatement))+ (ELSE IGNORE)?
-	(NOT ATOMIC CONTINUE ON SQLEXCEPTION)?
-	(QUERYNO INTEGERLITERAL)?
+	notAtomicPhrase?
+	querynoClause?
 	)
 	;
 
@@ -561,7 +561,7 @@ searchedUpdate
 	: (
 	UPDATE tableName periodClause? correlationName? includeColumns?
 	SET assignmentClause (WHERE searchCondition)? 
-	(isolationClause | skipLockedDataClause)* (QUERYNO INTEGERLITERAL)?
+	(isolationClause | skipLockedDataClause)* querynoClause?
 	)
 	;
 
@@ -675,7 +675,7 @@ multipleRowInsert
 	: (
 	VALUES (valuesList2 | (LPAREN valuesList2 (COMMA valuesList2)* RPAREN))
 	(FOR (hostVariable | INTEGERLITERAL) ROWS)?
-	(ATOMIC | (NOT ATOMIC CONTINUE ON SQLEXCEPTION))
+	(ATOMIC | notAtomicPhrase)
 	)
 	;
 
@@ -685,17 +685,17 @@ regenerateClause
 
 alterIndexOptions
 	:(
-	(BUFFERPOOL bpName)
-	| (CLOSE (YES | NO))
-	| (COPY (YES | NO))
-	| (DSSIZE SQLIDENTIFIER)
-	| (PIECESIZE SQLIDENTIFIER)
-	| usingSpecification
+	bufferpoolOption
+	| closeOption
+	| copyOption
+	| dssizeOption
+	| piecesizeOption
+	| usingSpecification1
 	| freeSpecification
 	| gbpcacheSpecification
-	| (NOT? CLUSTER)
-	| (NOT? PADDED)
-	| (COMPRESS (YES | NO))
+	| clusterOption
+	| paddedOption
+	| compressOption
 	| (ADD
 		((COLUMN
 		LPAREN
@@ -706,17 +706,56 @@ alterIndexOptions
 	)
 	;
 
+//
+bufferpoolOption
+	: (BUFFERPOOL bpName)
+	;
+
+closeOption
+	: (CLOSE (YES | NO))
+	;
+
+copyOption
+	: (COPY (YES | NO))
+	;
+
+dssizeOption
+	: (DSSIZE SQLIDENTIFIER)
+	;
+
+piecesizeOption
+	: (PIECESIZE SQLIDENTIFIER)
+	;
+
+clusterOption
+	: (NOT? CLUSTER)
+	;
+
+paddedOption
+	: (NOT? PADDED)
+	;
+
+compressOption
+	: (COMPRESS ((YES (FIXEDLENGTH | HUFFMAN)?) | NO))
+	;
+
+notAtomicPhrase
+	: (NOT ATOMIC CONTINUE ON SQLEXCEPTION)
+	;
+
+//
+
 alterIndexPartitionOptions
 	: (
 	ALTER partitionElement
-		(usingSpecification+
+		(usingSpecification1+
 		| freeSpecification+
 		| gbpcacheSpecification
-		| (DSSIZE SQLIDENTIFIER))*
+		| dssizeOption)*
 	)
 	;
 
-usingSpecification
+usingSpecification1
 	: (
 	(USING ((VCAT catalogName) | (STOGROUP stogroupName)))
 	| (PRIQTY INTEGERLITERAL)
@@ -914,14 +953,12 @@ tableOptionList
 
 tablespaceOptionList
 	: (
-	(BUFFERPOOL bpName)
+	bufferpoolOption
 	| (CCSID INTEGERLITERAL)
-	| (CLOSE YES)
-	| (CLOSE NO)
-	| (COMPRESS YES (FIXEDLENGTH | HUFFMAN)?)
-	| (COMPRESS NO)
+	| closeOption
+	| compressOption
 	| (DROP PENDING CHANGES)
-	| (DSSIZE SQLIDENTIFIER)
+	| dssizeOption
 	| (INSERT ALGORITHM INTEGERLITERAL)
 	| (LOCKMAX (SYSTEM | INTEGERLITERAL))
 	| (LOCKSIZE (ANY | TABLESPACE | TABLE | PAGE | ROW | LOB))
@@ -966,7 +1003,7 @@ trustedContextOptionList
 
 databaseOptionList
 	: (
-	(BUFFERPOOL bpName)
+	bufferpoolOption
 	| (INDEXBP bpName)
 	| (AS WORKFILE (FOR memberName)?)
 	| (STOGROUP ( SYSDEFLT | stogroupName)?)
@@ -978,28 +1015,28 @@ createIndexOptionList
 	: (
 	(xmlIndexSpecification)
 	| (INCLUDE LPAREN columnName (COMMA columnName)* RPAREN)
-	| (NOT? CLUSTER)
+	| clusterOption
 	| (PARTITIONED)
-	| (NOT? PADDED)
-	| (COMPRESS (YES | NO))
-	| createIndexUsingSpecification
+	| paddedOption
+	| compressOption
+	| usingSpecification2
 	| freeSpecification
 	| gbpcacheSpecification
 	| (DEFINE (YES | NO))
 	| ((INCLUDE | EXCLUDE) NULL KEYS)
 	| (PARTITION BY RANGE? LPAREN
-		partitionElement (createIndexUsingSpecification | freeSpecification | gbpcacheSpecification | (DSSIZE SQLIDENTIFIER))*
-		(COMMA partitionElement (createIndexUsingSpecification | freeSpecification | gbpcacheSpecification | (DSSIZE SQLIDENTIFIER))*)* RPAREN)
-	| (BUFFERPOOL bpName)
-	| (CLOSE (YES | NO))
+		partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*
+		(COMMA partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*)* RPAREN)
+	| bufferpoolOption
+	| closeOption
 	| (DEFER (NO | YES))
-	| (DSSIZE SQLIDENTIFIER)
-	| (PIECESIZE SQLIDENTIFIER)
-	| (COPY (NO | YES))
+	| dssizeOption
+	| piecesizeOption
+	| copyOption
 	)
 	;
 
-createIndexUsingSpecification
+usingSpecification2
 	: (
 	USING
 		((STOGROUP stogroupName
@@ -1090,8 +1127,8 @@ alterPartitionClause
 		( (usingBlock)
 		| (freeBlock)
 		| (gbpcacheBlock)
-		| (COMPRESS (YES | NO))
-		| (DSSIZE SQLIDENTIFIER)
+		| compressOption
+		| dssizeOption
 		| (TRACKMOD (YES | NO))
 		)+
 	)
@@ -1099,7 +1136,7 @@ alterPartitionClause
 
 usingBlock
 	: (
-	usingSpecification+
+	usingSpecification1+
 	)
 	;
 
@@ -3165,7 +3202,7 @@ skipLockedDataClause
 	;
 
 querynoClause
-	:(QUERYNO INTEGERLITERAL)
+	: (QUERYNO INTEGERLITERAL)
 	;
 
 scalarFullSelect
