@@ -67,6 +67,7 @@ sqlStatement
 	| createIndexStatement
 	| createLobTablespaceStatement
 	| createMaskStatement
+	| createPermissionStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -385,8 +386,15 @@ createLobTablespaceStatement
 
 createMaskStatement
 	: (
-	CREATE MASK maskName ON tableName (AS correlationName)?
-	FOR COLUMN columnName RETURN caseExpression (ENABLE | DISABLE)
+	CREATE MASK maskName ON tableName (AS? correlationName)?
+	FOR COLUMN columnName RETURN caseExpression enableDisableOption?
+	)
+	;
+
+createPermissionStatement
+	: (
+	CREATE PERMISSION permissionName ON tableName (AS? correlationName)?
+	FOR ROWS WHERE searchCondition ENFORCED FOR ALL ACCESS enableDisableOption?
 	)
 	;
 
@@ -764,6 +772,10 @@ locksizeOption
 
 lockmaxOption
 	: (LOCKMAX (SYSTEM | INTEGERLITERAL))
+	;
+
+enableDisableOption
+	: (ENABLE | DISABLE)
 	;
 
 /*
@@ -1567,7 +1579,7 @@ refreshableTableOptions
 refreshableTableOptionsList
 	: (
 	(MAINTAINED BY (SYSTEM | USER))
-	| ((ENABLE | DISABLE) QUERY OPTIMIZATION)
+	| (enableDisableOption QUERY OPTIMIZATION)
 	)
 	;
 
@@ -2702,7 +2714,7 @@ schemaName
 	;
 
 tableName
-	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier correlationName?
+	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier AS? correlationName?
 	;
 
 alterTableName

@@ -467,6 +467,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateMaskStatement(DB2zSQLParser.CreateMaskStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createPermissionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreatePermissionStatement(DB2zSQLParser.CreatePermissionStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createPermissionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreatePermissionStatement(DB2zSQLParser.CreatePermissionStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
@@ -946,6 +956,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#enableDisableOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterEnableDisableOption(DB2zSQLParser.EnableDisableOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#enableDisableOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitEnableDisableOption(DB2zSQLParser.EnableDisableOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#loggedOption}.
 	 * @param ctx the parse tree

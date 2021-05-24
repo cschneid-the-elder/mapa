@@ -286,6 +286,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateMaskStatement(DB2zSQLParser.CreateMaskStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createPermissionStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreatePermissionStatement(DB2zSQLParser.CreatePermissionStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -573,6 +579,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLockmaxOption(DB2zSQLParser.LockmaxOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#enableDisableOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEnableDisableOption(DB2zSQLParser.EnableDisableOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#loggedOption}.
 	 * @param ctx the parse tree
