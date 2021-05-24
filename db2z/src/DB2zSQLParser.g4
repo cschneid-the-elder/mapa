@@ -66,6 +66,7 @@ sqlStatement
 	| createGlobalTemporaryTableStatement
 	| createIndexStatement
 	| createLobTablespaceStatement
+	| createMaskStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -379,6 +380,13 @@ createIndexStatement
 createLobTablespaceStatement
 	: (
 	CREATE LOB TABLESPACE tablespaceName createLobTablespaceOptionList*
+	)
+	;
+
+createMaskStatement
+	: (
+	CREATE MASK maskName ON tableName (AS correlationName)?
+	FOR COLUMN columnName RETURN caseExpression (ENABLE | DISABLE)
 	)
 	;
 
@@ -2453,7 +2461,7 @@ timeZoneExpressionSubset
 
 caseExpression
 	: CASE
-	(searchedWhenClause | simpleWhenClause)
+	(searchedWhenClause | simpleWhenClause)+
 	((ELSE NULL) | (ELSE resultExpression))
 	END
 	;

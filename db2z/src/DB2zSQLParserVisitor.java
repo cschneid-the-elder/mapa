@@ -280,6 +280,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateLobTablespaceStatement(DB2zSQLParser.CreateLobTablespaceStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createMaskStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateMaskStatement(DB2zSQLParser.CreateMaskStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
