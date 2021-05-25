@@ -517,6 +517,406 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateFunctionStatementExternalScalarOptions(DB2zSQLParser.CreateFunctionStatementExternalScalarOptionsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#externalNameOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterExternalNameOption1(DB2zSQLParser.ExternalNameOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#externalNameOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitExternalNameOption1(DB2zSQLParser.ExternalNameOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#externalNameOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterExternalNameOption2(DB2zSQLParser.ExternalNameOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#externalNameOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitExternalNameOption2(DB2zSQLParser.ExternalNameOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#languageOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterLanguageOption1(DB2zSQLParser.LanguageOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#languageOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitLanguageOption1(DB2zSQLParser.LanguageOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#languageOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterLanguageOption2(DB2zSQLParser.LanguageOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#languageOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitLanguageOption2(DB2zSQLParser.LanguageOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#languageOption3}.
+	 * @param ctx the parse tree
+	 */
+	void enterLanguageOption3(DB2zSQLParser.LanguageOption3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#languageOption3}.
+	 * @param ctx the parse tree
+	 */
+	void exitLanguageOption3(DB2zSQLParser.LanguageOption3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#languageOption4}.
+	 * @param ctx the parse tree
+	 */
+	void enterLanguageOption4(DB2zSQLParser.LanguageOption4Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#languageOption4}.
+	 * @param ctx the parse tree
+	 */
+	void exitLanguageOption4(DB2zSQLParser.LanguageOption4Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#languageOption5}.
+	 * @param ctx the parse tree
+	 */
+	void enterLanguageOption5(DB2zSQLParser.LanguageOption5Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#languageOption5}.
+	 * @param ctx the parse tree
+	 */
+	void exitLanguageOption5(DB2zSQLParser.LanguageOption5Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterStyleOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterStyleOption1(DB2zSQLParser.ParameterStyleOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterStyleOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterStyleOption1(DB2zSQLParser.ParameterStyleOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterStyleOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterStyleOption2(DB2zSQLParser.ParameterStyleOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterStyleOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterStyleOption2(DB2zSQLParser.ParameterStyleOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterStyleOption3}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterStyleOption3(DB2zSQLParser.ParameterStyleOption3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterStyleOption3}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterStyleOption3(DB2zSQLParser.ParameterStyleOption3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#deterministicOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeterministicOption(DB2zSQLParser.DeterministicOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#deterministicOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeterministicOption(DB2zSQLParser.DeterministicOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fencedOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterFencedOption(DB2zSQLParser.FencedOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fencedOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitFencedOption(DB2zSQLParser.FencedOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#nullInputOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterNullInputOption(DB2zSQLParser.NullInputOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#nullInputOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitNullInputOption(DB2zSQLParser.NullInputOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlDataOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlDataOption1(DB2zSQLParser.SqlDataOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlDataOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlDataOption1(DB2zSQLParser.SqlDataOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlDataOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlDataOption2(DB2zSQLParser.SqlDataOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlDataOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlDataOption2(DB2zSQLParser.SqlDataOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlDataOption3}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlDataOption3(DB2zSQLParser.SqlDataOption3Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlDataOption3}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlDataOption3(DB2zSQLParser.SqlDataOption3Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#externalActionOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterExternalActionOption(DB2zSQLParser.ExternalActionOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#externalActionOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitExternalActionOption(DB2zSQLParser.ExternalActionOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#packagePathOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterPackagePathOption(DB2zSQLParser.PackagePathOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#packagePathOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitPackagePathOption(DB2zSQLParser.PackagePathOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#scratchpadOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterScratchpadOption(DB2zSQLParser.ScratchpadOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#scratchpadOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitScratchpadOption(DB2zSQLParser.ScratchpadOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#finalCallOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterFinalCallOption(DB2zSQLParser.FinalCallOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#finalCallOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitFinalCallOption(DB2zSQLParser.FinalCallOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parallelOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterParallelOption1(DB2zSQLParser.ParallelOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parallelOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitParallelOption1(DB2zSQLParser.ParallelOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parallelOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterParallelOption2(DB2zSQLParser.ParallelOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parallelOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitParallelOption2(DB2zSQLParser.ParallelOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dbinfoOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDbinfoOption(DB2zSQLParser.DbinfoOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dbinfoOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDbinfoOption(DB2zSQLParser.DbinfoOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#cardinalityOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCardinalityOption(DB2zSQLParser.CardinalityOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#cardinalityOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCardinalityOption(DB2zSQLParser.CardinalityOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#collectionIdOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCollectionIdOption(DB2zSQLParser.CollectionIdOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#collectionIdOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCollectionIdOption(DB2zSQLParser.CollectionIdOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#wlmEnvironmentOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterWlmEnvironmentOption1(DB2zSQLParser.WlmEnvironmentOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#wlmEnvironmentOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitWlmEnvironmentOption1(DB2zSQLParser.WlmEnvironmentOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#wlmEnvironmentOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterWlmEnvironmentOption2(DB2zSQLParser.WlmEnvironmentOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#wlmEnvironmentOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitWlmEnvironmentOption2(DB2zSQLParser.WlmEnvironmentOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#asuTimeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsuTimeOption(DB2zSQLParser.AsuTimeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#asuTimeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsuTimeOption(DB2zSQLParser.AsuTimeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#stayResidentOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterStayResidentOption(DB2zSQLParser.StayResidentOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#stayResidentOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitStayResidentOption(DB2zSQLParser.StayResidentOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#programTypeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterProgramTypeOption(DB2zSQLParser.ProgramTypeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#programTypeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitProgramTypeOption(DB2zSQLParser.ProgramTypeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#securityOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterSecurityOption(DB2zSQLParser.SecurityOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#securityOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitSecurityOption(DB2zSQLParser.SecurityOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#stopAfterFailureOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterStopAfterFailureOption(DB2zSQLParser.StopAfterFailureOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#stopAfterFailureOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitStopAfterFailureOption(DB2zSQLParser.StopAfterFailureOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#runOptionsOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterRunOptionsOption(DB2zSQLParser.RunOptionsOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#runOptionsOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitRunOptionsOption(DB2zSQLParser.RunOptionsOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#specialRegistersOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecialRegistersOption(DB2zSQLParser.SpecialRegistersOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#specialRegistersOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecialRegistersOption(DB2zSQLParser.SpecialRegistersOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dispatchOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDispatchOption(DB2zSQLParser.DispatchOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dispatchOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDispatchOption(DB2zSQLParser.DispatchOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#securedOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterSecuredOption(DB2zSQLParser.SecuredOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#securedOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitSecuredOption(DB2zSQLParser.SecuredOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#specificNameOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecificNameOption1(DB2zSQLParser.SpecificNameOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#specificNameOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecificNameOption1(DB2zSQLParser.SpecificNameOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#specificNameOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterSpecificNameOption2(DB2zSQLParser.SpecificNameOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#specificNameOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitSpecificNameOption2(DB2zSQLParser.SpecificNameOption2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterOption1}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterOption1(DB2zSQLParser.ParameterOption1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterOption1}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterOption1(DB2zSQLParser.ParameterOption1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterOption2}.
+	 * @param ctx the parse tree
+	 */
+	void enterParameterOption2(DB2zSQLParser.ParameterOption2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#parameterOption2}.
+	 * @param ctx the parse tree
+	 */
+	void exitParameterOption2(DB2zSQLParser.ParameterOption2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionStatementExternalTableOptions}.
 	 * @param ctx the parse tree
 	 */

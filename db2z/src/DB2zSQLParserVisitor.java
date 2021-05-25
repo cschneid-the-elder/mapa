@@ -316,6 +316,246 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateFunctionStatementExternalScalarOptions(DB2zSQLParser.CreateFunctionStatementExternalScalarOptionsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#externalNameOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExternalNameOption1(DB2zSQLParser.ExternalNameOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#externalNameOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExternalNameOption2(DB2zSQLParser.ExternalNameOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#languageOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLanguageOption1(DB2zSQLParser.LanguageOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#languageOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLanguageOption2(DB2zSQLParser.LanguageOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#languageOption3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLanguageOption3(DB2zSQLParser.LanguageOption3Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#languageOption4}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLanguageOption4(DB2zSQLParser.LanguageOption4Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#languageOption5}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLanguageOption5(DB2zSQLParser.LanguageOption5Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterStyleOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameterStyleOption1(DB2zSQLParser.ParameterStyleOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterStyleOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameterStyleOption2(DB2zSQLParser.ParameterStyleOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterStyleOption3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameterStyleOption3(DB2zSQLParser.ParameterStyleOption3Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#deterministicOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeterministicOption(DB2zSQLParser.DeterministicOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fencedOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFencedOption(DB2zSQLParser.FencedOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nullInputOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNullInputOption(DB2zSQLParser.NullInputOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlDataOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlDataOption1(DB2zSQLParser.SqlDataOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlDataOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlDataOption2(DB2zSQLParser.SqlDataOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlDataOption3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlDataOption3(DB2zSQLParser.SqlDataOption3Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#externalActionOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExternalActionOption(DB2zSQLParser.ExternalActionOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#packagePathOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPackagePathOption(DB2zSQLParser.PackagePathOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#scratchpadOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScratchpadOption(DB2zSQLParser.ScratchpadOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#finalCallOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFinalCallOption(DB2zSQLParser.FinalCallOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parallelOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParallelOption1(DB2zSQLParser.ParallelOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parallelOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParallelOption2(DB2zSQLParser.ParallelOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dbinfoOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDbinfoOption(DB2zSQLParser.DbinfoOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cardinalityOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCardinalityOption(DB2zSQLParser.CardinalityOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#collectionIdOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCollectionIdOption(DB2zSQLParser.CollectionIdOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#wlmEnvironmentOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWlmEnvironmentOption1(DB2zSQLParser.WlmEnvironmentOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#wlmEnvironmentOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWlmEnvironmentOption2(DB2zSQLParser.WlmEnvironmentOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#asuTimeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsuTimeOption(DB2zSQLParser.AsuTimeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#stayResidentOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStayResidentOption(DB2zSQLParser.StayResidentOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#programTypeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProgramTypeOption(DB2zSQLParser.ProgramTypeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#securityOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSecurityOption(DB2zSQLParser.SecurityOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#stopAfterFailureOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStopAfterFailureOption(DB2zSQLParser.StopAfterFailureOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#runOptionsOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRunOptionsOption(DB2zSQLParser.RunOptionsOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#specialRegistersOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSpecialRegistersOption(DB2zSQLParser.SpecialRegistersOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dispatchOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDispatchOption(DB2zSQLParser.DispatchOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#securedOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSecuredOption(DB2zSQLParser.SecuredOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#specificNameOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSpecificNameOption1(DB2zSQLParser.SpecificNameOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#specificNameOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSpecificNameOption2(DB2zSQLParser.SpecificNameOption2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterOption1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameterOption1(DB2zSQLParser.ParameterOption1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitParameterOption2(DB2zSQLParser.ParameterOption2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementExternalTableOptions}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -24,6 +24,7 @@ ALTER PROCEDURE (SQL - external)
 ALTER PROCEDURE (SQL - native)
 ALTER TRIGGER (advanced)
 CREATE FUNCTION (compiled SQL scalar)
+CREATE PROCEDURE (SQL - native)
 
 */
 
@@ -421,104 +422,259 @@ createFunctionStatementExternalScalarOptions
 	(RETURNS 
 		((dataType (AS LOCATOR)?)
 		| (dataType CAST FROM dataType (AS LOCATOR)?)))
-	| (EXTERNAL (NAME (externalProgramName | identifier))?)
-	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI))
-	| (PARAMETER STYLE (SQL | JAVA))
-	| (NOT? DETERMINISTIC)
-	| (NOT? VARIANT)
-	| (FENCED)
-	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
-	| (NULL CALL) 
-	| ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
-	| (NO? EXTERNAL ACTION)
-	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
-	| ((NO SCRATCHPAD) | (SCRATCHPAD INTEGERLITERAL))
-	| (NO? FINAL CALL)
-	| ((ALLOW | DISALLOW) PARALLEL)
-	| (NO? DBINFO)
-	| (CARDINALITY INTEGERLITERAL)
-	| ((NO COLLID) | (COLLID collectionID))
-	| (WLM ENVIRONMENT (identifier | (LPAREN identifier RPAREN)))
-	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
-	| (STAY RESIDENT (NO | YES))
-	| (PROGRAM TYPE (SUB | MAIN))
-	| (SECURITY (DB2 | USER | DEFINER))
-	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
-	| (RUN OPTIONS runTimeOptions)
-	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
-	| (STATIC DISPATCH)
-	| (NOT? SECURED)
-	| SPECIFIC specificName?
-	| (PARAMETER 
-		((CCSID (ASCII | EBCDIC | UNICODE))
-		| (VARCHAR (NULTERM | STRUCTURE)))+)
+	| externalNameOption1
+	| languageOption3
+	| parameterStyleOption2
+	| deterministicOption
+	| fencedOption
+	| nullInputOption
+	| sqlDataOption3
+	| externalActionOption
+	| packagePathOption
+	| scratchpadOption
+	| finalCallOption
+	| parallelOption2
+	| dbinfoOption
+	| cardinalityOption
+	| collectionIdOption
+	| wlmEnvironmentOption1
+	| asuTimeOption
+	| stayResidentOption
+	| programTypeOption
+	| securityOption
+	| stopAfterFailureOption
+	| runOptionsOption
+	| specialRegistersOption
+	| dispatchOption
+	| securedOption
+	| specificNameOption1
+	| parameterOption1
 	)
 	;
+
+//
+externalNameOption1
+	: (EXTERNAL (NAME (externalProgramName | identifier))?)
+	;
+
+externalNameOption2
+	: (EXTERNAL NAME (externalProgramName | identifier))
+	;
+
+languageOption1
+	: (LANGUAGE SQL)
+	;
+
+languageOption2
+	: (LANGUAGE (ASSEMBLE | C_ | COBOL | PLI))
+	;
+
+languageOption3
+	: (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI))
+	;
+
+languageOption4
+	: (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | SQL))
+	;
+
+languageOption5
+	: (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | REXX))
+	;
+
+parameterStyleOption1
+	: (PARAMETER STYLE SQL)
+	;
+
+parameterStyleOption2
+	: (PARAMETER STYLE (SQL | JAVA))
+	;
+
+parameterStyleOption3
+	: (PARAMETER STYLE (SQL | DB2SQL | (STANDARD CALL) | GENERAL | (SIMPLE CALL) | ((GENERAL | (SIMPLE CALL)) WITH NULLS) | JAVA))
+	;
+
+deterministicOption
+	: ((NOT? DETERMINISTIC) | (NOT? VARIANT))
+	;
+
+fencedOption
+	: (FENCED)
+	;
+
+nullInputOption
+	: ((RETURNS NULL ON NULL INPUT) | (CALLED ON NULL INPUT) | (NULL CALL))
+	;
+
+sqlDataOption1
+	: ((READS SQL DATA) | (CONTAINS SQL))
+	;
+
+sqlDataOption2
+	: ((READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
+	;
+
+sqlDataOption3
+	: ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
+	;
+
+externalActionOption
+	: (NO? EXTERNAL ACTION)
+	;
+
+packagePathOption
+	: ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
+	;
+
+scratchpadOption
+	: ((NO SCRATCHPAD) | (SCRATCHPAD INTEGERLITERAL))
+	;
+
+finalCallOption
+	: (NO? FINAL CALL)
+	;
+
+parallelOption1
+	: (DISALLOW PARALLEL)
+	;
+
+parallelOption2
+	: ((ALLOW | DISALLOW) PARALLEL)
+	;
+
+dbinfoOption
+	: (NO? DBINFO)
+	;
+
+cardinalityOption
+	: (CARDINALITY INTEGERLITERAL)
+	;
+
+collectionIdOption
+	: ((NO COLLID) | (COLLID collectionID))
+	;
+
+wlmEnvironmentOption1
+	: (WLM ENVIRONMENT (identifier | (LPAREN identifier RPAREN)))
+	;
+
+wlmEnvironmentOption2
+	: (WLM ENVIRONMENT (identifier | (LPAREN identifier COMMA SPLAT RPAREN)))
+	;
+
+asuTimeOption
+	: (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)))
+	;
+
+stayResidentOption
+	: (STAY RESIDENT (NO | YES))
+	;
+
+programTypeOption
+	: (PROGRAM TYPE (SUB | MAIN))
+	;
+
+securityOption
+	: (SECURITY (DB2 | USER | DEFINER))
+	;
+
+stopAfterFailureOption
+	: ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
+	;
+
+runOptionsOption
+	: (RUN OPTIONS runTimeOptions)
+	;
+
+specialRegistersOption
+	: ((INHERIT | DEFAULT) SPECIAL REGISTERS)
+	;
+
+dispatchOption
+	: (STATIC DISPATCH)
+	;
+
+securedOption
+	: (NOT? SECURED)
+	;
+
+specificNameOption1
+	: (SPECIFIC specificName?)
+	;
+
+specificNameOption2
+	: (SPECIFIC specificName)
+	;
+
+parameterOption1
+	: (PARAMETER 
+		((CCSID (ASCII | EBCDIC | UNICODE))
+		| (VARCHAR (NULTERM | STRUCTURE)))+)
+	;
+
+parameterOption2
+	: (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
+	;
+
+//
 
 createFunctionStatementExternalTableOptions
 	: (
 	(RETURNS 
 		((TABLE LPAREN columnName functionDataType (AS LOCATOR)? (COMMA columnName functionDataType (AS LOCATOR)?)* RPAREN)
 		| (GENERIC TABLE)))
-	| (EXTERNAL (NAME (externalProgramName | identifier))?)
-	| (LANGUAGE (ASSEMBLE | C_ | COBOL | PLI))
-	| (PARAMETER STYLE SQL)
-	| (NOT? DETERMINISTIC)
-	| (NOT? VARIANT)
-	| (FENCED)
-	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
-	| (NULL CALL) 
-	| ((READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
-	| (NO? EXTERNAL ACTION)
-	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
-	| ((NO SCRATCHPAD) | (SCRATCHPAD INTEGERLITERAL))
-	| (NO? FINAL CALL)
-	| (DISALLOW PARALLEL)
-	| (NO? DBINFO)
-	| (CARDINALITY INTEGERLITERAL)
-	| ((NO COLLID) | (COLLID collectionID))
-	| (WLM ENVIRONMENT (identifier | (LPAREN identifier RPAREN)))
-	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
-	| (STAY RESIDENT (NO | YES))
-	| (PROGRAM TYPE (SUB | MAIN))
-	| (SECURITY (DB2 | USER | DEFINER))
-	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
-	| (RUN OPTIONS runTimeOptions)
-	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
-	| (STATIC DISPATCH)
-	| (NOT? SECURED)
-	| SPECIFIC specificName?
-	| (PARAMETER 
-		((CCSID (ASCII | EBCDIC | UNICODE))
-		| (VARCHAR (NULTERM | STRUCTURE)))+)
+	| externalNameOption1
+	| languageOption2
+	| parameterStyleOption1
+	| deterministicOption
+	| fencedOption
+	| nullInputOption
+	| sqlDataOption2
+	| externalActionOption
+	| packagePathOption
+	| scratchpadOption
+	| finalCallOption
+	| parallelOption1
+	| dbinfoOption
+	| cardinalityOption
+	| collectionIdOption
+	| wlmEnvironmentOption1
+	| asuTimeOption
+	| stayResidentOption
+	| programTypeOption
+	| securityOption
+	| stopAfterFailureOption
+	| runOptionsOption
+	| specialRegistersOption
+	| dispatchOption
+	| securedOption
+	| specificNameOption1
+	| parameterOption1
 	)
 	;
 
 createFunctionStatementSourcedOptions
 	: (
 	(RETURNS functionDataType (AS LOCATOR)?)
-	| (SPECIFIC specificName)
-	| (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
+	| specificNameOption2
+	| parameterOption2
 	| (SOURCE 
 		((functionName LPAREN parameterType (COMMA parameterType)* RPAREN)
-		| (SPECIFIC specificName)))
+		| specificNameOption2))
 	)
 	;
 
 createFunctionStatementInlineSqlScalarOptions
 	: (
-	(RETURNS functionDataType (LANGUAGE SQL)?)
+	(RETURNS functionDataType languageOption1?)
 	| (RETURN (expression | NULL | fullSelect))
-	| (NOT? DETERMINISTIC)
-	| (NOT? VARIANT)
-	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
-	| (NULL CALL) 
-	| ((READS SQL DATA) | (CONTAINS SQL))
-	| (NO? EXTERNAL ACTION)
-	| (STATIC DISPATCH)
-	| (NOT? SECURED)
-	| SPECIFIC specificName?
-	| (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
+	| deterministicOption
+	| nullInputOption
+	| sqlDataOption1
+	| externalActionOption
+	| dispatchOption
+	| securedOption
+	| specificNameOption1
+	| parameterOption2
 	)
 	;
 
@@ -876,32 +1032,30 @@ functionBuiltInType
 
 functionOptionList
 	: (
-	(EXTERNAL NAME (externalProgramName | identifier))
-	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | SQL))
-	| (PARAMETER STYLE (SQL | JAVA))
-	| (NOT? DETERMINISTIC)
-	| (NOT? VARIANT)
-	| (((RETURNS NULL) | CALLED) ON NULL INPUT)
-	| (NULL CALL) 
-	| ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
-	| (NO? EXTERNAL ACTION)
-	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
-	| ((NO SCRATCHPAD) | (SCRATCHPAD INTEGERLITERAL))
-	| (NO? FINAL CALL)
-	| ((ALLOW | DISALLOW) PARALLEL)
-	| (NO? DBINFO)
-	| (CARDINALITY INTEGERLITERAL)
-	| ((NO COLLID) | (COLLID collectionID))
-	| (WLM ENVIRONMENT (identifier | (LPAREN identifier COMMA SPLAT RPAREN)))
-	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
-	| (STAY RESIDENT (NO | YES))
-	| (PROGRAM TYPE (SUB | MAIN))
-	| (SECURITY (DB2 | USER | DEFINER))
-	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
-	| (RUN OPTIONS runTimeOptions)
-	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
-	| (STATIC DISPATCH)
-	| (NOT? SECURED)
+	externalNameOption2
+	| languageOption4
+	| parameterStyleOption2
+	| deterministicOption
+	| nullInputOption
+	| sqlDataOption3
+	| externalActionOption
+	| packagePathOption
+	| scratchpadOption
+	| finalCallOption
+	| parallelOption2
+	| dbinfoOption
+	| cardinalityOption
+	| collectionIdOption
+	| wlmEnvironmentOption2
+	| asuTimeOption
+	| stayResidentOption
+	| programTypeOption
+	| securityOption
+	| stopAfterFailureOption
+	| runOptionsOption
+	| specialRegistersOption
+	| dispatchOption
+	| securedOption
 	| SPECIFIC
 	| (PARAMETER CCSID)
 	)
@@ -910,26 +1064,25 @@ functionOptionList
 procedureOptionList
 	: (
 	(DYNAMIC? RESULT (SET |SETS) INTEGERLITERAL)
-	| (EXTERNAL NAME (externalProgramName | identifier))
-	| (LANGUAGE (ASSEMBLE | C_ | COBOL | JAVA | PLI | REXX))
-	| (PARAMETER STYLE (SQL | DB2SQL | (STANDARD CALL) | GENERAL | (SIMPLE CALL) | ((GENERAL | (SIMPLE CALL)) WITH NULLS) | JAVA))
-	| (NOT? DETERMINISTIC)
-	| (NOT? VARIANT)
-	| ((PACKAGE PATH packagePath) | (NO PACKAGE PATH))
-	| ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
-	| (NO? DBINFO)
-	| ((NO COLLID) | (COLLID collectionID))
-	| (WLM ENVIRONMENT (identifier | (LPAREN identifier COMMA SPLAT RPAREN)))
-	| (ASUTIME ((NO LIMIT) | (LIMIT INTEGERLITERAL)) )
-	| (STAY RESIDENT (NO | YES))
-	| (PROGRAM TYPE (SUB | MAIN))
-	| (SECURITY (DB2 | USER | DEFINER))
-	| (RUN OPTIONS runTimeOptions)
+	| externalNameOption2
+	| languageOption5
+	| parameterStyleOption3
+	| deterministicOption
+	| packagePathOption
+	| sqlDataOption3
+	| dbinfoOption
+	| collectionIdOption
+	| wlmEnvironmentOption2
+	| asuTimeOption
+	| stayResidentOption
+	| programTypeOption
+	| securityOption
+	| runOptionsOption
 	| (COMMIT ON RETURN (NO | YES))
-	| ((INHERIT | DEFAULT) SPECIAL REGISTERS)
+	| specialRegistersOption
 	| (CALLED ON NULL INPUT)
 	| (NULL CALL)
-	| ((STOP AFTER SYSTEM DEFAULT FAILURES) | (STOP AFTER INTEGERLITERAL FAILURES) | (CONTINUE AFTER FAILURE))
+	| stopAfterFailureOption
 	| ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
 	)
 	;
