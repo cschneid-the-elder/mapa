@@ -71,6 +71,7 @@ sqlStatement
 	| createPermissionStatement
 	| createProcedureStatement
 	| createRoleStatement
+	| createSequenceStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -192,7 +193,7 @@ alterProcedureStatement
 
 alterSequenceStatement
 	: (
-	ALTER SEQUENCE sequenceName sequenceOptionList+
+	ALTER SEQUENCE sequenceName alterSequenceOptionList+
 	)
 	;
 
@@ -412,6 +413,12 @@ createProcedureStatement
 createRoleStatement
 	: (
 	CREATE ROLE roleName
+	)
+	;
+
+createSequenceStatement
+	: (
+	CREATE SEQUENCE sequenceName createSequenceOptionList+
 	)
 	;
 
@@ -1182,17 +1189,68 @@ procedureDataType
 	: (procedureBuiltinType | distinctTypeName)
 	;
 
-sequenceOptionList
+alterSequenceOptionList
 	: (
-	(RESTART (WITH INTEGERLITERAL)?)
-	| (INCREMENT BY INTEGERLITERAL)
-	| ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
-	| ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
-	| (NO? CYCLE)
-	| ((NO CACHE) | (CACHE INTEGERLITERAL))
-	| (NO? ORDER)
+	restartOption
+	| incrementOption
+	| minvalueOption
+	| maxvalueOption
+	| cycleOption
+	| cacheOption
+	| orderOption
 	)
 	;
+
+createSequenceOptionList
+	: (
+	asTypeOption
+	| startOption
+	| incrementOption
+	| minvalueOption
+	| maxvalueOption
+	| cycleOption
+	| cacheOption
+	| orderOption
+	)
+	;
+
+//
+asTypeOption
+	: (AS sequenceDataType)
+	;
+
+startOption
+	: (START WITH INTEGERLITERAL)
+	;
+
+restartOption
+	: (RESTART (WITH INTEGERLITERAL)?)
+	;
+
+incrementOption
+	: (INCREMENT BY INTEGERLITERAL)
+	;
+
+minvalueOption
+	: ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
+	;
+
+maxvalueOption
+	: ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
+	;
+
+cycleOption
+	: (NO? CYCLE)
+	;
+
+cacheOption
+	: ((NO CACHE) | (CACHE INTEGERLITERAL))
+	;
+
+orderOption
+	: (NO? ORDER)
+	;
+//
 
 stogroupOptionList
 	: (
@@ -1552,13 +1610,13 @@ asIdentityClause
 
 asIdentityClauseOptionList
 	: (
-	(START WITH INTEGERLITERAL)
-	| (INCREMENT BY INTEGERLITERAL)
-	| ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
-	| ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
-	| (NO? CYCLE)
-	| ((NO CACHE) | (CACHE INTEGERLITERAL))
-	| (NO? ORDER)
+	startOption
+	| incrementOption
+	| minvalueOption
+	| maxvalueOption
+	| cycleOption
+	| cacheOption
+	| orderOption
 	)
 	;
 
@@ -1654,6 +1712,20 @@ builtInType
 	)
 	;
 
+sequenceDataType
+	: (sequenceBuiltInType | distinctTypeName)
+	;
+
+sequenceBuiltInType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	| ((DECIMAL | DEC | NUMERIC) integerInParens?)
+	)
+	;
+
 sqlDataType
 	: (
 	(VARCHAR LPAREN INTEGERLITERAL RPAREN)
@@ -1703,12 +1775,12 @@ schemaLocation
 identityAlteration
 	: (
 	(RESTART (WITH INTEGERLITERAL)?)
-	| (SET INCREMENT BY INTEGERLITERAL)
-	| (SET ((NO MINVALUE) | (MINVALUE INTEGERLITERAL)))
-	| (SET ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL)))
-	| (SET NO? CYCLE)
-	| (SET ((NO CACHE) | (CACHE INTEGERLITERAL)))
-	| (SET NO? ORDER)
+	| (SET incrementOption)
+	| (SET minvalueOption)
+	| (SET maxvalueOption)
+	| (SET cycleOption)
+	| (SET cacheOption)
+	| (SET orderOption)
 	)
 	;
 

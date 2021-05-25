@@ -304,6 +304,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateRoleStatement(DB2zSQLParser.CreateRoleStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createSequenceStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateSequenceStatement(DB2zSQLParser.CreateSequenceStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -970,11 +976,71 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitProcedureDataType(DB2zSQLParser.ProcedureDataTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterSequenceOptionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
+	T visitAlterSequenceOptionList(DB2zSQLParser.AlterSequenceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createSequenceOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateSequenceOptionList(DB2zSQLParser.CreateSequenceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#asTypeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsTypeOption(DB2zSQLParser.AsTypeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#startOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStartOption(DB2zSQLParser.StartOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#restartOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRestartOption(DB2zSQLParser.RestartOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#incrementOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncrementOption(DB2zSQLParser.IncrementOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#minvalueOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMinvalueOption(DB2zSQLParser.MinvalueOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#maxvalueOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMaxvalueOption(DB2zSQLParser.MaxvalueOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cycleOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCycleOption(DB2zSQLParser.CycleOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cacheOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCacheOption(DB2zSQLParser.CacheOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#orderOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrderOption(DB2zSQLParser.OrderOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
 	 * @param ctx the parse tree
@@ -1245,6 +1311,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceDataType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequenceDataType(DB2zSQLParser.SequenceDataTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sequenceBuiltInType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSequenceBuiltInType(DB2zSQLParser.SequenceBuiltInTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlDataType}.
 	 * @param ctx the parse tree

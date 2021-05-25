@@ -497,6 +497,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateRoleStatement(DB2zSQLParser.CreateRoleStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createSequenceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateSequenceStatement(DB2zSQLParser.CreateSequenceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createSequenceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateSequenceStatement(DB2zSQLParser.CreateSequenceStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
@@ -1607,15 +1617,115 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitProcedureDataType(DB2zSQLParser.ProcedureDataTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceOptionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterSequenceOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void enterSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
+	void enterAlterSequenceOptionList(DB2zSQLParser.AlterSequenceOptionListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceOptionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterSequenceOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void exitSequenceOptionList(DB2zSQLParser.SequenceOptionListContext ctx);
+	void exitAlterSequenceOptionList(DB2zSQLParser.AlterSequenceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createSequenceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateSequenceOptionList(DB2zSQLParser.CreateSequenceOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createSequenceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateSequenceOptionList(DB2zSQLParser.CreateSequenceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#asTypeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsTypeOption(DB2zSQLParser.AsTypeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#asTypeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsTypeOption(DB2zSQLParser.AsTypeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#startOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterStartOption(DB2zSQLParser.StartOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#startOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitStartOption(DB2zSQLParser.StartOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#restartOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestartOption(DB2zSQLParser.RestartOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#restartOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestartOption(DB2zSQLParser.RestartOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#incrementOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterIncrementOption(DB2zSQLParser.IncrementOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#incrementOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitIncrementOption(DB2zSQLParser.IncrementOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#minvalueOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterMinvalueOption(DB2zSQLParser.MinvalueOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#minvalueOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitMinvalueOption(DB2zSQLParser.MinvalueOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#maxvalueOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterMaxvalueOption(DB2zSQLParser.MaxvalueOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#maxvalueOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitMaxvalueOption(DB2zSQLParser.MaxvalueOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#cycleOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCycleOption(DB2zSQLParser.CycleOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#cycleOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCycleOption(DB2zSQLParser.CycleOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#cacheOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCacheOption(DB2zSQLParser.CacheOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#cacheOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCacheOption(DB2zSQLParser.CacheOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#orderOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrderOption(DB2zSQLParser.OrderOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#orderOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrderOption(DB2zSQLParser.OrderOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
 	 * @param ctx the parse tree
@@ -2066,6 +2176,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBuiltInType(DB2zSQLParser.BuiltInTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceDataType}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequenceDataType(DB2zSQLParser.SequenceDataTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceDataType}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequenceDataType(DB2zSQLParser.SequenceDataTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sequenceBuiltInType}.
+	 * @param ctx the parse tree
+	 */
+	void enterSequenceBuiltInType(DB2zSQLParser.SequenceBuiltInTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sequenceBuiltInType}.
+	 * @param ctx the parse tree
+	 */
+	void exitSequenceBuiltInType(DB2zSQLParser.SequenceBuiltInTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlDataType}.
 	 * @param ctx the parse tree
