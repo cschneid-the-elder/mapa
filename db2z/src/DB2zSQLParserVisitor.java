@@ -310,6 +310,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateSequenceStatement(DB2zSQLParser.CreateSequenceStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createStogroupStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1042,11 +1048,35 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOrderOption(DB2zSQLParser.OrderOptionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#keyLabelOption}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStogroupOptionList(DB2zSQLParser.StogroupOptionListContext ctx);
+	T visitKeyLabelOption(DB2zSQLParser.KeyLabelOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dataclasOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataclasOption(DB2zSQLParser.DataclasOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#mgmtclasOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMgmtclasOption(DB2zSQLParser.MgmtclasOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#storclasOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStorclasOption(DB2zSQLParser.StorclasOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterStogroupOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterStogroupOptionList(DB2zSQLParser.AlterStogroupOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#tableOptionList}.
 	 * @param ctx the parse tree

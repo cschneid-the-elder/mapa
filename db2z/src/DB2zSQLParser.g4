@@ -72,6 +72,7 @@ sqlStatement
 	| createProcedureStatement
 	| createRoleStatement
 	| createSequenceStatement
+	| createStogroupStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -199,7 +200,7 @@ alterSequenceStatement
 
 alterStogroupStatement
 	: (
-	ALTER STOGROUP stogroupName stogroupOptionList+
+	ALTER STOGROUP stogroupName alterStogroupOptionList+
 	)
 	;
 
@@ -419,6 +420,21 @@ createRoleStatement
 createSequenceStatement
 	: (
 	CREATE SEQUENCE sequenceName createSequenceOptionList+
+	)
+	;
+
+createStogroupStatement
+	: (
+	CREATE STOGROUP stogroupName
+	(VOLUMES 
+		(LPAREN (volumeID | NONNUMERICLITERAL | SPLAT) 
+		(COMMA (volumeID | NONNUMERICLITERAL | SPLAT))* 
+		RPAREN))?
+	VCAT catalogName
+	dataclasOption?
+	mgmtclasOption?
+	storclasOption?
+	keyLabelOption?
 	)
 	;
 
@@ -1250,19 +1266,35 @@ cacheOption
 orderOption
 	: (NO? ORDER)
 	;
+
+keyLabelOption
+	: ((NO KEY LABEL) | (KEY LABEL keyLabelName))
+	;
+
+dataclasOption
+	: (DATACLAS dcName)
+	;
+
+mgmtclasOption
+	: (MGMTCLAS mcName)
+	;
+
+storclasOption
+	: (STORCLAS scName)
+	;
+
 //
 
-stogroupOptionList
+alterStogroupOptionList
 	: (
 	(ADD VOLUMES LPAREN volumeID (COMMA volumeID)* RPAREN)
 	| (ADD VOLUMES LPAREN NONNUMERICLITERAL (COMMA NONNUMERICLITERAL)* RPAREN)
 	| (REMOVE VOLUMES LPAREN volumeID (COMMA volumeID)* RPAREN)
 	| (REMOVE VOLUMES LPAREN NONNUMERICLITERAL (COMMA NONNUMERICLITERAL)* RPAREN)
-	| (NO KEY LABEL)
-	| (KEY LABEL keyLabelName)
-	| (DATACLAS dcName)
-	| (MGMTCLAS mcName)
-	| (STORCLAS scName)
+	| keyLabelOption
+	| dataclasOption
+	| mgmtclasOption
+	| storclasOption
 	)
 	;
 

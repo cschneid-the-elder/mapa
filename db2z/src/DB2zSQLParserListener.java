@@ -507,6 +507,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateSequenceStatement(DB2zSQLParser.CreateSequenceStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createStogroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createStogroupStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
@@ -1727,15 +1737,55 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitOrderOption(DB2zSQLParser.OrderOptionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#keyLabelOption}.
 	 * @param ctx the parse tree
 	 */
-	void enterStogroupOptionList(DB2zSQLParser.StogroupOptionListContext ctx);
+	void enterKeyLabelOption(DB2zSQLParser.KeyLabelOptionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#stogroupOptionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#keyLabelOption}.
 	 * @param ctx the parse tree
 	 */
-	void exitStogroupOptionList(DB2zSQLParser.StogroupOptionListContext ctx);
+	void exitKeyLabelOption(DB2zSQLParser.KeyLabelOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dataclasOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataclasOption(DB2zSQLParser.DataclasOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dataclasOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataclasOption(DB2zSQLParser.DataclasOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#mgmtclasOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterMgmtclasOption(DB2zSQLParser.MgmtclasOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#mgmtclasOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitMgmtclasOption(DB2zSQLParser.MgmtclasOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#storclasOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterStorclasOption(DB2zSQLParser.StorclasOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#storclasOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitStorclasOption(DB2zSQLParser.StorclasOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterStogroupOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterStogroupOptionList(DB2zSQLParser.AlterStogroupOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterStogroupOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterStogroupOptionList(DB2zSQLParser.AlterStogroupOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#tableOptionList}.
 	 * @param ctx the parse tree
