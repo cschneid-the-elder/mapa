@@ -69,6 +69,7 @@ sqlStatement
 	| createLobTablespaceStatement
 	| createMaskStatement
 	| createPermissionStatement
+	| createProcedureStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -399,6 +400,14 @@ createPermissionStatement
 	)
 	;
 
+createProcedureStatement
+	: (
+	CREATE (OR REPLACE)? PROCEDURE procedureName
+	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	createProcedureOptionList+
+	)
+	;
+
 globalTemporaryColumnDefinition
 	: (
 	columnName dataType (NOT NULL)?
@@ -417,6 +426,12 @@ parameterDeclaration2
 	)
 	;
 
+parameterDeclaration3
+	: (
+	(IN | OUT | INOUT)? parameterName? procedureDataType (AS LOCATOR)?
+	)
+	;
+
 createFunctionStatementExternalScalarOptions
 	: (
 	(RETURNS 
@@ -427,7 +442,7 @@ createFunctionStatementExternalScalarOptions
 	| parameterStyleOption2
 	| deterministicOption
 	| fencedOption
-	| nullInputOption
+	| nullInputOption1
 	| sqlDataOption3
 	| externalActionOption
 	| packagePathOption
@@ -459,6 +474,10 @@ externalNameOption1
 
 externalNameOption2
 	: (EXTERNAL NAME (externalProgramName | identifier))
+	;
+
+dynamicResultSetOption
+	: (DYNAMIC? RESULT (SET |SETS) INTEGERLITERAL)
 	;
 
 languageOption1
@@ -501,8 +520,16 @@ fencedOption
 	: (FENCED)
 	;
 
-nullInputOption
+nullInputOption1
 	: ((RETURNS NULL ON NULL INPUT) | (CALLED ON NULL INPUT) | (NULL CALL))
+	;
+
+nullInputOption2
+	: ((CALLED ON NULL INPUT) | (NULL CALL))
+	;
+
+debugOption
+	: ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
 	;
 
 sqlDataOption1
@@ -585,6 +612,10 @@ runOptionsOption
 	: (RUN OPTIONS runTimeOptions)
 	;
 
+commitOnReturnOption
+	: (COMMIT ON RETURN (YES | NO))
+	;
+
 specialRegistersOption
 	: ((INHERIT | DEFAULT) SPECIAL REGISTERS)
 	;
@@ -627,7 +658,7 @@ createFunctionStatementExternalTableOptions
 	| parameterStyleOption1
 	| deterministicOption
 	| fencedOption
-	| nullInputOption
+	| nullInputOption1
 	| sqlDataOption2
 	| externalActionOption
 	| packagePathOption
@@ -668,7 +699,7 @@ createFunctionStatementInlineSqlScalarOptions
 	(RETURNS functionDataType languageOption1?)
 	| (RETURN (expression | NULL | fullSelect))
 	| deterministicOption
-	| nullInputOption
+	| nullInputOption1
 	| sqlDataOption1
 	| externalActionOption
 	| dispatchOption
@@ -1030,13 +1061,37 @@ functionBuiltInType
 	)
 	;
 
+procedureBuiltinType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
+	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| REAL
+	| (DOUBLE PRECISION?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))?)
+	| (BINARY (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| DATE
+	| TIME
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| ROWID
+	)
+	;
+
 functionOptionList
 	: (
 	externalNameOption2
 	| languageOption4
 	| parameterStyleOption2
 	| deterministicOption
-	| nullInputOption
+	| nullInputOption1
 	| sqlDataOption3
 	| externalActionOption
 	| packagePathOption
@@ -1063,7 +1118,8 @@ functionOptionList
 
 procedureOptionList
 	: (
-	(DYNAMIC? RESULT (SET |SETS) INTEGERLITERAL)
+	dynamicResultSetOption
+	| parameterOption1
 	| externalNameOption2
 	| languageOption5
 	| parameterStyleOption3
@@ -1085,6 +1141,38 @@ procedureOptionList
 	| stopAfterFailureOption
 	| ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
 	)
+	;
+
+createProcedureOptionList
+	: (
+	specificNameOption2
+	| dynamicResultSetOption
+	| parameterOption1
+	| externalNameOption1
+	| languageOption5
+	| sqlDataOption3
+	| parameterStyleOption3
+	| deterministicOption
+	| packagePathOption
+	| fencedOption
+	| dbinfoOption
+	| collectionIdOption
+	| wlmEnvironmentOption2
+	| asuTimeOption
+	| stayResidentOption
+	| programTypeOption
+	| securityOption
+	| runOptionsOption
+	| commitOnReturnOption
+	| specialRegistersOption
+	| nullInputOption2
+	| stopAfterFailureOption
+	| debugOption
+	)
+	;
+
+procedureDataType
+	: (procedureBuiltinType | distinctTypeName)
 	;
 
 sequenceOptionList
