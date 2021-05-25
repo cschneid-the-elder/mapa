@@ -298,6 +298,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateProcedureStatement(DB2zSQLParser.CreateProcedureStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createRoleStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateRoleStatement(DB2zSQLParser.CreateRoleStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

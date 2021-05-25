@@ -70,6 +70,7 @@ sqlStatement
 	| createMaskStatement
 	| createPermissionStatement
 	| createProcedureStatement
+	| createRoleStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -405,6 +406,12 @@ createProcedureStatement
 	CREATE (OR REPLACE)? PROCEDURE procedureName
 	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
 	createProcedureOptionList+
+	)
+	;
+
+createRoleStatement
+	: (
+	CREATE ROLE roleName
 	)
 	;
 
