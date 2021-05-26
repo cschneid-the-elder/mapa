@@ -366,7 +366,7 @@ createGlobalTemporaryTableStatement
 	CREATE GLOBAL TEMPORARY TABLE tableName
 	((LPAREN globalTemporaryColumnDefinition (COMMA globalTemporaryColumnDefinition)* RPAREN)
 	| (LIKE tableName))
-	(CCSID (ASCII | EBCDIC | UNICODE))?
+	ccsidClause1?
 	)
 	;
 
@@ -436,6 +436,79 @@ createStogroupStatement
 	storclasOption?
 	keyLabelOption?
 	)
+	;
+/*
+createTableStatement
+	: (
+	CREATE TABLE tableName
+		(
+			(RPAREN
+				(columnDefinition
+				| periodDefinition
+				| uniqueConstraint
+				| referentialConstraint
+				| checkConstraint)
+				(COMMA
+				(columnDefinition
+				| periodDefinition
+				| uniqueConstraint
+				| referentialConstraint
+				| checkConstraint))*
+			LPAREN)
+			| (LIKE tableName copyOptions?)
+			| (asResultTable copyOptions?)
+			| (materializedQueryDefinition)
+		)
+	createTableInClause?
+	partitioningClause?
+	organizationClause?
+	editprocClause?
+	validprocClause?
+	auditClause?
+	obidClause?
+	dataCaptureClause?
+	restrictOnDropClause?
+	ccsidClause1?
+	)
+	;
+
+createTableInClause
+	: (
+	(IN databaseName? tablespaceName)
+	| (IN DATABASE databaseName)
+	| (IN ACCELERATOR acceleratorName)
+	)
+	;
+*/
+editprocClause
+	: (EDITPROC programName ((WITH | WITHOUT) ROW ATTRIBUTES)?)
+	;
+
+/*
+NULL is only valid for ALTER TABLE.
+*/
+validprocClause
+	: (VALIDPROC (programName | NULL))
+	;
+
+auditClause
+	: (AUDIT (NONE | CHANGES | ALL))
+	;
+
+obidClause
+	: (OBID INTEGERLITERAL)
+	;
+
+dataCaptureClause
+	: (DATA CAPTURE (NONE | CHANGES))
+	;
+
+restrictOnDropClause
+	: (WITH RESTRICT ON DROP)
+	;
+
+ccsidClause1
+	: (CCSID (ASCII | EBCDIC | UNICODE))
 	;
 
 globalTemporaryColumnDefinition
@@ -668,12 +741,12 @@ specificNameOption2
 
 parameterOption1
 	: (PARAMETER 
-		((CCSID (ASCII | EBCDIC | UNICODE))
+		(ccsidClause1
 		| (VARCHAR (NULTERM | STRUCTURE)))+)
 	;
 
 parameterOption2
-	: (PARAMETER CCSID (ASCII | EBCDIC | UNICODE))
+	: (PARAMETER ccsidClause1)
 	;
 
 //
@@ -1077,9 +1150,9 @@ functionBuiltInType
 	| (FLOAT (integerInParens | (LPAREN RPAREN)))
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
-	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
@@ -1102,9 +1175,9 @@ procedureBuiltinType
 	| (FLOAT (integerInParens | (LPAREN RPAREN)))
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))? forDataQualifier?)
-	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID (ASCII | EBCDIC | UNICODE))?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
@@ -1304,7 +1377,7 @@ alterTableOptionList
 	| (ALTER COLUMN? columnAlteration)
 	| (RENAME COLUMN sourceColumnName TO targetColumnName)
 	| (DROP COLUMN? columnName RESTRICT)
-	| (ADD PERIOD FOR? periodDefinition)
+	| (ADD periodDefinition)
 	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
 	| (ADD partitioningClause)
@@ -1318,7 +1391,7 @@ alterTableOptionList
 	| (ADD ((MATERIALIZED QUERY) | QUERY)? materializedQueryDefinition)
 	| (ALTER MATERIALIZED? QUERY materializedQueryAlteration)
 	| (DROP MATERIALIZED? QUERY)
-	| (DATA CAPTURE (NONE | CHANGES))
+	| dataCaptureClause
 	| (NOT? VOLATILE CARDINALITY?)
 	| (ADD CLONE cloneTableName)
 	| (DROP CLONE)
@@ -1327,8 +1400,8 @@ alterTableOptionList
 	| ((ACTIVATE | DEACTIVATE) ROW ACCESS CONTROL)
 	| ((ACTIVATE | DEACTIVATE) COLUMN ACCESS CONTROL)
 	| (APPEND (NO | YES))
-	| (AUDIT (NONE | CHANGES | ALL))
-	| (VALIDPROC (programName | NULL))
+	| auditClause
+	| validprocClause
 	| (ENABLE ARCHIVE USE archiveTableName)
 	| (DISABLE ARCHIVE)
 	| (NO KEY LABEL)
@@ -1392,7 +1465,7 @@ databaseOptionList
 	| (INDEXBP bpName)
 	| (AS WORKFILE (FOR memberName)?)
 	| (STOGROUP ( SYSDEFLT | stogroupName)?)
-	| (CCSID (ASCII | EBCDIC | UNICODE))
+	| ccsidClause1
 	)
 	;
 
@@ -1948,8 +2021,9 @@ materializedQueryTableAlteration
 
 periodDefinition
 	: (
-	(SYSTEM_TIME LPAREN beginColumnName COMMA endColumnName RPAREN)
-	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE) RPAREN)
+	PERIOD FOR?
+	((SYSTEM_TIME LPAREN beginColumnName COMMA endColumnName RPAREN)
+	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE) RPAREN))
 	)
 	;
 

@@ -517,6 +517,76 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#editprocClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterEditprocClause(DB2zSQLParser.EditprocClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#editprocClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitEditprocClause(DB2zSQLParser.EditprocClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#validprocClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterValidprocClause(DB2zSQLParser.ValidprocClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#validprocClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitValidprocClause(DB2zSQLParser.ValidprocClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#auditClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterAuditClause(DB2zSQLParser.AuditClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#auditClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitAuditClause(DB2zSQLParser.AuditClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#obidClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterObidClause(DB2zSQLParser.ObidClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#obidClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitObidClause(DB2zSQLParser.ObidClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dataCaptureClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataCaptureClause(DB2zSQLParser.DataCaptureClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dataCaptureClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataCaptureClause(DB2zSQLParser.DataCaptureClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#restrictOnDropClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterRestrictOnDropClause(DB2zSQLParser.RestrictOnDropClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#restrictOnDropClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitRestrictOnDropClause(DB2zSQLParser.RestrictOnDropClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ccsidClause1}.
+	 * @param ctx the parse tree
+	 */
+	void enterCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ccsidClause1}.
+	 * @param ctx the parse tree
+	 */
+	void exitCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 */

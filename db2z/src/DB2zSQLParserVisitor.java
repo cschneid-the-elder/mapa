@@ -316,6 +316,48 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#editprocClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEditprocClause(DB2zSQLParser.EditprocClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#validprocClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValidprocClause(DB2zSQLParser.ValidprocClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#auditClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAuditClause(DB2zSQLParser.AuditClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#obidClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObidClause(DB2zSQLParser.ObidClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dataCaptureClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataCaptureClause(DB2zSQLParser.DataCaptureClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#restrictOnDropClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRestrictOnDropClause(DB2zSQLParser.RestrictOnDropClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ccsidClause1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
