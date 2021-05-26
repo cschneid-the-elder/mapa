@@ -2364,6 +2364,30 @@ EVERY
 	: E V E R Y
 	;
 
+ABSOLUTE
+	: A B S O L U T E
+	;
+
+ACCELERATOR
+	: A C C E L E R A T O R
+	;
+
+EXCLUDING
+	: E X C L U D I N G
+	;
+
+INCLUDING
+	: I N C L U D I N G
+	;
+
+DEFAULTS
+	: D E F A U L T S
+	;
+
+MODIFIERS
+	: M O D I F I E R S
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

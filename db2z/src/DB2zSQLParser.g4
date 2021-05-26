@@ -73,6 +73,7 @@ sqlStatement
 	| createRoleStatement
 	| createSequenceStatement
 	| createStogroupStatement
+	| createTableStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -310,7 +311,7 @@ createAliasStatement
 createAuxiliaryTableStatement
 	: (
 	CREATE (AUX | AUXILIARY) TABLE auxTableName IN databaseName? tablespaceName
-	STORES tableName (APPEND (YES | NO))? COLUMN columnName PART INTEGERLITERAL
+	STORES tableName appendClause? COLUMN columnName PART INTEGERLITERAL
 	)
 	;
 
@@ -437,24 +438,24 @@ createStogroupStatement
 	keyLabelOption?
 	)
 	;
-/*
+
 createTableStatement
 	: (
 	CREATE TABLE tableName
 		(
-			(RPAREN
-				(columnDefinition
+			(LPAREN
+				(createTableColumnDefinition
 				| periodDefinition
 				| uniqueConstraint
 				| referentialConstraint
 				| checkConstraint)
 				(COMMA
-				(columnDefinition
+				(createTableColumnDefinition
 				| periodDefinition
 				| uniqueConstraint
 				| referentialConstraint
 				| checkConstraint))*
-			LPAREN)
+			RPAREN)
 			| (LIKE tableName copyOptions?)
 			| (asResultTable copyOptions?)
 			| (materializedQueryDefinition)
@@ -469,6 +470,16 @@ createTableStatement
 	dataCaptureClause?
 	restrictOnDropClause?
 	ccsidClause1?
+	cardinalityClause?
+	loggedOption?
+	compressOption?
+	appendClause?
+	dssizeOption?
+	bufferpoolOption?
+	memberClause?
+	trackmodClause?
+	pagenumClause?
+	keyLabelOption?
 	)
 	;
 
@@ -479,7 +490,21 @@ createTableInClause
 	| (IN ACCELERATOR acceleratorName)
 	)
 	;
-*/
+
+createTableColumnDefinition
+	: (
+	columnName dataType?
+	(NOT NULL)?
+	generatedClause?
+	createTableColumnConstraint?
+	defaultClause?
+	fieldprocClause?
+	asSecurityLabelClause?
+	implicitlyHiddenClause?
+	inlineLengthClause?
+	)
+	;
+
 editprocClause
 	: (EDITPROC programName ((WITH | WITHOUT) ROW ATTRIBUTES)?)
 	;
@@ -509,6 +534,85 @@ restrictOnDropClause
 
 ccsidClause1
 	: (CCSID (ASCII | EBCDIC | UNICODE))
+	;
+
+cardinalityClause
+	: (NOT? VOLATILE CARDINALITY?)
+	;
+
+appendClause
+	: (APPEND (YES | NO))
+	;
+
+memberClause
+	: (MEMBER CLUSTER)
+	;
+
+trackmodClause
+	: (TRACKMOD (YES | NO))
+	;
+
+pagenumClause
+	: (PAGENUM (RELATIVE | ABSOLUTE))
+	;
+
+fieldprocClause
+	: (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
+	;
+
+asSecurityLabelClause
+	: (AS SECURITY LABEL)
+	;
+
+implicitlyHiddenClause
+	: (IMPLICITLY HIDDEN_)
+	;
+
+inlineLengthClause
+	: (INLINE LENGTH INTEGERLITERAL)
+	;
+
+copyOptions
+	: (
+		(
+		((EXCLUDING | INCLUDING) IDENTITY (COLUMN ATTRIBUTES)?)
+		| ((EXCLUDING | INCLUDING) ROW CHANGE TIMESTAMP (COLUMN ATTRIBUTES)?)
+		| ((EXCLUDING | INCLUDING) COLUMN? DEFAULTS)
+		| (USING TYPE DEFAULTS)
+		| (EXCLUDING XML TYPE MODIFIERS)
+		)
+	)
+	;
+
+asResultTable
+	: (
+	LPAREN (columnName (COMMA columnName)*)? RPAREN AS
+	LPAREN fullSelect RPAREN
+	WITH NO DATA
+	)
+	;
+
+createTableColumnConstraint
+	: (
+	(CONSTRAINT constraintName)?
+		(
+			(PRIMARY KEY)
+			| UNIQUE
+			| referencesClause
+			| (CHECK LPAREN checkCondition RPAREN)
+		)
+	)
+	;
+
+/*
+Deprecated as of Db2 12.
+*/
+organizationClause
+	: (
+	ORGANIZE BY HASH UNIQUE
+	LPAREN columnName (COMMA columnName)* RPAREN
+	(HASH SPACE SQLIDENTIFIER)?
+	)
 	;
 
 globalTemporaryColumnDefinition
@@ -1392,14 +1496,14 @@ alterTableOptionList
 	| (ALTER MATERIALIZED? QUERY materializedQueryAlteration)
 	| (DROP MATERIALIZED? QUERY)
 	| dataCaptureClause
-	| (NOT? VOLATILE CARDINALITY?)
+	| cardinalityClause
 	| (ADD CLONE cloneTableName)
 	| (DROP CLONE)
 	| (ADD RESTRICT ON DROP)
 	| (DROP RESTRICT ON DROP)
 	| ((ACTIVATE | DEACTIVATE) ROW ACCESS CONTROL)
 	| ((ACTIVATE | DEACTIVATE) COLUMN ACCESS CONTROL)
-	| (APPEND (NO | YES))
+	| appendClause
 	| auditClause
 	| validprocClause
 	| (ENABLE ARCHIVE USE archiveTableName)
@@ -1420,13 +1524,12 @@ tablespaceOptionList
 	| (INSERT ALGORITHM INTEGERLITERAL)
 	| (LOCKMAX (SYSTEM | INTEGERLITERAL))
 	| (LOCKSIZE (ANY | TABLESPACE | TABLE | PAGE | ROW | LOB))
-	| (NOT? LOGGED)
-	| ((LOG YES) | (LOG NO))
+	| loggedOption
 	| (MAXROWS INTEGERLITERAL)
 	| (MAXPARTITIONS INTEGERLITERAL)
 	| (MEMBER CLUSTER (YES | NO))
 	| (SEGSIZE INTEGERLITERAL)
-	| (TRACKMOD (YES | NO))
+	| trackmodClause
 	| (usingBlock)
 	| (freeBlock)
 	| (gbpcacheBlock)
@@ -1607,7 +1710,7 @@ alterPartitionClause
 		| (gbpcacheBlock)
 		| compressOption
 		| dssizeOption
-		| (TRACKMOD (YES | NO))
+		| trackmodClause
 		)+
 	)
 	;
@@ -1671,10 +1774,10 @@ alterTableColumnDefinitionOptionList1
 	| (NOT NULL)
 	| (columnConstraint)
 	| (generatedClause)
-	| (IMPLICITLY HIDDEN_)
-	| (AS SECURITY LABEL)
-	| (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
-	| (INLINE LENGTH INTEGERLITERAL)
+	| implicitlyHiddenClause
+	| asSecurityLabelClause
+	| fieldprocClause
+	| inlineLengthClause
 	)
 	;
 
@@ -1684,10 +1787,10 @@ alterTableColumnDefinitionOptionList2
 	| (NOT NULL)
 	| (columnConstraint)
 	| (generatedClause)
-	| (IMPLICITLY HIDDEN_)
-	| (AS SECURITY LABEL)
-	| (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
-	| (INLINE LENGTH INTEGERLITERAL)
+	| implicitlyHiddenClause
+	| asSecurityLabelClause
+	| fieldprocClause
+	| inlineLengthClause
 	)
 	;
 
@@ -1707,9 +1810,9 @@ generatedClause
 
 asIdentityClause
 	: (
-	AS IDENTITY LPAREN 
+	AS IDENTITY (LPAREN 
 	asIdentityClauseOptionList (COMMA? asIdentityClauseOptionList)* 
-	RPAREN
+	RPAREN)?
 	)
 	;
 
@@ -1917,7 +2020,7 @@ referencesClause
 	columnName (PERIOD BUSINESS_TIME)? (COMMA columnName (PERIOD BUSINESS_TIME)?)* 
 	RPAREN)?
 	(ON DELETE (RESTRICT | (NO ACTION) | CASCADE | (SET NULL)))? 
-	NOT? ENFORCED
+	(NOT? ENFORCED)?
 	(ENABLE QUERY OPTIMIZATION)?	
 	)
 	;
@@ -3242,6 +3345,10 @@ tablespaceName
 	: identifier
 	;
 
+acceleratorName
+	: identifier
+	;
+
 catalogName
 	: identifier
 	;
@@ -4314,6 +4421,12 @@ sqlKeyword
 	| XMLPATTERN
 	| SIZE
 	| EVERY
+	| ABSOLUTE
+	| ACCELERATOR
+	| EXCLUDING
+	| INCLUDING
+	| DEFAULTS
+	| MODIFIERS
 	)
 	;
 

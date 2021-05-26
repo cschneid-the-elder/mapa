@@ -316,6 +316,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTableStatement(DB2zSQLParser.CreateTableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTableInClause(DB2zSQLParser.CreateTableInClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableColumnDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTableColumnDefinition(DB2zSQLParser.CreateTableColumnDefinitionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#editprocClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -357,6 +375,84 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cardinalityClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCardinalityClause(DB2zSQLParser.CardinalityClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#appendClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAppendClause(DB2zSQLParser.AppendClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#memberClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMemberClause(DB2zSQLParser.MemberClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trackmodClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrackmodClause(DB2zSQLParser.TrackmodClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#pagenumClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPagenumClause(DB2zSQLParser.PagenumClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fieldprocClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFieldprocClause(DB2zSQLParser.FieldprocClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#asSecurityLabelClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsSecurityLabelClause(DB2zSQLParser.AsSecurityLabelClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#implicitlyHiddenClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitImplicitlyHiddenClause(DB2zSQLParser.ImplicitlyHiddenClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#inlineLengthClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInlineLengthClause(DB2zSQLParser.InlineLengthClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#copyOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCopyOptions(DB2zSQLParser.CopyOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#asResultTable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableColumnConstraint}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTableColumnConstraint(DB2zSQLParser.CreateTableColumnConstraintContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#organizationClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrganizationClause(DB2zSQLParser.OrganizationClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
@@ -2385,6 +2481,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitTablespaceName(DB2zSQLParser.TablespaceNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#acceleratorName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAcceleratorName(DB2zSQLParser.AcceleratorNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree

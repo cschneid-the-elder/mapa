@@ -517,6 +517,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateStogroupStatement(DB2zSQLParser.CreateStogroupStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTableStatement(DB2zSQLParser.CreateTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTableStatement(DB2zSQLParser.CreateTableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTableInClause(DB2zSQLParser.CreateTableInClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTableInClause(DB2zSQLParser.CreateTableInClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableColumnDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTableColumnDefinition(DB2zSQLParser.CreateTableColumnDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTableColumnDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTableColumnDefinition(DB2zSQLParser.CreateTableColumnDefinitionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#editprocClause}.
 	 * @param ctx the parse tree
 	 */
@@ -586,6 +616,136 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#cardinalityClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCardinalityClause(DB2zSQLParser.CardinalityClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#cardinalityClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCardinalityClause(DB2zSQLParser.CardinalityClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#appendClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterAppendClause(DB2zSQLParser.AppendClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#appendClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitAppendClause(DB2zSQLParser.AppendClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#memberClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterMemberClause(DB2zSQLParser.MemberClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#memberClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitMemberClause(DB2zSQLParser.MemberClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trackmodClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrackmodClause(DB2zSQLParser.TrackmodClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trackmodClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrackmodClause(DB2zSQLParser.TrackmodClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#pagenumClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterPagenumClause(DB2zSQLParser.PagenumClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#pagenumClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitPagenumClause(DB2zSQLParser.PagenumClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fieldprocClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterFieldprocClause(DB2zSQLParser.FieldprocClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fieldprocClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitFieldprocClause(DB2zSQLParser.FieldprocClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#asSecurityLabelClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsSecurityLabelClause(DB2zSQLParser.AsSecurityLabelClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#asSecurityLabelClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsSecurityLabelClause(DB2zSQLParser.AsSecurityLabelClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#implicitlyHiddenClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterImplicitlyHiddenClause(DB2zSQLParser.ImplicitlyHiddenClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#implicitlyHiddenClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitImplicitlyHiddenClause(DB2zSQLParser.ImplicitlyHiddenClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#inlineLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInlineLengthClause(DB2zSQLParser.InlineLengthClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#inlineLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInlineLengthClause(DB2zSQLParser.InlineLengthClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#copyOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterCopyOptions(DB2zSQLParser.CopyOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#copyOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitCopyOptions(DB2zSQLParser.CopyOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#asResultTable}.
+	 * @param ctx the parse tree
+	 */
+	void enterAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#asResultTable}.
+	 * @param ctx the parse tree
+	 */
+	void exitAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableColumnConstraint}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTableColumnConstraint(DB2zSQLParser.CreateTableColumnConstraintContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTableColumnConstraint}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTableColumnConstraint(DB2zSQLParser.CreateTableColumnConstraintContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#organizationClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrganizationClause(DB2zSQLParser.OrganizationClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#organizationClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrganizationClause(DB2zSQLParser.OrganizationClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
 	 * @param ctx the parse tree
@@ -3966,6 +4126,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTablespaceName(DB2zSQLParser.TablespaceNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#acceleratorName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAcceleratorName(DB2zSQLParser.AcceleratorNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#acceleratorName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAcceleratorName(DB2zSQLParser.AcceleratorNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#catalogName}.
 	 * @param ctx the parse tree
