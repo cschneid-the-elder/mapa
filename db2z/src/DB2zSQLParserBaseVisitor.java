@@ -1262,7 +1262,7 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitTableOptionList(DB2zSQLParser.TableOptionListContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1451,14 +1451,14 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterTableColumnDefinitionOptionList1(DB2zSQLParser.AlterTableColumnDefinitionOptionList1Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterTableColumnDefinitionOptionList2(DB2zSQLParser.AlterTableColumnDefinitionOptionList2Context ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1780,7 +1780,7 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitColumnDefinition(DB2zSQLParser.ColumnDefinitionContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterTableColumnDefinition(DB2zSQLParser.AlterTableColumnDefinitionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

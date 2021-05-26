@@ -1787,15 +1787,15 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterStogroupOptionList(DB2zSQLParser.AlterStogroupOptionListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#tableOptionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTableOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void enterTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
+	void enterAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#tableOptionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTableOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void exitTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
+	void exitAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
 	 * @param ctx the parse tree
@@ -2057,25 +2057,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinitionOptionList1}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx);
+	void enterAlterTableColumnDefinitionOptionList1(DB2zSQLParser.AlterTableColumnDefinitionOptionList1Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinitionOptionList1}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx);
+	void exitAlterTableColumnDefinitionOptionList1(DB2zSQLParser.AlterTableColumnDefinitionOptionList1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList2}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinitionOptionList2}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx);
+	void enterAlterTableColumnDefinitionOptionList2(DB2zSQLParser.AlterTableColumnDefinitionOptionList2Context ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList2}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinitionOptionList2}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx);
+	void exitAlterTableColumnDefinitionOptionList2(DB2zSQLParser.AlterTableColumnDefinitionOptionList2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#columnConstraint}.
 	 * @param ctx the parse tree
@@ -2527,15 +2527,15 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitPeriodDefinition(DB2zSQLParser.PeriodDefinitionContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#columnDefinition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void enterColumnDefinition(DB2zSQLParser.ColumnDefinitionContext ctx);
+	void enterAlterTableColumnDefinition(DB2zSQLParser.AlterTableColumnDefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#columnDefinition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void exitColumnDefinition(DB2zSQLParser.ColumnDefinitionContext ctx);
+	void exitAlterTableColumnDefinition(DB2zSQLParser.AlterTableColumnDefinitionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree

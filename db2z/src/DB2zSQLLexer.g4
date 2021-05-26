@@ -2356,6 +2356,14 @@ XMLPATTERN
 	: X M L P A T T E R N 
 	;
 
+SIZE
+	: S I Z E
+	;
+
+EVERY
+	: E V E R Y
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

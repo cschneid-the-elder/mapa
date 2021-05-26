@@ -2151,13 +2151,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterTableOptionList(DB2zSQLParser.TableOptionListContext ctx) { }
+	@Override public void enterAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitTableOptionList(DB2zSQLParser.TableOptionListContext ctx) { }
+	@Override public void exitAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2475,25 +2475,25 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx) { }
+	@Override public void enterAlterTableColumnDefinitionOptionList1(DB2zSQLParser.AlterTableColumnDefinitionOptionList1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx) { }
+	@Override public void exitAlterTableColumnDefinitionOptionList1(DB2zSQLParser.AlterTableColumnDefinitionOptionList1Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx) { }
+	@Override public void enterAlterTableColumnDefinitionOptionList2(DB2zSQLParser.AlterTableColumnDefinitionOptionList2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx) { }
+	@Override public void exitAlterTableColumnDefinitionOptionList2(DB2zSQLParser.AlterTableColumnDefinitionOptionList2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3039,13 +3039,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterColumnDefinition(DB2zSQLParser.ColumnDefinitionContext ctx) { }
+	@Override public void enterAlterTableColumnDefinition(DB2zSQLParser.AlterTableColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitColumnDefinition(DB2zSQLParser.ColumnDefinitionContext ctx) { }
+	@Override public void exitAlterTableColumnDefinition(DB2zSQLParser.AlterTableColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

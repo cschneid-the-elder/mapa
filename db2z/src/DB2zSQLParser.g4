@@ -206,7 +206,7 @@ alterStogroupStatement
 
 alterTableStatement
 	: (
-	ALTER TABLE alterTableName tableOptionList+
+	ALTER TABLE alterTableName alterTableOptionList+
 	)
 	;
 
@@ -1298,16 +1298,16 @@ alterStogroupOptionList
 	)
 	;
 
-tableOptionList
+alterTableOptionList
 	: (
-	(ADD COLUMN? columnDefinition)
+	(ADD COLUMN? alterTableColumnDefinition)
 	| (ALTER COLUMN? columnAlteration)
 	| (RENAME COLUMN sourceColumnName TO targetColumnName)
 	| (DROP COLUMN? columnName RESTRICT)
 	| (ADD PERIOD FOR? periodDefinition)
 	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
-	| (ADD PARTITION BY partitioningClause)
+	| (ADD partitioningClause)
 	| (ADD PARTITION partitionClause)
 	| (ALTER PARTITION INTEGERLITERAL partitionClause)
 	| (ROTATE PARTITION (FIRST | INTEGERLITERAL) TO LAST rotatePartitionClause)
@@ -1592,7 +1592,7 @@ parameterType
 	: (dataType (AS LOCATOR)?)
 	;
 
-columnDefinitionOptionList1
+alterTableColumnDefinitionOptionList1
 	: (
 	(defaultClause1)
 	| (NOT NULL)
@@ -1605,7 +1605,7 @@ columnDefinitionOptionList1
 	)
 	;
 
-columnDefinitionOptionList2
+alterTableColumnDefinitionOptionList2
 	: (
 	(defaultClause2)
 	| (NOT NULL)
@@ -1840,9 +1840,9 @@ referentialConstraint
 referencesClause
 	: (
 	REFERENCES tableName 
-	LPAREN
+	(LPAREN
 	columnName (PERIOD BUSINESS TIME)? (COMMA columnName (PERIOD BUSINESS TIME)?)* 
-	RPAREN
+	RPAREN)?
 	(ON DELETE (RESTRICT | (NO ACTION) | CASCADE | (SET NULL)))? 
 	NOT? ENFORCED
 	(ENABLE QUERY OPTIMIZATION)?	
@@ -1857,13 +1857,15 @@ checkConstraint
 
 partitioningClause
 	: (
-	RANGE? 
-	LPAREN 
-	partitionExpression (COMMA partitionExpression)* 
-	RPAREN
-	LPAREN
-	partitioningClauseElement (COMMA partitioningClauseElement)*
-	RPAREN
+	PARTITION BY 
+		((RANGE? 
+		LPAREN 
+		partitionExpression (COMMA partitionExpression)* 
+		RPAREN
+		LPAREN
+		partitioningClauseElement (COMMA partitioningClauseElement)*
+		RPAREN)
+		| (SIZE (EVERY SQLIDENTIFIER)?))
 	)
 	;
 
@@ -1946,10 +1948,10 @@ periodDefinition
 	)
 	;
 
-columnDefinition
+alterTableColumnDefinition
 	: (
-	(columnName builtInType columnDefinitionOptionList1*)
-	| (columnName distinctTypeName columnDefinitionOptionList2*)
+	(columnName builtInType alterTableColumnDefinitionOptionList1*)
+	| (columnName distinctTypeName alterTableColumnDefinitionOptionList2*)
 	)
 	;
 
@@ -4231,6 +4233,8 @@ sqlKeyword
 	| GENERATE
 	| KEYS
 	| XMLPATTERN
+	| SIZE
+	| EVERY
 	)
 	;
 

@@ -1078,11 +1078,11 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterStogroupOptionList(DB2zSQLParser.AlterStogroupOptionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#tableOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTableOptionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTableOptionList(DB2zSQLParser.TableOptionListContext ctx);
+	T visitAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
 	 * @param ctx the parse tree
@@ -1240,17 +1240,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitParameterType(DB2zSQLParser.ParameterTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList1}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinitionOptionList1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColumnDefinitionOptionList1(DB2zSQLParser.ColumnDefinitionOptionList1Context ctx);
+	T visitAlterTableColumnDefinitionOptionList1(DB2zSQLParser.AlterTableColumnDefinitionOptionList1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinitionOptionList2}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinitionOptionList2}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColumnDefinitionOptionList2(DB2zSQLParser.ColumnDefinitionOptionList2Context ctx);
+	T visitAlterTableColumnDefinitionOptionList2(DB2zSQLParser.AlterTableColumnDefinitionOptionList2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#columnConstraint}.
 	 * @param ctx the parse tree
@@ -1522,11 +1522,11 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPeriodDefinition(DB2zSQLParser.PeriodDefinitionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#columnDefinition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitColumnDefinition(DB2zSQLParser.ColumnDefinitionContext ctx);
+	T visitAlterTableColumnDefinition(DB2zSQLParser.AlterTableColumnDefinitionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#externalProgramName}.
 	 * @param ctx the parse tree
