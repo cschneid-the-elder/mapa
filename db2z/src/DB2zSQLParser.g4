@@ -1879,8 +1879,13 @@ partitionLimitKey
 	: (INTEGERLITERAL | MAXVALUE | MINVALUE)
 	;
 
+/*
+The partitionHashSpace rule can be before the INCLUSIVE token in
+the create table statement, or after the INCLUSIVE token in the
+alter table statement.  Also, it's deprecated as of Db2 12.
+*/
 partitioningPhrase
-	: (ENDING AT? LPAREN partitionLimitKey (COMMA partitionLimitKey)* RPAREN INCLUSIVE?)
+	: (ENDING AT? LPAREN partitionLimitKey (COMMA partitionLimitKey)* RPAREN partitionHashSpace? INCLUSIVE? partitionHashSpace?)
 	;
 
 //deprecated as of Db2 12
@@ -1898,7 +1903,7 @@ alterHashOrganization
 
 partitioningClauseElement
 	: (
-	PARTITION INTEGERLITERAL partitioningPhrase partitionHashSpace?
+	PARTITION INTEGERLITERAL partitioningPhrase
 	)
 	;
 
