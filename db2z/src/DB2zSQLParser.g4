@@ -1831,7 +1831,7 @@ referentialConstraint
 	: (
 	((CONSTRAINT constraintName FOREIGN KEY) | (FOREIGN KEY constraintName?))
 	LPAREN
-	columnName (PERIOD BUSINESS TIME)? (COMMA columnName (PERIOD BUSINESS TIME)?)* 
+	columnName (PERIOD BUSINESS_TIME)? (COMMA columnName (PERIOD BUSINESS_TIME)?)* 
 	RPAREN
 	referencesClause
 	)
@@ -1841,7 +1841,7 @@ referencesClause
 	: (
 	REFERENCES tableName 
 	(LPAREN
-	columnName (PERIOD BUSINESS TIME)? (COMMA columnName (PERIOD BUSINESS TIME)?)* 
+	columnName (PERIOD BUSINESS_TIME)? (COMMA columnName (PERIOD BUSINESS_TIME)?)* 
 	RPAREN)?
 	(ON DELETE (RESTRICT | (NO ACTION) | CASCADE | (SET NULL)))? 
 	NOT? ENFORCED
