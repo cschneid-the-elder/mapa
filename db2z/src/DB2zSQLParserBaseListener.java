@@ -2655,6 +2655,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPartitionByRangePartitionPhrase(DB2zSQLParser.PartitionByRangePartitionPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPartitionByRangePartitionPhrase(DB2zSQLParser.PartitionByRangePartitionPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInsertAlgorithmOption(DB2zSQLParser.InsertAlgorithmOptionContext ctx) { }
 	/**
 	 * {@inheritDoc}

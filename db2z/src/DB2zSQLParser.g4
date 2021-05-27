@@ -74,6 +74,7 @@ sqlStatement
 	| createSequenceStatement
 	| createStogroupStatement
 	| createTableStatement
+	| createTablespaceStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -487,8 +488,6 @@ createTablespaceStatement
 	: (
 	CREATE TABLESPACE tablespaceName 
 	createTablespaceOptionList* 
-	alterPartitionClause?
-	moveTableClause?
 	)
 	;
 
@@ -1699,18 +1698,25 @@ partitionByRangeSpecification
 	: (
 	numpartsOption
 		(
-			(LPAREN (PARTITION INTEGERLITERAL
-				(
-				usingBlock
-				| freeBlock
-				| gbpcacheBlock
-				| compressOption
-				| trackmodClause
-				| dssizeOption
-				)*)*
+			(LPAREN 
+			(partitionByRangePartitionPhrase (COMMA partitionByRangePartitionPhrase)*)*
 			RPAREN)
 		|	pagenumClause
 		|	dssizeOption
+		)*
+	)
+	;
+
+partitionByRangePartitionPhrase
+	: (
+	(PARTITION | PART) INTEGERLITERAL
+		(
+		usingBlock
+		| freeBlock
+		| gbpcacheBlock
+		| compressOption
+		| trackmodClause
+		| dssizeOption
 		)*
 	)
 	;

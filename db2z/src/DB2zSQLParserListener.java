@@ -2207,6 +2207,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitPartitionByRangeSpecification(DB2zSQLParser.PartitionByRangeSpecificationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#partitionByRangePartitionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterPartitionByRangePartitionPhrase(DB2zSQLParser.PartitionByRangePartitionPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#partitionByRangePartitionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitPartitionByRangePartitionPhrase(DB2zSQLParser.PartitionByRangePartitionPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#insertAlgorithmOption}.
 	 * @param ctx the parse tree
 	 */

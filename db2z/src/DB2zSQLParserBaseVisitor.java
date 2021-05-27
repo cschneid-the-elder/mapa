@@ -1556,6 +1556,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitPartitionByRangePartitionPhrase(DB2zSQLParser.PartitionByRangePartitionPhraseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitInsertAlgorithmOption(DB2zSQLParser.InsertAlgorithmOptionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

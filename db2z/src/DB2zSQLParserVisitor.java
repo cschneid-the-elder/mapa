@@ -1330,6 +1330,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPartitionByRangeSpecification(DB2zSQLParser.PartitionByRangeSpecificationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#partitionByRangePartitionPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPartitionByRangePartitionPhrase(DB2zSQLParser.PartitionByRangePartitionPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#insertAlgorithmOption}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
