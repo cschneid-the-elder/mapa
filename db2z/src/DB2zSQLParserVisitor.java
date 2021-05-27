@@ -322,6 +322,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTableStatement(DB2zSQLParser.CreateTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTablespaceStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTablespaceStatement(DB2zSQLParser.CreateTablespaceStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -375,6 +381,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ccsidClause2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCcsidClause2(DB2zSQLParser.CcsidClause2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#cardinalityClause}.
 	 * @param ctx the parse tree
@@ -1252,11 +1264,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterTablespaceOptionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	T visitAlterTablespaceOptionList(DB2zSQLParser.AlterTablespaceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTablespaceOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTablespaceOptionList(DB2zSQLParser.CreateTablespaceOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextOptionList}.
 	 * @param ctx the parse tree
@@ -1281,6 +1299,54 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#inDatabaseOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInDatabaseOption(DB2zSQLParser.InDatabaseOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#segsizeOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSegsizeOption(DB2zSQLParser.SegsizeOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#numpartsOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNumpartsOption(DB2zSQLParser.NumpartsOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#partitionByGrowthSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPartitionByGrowthSpecification(DB2zSQLParser.PartitionByGrowthSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#partitionByRangeSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPartitionByRangeSpecification(DB2zSQLParser.PartitionByRangeSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#insertAlgorithmOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInsertAlgorithmOption(DB2zSQLParser.InsertAlgorithmOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#maxrowsOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMaxrowsOption(DB2zSQLParser.MaxrowsOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#maxpartitionsOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMaxpartitionsOption(DB2zSQLParser.MaxpartitionsOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree

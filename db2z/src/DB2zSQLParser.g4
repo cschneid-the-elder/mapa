@@ -214,7 +214,7 @@ alterTableStatement
 alterTablespaceStatement
 	: (
 	ALTER TABLESPACE (databaseName DOT)? tablespaceName 
-	tablespaceOptionList* 
+	alterTablespaceOptionList* 
 	alterPartitionClause?
 	moveTableClause?
 	)
@@ -483,6 +483,15 @@ createTableStatement
 	)
 	;
 
+createTablespaceStatement
+	: (
+	CREATE TABLESPACE tablespaceName 
+	createTablespaceOptionList* 
+	alterPartitionClause?
+	moveTableClause?
+	)
+	;
+
 createTableInClause
 	: (
 	(IN databaseName? tablespaceName)
@@ -534,6 +543,10 @@ restrictOnDropClause
 
 ccsidClause1
 	: (CCSID (ASCII | EBCDIC | UNICODE))
+	;
+
+ccsidClause2
+	: (CCSID INTEGERLITERAL)
 	;
 
 cardinalityClause
@@ -1186,7 +1199,7 @@ defineOption
 	;
 
 locksizeOption
-	: (LOCKSIZE (ANY | LOB))
+	: (LOCKSIZE (ANY | TABLESPACE | TABLE | PAGE | ROW | LOB))
 	;
 
 lockmaxOption
@@ -1538,27 +1551,52 @@ alterTableOptionList
 	)
 	;
 
-tablespaceOptionList
+alterTablespaceOptionList
 	: (
 	bufferpoolOption
-	| (CCSID INTEGERLITERAL)
+	| ccsidClause2
 	| closeOption
 	| compressOption
 	| (DROP PENDING CHANGES)
 	| dssizeOption
-	| (INSERT ALGORITHM INTEGERLITERAL)
-	| (LOCKMAX (SYSTEM | INTEGERLITERAL))
-	| (LOCKSIZE (ANY | TABLESPACE | TABLE | PAGE | ROW | LOB))
+	| insertAlgorithmOption
+	| lockmaxOption
+	| locksizeOption
 	| loggedOption
-	| (MAXROWS INTEGERLITERAL)
-	| (MAXPARTITIONS INTEGERLITERAL)
+	| maxrowsOption
+	| maxpartitionsOption
 	| (MEMBER CLUSTER (YES | NO))
-	| (SEGSIZE INTEGERLITERAL)
+	| segsizeOption
 	| trackmodClause
 	| (usingBlock)
 	| (freeBlock)
 	| (gbpcacheBlock)
 	| (PAGENUM RELATIVE)
+	)
+	;
+
+createTablespaceOptionList
+	: (
+	inDatabaseOption
+	| bufferpoolOption
+	| partitionByGrowthSpecification
+	| partitionByRangeSpecification
+	| segsizeOption
+	| ccsidClause1
+	| closeOption
+	| compressOption
+	| defineOption
+	| freeBlock
+	| gbpcacheBlock
+	| insertAlgorithmOption
+	| lockmaxOption
+	| locksizeOption
+	| loggedOption
+	| maxrowsOption
+	| maxpartitionsOption
+	| memberClause
+	| trackmodClause
+	| usingBlock
 	)
 	;
 
@@ -1624,7 +1662,7 @@ createIndexOptionList
 
 createLobTablespaceOptionList
 	: (
-	(IN databaseName)
+	inDatabaseOption
 	| bufferpoolOption
 	| closeOption
 	| compressOption
@@ -1636,6 +1674,57 @@ createLobTablespaceOptionList
 	| loggedOption
 	| usingSpecification2
 	)
+	;
+
+inDatabaseOption
+	: (IN databaseName)
+	;
+
+segsizeOption
+	: (SEGSIZE INTEGERLITERAL)
+	;
+
+numpartsOption
+	: (NUMPARTS INTEGERLITERAL)
+	;
+
+partitionByGrowthSpecification
+	: (
+	(maxpartitionsOption numpartsOption?)
+	| dssizeOption
+	)
+	;
+
+partitionByRangeSpecification
+	: (
+	numpartsOption
+		(
+			(LPAREN (PARTITION INTEGERLITERAL
+				(
+				usingBlock
+				| freeBlock
+				| gbpcacheBlock
+				| compressOption
+				| trackmodClause
+				| dssizeOption
+				)*)*
+			RPAREN)
+		|	pagenumClause
+		|	dssizeOption
+		)*
+	)
+	;
+
+insertAlgorithmOption
+	: (INSERT ALGORITHM INTEGERLITERAL)
+	;
+
+maxrowsOption
+	: (MAXROWS INTEGERLITERAL)
+	;
+
+maxpartitionsOption
+	: (MAXPARTITIONS INTEGERLITERAL)
 	;
 
 usingSpecification2
@@ -1931,9 +2020,9 @@ builtInType
 	| (FLOAT (integerInParens | (LPAREN RPAREN)))
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (forDataQualifier | (CCSID INTEGERLITERAL))?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (forDataQualifier | (CCSID INTEGERLITERAL))?)
-	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? (CCSID INTEGERLITERAL)?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (forDataQualifier | ccsidClause2)?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (forDataQualifier | ccsidClause2)?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause2?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL | SQLIDENTIFIER) RPAREN)?)

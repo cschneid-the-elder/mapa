@@ -527,6 +527,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTableStatement(DB2zSQLParser.CreateTableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTablespaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTablespaceStatement(DB2zSQLParser.CreateTablespaceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTablespaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTablespaceStatement(DB2zSQLParser.CreateTablespaceStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
 	 * @param ctx the parse tree
 	 */
@@ -616,6 +626,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCcsidClause1(DB2zSQLParser.CcsidClause1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ccsidClause2}.
+	 * @param ctx the parse tree
+	 */
+	void enterCcsidClause2(DB2zSQLParser.CcsidClause2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ccsidClause2}.
+	 * @param ctx the parse tree
+	 */
+	void exitCcsidClause2(DB2zSQLParser.CcsidClause2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#cardinalityClause}.
 	 * @param ctx the parse tree
@@ -2077,15 +2097,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterTableOptionList(DB2zSQLParser.AlterTableOptionListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterTablespaceOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void enterTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	void enterAlterTablespaceOptionList(DB2zSQLParser.AlterTablespaceOptionListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#tablespaceOptionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterTablespaceOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void exitTablespaceOptionList(DB2zSQLParser.TablespaceOptionListContext ctx);
+	void exitAlterTablespaceOptionList(DB2zSQLParser.AlterTablespaceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTablespaceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTablespaceOptionList(DB2zSQLParser.CreateTablespaceOptionListContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTablespaceOptionList}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTablespaceOptionList(DB2zSQLParser.CreateTablespaceOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextOptionList}.
 	 * @param ctx the parse tree
@@ -2126,6 +2156,86 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCreateLobTablespaceOptionList(DB2zSQLParser.CreateLobTablespaceOptionListContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#inDatabaseOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterInDatabaseOption(DB2zSQLParser.InDatabaseOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#inDatabaseOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitInDatabaseOption(DB2zSQLParser.InDatabaseOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#segsizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterSegsizeOption(DB2zSQLParser.SegsizeOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#segsizeOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitSegsizeOption(DB2zSQLParser.SegsizeOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#numpartsOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumpartsOption(DB2zSQLParser.NumpartsOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#numpartsOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumpartsOption(DB2zSQLParser.NumpartsOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#partitionByGrowthSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterPartitionByGrowthSpecification(DB2zSQLParser.PartitionByGrowthSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#partitionByGrowthSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitPartitionByGrowthSpecification(DB2zSQLParser.PartitionByGrowthSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#partitionByRangeSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterPartitionByRangeSpecification(DB2zSQLParser.PartitionByRangeSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#partitionByRangeSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitPartitionByRangeSpecification(DB2zSQLParser.PartitionByRangeSpecificationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#insertAlgorithmOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterInsertAlgorithmOption(DB2zSQLParser.InsertAlgorithmOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#insertAlgorithmOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitInsertAlgorithmOption(DB2zSQLParser.InsertAlgorithmOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#maxrowsOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterMaxrowsOption(DB2zSQLParser.MaxrowsOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#maxrowsOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitMaxrowsOption(DB2zSQLParser.MaxrowsOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#maxpartitionsOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterMaxpartitionsOption(DB2zSQLParser.MaxpartitionsOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#maxpartitionsOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitMaxpartitionsOption(DB2zSQLParser.MaxpartitionsOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#usingSpecification2}.
 	 * @param ctx the parse tree
