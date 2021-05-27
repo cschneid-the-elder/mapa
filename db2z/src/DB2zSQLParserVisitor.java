@@ -436,11 +436,41 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCopyOptions(DB2zSQLParser.CopyOptionsContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#copyOptionIdentity}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCopyOptionIdentity(DB2zSQLParser.CopyOptionIdentityContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#copyOptionRowChangeTimestamp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCopyOptionRowChangeTimestamp(DB2zSQLParser.CopyOptionRowChangeTimestampContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#copyOptionColumnDefaults}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCopyOptionColumnDefaults(DB2zSQLParser.CopyOptionColumnDefaultsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#copyOptionXmlTypeModifiers}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCopyOptionXmlTypeModifiers(DB2zSQLParser.CopyOptionXmlTypeModifiersContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#asResultTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableMaterializedQueryDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTableMaterializedQueryDefinition(DB2zSQLParser.CreateTableMaterializedQueryDefinitionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableColumnConstraint}.
 	 * @param ctx the parse tree
@@ -1641,6 +1671,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRefreshableTableOptions(DB2zSQLParser.RefreshableTableOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dataInitiallyDeferredPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataInitiallyDeferredPhrase(DB2zSQLParser.DataInitiallyDeferredPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#refreshDeferredPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRefreshDeferredPhrase(DB2zSQLParser.RefreshDeferredPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#refreshableTableOptionsList}.
 	 * @param ctx the parse tree

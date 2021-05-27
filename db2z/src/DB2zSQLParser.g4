@@ -458,7 +458,7 @@ createTableStatement
 			RPAREN)
 			| (LIKE tableName copyOptions?)
 			| (asResultTable copyOptions?)
-			| (materializedQueryDefinition)
+			| createTableMaterializedQueryDefinition
 		)
 	createTableInClause?
 	partitioningClause?
@@ -575,13 +575,31 @@ inlineLengthClause
 copyOptions
 	: (
 		(
-		((EXCLUDING | INCLUDING) IDENTITY (COLUMN ATTRIBUTES)?)
-		| ((EXCLUDING | INCLUDING) ROW CHANGE TIMESTAMP (COLUMN ATTRIBUTES)?)
-		| ((EXCLUDING | INCLUDING) COLUMN? DEFAULTS)
-		| (USING TYPE DEFAULTS)
-		| (EXCLUDING XML TYPE MODIFIERS)
-		)
+		copyOptionIdentity
+		| copyOptionRowChangeTimestamp
+		| copyOptionColumnDefaults
+		| copyOptionXmlTypeModifiers
+		)+
 	)
+	;
+
+copyOptionIdentity
+	: ((EXCLUDING | INCLUDING) IDENTITY (COLUMN ATTRIBUTES)?)
+	;
+
+copyOptionRowChangeTimestamp
+	: ((EXCLUDING | INCLUDING) ROW CHANGE TIMESTAMP (COLUMN ATTRIBUTES)?)
+	;
+
+copyOptionColumnDefaults
+	: (
+		((EXCLUDING | INCLUDING) COLUMN? DEFAULTS)
+		| (USING TYPE DEFAULTS)
+	)
+	;
+
+copyOptionXmlTypeModifiers
+	: (EXCLUDING XML TYPE MODIFIERS)
 	;
 
 asResultTable
@@ -589,6 +607,13 @@ asResultTable
 	LPAREN (columnName (COMMA columnName)*)? RPAREN AS
 	LPAREN fullSelect RPAREN
 	WITH NO DATA
+	)
+	;
+
+createTableMaterializedQueryDefinition
+	: (
+	(LPAREN columnName (COMMA columnName)* RPAREN)? 
+	AS materializedQueryDefinition
 	)
 	;
 
@@ -1800,7 +1825,7 @@ columnConstraint
 
 generatedClause
 	: (
-	(GENERATED (ALWAYS | (BY DEFAULT)) (asIdentityClause | asRowChangeTimestampClause))
+	(GENERATED (ALWAYS | (BY DEFAULT))? (asIdentityClause | asRowChangeTimestampClause))
 	| (GENERATED ALWAYS?
 		(asRowTransactionStartIDClause 
 		| asRowTransactionTimestampClause 
@@ -2108,7 +2133,15 @@ materializedQueryAlteration
 	;
 
 refreshableTableOptions
-	: (DATA INITIALLY DEFERRED REFRESH DEFERRED refreshableTableOptionsList*)
+	: (dataInitiallyDeferredPhrase refreshDeferredPhrase refreshableTableOptionsList*)
+	;
+
+dataInitiallyDeferredPhrase
+	: (DATA INITIALLY DEFERRED)
+	;
+
+refreshDeferredPhrase
+	: (REFRESH DEFERRED)
 	;
 
 refreshableTableOptionsList

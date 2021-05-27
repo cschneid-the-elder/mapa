@@ -867,6 +867,54 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCopyOptionIdentity(DB2zSQLParser.CopyOptionIdentityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopyOptionIdentity(DB2zSQLParser.CopyOptionIdentityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCopyOptionRowChangeTimestamp(DB2zSQLParser.CopyOptionRowChangeTimestampContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopyOptionRowChangeTimestamp(DB2zSQLParser.CopyOptionRowChangeTimestampContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCopyOptionColumnDefaults(DB2zSQLParser.CopyOptionColumnDefaultsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopyOptionColumnDefaults(DB2zSQLParser.CopyOptionColumnDefaultsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCopyOptionXmlTypeModifiers(DB2zSQLParser.CopyOptionXmlTypeModifiersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCopyOptionXmlTypeModifiers(DB2zSQLParser.CopyOptionXmlTypeModifiersContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAsResultTable(DB2zSQLParser.AsResultTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -874,6 +922,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitAsResultTable(DB2zSQLParser.AsResultTableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateTableMaterializedQueryDefinition(DB2zSQLParser.CreateTableMaterializedQueryDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateTableMaterializedQueryDefinition(DB2zSQLParser.CreateTableMaterializedQueryDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3274,6 +3334,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRefreshableTableOptions(DB2zSQLParser.RefreshableTableOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataInitiallyDeferredPhrase(DB2zSQLParser.DataInitiallyDeferredPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataInitiallyDeferredPhrase(DB2zSQLParser.DataInitiallyDeferredPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRefreshDeferredPhrase(DB2zSQLParser.RefreshDeferredPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRefreshDeferredPhrase(DB2zSQLParser.RefreshDeferredPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

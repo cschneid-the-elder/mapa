@@ -717,6 +717,46 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCopyOptions(DB2zSQLParser.CopyOptionsContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#copyOptionIdentity}.
+	 * @param ctx the parse tree
+	 */
+	void enterCopyOptionIdentity(DB2zSQLParser.CopyOptionIdentityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#copyOptionIdentity}.
+	 * @param ctx the parse tree
+	 */
+	void exitCopyOptionIdentity(DB2zSQLParser.CopyOptionIdentityContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#copyOptionRowChangeTimestamp}.
+	 * @param ctx the parse tree
+	 */
+	void enterCopyOptionRowChangeTimestamp(DB2zSQLParser.CopyOptionRowChangeTimestampContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#copyOptionRowChangeTimestamp}.
+	 * @param ctx the parse tree
+	 */
+	void exitCopyOptionRowChangeTimestamp(DB2zSQLParser.CopyOptionRowChangeTimestampContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#copyOptionColumnDefaults}.
+	 * @param ctx the parse tree
+	 */
+	void enterCopyOptionColumnDefaults(DB2zSQLParser.CopyOptionColumnDefaultsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#copyOptionColumnDefaults}.
+	 * @param ctx the parse tree
+	 */
+	void exitCopyOptionColumnDefaults(DB2zSQLParser.CopyOptionColumnDefaultsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#copyOptionXmlTypeModifiers}.
+	 * @param ctx the parse tree
+	 */
+	void enterCopyOptionXmlTypeModifiers(DB2zSQLParser.CopyOptionXmlTypeModifiersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#copyOptionXmlTypeModifiers}.
+	 * @param ctx the parse tree
+	 */
+	void exitCopyOptionXmlTypeModifiers(DB2zSQLParser.CopyOptionXmlTypeModifiersContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#asResultTable}.
 	 * @param ctx the parse tree
 	 */
@@ -726,6 +766,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableMaterializedQueryDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTableMaterializedQueryDefinition(DB2zSQLParser.CreateTableMaterializedQueryDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTableMaterializedQueryDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTableMaterializedQueryDefinition(DB2zSQLParser.CreateTableMaterializedQueryDefinitionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableColumnConstraint}.
 	 * @param ctx the parse tree
@@ -2726,6 +2776,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRefreshableTableOptions(DB2zSQLParser.RefreshableTableOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dataInitiallyDeferredPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataInitiallyDeferredPhrase(DB2zSQLParser.DataInitiallyDeferredPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dataInitiallyDeferredPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataInitiallyDeferredPhrase(DB2zSQLParser.DataInitiallyDeferredPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#refreshDeferredPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterRefreshDeferredPhrase(DB2zSQLParser.RefreshDeferredPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#refreshDeferredPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitRefreshDeferredPhrase(DB2zSQLParser.RefreshDeferredPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#refreshableTableOptionsList}.
 	 * @param ctx the parse tree
