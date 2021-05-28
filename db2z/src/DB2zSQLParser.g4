@@ -1191,7 +1191,8 @@ signalStatement
 
 signalInformation
 	: (
-	SET MESSAGE_TEXT EQ expression (operator expression)*
+	(SET MESSAGE_TEXT EQ expression (operator expression)*)
+	| (LPAREN NONNUMERICLITERAL RPAREN)
 	)
 	;
 
