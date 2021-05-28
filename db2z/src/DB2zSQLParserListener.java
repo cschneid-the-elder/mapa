@@ -537,6 +537,106 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTablespaceStatement(DB2zSQLParser.CreateTablespaceStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTriggerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTriggerStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggerDefinition(DB2zSQLParser.TriggerDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggerDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggerDefinition(DB2zSQLParser.TriggerDefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerActivationTime}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggerActivationTime(DB2zSQLParser.TriggerActivationTimeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggerActivationTime}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggerActivationTime(DB2zSQLParser.TriggerActivationTimeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerEvent}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggerEvent(DB2zSQLParser.TriggerEventContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggerEvent}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggerEvent(DB2zSQLParser.TriggerEventContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerGranularity}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggerGranularity(DB2zSQLParser.TriggerGranularityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggerGranularity}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggerGranularity(DB2zSQLParser.TriggerGranularityContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggeredAction}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggeredAction(DB2zSQLParser.TriggeredActionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggeredAction}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggeredAction(DB2zSQLParser.TriggeredActionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlTriggerBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlTriggerBody(DB2zSQLParser.SqlTriggerBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlTriggerBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlTriggerBody(DB2zSQLParser.SqlTriggerBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggeredSqlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggeredSqlStatement(DB2zSQLParser.TriggeredSqlStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggeredSqlStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggeredSqlStatement(DB2zSQLParser.TriggeredSqlStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerDefinitionOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterTriggerDefinitionOption(DB2zSQLParser.TriggerDefinitionOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#triggerDefinitionOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitTriggerDefinitionOption(DB2zSQLParser.TriggerDefinitionOptionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
 	 * @param ctx the parse tree
 	 */

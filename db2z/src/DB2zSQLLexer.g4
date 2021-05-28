@@ -170,6 +170,26 @@ SQLBLOCKCOMMENTEND
 	: SPLAT SLASH
 	;
 
+INSTEAD
+	: I N S T E A D 
+	;
+
+NEW
+	: N E W 
+	;
+
+NEW_TABLE
+	: N E W '_' T A B L E 
+	;
+
+OLD_TABLE
+	: O L D '_' T A B L E 
+	;
+
+REFERENCING
+	: R E F E R E N C I N G 
+	;
+
 //generated sql lexer keywords
 
 ADD

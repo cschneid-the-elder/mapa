@@ -6,6 +6,10 @@ software.  Use at your own risk.
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
 
+Rules for Db2 for z/OS SQL statements that can be embedded in an
+application program are included here.  Version 12 documentation
+served as source material.
+
 The ALTER FUNCTION variations (external), (inlined SQL scalar), and
 (SQL table) are all variations on each other and are contained in
 the alterFunctionStatement rule.
@@ -25,6 +29,7 @@ ALTER PROCEDURE (SQL - native)
 ALTER TRIGGER (advanced)
 CREATE FUNCTION (compiled SQL scalar)
 CREATE PROCEDURE (SQL - native)
+CREATE TRIGGER (advanced)
 
 */
 
@@ -75,6 +80,7 @@ sqlStatement
 	| createStogroupStatement
 	| createTableStatement
 	| createTablespaceStatement
+	| createTriggerStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -488,6 +494,90 @@ createTablespaceStatement
 	: (
 	CREATE TABLESPACE tablespaceName 
 	createTablespaceOptionList* 
+	)
+	;
+
+/*
+The syntax accepts WRAPPED obfuscatedStatementText, but not
+in a static SQL context so it is not supported here.
+*/
+createTriggerStatement
+	: (
+	CREATE TRIGGER triggerName triggerDefinition
+	)
+	;
+
+valuesStatement
+	: (
+	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
+	)
+	;
+
+triggerDefinition
+	: (
+	triggerActivationTime triggerEvent ON tableName
+	(REFERENCING
+		((OLD | NEW | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)?
+	triggerGranularity MODE_ DB2SQL triggerDefinitionOption? triggeredAction
+	)
+	;
+
+triggerActivationTime
+	: (
+	(NO CASCADE BEFORE)
+	| AFTER
+	| (INSTEAD OF)
+	)
+	;
+
+triggerEvent
+	: (
+	INSERT
+	| DELETE
+	| (UPDATE (OF columnName (COMMA columnName)*)?)
+	)
+	;
+
+triggerGranularity
+	: (
+	(FOR EACH STATEMENT)
+	| (FOR EACH ROW)
+	)
+	;
+
+triggeredAction
+	: (
+	(WHEN LPAREN searchCondition RPAREN)? sqlTriggerBody
+	)
+	;
+
+sqlTriggerBody
+	: (
+	triggeredSqlStatement
+	| (BEGIN ATOMIC (triggeredSqlStatement SEMICOLON)+ END)
+	)
+	;
+
+triggeredSqlStatement
+	: (
+	callStatement
+	| searchedDelete
+	| ((commonTableExpression)? fullSelect)
+	| insertStatement
+	| mergeStatement
+//	| refreshTableStatement
+//	| setAssignmentStatementStatement
+	| signalStatement
+//	| truncateStatement
+	| searchedUpdate
+	| valuesStatement
+	)
+	;
+
+triggerDefinitionOption
+	: (
+	(NOT SECURED)
+	| SECURED
 	)
 	;
 
@@ -4555,6 +4645,11 @@ sqlKeyword
 	| INCLUDING
 	| DEFAULTS
 	| MODIFIERS
+	| INSTEAD
+	| NEW
+	| NEW_TABLE
+	| OLD_TABLE
+	| REFERENCING
 	)
 	;
 

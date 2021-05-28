@@ -328,6 +328,66 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTablespaceStatement(DB2zSQLParser.CreateTablespaceStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTriggerStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggerDefinition(DB2zSQLParser.TriggerDefinitionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerActivationTime}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggerActivationTime(DB2zSQLParser.TriggerActivationTimeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerEvent}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggerEvent(DB2zSQLParser.TriggerEventContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerGranularity}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggerGranularity(DB2zSQLParser.TriggerGranularityContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggeredAction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggeredAction(DB2zSQLParser.TriggeredActionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlTriggerBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlTriggerBody(DB2zSQLParser.SqlTriggerBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggeredSqlStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggeredSqlStatement(DB2zSQLParser.TriggeredSqlStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerDefinitionOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTriggerDefinitionOption(DB2zSQLParser.TriggerDefinitionOptionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableInClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
