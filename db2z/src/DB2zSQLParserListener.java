@@ -567,6 +567,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTypeArrayStatement(DB2zSQLParser.CreateTypeArrayStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTypeDistinctStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTypeDistinctStatement(DB2zSQLParser.CreateTypeDistinctStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTypeDistinctStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTypeDistinctStatement(DB2zSQLParser.CreateTypeDistinctStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -2136,6 +2146,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCreateTypeArrayBuiltinType2(DB2zSQLParser.CreateTypeArrayBuiltinType2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sourceDataType}.
+	 * @param ctx the parse tree
+	 */
+	void enterSourceDataType(DB2zSQLParser.SourceDataTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sourceDataType}.
+	 * @param ctx the parse tree
+	 */
+	void exitSourceDataType(DB2zSQLParser.SourceDataTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
 	 * @param ctx the parse tree

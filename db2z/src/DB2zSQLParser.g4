@@ -83,6 +83,7 @@ sqlStatement
 	| createTriggerStatement
 	| createTrustedContextStatement
 	| createTypeArrayStatement
+	| createTypeDistinctStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -526,6 +527,12 @@ createTypeArrayStatement
 	: (
 	CREATE TYPE arrayTypeName AS createTypeArrayBuiltinType 
 	ARRAY OPENSQBRACKET (INTEGERLITERAL | createTypeArrayBuiltinType2) CLOSESQBRACKET
+	)
+	;
+
+createTypeDistinctStatement
+	: (
+	CREATE TYPE distinctTypeName AS sourceDataType (INLINE LENGTH INTEGERLITERAL)?
 	)
 	;
 
@@ -1557,6 +1564,10 @@ createTypeArrayBuiltinType2
 	| INT
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) length? ccsidClause1? forDataQualifier?)
 	)
+	;
+
+sourceDataType
+	: procedureBuiltinType
 	;
 
 functionOptionList
@@ -3554,7 +3565,7 @@ forDataQualifier
 	;
 
 distinctTypeName
-	: (correlationName DOT)? identifier
+	: (schemaName DOT)? identifier
 	;
 
 arrayType
