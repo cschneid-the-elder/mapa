@@ -82,6 +82,7 @@ sqlStatement
 	| createTablespaceStatement
 	| createTriggerStatement
 	| createTrustedContextStatement
+	| createTypeArrayStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -518,6 +519,13 @@ createTrustedContextStatement
 	| trustedContextDefaultSecurityLabelClause
 	| trustedContextAttributesClause
 	| trustedContextWithUseForClause)+
+	)
+	;
+
+createTypeArrayStatement
+	: (
+	CREATE TYPE arrayTypeName AS createTypeArrayBuiltinType 
+	ARRAY OPENSQBRACKET (INTEGERLITERAL | createTypeArrayBuiltinType2) CLOSESQBRACKET
 	)
 	;
 
@@ -1515,8 +1523,39 @@ procedureBuiltinType
 	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	| ROWID
+	)
+	;
+
+createTypeArrayBuiltinType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
+	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| REAL
+	| (DOUBLE PRECISION?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) length? ccsidClause1? forDataQualifier?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) length? ccsidClause1? forDataQualifier?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
+	| (BINARY (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| DATE
+	| TIME
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	)
+	;
+
+createTypeArrayBuiltinType2
+	: (
+	INTEGER
+	| INT
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) length? ccsidClause1? forDataQualifier?)
 	)
 	;
 
@@ -3480,7 +3519,7 @@ castBuiltInType
 	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	| ROWID
 	| XML
 	)
@@ -3613,6 +3652,10 @@ typeName
 	;
 
 variableName
+	: ((schemaName DOT)? identifier)
+	;
+
+arrayTypeName
 	: ((schemaName DOT)? identifier)
 	;
 

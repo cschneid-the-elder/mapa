@@ -340,6 +340,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTrustedContextStatement(DB2zSQLParser.CreateTrustedContextStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTypeArrayStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTypeArrayStatement(DB2zSQLParser.CreateTypeArrayStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1269,6 +1275,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProcedureBuiltinType(DB2zSQLParser.ProcedureBuiltinTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTypeArrayBuiltinType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTypeArrayBuiltinType(DB2zSQLParser.CreateTypeArrayBuiltinTypeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTypeArrayBuiltinType2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTypeArrayBuiltinType2(DB2zSQLParser.CreateTypeArrayBuiltinType2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
 	 * @param ctx the parse tree
@@ -2655,6 +2673,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitVariableName(DB2zSQLParser.VariableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayTypeName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayTypeName(DB2zSQLParser.ArrayTypeNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#aliasName}.
 	 * @param ctx the parse tree

@@ -557,6 +557,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTrustedContextStatement(DB2zSQLParser.CreateTrustedContextStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTypeArrayStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTypeArrayStatement(DB2zSQLParser.CreateTypeArrayStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTypeArrayStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTypeArrayStatement(DB2zSQLParser.CreateTypeArrayStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -2106,6 +2116,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProcedureBuiltinType(DB2zSQLParser.ProcedureBuiltinTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTypeArrayBuiltinType}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTypeArrayBuiltinType(DB2zSQLParser.CreateTypeArrayBuiltinTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTypeArrayBuiltinType}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTypeArrayBuiltinType(DB2zSQLParser.CreateTypeArrayBuiltinTypeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTypeArrayBuiltinType2}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTypeArrayBuiltinType2(DB2zSQLParser.CreateTypeArrayBuiltinType2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTypeArrayBuiltinType2}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTypeArrayBuiltinType2(DB2zSQLParser.CreateTypeArrayBuiltinType2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
 	 * @param ctx the parse tree
@@ -4416,6 +4446,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitVariableName(DB2zSQLParser.VariableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayTypeName}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayTypeName(DB2zSQLParser.ArrayTypeNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayTypeName}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayTypeName(DB2zSQLParser.ArrayTypeNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#aliasName}.
 	 * @param ctx the parse tree
