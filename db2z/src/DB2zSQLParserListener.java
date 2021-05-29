@@ -547,6 +547,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -1596,6 +1606,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setAssignmentClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree

@@ -87,6 +87,7 @@ sqlStatement
 	| deleteStatement
 	| insertStatement
 	| mergeStatement
+	| setAssignmentStatement
 	| updateStatement
 	)
 	(SEMICOLON | (END_EXEC DOT?) | EOF)
@@ -507,6 +508,12 @@ createTriggerStatement
 	)
 	;
 
+setAssignmentStatement
+	: (
+	SET setAssignmentClause
+	)
+	;
+
 valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
@@ -566,7 +573,7 @@ triggeredSqlStatement
 	| insertStatement
 	| mergeStatement
 //	| refreshTableStatement
-//	| setAssignmentStatementStatement
+	| setAssignmentStatement
 	| signalStatement
 //	| truncateStatement
 	| searchedUpdate
@@ -1061,7 +1068,7 @@ authorization
 
 searchedDelete
 	: (
-	DELETE FROM tableName periodClause? correlationName? includeColumns?
+	DELETE FROM tableName periodClause? AS? correlationName? includeColumns?
 	(SET assignmentClause)? (WHERE searchCondition) fetchClause?
 	(isolationClause | skipLockedDataClause)* querynoClause?
 	)
@@ -1069,7 +1076,7 @@ searchedDelete
 
 positionedDelete
 	: (
-	DELETE FROM tableName correlationName? WHERE CURRENT OF cursorName
+	DELETE FROM tableName AS? correlationName? WHERE CURRENT OF cursorName
 	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
 	)
 	;
@@ -1103,7 +1110,7 @@ mergeStatement
 
 searchedUpdate
 	: (
-	UPDATE tableName periodClause? correlationName? includeColumns?
+	UPDATE tableName periodClause? AS? correlationName? includeColumns?
 	SET assignmentClause (WHERE searchCondition)? 
 	(isolationClause | skipLockedDataClause)* querynoClause?
 	)
@@ -1111,7 +1118,7 @@ searchedUpdate
 
 positionedUpdate
 	: (
-	UPDATE tableName correlationName? 
+	UPDATE tableName AS? correlationName? 
 	SET assignmentClause
 	WHERE CURRENT OF cursorName
 	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
@@ -1153,6 +1160,26 @@ matchingCondition
 
 modificationOperation
 	: (updateOperation | deleteOperation | insertOperation)
+	;
+
+/*
+The target variable in this clause could be any of {global-variable-name,
+host-variable-name, SQL-parameter-name, SQL-variable-name, 
+transition-variable-name} all of which conform to the variableName rule
+save for host-variable-name; thus we confine the rule to just those two.
+*/
+setAssignmentClause
+	: (
+	((variableName | hostVariable) EQ valuesList1 (COMMA (variableName | hostVariable) EQ valuesList1)*)
+	| (LPAREN (variableName | hostVariable) (COMMA (variableName | hostVariable))* 
+		RPAREN EQ 
+		LPAREN 
+			(((valuesList1 (COMMA valuesList1)*) | fullSelect)
+			| subSelect
+			| (VALUES valuesList1)
+			| (VALUES LPAREN valuesList1 (COMMA valuesList1)* RPAREN))
+		RPAREN)
+	)
 	;
 
 assignmentClause
@@ -3229,7 +3256,7 @@ timeZoneExpressionSubset
 caseExpression
 	: CASE
 	(searchedWhenClause | simpleWhenClause)+
-	((ELSE NULL) | (ELSE resultExpression))
+	((ELSE NULL) | (ELSE resultExpression))?
 	END
 	;
 
@@ -3433,7 +3460,7 @@ ccsidValue
 	;
 
 columnName
-	: (correlationName DOT)? identifier
+	: ((correlationName DOT)? identifier)
 	;
 
 sourceColumnName
@@ -3469,7 +3496,7 @@ schemaName
 	;
 
 tableName
-	: ((locationName DOT schemaName DOT) | (schemaName DOT))? identifier AS? correlationName?
+	: (((locationName DOT schemaName DOT) | (schemaName DOT))? identifier)
 	;
 
 alterTableName
@@ -3513,7 +3540,7 @@ typeName
 	;
 
 variableName
-	: identifier
+	: ((schemaName DOT)? identifier)
 	;
 
 aliasName
@@ -3757,7 +3784,7 @@ The following is brought to you by the ANTLR 4.9.2 message
 	;
 
 singleTableReference
-	: (tableName periodSpecification* correlationClause?)
+	: (tableName AS? correlationName? periodSpecification* correlationClause?)
 	;
 
 periodSpecification

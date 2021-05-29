@@ -10,6 +10,30 @@ CREATE TRIGGER TR1
 ;
 
 CREATE TRIGGER TR1
+    AFTER UPDATE OF C2 ON T1
+    REFERENCING NEW AS NEW
+    FOR EACH ROW
+    MODE DB2SQL
+    SECURED
+    WHEN (NEW.C2 < 0.10 * NEW.C3)
+      BEGIN ATOMIC
+        VALUES(F1(NEW.C3 - NEW.C2, NEW.C1));
+      END
+;
+
+CREATE TRIGGER TR1
+    AFTER UPDATE OF C2 ON T1
+    REFERENCING NEW AS NEW
+    FOR EACH ROW
+    MODE DB2SQL
+    NOT SECURED
+    WHEN (NEW.C2 < 0.10 * NEW.C3)
+      BEGIN ATOMIC
+        VALUES(F1(NEW.C3 - NEW.C2, NEW.C1));
+      END
+;
+
+CREATE TRIGGER TR1
     AFTER UPDATE OF C2, C3 ON T1
     REFERENCING NEW AS NEW
     FOR EACH ROW
@@ -43,3 +67,58 @@ CREATE TRIGGER TR1
         SIGNAL SQLSTATE '75001' ('Invalid Increase - Exceeds 20%');
       END
 ;
+
+CREATE TRIGGER TR1
+    INSTEAD OF INSERT ON T1
+    REFERENCING NEW AS NEWT1
+    FOR EACH ROW
+    MODE DB2SQL
+      BEGIN ATOMIC
+        INSERT INTO T2 VALUES (NEWT1.C1, LEFT(NEWT1.C2,3));
+      END
+;
+
+
+CREATE TRIGGER TR1
+    NO CASCADE BEFORE UPDATE OF C1 ON T1
+    REFERENCING NEW AS NEW_T1
+                OLD AS OLD_T1
+    FOR EACH ROW MODE DB2SQL
+      BEGIN ATOMIC
+        SET NEW_T1.C2 =
+            CASE
+              WHEN (C1 > 5)
+              THEN 'A'
+              WHEN (C1 < 5)
+              THEN 'B'
+              WHEN (C1 > OLD_T1.C1) THEN 'C'
+              WHEN (C1 < OLD_T1.C1) THEN 'D'
+              WHEN (C1 = OLD_T1.C1) THEN 'E'
+            END;
+      END
+;
+
+CREATE TRIGGER TR1
+    NO CASCADE BEFORE UPDATE OF C1 ON T1
+    REFERENCING NEW AS NEW_T1
+                OLD AS OLD_T1
+    FOR EACH ROW MODE DB2SQL
+      BEGIN ATOMIC
+        SET NEW_T1.C2 =
+            CASE
+              WHEN (NEW_T1.C1 > (SELECT MAX(C1) FROM T1_ARCHIVE
+                                WHERE K1 = NEW_T1.K1
+                                  AND DATE(C3) = CURRENT DATE))
+              THEN 'A'
+              WHEN (NEW_T1.C1 < (SELECT MAX(C1) FROM T1_ARCHIVE
+                                WHERE K1 = NEW_T1.K1
+                                  AND DATE(C3) = CURRENT DATE))
+              THEN 'B'
+              WHEN (NEW_T1.C1 > OLD_T1.C1) THEN 'C'
+              WHEN (NEW_T1.C1 < OLD_T1.C1) THEN 'D'
+              WHEN (NEW_T1.C1 = OLD_T1.C1) THEN 'E'
+            END;
+      END
+;
+
+

@@ -663,6 +663,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterValuesStatement(DB2zSQLParser.ValuesStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1918,6 +1930,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

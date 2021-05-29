@@ -334,6 +334,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -963,6 +969,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree
