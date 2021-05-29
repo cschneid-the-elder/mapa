@@ -81,6 +81,7 @@ sqlStatement
 	| createTableStatement
 	| createTablespaceStatement
 	| createTriggerStatement
+	| createTrustedContextStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -508,6 +509,18 @@ createTriggerStatement
 	)
 	;
 
+createTrustedContextStatement
+	: (
+	CREATE TRUSTED CONTEXT contextName
+	BASED UPON CONNECTION USING SYSTEM AUTHID authorizationName
+	(trustedContextDefaultRoleClause
+	| trustedContextEnableDisableClause
+	| trustedContextDefaultSecurityLabelClause
+	| trustedContextAttributesClause
+	| trustedContextWithUseForClause)+
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -517,6 +530,65 @@ setAssignmentStatement
 valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
+	)
+	;
+
+trustedContextDefaultRoleClause
+	: (
+	(NO DEFAULT ROLE)
+	| (DEFAULT ROLE roleName ((WITHOUT ROLE AS OBJECT OWNER) | (WITH ROLE AS OBJECT OWNER AND QUALIFIER))?)
+	)
+	;
+
+trustedContextEnableDisableClause
+	: (DISABLE | ENABLE)
+	;
+
+trustedContextDefaultSecurityLabelClause
+	: ((NO DEFAULT SECURITY LABEL) | (DEFAULT SECURITY LABEL seclabelName))
+	;
+
+trustedContextAttributesClause
+	: (
+	ATTRIBUTES 
+	LPAREN 
+	((trustedContextAttribute1 (COMMA trustedContextAttribute1)*)
+	| (trustedContextAttribute2 (COMMA trustedContextAttribute2)*))
+	RPAREN
+	)
+	;
+
+trustedContextWithUseForClause
+	: (WITH USE FOR trustedContextUseFor (COMMA trustedContextUseFor)*)
+	;
+
+trustedContextAttribute1
+	: (
+	(ADDRESS addressValue)
+	| (ENCRYPTION encryptionValue)
+	| (SERVAUTH servauthValue)
+	)
+	;
+
+trustedContextAttribute2
+	: (
+	(JOBNAME jobnameValue)
+	)
+	;
+
+trustedContextUseFor
+	: (
+	(authorizationName userOptions*)
+	| (EXTERNAL SECURITY PROFILE profileName userOptions*)
+	| (PUBLIC (WITH | WITHOUT) AUTHENTICATION)
+	)
+	;
+
+userOptions
+	: (
+	(ROLE roleName)
+	| (SECURITY LABEL seclabelName)
+	| ((WITH | WITHOUT) AUTHENTICATION)
 	)
 	;
 
@@ -4679,6 +4751,8 @@ sqlKeyword
 	| NEW_TABLE
 	| OLD_TABLE
 	| REFERENCING
+	| BASED
+	| UPON
 	)
 	;
 

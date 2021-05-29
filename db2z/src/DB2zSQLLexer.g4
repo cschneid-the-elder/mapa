@@ -190,6 +190,14 @@ REFERENCING
 	: R E F E R E N C I N G 
 	;
 
+BASED
+	: B A S E D
+	;
+
+UPON
+	: U P O N
+	;
+
 //generated sql lexer keywords
 
 ADD

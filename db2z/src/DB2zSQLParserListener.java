@@ -547,6 +547,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createTrustedContextStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateTrustedContextStatement(DB2zSQLParser.CreateTrustedContextStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createTrustedContextStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateTrustedContextStatement(DB2zSQLParser.CreateTrustedContextStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -566,6 +576,96 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultRoleClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextDefaultRoleClause(DB2zSQLParser.TrustedContextDefaultRoleClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultRoleClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextDefaultRoleClause(DB2zSQLParser.TrustedContextDefaultRoleClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextEnableDisableClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextEnableDisableClause(DB2zSQLParser.TrustedContextEnableDisableClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextEnableDisableClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextEnableDisableClause(DB2zSQLParser.TrustedContextEnableDisableClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultSecurityLabelClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextDefaultSecurityLabelClause(DB2zSQLParser.TrustedContextDefaultSecurityLabelClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultSecurityLabelClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextDefaultSecurityLabelClause(DB2zSQLParser.TrustedContextDefaultSecurityLabelClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextAttributesClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextAttributesClause(DB2zSQLParser.TrustedContextAttributesClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextAttributesClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextAttributesClause(DB2zSQLParser.TrustedContextAttributesClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextWithUseForClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextWithUseForClause(DB2zSQLParser.TrustedContextWithUseForClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextWithUseForClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextWithUseForClause(DB2zSQLParser.TrustedContextWithUseForClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextAttribute1}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextAttribute1(DB2zSQLParser.TrustedContextAttribute1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextAttribute1}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextAttribute1(DB2zSQLParser.TrustedContextAttribute1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextAttribute2}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextAttribute2(DB2zSQLParser.TrustedContextAttribute2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextAttribute2}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextAttribute2(DB2zSQLParser.TrustedContextAttribute2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextUseFor}.
+	 * @param ctx the parse tree
+	 */
+	void enterTrustedContextUseFor(DB2zSQLParser.TrustedContextUseForContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#trustedContextUseFor}.
+	 * @param ctx the parse tree
+	 */
+	void exitTrustedContextUseFor(DB2zSQLParser.TrustedContextUseForContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#userOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserOptions(DB2zSQLParser.UserOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#userOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserOptions(DB2zSQLParser.UserOptionsContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#triggerDefinition}.
 	 * @param ctx the parse tree

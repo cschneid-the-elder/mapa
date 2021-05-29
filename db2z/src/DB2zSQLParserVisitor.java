@@ -334,6 +334,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTriggerStatement(DB2zSQLParser.CreateTriggerStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTrustedContextStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTrustedContextStatement(DB2zSQLParser.CreateTrustedContextStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -345,6 +351,60 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultRoleClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextDefaultRoleClause(DB2zSQLParser.TrustedContextDefaultRoleClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextEnableDisableClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextEnableDisableClause(DB2zSQLParser.TrustedContextEnableDisableClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultSecurityLabelClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextDefaultSecurityLabelClause(DB2zSQLParser.TrustedContextDefaultSecurityLabelClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextAttributesClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextAttributesClause(DB2zSQLParser.TrustedContextAttributesClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextWithUseForClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextWithUseForClause(DB2zSQLParser.TrustedContextWithUseForClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextAttribute1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextAttribute1(DB2zSQLParser.TrustedContextAttribute1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextAttribute2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextAttribute2(DB2zSQLParser.TrustedContextAttribute2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#trustedContextUseFor}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTrustedContextUseFor(DB2zSQLParser.TrustedContextUseForContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#userOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUserOptions(DB2zSQLParser.UserOptionsContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#triggerDefinition}.
 	 * @param ctx the parse tree
