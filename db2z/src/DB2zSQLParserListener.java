@@ -577,6 +577,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTypeDistinctStatement(DB2zSQLParser.CreateTypeDistinctStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateVariableStatement(DB2zSQLParser.CreateVariableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateVariableStatement(DB2zSQLParser.CreateVariableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -2146,6 +2156,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCreateTypeArrayBuiltinType2(DB2zSQLParser.CreateTypeArrayBuiltinType2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createVariableBuiltInType}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateVariableBuiltInType(DB2zSQLParser.CreateVariableBuiltInTypeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createVariableBuiltInType}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateVariableBuiltInType(DB2zSQLParser.CreateVariableBuiltInTypeContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#sourceDataType}.
 	 * @param ctx the parse tree

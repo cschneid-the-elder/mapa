@@ -352,6 +352,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTypeDistinctStatement(DB2zSQLParser.CreateTypeDistinctStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createVariableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateVariableStatement(DB2zSQLParser.CreateVariableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1293,6 +1299,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCreateTypeArrayBuiltinType2(DB2zSQLParser.CreateTypeArrayBuiltinType2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createVariableBuiltInType}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateVariableBuiltInType(DB2zSQLParser.CreateVariableBuiltInTypeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sourceDataType}.
 	 * @param ctx the parse tree

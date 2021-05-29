@@ -84,6 +84,7 @@ sqlStatement
 	| createTrustedContextStatement
 	| createTypeArrayStatement
 	| createTypeDistinctStatement
+	| createVariableStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -533,6 +534,14 @@ createTypeArrayStatement
 createTypeDistinctStatement
 	: (
 	CREATE TYPE distinctTypeName AS sourceDataType (INLINE LENGTH INTEGERLITERAL)?
+	)
+	;
+
+createVariableStatement
+	: (
+	CREATE VARIABLE variableName 
+	(createVariableBuiltInType | arrayTypeName) 
+	(DEFAULT (NULL | INTEGERLITERAL | NONNUMERICLITERAL | specialRegister))?
 	)
 	;
 
@@ -1527,7 +1536,7 @@ procedureBuiltinType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
@@ -1551,7 +1560,7 @@ createTypeArrayBuiltinType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
@@ -1563,6 +1572,29 @@ createTypeArrayBuiltinType2
 	INTEGER
 	| INT
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) length? ccsidClause1? forDataQualifier?)
+	)
+	;
+
+createVariableBuiltInType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
+	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| REAL
+	| (DOUBLE PRECISION?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) length? forDataQualifier?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) length? forDataQualifier?)
+	| ((GRAPHIC | VARGRAPHIC | DBCLOB) length?)
+	| (BINARY (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY LARGE OBJECT) | BLOB) length?)
+	| DATE
+	| TIME
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	)
 	;
 
