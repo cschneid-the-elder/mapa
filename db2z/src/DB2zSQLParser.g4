@@ -1170,7 +1170,8 @@ save for host-variable-name; thus we confine the rule to just those two.
 */
 setAssignmentClause
 	: (
-	((variableName | hostVariable) EQ valuesList1 (COMMA (variableName | hostVariable) EQ valuesList1)*)
+	(arrayElementSpecification EQ (expression | NULL))
+	| ((variableName | hostVariable) EQ valuesList1 (COMMA (variableName | hostVariable) EQ valuesList1)*)
 	| (LPAREN (variableName | hostVariable) (COMMA (variableName | hostVariable))* 
 		RPAREN EQ 
 		LPAREN 
