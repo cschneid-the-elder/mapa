@@ -23,6 +23,7 @@ function testLexAndParse {
 
 }
 
+STARTTIME=$(date +%s)
 export kind=DB2zSQL
 export myRC=0
 export tmp01=/tmp/$(date +%Y%m%d%H%M%S).$$.mapadb2z01
@@ -38,6 +39,10 @@ testLexAndParse
 
 rm $tmp01
 rm $tmp02
+
+ENDTIME=$(date +%s)
+
+echo "elapsed time $(($ENDTIME - $STARTTIME))
 
 exit $myRC
 

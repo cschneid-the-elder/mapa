@@ -861,7 +861,7 @@ asResultTable
 
 declareGlobalTemporaryTableAsResultTable
 	: (
-	LPAREN fullSelect RPAREN
+	AS LPAREN fullSelect RPAREN
 	WITH NO DATA
 	)
 	;
@@ -3308,7 +3308,7 @@ defaultClause
 
 defaultClause1
 	: (
-	WITH? DEFAULT defaultClauseAllowables
+	WITH? DEFAULT defaultClauseAllowables?
 	)
 	;
 
