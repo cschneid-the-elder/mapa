@@ -85,6 +85,7 @@ sqlStatement
 	| createTypeArrayStatement
 	| createTypeDistinctStatement
 	| createVariableStatement
+	| createViewStatement
 	| declareCursorStatement
 	| declareTableStatement
 	| declareStatementStatement
@@ -545,6 +546,16 @@ createVariableStatement
 	)
 	;
 
+createViewStatement
+	: (
+	CREATE VIEW viewName 
+	LPAREN columnName (COMMA columnName)* RPAREN AS
+	(WITH commonTableExpression (COMMA commonTableExpression)*)?
+	fullSelect
+	createViewCheckOptionClause?
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -555,6 +566,10 @@ valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
 	)
+	;
+
+createViewCheckOptionClause
+	: (WITH (CASCADED | LOCAL)? CHECK OPTION)
 	;
 
 trustedContextDefaultRoleClause
@@ -4839,6 +4854,7 @@ sqlKeyword
 	| REFERENCING
 	| BASED
 	| UPON
+    | OPTION
 	)
 	;
 

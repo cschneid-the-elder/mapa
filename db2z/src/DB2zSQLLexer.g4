@@ -2416,6 +2416,10 @@ MODIFIERS
 	: M O D I F I E R S
 	;
 
+OPTION
+	: O P T I O N
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

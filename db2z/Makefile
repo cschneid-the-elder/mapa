@@ -25,7 +25,9 @@ testrig:
 test:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
+	echo `date`
 	./src/tester all
+	echo `date`
 else
 	echo `date` $@ $(n) >> build.log
 	./src/tester $(n)

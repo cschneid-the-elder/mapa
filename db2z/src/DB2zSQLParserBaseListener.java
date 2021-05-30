@@ -711,6 +711,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateViewStatement(DB2zSQLParser.CreateViewStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateViewStatement(DB2zSQLParser.CreateViewStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -730,6 +742,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateViewCheckOptionClause(DB2zSQLParser.CreateViewCheckOptionClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateViewCheckOptionClause(DB2zSQLParser.CreateViewCheckOptionClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

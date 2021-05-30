@@ -587,6 +587,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateVariableStatement(DB2zSQLParser.CreateVariableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createViewStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateViewStatement(DB2zSQLParser.CreateViewStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createViewStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateViewStatement(DB2zSQLParser.CreateViewStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -606,6 +616,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createViewCheckOptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateViewCheckOptionClause(DB2zSQLParser.CreateViewCheckOptionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createViewCheckOptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateViewCheckOptionClause(DB2zSQLParser.CreateViewCheckOptionClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#trustedContextDefaultRoleClause}.
 	 * @param ctx the parse tree
