@@ -37,16 +37,6 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitQuery(DB2zSQLParser.QueryContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#cursorName}.
 	 * @param ctx the parse tree
 	 */
@@ -96,16 +86,6 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#notNullPhrase}.
 	 * @param ctx the parse tree
@@ -597,6 +577,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateViewStatement(DB2zSQLParser.CreateViewStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareGlobalTemporaryTableStatement(DB2zSQLParser.DeclareGlobalTemporaryTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareGlobalTemporaryTableStatement(DB2zSQLParser.DeclareGlobalTemporaryTableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -616,6 +626,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableLikeClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareGlobalTemporaryTableLikeClause(DB2zSQLParser.DeclareGlobalTemporaryTableLikeClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableLikeClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareGlobalTemporaryTableLikeClause(DB2zSQLParser.DeclareGlobalTemporaryTableLikeClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#onCommitClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterOnCommitClause(DB2zSQLParser.OnCommitClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#onCommitClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitOnCommitClause(DB2zSQLParser.OnCommitClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#loggedWithRollbackClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterLoggedWithRollbackClause(DB2zSQLParser.LoggedWithRollbackClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#loggedWithRollbackClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitLoggedWithRollbackClause(DB2zSQLParser.LoggedWithRollbackClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createViewCheckOptionClause}.
 	 * @param ctx the parse tree
@@ -1047,6 +1087,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableAsResultTable}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareGlobalTemporaryTableAsResultTable(DB2zSQLParser.DeclareGlobalTemporaryTableAsResultTableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableAsResultTable}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareGlobalTemporaryTableAsResultTable(DB2zSQLParser.DeclareGlobalTemporaryTableAsResultTableContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableMaterializedQueryDefinition}.
 	 * @param ctx the parse tree
 	 */
@@ -1077,15 +1127,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitOrganizationClause(DB2zSQLParser.OrganizationClauseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void enterGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx);
+	void enterCreateGlobalTemporaryTableColumnDefinition(DB2zSQLParser.CreateGlobalTemporaryTableColumnDefinitionContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 */
-	void exitGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx);
+	void exitCreateGlobalTemporaryTableColumnDefinition(DB2zSQLParser.CreateGlobalTemporaryTableColumnDefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableColumnDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareGlobalTemporaryTableColumnDefinition(DB2zSQLParser.DeclareGlobalTemporaryTableColumnDefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableColumnDefinition}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareGlobalTemporaryTableColumnDefinition(DB2zSQLParser.DeclareGlobalTemporaryTableColumnDefinitionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#parameterDeclaration1}.
 	 * @param ctx the parse tree
@@ -2806,6 +2866,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitGeneratedClause(DB2zSQLParser.GeneratedClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#generatedClause2}.
+	 * @param ctx the parse tree
+	 */
+	void enterGeneratedClause2(DB2zSQLParser.GeneratedClause2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#generatedClause2}.
+	 * @param ctx the parse tree
+	 */
+	void exitGeneratedClause2(DB2zSQLParser.GeneratedClause2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#asIdentityClause}.
 	 * @param ctx the parse tree

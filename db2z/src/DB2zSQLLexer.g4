@@ -2420,6 +2420,10 @@ OPTION
 	: O P T I O N
 	;
 
+PRESERVE
+	: P R E S E R V E
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

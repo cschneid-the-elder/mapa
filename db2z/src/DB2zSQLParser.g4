@@ -87,6 +87,7 @@ sqlStatement
 	| createVariableStatement
 	| createViewStatement
 	| declareCursorStatement
+	| declareGlobalTemporaryTableStatement
 	| declareTableStatement
 	| declareStatementStatement
 	| deleteStatement
@@ -104,14 +105,6 @@ query
 	| fullSelect
 	| selectStatement
 	| selectIntoStatement
-	)
-	;
-
-declareCursorStatement
-	: (
-	DECLARE cursorName
-	((NO SCROLL) | ((ASENSITIVE | INSENSITIVE | (SENSITIVE (DYNAMIC | STATIC))) SCROLL))?
-	CURSOR (holdability | returnability | rowsetPositioning)* FOR (selectStatement | statementName)
 	)
 	;
 
@@ -133,15 +126,6 @@ returnability
 
 rowsetPositioning
 	: ((WITHOUT ROWSET POSITIONING) | (WITH ROWSET POSITIONING))
-	;
-
-declareTableStatement
-	: (
-	DECLARE tableName TABLE LPAREN
-	(columnName dataType notNullPhrase?)
-	(COMMA columnName dataType notNullPhrase?)*
-	RPAREN
-	)
 	;
 
 notNullPhrase
@@ -378,7 +362,7 @@ createFunctionStatementInlineSqlScalar
 createGlobalTemporaryTableStatement
 	: (
 	CREATE GLOBAL TEMPORARY TABLE tableName
-	((LPAREN globalTemporaryColumnDefinition (COMMA globalTemporaryColumnDefinition)* RPAREN)
+	((LPAREN createGlobalTemporaryTableColumnDefinition (COMMA createGlobalTemporaryTableColumnDefinition)* RPAREN)
 	| (LIKE tableName))
 	ccsidClause1?
 	)
@@ -556,6 +540,36 @@ createViewStatement
 	)
 	;
 
+declareCursorStatement
+	: (
+	DECLARE cursorName
+	((NO SCROLL) | ((ASENSITIVE | INSENSITIVE | (SENSITIVE (DYNAMIC | STATIC))) SCROLL))?
+	CURSOR (holdability | returnability | rowsetPositioning)* FOR (selectStatement | statementName)
+	)
+	;
+
+declareGlobalTemporaryTableStatement
+	: (
+	DECLARE GLOBAL TEMPORARY TABLE tableName
+		((LPAREN declareGlobalTemporaryTableColumnDefinition 
+			(COMMA declareGlobalTemporaryTableColumnDefinition)* RPAREN)
+		| declareGlobalTemporaryTableLikeClause
+		| declareGlobalTemporaryTableAsResultTable)
+		(ccsidClause1
+		| onCommitClause
+		| loggedWithRollbackClause)*
+	)
+	;
+
+declareTableStatement
+	: (
+	DECLARE tableName TABLE LPAREN
+	(columnName dataType notNullPhrase?)
+	(COMMA columnName dataType notNullPhrase?)*
+	RPAREN
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -565,6 +579,21 @@ setAssignmentStatement
 valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
+	)
+	;
+
+declareGlobalTemporaryTableLikeClause
+	: (LIKE tableName copyOptions?)
+	;
+
+onCommitClause
+	: (ON COMMIT ((DELETE ROWS) | (PRESERVE ROWS) | (DROP TABLE)))
+	;
+
+loggedWithRollbackClause
+	: (
+	LOGGED
+	| (NOT LOGGED (ON ROLLBACK (DELETE | PRESERVE) ROWS)?)
 	)
 	;
 
@@ -830,6 +859,13 @@ asResultTable
 	)
 	;
 
+declareGlobalTemporaryTableAsResultTable
+	: (
+	LPAREN fullSelect RPAREN
+	WITH NO DATA
+	)
+	;
+
 createTableMaterializedQueryDefinition
 	: (
 	(LPAREN columnName (COMMA columnName)* RPAREN)? 
@@ -860,9 +896,18 @@ organizationClause
 	)
 	;
 
-globalTemporaryColumnDefinition
+createGlobalTemporaryTableColumnDefinition
 	: (
 	columnName dataType (NOT NULL)?
+	)
+	;
+
+declareGlobalTemporaryTableColumnDefinition
+	: (
+	columnName dataType 
+	(defaultClause1
+	| generatedClause2
+	| (NOT NULL))* 
 	)
 	;
 
@@ -2214,6 +2259,10 @@ generatedClause
 		| asRowTransactionTimestampClause 
 		| asGeneratedExpressionClause))
 	)
+	;
+
+generatedClause2
+	: (GENERATED (ALWAYS | (BY DEFAULT)) asIdentityClause?)
 	;
 
 asIdentityClause
@@ -4855,6 +4904,7 @@ sqlKeyword
 	| BASED
 	| UPON
     | OPTION
+	| PRESERVE
 	)
 	;
 

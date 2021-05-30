@@ -51,18 +51,6 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterCursorName(DB2zSQLParser.CursorNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -118,18 +106,6 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -723,6 +699,42 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclareGlobalTemporaryTableStatement(DB2zSQLParser.DeclareGlobalTemporaryTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareGlobalTemporaryTableStatement(DB2zSQLParser.DeclareGlobalTemporaryTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -742,6 +754,42 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclareGlobalTemporaryTableLikeClause(DB2zSQLParser.DeclareGlobalTemporaryTableLikeClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareGlobalTemporaryTableLikeClause(DB2zSQLParser.DeclareGlobalTemporaryTableLikeClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOnCommitClause(DB2zSQLParser.OnCommitClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOnCommitClause(DB2zSQLParser.OnCommitClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLoggedWithRollbackClause(DB2zSQLParser.LoggedWithRollbackClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLoggedWithRollbackClause(DB2zSQLParser.LoggedWithRollbackClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -1263,6 +1311,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeclareGlobalTemporaryTableAsResultTable(DB2zSQLParser.DeclareGlobalTemporaryTableAsResultTableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareGlobalTemporaryTableAsResultTable(DB2zSQLParser.DeclareGlobalTemporaryTableAsResultTableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateTableMaterializedQueryDefinition(DB2zSQLParser.CreateTableMaterializedQueryDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1299,13 +1359,25 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx) { }
+	@Override public void enterCreateGlobalTemporaryTableColumnDefinition(DB2zSQLParser.CreateGlobalTemporaryTableColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx) { }
+	@Override public void exitCreateGlobalTemporaryTableColumnDefinition(DB2zSQLParser.CreateGlobalTemporaryTableColumnDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclareGlobalTemporaryTableColumnDefinition(DB2zSQLParser.DeclareGlobalTemporaryTableColumnDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareGlobalTemporaryTableColumnDefinition(DB2zSQLParser.DeclareGlobalTemporaryTableColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3370,6 +3442,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitGeneratedClause(DB2zSQLParser.GeneratedClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGeneratedClause2(DB2zSQLParser.GeneratedClause2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGeneratedClause2(DB2zSQLParser.GeneratedClause2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

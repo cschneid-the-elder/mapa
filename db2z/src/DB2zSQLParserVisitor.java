@@ -28,12 +28,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQuery(DB2zSQLParser.QueryContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#cursorName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -63,12 +57,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRowsetPositioning(DB2zSQLParser.RowsetPositioningContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#notNullPhrase}.
 	 * @param ctx the parse tree
@@ -364,6 +352,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateViewStatement(DB2zSQLParser.CreateViewStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareCursorStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareCursorStatement(DB2zSQLParser.DeclareCursorStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareGlobalTemporaryTableStatement(DB2zSQLParser.DeclareGlobalTemporaryTableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -375,6 +381,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableLikeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareGlobalTemporaryTableLikeClause(DB2zSQLParser.DeclareGlobalTemporaryTableLikeClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#onCommitClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOnCommitClause(DB2zSQLParser.OnCommitClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#loggedWithRollbackClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLoggedWithRollbackClause(DB2zSQLParser.LoggedWithRollbackClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createViewCheckOptionClause}.
 	 * @param ctx the parse tree
@@ -634,6 +658,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAsResultTable(DB2zSQLParser.AsResultTableContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableAsResultTable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareGlobalTemporaryTableAsResultTable(DB2zSQLParser.DeclareGlobalTemporaryTableAsResultTableContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableMaterializedQueryDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -652,11 +682,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOrganizationClause(DB2zSQLParser.OrganizationClauseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#globalTemporaryColumnDefinition}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitGlobalTemporaryColumnDefinition(DB2zSQLParser.GlobalTemporaryColumnDefinitionContext ctx);
+	T visitCreateGlobalTemporaryTableColumnDefinition(DB2zSQLParser.CreateGlobalTemporaryTableColumnDefinitionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableColumnDefinition}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareGlobalTemporaryTableColumnDefinition(DB2zSQLParser.DeclareGlobalTemporaryTableColumnDefinitionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#parameterDeclaration1}.
 	 * @param ctx the parse tree
@@ -1689,6 +1725,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGeneratedClause(DB2zSQLParser.GeneratedClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#generatedClause2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGeneratedClause2(DB2zSQLParser.GeneratedClause2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#asIdentityClause}.
 	 * @param ctx the parse tree
