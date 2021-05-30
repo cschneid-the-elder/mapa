@@ -97,16 +97,6 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#allocateCursorStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -606,6 +596,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#declareVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#declareVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree

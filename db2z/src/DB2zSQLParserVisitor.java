@@ -64,12 +64,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNotNullPhrase(DB2zSQLParser.NotNullPhraseContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#allocateCursorStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -369,6 +363,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareStatementStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#declareVariableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree

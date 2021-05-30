@@ -89,6 +89,7 @@ sqlStatement
 	| declareCursorStatement
 	| declareGlobalTemporaryTableStatement
 	| declareTableStatement
+	| declareVariableStatement
 	| declareStatementStatement
 	| deleteStatement
 	| insertStatement
@@ -130,10 +131,6 @@ rowsetPositioning
 
 notNullPhrase
 	: ((NOT NULL) | (NOT NULL WITH DEFAULT))
-	;
-
-declareStatementStatement
-	: (DECLARE statementName (COMMA statementName)* STATEMENT)
 	;
 
 allocateCursorStatement
@@ -567,6 +564,17 @@ declareTableStatement
 	(columnName dataType notNullPhrase?)
 	(COMMA columnName dataType notNullPhrase?)*
 	RPAREN
+	)
+	;
+
+declareStatementStatement
+	: (DECLARE statementName (COMMA statementName)* STATEMENT)
+	;
+
+declareVariableStatement
+	: (
+	DECLARE hostVariable (COMMA hostVariable)* VARIABLE
+	((ccsidClause1 forDataQualifier) | ccsidClause1 | forDataQualifier | ccsidClause2)?
 	)
 	;
 

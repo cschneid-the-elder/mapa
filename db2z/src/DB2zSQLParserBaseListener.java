@@ -123,18 +123,6 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterAllocateCursorStatement(DB2zSQLParser.AllocateCursorStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -730,6 +718,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDeclareTableStatement(DB2zSQLParser.DeclareTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareStatementStatement(DB2zSQLParser.DeclareStatementStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
