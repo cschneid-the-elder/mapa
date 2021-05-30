@@ -40,6 +40,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementName(DB2zSQLParser.StatementNameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#descriptorName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescriptorName(DB2zSQLParser.DescriptorNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#holdability}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -376,6 +382,42 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeStatement(DB2zSQLParser.DescribeStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeCursorStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeCursorStatement(DB2zSQLParser.DescribeCursorStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeInputStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeInputStatement(DB2zSQLParser.DescribeInputStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeOutputStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeOutputStatement(DB2zSQLParser.DescribeOutputStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeProcedureStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeProcedureStatement(DB2zSQLParser.DescribeProcedureStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeTableStatement(DB2zSQLParser.DescribeTableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -387,6 +429,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#describeUsingOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDescribeUsingOption(DB2zSQLParser.DescribeUsingOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableLikeClause}.
 	 * @param ctx the parse tree

@@ -92,6 +92,7 @@ sqlStatement
 	| declareVariableStatement
 	| declareStatementStatement
 	| deleteStatement
+	| describeStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -115,6 +116,10 @@ cursorName
 
 statementName
 	: identifier
+	;
+
+descriptorName
+	: hostVariable
 	;
 
 holdability
@@ -578,6 +583,46 @@ declareVariableStatement
 	)
 	;
 
+describeStatement
+	: (
+	describeCursorStatement
+	| describeInputStatement
+	| describeOutputStatement
+	| describeProcedureStatement
+	| describeTableStatement
+	)
+	;
+
+describeCursorStatement
+	: (
+	DESCRIBE CURSOR (cursorName | hostVariable) INTO descriptorName
+	)
+	;
+
+describeInputStatement
+	: (
+	DESCRIBE INPUT statementName INTO descriptorName
+	)
+	;
+
+describeOutputStatement
+	: (
+	DESCRIBE OUTPUT? statementName INTO descriptorName describeUsingOption?
+	)
+	;
+
+describeProcedureStatement
+	: (
+	DESCRIBE PROCEDURE (procedureName | hostVariable) INTO descriptorName
+	)
+	;
+
+describeTableStatement
+	: (
+	DESCRIBE TABLE hostVariable INTO descriptorName describeUsingOption?
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -588,6 +633,10 @@ valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
 	)
+	;
+
+describeUsingOption
+	: (USING (NAMES | LABELS | ANY | BOTH))
 	;
 
 declareGlobalTemporaryTableLikeClause
@@ -4913,6 +4962,11 @@ sqlKeyword
 	| UPON
     | OPTION
 	| PRESERVE
+	| BOTH
+	| DESCRIBE
+	| LABELS
+	| NAMES
+	| OUTPUT
 	)
 	;
 

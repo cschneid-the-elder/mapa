@@ -42,7 +42,7 @@ rm $tmp02
 
 ENDTIME=$(date +%s)
 
-echo "elapsed time $(($ENDTIME - $STARTTIME))"
+echo "elapsed time $(($ENDTIME - $STARTTIME)) seconds"
 
 exit $myRC
 

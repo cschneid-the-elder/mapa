@@ -2424,6 +2424,26 @@ PRESERVE
 	: P R E S E R V E
 	;
 
+BOTH
+	: B O T H 
+	;
+
+DESCRIBE
+	: D E S C R I B E 
+	;
+
+LABELS
+	: L A B E L S 
+	;
+
+NAMES
+	: N A M E S 
+	;
+
+OUTPUT
+	: O U T P U T 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

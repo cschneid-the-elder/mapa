@@ -57,6 +57,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitStatementName(DB2zSQLParser.StatementNameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#descriptorName}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescriptorName(DB2zSQLParser.DescriptorNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#descriptorName}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescriptorName(DB2zSQLParser.DescriptorNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#holdability}.
 	 * @param ctx the parse tree
 	 */
@@ -617,6 +627,66 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeStatement(DB2zSQLParser.DescribeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeStatement(DB2zSQLParser.DescribeStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeCursorStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeCursorStatement(DB2zSQLParser.DescribeCursorStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeCursorStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeCursorStatement(DB2zSQLParser.DescribeCursorStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeInputStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeInputStatement(DB2zSQLParser.DescribeInputStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeInputStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeInputStatement(DB2zSQLParser.DescribeInputStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeOutputStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeOutputStatement(DB2zSQLParser.DescribeOutputStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeOutputStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeOutputStatement(DB2zSQLParser.DescribeOutputStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeProcedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeProcedureStatement(DB2zSQLParser.DescribeProcedureStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeProcedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeProcedureStatement(DB2zSQLParser.DescribeProcedureStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeTableStatement(DB2zSQLParser.DescribeTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeTableStatement(DB2zSQLParser.DescribeTableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -636,6 +706,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#describeUsingOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterDescribeUsingOption(DB2zSQLParser.DescribeUsingOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#describeUsingOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitDescribeUsingOption(DB2zSQLParser.DescribeUsingOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#declareGlobalTemporaryTableLikeClause}.
 	 * @param ctx the parse tree
