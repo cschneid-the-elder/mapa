@@ -21,6 +21,10 @@ an application program.
 The rule trustedContextOptionList does not strictly match its
 syntax diagram, for reasons documented with the rule.
 
+The rule executeImmediateStatement only partially implements the
+syntax of the EXECUTE IMMEDIATE	statement in order to avoid
+implementing a grammar for the entire PL/I language here.
+
 This grammar does not include SQL/PL or the following SQL statements.
 
 ALTER FUNCTION (compiled SQL scalar)
@@ -97,6 +101,7 @@ sqlStatement
 	| endDeclareSectionStatement
 	| exchangeStatement
 	| executeStatement
+	| executeImmediateStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -667,6 +672,18 @@ executeStatement
 		| (USING DESCRIPTOR descriptorName)
 		| sourceRowData)
 	)
+	;
+
+/*
+This rule _almost_ covers the syntax.  The NONNUMERICLITERAL 
+token corresponds to what the documentation refers to as 
+string-expression, which "is any PL/I expression that yields 
+a string."  I'm not going to implement a grammar for the 
+entire PL/I language here.
+
+*/
+executeImmediateStatement
+	: (EXECUTE IMMEDIATE (variable | NONNUMERICLITERAL))
 	;
 
 setAssignmentStatement
