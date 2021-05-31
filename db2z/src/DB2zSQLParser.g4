@@ -96,6 +96,7 @@ sqlStatement
 	| dropStatement
 	| endDeclareSectionStatement
 	| exchangeStatement
+	| executeStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -659,6 +660,15 @@ exchangeStatement
 	: (EXCHANGE DATA BETWEEN TABLE tableName AND tableName)
 	;
 
+executeStatement
+	: (
+	EXECUTE statementName 
+		((USING (variable | arrayElementSpecification) (COMMA (variable | arrayElementSpecification))*)
+		| (USING DESCRIPTOR descriptorName)
+		| sourceRowData)
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -668,6 +678,20 @@ setAssignmentStatement
 valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
+	)
+	;
+
+/*
+For purposes of this grammar there is no difference between a
+host-variable and a host-variable-array.  The first option in
+the sourceRowData rule allows either, but only for former is 
+coded as its rule will also match the latter.
+*/
+sourceRowData
+	: (
+	((USING hostVariable (COMMA hostVariable)*)
+	| (USING DESCRIPTOR descriptorName))
+	(FOR (INTEGERLITERAL | hostVariable) ROWS)?
 	)
 	;
 
@@ -5092,6 +5116,7 @@ sqlKeyword
 	| LABELS
 	| NAMES
 	| OUTPUT
+	| EXCHANGE
 	)
 	;
 

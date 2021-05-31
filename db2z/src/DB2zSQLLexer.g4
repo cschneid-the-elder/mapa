@@ -2444,6 +2444,10 @@ OUTPUT
 	: O U T P U T 
 	;
 
+EXCHANGE
+	: E X C H A N G E
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
