@@ -94,6 +94,7 @@ sqlStatement
 	| deleteStatement
 	| describeStatement
 	| dropStatement
+	| endDeclareSectionStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -647,6 +648,10 @@ dropStatement
 		| dropVariableClause
 		| dropViewClause)
 	)
+	;
+
+endDeclareSectionStatement
+	: (END DECLARE SECTION)
 	;
 
 setAssignmentStatement
