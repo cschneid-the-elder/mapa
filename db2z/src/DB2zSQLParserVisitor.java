@@ -418,6 +418,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDescribeTableStatement(DB2zSQLParser.DescribeTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropStatement(DB2zSQLParser.DropStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -429,6 +435,126 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aliasDesignation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAliasDesignation(DB2zSQLParser.AliasDesignationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropDatabaseClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropDatabaseClause(DB2zSQLParser.DropDatabaseClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropFunctionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropFunctionClause(DB2zSQLParser.DropFunctionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropIndexClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropIndexClause(DB2zSQLParser.DropIndexClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropMaskClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropMaskClause(DB2zSQLParser.DropMaskClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropPackageClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropPackageClause(DB2zSQLParser.DropPackageClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropPermissionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropPermissionClause(DB2zSQLParser.DropPermissionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropProcedureClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropProcedureClause(DB2zSQLParser.DropProcedureClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropRoleClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropRoleClause(DB2zSQLParser.DropRoleClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropSequenceClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropSequenceClause(DB2zSQLParser.DropSequenceClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropStogroupClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropStogroupClause(DB2zSQLParser.DropStogroupClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropSynonymClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropSynonymClause(DB2zSQLParser.DropSynonymClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropTableClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropTableClause(DB2zSQLParser.DropTableClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropTablespaceClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropTablespaceClause(DB2zSQLParser.DropTablespaceClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropTriggerClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropTriggerClause(DB2zSQLParser.DropTriggerClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropTrustedContextClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropTrustedContextClause(DB2zSQLParser.DropTrustedContextClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropTypeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropTypeClause(DB2zSQLParser.DropTypeClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropVariableClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropVariableClause(DB2zSQLParser.DropVariableClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dropViewClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDropViewClause(DB2zSQLParser.DropViewClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#packageDesignator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPackageDesignator(DB2zSQLParser.PackageDesignatorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#describeUsingOption}.
 	 * @param ctx the parse tree
@@ -3033,6 +3159,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitHostStructure(DB2zSQLParser.HostStructureContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#synonym}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSynonym(DB2zSQLParser.SynonymContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#variable}.
 	 * @param ctx the parse tree

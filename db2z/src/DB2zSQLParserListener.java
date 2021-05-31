@@ -687,6 +687,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitDescribeTableStatement(DB2zSQLParser.DescribeTableStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropStatement(DB2zSQLParser.DropStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropStatement(DB2zSQLParser.DropStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -706,6 +716,206 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aliasDesignation}.
+	 * @param ctx the parse tree
+	 */
+	void enterAliasDesignation(DB2zSQLParser.AliasDesignationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aliasDesignation}.
+	 * @param ctx the parse tree
+	 */
+	void exitAliasDesignation(DB2zSQLParser.AliasDesignationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropDatabaseClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropDatabaseClause(DB2zSQLParser.DropDatabaseClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropDatabaseClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropDatabaseClause(DB2zSQLParser.DropDatabaseClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropFunctionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropFunctionClause(DB2zSQLParser.DropFunctionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropFunctionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropFunctionClause(DB2zSQLParser.DropFunctionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropIndexClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropIndexClause(DB2zSQLParser.DropIndexClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropIndexClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropIndexClause(DB2zSQLParser.DropIndexClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropMaskClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropMaskClause(DB2zSQLParser.DropMaskClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropMaskClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropMaskClause(DB2zSQLParser.DropMaskClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropPackageClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropPackageClause(DB2zSQLParser.DropPackageClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropPackageClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropPackageClause(DB2zSQLParser.DropPackageClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropPermissionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropPermissionClause(DB2zSQLParser.DropPermissionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropPermissionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropPermissionClause(DB2zSQLParser.DropPermissionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropProcedureClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropProcedureClause(DB2zSQLParser.DropProcedureClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropProcedureClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropProcedureClause(DB2zSQLParser.DropProcedureClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropRoleClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropRoleClause(DB2zSQLParser.DropRoleClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropRoleClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropRoleClause(DB2zSQLParser.DropRoleClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropSequenceClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropSequenceClause(DB2zSQLParser.DropSequenceClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropSequenceClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropSequenceClause(DB2zSQLParser.DropSequenceClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropStogroupClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropStogroupClause(DB2zSQLParser.DropStogroupClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropStogroupClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropStogroupClause(DB2zSQLParser.DropStogroupClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropSynonymClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropSynonymClause(DB2zSQLParser.DropSynonymClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropSynonymClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropSynonymClause(DB2zSQLParser.DropSynonymClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropTableClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropTableClause(DB2zSQLParser.DropTableClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropTableClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropTableClause(DB2zSQLParser.DropTableClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropTablespaceClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropTablespaceClause(DB2zSQLParser.DropTablespaceClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropTablespaceClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropTablespaceClause(DB2zSQLParser.DropTablespaceClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropTriggerClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropTriggerClause(DB2zSQLParser.DropTriggerClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropTriggerClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropTriggerClause(DB2zSQLParser.DropTriggerClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropTrustedContextClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropTrustedContextClause(DB2zSQLParser.DropTrustedContextClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropTrustedContextClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropTrustedContextClause(DB2zSQLParser.DropTrustedContextClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropTypeClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropTypeClause(DB2zSQLParser.DropTypeClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropTypeClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropTypeClause(DB2zSQLParser.DropTypeClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropVariableClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropVariableClause(DB2zSQLParser.DropVariableClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropVariableClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropVariableClause(DB2zSQLParser.DropVariableClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#dropViewClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDropViewClause(DB2zSQLParser.DropViewClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#dropViewClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDropViewClause(DB2zSQLParser.DropViewClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#packageDesignator}.
+	 * @param ctx the parse tree
+	 */
+	void enterPackageDesignator(DB2zSQLParser.PackageDesignatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#packageDesignator}.
+	 * @param ctx the parse tree
+	 */
+	void exitPackageDesignator(DB2zSQLParser.PackageDesignatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#describeUsingOption}.
 	 * @param ctx the parse tree
@@ -5046,6 +5256,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitHostStructure(DB2zSQLParser.HostStructureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#synonym}.
+	 * @param ctx the parse tree
+	 */
+	void enterSynonym(DB2zSQLParser.SynonymContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#synonym}.
+	 * @param ctx the parse tree
+	 */
+	void exitSynonym(DB2zSQLParser.SynonymContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#variable}.
 	 * @param ctx the parse tree

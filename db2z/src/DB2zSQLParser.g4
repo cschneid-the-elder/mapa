@@ -93,6 +93,7 @@ sqlStatement
 	| declareStatementStatement
 	| deleteStatement
 	| describeStatement
+	| dropStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -271,7 +272,7 @@ commentStatement
 	| (COLUMN tableName DOT columnName)
 	| (functionDesignator ((ACTIVE VERSION) | (VERSION routineVersionID))?)
 	| (INDEX indexName)
-	| (PACKAGE collectionID DOT packageName (VERSION? versionID)?)
+	| (PACKAGE packageDesignator)
 	| (PLAN planName)
 	| (PROCEDURE procedureName ((ACTIVE VERSION) | (VERSION routineVersionID))?)
 	| (ROLE roleName)
@@ -623,6 +624,31 @@ describeTableStatement
 	)
 	;
 
+dropStatement
+	: (
+	DROP
+		(aliasDesignation
+		| dropDatabaseClause
+		| dropFunctionClause
+		| dropIndexClause
+		| dropMaskClause
+		| dropPackageClause
+		| dropPermissionClause
+		| dropProcedureClause
+		| dropRoleClause
+		| dropSequenceClause
+		| dropStogroupClause
+		| dropSynonymClause
+		| dropTableClause
+		| dropTablespaceClause
+		| dropTriggerClause
+		| dropTrustedContextClause
+		| dropTypeClause
+		| dropVariableClause
+		| dropViewClause)
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -633,6 +659,91 @@ valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
 	)
+	;
+
+aliasDesignation
+	: (PUBLIC? ALIAS aliasName (FOR (TABLE | SEQUENCE))?)
+	;
+
+dropDatabaseClause
+	: (DATABASE databaseName)
+	;
+
+dropFunctionClause
+	: (
+		(FUNCTION functionName
+			(LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?
+			RESTRICT?)
+		| (SPECIFIC FUNCTION specificName RESTRICT?)
+	)
+	;
+
+dropIndexClause
+	: (INDEX indexName)
+	;
+
+dropMaskClause
+	: (MASK maskName)
+	;
+
+dropPackageClause
+	: (PACKAGE packageDesignator)
+	;
+
+dropPermissionClause
+	: (PERMISSION permissionName)
+	;
+
+dropProcedureClause
+	: (PROCEDURE procedureName RESTRICT?)
+	;
+
+dropRoleClause
+	: (ROLE roleName RESTRICT?)
+	;
+
+dropSequenceClause
+	: (SEQUENCE sequenceName RESTRICT?)
+	;
+
+dropStogroupClause
+	: (STOGROUP stogroupName)
+	;
+
+dropSynonymClause
+	: (SYNONYM synonym)
+	;
+
+dropTableClause
+	: (TABLE tableName)
+	;
+
+dropTablespaceClause
+	: (TABLESPACE (databaseName DOT)? tablespaceName)
+	;
+
+dropTriggerClause
+	: (TRIGGER triggerName)
+	;
+
+dropTrustedContextClause
+	: (TRUSTED CONTEXT contextName)
+	;
+
+dropTypeClause
+	: (TYPE typeName RESTRICT?)
+	;
+
+dropVariableClause
+	: (VARIABLE variableName RESTRICT?)
+	;
+
+dropViewClause
+	: (VIEW viewName)
+	;
+
+packageDesignator
+	: (collectionID DOT packageName (VERSION? versionID)?)
 	;
 
 describeUsingOption
@@ -3968,6 +4079,10 @@ hostIdentifier
 	;
 
 hostStructure
+	: identifier
+	;
+
+synonym
 	: identifier
 	;
 
