@@ -95,6 +95,7 @@ sqlStatement
 	| describeStatement
 	| dropStatement
 	| endDeclareSectionStatement
+	| exchangeStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -652,6 +653,10 @@ dropStatement
 
 endDeclareSectionStatement
 	: (END DECLARE SECTION)
+	;
+
+exchangeStatement
+	: (EXCHANGE DATA BETWEEN TABLE tableName AND tableName)
 	;
 
 setAssignmentStatement
