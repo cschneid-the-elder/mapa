@@ -382,6 +382,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeclareVariableStatement(DB2zSQLParser.DeclareVariableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#deleteStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#describeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -448,17 +454,89 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecuteImmediateStatement(DB2zSQLParser.ExecuteImmediateStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#explainStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExplainStatement(DB2zSQLParser.ExplainStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInsertStatement(DB2zSQLParser.InsertStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMergeStatement(DB2zSQLParser.MergeStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#explainPlanClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExplainPlanClause(DB2zSQLParser.ExplainPlanClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#explainStmtcacheClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExplainStmtcacheClause(DB2zSQLParser.ExplainStmtcacheClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#explainPackageClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExplainPackageClause(DB2zSQLParser.ExplainPackageClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#explainStabilizedDynamicQueryClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExplainStabilizedDynamicQueryClause(DB2zSQLParser.ExplainStabilizedDynamicQueryClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#packageScopeSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPackageScopeSpecification(DB2zSQLParser.PackageScopeSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#collectionName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCollectionName(DB2zSQLParser.CollectionNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#packageScopePackageName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPackageScopePackageName(DB2zSQLParser.PackageScopePackageNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#versionName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVersionName(DB2zSQLParser.VersionNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sourceRowData}.
 	 * @param ctx the parse tree
@@ -1240,24 +1318,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPositionedDelete(DB2zSQLParser.PositionedDeleteContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#deleteStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDeleteStatement(DB2zSQLParser.DeleteStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitInsertStatement(DB2zSQLParser.InsertStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitMergeStatement(DB2zSQLParser.MergeStatementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#searchedUpdate}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1269,12 +1329,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitPositionedUpdate(DB2zSQLParser.PositionedUpdateContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sourceValues}.
 	 * @param ctx the parse tree

@@ -102,6 +102,7 @@ sqlStatement
 	| exchangeStatement
 	| executeStatement
 	| executeImmediateStatement
+	| explainStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -592,6 +593,10 @@ declareVariableStatement
 	)
 	;
 
+deleteStatement
+	: (searchedDelete | positionedDelete)
+	;
+
 describeStatement
 	: (
 	describeCursorStatement
@@ -686,10 +691,47 @@ executeImmediateStatement
 	: (EXECUTE IMMEDIATE (variable | NONNUMERICLITERAL))
 	;
 
+explainStatement
+	: (
+	EXPLAIN
+		(explainPlanClause
+		| explainStmtcacheClause
+		| explainPackageClause
+		| explainStabilizedDynamicQueryClause)
+	)
+	;
+
+insertStatement
+	: (
+	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
+	includeColumns?
+	(OVERRIDING USER VALUE)?
+	((VALUES (valuesList1 |
+		(LPAREN valuesList1 (COMMA valuesList1)* RPAREN)))
+	| ((WITH commonTableExpression (COMMA commonTableExpression)*)?
+		fullSelect isolationClause? querynoClause?)
+	| multipleRowInsert)
+	)
+	;
+
+mergeStatement
+	: (
+	MERGE INTO tableName correlationClause? includeColumns?
+	USING ((LPAREN* tableReference RPAREN*) | sourceValues) ON searchCondition
+	(WHEN matchingCondition THEN (modificationOperation | signalStatement))+ (ELSE IGNORE)?
+	notAtomicPhrase?
+	querynoClause?
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
 	)
+	;
+
+updateStatement
+	: (searchedUpdate | positionedUpdate)
 	;
 
 valuesStatement
@@ -697,6 +739,58 @@ valuesStatement
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
 	)
 	;
+
+explainPlanClause
+	: (
+	(PLAN | ALL) (SET QUERYNO EQ INTEGERLITERAL)? FOR
+	(query | insertStatement | mergeStatement | searchedDelete | searchedUpdate)
+	)
+	;
+
+explainStmtcacheClause
+	: (
+	STMTCACHE
+		(ALL
+		| (STMTID (hostVariable | INTEGERLITERAL))
+		| (STMTTOKEN (hostVariable | NONNUMERICLITERAL)))
+	)
+	;
+
+explainPackageClause
+	: (
+	PACKAGE packageScopeSpecification
+	)
+	;
+
+explainStabilizedDynamicQueryClause
+	: (
+	STABILIZED DYNAMIC QUERY STMTID
+	(hostVariable | INTEGERLITERAL)
+	(COPY NONNUMERICLITERAL)?
+	)
+	;
+
+packageScopeSpecification
+	: (
+	COLLECTION collectionName
+	PACKAGE packageScopePackageName
+	(VERSION versionName)?
+	(COPY NONNUMERICLITERAL)?
+	)
+	;
+
+collectionName
+	: (:hostVariable | NONNUMERICLITERAL)
+	;
+
+packageScopePackageName
+	: (:hostVariable | NONNUMERICLITERAL)
+	;
+
+versionName
+	: (:hostVariable | NONNUMERICLITERAL)
+	;
+
 
 /*
 For purposes of this grammar there is no difference between a
@@ -1456,33 +1550,6 @@ positionedDelete
 	)
 	;
 
-deleteStatement
-	: (searchedDelete | positionedDelete)
-	;
-
-insertStatement
-	: (
-	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
-	includeColumns?
-	(OVERRIDING USER VALUE)?
-	((VALUES (valuesList1 |
-		(LPAREN valuesList1 (COMMA valuesList1)* RPAREN)))
-	| ((WITH commonTableExpression (COMMA commonTableExpression)*)?
-		fullSelect isolationClause? querynoClause?)
-	| multipleRowInsert)
-	)
-	;
-
-mergeStatement
-	: (
-	MERGE INTO tableName correlationClause? includeColumns?
-	USING ((LPAREN* tableReference RPAREN*) | sourceValues) ON searchCondition
-	(WHEN matchingCondition THEN (modificationOperation | signalStatement))+ (ELSE IGNORE)?
-	notAtomicPhrase?
-	querynoClause?
-	)
-	;
-
 searchedUpdate
 	: (
 	UPDATE tableName periodClause? AS? correlationName? includeColumns?
@@ -1498,10 +1565,6 @@ positionedUpdate
 	WHERE CURRENT OF cursorName
 	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
 	)
-	;
-
-updateStatement
-	: (searchedUpdate | positionedUpdate)
 	;
 
 sourceValues
@@ -5134,6 +5197,10 @@ sqlKeyword
 	| NAMES
 	| OUTPUT
 	| EXCHANGE
+	| STABILIZED
+	| STMTCACHE
+	| STMTID
+	| STMTTOKEN
 	)
 	;
 

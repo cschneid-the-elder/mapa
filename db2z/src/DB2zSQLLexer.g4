@@ -2448,6 +2448,22 @@ EXCHANGE
 	: E X C H A N G E
 	;
 
+STABILIZED
+	: S T A B I L I Z E D 
+	;
+
+STMTCACHE
+	: S T M T C A C H E 
+	;
+
+STMTID
+	: S T M T I D 
+	;
+
+STMTTOKEN
+	: S T M T T O K E N 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
