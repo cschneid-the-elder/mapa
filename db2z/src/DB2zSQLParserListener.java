@@ -757,6 +757,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitExplainStatement(DB2zSQLParser.ExplainStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fetchStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterFetchStatement(DB2zSQLParser.FetchStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fetchStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitFetchStatement(DB2zSQLParser.FetchStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -806,6 +816,86 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fetchOrientation}.
+	 * @param ctx the parse tree
+	 */
+	void enterFetchOrientation(DB2zSQLParser.FetchOrientationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fetchOrientation}.
+	 * @param ctx the parse tree
+	 */
+	void exitFetchOrientation(DB2zSQLParser.FetchOrientationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowPositioned}.
+	 * @param ctx the parse tree
+	 */
+	void enterRowPositioned(DB2zSQLParser.RowPositionedContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowPositioned}.
+	 * @param ctx the parse tree
+	 */
+	void exitRowPositioned(DB2zSQLParser.RowPositionedContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#rowsetPositioned}.
+	 * @param ctx the parse tree
+	 */
+	void enterRowsetPositioned(DB2zSQLParser.RowsetPositionedContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#rowsetPositioned}.
+	 * @param ctx the parse tree
+	 */
+	void exitRowsetPositioned(DB2zSQLParser.RowsetPositionedContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#singleRowFetch}.
+	 * @param ctx the parse tree
+	 */
+	void enterSingleRowFetch(DB2zSQLParser.SingleRowFetchContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#singleRowFetch}.
+	 * @param ctx the parse tree
+	 */
+	void exitSingleRowFetch(DB2zSQLParser.SingleRowFetchContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#fetchTargetVariable}.
+	 * @param ctx the parse tree
+	 */
+	void enterFetchTargetVariable(DB2zSQLParser.FetchTargetVariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#fetchTargetVariable}.
+	 * @param ctx the parse tree
+	 */
+	void exitFetchTargetVariable(DB2zSQLParser.FetchTargetVariableContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#multipleRowFetch}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultipleRowFetch(DB2zSQLParser.MultipleRowFetchContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#multipleRowFetch}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultipleRowFetch(DB2zSQLParser.MultipleRowFetchContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#multipleRowFetchForClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultipleRowFetchForClause(DB2zSQLParser.MultipleRowFetchForClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#multipleRowFetchForClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultipleRowFetchForClause(DB2zSQLParser.MultipleRowFetchForClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#multipleRowFetchIntoClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterMultipleRowFetchIntoClause(DB2zSQLParser.MultipleRowFetchIntoClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#multipleRowFetchIntoClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitMultipleRowFetchIntoClause(DB2zSQLParser.MultipleRowFetchIntoClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#explainPlanClause}.
 	 * @param ctx the parse tree

@@ -460,6 +460,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExplainStatement(DB2zSQLParser.ExplainStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fetchStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFetchStatement(DB2zSQLParser.FetchStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -489,6 +495,54 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fetchOrientation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFetchOrientation(DB2zSQLParser.FetchOrientationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowPositioned}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRowPositioned(DB2zSQLParser.RowPositionedContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#rowsetPositioned}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRowsetPositioned(DB2zSQLParser.RowsetPositionedContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#singleRowFetch}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSingleRowFetch(DB2zSQLParser.SingleRowFetchContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#fetchTargetVariable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFetchTargetVariable(DB2zSQLParser.FetchTargetVariableContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#multipleRowFetch}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultipleRowFetch(DB2zSQLParser.MultipleRowFetchContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#multipleRowFetchForClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultipleRowFetchForClause(DB2zSQLParser.MultipleRowFetchForClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#multipleRowFetchIntoClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMultipleRowFetchIntoClause(DB2zSQLParser.MultipleRowFetchIntoClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#explainPlanClause}.
 	 * @param ctx the parse tree

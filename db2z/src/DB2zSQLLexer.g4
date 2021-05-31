@@ -2464,6 +2464,10 @@ STMTTOKEN
 	: S T M T T O K E N 
 	;
 
+STARTING
+	: S T A R T I N G
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

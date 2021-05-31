@@ -103,6 +103,7 @@ sqlStatement
 	| executeStatement
 	| executeImmediateStatement
 	| explainStatement
+	| fetchStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -701,6 +702,19 @@ explainStatement
 	)
 	;
 
+/*
+The syntax diagram in the documentation lists fetchOrientation
+as required.  It is optional here because one of its variants is 
+optional.
+*/
+fetchStatement
+	: (
+	FETCH (INSENSITIVE | SENSITIVE)? (WITH CONTINUE)? 
+	fetchOrientation? FROM? cursorName
+	(singleRowFetch | multipleRowFetch)?
+	)
+	;
+
 insertStatement
 	: (
 	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
@@ -738,6 +752,73 @@ valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
 	)
+	;
+
+fetchOrientation
+	: (BEFORE | AFTER | rowPositioned | rowsetPositioned)
+	;
+
+rowPositioned
+	: (
+	NEXT
+	| PRIOR
+	| FIRST
+	| LAST
+	| (CURRENT CONTINUE?)
+	| (ABSOLUTE (hostVariable | INTEGERLITERAL))
+	| (RELATIVE (hostVariable | INTEGERLITERAL))
+	)
+	;
+
+rowsetPositioned
+	: (
+	(NEXT ROWSET)
+	| (PRIOR ROWSET)
+	| (FIRST ROWSET)
+	| (LAST ROWSET)
+	| (CURRENT  ROWSET)
+	| (ROWSET STARTING AT (ABSOLUTE | RELATIVE) (hostVariable | INTEGERLITERAL))
+	)
+	;
+
+singleRowFetch
+	: (
+	(INTO ((fetchTargetVariable (COMMA fetchTargetVariable)*) | arrayElementSpecification))
+	| ((INTO | USING) DESCRIPTOR descriptorName)
+	)
+	;
+/*
+The target variable in this clause could be any of {global-variable-name,
+host-variable-name, SQL-parameter-name, SQL-variable-name, 
+transition-variable-name} all of which conform to the variableName rule
+save for host-variable-name; thus we confine the rule to just those two.
+*/
+
+fetchTargetVariable
+	: (variable | hostVariable)
+	;
+
+/*
+The syntax diagram in the documentation shows that both of these
+clauses are optional.  In ANTLR terms, this means an error of the
+form "rule can match the empty string."  So my interpretation is
+to have a rule that allows one, the other, or both, and then the
+entire rule is optional in the fetchStatement rule. 
+*/
+multipleRowFetch
+	: (
+	(multipleRowFetchForClause? multipleRowFetchIntoClause)
+	| (multipleRowFetchForClause multipleRowFetchIntoClause?)
+	| (multipleRowFetchForClause multipleRowFetchIntoClause)
+	)
+	;
+
+multipleRowFetchForClause
+	: (FOR (hostVariable | INTEGERLITERAL) ROWS)
+	;
+
+multipleRowFetchIntoClause
+	: ((INTO hostVariable (COMMA hostVariable)*) | ((INTO | USING) DESCRIPTOR descriptorName))
 	;
 
 explainPlanClause
@@ -5201,6 +5282,7 @@ sqlKeyword
 	| STMTCACHE
 	| STMTID
 	| STMTTOKEN
+	| STARTING
 	)
 	;
 
