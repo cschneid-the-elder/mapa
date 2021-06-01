@@ -548,6 +548,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitFreeLocatorStatement(DB2zSQLParser.FreeLocatorStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

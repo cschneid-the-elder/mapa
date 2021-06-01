@@ -104,6 +104,7 @@ sqlStatement
 	| executeImmediateStatement
 	| explainStatement
 	| fetchStatement
+	| freeLocatorStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -713,6 +714,10 @@ fetchStatement
 	fetchOrientation? FROM? cursorName
 	(singleRowFetch | multipleRowFetch)?
 	)
+	;
+
+freeLocatorStatement
+	: (FREE LOCATOR hostVariable (COMMA hostVariable)*)
 	;
 
 insertStatement
