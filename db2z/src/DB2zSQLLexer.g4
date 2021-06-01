@@ -2468,6 +2468,206 @@ STARTING
 	: S T A R T I N G
 	;
 
+CATALOG_NAME
+	: C A T A L O G '_' N A M E 
+	;
+
+CONDITION_NUMBER
+	: C O N D I T I O N '_' N U M B E R 
+	;
+
+CURSOR_NAME
+	: C U R S O R '_' N A M E 
+	;
+
+DB2_AUTHENTICATION_TYPE
+	: D B '2' '_' A U T H E N T I C A T I O N '_' T Y P E 
+	;
+
+DB2_AUTHORIZATION_ID
+	: D B '2' '_' A U T H O R I Z A T I O N '_' I D 
+	;
+
+DB2_CONNECTION_STATE
+	: D B '2' '_' C O N N E C T I O N '_' S T A T E 
+	;
+
+DB2_CONNECTION_STATUS
+	: D B '2' '_' C O N N E C T I O N '_' S T A T U S 
+	;
+
+DB2_ENCRYPTION_TYPE
+	: D B '2' '_' E N C R Y P T I O N '_' T Y P E 
+	;
+
+DB2_ERROR_CODE1
+	: D B '2' '_' E R R O R '_' C O D E '1' 
+	;
+
+DB2_ERROR_CODE2
+	: D B '2' '_' E R R O R '_' C O D E '2' 
+	;
+
+DB2_ERROR_CODE3
+	: D B '2' '_' E R R O R '_' C O D E '3' 
+	;
+
+DB2_ERROR_CODE4
+	: D B '2' '_' E R R O R '_' C O D E '4' 
+	;
+
+DB2_GET_DIAGNOSTICS_DIAGNOSTICS
+	: D B '2' '_' G E T '_' D I A G N O S T I C S '_' D I A G N O S T I C S 
+	;
+
+DB2_INTERNAL_ERROR_POINTER
+	: D B '2' '_' I N T E R N A L '_' E R R O R '_' P O I N T E R 
+	;
+
+DB2_LAST_ROW
+	: D B '2' '_' L A S T '_' R O W 
+	;
+
+DB2_LINE_NUMBER
+	: D B '2' '_' L I N E '_' N U M B E R 
+	;
+
+DB2_MESSAGE_ID
+	: D B '2' '_' M E S S A G E '_' I D 
+	;
+
+DB2_MODULE_DETECTING_ERROR
+	: D B '2' '_' M O D U L E '_' D E T E C T I N G '_' E R R O R 
+	;
+
+DB2_NUMBER_PARAMETER_MARKERS
+	: D B '2' '_' N U M B E R '_' P A R A M E T E R '_' M A R K E R S 
+	;
+
+DB2_NUMBER_RESULT_SETS
+	: D B '2' '_' N U M B E R '_' R E S U L T '_' S E T S 
+	;
+
+DB2_NUMBER_ROWS
+	: D B '2' '_' N U M B E R '_' R O W S 
+	;
+
+DB2_ORDINAL_TOKEN_
+	: D B '2' '_' O R D I N A L '_' T O K E N '_' 
+	;
+
+DB2_ORDINAL_TOKEN_n
+	: DB2_ORDINAL_TOKEN_ INTEGERLITERAL
+	;
+
+DB2_PRODUCT_ID
+	: D B '2' '_' P R O D U C T '_' I D 
+	;
+
+DB2_REASON_CODE
+	: D B '2' '_' R E A S O N '_' C O D E 
+	;
+
+DB2_RETURNED_SQLCODE
+	: D B '2' '_' R E T U R N E D '_' S Q L C O D E 
+	;
+
+DB2_RETURN_STATUS
+	: D B '2' '_' R E T U R N '_' S T A T U S 
+	;
+
+DB2_ROW_NUMBER
+	: D B '2' '_' R O W '_' N U M B E R 
+	;
+
+DB2_SERVER_CLASS_NAME
+	: D B '2' '_' S E R V E R '_' C L A S S '_' N A M E 
+	;
+
+DB2_SQL_ATTR_CURSOR_HOLD
+	: D B '2' '_' S Q L '_' A T T R '_' C U R S O R '_' H O L D 
+	;
+
+DB2_SQL_ATTR_CURSOR_ROWSET
+	: D B '2' '_' S Q L '_' A T T R '_' C U R S O R '_' R O W S E T 
+	;
+
+DB2_SQL_ATTR_CURSOR_SCROLLABLE
+	: D B '2' '_' S Q L '_' A T T R '_' C U R S O R '_' S C R O L L A B L E 
+	;
+
+DB2_SQL_ATTR_CURSOR_SENSITIVITY
+	: D B '2' '_' S Q L '_' A T T R '_' C U R S O R '_' S E N S I T I V I T Y 
+	;
+
+DB2_SQL_ATTR_CURSOR_TYPE
+	: D B '2' '_' S Q L '_' A T T R '_' C U R S O R '_' T Y P E 
+	;
+
+DB2_SQLERRD1
+	: D B '2' '_' S Q L E R R D '1' 
+	;
+
+DB2_SQLERRD2
+	: D B '2' '_' S Q L E R R D '2' 
+	;
+
+DB2_SQLERRD3
+	: D B '2' '_' S Q L E R R D '3' 
+	;
+
+DB2_SQLERRD4
+	: D B '2' '_' S Q L E R R D '4' 
+	;
+
+DB2_SQLERRD5
+	: D B '2' '_' S Q L E R R D '5' 
+	;
+
+DB2_SQLERRD6
+	: D B '2' '_' S Q L E R R D '6' 
+	;
+
+DB2_SQLERRD_SET
+	: D B '2' '_' S Q L E R R D '_' S E T 
+	;
+
+DB2_SQL_NESTING_LEVEL
+	: D B '2' '_' S Q L '_' N E S T I N G '_' L E V E L 
+	;
+
+DB2_TOKEN_COUNT
+	: D B '2' '_' T O K E N '_' C O U N T 
+	;
+
+DIAGNOSTICS
+	: D I A G N O S T I C S 
+	;
+
+MORE_
+	: M O R E 
+	;
+
+NUMBER
+	: N U M B E R 
+	;
+
+RETURNED_SQLSTATE
+	: R E T U R N E D '_' S Q L S T A T E 
+	;
+
+ROW_COUNT
+	: R O W '_' C O U N T 
+	;
+
+SERVER_NAME
+	: S E R V E R '_' N A M E 
+	;
+
+STACKED
+	: S T A C K E D 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

@@ -777,6 +777,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitFreeLocatorStatement(DB2zSQLParser.FreeLocatorStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#getDiagnosticsStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#getDiagnosticsStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -826,6 +836,96 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#statementInformation}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementInformation(DB2zSQLParser.StatementInformationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#statementInformation}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementInformation(DB2zSQLParser.StatementInformationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#statementInformationVariableEquate}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementInformationVariableEquate(DB2zSQLParser.StatementInformationVariableEquateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#statementInformationVariableEquate}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementInformationVariableEquate(DB2zSQLParser.StatementInformationVariableEquateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#statementInformationItemName}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementInformationItemName(DB2zSQLParser.StatementInformationItemNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#statementInformationItemName}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementInformationItemName(DB2zSQLParser.StatementInformationItemNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#conditionInformation}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionInformation(DB2zSQLParser.ConditionInformationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#conditionInformation}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionInformation(DB2zSQLParser.ConditionInformationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#conditionInformationVariableEquate}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionInformationVariableEquate(DB2zSQLParser.ConditionInformationVariableEquateContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#conditionInformationVariableEquate}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionInformationVariableEquate(DB2zSQLParser.ConditionInformationVariableEquateContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#conditionInformationItemName}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditionInformationItemName(DB2zSQLParser.ConditionInformationItemNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#conditionInformationItemName}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditionInformationItemName(DB2zSQLParser.ConditionInformationItemNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#connectionInformationItemName}.
+	 * @param ctx the parse tree
+	 */
+	void enterConnectionInformationItemName(DB2zSQLParser.ConnectionInformationItemNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#connectionInformationItemName}.
+	 * @param ctx the parse tree
+	 */
+	void exitConnectionInformationItemName(DB2zSQLParser.ConnectionInformationItemNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#combinedInformation}.
+	 * @param ctx the parse tree
+	 */
+	void enterCombinedInformation(DB2zSQLParser.CombinedInformationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#combinedInformation}.
+	 * @param ctx the parse tree
+	 */
+	void exitCombinedInformation(DB2zSQLParser.CombinedInformationContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#combinedInformationOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterCombinedInformationOption(DB2zSQLParser.CombinedInformationOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#combinedInformationOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitCombinedInformationOption(DB2zSQLParser.CombinedInformationOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#fetchOrientation}.
 	 * @param ctx the parse tree

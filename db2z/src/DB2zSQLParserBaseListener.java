@@ -939,6 +939,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -994,6 +1006,114 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatementInformation(DB2zSQLParser.StatementInformationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementInformation(DB2zSQLParser.StatementInformationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatementInformationVariableEquate(DB2zSQLParser.StatementInformationVariableEquateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementInformationVariableEquate(DB2zSQLParser.StatementInformationVariableEquateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatementInformationItemName(DB2zSQLParser.StatementInformationItemNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementInformationItemName(DB2zSQLParser.StatementInformationItemNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConditionInformation(DB2zSQLParser.ConditionInformationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditionInformation(DB2zSQLParser.ConditionInformationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConditionInformationVariableEquate(DB2zSQLParser.ConditionInformationVariableEquateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditionInformationVariableEquate(DB2zSQLParser.ConditionInformationVariableEquateContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConditionInformationItemName(DB2zSQLParser.ConditionInformationItemNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConditionInformationItemName(DB2zSQLParser.ConditionInformationItemNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConnectionInformationItemName(DB2zSQLParser.ConnectionInformationItemNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConnectionInformationItemName(DB2zSQLParser.ConnectionInformationItemNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCombinedInformation(DB2zSQLParser.CombinedInformationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCombinedInformation(DB2zSQLParser.CombinedInformationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCombinedInformationOption(DB2zSQLParser.CombinedInformationOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCombinedInformationOption(DB2zSQLParser.CombinedInformationOptionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -555,6 +555,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
@@ -584,6 +591,69 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStatementInformation(DB2zSQLParser.StatementInformationContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStatementInformationVariableEquate(DB2zSQLParser.StatementInformationVariableEquateContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitStatementInformationItemName(DB2zSQLParser.StatementInformationItemNameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConditionInformation(DB2zSQLParser.ConditionInformationContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConditionInformationVariableEquate(DB2zSQLParser.ConditionInformationVariableEquateContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConditionInformationItemName(DB2zSQLParser.ConditionInformationItemNameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitConnectionInformationItemName(DB2zSQLParser.ConnectionInformationItemNameContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitCombinedInformation(DB2zSQLParser.CombinedInformationContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitCombinedInformationOption(DB2zSQLParser.CombinedInformationOptionContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

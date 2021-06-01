@@ -472,6 +472,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFreeLocatorStatement(DB2zSQLParser.FreeLocatorStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#getDiagnosticsStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -501,6 +507,60 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#statementInformation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementInformation(DB2zSQLParser.StatementInformationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#statementInformationVariableEquate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementInformationVariableEquate(DB2zSQLParser.StatementInformationVariableEquateContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#statementInformationItemName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementInformationItemName(DB2zSQLParser.StatementInformationItemNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#conditionInformation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditionInformation(DB2zSQLParser.ConditionInformationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#conditionInformationVariableEquate}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditionInformationVariableEquate(DB2zSQLParser.ConditionInformationVariableEquateContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#conditionInformationItemName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConditionInformationItemName(DB2zSQLParser.ConditionInformationItemNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#connectionInformationItemName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConnectionInformationItemName(DB2zSQLParser.ConnectionInformationItemNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#combinedInformation}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCombinedInformation(DB2zSQLParser.CombinedInformationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#combinedInformationOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCombinedInformationOption(DB2zSQLParser.CombinedInformationOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#fetchOrientation}.
 	 * @param ctx the parse tree

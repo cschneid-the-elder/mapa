@@ -17,6 +17,8 @@
 				printf("'_' ");
 			} else if (chars[i] == " ") {
 				printf("[ ]+ ");
+			} else if (chars[i] ~ /[0-9]/) {
+				printf("'%s' ", chars[i]);
 			} else {
 				printf("%s ", chars[i])
 			}
