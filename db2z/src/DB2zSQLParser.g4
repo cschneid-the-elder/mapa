@@ -734,6 +734,7 @@ grantStatement
 	grantCollectionStatement
 	| grantDatabaseStatement
 	| grantFunctionOrProcedureStatement	
+	| grantPackageStatement
 	)
 	;
 
@@ -805,6 +806,29 @@ grantFunctionOrProcedureStatement
 	grantee (COMMA grantee)*
 	withGrantOption?
 	)
+	;
+
+grantPackageStatement
+	: (
+	GRANT (ALL | (grantPackageAuthority (COMMA grantPackageAuthority)*))
+	ON PACKAGE packageSpecification (COMMA packageSpecification)*
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantPackageAuthority
+	: (
+	BIND
+	| COPY
+	| EXECUTE
+	| RUN
+	)
+	;
+
+packageSpecification
+	: (collectionID DOT (packageName | SPLAT))
 	;
 
 functionSpecification
@@ -5532,6 +5556,7 @@ sqlKeyword
 	| STARTDB
 	| STATS
 	| STOPDB
+	| BIND
 	)
 	;
 

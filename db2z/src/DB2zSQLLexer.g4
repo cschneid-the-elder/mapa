@@ -2728,6 +2728,10 @@ STOPDB
 	: S T O P D B 
 	;
 
+BIND
+	: B I N D
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

@@ -877,6 +877,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitGrantFunctionOrProcedureStatement(DB2zSQLParser.GrantFunctionOrProcedureStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantPackageStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantPackageStatement(DB2zSQLParser.GrantPackageStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantPackageStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantPackageStatement(DB2zSQLParser.GrantPackageStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantPackageAuthority}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantPackageAuthority(DB2zSQLParser.GrantPackageAuthorityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantPackageAuthority}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantPackageAuthority(DB2zSQLParser.GrantPackageAuthorityContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#packageSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterPackageSpecification(DB2zSQLParser.PackageSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#packageSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitPackageSpecification(DB2zSQLParser.PackageSpecificationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#functionSpecification}.
 	 * @param ctx the parse tree
 	 */
