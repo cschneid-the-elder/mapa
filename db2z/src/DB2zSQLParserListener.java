@@ -877,6 +877,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitGrantFunctionOrProcedureStatement(DB2zSQLParser.GrantFunctionOrProcedureStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#functionSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionSpecification(DB2zSQLParser.FunctionSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#functionSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionSpecification(DB2zSQLParser.FunctionSpecificationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#grantee}.
 	 * @param ctx the parse tree
 	 */

@@ -797,12 +797,19 @@ grantDatabaseStatement
 grantFunctionOrProcedureStatement
 	: (
 	GRANT EXECUTE ON
-		((FUNCTION functionName ((LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)? | SPLAT)) 
+		((FUNCTION functionSpecification (COMMA functionSpecification)*)
+		| (FUNCTION SPLAT)
 		| (SPECIFIC FUNCTION specificName (COMMA specificName)*)
 		| (PROCEDURE ((procedureName (COMMA procedureName)*) | SPLAT)))
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+functionSpecification
+	: (
+	functionName (LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?
 	)
 	;
 

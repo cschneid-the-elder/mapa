@@ -532,6 +532,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGrantFunctionOrProcedureStatement(DB2zSQLParser.GrantFunctionOrProcedureStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSpecification(DB2zSQLParser.FunctionSpecificationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#grantee}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
