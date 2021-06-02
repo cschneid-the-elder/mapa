@@ -2668,6 +2668,66 @@ STACKED
 	: S T A C K E D 
 	;
 
+CREATETAB
+	: C R E A T E T A B 
+	;
+
+CREATETS
+	: C R E A T E T S 
+	;
+
+DBADM
+	: D B A D M 
+	;
+
+DBCTRL
+	: D B C T R L 
+	;
+
+DBMAINT
+	: D B M A I N T 
+	;
+
+DISPLAYDB
+	: D I S P L A Y D B 
+	;
+
+IMAGCOPY
+	: I M A G C O P Y 
+	;
+
+LOAD
+	: L O A D 
+	;
+
+PACKADM
+	: P A C K A D M 
+	;
+
+RECOVERDB
+	: R E C O V E R D B 
+	;
+
+REORG
+	: R E O R G 
+	;
+
+REPAIR
+	: R E P A I R 
+	;
+
+STARTDB
+	: S T A R T D B 
+	;
+
+STATS
+	: S T A T S 
+	;
+
+STOPDB
+	: S T O P D B 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

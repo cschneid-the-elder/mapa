@@ -478,6 +478,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantStatement(DB2zSQLParser.GrantStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -507,6 +513,42 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantCollectionStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantCollectionStatement(DB2zSQLParser.GrantCollectionStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantDatabaseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantDatabaseStatement(DB2zSQLParser.GrantDatabaseStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantFunctionOrProcedureStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantFunctionOrProcedureStatement(DB2zSQLParser.GrantFunctionOrProcedureStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantee}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantee(DB2zSQLParser.GranteeContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#withGrantOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWithGrantOption(DB2zSQLParser.WithGrantOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantDatabaseAuthority}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantDatabaseAuthority(DB2zSQLParser.GrantDatabaseAuthorityContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#statementInformation}.
 	 * @param ctx the parse tree

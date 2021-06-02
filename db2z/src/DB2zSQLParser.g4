@@ -106,6 +106,7 @@ sqlStatement
 	| fetchStatement
 	| freeLocatorStatement
 	| getDiagnosticsStatement
+	| grantStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -728,6 +729,14 @@ getDiagnosticsStatement
 	)
 	;
 
+grantStatement
+	: (
+	grantCollectionStatement
+	| grantDatabaseStatement
+	| grantFunctionOrProcedureStatement	
+	)
+	;
+
 insertStatement
 	: (
 	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
@@ -764,6 +773,64 @@ updateStatement
 valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
+	)
+	;
+
+grantCollectionStatement
+	: (
+	GRANT (CREATE | PACKADM) (ON | IN) COLLECTION
+	((collectionID (COMMA collectionID)*) | SPLAT) TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantDatabaseStatement
+	: (
+	GRANT grantDatabaseAuthority (COMMA grantDatabaseAuthority)*
+	ON DATABASE databaseName (COMMA databaseName)* TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantFunctionOrProcedureStatement
+	: (
+	GRANT EXECUTE ON
+		((FUNCTION functionName ((LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)? | SPLAT)) 
+		| (SPECIFIC FUNCTION specificName (COMMA specificName)*)
+		| (PROCEDURE ((procedureName (COMMA procedureName)*) | SPLAT)))
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantee
+	: (authorizationName | (ROLE roleName) | PUBLIC)
+	;
+
+withGrantOption
+	: (WITH GRANT OPTION)
+	;
+
+grantDatabaseAuthority
+	: (
+	DBADM
+	| DBCTRL
+	| DBMAINT
+	| CREATETAB
+	| CREATETS
+	| DISPLAYDB
+	| DROP
+	| IMAGCOPY
+	| LOAD
+	| RECOVERDB
+	| REORG
+	| REPAIR
+	| STARTDB
+	| STATS
+	| STOPDB
 	)
 	;
 
@@ -5443,6 +5510,21 @@ sqlKeyword
 	| ROW_COUNT
 	| SERVER_NAME
 	| STACKED
+	| CREATETAB
+	| CREATETS
+	| DBADM
+	| DBCTRL
+	| DBMAINT
+	| DISPLAYDB
+	| IMAGCOPY
+	| LOAD
+	| PACKADM
+	| RECOVERDB
+	| REORG
+	| REPAIR
+	| STARTDB
+	| STATS
+	| STOPDB
 	)
 	;
 

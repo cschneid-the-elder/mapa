@@ -787,6 +787,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitGetDiagnosticsStatement(DB2zSQLParser.GetDiagnosticsStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantStatement(DB2zSQLParser.GrantStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantStatement(DB2zSQLParser.GrantStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -836,6 +846,66 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantCollectionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantCollectionStatement(DB2zSQLParser.GrantCollectionStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantCollectionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantCollectionStatement(DB2zSQLParser.GrantCollectionStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantDatabaseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantDatabaseStatement(DB2zSQLParser.GrantDatabaseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantDatabaseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantDatabaseStatement(DB2zSQLParser.GrantDatabaseStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantFunctionOrProcedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantFunctionOrProcedureStatement(DB2zSQLParser.GrantFunctionOrProcedureStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantFunctionOrProcedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantFunctionOrProcedureStatement(DB2zSQLParser.GrantFunctionOrProcedureStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantee}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantee(DB2zSQLParser.GranteeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantee}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantee(DB2zSQLParser.GranteeContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#withGrantOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterWithGrantOption(DB2zSQLParser.WithGrantOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#withGrantOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitWithGrantOption(DB2zSQLParser.WithGrantOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantDatabaseAuthority}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantDatabaseAuthority(DB2zSQLParser.GrantDatabaseAuthorityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantDatabaseAuthority}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantDatabaseAuthority(DB2zSQLParser.GrantDatabaseAuthorityContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#statementInformation}.
 	 * @param ctx the parse tree
