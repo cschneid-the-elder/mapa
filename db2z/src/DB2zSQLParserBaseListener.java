@@ -1131,6 +1131,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGrantTypeOrJarStatement(DB2zSQLParser.GrantTypeOrJarStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrantTypeOrJarStatement(DB2zSQLParser.GrantTypeOrJarStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGrantTableAuthority(DB2zSQLParser.GrantTableAuthorityContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -6526,6 +6538,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArrayTypeName(DB2zSQLParser.ArrayTypeNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJarName(DB2zSQLParser.JarNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJarName(DB2zSQLParser.JarNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

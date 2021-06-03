@@ -740,6 +740,7 @@ grantStatement
 	| grantSequenceStatement
 	| grantSystemStatement
 	| grantTableStatement
+	| grantTypeOrJarStatement
 	)
 	;
 
@@ -867,6 +868,17 @@ grantTableStatement
 	: (
 	GRANT grantTableAuthority (COMMA grantTableAuthority)*
 	ON TABLE? tableName
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantTypeOrJarStatement
+	: (
+	GRANT USAGE ON
+	(((DATA | DISTINCT)? TYPE typeName (COMMA typeName)*)
+	| (JAR jarName (COMMA jarName)*))
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
@@ -4450,7 +4462,7 @@ planName
 	;
 
 typeName
-	: identifier
+	: ((schemaName DOT)? identifier)
 	;
 
 variableName
@@ -4458,6 +4470,10 @@ variableName
 	;
 
 arrayTypeName
+	: ((schemaName DOT)? identifier)
+	;
+
+jarName
 	: ((schemaName DOT)? identifier)
 	;
 

@@ -568,6 +568,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGrantTableStatement(DB2zSQLParser.GrantTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantTypeOrJarStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantTypeOrJarStatement(DB2zSQLParser.GrantTypeOrJarStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#grantTableAuthority}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3267,6 +3273,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitArrayTypeName(DB2zSQLParser.ArrayTypeNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#jarName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJarName(DB2zSQLParser.JarNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#aliasName}.
 	 * @param ctx the parse tree
