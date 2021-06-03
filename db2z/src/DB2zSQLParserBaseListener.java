@@ -1095,6 +1095,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGrantSequenceStatement(DB2zSQLParser.GrantSequenceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrantSequenceStatement(DB2zSQLParser.GrantSequenceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGrantSequenceAuthority(DB2zSQLParser.GrantSequenceAuthorityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrantSequenceAuthority(DB2zSQLParser.GrantSequenceAuthorityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGrantSchemaAuthority(DB2zSQLParser.GrantSchemaAuthorityContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -2744,6 +2744,10 @@ DROPIN
 	: D R O P I N
 	;
 
+USAGE
+	: U S A G E
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

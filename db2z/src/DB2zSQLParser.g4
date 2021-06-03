@@ -737,6 +737,7 @@ grantStatement
 	| grantPackageStatement
 	| grantPlanStatement
 	| grantSchemaStatement
+	| grantSequenceStatement
 	)
 	;
 
@@ -837,6 +838,23 @@ grantSchemaStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantSequenceStatement
+	: (
+	GRANT grantSequenceAuthority (COMMA grantSequenceAuthority)*
+	ON SEQUENCE sequenceName (COMMA sequenceName)*
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantSequenceAuthority
+	: (
+	ALTER
+	| USAGE
 	)
 	;
 
@@ -5597,6 +5615,7 @@ sqlKeyword
 	| ALTERIN
 	| CREATEIN
 	| DROPIN
+	| USAGE
 	)
 	;
 
