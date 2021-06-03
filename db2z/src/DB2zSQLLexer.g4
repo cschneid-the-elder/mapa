@@ -288,6 +288,10 @@ BUFFERPOOL
 	: B U F F E R P O O L 
 	;
 
+BUFFERPOOLS
+	: B U F F E R P O O L S
+	;
+
 BY
 	: B Y 
 	;

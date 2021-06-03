@@ -1155,6 +1155,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterGrantUseOfStatement(DB2zSQLParser.GrantUseOfStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrantUseOfStatement(DB2zSQLParser.GrantUseOfStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterGrantUseOfTarget(DB2zSQLParser.GrantUseOfTargetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitGrantUseOfTarget(DB2zSQLParser.GrantUseOfTargetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterGrantVariableAuthority(DB2zSQLParser.GrantVariableAuthorityContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -742,6 +742,7 @@ grantStatement
 	| grantTableStatement
 	| grantTypeOrJarStatement
 	| grantVariableStatement
+	| grantUseOfStatement
 	)
 	;
 
@@ -893,6 +894,24 @@ grantVariableStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantUseOfStatement
+	: (
+	GRANT USE OF grantUseOfTarget
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantUseOfTarget
+	: (
+	(BUFFERPOOL bpName (COMMA bpName)*)
+	| (ALL BUFFERPOOLS)
+	| (STOGROUP stogroupName (COMMA stogroupName)*)
+	| (TABLESPACE (databaseName DOT)? tablespaceName (COMMA (databaseName DOT)? tablespaceName)*)
 	)
 	;
 
@@ -5744,6 +5763,7 @@ sqlKeyword
 	| TRACE
 	| UNLOAD
 	| WRITE
+	| BUFFERPOOLS
 	)
 	;
 
