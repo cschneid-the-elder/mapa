@@ -3443,7 +3443,7 @@ functionInvocation
 scalarFunctionInvocation
 	: ((schemaName DOT)? scalarFunction
 	LPAREN
-	expression (COMMA expression)*
+	(expression (COMMA expression)*)?
 	RPAREN)
 	;
 
