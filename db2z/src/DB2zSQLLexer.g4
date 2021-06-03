@@ -2840,6 +2840,10 @@ TRACE
 	: T R A C E 
 	;
 
+UNLOAD
+	: U N L O A D
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

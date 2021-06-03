@@ -739,6 +739,7 @@ grantStatement
 	| grantSchemaStatement
 	| grantSequenceStatement
 	| grantSystemStatement
+	| grantTableStatement
 	)
 	;
 
@@ -859,6 +860,31 @@ grantSystemStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantTableStatement
+	: (
+	GRANT grantTableAuthority (COMMA grantTableAuthority)*
+	ON TABLE? tableName
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantTableAuthority
+	: (
+	(ALL PRIVILEGES?)
+	| ALTER
+	| DELETE
+	| INDEX
+	| INSERT
+	| (REFERENCES (LPAREN columnName (COMMA columnName)* RPAREN)?)
+	| SELECT
+	| TRIGGER
+	| UNLOAD
+	| (UPDATE (LPAREN columnName (COMMA columnName)* RPAREN)?)
 	)
 	;
 
@@ -5681,6 +5707,7 @@ sqlKeyword
 	| SYSCTRL
 	| SYSOPR
 	| TRACE
+	| UNLOAD
 	)
 	;
 
