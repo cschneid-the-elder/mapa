@@ -735,6 +735,7 @@ grantStatement
 	| grantDatabaseStatement
 	| grantFunctionOrProcedureStatement	
 	| grantPackageStatement
+	| grantPlanStatement
 	)
 	;
 
@@ -815,6 +816,23 @@ grantPackageStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantPlanStatement
+	: (
+	GRANT grantPlanAuthority (COMMA grantPlanAuthority)*
+	ON PLAN planName (COMMA planName)*
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantPlanAuthority
+	: (
+	BIND
+	| EXECUTE
 	)
 	;
 
