@@ -2732,6 +2732,18 @@ BIND
 	: B I N D
 	;
 
+ALTERIN
+	: A L T E R I N
+	;
+
+CREATEIN
+	: C R E A T E I N
+	;
+
+DROPIN
+	: D R O P I N
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

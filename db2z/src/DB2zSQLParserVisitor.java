@@ -544,6 +544,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGrantPlanStatement(DB2zSQLParser.GrantPlanStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantSchemaStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantSchemaStatement(DB2zSQLParser.GrantSchemaStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#grantSchemaAuthority}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGrantSchemaAuthority(DB2zSQLParser.GrantSchemaAuthorityContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#grantPlanAuthority}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

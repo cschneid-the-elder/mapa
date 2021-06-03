@@ -736,6 +736,7 @@ grantStatement
 	| grantFunctionOrProcedureStatement	
 	| grantPackageStatement
 	| grantPlanStatement
+	| grantSchemaStatement
 	)
 	;
 
@@ -826,6 +827,24 @@ grantPlanStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantSchemaStatement
+	: (
+	GRANT grantSchemaAuthority (COMMA grantSchemaAuthority)*
+	ON SCHEMA (SPLAT | (schemaName (COMMA schemaName)*))
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantSchemaAuthority
+	: (
+	ALTERIN
+	| CREATEIN
+	| DROPIN
 	)
 	;
 
@@ -5575,6 +5594,9 @@ sqlKeyword
 	| STATS
 	| STOPDB
 	| BIND
+	| ALTERIN
+	| CREATEIN
+	| DROPIN
 	)
 	;
 
