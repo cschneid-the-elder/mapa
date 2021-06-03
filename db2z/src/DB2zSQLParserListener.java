@@ -947,6 +947,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitGrantTypeOrJarStatement(DB2zSQLParser.GrantTypeOrJarStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantVariableStatement(DB2zSQLParser.GrantVariableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantVariableStatement(DB2zSQLParser.GrantVariableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#grantVariableAuthority}.
+	 * @param ctx the parse tree
+	 */
+	void enterGrantVariableAuthority(DB2zSQLParser.GrantVariableAuthorityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#grantVariableAuthority}.
+	 * @param ctx the parse tree
+	 */
+	void exitGrantVariableAuthority(DB2zSQLParser.GrantVariableAuthorityContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#grantTableAuthority}.
 	 * @param ctx the parse tree
 	 */

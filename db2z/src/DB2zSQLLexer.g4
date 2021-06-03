@@ -2844,6 +2844,10 @@ UNLOAD
 	: U N L O A D
 	;
 
+WRITE
+	: W R I T E
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

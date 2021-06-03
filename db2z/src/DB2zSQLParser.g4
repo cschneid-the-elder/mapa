@@ -741,6 +741,7 @@ grantStatement
 	| grantSystemStatement
 	| grantTableStatement
 	| grantTypeOrJarStatement
+	| grantVariableStatement
 	)
 	;
 
@@ -882,6 +883,24 @@ grantTypeOrJarStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantVariableStatement
+	: (
+	GRANT grantVariableAuthority (COMMA grantVariableAuthority)*
+	ON VARIABLE variableName (COMMA variableName)*
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantVariableAuthority
+	: (
+	(ALL PRIVILEGES?)
+	| READ
+	| WRITE
 	)
 	;
 
@@ -5724,6 +5743,7 @@ sqlKeyword
 	| SYSOPR
 	| TRACE
 	| UNLOAD
+	| WRITE
 	)
 	;
 
