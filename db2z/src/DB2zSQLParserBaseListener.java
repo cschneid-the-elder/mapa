@@ -963,6 +963,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterHoldLocatorStatement(DB2zSQLParser.HoldLocatorStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHoldLocatorStatement(DB2zSQLParser.HoldLocatorStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInsertStatement(DB2zSQLParser.InsertStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

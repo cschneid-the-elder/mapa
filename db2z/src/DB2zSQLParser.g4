@@ -107,6 +107,7 @@ sqlStatement
 	| freeLocatorStatement
 	| getDiagnosticsStatement
 	| grantStatement
+	| holdLocatorStatement
 	| insertStatement
 	| mergeStatement
 	| setAssignmentStatement
@@ -746,6 +747,10 @@ grantStatement
 	)
 	;
 
+holdLocatorStatement
+	: (HOLD LOCATOR hostVariable (COMMA hostVariable)*)
+	;
+	
 insertStatement
 	: (
 	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
