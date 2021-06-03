@@ -2748,6 +2748,98 @@ USAGE
 	: U S A G E
 	;
 
+ACCESSCTRL
+	: A C C E S S C T R L 
+	;
+
+BINDADD
+	: B I N D A D D 
+	;
+
+BINDAGENT
+	: B I N D A G E N T 
+	;
+
+BSDS
+	: B S D S 
+	;
+
+CREATEALIAS
+	: C R E A T E A L I A S 
+	;
+
+CREATEDBA
+	: C R E A T E D B A 
+	;
+
+CREATEDBC
+	: C R E A T E D B C 
+	;
+
+CREATE_SECURE_OBJECT
+	: C R E A T E '_' S E C U R E '_' O B J E C T 
+	;
+
+CREATESG
+	: C R E A T E S G 
+	;
+
+CREATETMTAB
+	: C R E A T E T M T A B 
+	;
+
+DATAACCESS
+	: D A T A A C C E S S 
+	;
+
+DEBUGSESSION
+	: D E B U G S E S S I O N 
+	;
+
+DISPLAY
+	: D I S P L A Y 
+	;
+
+MONITOR1
+	: M O N I T O R '1' 
+	;
+
+MONITOR2
+	: M O N I T O R '2' 
+	;
+
+RECOVER
+	: R E C O V E R 
+	;
+
+SQLADM
+	: S Q L A D M 
+	;
+
+STOPALL
+	: S T O P A L L 
+	;
+
+STOSPACE
+	: S T O S P A C E 
+	;
+
+SYSADM
+	: S Y S A D M 
+	;
+
+SYSCTRL
+	: S Y S C T R L 
+	;
+
+SYSOPR
+	: S Y S O P R 
+	;
+
+TRACE
+	: T R A C E 
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

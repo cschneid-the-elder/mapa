@@ -738,6 +738,7 @@ grantStatement
 	| grantPlanStatement
 	| grantSchemaStatement
 	| grantSequenceStatement
+	| grantSystemStatement
 	)
 	;
 
@@ -848,6 +849,47 @@ grantSequenceStatement
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
+	)
+	;
+
+grantSystemStatement
+	: (
+	GRANT grantSystemAuthority (COMMA grantSystemAuthority)*
+	(ON SYSTEM)?
+	TO
+	grantee (COMMA grantee)*
+	withGrantOption?
+	)
+	;
+
+grantSystemAuthority
+	: (
+	ACCESSCTRL
+	| ARCHIVE
+	| BINDADD
+	| BINDAGENT
+	| BSDS
+	| CREATEALIAS
+	| CREATEDBA
+	| CREATEDBC
+	| CREATESG
+	| CREATETMTAB
+	| CREATE_SECURE_OBJECT
+	| DATAACCESS
+	| (DBADM ((WITH | WITHOUT) ACCESSCTRL)? ((WITH | WITHOUT) DATAACCESS)?)
+	| DEBUGSESSION
+	| DISPLAY
+	| EXPLAIN
+	| MONITOR1
+	| MONITOR2
+	| RECOVER
+	| SQLADM
+	| STOPALL
+	| STOSPACE
+	| SYSADM
+	| SYSCTRL
+	| SYSOPR
+	| TRACE
 	)
 	;
 
@@ -5616,6 +5658,29 @@ sqlKeyword
 	| CREATEIN
 	| DROPIN
 	| USAGE
+	| ACCESSCTRL
+	| BINDADD
+	| BINDAGENT
+	| BSDS
+	| CREATEALIAS
+	| CREATEDBA
+	| CREATEDBC
+	| CREATE_SECURE_OBJECT
+	| CREATESG
+	| CREATETMTAB
+	| DATAACCESS
+	| DEBUGSESSION
+	| DISPLAY
+	| MONITOR1
+	| MONITOR2
+	| RECOVER
+	| SQLADM
+	| STOPALL
+	| STOSPACE
+	| SYSADM
+	| SYSCTRL
+	| SYSOPR
+	| TRACE
 	)
 	;
 

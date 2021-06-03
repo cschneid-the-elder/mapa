@@ -653,6 +653,20 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitGrantSystemStatement(DB2zSQLParser.GrantSystemStatementContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitGrantSystemAuthority(DB2zSQLParser.GrantSystemAuthorityContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitGrantSequenceAuthority(DB2zSQLParser.GrantSequenceAuthorityContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
