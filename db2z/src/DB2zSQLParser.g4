@@ -23,7 +23,8 @@ syntax diagram, for reasons documented with the rule.
 
 The rule executeImmediateStatement only partially implements the
 syntax of the EXECUTE IMMEDIATE	statement in order to avoid
-implementing a grammar for the entire PL/I language here.
+implementing a grammar for the entire PL/I language here.  The same
+is true of the prepareStatement rule.
 
 This grammar does not include SQL/PL or the following SQL statements.
 
@@ -114,6 +115,7 @@ sqlStatement
 	| lockTableStatement
 	| mergeStatement
 	| openStatement
+	| prepareStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -807,6 +809,20 @@ openStatement
 	OPEN cursorName 
 	((USING variable (COMMA variable)*)
 	| (USING DESCRIPTOR descriptorName))?
+	)
+	;
+
+/*
+This is incomplete, as the FROM string-expression phrase is
+not implemented because it is specific to PL/I, string-expression
+can be any valid PL/I string expression, and I'm not going to 
+implement the entirety of the PL/I language here.
+*/
+prepareStatement
+	: (
+	PREPARE statementName 
+	(INTO descriptorName (USING (NAMES | LABELS | ANY | BOTH))?)?
+	(ATTRIBUTES hostVariable)? FROM variable
 	)
 	;
 
