@@ -130,6 +130,7 @@ sqlStatement
 	| rollbackStatement
 	| savepointStatement
 	| setConnectionStatement
+	| setSpecialRegisterStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -892,6 +893,10 @@ savepointStatement
 
 setConnectionStatement
 	: (SET CONNECTION (locationName | hostVariable))
+	;
+
+setSpecialRegisterStatement
+	: (SET specialRegister EQ? (expression | NULL))
 	;
 
 setAssignmentStatement
@@ -2343,17 +2348,11 @@ modificationOperation
 	: (updateOperation | deleteOperation | insertOperation)
 	;
 
-/*
-The target variable in this clause could be any of {global-variable-name,
-host-variable-name, SQL-parameter-name, SQL-variable-name, 
-transition-variable-name} all of which conform to the variableName rule
-save for host-variable-name; thus we confine the rule to just those two.
-*/
 setAssignmentClause
 	: (
 	(arrayElementSpecification EQ (expression | NULL))
-	| ((variableName | hostVariable) EQ valuesList1 (COMMA (variableName | hostVariable) EQ valuesList1)*)
-	| (LPAREN (variableName | hostVariable) (COMMA (variableName | hostVariable))* 
+	| (setAssignmentTargetVariable EQ valuesList1 (COMMA setAssignmentTargetVariable EQ valuesList1)*)
+	| (LPAREN setAssignmentTargetVariable (COMMA setAssignmentTargetVariable)* 
 		RPAREN EQ 
 		LPAREN 
 			(((valuesList1 (COMMA valuesList1)*) | fullSelect)
@@ -2361,6 +2360,16 @@ setAssignmentClause
 			| (VALUES valuesList1)
 			| (VALUES LPAREN valuesList1 (COMMA valuesList1)* RPAREN))
 		RPAREN)
+	)
+	;
+
+setAssignmentTargetVariable
+	: (
+	globalVariableName
+	| hostVariable
+	| sqlParameterName
+	| sqlVariableName
+	| transitionVariableName
 	)
 	;
 
@@ -4704,7 +4713,7 @@ ccsidValue
 	;
 
 columnName
-	: ((correlationName DOT)? identifier)
+	: ((correlationName DOT)? identifier1)
 	;
 
 sourceColumnName
@@ -4736,7 +4745,7 @@ locationName
 	;
 
 schemaName
-	: identifier
+	: identifier1
 	;
 
 tableName
@@ -4945,6 +4954,22 @@ hostIdentifier
 
 hostStructure
 	: identifier
+	;
+
+globalVariableName
+	: ((schemaName DOT)? identifier1)
+	;
+
+sqlParameterName
+	: ((schemaName DOT)? identifier1)
+	;
+
+sqlVariableName
+	: ((schemaName DOT)? identifier1)
+	;
+
+transitionVariableName
+	: columnName
 	;
 
 synonym
@@ -5369,6 +5394,15 @@ identifier
 	| tableFunction
 	;
 
+identifier1
+	: SQLIDENTIFIER
+	| sqlKeyword
+	| scalarFunction
+	| aggregateFunction
+	| regressionFunction
+	| tableFunction
+	;
+
 sqlKeyword
 	: (
 	ADD
@@ -5422,7 +5456,7 @@ sqlKeyword
 	| CUBE
 	| CURRENT
 	| CURRENT_DATE
-	| CURRENT_LC_CTYPE
+//	| CURRENT_LC_CTYPE
 	| CURRENT_PATH
 	| CURRENT_SCHEMA
 	| CURRENT_SERVER

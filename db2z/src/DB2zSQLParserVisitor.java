@@ -580,6 +580,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetSpecialRegisterStatement(DB2zSQLParser.SetSpecialRegisterStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1809,6 +1815,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentTargetVariable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetAssignmentTargetVariable(DB2zSQLParser.SetAssignmentTargetVariableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree
@@ -3700,6 +3712,30 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitHostStructure(DB2zSQLParser.HostStructureContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#globalVariableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitGlobalVariableName(DB2zSQLParser.GlobalVariableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlParameterName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlParameterName(DB2zSQLParser.SqlParameterNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlVariableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlVariableName(DB2zSQLParser.SqlVariableNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#transitionVariableName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTransitionVariableName(DB2zSQLParser.TransitionVariableNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#synonym}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -4011,6 +4047,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIdentifier(DB2zSQLParser.IdentifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#identifier1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIdentifier1(DB2zSQLParser.Identifier1Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree

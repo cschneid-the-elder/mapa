@@ -408,9 +408,9 @@ CURRENT
 	: C U R R E N T 
 	;
 
-CURRENT_LC_CTYPE
-	: C U R R E N T ([ ]+ L O C A L E)? [ ]+ L C '_' C T Y P E 
-	;
+//CURRENT_LC_CTYPE
+//	: C U R R E N T ([ ]+ L O C A L E)? [ ]+ L C '_' C T Y P E 
+//	;
 
 CURRVAL
 	: C U R R V A L 
@@ -3769,7 +3769,7 @@ CURRENT_APPLICATION_COMPATIBILITY
 	;
 
 CURRENT_APPLICATION_ENCODING_SCHEME
-	: C U R R E N T [ ]+ A P P L I C A T I O N [ ]+ E N C O D I N G [ ]+ S C H E M E 
+	: C U R R E N T [ ]+ (A P P L I C A T I O N [ ]+)? E N C O D I N G [ ]+ S C H E M E 
 	;
 
 CURRENT_CLIENT_ACCTNG
@@ -3817,7 +3817,7 @@ CURRENT_GET_ACCEL_ARCHIVE
 	;
 
 CURRENT_LOCALE_LC_CTYPE
-	: C U R R E N T [ ]+ L O C A L E [ ]+ L C '_' C T Y P E 
+	: C U R R E N T ('_' | [ ]+ | ([ ]+ L O C A L E [ ]+)) L C '_' C T Y P E 
 	;
 
 CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION

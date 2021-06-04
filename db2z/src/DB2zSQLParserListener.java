@@ -957,6 +957,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetSpecialRegisterStatement(DB2zSQLParser.SetSpecialRegisterStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetSpecialRegisterStatement(DB2zSQLParser.SetSpecialRegisterStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -3006,6 +3016,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSetAssignmentClause(DB2zSQLParser.SetAssignmentClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentTargetVariable}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetAssignmentTargetVariable(DB2zSQLParser.SetAssignmentTargetVariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setAssignmentTargetVariable}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetAssignmentTargetVariable(DB2zSQLParser.SetAssignmentTargetVariableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
 	 * @param ctx the parse tree
@@ -6157,6 +6177,46 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitHostStructure(DB2zSQLParser.HostStructureContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#globalVariableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterGlobalVariableName(DB2zSQLParser.GlobalVariableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#globalVariableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitGlobalVariableName(DB2zSQLParser.GlobalVariableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlParameterName}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlParameterName(DB2zSQLParser.SqlParameterNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlParameterName}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlParameterName(DB2zSQLParser.SqlParameterNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlVariableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlVariableName(DB2zSQLParser.SqlVariableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlVariableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlVariableName(DB2zSQLParser.SqlVariableNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#transitionVariableName}.
+	 * @param ctx the parse tree
+	 */
+	void enterTransitionVariableName(DB2zSQLParser.TransitionVariableNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#transitionVariableName}.
+	 * @param ctx the parse tree
+	 */
+	void exitTransitionVariableName(DB2zSQLParser.TransitionVariableNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#synonym}.
 	 * @param ctx the parse tree
 	 */
@@ -6676,6 +6736,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIdentifier(DB2zSQLParser.IdentifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#identifier1}.
+	 * @param ctx the parse tree
+	 */
+	void enterIdentifier1(DB2zSQLParser.Identifier1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#identifier1}.
+	 * @param ctx the parse tree
+	 */
+	void exitIdentifier1(DB2zSQLParser.Identifier1Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree
