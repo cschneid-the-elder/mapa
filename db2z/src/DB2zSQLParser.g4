@@ -116,6 +116,7 @@ sqlStatement
 	| mergeStatement
 	| openStatement
 	| prepareStatement
+	| refreshTableStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -823,6 +824,12 @@ prepareStatement
 	PREPARE statementName 
 	(INTO descriptorName (USING (NAMES | LABELS | ANY | BOTH))?)?
 	(ATTRIBUTES hostVariable)? FROM variable
+	)
+	;
+
+refreshTableStatement
+	: (
+	REFRESH TABLE tableName (QUERYNO INTEGERLITERAL)?
 	)
 	;
 
