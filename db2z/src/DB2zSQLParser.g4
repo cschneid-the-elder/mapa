@@ -113,6 +113,7 @@ sqlStatement
 	| labelStatement
 	| lockTableStatement
 	| mergeStatement
+	| openStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -798,6 +799,14 @@ mergeStatement
 	(WHEN matchingCondition THEN (modificationOperation | signalStatement))+ (ELSE IGNORE)?
 	notAtomicPhrase?
 	querynoClause?
+	)
+	;
+
+openStatement
+	: (
+	OPEN cursorName 
+	((USING variable (COMMA variable)*)
+	| (USING DESCRIPTOR descriptorName))?
 	)
 	;
 

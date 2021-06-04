@@ -520,6 +520,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitMergeStatement(DB2zSQLParser.MergeStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#openStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOpenStatement(DB2zSQLParser.OpenStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
