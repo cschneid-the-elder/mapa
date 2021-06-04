@@ -127,6 +127,7 @@ sqlStatement
 	| releaseConnectionStatement
 	| renameStatement
 	| revokeStatement
+	| rollbackStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -874,6 +875,10 @@ revokeStatement
 	| revokeVariableStatement
 	| revokeUseOfStatement
 	)
+	;
+
+rollbackStatement
+	: (ROLLBACK WORK? (TO SAVEPOINT savepointName?)?)
 	;
 
 setAssignmentStatement
