@@ -117,6 +117,7 @@ sqlStatement
 	| openStatement
 	| prepareStatement
 	| refreshTableStatement
+	| releaseConnectionStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -830,6 +831,12 @@ prepareStatement
 refreshTableStatement
 	: (
 	REFRESH TABLE tableName (QUERYNO INTEGERLITERAL)?
+	)
+	;
+
+releaseConnectionStatement
+	: (
+	RELEASE (CURRENT | (ALL SQL?) | locationName | hostVariable)
 	)
 	;
 
@@ -1552,7 +1559,7 @@ triggeredSqlStatement
 	| ((commonTableExpression)? fullSelect)
 	| insertStatement
 	| mergeStatement
-//	| refreshTableStatement
+	| refreshTableStatement
 	| setAssignmentStatement
 	| signalStatement
 //	| truncateStatement
