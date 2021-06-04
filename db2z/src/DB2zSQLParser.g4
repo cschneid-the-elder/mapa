@@ -110,6 +110,7 @@ sqlStatement
 	| holdLocatorStatement
 	| includeStatement
 	| insertStatement
+	| labelStatement
 	| mergeStatement
 	| setAssignmentStatement
 	| updateStatement
@@ -766,6 +767,20 @@ insertStatement
 	| ((WITH commonTableExpression (COMMA commonTableExpression)*)?
 		fullSelect isolationClause? querynoClause?)
 	| multipleRowInsert)
+	)
+	;
+
+labelStatement
+	: (
+	LABEL ON
+	((((TABLE tableName)
+	| (ALIAS aliasName)
+	| (COLUMN tableName DOT columnName))
+	IS NONNUMERICLITERAL)
+	| (tableName LPAREN 
+		columnName IS NONNUMERICLITERAL 
+		(COMMA columnName IS NONNUMERICLITERAL)* 
+		RPAREN))
 	)
 	;
 
