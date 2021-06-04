@@ -125,6 +125,7 @@ sqlStatement
 	| refreshTableStatement
 	| releaseSavepointStatement
 	| releaseConnectionStatement
+	| renameStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -849,6 +850,12 @@ releaseConnectionStatement
 
 releaseSavepointStatement
 	: (RELEASE TO? SAVEPOINT savepointName)
+	;
+
+renameStatement
+	: (
+	RENAME ((TABLE? tableName TO tableName) | (INDEX indexName TO indexName))
+	)
 	;
 
 setAssignmentStatement
