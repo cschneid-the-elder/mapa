@@ -917,6 +917,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitRenameStatement(DB2zSQLParser.RenameStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeStatement(DB2zSQLParser.RevokeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeStatement(DB2zSQLParser.RevokeStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -1067,6 +1077,126 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitGrantUseOfStatement(DB2zSQLParser.GrantUseOfStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeCollectionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeCollectionStatement(DB2zSQLParser.RevokeCollectionStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeCollectionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeCollectionStatement(DB2zSQLParser.RevokeCollectionStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeDatabaseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeDatabaseStatement(DB2zSQLParser.RevokeDatabaseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeDatabaseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeDatabaseStatement(DB2zSQLParser.RevokeDatabaseStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeFunctionOrProcedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeFunctionOrProcedureStatement(DB2zSQLParser.RevokeFunctionOrProcedureStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeFunctionOrProcedureStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeFunctionOrProcedureStatement(DB2zSQLParser.RevokeFunctionOrProcedureStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokePackageStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokePackageStatement(DB2zSQLParser.RevokePackageStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokePackageStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokePackageStatement(DB2zSQLParser.RevokePackageStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokePlanStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokePlanStatement(DB2zSQLParser.RevokePlanStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokePlanStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokePlanStatement(DB2zSQLParser.RevokePlanStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeSchemaStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeSchemaStatement(DB2zSQLParser.RevokeSchemaStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeSchemaStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeSchemaStatement(DB2zSQLParser.RevokeSchemaStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeSequenceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeSequenceStatement(DB2zSQLParser.RevokeSequenceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeSequenceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeSequenceStatement(DB2zSQLParser.RevokeSequenceStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeSystemStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeSystemStatement(DB2zSQLParser.RevokeSystemStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeSystemStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeSystemStatement(DB2zSQLParser.RevokeSystemStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeTableStatement(DB2zSQLParser.RevokeTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeTableStatement(DB2zSQLParser.RevokeTableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeTypeOrJarStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeTypeOrJarStatement(DB2zSQLParser.RevokeTypeOrJarStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeTypeOrJarStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeTypeOrJarStatement(DB2zSQLParser.RevokeTypeOrJarStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeVariableStatement(DB2zSQLParser.RevokeVariableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeVariableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeVariableStatement(DB2zSQLParser.RevokeVariableStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeUseOfStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeUseOfStatement(DB2zSQLParser.RevokeUseOfStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeUseOfStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeUseOfStatement(DB2zSQLParser.RevokeUseOfStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#grantUseOfTarget}.
 	 * @param ctx the parse tree
 	 */
@@ -1186,6 +1316,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitWithGrantOption(DB2zSQLParser.WithGrantOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeByOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeByOption(DB2zSQLParser.RevokeByOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeByOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeByOption(DB2zSQLParser.RevokeByOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#revokeDependentPrivilegesOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterRevokeDependentPrivilegesOption(DB2zSQLParser.RevokeDependentPrivilegesOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#revokeDependentPrivilegesOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitRevokeDependentPrivilegesOption(DB2zSQLParser.RevokeDependentPrivilegesOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#grantDatabaseAuthority}.
 	 * @param ctx the parse tree

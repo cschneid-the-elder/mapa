@@ -2852,6 +2852,10 @@ WRITE
 	: W R I T E
 	;
 
+DEPENDENT
+	: D E P E N D E N T
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

@@ -126,6 +126,7 @@ sqlStatement
 	| releaseSavepointStatement
 	| releaseConnectionStatement
 	| renameStatement
+	| revokeStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -858,6 +859,23 @@ renameStatement
 	)
 	;
 
+revokeStatement
+	: (
+	revokeCollectionStatement
+	| revokeDatabaseStatement
+	| revokeFunctionOrProcedureStatement	
+	| revokePackageStatement
+	| revokePlanStatement
+	| revokeSchemaStatement
+	| revokeSequenceStatement
+	| revokeSystemStatement
+	| revokeTableStatement
+	| revokeTypeOrJarStatement
+	| revokeVariableStatement
+	| revokeUseOfStatement
+	)
+	;
+
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
@@ -995,6 +1013,148 @@ grantUseOfStatement
 	)
 	;
 
+revokeCollectionStatement
+	: (
+	REVOKE (CREATE | PACKADM) (ON | IN) COLLECTION
+	((collectionID (COMMA collectionID)*) | SPLAT) FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeDatabaseStatement
+	: (
+	REVOKE grantDatabaseAuthority (COMMA grantDatabaseAuthority)*
+	ON DATABASE databaseName (COMMA databaseName)* FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeFunctionOrProcedureStatement
+	: (
+	REVOKE EXECUTE ON
+		((FUNCTION functionSpecification (COMMA functionSpecification)*)
+		| (FUNCTION SPLAT)
+		| (SPECIFIC FUNCTION specificName (COMMA specificName)*)
+		| (PROCEDURE ((procedureName (COMMA procedureName)*) | SPLAT)))
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	RESTRICT?
+	)
+	;
+
+revokePackageStatement
+	: (
+	REVOKE (ALL | (grantPackageAuthority (COMMA grantPackageAuthority)*))
+	ON PACKAGE packageSpecification (COMMA packageSpecification)*
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokePlanStatement
+	: (
+	REVOKE grantPlanAuthority (COMMA grantPlanAuthority)*
+	ON PLAN planName (COMMA planName)*
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeSchemaStatement
+	: (
+	REVOKE grantSchemaAuthority (COMMA grantSchemaAuthority)*
+	ON SCHEMA (SPLAT | (schemaName (COMMA schemaName)*))
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeSequenceStatement
+	: (
+	REVOKE grantSequenceAuthority (COMMA grantSequenceAuthority)*
+	ON SEQUENCE sequenceName (COMMA sequenceName)*
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	RESTRICT?
+	)
+	;
+
+revokeSystemStatement
+	: (
+	REVOKE grantSystemAuthority (COMMA grantSystemAuthority)*
+	(ON SYSTEM)?
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeTableStatement
+	: (
+	REVOKE grantTableAuthority (COMMA grantTableAuthority)*
+	ON TABLE? tableName
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeTypeOrJarStatement
+	: (
+	REVOKE USAGE ON
+	(((DATA | DISTINCT)? TYPE typeName (COMMA typeName)*)
+	| (JAR jarName (COMMA jarName)*))
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	RESTRICT?
+	)
+	;
+
+/*
+The syntax diagram in the documentation says the RESTRICT option 
+comes before the revokeDependentPrivilegesOption in this
+particular case.
+*/
+revokeVariableStatement
+	: (
+	REVOKE grantVariableAuthority (COMMA grantVariableAuthority)*
+	ON VARIABLE variableName (COMMA variableName)*
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	RESTRICT?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
+revokeUseOfStatement
+	: (
+	REVOKE USE OF grantUseOfTarget
+	FROM
+	grantee (COMMA grantee)*
+	revokeByOption?
+	revokeDependentPrivilegesOption?
+	)
+	;
+
 grantUseOfTarget
 	: (
 	(BUFFERPOOL bpName (COMMA bpName)*)
@@ -1105,6 +1265,19 @@ grantee
 
 withGrantOption
 	: (WITH GRANT OPTION)
+	;
+
+revokeByOption
+	: (
+	BY 
+		(ALL 
+		| ((authorizationName | (ROLE roleName)) 
+			(COMMA (authorizationName | (ROLE roleName)))*))
+	)
+	;
+
+revokeDependentPrivilegesOption
+	: (NOT? INCLUDING DEPENDENT PRIVILEGES)
 	;
 
 grantDatabaseAuthority
@@ -5857,6 +6030,7 @@ sqlKeyword
 	| UNLOAD
 	| WRITE
 	| BUFFERPOOLS
+	| DEPENDENT
 	)
 	;
 

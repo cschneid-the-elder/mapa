@@ -556,6 +556,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRenameStatement(DB2zSQLParser.RenameStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeStatement(DB2zSQLParser.RevokeStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -646,6 +652,78 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGrantUseOfStatement(DB2zSQLParser.GrantUseOfStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeCollectionStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeCollectionStatement(DB2zSQLParser.RevokeCollectionStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeDatabaseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeDatabaseStatement(DB2zSQLParser.RevokeDatabaseStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeFunctionOrProcedureStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeFunctionOrProcedureStatement(DB2zSQLParser.RevokeFunctionOrProcedureStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokePackageStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokePackageStatement(DB2zSQLParser.RevokePackageStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokePlanStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokePlanStatement(DB2zSQLParser.RevokePlanStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeSchemaStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeSchemaStatement(DB2zSQLParser.RevokeSchemaStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeSequenceStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeSequenceStatement(DB2zSQLParser.RevokeSequenceStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeSystemStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeSystemStatement(DB2zSQLParser.RevokeSystemStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeTableStatement(DB2zSQLParser.RevokeTableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeTypeOrJarStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeTypeOrJarStatement(DB2zSQLParser.RevokeTypeOrJarStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeVariableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeVariableStatement(DB2zSQLParser.RevokeVariableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeUseOfStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeUseOfStatement(DB2zSQLParser.RevokeUseOfStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#grantUseOfTarget}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -717,6 +795,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitWithGrantOption(DB2zSQLParser.WithGrantOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeByOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeByOption(DB2zSQLParser.RevokeByOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#revokeDependentPrivilegesOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRevokeDependentPrivilegesOption(DB2zSQLParser.RevokeDependentPrivilegesOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#grantDatabaseAuthority}.
 	 * @param ctx the parse tree
