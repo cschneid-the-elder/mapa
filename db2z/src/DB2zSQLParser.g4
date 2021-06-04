@@ -129,6 +129,7 @@ sqlStatement
 	| revokeStatement
 	| rollbackStatement
 	| savepointStatement
+	| setConnectionStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -887,6 +888,10 @@ savepointStatement
 	SAVEPOINT savepointName UNIQUE?
 	((ON ROLLBACK RETAIN CURSORS) | (ON ROLLBACK RETAIN LOCKS))+
 	)
+	;
+
+setConnectionStatement
+	: (SET CONNECTION (locationName | hostVariable))
 	;
 
 setAssignmentStatement

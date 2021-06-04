@@ -574,6 +574,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSavepointStatement(DB2zSQLParser.SavepointStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setConnectionStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

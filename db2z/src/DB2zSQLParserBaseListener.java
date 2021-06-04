@@ -1143,6 +1143,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
