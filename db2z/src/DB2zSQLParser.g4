@@ -45,6 +45,12 @@ options {tokenVocab=DB2zSQLLexer;}
 
 startRule : sqlStatement* | EOF ;
 
+/*
+The order of the releaseSavepointStatement and
+releaseConnectionStatement rules is significant. In order
+for savepoints to be recognized correctly the former
+must come before the latter.
+*/
 sqlStatement
 	: EXEC_SQL?
 	(
@@ -117,6 +123,7 @@ sqlStatement
 	| openStatement
 	| prepareStatement
 	| refreshTableStatement
+	| releaseSavepointStatement
 	| releaseConnectionStatement
 	| setAssignmentStatement
 	| updateStatement
@@ -838,6 +845,10 @@ releaseConnectionStatement
 	: (
 	RELEASE (CURRENT | (ALL SQL?) | locationName | hostVariable)
 	)
+	;
+
+releaseSavepointStatement
+	: (RELEASE TO? SAVEPOINT savepointName)
 	;
 
 setAssignmentStatement
@@ -4584,6 +4595,10 @@ arrayTypeName
 
 jarName
 	: ((schemaName DOT)? identifier)
+	;
+
+savepointName
+	: identifier
 	;
 
 aliasName

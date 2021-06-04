@@ -544,6 +544,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReleaseConnectionStatement(DB2zSQLParser.ReleaseConnectionStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#releaseSavepointStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReleaseSavepointStatement(DB2zSQLParser.ReleaseSavepointStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3351,6 +3357,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJarName(DB2zSQLParser.JarNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#savepointName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSavepointName(DB2zSQLParser.SavepointNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#aliasName}.
 	 * @param ctx the parse tree

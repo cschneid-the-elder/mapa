@@ -897,6 +897,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitReleaseConnectionStatement(DB2zSQLParser.ReleaseConnectionStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#releaseSavepointStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterReleaseSavepointStatement(DB2zSQLParser.ReleaseSavepointStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#releaseSavepointStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitReleaseSavepointStatement(DB2zSQLParser.ReleaseSavepointStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -5576,6 +5586,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJarName(DB2zSQLParser.JarNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#savepointName}.
+	 * @param ctx the parse tree
+	 */
+	void enterSavepointName(DB2zSQLParser.SavepointNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#savepointName}.
+	 * @param ctx the parse tree
+	 */
+	void exitSavepointName(DB2zSQLParser.SavepointNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#aliasName}.
 	 * @param ctx the parse tree
