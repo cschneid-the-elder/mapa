@@ -111,6 +111,7 @@ sqlStatement
 	| includeStatement
 	| insertStatement
 	| labelStatement
+	| lockTableStatement
 	| mergeStatement
 	| setAssignmentStatement
 	| updateStatement
@@ -781,6 +782,12 @@ labelStatement
 		columnName IS NONNUMERICLITERAL 
 		(COMMA columnName IS NONNUMERICLITERAL)* 
 		RPAREN))
+	)
+	;
+
+lockTableStatement
+	: (
+	LOCK TABLE tableName ((PARTITION | PART) INTEGERLITERAL)? IN (SHARE | EXCLUSIVE) MODE_
 	)
 	;
 

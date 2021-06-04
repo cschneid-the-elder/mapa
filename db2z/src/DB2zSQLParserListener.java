@@ -837,6 +837,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitLabelStatement(DB2zSQLParser.LabelStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#lockTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterLockTableStatement(DB2zSQLParser.LockTableStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#lockTableStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitLockTableStatement(DB2zSQLParser.LockTableStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
 	 * @param ctx the parse tree
 	 */

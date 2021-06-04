@@ -1011,6 +1011,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLockTableStatement(DB2zSQLParser.LockTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLockTableStatement(DB2zSQLParser.LockTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterMergeStatement(DB2zSQLParser.MergeStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

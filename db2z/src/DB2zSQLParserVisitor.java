@@ -508,6 +508,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLabelStatement(DB2zSQLParser.LabelStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#lockTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLockTableStatement(DB2zSQLParser.LockTableStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#mergeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
