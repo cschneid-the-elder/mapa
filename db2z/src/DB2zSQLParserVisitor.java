@@ -568,6 +568,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRollbackStatement(DB2zSQLParser.RollbackStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#savepointStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSavepointStatement(DB2zSQLParser.SavepointStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -937,6 +937,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitRollbackStatement(DB2zSQLParser.RollbackStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#savepointStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSavepointStatement(DB2zSQLParser.SavepointStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#savepointStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSavepointStatement(DB2zSQLParser.SavepointStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
 	 * @param ctx the parse tree
 	 */

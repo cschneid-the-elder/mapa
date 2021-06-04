@@ -2856,6 +2856,14 @@ DEPENDENT
 	: D E P E N D E N T
 	;
 
+RETAIN
+	: R E T A I N
+	;
+
+CURSORS
+	: C U R S O R S
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

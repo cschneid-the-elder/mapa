@@ -128,6 +128,7 @@ sqlStatement
 	| renameStatement
 	| revokeStatement
 	| rollbackStatement
+	| savepointStatement
 	| setAssignmentStatement
 	| updateStatement
 	)
@@ -879,6 +880,13 @@ revokeStatement
 
 rollbackStatement
 	: (ROLLBACK WORK? (TO SAVEPOINT savepointName?)?)
+	;
+
+savepointStatement
+	: (
+	SAVEPOINT savepointName UNIQUE?
+	((ON ROLLBACK RETAIN CURSORS) | (ON ROLLBACK RETAIN LOCKS))+
+	)
 	;
 
 setAssignmentStatement
@@ -6036,6 +6044,8 @@ sqlKeyword
 	| WRITE
 	| BUFFERPOOLS
 	| DEPENDENT
+	| RETAIN
+	| CURSORS
 	)
 	;
 
