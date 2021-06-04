@@ -490,6 +490,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitHoldLocatorStatement(DB2zSQLParser.HoldLocatorStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#includeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIncludeStatement(DB2zSQLParser.IncludeStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#insertStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
