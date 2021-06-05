@@ -1861,7 +1861,7 @@ triggeredSqlStatement
 	| refreshTableStatement
 	| setAssignmentStatement
 	| signalStatement
-//	| truncateStatement
+	| truncateStatement
 	| searchedUpdate
 	| valuesStatement
 	)
