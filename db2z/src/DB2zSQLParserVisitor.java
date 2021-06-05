@@ -652,6 +652,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#wheneverStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitWheneverStatement(DB2zSQLParser.WheneverStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesIntoTargetVariable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3753,6 +3759,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSpecificName(DB2zSQLParser.SpecificNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#hostLabel}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitHostLabel(DB2zSQLParser.HostLabelContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#hostVariable}.
 	 * @param ctx the parse tree

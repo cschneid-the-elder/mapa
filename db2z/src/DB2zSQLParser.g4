@@ -141,6 +141,7 @@ sqlStatement
 	| truncateStatement
 	| updateStatement
 	| valuesIntoStatement
+	| wheneverStatement
 	)
 	(SEMICOLON | (END_EXEC DOT?) | EOF)
 	;
@@ -987,6 +988,13 @@ valuesIntoStatement
 	VALUES 
 	(expression | NULL | (LPAREN (expression | NULL) (COMMA (expression | NULL))* RPAREN))
 	INTO ((valuesIntoTargetVariable (COMMA valuesIntoTargetVariable)*) | arrayElementSpecification)
+	)
+	;
+
+wheneverStatement
+	: (
+	WHENEVER ((NOT FOUND) | SQLERROR | SQLWARNING)
+	(CONTINUE | ((GOTO | (GO TO)) COLON? hostLabel))
 	)
 	;
 
@@ -5038,6 +5046,10 @@ functionName
 
 specificName
 	: (schemaName DOT)? identifier
+	;
+
+hostLabel
+	: identifier
 	;
 
 hostVariable

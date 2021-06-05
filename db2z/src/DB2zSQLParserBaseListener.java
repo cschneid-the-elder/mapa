@@ -1299,6 +1299,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterWheneverStatement(DB2zSQLParser.WheneverStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitWheneverStatement(DB2zSQLParser.WheneverStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterValuesIntoTargetVariable(DB2zSQLParser.ValuesIntoTargetVariableContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7498,6 +7510,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSpecificName(DB2zSQLParser.SpecificNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterHostLabel(DB2zSQLParser.HostLabelContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitHostLabel(DB2zSQLParser.HostLabelContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -2896,6 +2896,18 @@ OWNERSHIP
 	: O W N E R S H I P
 	;
 
+FOUND
+	: F O U N D
+	;
+
+SQLERROR
+	: S Q L E R R O R
+	;
+
+SQLWARNING
+	: S Q L W A R N I N G
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

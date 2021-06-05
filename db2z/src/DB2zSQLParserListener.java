@@ -1077,6 +1077,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#wheneverStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterWheneverStatement(DB2zSQLParser.WheneverStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#wheneverStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitWheneverStatement(DB2zSQLParser.WheneverStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesIntoTargetVariable}.
 	 * @param ctx the parse tree
 	 */
@@ -6246,6 +6256,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSpecificName(DB2zSQLParser.SpecificNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#hostLabel}.
+	 * @param ctx the parse tree
+	 */
+	void enterHostLabel(DB2zSQLParser.HostLabelContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#hostLabel}.
+	 * @param ctx the parse tree
+	 */
+	void exitHostLabel(DB2zSQLParser.HostLabelContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#hostVariable}.
 	 * @param ctx the parse tree
