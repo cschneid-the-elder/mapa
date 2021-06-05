@@ -1027,6 +1027,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#transferOwnershipStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#transferOwnershipStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -1046,6 +1056,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#ownedObject}.
+	 * @param ctx the parse tree
+	 */
+	void enterOwnedObject(DB2zSQLParser.OwnedObjectContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#ownedObject}.
+	 * @param ctx the parse tree
+	 */
+	void exitOwnedObject(DB2zSQLParser.OwnedObjectContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#newOwner}.
+	 * @param ctx the parse tree
+	 */
+	void enterNewOwner(DB2zSQLParser.NewOwnerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#newOwner}.
+	 * @param ctx the parse tree
+	 */
+	void exitNewOwner(DB2zSQLParser.NewOwnerContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#grantCollectionStatement}.
 	 * @param ctx the parse tree

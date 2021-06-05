@@ -2876,6 +2876,14 @@ HINT
 	: H I N T
 	;
 
+TRANSFER
+	: T R A N S F E R
+	;
+
+OWNERSHIP
+	: O W N E R S H I P
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

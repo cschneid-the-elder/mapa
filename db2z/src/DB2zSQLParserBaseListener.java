@@ -1239,6 +1239,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1258,6 +1270,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterOwnedObject(DB2zSQLParser.OwnedObjectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitOwnedObject(DB2zSQLParser.OwnedObjectContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNewOwner(DB2zSQLParser.NewOwnerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNewOwner(DB2zSQLParser.NewOwnerContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

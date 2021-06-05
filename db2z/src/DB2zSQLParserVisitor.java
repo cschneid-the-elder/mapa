@@ -622,6 +622,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#transferOwnershipStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -633,6 +639,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#ownedObject}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOwnedObject(DB2zSQLParser.OwnedObjectContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#newOwner}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNewOwner(DB2zSQLParser.NewOwnerContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#grantCollectionStatement}.
 	 * @param ctx the parse tree

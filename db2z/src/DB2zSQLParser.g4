@@ -137,6 +137,7 @@ sqlStatement
 	| setSpecialRegisterStatement
 	| setAssignmentStatement
 	| signalStatement
+	| transferOwnershipStatement
 	| updateStatement
 	)
 	(SEMICOLON | (END_EXEC DOT?) | EOF)
@@ -938,6 +939,7 @@ separate tokens.  So here we are.
 setSessionTimezoneStatement
 	: (SET (SESSION_TIME_ZONE | (TIME ZONE) | TIMEZONE) EQ? (variable | NONNUMERICLITERAL))
 	;
+
 setSpecialRegisterStatement
 	: (SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
 	;
@@ -954,6 +956,12 @@ signalStatement
 	)
 	;
 
+transferOwnershipStatement
+	: (
+	TRANSFER OWNERSHIP OF ownedObject TO newOwner REVOKE PRIVILEGES
+	)
+	;
+
 updateStatement
 	: (searchedUpdate | positionedUpdate)
 	;
@@ -961,6 +969,25 @@ updateStatement
 valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
+	)
+	;
+
+ownedObject
+	: (
+	(DATABASE databaseName)
+	| (INDEX indexName)
+	| (STOGROUP stogroupName)
+	| (TABLE tableName)
+	| (TABLESPACE (databaseName DOT)? tablespaceName)
+	| (VIEW viewName)
+	)
+	;
+
+newOwner
+	: (
+	(ROLE roleName)
+	| (USER authorizationName)
+	| (SESSION_USER)
 	)
 	;
 
@@ -6131,6 +6158,8 @@ sqlKeyword
 	| PASSWORD
 	| HINT
 	| TIMEZONE
+	| TRANSFER
+	| OWNERSHIP
 	)
 	;
 
