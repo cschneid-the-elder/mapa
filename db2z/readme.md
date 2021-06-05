@@ -6,6 +6,8 @@ My intent is to provide enough support for embedded SQL to add to the COBOL anal
 
 Initially my intent was to provide more robust parsing of SQL to detect CALLs, but sometimes these things get out of hand.
 
-Currently (04-Jun-2021) a work in progress.  INSERT, UPDATE, DELETE, SELECT, DECLARE CURSOR, and quite a few other statements are supported.
+Currently (05-Jun-2021) a work in progress.  I believe all the embeddable statements are defined and there are tests for all of them.
+
+There is a left-recursion problem in the tableReference rule with respect to the joinedTable rule.  So this won't do arbitrarily complex SQL.
 
 IBM's documentation for version 12 of Db2 for z/OS serves as source material.
