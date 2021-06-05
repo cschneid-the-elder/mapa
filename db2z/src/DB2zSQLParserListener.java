@@ -987,6 +987,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setSessionTimezoneStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetSessionTimezoneStatement(DB2zSQLParser.SetSessionTimezoneStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setSessionTimezoneStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetSessionTimezoneStatement(DB2zSQLParser.SetSessionTimezoneStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -1006,6 +1016,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#signalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
@@ -3096,16 +3116,6 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInsertOperation(DB2zSQLParser.InsertOperationContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#signalStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#signalInformation}.
 	 * @param ctx the parse tree

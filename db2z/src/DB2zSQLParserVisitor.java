@@ -598,6 +598,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setSessionTimezoneStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetSessionTimezoneStatement(DB2zSQLParser.SetSessionTimezoneStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -609,6 +615,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
@@ -1863,12 +1875,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInsertOperation(DB2zSQLParser.InsertOperationContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSignalStatement(DB2zSQLParser.SignalStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#signalInformation}.
 	 * @param ctx the parse tree

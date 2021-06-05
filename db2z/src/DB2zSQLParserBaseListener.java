@@ -1191,6 +1191,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSetSessionTimezoneStatement(DB2zSQLParser.SetSessionTimezoneStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetSessionTimezoneStatement(DB2zSQLParser.SetSessionTimezoneStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSetSpecialRegisterStatement(DB2zSQLParser.SetSpecialRegisterStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1210,6 +1222,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3718,18 +3742,6 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInsertOperation(DB2zSQLParser.InsertOperationContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitSignalStatement(DB2zSQLParser.SignalStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

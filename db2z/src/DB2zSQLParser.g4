@@ -133,6 +133,7 @@ sqlStatement
 	| setEncryptionPasswordStatement
 	| setPathStatement
 	| setSchemaStatement
+	| setSessionTimezoneStatement
 	| setSpecialRegisterStatement
 	| setAssignmentStatement
 	| signalStatement
@@ -927,6 +928,16 @@ setSchemaStatement
 	: (SET (SCHEMA | CURRENT_SCHEMA) EQ? expression)
 	;
 
+/*
+SESSIONTIMEZONE, SESSION TIME ZONE, SESSION TIMEZONE, TIME ZONE,
+and TIMEZONE are all synonyms for each other in this context.
+Changing the lexer rule for SESSION_TIME_ZONE to match all of
+the above broke other things that expect TIME and ZONE to be
+separate tokens.  So here we are.
+*/
+setSessionTimezoneStatement
+	: (SET (SESSION_TIME_ZONE | (TIME ZONE) | TIMEZONE) EQ? (variable | NONNUMERICLITERAL))
+	;
 setSpecialRegisterStatement
 	: (SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
 	;
@@ -934,6 +945,12 @@ setSpecialRegisterStatement
 setAssignmentStatement
 	: (
 	SET setAssignmentClause
+	)
+	;
+
+signalStatement
+	: (
+	SIGNAL SQLSTATE VALUE? NONNUMERICLITERAL signalInformation?
 	)
 	;
 
@@ -2430,12 +2447,6 @@ insertOperation
 	INSERT LPAREN columnName (COMMA columnName)* RPAREN
 	VALUES (valuesList1 |
 		(LPAREN valuesList1 (COMMA valuesList1)* RPAREN))
-	)
-	;
-
-signalStatement
-	: (
-	SIGNAL SQLSTATE VALUE? NONNUMERICLITERAL signalInformation?
 	)
 	;
 
@@ -6119,6 +6130,7 @@ sqlKeyword
 	| CURSORS
 	| PASSWORD
 	| HINT
+	| TIMEZONE
 	)
 	;
 
