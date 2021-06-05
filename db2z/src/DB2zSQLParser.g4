@@ -135,6 +135,7 @@ sqlStatement
 	| setSchemaStatement
 	| setSpecialRegisterStatement
 	| setAssignmentStatement
+	| signalStatement
 	| updateStatement
 	)
 	(SEMICOLON | (END_EXEC DOT?) | EOF)
