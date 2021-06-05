@@ -1251,6 +1251,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTruncateStatement(DB2zSQLParser.TruncateStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTruncateStatement(DB2zSQLParser.TruncateStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterUpdateStatement(DB2zSQLParser.UpdateStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

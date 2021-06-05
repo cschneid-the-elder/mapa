@@ -628,6 +628,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#truncateStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTruncateStatement(DB2zSQLParser.TruncateStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -1037,6 +1037,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitTransferOwnershipStatement(DB2zSQLParser.TransferOwnershipStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#truncateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterTruncateStatement(DB2zSQLParser.TruncateStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#truncateStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitTruncateStatement(DB2zSQLParser.TruncateStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#updateStatement}.
 	 * @param ctx the parse tree
 	 */

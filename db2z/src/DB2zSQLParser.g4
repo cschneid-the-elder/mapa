@@ -138,6 +138,7 @@ sqlStatement
 	| setAssignmentStatement
 	| signalStatement
 	| transferOwnershipStatement
+	| truncateStatement
 	| updateStatement
 	)
 	(SEMICOLON | (END_EXEC DOT?) | EOF)
@@ -959,6 +960,14 @@ signalStatement
 transferOwnershipStatement
 	: (
 	TRANSFER OWNERSHIP OF ownedObject TO newOwner REVOKE PRIVILEGES
+	)
+	;
+
+truncateStatement
+	: (
+	TRUNCATE TABLE? tableName ((DROP | REUSE) STORAGE)?
+	((IGNORE | (RESTRICT WHEN)) DELETE TRIGGERS)?
+	IMMEDIATE?
 	)
 	;
 
@@ -6160,6 +6169,9 @@ sqlKeyword
 	| TIMEZONE
 	| TRANSFER
 	| OWNERSHIP
+	| REUSE
+	| STORAGE
+	| TRIGGERS
 	)
 	;
 

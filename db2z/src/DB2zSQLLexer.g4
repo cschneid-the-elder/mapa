@@ -1060,6 +1060,10 @@ RETURNS
 	: R E T U R N S 
 	;
 
+REUSE
+	: R E U S E
+	;
+
 REVOKE
 	: R E V O K E 
 	;
@@ -1204,6 +1208,10 @@ STOGROUP
 	: S T O G R O U P 
 	;
 
+STORAGE
+	: S T O R A G E
+	;
+
 STORES
 	: S T O R E S 
 	;
@@ -1250,6 +1258,10 @@ TO
 
 TRIGGER
 	: T R I G G E R 
+	;
+
+TRIGGERS
+	: T R I G G E R S
 	;
 
 TRUNCATE
