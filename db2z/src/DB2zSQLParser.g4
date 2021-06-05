@@ -896,7 +896,7 @@ setConnectionStatement
 	;
 
 setSpecialRegisterStatement
-	: (SET specialRegister EQ? (expression | NULL))
+	: (SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
 	;
 
 setAssignmentStatement
