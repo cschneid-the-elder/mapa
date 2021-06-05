@@ -957,6 +957,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setEncryptionPasswordStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetEncryptionPasswordStatement(DB2zSQLParser.SetEncryptionPasswordStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setEncryptionPasswordStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetEncryptionPasswordStatement(DB2zSQLParser.SetEncryptionPasswordStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setPathStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetPathStatement(DB2zSQLParser.SetPathStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setPathStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetPathStatement(DB2zSQLParser.SetPathStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#setSchemaStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#setSchemaStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
 	 * @param ctx the parse tree
 	 */

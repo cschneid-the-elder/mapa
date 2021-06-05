@@ -580,6 +580,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSetConnectionStatement(DB2zSQLParser.SetConnectionStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setEncryptionPasswordStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetEncryptionPasswordStatement(DB2zSQLParser.SetEncryptionPasswordStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setPathStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetPathStatement(DB2zSQLParser.SetPathStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setSchemaStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setSpecialRegisterStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

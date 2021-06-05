@@ -1155,6 +1155,42 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSetEncryptionPasswordStatement(DB2zSQLParser.SetEncryptionPasswordStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetEncryptionPasswordStatement(DB2zSQLParser.SetEncryptionPasswordStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSetPathStatement(DB2zSQLParser.SetPathStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetPathStatement(DB2zSQLParser.SetPathStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSetSchemaStatement(DB2zSQLParser.SetSchemaStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterSetSpecialRegisterStatement(DB2zSQLParser.SetSpecialRegisterStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

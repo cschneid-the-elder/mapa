@@ -130,6 +130,9 @@ sqlStatement
 	| rollbackStatement
 	| savepointStatement
 	| setConnectionStatement
+	| setEncryptionPasswordStatement
+	| setPathStatement
+	| setSchemaStatement
 	| setSpecialRegisterStatement
 	| setAssignmentStatement
 	| updateStatement
@@ -893,6 +896,34 @@ savepointStatement
 
 setConnectionStatement
 	: (SET CONNECTION (locationName | hostVariable))
+	;
+
+/*
+The SET statement for this particular special register does not
+conform to the pattern set by all the others.  There's always one.
+*/
+setEncryptionPasswordStatement
+	: (
+	SET ENCRYPTION_PASSWORD EQ? (NONNUMERICLITERAL | variable)
+	(WITH HINT EQ? (NONNUMERICLITERAL | variable))?
+	)
+	;
+
+/*
+PATH is a token.  CURRENT PATH is a token.  Sometimes the former
+is a synonym for the latter.  And sometimes not.
+*/
+setPathStatement
+	: (SET (PATH | CURRENT_PATH) EQ? expression (COMMA? expression)*)
+	;
+
+/*
+SCHEMA is a token.  CURRENT SCHEMA is a token, as is CURRENT_SCHEMA which
+is considered equivalent.  Sometimes the former is a synonym for either of
+the latter.  And sometimes not.
+*/
+setSchemaStatement
+	: (SET (SCHEMA | CURRENT_SCHEMA) EQ? expression)
 	;
 
 setSpecialRegisterStatement
@@ -3672,13 +3703,13 @@ expression
 	: (
 	functionInvocation
 	| LPAREN expression RPAREN
+	| labeledDuration
 	| literal
+	| specialRegister
 	| columnName
 	| hostVariable
-	| specialRegister
 	| scalarFullSelect
 	| timeZoneSpecificExpression
-	| labeledDuration
 	| caseExpression
 	| castSpecification
 	| xmlCastSpecification
@@ -3689,13 +3720,13 @@ expression
 	| sequenceReference
 	| ((functionInvocation
 		| LPAREN expression RPAREN
+		| labeledDuration
 		| literal
+		| specialRegister
 		| columnName
 		| hostVariable
-		| specialRegister
 		| scalarFullSelect
 		| timeZoneSpecificExpression
-		| labeledDuration
 		| caseExpression
 		| castSpecification
 		| xmlCastSpecification
@@ -6085,6 +6116,8 @@ sqlKeyword
 	| DEPENDENT
 	| RETAIN
 	| CURSORS
+	| PASSWORD
+	| HINT
 	)
 	;
 

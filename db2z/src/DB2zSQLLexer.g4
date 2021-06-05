@@ -2864,6 +2864,14 @@ CURSORS
 	: C U R S O R S
 	;
 
+PASSWORD
+	: P A S S W O R D
+	;
+
+HINT
+	: H I N T
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
@@ -3869,7 +3877,7 @@ CURRENT_RULES
 	;
 
 CURRENT_SCHEMA
-	: C U R R E N T [ ]+ S C H E M A 
+	: C U R R E N T ('_' | [ ]+) S C H E M A 
 	;
 
 CURRENT_SERVER
@@ -3905,7 +3913,7 @@ ENCRYPTION_PASSWORD
 	;
 
 SESSION_TIME_ZONE
-	: S E S S I O N [ ]+ T I M E [ ]+ Z O N E 
+	: (S E S S I O N [ ]+)? T I M E [ ]* Z O N E 
 	;
 
 SESSION_USER
