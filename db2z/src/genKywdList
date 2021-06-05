@@ -1,0 +1,13 @@
+#! /usr/bin/awk -f
+
+#generate ANTLR lexer keyword list
+#input:
+#SELECT
+#output:
+#	| SELECT
+
+{
+	if (length($0) > 0) {
+		printf("\t| %s\n", $0)
+	}
+}
