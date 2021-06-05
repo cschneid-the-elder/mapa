@@ -3821,7 +3821,7 @@ CURRENT_LOCALE_LC_CTYPE
 	;
 
 CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION
-	: C U R R E N T [ ]+ M A I N T A I N E D [ ]+ T A B L E [ ]+ T Y P E S [ ]+ F O R [ ]+ O P T I M I Z A T I O N 
+	: C U R R E N T [ ]+ M A I N T A I N E D [ ]+ (T A B L E [ ]+)? T Y P E S [ ]+ (F O R [ ]+ O P T I M I Z A T I O N)? 
 	;
 
 CURRENT_MEMBER
