@@ -646,6 +646,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesIntoStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#valuesIntoTargetVariable}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitValuesIntoTargetVariable(DB2zSQLParser.ValuesIntoTargetVariableContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#ownedObject}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3759,6 +3771,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitHostStructure(DB2zSQLParser.HostStructureContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nullIndicator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNullIndicator(DB2zSQLParser.NullIndicatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nullIndicatorStructure}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNullIndicatorStructure(DB2zSQLParser.NullIndicatorStructureContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#globalVariableName}.
 	 * @param ctx the parse tree

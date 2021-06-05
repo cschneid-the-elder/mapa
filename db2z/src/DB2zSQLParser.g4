@@ -140,6 +140,7 @@ sqlStatement
 	| transferOwnershipStatement
 	| truncateStatement
 	| updateStatement
+	| valuesIntoStatement
 	)
 	(SEMICOLON | (END_EXEC DOT?) | EOF)
 	;
@@ -979,6 +980,22 @@ valuesStatement
 	: (
 	VALUES (expression | (LPAREN expression (COMMA expression)* RPAREN))
 	)
+	;
+
+valuesIntoStatement
+	: (
+	VALUES 
+	(expression | NULL | (LPAREN (expression | NULL) (COMMA (expression | NULL))* RPAREN))
+	INTO ((valuesIntoTargetVariable (COMMA valuesIntoTargetVariable)*) | arrayElementSpecification)
+	)
+	;
+
+/*
+These happen to be the same right now.  Taking advantage of that,
+but insulating myself against future changes too.
+*/
+valuesIntoTargetVariable
+	: (setAssignmentTargetVariable)
 	;
 
 ownedObject
@@ -5024,7 +5041,7 @@ specificName
 	;
 
 hostVariable
-	: COLON (hostStructure DOT)? hostIdentifier (INDICATOR? COLON (hostStructure DOT)? hostIdentifier)?
+	: COLON (hostStructure DOT)? hostIdentifier (INDICATOR? COLON (nullIndicatorStructure DOT)? nullIndicator)?
 	;
 
 hostIdentifier
@@ -5032,6 +5049,14 @@ hostIdentifier
 	;
 
 hostStructure
+	: identifier
+	;
+
+nullIndicator
+	: identifier
+	;
+
+nullIndicatorStructure
 	: identifier
 	;
 

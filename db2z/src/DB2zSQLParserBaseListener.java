@@ -1287,6 +1287,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterValuesIntoTargetVariable(DB2zSQLParser.ValuesIntoTargetVariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitValuesIntoTargetVariable(DB2zSQLParser.ValuesIntoTargetVariableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterOwnedObject(DB2zSQLParser.OwnedObjectContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7510,6 +7534,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitHostStructure(DB2zSQLParser.HostStructureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNullIndicator(DB2zSQLParser.NullIndicatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNullIndicator(DB2zSQLParser.NullIndicatorContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNullIndicatorStructure(DB2zSQLParser.NullIndicatorStructureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNullIndicatorStructure(DB2zSQLParser.NullIndicatorStructureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

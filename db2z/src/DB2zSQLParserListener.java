@@ -1067,6 +1067,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitValuesStatement(DB2zSQLParser.ValuesStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesIntoStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesIntoStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitValuesIntoStatement(DB2zSQLParser.ValuesIntoStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#valuesIntoTargetVariable}.
+	 * @param ctx the parse tree
+	 */
+	void enterValuesIntoTargetVariable(DB2zSQLParser.ValuesIntoTargetVariableContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#valuesIntoTargetVariable}.
+	 * @param ctx the parse tree
+	 */
+	void exitValuesIntoTargetVariable(DB2zSQLParser.ValuesIntoTargetVariableContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#ownedObject}.
 	 * @param ctx the parse tree
 	 */
@@ -6256,6 +6276,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitHostStructure(DB2zSQLParser.HostStructureContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#nullIndicator}.
+	 * @param ctx the parse tree
+	 */
+	void enterNullIndicator(DB2zSQLParser.NullIndicatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#nullIndicator}.
+	 * @param ctx the parse tree
+	 */
+	void exitNullIndicator(DB2zSQLParser.NullIndicatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#nullIndicatorStructure}.
+	 * @param ctx the parse tree
+	 */
+	void enterNullIndicatorStructure(DB2zSQLParser.NullIndicatorStructureContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#nullIndicatorStructure}.
+	 * @param ctx the parse tree
+	 */
+	void exitNullIndicatorStructure(DB2zSQLParser.NullIndicatorStructureContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#globalVariableName}.
 	 * @param ctx the parse tree
