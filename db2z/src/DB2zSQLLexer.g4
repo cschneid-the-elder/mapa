@@ -3913,7 +3913,7 @@ ENCRYPTION_PASSWORD
 	;
 
 SESSION_TIME_ZONE
-	: (S E S S I O N [ ]+)? T I M E [ ]* Z O N E 
+	: (S E S S I O N [ ]*)? T I M E [ ]* Z O N E 
 	;
 
 SESSION_USER
