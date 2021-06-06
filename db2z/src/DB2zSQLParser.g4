@@ -5146,6 +5146,7 @@ tableReference
 The following is brought to you by the ANTLR 4.9.2 message
 "The following sets of rules are mutually left-recursive [tableReference, joinedTable]"
 */
+
 	| ((singleTableReference 
 		| nestedTableExpression 
 		| tableFunctionReference 
@@ -5162,8 +5163,8 @@ The following is brought to you by the ANTLR 4.9.2 message
 			| collectionDerivedTable)
 				(INNER | ((LEFT | RIGHT | FULL) OUTER?)) JOIN
 						tableReference ON joinCondition))
-		(INNER | ((LEFT | RIGHT | FULL) OUTER?)) JOIN
-					tableReference ON joinCondition)
+		((INNER | ((LEFT | RIGHT | FULL) OUTER?)) JOIN
+					tableReference ON joinCondition)+)
 	| ((singleTableReference 
 		| nestedTableExpression 
 		| tableFunctionReference 
