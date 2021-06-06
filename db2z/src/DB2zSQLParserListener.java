@@ -5027,6 +5027,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#listaggFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#listaggFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 */

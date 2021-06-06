@@ -3022,6 +3022,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRatioToReportFunction(DB2zSQLParser.RatioToReportFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#listaggFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

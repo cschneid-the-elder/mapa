@@ -6039,6 +6039,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -2908,6 +2908,10 @@ SQLWARNING
 	: S Q L W A R N I N G
 	;
 
+WITHIN
+	: W I T H I N
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
