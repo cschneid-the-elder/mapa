@@ -3992,7 +3992,7 @@ aggregateFunction
 	| COVARIANCE_SAMP
 	| CUME_DIST
 	| GROUPING
-	| LISTAGG
+	| listaggFunction
 	| MAX
 	| MEDIAN
 	| MIN
@@ -4037,19 +4037,28 @@ olapColumnFunction
 	;
 
 firstValueFunction
-	: FIRST_VALUE LPAREN expression (COMMA respectNullsClause)? RPAREN
+	: (FIRST_VALUE LPAREN expression (COMMA respectNullsClause)? RPAREN)
 	;
 
 lastValueFunction
-	: LAST_VALUE LPAREN expression (COMMA respectNullsClause)? RPAREN
+	: (LAST_VALUE LPAREN expression (COMMA respectNullsClause)? RPAREN)
 	;
 
 nthValueFunction
-	: NTH_VALUE LPAREN expression COMMA INTEGERLITERAL RPAREN
+	: (NTH_VALUE LPAREN expression COMMA INTEGERLITERAL RPAREN)
 	;
 
 ratioToReportFunction
-	: RATIO_TO_REPORT LPAREN expression RPAREN
+	: (RATIO_TO_REPORT LPAREN expression RPAREN)
+	;
+
+listaggFunction
+	: (
+	LISTAGG LPAREN (ALL | DISTINCT)? expression (COMMA NONNUMERICLITERAL)? RPAREN
+	(WITHIN GROUP LPAREN 
+		ORDER BY sortKey (ASC | DESC)? (COMMA sortKey (ASC | DESC)?)* 
+	RPAREN)?
+	)
 	;
 
 windowAggregationGroupClause
@@ -6210,6 +6219,10 @@ sqlKeyword
 	| REUSE
 	| STORAGE
 	| TRIGGERS
+	| FOUND
+	| SQLERROR
+	| SQLWARNING
+	| WITHIN
 	)
 	;
 
