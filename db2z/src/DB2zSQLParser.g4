@@ -5386,7 +5386,7 @@ superGroups
 
 selectColumns
 	: (
-	(expression (operator expression)* (AS? newColumnName)?)
+	(expression (operator? expression)* (AS? (newColumnName | NONNUMERICLITERAL))?)
 	| (tableName DOT SPLAT)
 	| (unpackedRow)
 	)
