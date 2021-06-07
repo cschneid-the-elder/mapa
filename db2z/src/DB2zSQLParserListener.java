@@ -5037,6 +5037,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayaggFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayaggFunction(DB2zSQLParser.ArrayaggFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayaggFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayaggFunction(DB2zSQLParser.ArrayaggFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayaggOrdinaryFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayaggOrdinaryFunction(DB2zSQLParser.ArrayaggOrdinaryFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayaggOrdinaryFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayaggOrdinaryFunction(DB2zSQLParser.ArrayaggOrdinaryFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayaggAssociativeFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterArrayaggAssociativeFunction(DB2zSQLParser.ArrayaggAssociativeFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#arrayaggAssociativeFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitArrayaggAssociativeFunction(DB2zSQLParser.ArrayaggAssociativeFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 */

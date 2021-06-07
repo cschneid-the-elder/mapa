@@ -3979,7 +3979,7 @@ aggregationSpecification
 
 aggregateFunction
 	: (
-	ARRAY_AGG
+	arrayaggFunction
 	| AVG
 	| CORR
 	| CORRELATION
@@ -4058,6 +4058,24 @@ listaggFunction
 	(WITHIN GROUP LPAREN 
 		ORDER BY sortKey (ASC | DESC)? (COMMA sortKey (ASC | DESC)?)* 
 	RPAREN)?
+	)
+	;
+
+arrayaggFunction
+	: (arrayaggOrdinaryFunction | arrayaggAssociativeFunction)
+	;
+
+arrayaggOrdinaryFunction
+	: (
+	ARRAY_AGG LPAREN expression
+	(ORDER BY sortKey (ASC | DESC)? (COMMA sortKey (ASC | DESC)?)*)?
+	RPAREN
+	)
+	;
+
+arrayaggAssociativeFunction
+	: (
+	ARRAY_AGG LPAREN expression (COMMA expression)? RPAREN
 	)
 	;
 
