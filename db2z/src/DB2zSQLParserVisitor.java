@@ -3028,6 +3028,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitListaggFunction(DB2zSQLParser.ListaggFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayaggFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayaggFunction(DB2zSQLParser.ArrayaggFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayaggOrdinaryFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayaggOrdinaryFunction(DB2zSQLParser.ArrayaggOrdinaryFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayaggAssociativeFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArrayaggAssociativeFunction(DB2zSQLParser.ArrayaggAssociativeFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
