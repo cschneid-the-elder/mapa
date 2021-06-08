@@ -3058,6 +3058,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCovarianceFunction(DB2zSQLParser.CovarianceFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#covarianceSampFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCovarianceSampFunction(DB2zSQLParser.CovarianceSampFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -3985,8 +3985,7 @@ aggregateFunction
 	| COUNT
 	| COUNT_BIG
 	| covarianceFunction
-	| COVAR_SAMP
-	| COVARIANCE_SAMP
+	| covarianceSampFunction
 	| CUME_DIST
 	| GROUPING
 	| listaggFunction
@@ -4082,6 +4081,10 @@ correlationFunction
 
 covarianceFunction
 	: ((COVAR_POP | COVARIANCE | COVAR) LPAREN expression COMMA expression RPAREN)
+	;
+
+covarianceSampFunction
+	: ((COVAR_SAMP | COVARIANCE_SAMP) LPAREN expression COMMA expression RPAREN)
 	;
 
 windowAggregationGroupClause
