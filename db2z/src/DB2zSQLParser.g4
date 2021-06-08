@@ -3984,9 +3984,7 @@ aggregateFunction
 	| correlationFunction
 	| COUNT
 	| COUNT_BIG
-	| COVAR_POP
-	| COVARIANCE
-	| COVAR
+	| covarianceFunction
 	| COVAR_SAMP
 	| COVARIANCE_SAMP
 	| CUME_DIST
@@ -4080,6 +4078,10 @@ arrayaggAssociativeFunction
 
 correlationFunction
 	: ((CORR | CORRELATION) LPAREN expression COMMA expression RPAREN)
+	;
+
+covarianceFunction
+	: ((COVAR_POP | COVARIANCE | COVAR) LPAREN expression COMMA expression RPAREN)
 	;
 
 windowAggregationGroupClause

@@ -5077,6 +5077,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCorrelationFunction(DB2zSQLParser.CorrelationFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#covarianceFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterCovarianceFunction(DB2zSQLParser.CovarianceFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#covarianceFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitCovarianceFunction(DB2zSQLParser.CovarianceFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 */
