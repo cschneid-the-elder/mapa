@@ -3046,6 +3046,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayaggAssociativeFunction(DB2zSQLParser.ArrayaggAssociativeFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#correlationFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCorrelationFunction(DB2zSQLParser.CorrelationFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -3981,8 +3981,7 @@ aggregateFunction
 	: (
 	arrayaggFunction
 	| AVG
-	| CORR
-	| CORRELATION
+	| correlationFunction
 	| COUNT
 	| COUNT_BIG
 	| COVAR_POP
@@ -4077,6 +4076,10 @@ arrayaggAssociativeFunction
 	: (
 	ARRAY_AGG LPAREN expression (COMMA expression)? RPAREN
 	)
+	;
+
+correlationFunction
+	: ((CORR | CORRELATION) LPAREN expression COMMA expression RPAREN)
 	;
 
 windowAggregationGroupClause

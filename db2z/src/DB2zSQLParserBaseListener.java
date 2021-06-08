@@ -6087,6 +6087,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCorrelationFunction(DB2zSQLParser.CorrelationFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCorrelationFunction(DB2zSQLParser.CorrelationFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
