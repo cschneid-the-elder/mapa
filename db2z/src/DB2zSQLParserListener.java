@@ -5107,6 +5107,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#percentileContFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterPercentileContFunction(DB2zSQLParser.PercentileContFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#percentileContFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitPercentileContFunction(DB2zSQLParser.PercentileContFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
 	 * @param ctx the parse tree
 	 */

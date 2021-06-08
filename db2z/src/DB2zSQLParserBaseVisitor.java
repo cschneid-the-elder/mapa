@@ -3586,6 +3586,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitPercentileContFunction(DB2zSQLParser.PercentileContFunctionContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

@@ -3070,6 +3070,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#percentileContFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPercentileContFunction(DB2zSQLParser.PercentileContFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

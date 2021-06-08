@@ -3992,7 +3992,7 @@ aggregateFunction
 	| MAX
 	| MEDIAN
 	| MIN
-	| PERCENTILE_CONT
+	| percentileContFunction
 	| PERCENTILE_DISC
 	| PERCENT_RANK
 	| STDDEV_POP
