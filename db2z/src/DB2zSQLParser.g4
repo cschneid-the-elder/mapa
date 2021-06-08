@@ -3994,7 +3994,7 @@ aggregateFunction
 	| MIN
 	| percentileContFunction
 	| percentileDiscFunction
-	| PERCENT_RANK
+	| percentRankFunction
 	| STDDEV_POP
 	| STDDEV
 	| STDDEV_SAMP
@@ -4105,6 +4105,15 @@ percentileContFunction
 percentileDiscFunction
 	: (PERCENTILE_DISC LPAREN expression RPAREN
 	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
+	)
+	;
+
+percentRankFunction
+	: (
+	PERCENT_RANK LPAREN
+	expression (COMMA expression)*
+	RPAREN 
+	WITHIN GROUP LPAREN aggregateOrderByClause RPAREN
 	)
 	;
 

@@ -6159,6 +6159,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPercentRankFunction(DB2zSQLParser.PercentRankFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPercentRankFunction(DB2zSQLParser.PercentRankFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
