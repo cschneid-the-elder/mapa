@@ -3986,7 +3986,7 @@ aggregateFunction
 	| COUNT_BIG
 	| covarianceFunction
 	| covarianceSampFunction
-	| CUME_DIST
+	| cumeDistFunction
 	| GROUPING
 	| listaggFunction
 	| MAX
@@ -4085,6 +4085,29 @@ covarianceFunction
 
 covarianceSampFunction
 	: ((COVAR_SAMP | COVARIANCE_SAMP) LPAREN expression COMMA expression RPAREN)
+	;
+
+cumeDistFunction
+	: (
+	CUME_DIST LPAREN
+	expression (COMMA expression)*
+	RPAREN 
+	WITHIN GROUP LPAREN aggregateOrderByClause RPAREN
+	)
+	;
+
+percentileContFunction
+	: (PERCENTILE_CONT LPAREN expression RPAREN
+	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
+	)
+	;
+
+aggregateOrderByClause
+	: (ORDER BY aggregateOrderByOption (COMMA aggregateOrderByOption)*)
+	;
+
+aggregateOrderByOption
+	: (sortKey (ASC | DESC)? (NULLS (LAST | FIRST))?)
 	;
 
 windowAggregationGroupClause

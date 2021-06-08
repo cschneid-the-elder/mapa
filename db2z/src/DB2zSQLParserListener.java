@@ -5097,6 +5097,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCovarianceSampFunction(DB2zSQLParser.CovarianceSampFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#cumeDistFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#cumeDistFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregateOrderByOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterAggregateOrderByOption(DB2zSQLParser.AggregateOrderByOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitAggregateOrderByOption(DB2zSQLParser.AggregateOrderByOptionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 */

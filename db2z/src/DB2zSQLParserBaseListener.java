@@ -6123,6 +6123,42 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAggregateOrderByOption(DB2zSQLParser.AggregateOrderByOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAggregateOrderByOption(DB2zSQLParser.AggregateOrderByOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterWindowAggregationGroupClause(DB2zSQLParser.WindowAggregationGroupClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

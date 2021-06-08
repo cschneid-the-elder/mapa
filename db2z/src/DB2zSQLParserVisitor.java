@@ -3064,6 +3064,24 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCovarianceSampFunction(DB2zSQLParser.CovarianceSampFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cumeDistFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAggregateOrderByOption(DB2zSQLParser.AggregateOrderByOptionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
