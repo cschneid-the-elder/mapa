@@ -3993,7 +3993,7 @@ aggregateFunction
 	| MEDIAN
 	| MIN
 	| percentileContFunction
-	| PERCENTILE_DISC
+	| percentileDiscFunction
 	| PERCENT_RANK
 	| STDDEV_POP
 	| STDDEV
@@ -4098,6 +4098,12 @@ cumeDistFunction
 
 percentileContFunction
 	: (PERCENTILE_CONT LPAREN expression RPAREN
+	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
+	)
+	;
+
+percentileDiscFunction
+	: (PERCENTILE_DISC LPAREN expression RPAREN
 	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
 	)
 	;
