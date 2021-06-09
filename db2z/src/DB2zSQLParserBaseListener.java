@@ -5259,6 +5259,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPiName(DB2zSQLParser.PiNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPiName(DB2zSQLParser.PiNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRegisteredXmlSchemaName(DB2zSQLParser.RegisteredXmlSchemaNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -6430,6 +6442,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlpiFunction(DB2zSQLParser.XmlpiFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlpiFunction(DB2zSQLParser.XmlpiFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

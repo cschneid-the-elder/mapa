@@ -3561,6 +3561,10 @@ xmlElementName
 	: (identifier | literal)
 	;
 
+piName
+	: (NONNUMERICLITERAL)
+	;
+
 registeredXmlSchemaName
 	: (
 	SYSXSR DOT SQLIDENTIFIER
@@ -3840,6 +3844,7 @@ scalarFunctionInvocation
 	| xmlforestFunction
 	| xmlmodifyFunction
 	| xmlnamespaceFunction
+	| xmlpiFunction
 	| xmlserializeFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
@@ -4527,6 +4532,12 @@ xmlmodifyFunction
 	XMLMODIFY LPAREN expression
 	(COMMA expression AS (NONNUMERICLITERAL | identifier))*
 	RPAREN
+	)
+	;
+
+xmlpiFunction
+	: (
+	XMLPI LPAREN NAME piName (COMMA expression)? RPAREN
 	)
 	;
 

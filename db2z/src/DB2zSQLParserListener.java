@@ -4377,6 +4377,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitXmlElementName(DB2zSQLParser.XmlElementNameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#piName}.
+	 * @param ctx the parse tree
+	 */
+	void enterPiName(DB2zSQLParser.PiNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#piName}.
+	 * @param ctx the parse tree
+	 */
+	void exitPiName(DB2zSQLParser.PiNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#registeredXmlSchemaName}.
 	 * @param ctx the parse tree
 	 */
@@ -5356,6 +5366,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlpiFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlpiFunction(DB2zSQLParser.XmlpiFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlpiFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlpiFunction(DB2zSQLParser.XmlpiFunctionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
