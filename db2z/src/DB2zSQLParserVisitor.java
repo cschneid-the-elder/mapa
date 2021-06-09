@@ -2632,6 +2632,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitXmlElementName(DB2zSQLParser.XmlElementNameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#piName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPiName(DB2zSQLParser.PiNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#registeredXmlSchemaName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3219,6 +3225,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlpiFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlpiFunction(DB2zSQLParser.XmlpiFunctionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
