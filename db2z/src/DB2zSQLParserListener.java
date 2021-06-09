@@ -5347,6 +5347,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlmodifyFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlmodifyFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
 	 */

@@ -6423,6 +6423,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXmlattributesFunction(DB2zSQLParser.XmlattributesFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}

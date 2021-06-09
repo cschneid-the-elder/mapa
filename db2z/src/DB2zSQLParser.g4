@@ -3838,6 +3838,7 @@ scalarFunctionInvocation
 	xmlattributesFunction
 	| xmlelementFunction
 	| xmlforestFunction
+	| xmlmodifyFunction
 	| xmlnamespaceFunction
 	| xmlserializeFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
@@ -4517,6 +4518,14 @@ xmlforestFunction
 	elementContentExpression (AS xmlElementName)?
 	(COMMA elementContentExpression (AS xmlElementName)?)*
 	xmlFunctionOptionClause?
+	RPAREN
+	)
+	;
+
+xmlmodifyFunction
+	: (
+	XMLMODIFY LPAREN expression
+	(COMMA expression AS (NONNUMERICLITERAL | identifier))*
 	RPAREN
 	)
 	;

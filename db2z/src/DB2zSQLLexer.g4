@@ -134,8 +134,8 @@ fragment HEXLITERAL
 	;
 
 fragment STRINGLITERAL
-	: '"' (~["\n\r] | '""' | '\'')* '"'
-	| '\'' (~['\n\r] | '\'\'' | '"')* '\''
+	: '"' (~["] | '""' | '\'')* '"'
+	| '\'' (~['] | '\'\'' | '"')* '\''
 	;
 
 INTEGERLITERAL

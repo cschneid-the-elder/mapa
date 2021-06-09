@@ -3214,6 +3214,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlmodifyFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlmodifyFunction(DB2zSQLParser.XmlmodifyFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
