@@ -3558,7 +3558,7 @@ Documentation is a bit sketchy on details for the following
 four items.  Examples would be nice.
 */
 xmlElementName
-	: (identifier)
+	: (identifier | literal)
 	;
 
 registeredXmlSchemaName
@@ -3834,10 +3834,9 @@ functionInvocation
 	;
 
 scalarFunctionInvocation
-	: ((schemaName DOT)? scalarFunction
-	LPAREN
-	(expression (COMMA expression)*)?
-	RPAREN)
+	: (
+	((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
+	)
 	;
 
 aggregateFunctionInvocation
@@ -4004,7 +4003,7 @@ aggregateFunction
 	| VAR
 	| VAR_SAMP
 	| VARIANCE_SAMP
-	| XMLAGG
+	| xmlaggFunction
 	)
 	;
 
@@ -4115,6 +4114,18 @@ percentRankFunction
 	RPAREN 
 	WITHIN GROUP LPAREN aggregateOrderByClause RPAREN
 	)
+	;
+
+xmlaggFunction
+	: (XMLAGG LPAREN expression xmlaggOrderByClause? RPAREN)
+	;
+
+xmlaggOrderByClause
+	: (ORDER BY xmlaggOrderByOption (COMMA xmlaggOrderByOption)*)
+	;
+
+xmlaggOrderByOption
+	: (expression (ASC | DESC)?)
 	;
 
 aggregateOrderByClause
@@ -4393,18 +4404,18 @@ scalarFunction
 	| WEEK
 	| WEEK_ISO
 	| WRAP
-	| XMLATTRIBUTES
+	| xmlattributesFunction
 	| XMLCOMMENT
 	| XMLCONCAT
 	| XMLDOCUMENT
-	| XMLELEMENT
+	| xmlelementFunction
 	| XMLFOREST
 	| XMLMODIFY
 	| XMLNAMESPACES
 	| XMLPARSE
 	| XMLPI
 	| XMLQUERY
-	| XMLSERIALIZE
+	| xmlserializeFunction
 	| XMLTEXT
 	| XMLXSROBJECTID
 	| XSLTRANSFORM
@@ -4467,6 +4478,53 @@ specialRegister
 	| SESSION_TIME_ZONE
 	| SESSION_USER
 	| USER
+	)
+	;
+
+xmlelementFunction
+	: (
+	XMLELEMENT LPAREN NAME xmlElementName
+	(COMMA xmlnamespacesDeclaration)?
+	(COMMA xmlattributesFunction)?
+	(COMMA expression)*
+	xmlFunctionOptionClause?
+	RPAREN
+	)
+	;
+
+xmlattributesFunction
+	: (
+	XMLATTRIBUTES LPAREN 
+	expression AS NONNUMERICLITERAL (COMMA expression AS NONNUMERICLITERAL)*
+	RPAREN
+	)
+	;
+
+xmlserializeFunction
+	: (
+	XMLSERIALIZE LPAREN CONTENT? expression AS dataType
+	xmlserializeFunctionOptions*
+	RPAREN
+	)
+	;
+
+xmlserializeFunctionOptions
+	: (
+	(VERSION NONNUMERICLITERAL)
+	| ((EXCLUDING | INCLUDING) XMLDECLARATION)
+	)
+	;
+
+xmlFunctionOptionClause
+	: (
+	OPTION xmlFunctionOption+
+	)
+	;
+
+xmlFunctionOption
+	: (
+	((EMPTY | NULL) ON NULL)
+	| (XMLBINARY USING? (BASE64 | HEX))
 	)
 	;
 
@@ -6287,6 +6345,10 @@ sqlKeyword
 	| SQLERROR
 	| SQLWARNING
 	| WITHIN
+	| EMPTY
+	| XMLBINARY
+	| BASE64
+	| XMLDECLARATION
 	)
 	;
 

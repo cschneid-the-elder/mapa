@@ -1,0 +1,31 @@
+SELECT
+    XMLSERIALIZE(
+        XMLDOCUMENT(
+            XMLELEMENT(
+                NAME "Department"
+              , XMLATTRIBUTES ( e.dept AS "name" )
+              , XMLAGG(
+                    XMLELEMENT(NAME "emp", e.lname) ORDER BY e.lname
+                )
+            ) 
+        ) AS "dept_list"
+     AS CLOB(1M))
+FROM employees e
+GROUP BY dept;
+
+/*
+SELECT
+    XMLSERIALIZE(
+        XMLDOCUMENT(
+            XMLELEMENT(
+                NAME "Department"
+              , XMLATTRIBUTES ( e.dept AS "name" )
+              , XMLAGG(
+                    XMLELEMENT(NAME "emp", e.lname) ORDER BY e.lname
+                )
+            ) 
+        ) AS "dept_list"
+     AS CLOB(1M))
+FROM employees e
+GROUP BY dept;
+*/

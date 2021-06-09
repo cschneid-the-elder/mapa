@@ -5137,6 +5137,36 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitPercentRankFunction(DB2zSQLParser.PercentRankFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlaggFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlaggFunction(DB2zSQLParser.XmlaggFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlaggFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlaggFunction(DB2zSQLParser.XmlaggFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlaggOrderByClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlaggOrderByClause(DB2zSQLParser.XmlaggOrderByClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlaggOrderByClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlaggOrderByClause(DB2zSQLParser.XmlaggOrderByClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlaggOrderByOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlaggOrderByOption(DB2zSQLParser.XmlaggOrderByOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlaggOrderByOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlaggOrderByOption(DB2zSQLParser.XmlaggOrderByOptionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
 	 * @param ctx the parse tree
 	 */
@@ -5296,6 +5326,66 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlelementFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlelementFunction(DB2zSQLParser.XmlelementFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlelementFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlelementFunction(DB2zSQLParser.XmlelementFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlattributesFunction(DB2zSQLParser.XmlattributesFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlattributesFunction(DB2zSQLParser.XmlattributesFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlserializeFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlserializeFunction(DB2zSQLParser.XmlserializeFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlserializeFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlserializeFunction(DB2zSQLParser.XmlserializeFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlserializeFunctionOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlserializeFunctionOptions(DB2zSQLParser.XmlserializeFunctionOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlserializeFunctionOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlserializeFunctionOptions(DB2zSQLParser.XmlserializeFunctionOptionsContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlFunctionOptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlFunctionOptionClause(DB2zSQLParser.XmlFunctionOptionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlFunctionOptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlFunctionOptionClause(DB2zSQLParser.XmlFunctionOptionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlFunctionOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlFunctionOption(DB2zSQLParser.XmlFunctionOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlFunctionOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlFunctionOption(DB2zSQLParser.XmlFunctionOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree
