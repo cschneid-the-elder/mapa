@@ -3558,7 +3558,7 @@ Documentation is a bit sketchy on details for the following
 four items.  Examples would be nice.
 */
 xmlElementName
-	: (identifier)
+	: (identifier | literal)
 	;
 
 registeredXmlSchemaName
@@ -3834,10 +3834,9 @@ functionInvocation
 	;
 
 scalarFunctionInvocation
-	: ((schemaName DOT)? scalarFunction
-	LPAREN
-	(expression (COMMA expression)*)?
-	RPAREN)
+	: (
+	((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
+	)
 	;
 
 aggregateFunctionInvocation
@@ -3981,24 +3980,20 @@ aggregateFunction
 	: (
 	arrayaggFunction
 	| AVG
-	| CORR
-	| CORRELATION
+	| correlationFunction
 	| COUNT
 	| COUNT_BIG
-	| COVAR_POP
-	| COVARIANCE
-	| COVAR
-	| COVAR_SAMP
-	| COVARIANCE_SAMP
-	| CUME_DIST
+	| covarianceFunction
+	| covarianceSampFunction
+	| cumeDistFunction
 	| GROUPING
 	| listaggFunction
 	| MAX
 	| MEDIAN
 	| MIN
-	| PERCENTILE_CONT
-	| PERCENTILE_DISC
-	| PERCENT_RANK
+	| percentileContFunction
+	| percentileDiscFunction
+	| percentRankFunction
 	| STDDEV_POP
 	| STDDEV
 	| STDDEV_SAMP
@@ -4008,7 +4003,7 @@ aggregateFunction
 	| VAR
 	| VAR_SAMP
 	| VARIANCE_SAMP
-	| XMLAGG
+	| xmlaggFunction
 	)
 	;
 
@@ -4077,6 +4072,68 @@ arrayaggAssociativeFunction
 	: (
 	ARRAY_AGG LPAREN expression (COMMA expression)? RPAREN
 	)
+	;
+
+correlationFunction
+	: ((CORR | CORRELATION) LPAREN expression COMMA expression RPAREN)
+	;
+
+covarianceFunction
+	: ((COVAR_POP | COVARIANCE | COVAR) LPAREN expression COMMA expression RPAREN)
+	;
+
+covarianceSampFunction
+	: ((COVAR_SAMP | COVARIANCE_SAMP) LPAREN expression COMMA expression RPAREN)
+	;
+
+cumeDistFunction
+	: (
+	CUME_DIST LPAREN
+	expression (COMMA expression)*
+	RPAREN 
+	WITHIN GROUP LPAREN aggregateOrderByClause RPAREN
+	)
+	;
+
+percentileContFunction
+	: (PERCENTILE_CONT LPAREN expression RPAREN
+	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
+	)
+	;
+
+percentileDiscFunction
+	: (PERCENTILE_DISC LPAREN expression RPAREN
+	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
+	)
+	;
+
+percentRankFunction
+	: (
+	PERCENT_RANK LPAREN
+	expression (COMMA expression)*
+	RPAREN 
+	WITHIN GROUP LPAREN aggregateOrderByClause RPAREN
+	)
+	;
+
+xmlaggFunction
+	: (XMLAGG LPAREN expression xmlaggOrderByClause? RPAREN)
+	;
+
+xmlaggOrderByClause
+	: (ORDER BY xmlaggOrderByOption (COMMA xmlaggOrderByOption)*)
+	;
+
+xmlaggOrderByOption
+	: (expression (ASC | DESC)?)
+	;
+
+aggregateOrderByClause
+	: (ORDER BY aggregateOrderByOption (COMMA aggregateOrderByOption)*)
+	;
+
+aggregateOrderByOption
+	: (sortKey (ASC | DESC)? (NULLS (LAST | FIRST))?)
 	;
 
 windowAggregationGroupClause
@@ -4347,18 +4404,18 @@ scalarFunction
 	| WEEK
 	| WEEK_ISO
 	| WRAP
-	| XMLATTRIBUTES
+	| xmlattributesFunction
 	| XMLCOMMENT
 	| XMLCONCAT
 	| XMLDOCUMENT
-	| XMLELEMENT
+	| xmlelementFunction
 	| XMLFOREST
 	| XMLMODIFY
 	| XMLNAMESPACES
 	| XMLPARSE
 	| XMLPI
 	| XMLQUERY
-	| XMLSERIALIZE
+	| xmlserializeFunction
 	| XMLTEXT
 	| XMLXSROBJECTID
 	| XSLTRANSFORM
@@ -4421,6 +4478,53 @@ specialRegister
 	| SESSION_TIME_ZONE
 	| SESSION_USER
 	| USER
+	)
+	;
+
+xmlelementFunction
+	: (
+	XMLELEMENT LPAREN NAME xmlElementName
+	(COMMA xmlnamespacesDeclaration)?
+	(COMMA xmlattributesFunction)?
+	(COMMA expression)*
+	xmlFunctionOptionClause?
+	RPAREN
+	)
+	;
+
+xmlattributesFunction
+	: (
+	XMLATTRIBUTES LPAREN 
+	expression AS NONNUMERICLITERAL (COMMA expression AS NONNUMERICLITERAL)*
+	RPAREN
+	)
+	;
+
+xmlserializeFunction
+	: (
+	XMLSERIALIZE LPAREN CONTENT? expression AS dataType
+	xmlserializeFunctionOptions*
+	RPAREN
+	)
+	;
+
+xmlserializeFunctionOptions
+	: (
+	(VERSION NONNUMERICLITERAL)
+	| ((EXCLUDING | INCLUDING) XMLDECLARATION)
+	)
+	;
+
+xmlFunctionOptionClause
+	: (
+	OPTION xmlFunctionOption+
+	)
+	;
+
+xmlFunctionOption
+	: (
+	((EMPTY | NULL) ON NULL)
+	| (XMLBINARY USING? (BASE64 | HEX))
 	)
 	;
 
@@ -6241,6 +6345,10 @@ sqlKeyword
 	| SQLERROR
 	| SQLWARNING
 	| WITHIN
+	| EMPTY
+	| XMLBINARY
+	| BASE64
+	| XMLDECLARATION
 	)
 	;
 

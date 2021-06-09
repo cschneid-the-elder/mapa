@@ -3046,6 +3046,78 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArrayaggAssociativeFunction(DB2zSQLParser.ArrayaggAssociativeFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#correlationFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCorrelationFunction(DB2zSQLParser.CorrelationFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#covarianceFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCovarianceFunction(DB2zSQLParser.CovarianceFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#covarianceSampFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCovarianceSampFunction(DB2zSQLParser.CovarianceSampFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#cumeDistFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCumeDistFunction(DB2zSQLParser.CumeDistFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#percentileContFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPercentileContFunction(DB2zSQLParser.PercentileContFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#percentileDiscFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPercentileDiscFunction(DB2zSQLParser.PercentileDiscFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#percentRankFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPercentRankFunction(DB2zSQLParser.PercentRankFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlaggFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlaggFunction(DB2zSQLParser.XmlaggFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlaggOrderByClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlaggOrderByClause(DB2zSQLParser.XmlaggOrderByClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlaggOrderByOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlaggOrderByOption(DB2zSQLParser.XmlaggOrderByOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAggregateOrderByClause(DB2zSQLParser.AggregateOrderByClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aggregateOrderByOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAggregateOrderByOption(DB2zSQLParser.AggregateOrderByOptionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#windowAggregationGroupClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3129,6 +3201,42 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlelementFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlelementFunction(DB2zSQLParser.XmlelementFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlattributesFunction(DB2zSQLParser.XmlattributesFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlserializeFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlserializeFunction(DB2zSQLParser.XmlserializeFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlserializeFunctionOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlserializeFunctionOptions(DB2zSQLParser.XmlserializeFunctionOptionsContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlFunctionOptionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlFunctionOptionClause(DB2zSQLParser.XmlFunctionOptionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlFunctionOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlFunctionOption(DB2zSQLParser.XmlFunctionOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree

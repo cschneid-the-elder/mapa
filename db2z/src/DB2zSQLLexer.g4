@@ -2912,6 +2912,22 @@ WITHIN
 	: W I T H I N
 	;
 
+EMPTY
+	: E M P T Y
+	;
+
+XMLBINARY
+	: X M L B I N A R Y
+	;
+
+BASE64
+	: B A S E '6' '4'
+	;
+
+XMLDECLARATION
+	: X M L D E C L A R A T I O N
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions
