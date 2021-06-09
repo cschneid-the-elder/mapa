@@ -6411,6 +6411,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXmlattributesFunction(DB2zSQLParser.XmlattributesFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -6430,6 +6442,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitXmlserializeFunction(DB2zSQLParser.XmlserializeFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlnamespaceFunction(DB2zSQLParser.XmlnamespaceFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlnamespaceFunction(DB2zSQLParser.XmlnamespaceFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXmlnamespaceOption(DB2zSQLParser.XmlnamespaceOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlnamespaceOption(DB2zSQLParser.XmlnamespaceOptionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -6466,6 +6502,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitXmlFunctionOption(DB2zSQLParser.XmlFunctionOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
