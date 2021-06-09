@@ -2,30 +2,15 @@ SELECT
     XMLSERIALIZE(
         XMLDOCUMENT(
             XMLELEMENT(
-                NAME "Department"
-              , XMLATTRIBUTES ( e.dept AS "name" )
+                NAME "Organization"
+              , XMLATTRIBUTES ( S.org AS "name" )
               , XMLAGG(
-                    XMLELEMENT(NAME "emp", e.lname) ORDER BY e.lname
+                    XMLELEMENT(NAME "emp", S.lastname) ORDER BY S.lastname
                 )
             ) 
-        ) AS "dept_list"
+        ) AS "org_list"
      AS CLOB(1M))
-FROM employees e
-GROUP BY dept;
+FROM STAFF S
+GROUP BY org;
 
-/*
-SELECT
-    XMLSERIALIZE(
-        XMLDOCUMENT(
-            XMLELEMENT(
-                NAME "Department"
-              , XMLATTRIBUTES ( e.dept AS "name" )
-              , XMLAGG(
-                    XMLELEMENT(NAME "emp", e.lname) ORDER BY e.lname
-                )
-            ) 
-        ) AS "dept_list"
-     AS CLOB(1M))
-FROM employees e
-GROUP BY dept;
-*/
+
