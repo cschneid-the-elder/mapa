@@ -3845,6 +3845,7 @@ scalarFunctionInvocation
 	| xmlmodifyFunction
 	| xmlnamespaceFunction
 	| xmlpiFunction
+	| xmlqueryFunction
 	| xmlserializeFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
@@ -4541,6 +4542,15 @@ xmlpiFunction
 	)
 	;
 
+xmlqueryFunction
+	: (
+	XMLQUERY LPAREN xqueryExpressionConstant
+	(PASSING (BY REF)? xqueryArgument (COMMA xqueryArgument)*)?
+	(RETURNING SEQUENCE (BY REF)?)? (EMPTY ON EMPTY)?
+	RPAREN
+	)
+	;
+
 xmlattributesFunction
 	: (
 	XMLATTRIBUTES LPAREN 
@@ -4595,6 +4605,14 @@ elementContentExpression
 	: (expression)
 	;
 
+xqueryExpressionConstant
+	: (NONNUMERICLITERAL)
+	;
+
+xqueryArgument
+	: (xqueryContextItemExpression | (xqueryVariableExpression AS (identifier | NONNUMERICLITERAL)))
+	;
+
 xmltableFunctionSpecification
 	: (
 	XMLTABLE
@@ -4614,7 +4632,7 @@ rowXqueryExpressionConstant
 
 rowXqueryArgument
 	: (
-	(xqueryContextItemExpression | (xqueryVariableExpression AS identifier))
+	(xqueryContextItemExpression | (xqueryVariableExpression AS (identifier | NONNUMERICLITERAL)))
 	)
 	;
 
@@ -6416,6 +6434,8 @@ sqlKeyword
 	| XMLBINARY
 	| BASE64
 	| XMLDECLARATION
+	| REFERENCE
+	| RETURNING
 	)
 	;
 
