@@ -2928,6 +2928,14 @@ XMLDECLARATION
 	: X M L D E C L A R A T I O N
 	;
 
+REFERENCE
+	: R E F E R E N C E
+	;
+
+RETURNING
+	: R E T U R N I N G
+	;
+
 //end of generated sql keywords
 
 //generated sql scalar functions

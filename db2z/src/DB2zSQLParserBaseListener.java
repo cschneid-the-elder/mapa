@@ -6459,6 +6459,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterXmlqueryFunction(DB2zSQLParser.XmlqueryFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlqueryFunction(DB2zSQLParser.XmlqueryFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXmlattributesFunction(DB2zSQLParser.XmlattributesFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -6550,6 +6562,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXqueryExpressionConstant(DB2zSQLParser.XqueryExpressionConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXqueryExpressionConstant(DB2zSQLParser.XqueryExpressionConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterXqueryArgument(DB2zSQLParser.XqueryArgumentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXqueryArgument(DB2zSQLParser.XqueryArgumentContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -5377,6 +5377,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitXmlpiFunction(DB2zSQLParser.XmlpiFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlqueryFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlqueryFunction(DB2zSQLParser.XmlqueryFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlqueryFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlqueryFunction(DB2zSQLParser.XmlqueryFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
 	 */
@@ -5456,6 +5466,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xqueryExpressionConstant}.
+	 * @param ctx the parse tree
+	 */
+	void enterXqueryExpressionConstant(DB2zSQLParser.XqueryExpressionConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xqueryExpressionConstant}.
+	 * @param ctx the parse tree
+	 */
+	void exitXqueryExpressionConstant(DB2zSQLParser.XqueryExpressionConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xqueryArgument}.
+	 * @param ctx the parse tree
+	 */
+	void enterXqueryArgument(DB2zSQLParser.XqueryArgumentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xqueryArgument}.
+	 * @param ctx the parse tree
+	 */
+	void exitXqueryArgument(DB2zSQLParser.XqueryArgumentContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree
