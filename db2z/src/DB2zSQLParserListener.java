@@ -5337,6 +5337,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitXmlelementFunction(DB2zSQLParser.XmlelementFunctionContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlforestFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlforestFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
 	 */
@@ -5356,6 +5366,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXmlserializeFunction(DB2zSQLParser.XmlserializeFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlnamespaceFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlnamespaceFunction(DB2zSQLParser.XmlnamespaceFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlnamespaceFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlnamespaceFunction(DB2zSQLParser.XmlnamespaceFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlnamespaceOption}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlnamespaceOption(DB2zSQLParser.XmlnamespaceOptionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlnamespaceOption}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlnamespaceOption(DB2zSQLParser.XmlnamespaceOptionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlserializeFunctionOptions}.
 	 * @param ctx the parse tree
@@ -5386,6 +5416,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXmlFunctionOption(DB2zSQLParser.XmlFunctionOptionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#elementContentExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#elementContentExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree

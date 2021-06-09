@@ -3837,6 +3837,8 @@ scalarFunctionInvocation
 	: (
 	xmlattributesFunction
 	| xmlelementFunction
+	| xmlforestFunction
+	| xmlnamespaceFunction
 	| xmlserializeFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
@@ -4509,6 +4511,16 @@ xmlelementFunction
 	)
 	;
 
+xmlforestFunction
+	: (
+	XMLFOREST LPAREN xmlnamespaceFunction?
+	elementContentExpression (AS xmlElementName)?
+	(COMMA elementContentExpression (AS xmlElementName)?)*
+	xmlFunctionOptionClause?
+	RPAREN
+	)
+	;
+
 xmlattributesFunction
 	: (
 	XMLATTRIBUTES LPAREN 
@@ -4522,6 +4534,20 @@ xmlserializeFunction
 	XMLSERIALIZE LPAREN CONTENT? expression AS dataType
 	xmlserializeFunctionOptions*
 	RPAREN
+	)
+	;
+
+xmlnamespaceFunction
+	: (
+	XMLNAMESPACES LPAREN xmlnamespaceOption (COMMA xmlnamespaceOption)* RPAREN
+	)
+	;
+
+xmlnamespaceOption
+	: (
+	(namespaceUri AS namespacePrefix)
+	| (DEFAULT namespaceUri)
+	| (NO DEFAULT)
 	)
 	;
 
@@ -4543,6 +4569,10 @@ xmlFunctionOption
 	((EMPTY | NULL) ON NULL)
 	| (XMLBINARY USING? (BASE64 | HEX))
 	)
+	;
+
+elementContentExpression
+	: (expression)
 	;
 
 xmltableFunctionSpecification

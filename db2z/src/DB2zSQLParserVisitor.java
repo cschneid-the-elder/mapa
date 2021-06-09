@@ -3208,6 +3208,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitXmlelementFunction(DB2zSQLParser.XmlelementFunctionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlforestFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlforestFunction(DB2zSQLParser.XmlforestFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlattributesFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3219,6 +3225,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitXmlserializeFunction(DB2zSQLParser.XmlserializeFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlnamespaceFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlnamespaceFunction(DB2zSQLParser.XmlnamespaceFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlnamespaceOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlnamespaceOption(DB2zSQLParser.XmlnamespaceOptionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlserializeFunctionOptions}.
 	 * @param ctx the parse tree
@@ -3237,6 +3255,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitXmlFunctionOption(DB2zSQLParser.XmlFunctionOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#elementContentExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitElementContentExpression(DB2zSQLParser.ElementContentExpressionContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmltableFunctionSpecification}.
 	 * @param ctx the parse tree
