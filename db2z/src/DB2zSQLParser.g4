@@ -3835,16 +3835,27 @@ functionInvocation
 
 scalarFunctionInvocation
 	: (
-	((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
+	xmlattributesFunction
+	| xmlelementFunction
+	| xmlserializeFunction
+	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
 	;
 
 aggregateFunctionInvocation
-	: ((schemaName DOT)? aggregateFunction
-	LPAREN
-	DISTINCT?
-	(expression | SPLAT)
-	RPAREN)
+	: (
+	arrayaggFunction
+	| correlationFunction
+	| covarianceFunction
+	| covarianceSampFunction
+	| cumeDistFunction
+	| listaggFunction
+	| percentileContFunction
+	| percentileDiscFunction
+	| percentRankFunction
+	| xmlaggFunction
+	| ((schemaName DOT)? aggregateFunction LPAREN DISTINCT? (expression | SPLAT) RPAREN)
+	)
 	;
 
 regressionFunctionInvocation
@@ -3978,22 +3989,26 @@ aggregationSpecification
 
 aggregateFunction
 	: (
-	arrayaggFunction
+	ARRAY_AGG
 	| AVG
-	| correlationFunction
+	| CORR
+	| CORRELATION
 	| COUNT
 	| COUNT_BIG
-	| covarianceFunction
-	| covarianceSampFunction
-	| cumeDistFunction
+	| COVAR_POP
+	| COVARIANCE
+	| COVAR
+	| COVAR_SAMP
+	| COVARIANCE_SAMP
+	| CUME_DIST
 	| GROUPING
-	| listaggFunction
+	| LISTAGG
 	| MAX
 	| MEDIAN
 	| MIN
-	| percentileContFunction
-	| percentileDiscFunction
-	| percentRankFunction
+	| PERCENTILE_CONT
+	| PERCENTILE_DISC
+	| PERCENT_RANK
 	| STDDEV_POP
 	| STDDEV
 	| STDDEV_SAMP
@@ -4003,7 +4018,7 @@ aggregateFunction
 	| VAR
 	| VAR_SAMP
 	| VARIANCE_SAMP
-	| xmlaggFunction
+	| XMLAGG
 	)
 	;
 
@@ -4096,13 +4111,15 @@ cumeDistFunction
 	;
 
 percentileContFunction
-	: (PERCENTILE_CONT LPAREN expression RPAREN
+	: (
+	PERCENTILE_CONT LPAREN expression RPAREN
 	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
 	)
 	;
 
 percentileDiscFunction
-	: (PERCENTILE_DISC LPAREN expression RPAREN
+	: (
+	PERCENTILE_DISC LPAREN expression RPAREN
 	WITHIN GROUP LPAREN ORDER BY expression (ASC | DESC)? RPAREN
 	)
 	;
@@ -4404,18 +4421,18 @@ scalarFunction
 	| WEEK
 	| WEEK_ISO
 	| WRAP
-	| xmlattributesFunction
+	| XMLATTRIBUTES
 	| XMLCOMMENT
 	| XMLCONCAT
 	| XMLDOCUMENT
-	| xmlelementFunction
+	| XMLELEMENT
 	| XMLFOREST
 	| XMLMODIFY
 	| XMLNAMESPACES
 	| XMLPARSE
 	| XMLPI
 	| XMLQUERY
-	| xmlserializeFunction
+	| XMLSERIALIZE
 	| XMLTEXT
 	| XMLXSROBJECTID
 	| XSLTRANSFORM
