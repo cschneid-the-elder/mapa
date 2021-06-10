@@ -4828,7 +4828,7 @@ timeZoneExpressionSubset
 
 caseExpression
 	: CASE
-	(searchedWhenClause | simpleWhenClause)+
+	(searchedWhenClause+ | simpleWhenClause)
 	((ELSE NULL) | (ELSE resultExpression))?
 	END
 	;
@@ -4838,18 +4838,16 @@ resultExpression
 	;
 
 searchedWhenClause
-	: WHEN
-	searchCondition
-	THEN
-	(resultExpression | NULL)
+	: (
+	WHEN searchCondition THEN (resultExpression | NULL)
+	)
 	;
 
 simpleWhenClause
-	: expression
-	WHEN
+	: (
 	expression
-	THEN
-	(resultExpression | NULL)
+	(WHEN expression THEN (resultExpression | NULL))+
+	)
 	;
 
 searchCondition
