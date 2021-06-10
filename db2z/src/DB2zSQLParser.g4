@@ -4619,7 +4619,7 @@ xmltableFunctionSpecification
 	LPAREN
 	(xmlnamespacesDeclaration COMMA)?
 	rowXqueryExpressionConstant
-	(PASSING (BY REF)? rowXqueryArgument (COMMA rowXqueryArgument))?
+	(PASSING (BY REF)? rowXqueryArgument (COMMA rowXqueryArgument)*)?
 	(COLUMNS (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition)
 		(COMMA (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition))*)?
 	RPAREN
@@ -5033,7 +5033,7 @@ ccsidValue
 	;
 
 columnName
-	: ((correlationName DOT)? identifier1)
+	: ((correlationName DOT)? (identifier1 | NONNUMERICLITERAL))
 	;
 
 sourceColumnName
@@ -5438,9 +5438,10 @@ dataChangeTableReference
 tableFunctionReference
 	: (
 	TABLE LPAREN 
-	(scalarFunction | aggregateFunction | regressionFunction | identifier)
+	(schemaName DOT)?
+	(scalarFunction | aggregateFunction | regressionFunction | tableFunction | identifier)
 	LPAREN
-	(expression | (TABLE tableName)) (COMMA (expression | (TABLE tableName)))*
+	((expression | (TABLE tableName)) (COMMA (expression | (TABLE tableName)))*)?
 	RPAREN
 	tableUdfCardinalityClause?
 	RPAREN
@@ -5577,25 +5578,30 @@ selectColumns
 	: (
 	(expression ((operator expression) | INTEGERLITERAL)* (AS? (newColumnName | NONNUMERICLITERAL))?)
 	| (tableName DOT SPLAT)
-	| (unpackedRow)
+	| unpackedRow
 	)
 	;
 
 unpackedRow
-	: UNPACK LPAREN expression RPAREN DOT SPLAT AS 
+	: (
+	UNPACK LPAREN expression RPAREN DOT SPLAT AS 
 	LPAREN 
 	columnName dataType (COMMA columnName dataType)* 
 	RPAREN
+	)
 	;
 
 selectClause
-	: SELECT
+	: (
+	SELECT
 	(ALL | DISTINCT)?
 	(SPLAT | (selectColumns (COMMA selectColumns)*))
+	)
 	;
 
 subSelect
-	: selectClause
+	: (
+	selectClause
 	fromClause
 	whereClause?
 	groupByClause?
@@ -5603,10 +5609,12 @@ subSelect
 	orderByClause?
 	offsetClause?
 	fetchClause?
+	)
 	;
 
 selectIntoStatement
-	: (WITH commonTableExpression (COMMA commonTableExpression)*)?
+	: (
+	(WITH commonTableExpression (COMMA commonTableExpression)*)?
 	selectClause
 	intoClause
 	fromClause
@@ -5618,10 +5626,12 @@ selectIntoStatement
 	fetchClause?
 	(isolationClause | skipLockedDataClause)?
 	querynoClause?
+	)
 	;
 
 selectStatement
-	: (WITH commonTableExpression (COMMA commonTableExpression)*)?
+	: (
+	(WITH commonTableExpression (COMMA commonTableExpression)*)?
 	fullSelect
 	(
 	updateClause
@@ -5631,6 +5641,7 @@ selectStatement
 	| skipLockedDataClause
 	| querynoClause
 	)*
+	)
 	;
 
 commonTableExpression
