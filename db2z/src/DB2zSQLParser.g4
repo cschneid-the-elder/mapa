@@ -5438,9 +5438,10 @@ dataChangeTableReference
 tableFunctionReference
 	: (
 	TABLE LPAREN 
-	(scalarFunction | aggregateFunction | regressionFunction | identifier)
+	(schemaName DOT)?
+	(scalarFunction | aggregateFunction | regressionFunction | tableFunction | identifier)
 	LPAREN
-	(expression | (TABLE tableName)) (COMMA (expression | (TABLE tableName)))*
+	((expression | (TABLE tableName)) (COMMA (expression | (TABLE tableName)))*)?
 	RPAREN
 	tableUdfCardinalityClause?
 	RPAREN
