@@ -5787,6 +5787,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDurationSuffix(DB2zSQLParser.DurationSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDurationSuffix(DB2zSQLParser.DurationSuffixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
