@@ -3383,6 +3383,13 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitDurationSuffix(DB2zSQLParser.DurationSuffixContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

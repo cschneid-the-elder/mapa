@@ -2896,6 +2896,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#durationSuffix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDurationSuffix(DB2zSQLParser.DurationSuffixContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlCastSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

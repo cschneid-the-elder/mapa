@@ -3795,6 +3795,7 @@ expression
 	| olapSpecification
 	| rowChangeExpression
 	| sequenceReference
+	| ((operator | INTEGERLITERAL) expression)
 	| ((functionInvocation
 		| LPAREN expression RPAREN
 		| labeledDuration
@@ -3812,7 +3813,7 @@ expression
 		| olapSpecification
 		| rowChangeExpression
 		| sequenceReference)
-		(operator expression)*)
+		((operator | INTEGERLITERAL) expression)*)
 	)
 	;
 
@@ -3888,7 +3889,13 @@ labeledDuration
 	| INTEGERLITERAL
 	| columnName
 	| variable)
-	(YEAR
+	durationSuffix
+	)
+	;
+
+durationSuffix
+	: (
+	YEAR
 	| YEARS
 	| MONTH
 	| MONTHS
@@ -3901,7 +3908,7 @@ labeledDuration
 	| SECOND
 	| SECONDS
 	| MICROSECOND
-	| MICROSECONDS)
+	| MICROSECONDS
 	)
 	;
 

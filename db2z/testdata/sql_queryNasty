@@ -77,4 +77,38 @@ WHERE
     C4 IN (MAX_BY_C1, MAX_BY_C3, MIN_BY_C1, MIN_BY_C3)
 ;
 
+SELECT
+    C1
+  , C2
+  , (SELECT MAX(B.C2)
+     FROM T1 B
+     WHERE B.C1 = A.C1
+       AND B.C3 = 
+           (SELECT MAX(C.C3)
+            FROM T1 C
+            WHERE C.C1 = A.C1))
+FROM T1 A
+;
+
+SELECT
+    C1
+  , C2
+  , (SELECT MAX(B.C2)
+     FROM T1 B
+     WHERE B.C1 = A.C1
+       AND B.C3 = 
+           (SELECT MAX(C.C3)
+            FROM T1 C
+            WHERE C.C1 IN
+                  (SELECT
+                       DISTINCT D.C1
+                   FROM T1 D
+                   WHERE D.C4 IN
+                         (SELECT
+                              DISTINCT E.C4
+                          FROM T1 E
+                          WHERE E.C5 = 1))))
+FROM T1 A
+;
+
 

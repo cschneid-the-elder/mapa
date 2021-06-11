@@ -4817,6 +4817,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitLabeledDuration(DB2zSQLParser.LabeledDurationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#durationSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void enterDurationSuffix(DB2zSQLParser.DurationSuffixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#durationSuffix}.
+	 * @param ctx the parse tree
+	 */
+	void exitDurationSuffix(DB2zSQLParser.DurationSuffixContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlCastSpecification}.
 	 * @param ctx the parse tree
 	 */
