@@ -900,6 +900,12 @@ savepointStatement
 	)
 	;
 
+setAssignmentStatement
+	: (
+	SET setAssignmentClause
+	)
+	;
+
 setConnectionStatement
 	: (SET CONNECTION (locationName | hostVariable))
 	;
@@ -945,12 +951,6 @@ setSessionTimezoneStatement
 
 setSpecialRegisterStatement
 	: (SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
-	;
-
-setAssignmentStatement
-	: (
-	SET setAssignmentClause
-	)
 	;
 
 signalStatement
@@ -2458,6 +2458,16 @@ modificationOperation
 	: (updateOperation | deleteOperation | insertOperation)
 	;
 
+assignmentClause
+	: (
+	(columnName EQ valuesList1 (COMMA columnName EQ valuesList1)*)
+	| (LPAREN columnName (COMMA columnName)* 
+		RPAREN EQ 
+		LPAREN ((valuesList1 (COMMA valuesList1)*) | fullSelect)
+		RPAREN)
+	)
+	;
+
 setAssignmentClause
 	: (
 	(arrayElementSpecification EQ (expression | NULL))
@@ -2480,16 +2490,6 @@ setAssignmentTargetVariable
 	| sqlParameterName
 	| sqlVariableName
 	| transitionVariableName
-	)
-	;
-
-assignmentClause
-	: (
-	(columnName EQ valuesList1 (COMMA columnName EQ valuesList1)*)
-	| (LPAREN columnName (COMMA columnName)* 
-		RPAREN EQ 
-		LPAREN (valuesList1 (COMMA valuesList1)*) | fullSelect)
-		RPAREN
 	)
 	;
 
