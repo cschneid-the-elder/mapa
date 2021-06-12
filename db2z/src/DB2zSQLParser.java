@@ -236,10 +236,10 @@ public class DB2zSQLParser extends Parser {
 		RULE_mergeStatement = 84, RULE_openStatement = 85, RULE_prepareStatement = 86, 
 		RULE_refreshTableStatement = 87, RULE_releaseConnectionStatement = 88, 
 		RULE_releaseSavepointStatement = 89, RULE_renameStatement = 90, RULE_revokeStatement = 91, 
-		RULE_rollbackStatement = 92, RULE_savepointStatement = 93, RULE_setConnectionStatement = 94, 
-		RULE_setEncryptionPasswordStatement = 95, RULE_setPathStatement = 96, 
-		RULE_setSchemaStatement = 97, RULE_setSessionTimezoneStatement = 98, RULE_setSpecialRegisterStatement = 99, 
-		RULE_setAssignmentStatement = 100, RULE_signalStatement = 101, RULE_transferOwnershipStatement = 102, 
+		RULE_rollbackStatement = 92, RULE_savepointStatement = 93, RULE_setAssignmentStatement = 94, 
+		RULE_setConnectionStatement = 95, RULE_setEncryptionPasswordStatement = 96, 
+		RULE_setPathStatement = 97, RULE_setSchemaStatement = 98, RULE_setSessionTimezoneStatement = 99, 
+		RULE_setSpecialRegisterStatement = 100, RULE_signalStatement = 101, RULE_transferOwnershipStatement = 102, 
 		RULE_truncateStatement = 103, RULE_updateStatement = 104, RULE_valuesStatement = 105, 
 		RULE_valuesIntoStatement = 106, RULE_wheneverStatement = 107, RULE_valuesIntoTargetVariable = 108, 
 		RULE_ownedObject = 109, RULE_newOwner = 110, RULE_grantCollectionStatement = 111, 
@@ -318,43 +318,42 @@ public class DB2zSQLParser extends Parser {
 		RULE_searchedDelete = 303, RULE_positionedDelete = 304, RULE_searchedUpdate = 305, 
 		RULE_positionedUpdate = 306, RULE_sourceValues = 307, RULE_valuesSingleRow = 308, 
 		RULE_valuesMultipleRow = 309, RULE_matchingCondition = 310, RULE_modificationOperation = 311, 
-		RULE_setAssignmentClause = 312, RULE_setAssignmentTargetVariable = 313, 
-		RULE_assignmentClause = 314, RULE_updateOperation = 315, RULE_deleteOperation = 316, 
-		RULE_insertOperation = 317, RULE_signalInformation = 318, RULE_valuesList1 = 319, 
-		RULE_valuesList2 = 320, RULE_valuesList3 = 321, RULE_valuesList4 = 322, 
-		RULE_includeColumns = 323, RULE_multipleRowInsert = 324, RULE_regenerateClause = 325, 
-		RULE_alterIndexOptions = 326, RULE_bufferpoolOption = 327, RULE_closeOption = 328, 
-		RULE_copyOption = 329, RULE_dssizeOption = 330, RULE_piecesizeOption = 331, 
-		RULE_clusterOption = 332, RULE_paddedOption = 333, RULE_compressOption = 334, 
-		RULE_defineOption = 335, RULE_locksizeOption = 336, RULE_lockmaxOption = 337, 
-		RULE_enableDisableOption = 338, RULE_loggedOption = 339, RULE_notAtomicPhrase = 340, 
-		RULE_alterIndexPartitionOptions = 341, RULE_usingSpecification1 = 342, 
-		RULE_freeSpecification = 343, RULE_gbpcacheSpecification = 344, RULE_partitionElement = 345, 
-		RULE_applCompatValue = 346, RULE_functionLevel = 347, RULE_functionParameterType = 348, 
-		RULE_functionDataType = 349, RULE_functionBuiltInType = 350, RULE_procedureBuiltinType = 351, 
-		RULE_createTypeArrayBuiltinType = 352, RULE_createTypeArrayBuiltinType2 = 353, 
-		RULE_createVariableBuiltInType = 354, RULE_sourceDataType = 355, RULE_functionOptionList = 356, 
-		RULE_procedureOptionList = 357, RULE_createProcedureOptionList = 358, 
-		RULE_procedureDataType = 359, RULE_alterSequenceOptionList = 360, RULE_createSequenceOptionList = 361, 
-		RULE_asTypeOption = 362, RULE_startOption = 363, RULE_restartOption = 364, 
-		RULE_incrementOption = 365, RULE_minvalueOption = 366, RULE_maxvalueOption = 367, 
-		RULE_cycleOption = 368, RULE_cacheOption = 369, RULE_orderOption = 370, 
-		RULE_keyLabelOption = 371, RULE_dataclasOption = 372, RULE_mgmtclasOption = 373, 
-		RULE_storclasOption = 374, RULE_alterStogroupOptionList = 375, RULE_alterTableOptionList = 376, 
-		RULE_alterTablespaceOptionList = 377, RULE_createTablespaceOptionList = 378, 
-		RULE_trustedContextOptionList = 379, RULE_databaseOptionList = 380, RULE_createIndexOptionList = 381, 
-		RULE_createLobTablespaceOptionList = 382, RULE_inDatabaseOption = 383, 
-		RULE_segsizeOption = 384, RULE_numpartsOption = 385, RULE_partitionByGrowthSpecification = 386, 
-		RULE_partitionByRangeSpecification = 387, RULE_partitionByRangePartitionPhrase = 388, 
-		RULE_insertAlgorithmOption = 389, RULE_maxrowsOption = 390, RULE_maxpartitionsOption = 391, 
-		RULE_usingSpecification2 = 392, RULE_xmlIndexSpecification = 393, RULE_xmlPatternClause = 394, 
-		RULE_alterAttributesOptions = 395, RULE_addAttributesOptions = 396, RULE_dropAttributesOptions = 397, 
-		RULE_includeColumnPhrase = 398, RULE_userClause = 399, RULE_userClauseAddOptions = 400, 
-		RULE_userClauseReplaceOptions = 401, RULE_userClauseDropOptions = 402, 
-		RULE_useOptions = 403, RULE_alterPartitionClause = 404, RULE_usingBlock = 405, 
-		RULE_freeBlock = 406, RULE_moveTableClause = 407, RULE_gbpcacheBlock = 408, 
-		RULE_aliasDesignator = 409, RULE_multipleColumnList = 410, RULE_functionDesignator = 411, 
-		RULE_parameterType = 412, RULE_alterTableColumnDefinitionOptionList1 = 413, 
+		RULE_assignmentClause = 312, RULE_setAssignmentClause = 313, RULE_setAssignmentTargetVariable = 314, 
+		RULE_updateOperation = 315, RULE_deleteOperation = 316, RULE_insertOperation = 317, 
+		RULE_signalInformation = 318, RULE_valuesList1 = 319, RULE_valuesList2 = 320, 
+		RULE_valuesList3 = 321, RULE_valuesList4 = 322, RULE_includeColumns = 323, 
+		RULE_multipleRowInsert = 324, RULE_regenerateClause = 325, RULE_alterIndexOptions = 326, 
+		RULE_bufferpoolOption = 327, RULE_closeOption = 328, RULE_copyOption = 329, 
+		RULE_dssizeOption = 330, RULE_piecesizeOption = 331, RULE_clusterOption = 332, 
+		RULE_paddedOption = 333, RULE_compressOption = 334, RULE_defineOption = 335, 
+		RULE_locksizeOption = 336, RULE_lockmaxOption = 337, RULE_enableDisableOption = 338, 
+		RULE_loggedOption = 339, RULE_notAtomicPhrase = 340, RULE_alterIndexPartitionOptions = 341, 
+		RULE_usingSpecification1 = 342, RULE_freeSpecification = 343, RULE_gbpcacheSpecification = 344, 
+		RULE_partitionElement = 345, RULE_applCompatValue = 346, RULE_functionLevel = 347, 
+		RULE_functionParameterType = 348, RULE_functionDataType = 349, RULE_functionBuiltInType = 350, 
+		RULE_procedureBuiltinType = 351, RULE_createTypeArrayBuiltinType = 352, 
+		RULE_createTypeArrayBuiltinType2 = 353, RULE_createVariableBuiltInType = 354, 
+		RULE_sourceDataType = 355, RULE_functionOptionList = 356, RULE_procedureOptionList = 357, 
+		RULE_createProcedureOptionList = 358, RULE_procedureDataType = 359, RULE_alterSequenceOptionList = 360, 
+		RULE_createSequenceOptionList = 361, RULE_asTypeOption = 362, RULE_startOption = 363, 
+		RULE_restartOption = 364, RULE_incrementOption = 365, RULE_minvalueOption = 366, 
+		RULE_maxvalueOption = 367, RULE_cycleOption = 368, RULE_cacheOption = 369, 
+		RULE_orderOption = 370, RULE_keyLabelOption = 371, RULE_dataclasOption = 372, 
+		RULE_mgmtclasOption = 373, RULE_storclasOption = 374, RULE_alterStogroupOptionList = 375, 
+		RULE_alterTableOptionList = 376, RULE_alterTablespaceOptionList = 377, 
+		RULE_createTablespaceOptionList = 378, RULE_trustedContextOptionList = 379, 
+		RULE_databaseOptionList = 380, RULE_createIndexOptionList = 381, RULE_createLobTablespaceOptionList = 382, 
+		RULE_inDatabaseOption = 383, RULE_segsizeOption = 384, RULE_numpartsOption = 385, 
+		RULE_partitionByGrowthSpecification = 386, RULE_partitionByRangeSpecification = 387, 
+		RULE_partitionByRangePartitionPhrase = 388, RULE_insertAlgorithmOption = 389, 
+		RULE_maxrowsOption = 390, RULE_maxpartitionsOption = 391, RULE_usingSpecification2 = 392, 
+		RULE_xmlIndexSpecification = 393, RULE_xmlPatternClause = 394, RULE_alterAttributesOptions = 395, 
+		RULE_addAttributesOptions = 396, RULE_dropAttributesOptions = 397, RULE_includeColumnPhrase = 398, 
+		RULE_userClause = 399, RULE_userClauseAddOptions = 400, RULE_userClauseReplaceOptions = 401, 
+		RULE_userClauseDropOptions = 402, RULE_useOptions = 403, RULE_alterPartitionClause = 404, 
+		RULE_usingBlock = 405, RULE_freeBlock = 406, RULE_moveTableClause = 407, 
+		RULE_gbpcacheBlock = 408, RULE_aliasDesignator = 409, RULE_multipleColumnList = 410, 
+		RULE_functionDesignator = 411, RULE_parameterType = 412, RULE_alterTableColumnDefinitionOptionList1 = 413, 
 		RULE_alterTableColumnDefinitionOptionList2 = 414, RULE_columnConstraint = 415, 
 		RULE_generatedClause = 416, RULE_generatedClause2 = 417, RULE_asIdentityClause = 418, 
 		RULE_asIdentityClauseOptionList = 419, RULE_asRowChangeTimestampClause = 420, 
@@ -494,9 +493,9 @@ public class DB2zSQLParser extends Parser {
 			"labelStatement", "lockTableStatement", "mergeStatement", "openStatement", 
 			"prepareStatement", "refreshTableStatement", "releaseConnectionStatement", 
 			"releaseSavepointStatement", "renameStatement", "revokeStatement", "rollbackStatement", 
-			"savepointStatement", "setConnectionStatement", "setEncryptionPasswordStatement", 
-			"setPathStatement", "setSchemaStatement", "setSessionTimezoneStatement", 
-			"setSpecialRegisterStatement", "setAssignmentStatement", "signalStatement", 
+			"savepointStatement", "setAssignmentStatement", "setConnectionStatement", 
+			"setEncryptionPasswordStatement", "setPathStatement", "setSchemaStatement", 
+			"setSessionTimezoneStatement", "setSpecialRegisterStatement", "signalStatement", 
 			"transferOwnershipStatement", "truncateStatement", "updateStatement", 
 			"valuesStatement", "valuesIntoStatement", "wheneverStatement", "valuesIntoTargetVariable", 
 			"ownedObject", "newOwner", "grantCollectionStatement", "grantDatabaseStatement", 
@@ -558,8 +557,8 @@ public class DB2zSQLParser extends Parser {
 			"createFunctionStatementSourcedOptions", "createFunctionStatementInlineSqlScalarOptions", 
 			"sequenceAlias", "tableAlias", "authorization", "searchedDelete", "positionedDelete", 
 			"searchedUpdate", "positionedUpdate", "sourceValues", "valuesSingleRow", 
-			"valuesMultipleRow", "matchingCondition", "modificationOperation", "setAssignmentClause", 
-			"setAssignmentTargetVariable", "assignmentClause", "updateOperation", 
+			"valuesMultipleRow", "matchingCondition", "modificationOperation", "assignmentClause", 
+			"setAssignmentClause", "setAssignmentTargetVariable", "updateOperation", 
 			"deleteOperation", "insertOperation", "signalInformation", "valuesList1", 
 			"valuesList2", "valuesList3", "valuesList4", "includeColumns", "multipleRowInsert", 
 			"regenerateClause", "alterIndexOptions", "bufferpoolOption", "closeOption", 
@@ -19770,6 +19769,55 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
+	public static class SetAssignmentStatementContext extends ParserRuleContext {
+		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
+		public SetAssignmentClauseContext setAssignmentClause() {
+			return getRuleContext(SetAssignmentClauseContext.class,0);
+		}
+		public SetAssignmentStatementContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_setAssignmentStatement; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSetAssignmentStatement(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSetAssignmentStatement(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSetAssignmentStatement(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final SetAssignmentStatementContext setAssignmentStatement() throws RecognitionException {
+		SetAssignmentStatementContext _localctx = new SetAssignmentStatementContext(_ctx, getState());
+		enterRule(_localctx, 188, RULE_setAssignmentStatement);
+		try {
+			enterOuterAlt(_localctx, 1);
+			{
+			{
+			setState(2999);
+			match(SET);
+			setState(3000);
+			setAssignmentClause();
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class SetConnectionStatementContext extends ParserRuleContext {
 		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
 		public TerminalNode CONNECTION() { return getToken(DB2zSQLParser.CONNECTION, 0); }
@@ -19800,16 +19848,16 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetConnectionStatementContext setConnectionStatement() throws RecognitionException {
 		SetConnectionStatementContext _localctx = new SetConnectionStatementContext(_ctx, getState());
-		enterRule(_localctx, 188, RULE_setConnectionStatement);
+		enterRule(_localctx, 190, RULE_setConnectionStatement);
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(2999);
+			setState(3002);
 			match(SET);
-			setState(3000);
-			match(CONNECTION);
 			setState(3003);
+			match(CONNECTION);
+			setState(3006);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case INTEGERLITERAL:
@@ -20774,13 +20822,13 @@ public class DB2zSQLParser extends Parser {
 			case XMLTABLE:
 			case SQLIDENTIFIER:
 				{
-				setState(3001);
+				setState(3004);
 				locationName();
 				}
 				break;
 			case COLON:
 				{
-				setState(3002);
+				setState(3005);
 				hostVariable();
 				}
 				break;
@@ -20841,32 +20889,32 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetEncryptionPasswordStatementContext setEncryptionPasswordStatement() throws RecognitionException {
 		SetEncryptionPasswordStatementContext _localctx = new SetEncryptionPasswordStatementContext(_ctx, getState());
-		enterRule(_localctx, 190, RULE_setEncryptionPasswordStatement);
+		enterRule(_localctx, 192, RULE_setEncryptionPasswordStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(3005);
-			match(SET);
-			setState(3006);
-			match(ENCRYPTION_PASSWORD);
 			setState(3008);
+			match(SET);
+			setState(3009);
+			match(ENCRYPTION_PASSWORD);
+			setState(3011);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EQ) {
 				{
-				setState(3007);
+				setState(3010);
 				match(EQ);
 				}
 			}
 
-			setState(3012);
+			setState(3015);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case NONNUMERICLITERAL:
 				{
-				setState(3010);
+				setState(3013);
 				match(NONNUMERICLITERAL);
 				}
 				break;
@@ -21831,38 +21879,38 @@ public class DB2zSQLParser extends Parser {
 			case XMLTABLE:
 			case SQLIDENTIFIER:
 				{
-				setState(3011);
+				setState(3014);
 				variable();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(3023);
+			setState(3026);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==WITH) {
 				{
-				setState(3014);
-				match(WITH);
-				setState(3015);
-				match(HINT);
 				setState(3017);
+				match(WITH);
+				setState(3018);
+				match(HINT);
+				setState(3020);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==EQ) {
 					{
-					setState(3016);
+					setState(3019);
 					match(EQ);
 					}
 				}
 
-				setState(3021);
+				setState(3024);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
 				case NONNUMERICLITERAL:
 					{
-					setState(3019);
+					setState(3022);
 					match(NONNUMERICLITERAL);
 					}
 					break;
@@ -22827,7 +22875,7 @@ public class DB2zSQLParser extends Parser {
 				case XMLTABLE:
 				case SQLIDENTIFIER:
 					{
-					setState(3020);
+					setState(3023);
 					variable();
 					}
 					break;
@@ -22887,16 +22935,16 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetPathStatementContext setPathStatement() throws RecognitionException {
 		SetPathStatementContext _localctx = new SetPathStatementContext(_ctx, getState());
-		enterRule(_localctx, 192, RULE_setPathStatement);
+		enterRule(_localctx, 194, RULE_setPathStatement);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(3025);
+			setState(3028);
 			match(SET);
-			setState(3026);
+			setState(3029);
 			_la = _input.LA(1);
 			if ( !(_la==PATH || _la==CURRENT_PATH) ) {
 			_errHandler.recoverInline(this);
@@ -22906,41 +22954,41 @@ public class DB2zSQLParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(3028);
+			setState(3031);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EQ) {
 				{
-				setState(3027);
+				setState(3030);
 				match(EQ);
 				}
 			}
 
-			setState(3030);
+			setState(3033);
 			expression();
-			setState(3037);
+			setState(3040);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,232,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(3032);
+					setState(3035);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==COMMA) {
 						{
-						setState(3031);
+						setState(3034);
 						match(COMMA);
 						}
 					}
 
-					setState(3034);
+					setState(3037);
 					expression();
 					}
 					} 
 				}
-				setState(3039);
+				setState(3042);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,232,_ctx);
 			}
@@ -22987,15 +23035,15 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetSchemaStatementContext setSchemaStatement() throws RecognitionException {
 		SetSchemaStatementContext _localctx = new SetSchemaStatementContext(_ctx, getState());
-		enterRule(_localctx, 194, RULE_setSchemaStatement);
+		enterRule(_localctx, 196, RULE_setSchemaStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(3040);
+			setState(3043);
 			match(SET);
-			setState(3041);
+			setState(3044);
 			_la = _input.LA(1);
 			if ( !(_la==SCHEMA || _la==CURRENT_SCHEMA) ) {
 			_errHandler.recoverInline(this);
@@ -23005,17 +23053,17 @@ public class DB2zSQLParser extends Parser {
 				_errHandler.reportMatch(this);
 				consume();
 			}
-			setState(3043);
+			setState(3046);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EQ) {
 				{
-				setState(3042);
+				setState(3045);
 				match(EQ);
 				}
 			}
 
-			setState(3045);
+			setState(3048);
 			expression();
 			}
 			}
@@ -23063,53 +23111,53 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetSessionTimezoneStatementContext setSessionTimezoneStatement() throws RecognitionException {
 		SetSessionTimezoneStatementContext _localctx = new SetSessionTimezoneStatementContext(_ctx, getState());
-		enterRule(_localctx, 196, RULE_setSessionTimezoneStatement);
+		enterRule(_localctx, 198, RULE_setSessionTimezoneStatement);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(3047);
+			setState(3050);
 			match(SET);
-			setState(3052);
+			setState(3055);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case SESSION_TIME_ZONE:
 				{
-				setState(3048);
+				setState(3051);
 				match(SESSION_TIME_ZONE);
 				}
 				break;
 			case TIME:
 				{
 				{
-				setState(3049);
+				setState(3052);
 				match(TIME);
-				setState(3050);
+				setState(3053);
 				match(ZONE);
 				}
 				}
 				break;
 			case TIMEZONE:
 				{
-				setState(3051);
+				setState(3054);
 				match(TIMEZONE);
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(3055);
+			setState(3058);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EQ) {
 				{
-				setState(3054);
+				setState(3057);
 				match(EQ);
 				}
 			}
 
-			setState(3059);
+			setState(3062);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case COLON:
@@ -24073,13 +24121,13 @@ public class DB2zSQLParser extends Parser {
 			case XMLTABLE:
 			case SQLIDENTIFIER:
 				{
-				setState(3057);
+				setState(3060);
 				variable();
 				}
 				break;
 			case NONNUMERICLITERAL:
 				{
-				setState(3058);
+				setState(3061);
 				match(NONNUMERICLITERAL);
 				}
 				break;
@@ -24138,118 +24186,69 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetSpecialRegisterStatementContext setSpecialRegisterStatement() throws RecognitionException {
 		SetSpecialRegisterStatementContext _localctx = new SetSpecialRegisterStatementContext(_ctx, getState());
-		enterRule(_localctx, 198, RULE_setSpecialRegisterStatement);
+		enterRule(_localctx, 200, RULE_setSpecialRegisterStatement);
 		int _la;
 		try {
 			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(3061);
-			match(SET);
-			setState(3062);
-			specialRegister();
 			setState(3064);
+			match(SET);
+			setState(3065);
+			specialRegister();
+			setState(3067);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			if (_la==EQ) {
 				{
-				setState(3063);
+				setState(3066);
 				match(EQ);
 				}
 			}
 
-			setState(3068);
+			setState(3071);
 			_errHandler.sync(this);
 			switch ( getInterpreter().adaptivePredict(_input,238,_ctx) ) {
 			case 1:
 				{
-				setState(3066);
+				setState(3069);
 				expression();
 				}
 				break;
 			case 2:
 				{
-				setState(3067);
+				setState(3070);
 				match(NULL);
 				}
 				break;
 			}
-			setState(3076);
+			setState(3079);
 			_errHandler.sync(this);
 			_alt = getInterpreter().adaptivePredict(_input,240,_ctx);
 			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
 				if ( _alt==1 ) {
 					{
 					{
-					setState(3071);
+					setState(3074);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					if (_la==COMMA) {
 						{
-						setState(3070);
+						setState(3073);
 						match(COMMA);
 						}
 					}
 
-					setState(3073);
+					setState(3076);
 					expression();
 					}
 					} 
 				}
-				setState(3078);
+				setState(3081);
 				_errHandler.sync(this);
 				_alt = getInterpreter().adaptivePredict(_input,240,_ctx);
 			}
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class SetAssignmentStatementContext extends ParserRuleContext {
-		public TerminalNode SET() { return getToken(DB2zSQLParser.SET, 0); }
-		public SetAssignmentClauseContext setAssignmentClause() {
-			return getRuleContext(SetAssignmentClauseContext.class,0);
-		}
-		public SetAssignmentStatementContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_setAssignmentStatement; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterSetAssignmentStatement(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitSetAssignmentStatement(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitSetAssignmentStatement(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final SetAssignmentStatementContext setAssignmentStatement() throws RecognitionException {
-		SetAssignmentStatementContext _localctx = new SetAssignmentStatementContext(_ctx, getState());
-		enterRule(_localctx, 200, RULE_setAssignmentStatement);
-		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			{
-			setState(3079);
-			match(SET);
-			setState(3080);
-			setAssignmentClause();
 			}
 			}
 		}
@@ -53710,6 +53709,1145 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
+	public static class AssignmentClauseContext extends ParserRuleContext {
+		public List<ColumnNameContext> columnName() {
+			return getRuleContexts(ColumnNameContext.class);
+		}
+		public ColumnNameContext columnName(int i) {
+			return getRuleContext(ColumnNameContext.class,i);
+		}
+		public List<TerminalNode> EQ() { return getTokens(DB2zSQLParser.EQ); }
+		public TerminalNode EQ(int i) {
+			return getToken(DB2zSQLParser.EQ, i);
+		}
+		public List<ValuesList1Context> valuesList1() {
+			return getRuleContexts(ValuesList1Context.class);
+		}
+		public ValuesList1Context valuesList1(int i) {
+			return getRuleContext(ValuesList1Context.class,i);
+		}
+		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
+		public TerminalNode LPAREN(int i) {
+			return getToken(DB2zSQLParser.LPAREN, i);
+		}
+		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
+		public TerminalNode RPAREN(int i) {
+			return getToken(DB2zSQLParser.RPAREN, i);
+		}
+		public FullSelectContext fullSelect() {
+			return getRuleContext(FullSelectContext.class,0);
+		}
+		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
+		public TerminalNode COMMA(int i) {
+			return getToken(DB2zSQLParser.COMMA, i);
+		}
+		public AssignmentClauseContext(ParserRuleContext parent, int invokingState) {
+			super(parent, invokingState);
+		}
+		@Override public int getRuleIndex() { return RULE_assignmentClause; }
+		@Override
+		public void enterRule(ParseTreeListener listener) {
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAssignmentClause(this);
+		}
+		@Override
+		public void exitRule(ParseTreeListener listener) {
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAssignmentClause(this);
+		}
+		@Override
+		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAssignmentClause(this);
+			else return visitor.visitChildren(this);
+		}
+	}
+
+	public final AssignmentClauseContext assignmentClause() throws RecognitionException {
+		AssignmentClauseContext _localctx = new AssignmentClauseContext(_ctx, getState());
+		enterRule(_localctx, 624, RULE_assignmentClause);
+		int _la;
+		try {
+			int _alt;
+			enterOuterAlt(_localctx, 1);
+			{
+			setState(5762);
+			_errHandler.sync(this);
+			switch (_input.LA(1)) {
+			case NONNUMERICLITERAL:
+			case INSTEAD:
+			case NEW:
+			case NEW_TABLE:
+			case OLD_TABLE:
+			case REFERENCING:
+			case BASED:
+			case UPON:
+			case ADD:
+			case AFTER:
+			case ALL:
+			case ALLOCATE:
+			case ALLOW:
+			case ALTER:
+			case ALTERAND:
+			case ANY:
+			case ARRAY:
+			case ARRAY_EXISTS:
+			case AS:
+			case ASENSITIVE:
+			case ASSOCIATE:
+			case ASUTIME:
+			case AT:
+			case AUDIT:
+			case AUX:
+			case AUXILIARY:
+			case BEFORE:
+			case BEGIN:
+			case BETWEEN:
+			case BUFFERPOOL:
+			case BUFFERPOOLS:
+			case BY:
+			case CALL:
+			case CAPTURE:
+			case CASCADED:
+			case CASE:
+			case CAST:
+			case CCSID:
+			case CHAR:
+			case CHARACTER:
+			case CHECK:
+			case CLONE:
+			case CLOSE:
+			case CLUSTER:
+			case COLLECTION:
+			case COLLID:
+			case COLUMN:
+			case COMMENT:
+			case COMMIT:
+			case CONCAT:
+			case CONDITION:
+			case CONNECT:
+			case CONNECTION:
+			case CONSTRAINT:
+			case CONTAINS:
+			case CONTENT:
+			case CONTINUE:
+			case CREATE:
+			case CUBE:
+			case CURRENT:
+			case CURRVAL:
+			case CURSOR:
+			case DATA:
+			case DATABASE:
+			case DAY:
+			case DAYS:
+			case DBINFO:
+			case DECLARE:
+			case DEFAULT:
+			case DELETE:
+			case DESCRIPTOR:
+			case DETERMINISTIC:
+			case DISABLE:
+			case DISALLOW:
+			case DISTINCT:
+			case DO:
+			case DOCUMENT:
+			case DOUBLE:
+			case DROP:
+			case DSSIZE:
+			case DYNAMIC:
+			case EDITPROC:
+			case ELSE:
+			case ELSEIF:
+			case ENCODING:
+			case ENCRYPTION:
+			case END:
+			case END_EXEC:
+			case ENDING:
+			case ERASE:
+			case ESCAPE:
+			case EXCEPT:
+			case EXCEPTION:
+			case EXEC_SQL:
+			case EXECUTE:
+			case EXISTS:
+			case EXIT:
+			case EXPLAIN:
+			case EXTERNAL:
+			case FENCED:
+			case FETCH:
+			case FIELDPROC:
+			case FINAL:
+			case FIRST:
+			case FOR:
+			case FREE:
+			case FROM:
+			case FULL:
+			case FUNCTION:
+			case GENERATED:
+			case GET:
+			case GLOBAL:
+			case GO:
+			case GOTO:
+			case GRANT:
+			case GROUP:
+			case HANDLER:
+			case HAVING:
+			case HOLD:
+			case HOUR:
+			case HOURS:
+			case IF:
+			case IMMEDIATE:
+			case IN:
+			case INCLUSIVE:
+			case INDEX:
+			case INDEXBP:
+			case INHERIT:
+			case INNER:
+			case INOUT:
+			case INSENSITIVE:
+			case INSERT:
+			case INTERSECT:
+			case INTO:
+			case IS:
+			case ISOBID:
+			case ITERATE:
+			case JAR:
+			case JOIN:
+			case KEEP:
+			case KEY:
+			case LABEL:
+			case LANGUAGE:
+			case LAST:
+			case LC_CTYPE:
+			case LEAVE:
+			case LEFT:
+			case LIKE:
+			case LIMIT:
+			case LOCAL:
+			case LOCALE:
+			case LOCATOR:
+			case LOCATORS:
+			case LOCK:
+			case LOCKMAX:
+			case LOCKSIZE:
+			case LONG:
+			case LOOP:
+			case MAINTAINED:
+			case MATERIALIZED:
+			case MICROSECOND:
+			case MICROSECONDS:
+			case MODIFIES:
+			case MONTH:
+			case MONTHS:
+			case NEXT:
+			case NEXTVAL:
+			case NO:
+			case NONE:
+			case NOT:
+			case NULL:
+			case NULLS:
+			case NUMPARTS:
+			case OBID:
+			case OF:
+			case OFFSET:
+			case OLD:
+			case ON:
+			case OPEN:
+			case OPTIMIZATION:
+			case OPTIMIZE:
+			case OR:
+			case ORDER:
+			case ORGANIZATION:
+			case OUT:
+			case OUTER:
+			case PACKAGE:
+			case PADDED:
+			case PARAMETER:
+			case PART:
+			case PARTITION:
+			case PARTITIONED:
+			case PARTITIONING:
+			case PATH:
+			case PERIOD:
+			case PIECESIZE:
+			case PLAN:
+			case PRECISION:
+			case PREPARE:
+			case PREVVAL:
+			case PRIOR:
+			case PRIQTY:
+			case PRIVILEGES:
+			case PROCEDURE:
+			case PROGRAM:
+			case PSID:
+			case PUBLIC:
+			case QUERY:
+			case QUERYNO:
+			case READS:
+			case REFERENCES:
+			case REFRESH:
+			case RELEASE:
+			case RENAME:
+			case REPEAT:
+			case RESIGNAL:
+			case RESTRICT:
+			case RESULT:
+			case RESULT_SET_LOCATOR:
+			case RETURN:
+			case RETURNS:
+			case REUSE:
+			case REVOKE:
+			case RIGHT:
+			case ROLE:
+			case ROLLBACK:
+			case ROLLUP:
+			case ROUND_CEILING:
+			case ROUND_DOWN:
+			case ROUND_FLOOR:
+			case ROUND_HALF_DOWN:
+			case ROUND_HALF_EVEN:
+			case ROUND_HALF_UP:
+			case ROUND_UP:
+			case ROW:
+			case ROWSET:
+			case RUN:
+			case SAVEPOINT:
+			case SCHEMA:
+			case SCRATCHPAD:
+			case SECOND:
+			case SECONDS:
+			case SECQTY:
+			case SECURITY:
+			case SELECT:
+			case SENSITIVE:
+			case SEQUENCE:
+			case SET:
+			case SIGNAL:
+			case SIMPLE:
+			case SOME:
+			case SOURCE:
+			case SPECIFIC:
+			case STANDARD:
+			case STATEMENT:
+			case STATIC:
+			case STAY:
+			case STOGROUP:
+			case STORAGE:
+			case STORES:
+			case STYLE:
+			case SUMMARY:
+			case SYNONYM:
+			case SYSDATE:
+			case SYSTEM:
+			case SYSTIMESTAMP:
+			case TABLE:
+			case TABLESPACE:
+			case THEN:
+			case TO:
+			case TRIGGER:
+			case TRIGGERS:
+			case TRUNCATE:
+			case TYPE:
+			case UNDO:
+			case UNION:
+			case UNIQUE:
+			case UNTIL:
+			case UPDATE:
+			case USING:
+			case VALIDPROC:
+			case VALUE:
+			case VALUES:
+			case VARIABLE:
+			case VARIANT:
+			case VCAT:
+			case VERSIONING:
+			case VIEW:
+			case VOLATILE:
+			case VOLUMES:
+			case WHEN:
+			case WHENEVER:
+			case WHERE:
+			case WHILE:
+			case WITH:
+			case WLM:
+			case XMLCAST:
+			case XMLEXISTS:
+			case XMLNAMESPACES:
+			case YEAR:
+			case YEARS:
+			case ZONE:
+			case TIMEZONE:
+			case AND:
+			case ARRAY_AGG:
+			case ASC:
+			case AVG:
+			case BIT:
+			case CHANGE:
+			case CODEUNITS16:
+			case CODEUNITS32:
+			case CORR:
+			case CORRELATION:
+			case COUNT:
+			case COUNT_BIG:
+			case COVAR:
+			case COVARIANCE:
+			case COVARIANCE_SAMP:
+			case COVAR_POP:
+			case COVAR_SAMP:
+			case CS:
+			case CUME_DIST:
+			case DENSE_RANK:
+			case DESC:
+			case EBCDIC:
+			case EXCLUSIVE:
+			case FIRST_VALUE:
+			case FOLLOWING:
+			case GROUPING:
+			case IGNORE:
+			case INDICATOR:
+			case INPUT:
+			case ISNULL:
+			case LAG:
+			case LARGE:
+			case LAST_VALUE:
+			case LEAD:
+			case LISTAGG:
+			case LOCKED:
+			case LOCKS:
+			case MEDIAN:
+			case MINUTES:
+			case MIXED:
+			case NOTNULL:
+			case NTH_VALUE:
+			case NTILE:
+			case NUMERIC:
+			case OBJECT:
+			case OCTETS:
+			case ONLY:
+			case OVER:
+			case PASSING:
+			case PERCENTILE_CONT:
+			case PERCENTILE_DISC:
+			case PERCENT_RANK:
+			case PRECEDING:
+			case PREVIOUS:
+			case RANGE:
+			case RANK:
+			case RATIO_TO_REPORT:
+			case READ:
+			case REF:
+			case REGR_AVGX:
+			case REGR_AVGY:
+			case REGR_COUNT:
+			case REGR_ICPT:
+			case REGR_INTERCEPT:
+			case REGR_R2:
+			case REGR_SLOPE:
+			case REGR_SXX:
+			case REGR_SXY:
+			case REGR_SYY:
+			case RESPECT:
+			case ROW_NUMBER:
+			case ROWS:
+			case RR:
+			case RS:
+			case SBCS:
+			case SELECTIVITY:
+			case SETS:
+			case SHARE:
+			case SKIP_:
+			case STDDEV:
+			case STDDEV_POP:
+			case STDDEV_SAMP:
+			case SUM:
+			case TOKEN:
+			case UNBOUNDED:
+			case UNPACK:
+			case UR:
+			case USE:
+			case VAR:
+			case VARIANCE:
+			case VARIANCE_SAMP:
+			case VAR_POP:
+			case VAR_SAMP:
+			case VARYING:
+			case WITHOUT:
+			case XML:
+			case XMLAGG:
+			case COLUMNS:
+			case SQLID:
+			case ORDINALITY:
+			case SYSTEM_TIME:
+			case BUSINESS_TIME:
+			case MULTIPLIER:
+			case UNNEST:
+			case CROSS:
+			case CALLER:
+			case CLIENT:
+			case POSITIONING:
+			case SCROLL:
+			case ACTION:
+			case ASSEMBLE:
+			case C_:
+			case CALLED:
+			case COBOL:
+			case DB2:
+			case DEFINER:
+			case DISPATCH:
+			case ENVIRONMENT:
+			case FAILURE:
+			case FAILURES:
+			case JAVA:
+			case MAIN:
+			case NAME:
+			case OPTIONS:
+			case PARALLEL:
+			case PLI:
+			case REGISTERS:
+			case RESIDENT:
+			case SECURED:
+			case SPECIAL:
+			case SQL:
+			case STOP:
+			case SUB:
+			case YES:
+			case APPLICATION:
+			case CHANGED:
+			case COMPATIBILITY:
+			case COMPRESS:
+			case COPY:
+			case FREEPAGE:
+			case GBPCACHE:
+			case INCLUDE:
+			case MAXVALUE:
+			case MINVALUE:
+			case PCTFREE:
+			case REGENERATE:
+			case MASK:
+			case ENABLE:
+			case PERMISSION:
+			case ATOMIC:
+			case SQLEXCEPTION:
+			case MERGE:
+			case MATCHED:
+			case SQLSTATE:
+			case MESSAGE_TEXT:
+			case OVERRIDING:
+			case PORTION:
+			case DB2SQL:
+			case DEBUG:
+			case GENERAL:
+			case MODE_:
+			case REXX:
+			case CACHE:
+			case CYCLE:
+			case INCREMENT:
+			case RESTART:
+			case DATACLAS:
+			case MGMTCLAS:
+			case REMOVE:
+			case STORCLAS:
+			case ACCESS:
+			case ACTIVATE:
+			case ALWAYS:
+			case APPEND:
+			case ARCHIVE:
+			case BUSINESS:
+			case CASCADE:
+			case CHANGES:
+			case CONTROL:
+			case DEACTIVATE:
+			case DEFERRED:
+			case EACH:
+			case ENFORCED:
+			case EXTRA:
+			case FOREIGN:
+			case HIDDEN_:
+			case HISTORY:
+			case ID:
+			case IDENTITY:
+			case IMPLICITLY:
+			case INITIALLY:
+			case INLINE:
+			case OPERATION:
+			case ORGANIZE:
+			case OVERLAPS:
+			case PACKAGE_NAME:
+			case PACKAGE_SCHEMA:
+			case PACKAGE_VERSION:
+			case PRIMARY:
+			case RESET:
+			case ROTATE:
+			case START:
+			case SYSIBM:
+			case TRANSACTION:
+			case XMLSCHEMA:
+			case ELEMENT:
+			case URL:
+			case NAMESPACE:
+			case LOCATION:
+			case SYSXSR:
+			case ALGORITHM:
+			case FIXEDLENGTH:
+			case HUFFMAN:
+			case LOB:
+			case LOG:
+			case LOGGED:
+			case MAXPARTITIONS:
+			case MAXROWS:
+			case MEMBER:
+			case MOVE:
+			case PAGE:
+			case PAGENUM:
+			case PENDING:
+			case RELATIVE:
+			case SEGSIZE:
+			case TRACKMOD:
+			case ADDRESS:
+			case ATTRIBUTES:
+			case AUTHENTICATION:
+			case AUTHID:
+			case CONTEXT:
+			case JOBNAME:
+			case OWNER:
+			case PROFILE:
+			case QUALIFIER:
+			case SERVAUTH:
+			case TRUSTED:
+			case SECTION:
+			case ACTIVE:
+			case VERSION:
+			case ALIAS:
+			case WORK:
+			case WORKFILE:
+			case SYSDEFLT:
+			case NULTERM:
+			case STRUCTURE:
+			case GENERIC:
+			case TEMPORARY:
+			case DEFER:
+			case DEFINE:
+			case EXCLUDE:
+			case GENERATE:
+			case KEYS:
+			case XMLPATTERN:
+			case SIZE:
+			case EVERY:
+			case ABSOLUTE:
+			case ACCELERATOR:
+			case EXCLUDING:
+			case INCLUDING:
+			case DEFAULTS:
+			case MODIFIERS:
+			case OPTION:
+			case PRESERVE:
+			case BOTH:
+			case DESCRIBE:
+			case LABELS:
+			case NAMES:
+			case OUTPUT:
+			case EXCHANGE:
+			case STABILIZED:
+			case STMTCACHE:
+			case STMTID:
+			case STMTTOKEN:
+			case STARTING:
+			case CATALOG_NAME:
+			case CONDITION_NUMBER:
+			case CURSOR_NAME:
+			case DB2_AUTHENTICATION_TYPE:
+			case DB2_AUTHORIZATION_ID:
+			case DB2_CONNECTION_STATE:
+			case DB2_CONNECTION_STATUS:
+			case DB2_ENCRYPTION_TYPE:
+			case DB2_ERROR_CODE1:
+			case DB2_ERROR_CODE2:
+			case DB2_ERROR_CODE3:
+			case DB2_ERROR_CODE4:
+			case DB2_GET_DIAGNOSTICS_DIAGNOSTICS:
+			case DB2_INTERNAL_ERROR_POINTER:
+			case DB2_LAST_ROW:
+			case DB2_LINE_NUMBER:
+			case DB2_MESSAGE_ID:
+			case DB2_MODULE_DETECTING_ERROR:
+			case DB2_NUMBER_PARAMETER_MARKERS:
+			case DB2_NUMBER_RESULT_SETS:
+			case DB2_NUMBER_ROWS:
+			case DB2_ORDINAL_TOKEN_:
+			case DB2_PRODUCT_ID:
+			case DB2_REASON_CODE:
+			case DB2_RETURNED_SQLCODE:
+			case DB2_RETURN_STATUS:
+			case DB2_ROW_NUMBER:
+			case DB2_SERVER_CLASS_NAME:
+			case DB2_SQL_ATTR_CURSOR_HOLD:
+			case DB2_SQL_ATTR_CURSOR_ROWSET:
+			case DB2_SQL_ATTR_CURSOR_SCROLLABLE:
+			case DB2_SQL_ATTR_CURSOR_SENSITIVITY:
+			case DB2_SQL_ATTR_CURSOR_TYPE:
+			case DB2_SQLERRD1:
+			case DB2_SQLERRD2:
+			case DB2_SQLERRD3:
+			case DB2_SQLERRD4:
+			case DB2_SQLERRD5:
+			case DB2_SQLERRD6:
+			case DB2_SQLERRD_SET:
+			case DB2_SQL_NESTING_LEVEL:
+			case DB2_TOKEN_COUNT:
+			case DIAGNOSTICS:
+			case MORE_:
+			case NUMBER:
+			case RETURNED_SQLSTATE:
+			case ROW_COUNT:
+			case SERVER_NAME:
+			case STACKED:
+			case CREATETAB:
+			case CREATETS:
+			case DBADM:
+			case DBCTRL:
+			case DBMAINT:
+			case DISPLAYDB:
+			case IMAGCOPY:
+			case LOAD:
+			case PACKADM:
+			case RECOVERDB:
+			case REORG:
+			case REPAIR:
+			case STARTDB:
+			case STATS:
+			case STOPDB:
+			case BIND:
+			case ALTERIN:
+			case CREATEIN:
+			case DROPIN:
+			case USAGE:
+			case ACCESSCTRL:
+			case BINDADD:
+			case BINDAGENT:
+			case BSDS:
+			case CREATEALIAS:
+			case CREATEDBA:
+			case CREATEDBC:
+			case CREATE_SECURE_OBJECT:
+			case CREATESG:
+			case CREATETMTAB:
+			case DATAACCESS:
+			case DEBUGSESSION:
+			case DISPLAY:
+			case MONITOR1:
+			case MONITOR2:
+			case RECOVER:
+			case SQLADM:
+			case STOPALL:
+			case STOSPACE:
+			case SYSADM:
+			case SYSCTRL:
+			case SYSOPR:
+			case TRACE:
+			case UNLOAD:
+			case WRITE:
+			case DEPENDENT:
+			case RETAIN:
+			case CURSORS:
+			case PASSWORD:
+			case HINT:
+			case TRANSFER:
+			case OWNERSHIP:
+			case FOUND:
+			case SQLERROR:
+			case SQLWARNING:
+			case WITHIN:
+			case EMPTY:
+			case XMLBINARY:
+			case BASE64:
+			case XMLDECLARATION:
+			case REFERENCE:
+			case RETURNING:
+			case ABS:
+			case ABSVAL:
+			case ACOS:
+			case ADD_DAYS:
+			case ADD_MONTHS:
+			case ARRAY_DELETE:
+			case ARRAY_FIRST:
+			case ARRAY_LAST:
+			case ARRAY_NEXT:
+			case ARRAY_PRIOR:
+			case ARRAY_TRIM:
+			case ASCII:
+			case ASCII_CHR:
+			case ASCIISTR:
+			case ASCII_STR:
+			case ASIN:
+			case ATAN:
+			case ATAN2:
+			case ATANH:
+			case BIGINT:
+			case BINARY:
+			case BITAND:
+			case BITANDNOT:
+			case BITNOT:
+			case BITOR:
+			case BITXOR:
+			case BLOB:
+			case BTRIM:
+			case CARDINALITY:
+			case CCSID_ENCODING:
+			case CEIL:
+			case CEILING:
+			case CHAR9:
+			case CHARACTER_LENGTH:
+			case CHAR_LENGTH:
+			case CHR:
+			case CLOB:
+			case COALESCE:
+			case COLLATION_KEY:
+			case COMPARE_DECFLOAT:
+			case COS:
+			case COSH:
+			case DATE:
+			case DAYOFMONTH:
+			case DAYOFWEEK:
+			case DAYOFWEEK_ISO:
+			case DAYOFYEAR:
+			case DAYS_BETWEEN:
+			case DBCLOB:
+			case DEC:
+			case DECFLOAT:
+			case DECFLOAT_FORMAT:
+			case DECFLOAT_SORTKEY:
+			case DECIMAL:
+			case DECODE:
+			case DECRYPT_BINARY:
+			case DECRYPT_BIT:
+			case DECRYPT_CHAR:
+			case DECRYPT_DATAKEY_BIGINT:
+			case DECRYPT_DATAKEY_BIT:
+			case DECRYPT_DATAKEY_CLOB:
+			case DECRYPT_DATAKEY_DBCLOB:
+			case DECRYPT_DATAKEY_DECIMAL:
+			case DECRYPT_DATAKEY_INTEGER:
+			case DECRYPT_DATAKEY_VARCHAR:
+			case DECRYPT_DATAKEY_VARGRAPHIC:
+			case DECRYPT_DB:
+			case DEGREES:
+			case DIFFERENCE:
+			case DIGITS:
+			case DOUBLE_PRECISION:
+			case DSN_XMLVALIDATE:
+			case EBCDIC_CHR:
+			case EBCDIC_STR:
+			case ENCRYPT_DATAKEY:
+			case ENCRYPT_TDES:
+			case EXP:
+			case EXTRACT:
+			case FLOAT:
+			case FLOOR:
+			case GENERATE_UNIQUE:
+			case GENERATE_UNIQUE_BINARY:
+			case GETHINT:
+			case GETVARIABLE:
+			case GRAPHIC:
+			case GREATEST:
+			case HASH:
+			case HASH_CRC32:
+			case HASH_MD5:
+			case HASH_SHA1:
+			case HASH_SHA256:
+			case HEX:
+			case IDENTITY_VAL_LOCAL:
+			case IFNULL:
+			case INSTR:
+			case INT:
+			case INTEGER:
+			case JULIAN_DAY:
+			case LAST_DAY:
+			case LCASE:
+			case LEAST:
+			case LENGTH:
+			case LN:
+			case LOCATE:
+			case LOCATE_IN_STRING:
+			case LOG10:
+			case LOWER:
+			case LPAD:
+			case LTRIM:
+			case MAX:
+			case MAX_CARDINALITY:
+			case MIDNIGHT_SECONDS:
+			case MIN:
+			case MINUTE:
+			case MOD:
+			case MONTHS_BETWEEN:
+			case MQREAD:
+			case MQREADCLOB:
+			case MQRECEIVE:
+			case MQRECEIVECLOB:
+			case MQSEND:
+			case MULTIPLY_ALT:
+			case NEXT_DAY:
+			case NEXT_MONTH:
+			case NORMALIZE_DECFLOAT:
+			case NORMALIZE_STRING:
+			case NULLIF:
+			case NVL:
+			case OVERLAY:
+			case PACK:
+			case POSITION:
+			case POSSTR:
+			case POW:
+			case POWER:
+			case QUANTIZE:
+			case QUARTER:
+			case RADIANS:
+			case RAISE_ERROR:
+			case RAND:
+			case RANDOM:
+			case REAL:
+			case REGEXP_COUNT:
+			case REGEXP_INSTR:
+			case REGEXP_LIKE:
+			case REGEXP_REPLACE:
+			case REGEXP_SUBSTR:
+			case REPLACE:
+			case RID:
+			case ROUND:
+			case ROUND_TIMESTAMP:
+			case ROWID:
+			case RPAD:
+			case RTRIM:
+			case SCORE:
+			case SIGN:
+			case SIN:
+			case SINH:
+			case SMALLINT:
+			case SOAPHTTPC:
+			case SOAPHTTPNC:
+			case SOAPHTTPNV:
+			case SOAPHTTPV:
+			case SOUNDEX:
+			case SPACE:
+			case SQRT:
+			case STRIP:
+			case STRLEFT:
+			case STRPOS:
+			case STRRIGHT:
+			case SUBSTR:
+			case SUBSTRING:
+			case TAN:
+			case TANH:
+			case TIME:
+			case TIMESTAMP:
+			case TIMESTAMPADD:
+			case TIMESTAMPDIFF:
+			case TIMESTAMP_FORMAT:
+			case TIMESTAMP_ISO:
+			case TIMESTAMP_TZ:
+			case TO_CHAR:
+			case TO_CLOB:
+			case TO_DATE:
+			case TO_NUMBER:
+			case TOTALORDER:
+			case TO_TIMESTAMP:
+			case TRANSLATE:
+			case TRIM:
+			case TRIM_ARRAY:
+			case TRUNC:
+			case TRUNC_TIMESTAMP:
+			case UCASE:
+			case UNICODE:
+			case UNICODE_STR:
+			case UNISTR:
+			case UPPER:
+			case VARBINARY:
+			case VARCHAR:
+			case VARCHAR9:
+			case VARCHAR_BIT_FORMAT:
+			case VARCHAR_FORMAT:
+			case VARGRAPHIC:
+			case VERIFY_GROUP_FOR_USER:
+			case VERIFY_ROLE_FOR_USER:
+			case VERIFY_TRUSTED_CONTEXT_ROLE_FOR_USER:
+			case WEEK:
+			case WEEK_ISO:
+			case WRAP:
+			case XMLATTRIBUTES:
+			case XMLCOMMENT:
+			case XMLCONCAT:
+			case XMLDOCUMENT:
+			case XMLELEMENT:
+			case XMLFOREST:
+			case XMLMODIFY:
+			case XMLPARSE:
+			case XMLPI:
+			case XMLQUERY:
+			case XMLSERIALIZE:
+			case XMLTEXT:
+			case XMLXSROBJECTID:
+			case XSLTRANSFORM:
+			case CURRENT_ACCELERATOR:
+			case CURRENT_APPLICATION_COMPATIBILITY:
+			case CURRENT_APPLICATION_ENCODING_SCHEME:
+			case CURRENT_CLIENT_ACCTNG:
+			case CURRENT_CLIENT_APPLNAME:
+			case CURRENT_CLIENT_CORR_TOKEN:
+			case CURRENT_CLIENT_USERID:
+			case CURRENT_CLIENT_WRKSTNNAME:
+			case CURRENT_DATE:
+			case CURRENT_DEBUG_MODE:
+			case CURRENT_DECFLOAT_ROUNDING_MODE:
+			case CURRENT_DEGREE:
+			case CURRENT_EXPLAIN_MODE:
+			case CURRENT_GET_ACCEL_ARCHIVE:
+			case CURRENT_LOCALE_LC_CTYPE:
+			case CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION:
+			case CURRENT_MEMBER:
+			case CURRENT_OPTIMIZATION_HINT:
+			case CURRENT_PACKAGE_PATH:
+			case CURRENT_PACKAGESET:
+			case CURRENT_PATH:
+			case CURRENT_PRECISION:
+			case CURRENT_QUERY_ACCELERATION:
+			case CURRENT_QUERY_ACCELERATION_WAITFORDATA:
+			case CURRENT_REFRESH_AGE:
+			case CURRENT_ROUTINE_VERSION:
+			case CURRENT_RULES:
+			case CURRENT_SCHEMA:
+			case CURRENT_SERVER:
+			case CURRENT_SQLID:
+			case CURRENT_TEMPORAL_BUSINESS_TIME:
+			case CURRENT_TEMPORAL_SYSTEM_TIME:
+			case CURRENT_TIME:
+			case CURRENT_TIMESTAMP:
+			case CURRENT_TIME_ZONE:
+			case ENCRYPTION_PASSWORD:
+			case SESSION_TIME_ZONE:
+			case SESSION_USER:
+			case USER:
+			case ADMIN_TASK_LIST:
+			case ADMIN_TASK_OUTPUT:
+			case ADMIN_TASK_STATUS:
+			case BLOCKING_THREADS:
+			case MQREADALL:
+			case MQREADALLCLOB:
+			case MQRECEIVEALL:
+			case MQRECEIVEALLCLOB:
+			case XMLTABLE:
+			case SQLIDENTIFIER:
+				{
+				{
+				setState(5724);
+				columnName();
+				setState(5725);
+				match(EQ);
+				setState(5726);
+				valuesList1();
+				setState(5734);
+				_errHandler.sync(this);
+				_alt = getInterpreter().adaptivePredict(_input,622,_ctx);
+				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+					if ( _alt==1 ) {
+						{
+						{
+						setState(5727);
+						match(COMMA);
+						setState(5728);
+						columnName();
+						setState(5729);
+						match(EQ);
+						setState(5730);
+						valuesList1();
+						}
+						} 
+					}
+					setState(5736);
+					_errHandler.sync(this);
+					_alt = getInterpreter().adaptivePredict(_input,622,_ctx);
+				}
+				}
+				}
+				break;
+			case LPAREN:
+				{
+				{
+				setState(5737);
+				match(LPAREN);
+				setState(5738);
+				columnName();
+				setState(5743);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				while (_la==COMMA) {
+					{
+					{
+					setState(5739);
+					match(COMMA);
+					setState(5740);
+					columnName();
+					}
+					}
+					setState(5745);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+				}
+				setState(5746);
+				match(RPAREN);
+				setState(5747);
+				match(EQ);
+				setState(5748);
+				match(LPAREN);
+				setState(5758);
+				_errHandler.sync(this);
+				switch ( getInterpreter().adaptivePredict(_input,625,_ctx) ) {
+				case 1:
+					{
+					{
+					setState(5749);
+					valuesList1();
+					setState(5754);
+					_errHandler.sync(this);
+					_la = _input.LA(1);
+					while (_la==COMMA) {
+						{
+						{
+						setState(5750);
+						match(COMMA);
+						setState(5751);
+						valuesList1();
+						}
+						}
+						setState(5756);
+						_errHandler.sync(this);
+						_la = _input.LA(1);
+					}
+					}
+					}
+					break;
+				case 2:
+					{
+					setState(5757);
+					fullSelect();
+					}
+					break;
+				}
+				setState(5760);
+				match(RPAREN);
+				}
+				}
+				break;
+			default:
+				throw new NoViableAltException(this);
+			}
+			}
+		}
+		catch (RecognitionException re) {
+			_localctx.exception = re;
+			_errHandler.reportError(this, re);
+			_errHandler.recover(this, re);
+		}
+		finally {
+			exitRule();
+		}
+		return _localctx;
+	}
+
 	public static class SetAssignmentClauseContext extends ParserRuleContext {
 		public ArrayElementSpecificationContext arrayElementSpecification() {
 			return getRuleContext(ArrayElementSpecificationContext.class,0);
@@ -53774,33 +54912,33 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetAssignmentClauseContext setAssignmentClause() throws RecognitionException {
 		SetAssignmentClauseContext _localctx = new SetAssignmentClauseContext(_ctx, getState());
-		enterRule(_localctx, 624, RULE_setAssignmentClause);
+		enterRule(_localctx, 626, RULE_setAssignmentClause);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(5785);
+			setState(5825);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,629,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,634,_ctx) ) {
 			case 1:
 				{
 				{
-				setState(5724);
+				setState(5764);
 				arrayElementSpecification();
-				setState(5725);
+				setState(5765);
 				match(EQ);
-				setState(5728);
+				setState(5768);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,622,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,627,_ctx) ) {
 				case 1:
 					{
-					setState(5726);
+					setState(5766);
 					expression();
 					}
 					break;
 				case 2:
 					{
-					setState(5727);
+					setState(5767);
 					match(NULL);
 					}
 					break;
@@ -53811,29 +54949,29 @@ public class DB2zSQLParser extends Parser {
 			case 2:
 				{
 				{
-				setState(5730);
+				setState(5770);
 				setAssignmentTargetVariable();
-				setState(5731);
+				setState(5771);
 				match(EQ);
-				setState(5732);
+				setState(5772);
 				valuesList1();
-				setState(5740);
+				setState(5780);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(5733);
+					setState(5773);
 					match(COMMA);
-					setState(5734);
+					setState(5774);
 					setAssignmentTargetVariable();
-					setState(5735);
+					setState(5775);
 					match(EQ);
-					setState(5736);
+					setState(5776);
 					valuesList1();
 					}
 					}
-					setState(5742);
+					setState(5782);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
@@ -53843,58 +54981,58 @@ public class DB2zSQLParser extends Parser {
 			case 3:
 				{
 				{
-				setState(5743);
+				setState(5783);
 				match(LPAREN);
-				setState(5744);
+				setState(5784);
 				setAssignmentTargetVariable();
-				setState(5749);
+				setState(5789);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				while (_la==COMMA) {
 					{
 					{
-					setState(5745);
+					setState(5785);
 					match(COMMA);
-					setState(5746);
+					setState(5786);
 					setAssignmentTargetVariable();
 					}
 					}
-					setState(5751);
+					setState(5791);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 				}
-				setState(5752);
+				setState(5792);
 				match(RPAREN);
-				setState(5753);
+				setState(5793);
 				match(EQ);
-				setState(5754);
+				setState(5794);
 				match(LPAREN);
-				setState(5781);
+				setState(5821);
 				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,628,_ctx) ) {
+				switch ( getInterpreter().adaptivePredict(_input,633,_ctx) ) {
 				case 1:
 					{
-					setState(5764);
+					setState(5804);
 					_errHandler.sync(this);
-					switch ( getInterpreter().adaptivePredict(_input,626,_ctx) ) {
+					switch ( getInterpreter().adaptivePredict(_input,631,_ctx) ) {
 					case 1:
 						{
 						{
-						setState(5755);
+						setState(5795);
 						valuesList1();
-						setState(5760);
+						setState(5800);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 						while (_la==COMMA) {
 							{
 							{
-							setState(5756);
+							setState(5796);
 							match(COMMA);
-							setState(5757);
+							setState(5797);
 							valuesList1();
 							}
 							}
-							setState(5762);
+							setState(5802);
 							_errHandler.sync(this);
 							_la = _input.LA(1);
 						}
@@ -53903,7 +55041,7 @@ public class DB2zSQLParser extends Parser {
 						break;
 					case 2:
 						{
-						setState(5763);
+						setState(5803);
 						fullSelect();
 						}
 						break;
@@ -53912,16 +55050,16 @@ public class DB2zSQLParser extends Parser {
 					break;
 				case 2:
 					{
-					setState(5766);
+					setState(5806);
 					subSelect();
 					}
 					break;
 				case 3:
 					{
 					{
-					setState(5767);
+					setState(5807);
 					match(VALUES);
-					setState(5768);
+					setState(5808);
 					valuesList1();
 					}
 					}
@@ -53929,35 +55067,35 @@ public class DB2zSQLParser extends Parser {
 				case 4:
 					{
 					{
-					setState(5769);
+					setState(5809);
 					match(VALUES);
-					setState(5770);
+					setState(5810);
 					match(LPAREN);
-					setState(5771);
+					setState(5811);
 					valuesList1();
-					setState(5776);
+					setState(5816);
 					_errHandler.sync(this);
 					_la = _input.LA(1);
 					while (_la==COMMA) {
 						{
 						{
-						setState(5772);
+						setState(5812);
 						match(COMMA);
-						setState(5773);
+						setState(5813);
 						valuesList1();
 						}
 						}
-						setState(5778);
+						setState(5818);
 						_errHandler.sync(this);
 						_la = _input.LA(1);
 					}
-					setState(5779);
+					setState(5819);
 					match(RPAREN);
 					}
 					}
 					break;
 				}
-				setState(5783);
+				setState(5823);
 				match(RPAREN);
 				}
 				}
@@ -54013,114 +55151,8 @@ public class DB2zSQLParser extends Parser {
 
 	public final SetAssignmentTargetVariableContext setAssignmentTargetVariable() throws RecognitionException {
 		SetAssignmentTargetVariableContext _localctx = new SetAssignmentTargetVariableContext(_ctx, getState());
-		enterRule(_localctx, 626, RULE_setAssignmentTargetVariable);
+		enterRule(_localctx, 628, RULE_setAssignmentTargetVariable);
 		try {
-			enterOuterAlt(_localctx, 1);
-			{
-			setState(5792);
-			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,630,_ctx) ) {
-			case 1:
-				{
-				setState(5787);
-				globalVariableName();
-				}
-				break;
-			case 2:
-				{
-				setState(5788);
-				hostVariable();
-				}
-				break;
-			case 3:
-				{
-				setState(5789);
-				sqlParameterName();
-				}
-				break;
-			case 4:
-				{
-				setState(5790);
-				sqlVariableName();
-				}
-				break;
-			case 5:
-				{
-				setState(5791);
-				transitionVariableName();
-				}
-				break;
-			}
-			}
-		}
-		catch (RecognitionException re) {
-			_localctx.exception = re;
-			_errHandler.reportError(this, re);
-			_errHandler.recover(this, re);
-		}
-		finally {
-			exitRule();
-		}
-		return _localctx;
-	}
-
-	public static class AssignmentClauseContext extends ParserRuleContext {
-		public List<TerminalNode> RPAREN() { return getTokens(DB2zSQLParser.RPAREN); }
-		public TerminalNode RPAREN(int i) {
-			return getToken(DB2zSQLParser.RPAREN, i);
-		}
-		public List<ColumnNameContext> columnName() {
-			return getRuleContexts(ColumnNameContext.class);
-		}
-		public ColumnNameContext columnName(int i) {
-			return getRuleContext(ColumnNameContext.class,i);
-		}
-		public List<TerminalNode> EQ() { return getTokens(DB2zSQLParser.EQ); }
-		public TerminalNode EQ(int i) {
-			return getToken(DB2zSQLParser.EQ, i);
-		}
-		public List<ValuesList1Context> valuesList1() {
-			return getRuleContexts(ValuesList1Context.class);
-		}
-		public ValuesList1Context valuesList1(int i) {
-			return getRuleContext(ValuesList1Context.class,i);
-		}
-		public List<TerminalNode> LPAREN() { return getTokens(DB2zSQLParser.LPAREN); }
-		public TerminalNode LPAREN(int i) {
-			return getToken(DB2zSQLParser.LPAREN, i);
-		}
-		public FullSelectContext fullSelect() {
-			return getRuleContext(FullSelectContext.class,0);
-		}
-		public List<TerminalNode> COMMA() { return getTokens(DB2zSQLParser.COMMA); }
-		public TerminalNode COMMA(int i) {
-			return getToken(DB2zSQLParser.COMMA, i);
-		}
-		public AssignmentClauseContext(ParserRuleContext parent, int invokingState) {
-			super(parent, invokingState);
-		}
-		@Override public int getRuleIndex() { return RULE_assignmentClause; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAssignmentClause(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAssignmentClause(this);
-		}
-		@Override
-		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAssignmentClause(this);
-			else return visitor.visitChildren(this);
-		}
-	}
-
-	public final AssignmentClauseContext assignmentClause() throws RecognitionException {
-		AssignmentClauseContext _localctx = new AssignmentClauseContext(_ctx, getState());
-		enterRule(_localctx, 628, RULE_assignmentClause);
-		int _la;
-		try {
-			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
 			setState(5832);
@@ -54128,102 +55160,32 @@ public class DB2zSQLParser extends Parser {
 			switch ( getInterpreter().adaptivePredict(_input,635,_ctx) ) {
 			case 1:
 				{
-				{
-				setState(5794);
-				columnName();
-				setState(5795);
-				match(EQ);
-				setState(5796);
-				valuesList1();
-				setState(5804);
-				_errHandler.sync(this);
-				_alt = getInterpreter().adaptivePredict(_input,631,_ctx);
-				while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
-					if ( _alt==1 ) {
-						{
-						{
-						setState(5797);
-						match(COMMA);
-						setState(5798);
-						columnName();
-						setState(5799);
-						match(EQ);
-						setState(5800);
-						valuesList1();
-						}
-						} 
-					}
-					setState(5806);
-					_errHandler.sync(this);
-					_alt = getInterpreter().adaptivePredict(_input,631,_ctx);
-				}
-				}
+				setState(5827);
+				globalVariableName();
 				}
 				break;
 			case 2:
 				{
 				setState(5828);
-				_errHandler.sync(this);
-				switch ( getInterpreter().adaptivePredict(_input,634,_ctx) ) {
-				case 1:
-					{
-					setState(5807);
-					match(LPAREN);
-					setState(5808);
-					columnName();
-					setState(5813);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					while (_la==COMMA) {
-						{
-						{
-						setState(5809);
-						match(COMMA);
-						setState(5810);
-						columnName();
-						}
-						}
-						setState(5815);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
-					setState(5816);
-					match(RPAREN);
-					setState(5817);
-					match(EQ);
-					setState(5818);
-					match(LPAREN);
-					{
-					setState(5819);
-					valuesList1();
-					setState(5824);
-					_errHandler.sync(this);
-					_la = _input.LA(1);
-					while (_la==COMMA) {
-						{
-						{
-						setState(5820);
-						match(COMMA);
-						setState(5821);
-						valuesList1();
-						}
-						}
-						setState(5826);
-						_errHandler.sync(this);
-						_la = _input.LA(1);
-					}
-					}
-					}
-					break;
-				case 2:
-					{
-					setState(5827);
-					fullSelect();
-					}
-					break;
+				hostVariable();
 				}
+				break;
+			case 3:
+				{
+				setState(5829);
+				sqlParameterName();
+				}
+				break;
+			case 4:
+				{
 				setState(5830);
-				match(RPAREN);
+				sqlVariableName();
+				}
+				break;
+			case 5:
+				{
+				setState(5831);
+				transitionVariableName();
 				}
 				break;
 			}
@@ -108911,29 +109873,29 @@ public class DB2zSQLParser extends Parser {
 		"\\\3\\\5\\\u0b83\n\\\3\\\3\\\3\\\3\\\3\\\3\\\3\\\3\\\3\\\5\\\u0b8e\n\\"+
 		"\3]\3]\3]\3]\3]\3]\3]\3]\3]\3]\3]\3]\5]\u0b9c\n]\3^\3^\5^\u0ba0\n^\3^"+
 		"\3^\3^\5^\u0ba5\n^\5^\u0ba7\n^\3_\3_\3_\5_\u0bac\n_\3_\3_\3_\3_\3_\3_"+
-		"\3_\3_\6_\u0bb6\n_\r_\16_\u0bb7\3`\3`\3`\3`\5`\u0bbe\n`\3a\3a\3a\5a\u0bc3"+
-		"\na\3a\3a\5a\u0bc7\na\3a\3a\3a\5a\u0bcc\na\3a\3a\5a\u0bd0\na\5a\u0bd2"+
-		"\na\3b\3b\3b\5b\u0bd7\nb\3b\3b\5b\u0bdb\nb\3b\7b\u0bde\nb\fb\16b\u0be1"+
-		"\13b\3c\3c\3c\5c\u0be6\nc\3c\3c\3d\3d\3d\3d\3d\5d\u0bef\nd\3d\5d\u0bf2"+
-		"\nd\3d\3d\5d\u0bf6\nd\3e\3e\3e\5e\u0bfb\ne\3e\3e\5e\u0bff\ne\3e\5e\u0c02"+
-		"\ne\3e\7e\u0c05\ne\fe\16e\u0c08\13e\3f\3f\3f\3g\3g\3g\5g\u0c10\ng\3g\3"+
-		"g\5g\u0c14\ng\3h\3h\3h\3h\3h\3h\3h\3h\3h\3i\3i\5i\u0c21\ni\3i\3i\3i\5"+
-		"i\u0c26\ni\3i\3i\3i\5i\u0c2b\ni\3i\3i\5i\u0c2f\ni\3i\5i\u0c32\ni\3j\3"+
-		"j\5j\u0c36\nj\3k\3k\3k\3k\3k\3k\7k\u0c3e\nk\fk\16k\u0c41\13k\3k\3k\5k"+
-		"\u0c45\nk\3l\3l\3l\3l\3l\3l\5l\u0c4d\nl\3l\3l\3l\5l\u0c52\nl\7l\u0c54"+
-		"\nl\fl\16l\u0c57\13l\3l\5l\u0c5a\nl\3l\3l\3l\3l\7l\u0c60\nl\fl\16l\u0c63"+
-		"\13l\3l\5l\u0c66\nl\3m\3m\3m\3m\3m\5m\u0c6d\nm\3m\3m\3m\3m\5m\u0c73\n"+
-		"m\3m\5m\u0c76\nm\3m\5m\u0c79\nm\3n\3n\3o\3o\3o\3o\3o\3o\3o\3o\3o\3o\3"+
-		"o\3o\5o\u0c89\no\3o\3o\3o\5o\u0c8e\no\3p\3p\3p\3p\3p\5p\u0c95\np\3q\3"+
-		"q\3q\3q\3q\3q\3q\7q\u0c9e\nq\fq\16q\u0ca1\13q\3q\5q\u0ca4\nq\3q\3q\3q"+
-		"\3q\7q\u0caa\nq\fq\16q\u0cad\13q\3q\5q\u0cb0\nq\3r\3r\3r\3r\7r\u0cb6\n"+
-		"r\fr\16r\u0cb9\13r\3r\3r\3r\3r\3r\7r\u0cc0\nr\fr\16r\u0cc3\13r\3r\3r\3"+
-		"r\3r\7r\u0cc9\nr\fr\16r\u0ccc\13r\3r\5r\u0ccf\nr\3s\3s\3s\3s\3s\3s\3s"+
-		"\7s\u0cd8\ns\fs\16s\u0cdb\13s\3s\3s\3s\3s\3s\3s\3s\7s\u0ce4\ns\fs\16s"+
-		"\u0ce7\13s\3s\3s\3s\3s\7s\u0ced\ns\fs\16s\u0cf0\13s\3s\5s\u0cf3\ns\5s"+
-		"\u0cf5\ns\3s\3s\3s\3s\7s\u0cfb\ns\fs\16s\u0cfe\13s\3s\5s\u0d01\ns\3t\3"+
-		"t\3t\3t\3t\7t\u0d08\nt\ft\16t\u0d0b\13t\5t\u0d0d\nt\3t\3t\3t\3t\3t\7t"+
-		"\u0d14\nt\ft\16t\u0d17\13t\3t\3t\3t\3t\7t\u0d1d\nt\ft\16t\u0d20\13t\3"+
+		"\3_\3_\6_\u0bb6\n_\r_\16_\u0bb7\3`\3`\3`\3a\3a\3a\3a\5a\u0bc1\na\3b\3"+
+		"b\3b\5b\u0bc6\nb\3b\3b\5b\u0bca\nb\3b\3b\3b\5b\u0bcf\nb\3b\3b\5b\u0bd3"+
+		"\nb\5b\u0bd5\nb\3c\3c\3c\5c\u0bda\nc\3c\3c\5c\u0bde\nc\3c\7c\u0be1\nc"+
+		"\fc\16c\u0be4\13c\3d\3d\3d\5d\u0be9\nd\3d\3d\3e\3e\3e\3e\3e\5e\u0bf2\n"+
+		"e\3e\5e\u0bf5\ne\3e\3e\5e\u0bf9\ne\3f\3f\3f\5f\u0bfe\nf\3f\3f\5f\u0c02"+
+		"\nf\3f\5f\u0c05\nf\3f\7f\u0c08\nf\ff\16f\u0c0b\13f\3g\3g\3g\5g\u0c10\n"+
+		"g\3g\3g\5g\u0c14\ng\3h\3h\3h\3h\3h\3h\3h\3h\3h\3i\3i\5i\u0c21\ni\3i\3"+
+		"i\3i\5i\u0c26\ni\3i\3i\3i\5i\u0c2b\ni\3i\3i\5i\u0c2f\ni\3i\5i\u0c32\n"+
+		"i\3j\3j\5j\u0c36\nj\3k\3k\3k\3k\3k\3k\7k\u0c3e\nk\fk\16k\u0c41\13k\3k"+
+		"\3k\5k\u0c45\nk\3l\3l\3l\3l\3l\3l\5l\u0c4d\nl\3l\3l\3l\5l\u0c52\nl\7l"+
+		"\u0c54\nl\fl\16l\u0c57\13l\3l\5l\u0c5a\nl\3l\3l\3l\3l\7l\u0c60\nl\fl\16"+
+		"l\u0c63\13l\3l\5l\u0c66\nl\3m\3m\3m\3m\3m\5m\u0c6d\nm\3m\3m\3m\3m\5m\u0c73"+
+		"\nm\3m\5m\u0c76\nm\3m\5m\u0c79\nm\3n\3n\3o\3o\3o\3o\3o\3o\3o\3o\3o\3o"+
+		"\3o\3o\5o\u0c89\no\3o\3o\3o\5o\u0c8e\no\3p\3p\3p\3p\3p\5p\u0c95\np\3q"+
+		"\3q\3q\3q\3q\3q\3q\7q\u0c9e\nq\fq\16q\u0ca1\13q\3q\5q\u0ca4\nq\3q\3q\3"+
+		"q\3q\7q\u0caa\nq\fq\16q\u0cad\13q\3q\5q\u0cb0\nq\3r\3r\3r\3r\7r\u0cb6"+
+		"\nr\fr\16r\u0cb9\13r\3r\3r\3r\3r\3r\7r\u0cc0\nr\fr\16r\u0cc3\13r\3r\3"+
+		"r\3r\3r\7r\u0cc9\nr\fr\16r\u0ccc\13r\3r\5r\u0ccf\nr\3s\3s\3s\3s\3s\3s"+
+		"\3s\7s\u0cd8\ns\fs\16s\u0cdb\13s\3s\3s\3s\3s\3s\3s\3s\7s\u0ce4\ns\fs\16"+
+		"s\u0ce7\13s\3s\3s\3s\3s\7s\u0ced\ns\fs\16s\u0cf0\13s\3s\5s\u0cf3\ns\5"+
+		"s\u0cf5\ns\3s\3s\3s\3s\7s\u0cfb\ns\fs\16s\u0cfe\13s\3s\5s\u0d01\ns\3t"+
+		"\3t\3t\3t\3t\7t\u0d08\nt\ft\16t\u0d0b\13t\5t\u0d0d\nt\3t\3t\3t\3t\3t\7"+
+		"t\u0d14\nt\ft\16t\u0d17\13t\3t\3t\3t\3t\7t\u0d1d\nt\ft\16t\u0d20\13t\3"+
 		"t\5t\u0d23\nt\3u\3u\3u\3u\7u\u0d29\nu\fu\16u\u0d2c\13u\3u\3u\3u\3u\3u"+
 		"\7u\u0d33\nu\fu\16u\u0d36\13u\3u\3u\3u\3u\7u\u0d3c\nu\fu\16u\u0d3f\13"+
 		"u\3u\5u\u0d42\nu\3v\3v\3v\3v\7v\u0d48\nv\fv\16v\u0d4b\13v\3v\3v\3v\3v"+
@@ -109218,22 +110180,22 @@ public class DB2zSQLParser extends Parser {
 		"\5\u0137\u164c\n\u0137\3\u0137\3\u0137\5\u0137\u1650\n\u0137\3\u0138\5"+
 		"\u0138\u1653\n\u0138\3\u0138\3\u0138\3\u0138\5\u0138\u1658\n\u0138\3\u0139"+
 		"\3\u0139\3\u0139\5\u0139\u165d\n\u0139\3\u013a\3\u013a\3\u013a\3\u013a"+
-		"\5\u013a\u1663\n\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a"+
-		"\3\u013a\3\u013a\7\u013a\u166d\n\u013a\f\u013a\16\u013a\u1670\13\u013a"+
-		"\3\u013a\3\u013a\3\u013a\3\u013a\7\u013a\u1676\n\u013a\f\u013a\16\u013a"+
-		"\u1679\13\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a\7\u013a"+
-		"\u1681\n\u013a\f\u013a\16\u013a\u1684\13\u013a\3\u013a\5\u013a\u1687\n"+
-		"\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a"+
-		"\7\u013a\u1691\n\u013a\f\u013a\16\u013a\u1694\13\u013a\3\u013a\3\u013a"+
-		"\5\u013a\u1698\n\u013a\3\u013a\3\u013a\5\u013a\u169c\n\u013a\3\u013b\3"+
-		"\u013b\3\u013b\3\u013b\3\u013b\5\u013b\u16a3\n\u013b\3\u013c\3\u013c\3"+
-		"\u013c\3\u013c\3\u013c\3\u013c\3\u013c\3\u013c\7\u013c\u16ad\n\u013c\f"+
-		"\u013c\16\u013c\u16b0\13\u013c\3\u013c\3\u013c\3\u013c\3\u013c\7\u013c"+
-		"\u16b6\n\u013c\f\u013c\16\u013c\u16b9\13\u013c\3\u013c\3\u013c\3\u013c"+
-		"\3\u013c\3\u013c\3\u013c\7\u013c\u16c1\n\u013c\f\u013c\16\u013c\u16c4"+
-		"\13\u013c\3\u013c\5\u013c\u16c7\n\u013c\3\u013c\3\u013c\5\u013c\u16cb"+
-		"\n\u013c\3\u013d\3\u013d\3\u013d\3\u013d\3\u013d\7\u013d\u16d2\n\u013d"+
-		"\f\u013d\16\u013d\u16d5\13\u013d\3\u013e\3\u013e\3\u013f\3\u013f\3\u013f"+
+		"\3\u013a\3\u013a\3\u013a\3\u013a\7\u013a\u1667\n\u013a\f\u013a\16\u013a"+
+		"\u166a\13\u013a\3\u013a\3\u013a\3\u013a\3\u013a\7\u013a\u1670\n\u013a"+
+		"\f\u013a\16\u013a\u1673\13\u013a\3\u013a\3\u013a\3\u013a\3\u013a\3\u013a"+
+		"\3\u013a\7\u013a\u167b\n\u013a\f\u013a\16\u013a\u167e\13\u013a\3\u013a"+
+		"\5\u013a\u1681\n\u013a\3\u013a\3\u013a\5\u013a\u1685\n\u013a\3\u013b\3"+
+		"\u013b\3\u013b\3\u013b\5\u013b\u168b\n\u013b\3\u013b\3\u013b\3\u013b\3"+
+		"\u013b\3\u013b\3\u013b\3\u013b\3\u013b\7\u013b\u1695\n\u013b\f\u013b\16"+
+		"\u013b\u1698\13\u013b\3\u013b\3\u013b\3\u013b\3\u013b\7\u013b\u169e\n"+
+		"\u013b\f\u013b\16\u013b\u16a1\13\u013b\3\u013b\3\u013b\3\u013b\3\u013b"+
+		"\3\u013b\3\u013b\7\u013b\u16a9\n\u013b\f\u013b\16\u013b\u16ac\13\u013b"+
+		"\3\u013b\5\u013b\u16af\n\u013b\3\u013b\3\u013b\3\u013b\3\u013b\3\u013b"+
+		"\3\u013b\3\u013b\3\u013b\7\u013b\u16b9\n\u013b\f\u013b\16\u013b\u16bc"+
+		"\13\u013b\3\u013b\3\u013b\5\u013b\u16c0\n\u013b\3\u013b\3\u013b\5\u013b"+
+		"\u16c4\n\u013b\3\u013c\3\u013c\3\u013c\3\u013c\3\u013c\5\u013c\u16cb\n"+
+		"\u013c\3\u013d\3\u013d\3\u013d\3\u013d\3\u013d\7\u013d\u16d2\n\u013d\f"+
+		"\u013d\16\u013d\u16d5\13\u013d\3\u013e\3\u013e\3\u013f\3\u013f\3\u013f"+
 		"\3\u013f\3\u013f\7\u013f\u16de\n\u013f\f\u013f\16\u013f\u16e1\13\u013f"+
 		"\3\u013f\3\u013f\3\u013f\3\u013f\3\u013f\3\u013f\3\u013f\7\u013f\u16ea"+
 		"\n\u013f\f\u013f\16\u013f\u16ed\13\u013f\3\u013f\3\u013f\5\u013f\u16f1"+
@@ -109988,9 +110950,9 @@ public class DB2zSQLParser extends Parser {
 		"\u0ae8\3\2\2\2\u00a8\u0b0b\3\2\2\2\u00aa\u0b16\3\2\2\2\u00ac\u0b47\3\2"+
 		"\2\2\u00ae\u0b57\3\2\2\2\u00b0\u0b68\3\2\2\2\u00b2\u0b6f\3\2\2\2\u00b4"+
 		"\u0b79\3\2\2\2\u00b6\u0b80\3\2\2\2\u00b8\u0b9b\3\2\2\2\u00ba\u0b9d\3\2"+
-		"\2\2\u00bc\u0ba8\3\2\2\2\u00be\u0bb9\3\2\2\2\u00c0\u0bbf\3\2\2\2\u00c2"+
-		"\u0bd3\3\2\2\2\u00c4\u0be2\3\2\2\2\u00c6\u0be9\3\2\2\2\u00c8\u0bf7\3\2"+
-		"\2\2\u00ca\u0c09\3\2\2\2\u00cc\u0c0c\3\2\2\2\u00ce\u0c15\3\2\2\2\u00d0"+
+		"\2\2\u00bc\u0ba8\3\2\2\2\u00be\u0bb9\3\2\2\2\u00c0\u0bbc\3\2\2\2\u00c2"+
+		"\u0bc2\3\2\2\2\u00c4\u0bd6\3\2\2\2\u00c6\u0be5\3\2\2\2\u00c8\u0bec\3\2"+
+		"\2\2\u00ca\u0bfa\3\2\2\2\u00cc\u0c0c\3\2\2\2\u00ce\u0c15\3\2\2\2\u00d0"+
 		"\u0c1e\3\2\2\2\u00d2\u0c35\3\2\2\2\u00d4\u0c37\3\2\2\2\u00d6\u0c46\3\2"+
 		"\2\2\u00d8\u0c67\3\2\2\2\u00da\u0c7a\3\2\2\2\u00dc\u0c8d\3\2\2\2\u00de"+
 		"\u0c94\3\2\2\2\u00e0\u0c96\3\2\2\2\u00e2\u0cb1\3\2\2\2\u00e4\u0cd0\3\2"+
@@ -110050,8 +111012,8 @@ public class DB2zSQLParser extends Parser {
 		"\u1595\3\2\2\2\u025a\u1597\3\2\2\2\u025c\u159c\3\2\2\2\u025e\u15a3\3\2"+
 		"\2\2\u0260\u15a8\3\2\2\2\u0262\u15cb\3\2\2\2\u0264\u15e2\3\2\2\2\u0266"+
 		"\u1600\3\2\2\2\u0268\u1618\3\2\2\2\u026a\u163a\3\2\2\2\u026c\u164f\3\2"+
-		"\2\2\u026e\u1652\3\2\2\2\u0270\u165c\3\2\2\2\u0272\u169b\3\2\2\2\u0274"+
-		"\u16a2\3\2\2\2\u0276\u16ca\3\2\2\2\u0278\u16cc\3\2\2\2\u027a\u16d6\3\2"+
+		"\2\2\u026e\u1652\3\2\2\2\u0270\u165c\3\2\2\2\u0272\u1684\3\2\2\2\u0274"+
+		"\u16c3\3\2\2\2\u0276\u16ca\3\2\2\2\u0278\u16cc\3\2\2\2\u027a\u16d6\3\2"+
 		"\2\2\u027c\u16d8\3\2\2\2\u027e\u1701\3\2\2\2\u0280\u170e\3\2\2\2\u0282"+
 		"\u1714\3\2\2\2\u0284\u1718\3\2\2\2\u0286\u171d\3\2\2\2\u0288\u171f\3\2"+
 		"\2\2\u028a\u172e\3\2\2\2\u028c\u1749\3\2\2\2\u028e\u176c\3\2\2\2\u0290"+
@@ -110194,9 +111156,9 @@ public class DB2zSQLParser extends Parser {
 		"\u05f4\u060b\5\u00acW\2\u05f5\u060b\5\u00aeX\2\u05f6\u060b\5\u00b0Y\2"+
 		"\u05f7\u060b\5\u00b4[\2\u05f8\u060b\5\u00b2Z\2\u05f9\u060b\5\u00b6\\\2"+
 		"\u05fa\u060b\5\u00b8]\2\u05fb\u060b\5\u00ba^\2\u05fc\u060b\5\u00bc_\2"+
-		"\u05fd\u060b\5\u00be`\2\u05fe\u060b\5\u00c0a\2\u05ff\u060b\5\u00c2b\2"+
-		"\u0600\u060b\5\u00c4c\2\u0601\u060b\5\u00c6d\2\u0602\u060b\5\u00c8e\2"+
-		"\u0603\u060b\5\u00caf\2\u0604\u060b\5\u00ccg\2\u0605\u060b\5\u00ceh\2"+
+		"\u05fd\u060b\5\u00c0a\2\u05fe\u060b\5\u00c2b\2\u05ff\u060b\5\u00c4c\2"+
+		"\u0600\u060b\5\u00c6d\2\u0601\u060b\5\u00c8e\2\u0602\u060b\5\u00caf\2"+
+		"\u0603\u060b\5\u00be`\2\u0604\u060b\5\u00ccg\2\u0605\u060b\5\u00ceh\2"+
 		"\u0606\u060b\5\u00d0i\2\u0607\u060b\5\u00d2j\2\u0608\u060b\5\u00d6l\2"+
 		"\u0609\u060b\5\u00d8m\2\u060a\u05b2\3\2\2\2\u060a\u05b3\3\2\2\2\u060a"+
 		"\u05b4\3\2\2\2\u060a\u05b5\3\2\2\2\u060a\u05b6\3\2\2\2\u060a\u05b7\3\2"+
@@ -110772,37 +111734,37 @@ public class DB2zSQLParser extends Parser {
 		"\2\2\u0bb0\u0bb6\7\u02c3\2\2\u0bb1\u0bb2\7\u00d1\2\2\u0bb2\u0bb3\7\u0101"+
 		"\2\2\u0bb3\u0bb4\7\u02c2\2\2\u0bb4\u0bb6\7\u0173\2\2\u0bb5\u0bad\3\2\2"+
 		"\2\u0bb5\u0bb1\3\2\2\2\u0bb6\u0bb7\3\2\2\2\u0bb7\u0bb5\3\2\2\2\u0bb7\u0bb8"+
-		"\3\2\2\2\u0bb8\u00bd\3\2\2\2\u0bb9\u0bba\7\u0117\2\2\u0bba\u0bbd\7S\2"+
-		"\2\u0bbb\u0bbe\5\u04c0\u0261\2\u0bbc\u0bbe\5\u0528\u0295\2\u0bbd\u0bbb"+
-		"\3\2\2\2\u0bbd\u0bbc\3\2\2\2\u0bbe\u00bf\3\2\2\2\u0bbf\u0bc0\7\u0117\2"+
-		"\2\u0bc0\u0bc2\7\u03d3\2\2\u0bc1\u0bc3\7\b\2\2\u0bc2\u0bc1\3\2\2\2\u0bc2"+
-		"\u0bc3\3\2\2\2\u0bc3\u0bc6\3\2\2\2\u0bc4\u0bc7\7\30\2\2\u0bc5\u0bc7\5"+
-		"\u053c\u029f\2\u0bc6\u0bc4\3\2\2\2\u0bc6\u0bc5\3\2\2\2\u0bc7\u0bd1\3\2"+
-		"\2\2\u0bc8\u0bc9\7\u0146\2\2\u0bc9\u0bcb\7\u02c5\2\2\u0bca\u0bcc\7\b\2"+
-		"\2\u0bcb\u0bca\3\2\2\2\u0bcb\u0bcc\3\2\2\2\u0bcc\u0bcf\3\2\2\2\u0bcd\u0bd0"+
-		"\7\30\2\2\u0bce\u0bd0\5\u053c\u029f\2\u0bcf\u0bcd\3\2\2\2\u0bcf\u0bce"+
-		"\3\2\2\2\u0bd0\u0bd2\3\2\2\2\u0bd1\u0bc8\3\2\2\2\u0bd1\u0bd2\3\2\2\2\u0bd2"+
-		"\u00c1\3\2\2\2\u0bd3\u0bd4\7\u0117\2\2\u0bd4\u0bd6\t\f\2\2\u0bd5\u0bd7"+
-		"\7\b\2\2\u0bd6\u0bd5\3\2\2\2\u0bd6\u0bd7\3\2\2\2\u0bd7\u0bd8\3\2\2\2\u0bd8"+
-		"\u0bdf\5\u03b0\u01d9\2\u0bd9\u0bdb\7\26\2\2\u0bda\u0bd9\3\2\2\2\u0bda"+
-		"\u0bdb\3\2\2\2\u0bdb\u0bdc\3\2\2\2\u0bdc\u0bde\5\u03b0\u01d9\2\u0bdd\u0bda"+
-		"\3\2\2\2\u0bde\u0be1\3\2\2\2\u0bdf\u0bdd\3\2\2\2\u0bdf\u0be0\3\2\2\2\u0be0"+
-		"\u00c3\3\2\2\2\u0be1\u0bdf\3\2\2\2\u0be2\u0be3\7\u0117\2\2\u0be3\u0be5"+
-		"\t\r\2\2\u0be4\u0be6\7\b\2\2\u0be5\u0be4\3\2\2\2\u0be5\u0be6\3\2\2\2\u0be6"+
-		"\u0be7\3\2\2\2\u0be7\u0be8\5\u03b0\u01d9\2\u0be8\u00c5\3\2\2\2\u0be9\u0bee"+
-		"\7\u0117\2\2\u0bea\u0bef\7\u03d4\2\2\u0beb\u0bec\7\u037f\2\2\u0bec\u0bef"+
-		"\7\u014d\2\2\u0bed\u0bef\7\u014e\2\2\u0bee\u0bea\3\2\2\2\u0bee\u0beb\3"+
-		"\2\2\2\u0bee\u0bed\3\2\2\2\u0bef\u0bf1\3\2\2\2\u0bf0\u0bf2\7\b\2\2\u0bf1"+
-		"\u0bf0\3\2\2\2\u0bf1\u0bf2\3\2\2\2\u0bf2\u0bf5\3\2\2\2\u0bf3\u0bf6\5\u053c"+
-		"\u029f\2\u0bf4\u0bf6\7\30\2\2\u0bf5\u0bf3\3\2\2\2\u0bf5\u0bf4\3\2\2\2"+
-		"\u0bf6\u00c7\3\2\2\2\u0bf7\u0bf8\7\u0117\2\2\u0bf8\u0bfa\5\u042c\u0217"+
-		"\2\u0bf9\u0bfb\7\b\2\2\u0bfa\u0bf9\3\2\2\2\u0bfa\u0bfb\3\2\2\2\u0bfb\u0bfe"+
-		"\3\2\2\2\u0bfc\u0bff\5\u03b0\u01d9\2\u0bfd\u0bff\7\u00ca\2\2\u0bfe\u0bfc"+
-		"\3\2\2\2\u0bfe\u0bfd\3\2\2\2\u0bff\u0c06\3\2\2\2\u0c00\u0c02\7\26\2\2"+
-		"\u0c01\u0c00\3\2\2\2\u0c01\u0c02\3\2\2\2\u0c02\u0c03\3\2\2\2\u0c03\u0c05"+
-		"\5\u03b0\u01d9\2\u0c04\u0c01\3\2\2\2\u0c05\u0c08\3\2\2\2\u0c06\u0c04\3"+
-		"\2\2\2\u0c06\u0c07\3\2\2\2\u0c07\u00c9\3\2\2\2\u0c08\u0c06\3\2\2\2\u0c09"+
-		"\u0c0a\7\u0117\2\2\u0c0a\u0c0b\5\u0272\u013a\2\u0c0b\u00cb\3\2\2\2\u0c0c"+
+		"\3\2\2\2\u0bb8\u00bd\3\2\2\2\u0bb9\u0bba\7\u0117\2\2\u0bba\u0bbb\5\u0274"+
+		"\u013b\2\u0bbb\u00bf\3\2\2\2\u0bbc\u0bbd\7\u0117\2\2\u0bbd\u0bc0\7S\2"+
+		"\2\u0bbe\u0bc1\5\u04c0\u0261\2\u0bbf\u0bc1\5\u0528\u0295\2\u0bc0\u0bbe"+
+		"\3\2\2\2\u0bc0\u0bbf\3\2\2\2\u0bc1\u00c1\3\2\2\2\u0bc2\u0bc3\7\u0117\2"+
+		"\2\u0bc3\u0bc5\7\u03d3\2\2\u0bc4\u0bc6\7\b\2\2\u0bc5\u0bc4\3\2\2\2\u0bc5"+
+		"\u0bc6\3\2\2\2\u0bc6\u0bc9\3\2\2\2\u0bc7\u0bca\7\30\2\2\u0bc8\u0bca\5"+
+		"\u053c\u029f\2\u0bc9\u0bc7\3\2\2\2\u0bc9\u0bc8\3\2\2\2\u0bca\u0bd4\3\2"+
+		"\2\2\u0bcb\u0bcc\7\u0146\2\2\u0bcc\u0bce\7\u02c5\2\2\u0bcd\u0bcf\7\b\2"+
+		"\2\u0bce\u0bcd\3\2\2\2\u0bce\u0bcf\3\2\2\2\u0bcf\u0bd2\3\2\2\2\u0bd0\u0bd3"+
+		"\7\30\2\2\u0bd1\u0bd3\5\u053c\u029f\2\u0bd2\u0bd0\3\2\2\2\u0bd2\u0bd1"+
+		"\3\2\2\2\u0bd3\u0bd5\3\2\2\2\u0bd4\u0bcb\3\2\2\2\u0bd4\u0bd5\3\2\2\2\u0bd5"+
+		"\u00c3\3\2\2\2\u0bd6\u0bd7\7\u0117\2\2\u0bd7\u0bd9\t\f\2\2\u0bd8\u0bda"+
+		"\7\b\2\2\u0bd9\u0bd8\3\2\2\2\u0bd9\u0bda\3\2\2\2\u0bda\u0bdb\3\2\2\2\u0bdb"+
+		"\u0be2\5\u03b0\u01d9\2\u0bdc\u0bde\7\26\2\2\u0bdd\u0bdc\3\2\2\2\u0bdd"+
+		"\u0bde\3\2\2\2\u0bde\u0bdf\3\2\2\2\u0bdf\u0be1\5\u03b0\u01d9\2\u0be0\u0bdd"+
+		"\3\2\2\2\u0be1\u0be4\3\2\2\2\u0be2\u0be0\3\2\2\2\u0be2\u0be3\3\2\2\2\u0be3"+
+		"\u00c5\3\2\2\2\u0be4\u0be2\3\2\2\2\u0be5\u0be6\7\u0117\2\2\u0be6\u0be8"+
+		"\t\r\2\2\u0be7\u0be9\7\b\2\2\u0be8\u0be7\3\2\2\2\u0be8\u0be9\3\2\2\2\u0be9"+
+		"\u0bea\3\2\2\2\u0bea\u0beb\5\u03b0\u01d9\2\u0beb\u00c7\3\2\2\2\u0bec\u0bf1"+
+		"\7\u0117\2\2\u0bed\u0bf2\7\u03d4\2\2\u0bee\u0bef\7\u037f\2\2\u0bef\u0bf2"+
+		"\7\u014d\2\2\u0bf0\u0bf2\7\u014e\2\2\u0bf1\u0bed\3\2\2\2\u0bf1\u0bee\3"+
+		"\2\2\2\u0bf1\u0bf0\3\2\2\2\u0bf2\u0bf4\3\2\2\2\u0bf3\u0bf5\7\b\2\2\u0bf4"+
+		"\u0bf3\3\2\2\2\u0bf4\u0bf5\3\2\2\2\u0bf5\u0bf8\3\2\2\2\u0bf6\u0bf9\5\u053c"+
+		"\u029f\2\u0bf7\u0bf9\7\30\2\2\u0bf8\u0bf6\3\2\2\2\u0bf8\u0bf7\3\2\2\2"+
+		"\u0bf9\u00c9\3\2\2\2\u0bfa\u0bfb\7\u0117\2\2\u0bfb\u0bfd\5\u042c\u0217"+
+		"\2\u0bfc\u0bfe\7\b\2\2\u0bfd\u0bfc\3\2\2\2\u0bfd\u0bfe\3\2\2\2\u0bfe\u0c01"+
+		"\3\2\2\2\u0bff\u0c02\5\u03b0\u01d9\2\u0c00\u0c02\7\u00ca\2\2\u0c01\u0bff"+
+		"\3\2\2\2\u0c01\u0c00\3\2\2\2\u0c02\u0c09\3\2\2\2\u0c03\u0c05\7\26\2\2"+
+		"\u0c04\u0c03\3\2\2\2\u0c04\u0c05\3\2\2\2\u0c05\u0c06\3\2\2\2\u0c06\u0c08"+
+		"\5\u03b0\u01d9\2\u0c07\u0c04\3\2\2\2\u0c08\u0c0b\3\2\2\2\u0c09\u0c07\3"+
+		"\2\2\2\u0c09\u0c0a\3\2\2\2\u0c0a\u00cb\3\2\2\2\u0c0b\u0c09\3\2\2\2\u0c0c"+
 		"\u0c0d\7\u0118\2\2\u0c0d\u0c0f\7\u01e8\2\2\u0c0e\u0c10\7\u0139\2\2\u0c0f"+
 		"\u0c0e\3\2\2\2\u0c0f\u0c10\3\2\2\2\u0c10\u0c11\3\2\2\2\u0c11\u0c13\7\30"+
 		"\2\2\u0c12\u0c14\5\u027e\u0140\2\u0c13\u0c12\3\2\2\2\u0c13\u0c14\3\2\2"+
@@ -110843,7 +111805,7 @@ public class DB2zSQLParser extends Parser {
 		"\2\2\u0c71\u0c73\7\u012d\2\2\u0c72\u0c6f\3\2\2\2\u0c72\u0c70\3\2\2\2\u0c73"+
 		"\u0c75\3\2\2\2\u0c74\u0c76\7\24\2\2\u0c75\u0c74\3\2\2\2\u0c75\u0c76\3"+
 		"\2\2\2\u0c76\u0c77\3\2\2\2\u0c77\u0c79\5\u0526\u0294\2\u0c78\u0c6e\3\2"+
-		"\2\2\u0c78\u0c72\3\2\2\2\u0c79\u00d9\3\2\2\2\u0c7a\u0c7b\5\u0274\u013b"+
+		"\2\2\u0c78\u0c72\3\2\2\2\u0c79\u00d9\3\2\2\2\u0c7a\u0c7b\5\u0276\u013c"+
 		"\2\u0c7b\u00db\3\2\2\2\u0c7c\u0c7d\7^\2\2\u0c7d\u0c8e\5\u04f6\u027c\2"+
 		"\u0c7e\u0c7f\7\u009c\2\2\u0c7f\u0c8e\5\u04ea\u0276\2\u0c80\u0c81\7\u0121"+
 		"\2\2\u0c81\u0c8e\5\u0516\u028c\2\u0c82\u0c83\7\u012a\2\2\u0c83\u0c8e\5"+
@@ -111443,7 +112405,7 @@ public class DB2zSQLParser extends Parser {
 		"\u12db\58\35\2\u12cd\u12db\5\u0260\u0131\2\u12ce\u12d0\5\u0582\u02c2\2"+
 		"\u12cf\u12ce\3\2\2\2\u12cf\u12d0\3\2\2\2\u12d0\u12d1\3\2\2\2\u12d1\u12db"+
 		"\5\u0594\u02cb\2\u12d2\u12db\5\u00a4S\2\u12d3\u12db\5\u00aaV\2\u12d4\u12db"+
-		"\5\u00b0Y\2\u12d5\u12db\5\u00caf\2\u12d6\u12db\5\u00ccg\2\u12d7\u12db"+
+		"\5\u00b0Y\2\u12d5\u12db\5\u00be`\2\u12d6\u12db\5\u00ccg\2\u12d7\u12db"+
 		"\5\u00d0i\2\u12d8\u12db\5\u0264\u0133\2\u12d9\u12db\5\u00d4k\2\u12da\u12cc"+
 		"\3\2\2\2\u12da\u12cd\3\2\2\2\u12da\u12cf\3\2\2\2\u12da\u12d2\3\2\2\2\u12da"+
 		"\u12d3\3\2\2\2\u12da\u12d4\3\2\2\2\u12da\u12d5\3\2\2\2\u12da\u12d6\3\2"+
@@ -111730,7 +112692,7 @@ public class DB2zSQLParser extends Parser {
 		"\u15b0\u15b2\3\2\2\2\u15b1\u15b3\5\u04be\u0260\2\u15b2\u15b1\3\2\2\2\u15b2"+
 		"\u15b3\3\2\2\2\u15b3\u15b5\3\2\2\2\u15b4\u15b6\5\u0288\u0145\2\u15b5\u15b4"+
 		"\3\2\2\2\u15b5\u15b6\3\2\2\2\u15b6\u15b9\3\2\2\2\u15b7\u15b8\7\u0117\2"+
-		"\2\u15b8\u15ba\5\u0276\u013c\2\u15b9\u15b7\3\2\2\2\u15b9\u15ba\3\2\2\2"+
+		"\2\u15b8\u15ba\5\u0272\u013a\2\u15b9\u15b7\3\2\2\2\u15b9\u15ba\3\2\2\2"+
 		"\u15ba\u15bb\3\2\2\2\u15bb\u15bc\7\u0144\2\2\u15bc\u15bd\5\u047c\u023f"+
 		"\2\u15bd\u15bf\3\2\2\2\u15be\u15c0\5\u059e\u02d0\2\u15bf\u15be\3\2\2\2"+
 		"\u15bf\u15c0\3\2\2\2\u15c0\u15c5\3\2\2\2\u15c1\u15c4\5\u058a\u02c6\2\u15c2"+
@@ -111751,7 +112713,7 @@ public class DB2zSQLParser extends Parser {
 		"\u15e8\u15e7\3\2\2\2\u15e8\u15e9\3\2\2\2\u15e9\u15eb\3\2\2\2\u15ea\u15ec"+
 		"\5\u04be\u0260\2\u15eb\u15ea\3\2\2\2\u15eb\u15ec\3\2\2\2\u15ec\u15ee\3"+
 		"\2\2\2\u15ed\u15ef\5\u0288\u0145\2\u15ee\u15ed\3\2\2\2\u15ee\u15ef\3\2"+
-		"\2\2\u15ef\u15f0\3\2\2\2\u15f0\u15f1\7\u0117\2\2\u15f1\u15f4\5\u0276\u013c"+
+		"\2\2\u15ef\u15f0\3\2\2\2\u15f0\u15f1\7\u0117\2\2\u15f1\u15f4\5\u0272\u013a"+
 		"\2\u15f2\u15f3\7\u0144\2\2\u15f3\u15f5\5\u047c\u023f\2\u15f4\u15f2\3\2"+
 		"\2\2\u15f4\u15f5\3\2\2\2\u15f5\u15fa\3\2\2\2\u15f6\u15f9\5\u058a\u02c6"+
 		"\2\u15f7\u15f9\5\u058e\u02c8\2\u15f8\u15f6\3\2\2\2\u15f8\u15f7\3\2\2\2"+
@@ -111761,7 +112723,7 @@ public class DB2zSQLParser extends Parser {
 		"\u1601\u1603\5\u04c4\u0263\2\u1602\u1604\7\61\2\2\u1603\u1602\3\2\2\2"+
 		"\u1603\u1604\3\2\2\2\u1604\u1606\3\2\2\2\u1605\u1607\5\u04be\u0260\2\u1606"+
 		"\u1605\3\2\2\2\u1606\u1607\3\2\2\2\u1607\u1608\3\2\2\2\u1608\u1609\7\u0117"+
-		"\2\2\u1609\u160a\5\u0276\u013c\2\u160a\u160b\7\u0144\2\2\u160b\u160c\7"+
+		"\2\2\u1609\u160a\5\u0272\u013a\2\u160a\u160b\7\u0144\2\2\u160b\u160c\7"+
 		"Z\2\2\u160c\u160d\7\u00ce\2\2\u160d\u1616\5\b\5\2\u160e\u160f\7\u0087"+
 		"\2\2\u160f\u1612\7\u010a\2\2\u1610\u1613\5\u0528\u0295\2\u1611\u1613\7"+
 		"\31\2\2\u1612\u1610\3\2\2\2\u1612\u1611\3\2\2\2\u1613\u1614\3\2\2\2\u1614"+
@@ -111791,104 +112753,104 @@ public class DB2zSQLParser extends Parser {
 		"\2\2\u1656\u1658\5\u047c\u023f\2\u1657\u1655\3\2\2\2\u1657\u1658\3\2\2"+
 		"\2\u1658\u026f\3\2\2\2\u1659\u165d\5\u0278\u013d\2\u165a\u165d\5\u027a"+
 		"\u013e\2\u165b\u165d\5\u027c\u013f\2\u165c\u1659\3\2\2\2\u165c\u165a\3"+
-		"\2\2\2\u165c\u165b\3\2\2\2\u165d\u0271\3\2\2\2\u165e\u165f\5\u03c8\u01e5"+
-		"\2\u165f\u1662\7\b\2\2\u1660\u1663\5\u03b0\u01d9\2\u1661\u1663\7\u00ca"+
-		"\2\2\u1662\u1660\3\2\2\2\u1662\u1661\3\2\2\2\u1663\u169c\3\2\2\2\u1664"+
-		"\u1665\5\u0274\u013b\2\u1665\u1666\7\b\2\2\u1666\u166e\5\u0280\u0141\2"+
-		"\u1667\u1668\7\26\2\2\u1668\u1669\5\u0274\u013b\2\u1669\u166a\7\b\2\2"+
-		"\u166a\u166b\5\u0280\u0141\2\u166b\u166d\3\2\2\2\u166c\u1667\3\2\2\2\u166d"+
-		"\u1670\3\2\2\2\u166e\u166c\3\2\2\2\u166e\u166f\3\2\2\2\u166f\u169c\3\2"+
-		"\2\2\u1670\u166e\3\2\2\2\u1671\u1672\7\3\2\2\u1672\u1677\5\u0274\u013b"+
-		"\2\u1673\u1674\7\26\2\2\u1674\u1676\5\u0274\u013b\2\u1675\u1673\3\2\2"+
-		"\2\u1676\u1679\3\2\2\2\u1677\u1675\3\2\2\2\u1677\u1678\3\2\2\2\u1678\u167a"+
-		"\3\2\2\2\u1679\u1677\3\2\2\2\u167a\u167b\7\4\2\2\u167b\u167c\7\b\2\2\u167c"+
-		"\u1697\7\3\2\2\u167d\u1682\5\u0280\u0141\2\u167e\u167f\7\26\2\2\u167f"+
-		"\u1681\5\u0280\u0141\2\u1680\u167e\3\2\2\2\u1681\u1684\3\2\2\2\u1682\u1680"+
-		"\3\2\2\2\u1682\u1683\3\2\2\2\u1683\u1687\3\2\2\2\u1684\u1682\3\2\2\2\u1685"+
-		"\u1687\5\u0594\u02cb\2\u1686\u167d\3\2\2\2\u1686\u1685\3\2\2\2\u1687\u1698"+
-		"\3\2\2\2\u1688\u1698\5\u057c\u02bf\2\u1689\u168a\7\u013a\2\2\u168a\u1698"+
-		"\5\u0280\u0141\2\u168b\u168c\7\u013a\2\2\u168c\u168d\7\3\2\2\u168d\u1692"+
-		"\5\u0280\u0141\2\u168e\u168f\7\26\2\2\u168f\u1691\5\u0280\u0141\2\u1690"+
-		"\u168e\3\2\2\2\u1691\u1694\3\2\2\2\u1692\u1690\3\2\2\2\u1692\u1693\3\2"+
-		"\2\2\u1693\u1695\3\2\2\2\u1694\u1692\3\2\2\2\u1695\u1696\7\4\2\2\u1696"+
-		"\u1698\3\2\2\2\u1697\u1686\3\2\2\2\u1697\u1688\3\2\2\2\u1697\u1689\3\2"+
-		"\2\2\u1697\u168b\3\2\2\2\u1698\u1699\3\2\2\2\u1699\u169a\7\4\2\2\u169a"+
-		"\u169c\3\2\2\2\u169b\u165e\3\2\2\2\u169b\u1664\3\2\2\2\u169b\u1671\3\2"+
-		"\2\2\u169c\u0273\3\2\2\2\u169d\u16a3\5\u0532\u029a\2\u169e\u16a3\5\u0528"+
-		"\u0295\2\u169f\u16a3\5\u0534\u029b\2\u16a0\u16a3\5\u0536\u029c\2\u16a1"+
-		"\u16a3\5\u0538\u029d\2\u16a2\u169d\3\2\2\2\u16a2\u169e\3\2\2\2\u16a2\u169f"+
-		"\3\2\2\2\u16a2\u16a0\3\2\2\2\u16a2\u16a1\3\2\2\2\u16a3\u0275\3\2\2\2\u16a4"+
-		"\u16a5\5\u04b2\u025a\2\u16a5\u16a6\7\b\2\2\u16a6\u16ae\5\u0280\u0141\2"+
-		"\u16a7\u16a8\7\26\2\2\u16a8\u16a9\5\u04b2\u025a\2\u16a9\u16aa\7\b\2\2"+
-		"\u16aa\u16ab\5\u0280\u0141\2\u16ab\u16ad\3\2\2\2\u16ac\u16a7\3\2\2\2\u16ad"+
-		"\u16b0\3\2\2\2\u16ae\u16ac\3\2\2\2\u16ae\u16af\3\2\2\2\u16af\u16cb\3\2"+
-		"\2\2\u16b0\u16ae\3\2\2\2\u16b1\u16b2\7\3\2\2\u16b2\u16b7\5\u04b2\u025a"+
-		"\2\u16b3\u16b4\7\26\2\2\u16b4\u16b6\5\u04b2\u025a\2\u16b5\u16b3\3\2\2"+
-		"\2\u16b6\u16b9\3\2\2\2\u16b7\u16b5\3\2\2\2\u16b7\u16b8\3\2\2\2\u16b8\u16ba"+
-		"\3\2\2\2\u16b9\u16b7\3\2\2\2\u16ba\u16bb\7\4\2\2\u16bb\u16bc\7\b\2\2\u16bc"+
-		"\u16bd\7\3\2\2\u16bd\u16c2\5\u0280\u0141\2\u16be\u16bf\7\26\2\2\u16bf"+
-		"\u16c1\5\u0280\u0141\2\u16c0\u16be\3\2\2\2\u16c1\u16c4\3\2\2\2\u16c2\u16c0"+
-		"\3\2\2\2\u16c2\u16c3\3\2\2\2\u16c3\u16c7\3\2\2\2\u16c4\u16c2\3\2\2\2\u16c5"+
-		"\u16c7\5\u0594\u02cb\2\u16c6\u16b1\3\2\2\2\u16c6\u16c5\3\2\2\2\u16c7\u16c8"+
-		"\3\2\2\2\u16c8\u16c9\7\4\2\2\u16c9\u16cb\3\2\2\2\u16ca\u16a4\3\2\2\2\u16ca"+
-		"\u16c6\3\2\2\2\u16cb\u0277\3\2\2\2\u16cc\u16cd\7\u0136\2\2\u16cd\u16ce"+
-		"\7\u0117\2\2\u16ce\u16d3\5\u0276\u013c\2\u16cf\u16d0\7\26\2\2\u16d0\u16d2"+
-		"\5\u0276\u013c\2\u16d1\u16cf\3\2\2\2\u16d2\u16d5\3\2\2\2\u16d3\u16d1\3"+
-		"\2\2\2\u16d3\u16d4\3\2\2\2\u16d4\u0279\3\2\2\2\u16d5\u16d3\3\2\2\2\u16d6"+
-		"\u16d7\7d\2\2\u16d7\u027b\3\2\2\2\u16d8\u16d9\7\u00a2\2\2\u16d9\u16da"+
-		"\7\3\2\2\u16da\u16df\5\u04b2\u025a\2\u16db\u16dc\7\26\2\2\u16dc\u16de"+
-		"\5\u04b2\u025a\2\u16dd\u16db\3\2\2\2\u16de\u16e1\3\2\2\2\u16df\u16dd\3"+
-		"\2\2\2\u16df\u16e0\3\2\2\2\u16e0\u16e2\3\2\2\2\u16e1\u16df\3\2\2\2\u16e2"+
-		"\u16e3\7\4\2\2\u16e3\u16f0\7\u013a\2\2\u16e4\u16f1\5\u0280\u0141\2\u16e5"+
-		"\u16e6\7\3\2\2\u16e6\u16eb\5\u0280\u0141\2\u16e7\u16e8\7\26\2\2\u16e8"+
-		"\u16ea\5\u0280\u0141\2\u16e9\u16e7\3\2\2\2\u16ea\u16ed\3\2\2\2\u16eb\u16e9"+
-		"\3\2\2\2\u16eb\u16ec\3\2\2\2\u16ec\u16ee\3\2\2\2\u16ed\u16eb\3\2\2\2\u16ee"+
-		"\u16ef\7\4\2\2\u16ef\u16f1\3\2\2\2\u16f0\u16e4\3\2\2\2\u16f0\u16e5\3\2"+
-		"\2\2\u16f1\u027d\3\2\2\2\u16f2\u16f3\7\u0117\2\2\u16f3\u16f4\7\u01e9\2"+
-		"\2\u16f4\u16f5\7\b\2\2\u16f5\u16fb\5\u03b0\u01d9\2\u16f6\u16f7\5\u03ae"+
-		"\u01d8\2\u16f7\u16f8\5\u03b0\u01d9\2\u16f8\u16fa\3\2\2\2\u16f9\u16f6\3"+
-		"\2\2\2\u16fa\u16fd\3\2\2\2\u16fb\u16f9\3\2\2\2\u16fb\u16fc\3\2\2\2\u16fc"+
-		"\u1702\3\2\2\2\u16fd\u16fb\3\2\2\2\u16fe\u16ff\7\3\2\2\u16ff\u1700\7\30"+
-		"\2\2\u1700\u1702\7\4\2\2\u1701\u16f2\3\2\2\2\u1701\u16fe\3\2\2\2\u1702"+
-		"\u027f\3\2\2\2\u1703\u1709\5\u03b0\u01d9\2\u1704\u1705\5\u03ae\u01d8\2"+
-		"\u1705\u1706\5\u03b0\u01d9\2\u1706\u1708\3\2\2\2\u1707\u1704\3\2\2\2\u1708"+
-		"\u170b\3\2\2\2\u1709\u1707\3\2\2\2\u1709\u170a\3\2\2\2\u170a\u170f\3\2"+
-		"\2\2\u170b\u1709\3\2\2\2\u170c\u170f\7c\2\2\u170d\u170f\7\u00ca\2\2\u170e"+
-		"\u1703\3\2\2\2\u170e\u170c\3\2\2\2\u170e\u170d\3\2\2\2\u170f\u0281\3\2"+
-		"\2\2\u1710\u1715\5\u03b0\u01d9\2\u1711\u1715\5\u0528\u0295\2\u1712\u1715"+
-		"\7c\2\2\u1713\u1715\7\u00ca\2\2\u1714\u1710\3\2\2\2\u1714\u1711\3\2\2"+
-		"\2\u1714\u1712\3\2\2\2\u1714\u1713\3\2\2\2\u1715\u0283\3\2\2\2\u1716\u1719"+
-		"\5\u03b0\u01d9\2\u1717\u1719\7\u00ca\2\2\u1718\u1716\3\2\2\2\u1718\u1717"+
-		"\3\2\2\2\u1719\u0285\3\2\2\2\u171a\u171e\5\u03b0\u01d9\2\u171b\u171e\5"+
-		"\u0528\u0295\2\u171c\u171e\7\u00ca\2\2\u171d\u171a\3\2\2\2\u171d\u171b"+
-		"\3\2\2\2\u171d\u171c\3\2\2\2\u171e\u0287\3\2\2\2\u171f\u1720\7\u01dc\2"+
-		"\2\u1720\u1721\7\3\2\2\u1721\u1722\5\u04b2\u025a\2\u1722\u1729\5\u035c"+
-		"\u01af\2\u1723\u1724\7\26\2\2\u1724\u1725\5\u04b2\u025a\2\u1725\u1726"+
-		"\5\u035c\u01af\2\u1726\u1728\3\2\2\2\u1727\u1723\3\2\2\2\u1728\u172b\3"+
-		"\2\2\2\u1729\u1727\3\2\2\2\u1729\u172a\3\2\2\2\u172a\u172c\3\2\2\2\u172b"+
-		"\u1729\3\2\2\2\u172c\u172d\7\4\2\2\u172d\u0289\3\2\2\2\u172e\u173b\7\u013a"+
-		"\2\2\u172f\u173c\5\u0282\u0142\2\u1730\u1731\7\3\2\2\u1731\u1736\5\u0282"+
-		"\u0142\2\u1732\u1733\7\26\2\2\u1733\u1735\5\u0282\u0142\2\u1734\u1732"+
-		"\3\2\2\2\u1735\u1738\3\2\2\2\u1736\u1734\3\2\2\2\u1736\u1737\3\2\2\2\u1737"+
-		"\u1739\3\2\2\2\u1738\u1736\3\2\2\2\u1739\u173a\7\4\2\2\u173a\u173c\3\2"+
-		"\2\2\u173b\u172f\3\2\2\2\u173b\u1730\3\2\2\2\u173c\u1743\3\2\2\2\u173d"+
-		"\u1740\7\u0087\2\2\u173e\u1741\5\u0528\u0295\2\u173f\u1741\7\31\2\2\u1740"+
-		"\u173e\3\2\2\2\u1740\u173f\3\2\2\2\u1741\u1742\3\2\2\2\u1742\u1744\7\u0196"+
-		"\2\2\u1743\u173d\3\2\2\2\u1743\u1744\3\2\2\2\u1744\u1747\3\2\2\2\u1745"+
-		"\u1748\7\u01e4\2\2\u1746\u1748\5\u02aa\u0156\2\u1747\u1745\3\2\2\2\u1747"+
-		"\u1746\3\2\2\2\u1748\u028b\3\2\2\2\u1749\u174e\7\u01e0\2\2\u174a\u174b"+
-		"\7\u0137\2\2\u174b\u174c\7\u01d5\2\2\u174c\u174d\7\u01d7\2\2\u174d\u174f"+
-		"\5\u02b6\u015c\2\u174e\u174a\3\2\2\2\u174e\u174f\3\2\2\2\u174f\u028d\3"+
-		"\2\2\2\u1750\u176d\5\u0290\u0149\2\u1751\u176d\5\u0292\u014a\2\u1752\u176d"+
-		"\5\u0294\u014b\2\u1753\u176d\5\u0296\u014c\2\u1754\u176d\5\u0298\u014d"+
-		"\2\u1755\u176d\5\u02ae\u0158\2\u1756\u176d\5\u02b0\u0159\2\u1757\u176d"+
-		"\5\u02b2\u015a\2\u1758\u176d\5\u029a\u014e\2\u1759\u176d\5\u029c\u014f"+
-		"\2\u175a\u176d\5\u029e\u0150\2\u175b\u176a\7\'\2\2\u175c\u175d\7M\2\2"+
-		"\u175d\u175e\7\3\2\2\u175e\u1760\5\u04b2\u025a\2\u175f\u1761\t\4\2\2\u1760"+
-		"\u175f\3\2\2\2\u1760\u1761\3\2\2\2\u1761\u1762\3\2\2\2\u1762\u1763\7\4"+
-		"\2\2\u1763\u176b\3\2\2\2\u1764\u1765\7\u01dc\2\2\u1765\u1766\7M\2\2\u1766"+
-		"\u1767\7\3\2\2\u1767\u1768\5\u04b2\u025a\2\u1768\u1769\7\4\2\2\u1769\u176b"+
-		"\3\2\2\2\u176a\u175c\3\2\2\2\u176a\u1764\3\2\2\2\u176b\u176d\3\2\2\2\u176c"+
+		"\2\2\2\u165c\u165b\3\2\2\2\u165d\u0271\3\2\2\2\u165e\u165f\5\u04b2\u025a"+
+		"\2\u165f\u1660\7\b\2\2\u1660\u1668\5\u0280\u0141\2\u1661\u1662\7\26\2"+
+		"\2\u1662\u1663\5\u04b2\u025a\2\u1663\u1664\7\b\2\2\u1664\u1665\5\u0280"+
+		"\u0141\2\u1665\u1667\3\2\2\2\u1666\u1661\3\2\2\2\u1667\u166a\3\2\2\2\u1668"+
+		"\u1666\3\2\2\2\u1668\u1669\3\2\2\2\u1669\u1685\3\2\2\2\u166a\u1668\3\2"+
+		"\2\2\u166b\u166c\7\3\2\2\u166c\u1671\5\u04b2\u025a\2\u166d\u166e\7\26"+
+		"\2\2\u166e\u1670\5\u04b2\u025a\2\u166f\u166d\3\2\2\2\u1670\u1673\3\2\2"+
+		"\2\u1671\u166f\3\2\2\2\u1671\u1672\3\2\2\2\u1672\u1674\3\2\2\2\u1673\u1671"+
+		"\3\2\2\2\u1674\u1675\7\4\2\2\u1675\u1676\7\b\2\2\u1676\u1680\7\3\2\2\u1677"+
+		"\u167c\5\u0280\u0141\2\u1678\u1679\7\26\2\2\u1679\u167b\5\u0280\u0141"+
+		"\2\u167a\u1678\3\2\2\2\u167b\u167e\3\2\2\2\u167c\u167a\3\2\2\2\u167c\u167d"+
+		"\3\2\2\2\u167d\u1681\3\2\2\2\u167e\u167c\3\2\2\2\u167f\u1681\5\u0594\u02cb"+
+		"\2\u1680\u1677\3\2\2\2\u1680\u167f\3\2\2\2\u1681\u1682\3\2\2\2\u1682\u1683"+
+		"\7\4\2\2\u1683\u1685\3\2\2\2\u1684\u165e\3\2\2\2\u1684\u166b\3\2\2\2\u1685"+
+		"\u0273\3\2\2\2\u1686\u1687\5\u03c8\u01e5\2\u1687\u168a\7\b\2\2\u1688\u168b"+
+		"\5\u03b0\u01d9\2\u1689\u168b\7\u00ca\2\2\u168a\u1688\3\2\2\2\u168a\u1689"+
+		"\3\2\2\2\u168b\u16c4\3\2\2\2\u168c\u168d\5\u0276\u013c\2\u168d\u168e\7"+
+		"\b\2\2\u168e\u1696\5\u0280\u0141\2\u168f\u1690\7\26\2\2\u1690\u1691\5"+
+		"\u0276\u013c\2\u1691\u1692\7\b\2\2\u1692\u1693\5\u0280\u0141\2\u1693\u1695"+
+		"\3\2\2\2\u1694\u168f\3\2\2\2\u1695\u1698\3\2\2\2\u1696\u1694\3\2\2\2\u1696"+
+		"\u1697\3\2\2\2\u1697\u16c4\3\2\2\2\u1698\u1696\3\2\2\2\u1699\u169a\7\3"+
+		"\2\2\u169a\u169f\5\u0276\u013c\2\u169b\u169c\7\26\2\2\u169c\u169e\5\u0276"+
+		"\u013c\2\u169d\u169b\3\2\2\2\u169e\u16a1\3\2\2\2\u169f\u169d\3\2\2\2\u169f"+
+		"\u16a0\3\2\2\2\u16a0\u16a2\3\2\2\2\u16a1\u169f\3\2\2\2\u16a2\u16a3\7\4"+
+		"\2\2\u16a3\u16a4\7\b\2\2\u16a4\u16bf\7\3\2\2\u16a5\u16aa\5\u0280\u0141"+
+		"\2\u16a6\u16a7\7\26\2\2\u16a7\u16a9\5\u0280\u0141\2\u16a8\u16a6\3\2\2"+
+		"\2\u16a9\u16ac\3\2\2\2\u16aa\u16a8\3\2\2\2\u16aa\u16ab\3\2\2\2\u16ab\u16af"+
+		"\3\2\2\2\u16ac\u16aa\3\2\2\2\u16ad\u16af\5\u0594\u02cb\2\u16ae\u16a5\3"+
+		"\2\2\2\u16ae\u16ad\3\2\2\2\u16af\u16c0\3\2\2\2\u16b0\u16c0\5\u057c\u02bf"+
+		"\2\u16b1\u16b2\7\u013a\2\2\u16b2\u16c0\5\u0280\u0141\2\u16b3\u16b4\7\u013a"+
+		"\2\2\u16b4\u16b5\7\3\2\2\u16b5\u16ba\5\u0280\u0141\2\u16b6\u16b7\7\26"+
+		"\2\2\u16b7\u16b9\5\u0280\u0141\2\u16b8\u16b6\3\2\2\2\u16b9\u16bc\3\2\2"+
+		"\2\u16ba\u16b8\3\2\2\2\u16ba\u16bb\3\2\2\2\u16bb\u16bd\3\2\2\2\u16bc\u16ba"+
+		"\3\2\2\2\u16bd\u16be\7\4\2\2\u16be\u16c0\3\2\2\2\u16bf\u16ae\3\2\2\2\u16bf"+
+		"\u16b0\3\2\2\2\u16bf\u16b1\3\2\2\2\u16bf\u16b3\3\2\2\2\u16c0\u16c1\3\2"+
+		"\2\2\u16c1\u16c2\7\4\2\2\u16c2\u16c4\3\2\2\2\u16c3\u1686\3\2\2\2\u16c3"+
+		"\u168c\3\2\2\2\u16c3\u1699\3\2\2\2\u16c4\u0275\3\2\2\2\u16c5\u16cb\5\u0532"+
+		"\u029a\2\u16c6\u16cb\5\u0528\u0295\2\u16c7\u16cb\5\u0534\u029b\2\u16c8"+
+		"\u16cb\5\u0536\u029c\2\u16c9\u16cb\5\u0538\u029d\2\u16ca\u16c5\3\2\2\2"+
+		"\u16ca\u16c6\3\2\2\2\u16ca\u16c7\3\2\2\2\u16ca\u16c8\3\2\2\2\u16ca\u16c9"+
+		"\3\2\2\2\u16cb\u0277\3\2\2\2\u16cc\u16cd\7\u0136\2\2\u16cd\u16ce\7\u0117"+
+		"\2\2\u16ce\u16d3\5\u0272\u013a\2\u16cf\u16d0\7\26\2\2\u16d0\u16d2\5\u0272"+
+		"\u013a\2\u16d1\u16cf\3\2\2\2\u16d2\u16d5\3\2\2\2\u16d3\u16d1\3\2\2\2\u16d3"+
+		"\u16d4\3\2\2\2\u16d4\u0279\3\2\2\2\u16d5\u16d3\3\2\2\2\u16d6\u16d7\7d"+
+		"\2\2\u16d7\u027b\3\2\2\2\u16d8\u16d9\7\u00a2\2\2\u16d9\u16da\7\3\2\2\u16da"+
+		"\u16df\5\u04b2\u025a\2\u16db\u16dc\7\26\2\2\u16dc\u16de\5\u04b2\u025a"+
+		"\2\u16dd\u16db\3\2\2\2\u16de\u16e1\3\2\2\2\u16df\u16dd\3\2\2\2\u16df\u16e0"+
+		"\3\2\2\2\u16e0\u16e2\3\2\2\2\u16e1\u16df\3\2\2\2\u16e2\u16e3\7\4\2\2\u16e3"+
+		"\u16f0\7\u013a\2\2\u16e4\u16f1\5\u0280\u0141\2\u16e5\u16e6\7\3\2\2\u16e6"+
+		"\u16eb\5\u0280\u0141\2\u16e7\u16e8\7\26\2\2\u16e8\u16ea\5\u0280\u0141"+
+		"\2\u16e9\u16e7\3\2\2\2\u16ea\u16ed\3\2\2\2\u16eb\u16e9\3\2\2\2\u16eb\u16ec"+
+		"\3\2\2\2\u16ec\u16ee\3\2\2\2\u16ed\u16eb\3\2\2\2\u16ee\u16ef\7\4\2\2\u16ef"+
+		"\u16f1\3\2\2\2\u16f0\u16e4\3\2\2\2\u16f0\u16e5\3\2\2\2\u16f1\u027d\3\2"+
+		"\2\2\u16f2\u16f3\7\u0117\2\2\u16f3\u16f4\7\u01e9\2\2\u16f4\u16f5\7\b\2"+
+		"\2\u16f5\u16fb\5\u03b0\u01d9\2\u16f6\u16f7\5\u03ae\u01d8\2\u16f7\u16f8"+
+		"\5\u03b0\u01d9\2\u16f8\u16fa\3\2\2\2\u16f9\u16f6\3\2\2\2\u16fa\u16fd\3"+
+		"\2\2\2\u16fb\u16f9\3\2\2\2\u16fb\u16fc\3\2\2\2\u16fc\u1702\3\2\2\2\u16fd"+
+		"\u16fb\3\2\2\2\u16fe\u16ff\7\3\2\2\u16ff\u1700\7\30\2\2\u1700\u1702\7"+
+		"\4\2\2\u1701\u16f2\3\2\2\2\u1701\u16fe\3\2\2\2\u1702\u027f\3\2\2\2\u1703"+
+		"\u1709\5\u03b0\u01d9\2\u1704\u1705\5\u03ae\u01d8\2\u1705\u1706\5\u03b0"+
+		"\u01d9\2\u1706\u1708\3\2\2\2\u1707\u1704\3\2\2\2\u1708\u170b\3\2\2\2\u1709"+
+		"\u1707\3\2\2\2\u1709\u170a\3\2\2\2\u170a\u170f\3\2\2\2\u170b\u1709\3\2"+
+		"\2\2\u170c\u170f\7c\2\2\u170d\u170f\7\u00ca\2\2\u170e\u1703\3\2\2\2\u170e"+
+		"\u170c\3\2\2\2\u170e\u170d\3\2\2\2\u170f\u0281\3\2\2\2\u1710\u1715\5\u03b0"+
+		"\u01d9\2\u1711\u1715\5\u0528\u0295\2\u1712\u1715\7c\2\2\u1713\u1715\7"+
+		"\u00ca\2\2\u1714\u1710\3\2\2\2\u1714\u1711\3\2\2\2\u1714\u1712\3\2\2\2"+
+		"\u1714\u1713\3\2\2\2\u1715\u0283\3\2\2\2\u1716\u1719\5\u03b0\u01d9\2\u1717"+
+		"\u1719\7\u00ca\2\2\u1718\u1716\3\2\2\2\u1718\u1717\3\2\2\2\u1719\u0285"+
+		"\3\2\2\2\u171a\u171e\5\u03b0\u01d9\2\u171b\u171e\5\u0528\u0295\2\u171c"+
+		"\u171e\7\u00ca\2\2\u171d\u171a\3\2\2\2\u171d\u171b\3\2\2\2\u171d\u171c"+
+		"\3\2\2\2\u171e\u0287\3\2\2\2\u171f\u1720\7\u01dc\2\2\u1720\u1721\7\3\2"+
+		"\2\u1721\u1722\5\u04b2\u025a\2\u1722\u1729\5\u035c\u01af\2\u1723\u1724"+
+		"\7\26\2\2\u1724\u1725\5\u04b2\u025a\2\u1725\u1726\5\u035c\u01af\2\u1726"+
+		"\u1728\3\2\2\2\u1727\u1723\3\2\2\2\u1728\u172b\3\2\2\2\u1729\u1727\3\2"+
+		"\2\2\u1729\u172a\3\2\2\2\u172a\u172c\3\2\2\2\u172b\u1729\3\2\2\2\u172c"+
+		"\u172d\7\4\2\2\u172d\u0289\3\2\2\2\u172e\u173b\7\u013a\2\2\u172f\u173c"+
+		"\5\u0282\u0142\2\u1730\u1731\7\3\2\2\u1731\u1736\5\u0282\u0142\2\u1732"+
+		"\u1733\7\26\2\2\u1733\u1735\5\u0282\u0142\2\u1734\u1732\3\2\2\2\u1735"+
+		"\u1738\3\2\2\2\u1736\u1734\3\2\2\2\u1736\u1737\3\2\2\2\u1737\u1739\3\2"+
+		"\2\2\u1738\u1736\3\2\2\2\u1739\u173a\7\4\2\2\u173a\u173c\3\2\2\2\u173b"+
+		"\u172f\3\2\2\2\u173b\u1730\3\2\2\2\u173c\u1743\3\2\2\2\u173d\u1740\7\u0087"+
+		"\2\2\u173e\u1741\5\u0528\u0295\2\u173f\u1741\7\31\2\2\u1740\u173e\3\2"+
+		"\2\2\u1740\u173f\3\2\2\2\u1741\u1742\3\2\2\2\u1742\u1744\7\u0196\2\2\u1743"+
+		"\u173d\3\2\2\2\u1743\u1744\3\2\2\2\u1744\u1747\3\2\2\2\u1745\u1748\7\u01e4"+
+		"\2\2\u1746\u1748\5\u02aa\u0156\2\u1747\u1745\3\2\2\2\u1747\u1746\3\2\2"+
+		"\2\u1748\u028b\3\2\2\2\u1749\u174e\7\u01e0\2\2\u174a\u174b\7\u0137\2\2"+
+		"\u174b\u174c\7\u01d5\2\2\u174c\u174d\7\u01d7\2\2\u174d\u174f\5\u02b6\u015c"+
+		"\2\u174e\u174a\3\2\2\2\u174e\u174f\3\2\2\2\u174f\u028d\3\2\2\2\u1750\u176d"+
+		"\5\u0290\u0149\2\u1751\u176d\5\u0292\u014a\2\u1752\u176d\5\u0294\u014b"+
+		"\2\u1753\u176d\5\u0296\u014c\2\u1754\u176d\5\u0298\u014d\2\u1755\u176d"+
+		"\5\u02ae\u0158\2\u1756\u176d\5\u02b0\u0159\2\u1757\u176d\5\u02b2\u015a"+
+		"\2\u1758\u176d\5\u029a\u014e\2\u1759\u176d\5\u029c\u014f\2\u175a\u176d"+
+		"\5\u029e\u0150\2\u175b\u176a\7\'\2\2\u175c\u175d\7M\2\2\u175d\u175e\7"+
+		"\3\2\2\u175e\u1760\5\u04b2\u025a\2\u175f\u1761\t\4\2\2\u1760\u175f\3\2"+
+		"\2\2\u1760\u1761\3\2\2\2\u1761\u1762\3\2\2\2\u1762\u1763\7\4\2\2\u1763"+
+		"\u176b\3\2\2\2\u1764\u1765\7\u01dc\2\2\u1765\u1766\7M\2\2\u1766\u1767"+
+		"\7\3\2\2\u1767\u1768\5\u04b2\u025a\2\u1768\u1769\7\4\2\2\u1769\u176b\3"+
+		"\2\2\2\u176a\u175c\3\2\2\2\u176a\u1764\3\2\2\2\u176b\u176d\3\2\2\2\u176c"+
 		"\u1750\3\2\2\2\u176c\u1751\3\2\2\2\u176c\u1752\3\2\2\2\u176c\u1753\3\2"+
 		"\2\2\u176c\u1754\3\2\2\2\u176c\u1755\3\2\2\2\u176c\u1756\3\2\2\2\u176c"+
 		"\u1757\3\2\2\2\u176c\u1758\3\2\2\2\u176c\u1759\3\2\2\2\u176c\u175a\3\2"+
@@ -113775,8 +114737,8 @@ public class DB2zSQLParser extends Parser {
 		"\u0acc\u0ad1\u0ad9\u0adc\u0ae0\u0ae3\u0ae6\u0af3\u0b04\u0b09\u0b10\u0b1a"+
 		"\u0b1d\u0b23\u0b2a\u0b2e\u0b37\u0b3b\u0b3f\u0b42\u0b45\u0b4f\u0b55\u0b5d"+
 		"\u0b5f\u0b63\u0b6d\u0b73\u0b77\u0b7b\u0b82\u0b8d\u0b9b\u0b9f\u0ba4\u0ba6"+
-		"\u0bab\u0bb5\u0bb7\u0bbd\u0bc2\u0bc6\u0bcb\u0bcf\u0bd1\u0bd6\u0bda\u0bdf"+
-		"\u0be5\u0bee\u0bf1\u0bf5\u0bfa\u0bfe\u0c01\u0c06\u0c0f\u0c13\u0c20\u0c25"+
+		"\u0bab\u0bb5\u0bb7\u0bc0\u0bc5\u0bc9\u0bce\u0bd2\u0bd4\u0bd9\u0bdd\u0be2"+
+		"\u0be8\u0bf1\u0bf4\u0bf8\u0bfd\u0c01\u0c04\u0c09\u0c0f\u0c13\u0c20\u0c25"+
 		"\u0c2a\u0c2e\u0c31\u0c35\u0c3f\u0c44\u0c4c\u0c51\u0c55\u0c59\u0c61\u0c65"+
 		"\u0c6c\u0c72\u0c75\u0c78\u0c88\u0c8d\u0c94\u0c9f\u0ca3\u0cab\u0caf\u0cb7"+
 		"\u0cc1\u0cca\u0cce\u0cd9\u0ce5\u0cee\u0cf2\u0cf4\u0cfc\u0d00\u0d09\u0d0c"+
@@ -113808,8 +114770,8 @@ public class DB2zSQLParser extends Parser {
 		"\u1580\u1585\u158b\u1595\u159f\u15ac\u15af\u15b2\u15b5\u15b9\u15bf\u15c3"+
 		"\u15c5\u15c9\u15cf\u15d2\u15dc\u15e0\u15e5\u15e8\u15eb\u15ee\u15f4\u15f8"+
 		"\u15fa\u15fe\u1603\u1606\u1612\u1616\u161c\u1620\u1629\u1635\u163a\u1643"+
-		"\u164b\u164f\u1652\u1657\u165c\u1662\u166e\u1677\u1682\u1686\u1692\u1697"+
-		"\u169b\u16a2\u16ae\u16b7\u16c2\u16c6\u16ca\u16d3\u16df\u16eb\u16f0\u16fb"+
+		"\u164b\u164f\u1652\u1657\u165c\u1668\u1671\u167c\u1680\u1684\u168a\u1696"+
+		"\u169f\u16aa\u16ae\u16ba\u16bf\u16c3\u16ca\u16d3\u16df\u16eb\u16f0\u16fb"+
 		"\u1701\u1709\u170e\u1714\u1718\u171d\u1729\u1736\u173b\u1740\u1743\u1747"+
 		"\u174e\u1760\u176a\u176c\u177e\u1783\u178a\u178d\u179b\u17a2\u17af\u17b4"+
 		"\u17b8\u17ba\u17c2\u17ca\u17d0\u17d9\u17df\u17e5\u17e9\u17ee\u17f0\u17f9"+

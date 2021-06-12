@@ -574,6 +574,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSavepointStatement(DB2zSQLParser.SavepointStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setConnectionStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -609,12 +615,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetSpecialRegisterStatement(DB2zSQLParser.SetSpecialRegisterStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitSetAssignmentStatement(DB2zSQLParser.SetAssignmentStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#signalStatement}.
 	 * @param ctx the parse tree
@@ -1882,6 +1882,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitModificationOperation(DB2zSQLParser.ModificationOperationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#setAssignmentClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1893,12 +1899,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetAssignmentTargetVariable(DB2zSQLParser.SetAssignmentTargetVariableContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#assignmentClause}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitAssignmentClause(DB2zSQLParser.AssignmentClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#updateOperation}.
 	 * @param ctx the parse tree
