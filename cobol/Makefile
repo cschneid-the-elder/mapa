@@ -1,6 +1,6 @@
 
 JC = javac
-CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.7.2-complete.jar"
+CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -13,7 +13,7 @@ AOPT = -visitor -listener
 
 ./src/%.tokens: ./src/%.g4
 	echo `date` $< >>build.log
-	java -jar ./lib/antlr-4.7.2-complete.jar $(AOPT) $<
+	java -jar ./lib/antlr-4.9.2-complete.jar $(AOPT) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
@@ -31,7 +31,7 @@ cleanmine:
 
 mine:
 	echo `date` $@ >> build.log
-	$(JC) $(JCOPT) ./src/TerminalNodeWrapper.java ./src/LiteralWrapper.java ./src/CharDataKeywordWrapper.java ./src/CobolWordWrapper.java ./src/PseudoTextWrapper.java ./src/CharDataWrapper.java ./src/FilenameWrapper.java ./src/CobolPreprocessorParserTerminalNodeListener.java ./src/CharDataLineWrapper.java ./src/CobolPreprocessorParserCharDataLineListener.java ./src/DirectoryPhrase.java ./src/ReplaceClause.java ./src/CobolProgram.java ./src/ProgramListener.java ./src/CobolWord.java ./src/AssignClause.java ./src/Literal.java ./src/CicsKeywordWithArg.java ./src/ExecCicsStatementType.java ./src/ExecCicsStatement.java ./src/CallEtAlListener.java ./src/DataDescriptionEntryListener.java ./src/DDNode.java ./src/CallWrapper.java ./src/TheCLI.java ./src/CompilerOptionsWrapper.java ./src/CompilerDirectingStatementListener.java ./src/TestIntegration.java ./src/CallType.java ./src/IdDivListener.java ./src/CopyReplaceParent.java ./src/CopyStatement.java ./src/ReplaceOffStatement.java ./src/ReplaceStatement.java ./src/CondCompToken.java ./src/CondCompCondition.java ./src/CondCompLogicOp.java ./src/CondCompArithOp.java ./src/CondCompGroupOp.java ./src/CondCompVar.java ./src/CondCompComparisonOp.java ./src/CondCompSimpleRelationalCondition.java ./src/CondCompBinaryCondition.java ./src/CondCompDefinedCondition.java ./src/CondCompRelationalCondition.java ./src/CondCompArithmeticAtom.java ./src/CondCompArithmeticExpression.java ./src/CompilerDirectingStatement.java ./src/CondCompStmtIf.java ./src/CondCompStmtElse.java ./src/CondCompStmtEndIf.java ./src/CondCompEvaluateSelection.java ./src/CondCompStmtEvaluate.java ./src/CondCompStmtWhen.java ./src/CondCompStmtEndEvaluate.java ./src/ConditionalCompilationStatement.java ./src/CondCompStmtDefine.java ./src/CobolSource.java ./src/Identifier.java ./src/QualifiedDataName.java ./src/QualifiedDataNameFormat1.java ./src/QualifiedInData.java ./src/DataName.java ./src/InData.java ./src/InTable.java ./src/TableCall.java ./src/MoveStatement.java
+	$(JC) $(JCOPT) ./src/TerminalNodeWrapper.java ./src/LiteralWrapper.java ./src/CharDataKeywordWrapper.java ./src/CobolWordWrapper.java ./src/PseudoTextWrapper.java ./src/CharDataWrapper.java ./src/FilenameWrapper.java ./src/CharDataLineWrapper.java ./src/CobolPreprocessorParserTerminalNodeListener.java ./src/DirectoryPhrase.java ./src/ReplaceClause.java ./src/CobolProgram.java ./src/ProgramListener.java ./src/CobolWord.java ./src/AssignClause.java ./src/Literal.java ./src/CicsKeywordWithArg.java ./src/ExecCicsStatementType.java ./src/ExecCicsStatement.java ./src/CallEtAlListener.java ./src/DataDescriptionEntryListener.java ./src/DDNode.java ./src/CallWrapper.java ./src/TheCLI.java ./src/CompilerOptionsWrapper.java ./src/CompilerDirectingStatementListener.java ./src/TestIntegration.java ./src/CallType.java ./src/IdDivListener.java ./src/CopyReplaceParent.java ./src/CopyStatement.java ./src/ReplaceOffStatement.java ./src/ReplaceStatement.java ./src/DataLocation.java ./src/CondCompToken.java ./src/CondCompCondition.java ./src/CondCompLogicOp.java ./src/CondCompArithOp.java ./src/CondCompGroupOp.java ./src/CondCompVar.java ./src/CondCompComparisonOp.java ./src/CondCompSimpleRelationalCondition.java ./src/CondCompBinaryCondition.java ./src/CondCompDefinedCondition.java ./src/CondCompRelationalCondition.java ./src/CondCompArithmeticAtom.java ./src/CondCompArithmeticExpression.java ./src/CompilerDirectingStatement.java ./src/CondCompStmtIf.java ./src/CondCompStmtElse.java ./src/CondCompStmtEndIf.java ./src/CondCompEvaluateSelection.java ./src/CondCompStmtEvaluate.java ./src/CondCompStmtWhen.java ./src/CondCompStmtEndEvaluate.java ./src/ConditionalCompilationStatement.java ./src/CondCompStmtDefine.java ./src/CobolSource.java ./src/Identifier.java ./src/QualifiedDataName.java ./src/QualifiedDataNameFormat1.java ./src/QualifiedInData.java ./src/DataName.java ./src/InData.java ./src/InTable.java ./src/TableCall.java ./src/MoveStatement.java
 
 evaluate:
 	echo `date` $@ >> build.log
@@ -78,27 +78,27 @@ endif
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+	java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigpp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+	java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigx:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/test$(n).cbl
+	java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrignist:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/nist/$(n)
+	java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/nist/$(n)
 
 testrigppx:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
+	java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrigppnist:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.7.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
+	java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
 
 ziplogs:
 	echo `date` $@ >> build.log
@@ -136,7 +136,7 @@ ziplogs:
 
 ./class/CompilerDirectingStatementListener.class:
 
-./class/TheCLI.class ./class/CharDataLineWrapper.class ./class/TerminalNodeWrapper.class ./class/CopyReplaceParent.class ./class/CopyStatement.class ./class/ReplaceStatement.class: ./src/CobolPreprocessorParser.java
+./class/TheCLI.class ./class/CharDataLineWrapper.class ./class/TerminalNodeWrapper.class ./class/CobolPreprocessorParserTerminalNodeListener.class ./class/CopyReplaceParent.class ./class/CopyStatement.class ./class/ReplaceStatement.class: ./src/CobolPreprocessorParser.java
 
 #./class/CondCompSimpleArithmeticExpression.class:
 

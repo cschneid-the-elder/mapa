@@ -1,4 +1,4 @@
-// Generated from src/CobolParser.g4 by ANTLR 4.7.2
+// Generated from src/CobolParser.g4 by ANTLR 4.9.2
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
 
 /**

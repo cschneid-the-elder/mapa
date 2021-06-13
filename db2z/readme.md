@@ -8,6 +8,10 @@ Initially my intent was to provide more robust parsing of SQL to detect CALLs, b
 
 Currently (05-Jun-2021) a work in progress.  I believe all the embeddable statements are defined and there are tests for all of them.
 
-There is a left-recursion problem in the tableReference rule with respect to the joinedTable rule.  So this won't do arbitrarily complex SQL.
+There is a left-recursion problem in the tableReference rule with respect to the joinedTable rule.  So this probably won't do arbitrarily complex SQL.
 
 IBM's documentation for version 12 of Db2 for z/OS serves as source material.
+
+This was built on ubuntu 16.04 LTS with ANTLR 4.9.2 and openjdk version "1.8.0_252".
+
+
