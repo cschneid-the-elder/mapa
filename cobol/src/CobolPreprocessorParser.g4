@@ -411,8 +411,13 @@ compilerDirectiveStatement
    ;
 
 compilerDirective
-   : (compilerDirectiveCallInterface 
-   | compilerDirectiveInline)
+   : (
+   compilerDirectiveCallInterface 
+   | compilerDirectiveInline
+   | compilerDirectiveBasis
+   | compilerDirectiveInsert
+   | compilerDirectiveDelete
+   )
    ;
 
 conditionalCompilationStatement
@@ -431,6 +436,39 @@ compilerDirectiveCallInterface
 
 compilerDirectiveInline
    : (COMPILER_DIRECTIVE_TAG INLINE (INLINE_ON | INLINE_OFF))
+   ;
+
+compilerDirectiveBasis
+   : (BASIS basisName)
+   ;
+
+basisName
+   : (literal | cobolWord | filename)
+   ;
+
+compilerDirectiveInsert
+   : (INSERT NUMERICLITERAL)
+   ;
+
+compilerDirectiveDelete
+   : (
+   DELETE compilerDirectiveDeleteSequenceNumber
+   )
+   ;
+
+compilerDirectiveNumericRange
+   : (compilerDirectiveNumericAtom MINUSCHAR compilerDirectiveNumericAtom)
+   ;
+
+compilerDirectiveNumericAtom
+   : (NUMERICLITERAL)
+   ;
+
+compilerDirectiveDeleteSequenceNumber
+   : (
+   (compilerDirectiveNumericAtom | compilerDirectiveNumericRange)
+   (COMMACHAR (compilerDirectiveNumericAtom | compilerDirectiveNumericRange))*
+   )
    ;
 
 conditionalCompilationDefine
@@ -582,6 +620,7 @@ charDataKeyword
    | C_CHAR | D_CHAR | E_CHAR | F_CHAR | H_CHAR | I_CHAR | M_CHAR | N_CHAR | O_CHAR | Q_CHAR | S_CHAR | U_CHAR | W_CHAR | X_CHAR
    | DIVISION
    | LEADING | TRAILING
+   | BASIS | INSERT | DELETE
    ;
 
 
