@@ -67,6 +67,7 @@ class CobolSource {
 		this.initFileNm = new File(sourceFileName).getName();
 
 		currTempFile = CobolSource.copyWithout73to80(sourceFileName, baseDir, initFileNm);
+		currTempFile = this.establishBasis(currTempFile);
 		Boolean idDivFound = lookForIdDiv(currTempFile);
 		if (!idDivFound) {
 			LOGGER.info(sourceFileName + " not COBOL?");
@@ -89,6 +90,68 @@ class CobolSource {
 
 	public UUID getUUID() {
 		return this.uuid;
+	}
+
+	private String establishBasis(String initFileName) throws Exception {
+		LOGGER.fine(this.myName + " establishBasis()");
+
+		CharStream cs = fromFileName(initFileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker walker = new ParseTreeWalker();
+	
+		BasisListener listener = new BasisListener(this.LOGGER);
+	
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+	
+		walker.walk(listener, tree);
+
+		BasisStatement basisStatement = listener.basisStatement;
+		if (basisStatement == null) {
+			return initFileName;
+		}
+
+		ArrayList<InsertStatement> insertStatements = listener.insertStatements;
+		ArrayList<DeleteStatement> deleteStatements = listener.deleteStatements;
+		return this.mergeSourceAndBasis(
+				initFileName
+				, basisStatement
+				, insertStatements
+				, deleteStatements);
+		
+	}
+
+	private String mergeSourceAndBasis(
+				String initFileName
+				, BasisStatement basisStatement
+				, ArrayList<InsertStatement> insertStatements
+				, ArrayList<DeleteStatement> deleteStatements
+				) throws IOException {
+		LineNumberReader src = new LineNumberReader(new FileReader( new File(initFileName)));
+		LineNumberReader basis = new LineNumberReader(new FileReader( new File(basisStatement.getBasisName())));
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-frombasis-", "-cbl", this.baseDir);
+		staticCLI.setPosixAttributes(tmp);
+		if (staticCLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+
+		PrintWriter out = new PrintWriter(tmp);
+		String basisLine = basis.readLine();
+		int basisLineNb = basis.getLineNumber();
+		String srcLine = src.readLine(); //this should be the BASIS statement
+
+		while (basisLine != null) {
+
+		}
+
+		out.close();
+		return tmp.getAbsolutePath();
 	}
 
 	/**
