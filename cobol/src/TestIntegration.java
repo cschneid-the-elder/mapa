@@ -734,6 +734,13 @@ public static void main(String[] args) throws Exception {
 				if (!testDD002(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
 				if (!testDD002(fileName, bareName, new Integer(05), "COUNTER", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
 				break;
+			case "testantlr060":
+			case "testantlr160":
+			case "testantlr260":
+			case "testantlr360":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

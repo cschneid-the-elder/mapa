@@ -162,3 +162,5 @@ ziplogs:
 
 ./class/BasisListener.class: .class/BasisStatement.class ./class/InsertStatement.class ./class/DeleteStatement.class
 
+./class/BasisStatement.class: ./class/InsertStatement.class ./class/DeleteStatement.class
+

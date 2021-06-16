@@ -50,6 +50,7 @@ class CobolSource {
 	private ArrayList<AssignClause> assignClauses = new ArrayList<>(); //TODO remove
 	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+	private BasisStatement basisStatement = null;
 	private Boolean isCobol = true;
 
 	public CobolSource(
@@ -67,7 +68,11 @@ class CobolSource {
 		this.initFileNm = new File(sourceFileName).getName();
 
 		currTempFile = CobolSource.copyWithout73to80(sourceFileName, baseDir, initFileNm);
-		currTempFile = this.establishBasis(currTempFile);
+		this.establishBasis(currTempFile);
+		if (this.basisStatement != null) {
+			String dir = new File(sourceFileName).getAbsoluteFile().getParent();
+			currTempFile = this.basisStatement.mergeWithSource(initFileNm, currTempFile, baseDir, dir);
+		}
 		Boolean idDivFound = lookForIdDiv(currTempFile);
 		if (!idDivFound) {
 			LOGGER.info(sourceFileName + " not COBOL?");
@@ -92,7 +97,7 @@ class CobolSource {
 		return this.uuid;
 	}
 
-	private String establishBasis(String initFileName) throws Exception {
+	private void establishBasis(String initFileName) throws Exception {
 		LOGGER.fine(this.myName + " establishBasis()");
 
 		CharStream cs = fromFileName(initFileName);  //load the file
@@ -105,53 +110,13 @@ class CobolSource {
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
-		BasisListener listener = new BasisListener(this.LOGGER);
+		BasisListener listener = new BasisListener(this.LOGGER, this.CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
 		walker.walk(listener, tree);
 
-		BasisStatement basisStatement = listener.basisStatement;
-		if (basisStatement == null) {
-			return initFileName;
-		}
-
-		ArrayList<InsertStatement> insertStatements = listener.insertStatements;
-		ArrayList<DeleteStatement> deleteStatements = listener.deleteStatements;
-		return this.mergeSourceAndBasis(
-				initFileName
-				, basisStatement
-				, insertStatements
-				, deleteStatements);
-		
-	}
-
-	private String mergeSourceAndBasis(
-				String initFileName
-				, BasisStatement basisStatement
-				, ArrayList<InsertStatement> insertStatements
-				, ArrayList<DeleteStatement> deleteStatements
-				) throws IOException {
-		LineNumberReader src = new LineNumberReader(new FileReader( new File(initFileName)));
-		LineNumberReader basis = new LineNumberReader(new FileReader( new File(basisStatement.getBasisName())));
-		File tmp = File.createTempFile("CallTree-" + initFileNm + "-frombasis-", "-cbl", this.baseDir);
-		staticCLI.setPosixAttributes(tmp);
-		if (staticCLI.saveTemp) {
-		} else {
-			tmp.deleteOnExit();
-		}
-
-		PrintWriter out = new PrintWriter(tmp);
-		String basisLine = basis.readLine();
-		int basisLineNb = basis.getLineNumber();
-		String srcLine = src.readLine(); //this should be the BASIS statement
-
-		while (basisLine != null) {
-
-		}
-
-		out.close();
-		return tmp.getAbsolutePath();
+		this.basisStatement = listener.basisStatement;
 	}
 
 	/**
