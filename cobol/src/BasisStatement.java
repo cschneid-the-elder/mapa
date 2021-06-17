@@ -75,7 +75,8 @@ public class BasisStatement implements CompilerDirectingStatement {
 				) throws IOException {
 		this.LOGGER.fine(myName + " mergeWithSource()");
 		this.distributeSource(currTempFile);
-		LineNumberReader basis = new LineNumberReader(new FileReader( new File(dir + File.separatorChar + this.getBasisName())));
+		String basisFile = CobolSource.copyWithout73to80(dir + File.separatorChar + this.getBasisName(), baseDir, this.getBasisName());
+		LineNumberReader basis = new LineNumberReader(new FileReader( new File(basisFile)));
 		File tmp = File.createTempFile("CallTree-" + initFileNm + "-frombasis-", "-cbl", baseDir);
 		this.CLI.setPosixAttributes(tmp);
 		if (this.CLI.saveTemp) {

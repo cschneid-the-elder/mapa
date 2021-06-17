@@ -68,7 +68,7 @@ class CobolSource {
 		this.initFileNm = new File(sourceFileName).getName();
 
 		currTempFile = CobolSource.copyWithout73to80(sourceFileName, baseDir, initFileNm);
-		this.establishBasis(currTempFile);
+		this.lookForBasis(currTempFile);
 		if (this.basisStatement != null) {
 			String dir = new File(sourceFileName).getAbsoluteFile().getParent();
 			currTempFile = this.basisStatement.mergeWithSource(initFileNm, currTempFile, baseDir, dir);
@@ -97,8 +97,8 @@ class CobolSource {
 		return this.uuid;
 	}
 
-	private void establishBasis(String initFileName) throws Exception {
-		LOGGER.fine(this.myName + " establishBasis()");
+	private void lookForBasis(String initFileName) throws Exception {
+		LOGGER.fine(this.myName + " lookForBasis()");
 
 		CharStream cs = fromFileName(initFileName);  //load the file
 		CobolPreprocessorLexer.testRig = false;
