@@ -47,7 +47,6 @@ class CobolSource {
 	private ArrayList<DDNode> dataNodes = new ArrayList<>();
 	private ArrayList<CobolProgram> programs = new ArrayList<>();
 	private ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-	private ArrayList<AssignClause> assignClauses = new ArrayList<>(); //TODO remove
 	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private BasisStatement basisStatement = null;
@@ -832,7 +831,6 @@ class CobolSource {
 						, ArrayList<DDNode> dataNodes) {
 
 		LOGGER.fine(this.myName + " resolveCalledNodes");
-		ArrayList<DDNode> calledDataNodes = new ArrayList<>(); //TODO remove
 
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
@@ -853,6 +851,10 @@ class CobolSource {
 			, this.getUUID().toString()
 			, this.sourceFileName
 			, dateTimeStamp);
+
+		if (basisStatement != null) {
+			basisStatement.writeOn(out, this.getUUID());
+		}
 
 		for (CopyStatement cs: this.copyStatements) {
 			cs.writeOn(out, this.getUUID());

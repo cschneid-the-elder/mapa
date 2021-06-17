@@ -9,6 +9,7 @@ import org.antlr.v4.runtime.tree.*;
 public class BasisStatement implements CompilerDirectingStatement {
 
 	private String myName = this.getClass().getName();
+	private UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	private TheCLI CLI = null;
 	private CobolPreprocessorParser.CompilerDirectiveBasisContext ctx = null;
@@ -40,6 +41,10 @@ public class BasisStatement implements CompilerDirectingStatement {
 
 	public CompilerDirectingStatementType getType() {
 		return this.type;
+	}
+
+	public UUID getUUID() {
+		return this.uuid;
 	}
 
 	public String getBasisName() {
@@ -193,5 +198,12 @@ public class BasisStatement implements CompilerDirectingStatement {
 		return null;
 	}
 
+	public void writeOn(PrintWriter out, UUID parentUUID) {
+		out.printf(
+			"BASIS,%s,%s,%s\n"
+			, this.getUUID().toString()
+			, parentUUID.toString()
+			, this.getBasisName());
+	}
 
 }

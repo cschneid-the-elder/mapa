@@ -73,6 +73,7 @@ More generically...
 | --- | --- |
 | FILE | UUID, file being processed, date / time stamp |
 | COPY | UUID, file UUID, copybook name |
+| BASIS | UUID, file UUID, basis file name |
 | PGM | UUID, file UUID, program name, statement count, conditional statement count |
 | CALL | UUID, program UUID, calling program name, call type (see below), called program name |
 | DD | UUID, program UUID, ddname (see below) |
