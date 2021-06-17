@@ -85,7 +85,10 @@ public class BasisStatement implements CompilerDirectingStatement {
 
 		PrintWriter out = new PrintWriter(tmp);
 		String basisLine = basis.readLine();
-		int basisLineNb = basis.getLineNumber();
+		Integer basisLineNb = new Integer(-1);
+		if (basisLine != null && basisLine.length() >= 6) {
+			basisLineNb = new Integer(basisLine.substring(0,6));
+		}
 
 		while (basisLine != null) {
 			InsertStatement insertStatement = this.applicableInsertStatement(basisLineNb);
@@ -105,7 +108,11 @@ public class BasisStatement implements CompilerDirectingStatement {
 				out.println(basisLine);
 			}
 			basisLine = basis.readLine();
-			basisLineNb = basis.getLineNumber();
+			if (basisLine != null && basisLine.length() >= 6) {
+				basisLineNb = new Integer(basisLine.substring(0,6));
+			} else {
+				basisLineNb = new Integer(-1);
+			}
 		}
 
 		out.close();
@@ -165,9 +172,9 @@ public class BasisStatement implements CompilerDirectingStatement {
 		this.LOGGER.fine(myName + " distributeSource() exit");
 	}
 
-	private InsertStatement applicableInsertStatement(int lineNb) {
+	private InsertStatement applicableInsertStatement(Integer lineNb) {
 		for (InsertStatement insertStatement: this.insertStatements) {
-			if (lineNb == insertStatement.getTargetLine()) {
+			if (insertStatement.appliesTo(lineNb)) {
 				return insertStatement;
 			}
 		}
@@ -175,7 +182,7 @@ public class BasisStatement implements CompilerDirectingStatement {
 		return null;
 	}
 
-	private DeleteStatement applicableDeleteStatement(int lineNb) {
+	private DeleteStatement applicableDeleteStatement(Integer lineNb) {
 		for (DeleteStatement deleteStatement: this.deleteStatements) {
 			if (deleteStatement.appliesTo(lineNb)) {
 				return deleteStatement;

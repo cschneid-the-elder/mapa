@@ -11,7 +11,7 @@ public class InsertStatement implements CompilerDirectingStatement {
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_INSERT;
 	private int startLine = -1;
 	private int endLine = -1;
-	private int targetLine = -1;
+	private Integer targetLine = null;
 	private ArrayList<String> src = new ArrayList<>();
 
 	InsertStatement(
@@ -22,8 +22,7 @@ public class InsertStatement implements CompilerDirectingStatement {
 		this.ctx = ctx;
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
-		Integer i = new Integer(this.ctx.NUMERICLITERAL().getText());
-		this.targetLine = i.intValue();
+		this.targetLine = new Integer(this.ctx.NUMERICLITERAL().getText());
 	}
 
 	public int getLine() {
@@ -38,8 +37,12 @@ public class InsertStatement implements CompilerDirectingStatement {
 		return this.type;
 	}
 
-	public int getTargetLine() {
+	public Integer getTargetLine() {
 		return this.targetLine;
+	}
+
+	public Boolean appliesTo(Integer lineNb) {
+		return (this.targetLine.compareTo(lineNb) == 0);
 	}
 
 	public void addSrc(String srcLine) {

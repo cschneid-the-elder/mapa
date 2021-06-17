@@ -80,12 +80,26 @@ public class DeleteStatement implements CompilerDirectingStatement {
 	public Boolean appliesTo(Integer lineNb) {
 		if (this.targetLines.contains(lineNb)) {
 			return true;
+		} else {
+			this.LOGGER.finest(
+				myName 
+				+ " " + lineNb
+				+ " is not present in "
+				+ this.targetLines
+				);
 		}
 
 		for (ArrayList<Integer> pair: this.targetRanges) {
 			if (lineNb.compareTo(pair.get(0)) >= 0
 			&& lineNb.compareTo(pair.get(1)) <= 0) {
 				return true;
+			} else {
+				this.LOGGER.finest(
+					myName
+					+ " " + lineNb
+					+ " is not >= " + pair.get(0)
+					+ " or not <= " + pair.get(1)
+					);
 			}
 		}
 
