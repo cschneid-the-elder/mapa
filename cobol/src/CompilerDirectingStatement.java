@@ -18,6 +18,9 @@ public interface CompilerDirectingStatement {
 			, STMT_EVALUATE
 			, STMT_WHEN
 			, STMT_END_EVALUATE
+			, STMT_BASIS
+			, STMT_DELETE
+			, STMT_INSERT
 	}
 
 }

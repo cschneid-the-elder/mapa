@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (28-Apr-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (16-Jun-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -59,6 +59,8 @@ This application will create several temporary files for each COBOL member you p
 
 A log file will be created in the current directory with messages about the current run.  If you use the `-logLevel` option, it applies to these messages.  The log messages output to the screen are at the INFO level or above.
 
+I don't have a mainframe, so there are compiler behaviors I cannot observe directly.  I've recently added support for what I believe to be the behavior of the BASIS statement and its attendant INSERT and DELETE statements, but as these are IBM extensions I cannot be certain the behavior I've coded is the moral equivalent of what IBM provides.
+
 This is free software, developed by an old man trying to keep busy.  There are no doubt edge cases not handled correctly, and static code analysis is never going to provide a definitive answer.  But we try.
 
 ### Output File Format
@@ -71,6 +73,7 @@ More generically...
 | --- | --- |
 | FILE | UUID, file being processed, date / time stamp |
 | COPY | UUID, file UUID, copybook name |
+| BASIS | UUID, file UUID, basis file name |
 | PGM | UUID, file UUID, program name, statement count, conditional statement count |
 | CALL | UUID, program UUID, calling program name, call type (see below), called program name |
 | DD | UUID, program UUID, ddname (see below) |
@@ -164,7 +167,6 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 
 ### What This Won't Do
 
- + `BASIS` statement.
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
  + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
 

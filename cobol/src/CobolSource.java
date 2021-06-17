@@ -47,9 +47,9 @@ class CobolSource {
 	private ArrayList<DDNode> dataNodes = new ArrayList<>();
 	private ArrayList<CobolProgram> programs = new ArrayList<>();
 	private ArrayList<CompilerDirectingStatement> compDirStmts = new ArrayList<>();
-	private ArrayList<AssignClause> assignClauses = new ArrayList<>(); //TODO remove
 	private ArrayList<CopyStatement> copyStatements = new ArrayList<>();
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
+	private BasisStatement basisStatement = null;
 	private Boolean isCobol = true;
 
 	public CobolSource(
@@ -67,6 +67,11 @@ class CobolSource {
 		this.initFileNm = new File(sourceFileName).getName();
 
 		currTempFile = CobolSource.copyWithout73to80(sourceFileName, baseDir, initFileNm);
+		this.lookForBasis(currTempFile);
+		if (this.basisStatement != null) {
+			String dir = new File(sourceFileName).getAbsoluteFile().getParent();
+			currTempFile = this.basisStatement.mergeWithSource(initFileNm, currTempFile, baseDir, dir);
+		}
 		Boolean idDivFound = lookForIdDiv(currTempFile);
 		if (!idDivFound) {
 			LOGGER.info(sourceFileName + " not COBOL?");
@@ -89,6 +94,28 @@ class CobolSource {
 
 	public UUID getUUID() {
 		return this.uuid;
+	}
+
+	private void lookForBasis(String initFileName) throws Exception {
+		LOGGER.fine(this.myName + " lookForBasis()");
+
+		CharStream cs = fromFileName(initFileName);  //load the file
+		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+	
+		ParseTreeWalker walker = new ParseTreeWalker();
+	
+		BasisListener listener = new BasisListener(this.LOGGER, this.CLI);
+	
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+	
+		walker.walk(listener, tree);
+
+		this.basisStatement = listener.basisStatement;
 	}
 
 	/**
@@ -804,7 +831,6 @@ class CobolSource {
 						, ArrayList<DDNode> dataNodes) {
 
 		LOGGER.fine(this.myName + " resolveCalledNodes");
-		ArrayList<DDNode> calledDataNodes = new ArrayList<>(); //TODO remove
 
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
@@ -825,6 +851,10 @@ class CobolSource {
 			, this.getUUID().toString()
 			, this.sourceFileName
 			, dateTimeStamp);
+
+		if (basisStatement != null) {
+			basisStatement.writeOn(out, this.getUUID());
+		}
 
 		for (CopyStatement cs: this.copyStatements) {
 			cs.writeOn(out, this.getUUID());
