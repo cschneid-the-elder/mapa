@@ -23,6 +23,7 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 	private CobolPreprocessorParser.CopyStatementContext ctx = null;
 	private CompilerDirectingStatementType type = CompilerDirectingStatementType.STMT_COPY;
 	private ArrayList<ReplaceClause> replaceClauses = new ArrayList<>();
+	private DB2zIncludeStatement includeStatement = null;
 	private int startLine = -1;
 	private int endLine = -1;
 	private int startPosn = -1;
@@ -67,6 +68,30 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		this.LOGGER.fine(myName + " this.replacement = " + this.replacement);
 	}
 
+	public CopyStatement(
+			DB2zIncludeStatement includeStatement
+			, CobolPreprocessorParser.ExecSqlStatementContext ctx 
+			, Logger LOGGER
+			, TheCLI CLI) {
+		this.includeStatement = includeStatement;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.startLine = ctx.start.getLine();
+		this.endLine = ctx.stop.getLine();
+		TerminalNode end = null;
+		if (ctx.DOT() == null) {
+			end = ctx.END_EXEC();
+		} else {
+			end = ctx.DOT();
+		}
+
+		this.startPosn = ctx.start.getCharPositionInLine();
+		this.endPosn = end.getSymbol().getCharPositionInLine() + end.getText().length();
+
+		this.LOGGER.fine(myName + " " + this.getCopyFile());
+		this.LOGGER.fine(myName + " instantiated from SQL INCLUDE");
+	}
+
 	public int getLine() {
 		return this.startLine;
 	}
@@ -80,23 +105,44 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 	}
 
 	public int startLine() {
-		return this.ctx.COPY().getSymbol().getLine();
+		if (this.ctx == null) {
+			return this.getLine();
+		} else {
+			return this.ctx.COPY().getSymbol().getLine();
+		}
 	}
 
 	public int endLine() {
-		return this.ctx.DOT().getSymbol().getLine();
+		if (this.ctx == null) {
+			return this.getEndLine();
+		} else {
+			return this.ctx.DOT().getSymbol().getLine();
+		}
 	}
 
 	public int startPositionInLine() {
-		return this.ctx.COPY().getSymbol().getCharPositionInLine();
+		if (this.ctx == null) {
+			return this.startPosn;
+		} else {
+			return this.ctx.COPY().getSymbol().getCharPositionInLine();
+		}
 	}
 
 	public int endPositionInLine() {
-		return this.ctx.DOT().getSymbol().getCharPositionInLine();
+		if (this.ctx == null) {
+			return this.endPosn;
+		} else {
+			return this.ctx.DOT().getSymbol().getCharPositionInLine();
+		}
+		
 	}
 
 	public String getText() {
-		return this.ctx.getText();
+		if (this.ctx == null) {
+			return "SQL INCLUDE " + this.includeStatement.getMemberName();
+		} else {
+			return this.ctx.getText();
+		}
 	}
 
 	public UUID getUUID() {
@@ -139,48 +185,56 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		out.println(currLine.substring(0, startPosn));
 
 		String copyFile = null;
+		String testCopyFile = this.getCopyFileFull();
 
-		try {
-			copyFile = CobolSource.copyWithout73to80(
-					this.getCopyFileFull()
-					, TestIntegration.baseDir
-					, this.getCopyFile()
-					);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-
-		try {
-			copyFile = this.CLI.copyCompressingContinuations(
-					copyFile
-					, TestIntegration.baseDir
-					, this.getCopyFile()
-					);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return;
-		}
-
-		if (this.replaceable.size() == 0) {
-			List<String> list = 
-				Files.readAllLines(Paths.get(copyFile));
-			for (String line: list) out.println(line);			
+		if (testCopyFile == null) {
+			if (!this.getCopyFile().equals("SQLCA")) {
+				this.LOGGER.info(this.getCopyFile() + " not found");
+			}
 		} else {
-			this.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);
+			try {
+				copyFile = CobolSource.copyWithout73to80(
+						this.getCopyFileFull()
+						, TestIntegration.baseDir
+						, this.getCopyFile()
+						);
+			} catch (Exception e) {
+				e.printStackTrace();
+				return;
+			}
+			try {
+				copyFile = this.CLI.copyCompressingContinuations(
+						copyFile
+						, TestIntegration.baseDir
+						, this.getCopyFile()
+						);
+			} catch (Exception e) {
+				e.printStackTrace();
+					return;
+			}
+			if (this.replaceable.size() == 0) {
+				List<String> list = 
+					Files.readAllLines(Paths.get(copyFile));
+				for (String line: list) out.println(line);			
+			} else {
+				this.applyReplacingPhrase(out, copyFile, this.replaceable, this.replacement);
+			}
 		}
-
 
 		/*
 		Writing the rest of the source line following the COPY statement.
 		*/
 		int endPosn = this.endPositionInLine() + 1;
 		this.LOGGER.fine("endPosn = " + endPosn);
-		String outLine = null;
+		String outLine = new String();
 		if (this.getLine() == this.getEndLine()) {
-			outLine = this.CLI.padLeft(currLine.substring(endPosn), currLine.length());
+			if (endPosn < currLine.length()) {
+				outLine = this.CLI.padLeft(currLine.substring(endPosn), currLine.length());
+			}
 		} else {
-			outLine = this.CLI.padLeft(lastLine.substring(endPosn), lastLine.length());
+			if (endPosn < lastLine.length()) {
+				outLine = this.CLI.padLeft(lastLine.substring(endPosn), lastLine.length());
+			}
 		}
 		this.LOGGER.fine("outLine = |" + outLine + "|");
 		out.println(outLine);
@@ -200,7 +254,9 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 	private String getCopyFileRaw() {
 		String copyFile = null;
 
-		if (this.ctx.copySource().literal() != null) {
+		if (this.ctx == null) {
+			copyFile = this.includeStatement.getMemberName();
+		} else if (this.ctx.copySource().literal() != null) {
 			copyFile = this.ctx.copySource().literal().getText();
 		} else if (this.ctx.copySource().cobolWord() != null) {
 			copyFile = this.ctx.copySource().cobolWord().getText();
@@ -247,17 +303,25 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 	}
 
 	public void writeOn(PrintWriter out, UUID parentUUID) {
-		out.printf(
-			"COPY,%s,%s,%s\n"
-			, this.getUUID().toString()
-			, parentUUID.toString()
-			, this.getCopyFile());
+		if (this.ctx == null) {
+			out.printf(
+				"SQLINCLUDE,%s,%s,%s\n"
+				, this.getUUID().toString()
+				, parentUUID.toString()
+				, this.getCopyFile());
+		} else {
+			out.printf(
+				"COPY,%s,%s,%s\n"
+				, this.getUUID().toString()
+				, parentUUID.toString()
+				, this.getCopyFile());
+		}
 	}
 
 	public String toString() {
-		StringBuilder sb = new StringBuilder("copy @" + this.ctx.start.getLine() + ": " + this.ctx.getText());
-		sb.append("\n\tstop = " + this.ctx.stop.getLine());
-		sb.append("\n\tcopySource = " + this.ctx.copySource().getText());
+		StringBuilder sb = new StringBuilder("copy @" + this.startLine() + ": " + this.getText());
+		sb.append("\n\tstop = " + this.endLine());
+		sb.append("\n\tcopySource = " + this.getText());
 
 		return sb.toString();
 	}

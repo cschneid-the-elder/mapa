@@ -298,10 +298,10 @@ beginDeclareSectionStatement
 callStatement
 	: (
 	CALL (procedureName | hostVariable)
-	LPAREN (
+	(LPAREN (
 		((expression | NULL | (TABLE tableName)) (COMMA (expression | NULL | (TABLE tableName)))*)
 		| (USING DESCRIPTOR hostVariable)
-	) RPAREN
+	) RPAREN)?
 	)
 	;
 

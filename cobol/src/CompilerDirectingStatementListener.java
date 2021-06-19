@@ -168,7 +168,6 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterExecSqlStatement(CobolPreprocessorParser.ExecSqlStatementContext ctx) {
-		//DB2zIncludeStatement includeStatement = new DB2zIncludeStatement(ctx, this.LOGGER, this.CLI);
 		StringBuilder sb = new StringBuilder();
 
 		for (TerminalNode tn: ctx.SQL_TEXT()) {
@@ -190,6 +189,14 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 
 		walker.walk(listener, tree);
 
+		if (listener.includeStatement != null) {
+			this.compDirStmts.add(
+				new CopyStatement(
+						listener.includeStatement
+						, ctx
+						, this.LOGGER
+						, this.CLI));
+		}
 	}
 
 }
