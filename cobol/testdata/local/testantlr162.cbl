@@ -1,0 +1,21 @@
+000001 Identification Division.
+000002 Program-ID. testantlr162.
+000003 Data Division.
+000004 Working-Storage Section.
+000005 01  CONSTANTS.
+000006     05  MYNAME               PIC X(012) VALUE 'testantlr162'.
+000007     05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+000008
+000009     EXEC SQL INCLUDE SQLCA END-EXEC
+000010
+000011 Procedure Division.
+000012     DISPLAY MYNAME ' Begin'
+000013     
+000014     EXEC SQL INCLUDE testantlr162a END-EXEC
+000015
+000016     DISPLAY MYNAME ' End'
+000017     
+000018     GOBACK
+000019     .
+000020
+000021
