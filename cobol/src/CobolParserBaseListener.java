@@ -4191,30 +4191,6 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterExecSqlCatchAllStatement(CobolParser.ExecSqlCatchAllStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExecSqlCatchAllStatement(CobolParser.ExecSqlCatchAllStatementContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExecSqlStatement(CobolParser.ExecSqlStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

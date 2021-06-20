@@ -167,4 +167,36 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 		}
 	}
 
+	public void enterExecSqlStatement(CobolPreprocessorParser.ExecSqlStatementContext ctx) {
+		StringBuilder sb = new StringBuilder();
+
+		for (TerminalNode tn: ctx.SQL_TEXT()) {
+			sb.append(tn.getSymbol().getText());
+		}
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		DB2zSQLLexer lexer = new DB2zSQLLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		DB2zSQLParser parser = new DB2zSQLParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		SQLIncludeStatementListener listener = 
+			new SQLIncludeStatementListener(this.LOGGER, this.CLI);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		if (listener.includeStatement != null) {
+			this.compDirStmts.add(
+				new CopyStatement(
+						listener.includeStatement
+						, ctx
+						, this.LOGGER
+						, this.CLI));
+		}
+	}
+
 }

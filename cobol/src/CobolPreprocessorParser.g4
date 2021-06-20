@@ -295,7 +295,7 @@ execCicsStatement
 // exec sql statement
 
 execSqlStatement
-   : EXEC SQL charDataSql END_EXEC DOT?
+   : EXEC_SQL SQL_TEXT+ END_EXEC DOT?
    ;
 
 // exec sql ims statement
