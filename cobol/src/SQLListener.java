@@ -6,15 +6,16 @@ import org.antlr.v4.runtime.tree.*;
 
 public class SQLListener extends DB2zSQLParserBaseListener {
 	private Logger LOGGER = null;
-	private TheCLI CLI = null;
 	public ArrayList<DB2zTableName> db2Tables = new ArrayList<>();
+	public DB2zCallStatement db2Call = null;
 
-	public SQLListener(
-			Logger LOGGER
-			, TheCLI CLI) {
+	public SQLListener(Logger LOGGER) {
 		super();
 		this.LOGGER = LOGGER;
-		this.CLI = CLI;
+	}
+
+	public void enterEveryRule(ParserRuleContext ctx) { 
+		this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
 	public void enterTableName(DB2zSQLParser.TableNameContext ctx) {
@@ -22,12 +23,7 @@ public class SQLListener extends DB2zSQLParserBaseListener {
 	}
 
 	public void enterCallStatement(DB2zSQLParser.CallStatementContext ctx) {
-
+		this.db2Call = new DB2zCallStatement(ctx, this.LOGGER);
 	}
-
-	public void enterIncludeStatement(DB2zSQLParser.IncludeStatementContext ctx) {
-
-	}
-
 
 }

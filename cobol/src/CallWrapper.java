@@ -49,7 +49,8 @@ class CallWrapper {
 	public CobolParser.CallStatementContext ctxCall = null;
 	public CobolParser.ExecCicsStatementContext ctxCics = null;
 	private ExecCicsStatement execCicsStmt = null;
-	public CobolParser.ExecSqlCallStatementContext ctxSqlCall = null;
+	private DB2zCallStatement db2Call = null;
+	private String db2CallHostStructure = null;
 	public CobolParser.IdentifierContext idCtx = null;
 	public DDNode dataNode = null;
 	public int line = -1;
@@ -83,16 +84,16 @@ class CallWrapper {
 	}
 
 	public CallWrapper(
-			CobolParser.ExecSqlCallStatementContext ctx
+			DB2zCallStatement db2Call
 			, String callingModuleName
 			, String aLib
 			, Logger LOGGER
 			) {
-		this.ctxSqlCall = ctx;
+		this.db2Call = db2Call;
 		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
 		this.aLib = aLib;
-		this.initialize(ctx);
+		this.initialize(db2Call);
 	}
 
 	public void addCalledModuleName(String calledModuleName) {
@@ -239,22 +240,21 @@ class CallWrapper {
 			);
 	}
 
-	public void initialize(CobolParser.ExecSqlCallStatementContext ctx) {
-		this.line = ctx.start.getLine();
-		if ( ctx.identifier() == null ) {
+	public void initialize(DB2zCallStatement db2Call) {
+		this.line = db2Call.getLine();
+		if (db2Call.getModuleName() != null ) {
 			// CALL literal syntax
-			this.addCalledModuleName(
-				ctx
-				.IDENTIFIER(0)
-				.toString());
+			this.addCalledModuleName(db2Call.getModuleName());
 			this.callType = CallType.SQLCALLBYLITERAL;
 		} else {
-			this.initialize(
-				null
-				, ctx.identifier()
-				, CallType.SQLCALLBYLITERAL
-				, CallType.SQLCALLBYIDENTIFIER
-				);
+			// CALL [hostStructure.]identifier syntax
+			ArrayList<String> reply = db2Call.getVariableName();
+//			this.addCalledModuleName(reply.get(0));
+			this.cobolIdentifier = reply.get(0);
+			if (reply.size() > 1) {
+				this.ofs.add(reply.get(1));
+			}
+			this.callType = CallType.SQLCALLBYIDENTIFIER;
 		}
 	}
 

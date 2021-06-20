@@ -12,7 +12,6 @@ Representing the DB2z TableName token in the DB2zSQL grammar.
 class DB2zTableName {
 
 	private Logger LOGGER = null;
-	private TheCLI CLI = null;
 	private UUID uuid = UUID.randomUUID();
 	private String myName = this.getClass().getName();
 	private DB2zSQLParser.TableNameContext ctx = null;

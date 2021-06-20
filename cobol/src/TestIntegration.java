@@ -751,6 +751,21 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "PGM0061A", CallType.CICSXCTLBYLITERAL, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "CEE3ABD", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
 				break;
+			case "testantlr062":
+			case "testantlr162":
+			case "testantlr262":
+			case "testantlr362":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.SQLCALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
+			case "testantlr063":
+			case "testantlr163":
+			case "testantlr263":
+			case "testantlr363":
+				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

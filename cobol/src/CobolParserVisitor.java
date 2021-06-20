@@ -2098,18 +2098,6 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExecCicsStatement(CobolParser.ExecCicsStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link CobolParser#execSqlCallStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx);
-	/**
-	 * Visit a parse tree produced by {@link CobolParser#execSqlCatchAllStatement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExecSqlCatchAllStatement(CobolParser.ExecSqlCatchAllStatementContext ctx);
-	/**
 	 * Visit a parse tree produced by {@link CobolParser#execSqlStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

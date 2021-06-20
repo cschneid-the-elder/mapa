@@ -978,7 +978,7 @@ dataDescriptionEntryFormat3
    ;
 
 dataDescriptionEntryExecSql
-   : EXECSQLLINE+ DOT_FS?
+   : execSqlStatement
    ;
 
 dataAlignedClause
@@ -1514,16 +1514,8 @@ execCicsStatement
 
 // exec sql statement
 
-execSqlCallStatement
-   : EXEC SQL CALL (COLONCHAR identifier | IDENTIFIER) NEWLINE* (LPARENCHAR (COLONCHAR* IDENTIFIER COMMACHAR* | NEWLINE)+ RPARENCHAR)* END_EXEC DOT?
-   ;
-
-execSqlCatchAllStatement
-   : EXEC SQL (TEXTA | NEWLINE)+ END_EXEC DOT?
-   ;
-
 execSqlStatement
-   : execSqlCallStatement | execSqlCatchAllStatement
+   : EXEC_SQL SQL_TEXT+ END_EXEC DOT?
    ;
 
 // exec sql ims statement

@@ -3487,26 +3487,6 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitExecCicsStatement(CobolParser.ExecCicsStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link CobolParser#execSqlCallStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#execSqlCallStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx);
-	/**
-	 * Enter a parse tree produced by {@link CobolParser#execSqlCatchAllStatement}.
-	 * @param ctx the parse tree
-	 */
-	void enterExecSqlCatchAllStatement(CobolParser.ExecSqlCatchAllStatementContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link CobolParser#execSqlCatchAllStatement}.
-	 * @param ctx the parse tree
-	 */
-	void exitExecSqlCatchAllStatement(CobolParser.ExecSqlCatchAllStatementContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link CobolParser#execSqlStatement}.
 	 * @param ctx the parse tree
 	 */

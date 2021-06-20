@@ -71,11 +71,6 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		}
 	}
 
-	public void enterExecSqlCallStatement(CobolParser.ExecSqlCallStatementContext ctx) {
-		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
-		this.currProgram.addCall(aCall);
-	}
-
 	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
 		this.currProgram.addAssignClause(new AssignClause(ctx, this.LOGGER));
 	}
@@ -87,4 +82,45 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	public void enterSetTo(CobolParser.SetToContext ctx) {
 		this.currProgram.addSetTo(new Identifier(ctx.identifier(), this.LOGGER));
 	}
+
+	public void enterExecSqlStatement(CobolParser.ExecSqlStatementContext ctx) {
+		this.LOGGER.finer("enterExecSqlStatement() entry");
+		StringBuilder sb = new StringBuilder();
+
+		for (TerminalNode tn: ctx.SQL_TEXT()) {
+			sb.append(tn.getSymbol().getText());
+		}
+		this.LOGGER.finest("SQL_TEXT = |" + sb + "|");
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		DB2zSQLLexer lexer = new DB2zSQLLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		DB2zSQLParser parser = new DB2zSQLParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		SQLListener listener = 
+			new SQLListener(this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		this.currProgram.addDB2Tables(listener.db2Tables);
+
+		if (listener.db2Call != null) {
+			this.currProgram.addCall(
+				new CallWrapper(
+						listener.db2Call
+						, this.currProgram.getProgramName()
+						, this.aLib
+						, this.LOGGER
+						)
+			);
+		}
+
+		this.LOGGER.finer("enterExecSqlStatement() exit");
+	}
+
 }
