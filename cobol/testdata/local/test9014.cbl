@@ -24,6 +24,10 @@
            05  PGM4                  PIC X(008) VALUE SPACES.
 
        Procedure Division.
+           OPEN INPUT A001
+           OPEN OUTPUT A002
+           OPEN I-O A003
+           OPEN EXTEND A004
            CALL PGM1
            MOVE 'PGMA0004' TO PGM4
            CALL 'test9014a'
@@ -44,6 +48,9 @@
            05  PGM1                  PIC X(008) VALUE 'PGMB0001'.
            05  PGM5                  PIC X(008) VALUE SPACES.
        Procedure Division.
+           OPEN INPUT B001 B002
+           OPEN OUTPUT B003 B004
+           OPEN I-O B005
            CALL PGM1
            CALL 'test9014b'
            CALL PGM4
@@ -67,6 +74,7 @@
                88  PGM6-B                       VALUE 'PGMB0006'.
                88  PGM6-C                       VALUE 'PGMC0006'.
        Procedure Division.
+           OPEN INPUT C001 C002 OUTPUT C003 I-O C004 C005
            CALL PGM1
            CALL PGM4
            CALL PGM3 OF JKL

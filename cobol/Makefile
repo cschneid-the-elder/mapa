@@ -132,7 +132,7 @@ ziplogs:
 
 ./class/IdDivListener.class: 
 
-./class/CobolProgram.class:
+./class/CobolProgram.class: ./class/AssignClause.class
 
 ./class/CompilerDirectingStatementListener.class:
 

@@ -9,6 +9,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	public ArrayList<CobolProgram> programs = null;
 	public String aLib = null;
 	public CobolProgram currProgram = null;
+	private String currCobolFileName = null;
 
 	public CallEtAlListener(
 			ArrayList<CobolProgram> programs
@@ -53,6 +54,10 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		currProgram.incrementStatementCounter(ctx);
 	}
 
+	public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
+		currProgram.incrementDataDescriptionCounter(ctx);
+	}
+
 	public void enterCallStatement(CobolParser.CallStatementContext ctx) {
 		CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 		this.currProgram.addCall(aCall);
@@ -71,8 +76,28 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		}
 	}
 
+	public void enterFileControlEntry(CobolParser.FileControlEntryContext ctx) {
+		this.currCobolFileName = ctx.selectClause().fileName().getText();
+	}
+
 	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
-		this.currProgram.addAssignClause(new AssignClause(ctx, this.LOGGER));
+		this.currProgram.addAssignClause(new AssignClause(ctx, this.currCobolFileName, this.LOGGER));
+	}
+
+	public void enterOpenInputStatement(CobolParser.OpenInputStatementContext ctx) {
+		this.currProgram.noteOpenType(ctx);
+	}
+
+	public void enterOpenOutputStatement(CobolParser.OpenOutputStatementContext ctx) {
+		this.currProgram.noteOpenType(ctx);
+	}
+
+	public void enterOpenIOStatement(CobolParser.OpenIOStatementContext ctx) {
+		this.currProgram.noteOpenType(ctx);
+	}
+
+	public void enterOpenExtendStatement(CobolParser.OpenExtendStatementContext ctx) {
+		this.currProgram.noteOpenType(ctx);
 	}
 
 	public void enterMoveStatement(CobolParser.MoveStatementContext ctx) {

@@ -19,12 +19,19 @@ class AssignClause {
 	private CobolParser.AssignClauseContext ctx = null;
 	private String assignName = null;
 	private String ddName = null;
+	private String cobolFileName = null;
+	private int openInputCount = 0;
+	private int openOutputCount = 0;
+	private int openIOCount = 0;
+	private int openExtendCount = 0;
 
 	public AssignClause(
 			CobolParser.AssignClauseContext ctx
+			, String cobolFileName
 			, Logger LOGGER
 			) {
 		this.ctx = ctx;
+		this.cobolFileName = cobolFileName;
 		this.LOGGER = LOGGER;
 
 		if (this.ctx.assignmentName() == null) {
@@ -60,16 +67,46 @@ class AssignClause {
 		}
 	}
 
+	public void addOpenType(CobolParser.OpenInputContext ctx) {
+		this.openInputCount++;
+		this.LOGGER.finest(this.getCobolFileName() + " this.openInputCount = " + this.openInputCount);
+	}
+
+	public void addOpenType(CobolParser.OpenOutputContext ctx) {
+		this.openOutputCount++;
+		this.LOGGER.finest(this.getCobolFileName() + " this.openOutputCount = " + this.openOutputCount);
+	}
+
+	public void addOpenType(CobolParser.OpenIOStatementContext ctx) {
+		this.openIOCount++;
+		this.LOGGER.finest(this.getCobolFileName() + " this.openIOCount = " + this.openIOCount);
+	}
+
+	public void addOpenType(CobolParser.OpenExtendStatementContext ctx) {
+		this.openExtendCount++;
+		this.LOGGER.finest(this.getCobolFileName() + " this.openExtendCount = " + this.openExtendCount);
+	}
+
+	public String getCobolFileName() {
+		return this.cobolFileName;
+	}
+
 	public String getDDname() {
 		return this.ddName;
 	}
 
 	public void writeOn(PrintWriter out, UUID parentUUID) {
 		out.printf(
-			"DD,%s,%s,%s\n"
+			"DD,%s,%s,%s,%s,%d,%d,%d,%d\n"
 			, this.uuid.toString()
 			, parentUUID.toString()
-			, this.getDDname());
+			, this.getDDname()
+			, this.getCobolFileName()
+			, this.openInputCount
+			, this.openOutputCount
+			, this.openIOCount
+			, this.openExtendCount
+		);
 	}
 
 }
