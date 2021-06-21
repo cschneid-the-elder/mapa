@@ -39,6 +39,8 @@ class DB2zTableName {
 			parent = currCtx.getParent();
 			String owningStatement = DB2zSQLParser.ruleNames[parent.getRuleIndex()];
 			if (owningStatement.endsWith("Statement")
+			|| owningStatement.equals("fullSelect")
+			|| owningStatement.equals("subSelect")
             || owningStatement.equals("query")) {
 				this.owningStatement = owningStatement;
 				done = true;

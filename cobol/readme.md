@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (20-Jun-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls"  seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (21-Jun-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -74,15 +74,19 @@ More generically...
 | FILE | UUID, file being processed, date / time stamp |
 | COPY | UUID, file UUID, copybook name |
 | BASIS | UUID, file UUID, basis file name |
-| PGM | UUID, file UUID, program name, statement count, conditional statement count |
+| PGM | UUID, file UUID, program name, statement count, conditional statement count, cics statement count, sql statement count, sqlims statement count, data description entry type 1 count, data description entry type 2 count, data description entry type 3 count, data description entry type sql count |
 | CALL | UUID, program UUID, calling program name, call type (see below), called program name |
-| DD | UUID, program UUID, ddname (see below) |
+| DD | UUID, program UUID, ddname (see below), cobol file name, open input count, open output count, open i-o count, open extend count |
 | DB2TABLE | UUID, program UUID, table name, type of SQL statement |
 | SQLINCLUDE | UUID, program UUID, included member name |
 
 Call types may be CALLBYLITERAL, CALLBYIDENTIFIER, CICSLINKBYLITERAL, CICSLINKBYIDENTIFIER, CICSXCTLBYLITERAL, CICSXCTLBYIDENTIFIER, SQLCALLBYLITERAL, SQLCALLBYIDENTIFIER.  Please note that CALLBYLITERAL may be a static call or a dynamic call depending on your compile options.
 
 The ddname is my mainframe bias showing.  The assignment name in the various flavors of IBM COBOL consists of an optional label followed by a hyphen followed by an optional organization field followed by a hyphen followed by a name.  So everything except the name is optional.  The name usually translates to a DDName in the JCL, except when it translates to an environment variable.
+
+The PGM record contains counts of things that might be interesting and were easy to obtain.  Data description entry type 2 is a level-66 entry, type 3 is a level-88 entry, and type 1 is everything else that isn't enclosed in and `EXEC SQL END-EXEC` block.
+
+The DD record contains counts of how the file is opened.  This might be useful in showing program inputs and outputs, or discovering files that are no longer used.
 
 ### Build/Execution Environment
 

@@ -36,6 +36,14 @@ class CobolProgram {
 	private ArrayList<DB2zTableName> db2Tables = new ArrayList<>();
 	private int conditionalStatementCount = 0;
 	private int statementCount = 0;
+	private int cicsStatementCount = 0;
+	private int sqlStatementCount = 0;
+	private int sqlImsStatementCount = 0;
+	private int dataDescriptionEntryCount = 0;
+	private int dataDescriptionEntryFormat1Count = 0;
+	private int dataDescriptionEntryFormat2Count = 0;
+	private int dataDescriptionEntryFormat3Count = 0;
+	private int dataDescriptionEntryExecSqlCount = 0;
 
 	public CobolProgram(
 			String programName
@@ -318,6 +326,87 @@ class CobolProgram {
 				this.conditionalStatementCount++;
 			}
 		}
+
+		if (ctx.execCicsStatement() != null) {
+			this.cicsStatementCount++;
+		}
+
+		if (ctx.execSqlStatement() != null) {
+			this.sqlStatementCount++;
+		}
+
+		if (ctx.execSqlImsStatement() != null) {
+			this.sqlImsStatementCount++;
+		}
+
+	}
+
+	public void incrementDataDescriptionCounter(CobolParser.DataDescriptionEntryContext ctx) {
+		this.dataDescriptionEntryCount++;
+
+		if (ctx.dataDescriptionEntryFormat1() != null) {
+			this.dataDescriptionEntryFormat1Count++;
+		}
+
+		if (ctx.dataDescriptionEntryFormat2() != null) {
+			this.dataDescriptionEntryFormat2Count++;
+		}
+
+		if (ctx.dataDescriptionEntryFormat3() != null) {
+			this.dataDescriptionEntryFormat3Count++;
+		}
+
+		if (ctx.dataDescriptionEntryExecSql() != null) {
+			this.dataDescriptionEntryExecSqlCount++;
+		}
+	}
+
+	public void noteOpenType(CobolParser.OpenInputStatementContext ctx) {
+		for (CobolParser.OpenInputContext oic: ctx.openInput()) {
+			String fileName = oic.fileName().getText();
+			for (AssignClause ac: this.assignClauses) {
+				if (ac.getCobolFileName().equals(fileName)) {
+					ac.addOpenType(oic);
+					break;
+				}
+			}
+		}
+	}
+
+	public void noteOpenType(CobolParser.OpenOutputStatementContext ctx) {
+		for (CobolParser.OpenOutputContext ooc: ctx.openOutput()) {
+			String fileName = ooc.fileName().getText();
+			for (AssignClause ac: this.assignClauses) {
+				if (ac.getCobolFileName().equals(fileName)) {
+					ac.addOpenType(ooc);
+					break;
+				}
+			}
+		}
+	}
+
+	public void noteOpenType(CobolParser.OpenIOStatementContext ctx) {
+		for (CobolParser.FileNameContext fnc: ctx.fileName()) {
+			String fileName = fnc.getText();
+			for (AssignClause ac: this.assignClauses) {
+				if (ac.getCobolFileName().equals(fileName)) {
+					ac.addOpenType(ctx);
+					break;
+				}
+			}
+		}
+	}
+
+	public void noteOpenType(CobolParser.OpenExtendStatementContext ctx) {
+		for (CobolParser.FileNameContext fnc: ctx.fileName()) {
+			String fileName = fnc.getText();
+			for (AssignClause ac: this.assignClauses) {
+				if (ac.getCobolFileName().equals(fileName)) {
+					ac.addOpenType(ctx);
+					break;
+				}
+			}
+		}
 	}
 
 	/**
@@ -326,12 +415,21 @@ class CobolProgram {
 	*/
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
 		out.printf(
-			"PGM,%s,%s,%s,%d,%d\n"
+			"PGM,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n"
 			, this.getUUID().toString()
 			, parentUUID.toString()
 			, this.programName
 			, this.statementCount
-			, this.conditionalStatementCount);
+			, this.conditionalStatementCount
+			, this.cicsStatementCount
+			, this.sqlStatementCount
+			, this.sqlImsStatementCount
+			, this.dataDescriptionEntryCount
+			, this.dataDescriptionEntryFormat1Count
+			, this.dataDescriptionEntryFormat2Count
+			, this.dataDescriptionEntryFormat3Count
+			, this.dataDescriptionEntryExecSqlCount
+			);
 
 		for (CobolProgram pgm: this.programs) {
 			pgm.writeOn(out, this.getUUID());
