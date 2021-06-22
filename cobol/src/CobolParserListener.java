@@ -6337,6 +6337,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitCobolWord(CobolParser.CobolWordContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#cicsWord}.
+	 * @param ctx the parse tree
+	 */
+	void enterCicsWord(CobolParser.CicsWordContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#cicsWord}.
+	 * @param ctx the parse tree
+	 */
+	void exitCicsWord(CobolParser.CicsWordContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#literal}.
 	 * @param ctx the parse tree
 	 */

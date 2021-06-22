@@ -23,7 +23,7 @@ class Literal {
 
 	public Literal(CobolParser.LiteralContext ctx) {
 		this.ctx = ctx;
-		this.text = this.ctx.NONNUMERICLITERAL().toString();
+		this.text = this.ctx.getText();
 	}
 
 	public String getText() {

@@ -71,6 +71,23 @@ public class CallEtAlListener extends CobolParserBaseListener {
 				CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 				this.currProgram.addCall(aCall);
 				break;
+			case "START":
+			case "STARTBR":
+			case "READNEXT":
+			case "READPREV":
+			case "DELETE":
+			case "READ":
+			case "REWRITE":
+			case "WRITE": //intentional fall through
+				this.currProgram.addCicsStatement(new ExecCicsStatement(ctx, this.LOGGER));
+				break;
+			case "RUN":
+				if (ctx.cicsKeywordWithArg() != null && ctx.cicsKeywordWithArg().size() > 0) {
+					if (ctx.cicsKeywordWithArg(0).getText().toUpperCase().startsWith("TRANSID")) {
+						this.currProgram.addCicsStatement(new ExecCicsStatement(ctx, this.LOGGER));
+					}
+				}
+				break;
 			default:
 				break;
 		}

@@ -3808,6 +3808,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCobolWord(CobolParser.CobolWordContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#cicsWord}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCicsWord(CobolParser.CicsWordContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

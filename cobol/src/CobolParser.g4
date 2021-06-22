@@ -1498,11 +1498,11 @@ cicsCmdEnd
 	;
 
 cicsKeyword
-	: cobolWord
+	: (cobolWord | cicsWord)
 	;
 
 cicsKeywordWithArg
-	: cobolWord
+	: (cobolWord | cicsWord)
 	LPARENCHAR (identifier | literal) RPARENCHAR
 	;
 
@@ -2815,6 +2815,71 @@ cobolWord
    | WAIT
    | YEAR | YYYYMMDD | YYYYDDD
    | ZERO_FILL
+   ;
+
+cicsWord
+   : IDENTIFIER 
+   | ABORT
+   | ADD 
+   | ADDRESS
+   | AFTER
+   | ALL
+   | ALLOCATE
+   | ALTERNATE
+   | AND
+   | ASSIGN
+   | AT
+   | BINARY
+   | CANCEL
+   | CLOSE
+   | CURSOR
+   | DATA
+   | DATE
+   | DELETE
+   | DELIMITER
+   | END
+   | EQUAL
+   | ERASE
+   | ERROR
+   | EXCEPTION
+   | FILE
+   | FOR
+   | FREE
+   | FROM
+   | INPUT
+   | INTO
+   | LABEL
+   | LAST
+   | LENGTH
+   | LINE
+   | MODE
+   | MOVE
+   | NAME
+   | ON
+   | OPEN
+   | OR
+   | PAGE
+   | PROCESS
+   | READ
+   | RECORD
+   | RESET
+   | REWIND
+   | REWRITE
+   | RUN
+   | SERVICE
+   | SET
+   | START
+   | STATUS
+   | TIME
+   | TITLE
+   | TO
+   | TYPE
+   | UNTIL
+   | USING
+   | VALUE
+   | WAIT
+   | WRITE
+   | YEAR
    ;
 
 literal
