@@ -4,13 +4,13 @@ The intent is to create at least part of what I would have wanted when I was bei
 
 I was often asked application impact analysis questions, what runs, how often, which program calls which other programs, et. al.
 
-In the cobol directory you will find a COBOL "call tree" tool, extracting CALLs, EXEC CICS LINKs, EXEC CICS XCTLs, EXEC SQL CALLs, and so forth to help give an idea of the "shape" of an application portfolio via static code analysis.
+In the cobol directory you will find a COBOL "call tree" tool, extracting CALLs, EXEC CICS LINKs, EXEC CICS XCTLs, EXEC SQL CALLs, program inputs and outputs and so forth to help give an idea of the "shape" of an application portfolio via static code analysis.
 
 In the jcl directory you will find something analagous for JCL.
 
-In both cases, the intent is to produce a flat file which can be loaded into a DBMS and used as part of a configuration management system.
+In both cases, the intent is to produce a flat file which can be loaded into a DBMS and used as part of a configuration management system.  Supplement with a dump of your CICS definitions and selected entries from your DB2 catalog (triggers, mostly) and you can build yourself a nice map of your portfolio.
 
-There certainly exist commercial products that do this, but they're pricey.  Maybe what I can do for free is good enough.
+There certainly exist commercial products that do this, but they're pricey.  Maybe what I can do for free is good enough.  If it's not then you've got yourself a justification for one of those commercial products.
 
 ### Static Code Analysis
 

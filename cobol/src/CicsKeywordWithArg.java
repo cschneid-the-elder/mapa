@@ -12,10 +12,12 @@ class CicsKeywordWithArg {
 	private UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	private CobolParser.CicsKeywordWithArgContext ctx = null;
-	private CobolWord keyword = null;
+	private String keyword = null;
 	private Identifier identifier = null;
 	private Literal literal = null;
 	private Boolean isProgram = false;
+	private Boolean isTransID = false;
+	private Boolean isFile = false;
 
 	public CicsKeywordWithArg(
 			CobolParser.CicsKeywordWithArgContext ctx
@@ -23,7 +25,13 @@ class CicsKeywordWithArg {
 			) {
 		this.ctx = ctx;
 		this.LOGGER = LOGGER;
-		this.keyword = new CobolWord(this.ctx.cobolWord());
+		if (this.ctx.cobolWord() != null) {
+			CobolWord source = new CobolWord(this.ctx.cobolWord());
+			this.keyword = source.getText().toUpperCase();
+		} else {
+			CicsWord source = new CicsWord(this.ctx.cicsWord());
+			this.keyword = source.getText().toUpperCase();
+		}
 
 		if (this.ctx.identifier() != null) {
 			this.identifier = new Identifier(this.ctx.identifier(), this.LOGGER);
@@ -33,12 +41,20 @@ class CicsKeywordWithArg {
 			this.literal = new Literal(this.ctx.literal());
 		}
 
-		if (this.keyword.getText().toUpperCase().equals("PROGRAM")) {
+		if (this.keyword.equals("PROGRAM")) {
 			this.isProgram = true;
+		}
+
+		if (this.keyword.equals("FILE")) {
+			this.isFile = true;
+		}
+
+		if (this.keyword.equals("TRANSID")) {
+			this.isTransID = true;
 		}
 	}
 
-	public CobolWord getKeyword() {
+	public String getKeyword() {
 		return this.keyword;
 	}
 
@@ -68,5 +84,13 @@ class CicsKeywordWithArg {
 
 	public Boolean isProgram() {
 		return this.isProgram;
+	}
+
+	public Boolean isFile() {
+		return this.isFile;
+	}
+
+	public Boolean isTransID() {
+		return this.isTransID;
 	}
 }

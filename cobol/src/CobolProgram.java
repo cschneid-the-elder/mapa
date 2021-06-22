@@ -34,6 +34,7 @@ class CobolProgram {
 	private ArrayList<Identifier> sets = new ArrayList<>();
 	private CobolProgram parent = null;
 	private ArrayList<DB2zTableName> db2Tables = new ArrayList<>();
+	private ArrayList<ExecCicsStatement> cicsStatements = new ArrayList<>();
 	private int conditionalStatementCount = 0;
 	private int statementCount = 0;
 	private int cicsStatementCount = 0;
@@ -301,6 +302,10 @@ class CobolProgram {
 		this.sets.add(identifier);
 	}
 
+	public void addCicsStatement(ExecCicsStatement cicsStmt) {
+		this.cicsStatements.add(cicsStmt);
+	}
+
 	/**
 	Increment counters for different types of statements that may be
 	of interest.  This could grow over time, for example CICS or SQL
@@ -445,6 +450,10 @@ class CobolProgram {
 
 		for (DB2zTableName tb: this.db2Tables) {
 			tb.writeOn(out, this.getUUID());
+		}
+
+		for (ExecCicsStatement ec: this.cicsStatements) {
+			ec.writeOn(out, this.getUUID());
 		}
 	}
 

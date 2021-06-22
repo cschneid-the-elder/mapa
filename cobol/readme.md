@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (21-Jun-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (22-Jun-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -79,6 +79,15 @@ More generically...
 | DD | UUID, program UUID, ddname (see below), cobol file name, open input count, open output count, open i-o count, open extend count |
 | DB2TABLE | UUID, program UUID, table name, type of SQL statement |
 | SQLINCLUDE | UUID, program UUID, included member name |
+| CICSSTARTTRANSID | UUID, program UUID, transaction being started |
+| CICSRUNTRANSID | UUID, program UUID, transaction being run asynchronously |
+| CICSREAD | UUID, program UUID, file being read |
+| CICSDELETE | UUID, program UUID, file whose record(s) are being deleted |
+| CICSWRITE | UUID, program UUID, file whose record is being written |
+| CICSREWRITE | UUID, program UUID, file whose record is being rewritten |
+| CICSSTARTBR | UUID, program UUID, file against which a browse is being started |
+| CICSREADNEXT | UUID, program UUID, file being read |
+| CICSREADPREV | UUID, program UUID, file being read |
 
 Call types may be CALLBYLITERAL, CALLBYIDENTIFIER, CICSLINKBYLITERAL, CICSLINKBYIDENTIFIER, CICSXCTLBYLITERAL, CICSXCTLBYIDENTIFIER, SQLCALLBYLITERAL, SQLCALLBYIDENTIFIER.  Please note that CALLBYLITERAL may be a static call or a dynamic call depending on your compile options.
 
