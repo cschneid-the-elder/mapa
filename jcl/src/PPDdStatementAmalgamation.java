@@ -81,4 +81,16 @@ public class PPDdStatementAmalgamation {
 		return symbolics;
 	}
 
+	public ArrayList<Integer> linesShouldBePrecededBySYSINDDSPLAT() {
+		ArrayList<Integer> lines = new ArrayList<>();
+
+		for (PPDdStatement dd: this.dds) {
+			if (dd.hasUnattributedAsteriskData()) {
+				lines.add(new Integer(dd.getAsteriskDataLine()));
+			}
+		}
+
+		return lines;
+	}
+
 }

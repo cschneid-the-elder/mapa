@@ -276,6 +276,16 @@ public class PPJclStep {
 		}
 	}
 
+	public ArrayList<Integer> linesShouldBePrecededBySYSINDDSPLAT() {
+		ArrayList<Integer> lines = new ArrayList<>();
+
+		for (PPDdStatementAmalgamation dda: this.ddStatements) {
+			lines.addAll(dda.linesShouldBePrecededBySYSINDDSPLAT());
+		}
+
+		return lines;
+	}
+
 	public void setJcllib(ArrayList<PPKeywordOrSymbolicWrapper> jcllib) {
 		this.jcllib = jcllib;
 	}

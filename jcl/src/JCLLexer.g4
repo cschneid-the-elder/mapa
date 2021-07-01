@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -122,6 +122,21 @@ COMMENT_FLAG_DFLT
 		getCharPositionInLine() == 3
 	}?
 	->type(COMMENT_FLAG),channel(COMMENTS),mode(CM_MODE);
+
+DD_ASTERISK_DATA_FLAG
+	: ANYCHAR ANYCHAR
+	{
+		dlmVals = new java.util.ArrayList();
+		dlmVals.add("/*");
+		dlmVals.add("//");
+		myMode = DEFAULT_MODE;
+	}
+	{
+		getCharPositionInLine() == 2
+	}?
+	->type(DD_ASTERISK_DATA),mode(DATA_MODE)
+	;
+
 COMMENT_FLAG_INLINE
 	: COMMA_DFLT ' '
 	->channel(COMMENTS),mode(CM_MODE)

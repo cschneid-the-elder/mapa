@@ -554,6 +554,10 @@ public class PPJob {
 		this.LOGGER.finest(this.myName + " tmp = |" + tmp.getName() + "|");
 		String inLine = new String();
 		StringBuffer outLine = new StringBuffer();
+		ArrayList<Integer> lines = new ArrayList<>();
+		for (PPJclStep aStep: this.steps) {
+			lines.addAll(aStep.linesShouldBePrecededBySYSINDDSPLAT());
+		}
 		while ((inLine = src.readLine()) != null) {
 			// first get just the symbolics on this line
 			PPSymbolic[] symOnThisLineA = 
@@ -587,6 +591,10 @@ public class PPJob {
 				} else {
 					outLine.replace(start, end, s.getResolvedText());
 				}
+			}
+			if (lines.contains(new Integer(src.getLineNumber()))) {
+				this.LOGGER.finest(this.myName + " adding SYSIN DD *");
+				out.println("//SYSIN DD * GENERATED STATEMENT");
 			}
 			this.LOGGER.finest(this.myName + " outLine after  = |" + outLine + "|");
 			out.println(outLine);

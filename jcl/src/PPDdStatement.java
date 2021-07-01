@@ -100,6 +100,8 @@ public class PPDdStatement {
 			The following bad idea is brought to you by the dozens of parameters of
 			the DD statement.
 		*/
+
+		this.LOGGER.finest(this.myName + " " + this.ddName + " initializeTediously(" + ddParms + ")");
 		for (JCLPPParser.DdParameterContext ddParm: ddParms) {
 			if (ddParm.ddParmASTERISK() != null) {
 				this.blankParms.add("ASTERISK");
@@ -179,4 +181,44 @@ public class PPDdStatement {
 		}
 	}
 
+	/**
+	Indicate whether or not this DD statement has instream
+	data associated with it but does not include an asterisk
+	parameter indicating the association was intended.
+
+	This happens when someone codes...
+	<code>
+	//STEP0001 EXEC PGM=IEBGENER
+	//SYSUT1   DD  DISP=OLD,DSN=ABC
+	//SYSUT2   DD  DISP=(NEW,CATLG),
+	//             DSN=XYZ,
+	//             LRECL=80,RECFM=FB,
+	//             SPACE=(TRK,1)
+	//SYSPRINT DD  SYSOUT=*
+	    GENERATE  MAXFLDS=3,MAXLITS=11
+	    RECORD  FIELD=(10,'**********',,1),
+	            FIELD=(5,1,HE,11),FIELD=(1,'=',,16)
+	</code>
+	...the control cards following SYSPRINT are erroneously
+	associated with that DD statement because a SYSIN DD *
+	DD was not coded.  Normally, JES adds that SYSIN, and
+	now I must also.
+
+	*/
+	public Boolean hasUnattributedAsteriskData() {
+		this.LOGGER.finest(this.myName + " " + this.ddName + " blankParms = |" + this.blankParms + "|");
+		return (!this.blankParms.contains("ASTERISK")
+				&& this.ddSplatCtx != null
+				&& this.ddSplatCtx.size() > 0);
+	}
+
+	public Integer getAsteriskDataLine() {
+		if (!this.hasUnattributedAsteriskData()) {
+			throw new IllegalArgumentException(
+				"this DD statement " + this.ddName
+				+ " has no associated instream data");
+		}
+
+		return new Integer(this.ddSplatCtx.get(0).getStart().getLine());
+	}
 }
