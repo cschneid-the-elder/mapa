@@ -160,7 +160,7 @@ lint:
 
 ./class/TheCLI.class: 
 
-./class/Demo01.class:
+./class/Demo01.class: ./src/JCLPPLexer.tokens
 
 ./class/SingleOrMultipleValueWrapper.class: ./src/SingleOrMultipleValueWrapper.java ./class/EmbeddedEqualityWrapper.class ./class/ParameterString.class
 	echo `date` $< >>build.log

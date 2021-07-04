@@ -1,15 +1,17 @@
-/*Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.*/
+/*Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.*/
 
 
 import java.util.*;
 import java.util.logging.*;
-//import java.lang.reflect.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
 Instances of this class represent a DD statement and any/all DD
 statements concatenated to it.
 
+This class is used during preprocessing, at which time symbolics
+are resolved and various other fixups are preformed so "actual"
+lexing and parsing can proceed.
 */
 public class PPDdStatementAmalgamation {
 
@@ -79,6 +81,18 @@ public class PPDdStatementAmalgamation {
 		}
 
 		return symbolics;
+	}
+
+	public ArrayList<Integer> linesShouldBePrecededBySYSINDDSPLAT() {
+		ArrayList<Integer> lines = new ArrayList<>();
+
+		for (PPDdStatement dd: this.dds) {
+			if (dd.hasUnattributedAsteriskData()) {
+				lines.add(new Integer(dd.getAsteriskDataLine()));
+			}
+		}
+
+		return lines;
 	}
 
 }

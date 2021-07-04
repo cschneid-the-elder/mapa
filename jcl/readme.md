@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (28-Oct-2020) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (04-Jul-2021) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -178,5 +178,5 @@ This is a relatively simple example.  Now consider...
 
 ### What This Won't Do
 
-JES3 control statements.  Probably some elderly syntax that is no longer documented, like the `SEP` parameter of the `DD` statement except I sussed that one.  Whatever the circumstances under which JES generates a `//SYSIN DD *` statement are, this won't.
+JES3 control statements.  Probably some elderly syntax that is no longer documented, like the `SEP` parameter of the `DD` statement except I sussed that one.
 

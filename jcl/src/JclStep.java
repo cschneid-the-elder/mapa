@@ -1,4 +1,4 @@
-/*Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.*/
+/*Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.*/
 
 
 import java.util.*;
@@ -466,9 +466,6 @@ public class JclStep {
 					i++;
 				}
 			}
-			for (DdStatementAmalgamation dda: ddStatements) {
-				dda.toCSV(csvOut, this.uuid);
-			}
 		} else {
 			csvOut.append("PROC");
 			csvOut.append(",");
@@ -477,6 +474,10 @@ public class JclStep {
 				csvOut.append(System.getProperty("line.separator"));
 				this.proc.toCSV(csvOut, this.uuid);
 			}
+		}
+
+		for (DdStatementAmalgamation dda: ddStatements) {
+			dda.toCSV(csvOut, this.uuid);
 		}
 	}
 

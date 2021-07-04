@@ -1,4 +1,4 @@
-/*Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.*/
+/*Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.*/
 
 
 import java.util.*;
@@ -274,6 +274,43 @@ public class PPJclStep {
 		} else {
 			return this.parentJob.getFileNb();
 		}
+	}
+
+	private Boolean hasUnattributedAsteriskData() {
+		return this.jclStepCtx.ddParmASTERISK_DATA() != null
+				&& this.jclStepCtx.ddParmASTERISK_DATA().size() > 0;
+	}
+
+	private Integer getAsteriskDataLine() {
+		if (!this.hasUnattributedAsteriskData()) {
+			throw new IllegalArgumentException(
+				"this JCL step " + this.stepName
+				+ " has no associated instream data");
+		}
+
+		return new Integer(
+						this
+						.jclStepCtx
+						.ddParmASTERISK_DATA()
+						.get(0)
+						.DD_ASTERISK_DATA()
+						.get(0)
+						.getSymbol()
+						.getLine());
+	}
+
+	public ArrayList<Integer> linesShouldBePrecededBySYSINDDSPLAT() {
+		ArrayList<Integer> lines = new ArrayList<>();
+
+		if (this.hasUnattributedAsteriskData()) {
+			lines.add(this.getAsteriskDataLine());
+		}
+
+		for (PPDdStatementAmalgamation dda: this.ddStatements) {
+			lines.addAll(dda.linesShouldBePrecededBySYSINDDSPLAT());
+		}
+
+		return lines;
 	}
 
 	public void setJcllib(ArrayList<PPKeywordOrSymbolicWrapper> jcllib) {
