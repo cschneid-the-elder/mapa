@@ -1,4 +1,4 @@
-/*Copyright (C) 2019, 2020 Craig Schneiderwent.  All rights reserved.*/
+/*Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.*/
 
 
 import java.util.*;
@@ -8,6 +8,9 @@ import org.antlr.v4.runtime.tree.*;
 /**
 Instances of this class represent a DD statement.
 
+This class is used during preprocessing, at which time symbolics
+are resolved and various other fixups are preformed so "actual"
+lexing and parsing can proceed.
 */
 public class PPDdStatement {
 
@@ -206,7 +209,6 @@ public class PPDdStatement {
 
 	*/
 	public Boolean hasUnattributedAsteriskData() {
-		this.LOGGER.finest(this.myName + " " + this.ddName + " blankParms = |" + this.blankParms + "|");
 		return (!this.blankParms.contains("ASTERISK")
 				&& this.ddSplatCtx != null
 				&& this.ddSplatCtx.size() > 0);
