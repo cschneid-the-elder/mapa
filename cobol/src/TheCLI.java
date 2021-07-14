@@ -22,6 +22,7 @@ public class TheCLI{
 	public String outFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
+	public Boolean profile = false;
 	public ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
 
 	public TheCLI(String[] args, Logger LOGGER) throws Exception {
@@ -47,6 +48,8 @@ public class TheCLI{
 			, "used to test lexer, parser, listeners, et. al");
 		Option saveTemp = new Option("saveTemp", false
 			, "save temporary files, used to test lexer, parser, listeners, et. al");
+		Option profile = new Option("profile", false
+			, "profile ANTLR grammar");
 		Option help = new Option("help", false, "print this message");
 
 		this.options.addOption(file);
@@ -58,6 +61,7 @@ public class TheCLI{
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
 		this.options.addOption(saveTemp);
+		this.options.addOption(profile);
 		this.options.addOption(help);
 
 		try {
@@ -140,10 +144,11 @@ public class TheCLI{
 				||  this.line.getOptionValue("logLevel").equals("FINEST")) {
 				} else {
 					this.LOGGER.setLevel(Level.FINE);
-					this.LOGGER.info("overriding logLevel");
+					this.LOGGER.info("overriding logLevel, setting to FINE");
 				}
 			} else {
 				this.LOGGER.setLevel(Level.FINE);
+				this.LOGGER.info("setting logLevel to FINE");
 			}
 			this.LOGGER.info("unit testing is in effect");
 		}
@@ -151,6 +156,11 @@ public class TheCLI{
 		if (this.line.hasOption("saveTemp")) {
 			this.saveTemp = true;
 			this.LOGGER.info("temporary files will be preserved");
+		}
+
+		if (this.line.hasOption("profile")) {
+			this.profile = true;
+			this.LOGGER.info("ANTLR grammar will be profiled");
 		}
 
 	}

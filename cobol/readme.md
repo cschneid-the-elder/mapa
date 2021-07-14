@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (22-Jun-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (14-Jul-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -31,6 +31,7 @@ Download the .jar files.
                        CONFIG, FINE, FINER, FINEST}
      -out <arg>        name of a file in which to store the CALLs, EXEC CICS
                        LINKs, EXEC CICS XCTLs, and EXEC SQL CALLs
+     -profile          profile ANTLR grammar
      -saveTemp         save temporary files, used to test lexer, parser,
                        listeners, et. al
      -unitTest         used to test lexer, parser, listeners, et. al

@@ -16,10 +16,6 @@ class QualifiedInData {
 	private UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	private CobolParser.QualifiedInDataContext ctx = null;
-	private CobolParser.InDataContext idCtx = null;
-	private CobolParser.InTableContext itCtx = null;
-	private InData inData = null;
-	private InTable inTable = null;
 
 	/**
 	*/
@@ -41,32 +37,28 @@ class QualifiedInData {
 			) {
 		this.ctx = ctx;
 		this.LOGGER = LOGGER;
-
-		this.idCtx = this.ctx.inData();
-		this.itCtx = this.ctx.inTable();
-
-		if (this.idCtx != null) {
-			this.inData = new InData(this.idCtx, LOGGER);
-		}
-
-		if (this.itCtx != null) {
-			this.inTable = new InTable(this.itCtx, LOGGER);
-		}
 	}
 
 	public String getInDataText() {
-		if (this.inData == null) {
+		if (this.ctx.dataName() == null) {
 			return null;
 		} else {
-			return this.inData.getDataNameText();
+			return this.ctx.dataName().getText();
 		}
 	}
 
 	public String getInTableText() {
-		if (this.inTable == null) {
+		if (this.ctx.fileName() == null) {
 			return null;
 		} else {
-			return this.inTable.getDataNameText();
+			return this.ctx.fileName().getText();
 		}
 	}
+
+	public String getText() {
+		if (this.ctx.dataName() == null) {
+			return this.getInTableText();
+		}
+		return this.getInDataText();
+	}		
 }

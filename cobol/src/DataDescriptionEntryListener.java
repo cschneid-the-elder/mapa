@@ -72,23 +72,23 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		String callingModuleName = this.currProgram.getProgramName();
 		DDNode node = new DDNode(this.currProgram, ctx, locn);
 
-		TestIntegration.LOGGER.finer(callingModuleName + " " + node);
+		TestIntegration.LOGGER.finest(callingModuleName + " " + node);
 
 		if (node.hasNoParent()) {
-			TestIntegration.LOGGER.finer(node + "node.hasNoParent() == true");
+			TestIntegration.LOGGER.finest(node + "node.hasNoParent() == true");
 			if (node.isNewRoot()) {
-				TestIntegration.LOGGER.finer(node + "node.isNewRoot() == true");
+				TestIntegration.LOGGER.finest(node + "node.isNewRoot() == true");
 				prev = node;
 			} else {
-				TestIntegration.LOGGER.finer(node + "node.isNewRoot() == false");
+				TestIntegration.LOGGER.finest(node + "node.isNewRoot() == false");
 				// a 77 level
 			}
 		} else if (prev == null) {
-				TestIntegration.LOGGER.finer(callingModuleName + " " + node + "prev == " + prev);
+				TestIntegration.LOGGER.finest(callingModuleName + " " + node + "prev == " + prev);
 		} else if (node.level == null) {
-				TestIntegration.LOGGER.finer(callingModuleName + " " + node + "node.level == " + node.level);
+				TestIntegration.LOGGER.finest(callingModuleName + " " + node + "node.level == " + node.level);
 		} else if (prev.level == null) {
-				TestIntegration.LOGGER.finer(callingModuleName + " " + prev);
+				TestIntegration.LOGGER.finest(callingModuleName + " " + prev);
 		} else if (node.level.compareTo(prev.level) == 0) {
 				prev.parent.adopt(node);
 				node.parent = prev.parent;
