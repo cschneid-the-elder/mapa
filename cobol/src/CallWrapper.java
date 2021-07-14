@@ -55,6 +55,7 @@ class CallWrapper {
 	public DDNode dataNode = null;
 	public int line = -1;
 	public String aLib = null;
+	private ArrayList<QualifiedInData> qualInData = null;
 
 	public CallWrapper(
 			CobolParser.CallStatementContext ctx
@@ -307,7 +308,7 @@ class CallWrapper {
 					.tableCall()
 					.qualifiedDataName()
 					.qualifiedDataNameFormat1()
-					.qualifiedInData();
+					.qualifiedInData(); //TODO no longer needed?
 			} else {
 				// CALL identifier syntax
 				this.cobolIdentifier = 
@@ -318,20 +319,15 @@ class CallWrapper {
 					.cobolWord()
 					.IDENTIFIER()
 					.toString();
-				this.inDataCtxs = 
+				this.qualInData = QualifiedInData.bunchOfThese(
 					idCtx
 					.qualifiedDataName()
 					.qualifiedDataNameFormat1()
-					.qualifiedInData();
-				if (this.inDataCtxs != null) {
-					for (CobolParser.QualifiedInDataContext qindc: this.inDataCtxs) {
-						this.ofs.add(
-							qindc
-							.inData()
-							.dataName()
-							.cobolWord()
-							.IDENTIFIER()
-							.toString());
+					.qualifiedInData()
+					, this.LOGGER);
+				if (this.qualInData != null) {
+					for (QualifiedInData qind: this.qualInData) {
+						this.ofs.add(qind.getText());
 					}
 				}
 			}

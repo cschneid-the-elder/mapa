@@ -2644,8 +2644,18 @@ qualifiedDataNameFormat4
    : LINAGE_COUNTER inFile
    ;
 
+/*
+This rule originally read...
+
+   : inData | inFile
+
+...and parsing NC246A from the NIST test suite took ~2 minutes.
+
+Changing the rule to its current form makes parsing NC246
+take ~10 seconds.
+*/
 qualifiedInData
-   : inData | inTable
+   : (IN | OF) (dataName | fileName)
    ;
 
 // in ----------------------------------

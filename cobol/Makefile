@@ -73,7 +73,8 @@ ifeq ($(strip $(n)),)
 	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log
 else
 	echo `date` $@ $(n) >> build.log
-	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
+#	java -agentlib:hprof=cpu=samples -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
+	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINER -saveTemp -profile -out callListNist$(n).log
 endif
 
 testrig:
@@ -122,7 +123,7 @@ ziplogs:
 
 ./class/DDNode.class: ./class/DataLocation.class
 
-./class/CallWrapper.class: ./class/CallType.class ./class/DDNode.class ./class/ExecCicsStatement.class ./class/DB2zCallStatement.class
+./class/CallWrapper.class: ./class/CallType.class ./class/DDNode.class ./class/ExecCicsStatement.class ./class/DB2zCallStatement.class ./class/QualifiedInData.class
 
 ./class/ExecCicsStatement.class: ./class/CicsKeywordWithArg.class ./class/ExecCicsStatementType.class
 
@@ -133,6 +134,8 @@ ziplogs:
 ./class/IdDivListener.class: 
 
 ./class/CobolProgram.class: ./class/AssignClause.class
+
+./class/CobolSource.class: ./class/TheCLI.class
 
 ./class/CompilerDirectingStatementListener.class:
 

@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 import static org.antlr.v4.runtime.CharStreams.fromFileName;
+import org.antlr.v4.runtime.atn.*;
 
 /**
 This class represents a source file containing one or more COBOL
@@ -105,7 +106,15 @@ class CobolSource {
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
 
+		if (this.CLI.profile) {
+			parser.setProfile(true);
+		}
+
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		if (this.CLI.profile) {
+			this.profileParser(parser, "lookForBasis");
+		}
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
@@ -131,8 +140,16 @@ class CobolSource {
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
 
+		if (this.CLI.profile) {
+			parser.setProfile(true);
+		}
+
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
-	
+
+		if (this.CLI.profile) {
+			this.profileParser(parser, "lookForIdDiv");
+		}
+		
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
 		IdDivListener listener = new IdDivListener();
@@ -666,7 +683,15 @@ class CobolSource {
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
 
+		if (this.CLI.profile) {
+			parser.setProfile(true);
+		}
+
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		if (this.CLI.profile) {
+			this.profileParser(parser, "lookForCompilerDirectingStatements");
+		}
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
@@ -753,7 +778,16 @@ class CobolSource {
 
 		CobolParser parser = new CobolParser(tokens);  //parse the tokens
 
+		if (this.CLI.profile) {
+			parser.setProfile(true);
+		}
+
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		if (this.CLI.profile) {
+			this.profileParser(parser, "lookForCobolPrograms");
+		}
+
 		ParseTreeWalker walker = new ParseTreeWalker();
 
 		ProgramListener listener = new ProgramListener(this.programs, this.LOGGER);
@@ -834,6 +868,92 @@ class CobolSource {
 
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
+		}
+	}
+
+	public void profileParser(CobolPreprocessorParser parser, String header) {
+		DecisionInfo[] decisionsInfo = parser.getParseInfo().getDecisionInfo();
+
+		this.LOGGER.fine(header);
+		String header2 = String.format(
+			"%35s %15s %15s %15s %15s %15s %15s %15s %15s %15s %15s"
+			, "ruleName"
+			, "timeInPred"
+			, "invocations"
+			, "SLL_TotalLook"
+			, "SLL_MaxLook"
+			, "ambiguities"
+			, "LL_TotalLook"
+			, "LL_MaxLook"
+			, "contextSensitiv"
+			, "predicateEvals"
+			, "errors"
+			);
+		this.LOGGER.fine(header2);
+
+		for (DecisionInfo di: decisionsInfo) {
+			DecisionState ds = parser.getATN().getDecisionState(di.decision);
+			String ruleName = CobolPreprocessorParser.ruleNames[ds.ruleIndex];
+			if (di.timeInPrediction > 0) {
+				String detail = String.format(
+					"%35s %15d %15d %15d %15d %15d %15d %15d %15d %15d %15d"
+					, ruleName
+					, di.timeInPrediction
+					, di.invocations
+					, di.SLL_TotalLook
+					, di.SLL_MaxLook
+					, di.ambiguities.size()
+					, di.LL_TotalLook
+					, di.LL_MaxLook
+					, di.contextSensitivities.size()
+					, di.predicateEvals.size()
+					, di.errors.size()
+					);
+				this.LOGGER.fine(detail);
+			}
+		}
+	}
+
+	public void profileParser(CobolParser parser, String header) {
+		DecisionInfo[] decisionsInfo = parser.getParseInfo().getDecisionInfo();
+
+		this.LOGGER.fine(header);
+		String header2 = String.format(
+			"%35s %15s %15s %15s %15s %15s %15s %15s %15s %15s %15s"
+			, "ruleName"
+			, "timeInPred"
+			, "invocations"
+			, "SLL_TotalLook"
+			, "SLL_MaxLook"
+			, "ambiguities"
+			, "LL_TotalLook"
+			, "LL_MaxLook"
+			, "contextSensitiv"
+			, "predicateEvals"
+			, "errors"
+			);
+		this.LOGGER.fine(header2);
+
+		for (DecisionInfo di: decisionsInfo) {
+			DecisionState ds = parser.getATN().getDecisionState(di.decision);
+			String ruleName = CobolParser.ruleNames[ds.ruleIndex];
+			if (di.timeInPrediction > 0) {
+				String detail = String.format(
+					"%35s %15d %15d %15d %15d %15d %15d %15d %15d %15d %15d"
+					, ruleName
+					, di.timeInPrediction
+					, di.invocations
+					, di.SLL_TotalLook
+					, di.SLL_MaxLook
+					, di.ambiguities.size()
+					, di.LL_TotalLook
+					, di.LL_MaxLook
+					, di.contextSensitivities.size()
+					, di.predicateEvals.size()
+					, di.errors.size()
+					);
+				this.LOGGER.fine(detail);
+			}
 		}
 	}
 
