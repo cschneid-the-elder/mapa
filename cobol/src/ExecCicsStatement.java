@@ -57,10 +57,16 @@ class ExecCicsStatement {
 			case "DELETE":
 				this.type = ExecCicsStatementType.CICSDELETE;
 				this.findFile();
+				if (this.file == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "READ":
 				this.type = ExecCicsStatementType.CICSREAD;
 				this.findFile();
+				if (this.file == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "REWRITE":
 				this.type = ExecCicsStatementType.CICSREWRITE;
@@ -141,10 +147,8 @@ class ExecCicsStatement {
 			case CICSREADPREV:
 			case CICSDELETE:
 			case CICSREAD:
-			case CICSREWRITE: //intentional fall through
-				name = this.file.getArgString();
-				break;
-			case CICSWRITE:
+			case CICSREWRITE:
+			case CICSWRITE: //intentional fall through
 				name = this.file.getArgString();
 				break;
 			default:

@@ -5857,6 +5857,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitIdentifier(CobolParser.IdentifierContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#dfhvalue}.
+	 * @param ctx the parse tree
+	 */
+	void enterDfhvalue(CobolParser.DfhvalueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dfhvalue}.
+	 * @param ctx the parse tree
+	 */
+	void exitDfhvalue(CobolParser.DfhvalueContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#tableCall}.
 	 * @param ctx the parse tree
 	 */

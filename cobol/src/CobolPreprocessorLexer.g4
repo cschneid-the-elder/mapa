@@ -143,6 +143,7 @@ INITCHECK : I N I T C H E C K;
 INTDATE : I N T D A T E;
 INITIAL : I N I T I A L;
 INL : I N L;
+INLINE : I N L I N E;
 INSERT : I N S E R T;
 JA : J A;
 JP : J P;
@@ -496,7 +497,7 @@ IDENTIFIER
    ;
 
 FILENAME
-   : [a-zA-Z0-9]+ '.' [a-zA-Z0-9]+
+   : [@#$a-zA-Z0-9]+ ('.' [@#$a-zA-Z0-9]+)*
    {
     (getCharPositionInLine() > 7 && !testRig)
     ||
@@ -594,7 +595,7 @@ EQUAL : E Q U A L;
 EVALUATE : E V A L U A T E;
 GREATER : G R E A T E R;
 IF : I F;
-INLINE : I N L I N E;
+INLINE_ : I N L I N E ->type(INLINE);
 INLINE_OFF : O F F;
 INLINE_ON : O N;
 IS : I S;

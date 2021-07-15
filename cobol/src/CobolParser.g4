@@ -2591,7 +2591,11 @@ abbreviation
 // identifier ----------------------------------
 
 identifier
-   : qualifiedDataName | tableCall | functionCall | specialRegister
+   : qualifiedDataName | tableCall | functionCall | specialRegister | dfhvalue
+   ;
+
+dfhvalue
+   : DFHVALUE LPARENCHAR (cicsWord | cobolWord) RPARENCHAR
    ;
 
 tableCall
@@ -2827,6 +2831,10 @@ cobolWord
    | ZERO_FILL
    ;
 
+/*
+This rule must contain any tokens from the Lexer that are also
+CICS keywords.
+*/
 cicsWord
    : IDENTIFIER 
    | ABORT
@@ -2839,8 +2847,10 @@ cicsWord
    | AND
    | ASSIGN
    | AT
+   | ATTRIBUTES
    | BINARY
    | CANCEL
+   | CLASS
    | CLOSE
    | CURSOR
    | DATA
@@ -2865,19 +2875,23 @@ cicsWord
    | MODE
    | MOVE
    | NAME
+   | NEXT
    | ON
    | OPEN
    | OR
    | OUTPUT
    | PAGE
    | PROCESS
+   | QUEUE
    | READ
+   | RECEIVE
    | RECORD
    | RESET
    | RETURN
    | REWIND
    | REWRITE
    | RUN
+   | SEND
    | SERVICE
    | SET
    | START

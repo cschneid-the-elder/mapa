@@ -289,19 +289,19 @@ classicCommentEntry
 // exec cics statement
 
 execCicsStatement
-   : EXEC CICS charData END_EXEC DOT?
+   : EXEC CICS (charData | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // exec sql statement
 
 execSqlStatement
-   : EXEC_SQL SQL_TEXT+ END_EXEC DOT?
+   : EXEC_SQL (SQL_TEXT+ | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // exec sql ims statement
 
 execSqlImsStatement
-   : EXEC SQLIMS charData END_EXEC DOT?
+   : EXEC SQLIMS (charData | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // copy statement
