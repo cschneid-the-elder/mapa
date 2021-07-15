@@ -69,6 +69,9 @@ class ExecCicsStatement {
 			case "WRITE":
 				this.type = ExecCicsStatementType.CICSWRITE;
 				this.findFile();
+				if (this.file == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "STARTBR":
 				this.type = ExecCicsStatementType.CICSSTARTBR;
@@ -138,8 +141,10 @@ class ExecCicsStatement {
 			case CICSREADPREV:
 			case CICSDELETE:
 			case CICSREAD:
-			case CICSREWRITE:
-			case CICSWRITE: //intentional fall through
+			case CICSREWRITE: //intentional fall through
+				name = this.file.getArgString();
+				break;
+			case CICSWRITE:
 				name = this.file.getArgString();
 				break;
 			default:

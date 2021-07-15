@@ -2868,11 +2868,13 @@ cicsWord
    | ON
    | OPEN
    | OR
+   | OUTPUT
    | PAGE
    | PROCESS
    | READ
    | RECORD
    | RESET
+   | RETURN
    | REWIND
    | REWRITE
    | RUN
@@ -2880,6 +2882,7 @@ cicsWord
    | SET
    | START
    | STATUS
+   | TEXT
    | TIME
    | TITLE
    | TO
