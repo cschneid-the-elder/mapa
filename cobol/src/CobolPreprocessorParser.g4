@@ -621,6 +621,7 @@ charDataKeyword
    | DIVISION
    | LEADING | TRAILING
    | BASIS | INSERT | DELETE
+   | (DFHVALUE LPARENCHAR (cobolWord | COPY | PROCESS) RPARENCHAR)
    ;
 
 

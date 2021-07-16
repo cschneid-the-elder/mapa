@@ -2591,12 +2591,14 @@ abbreviation
 // identifier ----------------------------------
 
 identifier
-   : qualifiedDataName | tableCall | functionCall | specialRegister | dfhvalue
+   : qualifiedDataName | tableCall | functionCall | specialRegister //| dfhvalue
    ;
 
+/*
 dfhvalue
    : DFHVALUE LPARENCHAR (cicsWord | cobolWord) RPARENCHAR
    ;
+*/
 
 tableCall
    : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR)* referenceModifier?
@@ -2872,6 +2874,7 @@ cicsWord
    | LAST
    | LENGTH
    | LINE
+   | METHOD
    | MODE
    | MOVE
    | NAME
