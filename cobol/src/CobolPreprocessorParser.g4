@@ -391,7 +391,7 @@ charDataSql
    ;
 
 charDataLine
-   : (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+ (NEWLINE CLASSIC_CONTINUATION (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+)*
+   : (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR | dfhvalue)+ (NEWLINE CLASSIC_CONTINUATION (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+)*
    ;
 
 cobolWord
@@ -404,6 +404,15 @@ literal
 
 filename
    : FILENAME
+   ;
+
+/*
+This rule was originally part of the charDataKeyword rule and
+quadrupled the clock time of parsing.  Breaking it out here
+restored balance to the universe.
+*/
+dfhvalue
+   : (DFHVALUE LPARENCHAR (cobolWord | COPY | PROCESS) RPARENCHAR)
    ;
 
 compilerDirectiveStatement
@@ -621,7 +630,6 @@ charDataKeyword
    | DIVISION
    | LEADING | TRAILING
    | BASIS | INSERT | DELETE
-   | (DFHVALUE LPARENCHAR (cobolWord | COPY | PROCESS) RPARENCHAR)
    ;
 
 

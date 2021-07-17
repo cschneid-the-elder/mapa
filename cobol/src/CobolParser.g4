@@ -1515,7 +1515,7 @@ execCicsStatement
 // exec sql statement
 
 execSqlStatement
-   : EXEC_SQL SQL_TEXT+ END_EXEC DOT?
+   : EXEC_SQL SQL_TEXT+ END_EXEC ((DOT NEWLINE?) | DOT_FS)?
    ;
 
 // exec sql ims statement
@@ -2932,8 +2932,12 @@ integerLiteral
    : INTEGERLITERAL | LEVEL_NUMBER_66 | LEVEL_NUMBER_77 | LEVEL_NUMBER_88
    ;
 
+/*
+The END token is here because it is the only valid DFHRESP value
+that is also a COBOL reserved word.
+*/
 cicsDfhRespLiteral
-   : DFHRESP LPARENCHAR (cobolWord | literal) RPARENCHAR
+   : DFHRESP LPARENCHAR (cobolWord | literal | END) RPARENCHAR
    ;
 
 cicsDfhValueLiteral
