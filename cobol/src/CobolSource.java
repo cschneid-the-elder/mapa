@@ -106,6 +106,7 @@ class CobolSource {
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners(); //that this is COBOL is not yet established
 
 		if (this.CLI.profile) {
 			parser.setProfile(true);
@@ -140,6 +141,7 @@ class CobolSource {
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners(); //that this is COBOL is not yet established
 
 		if (this.CLI.profile) {
 			parser.setProfile(true);

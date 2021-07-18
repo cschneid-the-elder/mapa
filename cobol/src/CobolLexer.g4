@@ -702,13 +702,13 @@ SLASHCHAR : '/';
 NONNUMERICLITERAL : STRINGLITERAL | DBCSLITERAL | HEXNUMBER  | NULLTERMINATED;
 
 fragment HEXNUMBER :
-	X '"' [0-9A-F]+ '"'
-	| X '\'' [0-9A-F]+ '\''
+	X '"' [0-9A-Fa-f]+ '"'
+	| X '\'' [0-9A-Fa-f]+ '\''
 ;
 
 CONTINUED_HEXNUMBER :
-	(X '"' [0-9A-F]+
-	| X '\'' [0-9A-F]+)
+	(X '"' [0-9A-Fa-f]+
+	| X '\'' [0-9A-Fa-f]+)
 	 {getCharPositionInLine() < 73}?
 ;
 

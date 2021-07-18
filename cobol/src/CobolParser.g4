@@ -2841,7 +2841,7 @@ cobolWord
    | WAIT
    | YEAR | YYYYMMDD | YYYYDDD
    | ZERO_FILL
-   | NAME | ROWID
+   | NAME | ROWID | REMARKS
    ;
 
 /*

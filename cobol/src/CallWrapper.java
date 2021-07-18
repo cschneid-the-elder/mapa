@@ -259,6 +259,7 @@ class CallWrapper {
 		}
 	}
 
+	//TODO this can be simplified
 	private void initialize(
 			CobolParser.LiteralContext litCtx
 			, CobolParser.IdentifierContext idCtx
@@ -428,7 +429,7 @@ class CallWrapper {
 	}
 
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
-		for (int i = 0; i < calledModuleNames.size(); i++) {
+		for (int i = 0; i < this.calledModuleNames.size(); i++) {
 			out.printf(
 				"CALL,%s,%s,%s,%s,%s\n"
 				, calledModuleUUIDs.get(i)
@@ -438,5 +439,15 @@ class CallWrapper {
 				, calledModuleNames.get(i));
 		}
 
+		if (this.calledModuleNames.size() == 0) {
+			//unresolved CALL by IDENTIFIER, or some flavour thereof
+			out.printf(
+				"UNRESOLVEDCALL,%s,%s,%s,%s,%s\n"
+				, UUID.randomUUID()
+				, parentUUID.toString()
+				, this.callingModuleName
+				, this.callType
+				, this.cobolIdentifier);
+		}
 	}
 }
