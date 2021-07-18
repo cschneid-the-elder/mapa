@@ -5038,7 +5038,7 @@ ccsidValue
 	;
 
 columnName
-	: ((correlationName DOT)? (identifier1 | NONNUMERICLITERAL))
+	: (((correlationName | tableName) DOT)? (identifier1 | NONNUMERICLITERAL))
 	;
 
 sourceColumnName
@@ -5066,7 +5066,8 @@ correlationName
 	;
 
 locationName
-	: (identifier | NUMERICLITERAL | INTEGERLITERAL) (DOT? (identifier | NUMERICLITERAL | INTEGERLITERAL))*
+//	: (identifier | NUMERICLITERAL | INTEGERLITERAL) (DOT? (identifier | NUMERICLITERAL | INTEGERLITERAL))*
+	: SQLIDENTIFIER
 	;
 
 schemaName

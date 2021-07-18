@@ -131,6 +131,7 @@ BIT : B I T;
 BLANK : B L A N K;
 BLINK : B L I N K;
 BLOB : B L O B;
+BLOB_LOCATOR : B L O B '-' L O C A T O R;
 BLOCK : B L O C K;
 BOUNDS : B O U N D S;
 BOTTOM : B O T T O M;
@@ -153,6 +154,7 @@ CICS : C I C S;
 CLASS : C L A S S;
 CLASS_ID : C L A S S MINUSCHAR I D;
 CLOB : C L O B;
+CLOB_LOCATOR : C L O B '-' L O C A T O R;
 CLOCK_UNITS : C L O C K MINUSCHAR U N I T S;
 CLOSE : C L O S E;
 CLOSE_DISPOSITION : C L O S E MINUSCHAR D I S P O S I T I O N;
@@ -208,6 +210,7 @@ DAY_OF_WEEK : D A Y MINUSCHAR O F MINUSCHAR W E E K;
 DB : D B;
 DBCS : D B C S;
 DBCLOB : D B C L O B;
+DBCLOB_LOCATOR : D B C L O B '-' L O C A T O R;
 DE : D E;
 DEBUG_CONTENTS : D E B U G MINUSCHAR C O N T E N T S;
 DEBUG_ITEM : D E B U G MINUSCHAR I T E M;
@@ -530,6 +533,7 @@ RF : R F;
 RH : R H;
 RIGHT : R I G H T;
 ROUNDED : R O U N D E D;
+ROWID : R O W I D;
 RUN : R U N;
 SAME : S A M E;
 SAVE : S A V E;
@@ -634,6 +638,7 @@ USING : U S I N G;
 VALUE : V A L U E;
 VALUES : V A L U E S;
 VALIDATING : V A L I D A T I N G;
+VARBINARY : V A R B I N A R Y;
 VARYING : V A R Y I N G;
 VIRTUAL : V I R T U A L;
 WAIT : W A I T;
@@ -645,6 +650,7 @@ WORDS : W O R D S;
 WORKING_STORAGE : W O R K I N G MINUSCHAR S T O R A G E;
 WRITE : W R I T E;
 //XCTL : X C T L;
+XML : X M L;
 XML_DECLARATION : X M L MINUSCHAR D E C L A R A T I O N;
 XML_GENERATE : X M L ' ' G E N E R A T E;
 XML_PARSE : X M L ' ' P A R S E;
@@ -765,7 +771,8 @@ NUMERICLITERAL
 
 
 IDENTIFIER
-   : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)*
+//   : [a-zA-Z0-9]+ ([-_]+ [a-zA-Z0-9]+)*
+   : [a-zA-Z0-9]+ [-_a-zA-Z0-9]*
    {
     (getCharPositionInLine() > 7 && !testRig)
     ||
