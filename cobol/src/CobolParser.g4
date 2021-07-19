@@ -2856,6 +2856,7 @@ cicsWord
    | AFTER
    | ALL
    | ALLOCATE
+   | ALTER
    | ALTERNATE
    | AND
    | ASSIGN
@@ -2865,6 +2866,7 @@ cicsWord
    | CANCEL
    | CLASS
    | CLOSE
+   | CONTROL
    | CURSOR
    | DATA
    | DATE
@@ -2905,6 +2907,7 @@ cicsWord
    | REWIND
    | REWRITE
    | RUN
+   | SECURITY
    | SEND
    | SERVICE
    | SET
