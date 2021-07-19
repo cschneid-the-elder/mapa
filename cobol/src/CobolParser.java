@@ -150,7 +150,7 @@ public class CobolParser extends Parser {
 		CLASSIC_DEBUG_LINE_PIC=700, CLASSIC_EOL_COMMENT_PIC=701, FREE_FORM_TEXT=702, 
 		FFT_NEWLINE=703, FFT_CLASSIC_LINE_NUMBER=704, FFT_CLASSIC_COMMENT_LINE=705, 
 		ES_CLASSIC_COMMENTLINE=706, ES_CLASSIC_LINE_NUMBER=707, SQL_TEXT=708, 
-		DFHVALUE_WS=709, DFHVALUE_NEWLINE=710;
+		DFHVALUE_WS=709, DFHVALUE_NEWLINE=710, DFHRESP_WS=711, DFHRESP_NEWLINE=712;
 	public static final int
 		RULE_startRule = 0, RULE_compilationUnit = 1, RULE_programUnit = 2, RULE_classicCommentEntry = 3, 
 		RULE_endProgramStatement = 4, RULE_identificationDivision = 5, RULE_identificationDivisionBody = 6, 
@@ -766,7 +766,7 @@ public class CobolParser extends Parser {
 			"CLASSIC_DEBUG_LINE_PIC", "CLASSIC_EOL_COMMENT_PIC", "FREE_FORM_TEXT", 
 			"FFT_NEWLINE", "FFT_CLASSIC_LINE_NUMBER", "FFT_CLASSIC_COMMENT_LINE", 
 			"ES_CLASSIC_COMMENTLINE", "ES_CLASSIC_LINE_NUMBER", "SQL_TEXT", "DFHVALUE_WS", 
-			"DFHVALUE_NEWLINE"
+			"DFHVALUE_NEWLINE", "DFHRESP_WS", "DFHRESP_NEWLINE"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -56828,7 +56828,7 @@ public class CobolParser extends Parser {
 
 	private static final int _serializedATNSegments = 3;
 	private static final String _serializedATNSegment0 =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u02c8\u1b16\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u02ca\u1b16\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+

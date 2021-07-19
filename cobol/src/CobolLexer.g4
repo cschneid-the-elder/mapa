@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, 2020, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019 - 2021, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -232,7 +232,7 @@ DEPENDING : D E P E N D I N G;
 DESCENDING : D E S C E N D I N G;
 DESTINATION : D E S T I N A T I O N;
 DETAIL : D E T A I L;
-DFHRESP : D F H R E S P;
+DFHRESP : D F H R E S P ->pushMode(DFHRESP_MODE);
 DFHVALUE : D F H V A L U E ->pushMode(DFHVALUE_MODE);
 DISABLE : D I S A B L E;
 DISK : D I S K;
@@ -908,6 +908,11 @@ ES_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInL
 
 SQL_TEXT : (.+?);
 
+/*
+This mode is to ensure any COBOL reserved words that are DFHVALUE keywords
+are recognized as IDENTIFIER instead of being themselves.  This makes the
+parser happy.
+*/
 mode DFHVALUE_MODE;
 
 DFHVALUE_WS : WS ->channel(HIDDEN);
@@ -917,4 +922,19 @@ DFHVALUE_LPARENCHAR : LPARENCHAR ->type(LPARENCHAR);
 DFHVALUE_RPARENCHAR : RPARENCHAR ->type(RPARENCHAR),popMode;
 
 DFHVALUE_IDENTIFIER : IDENTIFIER ->type(IDENTIFIER);
+
+/*
+This mode is to ensure any COBOL reserved words that are DFHRESP keywords
+are recognized as IDENTIFIER instead of being themselves.  This makes the
+parser happy.
+*/
+mode DFHRESP_MODE;
+
+DFHRESP_WS : WS ->channel(HIDDEN);
+DFHRESP_NEWLINE : NEWLINE ->channel(HIDDEN);
+
+DFHRESP_LPARENCHAR : LPARENCHAR ->type(LPARENCHAR);
+DFHRESP_RPARENCHAR : RPARENCHAR ->type(RPARENCHAR),popMode;
+
+DFHRESP_IDENTIFIER : IDENTIFIER ->type(IDENTIFIER);
 

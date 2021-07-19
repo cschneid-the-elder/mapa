@@ -56,8 +56,8 @@ endif
 
 testLocalx:
 ifeq ($(strip $(n)),)
-	#echo `date` $@ >> build.log
-	#java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
+	echo `date` $@ >> build.log
+	java -jar CallTree.jar -fileList testList91 -copy /home/craig/mapa/cobol/testdata/local -out callListLocalx.log
 else
 	echo `date` $@ $(n) >> build.log
 ifeq ($(wildcard /home/craig/mapa/cobol/testdata/local/test$(n).def),)

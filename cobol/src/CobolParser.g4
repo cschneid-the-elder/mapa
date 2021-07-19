@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, 2020, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019 - 2021, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
