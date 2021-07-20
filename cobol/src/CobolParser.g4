@@ -2859,6 +2859,7 @@ cicsWord
    | ALTER
    | ALTERNATE
    | AND
+   | ANY
    | ASSIGN
    | AT
    | ATTRIBUTES
@@ -2895,6 +2896,7 @@ cicsWord
    | ON
    | OPEN
    | OR
+   | ORGANIZATION
    | OUTPUT
    | PAGE
    | PROCESS
@@ -2913,6 +2915,7 @@ cicsWord
    | SET
    | START
    | STATUS
+   | TERMINAL
    | TEXT
    | TIME
    | TITLE

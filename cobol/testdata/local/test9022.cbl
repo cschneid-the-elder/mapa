@@ -1,5 +1,11 @@
        Identification Division.
        Program-ID.    test9022.
+      *
+      * Test all the parameters of all the CICS commands.
+      * This code probably wouldn't compile cleanly, in part
+      * due to mutually exclusive options on some commands.
+      * It's just here to test parsing.
+      *
        Procedure Division.
 
            EXEC CICS
@@ -410,6 +416,725 @@
                 SUBEVENT7(X)
                 SUBEVENT8(X)
            END-EXEC
+
+           EXEC CICS
+                DEFINE
+                COUNTER(X)
+                POOL(X)
+                VALUE(X)
+                MINIMUM(X)
+                MAXIMUM(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                DEFINE
+                DCOUNTER(X)
+                POOL(X)
+                VALUE(X)
+                MINIMUM(X)
+                MAXIMUM(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                DEFINE
+                INPUT
+                EVENT(X)
+           END-EXEC
+
+           EXEC CICS
+                DEFINE
+                PROCESS(X)
+                PROCESSTYPE(X)
+                TRANSID(X)
+                PROGRAM(X)
+                USERID(X)
+                NOCHECK
+           END-EXEC
+
+           EXEC CICS
+                DEFINE
+                TIMER(X)
+                EVENT(X)
+                AFTER
+                DAYS(X)
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+           END-EXEC
+
+           EXEC CICS
+                DEFINE
+                TIMER(X)
+                EVENT(X)
+                AT
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+                ON
+                YEAR(X)
+                MONTH(X)
+                DAYOFMONTH(X)
+                DAYOFYEAR(X)
+           END-EXEC
+
+           EXEC CICS
+                DELAY
+                INTERVAL(X)
+                TIME(X)
+                FOR
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+                MILLISECS(X)
+                UNTIL
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+                REQID(X)
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                FILE(X)
+                TOKEN(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                GENERIC
+                NUMREC(X)
+                SYSTEM(X)
+                NOSUSPEND
+                RBA
+                RRN
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                ACTIVITY(X)
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                CHANNEL(X)
+           END-EXEC
+
+           EXEC CICS
+                CONTAINER(X)
+                ACTIVITY(X)
+                ACQACTIVITY
+                PROCESS
+                ACQPROCESS
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                CONTAINER(X)
+                CHANNEL(X)
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                COUNTER(X)
+                POOL(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                DCOUNTER(X)
+                POOL(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                EVENT(X)
+           END-EXEC
+
+           EXEC CICS
+                DELETE
+                TIMER(X)
+           END-EXEC
+
+           EXEC CICS
+                DELETEQ
+                TD
+                QUEUE(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                DELETEQ
+                TS
+                QUEUE(X)
+                QNAME(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                DEQ
+                RESOURCE(X)
+                LENGTH(X)
+                UOW
+                MAXLIFETIME(X)
+                TASK
+           END-EXEC
+
+           EXEC CICS
+                DOCUMENT
+                CREATE
+                DOCTOKEN(X)
+                FROM(X)
+                TEXT(X)
+                BINARY(X)
+                LENGTH(X)
+                FROMDOC(X)
+                TEMPLATE(X)
+                SYMBOLLIST(X)
+                LISTLENGTH(X)
+                DELIMITER(X)
+                UNESCAPED
+                DOCSIZE(X)
+                HOSTCODEPAGE(X)
+           END-EXEC
+
+           EXEC CICS
+                DOCUMENT
+                DELETE
+                DOCTOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                DOCUMENT
+                INSERT
+                DOCTOKEN(X)
+                TEXT(X)
+                BINARY(X)
+                FROM(X)
+                LENGTH(X)
+                SYMBOL(X)
+                TEMPLATE(X)
+                FROMDOC(X)
+                BOOKMARK(X)
+                DOCSIZE(X)
+                HOSTCODEPAGE(X)
+                AT(X)
+                TO(X)
+           END-EXEC
+
+           EXEC CICS
+                DOCUMENT
+                RETRIEVE
+                DOCTOKEN(X)
+                INTO(X)
+                LENGTH(X)
+                MAXLENGTH(X)
+                CHARACTERSET(X)
+                DATAONLY
+           END-EXEC
+
+           EXEC CICS
+                DOCUMENT
+                SET
+                DOCTOKEN(X)
+                SYMBOL(X)
+                VALUE(X)
+                SYMBOLLIST(X)
+                DELIMITER(X)
+                LENGTH(X)
+                UNESCAPED
+           END-EXEC
+
+           EXEC CICS
+                DUMP
+                TRANSACTION
+                DUMPCODE(X)
+                FROM(X)
+                LENGTH(X)
+                FLENGTH(X)
+                COMPLETE
+                TRT
+                SEGMENTLIST(X)
+                LENGTHLIST(X)
+                NUMSEGMENTS(X)
+                TASK
+                STORAGE
+                PROGRAM
+                TERMINAL
+                TABLES
+                FCT
+                PCT
+                PPT
+                SIT
+                TCT
+                DUMPID(X)
+           END-EXEC
+
+           EXEC CICS
+                ENDBR
+                FILE(X)
+                REQID(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                ENDBROWSE
+                ACTIVITY
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                ENDBROWSE
+                CONTAINER
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                ENDBROWSE
+                EVENT
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                ENDBROWSE
+                PROCESS
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                ENDBROWSE
+                TIMER
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                ENQ
+                RESOURCE(X)
+                LENGTH(X)
+                UOW
+                MAXLIFETIME(X)
+                TASK
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                ENTER
+                TRACENUM(X)
+                FROM(X)
+                FROMLENGTH(X)
+                RESOURCE(X)
+                EXCEPTION
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                ATTACH
+                ATTACHID(X)
+                CONVID(X)
+                SESSION(X)
+                PROCESS(X)
+                RESOURCE(X)
+                RPROCESS(X)
+                RRESOURCE(X)
+                QUEUE(X)
+                IUTYPE(X)
+                DATASTR(X)
+                RECFM(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                ATTRIBUTES
+                CONVID(X)
+                SESSION(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                CERTIFICATE(X)
+                LENGTH(X)
+                SERIALNUM(X)
+                SERIALNUMLENGTH(X)
+                USERID(X)
+                OWNER
+                ISSUER
+                COMMONNAME(X)
+                COMMONNAMELEN(X)
+                COUNTRY(X)
+                COUNTRYLEN(X)
+                STATE(X)
+                STATELEN(X)
+                LOCALITY(X)
+                LOCALITYLEN(X)
+                ORGANIZATION(X)
+                ORGANIZATIONLEN(X)
+                ORGUNIT(X)
+                ORGUNITLEN(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                LOGONMSG
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                PROCESS
+                PROCNAME(X)
+                PROCLENGTH(X)
+                MAXPROCLEN(X)
+                CONVID(X)
+                SYNCLEVEL(X)
+                PIPLIST(X)
+                PIPLENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                TCPIP
+                AUTHENTICATE(X)
+                CLIENTNAME(X)
+                CNAMELENGTH(X)
+                SERVERNAME(X)
+                SNAMELENGTH(X)
+                CLIENTADDR(X)
+                CADDRLENGTH(X)
+                CLNTIPFAMILY(X)
+                CLIENTADDRNU(X)
+                CLNTADDR6NU(X)
+                SERVERADDR(X)
+                SADDRLENGTH(X)
+                SRVRIPFAMILY(X)
+                SERVERADDRNU(X)
+                SRVRADDR6NU(X)
+                SSLTYPE(X)
+                TCPIPSERVICE(X)
+                PORTNUMBER(X)
+                PORTNUMNU(X)
+                PRIVACY(X)
+                MAXDATALENT(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                TCT
+                NETNAME(X)
+                SYSID(X)
+                TERMID(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                WEB
+                SCHEME(X)
+                HOST(X)
+                HOSTLENGTH(X)
+                HOSTTYPE(X)
+                HTTPMETHOD(X)
+                METHODLENGTH(X)
+                HTTPVERSION(X)
+                VERSIONLEN(X)
+                PATH(X)
+                PATHLENGTH(X)
+                PORTNUMBER(X)
+                QUERYSTRING(X)
+                QUERYSTRLEN(X)
+                REQUESTTYPE(X)
+                URIMAP(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                WEB
+                SESSTOKEN(X)
+                SCHEME(X)
+                HOST(X)
+                HOSTLENGTH(X)
+                HOSTTYPE(X)
+                HTTPVERSION(X)
+                VERSIONLEN(X)
+                PATH(X)
+                PATHLENGTH(X)
+                PORTNUMBER(X)
+                URIMAP(X)
+                REALM(X)
+                REALMLEN(X)
+           END-EXEC
+
+           EXEC CICS
+                FETCH
+                ANY(X)
+                CHANNEL(X)
+                COMPSTATUS(X)
+                ABCODE(X)
+                NOSUSPEND
+                TIMEOUT(X)
+           END-EXEC
+
+           EXEC CICS
+                FETCH
+                CHILD(X)
+                CHANNEL(X)
+                COMPSTATUS(X)
+                ABCODE(X)
+                NOSUSPEND
+                TIMEOUT(X)
+           END-EXEC
+
+           EXEC CICS
+                FORCE
+                TIMER
+                ACQACTIVITY
+                ACQPROCESS
+           END-EXEC
+
+           EXEC CICS
+                FORMATTIME
+                ABSTIME(X)
+                DATE(X)
+                FULLDATE(X)
+                DATEFORM(X)
+                DATESEP(X)
+                DATESTRING(X)
+                STRINGZONE(X)
+                DAYCOUNT(X)
+                DAYOFMONTH(X)
+                DAYOFWEEK(X)
+                DDMMYY(X)
+                DDMMYYYY(X)
+                MILLISECONDS(X)
+                MMDDYY(X)
+                MMDDYYYY(X)
+                MONTHOFYEAR(X)
+                STRINGFORMAT(X)
+                TIME(X)
+                TIMESEP(X)
+                YEAR(X)
+                YYYYDDD(X)
+                YYYYDDMM(X)
+                YYYYMMDD(X)
+           END-EXEC
+
+           EXEC CICS
+                FREE
+                CONVID(X)
+                SESSION(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                FREE
+                CHILD(X)
+           END-EXEC
+
+           EXEC CICS
+                FREEMAIN
+                DATA(X)
+                DATAPOINTER(X)
+           END-EXEC
+
+           EXEC CICS
+                FREEMAIN64
+                DATA(X)
+                DATAPOINTER(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ALLOCATE
+                SYSID(X)
+                MODENAME(X)
+                PARTNER(X)
+                CONVID(X)
+                RETCODE(X)
+                NOQUEUE
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ASSIGN
+                PRINCONVID(X)
+                PRINSYSID(X)
+                RETCODE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                CONNECT
+                PROCESS
+                CONVID(X)
+                PROCNAME(X)
+                PROCLENGTH(X)
+                PARTNER(X)
+                PIPLIST(X)
+                PIPLENGTH(X)
+                SYNCLEVEL(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                EXTRACT
+                ATTRIBUTES
+                CONVID(X)
+                STATE(X)
+                CONVDATA(X)
+                RETCODE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                EXTRACT
+                PROCESS
+                CONVID(X)
+                PROCNAME(X)
+                PROCLENGTH(X)
+                MAXPROCLEN(X)
+                SYNCLEVEL(X)
+                PIPLIST(X)
+                PIPLENGTH(X)
+                RETCODE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                FREE
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ISSUE
+                ABEND
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ISSUE
+                CONFIRMATION
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ISSUE
+                ERROR
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ISSUE
+                PREPARE
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                ISSUE
+                SIGNAL
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                RECEIVE
+                CONVID(X)
+                INTO(X)
+                SET(X)
+                FLENGTH(X)
+                MAXFLENGTH(X)
+                BUFFER
+                LLID
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                SEND
+                CONVID(X)
+                FROM(X)
+                FLENGTH(X)
+                INVITE
+                LAST
+                CONFIRM
+                WAIT
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GDS
+                WAIT
+                CONVID(X)
+                CONVDATA(X)
+                RETCODE(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                GET
+                CONTAINER(X)
+                ACTIVITY(X)
+                ACQACTIVITY
+                PROCESS
+                ACQPROCESS
+                INTO(X)
+                SET(X)
+                NODATA
+                FLENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                GET
+                CONTAINER(X)
+                CHANNEL(X)
+                INTO(X)
+                FLENGTH(X)
+                BYTEOFFSET(X)
+                SET(X)
+                NODATA
+                INTOCCSID(X)
+                INTOCODEPAGE(X)
+                CONVERTST(X)
+                CCSID(X)
+           END-EXEC
+
+
+
+
+
+
 
 
 
