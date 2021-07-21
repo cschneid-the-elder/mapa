@@ -2,7 +2,7 @@
        Program-ID.    test9022.
       *
       * Test all the parameters of all the CICS commands.
-      * This code probably wouldn't compile cleanly, in part
+      * This code definitely won't compile cleanly, in part
       * due to mutually exclusive options on some commands.
       * It's just here to test parsing.
       *
@@ -1130,7 +1130,870 @@
                 CCSID(X)
            END-EXEC
 
+           EXEC CICS
+                GET
+                COUNTER(X)
+                POOL(X)
+                VALUE(X)
+                INCREMENT(X)
+                REDUCE
+                WRAP
+                COMPAREMIN(X)
+                COMPAREMAX(X)
+                NOSUSPEND
+           END-EXEC
 
+           EXEC CICS
+                GET
+                DCOUNTER(X)
+                POOL(X)
+                VALUE(X)
+                INCREMENT(X)
+                REDUCE
+                WRAP
+                COMPAREMIN(X)
+                COMPAREMAX(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                GETMAIN
+                SET(X)
+                FLENGTH(X)
+                BELOW
+                LENGTH(X)
+                INITIMG(X)
+                SHARED
+                NOSUSPEND
+                USERDATAKEY
+                CICSDATAKEY
+           END-EXEC
+
+           EXEC CICS
+                GETMAIN64
+                SET(X)
+                FLENGTH(X)
+                LOCATION
+                SHARED
+                NOSUSPEND
+                USERDATAKEY
+                CICSDATAKEY
+           END-EXEC
+
+           EXEC CICS
+                GETNEXT
+                ACTIVITY(X)
+                BROWSETOKEN(X)
+                ACTIVITYID(X)
+                LEVEL(X)
+           END-EXEC
+
+           EXEC CICS
+                GETNEXT
+                CONTAINER(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                GETNEXT
+                EVENT(X)
+                BROWSETOKEN(X)
+                COMPOSITE(X)
+                EVENTTYPE(X)
+                FIRESTATUS(X)
+                PREDICATE(X)
+                TIMER(X)
+           END-EXEC
+
+           EXEC CICS
+                GETNEXT
+                PROCESS(X)
+                BROWSETOKEN(X)
+                ACTIVITYID(X)
+           END-EXEC
+
+           EXEC CICS
+                GETNEXT
+                TIMER(X)
+                ACTIVITYID(X)
+                EVENT(X)
+                STATUS(X)
+                ABSTIME(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                GET64
+                CONTAINER(X)
+                CHANNEL(X)
+                INTO(X)
+                FLENGTH(X)
+                BYTEOFFSET(X)
+                SET(X)
+                NODATA
+                INTOCCSID(X)
+                INTOCODEPAGE(X)
+                CONVERTST(X)
+                CCSID(X)
+           END-EXEC
+
+           EXEC CICS
+                HANDLE
+                ABEND
+                CANCEL
+                PROGRAM(X)
+                LABEL(X)
+                RESET
+           END-EXEC
+
+           EXEC CICS
+                HANDLE
+                AID
+                ANYKEY
+                CLEAR
+                CLRPARTN
+                ENTER
+                LIGHTPEN
+                OPERID
+                PA1
+                PA2
+                PA3
+                PF1
+                PF2
+                PF3
+                PF4
+                PF5
+                PF6
+                PF7
+                PF8
+                PF9
+                PF10
+                PF11
+                PF12
+                PF13
+                PF14
+                PF15
+                PF16
+                PF17
+                PF18
+                PF19
+                PF20
+                PF21
+                PF22
+                PF23
+                PF24
+                TRIGGER
+           END-EXEC
+
+           EXEC CICS
+                HANDLE
+                CONDITION
+                NORMAL
+                ERROR
+                RDATT
+                WRBRK
+                EOF
+                EODS
+                EOC
+                INBFMH
+                ENDINPT
+                NONVAL
+                NOSTART
+                TERMIDERR
+                FILENOTFOUND
+                NOTFND
+                DUPREC
+                DUPKEY
+                INVREQ
+                IOERR
+                NOSPACE
+                NOTOPEN
+                ENDFILE
+                ILLOGIC
+                LENGERR
+                QZERO
+                SIGNAL
+                QBUSY
+                ITEMERR
+                PGMIDERR
+                TRANSIDERR
+                ENDDATA
+                INVTSREQ
+                EXPIRED
+                RETPAGE
+                RTEFAIL
+                RTESOME
+                TSIOERR
+                MAPFAIL
+                INVERRTERM
+                INVMPSZ
+                IGREQID
+                OVERFLOW
+                INVLDC
+                NOSTG
+                JIDERR
+                QIDERR
+                NOJBUFSP
+                DSSTAT
+                SELNERR
+                FUNCERR
+                UNEXPIN
+                NOPASSBKRD
+                NOPASSBKWR
+                SEGIDERR
+                SYSIDERR
+                ISCINVREQ
+                ENQBUSY
+                ENVDEFERR
+                IGREQCD
+                SESSIONERR
+                SYSBUSY
+                SESSBUSY
+                NOTALLOC
+                CBIDERR
+                INVEXITREQ
+                INVPARTNSET
+                INVPARTN
+                PARTNFAIL
+                USERIDERR
+                NOTAUTH
+                VOLIDERR
+                SUPPRESSED
+                RESIDERR
+                NOSPOOL
+                TERMERR
+                ROLLEDBACK
+                END
+                DISABLED
+                ALLOCERR
+                STRELERR
+                OPENERR
+                SPOLBUSY
+                SPOLERR
+                NODEIDERR
+                TASKIDERR
+                TCIDERR
+                DSNNOTFOUND
+                LOADING
+                MODELIDERR
+                OUTDESCRERR
+                PARTNERIDERR
+                PROFILEIDERR
+                NETNAMEIDERR
+                LOCKED
+                RECORDBUSY
+                UOWNOTFOUND
+                UOWLNOTFOUND
+                LINKABEND
+                CHANGED
+                PROCESSBUSY
+                ACTIVITYBUSY
+                PROCESSERR
+                ACTIVITYERR
+                CONTAINERERR
+                EVENTERR
+                TOKENERR
+                NOTFINISHED
+                POOLERR
+                TIMERERR
+                SYMBOLERR
+                TEMPLATERR
+                NOTSUPERUSER
+                CSDERR
+                DUPRES
+                RESUNAVAIL
+                CHANNELERR
+                CCSIDERR
+                TIMEDOUT
+                CODEPAGEERR
+                INCOMPLETE
+                APPNOTFOUND
+                BUSY
+           END-EXEC
+
+           EXEC CICS
+                HANDLE
+                CONDITION
+                NORMAL(LABEL1)
+                ERROR(LABEL1)
+                RDATT(LABEL1)
+                WRBRK(LABEL1)
+                EOF(LABEL1)
+                EODS(LABEL1)
+                EOC(LABEL1)
+                INBFMH(LABEL1)
+                ENDINPT(LABEL1)
+                NONVAL(LABEL1)
+                NOSTART(LABEL1)
+                TERMIDERR(LABEL1)
+                FILENOTFOUND(LABEL1)
+                NOTFND(LABEL1)
+                DUPREC(LABEL1)
+                DUPKEY(LABEL1)
+                INVREQ(LABEL1)
+                IOERR(LABEL1)
+                NOSPACE(LABEL1)
+                NOTOPEN(LABEL1)
+                ENDFILE(LABEL1)
+                ILLOGIC(LABEL1)
+                LENGERR(LABEL1)
+                QZERO(LABEL1)
+                SIGNAL(LABEL1)
+                QBUSY(LABEL1)
+                ITEMERR(LABEL1)
+                PGMIDERR(LABEL1)
+                TRANSIDERR(LABEL1)
+                ENDDATA(LABEL1)
+                INVTSREQ(LABEL1)
+                EXPIRED(LABEL1)
+                RETPAGE(LABEL1)
+                RTEFAIL(LABEL1)
+                RTESOME(LABEL1)
+                TSIOERR(LABEL1)
+                MAPFAIL(LABEL1)
+                INVERRTERM(LABEL1)
+                INVMPSZ(LABEL1)
+                IGREQID(LABEL1)
+                OVERFLOW(LABEL1)
+                INVLDC(LABEL1)
+                NOSTG(LABEL1)
+                JIDERR(LABEL1)
+                QIDERR(LABEL1)
+                NOJBUFSP(LABEL1)
+                DSSTAT(LABEL1)
+                SELNERR(LABEL1)
+                FUNCERR(LABEL1)
+                UNEXPIN(LABEL1)
+                NOPASSBKRD(LABEL1)
+                NOPASSBKWR(LABEL1)
+                SEGIDERR(LABEL1)
+                SYSIDERR(LABEL1)
+                ISCINVREQ(LABEL1)
+                ENQBUSY(LABEL1)
+                ENVDEFERR(LABEL1)
+                IGREQCD(LABEL1)
+                SESSIONERR(LABEL1)
+                SYSBUSY(LABEL1)
+                SESSBUSY(LABEL1)
+                NOTALLOC(LABEL1)
+                CBIDERR(LABEL1)
+                INVEXITREQ(LABEL1)
+                INVPARTNSET(LABEL1)
+                INVPARTN(LABEL1)
+                PARTNFAIL(LABEL1)
+                USERIDERR(LABEL1)
+                NOTAUTH(LABEL1)
+                VOLIDERR(LABEL1)
+                SUPPRESSED(LABEL1)
+                RESIDERR(LABEL1)
+                NOSPOOL(LABEL1)
+                TERMERR(LABEL1)
+                ROLLEDBACK(LABEL1)
+                END(LABEL1)
+                DISABLED(LABEL1)
+                ALLOCERR(LABEL1)
+                STRELERR(LABEL1)
+                OPENERR(LABEL1)
+                SPOLBUSY(LABEL1)
+                SPOLERR(LABEL1)
+                NODEIDERR(LABEL1)
+                TASKIDERR(LABEL1)
+                TCIDERR(LABEL1)
+                DSNNOTFOUND(LABEL1)
+                LOADING(LABEL1)
+                MODELIDERR(LABEL1)
+                OUTDESCRERR(LABEL1)
+                PARTNERIDERR(LABEL1)
+                PROFILEIDERR(LABEL1)
+                NETNAMEIDERR(LABEL1)
+                LOCKED(LABEL1)
+                RECORDBUSY(LABEL1)
+                UOWNOTFOUND(LABEL1)
+                UOWLNOTFOUND(LABEL1)
+                LINKABEND(LABEL1)
+                CHANGED(LABEL1)
+                PROCESSBUSY(LABEL1)
+                ACTIVITYBUSY(LABEL1)
+                PROCESSERR(LABEL1)
+                ACTIVITYERR(LABEL1)
+                CONTAINERERR(LABEL1)
+                EVENTERR(LABEL1)
+                TOKENERR(LABEL1)
+                NOTFINISHED(LABEL1)
+                POOLERR(LABEL1)
+                TIMERERR(LABEL1)
+                SYMBOLERR(LABEL1)
+                TEMPLATERR(LABEL1)
+                NOTSUPERUSER(LABEL1)
+                CSDERR(LABEL1)
+                DUPRES(LABEL1)
+                RESUNAVAIL(LABEL1)
+                CHANNELERR(LABEL1)
+                CCSIDERR(LABEL1)
+                TIMEDOUT(LABEL1)
+                CODEPAGEERR(LABEL1)
+                INCOMPLETE(LABEL1)
+                APPNOTFOUND(LABEL1)
+                BUSY(LABEL1)
+           END-EXEC
+
+           EXEC CICS
+                IGNORE
+                CONDITION
+                NORMAL
+                ERROR
+                RDATT
+                WRBRK
+                EOF
+                EODS
+                EOC
+                INBFMH
+                ENDINPT
+                NONVAL
+                NOSTART
+                TERMIDERR
+                FILENOTFOUND
+                NOTFND
+                DUPREC
+                DUPKEY
+                INVREQ
+                IOERR
+                NOSPACE
+                NOTOPEN
+                ENDFILE
+                ILLOGIC
+                LENGERR
+                QZERO
+                SIGNAL
+                QBUSY
+                ITEMERR
+                PGMIDERR
+                TRANSIDERR
+                ENDDATA
+                INVTSREQ
+                EXPIRED
+                RETPAGE
+                RTEFAIL
+                RTESOME
+                TSIOERR
+                MAPFAIL
+                INVERRTERM
+                INVMPSZ
+                IGREQID
+                OVERFLOW
+                INVLDC
+                NOSTG
+                JIDERR
+                QIDERR
+                NOJBUFSP
+                DSSTAT
+                SELNERR
+                FUNCERR
+                UNEXPIN
+                NOPASSBKRD
+                NOPASSBKWR
+                SEGIDERR
+                SYSIDERR
+                ISCINVREQ
+                ENQBUSY
+                ENVDEFERR
+                IGREQCD
+                SESSIONERR
+                SYSBUSY
+                SESSBUSY
+                NOTALLOC
+                CBIDERR
+                INVEXITREQ
+                INVPARTNSET
+                INVPARTN
+                PARTNFAIL
+                USERIDERR
+                NOTAUTH
+                VOLIDERR
+                SUPPRESSED
+                RESIDERR
+                NOSPOOL
+                TERMERR
+                ROLLEDBACK
+                END
+                DISABLED
+                ALLOCERR
+                STRELERR
+                OPENERR
+                SPOLBUSY
+                SPOLERR
+                NODEIDERR
+                TASKIDERR
+                TCIDERR
+                DSNNOTFOUND
+                LOADING
+                MODELIDERR
+                OUTDESCRERR
+                PARTNERIDERR
+                PROFILEIDERR
+                NETNAMEIDERR
+                LOCKED
+                RECORDBUSY
+                UOWNOTFOUND
+                UOWLNOTFOUND
+                LINKABEND
+                CHANGED
+                PROCESSBUSY
+                ACTIVITYBUSY
+                PROCESSERR
+                ACTIVITYERR
+                CONTAINERERR
+                EVENTERR
+                TOKENERR
+                NOTFINISHED
+                POOLERR
+                TIMERERR
+                SYMBOLERR
+                TEMPLATERR
+                NOTSUPERUSER
+                CSDERR
+                DUPRES
+                RESUNAVAIL
+                CHANNELERR
+                CCSIDERR
+                TIMEDOUT
+                CODEPAGEERR
+                INCOMPLETE
+                APPNOTFOUND
+                BUSY
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                ACTIVITYID(X)
+                ABCODE(X)
+                ABPROGRAM(X)
+                ACTIVITY(X)
+                COMPSTATUS(X)
+                EVENT(X)
+                MODE(X)
+                PROCESS(X)
+                PROCESSTYPE(X)
+                PROGRAM(X)
+                SUSPSTATUS(X)
+                TRANSID(X)
+                USERID(X)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                CONTAINER(X)
+                ACTIVITYID(X)
+                PROCESS(X)
+                PROCESSTYPE(X)
+                DATALENGTH(X)
+                SET(X)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EVENT(X)
+                ACTIVITYID(X)
+                EVENTTYPE(X)
+                FIRESTATUS(X)
+                COMPOSITE(X)
+                PREDICATE(X)
+                TIMER(X)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                PROCESS(X)
+                PROCESSTYPE(X)
+                ACTIVITYID(X)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                TIMER(X)
+                ACTIVITYID(X)
+                EVENT(X)
+                STATUS(X)
+                ABSTIME(X)
+           END-EXEC
+
+           EXEC CICS
+                INVOKE
+                APPLICATION(X)
+                OPERATION(X)
+                PLATFORM(X)
+                MAJORVERSION(X)
+                MINORVERSION(X)
+                EXACTMATCH
+                MINIMUM
+                COMMAREA(X)
+                LENGTH(X)
+                CHANNEL(X)
+           END-EXEC
+
+           EXEC CICS
+                INVOKE
+                SERVICE(X)
+                WEBSERVICE(X)
+                CHANNEL(X)
+                OPERATION(X)
+                URI(X)
+                URIMAP(X)
+                SCOPE(X)
+                SCOPELEN(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ABEND
+                CONVID(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ABORT
+                DESTID(X)
+                DESTIDLENG(X)
+                SUBADDR(X)
+                CONSOLE
+                PRINT
+                CARD
+                WPMEDIA1
+                WPMEDIA2
+                WPMEDIA3
+                WPMEDIA4
+                VOLUME(X)
+                VOLUMELENG(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ADD
+                DESTID(X)
+                DESTIDLENG(X)
+                VOLUME(X)
+                VOLUMELENG(X)
+                FROM(X)
+                LENGTH(X)
+                NUMREC(X)
+                DEFRESP(X)
+                NOWAIT
+                RIDFLD(X)
+                RRN
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                CONFIRMATION
+                CONVID(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                COPY
+                TERMID(X)
+                CTLCHAR(X)
+                WAIT
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                DISCONNECT(X)
+                SESSION(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                END
+                DESTID(X)
+                DESTIDLENG(X)
+                SUBADDR(X)
+                CONSOLE
+                PRINT
+                CARD
+                WPMEDIA1
+                WPMEDIA2
+                WPMEDIA3
+                WPMEDIA4
+                VOLUME(X)
+                VOLUMELENG(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ENDFILE
+                ENDOUTPUT
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                EODS
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ERASE
+                DESTID(X)
+                DESTIDLENG(X)
+                VOLUME(X)
+                VOLUMELENG(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                KEYNUMBER(X)
+                NUMREC(X)
+                RRN
+                DEFRESP
+                NOWAIT
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ERASEAUP
+                WAIT
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                ERROR
+                CONVID(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                LOAD
+                PROGRAM(X)
+                CONVERSE
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                NOTE
+                DESTID(X)
+                DESTIDLENG(X)
+                VOLUME(X)
+                VOLUMELENG(X)
+                RIDFLD(X)
+                RRN
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                PASS
+                LUNAME(X)
+                FROM(X)
+                LENGTH(X)
+                LOGMODE(X)
+                LOGONLOGMODE
+                NOQUIESCE
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                PREPARE
+                CONVID(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                PRINT
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                DESTID(X)
+                DESTIDLENG(X)
+                VOLUME(X)
+                VOLUMELENG(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                RECEIVE
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                REPLACE
+                DESTID(X)
+                DESTIDLENG(X)
+                VOLUME(X)
+                VOLUMELENG(X)
+                FROM(X)
+                LENGTH(X)
+                NUMREC(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                KEYNUMBER(X)
+                RRN
+                DEFRESP
+                NOWAIT
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                RESET
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                SEND
+                DESTID(X)
+                DESTIDLENG(X)
+                SUBADDR(X)
+                CONSOLE
+                PRINT
+                CARD
+                WPMEDIA1
+                WPMEDIA2
+                WPMEDIA3
+                WPMEDIA4
+                VOLUME(X)
+                VOLUMELENG(X)
+                FROM(X)
+                LENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                SIGNAL
+                CONVID(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                SIGNAL
+                CONVID(X)
+                SESSION(X)
+           END-EXEC
+
+           EXEC CICS
+                ISSUE
+                SEND
+                DESTID(X)
+                DESTIDLENG(X)
+                SUBADDR(X)
+                CONSOLE
+                PRINT
+                CARD
+                WPMEDIA1
+                WPMEDIA2
+                WPMEDIA3
+                WPMEDIA4
+                VOLUME(X)
+                VOLUMELENG(X)
+           END-EXEC
+
+           EXEC CICS
+                JOURNAL
+           END-EXEC
 
 
 

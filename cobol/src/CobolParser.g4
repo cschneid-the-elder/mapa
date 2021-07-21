@@ -2846,7 +2846,11 @@ cobolWord
 
 /*
 This rule must contain any tokens from the Lexer that are also
-CICS keywords.
+CICS keywords.  These are not broken out by the Lexer because
+it seems like more work to detect the different permutations of
+COBOL identifiers (again) in the Lexer, i.e. identifying the CICS
+keywords would be easy but their arguments would be more
+difficult than this method.  I think.
 */
 cicsWord
    : IDENTIFIER 
@@ -2868,6 +2872,7 @@ cicsWord
    | CLASS
    | CLOSE
    | CONTROL
+   | COPY
    | CURSOR
    | DATA
    | DATE
@@ -2884,6 +2889,7 @@ cicsWord
    | FROM
    | INPUT
    | INTO
+   | INVOKE
    | LABEL
    | LAST
    | LENGTH
@@ -2898,12 +2904,14 @@ cicsWord
    | OR
    | ORGANIZATION
    | OUTPUT
+   | OVERFLOW
    | PAGE
    | PROCESS
    | QUEUE
    | READ
    | RECEIVE
    | RECORD
+   | REPLACE
    | RESET
    | RETURN
    | REWIND
@@ -2925,6 +2933,7 @@ cicsWord
    | USING
    | VALUE
    | WAIT
+   | WEBSERVICE
    | WRITE
    | YEAR
    ;
