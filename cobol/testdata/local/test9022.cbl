@@ -761,7 +761,7 @@
                 OWNER
                 ISSUER
                 COMMONNAME(X)
-                COMMONNAMELEN(X)
+                COMMONNAMLEN(X)
                 COUNTRY(X)
                 COUNTRYLEN(X)
                 STATE(X)
@@ -1995,11 +1995,167 @@
                 JOURNAL
            END-EXEC
 
+           EXEC CICS
+                LINK
+                PROGRAM(X)
+                COMMAREA(X)
+                LENGTH(X)
+                DATALENGTH(X)
+                CHANNEL(X)
+                INPUTMSG(X)
+                INPUTMSGLEN(X)
+                SYSID(X)
+                SYNCONRETURN
+                TRANSID(X)
+           END-EXEC
 
+           EXEC CICS
+                LINK
+                ACQPROCESS
+                INPUTEVENT(X)
+           END-EXEC
 
+           EXEC CICS
+                LINK
+                ACTIVITY(X)
+                ACQACTIVITY
+                INPUTEVENT(X)
+           END-EXEC
 
+           EXEC CICS
+                LOAD
+                PROGRAM(X)
+                SET(X)
+                LENGTH(X)
+                FLENGTH(X)
+                ENTRY(X)
+                HOLD
+           END-EXEC
 
+           EXEC CICS
+                MONITOR
+                POINT(X)
+                DATA1(X)
+                DATA2(X)
+                ENTRYNAME(X)
+           END-EXEC
 
+           EXEC CICS
+                MOVE
+                CONTAINER(X)
+                AS(X)
+                FROMPROCESS
+                FROMACTIVITY(X)
+                TOPROCESS
+                TOACTIVITY(X)
+           END-EXEC
+
+           EXEC CICS
+                MOVE
+                CONTAINER(X)
+                AS(X)
+                CHANNEL(X)
+                TOCHANNEL(X)
+           END-EXEC
+
+           EXEC CICS
+                POINT
+                CONVID(X)
+                SESSION(X)
+           END-EXEC
+
+           EXEC CICS
+                POP
+                HANDLE
+           END-EXEC
+
+           EXEC CICS
+                POST
+                INTERVAL(X)
+                TIME(X)
+                AFTER
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+                AT
+                SET(X)
+                REQID(X)
+           END-EXEC
+
+           EXEC CICS
+                PURGE
+                MESSAGE
+           END-EXEC
+
+           EXEC CICS
+                PUSH
+                HANDLE
+           END-EXEC
+
+           EXEC CICS
+                PUT
+                CONTAINER(X)
+                ACTIVITY(X)
+                ACQACTIVITY
+                PROCESS
+                ACQPROCESS
+                FROM(X)
+                FLENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                PUT
+                CONTAINER(X)
+                CHANNEL(X)
+                FROM(X)
+                FLENGTH(X)
+                BIT
+                DATATYPE(X)
+                CHAR
+                FROMCCSID(X)
+                FROMCODEPAGE(X)
+                APPEND
+           END-EXEC
+
+           EXEC CICS
+                PUT64
+                CONTAINER(X)
+                CHANNEL(X)
+                FROM(X)
+                FLENGTH(X)
+                BIT
+                DATATYPE(X)
+                CHAR
+                FROMCCSID(X)
+                FROMCODEPAGE(X)
+                APPEND
+           END-EXEC
+
+           EXEC CICS
+                QUERY
+                CHANNEL(X)
+                CONTAINERCNT(X)
+           END-EXEC
+
+           EXEC CICS
+                QUERY
+                COUNTER(X)
+                POOL(X)
+                VALUE(X)
+                MINIMUM(X)
+                MAXIMUM(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                QUERY
+                DCOUNTER(X)
+                POOL(X)
+                VALUE(X)
+                MINIMUM(X)
+                MAXIMUM(X)
+                NOSUSPEND
+           END-EXEC
 
            EXEC CICS
                 QUERY SECURITY
@@ -2014,5 +2170,418 @@
                 CONTROL(X)
                 ALTER(X)
            END-EXEC
+
+           EXEC CICS
+                READ
+                FILE(X)
+                UNCOMMITTED
+                CONSISTENT
+                REPEATABLE
+                UPDATE
+                TOKEN(X)
+                INTO(X)
+                SET(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                GENERIC
+                SYSID(X)
+                LENGTH(X)
+                DEBKEY
+                DEBREC
+                RBA
+                XRBA
+                EQUAL
+                GTEQ
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                READNEXT
+                FILE(X)
+                INTO(X)
+                SET(X)
+                UNCOMMITTED
+                CONSISTENT
+                REPEATABLE
+                UPDATE
+                TOKEN(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                REQID(X)
+                SYSID(X)
+                LENGTH(X)
+                RBA
+                RRN
+                XRBA
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                READPREV
+                FILE(X)
+                INTO(X)
+                SET(X)
+                UNCOMMITTED
+                CONSISTENT
+                REPEATABLE
+                UPDATE
+                TOKEN(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                REQID(X)
+                SYSID(X)
+                LENGTH(X)
+                RBA
+                RRN
+                XRBA
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                READQ
+                TD
+                QUEUE(X)
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+                SYSID(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                READQ
+                TS
+                QUEUE(X)
+                QNAME(X)
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+                NUMITEMS(X)
+                NEXT
+                ITEM(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                RECEIVE
+                ASIS
+                BUFFER
+                CONVID(X)
+                FLENGTH(X)
+                INTO(X)
+                LENGTH(X)
+                MAXFLENGTH(X)
+                MAXLENGTH(X)
+                NOTRUNCATE
+                SESSION(X)
+                SET(X)
+                STATE(X)
+                LEAVEKB
+                PASSBK
+                PSEUDOBIN
+           END-EXEC
+
+           EXEC CICS
+                RECEIVE
+                MAP(X)
+                MAPSET(X)
+                INTO(X)
+                SET(X)
+                TERMINAL
+                FROM(X)
+                LENGTH(X)
+                ASIS
+                INPARTN(X)
+           END-EXEC
+
+           EXEC CICS
+                RECEIVE
+                MAP(X)
+                MAPPINGDEV(X)
+                FROM(X)
+                LENGTH(X)
+                MAPSET(X)
+                INTO(X)
+                SET(X)
+           END-EXEC
+
+           EXEC CICS
+                RECEIVE
+                PARTN(X)
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+                ASIS
+           END-EXEC
+
+           EXEC CICS
+                RELEASE
+                PROGRAM(X)
+           END-EXEC
+
+           EXEC CICS
+                REMOVE
+                SUBEVENT(X)
+                EVENT(X)
+           END-EXEC
+
+           EXEC CICS
+                REQUEST
+                ENCRYPTPTKT(X)
+                FLENGTH(X)
+                ENCRYPTKEY(X)
+                ESMAPPNAME(X)
+                ESMREASON(X)
+                ESMRESP(X)
+           END-EXEC
+
+           EXEC CICS
+                REQUEST
+                PASSTICKET(X)
+                ESMAPPNAME(X)
+                ESMRESP(X)
+                ESMREASON(X)
+           END-EXEC
+
+           EXEC CICS
+                RESET
+                ACQPROCESS
+           END-EXEC
+
+           EXEC CICS
+                RESET
+                ACTIVITY(X)
+           END-EXEC
+
+           EXEC CICS
+                RESETBR
+                FILE(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                GENERIC
+                REQID(X)
+                SYSID(X)
+                GTEQ
+                EQUAL
+                RBA
+                RRN
+                XRBA
+           END-EXEC
+
+           EXEC CICS
+                RESUME
+                ACQACTIVITY
+                ACQPROCESS
+                ACTIVITY(X)
+           END-EXEC
+
+           EXEC CICS
+                RETRIEVE
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+                RTRANSID(X)
+                RTERMID(X)
+                QUEUE(X)
+                WAIT
+           END-EXEC
+
+           EXEC CICS
+                RETRIEVE
+                REATTACH
+                EVENT(X)
+                EVENTTYPE(X)
+           END-EXEC
+
+           EXEC CICS
+                RETRIEVE
+                SUBEVENT(X)
+                EVENT(X)
+                EVENTTYPE(X)
+           END-EXEC
+
+           EXEC CICS
+                RETURN
+                TRANSID(EIBTRNID)
+                COMMAREA(DFHCOMMAREA)
+                LENGTH(LENGTH OF DFHCOMMAREA)
+                CHANNEL(X)
+                IMMEDIATE
+                INPUTMSG(X)
+                INPUTMSGLEN(X)
+                ENDACTIVITY
+           END-EXEC
+
+           EXEC CICS
+                REWIND
+                COUNTER(X)
+                POOL(X)
+                INCREMENT(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                REWIND
+                DCOUNTER(X)
+                POOL(X)
+                INCREMENT(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                REWRITE
+                FILE(X)
+                TOKEN(X)
+                FROM(X)
+                SYSID(X)
+                LENGTH(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                ROUTE
+                INTERVAL(X)
+                TIME(X)
+                AFTER
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+                AT
+                ERRTERM(X)
+                TITLE(X)
+                LIST(X)
+                OPCLASS(X)
+                REQID(X)
+                LDC(X)
+                NLEOM
+           END-EXEC
+
+           EXEC CICS
+                RUN
+                ACTIVITY(X)
+                ACQACTIVITY
+                ACQPROCESS
+                SYNCHRONOUS
+                ASYNCHRONOUS
+                FACILITYTOKN(X)
+                INPUTEVENT(X)
+           END-EXEC
+
+           EXEC CICS
+                RUN
+                TRANSID(X)
+                CHANNEL(X)
+                CHILD(X)
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                ALTERNATE
+                ASIS
+                ATTACHID(X)
+                CBUFF
+                CNOTCOMPL
+                CONFIRM
+                CONVID(X)
+                CTLCHAR(X)
+                DEFAULT
+                DEFRESP
+                ERASE
+                FLENGTH(X)
+                FMH
+                FROM(X)
+                INVITE
+                LAST
+                LDC(X)
+                LEAVEKB
+                LENGTH(X)
+                LINEADDR(X)
+                PASSBK
+                PSEUDOBIN
+                SESSION(X)
+                STATE(X)
+                STRFIELD
+                WAIT
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                CONTROL
+                ACCUM
+                ACTPARTN(X)
+                ALARM
+                ALTERNATE
+                CURSOR(X)
+                DEFAULT
+                ERASE
+                ERASEAUP
+                FORMFEED
+                FREEKB
+                FRSET
+                HONEOM
+                LAST
+                LDC(X)
+                L40
+                L64
+                L80
+                MSR(X)
+                OUTPARTN(X)
+                PAGING
+                PRINT
+                REQID(X)
+                SET(X)
+                TERMINAL
+                WAIT
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                MAP(X)
+                ACCUM
+                ACTPARTN(X)
+                ALARM
+                ALTERNATE
+                CURSOR(X)
+                DATAONLY
+                DEFAULT
+                ERASE
+                ERASEAUP
+                FMHPARM(X)
+                FORMFEED
+                FREEKB
+                FROM(X)
+                FRSET
+                HONEOM
+                LAST
+                LDC(X)
+                LENGTH(X)
+                L40
+                L64
+                L80
+                MAPONLY
+                MAPSET(X)
+                MSR(X)
+                NLEOM
+                NOFLUSH
+                OUTPARTN(X)
+                PAGING
+                PRINT
+                REQID(X)
+                SET(X)
+                TERMINAL
+                WAIT
+           END-EXEC
+
+
+
+
+
+
+
+
+
+
+
+
 
            EXEC CICS RETURN END-EXEC.

@@ -2876,9 +2876,11 @@ cicsWord
    | CURSOR
    | DATA
    | DATE
+   | DEFAULT
    | DELETE
    | DELIMITER
    | END
+   | ENTRY
    | EQUAL
    | ERASE
    | ERROR
@@ -2895,6 +2897,7 @@ cicsWord
    | LENGTH
    | LINE
    | METHOD
+   | MESSAGE
    | MODE
    | MOVE
    | NAME
@@ -2907,10 +2910,12 @@ cicsWord
    | OVERFLOW
    | PAGE
    | PROCESS
+   | PURGE
    | QUEUE
    | READ
    | RECEIVE
    | RECORD
+   | RELEASE
    | REPLACE
    | RESET
    | RETURN
