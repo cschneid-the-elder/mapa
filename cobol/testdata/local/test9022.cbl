@@ -1997,7 +1997,7 @@
 
            EXEC CICS
                 LINK
-                PROGRAM(X)
+                PROGRAM('SAMVIMES')
                 COMMAREA(X)
                 LENGTH(X)
                 DATALENGTH(X)
@@ -2571,6 +2571,117 @@
                 TERMINAL
                 WAIT
            END-EXEC
+
+           EXEC CICS
+                SEND
+                MAP(X)
+                MAPPINGDEV(X)
+                SET(X)
+                MAPSET(X)
+                FROM(X)
+                DATAONLY
+                LENGTH(X)
+                MAPONLY
+                CURSOR(X)
+                FORMFEED
+                ERASE
+                ERASEAUP
+                PRINT
+                FREEKB
+                ALARM
+                FRSET
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                PAGE
+                RELEASE
+                RETAIN
+                TRANSID(X)
+                TRAILER(X)
+                SET(X)
+                AUTOPAGE
+                CURRENT
+                ALL
+                NOAUTOPAGE
+                OPERPURGE
+                FMHPARM(X)
+                LAST
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                PARTNSET(X)
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                TEXT
+                ACCUM
+                ACTPARTN(X)
+                ALARM
+                ALTERNATE
+                CURSOR(X)
+                DEFAULT
+                ERASE
+                FMHPARM(X)
+                FORMFEED
+                FREEKB
+                FROM(X)
+                HEADER(X)
+                HONEOM
+                JUSFIRST
+                JUSLAST
+                JUSTIFY(X)
+                LAST
+                LDC(X)
+                LENGTH(X)
+                L40
+                L64
+                L80
+                MSR(X)
+                NLEOM
+                OUTPARTN(X)
+                PAGING
+                PRINT
+                REQID(X)
+                SET(X)
+                TERMINAL
+                TRAILER(X)
+                WAIT
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                TEXT
+                MAPPED
+                FROM(X)
+                LENGTH(X)
+                TERMINAL
+                WAIT
+                LAST
+                PAGING
+                REQID(X)
+           END-EXEC
+
+           EXEC CICS
+                SEND
+                TEXT
+                NOEDIT
+           END-EXEC
+
+           EXEC CICS
+                SIGNAL
+                EVENT(X)
+                FROMCHANNEL(X)
+                FROM(X)
+                FROMLENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                SIGNOFF
+           END-EXEC
+
 
 
 
