@@ -2879,12 +2879,14 @@ cicsWord
    | DEFAULT
    | DELETE
    | DELIMITER
+   | DETAIL
    | END
    | ENTRY
    | EQUAL
    | ERASE
    | ERROR
    | EXCEPTION
+   | EXTERNAL
    | FILE
    | FOR
    | FREE
@@ -2929,6 +2931,7 @@ cicsWord
    | START
    | STATUS
    | TERMINAL
+   | TEST
    | TEXT
    | TIME
    | TITLE

@@ -229,7 +229,8 @@
            END-EXEC
 
            EXEC CICS
-                CHANGEPHRASE(X)
+                CHANGE
+                PHRASE(X)
                 PHRASELEN(X)
                 NEWPHRASE(X)
                 NEWPHRASELEN(X)
@@ -239,7 +240,8 @@
            END-EXEC
 
            EXEC CICS
-                CHANGEPASSWORD(X)
+                CHANGE
+                PASSWORD(X)
                 NEWPASSWORD(X)
                 USERID(X)
                 ESMREASON(X)
@@ -2682,17 +2684,1000 @@
                 SIGNOFF
            END-EXEC
 
+           EXEC CICS
+                SIGNON
+                USERID(X)
+                ESMREASON(X)
+                ESMRESP(X)
+                GROUPID(X)
+                LANGUAGECODE(X)
+                NATLANG(X)
+                LANGINUSE(X)
+                NATLANGINUSE(X)
+                PASSWORD(X)
+                NEWPASSWORD(X)
+                PHRASE(X)
+                PHRASELEN(X)
+                NEWPHRASE(X)
+                NEWPHRASELEN(X)
+                OIDCARD(X)
+           END-EXEC
 
+           EXEC CICS
+                SIGNON
+                TOKEN(X)
+                TOKENLEN(X)
+                TOKENTYPE(X)
+                KERBEROS
+                BIT
+                DATATYPE(X)
+                BASE64
+                GROUPID(X)
+                LANGUAGECODE(X)
+                NATLANG(X)
+                LANGINUSE(X)
+                NATLANGINUSE(X)
+                ESMREASON(X)
+                ESMRESP(X)
+           END-EXEC
 
+           EXEC CICS
+                SOAPFAULT
+                ADD
+                FAULTSTRING(X)
+                FAULTSTRLEN(X)
+                NATLANG(X)
+                SUBCODESTR(X)
+                SUBCODELEN(X)
+                FROMCCSID(X)
+           END-EXEC
 
+           EXEC CICS
+                SOAPFAULT
+                CREATE
+                FAULTCODE(X)
+                CLIENT
+                SERVER
+                SENDER
+                RECEIVER
+                FAULTCODESTR(X)
+                FAULTCODELEN(X)
+                FAULTSTRING(X)
+                FAULTSTRLEN(X)
+                NATLANG(X)
+                ROLE(X)
+                ROLELENGTH(X)
+                FAULTACTOR(X)
+                FAULTACTLEN(X)
+                DETAIL(X)
+                DETAILLENGTH(X)
+                FROMCCSID(X)
+           END-EXEC
 
+           EXEC CICS
+                SOAPFAULT
+                DELETE
+           END-EXEC
 
+           EXEC CICS
+                SPOOLCLOSE
+                TOKEN(X)
+                KEEP
+                DELETE
+                NOHANDLE
+                RESP
+                RESP2
+           END-EXEC
 
+           EXEC CICS
+                SPOOLOPEN
+                INPUT
+                TOKEN(X)
+                USERID(X)
+                CLASS(X)
+                NOHANDLE
+                RESP
+                RESP2
+           END-EXEC
 
+           EXEC CICS
+                SPOOLOPEN
+                OUTPUT
+                TOKEN(X)
+                USERID(X)
+                NODE(X)
+                CLASS(X)
+                OUTDESCR(X)
+                NOCC
+                ASA
+                MCC
+                PRINT
+                RECORDLENGTH(X)
+                PUNCH
+                NOHANDLE
+                RESP
+                RESP2
+           END-EXEC
 
+           EXEC CICS
+                SPOOLREAD
+                TOKEN(X)
+                INTO(X)
+                MAXFLENGTH(X)
+                TOFLENGTH(X)
+                NOHANDLE
+                RESP
+                RESP2
+           END-EXEC
 
+           EXEC CICS
+                SPOOLWRITE
+                TOKEN(X)
+                FROM(X)
+                FLENGTH(X)
+                LINE
+                PAGE
+                NOHANDLE
+                RESP
+                RESP2
+           END-EXEC
 
+           EXEC CICS
+                START
+                TRANSID(X)
+                INTERVAL(X)
+                AFTER
+                HOURS(X)
+                MINUTES(X)
+                SECONDS(X)
+                AT
+                REQID(X)
+                FROM(X)
+                LENGTH(X)
+                FMH
+                TERMID(X)
+                USERID(X)
+                SYSID(X)
+                RTRANSID(X)
+                RTERMID(X)
+                QUEUE(X)
+                NOCHECK
+                PROTECT
+           END-EXEC
 
+           EXEC CICS
+                START
+                ATTACH
+                TRANSID(X)
+                FROM(X)
+                LENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                START
+                BREXIT(X)
+                TRANSID(X)
+                BRDATA(X)
+                BRDATALENGTH(X)
+                USERID(X)
+           END-EXEC
+
+           EXEC CICS
+                START
+                TRANSID(X)
+                CHANNEL(X)
+                TERMID(X)
+                USERID(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                STARTBR
+                FILE(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                GENERIC
+                REQID(X)
+                SYSID(X)
+                DEBKEY
+                DEBREC
+                RBA
+                RRN
+                XRBA
+                GTEQ
+                EQUAL
+           END-EXEC
+
+           EXEC CICS
+                STARTBROWSE
+                ACTIVITY
+                ACTIVITYID(X)
+                PROCESS(X)
+                PROCESSTYPE(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                STARTBROWSE
+                CONTAINER
+                ACTIVITYID(X)
+                PROCESS(X)
+                PROCESSTYPE(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                STARTBROWSE
+                CONTAINER
+                CHANNEL(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                STARTBROWSE
+                EVENT
+                BROWSETOKEN(X)
+                ACTIVITYID(X)
+           END-EXEC
+
+           EXEC CICS
+                STARTBROWSE
+                PROCESS
+                PROCESSTYPE(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                STARTBROWSE
+                TIMER(X)
+                ACTIVITYID(X)
+                BROWSETOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                SUSPEND
+           END-EXEC
+
+           EXEC CICS
+                SUSPEND
+                ACQACTIVITY
+                ACQPROCESS
+                ACTIVITY(X)
+           END-EXEC
+
+           EXEC CICS
+                SYNCPOINT
+                ROLLBACK
+           END-EXEC
+
+           EXEC CICS
+                TEST
+                EVENT(X)
+                FIRESTATUS(X)
+           END-EXEC
+
+           EXEC CICS
+                TRANSFORM
+                DATATOJSON
+                CHANNEL(X)
+                INCONTAINER(X)
+                OUTCONTAINER(X)
+                TRANSFORMER(X)
+           END-EXEC
+
+           EXEC CICS
+                TRANSFORM
+                DATATOXML
+                CHANNEL(X)
+                DATACONTAINER(X)
+                ELEMNAME(X)
+                ELEMNAMELEN(X)
+                ELEMNS(X)
+                ELEMNSLEN(X)
+                TYPENAME(X)
+                TYPENAMELEN(X)
+                TYPENS(X)
+                TYPENSLEN(X)
+                XMLCONTAINER(X)
+                XMLTRANSFORM(X)
+           END-EXEC
+
+           EXEC CICS
+                TRANSFORM
+                JSONTODATA
+                CHANNEL(X)
+                INCONTAINER(X)
+                OUTCONTAINER(X)
+                TRANSFORMER(X)
+           END-EXEC
+
+           EXEC CICS
+                TRANSFORM
+                XMLTODATA
+                CHANNEL(X)
+                DATACONTAINER(X)
+                ELEMNAME(X)
+                ELEMNAMELEN(X)
+                ELEMNS(X)
+                ELEMNSLEN(X)
+                NSCONTAINER(X)
+                TYPENAME(X)
+                TYPENAMELEN(X)
+                TYPENS(X)
+                TYPENSLEN(X)
+                XMLCONTAINER(X)
+                XMLTRANSFORM(X)
+           END-EXEC
+
+           EXEC CICS
+                UNLOCK
+                FILE(X)
+                TOKEN(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                UPDATE
+                COUNTER(X)
+                POOL(X)
+                VALUE(X)
+                COMPAREMIN(X)
+                COMPAREMAX(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                UPDATE
+                DCOUNTER(X)
+                POOL(X)
+                VALUE(X)
+                COMPAREMIN(X)
+                COMPAREMAX(X)
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                VERIFY
+                PASSWORD(X)
+                USERID(X)
+                GROUPID(X)
+                CHANGETIME(X)
+                DAYSLEFT(X)
+                ESMREASON(X)
+                ESMRESP(X)
+                EXPIRYTIME(X)
+                INVALIDCOUNT(X)
+                LASTUSETIME(X)
+           END-EXEC
+
+           EXEC CICS
+                VERIFY
+                PHRASE(X)
+                PHRASELEN(X)
+                USERID(X)
+                GROUPID(X)
+                CHANGETIME(X)
+                DAYSLEFT(X)
+                ESMREASON(X)
+                ESMRESP(X)
+                EXPIRYTIME(X)
+                INVALIDCOUNT(X)
+                LASTUSETIME(X)
+           END-EXEC
+
+           EXEC CICS
+                VERIFY
+                TOKEN(X)
+                TOKENLEN(X)
+                TOKENTYPE(X)
+                BASICAUTH
+                JWT
+                KERBEROS
+                ISUSERID(X)
+                BIT
+                DATATYPE(X)
+                BASE64
+                ENCRYPTKEY(X)
+                OUTTOKEN(X)
+                OUTTOKENLEN(X)
+                ESMRESP(X)
+                ESMREASON(X)
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                CONVID(X)
+                STATE(X)
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                EVENT
+                ECADDR(X)
+                NAME(X)
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                EXTERNAL
+                ECBLIST(X)
+                NUMEVENTS(X)
+                PURGEABLE
+                PURGEABILITY(X)
+                NOTPURGEABLE
+                NAME(X)
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                JOURNALNAME(X)
+                REQID(X)
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                JOURNALNUM(X)
+                REQID(X)
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                SIGNAL
+           END-EXEC
+
+           EXEC CICS
+                WAIT
+                TERMINAL
+                CONVID(X)
+                SESSION(X)
+           END-EXEC
+
+           EXEC CICS
+                WAITCICS
+                ECBLIST(X)
+                NUMEVENTS(X)
+                PURGEABLE
+                PURGEABILITY(X)
+                NOTPURGEABLE
+                NAME(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                CLOSE
+                SESSTOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                CONVERSE
+                SESSTOKEN(X)
+                PATH(X)
+                PATHLENGTH(X)
+                URIMAP(X)
+                GET
+                HEAD
+                PATCH
+                POST
+                PUT
+                TRACE
+                OPTIONS
+                METHOD(X)
+                MEDIATYPE(X)
+                QUERYSTRING(X)
+                QUERYSTRLEN(X)
+                ACTION(X)
+                EXPECT
+                NOCLOSE
+                CLOSE
+                CLOSESTATUS(X)
+                INTO(X)
+                SET(X)
+                TOCONTAINER(X)
+                TOCHANNEL(X)
+                TOLENGTH(X)
+                MAXLENGTH(X)
+                NOTRUNCATE
+                STATUSCODE(X)
+                STATUSTEXT(X)
+                STATUSLEN(X)
+                BODYCHARSET(X)
+                DOCTOKEN(X)
+                NODOCDELETE
+                DOCDELETE
+                DOCSTATUS(X)
+                FROM(X)
+                FROMLENGTH(X)
+                CONTAINER(X)
+                CHANNEL(X)
+                NONE
+                BASICAUTH
+                AUTHENTICATE(X)
+                USERNAME(X)
+                USERNAMELEN(X)
+                PASSWORD(X)
+                PASSWORDLEN(X)
+                CHARACTERSET(X)
+                CLICONVERT
+                NOINCONVERT
+                NOOUTCONVERT
+                NOCLICONVERT
+                CLIENTCONV(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                ENDBROWSE
+                FORMFIELD
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                ENDBROWSE
+                HTTPHEADER
+                SESSTOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                ENDBROWSE
+                QUERYPARM
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                EXTRACT
+                SCHEME(X)
+                HOST(X)
+                HOSTLENGTH(X)
+                HOSTTYPE(X)
+                HTTPMETHOD(X)
+                METHODLENGTH(X)
+                HTTPVERSION(X)
+                VERSIONLEN(X)
+                PATH(X)
+                PATHLENGTH(X)
+                PORTNUMBER(X)
+                QUERYSTRING(X)
+                QUERYSTRLEN(X)
+                REQUESTTYPE(X)
+                URIMAP(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                EXTRACT
+                SESSTOKEN(X)
+                SCHEME(X)
+                HOST(X)
+                HOSTLENGTH(X)
+                HOSTTYPE(X)
+                HTTPVERSION(X)
+                VERSIONLEN(X)
+                PATH(X)
+                PATHLENGTH(X)
+                PORTNUMBER(X)
+                URIMAP(X)
+                REALM(X)
+                REALMLEN(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                OPEN
+                URIMAP(X)
+                HOST(X)
+                HOSTLENGTH(X)
+                PORTNUMBER(X)
+                SCHEME(X)
+                CERTIFICATE(X)
+                CIPHERS(X)
+                NUMCIPHERS(X)
+                CODEPAGE(X)
+                SESSTOKEN(X)
+                HTTPVNUM(X)
+                HTTPRNUM(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                PARSE
+                URL(X)
+                URLLENGTH(X)
+                SCHEMENAME(X)
+                HOST(X)
+                HOSTLENGTH(X)
+                HOSTTYPE(X)
+                PORTNUMBER(X)
+                PATH(X)
+                PATHLENGTH(X)
+                QUERYSTRING(X)
+                QUERYSTRLEN(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                READ
+                FORMFIELD(X)
+                NAMELENGTH(X)
+                VALUE(X)
+                SET(X)
+                VALUELENGTH(X)
+                CHARACTERSET(X)
+                HOSTCODEPAGE(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                READ
+                HTTPHEADER(X)
+                NAMELENGTH(X)
+                SESSTOKEN(X)
+                VALUE(X)
+                VALUELENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                READ
+                QUERYPARM(X)
+                NAMELENGTH(X)
+                VALUE(X)
+                SET(X)
+                VALUELENGTH(X)
+                HOSTCODEPAGE(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                READNEXT
+                FORMFIELD(X)
+                NAMELENGTH(X)
+                VALUE(X)
+                VALUELENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                READNEXT
+                HTTPHEADER(X)
+                NAMELENGTH(X)
+                SESSTOKEN(X)
+                VALUE(X)
+                VALUELENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                READNEXT
+                QUERYPARM(X)
+                NAMELENGTH(X)
+                VALUE(X)
+                VALUELENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                RECEIVE
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+                MAXLENGTH(X)
+                NOTRUNCATE
+                TYPE(X)
+                SRVCONVERT
+                NOSRVCONVERT
+                SERVERCONV(X)
+                CHARACTERSET(X)
+                HOSTCODEPAGE(X)
+                BODYCHARSET(X)
+                MEDIATYPE(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                RECEIVE
+                TOCONTAINER(X)
+                TOCHANNEL(X)
+                TYPE(X)
+                CHARACTERSET(X)
+                BODYCHARSET(X)
+                MEDIATYPE(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                RECEIVE
+                SESSTOKEN(X)
+                MEDIATYPE(X)
+                STATUSCODE(X)
+                STATUSTEXT(X)
+                STATUSLEN(X)
+                INTO(X)
+                SET(X)
+                LENGTH(X)
+                MAXLENGTH(X)
+                NOTRUNCATE
+                CLICONVERT
+                NOCLICONVERT
+                CLIENTCONV(X)
+                BODYCHARSET(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                RECEIVE
+                SESSTOKEN(X)
+                MEDIATYPE(X)
+                STATUSCODE(X)
+                STATUSTEXT(X)
+                STATUSLEN(X)
+                TOCONTAINER(X)
+                TOCHANNEL(X)
+                BODYCHARSET(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                RETRIEVE
+                DOCTOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                SEND
+                DOCTOKEN(data-value)
+                NODOCDELETE
+                DOCDELETE
+                DOCSTATUS(cvda)
+                FROM(data-area)
+                FROMLENGTH(data-value)
+                CHUNKNO
+                CHUNKYES
+                CHUNKEND
+                CHUNKING(cvda)
+                HOSTCODEPAGE(data-value)
+                CONTAINER(data-value)
+                CHANNEL(data-value)
+                MEDIATYPE(data-value)
+                SRVCONVERT
+                NOSRVCONVERT
+                SERVERCONV(cvda)
+                CHARACTERSET(data-value)
+                STATUSCODE(data-value)
+                STATUSTEXT(data-area)
+                STATUSLEN(data-value)
+                LENGTH(data-value)
+                IMMEDIATE
+                EVENTUAL
+                ACTION(cvda)
+                NOCLOSE
+                CLOSE
+                CLOSESTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                SEND
+                SESSTOKEN(data-value)
+                GET
+                HEAD
+                PATCH
+                POST
+                PUT
+                TRACE
+                OPTIONS
+                DELETE
+                METHOD(cvda)
+                PATH(data-area)
+                PATHLENGTH(data-value)
+                URIMAP(data-value)
+                QUERYSTRING(data-area)
+                QUERYSTRLEN(data-value)
+                MEDIATYPE(data-value)
+                DOCTOKEN(data-value)
+                NODOCDELETE
+                DOCDELETE
+                DOCSTATUS(cvda)
+                FROM(data-area)
+                FROMLENGTH(data-value)
+                CHUNKNO
+                CHUNKYES
+                CHUNKEND
+                CHUNKING(cvda)
+                CONTAINER(data-value)
+                CHANNEL(data-value)
+                CLICONVERT
+                NOCLICONVERT
+                CLIENTCONV(cvda)
+                CHARACTERSET(data-value)
+                EXPECT
+                ACTION(cvda)
+                NOCLOSE
+                CLOSE
+                CLOSESTATUS(cvda)
+                NONE
+                BASICAUTH
+                AUTHENTICATE(cvda)
+                USERNAME(data-value)
+                USERNAMELEN(data-value)
+                PASSWORD(data-value)
+                PASSWORDLEN(data-value)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                STARTBROWSE
+                FORMFIELD(X)
+                NAMELENGTH(X)
+                CHARACTERSET(X)
+                HOSTCODEPAGE(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                STARTBROWSE
+                HTTPHEADER
+                SESSTOKEN(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                STARTBROWSE
+                QUERYPARM(X)
+                NAMELENGTH(X)
+                HOSTCODEPAGE(X)
+           END-EXEC
+
+           EXEC CICS
+                WEB
+                WRITE
+                HTTPHEADER(X)
+                NAMELENGTH(X)
+                SESSTOKEN(X)
+                VALUE(X)
+                VALUELENGTH(X)
+           END-EXEC
+
+           EXEC CICS
+                WRITE
+                FILE(X)
+                MASSINSERT
+                FROM(X)
+                RIDFLD(X)
+                KEYLENGTH(X)
+                SYSID(X)
+                LENGTH(X)
+                RBA
+                RRN
+                XRBA
+           END-EXEC
+
+           EXEC CICS
+                WRITE
+                JOURNALNAME(X)
+                JTYPEID(X)
+                FROM(X)
+                FLENGTH(X)
+                REQID(X)
+                PREFIX(X)
+                PFXLENG(X)
+                WAIT
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                WRITE
+                JOURNALNUM(X)
+           END-EXEC
+
+           EXEC CICS
+                WRITE
+                OPERATOR
+                TEXT(X)
+                TEXTLENGTH(X)
+                ROUTECODES(X)
+                NUMROUTES(X)
+                EVENTUAL
+                ACTION(X)
+                CRITICAL
+                IMMEDIATE
+                REPLY(X)
+                MAXLENGTH(X)
+                REPLYLENGTH(X)
+                TIMEOUT(X)
+           END-EXEC
+
+           EXEC CICS
+                WRITEQ
+                TD
+                QUEUE(X)
+                FROM(X)
+                LENGTH(X)
+                SYSID(X)
+           END-EXEC
+
+           EXEC CICS
+                WRITEQ
+                TS
+                QUEUE(X)
+                QNAME(X)
+                FROM(X)
+                LENGTH(X)
+                NUMITEMS(X)
+                ITEM(X)
+                REWRITE
+                SYSID(X)
+                AUXILIARY
+                MAIN
+                NOSUSPEND
+           END-EXEC
+
+           EXEC CICS
+                WSACONTEXT
+                BUILD
+                CHANNEL(data-value)
+                ACTION(data-value)
+                MESSAGEID(data-value)
+                RELATESURI(data-value)
+                RELATESTYPE(data-value)
+                EPRTYPE(cvda)
+                EPRFIELD(cvda)
+                EPRFROM(data-value)
+                EPRLENGTH(data-value)
+                FROMCCSID(data-value)
+                FROMCODEPAGE(data-value)
+           END-EXEC
+
+           EXEC CICS
+                WSACONTEXT
+                DELETE
+                CHANNEL(X)
+           END-EXEC
+
+           EXEC CICS
+                WSACONTEXT
+                GET
+                CONTEXTTYPE(cvda)
+                CHANNEL(data-value)
+                ACTION(data-area)
+                MESSAGEID(data-area)
+                RELATESURI(data-area)
+                RELATESTYPE(data-area)
+                RELATESINDEX(data-value)
+                EPRTYPE(cvda)
+                EPRFIELD(cvda)
+                EPRINTO(data-area)
+                EPRSET(ptr-ref)
+                EPRLENGTH(data-area)
+                INTOCCSID(data-value)
+                INTOCODEPAGE(data-value)
+           END-EXEC
+
+           EXEC CICS
+                WSAEPR
+                CREATE
+                EPRINTO(data-area)
+                EPRSET(data-area)
+                EPRLENGTH(data-area)
+                ADDRESS(data-value)
+                REFPARMS(data-value)
+                REFPARMSLEN(data-value)
+                METADATA(data-value)
+                METADATALEN(data-value)
+                FROMCCSID(data-value)
+                FROMCODEPAGE(data-value)
+           END-EXEC
+
+           EXEC CICS
+                XCTL
+                PROGRAM('SAMVIMES')
+                COMMAREA(X)
+                LENGTH(X)
+                CHANNEL(X)
+                INPUTMSG(X)
+                INPUTMSGLEN(X)
+           END-EXEC
 
 
            EXEC CICS RETURN END-EXEC.
