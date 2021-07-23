@@ -37,10 +37,21 @@ class ExecCicsStatement {
 		for (CobolParser.CicsKeywordWithArgContext kywdWithArgCtx: this.ctx.cicsKeywordWithArg()) {
 			this.cicsKeywordsWithArg.add(new CicsKeywordWithArg(kywdWithArgCtx, this.LOGGER));
 		}
-		switch(this.cicsKeywords.get(0)) {
+		String aKywd = null;
+        if (this.cicsKeywords.size() > 0) {
+			aKywd = this.cicsKeywords.get(0);
+		} else if (this.cicsKeywordsWithArg.size() > 0) {
+			aKywd = this.cicsKeywordsWithArg.get(0).getKeyword();
+		} else {
+			aKywd = "";
+		}
+		switch(aKywd) {
 			case "LINK":
 				this.type = ExecCicsStatementType.CICSLINK;
 				this.findProgram();
+				if (this.program == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "XCTL":
 				this.type = ExecCicsStatementType.CICSXCTL;
@@ -53,14 +64,23 @@ class ExecCicsStatement {
 			case "RUN":
 				this.type = ExecCicsStatementType.CICSRUNTRANSID;
 				this.findTransID();
+                if (this.transID == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "DELETE":
 				this.type = ExecCicsStatementType.CICSDELETE;
 				this.findFile();
+				if (this.file == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "READ":
 				this.type = ExecCicsStatementType.CICSREAD;
 				this.findFile();
+				if (this.file == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "REWRITE":
 				this.type = ExecCicsStatementType.CICSREWRITE;
@@ -69,6 +89,9 @@ class ExecCicsStatement {
 			case "WRITE":
 				this.type = ExecCicsStatementType.CICSWRITE;
 				this.findFile();
+				if (this.file == null) {
+					this.type = ExecCicsStatementType.CICSOTHER;
+				}
 				break;
 			case "STARTBR":
 				this.type = ExecCicsStatementType.CICSSTARTBR;

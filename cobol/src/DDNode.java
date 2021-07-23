@@ -81,7 +81,7 @@ class DDNode {
 				this.identifier = "FILLER";
 			}
 		} else {
-			this.identifier = this.dde1Ctx.dataName().cobolWord().IDENTIFIER().toString();
+			this.identifier = this.dde1Ctx.dataName().cobolWord().getText();
 		}
 
 	}

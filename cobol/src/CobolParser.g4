@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019, 2020, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019 - 2021, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -1074,7 +1074,17 @@ dataThreadLocalClause
    ;
 
 dataTypeClause
-   : TYPE IS? (SHORT_DATE | LONG_DATE | NUMERIC_DATE | NUMERIC_TIME | LONG_TIME | (CLOB | BLOB | DBCLOB) LPARENCHAR integerLiteral RPARENCHAR)
+   : TYPE IS? 
+   (SHORT_DATE
+   | LONG_DATE
+   | NUMERIC_DATE
+   | NUMERIC_TIME
+   | LONG_TIME
+   | CLOB_LOCATOR
+   | BLOB_LOCATOR
+   | DBCLOB_LOCATOR
+   | ROWID
+   | (CLOB | BLOB | DBCLOB | VARBINARY (XML AS CLOB)) LPARENCHAR (IDENTIFIER | INTEGERLITERAL) RPARENCHAR)
    ;
 
 dataTypeDefClause
@@ -1515,7 +1525,7 @@ execCicsStatement
 // exec sql statement
 
 execSqlStatement
-   : EXEC_SQL SQL_TEXT+ END_EXEC DOT?
+   : EXEC_SQL SQL_TEXT+ END_EXEC ((DOT NEWLINE?) | DOT_FS)?
    ;
 
 // exec sql ims statement
@@ -2591,8 +2601,14 @@ abbreviation
 // identifier ----------------------------------
 
 identifier
-   : qualifiedDataName | tableCall | functionCall | specialRegister
+   : qualifiedDataName | tableCall | functionCall | specialRegister //| dfhvalue
    ;
+
+/*
+dfhvalue
+   : DFHVALUE LPARENCHAR (cicsWord | cobolWord) RPARENCHAR
+   ;
+*/
 
 tableCall
    : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR)* referenceModifier?
@@ -2825,8 +2841,17 @@ cobolWord
    | WAIT
    | YEAR | YYYYMMDD | YYYYDDD
    | ZERO_FILL
+   | NAME | ROWID | REMARKS
    ;
 
+/*
+This rule must contain any tokens from the Lexer that are also
+CICS keywords.  These are not broken out by the Lexer because
+it seems like more work to detect the different permutations of
+COBOL identifiers (again) in the Lexer, i.e. identifying the CICS
+keywords would be easy but their arguments would be more
+difficult than this method.  I think.
+*/
 cicsWord
    : IDENTIFIER 
    | ABORT
@@ -2835,51 +2860,79 @@ cicsWord
    | AFTER
    | ALL
    | ALLOCATE
+   | ALTER
    | ALTERNATE
    | AND
+   | ANY
    | ASSIGN
    | AT
+   | ATTRIBUTES
    | BINARY
    | CANCEL
+   | CLASS
    | CLOSE
+   | CONTROL
+   | COPY
    | CURSOR
    | DATA
    | DATE
+   | DEFAULT
    | DELETE
    | DELIMITER
+   | DETAIL
    | END
+   | ENTRY
    | EQUAL
    | ERASE
    | ERROR
    | EXCEPTION
+   | EXTERNAL
    | FILE
    | FOR
    | FREE
    | FROM
    | INPUT
    | INTO
+   | INVOKE
    | LABEL
    | LAST
    | LENGTH
    | LINE
+   | METHOD
+   | MESSAGE
    | MODE
    | MOVE
    | NAME
+   | NEXT
    | ON
    | OPEN
    | OR
+   | ORGANIZATION
+   | OUTPUT
+   | OVERFLOW
    | PAGE
    | PROCESS
+   | PURGE
+   | QUEUE
    | READ
+   | RECEIVE
    | RECORD
+   | RELEASE
+   | REPLACE
    | RESET
+   | RETURN
    | REWIND
    | REWRITE
    | RUN
+   | SECURITY
+   | SEND
    | SERVICE
    | SET
    | START
    | STATUS
+   | TERMINAL
+   | TEST
+   | TEXT
    | TIME
    | TITLE
    | TO
@@ -2888,6 +2941,7 @@ cicsWord
    | USING
    | VALUE
    | WAIT
+   | WEBSERVICE
    | WRITE
    | YEAR
    ;
@@ -2912,8 +2966,12 @@ integerLiteral
    : INTEGERLITERAL | LEVEL_NUMBER_66 | LEVEL_NUMBER_77 | LEVEL_NUMBER_88
    ;
 
+/*
+The END token is here because it is the only valid DFHRESP value
+that is also a COBOL reserved word.
+*/
 cicsDfhRespLiteral
-   : DFHRESP LPARENCHAR (cobolWord | literal) RPARENCHAR
+   : DFHRESP LPARENCHAR (cobolWord | literal | END) RPARENCHAR
    ;
 
 cicsDfhValueLiteral

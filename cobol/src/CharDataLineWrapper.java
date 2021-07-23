@@ -18,6 +18,7 @@ class CharDataLineWrapper {
 	private ArrayList<CobolWordWrapper> cobolWords = null;
 	private ArrayList<LiteralWrapper> literals = null;
 	private ArrayList<FilenameWrapper> filenames = null;
+	private ArrayList<DfhvalueWrapper> dfhvalues = null;
 	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
 	private long line = -1;
 	private long lastLine = -1;
@@ -39,6 +40,7 @@ class CharDataLineWrapper {
 	}
 
 	public static ArrayList<CharDataLineWrapper> bunchOfThese(List<CobolPreprocessorParser.CharDataLineContext> ctxList, Boolean leading, Boolean trailing) {
+		//TODO not used?
 		ArrayList<CharDataLineWrapper> aList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.CharDataLineContext aCtx: ctxList) {
@@ -100,6 +102,13 @@ class CharDataLineWrapper {
 			}
 		}
 
+		if (this.ctx.dfhvalue() != null && this.ctx.dfhvalue().size() > 0) {
+			this.dfhvalues = DfhvalueWrapper.bunchOfThese(this.ctx.dfhvalue());
+			for (DfhvalueWrapper w: this.dfhvalues) {
+				this.tnwList.addAll(w.getTerminalNodeWrappers());
+			}
+		}
+
 		this.tnwList.sort(Comparator.comparingLong(TerminalNodeWrapper::getSortKey));
 
 		this.line = this.tnwList.get(0).getLine();
@@ -112,6 +121,7 @@ class CharDataLineWrapper {
 	}
 
 	public CharDataLineWrapper(CobolPreprocessorParser.CharDataLineContext ctx, Boolean leading, Boolean trailing) {
+		//TODO not used?
 		this.ctx = ctx;
 		this.leading = leading;
 		this.trailing = trailing;
@@ -161,6 +171,13 @@ class CharDataLineWrapper {
 		if (this.ctx.filename() != null && this.ctx.filename().size() > 0) {
 			this.filenames = FilenameWrapper.bunchOfThese(this.ctx.filename(), this.leading, this.trailing);
 			for (FilenameWrapper w: this.filenames) {
+				this.tnwList.addAll(w.getTerminalNodeWrappers());
+			}
+		}
+
+		if (this.ctx.dfhvalue() != null && this.ctx.dfhvalue().size() > 0) {
+			this.dfhvalues = DfhvalueWrapper.bunchOfThese(this.ctx.dfhvalue());
+			for (DfhvalueWrapper w: this.dfhvalues) {
 				this.tnwList.addAll(w.getTerminalNodeWrappers());
 			}
 		}

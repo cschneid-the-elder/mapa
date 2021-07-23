@@ -65,26 +65,42 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 	@SuppressWarnings({"fallthrough"})
 	public void enterExecCicsStatement(CobolParser.ExecCicsStatementContext ctx) {
-		switch(ctx.cicsKeyword(0).getText().toUpperCase()) {
-			case "LINK":
-			case "XCTL": //intentional fall through
+		ExecCicsStatement cicsStmt = null;
+
+		String aString = null;
+
+		if (ctx.cicsKeyword() == null || ctx.cicsKeyword().size() == 0) {
+			if (ctx.cicsKeywordWithArg() == null || ctx.cicsKeywordWithArg().size() == 0) {
+				return;  //empty CICS API call
+			} else {
+				String allOfIt = ctx.cicsKeywordWithArg(0).getText().toUpperCase();
+				aString = allOfIt.substring(0, allOfIt.indexOf("("));
+			}
+		} else {
+			aString = ctx.cicsKeyword(0).getText().toUpperCase();
+		}
+
+		cicsStmt = new ExecCicsStatement(ctx, this.LOGGER);
+		switch(cicsStmt.getType()) {
+			case CICSLINK:
+			case CICSXCTL: //intentional fall through
 				CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 				this.currProgram.addCall(aCall);
 				break;
-			case "START":
-			case "STARTBR":
-			case "READNEXT":
-			case "READPREV":
-			case "DELETE":
-			case "READ":
-			case "REWRITE":
-			case "WRITE": //intentional fall through
-				this.currProgram.addCicsStatement(new ExecCicsStatement(ctx, this.LOGGER));
+			case CICSSTARTTRANSID:
+			case CICSSTARTBR:
+			case CICSREADNEXT:
+			case CICSREADPREV:
+			case CICSDELETE:
+			case CICSREAD:
+			case CICSREWRITE:
+			case CICSWRITE: //intentional fall through
+				this.currProgram.addCicsStatement(cicsStmt);
 				break;
-			case "RUN":
+			case CICSRUNTRANSID:
 				if (ctx.cicsKeywordWithArg() != null && ctx.cicsKeywordWithArg().size() > 0) {
 					if (ctx.cicsKeywordWithArg(0).getText().toUpperCase().startsWith("TRANSID")) {
-						this.currProgram.addCicsStatement(new ExecCicsStatement(ctx, this.LOGGER));
+						this.currProgram.addCicsStatement(cicsStmt);
 					}
 				}
 				break;

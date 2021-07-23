@@ -77,6 +77,7 @@ More generically...
 | BASIS | UUID, file UUID, basis file name |
 | PGM | UUID, file UUID, program name, statement count, conditional statement count, cics statement count, sql statement count, sqlims statement count, data description entry type 1 count, data description entry type 2 count, data description entry type 3 count, data description entry type sql count |
 | CALL | UUID, program UUID, calling program name, call type (see below), called program name |
+| UNRESOLVEDCALL | UUID, program UUID, calling program name, call type (see below), cobol identifier that could not be resolved |
 | DD | UUID, program UUID, ddname (see below), cobol file name, open input count, open output count, open i-o count, open extend count |
 | DB2TABLE | UUID, program UUID, table name, type of SQL statement |
 | SQLINCLUDE | UUID, program UUID, included member name |

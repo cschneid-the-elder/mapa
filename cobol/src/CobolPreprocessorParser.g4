@@ -55,7 +55,7 @@ compilerOption
    | ((COPYLOC | CPLC) LPARENCHAR (IDENTIFIER | literal)? (COMMACHAR? DSN LPARENCHAR FILENAME RPARENCHAR)? (COMMACHAR? PATH LPARENCHAR literal RPARENCHAR)? RPARENCHAR)
    | ((COPYRIGHT | CPYR) LPARENCHAR literal RPARENCHAR)
    | CPP | CPSM
-   | (CURRENCY | CURR) LPARENCHAR TEXT RPARENCHAR
+   | (CURRENCY | CURR) LPARENCHAR TEXT+ RPARENCHAR
    | DATA LPARENCHAR literal RPARENCHAR
    | (DATEPROC | DP) (LPARENCHAR (FLAG | NOFLAG)? COMMACHAR? (TRIG | NOTRIG)? RPARENCHAR)?
    | DBCS 
@@ -289,19 +289,19 @@ classicCommentEntry
 // exec cics statement
 
 execCicsStatement
-   : EXEC CICS charData END_EXEC DOT?
+   : EXEC CICS (charData | classicCommentEntry | PROCESS | COPY | REPLACE)+ END_EXEC DOT?
    ;
 
 // exec sql statement
 
 execSqlStatement
-   : EXEC_SQL SQL_TEXT+ END_EXEC DOT?
+   : EXEC_SQL (SQL_TEXT+ | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // exec sql ims statement
 
 execSqlImsStatement
-   : EXEC SQLIMS charData END_EXEC DOT?
+   : EXEC SQLIMS (charData | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // copy statement
@@ -391,7 +391,7 @@ charDataSql
    ;
 
 charDataLine
-   : (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+ (NEWLINE CLASSIC_CONTINUATION (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+)*
+   : (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR | dfhvalue)+ (NEWLINE CLASSIC_CONTINUATION (cobolWord | literal | filename | PSEUDOTEXTIDENTIFIER | TEXT | DOT | LPARENCHAR | RPARENCHAR)+)*
    ;
 
 cobolWord
@@ -404,6 +404,15 @@ literal
 
 filename
    : FILENAME
+   ;
+
+/*
+This rule was originally part of the charDataKeyword rule and
+quadrupled the clock time of parsing.  Breaking it out here
+restored balance to the universe.
+*/
+dfhvalue
+   : (DFHVALUE LPARENCHAR (cobolWord | COPY | PROCESS) RPARENCHAR)
    ;
 
 compilerDirectiveStatement
@@ -621,6 +630,6 @@ charDataKeyword
    | DIVISION
    | LEADING | TRAILING
    | BASIS | INSERT | DELETE
-   ;
+  ;
 
 

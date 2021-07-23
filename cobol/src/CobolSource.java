@@ -4,6 +4,7 @@ import java.time.*;
 import java.time.format.*;
 import java.io.*;
 import java.nio.file.*;
+import java.nio.charset.Charset;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -105,6 +106,7 @@ class CobolSource {
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners(); //that this is COBOL is not yet established
 
 		if (this.CLI.profile) {
 			parser.setProfile(true);
@@ -139,6 +141,7 @@ class CobolSource {
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners(); //that this is COBOL is not yet established
 
 		if (this.CLI.profile) {
 			parser.setProfile(true);
@@ -167,6 +170,10 @@ class CobolSource {
 
 	<p>I was never able to find a way in the lexer grammar to simply and
 	easily ignore these columns.  So I just get rid of them.
+
+	<p><code>java.nio.charset.MalformedInputException: Input length = 1</code>
+	means I had to add the <code>,Charset.forName("ISO-8859-1")</code> to
+	<code>Files.readAllLines()</code>.  I'm not happy about it.
 	*/
 	public static String copyWithout73to80(
 			String fileName
@@ -182,7 +189,7 @@ class CobolSource {
 		}
 
 		PrintWriter out = new PrintWriter(tmp);
-		List<String> list = Files.readAllLines(Paths.get(fileName));
+		List<String> list = Files.readAllLines(Paths.get(fileName),Charset.forName("ISO-8859-1"));
 		for (String line: list) {
 			int length = line.length();
 			String outLine = new String(line);
