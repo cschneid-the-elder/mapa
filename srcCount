@@ -1,0 +1,20 @@
+#!/bin/bash
+
+javaCbl=$(grep --exclude-from=cobol/src-exclude-list --count ";" cobol/src/*.java | awk -F ":" '{tot = tot + $2} END {print tot}');
+javaJcl=$(grep --exclude-from=jcl/src-exclude-list --count ";" jcl/src/*.java | awk -F ":" '{tot = tot + $2} END {print tot}');
+antlrCbl=$(grep --count ";" cobol/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
+antlrJcl=$(grep --count ";" jcl/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
+antlrDb2=$(grep --count ";" db2z/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
+javaTot=$((${javaCbl}+${javaJcl}));
+antlrTot=$((${antlrCbl}+${antlrJcl}+${antlrDb2}));
+grandTot=$((${javaTot}+${antlrTot}));
+
+echo "java LOC cobol    = ${javaCbl}"
+echo "java LOC jcl      = ${javaJcl}"
+echo "antlr cobol rules = ${antlrCbl}"
+echo "antlr jcl rules   = ${antlrJcl}"
+echo "antlr db2z rules  = ${antlrDb2}"
+echo "java LOC total    = ${javaTot}"
+echo "antlr rules total = ${antlrTot}"
+echo "grand total FWIW  = ${grandTot}"
+
