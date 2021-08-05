@@ -334,6 +334,24 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#respositoryParagraph}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRespositoryParagraph(CobolParser.RespositoryParagraphContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#classIsPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassIsPhrase(CobolParser.ClassIsPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#functionIntrinsicPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionIntrinsicPhrase(CobolParser.FunctionIntrinsicPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#inputOutputSection}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

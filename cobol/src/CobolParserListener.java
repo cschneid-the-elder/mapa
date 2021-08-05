@@ -547,6 +547,36 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#respositoryParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterRespositoryParagraph(CobolParser.RespositoryParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#respositoryParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitRespositoryParagraph(CobolParser.RespositoryParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#classIsPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassIsPhrase(CobolParser.ClassIsPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#classIsPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassIsPhrase(CobolParser.ClassIsPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#functionIntrinsicPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionIntrinsicPhrase(CobolParser.FunctionIntrinsicPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#functionIntrinsicPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionIntrinsicPhrase(CobolParser.FunctionIntrinsicPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#inputOutputSection}.
 	 * @param ctx the parse tree
 	 */

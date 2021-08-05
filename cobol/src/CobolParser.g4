@@ -117,7 +117,7 @@ configurationSection
 // - configuration section paragraph ----------------------------------
 
 configurationSectionParagraph
-   : sourceComputerParagraph | objectComputerParagraph | specialNamesParagraph
+   : sourceComputerParagraph | objectComputerParagraph | specialNamesParagraph | respositoryParagraph
    // strictly, specialNamesParagraph does not belong into configurationSectionParagraph, but IBM-COBOL allows this
    ;
 
@@ -261,6 +261,20 @@ symbolicCharacters
 
 xmlSchemaClause
    : XML_SCHEMA identifier IS? (identifier | literal)
+   ;
+
+// - repository paragraph -----------------------------------
+
+respositoryParagraph
+   : REPOSITORY (DOT_FS | DOT) classIsPhrase* functionIntrinsicPhrase? (DOT_FS | DOT)?
+   ;
+
+classIsPhrase
+   : (CLASS className (IS IDENTIFIER)? (DOT_FS | DOT)?)
+   ;
+
+functionIntrinsicPhrase
+   : (FUNCTION (ALL | cobolWord+) INTRINSIC (DOT_FS | DOT)?)
    ;
 
 // -- input output section ----------------------------------
