@@ -274,7 +274,7 @@ classIsPhrase
    ;
 
 functionIntrinsicPhrase
-   : (FUNCTION (ALL | cobolWord+) INTRINSIC (DOT_FS | DOT)?)
+   : (FUNCTION (ALL | intrinsicFunctionName+) INTRINSIC (DOT_FS | DOT)?)
    ;
 
 // -- input output section ----------------------------------
@@ -2629,7 +2629,7 @@ tableCall
    ;
 
 functionCall
-   : FUNCTION functionName (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)* referenceModifier?
+   : FUNCTION? functionName (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)* referenceModifier?
    ;
 
 referenceModifier
@@ -2761,7 +2761,7 @@ fileName
    ;
 
 functionName
-   : INTEGER | LENGTH | RANDOM | SUM | WHEN_COMPILED | cobolWord
+   : INTEGER | LENGTH | RANDOM | SUM | WHEN_COMPILED | intrinsicFunctionName | cobolWord
    ;
 
 indexName
@@ -2856,6 +2856,94 @@ cobolWord
    | YEAR | YYYYMMDD | YYYYDDD
    | ZERO_FILL
    | NAME | ROWID | REMARKS
+/*
+copy of intrinsicFunctionName rule body
+
+This copy is here so that these show up as cobolWord and
+not intrisicFunctionName when used as data names.
+*/
+   | ABS
+   | ACOS
+   | ANNUITY
+   | ASIN
+   | ATAN
+   | BIT_OF
+   | BIT_TO_CHAR
+   | BYTE_LENGTH
+   | CHAR
+   | COMBINED_DATETIME
+   | COS
+   | CURRENT_DATE
+   | DATE_OF_INTEGER
+   | DATE_TO_YYYYMMDD
+   | DAY_OF_INTEGER
+   | DAY_TO_YYYYDDD
+   | DISPLAY_OF
+   | E_FUNC
+   | EXP
+   | EXP10
+   | FACTORIAL
+   | FORMATTED_CURRENT_DATE
+   | FORMATTED_DATE
+   | FORMATTED_DATETIME
+   | FORMATTED_TIME
+   | HEX_OF
+   | HEX_TO_CHAR
+   | INTEGER
+   | INTEGER_OF_DATE
+   | INTEGER_OF_DAY
+   | INTEGER_OF_FORMATTED_DATE
+   | INTEGER_PART
+   | LENGTH
+   | LOG
+   | LOG10
+   | LOWER_CASE
+   | MAX
+   | MEAN
+   | MEDIAN
+   | MIDRANGE
+   | MIN
+   | MOD
+   | NATIONAL_OF
+   | NUMVAL
+   | NUMVAL_C
+   | NUMVAL_F
+   | ORD
+   | ORD_MAX
+   | ORD_MIN
+   | PI
+   | PRESENT_VALUE
+   | RANDOM
+   | RANGE
+   | REM
+   | REVERSE
+   | SECONDS_FROM_FORMATTED_TIME
+   | SECONDS_PAST_MIDNIGHT
+   | SIGN
+   | SIN
+   | SQRT
+   | STANDARD_DEVIATION
+   | SUM
+   | TAN
+   | TEST_DATE_YYYYMMDD
+   | TEST_DAY_YYYYDDD
+   | TEST_FORMATTED_DATETIME
+   | TEST_NUMVAL
+   | TEST_NUMVAL_C
+   | TEST_NUMVAL_F
+   | TRIM
+   | ULENGTH
+   | UPOS
+   | UPPER_CASE
+   | USUBSTR
+   | USUPPLEMENTARY
+   | UUID4
+   | UVALID
+   | UWIDTH
+   | VARIANCE
+   | WHEN_COMPILED
+   | YEAR_TO_YYYY
+// end of copy of intrinsicFunctionName rule body
    ;
 
 /*
@@ -2883,6 +2971,7 @@ cicsWord
    | ATTRIBUTES
    | BINARY
    | CANCEL
+   | CHAR
    | CLASS
    | CLOSE
    | CONTROL
@@ -2958,6 +3047,90 @@ cicsWord
    | WEBSERVICE
    | WRITE
    | YEAR
+   ;
+
+intrinsicFunctionName
+   :  ABS
+   | ACOS
+   | ANNUITY
+   | ASIN
+   | ATAN
+   | BIT_OF
+   | BIT_TO_CHAR
+   | BYTE_LENGTH
+   | CHAR
+   | COMBINED_DATETIME
+   | COS
+   | CURRENT_DATE
+   | DATE_OF_INTEGER
+   | DATE_TO_YYYYMMDD
+   | DAY_OF_INTEGER
+   | DAY_TO_YYYYDDD
+   | DISPLAY_OF
+   | E_FUNC
+   | EXP
+   | EXP10
+   | FACTORIAL
+   | FORMATTED_CURRENT_DATE
+   | FORMATTED_DATE
+   | FORMATTED_DATETIME
+   | FORMATTED_TIME
+   | HEX_OF
+   | HEX_TO_CHAR
+   | INTEGER
+   | INTEGER_OF_DATE
+   | INTEGER_OF_DAY
+   | INTEGER_OF_FORMATTED_DATE
+   | INTEGER_PART
+   | LENGTH
+   | LOG
+   | LOG10
+   | LOWER_CASE
+   | MAX
+   | MEAN
+   | MEDIAN
+   | MIDRANGE
+   | MIN
+   | MOD
+   | NATIONAL_OF
+   | NUMVAL
+   | NUMVAL_C
+   | NUMVAL_F
+   | ORD
+   | ORD_MAX
+   | ORD_MIN
+   | PI
+   | PRESENT_VALUE
+   | RANDOM
+   | RANGE
+   | REM
+   | REVERSE
+   | SECONDS_FROM_FORMATTED_TIME
+   | SECONDS_PAST_MIDNIGHT
+   | SIGN
+   | SIN
+   | SQRT
+   | STANDARD_DEVIATION
+   | SUM
+   | TAN
+   | TEST_DATE_YYYYMMDD
+   | TEST_DAY_YYYYDDD
+   | TEST_FORMATTED_DATETIME
+   | TEST_NUMVAL
+   | TEST_NUMVAL_C
+   | TEST_NUMVAL_F
+   | TRIM
+   | ULENGTH
+   | UPOS
+   | UPPER_CASE
+   | USUBSTR
+   | USUPPLEMENTARY
+   | UUID4
+   | UVALID
+   | UWIDTH
+   | VARIANCE
+   | WHEN_COMPILED
+   | YEAR_TO_YYYY
    ;
 
 literal

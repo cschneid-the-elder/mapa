@@ -87,11 +87,11 @@ class DDNode {
 	}
 
 	private void setIdentifierFromDDE2CTX() {
-		this.identifier = this.dde2Ctx.dataName().cobolWord().IDENTIFIER().toString();
+		this.identifier = this.dde2Ctx.dataName().cobolWord().getText();
 	}
 
 	private void setIdentifierFromDDE3CTX() {
-		this.identifier = this.dde3Ctx.conditionName().cobolWord().IDENTIFIER().toString();
+		this.identifier = this.dde3Ctx.conditionName().cobolWord().getText();
 	}
 
 	private void setLevelFromDDE1CTX() {

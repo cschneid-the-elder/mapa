@@ -3832,6 +3832,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCicsWord(CobolParser.CicsWordContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#intrinsicFunctionName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntrinsicFunctionName(CobolParser.IntrinsicFunctionNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#literal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
