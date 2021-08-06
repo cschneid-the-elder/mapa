@@ -29,7 +29,7 @@ class CobolWord {
 		return this.tn.getSymbol().getText();
 	}
 
-	public void populateTerminalNode() {
+	private void populateTerminalNode() {
 		/*
 		There are a _lot_ of methods of the type we're interested in, and
 		they are subject to change.  This is the most future-proof way I
