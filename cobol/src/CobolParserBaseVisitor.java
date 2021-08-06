@@ -1640,6 +1640,13 @@ public class CobolParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitDataExternalClause(CobolParser.DataExternalClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

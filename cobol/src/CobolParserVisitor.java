@@ -1402,6 +1402,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataExternalClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

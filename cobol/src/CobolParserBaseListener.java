@@ -2799,6 +2799,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataExternalClause(CobolParser.DataExternalClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

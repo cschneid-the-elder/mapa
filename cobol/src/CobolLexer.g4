@@ -936,6 +936,7 @@ COMPUTATIONAL_4_PIC : C O M P U T A T I O N A L MINUSCHAR '4' ->popMode;
 COMPUTATIONAL_5_PIC : C O M P U T A T I O N A L MINUSCHAR '5' ->popMode;
 DISPLAY_PIC : D I S P L A Y ->popMode;
 DISPLAY_1_PIC : D I S P L A Y MINUSCHAR '1' ->popMode;
+DYNAMIC_PIC : DYNAMIC ->type(DYNAMIC),popMode;
 FUNCTION_POINTER_PIC : F U N C T I O N MINUSCHAR P O I N T E R ->popMode;
 INDEX_PIC : I N D E X ->popMode;
 JUST_PIC : J U S T ->popMode;
@@ -953,6 +954,7 @@ SYNC_PIC : S Y N C ->popMode;
 SYNCHRONIZED_PIC : S Y N C H R O N I Z E D ->popMode;
 USAGE_PIC : U S A G E ->popMode;
 UTF_8_PIC : UTF_8 ->type(UTF_8),popMode;
+
 VALUE_PIC : V A L U E ->popMode;
 DOT_FS_PIC : DOT_FS ->type(DOT_FS),popMode;
 DOT_WS : '. ' ->popMode;

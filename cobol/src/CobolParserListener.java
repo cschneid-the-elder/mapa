@@ -2327,6 +2327,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataExternalClause}.
 	 * @param ctx the parse tree
 	 */
