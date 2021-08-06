@@ -4683,6 +4683,66 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJsonGenerateWhenPhrase(CobolParser.JsonGenerateWhenPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonGenerateWhenPhrase(CobolParser.JsonGenerateWhenPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonGenerateFigurativeConstant(CobolParser.JsonGenerateFigurativeConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonGenerateFigurativeConstant(CobolParser.JsonGenerateFigurativeConstantContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonGenerateGenericSupressionPhrase(CobolParser.JsonGenerateGenericSupressionPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonGenerateGenericSupressionPhrase(CobolParser.JsonGenerateGenericSupressionPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonGeneratePhrase1(CobolParser.JsonGeneratePhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonGeneratePhrase1(CobolParser.JsonGeneratePhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonGenerateConvertingPhrase(CobolParser.JsonGenerateConvertingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonGenerateConvertingPhrase(CobolParser.JsonGenerateConvertingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterJsonGenerateEndJsonPhrase(CobolParser.JsonGenerateEndJsonPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -4738,6 +4798,42 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJsonParseSuppressPhrase(CobolParser.JsonParseSuppressPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonParsePhrase1(CobolParser.JsonParsePhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonParsePhrase1(CobolParser.JsonParsePhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonParseUsingPhrase1(CobolParser.JsonParseUsingPhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonParseUsingPhrase1(CobolParser.JsonParseUsingPhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsonParseConvertingPhrase(CobolParser.JsonParseConvertingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsonParseConvertingPhrase(CobolParser.JsonParseConvertingPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1703,6 +1703,7 @@ jsonGenerateStatement
      jsonGenerateCountPhrase?
      jsonGenerateNamePhrase?
      jsonGenerateSuppressPhrase?
+     jsonGenerateConvertingPhrase?
      onExceptionClause?
      notOnExceptionClause?
      jsonGenerateEndJsonPhrase
@@ -1717,7 +1718,35 @@ jsonGenerateNamePhrase
    ;
 
 jsonGenerateSuppressPhrase
-   : (SUPPRESS identifier+)
+   : (SUPPRESS ((identifier jsonGenerateWhenPhrase?) | jsonGenerateGenericSupressionPhrase)+)
+   ;
+
+jsonGenerateWhenPhrase
+   : WHEN jsonGenerateFigurativeConstant (OR? jsonGenerateFigurativeConstant)*
+   ;
+
+jsonGenerateFigurativeConstant
+   : (ZERO
+   | ZEROES
+   | ZEROS
+   | SPACE
+   | SPACES
+   | LOW_VALUE
+   | LOW_VALUES
+   | HIGH_VALUE
+   | HIGH_VALUES)
+   ;
+
+jsonGenerateGenericSupressionPhrase
+   : (EVERY (NUMERIC | NONNUMERIC)?)? jsonGenerateWhenPhrase
+   ;
+
+jsonGeneratePhrase1
+   : identifier TO? JSON? (BOOLEAN | BOOL) USING? (identifier | literal)
+   ;
+
+jsonGenerateConvertingPhrase
+   : CONVERTING jsonGeneratePhrase1 (ALSO jsonGeneratePhrase1)*
    ;
 
 jsonGenerateEndJsonPhrase
@@ -1732,6 +1761,7 @@ jsonParseStatement
      jsonParseWithDetailPhrase?
      jsonParseNamePhrase?
      jsonParseSuppressPhrase?
+     jsonParseConvertingPhrase?
      onExceptionClause?
      notOnExceptionClause?
      jsonParseEndJsonPhrase
@@ -1747,6 +1777,18 @@ jsonParseNamePhrase
 
 jsonParseSuppressPhrase
    : (SUPPRESS identifier+)
+   ;
+
+jsonParsePhrase1
+   : identifier FROM? JSON? (BOOLEAN | BOOL) jsonParseUsingPhrase1
+   ;
+
+jsonParseUsingPhrase1
+   : USING? (identifier | literal) (AND? (identifier | literal))?
+   ;
+
+jsonParseConvertingPhrase
+   : CONVERTING jsonParsePhrase1 (ALSO jsonParsePhrase1)*
    ;
 
 jsonParseEndJsonPhrase
