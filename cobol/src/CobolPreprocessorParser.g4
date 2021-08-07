@@ -80,6 +80,7 @@ compilerOption
    | ((INITCHECK | IC) (LPARENCHAR (LAX | STRICT) RPARENCHAR)?)
    | INITIAL
    | INLINE | INL
+   | ((INVDATA | INVD) (LPARENCHAR invdata_opts (COMMACHAR invdata_opts)* RPARENCHAR)?)
    | (LANGUAGE | LANG) LPARENCHAR (ENGLISH | CS | EN | JA | JP | KA | UE) RPARENCHAR
    | LEASM | LENGTH | LIB | LIN
    | (LINECOUNT | LC) LPARENCHAR literal RPARENCHAR
@@ -117,6 +118,7 @@ compilerOption
    | (NOINITCHECK | NOIC)
    | NOINITIAL
    | NOINLINE | NOINL
+   | (NOINVDATA | NOINVD)
    | NOLENGTH | NOLIB | NOLINKAGE | NOLIST
    | NOMAP 
    | (NOMDECK | NOMD)
@@ -168,7 +170,7 @@ compilerOption
    | (SEQUENCE | SEQ) (LPARENCHAR literal COMMACHAR literal RPARENCHAR)?
    | ((SERVICE | SERV) LPARENCHAR literal RPARENCHAR)
    | (SIZE | SZ) LPARENCHAR (MAX | literal) RPARENCHAR
-   | (SOURCE | S_CHAR)
+   | ((SOURCE | S_CHAR) (LPARENCHAR (DEC | HEX) RPARENCHAR)?)
    | SP
    | SPACE LPARENCHAR literal RPARENCHAR
    | SPIE
@@ -183,6 +185,7 @@ compilerOption
    | (TEST (LPARENCHAR test_opts (COMMACHAR test_opts)* RPARENCHAR)?)
    | THREAD
    | TRUNC LPARENCHAR (BIN | OPT | STD) RPARENCHAR
+   | (TUNE LPARENCHAR literal RPARENCHAR) 
    | VBREF
    | (VLR LPARENCHAR (STANDARD | S_CHAR | COMPAT | C_CHAR) RPARENCHAR)
    | ((VSAMOPENFS | VS) LPARENCHAR (COMPAT | C_CHAR | SUCC | S_CHAR) RPARENCHAR)
@@ -218,10 +221,20 @@ identifier_et_al
    | X_CHAR)
    ;
 
+invdata_opts
+   : (CLEANSIGN
+   | CS
+   | NOCLEANSIGN
+   | NOCS
+   | FORCENUMCMP
+   | FNC
+   | NOFORCENUMCMP
+   | NOFNC)
+   ;
 
 numcheck_opts
    : (ZON
-   | (ZON LPARENCHAR (ALPHNUM | NOALPHNUM) RPARENCHAR)
+   | (ZON LPARENCHAR numcheck_zon_opts (COMMACHAR numcheck_zon_opts)* RPARENCHAR)
    | NOZON
    | PAC
    | NOPAC
@@ -229,6 +242,13 @@ numcheck_opts
    | NOBIN
    | MSG
    | ABD)
+   ;
+
+numcheck_zon_opts
+   : (ALPHNUM
+   | NOALPHNUM
+   | LAXREDEF
+   | STRICTREDEF)
    ;
 
 rules_opts
@@ -242,8 +262,10 @@ rules_opts
     | NOEVENP
     | LAXPERF
     | LXPRF
+    | LAXREDEF
     | NOLAXPERF
     | NOLXPRF
+    | NOLAXREDEF
     | SLACKBYTES
     | SLCKB
     | NOSLACKBYTES

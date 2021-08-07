@@ -2327,6 +2327,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataExternalClause}.
 	 * @param ctx the parse tree
 	 */
@@ -3887,6 +3897,56 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitJsonGenerateSuppressPhrase(CobolParser.JsonGenerateSuppressPhraseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonGenerateWhenPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonGenerateWhenPhrase(CobolParser.JsonGenerateWhenPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonGenerateWhenPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonGenerateWhenPhrase(CobolParser.JsonGenerateWhenPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonGenerateFigurativeConstant}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonGenerateFigurativeConstant(CobolParser.JsonGenerateFigurativeConstantContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonGenerateFigurativeConstant}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonGenerateFigurativeConstant(CobolParser.JsonGenerateFigurativeConstantContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonGenerateGenericSupressionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonGenerateGenericSupressionPhrase(CobolParser.JsonGenerateGenericSupressionPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonGenerateGenericSupressionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonGenerateGenericSupressionPhrase(CobolParser.JsonGenerateGenericSupressionPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonGeneratePhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonGeneratePhrase1(CobolParser.JsonGeneratePhrase1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonGeneratePhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonGeneratePhrase1(CobolParser.JsonGeneratePhrase1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonGenerateConvertingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonGenerateConvertingPhrase(CobolParser.JsonGenerateConvertingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonGenerateConvertingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonGenerateConvertingPhrase(CobolParser.JsonGenerateConvertingPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#jsonGenerateEndJsonPhrase}.
 	 * @param ctx the parse tree
 	 */
@@ -3936,6 +3996,36 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitJsonParseSuppressPhrase(CobolParser.JsonParseSuppressPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonParsePhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonParsePhrase1(CobolParser.JsonParsePhrase1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonParsePhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonParsePhrase1(CobolParser.JsonParsePhrase1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonParseUsingPhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonParseUsingPhrase1(CobolParser.JsonParseUsingPhrase1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonParseUsingPhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonParseUsingPhrase1(CobolParser.JsonParseUsingPhrase1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#jsonParseConvertingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsonParseConvertingPhrase(CobolParser.JsonParseConvertingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#jsonParseConvertingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsonParseConvertingPhrase(CobolParser.JsonParseConvertingPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#jsonParseEndJsonPhrase}.
 	 * @param ctx the parse tree

@@ -980,7 +980,7 @@ dataDescriptionEntry
    ;
 
 dataDescriptionEntryFormat1
-   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause)* (DOT_WS | DOT_FS | DOT)
+   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause)* (DOT_WS | DOT_FS | DOT)
    ;
 
 dataDescriptionEntryFormat2
@@ -1005,6 +1005,10 @@ dataBlankWhenZeroClause
 
 dataCommonOwnLocalClause
    : COMMON | OWN | LOCAL
+   ;
+
+dataDynamicLengthClause
+   : DYNAMIC LENGTH? (LIMIT IS? INTEGERLITERAL)?
    ;
 
 dataExternalClause
@@ -1106,7 +1110,7 @@ dataTypeDefClause
    ;
 
 dataUsageClause
-   : ((USAGE | USAGE_PIC) IS?)? ((BINARY | BINARY_PIC) (TRUNCATED | EXTENDED)? | BIT | COMP | COMP_1 | COMP_2 | COMP_3 | COMP_4 | COMP_5 | COMPUTATIONAL | COMPUTATIONAL_1 | COMPUTATIONAL_2 | COMPUTATIONAL_3 | COMPUTATIONAL_4 | COMPUTATIONAL_5 | CONTROL_POINT | DATE | DISPLAY | DISPLAY_1 | DOUBLE | EVENT | FUNCTION_POINTER | INDEX | KANJI | LOCK | NATIONAL | PACKED_DECIMAL | POINTER | PROCEDURE_POINTER | REAL | SQL | TASK | COMP_PIC | COMP_1_PIC | COMP_2_PIC | COMP_3_PIC | COMP_4_PIC | COMP_5_PIC | COMPUTATIONAL_PIC | COMPUTATIONAL_1_PIC | COMPUTATIONAL_2_PIC | COMPUTATIONAL_3_PIC | COMPUTATIONAL_4_PIC | COMPUTATIONAL_5_PIC | DISPLAY_PIC | DISPLAY_1_PIC | FUNCTION_POINTER_PIC | INDEX_PIC | NATIONAL_PIC | PACKED_DECIMAL_PIC | POINTER_PIC | PROCEDURE_POINTER_PIC | OBJECT_REFERENCE_PIC)
+   : ((USAGE | USAGE_PIC) IS?)? ((BINARY | BINARY_PIC) (TRUNCATED | EXTENDED)? | BIT | COMP | COMP_1 | COMP_2 | COMP_3 | COMP_4 | COMP_5 | COMPUTATIONAL | COMPUTATIONAL_1 | COMPUTATIONAL_2 | COMPUTATIONAL_3 | COMPUTATIONAL_4 | COMPUTATIONAL_5 | CONTROL_POINT | DATE | DISPLAY | DISPLAY_1 | DOUBLE | EVENT | FUNCTION_POINTER | INDEX | KANJI | LOCK | NATIONAL | PACKED_DECIMAL | POINTER | POINTER_32 | PROCEDURE_POINTER | REAL | SQL | TASK | UTF_8 | COMP_PIC | COMP_1_PIC | COMP_2_PIC | COMP_3_PIC | COMP_4_PIC | COMP_5_PIC | COMPUTATIONAL_PIC | COMPUTATIONAL_1_PIC | COMPUTATIONAL_2_PIC | COMPUTATIONAL_3_PIC | COMPUTATIONAL_4_PIC | COMPUTATIONAL_5_PIC | DISPLAY_PIC | DISPLAY_1_PIC | FUNCTION_POINTER_PIC | INDEX_PIC | NATIONAL_PIC | PACKED_DECIMAL_PIC | POINTER_PIC | PROCEDURE_POINTER_PIC | OBJECT_REFERENCE_PIC) NATIVE?
    ;
 
 dataUsingClause
@@ -1699,6 +1703,7 @@ jsonGenerateStatement
      jsonGenerateCountPhrase?
      jsonGenerateNamePhrase?
      jsonGenerateSuppressPhrase?
+     jsonGenerateConvertingPhrase?
      onExceptionClause?
      notOnExceptionClause?
      jsonGenerateEndJsonPhrase
@@ -1713,7 +1718,35 @@ jsonGenerateNamePhrase
    ;
 
 jsonGenerateSuppressPhrase
-   : (SUPPRESS identifier+)
+   : (SUPPRESS ((identifier jsonGenerateWhenPhrase?) | jsonGenerateGenericSupressionPhrase)+)
+   ;
+
+jsonGenerateWhenPhrase
+   : WHEN jsonGenerateFigurativeConstant (OR? jsonGenerateFigurativeConstant)*
+   ;
+
+jsonGenerateFigurativeConstant
+   : (ZERO
+   | ZEROES
+   | ZEROS
+   | SPACE
+   | SPACES
+   | LOW_VALUE
+   | LOW_VALUES
+   | HIGH_VALUE
+   | HIGH_VALUES)
+   ;
+
+jsonGenerateGenericSupressionPhrase
+   : (EVERY (NUMERIC | NONNUMERIC)?)? jsonGenerateWhenPhrase
+   ;
+
+jsonGeneratePhrase1
+   : identifier TO? JSON? (BOOLEAN | BOOL) USING? (identifier | literal)
+   ;
+
+jsonGenerateConvertingPhrase
+   : CONVERTING jsonGeneratePhrase1 (ALSO jsonGeneratePhrase1)*
    ;
 
 jsonGenerateEndJsonPhrase
@@ -1728,6 +1761,7 @@ jsonParseStatement
      jsonParseWithDetailPhrase?
      jsonParseNamePhrase?
      jsonParseSuppressPhrase?
+     jsonParseConvertingPhrase?
      onExceptionClause?
      notOnExceptionClause?
      jsonParseEndJsonPhrase
@@ -1743,6 +1777,18 @@ jsonParseNamePhrase
 
 jsonParseSuppressPhrase
    : (SUPPRESS identifier+)
+   ;
+
+jsonParsePhrase1
+   : identifier FROM? JSON? (BOOLEAN | BOOL) jsonParseUsingPhrase1
+   ;
+
+jsonParseUsingPhrase1
+   : USING? (identifier | literal) (AND? (identifier | literal))?
+   ;
+
+jsonParseConvertingPhrase
+   : CONVERTING jsonParsePhrase1 (ALSO jsonParsePhrase1)*
    ;
 
 jsonParseEndJsonPhrase

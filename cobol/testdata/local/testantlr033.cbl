@@ -6,6 +6,11 @@
            05  MYNAME               PIC X(012) VALUE 'testantlr033'.
 
       * 
+       01  SWITCHES.
+           05  SD-001-TRUTH-SW      PIC X(008).
+               88  SD-001-TRUTH     VALUE 'ZAPHOD'.
+               88  SD-001-ALSO-TRUE VALUE 'FPREFECT'.
+
        01  SOME-DATA.
            05  SD-001               PIC X(008).
            05  SD-002.
@@ -40,6 +45,73 @@
                NAME OF SD-001 IS 'ARTHUR'
                        SD-002 IS OMITTED
                SUPPRESS SD-001 SD-003
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING SD-001 FROM JSON BOOLEAN USING SD-001-TRUTH
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING 
+                      SD-001 FROM JSON BOOLEAN 
+                          USING SD-001-TRUTH AND SD-001-ALSO-TRUE
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING 
+                      SD-001 FROM JSON BOOLEAN 
+                          USING 'TRILLIAN' AND 'MARVIN'
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING 
+                      SD-001 FROM JSON BOOLEAN 
+                          USING SD-001-TRUTH AND SD-001-ALSO-TRUE
+                 ALSO
+                      SD-002 FROM BOOL USING '%%'
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING 
+                      SD-001 FROM JSON BOOLEAN 
+                          USING SD-001-TRUTH AND SD-001-ALSO-TRUE
+                 ALSO
+                      SD-002 FROM BOOL USING '%%' AND '##'
                ON EXCEPTION CALL 'CEE3ABD' END-CALL
                NOT ON EXCEPTION PERFORM 1000-para
            END-JSON

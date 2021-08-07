@@ -187,4 +187,7 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
  + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
 
+### Up To Date
+
+This should be current with the changes IBM published in their Enterprise COBOL documentation dated 2021-08-03.
 

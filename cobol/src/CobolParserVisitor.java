@@ -1402,6 +1402,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataDynamicLengthClause(CobolParser.DataDynamicLengthClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataExternalClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2338,6 +2344,36 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitJsonGenerateSuppressPhrase(CobolParser.JsonGenerateSuppressPhraseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonGenerateWhenPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonGenerateWhenPhrase(CobolParser.JsonGenerateWhenPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonGenerateFigurativeConstant}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonGenerateFigurativeConstant(CobolParser.JsonGenerateFigurativeConstantContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonGenerateGenericSupressionPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonGenerateGenericSupressionPhrase(CobolParser.JsonGenerateGenericSupressionPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonGeneratePhrase1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonGeneratePhrase1(CobolParser.JsonGeneratePhrase1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonGenerateConvertingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonGenerateConvertingPhrase(CobolParser.JsonGenerateConvertingPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#jsonGenerateEndJsonPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2367,6 +2403,24 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitJsonParseSuppressPhrase(CobolParser.JsonParseSuppressPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParsePhrase1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParsePhrase1(CobolParser.JsonParsePhrase1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseUsingPhrase1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseUsingPhrase1(CobolParser.JsonParseUsingPhrase1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#jsonParseConvertingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitJsonParseConvertingPhrase(CobolParser.JsonParseConvertingPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#jsonParseEndJsonPhrase}.
 	 * @param ctx the parse tree
