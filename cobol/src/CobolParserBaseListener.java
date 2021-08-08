@@ -2835,6 +2835,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDataGroupUsageClause(CobolParser.DataGroupUsageClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataGroupUsageClause(CobolParser.DataGroupUsageClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataIntegerStringClause(CobolParser.DataIntegerStringClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3142,6 +3154,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDataValueIntervalTo(CobolParser.DataValueIntervalToContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataVolatileClause(CobolParser.DataVolatileClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataVolatileClause(CobolParser.DataVolatileClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

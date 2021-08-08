@@ -2357,6 +2357,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitDataGlobalClause(CobolParser.DataGlobalClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataGroupUsageClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataGroupUsageClause(CobolParser.DataGroupUsageClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataGroupUsageClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataGroupUsageClause(CobolParser.DataGroupUsageClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataIntegerStringClause}.
 	 * @param ctx the parse tree
 	 */
@@ -2616,6 +2626,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDataValueIntervalTo(CobolParser.DataValueIntervalToContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataVolatileClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataVolatileClause(CobolParser.DataVolatileClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataVolatileClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataVolatileClause(CobolParser.DataVolatileClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataWithLowerBoundsClause}.
 	 * @param ctx the parse tree

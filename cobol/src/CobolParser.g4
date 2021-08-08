@@ -980,7 +980,7 @@ dataDescriptionEntry
    ;
 
 dataDescriptionEntryFormat1
-   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause)* (DOT_WS | DOT_FS | DOT)
+   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataGroupUsageClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause | dataVolatileClause)* (DOT_WS | DOT_FS | DOT)
    ;
 
 dataDescriptionEntryFormat2
@@ -1019,6 +1019,10 @@ dataGlobalClause
    : IS? GLOBAL
    ;
 
+dataGroupUsageClause
+   : GROUP_USAGE IS? (NATIONAL | UTF_8)
+   ;
+
 dataIntegerStringClause
    : INTEGER | STRING
    ;
@@ -1048,7 +1052,7 @@ dataOccursIndexed
    ;
 
 dataPictureClause
-   : (PICTURE | PIC) (IS | IS_PIC)? pictureString
+   : (PICTURE | PIC) (IS | IS_PIC)? pictureString (BYTE_LENGTH IS? INTEGERLITERAL)?
    ;
 
 pictureString
@@ -1131,6 +1135,10 @@ dataValueIntervalFrom
 
 dataValueIntervalTo
    : (THROUGH | THRU) literal | continuedLiteral
+   ;
+
+dataVolatileClause
+   : VOLATILE
    ;
 
 dataWithLowerBoundsClause
