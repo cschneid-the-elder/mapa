@@ -139,6 +139,7 @@ BOUNDS : B O U N D S;
 BOTTOM : B O T T O M;
 BY : B Y;
 BYFUNCTION : B Y F U N C T I O N;
+//BYTE_LENGTH : B Y T E '-' L E N G T H; //already defined as a intrinsic function
 BYTITLE : B Y T I T L E;
 CALL : C A L L;
 CANCEL : C A N C E L;
@@ -335,6 +336,7 @@ GO : G O;
 GREATER : G R E A T E R;
 GRID : G R I D;
 GROUP : G R O U P;
+GROUP_USAGE: G R O U P '-' U S A G E;
 HEADING : H E A D I N G;
 HIGHLIGHT : H I G H L I G H T;
 HIGH_VALUE : H I G H MINUSCHAR V A L U E;
@@ -648,6 +650,7 @@ VALIDATING : V A L I D A T I N G;
 VARBINARY : V A R B I N A R Y;
 VARYING : V A R Y I N G;
 VIRTUAL : V I R T U A L;
+VOLATILE : V O L A T I L E;
 WAIT : W A I T;
 WEBSERVICE : W E B S E R V I C E;
 WHEN : W H E N;
@@ -924,6 +927,7 @@ the third its initial value.
 */
 BINARY_PIC : B I N A R Y ->popMode;
 BLANK_PIC : B L A N K ->popMode;
+BYTE_LENGTH_PIC : BYTE_LENGTH ->type(BYTE_LENGTH),popMode;
 COLUMN_PIC : C O L U M N ->popMode;
 COMP_PIC : C O M P ->popMode;
 COMP_1_PIC : C O M P MINUSCHAR '1' ->popMode;
@@ -941,6 +945,7 @@ DISPLAY_PIC : D I S P L A Y ->popMode;
 DISPLAY_1_PIC : D I S P L A Y MINUSCHAR '1' ->popMode;
 DYNAMIC_PIC : DYNAMIC ->type(DYNAMIC),popMode;
 FUNCTION_POINTER_PIC : F U N C T I O N MINUSCHAR P O I N T E R ->popMode;
+GROUP_USAGE_PIC : GROUP_USAGE ->type(GROUP_USAGE),popMode;
 INDEX_PIC : I N D E X ->popMode;
 JUST_PIC : J U S T ->popMode;
 JUSTIFIED_PIC : J U S T I F I E D ->popMode;
@@ -957,6 +962,7 @@ SYNC_PIC : S Y N C ->popMode;
 SYNCHRONIZED_PIC : S Y N C H R O N I Z E D ->popMode;
 USAGE_PIC : U S A G E ->popMode;
 UTF_8_PIC : UTF_8 ->type(UTF_8),popMode;
+VOLATILE_PIC : VOLATILE ->type(VOLATILE),popMode;
 
 VALUE_PIC : V A L U E ->popMode;
 DOT_FS_PIC : DOT_FS ->type(DOT_FS),popMode;
