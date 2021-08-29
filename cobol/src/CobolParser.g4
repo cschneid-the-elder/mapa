@@ -3023,6 +3023,7 @@ cicsWord
    | ASSIGN
    | AT
    | ATTRIBUTES
+   | BEFORE
    | BINARY
    | CANCEL
    | CHAR
@@ -3048,6 +3049,7 @@ cicsWord
    | FOR
    | FREE
    | FROM
+   | GROUP
    | INPUT
    | INTO
    | INVOKE
@@ -3055,6 +3057,7 @@ cicsWord
    | LAST
    | LENGTH
    | LINE
+   | LOCK
    | METHOD
    | MESSAGE
    | MODE

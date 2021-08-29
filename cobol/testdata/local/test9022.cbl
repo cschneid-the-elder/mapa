@@ -1,7 +1,7 @@
        Identification Division.
        Program-ID.    test9022.
       *
-      * Test all the parameters of all the CICS commands.
+      * Test all the parameters of all the CICS API commands.
       * This code definitely won't compile cleanly, in part
       * due to mutually exclusive options on some commands.
       * It's just here to test parsing.
