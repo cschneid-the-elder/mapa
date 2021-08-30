@@ -618,6 +618,83 @@
                 COMPAT
            END-EXEC
 
+           EXEC CICS
+                DISABLE
+                PROGRAM(X)
+                ENTRYNAME(X)
+                EXIT(X)
+                EXITALL
+                FORMATEDF
+                PURGEABLE
+                SHUTDOWN
+                SPI
+                STOP
+                TASKSTART
+           END-EXEC
+
+           EXEC CICS
+                DISCARD
+                AUTINSTMODEL(X)
+           END-EXEC
+
+      *    The DISCARD API looks identical for the other 30 or so
+      *    definitions, all of which have been syntax-checked for
+      *    purposes of parsing in the preceding CREATE APIs.  So
+      *    I'm not coding them here.
+
+           EXEC CICS
+                ENABLE
+                PROGRAM('J8675309')
+                ENTRY(ptr-ref)
+                ENTRYNAME(data-value)
+                EXIT(data-value)
+                FORMATEDFGALENGTH(data-value)
+                GALOCATION(cvda)
+                GAENTRYNAME(data-value)
+                INDOUBTWAIT 
+                LINKEDITMODE
+                QUASIRENT
+                THREADSAFE
+                OPENAPI
+                REQUIRED
+                PURGEABLE
+                SHUTDOWN 
+                SPI
+                START
+                TALENGTH(data-value)
+                TASKSTART
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                EXIT
+                PROGRAM(X)
+                ENTRYNAME(X)
+                GALENGTH(X)
+                GASET(X)
+           END-EXEC
+
+           EXEC CICS
+                EXTRACT
+                STATISTICS
+                RESTYPE(CVDA)
+                RESID(X)
+                RESIDLEN(X)
+                SUBRESTYPE(CVDA)
+                SUBRESID(X)
+                SUBRESIDLEN(X)
+                APPLICATION(X)
+                APPLMAJORVER(X)
+                APPLMINORVER(X)
+                APPLMICROVER(X)
+                PLATFORM(X)
+                SET(WS-PTR)
+                LASTRESET(X)
+                LASTRESETABS(X)
+                LASTRESETHRS(X)
+                LASTRESETMIN(X)
+                LASTRESETSEC(X)
+           END-EXEC
 
 
 

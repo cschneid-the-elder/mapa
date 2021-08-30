@@ -3038,12 +3038,15 @@ cicsWord
    | DELETE
    | DELIMITER
    | DETAIL
+   | DISABLE
+   | ENABLE
    | END
    | ENTRY
    | EQUAL
    | ERASE
    | ERROR
    | EXCEPTION
+   | EXIT
    | EXTERNAL
    | FILE
    | FOR
@@ -3090,6 +3093,7 @@ cicsWord
    | SET
    | START
    | STATUS
+   | STOP
    | TERMINAL
    | TEST
    | TEXT
