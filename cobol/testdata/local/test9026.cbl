@@ -902,6 +902,301 @@
                 VARIABLENAME(data-area)
            END-EXEC
 
+           EXEC CICS
+                INQUIRE
+                CAPOPTPRED
+                CAPTURESPEC(data-value)
+                EVENTBINDING(data-value)
+                FILTERVALUE(data-area)
+                OPERATOR(cvda)
+                OPTIONNAME(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                CAPTURESPEC(data-area)
+                EVENTBINDING(data-value)
+                CAPTUREPOINT(data-area)
+                CAPTUREPTYPE(cvda)
+                CURRPGM(data-area)
+                CURRPGMOP(cvda)
+                CURRTRANID(data-area)
+                CURRTRANIDOP(cvda)
+                CURRUSERID(data-area)
+                CURRUSERIDOP(cvda)
+                EVENTNAME(data-area)
+                NUMDATAPRED(data-area)
+                NUMINFOSRCE(data-area)
+                NUMOPTPRED(data-area)
+                PRIMPRED(data-area)
+                PRIMPREDOP(cvda)
+                PRIMPREDTYPE(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                CONNECTION(data-value)
+                ACCESSMETHOD(cvda)
+                ACQSTATUS(cvda)
+                AIDCOUNT(data-area)
+                AUTOCONNECT(cvda)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CONNSTATUS(cvda)
+                CONNTYPE(cvda)
+                CQP(cvda)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                EXITTRACING(cvda)
+                GRNAME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                LINKSYSTEM(data-area)
+                MEMBERNAME(data-area)
+                NETNAME(data-area)
+                NQNAME(data-area)
+                PENDSTATUS(cvda)
+                PROTOCOL(cvda)
+                RECEIVECOUNT(data-area)
+                RECOVSTATUS(cvda)
+                REMOTENAME(data-area)
+                REMOTESYSNET(data-area)
+                REMOTESYSTEM(data-area)
+                SENDCOUNT(data-area)
+                SERVSTATUS(cvda)
+                XLNSTATUS(cvda)
+                ZCPTRACING(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                CFDTPOOL(data-value)
+                CONNSTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DB2CONN
+                ACCOUNTREC(cvda)
+                AUTHID(data-area)
+                AUTHTYPE(cvda)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                COMAUTHID(data-area)
+                COMAUTHTYPE(cvda)
+                COMTHREADLIM(data-area)
+                COMTHREADS(data-area)
+                CONNECTERROR(cvda)
+                CONNECTST(cvda)
+                DB2GROUPID(data-area)
+                DB2ID(data-area)
+                DB2RELEASE(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                DROLLBACK(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                MSGQUEUE1(data-area)
+                MSGQUEUE2(data-area)
+                MSGQUEUE3(data-area)
+                NONTERMREL(cvda)
+                PLAN(data-area)
+                PLANEXITNAME(data-area)
+                PRIORITY(cvda)
+                PURGECYCLEM(data-area)
+                PURGECYCLES(data-area)
+                RESYNCMEMBER(cvda)
+                REUSELIMIT(data-area)
+                SIGNID(data-area)
+                STANDBYMODE(cvda)
+                STATSQUEUE(data-area)
+                TCBLIMIT(data-area)
+                TCBS(data-area)
+                THREADERROR(cvda)
+                THREADLIMIT(data-area)
+                THREADS(data-area)
+                THREADWAIT(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DB2ENTRY(data-value)
+                ACCOUNTREC(cvda)
+                AUTHID(data-area)
+                AUTHTYPE(cvda)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                DISABLEDACT(cvda)
+                DROLLBACK(cvda)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                PLAN(data-area)
+                PLANEXITNAME(data-area)
+                PRIORITY(cvda)
+                PROTECTNUM(data-area)
+                PTHREADS(data-area)
+                THREADLIMIT(data-area)
+                THREADS(data-area)
+                THREADWAIT(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DB2TRAN(data-value)
+                DB2ENTRY(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                PLAN(data-area)
+                PLANEXITNAME(data-area)
+                TRANSID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DELETSHIPPED
+                IDLE(data-area)
+                IDLEHRS(data-area)
+                IDLEMINS(data-area)
+                IDLESECS(data-area)
+                INTERVAL(data-area)
+                INTERVALHRS(data-area)
+                INTERVALMINS(data-area)
+                INTERVALSECS(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DISPATCHER
+                ACTOPENTCBS(data-area)
+                ACTSSLTCBS(data-area)
+                ACTTHRDTCBS(data-area)
+                ACTXPTCBS(data-area)
+                MAXOPENTCBS(data-area)
+                MAXSSLTCBS(data-area)
+                MAXTHRDTCBS(data-area)
+                MAXXPTCBS(data-area)
+                MROBATCH(data-area)
+                PRTYAGING(data-area)
+                RUNAWAY(data-area)
+                SCANDELAY(data-area)
+                SUBTASKS(data-area)
+                TIME(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DOCTEMPLATE(data-value)
+                APPENDCRLF(cvda)
+                CACHESIZE(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DDNAME(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                DSNAME(data-area)
+                EXITPGM(data-area)
+                FILE(data-area)
+                HFSFILE(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                MEMBER(data-area)
+                PROGRAM(data-area)
+                TDQUEUE(data-area)
+                TEMPLATENAME(data-area)
+                TEMPLATETYPE(cvda)
+                TSQUEUE(data-area)
+                TYPE(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                DSNAME(data-value)
+                ACCESSMETHOD(cvda)
+                AVAILABILITY(cvda)
+                BACKUPTYPE(cvda)
+                BASEDSNAME(data-area)
+                FILECOUNT(data-area)
+                FWDRECOVLOG(data-area)
+                FWDRECOVLSN(data-area)
+                OBJECT(cvda)
+                LOGREPSTATUS(cvda)
+                LOSTLOCKS(cvda)
+                QUIESCESTATE(cvda)
+                RECOVSTATUS(cvda)
+                RETLOCKS(cvda)
+                VALIDITY(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                DUMPDS
+                CURRENTDDS(data-area)
+                INITIALDDS(data-area)
+                OPENSTATUS(cvda)
+                SWITCHSTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                ENQ
+                ENQSCOPE(data-value)
+                RESOURCE(data-value)
+                RESLEN(data-value)
+                UOW(data-value)
+                DURATION(data-area)
+                ENQFAILS(data-area)
+                NETUOWID(data-area)
+                QUALIFIER(data-area)
+                QUALLEN(data-area)
+                RELATION(cvda)
+                RESLEN(data-area)
+                RESOURCE(data-area)
+                STATE(cvda)
+                TASKID(data-area)
+                TRANSID(data-area)
+                TYPE(cvda)
+                UOW(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                ENQMODEL(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENQSCOPE(data-area)
+                ENQNAME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                STATUS(cvda)
+           END-EXEC
+
 
 
 
