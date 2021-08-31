@@ -6,6 +6,8 @@
       * due to mutually exclusive options on some commands.
       * It's just here to test parsing.
       *
+      * Current as of CICS TS 5.6
+      *
        Procedure Division.
 
            EXEC CICS
@@ -695,6 +697,213 @@
                 LASTRESETMIN(X)
                 LASTRESETSEC(X)
            END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                ASSOCIATION(X)
+                ACAPPLNAME(data-area)
+                ACMAJORVER(data-area)
+                ACMICROVER(data-area)
+                ACMINORVER(data-area)
+                ACOPERNAME(data-area)
+                ACPLATNAME(data-area)
+                APPLDATA(data-area)
+                APPLID(data-area)
+                CLIENTIPADDR(data-area)
+                CLIENTLOC(data-area)
+                CLIENTPORT(data-area)
+                CLNTIPFAMILY(cvda)
+                DNAME(data-area)
+                FACILNAME(data-area)
+                FACILTYPE(cvda)
+                INITUSERID(data-area)
+                IPCONN(data-area)
+                IPFAMILY(cvda)
+                LUNAME(data-area)
+                MVSIMAGE(data-area)
+                NETID(data-area)
+                ODADPTRID(data-area)
+                ODADPTRDATA1(data-area)
+                ODADPTRDATA2(data-area)
+                ODADPTRDATA3(data-area)
+                ODAPPLID(data-area)
+                ODCLNTIPADDR(data-area)
+                ODCLNTPORT(data-area)
+                ODFACILNAME(data-area)
+                ODFACILTYPE(cvda)
+                ODIPFAMILY(cvda)
+                ODLUNAME(data-area)
+                ODNETID(data-area)
+                ODNETWORKID(data-area)
+                ODSERVERPORT(data-area)
+                ODSTARTTIME(data-area)
+                ODTASKID(data-area)
+                ODTCPIPS(data-area)
+                ODTRANSID(data-area)
+                ODUSERID(data-area)
+                PHAPPLID(data-area)
+                PHCOUNT(data-area)
+                PHNETWORKID(data-area)
+                PHSTARTTIME(data-area)
+                PHTASKID(data-area)
+                PHTRANSID(data-area)
+                PROGRAM(data-area)
+                PTCOUNT(data-area)
+                PTSTARTTIME(data-area)
+                PTTASKID(data-area)
+                PTTRANSID(data-area)
+                REALM(data-area)
+                SERVERIPADDR(data-area)
+                SERVERPORT(data-area)
+                SRVRIPFAMILY(cvda)
+                STARTTIME(data-area)
+                TCPIPJOB(data-area)
+                TCPIPSERVICE(data-area)
+                TCPIPZONE(data-area)
+                TRNGRPID(data-area)
+                TRANSACTION(data-area)
+                USERCORRDATA(data-area)
+                USERID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                ASSOCIATION 
+                LIST 
+                LISTSIZE(data-area)
+                DNAME(data-value)
+                DNAMELEN(data-value)
+                REALM(data-value)
+                REALMLEN(data-value)
+                SET(ptr-ref)
+                USERCORRDATA(data-value)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                ATOMSERVICE(data-value)
+                ATOMTYPE(cvda)
+                BINDFILE(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CONFIGFILE(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                RESOURCENAME(data-area)
+                RESOURCETYPE(cvda)
+                URIMAP(data-area)
+                XMLTRANSFORM(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                AUTINSTMODEL(data-value)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                AUTOINSTALL 
+                AIBRIDGE(cvda)
+                CONSOLES(cvda)
+                CURREQS(data-area)
+                ENABLESTATUS(cvda)
+                MAXREQS(data-area)
+                PROGRAM(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                BRFACILITY(data-value)
+                KEEPTIME(data-area)
+                LINKSYSTEM(data-area)
+                LINKSYSNET(data-area)
+                NAMESPACE(cvda)
+                NETNAME(data-area)
+                REMOTESYSNET(data-area)
+                REMOTESYSTEM(data-area)
+                TASKID(data-area)
+                TERMID(data-area)
+                TERMSTATUS(cvda)
+                TRANSACTION(data-area)
+                USERID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                BUNDLE(data-value)
+                AVAILSTATUS(cvda)
+                BASESCOPE(data-area)
+                BUNDLEDIR(data-area)
+                BUNDLEID(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLEDCOUNT(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                MAJORVERSION(data-value)
+                MGMTPART(data-value)
+                MICROVERSION(data-value)
+                MINORVERSION(data-value)
+                PARTCOUNT(data-area)
+                TARGETCOUNT(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE 
+                BUNDLEPART(data-area)
+                BUNDLE(data-value)
+                AVAILSTATUS(cvda)
+                ENABLESTATUS(cvda)
+                METADATAFILE(data-area)
+                PARTCLASS(cvda)
+                PARTTYPE(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                CAPDATAPRED
+                CAPTURESPEC(data-value)
+                EVENTBINDING(data-value)
+                CONTAINER(data-area)
+                FIELDLENGTH(data-area)
+                FIELDOFFSET(data-area)
+                FILENAME(data-area)
+                FILTERVALUE(data-area)
+                LOCATION(data-area)
+                OPERATOR(cvda)
+                STRUCTNAME(data-area)
+                VARIABLENAME(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                CAPINFOSRCE
+                CAPTURESPEC(data-value)
+                EVENTBINDING(data-value)
+                CONTAINER(data-area)
+                FIELDLENGTH(data-area)
+                FIELDOFFSET(data-area)
+                FILENAME(data-area)
+                ITEMNAME(data-area)
+                LOCATION(data-area)
+                STRUCTNAME(data-area)
+                VARIABLENAME(data-area)
+           END-EXEC
+
+
+
 
 
 

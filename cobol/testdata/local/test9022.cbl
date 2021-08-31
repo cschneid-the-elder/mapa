@@ -6,6 +6,8 @@
       * due to mutually exclusive options on some commands.
       * It's just here to test parsing.
       *
+      * Current as of CICS TS 5.6
+      *
        Procedure Division.
 
            EXEC CICS

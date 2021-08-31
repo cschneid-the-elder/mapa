@@ -3066,6 +3066,7 @@ cicsWord
    | MODE
    | MOVE
    | NAME
+   | NAMESPACE
    | NEXT
    | ON
    | OPEN
