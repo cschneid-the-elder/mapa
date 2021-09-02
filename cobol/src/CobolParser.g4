@@ -3095,6 +3095,7 @@ cicsWord
    | START
    | STATUS
    | STOP
+   | TABLE
    | TERMINAL
    | TEST
    | TEXT

@@ -1197,6 +1197,172 @@
                 STATUS(cvda)
            END-EXEC
 
+           EXEC CICS
+                INQUIRE
+                EPADAPTER(data-value)
+                ADAPTERTYPE(cvda)
+                AUTHORITY(cvda)
+                AUTHUSERID(data-area)
+                CONFIGDATA1(data-area)
+                DATAFORMAT(cvda)
+                EMITMODE(cvda)
+                ENABLESTATUS(cvda)
+                INVOKETYPE(cvda)
+                PRIORITY(cvda)
+                PROGRAM(data-area)
+                TRANSACTION(data-area)
+                TRANSMODE(cvda)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EPADAPTERSET(data-area)
+                ENABLESTATUS(cvda)
+                EPADAPTERNUM(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EPADAPTINSET
+                EPADAPTERSET(data-value)
+                EPADAPTER(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EVENTBINDING(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                EPADAPTER(data-area)
+                EPADAPTERRES(cvda)
+                EPADAPTERSET(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                USERTAG(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EVENTPROCESSEPSTATUS(cvda)
+                SCHEMALEVEL(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EXCI(data-value)
+                TASK(data-value)
+                URID(data-value)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                EXITPROGRAM(data-value)
+                EXIT(data-value)
+                ENTRYNAME(data-area)
+                APIST(cvda)
+                CONCURRENTST(cvda)
+                CONNECTST(cvda)
+                ENTRY(ptr-ref)
+                FORMATEDFST(cvda)
+                GAENTRYNAME(data-area)
+                GALENGTH(data-area)
+                GAUSECOUNT(data-area)
+                INDOUBTST(cvda)
+                NUMEXITS(data-area)
+                PURGEABLEST(cvda)
+                QUALIFIER(data-area)
+                SHUTDOWNST(cvda)
+                SPIST(cvda)
+                STARTSTATUS(cvda)
+                TALENGTH(data-area)
+                TASKSTARTST(cvda)
+                USECOUNT(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                FEATUREKEY(data-value)
+                VALUE(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                FILE(data-value)
+                ACCESSMETHOD(cvda)
+                ADD(cvda)
+                BASEDSNAME(data-area)
+                BLOCKFORMAT(cvda)
+                BLOCKKEYLEN(data-area)
+                BLOCKSIZE(data-area)
+                BROWSE(cvda)
+                CFDTPOOL(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                DELETE(cvda)
+                DISPOSITION(cvda)
+                DSNAME(data-area)
+                EMPTYSTATUS(cvda)
+                ENABLESTATUS(cvda)
+                EXCLUSIVE(cvda)
+                FWDRECSTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                JOURNALNUM(data-area)
+                KEYLENGTH(data-area)
+                KEYPOSITION(data-area)
+                LOADTYPE(cvda)
+                LSRPOOLNUM(data-area)
+                MAXNUMRECS(data-area)
+                OBJECT(cvda)
+                OPENSTATUS(cvda)
+                RBATYPE(cvda)
+                READ(cvda)
+                READINTEG(cvda)
+                RECORDFORMAT(cvda)
+                RECORDSIZE(data-area)
+                RECOVSTATUS(cvda)
+                RELTYPE(cvda)
+                REMOTENAME(data-area)
+                REMOTESYSTEM(data-area)
+                REMOTETABLE(cvda)
+                RLSACCESS(cvda)
+                STRINGS(data-area)
+                TABLE(cvda)
+                TABLENAME(data-area)
+                TYPE(cvda)
+                UPDATE(cvda)
+                UPDATEMODEL(cvda)
+           END-EXEC
+
 
 
 
