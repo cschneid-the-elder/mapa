@@ -1363,6 +1363,416 @@
                 UPDATEMODEL(cvda)
            END-EXEC
 
+           EXEC CICS
+                INQUIRE
+                HOST(data-area)
+                ENABLESTATUS(cvda)
+                TCPIPSERVICE(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                IPCONN(cvda)
+                APPLID(data-area)
+                AUTOCONNECT(cvda)
+                CERTIFICATE(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CIPHERS(data-area)
+                CLIENTLOC(data-area)
+                CONNSTATUS(cvda)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                HA(cvda)
+                HOST(data-area)
+                HOSTTYPE(cvda)
+                IDPROP(cvda)
+                IPFAMILY(cvda)
+                IPRESOLVED(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                LINKAUTH(cvda)
+                MAXQTIME(data-area)
+                MIRRORLIFE(cvda)
+                NETWORKID(data-area)
+                NUMCIPHERS(data-area)
+                PARTNER(data-area)
+                PENDSTATUS(cvda)
+                PORT(data-area)
+                QUEUELIMIT(data-area)
+                RECEIVECOUNT(data-area)
+                RECOVSTATUS(cvda)
+                SECURITYNAME(data-area)
+                SENDCOUNT(data-area)
+                SERVSTATUS(cvda)
+                SSLTYPE(cvda)
+                TCPIPSERVICE(data-area)
+                USERAUTH(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                IPFACILITY(data-value)
+                IPCONN(data-area)
+                IPFACILTYPE(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                IRCOPENSTATUS(cvda)
+                XCFGROUP(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                JOURNALMODEL(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                JOURNALNAME(data-area)
+                STREAMNAME(data-area)
+                TYPE(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                JOURNALNAME(data-value)
+                STATUS(cvda)
+                STREAMNAME(data-area)
+                TYPE(cvda)
+           END-EXEC
+
+           EXEC CICS
+      *    
+      *    Documentation indicates INQUIRE JOURNALNUM is obsolete
+      *    so I'm just checking to ensure compatibility with old code.
+      *    
+                INQUIRE
+                JOURNALNUM(data-value)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                JVMENDPOINT(data-value)
+                JVMSERVER(data-value)
+                ENABLESTATUS(cvda)
+                TYPE(data-area)
+                PORT(data-area)
+                SECPORT(data-area)
+                HOST(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                JVMSERVER(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CURRENTHEAP(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                GCPOLICY(data-area)
+                INITHEAP(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                JAVAHOME(data-area)
+                JVMPROFILE(data-area)
+                LERUNOPTS(data-area)
+                LOG(data-area)
+                MAXHEAP(data-area)
+                OCCUPANCY(data-area)
+                PID(data-area)
+                PROFILE(data-area)
+                PROFILEDIR(data-area)
+                STDERR(data-area)
+                STDOUT(data-area)
+                THREADCOUNT(data-area)
+                THREADLIMIT(data-area)
+                TRACE(data-area)
+                WORKDIR(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                LIBRARY(data-value)
+                APPLICATION(data-area)
+                APPLMAJORVER(data-area)
+                APPLMINORVER(data-area)
+                APPLMICROVER(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CRITICALST(cvda)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                DSNAMELIST(ptr-ref)
+                DSNAME01(data-area)
+                DSNAME02(data-area)
+                DSNAME03(data-area)
+                DSNAME04(data-area)
+                DSNAME05(data-area)
+                DSNAME06(data-area)
+                DSNAME07(data-area)
+                DSNAME08(data-area)
+                DSNAME09(data-area)
+                DSNAME10(data-area)
+                DSNAME11(data-area)
+                DSNAME12(data-area)
+                DSNAME13(data-area)
+                DSNAME14(data-area)
+                DSNAME15(data-area)
+                DSNAME16(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLUSRID(data-area)
+                INSTALLTIME(data-area)
+                NUMDSNAMES(data-area)
+                PLATFORM(data-area)
+                RANKING(data-area)
+                SEARCHPOS(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                MODENAME(data-value)
+                CONNECTION(data-value)
+                ACTIVE(data-area)
+                AUTOCONNECT(cvda)
+                AVAILABLE(data-area)
+                MAXIMUM(data-area)
+                MAXWINNERS(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                MONITOR
+                APPLNAMEST(cvda)
+                COMPRESSST(cvda)
+                CONVERSEST(cvda)
+                DPLLIMIT(data-area)
+                EXCEPTCLASS(cvda)
+                FILELIMIT(data-area)
+                FREQUENCY(data-area)
+                IDNTYCLASS(cvda)
+                PERFCLASS(cvda)
+                RESRCECLASS(cvda)
+                RMIST(cvda)
+                STATUS(cvda)
+                SYNCPOINTST(cvda)
+                TIME(cvda)
+                TSQUEUELIMIT(data-area)
+                URIMAPLIMIT(data-area)
+                WEBSERVLIMIT(data-area)
+                FREQUENCYHRS(data-area)
+                FREQUENCYMINS(data-area)
+                FREQUENCYSECS(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                MQCONN
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CONNECTST(cvda)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                MQNAME(data-area)
+                MQQMGR(data-area)
+                MQRELEASE(data-area)
+                RESYNCMEMBER(cvda)
+                TASKS(data-area)
+                TRIGMONTASKS(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                MQINI(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INITQNAME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                MQMONITOR( data-value)
+                AUTOSTART(cvda)
+                CHANGEAGENT(cvda)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                MONDATA(data-area)
+                MONSTATUS(cvda)
+                MONUSERID(data-area)
+                QNAME(data-area)
+                TASKID(data-area)
+                TRANSACTION(data-area)
+                USERID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                MVSTCB(ptr-ref)
+                SET(ptr-ref)
+                NUMELEMENTS(data-area)
+      *    
+      *    Documentation indicates ELEMENTLIST, LENGTHLIST, and
+      *    SUBPOOLLIST are obsolete
+      *    so I'm just checking to ensure compatibility with old code.
+      *    
+                ELEMENTLIST(ptr-ref)
+                LENGTHLIST(ptr-ref)
+                SUBPOOLLIST(ptr-ref)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                NETNAME(data-value)
+                TERMINAL(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                NODEJSAPP(data-value)
+                BUNDLE(data-area)
+                CHANGEAGENT(cvda)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                LERUNOPTS(data-area)
+                LOG(data-area)
+                NODEHOME(data-area)
+                PID(data-area)
+                PROFILE(data-area)
+                STARTSCRIPT(data-area)
+                STDERR(data-area)
+                STDOUT(data-area)
+                TRACE(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                OSGIBUNDLE(data-value)
+                OSGIVERSION(data-value)
+                JVMSERVER(data-value)
+                BUNDLE(data-area)
+                BUNDLEPART(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                OSGIBUNDLEID(data-area)
+                OSGISTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                OSGISERVICE(data-value)
+                JVMSERVER(data-value)
+                BUNDLE(data-area)
+                BUNDLEPART(data-area)
+                OSGIBUNDLE(data-area)
+                OSGIVERSION(data-area)
+                SRVCNAME(data-area)
+                SRVCSTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                PARTNER(data-value)
+                NETWORK(data-area)
+                NETNAME(data-area)
+                PROFILE(data-area)
+                TPNAME(data-area)
+                TPNAMELEN(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                PIPELINE(data-value)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                CIDDOMAIN(data-area)
+                CONFIGFILE(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                MODE(cvda)
+                MSGFORMAT(data-area)
+                MTOMNOXOPST(cvda)
+                MTOMST(cvda)
+                RESPWAIT(data-area)
+                SENDMTOMST(cvda)
+                SHELF(data-area)
+                SOAPLEVEL(data-area)
+                SOAPRNUM(data-area)
+                SOAPVNUM(data-area)
+                WSDIR(data-area)
+                XOPDIRECTST(cvda)
+                XOPSUPPORTST(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                PROCESSTYPE(data-value )
+                AUDITLOG(data-area)
+                AUDITLEVEL(cvda)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                FILE(data-area)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                STATUS(cvda)
+           END-EXEC
 
 
 
