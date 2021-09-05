@@ -3039,6 +3039,7 @@ cicsWord
    | DELIMITER
    | DETAIL
    | DISABLE
+   | ELEMENT
    | ENABLE
    | END
    | ENTRY
@@ -3081,6 +3082,7 @@ cicsWord
    | READ
    | RECEIVE
    | RECORD
+   | RECORDING
    | RELEASE
    | REPLACE
    | RESET
