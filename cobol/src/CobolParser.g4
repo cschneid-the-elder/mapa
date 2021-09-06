@@ -3094,6 +3094,7 @@ cicsWord
    | SEND
    | SERVICE
    | SET
+   | STANDARD
    | START
    | STATUS
    | STOP
@@ -3106,6 +3107,7 @@ cicsWord
    | TO
    | TYPE
    | UNTIL
+   | USAGE
    | USING
    | VALUE
    | WAIT
