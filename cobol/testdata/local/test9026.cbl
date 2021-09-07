@@ -2695,6 +2695,382 @@
                 XSDBIND(data-area)
            END-EXEC
 
+           EXEC CICS PERFORM DELETSHIPPED END-EXEC
+
+           EXEC CICS
+                PERFORM
+                DUMP
+                DUMPCODE(data-value)
+                TITLE(data-area)
+                TITLELENGTH(data-value)
+                CALLER(data-value)
+                CALLERLENGTH(data-value)
+                DUMPID(data-area)
+           END-EXEC
+
+           EXEC CICS
+                PERFORM
+                ENDAFFINITY
+                NETNAME(data-value)
+                NETID(data-value)
+           END-EXEC
+
+           EXEC CICS
+                PERFORM
+                JVMSERVER(data-area)
+                JVMTYPE(cvda)
+                JVMJVMACTION(cvda)
+                DUMPDUMPTYPE(cvda)
+                ALL
+                JAVACORE
+                HEAP
+                SNAPTRACE
+                GATHER
+                GATHERTYPE(cvda)
+                DIAGNOSTICS
+                LIBERTY
+                LIBRTYACTION(cvda)
+                REFRESH
+                RESOURCETYPE(cvda)
+                APPLICATION
+                APPID(data-area)
+                APPIDLEN(data-area)
+                CONFIG
+                SERVERDUMP
+                OSGI
+                OSGIACTION(cvda)
+                REFRESHPKGS
+           END-EXEC
+
+           EXEC CICS
+                PERFORM 
+                PIPELINE(data-value)
+                ACTION(cvda)
+                SCAN
+           END-EXEC
+
+           EXEC CICS PERFORM RESETTIME END-EXEC
+
+           EXEC CICS PERFORM SECURITY REBUILD ESMRESP(data-area)
+           END-EXEC
+
+           EXEC CICS
+                PERFORM
+                SHUTDOWN
+                PLT(data-value)
+                PLTNAME(data-value)
+                RESTART
+                SDTRAN(data-value)
+                NOSDTRAN
+                XLT(data-value)
+                DUMP
+                IMMEDIATE
+                TAKEOVER
+           END-EXEC
+
+           EXEC CICS PERFORM SSL REBUILD GSKRESP(data-area) END-EXEC
+
+           EXEC CICS
+                PERFORM
+                STATISTICS
+                RECORD
+                ALL
+                RESETNOW
+                ASYNCSERVICE
+                ATOMSERVICE
+                AUTOINSTALL
+                BUNDLE
+                CAPTURESPEC
+                CONNECTION
+                DB2
+                DISPATCHER
+                DOCTEMPLATE
+                ENQUEUE
+                EPADAPTER
+                EVENTBINDING
+                EVENTPROCESS
+                FEPI
+                FILE
+                IPCONN
+                JOURNALNAME
+                JOURNALNUM
+                JVMPROGRAM
+                JVMSERVER
+                LIBRARY
+                LSRPOOL
+                MONITOR
+                MQCONN
+                MQMONITOR
+                NODEJSAPP
+                PIPELINE
+                POLICY
+                PROGAUTO
+                PROGRAM
+                PROGRAMDEF
+                RECOVERY
+                SECURITY
+                STATS
+                STORAGE
+                STREAMNAME
+                SYSDUMP
+                TABLEMGR
+                TCPIP
+                TCPIPSERVICE
+                TDQUEUE
+                TERMINAL
+                TRANCLASS
+                TCLASS
+                TRANDUMP
+                TRANSACTION
+                TSQUEUE
+                URIMAP
+                USER
+                VTAM
+                WEBSERVICE
+                XMLTRANSFORM
+           END-EXEC
+
+           EXEC CICS
+                RESYNC
+                ENTRYNAME(data-value)
+                QUALIFIER(data-value)
+                IDLIST(data-value)
+                IDLISTLENGTH(data-value)
+                PARTIAL
+           END-EXEC
+
+      *
+      *    There are numerous SET SPI commands which do not appear
+      *    to introduce any new keywords beyond their corresponding
+      *    CREATE SPI command.  These are elided for brevity.
+      *
+
+           EXEC CICS
+                SET
+                AUTOINSTALL
+                AIBRIDGE(cvda)
+                CONSOLES(cvda)
+                MAXREQS(data-value)
+                PROGRAM(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET
+                BRFACILITY(data-value)
+                TERMSTATUS(cvda)
+                RELEASED
+           END-EXEC
+
+           EXEC CICS
+                SET
+                DELETSHIPPED
+                IDLE(data-value)
+                IDLEHRS(data-value)
+                IDLEMINS(data-value)
+                IDLESECS(data-value)
+                INTERVAL(data-value)
+                INTERVALHRS(data-value)
+                INTERVALMINS(data-value)
+                INTERVALSECS(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET
+                DISPATCHER
+                MAXOPENTCBS(data-value)
+                MAXSSLTCBS(data-value)
+                MAXXPTCBS(data-value)
+                MROBATCH(data-value)
+                PRTYAGING(data-value)
+                RUNAWAY(data-value)
+                SCANDELAY(data-value)
+                TIME(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET
+                DSNAME( data-value)
+                ACTION(cvda)
+                REMOVE
+                RECOVERED
+                RESETLOCKS
+                RETRY
+                AVAILABILITY(cvda)
+                AVAILABLE
+                RREPL
+                UNAVAILABLE
+                QUESCESTATE(cvda)
+                QUIESCED
+                IMMQUIESCED
+                UNQUIESCED
+                WAIT
+                BUSY(cvda)
+                NOWAIT
+                UOWACTION(cvda)
+                BACKOUT
+                COMMIT
+                FORCE
+           END-EXEC
+
+           EXEC CICS
+                SET
+                DUMPDS
+                INITIALDDS(data-value)
+                OPENSTATUS(cvda)
+                CLOSED
+                OPEN
+                SWITCH
+                SWITCHSTATUS(cvda)
+                NOSWITCH
+                SWITCHNEXT
+                SWITCHALL
+           END-EXEC
+
+           EXEC CICS
+                SET
+                EPADAPTER(data-value)
+                ENABLESTATUS(cvda)
+                ENABLED
+                DISABLED
+           END-EXEC
+
+           EXEC CICS
+                SET
+                EPADAPTERSET(data-value)
+                ENABLESTATUS(cvda)
+                ENABLED
+                DISABLED
+           END-EXEC
+
+           EXEC CICS
+                SET
+                EVENTBINDING(data-value)
+                ENABLESTATUS(cvda)
+                ENABLED
+                DISABLED
+           END-EXEC
+
+           EXEC CICS
+                SET
+                EVENTPROCESS
+                EPSTATUS(cvda)
+                STARTED
+                DRAIN
+                STOPPED
+           END-EXEC
+
+           EXEC CICS SET HOST(data-area) ENABLESTATUS(cvda) END-EXEC
+
+           EXEC CICS
+                SET
+                IRC
+                OPENSTATUS(cvda)
+                CLOSED
+                IMMCLOSE
+                OPEN
+           END-EXEC
+
+           EXEC CICS
+                SET
+                JOURNALNAME(data-value)
+                ACTION(cvda)
+                FLUSH
+                RESET
+                STATUS(cvda)
+                DISABLED
+                ENABLED
+           END-EXEC
+
+           EXEC CICS
+                SET
+                SYSTEM
+                AKP(data-value)
+                DEBUGTOOL(cvda)
+                DEBUG
+                NODEBUG
+                DSALIMIT(data-value)
+                DSRTPROGRAM(data-value)
+                DTRPROGRAM(data-value)
+                DUMPING(cvda)
+                NOSYSDUMP
+                TABLEONLY
+                SYSDUMP
+                EDSALIMIT(data-value)
+                FORCEQR(cvda)
+                FORCE
+                NOFORCE
+                GMMTEXT(data-value)
+                GMMLENGTH(data-value)
+                LOGDEFER(data-area)
+                MAXTASKS(data-value)
+                NEWMAXTASKS(data-area)
+                MROBATCH(data-value)
+                PROGAUTOCTLG(cvda)
+                CTLGALL
+                CTLGMODIFY
+                CTLGNONE
+                PROGAUTOEXIT(data-value)
+                PROGAUTOINST(cvda)
+                AUTOACTIVE
+                AUTOINACTIVE
+                PRTYAGING(data-value)
+                RUNAWAY(data-value)
+                SCANDELAY(data-value)
+                TIME(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TASK (data-value)
+                PRIORITY(data-value)
+                PURGETYPE(cvda)
+                FORCEPURGE
+                KILL
+                PURGE
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TCPIP 
+                MAXSOCKETS(data-value)
+                NEWMAXSOCKET(data-area)
+                OPENSTATUS(data-value)
+                CLOSED
+                IMMCLOSE
+                OPEN
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TCPIPSERVICE(data-value)
+                BACKLOG(data-area)
+                MAXDATALEN(data-area)
+                OPENSTATUS(cvda)
+                CLOSED
+                IMMCLOSE
+                OPEN
+                URM(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TDQUEUE(data-value)
+                ATIFACILITY(cvda)
+                NOTERMINAL
+                TERMINAL
+                ATITERMID(data-value)
+                ATITRANID(data-value)
+                ATIUSERID(data-value)
+                ENABLESTATUS(cvda)
+                DISABLED
+                ENABLED
+                OPENSTATUS(cvda)
+                CLOSED
+                OPEN
+                TRIGGERLEVEL(data-value)
+           END-EXEC
+
+
 
 
 

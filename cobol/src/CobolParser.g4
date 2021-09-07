@@ -3076,6 +3076,7 @@ cicsWord
    | OUTPUT
    | OVERFLOW
    | PAGE
+   | PERFORM
    | PROCESS
    | PURGE
    | QUEUE
