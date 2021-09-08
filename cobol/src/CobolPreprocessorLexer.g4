@@ -121,6 +121,7 @@ EVENP : E V E N P;
 EVENPACK : E V E N P A C K;
 EXCI : E X C I;
 EXEC : E X E C;
+EXEC_CICS : E X E C [ ]+ C I C S ->pushMode(EXEC_CICS_MODE);
 EXEC_SQL : E X E C [ ]+ S Q L ->pushMode(EXEC_SQL_MODE);
 EXIT : E X I T;
 EXP : E X P;
@@ -654,4 +655,10 @@ mode EXEC_SQL_MODE;
 ES_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
 SQL_TEXT : (.+?);
+
+mode EXEC_CICS_MODE;
+
+EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
+
+CICS_TEXT : (.+?);
 

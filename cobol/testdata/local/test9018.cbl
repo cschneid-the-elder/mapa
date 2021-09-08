@@ -1,5 +1,12 @@
        Identification Division.
        Program-ID.    test9018.
+      *
+      * Test all the parameters of all the CICS CVDA values.
+      * This code definitely won't compile cleanly.
+      * It's just here to test parsing.
+      *
+      * Current as of CICS TS 5.6
+      *
        Procedure Division.
            MOVE DFHVALUE(ABEND) TO WS-VAL
            MOVE DFHVALUE(ACQFAIL) TO WS-VAL

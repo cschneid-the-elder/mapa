@@ -311,7 +311,7 @@ classicCommentEntry
 // exec cics statement
 
 execCicsStatement
-   : EXEC CICS (charData | classicCommentEntry | PROCESS | COPY | REPLACE)+ END_EXEC DOT?
+   : EXEC_CICS (CICS_TEXT+ | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // exec sql statement

@@ -3023,6 +3023,7 @@ cicsWord
    | ASSIGN
    | AT
    | ATTRIBUTES
+   | BEFORE
    | BINARY
    | CANCEL
    | CHAR
@@ -3037,17 +3038,22 @@ cicsWord
    | DELETE
    | DELIMITER
    | DETAIL
+   | DISABLE
+   | ELEMENT
+   | ENABLE
    | END
    | ENTRY
    | EQUAL
    | ERASE
    | ERROR
    | EXCEPTION
+   | EXIT
    | EXTERNAL
    | FILE
    | FOR
    | FREE
    | FROM
+   | GROUP
    | INPUT
    | INTO
    | INVOKE
@@ -3055,11 +3061,13 @@ cicsWord
    | LAST
    | LENGTH
    | LINE
+   | LOCK
    | METHOD
    | MESSAGE
    | MODE
    | MOVE
    | NAME
+   | NAMESPACE
    | NEXT
    | ON
    | OPEN
@@ -3068,12 +3076,14 @@ cicsWord
    | OUTPUT
    | OVERFLOW
    | PAGE
+   | PERFORM
    | PROCESS
    | PURGE
    | QUEUE
    | READ
    | RECEIVE
    | RECORD
+   | RECORDING
    | RELEASE
    | REPLACE
    | RESET
@@ -3085,8 +3095,11 @@ cicsWord
    | SEND
    | SERVICE
    | SET
+   | STANDARD
    | START
    | STATUS
+   | STOP
+   | TABLE
    | TERMINAL
    | TEST
    | TEXT
@@ -3095,6 +3108,7 @@ cicsWord
    | TO
    | TYPE
    | UNTIL
+   | USAGE
    | USING
    | VALUE
    | WAIT
