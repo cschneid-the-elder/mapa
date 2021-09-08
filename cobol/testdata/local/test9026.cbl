@@ -3070,8 +3070,266 @@
                 TRIGGERLEVEL(data-value)
            END-EXEC
 
+           EXEC CICS SET TEMPSTORAGE TSMAINLIMIT(data-value) END-EXEC
 
+           EXEC CICS
+                SET
+                TERMINAL(data-value)
+                ACQSTATUS(cvda)
+                TERMSTATUS(cvda)
+                ACQUIRED
+                COLDACQ
+                RELEASED
+                ALTPRINTER(data-value)
+                ALTPRTCOPYST(cvda)
+                ALTPRTCOPY
+                NOALTPRTCOPY
+                ATISTATUS(cvda)
+                ATI
+                NOATI
+                CREATESESS(cvda)
+                CREATE
+                NOCREATE
+                DISCREQST(cvda)
+                DISCREQ
+                NODISCREQ
+                EXITTRACING(cvda)
+                EXITTRACE
+                NOEXITTRACE
+                MAPNAME(data-value)
+                MAPSETNAME(data-value)
+                NEXTTRANSID(data-value)
+                OBFORMATST(cvda)
+                OBFORMAT
+                NOOBFORMAT
+                OPERID(data-value)
+                PAGESTATUS(cvda)
+                AUTOPAGEABLE
+                PAGEABLE
+                PRINTER(data-value)
+                PRTCOPYST(cvda)
+                PRTCOPY
+                NOPRTCOPY
+                PURGETYPE(cvda)
+                FORCEPURGE
+                KILL
+                PURGE
+                FORCE
+                CANCEL
+                RELREQST(cvda)
+                RELREQ
+                NORELREQ
+                SERVSTATUS(cvda)
+                INSERVICE
+                OUTSERVICE
+                TCAMCONTROL(data-value)
+                TERMPRIORITY(data-value)
+                TRACING(cvda)
+                SPECTRACE
+                STANTRACE
+                TTISTATUS(cvda)
+                NOTTI
+                TTI
+                UCTRANST(cvda)
+                UCTRAN
+                NOUCTRAN
+                TRANIDONLY
+                ZCPTRACING(cvda)
+                NOZCPTRACE
+                ZCPTRACE
+           END-EXEC
 
+           EXEC CICS
+                SET
+                TRACEDEST
+                AUXSTATUS(cvda)
+                AUXPAUSE
+                AUXSTART
+                AUXSTOP
+                GTFSTATUS(cvda)
+                GTFSTART
+                GTFSTOP
+                INTSTATUS(cvda)
+                INTSTART
+                INTSTOP
+                SWITCHACTION(cvda)
+                SWITCH
+                SWITCHSTATUS(cvda)
+                NOSWITCH
+                SWITCHNEXT
+                SWITCHALL
+                TABLESIZE(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TRACEFLAG
+                SINGLESTATUS(cvda)
+                SINGLEOFF
+                SINGLEON
+                SYSTEMSTATUS(cvda)
+                SYSTEMOFF
+                SYSTEMON
+                TCEXITSTATUS(cvda)
+                TCEXITALL
+                TCEXITALLOFF
+                TCEXITNONE
+                TCEXITSYSTEM
+                USERSTATUS(cvda)
+                USEROFF
+                USERON
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TRACETYPE
+                FLAGSET(cvda)
+                SPECIAL
+                STANDARD
+                COMPID(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TRANCLASS(data-value)
+                MAXACTIVE(data-value)
+                PURGETHRESH(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TRANDUMPCODE(data-value)
+                ACTION(cvda)
+                ADD
+                REMOVE
+                RESET
+                DUMPSCOPE(cvda)
+                LOCAL
+                RELATED
+                MAXIMUM(data-value)
+                SHUTOPTION(cvda)
+                NOSHUTDOWN
+                SHUTDOWN
+                SYSDUMPING(cvda)
+                NOSYSDUMP
+                SYSDUMP
+                TRANDUMPING(cvda)
+                NOTRANDUMP
+                TRANDUMP
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                TRANSACTION(data-value)
+                DUMPING(cvda)
+                TRANDUMP
+                NOTRANDUMP
+                PRIORITY(data-value)
+                PURGEABILITY(cvda)
+                NOTPURGEABLE
+                PURGEABLE
+                RUNAWAY(data-value)
+                RUNAWAYTYPE(cvda)
+                SYSTEM
+                USER
+                SHUTDOWN(cvda)
+                SHUTDISABLED
+                SHUTENABLED
+                STATUS(cvda)
+                DISABLED
+                ENABLED
+                TCLASS(data-value)
+                TRANCLASS(data-value)
+                TRACING(cvda)
+                SPECTRACE
+                SPRSTRACE
+                STANTRACE
+           END-EXEC
+
+           EXEC CICS
+                SET
+                TSQUEUE(data-value)
+                TSQNAME(data-value)
+                SYSID(data-value)
+                POOLNAME(data-value)
+                ACTION(cvda)
+                LASTUSEDINT(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                UOW(data-value)
+                UOWSTATE(cvda)
+                COMMIT
+                BACKOUT
+                FORCE
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                UOWLINK(data-value)
+                ACTION(cvda)
+                DELETE
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                URIMAP(data-area)
+                ENABLESTATUS(cvda)
+                DISABLED
+                ENABLED
+                REDIRECTTYPE(cvda)
+                NONE
+                PERMANENT
+                TEMPORARY
+                LOCATION(data-area)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                VTAM
+                OPENSTATUS(cvda)
+                CLOSED
+                FORCECLOSE
+                IMMCLOSE
+                OPEN
+                PSDINTERVAL(data-value)
+                PSDINTHRS(data-value)
+                PSDINTMINS(data-value)
+                PSDINTSECS(data-value)
+                DEREGISTERED
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                WEB
+                GARBAGEINT(data-value)
+                TIMEOUTINT(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                WEBSERVICE(name) 
+                VALIDATIONST(cvda)
+                VALIDATION
+                NOVALIDATION
+           END-EXEC
+
+           EXEC CICS
+                SET
+                WLMHEALTH 
+                ADJUSTMENT(data-value)
+                INTERVAL(data-value)
+                OPENSTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                SET 
+                XMLTRANSFORM(name)
+                VALIDATIONST(cvda)
+                VALIDATION
+                NOVALIDATION
+           END-EXEC
 
 
 
