@@ -238,7 +238,7 @@ numcheck_opts
    | NOZON
    | PAC
    | NOPAC
-   | BIN
+   | (BIN (LPARENCHAR (TRUNCBIN | NOTRUNCBIN) RPARENCHAR)?)
    | NOBIN
    | MSG
    | ABD)
@@ -248,7 +248,9 @@ numcheck_zon_opts
    : (ALPHNUM
    | NOALPHNUM
    | LAXREDEF
-   | STRICTREDEF)
+   | STRICTREDEF
+   | LAX
+   | STRICT)
    ;
 
 rules_opts
@@ -448,6 +450,7 @@ compilerDirective
    | compilerDirectiveBasis
    | compilerDirectiveInsert
    | compilerDirectiveDelete
+   | compilerDirectiveData
    )
    ;
 
@@ -485,6 +488,10 @@ compilerDirectiveDelete
    : (
    DELETE compilerDirectiveDeleteSequenceNumber
    )
+   ;
+
+compilerDirectiveData
+   : (COMPILER_DIRECTIVE_TAG COMP_DIR_DATA NUMERICLITERAL)
    ;
 
 compilerDirectiveNumericRange

@@ -189,5 +189,5 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 
 ### Up To Date
 
-This should be current with the changes IBM published in their Enterprise COBOL documentation dated 2021-08-03.
+This should be current with the changes IBM published in their Enterprise COBOL documentation dated 2021-10-01.
 
