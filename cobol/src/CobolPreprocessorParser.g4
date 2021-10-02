@@ -448,6 +448,7 @@ compilerDirective
    | compilerDirectiveBasis
    | compilerDirectiveInsert
    | compilerDirectiveDelete
+   | compilerDirectiveData
    )
    ;
 
@@ -485,6 +486,10 @@ compilerDirectiveDelete
    : (
    DELETE compilerDirectiveDeleteSequenceNumber
    )
+   ;
+
+compilerDirectiveData
+   : (COMPILER_DIRECTIVE_TAG COMP_DIR_DATA NUMERICLITERAL)
    ;
 
 compilerDirectiveNumericRange
