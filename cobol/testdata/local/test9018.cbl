@@ -5,7 +5,7 @@
       * This code definitely won't compile cleanly.
       * It's just here to test parsing.
       *
-      * Current as of CICS TS 5.6
+      * Current as of CICS TS 6.1
       *
        Procedure Division.
            MOVE DFHVALUE(ABEND) TO WS-VAL
@@ -689,6 +689,8 @@
            MOVE DFHVALUE(PIPELINE) TO WS-VAL
            MOVE DFHVALUE(PLI) TO WS-VAL
            MOVE DFHVALUE(PL1) TO WS-VAL
+           MOVE DFHVALUE(POLICY) TO WS-VAL
+           MOVE DFHVALUE(POLICYRULE) TO WS-VAL
            MOVE DFHVALUE(POLICYSCOPE) TO WS-VAL
            MOVE DFHVALUE(POOL) TO WS-VAL
            MOVE DFHVALUE(POSITIVE) TO WS-VAL
@@ -852,6 +854,7 @@
            MOVE DFHVALUE(SQLCODE) TO WS-VAL
            MOVE DFHVALUE(SRVCONVERT) TO WS-VAL
            MOVE DFHVALUE(SSL) TO WS-VAL
+           MOVE DFHVALUE(STACKTRACE) TO WS-VAL
            MOVE DFHVALUE(STANDARD) TO WS-VAL
            MOVE DFHVALUE(STANDBY) TO WS-VAL
            MOVE DFHVALUE(STANTRACE) TO WS-VAL
