@@ -6,7 +6,7 @@
       * due to mutually exclusive options on some commands.
       * It's just here to test parsing.
       *
-      * Current as of CICS TS 5.6
+      * Current as of CICS TS 6.1
       *
        Procedure Division.
 
@@ -650,8 +650,10 @@
                 ENTRY(ptr-ref)
                 ENTRYNAME(data-value)
                 EXIT(data-value)
-                FORMATEDFGALENGTH(data-value)
+                FORMATEDF
+                GALENGTH(data-value)
                 GALOCATION(cvda)
+                GAEXECUTABLE
                 GAENTRYNAME(data-value)
                 INDOUBTWAIT 
                 LINKEDITMODE
@@ -664,6 +666,7 @@
                 SPI
                 START
                 TALENGTH(data-value)
+                TAEXECUTABLE
                 TASKSTART
            END-EXEC
 
@@ -1047,6 +1050,7 @@
                 PRIORITY(cvda)
                 PROTECTNUM(data-area)
                 PTHREADS(data-area)
+                SHARELOCKS(cvda)
                 THREADLIMIT(data-area)
                 THREADS(data-area)
                 THREADWAIT(cvda)
@@ -1307,6 +1311,7 @@
                 INQUIRE
                 FEATUREKEY(data-value)
                 VALUE(data-area)
+                FILEPATH(data-area)
            END-EXEC
 
            EXEC CICS
@@ -1758,6 +1763,40 @@
 
            EXEC CICS
                 INQUIRE
+                POLICY(data-value)
+                BUNDLE(data-area)
+                CHANGEAGENT(cvda)
+                CHANGEAGREL(data-area)
+                CHANGETIME(data-area)
+                CHANGEUSRID(data-area)
+                DEFINESOURCE(data-area)
+                DEFINETIME(data-area)
+                ENABLESTATUS(cvda)
+                INSTALLAGENT(cvda)
+                INSTALLTIME(data-area)
+                INSTALLUSRID(data-area)
+                USERTAG(data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                POLICYRULE(data-value)
+                POLICY(data-value)
+                ABENDCODE(data-area)
+                ACTIONCOUNT(data-area)
+                ACTIONTYPE(cvda)
+                EPADAPTER(data-area)
+                EPADAPTERSET(data-area)
+                LASTACTTIME(data-area)
+                RULEGROUP(cvda)
+                RULEITEM(data-area)
+                RULETYPE(cvda)
+                THRESHOLD(data-area)
+                WLMOPENST(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
                 PROCESSTYPE(data-value )
                 AUDITLOG(data-area)
                 AUDITLEVEL(cvda)
@@ -1871,6 +1910,31 @@
 
            EXEC CICS
                 INQUIRE
+                SECRECORDING(data-area)
+                ODADPTRID(data-value)
+                ODADPTRDATA1(data-value)
+                ODADPTRDATA2(data-value)
+                ODADPTRDATA3(data-value)
+                ODAPPLID(data-value)
+                ODCLNTIPADDR(data-value)
+                ODCLNTIPADDR(data-value)
+                ODCLNTPORT(data-value)
+                ODFACILNAME(data-value)
+                ODFACILTYPE(data-value)
+                ODIPFAMILY(data-value)
+                ODLUNAME(data-value)
+                ODNETID(data-value)
+                ODNETWORKID(data-value)
+                ODSERVERPORT(data-value)
+                ODTCPIPS(data-value)
+                ODTRANSID(data-value)
+                ODUSERID(data-value)
+                MAXIMUM(data-area)
+                CURRENT(area-value)                
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
                 STATISTICS
                 ENDOFDAY(data-area)
                 ENDOFDAYHRS(data-area)
@@ -1956,9 +2020,11 @@
                 DUMPING(cvda)
                 ECDSASIZE(data-area)
                 EDSALIMIT(data-area)
+                EPCDSASIZE(data-area)
+                EPUDSASIZE(data-area)
                 ERDSASIZE(data-area)
                 ESDSASIZE(data-area)
-                ETDSASIZE(data-area)
+                ETDSASIZE(data-area) *> removed in CICS TS 6.1
                 EUDSASIZE(data-area)
                 FORCEQR(cvda)
                 GCDSASIZE(data-area)
@@ -1967,6 +2033,7 @@
                 GSDSASIZE(data-area)
                 GUDSASIZE(data-area)
                 GMMTRANID(data-area)
+                HEALTHCHECK(cvda)
                 INITSTATUS(cvda)
                 JOBNAME(data-area)
                 LASTCOLDTIME(data-area)
@@ -1985,11 +2052,13 @@
                 OPREL(data-area)
                 OPSYS(data-area)
                 OSLEVEL(data-area)
+                PCDSASIZE(data-area)
                 PLTPIUSR(data-area)
                 PROGAUTOCTLG(cvda)
                 PROGAUTOEXIT(data-area)
                 PROGAUTOINST(cvda)
                 PRTYAGING(data-area)
+                PUDSASIZE(data-area)
                 RDSASIZE(data-area)
                 REENTPROTECT(cvda)
                 REGIONUSERID(data-area)
@@ -1998,6 +2067,7 @@
                 RUNAWAY(data-area)
                 SCANDELAY(data-area)
                 SDSASIZE(data-area)
+                SDTMEMLIMIT(data-area)
                 SDTRAN(data-area)
                 SECURITYMGR(cvda)
                 SHUTSTATUS(cvda)
@@ -2012,6 +2082,14 @@
                 TRANISOLATE(cvda)
                 UDSASIZE(data-area)
                 XRFSTATUS(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
+                TAG
+                START
+                NEXT
+                END
            END-EXEC
 
            EXEC CICS
@@ -2847,6 +2925,12 @@
 
            EXEC CICS
                 SET
+                ASSOCIATION
+                USERCORRDATA(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET
                 AUTOINSTALL
                 AIBRIDGE(cvda)
                 CONSOLES(cvda)
@@ -3017,6 +3101,12 @@
                 RUNAWAY(data-value)
                 SCANDELAY(data-value)
                 TIME(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET
+                TAGS
+                REFRESH
            END-EXEC
 
            EXEC CICS

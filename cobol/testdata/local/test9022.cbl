@@ -6,7 +6,7 @@
       * due to mutually exclusive options on some commands.
       * It's just here to test parsing.
       *
-      * Current as of CICS TS 5.6
+      * Current as of CICS TS 6.1
       *
        Procedure Division.
 
@@ -1167,6 +1167,7 @@
                 BELOW
                 LENGTH(X)
                 INITIMG(X)
+                EXECUTABLE
                 SHARED
                 NOSUSPEND
                 USERDATAKEY
@@ -1178,6 +1179,7 @@
                 SET(X)
                 FLENGTH(X)
                 LOCATION
+                EXECUTABLE
                 SHARED
                 NOSUSPEND
                 USERDATAKEY
@@ -2871,6 +2873,8 @@
                 TERMID(X)
                 USERID(X)
                 SYSID(X)
+                NOCHECK
+                PROTECT
            END-EXEC
 
            EXEC CICS
