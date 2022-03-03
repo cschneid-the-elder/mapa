@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -70,7 +70,7 @@ stepName : NAME_FIELD ;
 
 procName : NAME_FIELD ;
 
-jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ddParmASTERISK_DATA*;
+jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ddParmASTERISK_DATA* ;
 
 /*
 System symbols can be substringed...
@@ -232,7 +232,23 @@ endifStatement : SS NAME_FIELD? ENDIF ;
 
 includeStatement : SS NAME_FIELD? INCLUDE INCLUDE_PARM_MEMBER EQUAL keywordOrSymbolic ;
 
-jcllibStatement : SS NAME_FIELD? JCLLIB JCLLIB_PARM_ORDER EQUAL singleOrMultipleValue ;
+/*
+The documentation is unclear about whether ORDER and PROCLIB are mutually 
+exclusive, and whether PROCLIB must be specified only once if it is present.
+
+I'm going with: they _are not_ mutually exclusive and that PROCLIB may be
+specified multiple times if it is present.
+
+This breaks my Job and PPJob classes.  Probably yours too.  Sorry.
+*/
+jcllibStatement : 
+	SS NAME_FIELD? JCLLIB 
+	(
+		(JCLLIB_PARM_ORDER EQUAL singleOrMultipleValue (JCLLIB_PARM_PROCLIB EQUAL keywordOrSymbolic)*)
+		| 
+		(JCLLIB_PARM_PROCLIB EQUAL keywordOrSymbolic (JCLLIB_PARM_PROCLIB EQUAL keywordOrSymbolic)* (JCLLIB_PARM_ORDER EQUAL singleOrMultipleValue)? (JCLLIB_PARM_PROCLIB EQUAL keywordOrSymbolic)*)
+	) 
+	;
 
 notifyStatement : SS NAME_FIELD? NOTIFY_OP SYMBOLIC* ;
 

@@ -288,7 +288,7 @@ public class PPJclStep {
 				+ " has no associated instream data");
 		}
 
-		return new Integer(
+		return 
 						this
 						.jclStepCtx
 						.ddParmASTERISK_DATA()
@@ -296,7 +296,7 @@ public class PPJclStep {
 						.DD_ASTERISK_DATA()
 						.get(0)
 						.getSymbol()
-						.getLine());
+						.getLine();
 	}
 
 	public ArrayList<Integer> linesShouldBePrecededBySYSINDDSPLAT() {
