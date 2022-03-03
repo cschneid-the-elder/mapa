@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -3854,14 +3854,41 @@ JCLLIB_PARM_ORDER
 	: O R D E R
 	->pushMode(KYWD_VAL_MODE)
 	;
-JCLLIB_PARM_VALUE_NEWLINE
+
+JCLLIB_PARM_PROCLIB
+	: P R O C L I B
+	->pushMode(KYWD_VAL_MODE)
+	;
+
+JCLLIB_PARM_COMMA
+	: COMMA_DFLT
+	->channel(HIDDEN)
+	;
+
+JCLLIB_PARM_COMMA_WS
+	: COMMA_DFLT [ ]+
+	->channel(HIDDEN),pushMode(COMMA_WS_MODE)
+	;
+
+JCLLIB_PARM_COMMA_NEWLINE
+	: COMMA_DFLT NEWLINE
+	->channel(HIDDEN)
+	;
+
+JCLLIB_PARM_SS_WS
+	: SS [ ]+
+	->channel(HIDDEN)
+	;
+
+JCLLIB_PARM_NEWLINE
 	: NEWLINE
 	{
 		_modeStack.clear();
 	}
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
-JCLLIB_PARM_VALUE_WS
+
+JCLLIB_PARM_WS
 	: [ ]+
 	{
 		_modeStack.clear();
@@ -4443,7 +4470,7 @@ KYWD_VAL_NEWLINE
 	;
 KYWD_VAL_COMMA
 	: COMMA_DFLT
-	->type(COMMA),channel(HIDDEN),popMode
+	->channel(HIDDEN),popMode
 	;
 KYWD_VAL_COMMA_NEWLINE
 	: COMMA_DFLT NEWLINE

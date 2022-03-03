@@ -163,34 +163,50 @@ public class PPJob {
 			+ "|"
 			);
 
+		this.jcllibCtx = ctx;
+
 		/*
 		Handle single entry non-parenthesized JCLLIB...
 		// JCLLIB ORDER=SIKOZU
 		*/
 		ArrayList<JCLPPParser.KeywordOrSymbolicContext> kywdCtxList = new ArrayList<>();
-		if (ctx.singleOrMultipleValue().keywordOrSymbolic() == null) {
+		if (ctx.singleOrMultipleValue() == null) {
+			// it turns out these are optional
 		} else {
-			kywdCtxList.addAll(ctx.singleOrMultipleValue().keywordOrSymbolic());
+			if (ctx.singleOrMultipleValue().keywordOrSymbolic() == null) {
+			} else {
+				this.LOGGER.finest(
+					this.myName 
+					+ " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic() = |" 
+					+ ctx.singleOrMultipleValue().keywordOrSymbolic()
+					+ "|"
+					);
+				kywdCtxList.addAll(ctx.singleOrMultipleValue().keywordOrSymbolic());
+			}
 		}
 
-		this.LOGGER.finest(
-			this.myName 
-			+ " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic() = |" 
-			+ ctx.singleOrMultipleValue().keywordOrSymbolic()
-			+ "|"
-			);
-
-		this.jcllibCtx = ctx;
-		if (kywdCtxList.size() == 0) {
-			/*
-			Handle parenthesized JCLLIB
-			// JCLLIB ORDER=(SIKOZU)
-			...or...
-			// JCLLIB ORDER=(SIKOZU,JOOL)
-			*/
-			for (JCLPPParser.ParenListContext p: ctx.singleOrMultipleValue().parenList()) {
-				kywdCtxList.addAll(p.keywordOrSymbolic());
+		if (ctx.singleOrMultipleValue() == null) {
+		} else {
+			if (ctx.singleOrMultipleValue().parenList() == null) {
+			} else {
+				/*
+				Handle parenthesized JCLLIB
+				// JCLLIB ORDER=(SIKOZU)
+				...or...
+				// JCLLIB ORDER=(SIKOZU,JOOL)
+				*/
+				for (JCLPPParser.ParenListContext p: ctx.singleOrMultipleValue().parenList()) {
+					kywdCtxList.addAll(p.keywordOrSymbolic());
+				}
 			}
+		}
+
+		if (ctx.keywordOrSymbolic() == null) {
+		} else {
+			/*
+			Handle any extant PROCLIB parameters
+			*/
+			kywdCtxList.addAll(ctx.keywordOrSymbolic());
 		}
 
 		for (JCLPPParser.KeywordOrSymbolicContext k: kywdCtxList) {
@@ -592,7 +608,7 @@ public class PPJob {
 					outLine.replace(start, end, s.getResolvedText());
 				}
 			}
-			if (lines.contains(new Integer(src.getLineNumber()))) {
+			if (lines.contains(src.getLineNumber())) {
 				this.LOGGER.finest(this.myName + " adding SYSIN DD *");
 				out.println("//SYSIN DD * GENERATED STATEMENT");
 			}

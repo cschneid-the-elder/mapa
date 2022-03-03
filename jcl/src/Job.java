@@ -119,34 +119,50 @@ public class Job {
 			+ "|"
 			);
 
+		this.jcllibCtx = ctx;
+
 		/*
 		Handle single entry non-parenthesized JCLLIB...
 		// JCLLIB ORDER=SIKOZU
 		*/
 		ArrayList<JCLParser.KeywordOrSymbolicContext> kywdCtxList = new ArrayList<>();
-		if (ctx.singleOrMultipleValue().keywordOrSymbolic() == null) {
+		if (ctx.singleOrMultipleValue() == null) {
+			// it turns out these are optional
 		} else {
-			kywdCtxList.addAll(ctx.singleOrMultipleValue().keywordOrSymbolic());
+			if (ctx.singleOrMultipleValue().keywordOrSymbolic() == null) {
+			} else {
+				this.LOGGER.finest(
+					this.myName 
+					+ " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic() = |" 
+					+ ctx.singleOrMultipleValue().keywordOrSymbolic()
+					+ "|"
+					);
+				kywdCtxList.addAll(ctx.singleOrMultipleValue().keywordOrSymbolic());
+			}
 		}
 
-		this.LOGGER.finest(
-			this.myName 
-			+ " addJcllib ctx.singleOrMultipleValue().keywordOrSymbolic() = |" 
-			+ ctx.singleOrMultipleValue().keywordOrSymbolic()
-			+ "|"
-			);
-
-		this.jcllibCtx = ctx;
-		if (kywdCtxList.size() == 0) {
-			/*
-			Handle parenthesized JCLLIB
-			// JCLLIB ORDER=(SIKOZU)
-			...or...
-			// JCLLIB ORDER=(SIKOZU,JOOL)
-			*/
-			for (JCLParser.ParenListContext p: ctx.singleOrMultipleValue().parenList()) {
-				kywdCtxList.addAll(p.keywordOrSymbolic());
+		if (ctx.singleOrMultipleValue() == null) {
+		} else {
+			if (ctx.singleOrMultipleValue().parenList() == null) {
+			} else {
+				/*
+				Handle parenthesized JCLLIB
+				// JCLLIB ORDER=(SIKOZU)
+				...or...
+				// JCLLIB ORDER=(SIKOZU,JOOL)
+				*/
+				for (JCLParser.ParenListContext p: ctx.singleOrMultipleValue().parenList()) {
+					kywdCtxList.addAll(p.keywordOrSymbolic());
+				}
 			}
+		}
+
+		if (ctx.keywordOrSymbolic() == null) {
+		} else {
+			/*
+			Handle any extant PROCLIB parameters
+			*/
+			kywdCtxList.addAll(ctx.keywordOrSymbolic());
 		}
 
 		for (JCLParser.KeywordOrSymbolicContext k: kywdCtxList) {

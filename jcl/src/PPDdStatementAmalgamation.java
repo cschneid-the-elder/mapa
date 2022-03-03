@@ -88,7 +88,7 @@ public class PPDdStatementAmalgamation {
 
 		for (PPDdStatement dd: this.dds) {
 			if (dd.hasUnattributedAsteriskData()) {
-				lines.add(new Integer(dd.getAsteriskDataLine()));
+				lines.add(dd.getAsteriskDataLine());
 			}
 		}
 

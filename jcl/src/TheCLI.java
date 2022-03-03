@@ -30,7 +30,7 @@ public class TheCLI{
 	public String outtreeFileName = null;
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
-	public Integer sanity = new Integer(20);
+	public Integer sanity = 20;
 	public File setFile = null;
 	public ArrayList<SetSymbolValue> setSym = new ArrayList<>();
 	public ArrayList<PPSetSymbolValue> PPsetSym = new ArrayList<>();
@@ -204,7 +204,7 @@ public class TheCLI{
 		}
 
 		if (this.line.hasOption("sanity")) {
-			this.sanity = new Integer(this.line.getOptionValue("sanity"));
+			this.sanity = Integer.parseInt(this.line.getOptionValue("sanity"));
 		}
 
 		/*

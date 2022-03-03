@@ -221,6 +221,6 @@ public class PPDdStatement {
 				+ " has no associated instream data");
 		}
 
-		return new Integer(this.ddSplatCtx.get(0).getStart().getLine());
+		return this.ddSplatCtx.get(0).getStart().getLine();
 	}
 }
