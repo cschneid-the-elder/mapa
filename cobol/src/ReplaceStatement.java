@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.logging.Logger;
 import java.io.*;
 import java.nio.file.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -35,8 +36,10 @@ public class ReplaceStatement extends CopyReplaceParent implements CompilerDirec
 	private ReplaceOffStatement replaceOffStatement = null;
 	private ReplaceStatement nextReplaceStatement = null;
 	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
+	private Logger LOGGER = null;
 
-	ReplaceStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) {
+	ReplaceStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx, Logger LOGGER) {
+		this.LOGGER = LOGGER;
 		this.ctx = ctx;
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
@@ -188,9 +191,9 @@ public class ReplaceStatement extends CopyReplaceParent implements CompilerDirec
 	public void apply(
 			CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 			) throws IOException {
-		TestIntegration.LOGGER.fine(this.myName + " apply() ");
-		TestIntegration.LOGGER.finest(" replaceable = " + this.replaceable);
-		TestIntegration.LOGGER.finest(" replacement = " + this.replacement);
+		this.LOGGER.fine(this.myName + " apply() ");
+		this.LOGGER.finest(" replaceable = " + this.replaceable);
+		this.LOGGER.finest(" replacement = " + this.replacement);
 
 		this.iWasNeverHere(sourceNodes);
 

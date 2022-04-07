@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.logging.Logger;
 import java.io.*;
 import java.nio.file.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -12,7 +13,10 @@ of the COPY statement and the REPLACE statement, believe me when I
 tell you this was far worse in previous incarnations.  
 */
 
+
 abstract class CopyReplaceParent {
+
+public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 
 	/**
 	Needed in both CobolSource for processing REPLACE statements and
@@ -46,20 +50,24 @@ abstract class CopyReplaceParent {
 		StringBuilder outLine = new StringBuilder();
 
 		for (TerminalNodeWrapper token: sourceNodes) {
-			TestIntegration.LOGGER.finest(" token = " + token);
-			TestIntegration.LOGGER.finest(" prevLine = " + prevLine);
-			TestIntegration.LOGGER.finest(" prevPosn = " + prevPosn);
-			TestIntegration.LOGGER.finest(" prevTextLength = " + prevTextLength);
+			LOGGER.finest(" token = " + token);
+			LOGGER.finest(" prevLine = " + prevLine);
+			LOGGER.finest(" prevPosn = " + prevPosn);
+			LOGGER.finest(" prevTextLength = " + prevTextLength);
 			long clonedPosn = token.getClonedPosn();
 			if (token.isPrecededByNewline() || token.isFirst()) {
-				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
+				LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
 				if (token.getClonedPosn() == -1) {
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					long length = token.getTextLength() + token.getPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
 				} else {
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+					long length = token.getTextLength() + token.getClonedPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
 				}
 			} else if (token.getClonedLine() == prevLine) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
+				LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
 				if (token.isPrecededByWhitespace()) {
 					outLine.append(" ");
 					long extraPadding = 0;
@@ -68,12 +76,14 @@ abstract class CopyReplaceParent {
 					} else {
 						extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
 					}
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+					long length = token.getTextLength() + extraPadding;
+					outLine.append(String.format("%" + length + "s", token.getText()));
 				} else {
 					outLine.append(token.getText());
 				}
 			} else if (token.getClonedLine() == -1) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
+				LOGGER.finest(" token.getClonedLine() == -1");
 				if (prevToken != null && prevToken.getClonedLine() != -1) {
 					if (token.isPrecededByWhitespace()) {
 						outLine.append(" ");
@@ -85,10 +95,14 @@ abstract class CopyReplaceParent {
 				} else {
 					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
 				}
-				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				long length = token.getTextLength() + extraPadding;
+				outLine.append(String.format("%" + length + "s", token.getText()));
 			} else {
-				TestIntegration.LOGGER.finest(" else");
-				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				LOGGER.finest(" else");
+				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				long length = token.getTextLength() + token.getPosn();
+				outLine.append(String.format("%" + length + "s", token.getText()));
 			}
 			if (token.getClonedLine() == -1) {
 				prevLine = token.getLine();
@@ -197,12 +211,12 @@ abstract class CopyReplaceParent {
 			, int thisEndLine
 			, int thisStopLine
 			) {
-		TestIntegration.LOGGER.fine("applyReplacingPhrase() ");
-		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
-		TestIntegration.LOGGER.finest(" replacement = " + replacement);
-		TestIntegration.LOGGER.finest(" adjustmentNeeded = " + adjustmentNeeded);
-		TestIntegration.LOGGER.finest(" thisEndLine = " + thisEndLine);
-		TestIntegration.LOGGER.finest(" thisStopLine = " + thisStopLine);
+		LOGGER.fine("applyReplacingPhrase() ");
+		LOGGER.finest(" replaceable = " + replaceable);
+		LOGGER.finest(" replacement = " + replacement);
+		LOGGER.finest(" adjustmentNeeded = " + adjustmentNeeded);
+		LOGGER.finest(" thisEndLine = " + thisEndLine);
+		LOGGER.finest(" thisStopLine = " + thisStopLine);
 
 		int matchedIndex = 0;
 
@@ -213,7 +227,7 @@ abstract class CopyReplaceParent {
 				if (tnw.isNewline()) toRemove.add(tnw);
 			}
 			matchList.removeAll(toRemove);
-			TestIntegration.LOGGER.finest(" matchList = " + matchList);
+			LOGGER.finest(" matchList = " + matchList);
 			matchedIndex = replaceable.indexOf(matchList1);
 			int from = 0;
 			int to = -1;
@@ -225,41 +239,41 @@ abstract class CopyReplaceParent {
 			}
 			matchLoop: //TODO remove label
 			while (from < sourceNodes.size() && sourceNodes.get(from).getLine() < thisStopLine) {
-				TestIntegration.LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
+				LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
 				Boolean matched = false;
 				ArrayList<TerminalNodeWrapper> subList = null;
 				if (sourceNodes.size() - from >= matchList.size()) {
-					TestIntegration.LOGGER.finest(" sourceNodes.size() |" + sourceNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
+					LOGGER.finest(" sourceNodes.size() |" + sourceNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
 					to = from + matchList.size();
 					int i = 0;
 					subList = this.subListTerminalNodeWrapper(sourceNodes, from, matchList.size());
-					TestIntegration.LOGGER.finest(" subList = " + subList);
+					LOGGER.finest(" subList = " + subList);
 					if (subList.size() == matchList.size()) {
-						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
+						LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
 						matched = true;
 						for (TerminalNodeWrapper sourceNode: subList) {
-							TestIntegration.LOGGER.finest(" sourceNode = |" + sourceNode + "|");
+							LOGGER.finest(" sourceNode = |" + sourceNode + "|");
 							if (!matchList.get(i).textIsEqual(sourceNode)) {
-								TestIntegration.LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(sourceNode) i.e. |" + matchList.get(i) + "| != |" + sourceNode + "|");
+								LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(sourceNode) i.e. |" + matchList.get(i) + "| != |" + sourceNode + "|");
 								matched = false;
 								break;
 							}
 							i++;
 						}
 					} else {
-						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
+						LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
 						matched = false;
 					}
 				}
-				TestIntegration.LOGGER.finest(" matched = " + matched);
+				LOGGER.finest(" matched = " + matched);
 				if (matched) {
 					if (matchList.get(0).isDelimited()) {
 						subList.get(0).alterText(matchList.get(0), replacement.get(matchedIndex).get(0));
 					} else {
 						sourceNodes.removeAll(subList);
-						//TestIntegration.LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
+						//LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
 						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-						//TestIntegration.LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
+						//LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
 					}
 					from = from + replacement.get(matchedIndex).size();
 				} else {

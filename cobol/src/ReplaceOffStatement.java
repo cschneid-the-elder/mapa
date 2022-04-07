@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.logging.Logger;
 import java.util.concurrent.CopyOnWriteArrayList;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
@@ -20,8 +21,10 @@ public class ReplaceOffStatement implements CompilerDirectingStatement {
 	private int endLine = -1;
 	private Boolean enabled = false;
 	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
+	private Logger LOGGER = null;
 
-	ReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) {
+	public ReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx, Logger LOGGER) {
+		this.LOGGER = LOGGER;
 		this.ctx = ctx;
 		//this.line = this.ctx.REPLACE().getSymbol().getLine(); //TODO remove
 		this.startLine = this.ctx.start.getLine();
@@ -51,7 +54,7 @@ public class ReplaceOffStatement implements CompilerDirectingStatement {
 	public void apply(
 			CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 			) {
-		TestIntegration.LOGGER.fine(this.myName + " apply() ");
+		this.LOGGER.fine(this.myName + " apply() ");
 
 		this.iWasNeverHere(sourceNodes);
 	}

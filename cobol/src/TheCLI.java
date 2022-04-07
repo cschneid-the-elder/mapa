@@ -378,8 +378,8 @@ public class TheCLI{
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		CobolPreprocessorParserTerminalNodeListener listener = 
-			new CobolPreprocessorParserTerminalNodeListener(tNodes);
+		PreprocessorParserTerminalNodeListener listener = 
+			new PreprocessorParserTerminalNodeListener(tNodes);
 
 		this.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 

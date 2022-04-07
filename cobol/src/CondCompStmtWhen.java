@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
 class CondCompStmtWhen implements ConditionalCompilationStatement {
@@ -20,15 +21,18 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	private int line = -1;
 	private int endLine = -1;
 	private String text = null;
+	private Logger LOGGER = null;
 
 	public CondCompStmtWhen (
 				CobolPreprocessorParser.ConditionalCompilationWhenContext ccwc
 				, CondCompStmtEvaluate evaluateStmt
-				, ArrayList<CondCompVar> varList) {
+				, ArrayList<CondCompVar> varList
+				, Logger LOGGER) {
 		this.ctx = ccwc;
+		this.LOGGER = LOGGER;
 		this.line = this.ctx.COMPILER_DIRECTIVE_TAG().getSymbol().getLine();
 		this.text = "@ " + this.getLine() + " " + this.getType();
-		TestIntegration.LOGGER.fine(
+		this.LOGGER.fine(
 			this.myName + " " + this.toString());
 		this.evaluateStmt = evaluateStmt;
 		this.ccrcCtx = this.ctx.conditionalCompilationRelationalCondition();
@@ -56,7 +60,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 			}
 		}
 
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			this.myName 
 			+ " relCond = |" 
 			+ this.relCond 
@@ -210,20 +214,20 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		Integer whenInt1 = this.evaluateSelection1.getNumericValue();
 		String whenString1 = this.evaluateSelection1.getNonNumericValue();
 
-		TestIntegration.LOGGER.finer(
+		this.LOGGER.finer(
 			this.myName 
 			+ " compareWithEvaluate(CondCompVar evaluateVar, CondCompComparisonOp op)");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  evaluateVar = |" + evaluateVar + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op = |" + op + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar1 = |" + whenVar1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenInt1 = |" + whenInt1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenString1 = |" + whenString1 + "|");
 
 		if (whenVar1 == null) {
@@ -263,30 +267,30 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		Boolean cmp1 = null;
 		Boolean cmp2 = null;
 
-		TestIntegration.LOGGER.finer(
+		this.LOGGER.finer(
 			this.myName 
 			+ " compareWithEvaluate(CondCompVar evaluateVar, CondCompComparisonOp op1, CondCompComparisonOp op2)");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  evaluateVar = |" + evaluateVar + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op1 = |" + op1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op2 = |" + op2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar1 = |" + whenVar1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar2 = |" + whenVar2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn2 = |" + whenTn2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenInt1 = |" + whenInt1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenInt2 = |" + whenInt2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenString1 = |" + whenString1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenString2 = |" + whenString2 + "|");
 
 		if (whenVar1 != null) {
@@ -333,18 +337,18 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 		Integer whenInt1 = this.evaluateSelection1.getNumericValue();
 
-		TestIntegration.LOGGER.finer(
+		this.LOGGER.finer(
 			this.myName 
 			+ " compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op1)");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  evaluateInt = |" + evaluateInt + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op = |" + op + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar1 = |" + whenVar1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenInt1 = |" + whenInt1 + "|");
 
 		if (whenVar1 == null) {
@@ -375,22 +379,22 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		Boolean rc1 = null;
 		Boolean rc2 = null;
 
-		TestIntegration.LOGGER.finer(
+		this.LOGGER.finer(
 			this.myName 
 			+ " compareWithEvaluate(Integer evaluateInt, CondCompComparisonOp op1, CondCompComparisonOp op2)");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  evaluateInt = |" + evaluateInt + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op1 = |" + op1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op2 = |" + op2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar1 = |" + whenVar1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar2 = |" + whenVar2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn2 = |" + whenTn2 + "|");
 
 
@@ -421,16 +425,16 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		CondCompVar whenVar1 = this.evaluateSelection1.getVar();
 		TerminalNode whenTn1 = this.evaluateSelection1.getTerminalNode();
 
-		TestIntegration.LOGGER.finer(
+		this.LOGGER.finer(
 			this.myName 
 			+ " compareWithEvaluate(String evaluateText, CondCompComparisonOp op1)");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  evaluateText = |" + evaluateText + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op = |" + op + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar1 = |" + whenVar1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
 
 		if (whenVar1 == null) {
@@ -456,22 +460,22 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		Boolean rc1 = null;
 		Boolean rc2 = null;
 
-		TestIntegration.LOGGER.finer(
+		this.LOGGER.finer(
 			this.myName 
 			+ " compareWithEvaluate(String evaluateText, CondCompComparisonOp op1, CondCompComparisonOp op2)");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  evaluateText = |" + evaluateText + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op1 = |" + op1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  op2 = |" + op2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar1 = |" + whenVar1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenVar2 = |" + whenVar2 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn1 = |" + whenTn1 + "|");
-		TestIntegration.LOGGER.finest(
+		this.LOGGER.finest(
 			"  whenTn2 = |" + whenTn2 + "|");
 
 
@@ -495,9 +499,9 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 	}
 
 	private Boolean compare(int comparison, CondCompComparisonOp op) {
-		TestIntegration.LOGGER.finest(this.myName + " compare(int comparison, CondCompComparisonOp op)");
-		TestIntegration.LOGGER.finest("    comparison = |" + comparison + "|");
-		TestIntegration.LOGGER.finest("    op = |" + op + "|");
+		this.LOGGER.finest(this.myName + " compare(int comparison, CondCompComparisonOp op)");
+		this.LOGGER.finest("    comparison = |" + comparison + "|");
+		this.LOGGER.finest("    op = |" + op + "|");
 		Boolean rc = null;
 
 		switch(op.getType()) {
@@ -548,7 +552,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 							"comparison operator is of unknown type");
 		}
 
-		TestIntegration.LOGGER.finest("    returning " + rc);
+		this.LOGGER.finest("    returning " + rc);
 		return rc;
 	}
 

@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.Logger;
 import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.*;
@@ -21,6 +22,7 @@ public class ReplaceClause {
 	private ArrayList<TerminalNodeWrapper> replaceable = new ArrayList<>();
 	private ArrayList<TerminalNodeWrapper> replacement = new ArrayList<>();
 	private ArrayList<TerminalNodeWrapper> tnwList = new ArrayList<>();
+	private Logger LOGGER = Logger.getLogger("TestIntegration");
 
 	public ReplaceClause (CobolPreprocessorParser.ReplaceClauseContext ctx) {
 		this.ctx = ctx;
@@ -54,7 +56,7 @@ public class ReplaceClause {
 	}
 
 	private void setReplacement() {
-		TestIntegration.LOGGER.finest(this.myName + " setReplacement()");
+		this.LOGGER.finest(this.myName + " setReplacement()");
 		LiteralWrapper literal = null;
 		CobolWordWrapper cobolWord = null;
 		PseudoTextWrapper pseudoText = null;
@@ -95,7 +97,7 @@ public class ReplaceClause {
 	}
 
 	public void setReplaceable() {
-		TestIntegration.LOGGER.finest(this.myName + " setReplaceable()");
+		this.LOGGER.finest(this.myName + " setReplaceable()");
 		LiteralWrapper literal = null;
 		CobolWordWrapper cobolWord = null;
 		PseudoTextWrapper pseudoText = null;

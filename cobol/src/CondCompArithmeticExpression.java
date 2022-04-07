@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.Logger;
 import java.io.*;
 import java.nio.file.*;
 import org.antlr.v4.runtime.tree.*;
@@ -28,6 +29,7 @@ class CondCompArithmeticExpression {
 	private Integer value = null;
 	private String text = null;
 	private long sortKey = -1;
+	private Logger LOGGER = Logger.getLogger("TestIntegration");
 
 	public static List<CondCompArithmeticExpression> bunchOfThese(
 				List<CobolPreprocessorParser.ConditionalCompilationArithmeticExpressionContext> ctxList
@@ -46,7 +48,7 @@ class CondCompArithmeticExpression {
 			, ArrayList<CondCompVar> varList) {
 		this.ctx = ctx;
 		this.varList = varList;
-		TestIntegration.LOGGER.finer(this.myName + " varList = |" + varList + "|");
+		this.LOGGER.finer(this.myName + " varList = |" + varList + "|");
 		if (this.ctx.conditionalCompilationArithmeticAtom() != null) {
 			tokens.addAll( 
 				CondCompArithmeticAtom.bunchOfThese(
@@ -81,10 +83,10 @@ class CondCompArithmeticExpression {
 		on top of the stack.
 		*/
 		
-		TestIntegration.LOGGER.finest(this.myName + " tokens    = |" + this.tokens + "|");
+		this.LOGGER.finest(this.myName + " tokens    = |" + this.tokens + "|");
 		ArrayList<CondCompToken> revTokens = new ArrayList<>(this.tokens);
 		Collections.reverse(revTokens);
-		TestIntegration.LOGGER.finest(this.myName + " revTokens = |" + revTokens + "|");
+		this.LOGGER.finest(this.myName + " revTokens = |" + revTokens + "|");
 
 		/*
 		Quoting part of Wikipedia from https://en.wikipedia.org/wiki/Operator-precedence_parser#Alternative_methods
@@ -176,7 +178,7 @@ class CondCompArithmeticExpression {
 						break;
 				}
 			} catch (Exception e) {
-				TestIntegration.LOGGER.severe(
+				this.LOGGER.severe(
 					"Exception " + e + " encountered"
 					+ " in "
 					+ this.myName
@@ -201,13 +203,13 @@ class CondCompArithmeticExpression {
 		CondCompToken arithmeticOp = null;
 		Integer result = null;
 
-		TestIntegration.LOGGER.fine(this.myName + " setValue() evals = |" + this.evals + "|");
+		this.LOGGER.fine(this.myName + " setValue() evals = |" + this.evals + "|");
 
 		while(this.evals.peek() != null) {
 			try {
 				token = this.evals.pop();
 			} catch (Exception e) {
-				TestIntegration.LOGGER.severe(
+				this.LOGGER.severe(
 					"Exception " + e + " encountered"
 					+ " in "
 					+ this.myName
@@ -215,7 +217,7 @@ class CondCompArithmeticExpression {
 				e.printStackTrace();
 				System.exit(16);
 			}
-			TestIntegration.LOGGER.finest(this.myName + " setValue()" + " token.getType() = " + token.getType());
+			this.LOGGER.finest(this.myName + " setValue()" + " token.getType() = " + token.getType());
 			switch(token.getType()) {
 				case GROUPOP_BEGIN:
 					Integer groupResult = this.setValue();
@@ -241,7 +243,7 @@ class CondCompArithmeticExpression {
 					}
 					break;
 				case GROUPOP_END:
-					TestIntegration.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
+					this.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
 					return(result);
 				case ARITHMETIC_ATOM:
 					if (arithmeticOp == null) {
@@ -276,7 +278,7 @@ class CondCompArithmeticExpression {
 			}
 		}
 
-		TestIntegration.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
+		this.LOGGER.finest(this.myName + " setValue()" + " returning |" + result + "|");
 		return result;
 	}
 
