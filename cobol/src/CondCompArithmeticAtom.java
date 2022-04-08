@@ -66,11 +66,11 @@ class CondCompArithmeticAtom implements CondCompToken {
 		} else if (this.ctx.ZERO() != null) {
 			this.tn = this.ctx.ZERO();
 			this.setSortKey();
-			this.value = new Integer(0);
+			this.value = 0;
 		} else {
 			this.tn = this.ctx.NUMERICLITERAL();
 			this.setSortKey();
-			this.value = new Integer(this.tn.getSymbol().getText());
+			this.value = Integer.parseInt(this.tn.getSymbol().getText());
 		}
 	}
 

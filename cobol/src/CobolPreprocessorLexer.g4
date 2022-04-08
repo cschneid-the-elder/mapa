@@ -659,9 +659,13 @@ ES_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
 SQL_TEXT : (.+?);
 
+ES_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+
 mode EXEC_CICS_MODE;
 
 EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
 CICS_TEXT : (.+?);
+
+EC_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
 

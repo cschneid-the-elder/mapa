@@ -2,11 +2,13 @@
 # if making from scratch, for example the ./class directory
 # is empty, then...
 #
+# touch src/Cobol*.g4
 # make
 # make mine
 #
 # ...the first make will result in a number of errors which
-# can be ignored, the second should compile cleanly.
+# can be ignored, there are mutual references in a number of
+# classes.  The second should compile cleanly.
 
 JC = javac
 CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"

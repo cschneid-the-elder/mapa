@@ -123,7 +123,7 @@ class CondCompEvaluateSelection {
 			}
 		} else if (this.numericLiteral != null) {
 			this.tn = this.numericLiteral;
-			this.numericValue = new Integer(this.numericLiteral.getSymbol().getText());
+			this.numericValue = Integer.parseInt(this.numericLiteral.getSymbol().getText());
 		} else if (this.nonNumericLiteral != null) {
 			this.tn = this.nonNumericLiteral;
 			this.nonNumericValue = this.nonNumericLiteral.getSymbol().getText();

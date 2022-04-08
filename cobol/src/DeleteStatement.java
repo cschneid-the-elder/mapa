@@ -42,15 +42,15 @@ public class DeleteStatement implements CompilerDirectingStatement {
 
 	private void setTargetLines() {
 		this.seqNbCtx = this.ctx.compilerDirectiveDeleteSequenceNumber();
-		Integer ultimateLine = new Integer(0);
+		Integer ultimateLine = 0;
 
 		List<CobolPreprocessorParser.CompilerDirectiveNumericRangeContext> ranges =
 			this.seqNbCtx.compilerDirectiveNumericRange();
 		if (ranges != null) {
 			for (CobolPreprocessorParser.CompilerDirectiveNumericRangeContext range: ranges) {
 				ArrayList<Integer> thisRange = new ArrayList<>();
-				thisRange.add(new Integer(range.compilerDirectiveNumericAtom(0).NUMERICLITERAL().getText()));
-				thisRange.add(new Integer(range.compilerDirectiveNumericAtom(1).NUMERICLITERAL().getText()));
+				thisRange.add(Integer.parseInt(range.compilerDirectiveNumericAtom(0).NUMERICLITERAL().getText()));
+				thisRange.add(Integer.parseInt(range.compilerDirectiveNumericAtom(1).NUMERICLITERAL().getText()));
 				this.targetRanges.add(thisRange);
 				if (thisRange.get(1).compareTo(ultimateLine) > 0) {
 					ultimateLine = thisRange.get(1);
@@ -62,7 +62,7 @@ public class DeleteStatement implements CompilerDirectingStatement {
 			this.seqNbCtx.compilerDirectiveNumericAtom();
 		if (atoms != null) {
 			for (CobolPreprocessorParser.CompilerDirectiveNumericAtomContext atom: atoms) {
-				Integer thisLine = new Integer(atom.NUMERICLITERAL().getText());
+				Integer thisLine = Integer.parseInt(atom.NUMERICLITERAL().getText());
 				this.targetLines.add(thisLine);
 				if (thisLine.compareTo(ultimateLine) > 0) {
 					ultimateLine = thisLine;
@@ -74,7 +74,7 @@ public class DeleteStatement implements CompilerDirectingStatement {
 	}
 
 	public Boolean appliesTo(int lineNb) {
-		return this.appliesTo(new Integer(lineNb));
+		return this.appliesTo(lineNb);
 	}
 
 	public Boolean appliesTo(Integer lineNb) {

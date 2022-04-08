@@ -22,7 +22,7 @@ public class InsertStatement implements CompilerDirectingStatement {
 		this.ctx = ctx;
 		this.startLine = this.ctx.start.getLine();
 		this.endLine = this.ctx.stop.getLine();
-		this.targetLine = new Integer(this.ctx.NUMERICLITERAL().getText());
+		this.targetLine = Integer.parseInt(this.ctx.NUMERICLITERAL().getText());
 	}
 
 	public int getLine() {

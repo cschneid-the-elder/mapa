@@ -94,10 +94,26 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					extraPadding = token.getPosn();
 				} else {
 					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+					if (extraPadding < 0) extraPadding = 0;
 				}
 				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
 				long length = token.getTextLength() + extraPadding;
-				outLine.append(String.format("%" + length + "s", token.getText()));
+				try {
+					outLine.append(String.format("%" + length + "s", token.getText()));
+				} catch (Exception e) {
+					System.err.println(e);
+					e.printStackTrace(System.err);
+					System.err.println("length = " + length);
+					System.err.println("token.getText() = " + token.getText());
+					System.err.println("token.getTextLength() = " + token.getTextLength());
+					System.err.println("extraPadding = " + extraPadding);
+					LOGGER.finest("CopyReplaceParent createStringBuilderFromTerminalNodeWrappers "
+						+ "length = " + length
+						+ "token.getText() = " + token.getText()
+						+ "token.getTextLength() = " + token.getTextLength()
+						+ "extraPadding = " + extraPadding);
+					System.exit(16);
+				}
 			} else {
 				LOGGER.finest(" else");
 				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));

@@ -291,7 +291,7 @@ public class TheCLI{
 			File tmp
 			, ArrayList<TerminalNodeWrapper> tNodes
 			) throws IOException {
-		this.LOGGER.finest(this.myName + " writeOutTerminalNodes()");
+		this.LOGGER.finest(this.myName + " writeOutTerminalNodes() " + tmp.getName());
 
 		PrintWriter out = new PrintWriter(tmp);
 		StringBuilder sb = new StringBuilder();

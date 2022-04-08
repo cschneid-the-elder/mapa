@@ -96,18 +96,18 @@ class DDNode {
 
 	private void setLevelFromDDE1CTX() {
 		if (this.dde1Ctx.INTEGERLITERAL() == null) {
-			this.level = new Integer(this.dde1Ctx.LEVEL_NUMBER_77().toString());
+			this.level = Integer.parseInt(this.dde1Ctx.LEVEL_NUMBER_77().toString());
 		} else {
-			this.level = new Integer(this.dde1Ctx.INTEGERLITERAL().toString());
+			this.level = Integer.parseInt(this.dde1Ctx.INTEGERLITERAL().toString());
 		}
 	}
 
 	private void setLevelFromDDE2CTX() {
-		this.level = new Integer(this.dde2Ctx.LEVEL_NUMBER_66().toString());
+		this.level = Integer.parseInt(this.dde2Ctx.LEVEL_NUMBER_66().toString());
 	}
 
 	private void setLevelFromDDE3CTX() {
-		this.level = new Integer(this.dde3Ctx.LEVEL_NUMBER_88().toString());
+		this.level = Integer.parseInt(this.dde3Ctx.LEVEL_NUMBER_88().toString());
 	}
 
 	private void setValueFromDDE1CTX() {

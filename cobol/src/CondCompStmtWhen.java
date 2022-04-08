@@ -356,7 +356,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 				int cmp = whenInt1.compareTo(evaluateInt);
 				return this.compare(cmp, op);
 			} else {
-				Integer anInt = new Integer(whenTn1.getSymbol().getText());
+				Integer anInt = Integer.parseInt(whenTn1.getSymbol().getText());
 				int cmp = anInt.compareTo(evaluateInt);
 				return this.compare(cmp, op);
 			}
@@ -399,7 +399,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 
 
 		if (whenVar1 == null) {
-			Integer anInt = new Integer(whenTn1.getSymbol().getText());
+			Integer anInt = Integer.parseInt(whenTn1.getSymbol().getText());
 			cmp1 = anInt.compareTo(evaluateInt);
 			rc1 = compare(cmp1, op1);
 		} else {
@@ -407,7 +407,7 @@ class CondCompStmtWhen implements ConditionalCompilationStatement {
 		}
 
 		if (whenVar2 == null) {
-			Integer anInt = new Integer(whenTn2.getSymbol().getText());
+			Integer anInt = Integer.parseInt(whenTn2.getSymbol().getText());
 			cmp2 = anInt.compareTo(evaluateInt);
 			rc2 = compare(cmp2, op2);
 		} else {

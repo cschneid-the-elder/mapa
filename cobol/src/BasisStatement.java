@@ -88,36 +88,41 @@ public class BasisStatement implements CompilerDirectingStatement {
 		} else {
 			tmp.deleteOnExit();
 		}
+		this.LOGGER.finer(myName + " mergeWithSource() writing to " + tmp.getName());
 
 		PrintWriter out = new PrintWriter(tmp);
 		String basisLine = basis.readLine();
-		Integer basisLineNb = new Integer(-1);
+		Integer basisLineNb = -1;
 		if (basisLine != null && basisLine.length() >= 6) {
-			basisLineNb = new Integer(basisLine.substring(0,6));
+			basisLineNb = Integer.parseInt(basisLine.substring(0,6));
 		}
 
 		while (basisLine != null) {
 			InsertStatement insertStatement = this.applicableInsertStatement(basisLineNb);
 			DeleteStatement deleteStatement = this.applicableDeleteStatement(basisLineNb);
 			if (insertStatement != null) {
+				this.LOGGER.finest(myName + " writing " + basisLine);
 				out.println(basisLine);
 				for (String aNewLine: insertStatement.getSrc()) {
+					this.LOGGER.finest(myName + " writing " + aNewLine);
 					out.println(aNewLine);
 				}
 			} else if (deleteStatement != null) {
 				if (deleteStatement.isLastTargetLine(basisLineNb)) {
 					for (String aNewLine: deleteStatement.getSrc()) {
+						this.LOGGER.finest(myName + " writing " + aNewLine);
 						out.println(aNewLine);
 					}
 				}
 			} else {
+				this.LOGGER.finest(myName + " writing " + basisLine);
 				out.println(basisLine);
 			}
 			basisLine = basis.readLine();
 			if (basisLine != null && basisLine.length() >= 6) {
-				basisLineNb = new Integer(basisLine.substring(0,6));
+				basisLineNb = Integer.parseInt(basisLine.substring(0,6));
 			} else {
-				basisLineNb = new Integer(-1);
+				basisLineNb = -1;
 			}
 		}
 

@@ -280,7 +280,7 @@ class CondCompVar implements CondCompToken {
 		} else if (s.chars().allMatch(Character::isDigit)) {
 			this.LOGGER.finest("s.chars().allMatch(Character::isDigit)");
 			this.type = CondCompTokenType.VAR_INTEGER;
-			this.intValue = new Integer(s);
+			this.intValue = Integer.parseInt(s);
 		} else {
 			this.LOGGER.finest("else must be alphanum");
 			this.type = CondCompTokenType.VAR_ALPHANUM;
@@ -436,7 +436,7 @@ class CondCompVar implements CondCompToken {
 
 		switch(this.type) {
 			case VAR_INTEGER:
-				comparison = this.intValue.compareTo(new Integer(tText));
+				comparison = this.intValue.compareTo(Integer.parseInt(tText));
 				break;
 			case VAR_ALPHANUM:
 				comparison = this.alnumValue.compareTo(tText);
@@ -468,7 +468,8 @@ class CondCompVar implements CondCompToken {
 
 		switch(this.type) {
 			case VAR_INTEGER:
-				comparison = new Integer(tText).compareTo(this.intValue);
+				//comparison = new Integer(tText).compareTo(this.intValue);
+				comparison = Integer.compare(Integer.parseInt(tText), this.intValue);
 				break;
 			case VAR_ALPHANUM:
 				comparison = tText.compareTo(this.alnumValue);

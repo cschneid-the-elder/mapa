@@ -94,7 +94,7 @@ public class CobolPreprocessorParser extends Parser {
 		INLINE_OFF=473, INLINE_ON=474, IS=475, LESS=476, NOT=477, OR=478, OTHER=479, 
 		OVERRIDE=480, PARAMETER=481, STATIC=482, THAN=483, THROUGH=484, THRU=485, 
 		TO=486, TRUE=487, WHEN=488, BD_WS=489, BD_CLASSIC_EOL_COMMENT=490, SQL_TEXT=491, 
-		CICS_TEXT=492;
+		ES_CLASSIC_LINE_NUMBER=492, CICS_TEXT=493, EC_CLASSIC_LINE_NUMBER=494;
 	public static final int
 		RULE_startRule = 0, RULE_identificationDivisionTag = 1, RULE_compilerOptions = 2, 
 		RULE_compilerXOpts = 3, RULE_compilerOption = 4, RULE_define_opt = 5, 
@@ -266,7 +266,7 @@ public class CobolPreprocessorParser extends Parser {
 			"EVALUATE", "GREATER", "IF", "INLINE_OFF", "INLINE_ON", "IS", "LESS", 
 			"NOT", "OR", "OTHER", "OVERRIDE", "PARAMETER", "STATIC", "THAN", "THROUGH", 
 			"THRU", "TO", "TRUE", "WHEN", "BD_WS", "BD_CLASSIC_EOL_COMMENT", "SQL_TEXT", 
-			"CICS_TEXT"
+			"ES_CLASSIC_LINE_NUMBER", "CICS_TEXT", "EC_CLASSIC_LINE_NUMBER"
 		};
 	}
 	private static final String[] _SYMBOLIC_NAMES = makeSymbolicNames();
@@ -16239,7 +16239,7 @@ public class CobolPreprocessorParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u01ee\u057e\4\2\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\u01f0\u057e\4\2\t"+
 		"\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13"+
 		"\t\13\4\f\t\f\4\r\t\r\4\16\t\16\4\17\t\17\4\20\t\20\4\21\t\21\4\22\t\22"+
 		"\4\23\t\23\4\24\t\24\4\25\t\25\4\26\t\26\4\27\t\27\4\30\t\30\4\31\t\31"+
@@ -16692,7 +16692,7 @@ public class CobolPreprocessorParser extends Parser {
 		"\2\u0338\u033a\7\u01be\2\2\u0339\u0338\3\2\2\2\u033a\u033d\3\2\2\2\u033b"+
 		"\u0339\3\2\2\2\u033b\u033c\3\2\2\2\u033c\u033e\3\2\2\2\u033d\u033b\3\2"+
 		"\2\2\u033e\u033f\7\u01b9\2\2\u033f\35\3\2\2\2\u0340\u0347\7[\2\2\u0341"+
-		"\u0343\7\u01ee\2\2\u0342\u0341\3\2\2\2\u0343\u0344\3\2\2\2\u0344\u0342"+
+		"\u0343\7\u01ef\2\2\u0342\u0341\3\2\2\2\u0343\u0344\3\2\2\2\u0344\u0342"+
 		"\3\2\2\2\u0344\u0345\3\2\2\2\u0345\u0348\3\2\2\2\u0346\u0348\5\34\17\2"+
 		"\u0347\u0342\3\2\2\2\u0347\u0346\3\2\2\2\u0348\u0349\3\2\2\2\u0349\u0347"+
 		"\3\2\2\2\u0349\u034a\3\2\2\2\u034a\u034b\3\2\2\2\u034b\u034d\7U\2\2\u034c"+
