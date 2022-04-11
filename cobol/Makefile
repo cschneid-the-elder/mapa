@@ -52,10 +52,6 @@ qdn:
 	echo `date` $@ >> build.log
 	$(JC) $(JCOPT) ./src/Identifier.java ./src/QualifiedDataName.java ./src/QualifiedDataNameFormat1.java ./src/QualifiedInData.java ./src/DataName.java ./src/InData.java ./src/InTable.java ./src/TableCall.java
 
-cds:
-	echo `date` $@ >> build.log
-	$(JC) $(JCOPT) ./src/CopyReplaceParent.java ./src/CondCompGroupOp.java ./src/CondCompArithmeticAtom.java ./src/CondCompArithmeticExpression.java ./src/CondCompRelationalCondition.java ./src/CompilerDirectingStatement.java ./src/CondCompStmtIf.java ./src/CondCompStmtElse.java ./src/CondCompStmtEndIf.java ./src/CondCompStmtEvaluate.java ./src/CondCompEvaluateSelection.java ./src/CondCompStmtWhen.java ./src/CondCompStmtEndEvaluate.java ./src/ReplaceClause.java ./src/CompilerOptionsWrapper.java ./src/CondCompVar.java ./src/DB2zIncludeStatement.java ./src/CopyStatement.java ./src/ReplaceOffStatement.java ./src/ReplaceStatement.java ./src/SQLIncludeStatementListener.java ./src/CompilerDirectingStatementListener.java ./src/TheCLI.java 
-
 jar:
 	echo `date` $@ >> build.log
 	jar cfm CallTree.jar manifest -C class .
@@ -89,7 +85,7 @@ ifeq ($(strip $(n)),)
 else
 	echo `date` $@ $(n) >> build.log
 #	java -agentlib:hprof=cpu=samples -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
-	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINER -saveTemp -profile -out callListNist$(n).log
+	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -profile -out callListNist$(n).log
 endif
 
 testrig:

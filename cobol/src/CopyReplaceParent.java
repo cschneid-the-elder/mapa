@@ -227,7 +227,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 			, int thisEndLine
 			, int thisStopLine
 			) {
-		LOGGER.fine("applyReplacingPhrase() ");
+		LOGGER.fine("CopyReplaceParent applyReplacingPhrase() ");
 		LOGGER.finest(" replaceable = " + replaceable);
 		LOGGER.finest(" replacement = " + replacement);
 		LOGGER.finest(" adjustmentNeeded = " + adjustmentNeeded);
@@ -287,9 +287,9 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 						subList.get(0).alterText(matchList.get(0), replacement.get(matchedIndex).get(0));
 					} else {
 						sourceNodes.removeAll(subList);
-						//LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
+						LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
 						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-						//LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
+						LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
 					}
 					from = from + replacement.get(matchedIndex).size();
 				} else {
