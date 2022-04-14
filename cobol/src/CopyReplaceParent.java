@@ -288,11 +288,14 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					} else {
 						sourceNodes.removeAll(subList);
 						LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
+						LOGGER.finest(" from = " + from);
 						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
 						LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
 					}
+					LOGGER.finest(" replacement.get(matchedIndex).size() = " + replacement.get(matchedIndex).size());
 					from = from + replacement.get(matchedIndex).size();
 				} else {
+					LOGGER.finest(" from++");
 					from++;
 				}
 			}
