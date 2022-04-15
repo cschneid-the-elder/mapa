@@ -43,6 +43,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 		CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 		) {
 
+		LOGGER.fine("CopyReplaceParent createStringBuilderFromTerminalNodeWrappers()");
 		long prevLine = -1;
 		int prevTextLength = -1;
 		long prevPosn = -1;
@@ -141,7 +142,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 	too arcane to get into.  So this is a filtered subList() method, removing
 	TerminalNodeWrappers representing newlines.
 	*/
-	public ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper( //TODO make private
+	private ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
 			CopyOnWriteArrayList<TerminalNodeWrapper> tnwList
 			, int from
 			, int size
@@ -247,6 +248,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 			matchedIndex = replaceable.indexOf(matchList1);
 			int from = 0;
 			int to = -1;
+			int at = -1;
 			if (adjustmentNeeded) {
 				for (TerminalNodeWrapper sourceNode: sourceNodes) {
 					if (sourceNode.getLine() > thisEndLine) break;
@@ -258,10 +260,20 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 				LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
 				Boolean matched = false;
 				ArrayList<TerminalNodeWrapper> subList = null;
-				if (sourceNodes.size() - from >= matchList.size()) {
+				if (sourceNodes.size() - from >= matchList.size() && !sourceNodes.get(from).isNewline()) {
+					/*
+					The !sourceNodes.get(from).isNewline() check is because <sigh> the
+					subListTerminalNodeWrapper() method eliminates newlines to make COPY
+					REPLACING rules, which ignore whitespace, work correctly.  But that
+					messes with positioning for inserting the replacement text.  So, if
+					we're positioned at a newline, we skip over it.  Newlines internal to
+					the replaceable text are eliminated, as noted, in the
+					subListTerminalNodeWrapper() method.
+					*/
 					LOGGER.finest(" sourceNodes.size() |" + sourceNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
 					to = from + matchList.size();
 					int i = 0;
+					LOGGER.finest(" 1 sourceNodes(" + from + ") = |" + sourceNodes.get(from) + "|");
 					subList = this.subListTerminalNodeWrapper(sourceNodes, from, matchList.size());
 					LOGGER.finest(" subList = " + subList);
 					if (subList.size() == matchList.size()) {
@@ -286,9 +298,9 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					if (matchList.get(0).isDelimited()) {
 						subList.get(0).alterText(matchList.get(0), replacement.get(matchedIndex).get(0));
 					} else {
+						LOGGER.finest(" 2 sourceNodes(" + from + ") = |" + sourceNodes.get(from) + "|");
 						sourceNodes.removeAll(subList);
 						LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
-						LOGGER.finest(" from = " + from);
 						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
 						LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
 					}
@@ -298,6 +310,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					LOGGER.finest(" from++");
 					from++;
 				}
+				LOGGER.finest(" from = " + from);
 			}
 		}
 	}

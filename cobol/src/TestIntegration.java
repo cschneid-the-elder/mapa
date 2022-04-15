@@ -74,6 +74,7 @@ public static void main(String[] args) throws Exception {
 
 	CLI = new TheCLI(args, LOGGER);
 	baseDir = newTempDir(); // keep all temp files contained here
+	LOGGER.info("Temporary files are in " + baseDir);
 	String fileName = null;
 	ArrayList<CobolSource> allTheCobolSource = new ArrayList<>();
 	Boolean pass = true;
