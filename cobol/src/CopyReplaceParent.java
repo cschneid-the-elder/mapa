@@ -56,7 +56,25 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 			LOGGER.finest(" prevPosn = " + prevPosn);
 			LOGGER.finest(" prevTextLength = " + prevTextLength);
 			long clonedPosn = token.getClonedPosn();
-			if (token.isPrecededByNewline() || token.isFirst()) {
+			if (token.isEndExec()) {
+				LOGGER.finest(" token.isEndExec()");
+				if (token.getLine() == prevLine) {
+					long length = token.getTextLength();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				} else {
+					long length = token.getTextLength() + token.getPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				}
+			} else if (token.isCICStext() || token.isSQLtext()) {
+				LOGGER.finest(" token.isCICStext || token.isSQLtext()");
+				if (token.getLine() == prevLine) {
+					long length = token.getTextLength();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				} else {
+					long length = token.getTextLength() + token.getPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				}
+			} else if (token.isPrecededByNewline() || token.isFirst()) {
 				LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
 				if (token.getClonedPosn() == -1) {
 					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));

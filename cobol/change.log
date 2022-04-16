@@ -1,0 +1,24 @@
+--2022-04-16--------------------------------------------------------------------
+Modified a number of files to account for the inexcusable deprecation of
+_all_ of the constructors for Integer.  "Boxing" indeed.
+
+Fixed a bug in CopyReplaceParent.applyReplacingPhrase() that caused
+testdata/nist/SM202A to resolve K2SEA incorrectly.  A newline removed
+by CopyReplaceParent.subListTerminalNodeWrapper() was not accounted
+for properly.
+
+Fixed a bug in CopyReplaceParent.createStringBuilderFromTerminalNodeWrappers()
+that caused EXEC CICS ... END-EXEC to have the END-EXEC in the wrong
+position and resulted in a parse error.  That code was written prior to the
+addition of CICS_TEXT (and SQL_TEXT) in the lexer, and didn't properly
+account for differences between those (non-COBOL) formats and the rest of
+a COBOL program.
+
+Added some text to Makefile to indicate how to build from scratch.  This was
+not something I'd ever had to do and it turned out to be simple, once I
+figured out what order to build things.
+
+Renamed CobolPreprocessorParserTerminalNodeListener.java to
+PreprocessorParserTerminalNodeListener.java to eliminate problems in building
+from scratch.
+

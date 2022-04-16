@@ -184,6 +184,6 @@ ziplogs:
 
 ./class/CharDataLineWrapper.class: ./class/TerminalNodeWrapper.class ./class/CobolWordWrapper.class ./class/LiteralWrapper.class ./class/FilenameWrapper.class ./class/DfhvalueWrapper.class
 
-./class/TerminalNodeWrapper.class: ./src/TerminalNodeWrapper.java
+./class/TerminalNodeWrapper.class: ./src/TerminalNodeWrapper.java ./src/CobolPreprocessorLexer.tokens
 
 
