@@ -190,6 +190,18 @@ class TerminalNodeWrapper {
 		return (this.getType() == CobolPreprocessorParser.NEWLINE);
 	}
 
+	public Boolean isEndExec() {
+		return (this.getType() == CobolPreprocessorParser.END_EXEC);
+	}
+
+	public Boolean isCICStext() {
+		return (this.getType() == CobolPreprocessorParser.CICS_TEXT);
+	}
+
+	public Boolean isSQLtext() {
+		return (this.getType() == CobolPreprocessorParser.SQL_TEXT);
+	}
+
 	public void setIsFirst(Boolean isFirst) {
 		this.isFirst = isFirst;
 		this.setText();

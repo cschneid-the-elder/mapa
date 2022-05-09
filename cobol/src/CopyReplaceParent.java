@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.logging.Logger;
 import java.io.*;
 import java.nio.file.*;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -12,7 +13,10 @@ of the COPY statement and the REPLACE statement, believe me when I
 tell you this was far worse in previous incarnations.  
 */
 
+
 abstract class CopyReplaceParent {
+
+public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 
 	/**
 	Needed in both CobolSource for processing REPLACE statements and
@@ -39,6 +43,7 @@ abstract class CopyReplaceParent {
 		CopyOnWriteArrayList<TerminalNodeWrapper> sourceNodes
 		) {
 
+		LOGGER.fine("CopyReplaceParent createStringBuilderFromTerminalNodeWrappers()");
 		long prevLine = -1;
 		int prevTextLength = -1;
 		long prevPosn = -1;
@@ -46,20 +51,42 @@ abstract class CopyReplaceParent {
 		StringBuilder outLine = new StringBuilder();
 
 		for (TerminalNodeWrapper token: sourceNodes) {
-			TestIntegration.LOGGER.finest(" token = " + token);
-			TestIntegration.LOGGER.finest(" prevLine = " + prevLine);
-			TestIntegration.LOGGER.finest(" prevPosn = " + prevPosn);
-			TestIntegration.LOGGER.finest(" prevTextLength = " + prevTextLength);
+			LOGGER.finest(" token = " + token);
+			LOGGER.finest(" prevLine = " + prevLine);
+			LOGGER.finest(" prevPosn = " + prevPosn);
+			LOGGER.finest(" prevTextLength = " + prevTextLength);
 			long clonedPosn = token.getClonedPosn();
-			if (token.isPrecededByNewline() || token.isFirst()) {
-				TestIntegration.LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
-				if (token.getClonedPosn() == -1) {
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+			if (token.isEndExec()) {
+				LOGGER.finest(" token.isEndExec()");
+				if (token.getLine() == prevLine) {
+					long length = token.getTextLength();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
 				} else {
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+					long length = token.getTextLength() + token.getPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				}
+			} else if (token.isCICStext() || token.isSQLtext()) {
+				LOGGER.finest(" token.isCICStext || token.isSQLtext()");
+				if (token.getLine() == prevLine) {
+					long length = token.getTextLength();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				} else {
+					long length = token.getTextLength() + token.getPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				}
+			} else if (token.isPrecededByNewline() || token.isFirst()) {
+				LOGGER.finest(" token.isPrecededByNewline() == true || token.isFirst() == true");
+				if (token.getClonedPosn() == -1) {
+					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+					long length = token.getTextLength() + token.getPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
+				} else {
+					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getClonedPosn()));
+					long length = token.getTextLength() + token.getClonedPosn();
+					outLine.append(String.format("%"+ length + "s", token.getText()));
 				}
 			} else if (token.getClonedLine() == prevLine) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
+				LOGGER.finest(" token.getClonedLine() == prevLine ws = " + token.isPrecededByWhitespace());
 				if (token.isPrecededByWhitespace()) {
 					outLine.append(" ");
 					long extraPadding = 0;
@@ -68,12 +95,14 @@ abstract class CopyReplaceParent {
 					} else {
 						extraPadding = token.getClonedPosn() - (prevPosn + prevTextLength);
 					}
-					outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+					//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+					long length = token.getTextLength() + extraPadding;
+					outLine.append(String.format("%" + length + "s", token.getText()));
 				} else {
 					outLine.append(token.getText());
 				}
 			} else if (token.getClonedLine() == -1) {
-				TestIntegration.LOGGER.finest(" token.getClonedLine() == -1");
+				LOGGER.finest(" token.getClonedLine() == -1");
 				if (prevToken != null && prevToken.getClonedLine() != -1) {
 					if (token.isPrecededByWhitespace()) {
 						outLine.append(" ");
@@ -84,11 +113,31 @@ abstract class CopyReplaceParent {
 					extraPadding = token.getPosn();
 				} else {
 					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
+					if (extraPadding < 0) extraPadding = 0;
 				}
-				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
+				long length = token.getTextLength() + extraPadding;
+				try {
+					outLine.append(String.format("%" + length + "s", token.getText()));
+				} catch (Exception e) {
+					System.err.println(e);
+					e.printStackTrace(System.err);
+					System.err.println("length = " + length);
+					System.err.println("token.getText() = " + token.getText());
+					System.err.println("token.getTextLength() = " + token.getTextLength());
+					System.err.println("extraPadding = " + extraPadding);
+					LOGGER.finest("CopyReplaceParent createStringBuilderFromTerminalNodeWrappers "
+						+ "length = " + length
+						+ "token.getText() = " + token.getText()
+						+ "token.getTextLength() = " + token.getTextLength()
+						+ "extraPadding = " + extraPadding);
+					System.exit(16);
+				}
 			} else {
-				TestIntegration.LOGGER.finest(" else");
-				outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				LOGGER.finest(" else");
+				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + token.getPosn()));
+				long length = token.getTextLength() + token.getPosn();
+				outLine.append(String.format("%" + length + "s", token.getText()));
 			}
 			if (token.getClonedLine() == -1) {
 				prevLine = token.getLine();
@@ -111,7 +160,7 @@ abstract class CopyReplaceParent {
 	too arcane to get into.  So this is a filtered subList() method, removing
 	TerminalNodeWrappers representing newlines.
 	*/
-	public ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper( //TODO make private
+	private ArrayList<TerminalNodeWrapper> subListTerminalNodeWrapper(
 			CopyOnWriteArrayList<TerminalNodeWrapper> tnwList
 			, int from
 			, int size
@@ -197,12 +246,12 @@ abstract class CopyReplaceParent {
 			, int thisEndLine
 			, int thisStopLine
 			) {
-		TestIntegration.LOGGER.fine("applyReplacingPhrase() ");
-		TestIntegration.LOGGER.finest(" replaceable = " + replaceable);
-		TestIntegration.LOGGER.finest(" replacement = " + replacement);
-		TestIntegration.LOGGER.finest(" adjustmentNeeded = " + adjustmentNeeded);
-		TestIntegration.LOGGER.finest(" thisEndLine = " + thisEndLine);
-		TestIntegration.LOGGER.finest(" thisStopLine = " + thisStopLine);
+		LOGGER.fine("CopyReplaceParent applyReplacingPhrase() ");
+		LOGGER.finest(" replaceable = " + replaceable);
+		LOGGER.finest(" replacement = " + replacement);
+		LOGGER.finest(" adjustmentNeeded = " + adjustmentNeeded);
+		LOGGER.finest(" thisEndLine = " + thisEndLine);
+		LOGGER.finest(" thisStopLine = " + thisStopLine);
 
 		int matchedIndex = 0;
 
@@ -213,10 +262,11 @@ abstract class CopyReplaceParent {
 				if (tnw.isNewline()) toRemove.add(tnw);
 			}
 			matchList.removeAll(toRemove);
-			TestIntegration.LOGGER.finest(" matchList = " + matchList);
+			LOGGER.finest(" matchList = " + matchList);
 			matchedIndex = replaceable.indexOf(matchList1);
 			int from = 0;
 			int to = -1;
+			int at = -1;
 			if (adjustmentNeeded) {
 				for (TerminalNodeWrapper sourceNode: sourceNodes) {
 					if (sourceNode.getLine() > thisEndLine) break;
@@ -225,46 +275,60 @@ abstract class CopyReplaceParent {
 			}
 			matchLoop: //TODO remove label
 			while (from < sourceNodes.size() && sourceNodes.get(from).getLine() < thisStopLine) {
-				TestIntegration.LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
+				LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
 				Boolean matched = false;
 				ArrayList<TerminalNodeWrapper> subList = null;
-				if (sourceNodes.size() - from >= matchList.size()) {
-					TestIntegration.LOGGER.finest(" sourceNodes.size() |" + sourceNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
+				if (sourceNodes.size() - from >= matchList.size() && !sourceNodes.get(from).isNewline()) {
+					/*
+					The !sourceNodes.get(from).isNewline() check is because <sigh> the
+					subListTerminalNodeWrapper() method eliminates newlines to make COPY
+					REPLACING rules, which ignore whitespace, work correctly.  But that
+					messes with positioning for inserting the replacement text.  So, if
+					we're positioned at a newline, we skip over it.  Newlines internal to
+					the replaceable text are eliminated, as noted, in the
+					subListTerminalNodeWrapper() method.
+					*/
+					LOGGER.finest(" sourceNodes.size() |" + sourceNodes.size() + "| - from |" + from + "| >= matchList.size() |" + matchList.size() + "|");
 					to = from + matchList.size();
 					int i = 0;
+					LOGGER.finest(" 1 sourceNodes(" + from + ") = |" + sourceNodes.get(from) + "|");
 					subList = this.subListTerminalNodeWrapper(sourceNodes, from, matchList.size());
-					TestIntegration.LOGGER.finest(" subList = " + subList);
+					LOGGER.finest(" subList = " + subList);
 					if (subList.size() == matchList.size()) {
-						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
+						LOGGER.finest(" subList.size() |" + subList.size() + "| == matchList.size() |" + matchList.size() + "|");
 						matched = true;
 						for (TerminalNodeWrapper sourceNode: subList) {
-							TestIntegration.LOGGER.finest(" sourceNode = |" + sourceNode + "|");
+							LOGGER.finest(" sourceNode = |" + sourceNode + "|");
 							if (!matchList.get(i).textIsEqual(sourceNode)) {
-								TestIntegration.LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(sourceNode) i.e. |" + matchList.get(i) + "| != |" + sourceNode + "|");
+								LOGGER.finest(" !matchList.get(" + i + ").textIsEqual(sourceNode) i.e. |" + matchList.get(i) + "| != |" + sourceNode + "|");
 								matched = false;
 								break;
 							}
 							i++;
 						}
 					} else {
-						TestIntegration.LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
+						LOGGER.finest(" subList.size() |" + subList.size() + "| != matchList.size() |" + matchList.size() + "|");
 						matched = false;
 					}
 				}
-				TestIntegration.LOGGER.finest(" matched = " + matched);
+				LOGGER.finest(" matched = " + matched);
 				if (matched) {
 					if (matchList.get(0).isDelimited()) {
 						subList.get(0).alterText(matchList.get(0), replacement.get(matchedIndex).get(0));
 					} else {
+						LOGGER.finest(" 2 sourceNodes(" + from + ") = |" + sourceNodes.get(from) + "|");
 						sourceNodes.removeAll(subList);
-						//TestIntegration.LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
+						LOGGER.finest(" sourceNodes after removeAll = " + sourceNodes);
 						sourceNodes.addAll(from, this.cloneTerminalNodeWrapperList(replacement.get(matchedIndex), subList));
-						//TestIntegration.LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
+						LOGGER.finest(" sourceNodes after addAll    = " + sourceNodes);
 					}
+					LOGGER.finest(" replacement.get(matchedIndex).size() = " + replacement.get(matchedIndex).size());
 					from = from + replacement.get(matchedIndex).size();
 				} else {
+					LOGGER.finest(" from++");
 					from++;
 				}
+				LOGGER.finest(" from = " + from);
 			}
 		}
 	}

@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (14-Jul-2021) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (16-Apr-2022) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -101,7 +101,7 @@ The DD record contains counts of how the file is opened.  This might be useful i
 
 ### Build/Execution Environment
 
-This was built on ubuntu 16.04 LTS with ANTLR 4.9.2, openjdk version "1.8.0_252", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 20.04 LTS with ANTLR 4.9.2, openjdk version "11.0.14.1", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 ### Why This Is Complicated
 

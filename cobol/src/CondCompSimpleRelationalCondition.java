@@ -281,12 +281,12 @@ class CondCompSimpleRelationalCondition implements CondCompToken, CondCompCondit
 		}
 
 		if (this.arg1 != null) {
-			Integer val1 = new Integer(this.arg1.getSymbol().getText());
+			Integer val1 = Integer.parseInt(this.arg1.getSymbol().getText());
 			comparison = exp1Value.compareTo(val1);
 			return this.compare(comparison);
 		}
 
-		Integer val2 = new Integer(this.arg2.getSymbol().getText());
+		Integer val2 = Integer.parseInt(this.arg2.getSymbol().getText());
 		comparison = val2.compareTo(exp1Value);
 		return this.compare(comparison);
 	}

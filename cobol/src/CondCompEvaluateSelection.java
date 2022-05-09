@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.logging.Logger;
 import org.antlr.v4.runtime.tree.*;
 
 class CondCompEvaluateSelection {
@@ -18,6 +19,7 @@ class CondCompEvaluateSelection {
 	private Boolean booleanValue = null;
 	private int line = -1;
 	private String text = null;
+	private Logger LOGGER = Logger.getLogger("TestIntegration");
 
 	public CondCompEvaluateSelection (
 				CobolPreprocessorParser.ConditionalCompilationEvaluateSelectionContext ctx
@@ -97,9 +99,9 @@ class CondCompEvaluateSelection {
 				}
 			}
 			if (this.var == null) {
-				TestIntegration.LOGGER.finest(this.myName + " " + this.var + " is null");
+				this.LOGGER.finest(this.myName + " " + this.var + " is null");
 			} else {
-				TestIntegration.LOGGER.finest(this.myName + " " + this.var + " is not null");
+				this.LOGGER.finest(this.myName + " " + this.var + " is not null");
 				switch(this.var.getType()) {
 					case VAR_INTEGER:
 						this.numericValue = this.var.getIntValue();
@@ -121,7 +123,7 @@ class CondCompEvaluateSelection {
 			}
 		} else if (this.numericLiteral != null) {
 			this.tn = this.numericLiteral;
-			this.numericValue = new Integer(this.numericLiteral.getSymbol().getText());
+			this.numericValue = Integer.parseInt(this.numericLiteral.getSymbol().getText());
 		} else if (this.nonNumericLiteral != null) {
 			this.tn = this.nonNumericLiteral;
 			this.nonNumericValue = this.nonNumericLiteral.getSymbol().getText();

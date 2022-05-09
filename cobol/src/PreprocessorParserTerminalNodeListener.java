@@ -4,10 +4,10 @@ import java.util.logging.Logger;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
-public class CobolPreprocessorParserTerminalNodeListener extends CobolPreprocessorParserBaseListener {
+public class PreprocessorParserTerminalNodeListener extends CobolPreprocessorParserBaseListener {
 	public ArrayList<TerminalNodeWrapper> tNodes = null;
 
-	public CobolPreprocessorParserTerminalNodeListener(
+	public PreprocessorParserTerminalNodeListener(
 			ArrayList<TerminalNodeWrapper> tNodes
 			) {
 		super();

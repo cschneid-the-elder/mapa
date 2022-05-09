@@ -291,7 +291,7 @@ public class TheCLI{
 			File tmp
 			, ArrayList<TerminalNodeWrapper> tNodes
 			) throws IOException {
-		this.LOGGER.finest(this.myName + " writeOutTerminalNodes()");
+		this.LOGGER.finest(this.myName + " writeOutTerminalNodes() " + tmp.getName());
 
 		PrintWriter out = new PrintWriter(tmp);
 		StringBuilder sb = new StringBuilder();
@@ -378,8 +378,8 @@ public class TheCLI{
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		CobolPreprocessorParserTerminalNodeListener listener = 
-			new CobolPreprocessorParserTerminalNodeListener(tNodes);
+		PreprocessorParserTerminalNodeListener listener = 
+			new PreprocessorParserTerminalNodeListener(tNodes);
 
 		this.LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 

@@ -74,6 +74,7 @@ public static void main(String[] args) throws Exception {
 
 	CLI = new TheCLI(args, LOGGER);
 	baseDir = newTempDir(); // keep all temp files contained here
+	LOGGER.info("Temporary files are in " + baseDir);
 	String fileName = null;
 	ArrayList<CobolSource> allTheCobolSource = new ArrayList<>();
 	Boolean pass = true;
@@ -151,8 +152,8 @@ public static void main(String[] args) throws Exception {
 			case "testantlr101":
 			case "testantlr201":
 			case "testantlr301":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (calledNodes.size() == 0) {
 					//do nothing
 				} else {
@@ -167,314 +168,314 @@ public static void main(String[] args) throws Exception {
 			case "testantlr102":
 			case "testantlr202":
 			case "testantlr302":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr003":
 			case "testantlr103":
 			case "testantlr203":
 			case "testantlr303":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr004":
 			case "testantlr104":
 			case "testantlr204":
 			case "testantlr304":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr005":
 			case "testantlr105":
 			case "testantlr205":
 			case "testantlr305":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr006":
 			case "testantlr106":
 			case "testantlr206":
 			case "testantlr306":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSLINKBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr007":
 			case "testantlr107":
 			case "testantlr207":
 			case "testantlr307":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSXCTLBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr008":
 			case "testantlr108":
 			case "testantlr208":
 			case "testantlr308":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSLINKBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr009":
 			case "testantlr109":
 			case "testantlr209":
 			case "testantlr309":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSXCTLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr010":
 			case "testantlr110":
 			case "testantlr210":
 			case "testantlr310":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.SQLCALLBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr011":
 			case "testantlr111":
 			case "testantlr211":
 			case "testantlr311":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSLINKBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr012":
 			case "testantlr112":
 			case "testantlr212":
 			case "testantlr312":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSXCTLBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr013":
 			case "testantlr113":
 			case "testantlr213":
 			case "testantlr313":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.SQLCALLBYLITERAL, calledNodes)) failCount++;
 				break;
 			case "testantlr014":
 			case "testantlr114":
 			case "testantlr214":
 			case "testantlr314":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSLINKBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr015":
 			case "testantlr115":
 			case "testantlr215":
 			case "testantlr315":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CICSXCTLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr016":
 			case "testantlr116":
 			case "testantlr216":
 			case "testantlr316":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMB0004", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr017":
 			case "testantlr117":
 			case "testantlr217":
 			case "testantlr317":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMB0005", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr018":
 			case "testantlr118":
 			case "testantlr218":
 			case "testantlr318":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMO0010", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr019":
 			case "testantlr119":
 			case "testantlr219":
 			case "testantlr319":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMN0010", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr020":
 			case "testantlr120":
 			case "testantlr220":
 			case "testantlr320":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMK0008", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr021":
 			case "testantlr121":
 			case "testantlr221":
 			case "testantlr321":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMB0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr022":
 			case "testantlr122":
 			case "testantlr222":
 			case "testantlr322":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(77), "AA-FROM-COPY", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 77, "AA-FROM-COPY", dataNodes)) failCount++;
 				break;
 			case "testantlr023":
 			case "testantlr123":
 			case "testantlr223":
 			case "testantlr323":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "PGM-0004", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "PGM-0004", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMB0004", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr024":
 			case "testantlr124":
 			case "testantlr224":
 			case "testantlr324":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "A", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "X", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "V99", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "B9", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "Z", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "A", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "X", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "V99", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "B9", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "Z", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9", dataNodes)) failCount++;
 				break;
 			case "testantlr025":
 			case "testantlr125":
 			case "testantlr225":
 			case "testantlr325":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "A", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "X", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "V99", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "B9", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "Z", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99DISPLAY", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99USAGEDISPLAY", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99DISPLAY1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99USAGEDISPLAY1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMP", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMP1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95COMP3", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMP3", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9SFLOAT", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9DFLOAT", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98COMP5", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMP5", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99DISPLAY-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99USAGEDISPLAY-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99DISPLAY1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99USAGEDISPLAY1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMP-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMP1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95COMP3-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMP3-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98COMP5-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMP5-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMPU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMPU1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95COMPU3", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMPU3", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9SFLOATU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9DFLOATU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98COMPU5", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMPU5", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMPU-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94COMPU1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95COMPU3-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMPU3-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98COMPU5-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMPU5-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "A", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "X", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "V99", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "B9", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "Z", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99DISPLAY", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99USAGEDISPLAY", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99DISPLAY1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99USAGEDISPLAY1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMP", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMP1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95COMP3", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMP3", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9SFLOAT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9DFLOAT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98COMP5", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMP5", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99DISPLAY-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99USAGEDISPLAY-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99DISPLAY1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99USAGEDISPLAY1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMP-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMP1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95COMP3-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMP3-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98COMP5-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMP5-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMPU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMPU1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95COMPU3", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMPU3", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9SFLOATU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9DFLOATU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98COMPU5", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMPU5", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMPU-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94COMPU1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95COMPU3-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMPU3-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98COMPU5-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMPU5-V", dataNodes)) failCount++;
 				break;
 			case "testantlr026":
 			case "testantlr126":
 			case "testantlr226":
 			case "testantlr326":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "A", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "B", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "C", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMP3", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9SFLOAT", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9DFLOAT", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMP5", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99USAGEDISPLAY-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S99USAGEDISPLAY1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMP1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMP3-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMP5-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU1", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMPU3", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9SFLOATU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S9DFLOATU", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMPU5", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S94USAGECOMPU1-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S95USAGECOMPU3-V", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "S98USAGECOMPU5-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "A", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "B", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "C", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMP3", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9SFLOAT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9DFLOAT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMP5", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99USAGEDISPLAY-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S99USAGEDISPLAY1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMP1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMP3-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMP5-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU1", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMPU3", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9SFLOATU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S9DFLOATU", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMPU5", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S94USAGECOMPU1-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S95USAGECOMPU3-V", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "S98USAGECOMPU5-V", dataNodes)) failCount++;
 				break;
 			case "testantlr027":
 			case "testantlr127":
 			case "testantlr227":
 			case "testantlr327":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "A", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "X", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "A", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "X", dataNodes)) failCount++;
 				break;
 			case "testantlr028":
 			case "testantlr128":
 			case "testantlr228":
 			case "testantlr328":
-				if (!testDD002(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "MYNAME", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "X", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(01), "LOCAL-WORK-AREAS", dataNodes, DataLocation.LOCALSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "Y", dataNodes, DataLocation.LOCALSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(01), "PARM-DATA", dataNodes, DataLocation.LINKAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "PARM-DATA-LEN", dataNodes, DataLocation.LINKAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "PARM-DATA-VAL", dataNodes, DataLocation.LINKAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 1, "CONSTANTS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "MYNAME", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 1, "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "X", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 1, "LOCAL-WORK-AREAS", dataNodes, DataLocation.LOCALSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "Y", dataNodes, DataLocation.LOCALSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 1, "PARM-DATA", dataNodes, DataLocation.LINKAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "PARM-DATA-LEN", dataNodes, DataLocation.LINKAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "PARM-DATA-VAL", dataNodes, DataLocation.LINKAGE)) failCount++;
 				break;
 			case "testantlr029":
 			case "testantlr129":
 			case "testantlr229":
 			case "testantlr329":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMK0008", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMO0010", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0004", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
@@ -496,96 +497,96 @@ public static void main(String[] args) throws Exception {
 			case "testantlr133":
 			case "testantlr233":
 			case "testantlr333":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "CEE3ABD", CallType.CALLBYLITERAL, calledNodes, 1)) failCount++;
 				break;
 			case "testantlr034":
 			case "testantlr134":
 			case "testantlr234":
 			case "testantlr334":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr035":
 			case "testantlr135":
 			case "testantlr235":
 			case "testantlr335":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr036":
 			case "testantlr136":
 			case "testantlr236":
 			case "testantlr336":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr037":
 			case "testantlr137":
 			case "testantlr237":
 			case "testantlr337":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr038":
 			case "testantlr138":
 			case "testantlr238":
 			case "testantlr338":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr039":
 			case "testantlr139":
 			case "testantlr239":
 			case "testantlr339":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr040":
 			case "testantlr140":
 			case "testantlr240":
 			case "testantlr340":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr041":
 			case "testantlr141":
 			case "testantlr241":
 			case "testantlr341":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr042":
 			case "testantlr142":
 			case "testantlr242":
 			case "testantlr342":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr043":
 			case "testantlr143":
 			case "testantlr243":
 			case "testantlr343":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr044":
 			case "testantlr144":
 			case "testantlr244":
 			case "testantlr344":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
@@ -594,24 +595,24 @@ public static void main(String[] args) throws Exception {
 			case "testantlr145":
 			case "testantlr245":
 			case "testantlr345":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0009", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr046":
 			case "testantlr146":
 			case "testantlr246":
 			case "testantlr346":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr047":
 			case "testantlr147":
 			case "testantlr247":
 			case "testantlr347":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
 				break;
@@ -619,16 +620,16 @@ public static void main(String[] args) throws Exception {
 			case "testantlr148":
 			case "testantlr248":
 			case "testantlr348":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr049":
 			case "testantlr149":
 			case "testantlr249":
 			case "testantlr349":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0002", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0003", CallType.CALLBYIDENTIFIER, calledNodes, 13)) failCount++;
@@ -702,51 +703,51 @@ public static void main(String[] args) throws Exception {
 			case "testantlr156":
 			case "testantlr256":
 			case "testantlr356":
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "WS-COUNT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "WS-COUNT", dataNodes)) failCount++;
 				break;
 			case "testantlr057":
 			case "testantlr157":
 			case "testantlr257":
 			case "testantlr357":
-				if (!testDD001(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "WS-POINTER", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "WS-COUNT", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(01), "SOME-DATA", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "WS-POINTER", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "WS-COUNT", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "SOME-DATA", dataNodes)) failCount++;
 				break;
 			case "testantlr058":
 			case "testantlr158":
 			case "testantlr258":
 			case "testantlr358":
-				if (!testDD002(fileName, bareName, new Integer(77), "PENNY-ADIYODI", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(77), "KADY-ORLOFF-DIAZ", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(77), "ZELDA-SCHIFF", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(77), "HENRY-FOGG", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(01), "WS-WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "W1-TEXT01", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "WS-TEXT02", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "W1-TEXT03", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 77, "PENNY-ADIYODI", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 77, "KADY-ORLOFF-DIAZ", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 77, "ZELDA-SCHIFF", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 77, "HENRY-FOGG", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 1, "WS-WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "W1-TEXT01", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "WS-TEXT02", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "W1-TEXT03", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
 				break;
 			case "testantlr059":
 			case "testantlr159":
 			case "testantlr259":
 			case "testantlr359":
-				if (!testDD002(fileName, bareName, new Integer(01), "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
-				if (!testDD002(fileName, bareName, new Integer(05), "COUNTER", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 1, "WORK-AREAS", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
+				if (!testDD002(fileName, bareName, 5, "COUNTER", dataNodes, DataLocation.WORKINGSTORAGE)) failCount++;
 				break;
 			case "testantlr060":
 			case "testantlr160":
 			case "testantlr260":
 			case "testantlr360":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				break;
 			case "testantlr061":
 			case "testantlr161":
 			case "testantlr261":
 			case "testantlr361":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "CEEGTST", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "PGM0061A", CallType.CICSXCTLBYLITERAL, calledNodes, 3)) failCount++;
 				if (!testCall001(fileName, bareName, "CEE3ABD", CallType.CALLBYLITERAL, calledNodes, 3)) failCount++;
@@ -755,16 +756,16 @@ public static void main(String[] args) throws Exception {
 			case "testantlr162":
 			case "testantlr262":
 			case "testantlr362":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testCall001(fileName, bareName, "PGMA0001", CallType.SQLCALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
 			case "testantlr063":
 			case "testantlr163":
 			case "testantlr263":
 			case "testantlr363":
-				if (!testDD001(fileName, bareName, new Integer(01), "CONSTANTS", dataNodes)) failCount++;
-				if (!testDD001(fileName, bareName, new Integer(05), "MYNAME", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
+				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				break;
 			default:
 				LOGGER.info("NONE " + fileName);

@@ -30,7 +30,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {
-		//TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
 	public void enterCompilerOptions(CobolPreprocessorParser.CompilerOptionsContext ctx) { 
@@ -38,13 +38,13 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterDefine_opt(CobolPreprocessorParser.Define_optContext ctx) {
-		CondCompVar var = new CondCompVar(ctx);
+		CondCompVar var = new CondCompVar(ctx, this.LOGGER);
 		this.compOptDefines.add(var);
 		this.defines.add(var);
 	}
 
 	public void enterConditionalCompilationDefine(CobolPreprocessorParser.ConditionalCompilationDefineContext ctx) {
-		CondCompVar var = new CondCompVar(ctx, this.compOptDefines);
+		CondCompVar var = new CondCompVar(ctx, this.compOptDefines, this.LOGGER);
 		this.compOptDefines.add(var);
 		this.defines.add(var);
 	}
@@ -129,7 +129,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterConditionalCompilationWhen(CobolPreprocessorParser.ConditionalCompilationWhenContext ctx) {
-		CondCompStmtWhen currWhen = new CondCompStmtWhen(ctx, evaluateStmts.peek(), this.defines);
+		CondCompStmtWhen currWhen = new CondCompStmtWhen(ctx, evaluateStmts.peek(), this.defines, this.LOGGER);
 		evaluateStmts.peek().addWhen(currWhen);
 		CondCompStmtWhen prevWhen = whenStmts.peek();
 		if (prevWhen == null) {
@@ -141,7 +141,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterReplaceByStatement(CobolPreprocessorParser.ReplaceByStatementContext ctx) { 
-		ReplaceStatement rs = new ReplaceStatement(ctx);
+		ReplaceStatement rs = new ReplaceStatement(ctx, this.LOGGER);
 		int last = this.replaceStmts.size();
 
 		this.compDirStmts.add(rs);
@@ -155,7 +155,7 @@ public class CompilerDirectingStatementListener extends CobolPreprocessorParserB
 	}
 
 	public void enterReplaceOffStatement(CobolPreprocessorParser.ReplaceOffStatementContext ctx) { 
-		ReplaceOffStatement ros = new ReplaceOffStatement(ctx);
+		ReplaceOffStatement ros = new ReplaceOffStatement(ctx, this.LOGGER);
 		int last = this.replaceStmts.size();
 
 		this.compDirStmts.add(ros);
