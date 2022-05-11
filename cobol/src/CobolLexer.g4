@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019 - 2021, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019 - 2022, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -307,6 +307,7 @@ EXEC : E X E C;
 EXEC_SQL : E X E C [ ]+ S Q L ->pushMode(EXEC_SQL_MODE);
 EXHIBIT : E X H I B I T;
 EXIT : E X I T;
+EXPANDS : E X P A N D S;
 EXPORT : E X P O R T;
 EXTEND : E X T E N D;
 EXTENDED : E X T E N D E D;
@@ -361,6 +362,7 @@ INPUT_OUTPUT : I N P U T MINUSCHAR O U T P U T;
 INSPECT : I N S P E C T;
 INSTALLATION : I N S T A L L A T I O N;
 INTEGER : I N T E G E R;
+INTERFACE : I N T E R F A C E;
 INTO : I N T O;
 INTRINSIC : I N T R I N S I C;
 INVALID : I N V A L I D;
@@ -490,6 +492,7 @@ PROGRAM : P R O G R A M;
 PROGRAM_ID : P R O G R A M MINUSCHAR I D;
 PROGRAM_LIBRARY : P R O G R A M MINUSCHAR L I B R A R Y;
 PROMPT : P R O M P T;
+PROPERTY : P R O P E R T Y;
 PURGE : P U R G E;
 QUEUE : Q U E U E;
 QUOTE : Q U O T E;
@@ -674,7 +677,14 @@ ZEROS : Z E R O S;
 ZEROES : Z E R O E S;
 
 // intrinsic functions
-
+/*
+This list is not inclusive of all instrinsic functions listed
+in the COBOL standard, it is a list of all intrinsic functions
+listed in the IBM Enterprise COBOL 6.3 documentation.  If you 
+find you need the EXCEPTION-* functions et. al. feel free to
+add them to the Lexer, to the intrinsicFunction rule in the parser,
+and to the other two copies of that rule contained therein.
+*/
 ABS : A B S ;
 ACOS : A C O S ;
 ANNUITY : A N N U I T Y ;
