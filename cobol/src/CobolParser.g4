@@ -2,7 +2,7 @@
  Copyright (C) 2017, Ulrich Wolffgang <ulrich.wolffgang@proleap.io>
  All rights reserved.
 
- Portions copyright (C) 2019 - 2021, Craig Schneiderwent.  All rights reserved.
+ Portions copyright (C) 2019 - 2022, Craig Schneiderwent.  All rights reserved.
 
  This software may be modified and distributed under the terms
  of the MIT license. See the LICENSE file for details.
@@ -19,6 +19,17 @@ parser grammar CobolParser;
 
 options {tokenVocab=CobolLexer;}
 
+@parser::members {
+
+   /*
+   The functionNames collection is used to distinguish between a
+   tableCall and a function invocation, which are in some cases
+   syntactically identical.  The collection is populated in 
+   members of the repositoryParagraph rule.
+   */
+   public java.util.HashSet<String> functionNames = new java.util.HashSet();
+
+}
 
 startRule : compilationUnit EOF;
 
@@ -266,15 +277,128 @@ xmlSchemaClause
 // - repository paragraph -----------------------------------
 
 respositoryParagraph
-   : REPOSITORY (DOT_FS | DOT) classIsPhrase* functionIntrinsicPhrase? (DOT_FS | DOT)?
+   : REPOSITORY (DOT_FS | DOT) (classIsPhrase | interfaceSpecifier | functionIntrinsicPhrase | programSpecifier | propertySpecifier | userDefinedFunctionSpecifier)* (DOT_FS | DOT)?
    ;
 
 classIsPhrase
-   : (CLASS className (IS IDENTIFIER)? (DOT_FS | DOT)?)
+   : (CLASS className (IS IDENTIFIER)? (EXPANDS className USING className+)? (DOT_FS | DOT)?)
    ;
 
+interfaceSpecifier
+   : (INTERFACE interfaceName (AS literal)? (EXPANDS interfaceName USING className+)? (DOT_FS | DOT)?)
+   ;
+   
 functionIntrinsicPhrase
    : (FUNCTION (ALL | intrinsicFunctionName+) INTRINSIC (DOT_FS | DOT)?)
+   {
+      if ($ALL.text == null) {
+         functionNames.add($intrinsicFunctionName.text.toUpperCase());
+      } else {
+         /* 
+         oh, how I wish it could be otherwise; yes this is a list of
+         the intrinsicFunctionNames token values
+         */
+         List<String> funcs = List.of(
+            "ABS"
+            ,"ACOS"
+            ,"ANNUITY"
+            ,"ASIN"
+            ,"ATAN"
+            ,"BIT-OF"
+            ,"BIT-TO-CHAR"
+            ,"BYTE-LENGTH"
+            ,"CHAR"
+            ,"COMBINED-DATETIME"
+            ,"COS"
+            ,"CURRENT-DATE"
+            ,"DATE-OF-INTEGER"
+            ,"DATE-TO-YYYYMMDD"
+            ,"DAY-OF-INTEGER"
+            ,"DAY-TO-YYYYDDD"
+            ,"DISPLAY-OF"
+            ,"E-FUNC"
+            ,"EXP"
+            ,"EXP10"
+            ,"FACTORIAL"
+            ,"FORMATTED-CURRENT-DATE"
+            ,"FORMATTED-DATE"
+            ,"FORMATTED-DATETIME"
+            ,"FORMATTED-TIME"
+            ,"HEX-OF"
+            ,"HEX-TO-CHAR"
+            ,"INTEGER"
+            ,"INTEGER-OF-DATE"
+            ,"INTEGER-OF-DAY"
+            ,"INTEGER-OF-FORMATTED-DATE"
+            ,"INTEGER-PART"
+            ,"LENGTH"
+            ,"LOG"
+            ,"LOG10"
+            ,"LOWER-CASE"
+            ,"MAX"
+            ,"MEAN"
+            ,"MEDIAN"
+            ,"MIDRANGE"
+            ,"MIN"
+            ,"MOD"
+            ,"NATIONAL-OF"
+            ,"NUMVAL"
+            ,"NUMVAL-C"
+            ,"NUMVAL-F"
+            ,"ORD"
+            ,"ORD-MAX"
+            ,"ORD-MIN"
+            ,"PI"
+            ,"PRESENT-VALUE"
+            ,"RANDOM"
+            ,"RANGE"
+            ,"REM"
+            ,"REVERSE"
+            ,"SECONDS-FROM-FORMATTED-TIME"
+            ,"SECONDS-PAST-MIDNIGHT"
+            ,"SIGN"
+            ,"SIN"
+            ,"SQRT"
+            ,"STANDARD-DEVIATION"
+            ,"SUM"
+            ,"TAN"
+            ,"TEST-DATE-YYYYMMDD"
+            ,"TEST-DAY-YYYYDDD"
+            ,"TEST-FORMATTED-DATETIME"
+            ,"TEST-NUMVAL"
+            ,"TEST-NUMVAL-C"
+            ,"TEST-NUMVAL-F"
+            ,"TRIM"
+            ,"ULENGTH"
+            ,"UPOS"
+            ,"UPPER-CASE"
+            ,"USUBSTR"
+            ,"USUPPLEMENTARY"
+            ,"UUID4"
+            ,"UVALID"
+            ,"UWIDTH"
+            ,"VARIANCE"
+            ,"WHEN-COMPILED"
+            ,"YEAR-TO-YYYY"
+            );
+         functionNames.addAll(funcs);
+      }
+   }
+   ;
+
+programSpecifier
+   : (PROGRAM programName (AS literal)? (DOT_FS | DOT)?)
+   ;
+   
+propertySpecifier
+   : (PROPERTY propertyName (AS literal)? (DOT_FS | DOT)?)
+   ;
+
+userDefinedFunctionSpecifier
+   : (FUNCTION functionPrototypeName (AS literal)? (DOT_FS | DOT)?)
+   {
+      functionNames.add($functionPrototypeName.text.toUpperCase());
+   }
    ;
 
 // -- input output section ----------------------------------
@@ -2669,7 +2793,7 @@ abbreviation
 // identifier ----------------------------------
 
 identifier
-   : qualifiedDataName | tableCall | functionCall | specialRegister //| dfhvalue
+   : qualifiedDataName | functionCall | tableCall | specialRegister //| dfhvalue
    ;
 
 /*
@@ -2683,7 +2807,7 @@ tableCall
    ;
 
 functionCall
-   : FUNCTION? functionName (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)* referenceModifier?
+   : ((FUNCTION cobolWord) | functionName) (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)* referenceModifier?
    ;
 
 referenceModifier
@@ -2815,13 +2939,23 @@ fileName
    ;
 
 functionName
-   : INTEGER | LENGTH | RANDOM | SUM | WHEN_COMPILED | intrinsicFunctionName | cobolWord
+   : 
+   {functionNames.contains(_input.LT(1).getText().toUpperCase())}?
+   cobolWord
+   ;
+
+functionPrototypeName
+   : cobolWord
    ;
 
 indexName
    : cobolWord
    ;
 
+interfaceName
+   : cobolWord
+   ;
+   
 languageName
    : systemName
    ;
@@ -2847,6 +2981,10 @@ procedureName
    ;
 
 programName
+   : NONNUMERICLITERAL | cobolWord
+   ;
+
+propertyName
    : NONNUMERICLITERAL | cobolWord
    ;
 
@@ -3117,6 +3255,19 @@ cicsWord
    | YEAR
    ;
 
+/*
+There are two (count them, two!) copies of the body of this
+rule in addition to this one.  I don't like it any better than
+you do, but this is where we are.  One copy is in cobolWord
+and the other is in functionIntrinsicPhrase.
+
+This list is not inclusive of all instrinsic functions listed
+in the COBOL standard, it is a list of all intrinsic functions
+listed in the IBM Enterprise COBOL 6.3 documentation.  If you 
+find you need the EXCEPTION-* functions et. al. feel free to
+add them to the Lexer, to this rule, and to the other two copies
+of this rule contained herein.
+*/
 intrinsicFunctionName
    :  ABS
    | ACOS

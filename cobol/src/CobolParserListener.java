@@ -567,6 +567,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitClassIsPhrase(CobolParser.ClassIsPhraseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#interfaceSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterInterfaceSpecifier(CobolParser.InterfaceSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#interfaceSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitInterfaceSpecifier(CobolParser.InterfaceSpecifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#functionIntrinsicPhrase}.
 	 * @param ctx the parse tree
 	 */
@@ -576,6 +586,36 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFunctionIntrinsicPhrase(CobolParser.FunctionIntrinsicPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#programSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterProgramSpecifier(CobolParser.ProgramSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#programSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitProgramSpecifier(CobolParser.ProgramSpecifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#propertySpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterPropertySpecifier(CobolParser.PropertySpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#propertySpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitPropertySpecifier(CobolParser.PropertySpecifierContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#userDefinedFunctionSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserDefinedFunctionSpecifier(CobolParser.UserDefinedFunctionSpecifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#userDefinedFunctionSpecifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserDefinedFunctionSpecifier(CobolParser.UserDefinedFunctionSpecifierContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#inputOutputSection}.
 	 * @param ctx the parse tree
@@ -6307,6 +6347,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionName(CobolParser.FunctionNameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#functionPrototypeName}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionPrototypeName(CobolParser.FunctionPrototypeNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#functionPrototypeName}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionPrototypeName(CobolParser.FunctionPrototypeNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#indexName}.
 	 * @param ctx the parse tree
 	 */
@@ -6316,6 +6366,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIndexName(CobolParser.IndexNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#interfaceName}.
+	 * @param ctx the parse tree
+	 */
+	void enterInterfaceName(CobolParser.InterfaceNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#interfaceName}.
+	 * @param ctx the parse tree
+	 */
+	void exitInterfaceName(CobolParser.InterfaceNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#languageName}.
 	 * @param ctx the parse tree
@@ -6386,6 +6446,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProgramName(CobolParser.ProgramNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#propertyName}.
+	 * @param ctx the parse tree
+	 */
+	void enterPropertyName(CobolParser.PropertyNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#propertyName}.
+	 * @param ctx the parse tree
+	 */
+	void exitPropertyName(CobolParser.PropertyNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#recordName}.
 	 * @param ctx the parse tree

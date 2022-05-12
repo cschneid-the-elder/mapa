@@ -346,11 +346,35 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassIsPhrase(CobolParser.ClassIsPhraseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#interfaceSpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInterfaceSpecifier(CobolParser.InterfaceSpecifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#functionIntrinsicPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitFunctionIntrinsicPhrase(CobolParser.FunctionIntrinsicPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#programSpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProgramSpecifier(CobolParser.ProgramSpecifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#propertySpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPropertySpecifier(CobolParser.PropertySpecifierContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#userDefinedFunctionSpecifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUserDefinedFunctionSpecifier(CobolParser.UserDefinedFunctionSpecifierContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#inputOutputSection}.
 	 * @param ctx the parse tree
@@ -3790,11 +3814,23 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionName(CobolParser.FunctionNameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#functionPrototypeName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionPrototypeName(CobolParser.FunctionPrototypeNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#indexName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitIndexName(CobolParser.IndexNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#interfaceName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInterfaceName(CobolParser.InterfaceNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#languageName}.
 	 * @param ctx the parse tree
@@ -3837,6 +3873,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProgramName(CobolParser.ProgramNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#propertyName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPropertyName(CobolParser.PropertyNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#recordName}.
 	 * @param ctx the parse tree
