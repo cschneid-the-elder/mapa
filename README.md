@@ -33,3 +33,7 @@ Runtime behavior analysis looks at what actually happens as code executes, often
 
 A combination of both static code analysis and runtime behavior analysis is necessary in order to understand an application portfolio.  Simply noting that a given program is never executed is not prima facie evidence that it is obsolete.  Maybe that program is only executed when an error condition occurs; exception processing should, after all, be exceptional.
 
+### Building
+
+Each subdirectory under this one has a Makefile, intended to be used with GNU make.  The source code consists of ANTLR4 grammars (the *.g4 files) and, in the case of the COBOL and JCL grammars, additional Java code.  There are some instructions at the top of the cobol/Makefile for building from scratch, i.e. from a freshly cloned git repository.
+
