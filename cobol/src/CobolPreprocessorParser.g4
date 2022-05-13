@@ -451,6 +451,20 @@ compilerDirective
    | compilerDirectiveInsert
    | compilerDirectiveDelete
    | compilerDirectiveData
+   | compilerDirectiveCallConvention
+   | compilerDirectiveCobolWords
+   | compilerDirectiveDisplay
+   | compilerDirectiveFlag02
+   | compilerDirectiveFlag14
+   | compilerDirectiveLeapSecond
+   | compilerDirectiveListing
+   | compilerDirectivePage
+   | compilerDirectivePop
+   | compilerDirectivePropogate
+   | compilerDirectivePush
+   | compilerDirectiveRefModZeroLength
+   | compilerDirectiveSource
+   | compilerDirectiveTurn
    )
    ;
 
@@ -494,6 +508,106 @@ compilerDirectiveData
    : (COMPILER_DIRECTIVE_TAG COMP_DIR_DATA NUMERICLITERAL)
    ;
 
+compilerDirectiveCallConvention
+   : (COMPILER_DIRECTIVE_TAG CALL_CONVENTION (COBOL | IDENTIFIER))
+   ;
+   
+compilerDirectiveCobolWords
+   : (COMPILER_DIRECTIVE_TAG COBOL_WORDS
+      ( compilerDirectiveCobolWordsEquate
+      | compilerDirectiveCobolWordsUndefine
+      | compilerDirectiveCobolWordsSubstitute
+      | compilerDirectiveCobolWordsReserve
+      )
+   )
+   ;
+   
+compilerDirectiveDisplay
+   : (COMPILER_DIRECTIVE_TAG DISPLAY
+      (conditionalCompilationArithmeticExpression
+      | conditionalCompilationRelationalCondition
+      | literal
+      | (PARAMETER IDENTIFIER)
+      )
+   )
+   ;
+      
+compilerDirectiveFlag02
+   : (COMPILER_DIRECTIVE_TAG FLAG_02 (ALL | IDENTIFIER) (ON | OFF))
+   ;
+
+compilerDirectiveFlag14
+   : (COMPILER_DIRECTIVE_TAG FLAG_14 (ALL | IDENTIFIER) (ON | OFF))
+   ;
+
+compilerDirectiveLeapSecond
+   : (COMPILER_DIRECTIVE_TAG LEAP_SECOND (ON | OFF))
+   ;
+
+compilerDirectiveListing
+   : (COMPILER_DIRECTIVE_TAG LISTING (ON | OFF))
+   ;
+   
+compilerDirectivePage
+   : (COMPILER_DIRECTIVE_TAG PAGE (NONNUMERICLITERAL | NUMERICLITERAL | IDENTIFIER)*)
+   ;
+   
+compilerDirectivePop
+   : (COMPILER_DIRECTIVE_TAG POP (ALL | compilerDirectivePopList))
+   ;
+   
+compilerDirectivePropogate
+   : (COMPILER_DIRECTIVE_TAG PROPOGATE (ON | OFF))
+   ;
+   
+compilerDirectivePush
+   : (COMPILER_DIRECTIVE_TAG PUSH (ALL | compilerDirectivePopList))
+   ;
+   
+compilerDirectiveRefModZeroLength
+   : (COMPILER_DIRECTIVE_TAG REF_MOD_ZERO_LENGTH (ON | OFF))
+   ;
+
+compilerDirectiveSource
+   : (COMPILER_DIRECTIVE_TAG SOURCE (FORMAT IS)? (FIXED | COMP_DIR_FREE))
+   ;
+
+compilerDirectiveTurn
+   : (COMPILER_DIRECTIVE_TAG TURN IDENTIFIER* CHECKING (OFF | (ON? WITH? LOCATION)))
+   ;
+
+compilerDirectivePopList
+   : (CALL_CONVENTION
+   | COBOL_WORDS
+   | DEFINE
+   | DISPLAY
+   | FLAG_02
+   | FLAG_14
+   | LEAP_SECOND
+   | LISTING
+   | PROPOGATE
+   | REF_MOD_ZERO_LENGTH
+   | SOURCE
+   | TURN
+   )
+   ;
+   
+compilerDirectiveCobolWordsEquate
+   : (EQUATE literal WITH literal)
+   ;
+
+compilerDirectiveCobolWordsUndefine
+   : (UNDEFINE literal)
+   ;
+   
+compilerDirectiveCobolWordsSubstitute
+   : (SUBSTITUTE literal BY literal)
+   ;
+   
+compilerDirectiveCobolWordsReserve
+   : (RESERVE literal)
+   ;
+   
 compilerDirectiveNumericRange
    : (compilerDirectiveNumericAtom MINUSCHAR compilerDirectiveNumericAtom)
    ;
