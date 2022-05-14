@@ -577,6 +577,12 @@ CLASSIC_COMMENT_NEWLINE : NEWLINE ->type(NEWLINE),popMode;
 
 CLASSIC_COMMENT_TEXT : TEXT;
 
+mode PAGE_COMMENT_MODE;
+
+PAGE_COMMENT_NEWLINE : NEWLINE ->type(NEWLINE),popMode,popMode;
+
+PAGE_COMMENT_TEXT : TEXT;
+
 mode COMPILER_DIRECTIVE_MODE;
 
 CD_NEWLINE : NEWLINE ->type(NEWLINE),popMode;
@@ -629,20 +635,26 @@ COMP_DIR_FREE : F R E E;
 GREATER : G R E A T E R;
 IF : I F;
 INLINE_ : I N L I N E ->type(INLINE);
-INLINE_OFF : O F F;
-INLINE_ON : O N;
+//INLINE_OFF : O F F;
+//INLINE_ON : O N;
 IS : I S;
 LEAP_SECOND : L E A P '-' S E C O N D;
 LESS : L E S S;
 LISTING : L I S T I N G;
 LOCATION : L O C A T I O N;
 NOT : N O T;
-COMP_DIR_OFF : O F F ->type(OFF);
-COMP_DIR_ON : O N ->type(ON);
+COMP_DIR_OFF : O F F;
+COMP_DIR_ON : O N;
 OR : O R;
 OTHER : O T H E R;
 OVERRIDE : O V E R R I D E;
-PAGE : P A G E;
+/*
+The NEWLINE to popMode out of this mode is eaten by 
+CLASSIC_COMMENT_MODE, so we just popMode out here
+because we wouldn't have returned here without a NEWLINE
+being detected there.
+*/
+PAGE : P A G E ->pushMode(PAGE_COMMENT_MODE);
 PARAMETER : P A R A M E T E R;
 POP : P O P;
 PROPOGATE : P R O P O G A T E;

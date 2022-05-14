@@ -1,3 +1,28 @@
+--2022-05-14--------------------------------------------------------------------
+Modified  CobolPreprocessorLexer.g4 and CobolPreprocessorParser.g4 to understand
+draft COBOL 202x new compiler directives...
+
+CALL-CONVENTION
+COBOL-WORDS
+DISPLAY
+FLAG-02
+FLAG-14
+LEAP-SECOND
+LISTING
+PAGE
+POP
+PROPOGATE
+PUSH
+REF-MOD-ZERO-LENGTH
+SOURCE FORMAT
+TURN
+
+...and added test9029.cbl to verify.  Note there is no code to take any action
+based on these directives, they're merely tolerated by the lexer and the
+parser.  My current thinking is COBOL-WORDS will result in a message indicating
+lexing and parsing is likely to fail, when/if I get around to coding some sort
+of action.
+
 --2022-05-12--------------------------------------------------------------------
 Modified CobolParser.g4 to account for Repository paragraph.  Also added 
 actions to collect function names and a sematic predicate to functionName

@@ -483,7 +483,7 @@ compilerDirectiveCallInterface
    ;
 
 compilerDirectiveInline
-   : (COMPILER_DIRECTIVE_TAG INLINE (INLINE_ON | INLINE_OFF))
+   : (COMPILER_DIRECTIVE_TAG INLINE (COMP_DIR_ON | COMP_DIR_OFF))
    ;
 
 compilerDirectiveBasis
@@ -533,23 +533,23 @@ compilerDirectiveDisplay
    ;
       
 compilerDirectiveFlag02
-   : (COMPILER_DIRECTIVE_TAG FLAG_02 (ALL | IDENTIFIER) (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG FLAG_02 (ALL | IDENTIFIER) (COMP_DIR_ON | COMP_DIR_OFF))
    ;
 
 compilerDirectiveFlag14
-   : (COMPILER_DIRECTIVE_TAG FLAG_14 (ALL | IDENTIFIER) (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG FLAG_14 (ALL | IDENTIFIER | REF_MOD_ZERO_LENGTH) (COMP_DIR_ON | COMP_DIR_OFF))
    ;
 
 compilerDirectiveLeapSecond
-   : (COMPILER_DIRECTIVE_TAG LEAP_SECOND (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG LEAP_SECOND (COMP_DIR_ON | COMP_DIR_OFF))
    ;
 
 compilerDirectiveListing
-   : (COMPILER_DIRECTIVE_TAG LISTING (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG LISTING (COMP_DIR_ON | COMP_DIR_OFF))
    ;
    
 compilerDirectivePage
-   : (COMPILER_DIRECTIVE_TAG PAGE (NONNUMERICLITERAL | NUMERICLITERAL | IDENTIFIER)*)
+   : (COMPILER_DIRECTIVE_TAG PAGE PAGE_COMMENT_TEXT* NEWLINE)
    ;
    
 compilerDirectivePop
@@ -557,7 +557,7 @@ compilerDirectivePop
    ;
    
 compilerDirectivePropogate
-   : (COMPILER_DIRECTIVE_TAG PROPOGATE (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG PROPOGATE (COMP_DIR_ON | COMP_DIR_OFF))
    ;
    
 compilerDirectivePush
@@ -565,7 +565,7 @@ compilerDirectivePush
    ;
    
 compilerDirectiveRefModZeroLength
-   : (COMPILER_DIRECTIVE_TAG REF_MOD_ZERO_LENGTH (ON | OFF))
+   : (COMPILER_DIRECTIVE_TAG REF_MOD_ZERO_LENGTH (COMP_DIR_ON | COMP_DIR_OFF))
    ;
 
 compilerDirectiveSource
@@ -573,7 +573,7 @@ compilerDirectiveSource
    ;
 
 compilerDirectiveTurn
-   : (COMPILER_DIRECTIVE_TAG TURN IDENTIFIER* CHECKING (OFF | (ON? WITH? LOCATION)))
+   : (COMPILER_DIRECTIVE_TAG TURN IDENTIFIER* CHECKING (COMP_DIR_OFF | (COMP_DIR_ON? WITH? LOCATION)))
    ;
 
 compilerDirectivePopList
@@ -624,7 +624,7 @@ compilerDirectiveDeleteSequenceNumber
    ;
 
 conditionalCompilationDefine
-   : (COMPILER_DIRECTIVE_TAG DEFINE IDENTIFIER AS? (conditionalCompilationDefinePredicate | INLINE_OFF)?  OVERRIDE?)
+   : (COMPILER_DIRECTIVE_TAG DEFINE IDENTIFIER AS? (conditionalCompilationDefinePredicate | COMP_DIR_OFF)?  OVERRIDE?)
    ;
 
 conditionalCompilationDefinePredicate
