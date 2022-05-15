@@ -767,6 +767,15 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, 1, "CONSTANTS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				break;
+			case "testantlr064":
+			case "testantlr164":
+			case "testantlr264":
+			case "testantlr364":
+				if (!testCall001(fileName, bareName, "PGM00001", CallType.CALLBYIDENTIFIER, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00002", CallType.CALLBYIDENTIFIER, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00003", CallType.CALLBYIDENTIFIER, calledNodes, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00004", CallType.CALLBYIDENTIFIER, calledNodes, 4)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

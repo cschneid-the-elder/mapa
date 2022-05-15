@@ -314,6 +314,21 @@ public class TheCLI{
 					break;
 				case Token.EOF:
 					break;
+				case CobolPreprocessorParser.CONTINUED_NONNUMERICLITERAL:
+					if (continuation) {
+						sb.append(token.getText().substring(1, token.getText().length() -2));
+					} else {
+						sb.append(' ');
+						sb.append(token.getText().substring(0, token.getText().length() -2));
+					}
+					/*
+					The continuation boolean is used as both a "this is the first in
+					a potential series of CONTINUED_NONNUMERICLITERAL tokens" and to
+					make the default logic work as the last token will be of type
+					NONNUMERICLITERAL.
+					*/
+					continuation = true;
+					break;
 				default:
 					if (newline && continuation) {
 						if (token.getText().startsWith("\"") || token.getText().startsWith("\'")) {

@@ -482,6 +482,10 @@ NONNUMERICLITERAL
    }? 
    ;
 
+CONTINUED_NONNUMERICLITERAL
+   : CONTINUED_STRINGLITERAL
+   ;
+   
 NUMERICLITERAL
    : [0-9]+
    {
@@ -504,6 +508,11 @@ fragment HEXNUMBER :
 fragment STRINGLITERAL :
 	'"' (~["\n\r] | '""' | '\'')* '"'
 	| '\'' (~['\n\r] | '\'\'' | '"')* '\''
+;
+
+CONTINUED_STRINGLITERAL :
+	'"' (~["\n\r] | '""' | '\'')* '"' '-'
+	| '\'' (~['\n\r] | '\'\'' | '"')* '\'' '-'
 ;
 
 IDENTIFIER
