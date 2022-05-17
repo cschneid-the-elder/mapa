@@ -1,3 +1,10 @@
+--2022-05-16--------------------------------------------------------------------
+Modified both lexers to understand floating literal continuations and
+TheCLI.writeOutTerminalNodes() to process them correctly.  Added literal types
+BX, NX, U, and UX.  Test cases testantlr?64.cbl added.
+
+This is per the draft COBOL 202x standard.
+
 --2022-05-14--------------------------------------------------------------------
 Modified  CobolPreprocessorLexer.g4 and CobolPreprocessorParser.g4 to understand
 draft COBOL 202x new compiler directives...

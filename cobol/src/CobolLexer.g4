@@ -804,7 +804,17 @@ SLASHCHAR : '/';
 
 // literals
 
-NONNUMERICLITERAL : STRINGLITERAL | DBCSLITERAL | HEXNUMBER  | NULLTERMINATED;
+NONNUMERICLITERAL 
+   : STRINGLITERAL 
+   | DBCSLITERAL 
+   | HEXNUMBER  
+   | NULLTERMINATED
+   | BINNUMBER 
+   | HEXBINNUMBER 
+   | HEXNATIONALNUMBER
+   | UTF8STRINGLITERAL
+   | UTF8HEXSTRINGLITERAL
+   ;
 
 fragment HEXNUMBER :
 	X '"' [0-9A-Fa-f]+ '"'
@@ -848,6 +858,31 @@ CONTINUED_DBCSLITERAL :
 	([GN] '"' (~["\n\r] | '""' | '\'')*
 	| [GN] '\'' (~['\n\r] | '\'\'' | '"')* )
 	 {getCharPositionInLine() < 73}?
+;
+
+fragment HEXNATIONALNUMBER :
+	N X '"' [0-9A-Fa-f]+ '"'
+	| N X '\'' [0-9A-Fa-f]+ '\''
+;
+
+fragment UTF8STRINGLITERAL :
+	U '"' (~["\n\r] | '""' | '\'')* '"'
+	| U '\'' (~['\n\r] | '\'\'' | '"')* '\''
+;
+
+fragment UTF8HEXSTRINGLITERAL :
+	U X '"' [0-9A-Fa-f]+ '"'
+	| U X '\'' [0-9A-Fa-f]+ '\''
+;
+
+fragment BINNUMBER :
+	B '"' [01]+ '"'
+	| B '\'' [01]+ '\''
+;
+
+fragment HEXBINNUMBER :
+	B X '"' [01]+ '"'
+	| B X '\'' [01]+ '\''
 ;
 
 fragment BOL : [\r\n\f]+ ;
