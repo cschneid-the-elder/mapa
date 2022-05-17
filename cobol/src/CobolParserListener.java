@@ -47,6 +47,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitClassicCommentEntry(CobolParser.ClassicCommentEntryContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#endProgramUnitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endProgramUnitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endClassStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndClassStatement(CobolParser.EndClassStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endClassStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndClassStatement(CobolParser.EndClassStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#endProgramStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -86,6 +106,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProgramIdParagraph(CobolParser.ProgramIdParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#classIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassIdParagraph(CobolParser.ClassIdParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#classIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassIdParagraph(CobolParser.ClassIdParagraphContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#authorParagraph}.
 	 * @param ctx the parse tree
@@ -6366,6 +6396,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIndexName(CobolParser.IndexNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#inheritedClassName}.
+	 * @param ctx the parse tree
+	 */
+	void enterInheritedClassName(CobolParser.InheritedClassNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#inheritedClassName}.
+	 * @param ctx the parse tree
+	 */
+	void exitInheritedClassName(CobolParser.InheritedClassNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#interfaceName}.
 	 * @param ctx the parse tree

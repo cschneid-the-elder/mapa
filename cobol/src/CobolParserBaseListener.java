@@ -63,6 +63,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEndClassStatement(CobolParser.EndClassStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndClassStatement(CobolParser.EndClassStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEndProgramStatement(CobolParser.EndProgramStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -106,6 +130,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProgramIdParagraph(CobolParser.ProgramIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterClassIdParagraph(CobolParser.ClassIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitClassIdParagraph(CobolParser.ClassIdParagraphContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -7642,6 +7678,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitIndexName(CobolParser.IndexNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInheritedClassName(CobolParser.InheritedClassNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInheritedClassName(CobolParser.InheritedClassNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

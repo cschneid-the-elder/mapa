@@ -34,6 +34,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClassicCommentEntry(CobolParser.ClassicCommentEntryContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#endProgramUnitStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#endClassStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndClassStatement(CobolParser.EndClassStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#endProgramStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -57,6 +69,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProgramIdParagraph(CobolParser.ProgramIdParagraphContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#classIdParagraph}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitClassIdParagraph(CobolParser.ClassIdParagraphContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#authorParagraph}.
 	 * @param ctx the parse tree
@@ -3825,6 +3843,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIndexName(CobolParser.IndexNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#inheritedClassName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInheritedClassName(CobolParser.InheritedClassNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#interfaceName}.
 	 * @param ctx the parse tree

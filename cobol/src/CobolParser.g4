@@ -38,12 +38,22 @@ compilationUnit
    ;
 
 programUnit
-   : identificationDivision environmentDivision? dataDivision? procedureDivision? programUnit* endProgramStatement? classicCommentEntry*
+   : identificationDivision environmentDivision? dataDivision? procedureDivision? programUnit* endProgramUnitStatement? classicCommentEntry*
    ;
 
 classicCommentEntry
     : CLASSIC_COMMENTLINE
     ;
+
+endProgramUnitStatement
+   : (endProgramStatement 
+   | endClassStatement
+   )
+   ;
+   
+endClassStatement
+   : END CLASS className (DOT_FS | DOT)
+   ;
 
 endProgramStatement
    : END PROGRAM programName (DOT_FS | DOT)
@@ -52,7 +62,9 @@ endProgramStatement
 // --- identification division --------------------------------------------------------------------
 
 identificationDivision
-   : (IDENTIFICATION | ID) DIVISION (DOT_FS | DOT) programIdParagraph identificationDivisionBody*
+   : (IDENTIFICATION | ID) DIVISION (DOT_FS | DOT)
+     (programIdParagraph | classIdParagraph)
+     identificationDivisionBody*
    ;
 
 identificationDivisionBody
@@ -65,6 +77,16 @@ programIdParagraph
    : PROGRAM_ID (DOT | DOT_FS) programName (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
    ;
 
+// - class id paragraph --------------------------------
+
+classIdParagraph
+   : CLASS_ID (DOT | DOT_FS)
+     className (AS literal)?
+     (IS? FINAL)?
+     (INHERITS FROM? inheritedClassName+)?
+     (USING cobolWord+)?
+     (DOT | DOT_FS)
+   ;
 // - author paragraph ----------------------------------
 
 authorParagraph
@@ -2952,6 +2974,10 @@ indexName
    : cobolWord
    ;
 
+inheritedClassName
+   : className
+   ;
+   
 interfaceName
    : cobolWord
    ;
