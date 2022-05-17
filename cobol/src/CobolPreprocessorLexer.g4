@@ -474,7 +474,15 @@ DOUBLEEQUALCHAR : '==';
 
 // literals
 NONNUMERICLITERAL
-   : STRINGLITERAL | HEXNUMBER | BINNUMBER
+   : STRINGLITERAL
+   | HEXNUMBER 
+   | BINNUMBER 
+   | HEXBINNUMBER 
+   | NULLTERMINATED 
+   | DBCSLITERAL 
+   | HEXNATIONALNUMBER
+   | UTF8STRINGLITERAL
+   | UTF8HEXSTRINGLITERAL
    {
     (getCharPositionInLine() > 7 && !testRig)
     ||
@@ -484,6 +492,14 @@ NONNUMERICLITERAL
 
 CONTINUED_NONNUMERICLITERAL
    : CONTINUED_STRINGLITERAL
+   | CONTINUED_HEXNUMBER 
+   | CONTINUED_BINNUMBER 
+   | CONTINUED_HEXBINNUMBER 
+   | CONTINUED_NULLTERMINATED 
+   | CONTINUED_DBCSLITERAL 
+   | CONTINUED_HEXNATIONALNUMBER
+   | CONTINUED_UTF8STRINGLITERAL
+   | CONTINUED_UTF8HEXSTRINGLITERAL
    ;
    
 NUMERICLITERAL
@@ -500,9 +516,39 @@ fragment BINNUMBER :
 	| B '\'' [01]+ '\''
 ;
 
+fragment HEXBINNUMBER :
+	B X '"' [01]+ '"'
+	| B X '\'' [01]+ '\''
+;
+
 fragment HEXNUMBER :
-	X '"' [0-9A-F]+ '"'
-	| X '\'' [0-9A-F]+ '\''
+	X '"' [0-9A-Fa-f]+ '"'
+	| X '\'' [0-9A-Fa-f]+ '\''
+;
+
+fragment NULLTERMINATED :
+	Z '"' (~["\n\r] | '""' | '\'')* '"'
+	| Z '\'' (~['\n\r] | '\'\'' | '"')* '\''
+;
+
+fragment DBCSLITERAL :
+	[GN] '"' (~["\n\r] | '""' | '\'')* '"'
+	| [GN] '\'' (~['\n\r] | '\'\'' | '"')* '\''
+;
+
+fragment HEXNATIONALNUMBER :
+	N X '"' [0-9A-Fa-f]+ '"'
+	| N X '\'' [0-9A-Fa-f]+ '\''
+;
+
+fragment UTF8STRINGLITERAL :
+	U '"' (~["\n\r] | '""' | '\'')* '"'
+	| U '\'' (~['\n\r] | '\'\'' | '"')* '\''
+;
+
+fragment UTF8HEXSTRINGLITERAL :
+	U X '"' [0-9A-Fa-f]+ '"'
+	| U X '\'' [0-9A-Fa-f]+ '\''
 ;
 
 fragment STRINGLITERAL :
@@ -510,7 +556,47 @@ fragment STRINGLITERAL :
 	| '\'' (~['\n\r] | '\'\'' | '"')* '\''
 ;
 
-CONTINUED_STRINGLITERAL :
+fragment CONTINUED_BINNUMBER :
+	B '"' [01]+ '"' '-'
+	| B '\'' [01]+ '\'' '-'
+;
+
+fragment CONTINUED_HEXBINNUMBER :
+	B X '"' [01]+ '"' '-'
+	| B X '\'' [01]+ '\'' '-'
+;
+
+fragment CONTINUED_HEXNUMBER :
+	X '"' [0-9A-Fa-f]+ '"' '-'
+	| X '\'' [0-9A-Fa-f]+ '\'' '-'
+;
+
+fragment CONTINUED_NULLTERMINATED :
+	Z '"' (~["\n\r] | '""' | '\'')* '"' '-'
+	| Z '\'' (~['\n\r] | '\'\'' | '"')* '\'' '-'
+;
+
+fragment CONTINUED_DBCSLITERAL :
+	[GN] '"' (~["\n\r] | '""' | '\'')* '"' '-'
+	| [GN] '\'' (~['\n\r] | '\'\'' | '"')* '\'' '-'
+;
+
+fragment CONTINUED_HEXNATIONALNUMBER :
+	N X '"' [0-9A-Fa-f]+ '"' '-'
+	| N X '\'' [0-9A-Fa-f]+ '\'' '-'
+;
+
+fragment CONTINUED_UTF8STRINGLITERAL :
+	U '"' (~["\n\r] | '""' | '\'')* '"' '-'
+	| U '\'' (~['\n\r] | '\'\'' | '"')* '\'' '-'
+;
+
+fragment CONTINUED_UTF8HEXSTRINGLITERAL :
+	U X '"' [0-9A-Fa-f]+ '"' '-'
+	| U X '\'' [0-9A-Fa-f]+ '\'' '-'
+;
+
+fragment CONTINUED_STRINGLITERAL :
 	'"' (~["\n\r] | '""' | '\'')* '"' '-'
 	| '\'' (~['\n\r] | '\'\'' | '"')* '\'' '-'
 ;
