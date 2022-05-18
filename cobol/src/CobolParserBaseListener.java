@@ -87,6 +87,66 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterEndFunctionStatement(CobolParser.EndFunctionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndFunctionStatement(CobolParser.EndFunctionStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEndMethodStatement(CobolParser.EndMethodStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndMethodStatement(CobolParser.EndMethodStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEndInterfaceStatement(CobolParser.EndInterfaceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndInterfaceStatement(CobolParser.EndInterfaceStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEndFactoryStatement(CobolParser.EndFactoryStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndFactoryStatement(CobolParser.EndFactoryStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterEndObjectStatement(CobolParser.EndObjectStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitEndObjectStatement(CobolParser.EndObjectStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEndProgramStatement(CobolParser.EndProgramStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -142,6 +202,66 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitClassIdParagraph(CobolParser.ClassIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFactoryParagraph(CobolParser.FactoryParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFactoryParagraph(CobolParser.FactoryParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionIdParagraph(CobolParser.FunctionIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionIdParagraph(CobolParser.FunctionIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInterfaceIdParagraph(CobolParser.InterfaceIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInterfaceIdParagraph(CobolParser.InterfaceIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodIdParagraph(CobolParser.MethodIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodIdParagraph(CobolParser.MethodIdParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterObjectParagraph(CobolParser.ObjectParagraphContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitObjectParagraph(CobolParser.ObjectParagraphContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -7695,6 +7815,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInheritedInterfaceName(CobolParser.InheritedInterfaceNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInheritedInterfaceName(CobolParser.InheritedInterfaceNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInterfaceName(CobolParser.InterfaceNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7738,6 +7870,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLocalName(CobolParser.LocalNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterMethodName(CobolParser.MethodNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitMethodName(CobolParser.MethodNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -7894,6 +8038,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTextName(CobolParser.TextNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUserFunctionName(CobolParser.UserFunctionNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUserFunctionName(CobolParser.UserFunctionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

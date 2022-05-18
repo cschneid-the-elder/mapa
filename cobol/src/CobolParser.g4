@@ -48,11 +48,36 @@ classicCommentEntry
 endProgramUnitStatement
    : (endProgramStatement 
    | endClassStatement
+   | endFunctionStatement
+   | endMethodStatement
+   | endInterfaceStatement
+   | endFactoryStatement
+   | endObjectStatement
    )
    ;
    
 endClassStatement
    : END CLASS className (DOT_FS | DOT)
+   ;
+
+endFunctionStatement
+   : END FUNCTION userFunctionName (DOT_FS | DOT)
+   ;
+
+endMethodStatement
+   : END METHOD methodName? (DOT_FS | DOT)
+   ;
+
+endInterfaceStatement
+   : END INTERFACE interfaceName (DOT_FS | DOT)
+   ;
+
+endFactoryStatement
+   : END FACTORY (DOT_FS | DOT)
+   ;
+
+endObjectStatement
+   : END OBJECT (DOT_FS | DOT)
    ;
 
 endProgramStatement
@@ -63,7 +88,7 @@ endProgramStatement
 
 identificationDivision
    : (IDENTIFICATION | ID) DIVISION (DOT_FS | DOT)
-     (programIdParagraph | classIdParagraph)
+     (programIdParagraph | classIdParagraph | functionIdParagraph | interfaceIdParagraph | methodIdParagraph | objectParagraph | factoryParagraph)
      identificationDivisionBody*
    ;
 
@@ -74,7 +99,8 @@ identificationDivisionBody
 // - program id paragraph ----------------------------------
 
 programIdParagraph
-   : PROGRAM_ID (DOT | DOT_FS) programName (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
+   : PROGRAM_ID (DOT | DOT_FS)
+     programName (AS literal)? (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
    ;
 
 // - class id paragraph --------------------------------
@@ -87,6 +113,49 @@ classIdParagraph
      (USING cobolWord+)?
      (DOT | DOT_FS)
    ;
+
+// - factory paragraph ---------------------------------
+
+factoryParagraph
+   : FACTORY (DOT | DOT_FS) (IMPLEMENTS interfaceName+ (DOT | DOT_FS))?
+   ;
+
+// - function id paragraph -----------------------------
+
+functionIdParagraph
+   : FUNCTION_ID (DOT | DOT_FS) 
+     ((userFunctionName (AS literal)?)
+     | (functionPrototypeName (AS literal)? IS? PROTOTYPE))     
+     (DOT | DOT_FS)
+   ;
+
+// - interface id paragraph ----------------------------
+
+interfaceIdParagraph
+   : INTERFACE_ID (DOT | DOT_FS)
+     interfaceName (AS literal)?
+     (IS? FINAL)?
+     (INHERITS FROM? inheritedInterfaceName+)?
+     (USING cobolWord+)?
+     (DOT | DOT_FS)
+   ;
+
+// - method id paragraph -------------------------------
+
+methodIdParagraph
+   : METHOD_ID (DOT | DOT_FS)
+     ((methodName (AS literal)?)
+     | ((GET | SET) PROPERTY propertyName))
+     OVERRIDE? (IS? FINAL)?
+     (DOT | DOT_FS)
+   ;
+
+// - object paragraph ----------------------------------
+
+objectParagraph
+   : OBJECT (DOT | DOT_FS) (IMPLEMENTS interfaceName+ (DOT | DOT_FS))?
+   ;
+
 // - author paragraph ----------------------------------
 
 authorParagraph
@@ -2978,6 +3047,10 @@ inheritedClassName
    : className
    ;
    
+inheritedInterfaceName
+   : className
+   ;
+   
 interfaceName
    : cobolWord
    ;
@@ -2991,6 +3064,10 @@ libraryName
    ;
 
 localName
+   : cobolWord
+   ;
+
+methodName
    : cobolWord
    ;
 
@@ -3043,6 +3120,10 @@ symbolicCharacter
    ;
 
 textName
+   : cobolWord
+   ;
+
+userFunctionName
    : cobolWord
    ;
 
