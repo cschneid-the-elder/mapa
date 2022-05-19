@@ -133,7 +133,8 @@
        End Method.
        
        Identification Division.
-       Method-ID. someOtherMethod As "SOMEOTHERMETHOD" Override Is Final.
+       Method-ID. someOtherMethod As "SOMEOTHERMETHOD" 
+           Override Is Final.
        Procedure Division.
            GOBACK.
        End Method.

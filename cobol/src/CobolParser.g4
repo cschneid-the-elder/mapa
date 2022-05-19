@@ -2884,7 +2884,7 @@ abbreviation
 // identifier ----------------------------------
 
 identifier
-   : qualifiedDataName | functionCall | tableCall | specialRegister //| dfhvalue
+   : functionCall | tableCall | qualifiedDataName | specialRegister //| dfhvalue
    ;
 
 /*
@@ -2894,11 +2894,12 @@ dfhvalue
 */
 
 tableCall
-   : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR)* referenceModifier?
+//   : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR)* referenceModifier?
+   : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR) referenceModifier?
    ;
 
 functionCall
-   : ((FUNCTION cobolWord) | functionName) (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)* referenceModifier?
+   : ((FUNCTION cobolWord) | functionName) (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)? referenceModifier?
    ;
 
 referenceModifier
@@ -2928,7 +2929,7 @@ qualifiedDataName
    ;
 
 qualifiedDataNameFormat1
-   : (dataName | conditionName) (qualifiedInData+ inFile? | inFile)?
+   : (dataName | conditionName) (qualifiedInData+ inFile? | inFile)? referenceModifier?
    ;
 
 qualifiedDataNameFormat2
@@ -3298,6 +3299,7 @@ cicsWord
    | FOR
    | FREE
    | FROM
+   | GET
    | GROUP
    | INPUT
    | INTO
@@ -3314,6 +3316,7 @@ cicsWord
    | NAME
    | NAMESPACE
    | NEXT
+   | OBJECT
    | ON
    | OPEN
    | OR

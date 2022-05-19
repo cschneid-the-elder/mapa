@@ -25,8 +25,7 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		//TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		String newProgramName = ctx.getText();
+	public void setCurrProgram(String newProgramName) { 
 		this.currProgram = null;
 
 		for (CobolProgram pgm: this.programs) {
@@ -48,6 +47,21 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 				+ " not found in "
 				+ this.programs);
 		}
+	}
+
+	public void enterIdentificationDivision(CobolParser.IdentificationDivisionContext ctx) {
+	    if (ctx.programIdParagraph() != null) {
+	    	this.setCurrProgram(ctx.programIdParagraph().programName().getText());
+	    } else if (ctx.functionIdParagraph() != null) {
+	    	this.setCurrProgram(ctx.functionIdParagraph().userFunctionName().getText());
+	    } else if (ctx.classIdParagraph() != null) {
+	    	this.setCurrProgram(ctx.classIdParagraph().className().getText());
+	    }
+	    /*
+	    Note that other types of Identification Division (Factory, et. al.) do
+	    not change the current program.  This is intentional, those other types
+	    aren't real changes in the current program.
+	    */
 	}
 
 	public void enterFileDescriptionEntry(CobolParser.FileDescriptionEntryContext ctx) {
@@ -81,18 +95,18 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		TestIntegration.LOGGER.finest(callingModuleName + " " + node);
 
 		if (node.hasNoParent()) {
-			TestIntegration.LOGGER.finest(node + "node.hasNoParent() == true");
+			TestIntegration.LOGGER.finest(node + " node.hasNoParent() == true");
 			if (node.isNewRoot()) {
-				TestIntegration.LOGGER.finest(node + "node.isNewRoot() == true");
+				TestIntegration.LOGGER.finest(node + " node.isNewRoot() == true");
 				prev = node;
 			} else {
-				TestIntegration.LOGGER.finest(node + "node.isNewRoot() == false");
+				TestIntegration.LOGGER.finest(node + " node.isNewRoot() == false");
 				// a 77 level
 			}
 		} else if (prev == null) {
-				TestIntegration.LOGGER.finest(callingModuleName + " " + node + "prev == " + prev);
+				TestIntegration.LOGGER.finest(callingModuleName + " " + node + " prev == " + prev);
 		} else if (node.level == null) {
-				TestIntegration.LOGGER.finest(callingModuleName + " " + node + "node.level == " + node.level);
+				TestIntegration.LOGGER.finest(callingModuleName + " " + node + " node.level == " + node.level);
 		} else if (prev.level == null) {
 				TestIntegration.LOGGER.finest(callingModuleName + " " + prev);
 		} else if (node.level.compareTo(prev.level) == 0) {

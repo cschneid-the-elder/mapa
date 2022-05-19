@@ -45,12 +45,15 @@ class CobolProgram {
 	private int dataDescriptionEntryFormat2Count = 0;
 	private int dataDescriptionEntryFormat3Count = 0;
 	private int dataDescriptionEntryExecSqlCount = 0;
+	private CobolProgramType type = null;
 
 	public CobolProgram(
 			String programName
+			, CobolProgramType type
 			, Logger LOGGER
 			) {
 		this.programName = programName;
+		this.type = type;
 		this.LOGGER = LOGGER;
 	}
 
@@ -419,8 +422,23 @@ class CobolProgram {
 	to do the same.
 	*/
 	public void writeOn(PrintWriter out, UUID parentUUID) throws IOException {
+		StringBuilder typeString = new StringBuilder();
+		switch(this.type) {
+			case PROGRAM:
+				typeString.append("PGM");
+				break;
+			case FUNCTION:
+				typeString.append("FUNCTION");
+				break;
+			case CLASS:
+				typeString.append("CLASS");
+				break;
+			default:
+				typeString.append("UNKNOWN");
+		}
 		out.printf(
-			"PGM,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n"
+			"%s,%s,%s,%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d\n"
+			, typeString
 			, this.getUUID().toString()
 			, parentUUID.toString()
 			, this.programName
