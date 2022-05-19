@@ -1,3 +1,18 @@
+--2022-05-18--------------------------------------------------------------------
+Modified CobolLexer and CobolParser per draft 202x Identification Division
+specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,
+Object, and Options paragraphs.
+
+Further modification to functionCall to make the paren-args-paren construct
+merely optional instead of allowing 0..n of them.
+
+Also fixed tableCall rule to require subscripting, as otherwise it's not really
+a tableCall.  It was also confusing recognition of singleton identifiers and
+messing with my logic to resolve CALL IDENTIFIER statements.
+
+Output file has two new record types, one for FUNCTION and one for CLASS.  The
+rest of the fields mimic those for PGM.
+
 --2022-05-16--------------------------------------------------------------------
 Modified both lexers to understand floating literal continuations and
 TheCLI.writeOutTerminalNodes() to process them correctly.  Added literal types

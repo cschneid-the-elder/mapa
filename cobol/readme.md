@@ -76,6 +76,8 @@ More generically...
 | COPY | UUID, file UUID, copybook name |
 | BASIS | UUID, file UUID, basis file name |
 | PGM | UUID, file UUID, program name, statement count, conditional statement count, cics statement count, sql statement count, sqlims statement count, data description entry type 1 count, data description entry type 2 count, data description entry type 3 count, data description entry type sql count |
+| FUNCTION | UUID, file UUID, program name, statement count, conditional statement count, cics statement count, sql statement count, sqlims statement count, data description entry type 1 count, data description entry type 2 count, data description entry type 3 count, data description entry type sql count |
+| CLASS | UUID, file UUID, program name, statement count, conditional statement count, cics statement count, sql statement count, sqlims statement count, data description entry type 1 count, data description entry type 2 count, data description entry type 3 count, data description entry type sql count |
 | CALL | UUID, program UUID, calling program name, call type (see below), called program name |
 | UNRESOLVEDCALL | UUID, program UUID, calling program name, call type (see below), cobol identifier that could not be resolved |
 | DD | UUID, program UUID, ddname (see below), cobol file name, open input count, open output count, open i-o count, open extend count |
