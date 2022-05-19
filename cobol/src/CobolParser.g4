@@ -93,7 +93,7 @@ identificationDivision
    ;
 
 identificationDivisionBody
-   : authorParagraph | installationParagraph | dateWrittenParagraph | dateCompiledParagraph | securityParagraph | remarksParagraph
+   : authorParagraph | installationParagraph | dateWrittenParagraph | dateCompiledParagraph | securityParagraph | remarksParagraph | optionsParagraph
    ;
 
 // - program id paragraph ----------------------------------
@@ -154,6 +154,75 @@ methodIdParagraph
 
 objectParagraph
    : OBJECT (DOT | DOT_FS) (IMPLEMENTS interfaceName+ (DOT | DOT_FS))?
+   ;
+
+// - options paragraph ---------------------------------
+
+optionsParagraph
+   : OPTIONS (DOT | DOT_FS) (optionsParagraphBody+ (DOT | DOT_FS))?
+   ;
+
+optionsParagraphBody
+   : (arithmeticClause
+     | defaultRoundedClause
+     | entryConventionClause
+     | floatBinaryClause
+     | floatDecimalClause
+     | initializeClause
+     | intermediateRoundingClause
+     )
+   ;
+   
+arithmeticClause
+   : ARITHMETIC IS? (NATIVE | STANDARD_BINARY | STANDARD_DECIMAL)
+   ;
+   
+defaultRoundedClause
+   : DEFAULT ROUNDED MODE? IS? 
+     (AWAY_FROM_ZERO
+     | NEAREST_AWAY_FROM_ZERO
+     | NEAREST_EVEN
+     | NEAREST_TOWARD_ZERO
+     | PROHIBITED
+     | TOWARD_GREATER
+     | TOWARD_LESSER
+     | TRUNCATION
+     )
+   ;
+
+entryConventionClause
+   : ENTRY_CONVENTION IS? (COBOL | IDENTIFIER)
+   ;
+
+floatBinaryClause
+   : FLOAT_BINARY DEFAULT? IS? endiannessPhrase
+   ;
+
+floatDecimalClause
+   : FLOAT_DECIMAL DEFAULT? IS? (encodingPhrase | endiannessPhrase)
+   ;
+
+encodingPhrase
+   : (BINARY_ENCODING | DECIMAL_ENCODING)
+   ;
+
+endiannessPhrase
+   : (HIGH_ORDER_LEFT | HIGH_ORDER_RIGHT)
+   ;
+
+initializeClause
+   : INITIALIZE 
+     (ALL | LOCAL_STORAGE | SCREEN | WORKING_STORAGE) 
+     SECTION? TO? 
+     ((BINARY ZEROES) | literal | SPACES)
+   ;
+
+intermediateRoundingClause
+   : ( NEAREST_AWAY_FROM_ZERO
+     | NEAREST_EVEN
+     | PROHIBITED
+     | TRUNCATION
+     )
    ;
 
 // - author paragraph ----------------------------------
@@ -3319,6 +3388,7 @@ cicsWord
    | OBJECT
    | ON
    | OPEN
+   | OPTIONS
    | OR
    | ORGANIZATION
    | OUTPUT

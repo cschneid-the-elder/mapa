@@ -136,6 +136,72 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitObjectParagraph(CobolParser.ObjectParagraphContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#optionsParagraph}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOptionsParagraph(CobolParser.OptionsParagraphContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#optionsParagraphBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOptionsParagraphBody(CobolParser.OptionsParagraphBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#arithmeticClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitArithmeticClause(CobolParser.ArithmeticClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#defaultRoundedClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDefaultRoundedClause(CobolParser.DefaultRoundedClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#entryConventionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEntryConventionClause(CobolParser.EntryConventionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#floatBinaryClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatBinaryClause(CobolParser.FloatBinaryClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#floatDecimalClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFloatDecimalClause(CobolParser.FloatDecimalClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#encodingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEncodingPhrase(CobolParser.EncodingPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#endiannessPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitEndiannessPhrase(CobolParser.EndiannessPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#initializeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitializeClause(CobolParser.InitializeClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#intermediateRoundingClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIntermediateRoundingClause(CobolParser.IntermediateRoundingClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#authorParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
