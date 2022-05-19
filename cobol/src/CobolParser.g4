@@ -289,7 +289,6 @@ configurationSection
 
 configurationSectionParagraph
    : sourceComputerParagraph | objectComputerParagraph | specialNamesParagraph | respositoryParagraph
-   // strictly, specialNamesParagraph does not belong into configurationSectionParagraph, but IBM-COBOL allows this
    ;
 
 // - source computer paragraph ----------------------------------
@@ -301,11 +300,11 @@ sourceComputerParagraph
 // - object computer paragraph ----------------------------------
 
 objectComputerParagraph
-   : OBJECT_COMPUTER (DOT_FS | DOT) (computerName objectComputerClause* (DOT_FS | DOT))?
+   : OBJECT_COMPUTER (DOT_FS | DOT) (computerName? objectComputerClause* (DOT_FS | DOT))?
    ;
 
 objectComputerClause
-   : memorySizeClause | diskSizeClause | collatingSequenceClause | segmentLimitClause | characterSetClause
+   : memorySizeClause | diskSizeClause | collatingSequenceClause | segmentLimitClause | characterSetClause | characterClassificationClause
    ;
 
 memorySizeClause
@@ -334,6 +333,22 @@ segmentLimitClause
 
 characterSetClause
    : CHARACTER SET (DOT_FS | DOT)
+   ;
+
+characterClassificationClause
+   : CHARACTER? CLASSIFICATION (IS? localePhrase+) characterClassificationClauseAlphanumeric? characterClassificationClauseNational?
+   ;
+
+characterClassificationClauseAlphanumeric
+   : FOR? ALPHANUMERIC IS? localePhrase
+   ;
+
+characterClassificationClauseNational
+   : FOR? NATIONAL IS? localePhrase
+   ;
+
+localePhrase
+   : (IDENTIFIER | LOCALE | SYSTEM_DEFAULT | USER_DEFAULT)
    ;
 
 // - special names paragraph ----------------------------------
