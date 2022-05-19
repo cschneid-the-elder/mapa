@@ -23,9 +23,8 @@ public class ProgramListener extends CobolParserBaseListener {
 		//LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	public void enterProgramIdParagraph(CobolParser.ProgramIdParagraphContext ctx) {
-		String newPgmName = ctx.programName().getText();
-		CobolProgram newPgm = new CobolProgram(newPgmName, this.LOGGER);
+	public void addNewProgram(String newPgmName, CobolProgramType type) {
+		CobolProgram newPgm = new CobolProgram(newPgmName, type, this.LOGGER);
 		CobolProgram currProgram = pgmStack.peek();
 		if (currProgram == null) {
 			this.programs.add(newPgm);
@@ -39,8 +38,33 @@ public class ProgramListener extends CobolParserBaseListener {
 		LOGGER.finest(" enterProgramName exit currProgram = " + currProgram);
 	}
 
+	public void enterIdentificationDivision(CobolParser.IdentificationDivisionContext ctx) {
+	    if (ctx.programIdParagraph() != null) {
+	    	this.addNewProgram(ctx.programIdParagraph().programName().getText(), CobolProgramType.PROGRAM);
+	    } else if (ctx.functionIdParagraph() != null) {
+	    	this.addNewProgram(ctx.functionIdParagraph().userFunctionName().getText(), CobolProgramType.FUNCTION);
+	    } else if (ctx.classIdParagraph() != null) {
+	    	this.addNewProgram(ctx.classIdParagraph().className().getText(), CobolProgramType.CLASS);
+	    }
+	    /*
+	    Note that other types of Identification Division (Factory, et. al.) do
+	    not change the current program.  This is intentional, those other types
+	    aren't real changes in the current program.
+	    */
+	}
+
 	public void enterEndProgramStatement(CobolParser.EndProgramStatementContext ctx) {
 		this.pgmStack.pop();
 		LOGGER.finest(" enterEndProgramStatement exit pgmStack = " + this.pgmStack);
+	}
+
+	public void enterEndFunctionStatement(CobolParser.EndFunctionStatementContext ctx) {
+		this.pgmStack.pop();
+		LOGGER.finest(" enterEndFunctionStatement exit pgmStack = " + this.pgmStack);
+	}
+
+	public void enterEndClassStatement(CobolParser.EndClassStatementContext ctx) {
+		this.pgmStack.pop();
+		LOGGER.finest(" enterEndClassStatement exit pgmStack = " + this.pgmStack);
 	}
 }

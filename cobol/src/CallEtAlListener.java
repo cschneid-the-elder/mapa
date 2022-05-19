@@ -25,8 +25,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
-	public void enterProgramName(CobolParser.ProgramNameContext ctx) { 
-		String newProgramName = ctx.getText();
+	public void setCurrProgram(String newProgramName) { 
 		this.currProgram = null;
 
 		for (CobolProgram pgm: this.programs) {
@@ -48,6 +47,23 @@ public class CallEtAlListener extends CobolParserBaseListener {
 				+ " not found in "
 				+ this.programs);
 		}
+		
+		this.LOGGER.finest("CallEtAlListener currProgram = " + this.currProgram);
+	}
+
+	public void enterIdentificationDivision(CobolParser.IdentificationDivisionContext ctx) {
+	    if (ctx.programIdParagraph() != null) {
+	    	this.setCurrProgram(ctx.programIdParagraph().programName().getText());
+	    } else if (ctx.functionIdParagraph() != null) {
+	    	this.setCurrProgram(ctx.functionIdParagraph().userFunctionName().getText());
+	    } else if (ctx.classIdParagraph() != null) {
+	    	this.setCurrProgram(ctx.classIdParagraph().className().getText());
+	    }
+	    /*
+	    Note that other types of Identification Division (Factory, et. al.) do
+	    not change the current program.  This is intentional, those other types
+	    aren't real changes in the current program.
+	    */
 	}
 
 	public void enterStatement(CobolParser.StatementContext ctx) {

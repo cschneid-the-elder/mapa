@@ -47,6 +47,76 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitClassicCommentEntry(CobolParser.ClassicCommentEntryContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#endProgramUnitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endProgramUnitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndProgramUnitStatement(CobolParser.EndProgramUnitStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endClassStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndClassStatement(CobolParser.EndClassStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endClassStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndClassStatement(CobolParser.EndClassStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endFunctionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndFunctionStatement(CobolParser.EndFunctionStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endFunctionStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndFunctionStatement(CobolParser.EndFunctionStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endMethodStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndMethodStatement(CobolParser.EndMethodStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endMethodStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndMethodStatement(CobolParser.EndMethodStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endInterfaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndInterfaceStatement(CobolParser.EndInterfaceStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endInterfaceStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndInterfaceStatement(CobolParser.EndInterfaceStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endFactoryStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndFactoryStatement(CobolParser.EndFactoryStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endFactoryStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndFactoryStatement(CobolParser.EndFactoryStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endObjectStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndObjectStatement(CobolParser.EndObjectStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endObjectStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndObjectStatement(CobolParser.EndObjectStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#endProgramStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -86,6 +156,176 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProgramIdParagraph(CobolParser.ProgramIdParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#classIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterClassIdParagraph(CobolParser.ClassIdParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#classIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitClassIdParagraph(CobolParser.ClassIdParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#factoryParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterFactoryParagraph(CobolParser.FactoryParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#factoryParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitFactoryParagraph(CobolParser.FactoryParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#functionIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterFunctionIdParagraph(CobolParser.FunctionIdParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#functionIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitFunctionIdParagraph(CobolParser.FunctionIdParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#interfaceIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterInterfaceIdParagraph(CobolParser.InterfaceIdParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#interfaceIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitInterfaceIdParagraph(CobolParser.InterfaceIdParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#methodIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodIdParagraph(CobolParser.MethodIdParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#methodIdParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodIdParagraph(CobolParser.MethodIdParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#objectParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterObjectParagraph(CobolParser.ObjectParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#objectParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitObjectParagraph(CobolParser.ObjectParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#optionsParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void enterOptionsParagraph(CobolParser.OptionsParagraphContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#optionsParagraph}.
+	 * @param ctx the parse tree
+	 */
+	void exitOptionsParagraph(CobolParser.OptionsParagraphContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#optionsParagraphBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterOptionsParagraphBody(CobolParser.OptionsParagraphBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#optionsParagraphBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitOptionsParagraphBody(CobolParser.OptionsParagraphBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#arithmeticClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterArithmeticClause(CobolParser.ArithmeticClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#arithmeticClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitArithmeticClause(CobolParser.ArithmeticClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#defaultRoundedClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefaultRoundedClause(CobolParser.DefaultRoundedClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#defaultRoundedClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefaultRoundedClause(CobolParser.DefaultRoundedClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#entryConventionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterEntryConventionClause(CobolParser.EntryConventionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#entryConventionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitEntryConventionClause(CobolParser.EntryConventionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#floatBinaryClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatBinaryClause(CobolParser.FloatBinaryClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#floatBinaryClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatBinaryClause(CobolParser.FloatBinaryClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#floatDecimalClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterFloatDecimalClause(CobolParser.FloatDecimalClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#floatDecimalClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitFloatDecimalClause(CobolParser.FloatDecimalClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#encodingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterEncodingPhrase(CobolParser.EncodingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#encodingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitEncodingPhrase(CobolParser.EncodingPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#endiannessPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterEndiannessPhrase(CobolParser.EndiannessPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#endiannessPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitEndiannessPhrase(CobolParser.EndiannessPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#initializeClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitializeClause(CobolParser.InitializeClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#initializeClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitializeClause(CobolParser.InitializeClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#intermediateRoundingClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterIntermediateRoundingClause(CobolParser.IntermediateRoundingClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#intermediateRoundingClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitIntermediateRoundingClause(CobolParser.IntermediateRoundingClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#authorParagraph}.
 	 * @param ctx the parse tree
@@ -6367,6 +6607,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitIndexName(CobolParser.IndexNameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#inheritedClassName}.
+	 * @param ctx the parse tree
+	 */
+	void enterInheritedClassName(CobolParser.InheritedClassNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#inheritedClassName}.
+	 * @param ctx the parse tree
+	 */
+	void exitInheritedClassName(CobolParser.InheritedClassNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#inheritedInterfaceName}.
+	 * @param ctx the parse tree
+	 */
+	void enterInheritedInterfaceName(CobolParser.InheritedInterfaceNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#inheritedInterfaceName}.
+	 * @param ctx the parse tree
+	 */
+	void exitInheritedInterfaceName(CobolParser.InheritedInterfaceNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#interfaceName}.
 	 * @param ctx the parse tree
 	 */
@@ -6406,6 +6666,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLocalName(CobolParser.LocalNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#methodName}.
+	 * @param ctx the parse tree
+	 */
+	void enterMethodName(CobolParser.MethodNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#methodName}.
+	 * @param ctx the parse tree
+	 */
+	void exitMethodName(CobolParser.MethodNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#mnemonicName}.
 	 * @param ctx the parse tree
@@ -6536,6 +6806,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTextName(CobolParser.TextNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#userFunctionName}.
+	 * @param ctx the parse tree
+	 */
+	void enterUserFunctionName(CobolParser.UserFunctionNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#userFunctionName}.
+	 * @param ctx the parse tree
+	 */
+	void exitUserFunctionName(CobolParser.UserFunctionNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#cobolWord}.
 	 * @param ctx the parse tree

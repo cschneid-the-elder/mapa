@@ -38,12 +38,47 @@ compilationUnit
    ;
 
 programUnit
-   : identificationDivision environmentDivision? dataDivision? procedureDivision? programUnit* endProgramStatement? classicCommentEntry*
+   : identificationDivision environmentDivision? dataDivision? procedureDivision? programUnit* endProgramUnitStatement? classicCommentEntry*
    ;
 
 classicCommentEntry
     : CLASSIC_COMMENTLINE
     ;
+
+endProgramUnitStatement
+   : (endProgramStatement 
+   | endClassStatement
+   | endFunctionStatement
+   | endMethodStatement
+   | endInterfaceStatement
+   | endFactoryStatement
+   | endObjectStatement
+   )
+   ;
+   
+endClassStatement
+   : END CLASS className (DOT_FS | DOT)
+   ;
+
+endFunctionStatement
+   : END FUNCTION userFunctionName (DOT_FS | DOT)
+   ;
+
+endMethodStatement
+   : END METHOD methodName? (DOT_FS | DOT)
+   ;
+
+endInterfaceStatement
+   : END INTERFACE interfaceName (DOT_FS | DOT)
+   ;
+
+endFactoryStatement
+   : END FACTORY (DOT_FS | DOT)
+   ;
+
+endObjectStatement
+   : END OBJECT (DOT_FS | DOT)
+   ;
 
 endProgramStatement
    : END PROGRAM programName (DOT_FS | DOT)
@@ -52,17 +87,142 @@ endProgramStatement
 // --- identification division --------------------------------------------------------------------
 
 identificationDivision
-   : (IDENTIFICATION | ID) DIVISION (DOT_FS | DOT) programIdParagraph identificationDivisionBody*
+   : (IDENTIFICATION | ID) DIVISION (DOT_FS | DOT)
+     (programIdParagraph | classIdParagraph | functionIdParagraph | interfaceIdParagraph | methodIdParagraph | objectParagraph | factoryParagraph)
+     identificationDivisionBody*
    ;
 
 identificationDivisionBody
-   : authorParagraph | installationParagraph | dateWrittenParagraph | dateCompiledParagraph | securityParagraph | remarksParagraph
+   : authorParagraph | installationParagraph | dateWrittenParagraph | dateCompiledParagraph | securityParagraph | remarksParagraph | optionsParagraph
    ;
 
 // - program id paragraph ----------------------------------
 
 programIdParagraph
-   : PROGRAM_ID (DOT | DOT_FS) programName (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
+   : PROGRAM_ID (DOT | DOT_FS)
+     programName (AS literal)? (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
+   ;
+
+// - class id paragraph --------------------------------
+
+classIdParagraph
+   : CLASS_ID (DOT | DOT_FS)
+     className (AS literal)?
+     (IS? FINAL)?
+     (INHERITS FROM? inheritedClassName+)?
+     (USING cobolWord+)?
+     (DOT | DOT_FS)
+   ;
+
+// - factory paragraph ---------------------------------
+
+factoryParagraph
+   : FACTORY (DOT | DOT_FS) (IMPLEMENTS interfaceName+ (DOT | DOT_FS))?
+   ;
+
+// - function id paragraph -----------------------------
+
+functionIdParagraph
+   : FUNCTION_ID (DOT | DOT_FS) 
+     ((userFunctionName (AS literal)?)
+     | (functionPrototypeName (AS literal)? IS? PROTOTYPE))     
+     (DOT | DOT_FS)
+   ;
+
+// - interface id paragraph ----------------------------
+
+interfaceIdParagraph
+   : INTERFACE_ID (DOT | DOT_FS)
+     interfaceName (AS literal)?
+     (IS? FINAL)?
+     (INHERITS FROM? inheritedInterfaceName+)?
+     (USING cobolWord+)?
+     (DOT | DOT_FS)
+   ;
+
+// - method id paragraph -------------------------------
+
+methodIdParagraph
+   : METHOD_ID (DOT | DOT_FS)
+     ((methodName (AS literal)?)
+     | ((GET | SET) PROPERTY propertyName))
+     OVERRIDE? (IS? FINAL)?
+     (DOT | DOT_FS)
+   ;
+
+// - object paragraph ----------------------------------
+
+objectParagraph
+   : OBJECT (DOT | DOT_FS) (IMPLEMENTS interfaceName+ (DOT | DOT_FS))?
+   ;
+
+// - options paragraph ---------------------------------
+
+optionsParagraph
+   : OPTIONS (DOT | DOT_FS) (optionsParagraphBody+ (DOT | DOT_FS))?
+   ;
+
+optionsParagraphBody
+   : (arithmeticClause
+     | defaultRoundedClause
+     | entryConventionClause
+     | floatBinaryClause
+     | floatDecimalClause
+     | initializeClause
+     | intermediateRoundingClause
+     )
+   ;
+   
+arithmeticClause
+   : ARITHMETIC IS? (NATIVE | STANDARD_BINARY | STANDARD_DECIMAL)
+   ;
+   
+defaultRoundedClause
+   : DEFAULT ROUNDED MODE? IS? 
+     (AWAY_FROM_ZERO
+     | NEAREST_AWAY_FROM_ZERO
+     | NEAREST_EVEN
+     | NEAREST_TOWARD_ZERO
+     | PROHIBITED
+     | TOWARD_GREATER
+     | TOWARD_LESSER
+     | TRUNCATION
+     )
+   ;
+
+entryConventionClause
+   : ENTRY_CONVENTION IS? (COBOL | IDENTIFIER)
+   ;
+
+floatBinaryClause
+   : FLOAT_BINARY DEFAULT? IS? endiannessPhrase
+   ;
+
+floatDecimalClause
+   : FLOAT_DECIMAL DEFAULT? IS? (encodingPhrase | endiannessPhrase)
+   ;
+
+encodingPhrase
+   : (BINARY_ENCODING | DECIMAL_ENCODING)
+   ;
+
+endiannessPhrase
+   : (HIGH_ORDER_LEFT | HIGH_ORDER_RIGHT)
+   ;
+
+initializeClause
+   : INITIALIZE 
+     (ALL | LOCAL_STORAGE | SCREEN | WORKING_STORAGE) 
+     SECTION? TO? 
+     ((BINARY ZEROES) | literal | SPACES)
+   ;
+
+intermediateRoundingClause
+   : ( NEAREST_AWAY_FROM_ZERO
+     | NEAREST_EVEN
+     | PROHIBITED
+     | TRUNCATION
+     )
    ;
 
 // - author paragraph ----------------------------------
@@ -2793,7 +2953,7 @@ abbreviation
 // identifier ----------------------------------
 
 identifier
-   : qualifiedDataName | functionCall | tableCall | specialRegister //| dfhvalue
+   : functionCall | tableCall | qualifiedDataName | specialRegister //| dfhvalue
    ;
 
 /*
@@ -2803,11 +2963,12 @@ dfhvalue
 */
 
 tableCall
-   : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR)* referenceModifier?
+//   : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR)* referenceModifier?
+   : qualifiedDataName (LPARENCHAR subscript (COMMACHAR? subscript)* RPARENCHAR) referenceModifier?
    ;
 
 functionCall
-   : ((FUNCTION cobolWord) | functionName) (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)* referenceModifier?
+   : ((FUNCTION cobolWord) | functionName) (LPARENCHAR argument (COMMACHAR? argument)* RPARENCHAR)? referenceModifier?
    ;
 
 referenceModifier
@@ -2837,7 +2998,7 @@ qualifiedDataName
    ;
 
 qualifiedDataNameFormat1
-   : (dataName | conditionName) (qualifiedInData+ inFile? | inFile)?
+   : (dataName | conditionName) (qualifiedInData+ inFile? | inFile)? referenceModifier?
    ;
 
 qualifiedDataNameFormat2
@@ -2952,6 +3113,14 @@ indexName
    : cobolWord
    ;
 
+inheritedClassName
+   : className
+   ;
+   
+inheritedInterfaceName
+   : className
+   ;
+   
 interfaceName
    : cobolWord
    ;
@@ -2965,6 +3134,10 @@ libraryName
    ;
 
 localName
+   : cobolWord
+   ;
+
+methodName
    : cobolWord
    ;
 
@@ -3017,6 +3190,10 @@ symbolicCharacter
    ;
 
 textName
+   : cobolWord
+   ;
+
+userFunctionName
    : cobolWord
    ;
 
@@ -3191,6 +3368,7 @@ cicsWord
    | FOR
    | FREE
    | FROM
+   | GET
    | GROUP
    | INPUT
    | INTO
@@ -3207,8 +3385,10 @@ cicsWord
    | NAME
    | NAMESPACE
    | NEXT
+   | OBJECT
    | ON
    | OPEN
+   | OPTIONS
    | OR
    | ORGANIZATION
    | OUTPUT
