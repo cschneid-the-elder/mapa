@@ -361,15 +361,15 @@ specialNameClause
    : (channelClause 
    | odtClause 
    | alphabetClause 
-   | classClause 
-   | currencySignClause 
+   | classClause+ 
+   | currencySignClause+
    | decimalPointClause 
-   | symbolicCharactersClause 
+   | symbolicCharactersClause+ 
    | environmentSwitchNameClause 
    | defaultDisplaySignClause 
    | defaultComputationalSignClause 
    | reserveNetworkClause 
-   | xmlSchemaClause
+   | xmlSchemaClause+
    | crtStatusClause
    | cursorClause
    | dynamicLengthStructureClause
@@ -378,7 +378,7 @@ specialNameClause
    ;
 
 alphabetClause
-   : alphabetClauseFormat1+ | alphabetClauseFormat2
+   : alphabetClauseFormat1+ | alphabetClauseFormat2+
    ;
 
 alphabetClauseFormat1
@@ -398,7 +398,7 @@ alphabetAlso
    ;
 
 alphabetClauseFormat2
-   : ALPHABET alphabetName FOR? NATIONAL IS? ((LOCALE localeName?) | NATIVE | (CCSVERSION literal) | UCS_4 | UTF_8 | UTF_16 | IDENTIFIER | alphabetLiterals)
+   : ALPHABET alphabetName FOR? NATIONAL IS? ((LOCALE localeName?) | NATIVE | (CCSVERSION literal) | UCS_4 | UTF_8 | UTF_16 | IDENTIFIER | alphabetLiterals+)
    ;
 
 channelClause

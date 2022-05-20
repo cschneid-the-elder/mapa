@@ -5,7 +5,7 @@ specifications.
 Added characterClassificationClause to Object-Computer paragraph.  Added
 testdata/local/test9035.cbl.
 
-Modified alphabetClauseFormat1; added localeClause,
+Modified alphabetClauseFormat1, alphabetClauseFormat2; added localeClause,
 dynamicLengthStructureClause, orderTableClause to Special-Names paragraph.
 
 Added testdata/local/test9036.cbl.

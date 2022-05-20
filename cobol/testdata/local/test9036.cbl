@@ -19,6 +19,7 @@
            Alphabet Farscape Native
            Alphabet Farscape Standard-1
            Alphabet Farscape Standard-2
+           Alphabet Farscape EBCDIC
            Alphabet Farscape TormentedSpace
            Alphabet Farscape 'a' Through 'z'
            Alphabet Farscape 'a' Thru 'z'
@@ -28,6 +29,7 @@
            Alphabet Farscape Is Native
            Alphabet Farscape Is Standard-1
            Alphabet Farscape Is Standard-2
+           Alphabet Farscape Is EBCDIC
            Alphabet Farscape Is TormentedSpace
            Alphabet Farscape Is 'a' Through 'z'
            Alphabet Farscape Is 'a' Thru 'z'
@@ -37,6 +39,7 @@
            Alphabet Farscape Alphanumeric Native
            Alphabet Farscape Alphanumeric Standard-1
            Alphabet Farscape Alphanumeric Standard-2
+           Alphabet Farscape Alphanumeric EBCDIC
            Alphabet Farscape Alphanumeric TormentedSpace
            Alphabet Farscape Alphanumeric 'a' Through 'z'
            Alphabet Farscape Alphanumeric 'a' Thru 'z'
@@ -47,6 +50,7 @@
            Alphabet Farscape For Alphanumeric Native
            Alphabet Farscape For Alphanumeric Standard-1
            Alphabet Farscape For Alphanumeric Standard-2
+           Alphabet Farscape For Alphanumeric EBCDIC
            Alphabet Farscape For Alphanumeric TormentedSpace
            Alphabet Farscape For Alphanumeric 'a' Through 'z'
            Alphabet Farscape For Alphanumeric 'a' Thru 'z'
@@ -57,10 +61,235 @@
            Alphabet Farscape For Alphanumeric Is Native
            Alphabet Farscape For Alphanumeric Is Standard-1
            Alphabet Farscape For Alphanumeric Is Standard-2
+           Alphabet Farscape For Alphanumeric Is EBCDIC
            Alphabet Farscape For Alphanumeric Is TormentedSpace
            Alphabet Farscape For Alphanumeric Is 'a' Through 'z'
            Alphabet Farscape For Alphanumeric Is 'a' Thru 'z'
            Alphabet Farscape For Alphanumeric Is 'a' Also 'b' Also 'c'
+           Alphabet Farscape National Locale
+           Alphabet Farscape National Locale UnchartedTerritories
+           Alphabet Farscape National Native
+           Alphabet Farscape National UCS-4
+           Alphabet Farscape National UTF-8
+           Alphabet Farscape National UTF-16
+           Alphabet Farscape National TormentedSpace
+           Alphabet Farscape National 'a' Through 'z'
+           Alphabet Farscape National 'a' Thru 'z'
+           Alphabet Farscape National 'a' Through 'z' '0' Also '1'
+           Alphabet Farscape National 'a' Thru 'z' '0' Also '1'
+           Alphabet Farscape National 'a' Through 'z' '0' Through '9'
+           Alphabet Farscape National 'a' Thru 'z' '0' Thru '9'
+           Alphabet Farscape National 
+             'a' Through 'z' '0' Through '9' '@' Also '!'
+           Alphabet Farscape National 
+             'a' Thru 'z' '0' Thru '9' '@' Also '!'
+           Alphabet Farscape National Is Locale
+           Alphabet Farscape National Is Locale UnchartedTerritories
+           Alphabet Farscape National Is Native
+           Alphabet Farscape National Is UCS-4
+           Alphabet Farscape National Is UTF-8
+           Alphabet Farscape National Is UTF-16
+           Alphabet Farscape National Is TormentedSpace
+           Alphabet Farscape National Is 'a' Through 'z'
+           Alphabet Farscape National Is 'a' Thru 'z'
+           Alphabet Farscape National Is 'a' Through 'z' '0' Also '1'
+           Alphabet Farscape National Is 'a' Thru 'z' '0' Also '1'
+           Alphabet Farscape National Is 
+             'a' Through 'z' '0' Through '9'
+           Alphabet Farscape National Is 'a' Thru 'z' '0' Thru '9'
+           Alphabet Farscape National Is 
+             'a' Through 'z' '0' Through '9' '0' Also '!'
+           Alphabet Farscape National Is 
+             'a' Thru 'z' '0' Thru '9' '0' Also '!'
+           Alphabet Farscape For National Locale
+           Alphabet Farscape For National Locale UnchartedTerritories
+           Alphabet Farscape For National Native
+           Alphabet Farscape For National UCS-4
+           Alphabet Farscape For National UTF-8
+           Alphabet Farscape For National UTF-16
+           Alphabet Farscape For National TormentedSpace
+           Alphabet Farscape For National 'a' Through 'z'
+           Alphabet Farscape For National 'a' Thru 'z'
+           Alphabet Farscape For National 'a' Through 'z' '0' Also '1'
+           Alphabet Farscape For National 'a' Thru 'z' '0' Also '1'
+           Alphabet Farscape For National 
+             'a' Through 'z' '0' Through '9'
+           Alphabet Farscape For National 'a' Thru 'z' '0' Thru '9'
+           Alphabet Farscape For National 
+             'a' Through 'z' '0' Through '9' '@' Also '!'
+           Alphabet Farscape For National 
+             'a' Thru 'z' '0' Thru '9' '@' Also '!'
+           Alphabet Farscape For National Is Locale
+           Alphabet Farscape For National Is 
+             Locale UnchartedTerritories
+           Alphabet Farscape For National Is Native
+           Alphabet Farscape For National Is UCS-4
+           Alphabet Farscape For National Is UTF-8
+           Alphabet Farscape For National Is UTF-16
+           Alphabet Farscape For National Is TormentedSpace
+           Alphabet Farscape For National Is 'a' Through 'z'
+           Alphabet Farscape For National Is 'a' Thru 'z'
+           Alphabet Farscape For National Is 
+             'a' Through 'z' '0' Also '1'
+           Alphabet Farscape For National Is 'a' Thru 'z' '0' Also '1'
+           Alphabet Farscape For National Is 
+             'a' Through 'z' '0' Through '9'
+           Alphabet Farscape For National Is 'a' Thru 'z' '0' Thru '9'
+           Alphabet Farscape For National Is 
+             'a' Through 'z' '0' Through '9' '@' Also '!'
+           Alphabet Farscape For National Is 
+             'a' Thru 'z' '0' Thru '9' '@' Also '!'
+           Class Moya 'a'
+           Class Moya 'a' 'b'
+           Class Moya 'a' Through 'c' 'f' Through 'h'
+           Class Moya 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya 'a' Farscape
+           Class Moya 'a' 'b' Farscape
+           Class Moya 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya 'a' In Farscape
+           Class Moya 'a' 'b' In Farscape
+           Class Moya 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya Is 'a'
+           Class Moya Is 'a' 'b'
+           Class Moya Is 'a' Through 'c' 'f' Through 'h'
+           Class Moya Is 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya Is 'a' Farscape
+           Class Moya Is 'a' 'b' Farscape
+           Class Moya Is 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya Is 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya Is 'a' In Farscape
+           Class Moya Is 'a' 'b' In Farscape
+           Class Moya Is 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya Is 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya Alphanumeric 'a'
+           Class Moya Alphanumeric 'a' 'b'
+           Class Moya Alphanumeric 'a' Through 'c' 'f' Through 'h'
+           Class Moya Alphanumeric 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya Alphanumeric 'a' Farscape
+           Class Moya Alphanumeric 'a' 'b' Farscape
+           Class Moya 
+             Alphanumeric 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya Alphanumeric 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya Alphanumeric 'a' In Farscape
+           Class Moya Alphanumeric 'a' 'b' In Farscape
+           Class Moya 
+             Alphanumeric 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya Alphanumeric 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya Alphanumeric Is 'a'
+           Class Moya Alphanumeric Is 'a' 'b'
+           Class Moya Alphanumeric Is 'a' Through 'c' 'f' Through 'h'
+           Class Moya Alphanumeric Is 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya Alphanumeric Is 'a' Farscape
+           Class Moya Alphanumeric Is 'a' 'b' Farscape
+           Class Moya 
+             Alphanumeric Is 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya Alphanumeric Is 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya Alphanumeric Is 'a' In Farscape
+           Class Moya Alphanumeric Is 'a' 'b' In Farscape
+           Class Moya 
+             Alphanumeric Is 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya 
+             Alphanumeric Is 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya For Alphanumeric 'a'
+           Class Moya For Alphanumeric 'a' 'b'
+           Class Moya For Alphanumeric 'a' Through 'c' 'f' Through 'h'
+           Class Moya For Alphanumeric 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya For Alphanumeric 'a' Farscape
+           Class Moya For Alphanumeric 'a' 'b' Farscape
+           Class Moya 
+             For Alphanumeric 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya For Alphanumeric 'a' Thru 'c' 'f' Thru 'h' 
+             Farscape
+           Class Moya For Alphanumeric 'a' In Farscape
+           Class Moya For Alphanumeric 'a' 'b' In Farscape
+           Class Moya 
+             For Alphanumeric 'a' Through 'c' 'f' Through 'h' 
+             In Farscape
+           Class Moya 
+             For Alphanumeric 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya For Alphanumeric Is 'a'
+           Class Moya For Alphanumeric Is 'a' 'b'
+           Class Moya For Alphanumeric Is 
+             'a' Through 'c' 'f' Through 'h'
+           Class Moya For Alphanumeric Is 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya For Alphanumeric Is 'a' Farscape
+           Class Moya For Alphanumeric Is 'a' 'b' Farscape
+           Class Moya 
+             For Alphanumeric Is 'a' Through 'c' 'f' Through 'h' 
+             Farscape
+           Class Moya 
+             For Alphanumeric Is 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya For Alphanumeric Is 'a' In Farscape
+           Class Moya For Alphanumeric Is 'a' 'b' In Farscape
+           Class Moya 
+             For Alphanumeric Is 'a' Through 'c' 'f' Through 'h' 
+             In Farscape
+           Class Moya 
+             For Alphanumeric Is 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya National 'a'
+           Class Moya National 'a' 'b'
+           Class Moya National 'a' Through 'c' 'f' Through 'h'
+           Class Moya National 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya National 'a' Farscape
+           Class Moya National 'a' 'b' Farscape
+           Class Moya 
+             National 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya National 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya National 'a' In Farscape
+           Class Moya National 'a' 'b' In Farscape
+           Class Moya 
+             National 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya National 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya National Is 'a'
+           Class Moya National Is 'a' 'b'
+           Class Moya National Is 'a' Through 'c' 'f' Through 'h'
+           Class Moya National Is 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya National Is 'a' Farscape
+           Class Moya National Is 'a' 'b' Farscape
+           Class Moya 
+             National Is 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya National Is 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya National Is 'a' In Farscape
+           Class Moya National Is 'a' 'b' In Farscape
+           Class Moya 
+             National Is 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya 
+             National Is 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya For National 'a'
+           Class Moya For National 'a' 'b'
+           Class Moya For National 'a' Through 'c' 'f' Through 'h'
+           Class Moya For National 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya For National 'a' Farscape
+           Class Moya For National 'a' 'b' Farscape
+           Class Moya 
+             For National 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya For National 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya For National 'a' In Farscape
+           Class Moya For National 'a' 'b' In Farscape
+           Class Moya 
+             For National 'a' Through 'c' 'f' Through 'h' In Farscape
+           Class Moya 
+             For National 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           Class Moya For National Is 'a'
+           Class Moya For National Is 'a' 'b'
+           Class Moya For National Is 'a' Through 'c' 'f' Through 'h'
+           Class Moya For National Is 'a' Thru 'c' 'f' Thru 'h'
+           Class Moya For National Is 'a' Farscape
+           Class Moya For National Is 'a' 'b' Farscape
+           Class Moya 
+             For National Is 'a' Through 'c' 'f' Through 'h' Farscape
+           Class Moya 
+             For National Is 'a' Thru 'c' 'f' Thru 'h' Farscape
+           Class Moya For National Is 'a' In Farscape
+           Class Moya For National Is 'a' 'b' In Farscape
+           Class Moya 
+             For National Is 'a' Through 'c' 'f' Through 'h' 
+             In Farscape
+           Class Moya 
+             For National Is 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           
            .
        Procedure Division.
            GOBACK.
