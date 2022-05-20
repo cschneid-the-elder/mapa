@@ -502,6 +502,36 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#crtStatusClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCrtStatusClause(CobolParser.CrtStatusClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#cursorClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCursorClause(CobolParser.CursorClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dynamicLengthStructureClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDynamicLengthStructureClause(CobolParser.DynamicLengthStructureClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#localeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocaleClause(CobolParser.LocaleClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#orderTableClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrderTableClause(CobolParser.OrderTableClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#respositoryParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -4029,6 +4059,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLocalName(CobolParser.LocalNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#localeName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocaleName(CobolParser.LocaleNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#methodName}.
 	 * @param ctx the parse tree

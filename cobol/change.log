@@ -1,3 +1,15 @@
+--2022-05-20--------------------------------------------------------------------
+Modified CobolLexer and CobolParser per draft 202x Environment Division
+specifications.
+
+Added characterClassificationClause to Object-Computer paragraph.  Added
+testdata/local/test9035.cbl.
+
+Modified alphabetClauseFormat1; added localeClause,
+dynamicLengthStructureClause, orderTableClause to Special-Names paragraph.
+
+Added testdata/local/test9036.cbl.
+
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
 specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,

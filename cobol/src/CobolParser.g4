@@ -358,7 +358,23 @@ specialNamesParagraph
    ;
 
 specialNameClause
-   : channelClause | odtClause | alphabetClause | classClause | currencySignClause | decimalPointClause | symbolicCharactersClause | environmentSwitchNameClause | defaultDisplaySignClause | defaultComputationalSignClause | reserveNetworkClause | xmlSchemaClause
+   : (channelClause 
+   | odtClause 
+   | alphabetClause 
+   | classClause 
+   | currencySignClause 
+   | decimalPointClause 
+   | symbolicCharactersClause 
+   | environmentSwitchNameClause 
+   | defaultDisplaySignClause 
+   | defaultComputationalSignClause 
+   | reserveNetworkClause 
+   | xmlSchemaClause
+   | crtStatusClause
+   | cursorClause
+   | dynamicLengthStructureClause
+   | localeClause
+   | orderTableClause)
    ;
 
 alphabetClause
@@ -366,7 +382,7 @@ alphabetClause
    ;
 
 alphabetClauseFormat1
-   : ALPHABET alphabetName (FOR ALPHANUMERIC)? IS? (EBCDIC | ASCII | STANDARD_1 | STANDARD_2 | NATIVE | cobolWord | alphabetLiterals+) COMMACHAR?
+   : ALPHABET alphabetName (FOR? ALPHANUMERIC)? IS? ((LOCALE localeName?) | EBCDIC | ASCII | STANDARD_1 | STANDARD_2 | NATIVE | cobolWord | alphabetLiterals+) COMMACHAR?
    ;
 
 alphabetLiterals
@@ -382,7 +398,7 @@ alphabetAlso
    ;
 
 alphabetClauseFormat2
-   : ALPHABET alphabetName FOR? NATIONAL IS? (NATIVE | CCSVERSION literal)
+   : ALPHABET alphabetName FOR? NATIONAL IS? ((LOCALE localeName?) | NATIVE | (CCSVERSION literal) | UCS_4 | UTF_8 | UTF_16 | IDENTIFIER | alphabetLiterals)
    ;
 
 channelClause
@@ -390,7 +406,7 @@ channelClause
    ;
 
 classClause
-   : CLASS className (FOR? (ALPHANUMERIC | NATIONAL))? IS? classClauseThrough+
+   : CLASS className (FOR? (ALPHANUMERIC | NATIONAL))? IS? classClauseThrough+ (IN alphabetName)?
    ;
 
 classClauseThrough
@@ -422,7 +438,7 @@ defaultDisplaySignClause
    ;
 
 environmentSwitchNameClause
-   : environmentName IS? mnemonicName environmentSwitchNameSpecialNamesStatusPhrase? | environmentSwitchNameSpecialNamesStatusPhrase
+   : environmentName ((IS? mnemonicName environmentSwitchNameSpecialNamesStatusPhrase?) | environmentSwitchNameSpecialNamesStatusPhrase)
    ;
 
 environmentSwitchNameSpecialNamesStatusPhrase
@@ -447,6 +463,27 @@ symbolicCharacters
 
 xmlSchemaClause
    : XML_SCHEMA identifier IS? (identifier | literal)
+   ;
+
+crtStatusClause
+   : CRT STATUS IS? dataName
+   ;
+
+cursorClause
+   : CURSOR IS? dataName
+   ;
+
+dynamicLengthStructureClause
+   : DYNAMIC LENGTH STRUCTURE? dataName IS?
+     ((SIGNED? SHORT? PREFIXED) | DELIMITED | dataName)
+   ;
+
+localeClause
+   : LOCALE localeName IS? (cobolWord | literal)
+   ;
+
+orderTableClause
+   : ORDER TABLE cobolWord IS? literal
    ;
 
 // - repository paragraph -----------------------------------
@@ -3149,6 +3186,10 @@ libraryName
    ;
 
 localName
+   : cobolWord
+   ;
+
+localeName
    : cobolWord
    ;
 
