@@ -334,6 +334,30 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCharacterSetClause(CobolParser.CharacterSetClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#characterClassificationClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacterClassificationClause(CobolParser.CharacterClassificationClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#characterClassificationClauseAlphanumeric}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacterClassificationClauseAlphanumeric(CobolParser.CharacterClassificationClauseAlphanumericContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#characterClassificationClauseNational}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacterClassificationClauseNational(CobolParser.CharacterClassificationClauseNationalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#localePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocalePhrase(CobolParser.LocalePhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#specialNamesParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

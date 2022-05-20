@@ -547,6 +547,46 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitCharacterSetClause(CobolParser.CharacterSetClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#characterClassificationClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterClassificationClause(CobolParser.CharacterClassificationClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#characterClassificationClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterClassificationClause(CobolParser.CharacterClassificationClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#characterClassificationClauseAlphanumeric}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterClassificationClauseAlphanumeric(CobolParser.CharacterClassificationClauseAlphanumericContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#characterClassificationClauseAlphanumeric}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterClassificationClauseAlphanumeric(CobolParser.CharacterClassificationClauseAlphanumericContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#characterClassificationClauseNational}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterClassificationClauseNational(CobolParser.CharacterClassificationClauseNationalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#characterClassificationClauseNational}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterClassificationClauseNational(CobolParser.CharacterClassificationClauseNationalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#localePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocalePhrase(CobolParser.LocalePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#localePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocalePhrase(CobolParser.LocalePhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#specialNamesParagraph}.
 	 * @param ctx the parse tree
 	 */

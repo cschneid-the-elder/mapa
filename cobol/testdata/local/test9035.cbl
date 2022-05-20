@@ -2,7 +2,8 @@
        Program-ID.    test035a.
       * Permutations and combinations of OBJECT-COMPUTER paragraph.
        Environment Division.
-       Object Computer.
+       Configuration Section.
+       Object-Computer.
        Procedure Division.
            GOBACK.
        End Program test035a.
@@ -11,7 +12,8 @@
        Program-ID.    test035ab
       * Permutations and combinations of OBJECT-COMPUTER paragraph.
        Environment Division.
-       Object Computer.
+       Configuration Section.
+       Object-Computer.
            NCC1701
            Classification StarTrekTOS
            Classification Locale
@@ -123,7 +125,35 @@
            Program Sequence Is StarTrekTOS StarTrekTOS
            Program Collating Sequence Is StarTrekTOS
            Program Collating Sequence Is StarTrekTOS StarTrekTOS
-
+           Sequence Alphanumeric StarTrekTOS
+           Sequence National StarTrekTOS
+           Sequence Alphanumeric Is StarTrekTOS
+           Sequence National Is StarTrekTOS
+           Sequence For Alphanumeric StarTrekTOS
+           Sequence For National StarTrekTOS
+           Collating Sequence Alphanumeric StarTrekTOS
+           Collating Sequence National StarTrekTOS
+           Program Sequence Alphanumeric StarTrekTOS
+           Program Sequence National StarTrekTOS
+           Sequence For Alphanumeric Is StarTrekTOS
+           Sequence For National Is StarTrekTOS
+           Collating Sequence Alphanumeric Is StarTrekTOS
+           Collating Sequence National Is StarTrekTOS
+           Program Sequence Alphanumeric Is StarTrekTOS
+           Program Sequence National Is StarTrekTOS
+           Collating Sequence For Alphanumeric Is StarTrekTOS
+           Collating Sequence For National Is StarTrekTOS
+           Program Sequence For Alphanumeric Is StarTrekTOS
+           Program Sequence For National Is StarTrekTOS
+           Program Collating Sequence For Alphanumeric Is StarTrekTOS
+           Program Collating Sequence For National Is StarTrekTOS
+           Collating Sequence For Alphanumeric StarTrekTOS
+           Collating Sequence For National StarTrekTOS
+           Program Sequence For Alphanumeric StarTrekTOS
+           Program Sequence For National StarTrekTOS
+           Program Collating Sequence For Alphanumeric StarTrekTOS
+           Program Collating Sequence For National StarTrekTOS
+           .
        Procedure Division.
            GOBACK.
        End Program test035b.

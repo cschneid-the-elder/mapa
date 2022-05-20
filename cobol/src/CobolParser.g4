@@ -316,7 +316,7 @@ diskSizeClause
    ;
 
 collatingSequenceClause
-   : PROGRAM? COLLATING? SEQUENCE (IS? alphabetName+) collatingSequenceClauseAlphanumeric? collatingSequenceClauseNational?
+   : PROGRAM? COLLATING? SEQUENCE ((IS? alphabetName+) | collatingSequenceClauseAlphanumeric | collatingSequenceClauseNational)
    ;
 
 collatingSequenceClauseAlphanumeric
@@ -336,7 +336,7 @@ characterSetClause
    ;
 
 characterClassificationClause
-   : CHARACTER? CLASSIFICATION (IS? localePhrase+) characterClassificationClauseAlphanumeric? characterClassificationClauseNational?
+   : CHARACTER? CLASSIFICATION ((IS? localePhrase+) | characterClassificationClauseAlphanumeric | characterClassificationClauseNational)
    ;
 
 characterClassificationClauseAlphanumeric
