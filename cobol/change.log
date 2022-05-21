@@ -20,6 +20,18 @@ Modified environmentSwitchNameSpecialNamesStatusPhrase substituting dataName
 for condition as the former is (not obviously) what was intended in the
 standard.
 
+The draft standard I'm working from specifies...
+
+    "When ORDER TABLE is specified, ordering-name-1 references a cultural 
+    ordering table that is identified by literal-9 and constructed in 
+    accordance with ISO/IEC 14651:2011, Appendix A, Common Template Table. 
+    The implementorspecifies the allowable content of literal-9."
+
+...which I'm taking to mean literal-9 is just any literal.  FYI, ISO/IEC
+14651:2011 has been withdrawn, superceded by ISO/IEC 14651:2016 which has
+also been withdrawn, superceded by ISO/IEC 14651:2019 which has also been
+withdrawn, superceded by ISO/IEC 14651:2020.
+
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
 specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,

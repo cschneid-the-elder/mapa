@@ -373,7 +373,168 @@
            Pilot 
                On Status Is Bialar
                Off Status Is Crais           
-           
+           Symbolic A 32
+           Symbolic A 32 B 64
+           Symbolic A B C D E F 4 8 15 16 23 42
+           Symbolic A B 4 8 C D 15 16 E F 23 42
+           Symbolic Characters A 32
+           Symbolic Characters A 32 B 64
+           Symbolic Characters A B C D E F 4 8 15 16 23 42
+           Symbolic Characters A B 4 8 C D 15 16 E F 23 42
+           Symbolic Alphanumeric A 32
+           Symbolic Alphanumeric A 32 B 64
+           Symbolic Alphanumeric A B C D E F 4 8 15 16 23 42
+           Symbolic Alphanumeric 
+             A B 4 8 C D 15 16 E F 23 42
+           Symbolic National A 32
+           Symbolic National A 32 B 64
+           Symbolic National A B C D E F 4 8 15 16 23 42
+           Symbolic National A B 4 8 C D 15 16 E F 23 42
+           Symbolic A Is 32
+           Symbolic A 32 B Is 64
+           Symbolic A Is 32 B 64
+           Symbolic A Is 32 B Is 64
+           Symbolic A B C D E F Is 4 8 15 16 23 42
+           Symbolic A B Is 4 8 C D Is 15 16 E F Is 23 42
+           Symbolic A Are 32
+           Symbolic A 32 B Are 64
+           Symbolic A Are 32 B 64
+           Symbolic A Are 32 B Are 64
+           Symbolic A B C D E F Are 4 8 15 16 23 42
+           Symbolic A B Are 4 8 C D Are 15 16 E F Are 23 42
+           Symbolic Characters Alphanumeric A 32
+           Symbolic Characters Alphanumeric A 32 B 64
+           Symbolic Characters Alphanumeric A B C D E F 4 8 15 16 23 42
+           Symbolic Characters Alphanumeric 
+             A B 4 8 C D 15 16 E F 23 42
+           Symbolic Characters National A 32
+           Symbolic Characters National A 32 B 64
+           Symbolic Characters National A B C D E F 4 8 15 16 23 42
+           Symbolic Characters National A B 4 8 C D 15 16 E F 23 42
+           Symbolic Characters For Alphanumeric A 32
+           Symbolic Characters For Alphanumeric A 32 B 64
+           Symbolic Characters For Alphanumeric
+             A B C D E F 4 8 15 16 23 42
+           Symbolic Characters For Alphanumeric 
+             A B 4 8 C D 15 16 E F 23 42
+           Symbolic Characters For National A 32
+           Symbolic Characters For National A 32 B 64
+           Symbolic Characters For National A B C D E F 4 8 15 16 23 42
+           Symbolic Characters For National A B 4 8 C D 15 16 E F 23 42
+           Symbolic Characters For Alphanumeric
+             A B C D E F Are 4 8 15 16 23 42
+           Symbolic Characters For Alphanumeric 
+             A B Are 4 8 C D Are 15 16 E F Are 23 42
+           Symbolic Characters For National
+             A B C D E F Are 4 8 15 16 23 42
+           Symbolic Characters For National 
+             A B Are 4 8 C D Are 15 16 E F Are 23 42
+           Symbolic A 32
+             In Farscape
+           Symbolic A 32 B 64
+             In Farscape
+           Symbolic A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic Characters A 32
+             In Farscape
+           Symbolic Characters A 32 B 64
+             In Farscape
+           Symbolic Characters A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic Alphanumeric A 32
+             In Farscape
+           Symbolic Alphanumeric A 32 B 64
+             In Farscape
+           Symbolic Alphanumeric A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic Alphanumeric 
+             A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic National A 32
+             In Farscape
+           Symbolic National A 32 B 64
+             In Farscape
+           Symbolic National A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic National A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic A Is 32
+             In Farscape
+           Symbolic A 32 B Is 64
+             In Farscape
+           Symbolic A Is 32 B 64
+             In Farscape
+           Symbolic A Is 32 B Is 64
+             In Farscape
+           Symbolic A B C D E F Is 4 8 15 16 23 42
+             In Farscape
+           Symbolic A B Is 4 8 C D Is 15 16 E F Is 23 42
+             In Farscape
+           Symbolic A Are 32
+             In Farscape
+           Symbolic A 32 B Are 64
+             In Farscape
+           Symbolic A Are 32 B 64
+             In Farscape
+           Symbolic A Are 32 B Are 64
+             In Farscape
+           Symbolic A B C D E F Are 4 8 15 16 23 42
+             In Farscape
+           Symbolic A B Are 4 8 C D Are 15 16 E F Are 23 42
+             In Farscape
+           Symbolic Characters Alphanumeric A 32
+             In Farscape
+           Symbolic Characters Alphanumeric A 32 B 64
+             In Farscape
+           Symbolic Characters Alphanumeric A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters Alphanumeric 
+             A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic Characters National A 32
+             In Farscape
+           Symbolic Characters National A 32 B 64
+             In Farscape
+           Symbolic Characters National A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters National A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic Characters For Alphanumeric A 32
+             In Farscape
+           Symbolic Characters For Alphanumeric A 32 B 64
+             In Farscape
+           Symbolic Characters For Alphanumeric
+             A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters For Alphanumeric 
+             A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic Characters For National A 32
+             In Farscape
+           Symbolic Characters For National A 32 B 64
+             In Farscape
+           Symbolic Characters For National A B C D E F 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters For National A B 4 8 C D 15 16 E F 23 42
+             In Farscape
+           Symbolic Characters For Alphanumeric
+             A B C D E F Are 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters For Alphanumeric 
+             A B Are 4 8 C D Are 15 16 E F Are 23 42
+             In Farscape
+           Symbolic Characters For National
+             A B C D E F Are 4 8 15 16 23 42
+             In Farscape
+           Symbolic Characters For National 
+             A B Are 4 8 C D Are 15 16 E F Are 23 42
+             In Farscape
+           Order Table Talyn x'00010203'
+           Order Table Talyn Is x'00010203'
            .
        Data Division.
        Working-Storage Section.
