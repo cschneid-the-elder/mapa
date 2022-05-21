@@ -776,6 +776,12 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "PGM00003", CallType.CALLBYIDENTIFIER, calledNodes, 4)) failCount++;
 				if (!testCall001(fileName, bareName, "PGM00004", CallType.CALLBYIDENTIFIER, calledNodes, 4)) failCount++;
 				break;
+			case "testantlr065":
+			case "testantlr165":
+			case "testantlr265":
+			case "testantlr365":
+				if (!testCall001(fileName, bareName, "PGM00001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

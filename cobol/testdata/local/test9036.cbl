@@ -289,8 +289,25 @@
              In Farscape
            Class Moya 
              For National Is 'a' Thru 'c' 'f' Thru 'h' In Farscape
+           CRT Status Aeryn
+           CRT Status Is Aeryn
+           Currency '!'
+           Currency Sign '!'
+           Currency Is '!'
+           Currency Sign Is x'81'
+           Currency '!' Picture Symbol '_'
+           Currency Sign '!' Picture Symbol '_'
+           Currency Is '!' Picture Symbol '_'
+           Currency Sign Is x'81' Picture Symbol '_'
+           Currency '!' With Picture Symbol '_'
+           Currency Sign '!' With Picture Symbol '_'
+           Currency Is '!' With Picture Symbol '_'
+           Currency Sign Is x'81' With Picture Symbol '_'
            
            .
+       Data Division.
+       Working-Storage Section.
+       77  Stuff Pic X(001) Value 'X'.
        Procedure Division.
            GOBACK.
        End Program test036b.

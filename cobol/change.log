@@ -10,6 +10,12 @@ dynamicLengthStructureClause, orderTableClause to Special-Names paragraph.
 
 Added testdata/local/test9036.cbl.
 
+Added testdata/local/testantlr?65.cbl specifically to test the context
+sensitive nature of the PICTURE token, which means one thing in the
+currencySignClause and needs to cause a mode switch in the Data Division.  It
+turns out nothing in the NIST test suite includes this syntax, maybe it's new
+since then.
+
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
 specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,

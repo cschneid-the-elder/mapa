@@ -26,7 +26,14 @@ lexer grammar CobolLexer;
 	being processed via an application.  Under those circumstances,
 	the lexing code must set this variable to false.
 	*/
-	public static Boolean testRig = true; 
+	public static Boolean testRig = true;
+	
+	/*
+	The token PICTURE has a different meaning in the CURRENCY SIGN
+	clause of the Special-Names paragraph than it does in the
+	Data Division.
+	*/
+	public Boolean specialNames = false;
 }
 
 channels { COMPILER_DIRECTIVES }
@@ -248,7 +255,11 @@ DISK : D I S K;
 DISPLAY : D I S P L A Y;
 DISPLAY_1 : D I S P L A Y MINUSCHAR '1';
 DIVIDE : D I V I D E;
-DIVISION : D I V I S I O N;
+DIVISION : D I V I S I O N
+   {
+      specialNames = false;
+   }
+   ;
 DONTCARE : D O N T C A R E;
 DOUBLE : D O U B L E;
 DOWN : D O W N;
@@ -497,7 +508,13 @@ PERFORM : P E R F O R M;
 PF : P F;
 PH : P H;
 PIC : P I C ->pushMode(PIC_MODE);
-PICTURE : P I C T U R E ->pushMode(PIC_MODE);
+PICTURE : P I C T U R E 
+   {
+      if (!specialNames) {
+         pushMode(PIC_MODE);
+      }
+   }
+   ;
 PLUS : P L U S;
 POINTER : P O I N T E R;
 POINTER_32 : P O I N T E R MINUSCHAR '3' '2';
@@ -620,7 +637,11 @@ SOURCE : S O U R C E;
 SOURCE_COMPUTER : S O U R C E MINUSCHAR C O M P U T E R;
 SPACE : S P A C E;
 SPACES : S P A C E S;
-SPECIAL_NAMES : S P E C I A L MINUSCHAR N A M E S;
+SPECIAL_NAMES : S P E C I A L MINUSCHAR N A M E S 
+   {
+      specialNames = true;
+   }
+   ;
 SQL : S Q L;
 STANDARD : S T A N D A R D;
 STANDARD_1 : S T A N D A R D MINUSCHAR '1';
@@ -824,8 +845,13 @@ COMPILER_DIRECTIVE : '>>' TEXTA+ -> channel(COMPILER_DIRECTIVES);
 DOLLARCHAR : '$';
 DOUBLEQUOTE : '"';
 // period full stop
-DOT_FS : '.' ('\r' | '\n' | '\f' | '\t') | '.' EOF;
-DOT : '.';
+DOT_FS 
+   : '.' ('\r' | '\n' | '\f' | '\t') | '.' EOF
+   ;
+DOT 
+   : '.'
+   ;
+
 EQUALCHAR : '=';
 EXECCICSTAG : '*>EXECCICS';
 EXECSQLTAG : '*>EXECSQL';
