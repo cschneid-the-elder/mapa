@@ -303,6 +303,76 @@
            Currency Sign '!' With Picture Symbol '_'
            Currency Is '!' With Picture Symbol '_'
            Currency Sign Is x'81' With Picture Symbol '_'
+           Cursor Chiana
+           Cursor Is Chiana
+           Decimal-Point Comma
+           Decimal-Point Is Comma
+           Dynamic Length Rygel Prefixed
+           Dynamic Length Rygel Signed Prefixed
+           Dynamic Length Rygel Short Prefixed
+           Dynamic Length Rygel Signed Short Prefixed
+           Dynamic Length Rygel Delimited
+           Dynamic Length Rygel Dominar
+           Dynamic Length Rygel Is Prefixed
+           Dynamic Length Rygel Is Signed Prefixed
+           Dynamic Length Rygel Is Short Prefixed
+           Dynamic Length Rygel Is Signed Short Prefixed
+           Dynamic Length Rygel Is Delimited
+           Dynamic Length Rygel Is Dominar
+           Dynamic Length Structure Rygel Prefixed
+           Dynamic Length Structure Rygel Signed Prefixed
+           Dynamic Length Structure Rygel Short Prefixed
+           Dynamic Length Structure Rygel Signed Short Prefixed
+           Dynamic Length Structure Rygel Delimited
+           Dynamic Length Structure Rygel Dominar
+           Dynamic Length Structure Rygel Is Prefixed
+           Dynamic Length Structure Rygel Is Signed Prefixed
+           Dynamic Length Structure Rygel Is Short Prefixed
+           Dynamic Length Structure Rygel Is Signed Short Prefixed
+           Dynamic Length Structure Rygel Is Delimited
+           Dynamic Length Structure Rygel Is Dominar
+           Locale Crichton John
+           Locale Crichton 'John'
+           Locale Crichton Is John
+           Locale Crichton Is 'John'
+           Pilot LaniTupu
+           Pilot LaniTupu
+               On Bialar
+               Off Crais           
+           Pilot Is LaniTupu
+           Pilot Is LaniTupu
+               On Bialar
+               Off Crais           
+           Pilot LaniTupu
+               On Is Bialar
+               Off Is Crais           
+           Pilot LaniTupu
+               On Status Bialar
+               Off Status Crais           
+           Pilot LaniTupu
+               On Status Is Bialar
+               Off Status Is Crais
+           Pilot Is LaniTupu
+               On Is Bialar
+               Off Is Crais           
+           Pilot Is LaniTupu
+               On Status Bialar
+               Off Status Crais           
+           Pilot Is LaniTupu
+               On Status Is Bialar
+               Off Status Is Crais
+           Pilot 
+               On Bialar
+               Off Crais           
+           Pilot 
+               On Is Bialar
+               Off Is Crais
+           Pilot 
+               On Status Bialar
+               Off Status Crais
+           Pilot 
+               On Status Is Bialar
+               Off Status Is Crais           
            
            .
        Data Division.
