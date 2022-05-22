@@ -36,6 +36,11 @@ Modified assignClause rule in parser, adding USING syntax and allowing for
 multiple device names or literal names, and AssignClause class to account 
 for these changes.
 
+Added lockModeClause and sharingClause to fileControlParagraph.  Removed
+PASSWORD from cobolWord as it is a reserved word in IBM COBOL and it was
+messing with recognition of the token as the first part of passwordClause
+and mistakenly taking it for another assignmentName in assignmentClause.
+
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
 specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,

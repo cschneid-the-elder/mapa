@@ -999,6 +999,19 @@
            Select Moya
              Assign PILOT
              Sharing With No Other
+
+           Select Moya
+             Assign PILOT
+             Access Sequential
+             File Status Is Sikozu Jool
+             Password Noranti
+             Lock Mode Is Automatic With Lock On Records
+             Reserve 42 Areas
+             Padding Character Is x'42'
+             Organization Is Record Sequential
+             Record Delimiter Is Standard-1
+             Sharing With Read Only
+
            .
        Procedure Division.
            GOBACK.
