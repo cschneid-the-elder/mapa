@@ -640,7 +640,7 @@ selectClause
    ;
 
 fileControlClause
-   : assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause | lockModeClause
+   : assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause | lockModeClause | sharingClause
    ;
 
 assignClause
@@ -704,6 +704,9 @@ lockModeClause
      (WITH? LOCK ON (RECORD | RECORDS))?
    ;
 
+sharingClause
+   : (SHARING WITH? ((ALL OTHER?) | (NO OTHER?) | (READ ONLY)))
+   ;
 
 // - io control paragraph ----------------------------------
 
@@ -3276,6 +3279,9 @@ userFunctionName
 /*
 Removed CURSOR from cobolWord as it was causing Special-Names
 paragraph cursorClause to be mistaken for environmentSwitchNameClause.
+Removed PASSWORD from cobolWord as it was causing File-Control
+paragraph passwordClause to be recognized as an additional assignmentName
+in the assignmentClause.  PASSWORD is a reserved word in IBM COBOL. 
 */
 cobolWord
    : IDENTIFIER 
@@ -3293,7 +3299,7 @@ cobolWord
    | MMDDYYYY
    | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
-   | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
+   | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
    | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | REVERSE_VIDEO
    | SAVE | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF
@@ -3400,6 +3406,7 @@ it seems like more work to detect the different permutations of
 COBOL identifiers (again) in the Lexer, i.e. identifying the CICS
 keywords would be easy but their arguments would be more
 difficult than this method.  I think.
+Added PASSWORD here when it was removed from cobolWord.
 */
 cicsWord
    : IDENTIFIER 
@@ -3472,6 +3479,7 @@ cicsWord
    | OUTPUT
    | OVERFLOW
    | PAGE
+   | PASSWORD
    | PERFORM
    | PROCESS
    | PURGE

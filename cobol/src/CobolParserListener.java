@@ -1127,6 +1127,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitLockModeClause(CobolParser.LockModeClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#sharingClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterSharingClause(CobolParser.SharingClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#sharingClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitSharingClause(CobolParser.SharingClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#ioControlParagraph}.
 	 * @param ctx the parse tree
 	 */

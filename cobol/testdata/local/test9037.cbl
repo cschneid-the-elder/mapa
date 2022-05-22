@@ -967,6 +967,38 @@
            Select Moya
              Assign PILOT
              Lock Mode Is Automatic With Lock On Records
+
+           Select Moya
+             Assign PILOT
+             Sharing All
+           Select Moya
+             Assign PILOT
+             Sharing No
+           Select Moya
+             Assign PILOT
+             Sharing Read Only
+           Select Moya
+             Assign PILOT
+             Sharing All Other
+           Select Moya
+             Assign PILOT
+             Sharing No Other
+
+           Select Moya
+             Assign PILOT
+             Sharing With All
+           Select Moya
+             Assign PILOT
+             Sharing With No
+           Select Moya
+             Assign PILOT
+             Sharing With Read Only
+           Select Moya
+             Assign PILOT
+             Sharing With All Other
+           Select Moya
+             Assign PILOT
+             Sharing With No Other
            .
        Procedure Division.
            GOBACK.

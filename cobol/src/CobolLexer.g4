@@ -491,6 +491,7 @@ OF : O F;
 OFF : O F F;
 OMITTED : O M I T T E D;
 ON : O N;
+ONLY : O N L Y;
 OPEN : O P E N;
 OPTIONAL : O P T I O N A L;
 OPTIONS : O P T I O N S;

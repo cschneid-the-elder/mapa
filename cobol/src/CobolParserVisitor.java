@@ -682,6 +682,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitLockModeClause(CobolParser.LockModeClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#sharingClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSharingClause(CobolParser.SharingClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#ioControlParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
