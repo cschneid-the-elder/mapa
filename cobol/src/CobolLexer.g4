@@ -127,6 +127,7 @@ ATTRIBUTES : A T T R I B U T E S;
 AUTHOR : A U T H O R;
 AUTO : A U T O;
 AUTO_SKIP : A U T O MINUSCHAR S K I P;
+AUTOMATIC : A U T O M A T I C;
 AWAY_FROM_ZERO : A W A Y MINUSCHAR F R O M MINUSCHAR Z E R O;
 BACKGROUND_COLOR : B A C K G R O U N D MINUSCHAR C O L O R;
 BACKGROUND_COLOUR : B A C K G R O U N D MINUSCHAR C O L O U R;
@@ -257,6 +258,10 @@ DISPLAY_1 : D I S P L A Y MINUSCHAR '1';
 DIVIDE : D I V I D E;
 DIVISION : D I V I S I O N
    {
+      /*
+      When this token is detected, it's pretty certain
+      the Special-Names paragraph has been left behind.
+      */
       specialNames = false;
    }
    ;
@@ -440,6 +445,7 @@ LOWER : L O W E R;
 LOWLIGHT : L O W L I G H T;
 LOW_VALUE : L O W MINUSCHAR V A L U E;
 LOW_VALUES : L O W MINUSCHAR V A L U E S;
+MANUAL : M A N U A L;
 MEMORY : M E M O R Y;
 MERGE : M E R G E;
 MESSAGE : M E S S A G E;

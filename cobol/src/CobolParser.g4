@@ -640,7 +640,7 @@ selectClause
    ;
 
 fileControlClause
-   : assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause
+   : assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause | lockModeClause
    ;
 
 assignClause
@@ -698,6 +698,12 @@ fileStatusClause
 relativeKeyClause
    : RELATIVE KEY? IS? qualifiedDataName
    ;
+
+lockModeClause
+   : LOCK MODE? IS? (MANUAL | AUTOMATIC)
+     (WITH? LOCK ON (RECORD | RECORDS))?
+   ;
+
 
 // - io control paragraph ----------------------------------
 

@@ -842,6 +842,131 @@
            Select Moya
              Assign PILOT
              Padding Character Is x'42'
+
+           Select Moya
+             Assign PILOT
+             Lock Manual
+           Select Moya
+             Assign PILOT
+             Lock Automatic
+           Select Moya
+             Assign PILOT
+             Lock Mode Manual
+           Select Moya
+             Assign PILOT
+             Lock Mode Automatic
+           Select Moya
+             Assign PILOT
+             Lock Is Manual
+           Select Moya
+             Assign PILOT
+             Lock Is Automatic
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Manual
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Automatic
+
+           Select Moya
+             Assign PILOT
+             Lock Manual Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Automatic Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Manual Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Automatic Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Is Manual Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Is Automatic Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Manual Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Automatic Lock On Record
+
+           Select Moya
+             Assign PILOT
+             Lock Manual Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Automatic Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Manual Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Automatic Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Is Manual Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Is Automatic Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Manual Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Automatic Lock On Records
+
+           Select Moya
+             Assign PILOT
+             Lock Manual With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Automatic With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Manual With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Automatic With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Is Manual With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Is Automatic With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Manual With Lock On Record
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Automatic With Lock On Record
+
+           Select Moya
+             Assign PILOT
+             Lock Manual With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Automatic With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Manual With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Automatic With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Is Manual With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Is Automatic With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Manual With Lock On Records
+           Select Moya
+             Assign PILOT
+             Lock Mode Is Automatic With Lock On Records
            .
        Procedure Division.
            GOBACK.

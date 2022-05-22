@@ -676,6 +676,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRelativeKeyClause(CobolParser.RelativeKeyClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#lockModeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLockModeClause(CobolParser.LockModeClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#ioControlParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
