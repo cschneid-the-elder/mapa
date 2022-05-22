@@ -644,7 +644,19 @@ fileControlClause
    ;
 
 assignClause
-   : ASSIGN TO? (DISK | DISPLAY | KEYBOARD | PORT | PRINTER | READER | REMOTE | TAPE | VIRTUAL | (DYNAMIC | EXTERNAL)? assignmentName | literal)
+   : ASSIGN TO? 
+   (((DISK 
+     | DISPLAY 
+     | KEYBOARD 
+     | PORT 
+     | PRINTER 
+     | READER 
+     | REMOTE 
+     | TAPE 
+     | VIRTUAL 
+     | (DYNAMIC | EXTERNAL)? assignmentName 
+     | literal)+ (USING dataName)?)
+   | (USING dataName))
    ;
 
 reserveClause

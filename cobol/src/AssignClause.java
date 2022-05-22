@@ -34,8 +34,8 @@ class AssignClause {
 		this.cobolFileName = cobolFileName;
 		this.LOGGER = LOGGER;
 
-		if (this.ctx.assignmentName() == null) {
-			CobolParser.LiteralContext lc = this.ctx.literal();
+		if (this.ctx.assignmentName() == null || this.ctx.assignmentName().size() == 0) {
+			CobolParser.LiteralContext lc = this.ctx.literal(0);
 			/*
 			There are many, many other options for the text of a
 			literal, but effectively the only one used in the
@@ -53,7 +53,7 @@ class AssignClause {
 				this.assignName = this.assignName.substring(++quot1, quot2);
 			}
 		} else {
-			CobolParser.AssignmentNameContext anc = this.ctx.assignmentName();
+			CobolParser.AssignmentNameContext anc = this.ctx.assignmentName(0);
 			CobolParser.SystemNameContext snc = anc.systemName();
 			CobolWord cw = new CobolWord(snc.cobolWord());
 			this.assignName = cw.getTerminalNode().getSymbol().getText();

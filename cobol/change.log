@@ -1,4 +1,4 @@
---2022-05-20--------------------------------------------------------------------
+--2022-05-21--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Environment Division
 specifications.
 
@@ -25,12 +25,16 @@ The draft standard I'm working from specifies...
     "When ORDER TABLE is specified, ordering-name-1 references a cultural 
     ordering table that is identified by literal-9 and constructed in 
     accordance with ISO/IEC 14651:2011, Appendix A, Common Template Table. 
-    The implementorspecifies the allowable content of literal-9."
+    The implementor specifies the allowable content of literal-9."
 
 ...which I'm taking to mean literal-9 is just any literal.  FYI, ISO/IEC
 14651:2011 has been withdrawn, superceded by ISO/IEC 14651:2016 which has
 also been withdrawn, superceded by ISO/IEC 14651:2019 which has also been
 withdrawn, superceded by ISO/IEC 14651:2020.
+
+Modified assignClause rule in parser, adding USING syntax and allowing for 
+multiple device names or literal names, and AssignClause class to account 
+for these changes.
 
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
