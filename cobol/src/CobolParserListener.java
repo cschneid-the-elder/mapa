@@ -6587,6 +6587,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitAlphabetName(CobolParser.AlphabetNameContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#assignClauseName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignClauseName(CobolParser.AssignClauseNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#assignClauseName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignClauseName(CobolParser.AssignClauseNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#assignmentName}.
 	 * @param ctx the parse tree
 	 */

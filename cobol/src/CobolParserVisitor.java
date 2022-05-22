@@ -3958,6 +3958,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlphabetName(CobolParser.AlphabetNameContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#assignClauseName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignClauseName(CobolParser.AssignClauseNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#assignmentName}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

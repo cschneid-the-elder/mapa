@@ -654,7 +654,7 @@ assignClause
      | REMOTE 
      | TAPE 
      | VIRTUAL 
-     | (DYNAMIC | EXTERNAL)? assignmentName 
+     | (DYNAMIC | EXTERNAL)? assignClauseName 
      | literal)+ (USING dataName)?)
    | (USING dataName))
    ;
@@ -3132,6 +3132,19 @@ alphabetName
    : cobolWord
    ;
 
+/*
+Disallow PASSWORD as it was causing File-Control paragraph 
+passwordClause to be recognized as an additional assignmentName 
+in the assignmentClause.  PASSWORD is a reserved word in IBM 
+COBOL, but not in the standard.  Also changed to unique 
+assignClauseName to avoid interference in other uses of 
+assignmentName.
+*/
+assignClauseName
+   : {!_input.LT(1).getText().toUpperCase().equalsIgnoreCase("PASSWORD")}?
+     systemName
+   ;
+
 assignmentName
    : systemName
    ;
@@ -3279,9 +3292,6 @@ userFunctionName
 /*
 Removed CURSOR from cobolWord as it was causing Special-Names
 paragraph cursorClause to be mistaken for environmentSwitchNameClause.
-Removed PASSWORD from cobolWord as it was causing File-Control
-paragraph passwordClause to be recognized as an additional assignmentName
-in the assignmentClause.  PASSWORD is a reserved word in IBM COBOL. 
 */
 cobolWord
    : IDENTIFIER 
@@ -3299,7 +3309,7 @@ cobolWord
    | MMDDYYYY
    | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
-   | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
+   | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
    | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | REVERSE_VIDEO
    | SAVE | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF

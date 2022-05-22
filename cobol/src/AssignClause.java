@@ -35,7 +35,7 @@ class AssignClause {
 		this.LOGGER = LOGGER;
 		this.LOGGER.finest(myName + " ctx = " + ctx.getText());
 
-		if (this.ctx.assignmentName() == null || this.ctx.assignmentName().size() == 0) {
+		if (this.ctx.assignClauseName() == null || this.ctx.assignClauseName().size() == 0) {
 			if (this.ctx.literal() == null || this.ctx.literal().size() == 0) {
 				if (this.ctx.dataName() == null) {
 					this.assignName = "UNKNOWN!";
@@ -63,7 +63,7 @@ class AssignClause {
 				}
 			}
 		} else {
-			CobolParser.AssignmentNameContext anc = this.ctx.assignmentName(0);
+			CobolParser.AssignClauseNameContext anc = this.ctx.assignClauseName(0);
 			CobolParser.SystemNameContext snc = anc.systemName();
 			CobolWord cw = new CobolWord(snc.cobolWord());
 			this.assignName = cw.getTerminalNode().getSymbol().getText();
