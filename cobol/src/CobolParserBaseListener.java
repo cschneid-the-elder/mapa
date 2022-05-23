@@ -7815,6 +7815,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterQualifiedInData(CobolParser.QualifiedInDataContext ctx) { }
 	/**
 	 * {@inheritDoc}

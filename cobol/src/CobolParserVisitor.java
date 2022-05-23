@@ -3910,6 +3910,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQualifiedDataNameFormat4(CobolParser.QualifiedDataNameFormat4Context ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#fileControlQualifiedDataName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#qualifiedInData}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

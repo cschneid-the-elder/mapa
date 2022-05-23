@@ -1012,6 +1012,65 @@
              Record Delimiter Is Standard-1
              Sharing With Read Only
 
+      *    Format 1 indexed
+      
+           Select Moya
+             Assign PILOT
+             Organization Indexed
+             Access Random
+             Record Aeryn
+             Alternate Record Sun
+             Sequence Farscape Farscape1
+             Status Sikozu
+             Lock Automatic
+             Reserve 42
+             Sharing All
+             
+           Select Moya
+             Assign PILOT
+             Organization Is Indexed
+             Access Is Dynamic
+             Record Key Is Aeryn Password Is Xhalax
+             Alternate Record Key Is Sun
+               With Duplicates Suppress When x'00000000'
+               Password Is Xhalax
+             Collating Sequence For Alphanumeric Is Farscape
+             File Status Is Sikozu Jool
+             Lock Mode Is Manual With Lock On Record
+             Reserve 42 Areas
+             Sharing With Read Only            
+             
+           Select Moya
+             Assign To PILOT
+             Organization Is Indexed
+             Access Is Dynamic
+             Record Key Is Aeryn 
+               Source Is Peacekeeper Password Is Xhalax
+             Alternate Record Key Is Sun Source Is Peacekeeper 
+               With Duplicates Suppress When x'00000000'
+               Password Is Xhalax
+             Collating Sequence For National Is Farscape
+             File Status Is Sikozu Jool
+             Lock Mode Is Automatic With Lock On Multiple Records
+             Reserve 42 Areas
+             Sharing With Read Only            
+             
+           Select Moya
+             Assign To PILOT
+             Organization Is Indexed
+             Access Is Dynamic
+             Record Key Is Aeryn 
+               Source Is Peacekeeper Password Is Xhalax
+             Alternate Record Key Is Sun 
+               Source Is Peacekeeper Of Non-Aligned-Worlds
+                         Earth
+                         Password Is Xhalax
+             Collating Sequence For National Is Farscape
+             File Status Is Sikozu Jool
+             Lock Mode Is Automatic With Lock On Multiple Records
+             Reserve 42 Areas
+             Sharing With Read Only            
+             
            .
        Procedure Division.
            GOBACK.

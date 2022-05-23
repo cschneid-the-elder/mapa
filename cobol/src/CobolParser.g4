@@ -640,7 +640,7 @@ selectClause
    ;
 
 fileControlClause
-   : assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause | lockModeClause | sharingClause
+   : (assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause | lockModeClause | sharingClause | collatingSequenceClause)
    ;
 
 assignClause
@@ -680,11 +680,11 @@ accessModeClause
    ;
 
 recordKeyClause
-   : RECORD KEY? IS? qualifiedDataName passwordClause? (WITH? DUPLICATES)?
+   : RECORD KEY? IS? fileControlQualifiedDataName (SOURCE IS? fileControlQualifiedDataName+)? (WITH? DUPLICATES)? passwordClause?
    ;
 
 alternateRecordKeyClause
-   : ALTERNATE RECORD KEY? IS? qualifiedDataName passwordClause? (WITH? DUPLICATES)?
+   : ALTERNATE RECORD KEY? IS? fileControlQualifiedDataName (SOURCE IS? fileControlQualifiedDataName+)? (WITH? DUPLICATES)? (SUPPRESS WHEN? literal)? passwordClause?
    ;
 
 passwordClause
@@ -701,12 +701,13 @@ relativeKeyClause
 
 lockModeClause
    : LOCK MODE? IS? (MANUAL | AUTOMATIC)
-     (WITH? LOCK ON (RECORD | RECORDS))?
+     (WITH? LOCK ON MULTIPLE? (RECORD | RECORDS))?
    ;
 
 sharingClause
    : (SHARING WITH? ((ALL OTHER?) | (NO OTHER?) | (READ ONLY)))
    ;
+
 
 // - io control paragraph ----------------------------------
 
@@ -3084,6 +3085,17 @@ qualifiedDataNameFormat3
 
 qualifiedDataNameFormat4
    : LINAGE_COUNTER inFile
+   ;
+
+/*
+Disallow PASSWORD as it was causing File-Control paragraph 
+passwordClause to be recognized as an additional qualfiedDataName 
+in recordKeyClause and alternateRecordKeyClause.  PASSWORD is a 
+reserved word in IBM COBOL, but not in the standard.
+*/
+fileControlQualifiedDataName
+   : {!_input.LT(1).getText().toUpperCase().equalsIgnoreCase("PASSWORD")}?
+     qualifiedDataName
    ;
 
 /*

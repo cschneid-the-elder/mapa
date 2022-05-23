@@ -6507,6 +6507,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitQualifiedDataNameFormat4(CobolParser.QualifiedDataNameFormat4Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#fileControlQualifiedDataName}.
+	 * @param ctx the parse tree
+	 */
+	void enterFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#fileControlQualifiedDataName}.
+	 * @param ctx the parse tree
+	 */
+	void exitFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#qualifiedInData}.
 	 * @param ctx the parse tree
 	 */
