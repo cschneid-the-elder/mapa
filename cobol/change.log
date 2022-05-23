@@ -42,6 +42,8 @@ assignClause as it is a reserved word in IBM COBOL and it was
 messing with recognition of the token as the first part of passwordClause
 and mistakenly taking it for another assignClauseName in assignmentClause.
 
+Added applyCommitClause to ioControlClause.
+
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
 specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,
