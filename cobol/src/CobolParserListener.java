@@ -547,6 +547,46 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitCharacterSetClause(CobolParser.CharacterSetClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#characterClassificationClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterClassificationClause(CobolParser.CharacterClassificationClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#characterClassificationClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterClassificationClause(CobolParser.CharacterClassificationClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#characterClassificationClauseAlphanumeric}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterClassificationClauseAlphanumeric(CobolParser.CharacterClassificationClauseAlphanumericContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#characterClassificationClauseAlphanumeric}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterClassificationClauseAlphanumeric(CobolParser.CharacterClassificationClauseAlphanumericContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#characterClassificationClauseNational}.
+	 * @param ctx the parse tree
+	 */
+	void enterCharacterClassificationClauseNational(CobolParser.CharacterClassificationClauseNationalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#characterClassificationClauseNational}.
+	 * @param ctx the parse tree
+	 */
+	void exitCharacterClassificationClauseNational(CobolParser.CharacterClassificationClauseNationalContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#localePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocalePhrase(CobolParser.LocalePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#localePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocalePhrase(CobolParser.LocalePhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#specialNamesParagraph}.
 	 * @param ctx the parse tree
 	 */
@@ -786,6 +826,56 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#crtStatusClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCrtStatusClause(CobolParser.CrtStatusClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#crtStatusClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCrtStatusClause(CobolParser.CrtStatusClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#cursorClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCursorClause(CobolParser.CursorClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#cursorClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCursorClause(CobolParser.CursorClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#dynamicLengthStructureClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDynamicLengthStructureClause(CobolParser.DynamicLengthStructureClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dynamicLengthStructureClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDynamicLengthStructureClause(CobolParser.DynamicLengthStructureClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#localeClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocaleClause(CobolParser.LocaleClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#localeClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocaleClause(CobolParser.LocaleClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#orderTableClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterOrderTableClause(CobolParser.OrderTableClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#orderTableClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitOrderTableClause(CobolParser.OrderTableClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#respositoryParagraph}.
 	 * @param ctx the parse tree
@@ -1027,6 +1117,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitRelativeKeyClause(CobolParser.RelativeKeyClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#lockModeClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterLockModeClause(CobolParser.LockModeClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#lockModeClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitLockModeClause(CobolParser.LockModeClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#sharingClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterSharingClause(CobolParser.SharingClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#sharingClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitSharingClause(CobolParser.SharingClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#ioControlParagraph}.
 	 * @param ctx the parse tree
 	 */
@@ -1126,6 +1236,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCommitmentControlClause(CobolParser.CommitmentControlClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#applyCommitClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#applyCommitClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataDivision}.
 	 * @param ctx the parse tree
@@ -6397,6 +6517,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitQualifiedDataNameFormat4(CobolParser.QualifiedDataNameFormat4Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#fileControlQualifiedDataName}.
+	 * @param ctx the parse tree
+	 */
+	void enterFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#fileControlQualifiedDataName}.
+	 * @param ctx the parse tree
+	 */
+	void exitFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#qualifiedInData}.
 	 * @param ctx the parse tree
 	 */
@@ -6476,6 +6606,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitAlphabetName(CobolParser.AlphabetNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#assignClauseName}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignClauseName(CobolParser.AssignClauseNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#assignClauseName}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignClauseName(CobolParser.AssignClauseNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#assignmentName}.
 	 * @param ctx the parse tree
@@ -6666,6 +6806,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLocalName(CobolParser.LocalNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#localeName}.
+	 * @param ctx the parse tree
+	 */
+	void enterLocaleName(CobolParser.LocaleNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#localeName}.
+	 * @param ctx the parse tree
+	 */
+	void exitLocaleName(CobolParser.LocaleNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#methodName}.
 	 * @param ctx the parse tree

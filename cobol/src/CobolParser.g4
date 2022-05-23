@@ -289,7 +289,6 @@ configurationSection
 
 configurationSectionParagraph
    : sourceComputerParagraph | objectComputerParagraph | specialNamesParagraph | respositoryParagraph
-   // strictly, specialNamesParagraph does not belong into configurationSectionParagraph, but IBM-COBOL allows this
    ;
 
 // - source computer paragraph ----------------------------------
@@ -301,11 +300,11 @@ sourceComputerParagraph
 // - object computer paragraph ----------------------------------
 
 objectComputerParagraph
-   : OBJECT_COMPUTER (DOT_FS | DOT) (computerName objectComputerClause* (DOT_FS | DOT))?
+   : OBJECT_COMPUTER (DOT_FS | DOT) (computerName? objectComputerClause* (DOT_FS | DOT))?
    ;
 
 objectComputerClause
-   : memorySizeClause | diskSizeClause | collatingSequenceClause | segmentLimitClause | characterSetClause
+   : memorySizeClause | diskSizeClause | collatingSequenceClause | segmentLimitClause | characterSetClause | characterClassificationClause
    ;
 
 memorySizeClause
@@ -317,7 +316,7 @@ diskSizeClause
    ;
 
 collatingSequenceClause
-   : PROGRAM? COLLATING? SEQUENCE (IS? alphabetName+) collatingSequenceClauseAlphanumeric? collatingSequenceClauseNational?
+   : PROGRAM? COLLATING? SEQUENCE ((IS? alphabetName+) | collatingSequenceClauseAlphanumeric | collatingSequenceClauseNational)
    ;
 
 collatingSequenceClauseAlphanumeric
@@ -336,6 +335,22 @@ characterSetClause
    : CHARACTER SET (DOT_FS | DOT)
    ;
 
+characterClassificationClause
+   : CHARACTER? CLASSIFICATION ((IS? localePhrase+) | characterClassificationClauseAlphanumeric | characterClassificationClauseNational)
+   ;
+
+characterClassificationClauseAlphanumeric
+   : FOR? ALPHANUMERIC IS? localePhrase
+   ;
+
+characterClassificationClauseNational
+   : FOR? NATIONAL IS? localePhrase
+   ;
+
+localePhrase
+   : (IDENTIFIER | LOCALE | SYSTEM_DEFAULT | USER_DEFAULT)
+   ;
+
 // - special names paragraph ----------------------------------
 
 specialNamesParagraph
@@ -343,15 +358,31 @@ specialNamesParagraph
    ;
 
 specialNameClause
-   : channelClause | odtClause | alphabetClause | classClause | currencySignClause | decimalPointClause | symbolicCharactersClause | environmentSwitchNameClause | defaultDisplaySignClause | defaultComputationalSignClause | reserveNetworkClause | xmlSchemaClause
+   : (channelClause 
+   | odtClause 
+   | alphabetClause 
+   | classClause+ 
+   | currencySignClause+
+   | decimalPointClause 
+   | symbolicCharactersClause+ 
+   | environmentSwitchNameClause 
+   | defaultDisplaySignClause 
+   | defaultComputationalSignClause 
+   | reserveNetworkClause 
+   | xmlSchemaClause+
+   | crtStatusClause
+   | cursorClause
+   | dynamicLengthStructureClause
+   | localeClause
+   | orderTableClause)
    ;
 
 alphabetClause
-   : alphabetClauseFormat1+ | alphabetClauseFormat2
+   : alphabetClauseFormat1+ | alphabetClauseFormat2+
    ;
 
 alphabetClauseFormat1
-   : ALPHABET alphabetName (FOR ALPHANUMERIC)? IS? (EBCDIC | ASCII | STANDARD_1 | STANDARD_2 | NATIVE | cobolWord | alphabetLiterals+) COMMACHAR?
+   : ALPHABET alphabetName (FOR? ALPHANUMERIC)? IS? ((LOCALE localeName?) | EBCDIC | ASCII | STANDARD_1 | STANDARD_2 | NATIVE | cobolWord | alphabetLiterals+) COMMACHAR?
    ;
 
 alphabetLiterals
@@ -367,7 +398,7 @@ alphabetAlso
    ;
 
 alphabetClauseFormat2
-   : ALPHABET alphabetName FOR? NATIONAL IS? (NATIVE | CCSVERSION literal)
+   : ALPHABET alphabetName FOR? NATIONAL IS? ((LOCALE localeName?) | NATIVE | (CCSVERSION literal) | UCS_4 | UTF_8 | UTF_16 | IDENTIFIER | alphabetLiterals+)
    ;
 
 channelClause
@@ -375,7 +406,7 @@ channelClause
    ;
 
 classClause
-   : CLASS className (FOR? (ALPHANUMERIC | NATIONAL))? IS? classClauseThrough+
+   : CLASS className (FOR? (ALPHANUMERIC | NATIONAL))? IS? classClauseThrough+ (IN alphabetName)?
    ;
 
 classClauseThrough
@@ -407,11 +438,11 @@ defaultDisplaySignClause
    ;
 
 environmentSwitchNameClause
-   : environmentName IS? mnemonicName environmentSwitchNameSpecialNamesStatusPhrase? | environmentSwitchNameSpecialNamesStatusPhrase
+   : environmentName ((IS? mnemonicName environmentSwitchNameSpecialNamesStatusPhrase?) | environmentSwitchNameSpecialNamesStatusPhrase)
    ;
 
 environmentSwitchNameSpecialNamesStatusPhrase
-   : ON STATUS? IS? condition (OFF STATUS? IS? condition)? | OFF STATUS? IS? condition (ON STATUS? IS? condition)?
+   : ON STATUS? IS? dataName (OFF STATUS? IS? dataName)? | OFF STATUS? IS? dataName (ON STATUS? IS? dataName)?
    ;
 
 odtClause
@@ -432,6 +463,27 @@ symbolicCharacters
 
 xmlSchemaClause
    : XML_SCHEMA identifier IS? (identifier | literal)
+   ;
+
+crtStatusClause
+   : CRT STATUS IS? dataName
+   ;
+
+cursorClause
+   : CURSOR IS? dataName
+   ;
+
+dynamicLengthStructureClause
+   : DYNAMIC LENGTH STRUCTURE? dataName IS?
+     ((SIGNED? SHORT? PREFIXED) | DELIMITED | dataName)
+   ;
+
+localeClause
+   : LOCALE localeName IS? (cobolWord | literal)
+   ;
+
+orderTableClause
+   : ORDER TABLE cobolWord IS? literal
    ;
 
 // - repository paragraph -----------------------------------
@@ -588,11 +640,23 @@ selectClause
    ;
 
 fileControlClause
-   : assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause
+   : (assignClause | reserveClause | organizationClause | paddingCharacterClause | recordDelimiterClause | accessModeClause | recordKeyClause | alternateRecordKeyClause | fileStatusClause | passwordClause | relativeKeyClause | lockModeClause | sharingClause | collatingSequenceClause)
    ;
 
 assignClause
-   : ASSIGN TO? (DISK | DISPLAY | KEYBOARD | PORT | PRINTER | READER | REMOTE | TAPE | VIRTUAL | (DYNAMIC | EXTERNAL)? assignmentName | literal)
+   : ASSIGN TO? 
+   (((DISK 
+     | DISPLAY 
+     | KEYBOARD 
+     | PORT 
+     | PRINTER 
+     | READER 
+     | REMOTE 
+     | TAPE 
+     | VIRTUAL 
+     | (DYNAMIC | EXTERNAL)? assignClauseName 
+     | literal)+ (USING dataName)?)
+   | (USING dataName))
    ;
 
 reserveClause
@@ -616,11 +680,11 @@ accessModeClause
    ;
 
 recordKeyClause
-   : RECORD KEY? IS? qualifiedDataName passwordClause? (WITH? DUPLICATES)?
+   : RECORD KEY? IS? fileControlQualifiedDataName (SOURCE IS? fileControlQualifiedDataName+)? (WITH? DUPLICATES)? passwordClause?
    ;
 
 alternateRecordKeyClause
-   : ALTERNATE RECORD KEY? IS? qualifiedDataName passwordClause? (WITH? DUPLICATES)?
+   : ALTERNATE RECORD KEY? IS? fileControlQualifiedDataName (SOURCE IS? fileControlQualifiedDataName+)? (WITH? DUPLICATES)? (SUPPRESS WHEN? literal)? passwordClause?
    ;
 
 passwordClause
@@ -635,6 +699,16 @@ relativeKeyClause
    : RELATIVE KEY? IS? qualifiedDataName
    ;
 
+lockModeClause
+   : LOCK MODE? IS? (MANUAL | AUTOMATIC)
+     (WITH? LOCK ON MULTIPLE? (RECORD | RECORDS))?
+   ;
+
+sharingClause
+   : (SHARING WITH? ((ALL OTHER?) | (NO OTHER?) | (READ ONLY)))
+   ;
+
+
 // - io control paragraph ----------------------------------
 
 ioControlParagraph
@@ -642,7 +716,7 @@ ioControlParagraph
    ;
 
 ioControlClause
-   : rerunClause | sameClause | multipleFileClause | commitmentControlClause
+   : (rerunClause | sameClause | multipleFileClause | commitmentControlClause | applyCommitClause)
    ;
 
 rerunClause
@@ -675,6 +749,19 @@ multipleFilePosition
 
 commitmentControlClause
    : COMMITMENT CONTROL FOR? fileName
+   ;
+
+/*
+The applyCommitClause should really read...
+
+     APPLY COMMIT ON? (fileName | dataName)+
+
+...but both fileName and dataName are just aliases of
+cobolWord, so only the first one will match and that
+just seems misleading.
+*/
+applyCommitClause
+   : APPLY COMMIT ON? cobolWord+
    ;
 
 // --- data division --------------------------------------------------------------------
@@ -3014,6 +3101,17 @@ qualifiedDataNameFormat4
    ;
 
 /*
+Disallow PASSWORD as it was causing File-Control paragraph 
+passwordClause to be recognized as an additional qualfiedDataName 
+in recordKeyClause and alternateRecordKeyClause.  PASSWORD is a 
+reserved word in IBM COBOL, but not in the standard.
+*/
+fileControlQualifiedDataName
+   : {!_input.LT(1).getText().toUpperCase().equalsIgnoreCase("PASSWORD")}?
+     qualifiedDataName
+   ;
+
+/*
 This rule originally read...
 
    : inData | inFile
@@ -3057,6 +3155,19 @@ inTable
 
 alphabetName
    : cobolWord
+   ;
+
+/*
+Disallow PASSWORD as it was causing File-Control paragraph 
+passwordClause to be recognized as an additional assignmentName 
+in the assignmentClause.  PASSWORD is a reserved word in IBM 
+COBOL, but not in the standard.  Also changed to unique 
+assignClauseName to avoid interference in other uses of 
+assignmentName.
+*/
+assignClauseName
+   : {!_input.LT(1).getText().toUpperCase().equalsIgnoreCase("PASSWORD")}?
+     systemName
    ;
 
 assignmentName
@@ -3137,6 +3248,10 @@ localName
    : cobolWord
    ;
 
+localeName
+   : cobolWord
+   ;
+
 methodName
    : cobolWord
    ;
@@ -3199,11 +3314,15 @@ userFunctionName
 
 // literal ----------------------------------
 
+/*
+Removed CURSOR from cobolWord as it was causing Special-Names
+paragraph cursorClause to be mistaken for environmentSwitchNameClause.
+*/
 cobolWord
    : IDENTIFIER 
    | ABORT | AS | ASCII | ASSOCIATED_DATA | ASSOCIATED_DATA_LENGTH | ATTRIBUTE | AUTO | AUTO_SKIP
    | BACKGROUND_COLOR | BACKGROUND_COLOUR | BEEP | BELL | BINARY | BIT | BLINK | BLOB | BOUNDS
-   | CAPABLE | CCSVERSION | CHANGED | CHANNEL | CLOB | CLOSE_DISPOSITION | COBOL | COMMITMENT | CONTROL_POINT | CONVENTION | CRUNCH | CURSOR
+   | CAPABLE | CCSVERSION | CHANGED | CHANNEL | CLOB | CLOSE_DISPOSITION | COBOL | COMMITMENT | CONTROL_POINT | CONVENTION | CRUNCH
    | DBCLOB | DEFAULT | DEFAULT_DISPLAY | DEFINITION | DFHRESP | DFHVALUE | DISK | DONTCARE | DOUBLE
    | EBCDIC | EMPTY_CHECK | ENTER | ENTRY_PROCEDURE | EOL | EOS | ERASE | ESCAPE | EVENT | EXCLUSIVE | EXPORT | EXTENDED
    | FOREGROUND_COLOR | FOREGROUND_COLOUR | FULL | FUNCTIONNAME | FUNCTION_POINTER
@@ -3322,6 +3441,7 @@ it seems like more work to detect the different permutations of
 COBOL identifiers (again) in the Lexer, i.e. identifying the CICS
 keywords would be easy but their arguments would be more
 difficult than this method.  I think.
+Added PASSWORD here when it was removed from cobolWord.
 */
 cicsWord
    : IDENTIFIER 
@@ -3344,6 +3464,7 @@ cicsWord
    | CHAR
    | CLASS
    | CLOSE
+   | COMMIT
    | CONTROL
    | COPY
    | CURSOR
@@ -3394,6 +3515,7 @@ cicsWord
    | OUTPUT
    | OVERFLOW
    | PAGE
+   | PASSWORD
    | PERFORM
    | PROCESS
    | PURGE

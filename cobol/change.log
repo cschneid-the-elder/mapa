@@ -1,3 +1,49 @@
+--2022-05-21--------------------------------------------------------------------
+Modified CobolLexer and CobolParser per draft 202x Environment Division
+specifications.
+
+Added characterClassificationClause to Object-Computer paragraph.  Added
+testdata/local/test9035.cbl.
+
+Modified alphabetClauseFormat1, alphabetClauseFormat2; added localeClause,
+dynamicLengthStructureClause, orderTableClause to Special-Names paragraph.
+
+Added testdata/local/test9036.cbl.
+
+Added testdata/local/testantlr?65.cbl specifically to test the context
+sensitive nature of the PICTURE token, which means one thing in the
+currencySignClause and needs to cause a mode switch in the Data Division.  It
+turns out nothing in the NIST test suite includes this syntax, maybe it's new
+since then.
+
+Modified environmentSwitchNameSpecialNamesStatusPhrase substituting dataName
+for condition as the former is (not obviously) what was intended in the
+standard.
+
+The draft standard I'm working from specifies...
+
+    "When ORDER TABLE is specified, ordering-name-1 references a cultural 
+    ordering table that is identified by literal-9 and constructed in 
+    accordance with ISO/IEC 14651:2011, Appendix A, Common Template Table. 
+    The implementor specifies the allowable content of literal-9."
+
+...which I'm taking to mean literal-9 is just any literal.  FYI, ISO/IEC
+14651:2011 has been withdrawn, superceded by ISO/IEC 14651:2016 which has
+also been withdrawn, superceded by ISO/IEC 14651:2019 which has also been
+withdrawn, superceded by ISO/IEC 14651:2020.
+
+Modified assignClause rule in parser, adding USING syntax and allowing for 
+multiple device names or literal names, and AssignClause class to account 
+for these changes.
+
+Added lockModeClause and sharingClause to fileControlParagraph.  Added an
+ANTLR semantic predicate to disallow PASSWORD from being recognized in the
+assignClause as it is a reserved word in IBM COBOL and it was
+messing with recognition of the token as the first part of passwordClause
+and mistakenly taking it for another assignClauseName in assignmentClause.
+
+Added applyCommitClause to ioControlClause.
+
 --2022-05-18--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Identification Division
 specifications.  Added Class-ID, Function-ID, Factory, Method-ID, Interface-ID,

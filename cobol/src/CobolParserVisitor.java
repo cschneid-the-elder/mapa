@@ -334,6 +334,30 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCharacterSetClause(CobolParser.CharacterSetClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#characterClassificationClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacterClassificationClause(CobolParser.CharacterClassificationClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#characterClassificationClauseAlphanumeric}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacterClassificationClauseAlphanumeric(CobolParser.CharacterClassificationClauseAlphanumericContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#characterClassificationClauseNational}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCharacterClassificationClauseNational(CobolParser.CharacterClassificationClauseNationalContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#localePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocalePhrase(CobolParser.LocalePhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#specialNamesParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -477,6 +501,36 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitXmlSchemaClause(CobolParser.XmlSchemaClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#crtStatusClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCrtStatusClause(CobolParser.CrtStatusClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#cursorClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCursorClause(CobolParser.CursorClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dynamicLengthStructureClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDynamicLengthStructureClause(CobolParser.DynamicLengthStructureClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#localeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocaleClause(CobolParser.LocaleClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#orderTableClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrderTableClause(CobolParser.OrderTableClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#respositoryParagraph}.
 	 * @param ctx the parse tree
@@ -622,6 +676,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRelativeKeyClause(CobolParser.RelativeKeyClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#lockModeClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLockModeClause(CobolParser.LockModeClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#sharingClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSharingClause(CobolParser.SharingClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#ioControlParagraph}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -681,6 +747,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCommitmentControlClause(CobolParser.CommitmentControlClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#applyCommitClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataDivision}.
 	 * @param ctx the parse tree
@@ -3844,6 +3916,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitQualifiedDataNameFormat4(CobolParser.QualifiedDataNameFormat4Context ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#fileControlQualifiedDataName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFileControlQualifiedDataName(CobolParser.FileControlQualifiedDataNameContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#qualifiedInData}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3891,6 +3969,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitAlphabetName(CobolParser.AlphabetNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#assignClauseName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAssignClauseName(CobolParser.AssignClauseNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#assignmentName}.
 	 * @param ctx the parse tree
@@ -4005,6 +4089,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLocalName(CobolParser.LocalNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#localeName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLocaleName(CobolParser.LocaleNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#methodName}.
 	 * @param ctx the parse tree

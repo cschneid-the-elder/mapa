@@ -26,7 +26,14 @@ lexer grammar CobolLexer;
 	being processed via an application.  Under those circumstances,
 	the lexing code must set this variable to false.
 	*/
-	public static Boolean testRig = true; 
+	public static Boolean testRig = true;
+	
+	/*
+	The token PICTURE has a different meaning in the CURRENCY SIGN
+	clause of the Special-Names paragraph than it does in the
+	Data Division.
+	*/
+	public Boolean specialNames = false;
 }
 
 channels { COMPILER_DIRECTIVES }
@@ -104,6 +111,7 @@ ALTER : A L T E R;
 ALTERNATE : A L T E R N A T E;
 AND : A N D;
 ANY : A N Y;
+APPLY : A P P L Y;
 ARE : A R E;
 AREA : A R E A;
 AREAS : A R E A S;
@@ -120,6 +128,7 @@ ATTRIBUTES : A T T R I B U T E S;
 AUTHOR : A U T H O R;
 AUTO : A U T O;
 AUTO_SKIP : A U T O MINUSCHAR S K I P;
+AUTOMATIC : A U T O M A T I C;
 AWAY_FROM_ZERO : A W A Y MINUSCHAR F R O M MINUSCHAR Z E R O;
 BACKGROUND_COLOR : B A C K G R O U N D MINUSCHAR C O L O R;
 BACKGROUND_COLOUR : B A C K G R O U N D MINUSCHAR C O L O U R;
@@ -159,6 +168,7 @@ CHARACTERS : C H A R A C T E R S;
 CICS : C I C S;
 CLASS : C L A S S;
 CLASS_ID : C L A S S MINUSCHAR I D;
+CLASSIFICATION : C L A S S I F I C A T I O N;
 CLOB : C L O B;
 CLOB_LOCATOR : C L O B '-' L O C A T O R;
 CLOCK_UNITS : C L O C K MINUSCHAR U N I T S;
@@ -172,6 +182,7 @@ COL : C O L;
 COLUMN : C O L U M N;
 COM_REG : C O M MINUSCHAR R E G;
 COMMA : C O M M A;
+COMMIT : C O M M I T;
 COMMITMENT : C O M M I T M E N T;
 COMMON : C O M M O N;
 COMMUNICATION : C O M M U N I C A T I O N;
@@ -202,6 +213,7 @@ CORR : C O R R;
 CORRESPONDING : C O R R E S P O N D I N G;
 COUNT : C O U N T;
 CR : C R;
+CRT : C R T;
 CRUNCH : C R U N C H;
 CURRENCY : C U R R E N C Y;
 CURSOR : C U R S O R;
@@ -246,7 +258,15 @@ DISK : D I S K;
 DISPLAY : D I S P L A Y;
 DISPLAY_1 : D I S P L A Y MINUSCHAR '1';
 DIVIDE : D I V I D E;
-DIVISION : D I V I S I O N;
+DIVISION : D I V I S I O N
+   {
+      /*
+      When this token is detected, it's pretty certain
+      the Special-Names paragraph has been left behind.
+      */
+      specialNames = false;
+   }
+   ;
 DONTCARE : D O N T C A R E;
 DOUBLE : D O U B L E;
 DOWN : D O W N;
@@ -419,6 +439,7 @@ LIST : L I S T;
 LOC : L O C;
 LOCAL : L O C A L;
 LOCAL_STORAGE : L O C A L MINUSCHAR S T O R A G E;
+LOCALE : L O C A L E;
 LOCK : L O C K;
 LONG_DATE : L O N G MINUSCHAR D A T E;
 LONG_TIME : L O N G MINUSCHAR T I M E;
@@ -426,6 +447,7 @@ LOWER : L O W E R;
 LOWLIGHT : L O W L I G H T;
 LOW_VALUE : L O W MINUSCHAR V A L U E;
 LOW_VALUES : L O W MINUSCHAR V A L U E S;
+MANUAL : M A N U A L;
 MEMORY : M E M O R Y;
 MERGE : M E R G E;
 MESSAGE : M E S S A G E;
@@ -471,6 +493,7 @@ OF : O F;
 OFF : O F F;
 OMITTED : O M I T T E D;
 ON : O N;
+ONLY : O N L Y;
 OPEN : O P E N;
 OPTIONAL : O P T I O N A L;
 OPTIONS : O P T I O N S;
@@ -494,13 +517,20 @@ PERFORM : P E R F O R M;
 PF : P F;
 PH : P H;
 PIC : P I C ->pushMode(PIC_MODE);
-PICTURE : P I C T U R E ->pushMode(PIC_MODE);
+PICTURE : P I C T U R E 
+   {
+      if (!specialNames) {
+         pushMode(PIC_MODE);
+      }
+   }
+   ;
 PLUS : P L U S;
 POINTER : P O I N T E R;
 POINTER_32 : P O I N T E R MINUSCHAR '3' '2';
 POSITION : P O S I T I O N;
 POSITIVE : P O S I T I V E;
 PORT : P O R T;
+PREFIXED : P R E F I X E D;
 PRINTER : P R I N T E R;
 PRINTING : P R I N T I N G;
 PRIVATE : P R I V A T E;
@@ -596,8 +626,10 @@ SHAREDBYRUNUNIT : S H A R E D B Y R U N U N I T;
 SHARING : S H A R I N G;
 SHIFT_IN : S H I F T MINUSCHAR I N;
 SHIFT_OUT : S H I F T MINUSCHAR O U T;
+SHORT : S H O R T;
 SHORT_DATE : S H O R T MINUSCHAR D A T E;
 SIGN : S I G N;
+SIGNED : S I G N E D;
 SIZE : S I Z E;
 SKIP1 : S K I P '1';
 SKIP2 : S K I P '2';
@@ -614,7 +646,11 @@ SOURCE : S O U R C E;
 SOURCE_COMPUTER : S O U R C E MINUSCHAR C O M P U T E R;
 SPACE : S P A C E;
 SPACES : S P A C E S;
-SPECIAL_NAMES : S P E C I A L MINUSCHAR N A M E S;
+SPECIAL_NAMES : S P E C I A L MINUSCHAR N A M E S 
+   {
+      specialNames = true;
+   }
+   ;
 SQL : S Q L;
 STANDARD : S T A N D A R D;
 STANDARD_1 : S T A N D A R D MINUSCHAR '1';
@@ -625,6 +661,7 @@ START : S T A R T;
 STATUS : S T A T U S;
 STOP : S T O P;
 STRING : S T R I N G;
+STRUCTURE : S T R U C T U R E;
 SUB_QUEUE_1 : S U B MINUSCHAR Q U E U E MINUSCHAR '1';
 SUB_QUEUE_2 : S U B MINUSCHAR Q U E U E MINUSCHAR '2';
 SUB_QUEUE_3 : S U B MINUSCHAR Q U E U E MINUSCHAR '3';
@@ -635,6 +672,7 @@ SYMBOL : S Y M B O L;
 SYMBOLIC : S Y M B O L I C;
 SYNC : S Y N C;
 SYNCHRONIZED : S Y N C H R O N I Z E D;
+SYSTEM_DEFAULT : S Y S T E M MINUSCHAR D E F A U L T;
 TABLE : T A B L E;
 TALLY : T A L L Y;
 TALLYING : T A L L Y I N G;
@@ -666,6 +704,7 @@ TRUNCATED : T R U N C A T E D;
 TRUNCATION : T R U N C A T I O N;
 TYPE : T Y P E;
 TYPEDEF : T Y P E D E F;
+UCS_4 : U C S MINUSCHAR '4';
 UNDERLINE : U N D E R L I N E;
 UNIT : U N I T;
 UNSTRING : U N S T R I N G;
@@ -675,7 +714,9 @@ UPON : U P O N;
 USAGE : U S A G E;
 USE : U S E;
 USING : U S I N G;
+USER_DEFAULT : U S E R MINUSCHAR D E F A U L T;
 UTF_8 : U T F MINUSCHAR '8';
+UTF_16 : U T F MINUSCHAR '1' '6';
 VALUE : V A L U E;
 VALUES : V A L U E S;
 VALIDATING : V A L I D A T I N G;
@@ -813,8 +854,13 @@ COMPILER_DIRECTIVE : '>>' TEXTA+ -> channel(COMPILER_DIRECTIVES);
 DOLLARCHAR : '$';
 DOUBLEQUOTE : '"';
 // period full stop
-DOT_FS : '.' ('\r' | '\n' | '\f' | '\t') | '.' EOF;
-DOT : '.';
+DOT_FS 
+   : '.' ('\r' | '\n' | '\f' | '\t') | '.' EOF
+   ;
+DOT 
+   : '.'
+   ;
+
 EQUALCHAR : '=';
 EXECCICSTAG : '*>EXECCICS';
 EXECSQLTAG : '*>EXECSQL';
