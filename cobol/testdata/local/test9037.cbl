@@ -4,7 +4,6 @@
        Environment Division.
        Input-Output Section.
        File-Control.
-      * Format 3 Sequential
            Select Moya
              Assign PILOT
            Select Moya
@@ -1012,9 +1011,31 @@
              Record Delimiter Is Standard-1
              Sharing With Read Only
 
-      *    Format 1 indexed
-      
            Select Moya
+             Assign PILOT
+             Access Sequential
+             File Status Is Sikozu Jool
+             Organization Is Line Sequential
+
+           Select Optional Moya
+             Assign PILOT
+             Access Sequential
+             File Status Is Sikozu Jool
+             Organization Is Line Sequential
+
+           Select Moya
+             Assign PILOT
+             Organization Indexed
+             Access Random
+             Record Aeryn
+             Alternate Record Sun
+             Sequence Farscape Farscape1
+             Status Sikozu
+             Lock Automatic
+             Reserve 42
+             Sharing All
+             
+           Select Optional Moya
              Assign PILOT
              Organization Indexed
              Access Random
@@ -1071,7 +1092,19 @@
              Reserve 42 Areas
              Sharing With Read Only            
              
+           Select Moya
+             Assign To PILOT
+             Organization Is Relative
+             Access Is Random
+             Relative Key Is Aeryn Password Is Xhalax
+             File Status Is Sikozu Jool
+             Lock Mode Is Automatic With Lock On Multiple Records
+             Reserve 42 Areas
+             Sharing With Read Only            
+             
            .
+       I-O-Control.
+           Apply Commit On Moya Sikozu Jool.
        Procedure Division.
            GOBACK.
        End Program test9037.

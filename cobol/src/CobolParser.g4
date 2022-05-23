@@ -716,7 +716,7 @@ ioControlParagraph
    ;
 
 ioControlClause
-   : rerunClause | sameClause | multipleFileClause | commitmentControlClause
+   : (rerunClause | sameClause | multipleFileClause | commitmentControlClause | applyCommitClause)
    ;
 
 rerunClause
@@ -749,6 +749,19 @@ multipleFilePosition
 
 commitmentControlClause
    : COMMITMENT CONTROL FOR? fileName
+   ;
+
+/*
+The applyCommitClause should really read...
+
+     APPLY COMMIT ON? (fileName | dataName)+
+
+...but both fileName and dataName are just aliases of
+cobolWord, so only the first one will match and that
+just seems misleading.
+*/
+applyCommitClause
+   : APPLY COMMIT ON? cobolWord+
    ;
 
 // --- data division --------------------------------------------------------------------
@@ -3451,6 +3464,7 @@ cicsWord
    | CHAR
    | CLASS
    | CLOSE
+   | COMMIT
    | CONTROL
    | COPY
    | CURSOR

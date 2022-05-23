@@ -748,6 +748,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCommitmentControlClause(CobolParser.CommitmentControlClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#applyCommitClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataDivision}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

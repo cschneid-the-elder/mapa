@@ -1491,6 +1491,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataDivision(CobolParser.DataDivisionContext ctx) { }
 	/**
 	 * {@inheritDoc}

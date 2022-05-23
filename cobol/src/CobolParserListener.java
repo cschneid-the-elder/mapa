@@ -1237,6 +1237,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitCommitmentControlClause(CobolParser.CommitmentControlClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#applyCommitClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#applyCommitClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitApplyCommitClause(CobolParser.ApplyCommitClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataDivision}.
 	 * @param ctx the parse tree
 	 */
