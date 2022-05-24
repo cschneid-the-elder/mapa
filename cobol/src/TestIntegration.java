@@ -782,6 +782,14 @@ public static void main(String[] args) throws Exception {
 			case "testantlr365":
 				if (!testCall001(fileName, bareName, "PGM00001", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
 				break;
+			case "testantlr066":
+			case "testantlr166":
+			case "testantlr266":
+			case "testantlr366":
+				if (!testCall001(fileName, bareName, "PGM00001", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00002", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00003", CallType.CALLBYIDENTIFIER, calledNodes, 3)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");

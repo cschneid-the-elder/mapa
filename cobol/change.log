@@ -1,3 +1,17 @@
+--2022-05-24--------------------------------------------------------------------
+Modified CobolLexer and CobolParser per draft 202x Data Division
+specifications.
+
+Added constantEntry to dataDescriptionEntry and modified DDNode, CobolSource,
+and DataDescriptionEntryListener to allow for constant definition as per a
+variable defined via a DEFINE compile option or conditional compile statement.
+
+Modified fileDescriptionEntry clauses to allow both BYTES and CHARACTERS, added
+the formatClause, and modified codeSetClause adding codeSetAlphabetPhrase1 and
+codeSetAlphabetPhrase2.
+
+Added testdata/local/test9038.cbl and testdata/local/testantlr?66.cbl.
+
 --2022-05-21--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Environment Division
 specifications.
