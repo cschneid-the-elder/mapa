@@ -25,6 +25,12 @@
              For Alphanumeric is Farscape
              For National Is Farscape1
            .
+       Working-Storage Section.
+       >>DEFINE Meeklo 'PGM00002'
+       01  Scorpius Constant 'PGM00001'.
+       01  Braca Constant From Meeklo.
        Procedure Division.
+           Call Scorpius
+           Call Braca
            GOBACK.
        End Program test9038.

@@ -53,6 +53,7 @@ class CobolSource {
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private BasisStatement basisStatement = null;
 	private Boolean isCobol = true;
+	private ArrayList<CondCompVar> finalCompOptDefines = new ArrayList<>();
 
 	public CobolSource(
 			String sourceFileName
@@ -502,6 +503,7 @@ class CobolSource {
 		}
 
 		fileName = processReplaceStatements(fileName, baseDir, initFileNm, compOptDefines);
+		this.finalCompOptDefines = compOptDefines;
 
 		return fileName;
 	}
@@ -823,7 +825,7 @@ class CobolSource {
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER);
+		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER, this.finalCompOptDefines);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
