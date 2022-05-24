@@ -785,15 +785,19 @@ fileDescriptionEntry
    ;
 
 fileDescriptionEntryClause
-   : externalClause | globalClause | blockContainsClause | recordContainsClause | labelRecordsClause | valueOfClause | dataRecordsClause | linageClause | codeSetClause | reportClause | recordingModeClause
+   : externalClause | globalClause | formatClause | blockContainsClause | recordContainsClause | labelRecordsClause | valueOfClause | dataRecordsClause | linageClause | codeSetClause | reportClause | recordingModeClause
    ;
 
 externalClause
-   : IS? EXTERNAL
+   : IS? EXTERNAL (AS literal)?
    ;
 
 globalClause
    : IS? GLOBAL
+   ;
+
+formatClause
+   : FORMAT (BIT | CHARACTER | NUMERIC) DATA?
    ;
 
 blockContainsClause
@@ -809,15 +813,15 @@ recordContainsClause
    ;
 
 recordContainsClauseFormat1
-   : CONTAINS? integerLiteral CHARACTERS?
+   : CONTAINS? integerLiteral (BYTES | CHARACTERS)?
    ;
 
 recordContainsClauseFormat2
-   : IS? VARYING IN? SIZE? (FROM? integerLiteral recordContainsTo? CHARACTERS?)? (DEPENDING ON? qualifiedDataName)?
+   : IS? VARYING IN? SIZE? (FROM? integerLiteral recordContainsTo? (BYTES | CHARACTERS)?)? (DEPENDING ON? qualifiedDataName)?
    ;
 
 recordContainsClauseFormat3
-   : CONTAINS? integerLiteral recordContainsTo CHARACTERS?
+   : CONTAINS? integerLiteral recordContainsTo (BYTES | CHARACTERS)?
    ;
 
 recordContainsTo
@@ -869,7 +873,15 @@ modeStatement
    ;
 
 codeSetClause
-   : CODE_SET IS? alphabetName
+   : CODE_SET (codeSetAlphabetPhrase1 | codeSetAlphabetPhrase2+)
+   ;
+
+codeSetAlphabetPhrase1
+   : (IS? alphabetName alphabetName?)
+   ;
+
+codeSetAlphabetPhrase2
+   : (FOR? (ALPHANUMERIC | NATIONAL) IS? alphabetName)
    ;
 
 reportClause
@@ -1344,10 +1356,29 @@ libraryIsGlobalClause
    : IS? GLOBAL
    ;
 
+// constant description entry ------------------------------
+
+constantEntry
+   : INTEGERLITERAL dataName CONSTANT (IS? GLOBAL)? (constantEntryLengthPhrase | constantEntryFromPhrase) (DOT_FS | DOT)
+   ;
+
+constantEntryLengthPhrase
+   : AS? 
+     (literal 
+     | (BYTE_LENGTH OF? dataName)
+     | arithmeticExpression
+     | (LENGTH OF? dataName)
+     )
+   ;
+
+constantEntryFromPhrase
+   : FROM dataName
+   ;
+
 // data description entry ----------------------------------
 
 dataDescriptionEntry
-   : dataDescriptionEntryFormat1 | dataDescriptionEntryFormat2 | dataDescriptionEntryFormat3 | dataDescriptionEntryExecSql
+   : dataDescriptionEntryFormat1 | dataDescriptionEntryFormat2 | dataDescriptionEntryFormat3 | dataDescriptionEntryExecSql | constantEntry
    ;
 
 dataDescriptionEntryFormat1
@@ -1481,7 +1512,7 @@ dataTypeClause
    ;
 
 dataTypeDefClause
-   : IS? TYPEDEF
+   : IS? TYPEDEF STRONG?
    ;
 
 dataUsageClause
@@ -3336,7 +3367,7 @@ cobolWord
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
    | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | REVERSE_VIDEO
-   | SAVE | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | SYMBOL
+   | SAVE | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STRONG | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF
    | UNDERLINE
    | VIRTUAL

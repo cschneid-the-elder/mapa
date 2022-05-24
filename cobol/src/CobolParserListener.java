@@ -1317,6 +1317,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitGlobalClause(CobolParser.GlobalClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#formatClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterFormatClause(CobolParser.FormatClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#formatClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitFormatClause(CobolParser.FormatClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#blockContainsClause}.
 	 * @param ctx the parse tree
 	 */
@@ -1506,6 +1516,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitCodeSetClause(CobolParser.CodeSetClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void enterCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase1}.
+	 * @param ctx the parse tree
+	 */
+	void exitCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase2}.
+	 * @param ctx the parse tree
+	 */
+	void enterCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase2}.
+	 * @param ctx the parse tree
+	 */
+	void exitCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#reportClause}.
 	 * @param ctx the parse tree
@@ -2646,6 +2676,36 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitLibraryIsGlobalClause(CobolParser.LibraryIsGlobalClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#constantEntry}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantEntry(CobolParser.ConstantEntryContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#constantEntry}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantEntry(CobolParser.ConstantEntryContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#constantEntryLengthPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantEntryLengthPhrase(CobolParser.ConstantEntryLengthPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#constantEntryLengthPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantEntryLengthPhrase(CobolParser.ConstantEntryLengthPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#constantEntryFromPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterConstantEntryFromPhrase(CobolParser.ConstantEntryFromPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#constantEntryFromPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitConstantEntryFromPhrase(CobolParser.ConstantEntryFromPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataDescriptionEntry}.
 	 * @param ctx the parse tree

@@ -796,6 +796,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGlobalClause(CobolParser.GlobalClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#formatClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFormatClause(CobolParser.FormatClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#blockContainsClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -909,6 +915,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCodeSetClause(CobolParser.CodeSetClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#reportClause}.
 	 * @param ctx the parse tree
@@ -1593,6 +1611,24 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLibraryIsGlobalClause(CobolParser.LibraryIsGlobalClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#constantEntry}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstantEntry(CobolParser.ConstantEntryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#constantEntryLengthPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstantEntryLengthPhrase(CobolParser.ConstantEntryLengthPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#constantEntryFromPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitConstantEntryFromPhrase(CobolParser.ConstantEntryFromPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataDescriptionEntry}.
 	 * @param ctx the parse tree

@@ -1587,6 +1587,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFormatClause(CobolParser.FormatClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFormatClause(CobolParser.FormatClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlockContainsClause(CobolParser.BlockContainsClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1810,6 +1822,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCodeSetClause(CobolParser.CodeSetClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3178,6 +3214,42 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitLibraryIsGlobalClause(CobolParser.LibraryIsGlobalClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstantEntry(CobolParser.ConstantEntryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstantEntry(CobolParser.ConstantEntryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstantEntryLengthPhrase(CobolParser.ConstantEntryLengthPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstantEntryLengthPhrase(CobolParser.ConstantEntryLengthPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterConstantEntryFromPhrase(CobolParser.ConstantEntryFromPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitConstantEntryFromPhrase(CobolParser.ConstantEntryFromPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
