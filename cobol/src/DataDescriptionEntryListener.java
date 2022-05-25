@@ -11,17 +11,14 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	public DDNode parent = null;
 	public DDNode prev = null;
 	public DataLocation locn = null;
-	private ArrayList<CondCompVar> finalCompOptDefines = new ArrayList<>();
 
 	public DataDescriptionEntryListener(
 			ArrayList<CobolProgram> programs
 			, Logger LOGGER
-			, ArrayList<CondCompVar> finalCompOptDefines
 			) {
 		super();
 		this.programs = programs;
 		this.LOGGER = LOGGER;
-		this.finalCompOptDefines = finalCompOptDefines;
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
@@ -90,7 +87,7 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		DDNode node = null;
 
 		if (ctx.dataDescriptionEntryExecSql() == null) {
-			node = new DDNode(this.currProgram, ctx, locn, this.finalCompOptDefines);
+			node = new DDNode(this.currProgram, ctx, locn);
 		} else {
 			return;
 		}

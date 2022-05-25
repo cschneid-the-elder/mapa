@@ -1001,7 +1001,24 @@ screenSection
    ;
 
 screenDescriptionEntry
-   : INTEGERLITERAL (FILLER | screenName)? (screenDescriptionBlankClause | screenDescriptionBellClause | screenDescriptionBlinkClause | screenDescriptionEraseClause | screenDescriptionLightClause | screenDescriptionGridClause | screenDescriptionReverseVideoClause | screenDescriptionUnderlineClause | screenDescriptionSizeClause | screenDescriptionLineClause | screenDescriptionColumnClause | screenDescriptionForegroundColorClause | screenDescriptionBackgroundColorClause | screenDescriptionControlClause | screenDescriptionValueClause | screenDescriptionPictureClause | (screenDescriptionFromClause | screenDescriptionUsingClause) | screenDescriptionUsageClause | screenDescriptionBlankWhenZeroClause | screenDescriptionJustifiedClause | screenDescriptionSignClause | screenDescriptionAutoClause | screenDescriptionSecureClause | screenDescriptionRequiredClause | screenDescriptionPromptClause | screenDescriptionFullClause | screenDescriptionZeroFillClause)* DOT_FS
+   : INTEGERLITERAL (FILLER | screenName)? (screenDescriptionConstantEntryClause | (screenDescriptionBlankClause | screenDescriptionBellClause | screenDescriptionBlinkClause | screenDescriptionEraseClause | screenDescriptionLightClause | screenDescriptionGridClause | screenDescriptionReverseVideoClause | screenDescriptionUnderlineClause | screenDescriptionSizeClause | screenDescriptionLineClause | screenDescriptionColumnClause | screenDescriptionForegroundColorClause | screenDescriptionBackgroundColorClause | screenDescriptionControlClause | screenDescriptionValueClause | screenDescriptionPictureClause | (screenDescriptionFromClause | screenDescriptionUsingClause) | screenDescriptionUsageClause | screenDescriptionBlankWhenZeroClause | screenDescriptionJustifiedClause | screenDescriptionSignClause | screenDescriptionAutoClause | screenDescriptionSecureClause | screenDescriptionRequiredClause | screenDescriptionPromptClause | screenDescriptionFullClause | screenDescriptionZeroFillClause)*) DOT_FS
+   ;
+
+screenDescriptionConstantEntryClause
+   : (CONSTANT (IS? GLOBAL)? (screenDescriptionConstantEntryLengthPhrase | screenDescriptionConstantEntryFromPhrase))
+   ;
+
+screenDescriptionConstantEntryLengthPhrase
+   : AS? 
+     (literal 
+     | (BYTE_LENGTH OF? dataName)
+     | arithmeticExpression
+     | (LENGTH OF? dataName)
+     )
+   ;
+
+screenDescriptionConstantEntryFromPhrase
+   : FROM dataName
    ;
 
 screenDescriptionBlankClause
@@ -1356,33 +1373,14 @@ libraryIsGlobalClause
    : IS? GLOBAL
    ;
 
-// constant description entry ------------------------------
-
-constantEntry
-   : INTEGERLITERAL dataName CONSTANT (IS? GLOBAL)? (constantEntryLengthPhrase | constantEntryFromPhrase) (DOT_FS | DOT)
-   ;
-
-constantEntryLengthPhrase
-   : AS? 
-     (literal 
-     | (BYTE_LENGTH OF? dataName)
-     | arithmeticExpression
-     | (LENGTH OF? dataName)
-     )
-   ;
-
-constantEntryFromPhrase
-   : FROM dataName
-   ;
-
 // data description entry ----------------------------------
 
 dataDescriptionEntry
-   : dataDescriptionEntryFormat1 | dataDescriptionEntryFormat2 | dataDescriptionEntryFormat3 | dataDescriptionEntryExecSql | constantEntry
+   : dataDescriptionEntryFormat1 | dataDescriptionEntryFormat2 | dataDescriptionEntryFormat3 | dataDescriptionEntryExecSql
    ;
 
 dataDescriptionEntryFormat1
-   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataGroupUsageClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause | dataVolatileClause)* (DOT_WS | DOT_FS | DOT)
+   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataGroupUsageClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause | dataConstantRecordClause | dataVolatileClause)* (DOT_WS | DOT_FS | DOT)
    ;
 
 dataDescriptionEntryFormat2
@@ -1409,8 +1407,12 @@ dataCommonOwnLocalClause
    : COMMON | OWN | LOCAL
    ;
 
+dataConstantRecordClause
+   : CONSTANT RECORD
+   ;
+
 dataDynamicLengthClause
-   : DYNAMIC LENGTH? (LIMIT IS? INTEGERLITERAL)?
+   : DYNAMIC LENGTH? dataName? (LIMIT IS? INTEGERLITERAL)?
    ;
 
 dataExternalClause

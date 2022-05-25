@@ -13,7 +13,7 @@
            Block 0
            Record Contains 80 Bytes
            Code-Set Is Farscape Farscape1.
-       01  Dargo Constant As x'42'.
+       01  Dargo Constant Record PIC X(80).
 
        FD  Moya
            External Global
@@ -26,11 +26,6 @@
              For National Is Farscape1
            .
        Working-Storage Section.
-       >>DEFINE Meeklo 'PGM00002'
-       01  Scorpius Constant 'PGM00001'.
-       01  Braca Constant From Meeklo.
        Procedure Division.
-           Call Scorpius
-           Call Braca
            GOBACK.
        End Program test9038.

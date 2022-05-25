@@ -1,6 +1,5 @@
 
 import java.util.*;
-import java.util.stream.Collectors;
 import java.util.logging.Logger;
 
 /**
@@ -32,20 +31,16 @@ class DDNode {
 	public CobolParser.DataDescriptionEntryFormat1Context dde1Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat2Context dde2Ctx = null;
 	public CobolParser.DataDescriptionEntryFormat3Context dde3Ctx = null;
-	public CobolParser.ConstantEntryContext ceCtx = null;
-	private ArrayList<CondCompVar> finalCompOptDefines = new ArrayList<>();
 	
 	public DDNode(
 			CobolProgram program
 			, CobolParser.DataDescriptionEntryContext ctx
 			, DataLocation locn
-			, ArrayList<CondCompVar> finalCompOptDefines
 			) {
 		this.program = program;
 		this.programName = program.getProgramName();
 		this.ddeCtx = ctx;
 		this.locn = locn;
-		this.finalCompOptDefines = finalCompOptDefines;
 		this.initialize();
 	}
 
@@ -53,14 +48,7 @@ class DDNode {
 		if (this.ddeCtx.dataDescriptionEntryFormat1() == null) {
 			if (this.ddeCtx.dataDescriptionEntryFormat2() == null) {
 				if (this.ddeCtx.dataDescriptionEntryFormat3() == null) {
-					if (this.ddeCtx.constantEntry() == null) {
-						TestIntegration.LOGGER.info(myName + " ! no data description entry or constant found");
-					} else {
-						this.ceCtx = this.ddeCtx.constantEntry();
-						this.setIdentifierFromCECTX();
-						this.setLevelFromCECTX();
-						this.setValueFromCECTX();
-					}
+					this.LOGGER.info(myName + " ! dataDescriptionEntryExecSql ignored");
 				} else {
 					this.dde3Ctx = this.ddeCtx.dataDescriptionEntryFormat3();
 					this.setIdentifierFromDDE3CTX();
@@ -109,10 +97,6 @@ class DDNode {
 		this.identifier = this.dde3Ctx.conditionName().cobolWord().getText();
 	}
 
-	private void setIdentifierFromCECTX() {
-		this.identifier = this.ceCtx.dataName().getText();
-	}
-
 	private void setLevelFromDDE1CTX() {
 		if (this.dde1Ctx.INTEGERLITERAL() == null) {
 			this.level = Integer.parseInt(this.dde1Ctx.LEVEL_NUMBER_77().toString());
@@ -127,10 +111,6 @@ class DDNode {
 
 	private void setLevelFromDDE3CTX() {
 		this.level = Integer.parseInt(this.dde3Ctx.LEVEL_NUMBER_88().toString());
-	}
-
-	private void setLevelFromCECTX() {
-		this.level = Integer.parseInt(this.ceCtx.INTEGERLITERAL().toString());
 	}
 
 	private void setValueFromDDE1CTX() {
@@ -175,56 +155,6 @@ class DDNode {
 			}
 		}
 
-	}
-
-	private void setValueFromCECTX() {
-		if (this.ceCtx.constantEntryFromPhrase() == null) {
-			if (this.ceCtx.constantEntryLengthPhrase() == null) {
-			} else {
-				if (this.ceCtx.constantEntryLengthPhrase().literal() == null) {
-				} else {
-					Literal literal = new Literal(this.ceCtx.constantEntryLengthPhrase().literal());
-					this.valueInValueClause = literal.getText();
-				}
-			}
-		} else {
-			String fromVar = this.ceCtx.constantEntryFromPhrase().dataName().getText();
-			List<CondCompVar> defines = this.finalCompOptDefines
-				.stream()
-				.filter(c -> c.getVarName().equals(fromVar))
-				.collect(Collectors.toList());
-			if (defines.size() > 0) {
-				switch(defines.get(0).getType()) {
-					case VAR_ALPHANUM:
-						this.valueInValueClause = defines.get(0).getAlnumValue();
-						break;
-					case VAR_INTEGER:
-						this.valueInValueClause = defines.get(0).getIntValue().toString();
-						break;
-					case VAR_BOOLEAN:
-						this.valueInValueClause = defines.get(0).getBoolValue().toString();
-						break;
-					default:
-						this.LOGGER.warning(
-							myName
-							+ " " + defines.get(0).getVarName()
-							+ " in "
-							+ this.program.getProgramName()
-							+ " has unhandled type "
-							+ defines.get(0).getType());
-				}
-				this.valueInValueClause = defines.get(0).getAlnumValue();
-			} else {
-				this.LOGGER.info(
-					myName
-					+ " " + this.identifier
-					+ " in "
-					+ this.program.getProgramName()
-					+ " gets its value from "
-					+ fromVar
-					+ " which does not appear to be set");
-			}
-		}
 	}
 
 	private void setRedefinesFromDDE1CTX() {
