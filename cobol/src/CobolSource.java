@@ -53,6 +53,12 @@ class CobolSource {
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private BasisStatement basisStatement = null;
 	private Boolean isCobol = true;
+	/*
+	finalCompOptDefines isn't used for anything right now, but it may be
+	of use resolving screenDescriptionConstantEntryClause should that
+	become needed
+	*/
+	private ArrayList<CondCompVar> finalCompOptDefines = new ArrayList<>();
 
 	public CobolSource(
 			String sourceFileName
@@ -502,6 +508,7 @@ class CobolSource {
 		}
 
 		fileName = processReplaceStatements(fileName, baseDir, initFileNm, compOptDefines);
+		this.finalCompOptDefines = compOptDefines;
 
 		return fileName;
 	}

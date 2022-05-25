@@ -796,6 +796,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitGlobalClause(CobolParser.GlobalClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#formatClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFormatClause(CobolParser.FormatClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#blockContainsClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -909,6 +915,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitCodeSetClause(CobolParser.CodeSetClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#codeSetAlphabetPhrase2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#reportClause}.
 	 * @param ctx the parse tree
@@ -1071,6 +1089,24 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitScreenDescriptionEntry(CobolParser.ScreenDescriptionEntryContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#screenDescriptionConstantEntryClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScreenDescriptionConstantEntryClause(CobolParser.ScreenDescriptionConstantEntryClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#screenDescriptionConstantEntryLengthPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScreenDescriptionConstantEntryLengthPhrase(CobolParser.ScreenDescriptionConstantEntryLengthPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#screenDescriptionConstantEntryFromPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitScreenDescriptionConstantEntryFromPhrase(CobolParser.ScreenDescriptionConstantEntryFromPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#screenDescriptionBlankClause}.
 	 * @param ctx the parse tree
@@ -1630,17 +1666,35 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDataAlignedClause(CobolParser.DataAlignedClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataAnyLengthClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataAnyLengthClause(CobolParser.DataAnyLengthClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataBlankWhenZeroClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDataBlankWhenZeroClause(CobolParser.DataBlankWhenZeroClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataBasedClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataBasedClause(CobolParser.DataBasedClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataCommonOwnLocalClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataConstantRecordClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataConstantRecordClause(CobolParser.DataConstantRecordClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataDynamicLengthClause}.
 	 * @param ctx the parse tree
@@ -1732,6 +1786,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPictureCardinality(CobolParser.PictureCardinalityContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataPropertyClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataPropertyClause(CobolParser.DataPropertyClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataReceivedByClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1755,6 +1815,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDataRenamesClause(CobolParser.DataRenamesClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataSameAsClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataSameAsClause(CobolParser.DataSameAsClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataSelectWhenClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataSelectWhenClause(CobolParser.DataSelectWhenClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataSignClause}.
 	 * @param ctx the parse tree
@@ -1791,6 +1863,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDataUsageClause(CobolParser.DataUsageClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataUsageObjectReferenceFactoryPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataUsageObjectReferenceFactoryPhrase(CobolParser.DataUsageObjectReferenceFactoryPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataUsingClause}.
 	 * @param ctx the parse tree

@@ -1,3 +1,23 @@
+--2022-05-25--------------------------------------------------------------------
+Modified CobolLexer and CobolParser per draft 202x Data Division
+specifications.
+
+Added screenDescriptionConstantEntryClause to screenDescriptionEntry.
+
+Modified fileDescriptionEntry clauses to allow both BYTES and CHARACTERS, added
+the formatClause, and modified codeSetClause adding codeSetAlphabetPhrase1 and
+codeSetAlphabetPhrase2.
+
+Added dataConstantRecordClause, dataPropertyClause, dataSameAsClause, 
+dataSelectWhenClause, dataBasedClause, and dataAnyLengthClause to
+dataDescriptionEntryFormat1.
+
+Added BINARY-*, FLOAT-*, MESSAGE-TAG, et. al. entries to dataUsageClause.
+
+Added STRONG to dataTypeDefClause.
+
+Added testdata/local/test9038.cbl.
+
 --2022-05-21--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Environment Division
 specifications.

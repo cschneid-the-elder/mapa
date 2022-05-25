@@ -1587,6 +1587,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFormatClause(CobolParser.FormatClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFormatClause(CobolParser.FormatClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlockContainsClause(CobolParser.BlockContainsClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1810,6 +1822,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCodeSetClause(CobolParser.CodeSetClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCodeSetAlphabetPhrase1(CobolParser.CodeSetAlphabetPhrase1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCodeSetAlphabetPhrase2(CobolParser.CodeSetAlphabetPhrase2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -2134,6 +2170,42 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitScreenDescriptionEntry(CobolParser.ScreenDescriptionEntryContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterScreenDescriptionConstantEntryClause(CobolParser.ScreenDescriptionConstantEntryClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitScreenDescriptionConstantEntryClause(CobolParser.ScreenDescriptionConstantEntryClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterScreenDescriptionConstantEntryLengthPhrase(CobolParser.ScreenDescriptionConstantEntryLengthPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitScreenDescriptionConstantEntryLengthPhrase(CobolParser.ScreenDescriptionConstantEntryLengthPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterScreenDescriptionConstantEntryFromPhrase(CobolParser.ScreenDescriptionConstantEntryFromPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitScreenDescriptionConstantEntryFromPhrase(CobolParser.ScreenDescriptionConstantEntryFromPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3255,6 +3327,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDataAnyLengthClause(CobolParser.DataAnyLengthClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataAnyLengthClause(CobolParser.DataAnyLengthClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataBlankWhenZeroClause(CobolParser.DataBlankWhenZeroClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3267,6 +3351,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDataBasedClause(CobolParser.DataBasedClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataBasedClause(CobolParser.DataBasedClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3274,6 +3370,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDataCommonOwnLocalClause(CobolParser.DataCommonOwnLocalClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataConstantRecordClause(CobolParser.DataConstantRecordClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataConstantRecordClause(CobolParser.DataConstantRecordClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3459,6 +3567,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDataPropertyClause(CobolParser.DataPropertyClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataPropertyClause(CobolParser.DataPropertyClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataReceivedByClause(CobolParser.DataReceivedByClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3502,6 +3622,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDataRenamesClause(CobolParser.DataRenamesClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataSameAsClause(CobolParser.DataSameAsClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataSameAsClause(CobolParser.DataSameAsClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataSelectWhenClause(CobolParser.DataSelectWhenClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataSelectWhenClause(CobolParser.DataSelectWhenClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3574,6 +3718,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitDataUsageClause(CobolParser.DataUsageClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDataUsageObjectReferenceFactoryPhrase(CobolParser.DataUsageObjectReferenceFactoryPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDataUsageObjectReferenceFactoryPhrase(CobolParser.DataUsageObjectReferenceFactoryPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

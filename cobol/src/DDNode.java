@@ -1,5 +1,6 @@
 
 import java.util.*;
+import java.util.logging.Logger;
 
 /**
 This is an attempt at making my processing easier by creating
@@ -10,6 +11,8 @@ the ProLeap COBOL grammar.
 */
 
 class DDNode {
+	private String myName = this.getClass().getName();
+	private Logger LOGGER = Logger.getLogger("TestIntegration");
 	public List<DDNode> children = new ArrayList<>();
 	public DDNode parent = null;
 	public UUID uuid = UUID.randomUUID();
@@ -45,7 +48,7 @@ class DDNode {
 		if (this.ddeCtx.dataDescriptionEntryFormat1() == null) {
 			if (this.ddeCtx.dataDescriptionEntryFormat2() == null) {
 				if (this.ddeCtx.dataDescriptionEntryFormat3() == null) {
-					TestIntegration.LOGGER.info("! dataDescriptionEntryExecSql ignored");
+					this.LOGGER.info(myName + " ! dataDescriptionEntryExecSql ignored");
 				} else {
 					this.dde3Ctx = this.ddeCtx.dataDescriptionEntryFormat3();
 					this.setIdentifierFromDDE3CTX();
