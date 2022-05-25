@@ -1380,7 +1380,7 @@ dataDescriptionEntry
    ;
 
 dataDescriptionEntryFormat1
-   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataGroupUsageClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause | dataConstantRecordClause | dataVolatileClause)* (DOT_WS | DOT_FS | DOT)
+   : (INTEGERLITERAL | LEVEL_NUMBER_77) (FILLER | dataName)? (dataRedefinesClause | dataIntegerStringClause | dataExternalClause | dataGlobalClause | dataGroupUsageClause | dataTypeDefClause | dataThreadLocalClause | dataPictureClause | dataCommonOwnLocalClause | dataTypeClause | dataUsingClause | dataUsageClause | dataValueClause | dataReceivedByClause | dataOccursClause | dataSignClause | dataSynchronizedClause | dataJustifiedClause | dataBlankWhenZeroClause | dataWithLowerBoundsClause | dataAlignedClause | dataRecordAreaClause | dataDynamicLengthClause | dataConstantRecordClause | dataPropertyClause | dataSameAsClause | dataSelectWhenClause | dataBasedClause | dataAnyLengthClause | dataVolatileClause)* (DOT_WS | DOT_FS | DOT)
    ;
 
 dataDescriptionEntryFormat2
@@ -1399,8 +1399,16 @@ dataAlignedClause
    : ALIGNED
    ;
 
+dataAnyLengthClause
+   : (ANY LENGTH)
+   ;
+
 dataBlankWhenZeroClause
    : (BLANK | BLANK_PIC) WHEN? (ZERO | ZEROS | ZEROES)
+   ;
+
+dataBasedClause
+   : BASED
    ;
 
 dataCommonOwnLocalClause
@@ -1416,7 +1424,7 @@ dataDynamicLengthClause
    ;
 
 dataExternalClause
-   : IS? EXTERNAL (BY literal)?
+   : IS? EXTERNAL ((BY | AS) literal)?
    ;
 
 dataGlobalClause
@@ -1424,7 +1432,7 @@ dataGlobalClause
    ;
 
 dataGroupUsageClause
-   : GROUP_USAGE IS? (NATIONAL | UTF_8)
+   : GROUP_USAGE IS? (NATIONAL | UTF_8 | BIT)
    ;
 
 dataIntegerStringClause
@@ -1471,6 +1479,10 @@ pictureCardinality
    : PICTURE_CARDINALITY
    ;
 
+dataPropertyClause
+   : (PROPERTY (WITH? NO (GET | SET))? (IS? FINAL)?)
+   ;
+
 dataReceivedByClause
    : RECEIVED? BY? (CONTENT | REFERENCE | REF)
    ;
@@ -1485,6 +1497,14 @@ dataRedefinesClause
 
 dataRenamesClause
    : RENAMES qualifiedDataName ((THROUGH | THRU) qualifiedDataName)?
+   ;
+
+dataSameAsClause
+   : (SAME AS dataName)
+   ;
+
+dataSelectWhenClause
+   : (SELECT WHEN (OTHER | conditionName))
    ;
 
 dataSignClause
@@ -1518,7 +1538,80 @@ dataTypeDefClause
    ;
 
 dataUsageClause
-   : ((USAGE | USAGE_PIC) IS?)? ((BINARY | BINARY_PIC) (TRUNCATED | EXTENDED)? | BIT | COMP | COMP_1 | COMP_2 | COMP_3 | COMP_4 | COMP_5 | COMPUTATIONAL | COMPUTATIONAL_1 | COMPUTATIONAL_2 | COMPUTATIONAL_3 | COMPUTATIONAL_4 | COMPUTATIONAL_5 | CONTROL_POINT | DATE | DISPLAY | DISPLAY_1 | DOUBLE | EVENT | FUNCTION_POINTER | INDEX | KANJI | LOCK | NATIONAL | PACKED_DECIMAL | POINTER | POINTER_32 | PROCEDURE_POINTER | REAL | SQL | TASK | UTF_8 | COMP_PIC | COMP_1_PIC | COMP_2_PIC | COMP_3_PIC | COMP_4_PIC | COMP_5_PIC | COMPUTATIONAL_PIC | COMPUTATIONAL_1_PIC | COMPUTATIONAL_2_PIC | COMPUTATIONAL_3_PIC | COMPUTATIONAL_4_PIC | COMPUTATIONAL_5_PIC | DISPLAY_PIC | DISPLAY_1_PIC | FUNCTION_POINTER_PIC | INDEX_PIC | NATIONAL_PIC | PACKED_DECIMAL_PIC | POINTER_PIC | PROCEDURE_POINTER_PIC | OBJECT_REFERENCE_PIC) NATIVE?
+   : ((USAGE | USAGE_PIC) IS?)? 
+   ((BINARY | BINARY_PIC) (TRUNCATED | EXTENDED)? 
+   | (BINARY_CHAR (SIGNED | UNSIGNED))
+   | (BINARY_DOUBLE (SIGNED | UNSIGNED))
+   | (BINARY_LONG (SIGNED | UNSIGNED))
+   | (BINARY_SHORT (SIGNED | UNSIGNED))
+   | BIT 
+   | COMP 
+   | COMP_1 
+   | COMP_2 
+   | COMP_3 
+   | COMP_4 
+   | COMP_5 
+   | COMPUTATIONAL 
+   | COMPUTATIONAL_1 
+   | COMPUTATIONAL_2 
+   | COMPUTATIONAL_3 
+   | COMPUTATIONAL_4 
+   | COMPUTATIONAL_5 
+   | CONTROL_POINT 
+   | DATE 
+   | DISPLAY 
+   | DISPLAY_1 
+   | DOUBLE 
+   | EVENT 
+   | (FLOAT_BINARY_32 endiannessPhrase?)
+   | (FLOAT_BINARY_64 endiannessPhrase?)
+   | (FLOAT_BINARY_128 endiannessPhrase?)
+   | (FLOAT_DECIMAL_16 (encodingPhrase | endiannessPhrase)?)
+   | (FLOAT_DECIMAL_34 (encodingPhrase | endiannessPhrase)?)
+   | FLOAT_EXTENDED
+   | FLOAT_LONG
+   | FLOAT_SHORT
+   | (FUNCTION_POINTER (TO? cobolWord)?)
+   | INDEX 
+   | KANJI 
+   | LOCK 
+   | NATIONAL 
+   | (PACKED_DECIMAL (WITH? NO SIGN)?)
+   | (POINTER (TO dataName)?)
+   | POINTER_32 
+   | PROCEDURE_POINTER 
+   | REAL 
+   | SQL 
+   | TASK 
+   | UTF_8 
+   | COMP_PIC 
+   | COMP_1_PIC 
+   | COMP_2_PIC 
+   | COMP_3_PIC 
+   | COMP_4_PIC 
+   | COMP_5_PIC 
+   | COMPUTATIONAL_PIC 
+   | COMPUTATIONAL_1_PIC 
+   | COMPUTATIONAL_2_PIC 
+   | COMPUTATIONAL_3_PIC 
+   | COMPUTATIONAL_4_PIC 
+   | COMPUTATIONAL_5_PIC 
+   | DISPLAY_PIC 
+   | DISPLAY_1_PIC 
+   | (FUNCTION_POINTER_PIC (TO? cobolWord)?)
+   | INDEX_PIC 
+   | NATIONAL_PIC 
+   | (PACKED_DECIMAL_PIC (WITH? NO SIGN)?)
+   | POINTER_PIC 
+   | PROCEDURE_POINTER_PIC 
+   | (PROGRAM_POINTER (TO? cobolWord)?)
+   | MESSAGE_TAG
+   | OBJECT_REFERENCE dataUsageObjectReferenceFactoryPhrase?) 
+   NATIVE?
+   ;
+
+dataUsageObjectReferenceFactoryPhrase
+   : ((FACTORY OF?) (interfaceName | ACTIVE_CLASS | (className ONLY?)))
    ;
 
 dataUsingClause
@@ -1526,7 +1619,12 @@ dataUsingClause
    ;
 
 dataValueClause
-   : (VALUE_PIC | VALUE | VALUES) (IS | ARE)? dataValueInterval (COMMACHAR? dataValueInterval)*
+   : (VALUE_PIC | VALUE | VALUES) 
+   (IS | ARE)? 
+   dataValueInterval 
+   (COMMACHAR? dataValueInterval)* 
+   (IN? alphabetName)?
+   (WHEN? SET? TO? FALSE IS? literal)?
    ;
 
 dataValueInterval

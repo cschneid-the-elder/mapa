@@ -2767,6 +2767,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitDataAlignedClause(CobolParser.DataAlignedClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataAnyLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataAnyLengthClause(CobolParser.DataAnyLengthClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataAnyLengthClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataAnyLengthClause(CobolParser.DataAnyLengthClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataBlankWhenZeroClause}.
 	 * @param ctx the parse tree
 	 */
@@ -2776,6 +2786,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDataBlankWhenZeroClause(CobolParser.DataBlankWhenZeroClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataBasedClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataBasedClause(CobolParser.DataBasedClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataBasedClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataBasedClause(CobolParser.DataBasedClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataCommonOwnLocalClause}.
 	 * @param ctx the parse tree
@@ -2947,6 +2967,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitPictureCardinality(CobolParser.PictureCardinalityContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataPropertyClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataPropertyClause(CobolParser.DataPropertyClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataPropertyClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataPropertyClause(CobolParser.DataPropertyClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataReceivedByClause}.
 	 * @param ctx the parse tree
 	 */
@@ -2986,6 +3016,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDataRenamesClause(CobolParser.DataRenamesClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataSameAsClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataSameAsClause(CobolParser.DataSameAsClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataSameAsClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataSameAsClause(CobolParser.DataSameAsClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataSelectWhenClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataSelectWhenClause(CobolParser.DataSelectWhenClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataSelectWhenClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataSelectWhenClause(CobolParser.DataSelectWhenClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataSignClause}.
 	 * @param ctx the parse tree
@@ -3046,6 +3096,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitDataUsageClause(CobolParser.DataUsageClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#dataUsageObjectReferenceFactoryPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterDataUsageObjectReferenceFactoryPhrase(CobolParser.DataUsageObjectReferenceFactoryPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#dataUsageObjectReferenceFactoryPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitDataUsageObjectReferenceFactoryPhrase(CobolParser.DataUsageObjectReferenceFactoryPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataUsingClause}.
 	 * @param ctx the parse tree

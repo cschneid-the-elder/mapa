@@ -1666,11 +1666,23 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDataAlignedClause(CobolParser.DataAlignedClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataAnyLengthClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataAnyLengthClause(CobolParser.DataAnyLengthClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataBlankWhenZeroClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDataBlankWhenZeroClause(CobolParser.DataBlankWhenZeroClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataBasedClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataBasedClause(CobolParser.DataBasedClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataCommonOwnLocalClause}.
 	 * @param ctx the parse tree
@@ -1774,6 +1786,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPictureCardinality(CobolParser.PictureCardinalityContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataPropertyClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataPropertyClause(CobolParser.DataPropertyClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataReceivedByClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1797,6 +1815,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDataRenamesClause(CobolParser.DataRenamesClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataSameAsClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataSameAsClause(CobolParser.DataSameAsClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataSelectWhenClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataSelectWhenClause(CobolParser.DataSelectWhenClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataSignClause}.
 	 * @param ctx the parse tree
@@ -1833,6 +1863,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDataUsageClause(CobolParser.DataUsageClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#dataUsageObjectReferenceFactoryPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDataUsageObjectReferenceFactoryPhrase(CobolParser.DataUsageObjectReferenceFactoryPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataUsingClause}.
 	 * @param ctx the parse tree
