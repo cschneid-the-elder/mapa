@@ -296,6 +296,10 @@ class CondCompVar implements CondCompToken {
 		return this.varName.equals(identifier.getSymbol().getText());
 	}
 
+	public Boolean varNameIs(String varName) {
+		return this.varName.equals(varName);
+	}
+	
 	public String getVarName() {
 		return this.varName;
 	}

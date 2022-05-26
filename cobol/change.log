@@ -1,3 +1,23 @@
+--2022-05-26--------------------------------------------------------------------
+Fixed incorrect implementation of constantEntry in CobolParser.g4 and added
+representative class ConstantEntry.  Modified DataDescriptionEntryListener,
+CobolProgram, CondCompVar, and CallWrapper to allow for potential syntax...
+
+       Process DEFINE(GRAYZA,'PGM00001')
+       Identification Division.
+       Program-ID.    testantlr066.
+       Data Division.
+       Working-Storage Section.
+       01  PGM1 Constant From GRAYZA.
+       01  PGM2 Constant As   'PGM00002'.
+       Procedure Division.
+           Call PGM1
+           Call PGM2
+           Goback
+           .
+
+...adding testdata/local/testantlr?66.cbl to verify.
+
 --2022-05-25--------------------------------------------------------------------
 Modified CobolLexer and CobolParser per draft 202x Data Division
 specifications.

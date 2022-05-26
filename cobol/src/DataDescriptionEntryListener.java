@@ -11,18 +11,21 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	public DDNode parent = null;
 	public DDNode prev = null;
 	public DataLocation locn = null;
+	private ArrayList<CondCompVar> finalCompOptDefines = null;
 
 	public DataDescriptionEntryListener(
 			ArrayList<CobolProgram> programs
 			, Logger LOGGER
+			, ArrayList<CondCompVar> finalCompOptDefines
 			) {
 		super();
 		this.programs = programs;
 		this.LOGGER = LOGGER;
+		this.finalCompOptDefines = finalCompOptDefines;
 	}
 
 	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
-		//TestIntegration.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
+		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
 	public void setCurrProgram(String newProgramName) { 
@@ -92,23 +95,23 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 			return;
 		}
 
-		TestIntegration.LOGGER.finest(callingModuleName + " " + node);
+		this.LOGGER.finest(callingModuleName + " " + node);
 
 		if (node.hasNoParent()) {
-			TestIntegration.LOGGER.finest(node + " node.hasNoParent() == true");
+			this.LOGGER.finest(node + " node.hasNoParent() == true");
 			if (node.isNewRoot()) {
-				TestIntegration.LOGGER.finest(node + " node.isNewRoot() == true");
+				this.LOGGER.finest(node + " node.isNewRoot() == true");
 				prev = node;
 			} else {
-				TestIntegration.LOGGER.finest(node + " node.isNewRoot() == false");
+				this.LOGGER.finest(node + " node.isNewRoot() == false");
 				// a 77 level
 			}
 		} else if (prev == null) {
-				TestIntegration.LOGGER.finest(callingModuleName + " " + node + " prev == " + prev);
+				this.LOGGER.finest(callingModuleName + " " + node + " prev == " + prev);
 		} else if (node.level == null) {
-				TestIntegration.LOGGER.finest(callingModuleName + " " + node + " node.level == " + node.level);
+				this.LOGGER.finest(callingModuleName + " " + node + " node.level == " + node.level);
 		} else if (prev.level == null) {
-				TestIntegration.LOGGER.finest(callingModuleName + " " + prev);
+				this.LOGGER.finest(callingModuleName + " " + prev);
 		} else if (node.level.compareTo(prev.level) == 0) {
 				prev.parent.adopt(node);
 				node.parent = prev.parent;
@@ -127,4 +130,8 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 		this.currProgram.addDDNode(node);
 	}
 
+	public void enterConstantEntry(CobolParser.ConstantEntryContext ctx) {
+		this.currProgram.addConstantEntry(
+			new ConstantEntry(this.currProgram, ctx, this.locn, this.finalCompOptDefines));
+	}
 }

@@ -53,11 +53,6 @@ class CobolSource {
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private BasisStatement basisStatement = null;
 	private Boolean isCobol = true;
-	/*
-	finalCompOptDefines isn't used for anything right now, but it may be
-	of use resolving screenDescriptionConstantEntryClause should that
-	become needed
-	*/
 	private ArrayList<CondCompVar> finalCompOptDefines = new ArrayList<>();
 
 	public CobolSource(
@@ -830,14 +825,15 @@ class CobolSource {
 
 		ParseTreeWalker walker = new ParseTreeWalker();
 
-		DataDescriptionEntryListener listener = new DataDescriptionEntryListener(this.programs, this.LOGGER);
+		DataDescriptionEntryListener listener = 
+			new DataDescriptionEntryListener(this.programs, this.LOGGER, this.finalCompOptDefines);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
 
 		this.lookForCalledRoutines(tree, walker, aLib);
-		this.resolveCalledNodes(tree, walker, calledNodes, dataNodes);
+		this.resolveCalledNodes(tree, walker, this.calledNodes, this.dataNodes);
 	}
 
 	/**
