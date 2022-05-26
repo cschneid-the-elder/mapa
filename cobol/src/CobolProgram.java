@@ -28,8 +28,9 @@ class CobolProgram {
 	private String programName = null;
 	private ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 	private ArrayList<AssignClause> assignClauses = new ArrayList<>();
-	public ArrayList<DDNode> dataNodes = new ArrayList<>(); //TODO make private
-	public ArrayList<CobolProgram> programs = new ArrayList<>(); //TODO make private
+	private ArrayList<DDNode> dataNodes = new ArrayList<>();
+	private ArrayList<ConstantEntry> constantEntries = new ArrayList<>();
+	private ArrayList<CobolProgram> programs = new ArrayList<>();
 	private ArrayList<MoveStatement> moves = new ArrayList<>();
 	private ArrayList<Identifier> sets = new ArrayList<>();
 	private CobolProgram parent = null;
@@ -65,17 +66,6 @@ class CobolProgram {
 		return this.hasThisProgramName(pgm.getProgramName());
 	}
 
-	public Boolean hasThisDDNode01(DDNode ddNode) { //TODO remove
-		for (DDNode dataNode: this.dataNodes) {
-			if (dataNode.getLevel() != 1) continue;
-			if (dataNode.getUUID() == ddNode.getUUID()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 	/**
 	For each CALL, if it is of the form CALL identifier, locate the
 	identifier in the list of DDNodes for this program and any programs
@@ -100,9 +90,9 @@ class CobolProgram {
 					pgm = pgm.getParent();
 					LOGGER.finest(" parent = " + pgm);
 				}
-				if (resolved) {
+				if (resolved && call.getDataNode() != null) {
 					this.findAllTheRightMoves(call);
-				} else {
+				} else if (!resolved) {
 					this.LOGGER.warning(
 						"identifier " 
 						+ call.getCobolIdentifier()
@@ -143,6 +133,9 @@ class CobolProgram {
 		LOGGER.finest("  all node children named " + call.getCobolIdentifier() + " = " + calledDataNodes);
 		rc = call.selectDataNode(calledDataNodes);
 		LOGGER.finest("call.dataNode = " + call.getDataNode());
+		if (!rc) {
+			rc = call.selectConstant(this.constantEntries);
+		}
 		return rc;
 	}
 
@@ -230,6 +223,10 @@ class CobolProgram {
 		return this.dataNodes;
 	}
 
+	public ArrayList<ConstantEntry> getConstantEntries() {
+		return this.constantEntries;
+	}
+
 	/**
 	Return DDNodes marked GLOBAL or EXTERNAL as these may be
 	referenced in CALL statements by nested programs.
@@ -243,6 +240,21 @@ class CobolProgram {
 		}
 
 		return publicDataNodes;
+	}
+
+	/**
+	Return ConstantEntry marked GLOBAL as these may be
+	referenced in nested programs.
+	*/
+	public ArrayList<ConstantEntry> getPublicConstantEntries() {
+		ArrayList<ConstantEntry> publicConstantEntries = new ArrayList<>();
+		for (ConstantEntry constant: this.getConstantEntries()) {
+			if (constant.isGlobal()) {
+				publicConstantEntries.add(constant);
+			}
+		}
+
+		return publicConstantEntries;
 	}
 
 	public void addProgram(CobolProgram pgm) {
@@ -291,6 +303,10 @@ class CobolProgram {
 
 	public void addDDNode(DDNode node) {
 		this.dataNodes.add(node);
+	}
+
+	public void addConstantEntry(ConstantEntry constantEntry) {
+		this.constantEntries.add(constantEntry);
 	}
 
 	public void addAssignClause(AssignClause assignClause) {

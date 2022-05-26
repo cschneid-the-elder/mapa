@@ -53,6 +53,7 @@ class CallWrapper {
 	private String db2CallHostStructure = null;
 	public CobolParser.IdentifierContext idCtx = null;
 	public DDNode dataNode = null;
+	private ConstantEntry constantEntry;
 	public int line = -1;
 	public String aLib = null;
 	private ArrayList<QualifiedInData> qualInData = null;
@@ -211,6 +212,24 @@ class CallWrapper {
 		return this.getIdentifier().seemsToMatch(identifier);
 	}
 
+	public Boolean selectConstant(List<ConstantEntry> constantEntries) {
+		this.LOGGER.fine(this.myName + " " + this.callType + " @ " + this.line + " selectConstant()");
+		this.LOGGER.finest("  constantEntries = " + constantEntries);
+		Boolean found = false;
+
+		for (ConstantEntry constant: constantEntries) {
+			if (constant.getConstantName().equals(this.getCobolIdentifier())) {
+				this.LOGGER.finest("  found " + constant);
+				this.addCalledModuleName(constant.getStringValue());
+				this.constantEntry = constant;
+				found = true;
+				break;
+			}
+		}
+		
+		return found;
+	}
+	
 	private void initialize(CobolParser.CallStatementContext ctx) {
 		this.line = ctx.start.getLine();
 		this.initialize(

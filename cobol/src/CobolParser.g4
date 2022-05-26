@@ -781,7 +781,7 @@ fileSection
    ;
 
 fileDescriptionEntry
-   : (FD | SD) fileName ((DOT_FS | DOT)? fileDescriptionEntryClause)* (DOT_FS | DOT) dataDescriptionEntry*
+   : (FD | SD) fileName ((DOT_FS | DOT)? fileDescriptionEntryClause)* (DOT_FS | DOT) (constantEntry | dataDescriptionEntry)*
    ;
 
 fileDescriptionEntryClause
@@ -901,13 +901,13 @@ dataBaseSectionEntry
 // -- working storage section ----------------------------------
 
 workingStorageSection
-   : WORKING_STORAGE SECTION (DOT_FS | DOT) dataDescriptionEntry*
+   : WORKING_STORAGE SECTION (DOT_FS | DOT) (constantEntry | dataDescriptionEntry)*
    ;
 
 // -- linkage section ----------------------------------
 
 linkageSection
-   : LINKAGE SECTION (DOT_FS | DOT) dataDescriptionEntry*
+   : LINKAGE SECTION (DOT_FS | DOT) (constantEntry | dataDescriptionEntry)*
    ;
 
 // -- communication section ----------------------------------
@@ -991,34 +991,17 @@ textLengthClause
 // -- local storage section ----------------------------------
 
 localStorageSection
-   : LOCAL_STORAGE SECTION (DOT_FS | DOT) (LD localName (DOT_FS | DOT))? dataDescriptionEntry*
+   : LOCAL_STORAGE SECTION (DOT_FS | DOT) (LD localName (DOT_FS | DOT))? (constantEntry | dataDescriptionEntry)*
    ;
 
 // -- screen section ----------------------------------
 
 screenSection
-   : SCREEN SECTION (DOT_FS | DOT) screenDescriptionEntry*
+   : SCREEN SECTION (DOT_FS | DOT) (constantEntry | screenDescriptionEntry)*
    ;
 
 screenDescriptionEntry
-   : INTEGERLITERAL (FILLER | screenName)? (screenDescriptionConstantEntryClause | (screenDescriptionBlankClause | screenDescriptionBellClause | screenDescriptionBlinkClause | screenDescriptionEraseClause | screenDescriptionLightClause | screenDescriptionGridClause | screenDescriptionReverseVideoClause | screenDescriptionUnderlineClause | screenDescriptionSizeClause | screenDescriptionLineClause | screenDescriptionColumnClause | screenDescriptionForegroundColorClause | screenDescriptionBackgroundColorClause | screenDescriptionControlClause | screenDescriptionValueClause | screenDescriptionPictureClause | (screenDescriptionFromClause | screenDescriptionUsingClause) | screenDescriptionUsageClause | screenDescriptionBlankWhenZeroClause | screenDescriptionJustifiedClause | screenDescriptionSignClause | screenDescriptionAutoClause | screenDescriptionSecureClause | screenDescriptionRequiredClause | screenDescriptionPromptClause | screenDescriptionFullClause | screenDescriptionZeroFillClause)*) DOT_FS
-   ;
-
-screenDescriptionConstantEntryClause
-   : (CONSTANT (IS? GLOBAL)? (screenDescriptionConstantEntryLengthPhrase | screenDescriptionConstantEntryFromPhrase))
-   ;
-
-screenDescriptionConstantEntryLengthPhrase
-   : AS? 
-     (literal 
-     | (BYTE_LENGTH OF? dataName)
-     | arithmeticExpression
-     | (LENGTH OF? dataName)
-     )
-   ;
-
-screenDescriptionConstantEntryFromPhrase
-   : FROM dataName
+   : INTEGERLITERAL (FILLER | screenName)? (screenDescriptionBlankClause | screenDescriptionBellClause | screenDescriptionBlinkClause | screenDescriptionEraseClause | screenDescriptionLightClause | screenDescriptionGridClause | screenDescriptionReverseVideoClause | screenDescriptionUnderlineClause | screenDescriptionSizeClause | screenDescriptionLineClause | screenDescriptionColumnClause | screenDescriptionForegroundColorClause | screenDescriptionBackgroundColorClause | screenDescriptionControlClause | screenDescriptionValueClause | screenDescriptionPictureClause | (screenDescriptionFromClause | screenDescriptionUsingClause) | screenDescriptionUsageClause | screenDescriptionBlankWhenZeroClause | screenDescriptionJustifiedClause | screenDescriptionSignClause | screenDescriptionAutoClause | screenDescriptionSecureClause | screenDescriptionRequiredClause | screenDescriptionPromptClause | screenDescriptionFullClause | screenDescriptionZeroFillClause)* DOT_FS
    ;
 
 screenDescriptionBlankClause
@@ -1148,7 +1131,7 @@ reportSection
    ;
 
 reportDescription
-   : reportDescriptionEntry reportGroupDescriptionEntry+
+   : reportDescriptionEntry (constantEntry | reportGroupDescriptionEntry)+
    ;
 
 reportDescriptionEntry
@@ -1371,6 +1354,25 @@ libraryIsCommonClause
 
 libraryIsGlobalClause
    : IS? GLOBAL
+   ;
+
+// constant entry ------------------------------------------
+
+constantEntry
+   : INTEGERLITERAL constantName (CONSTANT (IS? GLOBAL)? (constantEntryAsPhrase | constantEntryFromPhrase)) (DOT_FS | DOT)
+   ;
+
+constantEntryAsPhrase
+   : AS? 
+     (literal 
+     | (BYTE_LENGTH OF? dataName)
+     | arithmeticExpression
+     | (LENGTH OF? dataName)
+     )
+   ;
+
+constantEntryFromPhrase
+   : FROM dataName
    ;
 
 // data description entry ----------------------------------
@@ -3322,6 +3324,10 @@ computerName
    ;
 
 conditionName
+   : cobolWord
+   ;
+
+constantName
    : cobolWord
    ;
 

@@ -1,3 +1,4 @@
+       Process DEFINE(GRAYZA,'PGM00001')
        Identification Division.
        Program-ID.    test9038
        Environment Division.
@@ -26,8 +27,9 @@
              For National Is Farscape1
            .
        Working-Storage Section.
-       01  Constants CONSTANT RECORD.
-           05  MYNAME             PIC X(008) VALUE 'test9038'.
+       01  MYNAME Constant              'test9038'.
+       01  PGM1   Constant         From GRAYZA.
+       01  PGM2   Constant           As 'PGM00002'.
            
        01  Work-Areas.
            05  Scorpius Constant Record PIC X Value x'42'.
@@ -59,5 +61,7 @@
        Linkage Section.
        01  BialarCrais                  pic x any length.
        Procedure Division.
+           Call PGM1
+           Call PGM2
            GOBACK.
        End Program test9038.
