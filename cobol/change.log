@@ -1,4 +1,12 @@
 --2022-05-26--------------------------------------------------------------------
+Modified CobolLexer.g4 and CobolParser.g4 to allow for Picture Clause Editing
+and Locale phrases.  This further complicates the lexer, as additional ANTLR
+modes are required, or at least that's the only way I can see to allow for
+the syntax.  
+
+testdata/local/test9039.cbl added to test these changes.
+
+--2022-05-26--------------------------------------------------------------------
 Fixed incorrect implementation of constantEntry in CobolParser.g4 and added
 representative class ConstantEntry.  Modified DataDescriptionEntryListener,
 CobolProgram, CondCompVar, and CallWrapper to allow for potential syntax...

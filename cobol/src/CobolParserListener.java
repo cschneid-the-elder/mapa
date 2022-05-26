@@ -2967,6 +2967,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitPictureCardinality(CobolParser.PictureCardinalityContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#pictureEditingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterPictureEditingPhrase(CobolParser.PictureEditingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#pictureEditingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitPictureEditingPhrase(CobolParser.PictureEditingPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#pictureLocalePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterPictureLocalePhrase(CobolParser.PictureLocalePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#pictureLocalePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitPictureLocalePhrase(CobolParser.PictureLocalePhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#dataPropertyClause}.
 	 * @param ctx the parse tree
 	 */

@@ -3567,6 +3567,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterPictureEditingPhrase(CobolParser.PictureEditingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPictureEditingPhrase(CobolParser.PictureEditingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterPictureLocalePhrase(CobolParser.PictureLocalePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitPictureLocalePhrase(CobolParser.PictureLocalePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDataPropertyClause(CobolParser.DataPropertyClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}

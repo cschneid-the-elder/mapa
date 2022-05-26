@@ -1125,7 +1125,14 @@ VALUE_PIC : V A L U E ->popMode;
 DOT_FS_PIC : DOT_FS ->type(DOT_FS),popMode;
 DOT_WS : '. ' ->popMode;
 
-IS_PIC : I S;
+IS_PIC : I S ->type(IS);
+EDITING : E D I T I N G ->pushMode(EDITING_PIC_MODE1);
+LOCALE_PIC : LOCALE ->type(LOCALE),pushMode(LOCALE_PIC_MODE);
+FOR_PIC : FOR ->type(FOR);
+NEGATIVE_PIC : NEGATIVE ->type(NEGATIVE);
+POSITIVE_PIC : POSITIVE ->type(POSITIVE);
+NONNUMERICLITERAL_PIC : NONNUMERICLITERAL ->type(NONNUMERICLITERAL);
+
 /*
 These are the actual symbols allowed in a PICTURE clause, but, owing to the
 CURRENCY SIGN phrase in the SPECIAL-NAMES paragraph, we must allow pretty 
@@ -1141,6 +1148,24 @@ CLASSIC_COMMENTLINE_PIC : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR
 CLASSIC_LINE_NUMBER_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
 CLASSIC_DEBUG_LINE_PIC : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA D TEXTA* {getCharPositionInLine() < 73}? -> skip;
 CLASSIC_EOL_COMMENT_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {testRig && getCharPositionInLine()==80}? -> skip;
+
+mode EDITING_PIC_MODE1;
+
+WS_E1 : [ \t\f\n\r]+ -> channel(HIDDEN),pushMode(EDITING_PIC_MODE2);
+
+mode EDITING_PIC_MODE2;
+
+EDITING_CHARACTER : ~[ \t\f\n\r]+?;
+
+WS_E2 : [ \t\f\n\r]+ -> channel(HIDDEN),popMode,popMode;
+
+mode LOCALE_PIC_MODE;
+
+IS_LOCALE : IS ->type(IS);
+WS_LOCALE : [ \t\f\n\r]+ ->channel(HIDDEN);
+SIZE_LOCALE : SIZE ->type(SIZE);
+INTEGERLITERAL_LOCALE : INTEGERLITERAL ->type(INTEGERLITERAL),popMode;
+IDENTIFIER_LOCALE : IDENTIFIER ->type(IDENTIFIER);
 
 mode FFT;
 

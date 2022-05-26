@@ -2088,6 +2088,20 @@ public class CobolParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imple
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitPictureEditingPhrase(CobolParser.PictureEditingPhraseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitPictureLocalePhrase(CobolParser.PictureLocalePhraseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitDataPropertyClause(CobolParser.DataPropertyClauseContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

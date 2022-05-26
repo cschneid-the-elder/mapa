@@ -1466,7 +1466,7 @@ dataOccursIndexed
    ;
 
 dataPictureClause
-   : (PICTURE | PIC) (IS | IS_PIC)? pictureString (BYTE_LENGTH IS? INTEGERLITERAL)?
+   : (PICTURE | PIC) IS? pictureString (BYTE_LENGTH IS? INTEGERLITERAL)? (pictureEditingPhrase | pictureLocalePhrase)?
    ;
 
 pictureString
@@ -1479,6 +1479,14 @@ pictureChars
 
 pictureCardinality
    : PICTURE_CARDINALITY
+   ;
+
+pictureEditingPhrase
+   : EDITING EDITING_CHARACTER ((IS? literal) | (FOR? NEGATIVE IS? literal POSITIVE IS? literal))?
+   ;
+
+pictureLocalePhrase
+   : LOCALE (IS? localeName)? SIZE IS? INTEGERLITERAL
    ;
 
 dataPropertyClause
@@ -1510,7 +1518,7 @@ dataSelectWhenClause
    ;
 
 dataSignClause
-   : ((SIGN | SIGN_PIC) (IS | IS_PIC)?)? (LEADING | TRAILING) (SEPARATE CHARACTER?)?
+   : ((SIGN | SIGN_PIC) IS?)? (LEADING | TRAILING) (SEPARATE CHARACTER?)?
    ;
 
 dataSynchronizedClause
