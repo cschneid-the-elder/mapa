@@ -1786,6 +1786,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPictureCardinality(CobolParser.PictureCardinalityContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#pictureEditingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPictureEditingPhrase(CobolParser.PictureEditingPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#pictureLocalePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPictureLocalePhrase(CobolParser.PictureLocalePhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#dataPropertyClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
