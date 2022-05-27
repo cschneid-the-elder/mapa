@@ -178,8 +178,11 @@ arithmeticClause
    ;
    
 defaultRoundedClause
-   : DEFAULT ROUNDED MODE? IS? 
-     (AWAY_FROM_ZERO
+   : DEFAULT ROUNDED MODE? IS? roundedMode
+   ;
+
+roundedMode
+   : (AWAY_FROM_ZERO
      | NEAREST_AWAY_FROM_ZERO
      | NEAREST_EVEN
      | NEAREST_TOWARD_ZERO
@@ -1660,7 +1663,7 @@ dataWithLowerBoundsClause
 // --- procedure division --------------------------------------------------------------------
 
 procedureDivision
-   : PROCEDURE DIVISION procedureDivisionUsingClause? procedureDivisionGivingClause? (DOT_FS | DOT) procedureDeclaratives? procedureDivisionBody
+   : PROCEDURE DIVISION procedureDivisionUsingClause? procedureDivisionGivingClause? procedureDivisionRaisingClause? (DOT_FS | DOT) procedureDeclaratives? procedureDivisionBody
    ;
 
 procedureDivisionUsingClause
@@ -1669,6 +1672,13 @@ procedureDivisionUsingClause
 
 procedureDivisionGivingClause
    : (GIVING | RETURNING) dataName
+   ;
+
+procedureDivisionRaisingClause
+   : (RAISING 
+     (exceptionName
+     | ((FACTORY OF?)? className)
+     | interfaceName)+)
    ;
 
 procedureDivisionUsingParameter
@@ -1774,7 +1784,7 @@ addFrom
    ;
 
 addTo
-   : identifier ROUNDED? COMMACHAR?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)? COMMACHAR?
    ;
 
 addToGiving
@@ -1782,7 +1792,7 @@ addToGiving
    ;
 
 addGiving
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 // allocate statement
@@ -1904,7 +1914,7 @@ computeStatement
    ;
 
 computeStore
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 // continue statement
@@ -1970,11 +1980,11 @@ divideGivingPhrase
    ;
 
 divideInto
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 divideGiving
-   : identifier ROUNDED?
+   : identifier(ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 divideRemainder
@@ -2390,7 +2400,7 @@ multiplyRegular
    ;
 
 multiplyRegularOperand
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 multiplyGiving
@@ -2402,7 +2412,7 @@ multiplyGivingOperand
    ;
 
 multiplyGivingResult
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 // next sentence
@@ -2800,7 +2810,7 @@ subtractSubtrahend
    ;
 
 subtractMinuend
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 subtractMinuendGiving
@@ -2808,11 +2818,11 @@ subtractMinuendGiving
    ;
 
 subtractGiving
-   : identifier ROUNDED?
+   : identifier (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 subtractMinuendCorresponding
-   : qualifiedDataName ROUNDED?
+   : qualifiedDataName (ROUNDED (MODE IS? roundedMode)?)?
    ;
 
 // terminate statement
@@ -3349,6 +3359,10 @@ dataDescName
 
 environmentName
    : systemName
+   ;
+
+exceptionName
+   : cobolWord
    ;
 
 fileName

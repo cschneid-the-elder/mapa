@@ -315,6 +315,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRoundedMode(CobolParser.RoundedModeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRoundedMode(CobolParser.RoundedModeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterEntryConventionClause(CobolParser.EntryConventionClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3874,6 +3886,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitProcedureDivisionGivingClause(CobolParser.ProcedureDivisionGivingClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterProcedureDivisionRaisingClause(CobolParser.ProcedureDivisionRaisingClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitProcedureDivisionRaisingClause(CobolParser.ProcedureDivisionRaisingClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -8242,6 +8266,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitEnvironmentName(CobolParser.EnvironmentNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExceptionName(CobolParser.ExceptionNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExceptionName(CobolParser.ExceptionNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

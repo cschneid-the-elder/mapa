@@ -160,6 +160,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDefaultRoundedClause(CobolParser.DefaultRoundedClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#roundedMode}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRoundedMode(CobolParser.RoundedModeContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#entryConventionClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1941,6 +1947,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitProcedureDivisionGivingClause(CobolParser.ProcedureDivisionGivingClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#procedureDivisionRaisingClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProcedureDivisionRaisingClause(CobolParser.ProcedureDivisionRaisingClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#procedureDivisionUsingParameter}.
 	 * @param ctx the parse tree
@@ -4125,6 +4137,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitEnvironmentName(CobolParser.EnvironmentNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#exceptionName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExceptionName(CobolParser.ExceptionNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#fileName}.
 	 * @param ctx the parse tree

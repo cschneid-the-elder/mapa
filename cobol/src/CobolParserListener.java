@@ -257,6 +257,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitDefaultRoundedClause(CobolParser.DefaultRoundedClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#roundedMode}.
+	 * @param ctx the parse tree
+	 */
+	void enterRoundedMode(CobolParser.RoundedModeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#roundedMode}.
+	 * @param ctx the parse tree
+	 */
+	void exitRoundedMode(CobolParser.RoundedModeContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#entryConventionClause}.
 	 * @param ctx the parse tree
 	 */
@@ -3226,6 +3236,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitProcedureDivisionGivingClause(CobolParser.ProcedureDivisionGivingClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#procedureDivisionRaisingClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterProcedureDivisionRaisingClause(CobolParser.ProcedureDivisionRaisingClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#procedureDivisionRaisingClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitProcedureDivisionRaisingClause(CobolParser.ProcedureDivisionRaisingClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#procedureDivisionUsingParameter}.
 	 * @param ctx the parse tree
@@ -6866,6 +6886,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitEnvironmentName(CobolParser.EnvironmentNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#exceptionName}.
+	 * @param ctx the parse tree
+	 */
+	void enterExceptionName(CobolParser.ExceptionNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#exceptionName}.
+	 * @param ctx the parse tree
+	 */
+	void exitExceptionName(CobolParser.ExceptionNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#fileName}.
 	 * @param ctx the parse tree
