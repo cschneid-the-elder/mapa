@@ -1802,7 +1802,7 @@ addGiving
 // allocate statement
 
 allocateStatement
-   : ALLOCATE ((identifier CHARACTERS) | arithmeticExpression) INITIALIZED? (LOC literal)? (RETURNING identifier)?
+   : ALLOCATE ((arithmeticExpression CHARACTERS) | identifier) INITIALIZED? (LOC integerLiteral)? (RETURNING identifier)?
    ;
 
 // altered go to statement

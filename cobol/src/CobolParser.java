@@ -37104,20 +37104,20 @@ public class CobolParser extends Parser {
 
 	public static class AllocateStatementContext extends ParserRuleContext {
 		public TerminalNode ALLOCATE() { return getToken(CobolParser.ALLOCATE, 0); }
-		public ArithmeticExpressionContext arithmeticExpression() {
-			return getRuleContext(ArithmeticExpressionContext.class,0);
-		}
-		public TerminalNode INITIALIZED() { return getToken(CobolParser.INITIALIZED, 0); }
-		public TerminalNode LOC() { return getToken(CobolParser.LOC, 0); }
-		public LiteralContext literal() {
-			return getRuleContext(LiteralContext.class,0);
-		}
-		public TerminalNode RETURNING() { return getToken(CobolParser.RETURNING, 0); }
 		public List<IdentifierContext> identifier() {
 			return getRuleContexts(IdentifierContext.class);
 		}
 		public IdentifierContext identifier(int i) {
 			return getRuleContext(IdentifierContext.class,i);
+		}
+		public TerminalNode INITIALIZED() { return getToken(CobolParser.INITIALIZED, 0); }
+		public TerminalNode LOC() { return getToken(CobolParser.LOC, 0); }
+		public IntegerLiteralContext integerLiteral() {
+			return getRuleContext(IntegerLiteralContext.class,0);
+		}
+		public TerminalNode RETURNING() { return getToken(CobolParser.RETURNING, 0); }
+		public ArithmeticExpressionContext arithmeticExpression() {
+			return getRuleContext(ArithmeticExpressionContext.class,0);
 		}
 		public TerminalNode CHARACTERS() { return getToken(CobolParser.CHARACTERS, 0); }
 		public AllocateStatementContext(ParserRuleContext parent, int invokingState) {
@@ -37155,7 +37155,7 @@ public class CobolParser extends Parser {
 				{
 				{
 				setState(5072);
-				identifier();
+				arithmeticExpression();
 				setState(5073);
 				match(CHARACTERS);
 				}
@@ -37164,7 +37164,7 @@ public class CobolParser extends Parser {
 			case 2:
 				{
 				setState(5075);
-				arithmeticExpression();
+				identifier();
 				}
 				break;
 			}
@@ -37186,7 +37186,7 @@ public class CobolParser extends Parser {
 				setState(5081);
 				match(LOC);
 				setState(5082);
-				literal();
+				integerLiteral();
 				}
 			}
 
@@ -70924,11 +70924,11 @@ public class CobolParser extends Parser {
 		"\u0198\2\2\u13c9\u13cb\7\u0164\2\2\u13ca\u13c9\3\2\2\2\u13ca\u13cb\3\2"+
 		"\2\2\u13cb\u13cc\3\2\2\2\u13cc\u13ce\5\64\33\2\u13cd\u13c8\3\2\2\2\u13cd"+
 		"\u13ce\3\2\2\2\u13ce\u13d0\3\2\2\2\u13cf\u13c7\3\2\2\2\u13cf\u13d0\3\2"+
-		"\2\2\u13d0\u02c1\3\2\2\2\u13d1\u13d6\7.\2\2\u13d2\u13d3\5\u0522\u0292"+
-		"\2\u13d3\u13d4\7t\2\2\u13d4\u13d7\3\2\2\2\u13d5\u13d7\5\u04f8\u027d\2"+
+		"\2\2\u13d0\u02c1\3\2\2\2\u13d1\u13d6\7.\2\2\u13d2\u13d3\5\u04f8\u027d"+
+		"\2\u13d3\u13d4\7t\2\2\u13d4\u13d7\3\2\2\2\u13d5\u13d7\5\u0522\u0292\2"+
 		"\u13d6\u13d2\3\2\2\2\u13d6\u13d5\3\2\2\2\u13d7\u13d9\3\2\2\2\u13d8\u13da"+
 		"\7\u0157\2\2\u13d9\u13d8\3\2\2\2\u13d9\u13da\3\2\2\2\u13da\u13dd\3\2\2"+
-		"\2\u13db\u13dc\7\u0185\2\2\u13dc\u13de\5\u05a0\u02d1\2\u13dd\u13db\3\2"+
+		"\2\u13db\u13dc\7\u0185\2\2\u13dc\u13de\5\u05a8\u02d5\2\u13dd\u13db\3\2"+
 		"\2\2\u13dd\u13de\3\2\2\2\u13de\u13e1\3\2\2\2\u13df\u13e0\7\u021c\2\2\u13e0"+
 		"\u13e2\5\u0522\u0292\2\u13e1\u13df\3\2\2\2\u13e1\u13e2\3\2\2\2\u13e2\u02c3"+
 		"\3\2\2\2\u13e3\u13e5\7\u013d\2\2\u13e4\u13e6\7\u027f\2\2\u13e5\u13e4\3"+

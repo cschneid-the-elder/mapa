@@ -8,6 +8,7 @@
            05  Crichton Picture Is S9(5) Packed-Decimal Value +3.
            05  Dargo    Picture Is S9(5) Packed-Decimal Value +4.
            05  Rygel    Picture Is S9(5) Packed-Decimal Value +0.
+           05  Stark    Pointer.
        Procedure Division.
            Add 1 To Aeryn Rounded Mode AWAY-FROM-ZERO
            Add 1 To Aeryn Giving Rygel 
@@ -35,6 +36,7 @@
            Multiply Aeryn By Crichton  
            Multiply Braca By Crichton Giving Rygel 
 
+           Allocate Function Length(Aeryn) Returning Stark
            Goback
            .
 

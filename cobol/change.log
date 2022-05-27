@@ -1,3 +1,9 @@
+--2022-05-27--------------------------------------------------------------------
+Modified CobolLexer.g4 and CobolParser.g4 per the 202x draft standard to allow 
+for Procedure Division Rounded phrase, acceptScreenStatement.
+
+Corrected (probably harmless) errata in Allocate statement.
+
 --2022-05-26--------------------------------------------------------------------
 Modified CobolLexer.g4 and CobolParser.g4 to allow for Picture Clause Editing
 and Locale phrases.  This further complicates the lexer, as additional ANTLR
