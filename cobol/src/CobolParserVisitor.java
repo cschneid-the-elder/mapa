@@ -2068,6 +2068,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAcceptMessageCountStatement(CobolParser.AcceptMessageCountStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#acceptScreenStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAcceptScreenStatement(CobolParser.AcceptScreenStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#addStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

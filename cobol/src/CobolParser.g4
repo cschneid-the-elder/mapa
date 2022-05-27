@@ -1742,7 +1742,7 @@ statement
 // accept statement
 
 acceptStatement
-   : ACCEPT identifier (acceptFromDateStatement | acceptFromEscapeKeyStatement | acceptFromMnemonicStatement | acceptMessageCountStatement)? onExceptionClause? notOnExceptionClause? END_ACCEPT?
+   : ACCEPT identifier (acceptFromDateStatement | acceptFromEscapeKeyStatement | acceptFromMnemonicStatement | acceptMessageCountStatement | acceptScreenStatement)? onExceptionClause? notOnExceptionClause? END_ACCEPT?
    ;
 
 acceptFromDateStatement
@@ -1759,6 +1759,10 @@ acceptFromEscapeKeyStatement
 
 acceptMessageCountStatement
    : MESSAGE? COUNT
+   ;
+
+acceptScreenStatement
+   : (AT (LINE NUMBER? (identifier | integerLiteral)) | ((COLUMN | COL) NUMBER? (identifier | integerLiteral)))
    ;
 
 // add statement

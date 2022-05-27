@@ -4131,6 +4131,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAcceptScreenStatement(CobolParser.AcceptScreenStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAcceptScreenStatement(CobolParser.AcceptScreenStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAddStatement(CobolParser.AddStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
