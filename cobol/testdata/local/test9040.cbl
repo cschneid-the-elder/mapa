@@ -9,6 +9,7 @@
            05  Dargo    Picture Is S9(5) Packed-Decimal Value +4.
            05  Rygel    Picture Is S9(5) Packed-Decimal Value +0.
            05  Stark    Pointer.
+           05  Noranti  Picture Is 1(8).
        Procedure Division.
            Add 1 To Aeryn Rounded Mode AWAY-FROM-ZERO
            Add 1 To Aeryn Giving Rygel 
@@ -37,6 +38,12 @@
            Multiply Braca By Crichton Giving Rygel 
 
            Allocate Function Length(Aeryn) Returning Stark
+           
+           Compute Noranti = B-NOT (Stark B-OR Noranti)
+           Compute Noranti = b'10101' b-and b'0101'
+           Compute Noranti = Stark B-And b'101'
+           Compute Noranti = Crichton B-XOR Scorpius B-AND (Grayza
+                             B-OR B-Not Braca)
            Goback
            .
 

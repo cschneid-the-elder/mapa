@@ -100,7 +100,7 @@ identificationDivisionBody
 
 programIdParagraph
    : PROGRAM_ID (DOT | DOT_FS)
-     programName (AS literal)? (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
+     programName (AS literal)? (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE | PROTOTYPE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
    ;
 
 // - class id paragraph --------------------------------
@@ -1736,7 +1736,7 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -1909,6 +1909,12 @@ closePortFileIOUsingAssociatedData
 
 closePortFileIOUsingAssociatedDataLength
    : ASSOCIATED_DATA_LENGTH OF? (identifier | integerLiteral)
+   ;
+
+// commit statement
+
+commitStatement
+   : COMMIT
    ;
 
 // compute statement
@@ -3104,8 +3110,16 @@ notOnExceptionClause
 
 // arithmetic expression ----------------------------------
 
+/*
+Including booleanExpression here is the only way I found to
+avoid the abiguity resulting from both arithmeticExpression
+and booleanExpression allowing a single identifier or a
+single literal.  Keeping them separate and as options in the
+computeStatement resulted in parsing problems regardless of
+their order.
+*/
 arithmeticExpression
-   : multDivs plusMinus*
+   : multDivs plusMinus* | booleanExpression
    ;
 
 plusMinus
@@ -3130,6 +3144,27 @@ power
 
 basis
    : LPARENCHAR arithmeticExpression RPARENCHAR | identifier | literal
+   ;
+
+// booleanExpression --------------------------
+
+/*
+Enclosing the options within parentheses will get you a
+mutual left recursion error for this rule (with itself, ironically).
+*/
+booleanExpression
+   : 
+     booleanExpression binaryBooleanOperator booleanExpression 
+   | unaryBooleanOperator booleanExpression 
+   | (LPARENCHAR booleanExpression RPARENCHAR) 
+   | booleanExpression booleanShiftOperator integerLiteral
+   | identifier 
+   | (ALL? literal) 
+   | figurativeZero
+   ;
+
+figurativeZero
+   : (ZERO | ZEROS | ZEROES)
    ;
 
 // condition ----------------------------------
@@ -3815,6 +3850,22 @@ intrinsicFunctionName
    | VARIANCE
    | WHEN_COMPILED
    | YEAR_TO_YYYY
+   ;
+
+binaryBooleanOperator
+   : (B_AND | B_OR | B_XOR)
+   ;
+
+unaryBooleanOperator
+   : B_NOT
+   ;
+
+booleanShiftOperator
+   : (B_SHIFT_L | B_SHIFT_LC | B_SHIFT_R | B_SHIFT_RC)
+   ;
+
+booleanOperator
+   : (binaryBooleanOperator | unaryBooleanOperator | booleanShiftOperator)
    ;
 
 literal

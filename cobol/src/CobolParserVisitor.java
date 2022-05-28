@@ -2272,6 +2272,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitClosePortFileIOUsingAssociatedDataLength(CobolParser.ClosePortFileIOUsingAssociatedDataLengthContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#commitStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCommitStatement(CobolParser.CommitStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#computeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3862,6 +3868,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBasis(CobolParser.BasisContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#booleanExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanExpression(CobolParser.BooleanExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#figurativeZero}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFigurativeZero(CobolParser.FigurativeZeroContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#condition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -4323,6 +4341,30 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitIntrinsicFunctionName(CobolParser.IntrinsicFunctionNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#binaryBooleanOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinaryBooleanOperator(CobolParser.BinaryBooleanOperatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#unaryBooleanOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnaryBooleanOperator(CobolParser.UnaryBooleanOperatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#booleanShiftOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanShiftOperator(CobolParser.BooleanShiftOperatorContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#booleanOperator}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBooleanOperator(CobolParser.BooleanOperatorContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#literal}.
 	 * @param ctx the parse tree

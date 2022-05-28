@@ -3777,6 +3777,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitClosePortFileIOUsingAssociatedDataLength(CobolParser.ClosePortFileIOUsingAssociatedDataLengthContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#commitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterCommitStatement(CobolParser.CommitStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#commitStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitCommitStatement(CobolParser.CommitStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#computeStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -6427,6 +6437,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitBasis(CobolParser.BasisContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#booleanExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanExpression(CobolParser.BooleanExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#booleanExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanExpression(CobolParser.BooleanExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#figurativeZero}.
+	 * @param ctx the parse tree
+	 */
+	void enterFigurativeZero(CobolParser.FigurativeZeroContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#figurativeZero}.
+	 * @param ctx the parse tree
+	 */
+	void exitFigurativeZero(CobolParser.FigurativeZeroContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#condition}.
 	 * @param ctx the parse tree
 	 */
@@ -7196,6 +7226,46 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitIntrinsicFunctionName(CobolParser.IntrinsicFunctionNameContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#binaryBooleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinaryBooleanOperator(CobolParser.BinaryBooleanOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#binaryBooleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinaryBooleanOperator(CobolParser.BinaryBooleanOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#unaryBooleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnaryBooleanOperator(CobolParser.UnaryBooleanOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#unaryBooleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnaryBooleanOperator(CobolParser.UnaryBooleanOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#booleanShiftOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanShiftOperator(CobolParser.BooleanShiftOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#booleanShiftOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanShiftOperator(CobolParser.BooleanShiftOperatorContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#booleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void enterBooleanOperator(CobolParser.BooleanOperatorContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#booleanOperator}.
+	 * @param ctx the parse tree
+	 */
+	void exitBooleanOperator(CobolParser.BooleanOperatorContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#literal}.
 	 * @param ctx the parse tree
