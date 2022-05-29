@@ -3827,6 +3827,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitDeleteStatement(CobolParser.DeleteStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#deleteStatementFormat1}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeleteStatementFormat1(CobolParser.DeleteStatementFormat1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#deleteStatementFormat1}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeleteStatementFormat1(CobolParser.DeleteStatementFormat1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#deleteStatementFormat2}.
+	 * @param ctx the parse tree
+	 */
+	void enterDeleteStatementFormat2(CobolParser.DeleteStatementFormat2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#deleteStatementFormat2}.
+	 * @param ctx the parse tree
+	 */
+	void exitDeleteStatementFormat2(CobolParser.DeleteStatementFormat2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#disableStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -6346,6 +6366,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitNotOnSizeErrorPhrase(CobolParser.NotOnSizeErrorPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#retryPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterRetryPhrase(CobolParser.RetryPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#retryPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitRetryPhrase(CobolParser.RetryPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#onExceptionClause}.
 	 * @param ctx the parse tree

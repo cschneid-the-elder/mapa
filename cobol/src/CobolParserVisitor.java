@@ -2302,6 +2302,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDeleteStatement(CobolParser.DeleteStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#deleteStatementFormat1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeleteStatementFormat1(CobolParser.DeleteStatementFormat1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#deleteStatementFormat2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDeleteStatementFormat2(CobolParser.DeleteStatementFormat2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#disableStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3813,6 +3825,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitNotOnSizeErrorPhrase(CobolParser.NotOnSizeErrorPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#retryPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRetryPhrase(CobolParser.RetryPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#onExceptionClause}.
 	 * @param ctx the parse tree

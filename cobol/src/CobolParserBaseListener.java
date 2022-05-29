@@ -4599,6 +4599,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterDeleteStatementFormat1(CobolParser.DeleteStatementFormat1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeleteStatementFormat1(CobolParser.DeleteStatementFormat1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterDeleteStatementFormat2(CobolParser.DeleteStatementFormat2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitDeleteStatementFormat2(CobolParser.DeleteStatementFormat2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDisableStatement(CobolParser.DisableStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7618,6 +7642,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitNotOnSizeErrorPhrase(CobolParser.NotOnSizeErrorPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterRetryPhrase(CobolParser.RetryPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRetryPhrase(CobolParser.RetryPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1930,13 +1930,21 @@ computeStore
 // continue statement
 
 continueStatement
-   : CONTINUE
+   : CONTINUE (AFTER arithmeticExpression SECONDS)?
    ;
 
 // delete statement
 
 deleteStatement
-   : DELETE fileName RECORD? invalidKeyPhrase? notInvalidKeyPhrase? END_DELETE?
+   : deleteStatementFormat1 | deleteStatementFormat2
+   ;
+
+deleteStatementFormat1
+   : DELETE fileName RECORD? retryPhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_DELETE?
+   ;
+
+deleteStatementFormat2
+   : DELETE FILE OVERRIDE? fileName+ onExceptionClause? notOnExceptionClause? END_DELETE?
    ;
 
 // disable statement
@@ -3098,6 +3106,12 @@ notOnSizeErrorPhrase
    : NOT ON? SIZE ERROR statement*
    ;
 
+retryPhrase
+   : RETRY 
+     ((arithmeticExpression TIMES)
+     | (FOR arithmeticExpression SECONDS)
+     | FOREVER)
+   ;
 // statement clauses ----------------------------------
 
 onExceptionClause
@@ -3533,8 +3547,8 @@ cobolWord
    | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
-   | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | REVERSE_VIDEO
-   | SAVE | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STRONG | SYMBOL
+   | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO
+   | SAVE | SECONDS | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STRONG | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF
    | UNDERLINE
    | VIRTUAL
@@ -3725,10 +3739,12 @@ cicsWord
    | RELEASE
    | REPLACE
    | RESET
+   | RETRY
    | RETURN
    | REWIND
    | REWRITE
    | RUN
+   | SECONDS
    | SECURITY
    | SEND
    | SERVICE

@@ -44,6 +44,38 @@
            Compute Noranti = Stark B-And b'101'
            Compute Noranti = Crichton B-XOR Scorpius B-AND (Grayza
                              B-OR B-Not Braca)
+                             
+           Continue
+           Continue After 1 + 2 * 3 Seconds
+           
+           Delete Moya Record
+             Invalid Key Display 'Oops'
+             Not Invalid Key Display 'All fine'
+           End-Delete
+           Delete Moya Record
+             Retry 2 + 3 Times
+             Invalid Key Display 'Oops'
+             Not Invalid Key Display 'All fine'
+           End-Delete
+           Delete Moya Record
+             Retry For 2 + 3 Seconds
+             Invalid Key Display 'Oops'
+             Not Invalid Key Display 'All fine'
+           End-Delete
+           Delete Moya Record
+             Retry Forever
+             Invalid Key Display 'Oops'
+             Not Invalid Key Display 'All fine'
+           End-Delete
+           Delete File Moya Talyn
+             On Exception Display 'Nope'
+             Not On Exception Display 'Yup'
+           End-Delete
+           Delete File Override Talyn
+             On Exception Display 'Nope'
+             Not On Exception Display 'Yup'
+           End-Delete
+
            Goback
            .
 

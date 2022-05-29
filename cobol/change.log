@@ -1,10 +1,19 @@
---2022-05-27--------------------------------------------------------------------
+--2022-05-28--------------------------------------------------------------------
 Modified CobolLexer.g4 and CobolParser.g4 per the 202x draft standard to allow 
 for Procedure Division Rounded phrase, acceptScreenStatement.
 
 Corrected (probably harmless) errata in Allocate statement.
 
-Added booleanExpression for computeStatement.
+Added booleanExpression for computeStatement.  This was slightly odd, in that
+ANTLR can't distinguish between arithmeticExpression and booleanExpression 
+with certainty.  Parsing errors abounded until I made booleanExpression an
+alternative within the arithmeticExpression rule.
+
+Added "after" syntax to continueStatement.
+
+Added deleteStatementFormat2, changed name of deleteStatement to
+deleteStatementFormat1 and created new deleteStatement rule which is either
+format1 or format2.
 
 Added testdata/local/test9040.cbl to test these changes.
 
