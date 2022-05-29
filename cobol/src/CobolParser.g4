@@ -1956,6 +1956,10 @@ disableStatement
 // display statement
 
 displayStatement
+   : displayStatementFormat1 | displayStatementFormat2
+   ;
+
+displayStatementFormat1
    : DISPLAY displayOperand+ displayAt? displayUpon? displayWith? onExceptionClause? notOnExceptionClause? END_DISPLAY?
    ;
 
@@ -1973,6 +1977,14 @@ displayUpon
 
 displayWith
    : WITH? NO ADVANCING
+   ;
+
+displayStatementFormat2
+   : DISPLAY screenName displayAtFormat2? onExceptionClause? notOnExceptionClause? END_DISPLAY?
+   ;
+
+displayAtFormat2
+   : AT ((LINE NUMBER? (identifier | integerLiteral)) | ((COLUMN | COL) NUMBER? (identifier | integerLiteral)))
    ;
 
 // divide statement

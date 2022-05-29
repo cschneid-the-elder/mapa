@@ -2326,6 +2326,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDisplayStatement(CobolParser.DisplayStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#displayStatementFormat1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDisplayStatementFormat1(CobolParser.DisplayStatementFormat1Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#displayOperand}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2349,6 +2355,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitDisplayWith(CobolParser.DisplayWithContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#displayStatementFormat2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDisplayStatementFormat2(CobolParser.DisplayStatementFormat2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#displayAtFormat2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDisplayAtFormat2(CobolParser.DisplayAtFormat2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#divideStatement}.
 	 * @param ctx the parse tree

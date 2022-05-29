@@ -76,6 +76,20 @@
              Not On Exception Display 'Yup'
            End-Delete
 
+           Display Scorpius
+           Display 'Harvey = ' Scorpius
+           Display theScreen
+             At Line 7
+           End-Display
+           Display theScreen
+             At Line Number screenPlacement
+             On Exception Call 'ILBOABN0'
+           End-Display
+           Display theScreen
+             At Column Number 4
+             Not On Exception Call 'IEFBR14'
+           End-Display
+
            Goback
            .
 
