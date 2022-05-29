@@ -166,6 +166,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRoundedMode(CobolParser.RoundedModeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#roundedPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRoundedPhrase(CobolParser.RoundedPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#entryConventionClause}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

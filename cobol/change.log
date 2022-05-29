@@ -15,6 +15,9 @@ Added deleteStatementFormat2, changed name of deleteStatement to
 deleteStatementFormat1 and created new deleteStatement rule which is either
 format1 or format2.
 
+Added displayStatementFormat2, refactored existing rules into displayStatement
+and displayStatementFormat1.
+
 Added testdata/local/test9040.cbl to test these changes.
 
 --2022-05-26--------------------------------------------------------------------

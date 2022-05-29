@@ -267,6 +267,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitRoundedMode(CobolParser.RoundedModeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#roundedPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterRoundedPhrase(CobolParser.RoundedPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#roundedPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitRoundedPhrase(CobolParser.RoundedPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#entryConventionClause}.
 	 * @param ctx the parse tree
 	 */

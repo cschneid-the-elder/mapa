@@ -193,6 +193,10 @@ roundedMode
      )
    ;
 
+roundedPhrase
+   : ROUNDED (MODE IS? roundedMode)?
+   ;
+
 entryConventionClause
    : ENTRY_CONVENTION IS? (COBOL | IDENTIFIER)
    ;
@@ -1788,7 +1792,7 @@ addFrom
    ;
 
 addTo
-   : identifier (ROUNDED (MODE IS? roundedMode)?)? COMMACHAR?
+   : identifier roundedPhrase? COMMACHAR?
    ;
 
 addToGiving
@@ -1796,7 +1800,7 @@ addToGiving
    ;
 
 addGiving
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 // allocate statement
@@ -1924,7 +1928,7 @@ computeStatement
    ;
 
 computeStore
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 // continue statement
@@ -2010,11 +2014,11 @@ divideGivingPhrase
    ;
 
 divideInto
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 divideGiving
-   : identifier(ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 divideRemainder
@@ -2430,7 +2434,7 @@ multiplyRegular
    ;
 
 multiplyRegularOperand
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 multiplyGiving
@@ -2442,7 +2446,7 @@ multiplyGivingOperand
    ;
 
 multiplyGivingResult
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 // next sentence
@@ -2840,7 +2844,7 @@ subtractSubtrahend
    ;
 
 subtractMinuend
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 subtractMinuendGiving
@@ -2848,11 +2852,11 @@ subtractMinuendGiving
    ;
 
 subtractGiving
-   : identifier (ROUNDED (MODE IS? roundedMode)?)?
+   : identifier roundedPhrase?
    ;
 
 subtractMinuendCorresponding
-   : qualifiedDataName (ROUNDED (MODE IS? roundedMode)?)?
+   : qualifiedDataName roundedPhrase?
    ;
 
 // terminate statement
