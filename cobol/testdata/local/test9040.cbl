@@ -107,5 +107,11 @@
            Goback Normal Status x'0000'
            Goback Error Scorpius
            Goback Normal Sikozu
+
+           Initialize Work-Areas Numeric To Value
+           Initialize Work-Areas Boolean To Value
+           Initialize Work-Areas All Value
+             Then Replacing Numeric By Low-Values
+                            Boolean By b'0'
            .
 

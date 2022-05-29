@@ -4367,6 +4367,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitInitializeStatement(CobolParser.InitializeStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#initializeWithFiller}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitializeWithFiller(CobolParser.InitializeWithFillerContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#initializeWithFiller}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitializeWithFiller(CobolParser.InitializeWithFillerContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#initializeValuePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitializeValuePhrase(CobolParser.InitializeValuePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#initializeValuePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitializeValuePhrase(CobolParser.InitializeValuePhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#initializeReplacingPhrase}.
 	 * @param ctx the parse tree
 	 */
@@ -4386,6 +4406,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitInitializeReplacingBy(CobolParser.InitializeReplacingByContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#initializeDefaultPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitializeDefaultPhrase(CobolParser.InitializeDefaultPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#initializeDefaultPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitializeDefaultPhrase(CobolParser.InitializeDefaultPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#initializeCategoryName}.
+	 * @param ctx the parse tree
+	 */
+	void enterInitializeCategoryName(CobolParser.InitializeCategoryNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#initializeCategoryName}.
+	 * @param ctx the parse tree
+	 */
+	void exitInitializeCategoryName(CobolParser.InitializeCategoryNameContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#initiateStatement}.
 	 * @param ctx the parse tree

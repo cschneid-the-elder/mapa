@@ -2189,15 +2189,44 @@ ifElse
 // initialize statement
 
 initializeStatement
-   : INITIALIZE identifier+ initializeReplacingPhrase?
+   : INITIALIZE identifier+ initializeWithFiller? initializeValuePhrase? initializeReplacingPhrase? initializeDefaultPhrase?
+   ;
+
+initializeWithFiller
+   : WITH? FILLER
+   ;
+
+initializeValuePhrase
+   : (ALL | initializeCategoryName) TO? VALUE
    ;
 
 initializeReplacingPhrase
-   : REPLACING initializeReplacingBy+
+   : THEN? REPLACING initializeReplacingBy+
    ;
 
 initializeReplacingBy
-   : (ALPHABETIC | ALPHANUMERIC | ALPHANUMERIC_EDITED | NATIONAL | NATIONAL_EDITED | NUMERIC | NUMERIC_EDITED | DBCS | EGCS) DATA? BY (identifier | literal)
+   : initializeCategoryName DATA? BY (identifier | literal)
+   ;
+
+initializeDefaultPhrase
+   : THEN? TO? DEFAULT
+   ;
+
+initializeCategoryName
+   : (ALPHABETIC 
+   | ALPHANUMERIC 
+   | ALPHANUMERIC_EDITED 
+   | BOOLEAN 
+   | DATA_POINTER 
+   | FUNCTION_POINTER 
+   | NATIONAL 
+   | NATIONAL_EDITED 
+   | NUMERIC 
+   | NUMERIC_EDITED 
+   | OBJECT_REFERENCE 
+   | PROGRAM_POINTER 
+   | DBCS 
+   | EGCS)
    ;
 
 // initiate statement

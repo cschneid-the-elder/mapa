@@ -5247,6 +5247,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInitializeWithFiller(CobolParser.InitializeWithFillerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitializeWithFiller(CobolParser.InitializeWithFillerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitializeValuePhrase(CobolParser.InitializeValuePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitializeValuePhrase(CobolParser.InitializeValuePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterInitializeReplacingPhrase(CobolParser.InitializeReplacingPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -5266,6 +5290,30 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitInitializeReplacingBy(CobolParser.InitializeReplacingByContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitializeDefaultPhrase(CobolParser.InitializeDefaultPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitializeDefaultPhrase(CobolParser.InitializeDefaultPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterInitializeCategoryName(CobolParser.InitializeCategoryNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInitializeCategoryName(CobolParser.InitializeCategoryNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

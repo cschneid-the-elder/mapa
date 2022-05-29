@@ -2626,6 +2626,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInitializeStatement(CobolParser.InitializeStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#initializeWithFiller}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitializeWithFiller(CobolParser.InitializeWithFillerContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#initializeValuePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitializeValuePhrase(CobolParser.InitializeValuePhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#initializeReplacingPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2637,6 +2649,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitInitializeReplacingBy(CobolParser.InitializeReplacingByContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#initializeDefaultPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitializeDefaultPhrase(CobolParser.InitializeDefaultPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#initializeCategoryName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInitializeCategoryName(CobolParser.InitializeCategoryNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#initiateStatement}.
 	 * @param ctx the parse tree

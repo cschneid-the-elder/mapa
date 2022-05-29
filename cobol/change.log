@@ -18,10 +18,12 @@ format1 or format2.
 Added displayStatementFormat2, refactored existing rules into displayStatement
 and displayStatementFormat1.
 
-Added raisingPhrase to the (now considered archaic PROGRAM form of) 
+Added raisingPhrase to the (now considered archaic) PROGRAM form of 
 exitStatement.
 
 Added raisingPhrase and statusPhrase to gobackStatement.
+
+Updated initializeStatement.
 
 Added testdata/local/test9040.cbl to test these changes.
 
