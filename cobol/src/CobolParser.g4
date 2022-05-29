@@ -2129,7 +2129,11 @@ exhibitOperand
 // exit statement
 
 exitStatement
-   : EXIT (PROGRAM | (PERFORM CYCLE?) | METHOD | PARAGRAPH | SECTION)?
+   : EXIT ((PROGRAM raisingPhrase?) | (PERFORM CYCLE?) | METHOD | PARAGRAPH | SECTION)?
+   ;
+
+raisingPhrase
+   : RAISING ((EXCEPTION exceptionName) | identifier | (LAST EXCEPTION?))
    ;
 
 // free statement
@@ -2147,7 +2151,11 @@ generateStatement
 // goback statement
 
 gobackStatement
-   : GOBACK
+   : GOBACK (raisingPhrase | statusPhrase)?
+   ;
+
+statusPhrase
+   : WITH? (ERROR | NORMAL) STATUS? (identifier | literal)?
    ;
 
 // goto statement
@@ -3560,7 +3568,7 @@ cobolWord
    | KEPT | KEYBOARD
    | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
    | MMDDYYYY
-   | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NUMERIC_DATE | NUMERIC_TIME
+   | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NORMAL | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
    | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO
@@ -3734,6 +3742,7 @@ cicsWord
    | NAME
    | NAMESPACE
    | NEXT
+   | NORMAL
    | OBJECT
    | ON
    | OPEN

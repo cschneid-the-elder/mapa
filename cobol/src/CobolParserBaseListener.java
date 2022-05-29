@@ -5103,6 +5103,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRaisingPhrase(CobolParser.RaisingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRaisingPhrase(CobolParser.RaisingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFreeStatement(CobolParser.FreeStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -5134,6 +5146,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitGobackStatement(CobolParser.GobackStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatusPhrase(CobolParser.StatusPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatusPhrase(CobolParser.StatusPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

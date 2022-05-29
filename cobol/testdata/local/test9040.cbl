@@ -90,6 +90,22 @@
              Not On Exception Call 'IEFBR14'
            End-Display
 
+           Exit Program
+           Exit Program Raising Exception EC-Oops
+           Exit Program Raising Zhaan
+           Exit Program Raising Last
+           Exit Program Raising Last Exception
+
            Goback
+           Goback Raising Exception EC-Oops
+           Goback Raising Zhaan
+           Goback Raising Last
+           Goback Raising Last Exception
+           Goback With Error Status Stark
+           Goback With Normal Status Zhaan
+           Goback Error Status x'0001'
+           Goback Normal Status x'0000'
+           Goback Error Scorpius
+           Goback Normal Sikozu
            .
 

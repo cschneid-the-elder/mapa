@@ -2554,6 +2554,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExitStatement(CobolParser.ExitStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#raisingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRaisingPhrase(CobolParser.RaisingPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#freeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2571,6 +2577,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitGobackStatement(CobolParser.GobackStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#statusPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatusPhrase(CobolParser.StatusPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#goToStatement}.
 	 * @param ctx the parse tree
