@@ -113,5 +113,25 @@
            Initialize Work-Areas All Value
              Then Replacing Numeric By Low-Values
                             Boolean By b'0'
+
+           Inspect Backward Backward Tallying Aeryn For All
+             Braca After Initial Rygel
+           Inspect Backward Backward Tallying Backward For All
+             Backward Before Initial Backward
+           Inspect Backward Tallying Backward For All
+             Backward Before Initial Backward
+           
+           Invoke SELF Grayza Using By Value Length Of Pilot
+             Returning Scorpius
+           End-Invoke
+           Invoke Moya x'1234' Using Content Crichton + Aeryn
+           Invoke Talyn Crais Using Reference Omitted
+             On Exception 
+               Invoke Moya Pilot Using Content Aeryn End-Invoke
+             Not On Exception 
+               Invoke Zhaan Chiana Using Reference Dargo End-Invoke
+           End-Invoke
+           Invoke Super New Using By Reference Omitted
+           
            .
 

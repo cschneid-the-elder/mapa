@@ -23,7 +23,10 @@ exitStatement.
 
 Added raisingPhrase and statusPhrase to gobackStatement.
 
-Updated initializeStatement.
+Updated initializeStatement and inspectStatement.
+
+Added invokeStatement. The draft standard and IBM Enterprise COBOL 6.4 differ
+pretty significantly.
 
 Added testdata/local/test9040.cbl to test these changes.
 

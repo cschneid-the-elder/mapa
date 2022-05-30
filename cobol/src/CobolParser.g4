@@ -1740,7 +1740,7 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -2238,7 +2238,7 @@ initiateStatement
 // inspect statement
 
 inspectStatement
-   : INSPECT identifier (inspectTallyingPhrase | inspectReplacingPhrase | inspectTallyingReplacingPhrase | inspectConvertingPhrase)
+   : INSPECT BACKWARD? identifier (inspectTallyingPhrase | inspectReplacingPhrase | inspectTallyingReplacingPhrase | inspectConvertingPhrase)
    ;
 
 inspectTallyingPhrase
@@ -2295,6 +2295,31 @@ inspectTo
 
 inspectBeforeAfter
    : (BEFORE | AFTER) INITIAL? (identifier | literal)
+   ;
+
+// invoke statement
+
+invokeStatement
+   : INVOKE (className | SELF | SUPER) (NEW | identifier | literal) 
+   (USING (invokeByReferenceClause | invokeByContentClause | invokeByValueClause)+)? 
+   invokeReturningClause? onExceptionClause? notOnExceptionClause? 
+   END_INVOKE?
+   ;
+
+invokeReturningClause
+   : RETURNING identifier
+   ;
+
+invokeByReferenceClause
+   : BY? REFERENCE (identifier | OMITTED)
+   ;
+
+invokeByContentClause
+   : BY? CONTENT (identifier | literal | arithmeticExpression)
+   ;
+
+invokeByValueClause
+   : BY? VALUE (((LENGTH OF)? identifier) | literal | arithmeticExpression)
    ;
 
 // json generate statement
@@ -3586,7 +3611,7 @@ paragraph cursorClause to be mistaken for environmentSwitchNameClause.
 cobolWord
    : IDENTIFIER 
    | ABORT | AS | ASCII | ASSOCIATED_DATA | ASSOCIATED_DATA_LENGTH | ATTRIBUTE | AUTO | AUTO_SKIP
-   | BACKGROUND_COLOR | BACKGROUND_COLOUR | BEEP | BELL | BINARY | BIT | BLINK | BLOB | BOUNDS
+   | BACKGROUND_COLOR | BACKGROUND_COLOUR | BACKWARD | BEEP | BELL | BINARY | BIT | BLINK | BLOB | BOUNDS
    | CAPABLE | CCSVERSION | CHANGED | CHANNEL | CLOB | CLOSE_DISPOSITION | COBOL | COMMITMENT | CONTROL_POINT | CONVENTION | CRUNCH
    | DBCLOB | DEFAULT | DEFAULT_DISPLAY | DEFINITION | DFHRESP | DFHVALUE | DISK | DONTCARE | DOUBLE
    | EBCDIC | EMPTY_CHECK | ENTER | ENTRY_PROCEDURE | EOL | EOS | ERASE | ESCAPE | EVENT | EXCLUSIVE | EXPORT | EXTENDED
@@ -3597,7 +3622,7 @@ cobolWord
    | KEPT | KEYBOARD
    | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
    | MMDDYYYY
-   | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NORMAL | NUMERIC_DATE | NUMERIC_TIME
+   | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NEW | NO_ECHO | NORMAL | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
    | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO

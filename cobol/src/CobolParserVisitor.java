@@ -2758,6 +2758,36 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitInspectBeforeAfter(CobolParser.InspectBeforeAfterContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#invokeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeStatement(CobolParser.InvokeStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#invokeReturningClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeReturningClause(CobolParser.InvokeReturningClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#invokeByReferenceClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeByReferenceClause(CobolParser.InvokeByReferenceClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#invokeByContentClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeByContentClause(CobolParser.InvokeByContentClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#invokeByValueClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitInvokeByValueClause(CobolParser.InvokeByValueClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#jsonGenerateStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

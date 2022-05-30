@@ -4587,6 +4587,56 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitInspectBeforeAfter(CobolParser.InspectBeforeAfterContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#invokeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeStatement(CobolParser.InvokeStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#invokeStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeStatement(CobolParser.InvokeStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#invokeReturningClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeReturningClause(CobolParser.InvokeReturningClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#invokeReturningClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeReturningClause(CobolParser.InvokeReturningClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#invokeByReferenceClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeByReferenceClause(CobolParser.InvokeByReferenceClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#invokeByReferenceClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeByReferenceClause(CobolParser.InvokeByReferenceClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#invokeByContentClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeByContentClause(CobolParser.InvokeByContentClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#invokeByContentClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeByContentClause(CobolParser.InvokeByContentClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#invokeByValueClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterInvokeByValueClause(CobolParser.InvokeByValueClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#invokeByValueClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitInvokeByValueClause(CobolParser.InvokeByValueClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#jsonGenerateStatement}.
 	 * @param ctx the parse tree
 	 */
