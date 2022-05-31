@@ -5247,6 +5247,66 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitPerformTestClause(CobolParser.PerformTestClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#performWithExceptionCheckingStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterPerformWithExceptionCheckingStatement(CobolParser.PerformWithExceptionCheckingStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#performWithExceptionCheckingStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitPerformWithExceptionCheckingStatement(CobolParser.PerformWithExceptionCheckingStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#performExceptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterPerformExceptionClause(CobolParser.PerformExceptionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#performExceptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitPerformExceptionClause(CobolParser.PerformExceptionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#performExceptionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterPerformExceptionPhrase(CobolParser.PerformExceptionPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#performExceptionPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitPerformExceptionPhrase(CobolParser.PerformExceptionPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#performOtherExceptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterPerformOtherExceptionClause(CobolParser.PerformOtherExceptionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#performOtherExceptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitPerformOtherExceptionClause(CobolParser.PerformOtherExceptionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#performCommonExceptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterPerformCommonExceptionClause(CobolParser.PerformCommonExceptionClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#performCommonExceptionClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitPerformCommonExceptionClause(CobolParser.PerformCommonExceptionClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#performFinallyClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterPerformFinallyClause(CobolParser.PerformFinallyClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#performFinallyClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitPerformFinallyClause(CobolParser.PerformFinallyClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#purgeStatement}.
 	 * @param ctx the parse tree
 	 */

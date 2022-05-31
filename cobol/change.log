@@ -30,6 +30,8 @@ pretty significantly.
 
 Added sharingPhrase and retryPhrase to openStatement.
 
+Added performWithExceptionCheckingStatement form of PERFORM statement.
+
 Added testdata/local/test9040.cbl to test these changes.
 
 --2022-05-26--------------------------------------------------------------------

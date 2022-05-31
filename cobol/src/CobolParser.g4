@@ -2554,7 +2554,7 @@ sharingPhrase
 // perform statement
 
 performStatement
-   : PERFORM (performInlineStatement | performProcedureStatement)
+   : PERFORM (performInlineStatement | performProcedureStatement | performWithExceptionCheckingStatement)
    ;
 
 performInlineStatement
@@ -2574,7 +2574,7 @@ performTimes
    ;
 
 performUntil
-   : performTestClause? UNTIL condition
+   : performTestClause? UNTIL (condition | EXIT)
    ;
 
 performVarying
@@ -2603,6 +2603,36 @@ performBy
 
 performTestClause
    : WITH? TEST (BEFORE | AFTER)
+   ;
+
+performWithExceptionCheckingStatement
+   : (WITH? LOCATION)?
+   statement* 
+   performExceptionClause+
+   performOtherExceptionClause?
+   performCommonExceptionClause?
+   performFinallyClause?
+   END_PERFORM
+   ;
+
+performExceptionClause
+   : (WHEN (performExceptionPhrase | exceptionName+ | (exceptionName FILE fileName)+) statement+)
+   ;
+ 
+performExceptionPhrase
+   : EXCEPTION (fileName+ | INPUT | OUTPUT | I_O | EXTEND)
+   ;
+
+performOtherExceptionClause
+   : (WHEN OTHER EXCEPTION? statement+)
+   ;
+   
+performCommonExceptionClause
+   : (WHEN? COMMON EXCEPTION? statement+)
+   ;
+
+performFinallyClause
+   : (FINALLY statement+)
    ;
 
 // purge statement
@@ -3624,7 +3654,7 @@ cobolWord
    | HIGHLIGHT
    | IMPLICIT | IMPORT | INTEGER | INVOKE
    | KEPT | KEYBOARD
-   | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
+   | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LOCATION | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
    | MMDDYYYY
    | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NEW | NO_ECHO | NORMAL | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
@@ -3792,6 +3822,7 @@ cicsWord
    | LAST
    | LENGTH
    | LINE
+   | LOCATION
    | LOCK
    | METHOD
    | MESSAGE

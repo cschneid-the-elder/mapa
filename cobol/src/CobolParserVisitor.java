@@ -3154,6 +3154,42 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPerformTestClause(CobolParser.PerformTestClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#performWithExceptionCheckingStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPerformWithExceptionCheckingStatement(CobolParser.PerformWithExceptionCheckingStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#performExceptionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPerformExceptionClause(CobolParser.PerformExceptionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#performExceptionPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPerformExceptionPhrase(CobolParser.PerformExceptionPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#performOtherExceptionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPerformOtherExceptionClause(CobolParser.PerformOtherExceptionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#performCommonExceptionClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPerformCommonExceptionClause(CobolParser.PerformCommonExceptionClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#performFinallyClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitPerformFinallyClause(CobolParser.PerformFinallyClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#purgeStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -239,6 +239,16 @@
            Open Input Sharing With No Other Retry Forever Talyn
              With No Rewind WhiteStar With No Rewind
 
-           
+           Perform Paragraph-1 Until Exit
+           Perform
+               Read Talyn
+               Add 1 To Talyn-Field
+             When Exception Talyn Display 'Oops'
+             When EC-DATA Display 'Also Oops'
+             When EC-IO File Talyn Display 'Oops Again'
+             When Other Display 'Other Oops'
+             Common Display 'Common Oops'
+             Finally Display 'Ultimate Oops'
+           End-Perform
            .
 
