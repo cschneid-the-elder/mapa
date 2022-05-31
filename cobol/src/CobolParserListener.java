@@ -5107,6 +5107,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitOpenExtendStatement(CobolParser.OpenExtendStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#sharingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterSharingPhrase(CobolParser.SharingPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#sharingPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitSharingPhrase(CobolParser.SharingPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#performStatement}.
 	 * @param ctx the parse tree
 	 */

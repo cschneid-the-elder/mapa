@@ -133,5 +133,112 @@
            End-Invoke
            Invoke Super New Using By Reference Omitted
            
+           Open Input Sharing All Moya
+           Open Input Sharing No Talyn
+           Open Input Sharing Read Only Roscinante
+           Open Input Sharing With All Moya
+           Open Input Sharing With No Talyn
+           Open Input Sharing With Read Only Roscinante
+           Open Input Sharing All Other Moya
+           Open Input Sharing No Other Talyn
+           Open Input Sharing With All Other Moya
+           Open Input Sharing With No Other Talyn
+
+           Open Input Retry 42 Times Moya
+           Open Input Retry 1 + 2 * 3 Times Talyn
+           Open Input Retry For 42 Seconds Roscinante
+           Open Input Retry For 1 + 2 * 3 Seconds WhiteStar
+           Open Input Retry Forever WhiteStar
+
+           Open Input Sharing All Retry 42 Times Moya
+           Open Input Sharing No Retry 42 Times Talyn
+           Open Input Sharing Read Only Retry 42 Times Roscinante
+           Open Input Sharing With All Retry 42 Times Moya
+           Open Input Sharing With No Retry 42 Times Talyn
+           Open Input Sharing With Read Only Retry 42 Times Roscinante
+           Open Input Sharing All Other Retry 42 Times Moya
+           Open Input Sharing No Other Retry 42 Times Talyn
+           Open Input Sharing With All Other Retry 42 Times Moya
+           Open Input Sharing With No Other Retry 42 Times Talyn
+
+           Open Input Sharing All Retry 1 + 2 * 3 Times Moya
+           Open Input Sharing No Retry 1 + 2 * 3 Times Talyn
+           Open Input Sharing Read Only 
+             Retry 1 + 2 * 3 Times Roscinante
+           Open Input Sharing With All Retry 1 + 2 * 3 Times Moya
+           Open Input Sharing With No Retry 1 + 2 * 3 Times Talyn
+           Open Input Sharing With Read Only 
+             Retry 1 + 2 * 3 Times Roscinante
+           Open Input Sharing All Other Retry 1 + 2 * 3 Times Moya
+           Open Input Sharing No Other Retry 1 + 2 * 3 Times Talyn
+           Open Input Sharing With All Other Retry 1 + 2 * 3 Times Moya
+           Open Input Sharing With No Other Retry 1 + 2 * 3 Times Talyn
+
+           Open Input Sharing All Retry For 42 Seconds Moya
+           Open Input Sharing No Retry For 42 Seconds Talyn
+           Open Input Sharing Read Only Retry For 42 Seconds Roscinante
+           Open Input Sharing With All Retry For 42 Seconds Moya
+           Open Input Sharing With No Retry For 42 Seconds Talyn
+           Open Input Sharing With Read Only 
+             Retry For 42 Seconds Roscinante
+           Open Input Sharing All Other Retry For 42 Seconds Moya
+           Open Input Sharing No Other Retry For 42 Seconds Talyn
+           Open Input Sharing With All Other 
+             Retry For 42 Seconds Moya
+           Open Input Sharing With No Other 
+             Retry For 42 Seconds Talyn
+
+           Open Input Sharing All Retry For 1 + 2 * 3 Seconds Moya
+           Open Input Sharing No Retry For 1 + 2 * 3 Seconds Talyn
+           Open Input Sharing Read Only 
+             Retry For 1 + 2 * 3 Seconds Roscinante
+           Open Input Sharing With All 
+             Retry For 1 + 2 * 3 Seconds Moya
+           Open Input Sharing With No 
+             Retry For 1 + 2 * 3 Seconds Talyn
+           Open Input Sharing With Read Only 
+             Retry For 1 + 2 * 3 Seconds Roscinante
+           Open Input Sharing All Other 
+             Retry For 1 + 2 * 3 Seconds Moya
+           Open Input Sharing No Other 
+             Retry For 1 + 2 * 3 Seconds Talyn
+           Open Input Sharing With All Other 
+             Retry For 1 + 2 * 3 Seconds Moya
+           Open Input Sharing With No Other 
+             Retry For 1 + 2 * 3 Seconds Talyn
+
+           Open Input Sharing All Retry Forever Moya
+           Open Input Sharing No Retry Forever Talyn
+           Open Input Sharing Read Only Retry Forever Roscinante
+           Open Input Sharing With All Retry Forever Moya
+           Open Input Sharing With No Retry Forever Talyn
+           Open Input Sharing With Read Only Retry Forever Roscinante
+           Open Input Sharing All Other Retry Forever Moya
+           Open Input Sharing No Other Retry Forever Talyn
+           Open Input Sharing With All Other Retry Forever Moya
+           Open Input Sharing With No Other Retry Forever Talyn
+
+           Open Input Sharing All Retry Forever Moya
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing No Retry Forever Talyn
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing Read Only Retry Forever Roscinante
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing With All Retry Forever Moya
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing With No Retry Forever Talyn
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing With Read Only Retry Forever Roscinante
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing All Other Retry Forever Moya
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing No Other Retry Forever Talyn
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing With All Other Retry Forever Moya
+             With No Rewind WhiteStar With No Rewind
+           Open Input Sharing With No Other Retry Forever Talyn
+             With No Rewind WhiteStar With No Rewind
+
+           
            .
 

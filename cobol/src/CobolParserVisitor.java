@@ -3070,6 +3070,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitOpenExtendStatement(CobolParser.OpenExtendStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#sharingPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSharingPhrase(CobolParser.SharingPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#performStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

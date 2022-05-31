@@ -6135,6 +6135,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSharingPhrase(CobolParser.SharingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSharingPhrase(CobolParser.SharingPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterPerformStatement(CobolParser.PerformStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

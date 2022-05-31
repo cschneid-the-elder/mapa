@@ -2524,7 +2524,7 @@ openStatement
    ;
 
 openInputStatement
-   : INPUT (openInput COMMACHAR?)+
+   : INPUT sharingPhrase? retryPhrase? (openInput COMMACHAR?)+
    ;
 
 openInput
@@ -2532,7 +2532,7 @@ openInput
    ;
 
 openOutputStatement
-   : OUTPUT (openOutput COMMACHAR?)+
+   : OUTPUT sharingPhrase? retryPhrase? (openOutput COMMACHAR?)+
    ;
 
 openOutput
@@ -2540,11 +2540,15 @@ openOutput
    ;
 
 openIOStatement
-   : I_O (fileName COMMACHAR?)+
+   : I_O sharingPhrase? retryPhrase? (fileName COMMACHAR?)+
    ;
 
 openExtendStatement
-   : EXTEND (fileName COMMACHAR?)+
+   : EXTEND sharingPhrase? retryPhrase? (fileName COMMACHAR?)+
+   ;
+
+sharingPhrase
+   : SHARING WITH? ((ALL OTHER?) | (NO OTHER?) | (READ ONLY))
    ;
 
 // perform statement

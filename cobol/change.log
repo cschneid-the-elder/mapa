@@ -1,4 +1,4 @@
---2022-05-28--------------------------------------------------------------------
+--2022-05-31--------------------------------------------------------------------
 Modified CobolLexer.g4 and CobolParser.g4 per the 202x draft standard to allow 
 for Procedure Division Rounded phrase, acceptScreenStatement.
 
@@ -27,6 +27,8 @@ Updated initializeStatement and inspectStatement.
 
 Added invokeStatement. The draft standard and IBM Enterprise COBOL 6.4 differ
 pretty significantly.
+
+Added sharingPhrase and retryPhrase to openStatement.
 
 Added testdata/local/test9040.cbl to test these changes.
 
