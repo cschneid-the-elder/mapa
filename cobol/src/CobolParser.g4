@@ -599,6 +599,31 @@ functionIntrinsicPhrase
             ,"VARIANCE"
             ,"WHEN-COMPILED"
             ,"YEAR-TO-YYYY"
+            ,"BASECONVERT"
+            ,"BOOLEAN-OF-INTEGER"
+            ,"CHAR-NATIONAL"
+            ,"CONCAT"
+            ,"CONTENT-OF"
+            ,"CONVERT"
+            ,"EXCEPTION-FILE"
+            ,"EXCEPTION-FILE-N"
+            ,"EXCEPTION-LOCATION"
+            ,"EXCEPTION-LOCATION-N"
+            ,"EXCEPTION-STATEMENT"
+            ,"EXCEPTION-STATUS"
+            ,"FIND-STRING"
+            ,"FRACTION-PART"
+            ,"HIGHEST-ALGEBRAIC"
+            ,"INTEGER-OF-BOOLEAN"
+            ,"LOCALE-COMPARE"
+            ,"LOCALE-DATE"
+            ,"LOCALE-TIME"
+            ,"LOCAL-TIME-FROM-SECONDS"
+            ,"LOWEST-ALGEBRAIC"
+            ,"MODULE-NAME"
+            ,"SMALLEST-ALGEBRAIC"
+            ,"STANDARD-COMPARE"
+            ,"SUBSTITUTE"
             );
          functionNames.addAll(funcs);
       }
@@ -3865,6 +3890,31 @@ not intrisicFunctionName when used as data names.
    | VARIANCE
    | WHEN_COMPILED
    | YEAR_TO_YYYY
+   | BASECONVERT
+   | BOOLEAN_OF_INTEGER
+   | CHAR_NATIONAL
+   | CONCAT
+   | CONTENT_OF
+   | CONVERT
+   | EXCEPTION_FILE
+   | EXCEPTION_FILE_N
+   | EXCEPTION_LOCATION
+   | EXCEPTION_LOCATION_N
+   | EXCEPTION_STATEMENT
+   | EXCEPTION_STATUS
+   | FIND_STRING
+   | FRACTION_PART
+   | HIGHEST_ALGEBRAIC
+   | INTEGER_OF_BOOLEAN
+   | LOCALE_COMPARE
+   | LOCALE_DATE
+   | LOCALE_TIME
+   | LOCAL_TIME_FROM_SECONDS
+   | LOWEST_ALGEBRAIC
+   | MODULE_NAME
+   | SMALLEST_ALGEBRAIC
+   | STANDARD_COMPARE
+   | SUBSTITUTE
 // end of copy of intrinsicFunctionName rule body
    ;
 
@@ -4005,12 +4055,9 @@ rule in addition to this one.  I don't like it any better than
 you do, but this is where we are.  One copy is in cobolWord
 and the other is in functionIntrinsicPhrase.
 
-This list is not inclusive of all instrinsic functions listed
-in the COBOL standard, it is a list of all intrinsic functions
-listed in the IBM Enterprise COBOL 6.3 documentation.  If you 
-find you need the EXCEPTION-* functions et. al. feel free to
-add them to the Lexer, to this rule, and to the other two copies
-of this rule contained herein.
+This list is inclusive of all instrinsic functions listed
+in the draft 202x COBOL standard, in addition to those
+listed in the IBM Enterprise COBOL 6.4 documentation.
 */
 intrinsicFunctionName
    :  ABS
@@ -4094,6 +4141,31 @@ intrinsicFunctionName
    | VARIANCE
    | WHEN_COMPILED
    | YEAR_TO_YYYY
+   | BASECONVERT
+   | BOOLEAN_OF_INTEGER
+   | CHAR_NATIONAL
+   | CONCAT
+   | CONTENT_OF
+   | CONVERT
+   | EXCEPTION_FILE
+   | EXCEPTION_FILE_N
+   | EXCEPTION_LOCATION
+   | EXCEPTION_LOCATION_N
+   | EXCEPTION_STATEMENT
+   | EXCEPTION_STATUS
+   | FIND_STRING
+   | FRACTION_PART
+   | HIGHEST_ALGEBRAIC
+   | INTEGER_OF_BOOLEAN
+   | LOCALE_COMPARE
+   | LOCALE_DATE
+   | LOCALE_TIME
+   | LOCAL_TIME_FROM_SECONDS
+   | LOWEST_ALGEBRAIC
+   | MODULE_NAME
+   | SMALLEST_ALGEBRAIC
+   | STANDARD_COMPARE
+   | SUBSTITUTE
    ;
 
 binaryBooleanOperator

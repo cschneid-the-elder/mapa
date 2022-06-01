@@ -801,12 +801,9 @@ ZEROES : Z E R O E S;
 
 // intrinsic functions
 /*
-This list is not inclusive of all instrinsic functions listed
-in the COBOL standard, it is a list of all intrinsic functions
-listed in the IBM Enterprise COBOL 6.3 documentation.  If you 
-find you need the EXCEPTION-* functions et. al. feel free to
-add them to the Lexer, to the intrinsicFunction rule in the parser,
-and to the other two copies of that rule contained therein.
+This list is inclusive of all instrinsic functions listed
+in the draft 202x COBOL standard, in addition to those
+listed in the IBM Enterprise COBOL 6.4 documentation.
 */
 ABS : A B S ;
 ACOS : A C O S ;
@@ -889,6 +886,32 @@ UWIDTH : U W I D T H ;
 VARIANCE : V A R I A N C E ;
 //WHEN_COMPILED : W H E N MINUSCHAR C O M P I L E D ;
 YEAR_TO_YYYY : Y E A R MINUSCHAR T O MINUSCHAR Y Y Y Y ;
+
+BASECONVERT :  B A S E C O N V E R T ;
+BOOLEAN_OF_INTEGER :  B O O L E A N MINUSCHAR O F MINUSCHAR I N T E G E R ;
+CHAR_NATIONAL :  C H A R MINUSCHAR N A T I O N A L ;
+CONCAT :  C O N C A T ;
+CONTENT_OF :  C O N T E N T MINUSCHAR O F ;
+CONVERT :  C O N V E R T ;
+EXCEPTION_FILE :  E X C E P T I O N MINUSCHAR F I L E ;
+EXCEPTION_FILE_N :  E X C E P T I O N MINUSCHAR F I L E MINUSCHAR N ;
+EXCEPTION_LOCATION :  E X C E P T I O N MINUSCHAR L O C A T I O N ;
+EXCEPTION_LOCATION_N :  E X C E P T I O N MINUSCHAR L O C A T I O N MINUSCHAR N ;
+EXCEPTION_STATEMENT :  E X C E P T I O N MINUSCHAR S T A T E M E N T ;
+EXCEPTION_STATUS :  E X C E P T I O N MINUSCHAR S T A T U S ;
+FIND_STRING :  F I N D MINUSCHAR S T R I N G ;
+FRACTION_PART :  F R A C T I O N MINUSCHAR P A R T ;
+HIGHEST_ALGEBRAIC :  H I G H E S T MINUSCHAR A L G E B R A I C ;
+INTEGER_OF_BOOLEAN :  I N T E G E R MINUSCHAR O F MINUSCHAR B O O L E A N ;
+LOCALE_COMPARE :  L O C A L E MINUSCHAR C O M P A R E ;
+LOCALE_DATE :  L O C A L E MINUSCHAR D A T E ;
+LOCALE_TIME :  L O C A L E MINUSCHAR T I M E ;
+LOCAL_TIME_FROM_SECONDS :  L O C A L MINUSCHAR T I M E MINUSCHAR F R O M MINUSCHAR S E C O N D S ;
+LOWEST_ALGEBRAIC :  L O W E S T MINUSCHAR A L G E B R A I C ;
+MODULE_NAME :  M O D U L E MINUSCHAR N A M E ;
+SMALLEST_ALGEBRAIC :  S M A L L E S T MINUSCHAR A L G E B R A I C ;
+STANDARD_COMPARE :  S T A N D A R D MINUSCHAR C O M P A R E ;
+SUBSTITUTE :  S U B S T I T U T E ;
 
 E_CHAR : E;
 EXEC_CICS
