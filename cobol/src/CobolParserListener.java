@@ -5487,6 +5487,26 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitReceiveStatus(CobolParser.ReceiveStatusContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#standardReceiveStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStandardReceiveStatement(CobolParser.StandardReceiveStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#standardReceiveStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStandardReceiveStatement(CobolParser.StandardReceiveStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#standardReceiveContinuePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterStandardReceiveContinuePhrase(CobolParser.StandardReceiveContinuePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#standardReceiveContinuePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitStandardReceiveContinuePhrase(CobolParser.StandardReceiveContinuePhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#releaseStatement}.
 	 * @param ctx the parse tree
 	 */

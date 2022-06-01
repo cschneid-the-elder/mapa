@@ -276,5 +276,49 @@
              Not End Display 'Not At End'
            End-Read
            
+           Receive Tachi Giving Canterbury
+           Receive From Tachi Giving Canterbury
+             Continue 4
+           Receive From Tachi Giving Canterbury
+             Continue 3 + 4 Seconds
+           Receive From Tachi Giving Canterbury
+             Continue Message Received
+           Receive From Tachi Giving Canterbury
+             Continue After 4
+           Receive From Tachi Giving Canterbury
+             Continue After 3 + 4 Seconds
+           Receive From Tachi Giving Canterbury
+             Continue After Message Received
+           Receive From Tachi Giving Canterbury
+             Continue After Message Received
+             Exception Display 'Exceptional' End-Display
+             Not Exception Display 'Ordinary' End-Display
+           End-Receive
+           Receive Tachi Giving Canterbury
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue 4
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue 3 + 4 Seconds
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue Message Received
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue After 4
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue After 3 + 4 Seconds
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue After Message Received
+           End-Receive
+           Receive From Tachi Giving Canterbury
+             Continue After Message Received
+             Exception Display 'Exceptional' End-Display
+             Not Exception Display 'Ordinary' End-Display
+           End-Receive
+           
            .
 

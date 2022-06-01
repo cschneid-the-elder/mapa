@@ -38,6 +38,10 @@ Added readLockPhrase to readStatement and changed readWith to not require
 KEPT | NO before LOCK as this isn't in either the standard nor in IBM's
 documentation.
 
+Added standardReceiveStatement, leaving alone the receiveStatement inherited 
+from the original ProLeap parser.  This appears to be vestigal, as the
+Communication Section is no longer in the standard.
+
 Added testdata/local/test9040.cbl to test these changes.
 
 --2022-05-26--------------------------------------------------------------------

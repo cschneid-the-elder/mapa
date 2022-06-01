@@ -3298,6 +3298,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReceiveStatus(CobolParser.ReceiveStatusContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#standardReceiveStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandardReceiveStatement(CobolParser.StandardReceiveStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#standardReceiveContinuePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandardReceiveContinuePhrase(CobolParser.StandardReceiveContinuePhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#releaseStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
