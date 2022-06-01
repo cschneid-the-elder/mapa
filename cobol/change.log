@@ -51,6 +51,11 @@ Communication Section is no longer in the standard.
 Modified sendToStatement to allow setting ADDRESS OF. Added 
 setScreenAttributeStatement.
 
+Added stopStatementWith to stopStatement.
+
+Added suppressStatement and unlockStatement.
+
+Added FILE syntax, retryPhrase, and lockPhrase to writeStatement.
 
 Added testdata/local/test9040.cbl to test these changes.
 

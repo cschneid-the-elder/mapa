@@ -7203,6 +7203,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStopStatementWith(CobolParser.StopStatementWithContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStopStatementWith(CobolParser.StopStatementWithContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStringStatement(CobolParser.StringStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7395,6 +7407,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSuppressStatement(CobolParser.SuppressStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSuppressStatement(CobolParser.SuppressStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTerminateStatement(CobolParser.TerminateStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -7402,6 +7426,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTerminateStatement(CobolParser.TerminateStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUnlockStatement(CobolParser.UnlockStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnlockStatement(CobolParser.UnlockStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -7618,6 +7654,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUseExceptionObjectClause(CobolParser.UseExceptionObjectClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUseReportClause(CobolParser.UseReportClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUseReportClause(CobolParser.UseReportClauseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -19,6 +19,7 @@
            
        Exceptional-Processing-EC-IO Section.
            Use After Exception Condition EC-IO File Talyn.
+           Unlock Talyn Record
            Resume Recovery-From-EC-IO
            .
            
@@ -27,12 +28,24 @@
              EC-BAD-STUFF 
              EC-WORSE-STUFF 
              EC-IO File Moya File Roscinante.
+           Unlock Moya Records
+           Unlock Roscinante
            Resume OMG-Give-It-Up
            .
            
        Exceptional-Object-Processing Section.
            Use Exception Object Protomolecule.
            Resume Next Statement
+           .
+           
+       Report-Preface-01 Section.
+           Use Before Reporting Report-01.
+           Suppress Printing
+           .
+           
+       Report-Preface-02 Section.
+           Use Global Before Reporting Report-02.
+           Suppress
            .
            
        End Declaratives.
@@ -362,6 +375,16 @@
 
            Set Address Of AlexKamal To TheBelt
            Set EarthAlliance Attribute Lowlight On
+           
+           Stop Run Error
+           Stop Run With Error Status 16
+           Stop Run With Normal Status 0
+           Stop Run With Error
+           Stop Run With Error Scorpius
+           
+           Write File Roscinante
+             Retry Forever Lock
+           End-Write
            .
            
        OMG-Give-It-Up.

@@ -3604,6 +3604,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStopStatementGiving(CobolParser.StopStatementGivingContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#stopStatementWith}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStopStatementWith(CobolParser.StopStatementWithContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#stringStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3700,11 +3706,23 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSubtractMinuendCorresponding(CobolParser.SubtractMinuendCorrespondingContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#suppressStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSuppressStatement(CobolParser.SuppressStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#terminateStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTerminateStatement(CobolParser.TerminateStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#unlockStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnlockStatement(CobolParser.UnlockStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#unstringStatement}.
 	 * @param ctx the parse tree
@@ -3813,6 +3831,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUseExceptionObjectClause(CobolParser.UseExceptionObjectClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#useReportClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseReportClause(CobolParser.UseReportClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
 	 * @param ctx the parse tree

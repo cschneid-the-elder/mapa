@@ -5997,6 +5997,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitStopStatementGiving(CobolParser.StopStatementGivingContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#stopStatementWith}.
+	 * @param ctx the parse tree
+	 */
+	void enterStopStatementWith(CobolParser.StopStatementWithContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#stopStatementWith}.
+	 * @param ctx the parse tree
+	 */
+	void exitStopStatementWith(CobolParser.StopStatementWithContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#stringStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -6157,6 +6167,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitSubtractMinuendCorresponding(CobolParser.SubtractMinuendCorrespondingContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#suppressStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterSuppressStatement(CobolParser.SuppressStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#suppressStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitSuppressStatement(CobolParser.SuppressStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#terminateStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -6166,6 +6186,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTerminateStatement(CobolParser.TerminateStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#unlockStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnlockStatement(CobolParser.UnlockStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#unlockStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnlockStatement(CobolParser.UnlockStatementContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#unstringStatement}.
 	 * @param ctx the parse tree
@@ -6346,6 +6376,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUseExceptionObjectClause(CobolParser.UseExceptionObjectClauseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#useReportClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterUseReportClause(CobolParser.UseReportClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#useReportClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitUseReportClause(CobolParser.UseReportClauseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
 	 * @param ctx the parse tree

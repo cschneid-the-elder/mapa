@@ -1740,7 +1740,7 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | resumeStatement | returnStatement | rewriteStatement | rollbackStatement | searchStatement | sendStatement | standardSendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | resumeStatement | returnStatement | rewriteStatement | rollbackStatement | searchStatement | sendStatement | standardSendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | suppressStatement | terminateStatement | unlockStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -2954,11 +2954,15 @@ startKey
 // stop statement
 
 stopStatement
-   : STOP (RUN | literal | stopStatementGiving)
+   : STOP (RUN | literal | stopStatementGiving | stopStatementWith)
    ;
 
 stopStatementGiving
    : RUN (GIVING | RETURNING) (identifier | integerLiteral)
+   ;
+
+stopStatementWith
+   : (RUN WITH? (ERROR | NORMAL) STATUS? (identifier | literal)?)
    ;
 
 // string statement
@@ -3029,10 +3033,22 @@ subtractMinuendCorresponding
    : qualifiedDataName roundedPhrase?
    ;
 
+// suppress statement
+
+suppressStatement
+   : SUPPRESS PRINTING?
+   ;
+
 // terminate statement
 
 terminateStatement
    : TERMINATE reportName
+   ;
+
+// unlock statement
+
+unlockStatement
+   : UNLOCK fileName (RECORD | RECORDS)?
    ;
 
 // unstring statement
@@ -3080,7 +3096,7 @@ unstringTallyingPhrase
 // use statement
 
 useStatement
-   : USE (useAfterClause | useDebugClause | useExceptionNameClause | useExceptionObjectClause)
+   : USE (useAfterClause | useDebugClause | useExceptionNameClause | useExceptionObjectClause | useReportClause)
    ;
 
 useAfterClause
@@ -3109,6 +3125,10 @@ useExceptionNameWithFilePhrase
 
 useExceptionObjectClause
    : AFTER? ((EXCEPTION OBJECT) | EO) (className | interfaceName)
+   ;
+
+useReportClause
+   : GLOBAL? BEFORE REPORTING identifier
    ;
    
 // xml generate statement
@@ -3239,7 +3259,7 @@ xmlParseEndXmlPhrase
 // write statement
 
 writeStatement
-   : WRITE recordName writeFromPhrase? writeAdvancingPhrase? writeAtEndOfPagePhrase? writeNotAtEndOfPagePhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_WRITE?
+   : WRITE (recordName | (FILE fileName)) writeFromPhrase? writeAdvancingPhrase? retryPhrase? lockPhrase? writeAtEndOfPagePhrase? writeNotAtEndOfPagePhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_WRITE?
    ;
 
 writeFromPhrase
@@ -3968,6 +3988,7 @@ cicsWord
    | TITLE
    | TO
    | TYPE
+   | UNLOCK
    | UNTIL
    | USAGE
    | USING
