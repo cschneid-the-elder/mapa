@@ -1740,7 +1740,7 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -2641,18 +2641,32 @@ purgeStatement
    : PURGE cdName+
    ;
 
+// raise statement
+
+raiseStatement
+   : RAISE ((EXCEPTION exceptionName) | identifier)
+   ;
+
 // read statement
 
 readStatement
-   : READ fileName NEXT? RECORD? readInto? readWith? readKey? invalidKeyPhrase? notInvalidKeyPhrase? atEndPhrase? notAtEndPhrase? END_READ?
+   : READ fileName (NEXT | PREVIOUS)? RECORD? readInto? readLockPhrase? retryPhrase? readWith? readKey? invalidKeyPhrase? notInvalidKeyPhrase? atEndPhrase? notAtEndPhrase? END_READ?
    ;
 
 readInto
    : INTO identifier
    ;
 
+/*
+Neither KEPT nor WAIT are in the current standard, they
+are also absent from IBM's current documentation.
+*/
 readWith
-   : WITH? ((KEPT | NO) LOCK | WAIT)
+   : WITH? ((KEPT | NO)? LOCK | WAIT)
+   ;
+
+readLockPhrase
+   : ((ADVANCING ON?) | IGNORING) LOCK
    ;
 
 readKey
@@ -3659,7 +3673,7 @@ cobolWord
    | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NEW | NO_ECHO | NORMAL | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
-   | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO
+   | RAISE | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO
    | SAVE | SECONDS | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STRONG | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF
    | UNDERLINE

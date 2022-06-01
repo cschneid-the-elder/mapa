@@ -5317,6 +5317,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitPurgeStatement(CobolParser.PurgeStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#raiseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterRaiseStatement(CobolParser.RaiseStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#raiseStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitRaiseStatement(CobolParser.RaiseStatementContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#readStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -5346,6 +5356,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitReadWith(CobolParser.ReadWithContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link CobolParser#readLockPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterReadLockPhrase(CobolParser.ReadLockPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#readLockPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitReadLockPhrase(CobolParser.ReadLockPhraseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link CobolParser#readKey}.
 	 * @param ctx the parse tree

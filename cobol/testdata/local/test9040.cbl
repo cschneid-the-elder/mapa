@@ -250,5 +250,31 @@
              Common Display 'Common Oops'
              Finally Display 'Ultimate Oops'
            End-Perform
+           
+           Raise Exception EC-PROGRAM-ARG-MISMATCH
+           Raise Sikozu
+           
+           Read Moya Next Record Into Crichton
+             Advancing On Lock
+             Retry 42 Times
+             With Lock
+             At End Display 'At End'
+             Not At End Display 'Not At End'
+           End-Read
+           Read Roscinante Previous Into Amos
+             Advancing Lock
+             Retry For 3 + 4 / 2 Seconds
+             Lock
+             End Display 'At End'
+             Not End Display 'Not At End'
+           End-Read
+           Read Roscinante Previous Into Amos
+             Ignoring Lock
+             Retry For 3 + 4 / 2 Seconds
+             No Lock
+             End Display 'At End'
+             Not End Display 'Not At End'
+           End-Read
+           
            .
 

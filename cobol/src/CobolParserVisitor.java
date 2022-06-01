@@ -3196,6 +3196,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPurgeStatement(CobolParser.PurgeStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#raiseStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRaiseStatement(CobolParser.RaiseStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#readStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3213,6 +3219,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitReadWith(CobolParser.ReadWithContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#readLockPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitReadLockPhrase(CobolParser.ReadLockPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#readKey}.
 	 * @param ctx the parse tree

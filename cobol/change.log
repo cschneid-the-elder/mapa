@@ -32,6 +32,12 @@ Added sharingPhrase and retryPhrase to openStatement.
 
 Added performWithExceptionCheckingStatement form of PERFORM statement.
 
+Added raiseStatement.
+
+Added readLockPhrase to readStatement and changed readWith to not require
+KEPT | NO before LOCK as this isn't in either the standard nor in IBM's
+documentation.
+
 Added testdata/local/test9040.cbl to test these changes.
 
 --2022-05-26--------------------------------------------------------------------

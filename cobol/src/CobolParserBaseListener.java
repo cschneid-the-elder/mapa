@@ -6387,6 +6387,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterRaiseStatement(CobolParser.RaiseStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitRaiseStatement(CobolParser.RaiseStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterReadStatement(CobolParser.ReadStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -6418,6 +6430,18 @@ public class CobolParserBaseListener implements CobolParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitReadWith(CobolParser.ReadWithContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterReadLockPhrase(CobolParser.ReadLockPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitReadLockPhrase(CobolParser.ReadLockPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
