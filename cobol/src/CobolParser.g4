@@ -1740,7 +1740,7 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | resumeStatement | returnStatement | rewriteStatement | rollbackStatement | searchStatement | sendStatement | standardSendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -2737,6 +2737,12 @@ releaseStatement
    : RELEASE recordName (FROM qualifiedDataName)?
    ;
 
+// resume statement
+
+resumeStatement
+   : RESUME AT? ((NEXT STATEMENT) | procedureName)
+   ;
+
 // return statement
 
 returnStatement
@@ -2750,13 +2756,23 @@ returnInto
 // rewrite statement
 
 rewriteStatement
-   : REWRITE recordName rewriteFrom? invalidKeyPhrase? notInvalidKeyPhrase? END_REWRITE?
+   : REWRITE recordName rewriteFrom? retryPhrase? lockPhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_REWRITE?
    ;
 
 rewriteFrom
    : FROM identifier
    ;
 
+lockPhrase
+   : WITH? NO? LOCK
+   ;
+
+// rollback statement
+
+rollbackStatement
+   : ROLLBACK
+   ;
+ 
 // search statement
 
 searchStatement
@@ -2813,14 +2829,33 @@ sendAdvancingMnemonic
    : mnemonicName
    ;
 
+// standard send statement
+
+standardSendStatement
+   : (standardSendStatementFormat1 | standardSendStatementFormat2)
+   ;
+   
+standardSendStatementFormat1
+   : SEND TO? (literal | messageServerName) FROM dataName
+   RETURNING dataName onExceptionClause? notOnExceptionClause? 
+   END_SEND
+   ;
+   
+standardSendStatementFormat2
+   : SEND TO? dataName FROM dataName
+   (RAISING ((EXCEPTION exceptionName) | (LAST EXCEPTION?)))?
+   onExceptionClause? notOnExceptionClause? 
+   END_SEND
+   ;
+
 // set statement
 
 setStatement
-   : SET (setToStatement+ | setUpDownByStatement)
+   : SET (setToStatement+ | setUpDownByStatement | setScreenAttributeStatement)
    ;
 
 setToStatement
-   : setTo+ TO setToValue+
+   : (ADDRESS OF?)? setTo+ TO setToValue+
    ;
 
 setUpDownByStatement
@@ -2837,6 +2872,19 @@ setToValue
 
 setByValue
    : identifier | literal
+   ;
+
+setScreenAttributeStatement
+   : screenName ATTRIBUTE (setScreenAttribute (OFF | ON))+
+   ;
+   
+setScreenAttribute
+   : (BELL
+     | BLINK
+     | HIGHLIGHT
+     | LOWLIGHT
+     | REVERSE_VIDEO
+     | UNDERLINE)
    ;
 
 // sort statement
@@ -3032,7 +3080,7 @@ unstringTallyingPhrase
 // use statement
 
 useStatement
-   : USE (useAfterClause | useDebugClause)
+   : USE (useAfterClause | useDebugClause | useExceptionNameClause | useExceptionObjectClause)
    ;
 
 useAfterClause
@@ -3051,6 +3099,18 @@ useDebugOn
    : ALL PROCEDURES | ALL REFERENCES? OF? identifier | procedureName | fileName
    ;
 
+useExceptionNameClause
+   : AFTER? ((EXCEPTION CONDITION) | EC) (exceptionName | useExceptionNameWithFilePhrase)+
+   ;
+
+useExceptionNameWithFilePhrase
+   : (exceptionName (FILE fileName)+)
+   ;
+
+useExceptionObjectClause
+   : AFTER? ((EXCEPTION OBJECT) | EO) (className | interfaceName)
+   ;
+   
 // xml generate statement
 
 xmlGenerateStatement
@@ -3602,6 +3662,10 @@ localeName
    : cobolWord
    ;
 
+messageServerName
+   : cobolWord
+   ;
+
 methodName
    : cobolWord
    ;
@@ -3686,7 +3750,7 @@ cobolWord
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
    | RAISE | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO
-   | SAVE | SECONDS | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STRONG | SYMBOL
+   | SAVE | SECONDS | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STATEMENT | STRONG | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF
    | UNDERLINE
    | VIRTUAL
@@ -3815,6 +3879,7 @@ cicsWord
    | CLASS
    | CLOSE
    | COMMIT
+   | CONDITION
    | CONTROL
    | COPY
    | CURSOR
@@ -3879,10 +3944,12 @@ cicsWord
    | RELEASE
    | REPLACE
    | RESET
+   | RESUME
    | RETRY
    | RETURN
    | REWIND
    | REWRITE
+   | ROLLBACK
    | RUN
    | SECONDS
    | SECURITY

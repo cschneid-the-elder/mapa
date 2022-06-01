@@ -3316,6 +3316,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitReleaseStatement(CobolParser.ReleaseStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#resumeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitResumeStatement(CobolParser.ResumeStatementContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#returnStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3339,6 +3345,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitRewriteFrom(CobolParser.RewriteFromContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#lockPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLockPhrase(CobolParser.LockPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#rollbackStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRollbackStatement(CobolParser.RollbackStatementContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#searchStatement}.
 	 * @param ctx the parse tree
@@ -3418,6 +3436,24 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSendAdvancingMnemonic(CobolParser.SendAdvancingMnemonicContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#standardSendStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandardSendStatement(CobolParser.StandardSendStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#standardSendStatementFormat1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandardSendStatementFormat1(CobolParser.StandardSendStatementFormat1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#standardSendStatementFormat2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStandardSendStatementFormat2(CobolParser.StandardSendStatementFormat2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#setStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -3453,6 +3489,18 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSetByValue(CobolParser.SetByValueContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#setScreenAttributeStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetScreenAttributeStatement(CobolParser.SetScreenAttributeStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#setScreenAttribute}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSetScreenAttribute(CobolParser.SetScreenAttributeContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#sortStatement}.
 	 * @param ctx the parse tree
@@ -3747,6 +3795,24 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUseDebugOn(CobolParser.UseDebugOnContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#useExceptionNameClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseExceptionNameClause(CobolParser.UseExceptionNameClauseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#useExceptionNameWithFilePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseExceptionNameWithFilePhrase(CobolParser.UseExceptionNameWithFilePhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#useExceptionObjectClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseExceptionObjectClause(CobolParser.UseExceptionObjectClauseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#xmlGenerateStatement}.
 	 * @param ctx the parse tree
@@ -4407,6 +4473,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitLocaleName(CobolParser.LocaleNameContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link CobolParser#messageServerName}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitMessageServerName(CobolParser.MessageServerNameContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link CobolParser#methodName}.
 	 * @param ctx the parse tree

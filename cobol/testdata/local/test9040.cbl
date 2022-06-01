@@ -11,6 +11,31 @@
            05  Stark    Pointer.
            05  Noranti  Picture Is 1(8).
        Procedure Division.
+       Declaratives.
+       Exceptional-Processing-EC-DATA Section.
+           Use After Exception Condition EC-DATA.
+           Resume At Recovery-From-EC-DATA
+           .
+           
+       Exceptional-Processing-EC-IO Section.
+           Use After Exception Condition EC-IO File Talyn.
+           Resume Recovery-From-EC-IO
+           .
+           
+       Exceptional-Processing-EC-OMG Section.
+           Use EC 
+             EC-BAD-STUFF 
+             EC-WORSE-STUFF 
+             EC-IO File Moya File Roscinante.
+           Resume OMG-Give-It-Up
+           .
+           
+       Exceptional-Object-Processing Section.
+           Use Exception Object Protomolecule.
+           Resume Next Statement
+           .
+           
+       End Declaratives.
            Add 1 To Aeryn Rounded Mode AWAY-FROM-ZERO
            Add 1 To Aeryn Giving Rygel 
              Rounded Mode NEAREST-AWAY-FROM-ZERO
@@ -245,7 +270,7 @@
                Add 1 To Talyn-Field
              When Exception Talyn Display 'Oops'
              When EC-DATA Display 'Also Oops'
-             When EC-IO File Talyn Display 'Oops Again'
+             When EC-IO File Talyn Resume Next Statement
              When Other Display 'Other Oops'
              Common Display 'Common Oops'
              Finally Display 'Ultimate Oops'
@@ -320,5 +345,28 @@
              Not Exception Display 'Ordinary' End-Display
            End-Receive
            
+           Send x'4815162342' From Crichton
+             Returning Aeryn
+             Exception Display 'Send failed' End-Display
+             Not Exception Display 'Send Succeeded' End-Display
+           End-Send
+           Send To Roscinante From NaomiNagata
+             Returning AmosBurton
+           End-Send
+           Send To Roscinante From NaomiNagata
+             Raising Exception EC-ALL
+           End-Send
+           Send To Roscinante From NaomiNagata
+             Raising Last
+           End-Send
+
+           Set Address Of AlexKamal To TheBelt
+           Set EarthAlliance Attribute Lowlight On
+           .
+           
+       OMG-Give-It-Up.
+           Rollback
+           Move 16 To Return-Code
+           Goback
            .
 
