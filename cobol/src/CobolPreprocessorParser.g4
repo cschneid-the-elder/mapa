@@ -81,6 +81,7 @@ compilerOption
    | INITIAL
    | INLINE | INL
    | ((INVDATA | INVD) (LPARENCHAR invdata_opts (COMMACHAR invdata_opts)* RPARENCHAR)?)
+   | javaiop
    | (LANGUAGE | LANG) LPARENCHAR (ENGLISH | CS | EN | JA | JP | KA | UE) RPARENCHAR
    | LEASM | LENGTH | LIB | LIN
    | (LINECOUNT | LC) LPARENCHAR literal RPARENCHAR
@@ -119,6 +120,7 @@ compilerOption
    | NOINITIAL
    | NOINLINE | NOINL
    | (NOINVDATA | NOINVD)
+   | NOJAVAIOP
    | NOLENGTH | NOLIB | NOLINKAGE | NOLIST
    | NOMAP 
    | (NOMDECK | NOMD)
@@ -133,6 +135,7 @@ compilerOption
    | NORENT | NORULES
    | (NOSEQUENCE | NOSEQ) 
    | (NOSERVICE | NOSERV)
+   | NOSMARTBIN
    | (NOSOURCE | NOS) 
    | NOSPIE | NOSQL | NOSQLIMS
    | (NOSQLCCSID | NOSQLC) 
@@ -170,6 +173,7 @@ compilerOption
    | (SEQUENCE | SEQ) (LPARENCHAR literal COMMACHAR literal RPARENCHAR)?
    | ((SERVICE | SERV) LPARENCHAR literal RPARENCHAR)
    | (SIZE | SZ) LPARENCHAR (MAX | literal) RPARENCHAR
+   | SMARTBIN
    | ((SOURCE | S_CHAR) (LPARENCHAR (DEC | HEX) RPARENCHAR)?)
    | SP
    | SPACE LPARENCHAR literal RPARENCHAR
@@ -304,6 +308,17 @@ test_opts
     | NOSOURCE
     | EJPD
     | NOEJPD)
+    ;
+
+javaiop
+    : (JAVAIOP (LPARENCHAR javaiopOption (COMMACHAR javaiopOption)* RPARENCHAR)?)
+    ;
+
+javaiopOption
+    : ((OUTPATH LPARENCHAR literal RPARENCHAR)
+    | (JVMINITOPTIONS LPARENCHAR literal RPARENCHAR)
+    | NOJAVA64
+    | JAVA64)
     ;
 
 classicCommentEntry
@@ -456,6 +471,8 @@ compilerDirective
    | compilerDirectiveDisplay
    | compilerDirectiveFlag02
    | compilerDirectiveFlag14
+   | compilerDirectiveJavaCallable
+   | compilerDirectiveJavaShareable
    | compilerDirectiveLeapSecond
    | compilerDirectiveListing
    | compilerDirectivePage
@@ -538,6 +555,14 @@ compilerDirectiveFlag02
 
 compilerDirectiveFlag14
    : (COMPILER_DIRECTIVE_TAG FLAG_14 (ALL | IDENTIFIER | REF_MOD_ZERO_LENGTH) (COMP_DIR_ON | COMP_DIR_OFF))
+   ;
+
+compilerDirectiveJavaCallable
+   : (COMPILER_DIRECTIVE_TAG JAVA_CALLABLE)
+   ;
+   
+compilerDirectiveJavaShareable
+   : (COMPILER_DIRECTIVE_TAG JAVA_SHAREABLE (COMP_DIR_ON | COMP_DIR_OFF))
    ;
 
 compilerDirectiveLeapSecond

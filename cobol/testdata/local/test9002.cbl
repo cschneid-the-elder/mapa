@@ -54,6 +54,8 @@
            DISPLAY "X NOT DEFINED"
            >>END-IF
 
-
+           >>JAVA-SHAREABLE ON
+           >>JAVA-SHAREABLE OFF
+           >>JAVA-CALLABLE
 
            GOBACK.

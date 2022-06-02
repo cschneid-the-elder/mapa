@@ -100,7 +100,7 @@ identificationDivisionBody
 
 programIdParagraph
    : PROGRAM_ID (DOT | DOT_FS)
-     programName (AS literal)? (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
+     programName (AS literal)? (IS? (COMMON | INITIAL | LIBRARY | DEFINITION | RECURSIVE | PROTOTYPE) PROGRAM?)? (DOT_FS | DOT)? commentEntry?
    ;
 
 // - class id paragraph --------------------------------
@@ -178,8 +178,11 @@ arithmeticClause
    ;
    
 defaultRoundedClause
-   : DEFAULT ROUNDED MODE? IS? 
-     (AWAY_FROM_ZERO
+   : DEFAULT ROUNDED MODE? IS? roundedMode
+   ;
+
+roundedMode
+   : (AWAY_FROM_ZERO
      | NEAREST_AWAY_FROM_ZERO
      | NEAREST_EVEN
      | NEAREST_TOWARD_ZERO
@@ -188,6 +191,10 @@ defaultRoundedClause
      | TOWARD_LESSER
      | TRUNCATION
      )
+   ;
+
+roundedPhrase
+   : ROUNDED (MODE IS? roundedMode)?
    ;
 
 entryConventionClause
@@ -592,6 +599,31 @@ functionIntrinsicPhrase
             ,"VARIANCE"
             ,"WHEN-COMPILED"
             ,"YEAR-TO-YYYY"
+            ,"BASECONVERT"
+            ,"BOOLEAN-OF-INTEGER"
+            ,"CHAR-NATIONAL"
+            ,"CONCAT"
+            ,"CONTENT-OF"
+            ,"CONVERT"
+            ,"EXCEPTION-FILE"
+            ,"EXCEPTION-FILE-N"
+            ,"EXCEPTION-LOCATION"
+            ,"EXCEPTION-LOCATION-N"
+            ,"EXCEPTION-STATEMENT"
+            ,"EXCEPTION-STATUS"
+            ,"FIND-STRING"
+            ,"FRACTION-PART"
+            ,"HIGHEST-ALGEBRAIC"
+            ,"INTEGER-OF-BOOLEAN"
+            ,"LOCALE-COMPARE"
+            ,"LOCALE-DATE"
+            ,"LOCALE-TIME"
+            ,"LOCAL-TIME-FROM-SECONDS"
+            ,"LOWEST-ALGEBRAIC"
+            ,"MODULE-NAME"
+            ,"SMALLEST-ALGEBRAIC"
+            ,"STANDARD-COMPARE"
+            ,"SUBSTITUTE"
             );
          functionNames.addAll(funcs);
       }
@@ -1660,7 +1692,7 @@ dataWithLowerBoundsClause
 // --- procedure division --------------------------------------------------------------------
 
 procedureDivision
-   : PROCEDURE DIVISION procedureDivisionUsingClause? procedureDivisionGivingClause? (DOT_FS | DOT) procedureDeclaratives? procedureDivisionBody
+   : PROCEDURE DIVISION procedureDivisionUsingClause? procedureDivisionGivingClause? procedureDivisionRaisingClause? (DOT_FS | DOT) procedureDeclaratives? procedureDivisionBody
    ;
 
 procedureDivisionUsingClause
@@ -1669,6 +1701,13 @@ procedureDivisionUsingClause
 
 procedureDivisionGivingClause
    : (GIVING | RETURNING) dataName
+   ;
+
+procedureDivisionRaisingClause
+   : (RAISING 
+     (exceptionName
+     | ((FACTORY OF?)? className)
+     | interfaceName)+)
    ;
 
 procedureDivisionUsingParameter
@@ -1726,13 +1765,13 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | readStatement | receiveStatement | releaseStatement | returnStatement | rewriteStatement | searchStatement | sendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | terminateStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | resumeStatement | returnStatement | rewriteStatement | rollbackStatement | searchStatement | sendStatement | standardSendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | suppressStatement | terminateStatement | unlockStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
 
 acceptStatement
-   : ACCEPT identifier (acceptFromDateStatement | acceptFromEscapeKeyStatement | acceptFromMnemonicStatement | acceptMessageCountStatement)? onExceptionClause? notOnExceptionClause? END_ACCEPT?
+   : ACCEPT identifier (acceptFromDateStatement | acceptFromEscapeKeyStatement | acceptFromMnemonicStatement | acceptMessageCountStatement | acceptScreenStatement)? onExceptionClause? notOnExceptionClause? END_ACCEPT?
    ;
 
 acceptFromDateStatement
@@ -1749,6 +1788,10 @@ acceptFromEscapeKeyStatement
 
 acceptMessageCountStatement
    : MESSAGE? COUNT
+   ;
+
+acceptScreenStatement
+   : (AT (LINE NUMBER? (identifier | integerLiteral)) | ((COLUMN | COL) NUMBER? (identifier | integerLiteral)))
    ;
 
 // add statement
@@ -1774,7 +1817,7 @@ addFrom
    ;
 
 addTo
-   : identifier ROUNDED? COMMACHAR?
+   : identifier roundedPhrase? COMMACHAR?
    ;
 
 addToGiving
@@ -1782,13 +1825,13 @@ addToGiving
    ;
 
 addGiving
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 // allocate statement
 
 allocateStatement
-   : ALLOCATE ((identifier CHARACTERS) | arithmeticExpression) INITIALIZED? (LOC literal)? (RETURNING identifier)?
+   : ALLOCATE ((arithmeticExpression CHARACTERS) | identifier) INITIALIZED? (LOC integerLiteral)? (RETURNING identifier)?
    ;
 
 // altered go to statement
@@ -1826,7 +1869,7 @@ callByReferencePhrase
    ;
 
 callByReference
-   : (((ADDRESS OF | INTEGER | STRING)? identifier | literal | fileName) | OMITTED) COMMACHAR?
+   : (((ADDRESS OF | INTEGER | STRING)? (identifier fixedPhrase?) | literal | fileName) | OMITTED) COMMACHAR?
    ;
 
 callByValuePhrase
@@ -1842,11 +1885,15 @@ callByContentPhrase
    ;
 
 callByContent
-   : ((ADDRESS OF | LENGTH OF?)? identifier | literal | OMITTED) COMMACHAR?
+   : ((ADDRESS OF | LENGTH OF?)? (identifier fixedPhrase?) | literal | OMITTED) COMMACHAR?
    ;
 
 callGivingPhrase
    : (GIVING | RETURNING) identifier
+   ;
+
+fixedPhrase
+   : (AS FIXED LENGTH integerLiteral)
    ;
 
 // cancel statement
@@ -1897,6 +1944,12 @@ closePortFileIOUsingAssociatedDataLength
    : ASSOCIATED_DATA_LENGTH OF? (identifier | integerLiteral)
    ;
 
+// commit statement
+
+commitStatement
+   : COMMIT
+   ;
+
 // compute statement
 
 computeStatement
@@ -1904,19 +1957,27 @@ computeStatement
    ;
 
 computeStore
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 // continue statement
 
 continueStatement
-   : CONTINUE
+   : CONTINUE (AFTER arithmeticExpression SECONDS)?
    ;
 
 // delete statement
 
 deleteStatement
-   : DELETE fileName RECORD? invalidKeyPhrase? notInvalidKeyPhrase? END_DELETE?
+   : deleteStatementFormat1 | deleteStatementFormat2
+   ;
+
+deleteStatementFormat1
+   : DELETE fileName RECORD? retryPhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_DELETE?
+   ;
+
+deleteStatementFormat2
+   : DELETE FILE OVERRIDE? fileName+ onExceptionClause? notOnExceptionClause? END_DELETE?
    ;
 
 // disable statement
@@ -1928,6 +1989,10 @@ disableStatement
 // display statement
 
 displayStatement
+   : displayStatementFormat1 | displayStatementFormat2
+   ;
+
+displayStatementFormat1
    : DISPLAY displayOperand+ displayAt? displayUpon? displayWith? onExceptionClause? notOnExceptionClause? END_DISPLAY?
    ;
 
@@ -1945,6 +2010,14 @@ displayUpon
 
 displayWith
    : WITH? NO ADVANCING
+   ;
+
+displayStatementFormat2
+   : DISPLAY screenName displayAtFormat2? onExceptionClause? notOnExceptionClause? END_DISPLAY?
+   ;
+
+displayAtFormat2
+   : AT ((LINE NUMBER? (identifier | integerLiteral)) | ((COLUMN | COL) NUMBER? (identifier | integerLiteral)))
    ;
 
 // divide statement
@@ -1970,11 +2043,11 @@ divideGivingPhrase
    ;
 
 divideInto
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 divideGiving
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 divideRemainder
@@ -2085,7 +2158,11 @@ exhibitOperand
 // exit statement
 
 exitStatement
-   : EXIT (PROGRAM | (PERFORM CYCLE?) | METHOD | PARAGRAPH | SECTION)?
+   : EXIT ((PROGRAM raisingPhrase?) | (PERFORM CYCLE?) | METHOD | PARAGRAPH | SECTION)?
+   ;
+
+raisingPhrase
+   : RAISING ((EXCEPTION exceptionName) | identifier | (LAST EXCEPTION?))
    ;
 
 // free statement
@@ -2103,7 +2180,11 @@ generateStatement
 // goback statement
 
 gobackStatement
-   : GOBACK
+   : GOBACK (raisingPhrase | statusPhrase)?
+   ;
+
+statusPhrase
+   : WITH? (ERROR | NORMAL) STATUS? (identifier | literal)?
    ;
 
 // goto statement
@@ -2137,15 +2218,44 @@ ifElse
 // initialize statement
 
 initializeStatement
-   : INITIALIZE identifier+ initializeReplacingPhrase?
+   : INITIALIZE identifier+ initializeWithFiller? initializeValuePhrase? initializeReplacingPhrase? initializeDefaultPhrase?
+   ;
+
+initializeWithFiller
+   : WITH? FILLER
+   ;
+
+initializeValuePhrase
+   : (ALL | initializeCategoryName) TO? VALUE
    ;
 
 initializeReplacingPhrase
-   : REPLACING initializeReplacingBy+
+   : THEN? REPLACING initializeReplacingBy+
    ;
 
 initializeReplacingBy
-   : (ALPHABETIC | ALPHANUMERIC | ALPHANUMERIC_EDITED | NATIONAL | NATIONAL_EDITED | NUMERIC | NUMERIC_EDITED | DBCS | EGCS) DATA? BY (identifier | literal)
+   : initializeCategoryName DATA? BY (identifier | literal)
+   ;
+
+initializeDefaultPhrase
+   : THEN? TO? DEFAULT
+   ;
+
+initializeCategoryName
+   : (ALPHABETIC 
+   | ALPHANUMERIC 
+   | ALPHANUMERIC_EDITED 
+   | BOOLEAN 
+   | DATA_POINTER 
+   | FUNCTION_POINTER 
+   | NATIONAL 
+   | NATIONAL_EDITED 
+   | NUMERIC 
+   | NUMERIC_EDITED 
+   | OBJECT_REFERENCE 
+   | PROGRAM_POINTER 
+   | DBCS 
+   | EGCS)
    ;
 
 // initiate statement
@@ -2157,7 +2267,7 @@ initiateStatement
 // inspect statement
 
 inspectStatement
-   : INSPECT identifier (inspectTallyingPhrase | inspectReplacingPhrase | inspectTallyingReplacingPhrase | inspectConvertingPhrase)
+   : INSPECT BACKWARD? identifier (inspectTallyingPhrase | inspectReplacingPhrase | inspectTallyingReplacingPhrase | inspectConvertingPhrase)
    ;
 
 inspectTallyingPhrase
@@ -2214,6 +2324,31 @@ inspectTo
 
 inspectBeforeAfter
    : (BEFORE | AFTER) INITIAL? (identifier | literal)
+   ;
+
+// invoke statement
+
+invokeStatement
+   : INVOKE (className | SELF | SUPER) (NEW | identifier | literal) 
+   (USING (invokeByReferenceClause | invokeByContentClause | invokeByValueClause)+)? 
+   invokeReturningClause? onExceptionClause? notOnExceptionClause? 
+   END_INVOKE?
+   ;
+
+invokeReturningClause
+   : RETURNING identifier
+   ;
+
+invokeByReferenceClause
+   : BY? REFERENCE (identifier | OMITTED)
+   ;
+
+invokeByContentClause
+   : BY? CONTENT (identifier | literal | arithmeticExpression)
+   ;
+
+invokeByValueClause
+   : BY? VALUE (((LENGTH OF)? identifier) | literal | arithmeticExpression)
    ;
 
 // json generate statement
@@ -2390,7 +2525,7 @@ multiplyRegular
    ;
 
 multiplyRegularOperand
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 multiplyGiving
@@ -2402,7 +2537,7 @@ multiplyGivingOperand
    ;
 
 multiplyGivingResult
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 // next sentence
@@ -2418,7 +2553,7 @@ openStatement
    ;
 
 openInputStatement
-   : INPUT (openInput COMMACHAR?)+
+   : INPUT sharingPhrase? retryPhrase? (openInput COMMACHAR?)+
    ;
 
 openInput
@@ -2426,7 +2561,7 @@ openInput
    ;
 
 openOutputStatement
-   : OUTPUT (openOutput COMMACHAR?)+
+   : OUTPUT sharingPhrase? retryPhrase? (openOutput COMMACHAR?)+
    ;
 
 openOutput
@@ -2434,17 +2569,21 @@ openOutput
    ;
 
 openIOStatement
-   : I_O (fileName COMMACHAR?)+
+   : I_O sharingPhrase? retryPhrase? (fileName COMMACHAR?)+
    ;
 
 openExtendStatement
-   : EXTEND (fileName COMMACHAR?)+
+   : EXTEND sharingPhrase? retryPhrase? (fileName COMMACHAR?)+
+   ;
+
+sharingPhrase
+   : SHARING WITH? ((ALL OTHER?) | (NO OTHER?) | (READ ONLY))
    ;
 
 // perform statement
 
 performStatement
-   : PERFORM (performInlineStatement | performProcedureStatement)
+   : PERFORM (performInlineStatement | performProcedureStatement | performWithExceptionCheckingStatement)
    ;
 
 performInlineStatement
@@ -2464,7 +2603,7 @@ performTimes
    ;
 
 performUntil
-   : performTestClause? UNTIL condition
+   : performTestClause? UNTIL (condition | EXIT)
    ;
 
 performVarying
@@ -2495,24 +2634,68 @@ performTestClause
    : WITH? TEST (BEFORE | AFTER)
    ;
 
+performWithExceptionCheckingStatement
+   : (WITH? LOCATION)?
+   statement* 
+   performExceptionClause+
+   performOtherExceptionClause?
+   performCommonExceptionClause?
+   performFinallyClause?
+   END_PERFORM
+   ;
+
+performExceptionClause
+   : (WHEN (performExceptionPhrase | exceptionName+ | (exceptionName FILE fileName)+) statement+)
+   ;
+ 
+performExceptionPhrase
+   : EXCEPTION (fileName+ | INPUT | OUTPUT | I_O | EXTEND)
+   ;
+
+performOtherExceptionClause
+   : (WHEN OTHER EXCEPTION? statement+)
+   ;
+   
+performCommonExceptionClause
+   : (WHEN? COMMON EXCEPTION? statement+)
+   ;
+
+performFinallyClause
+   : (FINALLY statement+)
+   ;
+
 // purge statement
 
 purgeStatement
    : PURGE cdName+
    ;
 
+// raise statement
+
+raiseStatement
+   : RAISE ((EXCEPTION exceptionName) | identifier)
+   ;
+
 // read statement
 
 readStatement
-   : READ fileName NEXT? RECORD? readInto? readWith? readKey? invalidKeyPhrase? notInvalidKeyPhrase? atEndPhrase? notAtEndPhrase? END_READ?
+   : READ fileName (NEXT | PREVIOUS)? RECORD? readInto? readLockPhrase? retryPhrase? readWith? readKey? invalidKeyPhrase? notInvalidKeyPhrase? atEndPhrase? notAtEndPhrase? END_READ?
    ;
 
 readInto
    : INTO identifier
    ;
 
+/*
+Neither KEPT nor WAIT are in the current standard, they
+are also absent from IBM's current documentation.
+*/
 readWith
-   : WITH? ((KEPT | NO) LOCK | WAIT)
+   : WITH? ((KEPT | NO)? LOCK | WAIT)
+   ;
+
+readLockPhrase
+   : ((ADVANCING ON?) | IGNORING) LOCK
    ;
 
 readKey
@@ -2521,6 +2704,10 @@ readKey
 
 // receive statement
 
+/*
+Presuming this works with the Communication Section which
+is no longer in the standard.
+*/
 receiveStatement
    : RECEIVE (receiveFromStatement | receiveIntoStatement) onExceptionClause? notOnExceptionClause? END_RECEIVE?
    ;
@@ -2565,10 +2752,24 @@ receiveStatus
    : STATUS IN? (identifier)
    ;
 
+standardReceiveStatement
+   : RECEIVE FROM? dataName GIVING dataName standardReceiveContinuePhrase? onExceptionClause? notOnExceptionClause? END_RECEIVE?
+   ;
+
+standardReceiveContinuePhrase
+   : CONTINUE AFTER? ((arithmeticExpression SECONDS?) | (MESSAGE RECEIVED))
+   ;
+
 // release statement
 
 releaseStatement
    : RELEASE recordName (FROM qualifiedDataName)?
+   ;
+
+// resume statement
+
+resumeStatement
+   : RESUME AT? ((NEXT STATEMENT) | procedureName)
    ;
 
 // return statement
@@ -2584,13 +2785,23 @@ returnInto
 // rewrite statement
 
 rewriteStatement
-   : REWRITE recordName rewriteFrom? invalidKeyPhrase? notInvalidKeyPhrase? END_REWRITE?
+   : REWRITE recordName rewriteFrom? retryPhrase? lockPhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_REWRITE?
    ;
 
 rewriteFrom
    : FROM identifier
    ;
 
+lockPhrase
+   : WITH? NO? LOCK
+   ;
+
+// rollback statement
+
+rollbackStatement
+   : ROLLBACK
+   ;
+ 
 // search statement
 
 searchStatement
@@ -2647,14 +2858,33 @@ sendAdvancingMnemonic
    : mnemonicName
    ;
 
+// standard send statement
+
+standardSendStatement
+   : (standardSendStatementFormat1 | standardSendStatementFormat2)
+   ;
+   
+standardSendStatementFormat1
+   : SEND TO? (literal | messageServerName) FROM dataName
+   RETURNING dataName onExceptionClause? notOnExceptionClause? 
+   END_SEND
+   ;
+   
+standardSendStatementFormat2
+   : SEND TO? dataName FROM dataName
+   (RAISING ((EXCEPTION exceptionName) | (LAST EXCEPTION?)))?
+   onExceptionClause? notOnExceptionClause? 
+   END_SEND
+   ;
+
 // set statement
 
 setStatement
-   : SET (setToStatement+ | setUpDownByStatement)
+   : SET (setToStatement+ | setUpDownByStatement | setScreenAttributeStatement)
    ;
 
 setToStatement
-   : setTo+ TO setToValue+
+   : (ADDRESS OF?)? setTo+ TO setToValue+
    ;
 
 setUpDownByStatement
@@ -2671,6 +2901,19 @@ setToValue
 
 setByValue
    : identifier | literal
+   ;
+
+setScreenAttributeStatement
+   : screenName ATTRIBUTE (setScreenAttribute (OFF | ON))+
+   ;
+   
+setScreenAttribute
+   : (BELL
+     | BLINK
+     | HIGHLIGHT
+     | LOWLIGHT
+     | REVERSE_VIDEO
+     | UNDERLINE)
    ;
 
 // sort statement
@@ -2740,11 +2983,15 @@ startKey
 // stop statement
 
 stopStatement
-   : STOP (RUN | literal | stopStatementGiving)
+   : STOP (RUN | literal | stopStatementGiving | stopStatementWith)
    ;
 
 stopStatementGiving
    : RUN (GIVING | RETURNING) (identifier | integerLiteral)
+   ;
+
+stopStatementWith
+   : (RUN WITH? (ERROR | NORMAL) STATUS? (identifier | literal)?)
    ;
 
 // string statement
@@ -2800,7 +3047,7 @@ subtractSubtrahend
    ;
 
 subtractMinuend
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 subtractMinuendGiving
@@ -2808,17 +3055,29 @@ subtractMinuendGiving
    ;
 
 subtractGiving
-   : identifier ROUNDED?
+   : identifier roundedPhrase?
    ;
 
 subtractMinuendCorresponding
-   : qualifiedDataName ROUNDED?
+   : qualifiedDataName roundedPhrase?
+   ;
+
+// suppress statement
+
+suppressStatement
+   : SUPPRESS PRINTING?
    ;
 
 // terminate statement
 
 terminateStatement
    : TERMINATE reportName
+   ;
+
+// unlock statement
+
+unlockStatement
+   : UNLOCK fileName (RECORD | RECORDS)?
    ;
 
 // unstring statement
@@ -2866,7 +3125,7 @@ unstringTallyingPhrase
 // use statement
 
 useStatement
-   : USE (useAfterClause | useDebugClause)
+   : USE (useAfterClause | useDebugClause | useExceptionNameClause | useExceptionObjectClause | useReportClause)
    ;
 
 useAfterClause
@@ -2885,6 +3144,22 @@ useDebugOn
    : ALL PROCEDURES | ALL REFERENCES? OF? identifier | procedureName | fileName
    ;
 
+useExceptionNameClause
+   : AFTER? ((EXCEPTION CONDITION) | EC) (exceptionName | useExceptionNameWithFilePhrase)+
+   ;
+
+useExceptionNameWithFilePhrase
+   : (exceptionName (FILE fileName)+)
+   ;
+
+useExceptionObjectClause
+   : AFTER? ((EXCEPTION OBJECT) | EO) (className | interfaceName)
+   ;
+
+useReportClause
+   : GLOBAL? BEFORE REPORTING identifier
+   ;
+   
 // xml generate statement
 
 xmlGenerateStatement
@@ -3013,7 +3288,7 @@ xmlParseEndXmlPhrase
 // write statement
 
 writeStatement
-   : WRITE recordName writeFromPhrase? writeAdvancingPhrase? writeAtEndOfPagePhrase? writeNotAtEndOfPagePhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_WRITE?
+   : WRITE (recordName | (FILE fileName)) writeFromPhrase? writeAdvancingPhrase? retryPhrase? lockPhrase? writeAtEndOfPagePhrase? writeNotAtEndOfPagePhrase? invalidKeyPhrase? notInvalidKeyPhrase? END_WRITE?
    ;
 
 writeFromPhrase
@@ -3078,6 +3353,12 @@ notOnSizeErrorPhrase
    : NOT ON? SIZE ERROR statement*
    ;
 
+retryPhrase
+   : RETRY 
+     ((arithmeticExpression TIMES)
+     | (FOR arithmeticExpression SECONDS)
+     | FOREVER)
+   ;
 // statement clauses ----------------------------------
 
 onExceptionClause
@@ -3090,8 +3371,16 @@ notOnExceptionClause
 
 // arithmetic expression ----------------------------------
 
+/*
+Including booleanExpression here is the only way I found to
+avoid the abiguity resulting from both arithmeticExpression
+and booleanExpression allowing a single identifier or a
+single literal.  Keeping them separate and as options in the
+computeStatement resulted in parsing problems regardless of
+their order.
+*/
 arithmeticExpression
-   : multDivs plusMinus*
+   : multDivs plusMinus* | booleanExpression
    ;
 
 plusMinus
@@ -3116,6 +3405,27 @@ power
 
 basis
    : LPARENCHAR arithmeticExpression RPARENCHAR | identifier | literal
+   ;
+
+// booleanExpression --------------------------
+
+/*
+Enclosing the options within parentheses will get you a
+mutual left recursion error for this rule (with itself, ironically).
+*/
+booleanExpression
+   : 
+     booleanExpression binaryBooleanOperator booleanExpression 
+   | unaryBooleanOperator booleanExpression 
+   | (LPARENCHAR booleanExpression RPARENCHAR) 
+   | booleanExpression booleanShiftOperator integerLiteral
+   | identifier 
+   | (ALL? literal) 
+   | figurativeZero
+   ;
+
+figurativeZero
+   : (ZERO | ZEROS | ZEROES)
    ;
 
 // condition ----------------------------------
@@ -3351,6 +3661,10 @@ environmentName
    : systemName
    ;
 
+exceptionName
+   : cobolWord
+   ;
+
 fileName
    : cobolWord
    ;
@@ -3394,6 +3708,10 @@ localName
    ;
 
 localeName
+   : cobolWord
+   ;
+
+messageServerName
    : cobolWord
    ;
 
@@ -3466,7 +3784,7 @@ paragraph cursorClause to be mistaken for environmentSwitchNameClause.
 cobolWord
    : IDENTIFIER 
    | ABORT | AS | ASCII | ASSOCIATED_DATA | ASSOCIATED_DATA_LENGTH | ATTRIBUTE | AUTO | AUTO_SKIP
-   | BACKGROUND_COLOR | BACKGROUND_COLOUR | BEEP | BELL | BINARY | BIT | BLINK | BLOB | BOUNDS
+   | BACKGROUND_COLOR | BACKGROUND_COLOUR | BACKWARD | BEEP | BELL | BINARY | BIT | BLINK | BLOB | BOUNDS
    | CAPABLE | CCSVERSION | CHANGED | CHANNEL | CLOB | CLOSE_DISPOSITION | COBOL | COMMITMENT | CONTROL_POINT | CONVENTION | CRUNCH
    | DBCLOB | DEFAULT | DEFAULT_DISPLAY | DEFINITION | DFHRESP | DFHVALUE | DISK | DONTCARE | DOUBLE
    | EBCDIC | EMPTY_CHECK | ENTER | ENTRY_PROCEDURE | EOL | EOS | ERASE | ESCAPE | EVENT | EXCLUSIVE | EXPORT | EXTENDED
@@ -3475,13 +3793,13 @@ cobolWord
    | HIGHLIGHT
    | IMPLICIT | IMPORT | INTEGER | INVOKE
    | KEPT | KEYBOARD
-   | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
+   | LANGUAGE | LB | LD | LEFTLINE | LENGTH_CHECK | LIBACCESS | LIBPARAMETER | LIBRARY | LIST | LOCAL | LOCATION | LONG_DATE | LONG_TIME | LOWER | LOWLIGHT
    | MMDDYYYY
-   | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NO_ECHO | NUMERIC_DATE | NUMERIC_TIME
+   | NAMED | NATIONAL | NATIONAL_EDITED | NETWORK | NEW | NO_ECHO | NORMAL | NUMERIC_DATE | NUMERIC_TIME
    | ODT | ORDERLY | OVERLINE | OWN
    | PASSWORD | PORT | PRINTER | PRIVATE | PROCESS | PROGRAM | PROMPT
-   | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | REVERSE_VIDEO
-   | SAVE | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STRONG | SYMBOL
+   | RAISE | READER | REAL | RECEIVED | RECURSIVE | REF | REMOTE | REMOVE | REQUIRED | RETRY | REVERSE_VIDEO
+   | SAVE | SECONDS | SECURE | SHARED | SHAREDBYALL | SHAREDBYRUNUNIT | SHARING | SHORT_DATE | SQL | STATEMENT | STRONG | SYMBOL
    | TASK | THREAD | THREAD_LOCAL | TIMER | TODAYS_DATE | TODAYS_NAME | TRUNCATED | TYPEDEF
    | UNDERLINE
    | VIRTUAL
@@ -3576,6 +3894,31 @@ not intrisicFunctionName when used as data names.
    | VARIANCE
    | WHEN_COMPILED
    | YEAR_TO_YYYY
+   | BASECONVERT
+   | BOOLEAN_OF_INTEGER
+   | CHAR_NATIONAL
+   | CONCAT
+   | CONTENT_OF
+   | CONVERT
+   | EXCEPTION_FILE
+   | EXCEPTION_FILE_N
+   | EXCEPTION_LOCATION
+   | EXCEPTION_LOCATION_N
+   | EXCEPTION_STATEMENT
+   | EXCEPTION_STATUS
+   | FIND_STRING
+   | FRACTION_PART
+   | HIGHEST_ALGEBRAIC
+   | INTEGER_OF_BOOLEAN
+   | LOCALE_COMPARE
+   | LOCALE_DATE
+   | LOCALE_TIME
+   | LOCAL_TIME_FROM_SECONDS
+   | LOWEST_ALGEBRAIC
+   | MODULE_NAME
+   | SMALLEST_ALGEBRAIC
+   | STANDARD_COMPARE
+   | SUBSTITUTE
 // end of copy of intrinsicFunctionName rule body
    ;
 
@@ -3610,6 +3953,7 @@ cicsWord
    | CLASS
    | CLOSE
    | COMMIT
+   | CONDITION
    | CONTROL
    | COPY
    | CURSOR
@@ -3643,6 +3987,7 @@ cicsWord
    | LAST
    | LENGTH
    | LINE
+   | LOCATION
    | LOCK
    | METHOD
    | MESSAGE
@@ -3651,6 +3996,7 @@ cicsWord
    | NAME
    | NAMESPACE
    | NEXT
+   | NORMAL
    | OBJECT
    | ON
    | OPEN
@@ -3672,10 +4018,14 @@ cicsWord
    | RELEASE
    | REPLACE
    | RESET
+   | RESUME
+   | RETRY
    | RETURN
    | REWIND
    | REWRITE
+   | ROLLBACK
    | RUN
+   | SECONDS
    | SECURITY
    | SEND
    | SERVICE
@@ -3692,6 +4042,7 @@ cicsWord
    | TITLE
    | TO
    | TYPE
+   | UNLOCK
    | UNTIL
    | USAGE
    | USING
@@ -3708,12 +4059,9 @@ rule in addition to this one.  I don't like it any better than
 you do, but this is where we are.  One copy is in cobolWord
 and the other is in functionIntrinsicPhrase.
 
-This list is not inclusive of all instrinsic functions listed
-in the COBOL standard, it is a list of all intrinsic functions
-listed in the IBM Enterprise COBOL 6.3 documentation.  If you 
-find you need the EXCEPTION-* functions et. al. feel free to
-add them to the Lexer, to this rule, and to the other two copies
-of this rule contained herein.
+This list is inclusive of all instrinsic functions listed
+in the draft 202x COBOL standard, in addition to those
+listed in the IBM Enterprise COBOL 6.4 documentation.
 */
 intrinsicFunctionName
    :  ABS
@@ -3797,6 +4145,47 @@ intrinsicFunctionName
    | VARIANCE
    | WHEN_COMPILED
    | YEAR_TO_YYYY
+   | BASECONVERT
+   | BOOLEAN_OF_INTEGER
+   | CHAR_NATIONAL
+   | CONCAT
+   | CONTENT_OF
+   | CONVERT
+   | EXCEPTION_FILE
+   | EXCEPTION_FILE_N
+   | EXCEPTION_LOCATION
+   | EXCEPTION_LOCATION_N
+   | EXCEPTION_STATEMENT
+   | EXCEPTION_STATUS
+   | FIND_STRING
+   | FRACTION_PART
+   | HIGHEST_ALGEBRAIC
+   | INTEGER_OF_BOOLEAN
+   | LOCALE_COMPARE
+   | LOCALE_DATE
+   | LOCALE_TIME
+   | LOCAL_TIME_FROM_SECONDS
+   | LOWEST_ALGEBRAIC
+   | MODULE_NAME
+   | SMALLEST_ALGEBRAIC
+   | STANDARD_COMPARE
+   | SUBSTITUTE
+   ;
+
+binaryBooleanOperator
+   : (B_AND | B_OR | B_XOR)
+   ;
+
+unaryBooleanOperator
+   : B_NOT
+   ;
+
+booleanShiftOperator
+   : (B_SHIFT_L | B_SHIFT_LC | B_SHIFT_R | B_SHIFT_RC)
+   ;
+
+booleanOperator
+   : (binaryBooleanOperator | unaryBooleanOperator | booleanShiftOperator)
    ;
 
 literal
