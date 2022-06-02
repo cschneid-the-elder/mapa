@@ -1,0 +1,11 @@
+--2022-06-02--------------------------------------------------------------------
+Added scalar functions
+
+AI_ANALOGY
+AI_SEMANTIC_CLUSTER
+AI_SIMILARITY
+
+...and their syntax to DB2zSQLLexer.g4 and DB2zSQLParser.g4.
+
+Added testdata/sql_aiFunction to test these.
+

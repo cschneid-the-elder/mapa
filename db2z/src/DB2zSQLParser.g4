@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2021 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2021 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -8,7 +8,7 @@ of the MIT license. See the LICENSE file for details.
 
 Rules for Db2 for z/OS SQL statements that can be embedded in an
 application program are included here.  Version 12 documentation
-served as source material.
+served as original source material.
 
 The ALTER FUNCTION variations (external), (inlined SQL scalar), and
 (SQL table) are all variations on each other and are contained in
@@ -3848,6 +3848,9 @@ scalarFunctionInvocation
 	| xmlpiFunction
 	| xmlqueryFunction
 	| xmlserializeFunction
+	| aiAnalogyFunction
+	| aiSemanticClusterFunction
+	| aiSimilarityFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
 	;
@@ -4220,6 +4223,9 @@ scalarFunction
 	| ACOS
 	| ADD_DAYS
 	| ADD_MONTHS
+	| AI_ANALOGY
+	| AI_SEMANTIC_CLUSTER
+	| AI_SIMILARITY
 	| ARRAY_DELETE
 	| ARRAY_FIRST
 	| ARRAY_LAST
@@ -4512,6 +4518,84 @@ specialRegister
 	| SESSION_USER
 	| USER
 	)
+	;
+
+aiAnalogyFunction
+	: (
+	AI_ANALOGY LPAREN
+	aiAnalogyFunctionSource1 COMMA
+	aiAnalogyFunctionTarget1 COMMA
+	aiAnalogyFunctionSource2 COMMA
+	aiAnalogyFunctionTarget2 
+	RPAREN
+	)
+	;
+
+aiFunctionExpression
+	: (expression (USING (MODEL COLUMN)? columnName)?)
+	;
+
+aiAnalogyFunctionSource
+	: aiFunctionExpression
+	;
+
+aiAnalogyFunctionTarget
+	: aiFunctionExpression
+	;
+
+aiAnalogyFunctionSource1
+	: aiAnalogyFunctionSource
+	;
+
+aiAnalogyFunctionSource2
+	: aiAnalogyFunctionSource
+	;
+
+aiAnalogyFunctionTarget1
+	: aiAnalogyFunctionTarget
+	;
+
+aiAnalogyFunctionTarget2
+	: aiAnalogyFunctionTarget
+	;
+
+aiSemanticClusterFunction
+	: (
+	AI_SEMANTIC_CLUSTER LPAREN
+	aiSemanticClusterMemberExpression COMMA
+	aiSemanticClusterClusteringExpression
+	(COMMA aiSemanticClusterClusteringExpression)*
+	RPAREN
+	)
+	;
+
+aiSemanticClusterMemberExpression
+	: aiFunctionExpression
+	;
+
+aiSemanticClusterClusteringExpression
+	: expression
+	;
+
+aiSimilarityFunction
+	: (
+	AI_SIMILARITY LPAREN
+	aiSimilarityExpression1 COMMA
+	aiSimilarityExpression2
+	RPAREN
+	)
+	;
+
+aiSimilarityExpression
+	: aiFunctionExpression
+	;
+
+aiSimilarityExpression1
+	: aiSimilarityExpression
+	;
+
+aiSimilarityExpression2
+	: aiSimilarityExpression
 	;
 
 xmlelementFunction
@@ -5916,6 +6000,7 @@ sqlKeyword
 	| MICROSECONDS
 	| MINUTE
 	| MINUTES
+	| MODEL
 	| MODIFIES
 	| MONTH
 	| MONTHS
