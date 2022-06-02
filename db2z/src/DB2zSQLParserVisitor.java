@@ -3214,6 +3214,96 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunction(DB2zSQLParser.AiAnalogyFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiFunctionExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiFunctionExpression(DB2zSQLParser.AiFunctionExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunctionSource(DB2zSQLParser.AiAnalogyFunctionSourceContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunctionTarget(DB2zSQLParser.AiAnalogyFunctionTargetContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunctionSource1(DB2zSQLParser.AiAnalogyFunctionSource1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunctionSource2(DB2zSQLParser.AiAnalogyFunctionSource2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunctionTarget1(DB2zSQLParser.AiAnalogyFunctionTarget1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiAnalogyFunctionTarget2(DB2zSQLParser.AiAnalogyFunctionTarget2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSemanticClusterFunction(DB2zSQLParser.AiSemanticClusterFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterMemberExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSemanticClusterMemberExpression(DB2zSQLParser.AiSemanticClusterMemberExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterClusteringExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSemanticClusterClusteringExpression(DB2zSQLParser.AiSemanticClusterClusteringExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSimilarityFunction}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSimilarityFunction(DB2zSQLParser.AiSimilarityFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSimilarityExpression(DB2zSQLParser.AiSimilarityExpressionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSimilarityExpression1(DB2zSQLParser.AiSimilarityExpression1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAiSimilarityExpression2(DB2zSQLParser.AiSimilarityExpression2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlelementFunction}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

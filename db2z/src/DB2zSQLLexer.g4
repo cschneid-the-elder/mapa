@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2021 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2021 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -822,6 +822,10 @@ MICROSECONDS
 
 MINUTEMINUTES
 	: M I N U T E M I N U T E S 
+	;
+
+MODEL
+	: M O D E L
 	;
 
 MODIFIES
@@ -2958,6 +2962,18 @@ ADD_DAYS
 
 ADD_MONTHS
 	: A D D '_' M O N T H S 
+	;
+
+AI_ANALOGY
+	: A I '_' A N A L O G Y
+	;
+
+AI_SEMANTIC_CLUSTER
+	: A I '_' S E M A N T I C '_' C L U S T E R
+	;
+
+AI_SIMILARITY
+	: A I '_' S I M I L A R I T Y
 	;
 
 ARRAY_DELETE

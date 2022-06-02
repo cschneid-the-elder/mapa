@@ -1,0 +1,27 @@
+SELECT AI_ANALOGY('Crichton' USING MODEL COLUMN AERYN
+                 ,'Aeryn' USING MODEL COLUMN CRICHTON
+                 ,'Moya' USING MODEL COLUMN TALYN
+                 ,'Talyn' USING MODEL COLUMN MOYA)
+      ,CAST_MEMBERS.*
+FROM FARSCAPE
+;
+
+SELECT AI_ANALOGY(AERYN
+                 ,CRICHTON
+                 ,TALYN
+                 ,MOYA)
+      ,FARSCAPE.*
+FROM FARSCAPE
+;
+
+Select AI_SEMANTIC_CLUSTER( CURRENT_DATE USING MODEL COLUMN aDay
+                          , CURRENT_DATE + 1 DAY
+                          , CURRENT_DATE - 1 DAY
+                          ) , allTheDays.*
+From allTheDays
+;
+
+Select AI_SIMILARITY( SCORPIUS, SIKOZU USING MODEL COLUMN NORANTI), FARSCAPE.*
+FROM FARSCAPE
+;
+

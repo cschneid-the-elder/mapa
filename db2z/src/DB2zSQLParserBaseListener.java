@@ -6423,6 +6423,186 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAiAnalogyFunction(DB2zSQLParser.AiAnalogyFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunction(DB2zSQLParser.AiAnalogyFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiFunctionExpression(DB2zSQLParser.AiFunctionExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiFunctionExpression(DB2zSQLParser.AiFunctionExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiAnalogyFunctionSource(DB2zSQLParser.AiAnalogyFunctionSourceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunctionSource(DB2zSQLParser.AiAnalogyFunctionSourceContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiAnalogyFunctionTarget(DB2zSQLParser.AiAnalogyFunctionTargetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunctionTarget(DB2zSQLParser.AiAnalogyFunctionTargetContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiAnalogyFunctionSource1(DB2zSQLParser.AiAnalogyFunctionSource1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunctionSource1(DB2zSQLParser.AiAnalogyFunctionSource1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiAnalogyFunctionSource2(DB2zSQLParser.AiAnalogyFunctionSource2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunctionSource2(DB2zSQLParser.AiAnalogyFunctionSource2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiAnalogyFunctionTarget1(DB2zSQLParser.AiAnalogyFunctionTarget1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunctionTarget1(DB2zSQLParser.AiAnalogyFunctionTarget1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiAnalogyFunctionTarget2(DB2zSQLParser.AiAnalogyFunctionTarget2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiAnalogyFunctionTarget2(DB2zSQLParser.AiAnalogyFunctionTarget2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSemanticClusterFunction(DB2zSQLParser.AiSemanticClusterFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSemanticClusterFunction(DB2zSQLParser.AiSemanticClusterFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSemanticClusterMemberExpression(DB2zSQLParser.AiSemanticClusterMemberExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSemanticClusterMemberExpression(DB2zSQLParser.AiSemanticClusterMemberExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSemanticClusterClusteringExpression(DB2zSQLParser.AiSemanticClusterClusteringExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSemanticClusterClusteringExpression(DB2zSQLParser.AiSemanticClusterClusteringExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSimilarityFunction(DB2zSQLParser.AiSimilarityFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSimilarityFunction(DB2zSQLParser.AiSimilarityFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSimilarityExpression(DB2zSQLParser.AiSimilarityExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSimilarityExpression(DB2zSQLParser.AiSimilarityExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSimilarityExpression1(DB2zSQLParser.AiSimilarityExpression1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSimilarityExpression1(DB2zSQLParser.AiSimilarityExpression1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAiSimilarityExpression2(DB2zSQLParser.AiSimilarityExpression2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAiSimilarityExpression2(DB2zSQLParser.AiSimilarityExpression2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXmlelementFunction(DB2zSQLParser.XmlelementFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}

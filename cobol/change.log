@@ -73,6 +73,8 @@ test these changes.
 
 Added some documentation in Makefile on various testing options.
 
+New edition of DB2zSQL.jar added.
+
 --2022-05-26--------------------------------------------------------------------
 Modified CobolLexer.g4 and CobolParser.g4 to allow for Picture Clause Editing
 and Locale phrases.  This further complicates the lexer, as additional ANTLR

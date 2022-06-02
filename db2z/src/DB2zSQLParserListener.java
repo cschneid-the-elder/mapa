@@ -5347,6 +5347,156 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitSpecialRegister(DB2zSQLParser.SpecialRegisterContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunction(DB2zSQLParser.AiAnalogyFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunction(DB2zSQLParser.AiAnalogyFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiFunctionExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiFunctionExpression(DB2zSQLParser.AiFunctionExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiFunctionExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiFunctionExpression(DB2zSQLParser.AiFunctionExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunctionSource(DB2zSQLParser.AiAnalogyFunctionSourceContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunctionSource(DB2zSQLParser.AiAnalogyFunctionSourceContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunctionTarget(DB2zSQLParser.AiAnalogyFunctionTargetContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunctionTarget(DB2zSQLParser.AiAnalogyFunctionTargetContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource1}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunctionSource1(DB2zSQLParser.AiAnalogyFunctionSource1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource1}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunctionSource1(DB2zSQLParser.AiAnalogyFunctionSource1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource2}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunctionSource2(DB2zSQLParser.AiAnalogyFunctionSource2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionSource2}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunctionSource2(DB2zSQLParser.AiAnalogyFunctionSource2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget1}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunctionTarget1(DB2zSQLParser.AiAnalogyFunctionTarget1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget1}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunctionTarget1(DB2zSQLParser.AiAnalogyFunctionTarget1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget2}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiAnalogyFunctionTarget2(DB2zSQLParser.AiAnalogyFunctionTarget2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiAnalogyFunctionTarget2}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiAnalogyFunctionTarget2(DB2zSQLParser.AiAnalogyFunctionTarget2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSemanticClusterFunction(DB2zSQLParser.AiSemanticClusterFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSemanticClusterFunction(DB2zSQLParser.AiSemanticClusterFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterMemberExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSemanticClusterMemberExpression(DB2zSQLParser.AiSemanticClusterMemberExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterMemberExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSemanticClusterMemberExpression(DB2zSQLParser.AiSemanticClusterMemberExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterClusteringExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSemanticClusterClusteringExpression(DB2zSQLParser.AiSemanticClusterClusteringExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSemanticClusterClusteringExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSemanticClusterClusteringExpression(DB2zSQLParser.AiSemanticClusterClusteringExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSimilarityFunction}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSimilarityFunction(DB2zSQLParser.AiSimilarityFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSimilarityFunction}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSimilarityFunction(DB2zSQLParser.AiSimilarityFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSimilarityExpression(DB2zSQLParser.AiSimilarityExpressionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSimilarityExpression(DB2zSQLParser.AiSimilarityExpressionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression1}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSimilarityExpression1(DB2zSQLParser.AiSimilarityExpression1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression1}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSimilarityExpression1(DB2zSQLParser.AiSimilarityExpression1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression2}.
+	 * @param ctx the parse tree
+	 */
+	void enterAiSimilarityExpression2(DB2zSQLParser.AiSimilarityExpression2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#aiSimilarityExpression2}.
+	 * @param ctx the parse tree
+	 */
+	void exitAiSimilarityExpression2(DB2zSQLParser.AiSimilarityExpression2Context ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlelementFunction}.
 	 * @param ctx the parse tree
 	 */
