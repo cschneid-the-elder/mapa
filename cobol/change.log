@@ -1,4 +1,4 @@
---2022-06-01--------------------------------------------------------------------
+--2022-06-02--------------------------------------------------------------------
 Modified CobolLexer.g4 and CobolParser.g4 per the 202x draft standard to allow 
 for Procedure Division Rounded phrase, acceptScreenStatement.
 
@@ -60,13 +60,18 @@ Added FILE syntax, retryPhrase, and lockPhrase to writeStatement.
 Added new intrinsic functions from 202x draft standard and IBM Enterprise
 COBOL 6.4 documentation.
 
+Added fixedPhrase to callStatement per IBM COBOL 6.4 documentation.
+
 Added testdata/local/test9040.cbl to test these changes.
 
-Added new compile option JAVAIOP and compiler directives JAVA-CALLABLE and
-JAVA-SHARED.
+Added new compile options SMARTBIN and JAVAIOP and compiler directives 
+JAVA-CALLABLE and JAVA-SHARED to CobolPreprocessorLexer.g4 and 
+CobolPreprocessorParser.g4.
 
 Modified testdata/local/test9001.cbl and testdata/local/test9002.cbl to
 test these changes.
+
+Added some documentation in Makefile on various testing options.
 
 --2022-05-26--------------------------------------------------------------------
 Modified CobolLexer.g4 and CobolParser.g4 to allow for Picture Clause Editing

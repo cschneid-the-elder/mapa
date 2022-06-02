@@ -9,6 +9,37 @@
 # ...the first make will result in a number of errors which
 # can be ignored, there are mutual references in a number of
 # classes.  The second should compile cleanly.
+#
+# below, n=### refers to a 3 digit number appended to test cases
+# conforming to the naming convention testantlr###.cbl; n=####
+# refers to test cases conforming to the naming convention
+# test####.cbl; and n=@@###@ refers to test cases from the NIST
+# test suite, most of which are two alpha + three numeric + 
+# two alpha
+#
+# make testLocal      test with list of test cases in testList90, runs
+#                     extra unit test code internally to verify CALLs etc.
+#                     are correctly identified, add n=### to run an 
+#                     individual unit test
+# make testLocalx     test with list of test cases in testList91, this is
+#                     to verify syntax checking works, add n=#### to run
+#                     an individual test
+# make testNist       test with list of test cases in nistList, these 
+#                     originally came from NIST and are from their COBOL
+#                     test suite, not all are intended to run as-is, add
+#                     n=@@###@ to run an individual test
+# make testrig        run ANTLR test rig with Cobol grammar, specify n=### 
+#                     as in testLocal
+# make testrigx       run ANTLR test rig with Cobol grammar, specify n=#### 
+#                     as in testLocalx
+# make testrignist    run ANTLR test rig with Cobol grammar, specify
+#                     n=@@###@ as in testNist
+# make testrigpp      run ANTLR test rig with CobolPreprocessor grammar,
+#                     specify n=### as in testLocal
+# make testrigppx     run ANTLR test rig with CobolPreprocessor grammar,
+#                     specify n=#### as in testLocalx
+# make testrigppnist  run ANTLR test rig with CobolPreprocessor grammar,
+#                     n=@@###@ as in testNist
 
 JC = javac
 CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
