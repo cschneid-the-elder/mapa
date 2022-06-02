@@ -385,6 +385,10 @@
            Write File Roscinante
              Retry Forever Lock
            End-Write
+           
+           Call 'IEFBR14' USING
+               Dargo As Fixed Length 4
+           End-Call
            .
            
        OMG-Give-It-Up.

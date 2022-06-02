@@ -3677,6 +3677,16 @@ public interface CobolParserListener extends ParseTreeListener {
 	 */
 	void exitCallGivingPhrase(CobolParser.CallGivingPhraseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link CobolParser#fixedPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterFixedPhrase(CobolParser.FixedPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link CobolParser#fixedPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitFixedPhrase(CobolParser.FixedPhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link CobolParser#cancelStatement}.
 	 * @param ctx the parse tree
 	 */

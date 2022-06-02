@@ -1869,7 +1869,7 @@ callByReferencePhrase
    ;
 
 callByReference
-   : (((ADDRESS OF | INTEGER | STRING)? identifier | literal | fileName) | OMITTED) COMMACHAR?
+   : (((ADDRESS OF | INTEGER | STRING)? (identifier fixedPhrase?) | literal | fileName) | OMITTED) COMMACHAR?
    ;
 
 callByValuePhrase
@@ -1885,11 +1885,15 @@ callByContentPhrase
    ;
 
 callByContent
-   : ((ADDRESS OF | LENGTH OF?)? identifier | literal | OMITTED) COMMACHAR?
+   : ((ADDRESS OF | LENGTH OF?)? (identifier fixedPhrase?) | literal | OMITTED) COMMACHAR?
    ;
 
 callGivingPhrase
    : (GIVING | RETURNING) identifier
+   ;
+
+fixedPhrase
+   : (AS FIXED LENGTH integerLiteral)
    ;
 
 // cancel statement

@@ -2212,6 +2212,12 @@ public interface CobolParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCallGivingPhrase(CobolParser.CallGivingPhraseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link CobolParser#fixedPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFixedPhrase(CobolParser.FixedPhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link CobolParser#cancelStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
