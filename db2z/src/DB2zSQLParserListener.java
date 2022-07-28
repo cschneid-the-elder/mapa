@@ -2197,6 +2197,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateTableInClause(DB2zSQLParser.CreateTableInClauseContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#customVolatileClause}.
+	 * @param ctx the parse tree
+	 */
+	void enterCustomVolatileClause(DB2zSQLParser.CustomVolatileClauseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#customVolatileClause}.
+	 * @param ctx the parse tree
+	 */
+	void exitCustomVolatileClause(DB2zSQLParser.CustomVolatileClauseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 */

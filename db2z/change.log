@@ -1,3 +1,17 @@
+--2022-07-28--------------------------------------------------------------------
+Modified createTableInClause rule to allow for requested syntax...
+
+CREATE TABLE [...]
+(NOT? VOLATILE)? IN databaseName? tablespaceName
+
+...which is not documented as far back as DB2 9, and I could not locate 
+documentation for versions of DB2 prior to that.  So I'm presuming this is
+old syntax, old enough that IBM no longer documents it, but not so old that
+IBM doesn't allow for it.  Sort of like the SEP parameter of the JCL DD
+statement.
+
+Added testdata/sql_createTableCustomVolatile to test this.
+
 --2022-06-02--------------------------------------------------------------------
 Added scalar functions
 

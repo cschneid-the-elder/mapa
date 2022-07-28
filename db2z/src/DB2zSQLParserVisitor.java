@@ -1324,6 +1324,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTableInClause(DB2zSQLParser.CreateTableInClauseContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#customVolatileClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCustomVolatileClause(DB2zSQLParser.CustomVolatileClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableColumnDefinition}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

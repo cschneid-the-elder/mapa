@@ -1899,12 +1899,25 @@ triggerDefinitionOption
 	)
 	;
 
+/*
+The customVolatileClause? prior to IN in each of the following
+flavors of the createTableInClause has been added by
+request.  As near as I can tell, it was once valid syntax
+but is now no longer documented.  A search of DB2 documentation
+back through v9 did not turn up this syntax, but it wouldn't
+be the first time IBM tolerated old syntax for a _very_ long
+time.  Looking at you, SEP parameter of the DD statement in JCL.
+*/
 createTableInClause
 	: (
-	(IN databaseName? tablespaceName)
-	| (IN DATABASE databaseName)
-	| (IN ACCELERATOR acceleratorName)
+	(customVolatileClause? IN databaseName? tablespaceName)
+	| (customVolatileClause? IN DATABASE databaseName)
+	| (customVolatileClause? IN ACCELERATOR acceleratorName)
 	)
+	;
+
+customVolatileClause
+	: (NOT? VOLATILE)
 	;
 
 createTableColumnDefinition
