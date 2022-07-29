@@ -1900,7 +1900,7 @@ triggerDefinitionOption
 	;
 
 /*
-The customVolatileClause? prior to IN in each of the following
+The customVolatileClause? in each of the following
 flavors of the createTableInClause has been added by
 request.  As near as I can tell, it was once valid syntax
 but is now no longer documented.  A search of DB2 documentation
@@ -1910,9 +1910,9 @@ time.  Looking at you, SEP parameter of the DD statement in JCL.
 */
 createTableInClause
 	: (
-	(customVolatileClause? IN databaseName? tablespaceName)
-	| (customVolatileClause? IN DATABASE databaseName)
-	| (customVolatileClause? IN ACCELERATOR acceleratorName)
+	(customVolatileClause? IN (databaseName DOT)? tablespaceName customVolatileClause?)
+	| (customVolatileClause? IN DATABASE databaseName customVolatileClause?)
+	| (customVolatileClause? IN ACCELERATOR acceleratorName customVolatileClause?)
 	)
 	;
 

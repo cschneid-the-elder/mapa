@@ -1,8 +1,8 @@
---2022-07-28--------------------------------------------------------------------
+--2022-07-29--------------------------------------------------------------------
 Modified createTableInClause rule to allow for requested syntax...
 
 CREATE TABLE [...]
-(NOT? VOLATILE)? IN databaseName? tablespaceName
+(NOT? VOLATILE)? IN (databaseName DOT)? tablespaceName (NOT? VOLATILE)?
 
 ...which is not documented as far back as DB2 9, and I could not locate 
 documentation for versions of DB2 prior to that.  So I'm presuming this is
@@ -10,7 +10,11 @@ old syntax, old enough that IBM no longer documents it, but not so old that
 IBM doesn't allow for it.  Sort of like the SEP parameter of the JCL DD
 statement.
 
-Added testdata/sql_createTableCustomVolatile to test this.
+Added testdata/sql_createTableCustomVolatile and 
+testdata/sql_createTableCustomVolatile1 to test both this, and an error in the
+DB2zSQLParser.g4 grammar reported by the same nice folks in the same rule.  I
+had erroneously left out the DOT between the optional databaseName and the
+tablespaceName.  Corrected testdata/sql_createTable to test this.
 
 --2022-06-02--------------------------------------------------------------------
 Added scalar functions
