@@ -159,10 +159,10 @@ WS
 /*
 For those who need to process SQL that is not embedded
 in application source code, provision is made for the
-SPUFI statement to set the SQL statement terminator.
+SPUFI command to set the SQL statement terminator.
 */
 SET_STATEMENT_TERMINATOR
-	: '--#SET TERMINATOR' WS ~[\n\r] WS? NEWLINE
+	: '--#SET' WS 'TERMINATOR' WS ~[\n\r] WS? NEWLINE
 	{
 		String text = getText();
 		String textStripped = text.stripTrailing();
@@ -4073,19 +4073,14 @@ M_CHAR
 	: M
 	;
 */
+
 SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
 	;
 
 SQLIDENTIFIER
-	: [a-zA-Z0-9]+
-	//{!getText().equals(statementTerminator)}?
-	;
-
-SQLIDENTIFIER1
-	: [@#$\-_]
-	{!getText().equals(statementTerminator)}?
+	: [a-zA-Z0-9@#$\-_]+
 	;
 
 
