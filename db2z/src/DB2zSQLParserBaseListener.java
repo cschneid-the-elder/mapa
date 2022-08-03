@@ -2643,6 +2643,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCustomVolatileClause(DB2zSQLParser.CustomVolatileClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCustomVolatileClause(DB2zSQLParser.CustomVolatileClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateTableColumnDefinition(DB2zSQLParser.CreateTableColumnDefinitionContext ctx) { }
 	/**
 	 * {@inheritDoc}
