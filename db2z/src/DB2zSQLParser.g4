@@ -2603,8 +2603,22 @@ dssizeOption
 	: (DSSIZE sqlidentifier)
 	;
 
+/*
+The optional INTEGERLITERAL has been added because it turns
+out that both...
+
+PIECESIZE 4K
+
+...and...
+
+PIECESIZE 4 K
+
+...are syntactically correct.  Documentation correction
+request submitted to IBM on 05-Aug-2022.
+
+*/
 piecesizeOption
-	: (PIECESIZE sqlidentifier)
+	: (PIECESIZE INTEGERLITERAL? sqlidentifier)
 	;
 
 clusterOption
