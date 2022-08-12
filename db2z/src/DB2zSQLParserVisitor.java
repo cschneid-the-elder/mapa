@@ -4432,6 +4432,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitIdentifier1(DB2zSQLParser.Identifier1Context ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlidentifier}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlidentifier(DB2zSQLParser.SqlidentifierContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

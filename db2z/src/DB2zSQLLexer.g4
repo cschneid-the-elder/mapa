@@ -10,6 +10,10 @@ of the MIT license. See the LICENSE file for details.
 
 lexer grammar DB2zSQLLexer;
 
+@lexer::members {
+	public String statementTerminator = new String("");
+}
+
 channels { COMMENTS }
 
 fragment A:('a'|'A');
@@ -56,7 +60,7 @@ CLOSESQBRACKET
 	;
 
 QUESTIONMARK
-	: '?'
+	: '?' {!getText().equals(statementTerminator)}?
 	;
 
 EQ
@@ -119,10 +123,6 @@ COMMA
 	: ','
 	;
 
-ATSIGN
-	: '@'
-	;
-
 NONNUMERICLITERAL
 	: STRINGLITERAL
 	| HEXLITERAL
@@ -154,6 +154,21 @@ NEWLINE
 WS
 	: [ \t]+
 	->channel(HIDDEN)
+	;
+
+/*
+For those who need to process SQL that is not embedded
+in application source code, provision is made for the
+SPUFI command to set the SQL statement terminator.
+*/
+SET_STATEMENT_TERMINATOR
+	: '--#SET' WS 'TERMINATOR' WS ~[\n\r] WS? NEWLINE
+	{
+		String text = getText();
+		String textStripped = text.stripTrailing();
+		statementTerminator = new String(textStripped.substring(textStripped.length() - 1));
+	}
+	->channel(COMMENTS)
 	;
 
 SQLCOMMENT
@@ -4058,6 +4073,12 @@ M_CHAR
 	: M
 	;
 */
+
+SQL_STATEMENT_TERMINATOR
+	: . 
+	{getText().equals(statementTerminator)}?
+	;
+
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$\-_]+
 	;

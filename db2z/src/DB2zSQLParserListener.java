@@ -7377,6 +7377,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitIdentifier1(DB2zSQLParser.Identifier1Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlidentifier}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlidentifier(DB2zSQLParser.SqlidentifierContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlidentifier}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlidentifier(DB2zSQLParser.SqlidentifierContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlKeyword}.
 	 * @param ctx the parse tree
 	 */

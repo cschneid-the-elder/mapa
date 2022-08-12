@@ -1,3 +1,42 @@
+--2022-08-05--------------------------------------------------------------------
+Added lexer rule for SPUFI command...
+
+--#SET TERMINATOR character
+
+...by request to assist in processing SQL intended to be executed via SPUFI.
+
+This rule works in concert with added SQL_STATEMENT_TERMINATOR rule to allow
+the dynamic alteration of the SQL statement terminator from its default of
+a semicolon.
+
+Note that due to national characters (@, #, and $) being in the regex for the
+SQLIDENTIFIER token, the character set as the SQL_STATEMENT_TERMINATOR must be
+preceded by whitespace or it may be recognized instead as part of an 
+SQLIDENTIFIER.  So...
+
+--#SET TERMINATOR @
+GRANT SELECT ON UMBRELLA_ACADEMY TO BEN@
+
+...may cause problems as the @ will be slurped up as part of the SQLIDENTIFIER
+grantee, where...
+
+--#SET TERMINATOR @
+GRANT SELECT ON UMBRELLA_ACADEMY TO NUMBER5 @
+
+...will work just fine due to the whitespace before the @.
+
+Also modified piecesizeOption rule to allow for...
+
+PIECESIZE 4K
+
+...and...
+
+PIECESIZE 4 K
+
+...which are both syntactically correct.  Documentation correction
+request submitted to IBM on 05-Aug-2022.  Thanks to Maarten van
+Haasteren and Martijn Rutte for pointing this out.
+
 --2022-07-29--------------------------------------------------------------------
 Modified createTableInClause rule to allow for requested syntax...
 

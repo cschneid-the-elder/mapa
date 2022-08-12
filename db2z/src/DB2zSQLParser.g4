@@ -143,7 +143,7 @@ sqlStatement
 	| valuesIntoStatement
 	| wheneverStatement
 	)
-	(SEMICOLON | (END_EXEC DOT?) | EOF)
+	(SQL_STATEMENT_TERMINATOR | SEMICOLON | (END_EXEC DOT?) | EOF)
 	;
 
 query
@@ -2076,7 +2076,7 @@ organizationClause
 	: (
 	ORGANIZE BY HASH UNIQUE
 	LPAREN columnName (COMMA columnName)* RPAREN
-	(HASH SPACE SQLIDENTIFIER)?
+	(HASH SPACE sqlidentifier)?
 	)
 	;
 
@@ -2600,11 +2600,25 @@ copyOption
 	;
 
 dssizeOption
-	: (DSSIZE SQLIDENTIFIER)
+	: (DSSIZE sqlidentifier)
 	;
 
+/*
+The optional INTEGERLITERAL has been added because it turns
+out that both...
+
+PIECESIZE 4K
+
+...and...
+
+PIECESIZE 4 K
+
+...are syntactically correct.  Documentation correction
+request submitted to IBM on 05-Aug-2022.
+
+*/
 piecesizeOption
-	: (PIECESIZE SQLIDENTIFIER)
+	: (PIECESIZE INTEGERLITERAL? sqlidentifier)
 	;
 
 clusterOption
@@ -2695,7 +2709,7 @@ applCompatValue
 	;
 
 functionLevel
-	: SQLIDENTIFIER
+	: sqlidentifier
 	;
 
 functionParameterType
@@ -2722,7 +2736,7 @@ functionBuiltInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL sqlidentifier) RPAREN)?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
@@ -3519,7 +3533,7 @@ builtInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause2?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL | SQLIDENTIFIER) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL | sqlidentifier) RPAREN)?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
@@ -3580,7 +3594,7 @@ piName
 
 registeredXmlSchemaName
 	: (
-	SYSXSR DOT SQLIDENTIFIER
+	SYSXSR DOT sqlidentifier
 	)
 	;
 
@@ -3653,7 +3667,7 @@ partitioningClause
 		LPAREN
 		partitioningClauseElement (COMMA partitioningClauseElement)*
 		RPAREN)
-		| (SIZE (EVERY SQLIDENTIFIER)?))
+		| (SIZE (EVERY sqlidentifier)?))
 	)
 	;
 
@@ -3678,14 +3692,14 @@ partitioningPhrase
 
 //deprecated as of Db2 12
 partitionHashSpace
-	: (HASH SPACE SQLIDENTIFIER)
+	: (HASH SPACE sqlidentifier)
 	;
 
 //deprecated as of Db2 12
 alterHashOrganization
 	: (
-	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE SQLIDENTIFIER)
-	| (ALTER ORGANIZATION SET HASH SPACE SQLIDENTIFIER)
+	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE sqlidentifier)
+	| (ALTER ORGANIZATION SET HASH SPACE sqlidentifier)
 	)
 	;
 
@@ -3892,7 +3906,7 @@ regressionFunctionInvocation
 	;
 
 externalFunctionInvocation
-	: ((schemaName DOT)? SQLIDENTIFIER
+	: ((schemaName DOT)? sqlidentifier
 	LPAREN
 	expression (COMMA expression)*
 	RPAREN)
@@ -5079,7 +5093,7 @@ castBuiltInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidQualifier?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL SQLIDENTIFIER) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL sqlidentifier) RPAREN)?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
@@ -5099,7 +5113,7 @@ as being part of the INTEGERLITERAL and becomes an SQLIDENTIFIER.
 length
 	: (
 	LPAREN
-	(INTEGERLITERAL | SQLIDENTIFIER)
+	(INTEGERLITERAL | sqlidentifier)
 	(CODEUNITS16 | CODEUNITS32 | OCTETS)?
 	RPAREN
 	)
@@ -5164,7 +5178,7 @@ correlationName
 
 locationName
 //	: (identifier | NUMERICLITERAL | INTEGERLITERAL) (DOT? (identifier | NUMERICLITERAL | INTEGERLITERAL))*
-	: SQLIDENTIFIER
+	: sqlidentifier
 	;
 
 schemaName
@@ -5832,7 +5846,7 @@ fetchClause
 	;
 
 identifier
-	: SQLIDENTIFIER
+	: sqlidentifier
 	| sqlKeyword
 	| specialRegister
 	| scalarFunction
@@ -5842,7 +5856,7 @@ identifier
 	;
 
 identifier1
-	: SQLIDENTIFIER
+	: sqlidentifier
 	| sqlKeyword
 	| scalarFunction
 	| aggregateFunction
@@ -5850,6 +5864,10 @@ identifier1
 	| tableFunction
 	;
 
+sqlidentifier
+	: SQLIDENTIFIER
+	;
+	
 sqlKeyword
 	: (
 	ADD
