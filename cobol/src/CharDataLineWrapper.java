@@ -40,7 +40,6 @@ class CharDataLineWrapper {
 	}
 
 	public static ArrayList<CharDataLineWrapper> bunchOfThese(List<CobolPreprocessorParser.CharDataLineContext> ctxList, Boolean leading, Boolean trailing) {
-		//TODO not used?
 		ArrayList<CharDataLineWrapper> aList = new ArrayList<>();
 
 		for (CobolPreprocessorParser.CharDataLineContext aCtx: ctxList) {
@@ -121,7 +120,6 @@ class CharDataLineWrapper {
 	}
 
 	public CharDataLineWrapper(CobolPreprocessorParser.CharDataLineContext ctx, Boolean leading, Boolean trailing) {
-		//TODO not used?
 		this.ctx = ctx;
 		this.leading = leading;
 		this.trailing = trailing;

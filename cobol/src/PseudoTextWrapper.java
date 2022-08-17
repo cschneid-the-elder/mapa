@@ -42,11 +42,7 @@ class PseudoTextWrapper {
 
 	public PseudoTextWrapper(CobolPreprocessorParser.PseudoTextContext ctx) {
 		this.ctx = ctx;
-/*TODO remove
-		if (this.ctx.DOUBLEEQUALCHAR() != null && this.ctx.DOUBLEEQUALCHAR().size() > 0) {
-			this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.DOUBLEEQUALCHAR()));
-		}
-*/
+
 		if (this.ctx.charData() != null) {
 			this.charData = new CharDataWrapper(this.ctx.charData());
 			this.tnwList.addAll(this.charData.getTerminalNodeWrappers());
@@ -59,11 +55,7 @@ class PseudoTextWrapper {
 		this.ctx = ctx;
 		this.leading = leading;
 		this.trailing = trailing;
-/*
-		if (this.ctx.DOUBLEEQUALCHAR() != null && this.ctx.DOUBLEEQUALCHAR().size() > 0) {
-			this.tnwList.addAll(TerminalNodeWrapper.bunchOfThese(this.ctx.DOUBLEEQUALCHAR()));
-		}
-*/
+
 		if (this.ctx.charData() != null) {
 			this.charData = new CharDataWrapper(this.ctx.charData(), this.leading, this.trailing);
 			this.tnwList.addAll(this.charData.getTerminalNodeWrappers());
