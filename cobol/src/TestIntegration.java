@@ -789,6 +789,15 @@ public static void main(String[] args) throws Exception {
 				if (!testCall001(fileName, bareName, "PGM00001", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
 				if (!testCall001(fileName, bareName, "PGM00002", CallType.CALLBYIDENTIFIER, calledNodes, 2)) failCount++;
 				break;
+			case "testantlr067":
+			case "testantlr167":
+			case "testantlr267":
+			case "testantlr367":
+				if (!testCall001(fileName, bareName, "PGM00001", CallType.CALLBYIDENTIFIER, calledNodes, 1, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00003", CallType.CALLBYIDENTIFIER, calledNodes, 1, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00004", CallType.CALLBYIDENTIFIER, calledNodes, 1, 4)) failCount++;
+				if (!testCall001(fileName, bareName, "PGM00005", CallType.CALLBYIDENTIFIER, calledNodes, 1, 4)) failCount++;
+				break;
 			default:
 				LOGGER.info("NONE " + fileName);
 				LOGGER.fine("NONE " + fileName + " test - no tests defined");
@@ -865,6 +874,53 @@ public static void main(String[] args) throws Exception {
 		} 
 
 		if (rc && calledNodes.get(0).getCalledModuleNames().size() == 1) {
+			rc = true;
+		} else {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - calledNodes.get(0).calledModuleNames.size() != 1");
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames.size() = " + calledNodes.get(0).getCalledModuleNames().size());
+			LOGGER.fine(fileName + " calledNodes.get(0).calledModuleNames = " + calledNodes.get(0).getCalledModuleNames());
+		} 
+
+		if (rc) {
+			rc = false;
+			for (CallWrapper cw: calledNodes) {
+				if (cw.includes(bareName, callee, ty)) {
+					rc = true;
+					break;
+				}
+			} 
+		}
+
+		if (!rc) {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - calledNodes.includes(" + callee + ") == false");
+			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
+		} 
+
+		return rc;
+	}
+
+	public static Boolean testCall001(String fileName
+						, String bareName
+						, String callee
+						, CallType ty
+						, ArrayList<CallWrapper> calledNodes
+						, int count
+						, int count2
+						) {
+		Boolean rc = false;
+
+		if (calledNodes.size() == count) {
+			rc = true;
+		} else {
+			LOGGER.info("FAIL " + fileName);
+			LOGGER.fine("FAIL " + fileName + " test - calledNodes.size() != " + count);
+			LOGGER.fine(fileName + " calledNodes.size() = " + calledNodes.size());
+			LOGGER.fine(fileName + " calledNodes = " + calledNodes);
+		} 
+
+		if (rc && calledNodes.get(0).getCalledModuleNames().size() == count2) {
 			rc = true;
 		} else {
 			LOGGER.info("FAIL " + fileName);

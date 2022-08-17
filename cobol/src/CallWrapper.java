@@ -44,7 +44,6 @@ class CallWrapper {
 	public List<DDNode> eightyEights = new ArrayList<>();
 	public ArrayList<String> subNames = null;
 	public List<CobolParser.SubscriptContext> subctxs = null;
-	public List<CobolParser.QualifiedInDataContext> inDataCtxs = null;
 	public ArrayList<String> ofs = new ArrayList<>();
 	public CobolParser.CallStatementContext ctxCall = null;
 	public CobolParser.ExecCicsStatementContext ctxCics = null;
@@ -278,7 +277,6 @@ class CallWrapper {
 		}
 	}
 
-	//TODO this can be simplified
 	private void initialize(
 			CobolParser.LiteralContext litCtx
 			, CobolParser.IdentifierContext idCtx
@@ -290,10 +288,7 @@ class CallWrapper {
 			if (litCtx == null) {
 				// ExecSqlCallStatementContext is handled on its own
 			} else {
-				this.addCalledModuleName(
-					litCtx
-					.NONNUMERICLITERAL()
-					.toString());
+				this.addCalledModuleName(litCtx.getText());
 				this.callType = litCallType;
 			}
 		} else {
@@ -311,24 +306,12 @@ class CallWrapper {
 					.cobolWord()
 					.IDENTIFIER()
 					.toString();
+				//this.cobolIdentifier = idCtx.getText(); doesn't work
 				this.subctxs = idCtx.tableCall().subscript();
 				this.subNames = new ArrayList<>();
 				for (CobolParser.SubscriptContext sub: subctxs) {
-					this.subNames.add(
-						sub
-						.qualifiedDataName()
-						.qualifiedDataNameFormat1()
-						.dataName()
-						.cobolWord()
-						.IDENTIFIER()
-						.toString());
+					this.subNames.add(sub.getText());
 				}
-				this.inDataCtxs = 
-					idCtx
-					.tableCall()
-					.qualifiedDataName()
-					.qualifiedDataNameFormat1()
-					.qualifiedInData(); //TODO no longer needed?
 			} else {
 				// CALL identifier syntax
 				this.cobolIdentifier = 
@@ -339,6 +322,7 @@ class CallWrapper {
 					.cobolWord()
 					.IDENTIFIER()
 					.toString();
+				//this.cobolIdentifier = idCtx.getText(); doesn't work
 				this.qualInData = QualifiedInData.bunchOfThese(
 					idCtx
 					.qualifiedDataName()

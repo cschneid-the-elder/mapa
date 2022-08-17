@@ -188,7 +188,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 	work better.
 	*/
 
-	public ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList( //TODO make private
+	private ArrayList<TerminalNodeWrapper> cloneTerminalNodeWrapperList(
 				ArrayList<TerminalNodeWrapper> source
 				, ArrayList<TerminalNodeWrapper> fudge) {
 		ArrayList<TerminalNodeWrapper> newList = new ArrayList<>();
@@ -273,7 +273,6 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					from++;
 				}
 			}
-			matchLoop: //TODO remove label
 			while (from < sourceNodes.size() && sourceNodes.get(from).getLine() < thisStopLine) {
 				LOGGER.finest(" while (" + from + " < " + sourceNodes.size() + " && " + sourceNodes.get(from).getLine() + " < " + thisStopLine + ")");
 				Boolean matched = false;
