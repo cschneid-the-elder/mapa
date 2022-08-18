@@ -1,3 +1,14 @@
+--2022-08-17--------------------------------------------------------------------
+IBM responded to the request for a documentation update regarding the PIECESIZE
+<integer>[K|M|G] syntax with an update indicating that _all_ such forms can
+have whitespace between the <integer> and the [K|M|G].  So a number of rules
+in DB2zSQLParser.g4 have been updated and tagged with #KMG.  Also, the length
+rule has been modified to reflect this update, and the *builtInType rules have
+been modified to use the length rule for BLOBs.
+
+Test cases have been added to sql_alterTable, sql_createTable, and 
+sql_createFunction.
+
 --2022-08-05--------------------------------------------------------------------
 Added lexer rule for SPUFI command...
 
