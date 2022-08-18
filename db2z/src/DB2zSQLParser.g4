@@ -2072,11 +2072,12 @@ createTableColumnConstraint
 /*
 Deprecated as of Db2 12.
 */
+//#KMG
 organizationClause
 	: (
 	ORGANIZE BY HASH UNIQUE
 	LPAREN columnName (COMMA columnName)* RPAREN
-	(HASH SPACE sqlidentifier)?
+	(HASH SPACE INTEGERLITERAL? sqlidentifier)?
 	)
 	;
 
@@ -2599,8 +2600,9 @@ copyOption
 	: (COPY (YES | NO))
 	;
 
+//#KMG
 dssizeOption
-	: (DSSIZE sqlidentifier)
+	: (DSSIZE INTEGERLITERAL? sqlidentifier)
 	;
 
 /*
@@ -2616,6 +2618,13 @@ PIECESIZE 4 K
 ...are syntactically correct.  Documentation correction
 request submitted to IBM on 05-Aug-2022.
 
+IBM responded to the documentation correction request on
+17-Aug-2022, noting that in _any_ place the syntax
+<integer>[K|M|G] was allowed, whitespace was allowed
+between the <integer> and the [K|M|G].  IBM indicated they
+would be updating their documentation to reflect this.
+
+All such changes tagged with #KMG
 */
 piecesizeOption
 	: (PIECESIZE INTEGERLITERAL? sqlidentifier)
@@ -2736,7 +2745,7 @@ functionBuiltInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL sqlidentifier) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
@@ -3533,7 +3542,7 @@ builtInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause2?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL | sqlidentifier) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
@@ -3657,6 +3666,7 @@ checkConstraint
 	)
 	;
 
+//#KMG
 partitioningClause
 	: (
 	PARTITION BY 
@@ -3667,7 +3677,7 @@ partitioningClause
 		LPAREN
 		partitioningClauseElement (COMMA partitioningClauseElement)*
 		RPAREN)
-		| (SIZE (EVERY sqlidentifier)?))
+		| (SIZE (EVERY INTEGERLITERAL? sqlidentifier)?))
 	)
 	;
 
@@ -3691,15 +3701,17 @@ partitioningPhrase
 	;
 
 //deprecated as of Db2 12
+//#KMG
 partitionHashSpace
-	: (HASH SPACE sqlidentifier)
+	: (HASH SPACE INTEGERLITERAL? sqlidentifier)
 	;
 
 //deprecated as of Db2 12
+//#KMG
 alterHashOrganization
 	: (
-	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE sqlidentifier)
-	| (ALTER ORGANIZATION SET HASH SPACE sqlidentifier)
+	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE INTEGERLITERAL? sqlidentifier)
+	| (ALTER ORGANIZATION SET HASH SPACE INTEGERLITERAL? sqlidentifier)
 	)
 	;
 
@@ -5093,7 +5105,7 @@ castBuiltInType
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidQualifier?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY LARGE OBJECT) | BLOB) (LPAREN (INTEGERLITERAL sqlidentifier) RPAREN)?)
+	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
 	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
@@ -5109,11 +5121,21 @@ integerInParens
 /*
 It turns out the lengthQualifier of K or M or G gets lexed
 as being part of the INTEGERLITERAL and becomes an SQLIDENTIFIER.
+
+It also turns out that...
+
+1024
+1K
+1 K
+
+...are all syntactically correct.  So we can see an INTEGERLITERAL,
+an INTEGERLITERAL followed by an sqlidentifier, or an sqlidentifier.
 */
+//#KMG
 length
 	: (
 	LPAREN
-	(INTEGERLITERAL | sqlidentifier)
+	(INTEGERLITERAL | (INTEGERLITERAL sqlidentifier) | sqlidentifier)
 	(CODEUNITS16 | CODEUNITS32 | OCTETS)?
 	RPAREN
 	)
