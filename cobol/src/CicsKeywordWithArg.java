@@ -45,7 +45,8 @@ class CicsKeywordWithArg {
 			this.isProgram = true;
 		}
 
-		if (this.keyword.equals("FILE")) {
+		if (this.keyword.equals("FILE") || this.keyword.equals("DATASET")) {
+			//DATASET is so old it is no longer documented
 			this.isFile = true;
 		}
 
