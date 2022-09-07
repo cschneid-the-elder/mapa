@@ -48,6 +48,35 @@
            LENGTH(FUNCTION LENGTH(PGM-0001))
            END-EXEC
 
+           EXEC CICS READ DATASET('SAMVIMES') INTO(PGM-0001)
+           END-EXEC
+
+           EXEC CICS DELETE DATASET ( 'GASPODE' ) END-EXEC
+
+           EXEC CICS WRITE
+                DATASET( 'CARROT') END-EXEC.
+
+           EXEC CICS
+                REWRITE
+                DATASET( 'VETINARI')
+           END-EXEC
+
+           EXEC CICS STARTBR
+                     DATASET('CMOTDBLR')
+                     EQUAL
+           END-EXEC
+
+           EXEC CICS
+                READNEXT
+                DATASET('CMOTDBLR')
+                INTO(PGM-0001)
+                LENGTH(LENGTH OF PGM-0001)
+           END-EXEC
+
+           EXEC CICS READPREV DATASET('CMOTDBLR') INTO(PGM-0001)
+           LENGTH(FUNCTION LENGTH(PGM-0001))
+           END-EXEC
+
            DISPLAY MYNAME ' End'
            
            GOBACK
