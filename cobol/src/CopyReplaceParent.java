@@ -99,6 +99,7 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					long length = token.getTextLength() + extraPadding;
 					outLine.append(String.format("%" + length + "s", token.getText()));
 				} else {
+					LOGGER.finest(" appending |" + token.getText() + "|");
 					outLine.append(token.getText());
 				}
 			} else if (token.getClonedLine() == -1) {
@@ -113,10 +114,18 @@ public static final Logger LOGGER = Logger.getLogger("TestIntegration");
 					extraPadding = token.getPosn();
 				} else {
 					extraPadding = token.getPosn() - (prevPosn + prevTextLength);
-					if (extraPadding < 0) extraPadding = 0;
+					if (extraPadding < 0 || !token.isPrecededByWhitespace()) extraPadding = 0;
 				}
 				//outLine.append(TestIntegration.CLI.padLeft(token.getText(), token.getTextLength() + extraPadding));
 				long length = token.getTextLength() + extraPadding;
+				LOGGER.finest(
+					" token.getTextLength() = " 
+					+ token.getTextLength()
+					+ " extraPadding = " 
+					+ extraPadding
+					+ " length = " 
+					+ length
+					);
 				try {
 					outLine.append(String.format("%" + length + "s", token.getText()));
 				} catch (Exception e) {
