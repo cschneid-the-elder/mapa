@@ -1,3 +1,22 @@
+--2022-09-10--------------------------------------------------------------------
+Fixing how COPY statements are resolved.  The rewriting of the source text was
+incorrect.  Bug exposed by Amazon Web Services in COACTUPC.cbl in their
+aws-mainframe-modernization-carddemo repository.
+
+CopyReplaceParent.java In createStringBuilderFromTerminalNodeWrappers()
+replaced...
+
+	if (extraPadding < 0) extraPadding = 0;
+
+...with..
+
+	if (extraPadding < 0 || !token.isPrecededByWhitespace()) extraPadding = 0;
+
+...because if a token isn't preceded by whitespace it doesn't need extra
+padding.  This is some of the ugliest code in the application.
+
+Added test9041.cbl and test9041.cpy to test this behavior.
+
 --2022-09-07--------------------------------------------------------------------
 The DATASET option of READ, WRITE, REWRITE, et. al. is now detected.  This
 option is no longer documented, but was used by Amazon Web Services in their
