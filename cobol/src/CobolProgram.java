@@ -162,7 +162,15 @@ class CobolProgram {
 			for (MoveStatement move: pgm.getMoves()) {
 				for (Identifier identifier: move.getIdentifiers()) {
 					if (identifier.seemsToMatch(call.getIdentifier())) {
-						call.addCalledModuleName(move.getText());
+						if (move.getText() == null) {
+							if (move.getSendingIdentifier() != null) {
+								call.addCalledModuleName(
+									this.identifierValueInValueClause(move.getSendingIdentifier())
+									);
+							}
+						} else {
+							call.addCalledModuleName(move.getText());
+						}
 					}
 				}
 			}
@@ -203,6 +211,15 @@ class CobolProgram {
 		}
 	}
 
+	private String identifierValueInValueClause(Identifier identifier) {
+		for (DDNode node: this.dataNodes) {
+			if (node.matches(identifier)) {
+				return node.getValueInValueClause();
+			}
+		}
+		return null;
+	}
+	
 	public UUID getUUID() {
 		return this.uuid;
 	}

@@ -1,3 +1,35 @@
+--2022-09-18--------------------------------------------------------------------
+Expanding on how CALL <identifier> statements are resolved.  Previously...
+
+01  Work-Areas.
+    05  PGM1 PIC X(8) Value 'PGM00001'.
+    05  PGMA PIC X(8) Value 'PGM00004'.
+    05  PGM2 PIC X(8) Value Spaces.
+    
+[...]
+
+    CALL 'PGM00009'         *> scenario 1
+    CALL PGM1               *> scenario 2
+    MOVE 'PGM00002' TO PGM2
+    CALL PGM2               *> scenario 3
+    MOVE PGMA TO PGM2
+    CALL PGM2               *> scenario 4
+    
+...scenario 4 would be unresolved.  Now it is.  Changes were made to...
+
+src/CallWrapper.java
+	the #selectDataNode method takes advantage of DDNode::matches
+src/CobolProgram.java
+	modified #findAllTheRightMoves to search for MOVEs in scenario 4
+src/DDNode.java
+	added two #matches methods
+src/Identifier.java
+	added the tableCall bits to #getDataNameText and #getInDataText
+src/MoveStatement.java
+	added a sendingIdentifier instance variable
+src/TestIntegration.java
+testdata/local/testantlr?23.cbl.
+
 --2022-09-10--------------------------------------------------------------------
 Fixing how COPY statements are resolved.  The rewriting of the source text was
 incorrect.  Bug exposed by Amazon Web Services in COACTUPC.cbl in their

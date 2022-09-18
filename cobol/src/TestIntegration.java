@@ -340,7 +340,8 @@ public static void main(String[] args) throws Exception {
 				if (!testDD001(fileName, bareName, 5, "MYNAME", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, 1, "WORK-AREAS", dataNodes)) failCount++;
 				if (!testDD001(fileName, bareName, 5, "PGM-0004", dataNodes)) failCount++;
-				if (!testCall001(fileName, bareName, "PGMB0004", CallType.CALLBYIDENTIFIER, calledNodes)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMB0004", CallType.CALLBYIDENTIFIER, calledNodes, 1, 2)) failCount++;
+				if (!testCall001(fileName, bareName, "PGMA0001", CallType.CALLBYIDENTIFIER, calledNodes, 1, 2)) failCount++;
 				break;
 			case "testantlr024":
 			case "testantlr124":
