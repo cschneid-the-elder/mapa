@@ -286,6 +286,101 @@ class DDNode {
 		return( result );
 	}
 
+	/**
+	This class represents a data definition node (a variable) in the Data
+	Division of a COBOL program.  An Identifier represents a variable in
+	the Procedure Division.  I need to know if these are equivalent, and
+	it's complicated.
+	<p><code>
+	Data Division.
+	Working-Storage Section.
+	01  Work-Areas.
+	    05  A.
+	        10  B.
+	            15  N5 PIC X(008) Value 'NUMBER5'.
+	            15  C.
+	                20  N5 PIC X(008) Value 'DELORES'.
+	    05  D.
+	        10  B.
+	            15  N5 PIC X(008) Value 'KRISTOFR'.
+	[...]
+	Procedure Division.
+	    CALL N5 OF A *> This is an error, N5 cannot be uniquely resolved
+	    CALL N5 OF B *> This is an error, N5 cannot be uniquely resolved
+	    CALL N5 OF B OF A *> This is okay
+	</code><p>
+	The "OFs" in the Procedure Division match the hierarchy of the data
+	definition in the Data Division.  The "OFs" are the inData in the
+	following method.
+	*/
+	public Boolean matches(Identifier id) {
+		if (id == null) { 
+			return false;
+		}
+		
+		Boolean matched = false;
+
+		if (this.getIdentifier().equals(id.getDataNameText())) {
+			if (id.getInDataText() == null || id.getInDataText().size() == 0) {
+				matched = true;
+			} else {
+				DDNode node = this.getParent();
+				ArrayList<String> inDataArray = id.getInDataText();
+				LOGGER.finest(this.myName + " inDataArray = |" + inDataArray + "|");
+				for (String inData: inDataArray) {
+					while (node != null && !node.getIdentifier().equals(inData)) {
+						LOGGER.finest(
+							this.myName 
+							+ " "
+							+ node.getIdentifier()
+							+ " != "
+							+ inData
+							);
+						node = node.getParent();
+					}
+				}
+				if (node != null) {
+					matched = true;
+				}
+			}
+		}
+		
+		return matched;
+	}
+
+	public Boolean matches(String idName, ArrayList<String> structNames) {
+		Boolean matched = false;
+
+		if (this.getIdentifier().equals(idName)) {
+			if (structNames == null || structNames.size() == 0) {
+				matched = true;
+			} else {
+				DDNode node = this.getParent();
+				ArrayList<String> inDataArray = new ArrayList<String>();
+				inDataArray.addAll(structNames);
+				Collections.reverse(inDataArray);
+				LOGGER.finest(this.myName + " inDataArray = |" + inDataArray + "|");
+				for (String inData: inDataArray) {
+					while (node != null && !node.getIdentifier().equals(inData)) {
+						LOGGER.finest(
+							this.myName 
+							+ " "
+							+ node.getIdentifier()
+							+ " != "
+							+ inData
+							);
+						node = node.getParent();
+					}
+				}
+				if (node != null) {
+					matched = true;
+				}
+			}
+		}
+		
+		return matched;
+	}
+
 	public String toString() {
 		return this.level.toString() + " " + this.identifier + " [parent=" + this.parent + "] " + this.locn;
 	}

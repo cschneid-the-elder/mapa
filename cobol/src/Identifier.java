@@ -89,7 +89,11 @@ class Identifier {
 
 	public String getDataNameText() {
 		if (this.getQualifiedDataName() == null) {
-			return null;
+			if (this.getTableCall() != null) {
+				return this.getTableCall().getDataNameText();
+			} else {
+				return null;
+			}
 		} else {
 			return this.getQualifiedDataName().getDataNameText();
 		}
@@ -97,6 +101,18 @@ class Identifier {
 
 	public QualifiedDataName getQualifiedDataName() {
 		return this.qdn;
+	}
+
+	public ArrayList<String> getInDataText() {
+		if (this.getQualifiedDataName() == null) {
+			if (this.getTableCall() != null) {
+				return this.getTableCall().getInDataText();
+			} else {
+				return null;
+			}
+		} else {
+			return this.getQualifiedDataName().getInDataText();
+		}
 	}
 
 	public TableCall getTableCall() {

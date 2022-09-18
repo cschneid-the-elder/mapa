@@ -21,6 +21,7 @@
            DISPLAY MYNAME ' Begin'
 
            MOVE 'PGMB0004' TO PGM-0004
+           MOVE PGM-0001   TO PGM-0004
            
            DISPLAY MYNAME ' End'
            

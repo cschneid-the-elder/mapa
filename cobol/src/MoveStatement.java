@@ -15,6 +15,7 @@ class MoveStatement {
 	private List<CobolParser.IdentifierContext> idCtxList = null;
 	private String literalText = null;
 	private ArrayList<Identifier> identifiers = null;
+	private Identifier sendingIdentifier = null;
 
 	public MoveStatement(
 			CobolParser.MoveStatementContext ctx
@@ -29,8 +30,13 @@ class MoveStatement {
 		} else {
 			mtsaCtx = mtCtx.moveToSendingArea();
 			CobolParser.LiteralContext lCtx = mtsaCtx.literal();
-			if (lCtx != null && lCtx.NONNUMERICLITERAL() != null) {
-				this.literalText = lCtx.NONNUMERICLITERAL().getSymbol().getText();
+			CobolParser.ContinuedLiteralContext clCtx = mtsaCtx.continuedLiteral();
+			if (lCtx != null ) {
+				this.literalText = lCtx.getText();
+			} else if (clCtx != null) {
+				this.literalText = clCtx.getText();
+			} else {
+				sendingIdentifier = new Identifier(mtsaCtx.identifier(), LOGGER);
 			}
 			this.idCtxList = mtCtx.identifier();
 		}
@@ -48,5 +54,8 @@ class MoveStatement {
 		return this.identifiers;
 	}
 
-
+	public Identifier getSendingIdentifier() {
+		return this.sendingIdentifier;
+	}
+	
 }

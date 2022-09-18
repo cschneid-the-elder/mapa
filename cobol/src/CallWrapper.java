@@ -152,30 +152,19 @@ class CallWrapper {
 		Boolean found = false;
 
 		for (DDNode node: dataNodes) {
-			if (node.getIdentifier().equals(this.getCobolIdentifier())) {
-				if (this.ofs.size() == 0) {
+			if (this.callType == CallType.SQLCALLBYIDENTIFIER) {
+				if (node.matches(this.cobolIdentifier, this.ofs)) {
 					found = true;
 					this.dataNode = node;
-					this.addCalledModuleName(this.dataNode.valueInValueClause);
+					this.addCalledModuleName(this.dataNode.getValueInValueClause());
 					break;
-				} else {
-					DDNode parent = node.parent;
-					Boolean foundOf = true;
-					for (String of: this.ofs) {
-						while (parent != null && !parent.getIdentifier().equals(of)) {
-							parent = parent.parent;
-						}
-						if (parent == null) {
-							foundOf = false;
-							break;
-						}
-					}
-					found = foundOf;
-					if (found) {
-						this.dataNode = node;
-						this.addCalledModuleName(this.dataNode.valueInValueClause);
-						break;
-					}
+				}
+			} else {
+				if (node.matches(this.getIdentifier())) {
+					found = true;
+					this.dataNode = node;
+					this.addCalledModuleName(this.dataNode.getValueInValueClause());
+					break;
 				}
 			}
 		}
