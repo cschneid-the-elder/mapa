@@ -3081,6 +3081,10 @@ alterTablespaceOptionList
 	)
 	;
 
+/*
+2022-11-01 Maarten van Haasteren noticed this rule should
+reference usingSpecification2 instead of usingBlock.
+*/
 createTablespaceOptionList
 	: (
 	inDatabaseOption
@@ -3102,7 +3106,7 @@ createTablespaceOptionList
 	| maxpartitionsOption
 	| memberClause
 	| trackmodClause
-	| usingBlock
+	| usingSpecification2
 	)
 	;
 

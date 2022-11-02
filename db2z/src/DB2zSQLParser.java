@@ -11128,7 +11128,7 @@ public class DB2zSQLParser extends Parser {
 			setState(2375);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (((((_la - 58)) & ~0x3f) == 0 && ((1L << (_la - 58)) & ((1L << (BUFFERPOOL - 58)) | (1L << (CCSID - 58)) | (1L << (CLOSE - 58)) | (1L << (DSSIZE - 58)) | (1L << (ERASE - 58)))) != 0) || ((((_la - 152)) & ~0x3f) == 0 && ((1L << (_la - 152)) & ((1L << (IN - 152)) | (1L << (INSERT - 152)) | (1L << (LOCKMAX - 152)) | (1L << (LOCKSIZE - 152)) | (1L << (NOT - 152)) | (1L << (NUMPARTS - 152)))) != 0) || _la==PRIQTY || _la==SECQTY || _la==USING || ((((_la - 471)) & ~0x3f) == 0 && ((1L << (_la - 471)) & ((1L << (COMPRESS - 471)) | (1L << (FREEPAGE - 471)) | (1L << (GBPCACHE - 471)) | (1L << (PCTFREE - 471)))) != 0) || ((((_la - 548)) & ~0x3f) == 0 && ((1L << (_la - 548)) & ((1L << (LOG - 548)) | (1L << (LOGGED - 548)) | (1L << (MAXPARTITIONS - 548)) | (1L << (MAXROWS - 548)) | (1L << (MEMBER - 548)) | (1L << (SEGSIZE - 548)) | (1L << (TRACKMOD - 548)) | (1L << (DEFINE - 548)))) != 0)) {
+			while (((((_la - 58)) & ~0x3f) == 0 && ((1L << (_la - 58)) & ((1L << (BUFFERPOOL - 58)) | (1L << (CCSID - 58)) | (1L << (CLOSE - 58)) | (1L << (DSSIZE - 58)))) != 0) || ((((_la - 152)) & ~0x3f) == 0 && ((1L << (_la - 152)) & ((1L << (IN - 152)) | (1L << (INSERT - 152)) | (1L << (LOCKMAX - 152)) | (1L << (LOCKSIZE - 152)) | (1L << (NOT - 152)) | (1L << (NUMPARTS - 152)))) != 0) || _la==USING || ((((_la - 471)) & ~0x3f) == 0 && ((1L << (_la - 471)) & ((1L << (COMPRESS - 471)) | (1L << (FREEPAGE - 471)) | (1L << (GBPCACHE - 471)) | (1L << (PCTFREE - 471)))) != 0) || ((((_la - 548)) & ~0x3f) == 0 && ((1L << (_la - 548)) & ((1L << (LOG - 548)) | (1L << (LOGGED - 548)) | (1L << (MAXPARTITIONS - 548)) | (1L << (MAXROWS - 548)) | (1L << (MEMBER - 548)) | (1L << (SEGSIZE - 548)) | (1L << (TRACKMOD - 548)) | (1L << (DEFINE - 548)))) != 0)) {
 				{
 				{
 				setState(2372);
@@ -62061,8 +62061,8 @@ public class DB2zSQLParser extends Parser {
 		public TrackmodClauseContext trackmodClause() {
 			return getRuleContext(TrackmodClauseContext.class,0);
 		}
-		public UsingBlockContext usingBlock() {
-			return getRuleContext(UsingBlockContext.class,0);
+		public UsingSpecification2Context usingSpecification2() {
+			return getRuleContext(UsingSpecification2Context.class,0);
 		}
 		public CreateTablespaceOptionListContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -62209,7 +62209,7 @@ public class DB2zSQLParser extends Parser {
 			case 20:
 				{
 				setState(7068);
-				usingBlock();
+				usingSpecification2();
 				}
 				break;
 			}
@@ -110646,7 +110646,7 @@ public class DB2zSQLParser extends Parser {
 		"\u1b97\u1ba0\5\u02a6\u0154\2\u1b98\u1ba0\5\u02a4\u0153\2\u1b99\u1ba0\5"+
 		"\u02aa\u0156\2\u1b9a\u1ba0\5\u0310\u0189\2\u1b9b\u1ba0\5\u0312\u018a\2"+
 		"\u1b9c\u1ba0\5\u01d0\u00e9\2\u1b9d\u1ba0\5\u01d2\u00ea\2\u1b9e\u1ba0\5"+
-		"\u032e\u0198\2\u1b9f\u1b8b\3\2\2\2\u1b9f\u1b8c\3\2\2\2\u1b9f\u1b8d\3\2"+
+		"\u0314\u018b\2\u1b9f\u1b8b\3\2\2\2\u1b9f\u1b8c\3\2\2\2\u1b9f\u1b8d\3\2"+
 		"\2\2\u1b9f\u1b8e\3\2\2\2\u1b9f\u1b8f\3\2\2\2\u1b9f\u1b90\3\2\2\2\u1b9f"+
 		"\u1b91\3\2\2\2\u1b9f\u1b92\3\2\2\2\u1b9f\u1b93\3\2\2\2\u1b9f\u1b94\3\2"+
 		"\2\2\u1b9f\u1b95\3\2\2\2\u1b9f\u1b96\3\2\2\2\u1b9f\u1b97\3\2\2\2\u1b9f"+
