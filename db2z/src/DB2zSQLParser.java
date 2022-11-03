@@ -63643,11 +63643,11 @@ public class DB2zSQLParser extends Parser {
 		public TerminalNode INTEGERLITERAL() { return getToken(DB2zSQLParser.INTEGERLITERAL, 0); }
 		public TerminalNode PARTITION() { return getToken(DB2zSQLParser.PARTITION, 0); }
 		public TerminalNode PART() { return getToken(DB2zSQLParser.PART, 0); }
-		public List<UsingBlockContext> usingBlock() {
-			return getRuleContexts(UsingBlockContext.class);
+		public List<UsingSpecification2Context> usingSpecification2() {
+			return getRuleContexts(UsingSpecification2Context.class);
 		}
-		public UsingBlockContext usingBlock(int i) {
-			return getRuleContext(UsingBlockContext.class,i);
+		public UsingSpecification2Context usingSpecification2(int i) {
+			return getRuleContext(UsingSpecification2Context.class,i);
 		}
 		public List<FreeBlockContext> freeBlock() {
 			return getRuleContexts(FreeBlockContext.class);
@@ -63721,18 +63721,15 @@ public class DB2zSQLParser extends Parser {
 			setState(7296);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
-			while (_la==DSSIZE || _la==ERASE || _la==PRIQTY || _la==SECQTY || _la==USING || ((((_la - 471)) & ~0x3f) == 0 && ((1L << (_la - 471)) & ((1L << (COMPRESS - 471)) | (1L << (FREEPAGE - 471)) | (1L << (GBPCACHE - 471)) | (1L << (PCTFREE - 471)))) != 0) || _la==TRACKMOD) {
+			while (_la==DSSIZE || _la==USING || ((((_la - 471)) & ~0x3f) == 0 && ((1L << (_la - 471)) & ((1L << (COMPRESS - 471)) | (1L << (FREEPAGE - 471)) | (1L << (GBPCACHE - 471)) | (1L << (PCTFREE - 471)))) != 0) || _la==TRACKMOD) {
 				{
 				setState(7294);
 				_errHandler.sync(this);
 				switch (_input.LA(1)) {
-				case ERASE:
-				case PRIQTY:
-				case SECQTY:
 				case USING:
 					{
 					setState(7288);
-					usingBlock();
+					usingSpecification2();
 					}
 					break;
 				case FREEPAGE:
@@ -110742,7 +110739,7 @@ public class DB2zSQLParser extends Parser {
 		"\u014d\2\u1c73\u1c62\3\2\2\2\u1c73\u1c71\3\2\2\2\u1c73\u1c72\3\2\2\2\u1c74"+
 		"\u1c77\3\2\2\2\u1c75\u1c73\3\2\2\2\u1c75\u1c76\3\2\2\2\u1c76\u030b\3\2"+
 		"\2\2\u1c77\u1c75\3\2\2\2\u1c78\u1c79\t\t\2\2\u1c79\u1c82\7\30\2\2\u1c7a"+
-		"\u1c81\5\u032e\u0198\2\u1c7b\u1c81\5\u0330\u0199\2\u1c7c\u1c81\5\u0334"+
+		"\u1c81\5\u0314\u018b\2\u1c7b\u1c81\5\u0330\u0199\2\u1c7c\u1c81\5\u0334"+
 		"\u019b\2\u1c7d\u1c81\5\u02a0\u0151\2\u1c7e\u1c81\5\u01d2\u00ea\2\u1c7f"+
 		"\u1c81\5\u0298\u014d\2\u1c80\u1c7a\3\2\2\2\u1c80\u1c7b\3\2\2\2\u1c80\u1c7c"+
 		"\3\2\2\2\u1c80\u1c7d\3\2\2\2\u1c80\u1c7e\3\2\2\2\u1c80\u1c7f\3\2\2\2\u1c81"+
