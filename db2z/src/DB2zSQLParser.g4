@@ -3218,11 +3218,15 @@ partitionByRangeSpecification
 	)
 	;
 
+/*
+2022-11-02 Maarten van Haasteren noticed this rule should
+reference usingSpecification2 instead of usingBlock.
+*/
 partitionByRangePartitionPhrase
 	: (
 	(PARTITION | PART) INTEGERLITERAL
 		(
-		usingBlock
+		usingSpecification2
 		| freeBlock
 		| gbpcacheBlock
 		| compressOption
