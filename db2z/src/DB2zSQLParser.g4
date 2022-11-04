@@ -255,11 +255,16 @@ alterTableStatement
 	)
 	;
 
+/*
+2022-11-04 Changed subrule operator for alterPartitionClause from
+? (0 or 1 allowed) to * (0 or more allowed) per documentation.
+Noticed whilst working on issue 125.
+*/
 alterTablespaceStatement
 	: (
 	ALTER TABLESPACE (databaseName DOT)? tablespaceName 
 	alterTablespaceOptionList* 
-	alterPartitionClause?
+	alterPartitionClause*
 	moveTableClause?
 	)
 	;
@@ -2564,6 +2569,9 @@ regenerateClause
 	: (REGENERATE (USING APPLICATION COMPATIBILITY applCompatValue)?)
 	;
 
+/*
+2022-11-04 Issue 125 Changed usingSpecification1 to usingBlock for consistency.
+*/
 alterIndexOptions
 	:(
 	bufferpoolOption
@@ -2571,7 +2579,7 @@ alterIndexOptions
 	| copyOption
 	| dssizeOption
 	| piecesizeOption
-	| usingSpecification1
+	| usingBlock
 	| freeSpecification
 	| gbpcacheSpecification
 	| clusterOption
@@ -2670,12 +2678,13 @@ notAtomicPhrase
 	: (NOT ATOMIC CONTINUE ON SQLEXCEPTION)
 	;
 
-//
-
+/*
+2022-11-04 Issue 125 Changed usingSpecification1 to usingBlock for consistency.
+*/
 alterIndexPartitionOptions
 	: (
 	ALTER partitionElement
-		(usingSpecification1+
+		(usingBlock
 		| freeSpecification+
 		| gbpcacheSpecification
 		| dssizeOption)*
