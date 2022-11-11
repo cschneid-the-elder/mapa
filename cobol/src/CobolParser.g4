@@ -511,7 +511,13 @@ functionIntrinsicPhrase
    : (FUNCTION (ALL | intrinsicFunctionName+) INTRINSIC (DOT_FS | DOT)?)
    {
       if ($ALL.text == null) {
-         functionNames.add($intrinsicFunctionName.text.toUpperCase());
+         //functionNames.add($intrinsicFunctionName.text.toUpperCase());
+         /*
+         This is entirely to cozy with ANTLR internals, but I see no other way.
+         */
+         for (IntrinsicFunctionNameContext ifnCtx : _localctx.intrinsicFunctionName()) {
+         	functionNames.add(ifnCtx.getText().toUpperCase());
+         }
       } else {
          /* 
          oh, how I wish it could be otherwise; yes this is a list of

@@ -1,6 +1,11 @@
 --2022-11-11--------------------------------------------------------------------
 Added CONDCOMP compile option and test cases to testdata/local/test9001.cbl.
 
+Fixed problem with functionIntrinsicPhrase rule, it wasn't processing all the
+individual functions specified.  It's a bit too cozy with ANTLR internals, but
+I see no other way to deal with the syntax.  Modified test9024.cbl and
+test9025.cbl in testdata/local to verify.  Must use make testrigx and visually
+check to see functions are seen as such and not table entries.
 
 --2022-11-04--------------------------------------------------------------------
 New edition of DB2zSQL.jar added.
