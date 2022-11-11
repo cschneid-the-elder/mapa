@@ -15,6 +15,7 @@
                BYTE-LENGTH
                CHAR
                COMBINED-DATETIME
+               CONTENT-OF
                COS
                CURRENT-DATE
                DATE-OF-INTEGER
@@ -94,5 +95,9 @@
            05  WS-COUNT              PIC S9999 COMP-3 VALUE +0.
        Procedure Division.
            MOVE REVERSE(WORK-AREAS) TO RETURN-CODE
+           
+           MOVE CONTENT-OF(WS-COUNT) TO WORK-AREAS
+
+           MOVE ABS(WS-COUNT) TO RETURN-CODE
 
            EXIT PROGRAM.

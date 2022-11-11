@@ -11273,7 +11273,13 @@ public class CobolParser extends Parser {
 			}
 
 			      if ((((FunctionIntrinsicPhraseContext)_localctx).ALL!=null?((FunctionIntrinsicPhraseContext)_localctx).ALL.getText():null) == null) {
-			         functionNames.add((((FunctionIntrinsicPhraseContext)_localctx).intrinsicFunctionName!=null?_input.getText(((FunctionIntrinsicPhraseContext)_localctx).intrinsicFunctionName.start,((FunctionIntrinsicPhraseContext)_localctx).intrinsicFunctionName.stop):null).toUpperCase());
+			         //functionNames.add((((FunctionIntrinsicPhraseContext)_localctx).intrinsicFunctionName!=null?_input.getText(((FunctionIntrinsicPhraseContext)_localctx).intrinsicFunctionName.start,((FunctionIntrinsicPhraseContext)_localctx).intrinsicFunctionName.stop):null).toUpperCase());
+			         /*
+			         This is entirely to cozy with ANTLR internals, but I see no other way.
+			         */
+			         for (IntrinsicFunctionNameContext ifnCtx : _localctx.intrinsicFunctionName()) {
+			         	functionNames.add(ifnCtx.getText().toUpperCase());
+			         }
 			      } else {
 			         /* 
 			         oh, how I wish it could be otherwise; yes this is a list of

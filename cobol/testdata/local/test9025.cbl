@@ -2,6 +2,8 @@
        Program-ID. test9025.
        Environment Division.
        Configuration Section.
+       Repository.
+           Function REVERSE Intrinsic.
        Data Division.
        Working-Storage Section.
        01  WORK-AREAS.
