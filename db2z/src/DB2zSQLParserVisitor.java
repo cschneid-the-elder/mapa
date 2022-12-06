@@ -2374,6 +2374,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#stogroupOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStogroupOptions(DB2zSQLParser.StogroupOptionsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

@@ -3947,6 +3947,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitUsingSpecification2(DB2zSQLParser.UsingSpecification2Context ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#stogroupOptions}.
+	 * @param ctx the parse tree
+	 */
+	void enterStogroupOptions(DB2zSQLParser.StogroupOptionsContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#stogroupOptions}.
+	 * @param ctx the parse tree
+	 */
+	void exitStogroupOptions(DB2zSQLParser.StogroupOptionsContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlIndexSpecification}.
 	 * @param ctx the parse tree
 	 */

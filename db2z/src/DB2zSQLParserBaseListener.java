@@ -4743,6 +4743,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStogroupOptions(DB2zSQLParser.StogroupOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStogroupOptions(DB2zSQLParser.StogroupOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterXmlIndexSpecification(DB2zSQLParser.XmlIndexSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}
