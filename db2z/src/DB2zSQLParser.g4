@@ -3260,11 +3260,21 @@ maxpartitionsOption
 usingSpecification2
 	: (
 	USING
-		((STOGROUP stogroupName
-			((PRIQTY INTEGERLITERAL)
-			| (SECQTY INTEGERLITERAL)
-			| (ERASE (NO | YES)))*)
+		((STOGROUP stogroupName stogroupOptions*)
 		| (VCAT catalogName))
+	)
+	;
+
+/*
+Refactored these options out of usingSpecification2 per
+suggestion by Martijn Rutte 2022-12-06.  More concise
+processing via SonarQube.
+*/
+stogroupOptions
+	: (
+	(PRIQTY INTEGERLITERAL)
+	| (SECQTY INTEGERLITERAL)
+	| (ERASE (NO | YES))
 	)
 	;
 
