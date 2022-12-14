@@ -1,4 +1,8 @@
 --2022-12-06--------------------------------------------------------------------
+Removed '+' modifier in freeBlock per suggestion by Martijn Rutte.  Its absence
+makes rule processing easier.
+
+--2022-12-06--------------------------------------------------------------------
 Refactored usingSpecification2 to place stogroupOptions into their own rule per
 suggestion by Martijn Rutte.  This makes processing via SonarQube more concise.
 

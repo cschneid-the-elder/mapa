@@ -3375,12 +3375,16 @@ usingBlock
 	)
 	;
 
+/*
+Removed '+' modifier per suggestion by Martijn Rutte 2022-12-14
+as its absence makes rule processing easier.
+*/
 freeBlock
 	: (
 	((FREEPAGE INTEGERLITERAL)
 	| (PCTFREE INTEGERLITERAL)
 	| (PCTFREE (INTEGERLITERAL? FOR UPDATE INTEGERLITERAL)?)
-	)+
+	)
 	)
 	;
 
