@@ -286,6 +286,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateProcedureSQLPLStatement(DB2zSQLParser.CreateProcedureSQLPLStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#probablySQLPL}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitProbablySQLPL(DB2zSQLParser.ProbablySQLPLContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createProcedureStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2194,6 +2200,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateProcedureSQLPLOptionList(DB2zSQLParser.CreateProcedureSQLPLOptionListContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#versionOption}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitVersionOption(DB2zSQLParser.VersionOptionContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#commitOnReturnOptionSQLPL}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2290,17 +2302,23 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSqlPathOption(DB2zSQLParser.SqlPathOptionContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlPathOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlPathOptionItem}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitSqlPathOptionList(DB2zSQLParser.SqlPathOptionListContext ctx);
+	T visitSqlPathOptionItem(DB2zSQLParser.SqlPathOptionItemContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#queryAccelerationOption}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitQueryAccelerationOption(DB2zSQLParser.QueryAccelerationOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#queryAccelerationOptionItem}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitQueryAccelerationOptionItem(DB2zSQLParser.QueryAccelerationOptionItemContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#getAccelArchiveOption}.
 	 * @param ctx the parse tree
@@ -2356,11 +2374,23 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitRoundingOption(DB2zSQLParser.RoundingOptionContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#roundingOptionItem}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitRoundingOptionItem(DB2zSQLParser.RoundingOptionItemContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#dateFormatOption}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitDateFormatOption(DB2zSQLParser.DateFormatOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#dateTimeFormatOptionItem}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitDateTimeFormatOptionItem(DB2zSQLParser.DateTimeFormatOptionItemContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#timeFormatOption}.
 	 * @param ctx the parse tree

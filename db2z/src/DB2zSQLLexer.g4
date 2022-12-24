@@ -3164,6 +3164,10 @@ WAITFORDATA
 	: W A I T F O R D A T A 
 	;
 
+WRAPPED
+	: W R A P P E D
+	;
+
 //generated sql scalar functions
 
 ABS
@@ -4291,6 +4295,24 @@ SQLIDENTIFIER
 	: [a-zA-Z0-9@#$\-_]+
 	;
 
+/*
+Lexing enters this mode when a CREATE PROCEDURE
+statement is encountered.  There are two types of
+stored procedure, native SQL and external.  The
+former is written in SQL/PL and is embedded in 
+the CREATE PROCEDURE statement.  By entering this
+mode we can detect such a statement and gracefully
+ignore the SQL/PL.
+
+The statement options are slightly different 
+between the two types of stored procedures.  Both
+are included here because the options can occur in
+any order and the only way to reliably determine
+an external stored procedure is being created is
+via the LANGUAGE option, which may be last - i.e.
+we may not know which type of statement is being
+processed until we're almost done with it.
+*/
 mode CREATE_PROCEDURE_MODE;
 
 CP_SQLCOMMENT
@@ -4316,6 +4338,11 @@ CP_NONNUMERICLITERAL
 CP_INTEGERLITERAL
 	: INTEGERLITERAL
 	->type(INTEGERLITERAL)
+	;
+
+CP_NUMERICLITERAL
+	: NUMERICLITERAL
+	->type(NUMERICLITERAL)
 	;
 
 CP_NEWLINE
@@ -5305,6 +5332,11 @@ CP_WRITE
 	->type(WRITE)
 	;
 
+CP_WRAPPED
+	: W R A P P E D
+	->type(WRAPPED)
+	;
+
 CP_XML
 	: X M L 
 	->type(XML)
@@ -5455,6 +5487,11 @@ CP_SQLIDENTIFIER
 	->type(SQLIDENTIFIER)
 	;
 
+/*
+Here it is, the raison d'etre for this mode, the
+mechanism by which implementing a grammar for the 
+entirety of the SQL/PL language is avoided.
+*/
 CP_UNIDENTIFIED
 	: .
 	;

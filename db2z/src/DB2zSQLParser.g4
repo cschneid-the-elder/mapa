@@ -457,8 +457,14 @@ createProcedureSQLPLStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
 	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	versionOption?
 	(createProcedureSQLPLOptionList* languageOption1? createProcedureSQLPLOptionList*)
-	(identifier 
+	WRAPPED? probablySQLPL*
+	)
+	;
+
+probablySQLPL
+	: (identifier 
 	| literal
 	| DOT
 	| COMMA 
@@ -467,7 +473,7 @@ createProcedureSQLPLStatement
 	| CEP_SEMICOLON
 	| CP_UNIDENTIFIED 
 	| LPAREN 
-	| RPAREN)*
+	| RPAREN
 	)
 	;
 
@@ -2920,7 +2926,7 @@ procedureOptionList
 	| programTypeOption
 	| securityOption
 	| runOptionsOption
-	| (COMMIT ON RETURN (NO | YES))
+	| commitOnReturnOption
 	| specialRegistersOption
 	| (CALLED ON NULL INPUT)
 	| (NULL CALL)
@@ -3017,6 +3023,10 @@ createProcedureSQLPLOptionList
 	)
 	;
 
+versionOption
+	: (VERSION (identifier | literal))
+	;
+
 commitOnReturnOptionSQLPL
 	: (AUTONOMOUS | commitOnReturnOption)
 	;
@@ -3088,20 +3098,23 @@ opthintOption
 	;
 
 sqlPathOption
-	: (SQL PATH sqlPathOptionList+)
+	: (SQL PATH sqlPathOptionItem (COMMA sqlPathOptionItem)*)
 	;
 	
-sqlPathOptionList
-	: (COMMA | (SYSTEM PATH) | (SESSION USER) | USER)
+sqlPathOptionItem
+	: ((SYSTEM PATH) | (SESSION USER) | USER | SQLIDENTIFIER)
 	;
 
 queryAccelerationOption
-	: (QUERY ACCELERATION 
-		(NONE
-		| ENABLE
-		| (ENABLE WITH FAILBACK)
-		| ELIGIBLE
-		| ALL)
+	: (QUERY ACCELERATION queryAccelerationOptionItem)
+	;
+
+queryAccelerationOptionItem
+	: (NONE
+	| ENABLE
+	| (ENABLE WITH FAILBACK)
+	| ELIGIBLE
+	| ALL
 	)
 	;
 
@@ -3138,24 +3151,30 @@ validateOption
 	;
 
 roundingOption
-	: (ROUNDING
-		( DEC_ROUND_CEILING
-		| DEC_ROUND_DOWN
-		| DEC_ROUND_FLOOR
-		| DEC_ROUND_HALF_DOWN
-		| DEC_ROUND_HALF_EVEN
-		| DEC_ROUND_HALF_UP
-		| DEC_ROUND_UP
-		)
+	: (ROUNDING roundingOptionItem)
+	;
+
+roundingOptionItem
+	: ( DEC_ROUND_CEILING
+	| DEC_ROUND_DOWN
+	| DEC_ROUND_FLOOR
+	| DEC_ROUND_HALF_DOWN
+	| DEC_ROUND_HALF_EVEN
+	| DEC_ROUND_HALF_UP
+	| DEC_ROUND_UP
 	)
 	;
 
 dateFormatOption
-	: (DATE FORMAT sqlidentifier)
+	: (DATE FORMAT dateTimeFormatOptionItem)
+	;
+
+dateTimeFormatOptionItem
+	: (ISO | EUR | USA | JIS | LOCAL)
 	;
 
 timeFormatOption
-	: (TIME FORMAT sqlidentifier)
+	: (TIME FORMAT dateTimeFormatOptionItem)
 	;
 
 decimalOption
@@ -6919,6 +6938,7 @@ sqlKeyword
 	| WLM
 	| WORK
 	| WORKFILE
+	| WRAPPED
 	| WRITE
 	| XML
 	| XMLAGG
