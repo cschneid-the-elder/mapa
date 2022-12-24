@@ -147,6 +147,12 @@ ziplogs:
 	echo `date` $@ >> build.log
 	zip -DjmTv9 testintegrationlogs TestIntegration-*.log
 
+oldjarfile := ./DB2zSQL.jar.$(shell date +%Y%m%d%H%M%S)
+cpdb2zjar:
+	echo `date` $@ >> build.log
+	cp ./DB2zSQL.jar $(oldjarfile)
+	cp ../db2z/DB2zSQL.jar .
+
 ./src/CobolLexer.tokens: 
 
 ./src/CobolParser.tokens: ./src/CobolLexer.tokens

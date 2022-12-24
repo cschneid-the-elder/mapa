@@ -218,13 +218,13 @@ public class DB2zSQLLexer extends Lexer {
 	public static final int
 		COMMENTS=2;
 	public static final int
-		CREATE_PROCEDURE_MODE=1, CREATE_EXTERNAL_PROCEDURE_MODE=2;
+		CREATE_OR_ALTER_PROCEDURE_MODE=1, CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE=2;
 	public static String[] channelNames = {
 		"DEFAULT_TOKEN_CHANNEL", "HIDDEN", "COMMENTS"
 	};
 
 	public static String[] modeNames = {
-		"DEFAULT_MODE", "CREATE_PROCEDURE_MODE", "CREATE_EXTERNAL_PROCEDURE_MODE"
+		"DEFAULT_MODE", "CREATE_OR_ALTER_PROCEDURE_MODE", "CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE"
 	};
 
 	private static String[] makeRuleNames() {
@@ -827,7 +827,7 @@ public class DB2zSQLLexer extends Lexer {
 		switch (actionIndex) {
 		case 4:
 
-					if (createOrAlterSeen) pushMode(CREATE_PROCEDURE_MODE);
+					if (createOrAlterSeen) pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
 				
 			break;
 		}
@@ -868,7 +868,7 @@ public class DB2zSQLLexer extends Lexer {
 
 					if (languageSeen) {
 						languageSeen = false;
-						pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+						pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 					}
 				
 			break;
@@ -880,7 +880,7 @@ public class DB2zSQLLexer extends Lexer {
 
 					if (languageSeen) {
 						languageSeen = false;
-						pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+						pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 					}
 				
 			break;
@@ -892,7 +892,7 @@ public class DB2zSQLLexer extends Lexer {
 
 					if (languageSeen) {
 						languageSeen = false;
-						pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+						pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 					}
 				
 			break;
@@ -904,7 +904,7 @@ public class DB2zSQLLexer extends Lexer {
 
 					if (languageSeen) {
 						languageSeen = false;
-						pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+						pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 					}
 				
 			break;
@@ -916,7 +916,7 @@ public class DB2zSQLLexer extends Lexer {
 
 					if (languageSeen) {
 						languageSeen = false;
-						pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+						pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 					}
 				
 			break;
@@ -928,7 +928,7 @@ public class DB2zSQLLexer extends Lexer {
 
 					if (languageSeen) {
 						languageSeen = false;
-						pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+						pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 					}
 				
 			break;

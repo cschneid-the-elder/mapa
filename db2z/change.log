@@ -1,3 +1,15 @@
+--2022-12-24--------------------------------------------------------------------
+Added toleration for SQL/PL in ALTER and CREATE PROCEDURE statement rules per 
+suggestion by Martijn Rutte.
+
+This entailed adding ANTLR lexer modes for native SQL and external stored
+procedures, and new parser rules for ALTER and CREATE of native SQL stored
+procedures.
+
+Instead of native SQL stored procedure ALTER and CREATE resulting in error
+messages, the SQL/PL embedded in the statements ends up falling into a parser
+rule named probablySQLPL.
+
 --2022-12-06--------------------------------------------------------------------
 Removed '+' modifier in freeBlock per suggestion by Martijn Rutte.  Its absence
 makes rule processing easier.

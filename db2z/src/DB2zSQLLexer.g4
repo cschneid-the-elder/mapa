@@ -1029,7 +1029,7 @@ PRIVILEGES
 PROCEDURE
 	: P R O C E D U R E 
 	{
-		if (createOrAlterSeen) pushMode(CREATE_PROCEDURE_MODE);
+		if (createOrAlterSeen) pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
 	}
 	;
 
@@ -4303,11 +4303,11 @@ SQLIDENTIFIER
 	;
 
 /*
-Lexing enters this mode when a CREATE PROCEDURE
+Lexing enters this mode when a CREATE or ALTER PROCEDURE
 statement is encountered.  There are two types of
 stored procedure, native SQL and external.  The
 former is written in SQL/PL and is embedded in 
-the CREATE PROCEDURE statement.  By entering this
+the CREATE or ALTER PROCEDURE statement.  By entering this
 mode we can detect such a statement and gracefully
 ignore the SQL/PL.
 
@@ -4320,7 +4320,7 @@ via the LANGUAGE option, which may be last - i.e.
 we may not know which type of statement is being
 processed until we're almost done with it.
 */
-mode CREATE_PROCEDURE_MODE;
+mode CREATE_OR_ALTER_PROCEDURE_MODE;
 
 CP_SQLCOMMENT
 	: SQLCOMMENT
@@ -4417,7 +4417,7 @@ CP_ASSEMBLE
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 		}
 	}
 	->type(ASSEMBLE)
@@ -4428,7 +4428,7 @@ CP_C_
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 		}
 	}
 	->type(C_)
@@ -4439,7 +4439,7 @@ CP_COBOL
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 		}
 	}
 	->type(COBOL)
@@ -4450,7 +4450,7 @@ CP_JAVA
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 		}
 	}
 	->type(JAVA)
@@ -4461,7 +4461,7 @@ CP_PLI
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 		}
 	}
 	->type(PLI)
@@ -4472,7 +4472,7 @@ CP_REXX
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
 		}
 	}
 	->type(REXX)
@@ -5553,7 +5553,7 @@ CP_UNIDENTIFIED
 	: .
 	;
 
-mode CREATE_EXTERNAL_PROCEDURE_MODE;
+mode CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE;
 
 CEP_SQLCOMMENT
 	: SQLCOMMENT

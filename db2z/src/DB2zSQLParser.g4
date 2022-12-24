@@ -29,11 +29,19 @@ is true of the prepareStatement rule.
 This grammar does not include SQL/PL or the following SQL statements.
 
 ALTER FUNCTION (compiled SQL scalar)
-ALTER PROCEDURE (SQL - external)
-ALTER PROCEDURE (SQL - native)
 ALTER TRIGGER (advanced)
 CREATE FUNCTION (compiled SQL scalar)
 CREATE TRIGGER (advanced)
+
+I do not know if the SQL statement 
+ALTER PROCEDURE (SQL - external)
+will work with this grammar.  It's been deprecated but the syntax
+is similar enough to a regular external stored procedure that it
+might work.
+
+While SQL/PL is not included in this grammar, its presence is
+tolerated to some extent in the CREATE and ALTER of native SQL
+stored procedures.
 
 */
 
