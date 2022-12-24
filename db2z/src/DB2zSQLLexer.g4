@@ -12,7 +12,7 @@ lexer grammar DB2zSQLLexer;
 
 @lexer::members {
 	public String statementTerminator = new String("");
-	public Boolean createSeen = false;
+	public Boolean createOrAlterSeen = false;
 	public Boolean languageSeen = false;
 }
 
@@ -120,7 +120,7 @@ COLON
 SEMICOLON
 	: ';'
 	{
-		createSeen = false;
+		createOrAlterSeen = false;
 	}
 	;
 
@@ -242,6 +242,9 @@ ALLOW
 
 ALTER
 	: A L T E R
+	{
+		createOrAlterSeen = true;
+	}
 	;
 
 ALTERAND
@@ -419,7 +422,7 @@ CONTINUE
 CREATE
 	: C R E A T E 
 	{
-		createSeen = true;
+		createOrAlterSeen = true;
 	}
 	;
 
@@ -1026,7 +1029,7 @@ PRIVILEGES
 PROCEDURE
 	: P R O C E D U R E 
 	{
-		if (createSeen) pushMode(CREATE_PROCEDURE_MODE);
+		if (createOrAlterSeen) pushMode(CREATE_PROCEDURE_MODE);
 	}
 	;
 
@@ -2380,6 +2383,10 @@ ACTIVE
 
 VERSION
 	: V E R S I O N
+	;
+
+VERSIONS
+	: V E R S I O N S
 	;
 
 ALIAS
@@ -4288,7 +4295,7 @@ M_CHAR
 SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
-	{createSeen = false;}
+	{createOrAlterSeen = false;}
 	;
 
 SQLIDENTIFIER
@@ -4389,7 +4396,7 @@ CP_SEMICOLON
 	: SEMICOLON
 	{
 		if (statementTerminator.length() == 0) {
-			createSeen = false;
+			createOrAlterSeen = false;
 			languageSeen = false;
 			setType(SEMICOLON);
 			popMode();
@@ -5472,11 +5479,41 @@ CP_TYPE
 	->type(TYPE)
 	;
 
+CP_ACTIVE
+	: ACTIVE
+	->type(ACTIVE)
+	;
+
+CP_ACTIVATE
+	: ACTIVATE
+	->type(ACTIVATE)
+	;
+
+CP_VERSIONS
+	: VERSIONS
+	->type(VERSIONS)
+	;
+
+CP_USING
+	: USING
+	->type(USING)
+	;
+
+CP_COMPATIBILITY
+	: COMPATIBILITY
+	->type(COMPATIBILITY)
+	;
+
+CP_DROP
+	: DROP
+	->type(DROP)
+	;
+
 CP_SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
 	{
-		createSeen = false;
+		createOrAlterSeen = false;
 		languageSeen = false;
 	}
 	->type(SQL_STATEMENT_TERMINATOR),popMode
@@ -5567,7 +5604,7 @@ CEP_SEMICOLON
 	: SEMICOLON
 	{
 		if (statementTerminator.length() == 0) {
-			createSeen = false;
+			createOrAlterSeen = false;
 			languageSeen = false;
 			setType(SEMICOLON);
 			popMode();
@@ -6159,7 +6196,7 @@ CEP_ZONE
 CEP_SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
-	{createSeen = false;}
+	{createOrAlterSeen = false;}
 	->type(SQL_STATEMENT_TERMINATOR),popMode,popMode
 	;
 
