@@ -231,6 +231,54 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAlterProcedureSQLPLStatement(DB2zSQLParser.AlterProcedureSQLPLStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterProcedureSQLPLStatement(DB2zSQLParser.AlterProcedureSQLPLStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterWhichProcedureSQLPL1(DB2zSQLParser.AlterWhichProcedureSQLPL1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterWhichProcedureSQLPL1(DB2zSQLParser.AlterWhichProcedureSQLPL1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterWhichProcedureSQLPL2(DB2zSQLParser.AlterWhichProcedureSQLPL2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterWhichProcedureSQLPL2(DB2zSQLParser.AlterWhichProcedureSQLPL2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAlterSequenceStatement(DB2zSQLParser.AlterSequenceStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -4383,13 +4431,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterCreateProcedureSQLPLOptionList(DB2zSQLParser.CreateProcedureSQLPLOptionListContext ctx) { }
+	@Override public void enterProcedureSQLPLOptionList(DB2zSQLParser.ProcedureSQLPLOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitCreateProcedureSQLPLOptionList(DB2zSQLParser.CreateProcedureSQLPLOptionListContext ctx) { }
+	@Override public void exitProcedureSQLPLOptionList(DB2zSQLParser.ProcedureSQLPLOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

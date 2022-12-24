@@ -118,6 +118,30 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterProcedureSQLPLStatement(DB2zSQLParser.AlterProcedureSQLPLStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterWhichProcedureSQLPL1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterWhichProcedureSQLPL1(DB2zSQLParser.AlterWhichProcedureSQLPL1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterWhichProcedureSQLPL2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterWhichProcedureSQLPL2(DB2zSQLParser.AlterWhichProcedureSQLPL2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLApplicationCompatibility}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterSequenceStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -2194,11 +2218,11 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateProcedureOptionList(DB2zSQLParser.CreateProcedureOptionListContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#createProcedureSQLPLOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#procedureSQLPLOptionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCreateProcedureSQLPLOptionList(DB2zSQLParser.CreateProcedureSQLPLOptionListContext ctx);
+	T visitProcedureSQLPLOptionList(DB2zSQLParser.ProcedureSQLPLOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#versionOption}.
 	 * @param ctx the parse tree

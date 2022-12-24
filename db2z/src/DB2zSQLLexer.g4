@@ -4519,6 +4519,11 @@ CP_ALLOW
 	->type(ALLOW)
 	;
 
+CP_ALTER
+	: ALTER
+	->type(ALTER)
+	;
+
 CP_ALWAYS
 	: A L W A Y S 
 	->type(ALWAYS)
@@ -5507,6 +5512,21 @@ CP_COMPATIBILITY
 CP_DROP
 	: DROP
 	->type(DROP)
+	;
+
+CP_REPLACE
+	: REPLACE
+	->type(REPLACE)
+	;
+
+CP_ADD
+	: ADD
+	->type(ADD)
+	;
+
+CP_REGENERATE
+	: REGENERATE
+	->type(REGENERATE)
 	;
 
 CP_SQL_STATEMENT_TERMINATOR

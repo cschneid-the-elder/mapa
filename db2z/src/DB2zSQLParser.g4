@@ -61,6 +61,7 @@ sqlStatement
 	| alterMaskStatement
 	| alterPermissionStatement
 	| alterProcedureStatement
+	| alterProcedureSQLPLStatement
 	| alterSequenceStatement
 	| alterStogroupStatement
 	| alterTableStatement
@@ -237,6 +238,36 @@ alterProcedureStatement
 	)
 	;
 
+alterProcedureSQLPLStatement
+	: (
+	ALTER PROCEDURE procedureName (
+		(ALTER? alterWhichProcedureSQLPL1? procedureSQLPLOptionList)
+		| (REPLACE alterWhichProcedureSQLPL2? 
+			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+			createProcedureOptionList*
+			probablySQLPL*)
+		| (ADD versionOption
+			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+			createProcedureOptionList*
+			probablySQLPL*)
+		| (ACTIVATE versionOption)
+		| (REGENERATE alterWhichProcedureSQLPL2 alterProcedureSQLPLApplicationCompatibility?)
+		| (DROP versionOption)
+		)
+	)
+	;
+
+alterWhichProcedureSQLPL1
+	: ((ACTIVE VERSION) | (ALL VERSIONS) | versionOption)
+	;
+
+alterWhichProcedureSQLPL2
+	: ((ACTIVE VERSION) | versionOption)
+	;
+
+alterProcedureSQLPLApplicationCompatibility
+	: (USING APPLICATION COMPATIBILITY CP_APPLCOMPAT_LEVEL)
+	;
 alterSequenceStatement
 	: (
 	ALTER SEQUENCE sequenceName alterSequenceOptionList+
@@ -458,7 +489,7 @@ createProcedureSQLPLStatement
 	CREATE (OR REPLACE)? PROCEDURE procedureName
 	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
 	versionOption?
-	(createProcedureSQLPLOptionList* languageOption1? createProcedureSQLPLOptionList*)
+	(procedureSQLPLOptionList* languageOption1? procedureSQLPLOptionList*)
 	WRAPPED? probablySQLPL*
 	)
 	;
@@ -2967,7 +2998,7 @@ createProcedureOptionList
 	)
 	;
 
-createProcedureSQLPLOptionList
+procedureSQLPLOptionList
 	: (
 	specificNameOption2
 	| deterministicOption
@@ -6923,6 +6954,7 @@ sqlKeyword
 	| VCAT
 	| VERSION
 	| VERSIONING
+	| VERSIONS
 	| VIEW
 	| VOLATILE
 	| VOLUMES

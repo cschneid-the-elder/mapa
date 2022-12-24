@@ -187,6 +187,46 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterProcedureStatement(DB2zSQLParser.AlterProcedureStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLStatement}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterProcedureSQLPLStatement(DB2zSQLParser.AlterProcedureSQLPLStatementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLStatement}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterProcedureSQLPLStatement(DB2zSQLParser.AlterProcedureSQLPLStatementContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterWhichProcedureSQLPL1}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterWhichProcedureSQLPL1(DB2zSQLParser.AlterWhichProcedureSQLPL1Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterWhichProcedureSQLPL1}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterWhichProcedureSQLPL1(DB2zSQLParser.AlterWhichProcedureSQLPL1Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterWhichProcedureSQLPL2}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterWhichProcedureSQLPL2(DB2zSQLParser.AlterWhichProcedureSQLPL2Context ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterWhichProcedureSQLPL2}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterWhichProcedureSQLPL2(DB2zSQLParser.AlterWhichProcedureSQLPL2Context ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLApplicationCompatibility}.
+	 * @param ctx the parse tree
+	 */
+	void enterAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLApplicationCompatibility}.
+	 * @param ctx the parse tree
+	 */
+	void exitAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#alterSequenceStatement}.
 	 * @param ctx the parse tree
 	 */
@@ -3647,15 +3687,15 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateProcedureOptionList(DB2zSQLParser.CreateProcedureOptionListContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#createProcedureSQLPLOptionList}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#procedureSQLPLOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void enterCreateProcedureSQLPLOptionList(DB2zSQLParser.CreateProcedureSQLPLOptionListContext ctx);
+	void enterProcedureSQLPLOptionList(DB2zSQLParser.ProcedureSQLPLOptionListContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#createProcedureSQLPLOptionList}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#procedureSQLPLOptionList}.
 	 * @param ctx the parse tree
 	 */
-	void exitCreateProcedureSQLPLOptionList(DB2zSQLParser.CreateProcedureSQLPLOptionListContext ctx);
+	void exitProcedureSQLPLOptionList(DB2zSQLParser.ProcedureSQLPLOptionListContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#versionOption}.
 	 * @param ctx the parse tree
