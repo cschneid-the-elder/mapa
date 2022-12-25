@@ -249,14 +249,14 @@ alterProcedureStatement
 alterProcedureSQLPLStatement
 	: (
 	ALTER PROCEDURE procedureName (
-		(ALTER? alterWhichProcedureSQLPL1? procedureSQLPLOptionList)
+		(ALTER? alterWhichProcedureSQLPL1? procedureSQLPLOptionList+)
 		| (REPLACE alterWhichProcedureSQLPL2? 
 			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
-			createProcedureOptionList*
+			procedureSQLPLOptionList*
 			probablySQLPL*)
 		| (ADD versionOption
 			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
-			createProcedureOptionList*
+			procedureSQLPLOptionList*
 			probablySQLPL*)
 		| (ACTIVATE versionOption)
 		| (REGENERATE alterWhichProcedureSQLPL2 alterProcedureSQLPLApplicationCompatibility?)
@@ -508,6 +508,7 @@ probablySQLPL
 	| DOT
 	| COMMA 
 	| COLON
+	| SPLAT
 	| CP_SEMICOLON
 	| CEP_SEMICOLON
 	| CP_UNIDENTIFIED 
