@@ -615,6 +615,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterSqlRoutineBody(DB2zSQLParser.SqlRoutineBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSqlRoutineBody(DB2zSQLParser.SqlRoutineBodyContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterObfuscatedStatementText(DB2zSQLParser.ObfuscatedStatementTextContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitObfuscatedStatementText(DB2zSQLParser.ObfuscatedStatementTextContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterProbablySQLPL(DB2zSQLParser.ProbablySQLPLContext ctx) { }
 	/**
 	 * {@inheritDoc}

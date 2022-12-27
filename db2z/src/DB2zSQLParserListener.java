@@ -507,6 +507,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateProcedureSQLPLStatement(DB2zSQLParser.CreateProcedureSQLPLStatementContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#sqlRoutineBody}.
+	 * @param ctx the parse tree
+	 */
+	void enterSqlRoutineBody(DB2zSQLParser.SqlRoutineBodyContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#sqlRoutineBody}.
+	 * @param ctx the parse tree
+	 */
+	void exitSqlRoutineBody(DB2zSQLParser.SqlRoutineBodyContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#obfuscatedStatementText}.
+	 * @param ctx the parse tree
+	 */
+	void enterObfuscatedStatementText(DB2zSQLParser.ObfuscatedStatementTextContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#obfuscatedStatementText}.
+	 * @param ctx the parse tree
+	 */
+	void exitObfuscatedStatementText(DB2zSQLParser.ObfuscatedStatementTextContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#probablySQLPL}.
 	 * @param ctx the parse tree
 	 */

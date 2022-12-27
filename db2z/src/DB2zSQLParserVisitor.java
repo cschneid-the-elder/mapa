@@ -310,6 +310,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateProcedureSQLPLStatement(DB2zSQLParser.CreateProcedureSQLPLStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#sqlRoutineBody}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSqlRoutineBody(DB2zSQLParser.SqlRoutineBodyContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#obfuscatedStatementText}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitObfuscatedStatementText(DB2zSQLParser.ObfuscatedStatementTextContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#probablySQLPL}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

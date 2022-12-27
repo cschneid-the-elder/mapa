@@ -492,14 +492,31 @@ createPermissionStatement
 	)
 	;
 
+/*
+Note that...
+
+	((WRAPPED obfuscatedStatementText) | sqlRoutineBody)
+
+...must be in that order.  Reversing the order makes WRAPPED 
+match sqlRoutineBody because WRAPPED is a sqlKeyword.  This
+is incorrect and misleading.
+*/
 createProcedureSQLPLStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
 	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
 	versionOption?
 	(procedureSQLPLOptionList* languageOption1? procedureSQLPLOptionList*)
-	WRAPPED? probablySQLPL*
+	((WRAPPED obfuscatedStatementText) | sqlRoutineBody)
 	)
+	;
+
+sqlRoutineBody
+	: probablySQLPL+
+	;
+
+obfuscatedStatementText
+	: probablySQLPL+
 	;
 
 probablySQLPL
