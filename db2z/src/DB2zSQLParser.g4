@@ -253,11 +253,11 @@ alterProcedureSQLPLStatement
 		| (REPLACE alterWhichProcedureSQLPL2? 
 			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
 			procedureSQLPLOptionList*
-			probablySQLPL*)
+			sqlRoutineBody)
 		| (ADD versionOption
 			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
 			procedureSQLPLOptionList*
-			probablySQLPL*)
+			sqlRoutineBody)
 		| (ACTIVATE versionOption)
 		| (REGENERATE alterWhichProcedureSQLPL2 alterProcedureSQLPLApplicationCompatibility?)
 		| (DROP versionOption)

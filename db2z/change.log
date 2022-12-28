@@ -1,4 +1,4 @@
---2022-12-27--------------------------------------------------------------------
+--2022-12-28--------------------------------------------------------------------
 Added toleration for SQL/PL in ALTER and CREATE PROCEDURE statement rules per 
 suggestion by Martijn Rutte.
 
@@ -8,7 +8,9 @@ procedures.
 
 Instead of native SQL stored procedure ALTER and CREATE resulting in error
 messages, the SQL/PL embedded in the statements ends up falling into a parser
-rule named probablySQLPL.
+rule named sqlRoutineBody which contains the tokens in the rule probablySQLPL.
+WRAPPED SQL/PL is found in the rule obfuscatedStatementText which again
+contains the tokens (such as they are) in the probablySQLPL rule.
 
 --2022-12-06--------------------------------------------------------------------
 Removed '+' modifier in freeBlock per suggestion by Martijn Rutte.  Its absence
