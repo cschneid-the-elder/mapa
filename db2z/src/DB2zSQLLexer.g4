@@ -65,6 +65,10 @@ QUESTIONMARK
 	: '?' {!getText().equals(statementTerminator)}?
 	;
 
+fragment BANG
+	: '!'
+	;
+
 EQ
 	: '='
 	;
@@ -78,15 +82,15 @@ LT
 	;
 
 GE
-	: GT EQ
+	: ((GT EQ) | (BANG LT))
 	;
 
 LE
-	: LT EQ
+	: ((LT EQ) | (BANG GT))
 	;
 
 NE
-	: LT GT
+	: ((LT GT) | (BANG EQ))
 	;
 
 PLUS
