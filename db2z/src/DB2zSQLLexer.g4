@@ -12,6 +12,8 @@ lexer grammar DB2zSQLLexer;
 
 @lexer::members {
 	public String statementTerminator = new String("");
+	public Boolean createOrAlterSeen = false;
+	public Boolean languageSeen = false;
 }
 
 channels { COMMENTS }
@@ -63,6 +65,10 @@ QUESTIONMARK
 	: '?' {!getText().equals(statementTerminator)}?
 	;
 
+fragment BANG
+	: '!'
+	;
+
 EQ
 	: '='
 	;
@@ -76,15 +82,15 @@ LT
 	;
 
 GE
-	: GT EQ
+	: ((GT EQ) | (BANG LT))
 	;
 
 LE
-	: LT EQ
+	: ((LT EQ) | (BANG GT))
 	;
 
 NE
-	: LT GT
+	: ((LT GT) | (BANG EQ))
 	;
 
 PLUS
@@ -117,6 +123,9 @@ COLON
 
 SEMICOLON
 	: ';'
+	{
+		createOrAlterSeen = false;
+	}
 	;
 
 COMMA
@@ -237,6 +246,9 @@ ALLOW
 
 ALTER
 	: A L T E R
+	{
+		createOrAlterSeen = true;
+	}
 	;
 
 ALTERAND
@@ -413,6 +425,9 @@ CONTINUE
 
 CREATE
 	: C R E A T E 
+	{
+		createOrAlterSeen = true;
+	}
 	;
 
 CUBE
@@ -867,6 +882,10 @@ NO
 	: N O 
 	;
 
+NODEFER
+	: N O D F E R
+	;
+
 NONE
 	: N O N E 
 	;
@@ -905,6 +924,10 @@ OLD
 
 ON
 	: O N 
+	;
+
+ONCE
+	: O N C E
 	;
 
 OPEN
@@ -1009,6 +1032,9 @@ PRIVILEGES
 
 PROCEDURE
 	: P R O C E D U R E 
+	{
+		if (createOrAlterSeen) pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+	}
 	;
 
 PROGRAM
@@ -2343,10 +2369,6 @@ PROFILE
 	: P R O F I L E 
 	;
 
-QUALIFIER
-	: Q U A L I F I E R 
-	;
-
 SERVAUTH
 	: S E R V A U T H 
 	;
@@ -2365,6 +2387,10 @@ ACTIVE
 
 VERSION
 	: V E R S I O N
+	;
+
+VERSIONS
+	: V E R S I O N S
 	;
 
 ALIAS
@@ -2956,6 +2982,202 @@ RETURNING
 	;
 
 //end of generated sql keywords
+
+QUALIFIER
+	: Q U A L I F I E R 
+	;
+
+DEGREE
+	: D E G R E E 
+	;
+
+DEFINEBIND
+	: D E F I N E B I N D
+	;
+
+DEFINERUN
+	: D E F I N E R U N
+	;
+
+INVOKEBIND
+	: I N V O K E B I N D
+	;
+
+INVOKERUN
+	: I N V O K E R U N
+	;
+
+DYNAMICRULES
+	: D Y N A M I C R U L E S
+	;
+
+ISOLATION
+	: I S O L A T I O N
+	;
+
+LEVEL
+	: L E V E L
+	;
+
+OPTHINT
+	: O P T H I N T
+	;
+
+REOPT
+	: R E O P T
+	;
+
+DEALLOCATE
+	: D E A L L O C A T E
+	;
+
+APPLCOMPAT
+	: A P P L C O M P A T
+	;
+
+DEC_ROUND_CEILING
+	: D E C '_' R O U N D '_' C E I L I N G
+	;
+
+DEC_ROUND_DOWN
+	: D E C '_' R O U N D '_' D O W N
+	;
+
+DEC_ROUND_FLOOR
+	: D E C '_' R O U N D '_' F L O O R
+	;
+
+DEC_ROUND_HALF_DOWN
+	: D E C '_' R O U N D '_' H A L F '_' D O W N
+	;
+
+DEC_ROUND_HALF_EVEN
+	: D E C '_' R O U N D '_' H A L F '_' E V E N
+	;
+
+DEC_ROUND_HALF_UP
+	: D E C '_' R O U N D '_' H A L F '_' U P
+	;
+
+DEC_ROUND_UP
+	: D E C '_' R O U N D '_' U P
+	;
+
+VALIDATE
+	: V A L I D A T E
+	;
+
+ROUNDING
+	: R O U N D I N G
+	;
+
+FORMAT
+	: F O R M A T
+	;
+
+CLAUSE
+	: C L A U S E
+	;
+
+REQUIRED
+	: R E Q U I R E D
+	;
+
+OPTIONAL
+	: O P T I O N A L
+	;
+
+CONCENTRATE
+	: C O N C E N T R A T E
+	;
+
+STATEMENTS
+	: S T A T E M E N T S
+	;
+
+LITERALS
+	: L I T E R A L S
+	;
+
+OFF
+	: O F F
+	;
+
+ACCELERATION
+	: A C C E L E R A T I O N 
+	;
+
+AUTONOMOUS
+	: A U T O N O M O U S 
+	;
+
+COMMITTED
+	: C O M M I T T E D 
+	;
+
+CONCURRENT
+	: C O N C U R R E N T 
+	;
+
+CURRENTLY
+	: C U R R E N T L Y 
+	;
+
+ELIGIBLE
+	: E L I G I B L E 
+	;
+
+EUR
+	: E U R 
+	;
+
+FAILBACK
+	: F A I L B A C K 
+	;
+
+GET_ACCEL_ARCHIVE
+	: G E T '_' A C C E L '_' A R C H I V E 
+	;
+
+ISO
+	: I S O 
+	;
+
+JIS
+	: J I S 
+	;
+
+OUTCOME
+	: O U T C O M E 
+	;
+
+RESOLUTION
+	: R E S O L U T I O N 
+	;
+
+SCHEME
+	: S C H E M E 
+	;
+
+SESSION
+	: S E S S I O N 
+	;
+
+USA
+	: U S A 
+	;
+
+WAIT
+	: W A I T 
+	;
+
+WAITFORDATA
+	: W A I T F O R D A T A 
+	;
+
+WRAPPED
+	: W R A P P E D
+	;
 
 //generated sql scalar functions
 
@@ -4077,10 +4299,1934 @@ M_CHAR
 SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
+	{createOrAlterSeen = false;}
 	;
 
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$\-_]+
+	;
+
+/*
+Lexing enters this mode when a CREATE or ALTER PROCEDURE
+statement is encountered.  There are two types of
+stored procedure, native SQL and external.  The
+former is written in SQL/PL and is embedded in 
+the CREATE or ALTER PROCEDURE statement.  By entering this
+mode we can detect such a statement and gracefully
+ignore the SQL/PL.
+
+The statement options are slightly different 
+between the two types of stored procedures.  Both
+are included here because the options can occur in
+any order and the only way to reliably determine
+an external stored procedure is being created is
+via the LANGUAGE option, which may be last - i.e.
+we may not know which type of statement is being
+processed until we're almost done with it.
+*/
+mode CREATE_OR_ALTER_PROCEDURE_MODE;
+
+CP_SQLCOMMENT
+	: SQLCOMMENT
+	->type(SQLCOMMENT),channel(COMMENTS)
+	;
+
+CP_SQLBLOCKCOMMENTBEGIN
+	: SQLBLOCKCOMMENTBEGIN
+	->type(SQLBLOCKCOMMENTBEGIN)
+	;
+
+CP_SQLBLOCKCOMMENTEND
+	: SQLBLOCKCOMMENTEND
+	->type(SQLBLOCKCOMMENTEND)
+	;
+
+CP_NONNUMERICLITERAL
+	: NONNUMERICLITERAL
+	->type(NONNUMERICLITERAL)
+	;
+
+CP_INTEGERLITERAL
+	: INTEGERLITERAL
+	->type(INTEGERLITERAL)
+	;
+
+CP_NUMERICLITERAL
+	: NUMERICLITERAL
+	->type(NUMERICLITERAL)
+	;
+
+CP_NEWLINE
+	: NEWLINE
+	->channel(HIDDEN)
+	;
+
+CP_WS
+	: WS
+	->channel(HIDDEN)
+	;
+
+CP_LPAREN
+	: LPAREN
+	->type(LPAREN)
+	;
+
+CP_RPAREN
+	: RPAREN
+	->type(RPAREN)
+	;
+
+CP_COMMA
+	: COMMA
+	->type(COMMA)
+	;
+
+CP_DOT
+	: DOT
+	->type(DOT)
+	;
+
+CP_SPLAT
+	: SPLAT
+	->type(SPLAT)
+	;
+
+CP_COLON
+	: COLON
+	->type(COLON)
+	;
+
+CP_SEMICOLON
+	: SEMICOLON
+	{
+		if (statementTerminator.length() == 0) {
+			createOrAlterSeen = false;
+			languageSeen = false;
+			setType(SEMICOLON);
+			popMode();
+		}
+	}
+	;
+
+CP_LANGUAGE
+	: LANGUAGE
+	{
+		languageSeen = true;
+	}
+	->type(LANGUAGE)
+	;
+
+CP_ASSEMBLE
+	: ASSEMBLE
+	{
+		if (languageSeen) {
+			languageSeen = false;
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+		}
+	}
+	->type(ASSEMBLE)
+	;
+
+CP_C_
+	: C_
+	{
+		if (languageSeen) {
+			languageSeen = false;
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+		}
+	}
+	->type(C_)
+	;
+
+CP_COBOL
+	: COBOL
+	{
+		if (languageSeen) {
+			languageSeen = false;
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+		}
+	}
+	->type(COBOL)
+	;
+
+CP_JAVA
+	: JAVA
+	{
+		if (languageSeen) {
+			languageSeen = false;
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+		}
+	}
+	->type(JAVA)
+	;
+
+CP_PLI
+	: PLI
+	{
+		if (languageSeen) {
+			languageSeen = false;
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+		}
+	}
+	->type(PLI)
+	;
+
+CP_REXX
+	: REXX
+	{
+		if (languageSeen) {
+			languageSeen = false;
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+		}
+	}
+	->type(REXX)
+	;
+
+CP_SQL
+	: SQL
+	{
+		languageSeen = false;
+	}
+	->type(SQL)
+	;
+
+CP_PREPARE
+	: PREPARE
+	;
+
+CP_APPLCOMPAT_LEVEL
+	: V INTEGERLITERAL R INTEGERLITERAL (M INTEGERLITERAL)?
+	;
+
+CP_ACCELERATION
+	: A C C E L E R A T I O N 
+	->type(ACCELERATION)
+	;
+
+CP_ACCELERATOR
+	: A C C E L E R A T O R 
+	->type(ACCELERATOR)
+	;
+
+CP_ACCESS
+	: A C C E S S 
+	->type(ACCESS)
+	;
+
+CP_ALL
+	: A L L 
+	->type(ALL)
+	;
+
+CP_ALLOW
+	: A L L O W 
+	->type(ALLOW)
+	;
+
+CP_ALTER
+	: ALTER
+	->type(ALTER)
+	;
+
+CP_ALWAYS
+	: A L W A Y S 
+	->type(ALWAYS)
+	;
+
+CP_ANY
+	: A N Y 
+	->type(ANY)
+	;
+
+CP_APPLCOMPAT
+	: A P P L C O M P A T 
+	->type(APPLCOMPAT)
+	;
+
+CP_APPLICATION
+	: A P P L I C A T I O N 
+	->type(APPLICATION)
+	;
+
+CP_ARCHIVE
+	: A R C H I V E 
+	->type(ARCHIVE)
+	;
+
+CP_AS
+	: A S 
+	->type(AS)
+	;
+
+CP_ASCII
+	: A S C I I 
+	->type(ASCII)
+	;
+
+CP_ASUTIME
+	: A S U T I M E 
+	->type(ASUTIME)
+	;
+
+CP_AT
+	: A T 
+	->type(AT)
+	;
+
+CP_AUTONOMOUS
+	: A U T O N O M O U S 
+	->type(AUTONOMOUS)
+	;
+
+CP_BIGINT
+	: B I G I N T 
+	->type(BIGINT)
+	;
+
+CP_BINARY
+	: B I N A R Y 
+	->type(BINARY)
+	;
+
+CP_BIND
+	: B I N D 
+	->type(BIND)
+	;
+
+CP_BIT
+	: B I T 
+	->type(BIT)
+	;
+
+CP_BLOB
+	: B L O B 
+	->type(BLOB)
+	;
+
+CP_BUSINESS_TIME
+	: B U S I N E S S '_' T I M E 
+	->type(BUSINESS_TIME)
+	;
+
+CP_CALL
+	: CALL
+	->type(CALL)
+	;
+
+CP_CALLED
+	: C A L L E D 
+	->type(CALLED)
+	;
+
+CP_CCSID
+	: C C S I D 
+	->type(CCSID)
+	;
+
+CP_CHAR
+	: C H A R 
+	->type(CHAR)
+	;
+
+CP_CHARACTER
+	: C H A R A C T E R 
+	->type(CHARACTER)
+	;
+
+CP_CLAUSE
+	: C L A U S E 
+	->type(CLAUSE)
+	;
+
+CP_CLOB
+	: C L O B 
+	->type(CLOB)
+	;
+
+CP_COMMIT
+	: C O M M I T 
+	->type(COMMIT)
+	;
+
+CP_COMMITTED
+	: C O M M I T T E D 
+	->type(COMMITTED)
+	;
+
+CP_CONCENTRATE
+	: C O N C E N T R A T E 
+	->type(CONCENTRATE)
+	;
+
+CP_CONCURRENT
+	: C O N C U R R E N T 
+	->type(CONCURRENT)
+	;
+
+CP_CONTAINS
+	: C O N T A I N S 
+	->type(CONTAINS)
+	;
+
+CP_CS
+	: C S 
+	->type(CS)
+	;
+
+CP_CURRENT
+	: C U R R E N T 
+	->type(CURRENT)
+	;
+
+CP_CURRENTLY
+	: C U R R E N T L Y 
+	->type(CURRENTLY)
+	;
+
+CP_DATA
+	: D A T A 
+	->type(DATA)
+	;
+
+CP_DATE
+	: D A T E 
+	->type(DATE)
+	;
+
+CP_DBCLOB
+	: D B C L O B 
+	->type(DBCLOB)
+	;
+
+CP_DEALLOCATE
+	: D E A L L O C A T E 
+	->type(DEALLOCATE)
+	;
+
+CP_DEBUG
+	: D E B U G 
+	->type(DEBUG)
+	;
+
+CP_DEC
+	: D E C 
+	->type(DEC)
+	;
+
+CP_DECFLOAT
+	: D E C F L O A T 
+	->type(DECFLOAT)
+	;
+
+CP_DECIMAL
+	: D E C I M A L 
+	->type(DECIMAL)
+	;
+
+CP_DEC_ROUND_CEILING
+	: D E C '_' R O U N D '_' C E I L I N G 
+	->type(DEC_ROUND_CEILING)
+	;
+
+CP_DEC_ROUND_DOWN
+	: D E C '_' R O U N D '_' D O W N 
+	->type(DEC_ROUND_DOWN)
+	;
+
+CP_DEC_ROUND_FLOOR
+	: D E C '_' R O U N D '_' F L O O R 
+	->type(DEC_ROUND_FLOOR)
+	;
+
+CP_DEC_ROUND_HALF_DOWN
+	: D E C '_' R O U N D '_' H A L F '_' D O W N 
+	->type(DEC_ROUND_HALF_DOWN)
+	;
+
+CP_DEC_ROUND_HALF_EVEN
+	: D E C '_' R O U N D '_' H A L F '_' E V E N 
+	->type(DEC_ROUND_HALF_EVEN)
+	;
+
+CP_DEC_ROUND_HALF_UP
+	: D E C '_' R O U N D '_' H A L F '_' U P 
+	->type(DEC_ROUND_HALF_UP)
+	;
+
+CP_DEC_ROUND_UP
+	: D E C '_' R O U N D '_' U P 
+	->type(DEC_ROUND_UP)
+	;
+
+CP_DEFAULT
+	: D E F A U L T 
+	->type(DEFAULT)
+	;
+
+CP_DEFER
+	: D E F E R 
+	->type(DEFER)
+	;
+
+CP_DEFINEBIND
+	: D E F I N E B I N D 
+	->type(DEFINEBIND)
+	;
+
+CP_DEFINERUN
+	: D E F I N E R U N 
+	->type(DEFINERUN)
+	;
+
+CP_DEGREE
+	: D E G R E E 
+	->type(DEGREE)
+	;
+
+CP_DETERMINISTIC
+	: D E T E R M I N I S T I C 
+	->type(DETERMINISTIC)
+	;
+
+CP_DISABLE
+	: D I S A B L E 
+	->type(DISABLE)
+	;
+
+CP_DISALLOW
+	: D I S A L L O W 
+	->type(DISALLOW)
+	;
+
+CP_DOUBLE
+	: D O U B L E 
+	->type(DOUBLE)
+	;
+
+CP_DYNAMIC
+	: D Y N A M I C 
+	->type(DYNAMIC)
+	;
+
+CP_DYNAMICRULES
+	: D Y N A M I C R U L E S 
+	->type(DYNAMICRULES)
+	;
+
+CP_EBCDIC
+	: E B C D I C 
+	->type(EBCDIC)
+	;
+
+CP_ELIGIBLE
+	: E L I G I B L E 
+	->type(ELIGIBLE)
+	;
+
+CP_ENABLE
+	: E N A B L E 
+	->type(ENABLE)
+	;
+
+CP_ENCODING
+	: E N C O D I N G 
+	->type(ENCODING)
+	;
+
+CP_ENVIRONMENT
+	: E N V I R O N M E N T 
+	->type(ENVIRONMENT)
+	;
+
+CP_EUR
+	: E U R 
+	->type(EUR)
+	;
+
+CP_EXPLAIN
+	: E X P L A I N 
+	->type(EXPLAIN)
+	;
+
+CP_EXTERNAL
+	: E X T E R N A L 
+	->type(EXTERNAL)
+	;
+
+CP_FAILBACK
+	: F A I L B A C K 
+	->type(FAILBACK)
+	;
+
+CP_FLOAT
+	: F L O A T 
+	->type(FLOAT)
+	;
+
+CP_FOR
+	: F O R 
+	->type(FOR)
+	;
+
+CP_FORMAT
+	: F O R M A T 
+	->type(FORMAT)
+	;
+
+CP_GET_ACCEL_ARCHIVE
+	: G E T '_' A C C E L '_' A R C H I V E 
+	->type(GET_ACCEL_ARCHIVE)
+	;
+
+CP_GRAPHIC
+	: G R A P H I C 
+	->type(GRAPHIC)
+	;
+
+CP_IMMEDIATE
+	: I M M E D I A T E 
+	->type(IMMEDIATE)
+	;
+
+CP_IN
+	: I N 
+	->type(IN)
+	;
+
+CP_INHERIT
+	: I N H E R I T 
+	->type(INHERIT)
+	;
+
+CP_INOUT
+	: I N O U T 
+	->type(INOUT)
+	;
+
+CP_INPUT
+	: I N P U T 
+	->type(INPUT)
+	;
+
+CP_INT
+	: I N T 
+	->type(INT)
+	;
+
+CP_INTEGER
+	: I N T E G E R 
+	->type(INTEGER)
+	;
+
+CP_INVOKEBIND
+	: I N V O K E B I N D 
+	->type(INVOKEBIND)
+	;
+
+CP_INVOKERUN
+	: I N V O K E R U N 
+	->type(INVOKERUN)
+	;
+
+CP_ISO
+	: I S O 
+	->type(ISO)
+	;
+
+CP_ISOLATION
+	: I S O L A T I O N 
+	->type(ISOLATION)
+	;
+
+CP_JIS
+	: J I S 
+	->type(JIS)
+	;
+
+CP_KEEP
+	: K E E P 
+	->type(KEEP)
+	;
+
+CP_LARGE
+	: L A R G E 
+	->type(LARGE)
+	;
+
+CP_LEVEL
+	: L E V E L 
+	->type(LEVEL)
+	;
+
+CP_LIKE
+	: L I K E 
+	->type(LIKE)
+	;
+
+CP_LIMIT
+	: L I M I T 
+	->type(LIMIT)
+	;
+
+CP_LITERALS
+	: LITERALS
+	->type(LITERALS)
+	;
+
+CP_LOCAL
+	: L O C A L 
+	->type(LOCAL)
+	;
+
+CP_LOCATOR
+	: L O C A T O R 
+	->type(LOCATOR)
+	;
+
+CP_MIXED
+	: M I X E D 
+	->type(MIXED)
+	;
+
+CP_MODE_
+	: M O D E 
+	->type(MODE_)
+	;
+
+CP_MODIFIES
+	: M O D I F I E S 
+	->type(MODIFIES)
+	;
+
+CP_NAME
+	: NAME
+	->type(NAME)
+	;
+
+CP_NO
+	: N O 
+	->type(NO)
+	;
+
+CP_NODEFER
+	: N O D E F E R 
+	->type(NODEFER)
+	;
+
+CP_NONE
+	: N O N E 
+	->type(NONE)
+	;
+
+CP_NOT
+	: N O T 
+	->type(NOT)
+	;
+
+CP_NULL
+	: N U L L 
+	->type(NULL)
+	;
+
+CP_NUMERIC
+	: N U M E R I C 
+	->type(NUMERIC)
+	;
+
+CP_OBJECT
+	: O B J E C T 
+	->type(OBJECT)
+	;
+
+CP_OFF
+	: OFF
+	->type(OFF)
+	;
+
+CP_ON
+	: O N 
+	->type(ON)
+	;
+
+CP_ONCE
+	: O N C E 
+	->type(ONCE)
+	;
+
+CP_OPTHINT
+	: O P T H I N T 
+	->type(OPTHINT)
+	;
+
+CP_OPTIONAL
+	: O P T I O N A L 
+	->type(OPTIONAL)
+	;
+
+CP_OUT
+	: O U T 
+	->type(OUT)
+	;
+
+CP_OUTCOME
+	: O U T C O M E 
+	->type(OUTCOME)
+	;
+
+CP_OWNER
+	: O W N E R 
+	->type(OWNER)
+	;
+
+CP_PACKAGE
+	: P A C K A G E 
+	->type(PACKAGE)
+	;
+
+CP_PARAMETER
+	: P A R A M E T E R 
+	->type(PARAMETER)
+	;
+
+CP_PATH
+	: P A T H 
+	->type(PATH)
+	;
+
+CP_PRECISION
+	: P R E C I S I O N 
+	->type(PRECISION)
+	;
+
+CP_QUALIFIER
+	: Q U A L I F I E R 
+	->type(QUALIFIER)
+	;
+
+CP_QUERY
+	: Q U E R Y 
+	->type(QUERY)
+	;
+
+CP_READS
+	: R E A D S 
+	->type(READS)
+	;
+
+CP_REAL
+	: R E A L 
+	->type(REAL)
+	;
+
+CP_REGISTERS
+	: R E G I S T E R S 
+	->type(REGISTERS)
+	;
+
+CP_RELEASE
+	: R E L E A S E 
+	->type(RELEASE)
+	;
+
+CP_REOPT
+	: R E O P T 
+	->type(REOPT)
+	;
+
+CP_REQUIRED
+	: R E Q U I R E D 
+	->type(REQUIRED)
+	;
+
+CP_RESOLUTION
+	: R E S O L U T I O N 
+	->type(RESOLUTION)
+	;
+
+CP_RESULT
+	: R E S U L T 
+	->type(RESULT)
+	;
+
+CP_RETURN
+	: R E T U R N 
+	->type(RETURN)
+	;
+
+CP_ROLE
+	: R O L E 
+	->type(ROLE)
+	;
+
+CP_ROUNDING
+	: R O U N D I N G 
+	->type(ROUNDING)
+	;
+
+CP_ROWID
+	: R O W I D 
+	->type(ROWID)
+	;
+
+CP_RR
+	: R R 
+	->type(RR)
+	;
+
+CP_RS
+	: R S 
+	->type(RS)
+	;
+
+CP_RUN
+	: R U N 
+	->type(RUN)
+	;
+
+CP_SBCS
+	: S B C S 
+	->type(SBCS)
+	;
+
+CP_SCHEME
+	: S C H E M E 
+	->type(SCHEME)
+	;
+
+CP_SENSITIVE
+	: S E N S I T I V E 
+	->type(SENSITIVE)
+	;
+
+CP_SESSION
+	: S E S S I O N 
+	->type(SESSION)
+	;
+
+CP_SET
+	: S E T
+	->type(SET)
+	;
+
+CP_SETS
+	: S E T S 
+	->type(SETS)
+	;
+
+CP_SMALLINT
+	: S M A L L I N T 
+	->type(SMALLINT)
+	;
+
+CP_SPECIAL
+	: S P E C I A L 
+	->type(SPECIAL)
+	;
+
+CP_SPECIFIC
+	: S P E C I F I C 
+	->type(SPECIFIC)
+	;
+
+CP_STATEMENTS
+	: S T A T E M E N T S 
+	->type(STATEMENTS)
+	;
+
+CP_SYSTEM
+	: S Y S T E M 
+	->type(SYSTEM)
+	;
+
+CP_SYSTEM_TIME
+	: S Y S T E M '_' T I M E 
+	->type(SYSTEM_TIME)
+	;
+
+CP_TABLE
+	: T A B L E 
+	->type(TABLE)
+	;
+
+CP_TIME
+	: T I M E 
+	->type(TIME)
+	;
+
+CP_TIMESTAMP
+	: T I M E S T A M P 
+	->type(TIMESTAMP)
+	;
+
+CP_UNICODE
+	: U N I C O D E 
+	->type(UNICODE)
+	;
+
+CP_UPDATE
+	: U P D A T E 
+	->type(UPDATE)
+	;
+
+CP_UR
+	: U R 
+	->type(UR)
+	;
+
+CP_USA
+	: U S A 
+	->type(USA)
+	;
+
+CP_USE
+	: U S E 
+	->type(USE)
+	;
+
+CP_USER
+	: U S E R 
+	->type(USER)
+	;
+
+CP_VALIDATE
+	: V A L I D A T E 
+	->type(VALIDATE)
+	;
+
+CP_VARBINARY
+	: V A R B I N A R Y 
+	->type(VARBINARY)
+	;
+
+CP_VARCHAR
+	: V A R C H A R 
+	->type(VARCHAR)
+	;
+
+CP_VARGRAPHIC
+	: V A R G R A P H I C 
+	->type(VARGRAPHIC)
+	;
+
+CP_VARYING
+	: V A R Y I N G 
+	->type(VARYING)
+	;
+
+CP_VERSION
+	: V E R S I O N 
+	->type(VERSION)
+	;
+
+CP_WAIT
+	: W A I T 
+	->type(WAIT)
+	;
+
+CP_WAITFORDATA
+	: W A I T F O R D A T A 
+	->type(WAITFORDATA)
+	;
+
+CP_WITH
+	: W I T H 
+	->type(WITH)
+	;
+
+CP_WITHOUT
+	: W I T H O U T 
+	->type(WITHOUT)
+	;
+
+CP_WLM
+	: W L M 
+	->type(WLM)
+	;
+
+CP_WRITE
+	: W R I T E 
+	->type(WRITE)
+	;
+
+CP_WRAPPED
+	: W R A P P E D
+	->type(WRAPPED)
+	;
+
+CP_XML
+	: X M L 
+	->type(XML)
+	;
+
+CP_YES
+	: Y E S 
+	->type(YES)
+	;
+
+CP_ZONE
+	: Z O N E 
+	->type(ZONE)
+	;
+
+CP_AFTER
+	: A F T E R 
+	->type(AFTER)
+	;
+
+CP_COLLID
+	: C O L L I D 
+	->type(COLLID)
+	;
+
+CP_CONTINUE
+	: C O N T I N U E 
+	->type(CONTINUE)
+	;
+
+CP_DB2
+	: D B '2' 
+	->type(DB2)
+	;
+
+CP_DBINFO
+	: D B I N F O 
+	->type(DBINFO)
+	;
+
+CP_DEFINER
+	: D E F I N E R 
+	->type(DEFINER)
+	;
+
+CP_FAILURE
+	: F A I L U R E 
+	->type(FAILURE)
+	;
+
+CP_FAILURES
+	: F A I L U R E S 
+	->type(FAILURES)
+	;
+
+CP_FENCED
+	: F E N C E D 
+	->type(FENCED)
+	;
+
+CP_GENERAL
+	: G E N E R A L 
+	->type(GENERAL)
+	;
+
+CP_MAIN
+	: M A I N 
+	->type(MAIN)
+	;
+
+CP_NULLS
+	: N U L L S 
+	->type(NULLS)
+	;
+
+CP_NULTERM
+	: N U L T E R M 
+	->type(NULTERM)
+	;
+
+CP_OPTIONS
+	: O P T I O N S 
+	->type(OPTIONS)
+	;
+
+CP_PROGRAM
+	: P R O G R A M 
+	->type(PROGRAM)
+	;
+
+CP_RESIDENT
+	: R E S I D E N T 
+	->type(RESIDENT)
+	;
+
+CP_SECURITY
+	: S E C U R I T Y 
+	->type(SECURITY)
+	;
+
+CP_SIMPLE
+	: SIMPLE
+	->type(SIMPLE)
+	;
+
+CP_STAY
+	: S T A Y 
+	->type(STAY)
+	;
+
+CP_STOP
+	: S T O P 
+	->type(STOP)
+	;
+
+CP_STRUCTURE
+	: S T R U C T U R E 
+	->type(STRUCTURE)
+	;
+
+CP_STYLE
+	: S T Y L E 
+	->type(STYLE)
+	;
+
+CP_SUB
+	: S U B 
+	->type(SUB)
+	;
+
+CP_TYPE
+	: T Y P E 
+	->type(TYPE)
+	;
+
+CP_ACTIVE
+	: ACTIVE
+	->type(ACTIVE)
+	;
+
+CP_ACTIVATE
+	: ACTIVATE
+	->type(ACTIVATE)
+	;
+
+CP_VERSIONS
+	: VERSIONS
+	->type(VERSIONS)
+	;
+
+CP_USING
+	: USING
+	->type(USING)
+	;
+
+CP_COMPATIBILITY
+	: COMPATIBILITY
+	->type(COMPATIBILITY)
+	;
+
+CP_DROP
+	: DROP
+	->type(DROP)
+	;
+
+CP_REPLACE
+	: REPLACE
+	->type(REPLACE)
+	;
+
+CP_ADD
+	: ADD
+	->type(ADD)
+	;
+
+CP_REGENERATE
+	: REGENERATE
+	->type(REGENERATE)
+	;
+
+CP_SQL_STATEMENT_TERMINATOR
+	: . 
+	{getText().equals(statementTerminator)}?
+	{
+		createOrAlterSeen = false;
+		languageSeen = false;
+	}
+	->type(SQL_STATEMENT_TERMINATOR),popMode
+	;
+
+CP_SQLIDENTIFIER
+	: [a-zA-Z0-9@#$\-_]+
+	->type(SQLIDENTIFIER)
+	;
+
+/*
+Here it is, the raison d'etre for this mode, the
+mechanism by which implementing a grammar for the 
+entirety of the SQL/PL language is avoided.
+*/
+CP_UNIDENTIFIED
+	: .
+	;
+
+mode CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE;
+
+CEP_SQLCOMMENT
+	: SQLCOMMENT
+	->type(SQLCOMMENT),channel(COMMENTS)
+	;
+
+CEP_SQLBLOCKCOMMENTBEGIN
+	: SQLBLOCKCOMMENTBEGIN
+	->type(SQLBLOCKCOMMENTBEGIN)
+	;
+
+CEP_SQLBLOCKCOMMENTEND
+	: SQLBLOCKCOMMENTEND
+	->type(SQLBLOCKCOMMENTEND)
+	;
+
+CEP_NONNUMERICLITERAL
+	: NONNUMERICLITERAL
+	->type(NONNUMERICLITERAL)
+	;
+
+CEP_INTEGERLITERAL
+	: INTEGERLITERAL
+	->type(INTEGERLITERAL)
+	;
+
+CEP_NEWLINE
+	: NEWLINE
+	->channel(HIDDEN)
+	;
+
+CEP_WS
+	: WS
+	->channel(HIDDEN)
+	;
+
+CEP_LPAREN
+	: LPAREN
+	->type(LPAREN)
+	;
+
+CEP_RPAREN
+	: RPAREN
+	->type(RPAREN)
+	;
+
+CEP_COMMA
+	: COMMA
+	->type(COMMA)
+	;
+
+CEP_DOT
+	: DOT
+	->type(DOT)
+	;
+
+CEP_SPLAT
+	: SPLAT
+	->type(SPLAT)
+	;
+
+CEP_COLON
+	: COLON
+	->type(COLON)
+	;
+
+CEP_SEMICOLON
+	: SEMICOLON
+	{
+		if (statementTerminator.length() == 0) {
+			createOrAlterSeen = false;
+			languageSeen = false;
+			setType(SEMICOLON);
+			popMode();
+			popMode();
+		}
+	}
+	;
+
+CEP_AFTER
+	: A F T E R 
+	->type(AFTER)
+	;
+
+CEP_ALLOW
+	: A L L O W 
+	->type(ALLOW)
+	;
+
+CEP_AS
+	: A S 
+	->type(AS)
+	;
+
+CEP_ASCII
+	: A S C I I 
+	->type(ASCII)
+	;
+
+CEP_ASUTIME
+	: A S U T I M E 
+	->type(ASUTIME)
+	;
+
+CEP_BIGINT
+	: B I G I N T 
+	->type(BIGINT)
+	;
+
+CEP_BINARY
+	: B I N A R Y 
+	->type(BINARY)
+	;
+
+CEP_BIT
+	: B I T 
+	->type(BIT)
+	;
+
+CEP_BLOB
+	: B L O B 
+	->type(BLOB)
+	;
+
+CEP_CALL
+	: CALL
+	->type(CALL)
+	;
+
+CEP_CALLED
+	: C A L L E D 
+	->type(CALLED)
+	;
+
+CEP_CCSID
+	: C C S I D 
+	->type(CCSID)
+	;
+
+CEP_CHAR
+	: C H A R 
+	->type(CHAR)
+	;
+
+CEP_CHARACTER
+	: C H A R A C T E R 
+	->type(CHARACTER)
+	;
+
+CEP_CLOB
+	: C L O B 
+	->type(CLOB)
+	;
+
+CEP_COLLID
+	: C O L L I D 
+	->type(COLLID)
+	;
+
+CEP_COMMIT
+	: C O M M I T 
+	->type(COMMIT)
+	;
+
+CEP_CONTAINS
+	: C O N T A I N S 
+	->type(CONTAINS)
+	;
+
+CEP_CONTINUE
+	: C O N T I N U E 
+	->type(CONTINUE)
+	;
+
+CEP_DATA
+	: D A T A 
+	->type(DATA)
+	;
+
+CEP_DATE
+	: D A T E 
+	->type(DATE)
+	;
+
+CEP_DB2
+	: D B '2' 
+	->type(DB2)
+	;
+
+CEP_DB2SQL
+	: DB2SQL
+	->type(DB2SQL)
+	;
+
+CEP_DBCLOB
+	: D B C L O B 
+	->type(DBCLOB)
+	;
+
+CEP_DBINFO
+	: D B I N F O 
+	->type(DBINFO)
+	;
+
+CEP_DEBUG
+	: D E B U G 
+	->type(DEBUG)
+	;
+
+CEP_DEC
+	: D E C 
+	->type(DEC)
+	;
+
+CEP_DECFLOAT
+	: D E C F L O A T 
+	->type(DECFLOAT)
+	;
+
+CEP_DECIMAL
+	: D E C I M A L 
+	->type(DECIMAL)
+	;
+
+CEP_DEFAULT
+	: D E F A U L T 
+	->type(DEFAULT)
+	;
+
+CEP_DEFINER
+	: D E F I N E R 
+	->type(DEFINER)
+	;
+
+CEP_DETERMINISTIC
+	: D E T E R M I N I S T I C 
+	->type(DETERMINISTIC)
+	;
+
+CEP_DISABLE
+	: D I S A B L E 
+	->type(DISABLE)
+	;
+
+CEP_DISALLOW
+	: D I S A L L O W 
+	->type(DISALLOW)
+	;
+
+CEP_DOUBLE
+	: D O U B L E 
+	->type(DOUBLE)
+	;
+
+CEP_DYNAMIC
+	: D Y N A M I C 
+	->type(DYNAMIC)
+	;
+
+CEP_EBCDIC
+	: E B C D I C 
+	->type(EBCDIC)
+	;
+
+CEP_ENVIRONMENT
+	: E N V I R O N M E N T 
+	->type(ENVIRONMENT)
+	;
+
+CEP_EXTERNAL
+	: E X T E R N A L 
+	->type(EXTERNAL)
+	;
+
+CEP_FAILURE
+	: F A I L U R E 
+	->type(FAILURE)
+	;
+
+CEP_FAILURES
+	: F A I L U R E S 
+	->type(FAILURES)
+	;
+
+CEP_FENCED
+	: F E N C E D 
+	->type(FENCED)
+	;
+
+CEP_FLOAT
+	: F L O A T 
+	->type(FLOAT)
+	;
+
+CEP_FOR
+	: F O R 
+	->type(FOR)
+	;
+
+CEP_GENERAL
+	: G E N E R A L 
+	->type(GENERAL)
+	;
+
+CEP_GRAPHIC
+	: G R A P H I C 
+	->type(GRAPHIC)
+	;
+
+CEP_IN
+	: I N 
+	->type(IN)
+	;
+
+CEP_INHERIT
+	: I N H E R I T 
+	->type(INHERIT)
+	;
+
+CEP_INOUT
+	: I N O U T 
+	->type(INOUT)
+	;
+
+CEP_INPUT
+	: I N P U T 
+	->type(INPUT)
+	;
+
+CEP_INT
+	: I N T 
+	->type(INT)
+	;
+
+CEP_INTEGER
+	: I N T E G E R 
+	->type(INTEGER)
+	;
+
+CEP_JAVA
+	: JAVA
+	->type(JAVA)
+	;
+
+CEP_LARGE
+	: L A R G E 
+	->type(LARGE)
+	;
+
+CEP_LIKE
+	: L I K E 
+	->type(LIKE)
+	;
+
+CEP_LIMIT
+	: L I M I T 
+	->type(LIMIT)
+	;
+
+CEP_LOCATOR
+	: L O C A T O R 
+	->type(LOCATOR)
+	;
+
+CEP_MAIN
+	: M A I N 
+	->type(MAIN)
+	;
+
+CEP_MIXED
+	: M I X E D 
+	->type(MIXED)
+	;
+
+CEP_MODE_
+	: M O D E
+	->type(MODE_)
+	;
+
+CEP_MODIFIES
+	: M O D I F I E S 
+	->type(MODIFIES)
+	;
+
+CEP_NAME
+	: N A M E 
+	->type(NAME)
+	;
+
+CEP_NO
+	: N O 
+	->type(NO)
+	;
+
+CEP_NOT
+	: N O T 
+	->type(NOT)
+	;
+
+CEP_NULL
+	: NULL
+	->type(NULL)
+	;
+
+CEP_NULLS
+	: N U L L S 
+	->type(NULLS)
+	;
+
+CEP_NULTERM
+	: N U L T E R M 
+	->type(NULTERM)
+	;
+
+CEP_NUMERIC
+	: N U M E R I C 
+	->type(NUMERIC)
+	;
+
+CEP_OBJECT
+	: O B J E C T 
+	->type(OBJECT)
+	;
+
+CEP_OFF
+	: OFF
+	->type(OFF)
+	;
+
+CEP_ON
+	: O N 
+	->type(ON)
+	;
+
+CEP_OPTIONS
+	: O P T I O N S 
+	->type(OPTIONS)
+	;
+
+CEP_OUT
+	: O U T 
+	->type(OUT)
+	;
+
+CEP_PACKAGE
+	: P A C K A G E 
+	->type(PACKAGE)
+	;
+
+CEP_PARAMETER
+	: P A R A M E T E R 
+	->type(PARAMETER)
+	;
+
+CEP_PATH
+	: P A T H 
+	->type(PATH)
+	;
+
+CEP_PRECISION
+	: P R E C I S I O N 
+	->type(PRECISION)
+	;
+
+CEP_PROGRAM
+	: P R O G R A M 
+	->type(PROGRAM)
+	;
+
+CEP_READS
+	: R E A D S 
+	->type(READS)
+	;
+
+CEP_REAL
+	: R E A L 
+	->type(REAL)
+	;
+
+CEP_REGISTERS
+	: R E G I S T E R S 
+	->type(REGISTERS)
+	;
+
+CEP_RESIDENT
+	: R E S I D E N T 
+	->type(RESIDENT)
+	;
+
+CEP_RESULT
+	: R E S U L T 
+	->type(RESULT)
+	;
+
+CEP_RETURN
+	: R E T U R N 
+	->type(RETURN)
+	;
+
+CEP_ROWID
+	: R O W I D 
+	->type(ROWID)
+	;
+
+CEP_RUN
+	: R U N 
+	->type(RUN)
+	;
+
+CEP_SBCS
+	: S B C S 
+	->type(SBCS)
+	;
+
+CEP_SECURITY
+	: S E C U R I T Y 
+	->type(SECURITY)
+	;
+
+CEP_SETS
+	: S E T S 
+	->type(SETS)
+	;
+
+CEP_SIMPLE
+	: SIMPLE
+	->type(SIMPLE)
+	;
+
+CEP_SMALLINT
+	: S M A L L I N T 
+	->type(SMALLINT)
+	;
+
+CEP_SPECIAL
+	: S P E C I A L 
+	->type(SPECIAL)
+	;
+
+CEP_SPECIFIC
+	: S P E C I F I C 
+	->type(SPECIFIC)
+	;
+
+CEP_SQL
+	: SQL
+	->type(SQL)
+	;
+
+CEP_STANDARD
+	: STANDARD
+	->type(STANDARD)
+	;
+
+CEP_STAY
+	: S T A Y 
+	->type(STAY)
+	;
+
+CEP_STOP
+	: S T O P 
+	->type(STOP)
+	;
+
+CEP_STRUCTURE
+	: S T R U C T U R E 
+	->type(STRUCTURE)
+	;
+
+CEP_STYLE
+	: S T Y L E 
+	->type(STYLE)
+	;
+
+CEP_SUB
+	: S U B 
+	->type(SUB)
+	;
+
+CEP_SYSTEM
+	: S Y S T E M 
+	->type(SYSTEM)
+	;
+
+CEP_TABLE
+	: T A B L E 
+	->type(TABLE)
+	;
+
+CEP_TIME
+	: T I M E 
+	->type(TIME)
+	;
+
+CEP_TIMESTAMP
+	: T I M E S T A M P 
+	->type(TIMESTAMP)
+	;
+
+CEP_TYPE
+	: T Y P E 
+	->type(TYPE)
+	;
+
+CEP_UNICODE
+	: U N I C O D E 
+	->type(UNICODE)
+	;
+
+CEP_USER
+	: U S E R 
+	->type(USER)
+	;
+
+CEP_VARBINARY
+	: V A R B I N A R Y 
+	->type(VARBINARY)
+	;
+
+CEP_VARCHAR
+	: V A R C H A R 
+	->type(VARCHAR)
+	;
+
+CEP_VARGRAPHIC
+	: V A R G R A P H I C 
+	->type(VARGRAPHIC)
+	;
+
+CEP_VARYING
+	: V A R Y I N G 
+	->type(VARYING)
+	;
+
+CEP_WITH
+	: W I T H 
+	->type(WITH)
+	;
+
+CEP_WITHOUT
+	: W I T H O U T 
+	->type(WITHOUT)
+	;
+
+CEP_WLM
+	: W L M 
+	->type(WLM)
+	;
+
+CEP_YES
+	: Y E S 
+	->type(YES)
+	;
+
+CEP_ZONE
+	: Z O N E 
+	->type(ZONE)
+	;
+
+CEP_SQL_STATEMENT_TERMINATOR
+	: . 
+	{getText().equals(statementTerminator)}?
+	{createOrAlterSeen = false;}
+	->type(SQL_STATEMENT_TERMINATOR),popMode,popMode
+	;
+
+CEP_SQLIDENTIFIER
+	: [a-zA-Z0-9@#$\-_]+
+	->type(SQLIDENTIFIER)
 	;
 
 

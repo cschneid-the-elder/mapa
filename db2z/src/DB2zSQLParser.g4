@@ -29,12 +29,19 @@ is true of the prepareStatement rule.
 This grammar does not include SQL/PL or the following SQL statements.
 
 ALTER FUNCTION (compiled SQL scalar)
-ALTER PROCEDURE (SQL - external)
-ALTER PROCEDURE (SQL - native)
 ALTER TRIGGER (advanced)
 CREATE FUNCTION (compiled SQL scalar)
-CREATE PROCEDURE (SQL - native)
 CREATE TRIGGER (advanced)
+
+I do not know if the SQL statement 
+ALTER PROCEDURE (SQL - external)
+will work with this grammar.  It's been deprecated but the syntax
+is similar enough to a regular external stored procedure that it
+might work.
+
+While SQL/PL is not included in this grammar, its presence is
+tolerated to some extent in the CREATE and ALTER of native SQL
+stored procedures.
 
 */
 
@@ -62,6 +69,7 @@ sqlStatement
 	| alterMaskStatement
 	| alterPermissionStatement
 	| alterProcedureStatement
+	| alterProcedureSQLPLStatement
 	| alterSequenceStatement
 	| alterStogroupStatement
 	| alterTableStatement
@@ -86,6 +94,7 @@ sqlStatement
 	| createMaskStatement
 	| createPermissionStatement
 	| createProcedureStatement
+	| createProcedureSQLPLStatement
 	| createRoleStatement
 	| createSequenceStatement
 	| createStogroupStatement
@@ -237,6 +246,36 @@ alterProcedureStatement
 	)
 	;
 
+alterProcedureSQLPLStatement
+	: (
+	ALTER PROCEDURE procedureName (
+		(ALTER? alterWhichProcedureSQLPL1? procedureSQLPLOptionList+)
+		| (REPLACE alterWhichProcedureSQLPL2? 
+			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+			procedureSQLPLOptionList*
+			sqlRoutineBody)
+		| (ADD versionOption
+			(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+			procedureSQLPLOptionList*
+			sqlRoutineBody)
+		| (ACTIVATE versionOption)
+		| (REGENERATE alterWhichProcedureSQLPL2 alterProcedureSQLPLApplicationCompatibility?)
+		| (DROP versionOption)
+		)
+	)
+	;
+
+alterWhichProcedureSQLPL1
+	: ((ACTIVE VERSION) | (ALL VERSIONS) | versionOption)
+	;
+
+alterWhichProcedureSQLPL2
+	: ((ACTIVE VERSION) | versionOption)
+	;
+
+alterProcedureSQLPLApplicationCompatibility
+	: (USING APPLICATION COMPATIBILITY CP_APPLCOMPAT_LEVEL)
+	;
 alterSequenceStatement
 	: (
 	ALTER SEQUENCE sequenceName alterSequenceOptionList+
@@ -453,11 +492,53 @@ createPermissionStatement
 	)
 	;
 
+/*
+Note that...
+
+	((WRAPPED obfuscatedStatementText) | sqlRoutineBody)
+
+...must be in that order.  Reversing the order makes WRAPPED 
+match sqlRoutineBody because WRAPPED is a sqlKeyword.  This
+is incorrect and misleading.
+*/
+createProcedureSQLPLStatement
+	: (
+	CREATE (OR REPLACE)? PROCEDURE procedureName
+	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	versionOption?
+	(procedureSQLPLOptionList* languageOption1? procedureSQLPLOptionList*)
+	((WRAPPED obfuscatedStatementText) | sqlRoutineBody)
+	)
+	;
+
+sqlRoutineBody
+	: probablySQLPL+
+	;
+
+obfuscatedStatementText
+	: probablySQLPL+
+	;
+
+probablySQLPL
+	: (identifier 
+	| literal
+	| DOT
+	| COMMA 
+	| COLON
+	| SPLAT
+	| CP_SEMICOLON
+	| CEP_SEMICOLON
+	| CP_UNIDENTIFIED 
+	| LPAREN 
+	| RPAREN
+	)
+	;
+
 createProcedureStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
 	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
-	createProcedureOptionList+
+	(createProcedureOptionList* languageOption5 createProcedureOptionList*)
 	)
 	;
 
@@ -2231,6 +2312,10 @@ sqlDataOption3
 	: ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL) | (NO SQL))
 	;
 
+sqlDataOption4
+	: ((MODIFIES SQL DATA) | (READS SQL DATA) | (CONTAINS SQL))
+	;
+
 externalActionOption
 	: (NO? EXTERNAL ACTION)
 	;
@@ -2273,6 +2358,10 @@ wlmEnvironmentOption1
 
 wlmEnvironmentOption2
 	: (WLM ENVIRONMENT (identifier | (LPAREN identifier COMMA SPLAT RPAREN)))
+	;
+
+wlmEnvironmentOption3
+	: (WLM ENVIRONMENT FOR DEBUG MODE_ identifier)
 	;
 
 asuTimeOption
@@ -2894,7 +2983,7 @@ procedureOptionList
 	| programTypeOption
 	| securityOption
 	| runOptionsOption
-	| (COMMIT ON RETURN (NO | YES))
+	| commitOnReturnOption
 	| specialRegistersOption
 	| (CALLED ON NULL INPUT)
 	| (NULL CALL)
@@ -2903,13 +2992,17 @@ procedureOptionList
 	)
 	;
 
+/*
+Removed languageOption5 from createProcedureOptionList so a
+distinction could be made between external (mandatory languageOption5) 
+and native SQL (optional languageOption1) stored procedures.
+*/
 createProcedureOptionList
 	: (
 	specificNameOption2
 	| dynamicResultSetOption
 	| parameterOption1
 	| externalNameOption1
-	| languageOption5
 	| sqlDataOption3
 	| parameterStyleOption3
 	| deterministicOption
@@ -2929,6 +3022,232 @@ createProcedureOptionList
 	| stopAfterFailureOption
 	| debugOption
 	)
+	;
+
+procedureSQLPLOptionList
+	: (
+	specificNameOption2
+	| deterministicOption
+	| sqlDataOption4
+	| nullInputOption2
+	| dynamicResultSetOption
+	| debugOption
+	| parameterOption2
+	| schemaQualifierOption
+	| packageOwnerOption
+	| asuTimeOption
+	| commitOnReturnOptionSQLPL
+	| specialRegistersOption
+	| wlmEnvironmentOption3
+	| deferPrepareOption
+	| currentDataOption
+	| degreeOption
+	| concurrentAccessOption
+	| dynamicRulesOption
+	| applicationEncodingOption
+	| explainOption
+	| immediateWriteOption
+	| isolationLevelOption
+	| keepDynamicOption
+	| opthintOption
+	| sqlPathOption
+	| queryAccelerationOption
+	| getAccelArchiveOption
+	| accelerationOption
+	| acceleratorOption
+	| releaseAtOption
+	| reoptOption
+	| validateOption
+	| roundingOption
+	| dateFormatOption
+	| decimalOption
+	| forUpdateOption
+	| timeFormatOption
+	| businessTimeSensitiveOption
+	| systemTimeSensitiveOption
+	| archiveSensitiveOption
+	| applcompatOption
+	| concentrateStatementsOption
+	| externalNameOption1    //deprecated as of db2 13
+	| fencedOption           //deprecated as of db2 13
+	| dbinfoOption           //for compatibility only
+	| collectionIdOption     //for compatibility only
+	| stopAfterFailureOption //for compatibility only
+	| stayResidentOption     //for compatibility only
+	| programTypeOption      //for compatibility only
+	| securityOption         //for compatibility only
+	| runOptionsOption       //for compatibility only
+	)
+	;
+
+versionOption
+	: (VERSION (identifier | literal))
+	;
+
+commitOnReturnOptionSQLPL
+	: (AUTONOMOUS | commitOnReturnOption)
+	;
+
+schemaQualifierOption
+	: (QUALIFIER schemaName)
+	;
+
+currentDataOption
+	: (CURRENT DATA (YES | NO))
+	;
+
+immediateWriteOption
+	: ((WITH | WITHOUT) IMMEDIATE WRITE)
+	;
+
+explainOption
+	: ((WITH | WITHOUT) EXPLAIN)
+	;
+
+reoptOption
+	: (REOPT (NONE | ALWAYS | ONCE))
+	;
+
+packageOwnerOption
+	: (PACKAGE OWNER authorizationName (AS (ROLE | USER))?)
+	;
+
+deferPrepareOption
+	: ((DEFER CP_PREPARE) | (NODEFER CP_PREPARE))
+	;
+
+degreeOption
+	: (DEGREE (ANY | INTEGERLITERAL))
+	;
+
+dynamicRulesOption
+	: (DYNAMICRULES
+		( RUN
+		| BIND
+		| DEFINEBIND
+		| DEFINERUN
+		| INVOKEBIND
+		| INVOKERUN
+		)
+	)
+	;
+
+concurrentAccessOption
+	: (CONCURRENT ACCESS RESOLUTION
+		((USE CURRENTLY COMMITTED) | (WAIT FOR OUTCOME))
+	)
+	;
+
+applicationEncodingOption
+	: (APPLICATION ENCODING SCHEME (ASCII | EBCDIC | UNICODE))
+	;
+
+isolationLevelOption
+	: (ISOLATION LEVEL (CS | RS | RR | UR))
+	;
+
+keepDynamicOption
+	: ((WITH | WITHOUT) KEEP DYNAMIC)
+	;
+
+opthintOption
+	: (OPTHINT NONNUMERICLITERAL)
+	;
+
+sqlPathOption
+	: (SQL PATH sqlPathOptionItem (COMMA sqlPathOptionItem)*)
+	;
+	
+sqlPathOptionItem
+	: ((SYSTEM PATH) | (SESSION USER) | USER | SQLIDENTIFIER)
+	;
+
+queryAccelerationOption
+	: (QUERY ACCELERATION queryAccelerationOptionItem)
+	;
+
+queryAccelerationOptionItem
+	: (NONE
+	| ENABLE
+	| (ENABLE WITH FAILBACK)
+	| ELIGIBLE
+	| ALL
+	)
+	;
+
+getAccelArchiveOption
+	: (GET_ACCEL_ARCHIVE (NO | YES))
+	;
+
+accelerationOption
+	: (ACCELERATION WAITFORDATA NUMERICLITERAL)
+	;
+
+releaseAtOption
+	: (RELEASE AT (COMMIT | DEALLOCATE))
+	;
+
+businessTimeSensitiveOption
+	: (BUSINESS_TIME SENSITIVE (YES | NO))
+	;
+
+systemTimeSensitiveOption
+	: (SYSTEM_TIME SENSITIVE (YES | NO))
+	;
+
+archiveSensitiveOption
+	: (ARCHIVE SENSITIVE (YES | NO))
+	;
+
+applcompatOption
+	: (APPLCOMPAT CP_APPLCOMPAT_LEVEL)
+	;
+
+validateOption
+	: (VALIDATE (RUN | BIND))
+	;
+
+roundingOption
+	: (ROUNDING roundingOptionItem)
+	;
+
+roundingOptionItem
+	: ( DEC_ROUND_CEILING
+	| DEC_ROUND_DOWN
+	| DEC_ROUND_FLOOR
+	| DEC_ROUND_HALF_DOWN
+	| DEC_ROUND_HALF_EVEN
+	| DEC_ROUND_HALF_UP
+	| DEC_ROUND_UP
+	)
+	;
+
+dateFormatOption
+	: (DATE FORMAT dateTimeFormatOptionItem)
+	;
+
+dateTimeFormatOptionItem
+	: (ISO | EUR | USA | JIS | LOCAL)
+	;
+
+timeFormatOption
+	: (TIME FORMAT dateTimeFormatOptionItem)
+	;
+
+decimalOption
+	: (DECIMAL LPAREN INTEGERLITERAL (COMMA INTEGERLITERAL)? RPAREN)
+	;
+
+forUpdateOption
+	: (FOR UPDATE CLAUSE (REQUIRED | OPTIONAL))
+	;
+
+concentrateStatementsOption
+	: (CONCENTRATE STATEMENTS (OFF | (WITH LITERALS)))
+	;
+
+acceleratorOption
+	: (ACCELERATOR acceleratorName)
 	;
 
 procedureDataType
@@ -2960,7 +3279,6 @@ createSequenceOptionList
 	)
 	;
 
-//
 asTypeOption
 	: (AS sequenceDataType)
 	;
@@ -5923,58 +6241,145 @@ sqlidentifier
 	
 sqlKeyword
 	: (
-	ADD
+	  ABSOLUTE
+	| ACCELERATION
+	| ACCELERATOR
+	| ACCESS
+	| ACCESSCTRL
+	| ACTION
+	| ACTIVATE
+	| ACTIVE
+	| ADD
+	| ADDRESS
 	| AFTER
+	| ALGORITHM
+	| ALIAS
 	| ALL
 	| ALLOCATE
 	| ALLOW
+	| ALTER
 	| ALTERAND
+	| ALTERIN
+	| ALWAYS
+	| AND
 	| ANY
+	| APPEND
+	| APPLCOMPAT
+	| APPLICATION
+	| ARCHIVE
 	| ARRAY
+	| ARRAY_AGG
 	| ARRAY_EXISTS
 	| AS
+	| ASC
+	| ASCII
 	| ASENSITIVE
+	| ASSEMBLE
 	| ASSOCIATE
 	| ASUTIME
 	| AT
+	| ATOMIC
+	| ATTRIBUTES
 	| AUDIT
+	| AUTHENTICATION
+	| AUTHID
+	| AUTONOMOUS
 	| AUX
 	| AUXILIARY
+	| AVG
+	| BASE64
+	| BASED
 	| BEFORE
 	| BEGIN
 	| BETWEEN
+	| BIGINT
+	| BINARY
+	| BIND
+	| BINDADD
+	| BINDAGENT
+	| BIT
+	| BLOB
+	| BOTH
+	| BSDS
 	| BUFFERPOOL
+	| BUFFERPOOLS
+	| BUSINESS
+	| BUSINESS_TIME
 	| BY
+	| C_
+	| CACHE
 	| CALL
+	| CALLED
+	| CALLER
 	| CAPTURE
+	| CASCADE
 	| CASCADED
 	| CASE
 	| CAST
+	| CATALOG_NAME
 	| CCSID
+	| CHANGE
+	| CHANGED
+	| CHANGES
 	| CHAR
 	| CHARACTER
 	| CHECK
+	| CLAUSE
+	| CLIENT
+	| CLOB
 	| CLONE
 	| CLOSE
 	| CLUSTER
+	| COBOL
+	| CODEUNITS16
+	| CODEUNITS32
 	| COLLECTION
 	| COLLID
 	| COLUMN
+	| COLUMNS
 	| COMMENT
 	| COMMIT
+	| COMMITTED
+	| COMPATIBILITY
+	| COMPRESS
 	| CONCAT
+	| CONCENTRATE
+	| CONCURRENT
 	| CONDITION
+	| CONDITION_NUMBER
 	| CONNECT
 	| CONNECTION
 	| CONSTRAINT
 	| CONTAINS
 	| CONTENT
+	| CONTEXT
 	| CONTINUE
+	| CONTROL
+	| COPY
+	| CORR
+	| CORRELATION
+	| COVAR
+	| COVARIANCE
+	| COVARIANCE_SAMP
+	| COVAR_POP
+	| COVAR_SAMP
 	| CREATE
+	| CREATEALIAS
+	| CREATEDBA
+	| CREATEDBC
+	| CREATEIN
+	| CREATE_SECURE_OBJECT
+	| CREATESG
+	| CREATETAB
+	| CREATETMTAB
+	| CREATETS
+	| CROSS
+	| CS
 	| CUBE
+	| CUME_DIST
 	| CURRENT
 	| CURRENT_DATE
-//	| CURRENT_LC_CTYPE
+	| CURRENTLY
 	| CURRENT_PATH
 	| CURRENT_SCHEMA
 	| CURRENT_SERVER
@@ -5983,532 +6388,17 @@ sqlKeyword
 	| CURRENT_TIME_ZONE
 	| CURRVAL
 	| CURSOR
+	| CURSOR_NAME
+	| CURSORS
+	| CYCLE
 	| DATA
+	| DATAACCESS
 	| DATABASE
+	| DATACLAS
+	| DATE
 	| DAY
 	| DAYS
-	| DBINFO
-	| DECLARE
-	| DEFAULT
-	| DELETE
-	| DESCRIPTOR
-	| DETERMINISTIC
-	| DISABLE
-	| DISALLOW
-	| DISTINCT
-	| DO
-	| DOCUMENT
-	| DOUBLE
-	| DROP
-	| DSSIZE
-	| DYNAMIC
-	| EDITPROC
-	| ELSE
-	| ELSEIF
-	| ENCODING
-	| ENCRYPTION
-	| END
-	| END_EXEC
-	| ENDING
-	| ERASE
-	| ESCAPE
-	| EXCEPT
-	| EXCEPTION
-	| EXEC_SQL
-	| EXECUTE
-	| EXISTS
-	| EXIT
-	| EXPLAIN
-	| EXTERNAL
-	| FENCED
-	| FETCH
-	| FIELDPROC
-	| FINAL
-	| FIRST
-	| FOR
-	| FREE
-	| FROM
-	| FULL
-	| FUNCTION
-	| GENERATED
-	| GET
-	| GLOBAL
-	| GO
-	| GOTO
-	| GRANT
-	| GROUP
-	| HANDLER
-	| HAVING
-	| HOLD
-	| HOUR
-	| HOURS
-	| IF
-	| IMMEDIATE
-	| IN
-	| INCLUSIVE
-	| INDEX
-	| INHERIT
-	| INNER
-	| INOUT
-	| INSENSITIVE
-	| INSERT
-	| INTERSECT
-	| INTO
-	| IS
-	| ISOBID
-	| ITERATE
-	| JAR
-	| JOIN
-	| KEEP
-	| KEY
-	| LABEL
-	| LANGUAGE
-	| LAST
-	| LC_CTYPE
-	| LEAVE
-	| LEFT
-	| LIKE
-	| LIMIT
-	| LOCAL
-	| LOCALE
-	| LOCATOR
-	| LOCATORS
-	| LOCK
-	| LOCKMAX
-	| LOCKSIZE
-	| LONG
-	| LOOP
-	| MAINTAINED
-	| MATERIALIZED
-	| MICROSECOND
-	| MICROSECONDS
-	| MINUTE
-	| MINUTES
-	| MODEL
-	| MODIFIES
-	| MONTH
-	| MONTHS
-	| NEXT
-	| NEXTVAL
-	| NO
-	| NONE
-	| NOT
-	| NULL
-	| NULLS
-	| NUMPARTS
-	| OBID
-	| OF
-	| OFFSET
-	| OLD
-	| ON
-	| OPEN
-	| OPTIMIZATION
-	| OPTIMIZE
-	| OR
-	| ORDER
-	| ORGANIZATION
-	| OUT
-	| OUTER
-	| PACKAGE
-	| PADDED
-	| PARAMETER
-	| PART
-	| PARTITION
-	| PARTITIONED
-	| PARTITIONING
-	| PATH
-	| PERIOD
-	| PIECESIZE
-	| PLAN
-	| PRECISION
-	| PREPARE
-	| PREVVAL
-	| PRIOR
-	| PRIQTY
-	| PRIVILEGES
-	| PROCEDURE
-	| PROGRAM
-	| PSID
-	| PUBLIC
-	| QUERY
-	| QUERYNO
-	| READS
-	| REFERENCES
-	| REFRESH
-	| RELEASE
-	| RENAME
-	| REPEAT
-	| RESIGNAL
-	| RESTRICT
-	| RESULT
-	| RESULT_SET_LOCATOR
-	| RETURN
-	| RETURNS
-	| REVOKE
-	| RIGHT
-	| ROLE
-	| ROLLBACK
-	| ROLLUP
-	| ROUND_CEILING
-	| ROUND_DOWN
-	| ROUND_FLOOR
-	| ROUND_HALF_DOWN
-	| ROUND_HALF_EVEN
-	| ROUND_HALF_UP
-	| ROUND_UP
-	| ROW
-	| ROWSET
-	| RUN
-	| SAVEPOINT
-	| SCHEMA
-	| SCRATCHPAD
-	| SECOND
-	| SECONDS
-	| SECQTY
-	| SECURITY
-	| SELECT
-	| SENSITIVE
-	| SEQUENCE
-	| SESSION_USER
-	| SET
-	| SIGNAL
-	| SIMPLE
-	| SOME
-	| SOURCE
-	| SPECIFIC
-	| STANDARD
-	| STATEMENT
-	| STATIC
-	| STAY
-	| STOGROUP
-	| STORES
-	| STYLE
-	| SUMMARY
-	| SYNONYM
-	| SYSDATE
-	| SYSTEM
-	| SYSTIMESTAMP
-	| TABLE
-	| TABLESPACE
-	| THEN
-	| TO
-	| TRIGGER
-	| TRUNCATE
-	| TYPE
-	| UNDO
-	| UNION
-	| UNIQUE
-	| UNTIL
-	| UPDATE
-	| USER
-	| USING
-	| VALIDPROC
-	| VALUE
-	| VALUES
-	| VARIABLE
-	| VARIANT
-	| VCAT
-	| VERSIONING
-	| VIEW
-	| VOLATILE
-	| VOLUMES
-	| WHEN
-	| WHENEVER
-	| WHERE
-	| WHILE
-	| WITH
-	| WLM
-	| XMLCAST
-	| XMLEXISTS
-	| XMLNAMESPACES
-	| YEAR
-	| YEARS
-	| ZONE
-	| AND
-	| ARRAY_AGG
-	| ASC
-	| AVG
-	| BIT
-	| CHANGE
-	| CODEUNITS16
-	| CODEUNITS32
-	| CORR
-	| CORRELATION
-	| COVAR
-	| COVARIANCE
-	| COVARIANCE_SAMP
-	| COVAR_POP
-	| COVAR_SAMP
-	| CS
-	| CUME_DIST
-	| DENSE_RANK
-	| DESC
-	| EBCDIC
-	| EXCLUSIVE
-	| FIRST_VALUE
-	| FOLLOWING
-	| GROUPING
-	| IGNORE
-	| INDICATOR
-	| INPUT
-	| ISNULL
-	| LAG
-	| LARGE
-	| LAST_VALUE
-	| LEAD
-	| LISTAGG
-	| LOCKED
-	| LOCKS
-	| MEDIAN
-	| MINUTES
-	| MIXED
-	| NOTNULL
-	| NTH_VALUE
-	| NTILE
-	| NUMERIC
-	| OBJECT
-	| OCTETS
-	| ONLY
-	| OVER
-	| PASSING
-	| PERCENTILE_CONT
-	| PERCENTILE_DISC
-	| PERCENT_RANK
-	| PRECEDING
-	| PREVIOUS
-	| RANGE
-	| RANK
-	| RATIO_TO_REPORT
-	| READ
-	| REF
-	| REGR_AVGX
-	| REGR_AVGY
-	| REGR_COUNT
-	| REGR_ICPT
-	| REGR_INTERCEPT
-	| REGR_R2
-	| REGR_SLOPE
-	| REGR_SXX
-	| REGR_SXY
-	| REGR_SYY
-	| RESPECT
-	| ROW_NUMBER
-	| ROWS
-	| RR
-	| RS
-	| SBCS
-	| SELECTIVITY
-	| SETS
-	| SHARE
-	| SKIP_
-	| STDDEV
-	| STDDEV_POP
-	| STDDEV_SAMP
-	| SUM
-	| TOKEN
-	| UNBOUNDED
-	| UNPACK
-	| UR
-	| USE
-	| VAR
-	| VARIANCE
-	| VARIANCE_SAMP
-	| VAR_POP
-	| VAR_SAMP
-	| VARYING
-	| WITHOUT
-	| XML
-	| XMLAGG
-	| COLUMNS
-	| SQLID
-	| ORDINALITY
-	| SYSTEM_TIME
-	| BUSINESS_TIME
-	| MULTIPLIER
-	| UNNEST
-	| CROSS
-	| CALLER
-	| CLIENT
-	| POSITIONING
-	| SCROLL
-	| ALTER
-	| INDEXBP
-	| ACTION
-	| ASSEMBLE
-	| C_
-	| CALLED
-	| COBOL
 	| DB2
-	| DEFINER
-	| DISPATCH
-	| ENVIRONMENT
-	| FAILURE
-	| FAILURES
-	| JAVA
-	| MAIN
-	| NAME
-	| OPTIONS
-	| PARALLEL
-	| PLI
-	| REGISTERS
-	| RESIDENT
-	| SECURED
-	| SPECIAL
-	| SQL
-	| STOP
-	| SUB
-	| YES
-	| APPLICATION
-	| CHANGED
-	| COMPATIBILITY
-	| COMPRESS
-	| COPY
-	| FREEPAGE
-	| GBPCACHE
-	| INCLUDE
-	| MAXVALUE
-	| MINVALUE
-	| PCTFREE
-	| REGENERATE
-	| MASK
-	| ENABLE
-	| PERMISSION
-	| ATOMIC
-	| SQLEXCEPTION
-	| MERGE
-	| MATCHED
-	| SQLSTATE
-	| MESSAGE_TEXT
-	| OVERRIDING
-	| PORTION
-	| DB2SQL
-	| DEBUG
-	| GENERAL
-	| MODE_
-	| REXX
-	| CACHE
-	| CYCLE
-	| INCREMENT
-	| RESTART
-	| DATACLAS
-	| MGMTCLAS
-	| REMOVE
-	| STORCLAS
-	| ACCESS
-	| ACTIVATE
-	| ALWAYS
-	| APPEND
-	| ARCHIVE
-	| BUSINESS
-	| CASCADE
-	| CHANGES
-	| CONTROL
-	| DEACTIVATE
-	| DEFERRED
-	| EACH
-	| ENFORCED
-	| EXTRA
-	| FOREIGN
-	| HIDDEN_
-	| HISTORY
-	| ID
-	| IDENTITY
-	| IMPLICITLY
-	| INITIALLY
-	| INLINE
-	| OPERATION
-	| ORGANIZE
-	| OVERLAPS
-	| PACKAGE_NAME
-	| PACKAGE_SCHEMA
-	| PACKAGE_VERSION
-	| PRIMARY
-	| RESET
-	| ROTATE
-	| START
-	| SYSIBM
-	| TRANSACTION
-	| XMLSCHEMA
-	| ELEMENT
-	| URL
-	| NAMESPACE
-	| LOCATION
-	| SYSXSR
-	| ALGORITHM
-	| FIXEDLENGTH
-	| HUFFMAN
-	| LOB
-	| LOG
-	| LOGGED
-	| MAXPARTITIONS
-	| MAXROWS
-	| MEMBER
-	| MOVE
-	| PAGE
-	| PAGENUM
-	| PENDING
-	| RELATIVE
-	| SEGSIZE
-	| TRACKMOD
-	| ADDRESS
-	| ATTRIBUTES
-	| AUTHENTICATION
-	| AUTHID
-	| CONTEXT
-	| JOBNAME
-	| OWNER
-	| PROFILE
-	| QUALIFIER
-	| SERVAUTH
-	| TRUSTED
-	| SECTION
-	| ACTIVE
-	| VERSION
-	| ALIAS
-	| WORK
-	| WORKFILE
-	| SYSDEFLT
-	| NULTERM
-	| STRUCTURE
-	| GENERIC
-	| TEMPORARY
-	| DEFER
-	| DEFINE
-	| EXCLUDE
-	| GENERATE
-	| KEYS
-	| XMLPATTERN
-	| SIZE
-	| EVERY
-	| ABSOLUTE
-	| ACCELERATOR
-	| EXCLUDING
-	| INCLUDING
-	| DEFAULTS
-	| MODIFIERS
-	| INSTEAD
-	| NEW
-	| NEW_TABLE
-	| OLD_TABLE
-	| REFERENCING
-	| BASED
-	| UPON
-    | OPTION
-	| PRESERVE
-	| BOTH
-	| DESCRIBE
-	| LABELS
-	| NAMES
-	| OUTPUT
-	| EXCHANGE
-	| STABILIZED
-	| STMTCACHE
-	| STMTID
-	| STMTTOKEN
-	| STARTING
-	| CATALOG_NAME
-	| CONDITION_NUMBER
-	| CURSOR_NAME
 	| DB2_AUTHENTICATION_TYPE
 	| DB2_AUTHORIZATION_ID
 	| DB2_CONNECTION_STATE
@@ -6534,6 +6424,7 @@ sqlKeyword
 	| DB2_RETURN_STATUS
 	| DB2_ROW_NUMBER
 	| DB2_SERVER_CLASS_NAME
+	| DB2SQL
 	| DB2_SQL_ATTR_CURSOR_HOLD
 	| DB2_SQL_ATTR_CURSOR_ROWSET
 	| DB2_SQL_ATTR_CURSOR_SCROLLABLE
@@ -6548,81 +6439,578 @@ sqlKeyword
 	| DB2_SQLERRD_SET
 	| DB2_SQL_NESTING_LEVEL
 	| DB2_TOKEN_COUNT
-	| DIAGNOSTICS
-	| MORE_
-	| NUMBER
-	| RETURNED_SQLSTATE
-	| ROW_COUNT
-	| SERVER_NAME
-	| STACKED
-	| CREATETAB
-	| CREATETS
 	| DBADM
+	| DBCLOB
 	| DBCTRL
+	| DBINFO
 	| DBMAINT
-	| DISPLAYDB
-	| IMAGCOPY
-	| LOAD
-	| PACKADM
-	| RECOVERDB
-	| REORG
-	| REPAIR
-	| STARTDB
-	| STATS
-	| STOPDB
-	| BIND
-	| ALTERIN
-	| CREATEIN
-	| DROPIN
-	| USAGE
-	| ACCESSCTRL
-	| BINDADD
-	| BINDAGENT
-	| BSDS
-	| CREATEALIAS
-	| CREATEDBA
-	| CREATEDBC
-	| CREATE_SECURE_OBJECT
-	| CREATESG
-	| CREATETMTAB
-	| DATAACCESS
+	| DEACTIVATE
+	| DEALLOCATE
+	| DEBUG
 	| DEBUGSESSION
+	| DEC
+	| DECFLOAT
+	| DECIMAL
+	| DECLARE
+	| DEC_ROUND_CEILING
+	| DEC_ROUND_DOWN
+	| DEC_ROUND_FLOOR
+	| DEC_ROUND_HALF_DOWN
+	| DEC_ROUND_HALF_EVEN
+	| DEC_ROUND_HALF_UP
+	| DEC_ROUND_UP
+	| DEFAULT
+	| DEFAULTS
+	| DEFER
+	| DEFERRED
+	| DEFINE
+	| DEFINEBIND
+	| DEFINER
+	| DEFINERUN
+	| DEGREE
+	| DELETE
+	| DENSE_RANK
+	| DEPENDENT
+	| DESC
+	| DESCRIBE
+	| DESCRIPTOR
+	| DETERMINISTIC
+	| DIAGNOSTICS
+	| DISABLE
+	| DISALLOW
+	| DISPATCH
 	| DISPLAY
+	| DISPLAYDB
+	| DISTINCT
+	| DO
+	| DOCUMENT
+	| DOUBLE
+	| DROP
+	| DROPIN
+	| DSSIZE
+	| DYNAMIC
+	| DYNAMICRULES
+	| EACH
+	| EBCDIC
+	| EDITPROC
+	| ELEMENT
+	| ELIGIBLE
+	| ELSE
+	| ELSEIF
+	| EMPTY
+	| ENABLE
+	| ENCODING
+	| ENCRYPTION
+	| END
+	| END_EXEC
+	| ENDING
+	| ENFORCED
+	| ENVIRONMENT
+	| ERASE
+	| ESCAPE
+	| EUR
+	| EVERY
+	| EXCEPT
+	| EXCEPTION
+	| EXCHANGE
+	| EXCLUDE
+	| EXCLUDING
+	| EXCLUSIVE
+	| EXEC_SQL
+	| EXECUTE
+	| EXISTS
+	| EXIT
+	| EXPLAIN
+	| EXTERNAL
+	| EXTRA
+	| FAILBACK
+	| FAILURE
+	| FAILURES
+	| FENCED
+	| FETCH
+	| FIELDPROC
+	| FINAL
+	| FIRST
+	| FIRST_VALUE
+	| FIXEDLENGTH
+	| FLOAT
+	| FOLLOWING
+	| FOR
+	| FOREIGN
+	| FORMAT
+	| FOUND
+	| FREE
+	| FREEPAGE
+	| FROM
+	| FULL
+	| FUNCTION
+	| GBPCACHE
+	| GENERAL
+	| GENERATE
+	| GENERATED
+	| GENERIC
+	| GET
+	| GET_ACCEL_ARCHIVE
+	| GLOBAL
+	| GO
+	| GOTO
+	| GRANT
+	| GRAPHIC
+	| GROUP
+	| GROUPING
+	| HANDLER
+	| HAVING
+	| HIDDEN_
+	| HINT
+	| HISTORY
+	| HOLD
+	| HOUR
+	| HOURS
+	| HUFFMAN
+	| ID
+	| IDENTITY
+	| IF
+	| IGNORE
+	| IMAGCOPY
+	| IMMEDIATE
+	| IMPLICITLY
+	| IN
+	| INCLUDE
+	| INCLUDING
+	| INCLUSIVE
+	| INCREMENT
+	| INDEX
+	| INDEXBP
+	| INDICATOR
+	| INHERIT
+	| INITIALLY
+	| INLINE
+	| INNER
+	| INOUT
+	| INPUT
+	| INSENSITIVE
+	| INSERT
+	| INSTEAD
+	| INT
+	| INTEGER
+	| INTERSECT
+	| INTO
+	| INVOKEBIND
+	| INVOKERUN
+	| IS
+	| ISNULL
+	| ISO
+	| ISOBID
+	| ISOLATION
+	| ITERATE
+	| JAR
+	| JAVA
+	| JIS
+	| JOBNAME
+	| JOIN
+	| KEEP
+	| KEY
+	| KEYS
+	| LABEL
+	| LABELS
+	| LAG
+	| LANGUAGE
+	| LARGE
+	| LAST
+	| LAST_VALUE
+	| LC_CTYPE
+	| LEAD
+	| LEAVE
+	| LEFT
+	| LEVEL
+	| LIKE
+	| LIMIT
+	| LISTAGG
+	| LITERALS
+	| LOAD
+	| LOB
+	| LOCAL
+	| LOCALE
+	| LOCATION
+	| LOCATOR
+	| LOCATORS
+	| LOCK
+	| LOCKED
+	| LOCKMAX
+	| LOCKS
+	| LOCKSIZE
+	| LOG
+	| LOGGED
+	| LONG
+	| LOOP
+	| MAIN
+	| MAINTAINED
+	| MASK
+	| MATCHED
+	| MATERIALIZED
+	| MAXPARTITIONS
+	| MAXROWS
+	| MAXVALUE
+	| MEDIAN
+	| MEMBER
+	| MERGE
+	| MESSAGE_TEXT
+	| MGMTCLAS
+	| MICROSECOND
+	| MICROSECONDS
+	| MINUTE
+	| MINUTES
+	| MINVALUE
+	| MIXED
+	| MODE_
+	| MODEL
+	| MODIFIERS
+	| MODIFIES
 	| MONITOR1
 	| MONITOR2
+	| MONTH
+	| MONTHS
+	| MORE_
+	| MOVE
+	| MULTIPLIER
+	| NAME
+	| NAMES
+	| NAMESPACE
+	| NEW
+	| NEW_TABLE
+	| NEXT
+	| NEXTVAL
+	| NO
+	| NODEFER
+	| NONE
+	| NOT
+	| NOTNULL
+	| NTH_VALUE
+	| NTILE
+	| NULL
+	| NULLS
+	| NULTERM
+	| NUMBER
+	| NUMERIC
+	| NUMPARTS
+	| OBID
+	| OBJECT
+	| OCTETS
+	| OF
+	| OFFSET
+	| OLD
+	| OLD_TABLE
+	| ON
+	| ONCE
+	| ONLY
+	| OPEN
+	| OPERATION
+	| OPTHINT
+	| OPTIMIZATION
+	| OPTIMIZE
+	| OPTION
+	| OPTIONAL
+	| OPTIONS
+	| OR
+	| ORDER
+	| ORDINALITY
+	| ORGANIZATION
+	| ORGANIZE
+	| OUT
+	| OUTCOME
+	| OUTER
+	| OUTPUT
+	| OVER
+	| OVERLAPS
+	| OVERRIDING
+	| OWNER
+	| OWNERSHIP
+	| PACKADM
+	| PACKAGE
+	| PACKAGE_NAME
+	| PACKAGE_SCHEMA
+	| PACKAGE_VERSION
+	| PADDED
+	| PAGE
+	| PAGENUM
+	| PARALLEL
+	| PARAMETER
+	| PART
+	| PARTITION
+	| PARTITIONED
+	| PARTITIONING
+	| PASSING
+	| PASSWORD
+	| PATH
+	| PCTFREE
+	| PENDING
+	| PERCENTILE_CONT
+	| PERCENTILE_DISC
+	| PERCENT_RANK
+	| PERIOD
+	| PERMISSION
+	| PIECESIZE
+	| PLAN
+	| PLI
+	| PORTION
+	| POSITIONING
+	| PRECEDING
+	| PRECISION
+	| PREPARE
+	| PRESERVE
+	| PREVIOUS
+	| PREVVAL
+	| PRIMARY
+	| PRIOR
+	| PRIQTY
+	| PRIVILEGES
+	| PROCEDURE
+	| PROFILE
+	| PROGRAM
+	| PSID
+	| PUBLIC
+	| QUALIFIER
+	| QUERY
+	| QUERYNO
+	| RANGE
+	| RANK
+	| RATIO_TO_REPORT
+	| READ
+	| READS
+	| REAL
 	| RECOVER
+	| RECOVERDB
+	| REF
+	| REFERENCE
+	| REFERENCES
+	| REFERENCING
+	| REFRESH
+	| REGENERATE
+	| REGISTERS
+	| REGR_AVGX
+	| REGR_AVGY
+	| REGR_COUNT
+	| REGR_ICPT
+	| REGR_INTERCEPT
+	| REGR_R2
+	| REGR_SLOPE
+	| REGR_SXX
+	| REGR_SXY
+	| REGR_SYY
+	| RELATIVE
+	| RELEASE
+	| REMOVE
+	| RENAME
+	| REOPT
+	| REORG
+	| REPAIR
+	| REPEAT
+	| REQUIRED
+	| RESET
+	| RESIDENT
+	| RESIGNAL
+	| RESOLUTION
+	| RESPECT
+	| RESTART
+	| RESTRICT
+	| RESULT
+	| RESULT_SET_LOCATOR
+	| RETAIN
+	| RETURN
+	| RETURNED_SQLSTATE
+	| RETURNING
+	| RETURNS
+	| REUSE
+	| REVOKE
+	| REXX
+	| RIGHT
+	| ROLE
+	| ROLLBACK
+	| ROLLUP
+	| ROTATE
+	| ROUND_CEILING
+	| ROUND_DOWN
+	| ROUND_FLOOR
+	| ROUND_HALF_DOWN
+	| ROUND_HALF_EVEN
+	| ROUND_HALF_UP
+	| ROUNDING
+	| ROUND_UP
+	| ROW
+	| ROW_COUNT
+	| ROWID
+	| ROW_NUMBER
+	| ROWS
+	| ROWSET
+	| RR
+	| RS
+	| RUN
+	| SAVEPOINT
+	| SBCS
+	| SCHEMA
+	| SCHEME
+	| SCRATCHPAD
+	| SCROLL
+	| SECOND
+	| SECONDS
+	| SECQTY
+	| SECTION
+	| SECURED
+	| SECURITY
+	| SEGSIZE
+	| SELECT
+	| SELECTIVITY
+	| SENSITIVE
+	| SEQUENCE
+	| SERVAUTH
+	| SERVER_NAME
+	| SESSION
+	| SESSION_USER
+	| SET
+	| SETS
+	| SHARE
+	| SIGNAL
+	| SIMPLE
+	| SIZE
+	| SKIP_
+	| SMALLINT
+	| SOME
+	| SOURCE
+	| SPECIAL
+	| SPECIFIC
+	| SQL
 	| SQLADM
+	| SQLERROR
+	| SQLEXCEPTION
+	| SQLID
+	| SQLSTATE
+	| SQLWARNING
+	| STABILIZED
+	| STACKED
+	| STANDARD
+	| START
+	| STARTDB
+	| STARTING
+	| STATEMENT
+	| STATEMENTS
+	| STATIC
+	| STATS
+	| STAY
+	| STDDEV
+	| STDDEV_POP
+	| STDDEV_SAMP
+	| STMTCACHE
+	| STMTID
+	| STMTTOKEN
+	| STOGROUP
+	| STOP
 	| STOPALL
+	| STOPDB
+	| STORAGE
+	| STORCLAS
+	| STORES
 	| STOSPACE
+	| STRUCTURE
+	| STYLE
+	| SUB
+	| SUM
+	| SUMMARY
+	| SYNONYM
 	| SYSADM
 	| SYSCTRL
+	| SYSDATE
+	| SYSDEFLT
+	| SYSIBM
 	| SYSOPR
-	| TRACE
-	| UNLOAD
-	| WRITE
-	| BUFFERPOOLS
-	| DEPENDENT
-	| RETAIN
-	| CURSORS
-	| PASSWORD
-	| HINT
+	| SYSTEM
+	| SYSTEM_TIME
+	| SYSTIMESTAMP
+	| SYSXSR
+	| TABLE
+	| TABLESPACE
+	| TEMPORARY
+	| THEN
+	| TIME
+	| TIMESTAMP
 	| TIMEZONE
+	| TO
+	| TOKEN
+	| TRACE
+	| TRACKMOD
+	| TRANSACTION
 	| TRANSFER
-	| OWNERSHIP
-	| REUSE
-	| STORAGE
+	| TRIGGER
 	| TRIGGERS
-	| FOUND
-	| SQLERROR
-	| SQLWARNING
+	| TRUNCATE
+	| TRUSTED
+	| TYPE
+	| UNBOUNDED
+	| UNDO
+	| UNICODE
+	| UNION
+	| UNIQUE
+	| UNLOAD
+	| UNNEST
+	| UNPACK
+	| UNTIL
+	| UPDATE
+	| UPON
+	| UR
+	| URL
+	| USA
+	| USAGE
+	| USE
+	| USER
+	| USING
+	| VALIDATE
+	| VALIDPROC
+	| VALUE
+	| VALUES
+	| VAR
+	| VARBINARY
+	| VARCHAR
+	| VARGRAPHIC
+	| VARIABLE
+	| VARIANCE
+	| VARIANCE_SAMP
+	| VARIANT
+	| VAR_POP
+	| VAR_SAMP
+	| VARYING
+	| VCAT
+	| VERSION
+	| VERSIONING
+	| VERSIONS
+	| VIEW
+	| VOLATILE
+	| VOLUMES
+	| WAIT
+	| WAITFORDATA
+	| WHEN
+	| WHENEVER
+	| WHERE
+	| WHILE
+	| WITH
 	| WITHIN
-	| EMPTY
+	| WITHOUT
+	| WLM
+	| WORK
+	| WORKFILE
+	| WRAPPED
+	| WRITE
+	| XML
+	| XMLAGG
 	| XMLBINARY
-	| BASE64
+	| XMLCAST
 	| XMLDECLARATION
-	| REFERENCE
-	| RETURNING
-	)
+	| XMLEXISTS
+	| XMLNAMESPACES
+	| XMLPATTERN
+	| XMLSCHEMA
+	| YEAR
+	| YEARS
+	| YES
+	| ZONE	)
 	;
 
 
