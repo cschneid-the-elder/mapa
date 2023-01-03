@@ -1,3 +1,25 @@
+--2023-01-03--------------------------------------------------------------------
+Changed...
+
+	(expression (operator expression)*)
+
+...to...
+
+	(expression ((operator expression) | INTEGERLITERAL)*)
+	
+...in parser rule valuesList1 to deal with hitherto unseen syntax...
+
+	INSERT INTO WEATHER VALUES
+		(NEWCW.CITY, 
+		1.8*NEWCW.TEMPC+32)
+
+...where +32 was lexed as a single token, breaking the
+parser rule valuesList1.  I don't have access to a DB2
+instance to test if this is a problem with the test case
+or not, so here we are.  If you're writing an interpreter
+you'll have to deal with this modified rule's handling
+of an optional operator.
+
 --2022-12-28--------------------------------------------------------------------
 Added toleration for SQL/PL in ALTER and CREATE PROCEDURE statement rules per 
 suggestion by Martijn Rutte.

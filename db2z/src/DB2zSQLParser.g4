@@ -2626,8 +2626,34 @@ signalInformation
 	)
 	;
 
+/*
+Changed...
+
+	(expression (operator expression)*)
+
+...to...
+
+	(expression ((operator expression) | INTEGERLITERAL)*)
+	
+...on 2023-01-03 to deal with hitherto unseen syntax...
+
+	INSERT INTO WEATHER VALUES
+		(NEWCW.CITY, 
+		1.8*NEWCW.TEMPC+32)
+
+...where +32 was lexed as a single token, breaking the
+parser rule valuesList1.  I don't have access to a DB2
+instance to test if this is a problem with the test case
+or not, so here we are.  If you're writing an interpreter
+you'll have to deal with this modified rule's handling
+of an optional operator.
+*/
 valuesList1
-	: ((expression (operator expression)*) | DEFAULT | NULL)
+	: (
+	(expression ((operator expression) | INTEGERLITERAL)*)
+	| DEFAULT 
+	| NULL
+	)
 	;
 
 valuesList2
