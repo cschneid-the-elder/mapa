@@ -136,6 +136,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionReturnsClause}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionReturnsClause(DB2zSQLParser.FunctionReturnsClauseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#functionDesignator1}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

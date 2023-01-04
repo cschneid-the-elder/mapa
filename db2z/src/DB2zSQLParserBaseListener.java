@@ -267,6 +267,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterFunctionReturnsClause(DB2zSQLParser.FunctionReturnsClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionReturnsClause(DB2zSQLParser.FunctionReturnsClauseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterFunctionDesignator1(DB2zSQLParser.FunctionDesignator1Context ctx) { }
 	/**
 	 * {@inheritDoc}

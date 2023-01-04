@@ -254,7 +254,7 @@ alterWhichFunction2
 functionCompiledSqlScalarRoutineSpecification
 	: (
 	LPAREN (parameterDeclaration2 (COMMA parameterDeclaration2)*)? RPAREN
-	RETURNS functionDataType
+	functionReturnsClause
 	functionCompiledSqlScalarOptionList*
 	sqlRoutineBody
 	)
@@ -275,6 +275,10 @@ alterFunctionSqlTableStatement
 	RESTRICT
 	functionSqlTableOptionList+
 	)
+	;
+
+functionReturnsClause
+	: (RETURNS functionDataType)
 	;
 
 functionDesignator1
@@ -3077,7 +3081,7 @@ functionBuiltInType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	| ROWID
 	| XML
 	)
