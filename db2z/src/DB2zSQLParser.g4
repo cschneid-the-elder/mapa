@@ -415,6 +415,8 @@ createFunctionStatement
 	| createFunctionStatementExternalTable
 	| createFunctionStatementSourced
 	| createFunctionStatementInlineSqlScalar
+	| createFunctionCompiledSqlScalar
+	| createFunctionSqlTable
 	)
 	;
 
@@ -422,7 +424,16 @@ createFunctionStatementExternalScalar
 	: (
 	CREATE FUNCTION functionName
 	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
+	createFunctionStatementExternalScalarReturnsPhrase
 	createFunctionStatementExternalScalarOptions+
+	)
+	;
+
+createFunctionStatementExternalScalarReturnsPhrase
+	: (
+	RETURNS 
+		((dataType (AS LOCATOR)?)
+		| (dataType CAST FROM dataType (AS LOCATOR)?))
 	)
 	;
 
@@ -430,7 +441,22 @@ createFunctionStatementExternalTable
 	: (
 	CREATE FUNCTION functionName
 	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
+	createFunctionStatementExternalTableReturnsPhrase
 	createFunctionStatementExternalTableOptions+
+	)
+	;
+
+createFunctionStatementExternalTableReturnsPhrase
+	:(
+	RETURNS 
+		((TABLE LPAREN externalTableFunctionColumn (COMMA externalTableFunctionColumn)* RPAREN)
+		| (GENERIC TABLE))
+	)
+	;
+
+externalTableFunctionColumn
+	: (
+	columnName functionDataType (AS LOCATOR)?
 	)
 	;
 
@@ -445,8 +471,24 @@ createFunctionStatementSourced
 createFunctionStatementInlineSqlScalar
 	: (
 	CREATE FUNCTION functionName
+	LPAREN ((parameterDeclaration1 (COMMA parameterDeclaration1)*)?) RPAREN
+	((WRAPPED obfuscatedStatementText) | inlineSqlScalarFunctionDefinition)
+	)
+	;
+
+createFunctionCompiledSqlScalar
+	: (
+	CREATE FUNCTION functionName
 	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
-	createFunctionStatementInlineSqlScalarOptions+
+	((WRAPPED obfuscatedStatementText) | compiledSqlScalarFunctionDefinition)
+	)
+	;
+
+createFunctionSqlTable
+	: (
+	CREATE FUNCTION functionName
+	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
+	((WRAPPED obfuscatedStatementText) | sqlTableFunctionDefinition)
 	)
 	;
 
@@ -2202,10 +2244,7 @@ parameterDeclaration3
 
 createFunctionStatementExternalScalarOptions
 	: (
-	(RETURNS 
-		((dataType (AS LOCATOR)?)
-		| (dataType CAST FROM dataType (AS LOCATOR)?)))
-	| externalNameOption1
+	externalNameOption1
 	| languageOption3
 	| parameterStyleOption2
 	| deterministicOption
@@ -2426,10 +2465,7 @@ parameterOption2
 
 createFunctionStatementExternalTableOptions
 	: (
-	(RETURNS 
-		((TABLE LPAREN columnName functionDataType (AS LOCATOR)? (COMMA columnName functionDataType (AS LOCATOR)?)* RPAREN)
-		| (GENERIC TABLE)))
-	| externalNameOption1
+	externalNameOption1
 	| languageOption2
 	| parameterStyleOption1
 	| deterministicOption
@@ -2470,11 +2506,17 @@ createFunctionStatementSourcedOptions
 	)
 	;
 
+inlineSqlScalarFunctionDefinition
+	: (
+	RETURNS functionDataType languageOption1?
+	createFunctionStatementInlineSqlScalarOptions+
+	sqlRoutineBody
+	)
+	;
+
 createFunctionStatementInlineSqlScalarOptions
 	: (
-	(RETURNS functionDataType languageOption1?)
-	| (RETURN (expression | NULL | fullSelect))
-	| deterministicOption
+	deterministicOption
 	| nullInputOption1
 	| sqlDataOption1
 	| externalActionOption
@@ -2482,6 +2524,87 @@ createFunctionStatementInlineSqlScalarOptions
 	| securedOption
 	| specificNameOption1
 	| parameterOption2
+	| dispatchOption
+	)
+	;
+
+compiledSqlScalarFunctionDefinition
+	: (
+	RETURNS functionDataType versionOption
+	createFunctionStatementCompiledSqlScalarOptions+
+	sqlRoutineBody
+	)
+	;
+
+createFunctionStatementCompiledSqlScalarOptions
+	: (
+	languageOption1
+	| specificNameOption1
+	| deterministicOption
+	| externalActionOption
+	| sqlDataOption4
+	| nullInputOption1
+	| dispatchOption
+	| parallelOption2
+	| debugOption
+	| parameterOption2
+	| parameterStyleOption1
+	| schemaQualifierOption
+	| packageOwnerOption
+	| asuTimeOption
+	| specialRegistersOption
+	| wlmEnvironmentOption3
+	| currentDataOption
+	| degreeOption
+	| concurrentAccessOption
+	| dynamicRulesOption
+	| applicationEncodingOption
+	| explainOption
+	| immediateWriteOption
+	| isolationLevelOption
+	| opthintOption
+	| queryAccelerationOption
+	| getAccelArchiveOption
+	| accelerationOption
+	| acceleratorOption
+	| sqlPathOption
+	| reoptOption
+	| validateOption
+	| roundingOption
+	| dateFormatOption
+	| decimalOption
+	| forUpdateOption
+	| timeFormatOption
+	| securedOption
+	| businessTimeSensitiveOption
+	| systemTimeSensitiveOption
+	| archiveSensitiveOption
+	| applcompatOption
+	| concentrateStatementsOption
+	)
+	;
+
+sqlTableFunctionDefinition
+	: (
+	RETURNS TABLE LPAREN functionDataType (COMMA functionDataType)* RPAREN
+	createFunctionStatementSqlTableOptions+
+	sqlRoutineBody
+	)
+	;
+
+createFunctionStatementSqlTableOptions
+	: (
+	languageOption1
+	| specificNameOption1
+	| deterministicOption
+	| externalActionOption
+	| sqlDataOption1
+	| nullInputOption1
+	| specialRegistersOption
+	| dispatchOption
+	| cardinalityOption
+	| parameterOption2
+	| securedOption
 	)
 	;
 

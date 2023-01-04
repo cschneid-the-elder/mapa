@@ -171,11 +171,29 @@ in application source code, provision is made for the
 SPUFI command to set the SQL statement terminator.
 */
 SET_STATEMENT_TERMINATOR
-	: '--#SET' WS 'TERMINATOR' WS ~[\n\r] WS? NEWLINE
+	: ('--#SET' WS 'TERMINATOR' WS ~[\n\r] WS? NEWLINE)
 	{
 		String text = getText();
 		String textStripped = text.stripTrailing();
 		statementTerminator = new String(textStripped.substring(textStripped.length() - 1));
+	}
+	->channel(COMMENTS)
+	;
+
+/*
+And apparently there's this alternate syntax...
+
+	#terminator=@#
+
+...which I can't find documented anywhere.
+*/
+SET_STATEMENT_TERMINATOR2
+	: ('#terminator' EQ ~[\n\r] '#' WS? NEWLINE)
+	{
+		String text = getText();
+		String textStripped = text.stripTrailing();
+		statementTerminator = 
+			new String(textStripped.substring(textStripped.length() - 2,textStripped.length() - 1));
 	}
 	->channel(COMMENTS)
 	;
@@ -636,6 +654,12 @@ FULL
 
 FUNCTION
 	: F U N C T I O N 
+	{
+		if (createOrAlterSeen) {
+			createOrAlterSeen = false;
+			pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+		}
+	}
 	;
 
 GENERATED
@@ -1033,7 +1057,10 @@ PRIVILEGES
 PROCEDURE
 	: P R O C E D U R E 
 	{
-		if (createOrAlterSeen) pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+		if (createOrAlterSeen) {
+			createOrAlterSeen = false;
+			pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+		}
 	}
 	;
 
@@ -4513,6 +4540,11 @@ CP_ACCESS
 	->type(ACCESS)
 	;
 
+CP_ACTION
+	: ACTION
+	->type(ACTION)
+	;
+
 CP_ALL
 	: A L L 
 	->type(ALL)
@@ -4616,6 +4648,16 @@ CP_CALL
 CP_CALLED
 	: C A L L E D 
 	->type(CALLED)
+	;
+
+CP_CARDINALITY
+	: CARDINALITY
+	->type(CARDINALITY)
+	;
+
+CP_CAST
+	: CAST
+	->type(CAST)
 	;
 
 CP_CCSID
@@ -4798,6 +4840,11 @@ CP_DISALLOW
 	->type(DISALLOW)
 	;
 
+CP_DISPATCH
+	: DISPATCH
+	->type(DISPATCH)
+	;
+
 CP_DOUBLE
 	: D O U B L E 
 	->type(DOUBLE)
@@ -4858,6 +4905,11 @@ CP_FAILBACK
 	->type(FAILBACK)
 	;
 
+CP_FINAL
+	: FINAL
+	->type(FINAL)
+	;
+
 CP_FLOAT
 	: F L O A T 
 	->type(FLOAT)
@@ -4871,6 +4923,11 @@ CP_FOR
 CP_FORMAT
 	: F O R M A T 
 	->type(FORMAT)
+	;
+
+CP_FROM
+	: FROM
+	->type(FROM)
 	;
 
 CP_GET_ACCEL_ARCHIVE
@@ -5083,6 +5140,11 @@ CP_PACKAGE
 	->type(PACKAGE)
 	;
 
+CP_PARALLEL
+	: PARALLEL
+	->type(PARALLEL)
+	;
+
 CP_PARAMETER
 	: P A R A M E T E R 
 	->type(PARAMETER)
@@ -5153,6 +5215,11 @@ CP_RETURN
 	->type(RETURN)
 	;
 
+CP_RETURNS
+	: RETURNS
+	->type(RETURNS)
+	;
+
 CP_ROLE
 	: R O L E 
 	->type(ROLE)
@@ -5193,6 +5260,11 @@ CP_SCHEME
 	->type(SCHEME)
 	;
 
+CP_SCRATCHPAD
+	: SCRATCHPAD
+	->type(SCRATCHPAD)
+	;
+
 CP_SENSITIVE
 	: S E N S I T I V E 
 	->type(SENSITIVE)
@@ -5231,6 +5303,11 @@ CP_SPECIFIC
 CP_STATEMENTS
 	: S T A T E M E N T S 
 	->type(STATEMENTS)
+	;
+
+CP_STATIC
+	: STATIC
+	->type(STATIC)
 	;
 
 CP_SYSTEM
@@ -5533,6 +5610,11 @@ CP_REGENERATE
 	->type(REGENERATE)
 	;
 
+CP_SECURED
+	: SECURED
+	->type(SECURED)
+	;
+
 CP_SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
@@ -5635,6 +5717,11 @@ CEP_SEMICOLON
 			popMode();
 		}
 	}
+	;
+
+CEP_ACTION
+	: ACTION
+	->type(ACTION)
 	;
 
 CEP_AFTER

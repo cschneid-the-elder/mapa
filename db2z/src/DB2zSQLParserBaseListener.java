@@ -507,6 +507,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateFunctionStatementExternalScalarReturnsPhrase(DB2zSQLParser.CreateFunctionStatementExternalScalarReturnsPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionStatementExternalScalarReturnsPhrase(DB2zSQLParser.CreateFunctionStatementExternalScalarReturnsPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateFunctionStatementExternalTable(DB2zSQLParser.CreateFunctionStatementExternalTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -514,6 +526,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCreateFunctionStatementExternalTable(DB2zSQLParser.CreateFunctionStatementExternalTableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateFunctionStatementExternalTableReturnsPhrase(DB2zSQLParser.CreateFunctionStatementExternalTableReturnsPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionStatementExternalTableReturnsPhrase(DB2zSQLParser.CreateFunctionStatementExternalTableReturnsPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExternalTableFunctionColumn(DB2zSQLParser.ExternalTableFunctionColumnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExternalTableFunctionColumn(DB2zSQLParser.ExternalTableFunctionColumnContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -538,6 +574,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateFunctionCompiledSqlScalar(DB2zSQLParser.CreateFunctionCompiledSqlScalarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionCompiledSqlScalar(DB2zSQLParser.CreateFunctionCompiledSqlScalarContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateFunctionSqlTable(DB2zSQLParser.CreateFunctionSqlTableContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionSqlTable(DB2zSQLParser.CreateFunctionSqlTableContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3735,6 +3795,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterInlineSqlScalarFunctionDefinition(DB2zSQLParser.InlineSqlScalarFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitInlineSqlScalarFunctionDefinition(DB2zSQLParser.InlineSqlScalarFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateFunctionStatementInlineSqlScalarOptions(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3742,6 +3814,54 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitCreateFunctionStatementInlineSqlScalarOptions(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCompiledSqlScalarFunctionDefinition(DB2zSQLParser.CompiledSqlScalarFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCompiledSqlScalarFunctionDefinition(DB2zSQLParser.CompiledSqlScalarFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateFunctionStatementCompiledSqlScalarOptions(DB2zSQLParser.CreateFunctionStatementCompiledSqlScalarOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionStatementCompiledSqlScalarOptions(DB2zSQLParser.CreateFunctionStatementCompiledSqlScalarOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSqlTableFunctionDefinition(DB2zSQLParser.SqlTableFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSqlTableFunctionDefinition(DB2zSQLParser.SqlTableFunctionDefinitionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateFunctionStatementSqlTableOptions(DB2zSQLParser.CreateFunctionStatementSqlTableOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionStatementSqlTableOptions(DB2zSQLParser.CreateFunctionStatementSqlTableOptionsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
