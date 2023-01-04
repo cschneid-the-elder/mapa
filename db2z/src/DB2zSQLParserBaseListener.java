@@ -183,6 +183,114 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterWhichFunction1(DB2zSQLParser.AlterWhichFunction1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterWhichFunction1(DB2zSQLParser.AlterWhichFunction1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterWhichFunction2(DB2zSQLParser.AlterWhichFunction2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterWhichFunction2(DB2zSQLParser.AlterWhichFunction2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionCompiledSqlScalarRoutineSpecification(DB2zSQLParser.FunctionCompiledSqlScalarRoutineSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCompiledSqlScalarRoutineSpecification(DB2zSQLParser.FunctionCompiledSqlScalarRoutineSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionDesignator1(DB2zSQLParser.FunctionDesignator1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionDesignator1(DB2zSQLParser.FunctionDesignator1Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionDesignator2(DB2zSQLParser.FunctionDesignator2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionDesignator2(DB2zSQLParser.FunctionDesignator2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterAlterIndexStatement(DB2zSQLParser.AlterIndexStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -267,13 +375,13 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx) { }
+	@Override public void enterApplicationCompatibilityPhrase(DB2zSQLParser.ApplicationCompatibilityPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx) { }
+	@Override public void exitApplicationCompatibilityPhrase(DB2zSQLParser.ApplicationCompatibilityPhraseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -3399,6 +3507,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterNullInputOption3(DB2zSQLParser.NullInputOption3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNullInputOption3(DB2zSQLParser.NullInputOption3Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNullInputOption4(DB2zSQLParser.NullInputOption4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNullInputOption4(DB2zSQLParser.NullInputOption4Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterDebugOption(DB2zSQLParser.DebugOptionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -3694,6 +3826,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitSpecialRegistersOption(DB2zSQLParser.SpecialRegistersOptionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterSpecialRegistersOption2(DB2zSQLParser.SpecialRegistersOption2Context ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitSpecialRegistersOption2(DB2zSQLParser.SpecialRegistersOption2Context ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -4539,13 +4683,49 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFunctionOptionList(DB2zSQLParser.FunctionOptionListContext ctx) { }
+	@Override public void enterFunctionExternalOptionList(DB2zSQLParser.FunctionExternalOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitFunctionOptionList(DB2zSQLParser.FunctionOptionListContext ctx) { }
+	@Override public void exitFunctionExternalOptionList(DB2zSQLParser.FunctionExternalOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionCompiledSqlScalarOptionList(DB2zSQLParser.FunctionCompiledSqlScalarOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionCompiledSqlScalarOptionList(DB2zSQLParser.FunctionCompiledSqlScalarOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionInlineSqlScalarOptionList(DB2zSQLParser.FunctionInlineSqlScalarOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionInlineSqlScalarOptionList(DB2zSQLParser.FunctionInlineSqlScalarOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFunctionSqlTableOptionList(DB2zSQLParser.FunctionSqlTableOptionListContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFunctionSqlTableOptionList(DB2zSQLParser.FunctionSqlTableOptionListContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

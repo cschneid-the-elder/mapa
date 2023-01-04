@@ -1,3 +1,16 @@
+--2023-01-04--------------------------------------------------------------------
+The alterFunction* rules were a mess.  They've been cleaned up in the process
+of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION.
+
+Speaking of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION,
+SQL/PL toleration has been added to CREATE FUNCTION and ALTER FUNCTION.  The
+CREATE_OR_ALTER_PROCEDURE_MODE lexer mode has been repurposed to tolerate
+SQL/PL in CREATE or ALTER of FUNCTIONs or PROCEDUREs.  Triggers may be next.
+
+Changed hard-coded debugOption and nullInputOption2 in procedureOptionList
+to use their parser rule equivalents.  Hopefully this isn't too painful for 
+anyone.
+
 --2023-01-03--------------------------------------------------------------------
 Changed...
 

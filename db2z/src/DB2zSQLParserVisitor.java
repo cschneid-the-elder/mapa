@@ -94,6 +94,60 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionExternalStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionCompiledSqlScalarStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterWhichFunction1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterWhichFunction1(DB2zSQLParser.AlterWhichFunction1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterWhichFunction2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterWhichFunction2(DB2zSQLParser.AlterWhichFunction2Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionCompiledSqlScalarRoutineSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCompiledSqlScalarRoutineSpecification(DB2zSQLParser.FunctionCompiledSqlScalarRoutineSpecificationContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionInlineSqlScalarStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionSqlTableStatement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionDesignator1}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDesignator1(DB2zSQLParser.FunctionDesignator1Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionDesignator2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionDesignator2(DB2zSQLParser.FunctionDesignator2Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterIndexStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -136,11 +190,11 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterWhichProcedureSQLPL2(DB2zSQLParser.AlterWhichProcedureSQLPL2Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#alterProcedureSQLPLApplicationCompatibility}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#applicationCompatibilityPhrase}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterProcedureSQLPLApplicationCompatibility(DB2zSQLParser.AlterProcedureSQLPLApplicationCompatibilityContext ctx);
+	T visitApplicationCompatibilityPhrase(DB2zSQLParser.ApplicationCompatibilityPhraseContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterSequenceStatement}.
 	 * @param ctx the parse tree
@@ -1702,6 +1756,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitNullInputOption2(DB2zSQLParser.NullInputOption2Context ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nullInputOption3}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNullInputOption3(DB2zSQLParser.NullInputOption3Context ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#nullInputOption4}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitNullInputOption4(DB2zSQLParser.NullInputOption4Context ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#debugOption}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -1851,6 +1917,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitSpecialRegistersOption(DB2zSQLParser.SpecialRegistersOptionContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#specialRegistersOption2}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSpecialRegistersOption2(DB2zSQLParser.SpecialRegistersOption2Context ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#dispatchOption}.
 	 * @param ctx the parse tree
@@ -2272,11 +2344,29 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitSourceDataType(DB2zSQLParser.SourceDataTypeContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#functionOptionList}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionExternalOptionList}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitFunctionOptionList(DB2zSQLParser.FunctionOptionListContext ctx);
+	T visitFunctionExternalOptionList(DB2zSQLParser.FunctionExternalOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionCompiledSqlScalarOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionCompiledSqlScalarOptionList(DB2zSQLParser.FunctionCompiledSqlScalarOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionInlineSqlScalarOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionInlineSqlScalarOptionList(DB2zSQLParser.FunctionInlineSqlScalarOptionListContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#functionSqlTableOptionList}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFunctionSqlTableOptionList(DB2zSQLParser.FunctionSqlTableOptionListContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#procedureOptionList}.
 	 * @param ctx the parse tree

@@ -212,11 +212,82 @@ alterDatabaseStatement
 
 alterFunctionStatement
 	: (
+	alterFunctionExternalStatement
+	| alterFunctionCompiledSqlScalarStatement
+	| alterFunctionInlineSqlScalarStatement
+	| alterFunctionSqlTableStatement
+	)
+	;
+
+alterFunctionExternalStatement
+	: (
 	ALTER 
-		((FUNCTION functionName (LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?) 
-		| (SPECIFIC FUNCTION specificName))
-	RESTRICT?
-	functionOptionList+
+	functionDesignator1
+	functionExternalOptionList+
+	)
+	;
+
+alterFunctionCompiledSqlScalarStatement
+	: (
+	ALTER 
+	functionDesignator2
+		((ALTER? alterWhichFunction1? functionCompiledSqlScalarOptionList+)
+		| (REPLACE alterWhichFunction2? 
+			functionCompiledSqlScalarRoutineSpecification)
+		| (ADD versionOption
+			functionCompiledSqlScalarRoutineSpecification)
+		| (ACTIVATE versionOption)
+		| (REGENERATE alterWhichFunction2 applicationCompatibilityPhrase?)
+		| (DROP versionOption)
+		)
+	)
+	;
+
+alterWhichFunction1
+	: ((ACTIVE VERSION) | (ALL VERSIONS) | versionOption)
+	;
+
+alterWhichFunction2
+	: ((ACTIVE VERSION) | versionOption)
+	;
+
+functionCompiledSqlScalarRoutineSpecification
+	: (
+	LPAREN (parameterDeclaration2 (COMMA parameterDeclaration2)*)? RPAREN
+	RETURNS functionDataType
+	functionCompiledSqlScalarOptionList*
+	sqlRoutineBody
+	)
+	;
+
+alterFunctionInlineSqlScalarStatement
+	: (
+	ALTER 
+	functionDesignator2
+	functionInlineSqlScalarOptionList+
+	)
+	;
+
+alterFunctionSqlTableStatement
+	: (
+	ALTER 
+	functionDesignator2
+	RESTRICT
+	functionSqlTableOptionList+
+	)
+	;
+
+functionDesignator1
+	: (
+	((FUNCTION functionName (LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?) 
+	| (SPECIFIC FUNCTION specificName))
+	)
+	;
+
+functionDesignator2
+	: (
+	((FUNCTION functionName (LPAREN functionDataType (COMMA functionDataType)* RPAREN)?) 
+	| (SPECIFIC FUNCTION specificName))
 	)
 	;
 
@@ -259,7 +330,7 @@ alterProcedureSQLPLStatement
 			procedureSQLPLOptionList*
 			sqlRoutineBody)
 		| (ACTIVATE versionOption)
-		| (REGENERATE alterWhichProcedureSQLPL2 alterProcedureSQLPLApplicationCompatibility?)
+		| (REGENERATE alterWhichProcedureSQLPL2 applicationCompatibilityPhrase?)
 		| (DROP versionOption)
 		)
 	)
@@ -273,7 +344,7 @@ alterWhichProcedureSQLPL2
 	: ((ACTIVE VERSION) | versionOption)
 	;
 
-alterProcedureSQLPLApplicationCompatibility
+applicationCompatibilityPhrase
 	: (USING APPLICATION COMPATIBILITY CP_APPLCOMPAT_LEVEL)
 	;
 alterSequenceStatement
@@ -2335,6 +2406,14 @@ nullInputOption2
 	: ((CALLED ON NULL INPUT) | (NULL CALL))
 	;
 
+nullInputOption3
+	: ((RETURNS NULL ON NULL INPUT) | (CALLED ON NULL INPUT))
+	;
+
+nullInputOption4
+	: (CALLED ON NULL INPUT)
+	;
+
 debugOption
 	: ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
 	;
@@ -2435,6 +2514,10 @@ specialRegistersOption
 	: ((INHERIT | DEFAULT) SPECIAL REGISTERS)
 	;
 
+specialRegistersOption2
+	: (INHERIT SPECIAL REGISTERS)
+	;
+
 dispatchOption
 	: (STATIC DISPATCH)
 	;
@@ -2524,7 +2607,6 @@ createFunctionStatementInlineSqlScalarOptions
 	| securedOption
 	| specificNameOption1
 	| parameterOption2
-	| dispatchOption
 	)
 	;
 
@@ -3083,13 +3165,13 @@ sourceDataType
 	: procedureBuiltinType
 	;
 
-functionOptionList
+functionExternalOptionList
 	: (
 	externalNameOption2
 	| languageOption4
 	| parameterStyleOption2
 	| deterministicOption
-	| nullInputOption1
+	| nullInputOption3
 	| sqlDataOption3
 	| externalActionOption
 	| packagePathOption
@@ -3109,11 +3191,83 @@ functionOptionList
 	| specialRegistersOption
 	| dispatchOption
 	| securedOption
-	| SPECIFIC
-	| (PARAMETER CCSID)
 	)
 	;
 
+functionCompiledSqlScalarOptionList
+	: (
+	deterministicOption
+	| externalActionOption
+	| sqlDataOption4
+	| nullInputOption3
+	| dispatchOption
+	| parallelOption2
+	| debugOption
+	| schemaQualifierOption
+	| packageOwnerOption
+	| asuTimeOption
+	| specialRegistersOption
+	| wlmEnvironmentOption3
+	| currentDataOption
+	| degreeOption
+	| concurrentAccessOption
+	| dynamicRulesOption
+	| applicationEncodingOption
+	| explainOption
+	| immediateWriteOption
+	| isolationLevelOption
+	| opthintOption
+	| sqlPathOption
+	| queryAccelerationOption
+	| getAccelArchiveOption
+	| accelerationOption
+	| acceleratorOption
+	| releaseAtOption
+	| reoptOption
+	| validateOption
+	| roundingOption
+	| dateFormatOption
+	| decimalOption
+	| forUpdateOption
+	| timeFormatOption
+	| securedOption
+	| businessTimeSensitiveOption
+	| systemTimeSensitiveOption
+	| archiveSensitiveOption
+	| applcompatOption
+	| concentrateStatementsOption
+	)
+	;
+
+functionInlineSqlScalarOptionList
+	: (
+	deterministicOption
+	| externalActionOption
+	| sqlDataOption1
+	| dispatchOption
+	| nullInputOption4
+	| securedOption
+	)
+	;
+
+functionSqlTableOptionList
+	: (
+	deterministicOption
+	| externalActionOption
+	| sqlDataOption1
+	| nullInputOption4
+	| specialRegistersOption2
+	| dispatchOption
+	| cardinalityOption
+	| securedOption
+	)
+	;
+
+/*
+Changed hard-coded debugOption and nullInputOption2
+to use their parser rule equivalents.  Hopefully this
+isn't too painful for anyone.
+*/
 procedureOptionList
 	: (
 	dynamicResultSetOption
@@ -3134,10 +3288,9 @@ procedureOptionList
 	| runOptionsOption
 	| commitOnReturnOption
 	| specialRegistersOption
-	| (CALLED ON NULL INPUT)
-	| (NULL CALL)
+	| nullInputOption2
 	| stopAfterFailureOption
-	| ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
+	| debugOption
 	)
 	;
 

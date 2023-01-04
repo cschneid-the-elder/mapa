@@ -657,7 +657,7 @@ FUNCTION
 	{
 		if (createOrAlterSeen) {
 			createOrAlterSeen = false;
-			pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	;
@@ -1059,7 +1059,7 @@ PROCEDURE
 	{
 		if (createOrAlterSeen) {
 			createOrAlterSeen = false;
-			pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	;
@@ -4335,10 +4335,10 @@ SQLIDENTIFIER
 
 /*
 Lexing enters this mode when a CREATE or ALTER PROCEDURE
-statement is encountered.  There are two types of
+or FUNCTION statement is encountered.  There are two types of
 stored procedure, native SQL and external.  The
 former is written in SQL/PL and is embedded in 
-the CREATE or ALTER PROCEDURE statement.  By entering this
+the CREATE or ALTER PROCEDURE or FUNCTION statement.  By entering this
 mode we can detect such a statement and gracefully
 ignore the SQL/PL.
 
@@ -4351,7 +4351,7 @@ via the LANGUAGE option, which may be last - i.e.
 we may not know which type of statement is being
 processed until we're almost done with it.
 */
-mode CREATE_OR_ALTER_PROCEDURE_MODE;
+mode CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE;
 
 CP_SQLCOMMENT
 	: SQLCOMMENT
@@ -4448,7 +4448,7 @@ CP_ASSEMBLE
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(ASSEMBLE)
@@ -4459,7 +4459,7 @@ CP_C_
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(C_)
@@ -4470,7 +4470,7 @@ CP_COBOL
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(COBOL)
@@ -4481,7 +4481,7 @@ CP_JAVA
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(JAVA)
@@ -4492,7 +4492,7 @@ CP_PLI
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(PLI)
@@ -4503,7 +4503,7 @@ CP_REXX
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(REXX)
@@ -5639,7 +5639,7 @@ CP_UNIDENTIFIED
 	: .
 	;
 
-mode CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE;
+mode CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE;
 
 CEP_SQLCOMMENT
 	: SQLCOMMENT
@@ -5719,6 +5719,31 @@ CEP_SEMICOLON
 	}
 	;
 
+CEP_ASSEMBLE
+	: ASSEMBLE
+	->type(ASSEMBLE)
+	;
+
+CEP_C_
+	: C_
+	->type(C_)
+	;
+
+CEP_COBOL
+	: COBOL
+	->type(COBOL)
+	;
+
+CEP_PLI
+	: PLI
+	->type(PLI)
+	;
+
+CEP_REXX
+	: REXX
+	->type(REXX)
+	;
+
 CEP_ACTION
 	: ACTION
 	->type(ACTION)
@@ -5777,6 +5802,11 @@ CEP_CALL
 CEP_CALLED
 	: C A L L E D 
 	->type(CALLED)
+	;
+
+CEP_CARDINALITY
+	: CARDINALITY
+	->type(CARDINALITY)
 	;
 
 CEP_CCSID
@@ -5894,6 +5924,11 @@ CEP_DISALLOW
 	->type(DISALLOW)
 	;
 
+CEP_DISPATCH
+	: DISPATCH
+	->type(DISPATCH)
+	;
+
 CEP_DOUBLE
 	: D O U B L E 
 	->type(DOUBLE)
@@ -5932,6 +5967,11 @@ CEP_FAILURES
 CEP_FENCED
 	: F E N C E D 
 	->type(FENCED)
+	;
+
+CEP_FINAL
+	: FINAL
+	->type(FINAL)
 	;
 
 CEP_FLOAT
@@ -5987,6 +6027,11 @@ CEP_INTEGER
 CEP_JAVA
 	: JAVA
 	->type(JAVA)
+	;
+
+CEP_LANGUAGE
+	: LANGUAGE
+	->type(LANGUAGE)
 	;
 
 CEP_LARGE
@@ -6094,6 +6139,11 @@ CEP_PACKAGE
 	->type(PACKAGE)
 	;
 
+CEP_PARALLEL
+	: PARALLEL
+	->type(PARALLEL)
+	;
+
 CEP_PARAMETER
 	: P A R A M E T E R 
 	->type(PARAMETER)
@@ -6144,6 +6194,11 @@ CEP_RETURN
 	->type(RETURN)
 	;
 
+CEP_RETURNS
+	: RETURNS
+	->type(RETURNS)
+	;
+
 CEP_ROWID
 	: R O W I D 
 	->type(ROWID)
@@ -6157,6 +6212,16 @@ CEP_RUN
 CEP_SBCS
 	: S B C S 
 	->type(SBCS)
+	;
+
+CEP_SCRATCHPAD
+	: SCRATCHPAD
+	->type(SCRATCHPAD)
+	;
+
+CEP_SECURED
+	: SECURED
+	->type(SECURED)
 	;
 
 CEP_SECURITY
@@ -6197,6 +6262,11 @@ CEP_SQL
 CEP_STANDARD
 	: STANDARD
 	->type(STANDARD)
+	;
+
+CEP_STATIC
+	: STATIC
+	->type(STATIC)
 	;
 
 CEP_STAY
