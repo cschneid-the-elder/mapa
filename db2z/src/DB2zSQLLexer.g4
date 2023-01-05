@@ -5205,6 +5205,11 @@ CP_RESOLUTION
 	->type(RESOLUTION)
 	;
 
+CP_RESTRICT
+	: RESTRICT
+	->type(RESTRICT)
+	;
+
 CP_RESULT
 	: R E S U L T 
 	->type(RESULT)

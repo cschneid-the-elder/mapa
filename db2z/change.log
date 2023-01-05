@@ -11,6 +11,10 @@ Changed hard-coded debugOption and nullInputOption2 in procedureOptionList
 to use their parser rule equivalents.  Hopefully this isn't too painful for 
 anyone.
 
+Corrected procedureBuiltinType and functionBuiltinType making 
+(integerInParens | (LPAREN RPAREN)) optional for DECIMAL, DEC, NUMERIC, and
+FLOAT as documented.
+
 --2023-01-03--------------------------------------------------------------------
 Changed...
 

@@ -3068,16 +3068,16 @@ functionBuiltInType
 	| INTEGER
 	| INT
 	| BIGINT
-	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
-	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
-	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN))?)
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN))?)
+	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
 	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN)))
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
@@ -3093,9 +3093,9 @@ procedureBuiltinType
 	| INTEGER
 	| INT
 	| BIGINT
-	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
-	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
-	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN))?)
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN))?)
+	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
