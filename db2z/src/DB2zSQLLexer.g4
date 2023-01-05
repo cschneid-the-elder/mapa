@@ -4930,6 +4930,11 @@ CP_FROM
 	->type(FROM)
 	;
 
+CP_GENERIC
+	: GENERIC
+	->type(GENERIC)
+	;
+
 CP_GET_ACCEL_ARCHIVE
 	: G E T '_' A C C E L '_' A R C H I V E 
 	->type(GET_ACCEL_ARCHIVE)

@@ -346,6 +346,18 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateFunctionStatementSourced(DB2zSQLParser.CreateFunctionStatementSourcedContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSourcedReturnsPhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateFunctionStatementSourcedReturnsPhrase(DB2zSQLParser.CreateFunctionStatementSourcedReturnsPhraseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSourcedSourcePhrase}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateFunctionStatementSourcedSourcePhrase(DB2zSQLParser.CreateFunctionStatementSourcedSourcePhraseContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementInlineSqlScalar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

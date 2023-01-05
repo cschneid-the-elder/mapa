@@ -567,6 +567,26 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateFunctionStatementSourced(DB2zSQLParser.CreateFunctionStatementSourcedContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSourcedReturnsPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateFunctionStatementSourcedReturnsPhrase(DB2zSQLParser.CreateFunctionStatementSourcedReturnsPhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSourcedReturnsPhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateFunctionStatementSourcedReturnsPhrase(DB2zSQLParser.CreateFunctionStatementSourcedReturnsPhraseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSourcedSourcePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void enterCreateFunctionStatementSourcedSourcePhrase(DB2zSQLParser.CreateFunctionStatementSourcedSourcePhraseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSourcedSourcePhrase}.
+	 * @param ctx the parse tree
+	 */
+	void exitCreateFunctionStatementSourcedSourcePhrase(DB2zSQLParser.CreateFunctionStatementSourcedSourcePhraseContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionStatementInlineSqlScalar}.
 	 * @param ctx the parse tree
 	 */

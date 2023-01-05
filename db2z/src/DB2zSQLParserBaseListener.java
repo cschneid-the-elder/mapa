@@ -687,6 +687,30 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateFunctionStatementSourcedReturnsPhrase(DB2zSQLParser.CreateFunctionStatementSourcedReturnsPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionStatementSourcedReturnsPhrase(DB2zSQLParser.CreateFunctionStatementSourcedReturnsPhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterCreateFunctionStatementSourcedSourcePhrase(DB2zSQLParser.CreateFunctionStatementSourcedSourcePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateFunctionStatementSourcedSourcePhrase(DB2zSQLParser.CreateFunctionStatementSourcedSourcePhraseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx) { }
 	/**
 	 * {@inheritDoc}

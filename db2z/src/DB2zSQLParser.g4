@@ -539,7 +539,21 @@ createFunctionStatementSourced
 	: (
 	CREATE FUNCTION functionName
 	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
-	createFunctionStatementSourcedOptions+
+	createFunctionStatementSourcedReturnsPhrase
+	createFunctionStatementSourcedOptions*
+	createFunctionStatementSourcedSourcePhrase
+	)
+	;
+
+createFunctionStatementSourcedReturnsPhrase
+	: (RETURNS functionDataType (AS LOCATOR)?)
+	;
+
+createFunctionStatementSourcedSourcePhrase
+	: (
+	SOURCE 
+		((functionName LPAREN parameterDeclaration1 (COMMA parameterDeclaration1)* RPAREN)
+		| specificNameOption2)
 	)
 	;
 
@@ -2584,12 +2598,8 @@ createFunctionStatementExternalTableOptions
 
 createFunctionStatementSourcedOptions
 	: (
-	(RETURNS functionDataType (AS LOCATOR)?)
-	| specificNameOption2
+	specificNameOption2
 	| parameterOption2
-	| (SOURCE 
-		((functionName LPAREN parameterType (COMMA parameterType)* RPAREN)
-		| specificNameOption2))
 	)
 	;
 

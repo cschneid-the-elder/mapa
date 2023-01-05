@@ -408,6 +408,20 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
+	@Override public T visitCreateFunctionStatementSourcedReturnsPhrase(DB2zSQLParser.CreateFunctionStatementSourcedReturnsPhraseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitCreateFunctionStatementSourcedSourcePhrase(DB2zSQLParser.CreateFunctionStatementSourcedSourcePhraseContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
 	@Override public T visitCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
