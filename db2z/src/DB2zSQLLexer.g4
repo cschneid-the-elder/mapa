@@ -4892,7 +4892,6 @@ CP_EUR
 
 CP_EXPLAIN
 	: E X P L A I N 
-	->type(EXPLAIN)
 	;
 
 CP_EXTERNAL
@@ -5298,6 +5297,11 @@ CP_SETS
 CP_SMALLINT
 	: S M A L L I N T 
 	->type(SMALLINT)
+	;
+
+CP_SOURCE
+	: SOURCE
+	->type(SOURCE)
 	;
 
 CP_SPECIAL

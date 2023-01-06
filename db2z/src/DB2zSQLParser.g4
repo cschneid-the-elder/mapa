@@ -2626,7 +2626,7 @@ createFunctionStatementInlineSqlScalarOptions
 
 compiledSqlScalarFunctionDefinition
 	: (
-	RETURNS functionDataType versionOption
+	RETURNS functionDataType versionOption?
 	createFunctionStatementCompiledSqlScalarOptions+
 	sqlRoutineBody
 	)
@@ -3417,7 +3417,7 @@ immediateWriteOption
 	;
 
 explainOption
-	: ((WITH | WITHOUT) EXPLAIN)
+	: ((WITH | WITHOUT) CP_EXPLAIN)
 	;
 
 reoptOption
