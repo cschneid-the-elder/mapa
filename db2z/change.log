@@ -1,4 +1,4 @@
---2023-01-04--------------------------------------------------------------------
+--2023-01-06--------------------------------------------------------------------
 The alterFunction* rules were a mess.  They've been cleaned up in the process
 of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION.
 
@@ -11,12 +11,12 @@ Changed hard-coded debugOption and nullInputOption2 in procedureOptionList
 to use their parser rule equivalents.  Hopefully this isn't too painful for 
 anyone.
 
-Corrected procedureBuiltinType and functionBuiltinType making 
+Corrected builtInType, procedureBuiltinType and functionBuiltinType making 
 (integerInParens | (LPAREN RPAREN)) optional for DECIMAL, DEC, NUMERIC, and
 FLOAT as documented.
 
 Fixed CREATE AUXILIARY TABLE changing databaseName? to (databaseName DOT)? prior
-to tablespaceName.
+to tablespaceName.  Martijn Rutte noticed the bug.
 
 --2023-01-03--------------------------------------------------------------------
 Changed...

@@ -4197,9 +4197,9 @@ builtInType
 	| INTEGER
 	| INT
 	| BIGINT
-	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
-	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
-	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN))?)
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN))?)
+	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (forDataQualifier | ccsidClause2)?)
