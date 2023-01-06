@@ -8852,11 +8852,11 @@ public class DB2zSQLParser extends Parser {
 
 	public static class CreateFunctionStatementExternalScalarReturnsPhraseContext extends ParserRuleContext {
 		public TerminalNode RETURNS() { return getToken(DB2zSQLParser.RETURNS, 0); }
-		public List<DataTypeContext> dataType() {
-			return getRuleContexts(DataTypeContext.class);
+		public List<FunctionDataTypeContext> functionDataType() {
+			return getRuleContexts(FunctionDataTypeContext.class);
 		}
-		public DataTypeContext dataType(int i) {
-			return getRuleContext(DataTypeContext.class,i);
+		public FunctionDataTypeContext functionDataType(int i) {
+			return getRuleContext(FunctionDataTypeContext.class,i);
 		}
 		public TerminalNode CAST() { return getToken(DB2zSQLParser.CAST, 0); }
 		public TerminalNode FROM() { return getToken(DB2zSQLParser.FROM, 0); }
@@ -8898,7 +8898,7 @@ public class DB2zSQLParser extends Parser {
 				{
 				{
 				setState(2373);
-				dataType();
+				functionDataType();
 				setState(2376);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -8918,13 +8918,13 @@ public class DB2zSQLParser extends Parser {
 				{
 				{
 				setState(2378);
-				dataType();
+				functionDataType();
 				setState(2379);
 				match(CAST);
 				setState(2380);
 				match(FROM);
 				setState(2381);
-				dataType();
+				functionDataType();
 				setState(2384);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
@@ -119739,10 +119739,10 @@ public class DB2zSQLParser extends Parser {
 		"\3\2\2\2\u093d\u0935\3\2\2\2\u093d\u093e\3\2\2\2\u093e\u093f\3\2\2\2\u093f"+
 		"\u0940\7\4\2\2\u0940\u0942\5h\65\2\u0941\u0943\5\u022e\u0118\2\u0942\u0941"+
 		"\3\2\2\2\u0943\u0944\3\2\2\2\u0944\u0942\3\2\2\2\u0944\u0945\3\2\2\2\u0945"+
-		"g\3\2\2\2\u0946\u0954\7\u0100\2\2\u0947\u094a\5\u03f8\u01fd\2\u0948\u0949"+
+		"g\3\2\2\2\u0946\u0954\7\u0100\2\2\u0947\u094a\5\u0304\u0183\2\u0948\u0949"+
 		"\7\62\2\2\u0949\u094b\7\u00b7\2\2\u094a\u0948\3\2\2\2\u094a\u094b\3\2"+
-		"\2\2\u094b\u0955\3\2\2\2\u094c\u094d\5\u03f8\u01fd\2\u094d\u094e\7D\2"+
-		"\2\u094e\u094f\7\u008a\2\2\u094f\u0952\5\u03f8\u01fd\2\u0950\u0951\7\62"+
+		"\2\2\u094b\u0955\3\2\2\2\u094c\u094d\5\u0304\u0183\2\u094d\u094e\7D\2"+
+		"\2\u094e\u094f\7\u008a\2\2\u094f\u0952\5\u0304\u0183\2\u0950\u0951\7\62"+
 		"\2\2\u0951\u0953\7\u00b7\2\2\u0952\u0950\3\2\2\2\u0952\u0953\3\2\2\2\u0953"+
 		"\u0955\3\2\2\2\u0954\u0947\3\2\2\2\u0954\u094c\3\2\2\2\u0955i\3\2\2\2"+
 		"\u0956\u0957\7Y\2\2\u0957\u0958\7\u008c\2\2\u0958\u0959\5\u05dc\u02ef"+

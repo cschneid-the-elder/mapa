@@ -507,8 +507,8 @@ createFunctionStatementExternalScalar
 createFunctionStatementExternalScalarReturnsPhrase
 	: (
 	RETURNS 
-		((dataType (AS LOCATOR)?)
-		| (dataType CAST FROM dataType (AS LOCATOR)?))
+		((functionDataType (AS LOCATOR)?)
+		| (functionDataType CAST FROM functionDataType (AS LOCATOR)?))
 	)
 	;
 
