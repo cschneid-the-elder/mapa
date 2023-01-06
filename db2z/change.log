@@ -5,7 +5,7 @@ of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION.
 Speaking of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION,
 SQL/PL toleration has been added to CREATE FUNCTION and ALTER FUNCTION.  The
 CREATE_OR_ALTER_PROCEDURE_MODE lexer mode has been repurposed to tolerate
-SQL/PL in CREATE or ALTER of FUNCTIONs or PROCEDUREs.  Triggers may be next.
+SQL/PL in CREATE or ALTER of FUNCTIONs or PROCEDUREs.
 
 Changed hard-coded debugOption and nullInputOption2 in procedureOptionList
 to use their parser rule equivalents.  Hopefully this isn't too painful for 
@@ -14,6 +14,9 @@ anyone.
 Corrected procedureBuiltinType and functionBuiltinType making 
 (integerInParens | (LPAREN RPAREN)) optional for DECIMAL, DEC, NUMERIC, and
 FLOAT as documented.
+
+Fixed CREATE AUXILIARY TABLE changing databaseName? to (databaseName DOT)? prior
+to tablespaceName.
 
 --2023-01-03--------------------------------------------------------------------
 Changed...

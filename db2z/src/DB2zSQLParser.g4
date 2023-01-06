@@ -473,7 +473,7 @@ createAliasStatement
 
 createAuxiliaryTableStatement
 	: (
-	CREATE (AUX | AUXILIARY) TABLE auxTableName IN databaseName? tablespaceName
+	CREATE (AUX | AUXILIARY) TABLE auxTableName IN (databaseName DOT)? tablespaceName
 	STORES tableName appendClause? COLUMN columnName PART INTEGERLITERAL
 	)
 	;
