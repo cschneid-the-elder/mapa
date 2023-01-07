@@ -94,17 +94,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionExternalStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementExternal}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx);
+	T visitAlterFunctionStatementExternal(DB2zSQLParser.AlterFunctionStatementExternalContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionCompiledSqlScalarStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementCompiledSqlScalar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx);
+	T visitAlterFunctionStatementCompiledSqlScalar(DB2zSQLParser.AlterFunctionStatementCompiledSqlScalarContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#alterWhichFunction1}.
 	 * @param ctx the parse tree
@@ -124,17 +124,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionCompiledSqlScalarRoutineSpecification(DB2zSQLParser.FunctionCompiledSqlScalarRoutineSpecificationContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionInlineSqlScalarStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementInlineSqlScalar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx);
+	T visitAlterFunctionStatementInlineSqlScalar(DB2zSQLParser.AlterFunctionStatementInlineSqlScalarContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionSqlTableStatement}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementSqlTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx);
+	T visitAlterFunctionStatementSqlTable(DB2zSQLParser.AlterFunctionStatementSqlTableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#functionReturnsClause}.
 	 * @param ctx the parse tree
@@ -364,17 +364,17 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionCompiledSqlScalar}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementCompiledSqlScalar}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCreateFunctionCompiledSqlScalar(DB2zSQLParser.CreateFunctionCompiledSqlScalarContext ctx);
+	T visitCreateFunctionStatementCompiledSqlScalar(DB2zSQLParser.CreateFunctionStatementCompiledSqlScalarContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionSqlTable}.
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSqlTable}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitCreateFunctionSqlTable(DB2zSQLParser.CreateFunctionSqlTableContext ctx);
+	T visitCreateFunctionStatementSqlTable(DB2zSQLParser.CreateFunctionStatementSqlTableContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableStatement}.
 	 * @param ctx the parse tree

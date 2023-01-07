@@ -114,14 +114,14 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterFunctionStatementExternal(DB2zSQLParser.AlterFunctionStatementExternalContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterFunctionStatementCompiledSqlScalar(DB2zSQLParser.AlterFunctionStatementCompiledSqlScalarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -149,14 +149,14 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterFunctionStatementInlineSqlScalar(DB2zSQLParser.AlterFunctionStatementInlineSqlScalarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx) { return visitChildren(ctx); }
+	@Override public T visitAlterFunctionStatementSqlTable(DB2zSQLParser.AlterFunctionStatementSqlTableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -429,14 +429,14 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCreateFunctionCompiledSqlScalar(DB2zSQLParser.CreateFunctionCompiledSqlScalarContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCreateFunctionStatementCompiledSqlScalar(DB2zSQLParser.CreateFunctionStatementCompiledSqlScalarContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitCreateFunctionSqlTable(DB2zSQLParser.CreateFunctionSqlTableContext ctx) { return visitChildren(ctx); }
+	@Override public T visitCreateFunctionStatementSqlTable(DB2zSQLParser.CreateFunctionStatementSqlTableContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

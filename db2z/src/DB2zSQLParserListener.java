@@ -147,25 +147,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitAlterFunctionStatement(DB2zSQLParser.AlterFunctionStatementContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionExternalStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementExternal}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx);
+	void enterAlterFunctionStatementExternal(DB2zSQLParser.AlterFunctionStatementExternalContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionExternalStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementExternal}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterFunctionExternalStatement(DB2zSQLParser.AlterFunctionExternalStatementContext ctx);
+	void exitAlterFunctionStatementExternal(DB2zSQLParser.AlterFunctionStatementExternalContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionCompiledSqlScalarStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementCompiledSqlScalar}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx);
+	void enterAlterFunctionStatementCompiledSqlScalar(DB2zSQLParser.AlterFunctionStatementCompiledSqlScalarContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionCompiledSqlScalarStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementCompiledSqlScalar}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterFunctionCompiledSqlScalarStatement(DB2zSQLParser.AlterFunctionCompiledSqlScalarStatementContext ctx);
+	void exitAlterFunctionStatementCompiledSqlScalar(DB2zSQLParser.AlterFunctionStatementCompiledSqlScalarContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#alterWhichFunction1}.
 	 * @param ctx the parse tree
@@ -197,25 +197,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitFunctionCompiledSqlScalarRoutineSpecification(DB2zSQLParser.FunctionCompiledSqlScalarRoutineSpecificationContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionInlineSqlScalarStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementInlineSqlScalar}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx);
+	void enterAlterFunctionStatementInlineSqlScalar(DB2zSQLParser.AlterFunctionStatementInlineSqlScalarContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionInlineSqlScalarStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementInlineSqlScalar}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterFunctionInlineSqlScalarStatement(DB2zSQLParser.AlterFunctionInlineSqlScalarStatementContext ctx);
+	void exitAlterFunctionStatementInlineSqlScalar(DB2zSQLParser.AlterFunctionStatementInlineSqlScalarContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionSqlTableStatement}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementSqlTable}.
 	 * @param ctx the parse tree
 	 */
-	void enterAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx);
+	void enterAlterFunctionStatementSqlTable(DB2zSQLParser.AlterFunctionStatementSqlTableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionSqlTableStatement}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#alterFunctionStatementSqlTable}.
 	 * @param ctx the parse tree
 	 */
-	void exitAlterFunctionSqlTableStatement(DB2zSQLParser.AlterFunctionSqlTableStatementContext ctx);
+	void exitAlterFunctionStatementSqlTable(DB2zSQLParser.AlterFunctionStatementSqlTableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#functionReturnsClause}.
 	 * @param ctx the parse tree
@@ -597,25 +597,25 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitCreateFunctionStatementInlineSqlScalar(DB2zSQLParser.CreateFunctionStatementInlineSqlScalarContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionCompiledSqlScalar}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionStatementCompiledSqlScalar}.
 	 * @param ctx the parse tree
 	 */
-	void enterCreateFunctionCompiledSqlScalar(DB2zSQLParser.CreateFunctionCompiledSqlScalarContext ctx);
+	void enterCreateFunctionStatementCompiledSqlScalar(DB2zSQLParser.CreateFunctionStatementCompiledSqlScalarContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#createFunctionCompiledSqlScalar}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementCompiledSqlScalar}.
 	 * @param ctx the parse tree
 	 */
-	void exitCreateFunctionCompiledSqlScalar(DB2zSQLParser.CreateFunctionCompiledSqlScalarContext ctx);
+	void exitCreateFunctionStatementCompiledSqlScalar(DB2zSQLParser.CreateFunctionStatementCompiledSqlScalarContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionSqlTable}.
+	 * Enter a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSqlTable}.
 	 * @param ctx the parse tree
 	 */
-	void enterCreateFunctionSqlTable(DB2zSQLParser.CreateFunctionSqlTableContext ctx);
+	void enterCreateFunctionStatementSqlTable(DB2zSQLParser.CreateFunctionStatementSqlTableContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#createFunctionSqlTable}.
+	 * Exit a parse tree produced by {@link DB2zSQLParser#createFunctionStatementSqlTable}.
 	 * @param ctx the parse tree
 	 */
-	void exitCreateFunctionSqlTable(DB2zSQLParser.CreateFunctionSqlTableContext ctx);
+	void exitCreateFunctionStatementSqlTable(DB2zSQLParser.CreateFunctionStatementSqlTableContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#createGlobalTemporaryTableStatement}.
 	 * @param ctx the parse tree

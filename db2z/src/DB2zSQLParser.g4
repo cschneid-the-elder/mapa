@@ -210,14 +210,14 @@ alterDatabaseStatement
 
 alterFunctionStatement
 	: (
-	alterFunctionExternalStatement
-	| alterFunctionCompiledSqlScalarStatement
-	| alterFunctionInlineSqlScalarStatement
-	| alterFunctionSqlTableStatement
+	alterFunctionStatementExternal
+	| alterFunctionStatementCompiledSqlScalar
+	| alterFunctionStatementInlineSqlScalar
+	| alterFunctionStatementSqlTable
 	)
 	;
 
-alterFunctionExternalStatement
+alterFunctionStatementExternal
 	: (
 	ALTER 
 	functionDesignator1
@@ -225,7 +225,7 @@ alterFunctionExternalStatement
 	)
 	;
 
-alterFunctionCompiledSqlScalarStatement
+alterFunctionStatementCompiledSqlScalar
 	: (
 	ALTER 
 	functionDesignator2
@@ -258,7 +258,7 @@ functionCompiledSqlScalarRoutineSpecification
 	)
 	;
 
-alterFunctionInlineSqlScalarStatement
+alterFunctionStatementInlineSqlScalar
 	: (
 	ALTER 
 	functionDesignator2
@@ -266,7 +266,7 @@ alterFunctionInlineSqlScalarStatement
 	)
 	;
 
-alterFunctionSqlTableStatement
+alterFunctionStatementSqlTable
 	: (
 	ALTER 
 	functionDesignator2
@@ -488,8 +488,8 @@ createFunctionStatement
 	| createFunctionStatementExternalTable
 	| createFunctionStatementSourced
 	| createFunctionStatementInlineSqlScalar
-	| createFunctionCompiledSqlScalar
-	| createFunctionSqlTable
+	| createFunctionStatementCompiledSqlScalar
+	| createFunctionStatementSqlTable
 	)
 	;
 
@@ -563,7 +563,7 @@ createFunctionStatementInlineSqlScalar
 	)
 	;
 
-createFunctionCompiledSqlScalar
+createFunctionStatementCompiledSqlScalar
 	: (
 	CREATE FUNCTION functionName
 	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
@@ -571,7 +571,7 @@ createFunctionCompiledSqlScalar
 	)
 	;
 
-createFunctionSqlTable
+createFunctionStatementSqlTable
 	: (
 	CREATE FUNCTION functionName
 	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN

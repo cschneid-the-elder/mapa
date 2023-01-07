@@ -221,10 +221,10 @@ public class DB2zSQLParser extends Parser {
 		RULE_statementName = 4, RULE_descriptorName = 5, RULE_holdability = 6, 
 		RULE_returnability = 7, RULE_rowsetPositioning = 8, RULE_notNullPhrase = 9, 
 		RULE_allocateCursorStatement = 10, RULE_rsLocatorVariable = 11, RULE_alterDatabaseStatement = 12, 
-		RULE_alterFunctionStatement = 13, RULE_alterFunctionExternalStatement = 14, 
-		RULE_alterFunctionCompiledSqlScalarStatement = 15, RULE_alterWhichFunction1 = 16, 
+		RULE_alterFunctionStatement = 13, RULE_alterFunctionStatementExternal = 14, 
+		RULE_alterFunctionStatementCompiledSqlScalar = 15, RULE_alterWhichFunction1 = 16, 
 		RULE_alterWhichFunction2 = 17, RULE_functionCompiledSqlScalarRoutineSpecification = 18, 
-		RULE_alterFunctionInlineSqlScalarStatement = 19, RULE_alterFunctionSqlTableStatement = 20, 
+		RULE_alterFunctionStatementInlineSqlScalar = 19, RULE_alterFunctionStatementSqlTable = 20, 
 		RULE_functionReturnsClause = 21, RULE_functionDesignator1 = 22, RULE_functionDesignator2 = 23, 
 		RULE_alterIndexStatement = 24, RULE_alterMaskStatement = 25, RULE_alterPermissionStatement = 26, 
 		RULE_alterProcedureStatement = 27, RULE_alterProcedureSQLPLStatement = 28, 
@@ -241,7 +241,7 @@ public class DB2zSQLParser extends Parser {
 		RULE_createFunctionStatementExternalTableReturnsPhrase = 53, RULE_externalTableFunctionColumn = 54, 
 		RULE_createFunctionStatementSourced = 55, RULE_createFunctionStatementSourcedReturnsPhrase = 56, 
 		RULE_createFunctionStatementSourcedSourcePhrase = 57, RULE_createFunctionStatementInlineSqlScalar = 58, 
-		RULE_createFunctionCompiledSqlScalar = 59, RULE_createFunctionSqlTable = 60, 
+		RULE_createFunctionStatementCompiledSqlScalar = 59, RULE_createFunctionStatementSqlTable = 60, 
 		RULE_createGlobalTemporaryTableStatement = 61, RULE_createIndexStatement = 62, 
 		RULE_createLobTablespaceStatement = 63, RULE_createMaskStatement = 64, 
 		RULE_createPermissionStatement = 65, RULE_createProcedureSQLPLStatement = 66, 
@@ -523,9 +523,9 @@ public class DB2zSQLParser extends Parser {
 			"startRule", "sqlStatement", "query", "cursorName", "statementName", 
 			"descriptorName", "holdability", "returnability", "rowsetPositioning", 
 			"notNullPhrase", "allocateCursorStatement", "rsLocatorVariable", "alterDatabaseStatement", 
-			"alterFunctionStatement", "alterFunctionExternalStatement", "alterFunctionCompiledSqlScalarStatement", 
+			"alterFunctionStatement", "alterFunctionStatementExternal", "alterFunctionStatementCompiledSqlScalar", 
 			"alterWhichFunction1", "alterWhichFunction2", "functionCompiledSqlScalarRoutineSpecification", 
-			"alterFunctionInlineSqlScalarStatement", "alterFunctionSqlTableStatement", 
+			"alterFunctionStatementInlineSqlScalar", "alterFunctionStatementSqlTable", 
 			"functionReturnsClause", "functionDesignator1", "functionDesignator2", 
 			"alterIndexStatement", "alterMaskStatement", "alterPermissionStatement", 
 			"alterProcedureStatement", "alterProcedureSQLPLStatement", "alterWhichProcedureSQLPL1", 
@@ -539,10 +539,10 @@ public class DB2zSQLParser extends Parser {
 			"createFunctionStatementExternalTable", "createFunctionStatementExternalTableReturnsPhrase", 
 			"externalTableFunctionColumn", "createFunctionStatementSourced", "createFunctionStatementSourcedReturnsPhrase", 
 			"createFunctionStatementSourcedSourcePhrase", "createFunctionStatementInlineSqlScalar", 
-			"createFunctionCompiledSqlScalar", "createFunctionSqlTable", "createGlobalTemporaryTableStatement", 
-			"createIndexStatement", "createLobTablespaceStatement", "createMaskStatement", 
-			"createPermissionStatement", "createProcedureSQLPLStatement", "sqlRoutineBody", 
-			"obfuscatedStatementText", "probablySQLPL", "createProcedureStatement", 
+			"createFunctionStatementCompiledSqlScalar", "createFunctionStatementSqlTable", 
+			"createGlobalTemporaryTableStatement", "createIndexStatement", "createLobTablespaceStatement", 
+			"createMaskStatement", "createPermissionStatement", "createProcedureSQLPLStatement", 
+			"sqlRoutineBody", "obfuscatedStatementText", "probablySQLPL", "createProcedureStatement", 
 			"createRoleStatement", "createSequenceStatement", "createStogroupStatement", 
 			"createTableStatement", "createTablespaceStatement", "createTriggerStatement", 
 			"createTrustedContextStatement", "createTypeArrayStatement", "createTypeDistinctStatement", 
@@ -2747,17 +2747,17 @@ public class DB2zSQLParser extends Parser {
 	}
 
 	public static class AlterFunctionStatementContext extends ParserRuleContext {
-		public AlterFunctionExternalStatementContext alterFunctionExternalStatement() {
-			return getRuleContext(AlterFunctionExternalStatementContext.class,0);
+		public AlterFunctionStatementExternalContext alterFunctionStatementExternal() {
+			return getRuleContext(AlterFunctionStatementExternalContext.class,0);
 		}
-		public AlterFunctionCompiledSqlScalarStatementContext alterFunctionCompiledSqlScalarStatement() {
-			return getRuleContext(AlterFunctionCompiledSqlScalarStatementContext.class,0);
+		public AlterFunctionStatementCompiledSqlScalarContext alterFunctionStatementCompiledSqlScalar() {
+			return getRuleContext(AlterFunctionStatementCompiledSqlScalarContext.class,0);
 		}
-		public AlterFunctionInlineSqlScalarStatementContext alterFunctionInlineSqlScalarStatement() {
-			return getRuleContext(AlterFunctionInlineSqlScalarStatementContext.class,0);
+		public AlterFunctionStatementInlineSqlScalarContext alterFunctionStatementInlineSqlScalar() {
+			return getRuleContext(AlterFunctionStatementInlineSqlScalarContext.class,0);
 		}
-		public AlterFunctionSqlTableStatementContext alterFunctionSqlTableStatement() {
-			return getRuleContext(AlterFunctionSqlTableStatementContext.class,0);
+		public AlterFunctionStatementSqlTableContext alterFunctionStatementSqlTable() {
+			return getRuleContext(AlterFunctionStatementSqlTableContext.class,0);
 		}
 		public AlterFunctionStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -2790,25 +2790,25 @@ public class DB2zSQLParser extends Parser {
 			case 1:
 				{
 				setState(1815);
-				alterFunctionExternalStatement();
+				alterFunctionStatementExternal();
 				}
 				break;
 			case 2:
 				{
 				setState(1816);
-				alterFunctionCompiledSqlScalarStatement();
+				alterFunctionStatementCompiledSqlScalar();
 				}
 				break;
 			case 3:
 				{
 				setState(1817);
-				alterFunctionInlineSqlScalarStatement();
+				alterFunctionStatementInlineSqlScalar();
 				}
 				break;
 			case 4:
 				{
 				setState(1818);
-				alterFunctionSqlTableStatement();
+				alterFunctionStatementSqlTable();
 				}
 				break;
 			}
@@ -2825,7 +2825,7 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AlterFunctionExternalStatementContext extends ParserRuleContext {
+	public static class AlterFunctionStatementExternalContext extends ParserRuleContext {
 		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
 		public FunctionDesignator1Context functionDesignator1() {
 			return getRuleContext(FunctionDesignator1Context.class,0);
@@ -2836,28 +2836,28 @@ public class DB2zSQLParser extends Parser {
 		public FunctionExternalOptionListContext functionExternalOptionList(int i) {
 			return getRuleContext(FunctionExternalOptionListContext.class,i);
 		}
-		public AlterFunctionExternalStatementContext(ParserRuleContext parent, int invokingState) {
+		public AlterFunctionStatementExternalContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_alterFunctionExternalStatement; }
+		@Override public int getRuleIndex() { return RULE_alterFunctionStatementExternal; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionExternalStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionStatementExternal(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionExternalStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionStatementExternal(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionExternalStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionStatementExternal(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AlterFunctionExternalStatementContext alterFunctionExternalStatement() throws RecognitionException {
-		AlterFunctionExternalStatementContext _localctx = new AlterFunctionExternalStatementContext(_ctx, getState());
-		enterRule(_localctx, 28, RULE_alterFunctionExternalStatement);
+	public final AlterFunctionStatementExternalContext alterFunctionStatementExternal() throws RecognitionException {
+		AlterFunctionStatementExternalContext _localctx = new AlterFunctionStatementExternalContext(_ctx, getState());
+		enterRule(_localctx, 28, RULE_alterFunctionStatementExternal);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -2895,7 +2895,7 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AlterFunctionCompiledSqlScalarStatementContext extends ParserRuleContext {
+	public static class AlterFunctionStatementCompiledSqlScalarContext extends ParserRuleContext {
 		public List<TerminalNode> ALTER() { return getTokens(DB2zSQLParser.ALTER); }
 		public TerminalNode ALTER(int i) {
 			return getToken(DB2zSQLParser.ALTER, i);
@@ -2929,28 +2929,28 @@ public class DB2zSQLParser extends Parser {
 		public ApplicationCompatibilityPhraseContext applicationCompatibilityPhrase() {
 			return getRuleContext(ApplicationCompatibilityPhraseContext.class,0);
 		}
-		public AlterFunctionCompiledSqlScalarStatementContext(ParserRuleContext parent, int invokingState) {
+		public AlterFunctionStatementCompiledSqlScalarContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_alterFunctionCompiledSqlScalarStatement; }
+		@Override public int getRuleIndex() { return RULE_alterFunctionStatementCompiledSqlScalar; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionCompiledSqlScalarStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionStatementCompiledSqlScalar(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionCompiledSqlScalarStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionStatementCompiledSqlScalar(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionCompiledSqlScalarStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionStatementCompiledSqlScalar(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AlterFunctionCompiledSqlScalarStatementContext alterFunctionCompiledSqlScalarStatement() throws RecognitionException {
-		AlterFunctionCompiledSqlScalarStatementContext _localctx = new AlterFunctionCompiledSqlScalarStatementContext(_ctx, getState());
-		enterRule(_localctx, 30, RULE_alterFunctionCompiledSqlScalarStatement);
+	public final AlterFunctionStatementCompiledSqlScalarContext alterFunctionStatementCompiledSqlScalar() throws RecognitionException {
+		AlterFunctionStatementCompiledSqlScalarContext _localctx = new AlterFunctionStatementCompiledSqlScalarContext(_ctx, getState());
+		enterRule(_localctx, 30, RULE_alterFunctionStatementCompiledSqlScalar);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -3404,7 +3404,7 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AlterFunctionInlineSqlScalarStatementContext extends ParserRuleContext {
+	public static class AlterFunctionStatementInlineSqlScalarContext extends ParserRuleContext {
 		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
 		public FunctionDesignator2Context functionDesignator2() {
 			return getRuleContext(FunctionDesignator2Context.class,0);
@@ -3415,28 +3415,28 @@ public class DB2zSQLParser extends Parser {
 		public FunctionInlineSqlScalarOptionListContext functionInlineSqlScalarOptionList(int i) {
 			return getRuleContext(FunctionInlineSqlScalarOptionListContext.class,i);
 		}
-		public AlterFunctionInlineSqlScalarStatementContext(ParserRuleContext parent, int invokingState) {
+		public AlterFunctionStatementInlineSqlScalarContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_alterFunctionInlineSqlScalarStatement; }
+		@Override public int getRuleIndex() { return RULE_alterFunctionStatementInlineSqlScalar; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionInlineSqlScalarStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionStatementInlineSqlScalar(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionInlineSqlScalarStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionStatementInlineSqlScalar(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionInlineSqlScalarStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionStatementInlineSqlScalar(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AlterFunctionInlineSqlScalarStatementContext alterFunctionInlineSqlScalarStatement() throws RecognitionException {
-		AlterFunctionInlineSqlScalarStatementContext _localctx = new AlterFunctionInlineSqlScalarStatementContext(_ctx, getState());
-		enterRule(_localctx, 38, RULE_alterFunctionInlineSqlScalarStatement);
+	public final AlterFunctionStatementInlineSqlScalarContext alterFunctionStatementInlineSqlScalar() throws RecognitionException {
+		AlterFunctionStatementInlineSqlScalarContext _localctx = new AlterFunctionStatementInlineSqlScalarContext(_ctx, getState());
+		enterRule(_localctx, 38, RULE_alterFunctionStatementInlineSqlScalar);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -3474,7 +3474,7 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class AlterFunctionSqlTableStatementContext extends ParserRuleContext {
+	public static class AlterFunctionStatementSqlTableContext extends ParserRuleContext {
 		public TerminalNode ALTER() { return getToken(DB2zSQLParser.ALTER, 0); }
 		public FunctionDesignator2Context functionDesignator2() {
 			return getRuleContext(FunctionDesignator2Context.class,0);
@@ -3486,28 +3486,28 @@ public class DB2zSQLParser extends Parser {
 		public FunctionSqlTableOptionListContext functionSqlTableOptionList(int i) {
 			return getRuleContext(FunctionSqlTableOptionListContext.class,i);
 		}
-		public AlterFunctionSqlTableStatementContext(ParserRuleContext parent, int invokingState) {
+		public AlterFunctionStatementSqlTableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_alterFunctionSqlTableStatement; }
+		@Override public int getRuleIndex() { return RULE_alterFunctionStatementSqlTable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionSqlTableStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterAlterFunctionStatementSqlTable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionSqlTableStatement(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitAlterFunctionStatementSqlTable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionSqlTableStatement(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitAlterFunctionStatementSqlTable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final AlterFunctionSqlTableStatementContext alterFunctionSqlTableStatement() throws RecognitionException {
-		AlterFunctionSqlTableStatementContext _localctx = new AlterFunctionSqlTableStatementContext(_ctx, getState());
-		enterRule(_localctx, 40, RULE_alterFunctionSqlTableStatement);
+	public final AlterFunctionStatementSqlTableContext alterFunctionStatementSqlTable() throws RecognitionException {
+		AlterFunctionStatementSqlTableContext _localctx = new AlterFunctionStatementSqlTableContext(_ctx, getState());
+		enterRule(_localctx, 40, RULE_alterFunctionStatementSqlTable);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -8646,11 +8646,11 @@ public class DB2zSQLParser extends Parser {
 		public CreateFunctionStatementInlineSqlScalarContext createFunctionStatementInlineSqlScalar() {
 			return getRuleContext(CreateFunctionStatementInlineSqlScalarContext.class,0);
 		}
-		public CreateFunctionCompiledSqlScalarContext createFunctionCompiledSqlScalar() {
-			return getRuleContext(CreateFunctionCompiledSqlScalarContext.class,0);
+		public CreateFunctionStatementCompiledSqlScalarContext createFunctionStatementCompiledSqlScalar() {
+			return getRuleContext(CreateFunctionStatementCompiledSqlScalarContext.class,0);
 		}
-		public CreateFunctionSqlTableContext createFunctionSqlTable() {
-			return getRuleContext(CreateFunctionSqlTableContext.class,0);
+		public CreateFunctionStatementSqlTableContext createFunctionStatementSqlTable() {
+			return getRuleContext(CreateFunctionStatementSqlTableContext.class,0);
 		}
 		public CreateFunctionStatementContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
@@ -8707,13 +8707,13 @@ public class DB2zSQLParser extends Parser {
 			case 5:
 				{
 				setState(2347);
-				createFunctionCompiledSqlScalar();
+				createFunctionStatementCompiledSqlScalar();
 				}
 				break;
 			case 6:
 				{
 				setState(2348);
-				createFunctionSqlTable();
+				createFunctionStatementSqlTable();
 				}
 				break;
 			}
@@ -9664,7 +9664,7 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class CreateFunctionCompiledSqlScalarContext extends ParserRuleContext {
+	public static class CreateFunctionStatementCompiledSqlScalarContext extends ParserRuleContext {
 		public TerminalNode CREATE() { return getToken(DB2zSQLParser.CREATE, 0); }
 		public TerminalNode FUNCTION() { return getToken(DB2zSQLParser.FUNCTION, 0); }
 		public FunctionNameContext functionName() {
@@ -9689,28 +9689,28 @@ public class DB2zSQLParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public CreateFunctionCompiledSqlScalarContext(ParserRuleContext parent, int invokingState) {
+		public CreateFunctionStatementCompiledSqlScalarContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_createFunctionCompiledSqlScalar; }
+		@Override public int getRuleIndex() { return RULE_createFunctionStatementCompiledSqlScalar; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCreateFunctionCompiledSqlScalar(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCreateFunctionStatementCompiledSqlScalar(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCreateFunctionCompiledSqlScalar(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCreateFunctionStatementCompiledSqlScalar(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCreateFunctionCompiledSqlScalar(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCreateFunctionStatementCompiledSqlScalar(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final CreateFunctionCompiledSqlScalarContext createFunctionCompiledSqlScalar() throws RecognitionException {
-		CreateFunctionCompiledSqlScalarContext _localctx = new CreateFunctionCompiledSqlScalarContext(_ctx, getState());
-		enterRule(_localctx, 118, RULE_createFunctionCompiledSqlScalar);
+	public final CreateFunctionStatementCompiledSqlScalarContext createFunctionStatementCompiledSqlScalar() throws RecognitionException {
+		CreateFunctionStatementCompiledSqlScalarContext _localctx = new CreateFunctionStatementCompiledSqlScalarContext(_ctx, getState());
+		enterRule(_localctx, 118, RULE_createFunctionStatementCompiledSqlScalar);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
@@ -9790,7 +9790,7 @@ public class DB2zSQLParser extends Parser {
 		return _localctx;
 	}
 
-	public static class CreateFunctionSqlTableContext extends ParserRuleContext {
+	public static class CreateFunctionStatementSqlTableContext extends ParserRuleContext {
 		public TerminalNode CREATE() { return getToken(DB2zSQLParser.CREATE, 0); }
 		public TerminalNode FUNCTION() { return getToken(DB2zSQLParser.FUNCTION, 0); }
 		public FunctionNameContext functionName() {
@@ -9815,28 +9815,28 @@ public class DB2zSQLParser extends Parser {
 		public TerminalNode COMMA(int i) {
 			return getToken(DB2zSQLParser.COMMA, i);
 		}
-		public CreateFunctionSqlTableContext(ParserRuleContext parent, int invokingState) {
+		public CreateFunctionStatementSqlTableContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
-		@Override public int getRuleIndex() { return RULE_createFunctionSqlTable; }
+		@Override public int getRuleIndex() { return RULE_createFunctionStatementSqlTable; }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCreateFunctionSqlTable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).enterCreateFunctionStatementSqlTable(this);
 		}
 		@Override
 		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCreateFunctionSqlTable(this);
+			if ( listener instanceof DB2zSQLParserListener ) ((DB2zSQLParserListener)listener).exitCreateFunctionStatementSqlTable(this);
 		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
-			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCreateFunctionSqlTable(this);
+			if ( visitor instanceof DB2zSQLParserVisitor ) return ((DB2zSQLParserVisitor<? extends T>)visitor).visitCreateFunctionStatementSqlTable(this);
 			else return visitor.visitChildren(this);
 		}
 	}
 
-	public final CreateFunctionSqlTableContext createFunctionSqlTable() throws RecognitionException {
-		CreateFunctionSqlTableContext _localctx = new CreateFunctionSqlTableContext(_ctx, getState());
-		enterRule(_localctx, 120, RULE_createFunctionSqlTable);
+	public final CreateFunctionStatementSqlTableContext createFunctionStatementSqlTable() throws RecognitionException {
+		CreateFunctionStatementSqlTableContext _localctx = new CreateFunctionStatementSqlTableContext(_ctx, getState());
+		enterRule(_localctx, 120, RULE_createFunctionStatementSqlTable);
 		int _la;
 		try {
 			enterOuterAlt(_localctx, 1);
