@@ -1,7 +1,7 @@
 /*
-Copyright (C) 2021 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
-no liability for damages of any kind resulting from the use of this 
-software.  Use at your own risk.
+Copyright (C) 2021 - 2023 Craig Schneiderwent.  All rights reserved.
+I accept no liability for damages of any kind resulting from the use
+of this software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
