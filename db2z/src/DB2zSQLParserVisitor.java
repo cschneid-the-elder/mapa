@@ -3910,12 +3910,6 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx);
 	/**
-	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClause2}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx);
-	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

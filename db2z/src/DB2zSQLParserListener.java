@@ -6507,16 +6507,6 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitDefaultClause1(DB2zSQLParser.DefaultClause1Context ctx);
 	/**
-	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClause2}.
-	 * @param ctx the parse tree
-	 */
-	void enterDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx);
-	/**
-	 * Exit a parse tree produced by {@link DB2zSQLParser#defaultClause2}.
-	 * @param ctx the parse tree
-	 */
-	void exitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx);
-	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#defaultClauseAllowables}.
 	 * @param ctx the parse tree
 	 */

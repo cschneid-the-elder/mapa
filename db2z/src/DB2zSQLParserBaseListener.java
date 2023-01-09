@@ -7815,18 +7815,6 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx) { }
 	/**
 	 * {@inheritDoc}

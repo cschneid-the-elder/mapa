@@ -4566,13 +4566,6 @@ public class DB2zSQLParserBaseVisitor<T> extends AbstractParseTreeVisitor<T> imp
 	 * <p>The default implementation returns the result of calling
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
-	@Override public T visitDefaultClause2(DB2zSQLParser.DefaultClause2Context ctx) { return visitChildren(ctx); }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation returns the result of calling
-	 * {@link #visitChildren} on {@code ctx}.</p>
-	 */
 	@Override public T visitDefaultClauseAllowables(DB2zSQLParser.DefaultClauseAllowablesContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}

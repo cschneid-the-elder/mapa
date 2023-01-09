@@ -1,4 +1,4 @@
---2023-01-06--------------------------------------------------------------------
+--2023-01-09--------------------------------------------------------------------
 The alterFunction* rules were a mess.  They've been cleaned up in the process
 of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION.
 
@@ -15,8 +15,45 @@ Corrected builtInType, procedureBuiltinType and functionBuiltinType making
 (integerInParens | (LPAREN RPAREN)) optional for DECIMAL, DEC, NUMERIC, and
 FLOAT as documented.
 
-Fixed CREATE AUXILIARY TABLE changing databaseName? to (databaseName DOT)? prior
-to tablespaceName.  Martijn Rutte noticed the bug.
+Fixed CREATE AUXILIARY TABLE changing databaseName? to (databaseName DOT)? 
+prior to tablespaceName.  Martijn Rutte noticed the bug.
+
+Corrected defaultClause, making...
+
+	(defaultClauseAllowables
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+
+...optional because it wasn't by my mistake.
+
+Corrected partitionExpression, making...
+
+	(ASC | DESC)
+
+...optional because it wasn't and it should be.
+
+Changed partitionLimitKey from...
+
+	(INTEGERLITERAL | MAXVALUE | MINVALUE)
+
+...to...
+
+	(literal | MAXVALUE | MINVALUE)
+
+...because the literal must match the data type of the column
+it references.
+
+Above 3 corrections found by Martijn Rutte 2022-01-09.
+
+Changed sqlStatement from...
+
+	(SQL_STATEMENT_TERMINATOR | SEMICOLON | (END_EXEC DOT?) | EOF)
+
+...to...
+
+	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
+
+...as multiple statement terminators or semicolons would end parsing and the
+rest of the input would go unnoticed.
 
 --2023-01-03--------------------------------------------------------------------
 Changed...

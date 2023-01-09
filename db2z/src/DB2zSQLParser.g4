@@ -150,7 +150,7 @@ sqlStatement
 	| valuesIntoStatement
 	| wheneverStatement
 	)
-	(SQL_STATEMENT_TERMINATOR | SEMICOLON | (END_EXEC DOT?) | EOF)
+	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
 	;
 
 query
@@ -4071,9 +4071,13 @@ alterTableColumnDefinitionOptionList1
 	)
 	;
 
+/*
+Changed to refer to defaultClause instead of defaultClause2
+as these are identical.
+*/
 alterTableColumnDefinitionOptionList2
 	: (
-	(defaultClause2)
+	(defaultClause)
 	| (NOT NULL)
 	| (columnConstraint)
 	| (generatedClause)
@@ -4344,14 +4348,33 @@ partitioningClause
 	)
 	;
 
+/*
+Made...
+
+	(ASC | DESC)
+
+...optional because it wasn't and it should be.  Found by Martijn Rutte 2022-01-09.
+*/
 partitionExpression
 	: (
-	columnName (NULLS LAST)? (ASC | DESC)
+	columnName (NULLS LAST)? (ASC | DESC)?
 	)
 	;
 
+/*
+Changed...
+
+	(INTEGERLITERAL | MAXVALUE | MINVALUE)
+
+...to...
+
+	(literal | MAXVALUE | MINVALUE)
+
+...because the literal must match the data type of the column
+it references.  Found by Martijn Rutte 2022-01-09.
+*/
 partitionLimitKey
-	: (INTEGERLITERAL | MAXVALUE | MINVALUE)
+	: (literal | MAXVALUE | MINVALUE)
 	;
 
 /*
@@ -5445,25 +5468,25 @@ xmlTableRegularColumnDefinition
 	)
 	;
 
+/*
+Made...
+
+	(defaultClauseAllowables
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+
+...optional because it wasn't by my mistake.  Noted by Martijn Rutte 2023-01-09.
+*/
 defaultClause
 	: (
 	WITH? DEFAULT
 	(defaultClauseAllowables
-	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))?
 	)
 	;
 
 defaultClause1
 	: (
 	WITH? DEFAULT defaultClauseAllowables?
-	)
-	;
-
-defaultClause2
-	: (
-	WITH? DEFAULT
-	(defaultClauseAllowables
-	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
 	)
 	;
 
