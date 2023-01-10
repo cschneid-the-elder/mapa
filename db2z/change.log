@@ -16,7 +16,7 @@ Corrected builtInType, procedureBuiltinType and functionBuiltinType making
 FLOAT as documented.
 
 Fixed CREATE AUXILIARY TABLE changing databaseName? to (databaseName DOT)? 
-prior to tablespaceName.  Martijn Rutte noticed the bug.
+prior to tablespaceName.
 
 Corrected defaultClause, making...
 
@@ -42,7 +42,40 @@ Changed partitionLimitKey from...
 ...because the literal must match the data type of the column
 it references.
 
-Above 3 corrections found by Martijn Rutte 2022-01-09.
+Made FROM optional in searchedDelete and positionedDelete, 
+this is an alternate syntax allowed by IBM for compatibility with other DBMSs.
+
+Added pagenumClause to createTablespaceOptionList.
+
+Made...
+
+	(asIdentityClause | asRowChangeTimestampClause)
+
+...optional in generatedClause, as it should be per the documentation.
+
+Made...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...optional in commonTableExpression, as it should be per the documentation.
+
+The...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...has been made optional in createViewStatement.
+
+Added..
+
+	| (referentialConstraint)
+
+...to alterTableOptionList as it seems to be allowed on its own.
+
+Moved CREATE TABLE options to their own createTableOptions rule so
+they could be in any order.
+
+Need for above 10 corrections found by Martijn Rutte 2023-01-09 
+and 2023-01-10.
 
 Changed sqlStatement from...
 
@@ -54,6 +87,10 @@ Changed sqlStatement from...
 
 ...as multiple statement terminators or semicolons would end parsing and the
 rest of the input would go unnoticed.
+
+Added CARDINALITY? to customVolatileClause because it's documented that way...
+now.  I know I researched this and remember doing searches of the documentation
+back in late July of 2022 and found nothing.  Maybe it's just my old age.
 
 --2023-01-03--------------------------------------------------------------------
 Changed...

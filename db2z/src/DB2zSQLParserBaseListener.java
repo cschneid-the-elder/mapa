@@ -915,6 +915,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterCreateTableOptions(DB2zSQLParser.CreateTableOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitCreateTableOptions(DB2zSQLParser.CreateTableOptionsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCreateTablespaceStatement(DB2zSQLParser.CreateTablespaceStatementContext ctx) { }
 	/**
 	 * {@inheritDoc}

@@ -698,6 +698,10 @@ createStogroupStatement
 	)
 	;
 
+/*
+Moved options to createTableOptions rule so they could
+be in any order.  Suggested by Martijn Rutte 2023-01-10.
+*/
 createTableStatement
 	: (
 	CREATE TABLE tableName
@@ -719,26 +723,32 @@ createTableStatement
 			| (asResultTable copyOptions?)
 			| createTableMaterializedQueryDefinition
 		)
-	createTableInClause?
-	partitioningClause?
-	organizationClause?
-	editprocClause?
-	validprocClause?
-	auditClause?
-	obidClause?
-	dataCaptureClause?
-	restrictOnDropClause?
-	ccsidClause1?
-	cardinalityClause?
-	loggedOption?
-	compressOption?
-	appendClause?
-	dssizeOption?
-	bufferpoolOption?
-	memberClause?
-	trackmodClause?
-	pagenumClause?
-	keyLabelOption?
+	createTableOptions*
+	)
+	;
+
+createTableOptions
+	: (
+	createTableInClause
+	| partitioningClause
+	| organizationClause
+	| editprocClause
+	| validprocClause
+	| auditClause
+	| obidClause
+	| dataCaptureClause
+	| restrictOnDropClause
+	| ccsidClause1
+	| cardinalityClause
+	| loggedOption
+	| compressOption
+	| appendClause
+	| dssizeOption
+	| bufferpoolOption
+	| memberClause
+	| trackmodClause
+	| pagenumClause
+	| keyLabelOption
 	)
 	;
 
@@ -792,10 +802,20 @@ createVariableStatement
 	)
 	;
 
+/*
+The...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...has been made optional, as it should be per the documentation.
+
+Noted by Martijn Rutte 2023-01-10.
+
+*/
 createViewStatement
 	: (
 	CREATE VIEW viewName 
-	LPAREN columnName (COMMA columnName)* RPAREN AS
+	(LPAREN columnName (COMMA columnName)* RPAREN)? AS
 	(WITH commonTableExpression (COMMA commonTableExpression)*)?
 	fullSelect
 	createViewCheckOptionClause?
@@ -2114,15 +2134,6 @@ triggerDefinitionOption
 	)
 	;
 
-/*
-The customVolatileClause? in each of the following
-flavors of the createTableInClause has been added by
-request.  As near as I can tell, it was once valid syntax
-but is now no longer documented.  A search of DB2 documentation
-back through v9 did not turn up this syntax, but it wouldn't
-be the first time IBM tolerated old syntax for a _very_ long
-time.  Looking at you, SEP parameter of the DD statement in JCL.
-*/
 createTableInClause
 	: (
 	(customVolatileClause? IN (databaseName DOT)? tablespaceName customVolatileClause?)
@@ -2131,8 +2142,11 @@ createTableInClause
 	)
 	;
 
+/*
+Optional CARDINALITY added 2023-01-10.
+*/
 customVolatileClause
-	: (NOT? VOLATILE)
+	: (NOT? VOLATILE CARDINALITY?)
 	;
 
 createTableColumnDefinition
@@ -2718,17 +2732,25 @@ authorization
 	: (USER hostVariable USING hostVariable)
 	;
 
+/*
+Alternate syntax allows omission of FROM.  (WHERE searchCondition) should
+be optional, i.e. DELETE T1; is a valid statement.
+Noted by Martijn Rutte 2023-01-09.
+*/
 searchedDelete
 	: (
-	DELETE FROM tableName periodClause? AS? correlationName? includeColumns?
-	(SET assignmentClause)? (WHERE searchCondition) fetchClause?
+	DELETE FROM? tableName periodClause? AS? correlationName? includeColumns?
+	(SET assignmentClause)? (WHERE searchCondition)? fetchClause?
 	(isolationClause | skipLockedDataClause)* querynoClause?
 	)
 	;
 
+/*
+Alternate syntax allows omission of FROM.  Noted by Martijn Rutte 2023-01-09.
+*/
 positionedDelete
 	: (
-	DELETE FROM tableName AS? correlationName? WHERE CURRENT OF cursorName
+	DELETE FROM? tableName AS? correlationName? WHERE CURRENT OF cursorName
 	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
 	)
 	;
@@ -3660,6 +3682,13 @@ alterStogroupOptionList
 	)
 	;
 
+/*
+Added..
+
+	| (referentialConstraint)
+
+...as it seems to be allowed on its own.  Noted by Martijn Rutte 2023-01-10.
+*/
 alterTableOptionList
 	: (
 	(ADD COLUMN? alterTableColumnDefinition)
@@ -3668,6 +3697,7 @@ alterTableOptionList
 	| (DROP COLUMN? columnName RESTRICT)
 	| (ADD periodDefinition)
 	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
+	| (referentialConstraint)
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
 	| (ADD partitioningClause)
 	| (ADD PARTITION partitionClause)
@@ -3725,6 +3755,9 @@ alterTablespaceOptionList
 /*
 2022-11-01 Maarten van Haasteren noticed this rule should
 reference usingSpecification2 instead of usingBlock.
+2023-01-10 Martijn Rutte noticed this rule should allow
+pagenumClause on its own and not just as part of
+partitionByRangeSpecification.
 */
 createTablespaceOptionList
 	: (
@@ -3747,6 +3780,7 @@ createTablespaceOptionList
 	| maxpartitionsOption
 	| memberClause
 	| trackmodClause
+	| pagenumClause
 	| usingSpecification2
 	)
 	;
@@ -4092,9 +4126,16 @@ columnConstraint
 	: (referencesClause | checkConstraint)
 	;
 
+/*
+Made...
+
+	(asIdentityClause | asRowChangeTimestampClause)
+
+...optional as it was not by by mistake.  Noted by Martijn Rutte 2023-01-10.
+*/
 generatedClause
 	: (
-	(GENERATED (ALWAYS | (BY DEFAULT))? (asIdentityClause | asRowChangeTimestampClause))
+	(GENERATED (ALWAYS | (BY DEFAULT))? (asIdentityClause | asRowChangeTimestampClause)?)
 	| (GENERATED ALWAYS?
 		(asRowTransactionStartIDClause 
 		| asRowTransactionTimestampClause 
@@ -6469,12 +6510,17 @@ selectStatement
 	)
 	;
 
+/*
+Made...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...optional, as it should be per the documentation.  Noted
+by Martijn Rutte 2023-01-10.
+*/
 commonTableExpression
 	: tableName 
-	LPAREN
-	columnName
-	(COMMA columnName)*
-	RPAREN
+	(LPAREN columnName (COMMA columnName)* RPAREN)?
 	AS LPAREN fullSelect RPAREN
 	;
 

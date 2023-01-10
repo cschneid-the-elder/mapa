@@ -460,6 +460,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCreateTableStatement(DB2zSQLParser.CreateTableStatementContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#createTableOptions}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCreateTableOptions(DB2zSQLParser.CreateTableOptionsContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#createTablespaceStatement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
