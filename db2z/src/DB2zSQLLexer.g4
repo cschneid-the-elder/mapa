@@ -1,7 +1,7 @@
 /*
-Copyright (C) 2021 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
-no liability for damages of any kind resulting from the use of this 
-software.  Use at your own risk.
+Copyright (C) 2021 - 2023 Craig Schneiderwent.  All rights reserved.
+I accept no liability for damages of any kind resulting from the use
+of this software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
@@ -171,11 +171,29 @@ in application source code, provision is made for the
 SPUFI command to set the SQL statement terminator.
 */
 SET_STATEMENT_TERMINATOR
-	: '--#SET' WS 'TERMINATOR' WS ~[\n\r] WS? NEWLINE
+	: ('--#SET' WS 'TERMINATOR' WS ~[\n\r] WS? NEWLINE)
 	{
 		String text = getText();
 		String textStripped = text.stripTrailing();
 		statementTerminator = new String(textStripped.substring(textStripped.length() - 1));
+	}
+	->channel(COMMENTS)
+	;
+
+/*
+And apparently there's this alternate syntax...
+
+	#terminator=@#
+
+...which I can't find documented anywhere.
+*/
+SET_STATEMENT_TERMINATOR2
+	: ('#terminator' EQ ~[\n\r] '#' WS? NEWLINE)
+	{
+		String text = getText();
+		String textStripped = text.stripTrailing();
+		statementTerminator = 
+			new String(textStripped.substring(textStripped.length() - 2,textStripped.length() - 1));
 	}
 	->channel(COMMENTS)
 	;
@@ -636,6 +654,12 @@ FULL
 
 FUNCTION
 	: F U N C T I O N 
+	{
+		if (createOrAlterSeen) {
+			createOrAlterSeen = false;
+			pushMode(CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE);
+		}
+	}
 	;
 
 GENERATED
@@ -1033,7 +1057,10 @@ PRIVILEGES
 PROCEDURE
 	: P R O C E D U R E 
 	{
-		if (createOrAlterSeen) pushMode(CREATE_OR_ALTER_PROCEDURE_MODE);
+		if (createOrAlterSeen) {
+			createOrAlterSeen = false;
+			pushMode(CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE);
+		}
 	}
 	;
 
@@ -4308,10 +4335,10 @@ SQLIDENTIFIER
 
 /*
 Lexing enters this mode when a CREATE or ALTER PROCEDURE
-statement is encountered.  There are two types of
+or FUNCTION statement is encountered.  There are two types of
 stored procedure, native SQL and external.  The
 former is written in SQL/PL and is embedded in 
-the CREATE or ALTER PROCEDURE statement.  By entering this
+the CREATE or ALTER PROCEDURE or FUNCTION statement.  By entering this
 mode we can detect such a statement and gracefully
 ignore the SQL/PL.
 
@@ -4324,7 +4351,7 @@ via the LANGUAGE option, which may be last - i.e.
 we may not know which type of statement is being
 processed until we're almost done with it.
 */
-mode CREATE_OR_ALTER_PROCEDURE_MODE;
+mode CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE;
 
 CP_SQLCOMMENT
 	: SQLCOMMENT
@@ -4421,7 +4448,7 @@ CP_ASSEMBLE
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(ASSEMBLE)
@@ -4432,7 +4459,7 @@ CP_C_
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(C_)
@@ -4443,7 +4470,7 @@ CP_COBOL
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(COBOL)
@@ -4454,7 +4481,7 @@ CP_JAVA
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(JAVA)
@@ -4465,7 +4492,7 @@ CP_PLI
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(PLI)
@@ -4476,7 +4503,7 @@ CP_REXX
 	{
 		if (languageSeen) {
 			languageSeen = false;
-			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE);
+			pushMode(CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE);
 		}
 	}
 	->type(REXX)
@@ -4511,6 +4538,11 @@ CP_ACCELERATOR
 CP_ACCESS
 	: A C C E S S 
 	->type(ACCESS)
+	;
+
+CP_ACTION
+	: ACTION
+	->type(ACTION)
 	;
 
 CP_ALL
@@ -4616,6 +4648,16 @@ CP_CALL
 CP_CALLED
 	: C A L L E D 
 	->type(CALLED)
+	;
+
+CP_CARDINALITY
+	: CARDINALITY
+	->type(CARDINALITY)
+	;
+
+CP_CAST
+	: CAST
+	->type(CAST)
 	;
 
 CP_CCSID
@@ -4798,6 +4840,11 @@ CP_DISALLOW
 	->type(DISALLOW)
 	;
 
+CP_DISPATCH
+	: DISPATCH
+	->type(DISPATCH)
+	;
+
 CP_DOUBLE
 	: D O U B L E 
 	->type(DOUBLE)
@@ -4845,7 +4892,6 @@ CP_EUR
 
 CP_EXPLAIN
 	: E X P L A I N 
-	->type(EXPLAIN)
 	;
 
 CP_EXTERNAL
@@ -4856,6 +4902,11 @@ CP_EXTERNAL
 CP_FAILBACK
 	: F A I L B A C K 
 	->type(FAILBACK)
+	;
+
+CP_FINAL
+	: FINAL
+	->type(FINAL)
 	;
 
 CP_FLOAT
@@ -4871,6 +4922,16 @@ CP_FOR
 CP_FORMAT
 	: F O R M A T 
 	->type(FORMAT)
+	;
+
+CP_FROM
+	: FROM
+	->type(FROM)
+	;
+
+CP_GENERIC
+	: GENERIC
+	->type(GENERIC)
 	;
 
 CP_GET_ACCEL_ARCHIVE
@@ -5083,6 +5144,11 @@ CP_PACKAGE
 	->type(PACKAGE)
 	;
 
+CP_PARALLEL
+	: PARALLEL
+	->type(PARALLEL)
+	;
+
 CP_PARAMETER
 	: P A R A M E T E R 
 	->type(PARAMETER)
@@ -5143,6 +5209,11 @@ CP_RESOLUTION
 	->type(RESOLUTION)
 	;
 
+CP_RESTRICT
+	: RESTRICT
+	->type(RESTRICT)
+	;
+
 CP_RESULT
 	: R E S U L T 
 	->type(RESULT)
@@ -5151,6 +5222,11 @@ CP_RESULT
 CP_RETURN
 	: R E T U R N 
 	->type(RETURN)
+	;
+
+CP_RETURNS
+	: RETURNS
+	->type(RETURNS)
 	;
 
 CP_ROLE
@@ -5193,6 +5269,11 @@ CP_SCHEME
 	->type(SCHEME)
 	;
 
+CP_SCRATCHPAD
+	: SCRATCHPAD
+	->type(SCRATCHPAD)
+	;
+
 CP_SENSITIVE
 	: S E N S I T I V E 
 	->type(SENSITIVE)
@@ -5218,6 +5299,11 @@ CP_SMALLINT
 	->type(SMALLINT)
 	;
 
+CP_SOURCE
+	: SOURCE
+	->type(SOURCE)
+	;
+
 CP_SPECIAL
 	: S P E C I A L 
 	->type(SPECIAL)
@@ -5231,6 +5317,11 @@ CP_SPECIFIC
 CP_STATEMENTS
 	: S T A T E M E N T S 
 	->type(STATEMENTS)
+	;
+
+CP_STATIC
+	: STATIC
+	->type(STATIC)
 	;
 
 CP_SYSTEM
@@ -5533,6 +5624,11 @@ CP_REGENERATE
 	->type(REGENERATE)
 	;
 
+CP_SECURED
+	: SECURED
+	->type(SECURED)
+	;
+
 CP_SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
@@ -5557,7 +5653,7 @@ CP_UNIDENTIFIED
 	: .
 	;
 
-mode CREATE_OR_ALTER_EXTERNAL_PROCEDURE_MODE;
+mode CREATE_OR_ALTER_EXTERNAL_PROCEDURE_OR_FUNCTION_MODE;
 
 CEP_SQLCOMMENT
 	: SQLCOMMENT
@@ -5637,6 +5733,36 @@ CEP_SEMICOLON
 	}
 	;
 
+CEP_ASSEMBLE
+	: ASSEMBLE
+	->type(ASSEMBLE)
+	;
+
+CEP_C_
+	: C_
+	->type(C_)
+	;
+
+CEP_COBOL
+	: COBOL
+	->type(COBOL)
+	;
+
+CEP_PLI
+	: PLI
+	->type(PLI)
+	;
+
+CEP_REXX
+	: REXX
+	->type(REXX)
+	;
+
+CEP_ACTION
+	: ACTION
+	->type(ACTION)
+	;
+
 CEP_AFTER
 	: A F T E R 
 	->type(AFTER)
@@ -5690,6 +5816,11 @@ CEP_CALL
 CEP_CALLED
 	: C A L L E D 
 	->type(CALLED)
+	;
+
+CEP_CARDINALITY
+	: CARDINALITY
+	->type(CARDINALITY)
 	;
 
 CEP_CCSID
@@ -5807,6 +5938,11 @@ CEP_DISALLOW
 	->type(DISALLOW)
 	;
 
+CEP_DISPATCH
+	: DISPATCH
+	->type(DISPATCH)
+	;
+
 CEP_DOUBLE
 	: D O U B L E 
 	->type(DOUBLE)
@@ -5845,6 +5981,11 @@ CEP_FAILURES
 CEP_FENCED
 	: F E N C E D 
 	->type(FENCED)
+	;
+
+CEP_FINAL
+	: FINAL
+	->type(FINAL)
 	;
 
 CEP_FLOAT
@@ -5900,6 +6041,11 @@ CEP_INTEGER
 CEP_JAVA
 	: JAVA
 	->type(JAVA)
+	;
+
+CEP_LANGUAGE
+	: LANGUAGE
+	->type(LANGUAGE)
 	;
 
 CEP_LARGE
@@ -6007,6 +6153,11 @@ CEP_PACKAGE
 	->type(PACKAGE)
 	;
 
+CEP_PARALLEL
+	: PARALLEL
+	->type(PARALLEL)
+	;
+
 CEP_PARAMETER
 	: P A R A M E T E R 
 	->type(PARAMETER)
@@ -6057,6 +6208,11 @@ CEP_RETURN
 	->type(RETURN)
 	;
 
+CEP_RETURNS
+	: RETURNS
+	->type(RETURNS)
+	;
+
 CEP_ROWID
 	: R O W I D 
 	->type(ROWID)
@@ -6070,6 +6226,16 @@ CEP_RUN
 CEP_SBCS
 	: S B C S 
 	->type(SBCS)
+	;
+
+CEP_SCRATCHPAD
+	: SCRATCHPAD
+	->type(SCRATCHPAD)
+	;
+
+CEP_SECURED
+	: SECURED
+	->type(SECURED)
 	;
 
 CEP_SECURITY
@@ -6110,6 +6276,11 @@ CEP_SQL
 CEP_STANDARD
 	: STANDARD
 	->type(STANDARD)
+	;
+
+CEP_STATIC
+	: STATIC
+	->type(STATIC)
 	;
 
 CEP_STAY

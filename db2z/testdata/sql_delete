@@ -1,3 +1,15 @@
+
+
+/*
+Alternate syntax allows for omission of FROM.
+*/
+
+DELETE T1 WHERE CURRENT OF CURSOR;
+
+DELETE T1 WHERE C1 = 1 AND C2 = 'X';
+
+DELETE T1;
+
 EXEC SQL 
      DELETE FROM FARSCAPE.MOYA WHERE CURRENT OF C1
 END-EXEC

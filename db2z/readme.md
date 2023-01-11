@@ -6,7 +6,7 @@ My intent is to provide enough support for embedded SQL to add to the COBOL anal
 
 Initially my intent was to provide more robust parsing of SQL to detect CALLs, but sometimes these things get out of hand.
 
-Currently (27-Dec-2022) a work in progress.  I believe all the embeddable statements are defined and there are tests for all of them.  Martijn Rutte and Maarten van Haasteren have been instrumental in tracking down a number of bugs.  Some toleration for SQL/PL in the ALTER and CREATE PROCEDURE DDL statements has been added.
+Currently (07-Jan-2023) a work in progress.  I believe all the embeddable statements are defined and there are tests for all of them.  Martijn Rutte and Maarten van Haasteren have been instrumental in tracking down a number of bugs.  Some toleration for SQL/PL in the ALTER and CREATE PROCEDURE and FUNCTION DDL statements has been added.
 
 There is a left-recursion problem in the tableReference rule with respect to the joinedTable rule.  So this probably won't do arbitrarily complex SQL.
 

@@ -1,7 +1,7 @@
 /*
-Copyright (C) 2021 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
-no liability for damages of any kind resulting from the use of this 
-software.  Use at your own risk.
+Copyright (C) 2021 - 2023 Craig Schneiderwent.  All rights reserved.
+I accept no liability for damages of any kind resulting from the use
+of this software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
@@ -28,9 +28,7 @@ is true of the prepareStatement rule.
 
 This grammar does not include SQL/PL or the following SQL statements.
 
-ALTER FUNCTION (compiled SQL scalar)
 ALTER TRIGGER (advanced)
-CREATE FUNCTION (compiled SQL scalar)
 CREATE TRIGGER (advanced)
 
 I do not know if the SQL statement 
@@ -41,7 +39,7 @@ might work.
 
 While SQL/PL is not included in this grammar, its presence is
 tolerated to some extent in the CREATE and ALTER of native SQL
-stored procedures.
+stored procedures and functions.
 
 */
 
@@ -152,7 +150,7 @@ sqlStatement
 	| valuesIntoStatement
 	| wheneverStatement
 	)
-	(SQL_STATEMENT_TERMINATOR | SEMICOLON | (END_EXEC DOT?) | EOF)
+	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
 	;
 
 query
@@ -212,11 +210,86 @@ alterDatabaseStatement
 
 alterFunctionStatement
 	: (
+	alterFunctionStatementExternal
+	| alterFunctionStatementCompiledSqlScalar
+	| alterFunctionStatementInlineSqlScalar
+	| alterFunctionStatementSqlTable
+	)
+	;
+
+alterFunctionStatementExternal
+	: (
 	ALTER 
-		((FUNCTION functionName (LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?) 
-		| (SPECIFIC FUNCTION specificName))
-	RESTRICT?
-	functionOptionList+
+	functionDesignator1
+	functionExternalOptionList+
+	)
+	;
+
+alterFunctionStatementCompiledSqlScalar
+	: (
+	ALTER 
+	functionDesignator2
+		((ALTER? alterWhichFunction1? functionCompiledSqlScalarOptionList+)
+		| (REPLACE alterWhichFunction2? 
+			functionCompiledSqlScalarRoutineSpecification)
+		| (ADD versionOption
+			functionCompiledSqlScalarRoutineSpecification)
+		| (ACTIVATE versionOption)
+		| (REGENERATE alterWhichFunction2 applicationCompatibilityPhrase?)
+		| (DROP versionOption)
+		)
+	)
+	;
+
+alterWhichFunction1
+	: ((ACTIVE VERSION) | (ALL VERSIONS) | versionOption)
+	;
+
+alterWhichFunction2
+	: ((ACTIVE VERSION) | versionOption)
+	;
+
+functionCompiledSqlScalarRoutineSpecification
+	: (
+	LPAREN (parameterDeclaration2 (COMMA parameterDeclaration2)*)? RPAREN
+	functionReturnsClause
+	functionCompiledSqlScalarOptionList*
+	sqlRoutineBody
+	)
+	;
+
+alterFunctionStatementInlineSqlScalar
+	: (
+	ALTER 
+	functionDesignator2
+	functionInlineSqlScalarOptionList+
+	)
+	;
+
+alterFunctionStatementSqlTable
+	: (
+	ALTER 
+	functionDesignator2
+	RESTRICT
+	functionSqlTableOptionList+
+	)
+	;
+
+functionReturnsClause
+	: (RETURNS functionDataType)
+	;
+
+functionDesignator1
+	: (
+	((FUNCTION functionName (LPAREN functionParameterType (COMMA functionParameterType)* RPAREN)?) 
+	| (SPECIFIC FUNCTION specificName))
+	)
+	;
+
+functionDesignator2
+	: (
+	((FUNCTION functionName (LPAREN functionDataType (COMMA functionDataType)* RPAREN)?) 
+	| (SPECIFIC FUNCTION specificName))
 	)
 	;
 
@@ -259,7 +332,7 @@ alterProcedureSQLPLStatement
 			procedureSQLPLOptionList*
 			sqlRoutineBody)
 		| (ACTIVATE versionOption)
-		| (REGENERATE alterWhichProcedureSQLPL2 alterProcedureSQLPLApplicationCompatibility?)
+		| (REGENERATE alterWhichProcedureSQLPL2 applicationCompatibilityPhrase?)
 		| (DROP versionOption)
 		)
 	)
@@ -273,7 +346,7 @@ alterWhichProcedureSQLPL2
 	: ((ACTIVE VERSION) | versionOption)
 	;
 
-alterProcedureSQLPLApplicationCompatibility
+applicationCompatibilityPhrase
 	: (USING APPLICATION COMPATIBILITY CP_APPLCOMPAT_LEVEL)
 	;
 alterSequenceStatement
@@ -398,7 +471,7 @@ createAliasStatement
 
 createAuxiliaryTableStatement
 	: (
-	CREATE (AUX | AUXILIARY) TABLE auxTableName IN databaseName? tablespaceName
+	CREATE (AUX | AUXILIARY) TABLE auxTableName IN (databaseName DOT)? tablespaceName
 	STORES tableName appendClause? COLUMN columnName PART INTEGERLITERAL
 	)
 	;
@@ -415,6 +488,8 @@ createFunctionStatement
 	| createFunctionStatementExternalTable
 	| createFunctionStatementSourced
 	| createFunctionStatementInlineSqlScalar
+	| createFunctionStatementCompiledSqlScalar
+	| createFunctionStatementSqlTable
 	)
 	;
 
@@ -422,7 +497,16 @@ createFunctionStatementExternalScalar
 	: (
 	CREATE FUNCTION functionName
 	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
+	createFunctionStatementExternalScalarReturnsPhrase
 	createFunctionStatementExternalScalarOptions+
+	)
+	;
+
+createFunctionStatementExternalScalarReturnsPhrase
+	: (
+	RETURNS 
+		((functionDataType (AS LOCATOR)?)
+		| (functionDataType CAST FROM functionDataType (AS LOCATOR)?))
 	)
 	;
 
@@ -430,7 +514,22 @@ createFunctionStatementExternalTable
 	: (
 	CREATE FUNCTION functionName
 	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
+	createFunctionStatementExternalTableReturnsPhrase
 	createFunctionStatementExternalTableOptions+
+	)
+	;
+
+createFunctionStatementExternalTableReturnsPhrase
+	:(
+	RETURNS 
+		((TABLE LPAREN externalTableFunctionColumn (COMMA externalTableFunctionColumn)* RPAREN)
+		| (GENERIC TABLE))
+	)
+	;
+
+externalTableFunctionColumn
+	: (
+	columnName functionDataType (AS LOCATOR)?
 	)
 	;
 
@@ -438,15 +537,45 @@ createFunctionStatementSourced
 	: (
 	CREATE FUNCTION functionName
 	LPAREN (parameterDeclaration1 (COMMA parameterDeclaration1)*)? RPAREN
-	createFunctionStatementSourcedOptions+
+	createFunctionStatementSourcedReturnsPhrase
+	createFunctionStatementSourcedOptions*
+	createFunctionStatementSourcedSourcePhrase
+	)
+	;
+
+createFunctionStatementSourcedReturnsPhrase
+	: (RETURNS functionDataType (AS LOCATOR)?)
+	;
+
+createFunctionStatementSourcedSourcePhrase
+	: (
+	SOURCE 
+		((functionName LPAREN parameterDeclaration1 (COMMA parameterDeclaration1)* RPAREN)
+		| specificNameOption2)
 	)
 	;
 
 createFunctionStatementInlineSqlScalar
 	: (
 	CREATE FUNCTION functionName
+	LPAREN ((parameterDeclaration1 (COMMA parameterDeclaration1)*)?) RPAREN
+	((WRAPPED obfuscatedStatementText) | inlineSqlScalarFunctionDefinition)
+	)
+	;
+
+createFunctionStatementCompiledSqlScalar
+	: (
+	CREATE FUNCTION functionName
 	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
-	createFunctionStatementInlineSqlScalarOptions+
+	((WRAPPED obfuscatedStatementText) | compiledSqlScalarFunctionDefinition)
+	)
+	;
+
+createFunctionStatementSqlTable
+	: (
+	CREATE FUNCTION functionName
+	LPAREN ((parameterDeclaration2 (COMMA parameterDeclaration2)*)?) RPAREN
+	((WRAPPED obfuscatedStatementText) | sqlTableFunctionDefinition)
 	)
 	;
 
@@ -569,6 +698,10 @@ createStogroupStatement
 	)
 	;
 
+/*
+Moved options to createTableOptions rule so they could
+be in any order.  Suggested by Martijn Rutte 2023-01-10.
+*/
 createTableStatement
 	: (
 	CREATE TABLE tableName
@@ -590,26 +723,32 @@ createTableStatement
 			| (asResultTable copyOptions?)
 			| createTableMaterializedQueryDefinition
 		)
-	createTableInClause?
-	partitioningClause?
-	organizationClause?
-	editprocClause?
-	validprocClause?
-	auditClause?
-	obidClause?
-	dataCaptureClause?
-	restrictOnDropClause?
-	ccsidClause1?
-	cardinalityClause?
-	loggedOption?
-	compressOption?
-	appendClause?
-	dssizeOption?
-	bufferpoolOption?
-	memberClause?
-	trackmodClause?
-	pagenumClause?
-	keyLabelOption?
+	createTableOptions*
+	)
+	;
+
+createTableOptions
+	: (
+	createTableInClause
+	| partitioningClause
+	| organizationClause
+	| editprocClause
+	| validprocClause
+	| auditClause
+	| obidClause
+	| dataCaptureClause
+	| restrictOnDropClause
+	| ccsidClause1
+	| cardinalityClause
+	| loggedOption
+	| compressOption
+	| appendClause
+	| dssizeOption
+	| bufferpoolOption
+	| memberClause
+	| trackmodClause
+	| pagenumClause
+	| keyLabelOption
 	)
 	;
 
@@ -663,10 +802,20 @@ createVariableStatement
 	)
 	;
 
+/*
+The...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...has been made optional, as it should be per the documentation.
+
+Noted by Martijn Rutte 2023-01-10.
+
+*/
 createViewStatement
 	: (
 	CREATE VIEW viewName 
-	LPAREN columnName (COMMA columnName)* RPAREN AS
+	(LPAREN columnName (COMMA columnName)* RPAREN)? AS
 	(WITH commonTableExpression (COMMA commonTableExpression)*)?
 	fullSelect
 	createViewCheckOptionClause?
@@ -1985,15 +2134,6 @@ triggerDefinitionOption
 	)
 	;
 
-/*
-The customVolatileClause? in each of the following
-flavors of the createTableInClause has been added by
-request.  As near as I can tell, it was once valid syntax
-but is now no longer documented.  A search of DB2 documentation
-back through v9 did not turn up this syntax, but it wouldn't
-be the first time IBM tolerated old syntax for a _very_ long
-time.  Looking at you, SEP parameter of the DD statement in JCL.
-*/
 createTableInClause
 	: (
 	(customVolatileClause? IN (databaseName DOT)? tablespaceName customVolatileClause?)
@@ -2002,8 +2142,11 @@ createTableInClause
 	)
 	;
 
+/*
+Optional CARDINALITY added 2023-01-10.
+*/
 customVolatileClause
-	: (NOT? VOLATILE)
+	: (NOT? VOLATILE CARDINALITY?)
 	;
 
 createTableColumnDefinition
@@ -2202,10 +2345,7 @@ parameterDeclaration3
 
 createFunctionStatementExternalScalarOptions
 	: (
-	(RETURNS 
-		((dataType (AS LOCATOR)?)
-		| (dataType CAST FROM dataType (AS LOCATOR)?)))
-	| externalNameOption1
+	externalNameOption1
 	| languageOption3
 	| parameterStyleOption2
 	| deterministicOption
@@ -2294,6 +2434,14 @@ nullInputOption1
 
 nullInputOption2
 	: ((CALLED ON NULL INPUT) | (NULL CALL))
+	;
+
+nullInputOption3
+	: ((RETURNS NULL ON NULL INPUT) | (CALLED ON NULL INPUT))
+	;
+
+nullInputOption4
+	: (CALLED ON NULL INPUT)
 	;
 
 debugOption
@@ -2396,6 +2544,10 @@ specialRegistersOption
 	: ((INHERIT | DEFAULT) SPECIAL REGISTERS)
 	;
 
+specialRegistersOption2
+	: (INHERIT SPECIAL REGISTERS)
+	;
+
 dispatchOption
 	: (STATIC DISPATCH)
 	;
@@ -2426,10 +2578,7 @@ parameterOption2
 
 createFunctionStatementExternalTableOptions
 	: (
-	(RETURNS 
-		((TABLE LPAREN columnName functionDataType (AS LOCATOR)? (COMMA columnName functionDataType (AS LOCATOR)?)* RPAREN)
-		| (GENERIC TABLE)))
-	| externalNameOption1
+	externalNameOption1
 	| languageOption2
 	| parameterStyleOption1
 	| deterministicOption
@@ -2461,20 +2610,22 @@ createFunctionStatementExternalTableOptions
 
 createFunctionStatementSourcedOptions
 	: (
-	(RETURNS functionDataType (AS LOCATOR)?)
-	| specificNameOption2
+	specificNameOption2
 	| parameterOption2
-	| (SOURCE 
-		((functionName LPAREN parameterType (COMMA parameterType)* RPAREN)
-		| specificNameOption2))
+	)
+	;
+
+inlineSqlScalarFunctionDefinition
+	: (
+	RETURNS functionDataType languageOption1?
+	createFunctionStatementInlineSqlScalarOptions+
+	sqlRoutineBody
 	)
 	;
 
 createFunctionStatementInlineSqlScalarOptions
 	: (
-	(RETURNS functionDataType languageOption1?)
-	| (RETURN (expression | NULL | fullSelect))
-	| deterministicOption
+	deterministicOption
 	| nullInputOption1
 	| sqlDataOption1
 	| externalActionOption
@@ -2482,6 +2633,86 @@ createFunctionStatementInlineSqlScalarOptions
 	| securedOption
 	| specificNameOption1
 	| parameterOption2
+	)
+	;
+
+compiledSqlScalarFunctionDefinition
+	: (
+	RETURNS functionDataType versionOption?
+	createFunctionStatementCompiledSqlScalarOptions+
+	sqlRoutineBody
+	)
+	;
+
+createFunctionStatementCompiledSqlScalarOptions
+	: (
+	languageOption1
+	| specificNameOption1
+	| deterministicOption
+	| externalActionOption
+	| sqlDataOption4
+	| nullInputOption1
+	| dispatchOption
+	| parallelOption2
+	| debugOption
+	| parameterOption2
+	| parameterStyleOption1
+	| schemaQualifierOption
+	| packageOwnerOption
+	| asuTimeOption
+	| specialRegistersOption
+	| wlmEnvironmentOption3
+	| currentDataOption
+	| degreeOption
+	| concurrentAccessOption
+	| dynamicRulesOption
+	| applicationEncodingOption
+	| explainOption
+	| immediateWriteOption
+	| isolationLevelOption
+	| opthintOption
+	| queryAccelerationOption
+	| getAccelArchiveOption
+	| accelerationOption
+	| acceleratorOption
+	| sqlPathOption
+	| reoptOption
+	| validateOption
+	| roundingOption
+	| dateFormatOption
+	| decimalOption
+	| forUpdateOption
+	| timeFormatOption
+	| securedOption
+	| businessTimeSensitiveOption
+	| systemTimeSensitiveOption
+	| archiveSensitiveOption
+	| applcompatOption
+	| concentrateStatementsOption
+	)
+	;
+
+sqlTableFunctionDefinition
+	: (
+	RETURNS TABLE LPAREN functionDataType (COMMA functionDataType)* RPAREN
+	createFunctionStatementSqlTableOptions+
+	sqlRoutineBody
+	)
+	;
+
+createFunctionStatementSqlTableOptions
+	: (
+	languageOption1
+	| specificNameOption1
+	| deterministicOption
+	| externalActionOption
+	| sqlDataOption1
+	| nullInputOption1
+	| specialRegistersOption
+	| dispatchOption
+	| cardinalityOption
+	| parameterOption2
+	| securedOption
 	)
 	;
 
@@ -2501,17 +2732,25 @@ authorization
 	: (USER hostVariable USING hostVariable)
 	;
 
+/*
+Alternate syntax allows omission of FROM.  (WHERE searchCondition) should
+be optional, i.e. DELETE T1; is a valid statement.
+Noted by Martijn Rutte 2023-01-09.
+*/
 searchedDelete
 	: (
-	DELETE FROM tableName periodClause? AS? correlationName? includeColumns?
-	(SET assignmentClause)? (WHERE searchCondition) fetchClause?
+	DELETE FROM? tableName periodClause? AS? correlationName? includeColumns?
+	(SET assignmentClause)? (WHERE searchCondition)? fetchClause?
 	(isolationClause | skipLockedDataClause)* querynoClause?
 	)
 	;
 
+/*
+Alternate syntax allows omission of FROM.  Noted by Martijn Rutte 2023-01-09.
+*/
 positionedDelete
 	: (
-	DELETE FROM tableName AS? correlationName? WHERE CURRENT OF cursorName
+	DELETE FROM? tableName AS? correlationName? WHERE CURRENT OF cursorName
 	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
 	)
 	;
@@ -2859,20 +3098,20 @@ functionBuiltInType
 	| INTEGER
 	| INT
 	| BIGINT
-	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
-	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
-	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN))?)
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN))?)
+	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
 	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
-	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
+	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN)))
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE))
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
 	| ROWID
 	| XML
 	)
@@ -2884,9 +3123,9 @@ procedureBuiltinType
 	| INTEGER
 	| INT
 	| BIGINT
-	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
-	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
-	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN))?)
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN))?)
+	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
@@ -2960,13 +3199,13 @@ sourceDataType
 	: procedureBuiltinType
 	;
 
-functionOptionList
+functionExternalOptionList
 	: (
 	externalNameOption2
 	| languageOption4
 	| parameterStyleOption2
 	| deterministicOption
-	| nullInputOption1
+	| nullInputOption3
 	| sqlDataOption3
 	| externalActionOption
 	| packagePathOption
@@ -2986,11 +3225,83 @@ functionOptionList
 	| specialRegistersOption
 	| dispatchOption
 	| securedOption
-	| SPECIFIC
-	| (PARAMETER CCSID)
 	)
 	;
 
+functionCompiledSqlScalarOptionList
+	: (
+	deterministicOption
+	| externalActionOption
+	| sqlDataOption4
+	| nullInputOption3
+	| dispatchOption
+	| parallelOption2
+	| debugOption
+	| schemaQualifierOption
+	| packageOwnerOption
+	| asuTimeOption
+	| specialRegistersOption
+	| wlmEnvironmentOption3
+	| currentDataOption
+	| degreeOption
+	| concurrentAccessOption
+	| dynamicRulesOption
+	| applicationEncodingOption
+	| explainOption
+	| immediateWriteOption
+	| isolationLevelOption
+	| opthintOption
+	| sqlPathOption
+	| queryAccelerationOption
+	| getAccelArchiveOption
+	| accelerationOption
+	| acceleratorOption
+	| releaseAtOption
+	| reoptOption
+	| validateOption
+	| roundingOption
+	| dateFormatOption
+	| decimalOption
+	| forUpdateOption
+	| timeFormatOption
+	| securedOption
+	| businessTimeSensitiveOption
+	| systemTimeSensitiveOption
+	| archiveSensitiveOption
+	| applcompatOption
+	| concentrateStatementsOption
+	)
+	;
+
+functionInlineSqlScalarOptionList
+	: (
+	deterministicOption
+	| externalActionOption
+	| sqlDataOption1
+	| dispatchOption
+	| nullInputOption4
+	| securedOption
+	)
+	;
+
+functionSqlTableOptionList
+	: (
+	deterministicOption
+	| externalActionOption
+	| sqlDataOption1
+	| nullInputOption4
+	| specialRegistersOption2
+	| dispatchOption
+	| cardinalityOption
+	| securedOption
+	)
+	;
+
+/*
+Changed hard-coded debugOption and nullInputOption2
+to use their parser rule equivalents.  Hopefully this
+isn't too painful for anyone.
+*/
 procedureOptionList
 	: (
 	dynamicResultSetOption
@@ -3011,10 +3322,9 @@ procedureOptionList
 	| runOptionsOption
 	| commitOnReturnOption
 	| specialRegistersOption
-	| (CALLED ON NULL INPUT)
-	| (NULL CALL)
+	| nullInputOption2
 	| stopAfterFailureOption
-	| ((DISALLOW | ALLOW | DISABLE) DEBUG MODE_)
+	| debugOption
 	)
 	;
 
@@ -3127,7 +3437,7 @@ immediateWriteOption
 	;
 
 explainOption
-	: ((WITH | WITHOUT) EXPLAIN)
+	: ((WITH | WITHOUT) CP_EXPLAIN)
 	;
 
 reoptOption
@@ -3372,6 +3682,13 @@ alterStogroupOptionList
 	)
 	;
 
+/*
+Added..
+
+	| (referentialConstraint)
+
+...as it seems to be allowed on its own.  Noted by Martijn Rutte 2023-01-10.
+*/
 alterTableOptionList
 	: (
 	(ADD COLUMN? alterTableColumnDefinition)
@@ -3380,6 +3697,7 @@ alterTableOptionList
 	| (DROP COLUMN? columnName RESTRICT)
 	| (ADD periodDefinition)
 	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
+	| (referentialConstraint)
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
 	| (ADD partitioningClause)
 	| (ADD PARTITION partitionClause)
@@ -3437,6 +3755,9 @@ alterTablespaceOptionList
 /*
 2022-11-01 Maarten van Haasteren noticed this rule should
 reference usingSpecification2 instead of usingBlock.
+2023-01-10 Martijn Rutte noticed this rule should allow
+pagenumClause on its own and not just as part of
+partitionByRangeSpecification.
 */
 createTablespaceOptionList
 	: (
@@ -3459,6 +3780,7 @@ createTablespaceOptionList
 	| maxpartitionsOption
 	| memberClause
 	| trackmodClause
+	| pagenumClause
 	| usingSpecification2
 	)
 	;
@@ -3783,9 +4105,13 @@ alterTableColumnDefinitionOptionList1
 	)
 	;
 
+/*
+Changed to refer to defaultClause instead of defaultClause2
+as these are identical.
+*/
 alterTableColumnDefinitionOptionList2
 	: (
-	(defaultClause2)
+	(defaultClause)
 	| (NOT NULL)
 	| (columnConstraint)
 	| (generatedClause)
@@ -3800,9 +4126,16 @@ columnConstraint
 	: (referencesClause | checkConstraint)
 	;
 
+/*
+Made...
+
+	(asIdentityClause | asRowChangeTimestampClause)
+
+...optional as it was not by by mistake.  Noted by Martijn Rutte 2023-01-10.
+*/
 generatedClause
 	: (
-	(GENERATED (ALWAYS | (BY DEFAULT))? (asIdentityClause | asRowChangeTimestampClause))
+	(GENERATED (ALWAYS | (BY DEFAULT))? (asIdentityClause | asRowChangeTimestampClause)?)
 	| (GENERATED ALWAYS?
 		(asRowTransactionStartIDClause 
 		| asRowTransactionTimestampClause 
@@ -3907,9 +4240,9 @@ builtInType
 	| INTEGER
 	| INT
 	| BIGINT
-	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN)))
-	| (DECFLOAT (integerInParens | (LPAREN RPAREN)))
-	| (FLOAT (integerInParens | (LPAREN RPAREN)))
+	| ((DECIMAL | DEC | NUMERIC) (integerInParens | (LPAREN RPAREN))?)
+	| (DECFLOAT (integerInParens | (LPAREN RPAREN))?)
+	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
 	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (forDataQualifier | ccsidClause2)?)
@@ -4056,14 +4389,33 @@ partitioningClause
 	)
 	;
 
+/*
+Made...
+
+	(ASC | DESC)
+
+...optional because it wasn't and it should be.  Found by Martijn Rutte 2022-01-09.
+*/
 partitionExpression
 	: (
-	columnName (NULLS LAST)? (ASC | DESC)
+	columnName (NULLS LAST)? (ASC | DESC)?
 	)
 	;
 
+/*
+Changed...
+
+	(INTEGERLITERAL | MAXVALUE | MINVALUE)
+
+...to...
+
+	(literal | MAXVALUE | MINVALUE)
+
+...because the literal must match the data type of the column
+it references.  Found by Martijn Rutte 2022-01-09.
+*/
 partitionLimitKey
-	: (INTEGERLITERAL | MAXVALUE | MINVALUE)
+	: (literal | MAXVALUE | MINVALUE)
 	;
 
 /*
@@ -5157,25 +5509,25 @@ xmlTableRegularColumnDefinition
 	)
 	;
 
+/*
+Made...
+
+	(defaultClauseAllowables
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+
+...optional because it wasn't by my mistake.  Noted by Martijn Rutte 2023-01-09.
+*/
 defaultClause
 	: (
 	WITH? DEFAULT
 	(defaultClauseAllowables
-	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))?
 	)
 	;
 
 defaultClause1
 	: (
 	WITH? DEFAULT defaultClauseAllowables?
-	)
-	;
-
-defaultClause2
-	: (
-	WITH? DEFAULT
-	(defaultClauseAllowables
-	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
 	)
 	;
 
@@ -6158,12 +6510,17 @@ selectStatement
 	)
 	;
 
+/*
+Made...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...optional, as it should be per the documentation.  Noted
+by Martijn Rutte 2023-01-10.
+*/
 commonTableExpression
 	: tableName 
-	LPAREN
-	columnName
-	(COMMA columnName)*
-	RPAREN
+	(LPAREN columnName (COMMA columnName)* RPAREN)?
 	AS LPAREN fullSelect RPAREN
 	;
 

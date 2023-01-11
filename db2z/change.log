@@ -1,3 +1,97 @@
+--2023-01-09--------------------------------------------------------------------
+The alterFunction* rules were a mess.  They've been cleaned up in the process
+of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION.
+
+Speaking of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION,
+SQL/PL toleration has been added to CREATE FUNCTION and ALTER FUNCTION.  The
+CREATE_OR_ALTER_PROCEDURE_MODE lexer mode has been repurposed to tolerate
+SQL/PL in CREATE or ALTER of FUNCTIONs or PROCEDUREs.
+
+Changed hard-coded debugOption and nullInputOption2 in procedureOptionList
+to use their parser rule equivalents.  Hopefully this isn't too painful for 
+anyone.
+
+Corrected builtInType, procedureBuiltinType and functionBuiltinType making 
+(integerInParens | (LPAREN RPAREN)) optional for DECIMAL, DEC, NUMERIC, and
+FLOAT as documented.
+
+Fixed CREATE AUXILIARY TABLE changing databaseName? to (databaseName DOT)? 
+prior to tablespaceName.
+
+Corrected defaultClause, making...
+
+	(defaultClauseAllowables
+	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
+
+...optional because it wasn't by my mistake.
+
+Corrected partitionExpression, making...
+
+	(ASC | DESC)
+
+...optional because it wasn't and it should be.
+
+Changed partitionLimitKey from...
+
+	(INTEGERLITERAL | MAXVALUE | MINVALUE)
+
+...to...
+
+	(literal | MAXVALUE | MINVALUE)
+
+...because the literal must match the data type of the column
+it references.
+
+Made FROM optional in searchedDelete and positionedDelete, 
+this is an alternate syntax allowed by IBM for compatibility with other DBMSs.
+
+Added pagenumClause to createTablespaceOptionList.
+
+Made...
+
+	(asIdentityClause | asRowChangeTimestampClause)
+
+...optional in generatedClause, as it should be per the documentation.
+
+Made...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...optional in commonTableExpression, as it should be per the documentation.
+
+The...
+
+	(LPAREN columnName (COMMA columnName)* RPAREN)
+
+...has been made optional in createViewStatement.
+
+Added..
+
+	| (referentialConstraint)
+
+...to alterTableOptionList as it seems to be allowed on its own.
+
+Moved CREATE TABLE options to their own createTableOptions rule so
+they could be in any order.
+
+Need for above 10 corrections found by Martijn Rutte 2023-01-09 
+and 2023-01-10.
+
+Changed sqlStatement from...
+
+	(SQL_STATEMENT_TERMINATOR | SEMICOLON | (END_EXEC DOT?) | EOF)
+
+...to...
+
+	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
+
+...as multiple statement terminators or semicolons would end parsing and the
+rest of the input would go unnoticed.
+
+Added CARDINALITY? to customVolatileClause because it's documented that way...
+now.  I know I researched this and remember doing searches of the documentation
+back in late July of 2022 and found nothing.  Maybe it's just my old age.
+
 --2023-01-03--------------------------------------------------------------------
 Changed...
 
