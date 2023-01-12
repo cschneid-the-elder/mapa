@@ -5898,7 +5898,7 @@ ccsidValue
 	;
 
 columnName
-	: (((correlationName | tableName) DOT)? (identifier1 | NONNUMERICLITERAL))
+	: (((correlationName | tableName) DOT)? identifier1)
 	;
 
 sourceColumnName
@@ -6619,7 +6619,7 @@ identifier1
 	;
 
 sqlidentifier
-	: SQLIDENTIFIER
+	: (SQLIDENTIFIER | NONNUMERICLITERAL)
 	;
 	
 sqlKeyword

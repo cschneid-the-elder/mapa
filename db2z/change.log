@@ -1,3 +1,34 @@
+--2023-01-11--------------------------------------------------------------------
+Precipitated by Martijn Rutte pointing out that...
+
+	ALTER TABLE "T1" ADD COLUMN C1 TIMESTAMP;
+
+...failed to parse correctly, I did the following.
+
+Changed definition of sqlidentifier from...
+
+	SQLIDENTIFIER
+
+...to...
+
+	(SQLIDENTIFIER | NONNUMERICLITERAL)
+
+...because that's what the documentation says.  It actually says more than that,
+but right now I'm going to exclude support for DBCS names.  And 
+NONNUMERICLITERAL is a bit more liberal than perhaps it should be, but that's
+probably okay.
+
+Changed definition of columnName from...
+
+	(((correlationName | tableName) DOT)? (identifier1 | NONNUMERICLITERAL))
+
+...to...
+
+	(((correlationName | tableName) DOT)? identifier1)
+
+...because identifier1 references sqlidentifier and the above change takes
+care of that.
+
 --2023-01-09--------------------------------------------------------------------
 The alterFunction* rules were a mess.  They've been cleaned up in the process
 of adding SQL/PL toleration to CREATE FUNCTION and ALTER FUNCTION.
