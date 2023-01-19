@@ -6139,19 +6139,19 @@ hostVariable
 	;
 
 hostIdentifier
-	: identifier (MINUS identifier)*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
 	;
 
 hostStructure
-	: identifier (MINUS identifier)*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
 	;
 
 nullIndicator
-	: identifier (MINUS identifier)*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
 	;
 
 nullIndicatorStructure
-	: identifier (MINUS identifier)*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
 	;
 
 globalVariableName
