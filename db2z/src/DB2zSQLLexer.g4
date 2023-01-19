@@ -4329,6 +4329,13 @@ SQL_STATEMENT_TERMINATOR
 	{createOrAlterSeen = false;}
 	;
 
+/*
+TODO it's possible the national characters and the hyphen
+are incorrect here, but also it would seem this should begin
+with an uppercase character
+https://www.ibm.com/docs/en/db2-for-zos/13?topic=identifiers-sql
+however, i suspect the documentation is out of date
+*/
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$\-_]+
 	;
