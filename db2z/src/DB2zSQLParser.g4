@@ -6131,7 +6131,7 @@ specificName
 	;
 
 hostLabel
-	: identifier
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
 	;
 
 hostVariable
@@ -6139,19 +6139,19 @@ hostVariable
 	;
 
 hostIdentifier
-	: identifier
+	: identifier (MINUS identifier)*
 	;
 
 hostStructure
-	: identifier
+	: identifier (MINUS identifier)*
 	;
 
 nullIndicator
-	: identifier
+	: identifier (MINUS identifier)*
 	;
 
 nullIndicatorStructure
-	: identifier
+	: identifier (MINUS identifier)*
 	;
 
 globalVariableName
@@ -6243,9 +6243,9 @@ The following is brought to you by the ANTLR 4.9.2 message
 			| xmltableExpression 
 			| (LPAREN+ tableReference RPAREN+)
 			| collectionDerivedTable)
-				(INNER | ((LEFT | RIGHT | FULL) OUTER?)) JOIN
+				(INNER | ((LEFT | RIGHT | FULL) OUTER?))? JOIN
 						tableReference ON joinCondition))
-		((INNER | ((LEFT | RIGHT | FULL) OUTER?)) JOIN
+		((INNER | ((LEFT | RIGHT | FULL) OUTER?))? JOIN
 					tableReference ON joinCondition)+)
 	| ((singleTableReference 
 		| nestedTableExpression 
@@ -6261,7 +6261,7 @@ The following is brought to you by the ANTLR 4.9.2 message
 			| xmltableExpression 
 			| (LPAREN+ tableReference RPAREN+)
 			| collectionDerivedTable)
-				(INNER | ((LEFT | RIGHT | FULL) OUTER?)) JOIN
+				(INNER | ((LEFT | RIGHT | FULL) OUTER?))? JOIN
 					tableReference ON joinCondition)) CROSS JOIN tableReference)
 	| (LPAREN+ tableReference RPAREN+)
 	)

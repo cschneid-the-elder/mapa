@@ -1,3 +1,31 @@
+--2023-01-12--------------------------------------------------------------------
+Corrected...
+
+	(INNER | ((LEFT | RIGHT | FULL) OUTER?))
+
+...to be optional preceding JOIN in the tableReference rule.
+
+Changed lexer rule SQLIDENTIFIER from...
+
+	[a-zA-Z0-9@#$\-_]+
+
+...to...
+
+	[a-zA-Z0-9@#$_]+
+
+...to prevent syntax such as...
+
+	LENGTH('XYZ') -LENGTH('X')
+
+...from causing havoc as -LENGTH was recognized as an SQLIDENTIFIER instead
+of a MINUS token and a LENGTH token.
+
+Also, this is more in line with IBM's documentation.
+However, I did also have to alter the rules for hostLabel, hostIdentifier,
+hostStructure, nullIndicator, and nullIndicatorStructure to account for the
+removal of the hyphen character from SQLIDENTIFIER.  Previously, these all
+merely referenced the identifier rule.
+
 --2023-01-11--------------------------------------------------------------------
 Precipitated by Martijn Rutte pointing out that...
 

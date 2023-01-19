@@ -4337,7 +4337,8 @@ https://www.ibm.com/docs/en/db2-for-zos/13?topic=identifiers-sql
 however, i suspect the documentation is out of date
 */
 SQLIDENTIFIER
-	: [a-zA-Z0-9@#$\-_]+
+//	: [a-zA-Z0-9@#$\-_]+
+	: [a-zA-Z0-9@#$_]+
 	;
 
 /*
