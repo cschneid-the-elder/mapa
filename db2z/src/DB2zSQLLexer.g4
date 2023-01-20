@@ -4330,14 +4330,33 @@ SQL_STATEMENT_TERMINATOR
 	;
 
 /*
-TODO it's possible the national characters and the hyphen
-are incorrect here, but also it would seem this should begin
-with an uppercase character
-https://www.ibm.com/docs/en/db2-for-zos/13?topic=identifiers-sql
-however, i suspect the documentation is out of date
+Changed lexer rule SQLIDENTIFIER from...
+
+	[a-zA-Z0-9@#$\-_]+
+
+...to...
+
+	[a-zA-Z0-9@#$_]+
+
+...to prevent syntax such as...
+
+	LENGTH('XYZ') -LENGTH('X')
+
+...from causing havoc as -LENGTH was recognized as an SQLIDENTIFIER instead
+of a MINUS token and a LENGTH token.
+
+An ordinary SQL Identifier begins with an upper case character and
+can contain underscores.  But apparently DB2 tolerates lower case
+characters and will "fold" them to upper case.  
+
+The national characters are there because they may be valid as host 
+identifiers depending on the host language.  One way around this
+would be to have two different lexer rules, one that includes the
+national characters and one that does not; the parser rule for host
+identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
-	: [a-zA-Z0-9@#$\-_]+
+	: [a-zA-Z0-9@#$_]+
 	;
 
 /*
