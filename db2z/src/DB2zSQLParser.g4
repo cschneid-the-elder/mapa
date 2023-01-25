@@ -4681,8 +4681,12 @@ durationSuffix
 	)
 	;
 
+/*
+Corrected to add LPAREN and RPAREN per Martijn Rutte's discovery
+that XMLCAST invocations did not parse correctly.  2023-01-24
+*/
 xmlCastSpecification
-	: XMLCAST (expression | NULL | parameterMarker) AS dataType
+	: XMLCAST LPAREN (expression | NULL | parameterMarker) AS dataType RPAREN
 	;
 
 arrayElementSpecification
