@@ -1,8 +1,16 @@
+--2023-01-25--------------------------------------------------------------------
+Added parser rule xmlParseSpecification as the XMLPARSE function has its own
+syntax, different from other scalar functions.  This fixes a problem found by
+Martijn Rutte.
+
+Added test cases specifically for XMLPARSE.
+
 --2023-01-24--------------------------------------------------------------------
 Corrected xmlCastSpecification to add LPAREN and RPAREN per Martijn Rutte's
 discovery that XMLCAST invocations did not parse correctly.
 
 Added test cases specifically for XMLCAST.
+
 --2023-01-12--------------------------------------------------------------------
 Corrected...
 

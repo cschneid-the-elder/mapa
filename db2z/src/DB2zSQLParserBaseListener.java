@@ -6759,6 +6759,18 @@ public class DB2zSQLParserBaseListener implements DB2zSQLParserListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterXmlParseSpecification(DB2zSQLParser.XmlParseSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitXmlParseSpecification(DB2zSQLParser.XmlParseSpecificationContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterArrayElementSpecification(DB2zSQLParser.ArrayElementSpecificationContext ctx) { }
 	/**
 	 * {@inheritDoc}

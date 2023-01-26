@@ -5627,6 +5627,16 @@ public interface DB2zSQLParserListener extends ParseTreeListener {
 	 */
 	void exitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link DB2zSQLParser#xmlParseSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void enterXmlParseSpecification(DB2zSQLParser.XmlParseSpecificationContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link DB2zSQLParser#xmlParseSpecification}.
+	 * @param ctx the parse tree
+	 */
+	void exitXmlParseSpecification(DB2zSQLParser.XmlParseSpecificationContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link DB2zSQLParser#arrayElementSpecification}.
 	 * @param ctx the parse tree
 	 */

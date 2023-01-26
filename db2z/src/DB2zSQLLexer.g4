@@ -4323,6 +4323,10 @@ M_CHAR
 	;
 */
 
+WHITESPACE
+	: W H I T E S P A C E
+	;
+
 SQL_STATEMENT_TERMINATOR
 	: . 
 	{getText().equals(statementTerminator)}?
