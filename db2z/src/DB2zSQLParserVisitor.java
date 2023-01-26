@@ -3382,6 +3382,12 @@ public interface DB2zSQLParserVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitXmlCastSpecification(DB2zSQLParser.XmlCastSpecificationContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link DB2zSQLParser#xmlParseSpecification}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitXmlParseSpecification(DB2zSQLParser.XmlParseSpecificationContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link DB2zSQLParser#arrayElementSpecification}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
