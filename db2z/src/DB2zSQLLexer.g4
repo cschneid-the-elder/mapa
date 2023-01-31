@@ -907,7 +907,7 @@ NO
 	;
 
 NODEFER
-	: N O D F E R
+	: N O D E F E R
 	;
 
 NONE
