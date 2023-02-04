@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019 - 2023 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
@@ -230,7 +230,7 @@ ddParmDCB : DCB EQUAL (
     RPAREN) 
   ) ;
 
-ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | datasetName ;
+ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmHIARCHY | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | datasetName ;
 
 
 ddParmDDNAME : DDNAME EQUAL keywordOrSymbolic? ;
@@ -262,6 +262,15 @@ ddParmFREEVOL : FREEVOL EQUAL keywordOrSymbolic ;
 ddParmFUNC : FUNC EQUAL keywordOrSymbolic ;
 ddParmGDGORDER : GDGORDER EQUAL keywordOrSymbolic ;
 ddParmGNCP : GNCP EQUAL keywordOrSymbolic ;
+/*
+HIARCHY is obsolete but probably still tolerated.
+syntax: HIARCHY={0|1}
+example: DCB=(DSORG=DA,HIARCHY=0)
+
+Whether or not HIARCHY=1 on its own (without an associated DCB=
+would be tolerated by JES is currently unknown.
+*/
+ddParmHIARCHY : HIARCHY EQUAL keywordOrSymbolic ;
 ddParmHOLD : HOLD EQUAL keywordOrSymbolic ;
 ddParmINTVL : INTVL EQUAL keywordOrSymbolic ;
 ddParmIPLTXID : IPLTXID EQUAL keywordOrSymbolic ;
