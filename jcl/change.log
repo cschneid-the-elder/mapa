@@ -1,3 +1,7 @@
+--2023-02-03--------------------------------------------------------------------
+Added ROLL parameter to JOB and EXEC statements.  This is old, obsolete, and
+still tolerated.
+
 --2022-03-03--------------------------------------------------------------------
 Added PROCLIB parameter to JCLLIB statement.  No idea how
 I missed that as it's been there since z/OS 2.1.

@@ -108,7 +108,7 @@ are only identical _now_ and may change. It's pretty easy to see which
 they are - the upper case part of the name is the same.  Except for 
 the COND parameter, which is in fact different.
 */
-execParameter : execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmTIME | execParmTVSMSG | execParmTVSAMCOM ;
+execParameter : execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmROLL | execParmTIME | execParmTVSMSG | execParmTVSAMCOM ;
 
 /*
 Some of the parameters for the EXEC statement can have a procstepname 
@@ -155,6 +155,13 @@ execParmREGIONX : EXEC_REGIONX EQUAL singleOrMultipleValue ;
 
 execParmRLSTMOUT : EXEC_RLSTMOUT EQUAL keywordOrSymbolic ;
 
+/*
+Per the 1976 OS JCL manual retrieved from bitsavers.org, the ROLL
+parameter must be coded with both parameters enclosed in parenthesis
+separated by a comma.
+*/
+execParmROLL : EXEC_ROLL EQUAL LPAREN keywordOrSymbolic COMMA keywordOrSymbolic RPAREN ;
+ 
 execParmTIME : EXEC_TIME EQUAL singleOrMultipleValue ;
 
 execParmTVSMSG : EXEC_TVSMSG EQUAL keywordOrSymbolic ;
@@ -362,7 +369,7 @@ jobAccountingInformation : (
   ) ;
 jobProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | JOB_PROGRAMMER_NAME_UNQUOTED_STRING+ | QS_AMPERSAND+ | QS_SQUOTE2+) ;
 
-jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
+jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmROLL | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
 
 jobParmBYTES : BYTES EQUAL singleOrMultipleValue ;
 
@@ -418,6 +425,13 @@ jobParmREGION : REGION EQUAL keywordOrSymbolic ;
 jobParmREGIONX : REGIONX EQUAL singleOrMultipleValue ;
 
 jobParmRESTART : RESTART EQUAL singleOrMultipleValue ;
+
+/*
+Per the 1976 OS JCL manual retrieved from bitsavers.org, the ROLL
+parameter must be coded with both parameters enclosed in parenthesis
+separated by a comma.
+*/
+jobParmROLL : ROLL EQUAL LPAREN keywordOrSymbolic COMMA keywordOrSymbolic RPAREN ;
 
 jobParmSECLABEL : SECLABEL EQUAL keywordOrSymbolic ;
 

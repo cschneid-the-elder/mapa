@@ -1,4 +1,4 @@
-/*Copyright (C) 2019 - 2021 Craig Schneiderwent.  All rights reserved.*/
+/*Copyright (C) 2019 - 2023 Craig Schneiderwent.  All rights reserved.*/
 
 
 /*
@@ -84,6 +84,12 @@ public static void main(String[] args) throws Exception {
 		if (jobsPP.size() == 0 && procsPP.size() == 0) {
 			LOGGER.info(aFileName + " contains neither jobs nor procs - not JCL?");
 		}
+		LOGGER.fine(
+			"after lexAndParsePP jobs = |" 
+			+ jobsPP 
+			+ "| procs = |" 
+			+ procsPP 
+			+ "|");
 		for (PPJob j: jobsPP) {
 			jobNb++;
 			LOGGER.info("Processing job " + j.getJobName());
