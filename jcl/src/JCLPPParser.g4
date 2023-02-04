@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2019 - 2022 Craig Schneiderwent.  All rights reserved.  I accept
+Copyright (C) 2019 - 2023 Craig Schneiderwent.  All rights reserved.  I accept
 no liability for damages of any kind resulting from the use of this 
 software.  Use at your own risk.
 
