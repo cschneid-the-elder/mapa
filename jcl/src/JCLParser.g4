@@ -193,12 +193,14 @@ ddParmBUFMAX : BUFMAX EQUAL keywordOrSymbolic ;
 ddParmBUFNO : BUFNO EQUAL keywordOrSymbolic ;
 ddParmBUFOFF : BUFOFF EQUAL keywordOrSymbolic ;
 ddParmBUFOUT : BUFOUT EQUAL keywordOrSymbolic ;
+ddParmBUFRQ : BUFRQ EQUAL keywordOrSymbolic ;
 ddParmBUFSIZE : BUFSIZE EQUAL keywordOrSymbolic ;
 ddParmBURST : BURST EQUAL keywordOrSymbolic ;
 ddParmCCSID : CCSID EQUAL keywordOrSymbolic ;
 ddParmCHARS : CHARS EQUAL singleOrMultipleValue ;
 ddParmCHKPT : CHKPT EQUAL keywordOrSymbolic ;
 ddParmCNTL : CNTL EQUAL keywordOrSymbolic ;
+ddParmCODE : CODE EQUAL keywordOrSymbolic ;
 ddParmCOPIES : COPIES EQUAL singleOrMultipleValue ;
 ddParmCPRI : CPRI EQUAL keywordOrSymbolic ;
 ddParmCYLOFL : CYLOFL EQUAL keywordOrSymbolic ;
@@ -230,7 +232,7 @@ ddParmDCB : DCB EQUAL (
     RPAREN) 
   ) ;
 
-ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFSIZE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmHIARCHY | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | datasetName ;
+ddParmDCB_Parameter : ddParmBFALN | ddParmBFTEK | ddParmBLKSIZE | ddParmBUFIN | ddParmBUFL | ddParmBUFMAX | ddParmBUFNO | ddParmBUFOFF | ddParmBUFOUT | ddParmBUFRQ | ddParmBUFSIZE | ddParmCODE | ddParmCPRI | ddParmCYLOFL | ddParmDEN | ddParmDIAGNS | ddParmDSORG | ddParmEROPT | ddParmFUNC | ddParmGNCP | ddParmHIARCHY | ddParmINTVL | ddParmIPLTXID | ddParmKEYLEN | ddParmLIMCT| ddParmLRECL | ddParmMODE |  ddParmNCP | ddParmNTM | ddParmOPTCD | ddParmPCI | ddParmPRTSP | ddParmRECFM | ddParmRESERVE | ddParmRKP | ddParmSOWA | ddParmSTACK | ddParmTHRESH | ddParmTRTCH | datasetName ;
 
 
 ddParmDDNAME : DDNAME EQUAL keywordOrSymbolic? ;
@@ -317,6 +319,7 @@ ddParmROACCESS : ROACCESS EQUAL singleOrMultipleValue ;
 ddParmSECMODEL : SECMODEL EQUAL singleOrMultipleValue ;
 ddParmSEGMENT : SEGMENT EQUAL keywordOrSymbolic ;
 ddParmSEP : SEP EQUAL singleOrMultipleValue ;
+ddParmSOWA : SOWA EQUAL keywordOrSymbolic ;
 ddParmSPACE : SPACE EQUAL singleOrMultipleValue ; 
 
 ddParmSPIN : SPIN EQUAL singleOrMultipleValue ;

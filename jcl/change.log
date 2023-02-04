@@ -1,3 +1,8 @@
+--2023-02-04--------------------------------------------------------------------
+Added obsolete DD DCB parameters BUFRQ, CODE, and SOWA.  The first and last
+are for QTAM only, the second is for paper tape.  My guess is these are still
+tolerated, so just in case someone is processing ancient JCL I added them.
+
 --2023-02-03--------------------------------------------------------------------
 Added ROLL parameter to JOB and EXEC statements.  This is old, obsolete, and
 still tolerated.
