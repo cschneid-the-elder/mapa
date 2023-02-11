@@ -1,3 +1,8 @@
+--2023-02-10--------------------------------------------------------------------
+ANTLR 4.11.1 migration.  Makefile, manifest file, tester script modified to use
+new antlr-4.11.1-complete.jar file.  DB2zSQL.jar regenerated.
+
+
 --2023-01-31--------------------------------------------------------------------
 Fixed typo in lexer rule NODEFER.
 

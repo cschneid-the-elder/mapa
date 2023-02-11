@@ -42,7 +42,8 @@
 #                     n=@@###@ as in testNist
 
 JC = javac
-CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
+#CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
+CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.11.1-complete.jar:./DB2zSQL.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -55,7 +56,8 @@ AOPT = -visitor -listener
 
 ./src/%.tokens: ./src/%.g4
 	echo `date` $< >>build.log
-	java -jar ./lib/antlr-4.9.2-complete.jar $(AOPT) $<
+#	java -jar ./lib/antlr-4.9.2-complete.jar $(AOPT) $<
+	java -jar ./lib/antlr-4.11.1-complete.jar $(AOPT) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 

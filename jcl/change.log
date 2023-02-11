@@ -1,3 +1,7 @@
+--2023-02-10--------------------------------------------------------------------
+ANTLR 4.11.1 migration.  Makefile, manifest file, tester script modified to use
+new antlr-4.11.1-complete.jar file.  JCLParser.jar regenerated.
+
 --2023-02-04--------------------------------------------------------------------
 Added obsolete DD DCB parameters BUFRQ, CODE, and SOWA.  The first and last
 are for QTAM only, the second is for paper tape.  My guess is these are still
