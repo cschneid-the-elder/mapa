@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
 
-Currently (12-May-2022) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (10-Feb-2023) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -12,7 +12,7 @@ Currently (12-May-2022) a work in progress.  Parsing COBOL to extract various so
 
 ### How To Run
 
-Download the .jar files.
+Download the .jar files.  If you have provenance issues feel free to obtain the ANTLR jar from https://www.antlr.org and the commons-cli jar from https://commons.apache.org/proper/commons-cli/. 
 
     usage: CallTree [-copy <arg>] [-copyList <arg>] [-file <arg>] [-fileList
            <arg>] [-help] [-logLevel <arg>] [-out <arg>] [-saveTemp]
@@ -103,7 +103,7 @@ The DD record contains counts of how the file is opened.  This might be useful i
 
 ### Build/Execution Environment
 
-This was built on ubuntu 20.04 LTS with ANTLR 4.9.2, openjdk version "11.0.14.1", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 20.04 LTS with ANTLR 4.11.1, openjdk version "11.0.14.1", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 The GNU toolchain is used for building.  If you want to build from scratch, i.e. a repository cloned with git, there are some instructions at the top of the Makefile.
 

@@ -4,7 +4,7 @@ function testLexAndParse {
 
 	while read line
 	do
-		java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tokens < $line 1>/dev/null 2>$tmp02
+		java -cp ./class:.:./antlr-4.11.1-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tokens < $line 1>/dev/null 2>$tmp02
 		grep -v '^\[' $tmp02
 		if [ "$?" -eq 0 ]
 		then
@@ -14,7 +14,7 @@ function testLexAndParse {
 		fi
 		export filePart=${line: -8}
 		export numPart=${filePart:0:4}
-		java -cp ./class:.:./antlr-4.9.2-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tree < $line | ./src/treeCount -vruleName=test$numPart -vruleType=$kind
+		java -cp ./class:.:./antlr-4.11.1-complete.jar org.antlr.v4.gui.TestRig $kind startRule -tree < $line | ./src/treeCount -vruleName=test$numPart -vruleType=$kind
 		export myRC1=$?
 		if [ "$myRC1" -gt "$myRC" ]
 		then
