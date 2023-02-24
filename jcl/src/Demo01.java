@@ -15,6 +15,7 @@ import java.nio.file.attribute.*;
 import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 
 /**
 This is intended to demonstrate use of the JCL lexing and parsing code
@@ -245,11 +246,19 @@ public static void main(String[] args) throws Exception {
 		lexer.removeErrorListeners();
 		lexer.addErrorListener(new StdoutLexerErrorListener());
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+
 		JCLPPParser parser = new JCLPPParser(tokens);  //parse the tokens	
 		parser.removeErrorListeners();
-		parser.addErrorListener(new StdoutParserErrorListener());
+		//parser.addErrorListener(new StdoutParserErrorListener());
+		parser.addErrorListener(new CatchableErrorListener());
 
-		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		ParseTree tree = null;
+		try {
+			tree = parser.startRule(); // parse the content and get the tree
+		} catch(ParseCancellationException e) {
+			LOGGER.warning("Parser error " + e);
+			return;
+		}
 	
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
