@@ -249,7 +249,11 @@ public static void main(String[] args) throws Exception {
 
 		JCLPPParser parser = new JCLPPParser(tokens);  //parse the tokens	
 		parser.removeErrorListeners();
-		//parser.addErrorListener(new StdoutParserErrorListener());
+
+		/*
+		parser.addErrorListener(new StdoutParserErrorListener());
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		*/
 		parser.addErrorListener(new CatchableErrorListener());
 
 		ParseTree tree = null;
@@ -259,14 +263,18 @@ public static void main(String[] args) throws Exception {
 			LOGGER.warning("Parser error " + e);
 			return;
 		}
-	
+		
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
 		PPListener listener = new PPListener(jobs, procs, fileName, fileNb, baseDir, null, null, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		walker.walk(listener, tree);
+		try {
+			walker.walk(listener, tree);
+		} catch(Exception e) {
+			LOGGER.warning(listener.getClass().getName() + " error " + e);
+		}
 
 	}
 
@@ -330,17 +338,32 @@ public static void main(String[] args) throws Exception {
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		JCLParser parser = new JCLParser(tokens);  //parse the tokens	
 		parser.removeErrorListeners();
-		parser.addErrorListener(new StdoutParserErrorListener());
 
+		/*
+		parser.addErrorListener(new StdoutParserErrorListener());
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
-	
+		*/
+		parser.addErrorListener(new CatchableErrorListener());
+
+		ParseTree tree = null;
+		try {
+			tree = parser.startRule(); // parse the content and get the tree
+		} catch(ParseCancellationException e) {
+			LOGGER.warning("Parser error " + e);
+			return;
+		}
+		
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
 		JobListener listener = new JobListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		walker.walk(listener, tree);
+		try {
+			walker.walk(listener, tree);
+		} catch(Exception e) {
+			LOGGER.warning(listener.getClass().getName() + " error " + e);
+		}
 
 	}
 

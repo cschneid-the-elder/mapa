@@ -77,6 +77,15 @@ fi
 
 if [ "$kind" = "DEMO" ]
 then
+	if [ "$1" = "all" ]
+	then
+	  echo "testdata/test9004.jcl" >> $tmp01
+	  echo "testdata/test9007.jcl" >> $tmp01
+	  echo "testdata/test9011.jcl" >> $tmp01
+	  echo "testdata/test9012.jcl" >> $tmp01
+	  echo "testdata/test9013.jcl" >> $tmp01
+	  echo "testdata/test9014.jcl" >> $tmp01
+	fi
 	testDemo
 else
 	testLexAndParse

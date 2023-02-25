@@ -1,3 +1,27 @@
+--2023-02-25--------------------------------------------------------------------
+Issue 147 mitigation.
+
+Added ERROR_CHAR* tokens to JCLLexer.g4 and JCLPPLexer.g4.  Added errorChars
+rule to JCLParser.g4 and JCLPPParser.g4.  This was to transfer unrecognized
+token errors to the parser, where I could catch them with a custom error
+listener.
+
+Substituted CatchableErrorListener for StdoutParserErrorListener in methods
+lexAndParsePP() and lexAndParse() in Demo01.java.  This way, both unrecognized
+and unexpected tokens are caught programmatically.
+
+Modified the execJCL rule in the parser grammars to allow for 
+delimiterStatements placed between jclSteps.  Oddly, a side effect is that
+files containing large numbers of outputStatements take significantly longer
+to parse.
+
+Wrapped the ParseTreeWalker.walk() execution in a try/catch block in an attempt
+to trap anything I've overlooked.
+
+The overall effect of all this should be to continue processing despite 
+unexpected input (say, a COBOL or C program) and any oversights in the grammars
+or the listeners. 
+
 --2023-02-10--------------------------------------------------------------------
 ANTLR 4.11.1 migration.  Makefile, manifest file, tester script modified to use
 new antlr-4.11.1-complete.jar file.  JCLParser.jar regenerated.
