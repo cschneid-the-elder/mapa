@@ -2414,6 +2414,10 @@ JOBGROUP_ACCT_COMMA_WS_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
 ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS_NEWLINE
 	: .
 	;
@@ -2433,6 +2437,10 @@ JOBGROUP_ACCT_COMMA_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
 ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE
 	: .
 	;
@@ -2483,6 +2491,10 @@ JOBGROUP_ACCT2_COMMA
 	->channel(HIDDEN)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_JOBGROUP_ACCT2
 	: .
 	;
@@ -2507,6 +2519,10 @@ JOBGROUP_ACCT3_COMMA_NEWLINE
 	->channel(HIDDEN),mode(JOBGROUP_ACCT_COMMA_WS_NEWLINE_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_JOBGROUP_ACCT3
 	: .
 	;
@@ -2609,6 +2625,10 @@ JOBGROUP_ERROR_LPAREN
 	->type(LPAREN),mode(JOBGROUP_ERROR_PAREN_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
 ERROR_CHAR_JOBGROUP_ERROR
 	: .
 	;
@@ -3625,6 +3645,10 @@ DLM_VAL
 	->type(KEYWORD_VALUE),popMode
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
 ERROR_CHAR_DLM
 	: .
 	;
@@ -3735,6 +3759,10 @@ CNTL_DATA
 	: DD_ASTERISK_DATA+?
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_CNTL_DATA
 	: .
 	;
@@ -4038,6 +4066,10 @@ DCB_KEYWORD_VALUE
 	: KEYWORD_VALUE
 	->type(KEYWORD_VALUE);
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_DCB
 	: .
 	;
@@ -4232,6 +4264,10 @@ DCB_PAREN_KEYWORD_VALUE
 	: KEYWORD_VALUE
 	->type(KEYWORD_VALUE);
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_DCB_PAREN
 	: .
 	;
@@ -4612,6 +4648,10 @@ JOB_ACCT_COMMA_WS_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_JOB_ACCT_COMMA_WS_NEWLINE
 	: .
 	;
@@ -4631,6 +4671,10 @@ JOB_ACCT_COMMA_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_JOB_ACCT_COMMA_NEWLINE
 	: .
 	;
@@ -4676,11 +4720,19 @@ JOB_ACCT2_MODE_UNQUOTED_STRING
 	->type(JOB_ACCT_MODE_UNQUOTED_STRING)
 	;
 
+/*
+Commas are no longer hidden in this mode, allowing for
+separation of the potential various accounting parameters.
+*/
 JOB_ACCT2_MODE_COMMA
 	: COMMA_DFLT
-	->type(COMMA) //,channel(HIDDEN)
+	->type(COMMA)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_JOB_ACCT2
 	: .
 	;
@@ -5021,6 +5073,10 @@ KYWD_VAL_PAREN_COMMA_WS
 	->type(COMMA),pushMode(COMMA_WS_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
 ERROR_CHAR_KYWD_VAL_PAREN
 	: .
 	;
