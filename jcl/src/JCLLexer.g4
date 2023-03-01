@@ -1988,6 +1988,10 @@ PROC_PARM_NAME
 	: NM_PART
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
 ERROR_CHAR_PROC_PARM
 	: .
 	;
@@ -2153,6 +2157,10 @@ SET_PARM_NAME
 	: NM_PART
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
 ERROR_CHAR_SET_PARM
 	: .
 	;
@@ -4670,7 +4678,7 @@ JOB_ACCT2_MODE_UNQUOTED_STRING
 
 JOB_ACCT2_MODE_COMMA
 	: COMMA_DFLT
-	->type(COMMA),channel(HIDDEN)
+	->type(COMMA) //,channel(HIDDEN)
 	;
 
 ERROR_CHAR_JOB_ACCT2
@@ -4695,6 +4703,11 @@ JOB_ACCT3_MODE_COMMA_WS
 JOB_ACCT3_MODE_COMMA_NEWLINE
 	: COMMA_DFLT NEWLINE
 	->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_NEWLINE_MODE)
+	;
+
+JOB_ACCT3_WS
+	: [ ]+
+	->channel(HIDDEN)
 	;
 
 ERROR_CHAR_JOB_ACCT3
