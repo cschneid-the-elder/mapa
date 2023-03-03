@@ -195,7 +195,7 @@ errorChars
 	| ERROR_CHAR_KYWD_VAL_PAREN_MODE)+
 	;
 
-jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ddParmASTERISK_DATA* ;
+jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement | errorChars)* ddParmASTERISK_DATA* ;
 
 /*
 System symbols can be substringed...

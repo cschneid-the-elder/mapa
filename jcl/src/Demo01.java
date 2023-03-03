@@ -112,6 +112,15 @@ public static void main(String[] args) throws Exception {
 			ArrayList<Proc> procs = new ArrayList<>();
 			ArrayList<Job> jobs = new ArrayList<>();
 			lexAndParse(jobs, procs, finalJobFile.getPath(), fileNb);
+			if (jobs.size() == 0) {
+				/*
+				There was an error in parsing, possibly the input was correct
+				enough to pass preprocessing but not correct enough to pass
+				more rigourous processing.
+				*/
+				LOGGER.info("Ignoring content of " + aFileName + " due to parsing error");
+				continue;
+			}
 			jobs.get(0).setTmpDirs(baseDir, rJob.getJobDir(), rJob.getProcDir());
 			jobs.get(0).setOrdNb(rJob.getOrdNb());
 			jobs.get(0).lexAndParseProcs();
@@ -169,6 +178,15 @@ public static void main(String[] args) throws Exception {
 			ArrayList<Proc> procs = new ArrayList<>();
 			ArrayList<Job> jobs = new ArrayList<>();
 			lexAndParse(jobs, procs, finalProcFile.getPath(), fileNb);
+			if (procs.size() == 0) {
+				/*
+				There was an error in parsing, possibly the input was correct
+				enough to pass preprocessing but not correct enough to pass
+				more rigourous processing.
+				*/
+				LOGGER.info("Ignoring content of " + aFileName + " due to parsing error");
+				continue;
+			}
 			procs.get(0).setTmpDirs(baseDir, rProc.getProcDir());
 			procs.get(0).setOrdNb(rProc.getOrdNb());
 			procs.get(0).lexAndParseProcs();
