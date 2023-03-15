@@ -1,3 +1,19 @@
+--2023-03-15--------------------------------------------------------------------
+Added alternate syntax '!!' (as BANG BANG because it amused me) for CONCATOP 
+token in lexer.  This is somewhat obscurely documented by IBM in a footnote on
+the page documenting "Expressions with the concatenation operator" as x'5A5A'.
+IBM also documents x'BBBB' (two right brackets, ']]') as an allowable 
+concatenation operator outside of an array-index expression.  I'm not going to
+allow it here as it seems like the sort of thing that would cause more trouble
+than it is worth.  Particulary since IBM also says that the CONCAT function is
+preferable to any of the concatenation operators.
+
+Removed the alternate syntax for setting the statement terminator...
+
+    #terminator
+    
+...as it is not needed per Martijn Rutte.
+
 --2023-02-10--------------------------------------------------------------------
 ANTLR 4.11.1 migration.  Makefile, manifest file, tester script modified to use
 new antlr-4.11.1-complete.jar file.  DB2zSQL.jar regenerated.
