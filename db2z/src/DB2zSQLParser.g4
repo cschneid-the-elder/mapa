@@ -648,6 +648,11 @@ obfuscatedStatementText
 	: probablySQLPL+
 	;
 
+/*
+Adding CP_PREPARE because PREPARE is part of deferPrepareOption
+in procedureSQLPLOptionList in addition to being legitimate SQL
+on its own.  Found by Martijn Rutte 05-Apr-2023.
+*/
 probablySQLPL
 	: (identifier 
 	| literal
@@ -657,6 +662,7 @@ probablySQLPL
 	| SPLAT
 	| CP_SEMICOLON
 	| CEP_SEMICOLON
+	| CP_PREPARE
 	| CP_UNIDENTIFIED 
 	| LPAREN 
 	| RPAREN
