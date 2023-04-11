@@ -1,3 +1,21 @@
+--2023-04-06--------------------------------------------------------------------
+Added CP_PREPARE token to probablySQLPL parser rule.  Martijn Rutte discovered
+that if the body of a native SQL stored procedure contains a PREPARE statement
+it results in a parse error...
+
+    mismatched input 'PREPARE' expecting {<EOF>, ';', END_EXEC, 
+    SQL_STATEMENT_TERMINATOR}
+
+...so the simplest solution was to just add CP_PREPARE to the probablySQLPL
+parser rule.
+
+PREPARE was not caught as a CP_UNIDENTIFIED token because it is a valid
+option on the CREATE PROCEDURE statement.  It appears to be unique in the 
+sense that there is a PREPARE statement and there is a PREPARE option.
+
+The sql_createProcedureSQLPL test case has been modified to include a test for
+having a PREPARE statement in the body of the procedure.
+
 --2023-03-15--------------------------------------------------------------------
 Added alternate syntax '!!' (as BANG BANG because it amused me) for CONCATOP 
 token in lexer.  This is somewhat obscurely documented by IBM in a footnote on
