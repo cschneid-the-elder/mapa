@@ -24,7 +24,19 @@ ALTER PROCEDURE DESTINY
 ALTER PROCEDURE DESTINY
   REPLACE VERSION VGhlIFNlY3JldA  --==
   ASUTIME NO LIMIT
-  SOME PL/SQL HERE;
+  IF YEAR(CURRENT DATE) > 2000 THEN
+    INSERT INTO T1
+      ( C1
+      , C2
+      , C3
+      )
+      VALUES 
+      ( CURRENT DATE
+      , 42
+      , 'TWELVE'
+      )
+    ;
+  END IF;
 @
 
 
