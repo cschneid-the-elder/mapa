@@ -2484,7 +2484,7 @@ sqlTriggerBody
 
 sqlTriggerAdvancedBody
 	: (
-	triggeredSqlStatement
+	triggeredAdvancedSqlStatement
 	| sqlplControlStatement
 	)
 	;
@@ -2494,6 +2494,22 @@ triggeredSqlStatement
 	callStatement
 	| searchedDelete
 	| ((commonTableExpression)? fullSelect)
+	| insertStatement
+	| mergeStatement
+	| refreshTableStatement
+	| setAssignmentStatement
+	| signalStatement
+	| truncateStatement
+	| searchedUpdate
+	| valuesStatement
+	)
+	;
+
+triggeredAdvancedSqlStatement
+	: (
+	callStatement
+	| searchedDelete
+	| getDiagnosticsStatement
 	| insertStatement
 	| mergeStatement
 	| refreshTableStatement
