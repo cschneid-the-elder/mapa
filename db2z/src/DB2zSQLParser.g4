@@ -2429,7 +2429,7 @@ triggerDefinition
 triggerAdvancedDefinition
 	: (
 	versionOption?
-	triggerActivationTime triggerEvent ON tableName
+	triggerAdvancedActivationTime triggerEvent ON tableName
 	triggerReferencingPhrase?
 	triggerGranularity triggerAdvancedDefinitionOptionList? triggeredAdvancedAction
 	)
@@ -2443,6 +2443,14 @@ triggerReferencingPhrase
 triggerActivationTime
 	: (
 	(NO CASCADE BEFORE)
+	| AFTER
+	| (INSTEAD OF)
+	)
+	;
+
+triggerAdvancedActivationTime
+	: (
+	((NO CASCADE)? BEFORE)
 	| AFTER
 	| (INSTEAD OF)
 	)
@@ -2484,7 +2492,7 @@ sqlTriggerBody
 
 sqlTriggerAdvancedBody
 	: (
-	triggeredAdvancedSqlStatement
+	(triggeredAdvancedSqlStatement SEMICOLON)
 	| sqlplControlStatement
 	)
 	;
