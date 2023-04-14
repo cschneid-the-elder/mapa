@@ -1691,7 +1691,7 @@ sqlplGotoStatement
 sqlplIfStatement
 	: (sqlplStartLabel? IF searchCondition THEN
 	(sqlplProcedureStatement SEMICOLON)+
-	sqlplIfElseIfPhrase?
+	sqlplIfElseIfPhrase*
 	sqlplIfElsePhrase?
 	END_IF
 	SEMICOLON?
