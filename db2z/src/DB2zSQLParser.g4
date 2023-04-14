@@ -1850,17 +1850,15 @@ sqlplCompoundAtomicClause
 	;
 
 sqlplCallArgumentList
-	: sqlplCallArgument (COMMA sqlplCallArgument)*
+	: (LPAREN sqlplCallArgument (COMMA sqlplCallArgument)* RPAREN)
 	;
 
 sqlplCallArgument
-	: (LPAREN 
-		(sqlVariableName
+	: (sqlVariableName
 		| sqlParameterName
 		| expression
 		| NULL
-		)
-	RPAREN)
+	)
 	;
 
 sqlplCaseSimpleWhenClause
