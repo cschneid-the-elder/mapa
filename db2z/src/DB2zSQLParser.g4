@@ -2430,14 +2430,19 @@ triggerAdvancedDefinition
 	: (
 	versionOption?
 	triggerAdvancedActivationTime triggerEvent ON tableName
-	triggerReferencingPhrase?
-	triggerGranularity triggerAdvancedDefinitionOptionList? triggeredAdvancedAction
+	triggerAdvancedReferencingPhrase?
+	triggerGranularity triggerAdvancedDefinitionOptionList* triggeredAdvancedAction
 	)
 	;
 
 triggerReferencingPhrase
 	: (REFERENCING
 		((OLD | NEW | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)
+	;
+	
+triggerAdvancedReferencingPhrase
+	: (REFERENCING
+		(((OLD ROW?) | (NEW ROW?) | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)
 	;
 	
 triggerActivationTime
