@@ -3268,6 +3268,7 @@ setAssignmentClause
 			| (VALUES valuesList1)
 			| (VALUES LPAREN valuesList1 (COMMA valuesList1)* RPAREN))
 		RPAREN)
+	| (setAssignmentTargetVariable EQ arrayConstructor)
 	)
 	;
 
@@ -4983,6 +4984,11 @@ operator
 	: (SPLAT | PLUS | MINUS | SLASH | CONCAT | CONCATOP)
 	;
 
+/*
+Note that arrayConstructor must precede arrayElementSpecification
+in the expression rule.  Otherwise the former is mistaken for
+the latter.
+*/
 expression
 	: (
 	functionInvocation
@@ -4998,8 +5004,8 @@ expression
 	| castSpecification
 	| xmlCastSpecification
 	| xmlParseSpecification
-	| arrayElementSpecification
 	| arrayConstructor
+	| arrayElementSpecification
 	| olapSpecification
 	| rowChangeExpression
 	| sequenceReference
