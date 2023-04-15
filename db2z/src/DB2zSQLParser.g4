@@ -757,7 +757,7 @@ is incorrect and misleading.
 createProcedureSQLPLStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
-	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	(LPAREN (parameterDeclaration3 (COMMA parameterDeclaration3)*)? RPAREN)?
 	versionOption?
 	(procedureSQLPLOptionList* languageOption1? procedureSQLPLOptionList*)
 	((WRAPPED obfuscatedStatementText) | sqlRoutineBody)
@@ -779,7 +779,7 @@ probablySQLPL
 createProcedureStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
-	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	(LPAREN (parameterDeclaration3 (COMMA parameterDeclaration3)*)? RPAREN)?
 	(createProcedureOptionList* languageOption5 createProcedureOptionList*)
 	)
 	;
@@ -2030,6 +2030,19 @@ statementInformationVariableEquate
 	: (variable EQ statementInformationItemName)
 	;
 
+/*
+	| DB2_GET_DIAGNOSTICS_DIAGNOSTICS
+	| DB2_SQL_NESTING_LEVEL
+
+are here because even though they aren't included in what the
+documentation lists as statement-information-item-name, they
+are included individually where those items are listed.
+
+I suspect, from the syntax diagram, one can only list them 
+alone, without other items.  Regardless, I'm including them
+here for simplicity's sake.
+*/
+
 statementInformationItemName
 	: (
 	DB2_LAST_ROW
@@ -2045,6 +2058,8 @@ statementInformationItemName
 	| MORE_
 	| NUMBER
 	| ROW_COUNT
+	| DB2_GET_DIAGNOSTICS_DIAGNOSTICS
+	| DB2_SQL_NESTING_LEVEL
 	)
 	;
 
