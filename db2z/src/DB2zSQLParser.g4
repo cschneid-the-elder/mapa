@@ -505,8 +505,8 @@ alterTriggerAdvancedApplicationCompatibility
 
 triggerSpecification
 	: (
-	triggerActivationTime triggerEvent ON tableName
-	triggerReferencingPhrase?
+	triggerAdvancedActivationTime triggerEvent ON tableName
+	triggerAdvancedReferencingPhrase?
 	triggerGranularity triggerAdvancedDefinitionOptionList? triggeredAdvancedAction
 	)
 	;
