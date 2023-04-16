@@ -507,7 +507,7 @@ triggerSpecification
 	: (
 	triggerAdvancedActivationTime triggerEvent ON tableName
 	triggerAdvancedReferencingPhrase?
-	triggerGranularity triggerAdvancedDefinitionOptionList? triggeredAdvancedAction
+	triggerGranularity triggerAdvancedDefinitionOptionList* triggeredAdvancedAction
 	)
 	;
 
