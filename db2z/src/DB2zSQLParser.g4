@@ -536,14 +536,28 @@ beginDeclareSectionStatement
 	: (BEGIN DECLARE SECTION)
 	;
 
+/*
+Note this is not the same as sqlplCallStatement.  Among other things,
+the syntax...
+
+	CALL XYZ()
+
+...is allowed here and not there.  I do not make the rules, I merely
+code to what is documented.
+*/
 callStatement
 	: (
 	CALL (procedureName | hostVariable)
-	(LPAREN (
-		((expression | NULL | (TABLE tableName)) (COMMA (expression | NULL | (TABLE tableName)))*)
-		| (USING DESCRIPTOR hostVariable)
-	) RPAREN)?
+	(LPAREN (callArgumentList | (USING DESCRIPTOR hostVariable))? RPAREN)?
 	)
+	;
+
+callArgument
+	: (expression | NULL | (TABLE tableName))
+	;
+
+callArgumentList
+	: (callArgument (COMMA callArgument)*)
 	;
 
 closeStatement
