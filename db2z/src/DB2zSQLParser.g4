@@ -442,7 +442,7 @@ applicationCompatibilityPhrase
 	
 alterSequenceStatement
 	: (
-	ALTER SEQUENCE sequenceName alterSequenceOptionList+
+	ALTER SEQUENCE sequenceName alterSequenceOptionList (COMMA? alterSequenceOptionList)*
 	)
 	;
 
@@ -806,7 +806,7 @@ createRoleStatement
 
 createSequenceStatement
 	: (
-	CREATE SEQUENCE sequenceName createSequenceOptionList+
+	CREATE SEQUENCE sequenceName createSequenceOptionList (COMMA? createSequenceOptionList)*
 	)
 	;
 
@@ -4101,23 +4101,23 @@ incrementOption
 	;
 
 minvalueOption
-	: ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
+	: (NOMINVALUE | (NO MINVALUE) | (MINVALUE INTEGERLITERAL))
 	;
 
 maxvalueOption
-	: ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
+	: (NOMAXVALUE | (NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
 	;
 
 cycleOption
-	: (NO? CYCLE)
+	: (NOCYCLE | (NO? CYCLE))
 	;
 
 cacheOption
-	: ((NO CACHE) | (CACHE INTEGERLITERAL))
+	: (NOCACHE | (NO CACHE) | (CACHE INTEGERLITERAL))
 	;
 
 orderOption
-	: (NO? ORDER)
+	: (NOORDER | (NO? ORDER))
 	;
 
 keyLabelOption
@@ -4166,6 +4166,7 @@ alterTableOptionList
 	| (DROP COLUMN? columnName RESTRICT)
 	| (ADD periodDefinition)
 	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
+	| (uniqueConstraint)
 	| (referentialConstraint)
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
 	| (ADD partitioningClause)
@@ -7084,7 +7085,8 @@ offsetClause
 	;
 
 fetchClause
-	: FETCH (FIRST | NEXT) INTEGERLITERAL? (ROW | ROWS) ONLY
+	: (FETCH (FIRST | NEXT) INTEGERLITERAL? (ROW | ROWS) ONLY)
+	| (LIMIT INTEGERLITERAL ((OFFSET INTEGERLITERAL) | (COMMA INTEGERLITERAL))?)
 	;
 
 identifier
@@ -7553,8 +7555,12 @@ sqlKeyword
 	| NEXT
 	| NEXTVAL
 	| NO
+	| NOCACHE
 	| NODEFER
+	| NOMAXVALUE
+	| NOMINVALUE
 	| NONE
+	| NOORDER
 	| NOT
 	| NOTNULL
 	| NTH_VALUE

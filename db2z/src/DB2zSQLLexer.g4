@@ -940,6 +940,10 @@ ORDER
 	: O R D E R 
 	;
 
+NOORDER
+	: N O O R D E R
+	;
+
 ORGANIZATION
 	: O R G A N I Z A T I O N 
 	;
@@ -1992,8 +1996,16 @@ MAXVALUE
 	: M A X V A L U E 
 	;
 
+NOMAXVALUE
+	: N O M A X V A L U E
+	;
+
 MINVALUE
 	: M I N V A L U E 
+	;
+
+NOMINVALUE
+	: N O M I N V A L U E
 	;
 
 PCTFREE
@@ -2072,8 +2084,16 @@ CACHE
 	: C A C H E
 	;
 
+NOCACHE
+	: N O C A C H E
+	;
+
 CYCLE
 	: C Y C L E
+	;
+
+NOCYCLE
+	: N O C Y C L E
 	;
 
 INCREMENT
