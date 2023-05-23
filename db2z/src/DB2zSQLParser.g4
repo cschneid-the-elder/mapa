@@ -439,7 +439,11 @@ alterWhichProcedureSQLPL2
 applicationCompatibilityPhrase
 	: (USING APPLICATION COMPATIBILITY applCompatValue)
 	;
-	
+
+/*
+Per Martijn Rutte, the alterSequenceOptionList can optionally be
+comma separated.  23-May-2023.
+*/	
 alterSequenceStatement
 	: (
 	ALTER SEQUENCE sequenceName alterSequenceOptionList (COMMA? alterSequenceOptionList)*
@@ -804,6 +808,10 @@ createRoleStatement
 	)
 	;
 
+/*
+Per Martijn Rutte, the createSequenceOptionList can optionally be
+comma separated. 23-May-2023.
+*/	
 createSequenceStatement
 	: (
 	CREATE SEQUENCE sequenceName createSequenceOptionList (COMMA? createSequenceOptionList)*
@@ -5016,6 +5024,9 @@ operator
 Note that arrayConstructor must precede arrayElementSpecification
 in the expression rule.  Otherwise the former is mistaken for
 the latter.
+
+Note that sequenceReference must precede columnName in the expression
+rule.  Otherwise the former is mistaken for the latter.
 */
 expression
 	: (
@@ -5024,6 +5035,7 @@ expression
 	| labeledDuration
 	| literal
 	| specialRegister
+	| sequenceReference
 	| columnName
 	| hostVariable
 	| scalarFullSelect
@@ -5036,7 +5048,6 @@ expression
 	| arrayElementSpecification
 	| olapSpecification
 	| rowChangeExpression
-	| sequenceReference
 	| ((operator | INTEGERLITERAL) expression)
 	| ((functionInvocation
 		| LPAREN expression RPAREN
@@ -5068,8 +5079,12 @@ rowChangeExpression
 	: ROW CHANGE (TIMESTAMP | TOKEN) FOR tableName
 	;
 
+/*
+Alternate syntax added per Michel A. G. Poppema 23-May-2023.
+*/
 sequenceReference
-	: (NEXT | PREVIOUS) VALUE FOR tableName
+	: ((((NEXT | PREVIOUS) VALUE) | NEXTVAL | PREVVAL) FOR sequenceName)
+	| (sequenceName DOT (NEXTVAL | CURRVAL))
 	;
 
 functionInvocation
@@ -7084,6 +7099,9 @@ offsetClause
 	: OFFSET INTEGERLITERAL (ROW | ROWS)
 	;
 
+/*
+LIMIT syntax added per Martijn Rutte 22-May-2023.
+*/
 fetchClause
 	: (FETCH (FIRST | NEXT) INTEGERLITERAL? (ROW | ROWS) ONLY)
 	| (LIMIT INTEGERLITERAL ((OFFSET INTEGERLITERAL) | (COMMA INTEGERLITERAL))?)
