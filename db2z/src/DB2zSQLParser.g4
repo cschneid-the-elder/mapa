@@ -5142,6 +5142,9 @@ scalarFunctionInvocation
 	)
 	;
 
+/*
+Extract function added per Martijn Rutte 2023-05-23.
+*/
 extractFunction
 	: (
 	EXTRACT LPAREN 
