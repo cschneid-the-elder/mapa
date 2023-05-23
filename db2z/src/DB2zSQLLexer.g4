@@ -1424,6 +1424,14 @@ TIMEZONE
 	: T I M E Z O N E
 	;
 
+TIMEZONE_HOUR
+	: T I M E Z O N E '_' H O U R
+	;
+
+TIMEZONE_MINUTE
+	: T I M E Z O N E '_' M I N U T E
+	;
+
 AND
 	: A N D 
 	;

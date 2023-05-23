@@ -4347,6 +4347,7 @@ createLobTablespaceOptionList
 	| defineOption
 	| dssizeOption
 	| gbpcacheSpecification
+	| insertAlgorithmOption
 	| lockmaxOption
 	| locksizeOption
 	| loggedOption
@@ -5136,7 +5137,44 @@ scalarFunctionInvocation
 	| aiAnalogyFunction
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
+	| extractFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
+	)
+	;
+
+extractFunction
+	: (
+	EXTRACT LPAREN 
+	(datePrefix | timePrefix | timezonePrefix)
+	FROM 
+	expression
+	RPAREN
+	)
+	;
+
+datePrefix
+	: (
+	YEAR
+	| MONTH
+	| DAY
+	)
+	;
+
+timePrefix
+	: (
+	HOUR
+	| MINUTE
+	| SECOND
+	)
+	;
+
+timezonePrefix
+	: (
+	HOUR
+	| MINUTE
+	| SECOND
+	| TIMEZONE_HOUR
+	| TIMEZONE_MINUTE
 	)
 	;
 
