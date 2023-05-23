@@ -4984,11 +4984,15 @@ materializedQueryTableAlteration
 	: (SET refreshableTableOptionsList+)
 	;
 
+/*
+Made (EXCLUSIVE | INCLUSIVE) optional as per documentation.  Noted
+by Martijn Rutte 2023-05-23.
+*/
 periodDefinition
 	: (
 	PERIOD FOR?
 	((SYSTEM_TIME LPAREN beginColumnName COMMA endColumnName RPAREN)
-	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE) RPAREN))
+	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE)? RPAREN))
 	)
 	;
 
