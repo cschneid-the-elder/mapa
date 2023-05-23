@@ -442,7 +442,7 @@ applicationCompatibilityPhrase
 
 /*
 Per Martijn Rutte, the alterSequenceOptionList can optionally be
-comma separated.  23-May-2023.
+comma separated.  2023-05-23.
 */	
 alterSequenceStatement
 	: (
@@ -810,7 +810,7 @@ createRoleStatement
 
 /*
 Per Martijn Rutte, the createSequenceOptionList can optionally be
-comma separated. 23-May-2023.
+comma separated. 2023-05-23.
 */	
 createSequenceStatement
 	: (
@@ -1481,11 +1481,13 @@ grantSystemStatement
 	withGrantOption?
 	)
 	;
-
+/*
+Corrected to allow comma separated list of tables per Michel A. G. Poppema 2023-05-23.
+*/
 grantTableStatement
 	: (
 	GRANT grantTableAuthority (COMMA grantTableAuthority)*
-	ON TABLE? tableName
+	ON TABLE? tableName (COMMA tableName)*
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
@@ -2347,8 +2349,11 @@ dropTablespaceClause
 	: (TABLESPACE (databaseName DOT)? tablespaceName)
 	;
 
+/*
+Added RESTRICT? per Martijn Rutte 2023-05-23.
+*/
 dropTriggerClause
-	: (TRIGGER triggerName)
+	: (TRIGGER triggerName RESTRICT?)
 	;
 
 dropTrustedContextClause
@@ -4165,6 +4170,12 @@ Added..
 	| (referentialConstraint)
 
 ...as it seems to be allowed on its own.  Noted by Martijn Rutte 2023-01-10.
+
+Added..
+
+	| (uniqueConstraint)
+
+...as it seems to be allowed on its own.  Noted by Martijn Rutte 2023-05-23.
 */
 alterTableOptionList
 	: (
@@ -5080,7 +5091,7 @@ rowChangeExpression
 	;
 
 /*
-Alternate syntax added per Michel A. G. Poppema 23-May-2023.
+Alternate syntax added per Michel A. G. Poppema 2023-05-23.
 */
 sequenceReference
 	: ((((NEXT | PREVIOUS) VALUE) | NEXTVAL | PREVVAL) FOR sequenceName)
@@ -7100,7 +7111,7 @@ offsetClause
 	;
 
 /*
-LIMIT syntax added per Martijn Rutte 22-May-2023.
+LIMIT syntax added per Martijn Rutte 2023-05-22.
 */
 fetchClause
 	: (FETCH (FIRST | NEXT) INTEGERLITERAL? (ROW | ROWS) ONLY)
