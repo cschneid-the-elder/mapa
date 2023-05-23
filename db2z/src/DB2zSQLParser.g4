@@ -5067,7 +5067,7 @@ expression
 	| arrayElementSpecification
 	| olapSpecification
 	| rowChangeExpression
-	| ((operator | INTEGERLITERAL) expression?)
+	| ((operator | INTEGERLITERAL) expression)
 	| ((functionInvocation
 		| LPAREN expression RPAREN
 		| labeledDuration
