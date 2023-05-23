@@ -6184,11 +6184,19 @@ namespacePrefix
 	: NONNUMERICLITERAL
 	;
 
+/*
+Added integerInParens? and | ((WITH | WITHOUT) TIME ZONE) per
+Martijn Rutte 2023-05-23.
+*/
 timeZoneSpecificExpression
 	: timeZoneExpressionSubset
-	((AT LOCAL) | (AT TIME ZONE timeZoneExpressionSubset))
+	integerInParens?
+	((AT LOCAL) | (AT TIME ZONE timeZoneExpressionSubset) | ((WITH | WITHOUT) TIME ZONE))
 	;
 
+/*
+Added (LPAREN expression RPAREN) per documentation. 2023-05-23
+*/
 timeZoneExpressionSubset
 	: (
 	functionInvocation
@@ -6199,6 +6207,7 @@ timeZoneExpressionSubset
 	| scalarFullSelect
 	| caseExpression
 	| castSpecification
+	| (LPAREN expression RPAREN)
 	)
 	;
 
