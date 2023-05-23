@@ -5038,6 +5038,14 @@ the latter.
 
 Note that sequenceReference must precede columnName in the expression
 rule.  Otherwise the former is mistaken for the latter.
+
+Made expression optional in ((operator | INTEGERLITERAL) expression?)
+per Martijn Rutte 2023-05-23.  This allows for...
+
+  SET C1 = SUBSTR(C2,LENGTH(C2)-1);
+
+...due to the -1 being output from the lexer as one token (INTEGERLITERAL)
+instead of two (operator INTEGERLITERAL).
 */
 expression
 	: (
@@ -5059,7 +5067,7 @@ expression
 	| arrayElementSpecification
 	| olapSpecification
 	| rowChangeExpression
-	| ((operator | INTEGERLITERAL) expression)
+	| ((operator | INTEGERLITERAL) expression?)
 	| ((functionInvocation
 		| LPAREN expression RPAREN
 		| labeledDuration
@@ -5078,7 +5086,7 @@ expression
 		| olapSpecification
 		| rowChangeExpression
 		| sequenceReference)
-		((operator | INTEGERLITERAL) expression)*)
+		((operator | INTEGERLITERAL) expression?)*)
 	)
 	;
 
