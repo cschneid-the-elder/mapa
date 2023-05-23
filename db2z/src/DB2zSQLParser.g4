@@ -2741,9 +2741,13 @@ copyOptionXmlTypeModifiers
 	: (EXCLUDING XML TYPE MODIFIERS)
 	;
 
+/*
+Corrected to make the list of columns in parentheses optional.
+Noted by Martijn Rutte 2023-05-23.
+*/
 asResultTable
 	: (
-	LPAREN (columnName (COMMA columnName)*)? RPAREN AS
+	(LPAREN (columnName (COMMA columnName)*) RPAREN)? AS
 	LPAREN fullSelect RPAREN
 	WITH NO DATA
 	)
