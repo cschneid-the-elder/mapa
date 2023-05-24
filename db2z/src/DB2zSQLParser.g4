@@ -478,7 +478,7 @@ alterTablespaceStatement
 
 alterTriggerStatement
 	: (
-	ALTER TRIGGER (schemaName DOT) triggerName NOT? SECURED
+	ALTER TRIGGER triggerName NOT? SECURED
 	)
 	;
 
@@ -6586,7 +6586,7 @@ savepointName
 	;
 
 aliasName
-	: identifier
+	: (schemaName DOT)? identifier
 	;
 
 constraintName
@@ -6641,8 +6641,11 @@ catalogName
 	: identifier
 	;
 
+/*
+Added (schemaName DOT)? per Martijn Rutte 2023-05-23.
+*/
 triggerName
-	: identifier
+	: (schemaName DOT)? identifier
 	;
 
 contextName
