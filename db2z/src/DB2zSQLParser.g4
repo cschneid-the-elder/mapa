@@ -6884,13 +6884,17 @@ nestedTableExpression
 	: (TABLE? LPAREN fullSelect RPAREN correlationClause?)
 	;
 
-/**/
+/*
+This was previously quite embarrassingly wrong.  Thankfully,
+Martijn Rutte provided a test case and we found a solution 2023-05-23.
+*/
 dataChangeTableReference
 	: (
-	(FINAL TABLE LPAREN insertStatement RPAREN correlationClause?)
-	| ((FINAL | OLD) TABLE searchedUpdate)
-	| (OLD TABLE searchedDelete)
-	| (FINAL TABLE mergeStatement)
+	((FINAL TABLE LPAREN insertStatement RPAREN)
+	| ((FINAL | OLD) TABLE LPAREN searchedUpdate RPAREN)
+	| (OLD TABLE LPAREN searchedDelete RPAREN)
+	| (FINAL TABLE LPAREN mergeStatement RPAREN))
+	correlationClause?
 	)
 	;
 
