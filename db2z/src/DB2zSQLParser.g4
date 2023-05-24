@@ -6418,6 +6418,9 @@ castDataType
 	)
 	;
 
+/*
+Modified to allow forDataQualifier on its own per Martijn Rutte 2023-05-24.
+*/
 castBuiltInType
 	: (
 	SMALLINT
@@ -6429,8 +6432,8 @@ castBuiltInType
 	| (FLOAT (integerInParens | (LPAREN RPAREN)))
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidQualifier?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidQualifier?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (ccsidQualifier | forDataQualifier)?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (ccsidQualifier | forDataQualifier)?)
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidQualifier?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
