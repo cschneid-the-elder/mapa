@@ -383,11 +383,15 @@ functionDesignator2
 	)
 	;
 
+/*
+Alternate syntax says the COMMA between alterIndexPartitionOptions
+is optional.  2023-05-24
+*/
 alterIndexStatement
 	: (
 	ALTER INDEX indexName regenerateClause?
 	alterIndexOptions*
-	(alterIndexPartitionOptions (COMMA alterIndexPartitionOptions)*)?
+	(alterIndexPartitionOptions (COMMA? alterIndexPartitionOptions)*)?
 	)
 	;
 
@@ -730,9 +734,13 @@ createGlobalTemporaryTableStatement
 	)
 	;
 
+/*
+Added syntax for TYPE 1 and TYPE 2 indexes per Martijn
+Rutte 2023-05-24.
+*/
 createIndexStatement
 	: (
-	CREATE (UNIQUE (WHERE NOT NULL)?)? INDEX indexName ON
+	CREATE (TYPE (INTEGERLITERAL))? (UNIQUE (WHERE NOT NULL)?)? INDEX indexName ON
 		((tableName LPAREN 
 		(columnName | keyExpression) (ASC | DESC | RANDOM)?
 		(COMMA (columnName | keyExpression) (ASC | DESC | RANDOM)?)*
@@ -3534,10 +3542,11 @@ notAtomicPhrase
 
 /*
 2022-11-04 Issue 125 Changed usingSpecification1 to usingBlock for consistency.
+2023-05-24 Alternate syntax says ALTER is optional.
 */
 alterIndexPartitionOptions
 	: (
-	ALTER partitionElement
+	ALTER? partitionElement
 		(usingBlock
 		| freeSpecification+
 		| gbpcacheSpecification
@@ -3567,15 +3576,17 @@ gbpcacheSpecification
 	)
 	;
 
+/*
+Updated to include alternate syntax per Martijn Rutte 2023-05-24.
+*/
 partitionElement
 	: (
-	PARTITION INTEGERLITERAL
-	(ENDING AT? LPAREN 
+	(PARTITION | PART) INTEGERLITERAL
+	(((ENDING AT?) | VALUES) LPAREN 
 		(literal | MAXVALUE | MINVALUE) (COMMA (literal | MAXVALUE | MINVALUE))* 
 	RPAREN INCLUSIVE?)?
 	)
 	;
-
 applCompatValue
 	: APPLCOMPAT_LEVEL
 	;
@@ -4340,7 +4351,7 @@ createIndexOptionList
 	| gbpcacheSpecification
 	| defineOption
 	| ((INCLUDE | EXCLUDE) NULL KEYS)
-	| (PARTITION BY RANGE? LPAREN
+	| ((PARTITION BY RANGE?)? LPAREN
 		partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*
 		(COMMA partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*)* RPAREN)
 	| bufferpoolOption
