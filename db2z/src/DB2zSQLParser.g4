@@ -2668,7 +2668,7 @@ restrictOnDropClause
 	;
 
 ccsidClause1
-	: (CCSID (ASCII | EBCDIC | UNICODE))
+	: (CCSID (ASCII | EBCDIC | UNICODE)?)
 	;
 
 ccsidClause2
@@ -3100,9 +3100,16 @@ createFunctionStatementSourcedOptions
 	)
 	;
 
+/*
+Added ccsidClause1 and forDataQualifier per Martijn Rutte 2023-05-23.
+This allows the forDataQualifier and ccsidClause1 phrases to be
+reversed from how they are defined in functionBuiltInType.
+*/
 inlineSqlScalarFunctionDefinition
 	: (
-	RETURNS functionDataType languageOption1?
+	RETURNS functionDataType 
+	(forDataQualifier ccsidClause1)? 
+	languageOption1?
 	createFunctionStatementInlineSqlScalarOptions+
 	sqlRoutineBody
 	)
@@ -3121,9 +3128,16 @@ createFunctionStatementInlineSqlScalarOptions
 	)
 	;
 
+/*
+Added ccsidClause1 and forDataQualifier per Martijn Rutte 2023-05-23.
+This allows the forDataQualifier and ccsidClause1 phrases to be
+reversed from how they are defined in functionBuiltInType.
+*/
 compiledSqlScalarFunctionDefinition
 	: (
-	RETURNS functionDataType versionOption?
+	RETURNS functionDataType 
+	(forDataQualifier ccsidClause1)? 
+	versionOption?
 	createFunctionStatementCompiledSqlScalarOptions+
 	sqlRoutineBody
 	)
