@@ -3639,8 +3639,8 @@ procedureBuiltinType
 	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (ccsidClause1 | forDataQualifier)*)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (ccsidClause1 | forDataQualifier)*)
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
@@ -4006,7 +4006,7 @@ sqlPathOption
 	;
 	
 sqlPathOptionItem
-	: ((SYSTEM PATH) | (SESSION USER) | USER | SQLIDENTIFIER)
+	: ((SYSTEM PATH) | (SESSION USER) | USER | SQLIDENTIFIER | NONNUMERICLITERAL)
 	;
 
 queryAccelerationOption
