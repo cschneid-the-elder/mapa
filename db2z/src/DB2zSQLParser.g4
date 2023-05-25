@@ -4130,8 +4130,11 @@ asTypeOption
 	: (AS sequenceDataType)
 	;
 
+/*
+Non-integer literals allowed, noted by Martijn Rutte 2023-05-23.
+*/
 startOption
-	: (START WITH INTEGERLITERAL)
+	: (START WITH (NUMERICLITERAL | INTEGERLITERAL))
 	;
 
 restartOption
@@ -4139,15 +4142,15 @@ restartOption
 	;
 
 incrementOption
-	: (INCREMENT BY INTEGERLITERAL)
+	: (INCREMENT BY (NUMERICLITERAL | INTEGERLITERAL))
 	;
 
 minvalueOption
-	: (NOMINVALUE | (NO MINVALUE) | (MINVALUE INTEGERLITERAL))
+	: (NOMINVALUE | (NO MINVALUE) | (MINVALUE (NUMERICLITERAL | INTEGERLITERAL)))
 	;
 
 maxvalueOption
-	: (NOMAXVALUE | (NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
+	: (NOMAXVALUE | (NO MAXVALUE) | (MAXVALUE (NUMERICLITERAL | INTEGERLITERAL)))
 	;
 
 cycleOption
