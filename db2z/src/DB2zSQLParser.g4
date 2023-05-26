@@ -2634,17 +2634,28 @@ customVolatileClause
 	: (NOT? VOLATILE CARDINALITY?)
 	;
 
+/*
+Restructured per observation by Michel A. G. Poppema 2023-05-26.
+Added columnDefinitionOptions as they can be in any order, previous
+implementation enforced an order incorrectly.
+*/
 createTableColumnDefinition
 	: (
 	columnName dataType?
-	(NOT NULL)?
-	generatedClause?
-	createTableColumnConstraint?
-	defaultClause?
-	fieldprocClause?
-	asSecurityLabelClause?
-	implicitlyHiddenClause?
-	inlineLengthClause?
+	columnDefinitionOptions*
+	)
+	;
+
+columnDefinitionOptions
+	: (
+	(NOT NULL)
+	| generatedClause
+	| createTableColumnConstraint
+	| defaultClause
+	| fieldprocClause
+	| asSecurityLabelClause
+	| implicitlyHiddenClause
+	| inlineLengthClause
 	)
 	;
 
@@ -2703,8 +2714,12 @@ pagenumClause
 	: (PAGENUM (RELATIVE | ABSOLUTE))
 	;
 
+/*
+Arguments to programName are options, noted when testing new
+implementation of createTableColumnDefinition 2023-05-26.
+*/
 fieldprocClause
-	: (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
+	: (FIELDPROC programName (LPAREN literal (COMMA literal)* RPAREN)?)
 	;
 
 asSecurityLabelClause
@@ -3628,6 +3643,11 @@ functionBuiltInType
 	)
 	;
 
+/*
+Changed CHAR and CLOB from ccsidClause1? forDataQualifier? to
+(ccsidClause1 | forDataQualifier)* to allow the clauses to be
+in any order.  2023-05-24
+*/
 procedureBuiltinType
 	: (
 	SMALLINT
