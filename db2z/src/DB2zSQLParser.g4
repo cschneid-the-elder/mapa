@@ -284,8 +284,11 @@ allocateCursorStatement
 	: (ALLOCATE cursorName CURSOR FOR RESULT SET rsLocatorVariable)
 	;
 
+/*
+This used to just be hostVariable, correction noted by Martijn Rutte 2023-06-05.
+*/
 rsLocatorVariable
-	: hostVariable
+	: variable
 	;
 
 alterDatabaseStatement
