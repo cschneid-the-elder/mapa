@@ -5262,10 +5262,13 @@ regressionFunctionInvocation
 	RPAREN)
 	;
 
+/*
+Function arguments made optional per observation by Martijn Rutte 2023-06-05.
+*/
 externalFunctionInvocation
 	: ((schemaName DOT)? sqlidentifier
 	LPAREN
-	expression (COMMA expression)*
+	(expression (COMMA expression)*)?
 	RPAREN)
 	;
 
