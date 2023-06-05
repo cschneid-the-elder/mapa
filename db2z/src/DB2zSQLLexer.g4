@@ -12,6 +12,7 @@ lexer grammar DB2zSQLLexer;
 
 @lexer::members {
 	public String statementTerminator = new String("");
+	public int bracketNesting = 0;
 }
 
 channels { COMMENTS }
@@ -53,10 +54,12 @@ RPAREN
 
 OPENSQBRACKET
 	: '['
+	{bracketNesting++;}
 	;
 
 CLOSESQBRACKET
 	: ']'
+	{bracketNesting--;}
 	;
 
 QUESTIONMARK
@@ -110,6 +113,12 @@ SLASH
 CONCATOP
 	: '||'
 	| BANG BANG
+	;
+
+CONCATOP_BBBB
+	: ']]'
+	{bracketNesting == 0}?
+	->type(CONCATOP)
 	;
 
 DOT
@@ -4315,8 +4324,14 @@ WHITESPACE
 	: W H I T E S P A C E
 	;
 
+/*
+Noted by Martijn Rutte 2023-06-05, NEWLINE can be present
+between END and CASE.
+
+TODO: might need this for other scope terminators
+*/
 END_CASE
-	: END WS+ CASE
+	: END (WS | NEWLINE)+ CASE
 	;
 
 END_FOR

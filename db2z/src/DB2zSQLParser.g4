@@ -1805,8 +1805,12 @@ sqlplSignalValue
 	: (sqlConditionName | (SQLSTATE VALUE? (literal | sqlVariableName)))
 	;
 
+/*
+MESSAGE_TEXT can be set to a literal or a sqlVariableName, the latter was
+noted by Martijn Rutte 2023-06-05.
+*/
 sqlplSignalInformation
-	: ((SET MESSAGE_TEXT EQ literal) | (LPAREN literal RPAREN))
+	: ((SET MESSAGE_TEXT EQ (literal | sqlVariableName)) | (LPAREN literal RPAREN))
 	;
 
 sqlplResignalValue
