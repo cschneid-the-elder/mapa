@@ -5236,6 +5236,9 @@ timezonePrefix
 	)
 	;
 
+/*
+That DISTINCT should be (ALL | DISTINCT) noted on 2023-06-05.
+*/
 aggregateFunctionInvocation
 	: (
 	arrayaggFunction
@@ -5248,7 +5251,7 @@ aggregateFunctionInvocation
 	| percentileDiscFunction
 	| percentRankFunction
 	| xmlaggFunction
-	| ((schemaName DOT)? aggregateFunction LPAREN DISTINCT? (expression | SPLAT) RPAREN)
+	| ((schemaName DOT)? aggregateFunction LPAREN (ALL | DISTINCT)? (expression | SPLAT) RPAREN)
 	)
 	;
 
@@ -5605,6 +5608,9 @@ currentRow
 	: CURRENT ROW
 	;
 
+/*
+Added MAX and MIN 2023-06-05
+*/
 scalarFunction
 	: (
 	ABS
@@ -5728,9 +5734,11 @@ scalarFunction
 	| LOWER
 	| LPAD
 	| LTRIM
+	| MAX
 	| MAX_CARDINALITY
 	| MICROSECOND
 	| MIDNIGHT_SECONDS
+	| MIN
 	| MINUTE
 	| MOD
 	| MONTH
