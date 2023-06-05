@@ -18,6 +18,18 @@ SET A =
     END
 ;
 
+SET A = 
+    CASE
+      WHEN (X = 1) THEN 4
+      WHEN (X = 2) THEN 8
+      WHEN (X = 3) THEN 15
+      WHEN (X = 4) THEN 16
+      WHEN (X = 5) THEN 23
+      WHEN (X = 6) THEN 42
+      ELSE 108
+    END CASE
+;
+
 SET A =
     CASE
       WHEN ((SELECT CURRENT_USER FROM SYSIBM.SYSDUMMY1) = 'IBMUSER') THEN 4

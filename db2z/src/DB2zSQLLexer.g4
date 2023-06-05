@@ -1,6 +1,8 @@
 /*
-Copyright (C) 2021 - 2023 Craig Schneiderwent.  All rights reserved.
-I accept no liability for damages of any kind resulting from the use
+Copyright (C) 2021 - 2023 Craig Schneiderwent.  Portions copyright
+2023 Martijn Rutte.  All rights reserved.
+
+The authors accept no liability for damages of any kind resulting from the use
 of this software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
