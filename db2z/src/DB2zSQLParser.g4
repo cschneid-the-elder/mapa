@@ -7251,9 +7251,12 @@ offsetClause
 
 /*
 LIMIT syntax added per Martijn Rutte 2023-05-22.
+
+INTEGERLITERAL changed to (variable | INTEGERLITERAL) in first
+alternative per Martijn Rutte 2023-06-05.
 */
 fetchClause
-	: (FETCH (FIRST | NEXT) INTEGERLITERAL? (ROW | ROWS) ONLY)
+	: (FETCH (FIRST | NEXT) (variable | INTEGERLITERAL)? (ROW | ROWS) ONLY)
 	| (LIMIT INTEGERLITERAL ((OFFSET INTEGERLITERAL) | (COMMA INTEGERLITERAL))?)
 	;
 
