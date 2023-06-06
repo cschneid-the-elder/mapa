@@ -149,9 +149,33 @@ fragment HEXLITERAL
 	| X '\'' [0-9A-F]+ '\''
 	;
 
+/*
+This needs to match...
+
+	'ABC''DEF X'ABCD' 'XYZ%' 123'
+
+...all as one token.  See testdata/sql_call for a real example.
+
+It turns out that SYSPROC.DSNUTILV is very forgiving in what it
+will accept in its third parameter.
+
+Documenting what I tried so I don't make the mistake of trying
+to simplify this later.
+
+trying ('\'' ~[']* '\'') picks up multiple strings all as one
+ i.e. 'a', 'b', 'like 'a%'' all three are lexed as one
+
+trying ('\'' [0-9a-zA-Z %_@#$]* '\'') which mismatches "normal" literals
+
+trying ('\'' ~[',]* '\'') which mismatches "normal" literals
+
+trying ('\'' [0-9a-zA-Z%_@#$]* '\'') which seems to work
+
+So, as of 2023-06-06, this is what we've got.
+*/
 fragment STRINGLITERAL
-	: '"' (~["] | '""' | '\'')* '"'
-	| '\'' (~['] | '\'\'' | '"')* '\''
+	: '"' (('"' [0-9a-zA-Z%_@#$]* '"') | ~["] | '""' | '\'')* '"'
+	| '\'' (('\'' [0-9a-zA-Z%_@#$]* '\'') | ~['] | '\'\'' | '"')* '\''
 	;
 
 INTEGERLITERAL
