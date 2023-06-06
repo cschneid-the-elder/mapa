@@ -6152,6 +6152,10 @@ Made...
 	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
 
 ...optional because it wasn't by my mistake.  Noted by Martijn Rutte 2023-01-09.
+
+TODO: It's possible the second half, with distinctTypeCastFunctionName, is
+simply not necessary given the addition of scalarFunctionInvocation to
+defaultClauseAllowables.
 */
 defaultClause
 	: (
@@ -6167,6 +6171,10 @@ defaultClause1
 	)
 	;
 
+/*
+Added scalarFunctionInvocation to allow what IBM documentation refers to
+as cast-function-name.  Need noted by Martijn Rutte 2023-06-05.
+*/
 defaultClauseAllowables
 	: (
 	literal
@@ -6174,6 +6182,7 @@ defaultClauseAllowables
 	| USER
 	| CURRENT_SQLID
 	| NULL
+	| scalarFunctionInvocation
 	)
 	;
 
