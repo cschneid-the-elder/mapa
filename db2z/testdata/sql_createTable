@@ -8810,3 +8810,10 @@ CREATE TABLE ROCINANTE
   )
   ;
 
+--contrary to the syntax diagram, the forDataOption can follow NOT NULL
+CREATE TABLE ROCINANTE
+  ( HOLDEN DATE DEFAULT DATE('1900-01-01') NOT NULL FOR MIXED DATA
+  , NAGATA INTEGER DEFAULT INT('123') NOT NULL
+  )
+  ;
+

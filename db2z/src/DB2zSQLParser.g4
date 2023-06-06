@@ -2655,6 +2655,12 @@ createTableColumnDefinition
 	)
 	;
 
+/*
+Added forDataQualifier as it can appear after NOT NULL and
+still be syntactically valid, contrary to the syntax diagram.
+
+Per Martijn Rutte 2023-06-05.
+*/
 columnDefinitionOptions
 	: (
 	(NOT NULL)
@@ -2665,6 +2671,7 @@ columnDefinitionOptions
 	| asSecurityLabelClause
 	| implicitlyHiddenClause
 	| inlineLengthClause
+	| forDataQualifier
 	)
 	;
 
