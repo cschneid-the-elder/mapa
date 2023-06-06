@@ -148,81 +148,84 @@ sqlStatement
 	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
 	;
 
+/*
+Added sqlplStartLabel 2023-06-05.  Pesky GOTO needs a target.
+*/
 sqlplProcedureStatement
 	: (sqlplControlStatement
-	| allocateCursorStatement
-	| alterDatabaseStatement
-	| alterFunctionStatement
-	| alterIndexStatement
-	| alterMaskStatement
-	| alterPermissionStatement
-	| alterProcedureStatement
-	| alterProcedureSQLPLStatement
-	| alterSequenceStatement
-	| alterStogroupStatement
-	| alterTableStatement
-	| alterTablespaceStatement
-	| alterTriggerStatement
-	| alterTrustedContextStatement
-	| alterViewStatement
-	| associateLocatorsStatement
+	| (sqlplStartLabel? allocateCursorStatement)
+	| (sqlplStartLabel? alterDatabaseStatement)
+	| (sqlplStartLabel? alterFunctionStatement)
+	| (sqlplStartLabel? alterIndexStatement)
+	| (sqlplStartLabel? alterMaskStatement)
+	| (sqlplStartLabel? alterPermissionStatement)
+	| (sqlplStartLabel? alterProcedureStatement)
+	| (sqlplStartLabel? alterProcedureSQLPLStatement)
+	| (sqlplStartLabel? alterSequenceStatement)
+	| (sqlplStartLabel? alterStogroupStatement)
+	| (sqlplStartLabel? alterTableStatement)
+	| (sqlplStartLabel? alterTablespaceStatement)
+	| (sqlplStartLabel? alterTriggerStatement)
+	| (sqlplStartLabel? alterTrustedContextStatement)
+	| (sqlplStartLabel? alterViewStatement)
+	| (sqlplStartLabel? associateLocatorsStatement)
 	| beginDeclareSectionStatement
-	| callStatement
-	| closeStatement
-	| commitStatement
+	| (sqlplStartLabel? callStatement)
+	| (sqlplStartLabel? closeStatement)
+	| (sqlplStartLabel? commitStatement)
 	| commentStatement
-	| connectStatement
-	| createAliasStatement
-	| createDatabaseStatement
-	| createFunctionStatement
-	| createGlobalTemporaryTableStatement
-	| createIndexStatement
-	| createLobTablespaceStatement
-	| createMaskStatement
-	| createPermissionStatement
-	| createProcedureStatement
-	| createRoleStatement
-	| createSequenceStatement
-	| createStogroupStatement
-	| createTableStatement
-	| createTablespaceStatement
-	| createTriggerStatement
-	| createTrustedContextStatement
-	| createTypeArrayStatement
-	| createTypeDistinctStatement
-	| createVariableStatement
-	| createViewStatement
-	| declareCursorStatement
-	| declareGlobalTemporaryTableStatement
-	| deleteStatement
-	| describeStatement
-	| dropStatement
-	| exchangeStatement
-	| executeStatement
-	| executeImmediateStatement
-	| explainStatement
-	| fetchStatement
-	| getDiagnosticsStatement
-	| grantStatement
-	| insertStatement
-	| labelStatement
-	| lockTableStatement
-	| mergeStatement
-	| openStatement
-	| prepareStatement
-	| refreshTableStatement
-	| releaseSavepointStatement
-	| releaseConnectionStatement
-	| renameStatement
-	| revokeStatement
-	| rollbackStatement
-	| savepointStatement
-	| selectIntoStatement
-	| setConnectionStatement
-	| setAssignmentStatement
-	| truncateStatement
-	| updateStatement
-	| valuesIntoStatement
+	| (sqlplStartLabel? connectStatement)
+	| (sqlplStartLabel? createAliasStatement)
+	| (sqlplStartLabel? createDatabaseStatement)
+	| (sqlplStartLabel? createFunctionStatement)
+	| (sqlplStartLabel? createGlobalTemporaryTableStatement)
+	| (sqlplStartLabel? createIndexStatement)
+	| (sqlplStartLabel? createLobTablespaceStatement)
+	| (sqlplStartLabel? createMaskStatement)
+	| (sqlplStartLabel? createPermissionStatement)
+	| (sqlplStartLabel? createProcedureStatement)
+	| (sqlplStartLabel? createRoleStatement)
+	| (sqlplStartLabel? createSequenceStatement)
+	| (sqlplStartLabel? createStogroupStatement)
+	| (sqlplStartLabel? createTableStatement)
+	| (sqlplStartLabel? createTablespaceStatement)
+	| (sqlplStartLabel? createTriggerStatement)
+	| (sqlplStartLabel? createTrustedContextStatement)
+	| (sqlplStartLabel? createTypeArrayStatement)
+	| (sqlplStartLabel? createTypeDistinctStatement)
+	| (sqlplStartLabel? createVariableStatement)
+	| (sqlplStartLabel? createViewStatement)
+	| (sqlplStartLabel? declareCursorStatement)
+	| (sqlplStartLabel? declareGlobalTemporaryTableStatement)
+	| (sqlplStartLabel? deleteStatement)
+	| (sqlplStartLabel? describeStatement)
+	| (sqlplStartLabel? dropStatement)
+	| (sqlplStartLabel? exchangeStatement)
+	| (sqlplStartLabel? executeStatement)
+	| (sqlplStartLabel? executeImmediateStatement)
+	| (sqlplStartLabel? explainStatement)
+	| (sqlplStartLabel? fetchStatement)
+	| (sqlplStartLabel? getDiagnosticsStatement)
+	| (sqlplStartLabel? grantStatement)
+	| (sqlplStartLabel? insertStatement)
+	| (sqlplStartLabel? labelStatement)
+	| (sqlplStartLabel? lockTableStatement)
+	| (sqlplStartLabel? mergeStatement)
+	| (sqlplStartLabel? openStatement)
+	| (sqlplStartLabel? prepareStatement)
+	| (sqlplStartLabel? refreshTableStatement)
+	| (sqlplStartLabel? releaseSavepointStatement)
+	| (sqlplStartLabel? releaseConnectionStatement)
+	| (sqlplStartLabel? renameStatement)
+	| (sqlplStartLabel? revokeStatement)
+	| (sqlplStartLabel? rollbackStatement)
+	| (sqlplStartLabel? savepointStatement)
+	| (sqlplStartLabel? selectIntoStatement)
+	| (sqlplStartLabel? setConnectionStatement)
+	| (sqlplStartLabel? setAssignmentStatement)
+	| (sqlplStartLabel? truncateStatement)
+	| (sqlplStartLabel? updateStatement)
+	| (sqlplStartLabel? valuesIntoStatement)
 	)
 	;
 
