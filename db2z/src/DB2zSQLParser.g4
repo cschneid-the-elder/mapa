@@ -1682,13 +1682,22 @@ revokeUseOfStatement
 	)
 	;
 
+/*
+Changed from SQLIDENTIFIER COLON to identifier2 COLON to allow
+SQL "reserved words" to be used as labels.
+Noted by Martijn Rutte 2023-06-05.
+*/
 sqlplStartLabel
-//	: SQLPL_LABEL
-	: SQLIDENTIFIER COLON
+	: identifier2 COLON
 	;
 
+/*
+Changed from SQLIDENTIFIER COLON to identifier2 COLON to allow
+SQL "reserved words" to be used as labels.
+Noted by Martijn Rutte 2023-06-05.
+*/
 sqlplEndLabel
-	: SQLIDENTIFIER
+	: identifier2
 	;
 
 sqlplAssignmentStatement
@@ -7299,6 +7308,16 @@ identifier
 
 identifier1
 	: sqlidentifier
+	| sqlKeyword
+	| scalarFunction
+	| aggregateFunction
+	| regressionFunction
+	| tableFunction
+	;
+
+identifier2
+	: SQLIDENTIFIER
+	| USER
 	| sqlKeyword
 	| scalarFunction
 	| aggregateFunction
