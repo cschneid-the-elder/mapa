@@ -169,13 +169,21 @@ trying ('\'' [0-9a-zA-Z %_@#$]* '\'') which mismatches "normal" literals
 
 trying ('\'' ~[',]* '\'') which mismatches "normal" literals
 
-trying ('\'' [0-9a-zA-Z%_@#$]* '\'') which seems to work
+trying ('\'' [0-9a-zA-Z%_@#$]* '\'') which seems to work but lacks many characters
 
-So, as of 2023-06-06, this is what we've got.
+trying ('\'' [0-9a-zA-Z !@#$%^&*()\-_=+[\]{}\\|;:.<>/?]*? '\'') which mismatches
+"normal" literals and just seems prone to missing a character
+
+trying ('\'' ~[', ;]* '\'') which seems to work
+
+So, as of 2023-06-06, this is what we've got.  It appears the solution is to
+exclude the string delimiter, the comma, the space, and the semicolon.  The 
+exclusions prevent matching multiple strings as one.  Hopefully no one will 
+need to match an embedded string with those characters.
 */
 fragment STRINGLITERAL
-	: '"' (('"' [0-9a-zA-Z%_@#$]* '"') | ~["] | '""' | '\'')* '"'
-	| '\'' (('\'' [0-9a-zA-Z%_@#$]* '\'') | ~['] | '\'\'' | '"')* '\''
+	: '"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
+	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\''
 	;
 
 INTEGERLITERAL
