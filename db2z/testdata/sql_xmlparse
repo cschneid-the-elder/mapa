@@ -5,8 +5,8 @@ SELECT A.C1 AS COLUMN1
      , DATE(x.X3) AS X3
      , DEC(x.X4, 18, 2) AS X4
      , CASE WHEN x.X5 IS NULL THEN '                                  ' ELSE x.X5 END AS X5
-     , x.CODE_REDEN_NIET_UITVOEREN
-     , DATE(x.VERANTWOORDING_DATUM) AS VERANTWOORDING_DATUM
+     , x.AAAA
+     , DATE(x.BBBB) AS BBBB
      , A.C2 AS COLUMN2
   FROM T1 A
      , XMLTABLE(
@@ -29,8 +29,8 @@ SELECT A.C1 AS COLUMN1
      , DATE(x.X3) AS X3
      , DEC(x.X4, 18, 2) AS X4
      , CASE WHEN x.X5 IS NULL THEN '                                  ' ELSE x.X5 END AS X5
-     , x.CODE_REDEN_NIET_UITVOEREN
-     , DATE(x.VERANTWOORDING_DATUM) AS VERANTWOORDING_DATUM
+     , x.AAAA
+     , DATE(x.BBBB) AS BBBB
      , A.C2 AS COLUMN2
   FROM T1 A
      , XMLTABLE(
@@ -53,8 +53,8 @@ SELECT A.C1 AS COLUMN1
      , DATE(x.X3) AS X3
      , DEC(x.X4, 18, 2) AS X4
      , CASE WHEN x.X5 IS NULL THEN '                                  ' ELSE x.X5 END AS X5
-     , x.CODE_REDEN_NIET_UITVOEREN
-     , DATE(x.VERANTWOORDING_DATUM) AS VERANTWOORDING_DATUM
+     , x.AAAA
+     , DATE(x.BBBB) AS BBBB
      , A.C2 AS COLUMN2
   FROM T1 A
      , XMLTABLE(
@@ -77,8 +77,8 @@ SELECT A.C1 AS COLUMN1
      , DATE(x.X3) AS X3
      , DEC(x.X4, 18, 2) AS X4
      , CASE WHEN x.X5 IS NULL THEN '                                  ' ELSE x.X5 END AS X5
-     , x.CODE_REDEN_NIET_UITVOEREN
-     , DATE(x.VERANTWOORDING_DATUM) AS VERANTWOORDING_DATUM
+     , x.AAAA
+     , DATE(x.BBBB) AS BBBB
      , A.C2 AS COLUMN2
   FROM T1 A
      , XMLTABLE(

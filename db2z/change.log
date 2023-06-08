@@ -1,3 +1,104 @@
+--2023-06-06--------------------------------------------------------------------
+Major changes.
+
+Eliminated the CREATE_OR_ALTER_PROCEDURE_OR_FUNCTION_MODE mode which was for
+toleration of SQL/PL.  In its place, I've implemented the grammar for SQL/PL.
+
+Extensive testing by Martijn Rutte and Michel A. G. Poppema gave rise to a
+number of other changes.
+
+alterIndexStatement changed so the COMMA between alterIndexPartitionOptions
+is optional.
+
+alterSequenceOptionList changed so the COMMA between alterSequenceOptionList
+is optional.
+
+createIndexStatement changed to allow for obsolete but still tolerated TYPE 1
+and TYPE 2 indexes.  Martijn Rutte checked with IBM and they said this went
+away with DB2 for z/OS version 6.
+
+createSequenceStatement changed so the COMMA between createSequenceOptionList
+is optional.
+
+grantTableStatement corrected to allow comma separated list of tables.
+
+dropTriggerClause changed to allow the obsolete but still tolerated RESTRICT 
+keyword.  Martijn Rutte checked with IBM and they said this keyword does nothing
+and was deleted in DB2 for z/OS version 6.
+
+createTableColumnDefinition and columnDefinitionOptions refactored to allow the
+options to be specified in any order.  Also added forDataQualifier as it can 
+appear after NOT NULL and still be syntactically valid, contrary to the syntax 
+diagram.
+
+fieldprocClause changed to have the arguments to the programName be optional,
+as per the syntax diagram.
+
+asResultTable corrected to make the list of columns in parentheses optional.
+
+inlineSqlScalarFunctionDefinition added ccsidClause1 and forDataQualifier.
+This allows the forDataQualifier and ccsidClause1 phrases to be
+reversed from how they are defined in functionBuiltInType.
+
+compiledSqlScalarFunctionDefinition added ccsidClause1 and forDataQualifier.
+This allows the forDataQualifier and ccsidClause1 phrases to be
+reversed from how they are defined in functionBuiltInType.
+
+alterIndexPartitionOptions made ALTER optional per alternate syntax.
+
+partitionElement changed to allow PART in place of PARTITION.
+
+procedureBuiltinType changed CHAR and CLOB from ccsidClause1? 
+forDataQualifier? to (ccsidClause1 | forDataQualifier)* to allow the clauses 
+to be in any order.
+
+startOption non-numeric literals are now allowed.
+
+alterTableOptionList added | (uniqueConstraint) as it seems to be allowed.
+
+periodDefinition made (EXCLUSIVE | INCLUSIVE) optional as per documentation.
+
+expression changed so expression is optional in...
+
+	((operator | INTEGERLITERAL) expression?)
+
+...This allows for...
+
+  SET C1 = SUBSTR(C2,LENGTH(C2)-1);
+
+...due to the -1 being output from the lexer as one token (INTEGERLITERAL)
+instead of two (operator INTEGERLITERAL).
+
+sequenceReference changed to allow for alternate syntax with NEXTVAL and
+PREVVAL and (sequenceName DOT (NEXTVAL | CURRVAL)).
+
+extractFunction added.  This builtin function was incorrectly presumed to be
+included via the generic function definition.  Its syntax is sufficiently
+different that it was not.
+
+timeZoneSpecificExpression changed to add integerInParens? and 
+| ((WITH | WITHOUT) TIME ZONE).
+
+timeZoneExpressionSubset added | (LPAREN expression RPAREN) per documentation.
+
+castBuiltInType modified to allow forDataQualifier on CHAR and CLOB types.
+
+triggerName modified to allow (schemaName DOT)?
+
+dataChangeTableReference changed to actually be correct per documentation.
+
+fetchClause changed to allow LIMIT syntax and to allow for a variable number
+of rows to be fetched.
+
+In the lexer, END_CASE has been changed to allow for NEWLINEs and not just
+WS between END and CASE.
+
+Also in the lexer, ]] is now a valid concatenation operator.
+
+Also in the lexer, STRINGLITERAL has become more complex as it must handle
+undoubled apostrophes embedded within literals delimited by apostrophes.  Take
+a look at the SYSPROC.DSNUTILV test cases in testdata/sql_call for details.
+
 --2023-04-06--------------------------------------------------------------------
 Added CP_PREPARE token to probablySQLPL parser rule.  Martijn Rutte discovered
 that if the body of a native SQL stored procedure contains a PREPARE statement

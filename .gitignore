@@ -82,3 +82,17 @@ db2z/DB2zSQL.jar
 #
 cobol/DB2zSQL.jar.*
 #
+# test data that should not be made public
+#
+db2z/testdata/sql_NOUPLOAD_*
+db2z/testdata/original_*
+db2z/testdata/old_*
+db2z/testdata/ibm_*
+db2z/testdata/PFS_*
+db2z/testdata/some_issues
+#
+# output from JCLParser.jar
+#
+jcl/test*.csv
+jcl/test*.tsv
+#

@@ -1,14 +1,15 @@
 /*
-Copyright (C) 2021 - 2023 Craig Schneiderwent.  All rights reserved.
-I accept no liability for damages of any kind resulting from the use
+Copyright (C) 2021 - 2023 Craig Schneiderwent.  Portions copyright
+2023 Martijn Rutte.  All rights reserved.
+
+The authors accept no liability for damages of any kind resulting from the use
 of this software.  Use at your own risk.
 
 This software may be modified and distributed under the terms
 of the MIT license. See the LICENSE file for details.
 
-Rules for Db2 for z/OS SQL statements that can be embedded in an
-application program are included here.  Version 12 documentation
-served as original source material.
+Db2 for z/OS Version 12 documentation served as the original source 
+material.
 
 The ALTER FUNCTION variations (external), (inlined SQL scalar), and
 (SQL table) are all variations on each other and are contained in
@@ -16,7 +17,8 @@ the alterFunctionStatement rule.
 
 The rule signalStatement is not a full implementation of the syntax
 of the SIGNAL statement, but a subset that is possible to embed in
-an application program.
+an application program.  Look to sqlplSignalStatement for the SQL/PL
+implementation.
 
 The rule trustedContextOptionList does not strictly match its
 syntax diagram, for reasons documented with the rule.
@@ -26,20 +28,11 @@ syntax of the EXECUTE IMMEDIATE	statement in order to avoid
 implementing a grammar for the entire PL/I language here.  The same
 is true of the prepareStatement rule.
 
-This grammar does not include SQL/PL or the following SQL statements.
-
-ALTER TRIGGER (advanced)
-CREATE TRIGGER (advanced)
-
 I do not know if the SQL statement 
 ALTER PROCEDURE (SQL - external)
 will work with this grammar.  It's been deprecated but the syntax
 is similar enough to a regular external stored procedure that it
 might work.
-
-While SQL/PL is not included in this grammar, its presence is
-tolerated to some extent in the CREATE and ALTER of native SQL
-stored procedures and functions.
 
 */
 
@@ -48,7 +41,7 @@ parser grammar DB2zSQLParser;
 
 options {tokenVocab=DB2zSQLLexer;}
 
-startRule : sqlStatement* | EOF ;
+startRule : sqlStatement* | (sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+)* | EOF ;
 
 /*
 The order of the releaseSavepointStatement and
@@ -73,6 +66,7 @@ sqlStatement
 	| alterTableStatement
 	| alterTablespaceStatement
 	| alterTriggerStatement
+	| alterTriggerAdvancedStatement
 	| alterTrustedContextStatement
 	| alterViewStatement
 	| associateLocatorsStatement
@@ -99,6 +93,7 @@ sqlStatement
 	| createTableStatement
 	| createTablespaceStatement
 	| createTriggerStatement
+	| createTriggerAdvancedStatement
 	| createTrustedContextStatement
 	| createTypeArrayStatement
 	| createTypeDistinctStatement
@@ -153,6 +148,106 @@ sqlStatement
 	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
 	;
 
+/*
+Added sqlplStartLabel 2023-06-05.  Pesky GOTO needs a target.
+*/
+sqlplProcedureStatement
+	: (sqlplControlStatement
+	| (sqlplStartLabel? allocateCursorStatement)
+	| (sqlplStartLabel? alterDatabaseStatement)
+	| (sqlplStartLabel? alterFunctionStatement)
+	| (sqlplStartLabel? alterIndexStatement)
+	| (sqlplStartLabel? alterMaskStatement)
+	| (sqlplStartLabel? alterPermissionStatement)
+	| (sqlplStartLabel? alterProcedureStatement)
+	| (sqlplStartLabel? alterProcedureSQLPLStatement)
+	| (sqlplStartLabel? alterSequenceStatement)
+	| (sqlplStartLabel? alterStogroupStatement)
+	| (sqlplStartLabel? alterTableStatement)
+	| (sqlplStartLabel? alterTablespaceStatement)
+	| (sqlplStartLabel? alterTriggerStatement)
+	| (sqlplStartLabel? alterTrustedContextStatement)
+	| (sqlplStartLabel? alterViewStatement)
+	| (sqlplStartLabel? associateLocatorsStatement)
+	| beginDeclareSectionStatement
+	| (sqlplStartLabel? callStatement)
+	| (sqlplStartLabel? closeStatement)
+	| (sqlplStartLabel? commitStatement)
+	| commentStatement
+	| (sqlplStartLabel? connectStatement)
+	| (sqlplStartLabel? createAliasStatement)
+	| (sqlplStartLabel? createDatabaseStatement)
+	| (sqlplStartLabel? createFunctionStatement)
+	| (sqlplStartLabel? createGlobalTemporaryTableStatement)
+	| (sqlplStartLabel? createIndexStatement)
+	| (sqlplStartLabel? createLobTablespaceStatement)
+	| (sqlplStartLabel? createMaskStatement)
+	| (sqlplStartLabel? createPermissionStatement)
+	| (sqlplStartLabel? createProcedureStatement)
+	| (sqlplStartLabel? createRoleStatement)
+	| (sqlplStartLabel? createSequenceStatement)
+	| (sqlplStartLabel? createStogroupStatement)
+	| (sqlplStartLabel? createTableStatement)
+	| (sqlplStartLabel? createTablespaceStatement)
+	| (sqlplStartLabel? createTriggerStatement)
+	| (sqlplStartLabel? createTrustedContextStatement)
+	| (sqlplStartLabel? createTypeArrayStatement)
+	| (sqlplStartLabel? createTypeDistinctStatement)
+	| (sqlplStartLabel? createVariableStatement)
+	| (sqlplStartLabel? createViewStatement)
+	| (sqlplStartLabel? declareCursorStatement)
+	| (sqlplStartLabel? declareGlobalTemporaryTableStatement)
+	| (sqlplStartLabel? deleteStatement)
+	| (sqlplStartLabel? describeStatement)
+	| (sqlplStartLabel? dropStatement)
+	| (sqlplStartLabel? exchangeStatement)
+	| (sqlplStartLabel? executeStatement)
+	| (sqlplStartLabel? executeImmediateStatement)
+	| (sqlplStartLabel? explainStatement)
+	| (sqlplStartLabel? fetchStatement)
+	| (sqlplStartLabel? getDiagnosticsStatement)
+	| (sqlplStartLabel? grantStatement)
+	| (sqlplStartLabel? insertStatement)
+	| (sqlplStartLabel? labelStatement)
+	| (sqlplStartLabel? lockTableStatement)
+	| (sqlplStartLabel? mergeStatement)
+	| (sqlplStartLabel? openStatement)
+	| (sqlplStartLabel? prepareStatement)
+	| (sqlplStartLabel? refreshTableStatement)
+	| (sqlplStartLabel? releaseSavepointStatement)
+	| (sqlplStartLabel? releaseConnectionStatement)
+	| (sqlplStartLabel? renameStatement)
+	| (sqlplStartLabel? revokeStatement)
+	| (sqlplStartLabel? rollbackStatement)
+	| (sqlplStartLabel? savepointStatement)
+	| (sqlplStartLabel? selectIntoStatement)
+	| (sqlplStartLabel? setConnectionStatement)
+	| (sqlplStartLabel? setAssignmentStatement)
+	| (sqlplStartLabel? truncateStatement)
+	| (sqlplStartLabel? updateStatement)
+	| (sqlplStartLabel? valuesIntoStatement)
+	)
+	;
+
+sqlplControlStatement
+	: (sqlplAssignmentStatement
+	| sqlplCallStatement
+	| sqlplCaseStatement
+	| sqlplCompoundStatement
+	| sqlplForStatement
+	| sqlplGotoStatement
+	| sqlplIfStatement
+	| sqlplIterateStatement
+	| sqlplLeaveStatement
+	| sqlplLoopStatement
+	| sqlplRepeatStatement
+	| sqlplResignalStatement
+	| sqlplReturnStatement
+	| sqlplSignalStatement
+	| sqlplWhileStatement
+	)
+	;
+
 query
 	: (
 	subSelect
@@ -194,8 +289,11 @@ allocateCursorStatement
 	: (ALLOCATE cursorName CURSOR FOR RESULT SET rsLocatorVariable)
 	;
 
+/*
+This used to just be hostVariable, correction noted by Martijn Rutte 2023-06-05.
+*/
 rsLocatorVariable
-	: hostVariable
+	: variable
 	;
 
 alterDatabaseStatement
@@ -293,11 +391,15 @@ functionDesignator2
 	)
 	;
 
+/*
+Alternate syntax says the COMMA between alterIndexPartitionOptions
+is optional.  2023-05-24
+*/
 alterIndexStatement
 	: (
 	ALTER INDEX indexName regenerateClause?
 	alterIndexOptions*
-	(alterIndexPartitionOptions (COMMA alterIndexPartitionOptions)*)?
+	(alterIndexPartitionOptions (COMMA? alterIndexPartitionOptions)*)?
 	)
 	;
 
@@ -347,11 +449,16 @@ alterWhichProcedureSQLPL2
 	;
 
 applicationCompatibilityPhrase
-	: (USING APPLICATION COMPATIBILITY CP_APPLCOMPAT_LEVEL)
+	: (USING APPLICATION COMPATIBILITY applCompatValue)
 	;
+
+/*
+Per Martijn Rutte, the alterSequenceOptionList can optionally be
+comma separated.  2023-05-23.
+*/	
 alterSequenceStatement
 	: (
-	ALTER SEQUENCE sequenceName alterSequenceOptionList+
+	ALTER SEQUENCE sequenceName alterSequenceOptionList (COMMA? alterSequenceOptionList)*
 	)
 	;
 
@@ -383,7 +490,40 @@ alterTablespaceStatement
 
 alterTriggerStatement
 	: (
-	ALTER TRIGGER (schemaName DOT) triggerName NOT? SECURED
+	ALTER TRIGGER triggerName NOT? SECURED
+	)
+	;
+
+alterTriggerAdvancedStatement
+	: (
+	ALTER TRIGGER triggerName (
+		(ALTER? alterWhichTrigger2? triggerAdvancedDefinitionOptionList+)
+		| (REPLACE alterWhichTrigger2? triggerSpecification)
+		| (ADD versionOption triggerSpecification)
+		| (ACTIVATE versionOption)
+		| (REGENERATE alterWhichTrigger2? alterTriggerAdvancedApplicationCompatibility?)
+		| (DROP versionOption)
+		)
+	)
+	;
+
+alterWhichTrigger1
+	: ((ACTIVE VERSION) | (ALL VERSIONS) | versionOption)
+	;
+
+alterWhichTrigger2
+	: ((ACTIVE VERSION) | versionOption)
+	;
+
+alterTriggerAdvancedApplicationCompatibility
+	: (USING APPLICATION COMPATIBILITY applCompatValue)
+	;
+
+triggerSpecification
+	: (
+	triggerAdvancedActivationTime triggerEvent ON tableName
+	triggerAdvancedReferencingPhrase?
+	triggerGranularity triggerAdvancedDefinitionOptionList* triggeredAdvancedAction
 	)
 	;
 
@@ -412,14 +552,28 @@ beginDeclareSectionStatement
 	: (BEGIN DECLARE SECTION)
 	;
 
+/*
+Note this is not the same as sqlplCallStatement.  Among other things,
+the syntax...
+
+	CALL XYZ()
+
+...is allowed here and not there.  I do not make the rules, I merely
+code to what is documented.
+*/
 callStatement
 	: (
 	CALL (procedureName | hostVariable)
-	(LPAREN (
-		((expression | NULL | (TABLE tableName)) (COMMA (expression | NULL | (TABLE tableName)))*)
-		| (USING DESCRIPTOR hostVariable)
-	) RPAREN)?
+	(LPAREN (callArgumentList | (USING DESCRIPTOR hostVariable))? RPAREN)?
 	)
+	;
+
+callArgument
+	: (expression | NULL | (TABLE tableName))
+	;
+
+callArgumentList
+	: (callArgument (COMMA callArgument)*)
 	;
 
 closeStatement
@@ -588,9 +742,13 @@ createGlobalTemporaryTableStatement
 	)
 	;
 
+/*
+Added syntax for TYPE 1 and TYPE 2 indexes per Martijn
+Rutte 2023-05-24.
+*/
 createIndexStatement
 	: (
-	CREATE (UNIQUE (WHERE NOT NULL)?)? INDEX indexName ON
+	CREATE (TYPE (INTEGERLITERAL))? (UNIQUE (WHERE NOT NULL)?)? INDEX indexName ON
 		((tableName LPAREN 
 		(columnName | keyExpression) (ASC | DESC | RANDOM)?
 		(COMMA (columnName | keyExpression) (ASC | DESC | RANDOM)?)*
@@ -633,7 +791,7 @@ is incorrect and misleading.
 createProcedureSQLPLStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
-	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	(LPAREN (parameterDeclaration3 (COMMA parameterDeclaration3)*)? RPAREN)?
 	versionOption?
 	(procedureSQLPLOptionList* languageOption1? procedureSQLPLOptionList*)
 	((WRAPPED obfuscatedStatementText) | sqlRoutineBody)
@@ -645,34 +803,17 @@ sqlRoutineBody
 	;
 
 obfuscatedStatementText
-	: probablySQLPL+
+	: (identifier | COLON | UNIDENTIFIED)+
 	;
 
-/*
-Adding CP_PREPARE because PREPARE is part of deferPrepareOption
-in procedureSQLPLOptionList in addition to being legitimate SQL
-on its own.  Found by Martijn Rutte 05-Apr-2023.
-*/
 probablySQLPL
-	: (identifier 
-	| literal
-	| DOT
-	| COMMA 
-	| COLON
-	| SPLAT
-	| CP_SEMICOLON
-	| CEP_SEMICOLON
-	| CP_PREPARE
-	| CP_UNIDENTIFIED 
-	| LPAREN 
-	| RPAREN
-	)
+	: (sqlplProcedureStatement SEMICOLON*)
 	;
 
 createProcedureStatement
 	: (
 	CREATE (OR REPLACE)? PROCEDURE procedureName
-	(LPAREN parameterDeclaration3 (COMMA parameterDeclaration3)* RPAREN)?
+	(LPAREN (parameterDeclaration3 (COMMA parameterDeclaration3)*)? RPAREN)?
 	(createProcedureOptionList* languageOption5 createProcedureOptionList*)
 	)
 	;
@@ -683,9 +824,13 @@ createRoleStatement
 	)
 	;
 
+/*
+Per Martijn Rutte, the createSequenceOptionList can optionally be
+comma separated. 2023-05-23.
+*/	
 createSequenceStatement
 	: (
-	CREATE SEQUENCE sequenceName createSequenceOptionList+
+	CREATE SEQUENCE sequenceName createSequenceOptionList (COMMA? createSequenceOptionList)*
 	)
 	;
 
@@ -772,6 +917,12 @@ in a static SQL context so it is not supported here.
 createTriggerStatement
 	: (
 	CREATE TRIGGER triggerName triggerDefinition
+	)
+	;
+
+createTriggerAdvancedStatement
+	: (
+	CREATE (OR REPLACE)? TRIGGER triggerName triggerAdvancedDefinition
 	)
 	;
 
@@ -1346,11 +1497,13 @@ grantSystemStatement
 	withGrantOption?
 	)
 	;
-
+/*
+Corrected to allow comma separated list of tables per Michel A. G. Poppema 2023-05-23.
+*/
 grantTableStatement
 	: (
 	GRANT grantTableAuthority (COMMA grantTableAuthority)*
-	ON TABLE? tableName
+	ON TABLE? tableName (COMMA tableName)*
 	TO
 	grantee (COMMA grantee)*
 	withGrantOption?
@@ -1529,6 +1682,250 @@ revokeUseOfStatement
 	)
 	;
 
+/*
+Changed from SQLIDENTIFIER COLON to identifier2 COLON to allow
+SQL "reserved words" to be used as labels.
+Noted by Martijn Rutte 2023-06-05.
+*/
+sqlplStartLabel
+	: identifier2 COLON
+	;
+
+/*
+Changed from SQLIDENTIFIER COLON to identifier2 COLON to allow
+SQL "reserved words" to be used as labels.
+Noted by Martijn Rutte 2023-06-05.
+*/
+sqlplEndLabel
+	: identifier2
+	;
+
+sqlplAssignmentStatement
+	: (sqlplStartLabel? setAssignmentStatement)
+	;
+
+sqlplCallStatement
+	: (sqlplStartLabel? CALL procedureName sqlplCallArgumentList?)
+	;
+
+sqlplCaseStatement
+	: (sqlplStartLabel? CASE 
+	(sqlplCaseSimpleWhenClause | sqlplCaseSearchedWhenClause)
+	sqlplCaseElseClause?
+	END_CASE)
+	;
+
+sqlplCompoundStatement
+	: (sqlplStartLabel? BEGIN sqlplCompoundAtomicClause?
+	sqlplCompoundInitialDeclarations*
+	sqlplStatementDeclaration*
+	sqlplDeclareCursorStatement*
+	sqlplHandlerDeclaration*
+	(sqlplProcedureStatement SEMICOLON?)*
+	END sqlplEndLabel? SEMICOLON?)
+	;
+
+sqlplForStatement
+	: (sqlplStartLabel? FOR 
+	(forLoopName AS)?
+	(cursorName CURSOR holdability? FOR)?
+	selectStatement DO (sqlplProcedureStatement SEMICOLON)+
+	END_FOR sqlplEndLabel?)
+	;
+
+sqlplGotoStatement
+	: (sqlplStartLabel? GOTO sqlplEndLabel SEMICOLON?)
+	;
+
+sqlplIfStatement
+	: (sqlplStartLabel? IF searchCondition THEN
+	(sqlplProcedureStatement SEMICOLON)+
+	sqlplIfElseIfPhrase*
+	sqlplIfElsePhrase?
+	END_IF
+	SEMICOLON?
+	)
+	;
+
+sqlplIfElseIfPhrase
+	: (ELSEIF searchCondition THEN (sqlplProcedureStatement SEMICOLON)+)
+	;
+
+sqlplIfElsePhrase
+	: (ELSE (sqlplProcedureStatement SEMICOLON)+)
+	;
+
+sqlplIterateStatement
+	: (sqlplStartLabel? ITERATE sqlplEndLabel SEMICOLON?)
+	;
+
+sqlplLeaveStatement
+	: (sqlplStartLabel? LEAVE sqlplEndLabel SEMICOLON?)
+	;
+
+sqlplLoopStatement
+	: (sqlplStartLabel? LOOP (sqlplProcedureStatement SEMICOLON)+
+	END_LOOP sqlplEndLabel?
+	SEMICOLON?
+	)
+	;
+
+sqlplRepeatStatement
+	: (sqlplStartLabel? REPEAT (sqlplProcedureStatement SEMICOLON)+
+	UNTIL searchCondition
+	END_REPEAT sqlplEndLabel?
+	SEMICOLON?
+	)
+	;
+
+sqlplResignalStatement
+	: (sqlplStartLabel? RESIGNAL 
+	sqlplResignalValue sqlplResignalInformation?
+	SEMICOLON?
+	)
+	;
+
+sqlplReturnStatement
+	: (sqlplStartLabel? RETURN (expression | NULL | fullSelect)?
+	SEMICOLON?
+	)
+	;
+
+sqlplSignalStatement
+	: (sqlplStartLabel? SIGNAL 
+	sqlplSignalValue sqlplSignalInformation?
+	SEMICOLON?
+	)
+	;
+
+sqlplWhileStatement
+	: (sqlplStartLabel? WHILE searchCondition DO
+	(sqlplProcedureStatement SEMICOLON)+
+	END_WHILE sqlplEndLabel?
+	SEMICOLON?
+	)
+	;
+
+forLoopName
+	: identifier
+	;
+
+/*
+The documentation says the second part of the conditional should read...
+
+	(SQLSTATE VALUE? (literal | sqlVariableName | sqlParameterName))
+
+...but the definition of sqlVariableName and sqlParameterName are such
+that there is no way to distinguish between them in this context.
+*/
+sqlplSignalValue
+	: (sqlConditionName | (SQLSTATE VALUE? (literal | sqlVariableName)))
+	;
+
+/*
+MESSAGE_TEXT can be set to a literal or a sqlVariableName, the latter was
+noted by Martijn Rutte 2023-06-05.
+*/
+sqlplSignalInformation
+	: ((SET MESSAGE_TEXT EQ (literal | sqlVariableName)) | (LPAREN literal RPAREN))
+	;
+
+sqlplResignalValue
+	: sqlplSignalValue
+	;
+
+sqlplResignalInformation
+	: (SET MESSAGE_TEXT EQ literal)
+	;
+
+sqlplCompoundInitialDeclarations
+	: ((sqlplVariableDeclaration SEMICOLON)
+	| (sqlplConditionDeclaration SEMICOLON)
+	| (sqlplReturnCodesDeclaration SEMICOLON))
+	;
+
+sqlplVariableDeclaration
+	: (DECLARE sqlVariableName (COMMA sqlVariableName)*
+		((RESULT_SET_LOCATOR VARYING)
+		| (dataType sqlplVariableDataTypeModifier?))
+	)
+	;
+
+sqlplConditionDeclaration
+	: (DECLARE sqlConditionName CONDITION FOR (SQLSTATE VALUE?)? literal)
+	;
+
+sqlplReturnCodesDeclaration
+	: (DECLARE 
+		((SQLSTATE ((CHAR | CHARACTER) LPAREN INTEGERLITERAL RPAREN DEFAULT literal))
+		| (SQLCODE (INT | INTEGER) DEFAULT INTEGERLITERAL))
+	)
+	;
+
+sqlplStatementDeclaration
+	: (DECLARE statementName (COMMA statementName)* STATEMENT)
+	;
+
+sqlplDeclareCursorStatement
+	: (declareCursorStatement SEMICOLON)
+	;
+
+sqlplHandlerDeclaration
+	: (DECLARE (CONTINUE | EXIT) HANDLER FOR 
+	(sqlplHandlerSpecificConditionList | sqlplHandlerGeneralConditionList) 
+	sqlplProcedureStatement
+	SEMICOLON?
+	)
+	;
+
+sqlplHandlerSpecificConditionList
+	: (sqlplHandlerSpecificCondition (COMMA sqlplHandlerSpecificCondition)*)
+	;
+
+sqlplHandlerSpecificCondition
+	: ((SQLSTATE VALUE? literal) | sqlConditionName)
+	;
+
+sqlplHandlerGeneralConditionList
+	: (sqlplHandlerGeneralCondition (COMMA sqlplHandlerGeneralCondition)*)
+	;
+
+sqlplHandlerGeneralCondition
+	: (SQLEXCEPTION | SQLWARNING | (NOT FOUND))
+	;
+
+sqlplVariableDataTypeModifier
+	: ((DEFAULT | CONSTANT) (NULL | literal))
+	;
+	
+sqlplCompoundAtomicClause
+	: (NOT? ATOMIC)
+	;
+
+sqlplCallArgumentList
+	: (LPAREN sqlplCallArgument (COMMA sqlplCallArgument)* RPAREN)
+	;
+
+sqlplCallArgument
+	: (sqlVariableName
+		| sqlParameterName
+		| expression
+		| NULL
+	)
+	;
+
+sqlplCaseSimpleWhenClause
+	: (expression (WHEN expression THEN (sqlplProcedureStatement SEMICOLON)+)+)
+	;
+
+sqlplCaseSearchedWhenClause
+	: ((WHEN searchCondition THEN (sqlplProcedureStatement SEMICOLON)+)+)
+	;
+
+sqlplCaseElseClause
+	: (ELSE (sqlplProcedureStatement SEMICOLON)+)
+	;
+
 grantUseOfTarget
 	: (
 	(BUFFERPOOL bpName (COMMA bpName)*)
@@ -1686,6 +2083,19 @@ statementInformationVariableEquate
 	: (variable EQ statementInformationItemName)
 	;
 
+/*
+	| DB2_GET_DIAGNOSTICS_DIAGNOSTICS
+	| DB2_SQL_NESTING_LEVEL
+
+are here because even though they aren't included in what the
+documentation lists as statement-information-item-name, they
+are included individually where those items are listed.
+
+I suspect, from the syntax diagram, one can only list them 
+alone, without other items.  Regardless, I'm including them
+here for simplicity's sake.
+*/
+
 statementInformationItemName
 	: (
 	DB2_LAST_ROW
@@ -1701,6 +2111,8 @@ statementInformationItemName
 	| MORE_
 	| NUMBER
 	| ROW_COUNT
+	| DB2_GET_DIAGNOSTICS_DIAGNOSTICS
+	| DB2_SQL_NESTING_LEVEL
 	)
 	;
 
@@ -1966,8 +2378,11 @@ dropTablespaceClause
 	: (TABLESPACE (databaseName DOT)? tablespaceName)
 	;
 
+/*
+Added RESTRICT? per Martijn Rutte 2023-05-23.
+*/
 dropTriggerClause
-	: (TRIGGER triggerName)
+	: (TRIGGER triggerName RESTRICT?)
 	;
 
 dropTrustedContextClause
@@ -2075,15 +2490,41 @@ userOptions
 triggerDefinition
 	: (
 	triggerActivationTime triggerEvent ON tableName
-	(REFERENCING
-		((OLD | NEW | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)?
+	triggerReferencingPhrase?
 	triggerGranularity MODE_ DB2SQL triggerDefinitionOption? triggeredAction
 	)
 	;
 
+triggerAdvancedDefinition
+	: (
+	versionOption?
+	triggerAdvancedActivationTime triggerEvent ON tableName
+	triggerAdvancedReferencingPhrase?
+	triggerGranularity triggerAdvancedDefinitionOptionList* triggeredAdvancedAction
+	)
+	;
+
+triggerReferencingPhrase
+	: (REFERENCING
+		((OLD | NEW | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)
+	;
+	
+triggerAdvancedReferencingPhrase
+	: (REFERENCING
+		(((OLD ROW?) | (NEW ROW?) | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)
+	;
+	
 triggerActivationTime
 	: (
 	(NO CASCADE BEFORE)
+	| AFTER
+	| (INSTEAD OF)
+	)
+	;
+
+triggerAdvancedActivationTime
+	: (
+	((NO CASCADE)? BEFORE)
 	| AFTER
 	| (INSTEAD OF)
 	)
@@ -2110,10 +2551,23 @@ triggeredAction
 	)
 	;
 
+triggeredAdvancedAction
+	: (
+	(WHEN LPAREN searchCondition RPAREN)? sqlTriggerAdvancedBody
+	)
+	;
+
 sqlTriggerBody
 	: (
 	triggeredSqlStatement
 	| (BEGIN ATOMIC (triggeredSqlStatement SEMICOLON)+ END)
+	)
+	;
+
+sqlTriggerAdvancedBody
+	: (
+	(triggeredAdvancedSqlStatement SEMICOLON)
+	| sqlplControlStatement
 	)
 	;
 
@@ -2133,10 +2587,56 @@ triggeredSqlStatement
 	)
 	;
 
+triggeredAdvancedSqlStatement
+	: (
+	callStatement
+	| searchedDelete
+	| getDiagnosticsStatement
+	| insertStatement
+	| mergeStatement
+	| refreshTableStatement
+	| setAssignmentStatement
+	| signalStatement
+	| truncateStatement
+	| searchedUpdate
+	| valuesStatement
+	)
+	;
+
 triggerDefinitionOption
 	: (
 	(NOT SECURED)
 	| SECURED
+	)
+	;
+
+triggerAdvancedDefinitionOptionList
+	: (
+	debugOption
+	| schemaQualifierOption
+	| asuTimeOption
+	| wlmEnvironmentOption3
+	| currentDataOption
+	| concurrentAccessOption
+	| dynamicRulesOption
+	| applicationEncodingOption
+	| explainOption
+	| immediateWriteOption
+	| isolationLevelOption
+	| opthintOption
+	| sqlPathOption
+	| releaseAtOption
+	| roundingOption
+	| dateFormatOption
+	| decimalOption
+	| timeFormatOption
+	| forUpdateOption
+	| securedOption
+	| businessTimeSensitiveOption
+	| systemTimeSensitiveOption
+	| archiveSensitiveOption
+	| applcompatOption
+	| concentrateStatementsOption
 	)
 	;
 
@@ -2155,17 +2655,35 @@ customVolatileClause
 	: (NOT? VOLATILE CARDINALITY?)
 	;
 
+/*
+Restructured per observation by Michel A. G. Poppema 2023-05-26.
+Added columnDefinitionOptions as they can be in any order, previous
+implementation enforced an order incorrectly.
+*/
 createTableColumnDefinition
 	: (
 	columnName dataType?
-	(NOT NULL)?
-	generatedClause?
-	createTableColumnConstraint?
-	defaultClause?
-	fieldprocClause?
-	asSecurityLabelClause?
-	implicitlyHiddenClause?
-	inlineLengthClause?
+	columnDefinitionOptions*
+	)
+	;
+
+/*
+Added forDataQualifier as it can appear after NOT NULL and
+still be syntactically valid, contrary to the syntax diagram.
+
+Per Martijn Rutte 2023-06-05.
+*/
+columnDefinitionOptions
+	: (
+	(NOT NULL)
+	| generatedClause
+	| createTableColumnConstraint
+	| defaultClause
+	| fieldprocClause
+	| asSecurityLabelClause
+	| implicitlyHiddenClause
+	| inlineLengthClause
+	| forDataQualifier
 	)
 	;
 
@@ -2197,7 +2715,7 @@ restrictOnDropClause
 	;
 
 ccsidClause1
-	: (CCSID (ASCII | EBCDIC | UNICODE))
+	: (CCSID (ASCII | EBCDIC | UNICODE)?)
 	;
 
 ccsidClause2
@@ -2224,8 +2742,12 @@ pagenumClause
 	: (PAGENUM (RELATIVE | ABSOLUTE))
 	;
 
+/*
+Arguments to programName are options, noted when testing new
+implementation of createTableColumnDefinition 2023-05-26.
+*/
 fieldprocClause
-	: (FIELDPROC programName LPAREN literal (COMMA literal)* RPAREN)
+	: (FIELDPROC programName (LPAREN literal (COMMA literal)* RPAREN)?)
 	;
 
 asSecurityLabelClause
@@ -2270,9 +2792,13 @@ copyOptionXmlTypeModifiers
 	: (EXCLUDING XML TYPE MODIFIERS)
 	;
 
+/*
+Corrected to make the list of columns in parentheses optional.
+Noted by Martijn Rutte 2023-05-23.
+*/
 asResultTable
 	: (
-	LPAREN (columnName (COMMA columnName)*)? RPAREN AS
+	(LPAREN (columnName (COMMA columnName)*) RPAREN)? AS
 	LPAREN fullSelect RPAREN
 	WITH NO DATA
 	)
@@ -2343,9 +2869,13 @@ parameterDeclaration2
 	)
 	;
 
+/*
+I cannot find where it is documented that (IN | OUT | INOUT)? is allowed
+following the procedureDataType but apparently it is.
+*/
 parameterDeclaration3
 	: (
-	(IN | OUT | INOUT)? parameterName? procedureDataType (AS LOCATOR)?
+	(IN | OUT | INOUT)? parameterName? procedureDataType (AS LOCATOR)? (IN | OUT | INOUT)?
 	)
 	;
 
@@ -2621,9 +3151,16 @@ createFunctionStatementSourcedOptions
 	)
 	;
 
+/*
+Added ccsidClause1 and forDataQualifier per Martijn Rutte 2023-05-23.
+This allows the forDataQualifier and ccsidClause1 phrases to be
+reversed from how they are defined in functionBuiltInType.
+*/
 inlineSqlScalarFunctionDefinition
 	: (
-	RETURNS functionDataType languageOption1?
+	RETURNS functionDataType 
+	(forDataQualifier ccsidClause1)? 
+	languageOption1?
 	createFunctionStatementInlineSqlScalarOptions+
 	sqlRoutineBody
 	)
@@ -2642,9 +3179,16 @@ createFunctionStatementInlineSqlScalarOptions
 	)
 	;
 
+/*
+Added ccsidClause1 and forDataQualifier per Martijn Rutte 2023-05-23.
+This allows the forDataQualifier and ccsidClause1 phrases to be
+reversed from how they are defined in functionBuiltInType.
+*/
 compiledSqlScalarFunctionDefinition
 	: (
-	RETURNS functionDataType versionOption?
+	RETURNS functionDataType 
+	(forDataQualifier ccsidClause1)? 
+	versionOption?
 	createFunctionStatementCompiledSqlScalarOptions+
 	sqlRoutineBody
 	)
@@ -2833,6 +3377,7 @@ setAssignmentClause
 			| (VALUES valuesList1)
 			| (VALUES LPAREN valuesList1 (COMMA valuesList1)* RPAREN))
 		RPAREN)
+	| (setAssignmentTargetVariable EQ arrayConstructor)
 	)
 	;
 
@@ -3040,10 +3585,11 @@ notAtomicPhrase
 
 /*
 2022-11-04 Issue 125 Changed usingSpecification1 to usingBlock for consistency.
+2023-05-24 Alternate syntax says ALTER is optional.
 */
 alterIndexPartitionOptions
 	: (
-	ALTER partitionElement
+	ALTER? partitionElement
 		(usingBlock
 		| freeSpecification+
 		| gbpcacheSpecification
@@ -3073,17 +3619,19 @@ gbpcacheSpecification
 	)
 	;
 
+/*
+Updated to include alternate syntax per Martijn Rutte 2023-05-24.
+*/
 partitionElement
 	: (
-	PARTITION INTEGERLITERAL
-	(ENDING AT? LPAREN 
+	(PARTITION | PART) INTEGERLITERAL
+	(((ENDING AT?) | VALUES) LPAREN 
 		(literal | MAXVALUE | MINVALUE) (COMMA (literal | MAXVALUE | MINVALUE))* 
 	RPAREN INCLUSIVE?)?
 	)
 	;
-
 applCompatValue
-	: (functionLevel)
+	: APPLCOMPAT_LEVEL
 	;
 
 functionLevel
@@ -3123,6 +3671,11 @@ functionBuiltInType
 	)
 	;
 
+/*
+Changed CHAR and CLOB from ccsidClause1? forDataQualifier? to
+(ccsidClause1 | forDataQualifier)* to allow the clauses to be
+in any order.  2023-05-24
+*/
 procedureBuiltinType
 	: (
 	SMALLINT
@@ -3134,8 +3687,8 @@ procedureBuiltinType
 	| (FLOAT (integerInParens | (LPAREN RPAREN))?)
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidClause1? forDataQualifier?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (ccsidClause1 | forDataQualifier)*)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (ccsidClause1 | forDataQualifier)*)
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidClause1?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
@@ -3443,7 +3996,7 @@ immediateWriteOption
 	;
 
 explainOption
-	: ((WITH | WITHOUT) CP_EXPLAIN)
+	: ((WITH | WITHOUT) EXPLAIN)
 	;
 
 reoptOption
@@ -3455,7 +4008,7 @@ packageOwnerOption
 	;
 
 deferPrepareOption
-	: ((DEFER CP_PREPARE) | (NODEFER CP_PREPARE))
+	: ((DEFER PREPARE) | (NODEFER PREPARE))
 	;
 
 degreeOption
@@ -3501,7 +4054,7 @@ sqlPathOption
 	;
 	
 sqlPathOptionItem
-	: ((SYSTEM PATH) | (SESSION USER) | USER | SQLIDENTIFIER)
+	: ((SYSTEM PATH) | (SESSION USER) | USER | SQLIDENTIFIER | NONNUMERICLITERAL)
 	;
 
 queryAccelerationOption
@@ -3542,7 +4095,7 @@ archiveSensitiveOption
 	;
 
 applcompatOption
-	: (APPLCOMPAT CP_APPLCOMPAT_LEVEL)
+	: (APPLCOMPAT applCompatValue)
 	;
 
 validateOption
@@ -3625,8 +4178,11 @@ asTypeOption
 	: (AS sequenceDataType)
 	;
 
+/*
+Non-integer literals allowed, noted by Martijn Rutte 2023-05-23.
+*/
 startOption
-	: (START WITH INTEGERLITERAL)
+	: (START WITH (NUMERICLITERAL | INTEGERLITERAL))
 	;
 
 restartOption
@@ -3634,27 +4190,27 @@ restartOption
 	;
 
 incrementOption
-	: (INCREMENT BY INTEGERLITERAL)
+	: (INCREMENT BY (NUMERICLITERAL | INTEGERLITERAL))
 	;
 
 minvalueOption
-	: ((NO MINVALUE) | (MINVALUE INTEGERLITERAL))
+	: (NOMINVALUE | (NO MINVALUE) | (MINVALUE (NUMERICLITERAL | INTEGERLITERAL)))
 	;
 
 maxvalueOption
-	: ((NO MAXVALUE) | (MAXVALUE INTEGERLITERAL))
+	: (NOMAXVALUE | (NO MAXVALUE) | (MAXVALUE (NUMERICLITERAL | INTEGERLITERAL)))
 	;
 
 cycleOption
-	: (NO? CYCLE)
+	: (NOCYCLE | (NO? CYCLE))
 	;
 
 cacheOption
-	: ((NO CACHE) | (CACHE INTEGERLITERAL))
+	: (NOCACHE | (NO CACHE) | (CACHE INTEGERLITERAL))
 	;
 
 orderOption
-	: (NO? ORDER)
+	: (NOORDER | (NO? ORDER))
 	;
 
 keyLabelOption
@@ -3694,6 +4250,12 @@ Added..
 	| (referentialConstraint)
 
 ...as it seems to be allowed on its own.  Noted by Martijn Rutte 2023-01-10.
+
+Added..
+
+	| (uniqueConstraint)
+
+...as it seems to be allowed on its own.  Noted by Martijn Rutte 2023-05-23.
 */
 alterTableOptionList
 	: (
@@ -3703,6 +4265,7 @@ alterTableOptionList
 	| (DROP COLUMN? columnName RESTRICT)
 	| (ADD periodDefinition)
 	| (ADD (uniqueConstraint | referentialConstraint | checkConstraint))
+	| (uniqueConstraint)
 	| (referentialConstraint)
 	| (DROP ((PRIMARY KEY) | ((UNIQUE | (FOREIGN KEY) | CHECK | CONSTRAINT) constraintName)))
 	| (ADD partitioningClause)
@@ -3839,7 +4402,7 @@ createIndexOptionList
 	| gbpcacheSpecification
 	| defineOption
 	| ((INCLUDE | EXCLUDE) NULL KEYS)
-	| (PARTITION BY RANGE? LPAREN
+	| ((PARTITION BY RANGE?)? LPAREN
 		partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*
 		(COMMA partitionElement (usingSpecification2 | freeSpecification | gbpcacheSpecification | dssizeOption)*)* RPAREN)
 	| bufferpoolOption
@@ -3860,6 +4423,7 @@ createLobTablespaceOptionList
 	| defineOption
 	| dssizeOption
 	| gbpcacheSpecification
+	| insertAlgorithmOption
 	| lockmaxOption
 	| locksizeOption
 	| loggedOption
@@ -4501,11 +5065,15 @@ materializedQueryTableAlteration
 	: (SET refreshableTableOptionsList+)
 	;
 
+/*
+Made (EXCLUSIVE | INCLUSIVE) optional as per documentation.  Noted
+by Martijn Rutte 2023-05-23.
+*/
 periodDefinition
 	: (
 	PERIOD FOR?
 	((SYSTEM_TIME LPAREN beginColumnName COMMA endColumnName RPAREN)
-	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE) RPAREN))
+	| (BUSINESS_TIME LPAREN beginColumnName COMMA endColumnName (EXCLUSIVE | INCLUSIVE)? RPAREN))
 	)
 	;
 
@@ -4548,6 +5116,22 @@ operator
 	: (SPLAT | PLUS | MINUS | SLASH | CONCAT | CONCATOP)
 	;
 
+/*
+Note that arrayConstructor must precede arrayElementSpecification
+in the expression rule.  Otherwise the former is mistaken for
+the latter.
+
+Note that sequenceReference must precede columnName in the expression
+rule.  Otherwise the former is mistaken for the latter.
+
+Made expression optional in ((operator | INTEGERLITERAL) expression?)
+per Martijn Rutte 2023-05-23.  This allows for...
+
+  SET C1 = SUBSTR(C2,LENGTH(C2)-1);
+
+...due to the -1 being output from the lexer as one token (INTEGERLITERAL)
+instead of two (operator INTEGERLITERAL).
+*/
 expression
 	: (
 	functionInvocation
@@ -4555,6 +5139,7 @@ expression
 	| labeledDuration
 	| literal
 	| specialRegister
+	| sequenceReference
 	| columnName
 	| hostVariable
 	| scalarFullSelect
@@ -4563,11 +5148,10 @@ expression
 	| castSpecification
 	| xmlCastSpecification
 	| xmlParseSpecification
-	| arrayElementSpecification
 	| arrayConstructor
+	| arrayElementSpecification
 	| olapSpecification
 	| rowChangeExpression
-	| sequenceReference
 	| ((operator | INTEGERLITERAL) expression)
 	| ((functionInvocation
 		| LPAREN expression RPAREN
@@ -4587,7 +5171,7 @@ expression
 		| olapSpecification
 		| rowChangeExpression
 		| sequenceReference)
-		((operator | INTEGERLITERAL) expression)*)
+		((operator | INTEGERLITERAL) expression?)*)
 	)
 	;
 
@@ -4599,8 +5183,12 @@ rowChangeExpression
 	: ROW CHANGE (TIMESTAMP | TOKEN) FOR tableName
 	;
 
+/*
+Alternate syntax added per Michel A. G. Poppema 2023-05-23.
+*/
 sequenceReference
-	: (NEXT | PREVIOUS) VALUE FOR tableName
+	: ((((NEXT | PREVIOUS) VALUE) | NEXTVAL | PREVVAL) FOR sequenceName)
+	| (sequenceName DOT (NEXTVAL | CURRVAL))
 	;
 
 functionInvocation
@@ -4625,10 +5213,53 @@ scalarFunctionInvocation
 	| aiAnalogyFunction
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
+	| extractFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
 	;
 
+/*
+Extract function added per Martijn Rutte 2023-05-23.
+*/
+extractFunction
+	: (
+	EXTRACT LPAREN 
+	(datePrefix | timePrefix | timezonePrefix)
+	FROM 
+	expression
+	RPAREN
+	)
+	;
+
+datePrefix
+	: (
+	YEAR
+	| MONTH
+	| DAY
+	)
+	;
+
+timePrefix
+	: (
+	HOUR
+	| MINUTE
+	| SECOND
+	)
+	;
+
+timezonePrefix
+	: (
+	HOUR
+	| MINUTE
+	| SECOND
+	| TIMEZONE_HOUR
+	| TIMEZONE_MINUTE
+	)
+	;
+
+/*
+That DISTINCT should be (ALL | DISTINCT) noted on 2023-06-05.
+*/
 aggregateFunctionInvocation
 	: (
 	arrayaggFunction
@@ -4641,7 +5272,7 @@ aggregateFunctionInvocation
 	| percentileDiscFunction
 	| percentRankFunction
 	| xmlaggFunction
-	| ((schemaName DOT)? aggregateFunction LPAREN DISTINCT? (expression | SPLAT) RPAREN)
+	| ((schemaName DOT)? aggregateFunction LPAREN (ALL | DISTINCT)? (expression | SPLAT) RPAREN)
 	)
 	;
 
@@ -4652,10 +5283,13 @@ regressionFunctionInvocation
 	RPAREN)
 	;
 
+/*
+Function arguments made optional per observation by Martijn Rutte 2023-06-05.
+*/
 externalFunctionInvocation
 	: ((schemaName DOT)? sqlidentifier
 	LPAREN
-	expression (COMMA expression)*
+	(expression (COMMA expression)*)?
 	RPAREN)
 	;
 
@@ -4998,6 +5632,9 @@ currentRow
 	: CURRENT ROW
 	;
 
+/*
+Added MAX and MIN 2023-06-05
+*/
 scalarFunction
 	: (
 	ABS
@@ -5121,9 +5758,11 @@ scalarFunction
 	| LOWER
 	| LPAD
 	| LTRIM
+	| MAX
 	| MAX_CARDINALITY
 	| MICROSECOND
 	| MIDNIGHT_SECONDS
+	| MIN
 	| MINUTE
 	| MOD
 	| MONTH
@@ -5532,6 +6171,10 @@ Made...
 	| (distinctTypeCastFunctionName LPAREN defaultClauseAllowables RPAREN))
 
 ...optional because it wasn't by my mistake.  Noted by Martijn Rutte 2023-01-09.
+
+TODO: It's possible the second half, with distinctTypeCastFunctionName, is
+simply not necessary given the addition of scalarFunctionInvocation to
+defaultClauseAllowables.
 */
 defaultClause
 	: (
@@ -5547,6 +6190,10 @@ defaultClause1
 	)
 	;
 
+/*
+Added scalarFunctionInvocation to allow what IBM documentation refers to
+as cast-function-name.  Need noted by Martijn Rutte 2023-06-05.
+*/
 defaultClauseAllowables
 	: (
 	literal
@@ -5554,6 +6201,7 @@ defaultClauseAllowables
 	| USER
 	| CURRENT_SQLID
 	| NULL
+	| scalarFunctionInvocation
 	)
 	;
 
@@ -5681,11 +6329,19 @@ namespacePrefix
 	: NONNUMERICLITERAL
 	;
 
+/*
+Added integerInParens? and | ((WITH | WITHOUT) TIME ZONE) per
+Martijn Rutte 2023-05-23.
+*/
 timeZoneSpecificExpression
 	: timeZoneExpressionSubset
-	((AT LOCAL) | (AT TIME ZONE timeZoneExpressionSubset))
+	integerInParens?
+	((AT LOCAL) | (AT TIME ZONE timeZoneExpressionSubset) | ((WITH | WITHOUT) TIME ZONE))
 	;
 
+/*
+Added (LPAREN expression RPAREN) per documentation. 2023-05-23
+*/
 timeZoneExpressionSubset
 	: (
 	functionInvocation
@@ -5696,14 +6352,18 @@ timeZoneExpressionSubset
 	| scalarFullSelect
 	| caseExpression
 	| castSpecification
+	| (LPAREN expression RPAREN)
 	)
 	;
 
+/*
+END changed to (END | END_CASE) per Martijn Rutte 2023-06-05.
+*/
 caseExpression
 	: CASE
 	(searchedWhenClause+ | simpleWhenClause)
 	((ELSE NULL) | (ELSE resultExpression))?
-	END
+	(END | END_CASE)
 	;
 
 resultExpression
@@ -5832,6 +6492,9 @@ castDataType
 	)
 	;
 
+/*
+Modified to allow forDataQualifier on its own per Martijn Rutte 2023-05-24.
+*/
 castBuiltInType
 	: (
 	SMALLINT
@@ -5843,8 +6506,8 @@ castBuiltInType
 	| (FLOAT (integerInParens | (LPAREN RPAREN)))
 	| REAL
 	| (DOUBLE PRECISION?)
-	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? ccsidQualifier?)
-	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? ccsidQualifier?)
+	| ((((CHARACTER | CHAR) VARYING? ) | VARCHAR) (length | (LPAREN RPAREN))? (ccsidQualifier | forDataQualifier)?)
+	| ((((CHARACTER | CHAR) LARGE OBJECT) | CLOB) (length | (LPAREN RPAREN))? (ccsidQualifier | forDataQualifier)?)
 	| ((GRAPHIC | VARGRAPHIC | DBCLOB) (length | (LPAREN RPAREN))? ccsidQualifier?)
 	| (BINARY (integerInParens | (LPAREN RPAREN))?)
 	| (((BINARY VARYING?) | VARBINARY) (integerInParens | (LPAREN RPAREN))?)
@@ -6011,7 +6674,7 @@ savepointName
 	;
 
 aliasName
-	: identifier
+	: (schemaName DOT)? identifier
 	;
 
 constraintName
@@ -6066,8 +6729,11 @@ catalogName
 	: identifier
 	;
 
+/*
+Added (schemaName DOT)? per Martijn Rutte 2023-05-23.
+*/
 triggerName
-	: identifier
+	: (schemaName DOT)? identifier
 	;
 
 contextName
@@ -6180,6 +6846,10 @@ sqlParameterName
 
 sqlVariableName
 	: ((schemaName DOT)? identifier1)
+	;
+
+sqlConditionName
+	: identifier1
 	;
 
 transitionVariableName
@@ -6305,13 +6975,17 @@ nestedTableExpression
 	: (TABLE? LPAREN fullSelect RPAREN correlationClause?)
 	;
 
-/**/
+/*
+This was previously quite embarrassingly wrong.  Thankfully,
+Martijn Rutte provided a test case and we found a solution 2023-05-23.
+*/
 dataChangeTableReference
 	: (
-	(FINAL TABLE LPAREN insertStatement RPAREN correlationClause?)
-	| ((FINAL | OLD) TABLE searchedUpdate)
-	| (OLD TABLE searchedDelete)
-	| (FINAL TABLE mergeStatement)
+	((FINAL TABLE LPAREN insertStatement RPAREN)
+	| ((FINAL | OLD) TABLE LPAREN searchedUpdate RPAREN)
+	| (OLD TABLE LPAREN searchedDelete RPAREN)
+	| (FINAL TABLE LPAREN mergeStatement RPAREN))
+	correlationClause?
 	)
 	;
 
@@ -6611,8 +7285,15 @@ offsetClause
 	: OFFSET INTEGERLITERAL (ROW | ROWS)
 	;
 
+/*
+LIMIT syntax added per Martijn Rutte 2023-05-22.
+
+INTEGERLITERAL changed to (variable | INTEGERLITERAL) in first
+alternative per Martijn Rutte 2023-06-05.
+*/
 fetchClause
-	: FETCH (FIRST | NEXT) INTEGERLITERAL? (ROW | ROWS) ONLY
+	: (FETCH (FIRST | NEXT) (variable | INTEGERLITERAL)? (ROW | ROWS) ONLY)
+	| (LIMIT INTEGERLITERAL ((OFFSET INTEGERLITERAL) | (COMMA INTEGERLITERAL))?)
 	;
 
 identifier
@@ -6627,6 +7308,16 @@ identifier
 
 identifier1
 	: sqlidentifier
+	| sqlKeyword
+	| scalarFunction
+	| aggregateFunction
+	| regressionFunction
+	| tableFunction
+	;
+
+identifier2
+	: SQLIDENTIFIER
+	| USER
 	| sqlKeyword
 	| scalarFunction
 	| aggregateFunction
@@ -6748,6 +7439,7 @@ sqlKeyword
 	| CONDITION_NUMBER
 	| CONNECT
 	| CONNECTION
+	| CONSTANT
 	| CONSTRAINT
 	| CONTAINS
 	| CONTENT
@@ -7080,8 +7772,12 @@ sqlKeyword
 	| NEXT
 	| NEXTVAL
 	| NO
+	| NOCACHE
 	| NODEFER
+	| NOMAXVALUE
+	| NOMINVALUE
 	| NONE
+	| NOORDER
 	| NOT
 	| NOTNULL
 	| NTH_VALUE
@@ -7279,6 +7975,7 @@ sqlKeyword
 	| SPECIFIC
 	| SQL
 	| SQLADM
+	| SQLCODE
 	| SQLERROR
 	| SQLEXCEPTION
 	| SQLID

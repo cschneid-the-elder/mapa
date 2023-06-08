@@ -1,0 +1,109 @@
+
+--#SET TERMINATOR @
+
+CREATE PROCEDURE div ( IN  num INTEGER,
+                       IN  den INTEGER,
+                       OUT res INTEGER,
+                       OUT err VARCHAR(70))
+       LANGUAGE SQL
+    BEGIN
+        DECLARE msg        CHAR(70) DEFAULT '';
+        DECLARE div_err    CHAR(70) DEFAULT '';
+
+        DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+           BEGIN
+              GET STACKED DIAGNOSTICS CONDITION 1 div_err = MESSAGE_TEXT;
+              INSERT INTO ERR_LOG
+                ( PROC_NM
+                , ERR_MSG
+                , CM
+                ) VALUES (
+                  'div'
+                , div_err
+                , 'attempt to divide '
+                  CONCAT CHAR(NUM) 
+                  CONCAT ' by '
+                  CONCAT CHAR(DEN)
+                );
+            
+            END;
+
+         SET res = num/den;
+    END;
+@
+
+CREATE PROCEDURE P1 LANGUAGE SQL
+  BEGIN
+    DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    BEGIN
+    GET STACKED DIAGNOSTICS
+        D01 = DB2_LAST_ROW
+      , D02 = DB2_NUMBER_PARAMETER_MARKERS
+      , D03 = DB2_NUMBER_RESULT_SETS
+      , D04 = DB2_NUMBER_ROWS
+      , D05 = DB2_RETURN_STATUS
+      , D06 = DB2_SQL_ATTR_CURSOR_HOLD
+      , D07 = DB2_SQL_ATTR_CURSOR_ROWSET
+      , D08 = DB2_SQL_ATTR_CURSOR_SCROLLABLE
+      , D09 = DB2_SQL_ATTR_CURSOR_SENSITIVITY
+      , D10 = DB2_SQL_ATTR_CURSOR_TYPE
+      , D11 = MORE
+      , D12 = NUMBER
+      , D13 = ROW_COUNT
+      , D14 = DB2_GET_DIAGNOSTICS_DIAGNOSTICS
+      , D15 = DB2_SQL_NESTING_LEVEL
+    ;
+    
+    GET STACKED DIAGNOSTICS CONDITION 1
+        C01 = CATALOG_NAME
+      , C02 = CONDITION_NUMBER
+      , C03 = CURSOR_NAME
+      , C04 = DB2_ERROR_CODE1
+      , C05 = DB2_ERROR_CODE2
+      , C06 = DB2_ERROR_CODE3
+      , C07 = DB2_ERROR_CODE4
+      , C08 = DB2_INTERNAL_ERROR_POINTER
+      , C09 = DB2_LINE_NUMBER
+      , C10 = DB2_MESSAGE_ID
+      , C11 = DB2_MODULE_DETECTING_ERROR
+      , C12 = DB2_ORDINAL_TOKEN_1
+      , C13 = DB2_REASON_CODE
+      , C14 = DB2_RETURNED_SQLCODE
+      , C15 = DB2_ROW_NUMBER
+      , C16 = DB2_SQLERRD_SET
+      , C17 = DB2_SQLERRD1
+      , C18 = DB2_SQLERRD2
+      , C19 = DB2_SQLERRD3
+      , C20 = DB2_SQLERRD4
+      , C21 = DB2_SQLERRD5
+      , C22 = DB2_SQLERRD6
+      , C23 = DB2_TOKEN_COUNT
+      , C24 = MESSAGE_TEXT
+      , C25 = RETURNED_SQLSTATE
+      , C26 = SERVER_NAME
+    ;
+    
+    GET STACKED DIAGNOSTICS CONDITION 1
+        C27 = DB2_AUTHENTICATION_TYPE
+      , C28 = DB2_AUTHORIZATION_ID
+      , C29 = DB2_CONNECTION_STATE
+      , C30 = DB2_CONNECTION_STATUS
+      , C31 = DB2_ENCRYPTION_TYPE
+      , C31 = DB2_SERVER_CLASS_NAME
+      , C33 = DB2_PRODUCT_ID
+    ;
+    
+    GET CURRENT DIAGNOSTICS
+        V01 = ALL STATEMENT
+            , CONDITION 1
+            , CONNECTION 1
+            , CONDITION COND_NB
+            , CONNECTION CONN_NB
+    ;
+  END
+  
+    SELECT CURRENT TIMESTAMP INTO MY_TMST FROM SYSIBM.SYSDUMMY1;
+  END
+@
+
+

@@ -1,0 +1,60 @@
+
+--#SET TERMINATOR @
+
+CREATE OR REPLACE TRIGGER TRIG001
+  BEFORE INSERT ON T1
+  REFERENCING NEW AS NEW
+  FOR EACH ROW
+  BEGIN
+  LABEL1: IF A = 1 THEN SET X = 4;
+          ELSEIF A = 2 THEN SET X = 8;
+          ELSEIF A = 3 THEN SET X = 15;
+          ELSEIF A = 4 THEN SET X = 16;
+          ELSEIF A = 5 THEN SET X = 23;
+          ELSEIF A = 6 THEN SET X = 42;
+          ELSE SET X = 108;
+          END IF;
+  END;
+@
+
+CREATE OR REPLACE TRIGGER TRIG002
+  BEFORE INSERT ON T1
+  REFERENCING NEW AS NEW
+  FOR EACH ROW
+  BEGIN
+  LABEL1: IF A = 1 THEN SET X = 4; SET Y = 44;
+          ELSEIF A = 2 THEN SET X = 8; SET Y = 88; SET Z = 888;
+          ELSEIF A = 3 THEN SET X = 15;
+          ELSEIF A = 4 THEN SET X = 16;
+          ELSEIF A = 5 THEN SET X = 23;
+          ELSEIF A = 6 THEN SET X = 42;
+          ELSE SET X = 108;
+          END IF;
+  END;
+@
+
+CREATE OR REPLACE TRIGGER TRIG003
+  BEFORE INSERT ON T1
+  REFERENCING NEW AS NEW
+  FOR EACH ROW
+  WHEN (NEW.C1 IS NULL OR NEW.C1 > '20:30')
+    P1: BEGIN
+      IF (NEW.C1 IS NULL) THEN
+        IF (NEW.C2 IS NULL) THEN
+          IF (NEW.C3 IS NULL) THEN
+            IF (NEW.C4 IS NULL) THEN
+              IF (NEW.C5 IS NULL) THEN
+                SET NEW.C1 = NEW.C2 + 1 HOUR;
+              END IF;
+            END IF;
+          END IF;
+        END IF;
+      END IF;
+      IF (NEW.C1 > '20:30') THEN
+        SIGNAL SQLSTATE '27182'
+          SET MESSAGE_TEXT = 'this is a bad time';
+      END IF;
+    END
+@
+
+
