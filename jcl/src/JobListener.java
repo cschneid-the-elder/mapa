@@ -22,6 +22,7 @@ public class JobListener extends JCLParserBaseListener {
 	public JclStep currJclStep = null;
 	public int nbJobs = 0;
 	public int fileNb = 0;
+	private Boolean errorCharsFound = false;
 
 	public JobListener(
 			ArrayList<Job> jobs
@@ -187,7 +188,25 @@ public class JobListener extends JCLParserBaseListener {
 		}
 	}
 
+	@Override public void enterErrorChars(JCLParser.ErrorCharsContext ctx) {
+		this.errorCharsFound = true;	
+	}
+
+	/**
+	It is convenient to have the end line of the current Job or Proc.
+	<p>In-stream procs will have been ended by their PEND statement.
+	<p>If any unexpected characters have been found, indicated by the
+	errorChars rule being entered, then all processing is thrown away as
+	the input isn't valid JCL.
+	*/
 	@Override public void exitStartRule(JCLParser.StartRuleContext ctx) {
+		if (this.errorCharsFound) {
+			this.procs.clear();
+			this.jobs.clear();
+			this.currJob = null;
+			this.currProc = null;
+		}
+
 		if (this.currJob == null) {
 			if (this.currProc == null) {
 			} else {

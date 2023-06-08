@@ -21,10 +21,10 @@ options {tokenVocab=JCLPPLexer;}
 
 startRule : jcl | EOF ;
 
-jcl : execJCL+ | procJCL ;
+jcl : execJCL+ | procJCL;
 
 execJCL
-	: jesExecutionControlStatements	
+	: jesExecutionControlStatements*	
 		(jobCard 
 			(jclCommandStatement 
 			| jes2CntlStatement 
@@ -50,7 +50,33 @@ execJCL
 			| pendStatement 
 			| scheduleStatement 
 			| setStatement)*
-			nullStatement* jes2CntlStatement* delimiterStatement*)+ 
+			nullStatement* jes2CntlStatement* delimiterStatement*
+		(
+			(jclCommandStatement 
+			| jes2CntlStatement 
+			| commandStatement 
+			| commentStatement 
+			| joblibAmalgamation 
+			| syschkAmalgamation 
+			| jcllibStatement 
+			| cntlStatementAmalgamation 
+			| notifyStatement 
+			| xmitStatement)* 
+			(jclCommandStatement 
+			| commandStatement 
+			| commentStatement 
+			| jclStep 
+			| ifStatement 
+			| elseStatement 
+			| endifStatement 
+			| includeStatement 
+			| exportStatement 
+			| outputStatement 
+			| procStatement 
+			| pendStatement 
+			| scheduleStatement 
+			| setStatement)*
+			nullStatement* jes2CntlStatement* delimiterStatement*))+
 	EOF?
 	;
 
@@ -70,7 +96,106 @@ stepName : NAME_FIELD ;
 
 procName : NAME_FIELD ;
 
-jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ddParmASTERISK_DATA* ;
+errorChars
+	: (ERROR_CHAR
+	| ERROR_CHAR_CM_MODE
+	| ERROR_CHAR_COMMA_WS_MODE
+	| ERROR_CHAR_COMMA_WS_NEWLINE_MODE
+	| ERROR_CHAR_COMMA_NEWLINE_MODE
+	| ERROR_CHAR_COMMA_NEWLINE_CM_MODE
+	| ERROR_CHAR_JES2_CNTL_MODE
+	| ERROR_CHAR_NM_MODE
+	| ERROR_CHAR_OP_MODE
+	| ERROR_CHAR_OP_PARM1_MODE
+	| ERROR_CHAR_OP_PARM_MODE
+	| ERROR_CHAR_COMMAND_MODE
+	| ERROR_CHAR_COMMAND_PARM_MODE
+	| ERROR_CHAR_JCL_COMMAND_MODE
+	| ERROR_CHAR_JCL_COMMAND_PARM_MODE
+	| ERROR_CHAR_EXEC1_MODE
+	| ERROR_CHAR_EXEC2_MODE
+	| ERROR_CHAR_IF_MODE
+	| ERROR_CHAR_DD_MODE
+	| ERROR_CHAR_DD_PARM_MODE
+	| ERROR_CHAR_EXPORT_STMT_MODE
+	| ERROR_CHAR_EXPORT_STMT_PARM_MODE
+	| ERROR_CHAR_NOTIFY_STMT_MODE
+	| ERROR_CHAR_NOTIFY_STMT_PARM_MODE
+	| ERROR_CHAR_PROC_MODE
+	| ERROR_CHAR_PROC_PARM_MODE
+	| ERROR_CHAR_PROC_PARM_VALUE_MODE
+	| ERROR_CHAR_SCHEDULE_MODE
+	| ERROR_CHAR_SCHEDULE_PARM_MODE
+	| ERROR_CHAR_SET_MODE
+	| ERROR_CHAR_SET_PARM_MODE
+	| ERROR_CHAR_SET_PARM_VALUE_MODE
+	| ERROR_CHAR_XMIT_MODE
+	| ERROR_CHAR_XMIT_PARM_MODE
+	| ERROR_CHAR_JOBGROUP_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT1_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS_NEWLINE_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE_CM_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT2_MODE
+	| ERROR_CHAR_JOBGROUP_ACCT3_MODE
+	| ERROR_CHAR_JOBGROUP_PROGRAMMER_NAME_MODE
+	| ERROR_CHAR_JOBGROUP_ERROR_MODE
+	| ERROR_CHAR_JOBGROUP_ERROR_PAREN_MODE
+	| ERROR_CHAR_GJOB_MODE
+	| ERROR_CHAR_GJOB_PARM_MODE
+	| ERROR_CHAR_JOBSET_MODE
+	| ERROR_CHAR_JOBSET_PARM_MODE
+	| ERROR_CHAR_SJOB_MODE
+	| ERROR_CHAR_ENDSET_MODE
+	| ERROR_CHAR_AFTER_MODE
+	| ERROR_CHAR_AFTER_PARM_MODE
+	| ERROR_CHAR_BEFORE_MODE
+	| ERROR_CHAR_BEFORE_PARM_MODE
+	| ERROR_CHAR_CONCURRENT_MODE
+	| ERROR_CHAR_CONCURRENT_PARM_MODE
+	| ERROR_CHAR_ENDGROUP_MODE
+	| ERROR_CHAR_JES2_JOBPARM_MODE
+	| ERROR_CHAR_JES2_JOBPARM_PARM_MODE
+	| ERROR_CHAR_JES2_MESSAGE_MODE
+	| ERROR_CHAR_JES2_MESSAGE_PARM_MODE
+	| ERROR_CHAR_JES2_NETACCT_MODE
+	| ERROR_CHAR_JES2_NETACCT_PARM_MODE
+	| ERROR_CHAR_JES2_NOTIFY_MODE
+	| ERROR_CHAR_JES2_NOTIFY_PARM_MODE
+	| ERROR_CHAR_JES2_OUTPUT_MODE
+	| ERROR_CHAR_JES2_OUTPUT_PARM_MODE
+	| ERROR_CHAR_JES2_PRIORITY_MODE
+	| ERROR_CHAR_JES2_PRIORITY_PARM_MODE
+	| ERROR_CHAR_JES2_ROUTE_MODE
+	| ERROR_CHAR_JES2_ROUTE_PARM_MODE
+	| ERROR_CHAR_JES2_ROUTE_PARM1_MODE
+	| ERROR_CHAR_JES2_SETUP_MODE
+	| ERROR_CHAR_JES2_SETUP_PARM_MODE
+	| ERROR_CHAR_JES2_SIGNON_MODE
+	| ERROR_CHAR_JES2_XEQ_MODE
+	| ERROR_CHAR_JES2_XMIT_MODE
+	| ERROR_CHAR_JES2_XMIT_NODE_MODE
+	| ERROR_CHAR_JES2_XMIT_DLM_MODE
+	| ERROR_CHAR_DATA_PARM_MODE
+	| ERROR_CHAR_DLM_MODE
+	| ERROR_CHAR_DATA_MODE
+	| ERROR_CHAR_CNTL_MODE
+	| ERROR_CHAR_CNTL_CM_MODE
+	| ERROR_CHAR_CNTL_DATA_MODE
+	| ERROR_CHAR_QS_MODE
+	| ERROR_CHAR_QS_SS_MODE
+	| ERROR_CHAR_DCB_MODE
+	| ERROR_CHAR_DCB_PAREN_MODE
+	| ERROR_CHAR_INCLUDE_MODE
+	| ERROR_CHAR_INCLUDE_PARM_MODE
+	| ERROR_CHAR_JCLLIB_MODE
+	| ERROR_CHAR_JCLLIB_PARM_MODE
+	| ERROR_CHAR_KYWD_VAL_MODE
+	| ERROR_CHAR_KYWD_VAL_PAREN_MODE)+
+	;
+
+jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement | errorChars)* ddParmASTERISK_DATA* ;
 
 /*
 System symbols can be substringed...
@@ -275,7 +400,7 @@ setOperation : (SET_PARM_NAME EQUAL keywordOrSymbolic?) ;
 xmitStatement : SS NAME_FIELD? XMIT SYMBOLIC* ddParmASTERISK_DATA* ;
 
 
-jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetStatement | sJobStatement | endSetStatement | endGroupStatement | afterStatement | beforeStatement | concurrentStatement)* ;
+jesExecutionControlStatements : (jobGroupStatement | gJobStatement | jobSetStatement | sJobStatement | endSetStatement | endGroupStatement | afterStatement | beforeStatement | concurrentStatement) ;
 
 jobGroupStatement : SS NAME_FIELD? JOBGROUP_OP SYMBOLIC* ;
 

@@ -1,3 +1,51 @@
+--2023-03-03--------------------------------------------------------------------
+Issue 147 mitigation.
+
+Added ERROR_CHAR* tokens to JCLLexer.g4 and JCLPPLexer.g4.  Added errorChars
+rule to JCLParser.g4 and JCLPPParser.g4.  This was to transfer unrecognized
+token errors to the parser, where I could catch them with a custom error
+listener.
+
+Substituted CatchableErrorListener for StdoutParserErrorListener in methods
+lexAndParsePP() and lexAndParse() in Demo01.java.  This way, both unrecognized
+and unexpected tokens are caught programmatically.
+
+Modified the execJCL rule in the parser grammars to allow for 
+delimiterStatements placed between jclSteps.  Oddly, a side effect is that
+files containing large numbers of outputStatements take significantly longer
+to parse.
+
+Wrapped the ParseTreeWalker.walk() execution in a try/catch block in an attempt
+to trap anything I've overlooked.
+
+Checked for size() == 0 of both jobs and procs arrays in main processing loop
+in Demo01.java to catch parsing errors taking place after preprocessing.
+
+Added a check in PPListener.java and JobListener.java to check for errorChars
+and throw away any jobs or procs which may have otherwise passed parsing.  Yet
+another mechanism to allow for bad input yet continue processing.
+
+Modified JCLPPLexer.g4 and JCLLexer.g4 to disallow emitting an EXEC_PROC_PARM
+if an EXEC PGM= exec statement is being processed.  This means statements
+such as EXEC PGM=IEFBR14,Q (which is invalid) will have the bad characters
+show up in the errorChars rule in the parser.
+
+Added errorChars in a couple of strategic spots in JCLLexer.g4 to help
+parsing continue even in the event of syntax errors.  But you can definitely
+still mess things up with a badly formatted jobcard.
+
+The overall effect of all this should be to continue processing despite 
+unexpected input (say, a COBOL or C program) and any oversights in the grammars
+or the listeners. 
+
+Added several test cases to test for trailing spaces in jobcard, jcllib, and
+exec parameters, and several others for testing bad syntax.  This is probably
+not exhaustive.
+
+Also, corrected a weakness in jobcard parsing; comma-separated parameters 
+enclosed in parentheses were sent to the parser without the separating commas.  
+The jobCard rule has been modified to allow for the commas.
+
 --2023-02-10--------------------------------------------------------------------
 ANTLR 4.11.1 migration.  Makefile, manifest file, tester script modified to use
 new antlr-4.11.1-complete.jar file.  JCLParser.jar regenerated.

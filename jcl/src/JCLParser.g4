@@ -50,7 +50,33 @@ execJCL
 			| pendStatement 
 			| scheduleStatement 
 			| setStatement)*
-			nullStatement* jes2CntlStatement* delimiterStatement*)+ 
+			nullStatement* jes2CntlStatement* delimiterStatement*
+		(
+			(jclCommandStatement 
+			| jes2CntlStatement 
+			| commandStatement 
+			| commentStatement 
+			| joblibAmalgamation 
+			| syschkAmalgamation 
+			| jcllibStatement 
+			| cntlStatementAmalgamation 
+			| notifyStatement 
+			| xmitStatement)* 
+			(jclCommandStatement 
+			| commandStatement 
+			| commentStatement 
+			| jclStep 
+			| ifStatement 
+			| elseStatement 
+			| endifStatement 
+			| includeStatement 
+			| exportStatement 
+			| outputStatement 
+			| procStatement 
+			| pendStatement 
+			| scheduleStatement 
+			| setStatement)*
+			nullStatement* jes2CntlStatement* delimiterStatement*))+
 	EOF?
 	;
 
@@ -70,7 +96,115 @@ stepName : NAME_FIELD ;
 
 procName : NAME_FIELD ;
 
-jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement)* ddParmASTERISK_DATA* ;
+errorChars
+	: (ERROR_CHAR
+	| ERROR_CHAR_CM
+	| ERROR_CHAR_COMMA_WS
+	| ERROR_CHAR_COMMA_WS_NEWLINE
+	| ERROR_CHAR_COMMA_NEWLINE
+	| ERROR_CHAR_COMMA_NEWLINE_CM
+	| ERROR_CHAR_JES2_CNTL
+	| ERROR_CHAR_NM
+	| ERROR_CHAR_OP
+	| ERROR_CHAR_COMMAND
+	| ERROR_CHAR_COMMAND_PARM
+	| ERROR_CHAR_JCL_COMMAND
+	| ERROR_CHAR_JCL_COMMAND_PARM
+	| ERROR_CHAR_EXEC1
+	| ERROR_CHAR_EXEC2
+	| ERROR_CHAR_IF
+	| ERROR_CHAR_DD
+	| ERROR_CHAR_DD_PARM
+	| ERROR_CHAR_EXPORT_STMT
+	| ERROR_CHAR_EXPORT_STMT_PARM
+	| ERROR_CHAR_NOTIFY_STMT
+	| ERROR_CHAR_NOTIFY_STMT_PARM
+	| ERROR_CHAR_OUTPUT_STMT
+	| ERROR_CHAR_OUTPUT_STMT_PARM
+	| ERROR_CHAR_PROC
+	| ERROR_CHAR_PROC_PARM
+	| ERROR_CHAR_PROC_PARM_VALUE
+	| ERROR_CHAR_SCHEDULE
+	| ERROR_CHAR_SCHEDULE_PARM
+	| ERROR_CHAR_SET
+	| ERROR_CHAR_SET_PARM
+	| ERROR_CHAR_SET_PARM_VALUE
+	| ERROR_CHAR_XMIT
+	| ERROR_CHAR_XMIT_PARM
+	| ERROR_CHAR_JOBGROUP
+	| ERROR_CHAR_JOBGROUP_ACCT1
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS_NEWLINE
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE
+	| ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE_CM
+	| ERROR_CHAR_JOBGROUP_ACCT2
+	| ERROR_CHAR_JOBGROUP_ACCT3
+	| ERROR_CHAR_JOBGROUP_PROGRAMMER_NAME
+	| ERROR_CHAR_JOBGROUP_ERROR
+	| ERROR_CHAR_JOBGROUP_ERROR_PAREN
+	| ERROR_CHAR_GJOB
+	| ERROR_CHAR_GJOB_PARM
+	| ERROR_CHAR_JOBSET
+	| ERROR_CHAR_JOBSET_PARM
+	| ERROR_CHAR_SJOB
+	| ERROR_CHAR_ENDSET
+	| ERROR_CHAR_AFTER
+	| ERROR_CHAR_AFTER_PARM
+	| ERROR_CHAR_BEFORE
+	| ERROR_CHAR_BEFORE_PARM
+	| ERROR_CHAR_CONCURRENT
+	| ERROR_CHAR_CONCURRENT_PARM
+	| ERROR_CHAR_ENDGROUP
+	| ERROR_CHAR_JES2_JOBPARM
+	| ERROR_CHAR_JES2_JOBPARM_PARM
+	| ERROR_CHAR_JES2_MESSAGE
+	| ERROR_CHAR_JES2_MESSAGE_PARM
+	| ERROR_CHAR_JES2_NETACCT
+	| ERROR_CHAR_JES2_NETACCT_PARM
+	| ERROR_CHAR_JES2_NOTIFY
+	| ERROR_CHAR_JES2_NOTIFY_PARM
+	| ERROR_CHAR_JES2_OUTPUT
+	| ERROR_CHAR_JES2_OUTPUT_PARM
+	| ERROR_CHAR_JES2_PRIORITY
+	| ERROR_CHAR_JES2_PRIORITY_PARM
+	| ERROR_CHAR_JES2_ROUTE
+	| ERROR_CHAR_JES2_ROUTE_PARM
+	| ERROR_CHAR_JES2_ROUTE_PARM1
+	| ERROR_CHAR_JES2_SETUP
+	| ERROR_CHAR_JES2_SETUP_PARM
+	| ERROR_CHAR_JES2_SIGNON
+	| ERROR_CHAR_JES2_XEQ
+	| ERROR_CHAR_JES2_XMIT
+	| ERROR_CHAR_JES2_XMIT_NODE
+	| ERROR_CHAR_JES2_XMIT_DLM
+	| ERROR_CHAR_DATA_PARM
+	| ERROR_CHAR_DLM
+	| ERROR_CHAR_DATA
+	| ERROR_CHAR_CNTL
+	| ERROR_CHAR_CNTL_CM
+	| ERROR_CHAR_CNTL_DATA
+	| ERROR_CHAR_QS
+	| ERROR_CHAR_QS_SS
+	| ERROR_CHAR_DCB
+	| ERROR_CHAR_DCB_PAREN
+	| ERROR_CHAR_INCLUDE
+	| ERROR_CHAR_INCLUDE_PARM
+	| ERROR_CHAR_JCLLIB
+	| ERROR_CHAR_JCLLIB_PARM
+	| ERROR_CHAR_JOB1
+	| ERROR_CHAR_JOB_ACCT1
+	| ERROR_CHAR_JOB_ACCT_COMMA_WS
+	| ERROR_CHAR_JOB_ACCT_COMMA_WS_NEWLINE
+	| ERROR_CHAR_JOB_ACCT_COMMA_NEWLINE
+	| ERROR_CHAR_JOB_ACCT_COMMA_NEWLINE_CM
+	| ERROR_CHAR_JOB_ACCT2
+	| ERROR_CHAR_JOB_ACCT3
+	| ERROR_CHAR_JOB_PROGRAMMER_NAME
+	| ERROR_CHAR_KYWD_VAL
+	| ERROR_CHAR_KYWD_VAL_PAREN)+
+	;
+
+jclStep : execStatement (cntlStatementAmalgamation | ddStatementAmalgamation | outputStatement | includeStatement | commentStatement | errorChars)* ddParmASTERISK_DATA* ;
 
 /*
 System symbols can be substringed...
@@ -108,7 +242,7 @@ are only identical _now_ and may change. It's pretty easy to see which
 they are - the upper case part of the name is the same.  Except for 
 the COND parameter, which is in fact different.
 */
-execParameter : execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmROLL | execParmTIME | execParmTVSMSG | execParmTVSAMCOM ;
+execParameter : execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmROLL | execParmTIME | execParmTVSMSG | execParmTVSAMCOM | errorChars ;
 
 /*
 Some of the parameters for the EXEC statement can have a procstepname 
@@ -176,7 +310,7 @@ ddStatementAmalgamation : ddStatement ddStatementConcatenation* ;
 
 ddName : (NAME | NAME_FIELD) (DOT (NAME | NAME_FIELD))? ;
 
-ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDDNAME | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmNULLOVRD | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSEP | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter;
+ddParameter : ddParmACCODE | ddParmAMP | ddParmASTERISK | ddParmAVGREC | ddParmBLKSZLIM | ddParmBURST | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmCOPIES | ddParmDATA | ddParmDATACLAS | ddParmDCB | ddParmDDNAME | ddParmDEST | ddParmDISP | ddParmDLM | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFCB | ddParmFILEDATA | ddParmFLASH | ddParmFREE | ddParmFREEVOL | ddParmGDGORDER | ddParmHOLD | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYOFF | ddParmLABEL | ddParmLGSTREAM | ddParmLIKE | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmNULLOVRD | ddParmOUTLIM | ddParmOUTPUT | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSEP | ddParmSPACE | ddParmSPIN | ddParmSTORCLAS | ddParmSUBSYS | ddParmSYMBOLS | ddParmSYMLIST | ddParmSYSOUT | ddParmTERM | ddParmUCS | ddParmUNIT | ddParmVOLUME | ddParmDCB_Parameter | errorChars;
 
 ddParmACCODE : ACCODE EQUAL keywordOrSymbolic;
 ddParmAMP : AMP EQUAL singleOrMultipleValue ;
@@ -354,7 +488,7 @@ joblibConcatenation : SS DD joblibParameter+ ;
 
 joblibAmalgamation : joblibStatement joblibConcatenation* ;
 
-joblibParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
+joblibParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME | errorChars;
 
 
 syschkStatement : SS SYSCHK DD syschkParameter+ ;
@@ -363,12 +497,12 @@ syschkConcatenation : SS DD syschkParameter+ ;
 
 syschkAmalgamation : syschkStatement syschkConcatenation* ;
 
-syschkParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME ;
+syschkParameter : ddParmACCODE | ddParmAVGREC | ddParmBLKSIZE | ddParmBLKSZLIM | ddParmCCSID | ddParmCHARS | ddParmCHKPT | ddParmCNTL | ddParmDATACLAS | ddParmDCB | ddParmDISP | ddParmDSID | ddParmDSKEYLBL | ddParmDSNAME | ddParmDSNTYPE | ddParmDUMMY | ddParmDYNAM | ddParmEATTR | ddParmEXPDT | ddParmFILEDATA | ddParmKEYLABL1 | ddParmKEYLABL2 | ddParmKEYENCD1 | ddParmKEYENCD2 | ddParmKEYLEN | ddParmKEYOFF | ddParmLABEL | ddParmLIKE | ddParmLRECL | ddParmMAXGENS | ddParmMGMTCLAS | ddParmMODIFY | ddParmPATH | ddParmPATHDISP | ddParmPATHMODE | ddParmPATHOPTS | ddParmPROTECT | ddParmRECFM | ddParmRECORG | ddParmREFDD | ddParmRETPD | ddParmRLS | ddParmROACCESS | ddParmSECMODEL | ddParmSEGMENT | ddParmSPACE | ddParmSTORCLAS | ddParmUNIT | ddParmVOLUME | errorChars ;
 
 
 jobCard : SS jobName JOB (
     jobAccountingInformation+ |
-    (LPAREN jobAccountingInformation+ RPAREN)
+    (LPAREN jobAccountingInformation+ (COMMA jobAccountingInformation*)* RPAREN errorChars*)
   )? jobProgrammerName? jobKeywordParameter* ;
 
 jobName : NAME_FIELD ;
@@ -381,7 +515,7 @@ jobAccountingInformation : (
   ) ;
 jobProgrammerName : (QUOTED_STRING_PROGRAMMER_NAME+ | JOB_PROGRAMMER_NAME_UNQUOTED_STRING+ | QS_AMPERSAND+ | QS_SQUOTE2+) ;
 
-jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmROLL | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER ;
+jobKeywordParameter : jobParmADDRSPC | jobParmBYTES | jobParmCARDS | jobParmCCSID | jobParmCLASS | jobParmCOND | jobParmDSENQSHR | jobParmEMAIL | jobParmGDGBIAS | jobParmGROUP | jobParmJESLOG | jobParmJOBRC | jobParmLINES | jobParmMEMLIMIT | jobParmMSGCLASS | jobParmMSGLEVEL | jobParmNOTIFY | jobParmPAGES | jobParmPASSWORD | jobParmPERFORM | jobParmPRTY | jobParmRD | jobParmREGION | jobParmREGIONX | jobParmRESTART | jobParmROLL | jobParmSECLABEL | jobParmSCHENV | jobParmSYSAFF | jobParmSYSTEM | jobParmTIME | jobParmTYPRUN | jobParmUJOBCORR | jobParmUSER | errorChars;
 
 jobParmBYTES : BYTES EQUAL singleOrMultipleValue ;
 

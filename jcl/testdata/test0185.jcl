@@ -1,0 +1,69 @@
+//HARTNELL JOB   
+//  EXEC PGM=IEFBR14
+//TROUGHTN JOB ACCT-DATA   
+//  EXEC PGM=IEFBR14
+//PERTWEE JOB 'ACCT-DATA'   
+//  EXEC PGM=IEFBR14
+//BAKERT JOB ,CSCHNEID   
+//  EXEC PGM=IEFBR14
+//DAVISON JOB ,'CSCHNEID'   
+//  EXEC PGM=IEFBR14
+//BAKERC JOB ,TIME=10   
+//  EXEC PGM=IEFBR14
+//MCCOY JOB ACCT-DATA,CSCHNEID,TIME=10   
+//  EXEC PGM=IEFBR14
+//MCGANN JOB ('123456789A123456789B123456789C123456789D123456789E123   
+//          456789F123456789G123456789H123456789I123456789J123456789K1   
+//          23456789L123456789M123456789L'),'123456789A123456789B',   
+//          TIME=NOLIMIT   
+//  EXEC PGM=IEFBR14
+//ECCLESTN JOB (1234,201B,1,100,,,,N,60),'JES2 ACCTDATA FORMAT'   
+//  EXEC PGM=IEFBR14
+//TENNANT JOB ('@395ZZZ135,T2468123&&',101),   
+//        'CSCHNEID',   
+//        TIME=(00,04),   
+//        MSGLEVEL=(1,1),   
+//        MSGCLASS=Y,   
+//        BYTES=(400000,WARNING),   
+//        LINES=(3000,WARNING),   
+//        NOTIFY=&SYSUID   
+//  EXEC PGM=IEFBR14
+//SMITH JOB ('123456789A123456789B123456789C123456789D123456789E123   
+//          456789F123456789G123456789H123456789I123456789J123456789K1   
+//          23456789L123456789M123456789L'),   
+//          '123456789A123456789B',   
+//          ADDRSPC=VIRT,   
+//          BYTES=(400000,WARNING),   
+//          CARDS=(400000,WARNING),   
+//          CCSID=37,   
+//          CLASS=A,   
+//          COND=(4,LT),   
+//          DSENQSHR=ALLOW,   
+//          EMAIL='cschneid@example.com',   
+//          GDGBIAS=STEP,   
+//          GROUP=@PROD001,   
+//          JESLOG=NOSPIN,   
+//          JOBRC=LASTRC,   
+//          MEMLIMIT=NOLIMIT,   
+//          MSGLEVEL=(1,1),   
+//          MSGCLASS=Y,   
+//          NOTIFY=&SYSUID,   
+//          PASSWORD=(CAPALDI,WHITTAKR),   
+//          PERFORM=3,   
+//          PRTY=2,   
+//          RD=RNC,   
+//          REGION=4M,   
+//          REGIONX=(4M,10G),   
+//          RESTART=*,   
+//          SECLABEL=#PRIVATE,   
+//          SCHENV=@11PM,   
+//          SYSAFF=PRD5,   
+//          SYSTEM=ANY,   
+//          TIME=NOLIMIT,   
+//          TYPRUN=JCLHOLD,   
+//          UJOBCORR=DEF,   
+//          USER=CSCHNEID   
+//  EXEC PGM=IEFBR14
+//CAPALDI JOB (1234,201B,1,100,,,,N,60)   
+//  EXEC PGM=IEFBR14
+//* specifically testing whitespace after jobcard parameters

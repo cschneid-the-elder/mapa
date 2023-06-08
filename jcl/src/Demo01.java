@@ -15,6 +15,7 @@ import java.nio.file.attribute.*;
 import java.util.logging.*;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 
 /**
 This is intended to demonstrate use of the JCL lexing and parsing code
@@ -111,6 +112,15 @@ public static void main(String[] args) throws Exception {
 			ArrayList<Proc> procs = new ArrayList<>();
 			ArrayList<Job> jobs = new ArrayList<>();
 			lexAndParse(jobs, procs, finalJobFile.getPath(), fileNb);
+			if (jobs.size() == 0) {
+				/*
+				There was an error in parsing, possibly the input was correct
+				enough to pass preprocessing but not correct enough to pass
+				more rigourous processing.
+				*/
+				LOGGER.info("Ignoring content of " + aFileName + " due to parsing error");
+				continue;
+			}
 			jobs.get(0).setTmpDirs(baseDir, rJob.getJobDir(), rJob.getProcDir());
 			jobs.get(0).setOrdNb(rJob.getOrdNb());
 			jobs.get(0).lexAndParseProcs();
@@ -168,6 +178,15 @@ public static void main(String[] args) throws Exception {
 			ArrayList<Proc> procs = new ArrayList<>();
 			ArrayList<Job> jobs = new ArrayList<>();
 			lexAndParse(jobs, procs, finalProcFile.getPath(), fileNb);
+			if (procs.size() == 0) {
+				/*
+				There was an error in parsing, possibly the input was correct
+				enough to pass preprocessing but not correct enough to pass
+				more rigourous processing.
+				*/
+				LOGGER.info("Ignoring content of " + aFileName + " due to parsing error");
+				continue;
+			}
 			procs.get(0).setTmpDirs(baseDir, rProc.getProcDir());
 			procs.get(0).setOrdNb(rProc.getOrdNb());
 			procs.get(0).lexAndParseProcs();
@@ -245,19 +264,35 @@ public static void main(String[] args) throws Exception {
 		lexer.removeErrorListeners();
 		lexer.addErrorListener(new StdoutLexerErrorListener());
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+
 		JCLPPParser parser = new JCLPPParser(tokens);  //parse the tokens	
 		parser.removeErrorListeners();
-		parser.addErrorListener(new StdoutParserErrorListener());
 
+		/*
+		parser.addErrorListener(new StdoutParserErrorListener());
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
-	
+		*/
+		parser.addErrorListener(new CatchableErrorListener());
+
+		ParseTree tree = null;
+		try {
+			tree = parser.startRule(); // parse the content and get the tree
+		} catch(ParseCancellationException e) {
+			LOGGER.warning("Parser error " + e);
+			return;
+		}
+		
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
 		PPListener listener = new PPListener(jobs, procs, fileName, fileNb, baseDir, null, null, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		walker.walk(listener, tree);
+		try {
+			walker.walk(listener, tree);
+		} catch(Exception e) {
+			LOGGER.warning(listener.getClass().getName() + " error " + e);
+		}
 
 	}
 
@@ -321,17 +356,32 @@ public static void main(String[] args) throws Exception {
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		JCLParser parser = new JCLParser(tokens);  //parse the tokens	
 		parser.removeErrorListeners();
-		parser.addErrorListener(new StdoutParserErrorListener());
 
+		/*
+		parser.addErrorListener(new StdoutParserErrorListener());
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
-	
+		*/
+		parser.addErrorListener(new CatchableErrorListener());
+
+		ParseTree tree = null;
+		try {
+			tree = parser.startRule(); // parse the content and get the tree
+		} catch(ParseCancellationException e) {
+			LOGGER.warning("Parser error " + e);
+			return;
+		}
+		
 		ParseTreeWalker walker = new ParseTreeWalker();
 	
 		JobListener listener = new JobListener(jobs, procs, fileName, fileNb, LOGGER, CLI);
 	
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 	
-		walker.walk(listener, tree);
+		try {
+			walker.walk(listener, tree);
+		} catch(Exception e) {
+			LOGGER.warning(listener.getClass().getName() + " error " + e);
+		}
 
 	}
 

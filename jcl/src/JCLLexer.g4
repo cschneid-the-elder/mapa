@@ -74,6 +74,7 @@ lexer grammar JCLLexer;
 	public java.util.ArrayList<String> dlmVals = new java.util.ArrayList();
 	public String dlmString = null;
 	public int myMode = DEFAULT_MODE;
+	public Boolean inExecPgmMode = false;
 }
 
 tokens { NAME , ALNUMNAT , DELIMITER_STATEMENT , COMMENT_FLAG , CNTL , COMMAND , DD , ELSE , ENDCNTL , ENDIF , EXEC , IF , INCLUDE , JCLLIB , JOB , NOTIFY , OUTPUT , PEND , PROC , SCHEDULE , SET , XMIT, EQUAL , ACCODE , AMP , ASTERISK , AVGREC , BLKSIZE ,  BLKSZLIM , BUFNO , BURST , CCSID , CHARS , CHKPT , COPIES , DATA , DATACLAS , DCB , DDNAME , DEST , DIAGNS , DISP , DLM , DSID , DSKEYLBL , DSN , DSNAME , DSNTYPE , DUMMY , DYNAM , EATTR , EXPDT , EXPORT , FCB , FILEDATA , FLASH , FREE , FREEVOL , GDGORDER , HOLD , KEYLABL1 , KEYLABL2 , KEYENCD1 , KEYENCD2 , KEYLEN , KEYOFF , LABEL , LGSTREAM , LIKE , LRECL , MAXGENS , MGMTCLAS , MODE, MODIFY , NULLOVRD , OUTLIM , OUTPUT , PATH , PATHDISP , PATHMODE , PATHOPTS , PROTECT , RECFM , RECORG , REFDD , RETPD , RLS , ROACCESS , SECMODEL , SEGMENT , SPACE , SPIN , STORCLAS , SUBSYS , SYMBOLS , SYMLIST , SYSOUT , TERM , UCS , UNIT , VOL , VOLUME , COMMA , ABEND , ABENDCC , NOT_SYMBOL , TRUE , FALSE , RC , RUN , CNVTSYS , EXECSYS , JCLONLY , LOGGING_DDNAME , NUM_LIT , LPAREN , RPAREN , BFALN , BFTEK , BUFIN , BUFL , BUFMAX , BUFOFF , BUFOUT , BUFRQ , BUFSIZE , CODE , CPRI , CYLOFL , DEN , DSORG , EROPT , FUNC , GNCP , HIARCHY , INTVL , IPLTXID , LIMCT , NCP , NTM , OPTCD , PCI , PRTSP , RESERVE , RKP , SOWA , STACK , THRESH , TRTCH , ADDRSPC , BYTES , CARDS , CCSID , CLASS , COND , DSENQSHR , EMAIL , GDGBIAS , GROUP , JESLOG , JOBRC , LINES , MEMLIMIT , MSGCLASS , MSGLEVEL , NOTIFY , PAGES , PASSWORD , PERFORM , PRTY , RD , REGION , REGIONX , RESTART , ROLL , SECLABEL , SYSAFF , SCHENV , SYSTEM , TIME , TYPRUN , UJOBCORR , USER , COMMENT_TEXT , DATASET_NAME , EXEC_PARM_STRING , DOT , DEST_VALUE , QUOTED_STRING_PROGRAMMER_NAME , SUBCHARS , SEP , JOB_ACCT_MODE_UNQUOTED_STRING }
@@ -258,7 +259,9 @@ fragment X:'X';
 fragment Y:'Y';
 fragment Z:'Z';
 
-
+ERROR_CHAR
+	: .
+	;
 
 mode CM_MODE
 	;
@@ -273,6 +276,10 @@ CM_NEWLINE
 CM_COMMENT_TEXT
 	: (' ' | ANYCHAR)+
 	->type(COMMENT_TEXT),channel(COMMENTS)
+	;
+
+ERROR_CHAR_CM
+	: .
 	;
 
 /*
@@ -300,6 +307,10 @@ COMMA_WS_NEWLINE
 	->channel(HIDDEN),pushMode(COMMA_WS_NEWLINE_MODE)
 	;
 
+ERROR_CHAR_COMMA_WS
+	: .
+	;
+
 mode COMMA_WS_NEWLINE_MODE
 	;
 
@@ -313,6 +324,10 @@ COMMA_WS_NEWLINE_SS_WS
 		getText().length() <= 15
 	}?
 	->channel(HIDDEN),popMode,popMode
+	;
+
+ERROR_CHAR_COMMA_WS_NEWLINE
+	: .
 	;
 
 mode COMMA_NEWLINE_MODE
@@ -330,6 +345,10 @@ COMMA_NEWLINE_SS_WS
 	->channel(HIDDEN),popMode
 	;
 
+ERROR_CHAR_COMMA_NEWLINE
+	: .
+	;
+
 mode COMMA_NEWLINE_CM_MODE
 	;
 
@@ -340,6 +359,10 @@ COMMA_NEWLINE_CM_COMMENT_TEXT
 COMMA_NEWLINE_CM_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),popMode
+	;
+
+ERROR_CHAR_COMMA_NEWLINE_CM
+	: .
 	;
 
 mode JES2_CNTL_MODE
@@ -394,6 +417,10 @@ JES2_XMIT
 	->mode(JES2_XMIT_MODE)
 	;
 
+ERROR_CHAR_JES2_CNTL
+	: .
+	;
+
 mode NM_MODE
 	;
 
@@ -432,6 +459,10 @@ NM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_NM
+	: .
+	;
+
 mode OP_MODE
 	;
 
@@ -461,6 +492,9 @@ ENDIF_OP
 	;
 EXEC_OP
 	: E X E C
+	{
+		inExecPgmMode = false;
+	}
 	->mode(EXEC1_MODE),type(EXEC)
 	;
 EXPORT_OP
@@ -568,12 +602,20 @@ NEWLINE_OP
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_OP
+	: .
+	;
+
 mode COMMAND_MODE
 	;
 
 COMMAND_WS
 	: ' '+
 	->channel(HIDDEN),mode(COMMAND_PARM_MODE)
+	;
+
+ERROR_CHAR_COMMAND
+	: .
 	;
 
 mode COMMAND_PARM_MODE
@@ -592,12 +634,20 @@ COMMAND_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_COMMAND_PARM
+	: .
+	;
+
 mode JCL_COMMAND_MODE
 	;
 
 JCL_COMMAND_WS
 	: ' '+
 	->channel(HIDDEN),mode(JCL_COMMAND_PARM_MODE)
+	;
+
+ERROR_CHAR_JCL_COMMAND
+	: .
 	;
 
 mode JCL_COMMAND_PARM_MODE
@@ -617,6 +667,10 @@ JCL_COMMAND_PARM_WS
 JCL_COMMAND_PARM_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+ERROR_CHAR_JCL_COMMAND_PARM
+	: .
 	;
 
 mode EXEC1_MODE
@@ -648,6 +702,9 @@ WS_POST_EX
 	;
 PGM
 	: P G M
+	{
+		inExecPgmMode = true;
+	}
 	->mode(EXEC2_MODE)
 	;
 PROC_EX
@@ -657,6 +714,10 @@ PROC_EX
 EXEC_PROC_NAME
 	: NM_PART
 	->type(KEYWORD_VALUE),mode(EXEC2_MODE)
+	;
+
+ERROR_CHAR_EXEC1
+	: .
 	;
 
 mode EXEC2_MODE
@@ -738,6 +799,9 @@ EXEC_TVSAMCOM
 
 EXEC_PROC_PARM
 	: NAME
+	{
+		!inExecPgmMode
+	}?
 	->pushMode(KYWD_VAL_MODE)
 	;
 
@@ -777,6 +841,10 @@ EXEC_SS_WS
 		getText().length() <= 15
 	}?
 	->channel(HIDDEN)
+	;
+
+ERROR_CHAR_EXEC2
+	: .
 	;
 
 mode IF_MODE
@@ -876,6 +944,10 @@ IF_ALNUMNAT
 	->type(ALNUMNAT)
 	;
 
+ERROR_CHAR_IF
+	: .
+	;
+
 mode DD_MODE
 	;
 
@@ -889,6 +961,10 @@ DD_NEWLINE1
 		_modeStack.clear();
 	}
 	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+ERROR_CHAR_DD
+	: .
 	;
 
 mode DD_PARM_MODE
@@ -1423,12 +1499,20 @@ DD_TRTCH
 	->type(TRTCH),pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_DD_PARM
+	: .
+	;
+
 mode EXPORT_STMT_MODE
 	;
 
 EXPORT_STMT_WS
 	: [ ]+
 	->channel(HIDDEN),mode(EXPORT_STMT_PARM_MODE)
+	;
+
+ERROR_CHAR_EXPORT_STMT
+	: .
 	;
 
 mode EXPORT_STMT_PARM_MODE
@@ -1453,12 +1537,20 @@ EXPORT_STMT_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_EXPORT_STMT_PARM
+	: .
+	;
+
 mode NOTIFY_STMT_MODE
 	;
 
 NOTIFY_STMT_WS
 	: [ ]+
 	->channel(HIDDEN),mode(NOTIFY_STMT_PARM_MODE)
+	;
+
+ERROR_CHAR_NOTIFY_STMT
+	: .
 	;
 
 mode NOTIFY_STMT_PARM_MODE
@@ -1501,12 +1593,20 @@ NOTIFY_STMT_COMMA
 	->channel(HIDDEN)
 	;
 
+ERROR_CHAR_NOTIFY_STMT_PARM
+	: .
+	;
+
 mode OUTPUT_STMT_MODE
 	;
 
 OUTPUT_STMT_WS
 	: [ ]+
 	->channel(HIDDEN),mode(OUTPUT_STMT_PARM_MODE)
+	;
+
+ERROR_CHAR_OUTPUT_STMT
+	: .
 	;
 
 mode OUTPUT_STMT_PARM_MODE
@@ -1863,6 +1963,10 @@ OUTPUT_STMT_WRITER
 	->pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_OUTPUT_STMT_PARM
+	: .
+	;
+
 mode PROC_MODE
 	;
 
@@ -1879,6 +1983,10 @@ PROC_WS_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_PROC
+	: .
+	;
+
 mode PROC_PARM_MODE
 	;
 
@@ -1888,6 +1996,14 @@ PROC_PARM_EQUAL
 	;
 PROC_PARM_NAME
 	: NM_PART
+	;
+
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
+ERROR_CHAR_PROC_PARM
+	: .
 	;
 
 mode PROC_PARM_VALUE_MODE
@@ -1933,6 +2049,10 @@ PROC_PARM_VALUE_COMMA
 	->channel(HIDDEN),popMode
 	;
 
+ERROR_CHAR_PROC_PARM_VALUE
+	: .
+	;
+
 mode SCHEDULE_MODE
 	;
 
@@ -1947,6 +2067,10 @@ SCHEDULE_NEWLINE
 SCHEDULE_WS_NEWLINE
 	: PROC_WS PROC_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+ERROR_CHAR_SCHEDULE
+	: .
 	;
 
 mode SCHEDULE_PARM_MODE
@@ -2008,6 +2132,10 @@ SCHEDULE_PARM_COMMA
 	->type(COMMA),channel(HIDDEN)
 	;
 
+ERROR_CHAR_SCHEDULE_PARM
+	: .
+	;
+
 mode SET_MODE
 	;
 
@@ -2024,6 +2152,10 @@ SET_WS_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_SET
+	: .
+	;
+
 mode SET_PARM_MODE
 	;
 
@@ -2033,6 +2165,14 @@ SET_PARM_EQUAL
 	;
 SET_PARM_NAME
 	: NM_PART
+	;
+
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
+ERROR_CHAR_SET_PARM
+	: .
 	;
 
 mode SET_PARM_VALUE_MODE
@@ -2083,6 +2223,10 @@ SET_PARM_VALUE_COMMA
 	->channel(HIDDEN),popMode
 	;
 
+ERROR_CHAR_SET_PARM_VALUE
+	: .
+	;
+
 mode XMIT_MODE
 	;
 
@@ -2093,6 +2237,10 @@ XMIT_WS
 XMIT_NEWLINE
 	: [\n\r]
 	->channel(HIDDEN),mode(DATA_MODE)
+	;
+
+ERROR_CHAR_XMIT
+	: .
 	;
 
 mode XMIT_PARM_MODE
@@ -2135,6 +2283,10 @@ XMIT_PARM_COMMA
 	->channel(HIDDEN)
 	;
 
+ERROR_CHAR_XMIT_PARM
+	: .
+	;
+
 mode JOBGROUP_MODE
 	;
 
@@ -2145,6 +2297,10 @@ JOBGROUP_NEWLINE
 JOBGROUP_WS
 	: WS
 	->channel(HIDDEN),mode(JOBGROUP_ACCT1_MODE)
+	;
+
+ERROR_CHAR_JOBGROUP
+	: .
 	;
 
 mode JOBGROUP_ACCT1_MODE
@@ -2233,6 +2389,10 @@ JOBGROUP_ACCT_UNQUOTED_STRING
 	: (~[,'\n\r] | SQUOTE2)+?
 	;
 
+ERROR_CHAR_JOBGROUP_ACCT1
+	: .
+	;
+
 mode JOBGROUP_ACCT_COMMA_WS_MODE
 	;
 
@@ -2243,6 +2403,10 @@ JOBGROUP_ACCT_COMMA_WS_COMMENT_TEXT
 JOBGROUP_ACCT_COMMA_WS_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(JOBGROUP_ACCT_COMMA_WS_NEWLINE_MODE)
+	;
+
+ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS
+	: .
 	;
 
 mode JOBGROUP_ACCT_COMMA_WS_NEWLINE_MODE
@@ -2260,6 +2424,14 @@ JOBGROUP_ACCT_COMMA_WS_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
+ERROR_CHAR_JOBGROUP_ACCT_COMMA_WS_NEWLINE
+	: .
+	;
+
 mode JOBGROUP_ACCT_COMMA_NEWLINE_MODE
 	;
 
@@ -2275,6 +2447,14 @@ JOBGROUP_ACCT_COMMA_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOBGROUP_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
+ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE
+	: .
+	;
+
 mode JOBGROUP_ACCT_COMMA_NEWLINE_CM_MODE
 	;
 
@@ -2285,6 +2465,10 @@ JOBGROUP_ACCT_COMMA_NEWLINE_CM_COMMENT_TEXT
 JOBGROUP_ACCT_COMMA_NEWLINE_CM_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(JOBGROUP_ACCT_COMMA_NEWLINE_MODE)
+	;
+
+ERROR_CHAR_JOBGROUP_ACCT_COMMA_NEWLINE_CM
+	: .
 	;
 
 mode JOBGROUP_ACCT2_MODE
@@ -2317,6 +2501,14 @@ JOBGROUP_ACCT2_COMMA
 	->channel(HIDDEN)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_JOBGROUP_ACCT2
+	: .
+	;
+
 mode JOBGROUP_ACCT3_MODE
 	;
 
@@ -2335,6 +2527,14 @@ JOBGROUP_ACCT3_COMMA_WS
 JOBGROUP_ACCT3_COMMA_NEWLINE
 	: COMMA_DFLT NEWLINE
 	->channel(HIDDEN),mode(JOBGROUP_ACCT_COMMA_WS_NEWLINE_MODE)
+	;
+
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_JOBGROUP_ACCT3
+	: .
 	;
 
 mode JOBGROUP_PROGRAMMER_NAME_MODE
@@ -2419,6 +2619,10 @@ JOBGROUP_PROGRAMMER_NAME_UNQUOTED_STRING
 	: (~[,'\n\r] | SQUOTE2)+?
 	;
 
+ERROR_CHAR_JOBGROUP_PROGRAMMER_NAME
+	: .
+	;
+
 mode JOBGROUP_ERROR_MODE
 	;
 
@@ -2429,6 +2633,14 @@ JOBGROUP_ERROR_EQUAL
 JOBGROUP_ERROR_LPAREN
 	: LPAREN_DFLT
 	->type(LPAREN),mode(JOBGROUP_ERROR_PAREN_MODE)
+	;
+
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
+ERROR_CHAR_JOBGROUP_ERROR
+	: .
 	;
 
 mode JOBGROUP_ERROR_PAREN_MODE
@@ -2519,6 +2731,10 @@ JOBGROUP_ERROR_ALNUMNAT
 	->type(ALNUMNAT)
 	;
 
+ERROR_CHAR_JOBGROUP_ERROR_PAREN
+	: .
+	;
+
 mode GJOB_MODE
 	;
 
@@ -2529,6 +2745,10 @@ GJOB_WS
 GJOB_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+ERROR_CHAR_GJOB
+	: .
 	;
 
 mode GJOB_PARM_MODE
@@ -2547,6 +2767,10 @@ GJOB_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_GJOB_PARM
+	: .
+	;
+
 mode JOBSET_MODE
 	;
 
@@ -2557,6 +2781,10 @@ JOBSET_WS
 JOBSET_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+ERROR_CHAR_JOBSET
+	: .
 	;
 
 mode JOBSET_PARM_MODE
@@ -2575,6 +2803,10 @@ JOBSET_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_JOBSET_PARM
+	: .
+	;
+
 mode SJOB_MODE
 	;
 
@@ -2585,6 +2817,10 @@ SJOB_WS
 SJOB_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
+	;
+
+ERROR_CHAR_SJOB
+	: .
 	;
 
 mode ENDSET_MODE
@@ -2599,12 +2835,20 @@ ENDSET_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_ENDSET
+	: .
+	;
+
 mode AFTER_MODE
 	;
 
 AFTER_WS
 	: WS
 	->channel(HIDDEN),mode(AFTER_PARM_MODE)
+	;
+
+ERROR_CHAR_AFTER
+	: .
 	;
 
 mode AFTER_PARM_MODE
@@ -2648,12 +2892,20 @@ AFTER_PARM_OTHERWISE
 	->pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_AFTER_PARM
+	: .
+	;
+
 mode BEFORE_MODE
 	;
 
 BEFORE_WS
 	: WS
 	->channel(HIDDEN),mode(BEFORE_PARM_MODE)
+	;
+
+ERROR_CHAR_BEFORE
+	: .
 	;
 
 mode BEFORE_PARM_MODE
@@ -2697,12 +2949,20 @@ BEFORE_PARM_OTHERWISE
 	->pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_BEFORE_PARM
+	: .
+	;
+
 mode CONCURRENT_MODE
 	;
 
 CONCURRENT_WS
 	: WS
 	->channel(HIDDEN),mode(CONCURRENT_PARM_MODE)
+	;
+
+ERROR_CHAR_CONCURRENT
+	: .
 	;
 
 mode CONCURRENT_PARM_MODE
@@ -2734,6 +2994,10 @@ CONCURRENT_PARM_NAME
 	->pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_CONCURRENT_PARM
+	: .
+	;
+
 mode ENDGROUP_MODE
 	;
 
@@ -2746,12 +3010,20 @@ ENDGROUP_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_ENDGROUP
+	: .
+	;
+
 mode JES2_JOBPARM_MODE
 	;
 
 JES2_JOBPARM_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_JOBPARM_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_JOBPARM
+	: .
 	;
 
 mode JES2_JOBPARM_PARM_MODE
@@ -2826,12 +3098,20 @@ JES2_JOBPARM_TIME
 	->pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_JES2_JOBPARM_PARM
+	: .
+	;
+
 mode JES2_MESSAGE_MODE
 	;
 
 JES2_MESSAGE_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_MESSAGE_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_MESSAGE
+	: .
 	;
 
 mode JES2_MESSAGE_PARM_MODE
@@ -2845,12 +3125,20 @@ JES2_MESSAGE_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_JES2_MESSAGE_PARM
+	: .
+	;
+
 mode JES2_NETACCT_MODE
 	;
 
 JES2_NETACCT_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_NETACCT_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_NETACCT
+	: .
 	;
 
 mode JES2_NETACCT_PARM_MODE
@@ -2864,12 +3152,20 @@ JES2_NETACCT_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_JES2_NETACCT_PARM
+	: .
+	;
+
 mode JES2_NOTIFY_MODE
 	;
 
 JES2_NOTIFY_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_NOTIFY_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_NOTIFY
+	: .
 	;
 
 mode JES2_NOTIFY_PARM_MODE
@@ -2883,12 +3179,20 @@ JES2_NOTIFY_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_JES2_NOTIFY_PARM
+	: .
+	;
+
 mode JES2_OUTPUT_MODE
 	;
 
 JES2_OUTPUT_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_OUTPUT_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_OUTPUT
+	: .
 	;
 
 mode JES2_OUTPUT_PARM_MODE
@@ -2983,12 +3287,20 @@ JES2_OUTPUT_UCS
 	->pushMode(KYWD_VAL_MODE)
 	;
 
+ERROR_CHAR_JES2_OUTPUT_PARM
+	: .
+	;
+
 mode JES2_PRIORITY_MODE
 	;
 
 JES2_PRIORITY_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_PRIORITY_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_PRIORITY
+	: .
 	;
 
 mode JES2_PRIORITY_PARM_MODE
@@ -3002,12 +3314,20 @@ JES2_PRIORITY_PARM_NEWLINE
 	->channel(HIDDEN),mode(DEFAULT_MODE)
 	;
 
+ERROR_CHAR_JES2_PRIORITY_PARM
+	: .
+	;
+
 mode JES2_ROUTE_MODE
 	;
 
 JES2_ROUTE_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_ROUTE_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_ROUTE
+	: .
 	;
 
 mode JES2_ROUTE_PARM_MODE
@@ -3039,6 +3359,10 @@ JES2_ROUTE_XEQ
 	->pushMode(JES2_ROUTE_PARM1_MODE)
 	;
 
+ERROR_CHAR_JES2_ROUTE_PARM
+	: .
+	;
+
 mode JES2_ROUTE_PARM1_MODE
 	;
 
@@ -3051,12 +3375,20 @@ JES2_ROUTE_VALUE
 	->popMode
 	;
 
+ERROR_CHAR_JES2_ROUTE_PARM1
+	: .
+	;
+
 mode JES2_SETUP_MODE
 	;
 
 JES2_SETUP_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_SETUP_PARM_MODE)
+	;
+
+ERROR_CHAR_JES2_SETUP
+	: .
 	;
 
 mode JES2_SETUP_PARM_MODE
@@ -3078,6 +3410,10 @@ JES2_SETUP_PARM_COMMA
 JES2_SETUP_VALUE
 	: KEYWORD_VALUE
 	->type(KEYWORD_VALUE)
+	;
+
+ERROR_CHAR_JES2_SETUP_PARM
+	: .
 	;
 
 mode JES2_SIGNON_MODE
@@ -3120,6 +3456,10 @@ JES2_SIGNON_PASSWORD2 :JES2_PASSWORD
 	}?
 	;
 
+ERROR_CHAR_JES2_SIGNON
+	: .
+	;
+
 mode JES2_XEQ_MODE
 	;
 
@@ -3135,12 +3475,20 @@ JES2_XEQ_NODE
 	: [A-Z0-9@#$*\-+&./%[:()]+
 	;
 
+ERROR_CHAR_JES2_XEQ
+	: .
+	;
+
 mode JES2_XMIT_MODE
 	;
 
 JES2_XMIT_WS
 	: WS
 	->channel(HIDDEN),mode(JES2_XMIT_NODE_MODE)
+	;
+
+ERROR_CHAR_JES2_XMIT
+	: .
 	;
 
 mode JES2_XMIT_NODE_MODE
@@ -3167,6 +3515,10 @@ JES2_XMIT_NODE
 	: [A-Z0-9@#$*\-+&./%[:()]+
 	;
 
+ERROR_CHAR_JES2_XMIT_NODE
+	: .
+	;
+
 mode JES2_XMIT_DLM_MODE
 	;
 
@@ -3183,8 +3535,9 @@ JES2_XMIT_DLM_NEWLINE
 	->channel(HIDDEN),mode(DATA_MODE)
 	;
 
-
-
+ERROR_CHAR_JES2_XMIT_DLM
+	: .
+	;
 
 mode DATA_PARM_MODE
 	;
@@ -3277,6 +3630,10 @@ DATA_PARM_MODE_SYMLIST
 	->type(SYMLIST),pushMode(KYWD_VAL_MODE)
 	;
  
+ERROR_CHAR_DATA_PARM
+	: .
+	;
+
 mode DLM_MODE
 	;
 
@@ -3296,6 +3653,14 @@ DLM_VAL
 			dlmVals.add(getText());
 	}
 	->type(KEYWORD_VALUE),popMode
+	;
+
+/*
+There is no check for whitespace here because whitespace
+in this mode is invalid.
+*/
+ERROR_CHAR_DLM
+	: .
 	;
 
 mode DATA_MODE
@@ -3346,6 +3711,10 @@ DD_ASTERISK_DATA
 	: ([ \n\r] | ANYCHAR)+?
 	;
 
+ERROR_CHAR_DATA
+	: .
+	;
+
 mode CNTL_MODE
 	;
 
@@ -3363,6 +3732,10 @@ WS_CNTL
 	->channel(HIDDEN)
 	;
 
+ERROR_CHAR_CNTL
+	: .
+	;
+
 mode CNTL_MODE_CM
 	;
 
@@ -3373,6 +3746,10 @@ CNTL_CM_NEWLINE
 CNTL_CM_COMMENT_TEXT
 	: CM_COMMENT_TEXT
 	->type(COMMENT_TEXT),channel(COMMENTS)
+	;
+
+ERROR_CHAR_CNTL_CM
+	: .
 	;
 
 mode CNTL_DATA_MODE
@@ -3392,6 +3769,13 @@ CNTL_DATA
 	: DD_ASTERISK_DATA+?
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_CNTL_DATA
+	: .
+	;
 
 mode QS_MODE
 	;
@@ -3455,6 +3839,10 @@ QUOTED_STRING_FRAGMENT
  
 	;
 
+ERROR_CHAR_QS
+	: .
+	;
+
 mode QS_SS_MODE
 	;
 QS_SS
@@ -3475,6 +3863,10 @@ QS_SS_CONTINUATION_WS
 QS_SS_COMMENT_FLAG
 	: COMMENT_FLAG_DFLT
 	->type(COMMENT_FLAG),channel(COMMENTS),mode(COMMA_WS_MODE)
+	;
+
+ERROR_CHAR_QS_SS
+	: .
 	;
 
 mode DCB_MODE
@@ -3684,6 +4076,14 @@ DCB_KEYWORD_VALUE
 	: KEYWORD_VALUE
 	->type(KEYWORD_VALUE);
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_DCB
+	: .
+	;
+
 mode DCB_PAREN_MODE
 	;
 
@@ -3874,12 +4274,24 @@ DCB_PAREN_KEYWORD_VALUE
 	: KEYWORD_VALUE
 	->type(KEYWORD_VALUE);
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_DCB_PAREN
+	: .
+	;
+
 mode INCLUDE_MODE
 	;
 
 INCLUDE_WS
 	: [ ]+
 	->channel(HIDDEN),mode(INCLUDE_PARM_MODE)
+	;
+
+ERROR_CHAR_INCLUDE
+	: .
 	;
 
 mode INCLUDE_PARM_MODE
@@ -3905,12 +4317,20 @@ INCLUDE_PARM_VALUE_WS
 	->channel(HIDDEN),mode(CM_MODE)
 	;
 
+ERROR_CHAR_INCLUDE_PARM
+	: .
+	;
+
 mode JCLLIB_MODE
 	;
 
 JCLLIB_WS
 	: [ ]+
 	->channel(HIDDEN),mode(JCLLIB_PARM_MODE)
+	;
+
+ERROR_CHAR_JCLLIB
+	: .
 	;
 
 mode JCLLIB_PARM_MODE
@@ -3962,6 +4382,10 @@ JCLLIB_PARM_WS
 	->channel(HIDDEN),mode(CM_MODE)
 	;
 
+
+ERROR_CHAR_JCLLIB_PARM
+	: .
+	;
 
 mode JOB1_MODE
 	;
@@ -4018,6 +4442,10 @@ JOB_NEWLINE
 JOB_WS
 	: [ ]+
 	->channel(HIDDEN),mode(JOB_ACCT1_MODE)
+	;
+
+ERROR_CHAR_JOB1
+	: .
 	;
 
 mode JOB_ACCT1_MODE
@@ -4195,6 +4623,10 @@ JOB_ACCT1_MODE_UNQUOTED_STRING
 	->type(JOB_ACCT_MODE_UNQUOTED_STRING)
 	;
 
+ERROR_CHAR_JOB_ACCT1
+	: .
+	;
+
 mode JOB_ACCT_COMMA_WS_MODE
 	;
 
@@ -4205,6 +4637,10 @@ JOB_ACCT_COMMA_WS_COMMENT_TEXT
 JOB_ACCT_COMMA_WS_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_NEWLINE_MODE)
+	;
+
+ERROR_CHAR_JOB_ACCT_COMMA_WS
+	: .
 	;
 
 mode JOB_ACCT_COMMA_WS_NEWLINE_MODE
@@ -4222,6 +4658,14 @@ JOB_ACCT_COMMA_WS_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_JOB_ACCT_COMMA_WS_NEWLINE
+	: .
+	;
+
 mode JOB_ACCT_COMMA_NEWLINE_MODE
 	;
 
@@ -4237,6 +4681,14 @@ JOB_ACCT_COMMA_NEWLINE_SS_WS
 	->channel(HIDDEN),mode(JOB_PROGRAMMER_NAME_MODE)
 	;
 
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_JOB_ACCT_COMMA_NEWLINE
+	: .
+	;
+
 mode JOB_ACCT_COMMA_NEWLINE_CM_MODE
 	;
 
@@ -4247,6 +4699,10 @@ JOB_ACCT_COMMA_NEWLINE_CM_COMMENT_TEXT
 JOB_ACCT_COMMA_NEWLINE_CM_NEWLINE
 	: NEWLINE
 	->channel(HIDDEN),mode(JOB_ACCT_COMMA_NEWLINE_MODE)
+	;
+
+ERROR_CHAR_JOB_ACCT_COMMA_NEWLINE_CM
+	: .
 	;
 
 mode JOB_ACCT2_MODE
@@ -4274,9 +4730,21 @@ JOB_ACCT2_MODE_UNQUOTED_STRING
 	->type(JOB_ACCT_MODE_UNQUOTED_STRING)
 	;
 
+/*
+Commas are no longer hidden in this mode, allowing for
+separation of the potential various accounting parameters.
+*/
 JOB_ACCT2_MODE_COMMA
 	: COMMA_DFLT
-	->type(COMMA),channel(HIDDEN)
+	->type(COMMA)
+	;
+
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_JOB_ACCT2
+	: .
 	;
 
 mode JOB_ACCT3_MODE
@@ -4297,6 +4765,15 @@ JOB_ACCT3_MODE_COMMA_WS
 JOB_ACCT3_MODE_COMMA_NEWLINE
 	: COMMA_DFLT NEWLINE
 	->channel(HIDDEN),mode(JOB_ACCT_COMMA_WS_NEWLINE_MODE)
+	;
+
+JOB_ACCT3_WS
+	: [ ]+
+	->channel(HIDDEN)
+	;
+
+ERROR_CHAR_JOB_ACCT3
+	: .
 	;
 
 mode JOB_PROGRAMMER_NAME_MODE
@@ -4465,6 +4942,9 @@ JOB_PROGRAMMER_NAME_UNQUOTED_STRING
 	: (~[,'\n\r] | SQUOTE2)+?
 	;
 
+ERROR_CHAR_JOB_PROGRAMMER_NAME
+	: .
+	;
 
 mode KYWD_VAL_MODE
 	;
@@ -4558,6 +5038,10 @@ KYWD_VAL_WS
 	->channel(HIDDEN),mode(CM_MODE)
 	;
 
+ERROR_CHAR_KYWD_VAL
+	: .
+	;
+
 mode KYWD_VAL_PAREN_MODE
 	;
 
@@ -4597,6 +5081,14 @@ KYWD_VAL_PAREN_COMMA_NEWLINE
 KYWD_VAL_PAREN_COMMA_WS
 	: COMMA_DFLT [ ]+
 	->type(COMMA),pushMode(COMMA_WS_MODE)
+	;
+
+/*
+There is no check for whitespace here because whitespace
+on its own in this mode is invalid.
+*/
+ERROR_CHAR_KYWD_VAL_PAREN
+	: .
 	;
 
 
