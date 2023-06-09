@@ -1,17 +1,15 @@
 ## DB2 on IBM Z SQL Grammar
 
-This is a partial grammar for DB2 on IBM Z SQL.  It does not include some edge cases such as "]]" for a concatenation operator.
+This is a partial grammar for DB2 on IBM Z SQL.  It does not include some edge cases such as such as full support for the LIKE operator in REORG commands submitted via SYSPROC.DSNUTILV.
 
-My intent is to provide enough support for embedded SQL to add to the COBOL analysis elsewhere in this repository the ability to extract DB2 table actions.
+Initially my intent was to provide more robust parsing of SQL to detect CALLs, but sometimes these things get out of hand.  The project grew to provide enough support for embedded SQL to add to the COBOL analysis elsewhere in this repository the ability to extract DB2 table actions.  And then I added support for SQL/PL.
 
-Initially my intent was to provide more robust parsing of SQL to detect CALLs, but sometimes these things get out of hand.
+Currently (09-Jun-2023) a work in progress.  I believe all the embeddable statements are defined and there are tests for all of them.  Martijn Rutte and Maarten van Haasteren have been instrumental in tracking down a number of bugs.
 
-Currently (11-Apr-2023) a work in progress.  I believe all the embeddable statements are defined and there are tests for all of them.  Martijn Rutte and Maarten van Haasteren have been instrumental in tracking down a number of bugs.  This version of the grammars attempts to include SQL/PL.
+There is a mutual left-recursion problem in the tableReference rule with respect to the joinedTable rule.  So this probably won't do arbitrarily complex SQL but it seems to do pretty complex SQL.
 
-There is a left-recursion problem in the tableReference rule with respect to the joinedTable rule.  So this probably won't do arbitrarily complex SQL.
+IBM's documentation for version 12 of Db2 for z/OS served as original source material.  This should be up to date with Db2 13 documentation dated 2023-01-11.  I do check back with the IBM documentation every three to six months looking for anything new that I should add to the grammars.
 
-IBM's documentation for version 12 of Db2 for z/OS served as original source material.  This should be up to date with Db2 13 documentation dated 2023-01-11.
-
-This was built on Ubuntu 20.04 LTS with ANTLR 4.11.1 and openjdk version "11.0.15 2022-04-19".
+This was built on Ubuntu 20.04 LTS with ANTLR 4.11.1 and openjdk version "11.0.18 2023-01-17".
 
 
