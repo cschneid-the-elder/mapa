@@ -1,3 +1,8 @@
+--2023-06-09--------------------------------------------------------------------
+Added optimizeClause to selectIntoStatement and changed the optionality of 
+(isolationClause | skipLockedDataClause | optimizeClause) from ? to * as per
+the documentation.
+
 --2023-06-06--------------------------------------------------------------------
 Major changes.
 

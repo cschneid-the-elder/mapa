@@ -7180,7 +7180,7 @@ selectIntoStatement
 	orderByClause?
 	offsetClause?
 	fetchClause?
-	(isolationClause | skipLockedDataClause)?
+	(isolationClause | skipLockedDataClause | optimizeClause)*
 	querynoClause?
 	)
 	;
