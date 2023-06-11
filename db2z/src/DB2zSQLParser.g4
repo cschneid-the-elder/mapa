@@ -569,7 +569,11 @@ callStatement
 	;
 
 callArgument
-	: (expression | NULL | (TABLE tableName))
+	: (expression | NULL | (TABLE tableName) | dsnutilvLiteral)
+	;
+
+dsnutilvLiteral
+	: DSNUTILV_APOS (DA_CHAR | DA_APOS)* DSNUTILV_APOS
 	;
 
 callArgumentList

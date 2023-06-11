@@ -15,6 +15,10 @@ lexer grammar DB2zSQLLexer;
 @lexer::members {
 	public String statementTerminator = new String("");
 	public int bracketNesting = 0;
+	public Boolean dsnutilv = false;
+	public int dsnutilvArgc = 0;
+	public int termApos = 0;
+
 }
 
 channels { COMMENTS }
@@ -133,15 +137,30 @@ COLON
 
 SEMICOLON
 	: ';'
+	{dsnutilv = false;}
 	;
 
 COMMA
 	: ','
+	{
+		if (dsnutilv) {
+			dsnutilvArgc++;
+			System.out.println("dsnutilvArgc = " + dsnutilvArgc);
+		}
+	}
+	;
+
+DSNUTILV_APOS
+	: '\''
+	{dsnutilv && dsnutilvArgc == 2}?
+	{System.out.println("quote matched");}
+	->pushMode(DSNUTILV_APOS_MODE)
 	;
 
 NONNUMERICLITERAL
 	: STRINGLITERAL
 	| HEXLITERAL
+//	| DSNUTILV_LITERAL
 	;
 
 fragment HEXLITERAL
@@ -180,11 +199,25 @@ So, as of 2023-06-06, this is what we've got.  It appears the solution is to
 exclude the string delimiter, the comma, the space, and the semicolon.  The 
 exclusions prevent matching multiple strings as one.  Hopefully no one will 
 need to match an embedded string with those characters.
+
+2023-06-10 substituting STRINGLITERAL for ('\'' ~[', ;]* '\'') doesn't work,
+same problem as ('\'' ~[']* '\'') multiple strings are matched as one.
 */
 fragment STRINGLITERAL
 	: '"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
 	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\''
+	{dsnutilvArgc != 2}?
 	;
+
+/*
+This doesn't work.  For reasons I cannot determine, having this rule in the
+lexer causes the third parameter of DSNUTILV to continue to match after its
+terminating apostrophe.  So instead of four callArguments there are three
+from the parser's point of view.
+DSNUTILV_LITERAL
+	: DSNUTILV_APOS (DA_CHAR | DA_APOS)* DA_APOS
+	;
+*/
 
 INTEGERLITERAL
 	: (PLUS | MINUS)? [0-9]+
@@ -4433,9 +4466,59 @@ identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$_]+
+	{
+		if (getText().equalsIgnoreCase("DSNUTILV")) {
+			dsnutilv = true;
+			System.out.println("dsnutilv matched");
+		}
+	}
 	;
 
 UNIDENTIFIED
 	: .
 	;
+
+mode DSNUTILV_APOS_MODE;
+
+DA_APOS
+	: '\''
+	{
+		CharStream cs = getInputStream();
+		int size = cs.size();
+		int index = cs.index();
+		System.out.println("cs.size() = " + cs.size());
+		System.out.println("cs.index() = " + cs.index());
+		if (termApos == 0) {
+			Interval interval = new Interval(getCharIndex(), cs.size());
+			String csString = cs.getText(interval);
+			System.out.println("csString = |" + csString + "|");
+			int nextApos = csString.indexOf("'");
+			int sem = csString.indexOf(";", nextApos);
+			int aposCount = 0;
+			for (int i = sem; i > nextApos; i--) {
+				if (csString.charAt(i) == '\'') {
+					aposCount++;
+					System.out.println("aposCount = " + aposCount + " i = " + i);
+				}
+				if (aposCount == 3) {
+					termApos = i + cs.index() + 1;
+					break;
+				}
+			}
+		}
+		System.out.println("termApos = " + termApos);
+		if (termApos == index) {
+			dsnutilv = false;
+			dsnutilvArgc = 0;
+			termApos = 0;
+			setType(DSNUTILV_APOS);
+			popMode();
+		}
+	}
+	;
+
+DA_CHAR
+	: .+?
+	;
+
 
