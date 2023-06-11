@@ -569,7 +569,17 @@ callStatement
 	;
 
 callArgument
-	: (expression | NULL | (TABLE tableName))
+	: (expression | NULL | (TABLE tableName) | dsnutilvThirdArgument)
+	;
+
+/*
+This could be significantly cleaner with a bit of work in the lexer, i.e.
+we could add type(xxx) to most of these tokens.  I didn't do that because
+I find it useful to look at the ANTLR token output and know which mode
+the lexer was in at each stage.
+*/
+dsnutilvThirdArgument
+	: DSNUTILV_APOS (DA_CHAR | DA_WHEN | WH_WS | WH_LPAREN | WP_CHAR | WP_APOS | PA_CHAR | PA_APOS | WP_RPAREN | WH_CHAR)* DA_APOS
 	;
 
 callArgumentList
@@ -1911,6 +1921,7 @@ sqlplCallArgument
 		| sqlParameterName
 		| expression
 		| NULL
+		| dsnutilvThirdArgument
 	)
 	;
 

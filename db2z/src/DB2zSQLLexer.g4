@@ -15,6 +15,8 @@ lexer grammar DB2zSQLLexer;
 @lexer::members {
 	public String statementTerminator = new String("");
 	public int bracketNesting = 0;
+	public Boolean dsnutilv = false;
+	public int dsnutilvArgc = 0;
 }
 
 channels { COMMENTS }
@@ -52,6 +54,10 @@ LPAREN
 
 RPAREN
 	: ')'
+	{
+		dsnutilvArgc = 0;
+		dsnutilv = false;
+	}
 	;
 
 OPENSQBRACKET
@@ -133,10 +139,34 @@ COLON
 
 SEMICOLON
 	: ';'
+	{
+		dsnutilvArgc = 0;
+		dsnutilv = false;
+	}
 	;
 
 COMMA
 	: ','
+	{
+		if (dsnutilv) {
+			dsnutilvArgc++;
+			//System.out.println("dsnutilvArgc = " + dsnutilvArgc);
+		}
+		
+		if (dsnutilvArgc > 2) {
+			dsnutilvArgc = 0;
+			dsnutilv = false;
+		}
+	}
+	;
+
+DSNUTILV_APOS
+	: '\''
+	{dsnutilv && dsnutilvArgc == 2}?
+	{
+		//System.out.println("quote matched");
+	}
+	->pushMode(DSNUTILV_APOS_MODE)
 	;
 
 NONNUMERICLITERAL
@@ -184,6 +214,7 @@ need to match an embedded string with those characters.
 fragment STRINGLITERAL
 	: '"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
 	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\''
+	{dsnutilvArgc != 2}?
 	;
 
 INTEGERLITERAL
@@ -4433,9 +4464,84 @@ identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$_]+
+	{
+		if (getText().equalsIgnoreCase("DSNUTILV")) {
+			dsnutilv = true;
+			//System.out.println("dsnutilv matched");
+		}
+	}
 	;
 
 UNIDENTIFIED
 	: .
+	;
+
+mode DSNUTILV_APOS_MODE;
+
+DA_WHEN
+	: WHEN
+	->pushMode(WHEN_MODE)
+	;
+
+DA_APOS
+	: '\''
+	->popMode
+	;
+
+DA_CHAR
+	: .+?
+	;
+
+mode WHEN_MODE;
+
+WH_LPAREN
+	: '('
+	->pushMode(WHEN_PREDICATE_MODE)
+	;
+
+WH_WS
+	: WS+
+	;
+
+WH_APOS
+	: '\''
+	->popMode,popMode
+	;
+
+WH_CHAR
+	: .+?
+	->popMode
+	;
+
+mode WHEN_PREDICATE_MODE;
+
+WP_LPAREN
+	: '('
+	->pushMode(WHEN_PREDICATE_MODE)
+	;
+
+WP_RPAREN
+	: ')'
+	->popMode
+	;
+
+WP_APOS
+	: '\''
+	->pushMode(PREDICATE_APOS_MODE)
+	;
+
+WP_CHAR
+	: .+?
+	;
+
+mode PREDICATE_APOS_MODE;
+
+PA_APOS
+	: '\''
+	->popMode
+	;
+
+PA_CHAR
+	: .+?
 	;
 
