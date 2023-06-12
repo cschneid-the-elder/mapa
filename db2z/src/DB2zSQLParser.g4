@@ -2020,8 +2020,16 @@ grantPackageAuthority
 	)
 	;
 
+/*
+It turns out that if the collectionID is in quotes and the
+packageName is in quotes that they and the DOT don't match
+individually, but collectively they match as NONNUMERICLITERAL.
+Discovered by Martijn Rutte 2023-06-12.
+*/
 packageSpecification
-	: (collectionID DOT (packageName | SPLAT))
+	: (
+	(collectionID DOT (packageName | SPLAT)) | NONNUMERICLITERAL
+	)
 	;
 
 functionSpecification
@@ -3242,9 +3250,13 @@ createFunctionStatementCompiledSqlScalarOptions
 	)
 	;
 
+/*
+Added columnName to go with functionDataType.  My omission, found by
+Martijn Rutte 2023-06-12.
+*/
 sqlTableFunctionDefinition
 	: (
-	RETURNS TABLE LPAREN functionDataType (COMMA functionDataType)* RPAREN
+	RETURNS TABLE LPAREN columnName functionDataType (COMMA columnName functionDataType)* RPAREN
 	createFunctionStatementSqlTableOptions+
 	sqlRoutineBody
 	)
