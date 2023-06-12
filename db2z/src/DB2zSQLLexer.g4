@@ -17,7 +17,11 @@ lexer grammar DB2zSQLLexer;
 	public int bracketNesting = 0;
 	public Boolean dsnutilv = false;
 	public int dsnutilvArgc = 0;
+	public Boolean dsn_apos2 = false;
+	public Boolean dsn_apos = false;
 }
+
+tokens { DSNUTILV_SAU , DSN_DSNUTILV_SAU}
 
 channels { COMMENTS }
 
@@ -4478,9 +4482,143 @@ UNIDENTIFIED
 
 mode DSNUTILV_APOS_MODE;
 
-DA_WHEN
-	: WHEN
-	->pushMode(WHEN_MODE)
+DA_BACKUP_SYSTEM
+	: B A C K U P WS S Y S T E M
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_CATMAINT
+	: C A T M A I N T
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_CHECK_DATA
+	: C H E C K WS D A T A
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_CHECK_INDEX
+	: C H E C K WS I N D E X
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_CHECK_LOB
+	: C H E C K WS L O B
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_COPY
+	: C O P Y
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_COPYTOCOPY
+	: C O P Y T O C O P Y
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_DIAGNOSE
+	: D I A G N O S E
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_EXEC_SQL
+	: E X E C WS S Q L
+	->pushMode(DSNUTILV_EXECSQL_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_LISTDEF
+	: L I S T D E F
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_LOAD
+	: L O A D
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_MERGECOPY
+	: M E R G E C O P Y
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_MODIFY_RECOVERY
+	: M O D I F Y WS R E C O V E R Y
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_MODIFY_STATISTICS
+	: M O D I F Y WS S T A T I S T I C S
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_OPTIONS
+	: O P T I O N S
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_QUIESCE
+	: Q U I E S C E
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_REBUILD_INDEX
+	: R E B U I L D WS I N D E X
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_RECOVER
+	: R E C O V E R
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_REORG_INDEX
+	: R E O R G WS I N D E X
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_REORG_TABLESPACE
+	: R E O R G WS T A B L E S P A C E
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_REPAIR
+	: R E P A I R
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_REPORT
+	: R E P O R T
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_RESTORE_SYSTEM
+	: R E S T O R E WS S Y S T E M
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_RUNSTATS
+	: R U N S T A T S
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_STOSPACE
+	: S T O S P A C E
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_TEMPLATE
+	: T E M P L A T E
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_UNLOAD
+	: U N L O A D
+	->pushMode(DSNUTILV_SAU_MODE),type(DSNUTILV_SAU)
+	;
+
+DA_APOS2
+	: '\'\''
 	;
 
 DA_APOS
@@ -4489,6 +4627,28 @@ DA_APOS
 	;
 
 DA_CHAR
+	: .+?
+	;
+
+mode DSNUTILV_SAU_MODE;
+
+
+DS_WHEN
+	: WHEN
+	->pushMode(WHEN_MODE)
+	;
+
+DS_DSN
+	: D S N
+	->pushMode(DSN_MODE)
+	;
+
+DS_APOS
+	: '\''
+	->popMode,popMode
+	;
+
+DS_CHAR
 	: .+?
 	;
 
@@ -4505,7 +4665,7 @@ WH_WS
 
 WH_APOS
 	: '\''
-	->popMode,popMode
+	->popMode,popMode,popMode
 	;
 
 WH_CHAR
@@ -4544,4 +4704,181 @@ PA_APOS
 PA_CHAR
 	: .+?
 	;
+
+mode DSN_MODE;
+
+DSN_APOS2
+	: '\'\''
+	{
+		if (dsn_apos2) {
+			dsn_apos2 = false;
+			popMode();
+		} else {
+			dsn_apos2 = true;
+		}
+	}
+	;
+
+DSN_APOS
+	: '\''
+	{
+		if (dsn_apos) {
+			dsn_apos = false;
+			popMode();
+		} else {
+			dsn_apos = true;
+		}
+	}
+	;
+
+DSN_BACKUP_SYSTEM
+	: B A C K U P WS S Y S T E M
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_CATMAINT
+	: C A T M A I N T
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_CHECK_DATA
+	: C H E C K WS D A T A
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_CHECK_INDEX
+	: C H E C K WS I N D E X
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_CHECK_LOB
+	: C H E C K WS L O B
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_COPY
+	: C O P Y
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_COPYTOCOPY
+	: C O P Y T O C O P Y
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_DIAGNOSE
+	: D I A G N O S E
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_EXEC_SQL
+	: E X E C WS S Q L
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_LISTDEF
+	: L I S T D E F
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_LOAD
+	: L O A D
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_MERGECOPY
+	: M E R G E C O P Y
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_MODIFY_RECOVERY
+	: M O D I F Y WS R E C O V E R Y
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_MODIFY_STATISTICS
+	: M O D I F Y WS S T A T I S T I C S
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_OPTIONS
+	: O P T I O N S
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_QUIESCE
+	: Q U I E S C E
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_REBUILD_INDEX
+	: R E B U I L D WS I N D E X
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_RECOVER
+	: R E C O V E R
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_REORG_INDEX
+	: R E O R G WS I N D E X
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_REORG_TABLESPACE
+	: R E O R G WS T A B L E S P A C E
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_REPAIR
+	: R E P A I R
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_REPORT
+	: R E P O R T
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_RESTORE_SYSTEM
+	: R E S T O R E WS S Y S T E M
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_RUNSTATS
+	: R U N S T A T S
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_STOSPACE
+	: S T O S P A C E
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_TEMPLATE
+	: T E M P L A T E
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_UNLOAD
+	: U N L O A D
+	->popMode,type(DSN_DSNUTILV_SAU)
+	;
+
+DSN_CHAR
+	: .+?
+	;
+
+mode DSNUTILV_EXECSQL_MODE;
+
+DE_ENDEXEC
+	: E N D E X E C
+	->popMode
+	;
+
+DE_CHAR
+	: .+?
+	;
+
 

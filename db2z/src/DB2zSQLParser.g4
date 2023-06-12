@@ -579,7 +579,28 @@ I find it useful to look at the ANTLR token output and know which mode
 the lexer was in at each stage.
 */
 dsnutilvThirdArgument
-	: DSNUTILV_APOS (DA_CHAR | DA_WHEN | WH_WS | WH_LPAREN | WP_CHAR | WP_APOS | PA_CHAR | PA_APOS | WP_RPAREN | WH_CHAR)* DA_APOS
+	: DSNUTILV_APOS 
+	(DA_CHAR 
+	| DS_WHEN 
+	| WH_WS 
+	| WH_LPAREN 
+	| WP_CHAR 
+	| WP_APOS 
+	| PA_CHAR 
+	| PA_APOS 
+	| WP_RPAREN 
+	| WH_CHAR
+	| DSNUTILV_SAU
+	| DSN_DSNUTILV_SAU
+	| DS_DSN
+	| DS_APOS
+	| DS_CHAR
+	| DSN_APOS2
+	| DSN_APOS
+	| DSN_CHAR
+	| DE_CHAR
+	| DE_ENDEXEC
+	)* DA_APOS
 	;
 
 callArgumentList
