@@ -6125,6 +6125,11 @@ xqueryArgument
 	: (xqueryContextItemExpression | (xqueryVariableExpression AS (identifier | NONNUMERICLITERAL)))
 	;
 
+/*
+Added SQL? before COLUMNS per Martijn Rutte 2023-06-12.  This isn't in
+the IBM documentation for the XMLTABLE function, but if DB2z accepts
+it, we add it here.
+*/
 xmltableFunctionSpecification
 	: (
 	XMLTABLE
@@ -6132,7 +6137,7 @@ xmltableFunctionSpecification
 	(xmlnamespacesDeclaration COMMA)?
 	rowXqueryExpressionConstant
 	(PASSING (BY REF)? rowXqueryArgument (COMMA rowXqueryArgument)*)?
-	(COLUMNS (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition)
+	(SQL? COLUMNS (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition)
 		(COMMA (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition))*)?
 	RPAREN
 	)
@@ -6156,11 +6161,17 @@ xqueryVariableExpression
 	: (expression)
 	;
 
+/*
+Changed optionality of (defaultClause | (PATH columnXqueryExpressionConstant))
+from ? to * because you can have one, the other, both, or neither.  IBM
+documentation says you can have one, the other, or neither.  If DB2z accepts
+it we put it here.
+*/
 xmlTableRegularColumnDefinition
 	: (
 	columnName
 	dataType
-	(defaultClause | (PATH columnXqueryExpressionConstant))?
+	(defaultClause | (PATH columnXqueryExpressionConstant))*
 	)
 	;
 
