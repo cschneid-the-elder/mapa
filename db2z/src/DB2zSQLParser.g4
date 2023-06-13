@@ -2020,8 +2020,16 @@ grantPackageAuthority
 	)
 	;
 
+/*
+It turns out that if the collectionID is in quotes and the
+packageName is in quotes that they and the DOT don't match
+individually, but collectively they match as NONNUMERICLITERAL.
+Discovered by Martijn Rutte 2023-06-12.
+*/
 packageSpecification
-	: (collectionID DOT (packageName | SPLAT))
+	: (
+	(collectionID DOT (packageName | SPLAT)) | NONNUMERICLITERAL
+	)
 	;
 
 functionSpecification
@@ -3242,9 +3250,13 @@ createFunctionStatementCompiledSqlScalarOptions
 	)
 	;
 
+/*
+Added columnName to go with functionDataType.  My omission, found by
+Martijn Rutte 2023-06-12.
+*/
 sqlTableFunctionDefinition
 	: (
-	RETURNS TABLE LPAREN functionDataType (COMMA functionDataType)* RPAREN
+	RETURNS TABLE LPAREN columnName functionDataType (COMMA columnName functionDataType)* RPAREN
 	createFunctionStatementSqlTableOptions+
 	sqlRoutineBody
 	)
@@ -6125,6 +6137,11 @@ xqueryArgument
 	: (xqueryContextItemExpression | (xqueryVariableExpression AS (identifier | NONNUMERICLITERAL)))
 	;
 
+/*
+Added SQL? before COLUMNS per Martijn Rutte 2023-06-12.  This isn't in
+the IBM documentation for the XMLTABLE function, but if DB2z accepts
+it, we add it here.
+*/
 xmltableFunctionSpecification
 	: (
 	XMLTABLE
@@ -6132,7 +6149,7 @@ xmltableFunctionSpecification
 	(xmlnamespacesDeclaration COMMA)?
 	rowXqueryExpressionConstant
 	(PASSING (BY REF)? rowXqueryArgument (COMMA rowXqueryArgument)*)?
-	(COLUMNS (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition)
+	(SQL? COLUMNS (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition)
 		(COMMA (xmlTableRegularColumnDefinition | xmlTableOrdinalityColumnDefinition))*)?
 	RPAREN
 	)
@@ -6156,11 +6173,17 @@ xqueryVariableExpression
 	: (expression)
 	;
 
+/*
+Changed optionality of (defaultClause | (PATH columnXqueryExpressionConstant))
+from ? to * because you can have one, the other, both, or neither.  IBM
+documentation says you can have one, the other, or neither.  If DB2z accepts
+it we put it here.
+*/
 xmlTableRegularColumnDefinition
 	: (
 	columnName
 	dataType
-	(defaultClause | (PATH columnXqueryExpressionConstant))?
+	(defaultClause | (PATH columnXqueryExpressionConstant))*
 	)
 	;
 
