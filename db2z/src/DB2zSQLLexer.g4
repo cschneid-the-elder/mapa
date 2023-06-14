@@ -144,7 +144,7 @@ COMMA
 	{
 		if (dsnutil) {
 			dsnutilArgc++;
-			System.out.println("dsnutilArgc = " + dsnutilArgc);
+			//System.out.println("dsnutilArgc = " + dsnutilArgc);
 		}
 	}
 	;
@@ -153,7 +153,7 @@ DSNUTIL_APOS
 	: '\''
 	{dsnutil && dsnutilArgc == 2}?
 	{
-		System.out.println("apostrophe matched");
+		//System.out.println("apostrophe matched");
 		/*
 		The algorithm is...
 		We have matched an apostrophe
@@ -173,13 +173,13 @@ DSNUTIL_APOS
 		CharStream cs = getInputStream();
 		int size = cs.size();
 		int index = cs.index();
-		System.out.println("cs.size() = " + cs.size());
-		System.out.println("cs.index() = " + cs.index());
+		//System.out.println("cs.size() = " + cs.size());
+		//System.out.println("cs.index() = " + cs.index());
 		if (termApos == 0) {
-			System.out.println("getCharIndex() = " + getCharIndex());
+			//System.out.println("getCharIndex() = " + getCharIndex());
 			Interval interval = new Interval(index, cs.size());
 			String csString = cs.getText(interval);
-			System.out.println("csString = |" + csString + "|");
+			//System.out.println("csString = |" + csString + "|");
 			Boolean inApos = false;
 			int prevApos = -1;
 			int lParen = 0;
@@ -204,13 +204,13 @@ DSNUTIL_APOS
 						if (!inApos) {
 							lParen++;
 						}
-						System.out.println("lParen = " + lParen);
+						//System.out.println("lParen = " + lParen);
 						break;
 					case ')' :
 						if (!inApos) {
 							rParen++;
 						}
-						System.out.println("rParen = " + rParen);
+						//System.out.println("rParen = " + rParen);
 						if (rParen > lParen) {
 							//found terminating closing parenthesis
 							for (int j = i; j > 0; j--) {
@@ -237,7 +237,7 @@ DSNUTIL_APOS
 				} //end switch
 			} //end for
 		} // end if
-		System.out.println("termApos = " + termApos);
+		//System.out.println("termApos = " + termApos);
 	}
 	->pushMode(DSNUTIL_APOS_MODE)
 	;
@@ -246,7 +246,7 @@ DSNUTIL_QUOTE
 	: '"'
 	{dsnutil && dsnutilArgc == 2}?
 	{
-		System.out.println("quote matched");
+		//System.out.println("quote matched");
 		/*
 		The algorithm is...
 		We have matched a quote
@@ -266,13 +266,13 @@ DSNUTIL_QUOTE
 		CharStream cs = getInputStream();
 		int size = cs.size();
 		int index = cs.index();
-		System.out.println("cs.size() = " + cs.size());
-		System.out.println("cs.index() = " + cs.index());
+		//System.out.println("cs.size() = " + cs.size());
+		//System.out.println("cs.index() = " + cs.index());
 		if (termApos == 0) {
-			System.out.println("getCharIndex() = " + getCharIndex());
+			//System.out.println("getCharIndex() = " + getCharIndex());
 			Interval interval = new Interval(index, cs.size());
 			String csString = cs.getText(interval);
-			System.out.println("csString = |" + csString + "|");
+			//System.out.println("csString = |" + csString + "|");
 			Boolean inApos = false;
 			int prevApos = -1;
 			int lParen = 0;
@@ -297,13 +297,13 @@ DSNUTIL_QUOTE
 						if (!inApos) {
 							lParen++;
 						}
-						System.out.println("lParen = " + lParen);
+						//System.out.println("lParen = " + lParen);
 						break;
 					case ')' :
 						if (!inApos) {
 							rParen++;
 						}
-						System.out.println("rParen = " + rParen);
+						//System.out.println("rParen = " + rParen);
 						if (rParen > lParen) {
 							//found terminating closing parenthesis
 							for (int j = i; j > 0; j--) {
@@ -330,7 +330,7 @@ DSNUTIL_QUOTE
 				} //end switch
 			} //end for
 		} // end if
-		System.out.println("termApos = " + termApos);
+		//System.out.println("termApos = " + termApos);
 	}
 	->pushMode(DSNUTIL_QUOTE_MODE)
 	;
@@ -376,6 +376,10 @@ So, as of 2023-06-06, this is what we've got.  It appears the solution is to
 exclude the string delimiter, the comma, the space, and the semicolon.  The 
 exclusions prevent matching multiple strings as one.  Hopefully no one will 
 need to match an embedded string with those characters.
+
+2023-06-14 note the predicate {dsnutilArgc != 2}?  This is so the third 
+argument to SYSPROC.DSNUTILx will not match this rule.  Instead, see the
+DSNUTIL_APOS and DSNUTIL_QUOTE rules, and their actions.
 */
 fragment STRINGLITERAL
 	: ('"' (~["] | '""' | '\'')* '"'
@@ -4635,7 +4639,7 @@ SQLIDENTIFIER
 		||  getText().equalsIgnoreCase("DSNUTILU")
 		||  getText().equalsIgnoreCase("DSNUTILS")) {
 			dsnutil = true;
-			System.out.println("dsnutil matched");
+			//System.out.println("dsnutil matched");
 		}
 	}
 	;
@@ -4651,7 +4655,7 @@ DA_APOS
 	{
 		CharStream cs = getInputStream();
 		int index = cs.index();
-		System.out.println("cs.index() = " + cs.index());
+		//System.out.println("cs.index() = " + cs.index());
 		if (termApos == index) {
 			dsnutil = false;
 			dsnutilArgc = 0;
@@ -4675,7 +4679,7 @@ DQ_QUOTE
 	{
 		CharStream cs = getInputStream();
 		int index = cs.index();
-		System.out.println("cs.index() = " + cs.index());
+		//System.out.println("cs.index() = " + cs.index());
 		if (termApos == index) {
 			dsnutil = false;
 			dsnutilArgc = 0;
