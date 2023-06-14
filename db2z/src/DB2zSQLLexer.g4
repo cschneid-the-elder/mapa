@@ -15,9 +15,13 @@ lexer grammar DB2zSQLLexer;
 @lexer::members {
 	public String statementTerminator = new String("");
 	public int bracketNesting = 0;
+	public Boolean dsnutil = false;
+	public int dsnutilArgc = 0;
+	public int termApos = 0;
 }
 
 channels { COMMENTS }
+tokens { DSNUTIL_APOS }
 
 fragment A:('a'|'A');
 fragment B:('b'|'B');
@@ -137,6 +141,198 @@ SEMICOLON
 
 COMMA
 	: ','
+	{
+		if (dsnutil) {
+			dsnutilArgc++;
+			System.out.println("dsnutilArgc = " + dsnutilArgc);
+		}
+	}
+	;
+
+DSNUTIL_APOS
+	: '\''
+	{dsnutil && dsnutilArgc == 2}?
+	{
+		System.out.println("apostrophe matched");
+		/*
+		The algorithm is...
+		We have matched an apostrophe
+		If the next apostrophe is in the next position then we
+		have encountered '' which is to be treated as just one
+		apostrophe
+		If we are within apostrophes then just look for the
+		closing apostrophe
+		If we are not within apostrophes then count parens
+		When we get to a closing paren without a matching
+		opening paren we have reached the end of the parameter
+		list
+		Now move backward until a comma is found
+		Now move backward until an apostrophe is found
+		This is the terminating apostrophe
+		*/
+		CharStream cs = getInputStream();
+		int size = cs.size();
+		int index = cs.index();
+		System.out.println("cs.size() = " + cs.size());
+		System.out.println("cs.index() = " + cs.index());
+		if (termApos == 0) {
+			System.out.println("getCharIndex() = " + getCharIndex());
+			Interval interval = new Interval(index, cs.size());
+			String csString = cs.getText(interval);
+			System.out.println("csString = |" + csString + "|");
+			Boolean inApos = false;
+			int prevApos = -1;
+			int lParen = 0;
+			int rParen = 0;
+			outermostLoop:
+			for (int i = 0; i < csString.length(); i++) {
+				switch (csString.charAt(i)) {
+					case '\'' :
+						if (i == prevApos + 1) {
+							// found '' which is treated as '
+							prevApos = -1;
+						} else {
+							if (inApos) {
+								inApos = false;
+							} else {
+								inApos = true;
+							}
+							prevApos = i;
+						}
+						break;
+					case '(' :
+						if (!inApos) {
+							lParen++;
+						}
+						System.out.println("lParen = " + lParen);
+						break;
+					case ')' :
+						if (!inApos) {
+							rParen++;
+						}
+						System.out.println("rParen = " + rParen);
+						if (rParen > lParen) {
+							//found terminating closing parenthesis
+							for (int j = i; j > 0; j--) {
+								switch (csString.charAt(j)) {
+									case ',' :
+										for (int k = j; k > 0; k--) {
+											switch (csString.charAt(k)) {
+												case '\'' :
+													termApos = k + cs.index() + 1;
+													break outermostLoop;
+												default:
+													break;
+											} //end switch
+										} //end for
+										break;
+									default:
+										break;
+								} //end switch
+							} //end for
+						} //end if
+						break;
+					default:
+						break;
+				} //end switch
+			} //end for
+		} // end if
+		System.out.println("termApos = " + termApos);
+	}
+	->pushMode(DSNUTIL_APOS_MODE)
+	;
+
+DSNUTIL_QUOTE
+	: '"'
+	{dsnutil && dsnutilArgc == 2}?
+	{
+		System.out.println("quote matched");
+		/*
+		The algorithm is...
+		We have matched a quote
+		If the next quote is in the next position then we
+		have encountered "" which is to be treated as just one
+		quote
+		If we are within quotes then just look for the
+		closing quote
+		If we are not within quotes then count parens
+		When we get to a closing paren without a matching
+		opening paren we have reached the end of the parameter
+		list
+		Now move backward until a comma is found
+		Now move backward until a quote is found
+		This is the terminating quote
+		*/
+		CharStream cs = getInputStream();
+		int size = cs.size();
+		int index = cs.index();
+		System.out.println("cs.size() = " + cs.size());
+		System.out.println("cs.index() = " + cs.index());
+		if (termApos == 0) {
+			System.out.println("getCharIndex() = " + getCharIndex());
+			Interval interval = new Interval(index, cs.size());
+			String csString = cs.getText(interval);
+			System.out.println("csString = |" + csString + "|");
+			Boolean inApos = false;
+			int prevApos = -1;
+			int lParen = 0;
+			int rParen = 0;
+			outermostLoop:
+			for (int i = 0; i < csString.length(); i++) {
+				switch (csString.charAt(i)) {
+					case '"' :
+						if (i == prevApos + 1) {
+							// found "" which is treated as "
+							prevApos = -1;
+						} else {
+							if (inApos) {
+								inApos = false;
+							} else {
+								inApos = true;
+							}
+							prevApos = i;
+						}
+						break;
+					case '(' :
+						if (!inApos) {
+							lParen++;
+						}
+						System.out.println("lParen = " + lParen);
+						break;
+					case ')' :
+						if (!inApos) {
+							rParen++;
+						}
+						System.out.println("rParen = " + rParen);
+						if (rParen > lParen) {
+							//found terminating closing parenthesis
+							for (int j = i; j > 0; j--) {
+								switch (csString.charAt(j)) {
+									case ',' :
+										for (int k = j; k > 0; k--) {
+											switch (csString.charAt(k)) {
+												case '"' :
+													termApos = k + cs.index() + 1;
+													break outermostLoop;
+												default:
+													break;
+											} //end switch
+										} //end for
+										break;
+									default:
+										break;
+								} //end switch
+							} //end for
+						} //end if
+						break;
+					default:
+						break;
+				} //end switch
+			} //end for
+		} // end if
+		System.out.println("termApos = " + termApos);
+	}
+	->pushMode(DSNUTIL_QUOTE_MODE)
 	;
 
 NONNUMERICLITERAL
@@ -182,8 +378,9 @@ exclusions prevent matching multiple strings as one.  Hopefully no one will
 need to match an embedded string with those characters.
 */
 fragment STRINGLITERAL
-	: '"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
-	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\''
+	: ('"' (~["] | '""' | '\'')* '"'
+	| '\'' (~['] | '\'\'' | '"')* '\'')
+	{dsnutilArgc != 2}?
 	;
 
 INTEGERLITERAL
@@ -4433,9 +4630,66 @@ identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$_]+
+	{
+		if (getText().equalsIgnoreCase("DSNUTILV")
+		||  getText().equalsIgnoreCase("DSNUTILU")
+		||  getText().equalsIgnoreCase("DSNUTILS")) {
+			dsnutil = true;
+			System.out.println("dsnutil matched");
+		}
+	}
 	;
 
 UNIDENTIFIED
 	: .
 	;
+
+mode DSNUTIL_APOS_MODE;
+
+DA_APOS
+	: '\''
+	{
+		CharStream cs = getInputStream();
+		int index = cs.index();
+		System.out.println("cs.index() = " + cs.index());
+		if (termApos == index) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			termApos = 0;
+			setType(DSNUTIL_APOS);
+			popMode();
+		} else {
+			setType(DA_CHAR);
+		}
+	}
+	;
+
+DA_CHAR
+	: .+?
+	;
+
+mode DSNUTIL_QUOTE_MODE;
+
+DQ_QUOTE
+	: '"'
+	{
+		CharStream cs = getInputStream();
+		int index = cs.index();
+		System.out.println("cs.index() = " + cs.index());
+		if (termApos == index) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			termApos = 0;
+			setType(DSNUTIL_QUOTE);
+			popMode();
+		} else {
+			setType(DQ_CHAR);
+		}
+	}
+	;
+
+DQ_CHAR
+	: .+?
+	;
+
 

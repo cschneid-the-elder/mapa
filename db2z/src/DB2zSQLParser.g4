@@ -569,7 +569,12 @@ callStatement
 	;
 
 callArgument
-	: (expression | NULL | (TABLE tableName))
+	: (expression | NULL | (TABLE tableName) | dsnutilThirdArgument)
+	;
+
+dsnutilThirdArgument
+	: (DSNUTIL_APOS DA_CHAR* DSNUTIL_APOS)
+	| (DSNUTIL_QUOTE DQ_CHAR* DSNUTIL_QUOTE)
 	;
 
 callArgumentList
@@ -1911,6 +1916,7 @@ sqlplCallArgument
 		| sqlParameterName
 		| expression
 		| NULL
+		| dsnutilThirdArgument
 	)
 	;
 
