@@ -144,7 +144,7 @@ COMMA
 	{
 		if (dsnutil) {
 			dsnutilArgc++;
-			//System.out.println("dsnutilArgc = " + dsnutilArgc);
+			System.out.println("dsnutilArgc = " + dsnutilArgc);
 		}
 	}
 	;
@@ -153,7 +153,7 @@ DSNUTIL_APOS
 	: '\''
 	{dsnutil && dsnutilArgc == 2}?
 	{
-		//System.out.println("apostrophe matched");
+		System.out.println("apostrophe matched");
 		/*
 		The algorithm is...
 		We have matched an apostrophe
@@ -173,13 +173,13 @@ DSNUTIL_APOS
 		CharStream cs = getInputStream();
 		int size = cs.size();
 		int index = cs.index();
-		//System.out.println("cs.size() = " + cs.size());
-		//System.out.println("cs.index() = " + cs.index());
+		System.out.println("cs.size() = " + cs.size());
+		System.out.println("cs.index() = " + cs.index());
 		if (termApos == 0) {
-			//System.out.println("getCharIndex() = " + getCharIndex());
+			System.out.println("getCharIndex() = " + getCharIndex());
 			Interval interval = new Interval(index, cs.size());
 			String csString = cs.getText(interval);
-			//System.out.println("csString = |" + csString + "|");
+			System.out.println("csString = |" + csString + "|");
 			Boolean inApos = false;
 			int prevApos = -1;
 			int lParen = 0;
@@ -190,6 +190,7 @@ DSNUTIL_APOS
 					case '\'' :
 						if (i == prevApos + 1) {
 							// found '' which is treated as '
+							System.out.println("i == prevApos + 1");
 							prevApos = -1;
 						} else {
 							if (inApos) {
@@ -199,18 +200,19 @@ DSNUTIL_APOS
 							}
 							prevApos = i;
 						}
+						System.out.println("inApos = " + inApos);
 						break;
 					case '(' :
 						if (!inApos) {
 							lParen++;
 						}
-						//System.out.println("lParen = " + lParen);
+						System.out.println("lParen = " + lParen);
 						break;
 					case ')' :
 						if (!inApos) {
 							rParen++;
 						}
-						//System.out.println("rParen = " + rParen);
+						System.out.println("rParen = " + rParen);
 						if (rParen > lParen) {
 							//found terminating closing parenthesis
 							for (int j = i; j > 0; j--) {
@@ -237,7 +239,7 @@ DSNUTIL_APOS
 				} //end switch
 			} //end for
 		} // end if
-		//System.out.println("termApos = " + termApos);
+		System.out.println("termApos = " + termApos);
 	}
 	->pushMode(DSNUTIL_APOS_MODE)
 	;
@@ -246,7 +248,7 @@ DSNUTIL_QUOTE
 	: '"'
 	{dsnutil && dsnutilArgc == 2}?
 	{
-		//System.out.println("quote matched");
+		System.out.println("quote matched");
 		/*
 		The algorithm is...
 		We have matched a quote
@@ -266,13 +268,13 @@ DSNUTIL_QUOTE
 		CharStream cs = getInputStream();
 		int size = cs.size();
 		int index = cs.index();
-		//System.out.println("cs.size() = " + cs.size());
-		//System.out.println("cs.index() = " + cs.index());
+		System.out.println("cs.size() = " + cs.size());
+		System.out.println("cs.index() = " + cs.index());
 		if (termApos == 0) {
-			//System.out.println("getCharIndex() = " + getCharIndex());
+			System.out.println("getCharIndex() = " + getCharIndex());
 			Interval interval = new Interval(index, cs.size());
 			String csString = cs.getText(interval);
-			//System.out.println("csString = |" + csString + "|");
+			System.out.println("csString = |" + csString + "|");
 			Boolean inApos = false;
 			int prevApos = -1;
 			int lParen = 0;
@@ -297,13 +299,13 @@ DSNUTIL_QUOTE
 						if (!inApos) {
 							lParen++;
 						}
-						//System.out.println("lParen = " + lParen);
+						System.out.println("lParen = " + lParen);
 						break;
 					case ')' :
 						if (!inApos) {
 							rParen++;
 						}
-						//System.out.println("rParen = " + rParen);
+						System.out.println("rParen = " + rParen);
 						if (rParen > lParen) {
 							//found terminating closing parenthesis
 							for (int j = i; j > 0; j--) {
@@ -330,7 +332,7 @@ DSNUTIL_QUOTE
 				} //end switch
 			} //end for
 		} // end if
-		//System.out.println("termApos = " + termApos);
+		System.out.println("termApos = " + termApos);
 	}
 	->pushMode(DSNUTIL_QUOTE_MODE)
 	;
@@ -4639,7 +4641,7 @@ SQLIDENTIFIER
 		||  getText().equalsIgnoreCase("DSNUTILU")
 		||  getText().equalsIgnoreCase("DSNUTILS")) {
 			dsnutil = true;
-			//System.out.println("dsnutil matched");
+			System.out.println("dsnutil matched");
 		}
 	}
 	;
@@ -4655,7 +4657,7 @@ DA_APOS
 	{
 		CharStream cs = getInputStream();
 		int index = cs.index();
-		//System.out.println("cs.index() = " + cs.index());
+		System.out.println("cs.index() = " + cs.index());
 		if (termApos == index) {
 			dsnutil = false;
 			dsnutilArgc = 0;
@@ -4679,7 +4681,7 @@ DQ_QUOTE
 	{
 		CharStream cs = getInputStream();
 		int index = cs.index();
-		//System.out.println("cs.index() = " + cs.index());
+		System.out.println("cs.index() = " + cs.index());
 		if (termApos == index) {
 			dsnutil = false;
 			dsnutilArgc = 0;
