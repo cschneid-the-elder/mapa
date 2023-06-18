@@ -15,6 +15,9 @@ lexer grammar DB2zSQLLexer;
 @lexer::members {
 	public String statementTerminator = new String("");
 	public int bracketNesting = 0;
+	public Boolean dsnutil = false;
+	public int dsnutilArgc = 0;
+	public int dsnutilWhenParen = 0;
 }
 
 channels { COMMENTS }
@@ -137,6 +140,26 @@ SEMICOLON
 
 COMMA
 	: ','
+	{
+		if (dsnutil) {
+			dsnutilArgc++;
+			System.out.println("dsnutilArgc = " + dsnutilArgc);
+		}
+	}
+	;
+
+DSNUTIL_OPEN_APOS
+	: '\''
+	{dsnutil && dsnutilArgc == 2}?
+	{System.out.println("dsnutil && dsnutilArgc == 2 & \'");}
+	->pushMode(DSNUTIL_MODE)
+	;
+
+DSNUTIL_OPEN_QUOTE
+	: '"'
+	{dsnutil && dsnutilArgc == 2}?
+	{System.out.println("dsnutil && dsnutilArgc == 2 & \"");}
+	->pushMode(DSNUTIL_MODE)
 	;
 
 NONNUMERICLITERAL
@@ -182,8 +205,9 @@ exclusions prevent matching multiple strings as one.  Hopefully no one will
 need to match an embedded string with those characters.
 */
 fragment STRINGLITERAL
-	: '"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
-	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\''
+	: ('"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
+	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\'')
+	{dsnutilArgc != 2}?
 	;
 
 INTEGERLITERAL
@@ -4433,9 +4457,159 @@ identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$_]+
+	{
+		if (getText().equalsIgnoreCase("DSNUTILV")
+		||  getText().equalsIgnoreCase("DSNUTILU")
+		||  getText().equalsIgnoreCase("DSNUTILS")) {
+			dsnutil = true;
+			System.out.println("dsnutil matched");
+		}
+	}
 	;
 
 UNIDENTIFIED
 	: .
 	;
+
+mode DSNUTIL_MODE;
+
+DSNUTIL_DOUBLE_APOS
+	: '\'\''
+	;
+
+DSNUTIL_CLOSE_APOS
+	: '\''
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+	}
+	->popMode
+	;
+
+DSNUTIL_DOUBLE_QUOTE
+	: '""'
+	;
+
+DSNUTIL_CLOSE_QUOTE
+	: '"'
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+	}
+	->popMode
+	;
+
+DSNUTIL_CHAR
+	: .+?
+	;
+
+DSNUTIL_DSN
+	: D S N
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_WHEN
+	: W H E N
+	->pushMode(DSNUTIL_WHEN_MODE)
+	;
+
+mode DSNUTIL_DSN_MODE;
+
+DSNUTIL_DSN_DOUBLE_APOS
+	: '\'\''
+	->pushMode(DSNUTIL_DOUBLE_APOS_2_MODE)
+	;
+
+DSNUTIL_DSN_OPEN_APOS
+	: '\''
+	->pushMode(DSNUTIL_APOS_2_MODE)
+	;
+
+DSNUTIL_DSN_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_WHEN_MODE;
+
+DSNUTIL_WHEN_LPAREN
+	: '('
+	{
+		dsnutilWhenParen++;
+	}
+	;
+
+DSNUTIL_WHEN_RPAREN
+	: ')'
+	{
+		dsnutilWhenParen--;
+		if (dsnutilWhenParen == 0) {
+			popMode();
+		}
+	}
+	;
+
+DSNUTIL_WHEN_OPEN_APOS
+	: '\''
+	->pushMode(DSNUTIL_APOS_1_MODE)
+	;
+
+DSNUTIL_WHEN_OPEN_QUOTE
+	: '"'
+	->pushMode(DSNUTIL_QUOTE_1_MODE)
+	;
+
+DSNUTIL_WHEN_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_DOUBLE_APOS_2_MODE;
+
+DSNUTIL_DOUBLE_APOS2
+	: '\'\''
+	->popMode,popMode
+	;
+
+DSNUTIL_DOUBLE_APOS_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_APOS_1_MODE;
+
+DSNUTIL_APOS1
+	: '\''
+	->popMode
+	;
+
+DSNUTIL_APOS_1_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_APOS_2_MODE;
+
+DSNUTIL_APOS2
+	: '\''
+	->popMode,popMode
+	;
+
+DSNUTIL_APOS_2_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_QUOTE_1_MODE;
+
+DSNUTIL_QUOTE1
+	: '"'
+	->popMode
+	;
+
+DSNUTIL_QUOTE_1_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
 
