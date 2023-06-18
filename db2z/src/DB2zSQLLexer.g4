@@ -4433,9 +4433,23 @@ identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$_]+
+	{
+		if (getText().equalsIgnoreCase("DSNUTILV")
+		||  getText().equalsIgnoreCase("DSNUTILU")
+		||  getText().equalsIgnoreCase("DSNUTILS")) {
+			pushMode(SYSPROC_DSNUTIL_MODE);
+		}
+	}
 	;
 
 UNIDENTIFIED
 	: .
+	;
+
+mode SYSPROC_DSNUTIL_MODE;
+
+DSNUTIL_ARGS
+	: LPAREN .*? RPAREN (WS | NEWLINE)* SEMICOLON
+	->popMode
 	;
 

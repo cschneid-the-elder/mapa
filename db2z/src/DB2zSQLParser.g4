@@ -50,7 +50,7 @@ for savepoints to be recognized correctly the former
 must come before the latter.
 */
 sqlStatement
-	: EXEC_SQL?
+	: (EXEC_SQL?
 	(
 	query
 	| allocateCursorStatement
@@ -145,7 +145,8 @@ sqlStatement
 	| valuesIntoStatement
 	| wheneverStatement
 	)
-	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF)
+	(SQL_STATEMENT_TERMINATOR+ | SEMICOLON+ | (END_EXEC DOT?) | EOF))
+	| callDSNUTILx
 	;
 
 /*
@@ -565,6 +566,12 @@ callStatement
 	: (
 	CALL (procedureName | hostVariable)
 	(LPAREN (callArgumentList | (USING DESCRIPTOR hostVariable))? RPAREN)?
+	)
+	;
+
+callDSNUTILx
+	: (
+	CALL procedureName DSNUTIL_ARGS
 	)
 	;
 
