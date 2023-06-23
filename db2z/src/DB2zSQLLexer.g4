@@ -18,6 +18,7 @@ lexer grammar DB2zSQLLexer;
 	public Boolean dsnutil = false;
 	public int dsnutilArgc = 0;
 	public int dsnutilWhenParen = 0;
+	public Boolean dsnutil_dsn_ws_char = false;
 }
 
 channels { COMMENTS }
@@ -4472,6 +4473,49 @@ UNIDENTIFIED
 	;
 
 mode DSNUTIL_MODE;
+/*
+Why are we here?
+
+The SYSPROC.DSNUTILx stored procedures are very forgiving of the
+content of their third parameter.  It may look like this...
+
+	'TEMPLATE REOCP DSN(''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'')'
+
+...or...
+
+	'TEMPLATE REOCP DSN ''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'''
+	
+...or...
+
+	'TEMPLATE REOCP DSN 'X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.''
+	
+...or...
+
+	'TEMPLATE REOCP DSN X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'
+
+...or...
+
+	  'TEMPLATE REOCP DSN(''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'') UNIT VTSSALL VOLCNT 99 RETPD 17 STACK YES
+        TEMPLATE REODC DSN(''X&DB(1,3)..&DB..&SN..P&PA..DB2XX(+1)'') GDGLIMIT 7 DISP (NEW,CATLG,DELETE) DATACLAS DCFILE
+        TEMPLATE REOPU DSN(''X&DB(1,3)..&DB..&SN..P&PA..DB2YY(+1)'') GDGLIMIT 7 DISP (NEW,CATLG,DELETE) DATACLAS DCFILE  
+ REORG TABLESPACE DB01.TS01 SHRLEVEL CHANGE LOG NO NOSYSREC COPYDDN (REOCP) SORTDEVT SYSDA SORTNUM 40 SORTKEYS  DRAIN_WAIT 30 RETRY 10 RETRY_DELAY 180 MAXRO 50 DRAIN ALL LONGLOG CONTINUE TIMEOUT TERM  FASTSWITCH YES  DISCARD FROM TABLE T1 WHEN (C1 LIKE ') ; "%') STATISTICS TABLE(ALL) INDEX(ALL) KEYCARD FREQVAL NUMCOLS 5 COUNT 10
+ REORG TABLESPACE DB01.TS02 SHRLEVEL CHANGE LOG NO NOSYSREC COPYDDN (REOCP) SORTDEVT SYSDA SORTNUM 40 SORTKEYS  DRAIN_WAIT 30 RETRY 10 RETRY_DELAY 180 MAXRO 50 DRAIN ALL LONGLOG CONTINUE TIMEOUT TERM  FASTSWITCH YES  DISCARD FROM TABLE T2 WHEN (C1 LIKE '( , )) , %') STATISTICS TABLE(ALL) INDEX(ALL) KEYCARD FREQVAL NUMCOLS 5 COUNT 10
+ REORG TABLESPACE DB01.TS03 SHRLEVEL CHANGE LOG NO NOSYSREC COPYDDN (REOCP) SORTDEVT SYSDA SORTNUM 40 SORTKEYS  DRAIN_WAIT 30 RETRY 10 RETRY_DELAY 180 MAXRO 50 DRAIN ALL LONGLOG CONTINUE TIMEOUT TERM  FASTSWITCH YES  DISCARD FROM TABLE T3 WHEN (C1 LIKE X'416C') STATISTICS TABLE(ALL) INDEX(ALL) KEYCARD FREQVAL NUMCOLS 5 COUNT 10
+ '
+
+...and trying to write a single ANTLR rule that matches all of that
+third parameter and stops at the terminating apostrophe has proven 
+difficult.  Several attempts, including embedding a state machine to
+scan for the terminating closing parenthesis, failed.  If this is not
+self-evident, pay attention to what appear to be opening and closing
+apostrophes in each example.
+
+So here we are, knowing that we are processing the third parameter
+to SYSPROC.DSNUTILx, and that the opening apostrophe (or quote) has
+been detected.
+
+
+*/
 
 DSNUTIL_DOUBLE_APOS
 	: '\'\''
@@ -4482,6 +4526,7 @@ DSNUTIL_CLOSE_APOS
 	{
 		dsnutil = false;
 		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
 	}
 	->popMode
 	;
@@ -4495,6 +4540,7 @@ DSNUTIL_CLOSE_QUOTE
 	{
 		dsnutil = false;
 		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
 	}
 	->popMode
 	;
@@ -4510,36 +4556,133 @@ DSNUTIL_DSN
 
 DSNUTIL_WHEN
 	: W H E N
-	->pushMode(DSNUTIL_WHEN_MODE)
+	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
+/*
+This is here to prevent matches with the subsequent token.
+*/
+DSNUTIL_FASTSWITCH
+	: F A S T S W I T C H
+	;
+
+DSNUTIL_SWITCH
+	: S W I T C H
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+/*
+This is here to prevent matches with the subsequent token.
+*/
+DSNUTIL_SHRLEVEL
+	: S H R L E V E L
+	;
+
+DSNUTIL_LEVEL
+	: L E V E L
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_INCLUDE_XML_TABLESPACES
+	: I N C L U D E (WS | NEWLINE)+ X M L (WS | NEWLINE)+ T A B L E S P A C E S
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+	
 mode DSNUTIL_DSN_MODE;
+/*
+Why are we here?
+
+The DSN token has been seen.  This means that a dataset name
+string follows.  It _may_ be enclosed in parenthesis, apostrophes,
+double apostrophes, or quotes.  Some combinations of these are
+allowed.
+
+*/
 
 DSNUTIL_DSN_DOUBLE_APOS
 	: '\'\''
-	->pushMode(DSNUTIL_DOUBLE_APOS_2_MODE)
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
 	;
 
 DSNUTIL_DSN_OPEN_APOS
 	: '\''
-	->pushMode(DSNUTIL_APOS_2_MODE)
+	->pushMode(DSNUTIL_APOS_MODE)
 	;
+
+DSNUTIL_DSN_WS
+	: (WS | NEWLINE)+
+	->pushMode(DSNUTIL_DSN_WS_MODE);
 
 DSNUTIL_DSN_CHAR
 	: .+?
 	//->type(DSNUTIL_CHAR)
 	;
 
-mode DSNUTIL_WHEN_MODE;
+mode DSNUTIL_DSN_WS_MODE;
+/*
+Why are we here?
 
-DSNUTIL_WHEN_LPAREN
+In processing a DSN token, whitespace was detected.  This means it
+is possible the dataset name is not enclosed in parentheses, 
+apostrophes, double apostrophes, or quotes.  So the end of the 
+dataset name is delimited by either whitespace or the closing
+apostrophe for the entire parameter.
+*/
+
+DSNUTIL_DSN_WS_DOUBLE_APOS
+	: '\'\''
+	{!dsnutil_dsn_ws_char}?
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
+	;
+
+DSNUTIL_DSN_WS_OPEN_APOS
+	: '\''
+	{
+		if (dsnutil_dsn_ws_char) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			setType(DSNUTIL_CLOSE_APOS);
+			popMode(); //back to DSNUTIL_DSN_MODE
+			popMode(); //back to DSNUTIL_MODE
+			popMode(); //back to DEFAULT_MODE
+		} else {
+			pushMode(DSNUTIL_APOS_MODE);
+		}
+	}
+	;
+
+DSNUTIL_DSN_WS_WS
+	: (WS | NEWLINE)+
+	->popMode;
+
+DSNUTIL_DSN_WS_CHAR
+	: .+?
+	{
+		dsnutil_dsn_ws_char = true;
+	}
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_PAREN_MODE;
+/*
+Why are we here?
+
+A token has been seen which is followed by a paren.  What is enclosed
+in parentheses may include apostrophes or quotes.  If this is a
+REORG TABLESPACE utility control statement we are about to encounter
+what IBM calls a selection-condition-spec which may contain one or 
+more predicates.  There are other possibilities.
+
+*/
+DSNUTIL_LPAREN
 	: '('
 	{
 		dsnutilWhenParen++;
 	}
 	;
 
-DSNUTIL_WHEN_RPAREN
+DSNUTIL_RPAREN
 	: ')'
 	{
 		dsnutilWhenParen--;
@@ -4549,26 +4692,53 @@ DSNUTIL_WHEN_RPAREN
 	}
 	;
 
-DSNUTIL_WHEN_OPEN_APOS
+DSNUTIL_PAREN_OPEN_APOS
 	: '\''
-	->pushMode(DSNUTIL_APOS_1_MODE)
+	->pushMode(DSNUTIL_APOS_MODE)
 	;
 
-DSNUTIL_WHEN_OPEN_QUOTE
+DSNUTIL_PAREN_OPEN_QUOTE
 	: '"'
-	->pushMode(DSNUTIL_QUOTE_1_MODE)
+	->pushMode(DSNUTIL_QUOTE_MODE)
 	;
 
-DSNUTIL_WHEN_CHAR
+DSNUTIL_PAREN_CHAR
 	: .+?
 	//->type(DSNUTIL_CHAR)
 	;
 
-mode DSNUTIL_DOUBLE_APOS_2_MODE;
+mode DSNUTIL_DOUBLE_APOS_MODE;
+/*
+Why are we here?
 
-DSNUTIL_DOUBLE_APOS2
+Whilst processing, a double apostrophe token has been encountered.
+Until another double apostrophe token is encountered, all characters
+are considered to be one token.
+
+This is tricky because we want to exit differently depending on how
+we arrived.  Hence, the switch statement.  I did consider having
+three different copies of this mode, the only difference being how
+they exited.  That seemed less clear than this.
+*/
+
+DSNUTIL_DOUBLE_APOS1
 	: '\'\''
-	->popMode,popMode
+	{
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to DSNUTIL_MODE
+				break;
+		}
+	}
 	;
 
 DSNUTIL_DOUBLE_APOS_CHAR
@@ -4576,38 +4746,81 @@ DSNUTIL_DOUBLE_APOS_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
-mode DSNUTIL_APOS_1_MODE;
+mode DSNUTIL_APOS_MODE;
+/*
+Why are we here?
 
-DSNUTIL_APOS1
+Whilst processing, an apostrophe token has been encountered.
+Until another apostrophe token is encountered, all characters
+are considered to be one token.
+
+This is tricky because we want to exit differently depending on how
+we arrived.  Hence, the switch statement.  I did consider having
+three different copies of this mode, the only difference being how
+they exited.  That seemed less clear than this.
+*/
+
+DSNUTIL_APOS
 	: '\''
-	->popMode
+	{
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to DSNUTIL_MODE
+				break;
+		}
+	}
 	;
 
-DSNUTIL_APOS_1_CHAR
+DSNUTIL_APOS_CHAR
 	: .+?
 	//->type(DSNUTIL_CHAR)
 	;
 
-mode DSNUTIL_APOS_2_MODE;
+mode DSNUTIL_QUOTE_MODE;
 
-DSNUTIL_APOS2
-	: '\''
-	->popMode,popMode
-	;
+/*
+Why are we here?
 
-DSNUTIL_APOS_2_CHAR
-	: .+?
-	//->type(DSNUTIL_CHAR)
-	;
+Whilst processing, a quote token has been encountered.
+Until another quote token is encountered, all characters
+are considered to be one token.
 
-mode DSNUTIL_QUOTE_1_MODE;
+This is tricky because we want to exit differently depending on how
+we arrived.  Hence, the switch statement.  I did consider having
+three different copies of this mode, the only difference being how
+they exited.  That seemed less clear than this.
+*/
 
 DSNUTIL_QUOTE1
 	: '"'
-	->popMode
+	{
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to DSNUTIL_MODE
+				break;
+		}
+	}
 	;
 
-DSNUTIL_QUOTE_1_CHAR
+DSNUTIL_QUOTE_CHAR
 	: .+?
 	//->type(DSNUTIL_CHAR)
 	;
