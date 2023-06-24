@@ -19,6 +19,7 @@ lexer grammar DB2zSQLLexer;
 	public int dsnutilArgc = 0;
 	public int dsnutilWhenParen = 0;
 	public Boolean dsnutil_dsn_ws_char = false;
+	public Boolean dsnutil_wsd_ws_char = false;
 }
 
 channels { COMMENTS }
@@ -4585,9 +4586,14 @@ DSNUTIL_LEVEL
 
 DSNUTIL_INCLUDE_XML_TABLESPACES
 	: I N C L U D E (WS | NEWLINE)+ X M L (WS | NEWLINE)+ T A B L E S P A C E S
-	->pushMode(DSNUTIL_PAREN_MODE)
+	->pushMode(DSNUTIL_POSSIBLE_PAREN_MODE)
 	;
-	
+
+DSNUTIL_TABLESPACE
+	: T A B L E S P A C E
+	->pushMode(DSNUTIL_WS_DELIMITED_MODE)
+	;
+
 mode DSNUTIL_DSN_MODE;
 /*
 Why are we here?
@@ -4664,6 +4670,92 @@ DSNUTIL_DSN_WS_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
+mode DSNUTIL_WS_DELIMITED_MODE;
+/*
+Why are we here?
+
+We have encountered a token such as TABLESPACE in the CHECK DATA
+control statement which is followed by whitespace which is followed
+by a string constant which is followed by whitespace.
+
+It is necessary to return to the "parent" mode when the whitespace
+following the string constant is encountered.  We must not mistake
+the leading whitespace for the terminating whitespace, hence the
+boolean check in the predicate.
+
+From the syntax diagram for CHECK DATA, it appears it is 
+syntactically correct for the termination to also be the end of the
+parameter string to SYSPROC.DSNUTILx.  So if an apostrophe is found
+we popMode twice.
+*/
+
+DSNUTIL_WSD_WS_LEADING
+	: (WS | NEWLINE)+
+	{!dsnutil_wsd_ws_char}?
+	;
+
+DSNUTIL_WSD_WS_TERMINATING
+	: (WS | NEWLINE)+
+	{dsnutil_wsd_ws_char}?
+	{
+		dsnutil_wsd_ws_char = false;
+	}
+	->popMode
+	;
+
+DSNUTIL_WSD_APOS
+	: '\''
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
+		dsnutil_wsd_ws_char = false;
+	}
+	->type(DSNUTIL_CLOSE_APOS),popMode,popMode
+	;
+
+DSNUTIL_WSD_CHAR
+	: .+?
+	{
+		dsnutil_wsd_ws_char = true;
+	}
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_POSSIBLE_PAREN_MODE;
+/*
+Why are we here?
+
+A token has been seen which may be followed by a paren.  If the paren
+is seen, we increment dsnutilWhenParen to make the exit logic work
+and pushMode(DSNUTIL_PAREN_MODE) to process the rest of the parameter.
+*/
+
+DSNUTIL_P_LPAREN
+	: '('
+	{
+		dsnutilWhenParen++;
+	}
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_P_APOS
+	: '\''
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
+		dsnutil_wsd_ws_char = false;
+	}
+	->type(DSNUTIL_CLOSE_APOS),popMode,popMode
+	;
+
+DSNUTIL_P_CHAR
+	: .+?
+	->popMode
+	//->type(DSNUTIL_CHAR)
+	;
+
 mode DSNUTIL_PAREN_MODE;
 /*
 Why are we here?
@@ -4687,7 +4779,12 @@ DSNUTIL_RPAREN
 	{
 		dsnutilWhenParen--;
 		if (dsnutilWhenParen == 0) {
-			popMode();
+			if (_modeStack.peek() == DSNUTIL_POSSIBLE_PAREN_MODE) {
+				popMode();
+				popMode();
+			} else {
+				popMode();
+			}
 		}
 	}
 	;
@@ -4774,7 +4871,7 @@ DSNUTIL_APOS
 				popMode(); //back to DSNUTIL_MODE
 				break;
 			default :
-				popMode(); //back to DSNUTIL_MODE
+				popMode(); //back to "parent" mode
 				break;
 		}
 	}
