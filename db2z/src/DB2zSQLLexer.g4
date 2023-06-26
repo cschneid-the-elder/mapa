@@ -19,7 +19,7 @@ lexer grammar DB2zSQLLexer;
 	public int dsnutilArgc = 0;
 	public int dsnutilWhenParen = 0;
 	public Boolean dsnutil_dsn_ws_char = false;
-	public Boolean dsnutil_wsd_ws_char = false;
+	public Boolean dsnutil_db_ts_char = false;
 }
 
 channels { COMMENTS }
@@ -4560,6 +4560,11 @@ DSNUTIL_WHEN
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
+DSNUTIL_TOKEN
+	: T O K E N
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
 /*
 This is here to prevent matches with the subsequent token.
 */
@@ -4591,7 +4596,27 @@ DSNUTIL_INCLUDE_XML_TABLESPACES
 
 DSNUTIL_TABLESPACE
 	: T A B L E S P A C E
-	->pushMode(DSNUTIL_WS_DELIMITED_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INDEXSPACE
+	: I N D E X S P A C E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INDEX
+	: I N D E X
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_TABLE
+	: T A B L E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_EXEC_SQL
+	: E X E C (WS | NEWLINE)+ S Q L
+	->pushMode(DSNUTIL_EXEC_SQL_MODE)
 	;
 
 mode DSNUTIL_DSN_MODE;
@@ -4670,13 +4695,21 @@ DSNUTIL_DSN_WS_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
-mode DSNUTIL_WS_DELIMITED_MODE;
+mode DSNUTIL_DB_TS_MODE;
 /*
 Why are we here?
 
 We have encountered a token such as TABLESPACE in the CHECK DATA
 control statement which is followed by whitespace which is followed
-by a string constant which is followed by whitespace.
+by a string constant representing a tablespace name qualified with
+a database name (or a similar construct) which is followed by 
+whitespace.  This takes the form...
+
+	[database-name.]tablespace-name
+
+...where the database name and the dot are optional.  It is 
+possible that the database name and/or the tablespace name are
+enclosed by quotes or apostrophes.
 
 It is necessary to return to the "parent" mode when the whitespace
 following the string constant is encountered.  We must not mistake
@@ -4685,39 +4718,73 @@ boolean check in the predicate.
 
 From the syntax diagram for CHECK DATA, it appears it is 
 syntactically correct for the termination to also be the end of the
-parameter string to SYSPROC.DSNUTILx.  So if an apostrophe is found
-we popMode twice.
+parameter string to SYSPROC.DSNUTILx.  So if an apostrophe or a quote
+is found which is not enclosing either portion of the string constant
+then we popMode twice.
 */
 
-DSNUTIL_WSD_WS_LEADING
+DSNUTIL_DB_TS_WS_LEADING
 	: (WS | NEWLINE)+
-	{!dsnutil_wsd_ws_char}?
+	{!dsnutil_db_ts_char}? 
 	;
 
-DSNUTIL_WSD_WS_TERMINATING
+DSNUTIL_DB_TS_WS_TERMINATING
 	: (WS | NEWLINE)+
-	{dsnutil_wsd_ws_char}?
+	{dsnutil_db_ts_char}?
 	{
-		dsnutil_wsd_ws_char = false;
+		dsnutil_db_ts_char = false;
 	}
 	->popMode
 	;
 
-DSNUTIL_WSD_APOS
+DSNUTIL_DB_TS_APOS
 	: '\''
 	{
-		dsnutil = false;
-		dsnutilArgc = 0;
-		dsnutil_dsn_ws_char = false;
-		dsnutil_wsd_ws_char = false;
+		if (dsnutil_db_ts_char) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			dsnutil_db_ts_char = false;
+			setType(DSNUTIL_CLOSE_APOS);
+			popMode();
+			popMode();
+		} else {
+			pushMode(DSNUTIL_APOS_MODE);
+			dsnutil_db_ts_char = true;
+		}
 	}
-	->type(DSNUTIL_CLOSE_APOS),popMode,popMode
 	;
 
-DSNUTIL_WSD_CHAR
+DSNUTIL_DB_TS_QUOTE
+	: '"'
+	{
+		if (dsnutil_db_ts_char) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			dsnutil_db_ts_char = false;
+			setType(DSNUTIL_CLOSE_QUOTE);
+			popMode();
+			popMode();
+		} else {
+			pushMode(DSNUTIL_QUOTE_MODE);
+			dsnutil_db_ts_char = true;
+		}
+	}
+	;
+
+DSNUTIL_DB_TS_DOT
+	: DOT
+	{
+		dsnutil_db_ts_char = false;
+	}
+	//->type(DSNUTIL_CHAR)
+	;
+
+DSNUTIL_DB_TS_CHAR
 	: .+?
 	{
-		dsnutil_wsd_ws_char = true;
+		dsnutil_db_ts_char = true;
 	}
 	//->type(DSNUTIL_CHAR)
 	;
@@ -4745,9 +4812,20 @@ DSNUTIL_P_APOS
 		dsnutil = false;
 		dsnutilArgc = 0;
 		dsnutil_dsn_ws_char = false;
-		dsnutil_wsd_ws_char = false;
+		dsnutil_db_ts_char = false;
 	}
 	->type(DSNUTIL_CLOSE_APOS),popMode,popMode
+	;
+
+DSNUTIL_P_QUOTE
+	: '"'
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
+		dsnutil_db_ts_char = false;
+	}
+	->type(DSNUTIL_CLOSE_QUOTE),popMode,popMode
 	;
 
 DSNUTIL_P_CHAR
@@ -4918,6 +4996,18 @@ DSNUTIL_QUOTE1
 	;
 
 DSNUTIL_QUOTE_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_EXEC_SQL_MODE;
+
+DSNUTIL_ENDEXEC
+	: E N D E X E C
+	->popMode
+	;
+
+DSNUTIL_EXEC_SQL_CHAR
 	: .+?
 	//->type(DSNUTIL_CHAR)
 	;
