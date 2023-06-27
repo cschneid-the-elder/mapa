@@ -4546,6 +4546,12 @@ DSNUTIL_CLOSE_QUOTE
 	->popMode
 	;
 
+DSNUTIL_LPAREN
+	: LPAREN
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+
 DSNUTIL_CHAR
 	: .+?
 	;
@@ -4555,43 +4561,11 @@ DSNUTIL_DSN
 	->pushMode(DSNUTIL_DSN_MODE)
 	;
 
-DSNUTIL_WHEN
-	: W H E N
-	->pushMode(DSNUTIL_PAREN_MODE)
-	;
-
-DSNUTIL_TOKEN
-	: T O K E N
-	->pushMode(DSNUTIL_PAREN_MODE)
-	;
-
 /*
 This is here to prevent matches with the subsequent token.
 */
-DSNUTIL_FASTSWITCH
-	: F A S T S W I T C H
-	;
-
-DSNUTIL_SWITCH
-	: S W I T C H
-	->pushMode(DSNUTIL_PAREN_MODE)
-	;
-
-/*
-This is here to prevent matches with the subsequent token.
-*/
-DSNUTIL_SHRLEVEL
-	: S H R L E V E L
-	;
-
-DSNUTIL_LEVEL
-	: L E V E L
-	->pushMode(DSNUTIL_PAREN_MODE)
-	;
-
-DSNUTIL_INCLUDE_XML_TABLESPACES
-	: I N C L U D E (WS | NEWLINE)+ X M L (WS | NEWLINE)+ T A B L E S P A C E S
-	->pushMode(DSNUTIL_POSSIBLE_PAREN_MODE)
+DSNUTIL_TABLESPACES
+	: T A B L E S P A C E S
 	;
 
 DSNUTIL_TABLESPACE
@@ -4629,6 +4603,11 @@ double apostrophes, or quotes.  Some combinations of these are
 allowed.
 
 */
+
+DSNUTIL_DSN_LPAREN
+	: LPAREN
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
 
 DSNUTIL_DSN_DOUBLE_APOS
 	: '\'\''
@@ -4681,6 +4660,11 @@ DSNUTIL_DSN_WS_OPEN_APOS
 			pushMode(DSNUTIL_APOS_MODE);
 		}
 	}
+	;
+
+DSNUTIL_DSN_WS_LPAREN
+	: LPAREN
+	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
 DSNUTIL_DSN_WS_WS
@@ -4789,51 +4773,6 @@ DSNUTIL_DB_TS_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
-mode DSNUTIL_POSSIBLE_PAREN_MODE;
-/*
-Why are we here?
-
-A token has been seen which may be followed by a paren.  If the paren
-is seen, we increment dsnutilWhenParen to make the exit logic work
-and pushMode(DSNUTIL_PAREN_MODE) to process the rest of the parameter.
-*/
-
-DSNUTIL_P_LPAREN
-	: '('
-	{
-		dsnutilWhenParen++;
-	}
-	->pushMode(DSNUTIL_PAREN_MODE)
-	;
-
-DSNUTIL_P_APOS
-	: '\''
-	{
-		dsnutil = false;
-		dsnutilArgc = 0;
-		dsnutil_dsn_ws_char = false;
-		dsnutil_db_ts_char = false;
-	}
-	->type(DSNUTIL_CLOSE_APOS),popMode,popMode
-	;
-
-DSNUTIL_P_QUOTE
-	: '"'
-	{
-		dsnutil = false;
-		dsnutilArgc = 0;
-		dsnutil_dsn_ws_char = false;
-		dsnutil_db_ts_char = false;
-	}
-	->type(DSNUTIL_CLOSE_QUOTE),popMode,popMode
-	;
-
-DSNUTIL_P_CHAR
-	: .+?
-	->popMode
-	//->type(DSNUTIL_CHAR)
-	;
-
 mode DSNUTIL_PAREN_MODE;
 /*
 Why are we here?
@@ -4845,24 +4784,27 @@ what IBM calls a selection-condition-spec which may contain one or
 more predicates.  There are other possibilities.
 
 */
-DSNUTIL_LPAREN
+DSNUTIL_LPAREN1
 	: '('
-	{
-		dsnutilWhenParen++;
-	}
+	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
 DSNUTIL_RPAREN
 	: ')'
 	{
-		dsnutilWhenParen--;
-		if (dsnutilWhenParen == 0) {
-			if (_modeStack.peek() == DSNUTIL_POSSIBLE_PAREN_MODE) {
-				popMode();
-				popMode();
-			} else {
-				popMode();
-			}
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to "parent" mode (which may be this mode)
+				break;
 		}
 	}
 	;
@@ -4870,6 +4812,11 @@ DSNUTIL_RPAREN
 DSNUTIL_PAREN_OPEN_APOS
 	: '\''
 	->pushMode(DSNUTIL_APOS_MODE)
+	;
+
+DSNUTIL_PAREN_DOUBLE_APOS
+	: '\'\''
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
 	;
 
 DSNUTIL_PAREN_OPEN_QUOTE
@@ -4910,7 +4857,7 @@ DSNUTIL_DOUBLE_APOS1
 				popMode(); //back to DSNUTIL_MODE
 				break;
 			default :
-				popMode(); //back to DSNUTIL_MODE
+				popMode(); //back to "parent" mode
 				break;
 		}
 	}
