@@ -1,0 +1,234 @@
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA
+     RESUME YES
+     INTO TABLE KAER.MORHEN
+     (GERALT    POSITION (1:3)     CHAR(3),
+      YENNEFER POSITION (4:39)    CHAR(36),
+      CIRI     POSITION (40:45)   CHAR(6),
+      FRINGILA POSITION (46:48)   CHAR(3),
+      VESEMIR POSITION (49:64)   CHAR(16))
+  '
+  , '');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA
+     RESUME YES
+     INTO TABLE "KAER".MORHEN
+     (GERALT    POSITION (1:3)     CHAR(3),
+      YENNEFER POSITION (4:39)    CHAR(36),
+      CIRI     POSITION (40:45)   CHAR(6),
+      FRINGILA POSITION (46:48)   CHAR(3),
+      VESEMIR POSITION (49:64)   CHAR(16))
+  '
+  , '');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA
+     RESUME YES
+     INTO TABLE KAER."MORHEN"
+     (GERALT    POSITION (1:3)     CHAR(3),
+      YENNEFER POSITION (4:39)    CHAR(36),
+      CIRI     POSITION (40:45)   CHAR(6),
+      FRINGILA POSITION (46:48)   CHAR(3),
+      VESEMIR POSITION (49:64)   CHAR(16))
+  '
+  , '');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA
+     RESUME YES
+     INTO TABLE "KAER"."MORHEN"
+     (GERALT    POSITION (1:3)     CHAR(3),
+      YENNEFER POSITION (4:39)    CHAR(36),
+      CIRI     POSITION (40:45)   CHAR(6),
+      FRINGILA POSITION (46:48)   CHAR(3),
+      VESEMIR POSITION (49:64)   CHAR(16))
+  '
+  , '');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , "LOAD DATA
+     RESUME YES
+     INTO TABLE "KAER"."MORHEN"
+     (GERALT    POSITION (1:3)     CHAR(3),
+      YENNEFER POSITION (4:39)    CHAR(36),
+      CIRI     POSITION (40:45)   CHAR(6),
+      FRINGILA POSITION (46:48)   CHAR(3),
+      VESEMIR POSITION (49:64)   CHAR(16))
+  "
+  , '');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD INTO TABLE KAER.MORHEN PART 1 REPLACE'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD INTO TABLE 'KAER'.MORHEN PART 1 REPLACE'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD INTO TABLE KAER.'MORHEN' PART 1 REPLACE'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD INTO TABLE 'KAER'.'MORHEN' PART 1 REPLACE'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA INDDN EMPLDS
+ RESUME YES
+ INTO TABLE RIVIA
+ NUMRECS   100000
+ WHEN (1:3)='LKA'
+ INTO TABLE CINTRA
+ NUMRECS   100
+ WHEN (1:3)='ABC'
+ INTO TABLE KAER.MORHEN 
+ NUMRECS   500
+ WHEN (1:3)='LKA'
+  (GERALT   POSITION (7:9) CHAR,
+   YENNEFER POSITION (10:35) CHAR,
+   FRINGILA POSITION (36:41) CHAR,
+   VESEMIR  POSITION (42:44) CHAR)
+ ','');
+ 
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , '
+  TEMPLATE SYSRECPJ DSN(''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'') DISP (OLD)
+  LOAD DATA INDDN(SYSRECPJ)
+  INTO TABLE SOUTH.NILFGAARD
+  (FRINGILA   POSITION  (1) CHAR(6),
+   ISTREDD    POSITION  (8) CHAR(22),
+   STREGOBOR  POSITION (31) CHAR(3),
+   TISSAIA    POSITION (35) CHAR(6),
+   GERALT     POSITION (42) DECIMAL EXTERNAL(5),
+   CIRI       POSITION (48) DATE EXTERNAL(10),
+   CALANTHE   POSITION (59) DATE EXTERNAL(10),
+   TRISS      POSITION (70) CHAR(6))'
+  ,'');
+  
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA                                                   
+        FORMAT DELIMITED COLDEL ',' CHARDEL '"' DECPT '.'      
+        INTO TABLE NORTH.CINTRA                                    
+            (JASKIER   CHAR,                                    
+             YENNEFER  DATE EXTERNAL,                           
+             CIRI      TIME EXTERNAL,                           
+             CAHIR     TIMESTAMP EXTERNAL)','');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , '
+LOAD DATA INDDN(DD1) CONTINUEIF(72:72)='X'
+  INTO TABLE 'KAER'.'MORHEN'
+  (GERALT    POSITION   (2) CHAR(1),
+   YENNEFER  POSITION   (4) CHAR(1),
+   CIRI      POSITION   (6) CHAR(2),
+   TISSAIA   POSITION   (9) CHAR(2),
+   FRINGILA  POSITION  (12) CHAR(1),
+   CAHIR     POSITION  (80) CHAR(50),
+   CALANTHE  POSITION (159) CHAR(50),
+   MOUSESACK POSITION (238) CHAR(71),
+   DARA      POSITION (317) CHAR(71),
+   JASKIER   POSITION (396) CHAR(71),
+   VESEMIR   POSITION (475) CHAR(2))','');
+   
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , '
+   LOAD DATA INDDN(INPUT01) CONTINUEIF(80:80)='X' RESUME(YES)      
+     INTO TABLE ZZ9.PLURALZALPHA                                
+           (C1   POSITION(  1) INTEGER EXTERNAL(5),          
+            C2   POSITION(  7) INTEGER EXTERNAL(5),          
+            C3   POSITION( 13) CHAR(2),                      
+            C4   POSITION( 16) CHAR(1) NULLIF(C4=' '),
+            C5   POSITION( 18) CHAR(1) NULLIF(C5=' '),  
+            C6   POSITION( 20) CHAR(8),                      
+            C7   POSITION( 29) CHAR(1),                      
+            C8   POSITION( 31) CHAR(256) DEFAULTIF(C3='GG'))
+','');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , '
+   LOAD DATA INDDN(INPUT01) CONTINUEIF(80:80)='X' RESUME(YES)      
+     INTO TABLE ZZ9.PLURALZALPHA                                
+           ("C1"   POSITION(  1) INTEGER EXTERNAL(5),          
+            "C2"   POSITION(  7) INTEGER EXTERNAL(5),          
+            "C3"   POSITION( 13) CHAR(2),                      
+            "C4"   POSITION( 16) CHAR(1) NULLIF("C4"=' '),
+            "C5"   POSITION( 18) CHAR(1) NULLIF("C5"=' '),  
+            "C6"   POSITION( 20) CHAR(8),                      
+            "C7"   POSITION( 29) CHAR(1),                      
+            "C8"   POSITION( 31) CHAR(256) DEFAULTIF("C3"='GG'))
+','');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , '
+LOAD DATA INDDN RIVIA REPLACE
+   CONTINUEIF(79:80)='--'
+   COPYDDN(COPYRIV)
+   STATISTICS
+     TABLE (STATRIV) SAMPLE 42
+       COLUMN (GERALT,
+               JASKIER,
+               JENNEFER,
+               CIRI)
+     INDEX (IRIVIA
+       FREQVAL NUMCOLS 4 COUNT 20)                      
+     REPORT YES UPDATE ALL HISTORY ALL
+   ERRDDN(ERRDDN)
+   WORKDDN(UT1,OUT)
+   MAPDDN(MAP)
+   DISCARDDN(DISCARD)
+  INTO TABLE
+       NORTH.CINTRA                                 
+  ( CALANTHE     POSITION(1)    CHAR(1),                      
+    FRINGILA     POSITION(2)    CHAR(5),                      
+    TESSA        POSITION(7)    CHAR(9),                      
+    JENNEFER     POSITION(16)   CHAR(7),                      
+    CAHIR        POSITION(23)   CHAR(8),                        
+    TISSAIA      POSITION(31)   CHAR(3),                        
+    CIRI         POSITION(34)   DATE EXTERNAL(10),                        
+    VESEMIR      POSITION(44)   CHAR(3),                        
+    MOUSESACK    POSITION(47)   TIMESTAMP EXTERNAL(26),                        
+    GERALT       POSITION(73)   INTEGER,                        
+    ISTREDD      POSITION(77)   CHAR(2),                        
+    DARA         POSITION(79)   CHAR(7),                        
+    JASKIER      POSITION(86)   CHAR(4),                        
+    RIENCE       POSITION(90)   CHAR(6))','');
+
+

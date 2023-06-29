@@ -4551,6 +4551,30 @@ DSNUTIL_LPAREN
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
+DSNUTIL_EQUAL
+	: '='
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_EXPDL
+	: E X P D L
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_COLDEL
+	: C O L D E L
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_CHARDEL
+	: C H A R D E L
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_DECPT
+	: D E C P T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
 
 DSNUTIL_CHAR
 	: .+?
@@ -4705,6 +4729,9 @@ syntactically correct for the termination to also be the end of the
 parameter string to SYSPROC.DSNUTILx.  So if an apostrophe or a quote
 is found which is not enclosing either portion of the string constant
 then we popMode twice.
+
+Conveniently, this mode also handles arbitrary strings and so we may
+have arrived because we're on the right hand side of an equal sign.
 */
 
 DSNUTIL_DB_TS_WS_LEADING
@@ -4763,6 +4790,11 @@ DSNUTIL_DB_TS_DOT
 		dsnutil_db_ts_char = false;
 	}
 	//->type(DSNUTIL_CHAR)
+	;
+
+DSNUTIL_DB_TS_LPAREN
+	: '('
+	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
 DSNUTIL_DB_TS_CHAR
