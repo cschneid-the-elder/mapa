@@ -1,0 +1,82 @@
+#! /usr/bin/awk -f
+
+#
+
+{
+rc = 0;
+
+input = $0;
+type = tolower(ruleType);
+dbFile = "./src/treeCount-"type".db";
+#print "dbFile = " dbFile
+#print "ruleName = " ruleName
+while(getline <dbFile > 0) {
+	#print "$1 = " $1
+	#print "$2 = " $2
+	if ($1 == "#") {}
+	if ($1 == "=") {
+				nbStrings = 0;
+				for(i = 2; i <= NF; i++) {
+					nbStrings++;
+					mStrings[nbStrings] = $i;
+					#print "mStrings[" nbStrings "] = " mStrings[nbStrings]
+				}
+			}
+	if ($1 == "+" && $2 == ruleName) {
+				j = 0;
+				for(i = 3; i <= NF; i++) {
+					j++;
+					mCount[j] = $i;
+					#print "mCount[" j "] = " mCount[j]
+				}
+			}
+}
+
+if (nbStrings == 0) {
+	print dbFile " not found"
+	rc = 24
+	EXIT rc
+}
+
+for (i = 1; i <= nbStrings; i++) {
+	thisCount = countThese(mStrings[i]);
+	if (thisCount != mCount[i]) {
+		print "!Error - " ruleName " found " thisCount " should have found " mCount[i] " " mStrings[i];
+		rc = 16;
+	}
+}
+
+if (rc == 0) print ruleName " OK";
+
+exit rc
+}
+
+function countThese(mString) {
+	count = 0
+	aString = input;
+	mString1 = "(" mString " ";
+	len = length(mString1);
+	posn = index(aString, mString1);
+	#print "mString1 = " mString1
+	#print "aString = " aString
+	#print "posn = " posn
+	while(posn != 0) {
+		count++;
+		aString = substr(aString, posn + len);
+		posn = index(aString, mString1);
+	}
+#	GNU Awk 4.1.3 gave an error "fatal: :, [., or [=:" for
+#	both the split() and match() attempts below.  Escaping
+#	the "(" merely resulted in "warning: escape sequence `\(' treated as plain `('"
+#	prior to the same fatal error.
+#	count = split(aString, dummy, mString1);
+#	count--;
+#	match(aString, mString1);
+#	while(RSTART != 0) {
+#		count++;
+#		aString = substr(aString, RSTART + RLENGTH);
+#		match(aString, mString);
+#	}
+	return count ;
+}
+

@@ -145,7 +145,7 @@ COMMA
 	{
 		if (dsnutil) {
 			dsnutilArgc++;
-			System.out.println("dsnutilArgc = " + dsnutilArgc);
+			//System.out.println("dsnutilArgc = " + dsnutilArgc);
 		}
 	}
 	;
@@ -153,14 +153,18 @@ COMMA
 DSNUTIL_OPEN_APOS
 	: '\''
 	{dsnutil && dsnutilArgc == 2}?
-	{System.out.println("dsnutil && dsnutilArgc == 2 & \'");}
+	{
+		//System.out.println("dsnutil && dsnutilArgc == 2 & \'");
+	}
 	->pushMode(DSNUTIL_MODE)
 	;
 
 DSNUTIL_OPEN_QUOTE
 	: '"'
 	{dsnutil && dsnutilArgc == 2}?
-	{System.out.println("dsnutil && dsnutilArgc == 2 & \"");}
+	{
+		//System.out.println("dsnutil && dsnutilArgc == 2 & \"");
+	}
 	->pushMode(DSNUTIL_MODE)
 	;
 
@@ -4464,7 +4468,7 @@ SQLIDENTIFIER
 		||  getText().equalsIgnoreCase("DSNUTILU")
 		||  getText().equalsIgnoreCase("DSNUTILS")) {
 			dsnutil = true;
-			System.out.println("dsnutil matched");
+			//System.out.println("dsnutil matched");
 		}
 	}
 	;
@@ -4832,6 +4836,10 @@ DSNUTIL_RPAREN
 				break;
 			case DSNUTIL_DSN_MODE :
 				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DB_TS_MODE :
+				popMode(); //back to DSNUTIL_DB_TS_MODE
 				popMode(); //back to DSNUTIL_MODE
 				break;
 			default :

@@ -1,0 +1,11 @@
+# data file for treeCount awk script
+# fields are tab delimited
+=	callStatement	callArgument
++	sql_call_dsnutil	7	28
++	sql_call_dsnutil_catmaint	56	224
++	sql_call_dsnutil_check_data	26	104
++	sql_call_dsnutil_check_index	12	48
++	sql_call_dsnutil_check_lob	18	72
++	sql_call_dsnutil_load	16	64
++	sql_call_dsnutil_template	4	16
++	sql_NOUPLOAD_call_dsnutilv	1	4

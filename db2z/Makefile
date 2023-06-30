@@ -37,6 +37,10 @@ else
 	./src/tester $(n)
 endif
 
+testdsnutil:
+	echo `date` $@ $(n) >> build.log
+	./src/tester dsnutil
+
 jar:
 	echo `date` $@ >> build.log
 	jar cf DB2zSQL.jar -C class .
