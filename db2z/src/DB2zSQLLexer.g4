@@ -4584,8 +4584,20 @@ DSNUTIL_CHAR
 	: .+?
 	;
 
+/*
+This is here to prevent matches with the subsequent token.
+*/
+DSNUTIL_DSNTYPE
+	: D S N T Y P E
+	;
+
 DSNUTIL_DSN
 	: D S N
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_MODELDCB
+	: M O D E L D C B
 	->pushMode(DSNUTIL_DSN_MODE)
 	;
 
@@ -4697,7 +4709,10 @@ DSNUTIL_DSN_WS_LPAREN
 
 DSNUTIL_DSN_WS_WS
 	: (WS | NEWLINE)+
-	->popMode;
+	{
+			dsnutil_dsn_ws_char = false;
+	}
+	->popMode,popMode;
 
 DSNUTIL_DSN_WS_CHAR
 	: .+?
