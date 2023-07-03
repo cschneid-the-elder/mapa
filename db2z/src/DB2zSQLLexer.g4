@@ -4601,6 +4601,11 @@ DSNUTIL_MODELDCB
 	->pushMode(DSNUTIL_DSN_MODE)
 	;
 
+DSNUTIL_FROMCOPY
+	: F R O M C O P Y
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
 /*
 This is here to prevent matches with the subsequent token.
 */
@@ -4628,9 +4633,24 @@ DSNUTIL_TABLE
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
+DSNUTIL_DATABASE
+	: D A T A B A S E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_OBD
+	: O B D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
 DSNUTIL_EXEC_SQL
 	: E X E C (WS | NEWLINE)+ S Q L
 	->pushMode(DSNUTIL_EXEC_SQL_MODE)
+	;
+
+DSNUTIL_TRACEID
+	: T R A C E I D
+	->pushMode(DSNUTIL_TRACEID_MODE)
 	;
 
 mode DSNUTIL_DSN_MODE;
@@ -4935,6 +4955,10 @@ This is tricky because we want to exit differently depending on how
 we arrived.  Hence, the switch statement.  I did consider having
 three different copies of this mode, the only difference being how
 they exited.  That seemed less clear than this.
+
+It's also tricky because there may be an apostrophe or a quote
+following the DSNUTIL_APOS token, indicating the end of the
+argument.  That's why it's important to get back to DSNUTIL_MODE.
 */
 
 DSNUTIL_APOS
@@ -4948,6 +4972,12 @@ DSNUTIL_APOS
 				break;
 			case DSNUTIL_DSN_MODE :
 				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_TRACEID_X_MODE :
+				popMode(); //back to DSNUTIL_TRACEID_X_MODE
+				popMode(); //back to DSNUTIL_TRACEID_WS_MODE
+				popMode(); //back to DSNUTIL_TRACEID_MODE
 				popMode(); //back to DSNUTIL_MODE
 				break;
 			default :
@@ -5010,6 +5040,80 @@ DSNUTIL_ENDEXEC
 	;
 
 DSNUTIL_EXEC_SQL_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_TRACEID_MODE;
+/*
+Why are we here?
+
+A DSNUTIL_TRACEID token has been found, the syntax is...
+
+	TRACEID X'aaaaaaaa'
+
+...or...
+
+	TRACEID nnnnnnnn
+
+...where aaaaaaaa is a hex literal and nnnnnnnn is an integer.
+
+It is syntactically possible for this syntax to be followed by
+either a quote or an apostrophe indicating the end of the argument.
+*/
+
+DSNUTIL_TRACEID_WS
+	: (WS | NEWLINE)+
+	->pushMode(DSNUTIL_TRACEID_WS_MODE)
+	;
+
+mode DSNUTIL_TRACEID_WS_MODE;
+
+DSNUTIL_TRACEID_X
+	: X
+	->pushMode(DSNUTIL_TRACEID_X_MODE)
+	;
+
+/*
+If this rule is matched then we've hit the end of the
+argument and need to get back to DEFAULT_MODE.
+*/
+DSNUTIL_TRACEID_WS_APOS
+	: '\''
+	->type(DSNUTIL_CLOSE_APOS),popMode,popMode,popMode
+	;
+
+/*
+If this rule is matched then we've hit the end of the
+integer following the whitespace following TRACEID and
+we need to get back to DSNUTIL_MODE.
+*/
+DSNUTIL_TRACEID_WS_WS
+	: (WS | NEWLINE)+
+	->popMode,popMode
+	;
+
+DSNUTIL_TRACEID_WS_CHAR
+	: .+?
+	//->type(DSNUTIL_CHAR)
+	;
+
+mode DSNUTIL_TRACEID_X_MODE;
+
+DSNUTIL_TRACEID_X_APOS
+	: '\''
+	->pushMode(DSNUTIL_APOS_MODE)
+	;
+
+/*
+This rule should never be hit.  Syntax is...
+
+	TRACEID X'ABC01234'
+
+...and if we're in this mode the X has been seen.
+
+*/
+DSNUTIL_TRACEID_X_CHAR
 	: .+?
 	//->type(DSNUTIL_CHAR)
 	;
