@@ -4585,10 +4585,17 @@ DSNUTIL_CHAR
 	;
 
 /*
-This is here to prevent matches with the subsequent token.
+This is here to prevent matches with the DSN token.
 */
 DSNUTIL_DSNTYPE
 	: D S N T Y P E
+	;
+
+/*
+This is here to prevent matches with the DSN token.
+*/
+DSNUTIL_DSNUM
+	: D S N U M
 	;
 
 DSNUTIL_DSN
