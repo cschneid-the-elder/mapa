@@ -17,5 +17,7 @@
 +	sql_call_dsnutil_modify_statistics	119	476
 +	sql_call_dsnutil_options	12	48
 +	sql_call_dsnutil_quiesce	73	292
++	sql_call_dsnutil_rebuild_index	4	16
++	sql_call_dsnutil_recover	4	16
 +	sql_call_dsnutil_template	5	20
 +	sql_NOUPLOAD_call_dsnutilv	1	4
