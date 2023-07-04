@@ -4614,7 +4614,14 @@ DSNUTIL_FROMCOPY
 	;
 
 /*
-This is here to prevent matches with the subsequent token.
+This is here to prevent matches with the DSNUTIL_TABLESPACE token.
+*/
+DSNUTIL_TABLESPACESET
+	: T A B L E S P A C E S E T
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_TABLESPACE token.
 */
 DSNUTIL_TABLESPACES
 	: T A B L E S P A C E S

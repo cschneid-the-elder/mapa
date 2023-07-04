@@ -1,0 +1,104 @@
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS PREVIEW'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS LISTDEFDD DD1'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS TEMPLATEDD DD2'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS FILSZ 32767'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS EVENT (ITEMERROR, HALT)'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS EVENT(ITEMERROR,SKIP )'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS EVENT ( , WARNING , RC4 )'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS EVENT (WARNING,RC0)'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS EVENT (ITEMERROR,HALT,WARNING,RC8)'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+OPTIONS
+  PREVIEW
+  LISTDEFDD DD1 
+  TEMPLATEDD DD2
+  FILSZ 32767
+  EVENT(ITEMERROR,SKIP,WARNING,RC4)
+    '
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS OFF'
+  , ''
+  );
+
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'OPTIONS KEY ZZ9PLURALZALPHA'
+  , ''
+  );
+
+
+
