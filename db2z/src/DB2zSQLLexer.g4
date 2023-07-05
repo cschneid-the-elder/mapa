@@ -17,7 +17,6 @@ lexer grammar DB2zSQLLexer;
 	public int bracketNesting = 0;
 	public Boolean dsnutil = false;
 	public int dsnutilArgc = 0;
-	public int dsnutilWhenParen = 0;
 	public Boolean dsnutil_dsn_ws_char = false;
 	public Boolean dsnutil_db_ts_char = false;
 }
@@ -4661,6 +4660,25 @@ DSNUTIL_FROM
 	: FROM
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
+
+/*
+Documentation does not mention apostrophes around the
+possible timestamp literal following these tokens.  Examples
+do not show apostrophes, but it's possible they are allowed.
+
+I'm leaving these here, commented out, in case it turns out
+they're necessary.
+
+DSNUTIL_DEADLINE
+	: D E A D L I N E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_SWITCHTIME
+	: S W I T C H T I M E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+*/
 
 DSNUTIL_EXEC_SQL
 	: E X E C (WS | NEWLINE)+ S Q L
