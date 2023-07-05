@@ -4641,6 +4641,23 @@ DSNUTIL_INDEX
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
+DSNUTIL_MAPPINGTABLE
+	: M A P P I N G T A B L E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_MAPPINGDATABASE
+	: M A P P I N G D A T A B A S E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_TABLE token.
+*/
+DSNUTIL_TABLESAMPLE
+	: T A B L E S A M P L E
+	;
+
 DSNUTIL_TABLE
 	: T A B L E
 	->pushMode(DSNUTIL_DB_TS_MODE)
@@ -4656,6 +4673,11 @@ DSNUTIL_OBD
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
+DSNUTIL_FROM_TABLE
+	: FROM (WS | NEWLINE)+ TABLE
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
 DSNUTIL_FROM
 	: FROM
 	->pushMode(DSNUTIL_DB_TS_MODE)
@@ -4665,9 +4687,7 @@ DSNUTIL_FROM
 Documentation does not mention apostrophes around the
 possible timestamp literal following these tokens.  Examples
 do not show apostrophes, but it's possible they are allowed.
-
-I'm leaving these here, commented out, in case it turns out
-they're necessary.
+*/
 
 DSNUTIL_DEADLINE
 	: D E A D L I N E
@@ -4678,7 +4698,6 @@ DSNUTIL_SWITCHTIME
 	: S W I T C H T I M E
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
-*/
 
 DSNUTIL_EXEC_SQL
 	: E X E C (WS | NEWLINE)+ S Q L
