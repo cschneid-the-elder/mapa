@@ -1,3 +1,13 @@
+--2023-07-06--------------------------------------------------------------------
+Modified sqlTableFunctionDefinition to use sqlTableReturnStatement instead of
+sqlRoutineBody per Martijn Rutte.
+
+--2023-06-12--------------------------------------------------------------------
+Added SQL? before COLUMNS in xmltableFunctionSpecification.  It's not in the
+IBM documentation, but DB2 accepts it.
+
+Per Martijn Rutte.
+
 --2023-06-09--------------------------------------------------------------------
 Added optimizeClause to selectIntoStatement and changed the optionality of 
 (isolationClause | skipLockedDataClause | optimizeClause) from ? to * as per
