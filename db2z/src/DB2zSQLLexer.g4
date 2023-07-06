@@ -19,6 +19,7 @@ lexer grammar DB2zSQLLexer;
 	public int dsnutilArgc = 0;
 	public Boolean dsnutil_dsn_ws_char = false;
 	public Boolean dsnutil_db_ts_char = false;
+	public Boolean dsnutil_hexlit_char = false;
 }
 
 channels { COMMENTS }
@@ -4531,6 +4532,7 @@ DSNUTIL_CLOSE_APOS
 		dsnutil = false;
 		dsnutilArgc = 0;
 		dsnutil_dsn_ws_char = false;
+		dsnutil_hexlit_char = false;
 	}
 	->popMode
 	;
@@ -4545,6 +4547,7 @@ DSNUTIL_CLOSE_QUOTE
 		dsnutil = false;
 		dsnutilArgc = 0;
 		dsnutil_dsn_ws_char = false;
+		dsnutil_hexlit_char = false;
 	}
 	->popMode
 	;
@@ -4724,6 +4727,103 @@ DSNUTIL_RESTOREBEFORE
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
+DSNUTIL_PAGE
+	: P A G E
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_ROWID
+	: R O W I D
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_VERSION token.
+*/
+DSNUTIL_RBALRSN_CONVERSION
+	: R B A L R S N '_' C O N V E R S I O N
+	;
+
+DSNUTIL_VERSION
+	: V E R S I O N
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_DOCID
+	: D O C I D
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_KEY token.
+*/
+DSNUTIL_KEYCARD
+	: K E Y C A R D
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_KEY token.
+*/
+DSNUTIL_SORTKEYS
+	: S O R T K E Y S
+	;
+
+DSNUTIL_KEY
+	: K E Y
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+/*
+This rule is here to prevent matches with the DSNUTIL_DATA rule.
+*/
+DSNUTIL_DATACLAS
+	: D A T A C L A S
+	;
+
+/*
+This rule is here to prevent matches with the DSNUTIL_DATA rule.
+*/
+DSNUTIL_DATAONLY
+	: D A T A O N L Y
+	;
+
+/*
+This rule is here to prevent matches with the DSNUTIL_DATA rule.
+*/
+DSNUTIL_CHECK_DATA
+	: C H E C K (WS | NEWLINE)+ D A T A
+	;
+
+DSNUTIL_DATA
+	: D A T A
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_OFFSET
+	: O F F S E T
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_LENGTH
+	: L E N G T H
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_PAGES
+	: P A G E S
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_DBID
+	: D B I D
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_TEXT
+	: T E X T
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
 mode DSNUTIL_DSN_MODE;
 /*
 Why are we here?
@@ -4801,7 +4901,7 @@ DSNUTIL_DSN_WS_LPAREN
 DSNUTIL_DSN_WS_WS
 	: (WS | NEWLINE)+
 	{
-			dsnutil_dsn_ws_char = false;
+		dsnutil_dsn_ws_char = false;
 	}
 	->popMode,popMode;
 
@@ -5051,6 +5151,11 @@ DSNUTIL_APOS
 				popMode(); //back to DSNUTIL_HEXLIT_MODE
 				popMode(); //back to DSNUTIL_MODE
 				break;
+			case DSNUTIL_HEXLIT_WS_MODE :
+				popMode(); //back to DSNUTIL_HEXLIT_WS_MODE
+				popMode(); //back to DSNUTIL_HEXLIT_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
 			default :
 				popMode(); //back to "parent" mode
 				break;
@@ -5145,13 +5250,34 @@ DSNUTIL_HEXLIT_X
 	->pushMode(DSNUTIL_HEXLIT_X_MODE)
 	;
 
-/*
-If this rule is matched then we've hit the end of the
-argument and need to get back to DEFAULT_MODE.
-*/
 DSNUTIL_HEXLIT_WS_APOS
 	: '\''
-	->type(DSNUTIL_CLOSE_APOS),popMode,popMode,popMode
+	{
+		if (dsnutil_hexlit_char) {
+			/*
+			If this branch is taken then we've hit the end of the
+			argument and need to get back to DEFAULT_MODE.
+			*/
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			dsnutil_db_ts_char = false;
+			dsnutil_hexlit_char = false;
+			setType(DSNUTIL_CLOSE_APOS);
+			popMode(); //back to DSNUTIL_HEXLIT_MODE
+			popMode(); //back to DSNUTIL_MODE
+			popMode(); //back to DEFAULT_MODE
+		} else {
+			/*
+			If this branch is taken then the literal is not a hex
+			string prefixed by X it is instead a character string
+			literal beginning and ending with an apostrophe. 
+			*/
+			dsnutil_hexlit_char = false;
+			pushMode(DSNUTIL_APOS_MODE); //we don't come back to this mode
+		}
+	}
+//	->type(DSNUTIL_CLOSE_APOS),popMode,popMode,popMode
 	;
 
 /*
@@ -5161,11 +5287,17 @@ we need to get back to DSNUTIL_MODE.
 */
 DSNUTIL_HEXLIT_WS_WS
 	: (WS | NEWLINE)+
+	{
+		dsnutil_hexlit_char = false;
+	}
 	->popMode,popMode
 	;
 
 DSNUTIL_HEXLIT_WS_CHAR
 	: .+?
+	{
+		dsnutil_hexlit_char = true;
+	}
 	//->type(DSNUTIL_CHAR)
 	;
 
