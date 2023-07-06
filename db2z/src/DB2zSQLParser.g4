@@ -3337,12 +3337,16 @@ createFunctionStatementCompiledSqlScalarOptions
 /*
 Added columnName to go with functionDataType.  My omission, found by
 Martijn Rutte 2023-06-12.
+
+Modified to use sqlTableReturnStatement as sqlRoutineBody was
+simply incorrect according to the documentation.  Found by Martijn
+Rutte 2023-07-06.
 */
 sqlTableFunctionDefinition
 	: (
 	RETURNS TABLE LPAREN columnName functionDataType (COMMA columnName functionDataType)* RPAREN
 	createFunctionStatementSqlTableOptions+
-	sqlRoutineBody
+	sqlTableReturnStatement
 	)
 	;
 
@@ -3360,6 +3364,13 @@ createFunctionStatementSqlTableOptions
 	| parameterOption2
 	| securedOption
 	)
+	;
+
+sqlTableReturnStatement
+	: ((BEGIN sqlplCompoundAtomicClause? 
+	RETURN fullSelect SEMICOLON? 
+	END SEMICOLON?)
+	| (RETURN fullSelect SEMICOLON?))
 	;
 
 sequenceAlias
