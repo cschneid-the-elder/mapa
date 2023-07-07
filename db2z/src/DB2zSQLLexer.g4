@@ -4668,6 +4668,13 @@ DSNUTIL_TABLESAMPLE
 	: T A B L E S A M P L E
 	;
 
+/*
+This is here to prevent matches with the DSNUTIL_TABLE token.
+*/
+DSNUTIL_REPEATABLE
+	: R E P E A T A B L E
+	;
+
 DSNUTIL_TABLE
 	: T A B L E
 	->pushMode(DSNUTIL_DB_TS_MODE)
