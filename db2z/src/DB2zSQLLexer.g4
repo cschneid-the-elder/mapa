@@ -4744,6 +4744,13 @@ DSNUTIL_RBALRSN_CONVERSION
 	: R B A L R S N '_' C O N V E R S I O N
 	;
 
+/*
+This is here to prevent matches with the DSNUTIL_VERSION token.
+*/
+DSNUTIL_SETCURRENTVERSION
+	: S E T C U R R E N T V E R S I O N
+	;
+
 DSNUTIL_VERSION
 	: V E R S I O N
 	->pushMode(DSNUTIL_HEXLIT_MODE)
@@ -4807,6 +4814,14 @@ DSNUTIL_OFFSET
 DSNUTIL_LENGTH
 	: L E N G T H
 	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+/*
+This rule is here to prevent matches with the DSNUTIL_PAGES rule or
+the DSNUTIL_VERSION rule.
+*/
+DSNUTIL_INSERTVERSIONPAGES
+	: I N S E R T V E R S I O N P A G E S
 	;
 
 DSNUTIL_PAGES
