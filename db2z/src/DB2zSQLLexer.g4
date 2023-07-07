@@ -4661,6 +4661,11 @@ DSNUTIL_MAPPINGDATABASE
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
+DSNUTIL_STOGROUP
+	: S T O G R O U P
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
 /*
 This is here to prevent matches with the DSNUTIL_TABLE token.
 */
