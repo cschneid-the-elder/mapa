@@ -22,5 +22,7 @@
 +	sql_call_dsnutil_reorg_index	18	72
 +	sql_call_dsnutil_reorg_tablespace	7	28
 +	sql_call_dsnutil_repair	13	52
++	sql_call_dsnutil_report	7	28
++	sql_call_dsnutil_restore_system	6	24
 +	sql_call_dsnutil_template	5	20
 +	sql_NOUPLOAD_call_dsnutilv	1	4

@@ -4594,10 +4594,17 @@ DSNUTIL_DSNTYPE
 	;
 
 /*
-This is here to prevent matches with the DSN token.
+This is here to prevent matches with the DSNUTIL_DSN token.
 */
 DSNUTIL_DSNUM
 	: D S N U M
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_DSN token.
+*/
+DSNUTIL_SHOWDSNS
+	: S H O W D S N S
 	;
 
 DSNUTIL_DSN
@@ -4773,6 +4780,13 @@ This is here to prevent matches with the DSNUTIL_KEY token.
 */
 DSNUTIL_SORTKEYS
 	: S O R T K E Y S
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_KEY token.
+*/
+DSNUTIL_SHOWKEYLABEL
+	: S H O W K E Y L A B E L
 	;
 
 DSNUTIL_KEY
