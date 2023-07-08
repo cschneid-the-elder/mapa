@@ -4695,9 +4695,28 @@ DSNUTIL_OBD
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
+DSNUTIL_FROM_TABLESPACE
+	: FROM (WS | NEWLINE)+ TABLESPACE
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
 DSNUTIL_FROM_TABLE
 	: FROM (WS | NEWLINE)+ TABLE
 	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_FROM token.
+*/
+DSNUTIL_FROMVOLUME
+	: F R O M V O L U M E
+	;
+
+/*
+This is here to prevent matches with the DSNUTIL_FROM token.
+*/
+DSNUTIL_FROMCOPYDDN
+	: F R O M C O P Y D D N
 	;
 
 DSNUTIL_FROM
@@ -4780,6 +4799,16 @@ DSNUTIL_DOCID
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
+DSNUTIL_CONST
+	: C O N S T
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_IMPLICIT_TZ
+	: I M P L I C I T '_' T Z
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
 /*
 This is here to prevent matches with the DSNUTIL_KEY token.
 */
@@ -4825,6 +4854,17 @@ This rule is here to prevent matches with the DSNUTIL_DATA rule.
 */
 DSNUTIL_CHECK_DATA
 	: C H E C K (WS | NEWLINE)+ D A T A
+	;
+
+/*
+This rule is here to prevent matches with the DSNUTIL_DATA rule.
+*/
+DSNUTIL_SKIP_LOCKED_DATA
+	: S K I P (WS | NEWLINE)+ LOCKED (WS | NEWLINE)+ DATA
+	;
+
+DSNUTIL_UNLOAD_DATA
+	: U N L O A D (WS | NEWLINE)+ DATA
 	;
 
 DSNUTIL_DATA
