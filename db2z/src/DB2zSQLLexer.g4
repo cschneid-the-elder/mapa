@@ -4732,12 +4732,14 @@ do not show apostrophes, but it's possible they are allowed.
 
 DSNUTIL_DEADLINE
 	: D E A D L I N E
-	->pushMode(DSNUTIL_DB_TS_MODE)
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+//	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_SWITCHTIME
 	: S W I T C H T I M E
-	->pushMode(DSNUTIL_DB_TS_MODE)
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+//	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_EXEC_SQL
@@ -5205,8 +5207,8 @@ are considered to be one token.
 
 This is tricky because we want to exit differently depending on how
 we arrived.  Hence, the switch statement.  I did consider having
-three different copies of this mode, the only difference being how
-they exited.  That seemed less clear than this.
+several different copies of this mode, the only difference being
+how they exited.  That seemed less clear than this.
 
 It's also tricky because there may be an apostrophe or a quote
 following the DSNUTIL_APOS token, indicating the end of the
@@ -5291,6 +5293,13 @@ DSNUTIL_QUOTE_CHAR
 
 mode DSNUTIL_EXEC_SQL_MODE;
 
+/*
+Why are we here?
+
+Whilst processing, an EXEC SQL token was encountered, indicating
+some arbitrary SQL follows, terminated by an ENDEXEC token.
+*/
+
 DSNUTIL_ENDEXEC
 	: E N D E X E C
 	->popMode
@@ -5311,9 +5320,14 @@ A token has been found, the syntax is...
 
 ...or...
 
+	<token> 'tttttttt'
+
+...or...
+
 	<token> nnnnnnnn
 
-...where aaaaaaaa is a hex literal and nnnnnnnn is an integer.
+...where aaaaaaaa is a hex literal, tttttttt is arbitrary text
+delimited by apostrophes, and nnnnnnnn is an integer.
 
 It is syntactically possible for this syntax to be followed by
 either a quote or an apostrophe indicating the end of the argument.
@@ -5326,6 +5340,27 @@ DSNUTIL_HEXLIT_WS
 
 mode DSNUTIL_HEXLIT_WS_MODE;
 
+/*
+We have consumed the whitespace that comes between the <token>
+and the value which follows.  We now need to process that
+value, which may take the form...
+
+	X'aaaaaaaa'
+
+...or...
+
+	'tttttttt'
+
+...or...
+
+	nnnnnnnn
+
+Keep in mind that an apostrophe in this mode could mean the
+end of the CALL argument or it could be the first apostrophe
+enclosing some text.  The difference between these two cases
+is detected via the dsnutil_hexlit_char boolean.
+*/
+
 DSNUTIL_HEXLIT_X
 	: X
 	->pushMode(DSNUTIL_HEXLIT_X_MODE)
@@ -5337,7 +5372,7 @@ DSNUTIL_HEXLIT_WS_APOS
 		if (dsnutil_hexlit_char) {
 			/*
 			If this branch is taken then we've hit the end of the
-			argument and need to get back to DEFAULT_MODE.
+			CALL argument and need to get back to DEFAULT_MODE.
 			*/
 			dsnutil = false;
 			dsnutilArgc = 0;
@@ -5354,16 +5389,14 @@ DSNUTIL_HEXLIT_WS_APOS
 			string prefixed by X it is instead a character string
 			literal beginning and ending with an apostrophe. 
 			*/
-			dsnutil_hexlit_char = false;
 			pushMode(DSNUTIL_APOS_MODE); //we don't come back to this mode
 		}
 	}
-//	->type(DSNUTIL_CLOSE_APOS),popMode,popMode,popMode
 	;
 
 /*
 If this rule is matched then we've hit the end of the
-integer following the whitespace following TRACEID and
+value following the whitespace following <token> and
 we need to get back to DSNUTIL_MODE.
 */
 DSNUTIL_HEXLIT_WS_WS
@@ -5384,9 +5417,17 @@ DSNUTIL_HEXLIT_WS_CHAR
 
 mode DSNUTIL_HEXLIT_X_MODE;
 
+/*
+Why are we here?
+
+We have consumed <token>, the whitespace following it, and
+the X preceeding a hex literal enclosed in apostrophes. We
+are here to detect the first apostrophe and pushMode.
+*/
+
 DSNUTIL_HEXLIT_X_APOS
 	: '\''
-	->pushMode(DSNUTIL_APOS_MODE)
+	->pushMode(DSNUTIL_APOS_MODE) //we don't come back to this mode
 	;
 
 /*
@@ -5394,7 +5435,8 @@ This rule should never be hit.  Syntax is...
 
 	TRACEID X'ABC01234'
 
-...and if we're in this mode the X has been seen.
+...and if we're in this mode the X has been seen, so the
+first apostrophe should have taken us out of this mode.
 
 */
 DSNUTIL_HEXLIT_X_CHAR
