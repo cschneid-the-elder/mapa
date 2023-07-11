@@ -376,4 +376,48 @@ CALL SYSPROC.DSNUTILV(
   , ''
   ); 
 
+CALL SYSPROC.DSNUTILV(
+  'DBB.STUFF'
+  , 'NO'
+  , 'CATMAINT UPDATE SCHEMA 
+     SWITCH(ABC,DEF)
+     SWITCH (ABC , DEF)
+     SWITCH ( ABC , DEF )
+     SWITCH("ABC",DEF)
+     SWITCH(ABC,"DEF")
+     SWITCH("ABC","DEF")
+     SWITCH ("ABC" , DEF)
+     SWITCH (ABC , "DEF")
+     SWITCH ("ABC" , "DEF")
+     SWITCH ( "ABC" , DEF )
+     SWITCH ( ABC , "DEF" )
+     SWITCH ( "ABC" , "DEF" )
+     VCAT SWITCH ( GHI , JKL )
+          SWITCH(GHI,JKL)
+          SWITCH ( "GHI" , "JKL")
+          SWITCH ( 'GHI' , 'JKL' )
+     '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILV(
+  'DBB.STUFF'
+  , 'NO'
+  , 'CATMAINT UPDATE UTILX BASIC',''); 
+
+CALL SYSPROC.DSNUTILV(
+  'DBB.STUFF'
+  , 'NO'
+  , 'CATMAINT UPDATE UTILX EXTENDED',''); 
+
+CALL SYSPROC.DSNUTILV(
+  'DBB.STUFF'
+  , 'NO'
+  , 'CATMAINT UPDATE UTILX RESET',''); 
+
+CALL SYSPROC.DSNUTILV(
+  'DBB.STUFF'
+  , 'NO'
+  , 'CATMAINT UPDATE UNLDDN IBM-SECRET',''); 
+
 
