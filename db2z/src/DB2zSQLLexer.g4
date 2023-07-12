@@ -4669,12 +4669,8 @@ DSNUTIL_OWNER_FROM
 	: OWNER (WS | NEWLINE)+ FROM
 	;
 
-DSNUTIL_TO
-	: TO
-	;
-
-DSNUTIL_ROLE
-	: ROLE
+DSNUTIL_TO_ROLE
+	: TO (WS | NEWLINE)+ ROLE
 	;
 
 DSNUTIL_VCAT
@@ -4725,7 +4721,7 @@ DSNUTIL_DECPT
 
 DSNUTIL_WS
 	: (WS | NEWLINE)+
-	->skip
+	->channel(HIDDEN)
 	;
 
 DSNUTIL_CHAR
@@ -5053,11 +5049,155 @@ DSNUTIL_TEXT
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
+DSNUTIL_PART
+	: P A R T
+	;
+
+DSNUTIL_INCLUDE
+	: I N C L U D E
+	;
+
+DSNUTIL_XML
+	: X M L
+	;
+
+DSNUTIL_CLONE
+	: C L O N E
+	;
+
+DSNUTIL_SHRLEVEL
+	: S H R L E V E L
+	;
+
+DSNUTIL_REFERENCE
+	: R E F E R E N C E
+	;
+
+DSNUTIL_CHANGE
+	: C H A N G E
+	;
+
+DSNUTIL_DRAIN_WAIT
+	: D R A I N '_' W A I T
+	;
+
+DSNUTIL_RETRY
+	: R E T R Y
+	;
+
+DSNUTIL_RETRY_DELAY
+	: R E T R Y '_' D E L A Y
+	;
+
+DSNUTIL_SCOPE
+	: S C O P E
+	;
+
+DSNUTIL_PENDING
+	: P E N D I N G
+	;
+
+DSNUTIL_AUXONLY
+	: A U X O N L Y
+	;
+
+DSNUTIL_ALL
+	: A L L
+	;
+
+DSNUTIL_REFONLY
+	: R E F O N L Y
+	;
+
+DSNUTIL_XMLSCHEMAONLY
+	: X M L S C H E M A O N L Y
+	;
+
+DSNUTIL_AUXERROR
+	: A U X E R R O R
+	;
+
+DSNUTIL_REPORT
+	: R E P O R T
+	;
+
+DSNUTIL_INVALIDATE
+	: I N V A L I D A T E
+	;
+
+DSNUTIL_LOBERROR
+	: L O B E R R O R
+	;
+
+DSNUTIL_XMLERROR
+	: X M L E R R O R
+	;
+
+DSNUTIL_FOR
+	: F O R
+	;
+
+DSNUTIL_EXCEPTION
+	: E X C E P T I O N
+	->pushMode(DSNUTIL_EXCEPTION_MODE)
+	;
+
+DSNUTIL_DELETE
+	: D E L E T E
+	;
+
+DSNUTIL_YES
+	: Y E S
+	;
+
+DSNUTIL_NO
+	: N O
+	;
+
+DSNUTIL_LOG
+	: L O G
+	;
+
+DSNUTIL_EXCEPTIONS
+	: E X C E P T I O N S
+	;
+
+DSNUTIL_ERRDDN
+	: E R R D D N
+	;
+
+DSNUTIL_WORKDDN
+	: W O R K D D N
+	;
+
+DSNUTIL_PUNCHDDN
+	: P U N C H D D N
+	;
+
+DSNUTIL_SORTDEVT
+	: S O R T D E V T
+	;
+
+DSNUTIL_SORTNUM
+	: S O R T N U M
+	;
+
+DSNUTIL_XMLSCHEMA
+	: X M L S C H E M A
+	;
+
+
+
+
+
+
+
+
 mode DSNUTIL_WHEN_MODE;
 
 DSNUTIL_WHEN_WS
 	: (WS | NEWLINE)+
-	->skip
+	->channel(HIDDEN)
 	;
 
 DSNUTIL_WHEN_LPAREN
@@ -5068,6 +5208,109 @@ DSNUTIL_WHEN_LPAREN
 		dsnutil = false;
 	}
 	->pushMode(DEFAULT_MODE) //we're not coming back here
+	;
+
+mode DSNUTIL_EXCEPTION_MODE;
+
+/*
+Why are we here?
+
+The EXCEPTION token has been seen and thus we will see one
+or more IN <tablespace> USE <tablespace> phrases.  When 
+another token representing an option indicating we will see
+no more of these phrases is seen, we popMode back to 
+DSNUTIL_MODE.
+
+*/
+
+DSNUTIL_IN
+	: I N
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_USE
+	: U S E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_EXCEPTION_CLONE
+	: C L O N E
+	->type(DSNUTIL_CLONE),popMode
+	;
+
+DSNUTIL_EXCEPTION_SHRLEVEL
+	: S H R L E V E L
+	->type(DSNUTIL_SHRLEVEL),popMode
+	;
+
+DSNUTIL_EXCEPTION_DRAIN_WAIT
+	: D R A I N '_' W A I T
+	->type(DSNUTIL_DRAIN_WAIT),popMode
+	;
+
+DSNUTIL_EXCEPTION_RETRY
+	: R E T R Y
+	->type(DSNUTIL_RETRY),popMode
+	;
+
+DSNUTIL_EXCEPTION_RETRY_DELAY
+	: R E T R Y '_' D E L A Y
+	->type(DSNUTIL_RETRY_DELAY),popMode
+	;
+
+DSNUTIL_EXCEPTION_SCOPE
+	: S C O P E
+	->type(DSNUTIL_SCOPE),popMode
+	;
+
+DSNUTIL_EXCEPTION_AUXERROR
+	: A U X E R R O R
+	->type(DSNUTIL_AUXERROR),popMode
+	;
+
+DSNUTIL_EXCEPTION_LOBERROR
+	: L O B E R R O R
+	->type(DSNUTIL_LOBERROR),popMode
+	;
+
+DSNUTIL_EXCEPTION_XMLERROR
+	: X M L E R R O R
+	->type(DSNUTIL_XMLERROR),popMode
+	;
+
+DSNUTIL_EXCEPTION_DELETE
+	: D E L E T E
+	->type(DSNUTIL_DELETE),popMode
+	;
+
+DSNUTIL_EXCEPTION_EXCEPTIONS
+	: E X C E P T I O N S
+	->type(DSNUTIL_EXCEPTIONS),popMode
+	;
+
+DSNUTIL_EXCEPTION_ERRDDN
+	: E R R D D N
+	->type(DSNUTIL_ERRDDN),popMode
+	;
+
+DSNUTIL_EXCEPTION_WORKDDN
+	: W O R K D D N
+	->type(DSNUTIL_WORKDDN),popMode
+	;
+
+DSNUTIL_EXCEPTION_PUNCHDDN
+	: P U N C H D D N
+	->type(DSNUTIL_PUNCHDDN),popMode
+	;
+
+DSNUTIL_EXCEPTION_SORTDEVT
+	: S O R T D E V T
+	->type(DSNUTIL_SORTDEVT),popMode
+	;
+
+DSNUTIL_EXCEPTION_SORTNUM
+	: S O R T N U M
+	->type(DSNUTIL_SORTNUM),popMode
 	;
 
 mode DSNUTIL_DSN_MODE;
@@ -5101,7 +5344,7 @@ DSNUTIL_DSN_OPEN_APOS
 
 DSNUTIL_DSN_WS
 	: (WS | NEWLINE)+
-	->pushMode(DSNUTIL_DSN_WS_MODE);
+	->channel(HIDDEN),pushMode(DSNUTIL_DSN_WS_MODE);
 
 DSNUTIL_DSN_CHAR
 	: .+?
@@ -5155,7 +5398,7 @@ DSNUTIL_DSN_WS_WS
 	{
 		dsnutil_dsn_ws_char = false;
 	}
-	->popMode,popMode;
+	->channel(HIDDEN),popMode,popMode;
 
 DSNUTIL_DSN_WS_CHAR
 	: .+?
@@ -5199,6 +5442,7 @@ have arrived because we're on the right hand side of an equal sign.
 DSNUTIL_DB_TS_WS_LEADING
 	: (WS | NEWLINE)+
 	{!dsnutil_db_ts_char}? 
+	->channel(HIDDEN)
 	;
 
 DSNUTIL_DB_TS_WS_TERMINATING
@@ -5207,7 +5451,7 @@ DSNUTIL_DB_TS_WS_TERMINATING
 	{
 		dsnutil_db_ts_char = false;
 	}
-	->popMode
+	->channel(HIDDEN),popMode
 	;
 
 DSNUTIL_DB_TS_APOS
@@ -5219,8 +5463,20 @@ DSNUTIL_DB_TS_APOS
 			dsnutil_dsn_ws_char = false;
 			dsnutil_db_ts_char = false;
 			setType(DSNUTIL_CLOSE_APOS);
-			popMode();
-			popMode();
+			switch(_modeStack.peek()) {
+				case DSNUTIL_PAREN_MODE :
+					popMode();
+					break;
+				case DSNUTIL_EXCEPTION_MODE :
+					popMode(); //back to DSNUTIL_EXCEPTION_MODE
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+				default :
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+			}
 		} else {
 			pushMode(DSNUTIL_APOS_MODE);
 			dsnutil_db_ts_char = true;
@@ -5237,8 +5493,20 @@ DSNUTIL_DB_TS_QUOTE
 			dsnutil_dsn_ws_char = false;
 			dsnutil_db_ts_char = false;
 			setType(DSNUTIL_CLOSE_QUOTE);
-			popMode();
-			popMode();
+			switch(_modeStack.peek()) {
+				case DSNUTIL_PAREN_MODE :
+					popMode();
+					break;
+				case DSNUTIL_EXCEPTION_MODE :
+					popMode(); //back to DSNUTIL_EXCEPTION_MODE
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+				default :
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+			}
 		} else {
 			pushMode(DSNUTIL_QUOTE_MODE);
 			dsnutil_db_ts_char = true;
@@ -5260,6 +5528,22 @@ DSNUTIL_DB_TS_LPAREN
 		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_DB_TS_RPAREN
+	: ')'
+	{
+		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		switch(_modeStack.peek()) {
+			case DSNUTIL_PAREN_MODE :
+				popMode(); //back to DSNUTIL_PAREN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to "parent" mode
+				break;
+		}
+	}
 	;
 
 DSNUTIL_DB_TS_CHAR
@@ -5335,7 +5619,21 @@ DSNUTIL_COMMA
 
 DSNUTIL_PAREN_WS
 	: (WS | NEWLINE)+
-	->skip
+	->channel(HIDDEN)
+	;
+
+DSNUTIL_PAREN_TABLESPACE
+	: T A B L E S P A C E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PAREN_TABLE
+	: T A B L E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PAREN_XMLCOLUMN
+	: X M L C O L U M N
 	;
 
 DSNUTIL_PAREN_CHAR
@@ -5520,7 +5818,7 @@ either a quote or an apostrophe indicating the end of the argument.
 
 DSNUTIL_HEXLIT_WS
 	: (WS | NEWLINE)+
-	->pushMode(DSNUTIL_HEXLIT_WS_MODE)
+	->channel(HIDDEN),pushMode(DSNUTIL_HEXLIT_WS_MODE)
 	;
 
 mode DSNUTIL_HEXLIT_WS_MODE;
@@ -5589,7 +5887,7 @@ DSNUTIL_HEXLIT_WS_WS
 	{
 		dsnutil_hexlit_char = false;
 	}
-	->popMode,popMode
+	->channel(HIDDEN),popMode,popMode
 	;
 
 DSNUTIL_HEXLIT_WS_CHAR

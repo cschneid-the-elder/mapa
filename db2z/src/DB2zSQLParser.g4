@@ -631,13 +631,185 @@ dsnutilUCSCatmaint
 dsnutilUCSSwitchSpec
 	: (
 	((DSNUTIL_SCHEMA (DSNUTIL_SWITCH dsnutilUCSArgList)+)
-	| (DSNUTIL_OWNER_FROM dsnutilUCSArgList) DSNUTIL_TO DSNUTIL_ROLE)
+	| (DSNUTIL_OWNER_FROM dsnutilUCSArgList) DSNUTIL_TO_ROLE)
 	(DSNUTIL_VCAT (DSNUTIL_SWITCH dsnutilUCSArgList)+)?
 	)
 	;
 
 dsnutilUCSUtilxSpec
 	: (DSNUTIL_UTILX (DSNUTIL_BASIC | DSNUTIL_EXTENDED | DSNUTIL_RESET))
+	;
+
+dsnutilUCSCheckData
+	: DSNUTIL_CHECK_DATA dsnutilUCSTablespacePhrase+ dsnutilUCSXMLTablespacePhrase?
+	dsnutilUCSCheckDataOptions*
+	;
+
+dsnutilUCSTablespacePhrase
+	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?)
+	;
+
+dsnutilUCSXMLTablespacePhrase
+	: (DSNUTIL_INCLUDE DSNUTIL_XML DSNUTIL_TABLESPACES (DSNUTIL_ALL | dsnutilUCSXMLSpec)?)
+	;
+
+dsnutilUCSXMLSpec
+	: (
+	DSNUTIL_LPAREN 
+	dsnutilUCSXMLSpecTableOrTablespace (DSNUTIL_COMMA dsnutilUCSXMLSpecTableOrTablespace)*
+	(DSNUTIL_DB_TS_RPAREN | DSNUTIL_RPAREN)
+	)
+	;
+
+dsnutilUCSXMLSpecTableOrTablespace
+	: (
+	(DSNUTIL_PAREN_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+	| (DSNUTIL_PAREN_TABLE dsnutilUCSQualifiedTableName DSNUTIL_PAREN_XMLCOLUMN dsnutilUCSColumnName)
+	)
+	;
+
+dsnutilUCSCheckDataOptions
+	: (
+	dsnutilUCSCheckDataClone
+	| dsnutilUCSCheckDataShrlevel
+	| dsnutilUCSCheckDataDrainWait
+	| dsnutilUCSCheckDataRetry
+	| dsnutilUCSCheckDataRetryDelay
+	| dsnutilUCSCheckDataScope
+	| dsnutilUCSCheckDataAuxerror
+	| dsnutilUCSCheckDataLoberror
+	| dsnutilUCSCheckDataXmlerror
+	| dsnutilUCSCheckDataForException
+	| dsnutilUCSCheckDataDelete
+	| dsnutilUCSCheckDataExceptions
+	| dsnutilUCSCheckDataErrddn
+	| dsnutilUCSCheckDataWorkddn
+	| dsnutilUCSCheckDataPunchddn
+	| dsnutilUCSCheckDataSortdevt
+	| dsnutilUCSCheckDataSortnum
+	)
+	;
+
+dsnutilUCSCheckDataClone
+	: (DSNUTIL_CLONE)
+	;
+
+dsnutilUCSCheckDataShrlevel
+	: (DSNUTIL_SHRLEVEL (DSNUTIL_REFERENCE | DSNUTIL_CHANGE))
+	;
+
+dsnutilUCSCheckDataDrainWait
+	: (DSNUTIL_DRAIN_WAIT dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataRetry
+	: (DSNUTIL_RETRY dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataRetryDelay
+	: (DSNUTIL_RETRY_DELAY dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataScope
+	: (DSNUTIL_SCOPE (
+		DSNUTIL_PENDING 
+		| DSNUTIL_AUXONLY 
+		| DSNUTIL_ALL 
+		| DSNUTIL_REFONLY 
+		| DSNUTIL_XMLSCHEMAONLY
+		)
+	)
+	;
+
+dsnutilUCSCheckDataAuxerror
+	: (DSNUTIL_AUXERROR (DSNUTIL_REPORT | DSNUTIL_INVALIDATE))
+	;
+
+dsnutilUCSCheckDataLoberror
+	: (DSNUTIL_LOBERROR (DSNUTIL_REPORT | DSNUTIL_INVALIDATE))
+	;
+
+dsnutilUCSCheckDataXmlerror
+	: (DSNUTIL_XMLERROR (DSNUTIL_REPORT | DSNUTIL_INVALIDATE))
+	;
+
+dsnutilUCSCheckDataForException
+	: (
+	DSNUTIL_FOR DSNUTIL_EXCEPTION
+	(DSNUTIL_IN dsnutilUCSQualifiedTableName DSNUTIL_USE dsnutilUCSQualifiedTableName)+
+	)
+	;
+
+dsnutilUCSCheckDataDelete
+	: (
+	DSNUTIL_DELETE
+	(DSNUTIL_NO | (DSNUTIL_YES (DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))?))
+	)
+	;
+
+dsnutilUCSCheckDataExceptions
+	: (DSNUTIL_EXCEPTIONS dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataErrddn
+	: (DSNUTIL_ERRDDN dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataWorkddn
+	: (DSNUTIL_WORKDDN 
+	(dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)?) | (dsnutilUCSArg? (DSNUTIL_COMMA dsnutilUCSArg))
+	)
+	;
+
+dsnutilUCSCheckDataPunchddn
+	: (DSNUTIL_PUNCHDDN dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataSortdevt
+	: (DSNUTIL_SORTDEVT dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckDataSortnum
+	: (DSNUTIL_SORTNUM dsnutilUCSArg)
+	;
+
+dsnutilUCSDatabaseObjectName
+	: (
+	DSNUTIL_DB_TS_CHAR+
+	| DSNUTIL_PAREN_CHAR+
+	| (DSNUTIL_DB_TS_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
+	| (DSNUTIL_DB_TS_QUOTE DSNUTIL_QUOTE_CHAR+ DSNUTIL_QUOTE1)
+	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
+	| (DSNUTIL_PAREN_OPEN_QUOTE DSNUTIL_QUOTE_CHAR+ DSNUTIL_QUOTE1)
+	)
+	;
+
+dsnutilUCSDatabaseName
+	: dsnutilUCSDatabaseObjectName
+	;
+
+dsnutilUCSTablespaceName
+	: dsnutilUCSDatabaseObjectName
+	;
+
+dsnutilUCSTableName
+	: dsnutilUCSDatabaseObjectName
+	;
+
+dsnutilUCSSchemaName
+	: dsnutilUCSDatabaseObjectName
+	;
+
+dsnutilUCSColumnName
+	: dsnutilUCSDatabaseObjectName
+	;
+
+dsnutilUCSQualifiedTablespaceName
+	: ((dsnutilUCSDatabaseName DSNUTIL_DB_TS_DOT)? dsnutilUCSTablespaceName)
+	;
+
+dsnutilUCSQualifiedTableName
+	: ((dsnutilUCSSchemaName DSNUTIL_DB_TS_DOT)? dsnutilUCSTableName)
 	;
 
 /*
@@ -751,6 +923,7 @@ dsnutilArgument3Text
 	| (DSNUTIL_WHEN DSNUTIL_WHEN_LPAREN NOT? predicate ((AND | OR) NOT? LPAREN* predicate RPAREN*)* RPAREN)
 	| dsnutilUCSBackup
 	| dsnutilUCSCatmaint
+	| dsnutilUCSCheckData
 	)
 	;
 
