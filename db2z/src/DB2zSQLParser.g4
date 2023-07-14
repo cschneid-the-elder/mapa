@@ -684,10 +684,10 @@ dsnutilUCSCheckDataOptions
 	| dsnutilUCSCheckDataXmlerror
 	| dsnutilUCSCheckDataForException
 	| dsnutilUCSCheckDataDelete
-	| dsnutilUCSCheckDataExceptions
+	| dsnutilUCSExceptions
 	| dsnutilUCSCheckDataErrddn
 	| dsnutilUCSCheckDataWorkddn
-	| dsnutilUCSCheckDataPunchddn
+	| dsnutilUCSPunchddn
 	| dsnutilUCSSortdevtOption
 	| dsnutilUCSSortnumOption
 	)
@@ -750,7 +750,7 @@ dsnutilUCSCheckDataDelete
 	)
 	;
 
-dsnutilUCSCheckDataExceptions
+dsnutilUCSExceptions
 	: (DSNUTIL_EXCEPTIONS dsnutilUCSArg)
 	;
 
@@ -764,7 +764,7 @@ dsnutilUCSCheckDataWorkddn
 	)
 	;
 
-dsnutilUCSCheckDataPunchddn
+dsnutilUCSPunchddn
 	: (DSNUTIL_PUNCHDDN dsnutilUCSArg)
 	;
 
@@ -802,6 +802,27 @@ dsnutilUCSCheckIndexOptions
 	| dsnutilUCSSortdevtOption
 	| dsnutilUCSSortnumOption
 	| dsnutilUCSParallelOption
+	)
+	;
+
+dsnutilUCSCheckLob
+	: (
+	DSNUTIL_CHECK_LOB dsnutilUCSTablespacePhrase
+	dsnutilUCSCheckLobOptions*
+	)
+	;
+
+dsnutilUCSCheckLobOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSShrlevelOption
+	| dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSExceptions
+	| dsnutilUCSPunchddn
+	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
 	)
 	;
 
@@ -969,6 +990,7 @@ dsnutilArgument3Text
 	| dsnutilUCSCatmaint
 	| dsnutilUCSCheckData
 	| dsnutilUCSCheckIndex
+	| dsnutilUCSCheckLob
 	)
 	;
 

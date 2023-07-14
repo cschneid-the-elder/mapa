@@ -5019,6 +5019,10 @@ DSNUTIL_CHECK_INDEX_ALL
 	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)* '(' + (WS | NEWLINE)* A L L (WS | NEWLINE)* ')'
 	;
 
+DSNUTIL_CHECK_LOB
+	: C H E C K (WS | NEWLINE)+ L O B
+	;
+
 /*
 This rule is here to prevent matches with the DSNUTIL_DATA rule.
 */
