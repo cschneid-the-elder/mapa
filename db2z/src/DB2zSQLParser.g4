@@ -579,11 +579,10 @@ dsnutilArgument3
 
 dsnutilUCSArg
 	: (
-	DSNUTIL_PAREN_CHAR+ 
+	(DSNUTIL_PAREN_CHAR | DSNUTIL_PAREN_DOT)+
 	| DSNUTIL_DOUBLE_APOS_CHAR+ 
 	| DSNUTIL_APOS_CHAR+
 	| DSNUTIL_QUOTE_CHAR+
-	| DSNUTIL_PAREN_CHAR+
 	| DSNUTIL_CHAR+
 	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_QUOTE DSNUTIL_QUOTE_CHAR* DSNUTIL_QUOTE1)
@@ -594,14 +593,14 @@ dsnutilUCSArg
 	;
 
 dsnutilUCSArgList
-	:(DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN)
+	:(DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
 	;
 
 dsnutilUCSBackup
 	: DSNUTIL_BACKUP DSNUTIL_SYSTEM (DSNUTIL_FULL | DSNUTIL_DATA_ONLY)?
-	(DSNUTIL_ALTERNATE_CP DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN)?
-	(DSNUTIL_DBBSG DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN)?
-	(DSNUTIL_LGBSG DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN)?
+	(DSNUTIL_ALTERNATE_CP DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
+	(DSNUTIL_DBBSG DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
+	(DSNUTIL_LGBSG DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
 	((DSNUTIL_ESTABLISH | DSNUTIL_END)? DSNUTIL_FCINCREMENTAL)?
 	dsnutilUCSReplicationCopyOption?
 	;
@@ -610,7 +609,7 @@ dsnutilUCSReplicationCopyOption
 	: (
 	DSNUTIL_FORCE 
 	| (DSNUTIL_DUMP dsnutilUCSDumpclassSpec? DSNUTIL_FORCE?) 
-	| (DSNUTIL_DUMPONLY (DSNUTIL_TOKEN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN)? dsnutilUCSDumpclassSpec?)
+	| (DSNUTIL_DUMPONLY (DSNUTIL_TOKEN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)? dsnutilUCSDumpclassSpec?)
 	)
 	;
 	
@@ -621,7 +620,7 @@ dsnutilUCSDumpclassSpec
 dsnutilUCSCatmaint
 	: (
 	DSNUTIL_CATMAINT DSNUTIL_UPDATE
-	((DSNUTIL_LEVEL DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN)
+	((DSNUTIL_LEVEL DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
 	| (DSNUTIL_UNLDDN dsnutilUCSArg)
 	| dsnutilUCSSwitchSpec
 	| dsnutilUCSUtilxSpec)
@@ -649,6 +648,10 @@ dsnutilUCSTablespacePhrase
 	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?)
 	;
 
+dsnutilUCSIndexPhrase
+	: (dsnutilUCSQualifiedIndexName (DSNUTIL_PART dsnutilUCSArg)?)
+	;
+
 dsnutilUCSXMLTablespacePhrase
 	: (DSNUTIL_INCLUDE DSNUTIL_XML DSNUTIL_TABLESPACES (DSNUTIL_ALL | dsnutilUCSXMLSpec)?)
 	;
@@ -657,7 +660,7 @@ dsnutilUCSXMLSpec
 	: (
 	DSNUTIL_LPAREN 
 	dsnutilUCSXMLSpecTableOrTablespace (DSNUTIL_COMMA dsnutilUCSXMLSpecTableOrTablespace)*
-	(DSNUTIL_DB_TS_RPAREN | DSNUTIL_RPAREN)
+	(DSNUTIL_DB_TS_RPAREN | DSNUTIL_RPAREN1)
 	)
 	;
 
@@ -670,12 +673,12 @@ dsnutilUCSXMLSpecTableOrTablespace
 
 dsnutilUCSCheckDataOptions
 	: (
-	dsnutilUCSCheckDataClone
-	| dsnutilUCSCheckDataShrlevel
-	| dsnutilUCSCheckDataDrainWait
-	| dsnutilUCSCheckDataRetry
-	| dsnutilUCSCheckDataRetryDelay
-	| dsnutilUCSCheckDataScope
+	dsnutilUCSCloneOption
+	| dsnutilUCSShrlevelOption
+	| dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSScopeOption
 	| dsnutilUCSCheckDataAuxerror
 	| dsnutilUCSCheckDataLoberror
 	| dsnutilUCSCheckDataXmlerror
@@ -685,32 +688,32 @@ dsnutilUCSCheckDataOptions
 	| dsnutilUCSCheckDataErrddn
 	| dsnutilUCSCheckDataWorkddn
 	| dsnutilUCSCheckDataPunchddn
-	| dsnutilUCSCheckDataSortdevt
-	| dsnutilUCSCheckDataSortnum
+	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
 	)
 	;
 
-dsnutilUCSCheckDataClone
+dsnutilUCSCloneOption
 	: (DSNUTIL_CLONE)
 	;
 
-dsnutilUCSCheckDataShrlevel
+dsnutilUCSShrlevelOption
 	: (DSNUTIL_SHRLEVEL (DSNUTIL_REFERENCE | DSNUTIL_CHANGE))
 	;
 
-dsnutilUCSCheckDataDrainWait
+dsnutilUCSDrainWaitOption
 	: (DSNUTIL_DRAIN_WAIT dsnutilUCSArg)
 	;
 
-dsnutilUCSCheckDataRetry
+dsnutilUCSRetryOption
 	: (DSNUTIL_RETRY dsnutilUCSArg)
 	;
 
-dsnutilUCSCheckDataRetryDelay
+dsnutilUCSRetryDelayOption
 	: (DSNUTIL_RETRY_DELAY dsnutilUCSArg)
 	;
 
-dsnutilUCSCheckDataScope
+dsnutilUCSScopeOption
 	: (DSNUTIL_SCOPE (
 		DSNUTIL_PENDING 
 		| DSNUTIL_AUXONLY 
@@ -765,12 +768,41 @@ dsnutilUCSCheckDataPunchddn
 	: (DSNUTIL_PUNCHDDN dsnutilUCSArg)
 	;
 
-dsnutilUCSCheckDataSortdevt
+dsnutilUCSSortdevtOption
 	: (DSNUTIL_SORTDEVT dsnutilUCSArg)
 	;
 
-dsnutilUCSCheckDataSortnum
+dsnutilUCSSortnumOption
 	: (DSNUTIL_SORTNUM dsnutilUCSArg)
+	;
+
+dsnutilUCSParallelOption
+	: (DSNUTIL_PARALLEL dsnutilUCSArg)
+	;
+
+dsnutilUCSCheckIndex
+	: (
+		(
+		(DSNUTIL_CHECK_INDEX_LIST dsnutilUCSArg) 
+		| (DSNUTIL_CHECK_INDEX_OPEN_PAREN dsnutilUCSIndexPhrase (DSNUTIL_COMMA dsnutilUCSIndexPhrase)* DSNUTIL_RPAREN1) 
+		| (DSNUTIL_CHECK_INDEX_ALL dsnutilUCSTablespacePhrase)
+		)
+	dsnutilUCSCheckIndexOptions*
+	)
+	;
+
+dsnutilUCSCheckIndexOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSShrlevelOption
+	| dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSScopeOption
+	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
+	| dsnutilUCSParallelOption
+	)
 	;
 
 dsnutilUCSDatabaseObjectName
@@ -804,12 +836,24 @@ dsnutilUCSColumnName
 	: dsnutilUCSDatabaseObjectName
 	;
 
+dsnutilUCSCreatorID
+	: dsnutilUCSDatabaseObjectName
+	;
+
+dsnutilUCSIndexName
+	: dsnutilUCSDatabaseObjectName
+	;
+
 dsnutilUCSQualifiedTablespaceName
-	: ((dsnutilUCSDatabaseName DSNUTIL_DB_TS_DOT)? dsnutilUCSTablespaceName)
+	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSTablespaceName)
 	;
 
 dsnutilUCSQualifiedTableName
-	: ((dsnutilUCSSchemaName DSNUTIL_DB_TS_DOT)? dsnutilUCSTableName)
+	: ((dsnutilUCSSchemaName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSTableName)
+	;
+
+dsnutilUCSQualifiedIndexName
+	: ((dsnutilUCSCreatorID (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSIndexName)
 	;
 
 /*
@@ -845,7 +889,7 @@ dsnutilArgument3Text
 	| DSNUTIL_LPAREN
 	| DSNUTIL_LPAREN1
 	| DSNUTIL_DB_TS_LPAREN
-	| DSNUTIL_RPAREN
+	| DSNUTIL_RPAREN1
 	| DSNUTIL_EQUAL
 	| DSNUTIL_EXPDL
 	| DSNUTIL_COLDEL
@@ -924,6 +968,7 @@ dsnutilArgument3Text
 	| dsnutilUCSBackup
 	| dsnutilUCSCatmaint
 	| dsnutilUCSCheckData
+	| dsnutilUCSCheckIndex
 	)
 	;
 

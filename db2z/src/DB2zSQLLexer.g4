@@ -4580,6 +4580,13 @@ DSNUTIL_LPAREN
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
+DSNUTIL_RPAREN
+	: RPAREN
+	{
+		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	;
+
 DSNUTIL_EQUAL
 	: '='
 	->pushMode(DSNUTIL_DB_TS_MODE)
@@ -4875,13 +4882,11 @@ do not show apostrophes, but it's possible they are allowed.
 DSNUTIL_DEADLINE
 	: D E A D L I N E
 	->pushMode(DSNUTIL_HEXLIT_MODE)
-//	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_SWITCHTIME
 	: S W I T C H T I M E
 	->pushMode(DSNUTIL_HEXLIT_MODE)
-//	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_EXEC_SQL
@@ -4993,11 +4998,25 @@ DSNUTIL_DATA_ONLY
 	: D A T A (WS | NEWLINE)+ O N L Y
 	;
 
-/*
-This rule is here to prevent matches with the DSNUTIL_DATA rule.
-*/
 DSNUTIL_CHECK_DATA
 	: C H E C K (WS | NEWLINE)+ D A T A
+	;
+
+DSNUTIL_CHECK_INDEX
+	: C H E C K (WS | NEWLINE)+ I N D E X
+	;
+
+DSNUTIL_CHECK_INDEX_LIST
+	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)+ L I S T
+	;
+
+DSNUTIL_CHECK_INDEX_OPEN_PAREN
+	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)* '('
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_CHECK_INDEX_ALL
+	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)* '(' + (WS | NEWLINE)* A L L (WS | NEWLINE)* ')'
 	;
 
 /*
@@ -5186,9 +5205,13 @@ DSNUTIL_XMLSCHEMA
 	: X M L S C H E M A
 	;
 
+DSNUTIL_LIST
+	: L I S T
+	;
 
-
-
+DSNUTIL_PARALLEL
+	: PARALLEL
+	;
 
 
 
@@ -5526,14 +5549,16 @@ DSNUTIL_DB_TS_LPAREN
 	: '('
 	{
 		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		dsnutil_db_ts_char = false;
 	}
-	->pushMode(DSNUTIL_PAREN_MODE)
+	->pushMode(DSNUTIL_PAREN_MODE) //we're not coming back here
 	;
 
 DSNUTIL_DB_TS_RPAREN
 	: ')'
 	{
 		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		dsnutil_db_ts_char = false;
 		switch(_modeStack.peek()) {
 			case DSNUTIL_PAREN_MODE :
 				popMode(); //back to DSNUTIL_PAREN_MODE
@@ -5573,7 +5598,7 @@ DSNUTIL_LPAREN1
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
 
-DSNUTIL_RPAREN
+DSNUTIL_RPAREN1
 	: ')'
 	{
 		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
@@ -5615,6 +5640,10 @@ DSNUTIL_PAREN_OPEN_QUOTE
 
 DSNUTIL_COMMA
 	: COMMA
+	;
+
+DSNUTIL_PAREN_DOT
+	: DOT
 	;
 
 DSNUTIL_PAREN_WS
