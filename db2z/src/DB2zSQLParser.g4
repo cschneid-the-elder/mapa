@@ -593,7 +593,12 @@ dsnutilUCSArg
 	;
 
 dsnutilUCSArgList
-	:(DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
+	: (DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
+	;
+
+dsnutilUCSArgList1
+	: ((DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
+	| (DSNUTIL_LPAREN DSNUTIL_COMMA dsnutilUCSArg DSNUTIL_RPAREN1))
 	;
 
 dsnutilUCSBackup
@@ -640,8 +645,12 @@ dsnutilUCSUtilxSpec
 	;
 
 dsnutilUCSCheckData
-	: DSNUTIL_CHECK_DATA dsnutilUCSTablespacePhrase+ dsnutilUCSXMLTablespacePhrase?
+	: (
+	DSNUTIL_CHECK_DATA 
+	dsnutilUCSTablespacePhrase+ 
+	dsnutilUCSXMLTablespacePhrase?
 	dsnutilUCSCheckDataOptions*
+	)
 	;
 
 dsnutilUCSTablespacePhrase
@@ -826,6 +835,62 @@ dsnutilUCSCheckLobOptions
 	)
 	;
 
+dsnutilUCSCopy
+	: (
+	DSNUTIL_COPY 
+	(dsnutilUCSCopySpec | dsnutilUCSConcurrentSpec | dsnutilUCSFilterddnSpec) 
+	dsnutilUCSCloneOption? 
+	dsnutilUCSShrlevelOption? 
+	dsnutilUCSScopeOption?
+	)
+	;
+
+dsnutilUCSCopySpec
+	: ((DSNUTIL_LIST dsnutilUCSArg dsnutilUCSDatasetSpec dsnutilUCSFullOrChangelimit?) 
+	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) dsnutilUCSFullOrChangelimit? (DSNUTIL_DSNUM dsnutilUCSArg)? dsnutilUCSDatasetSpec)+)
+	(DSNUTIL_PARALLEL (DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?)?
+	(DSNUTIL_TAPEUNITS DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
+	(DSNUTIL_CHECKPAGE | DSNUTIL_NOCHECKPAGE)?
+	(DSNUTIL_SYSTEMPAGES (DSNUTIL_YES | DSNUTIL_NO))?
+	((DSNUTIL_FLASHCOPY DSNUTIL_NO) | (DSNUTIL_FLASHCOPY (DSNUTIL_NO | DSNUTIL_CONSISTENT) (DSNUTIL_FCCOPYDDN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?))?
+	;
+
+dsnutilUCSFullOrChangelimit
+	: ((DSNUTIL_FULL (DSNUTIL_YES | DSNUTIL_NO)) | dsnutilUCSChangelimitSpec)
+	;
+
+dsnutilUCSConcurrentSpec
+	: ((DSNUTIL_LIST dsnutilUCSArg dsnutilUCSDatasetSpec) 
+	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) (DSNUTIL_DSNUM dsnutilUCSArg)? dsnutilUCSDatasetSpec)+)
+	DSNUTIL_CONCURRENT
+	;
+
+dsnutilUCSFilterddnSpec
+	: ((DSNUTIL_LIST dsnutilUCSArg) 
+	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) (DSNUTIL_DSNUM dsnutilUCSArg)?)+)
+	dsnutilUCSDatasetSpec 
+	DSNUTIL_FILTERDDN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1 
+	DSNUTIL_CONCURRENT
+	;
+
+dsnutilUCSDatasetSpec
+	: ((DSNUTIL_COPYDDN dsnutilUCSArgList1 (DSNUTIL_RECOVERYDDN dsnutilUCSArgList1)?)
+	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList1))
+	;
+
+dsnutilUCSChangelimitSpec
+	: (DSNUTIL_CHANGELIMIT dsnutilUCSArgList DSNUTIL_REPORTONLY?)
+	;
+
+dsnutilUCSTablespaceSpec
+	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+	;
+
+dsnutilUCSIndexspaceSpec
+	: ((DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
+	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+	;
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_CHAR+
@@ -865,6 +930,10 @@ dsnutilUCSIndexName
 	: dsnutilUCSDatabaseObjectName
 	;
 
+dsnutilUCSIndexspaceName
+	: dsnutilUCSDatabaseObjectName
+	;
+
 dsnutilUCSQualifiedTablespaceName
 	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSTablespaceName)
 	;
@@ -877,6 +946,10 @@ dsnutilUCSQualifiedIndexName
 	: ((dsnutilUCSCreatorID (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSIndexName)
 	;
 
+dsnutilUCSQualifiedIndexspaceName
+	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSIndexspaceName)
+	;
+
 /*
 This could be simplified by using setType() or ->type() in the lexer,
 but at least for now it's helpful to see exactly which token was 
@@ -884,7 +957,13 @@ matched in which mode.
 */
 dsnutilArgument3Text
 	: (
-	DSNUTIL_CHAR 
+	dsnutilUCSBackup
+	| dsnutilUCSCatmaint
+	| dsnutilUCSCheckData
+	| dsnutilUCSCheckIndex
+	| dsnutilUCSCheckLob
+	| dsnutilUCSCopy
+	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
 	| DSNUTIL_DSN 
 	| DSNUTIL_MODELDCB
@@ -986,11 +1065,6 @@ dsnutilArgument3Text
 	| DSNUTIL_HEXLIT_WS_CHAR
 	| DSNUTIL_HEXLIT_X_APOS
 	| (DSNUTIL_WHEN DSNUTIL_WHEN_LPAREN NOT? predicate ((AND | OR) NOT? LPAREN* predicate RPAREN*)* RPAREN)
-	| dsnutilUCSBackup
-	| dsnutilUCSCatmaint
-	| dsnutilUCSCheckData
-	| dsnutilUCSCheckIndex
-	| dsnutilUCSCheckLob
 	)
 	;
 

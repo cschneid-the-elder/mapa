@@ -5023,6 +5023,62 @@ DSNUTIL_CHECK_LOB
 	: C H E C K (WS | NEWLINE)+ L O B
 	;
 
+DSNUTIL_CHANGELIMIT
+	: C H A N G E L I M I T
+	;
+
+DSNUTIL_REPORTONLY
+	: R E P O R T O N L Y
+	;
+
+DSNUTIL_COPYDDN
+	: C O P Y D D N
+	;
+
+DSNUTIL_RECOVERYDDN
+	: R E C O V E R Y D D N
+	;
+
+DSNUTIL_FILTERDDN
+	: F I L T E R D D N
+	;
+
+DSNUTIL_CONCURRENT
+	: C O N C U R R E N T
+	;
+
+DSNUTIL_COPY
+	: C O P Y
+	;
+
+DSNUTIL_TAPEUNITS
+	: T A P E U N I T S
+	;
+
+DSNUTIL_CHECKPAGE
+	: C H E C K P A G E
+	;
+
+DSNUTIL_NOCHECKPAGE
+	: N O C H E C K P A G E
+	;
+
+DSNUTIL_SYSTEMPAGES
+	: S Y S T E M P A G E S
+	;
+
+DSNUTIL_FLASHCOPY
+	: F L A S H C O P Y
+	;
+
+DSNUTIL_CONSISTENT
+	: C O N S I S T E N T
+	;
+
+DSNUTIL_FCCOPYDDN
+	: F C C O P Y D D N
+	;
+
 /*
 This rule is here to prevent matches with the DSNUTIL_DATA rule.
 */
