@@ -579,11 +579,13 @@ dsnutilArgument3
 
 dsnutilUCSArg
 	: (
-	(DSNUTIL_PAREN_CHAR | DSNUTIL_PAREN_DOT)+
-	| DSNUTIL_DOUBLE_APOS_CHAR+ 
-	| DSNUTIL_APOS_CHAR+
-	| DSNUTIL_QUOTE_CHAR+
-	| DSNUTIL_CHAR+
+	(DSNUTIL_PAREN_CHAR 
+	| DSNUTIL_PAREN_DOT
+	| DSNUTIL_DOUBLE_APOS_CHAR
+	| DSNUTIL_APOS_CHAR
+	| DSNUTIL_QUOTE_CHAR
+	| DSNUTIL_CHAR
+	| DSNUTIL_HEXLIT_WS_CHAR)+
 	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_QUOTE DSNUTIL_QUOTE_CHAR* DSNUTIL_QUOTE1)
 	| (DSNUTIL_HEXLIT_X DSNUTIL_HEXLIT_X_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
@@ -601,11 +603,15 @@ dsnutilUCSArgList1
 	| (DSNUTIL_LPAREN DSNUTIL_COMMA dsnutilUCSArg DSNUTIL_RPAREN1))
 	;
 
+dsnutilUCSArgInParens
+	: (DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
+	;
+
 dsnutilUCSBackup
 	: DSNUTIL_BACKUP DSNUTIL_SYSTEM (DSNUTIL_FULL | DSNUTIL_DATA_ONLY)?
-	(DSNUTIL_ALTERNATE_CP DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
-	(DSNUTIL_DBBSG DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
-	(DSNUTIL_LGBSG DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
+	(DSNUTIL_ALTERNATE_CP dsnutilUCSArgInParens)?
+	(DSNUTIL_DBBSG dsnutilUCSArgInParens)?
+	(DSNUTIL_LGBSG dsnutilUCSArgInParens)?
 	((DSNUTIL_ESTABLISH | DSNUTIL_END)? DSNUTIL_FCINCREMENTAL)?
 	dsnutilUCSReplicationCopyOption?
 	;
@@ -614,7 +620,7 @@ dsnutilUCSReplicationCopyOption
 	: (
 	DSNUTIL_FORCE 
 	| (DSNUTIL_DUMP dsnutilUCSDumpclassSpec? DSNUTIL_FORCE?) 
-	| (DSNUTIL_DUMPONLY (DSNUTIL_TOKEN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)? dsnutilUCSDumpclassSpec?)
+	| (DSNUTIL_DUMPONLY (DSNUTIL_TOKEN dsnutilUCSArgInParens)? dsnutilUCSDumpclassSpec?)
 	)
 	;
 	
@@ -625,7 +631,7 @@ dsnutilUCSDumpclassSpec
 dsnutilUCSCatmaint
 	: (
 	DSNUTIL_CATMAINT DSNUTIL_UPDATE
-	((DSNUTIL_LEVEL DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
+	((DSNUTIL_LEVEL dsnutilUCSArgInParens)
 	| (DSNUTIL_UNLDDN dsnutilUCSArg)
 	| dsnutilUCSSwitchSpec
 	| dsnutilUCSUtilxSpec)
@@ -845,14 +851,62 @@ dsnutilUCSCopy
 	)
 	;
 
+/*
+This does not match the syntax diagram, as there are
+discrepencies between the syntax diagram and the examples.
+*/
 dsnutilUCSCopySpec
-	: ((DSNUTIL_LIST dsnutilUCSArg dsnutilUCSDatasetSpec dsnutilUCSFullOrChangelimit?) 
-	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) dsnutilUCSFullOrChangelimit? (DSNUTIL_DSNUM dsnutilUCSArg)? dsnutilUCSDatasetSpec)+)
-	(DSNUTIL_PARALLEL (DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?)?
-	(DSNUTIL_TAPEUNITS DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?
-	(DSNUTIL_CHECKPAGE | DSNUTIL_NOCHECKPAGE)?
-	(DSNUTIL_SYSTEMPAGES (DSNUTIL_YES | DSNUTIL_NO))?
-	((DSNUTIL_FLASHCOPY DSNUTIL_NO) | (DSNUTIL_FLASHCOPY (DSNUTIL_NO | DSNUTIL_CONSISTENT) (DSNUTIL_FCCOPYDDN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)?))?
+	: dsnutilUCSCopySpecOptions*
+	(
+		(DSNUTIL_LIST 
+		dsnutilUCSArg 
+		dsnutilUCSCopySpecOptions* 
+		dsnutilUCSDatasetSpec? 
+		dsnutilUCSFullOrChangelimit?) 
+		| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) 
+		(dsnutilUCSFullOrChangelimit | dsnutilUCSCopyDsnum | dsnutilUCSDatasetSpec)*)+
+	)
+	dsnutilUCSCopySpecOptions*
+	;
+
+dsnutilUCSCopyDsnum
+	: (DSNUTIL_DSNUM (DSNUTIL_ALL | dsnutilUCSArg))
+	;
+
+dsnutilUCSCopySpecOptions
+	: (
+	dsnutilUCSCopySpecParallelOption
+	| dsnutilUCSTapeunitsOption
+	| dsnutilUCSCheckpageOption
+	| dsnutilUCSSystempagesOption
+	| dsnutilUCSFlashcopyOption
+	| dsnutilUCSCloneOption 
+	| dsnutilUCSShrlevelOption 
+	| dsnutilUCSScopeOption
+	)
+	;
+
+dsnutilUCSCopySpecParallelOption
+	: (DSNUTIL_PARALLEL (dsnutilUCSArgInParens)?)
+	;
+
+dsnutilUCSTapeunitsOption
+	: (DSNUTIL_TAPEUNITS dsnutilUCSArgInParens)
+	;
+
+dsnutilUCSCheckpageOption
+	: (DSNUTIL_CHECKPAGE | DSNUTIL_NOCHECKPAGE)
+	;
+
+dsnutilUCSSystempagesOption
+	: (DSNUTIL_SYSTEMPAGES (DSNUTIL_YES | DSNUTIL_NO))
+	;
+
+dsnutilUCSFlashcopyOption
+	: (
+	(DSNUTIL_FLASHCOPY DSNUTIL_NO) 
+	| (DSNUTIL_FLASHCOPY (DSNUTIL_NO | DSNUTIL_CONSISTENT) (DSNUTIL_FCCOPYDDN dsnutilUCSArgInParens)?)
+	)
 	;
 
 dsnutilUCSFullOrChangelimit
@@ -868,9 +922,9 @@ dsnutilUCSConcurrentSpec
 dsnutilUCSFilterddnSpec
 	: ((DSNUTIL_LIST dsnutilUCSArg) 
 	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) (DSNUTIL_DSNUM dsnutilUCSArg)?)+)
-	dsnutilUCSDatasetSpec 
-	DSNUTIL_FILTERDDN DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1 
-	DSNUTIL_CONCURRENT
+	(dsnutilUCSDatasetSpec 
+	| (DSNUTIL_FILTERDDN dsnutilUCSArgInParens)
+	| DSNUTIL_CONCURRENT)*
 	;
 
 dsnutilUCSDatasetSpec
