@@ -607,6 +607,25 @@ dsnutilUCSArgInParens
 	: (DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
 	;
 
+dsnutilUCSDsn
+	: (
+	DSNUTIL_DSN_CHAR+
+	| DSNUTIL_DSN_WS_CHAR+
+	| (DSNUTIL_DSN_OPEN_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
+	| (DSNUTIL_DSN_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR+ DSNUTIL_DOUBLE_APOS1)
+	| (DSNUTIL_DSN_WS_OPEN_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
+	| (DSNUTIL_DSN_WS_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR+ DSNUTIL_DOUBLE_APOS1)
+	| (DSNUTIL_DSN_LPAREN (DSNUTIL_PAREN_CHAR | DSNUTIL_PAREN_DOT)+ dsnutilUCSDsnMemberName? DSNUTIL_RPAREN1)
+	| (DSNUTIL_DSN_WS_LPAREN (DSNUTIL_PAREN_CHAR | DSNUTIL_PAREN_DOT)+ dsnutilUCSDsnMemberName? DSNUTIL_RPAREN1)
+	| (DSNUTIL_DSN_LPAREN DSNUTIL_DSN_OPEN_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS DSNUTIL_RPAREN1)
+	| (DSNUTIL_DSN_LPAREN DSNUTIL_DSN_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR+ DSNUTIL_DOUBLE_APOS1 DSNUTIL_RPAREN1)
+	)
+	;
+
+dsnutilUCSDsnMemberName
+	: (DSNUTIL_LPAREN1 DSNUTIL_PAREN_CHAR+ DSNUTIL_RPAREN1)
+	;
+
 dsnutilUCSBackup
 	: DSNUTIL_BACKUP DSNUTIL_SYSTEM (DSNUTIL_FULL | DSNUTIL_DATA_ONLY)?
 	(DSNUTIL_ALTERNATE_CP dsnutilUCSArgInParens)?
@@ -915,13 +934,13 @@ dsnutilUCSFullOrChangelimit
 
 dsnutilUCSConcurrentSpec
 	: ((DSNUTIL_LIST dsnutilUCSArg dsnutilUCSDatasetSpec) 
-	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) (DSNUTIL_DSNUM dsnutilUCSArg)? dsnutilUCSDatasetSpec)+)
+	| ((dsnutilUCSTablespaceCopySpec | dsnutilUCSIndexspaceCopySpec) dsnutilUCSDatasetSpec)+)
 	DSNUTIL_CONCURRENT
 	;
 
 dsnutilUCSFilterddnSpec
 	: ((DSNUTIL_LIST dsnutilUCSArg) 
-	| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) (DSNUTIL_DSNUM dsnutilUCSArg)?)+)
+	| ((dsnutilUCSTablespaceCopySpec | dsnutilUCSIndexspaceCopySpec))+)
 	(dsnutilUCSDatasetSpec 
 	| (DSNUTIL_FILTERDDN dsnutilUCSArgInParens)
 	| DSNUTIL_CONCURRENT)*
@@ -940,9 +959,36 @@ dsnutilUCSTablespaceSpec
 	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
 	;
 
+dsnutilUCSTablespaceCopySpec
+	: (dsnutilUCSTablespaceSpec (DSNUTIL_DSNUM dsnutilUCSArg)?)
+	;
+
 dsnutilUCSIndexspaceSpec
 	: ((DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
 	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+	;
+
+dsnutilUCSIndexspaceCopySpec
+	: (dsnutilUCSIndexspaceSpec (DSNUTIL_DSNUM dsnutilUCSArg)?)
+	;
+
+dsnutilUCSCopyToCopy
+	: (
+	DSNUTIL_COPYTOCOPY
+	(((DSNUTIL_LIST dsnutilUCSArg) dsnutilUCSFromCopySpec? dsnutilUCSDatasetSpec?)
+	| ((dsnutilUCSTablespaceCopySpec | dsnutilUCSIndexspaceCopySpec) dsnutilUCSFromCopySpec? dsnutilUCSDatasetSpec?)+)
+	DSNUTIL_CLONE?
+	)
+	;
+
+dsnutilUCSFromCopySpec
+	: (
+	DSNUTIL_FROMLASTCOPY
+	| DSNUTIL_FROMLASTFULLCOPY
+	| DSNUTIL_FROMLASTINCRCOPY
+	| DSNUTIL_FROMLASTFLASHCOPY
+	| (DSNUTIL_FROMCOPY dsnutilUCSDsn (DSNUTIL_FROMVOLUME (DSNUTIL_CATALOG | (dsnutilUCSArg (DSNUTIL_FROMSEQNO dsnutilUCSArg)?)))?)
+	)
 	;
 
 dsnutilUCSDatabaseObjectName
@@ -1017,6 +1063,7 @@ dsnutilArgument3Text
 	| dsnutilUCSCheckIndex
 	| dsnutilUCSCheckLob
 	| dsnutilUCSCopy
+	| dsnutilUCSCopyToCopy
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
 	| DSNUTIL_DSN 
