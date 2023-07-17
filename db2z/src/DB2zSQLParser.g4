@@ -1093,6 +1093,225 @@ dsnutilUCSExecSql
 	)
 	;
 
+dsnutilUCSTemplate
+	: (
+	DSNUTIL_TEMPLATE dsnutilUCSTemplateName
+	((((DSNUTIL_DSN dsnutilUCSDsn)
+		| dsnutilUCSDsnCommonOptions 
+		| dsnutilUCSDsnDiskOptions
+		| dsnutilUCSDsnTapeOptions)+
+		dsnutilUCSDsnSubsysSpec?)
+	| dsnutilUCSPathExpression)
+	)
+	;
+
+dsnutilUCSDsnCommonOptions
+	: (
+	dsnutilUCSDsnUnitOption
+	| dsnutilUCSDsnModelDcbOption
+	| dsnutilUCSDsnBufnoOption
+	| dsnurtilUCSDsnDataclasOption
+	| dsnutilUCSDsnMgmtclasOption
+	| dsnutilUCSDsnStorclasOption
+	| dsnutilUCSDsnRetpdOption
+	| dsnutilUCSDsnVolumesOption
+	| dsnutilUCSDsnVolcntOption
+	| dsnutilUCSDsnUncntOption
+	| dsnutilUCSDsnGdgLimitOption
+	| dsnutilUCSDsnDispOption
+	| dsnutilUCSDsnLimitOption
+	| dsnutilUCSDsnTimeOption
+	| dsnutilUCSDsnBlkszlimOption
+	)
+	;
+
+dsnutilUCSDsnDiskOptions
+	: (
+	dsnutilUCSDsnSpaceOption
+	| dsnutilUCSDsnPctprimeOption
+	| dsnutilUCSDsnMaxprimeOption
+	| dsnutilUCSDsnNbrsecndOption
+	| dsnutilUCSDsnDirOption
+	| dsnutilUCSDsnDsntypeOption
+	| dsnutilUCSDsnEattrOption
+	)
+	;
+
+dsnutilUCSDsnTapeOptions
+	: (
+	dsnutilUCSDsnStackOption
+	| dsnutilUCSDsnTrtchOption
+	)
+	;
+
+dsnutilUCSDsnSubsysSpec
+	: (
+	dsnutilUCSDsnSubsysOption
+	dsnutilUCSDsnLreclOption
+	dsnutilUCSDsnRecfmOption
+	)
+	;
+
+dsnutilUCSPathExpression
+	: (
+	DSNUTIL_PATH dsnutilUCSPathName dsnutilUCSPathOptions*
+	)
+	;
+
+dsnutilUCSPathOptions
+	: (
+	dsnutilUCSPathFiledataOption
+	| dsnutilUCSDsnRecfmOption
+	| dsnutilUCSDsnLreclOption
+	| dsnutilUCSPathPathoptsOption
+	| dsnutilUCSPathPathmodeOption
+	| dsnutilUCSPathPathdispOption
+	)
+	;
+
+dsnutilUCSDsnUnitOption
+	: (DSNUTIL_UNIT ((DSNUTIL_EQUAL? dsnutilUCSArg) | dsnutilUCSArgInParens))
+	;
+
+dsnutilUCSDsnModelDcbOption
+	: (DSNUTIL_MODELDCB dsnutilUCSDsn)
+	;
+
+dsnutilUCSDsnBufnoOption
+	: (DSNUTIL_BUFNO dsnutilUCSArg)
+	;
+
+dsnurtilUCSDsnDataclasOption
+	: (DSNUTIL_DATACLAS dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnMgmtclasOption
+	: (DSNUTIL_MGMTCLAS dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnStorclasOption
+	: (DSNUTIL_STORCLAS dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnRetpdOption
+	: ((DSNUTIL_RETPD | DSNUTIL_EXPDL) dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnVolumesOption
+	: (DSNUTIL_VOLUMES dsnutilUCSArgList)
+	;
+
+dsnutilUCSDsnVolcntOption
+	: (DSNUTIL_VOLCNT dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnUncntOption
+	: (DSNUTIL_UNCNT dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnGdgLimitOption
+	: (DSNUTIL_GDGLIMIT (dsnutilUCSArg | dsnutilUCSArgInParens))
+	;
+
+dsnutilUCSDsnDispOption
+	: (DSNUTIL_DISP dsnutilUCSArgList)
+	;
+
+dsnutilUCSDsnLimitOption
+	: (DSNUTIL_LIMIT dsnutilUCSArgList)
+	;
+
+dsnutilUCSDsnTimeOption
+	: (DSNUTIL_TIME dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnBlkszlimOption
+	: (DSNUTIL_BLKSZLIM dsnutilUCSArg dsnutilUCSArg?)
+	;
+
+dsnutilUCSDsnSpaceOption
+	: (DSNUTIL_SPACE dsnutilUCSArgList? dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnPctprimeOption
+	: (DSNUTIL_PCTPRIME dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnMaxprimeOption
+	: (DSNUTIL_MAXPRIME dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnNbrsecndOption
+	: (DSNUTIL_NBRSECND dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnDirOption
+	: (DSNUTIL_DIR dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnDsntypeOption
+	: (DSNUTIL_DSNTYPE (dsnutilUCSDsnDsntype | dsnutilUCSArgInParens))
+	;
+
+dsnutilUCSDsnDsntype
+	: (DSNUTIL_LIBRARY
+	| DSNUTIL_PDS
+	| DSNUTIL_HFS
+	| DSNUTIL_NULL
+	| DSNUTIL_BASIC
+	| DSNUTIL_LARGE
+	| DSNUTIL_EXTREQ
+	| DSNUTIL_EXTPREF)
+	;
+
+dsnutilUCSDsnEattrOption
+	: DSNUTIL_EATTR
+	;
+
+dsnutilUCSDsnStackOption
+	: (DSNUTIL_STACK (DSNUTIL_YES | DSNUTIL_NO))
+	;
+
+dsnutilUCSDsnTrtchOption
+	: (DSNUTIL_TRTCH (DSNUTIL_NONE | DSNUTIL_COMP | DSNUTIL_NOCOMP))
+	;
+
+dsnutilUCSDsnSubsysOption
+	: (DSNUTIL_SUBSYS dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnLreclOption
+	: (DSNUTIL_LRECL dsnutilUCSArg)
+	;
+
+dsnutilUCSDsnRecfmOption
+	: (DSNUTIL_RECFM dsnutilUCSArg)
+	;
+
+dsnutilUCSPathFiledataOption
+	: (DSNUTIL_FILEDATA (DSNUTIL_RECORD | DSNUTIL_TEXT | DSNUTIL_BINARY))
+	;
+
+dsnutilUCSPathPathoptsOption
+	: (DSNUTIL_PATHOPTS dsnutilUCSArgList)
+	;
+
+dsnutilUCSPathPathmodeOption
+	: (DSNUTIL_PATHMODE dsnutilUCSArgList)
+	;
+
+dsnutilUCSPathPathdispOption
+	: (DSNUTIL_PATHDISP dsnutilUCSArgList)
+	;
+
+dsnutilUCSTemplateName
+	: dsnutilUCSArg
+	;
+
+dsnutilUCSPathName
+	: dsnutilUCSArg
+	;
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_CHAR+
@@ -1168,6 +1387,7 @@ dsnutilArgument3Text
 	| dsnutilUCSCopyToCopy
 	| dsnutilUCSDiagnose
 	| dsnutilUCSExecSql
+	| dsnutilUCSTemplate
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
 	| DSNUTIL_DSN 

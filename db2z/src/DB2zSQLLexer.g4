@@ -54,7 +54,7 @@ fragment Z:('z'|'Z');
 LPAREN
 	: '('
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	->pushMode(DEFAULT_MODE)
 	;
@@ -62,7 +62,7 @@ LPAREN
 RPAREN
 	: ')'
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 		switch (_modeStack.peek()){
 			case DEFAULT_MODE :
 				popMode();
@@ -165,7 +165,7 @@ COMMA
 	{
 		if (dsnutil) {
 			dsnutilArgc++;
-			System.out.println("dsnutilArgc = " + dsnutilArgc);
+			//System.out.println("dsnutilArgc = " + dsnutilArgc);
 		}
 	}
 	;
@@ -174,7 +174,7 @@ DSNUTIL_OPEN_APOS
 	: '\''
 	{dsnutil && dsnutilArgc == 2}?
 	{
-		System.out.println("dsnutil && dsnutilArgc == 2 & \'");
+		//System.out.println("dsnutil && dsnutilArgc == 2 & \'");
 	}
 	->pushMode(DSNUTIL_MODE)
 	;
@@ -183,7 +183,7 @@ DSNUTIL_OPEN_QUOTE
 	: '"'
 	{dsnutil && dsnutilArgc == 2}?
 	{
-		System.out.println("dsnutil && dsnutilArgc == 2 & \"");
+		//System.out.println("dsnutil && dsnutilArgc == 2 & \"");
 	}
 	->pushMode(DSNUTIL_MODE)
 	;
@@ -4493,7 +4493,7 @@ SQLIDENTIFIER
 		||  getText().equalsIgnoreCase("DSNUTILU")
 		||  getText().equalsIgnoreCase("DSNUTILS")) {
 			dsnutil = true;
-			System.out.println("dsnutil matched");
+			//System.out.println("dsnutil matched");
 		}
 	}
 	;
@@ -4580,7 +4580,7 @@ DSNUTIL_CLOSE_QUOTE
 DSNUTIL_LPAREN
 	: LPAREN
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
@@ -4588,13 +4588,14 @@ DSNUTIL_LPAREN
 DSNUTIL_RPAREN
 	: RPAREN
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	;
 
 DSNUTIL_EQUAL
 	: '='
-	->pushMode(DSNUTIL_DB_TS_MODE)
+//	->pushMode(DSNUTIL_DB_TS_MODE)
+	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_BACKUP
@@ -4701,10 +4702,41 @@ DSNUTIL_EXTENDED
 	: E X T E N D E D
 	;
 
+DSNUTIL_LIBRARY
+	: L I B R A R Y
+	;
+
+DSNUTIL_PDS
+	: P D S
+	;
+
+DSNUTIL_HFS
+	: H F S
+	;
+
+DSNUTIL_NULL
+	: N U L L
+	;
+
+DSNUTIL_LARGE
+	: L A R G E
+	;
+
+DSNUTIL_EXTREQ
+	: E X T R E Q
+	;
+
+DSNUTIL_EXTPREF
+	: E X T P R E F
+	;
+
+DSNUTIL_EATTR
+	: E A T T R
+	;
+
 DSNUTIL_RESET
 	: RESET
 	;
-
 
 DSNUTIL_WHEN
 	: WHEN
@@ -4713,7 +4745,8 @@ DSNUTIL_WHEN
 
 DSNUTIL_EXPDL
 	: E X P D L
-	->pushMode(DSNUTIL_DB_TS_MODE)
+//	->pushMode(DSNUTIL_DB_TS_MODE)
+	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_COLDEL
@@ -4740,16 +4773,10 @@ DSNUTIL_CHAR
 	: .+?
 	;
 
-/*
-This is here to prevent matches with the DSN token.
-*/
 DSNUTIL_DSNTYPE
 	: D S N T Y P E
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_DSN token.
-*/
 DSNUTIL_DSNUM
 	: D S N U M
 	;
@@ -4997,11 +5024,16 @@ DSNUTIL_KEY
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
-/*
-This rule is here to prevent matches with the DSNUTIL_DATA rule.
-*/
 DSNUTIL_DATACLAS
 	: D A T A C L A S
+	;
+
+DSNUTIL_MGMTCLAS
+	: M G M T C L A S
+	;
+
+DSNUTIL_STORCLAS
+	: S T O R C L A S
 	;
 
 /*
@@ -5377,6 +5409,134 @@ DSNUTIL_DBET
 	: D B E T
 	;
 
+DSNUTIL_BUFNO
+	: B U F N O
+	;
+
+DSNUTIL_RETPD
+	: R E T P D
+	;
+
+DSNUTIL_VOLUMES
+	: V O L U M E S
+	;
+
+DSNUTIL_VOLCNT
+	: V O L C N T
+	;
+
+DSNUTIL_UNCNT
+	: U N C N T
+	;
+
+DSNUTIL_GDGLIMIT
+	: G D G L I M I T
+	;
+
+DSNUTIL_DISP
+	: D I S P
+	;
+
+DSNUTIL_LIMIT
+	: L I M I T
+	;
+
+DSNUTIL_TIME
+	: T I M E
+	;
+
+DSNUTIL_BLKSZLIM
+	: B L K S Z L I M
+	;
+
+DSNUTIL_SPACE
+	: S P A C E
+	;
+
+DSNUTIL_PCTPRIME
+	: P C T P R I M E
+	;
+
+DSNUTIL_MAXPRIME
+	: M A X P R I M E
+	;
+
+DSNUTIL_NBRSECND
+	: N B R S E C N D
+	;
+
+DSNUTIL_DIR
+	: D I R
+	;
+
+DSNUTIL_STACK
+	: S T A C K
+	;
+
+DSNUTIL_TRTCH
+	: T R T C H
+	;
+
+DSNUTIL_NONE
+	: N O N E
+	;
+
+DSNUTIL_COMP
+	: C O M P
+	;
+
+DSNUTIL_NOCOMP
+	: N O C O M P
+	;
+
+DSNUTIL_SUBSYS
+	: S U B S Y S
+	;
+
+DSNUTIL_LRECL
+	: L R E C L
+	;
+
+DSNUTIL_RECFM
+	: R E C F M
+	;
+
+DSNUTIL_FILEDATA
+	: F I L E D A T A
+	;
+
+DSNUTIL_RECORD
+	: R E C O R D
+	;
+
+DSNUTIL_BINARY
+	: B I N A R Y
+	;
+
+DSNUTIL_PATHOPTS
+	: P A T H O P T S
+	;
+
+DSNUTIL_PATHMODE
+	: P A T H M O D E
+	;
+
+DSNUTIL_PATHDISP
+	: P A T H D I S P
+	;
+
+DSNUTIL_TEMPLATE
+	: T E M P L A T E
+	;
+
+DSNUTIL_PATH
+	: P A T H
+	;
+
+DSNUTIL_UNIT
+	: U N I T
+	;
+
 
 
 mode DSNUTIL_WHEN_MODE;
@@ -5389,7 +5549,7 @@ DSNUTIL_WHEN_WS
 DSNUTIL_WHEN_LPAREN
 	: LPAREN
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 		dsnutilArgc = 0;
 		dsnutil = false;
 	}
@@ -5513,7 +5673,7 @@ allowed.
 DSNUTIL_DSN_LPAREN
 	: LPAREN
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
@@ -5574,7 +5734,7 @@ DSNUTIL_DSN_WS_OPEN_APOS
 DSNUTIL_DSN_WS_LPAREN
 	: LPAREN
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
@@ -5711,7 +5871,7 @@ DSNUTIL_DB_TS_DOT
 DSNUTIL_DB_TS_LPAREN
 	: '('
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 		dsnutil_db_ts_char = false;
 	}
 	->pushMode(DSNUTIL_PAREN_MODE) //we're not coming back here
@@ -5720,7 +5880,7 @@ DSNUTIL_DB_TS_LPAREN
 DSNUTIL_DB_TS_RPAREN
 	: ')'
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 		dsnutil_db_ts_char = false;
 		switch(_modeStack.peek()) {
 			case DSNUTIL_PAREN_MODE :
@@ -5756,7 +5916,7 @@ more predicates.  There are other possibilities.
 DSNUTIL_LPAREN1
 	: '('
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 	}
 	->pushMode(DSNUTIL_PAREN_MODE)
 	;
@@ -5764,7 +5924,7 @@ DSNUTIL_LPAREN1
 DSNUTIL_RPAREN1
 	: ')'
 	{
-		System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
 		switch(_modeStack.peek()) {
 			case DSNUTIL_DSN_WS_MODE :
 				popMode(); //back to DSNUTIL_DSN_WS_MODE
