@@ -283,6 +283,11 @@ SQLBLOCKCOMMENTEND
 	: SPLAT SLASH
 	;
 
+DSNUTIL_ENDEXEC
+	: E N D E X E C
+	->popMode
+	;
+
 INSTEAD
 	: I N S T E A D 
 	;
@@ -4899,7 +4904,7 @@ DSNUTIL_SWITCHTIME
 
 DSNUTIL_EXEC_SQL
 	: E X E C (WS | NEWLINE)+ S Q L
-	->pushMode(DSNUTIL_EXEC_SQL_MODE)
+	->pushMode(DEFAULT_MODE)
 	;
 
 DSNUTIL_TRACEID
@@ -5974,10 +5979,12 @@ Whilst processing, an EXEC SQL token was encountered, indicating
 some arbitrary SQL follows, terminated by an ENDEXEC token.
 */
 
+/*
 DSNUTIL_ENDEXEC
 	: E N D E X E C
 	->popMode
 	;
+*/
 
 DSNUTIL_EXEC_SQL_CHAR
 	: .+?

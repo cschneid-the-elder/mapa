@@ -1036,6 +1036,63 @@ dsnutilUCSDiagnoseMessageOrTraceID
 	| (DSNUTIL_TRACEID dsnutilUCSArg (DSNUTIL_INSTANCE dsnutilUCSArg)?))
 	;
 
+dsnutilUCSExecSql
+	: (DSNUTIL_EXEC_SQL 
+	(alterDatabaseStatement
+	| alterFunctionStatement
+	| alterIndexStatement
+	| alterMaskStatement
+	| alterPermissionStatement
+	| alterProcedureStatement
+	| alterProcedureSQLPLStatement
+	| alterSequenceStatement
+	| alterStogroupStatement
+	| alterTableStatement
+	| alterTablespaceStatement
+	| alterTriggerStatement
+	| alterTriggerAdvancedStatement
+	| alterTrustedContextStatement
+	| alterViewStatement
+	| commitStatement
+	| commentStatement
+	| createAliasStatement
+	| createAuxiliaryTableStatement
+	| createDatabaseStatement
+	| createFunctionStatement
+	| createGlobalTemporaryTableStatement
+	| createIndexStatement
+	| createLobTablespaceStatement
+	| createMaskStatement
+	| createPermissionStatement
+	| createProcedureStatement
+	| createProcedureSQLPLStatement
+	| createRoleStatement
+	| createSequenceStatement
+	| createStogroupStatement
+	| createTableStatement
+	| createTablespaceStatement
+	| createTriggerStatement
+	| createTriggerAdvancedStatement
+	| createTrustedContextStatement
+	| createTypeArrayStatement
+	| createTypeDistinctStatement
+	| createVariableStatement
+	| createViewStatement
+	| declareCursorStatement
+	| deleteStatement
+	| dropStatement
+	| explainStatement
+	| grantStatement
+	| insertStatement
+	| labelStatement
+	| renameStatement
+	| revokeStatement
+	| setSpecialRegisterStatement
+	| updateStatement)
+	DSNUTIL_ENDEXEC
+	)
+	;
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_CHAR+
@@ -1110,6 +1167,7 @@ dsnutilArgument3Text
 	| dsnutilUCSCopy
 	| dsnutilUCSCopyToCopy
 	| dsnutilUCSDiagnose
+	| dsnutilUCSExecSql
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
 	| DSNUTIL_DSN 
