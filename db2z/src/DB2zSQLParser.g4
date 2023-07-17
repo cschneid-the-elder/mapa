@@ -991,6 +991,51 @@ dsnutilUCSFromCopySpec
 	)
 	;
 
+dsnutilUCSDiagnose
+	: (DSNUTIL_DIAGNOSE (dsnutilUCSDiagnoseStatement+ | DSNUTIL_END))
+	;
+
+dsnutilUCSDiagnoseStatement
+	: (
+	(DSNUTIL_TYPE dsnutilUCSArgList)
+	| (DSNUTIL_ALLDUMPS dsnutilUCSArgList?)
+	| (DSNUTIL_NODUMPS dsnutilUCSArgList?)
+	| dsnutilUCSDiagnoseDisplayStatement
+	| dsnutilUCSDiagnoseWaitStatement
+	| dsnutilUCSDiagnoseAbendStatement
+	)
+	;
+
+dsnutilUCSDiagnoseDisplayStatement
+	: (
+	DSNUTIL_DISPLAY
+	((DSNUTIL_OBD dsnutilUCSQualifiedTablespaceName 
+		(DSNUTIL_ALL | DSNUTIL_TABLES | DSNUTIL_INDEXES)? DSNUTIL_CLONE?)
+	| DSNUTIL_SYSUTIL
+	| DSNUTIL_MEPL
+	| DSNUTIL_AVAILABLE
+	| DSNUTIL_RBLP
+	| (DSNUTIL_DBET 
+		((DSNUTIL_DATABASE dsnutilUCSDatabaseName)
+		| (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+		| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+		DSNUTIL_CLONE?))
+	)
+	;
+
+dsnutilUCSDiagnoseWaitStatement
+	: (DSNUTIL_WAIT dsnutilUCSDiagnoseMessageOrTraceID+)
+	;
+
+dsnutilUCSDiagnoseAbendStatement
+	: (DSNUTIL_ABEND dsnutilUCSDiagnoseMessageOrTraceID DSNUTIL_NODUMP?)
+	;
+
+dsnutilUCSDiagnoseMessageOrTraceID
+	: ((DSNUTIL_MESSAGE dsnutilUCSArg (DSNUTIL_INSTANCE dsnutilUCSArg)?)
+	| (DSNUTIL_TRACEID dsnutilUCSArg (DSNUTIL_INSTANCE dsnutilUCSArg)?))
+	;
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_CHAR+
@@ -1064,6 +1109,7 @@ dsnutilArgument3Text
 	| dsnutilUCSCheckLob
 	| dsnutilUCSCopy
 	| dsnutilUCSCopyToCopy
+	| dsnutilUCSDiagnose
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
 	| DSNUTIL_DSN 
