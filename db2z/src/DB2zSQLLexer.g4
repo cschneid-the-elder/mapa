@@ -4769,9 +4769,11 @@ DSNUTIL_WS
 	->channel(HIDDEN)
 	;
 
+/*
 DSNUTIL_CHAR
 	: .+?
 	;
+*/
 
 DSNUTIL_DSNTYPE
 	: D S N T Y P E
@@ -4810,9 +4812,6 @@ DSNUTIL_TABLESPACESET
 	: T A B L E S P A C E S E T
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_TABLESPACE token.
-*/
 DSNUTIL_TABLESPACES
 	: T A B L E S P A C E S
 	;
@@ -4820,6 +4819,10 @@ DSNUTIL_TABLESPACES
 DSNUTIL_TABLESPACE
 	: T A B L E S P A C E
 	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INDEXSPACES
+	: I N D E X S P A C E S
 	;
 
 DSNUTIL_INDEXSPACE
@@ -5310,9 +5313,50 @@ DSNUTIL_XMLSCHEMA
 	: X M L S C H E M A
 	;
 
+DSNUTIL_LISTDEF
+	: L I S T D E F
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
 DSNUTIL_LIST
 	: L I S T
 	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
+DSNUTIL_EXCLUDE
+	: E X C L U D E
+	;
+
+DSNUTIL_CLONED
+	: C L O N E D
+	;
+
+DSNUTIL_DEFINED
+	: D E F I N E D
+	;
+
+DSNUTIL_RI
+	: R I 
+	;
+
+DSNUTIL_BASE
+	: B A S E
+	;
+
+DSNUTIL_LOB
+	: L O B
+	;
+
+DSNUTIL_HISTORY
+	: H I S T O R Y
+	;
+
+DSNUTIL_ARCHIVE
+	: A R C H I V E
+	;
+
+DSNUTIL_PARTLEVEL
+	: P A R T L E V E L
 	;
 
 DSNUTIL_PARALLEL
@@ -5535,6 +5579,10 @@ DSNUTIL_PATH
 
 DSNUTIL_UNIT
 	: U N I T
+	;
+
+DSNUTIL_CHAR
+	: ~[ \n,;)('"]+
 	;
 
 
@@ -5993,7 +6041,7 @@ DSNUTIL_PAREN_XMLCOLUMN
 	;
 
 DSNUTIL_PAREN_CHAR
-	: .+?
+	: DSNUTIL_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
@@ -6249,7 +6297,7 @@ DSNUTIL_HEXLIT_WS_WS
 	;
 
 DSNUTIL_HEXLIT_WS_CHAR
-	: .+?
+	: DSNUTIL_CHAR
 	{
 		dsnutil_hexlit_char = true;
 	}
@@ -6263,7 +6311,7 @@ Why are we here?
 
 We have consumed <token>, the whitespace following it, and
 the X preceeding a hex literal enclosed in apostrophes. We
-are here to detect the first apostrophe and pushMode.
+are here to detect the first apostrophe and then pushMode.
 */
 
 DSNUTIL_HEXLIT_X_APOS
@@ -6281,7 +6329,7 @@ first apostrophe should have taken us out of this mode.
 
 */
 DSNUTIL_HEXLIT_X_CHAR
-	: .+?
+	: DSNUTIL_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
