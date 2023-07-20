@@ -5315,12 +5315,14 @@ DSNUTIL_XMLSCHEMA
 
 DSNUTIL_LISTDEF
 	: L I S T D E F
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+//	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_LIST
 	: L I S T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+//	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_EXCLUDE
@@ -5741,7 +5743,7 @@ DSNUTIL_DSN_WS
 	->channel(HIDDEN),pushMode(DSNUTIL_DSN_WS_MODE);
 
 DSNUTIL_DSN_CHAR
-	: .+?
+	: ~[ \n,;)('"]+
 	//->type(DSNUTIL_CHAR)
 	;
 
@@ -5795,7 +5797,7 @@ DSNUTIL_DSN_WS_WS
 	->channel(HIDDEN),popMode,popMode;
 
 DSNUTIL_DSN_WS_CHAR
-	: .+?
+	: DSNUTIL_DSN_CHAR
 	{
 		dsnutil_dsn_ws_char = true;
 	}
@@ -5943,7 +5945,7 @@ DSNUTIL_DB_TS_RPAREN
 	;
 
 DSNUTIL_DB_TS_CHAR
-	: .+?
+	: ~[ \n.,;)('"]+
 	{
 		dsnutil_db_ts_char = true;
 	}
@@ -5955,10 +5957,7 @@ mode DSNUTIL_PAREN_MODE;
 Why are we here?
 
 A token has been seen which is followed by a paren.  What is enclosed
-in parentheses may include apostrophes or quotes.  If this is a
-REORG TABLESPACE utility control statement we are about to encounter
-what IBM calls a selection-condition-spec which may contain one or 
-more predicates.  There are other possibilities.
+in parentheses may include apostrophes or quotes.
 
 */
 DSNUTIL_LPAREN1
@@ -6134,7 +6133,7 @@ DSNUTIL_APOS
 	;
 
 DSNUTIL_APOS_CHAR
-	: .+?
+	: ~'\''+
 	//->type(DSNUTIL_CHAR)
 	;
 
@@ -6174,7 +6173,7 @@ DSNUTIL_QUOTE1
 	;
 
 DSNUTIL_QUOTE_CHAR
-	: .+?
+	: ~'"'+
 	//->type(DSNUTIL_CHAR)
 	;
 
@@ -6317,6 +6316,19 @@ are here to detect the first apostrophe and then pushMode.
 DSNUTIL_HEXLIT_X_APOS
 	: '\''
 	->pushMode(DSNUTIL_APOS_MODE) //we don't come back to this mode
+	;
+
+/*
+If this rule is matched then we've hit the end of the
+value following the whitespace following <token> and
+we need to get back to DSNUTIL_MODE.
+*/
+DSNUTIL_HEXLIT_X_WS
+	: (WS | NEWLINE)+
+	{
+		dsnutil_hexlit_char = false;
+	}
+	->channel(HIDDEN),popMode,popMode,popMode
 	;
 
 /*
