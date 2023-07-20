@@ -1564,6 +1564,99 @@ dsnutilUCSInitialObjectSpec
 	) (DSNUTIL_PARTLEVEL dsnutilUCSArgList?)?
 	;
 
+dsnutilUCSIgnoreSpec
+	: (
+	DSNUTIL_IGNORE DSNUTIL_LPAREN dsnutilUCSIgnoreSpecOption DSNUTIL_RPAREN1
+	)
+	;
+
+dsnutilUCSIgnoreSpecOption
+	: (
+	DSNUTIL_PAREN_WHEN
+	| DSNUTIL_PART
+	| DSNUTIL_CONV
+	| DSNUTIL_VALPROC
+	| DSNUTIL_IDERROR
+	| DSNUTIL_DUPKEY
+	)
+	;
+
+dsnutilUCSDecfloatSpec
+	: (
+	DSNUTIL_DECFLOAT_ROUNDMODE dsnutilUCSDecfloatSpecOption
+	)
+	;
+
+dsnutilUCSDecfloatSpecOption
+	: (
+	DSNUTIL_ROUND_CEILING
+	| DSNUTIL_ROUND_DOWN
+	| DSNUTIL_ROUND_FLOOR
+	| DSNUTIL_ROUND_HALF_DOWN
+	| DSNUTIL_ROUND_HALF_EVEN
+	| DSNUTIL_ROUND_HALF_UP
+	| DSNUTIL_ROUND_UP
+	)
+	;
+
+dsnutilUCSOverrideSpec
+	: (
+	DSNUTIL_OVERRIDE DSNUTIL_LPAREN 
+	dsnutilUCSOverrideSpecOption (DSNUTIL_COMMA dsnutilUCSOverrideSpecOption)* 
+	DSNUTIL_RPAREN1
+	)
+	;
+
+dsnutilUCSOverrideSpecOption
+	: (
+	DSNUTIL_SYSTEMPERIOD
+	| DSNUTIL_IDENTITY
+	| DSNUTIL_TRANSID
+	| DSNUTIL_NONDETERMINISTIC
+	| DSNUTIL_ROWCHANGE
+	)
+	;
+
+dsnutilUCSDrainSpec
+	: (
+	dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSSwitchtimeOption
+	)
+	;
+
+dsnutilUCSLabeledDurationExpression
+	: (
+	(DSNUTIL_CURRENT_DATE | DSNUTIL_CURRENT_TIMESTAMP DSNUTIL_WITH_TIMEZONE?)
+	((DSNUTIL_PLUS | DSNUTIL_MINUS) dsnutilUCSArg dsnutilDurationSuffix)+
+	)
+	;
+
+dsnutilUCSSwitchtimeOption
+	: (DSNUTIL_SWITCHTIME (DSNUTIL_NONE | dsnutilUCSArg | dsnutilUCSLabeledDurationExpression))
+	;
+
+dsnutilDurationSuffix
+	: (
+	DSNUTIL_YEAR
+	| DSNUTIL_YEARS
+	| DSNUTIL_MONTH
+	| DSNUTIL_MONTHS
+	| DSNUTIL_DAY
+	| DSNUTIL_DAYS
+	| DSNUTIL_HOUR
+	| DSNUTIL_HOURS
+	| DSNUTIL_MINUTE
+	| DSNUTIL_MINUTES
+	| DSNUTIL_SECOND
+	| DSNUTIL_SECONDS
+	| DSNUTIL_MICROSECOND
+	| DSNUTIL_MICROSECONDS
+	)
+	;
+
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_CHAR+

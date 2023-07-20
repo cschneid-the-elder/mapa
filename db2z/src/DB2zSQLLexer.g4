@@ -4783,9 +4783,6 @@ DSNUTIL_DSNUM
 	: D S N U M
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_DSN token.
-*/
 DSNUTIL_SHOWDSNS
 	: S H O W D S N S
 	;
@@ -4805,9 +4802,6 @@ DSNUTIL_FROMCOPY
 	->pushMode(DSNUTIL_DSN_MODE)
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_TABLESPACE token.
-*/
 DSNUTIL_TABLESPACESET
 	: T A B L E S P A C E S E T
 	;
@@ -4854,16 +4848,10 @@ DSNUTIL_STOGROUP
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_TABLE token.
-*/
 DSNUTIL_TABLESAMPLE
 	: T A B L E S A M P L E
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_TABLE token.
-*/
 DSNUTIL_REPEATABLE
 	: R E P E A T A B L E
 	;
@@ -4897,16 +4885,10 @@ DSNUTIL_FROM_TABLE
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_FROM token.
-*/
 DSNUTIL_FROMVOLUME
 	: F R O M V O L U M E
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_FROM token.
-*/
 DSNUTIL_FROMCOPYDDN
 	: F R O M C O P Y D D N
 	;
@@ -4967,16 +4949,10 @@ DSNUTIL_ROWID
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_VERSION token.
-*/
 DSNUTIL_RBALRSN_CONVERSION
 	: R B A L R S N '_' C O N V E R S I O N
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_VERSION token.
-*/
 DSNUTIL_SETCURRENTVERSION
 	: S E T C U R R E N T V E R S I O N
 	;
@@ -5001,23 +4977,14 @@ DSNUTIL_IMPLICIT_TZ
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_KEY token.
-*/
 DSNUTIL_KEYCARD
 	: K E Y C A R D
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_KEY token.
-*/
 DSNUTIL_SORTKEYS
 	: S O R T K E Y S
 	;
 
-/*
-This is here to prevent matches with the DSNUTIL_KEY token.
-*/
 DSNUTIL_SHOWKEYLABEL
 	: S H O W K E Y L A B E L
 	;
@@ -5039,9 +5006,6 @@ DSNUTIL_STORCLAS
 	: S T O R C L A S
 	;
 
-/*
-This rule is here to prevent matches with the DSNUTIL_DATA rule.
-*/
 DSNUTIL_DATA_ONLY
 	: D A T A (WS | NEWLINE)+ O N L Y
 	;
@@ -5127,9 +5091,6 @@ DSNUTIL_FCCOPYDDN
 	: F C C O P Y D D N
 	;
 
-/*
-This rule is here to prevent matches with the DSNUTIL_DATA rule.
-*/
 DSNUTIL_SKIP_LOCKED_DATA
 	: S K I P (WS | NEWLINE)+ LOCKED (WS | NEWLINE)+ DATA
 	;
@@ -5153,10 +5114,6 @@ DSNUTIL_LENGTH
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
-/*
-This rule is here to prevent matches with the DSNUTIL_PAGES rule or
-the DSNUTIL_VERSION rule.
-*/
 DSNUTIL_INSERTVERSIONPAGES
 	: I N S E R T V E R S I O N P A G E S
 	;
@@ -5582,6 +5539,121 @@ DSNUTIL_PATH
 DSNUTIL_UNIT
 	: U N I T
 	;
+
+DSNUTIL_CURRENT_DATE
+	: CURRENT_DATE
+	;
+
+DSNUTIL_CURRENT_TIMESTAMP
+	: CURRENT_TIMESTAMP
+	;
+
+DSNUTIL_WITH_TIMEZONE
+	: W I T H '_' T I M E Z O N E
+	;
+
+DSNUTIL_YEAR
+	: Y E A R 
+	;
+
+DSNUTIL_YEARS
+	: Y E A R S 
+	;
+
+DSNUTIL_MONTH
+	: M O N T H 
+	;
+
+DSNUTIL_MONTHS
+	: M O N T H S 
+	;
+
+DSNUTIL_DAY
+	: D A Y 
+	;
+
+DSNUTIL_DAYS
+	: D A Y S 
+	;
+
+DSNUTIL_HOUR
+	: H O U R 
+	;
+
+DSNUTIL_HOURS
+	: H O U R S 
+	;
+
+DSNUTIL_MINUTE
+	: M I N U T E 
+	;
+
+DSNUTIL_MINUTES
+	: M I N U T E S 
+	;
+
+DSNUTIL_SECOND
+	: S E C O N D 
+	;
+
+DSNUTIL_SECONDS
+	: S E C O N D S 
+	;
+
+DSNUTIL_MICROSECOND
+	: M I C R O S E C O N D 
+	;
+
+DSNUTIL_MICROSECONDS
+	: M I C R O S E C O N D S 
+	;
+
+DSNUTIL_OVERRIDE
+	: O V E R R I D E 
+	;
+
+DSNUTIL_DECFLOAT_ROUNDMODE
+	: D E C F L O A T '_' R O U N D M O D E 
+	;
+
+DSNUTIL_ROUND_CEILING
+	: R O U N D '_' C E I L I N G 
+	;
+
+DSNUTIL_ROUND_DOWN
+	: R O U N D '_' D O W N 
+	;
+
+DSNUTIL_ROUND_FLOOR
+	: R O U N D '_' F L O O R 
+	;
+
+DSNUTIL_ROUND_HALF_DOWN
+	: R O U N D '_' H A L F '_' D O W N 
+	;
+
+DSNUTIL_ROUND_HALF_EVEN
+	: R O U N D '_' H A L F '_' E V E N 
+	;
+
+DSNUTIL_ROUND_HALF_UP
+	: R O U N D '_' H A L F '_' U P 
+	;
+
+DSNUTIL_ROUND_UP
+	: R O U N D '_' U P 
+	;
+
+DSNUTIL_IGNORE
+	: I G N O R E
+	;
+
+
+
+
+
+
+
 
 DSNUTIL_CHAR
 	: ~[ \n,;)('"]+
@@ -6038,6 +6110,51 @@ DSNUTIL_PAREN_TABLE
 DSNUTIL_PAREN_XMLCOLUMN
 	: X M L C O L U M N
 	;
+
+DSNUTIL_SYSTEMPERIOD
+	: S Y S T E M P E R I O D 
+	;
+
+DSNUTIL_IDENTITY
+	: I D E N T I T Y 
+	;
+
+DSNUTIL_TRANSID
+	: T R A N S I D 
+	;
+
+DSNUTIL_NONDETERMINISTIC
+	: N O N D E T E R M I N I S T I C 
+	;
+
+DSNUTIL_ROWCHANGE
+	: R O W C H A N G E 
+	;
+
+DSNUTIL_PAREN_WHEN
+	: W H E N
+	;
+
+DSNUTIL_PART
+	: P A R T
+	;
+
+DSNUTIL_CONV
+	: C O N V
+	;
+
+DSNUTIL_VALPROC
+	: V A L P R O C
+	;
+
+DSNUTIL_IDERROR
+	: I D E R R O R
+	;
+
+DSNUTIL_DUPKEY
+	: D U P K E Y
+	;
+
 
 DSNUTIL_PAREN_CHAR
 	: DSNUTIL_CHAR
