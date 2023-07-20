@@ -4595,7 +4595,13 @@ DSNUTIL_RPAREN
 DSNUTIL_EQUAL
 	: '='
 //	->pushMode(DSNUTIL_DB_TS_MODE)
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_GNX_MODE)
+	;
+
+DSNUTIL_NOT_EQUAL
+	: '<>'
+//	->pushMode(DSNUTIL_DB_TS_MODE)
+	->pushMode(DSNUTIL_GNX_MODE)
 	;
 
 DSNUTIL_BACKUP
@@ -5648,9 +5654,93 @@ DSNUTIL_IGNORE
 	: I G N O R E
 	;
 
+DSNUTIL_FORMAT
+	: F O R M A T
+	;
 
+DSNUTIL_SQLDS
+	: S Q L '/' D S
+	;
 
+DSNUTIL_INTERNAL
+	: I N T E R N A L
+	;
 
+DSNUTIL_DELIMITED
+	: D E L I M I T E D
+	;
+
+DSNUTIL_SPANNED
+	: S P A N N E D
+	;
+
+DSNUTIL_FREQVAL
+	: F R E Q V A L
+	;
+
+DSNUTIL_NUMCOLS
+	: N U M C O L S
+	;
+
+DSNUTIL_COUNT
+	: C O U N T
+	;
+
+DSNUTIL_MOST
+	: M O S T
+	;
+
+DSNUTIL_BOTH
+	: B O T H
+	;
+
+DSNUTIL_LEAST
+	: L E A S T
+	;
+
+DSNUTIL_HISTOGRAM
+	: H I S T O G R A M
+	;
+
+DSNUTIL_NUMQUANTILES
+	: N U M Q U A N T I L E S
+	;
+
+DSNUTIL_COLGROUP
+	: C O L G R O U P
+	;
+
+DSNUTIL_FORCEROLLUP
+	: F O R C E R O L L U P
+	;
+
+DSNUTIL_STATCLGMEMSRT
+	: S T A T C L G M E M S R T
+	;
+
+DSNUTIL_INVALIDATECACHE
+	: I N V A L I D A T E C A C H E
+	;
+
+DSNUTIL_ACCESSPATH
+	: A C C E S S P A T H
+	;
+
+DSNUTIL_STATISTICS
+	: S T A T I S T I C S
+	;
+
+DSNUTIL_RESUME
+	: R E S U M E
+	;
+
+DSNUTIL_CONTINUEIF
+	: C O N T I N U E I F
+	;
+
+DSNUTIL_CONV_ERROR
+	: C O N V '_' E R R O R
+	;
 
 
 
@@ -6084,6 +6174,16 @@ DSNUTIL_COMMA
 	: COMMA
 	;
 
+DSNUTIL_PAREN_EQUAL
+	: DSNUTIL_EQUAL
+	->type(DSNUTIL_EQUAL),pushMode(DSNUTIL_GNX_MODE)
+	;
+
+DSNUTIL_PAREN_NOT_EQUAL
+	: DSNUTIL_NOT_EQUAL
+	->type(DSNUTIL_NOT_EQUAL),pushMode(DSNUTIL_GNX_MODE)
+	;
+
 //TODO needed?
 DSNUTIL_PAREN_DOT
 	: DOT
@@ -6241,6 +6341,10 @@ DSNUTIL_APOS
 				popMode(); //back to DSNUTIL_HEXLIT_WS_MODE
 				popMode(); //back to DSNUTIL_HEXLIT_MODE
 				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_GNX_MODE :
+				popMode(); //back to DSNUTIL_GNX_MODE
+				popMode(); //back to "parent" mode
 				break;
 			default :
 				popMode(); //back to "parent" mode
@@ -6462,4 +6566,22 @@ DSNUTIL_HEXLIT_X_CHAR
 	//->type(DSNUTIL_CHAR)
 	;
 
+mode DSNUTIL_GNX_MODE;
+
+DSNUTIL_GNX_X
+	: X
+	;
+
+DSNUTIL_GNX_G
+	: G
+	;
+
+DSNUTIL_GNX_N
+	: N
+	;
+
+DSNUTIL_GNX_APOS
+	: '\''
+	->pushMode(DSNUTIL_APOS_MODE) //we don't come back to this mode
+	;
 

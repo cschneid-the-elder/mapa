@@ -810,14 +810,15 @@ dsnutilUCSArg
 	| (DSNUTIL_HEXLIT_X DSNUTIL_HEXLIT_X_CHAR)
 	| (DSNUTIL_HEXLIT_WS_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_CHAR DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
+	| ((DSNUTIL_GNX_X | DSNUTIL_GNX_G | DSNUTIL_GNX_N)? DSNUTIL_GNX_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
 	)
 	;
 
-dsnutilUCSArgList
+dsnutilUCSArgList1
 	: (DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
 	;
 
-dsnutilUCSArgList1
+dsnutilUCSArgList2
 	: ((DSNUTIL_LPAREN dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
 	| (DSNUTIL_LPAREN DSNUTIL_COMMA dsnutilUCSArg DSNUTIL_RPAREN1))
 	;
@@ -864,7 +865,7 @@ dsnutilUCSReplicationCopyOption
 	;
 	
 dsnutilUCSDumpclassSpec
-	: (DSNUTIL_DUMPCLASS dsnutilUCSArgList)
+	: (DSNUTIL_DUMPCLASS dsnutilUCSArgList1)
 	;
 
 dsnutilUCSCatmaint
@@ -879,9 +880,9 @@ dsnutilUCSCatmaint
 
 dsnutilUCSSwitchSpec
 	: (
-	((DSNUTIL_SCHEMA (DSNUTIL_SWITCH dsnutilUCSArgList)+)
-	| (DSNUTIL_OWNER_FROM dsnutilUCSArgList) DSNUTIL_TO_ROLE)
-	(DSNUTIL_VCAT (DSNUTIL_SWITCH dsnutilUCSArgList)+)?
+	((DSNUTIL_SCHEMA (DSNUTIL_SWITCH dsnutilUCSArgList1)+)
+	| (DSNUTIL_OWNER_FROM dsnutilUCSArgList1) DSNUTIL_TO_ROLE)
+	(DSNUTIL_VCAT (DSNUTIL_SWITCH dsnutilUCSArgList1)+)?
 	)
 	;
 
@@ -1167,12 +1168,12 @@ dsnutilUCSFilterddnSpec
 	;
 
 dsnutilUCSDatasetSpec
-	: ((DSNUTIL_COPYDDN dsnutilUCSArgList1 (DSNUTIL_RECOVERYDDN dsnutilUCSArgList1)?)
-	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList1))
+	: ((DSNUTIL_COPYDDN dsnutilUCSArgList2 (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2)?)
+	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2))
 	;
 
 dsnutilUCSChangelimitSpec
-	: (DSNUTIL_CHANGELIMIT dsnutilUCSArgList DSNUTIL_REPORTONLY?)
+	: (DSNUTIL_CHANGELIMIT dsnutilUCSArgList1 DSNUTIL_REPORTONLY?)
 	;
 
 dsnutilUCSTablespaceSpec
@@ -1217,9 +1218,9 @@ dsnutilUCSDiagnose
 
 dsnutilUCSDiagnoseStatement
 	: (
-	(DSNUTIL_TYPE dsnutilUCSArgList)
-	| (DSNUTIL_ALLDUMPS dsnutilUCSArgList?)
-	| (DSNUTIL_NODUMPS dsnutilUCSArgList?)
+	(DSNUTIL_TYPE dsnutilUCSArgList1)
+	| (DSNUTIL_ALLDUMPS dsnutilUCSArgList1?)
+	| (DSNUTIL_NODUMPS dsnutilUCSArgList1?)
 	| dsnutilUCSDiagnoseDisplayStatement
 	| dsnutilUCSDiagnoseWaitStatement
 	| dsnutilUCSDiagnoseAbendStatement
@@ -1418,7 +1419,7 @@ dsnutilUCSDsnRetpdOption
 	;
 
 dsnutilUCSDsnVolumesOption
-	: (DSNUTIL_VOLUMES dsnutilUCSArgList)
+	: (DSNUTIL_VOLUMES dsnutilUCSArgList1)
 	;
 
 dsnutilUCSDsnVolcntOption
@@ -1434,11 +1435,11 @@ dsnutilUCSDsnGdgLimitOption
 	;
 
 dsnutilUCSDsnDispOption
-	: (DSNUTIL_DISP dsnutilUCSArgList)
+	: (DSNUTIL_DISP dsnutilUCSArgList1)
 	;
 
 dsnutilUCSDsnLimitOption
-	: (DSNUTIL_LIMIT dsnutilUCSArgList)
+	: (DSNUTIL_LIMIT dsnutilUCSArgList1)
 	;
 
 dsnutilUCSDsnTimeOption
@@ -1450,7 +1451,7 @@ dsnutilUCSDsnBlkszlimOption
 	;
 
 dsnutilUCSDsnSpaceOption
-	: (DSNUTIL_SPACE dsnutilUCSArgList? dsnutilUCSArg)
+	: (DSNUTIL_SPACE dsnutilUCSArgList1? dsnutilUCSArg)
 	;
 
 dsnutilUCSDsnPctprimeOption
@@ -1513,15 +1514,15 @@ dsnutilUCSPathFiledataOption
 	;
 
 dsnutilUCSPathPathoptsOption
-	: (DSNUTIL_PATHOPTS dsnutilUCSArgList)
+	: (DSNUTIL_PATHOPTS dsnutilUCSArgList1)
 	;
 
 dsnutilUCSPathPathmodeOption
-	: (DSNUTIL_PATHMODE dsnutilUCSArgList)
+	: (DSNUTIL_PATHMODE dsnutilUCSArgList1)
 	;
 
 dsnutilUCSPathPathdispOption
-	: (DSNUTIL_PATHDISP dsnutilUCSArgList)
+	: (DSNUTIL_PATHDISP dsnutilUCSArgList1)
 	;
 
 dsnutilUCSTemplateName
@@ -1561,7 +1562,215 @@ dsnutilUCSInitialObjectSpec
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
 	| (DSNUTIL_TABLE dsnutilUCSQualifiedTableName)
 	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
-	) (DSNUTIL_PARTLEVEL dsnutilUCSArgList?)?
+	) (DSNUTIL_PARTLEVEL dsnutilUCSArgList1?)?
+	;
+
+dsnutilUCSLoadResumeSpec
+	: (
+	DSNUTIL_RESUME
+	(DSNUTIL_YES (DSNUTIL_SHRLEVEL ((DSNUTIL_NONE dsnutilUCSLoadCopySpec) | DSNUTIL_CHANGE))?)
+	| (DSNUTIL_NO? (DSNUTIL_SHRLEVEL (DSNUTIL_NONE | DSNUTIL_REFERENCE))? DSNUTIL_REPLACE? dsnutilUCSLoadCopySpec dsnutilUCSStatisticsSpec)
+	)
+	;
+
+dsnutilUCSLoadCopySpec
+	: ((DSNUTIL_COPYDDN dsnutilUCSArgList2 (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2)?)
+	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2))
+	;
+
+dsnutilUCSFlashcopySpec
+	: (
+	DSNUTIL_FLASHCOPY (DSNUTIL_YES | DSNUTIL_NO | DSNUTIL_CONSISTENT)
+	DSNUTIL_FCCOPYDDN dsnutilUCSArgInParens
+	)
+	;
+
+dsnutilUCSStatisticsSpec
+	: (
+	DSNUTIL_STATISTICS
+	dsnutilUCSStatTableSpec?
+	dsnutilUCSStatIndexSpec?
+	dsnutilUCSStatisticsSpecOptions*
+	)
+	;
+
+dsnutilUCSStatisticsSpecOptions
+	: (
+	dsnutilUCSReportOption
+	| dsnutilUCSUpdateOption
+	| dsnutilUCSStatclgmemsrtOption
+	| dsnutilUCSInvalidateCacheOption
+	| dsnutilUCSHistoryOption
+	| dsnutilUCSForcerollupOption
+	)
+	;
+
+dsnutilUCSReportOption
+	: (
+	DSNUTIL_REPORT (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSUpdateOption
+	: (
+	DSNUTIL_UPDATE (DSNUTIL_ALL | DSNUTIL_ACCESSPATH | DSNUTIL_SPACE | DSNUTIL_NONE)
+	)
+	;
+
+dsnutilUCSStatclgmemsrtOption
+	: (
+	DSNUTIL_STATCLGMEMSRT dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSInvalidateCacheOption
+	: (
+	DSNUTIL_INVALIDATECACHE (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSHistoryOption
+	: (
+	DSNUTIL_HISTORY (DSNUTIL_ALL | DSNUTIL_ACCESSPATH | DSNUTIL_SPACE | DSNUTIL_NONE)
+	)
+	;
+
+dsnutilUCSForcerollupOption
+	: (
+	DSNUTIL_FORCEROLLUP (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSStatTableSpec
+	: (
+	((DSNUTIL_TABLE DSNUTIL_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)? dsnutilUCSSampleSpec? dsnutilUCSUseProfile?)
+	| (DSNUTIL_TABLE DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedTableName DSNUTIL_RPAREN1 dsnutilUCSTableStatsSpec)+
+	)
+	;
+
+dsnutilUCSTableStatsSpec
+	: (
+	dsnutilUCSSampleSpec?
+	DSNUTIL_COLUMN 
+	(DSNUTIL_ALL
+	| (DSNUTIL_DB_TS_LPAREN dsnutilUCSColumnList DSNUTIL_RPAREN1))
+	((DSNUTIL_COLGROUP (DSNUTIL_DB_TS_LPAREN dsnutilUCSColumnList DSNUTIL_RPAREN1) dsnutilUCSColgroupStatsSpec?)+
+	| dsnutilUCSUseProfile)
+	)
+	;
+
+dsnutilUCSUseProfile
+	: (
+	DSNUTIL_USE DSNUTIL_PROFILE
+	)
+	;
+
+dsnutilUCSColumnList
+	: (
+	dsnutilUCSColumnName 
+	(DSNUTIL_COMMA dsnutilUCSColumnName)*
+	)
+	;
+
+dsnutilUCSSampleSpec
+	: (
+	(DSNUTIL_SAMPLE dsnutilUCSArg?)
+	| (DSNUTIL_TABLESAMPLE DSNUTIL_SYSTEM (DSNUTIL_AUTO | DSNUTIL_NONE | dsnutilUCSArg)?)
+	)
+	;
+
+dsnutilUCSColgroupStatsSpec
+	: (
+	dsnutilUCSFreqval2 | dsnutilUCSHistogram2
+	)
+	;
+
+dsnutilUCSStatIndexSpec
+	: (
+	DSNUTIL_INDEX 
+	(DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName DSNUTIL_RPAREN1)
+	dsnutilUCSCorrelationStatsSpec?
+	| (DSNUTIL_DB_TS_LPAREN dsnutilUCSStatsIndexSpecList DSNUTIL_RPAREN1)
+	)
+	;
+
+dsnutilUCSStatsIndexSpecList
+	: (
+	dsnutilUCSQualifiedIndexName 
+	dsnutilUCSCorrelationStatsSpec?
+	(DSNUTIL_COMMA dsnutilUCSQualifiedIndexName 
+	dsnutilUCSCorrelationStatsSpec?)*
+	)
+	;
+
+dsnutilUCSCorrelationStatsSpec
+	: (
+	DSNUTIL_KEYCARD?
+	(dsnutilUCSFreqval1+ | dsnutilUCSHistogram1)
+	)
+	;
+
+dsnutilUCSFreqval1
+	: (
+	DSNUTIL_FREQVAL 
+	DSNUTIL_NUMCOLS dsnutilUCSArg 
+	DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?
+	)
+	;
+
+dsnutilUCSFreqval2
+	: (
+	DSNUTIL_FREQVAL 
+	DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?
+	)
+	;
+
+dsnutilUCSHistogram1
+	: (
+	DSNUTIL_HISTOGRAM 
+	DSNUTIL_NUMCOLS dsnutilUCSArg 
+	DSNUTIL_NUMQUANTILES dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSHistogram2
+	: (
+	DSNUTIL_HISTOGRAM 
+	DSNUTIL_NUMQUANTILES dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSCountOptions
+	: (
+	DSNUTIL_MOST
+	| DSNUTIL_BOTH
+	| DSNUTIL_LEAST
+	)
+	;
+
+dsnutilUCSWorkddnSpec
+	: (
+	DSNUTIL_WORKDDN dsnutilUCSArgList2?
+	)
+	;
+
+dsnutilUCSFormatSpec
+	: (
+	DSNUTIL_FORMAT
+		(DSNUTIL_UNLOAD
+		| DSNUTIL_SQLDS
+		| DSNUTIL_INTERNAL
+		| (DSNUTIL_DELIMITED dsnutilUCSDelimitedOption*)
+		| (DSNUTIL_SPANNED (DSNUTIL_YES | DSNUTIL_NO)))
+	)
+	;
+
+dsnutilUCSDelimitedOption
+	: (
+	(DSNUTIL_COLDEL dsnutilUCSArg)
+	| (DSNUTIL_CHARDEL dsnutilUCSArg)
+	| (DSNUTIL_DECPT dsnutilUCSArg)
+	)
 	;
 
 dsnutilUCSIgnoreSpec
@@ -1656,6 +1865,30 @@ dsnutilDurationSuffix
 	)
 	;
 
+
+
+
+
+
+
+
+
+
+dsnutilUCSDecimalSpec
+	: (
+	)
+	;
+
+dsnutilUCSDefaultifCondition
+	: (
+	DSNUTIL_CONV_ERROR
+	| ((dsnutilUCSFieldName | dsnutilUCSArgInParens) (DSNUTIL_EQUAL | DSNUTIL_NOT_EQUAL) dsnutilUCSArg)
+	)
+	;
+
+dsnutilUCSFieldName
+	: dsnutilUCSArg
+	;
 
 dsnutilUCSDatabaseObjectName
 	: (
