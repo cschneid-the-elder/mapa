@@ -1883,19 +1883,19 @@ dsnutilUCSLoadNocheckpendOption
 
 dsnutilUCSLoadErrddnOption
 	: (
-	DSNUTIL_ERRDDN dsnutilUCSArg
+	DSNUTIL_ERRDDN (dsnutilUCSArg | dsnutilUCSArgInParens)
 	)
 	;
 
 dsnutilUCSLoadMapddnOption
 	: (
-	DSNUTIL_MAPDDN dsnutilUCSArg
+	DSNUTIL_MAPDDN (dsnutilUCSArg | dsnutilUCSArgInParens)
 	)
 	;
 
 dsnutilUCSLoadDiscarddnOption
 	: (
-	DSNUTIL_DISCARDDN dsnutilUCSArg
+	DSNUTIL_DISCARDDN (dsnutilUCSArg | dsnutilUCSArgInParens)
 	)
 	;
 
@@ -1991,9 +1991,38 @@ dsnutilUCSLoadKeepEmptyPagesOption
 
 dsnutilUCSLoadResumeSpec
 	: (
-	DSNUTIL_RESUME
-	(DSNUTIL_YES (DSNUTIL_SHRLEVEL ((DSNUTIL_NONE dsnutilUCSLoadCopySpec) | DSNUTIL_CHANGE))?)
-	| (DSNUTIL_NO? (DSNUTIL_SHRLEVEL (DSNUTIL_NONE | DSNUTIL_REFERENCE))? DSNUTIL_REPLACE? dsnutilUCSLoadCopySpec dsnutilUCSStatisticsSpec)
+	dsnutilUCSLoadResumeSpecOptions
+	)
+	;
+
+dsnutilUCSLoadResumeSpecOptions
+	: (
+	(DSNUTIL_RESUME (DSNUTIL_YES | DSNUTIL_NO))
+	| (DSNUTIL_RESUME DSNUTIL_LPAREN (DSNUTIL_YES | DSNUTIL_NO) DSNUTIL_RPAREN1)
+	| dsnutilUCSLoadResumeSpecShrlevelOption
+	| dsnutilUCSLoadCopySpec
+	| dsnutilUCSLoadResumeSpecReplaceOption
+	| dsnutilUCSStatisticsSpec
+	)
+	;
+
+dsnutilUCSLoadResumeSpecReplaceOption
+	: (
+	DSNUTIL_REPLACE
+	)
+	;
+
+dsnutilUCSLoadResumeSpecShrlevelOption
+	: (
+	DSNUTIL_SHRLEVEL dsnutilUCSLoadResumeSpecShrlevelOptions
+	)
+	;
+
+dsnutilUCSLoadResumeSpecShrlevelOptions
+	: (
+	DSNUTIL_NONE 
+	| DSNUTIL_REFERENCE
+	| DSNUTIL_CHANGE
 	)
 	;
 
@@ -2076,10 +2105,20 @@ dsnutilUCSTableStatsSpec
 	: (
 	dsnutilUCSSampleSpec?
 	DSNUTIL_COLUMN 
-	(DSNUTIL_ALL
-	| (DSNUTIL_DB_TS_LPAREN dsnutilUCSColumnList DSNUTIL_RPAREN1))
-	((DSNUTIL_COLGROUP (DSNUTIL_DB_TS_LPAREN dsnutilUCSColumnList DSNUTIL_RPAREN1) dsnutilUCSColgroupStatsSpec?)+
-	| dsnutilUCSUseProfile)
+	(DSNUTIL_ALL | ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSColumnList DSNUTIL_RPAREN1))
+	(dsnutilUCSColgroupList | dsnutilUCSUseProfile)?
+	)
+	;
+
+dsnutilUCSColgroupList
+	: (
+	dsnutilUCSColgroupSpec (DSNUTIL_COMMA dsnutilUCSColgroupSpec)*
+	)
+	;
+
+dsnutilUCSColgroupSpec
+	: (
+	DSNUTIL_COLGROUP (DSNUTIL_DB_TS_LPAREN dsnutilUCSColumnList DSNUTIL_RPAREN1) dsnutilUCSColgroupStatsSpec?
 	)
 	;
 
@@ -2112,25 +2151,26 @@ dsnutilUCSColgroupStatsSpec
 dsnutilUCSStatIndexSpec
 	: (
 	DSNUTIL_INDEX 
-	(DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName DSNUTIL_RPAREN1)
-	dsnutilUCSCorrelationStatsSpec?
-	| (DSNUTIL_DB_TS_LPAREN dsnutilUCSStatsIndexSpecList DSNUTIL_RPAREN1)
+	(((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName DSNUTIL_RPAREN1)
+	dsnutilUCSCorrelationStatsSpec*)
+	| (DSNUTIL_DB_TS_LPAREN dsnutilUCSStatsIndexSpecList DSNUTIL_RPAREN1))
 	)
 	;
 
 dsnutilUCSStatsIndexSpecList
 	: (
 	dsnutilUCSQualifiedIndexName 
-	dsnutilUCSCorrelationStatsSpec?
+	dsnutilUCSCorrelationStatsSpec*
 	(DSNUTIL_COMMA dsnutilUCSQualifiedIndexName 
-	dsnutilUCSCorrelationStatsSpec?)*
+	dsnutilUCSCorrelationStatsSpec*)*
 	)
 	;
 
 dsnutilUCSCorrelationStatsSpec
 	: (
-	DSNUTIL_KEYCARD?
-	(dsnutilUCSFreqval1+ | dsnutilUCSHistogram1)
+	DSNUTIL_KEYCARD
+	| dsnutilUCSFreqval1 
+	| dsnutilUCSHistogram1
 	)
 	;
 
@@ -2138,29 +2178,28 @@ dsnutilUCSFreqval1
 	: (
 	DSNUTIL_FREQVAL 
 	DSNUTIL_NUMCOLS dsnutilUCSArg 
-	DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?
+	(DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?)?
 	)
 	;
 
 dsnutilUCSFreqval2
 	: (
 	DSNUTIL_FREQVAL 
-	DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?
+	(DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?)?
 	)
 	;
 
 dsnutilUCSHistogram1
 	: (
 	DSNUTIL_HISTOGRAM 
-	DSNUTIL_NUMCOLS dsnutilUCSArg 
-	DSNUTIL_NUMQUANTILES dsnutilUCSArg
+	(DSNUTIL_NUMCOLS dsnutilUCSArg (DSNUTIL_NUMQUANTILES dsnutilUCSArg)?)?
 	)
 	;
 
 dsnutilUCSHistogram2
 	: (
 	DSNUTIL_HISTOGRAM 
-	DSNUTIL_NUMQUANTILES dsnutilUCSArg
+	(DSNUTIL_NUMQUANTILES dsnutilUCSArg)?
 	)
 	;
 
@@ -2353,9 +2392,16 @@ dsnutilUCSIgnoreFieldsOption
 
 dsnutilUCSIntoTableResumeSpec
 	: (
-	((DSNUTIL_RESUME DSNUTIL_NO (DSNUTIL_REPLACE DSNUTIL_REUSE? dsnutilUCSLoadCopySpec?)?)
-	| (DSNUTIL_RESUME DSNUTIL_YES dsnutilUCSLoadCopySpec?))
-	DSNUTIL_KEEPDICTIONARY
+	dsnutilUCSIntoTableResumeSpecOptions
+	)
+	;
+
+dsnutilUCSIntoTableResumeSpecOptions
+	: (
+	(DSNUTIL_RESUME (DSNUTIL_YES | DSNUTIL_NO))
+	| (DSNUTIL_REPLACE DSNUTIL_REUSE?)
+	| dsnutilUCSLoadCopySpec
+	| DSNUTIL_KEEPDICTIONARY
 	)
 	;
 
