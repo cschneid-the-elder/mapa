@@ -5910,7 +5910,7 @@ DSNUTIL_KEEP_EMPTY_PAGES
 
 
 DSNUTIL_IDENTIFIER
-	: ~[ \n,;)('"]+
+	: ~[ \n,;)('"=><]+
 	;
 
 
@@ -6538,6 +6538,11 @@ DSNUTIL_DATE
 
 DSNUTIL_DATE_P
 	: D A T E '_' P
+	;
+
+DSNUTIL_PAREN_TIME
+	: T I M E
+	->type(DSNUTIL_TIME)
 	;
 
 DSNUTIL_TIMESTAMP

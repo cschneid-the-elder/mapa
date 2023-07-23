@@ -866,6 +866,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_FLOAT
 	| DSNUTIL_DATE
 	| DSNUTIL_DATE_P
+	| DSNUTIL_TIME
 	| DSNUTIL_TIMESTAMP
 	| DSNUTIL_TIMESTAMP_WITH_TIME_ZONE
 	| DSNUTIL_BLOB
@@ -938,6 +939,7 @@ dsnutilUCSArg
 	| DSNUTIL_PAREN_IDENTIFIER
 	| DSNUTIL_HEXLIT_WS_CHAR
 	| DSNUTIL_DB_TS_IDENTIFIER
+	| (DSNUTIL_DB_TS_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_QUOTE DSNUTIL_QUOTE_CHAR* DSNUTIL_QUOTE1)
 	| (DSNUTIL_HEXLIT_X DSNUTIL_HEXLIT_X_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)
@@ -1725,6 +1727,7 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadLogOption
 	| dsnutilUCSLoadWorkddnOption
 	| dsnutilUCSLoadSortkeysOption
+	| dsnutilUCSFormatSpec
 	| dsnutilUCSLoadFloatOption
 	| dsnutilUCSLoadEAUOption
 	| dsnutilUCSLoadCCSIDOption
@@ -2538,13 +2541,17 @@ dsnutilUCSFieldSpecificationXml
 
 dsnutilUCSNullif
 	: (
-	DSNUTIL_NULLIF dsnutilUCSFieldSelectionCriterion
+	DSNUTIL_NULLIF 
+	(dsnutilUCSFieldSelectionCriterion
+	| (DSNUTIL_LPAREN1 dsnutilUCSFieldSelectionCriterion DSNUTIL_RPAREN1))
 	)
 	;
 
 dsnutilUCSDefaultif
 	: (
-	DSNUTIL_DEFAULTIF dsnutilUCSDefaultifCondition
+	DSNUTIL_DEFAULTIF 
+	(dsnutilUCSDefaultifCondition
+	| (DSNUTIL_LPAREN1 dsnutilUCSDefaultifCondition DSNUTIL_RPAREN1))
 	)
 	;
 

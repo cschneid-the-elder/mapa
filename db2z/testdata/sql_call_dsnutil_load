@@ -182,7 +182,7 @@ CALL SYSPROC.DSNUTILS(
   'DBB.STUFF'
   , 'NO'
   , '
-   LOAD DATA INDDN(INPUT01) CONTINUEIF(80:80)='X' RESUME(YES)      
+   LOAD DATA INDDN(INPUT01) CONTINUEIF(80:80)='X' RESUME YES      
      INTO TABLE ZZ9.PLURALZALPHA                                
            ("C1"   POSITION(  1) INTEGER EXTERNAL(5),          
             "C2"   POSITION(  7) INTEGER EXTERNAL(5),          
