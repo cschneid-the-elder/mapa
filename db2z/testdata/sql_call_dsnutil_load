@@ -387,3 +387,102 @@ CALL SYSPROC.DSNUTILS(
   )
  ','');
 
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA INDDN (INDD1,INDD2,INDD3)
+ STATISTICS 
+   TABLE(ALL) 
+   SAMPLE 20
+   USE PROFILE
+ INTO TABLE TACHI
+ ','');
+
+CALL SYSPROC.DSNUTILS(
+  'DBB.STUFF'
+  , 'NO'
+  , 'LOAD DATA INDDN (INDD1,INDD2,INDD3)
+ STATISTICS 
+   TABLE(TACHI) 
+     TABLESAMPLE SYSTEM
+     COLUMN ALL
+   TABLE("CERES")
+     TABLESAMPLE SYSTEM AUTO
+     COLUMN (
+              "STAR HELIX"
+            , MILLER
+            , JULIE_MAO
+            )
+   TABLE (EROS)
+     TABLESAMPLE SYSTEM 42
+     COLUMN (
+              NAGATA
+            , DRAPER
+            , KAMAL
+            )
+     USE PROFILE
+   TABLE(LUNA)
+     TABLESAMPLE SYSTEM NONE
+     COLUMN (
+              ERRENWRIGHT
+            , AVASARALA
+            )
+       COLGROUP (
+                  HOLDEN
+                , NAGATA
+                )
+         FREQVAL COUNT 7 MOST
+         HISTOGRAM NUMQUANTILES 33
+   TABLE(PHOBOS)
+     TABLESAMPLE SYSTEM
+     COLUMN ALL
+       COLGROUP (
+                  BURTON
+                )
+       FREQVAL COUNT 9 LEAST
+   TABLE(DIEMOS)
+     TABLESAMPLE SYSTEM
+     COLUMN ALL
+       COLGROUP (
+                  XO
+                )
+       FREQVAL COUNT 11 BOTH
+     , COLGROUP (
+                  XO1
+                )
+       FREQVAL COUNT 11 BOTH
+   TABLE(EARTH)
+     TABLESAMPLE SYSTEM NONE
+   TABLE(MARS)
+   INDEX(
+          GANYMEDE
+            FREQVAL 
+              NUMCOLS 7 
+              COUNT 9 BOTH
+            HISTOGRAM 
+              NUMCOLS 11 
+              NUMQUANTILES 123
+        , IO
+            FREQVAL
+              NUMCOLS 13
+              COUNT 17 LEAST
+            HISTOGRAM
+        )
+   REPORT NO
+   REPORT YES
+   UPDATE ALL
+   UPDATE ACCESSPATH
+   UPDATE SPACE
+   UPDATE NONE
+   STATCLGMEMSRT 18
+   INVALIDATECACHE NO
+   INVALIDATECACHE YES
+   HISTORY ALL
+   HISTORY ACCESSPATH
+   HISTORY SPACE
+   HISTORY NONE
+   FORCEROLLUP YES
+   FORCEROLLUP NO
+ INTO TABLE TACHI
+ ','');
+
