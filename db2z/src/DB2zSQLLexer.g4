@@ -20,6 +20,7 @@ lexer grammar DB2zSQLLexer;
 	public Boolean dsnutil_dsn_ws_char = false;
 	public Boolean dsnutil_db_ts_char = false;
 	public Boolean dsnutil_hexlit_char = false;
+	public Boolean dsnutilLoad = false;
 }
 
 channels { COMMENTS }
@@ -4493,6 +4494,7 @@ SQLIDENTIFIER
 		||  getText().equalsIgnoreCase("DSNUTILU")
 		||  getText().equalsIgnoreCase("DSNUTILS")) {
 			dsnutil = true;
+			dsnutilLoad = false;
 			//System.out.println("dsnutil matched");
 		}
 	}
@@ -4746,7 +4748,13 @@ DSNUTIL_RESET
 
 DSNUTIL_WHEN
 	: WHEN
-	->pushMode(DSNUTIL_WHEN_MODE)
+	{
+		if (dsnutilLoad) {
+			break;
+		} else {
+			pushMode(DSNUTIL_WHEN_MODE);
+		}
+	}
 	;
 
 DSNUTIL_EXPDL
@@ -5806,10 +5814,23 @@ DSNUTIL_TRUNCATE
 
 DSNUTIL_LOAD
 	: L O A D 
+	{
+		dsnutilLoad = true;
+	}
 	;
 
 DSNUTIL_LOAD_DATA
 	: L O A D (WS | NEWLINE)+ D A T A
+	{
+		dsnutilLoad = true;
+	}
+	;
+
+DSNUTIL_REORG
+	: R E O R G
+	{
+		dsnutilLoad = false;
+	}
 	;
 
 DSNUTIL_COPYDICTIONARY

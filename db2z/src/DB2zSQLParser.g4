@@ -2370,8 +2370,8 @@ dsnutilUCSIntoTableSpecNumrecsOption
 dsnutilUCSIntoTableSpecWhenOption
 	: (
 	DSNUTIL_WHEN 
-	(DSNUTIL_SQLDS DSNUTIL_EQUAL dsnutilUCSArg) 
-	| dsnutilUCSFieldSelectionCriterion
+	((DSNUTIL_SQLDS DSNUTIL_EQUAL dsnutilUCSArg) 
+	| dsnutilUCSFieldSelectionCriterion)
 	)
 	;
 
