@@ -2300,7 +2300,7 @@ dsnutilUCSDrainSpec
 
 dsnutilUCSLabeledDurationExpression
 	: (
-	(DSNUTIL_CURRENT_DATE | DSNUTIL_CURRENT_TIMESTAMP DSNUTIL_WITH_TIMEZONE?)
+	(DSNUTIL_CURRENT_DATE | (DSNUTIL_CURRENT_TIMESTAMP DSNUTIL_WITH_TIMEZONE?))
 	((DSNUTIL_PLUS | DSNUTIL_MINUS) dsnutilUCSArg dsnutilDurationSuffix)+
 	)
 	;
@@ -2484,7 +2484,7 @@ dsnutilUCSFieldSpecificationGraphic
 
 dsnutilUCSFieldSpecificationVargraphic
 	: (
-	DSNUTIL_GRAPHIC dsnutilUCSVargraphicOptions*
+	DSNUTIL_VARGRAPHIC dsnutilUCSVargraphicOptions*
 	)
 	;
 
@@ -2569,7 +2569,7 @@ dsnutilUCSFieldSpecificationClob
 
 dsnutilUCSFieldSpecificationDbclob
 	: (
-	DSNUTIL_CLOB (DSNUTIL_CCSID dsnutilUCSArg)?
+	DSNUTIL_DBCLOB (DSNUTIL_CCSID dsnutilUCSArg)?
 	)
 	;
 
