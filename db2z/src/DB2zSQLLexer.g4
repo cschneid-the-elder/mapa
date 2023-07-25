@@ -5958,11 +5958,45 @@ DSNUTIL_NEWCOPY
 	: N E W C O P Y
 	;
 
+DSNUTIL_MODIFY
+	: M O D I F Y
+	;
+
+DSNUTIL_RECOVERY
+	: R E C O V E R Y
+	;
+
+DSNUTIL_AGE
+	: A G E
+	;
+
+DSNUTIL_DATE
+	: D A T E
+	;
+
+DSNUTIL_DELETEDS
+	: D E L E T E D S
+	;
+
+DSNUTIL_RETAIN
+	: R E T A I N
+	;
+
+DSNUTIL_LAST
+	: L A S T
+	;
+
+DSNUTIL_LOGLIMIT
+	: L O G L I M I T
+	;
+
+DSNUTIL_ONLY
+	: O N L Y
+	;
+
 DSNUTIL_IDENTIFIER
 	: ~[ \n,;)('"=><+-]+
 	;
-
-
 
 mode DSNUTIL_WHEN_MODE; //TODO contraindicated for LOAD
 
@@ -6589,8 +6623,9 @@ DSNUTIL_PAREN_FLOAT
 	->type(DSNUTIL_FLOAT)
 	;
 
-DSNUTIL_DATE
+DSNUTIL_PAREN_DATE
 	: D A T E
+	->type(DSNUTIL_DATE)
 	;
 
 DSNUTIL_DATE_P

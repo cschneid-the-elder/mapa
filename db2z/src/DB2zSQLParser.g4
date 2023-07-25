@@ -739,6 +739,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_KEY
 	| DSNUTIL_KEYCARD
 	| DSNUTIL_LARGE
+	| DSNUTIL_LAST
 	| DSNUTIL_LEADING
 	| DSNUTIL_LEAST
 	| DSNUTIL_LENGTH
@@ -752,6 +753,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_LOB
 	| DSNUTIL_LOBERROR
 	| DSNUTIL_LOG
+	| DSNUTIL_LOGLIMIT
 	| DSNUTIL_LRECL
 	| DSNUTIL_MAPDDN
 	| DSNUTIL_MAPPINGDATABASE
@@ -789,6 +791,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_NUMRECS
 	| DSNUTIL_OBD
 	| DSNUTIL_OFFSET
+	| DSNUTIL_ONLY
 	| DSNUTIL_OVERRIDE
 	| DSNUTIL_OWNER_FROM
 	| DSNUTIL_PACKED
@@ -828,6 +831,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_RESET
 	| DSNUTIL_RESTOREBEFORE
 	| DSNUTIL_RESUME
+	| DSNUTIL_RETAIN
 	| DSNUTIL_RETPD
 	| DSNUTIL_RETRY
 	| DSNUTIL_RETRY_DELAY
@@ -2779,8 +2783,14 @@ dsnutilUCSDefaultifCondition
 dsnutilUCSMergecopy
 	: (
 	DSNUTIL_MERGECOPY
-	((DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_DSNUM dsnutilUCSArg)?))
+	dsnutilUCSMergecopyListOrTablespace
 	dsnutilUCSMergecopyOptions*
+	)
+	;
+
+dsnutilUCSMergecopyListOrTablespace
+	: (
+	(DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_DSNUM dsnutilUCSArg)?)
 	)
 	;
 
@@ -2788,7 +2798,7 @@ dsnutilUCSMergecopyOptions
 	: (
 	dsnutilUCSCloneOption
 	| dsnutilUCSMergecopyWorkddnOption
-	| dsnutilUCSMergecopyNewcopyOption
+	| dsnutilUCSNewcopyOption
 	| dsnutilUCSCopyddnOption
 	| dsnutilUCSRecoveryddnOption
 	)
@@ -2800,7 +2810,7 @@ dsnutilUCSMergecopyWorkddnOption
 	)
 	;
 
-dsnutilUCSMergecopyNewcopyOption
+dsnutilUCSNewcopyOption
 	: (
 	DSNUTIL_NEWCOPY (DSNUTIL_YES | DSNUTIL_NO)
 	)
@@ -2815,6 +2825,65 @@ dsnutilUCSCopyddnOption
 dsnutilUCSRecoveryddnOption
 	: (
 	DSNUTIL_RECOVERYDDN dsnutilUCSArgList1
+	)
+	;
+
+dsnutilUCSModifyRecovery
+	: (
+	DSNUTIL_MODIFY DSNUTIL_RECOVERY
+	dsnutilUCSModifyRecoveryListOrTablespace
+	dsnutilUCSModifyRecoveryOptions*
+	)
+	;
+
+dsnutilUCSModifyRecoveryListOrTablespace
+	: (
+	((DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)) (DSNUTIL_DSNUM dsnutilUCSArg)?
+	)
+	;
+
+dsnutilUCSModifyRecoveryOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSModifyRecoveryDeleteOption
+	| dsnutilUCSModifyRecoveryRetainOption
+	| dsnutilUCSModifyRecoveryDeletedsOption
+	| dsnutilUCSModifyRecoveryNocopypendOption
+	)
+	;
+
+dsnutilUCSModifyRecoveryDeleteOption
+	: (
+	DSNUTIL_DELETE
+	(DSNUTIL_AGE | DSNUTIL_DATE) (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	dsnutilUCSModifyRecoveryFlashcopy?
+	)
+	;
+
+dsnutilUCSModifyRecoveryFlashcopy
+	: (
+	DSNUTIL_FLASHCOPY DSNUTIL_ONLY
+	)
+	;
+
+dsnutilUCSModifyRecoveryDeletedsOption
+	: (
+	DSNUTIL_DELETEDS
+	)
+	;
+
+dsnutilUCSModifyRecoveryRetainOption
+	: (
+	DSNUTIL_RETAIN
+	((DSNUTIL_LAST dsnutilUCSArgInParens dsnutilUCSModifyRecoveryFlashcopy?)
+	| DSNUTIL_LOGLIMIT
+	| (DSNUTIL_GDGLIMIT ((DSNUTIL_LAST dsnutilUCSArgInParens) | DSNUTIL_LOGLIMIT)?))
+	)
+	;
+
+dsnutilUCSModifyRecoveryNocopypendOption
+	: (
+	DSNUTIL_NOCOPYPEND
 	)
 	;
 
@@ -2900,6 +2969,7 @@ dsnutilArgument3Text
 	| dsnutilUCSListdef
 	| dsnutilUCSLoad
 	| dsnutilUCSMergecopy
+	| dsnutilUCSModifyRecovery
 	| dsnutilUCSTemplate
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
