@@ -5950,6 +5950,14 @@ DSNUTIL_COMMA
 	: COMMA
 	;
 
+DSNUTIL_MERGECOPY
+	: M E R G E C O P Y
+	;
+
+DSNUTIL_NEWCOPY
+	: N E W C O P Y
+	;
+
 DSNUTIL_IDENTIFIER
 	: ~[ \n,;)('"=><+-]+
 	;

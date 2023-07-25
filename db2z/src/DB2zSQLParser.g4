@@ -959,6 +959,10 @@ dsnutilUCSArgList2
 	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) DSNUTIL_COMMA dsnutilUCSArg DSNUTIL_RPAREN1))
 	;
 
+dsnutilUCSArgList3
+	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg dsnutilUCSArg? (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
+	;
+
 dsnutilUCSArgInParens
 	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg DSNUTIL_RPAREN1)
 	;
@@ -1576,7 +1580,7 @@ dsnutilUCSDsnDispOption
 	;
 
 dsnutilUCSDsnLimitOption
-	: (DSNUTIL_LIMIT dsnutilUCSArgList1)
+	: (DSNUTIL_LIMIT dsnutilUCSArgList3)
 	;
 
 dsnutilUCSDsnTimeOption
@@ -2772,6 +2776,48 @@ dsnutilUCSDefaultifCondition
 	)
 	;
 
+dsnutilUCSMergecopy
+	: (
+	DSNUTIL_MERGECOPY
+	((DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_DSNUM dsnutilUCSArg)?))
+	dsnutilUCSMergecopyOptions*
+	)
+	;
+
+dsnutilUCSMergecopyOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSMergecopyWorkddnOption
+	| dsnutilUCSMergecopyNewcopyOption
+	| dsnutilUCSCopyddnOption
+	| dsnutilUCSRecoveryddnOption
+	)
+	;
+
+dsnutilUCSMergecopyWorkddnOption
+	: (
+	DSNUTIL_WORKDDN dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSMergecopyNewcopyOption
+	: (
+	DSNUTIL_NEWCOPY (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSCopyddnOption
+	: (
+	DSNUTIL_COPYDDN (dsnutilUCSArg | dsnutilUCSArgList2)
+	)
+	;
+
+dsnutilUCSRecoveryddnOption
+	: (
+	DSNUTIL_RECOVERYDDN dsnutilUCSArgList1
+	)
+	;
+
 dsnutilUCSFieldName
 	: dsnutilUCSArg
 	;
@@ -2853,6 +2899,7 @@ dsnutilArgument3Text
 	| dsnutilUCSExecSql
 	| dsnutilUCSListdef
 	| dsnutilUCSLoad
+	| dsnutilUCSMergecopy
 	| dsnutilUCSTemplate
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA

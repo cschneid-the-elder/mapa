@@ -2,16 +2,17 @@
 # fields are tab delimited
 =	callStatement	callArgument
 +	sql_call_dsnutil	7	28
-+	sql_call_dsnutil_catmaint	56	224
-+	sql_call_dsnutil_check_data	26	104
-+	sql_call_dsnutil_check_index	12	48
++	sql_call_backup_system	11	44
++	sql_call_dsnutil_catmaint	62	248
++	sql_call_dsnutil_check_data	29	116
++	sql_call_dsnutil_check_index	9	36
 +	sql_call_dsnutil_check_lob	18	72
 +	sql_call_dsnutil_copy	21	84
 +	sql_call_dsnutil_copytocopy	11	44
 +	sql_call_dsnutil_diagnose	9	36
 +	sql_call_dsnutil_exec_sql	1	4
 +	sql_call_dsnutil_listdef	6	24
-+	sql_call_dsnutil_load	16	64
++	sql_call_dsnutil_load	19	76
 +	sql_call_dsnutil_mergecopy	6	24
 +	sql_call_dsnutil_modify_recovery	27	108
 +	sql_call_dsnutil_modify_statistics	119	476
