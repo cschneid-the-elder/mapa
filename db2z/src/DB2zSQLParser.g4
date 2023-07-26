@@ -2887,6 +2887,49 @@ dsnutilUCSModifyRecoveryNocopypendOption
 	)
 	;
 
+dsnutilUCSModifyStatistics
+	: (
+	DSNUTIL_MODIFY DSNUTIL_STATISTICS
+	dsnutilUCSModifyStatisticsListOrTablespaceEtAl
+	dsnutilUCSModifyStatisticsOptions*
+	)
+	;
+
+dsnutilUCSModifyStatisticsListOrTablespaceEtAl
+	: (
+	(DSNUTIL_LIST dsnutilUCSArg) 
+	| (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
+	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	)
+	;
+
+dsnutilUCSModifyStatisticsOptions
+	: (
+	dsnutilUCSModifyStatisticsDeleteOption
+	| dsnutilUCSModifyStatisticsAgeOption
+	| dsnutilUCSModifyStatisticsDateOption
+	)
+	;
+
+dsnutilUCSModifyStatisticsDeleteOption 
+	: (
+	DSNUTIL_DELETE (DSNUTIL_ALL | DSNUTIL_ACCESSPATH | DSNUTIL_SPACE)
+	)
+	;
+
+dsnutilUCSModifyStatisticsAgeOption
+	: (
+	DSNUTIL_AGE (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	)
+	;
+
+dsnutilUCSModifyStatisticsDateOption
+	: (
+	DSNUTIL_DATE (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	)
+	;
+
 dsnutilUCSFieldName
 	: dsnutilUCSArg
 	;
@@ -2970,6 +3013,7 @@ dsnutilArgument3Text
 	| dsnutilUCSLoad
 	| dsnutilUCSMergecopy
 	| dsnutilUCSModifyRecovery
+	| dsnutilUCSModifyStatistics
 	| dsnutilUCSTemplate
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
