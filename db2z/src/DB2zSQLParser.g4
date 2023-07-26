@@ -627,6 +627,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_CONSTANT
 	| DSNUTIL_CONSTANTIF
 	| DSNUTIL_CONSTRAINTS
+	| DSNUTIL_CONTINUE
 	| DSNUTIL_CONTINUEIF
 	| DSNUTIL_CONV_ERROR
 	| DSNUTIL_COPY
@@ -634,6 +635,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_COPYDICTIONARY
 	| DSNUTIL_COPYTOCOPY
 	| DSNUTIL_COUNT
+	| DSNUTIL_CURRENTCOPYONLY
 	| DSNUTIL_CURRENT_DATE
 	| DSNUTIL_CURRENT_TIMESTAMP
 	| DSNUTIL_DATA
@@ -655,8 +657,10 @@ dsnutilUCSKeyword
 	| DSNUTIL_DECIMAL
 	| DSNUTIL_DECPT
 	| DSNUTIL_DEFAULTIF
+	| DSNUTIL_DEFER
 	| DSNUTIL_DEFINEAUX
 	| DSNUTIL_DEFINED
+	| DSNUTIL_DELAY
 	| DSNUTIL_DELETE
 	| DSNUTIL_DELIMITED
 	| DSNUTIL_DIAGNOSE
@@ -666,7 +670,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_DISP
 	| DSNUTIL_DISPLAY
 	| DSNUTIL_DOCID
-	| DSNUTIL_PAREN_DOT
+	| DSNUTIL_DRAIN
 	| DSNUTIL_DRAIN_WAIT
 	| DSNUTIL_DSN
 	| DSNUTIL_DSNTYPE
@@ -679,6 +683,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_END
 	| DSNUTIL_ENFORCE
 	| DSNUTIL_ERRDDN
+	| DSNUTIL_ERROR
 	| DSNUTIL_ESTABLISH
 	| DSNUTIL_EVENT
 	| DSNUTIL_EXCEPTION
@@ -689,12 +694,14 @@ dsnutilUCSKeyword
 	| DSNUTIL_EXTERNAL
 	| DSNUTIL_EXTPREF
 	| DSNUTIL_EXTREQ
+	| DSNUTIL_FCCOPY
 	| DSNUTIL_FCCOPYDDN
 	| DSNUTIL_FCINCREMENTAL
 	| DSNUTIL_FILEDATA
 	| DSNUTIL_FILSZ
 	| DSNUTIL_FILTERDDN
 	| DSNUTIL_FLASHCOPY
+	| DSNUTIL_FLASHCOPY_PPRCP
 	| DSNUTIL_FLOAT
 	| DSNUTIL_FOR
 	| DSNUTIL_FORCE
@@ -704,6 +711,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_FROM
 	| DSNUTIL_FROMCOPY
 	| DSNUTIL_FROMCOPYDDN
+	| DSNUTIL_FROMDUMP
 	| DSNUTIL_FROMLASTCOPY
 	| DSNUTIL_FROMLASTFLASHCOPY
 	| DSNUTIL_FROMLASTFULLCOPY
@@ -719,6 +727,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_HISTORY
 	| DSNUTIL_HOUR
 	| DSNUTIL_HOURS
+	| DSNUTIL_IDENTITYOVERRIDE
 	| DSNUTIL_IGNORE
 	| DSNUTIL_IGNOREFIELDS
 	| DSNUTIL_IMPLICIT_TZ
@@ -730,6 +739,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_INDEXES
 	| DSNUTIL_INDEXSPACE
 	| DSNUTIL_INDEXSPACES
+	| DSNUTIL_INLCOPY
 	| DSNUTIL_INSERTVERSIONPAGES
 	| DSNUTIL_INSTANCE
 	| DSNUTIL_INT
@@ -758,13 +768,18 @@ dsnutilUCSKeyword
 	| DSNUTIL_LOAD
 	| DSNUTIL_LOB
 	| DSNUTIL_LOBERROR
+	| DSNUTIL_LOCALSITE
 	| DSNUTIL_LOG
 	| DSNUTIL_LOGLIMIT
+	| DSNUTIL_LOGONLY
+	| DSNUTIL_LOGRANGES
+	| DSNUTIL_LONGLOG
 	| DSNUTIL_LRECL
 	| DSNUTIL_MAPDDN
 	| DSNUTIL_MAPPINGDATABASE
 	| DSNUTIL_MAPPINGTABLE
 	| DSNUTIL_MAXPRIME
+	| DSNUTIL_MAXRO
 	| DSNUTIL_MEPL
 	| DSNUTIL_MESSAGE
 	| DSNUTIL_MGMTCLAS
@@ -789,6 +804,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_NONE
 	| DSNUTIL_NONUNIQUE
 	| DSNUTIL_NOSUBS
+	| DSNUTIL_NOSYSCOPY
 	| DSNUTIL_NPI
 	| DSNUTIL_NULL
 	| DSNUTIL_NULLIF
@@ -806,6 +822,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_PAGE
 	| DSNUTIL_PAGES
 	| DSNUTIL_PARALLEL
+	| DSNUTIL_PAREN_DOT
 	| DSNUTIL_PART
 	| DSNUTIL_PARTLEVEL
 	| DSNUTIL_PATH
@@ -815,7 +832,11 @@ dsnutilUCSKeyword
 	| DSNUTIL_PCTPRIME
 	| DSNUTIL_PDS
 	| DSNUTIL_PENDING
+	| DSNUTIL_PERIODOVERRIDE
 	| DSNUTIL_PLUS
+	| DSNUTIL_PMNO
+	| DSNUTIL_PMPREF
+	| DSNUTIL_PMREQ
 	| DSNUTIL_POSITION
 	| DSNUTIL_PREFORMAT
 	| DSNUTIL_PRESERVE
@@ -825,15 +846,19 @@ dsnutilUCSKeyword
 	| DSNUTIL_PROFILE
 	| DSNUTIL_PUNCHDDN
 	| DSNUTIL_QUIESCE
+	| DSNUTIL_RANGE
 	| DSNUTIL_RBALRSN_CONVERSION
 	| DSNUTIL_RBLP
 	| DSNUTIL_RC0
 	| DSNUTIL_RC4
 	| DSNUTIL_RC8
 	| DSNUTIL_READERS
+	| DSNUTIL_REBUILD
 	| DSNUTIL_RECFM
 	| DSNUTIL_RECORD
+	| DSNUTIL_RECOVER
 	| DSNUTIL_RECOVERYDDN
+	| DSNUTIL_RECOVERYSITE
 	| DSNUTIL_REFERENCE
 	| DSNUTIL_REFONLY
 	| DSNUTIL_REPEATABLE
@@ -899,17 +924,24 @@ dsnutilUCSKeyword
 	| DSNUTIL_TAPEUNITS
 	| DSNUTIL_TEMPLATE
 	| DSNUTIL_TEMPLATEDD
+	| DSNUTIL_TERM
 	| DSNUTIL_TEXT
 	| DSNUTIL_TIME
 	| DSNUTIL_TIME
 	| DSNUTIL_TIMESTAMP
 	| DSNUTIL_TIMESTAMP_WITH_TIME_ZONE
+	| DSNUTIL_TOCOPY
 	| DSNUTIL_TOKEN
+	| DSNUTIL_TOLASTCOPY
+	| DSNUTIL_TOLASTFULLCOPY
 	| DSNUTIL_TOLOGPOINT
 	| DSNUTIL_TORBA
 	| DSNUTIL_TO_ROLE
+	| DSNUTIL_TOSEQNO
+	| DSNUTIL_TOVOLUME
 	| DSNUTIL_TRACEID
 	| DSNUTIL_TRAILING
+	| DSNUTIL_TRANSIDOVERRIDE
 	| DSNUTIL_TRTCH
 	| DSNUTIL_TRUNCATE
 	| DSNUTIL_TYPE
@@ -920,6 +952,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_UNLOAD
 	| DSNUTIL_UNLOAD_DATA
 	| DSNUTIL_UPDATE
+	| DSNUTIL_UPDATED
 	| DSNUTIL_UPDMAXASSIGNEDVAL
 	| DSNUTIL_USE
 	| DSNUTIL_UTILX
@@ -928,6 +961,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_VARGRAPHIC
 	| DSNUTIL_VARYING
 	| DSNUTIL_VCAT
+	| DSNUTIL_VERIFYSET
 	| DSNUTIL_VERSION
 	| DSNUTIL_VOLCNT
 	| DSNUTIL_VOLUMES
@@ -945,7 +979,8 @@ dsnutilUCSKeyword
 	| DSNUTIL_YEAR
 	| DSNUTIL_YEARS
 	| DSNUTIL_YES
-	| DSNUTIL_ZONED	)
+	| DSNUTIL_ZONED
+	)
 	;
 
 dsnutilUCSArg
@@ -1012,11 +1047,17 @@ dsnutilUCSDsnMemberName
 
 dsnutilUCSBackup
 	: DSNUTIL_BACKUP DSNUTIL_SYSTEM (DSNUTIL_FULL | DSNUTIL_DATA_ONLY)?
-	(DSNUTIL_ALTERNATE_CP dsnutilUCSArgInParens)?
+	dsnutilUCSAlternatecpOption?
 	(DSNUTIL_DBBSG dsnutilUCSArgInParens)?
 	(DSNUTIL_LGBSG dsnutilUCSArgInParens)?
 	((DSNUTIL_ESTABLISH | DSNUTIL_END)? DSNUTIL_FCINCREMENTAL)?
 	dsnutilUCSReplicationCopyOption?
+	;
+
+dsnutilUCSAlternatecpOption
+	: (
+	DSNUTIL_ALTERNATE_CP dsnutilUCSArgInParens
+	)
 	;
 
 dsnutilUCSReplicationCopyOption
@@ -1198,6 +1239,10 @@ dsnutilUCSParallelOption
 	: (DSNUTIL_PARALLEL dsnutilUCSArg)
 	;
 
+dsnutilUCSParallelOption2
+	: (DSNUTIL_PARALLEL (dsnutilUCSArg | dsnutilUCSArgInParens)?)
+	;
+
 dsnutilUCSCheckIndex
 	: (
 		(
@@ -1267,18 +1312,18 @@ dsnutilUCSCopySpec
 		dsnutilUCSDatasetSpec? 
 		dsnutilUCSFullOrChangelimit?) 
 		| ((dsnutilUCSTablespaceSpec | dsnutilUCSIndexspaceSpec) 
-		(dsnutilUCSFullOrChangelimit | dsnutilUCSCopyDsnum | dsnutilUCSDatasetSpec)*)+
+		(dsnutilUCSFullOrChangelimit | dsnutilUCSDsnumOption | dsnutilUCSDatasetSpec)*)+
 	)
 	dsnutilUCSCopySpecOptions*
 	;
 
-dsnutilUCSCopyDsnum
+dsnutilUCSDsnumOption
 	: (DSNUTIL_DSNUM (DSNUTIL_ALL | dsnutilUCSArg))
 	;
 
 dsnutilUCSCopySpecOptions
 	: (
-	dsnutilUCSCopySpecParallelOption
+	dsnutilUCSParallelOption2
 	| dsnutilUCSTapeunitsOption
 	| dsnutilUCSCheckpageOption
 	| dsnutilUCSSystempagesOption
@@ -1287,10 +1332,6 @@ dsnutilUCSCopySpecOptions
 	| dsnutilUCSShrlevelOption 
 	| dsnutilUCSScopeOption
 	)
-	;
-
-dsnutilUCSCopySpecParallelOption
-	: (DSNUTIL_PARALLEL (dsnutilUCSArg | dsnutilUCSArgInParens)?)
 	;
 
 dsnutilUCSTapeunitsOption
@@ -1340,11 +1381,11 @@ dsnutilUCSChangelimitSpec
 	;
 
 dsnutilUCSTablespaceSpec
-	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?)
 	;
 
 dsnutilUCSTablespaceCopySpec
-	: (dsnutilUCSTablespaceSpec (DSNUTIL_DSNUM dsnutilUCSArg)?)
+	: (dsnutilUCSTablespaceSpec dsnutilUCSDsnumOption?)
 	;
 
 dsnutilUCSIndexspaceSpec
@@ -1353,7 +1394,7 @@ dsnutilUCSIndexspaceSpec
 	;
 
 dsnutilUCSIndexspaceCopySpec
-	: (dsnutilUCSIndexspaceSpec (DSNUTIL_DSNUM dsnutilUCSArg)?)
+	: (dsnutilUCSIndexspaceSpec dsnutilUCSDsnumOption?)
 	;
 
 dsnutilUCSCopyToCopy
@@ -1745,11 +1786,11 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadParallelOption
 	| dsnutilUCSLoadPresortOption
 	| dsnutilUCSLoadRowformatOption
-	| dsnutilUCSLoadRbalrsnConversionOption
+	| dsnutilUCSRbalrsnConversionOption
 	| dsnutilUCSLoadResumeOption
 	| dsnutilUCSLoadFlashcopyOption
 	| dsnutilUCSLoadKeepdictionaryOption
-	| dsnutilUCSLoadReuseOption
+	| dsnutilUCSReuseOption
 	| dsnutilUCSLoadLogOption
 	| dsnutilUCSLoadWorkddnOption
 	| dsnutilUCSLoadSortkeysOption
@@ -1764,13 +1805,14 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadMapddnOption
 	| dsnutilUCSLoadDiscarddnOption
 	| dsnutilUCSLoadDiscardsOption
-	| dsnutilUCSLoadBackoutOption
+	| dsnutilUCSBackoutOption
 	| dsnutilUCSLoadSortdevtOption
 	| dsnutilUCSLoadSortnumOption
 	| dsnutilUCSLoadContinueifOption
 	| dsnutilUCSLoadIgnoreOption
 	| dsnutilUCSLoadDecfloatOption
 	| dsnutilUCSLoadOverrideOption
+	| dsnutilUCSOverrideSpecAlternateSyntax
 	| dsnutilUCSLoadDrainOption
 	| dsnutilUCSLoadIndexdeferOption
 	| dsnutilUCSLoadImplicitTZOption
@@ -1823,7 +1865,7 @@ dsnutilUCSLoadRowformatOption
 	)
 	;
 
-dsnutilUCSLoadRbalrsnConversionOption
+dsnutilUCSRbalrsnConversionOption
 	: (
 	DSNUTIL_RBALRSN_CONVERSION (DSNUTIL_EXTENDED | DSNUTIL_NONE)
 	)
@@ -1847,7 +1889,7 @@ dsnutilUCSLoadKeepdictionaryOption
 	)
 	;
 
-dsnutilUCSLoadReuseOption
+dsnutilUCSReuseOption
 	: (
 	DSNUTIL_REUSE
 	)
@@ -1931,7 +1973,7 @@ dsnutilUCSLoadDiscardsOption
 	)
 	;
 
-dsnutilUCSLoadBackoutOption
+dsnutilUCSBackoutOption
 	: (
 	DSNUTIL_BACKOUT (DSNUTIL_YES | DSNUTIL_NO)?
 	)
@@ -2352,6 +2394,14 @@ dsnutilUCSOverrideSpecOption
 	| DSNUTIL_TRANSID
 	| DSNUTIL_NONDETERMINISTIC
 	| DSNUTIL_ROWCHANGE
+	)
+	;
+
+dsnutilUCSOverrideSpecAlternateSyntax
+	: (
+	DSNUTIL_IDENTITYOVERRIDE
+	| DSNUTIL_PERIODOVERRIDE
+	| DSNUTIL_TRANSIDOVERRIDE
 	)
 	;
 
@@ -2808,7 +2858,7 @@ dsnutilUCSMergecopy
 
 dsnutilUCSMergecopyListOrTablespace
 	: (
-	(DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_DSNUM dsnutilUCSArg)?)
+	(DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSDsnumOption?)
 	)
 	;
 
@@ -2856,7 +2906,7 @@ dsnutilUCSModifyRecovery
 
 dsnutilUCSModifyRecoveryListOrTablespace
 	: (
-	((DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)) (DSNUTIL_DSNUM dsnutilUCSArg)?
+	((DSNUTIL_LIST dsnutilUCSArg) | (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)) dsnutilUCSDsnumOption?
 	)
 	;
 
@@ -3045,7 +3095,348 @@ dsnutilUCSQuiesceWriteOption
 	)
 	;
 
+dsnutilUCSRebuildIndex
+	: (
+	DSNUTIL_REBUILD
+	dsnutilUCSRebuildIndexSpec
+	dsnutilUCSRebuildIndexOptions*
+	)
+	;
+
+dsnutilUCSRebuildIndexSpec
+	: (
+	dsnutilUCSRebuildIndexSpecIndex
+	| dsnutilUCSRebuildIndexSpecIndexspace
+	)
+	;
+
+dsnutilUCSRebuildIndexSpecIndex
+	: (
+	DSNUTIL_INDEX
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSIndexSpec (DSNUTIL_COMMA dsnutilUCSIndexSpec)* DSNUTIL_RPAREN1)
+	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
+	| (DSNUTIL_LIST dsnutilUCSListName))
+	)
+	;
+
+dsnutilUCSRebuildIndexSpecIndexspace
+	: (
+	DSNUTIL_INDEXSPACE
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSRebuildIndexIndexspaceSpec (DSNUTIL_COMMA dsnutilUCSRebuildIndexIndexspaceSpec)*) DSNUTIL_RPAREN1
+	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
+	| (DSNUTIL_LIST dsnutilUCSListName))
+	)
+	;
+	
+dsnutilUCSIndexSpec
+	: (
+	dsnutilUCSQualifiedIndexName (DSNUTIL_PART dsnutilUCSArg)?
+	)
+	;
+
+dsnutilUCSRebuildIndexIndexspaceSpec
+	: (
+	dsnutilUCSQualifiedIndexspaceName (DSNUTIL_PART dsnutilUCSArg)?
+	)
+	;
+
+dsnutilUCSRebuildIndexOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSRebuildIndexShrlevelOption
+	| dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSScopeOption
+	| dsnutilUCSReuseOption
+	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
+	| dsnutilUCSFlashcopyOption
+	| dsnutilUCSRebuildIndexParallelOption
+	| dsnutilUCSRbalrsnConversionOption
+	| dsnutilUCSRebuildIndexStatsSpec
+	)
+	;
+
+dsnutilUCSRebuildIndexShrlevelOption
+	: (DSNUTIL_SHRLEVEL (DSNUTIL_REFERENCE | (DSNUTIL_CHANGE dsnutilUCSRebuildIndexChangeSpec*)))
+	;
+
+dsnutilUCSRebuildIndexChangeSpec
+	: (
+	(DSNUTIL_MAXRO (dsnutilUCSArg | DSNUTIL_DEFER))
+	| (DSNUTIL_LONGLOG (DSNUTIL_CONTINUE | DSNUTIL_TERM | DSNUTIL_DRAIN))
+	| (DSNUTIL_DELAY dsnutilUCSArg)
+	)
+	;
+
+dsnutilUCSRebuildIndexStatsSpec
+	: (
+	DSNUTIL_STATISTICS
+	dsnutilUCSRebuildIndexStatsSpecOptions*
+	)
+	;
+
+dsnutilUCSRebuildIndexStatsSpecOptions
+	: (
+	dsnutilUCSReportOption
+	| dsnutilUCSUpdateOption
+	| dsnutilUCSInvalidateCacheOption
+	| dsnutilUCSHistoryOption
+	| dsnutilUCSForcerollupOption
+	| dsnutilUCSCorrelationStatsSpec
+	)
+	;
+
+dsnutilUCSRebuildIndexParallelOption
+	: (DSNUTIL_PARALLEL dsnutilUCSArgInParens)
+	;
+
+dsnutilUCSRecover
+	: (
+	DSNUTIL_RECOVER
+	((((DSNUTIL_LIST dsnutilUCSListName) | (dsnutilUCSRecoverObjectSpec dsnutilUCSDsnumOption?)+) dsnutilUCSRecoverListOptionsSpec)
+	| dsnutilUCSRecoverOptionsSpec
+	| dsnutilUCSRecoverFromMultiSpec
+	| dsnutilUCSRecoverFromSpec
+	| (dsnutilUCSRecoverObjectSpec DSNUTIL_PAGE dsnutilUCSArg DSNUTIL_CONTINUE?))
+	(DSNUTIL_LOCALSITE | DSNUTIL_RECOVERYSITE)?
+	(DSNUTIL_LOGRANGES (DSNUTIL_YES | DSNUTIL_NO))?
+	)
+	;
+
+dsnutilUCSRecoverListOptionsSpec
+	: (
+	dsnutilUCSBackoutOption
+	| dsnutilUCSVerifysetOption
+	| dsnutilUCSEnforceOption
+	| dsnutilUCSTorbaOption
+	| dsnutilUCSRecoverNonLogonlyOptionsSpec
+	| dsnutilUCSLogonlyOption
+	| dsnutilUCSScopeOption2
+	)
+	;
+
+dsnutilUCSScopeOption2
+	: (
+	DSNUTIL_SCOPE (DSNUTIL_UPDATED | DSNUTIL_ALL)
+	)
+	;
+
+dsnutilUCSRecoverOptionsSpec
+	:(
+	dsnutilUCSRecoverObjectSpec
+	dsnutilUCSDsnumOption?
+	((DSNUTIL_TOCOPY dsnutilUCSDsn dsnutilUCSRecoverImageCopySpec? dsnutilUCSRecoverTocopyOptionsSpec*)
+	| (DSNUTIL_TOLASTCOPY dsnutilUCSRecoverTocopyOptionsSpec*)
+	| (DSNUTIL_TOLASTFULLCOPY dsnutilUCSRecoverTocopyOptionsSpec*)
+	| (DSNUTIL_ERROR DSNUTIL_RANGE))
+	)
+	;
+
+dsnutilUCSRecoverObjectSpec
+	: (
+	dsnutilUCSRecoverObjectSpecTablespace
+	| dsnutilUCSRecoverObjectSpecIndexpace
+	| dsnutilUCSRecoverObjectSpecIndex
+	)
+	;
+
+dsnutilUCSRecoverObjectSpecTablespace
+	: (
+	DSNUTIL_TABLESPACE 
+	dsnutilUCSQualifiedTablespaceName 
+	)
+	;
+
+dsnutilUCSRecoverObjectSpecIndexpace
+	: (
+	DSNUTIL_INDEXSPACE 
+	dsnutilUCSQualifiedIndexspaceName 
+	)
+	;
+
+dsnutilUCSRecoverObjectSpecIndex
+	: (
+	DSNUTIL_INDEX
+	dsnutilUCSQualifiedIndexName 
+	)
+	;
+
+dsnutilUCSRecoverFromMultiSpec
+	: (
+	(dsnutilUCSRecoverFromSpecTablespace
+	| dsnutilUCSRecoverFromSpecIndexpace
+	| dsnutilUCSRecoverFromSpecIndex)+
+	dsnutilUCSRecoverFromMultiSpecOptions*
+	)
+	;
+
+dsnutilUCSRecoverFromMultiSpecOptions
+	: (
+	dsnutilUCSVerifysetOption
+	| dsnutilUCSEnforceOption
+	| dsnutilUCSTorbaOption
+	| dsnutilUCSRecoverNonLogonlyOptionsSpec
+	| dsnutilUCSLogonlyOption
+	)
+	;
+
+dsnutilUCSVerifysetOption
+	: (
+	DSNUTIL_VERIFYSET (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSEnforceOption
+	: (
+	DSNUTIL_ENFORCE (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSTorbaOption
+	: (
+	(DSNUTIL_TORBA | DSNUTIL_TOLOGPOINT) dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSLogonlyOption
+	: (
+	DSNUTIL_LOGONLY
+	)
+	;
+
+dsnutilUCSRecoverNonLogonlyOptionsSpec
+	: (
+	dsnutilUCSReuseOption
+	| dsnutilUCSCurrentCopyOnlyOption
+	| dsnutilUCSParallelOption2
+	| dsnutilUCSRestorebeforeOption
+	| dsnutilUCSFromdumpOption
+	| dsnutilUCSFlashcopyPprcpOption
+ 	| dsnutilUCSAlternatecpOption
+	)
+	;
+
+dsnutilUCSCurrentCopyOnlyOption
+	: (
+	DSNUTIL_CURRENTCOPYONLY
+	)
+	;
+
+dsnutilUCSRestorebeforeOption
+	: (
+	DSNUTIL_RESTOREBEFORE dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSFromdumpOption
+	: (
+	DSNUTIL_FROMDUMP dsnutilUCSDumpclassSpec?
+	)
+	;
+
+dsnutilUCSRecoverFromSpec
+	: (
+	(dsnutilUCSRecoverFromSpecTablespace
+	| dsnutilUCSRecoverFromSpecIndexpace
+	| dsnutilUCSRecoverFromSpecIndex)
+	dsnutilUCSRecoverFromSpecTocopy
+	)
+	;
+
+dsnutilUCSRecoverFromSpecTablespace
+	: (
+	DSNUTIL_TABLESPACE 
+	dsnutilUCSQualifiedTablespaceName 
+	dsnutilUCSDsnumOption?
+	DSNUTIL_FROM
+	dsnutilUCSQualifiedTablespaceName
+	dsnutilUCSDsnumOption?
+	)
+	;
+
+dsnutilUCSRecoverFromSpecIndexpace
+	: (
+	DSNUTIL_INDEXSPACE 
+	dsnutilUCSQualifiedIndexspaceName 
+	dsnutilUCSDsnumOption?
+	DSNUTIL_FROM
+	dsnutilUCSQualifiedIndexspaceName
+	dsnutilUCSDsnumOption?
+	)
+	;
+
+dsnutilUCSRecoverFromSpecIndex
+	: (
+	DSNUTIL_INDEX
+	dsnutilUCSQualifiedIndexName 
+	dsnutilUCSDsnumOption?
+	DSNUTIL_FROM
+	dsnutilUCSQualifiedIndexName
+	dsnutilUCSDsnumOption?
+	)
+	;
+
+dsnutilUCSRecoverFromSpecTocopy
+	:(
+	(DSNUTIL_TOCOPY dsnutilUCSDsn dsnutilUCSRecoverImageCopySpec? dsnutilUCSRecoverTocopyOptionsSpec*)
+	| (DSNUTIL_TOLASTCOPY dsnutilUCSRecoverTocopyOptionsSpec*)
+	| (DSNUTIL_TOLASTFULLCOPY dsnutilUCSRecoverTocopyOptionsSpec*)
+	)
+	;
+
+dsnutilUCSRecoverTocopyOptionsSpec
+	: (
+	dsnutilUCSReuseOption
+	| dsnutilUCSRecoverCurrentcopyonlyOption
+	| dsnutilUCSRecoverEnforceOption
+	| dsnutilUCSRecoverNosyscopyOption
+	| dsnutilUCSFlashcopyPprcpOption
+	)
+	;
+
+dsnutilUCSRecoverCurrentcopyonlyOption
+	: (
+	DSNUTIL_CURRENTCOPYONLY
+	)
+	;
+
+dsnutilUCSRecoverEnforceOption
+	: (
+	DSNUTIL_ENFORCE (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSRecoverNosyscopyOption
+	: (
+	DSNUTIL_NOSYSCOPY (DSNUTIL_INLCOPY | DSNUTIL_FCCOPY)
+	)
+	;
+
+dsnutilUCSFlashcopyPprcpOption
+	: (
+	DSNUTIL_FLASHCOPY_PPRCP
+	(DSNUTIL_NO 
+	| DSNUTIL_PMNO 
+	| DSNUTIL_PMPREF 
+	| DSNUTIL_PMREQ)
+	)
+	;
+
+dsnutilUCSRecoverImageCopySpec
+	: (
+	DSNUTIL_TOVOLUME
+	(DSNUTIL_CATALOG
+	| (dsnutilUCSArg (DSNUTIL_TOSEQNO dsnutilUCSArg)?))
+	)
+	;
+
 dsnutilUCSFieldName
+	: dsnutilUCSArg
+	;
+
+dsnutilUCSListName
 	: dsnutilUCSArg
 	;
 
@@ -3131,6 +3522,8 @@ dsnutilArgument3Text
 	| dsnutilUCSModifyStatistics
 	| dsnutilUCSOptions
 	| dsnutilUCSQuiesce
+	| dsnutilUCSRebuildIndex
+	| dsnutilUCSRecover
 	| dsnutilUCSTemplate
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA

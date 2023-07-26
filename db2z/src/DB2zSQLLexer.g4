@@ -4546,7 +4546,8 @@ So here we are, knowing that we are processing the third parameter
 to SYSPROC.DSNUTILx, and that the opening apostrophe (or quote) has
 been detected.
 
-
+Things get a little messy from this point on.  Lots of modes, and 
+transferring between them is done... creatively.
 */
 
 DSNUTIL_DOUBLE_APOS
@@ -5827,6 +5828,18 @@ DSNUTIL_LOAD_DATA
 	}
 	;
 
+DSNUTIL_IDENTITYOVERRIDE
+	: I D E N T I T Y O V E R R I D E
+	;
+
+DSNUTIL_PERIODOVERRIDE
+	: P E R I O D O V E R R I D E
+	;
+
+DSNUTIL_TRANSIDOVERRIDE
+	: T R A N S I D O V E R R I D E
+	;
+
 DSNUTIL_REORG
 	: R E O R G
 	{
@@ -6058,6 +6071,131 @@ DSNUTIL_QUIESCE
 
 DSNUTIL_WRITE
 	: W R I T E
+	;
+
+DSNUTIL_REBUILD
+	: R E B U I L D
+	;
+
+DSNUTIL_MAXRO
+	: M A X R O
+	;
+
+DSNUTIL_LONGLOG
+	: L O N G L O G
+	;
+
+DSNUTIL_DELAY
+	: D E L A Y
+	;
+
+DSNUTIL_DEFER
+	: D E F E R
+	;
+
+DSNUTIL_CONTINUE
+	: C O N T I N U E
+	;
+
+DSNUTIL_TERM
+	: T E R M
+	;
+
+DSNUTIL_DRAIN
+	: D R A I N
+	;
+
+DSNUTIL_RECOVER
+	: R E C O V E R
+	;
+
+DSNUTIL_LOCALSITE
+	: L O C A L S I T E
+	;
+
+DSNUTIL_LOGRANGES
+	: L O G R A N G E S
+	;
+
+DSNUTIL_VERIFYSET
+	: V E R I F Y S E T
+	;
+
+DSNUTIL_LOGONLY
+	: L O G O N L Y
+	;
+
+DSNUTIL_CURRENTCOPYONLY
+	: C U R R E N T C O P Y O N L Y
+	;
+
+DSNUTIL_FROMDUMP
+	: F R O M D U M P
+	;
+
+DSNUTIL_FLASHCOPY_PPRCP
+	: F L A S H C O P Y '_' P P R C P
+	;
+
+DSNUTIL_TOCOPY
+	: T O C O P Y
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_TOLASTCOPY
+	: T O L A S T C O P Y
+	;
+
+DSNUTIL_TOLASTFULLCOPY
+	: T O L A S T F U L L C O P Y
+	;
+
+DSNUTIL_ERROR
+	: E R R O R
+	;
+
+DSNUTIL_RANGE
+	: R A N G E
+	;
+
+DSNUTIL_NOSYSCOPY
+	: N O S Y S C O P Y
+	;
+
+DSNUTIL_INLCOPY
+	: I N L C O P Y
+	;
+
+DSNUTIL_FCCOPY
+	: F C C O P Y
+	;
+
+DSNUTIL_TOVOLUME
+	: T O V O L U M E
+	;
+
+DSNUTIL_TOSEQNO
+	: T O S E Q N O
+	;
+
+DSNUTIL_PMNO
+	: P M N O
+	;
+
+DSNUTIL_PMPREF
+	: P M P R E F
+	;
+
+DSNUTIL_PMREQ
+	: P M R E Q
+	;
+
+DSNUTIL_RECOVERYSITE
+	: R E C O V E R Y S I T E
+	;
+
+DSNUTIL_UPDATED
+	: U P D A T E D
 	;
 
 DSNUTIL_IDENTIFIER
@@ -6424,6 +6562,11 @@ DSNUTIL_DB_TS_RPAREN
 	}
 	;
 
+DSNUTIL_DB_TS_LIST
+	: DSNUTIL_LIST
+	->type(DSNUTIL_LIST)
+	;
+
 DSNUTIL_DB_TS_IDENTIFIER
 	: ~[ \n.,;)('"]+
 	{
@@ -6503,7 +6646,6 @@ DSNUTIL_PAREN_NOT_EQUAL
 	->type(DSNUTIL_NOT_EQUAL),pushMode(DSNUTIL_GNX_MODE)
 	;
 
-//TODO needed?
 DSNUTIL_PAREN_DOT
 	: DOT
 	;
@@ -6513,19 +6655,16 @@ DSNUTIL_PAREN_WS
 	->channel(HIDDEN)
 	;
 
-//TODO needed?
 DSNUTIL_PAREN_TABLESPACE
 	: T A B L E S P A C E
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
-//TODO needed?
 DSNUTIL_PAREN_TABLE
 	: T A B L E
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
-//TODO needed?
 DSNUTIL_PAREN_XMLCOLUMN
 	: X M L C O L U M N
 	;
@@ -6814,6 +6953,11 @@ DSNUTIL_PAREN_YES
 DSNUTIL_PAREN_NO
 	: N O
 	->type(DSNUTIL_NO)
+	;
+
+DSNUTIL_PAREN_ALL
+	: DSNUTIL_ALL
+	->type(DSNUTIL_ALL)
 	;
 
 DSNUTIL_PAREN_ITEMERROR
@@ -7165,7 +7309,7 @@ DSNUTIL_HEXLIT_X_CHAR
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
-mode DSNUTIL_GNX_MODE;
+mode DSNUTIL_GNX_MODE; //TODO combine with DSNUTIL_HEXLIT_MODEs?
 
 DSNUTIL_GNX_X
 	: X
@@ -7183,4 +7327,10 @@ DSNUTIL_GNX_APOS
 	: '\''
 	->pushMode(DSNUTIL_APOS_MODE) //we don't come back to this mode
 	;
+
+DSNUTIL_GNX_WS
+	: (WS | NEWLINE)+
+	->channel(HIDDEN)
+	;
+
 
