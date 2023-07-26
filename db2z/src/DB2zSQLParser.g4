@@ -824,6 +824,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_PREVIEW
 	| DSNUTIL_PROFILE
 	| DSNUTIL_PUNCHDDN
+	| DSNUTIL_QUIESCE
 	| DSNUTIL_RBALRSN_CONVERSION
 	| DSNUTIL_RBLP
 	| DSNUTIL_RC0
@@ -936,6 +937,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_WHITESPACE
 	| DSNUTIL_WITH_TIMEZONE
 	| DSNUTIL_WORKDDN
+	| DSNUTIL_WRITE
 	| DSNUTIL_XML
 	| DSNUTIL_XMLERROR
 	| DSNUTIL_XMLSCHEMA
@@ -3014,6 +3016,35 @@ dsnutilUCSOptionsEventWarningOption
 	)
 	;
 
+dsnutilUCSQuiesce
+	: (
+	DSNUTIL_QUIESCE
+	dsnutilUCSQuiesceListOrTablespaceEtAl
+	dsnutilUCSQuiesceOptions*
+	)
+	;
+
+dsnutilUCSQuiesceListOrTablespaceEtAl
+	: (
+	(DSNUTIL_LIST dsnutilUCSArg) 
+	| ((DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?)
+	| (DSNUTIL_TABLESPACESET DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))+
+	)
+	;
+
+dsnutilUCSQuiesceOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSQuiesceWriteOption
+	)
+	;
+
+dsnutilUCSQuiesceWriteOption
+	: (
+	DSNUTIL_WRITE (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
 dsnutilUCSFieldName
 	: dsnutilUCSArg
 	;
@@ -3099,6 +3130,7 @@ dsnutilArgument3Text
 	| dsnutilUCSModifyRecovery
 	| dsnutilUCSModifyStatistics
 	| dsnutilUCSOptions
+	| dsnutilUCSQuiesce
 	| dsnutilUCSTemplate
 	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA

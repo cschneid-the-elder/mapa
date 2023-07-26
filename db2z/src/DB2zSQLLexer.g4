@@ -6052,6 +6052,14 @@ DSNUTIL_RC8
 	: R C '8'
 	;
 
+DSNUTIL_QUIESCE
+	: Q U I E S C E
+	;
+
+DSNUTIL_WRITE
+	: W R I T E
+	;
+
 DSNUTIL_IDENTIFIER
 	: ~[ \n,;)('"=><+-]+
 	;
