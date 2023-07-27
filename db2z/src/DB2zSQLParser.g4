@@ -694,6 +694,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_EXTERNAL
 	| DSNUTIL_EXTPREF
 	| DSNUTIL_EXTREQ
+	| DSNUTIL_FASTSWITCH
 	| DSNUTIL_FCCOPY
 	| DSNUTIL_FCCOPYDDN
 	| DSNUTIL_FCINCREMENTAL
@@ -755,7 +756,9 @@ dsnutilUCSKeyword
 	| DSNUTIL_KEYCARD
 	| DSNUTIL_LARGE
 	| DSNUTIL_LAST
+	| DSNUTIL_LASTLOG
 	| DSNUTIL_LEADING
+	| DSNUTIL_LEAFDISTLIMIT
 	| DSNUTIL_LEAST
 	| DSNUTIL_LENGTH
 	| DSNUTIL_LEVEL
@@ -794,6 +797,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_MONTHS
 	| DSNUTIL_MOST
 	| DSNUTIL_NBRSECND
+	| DSNUTIL_NEWMAXRO
 	| DSNUTIL_NO
 	| DSNUTIL_NOCHECKPAGE
 	| DSNUTIL_NOCHECKPEND
@@ -805,6 +809,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_NONUNIQUE
 	| DSNUTIL_NOSUBS
 	| DSNUTIL_NOSYSCOPY
+	| DSNUTIL_NOSYSUT1
 	| DSNUTIL_NPI
 	| DSNUTIL_NULL
 	| DSNUTIL_NULLIF
@@ -829,6 +834,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_PATHDISP
 	| DSNUTIL_PATHMODE
 	| DSNUTIL_PATHOPTS
+	| DSNUTIL_PAUSE
 	| DSNUTIL_PCTPRIME
 	| DSNUTIL_PDS
 	| DSNUTIL_PENDING
@@ -927,7 +933,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_TERM
 	| DSNUTIL_TEXT
 	| DSNUTIL_TIME
-	| DSNUTIL_TIME
+	| DSNUTIL_TIMEOUT
 	| DSNUTIL_TIMESTAMP
 	| DSNUTIL_TIMESTAMP_WITH_TIME_ZONE
 	| DSNUTIL_TOCOPY
@@ -972,6 +978,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_WITH_TIMEZONE
 	| DSNUTIL_WORKDDN
 	| DSNUTIL_WRITE
+	| DSNUTIL_WRITERS
 	| DSNUTIL_XML
 	| DSNUTIL_XMLERROR
 	| DSNUTIL_XMLSCHEMA
@@ -1782,15 +1789,15 @@ dsnutilUCSLoad
 dsnutilUCSLoadOptions
 	: (
 	dsnutilUCSLoadInddnOption
-	| dsnutilUCSLoadPreformatOption
+	| dsnutilUCSPreformatOption
 	| dsnutilUCSLoadCopydictionaryOption
 	| dsnutilUCSLoadPresortedOption
-	| dsnutilUCSLoadParallelOption
+	| dsnutilUCSParallelOption2
 	| dsnutilUCSLoadPresortOption
 	| dsnutilUCSLoadRowformatOption
 	| dsnutilUCSRbalrsnConversionOption
 	| dsnutilUCSLoadResumeOption
-	| dsnutilUCSLoadFlashcopyOption
+	| dsnutilUCSFlashcopyOption
 	| dsnutilUCSLoadKeepdictionaryOption
 	| dsnutilUCSReuseOption
 	| dsnutilUCSLoadLogOption
@@ -1808,8 +1815,8 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadDiscarddnOption
 	| dsnutilUCSLoadDiscardsOption
 	| dsnutilUCSBackoutOption
-	| dsnutilUCSLoadSortdevtOption
-	| dsnutilUCSLoadSortnumOption
+	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
 	| dsnutilUCSLoadContinueifOption
 	| dsnutilUCSLoadIgnoreOption
 	| dsnutilUCSLoadDecfloatOption
@@ -1820,7 +1827,7 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadImplicitTZOption
 	| dsnutilUCSLoadUpdmaxassignedvalOption
 	| dsnutilUCSLoadDefineauxOption
-	| dsnutilUCSLoadForceOption
+	| dsnutilUCSForceOption
 	| dsnutilUCSLoadKeepEmptyPagesOption
 	)
 	;
@@ -1831,7 +1838,7 @@ dsnutilUCSLoadInddnOption
 	)
 	;
 
-dsnutilUCSLoadPreformatOption
+dsnutilUCSPreformatOption
 	: (
 	DSNUTIL_PREFORMAT
 	)
@@ -1846,12 +1853,6 @@ dsnutilUCSLoadCopydictionaryOption
 dsnutilUCSLoadPresortedOption
 	: (
 	DSNUTIL_PRESORTED (DSNUTIL_YES | DSNUTIL_NO)
-	)
-	;
-
-dsnutilUCSLoadParallelOption
-	: (
-	DSNUTIL_PARALLEL dsnutilUCSArgInParens
 	)
 	;
 
@@ -1879,11 +1880,13 @@ dsnutilUCSLoadResumeOption
 	)
 	;
 
-dsnutilUCSLoadFlashcopyOption
+/*
+dsnutilUCSFlashcopyOption
 	: (
-	dsnutilUCSLoadFlashcopySpec
+	dsnutilUCSFlashcopySpec
 	)
 	;
+*/
 
 dsnutilUCSLoadKeepdictionaryOption
 	: (
@@ -1981,18 +1984,6 @@ dsnutilUCSBackoutOption
 	)
 	;
 
-dsnutilUCSLoadSortdevtOption
-	: (
-	DSNUTIL_SORTDEVT dsnutilUCSArg
-	)
-	;
-
-dsnutilUCSLoadSortnumOption
-	: (
-	DSNUTIL_SORTNUM dsnutilUCSArg
-	)
-	;
-
 dsnutilUCSLoadContinueifOption
 	: (
 	DSNUTIL_CONTINUEIF dsnutilUCSArgInParens DSNUTIL_EQUAL dsnutilUCSArg
@@ -2047,7 +2038,7 @@ dsnutilUCSLoadDefineauxOption
 	)
 	;
 
-dsnutilUCSLoadForceOption
+dsnutilUCSForceOption
 	: (
 	DSNUTIL_FORCE (DSNUTIL_NONE | DSNUTIL_READERS | DSNUTIL_ALL)
 	)
@@ -2101,12 +2092,14 @@ dsnutilUCSLoadCopySpec
 	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2))
 	;
 
-dsnutilUCSLoadFlashcopySpec
+/*
+dsnutilUCSFlashcopySpec
 	: (
 	DSNUTIL_FLASHCOPY (DSNUTIL_YES | DSNUTIL_NO | DSNUTIL_CONSISTENT)
 	DSNUTIL_FCCOPYDDN dsnutilUCSArgInParens
 	)
 	;
+*/
 
 dsnutilUCSStatisticsSpec
 	: (
@@ -2418,13 +2411,13 @@ dsnutilUCSDrainSpec
 
 dsnutilUCSLabeledDurationExpression
 	: (
-	(DSNUTIL_CURRENT_DATE | (DSNUTIL_CURRENT_TIMESTAMP DSNUTIL_WITH_TIMEZONE?))
+	(DSNUTIL_CURRENT_DATE | (DSNUTIL_CURRENT_TIMESTAMP DSNUTIL_WITH_TIME_ZONE?))
 	((DSNUTIL_PLUS | DSNUTIL_MINUS) dsnutilUCSArg dsnutilDurationSuffix)+
 	)
 	;
 
 dsnutilUCSSwitchtimeOption
-	: (DSNUTIL_SWITCHTIME (DSNUTIL_NONE | dsnutilUCSArg | dsnutilUCSLabeledDurationExpression))
+	: (DSNUTIL_SWITCHTIME (DSNUTIL_NONE | dsnutilUCSTimestamp | dsnutilUCSLabeledDurationExpression))
 	;
 
 dsnutilDurationSuffix
@@ -3114,19 +3107,17 @@ dsnutilUCSRebuildIndexSpec
 
 dsnutilUCSRebuildIndexSpecIndex
 	: (
-	DSNUTIL_INDEX
-	((DSNUTIL_DB_TS_LPAREN dsnutilUCSIndexSpec (DSNUTIL_COMMA dsnutilUCSIndexSpec)* DSNUTIL_RPAREN1)
-	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
-	| (DSNUTIL_LIST dsnutilUCSListName))
+	(DSNUTIL_INDEX DSNUTIL_DB_TS_LPAREN dsnutilUCSIndexSpec (DSNUTIL_COMMA dsnutilUCSIndexSpec)* DSNUTIL_RPAREN1)
+	| (DSNUTIL_INDEX DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
+	| (DSNUTIL_INDEX_LIST dsnutilUCSListName)
 	)
 	;
 
 dsnutilUCSRebuildIndexSpecIndexspace
 	: (
-	DSNUTIL_INDEXSPACE
-	((DSNUTIL_DB_TS_LPAREN dsnutilUCSRebuildIndexIndexspaceSpec (DSNUTIL_COMMA dsnutilUCSRebuildIndexIndexspaceSpec)*) DSNUTIL_RPAREN1
-	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
-	| (DSNUTIL_LIST dsnutilUCSListName))
+	(DSNUTIL_INDEXSPACE DSNUTIL_DB_TS_LPAREN dsnutilUCSRebuildIndexIndexspaceSpec (DSNUTIL_COMMA dsnutilUCSRebuildIndexIndexspaceSpec)*) DSNUTIL_RPAREN1
+	| (DSNUTIL_INDEXSPACE DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
+	| (DSNUTIL_INDEXSPACE_LIST dsnutilUCSListName)
 	)
 	;
 	
@@ -3166,9 +3157,27 @@ dsnutilUCSRebuildIndexShrlevelOption
 
 dsnutilUCSRebuildIndexChangeSpec
 	: (
-	(DSNUTIL_MAXRO (dsnutilUCSArg | DSNUTIL_DEFER))
-	| (DSNUTIL_LONGLOG (DSNUTIL_CONTINUE | DSNUTIL_TERM | DSNUTIL_DRAIN))
-	| (DSNUTIL_DELAY dsnutilUCSArg)
+	dsnutilUCSMaxroOption
+	| dsnutilUCSLonglogOption
+	| dsnutilUCSDelayOption
+	)
+	;
+
+dsnutilUCSMaxroOption
+	: (
+	DSNUTIL_MAXRO (dsnutilUCSArg | DSNUTIL_DEFER)
+	)
+	;
+
+dsnutilUCSLonglogOption
+	: (
+	DSNUTIL_LONGLOG (DSNUTIL_CONTINUE | DSNUTIL_TERM | DSNUTIL_DRAIN)
+	)
+	;
+
+dsnutilUCSDelayOption
+	: (
+	DSNUTIL_DELAY dsnutilUCSArg
 	)
 	;
 
@@ -3203,7 +3212,13 @@ dsnutilUCSRecover
 	| dsnutilUCSRecoverFromSpec
 	| (dsnutilUCSRecoverObjectSpec DSNUTIL_PAGE dsnutilUCSArg DSNUTIL_CONTINUE?))
 	dsnutilUCSRecoverSiteOption?
-	(DSNUTIL_LOGRANGES (DSNUTIL_YES | DSNUTIL_NO))?
+	dsnutilUCSLograngesOption?
+	)
+	;
+
+dsnutilUCSLograngesOption
+	: (
+	DSNUTIL_LOGRANGES (DSNUTIL_YES | DSNUTIL_NO)
 	)
 	;
 
@@ -3460,6 +3475,153 @@ dsnutilUCSRecoverImageCopySpec
 	)
 	;
 
+dsnutilUCSReorgIndex
+	: (
+	DSNUTIL_REORG
+	((DSNUTIL_INDEX DSNUTIL_LIST dsnutilUCSListName)
+	| dsnutilUCSReorgIndexIndexNameSpec)
+	dsnutilUCSReorgIndexOptions*
+	)
+	;
+
+dsnutilUCSReorgIndexOptions
+	: (
+	dsnutilUCSReuseOption
+	| dsnutilUCSCloneOption
+	| dsnutilUCSReorgIndexShrlevelOption
+	| dsnutilUCSForceOption
+	| dsnutilUCSReorgIndexLeafdistlimitOption
+	| dsnutilUCSReorgIndexUnloadOption
+	| dsnutilUCSReorgIndexStatsSpec
+	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
+	| dsnutilUCSReorgIndexWorkddnOption
+	| dsnutilUCSPreformatOption
+	| dsnutilUCSFlashcopyOption
+	| dsnutilUCSRbalrsnConversionOption
+	| dsnutilUCSReorgIndexNosysut1Option
+	| dsnutilUCSParallelOption2
+	)
+	;
+
+dsnutilUCSReorgIndexShrlevelOption
+	: (
+	DSNUTIL_SHRLEVEL
+	(DSNUTIL_NONE
+	| (DSNUTIL_REFERENCE (dsnutilUCSDeadlineOption | dsnutilUCSReorgIndexDrainSpec)*)
+	| (DSNUTIL_CHANGE (dsnutilUCSDeadlineOption | dsnutilUCSReorgIndexDrainSpec | dsnutilUCSChangeSpec)*))
+	dsnutilUCSFastswitchOption?
+	)
+	;
+
+dsnutilUCSFastswitchOption
+	: (
+	DSNUTIL_FASTSWITCH (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSReorgIndexLeafdistlimitOption
+	: (
+	DSNUTIL_LEAFDISTLIMIT dsnutilUCSArg? DSNUTIL_REPORTONLY?
+	)
+	;
+
+dsnutilUCSReorgIndexUnloadOption
+	: (
+	DSNUTIL_UNLOAD (DSNUTIL_CONTINUE | DSNUTIL_PAUSE | DSNUTIL_ONLY)
+	)
+	;
+
+dsnutilUCSReorgIndexStatsSpec
+	: (
+	DSNUTIL_STATISTICS
+	dsnutilUCSReorgIndexStatsSpecOptions+
+	)
+	;
+
+dsnutilUCSReorgIndexStatsSpecOptions
+	: (
+	dsnutilUCSReportOption
+	| dsnutilUCSUpdateOption
+	| dsnutilUCSInvalidateCacheOption
+	| dsnutilUCSHistoryOption
+	| dsnutilUCSForcerollupOption
+	| dsnutilUCSCorrelationStatsSpec
+	)
+	;
+
+dsnutilUCSReorgIndexIndexNameSpec
+	: (
+	((DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
+	(DSNUTIL_PART dsnutilUCSArg)?
+	)
+	;
+
+dsnutilUCSReorgIndexDrainSpec
+	: (
+	dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSTimeoutOption
+	)
+	;
+
+dsnutilUCSTimeoutOption
+	: (
+	DSNUTIL_TIMEOUT (DSNUTIL_TERM | DSNUTIL_ABEND)
+	)
+	;
+
+dsnutilUCSReorgIndexWorkddnOption
+	: (
+	DSNUTIL_WORKDDN dsnutilUCSArgInParens
+	)
+	;
+
+dsnutilUCSReorgIndexNosysut1Option
+	: (
+	DSNUTIL_NOSYSUT1
+	)
+	;
+
+dsnutilUCSChangeSpec
+	: (
+	dsnutilUCSMaxroOption
+	| dsnutilUCSDrainOption
+	| dsnutilUCSLonglogOption
+	| dsnutilUCSDelayOption
+	| dsnutilUCSLograngesOption
+	| dsnutilUCSLastlogOption
+	| dsnutilUCSSwitchtimeOption
+	)
+	;
+
+dsnutilUCSLastlogOption
+	: (
+	DSNUTIL_LASTLOG (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSDrainOption
+	: (
+	DSNUTIL_DRAIN (DSNUTIL_ALL | DSNUTIL_WRITERS)
+	)
+	;
+
+dsnutilUCSDeadlineOption
+	: (
+	DSNUTIL_DEADLINE
+	(DSNUTIL_NONE | dsnutilUCSTimestamp | dsnutilUCSLabeledDurationExpression)
+	)
+	;
+
+dsnutilUCSTimestamp
+	: (
+	(DSNUTIL_IDENTIFIER | DSNUTIL_MINUS)+
+	)
+	;
+
 dsnutilUCSFieldName
 	: dsnutilUCSArg
 	;
@@ -3560,6 +3722,7 @@ dsnutilArgument3Text
 	| dsnutilUCSQuiesce
 	| dsnutilUCSRebuildIndex
 	| dsnutilUCSRecover
+	| dsnutilUCSReorgIndex
 	| dsnutilUCSTemplate
 /*	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA

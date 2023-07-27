@@ -4548,6 +4548,10 @@ been detected.
 
 Things get a little messy from this point on.  Lots of modes, and 
 transferring between them is done... creatively.
+
+Remember to add any new keywords to the dsnutilUCSKeyword parser rule,
+to catch anyone who wants to name their list "LIST" or their workddn
+"WORKDDN" or other such perfectly legitimate yet irritating thing.
 */
 
 DSNUTIL_DOUBLE_APOS
@@ -4833,6 +4837,18 @@ DSNUTIL_INDEXSPACE
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
+/*
+In this case, we have the INDEXSPACE token followed
+by the LIST token (probably) in a REBUILD INDEX
+command.  We're setting up for the next token, which
+is a list name and thus we behave as we do for the
+LIST token.
+*/
+DSNUTIL_INDEXSPACE_LIST
+	: I N D E X S P A C E (WS | NEWLINE)+ L I S T
+	->pushMode(DSNUTIL_HEXLIT_MODE)
+	;
+
 DSNUTIL_INDEXES
 	: I N D E X E S
 	;
@@ -4840,6 +4856,18 @@ DSNUTIL_INDEXES
 DSNUTIL_INDEX
 	: I N D E X
 	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+In this case, we have the INDEX token followed
+by the LIST token (probably) in a REBUILD INDEX
+command.  We're setting up for the next token, which
+is a list name and thus we behave as we do for the
+LIST token.
+*/
+DSNUTIL_INDEX_LIST
+	: I N D E X (WS | NEWLINE)+ L I S T
+	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_MAPPINGTABLE
@@ -4915,7 +4943,7 @@ do not show apostrophes, but it's possible they are allowed.
 
 DSNUTIL_DEADLINE
 	: D E A D L I N E
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_SWITCHTIME
@@ -5951,8 +5979,16 @@ DSNUTIL_CCSID
 	: C C S I D
 	;
 
+/*
+These two are terrible.  Also note
+DSNUTIL_TIMESTAMP_WITH_TIME_ZONE.
+*/
 DSNUTIL_WITH_TIMEZONE
 	: W I T H '_' T I M E Z O N E
+	;
+
+DSNUTIL_WITH_TIME_ZONE
+	: W I T H (WS | NEWLINE)+ T I M E (WS | NEWLINE)+ Z O N E
 	;
 
 DSNUTIL_USE
@@ -6196,6 +6232,38 @@ DSNUTIL_RECOVERYSITE
 
 DSNUTIL_UPDATED
 	: U P D A T E D
+	;
+
+DSNUTIL_FASTSWITCH
+	: F A S T S W I T C H
+	;
+
+DSNUTIL_LEAFDISTLIMIT
+	: L E A F D I S T L I M I T
+	;
+
+DSNUTIL_PAUSE
+	: P A U S E
+	;
+
+DSNUTIL_NOSYSUT1
+	: N O S Y S U T '1'
+	;
+
+DSNUTIL_TIMEOUT
+	: T I M E O U T
+	;
+
+DSNUTIL_NEWMAXRO
+	: N E W M A X R O
+	;
+
+DSNUTIL_LASTLOG
+	: L A S T L O G
+	;
+
+DSNUTIL_WRITERS
+	: W R I T E R S
 	;
 
 DSNUTIL_IDENTIFIER
@@ -6587,11 +6655,6 @@ DSNUTIL_DB_TS_RPAREN
 				break;
 		}
 	}
-	;
-
-DSNUTIL_DB_TS_LIST
-	: DSNUTIL_LIST
-	->type(DSNUTIL_LIST)
 	;
 
 DSNUTIL_DB_TS_IDENTIFIER
