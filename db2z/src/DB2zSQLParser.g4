@@ -587,6 +587,8 @@ dsnutilUCSKeyword
 	| DSNUTIL_ARCHIVE
 	| DSNUTIL_ASCII
 	| DSNUTIL_AUTO
+	| DSNUTIL_AUTOESTSPACE
+	| DSNUTIL_AUX
 	| DSNUTIL_AUXERROR
 	| DSNUTIL_AUXONLY
 	| DSNUTIL_AVAILABLE
@@ -665,13 +667,16 @@ dsnutilUCSKeyword
 	| DSNUTIL_DELIMITED
 	| DSNUTIL_DIAGNOSE
 	| DSNUTIL_DIR
+	| DSNUTIL_DISCARD
 	| DSNUTIL_DISCARDDN
 	| DSNUTIL_DISCARDS
 	| DSNUTIL_DISP
 	| DSNUTIL_DISPLAY
 	| DSNUTIL_DOCID
 	| DSNUTIL_DRAIN
+	| DSNUTIL_DRAIN_ALLPARTS
 	| DSNUTIL_DRAIN_WAIT
+	| DSNUTIL_DROP_PART
 	| DSNUTIL_DSN
 	| DSNUTIL_DSNTYPE
 	| DSNUTIL_DSNUM
@@ -728,6 +733,8 @@ dsnutilUCSKeyword
 	| DSNUTIL_HISTORY
 	| DSNUTIL_HOUR
 	| DSNUTIL_HOURS
+	| DSNUTIL_ICLIMIT_DASD
+	| DSNUTIL_ICLIMIT_TAPE
 	| DSNUTIL_IDENTITYOVERRIDE
 	| DSNUTIL_IGNORE
 	| DSNUTIL_IGNOREFIELDS
@@ -740,6 +747,8 @@ dsnutilUCSKeyword
 	| DSNUTIL_INDEXES
 	| DSNUTIL_INDEXSPACE
 	| DSNUTIL_INDEXSPACES
+	| DSNUTIL_INDREFLIMIT
+	| DSNUTIL_INITCDDS
 	| DSNUTIL_INLCOPY
 	| DSNUTIL_INSERTVERSIONPAGES
 	| DSNUTIL_INSTANCE
@@ -768,6 +777,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_LIST
 	| DSNUTIL_LISTDEF
 	| DSNUTIL_LISTDEFDD
+	| DSNUTIL_LISTPARTS
 	| DSNUTIL_LOAD
 	| DSNUTIL_LOB
 	| DSNUTIL_LOBERROR
@@ -807,8 +817,10 @@ dsnutilUCSKeyword
 	| DSNUTIL_NODUMPS
 	| DSNUTIL_NONE
 	| DSNUTIL_NONUNIQUE
+	| DSNUTIL_NOPAD
 	| DSNUTIL_NOSUBS
 	| DSNUTIL_NOSYSCOPY
+	| DSNUTIL_NOSYSREC
 	| DSNUTIL_NOSYSUT1
 	| DSNUTIL_NPI
 	| DSNUTIL_NULL
@@ -818,6 +830,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_NUMRECS
 	| DSNUTIL_OBD
 	| DSNUTIL_OFF
+	| DSNUTIL_OFFPOSLIMIT
 	| DSNUTIL_OFFSET
 	| DSNUTIL_ONLY
 	| DSNUTIL_OPTIONS
@@ -859,8 +872,10 @@ dsnutilUCSKeyword
 	| DSNUTIL_RC4
 	| DSNUTIL_RC8
 	| DSNUTIL_READERS
+	| DSNUTIL_REBALANCE
 	| DSNUTIL_REBUILD
 	| DSNUTIL_RECFM
+	| DSNUTIL_RECLUSTER
 	| DSNUTIL_RECORD
 	| DSNUTIL_RECOVER
 	| DSNUTIL_RECOVERYDDN
@@ -894,6 +909,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_SAMPLE
 	| DSNUTIL_SCHEMA
 	| DSNUTIL_SCOPE
+	| DSNUTIL_SEARCHTIME
 	| DSNUTIL_SECOND
 	| DSNUTIL_SECONDS
 	| DSNUTIL_SETCURRENTVERSION
@@ -903,8 +919,11 @@ dsnutilUCSKeyword
 	| DSNUTIL_SKIP
 	| DSNUTIL_SKIP_LOCKED_DATA
 	| DSNUTIL_SMALLINT
+	| DSNUTIL_SORTCLUSTER
+	| DSNUTIL_SORTDATA
 	| DSNUTIL_SORTDEVT
 	| DSNUTIL_SORTKEYS
+	| DSNUTIL_SORTNPSI
 	| DSNUTIL_SORTNUM
 	| DSNUTIL_SPACE
 	| DSNUTIL_SPANNED
@@ -986,8 +1005,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_YEAR
 	| DSNUTIL_YEARS
 	| DSNUTIL_YES
-	| DSNUTIL_ZONED
-	)
+	| DSNUTIL_ZONED	)
 	;
 
 dsnutilUCSArg
@@ -1155,7 +1173,7 @@ dsnutilUCSCheckDataOptions
 	| dsnutilUCSExceptions
 	| dsnutilUCSCheckDataErrddn
 	| dsnutilUCSCheckDataWorkddn
-	| dsnutilUCSPunchddn
+	| dsnutilUCSPunchddnOption
 	| dsnutilUCSSortdevtOption
 	| dsnutilUCSSortnumOption
 	)
@@ -1214,8 +1232,12 @@ dsnutilUCSCheckDataForException
 dsnutilUCSCheckDataDelete
 	: (
 	DSNUTIL_DELETE
-	(DSNUTIL_NO | (DSNUTIL_YES (DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))?))
+	(DSNUTIL_NO | (DSNUTIL_YES dsnutilUCSLogOption?))
 	)
+	;
+
+dsnutilUCSLogOption
+	: (DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))
 	;
 
 dsnutilUCSExceptions
@@ -1232,7 +1254,7 @@ dsnutilUCSCheckDataWorkddn
 	)
 	;
 
-dsnutilUCSPunchddn
+dsnutilUCSPunchddnOption
 	: (DSNUTIL_PUNCHDDN dsnutilUCSArg)
 	;
 
@@ -1292,7 +1314,7 @@ dsnutilUCSCheckLobOptions
 	| dsnutilUCSRetryOption
 	| dsnutilUCSRetryDelayOption
 	| dsnutilUCSExceptions
-	| dsnutilUCSPunchddn
+	| dsnutilUCSPunchddnOption
 	| dsnutilUCSSortdevtOption
 	| dsnutilUCSSortnumOption
 	)
@@ -1381,8 +1403,8 @@ dsnutilUCSFilterddnSpec
 	;
 
 dsnutilUCSDatasetSpec
-	: ((DSNUTIL_COPYDDN dsnutilUCSArgList2 (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2)?)
-	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2))
+	: ((dsnutilUCSCopyddnOption dsnutilUCSRecoveryddnOption2?)
+	| dsnutilUCSRecoveryddnOption2)
 	;
 
 dsnutilUCSChangelimitSpec
@@ -1809,7 +1831,7 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadCCSIDOption
 	| dsnutilUCSLoadNosubsOption
 	| dsnutilUCSLoadEnforceOption
-	| dsnutilUCSLoadNocheckpendOption
+	| dsnutilUCSNocheckpendOption
 	| dsnutilUCSLoadErrddnOption
 	| dsnutilUCSLoadMapddnOption
 	| dsnutilUCSLoadDiscarddnOption
@@ -1948,7 +1970,7 @@ dsnutilUCSLoadEnforceOption
 	)
 	;
 
-dsnutilUCSLoadNocheckpendOption
+dsnutilUCSNocheckpendOption
 	: (
 	DSNUTIL_NOCHECKPEND
 	)
@@ -2088,8 +2110,8 @@ dsnutilUCSLoadResumeSpecShrlevelOptions
 	;
 
 dsnutilUCSLoadCopySpec
-	: ((DSNUTIL_COPYDDN dsnutilUCSArgList2 (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2)?)
-	| (DSNUTIL_RECOVERYDDN dsnutilUCSArgList2))
+	: ((dsnutilUCSCopyddnOption dsnutilUCSRecoveryddnOption2?)
+	| dsnutilUCSRecoveryddnOption2)
 	;
 
 /*
@@ -2254,7 +2276,7 @@ dsnutilUCSColgroupStatsSpec
 dsnutilUCSStatIndexSpec
 	: (
 	DSNUTIL_INDEX 
-	(((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName DSNUTIL_RPAREN1)
+	(((DSNUTIL_DB_TS_LPAREN (dsnutilUCSQualifiedIndexName | DSNUTIL_ALL) DSNUTIL_RPAREN1)
 	dsnutilUCSCorrelationStatsSpec*)
 	| (DSNUTIL_DB_TS_LPAREN dsnutilUCSStatsIndexSpecList DSNUTIL_RPAREN1))
 	)
@@ -2262,10 +2284,15 @@ dsnutilUCSStatIndexSpec
 
 dsnutilUCSStatsIndexSpecList
 	: (
+	dsnutilUCSStatsIndexNameAndStats 
+	(DSNUTIL_COMMA dsnutilUCSStatsIndexNameAndStats)*
+	)
+	;
+
+dsnutilUCSStatsIndexNameAndStats
+	: (
 	dsnutilUCSQualifiedIndexName 
 	dsnutilUCSCorrelationStatsSpec*
-	(DSNUTIL_COMMA dsnutilUCSQualifiedIndexName 
-	dsnutilUCSCorrelationStatsSpec*)*
 	)
 	;
 
@@ -2417,7 +2444,17 @@ dsnutilUCSLabeledDurationExpression
 	;
 
 dsnutilUCSSwitchtimeOption
-	: (DSNUTIL_SWITCHTIME (DSNUTIL_NONE | dsnutilUCSTimestamp | dsnutilUCSLabeledDurationExpression))
+	: (
+	DSNUTIL_SWITCHTIME 
+	(DSNUTIL_NONE 
+	| ((dsnutilUCSTimestamp | dsnutilUCSLabeledDurationExpression) dsnutilUCSNewmaxroOption?))
+	)
+	;
+
+dsnutilUCSNewmaxroOption
+	: (
+	DSNUTIL_NEWMAXRO (DSNUTIL_NONE | dsnutilUCSArg)
+	)
 	;
 
 dsnutilDurationSuffix
@@ -2863,7 +2900,7 @@ dsnutilUCSMergecopyOptions
 	| dsnutilUCSMergecopyWorkddnOption
 	| dsnutilUCSNewcopyOption
 	| dsnutilUCSCopyddnOption
-	| dsnutilUCSRecoveryddnOption
+	| dsnutilUCSRecoveryddnOption1
 	)
 	;
 
@@ -2885,9 +2922,15 @@ dsnutilUCSCopyddnOption
 	)
 	;
 
-dsnutilUCSRecoveryddnOption
+dsnutilUCSRecoveryddnOption1
 	: (
 	DSNUTIL_RECOVERYDDN dsnutilUCSArgList1
+	)
+	;
+
+dsnutilUCSRecoveryddnOption2
+	: (
+	DSNUTIL_RECOVERYDDN dsnutilUCSArgList2
 	)
 	;
 
@@ -3478,7 +3521,7 @@ dsnutilUCSRecoverImageCopySpec
 dsnutilUCSReorgIndex
 	: (
 	DSNUTIL_REORG
-	((DSNUTIL_INDEX DSNUTIL_LIST dsnutilUCSListName)
+	((DSNUTIL_INDEX_LIST dsnutilUCSListName)
 	| dsnutilUCSReorgIndexIndexNameSpec)
 	dsnutilUCSReorgIndexOptions*
 	)
@@ -3616,9 +3659,303 @@ dsnutilUCSDeadlineOption
 	)
 	;
 
+dsnutilUCSReorgTablespace
+	: (
+	DSNUTIL_REORG 
+	((DSNUTIL_TABLESPACE_LIST dsnutilUCSListName (DSNUTIL_LISTPARTS dsnutilUCSArg)?)
+	| (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArgList1)?))
+	dsnutilUCSReorgTablespaceOptions*
+	)
+	;
+
+/*
+It turns out that dsnutilUCSReorgTablespaceSortkeysOption being tolerated
+but ignored has implications for other options.  For example, dsnutilUCSChangeSpec
+is only part of two other (SHRLEVEL) options.  Because we may see the
+SORTKEYS token interspersed with other tokens recognized as part of the
+SHRLEVEL option, the parser believes it has hit the end of the SHRLEVEL
+option.  So dsnutilUCSChangeSpec and dsnutilUCSMapSpec (et. al) must be 
+included here on their own.
+*/
+dsnutilUCSReorgTablespaceOptions
+	: (
+	dsnutilUCSCloneOption
+	| dsnutilUCSReuseOption
+	| dsnutilUCSScopeOption
+	| dsnutilUCSRebalanceOption
+	| dsnutilUCSLogOption
+	| dsnutilUCSDropPartOption
+	| dsnutilUCSSortdataOption
+	| dsnutilUCSNosysrecOption
+	| dsnutilUCSReorgTablespaceCopySpec
+	| dsnutilUCSAutoestspaceOption
+	| dsnutilUCSReorgTablespaceShrlevelSpec
+	| dsnutilUCSForceOption
+	| dsnutilUCSSortnpsiOption
+	| dsnutilUCSOffposlimitSpec
+	| dsnutilUCSUnloadSpec
+	| dsnutilUCSKeepdictionaryOption
+	| dsnutilUCSStatisticsSpec
+	| dsnutilUCSPunchddnOption
+	| dsnutilUCSDiscarddnOption
+	| dsnutilUCSUnlddnOption
+	| dsnutilUCSSortSpec
+	| dsnutilUCSPreformatOption
+	| dsnutilUCSRowformatOption
+	| dsnutilUCSRbalrsnConversionOption
+	| dsnutilUCSDiscardSpec
+	| dsnutilUCSParallelOption2
+	| dsnutilUCSInitcddsSpec
+	| dsnutilUCSNocheckpendOption
+	| dsnutilUCSReorgTablespaceSortkeysOption
+	| dsnutilUCSReorgTablespaceDrainSpec
+	| dsnutilUCSChangeSpec
+	| dsnutilUCSMapSpec
+	| dsnutilUCSFastswitchOption 
+	| dsnutilUCSAuxOption
+	)
+	;
+
+
+/*
+As of DB2 8 this option is ignored, but apparently
+still tolerated as of DB2 13.
+*/
+dsnutilUCSReorgTablespaceSortkeysOption
+	: (
+	DSNUTIL_SORTKEYS
+	)
+	;
+
+dsnutilUCSRowformatOption
+	: (
+	DSNUTIL_ROWFORMAT (DSNUTIL_RRF | DSNUTIL_BRF)
+	)
+	;
+
+dsnutilUCSUnlddnOption
+	: (
+	DSNUTIL_UNLDDN dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSDiscarddnOption
+	: (
+	DSNUTIL_DISCARDDN dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSUnloadSpec
+	: (
+	dsnutilUCSUnloadContinuePauseOnlySpec
+	| dsnutilUCSUnloadExternalSpec
+	)
+	;
+
+dsnutilUCSUnloadContinuePauseOnlySpec
+	: (
+	DSNUTIL_UNLOAD (DSNUTIL_CONTINUE | DSNUTIL_PAUSE | DSNUTIL_ONLY) 
+	)
+	;
+
+dsnutilUCSKeepdictionaryOption
+	: (
+	DSNUTIL_KEEPDICTIONARY 
+	)
+	;
+
+dsnutilUCSUnloadOnlySpec
+	: (
+	DSNUTIL_UNLOAD DSNUTIL_ONLY
+	)
+	;
+
+dsnutilUCSSortnpsiOption
+	: (
+	DSNUTIL_SORTNPSI (DSNUTIL_AUTO | DSNUTIL_YES | DSNUTIL_NO | dsnutilUCSArg)
+	)
+	;
+
+dsnutilUCSReorgTablespaceShrlevelSpec
+	: (
+	dsnutilUCSShrlevelNoneSpec
+	| ((dsnutilUCSShrlevelReferenceSpec | dsnutilUCSShrlevelChangeSpec) 
+		(dsnutilUCSFastswitchOption | dsnutilUCSAuxOption)*)
+	)
+	;
+
+dsnutilUCSAuxOption
+	: (
+	DSNUTIL_AUX (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSAutoestspaceOption
+	: (
+	DSNUTIL_AUTOESTSPACE (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSNosysrecOption
+	: (
+	DSNUTIL_NOSYSREC
+	)
+	;
+
+dsnutilUCSSortdataOption
+	: (
+	DSNUTIL_SORTDATA (DSNUTIL_NO (DSNUTIL_RECLUSTER (DSNUTIL_YES | DSNUTIL_NO))?)?
+	)
+	;
+
+dsnutilUCSDropPartOption
+	: (
+	DSNUTIL_DROP_PART dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSRebalanceOption
+	: (
+	DSNUTIL_REBALANCE
+	(DSNUTIL_SORTCLUSTER (DSNUTIL_YES | DSNUTIL_NO))?
+	)
+	;
+
+dsnutilUCSReorgTablespaceCopySpec
+	: (
+	(dsnutilUCSCopyddnOption dsnutilUCSRecoveryddnOption2?)
+	| dsnutilUCSRecoveryddnOption2
+	| dsnutilUCSIclimitDasdOption
+	| dsnutilUCSIclimitTapeOption
+	)
+	;
+
+dsnutilUCSIclimitDasdOption
+	: (
+	DSNUTIL_ICLIMIT_DASD dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSIclimitTapeOption
+	: (
+	DSNUTIL_ICLIMIT_TAPE dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSShrlevelNoneSpec
+	: (
+	DSNUTIL_SHRLEVEL DSNUTIL_NONE
+	)
+	;
+
+dsnutilUCSShrlevelReferenceSpec
+	: (
+	DSNUTIL_SHRLEVEL DSNUTIL_REFERENCE
+	(dsnutilUCSDeadlineOption
+	| dsnutilUCSReorgTablespaceDrainSpec
+	| dsnutilUCSChangeSpec)*
+	)
+	;
+
+dsnutilUCSShrlevelChangeSpec
+	: (
+	DSNUTIL_SHRLEVEL DSNUTIL_CHANGE
+	(dsnutilUCSDeadlineOption
+	| dsnutilUCSReorgTablespaceDrainSpec
+	| dsnutilUCSChangeSpec
+	| dsnutilUCSMapSpec)*
+	)
+	;
+
+dsnutilUCSReorgTablespaceDrainSpec
+	: (
+	dsnutilUCSDrainWaitOption
+	| dsnutilUCSRetryOption
+	| dsnutilUCSRetryDelayOption
+	| dsnutilUCSTimeoutOption
+	| dsnutilUCSLograngesOption
+	| dsnutilUCSDrainAllpartsOption
+	| dsnutilUCSSwitchtimeOption
+	)
+	;
+
+dsnutilUCSDrainAllpartsOption
+	: (
+	DSNUTIL_DRAIN_ALLPARTS (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSMapSpec
+	: (
+	(DSNUTIL_MAPPINGTABLE dsnutilUCSQualifiedTableName)
+	| (DSNUTIL_MAPPINGDATABASE dsnutilUCSDatabaseName)
+	)
+	;
+
+dsnutilUCSOffposlimitSpec
+	: (
+	DSNUTIL_OFFPOSLIMIT dsnutilUCSArg? DSNUTIL_INDREFLIMIT dsnutilUCSArg? DSNUTIL_REPORTONLY?
+	)
+	;
+
+dsnutilUCSUnloadExternalSpec
+	: (
+	DSNUTIL_UNLOAD DSNUTIL_EXTERNAL
+	(dsnutilUCSNopadOption | dsnutilUCSFromTableSpec)*
+	)
+	;
+
+dsnutilUCSSortSpec
+	: (
+	dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
+	)
+	;
+
+dsnutilUCSDiscardSpec
+	: (
+	DSNUTIL_DISCARD
+	(dsnutilUCSNopadOption
+	| dsnutilUCSFromTableSpec)*
+	)
+	;
+
+dsnutilUCSFromTableSpec
+	: (
+	DSNUTIL_FROM_TABLE
+	dsnutilUCSQualifiedTableName
+	(DSNUTIL_WHEN DSNUTIL_WHEN_LPAREN NOT? predicate ((AND | OR) NOT? LPAREN* predicate RPAREN*)* RPAREN)
+	)
+	;
+	
+dsnutilUCSNopadOption
+	: (
+	DSNUTIL_NOPAD (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSInitcddsSpec
+	: (
+	DSNUTIL_INITCDDS
+	(DSNUTIL_NO
+	| (DSNUTIL_YES dsnutilUCSSearchtimeOption?))
+	)
+	;
+
+dsnutilUCSSearchtimeOption
+	: (
+	DSNUTIL_SEARCHTIME DSNUTIL_LPAREN
+	(DSNUTIL_NONE
+	| dsnutilUCSTimestamp
+	| dsnutilUCSLabeledDurationExpression)
+	DSNUTIL_RPAREN1
+	)
+	;
+
 dsnutilUCSTimestamp
 	: (
-	(DSNUTIL_IDENTIFIER | DSNUTIL_MINUS)+
+	((DSNUTIL_IDENTIFIER | DSNUTIL_MINUS)+
+	| (DSNUTIL_PAREN_NUMBER | DSNUTIL_PAREN_IDENTIFIER)+)
 	)
 	;
 
@@ -3723,6 +4060,7 @@ dsnutilArgument3Text
 	| dsnutilUCSRebuildIndex
 	| dsnutilUCSRecover
 	| dsnutilUCSReorgIndex
+	| dsnutilUCSReorgTablespace
 	| dsnutilUCSTemplate
 /*	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
