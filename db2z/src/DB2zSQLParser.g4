@@ -3676,6 +3676,10 @@ SORTKEYS token interspersed with other tokens recognized as part of the
 SHRLEVEL option, the parser believes it has hit the end of the SHRLEVEL
 option.  So dsnutilUCSChangeSpec and dsnutilUCSMapSpec (et. al) must be 
 included here on their own.
+
+It is also possible that the syntax diagram is simply not communicating its
+intent to me, and options which appear to be embedded in other options are
+in fact independent.
 */
 dsnutilUCSReorgTablespaceOptions
 	: (
@@ -3713,6 +3717,7 @@ dsnutilUCSReorgTablespaceOptions
 	| dsnutilUCSMapSpec
 	| dsnutilUCSFastswitchOption 
 	| dsnutilUCSAuxOption
+	| dsnutilUCSFlashcopyOption
 	)
 	;
 
@@ -3892,9 +3897,14 @@ dsnutilUCSMapSpec
 	)
 	;
 
+/*
+DB2 13 documentation indicates this is deprecated.
+*/
 dsnutilUCSOffposlimitSpec
 	: (
-	DSNUTIL_OFFPOSLIMIT dsnutilUCSArg? DSNUTIL_INDREFLIMIT dsnutilUCSArg? DSNUTIL_REPORTONLY?
+	(DSNUTIL_OFFPOSLIMIT dsnutilUCSArg?)
+	| (DSNUTIL_INDREFLIMIT dsnutilUCSArg?)
+	| DSNUTIL_REPORTONLY
 	)
 	;
 
