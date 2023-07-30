@@ -6450,6 +6450,19 @@ DSNUTIL_LOCATE
 	: L O C A T E
 	;
 
+DSNUTIL_ARCHLOG
+	: A R C H L O G
+	;
+
+DSNUTIL_CURRENT
+	: C U R R E N T
+	;
+
+DSNUTIL_SUMMARY
+	: S U M M A R Y
+	;
+
+
 /*
 Does this solve problems or create them?
 */
