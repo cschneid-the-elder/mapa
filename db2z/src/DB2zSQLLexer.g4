@@ -6354,6 +6354,109 @@ DSNUTIL_SORTDATA
 	: S O R T D A T A
 	;
 
+DSNUTIL_WRITELOG
+	: W R I T E L O G
+	;
+
+DSNUTIL_SUBTYPE
+	: S U B T Y P E
+	;
+
+DSNUTIL_TEST
+	: T E S T
+	;
+
+DSNUTIL_LEVELID
+	: L E V E L I D
+	;
+
+DSNUTIL_DBD
+	: D B D
+	;
+
+DSNUTIL_DROP
+	: D R O P
+	;
+
+DSNUTIL_OUTDDN
+	: O U T D D N
+	;
+
+DSNUTIL_SET
+	: S E T
+	;
+
+DSNUTIL_NORCVRPEND
+	: N O R C V R P E N D
+	;
+
+DSNUTIL_NOAUXWARN
+	: N O A U X W A R N
+	;
+
+DSNUTIL_NOAUXCHKP
+	: N O A U X C H K P
+	;
+
+DSNUTIL_NOAREORPENDSTAR
+	: N O A R E O R P E N D S T A R
+	;
+
+DSNUTIL_NOAREORPEND
+	: N O A R E O R P E N D
+	;
+
+DSNUTIL_PRO
+	: P R O
+	;
+
+DSNUTIL_NOPRO
+	: N O P R O
+	;
+
+DSNUTIL_NORBDPEND
+	: N O R B D P E N D
+	;
+
+DSNUTIL_RBDPEND
+	: R B D P E N D
+	;
+
+DSNUTIL_PSRBDPEND
+	: P S R B D P E N D
+	;
+
+DSNUTIL_MAP
+	: M A P
+	;
+
+DSNUTIL_DATAONLY
+	: D A T A O N L Y
+	;
+
+DSNUTIL_VERIFY
+	: V E R I F Y
+	;
+
+DSNUTIL_REPAIR
+	: R E P A I R
+	;
+
+DSNUTIL_OBJECT
+	: O B J E C T
+	;
+
+DSNUTIL_LOCATE
+	: L O C A T E
+	;
+
+/*
+Does this solve problems or create them?
+*/
+DSNUTIL_HEX_LIT
+	: X '\'' [0-9A-Za-z]+ '\''
+	;
+
 DSNUTIL_IDENTIFIER
 	: ~[ \n,;)('"=><+-]+
 	;

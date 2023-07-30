@@ -1016,6 +1016,7 @@ dsnutilUCSArg
 	| DSNUTIL_APOS_CHAR
 	| DSNUTIL_QUOTE_CHAR)+
 	| dsnutilUCSKeyword
+	| DSNUTIL_HEX_LIT
 	| DSNUTIL_IDENTIFIER
 	| DSNUTIL_PAREN_IDENTIFIER
 	| DSNUTIL_HEXLIT_WS_CHAR
@@ -3985,6 +3986,265 @@ dsnutilUCSVolSeqNo
 	: dsnutilUCSArg
 	;
 
+dsnutilUCSRepair
+	: (
+	DSNUTIL_REPAIR DSNUTIL_OBJECT? (DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))?
+	dsnutilUCSRepairOptions+
+	dsnutilUCSCloneOption?
+	)
+	;
+
+dsnutilUCSRepairOptions
+	: (
+	dsnutilUCSLocateBlock
+	| 	dsnutilUCSRepairSetStatement
+	| 	dsnutilUCSDbdStatement
+	| 	dsnutilUCSLevelidStatement
+	| 	dsnutilUCSCatalogStatement
+	| 	dsnutilUCSSystempagesStatement
+	| 	dsnutilUCSWritelogStatement
+	)
+	;
+
+dsnutilUCSLocateBlock
+	: (
+	DSNUTIL_LOCATE
+	(((dsnutilUCSLocateTablespaceSpec | dsnutilUCSLocateIndexSpec) dsnutilUCSLocateOptions+ (DSNUTIL_SHRLEVEL DSNUTIL_CHANGE)?)
+	| dsnutilUCSLobTablespaceSpec
+	| dsnutilUCSXmlTablespaceSpec)
+	)
+	;
+
+dsnutilUCSLocateOptions
+	: (
+	dsnutilUCSVerifyStatement
+	| dsnutilUCSReplaceStatement
+	| dsnutilUCSRepairDeleteStatement
+	| dsnutilUCSDumpStatement
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpec
+	: (
+	DSNUTIL_TABLESPACE
+	dsnutilUCSQualifiedTablespaceName
+	(((DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens))
+	| (DSNUTIL_KEY (dsnutilUCSArg | dsnutilUCSArgInParens) DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+	)
+	;
+
+dsnutilUCSLocateIndexSpec
+	: (
+	((DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
+	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
+	DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens)
+	)
+	;
+
+dsnutilUCSLobTablespaceSpec
+	: (
+	DSNUTIL_TABLESPACE
+	dsnutilUCSQualifiedXmlTablespacename
+	DSNUTIL_ROWID (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_VERSION (dsnutilUCSArg | dsnutilUCSArgInParens)
+	(dsnutilUCSRepairDeleteStatement | dsnutilUCSDumpStatement)
+	)
+	;
+
+dsnutilUCSXmlTablespaceSpec
+	: (
+	DSNUTIL_TABLESPACE
+	dsnutilUCSQualifiedXmlTablespacename
+	DSNUTIL_DOCID (dsnutilUCSArg | dsnutilUCSArgInParens)
+	dsnutilUCSRepairDeleteStatement
+	)
+	;
+
+dsnutilUCSVerifyStatement
+	: (
+	DSNUTIL_VERIFY
+	dsnutilUCSRepairOffsetOption? dsnutilUCSRepairDataOption+
+	)
+	;
+
+dsnutilUCSReplaceStatement
+	: (
+	DSNUTIL_REPLACE
+	(DSNUTIL_RESET
+	| (dsnutilUCSRepairOffsetOption | dsnutilUCSRepairDataOption)+)
+	)
+	;
+
+dsnutilUCSRepairDataOption
+	: (
+	DSNUTIL_DATA (dsnutilUCSArg | dsnutilUCSArgInParens)
+	)
+	;
+
+dsnutilUCSRepairDeleteStatement
+	: (
+	DSNUTIL_DELETE DSNUTIL_DATAONLY?
+	)
+	;
+
+dsnutilUCSDumpStatement
+	: (
+	DSNUTIL_DUMP
+	dsnutilUCSDumpStatementOptions+
+	)
+	;
+
+dsnutilUCSDumpStatementOptions
+	: (
+	dsnutilUCSRepairOffsetOption
+	| dsnutilUCSDumpLengthOption
+	| dsnutilUCSDumpPagesOption
+	| dsnutilUCSDumpMapOption
+	| dsnutilUCSDumpDataOption
+	)
+	;
+
+dsnutilUCSRepairOffsetOption
+	: (
+	DSNUTIL_OFFSET (dsnutilUCSArg | dsnutilUCSArgInParens)
+	)
+	;
+
+dsnutilUCSDumpLengthOption
+	: (
+	DSNUTIL_LENGTH (dsnutilUCSArg | dsnutilUCSArgInParens)
+	)
+	;
+
+dsnutilUCSDumpPagesOption
+	: (
+	DSNUTIL_PAGES (dsnutilUCSArg | dsnutilUCSArgInParens)
+	)
+	;
+
+dsnutilUCSDumpMapOption
+	: (
+	DSNUTIL_MAP (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	)
+	;
+
+dsnutilUCSDumpDataOption
+	: (
+	DSNUTIL_DATA (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	)
+	;
+
+dsnutilUCSRepairSetStatement
+	: (
+	DSNUTIL_SET
+	(dsnutilUCSRepairSetTablespace
+	| dsnutilUCSRepairSetIndex
+	| dsnutilUCSRepairSetIndexspace)
+	)
+	;
+
+dsnutilUCSRepairSetTablespace
+	: (
+	DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName
+	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
+	dsnutilUCSRepairSetTablespaceOptions
+	)
+	;
+
+dsnutilUCSRepairSetIndex
+	: (
+	DSNUTIL_INDEX 
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName (DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_RPAREN1)
+	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))
+	dsnutilUCSRepairSetIndexOptions
+	)
+	;
+
+dsnutilUCSRepairSetIndexspace
+	: (
+	DSNUTIL_INDEXSPACE 
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexspaceName (DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_RPAREN1)
+	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))
+	dsnutilUCSRepairSetIndexOptions
+	)
+	;
+
+dsnutilUCSRepairSetTablespaceOptions
+	: (
+	DSNUTIL_NOCOPYPEND
+	| DSNUTIL_NORCVRPEND
+	| DSNUTIL_NOCHECKPEND
+	| DSNUTIL_NOAUXWARN
+	| DSNUTIL_NOAUXCHKP
+	| DSNUTIL_NOAREORPENDSTAR
+	| DSNUTIL_NOAREORPEND
+	| DSNUTIL_PRO
+	| DSNUTIL_NOPRO
+	)
+	;
+
+dsnutilUCSRepairSetIndexOptions
+	: (
+	DSNUTIL_NOCOPYPEND
+	| DSNUTIL_NORCVRPEND
+	| DSNUTIL_NORBDPEND
+	| DSNUTIL_NOCHECKPEND
+	| DSNUTIL_NOAREORPENDSTAR
+	| DSNUTIL_NOAREORPEND
+	| DSNUTIL_RBDPEND
+	| DSNUTIL_PSRBDPEND
+	)
+	;
+
+dsnutilUCSDbdStatement
+	: (
+	DSNUTIL_DBD
+	((DSNUTIL_DROP DSNUTIL_DATABASE dsnutilUCSDatabaseName DSNUTIL_DBID (dsnutilUCSArg | dsnutilUCSArgInParens))
+	| ((DSNUTIL_TEST | DSNUTIL_DIAGNOSE | DSNUTIL_REBUILD) DSNUTIL_DATABASE dsnutilUCSDatabaseName (DSNUTIL_OUTDDN (dsnutilUCSArg | dsnutilUCSArgInParens))?))
+	)
+	;
+
+dsnutilUCSLevelidStatement
+	: (
+	DSNUTIL_LEVELID
+	((DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
+	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
+	)
+	;
+
+dsnutilUCSCatalogStatement
+	: (
+	DSNUTIL_CATALOG
+	((DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
+	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
+	DSNUTIL_TEST?
+	)
+	;
+
+dsnutilUCSSystempagesStatement
+	: (
+	DSNUTIL_INSERTVERSIONPAGES
+	DSNUTIL_SETCURRENTVERSION?
+	DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName
+	(DSNUTIL_SHRLEVEL DSNUTIL_CHANGE)?
+	)
+	;
+
+dsnutilUCSWritelogStatement
+	: (
+	DSNUTIL_WRITELOG
+	DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName
+	((DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))
+	| (DSNUTIL_TYPE (dsnutilUCSArg | dsnutilUCSArgInParens))
+	| (DSNUTIL_SUBTYPE (dsnutilUCSArg | dsnutilUCSArgInParens))
+	| (DSNUTIL_TEXT (dsnutilUCSArg | dsnutilUCSArgInParens)))+
+	)
+	;
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_IDENTIFIER
@@ -4028,6 +4288,10 @@ dsnutilUCSIndexspaceName
 	: dsnutilUCSDatabaseObjectName
 	;
 
+dsnutilUCSXmlTablespacename
+	: dsnutilUCSDatabaseObjectName
+	;
+
 dsnutilUCSQualifiedTablespaceName
 	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSTablespaceName)
 	;
@@ -4042,6 +4306,10 @@ dsnutilUCSQualifiedIndexName
 
 dsnutilUCSQualifiedIndexspaceName
 	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSIndexspaceName)
+	;
+
+dsnutilUCSQualifiedXmlTablespacename
+	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSXmlTablespacename)
 	;
 
 /*
@@ -4071,6 +4339,7 @@ dsnutilArgument3Text
 	| dsnutilUCSRecover
 	| dsnutilUCSReorgIndex
 	| dsnutilUCSReorgTablespace
+	| dsnutilUCSRepair
 	| dsnutilUCSTemplate
 /*	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
