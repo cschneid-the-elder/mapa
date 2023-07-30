@@ -4148,7 +4148,7 @@ dsnutilUCSRepairSetTablespace
 	: (
 	DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName
 	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
-	dsnutilUCSRepairSetTablespaceOptions
+	dsnutilUCSRepairSetTablespaceOptions?
 	)
 	;
 
@@ -4157,7 +4157,7 @@ dsnutilUCSRepairSetIndex
 	DSNUTIL_INDEX 
 	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName (DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_RPAREN1)
 	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))
-	dsnutilUCSRepairSetIndexOptions
+	dsnutilUCSRepairSetIndexOptions?
 	)
 	;
 
@@ -4166,7 +4166,7 @@ dsnutilUCSRepairSetIndexspace
 	DSNUTIL_INDEXSPACE 
 	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexspaceName (DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_RPAREN1)
 	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))
-	dsnutilUCSRepairSetIndexOptions
+	dsnutilUCSRepairSetIndexOptions?
 	)
 	;
 
