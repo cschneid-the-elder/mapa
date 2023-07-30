@@ -927,6 +927,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_ROWFORMAT
 	| DSNUTIL_ROWID
 	| DSNUTIL_RRF
+	| DSNUTIL_RSA
 	| DSNUTIL_SAMPLE
 	| DSNUTIL_SCHEMA
 	| DSNUTIL_SCOPE
@@ -964,6 +965,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_SYSTEM
 	| DSNUTIL_SYSTEMPAGES
 	| DSNUTIL_SYSUTIL
+	| DSNUTIL_SYSVALUEDDN
 	| DSNUTIL_TABLE
 	| DSNUTIL_TABLES
 	| DSNUTIL_TABLESAMPLE
@@ -4363,6 +4365,82 @@ dsnutilUCSArchlogOption
 	)
 	;
 
+dsnutilUCSRestoreSystem
+	: (
+	DSNUTIL_RESTORE_SYSTEM
+	(dsnutilUCSReportNonlogonlySpec*
+	| dsnutilUCSReportLogonlySpec)
+	)
+	;
+
+dsnutilUCSReportLogonlySpec
+	: (
+	DSNUTIL_LOGONLY
+	dsnutilUCSSwitchVcatOption?
+	)
+	;
+
+dsnutilUCSSwitchVcatOption
+	: (
+	DSNUTIL_SWITCH_VCAT
+	(DSNUTIL_SYSVALUEDDN dsnutilUCSArgInParens)?
+	)
+	;
+
+/*
+This doesn't, strictly speaking, conform to the syntax diagram.  But
+ANTLR has a problem (as do I) with coding something with no required
+parameters.  So I code it this way, then make them all optional with
+a * parameter where they're used.
+*/
+dsnutilUCSReportNonlogonlySpec
+	: (
+	dsnutilUCSAlternatecpOption 
+	| dsnutilUCSRestorebeforeOption
+	| dsnutilUCSReportFromdumpSpec 
+	| dsnutilUCSFlashcopyPprcpOption
+	)
+	;
+
+dsnutilUCSReportFromdumpSpec
+	: (
+	DSNUTIL_FROMDUMP
+	dsnutilUCSReportFromdumpOptions*
+	)
+	;
+
+dsnutilUCSReportFromdumpOptions
+	: (
+	dsnutilUCSReportFromdumpDumpclassOption
+	| dsnutilUCSReportFromdumpRsaOption
+	| dsnutilUCSReportFromdumpTapeunitsOption
+	)
+	;
+
+dsnutilUCSReportFromdumpDumpclassOption
+	: (
+	DSNUTIL_DUMPCLASS dsnutilUCSArgInParens
+	)
+	;
+
+dsnutilUCSReportFromdumpRsaOption
+	: (
+	DSNUTIL_RSA dsnutilUCSArgInParens
+	)
+	;
+
+/*
+Ignored since DB2 V1R12.  That's what the documentation says.
+*/
+dsnutilUCSReportFromdumpTapeunitsOption
+	: (
+	DSNUTIL_TAPEUNITS dsnutilUCSArgInParens?
+	)
+	;
+
+
+
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_IDENTIFIER
@@ -4459,6 +4537,7 @@ dsnutilArgument3Text
 	| dsnutilUCSReorgTablespace
 	| dsnutilUCSRepair
 	| dsnutilUCSReport
+	| dsnutilUCSRestoreSystem
 	| dsnutilUCSTemplate
 /*	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA

@@ -6462,6 +6462,21 @@ DSNUTIL_SUMMARY
 	: S U M M A R Y
 	;
 
+DSNUTIL_SWITCH_VCAT
+	: DSNUTIL_SWITCH (WS | NEWLINE)+ VCAT
+	;
+
+DSNUTIL_RESTORE_SYSTEM
+	: R E S T O R E (WS | NEWLINE)+ S Y S T E M
+	;
+
+DSNUTIL_SYSVALUEDDN
+	: S Y S V A L U E D D N
+	;
+
+DSNUTIL_RSA
+	: R S A
+	;
 
 /*
 Does this solve problems or create them?
