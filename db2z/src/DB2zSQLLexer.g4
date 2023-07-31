@@ -6478,6 +6478,22 @@ DSNUTIL_RSA
 	: R S A
 	;
 
+DSNUTIL_REGISTER
+	: R E G I S T E R
+	;
+
+DSNUTIL_RUNSTATS
+	: R U N S T A T S
+	;
+
+DSNUTIL_EXISTING
+	: E X I S T I N G
+	;
+
+DSNUTIL_STATS
+	: S T A T S
+	;
+
 /*
 Does this solve problems or create them?
 */
