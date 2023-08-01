@@ -4579,7 +4579,14 @@ dsnutilUCSRunstatsTablespace
 	| (DSNUTIL_TABLESPACE dsnutilUCSRunstatsTablespaceSpec))
 	dsnutilUCSInvalidatecacheOption?
 	(dsnutilUCSRunstatsTablespaceStatisticsSpec*
-	| (DSNUTIL_RESET DSNUTIL_ACCESSPATH (DSNUTIL_HISTORY DSNUTIL_ACCESSPATH)?))
+	| dsnutilUCSRunstatsResetAccesspath)
+	)
+	;
+
+dsnutilUCSRunstatsResetAccesspath
+	: (
+	DSNUTIL_RESET DSNUTIL_ACCESSPATH
+	(DSNUTIL_HISTORY DSNUTIL_ACCESSPATH)?
 	)
 	;
 
