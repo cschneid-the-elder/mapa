@@ -6491,6 +6491,10 @@ DSNUTIL_FROM_EXISTING_STATS
 	: DSNUTIL_FROM (WS | NEWLINE)+ E X I S T I N G (WS | NEWLINE)+ S T A T S
 	;
 
+DSNUTIL_STOSPACE
+	: S T O S P A C E
+	;
+
 /*
 Does this solve problems or create them?
 */

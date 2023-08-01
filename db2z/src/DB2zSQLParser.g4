@@ -1066,7 +1066,7 @@ dsnutilUCSArg
 	;
 
 dsnutilUCSArgList1
-	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
+	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
 	;
 
 dsnutilUCSArgList2
@@ -4468,6 +4468,19 @@ dsnutilUCSSetProfileSpec
 	)
 	;
 
+dsnutilUCSStospace
+	: (
+	DSNUTIL_STOSPACE DSNUTIL_STOGROUP
+	(dsnutilUCSArg
+	| dsnutilUCSArgList1)
+	)
+	;
+
+
+dsnutilUCSStogroupName
+	: dsnutilUCSArg
+	;
+
 dsnutilUCSTemplate
 	: (
 	DSNUTIL_TEMPLATE dsnutilUCSTemplateName
@@ -4785,6 +4798,7 @@ dsnutilArgument3Text
 	| dsnutilUCSReport
 	| dsnutilUCSRestoreSystem
 	| dsnutilUCSRunstats
+	| dsnutilUCSStospace
 	| dsnutilUCSTemplate
 /*	| DSNUTIL_CHAR 
 	| DSNUTIL_COMMA
