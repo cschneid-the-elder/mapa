@@ -27,6 +27,6 @@
 +	sql_call_dsnutil_restore_system	6	24
 +	sql_call_dsnutil_runstats	45	180
 +	sql_call_dsnutil_stospace	5	20
-+	sql_call_dsnutil_template	5	20
++	sql_call_dsnutil_template	10	40
 +	sql_call_dsnutil_unload	8	32
 +	sql_NOUPLOAD_call_dsnutilv	1	4
