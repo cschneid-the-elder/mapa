@@ -6486,12 +6486,8 @@ DSNUTIL_RUNSTATS
 	: R U N S T A T S
 	;
 
-DSNUTIL_EXISTING
-	: E X I S T I N G
-	;
-
-DSNUTIL_STATS
-	: S T A T S
+DSNUTIL_FROM_EXISTING_STATS
+	: DSNUTIL_FROM (WS | NEWLINE)+ E X I S T I N G (WS | NEWLINE)+ S T A T S
 	;
 
 /*
@@ -6890,6 +6886,30 @@ DSNUTIL_DB_TS_RPAREN
 				break;
 		}
 	}
+	;
+
+DSNUTIL_DB_TS_DELETE
+	: DSNUTIL_DELETE
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_DELETE)
+	;
+
+DSNUTIL_DB_TS_SAMPLE
+	: DSNUTIL_SAMPLE
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_SAMPLE)
+	;
+
+DSNUTIL_DB_TS_TABLESAMPLE
+	: DSNUTIL_TABLESAMPLE
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_TABLESAMPLE)
 	;
 
 DSNUTIL_DB_TS_IDENTIFIER

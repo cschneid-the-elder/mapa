@@ -699,7 +699,6 @@ dsnutilUCSKeyword
 	| DSNUTIL_EXCEPTION
 	| DSNUTIL_EXCEPTIONS
 	| DSNUTIL_EXCLUDE
-	| DSNUTIL_EXISTING
 	| DSNUTIL_EXPDL
 	| DSNUTIL_EXTENDED
 	| DSNUTIL_EXTERNAL
@@ -957,7 +956,6 @@ dsnutilUCSKeyword
 	| DSNUTIL_STACK
 	| DSNUTIL_STATCLGMEMSRT
 	| DSNUTIL_STATISTICS
-	| DSNUTIL_STATS
 	| DSNUTIL_STOGROUP
 	| DSNUTIL_STORCLAS
 	| DSNUTIL_STRIP
@@ -3980,8 +3978,8 @@ dsnutilUCSShrlevelChangeSpec1
 
 dsnutilUCSShrlevelChangeSpec2
 	: (
-	(DSNUTIL_SHRLEVEL DSNUTIL_CHANGE DSNUTIL_REGISTER DSNUTIL_NO)
-	| ((DSNUTIL_SHRLEVEL DSNUTIL_CHANGE)? DSNUTIL_REGISTER DSNUTIL_YES)
+	(DSNUTIL_SHRLEVEL DSNUTIL_CHANGE DSNUTIL_REGISTER DSNUTIL_YES)
+	| ((DSNUTIL_SHRLEVEL DSNUTIL_CHANGE)? DSNUTIL_REGISTER DSNUTIL_NO)
 	)
 	;
 
@@ -4530,7 +4528,7 @@ dsnutilUCSRunstats
 
 dsnutilUCSRunstatsIndex
 	: (
-	((DSNUTIL_INDEX_LIST dsnutilUCSListName)
+	((DSNUTIL_INDEX_LIST dsnutilUCSListName dsnutilUCSCorrelationStatsSpec*)
 	| (DSNUTIL_INDEX dsnutilUCSRunstatsIndexListSpec)
 	| (DSNUTIL_INDEX dsnutilUCSRunstatsIndexTablespaceSpec))
 	dsnutilUCSRunstatsIndexOptions*
@@ -4540,15 +4538,21 @@ dsnutilUCSRunstatsIndex
 dsnutilUCSRunstatsIndexListSpec
 	: (
 	DSNUTIL_DB_TS_LPAREN
-	dsnutilUCSQualifiedIndexName dsnutilUCSPartOption? dsnutilUCSCorrelationStatsSpec*
-	(DSNUTIL_COMMA dsnutilUCSQualifiedIndexName dsnutilUCSPartOption? dsnutilUCSCorrelationStatsSpec*)*
+	dsnutilUCSRunstatsIndexAndSpecs
+	(DSNUTIL_COMMA dsnutilUCSRunstatsIndexAndSpecs)*
 	DSNUTIL_RPAREN1
+	)
+	;
+
+dsnutilUCSRunstatsIndexAndSpecs
+	: (
+	dsnutilUCSQualifiedIndexName dsnutilUCSPartOption? dsnutilUCSCorrelationStatsSpec*
 	)
 	;
 
 dsnutilUCSRunstatsIndexTablespaceSpec
 	: (
-	dsnutilUCSArgInParens
+	(DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1)
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedTablespaceName
 	dsnutilUCSCorrelationStatsSpec*
@@ -4603,14 +4607,22 @@ dsnutilUCSRunstatsTablespaceStatisticsSpec
 
 dsnutilUCSRunstatsTableSpec
 	: (
-	DSNUTIL_TABLE dsnutilUCSArgInParens? dsnutilUCSAllTablesSpec
+	DSNUTIL_TABLE (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1)? dsnutilUCSAllTablesSpec*
 	)
 	;
 
 dsnutilUCSRunstatsTableListSpec
 	: (
-	DSNUTIL_TABLE dsnutilUCSArgInParens dsnutilUCSNamedTablesSpec
-	(DSNUTIL_COMMA DSNUTIL_TABLE dsnutilUCSArgInParens dsnutilUCSNamedTablesSpec)*
+	dsnutilUCSRunstatsTableAndSpecs
+	(DSNUTIL_COMMA dsnutilUCSRunstatsTableAndSpecs)*
+	)
+	;
+
+dsnutilUCSRunstatsTableAndSpecs
+	: (
+	DSNUTIL_TABLE 
+	DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedTableName DSNUTIL_RPAREN1 
+	dsnutilUCSNamedTablesSpec*
 	)
 	;
 
@@ -4661,7 +4673,7 @@ dsnutilUCSIncludeNpi
 
 dsnutilUCSSetProfileSpec
 	: (
-	(DSNUTIL_SET DSNUTIL_PROFILE (DSNUTIL_FROM DSNUTIL_EXISTING DSNUTIL_STATS)?)
+	(DSNUTIL_SET DSNUTIL_PROFILE DSNUTIL_FROM_EXISTING_STATS?)
 	| (DSNUTIL_UPDATE DSNUTIL_PROFILE)
 	)
 	;
