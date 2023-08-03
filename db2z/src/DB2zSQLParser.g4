@@ -1111,23 +1111,89 @@ dsnutilUCSExecSql
 
 dsnutilUCSListdef
 	: (
-	DSNUTIL_LISTDEF dsnutilUCSArg
-	((DSNUTIL_INCLUDE | DSNUTIL_EXCLUDE) dsnutilUCSListdefOptions+)+
+	DSNUTIL_LISTDEF dsnutilUCSListName
+	dsnutilUCSListdefContents+
+	)
+	;
+
+dsnutilUCSListdefContents
+	: (
+	(DSNUTIL_INCLUDE | DSNUTIL_EXCLUDE) dsnutilUCSListdefOptions+
 	)
 	;
 
 dsnutilUCSListdefOptions
 	: (
-	(DSNUTIL_TABLESPACES)
-	| (DSNUTIL_INDEXSPACES (DSNUTIL_COPY dsnutilUCSYesOrNo)?)
-	| (dsnutilUCSListNameWithLit | dsnutilUCSInitialObjectSpec)
-	| (DSNUTIL_CLONED dsnutilUCSYesOrNo)
-	| (DSNUTIL_DEFINED (DSNUTIL_YES | DSNUTIL_NO | DSNUTIL_ALL))
-	| (DSNUTIL_RI)
-	| (DSNUTIL_BASE | DSNUTIL_LOB | DSNUTIL_XML | DSNUTIL_ALL)
-	| (DSNUTIL_HISTORY | DSNUTIL_ARCHIVE)
-	| (DSNUTIL_BASIC dsnutilUCSYesOrNo)
-	| (DSNUTIL_EXTENDED dsnutilUCSYesOrNo)
+	dsnutilUCSListdefTablespacesOption
+	| dsnutilUCSListdefIndexspacesOption
+	| dsnutilUCSListdefInitialObjectSpecOption
+	| dsnutilUCSListdefClonedOption
+	| dsnutilUCSListdefDefinedOption
+	| dsnutilUCSListdefRIOption
+	| dsnutilUCSListdefAuxiliaryIndicatorOption
+	| dsnutilUCSListdefHistoryOrArchiveOption
+	| dsnutilUCSListdefBasicOption
+	| dsnutilUCSListdefExtendedOption
+	)
+	;
+
+dsnutilUCSListdefTablespacesOption
+	: (
+	DSNUTIL_TABLESPACES
+	)
+	;
+
+dsnutilUCSListdefIndexspacesOption
+	: (
+	DSNUTIL_INDEXSPACES (DSNUTIL_COPY dsnutilUCSYesOrNo)?
+	)
+	;
+
+dsnutilUCSListdefInitialObjectSpecOption
+	: (
+	dsnutilUCSListNameWithLit | dsnutilUCSInitialObjectSpec
+	)
+	;
+
+dsnutilUCSListdefClonedOption
+	: (
+	DSNUTIL_CLONED dsnutilUCSYesOrNo
+	)
+	;
+
+dsnutilUCSListdefDefinedOption
+	: (
+	DSNUTIL_DEFINED (DSNUTIL_YES | DSNUTIL_NO | DSNUTIL_ALL)
+	)
+	;
+
+dsnutilUCSListdefRIOption
+	: (
+	DSNUTIL_RI
+	)
+	;
+
+dsnutilUCSListdefAuxiliaryIndicatorOption
+	: (
+	DSNUTIL_BASE | DSNUTIL_LOB | DSNUTIL_XML | DSNUTIL_ALL
+	)
+	;
+
+dsnutilUCSListdefHistoryOrArchiveOption
+	: (
+	DSNUTIL_HISTORY | DSNUTIL_ARCHIVE
+	)
+	;
+
+dsnutilUCSListdefBasicOption
+	: (
+	DSNUTIL_BASIC dsnutilUCSYesOrNo
+	)
+	;
+
+dsnutilUCSListdefExtendedOption
+	: (
+	DSNUTIL_EXTENDED dsnutilUCSYesOrNo
 	)
 	;
 
