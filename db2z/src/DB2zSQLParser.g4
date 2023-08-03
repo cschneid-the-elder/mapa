@@ -970,7 +970,7 @@ dsnutilUCSTablespaceCopySpec
 
 dsnutilUCSIndexspaceSpec
 	: ((DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
-	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+	| dsnutilUCSQualifiedIndexNameWithLit)
 	;
 
 dsnutilUCSIndexspaceCopySpec
@@ -1035,7 +1035,7 @@ dsnutilUCSDiagnoseDisplayStatement
 	| (DSNUTIL_DBET 
 		((DSNUTIL_DATABASE dsnutilUCSDatabaseName)
 		| dsnutilUCSQualifiedTablespaceNameWithLit
-		| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+		| dsnutilUCSQualifiedIndexNameWithLit)
 		DSNUTIL_CLONE?))
 	)
 	;
@@ -1138,7 +1138,7 @@ dsnutilUCSInitialObjectSpec
 	| dsnutilUCSQualifiedTablespaceNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
 	| dsnutilUCSQualifiedTableNameWithLit
-	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| dsnutilUCSQualifiedIndexNameWithLit
 	) (DSNUTIL_PARTLEVEL dsnutilUCSArgList1?)?
 	;
 
@@ -2582,7 +2582,7 @@ dsnutilUCSModifyStatisticsListOrTablespaceEtAl
 	(DSNUTIL_LIST dsnutilUCSListName) 
 	| dsnutilUCSQualifiedTablespaceNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
-	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| dsnutilUCSQualifiedIndexNameWithLit
 	)
 	;
 
@@ -3184,7 +3184,7 @@ dsnutilUCSReorgIndexStatsSpecOptions
 
 dsnutilUCSReorgIndexIndexNameSpec
 	: (
-	((DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	(dsnutilUCSQualifiedIndexNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
 	dsnutilUCSPartOption1?
 	)
@@ -3704,13 +3704,13 @@ dsnutilUCSLocateTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceNameWithLit
 	((dsnutilUCSPartOption2? DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens))
-	| (DSNUTIL_KEY (dsnutilUCSArg | dsnutilUCSArgInParens) DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
+	| (DSNUTIL_KEY (dsnutilUCSArg | dsnutilUCSArgInParens) dsnutilUCSQualifiedIndexNameWithLit))
 	)
 	;
 
 dsnutilUCSLocateIndexSpec
 	: (
-	((DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	(dsnutilUCSQualifiedIndexNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
 	dsnutilUCSPartOption2?
 	DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens)
@@ -3884,7 +3884,7 @@ dsnutilUCSLevelidStatement
 	: (
 	DSNUTIL_LEVELID
 	(dsnutilUCSQualifiedTablespaceNameWithLit
-	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| dsnutilUCSQualifiedIndexNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
 	dsnutilUCSPartOption2?
 	)
@@ -3894,7 +3894,7 @@ dsnutilUCSCatalogStatement
 	: (
 	DSNUTIL_CATALOG
 	(dsnutilUCSQualifiedTablespaceNameWithLit
-	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	| dsnutilUCSQualifiedIndexNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
 	DSNUTIL_TEST?
 	)
@@ -3964,7 +3964,7 @@ dsnutilUCSReportIndexspaceListSpec
 
 dsnutilUCSReportIndexListSpec
 	: (
-	(DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
+	dsnutilUCSQualifiedIndexNameWithLit
 	| (DSNUTIL_INDEX_LIST dsnutilUCSListName)
 	)
 	;
@@ -4606,6 +4606,10 @@ dsnutilUCSQualifiedTableNameWithLit
 
 dsnutilUCSQualifiedIndexName
 	: ((dsnutilUCSCreatorID (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSIndexName)
+	;
+
+dsnutilUCSQualifiedIndexNameWithLit
+	: (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
 	;
 
 dsnutilUCSQualifiedIndexspaceName
