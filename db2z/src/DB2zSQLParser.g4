@@ -638,6 +638,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_COPYDICTIONARY
 	| DSNUTIL_COPYTOCOPY
 	| DSNUTIL_COUNT
+	| DSNUTIL_CS
 	| DSNUTIL_CURRENT
 	| DSNUTIL_CURRENTCOPYONLY
 	| DSNUTIL_CURRENT_DATE
@@ -677,6 +678,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_DISP
 	| DSNUTIL_DISPLAY
 	| DSNUTIL_DOCID
+	| DSNUTIL_DOUBLE
 	| DSNUTIL_DRAIN
 	| DSNUTIL_DRAIN_ALLPARTS
 	| DSNUTIL_DRAIN_WAIT
@@ -733,6 +735,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_GDGLIMIT
 	| DSNUTIL_GRAPHIC
 	| DSNUTIL_HALT
+	| DSNUTIL_HEADER
 	| DSNUTIL_HFS
 	| DSNUTIL_HISTOGRAM
 	| DSNUTIL_HISTORY
@@ -741,6 +744,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_ICLIMIT_DASD
 	| DSNUTIL_ICLIMIT_TAPE
 	| DSNUTIL_IDENTITYOVERRIDE
+	| DSNUTIL_IEEE
 	| DSNUTIL_IGNORE
 	| DSNUTIL_IGNOREFIELDS
 	| DSNUTIL_IMPLICIT_TZ
@@ -763,6 +767,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_INTO
 	| DSNUTIL_INVALIDATE
 	| DSNUTIL_INVALIDATECACHE
+	| DSNUTIL_ISOLATION
 	| DSNUTIL_ITEMERROR
 	| DSNUTIL_KEEPDICTIONARY
 	| DSNUTIL_KEEP_EMPTY_PAGES
@@ -799,6 +804,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_MAPDDN
 	| DSNUTIL_MAPPINGDATABASE
 	| DSNUTIL_MAPPINGTABLE
+	| DSNUTIL_MAXERR
 	| DSNUTIL_MAXPRIME
 	| DSNUTIL_MAXRO
 	| DSNUTIL_MEPL
@@ -844,6 +850,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_NUMQUANTILES
 	| DSNUTIL_NUMRECS
 	| DSNUTIL_OBD
+	| DSNUTIL_OBID
 	| DSNUTIL_OBJECT
 	| DSNUTIL_OFF
 	| DSNUTIL_OFFPOSLIMIT
@@ -892,6 +899,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_RC4
 	| DSNUTIL_RC8
 	| DSNUTIL_READERS
+	| DSNUTIL_REAL
 	| DSNUTIL_REBALANCE
 	| DSNUTIL_REBUILD
 	| DSNUTIL_RECFM
@@ -958,6 +966,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_STATISTICS
 	| DSNUTIL_STOGROUP
 	| DSNUTIL_STORCLAS
+	| DSNUTIL_STOSPACE
 	| DSNUTIL_STRIP
 	| DSNUTIL_SUBSYS
 	| DSNUTIL_SUBTYPE
@@ -968,6 +977,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_SYSTEMPAGES
 	| DSNUTIL_SYSUTIL
 	| DSNUTIL_SYSVALUEDDN
+	| DSNUTIL_S390
 	| DSNUTIL_TABLE
 	| DSNUTIL_TABLES
 	| DSNUTIL_TABLESAMPLE
@@ -1008,6 +1018,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_UPDATE
 	| DSNUTIL_UPDATED
 	| DSNUTIL_UPDMAXASSIGNEDVAL
+	| DSNUTIL_UR
 	| DSNUTIL_USE
 	| DSNUTIL_UTILX
 	| DSNUTIL_VARBINARY
@@ -1138,9 +1149,18 @@ dsnutilUCSCatmaint
 	: (
 	DSNUTIL_CATMAINT DSNUTIL_UPDATE
 	((DSNUTIL_LEVEL dsnutilUCSArgInParens)
-	| (DSNUTIL_UNLDDN dsnutilUCSArg)
+	| (DSNUTIL_UNLDDN dsnutilUCSCatmaintActionToken)
 	| dsnutilUCSSwitchSpec
 	| dsnutilUCSUtilxSpec)
+	)
+	;
+
+dsnutilUCSCatmaintActionToken
+	: (
+	(dsnutilUCSArg
+	| DSNUTIL_MINUS
+	| DSNUTIL_EQUAL
+	| DSNUTIL_PLUS)+
 	)
 	;
 
@@ -1307,6 +1327,10 @@ dsnutilUCSParallelOption
 
 dsnutilUCSParallelOption2
 	: (DSNUTIL_PARALLEL (dsnutilUCSArg | dsnutilUCSArgInParens)?)
+	;
+
+dsnutilUCSParallelOption3
+	: (DSNUTIL_PARALLEL (dsnutilUCSArg | dsnutilUCSArgInParens))
 	;
 
 dsnutilUCSCheckIndex
@@ -1478,7 +1502,19 @@ dsnutilUCSFromCopySpec
 	| DSNUTIL_FROMLASTFULLCOPY
 	| DSNUTIL_FROMLASTINCRCOPY
 	| DSNUTIL_FROMLASTFLASHCOPY
-	| (DSNUTIL_FROMCOPY dsnutilUCSDsn (DSNUTIL_FROMVOLUME (DSNUTIL_CATALOG | (dsnutilUCSArg (DSNUTIL_FROMSEQNO dsnutilUCSArg)?)))?)
+	| dsnutilUCSFromCopyDsnOption
+	)
+	;
+
+dsnutilUCSFromCopyDsnOption
+	: (
+	DSNUTIL_FROMCOPY 
+	dsnutilUCSDsn 
+	(DSNUTIL_FROMVOLUME 
+		(DSNUTIL_CATALOG 
+		| (dsnutilUCSArg (DSNUTIL_FROMSEQNO dsnutilUCSArg)?)
+		)
+	)?
 	)
 	;
 
@@ -1643,9 +1679,9 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadSortkeysOption
 	| dsnutilUCSFormatSpec
 	| dsnutilUCSLoadFloatOption
-	| dsnutilUCSLoadEAUOption
-	| dsnutilUCSLoadCCSIDOption
-	| dsnutilUCSLoadNosubsOption
+	| dsnutilUCSEAUOption
+	| dsnutilUCSCCSIDOption
+	| dsnutilUCSNosubsOption
 	| dsnutilUCSLoadEnforceOption
 	| dsnutilUCSNocheckpendOption
 	| dsnutilUCSLoadErrddnOption
@@ -1662,7 +1698,7 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSOverrideSpecAlternateSyntax
 	| dsnutilUCSLoadDrainOption
 	| dsnutilUCSLoadIndexdeferOption
-	| dsnutilUCSLoadImplicitTZOption
+	| dsnutilUCSImplicitTZOption
 	| dsnutilUCSLoadUpdmaxassignedvalOption
 	| dsnutilUCSLoadDefineauxOption
 	| dsnutilUCSForceOption
@@ -1762,19 +1798,19 @@ dsnutilUCSLoadFloatOption
 	)
 	;
 
-dsnutilUCSLoadEAUOption
+dsnutilUCSEAUOption
 	: (
 	DSNUTIL_EBCDIC | DSNUTIL_ASCII | DSNUTIL_UNICODE
 	)
 	;
 
-dsnutilUCSLoadCCSIDOption
+dsnutilUCSCCSIDOption
 	: (
 	DSNUTIL_CCSID dsnutilUCSArgList1
 	)
 	;
 
-dsnutilUCSLoadNosubsOption
+dsnutilUCSNosubsOption
 	: (
 	DSNUTIL_NOSUBS
 	)
@@ -1858,7 +1894,7 @@ dsnutilUCSLoadIndexdeferOption
 	)
 	;
 
-dsnutilUCSLoadImplicitTZOption
+dsnutilUCSImplicitTZOption
 	: (
 	DSNUTIL_IMPLICIT_TZ dsnutilUCSArg
 	)
@@ -2230,16 +2266,33 @@ dsnutilUCSWorkddnSpec
 
 dsnutilUCSFormatSpec
 	: (
-	DSNUTIL_FORMAT
-		(DSNUTIL_UNLOAD
-		| DSNUTIL_SQLDS
-		| DSNUTIL_INTERNAL
-		| (DSNUTIL_DELIMITED dsnutilUCSDelimitedOption*)
-		| (DSNUTIL_SPANNED (DSNUTIL_YES | DSNUTIL_NO)))
+	DSNUTIL_FORMAT dsnutilUCSFormatSpecOptions
+	)
+	;
+
+dsnutilUCSFormatSpecOptions
+	: (
+	DSNUTIL_UNLOAD
+	| DSNUTIL_SQLDS
+	| DSNUTIL_INTERNAL
+	| dsnutilUCSDelimitedOption
+	| dsnutilUCSSpannedOption
+	)
+	;
+
+dsnutilUCSSpannedOption
+	: (
+	DSNUTIL_SPANNED (DSNUTIL_YES | DSNUTIL_NO)
 	)
 	;
 
 dsnutilUCSDelimitedOption
+	: (
+	DSNUTIL_DELIMITED dsnutilUCSDelimitedOptions*
+	)
+	;
+
+dsnutilUCSDelimitedOptions
 	: (
 	(DSNUTIL_COLDEL dsnutilUCSArg)
 	| (DSNUTIL_CHARDEL dsnutilUCSArg)
@@ -2373,7 +2426,7 @@ dsnutilUCSIntoTableSpecOptions
 	| dsnutilUCSIntoTableSpecDDNOption
 	| dsnutilUCSIntoTableSpecNumrecsOption
 	| dsnutilUCSIntoTableSpecWhenOption
-	| dsnutilUCSIntoTableSpecFieldListOption
+	| dsnutilUCSLoadFieldListOption
 	)
 	;
 
@@ -2404,11 +2457,20 @@ dsnutilUCSIntoTableSpecWhenOption
 	)
 	;
 
-dsnutilUCSIntoTableSpecFieldListOption
+dsnutilUCSLoadFieldListOption
 	: (
 	DSNUTIL_LPAREN 
-	dsnutilUCSFieldSpecification 
-	(DSNUTIL_COMMA dsnutilUCSFieldSpecification)* 
+	dsnutilUCSLoadFieldSpecification 
+	(DSNUTIL_COMMA dsnutilUCSLoadFieldSpecification)* 
+	DSNUTIL_RPAREN1
+	)
+	;
+
+dsnutilUCSUnloadFieldListOption
+	: (
+	DSNUTIL_LPAREN 
+	dsnutilUCSUnloadFieldSpecification 
+	(DSNUTIL_COMMA dsnutilUCSUnloadFieldSpecification)* 
 	DSNUTIL_RPAREN1
 	)
 	;
@@ -2440,18 +2502,25 @@ dsnutilUCSFieldSelectionCriterion
 	)
 	;
 
-dsnutilUCSFieldSpecification
+dsnutilUCSLoadFieldSpecification
 	: (
 	dsnutilUCSFieldNameSpec
-	dsnutilUCSFieldSpecificationType
+	dsnutilUCSLoadFieldSpecificationType?
 	(dsnutilUCSNullif | dsnutilUCSDefaultif)?
 	)
 	;
 
-dsnutilUCSFieldSpecificationType
+dsnutilUCSUnloadFieldSpecification
 	: (
-	dsnutilUCSFieldSpecificationChar
-	| dsnutilUCSFieldSpecificationVarchar
+	dsnutilUCSFieldNameSpec
+	dsnutilUCSUnloadFieldSpecificationType?
+	)
+	;
+
+dsnutilUCSLoadFieldSpecificationType
+	: (
+	dsnutilUCSLoadFieldSpecificationChar
+	| dsnutilUCSLoadFieldSpecificationVarchar
 	| dsnutilUCSFieldSpecificationGraphic
 	| dsnutilUCSFieldSpecificationVargraphic
 	| dsnutilUCSFieldSpecificationSmallint
@@ -2459,37 +2528,93 @@ dsnutilUCSFieldSpecificationType
 	| dsnutilUCSFieldSpecificationBigint
 	| dsnutilUCSFieldSpecificationBinary
 	| dsnutilUCSFieldSpecificationVarbinary
-	| dsnutilUCSDecimalSpec
+	| dsnutilUCSLoadDecimalSpec
 	| dsnutilUCSFieldSpecificationFloat
 	| dsnutilUCSFieldSpecificationDate
 	| dsnutilUCSFieldSpecificationTime
 	| dsnutilUCSFieldSpecificationTimestamp
 	| dsnutilUCSFieldSpecificationTimestampWithTimeZone
 	| dsnutilUCSFieldSpecificationRowid
-	| dsnutilUCSFieldSpecificationBlob
-	| dsnutilUCSFieldSpecificationClob
-	| dsnutilUCSFieldSpecificationDbclob
+	| dsnutilUCSLoadFieldSpecificationBlob
+	| dsnutilUCSLoadFieldSpecificationClob
+	| dsnutilUCSLoadFieldSpecificationDbclob
 	| dsnutilUCSFieldSpecificationDecfloat
 	| dsnutilUCSFieldSpecificationXml
 	)
 	;
 
-dsnutilUCSFieldSpecificationChar
+dsnutilUCSUnloadFieldSpecificationType
+	: (
+	dsnutilUCSUnloadFieldSpecificationChar
+	| dsnutilUCSUnloadFieldSpecificationVarchar
+	| dsnutilUCSFieldSpecificationGraphic
+	| dsnutilUCSFieldSpecificationVargraphic
+	| dsnutilUCSFieldSpecificationSmallint
+	| dsnutilUCSFieldSpecificationInteger
+	| dsnutilUCSFieldSpecificationBigint
+	| dsnutilUCSFieldSpecificationBinary
+	| dsnutilUCSFieldSpecificationVarbinary
+	| dsnutilUCSStripSpec
+	| dsnutilUCSUnloadDecimalSpec
+	| dsnutilUCSFieldSpecificationFloat
+	| dsnutilUCSFieldSpecificationDouble
+	| dsnutilUCSFieldSpecificationReal
+	| dsnutilUCSFieldSpecificationDate
+	| dsnutilUCSFieldSpecificationTime
+	| dsnutilUCSFieldSpecificationTimestamp
+	| dsnutilUCSFieldSpecificationTimestampWithTimeZone
+	| dsnutilUCSUnloadFieldSpecificationConstant
+	| dsnutilUCSFieldSpecificationRowid
+	| dsnutilUCSUnloadFieldSpecificationBlob
+	| dsnutilUCSUnloadFieldSpecificationClob
+	| dsnutilUCSUnloadFieldSpecificationDbclob
+	| dsnutilUCSFieldSpecificationDecfloat
+	| dsnutilUCSFieldSpecificationXml
+	)
+	;
+
+/*
+Having a length in parentheses isn't noted in the syntax diagram
+but it is in the examples.  And I'm allowing a strip-spec because
+as long as I have to make things up, I'm going to make things up
+that seem correct to me.
+*/
+dsnutilUCSLoadFieldSpecificationChar
 	: (
 	(DSNUTIL_CHAR | DSNUTIL_CHARACTER)
 		(
-		(DSNUTIL_BIT dsnutilUCSArgInParens dsnutilUCSStripSpec?)
-		| (DSNUTIL_CCSID dsnutilUCSArg dsnutilUCSStripSpec?)
-		| (DSNUTIL_MIXED dsnutilUCSStripSpec?)
+		(DSNUTIL_BIT dsnutilUCSArgInParens dsnutilUCSStripSpec*)
+		| (DSNUTIL_CCSID dsnutilUCSArg dsnutilUCSStripSpec*)
+		| (DSNUTIL_MIXED dsnutilUCSStripSpec*)
 		| (DSNUTIL_BLOBF dsnutilUCSBlobfOptions*)
 		| (DSNUTIL_CLOBF dsnutilUCSClobfOptions*)
 		| (DSNUTIL_DBCLOBF dsnutilUCSDbclobfOptions*)
-		| dsnutilUCSArgInParens
+		| (dsnutilUCSArgInParens dsnutilUCSStripSpec*)
 		)?
 	)
 	;
 
-dsnutilUCSFieldSpecificationVarchar
+dsnutilUCSUnloadFieldSpecificationChar
+	: (
+	(DSNUTIL_CHAR | DSNUTIL_CHARACTER)
+	dsnutilUCSArgInParens?
+	((DSNUTIL_TRUNCATE (DSNUTIL_CCSID dsnutilUCSArg)?)
+	| dsnutilUCSUnloadClobfSpec
+	| (DSNUTIL_CCSID dsnutilUCSArg DSNUTIL_TRUNCATE?))
+	)
+	;
+
+dsnutilUCSUnloadClobfSpec
+	: (
+	((DSNUTIL_DBCLOBF DSNUTIL_CCSID dsnutilUCSArg)
+	| (DSNUTIL_CLOBF DSNUTIL_CCSID dsnutilUCSArg)
+	| DSNUTIL_BLOBF)
+	dsnutilUCSTemplateName
+	DSNUTIL_BINARYXML?
+	)
+	;
+
+dsnutilUCSLoadFieldSpecificationVarchar
 	: (
 	DSNUTIL_VARCHAR
 		(
@@ -2502,6 +2627,16 @@ dsnutilUCSFieldSpecificationVarchar
 		| dsnutilUCSArgInParens
 		)?
 	dsnutilUCSStripSpec?
+	)
+	;
+
+dsnutilUCSUnloadFieldSpecificationVarchar
+	: (
+	DSNUTIL_VARCHAR
+	dsnutilUCSArgInParens?
+	((dsnutilUCSStripSpec (DSNUTIL_CCSID dsnutilUCSArg)?)
+	| dsnutilUCSUnloadClobfSpec
+	| (DSNUTIL_CCSID dsnutilUCSArg dsnutilUCSStripSpec?))
 	)
 	;
 
@@ -2543,13 +2678,25 @@ dsnutilUCSFieldSpecificationBinary
 
 dsnutilUCSFieldSpecificationVarbinary
 	: (
-	(DSNUTIL_VARBINARY | (DSNUTIL_BINARY DSNUTIL_VARYING)) dsnutilUCSStripSpec?
+	(DSNUTIL_VARBINARY | (DSNUTIL_BINARY DSNUTIL_VARYING)) dsnutilUCSStripSpec*
 	)
 	;
 
 dsnutilUCSFieldSpecificationFloat
 	: (
 	DSNUTIL_FLOAT dsnutilUCSFloatOptions*
+	)
+	;
+
+dsnutilUCSFieldSpecificationDouble
+	: (
+	DSNUTIL_DOUBLE
+	)
+	;
+
+dsnutilUCSFieldSpecificationReal
+	: (
+	DSNUTIL_REAL
 	)
 	;
 
@@ -2578,27 +2725,59 @@ dsnutilUCSFieldSpecificationTimestampWithTimeZone
 	)
 	;
 
+dsnutilUCSUnloadFieldSpecificationConstant
+	: (
+	DSNUTIL_CONSTANT dsnutilUCSArg
+	)
+	;
+
 dsnutilUCSFieldSpecificationRowid
 	: (
 	DSNUTIL_ROWID
 	)
 	;
 
-dsnutilUCSFieldSpecificationBlob
+dsnutilUCSLoadFieldSpecificationBlob
 	: (
-	DSNUTIL_BLOB
+	DSNUTIL_BLOB 
 	)
 	;
 
-dsnutilUCSFieldSpecificationClob
+dsnutilUCSUnloadFieldSpecificationBlob
+	: (
+	DSNUTIL_BLOB 
+	dsnutilUCSArgInParens? 
+	DSNUTIL_TRUNCATE?
+	)
+	;
+
+dsnutilUCSLoadFieldSpecificationClob
 	: (
 	DSNUTIL_CLOB dsnutilUCSClobOptions*
 	)
 	;
 
-dsnutilUCSFieldSpecificationDbclob
+dsnutilUCSUnloadFieldSpecificationClob
+	: (
+	DSNUTIL_CLOB
+	dsnutilUCSArgInParens? 
+	DSNUTIL_TRUNCATE?
+	(DSNUTIL_CCSID dsnutilUCSArg)?
+	)
+	;
+
+dsnutilUCSLoadFieldSpecificationDbclob
 	: (
 	DSNUTIL_DBCLOB (DSNUTIL_CCSID dsnutilUCSArg)?
+	)
+	;
+
+dsnutilUCSUnloadFieldSpecificationDbclob
+	: (
+	DSNUTIL_DBCLOB
+	dsnutilUCSArgInParens? 
+	DSNUTIL_TRUNCATE?
+	(DSNUTIL_CCSID dsnutilUCSArg)?
 	)
 	;
 
@@ -2658,6 +2837,10 @@ dsnutilUCSFloatOptions
 	)
 	;
 
+/*
+A * after dsnutilUCSStripSpec is not necessary because
+this rule is itself followed by a *.
+*/
 dsnutilUCSBinaryOptions
 	: (
 	dsnutilUCSArgInParens
@@ -2672,6 +2855,10 @@ dsnutilUCSIntegerOptions
 	)
 	;
 
+/*
+A * after dsnutilUCSStripSpec is not necessary because
+this rule is itself followed by a *.
+*/
 dsnutilUCSVargraphicOptions
 	: (
 	dsnutilUCSStripSpec
@@ -2679,6 +2866,10 @@ dsnutilUCSVargraphicOptions
 	)
 	;
 
+/*
+A * after dsnutilUCSStripSpec is not necessary because
+this rule is itself followed by a *.
+*/
 dsnutilUCSGraphicOptions
 	: (
 	DSNUTIL_EXTERNAL
@@ -2742,15 +2933,23 @@ dsnutilUCSFieldNameConstantOption
 
 dsnutilUCSStripSpec
 	: (
-	DSNUTIL_STRIP (DSNUTIL_BOTH | DSNUTIL_TRAILING | DSNUTIL_LEADING)?
-	dsnutilUCSArg? DSNUTIL_TRUNCATE?
+	(DSNUTIL_STRIP (DSNUTIL_BOTH | DSNUTIL_TRAILING | DSNUTIL_LEADING)? dsnutilUCSArg?)
+	| DSNUTIL_TRUNCATE
 	)
 	;
 
-dsnutilUCSDecimalSpec
+dsnutilUCSLoadDecimalSpec
 	: (
 	DSNUTIL_DECIMAL
 	(DSNUTIL_PACKED | DSNUTIL_ZONED | (DSNUTIL_EXTERNAL (dsnutilUCSArgList1)?))
+	)
+	;
+
+dsnutilUCSUnloadDecimalSpec
+	: (
+	DSNUTIL_DECIMAL
+	(DSNUTIL_PACKED | DSNUTIL_ZONED | DSNUTIL_EXTERNAL)?
+	dsnutilUCSArgList1?
 	)
 	;
 
@@ -3578,7 +3777,7 @@ dsnutilUCSReorgTablespaceOptions
 	| dsnutilUCSForceOption
 	| dsnutilUCSSortnpsiOption
 	| dsnutilUCSOffposlimitSpec
-	| dsnutilUCSUnloadSpec
+	| dsnutilUCSReorgUnloadSpec
 	| dsnutilUCSKeepdictionaryOption
 	| dsnutilUCSStatisticsSpec
 	| dsnutilUCSPunchddnOption
@@ -3631,7 +3830,7 @@ dsnutilUCSDiscarddnOption
 	)
 	;
 
-dsnutilUCSUnloadSpec
+dsnutilUCSReorgUnloadSpec
 	: (
 	dsnutilUCSUnloadContinuePauseOnlySpec
 	| dsnutilUCSUnloadExternalSpec
@@ -3766,6 +3965,32 @@ dsnutilUCSShrlevelChangeSpec2
 	)
 	;
 
+dsnutilUCSShrlevelChangeSpec3
+	: (
+	DSNUTIL_SHRLEVEL DSNUTIL_CHANGE
+	((dsnutilUCSIsolationCSOption DSNUTIL_SKIP_LOCKED_DATA?)
+	| (dsnutilUCSIsolationUROption dsnutilUCSRegisterOption))
+	)
+	;
+
+dsnutilUCSIsolationCSOption
+	: (
+	DSNUTIL_ISOLATION DSNUTIL_CS
+	)
+	;
+
+dsnutilUCSIsolationUROption
+	: (
+	DSNUTIL_ISOLATION DSNUTIL_UR
+	)
+	;
+
+dsnutilUCSRegisterOption
+	: (
+	DSNUTIL_REGISTER (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
 dsnutilUCSReorgTablespaceDrainSpec
 	: (
 	dsnutilUCSDrainWaitOption
@@ -3805,7 +4030,7 @@ dsnutilUCSOffposlimitSpec
 dsnutilUCSUnloadExternalSpec
 	: (
 	DSNUTIL_UNLOAD DSNUTIL_EXTERNAL
-	(dsnutilUCSNopadOption | dsnutilUCSFromTableSpec)*
+	(dsnutilUCSNopadOption1 | dsnutilUCSFromTableSpec1)*
 	)
 	;
 
@@ -3819,22 +4044,71 @@ dsnutilUCSSortSpec
 dsnutilUCSDiscardSpec
 	: (
 	DSNUTIL_DISCARD
-	(dsnutilUCSNopadOption
-	| dsnutilUCSFromTableSpec)*
+	(dsnutilUCSNopadOption1
+	| dsnutilUCSFromTableSpec1)*
 	)
 	;
 
-dsnutilUCSFromTableSpec
+dsnutilUCSFromTableSpec1
 	: (
 	DSNUTIL_FROM_TABLE
 	dsnutilUCSQualifiedTableName
-	(DSNUTIL_WHEN DSNUTIL_WHEN_LPAREN NOT? predicate ((AND | OR) NOT? LPAREN* predicate RPAREN*)* RPAREN)
+	dsnutilUCSWhenCondition?
 	)
 	;
-	
-dsnutilUCSNopadOption
+
+dsnutilUCSWhenCondition
+	: (
+	DSNUTIL_WHEN 
+	DSNUTIL_WHEN_LPAREN 
+	NOT? predicate 
+	((AND | OR) NOT? LPAREN* predicate RPAREN*)* 
+	RPAREN
+	)
+	;
+
+dsnutilUCSFromTableSpec2
+	: (
+	DSNUTIL_FROM_TABLE
+	dsnutilUCSQualifiedTableName
+	dsnutilUCSFromTableSpec2Options*
+	dsnutilUCSWhenCondition?
+	)
+	;
+
+dsnutilUCSFromTableSpec2Options
+	: (
+	dsnutilUCSSampleOption
+	| dsnutilUCSTableSpec2LimitOption
+	| dsnutilUCSHeaderOption
+	| dsnutilUCSUnloadFieldListOption
+	)
+	;
+
+dsnutilUCSTableSpec2LimitOption
+	: (
+	DSNUTIL_LIMIT dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSHeaderOption
+	: (
+	DSNUTIL_HEADER
+	(DSNUTIL_OBID
+	| DSNUTIL_NONE
+	| (DSNUTIL_CONST dsnutilUCSArg))
+	)
+	;
+
+dsnutilUCSNopadOption1
 	: (
 	DSNUTIL_NOPAD (DSNUTIL_YES | DSNUTIL_NO)
+	)
+	;
+
+dsnutilUCSNopadOption2
+	: (
+	DSNUTIL_NOPAD
 	)
 	;
 
@@ -4368,7 +4642,7 @@ dsnutilUCSRunstatsTablespace
 
 dsnutilUCSRunstatsResetAccesspath
 	: (
-	DSNUTIL_RESET DSNUTIL_ACCESSPATH
+	DSNUTIL_RESET_ACCESSPATH
 	(DSNUTIL_HISTORY DSNUTIL_ACCESSPATH)?
 	)
 	;
@@ -4614,7 +4888,7 @@ dsnutilUCSDsnTimeOption
 	;
 
 dsnutilUCSDsnBlkszlimOption
-	: (DSNUTIL_BLKSZLIM dsnutilUCSArg dsnutilUCSArg?)
+	: (DSNUTIL_BLKSZLIM dsnutilUCSArg DSNUTIL_BLKSZLIM_SUFFIX?)
 	;
 
 dsnutilUCSDsnSpaceOption
@@ -4700,6 +4974,66 @@ dsnutilUCSPathName
 	: dsnutilUCSArg
 	;
 
+dsnutilUCSUnload
+	: (
+	((DSNUTIL_UNLOAD_DATA dsnutilUCSFromTableSpec2+)
+	| (DSNUTIL_UNLOAD dsnutilUCSUnloadSourceSpec dsnutilUCSFromTableSpec2*)
+	| (DSNUTIL_UNLOAD DSNUTIL_LIST dsnutilUCSListName))
+	dsnutilUCSUnloadSpec*
+	)
+	;
+
+dsnutilUCSUnloadSpec
+	: (
+	dsnutilUCSPunchddnOption
+	| dsnutilUCSUnlddnOption
+	| dsnutilUCSEAUOption
+	| dsnutilUCSCCSIDOption
+	| dsnutilUCSNosubsOption
+	| dsnutilUCSNopadOption2
+	| dsnutilUCSSpannedOption
+	| dsnutilUCSFormatSpec
+	| dsnutilUCSDelimitedOption
+	| dsnutilUCSUnloadFloatOption
+	| dsnutilUCSMaxerrOption
+	| dsnutilUCSShrlevelChangeSpec3
+	| dsnutilUCSShrlevelReferenceSpec2
+	| dsnutilUCSDecfloatSpec
+	| dsnutilUCSImplicitTZOption
+	| dsnutilUCSParallelOption3
+	| dsnutilUCSCloneOption
+	)
+	;
+
+dsnutilUCSUnloadSourceSpec
+	: (
+	DSNUTIL_FROM_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?
+	(dsnutilUCSFromCopyDsnOption | dsnutilUCSFromCopyDdnOption)?
+	)
+	;
+
+dsnutilUCSFromCopyDdnOption
+	: (
+	DSNUTIL_FROMCOPYDDN dsnutilUCSDdname
+	)
+	;
+
+dsnutilUCSUnloadFloatOption
+	: (
+	DSNUTIL_FLOAT (DSNUTIL_S390 | DSNUTIL_IEEE)
+	)
+	;
+
+dsnutilUCSMaxerrOption
+	: (
+	DSNUTIL_MAXERR dsnutilUCSArg
+	)
+	;
+
+dsnutilUCSDdname
+	: dsnutilUCSArg
+	;
+
 dsnutilUCSDatabaseObjectName
 	: (
 	DSNUTIL_DB_TS_IDENTIFIER
@@ -4767,11 +5101,21 @@ dsnutilUCSQualifiedXmlTablespacename
 	: ((dsnutilUCSDatabaseName (DSNUTIL_DB_TS_DOT | DSNUTIL_PAREN_DOT))? dsnutilUCSXmlTablespacename)
 	;
 
+
 /*
-This could be simplified by using setType() or ->type() in the lexer,
-but at least for now it's helpful to see exactly which token was 
-matched in which mode.
+I'm not happy with this, but there's at least one test case
+with an unknown parameter/command/utility for which I can
+find not documentation anywhere.  This catches it, and 
+doesn't seem to break anything else.
+
+Seems like 4 keywords in a row might trigger this rule.  Hm.
 */
+dsnutilUCSUnknown
+	: (
+	dsnutilUCSArg+
+	)
+	;
+
 dsnutilArgument3Text
 	: (
 	dsnutilUCSBackup
@@ -4800,108 +5144,8 @@ dsnutilArgument3Text
 	| dsnutilUCSRunstats
 	| dsnutilUCSStospace
 	| dsnutilUCSTemplate
-/*	| DSNUTIL_CHAR 
-	| DSNUTIL_COMMA
-	| DSNUTIL_DSN 
-	| DSNUTIL_MODELDCB
-	| DSNUTIL_FROMCOPY
-	| DSNUTIL_DSNTYPE
-	| DSNUTIL_DSNUM
-	| DSNUTIL_SHOWDSNS
-	| DSNUTIL_DSN_DOUBLE_APOS
-	| DSNUTIL_DOUBLE_QUOTE
-	| DSNUTIL_DSN_LPAREN
-	| DSNUTIL_DSN_CHAR 
-	| DSNUTIL_DSN_OPEN_APOS 
-	| DSNUTIL_DSN_WS
-	| DSNUTIL_DSN_WS_DOUBLE_APOS
-	| DSNUTIL_DSN_WS_OPEN_APOS
-	| DSNUTIL_DSN_WS_LPAREN
-	| DSNUTIL_DSN_WS_WS
-	| DSNUTIL_DSN_WS_CHAR
-	| DSNUTIL_APOS
-	| DSNUTIL_APOS_CHAR
-	| DSNUTIL_DOUBLE_APOS1
-	| DSNUTIL_DOUBLE_APOS_CHAR 
-	| DSNUTIL_LPAREN
-	| DSNUTIL_LPAREN1
-	| DSNUTIL_DB_TS_LPAREN
-	| DSNUTIL_RPAREN1
-	| DSNUTIL_EQUAL
-	| DSNUTIL_EXPDL
-	| DSNUTIL_COLDEL
-	| DSNUTIL_CHARDEL
-	| DSNUTIL_DECPT
-	| DSNUTIL_PAREN_IDENTIFIER
-	| DSNUTIL_PAREN_OPEN_APOS
-	| DSNUTIL_PAREN_OPEN_QUOTE
-	| DSNUTIL_PAREN_DOUBLE_APOS
-	| DSNUTIL_QUOTE1
-	| DSNUTIL_QUOTE_CHAR
-	| DSNUTIL_TABLESPACES
-	| DSNUTIL_TABLESPACESET
-	| DSNUTIL_TABLESPACE
-	| DSNUTIL_INDEXSPACE
-	| DSNUTIL_INDEX
-	| DSNUTIL_MAPPINGTABLE
-	| DSNUTIL_MAPPINGDATABASE
-	| DSNUTIL_STOGROUP
-	| DSNUTIL_TABLESAMPLE
-	| DSNUTIL_REPEATABLE
-	| DSNUTIL_TABLE
-	| DSNUTIL_OBD
-	| DSNUTIL_DATABASE
-	| DSNUTIL_FROM_TABLESPACE
-	| DSNUTIL_FROM_TABLE
-	| DSNUTIL_FROMVOLUME
-	| DSNUTIL_FROMCOPYDDN
-	| DSNUTIL_FROM
-	| DSNUTIL_DEADLINE
-	| DSNUTIL_SWITCHTIME
-	| DSNUTIL_DB_TS_IDENTIFIER
-	| DSNUTIL_DB_TS_DOT
-	| DSNUTIL_DB_TS_APOS
-	| DSNUTIL_DB_TS_QUOTE
-	| DSNUTIL_DB_TS_WS_LEADING
-	| DSNUTIL_DB_TS_WS_TERMINATING
-	| DSNUTIL_EXEC_SQL
-	| DSNUTIL_ENDEXEC
-	| DSNUTIL_EXEC_SQL_CHAR
-	| DSNUTIL_TRACEID
-	| DSNUTIL_TORBA
-	| DSNUTIL_TOLOGPOINT
-	| DSNUTIL_RESTOREBEFORE
-	| DSNUTIL_PAGE
-	| DSNUTIL_ROWID
-	| DSNUTIL_RBALRSN_CONVERSION
-	| DSNUTIL_SETCURRENTVERSION
-	| DSNUTIL_VERSION
-	| DSNUTIL_DOCID
-	| DSNUTIL_CONST
-	| DSNUTIL_IMPLICIT_TZ
-	| DSNUTIL_DATACLAS
-	| DSNUTIL_DATA_ONLY
-	| DSNUTIL_CHECK_DATA
-	| DSNUTIL_SKIP_LOCKED_DATA
-	| DSNUTIL_UNLOAD_DATA
-	| DSNUTIL_DATA
-	| DSNUTIL_OFFSET
-	| DSNUTIL_LENGTH
-	| DSNUTIL_INSERTVERSIONPAGES
-	| DSNUTIL_PAGES
-	| DSNUTIL_DBID
-	| DSNUTIL_TEXT
-	| DSNUTIL_KEYCARD
-	| DSNUTIL_SORTKEYS
-	| DSNUTIL_SHOWKEYLABEL
-	| DSNUTIL_KEY
-	| DSNUTIL_HEXLIT_WS
-	| DSNUTIL_HEXLIT_X
-	| DSNUTIL_HEXLIT_WS_WS
-	| DSNUTIL_HEXLIT_WS_APOS
-	| DSNUTIL_HEXLIT_WS_CHAR
-	| DSNUTIL_HEXLIT_X_APOS */
-	| (DSNUTIL_WHEN DSNUTIL_WHEN_LPAREN NOT? predicate ((AND | OR) NOT? LPAREN* predicate RPAREN*)* RPAREN)
+	| dsnutilUCSUnload
+	| dsnutilUCSUnknown
 	)
 	;
 
