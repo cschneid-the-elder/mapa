@@ -1137,7 +1137,7 @@ dsnutilUCSInitialObjectSpec
 	(DSNUTIL_DATABASE dsnutilUCSDatabaseName)
 	| dsnutilUCSQualifiedTablespaceNameWithLit
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName)
-	| (DSNUTIL_TABLE dsnutilUCSQualifiedTableName)
+	| dsnutilUCSQualifiedTableNameWithLit
 	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
 	) (DSNUTIL_PARTLEVEL dsnutilUCSArgList1?)?
 	;
@@ -1902,7 +1902,7 @@ dsnutilDurationSuffix
 
 dsnutilUCSIntoTableSpec
 	: (
-	DSNUTIL_INTO DSNUTIL_TABLE dsnutilUCSQualifiedTableName
+	DSNUTIL_INTO dsnutilUCSQualifiedTableNameWithLit
 	dsnutilUCSIntoTableSpecOptions*
 	)
 	;
