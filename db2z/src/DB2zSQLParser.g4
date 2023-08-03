@@ -670,11 +670,11 @@ dsnutilUCSCheckData
 	;
 
 dsnutilUCSTablespacePhrase
-	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSPartOption?)
+	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSPartOption1?)
 	;
 
 dsnutilUCSIndexPhrase
-	: (dsnutilUCSQualifiedIndexName dsnutilUCSPartOption?)
+	: (dsnutilUCSQualifiedIndexName dsnutilUCSPartOption1?)
 	;
 
 dsnutilUCSXMLTablespacePhrase
@@ -961,7 +961,7 @@ dsnutilUCSChangelimitSpec
 	;
 
 dsnutilUCSTablespaceSpec
-	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSPartOption?)
+	: (DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSPartOption1?)
 	;
 
 dsnutilUCSTablespaceCopySpec
@@ -1695,7 +1695,7 @@ dsnutilUCSStatsIndexNameAndStats1
 dsnutilUCSStatsIndexNameAndStats2
 	: (
 	dsnutilUCSQualifiedIndexName
-	dsnutilUCSPartOption?
+	dsnutilUCSPartOption1?
 	dsnutilUCSCorrelationStatsSpec*
 	)
 	;
@@ -1910,7 +1910,7 @@ dsnutilUCSIntoTableSpec
 dsnutilUCSIntoTableSpecOptions
 	: (
 	dsnutilUCSIgnoreFieldsOption
-	| dsnutilUCSPartOption
+	| dsnutilUCSPartOption1
 	| dsnutilUCSIntoTableSpecPreformatOption
 	| dsnutilUCSIntoTableResumeSpec
 	| dsnutilUCSIntoTableSpecDDNOption
@@ -1920,8 +1920,14 @@ dsnutilUCSIntoTableSpecOptions
 	)
 	;
 
-dsnutilUCSPartOption
+dsnutilUCSPartOption1
 	: (DSNUTIL_PART dsnutilUCSArg)
+	;
+
+dsnutilUCSPartOption2
+	: (
+	DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens)
+	)
 	;
 
 dsnutilUCSIntoTableSpecPreformatOption
@@ -2700,7 +2706,7 @@ dsnutilUCSQuiesce
 dsnutilUCSQuiesceListOrTablespaceEtAl
 	: (
 	(DSNUTIL_LIST dsnutilUCSListName) 
-	| ((DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSPartOption?)
+	| ((DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName dsnutilUCSPartOption1?)
 	| (DSNUTIL_TABLESPACESET DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))+
 	)
 	;
@@ -2751,13 +2757,13 @@ dsnutilUCSRebuildIndexSpecIndexspace
 	
 dsnutilUCSIndexSpec
 	: (
-	dsnutilUCSQualifiedIndexName dsnutilUCSPartOption?
+	dsnutilUCSQualifiedIndexName dsnutilUCSPartOption1?
 	)
 	;
 
 dsnutilUCSRebuildIndexIndexspaceSpec
 	: (
-	dsnutilUCSQualifiedIndexspaceName dsnutilUCSPartOption?
+	dsnutilUCSQualifiedIndexspaceName dsnutilUCSPartOption1?
 	)
 	;
 
@@ -3182,7 +3188,7 @@ dsnutilUCSReorgIndexIndexNameSpec
 	: (
 	((DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
-	dsnutilUCSPartOption?
+	dsnutilUCSPartOption1?
 	)
 	;
 
@@ -3700,7 +3706,7 @@ dsnutilUCSLocateTablespaceSpec
 	: (
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedTablespaceName
-	(((DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens))
+	((dsnutilUCSPartOption2? DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens))
 	| (DSNUTIL_KEY (dsnutilUCSArg | dsnutilUCSArgInParens) DSNUTIL_INDEX dsnutilUCSQualifiedIndexName))
 	)
 	;
@@ -3709,7 +3715,7 @@ dsnutilUCSLocateIndexSpec
 	: (
 	((DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
-	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
+	dsnutilUCSPartOption2?
 	DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens)
 	)
 	;
@@ -3819,7 +3825,7 @@ dsnutilUCSRepairSetStatement
 dsnutilUCSRepairSetTablespace
 	: (
 	DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName
-	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
+	dsnutilUCSPartOption2?
 	dsnutilUCSRepairSetTablespaceOptions?
 	)
 	;
@@ -3827,7 +3833,7 @@ dsnutilUCSRepairSetTablespace
 dsnutilUCSRepairSetIndex
 	: (
 	DSNUTIL_INDEX 
-	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName (DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_RPAREN1)
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName dsnutilUCSPartOption2? DSNUTIL_RPAREN1)
 	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))
 	dsnutilUCSRepairSetIndexOptions?
 	)
@@ -3836,7 +3842,7 @@ dsnutilUCSRepairSetIndex
 dsnutilUCSRepairSetIndexspace
 	: (
 	DSNUTIL_INDEXSPACE 
-	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexspaceName (DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))? DSNUTIL_RPAREN1)
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexspaceName dsnutilUCSPartOption2? DSNUTIL_RPAREN1)
 	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName))
 	dsnutilUCSRepairSetIndexOptions?
 	)
@@ -3883,7 +3889,7 @@ dsnutilUCSLevelidStatement
 	((DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName)
 	| (DSNUTIL_INDEX dsnutilUCSQualifiedIndexName)
 	| (DSNUTIL_INDEXSPACE dsnutilUCSQualifiedIndexspaceName))
-	(DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))?
+	dsnutilUCSPartOption2?
 	)
 	;
 
@@ -3910,7 +3916,7 @@ dsnutilUCSWritelogStatement
 	: (
 	DSNUTIL_WRITELOG
 	DSNUTIL_TABLESPACE dsnutilUCSQualifiedTablespaceName
-	((DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens))
+	(dsnutilUCSPartOption2
 	| (DSNUTIL_TYPE (dsnutilUCSArg | dsnutilUCSArgInParens))
 	| (DSNUTIL_SUBTYPE (dsnutilUCSArg | dsnutilUCSArgInParens))
 	| (DSNUTIL_TEXT (dsnutilUCSArg | dsnutilUCSArgInParens)))+
@@ -4108,7 +4114,7 @@ dsnutilUCSRunstatsIndexListSpec
 
 dsnutilUCSRunstatsIndexAndSpecs
 	: (
-	dsnutilUCSQualifiedIndexName dsnutilUCSPartOption? dsnutilUCSCorrelationStatsSpec*
+	dsnutilUCSQualifiedIndexName dsnutilUCSPartOption1? dsnutilUCSCorrelationStatsSpec*
 	)
 	;
 
@@ -4155,7 +4161,7 @@ dsnutilUCSRunstatsResetAccesspath
 dsnutilUCSRunstatsTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceName
-	(dsnutilUCSPartOption dsnutilUCSForcerollupOption?)?
+	(dsnutilUCSPartOption1 dsnutilUCSForcerollupOption?)?
 	)
 	;
 
