@@ -3799,7 +3799,7 @@ dsnutilUCSLobTablespaceSpec
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedXmlTablespacename
 	dsnutilUCSRowidOption
-	DSNUTIL_VERSION dsnutilUCSArgOptionalParens
+	dsnutilUCSVersionOption
 	(dsnutilUCSRepairDeleteStatement | dsnutilUCSDumpStatement)
 	)
 	;
@@ -3810,12 +3810,24 @@ dsnutilUCSRowidOption
 	)
 	;
 
+dsnutilUCSVersionOption
+	: (
+	DSNUTIL_VERSION dsnutilUCSArgOptionalParens
+	)
+	;
+
 dsnutilUCSXmlTablespaceSpec
 	: (
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedXmlTablespacename
-	DSNUTIL_DOCID dsnutilUCSArgOptionalParens
+	dsnutilUCSDocidOption
 	dsnutilUCSRepairDeleteStatement
+	)
+	;
+
+dsnutilUCSDocidOption
+	: (
+	DSNUTIL_DOCID dsnutilUCSArgOptionalParens
 	)
 	;
 
