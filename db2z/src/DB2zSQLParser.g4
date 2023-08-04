@@ -3774,8 +3774,14 @@ dsnutilUCSLocateOptions
 dsnutilUCSLocateTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceNameWithLit
-	((dsnutilUCSPartOption2? DSNUTIL_PAGE dsnutilUCSArgOptionalParens)
+	((dsnutilUCSPartOption2? dsnutilUCSPageOption)
 	| (DSNUTIL_KEY dsnutilUCSArgOptionalParens dsnutilUCSQualifiedIndexNameWithLit))
+	)
+	;
+
+dsnutilUCSPageOption
+	: (
+	DSNUTIL_PAGE dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3784,7 +3790,7 @@ dsnutilUCSLocateIndexSpec
 	(dsnutilUCSQualifiedIndexNameWithLit
 	| dsnutilUCSQualifiedIndexspaceNameWithLit)
 	dsnutilUCSPartOption2?
-	DSNUTIL_PAGE dsnutilUCSArgOptionalParens
+	dsnutilUCSPageOption
 	)
 	;
 
