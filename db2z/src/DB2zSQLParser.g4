@@ -822,11 +822,11 @@ dsnutilUCSParallelOption
 	;
 
 dsnutilUCSParallelOption2
-	: (DSNUTIL_PARALLEL (dsnutilUCSArg | dsnutilUCSArgInParens)?)
+	: (DSNUTIL_PARALLEL dsnutilUCSArgOptionalParens?)
 	;
 
 dsnutilUCSParallelOption3
-	: (DSNUTIL_PARALLEL (dsnutilUCSArg | dsnutilUCSArgInParens))
+	: (DSNUTIL_PARALLEL dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSCheckIndex
@@ -920,7 +920,7 @@ dsnutilUCSCopySpecOptions
 	;
 
 dsnutilUCSTapeunitsOption
-	: (DSNUTIL_TAPEUNITS (dsnutilUCSArg | dsnutilUCSArgInParens))
+	: (DSNUTIL_TAPEUNITS dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSCheckpageOption
@@ -1391,19 +1391,19 @@ dsnutilUCSNocheckpendOption
 
 dsnutilUCSLoadErrddnOption
 	: (
-	DSNUTIL_ERRDDN (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_ERRDDN dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSLoadMapddnOption
 	: (
-	DSNUTIL_MAPDDN (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_MAPDDN dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSLoadDiscarddnOption
 	: (
-	DSNUTIL_DISCARDDN (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_DISCARDDN dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -1997,7 +1997,7 @@ dsnutilUCSPartOption1
 
 dsnutilUCSPartOption2
 	: (
-	DSNUTIL_PART (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_PART dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2608,7 +2608,7 @@ dsnutilUCSModifyRecoveryOptions
 dsnutilUCSModifyRecoveryDeleteOption
 	: (
 	DSNUTIL_DELETE
-	(DSNUTIL_AGE | DSNUTIL_DATE) (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	(DSNUTIL_AGE | DSNUTIL_DATE) dsnutilUCSArgOptionalParens?
 	dsnutilUCSModifyRecoveryFlashcopy?
 	)
 	;
@@ -2673,13 +2673,13 @@ dsnutilUCSModifyStatisticsDeleteOption
 
 dsnutilUCSModifyStatisticsAgeOption
 	: (
-	DSNUTIL_AGE (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	DSNUTIL_AGE dsnutilUCSArgOptionalParens?
 	)
 	;
 
 dsnutilUCSModifyStatisticsDateOption
 	: (
-	DSNUTIL_DATE (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	DSNUTIL_DATE dsnutilUCSArgOptionalParens?
 	)
 	;
 
@@ -3774,8 +3774,8 @@ dsnutilUCSLocateOptions
 dsnutilUCSLocateTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceNameWithLit
-	((dsnutilUCSPartOption2? DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens))
-	| (DSNUTIL_KEY (dsnutilUCSArg | dsnutilUCSArgInParens) dsnutilUCSQualifiedIndexNameWithLit))
+	((dsnutilUCSPartOption2? DSNUTIL_PAGE dsnutilUCSArgOptionalParens)
+	| (DSNUTIL_KEY dsnutilUCSArgOptionalParens dsnutilUCSQualifiedIndexNameWithLit))
 	)
 	;
 
@@ -3784,7 +3784,7 @@ dsnutilUCSLocateIndexSpec
 	(dsnutilUCSQualifiedIndexNameWithLit
 	| dsnutilUCSQualifiedIndexspaceNameWithLit)
 	dsnutilUCSPartOption2?
-	DSNUTIL_PAGE (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_PAGE dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3792,8 +3792,8 @@ dsnutilUCSLobTablespaceSpec
 	: (
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedXmlTablespacename
-	DSNUTIL_ROWID (dsnutilUCSArg | dsnutilUCSArgInParens)
-	DSNUTIL_VERSION (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_ROWID dsnutilUCSArgOptionalParens
+	DSNUTIL_VERSION dsnutilUCSArgOptionalParens
 	(dsnutilUCSRepairDeleteStatement | dsnutilUCSDumpStatement)
 	)
 	;
@@ -3802,7 +3802,7 @@ dsnutilUCSXmlTablespaceSpec
 	: (
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedXmlTablespacename
-	DSNUTIL_DOCID (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_DOCID dsnutilUCSArgOptionalParens
 	dsnutilUCSRepairDeleteStatement
 	)
 	;
@@ -3824,7 +3824,7 @@ dsnutilUCSReplaceStatement
 
 dsnutilUCSRepairDataOption
 	: (
-	DSNUTIL_DATA (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_DATA dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3853,31 +3853,31 @@ dsnutilUCSDumpStatementOptions
 
 dsnutilUCSRepairOffsetOption
 	: (
-	DSNUTIL_OFFSET (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_OFFSET dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSDumpLengthOption
 	: (
-	DSNUTIL_LENGTH (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_LENGTH dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSDumpPagesOption
 	: (
-	DSNUTIL_PAGES (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_PAGES dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSDumpMapOption
 	: (
-	DSNUTIL_MAP (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	DSNUTIL_MAP dsnutilUCSArgOptionalParens?
 	)
 	;
 
 dsnutilUCSDumpDataOption
 	: (
-	DSNUTIL_DATA (dsnutilUCSArg | dsnutilUCSArgInParens)?
+	DSNUTIL_DATA dsnutilUCSArgOptionalParens?
 	)
 	;
 
@@ -3946,8 +3946,8 @@ dsnutilUCSRepairSetIndexOptions
 dsnutilUCSDbdStatement
 	: (
 	DSNUTIL_DBD
-	((DSNUTIL_DROP DSNUTIL_DATABASE dsnutilUCSDatabaseName DSNUTIL_DBID (dsnutilUCSArg | dsnutilUCSArgInParens))
-	| ((DSNUTIL_TEST | DSNUTIL_DIAGNOSE | DSNUTIL_REBUILD) DSNUTIL_DATABASE dsnutilUCSDatabaseName (DSNUTIL_OUTDDN (dsnutilUCSArg | dsnutilUCSArgInParens))?))
+	((DSNUTIL_DROP DSNUTIL_DATABASE dsnutilUCSDatabaseName DSNUTIL_DBID dsnutilUCSArgOptionalParens)
+	| ((DSNUTIL_TEST | DSNUTIL_DIAGNOSE | DSNUTIL_REBUILD) DSNUTIL_DATABASE dsnutilUCSDatabaseName (DSNUTIL_OUTDDN dsnutilUCSArgOptionalParens)?))
 	)
 	;
 
@@ -3985,9 +3985,9 @@ dsnutilUCSWritelogStatement
 	DSNUTIL_WRITELOG
 	dsnutilUCSQualifiedTablespaceNameWithLit
 	(dsnutilUCSPartOption2
-	| (DSNUTIL_TYPE (dsnutilUCSArg | dsnutilUCSArgInParens))
-	| (DSNUTIL_SUBTYPE (dsnutilUCSArg | dsnutilUCSArgInParens))
-	| (DSNUTIL_TEXT (dsnutilUCSArg | dsnutilUCSArgInParens)))+
+	| (DSNUTIL_TYPE dsnutilUCSArgOptionalParens)
+	| (DSNUTIL_SUBTYPE dsnutilUCSArgOptionalParens)
+	| (DSNUTIL_TEXT dsnutilUCSArgOptionalParens))+
 	)
 	;
 
@@ -4450,7 +4450,7 @@ dsnutilUCSDsnUncntOption
 	;
 
 dsnutilUCSDsnGdgLimitOption
-	: (DSNUTIL_GDGLIMIT (dsnutilUCSArg | dsnutilUCSArgInParens))
+	: (DSNUTIL_GDGLIMIT dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnDispOption
@@ -5262,6 +5262,10 @@ dsnutilUCSArgList3
 
 dsnutilUCSArgInParens
 	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg DSNUTIL_RPAREN1)
+	;
+
+dsnutilUCSArgOptionalParens
+	: (dsnutilUCSArg | dsnutilUCSArgInParens)
 	;
 
 /*
