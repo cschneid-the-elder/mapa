@@ -3984,10 +3984,34 @@ dsnutilUCSWritelogStatement
 	: (
 	DSNUTIL_WRITELOG
 	dsnutilUCSQualifiedTablespaceNameWithLit
-	(dsnutilUCSPartOption2
-	| (DSNUTIL_TYPE dsnutilUCSArgOptionalParens)
-	| (DSNUTIL_SUBTYPE dsnutilUCSArgOptionalParens)
-	| (DSNUTIL_TEXT dsnutilUCSArgOptionalParens))+
+	dsnutilUCSWritelogStatementOptions+
+	)
+	;
+
+dsnutilUCSWritelogStatementOptions
+	: (
+	dsnutilUCSPartOption2
+	| dsnutilUCSWritelogTypeOption
+	| dsnutilUCSWritelogSubtypeOption
+	| dsnutilUCSWritelogTextOption
+	)
+	;
+
+dsnutilUCSWritelogTypeOption
+	: (
+	DSNUTIL_TYPE dsnutilUCSArgOptionalParens
+	)
+	;
+
+dsnutilUCSWritelogSubtypeOption
+	: (
+	DSNUTIL_SUBTYPE dsnutilUCSArgOptionalParens
+	)
+	;
+
+dsnutilUCSWritelogTextOption
+	: (
+	DSNUTIL_TEXT dsnutilUCSArgOptionalParens
 	)
 	;
 
