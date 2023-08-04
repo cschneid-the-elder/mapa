@@ -2813,15 +2813,21 @@ dsnutilUCSRebuildIndexSpec
 dsnutilUCSRebuildIndexSpecIndex
 	: (
 	(DSNUTIL_INDEX DSNUTIL_DB_TS_LPAREN dsnutilUCSIndexSpec (DSNUTIL_COMMA dsnutilUCSIndexSpec)* DSNUTIL_RPAREN1)
-	| (DSNUTIL_INDEX DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
+	| (DSNUTIL_INDEX dsnutilUCSAllInParens dsnutilUCSTablespaceSpec)
 	| (DSNUTIL_INDEX_LIST dsnutilUCSListName)
+	)
+	;
+
+dsnutilUCSAllInParens
+	: (
+	DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1
 	)
 	;
 
 dsnutilUCSRebuildIndexSpecIndexspace
 	: (
 	(DSNUTIL_INDEXSPACE DSNUTIL_DB_TS_LPAREN dsnutilUCSRebuildIndexIndexspaceSpec (DSNUTIL_COMMA dsnutilUCSRebuildIndexIndexspaceSpec)*) DSNUTIL_RPAREN1
-	| (DSNUTIL_INDEXSPACE DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSTablespaceSpec)
+	| (DSNUTIL_INDEXSPACE dsnutilUCSAllInParens dsnutilUCSTablespaceSpec)
 	| (DSNUTIL_INDEXSPACE_LIST dsnutilUCSListName)
 	)
 	;
@@ -3926,7 +3932,7 @@ dsnutilUCSRepairSetIndex
 	: (
 	DSNUTIL_INDEX 
 	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexName dsnutilUCSPartOption2? DSNUTIL_RPAREN1)
-	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSQualifiedTablespaceNameWithLit))
+	| (dsnutilUCSAllInParens dsnutilUCSQualifiedTablespaceNameWithLit))
 	dsnutilUCSRepairSetIndexOptions?
 	)
 	;
@@ -3935,7 +3941,7 @@ dsnutilUCSRepairSetIndexspace
 	: (
 	DSNUTIL_INDEXSPACE 
 	((DSNUTIL_DB_TS_LPAREN dsnutilUCSQualifiedIndexspaceName dsnutilUCSPartOption2? DSNUTIL_RPAREN1)
-	| (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1 dsnutilUCSQualifiedTablespaceNameWithLit))
+	| (dsnutilUCSAllInParens dsnutilUCSQualifiedTablespaceNameWithLit))
 	dsnutilUCSRepairSetIndexOptions?
 	)
 	;
@@ -4236,7 +4242,7 @@ dsnutilUCSRunstatsIndexAndSpecs
 
 dsnutilUCSRunstatsIndexTablespaceSpec
 	: (
-	(DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1)
+	dsnutilUCSAllInParens
 	dsnutilUCSQualifiedTablespaceNameWithLit
 	dsnutilUCSCorrelationStatsSpec*
 	)
@@ -4297,7 +4303,7 @@ dsnutilUCSRunstatsTablespaceStatisticsSpec
 
 dsnutilUCSRunstatsTableSpec
 	: (
-	DSNUTIL_TABLE (DSNUTIL_DB_TS_LPAREN DSNUTIL_ALL DSNUTIL_RPAREN1)? dsnutilUCSAllTablesSpec*
+	DSNUTIL_TABLE dsnutilUCSAllInParens? dsnutilUCSAllTablesSpec*
 	)
 	;
 
