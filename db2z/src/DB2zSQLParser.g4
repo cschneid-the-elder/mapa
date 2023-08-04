@@ -4390,12 +4390,29 @@ dsnutilUCSStogroupName
 dsnutilUCSTemplate
 	: (
 	DSNUTIL_TEMPLATE dsnutilUCSTemplateName
-	((((DSNUTIL_DSN dsnutilUCSDsn)
-		| dsnutilUCSDsnCommonOptions 
-		| dsnutilUCSDsnDiskOptions
-		| dsnutilUCSDsnTapeOptions)+
-		dsnutilUCSDsnSubsysSpec?)
+	(dsnutilUCSDsnExpression
 	| dsnutilUCSPathExpression)
+	)
+	;
+
+dsnutilUCSDsnExpression
+	: (
+	 dsnutilUCSDsnOptions* dsnutilUCSDsnSubsysSpec?
+	)
+	;
+
+dsnutilUCSDsnOptions
+	: (
+	dsnutilUCSDsnWithLit
+	| dsnutilUCSDsnCommonOptions 
+	| dsnutilUCSDsnDiskOptions
+	| dsnutilUCSDsnTapeOptions
+	)
+	;
+
+dsnutilUCSDsnWithLit
+	: (
+	DSNUTIL_DSN dsnutilUCSDsn
 	)
 	;
 
