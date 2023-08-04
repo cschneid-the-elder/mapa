@@ -68,7 +68,7 @@ CALL SYSPROC.DSNUTILU (
   , '
 TEMPLATE
 ARETUZA
-DSN (''X&DB(1,3)..&DB..&SN(+1'')
+DSN (''X&DB(1,3)..&DB..&SN(+1)'')
 UNIT SYSALLDA
 MODELDCB ('DB.MODEL')
 BUFNO 30
@@ -96,7 +96,7 @@ CALL SYSPROC.DSNUTILU (
   , '
 TEMPLATE
 ARETUZA
-DSN (''X&DB(1,3)..&DB..&SN(+1'')
+DSN (''X&DB(1,3)..&DB..&SN(+1)'')
 UNIT SYSALLDA
 MODELDCB ('DB.MODEL')
 BUFNO 30
@@ -173,6 +173,124 @@ PATH '/dev1/db2/p a t h'
           , SIXOTH
           )
    PATHDISP(KEEP,DELETE)
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN X&DB..&DB..&SN
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN 'X&DB(1,3)..&DB..&SN'
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN 'X&DB(1,3)..&DB..&SN''
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN ''X&DB(1,3)..&DB..&SN''
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN ''X&DB(1,3)..&DB..&SN'''
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN "X&DB(1,3)..&DB..&SN"
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , "
+TEMPLATE
+ARETUZA
+DSN "X&DB(1,3)..&DB..&SN""
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN (X&DB..&DB..&SN)
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN ('X&DB(1,3)..&DB..&SN')
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN (''X&DB(1,3)..&DB..&SN'')
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
+DSN ("X&DB(1,3)..&DB..&SN")
     '
   , ''
   );
