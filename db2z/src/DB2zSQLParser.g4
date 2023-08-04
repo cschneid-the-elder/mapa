@@ -3798,9 +3798,15 @@ dsnutilUCSLobTablespaceSpec
 	: (
 	DSNUTIL_TABLESPACE
 	dsnutilUCSQualifiedXmlTablespacename
-	DSNUTIL_ROWID dsnutilUCSArgOptionalParens
+	dsnutilUCSRowidOption
 	DSNUTIL_VERSION dsnutilUCSArgOptionalParens
 	(dsnutilUCSRepairDeleteStatement | dsnutilUCSDumpStatement)
+	)
+	;
+
+dsnutilUCSRowidOption
+	: (
+	DSNUTIL_ROWID dsnutilUCSArgOptionalParens
 	)
 	;
 
