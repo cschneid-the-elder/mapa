@@ -4551,7 +4551,11 @@ transferring between them is done... creatively.
 
 Remember to add any new keywords to the dsnutilUCSKeyword parser rule,
 to catch anyone who wants to name their list "LIST" or their workddn
-"WORKDDN" or other such perfectly legitimate yet irritating thing.
+"WORKDDN" or other such perfectly legitimate.
+
+This is essentially an "embedded" lexer just for the third parameter
+to SYSPROC.DSNUTILx.  We also have a corresponding "embedded"
+parser just for SYSPROC.DSNUTILx's third parameter.
 */
 
 DSNUTIL_DOUBLE_APOS
@@ -5605,12 +5609,12 @@ DSNUTIL_CURRENT_DATE
 DSNUTIL_CURRENT_TIMESTAMP
 	: CURRENT_TIMESTAMP
 	;
-
+/*
 DSNUTIL_PAREN_WITH_TIMEZONE
 	: W I T H '_' T I M E Z O N E
 	->type(DSNUTIL_WITH_TIMEZONE)
 	;
-
+*/
 DSNUTIL_YEAR
 	: Y E A R 
 	;
@@ -6006,14 +6010,6 @@ DSNUTIL_REAL
 
 DSNUTIL_CCSID
 	: C C S I D
-	;
-
-/*
-These two are terrible.  Also note
-DSNUTIL_TIMESTAMP_WITH_TIME_ZONE.
-*/
-DSNUTIL_WITH_TIMEZONE
-	: W I T H '_' T I M E Z O N E
 	;
 
 DSNUTIL_WITH_TIME_ZONE

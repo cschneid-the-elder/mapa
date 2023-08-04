@@ -572,6 +572,12 @@ callArgument
 	: (expression | NULL | (TABLE tableName) | dsnutilArgument3)
 	;
 
+/*
+Here begins an "embedded" parser just for SYSPROC.DSNUTILx's third parameter.
+
+This goes on for a bit, ~4500 lines or so.
+*/
+
 dsnutilArgument3
 	: (DSNUTIL_OPEN_APOS dsnutilArgument3Text* DSNUTIL_CLOSE_APOS)
 	| (DSNUTIL_OPEN_QUOTE dsnutilArgument3Text* DSNUTIL_CLOSE_QUOTE)
@@ -4693,7 +4699,7 @@ dsnutilUCSQualifiedXmlTablespacename
 /*
 I'm not happy with this, but there's at least one test case
 with an unknown parameter/command/utility for which I can
-find not documentation anywhere.  This catches it, and 
+find no documentation anywhere.  This catches it, and 
 doesn't seem to break anything else.
 
 The trick seems to be to have everything that isn't unknown
@@ -4738,6 +4744,16 @@ dsnutilArgument3Text
 	)
 	;
 
+/*
+Keywords defined in the lexer that could also be arguments for
+other keywords must be added here.  For example, someone might
+use WORKDDN as the ddname for the WORKDDN keyword.  Or maybe
+someone wants the list they define with LISTDEF to be named LIST.
+
+Bear in mind that all these keywords come out of the "embedded"
+lexer for the SYSPROC.DSNUTILx stored procedure's third parameter,
+so "normal" DB2z SQL keywords need not be listed here.
+*/
 dsnutilUCSKeyword
 	: (
 	DSNUTIL_ABEND
@@ -5020,7 +5036,6 @@ dsnutilUCSKeyword
 	| DSNUTIL_OPTIONS
 	| DSNUTIL_OUTDDN
 	| DSNUTIL_OVERRIDE
-	| DSNUTIL_OWNER_FROM
 	| DSNUTIL_PACKED
 	| DSNUTIL_PAGE
 	| DSNUTIL_PAGES
@@ -5111,7 +5126,6 @@ dsnutilUCSKeyword
 	| DSNUTIL_SHOWKEYLABEL
 	| DSNUTIL_SHRLEVEL
 	| DSNUTIL_SKIP
-	| DSNUTIL_SKIP_LOCKED_DATA
 	| DSNUTIL_SMALLINT
 	| DSNUTIL_SORTCLUSTER
 	| DSNUTIL_SORTDATA
@@ -5154,14 +5168,12 @@ dsnutilUCSKeyword
 	| DSNUTIL_TIME
 	| DSNUTIL_TIMEOUT
 	| DSNUTIL_TIMESTAMP
-	| DSNUTIL_TIMESTAMP_WITH_TIME_ZONE
 	| DSNUTIL_TOCOPY
 	| DSNUTIL_TOKEN
 	| DSNUTIL_TOLASTCOPY
 	| DSNUTIL_TOLASTFULLCOPY
 	| DSNUTIL_TOLOGPOINT
 	| DSNUTIL_TORBA
-	| DSNUTIL_TO_ROLE
 	| DSNUTIL_TOSEQNO
 	| DSNUTIL_TOVOLUME
 	| DSNUTIL_TRACEID
@@ -5175,7 +5187,6 @@ dsnutilUCSKeyword
 	| DSNUTIL_UNIT
 	| DSNUTIL_UNLDDN
 	| DSNUTIL_UNLOAD
-	| DSNUTIL_UNLOAD_DATA
 	| DSNUTIL_UPDATE
 	| DSNUTIL_UPDATED
 	| DSNUTIL_UPDMAXASSIGNEDVAL
@@ -5196,7 +5207,6 @@ dsnutilUCSKeyword
 	| DSNUTIL_WARNING
 	| DSNUTIL_WHEN
 	| DSNUTIL_WHITESPACE
-	| DSNUTIL_WITH_TIMEZONE
 	| DSNUTIL_WORKDDN
 	| DSNUTIL_WRITE
 	| DSNUTIL_WRITELOG
@@ -5253,6 +5263,10 @@ dsnutilUCSArgList3
 dsnutilUCSArgInParens
 	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg DSNUTIL_RPAREN1)
 	;
+
+/*
+Here ends the "embedded" parser just for SYSPROC.DSNUTILx's third parameter.
+*/
 
 callArgumentList
 	: (callArgument (COMMA callArgument)*)
