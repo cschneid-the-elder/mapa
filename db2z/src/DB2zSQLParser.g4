@@ -1315,14 +1315,6 @@ dsnutilUCSLoadResumeOption
 	)
 	;
 
-/*
-dsnutilUCSFlashcopyOption
-	: (
-	dsnutilUCSFlashcopySpec
-	)
-	;
-*/
-
 dsnutilUCSLoadKeepdictionaryOption
 	: (
 	DSNUTIL_KEEPDICTIONARY
@@ -1526,15 +1518,6 @@ dsnutilUCSLoadCopySpec
 	: ((dsnutilUCSCopyddnOption dsnutilUCSRecoveryddnOption2?)
 	| dsnutilUCSRecoveryddnOption2)
 	;
-
-/*
-dsnutilUCSFlashcopySpec
-	: (
-	DSNUTIL_FLASHCOPY (DSNUTIL_YES | DSNUTIL_NO | DSNUTIL_CONSISTENT)
-	DSNUTIL_FCCOPYDDN dsnutilUCSArgInParens
-	)
-	;
-*/
 
 dsnutilUCSStatisticsSpec
 	: (
@@ -2686,7 +2669,6 @@ dsnutilUCSModifyStatisticsDateOption
 dsnutilUCSOptions
 	: (
 	DSNUTIL_OPTIONS
-//	(dsnutilUCSOptionsProcessingOptionsSpec* | dsnutilUCSOptionsOff | (DSNUTIL_KEY dsnutilUCSArg))
 	dsnutilUCSOptionsProcessingOptionsSpec*
 	)
 	;

@@ -4772,7 +4772,6 @@ DSNUTIL_WHEN
 
 DSNUTIL_EXPDL
 	: E X P D L
-//	->pushMode(DSNUTIL_DB_TS_MODE)
 	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
@@ -4963,12 +4962,10 @@ do not show apostrophes, but it's possible they are allowed.
 
 DSNUTIL_DEADLINE
 	: D E A D L I N E
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_SWITCHTIME
 	: S W I T C H T I M E
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_EXEC_SQL
@@ -4983,22 +4980,18 @@ DSNUTIL_TRACEID
 
 DSNUTIL_TORBA
 	: T O R B A
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_TOLOGPOINT
 	: T O L O G P O I N T
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_RESTOREBEFORE
 	: R E S T O R E B E F O R E
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_PAGE
 	: P A G E
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	;
 
 DSNUTIL_ROWID
@@ -5329,14 +5322,12 @@ DSNUTIL_XMLSCHEMA
 
 DSNUTIL_LISTDEF
 	: L I S T D E F
-//	->pushMode(DSNUTIL_HEXLIT_MODE)
 	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_LIST
 	: L I S T
 	->pushMode(DSNUTIL_HEXLIT_MODE)
-//	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_EXCLUDE
@@ -7534,7 +7525,6 @@ DSNUTIL_DOUBLE_APOS1
 
 DSNUTIL_DOUBLE_APOS_CHAR
 	: DSNUTIL_APOS_CHAR
-//	: .+?
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
@@ -7633,27 +7623,6 @@ DSNUTIL_QUOTE1
 
 DSNUTIL_QUOTE_CHAR
 	: ~'"'+
-	//->type(DSNUTIL_IDENTIFIER)
-	;
-
-mode DSNUTIL_EXEC_SQL_MODE;
-
-/*
-Why are we here?
-
-Whilst processing, an EXEC SQL token was encountered, indicating
-some arbitrary SQL follows, terminated by an ENDEXEC token.
-*/
-
-/*
-DSNUTIL_ENDEXEC
-	: E N D E X E C
-	->popMode
-	;
-*/
-
-DSNUTIL_EXEC_SQL_CHAR
-	: .+?
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
@@ -7801,7 +7770,6 @@ first apostrophe should have taken us out of this mode.
 */
 DSNUTIL_HEXLIT_X_CHAR
 	: DSNUTIL_IDENTIFIER
-	//->type(DSNUTIL_IDENTIFIER)
 	;
 
 mode DSNUTIL_GNX_MODE; //TODO combine with DSNUTIL_HEXLIT_MODEs?
