@@ -176,6 +176,13 @@ DSNUTIL_OPEN_APOS
 	{dsnutil && dsnutilArgc == 2}?
 	{
 		//System.out.println("dsnutil && dsnutilArgc == 2 & \'");
+		/*
+		Setting this variable to false is necessary here because 
+		the EXEC SQL online Utility Control Statement may come back
+		through this token if a literal is present in any dynamic
+		SQL being processed.
+		*/
+		dsnutil = false;
 	}
 	->pushMode(DSNUTIL_MODE)
 	;
@@ -234,7 +241,7 @@ need to match an embedded string with those characters.
 fragment STRINGLITERAL
 	: (('"' (~["] | '""' | '\'')* '"')
 	| ('\'' (~['] | '\'\'' | '"')* '\''))
-	{dsnutilArgc != 2}?
+	{!(dsnutil && dsnutilArgc == 2)}?
 	;
 
 INTEGERLITERAL

@@ -1213,11 +1213,17 @@ dsnutilUCSInitialObjectSpec
 	) (DSNUTIL_PARTLEVEL dsnutilUCSArgList1?)?
 	;
 
+/*
+It appears, from the examples, that load options can both
+precede and succeed the into-table-spec.  This is contrary
+to the syntax diagram.
+*/
 dsnutilUCSLoad
 	: (
 	(DSNUTIL_LOAD | DSNUTIL_LOAD_DATA) 
 	dsnutilUCSLoadOptions*
 	dsnutilUCSIntoTableSpec+
+	dsnutilUCSLoadOptions*
 	)
 	;
 
@@ -1269,7 +1275,7 @@ dsnutilUCSLoadOptions
 
 dsnutilUCSLoadInddnOption
 	: (
-	(DSNUTIL_INDDN (dsnutilUCSArg | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArg)?) | DSNUTIL_INCURSOR dsnutilUCSArg
+	(DSNUTIL_INDDN (dsnutilUCSArg | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArg)?) | (DSNUTIL_INCURSOR dsnutilUCSArgOptionalParens)
 	)
 	;
 
@@ -1991,7 +1997,7 @@ dsnutilUCSIntoTableSpecPreformatOption
 dsnutilUCSIntoTableSpecDDNOption
 	: (
 	(DSNUTIL_INDDN (dsnutilUCSArg | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArg)?) 
-	| DSNUTIL_INCURSOR dsnutilUCSArg
+	| (DSNUTIL_INCURSOR dsnutilUCSArgOptionalParens)
 	)
 	;
 
