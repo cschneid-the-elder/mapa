@@ -206,38 +206,6 @@ fragment HEXLITERAL
 	| X '\'' [0-9A-F]+ '\''
 	;
 
-/*
-This needs to match...
-
-	'ABC''DEF X'ABCD' 'XYZ%' 123'
-
-...all as one token.  See testdata/sql_call for a real example.
-
-It turns out that SYSPROC.DSNUTILV is very forgiving in what it
-will accept in its third parameter.
-
-Documenting what I tried so I don't make the mistake of trying
-to simplify this later.
-
-trying ('\'' ~[']* '\'') picks up multiple strings all as one
- i.e. 'a', 'b', 'like 'a%'' all three are lexed as one
-
-trying ('\'' [0-9a-zA-Z %_@#$]* '\'') which mismatches "normal" literals
-
-trying ('\'' ~[',]* '\'') which mismatches "normal" literals
-
-trying ('\'' [0-9a-zA-Z%_@#$]* '\'') which seems to work but lacks many characters
-
-trying ('\'' [0-9a-zA-Z !@#$%^&*()\-_=+[\]{}\\|;:.<>/?]*? '\'') which mismatches
-"normal" literals and just seems prone to missing a character
-
-trying ('\'' ~[', ;]* '\'') which seems to work
-
-So, as of 2023-06-06, this is what we've got.  It appears the solution is to
-exclude the string delimiter, the comma, the space, and the semicolon.  The 
-exclusions prevent matching multiple strings as one.  Hopefully no one will 
-need to match an embedded string with those characters.
-*/
 fragment STRINGLITERAL
 	: (('"' (~["] | '""' | '\'')* '"')
 	| ('\'' (~['] | '\'\'' | '"')* '\''))
@@ -4843,7 +4811,7 @@ DSNUTIL_TABLESPACE
 	;
 
 /*
-In this case, we have the INDEXSPACE token followed
+In this case, we have the TABLESPACE token followed
 by the LIST token (probably) in a REORG TABLESPACE
 command.  We're setting up for the next token, which
 is a list name and thus we behave as we do for the
@@ -4963,7 +4931,7 @@ DSNUTIL_FROM
 
 /*
 Documentation does not mention apostrophes around the
-possible timestamp literal following these tokens.  Examples
+possible timestamp literal following these next 2 tokens.  Examples
 do not show apostrophes, but it's possible they are allowed.
 */
 
@@ -5607,12 +5575,7 @@ DSNUTIL_CURRENT_DATE
 DSNUTIL_CURRENT_TIMESTAMP
 	: CURRENT_TIMESTAMP
 	;
-/*
-DSNUTIL_PAREN_WITH_TIMEZONE
-	: W I T H '_' T I M E Z O N E
-	->type(DSNUTIL_WITH_TIMEZONE)
-	;
-*/
+
 DSNUTIL_YEAR
 	: Y E A R 
 	;
@@ -6537,9 +6500,6 @@ DSNUTIL_UR
 	: U R
 	;
 
-/*
-Does this solve problems or create them?
-*/
 DSNUTIL_HEX_LIT
 	: X '\'' [0-9A-Za-z]+ '\''
 	;
