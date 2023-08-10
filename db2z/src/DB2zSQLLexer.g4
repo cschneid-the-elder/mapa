@@ -4578,21 +4578,14 @@ DSNUTIL_RPAREN
 	}
 	;
 
-/*
-Equal and not equal pushMode to two different places because
-the former must also work with the UNIT token and the latter
-need not.
-*/
 DSNUTIL_EQUAL
 	: '='
 	->pushMode(DSNUTIL_DB_TS_MODE)
-//	->pushMode(DSNUTIL_GNX_MODE)
 	;
 
 DSNUTIL_NOT_EQUAL
 	: '<>'
-//	->pushMode(DSNUTIL_DB_TS_MODE)
-	->pushMode(DSNUTIL_GNX_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_BACKUP
@@ -7011,7 +7004,7 @@ DSNUTIL_PAREN_EQUAL
 
 DSNUTIL_PAREN_NOT_EQUAL
 	: DSNUTIL_NOT_EQUAL
-	->type(DSNUTIL_NOT_EQUAL),pushMode(DSNUTIL_GNX_MODE)
+	->type(DSNUTIL_NOT_EQUAL),pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_PAREN_DOT
@@ -7553,10 +7546,6 @@ DSNUTIL_APOS
 				popMode(); //back to DSNUTIL_HEXLIT_MODE
 				popMode(); //back to DSNUTIL_MODE
 				break;
-			case DSNUTIL_GNX_MODE :
-				popMode(); //back to DSNUTIL_GNX_MODE
-				popMode(); //back to "parent" mode
-				break;
 			default :
 				popMode(); //back to "parent" mode
 				break;
@@ -7753,30 +7742,6 @@ first apostrophe should have taken us out of this mode.
 */
 DSNUTIL_HEXLIT_X_CHAR
 	: DSNUTIL_IDENTIFIER
-	;
-
-mode DSNUTIL_GNX_MODE; //TODO combine with DSNUTIL_HEXLIT_MODEs?
-
-DSNUTIL_GNX_X
-	: X
-	;
-
-DSNUTIL_GNX_G
-	: G
-	;
-
-DSNUTIL_GNX_N
-	: N
-	;
-
-DSNUTIL_GNX_APOS
-	: '\''
-	->pushMode(DSNUTIL_APOS_MODE) //we don't come back to this mode
-	;
-
-DSNUTIL_GNX_WS
-	: (WS | NEWLINE)+
-	->channel(HIDDEN)
 	;
 
 
