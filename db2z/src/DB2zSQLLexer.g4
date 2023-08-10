@@ -19,7 +19,6 @@ lexer grammar DB2zSQLLexer;
 	public int dsnutilArgc = 0;
 	public Boolean dsnutil_dsn_ws_char = false;
 	public Boolean dsnutil_db_ts_char = false;
-	public Boolean dsnutil_hexlit_char = false;
 	public Boolean dsnutilLoad = false;
 }
 
@@ -4543,7 +4542,6 @@ DSNUTIL_CLOSE_APOS
 		dsnutil = false;
 		dsnutilArgc = 0;
 		dsnutil_dsn_ws_char = false;
-		dsnutil_hexlit_char = false;
 	}
 	->popMode
 	;
@@ -4558,7 +4556,6 @@ DSNUTIL_CLOSE_QUOTE
 		dsnutil = false;
 		dsnutilArgc = 0;
 		dsnutil_dsn_ws_char = false;
-		dsnutil_hexlit_char = false;
 	}
 	->popMode
 	;
@@ -4745,7 +4742,7 @@ DSNUTIL_WHEN
 
 DSNUTIL_EXPDL
 	: E X P D L
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_COLDEL
@@ -4817,7 +4814,7 @@ LIST token.
 */
 DSNUTIL_TABLESPACE_LIST
 	: T A B L E S P A C E (WS | NEWLINE)+ L I S T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_INDEXSPACES
@@ -4838,7 +4835,7 @@ LIST token.
 */
 DSNUTIL_INDEXSPACE_LIST
 	: I N D E X S P A C E (WS | NEWLINE)+ L I S T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_INDEXES
@@ -4859,7 +4856,7 @@ LIST token.
 */
 DSNUTIL_INDEX_LIST
 	: I N D E X (WS | NEWLINE)+ L I S T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_MAPPINGTABLE
@@ -4948,7 +4945,7 @@ DSNUTIL_EXEC_SQL
 
 DSNUTIL_TRACEID
 	: T R A C E I D
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_TORBA
@@ -4969,7 +4966,7 @@ DSNUTIL_PAGE
 
 DSNUTIL_ROWID
 	: R O W I D
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_RBALRSN_CONVERSION
@@ -4982,22 +4979,22 @@ DSNUTIL_SETCURRENTVERSION
 
 DSNUTIL_VERSION
 	: V E R S I O N
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_DOCID
 	: D O C I D
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_CONST
 	: C O N S T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_IMPLICIT_TZ
 	: I M P L I C I T '_' T Z
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_KEYCARD
@@ -5014,7 +5011,7 @@ DSNUTIL_SHOWKEYLABEL
 
 DSNUTIL_KEY
 	: K E Y
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_DATACLAS
@@ -5124,17 +5121,17 @@ DSNUTIL_UNLOAD_DATA
 
 DSNUTIL_DATA
 	: D A T A
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_OFFSET
 	: O F F S E T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_LENGTH
 	: L E N G T H
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_INSERTVERSIONPAGES
@@ -5143,17 +5140,17 @@ DSNUTIL_INSERTVERSIONPAGES
 
 DSNUTIL_PAGES
 	: P A G E S
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_DBID
 	: D B I D
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_TEXT
 	: T E X T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_PART
@@ -5300,7 +5297,7 @@ DSNUTIL_LISTDEF
 
 DSNUTIL_LIST
 	: L I S T
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_EXCLUDE
@@ -5409,12 +5406,12 @@ DSNUTIL_WAIT
 
 DSNUTIL_MESSAGE
 	: M E S S A G E
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_INSTANCE
 	: I N S T A N C E
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_ABEND
@@ -5559,7 +5556,7 @@ DSNUTIL_TEMPLATE
 
 DSNUTIL_PATH
 	: P A T H
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_UNIT
@@ -6041,12 +6038,12 @@ DSNUTIL_PREVIEW
 
 DSNUTIL_LISTDEFDD
 	: L I S T D E F D D
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_TEMPLATEDD
 	: T E M P L A T E D D
-	->pushMode(DSNUTIL_HEXLIT_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_FILSZ
@@ -6925,7 +6922,6 @@ DSNUTIL_DB_TS_IDENTIFIER
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
-//TODO obviate the need for GNX_MODE?
 DSNUTIL_DB_TS_HEX_LIT
 	: [GNX] '\'' [0-9A-Za-z]+ '\''
 	->popMode
@@ -7535,17 +7531,6 @@ DSNUTIL_APOS
 				popMode(); //back to DSNUTIL_DSN_MODE
 				popMode(); //back to DSNUTIL_MODE
 				break;
-			case DSNUTIL_HEXLIT_X_MODE :
-				popMode(); //back to DSNUTIL_HEXLIT_X_MODE
-				popMode(); //back to DSNUTIL_HEXLIT_WS_MODE
-				popMode(); //back to DSNUTIL_HEXLIT_MODE
-				popMode(); //back to DSNUTIL_MODE
-				break;
-			case DSNUTIL_HEXLIT_WS_MODE :
-				popMode(); //back to DSNUTIL_HEXLIT_WS_MODE
-				popMode(); //back to DSNUTIL_HEXLIT_MODE
-				popMode(); //back to DSNUTIL_MODE
-				break;
 			default :
 				popMode(); //back to "parent" mode
 				break;
@@ -7596,152 +7581,6 @@ DSNUTIL_QUOTE1
 DSNUTIL_QUOTE_CHAR
 	: ~'"'+
 	//->type(DSNUTIL_IDENTIFIER)
-	;
-
-mode DSNUTIL_HEXLIT_MODE;
-/*
-Why are we here?
-
-A token has been found, the syntax is...
-
-	<token> X'aaaaaaaa'
-
-...or...
-
-	<token> 'tttttttt'
-
-...or...
-
-	<token> nnnnnnnn
-
-...where aaaaaaaa is a hex literal, tttttttt is arbitrary text
-delimited by apostrophes, and nnnnnnnn is an integer.
-
-It is syntactically possible for this syntax to be followed by
-either a quote or an apostrophe indicating the end of the argument.
-*/
-
-DSNUTIL_HEXLIT_WS
-	: (WS | NEWLINE)+
-	->channel(HIDDEN),pushMode(DSNUTIL_HEXLIT_WS_MODE)
-	;
-
-mode DSNUTIL_HEXLIT_WS_MODE;
-
-/*
-We have consumed the whitespace that comes between the <token>
-and the value which follows.  We now need to process that
-value, which may take the form...
-
-	X'aaaaaaaa'
-
-...or...
-
-	'tttttttt'
-
-...or...
-
-	nnnnnnnn
-
-Keep in mind that an apostrophe in this mode could mean the
-end of the CALL argument or it could be the first apostrophe
-enclosing some text.  The difference between these two cases
-is detected via the dsnutil_hexlit_char boolean.
-*/
-
-DSNUTIL_HEXLIT_X
-	: X
-	->pushMode(DSNUTIL_HEXLIT_X_MODE)
-	;
-
-DSNUTIL_HEXLIT_WS_APOS
-	: '\''
-	{
-		if (dsnutil_hexlit_char) {
-			/*
-			If this branch is taken then we've hit the end of the
-			CALL argument and need to get back to DEFAULT_MODE.
-			*/
-			dsnutil = false;
-			dsnutilArgc = 0;
-			dsnutil_dsn_ws_char = false;
-			dsnutil_db_ts_char = false;
-			dsnutil_hexlit_char = false;
-			setType(DSNUTIL_CLOSE_APOS);
-			popMode(); //back to DSNUTIL_HEXLIT_MODE
-			popMode(); //back to DSNUTIL_MODE
-			popMode(); //back to DEFAULT_MODE
-		} else {
-			/*
-			If this branch is taken then the literal is not a hex
-			string prefixed by X it is instead a character string
-			literal beginning and ending with an apostrophe. 
-			*/
-			pushMode(DSNUTIL_APOS_MODE); //we don't come back to this mode
-		}
-	}
-	;
-
-/*
-If this rule is matched then we've hit the end of the
-value following the whitespace following <token> and
-we need to get back to DSNUTIL_MODE.
-*/
-DSNUTIL_HEXLIT_WS_WS
-	: (WS | NEWLINE)+
-	{
-		dsnutil_hexlit_char = false;
-	}
-	->channel(HIDDEN),popMode,popMode
-	;
-
-DSNUTIL_HEXLIT_WS_CHAR
-	: DSNUTIL_IDENTIFIER
-	{
-		dsnutil_hexlit_char = true;
-	}
-	//->type(DSNUTIL_IDENTIFIER)
-	;
-
-mode DSNUTIL_HEXLIT_X_MODE;
-
-/*
-Why are we here?
-
-We have consumed <token>, the whitespace following it, and
-the X preceeding a hex literal enclosed in apostrophes. We
-are here to detect the first apostrophe and then pushMode.
-*/
-
-DSNUTIL_HEXLIT_X_APOS
-	: '\''
-	->pushMode(DSNUTIL_APOS_MODE) //we don't come back to this mode
-	;
-
-/*
-If this rule is matched then we've hit the end of the
-value following the whitespace following <token> and
-we need to get back to DSNUTIL_MODE.
-*/
-DSNUTIL_HEXLIT_X_WS
-	: (WS | NEWLINE)+
-	{
-		dsnutil_hexlit_char = false;
-	}
-	->channel(HIDDEN),popMode,popMode,popMode
-	;
-
-/*
-This rule should never be hit.  Syntax is...
-
-	TRACEID X'ABC01234'
-
-...and if we're in this mode the X has been seen, so the
-first apostrophe should have taken us out of this mode.
-
-*/
-DSNUTIL_HEXLIT_X_CHAR
-	: DSNUTIL_IDENTIFIER
 	;
 
 
