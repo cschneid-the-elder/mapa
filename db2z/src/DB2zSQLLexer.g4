@@ -6922,6 +6922,23 @@ DSNUTIL_DB_TS_IDENTIFIER
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
+/*
+This doesn't work.
+
+The reason it doesn't work is that, following a token that
+matches this rule, the closing quote for the third parameter
+to SYSPROC.DSNUTILx + any intervening whitespace + the comma
+prior to the fourth parameter + the opening quote for the
+fourth parameter also match this rule - and we don't want that.
+
+DSNUTIL_DB_TS_STRINGLITERAL
+	: STRINGLITERAL
+	{
+		dsnutil_db_ts_char = true;
+	}
+	;
+*/
+
 DSNUTIL_DB_TS_HEX_LIT
 	: [GNX] '\'' [0-9A-Za-z]+ '\''
 	->popMode
