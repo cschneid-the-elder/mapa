@@ -2353,7 +2353,7 @@ dsnutilUCSNullif
 	: (
 	DSNUTIL_NULLIF 
 	(dsnutilUCSFieldSelectionCriterion
-	| (DSNUTIL_LPAREN1 dsnutilUCSFieldSelectionCriterion DSNUTIL_RPAREN1))
+	| (DSNUTIL_LPAREN1 dsnutilUCSFieldSelectionCriterion (DSNUTIL_RPAREN1 | DSNUTIL_DB_TS_RPAREN)))
 	)
 	;
 
@@ -2361,7 +2361,7 @@ dsnutilUCSDefaultif
 	: (
 	DSNUTIL_DEFAULTIF 
 	(dsnutilUCSDefaultifCondition
-	| (DSNUTIL_LPAREN1 dsnutilUCSDefaultifCondition DSNUTIL_RPAREN1))
+	| (DSNUTIL_LPAREN1 dsnutilUCSDefaultifCondition (DSNUTIL_RPAREN1 | DSNUTIL_DB_TS_RPAREN)))
 	)
 	;
 
@@ -4370,7 +4370,6 @@ dsnutilUCSStospace
 	)
 	;
 
-
 dsnutilUCSStogroupName
 	: dsnutilUCSArg
 	;
@@ -4385,7 +4384,7 @@ dsnutilUCSTemplate
 
 dsnutilUCSDsnExpression
 	: (
-	 dsnutilUCSDsnOptions* dsnutilUCSDsnSubsysSpec?
+	 dsnutilUCSDsnOptions+
 	)
 	;
 
@@ -4395,6 +4394,7 @@ dsnutilUCSDsnOptions
 	| dsnutilUCSDsnCommonOptions 
 	| dsnutilUCSDsnDiskOptions
 	| dsnutilUCSDsnTapeOptions
+	| dsnutilUCSDsnSubsysSpec
 	)
 	;
 
@@ -5294,6 +5294,7 @@ dsnutilUCSArg
 	| DSNUTIL_PAREN_IDENTIFIER
 	| DSNUTIL_HEXLIT_WS_CHAR
 	| DSNUTIL_DB_TS_IDENTIFIER
+	| DSNUTIL_DB_TS_HEX_LIT
 	| DSNUTIL_PAREN_NUMBER
 	| (DSNUTIL_DB_TS_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)

@@ -4578,10 +4578,15 @@ DSNUTIL_RPAREN
 	}
 	;
 
+/*
+Equal and not equal pushMode to two different places because
+the former must also work with the UNIT token and the latter
+need not.
+*/
 DSNUTIL_EQUAL
 	: '='
-//	->pushMode(DSNUTIL_DB_TS_MODE)
-	->pushMode(DSNUTIL_GNX_MODE)
+	->pushMode(DSNUTIL_DB_TS_MODE)
+//	->pushMode(DSNUTIL_GNX_MODE)
 	;
 
 DSNUTIL_NOT_EQUAL
@@ -6927,6 +6932,12 @@ DSNUTIL_DB_TS_IDENTIFIER
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
+//TODO obviate the need for GNX_MODE?
+DSNUTIL_DB_TS_HEX_LIT
+	: [GNX] '\'' [0-9A-Za-z]+ '\''
+	->popMode
+	;
+
 mode DSNUTIL_PAREN_MODE;
 /*
 Why are we here?
@@ -6988,9 +6999,14 @@ DSNUTIL_PAREN_COMMA
 	->type(DSNUTIL_COMMA)
 	;
 
+/*
+Equal and not equal pushMode to two different places because
+the former must also work with the UNIT token and the latter
+need not.
+*/
 DSNUTIL_PAREN_EQUAL
 	: DSNUTIL_EQUAL
-	->type(DSNUTIL_EQUAL),pushMode(DSNUTIL_GNX_MODE)
+	->type(DSNUTIL_EQUAL),pushMode(DSNUTIL_DB_TS_MODE)
 	;
 
 DSNUTIL_PAREN_NOT_EQUAL

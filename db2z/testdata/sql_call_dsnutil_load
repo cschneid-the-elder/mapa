@@ -175,7 +175,7 @@ CALL SYSPROC.DSNUTILS(
             C5   POSITION( 18) CHAR(1) NULLIF(C5=' '),  
             C6   POSITION( 20) CHAR(8),                      
             C7   POSITION( 29) CHAR(1),                      
-            C8   POSITION( 31) CHAR(256) DEFAULTIF(C3='GG'))
+            C8   POSITION( 31) CHAR(256) DEFAULTIF(C3<>'GG'))
 ','');
 
 CALL SYSPROC.DSNUTILS(
