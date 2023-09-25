@@ -4755,21 +4755,6 @@ dsnutilUCSQualifiedXmlTablespacename
 	;
 
 
-/*
-I'm not happy with this, but there's at least one test case
-with an unknown parameter/command/utility for which I can
-find no documentation anywhere.  This catches it, and 
-doesn't seem to break anything else.
-
-The trick seems to be to have everything that isn't unknown
-match a greedier rule.
-*/
-dsnutilUCSUnknown
-	: (
-	DSNUTIL_IDENTIFIER+
-	)
-	;
-
 dsnutilArgument3Text
 	: (
 	dsnutilUCSBackup
@@ -4799,7 +4784,6 @@ dsnutilArgument3Text
 	| dsnutilUCSStospace
 	| dsnutilUCSTemplate
 	| dsnutilUCSUnload
-	| dsnutilUCSUnknown
 	)
 	;
 
