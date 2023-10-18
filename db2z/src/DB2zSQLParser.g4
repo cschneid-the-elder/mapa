@@ -3770,8 +3770,34 @@ dsnutilUCSLocateOptions
 dsnutilUCSLocateTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceNameWithLit
-	((dsnutilUCSPartOption2? dsnutilUCSPageOption)
-	| (DSNUTIL_KEY dsnutilUCSArgOptionalParens dsnutilUCSQualifiedIndexNameWithLit))
+	(dsnutilUCSLocateTablespaceSpecPageOption
+	| dsnutilUCSLocateTablespaceSpecKeyOption
+	| dsnutilUCSLocateTablespaceSpecRidOption
+	| dsnutilUCSLocateTablespaceSpecPartOption)
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecKeyOption
+	: (
+	DSNUTIL_KEY dsnutilUCSArgOptionalParens dsnutilUCSQualifiedIndexNameWithLit
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecRidOption
+	: (
+	DSNUTIL_RID DSNUTIL_HEX_LIT
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecPageOption
+	: (
+	DSNUTIL_PAGE DSNUTIL_HEX_LIT
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecPartOption
+	: (
+	dsnutilUCSPartOption2? dsnutilUCSPageOption
 	)
 	;
 

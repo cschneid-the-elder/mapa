@@ -5320,6 +5320,10 @@ DSNUTIL_RI
 	: R I 
 	;
 
+DSNUTIL_RID
+	: R I D
+	;
+
 DSNUTIL_BASE
 	: B A S E
 	;

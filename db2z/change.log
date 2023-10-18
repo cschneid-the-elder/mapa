@@ -11,6 +11,15 @@ DSNUTIL_PAREN_IDENTIFIER
 
 Everything after the statementName in an executeStatement is optional.
 
+...and per IBM...
+
+DB2 13 FL100 add RID and PAGE options to locate-table-space-spec
+
+DB2 13 FL500 SET CURRENT LOCK TIMEOUT which complicated the
+setSpecialRegisterStatement parser rule.
+
+DB2 13 FL501 added DEADLOCK_RESOLUTION_PRIORITY test case.
+
 --2023-09-25--------------------------------------------------------------------
 Unhappy with the STRINGLITERAL changes in the 2023-06-06 version, I investigated
 several other means of dealing with the third parameter of the SYSPROC.DSNUTILx
