@@ -30,3 +30,4 @@
 +	sql_call_dsnutil_template	22	88	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	22	0
 +	sql_call_dsnutil_unload	8	32	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8
 +	sql_NOUPLOAD_call_dsnutilv	2	8	0	0	0	0	0	1	0	0	0	1	0	0	1	0	0	0	0	0	0	18	0	0	0	0	0	4	0
++	sql_NOUPLOAD_call_dsnutil_CR_error	2	8	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	4	0

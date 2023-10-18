@@ -1,3 +1,15 @@
+--2023-10-18--------------------------------------------------------------------
+Maintenance per Martin Rutte...
+
+Changed the definition of the following tokens in the lexer to include '\r' so
+as to prevent a carriage return character from being mistakenly included.
+
+DSNUTIL_IDENTIFIER
+DSNUTIL_DSN_CHAR
+DSNUTIL_DB_TS_IDENTIFIER
+DSNUTIL_PAREN_IDENTIFIER
+
+
 --2023-09-25--------------------------------------------------------------------
 Unhappy with the STRINGLITERAL changes in the 2023-06-06 version, I investigated
 several other means of dealing with the third parameter of the SYSPROC.DSNUTILx
