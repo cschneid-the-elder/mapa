@@ -5838,12 +5838,15 @@ exchangeStatement
 	: (EXCHANGE DATA BETWEEN TABLE tableName AND tableName)
 	;
 
+/*
+The USING part of an EXECUTE statement is optional, per Martijn Rutte.
+*/
 executeStatement
 	: (
 	EXECUTE statementName 
 		((USING (variable | arrayElementSpecification) (COMMA (variable | arrayElementSpecification))*)
 		| (USING DESCRIPTOR descriptorName)
-		| sourceRowData)
+		| sourceRowData)?
 	)
 	;
 
