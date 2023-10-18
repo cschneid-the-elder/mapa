@@ -3765,6 +3765,8 @@ dsnutilUCSLocateOptions
 	)
 	;
 
+
+//TODO add RID and PAGE options from DB2 13 FL100 locate-table-space-spec
 dsnutilUCSLocateTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceNameWithLit
