@@ -6086,7 +6086,19 @@ setSessionTimezoneStatement
 	;
 
 setSpecialRegisterStatement
-	: (SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
+	: (
+	(SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
+	| (SET CURRENT? LOCK (TIMEOUT | MODE_) (TO | EQ)? currentLockTimeoutOptions)
+	)
+	;
+
+currentLockTimeoutOptions
+	: (
+	(NOT? WAIT)
+	| NULL
+	| (WAIT? INTEGERLITERAL)
+	|  setAssignmentTargetVariable
+	)
 	;
 
 signalStatement

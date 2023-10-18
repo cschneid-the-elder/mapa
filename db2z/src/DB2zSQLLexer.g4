@@ -4388,6 +4388,10 @@ WHITESPACE
 	: W H I T E S P A C E
 	;
 
+TIMEOUT
+	: T I M E O U T
+	;
+
 /*
 Noted by Martijn Rutte 2023-06-05, NEWLINE can be present
 between END and CASE.
