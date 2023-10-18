@@ -15,6 +15,11 @@ lexer grammar DB2zSQLLexer;
 @lexer::members {
 	public String statementTerminator = new String("");
 	public int bracketNesting = 0;
+	public Boolean dsnutil = false;
+	public int dsnutilArgc = 0;
+	public Boolean dsnutil_dsn_ws_char = false;
+	public Boolean dsnutil_db_ts_char = false;
+	public Boolean dsnutilLoad = false;
 }
 
 channels { COMMENTS }
@@ -48,10 +53,30 @@ fragment Z:('z'|'Z');
 
 LPAREN
 	: '('
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	->pushMode(DEFAULT_MODE)
 	;
 
 RPAREN
 	: ')'
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		switch (_modeStack.peek()){
+			case DEFAULT_MODE :
+				popMode();
+				break;
+			case DSNUTIL_WHEN_MODE :
+				popMode();
+				popMode();
+				break;
+			default:
+				popMode();
+				popMode();
+				break;
+		}
+	}
 	;
 
 OPENSQBRACKET
@@ -137,6 +162,37 @@ SEMICOLON
 
 COMMA
 	: ','
+	{
+		if (dsnutil) {
+			dsnutilArgc++;
+			//System.out.println("dsnutilArgc = " + dsnutilArgc);
+		}
+	}
+	;
+
+DSNUTIL_OPEN_APOS
+	: '\''
+	{dsnutil && dsnutilArgc == 2}?
+	{
+		//System.out.println("dsnutil && dsnutilArgc == 2 & \'");
+		/*
+		Setting this variable to false is necessary here because 
+		the EXEC SQL online Utility Control Statement may come back
+		through this token if a literal is present in any dynamic
+		SQL being processed.
+		*/
+		dsnutil = false;
+	}
+	->pushMode(DSNUTIL_MODE)
+	;
+
+DSNUTIL_OPEN_QUOTE
+	: '"'
+	{dsnutil && dsnutilArgc == 2}?
+	{
+		//System.out.println("dsnutil && dsnutilArgc == 2 & \"");
+	}
+	->pushMode(DSNUTIL_MODE)
 	;
 
 NONNUMERICLITERAL
@@ -149,41 +205,10 @@ fragment HEXLITERAL
 	| X '\'' [0-9A-F]+ '\''
 	;
 
-/*
-This needs to match...
-
-	'ABC''DEF X'ABCD' 'XYZ%' 123'
-
-...all as one token.  See testdata/sql_call for a real example.
-
-It turns out that SYSPROC.DSNUTILV is very forgiving in what it
-will accept in its third parameter.
-
-Documenting what I tried so I don't make the mistake of trying
-to simplify this later.
-
-trying ('\'' ~[']* '\'') picks up multiple strings all as one
- i.e. 'a', 'b', 'like 'a%'' all three are lexed as one
-
-trying ('\'' [0-9a-zA-Z %_@#$]* '\'') which mismatches "normal" literals
-
-trying ('\'' ~[',]* '\'') which mismatches "normal" literals
-
-trying ('\'' [0-9a-zA-Z%_@#$]* '\'') which seems to work but lacks many characters
-
-trying ('\'' [0-9a-zA-Z !@#$%^&*()\-_=+[\]{}\\|;:.<>/?]*? '\'') which mismatches
-"normal" literals and just seems prone to missing a character
-
-trying ('\'' ~[', ;]* '\'') which seems to work
-
-So, as of 2023-06-06, this is what we've got.  It appears the solution is to
-exclude the string delimiter, the comma, the space, and the semicolon.  The 
-exclusions prevent matching multiple strings as one.  Hopefully no one will 
-need to match an embedded string with those characters.
-*/
 fragment STRINGLITERAL
-	: '"' (~["] | '""' | '\'' | ('"' ~[", ;]* '"'))* '"'
-	| '\'' (~['] | '\'\'' | '"' | ('\'' ~[', ;]* '\''))* '\''
+	: (('"' (~["] | '""' | '\'')* '"')
+	| ('\'' (~['] | '\'\'' | '"')* '\''))
+	{!(dsnutil && dsnutilArgc == 2)}?
 	;
 
 INTEGERLITERAL
@@ -231,6 +256,11 @@ SQLBLOCKCOMMENTBEGIN
 
 SQLBLOCKCOMMENTEND
 	: SPLAT SLASH
+	;
+
+DSNUTIL_ENDEXEC
+	: E N D E X E C
+	->popMode
 	;
 
 INSTEAD
@@ -4433,9 +4463,3141 @@ identifiers could then refer to both.  I'm not sure this is necessary.
 */
 SQLIDENTIFIER
 	: [a-zA-Z0-9@#$_]+
+	{
+		if (getText().equalsIgnoreCase("DSNUTILV")
+		||  getText().equalsIgnoreCase("DSNUTILU")
+		||  getText().equalsIgnoreCase("DSNUTILS")) {
+			dsnutil = true;
+			dsnutilLoad = false;
+			//System.out.println("dsnutil matched");
+		}
+	}
 	;
 
 UNIDENTIFIED
 	: .
 	;
+
+mode DSNUTIL_MODE;
+/*
+Why are we here?
+
+The SYSPROC.DSNUTILx stored procedures are very forgiving of the
+content of their third parameter.  It may look like this...
+
+	'TEMPLATE REOCP DSN(''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'')'
+
+...or...
+
+	'TEMPLATE REOCP DSN ''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'''
+	
+...or...
+
+	'TEMPLATE REOCP DSN 'X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.''
+	
+...or...
+
+	'TEMPLATE REOCP DSN X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'
+
+...or...
+
+	  'TEMPLATE REOCP DSN(''X&DB(1,3)..&DB..&SN..XXXX.DB2&IC.IC.&UQ.'') UNIT VTSSALL VOLCNT 99 RETPD 17 STACK YES
+        TEMPLATE REODC DSN(''X&DB(1,3)..&DB..&SN..P&PA..DB2XX(+1)'') GDGLIMIT 7 DISP (NEW,CATLG,DELETE) DATACLAS DCFILE
+        TEMPLATE REOPU DSN(''X&DB(1,3)..&DB..&SN..P&PA..DB2YY(+1)'') GDGLIMIT 7 DISP (NEW,CATLG,DELETE) DATACLAS DCFILE  
+ REORG TABLESPACE DB01.TS01 SHRLEVEL CHANGE LOG NO NOSYSREC COPYDDN (REOCP) SORTDEVT SYSDA SORTNUM 40 SORTKEYS  DRAIN_WAIT 30 RETRY 10 RETRY_DELAY 180 MAXRO 50 DRAIN ALL LONGLOG CONTINUE TIMEOUT TERM  FASTSWITCH YES  DISCARD FROM TABLE T1 WHEN (C1 LIKE ') ; "%') STATISTICS TABLE(ALL) INDEX(ALL) KEYCARD FREQVAL NUMCOLS 5 COUNT 10
+ REORG TABLESPACE DB01.TS02 SHRLEVEL CHANGE LOG NO NOSYSREC COPYDDN (REOCP) SORTDEVT SYSDA SORTNUM 40 SORTKEYS  DRAIN_WAIT 30 RETRY 10 RETRY_DELAY 180 MAXRO 50 DRAIN ALL LONGLOG CONTINUE TIMEOUT TERM  FASTSWITCH YES  DISCARD FROM TABLE T2 WHEN (C1 LIKE '( , )) , %') STATISTICS TABLE(ALL) INDEX(ALL) KEYCARD FREQVAL NUMCOLS 5 COUNT 10
+ REORG TABLESPACE DB01.TS03 SHRLEVEL CHANGE LOG NO NOSYSREC COPYDDN (REOCP) SORTDEVT SYSDA SORTNUM 40 SORTKEYS  DRAIN_WAIT 30 RETRY 10 RETRY_DELAY 180 MAXRO 50 DRAIN ALL LONGLOG CONTINUE TIMEOUT TERM  FASTSWITCH YES  DISCARD FROM TABLE T3 WHEN (C1 LIKE X'416C') STATISTICS TABLE(ALL) INDEX(ALL) KEYCARD FREQVAL NUMCOLS 5 COUNT 10
+ '
+
+...and trying to write a single ANTLR rule that matches all of that
+third parameter and stops at the terminating apostrophe has proven 
+difficult.  Several attempts, including embedding a state machine to
+scan for the terminating closing parenthesis, failed.  If this is not
+self-evident, pay attention to what appear to be opening and closing
+apostrophes in each example.
+
+So here we are, knowing that we are processing the third parameter
+to SYSPROC.DSNUTILx, and that the opening apostrophe (or quote) has
+been detected.
+
+Things get a little messy from this point on.  Lots of modes, and 
+transferring between them is done... creatively.
+
+Remember to add any new keywords to the dsnutilUCSKeyword parser rule,
+to catch anyone who wants to name their list "LIST" or their workddn
+"WORKDDN" or other such perfectly legitimate.
+
+This is essentially an "embedded" lexer just for the third parameter
+to SYSPROC.DSNUTILx.  We also have a corresponding "embedded"
+parser just for SYSPROC.DSNUTILx's third parameter.
+*/
+
+DSNUTIL_DOUBLE_APOS
+	: '\'\''
+	;
+
+DSNUTIL_CLOSE_APOS
+	: '\''
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
+	}
+	->popMode
+	;
+
+DSNUTIL_DOUBLE_QUOTE
+	: '""'
+	;
+
+DSNUTIL_CLOSE_QUOTE
+	: '"'
+	{
+		dsnutil = false;
+		dsnutilArgc = 0;
+		dsnutil_dsn_ws_char = false;
+	}
+	->popMode
+	;
+
+DSNUTIL_LPAREN
+	: LPAREN
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_RPAREN
+	: RPAREN
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	;
+
+DSNUTIL_EQUAL
+	: '='
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_NOT_EQUAL
+	: '<>'
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_BACKUP
+	: B A C K U P
+	;
+
+DSNUTIL_SYSTEM
+	: SYSTEM
+	;
+
+DSNUTIL_FULL
+	: FULL
+	;
+
+DSNUTIL_ALTERNATE_CP
+	: A L T E R N A T E '_' C P
+	;
+
+DSNUTIL_DBBSG
+	: D B B S G
+	;
+
+DSNUTIL_LGBSG
+	: L G B S G
+	;
+
+DSNUTIL_ESTABLISH
+	: E S T A B L I S H
+	;
+
+DSNUTIL_END
+	: END
+	;
+
+DSNUTIL_FCINCREMENTAL
+	: F C I N C R E M E N T A L
+	;
+
+DSNUTIL_FORCE
+	: F O R C E
+	;
+
+DSNUTIL_DUMP
+	: D U M P
+	;
+
+DSNUTIL_DUMPONLY
+	: D U M P O N L Y
+	;
+
+DSNUTIL_DUMPCLASS
+	: D U M P C L A S S
+	;
+
+DSNUTIL_TOKEN
+	: T O K E N
+	;
+
+DSNUTIL_CATMAINT
+	: C A T M A I N T
+	;
+
+DSNUTIL_UPDATE
+	: UPDATE
+	;
+
+DSNUTIL_LEVEL
+	: L E V E L
+	;
+
+DSNUTIL_UNLDDN
+	: U N L D D N
+	;
+
+DSNUTIL_SCHEMA
+	: SCHEMA
+	;
+
+DSNUTIL_SWITCH
+	: S W I T C H
+	;
+
+DSNUTIL_OWNER_FROM
+	: OWNER (WS | NEWLINE)+ FROM
+	;
+
+DSNUTIL_TO_ROLE
+	: TO (WS | NEWLINE)+ ROLE
+	;
+
+DSNUTIL_VCAT
+	: V C A T
+	;
+
+DSNUTIL_UTILX
+	: U T I L X
+	;
+
+DSNUTIL_BASIC
+	: B A S I C
+	;
+
+DSNUTIL_EXTENDED
+	: E X T E N D E D
+	;
+
+DSNUTIL_LIBRARY
+	: L I B R A R Y
+	;
+
+DSNUTIL_PDS
+	: P D S
+	;
+
+DSNUTIL_HFS
+	: H F S
+	;
+
+DSNUTIL_NULL
+	: N U L L
+	;
+
+DSNUTIL_LARGE
+	: L A R G E
+	;
+
+DSNUTIL_EXTREQ
+	: E X T R E Q
+	;
+
+DSNUTIL_EXTPREF
+	: E X T P R E F
+	;
+
+DSNUTIL_EATTR
+	: E A T T R
+	;
+
+DSNUTIL_RESET
+	: RESET
+	;
+
+DSNUTIL_RESET_ACCESSPATH
+	: DSNUTIL_RESET (WS | NEWLINE)+ DSNUTIL_ACCESSPATH
+	;
+
+DSNUTIL_WHEN
+	: WHEN
+	{
+		if (dsnutilLoad) {
+			break;
+		} else {
+			pushMode(DSNUTIL_WHEN_MODE);
+		}
+	}
+	;
+
+DSNUTIL_EXPDL
+	: E X P D L
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_COLDEL
+	: C O L D E L
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_CHARDEL
+	: C H A R D E L
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_DECPT
+	: D E C P T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_WS
+	: (WS | NEWLINE)+
+	->channel(HIDDEN)
+	;
+
+DSNUTIL_DSNTYPE
+	: D S N T Y P E
+	;
+
+DSNUTIL_DSNUM
+	: D S N U M
+	;
+
+DSNUTIL_SHOWDSNS
+	: S H O W D S N S
+	;
+
+DSNUTIL_DSN
+	: D S N
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_MODELDCB
+	: M O D E L D C B
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_FROMCOPY
+	: F R O M C O P Y
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_TABLESPACESET
+	: T A B L E S P A C E S E T
+	;
+
+DSNUTIL_TABLESPACES
+	: T A B L E S P A C E S
+	;
+
+DSNUTIL_TABLESPACE
+	: T A B L E S P A C E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+In this case, we have the TABLESPACE token followed
+by the LIST token (probably) in a REORG TABLESPACE
+command.  We're setting up for the next token, which
+is a list name and thus we behave as we do for the
+LIST token.
+*/
+DSNUTIL_TABLESPACE_LIST
+	: T A B L E S P A C E (WS | NEWLINE)+ L I S T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INDEXSPACES
+	: I N D E X S P A C E S
+	;
+
+DSNUTIL_INDEXSPACE
+	: I N D E X S P A C E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+In this case, we have the INDEXSPACE token followed
+by the LIST token (probably) in a REBUILD INDEX
+command.  We're setting up for the next token, which
+is a list name and thus we behave as we do for the
+LIST token.
+*/
+DSNUTIL_INDEXSPACE_LIST
+	: I N D E X S P A C E (WS | NEWLINE)+ L I S T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INDEXES
+	: I N D E X E S
+	;
+
+DSNUTIL_INDEX
+	: I N D E X
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+In this case, we have the INDEX token followed
+by the LIST token (probably) in a REBUILD INDEX
+command.  We're setting up for the next token, which
+is a list name and thus we behave as we do for the
+LIST token.
+*/
+DSNUTIL_INDEX_LIST
+	: I N D E X (WS | NEWLINE)+ L I S T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_MAPPINGTABLE
+	: M A P P I N G T A B L E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_MAPPINGDATABASE
+	: M A P P I N G D A T A B A S E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_STOGROUP
+	: S T O G R O U P
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_TABLESAMPLE
+	: T A B L E S A M P L E
+	;
+
+DSNUTIL_REPEATABLE
+	: R E P E A T A B L E
+	;
+
+DSNUTIL_TABLES
+	: T A B L E S
+	;
+
+DSNUTIL_TABLE
+	: T A B L E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_DATABASE
+	: D A T A B A S E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_OBD
+	: O B D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_FROM_TABLESPACE
+	: FROM (WS | NEWLINE)+ TABLESPACE
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_FROM_TABLE
+	: FROM (WS | NEWLINE)+ TABLE
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_FROMVOLUME
+	: F R O M V O L U M E
+	;
+
+DSNUTIL_FROMCOPYDDN
+	: F R O M C O P Y D D N
+	;
+
+DSNUTIL_FROM
+	: FROM
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+/*
+Documentation does not mention apostrophes around the
+possible timestamp literal following these next 2 tokens.  Examples
+do not show apostrophes, but it's possible they are allowed.
+*/
+
+DSNUTIL_DEADLINE
+	: D E A D L I N E
+	;
+
+DSNUTIL_SWITCHTIME
+	: S W I T C H T I M E
+	;
+
+DSNUTIL_EXEC_SQL
+	: E X E C (WS | NEWLINE)+ S Q L
+	->pushMode(DEFAULT_MODE)
+	;
+
+DSNUTIL_TRACEID
+	: T R A C E I D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_TORBA
+	: T O R B A
+	;
+
+DSNUTIL_TOLOGPOINT
+	: T O L O G P O I N T
+	;
+
+DSNUTIL_RESTOREBEFORE
+	: R E S T O R E B E F O R E
+	;
+
+DSNUTIL_PAGE
+	: P A G E
+	;
+
+DSNUTIL_ROWID
+	: R O W I D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_RBALRSN_CONVERSION
+	: R B A L R S N '_' C O N V E R S I O N
+	;
+
+DSNUTIL_SETCURRENTVERSION
+	: S E T C U R R E N T V E R S I O N
+	;
+
+DSNUTIL_VERSION
+	: V E R S I O N
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_DOCID
+	: D O C I D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_CONST
+	: C O N S T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_IMPLICIT_TZ
+	: I M P L I C I T '_' T Z
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_KEYCARD
+	: K E Y C A R D
+	;
+
+DSNUTIL_SORTKEYS
+	: S O R T K E Y S
+	;
+
+DSNUTIL_SHOWKEYLABEL
+	: S H O W K E Y L A B E L
+	;
+
+DSNUTIL_KEY
+	: K E Y
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_DATACLAS
+	: D A T A C L A S
+	;
+
+DSNUTIL_MGMTCLAS
+	: M G M T C L A S
+	;
+
+DSNUTIL_STORCLAS
+	: S T O R C L A S
+	;
+
+DSNUTIL_DATA_ONLY
+	: D A T A (WS | NEWLINE)+ O N L Y
+	;
+
+DSNUTIL_CHECK_DATA
+	: C H E C K (WS | NEWLINE)+ D A T A
+	;
+
+DSNUTIL_CHECK_INDEX
+	: C H E C K (WS | NEWLINE)+ I N D E X
+	;
+
+DSNUTIL_CHECK_INDEX_LIST
+	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)+ L I S T
+	;
+
+DSNUTIL_CHECK_INDEX_OPEN_PAREN
+	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)* '('
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_CHECK_INDEX_ALL
+	: C H E C K (WS | NEWLINE)+ I N D E X (WS | NEWLINE)* '(' + (WS | NEWLINE)* A L L (WS | NEWLINE)* ')'
+	;
+
+DSNUTIL_CHECK_LOB
+	: C H E C K (WS | NEWLINE)+ L O B
+	;
+
+DSNUTIL_CHANGELIMIT
+	: C H A N G E L I M I T
+	;
+
+DSNUTIL_REPORTONLY
+	: R E P O R T O N L Y
+	;
+
+DSNUTIL_COPYDDN
+	: C O P Y D D N
+	;
+
+DSNUTIL_RECOVERYDDN
+	: R E C O V E R Y D D N
+	;
+
+DSNUTIL_FILTERDDN
+	: F I L T E R D D N
+	;
+
+DSNUTIL_CONCURRENT
+	: C O N C U R R E N T
+	;
+
+DSNUTIL_COPY
+	: C O P Y
+	;
+
+DSNUTIL_TAPEUNITS
+	: T A P E U N I T S
+	;
+
+DSNUTIL_CHECKPAGE
+	: C H E C K P A G E
+	;
+
+DSNUTIL_NOCHECKPAGE
+	: N O C H E C K P A G E
+	;
+
+DSNUTIL_SYSTEMPAGES
+	: S Y S T E M P A G E S
+	;
+
+DSNUTIL_FLASHCOPY
+	: F L A S H C O P Y
+	;
+
+DSNUTIL_CONSISTENT
+	: C O N S I S T E N T
+	;
+
+DSNUTIL_FCCOPYDDN
+	: F C C O P Y D D N
+	;
+
+DSNUTIL_SKIP_LOCKED_DATA
+	: S K I P (WS | NEWLINE)+ LOCKED (WS | NEWLINE)+ DATA
+	;
+
+DSNUTIL_UNLOAD_DATA
+	: U N L O A D (WS | NEWLINE)+ DATA
+	;
+
+DSNUTIL_DATA
+	: D A T A
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_OFFSET
+	: O F F S E T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_LENGTH
+	: L E N G T H
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INSERTVERSIONPAGES
+	: I N S E R T V E R S I O N P A G E S
+	;
+
+DSNUTIL_PAGES
+	: P A G E S
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_DBID
+	: D B I D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_TEXT
+	: T E X T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PART
+	: P A R T
+	;
+
+DSNUTIL_INCLUDE
+	: I N C L U D E
+	;
+
+DSNUTIL_XML
+	: X M L
+	;
+
+DSNUTIL_CLONE
+	: C L O N E
+	;
+
+DSNUTIL_SHRLEVEL
+	: S H R L E V E L
+	;
+
+DSNUTIL_REFERENCE
+	: R E F E R E N C E
+	;
+
+DSNUTIL_CHANGE
+	: C H A N G E
+	;
+
+DSNUTIL_DRAIN_WAIT
+	: D R A I N '_' W A I T
+	;
+
+DSNUTIL_RETRY
+	: R E T R Y
+	;
+
+DSNUTIL_RETRY_DELAY
+	: R E T R Y '_' D E L A Y
+	;
+
+DSNUTIL_SCOPE
+	: S C O P E
+	;
+
+DSNUTIL_PENDING
+	: P E N D I N G
+	;
+
+DSNUTIL_AUXONLY
+	: A U X O N L Y
+	;
+
+DSNUTIL_ALL
+	: A L L
+	;
+
+DSNUTIL_REFONLY
+	: R E F O N L Y
+	;
+
+DSNUTIL_XMLSCHEMAONLY
+	: X M L S C H E M A O N L Y
+	;
+
+DSNUTIL_AUXERROR
+	: A U X E R R O R
+	;
+
+DSNUTIL_REPORT
+	: R E P O R T
+	;
+
+DSNUTIL_INVALIDATE
+	: I N V A L I D A T E
+	;
+
+DSNUTIL_LOBERROR
+	: L O B E R R O R
+	;
+
+DSNUTIL_XMLERROR
+	: X M L E R R O R
+	;
+
+DSNUTIL_FOR
+	: F O R
+	;
+
+DSNUTIL_EXCEPTION
+	: E X C E P T I O N
+	->pushMode(DSNUTIL_EXCEPTION_MODE)
+	;
+
+DSNUTIL_DELETE
+	: D E L E T E
+	;
+
+DSNUTIL_YES
+	: Y E S
+	;
+
+DSNUTIL_NO
+	: N O
+	;
+
+DSNUTIL_LOG
+	: L O G
+	;
+
+DSNUTIL_EXCEPTIONS
+	: E X C E P T I O N S
+	;
+
+DSNUTIL_ERRDDN
+	: E R R D D N
+	;
+
+DSNUTIL_WORKDDN
+	: W O R K D D N
+	;
+
+DSNUTIL_PUNCHDDN
+	: P U N C H D D N
+	;
+
+DSNUTIL_SORTDEVT
+	: S O R T D E V T
+	;
+
+DSNUTIL_SORTNUM
+	: S O R T N U M
+	;
+
+DSNUTIL_XMLSCHEMA
+	: X M L S C H E M A
+	;
+
+DSNUTIL_LISTDEF
+	: L I S T D E F
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_LIST
+	: L I S T
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_EXCLUDE
+	: E X C L U D E
+	;
+
+DSNUTIL_CLONED
+	: C L O N E D
+	;
+
+DSNUTIL_DEFINED
+	: D E F I N E D
+	;
+
+DSNUTIL_RI
+	: R I 
+	;
+
+DSNUTIL_BASE
+	: B A S E
+	;
+
+DSNUTIL_LOB
+	: L O B
+	;
+
+DSNUTIL_HISTORY
+	: H I S T O R Y
+	;
+
+DSNUTIL_ARCHIVE
+	: A R C H I V E
+	;
+
+DSNUTIL_PARTLEVEL
+	: P A R T L E V E L
+	;
+
+DSNUTIL_PARALLEL
+	: PARALLEL
+	;
+
+DSNUTIL_COPYTOCOPY
+	: C O P Y T O C O P Y
+	;
+
+DSNUTIL_FROMLASTCOPY
+	: F R O M L A S T C O P Y
+	;
+
+DSNUTIL_FROMLASTFULLCOPY
+	: F R O M L A S T F U L L C O P Y
+	;
+
+DSNUTIL_FROMLASTINCRCOPY
+	: F R O M L A S T I N C R C O P Y
+	;
+
+DSNUTIL_FROMLASTFLASHCOPY
+	: F R O M L A S T F L A S H C O P Y
+	;
+
+DSNUTIL_CATALOG
+	: C A T A L O G
+	;
+
+DSNUTIL_FROMSEQNO
+	: F R O M S E Q N O
+	;
+
+DSNUTIL_DIAGNOSE
+	: D I A G N O S E
+	;
+
+DSNUTIL_TYPE
+	: T Y P E
+	;
+
+DSNUTIL_ALLDUMPS
+	: A L L D U M P S
+	;
+
+DSNUTIL_NODUMPS
+	: N O D U M P S
+	;
+
+DSNUTIL_SYSUTIL
+	: S Y S U T I L
+	;
+
+DSNUTIL_MEPL
+	: M E P L
+	;
+
+DSNUTIL_AVAILABLE
+	: A V A I L A B L E
+	;
+
+DSNUTIL_RBLP
+	: R B L P
+	;
+
+DSNUTIL_WAIT
+	: W A I T
+	;
+
+DSNUTIL_MESSAGE
+	: M E S S A G E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_INSTANCE
+	: I N S T A N C E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_ABEND
+	: A B E N D
+	;
+
+DSNUTIL_NODUMP
+	: N O D U M P
+	;
+
+DSNUTIL_DISPLAY
+	: D I S P L A Y
+	;
+
+DSNUTIL_DBET
+	: D B E T
+	;
+
+DSNUTIL_BUFNO
+	: B U F N O
+	;
+
+DSNUTIL_RETPD
+	: R E T P D
+	;
+
+DSNUTIL_VOLUMES
+	: V O L U M E S
+	;
+
+DSNUTIL_VOLCNT
+	: V O L C N T
+	;
+
+DSNUTIL_UNCNT
+	: U N C N T
+	;
+
+DSNUTIL_GDGLIMIT
+	: G D G L I M I T
+	;
+
+DSNUTIL_DISP
+	: D I S P
+	;
+
+DSNUTIL_LIMIT
+	: L I M I T
+	;
+
+DSNUTIL_TIME
+	: T I M E
+	;
+
+DSNUTIL_BLKSZLIM
+	: B L K S Z L I M
+	;
+
+DSNUTIL_BLKSZLIM_SUFFIX
+	: [KMG]
+	;
+
+DSNUTIL_SPACE
+	: S P A C E
+	;
+
+DSNUTIL_PCTPRIME
+	: P C T P R I M E
+	;
+
+DSNUTIL_MAXPRIME
+	: M A X P R I M E
+	;
+
+DSNUTIL_NBRSECND
+	: N B R S E C N D
+	;
+
+DSNUTIL_DIR
+	: D I R
+	;
+
+DSNUTIL_STACK
+	: S T A C K
+	;
+
+DSNUTIL_TRTCH
+	: T R T C H
+	;
+
+DSNUTIL_NONE
+	: N O N E
+	;
+
+DSNUTIL_COMP
+	: C O M P
+	;
+
+DSNUTIL_NOCOMP
+	: N O C O M P
+	;
+
+DSNUTIL_SUBSYS
+	: S U B S Y S
+	;
+
+DSNUTIL_LRECL
+	: L R E C L
+	;
+
+DSNUTIL_RECFM
+	: R E C F M
+	;
+
+DSNUTIL_FILEDATA
+	: F I L E D A T A
+	;
+
+DSNUTIL_RECORD
+	: R E C O R D
+	;
+
+DSNUTIL_BINARY
+	: B I N A R Y
+	;
+
+DSNUTIL_PATHOPTS
+	: P A T H O P T S
+	;
+
+DSNUTIL_PATHMODE
+	: P A T H M O D E
+	;
+
+DSNUTIL_PATHDISP
+	: P A T H D I S P
+	;
+
+DSNUTIL_TEMPLATE
+	: T E M P L A T E
+	;
+
+DSNUTIL_PATH
+	: P A T H
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_UNIT
+	: U N I T
+	;
+
+DSNUTIL_CURRENT_DATE
+	: CURRENT_DATE
+	;
+
+DSNUTIL_CURRENT_TIMESTAMP
+	: CURRENT_TIMESTAMP
+	;
+
+DSNUTIL_YEAR
+	: Y E A R 
+	;
+
+DSNUTIL_YEARS
+	: Y E A R S 
+	;
+
+DSNUTIL_MONTH
+	: M O N T H 
+	;
+
+DSNUTIL_MONTHS
+	: M O N T H S 
+	;
+
+DSNUTIL_DAY
+	: D A Y 
+	;
+
+DSNUTIL_DAYS
+	: D A Y S 
+	;
+
+DSNUTIL_HOUR
+	: H O U R 
+	;
+
+DSNUTIL_HOURS
+	: H O U R S 
+	;
+
+DSNUTIL_MINUTE
+	: M I N U T E 
+	;
+
+DSNUTIL_MINUTES
+	: M I N U T E S 
+	;
+
+DSNUTIL_SECOND
+	: S E C O N D 
+	;
+
+DSNUTIL_SECONDS
+	: S E C O N D S 
+	;
+
+DSNUTIL_MICROSECOND
+	: M I C R O S E C O N D 
+	;
+
+DSNUTIL_MICROSECONDS
+	: M I C R O S E C O N D S 
+	;
+
+DSNUTIL_OVERRIDE
+	: O V E R R I D E 
+	;
+
+DSNUTIL_DECFLOAT_ROUNDMODE
+	: D E C F L O A T '_' R O U N D M O D E 
+	;
+
+DSNUTIL_ROUND_CEILING
+	: R O U N D '_' C E I L I N G 
+	;
+
+DSNUTIL_ROUND_DOWN
+	: R O U N D '_' D O W N 
+	;
+
+DSNUTIL_ROUND_FLOOR
+	: R O U N D '_' F L O O R 
+	;
+
+DSNUTIL_ROUND_HALF_DOWN
+	: R O U N D '_' H A L F '_' D O W N 
+	;
+
+DSNUTIL_ROUND_HALF_EVEN
+	: R O U N D '_' H A L F '_' E V E N 
+	;
+
+DSNUTIL_ROUND_HALF_UP
+	: R O U N D '_' H A L F '_' U P 
+	;
+
+DSNUTIL_ROUND_UP
+	: R O U N D '_' U P 
+	;
+
+DSNUTIL_IGNORE
+	: I G N O R E
+	;
+
+DSNUTIL_FORMAT
+	: F O R M A T
+	;
+
+DSNUTIL_SQLDS
+	: S Q L '/' D S
+	;
+
+DSNUTIL_INTERNAL
+	: I N T E R N A L
+	;
+
+DSNUTIL_DELIMITED
+	: D E L I M I T E D
+	;
+
+DSNUTIL_SPANNED
+	: S P A N N E D
+	;
+
+DSNUTIL_FREQVAL
+	: F R E Q V A L
+	;
+
+DSNUTIL_NUMCOLS
+	: N U M C O L S
+	;
+
+DSNUTIL_COUNT
+	: C O U N T
+	;
+
+DSNUTIL_MOST
+	: M O S T
+	;
+
+DSNUTIL_BOTH
+	: B O T H
+	;
+
+DSNUTIL_LEAST
+	: L E A S T
+	;
+
+DSNUTIL_HISTOGRAM
+	: H I S T O G R A M
+	;
+
+DSNUTIL_NUMQUANTILES
+	: N U M Q U A N T I L E S
+	;
+
+DSNUTIL_COLGROUP
+	: C O L G R O U P
+	;
+
+DSNUTIL_FORCEROLLUP
+	: F O R C E R O L L U P
+	;
+
+DSNUTIL_STATCLGMEMSRT
+	: S T A T C L G M E M S R T
+	;
+
+DSNUTIL_INVALIDATECACHE
+	: I N V A L I D A T E C A C H E
+	;
+
+DSNUTIL_ACCESSPATH
+	: A C C E S S P A T H
+	;
+
+DSNUTIL_STATISTICS
+	: S T A T I S T I C S
+	;
+
+DSNUTIL_RESUME
+	: R E S U M E
+	;
+
+DSNUTIL_CONTINUEIF
+	: C O N T I N U E I F
+	;
+
+DSNUTIL_INDDN
+	: I N D D N
+	;
+
+DSNUTIL_DISCARDDN
+	: D I S C A R D D N
+	;
+
+DSNUTIL_NUMRECS
+	: N U M R E C S
+	;
+
+DSNUTIL_KEEPDICTIONARY
+	: K E E P D I C T I O N A R Y
+	;
+
+DSNUTIL_PREFORMAT
+	: P R E F O R M A T
+	;
+
+DSNUTIL_INCURSOR
+	: I N C U R S O R
+	;
+
+DSNUTIL_IGNOREFIELDS
+	: I G N O R E F I E L D S
+	;
+
+DSNUTIL_REPLACE
+	: R E P L A C E 
+	;
+
+DSNUTIL_COLUMN
+	: C O L U M N 
+	;
+
+DSNUTIL_PROFILE
+	: P R O F I L E 
+	;
+
+DSNUTIL_SAMPLE
+	: S A M P L E 
+	;
+
+DSNUTIL_AUTO
+	: A U T O 
+	;
+
+DSNUTIL_UNLOAD
+	: U N L O A D 
+	;
+
+DSNUTIL_PLUS
+	: '+' 
+	;
+
+DSNUTIL_MINUS
+	: '-' 
+	;
+
+DSNUTIL_INTO
+	: I N T O 
+	;
+
+DSNUTIL_REUSE
+	: R E U S E 
+	;
+
+DSNUTIL_TRUNCATE
+	: T R U N C A T E 
+	;
+
+DSNUTIL_LOAD
+	: L O A D 
+	{
+		dsnutilLoad = true;
+	}
+	;
+
+DSNUTIL_LOAD_DATA
+	: L O A D (WS | NEWLINE)+ D A T A
+	{
+		dsnutilLoad = true;
+	}
+	;
+
+DSNUTIL_IDENTITYOVERRIDE
+	: I D E N T I T Y O V E R R I D E
+	;
+
+DSNUTIL_PERIODOVERRIDE
+	: P E R I O D O V E R R I D E
+	;
+
+DSNUTIL_TRANSIDOVERRIDE
+	: T R A N S I D O V E R R I D E
+	;
+
+DSNUTIL_REORG
+	: R E O R G
+	{
+		dsnutilLoad = false;
+	}
+	;
+
+DSNUTIL_COPYDICTIONARY
+	: C O P Y D I C T I O N A R Y 
+	;
+
+DSNUTIL_PRESORTED
+	: P R E S O R T E D 
+	;
+
+DSNUTIL_PRESORT
+	: P R E S O R T 
+	;
+
+DSNUTIL_ROWFORMAT
+	: R O W F O R M A T 
+	;
+
+DSNUTIL_RRF
+	: R R F 
+	;
+
+DSNUTIL_BRF
+	: B R F 
+	;
+
+DSNUTIL_NOCOPYPEND
+	: N O C O P Y P E N D 
+	;
+
+DSNUTIL_EBCDIC
+	: E B C D I C 
+	;
+
+DSNUTIL_ASCII
+	: A S C I I 
+	;
+
+DSNUTIL_UNICODE
+	: U N I C O D E 
+	;
+
+DSNUTIL_NOSUBS
+	: N O S U B S 
+	;
+
+DSNUTIL_ENFORCE
+	: E N F O R C E 
+	;
+
+DSNUTIL_CONSTRAINTS
+	: C O N S T R A I N T S 
+	;
+
+DSNUTIL_NOCHECKPEND
+	: N O C H E C K P E N D 
+	;
+
+DSNUTIL_MAPDDN
+	: M A P D D N 
+	;
+
+DSNUTIL_DISCARDS
+	: D I S C A R D S 
+	;
+
+DSNUTIL_BACKOUT
+	: B A C K O U T 
+	;
+
+DSNUTIL_INDEXDEFER
+	: I N D E X D E F E R 
+	;
+
+DSNUTIL_NPI
+	: N P I 
+	;
+
+DSNUTIL_NONUNIQUE
+	: N O N U N I Q U E 
+	;
+
+DSNUTIL_UPDMAXASSIGNEDVAL
+	: U P D M A X A S S I G N E D V A L 
+	;
+
+DSNUTIL_DEFINEAUX
+	: D E F I N E A U X 
+	;
+
+DSNUTIL_READERS
+	: R E A D E R S 
+	;
+
+DSNUTIL_KEEP_EMPTY_PAGES
+	: K E E P '_' E M P T Y '_' P A G E S 
+	;
+
+DSNUTIL_FLOAT
+	: F L O A T
+	;
+
+DSNUTIL_DOUBLE
+	: D O U B L E
+	;
+
+DSNUTIL_REAL
+	: R E A L
+	;
+
+DSNUTIL_CCSID
+	: C C S I D
+	;
+
+DSNUTIL_WITH_TIME_ZONE
+	: W I T H (WS | NEWLINE)+ T I M E (WS | NEWLINE)+ Z O N E
+	;
+
+DSNUTIL_USE
+	: U S E
+	;
+
+DSNUTIL_COMMA
+	: COMMA
+	;
+
+DSNUTIL_MERGECOPY
+	: M E R G E C O P Y
+	;
+
+DSNUTIL_NEWCOPY
+	: N E W C O P Y
+	;
+
+DSNUTIL_MODIFY
+	: M O D I F Y
+	;
+
+DSNUTIL_RECOVERY
+	: R E C O V E R Y
+	;
+
+DSNUTIL_AGE
+	: A G E
+	;
+
+DSNUTIL_DATE
+	: D A T E
+	;
+
+DSNUTIL_DELETEDS
+	: D E L E T E D S
+	;
+
+DSNUTIL_RETAIN
+	: R E T A I N
+	;
+
+DSNUTIL_LAST
+	: L A S T
+	;
+
+DSNUTIL_LOGLIMIT
+	: L O G L I M I T
+	;
+
+DSNUTIL_ONLY
+	: O N L Y
+	;
+
+DSNUTIL_OPTIONS
+	: O P T I O N S
+	;
+
+DSNUTIL_OFF
+	: O F F 
+	;
+
+DSNUTIL_PREVIEW
+	: P R E V I E W
+	;
+
+DSNUTIL_LISTDEFDD
+	: L I S T D E F D D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_TEMPLATEDD
+	: T E M P L A T E D D
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_FILSZ
+	: F I L S Z
+	;
+
+DSNUTIL_EVENT
+	: E V E N T
+	;
+
+DSNUTIL_ITEMERROR
+	: I T E M E R R O R
+	;
+
+DSNUTIL_HALT
+	: H A L T
+	;
+
+DSNUTIL_SKIP
+	: S K I P
+	;
+
+DSNUTIL_WARNING
+	: W A R N I N G
+	;
+
+DSNUTIL_RC0
+	: R C '0'
+	;
+
+DSNUTIL_RC4
+	: R C '4'
+	;
+
+DSNUTIL_RC8
+	: R C '8'
+	;
+
+DSNUTIL_QUIESCE
+	: Q U I E S C E
+	;
+
+DSNUTIL_WRITE
+	: W R I T E
+	;
+
+DSNUTIL_REBUILD
+	: R E B U I L D
+	;
+
+DSNUTIL_MAXRO
+	: M A X R O
+	;
+
+DSNUTIL_LONGLOG
+	: L O N G L O G
+	;
+
+DSNUTIL_DELAY
+	: D E L A Y
+	;
+
+DSNUTIL_DEFER
+	: D E F E R
+	;
+
+DSNUTIL_CONTINUE
+	: C O N T I N U E
+	;
+
+DSNUTIL_TERM
+	: T E R M
+	;
+
+DSNUTIL_DRAIN
+	: D R A I N
+	;
+
+DSNUTIL_RECOVER
+	: R E C O V E R
+	;
+
+DSNUTIL_LOCALSITE
+	: L O C A L S I T E
+	;
+
+DSNUTIL_LOGRANGES
+	: L O G R A N G E S
+	;
+
+DSNUTIL_VERIFYSET
+	: V E R I F Y S E T
+	;
+
+DSNUTIL_LOGONLY
+	: L O G O N L Y
+	;
+
+DSNUTIL_CURRENTCOPYONLY
+	: C U R R E N T C O P Y O N L Y
+	;
+
+DSNUTIL_FROMDUMP
+	: F R O M D U M P
+	;
+
+DSNUTIL_FLASHCOPY_PPRCP
+	: F L A S H C O P Y '_' P P R C P
+	;
+
+DSNUTIL_TOCOPY
+	: T O C O P Y
+	->pushMode(DSNUTIL_DSN_MODE)
+	;
+
+DSNUTIL_TOLASTCOPY
+	: T O L A S T C O P Y
+	;
+
+DSNUTIL_TOLASTFULLCOPY
+	: T O L A S T F U L L C O P Y
+	;
+
+DSNUTIL_ERROR
+	: E R R O R
+	;
+
+DSNUTIL_RANGE
+	: R A N G E
+	;
+
+DSNUTIL_NOSYSCOPY
+	: N O S Y S C O P Y
+	;
+
+DSNUTIL_INLCOPY
+	: I N L C O P Y
+	;
+
+DSNUTIL_FCCOPY
+	: F C C O P Y
+	;
+
+DSNUTIL_TOVOLUME
+	: T O V O L U M E
+	;
+
+DSNUTIL_TOSEQNO
+	: T O S E Q N O
+	;
+
+DSNUTIL_PMNO
+	: P M N O
+	;
+
+DSNUTIL_PMPREF
+	: P M P R E F
+	;
+
+DSNUTIL_PMREQ
+	: P M R E Q
+	;
+
+DSNUTIL_RECOVERYSITE
+	: R E C O V E R Y S I T E
+	;
+
+DSNUTIL_UPDATED
+	: U P D A T E D
+	;
+
+DSNUTIL_FASTSWITCH
+	: F A S T S W I T C H
+	;
+
+DSNUTIL_LEAFDISTLIMIT
+	: L E A F D I S T L I M I T
+	;
+
+DSNUTIL_PAUSE
+	: P A U S E
+	;
+
+DSNUTIL_NOSYSUT1
+	: N O S Y S U T '1'
+	;
+
+DSNUTIL_TIMEOUT
+	: T I M E O U T
+	;
+
+DSNUTIL_NEWMAXRO
+	: N E W M A X R O
+	;
+
+DSNUTIL_LASTLOG
+	: L A S T L O G
+	;
+
+DSNUTIL_WRITERS
+	: W R I T E R S
+	;
+
+DSNUTIL_LISTPARTS
+	: L I S T P A R T S
+	;
+
+DSNUTIL_REBALANCE
+	: R E B A L A N C E
+	;
+
+DSNUTIL_SORTCLUSTER
+	: S O R T C L U S T E R
+	;
+
+DSNUTIL_DROP_PART
+	: D R O P '_' P A R T
+	;
+
+DSNUTIL_RECLUSTER
+	: R E C L U S T E R
+	;
+
+DSNUTIL_NOSYSREC
+	: N O S Y S R E C
+	;
+
+DSNUTIL_AUTOESTSPACE
+	: A U T O E S T S P A C E
+	;
+
+DSNUTIL_AUX
+	: A U X
+	;
+
+DSNUTIL_SORTNPSI
+	: S O R T N P S I
+	;
+
+DSNUTIL_ICLIMIT_DASD
+	: I C L I M I T '_' D A S D
+	;
+
+DSNUTIL_ICLIMIT_TAPE
+	: I C L I M I T '_' T A P E
+	;
+
+DSNUTIL_DRAIN_ALLPARTS
+	: D R A I N '_' A L L P A R T S
+	;
+
+DSNUTIL_OFFPOSLIMIT
+	: O F F P O S L I M I T
+	;
+
+DSNUTIL_INDREFLIMIT
+	: I N D R E F L I M I T
+	;
+
+DSNUTIL_NOPAD
+	: N O P A D
+	;
+
+DSNUTIL_DISCARD
+	: D I S C A R D
+	;
+
+DSNUTIL_INITCDDS
+	: I N I T C C D S
+	;
+
+DSNUTIL_SEARCHTIME
+	: S E A R C H T I M E
+	;
+
+DSNUTIL_SORTDATA
+	: S O R T D A T A
+	;
+
+DSNUTIL_WRITELOG
+	: W R I T E L O G
+	;
+
+DSNUTIL_SUBTYPE
+	: S U B T Y P E
+	;
+
+DSNUTIL_TEST
+	: T E S T
+	;
+
+DSNUTIL_LEVELID
+	: L E V E L I D
+	;
+
+DSNUTIL_DBD
+	: D B D
+	;
+
+DSNUTIL_DROP
+	: D R O P
+	;
+
+DSNUTIL_OUTDDN
+	: O U T D D N
+	;
+
+DSNUTIL_SET
+	: S E T
+	;
+
+DSNUTIL_NORCVRPEND
+	: N O R C V R P E N D
+	;
+
+DSNUTIL_NOAUXWARN
+	: N O A U X W A R N
+	;
+
+DSNUTIL_NOAUXCHKP
+	: N O A U X C H K P
+	;
+
+DSNUTIL_NOAREORPENDSTAR
+	: N O A R E O R P E N D S T A R
+	;
+
+DSNUTIL_NOAREORPEND
+	: N O A R E O R P E N D
+	;
+
+DSNUTIL_PRO
+	: P R O
+	;
+
+DSNUTIL_NOPRO
+	: N O P R O
+	;
+
+DSNUTIL_NORBDPEND
+	: N O R B D P E N D
+	;
+
+DSNUTIL_RBDPEND
+	: R B D P E N D
+	;
+
+DSNUTIL_PSRBDPEND
+	: P S R B D P E N D
+	;
+
+DSNUTIL_MAP
+	: M A P
+	;
+
+DSNUTIL_DATAONLY
+	: D A T A O N L Y
+	;
+
+DSNUTIL_VERIFY
+	: V E R I F Y
+	;
+
+DSNUTIL_REPAIR
+	: R E P A I R
+	;
+
+DSNUTIL_OBJECT
+	: O B J E C T
+	;
+
+DSNUTIL_LOCATE
+	: L O C A T E
+	;
+
+DSNUTIL_ARCHLOG
+	: A R C H L O G
+	;
+
+DSNUTIL_CURRENT
+	: C U R R E N T
+	;
+
+DSNUTIL_SUMMARY
+	: S U M M A R Y
+	;
+
+DSNUTIL_SWITCH_VCAT
+	: DSNUTIL_SWITCH (WS | NEWLINE)+ VCAT
+	;
+
+DSNUTIL_RESTORE_SYSTEM
+	: R E S T O R E (WS | NEWLINE)+ S Y S T E M
+	;
+
+DSNUTIL_SYSVALUEDDN
+	: S Y S V A L U E D D N
+	;
+
+DSNUTIL_RSA
+	: R S A
+	;
+
+DSNUTIL_REGISTER
+	: R E G I S T E R
+	;
+
+DSNUTIL_RUNSTATS
+	: R U N S T A T S
+	;
+
+DSNUTIL_FROM_EXISTING_STATS
+	: DSNUTIL_FROM (WS | NEWLINE)+ E X I S T I N G (WS | NEWLINE)+ S T A T S
+	;
+
+DSNUTIL_STOSPACE
+	: S T O S P A C E
+	;
+
+DSNUTIL_HEADER
+	: H E A D E R
+	;
+
+DSNUTIL_OBID
+	: OBID
+	;
+
+DSNUTIL_S390
+	: S '3' '9' '0'
+	;
+
+DSNUTIL_IEEE
+	: I E E E
+	;
+
+DSNUTIL_MAXERR
+	: M A X E R R 
+	;
+
+DSNUTIL_ISOLATION
+	: I S O L A T I O N
+	;
+	
+DSNUTIL_CS
+	: C S
+	;
+
+DSNUTIL_UR
+	: U R
+	;
+
+DSNUTIL_HEX_LIT
+	: X '\'' [0-9A-Za-z]+ '\''
+	;
+
+DSNUTIL_IDENTIFIER
+	: ~[ \n,;)('"=><+-]+
+	;
+
+mode DSNUTIL_WHEN_MODE;
+
+DSNUTIL_WHEN_WS
+	: (WS | NEWLINE)+
+	->channel(HIDDEN)
+	;
+
+DSNUTIL_WHEN_LPAREN
+	: LPAREN
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		dsnutilArgc = 0;
+		dsnutil = false;
+	}
+	->pushMode(DEFAULT_MODE) //we're not coming back here
+	;
+
+mode DSNUTIL_EXCEPTION_MODE;
+
+/*
+Why are we here?
+
+The EXCEPTION token has been seen and thus we will see one
+or more IN <tablespace> USE <tablespace> phrases.  When 
+another token representing an option indicating we will see
+no more of these phrases is seen, we popMode back to 
+DSNUTIL_MODE.
+
+*/
+
+DSNUTIL_EXCEPTION_WS
+	: (WS | NEWLINE)+
+	->channel(HIDDEN)
+	;
+
+DSNUTIL_IN
+	: I N
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_EXCEPTION_USE
+	: U S E
+	->type(DSNUTIL_USE),pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_EXCEPTION_CLONE
+	: C L O N E
+	->type(DSNUTIL_CLONE),popMode
+	;
+
+DSNUTIL_EXCEPTION_SHRLEVEL
+	: S H R L E V E L
+	->type(DSNUTIL_SHRLEVEL),popMode
+	;
+
+DSNUTIL_EXCEPTION_DRAIN_WAIT
+	: D R A I N '_' W A I T
+	->type(DSNUTIL_DRAIN_WAIT),popMode
+	;
+
+DSNUTIL_EXCEPTION_RETRY
+	: R E T R Y
+	->type(DSNUTIL_RETRY),popMode
+	;
+
+DSNUTIL_EXCEPTION_RETRY_DELAY
+	: R E T R Y '_' D E L A Y
+	->type(DSNUTIL_RETRY_DELAY),popMode
+	;
+
+DSNUTIL_EXCEPTION_SCOPE
+	: S C O P E
+	->type(DSNUTIL_SCOPE),popMode
+	;
+
+DSNUTIL_EXCEPTION_AUXERROR
+	: A U X E R R O R
+	->type(DSNUTIL_AUXERROR),popMode
+	;
+
+DSNUTIL_EXCEPTION_LOBERROR
+	: L O B E R R O R
+	->type(DSNUTIL_LOBERROR),popMode
+	;
+
+DSNUTIL_EXCEPTION_XMLERROR
+	: X M L E R R O R
+	->type(DSNUTIL_XMLERROR),popMode
+	;
+
+DSNUTIL_EXCEPTION_DELETE
+	: D E L E T E
+	->type(DSNUTIL_DELETE),popMode
+	;
+
+DSNUTIL_EXCEPTION_EXCEPTIONS
+	: E X C E P T I O N S
+	->type(DSNUTIL_EXCEPTIONS),popMode
+	;
+
+DSNUTIL_EXCEPTION_ERRDDN
+	: E R R D D N
+	->type(DSNUTIL_ERRDDN),popMode
+	;
+
+DSNUTIL_EXCEPTION_WORKDDN
+	: W O R K D D N
+	->type(DSNUTIL_WORKDDN),popMode
+	;
+
+DSNUTIL_EXCEPTION_PUNCHDDN
+	: P U N C H D D N
+	->type(DSNUTIL_PUNCHDDN),popMode
+	;
+
+DSNUTIL_EXCEPTION_SORTDEVT
+	: S O R T D E V T
+	->type(DSNUTIL_SORTDEVT),popMode
+	;
+
+DSNUTIL_EXCEPTION_SORTNUM
+	: S O R T N U M
+	->type(DSNUTIL_SORTNUM),popMode
+	;
+
+mode DSNUTIL_DSN_MODE;
+/*
+Why are we here?
+
+The DSN token has been seen.  This means that a dataset name
+string follows.  It _may_ be enclosed in parenthesis, apostrophes,
+double apostrophes, or quotes.  Some combinations of these are
+allowed.
+
+*/
+
+DSNUTIL_DSN_LPAREN
+	: LPAREN
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_DSN_DOUBLE_APOS
+	: '\'\''
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
+	;
+
+DSNUTIL_DSN_OPEN_APOS
+	: '\''
+	->pushMode(DSNUTIL_APOS_MODE)
+	;
+
+DSNUTIL_DSN_WS
+	: (WS | NEWLINE)+
+	->channel(HIDDEN),pushMode(DSNUTIL_DSN_WS_MODE);
+
+DSNUTIL_DSN_CHAR
+	: ~[ \n,;)('"]+
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+mode DSNUTIL_DSN_WS_MODE;
+/*
+Why are we here?
+
+In processing a DSN token, whitespace was detected.  This means it
+is possible the dataset name is not enclosed in parentheses, 
+apostrophes, double apostrophes, or quotes.  So the end of the 
+dataset name is delimited by either whitespace or the closing
+apostrophe for the entire parameter.
+*/
+
+DSNUTIL_DSN_WS_DOUBLE_APOS
+	: '\'\''
+	{!dsnutil_dsn_ws_char}?
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
+	;
+
+DSNUTIL_DSN_WS_OPEN_APOS
+	: '\''
+	{
+		if (dsnutil_dsn_ws_char) {
+			/*
+			We are not within apostrophes, this is the
+			closing apostrophe of the whole third
+			parameter for SYSPROC.DSNUTILx.
+			*/
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			setType(DSNUTIL_CLOSE_APOS);
+			popMode(); //back to DSNUTIL_DSN_MODE
+			popMode(); //back to DSNUTIL_MODE
+			popMode(); //back to DEFAULT_MODE
+		} else {
+			pushMode(DSNUTIL_APOS_MODE); //we don't come back here
+		}
+	}
+	;
+
+DSNUTIL_DSN_WS_OPEN_QUOTE
+	: '"'
+	{
+		if (dsnutil_dsn_ws_char) {
+			/*
+			We are not within quotes, this is the
+			closing quote of the whole third
+			parameter for SYSPROC.DSNUTILx.
+			*/
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			setType(DSNUTIL_CLOSE_QUOTE);
+			popMode(); //back to DSNUTIL_DSN_MODE
+			popMode(); //back to DSNUTIL_MODE
+			popMode(); //back to DEFAULT_MODE
+		} else {
+			pushMode(DSNUTIL_QUOTE_MODE); //we don't come back here
+		}
+	}
+	;
+
+DSNUTIL_DSN_WS_LPAREN
+	: LPAREN
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_DSN_WS_WS
+	: (WS | NEWLINE)+
+	{
+		dsnutil_dsn_ws_char = false;
+	}
+	->channel(HIDDEN),popMode,popMode;
+
+DSNUTIL_DSN_WS_CHAR
+	: DSNUTIL_DSN_CHAR
+	{
+		dsnutil_dsn_ws_char = true;
+	}
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+mode DSNUTIL_DB_TS_MODE;
+/*
+Why are we here?
+
+We have encountered a token such as TABLESPACE in the CHECK DATA
+control statement which is followed by whitespace which is followed
+by a string constant representing a tablespace name qualified with
+a database name (or a similar construct) which is followed by 
+whitespace.  This takes the form...
+
+	[database-name.]tablespace-name
+
+...where the database name and the dot are optional.  It is 
+possible that the database name and/or the tablespace name are
+enclosed by quotes or apostrophes.
+
+It is necessary to return to the "parent" mode when the whitespace
+following the string constant is encountered.  We must not mistake
+the leading whitespace for the terminating whitespace, hence the
+boolean check in the predicate.
+
+From the syntax diagram for CHECK DATA, it appears it is 
+syntactically correct for the termination to also be the end of the
+parameter string to SYSPROC.DSNUTILx.  So if an apostrophe or a quote
+is found which is not enclosing either portion of the string constant
+then we popMode twice.
+
+Conveniently, this mode also handles arbitrary strings and so we may
+have arrived because we're on the right hand side of an equal sign.
+*/
+
+DSNUTIL_DB_TS_WS_LEADING
+	: (WS | NEWLINE)+
+	{!dsnutil_db_ts_char}? 
+	->channel(HIDDEN)
+	;
+
+DSNUTIL_DB_TS_WS_TERMINATING
+	: (WS | NEWLINE)+
+	{dsnutil_db_ts_char}?
+	{
+		dsnutil_db_ts_char = false;
+	}
+	->channel(HIDDEN),popMode
+	;
+
+DSNUTIL_DB_TS_APOS
+	: '\''
+	{
+		if (dsnutil_db_ts_char) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			dsnutil_db_ts_char = false;
+			setType(DSNUTIL_CLOSE_APOS);
+			switch(_modeStack.peek()) {
+				case DSNUTIL_PAREN_MODE :
+					popMode();
+					break;
+				case DSNUTIL_EXCEPTION_MODE :
+					popMode(); //back to DSNUTIL_EXCEPTION_MODE
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+				default :
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+			}
+		} else {
+			pushMode(DSNUTIL_APOS_MODE);
+			dsnutil_db_ts_char = true;
+		}
+	}
+	;
+
+DSNUTIL_DB_TS_QUOTE
+	: '"'
+	{
+		if (dsnutil_db_ts_char) {
+			dsnutil = false;
+			dsnutilArgc = 0;
+			dsnutil_dsn_ws_char = false;
+			dsnutil_db_ts_char = false;
+			setType(DSNUTIL_CLOSE_QUOTE);
+			switch(_modeStack.peek()) {
+				case DSNUTIL_PAREN_MODE :
+					popMode();
+					break;
+				case DSNUTIL_EXCEPTION_MODE :
+					popMode(); //back to DSNUTIL_EXCEPTION_MODE
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+				default :
+					popMode(); //back to DSNUTIL_MODE
+					popMode(); //back to DEFAULT_MODE
+					break;
+			}
+		} else {
+			pushMode(DSNUTIL_QUOTE_MODE);
+			dsnutil_db_ts_char = true;
+		}
+	}
+	;
+
+DSNUTIL_DB_TS_DOT
+	: DOT
+	{
+		dsnutil_db_ts_char = false;
+	}
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+DSNUTIL_DB_TS_LPAREN
+	: '('
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		dsnutil_db_ts_char = false;
+	}
+	->pushMode(DSNUTIL_PAREN_MODE) //we're not coming back here
+	;
+
+DSNUTIL_DB_TS_RPAREN
+	: ')'
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		dsnutil_db_ts_char = false;
+		switch(_modeStack.peek()) {
+			case DSNUTIL_PAREN_MODE :
+				popMode(); //back to DSNUTIL_PAREN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to "parent" mode
+				break;
+		}
+	}
+	;
+
+DSNUTIL_DB_TS_DELETE
+	: DSNUTIL_DELETE
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_DELETE)
+	;
+
+DSNUTIL_DB_TS_SAMPLE
+	: DSNUTIL_SAMPLE
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_SAMPLE)
+	;
+
+DSNUTIL_DB_TS_TABLESAMPLE
+	: DSNUTIL_TABLESAMPLE
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_TABLESAMPLE)
+	;
+
+DSNUTIL_DB_TS_IDENTIFIER
+	: ~[ \n.,;)('"]+
+	{
+		dsnutil_db_ts_char = true;
+	}
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+/*
+This doesn't work.
+
+The reason it doesn't work is that, following a token that
+matches this rule, the closing quote for the third parameter
+to SYSPROC.DSNUTILx + any intervening whitespace + the comma
+prior to the fourth parameter + the opening quote for the
+fourth parameter also match this rule - and we don't want that.
+
+DSNUTIL_DB_TS_STRINGLITERAL
+	: STRINGLITERAL
+	{
+		dsnutil_db_ts_char = true;
+	}
+	;
+*/
+
+DSNUTIL_DB_TS_HEX_LIT
+	: [GNX] '\'' [0-9A-Za-z]+ '\''
+	->popMode
+	;
+
+mode DSNUTIL_PAREN_MODE;
+/*
+Why are we here?
+
+A token has been seen which is followed by a paren.  What is enclosed
+in parentheses may include apostrophes or quotes.
+
+*/
+DSNUTIL_LPAREN1
+	: '('
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+	}
+	->pushMode(DSNUTIL_PAREN_MODE)
+	;
+
+DSNUTIL_RPAREN1
+	: ')'
+	{
+		//System.out.println(getLine() + ":" + getCharPositionInLine() + "|" + getText() + "|" + " mode " + modeNames[_mode] + " prevMode " + (_modeStack.isEmpty() ? "empty" : modeNames[_modeStack.peek()]));
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DB_TS_MODE :
+				popMode(); //back to DSNUTIL_DB_TS_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to "parent" mode (which may be this mode)
+				break;
+		}
+	}
+	;
+
+DSNUTIL_PAREN_OPEN_APOS
+	: '\''
+	->pushMode(DSNUTIL_APOS_MODE)
+	;
+
+DSNUTIL_PAREN_DOUBLE_APOS
+	: '\'\''
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
+	;
+
+DSNUTIL_PAREN_OPEN_QUOTE
+	: '"'
+	->pushMode(DSNUTIL_QUOTE_MODE)
+	;
+
+DSNUTIL_PAREN_COMMA
+	: COMMA
+	->type(DSNUTIL_COMMA)
+	;
+
+/*
+Equal and not equal pushMode to two different places because
+the former must also work with the UNIT token and the latter
+need not.
+*/
+DSNUTIL_PAREN_EQUAL
+	: DSNUTIL_EQUAL
+	->type(DSNUTIL_EQUAL),pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PAREN_NOT_EQUAL
+	: DSNUTIL_NOT_EQUAL
+	->type(DSNUTIL_NOT_EQUAL),pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PAREN_DOT
+	: DOT
+	;
+
+DSNUTIL_PAREN_WS
+	: (WS | NEWLINE)+
+	->channel(HIDDEN)
+	;
+
+DSNUTIL_PAREN_TABLESPACE
+	: T A B L E S P A C E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PAREN_TABLE
+	: T A B L E
+	->pushMode(DSNUTIL_DB_TS_MODE)
+	;
+
+DSNUTIL_PAREN_XMLCOLUMN
+	: X M L C O L U M N
+	;
+
+DSNUTIL_SYSTEMPERIOD
+	: S Y S T E M P E R I O D 
+	;
+
+DSNUTIL_IDENTITY
+	: I D E N T I T Y 
+	;
+
+DSNUTIL_TRANSID
+	: T R A N S I D 
+	;
+
+DSNUTIL_NONDETERMINISTIC
+	: N O N D E T E R M I N I S T I C 
+	;
+
+DSNUTIL_ROWCHANGE
+	: R O W C H A N G E 
+	;
+
+DSNUTIL_PAREN_WHEN
+	: W H E N
+	;
+
+DSNUTIL_PAREN_PART
+	: P A R T
+	->type(DSNUTIL_PART)
+	;
+
+DSNUTIL_CONV
+	: C O N V
+	;
+
+DSNUTIL_VALPROC
+	: V A L P R O C
+	;
+
+DSNUTIL_IDERROR
+	: I D E R R O R
+	;
+
+DSNUTIL_DUPKEY
+	: D U P K E Y
+	;
+
+DSNUTIL_CONV_ERROR
+	: C O N V '_' E R R O R
+	;
+
+DSNUTIL_DECIMAL
+	: D E C I M A L 
+	;
+
+DSNUTIL_PACKED
+	: P A C K E D
+	;
+
+DSNUTIL_ZONED
+	: Z O N E D
+	;
+
+DSNUTIL_EXTERNAL
+	: E X T E R N A L
+	;
+
+DSNUTIL_TRAILING
+	: T R A I L I N G
+	;
+
+DSNUTIL_LEADING
+	: L E A D I N G
+	;
+
+DSNUTIL_CHARACTER
+	: C H A R A C T E R 
+	;
+
+DSNUTIL_CHAR
+	: C H A R
+	;
+
+DSNUTIL_VARCHAR
+	: V A R C H A R
+	;
+
+DSNUTIL_BIT
+	: B I T
+	;
+
+DSNUTIL_PAREN_CCSID
+	: C C S I D
+	->type(DSNUTIL_CCSID)
+	;
+
+DSNUTIL_MIXED
+	: M I X E D
+	;
+
+DSNUTIL_BLOBF
+	: B L O B F
+	;
+
+DSNUTIL_PRESERVE
+	: P R E S E R V E
+	;
+
+DSNUTIL_WHITESPACE
+	: W H I T E S P A C E
+	;
+
+DSNUTIL_BINARYXML
+	: B I N A R Y X M L
+	;
+
+DSNUTIL_CLOBF
+	: C L O B F
+	;
+
+DSNUTIL_DBCLOBF
+	: D B C L O B F
+	;
+
+DSNUTIL_GRAPHIC
+	: G R A P H I C
+	;
+
+DSNUTIL_VARGRAPHIC
+	: V A R G R A P H I C
+	;
+
+DSNUTIL_SMALLINT
+	: S M A L L I N T
+	;
+
+DSNUTIL_INTEGER
+	: I N T E G E R
+	;
+
+DSNUTIL_INT
+	: I N T
+	;
+
+DSNUTIL_BIGINT
+	: B I G I N T
+	;
+
+DSNUTIL_VARBINARY
+	: V A R B I N A R Y
+	;
+
+DSNUTIL_PAREN_BINARY
+	: B I N A R Y
+	->type(DSNUTIL_BINARY)
+	;
+
+DSNUTIL_VARYING
+	: V A R Y I N G
+	;
+
+DSNUTIL_PAREN_FLOAT
+	: F L O A T
+	->type(DSNUTIL_FLOAT)
+	;
+
+DSNUTIL_PAREN_DOUBLE
+	: DSNUTIL_DOUBLE
+	->type(DSNUTIL_DOUBLE)
+	;
+
+DSNUTIL_PAREN_REAL
+	: DSNUTIL_REAL
+	->type(DSNUTIL_REAL)
+	;
+
+DSNUTIL_PAREN_DATE
+	: D A T E
+	->type(DSNUTIL_DATE)
+	;
+
+DSNUTIL_DATE_P
+	: D A T E '_' P
+	;
+
+DSNUTIL_PAREN_TIME
+	: T I M E
+	->type(DSNUTIL_TIME)
+	;
+
+DSNUTIL_TIMESTAMP
+	: T I M E S T A M P
+	;
+
+DSNUTIL_TIMESTAMP_WITH_TIME_ZONE
+	: T I M E S T A M P (WS | NEWLINE)+ W I T H (WS | NEWLINE)+ T I M E (WS | NEWLINE)+ Z O N E
+	;
+
+DSNUTIL_BLOB
+	: B L O B
+	;
+
+DSNUTIL_CLOB
+	: C L O B
+	;
+
+DSNUTIL_DBCLOB
+	: D B C L O B
+	;
+
+DSNUTIL_DECFLOAT
+	: D E C F L O A T
+	;
+
+DSNUTIL_PAREN_ROWID
+	: R O W I D
+	->type(DSNUTIL_ROWID)
+	;
+
+DSNUTIL_PAREN_XML
+	: X M L
+	->type(DSNUTIL_XML)
+	;
+
+DSNUTIL_NULLIF
+	: N U L L I F
+	;
+
+DSNUTIL_DEFAULTIF
+	: D E F A U L T I F
+	;
+
+DSNUTIL_POSITION
+	: P O S I T I O N
+	;
+
+DSNUTIL_CONSTANTIF
+	: C O N S T A N T I F 
+	;
+
+DSNUTIL_CONSTANT
+	: C O N S T A N T 
+	;
+
+DSNUTIL_STRIP
+	: S T R I P 
+	;
+
+DSNUTIL_PAREN_FREQVAL
+	: F R E Q V A L
+	->type(DSNUTIL_FREQVAL)
+	;
+
+DSNUTIL_PAREN_NUMCOLS
+	: N U M C O L S
+	->type(DSNUTIL_NUMCOLS)
+	;
+
+DSNUTIL_PAREN_COUNT
+	: C O U N T
+	->type(DSNUTIL_COUNT)
+	;
+
+DSNUTIL_PAREN_MOST
+	: M O S T
+	->type(DSNUTIL_MOST)
+	;
+
+DSNUTIL_PAREN_BOTH
+	: B O T H
+	->type(DSNUTIL_BOTH)
+	;
+
+DSNUTIL_PAREN_TRUNCATE
+	: DSNUTIL_TRUNCATE
+	->type(DSNUTIL_TRUNCATE)
+	;
+
+DSNUTIL_PAREN_LEAST
+	: L E A S T
+	->type(DSNUTIL_LEAST)
+	;
+
+DSNUTIL_PAREN_HISTOGRAM
+	: H I S T O G R A M
+	->type(DSNUTIL_HISTOGRAM)
+	;
+
+DSNUTIL_PAREN_NUMQUANTILES
+	: N U M Q U A N T I L E S
+	->type(DSNUTIL_NUMQUANTILES)
+	;
+
+DSNUTIL_PAREN_YES
+	: Y E S
+	->type(DSNUTIL_YES)
+	;
+
+DSNUTIL_PAREN_NO
+	: N O
+	->type(DSNUTIL_NO)
+	;
+
+DSNUTIL_PAREN_ALL
+	: DSNUTIL_ALL
+	->type(DSNUTIL_ALL)
+	;
+
+DSNUTIL_PAREN_ITEMERROR
+	: DSNUTIL_ITEMERROR
+	->type(DSNUTIL_ITEMERROR)
+	;
+
+DSNUTIL_PAREN_HALT
+	: DSNUTIL_HALT
+	->type(DSNUTIL_HALT)
+	;
+
+DSNUTIL_PAREN_SKIP
+	: DSNUTIL_SKIP
+	->type(DSNUTIL_SKIP)
+	;
+
+DSNUTIL_PAREN_WARNING
+	: DSNUTIL_WARNING
+	->type(DSNUTIL_WARNING)
+	;
+
+DSNUTIL_PAREN_RC0
+	: DSNUTIL_RC0
+	->type(DSNUTIL_RC0)
+	;
+
+DSNUTIL_PAREN_RC4
+	: DSNUTIL_RC4
+	->type(DSNUTIL_RC4)
+	;
+
+DSNUTIL_PAREN_RC8
+	: DSNUTIL_RC8
+	->type(DSNUTIL_RC8)
+	;
+
+DSNUTIL_PAREN_CURRENT_DATE
+	: DSNUTIL_CURRENT_DATE
+	->type(DSNUTIL_CURRENT_DATE)
+	;
+
+DSNUTIL_PAREN_CURRENT_TIMESTAMP
+	: DSNUTIL_CURRENT_TIMESTAMP
+	->type(DSNUTIL_CURRENT_TIMESTAMP)
+	;
+
+DSNUTIL_PAREN_YEAR
+	: DSNUTIL_YEAR
+	->type(DSNUTIL_YEAR)
+	;
+
+DSNUTIL_PAREN_YEARS
+	: DSNUTIL_YEARS
+	->type(DSNUTIL_YEARS)
+	;
+
+DSNUTIL_PAREN_MONTH
+	: DSNUTIL_MONTH
+	->type(DSNUTIL_MONTH)
+	;
+
+DSNUTIL_PAREN_MONTHS
+	: DSNUTIL_MONTHS
+	->type(DSNUTIL_MONTHS)
+	;
+
+DSNUTIL_PAREN_DAY
+	: DSNUTIL_DAY
+	->type(DSNUTIL_DAY)
+	;
+
+DSNUTIL_PAREN_DAYS
+	: DSNUTIL_DAYS
+	->type(DSNUTIL_DAYS)
+	;
+
+DSNUTIL_PAREN_HOUR
+	: DSNUTIL_HOUR
+	->type(DSNUTIL_HOUR)
+	;
+
+DSNUTIL_PAREN_HOURS
+	: DSNUTIL_HOURS
+	->type(DSNUTIL_HOURS)
+	;
+
+DSNUTIL_PAREN_MINUTE
+	: DSNUTIL_MINUTE
+	->type(DSNUTIL_MINUTE)
+	;
+
+DSNUTIL_PAREN_MINUTES
+	: DSNUTIL_MINUTES
+	->type(DSNUTIL_MINUTES)
+	;
+
+DSNUTIL_PAREN_SECOND
+	: DSNUTIL_SECOND
+	->type(DSNUTIL_SECOND)
+	;
+
+DSNUTIL_PAREN_SECONDS
+	: DSNUTIL_SECONDS
+	->type(DSNUTIL_SECONDS)
+	;
+
+DSNUTIL_PAREN_MICROSECOND
+	: DSNUTIL_MICROSECOND
+	->type(DSNUTIL_MICROSECOND)
+	;
+
+DSNUTIL_PAREN_MICROSECONDS
+	: DSNUTIL_MICROSECONDS
+	->type(DSNUTIL_MICROSECONDS)
+	;
+
+DSNUTIL_PAREN_KEYCARD
+	: DSNUTIL_KEYCARD
+	->type(DSNUTIL_KEYCARD)
+	;
+
+DSNUTIL_PAREN_NUMBER
+	: [0-9]+ ('.' [0-9]+)?
+	;
+
+DSNUTIL_PAREN_IDENTIFIER
+	: ~[ \n,.;)('"=><+-]+
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+mode DSNUTIL_DOUBLE_APOS_MODE;
+/*
+Why are we here?
+
+Whilst processing, a double apostrophe token has been encountered.
+Until another double apostrophe token is encountered, all characters
+are considered to be one token.
+
+This is tricky because we want to exit differently depending on how
+we arrived.  Hence, the switch statement.  I did consider having
+three different copies of this mode, the only difference being how
+they exited.  That seemed less clear than this.
+*/
+
+DSNUTIL_DOUBLE_APOS1
+	: '\'\''
+	{
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to "parent" mode
+				break;
+		}
+	}
+	;
+
+DSNUTIL_DOUBLE_APOS_CHAR
+	: DSNUTIL_APOS_CHAR
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+mode DSNUTIL_APOS_MODE;
+/*
+Why are we here?
+
+Whilst processing, an apostrophe token has been encountered.
+Until another apostrophe token is encountered, all characters
+are considered to be one token.
+
+This is tricky because we want to exit differently depending on how
+we arrived.  Hence, the switch statement.  I did consider having
+several different copies of this mode, the only difference being
+how they exited.  That seemed less clear than this.
+
+It's also tricky because there may be an apostrophe or a quote
+following the DSNUTIL_APOS token, indicating the end of the
+argument.  That's why it's important to get back to DSNUTIL_MODE.
+*/
+
+DSNUTIL_APOS
+	: '\''
+	{
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to "parent" mode
+				break;
+		}
+	}
+	;
+
+DSNUTIL_APOS_CHAR
+	: ~'\''+
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
+mode DSNUTIL_QUOTE_MODE;
+
+/*
+Why are we here?
+
+Whilst processing, a quote token has been encountered.
+Until another quote token is encountered, all characters
+are considered to be one token.
+
+This is tricky because we want to exit differently depending on how
+we arrived.  Hence, the switch statement.  I did consider having
+three different copies of this mode, the only difference being how
+they exited.  That seemed less clear than this.
+*/
+
+DSNUTIL_QUOTE1
+	: '"'
+	{
+		switch(_modeStack.peek()) {
+			case DSNUTIL_DSN_WS_MODE :
+				popMode(); //back to DSNUTIL_DSN_WS_MODE
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			case DSNUTIL_DSN_MODE :
+				popMode(); //back to DSNUTIL_DSN_MODE
+				popMode(); //back to DSNUTIL_MODE
+				break;
+			default :
+				popMode(); //back to DSNUTIL_MODE
+				break;
+		}
+	}
+	;
+
+DSNUTIL_QUOTE_CHAR
+	: ~'"'+
+	//->type(DSNUTIL_IDENTIFIER)
+	;
+
 

@@ -1,3 +1,39 @@
+--2023-09-25--------------------------------------------------------------------
+Unhappy with the STRINGLITERAL changes in the 2023-06-06 version, I investigated
+several other means of dealing with the third parameter of the SYSPROC.DSNUTILx
+stored procedure supplied by IBM.
+
+Attempts at finessing my way around the issue of apostrophe-delimited strings
+containing apostrophe-delimited strings included writing a state machine to
+count apostrophes, looking for the comma after an apostrophe, and various
+other methods.  All either failed or were cumbersome and aesthetically
+displeasing.
+
+Ultimately, I embedded a lexer and parser rules for the DB2z online Utility
+Control Statements in the existing lexer and parser.  The embedded lexer is
+a set of ANTLR modes entered when the third parameter of SYSPROC.DSNUTILx is
+detected.  The embedded parser rules begin with "dsnutil".
+
+The implemented mechanism is more robust and offers the ability to examine and
+process DB2z online Utility Control Statements programmatically.
+
+The "entry point" to the embedded lexer is the DSNUTIL_MODE mode.  Extensive
+use of lexer API calls is made to control transfers between the DSNUTIL_*
+modes.  There are commented out ->type(DSNUTIL_IDENTIFIER) ANTLR statements
+as I was uncertain if the utility of being able to identify which mode was
+current outweighed that of simplicity in writing parser rules.  In the end,
+ease of debugging won out.
+
+This does expand the use of Java code embedded in the lexer.  Anyone who wants
+to generate for a different language will have a bit more work to do.
+
+Interesting, at least to me, was that the DSNUTIL_EXEC_SQL ended up doing a
+pushMode(DEFAULT_MODE), and thankfully DSNUTIL_ENDEXEC is different from the
+standard END_EXEC token so it could just do a popMode.
+
+I did end up reporting a number of discrepencies between examples and the
+syntax diagrams to the IBM documentation stewards.
+
 --2023-07-06--------------------------------------------------------------------
 Modified sqlTableFunctionDefinition to use sqlTableReturnStatement instead of
 sqlRoutineBody per Martijn Rutte.

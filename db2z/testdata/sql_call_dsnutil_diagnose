@@ -1,0 +1,81 @@
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'DIAGNOSE DISPLAY DBET DATABASE "QUENTIN"'
+  , ''
+  );
+  
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'DIAGNOSE DISPLAY OBD "QUENTIN"."COLDH2O"'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'DIAGNOSE DISPLAY DBET TABLESPACE "QUENTIN"."COLDH2O"'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'DIAGNOSE ALLDUMPS(X'0BADF00D',X'DEADBEEF')'
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+DIAGNOSE
+ ALLDUMPS
+ COPY TABLESPACE DSNDB06.SYSDDF
+DIAGNOSE END
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+DIAGNOSE TYPE(66)                                                    
+    REBUILD INDEX (ELIOT, TODD, JOSH)                       
+            SORTDEVT SYSDA SORTNUM 3                                   
+DIAGNOSE END
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+   DIAGNOSE WAIT TRACEID X'2E6F' INSTANCE 51                             
+    COPYTOCOPY TABLESPACE HENRY.FOGG DSNUM 1                      
+              FROMLASTFULLCOPY COPYDDN(,COPY2)                           
+                               RECOVERYDDN(COPY3,COPY4)  
+   DIAGNOSE END
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'DIAGNOSE WAIT TRACEID X'2E6F''
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'DIAGNOSE WAIT TRACEID 99'
+  , ''
+  );
+
+
