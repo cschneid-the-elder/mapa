@@ -3770,8 +3770,34 @@ dsnutilUCSLocateOptions
 dsnutilUCSLocateTablespaceSpec
 	: (
 	dsnutilUCSQualifiedTablespaceNameWithLit
-	((dsnutilUCSPartOption2? dsnutilUCSPageOption)
-	| (DSNUTIL_KEY dsnutilUCSArgOptionalParens dsnutilUCSQualifiedIndexNameWithLit))
+	(dsnutilUCSLocateTablespaceSpecPageOption
+	| dsnutilUCSLocateTablespaceSpecKeyOption
+	| dsnutilUCSLocateTablespaceSpecRidOption
+	| dsnutilUCSLocateTablespaceSpecPartOption)
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecKeyOption
+	: (
+	DSNUTIL_KEY dsnutilUCSArgOptionalParens dsnutilUCSQualifiedIndexNameWithLit
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecRidOption
+	: (
+	DSNUTIL_RID DSNUTIL_HEX_LIT
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecPageOption
+	: (
+	DSNUTIL_PAGE DSNUTIL_HEX_LIT
+	)
+	;
+
+dsnutilUCSLocateTablespaceSpecPartOption
+	: (
+	dsnutilUCSPartOption2? dsnutilUCSPageOption
 	)
 	;
 
@@ -5838,12 +5864,15 @@ exchangeStatement
 	: (EXCHANGE DATA BETWEEN TABLE tableName AND tableName)
 	;
 
+/*
+The USING part of an EXECUTE statement is optional, per Martijn Rutte.
+*/
 executeStatement
 	: (
 	EXECUTE statementName 
 		((USING (variable | arrayElementSpecification) (COMMA (variable | arrayElementSpecification))*)
 		| (USING DESCRIPTOR descriptorName)
-		| sourceRowData)
+		| sourceRowData)?
 	)
 	;
 
@@ -6083,7 +6112,19 @@ setSessionTimezoneStatement
 	;
 
 setSpecialRegisterStatement
-	: (SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
+	: (
+	(SET specialRegister EQ? (expression | NULL) (COMMA? expression)*)
+	| (SET CURRENT? LOCK (TIMEOUT | MODE_) (TO | EQ)? currentLockTimeoutOptions)
+	)
+	;
+
+currentLockTimeoutOptions
+	: (
+	(NOT? WAIT)
+	| NULL
+	| (WAIT? INTEGERLITERAL)
+	|  setAssignmentTargetVariable
+	)
 	;
 
 signalStatement

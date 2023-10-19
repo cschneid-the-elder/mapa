@@ -4388,6 +4388,10 @@ WHITESPACE
 	: W H I T E S P A C E
 	;
 
+TIMEOUT
+	: T I M E O U T
+	;
+
 /*
 Noted by Martijn Rutte 2023-06-05, NEWLINE can be present
 between END and CASE.
@@ -5314,6 +5318,10 @@ DSNUTIL_DEFINED
 
 DSNUTIL_RI
 	: R I 
+	;
+
+DSNUTIL_RID
+	: R I D
 	;
 
 DSNUTIL_BASE
@@ -6499,8 +6507,22 @@ DSNUTIL_HEX_LIT
 	: X '\'' [0-9A-Za-z]+ '\''
 	;
 
+/*
+Added \r 2023-10-17 per Martijn Rutte.  Also on...
+
+DSNUTIL_DSN_CHAR
+DSNUTIL_DB_TS_IDENTIFIER
+DSNUTIL_PAREN_IDENTIFIER
+
+...tokens.
+
+ANTLR is "greedy" in its matching to create tokens and
+was including the \r (Carriage Return) character when
+present in the input.  No one wants that, so the CR is
+now excluded.
+*/
 DSNUTIL_IDENTIFIER
-	: ~[ \n,;)('"=><+-]+
+	: ~[ \n\r,;)('"=><+-]+
 	;
 
 mode DSNUTIL_WHEN_MODE;
@@ -6662,7 +6684,7 @@ DSNUTIL_DSN_WS
 	->channel(HIDDEN),pushMode(DSNUTIL_DSN_WS_MODE);
 
 DSNUTIL_DSN_CHAR
-	: ~[ \n,;)('"]+
+	: ~[ \n\r,;)('"]+
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
@@ -6915,7 +6937,7 @@ DSNUTIL_DB_TS_TABLESAMPLE
 	;
 
 DSNUTIL_DB_TS_IDENTIFIER
-	: ~[ \n.,;)('"]+
+	: ~[ \n\r.,;)('"]+
 	{
 		dsnutil_db_ts_char = true;
 	}
@@ -7474,7 +7496,7 @@ DSNUTIL_PAREN_NUMBER
 	;
 
 DSNUTIL_PAREN_IDENTIFIER
-	: ~[ \n,.;)('"=><+-]+
+	: ~[ \n\r,.;)('"=><+-]+
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
