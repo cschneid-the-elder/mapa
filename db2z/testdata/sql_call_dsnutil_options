@@ -115,4 +115,13 @@ CALL SYSPROC.DSNUTILU (
   );
 
 
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+OPTIONS TEMPLATEDD(TMPL8)
+    '
+  , ''
+  );
+
 

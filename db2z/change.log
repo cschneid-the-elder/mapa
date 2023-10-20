@@ -1,3 +1,15 @@
+--2023-10-20--------------------------------------------------------------------
+Maintenance per Martin Rutte...
+
+Altered dsnutilUCSOptionsTemplateddOption rule to allow argument to be enclosed
+in parentheses.  This is tolerated by DB2 but not documented.
+
+Altered dsnutilUCSLoadLogOption rule to allow NOCOPYPEND to precede 
+LOG (YES|NO).  This is tolerated by DB2 but not documented.
+
+Added DSNUTIL_DB_TS_LPAREN to dsnutilUCSArgInParens rule to make TEMPLATEDD 
+argument in optional parentheses work.
+
 --2023-10-18--------------------------------------------------------------------
 Maintenance per Martin Rutte...
 
