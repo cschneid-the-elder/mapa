@@ -1333,9 +1333,15 @@ dsnutilUCSReuseOption
 	)
 	;
 
+/*
+Fix by Martijn Rutte, contrary to IBM documentation as of 2023-10-20
+NOCOPYPEND can prepend LOG.
+*/
 dsnutilUCSLoadLogOption
 	: (
-	DSNUTIL_LOG (DSNUTIL_YES | (DSNUTIL_NO DSNUTIL_NOCOPYPEND?))
+	(DSNUTIL_LOG (DSNUTIL_YES | (DSNUTIL_NO DSNUTIL_NOCOPYPEND?)))
+	|
+	(DSNUTIL_NOCOPYPEND? DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))
 	)
 	;
 
@@ -2715,9 +2721,13 @@ dsnutilUCSOptionsListdefddOption
 	)
 	;
 
+/*
+Fix by Martijn Rutte, contrary to IBM documentation as of 2023-10-20
+the TEMPLATEDD argument can optionally be enclosed in parentheses.
+*/
 dsnutilUCSOptionsTemplateddOption
 	: (
-	DSNUTIL_TEMPLATEDD dsnutilUCSArg
+	DSNUTIL_TEMPLATEDD (dsnutilUCSArg | dsnutilUCSArgInParens)
 	)
 	;
 
@@ -5327,8 +5337,12 @@ dsnutilUCSArgList3
 	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg dsnutilUCSArg? (DSNUTIL_COMMA dsnutilUCSArg)* DSNUTIL_RPAREN1)
 	;
 
+/*
+Added DSNUTIL_DB_TS_LPAREN to make TEMPLATEDD argument in optional
+parentheses work.  2023-10-20
+*/
 dsnutilUCSArgInParens
-	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1) dsnutilUCSArg DSNUTIL_RPAREN1)
+	: ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) dsnutilUCSArg DSNUTIL_RPAREN1)
 	;
 
 dsnutilUCSArgOptionalParens
