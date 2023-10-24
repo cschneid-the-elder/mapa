@@ -5768,6 +5768,9 @@ declareCursorStatement
 	)
 	;
 
+/*
+copyOptionColumnDefaults added per Martijn Rutte 2023-10-24
+*/
 declareGlobalTemporaryTableStatement
 	: (
 	DECLARE GLOBAL TEMPORARY TABLE tableName
@@ -5777,6 +5780,7 @@ declareGlobalTemporaryTableStatement
 		| declareGlobalTemporaryTableAsResultTable)
 		(ccsidClause1
 		| onCommitClause
+		| copyOptionColumnDefaults
 		| loggedWithRollbackClause)*
 	)
 	;
