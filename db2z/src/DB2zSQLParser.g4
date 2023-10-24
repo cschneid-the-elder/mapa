@@ -1814,6 +1814,11 @@ dsnutilUCSCountOptions
 	)
 	;
 
+/*
+Allow for WORKDDN arguments to not be enclosed in parentheses per
+Martijn Rutte 2023-10-24.  This is tolerated by DB2 13 but is
+not documented as far back as DB2 v6.
+*/
 dsnutilUCSWorkddnSpec
 	: (
 	DSNUTIL_WORKDDN
@@ -2561,9 +2566,16 @@ dsnutilUCSNewcopyOption
 	)
 	;
 
+/*
+Allow for argument in optional parentheses per Martijn Rutte
+2023-10-24.
+*/
 dsnutilUCSCopyddnOption
 	: (
-	DSNUTIL_COPYDDN (dsnutilUCSArg | dsnutilUCSArgList2)
+	DSNUTIL_COPYDDN 
+	(dsnutilUCSArg
+	| dsnutilUCSArgList2
+	| dsnutilUCSArgOptionalParens)
 	)
 	;
 
@@ -3401,9 +3413,13 @@ dsnutilUCSRowformatOption
 	)
 	;
 
+/*
+Allow for argument in optional paretheses per Martijn Rutte
+2023-10-24.  This is tolerated by DB2 13 but is not documented.
+*/
 dsnutilUCSUnlddnOption
 	: (
-	DSNUTIL_UNLDDN dsnutilUCSArg
+	DSNUTIL_UNLDDN dsnutilUCSArgOptionalParens
 	)
 	;
 

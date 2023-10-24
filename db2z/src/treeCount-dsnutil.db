@@ -21,7 +21,7 @@
 +	sql_call_dsnutil_rebuild_index	6	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_recover	16	64	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	16	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_reorg_index	18	72	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_reorg_tablespace	24	96	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	24	0	0	0	0	0	0	0
++	sql_call_dsnutil_reorg_tablespace	26	104	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	26	0	0	0	0	0	0	0
 +	sql_call_dsnutil_repair	15	60	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	15	0	0	0	0	0	0
 +	sql_call_dsnutil_report	7	28	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0
 +	sql_call_dsnutil_restore_system	6	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	0	0	0	0
