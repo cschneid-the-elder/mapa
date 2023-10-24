@@ -1816,7 +1816,10 @@ dsnutilUCSCountOptions
 
 dsnutilUCSWorkddnSpec
 	: (
-	DSNUTIL_WORKDDN dsnutilUCSArgList2?
+	DSNUTIL_WORKDDN
+	(dsnutilUCSArgList2?
+	| (dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)?) 
+	| (dsnutilUCSArg? (DSNUTIL_COMMA dsnutilUCSArg)))
 	)
 	;
 
@@ -3538,10 +3541,16 @@ dsnutilUCSShrlevelChangeSpec1
 	)
 	;
 
+/*
+(DSNUTIL_SHRLEVEL DSNUTIL_CHANGE) option on its own added per
+Martijn Rutte 2023-10-24.  This syntax is tolerated by DB2 13
+but is not documented.
+*/
 dsnutilUCSShrlevelChangeSpec2
 	: (
 	(DSNUTIL_SHRLEVEL DSNUTIL_CHANGE DSNUTIL_REGISTER DSNUTIL_YES)
 	| ((DSNUTIL_SHRLEVEL DSNUTIL_CHANGE)? DSNUTIL_REGISTER DSNUTIL_NO)
+	| (DSNUTIL_SHRLEVEL DSNUTIL_CHANGE)
 	)
 	;
 
