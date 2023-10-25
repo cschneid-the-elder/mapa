@@ -1,3 +1,19 @@
+--2023-10-24--------------------------------------------------------------------
+Maintenance per Martin Rutte...
+
+Alter dsnutilUCSWorkddnSpec to allow for WORKDDN arguments to not be enclosed 
+in parentheses.  This is tolerated by DB2 13 but is not documented as far back 
+as DB2 v6.
+
+Alter dsnutilUCSCopyddnOption to allow for argument in optional parentheses.
+
+Alter dsnutilUCSUnlddnOption to allow for argument in optional parentheses.
+
+Alter dsnutilUCSShrlevelChangeSpec2 to allow (DSNUTIL_SHRLEVEL DSNUTIL_CHANGE) 
+option on its own.  This is tolerated by DB2 13 but not documented.
+
+Alter declareGlobalTemporaryTableStatement to add copyOptionColumnDefaults.
+
 --2023-10-20--------------------------------------------------------------------
 Maintenance per Martin Rutte...
 
