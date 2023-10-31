@@ -2398,6 +2398,7 @@ invokeByValueClause
 jsonGenerateStatement
    : JSON_GENERATE identifier FROM identifier
      jsonGenerateCountPhrase?
+     jsonGenerateEncodingPhrase?
      jsonGenerateNamePhrase?
      jsonGenerateSuppressPhrase?
      jsonGenerateConvertingPhrase?
@@ -2408,6 +2409,13 @@ jsonGenerateStatement
 
 jsonGenerateCountPhrase
    : (COUNT IN? identifier)
+   ;
+
+jsonGenerateEncodingPhrase
+   : (
+   ENCODING
+   (identifier | literal | (FROM CODEPAGE))
+   )
    ;
 
 jsonGenerateNamePhrase
@@ -2456,6 +2464,7 @@ jsonGenerateEndJsonPhrase
 jsonParseStatement
    : JSON_PARSE identifier INTO identifier
      jsonParseWithDetailPhrase?
+     jsonParseEncodingPhrase?
      jsonParseNamePhrase?
      jsonParseSuppressPhrase?
      jsonParseConvertingPhrase?
@@ -2466,6 +2475,13 @@ jsonParseStatement
 
 jsonParseWithDetailPhrase
    : (WITH? DETAIL)
+   ;
+
+jsonParseEncodingPhrase
+   : (
+   ENCODING
+   (identifier | literal | (FROM CODEPAGE))
+   )
    ;
 
 jsonParseNamePhrase

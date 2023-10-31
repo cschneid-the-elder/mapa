@@ -27,102 +27,114 @@
 000027                                                                  00000027
 000028     JSON PARSE WS-BUF INTO SOME-DATA END-JSON                    00000028
 000029                                                                  00000029
-000030     JSON PARSE                                                   00000030
-000031         WS-BUF INTO SOME-DATA                                    00000031
-000032         DETAIL                                                   00000032
-000033         NAME SD-001 'ARTHUR'                                     00000033
-000034              SD-002 'DENT'                                       00000034
-000035         SUPPRESS                                                 00000035
-000036              SD-001                                              00000036
-000037              SD-002                                              00000037
-000038         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000038
-000039         NOT ON EXCEPTION PERFORM 1000-para                       00000039
+000030     JSON PARSE WS-BUF INTO SOME-DATA                             00000030
+000031       ENCODING 37                                                00000031
+000032     END-JSON                                                     00000032
+000033                                                                  00000033
+000034     JSON PARSE WS-BUF INTO SOME-DATA                             00000034
+000035       ENCODING WS-COUNT                                          00000035
+000036     END-JSON                                                     00000036
+000037                                                                  00000037
+000038     JSON PARSE WS-BUF INTO SOME-DATA                             00000038
+000039       ENCODING FROM CODEPAGE                                     00000039
 000040     END-JSON                                                     00000040
 000041                                                                  00000041
 000042     JSON PARSE                                                   00000042
 000043         WS-BUF INTO SOME-DATA                                    00000043
-000044         WITH DETAIL                                              00000044
-000045         NAME OF SD-001 IS 'ARTHUR'                               00000045
-000046                 SD-002 IS OMITTED                                00000046
-000047         SUPPRESS SD-001 SD-003                                   00000047
-000048         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000048
-000049         NOT ON EXCEPTION PERFORM 1000-para                       00000049
-000050     END-JSON                                                     00000050
-000051                                                                  00000051
-000052     JSON PARSE                                                   00000052
-000053         WS-BUF INTO SOME-DATA                                    00000053
-000054         WITH DETAIL                                              00000054
-000055         NAME OF SD-001 IS 'ARTHUR'                               00000055
-000056                 SD-002 IS OMITTED                                00000056
-000057         SUPPRESS SD-001 SD-003                                   00000057
-000058         CONVERTING SD-001 FROM JSON BOOLEAN USING SD-001-TRUTH   00000058
-000059         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000059
-000060         NOT ON EXCEPTION PERFORM 1000-para                       00000060
-000061     END-JSON                                                     00000061
-000062                                                                  00000062
-000063     JSON PARSE                                                   00000063
-000064         WS-BUF INTO SOME-DATA                                    00000064
-000065         WITH DETAIL                                              00000065
-000066         NAME OF SD-001 IS 'ARTHUR'                               00000066
-000067                 SD-002 IS OMITTED                                00000067
-000068         SUPPRESS SD-001 SD-003                                   00000068
-000069         CONVERTING                                               00000069
-000070                SD-001 FROM JSON BOOLEAN                          00000070
-000071                    USING SD-001-TRUTH AND SD-001-ALSO-TRUE       00000071
-000072         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000072
-000073         NOT ON EXCEPTION PERFORM 1000-para                       00000073
-000074     END-JSON                                                     00000074
-000075                                                                  00000075
-000076     JSON PARSE                                                   00000076
-000077         WS-BUF INTO SOME-DATA                                    00000077
-000078         WITH DETAIL                                              00000078
-000079         NAME OF SD-001 IS 'ARTHUR'                               00000079
-000080                 SD-002 IS OMITTED                                00000080
-000081         SUPPRESS SD-001 SD-003                                   00000081
-000082         CONVERTING                                               00000082
-000083                SD-001 FROM JSON BOOLEAN                          00000083
-000084                    USING 'TRILLIAN' AND 'MARVIN'                 00000084
-000085         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000085
-000086         NOT ON EXCEPTION PERFORM 1000-para                       00000086
-000087     END-JSON                                                     00000087
-000088                                                                  00000088
-000089     JSON PARSE                                                   00000089
-000090         WS-BUF INTO SOME-DATA                                    00000090
-000091         WITH DETAIL                                              00000091
-000092         NAME OF SD-001 IS 'ARTHUR'                               00000092
-000093                 SD-002 IS OMITTED                                00000093
-000094         SUPPRESS SD-001 SD-003                                   00000094
-000095         CONVERTING                                               00000095
-000096                SD-001 FROM JSON BOOLEAN                          00000096
-000097                    USING SD-001-TRUTH AND SD-001-ALSO-TRUE       00000097
-000098           ALSO                                                   00000098
-000099                SD-002 FROM BOOL USING '%%'                       00000099
-000100         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000100
-000101         NOT ON EXCEPTION PERFORM 1000-para                       00000101
-000102     END-JSON                                                     00000102
-000103                                                                  00000103
-000104     JSON PARSE                                                   00000104
-000105         WS-BUF INTO SOME-DATA                                    00000105
-000106         WITH DETAIL                                              00000106
-000107         NAME OF SD-001 IS 'ARTHUR'                               00000107
-000108                 SD-002 IS OMITTED                                00000108
-000109         SUPPRESS SD-001 SD-003                                   00000109
-000110         CONVERTING                                               00000110
-000111                SD-001 FROM JSON BOOLEAN                          00000111
-000112                    USING SD-001-TRUTH AND SD-001-ALSO-TRUE       00000112
-000113           ALSO                                                   00000113
-000114                SD-002 FROM BOOL USING '%%' AND '##'              00000114
-000115         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000115
-000116         NOT ON EXCEPTION PERFORM 1000-para                       00000116
-000117     END-JSON                                                     00000117
-000118                                                                  00000118
-000119                                                                  00000119
-000120     DISPLAY MYNAME ' End'                                        00000120
-000121                                                                  00000121
-000122     GOBACK                                                       00000122
-000123     .                                                            00000123
-000124                                                                  00000124
-000125 1000-para.                                                       00000125
-000126                                                                  00000126
-000127     .                                                            00000127
-000128                                                                  00000128
+000044         DETAIL                                                   00000044
+000045         NAME SD-001 'ARTHUR'                                     00000045
+000046              SD-002 'DENT'                                       00000046
+000047         SUPPRESS                                                 00000047
+000048              SD-001                                              00000048
+000049              SD-002                                              00000049
+000050         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000050
+000051         NOT ON EXCEPTION PERFORM 1000-para                       00000051
+000052     END-JSON                                                     00000052
+000053                                                                  00000053
+000054     JSON PARSE                                                   00000054
+000055         WS-BUF INTO SOME-DATA                                    00000055
+000056         WITH DETAIL                                              00000056
+000057         NAME OF SD-001 IS 'ARTHUR'                               00000057
+000058                 SD-002 IS OMITTED                                00000058
+000059         SUPPRESS SD-001 SD-003                                   00000059
+000060         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000060
+000061         NOT ON EXCEPTION PERFORM 1000-para                       00000061
+000062     END-JSON                                                     00000062
+000063                                                                  00000063
+000064     JSON PARSE                                                   00000064
+000065         WS-BUF INTO SOME-DATA                                    00000065
+000066         WITH DETAIL                                              00000066
+000067         NAME OF SD-001 IS 'ARTHUR'                               00000067
+000068                 SD-002 IS OMITTED                                00000068
+000069         SUPPRESS SD-001 SD-003                                   00000069
+000070         CONVERTING SD-001 FROM JSON BOOLEAN USING SD-001-TRUTH   00000070
+000071         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000071
+000072         NOT ON EXCEPTION PERFORM 1000-para                       00000072
+000073     END-JSON                                                     00000073
+000074                                                                  00000074
+000075     JSON PARSE                                                   00000075
+000076         WS-BUF INTO SOME-DATA                                    00000076
+000077         WITH DETAIL                                              00000077
+000078         NAME OF SD-001 IS 'ARTHUR'                               00000078
+000079                 SD-002 IS OMITTED                                00000079
+000080         SUPPRESS SD-001 SD-003                                   00000080
+000081         CONVERTING                                               00000081
+000082                SD-001 FROM JSON BOOLEAN                          00000082
+000083                    USING SD-001-TRUTH AND SD-001-ALSO-TRUE       00000083
+000084         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000084
+000085         NOT ON EXCEPTION PERFORM 1000-para                       00000085
+000086     END-JSON                                                     00000086
+000087                                                                  00000087
+000088     JSON PARSE                                                   00000088
+000089         WS-BUF INTO SOME-DATA                                    00000089
+000090         WITH DETAIL                                              00000090
+000091         NAME OF SD-001 IS 'ARTHUR'                               00000091
+000092                 SD-002 IS OMITTED                                00000092
+000093         SUPPRESS SD-001 SD-003                                   00000093
+000094         CONVERTING                                               00000094
+000095                SD-001 FROM JSON BOOLEAN                          00000095
+000096                    USING 'TRILLIAN' AND 'MARVIN'                 00000096
+000097         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000097
+000098         NOT ON EXCEPTION PERFORM 1000-para                       00000098
+000099     END-JSON                                                     00000099
+000100                                                                  00000100
+000101     JSON PARSE                                                   00000101
+000102         WS-BUF INTO SOME-DATA                                    00000102
+000103         WITH DETAIL                                              00000103
+000104         NAME OF SD-001 IS 'ARTHUR'                               00000104
+000105                 SD-002 IS OMITTED                                00000105
+000106         SUPPRESS SD-001 SD-003                                   00000106
+000107         CONVERTING                                               00000107
+000108                SD-001 FROM JSON BOOLEAN                          00000108
+000109                    USING SD-001-TRUTH AND SD-001-ALSO-TRUE       00000109
+000110           ALSO                                                   00000110
+000111                SD-002 FROM BOOL USING '%%'                       00000111
+000112         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000112
+000113         NOT ON EXCEPTION PERFORM 1000-para                       00000113
+000114     END-JSON                                                     00000114
+000115                                                                  00000115
+000116     JSON PARSE                                                   00000116
+000117         WS-BUF INTO SOME-DATA                                    00000117
+000118         WITH DETAIL                                              00000118
+000119         NAME OF SD-001 IS 'ARTHUR'                               00000119
+000120                 SD-002 IS OMITTED                                00000120
+000121         SUPPRESS SD-001 SD-003                                   00000121
+000122         CONVERTING                                               00000122
+000123                SD-001 FROM JSON BOOLEAN                          00000123
+000124                    USING SD-001-TRUTH AND SD-001-ALSO-TRUE       00000124
+000125           ALSO                                                   00000125
+000126                SD-002 FROM BOOL USING '%%' AND '##'              00000126
+000127         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000127
+000128         NOT ON EXCEPTION PERFORM 1000-para                       00000128
+000129     END-JSON                                                     00000129
+000130                                                                  00000130
+000131                                                                  00000131
+000132     DISPLAY MYNAME ' End'                                        00000132
+000133                                                                  00000133
+000134     GOBACK                                                       00000134
+000135     .                                                            00000135
+000136                                                                  00000136
+000137 1000-para.                                                       00000137
+000138                                                                  00000138
+000139     .                                                            00000139
+000140                                                                  00000140
