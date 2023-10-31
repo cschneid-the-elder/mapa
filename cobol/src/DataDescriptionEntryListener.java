@@ -86,6 +86,14 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
 		/**
 		*/
+		if (this.currProgram == null) {
+			/*
+			We are processing something other than a program, perhaps a
+			function prototype.
+			*/
+			return;
+		}
+
 		String callingModuleName = this.currProgram.getProgramName();
 		DDNode node = null;
 
@@ -131,6 +139,14 @@ public class DataDescriptionEntryListener extends CobolParserBaseListener {
 	}
 
 	public void enterConstantEntry(CobolParser.ConstantEntryContext ctx) {
+		if (this.currProgram == null) {
+			/*
+			We are processing something other than a program, perhaps a
+			function prototype.
+			*/
+			return;
+		}
+
 		this.currProgram.addConstantEntry(
 			new ConstantEntry(this.currProgram, ctx, this.locn, this.finalCompOptDefines));
 	}

@@ -26,6 +26,18 @@
            
            JSON GENERATE WS-BUF FROM SOME-DATA END-JSON
 
+           JSON GENERATE WS-BUF FROM SOME-DATA 
+               ENCODING 37
+           END-JSON
+
+           JSON GENERATE WS-BUF FROM SOME-DATA 
+               ENCODING WS-COUNT
+           END-JSON
+
+           JSON GENERATE WS-BUF FROM SOME-DATA 
+               ENCODING FROM CODEPAGE
+           END-JSON
+
            JSON GENERATE
                WS-BUF FROM SOME-DATA
                COUNT WS-COUNT

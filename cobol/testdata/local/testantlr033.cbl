@@ -27,6 +27,18 @@
            
            JSON PARSE WS-BUF INTO SOME-DATA END-JSON
 
+           JSON PARSE WS-BUF INTO SOME-DATA 
+             ENCODING 37
+           END-JSON
+
+           JSON PARSE WS-BUF INTO SOME-DATA 
+             ENCODING WS-COUNT
+           END-JSON
+
+           JSON PARSE WS-BUF INTO SOME-DATA 
+             ENCODING FROM CODEPAGE
+           END-JSON
+
            JSON PARSE
                WS-BUF INTO SOME-DATA
                DETAIL

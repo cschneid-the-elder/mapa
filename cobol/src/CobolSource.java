@@ -82,8 +82,18 @@ class CobolSource {
 		} else {
 			currTempFile = CLI.copyCompressingContinuations(currTempFile, baseDir, initFileNm);
 			currTempFile = processCDS(currTempFile, baseDir, initFileNm);
-			ParseTree tree = this.lookForCobolPrograms(currTempFile);
-			this.assembleDataNodeTree(tree, currTempFile, getLib(sourceFileName));
+			Boolean exceptionFound = false;
+			ParseTree tree = null;
+			try {
+				tree = this.lookForCobolPrograms(currTempFile);
+			} catch (Exception e) {
+				LOGGER.severe("Exception " + e + " encountered");
+				e.printStackTrace();
+				exceptionFound = true;
+			}
+			if (!exceptionFound) {
+				this.assembleDataNodeTree(tree, currTempFile, getLib(sourceFileName));
+			}
 		}
 	}
 
@@ -791,6 +801,10 @@ class CobolSource {
 			parser.setProfile(true);
 		}
 
+		/*
+		This may throw an exception, which is caught in the caller.  In that case
+		we just bail because a parsing error occurred.
+		*/
 		ParseTree tree = parser.startRule(); // parse the content and get the tree
 
 		if (this.CLI.profile) {
@@ -820,7 +834,15 @@ class CobolSource {
 				, String fileName
 				, String aLib
 				) throws IOException {
-		LOGGER.fine(this.myName + " assembleDataNodeTree()");
+		LOGGER.fine(
+			this.myName 
+			+ " assembleDataNodeTree("
+			+ tree
+			+ ", "
+			+ fileName
+			+ ", "
+			+ aLib
+			+ ")");
 		ArrayList<CallWrapper> calledNodes = new ArrayList<>();
 
 		ParseTreeWalker walker = new ParseTreeWalker();

@@ -193,5 +193,5 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 
 ### Up To Date
 
-This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2022-05-27 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
+This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2023-10-31 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
 
