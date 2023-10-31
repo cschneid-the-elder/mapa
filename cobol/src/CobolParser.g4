@@ -88,12 +88,12 @@ endProgramStatement
 
 identificationDivision
    : (IDENTIFICATION | ID) DIVISION (DOT_FS | DOT)
-     (programIdParagraph | classIdParagraph | functionIdParagraph | interfaceIdParagraph | methodIdParagraph | objectParagraph | factoryParagraph)
+     (programIdParagraph | classIdParagraph | functionIdParagraph | functionPrototypeIdParagraph | interfaceIdParagraph | methodIdParagraph | objectParagraph | factoryParagraph)
      identificationDivisionBody*
    ;
 
 identificationDivisionBody
-   : authorParagraph | installationParagraph | dateWrittenParagraph | dateCompiledParagraph | securityParagraph | remarksParagraph | optionsParagraph
+   : authorParagraph | installationParagraph | dateWrittenParagraph | dateCompiledParagraph | securityParagraph | remarksParagraph | optionsParagraph | entryInterfaceParagraph | entryNameParagraph
    ;
 
 // - program id paragraph ----------------------------------
@@ -124,8 +124,44 @@ factoryParagraph
 
 functionIdParagraph
    : FUNCTION_ID (DOT | DOT_FS) 
-     ((userFunctionName (AS literal)?)
-     | (functionPrototypeName (AS literal)? IS? PROTOTYPE))     
+     userFunctionName (AS literal)?
+     (DOT | DOT_FS)
+   ;
+
+// - function prototype id paragraph -----------------------------
+
+functionPrototypeIdParagraph
+   : FUNCTION_ID (DOT | DOT_FS) 
+     functionPrototypeNameClause 
+     IS? PROTOTYPE
+     entryNameClause?
+     entryInterfaceClause?
+     (DOT | DOT_FS)
+   ;
+
+functionPrototypeNameClause
+   : functionPrototypeName (AS literal)?
+   ;
+
+entryNameClause
+   : ENTRY_NAME IS? (COMPAT | LONGUPPER | LONGMIXED)
+   ;
+
+entryInterfaceClause
+   : ENTRY_INTERFACE IS? (STATIC | DYNAMIC | DLL)
+   ;
+
+// - entry interface paragraph -----------------------------
+
+entryInterfaceParagraph
+   : ENTRY_INTERFACE
+     (DOT | DOT_FS)
+   ;
+
+// - entry name paragraph -----------------------------
+
+entryNameParagraph
+   : ENTRY_NAME
      (DOT | DOT_FS)
    ;
 
@@ -3959,6 +3995,7 @@ cicsWord
    | CLASS
    | CLOSE
    | COMMIT
+   | COMPAT
    | CONDITION
    | CONTROL
    | COPY

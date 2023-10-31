@@ -18,5 +18,5 @@
        Procedure Division.
            DISPLAY doesnada
            GOBACK.
-       End Function test9033.
+       End Program test9033.
 

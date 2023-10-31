@@ -54,17 +54,23 @@ public class ProgramListener extends CobolParserBaseListener {
 	}
 
 	public void enterEndProgramStatement(CobolParser.EndProgramStatementContext ctx) {
-		this.pgmStack.pop();
+		if (!this.pgmStack.isEmpty()) {
+			this.pgmStack.pop();
+		}
 		LOGGER.finest(" enterEndProgramStatement exit pgmStack = " + this.pgmStack);
 	}
 
 	public void enterEndFunctionStatement(CobolParser.EndFunctionStatementContext ctx) {
-		this.pgmStack.pop();
+		if (!this.pgmStack.isEmpty()) {
+			this.pgmStack.pop();
+		}
 		LOGGER.finest(" enterEndFunctionStatement exit pgmStack = " + this.pgmStack);
 	}
 
 	public void enterEndClassStatement(CobolParser.EndClassStatementContext ctx) {
-		this.pgmStack.pop();
+		if (!this.pgmStack.isEmpty()) {
+			this.pgmStack.pop();
+		}
 		LOGGER.finest(" enterEndClassStatement exit pgmStack = " + this.pgmStack);
 	}
 }
