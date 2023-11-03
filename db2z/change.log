@@ -1,10 +1,28 @@
+--2023-11-03--------------------------------------------------------------------
+Maintenance per Martin Rutte...
+
+Alter dsnutilUCSYesOrNo to allow for optional parentheses.  The parentheses are
+not necessarily in the IBM documentation syntax diagram, but they are tolerated
+by DB2.
+
+Alter dsnutilUCSStatsIndexSpecJustOne and dsnutilUCSStatTableSpecName1 to make 
+parentheses optional.  The parentheses are not optional in the IBM 
+documentation syntax diagram, but their absence is tolerated by DB2.
+
+Added dsnutilUCSInvalidatecacheOption to 
+dsnutilUCSRunstatsTablespaceStatisticsSpec.  It's not documented, but DB2
+tolerates it.
+
+Moved DSNUTIL_SKIP_LOCKED_DATA? from dsnutilUCSShrlevelChangeSpec3 
+to dsnutilUCSIsolationCSOption for clarity.
+
 --2023-10-24--------------------------------------------------------------------
 Maintenance per Martin Rutte...
 
 Alter dsnutilUCSWorkddnSpec to allow for WORKDDN arguments to not be enclosed 
 in parentheses.  This is tolerated by DB2 13 but is not documented as far back 
 as DB2 v6.
-
+ 
 Alter dsnutilUCSCopyddnOption to allow for argument in optional parentheses.
 
 Alter dsnutilUCSUnlddnOption to allow for argument in optional parentheses.

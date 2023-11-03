@@ -781,8 +781,15 @@ dsnutilUCSCheckDataDelete
 	)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2023-11-03.  The
+parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+*/
 dsnutilUCSYesOrNo
 	: (
+	((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) (DSNUTIL_YES | DSNUTIL_NO) DSNUTIL_RPAREN1)
+	|
 	DSNUTIL_YES | DSNUTIL_NO
 	)
 	;
@@ -1605,10 +1612,17 @@ dsnutilUCSStatTableSpecOneOfMany
 	dsnutilUCSStatTableSpecName2 dsnutilUCSTableStatsSpec*
 	)
 	;
-
+/*
+Modified per Martijn Rutte 2023-11-03 to make parentheses optional.  This
+syntax is tolerated by DB2 but not mentioned in the IBM documentation as
+of this date.
+*/
 dsnutilUCSStatTableSpecName1
 	: (
-	DSNUTIL_TABLE DSNUTIL_DB_TS_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1
+	DSNUTIL_TABLE 
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
+	|
+	dsnutilUCSArg)
 	)
 	;
 
@@ -1730,9 +1744,18 @@ dsnutilUCSStatIndexSpec2
 	)
 	;
 
+/*
+Modified per Martijn Rutte 2023-11-03 to make parentheses optional.  This
+syntax is tolerated by DB2 but not mentioned in the IBM documentation as
+of this date.
+*/
 dsnutilUCSStatsIndexSpecJustOne
 	: (
-	(DSNUTIL_DB_TS_LPAREN (dsnutilUCSQualifiedIndexName | DSNUTIL_ALL) DSNUTIL_RPAREN1)
+	(
+		(DSNUTIL_DB_TS_LPAREN (dsnutilUCSQualifiedIndexName | DSNUTIL_ALL) DSNUTIL_RPAREN1)
+	|
+		(dsnutilUCSQualifiedIndexName | DSNUTIL_ALL)
+	)
 	dsnutilUCSCorrelationStatsSpec*
 	)
 	;
@@ -3570,17 +3593,21 @@ dsnutilUCSShrlevelChangeSpec2
 	)
 	;
 
+/*
+Moved  DSNUTIL_SKIP_LOCKED_DATA? from dsnutilUCSShrlevelChangeSpec3 
+to dsnutilUCSIsolationCSOption for clarity per Martijn Rutte 2023-11-03.
+*/
 dsnutilUCSShrlevelChangeSpec3
 	: (
 	DSNUTIL_SHRLEVEL DSNUTIL_CHANGE
-	((dsnutilUCSIsolationCSOption DSNUTIL_SKIP_LOCKED_DATA?)
+	((dsnutilUCSIsolationCSOption)
 	| (dsnutilUCSIsolationUROption dsnutilUCSRegisterOption))
 	)
 	;
 
 dsnutilUCSIsolationCSOption
 	: (
-	DSNUTIL_ISOLATION DSNUTIL_CS
+	DSNUTIL_ISOLATION DSNUTIL_CS DSNUTIL_SKIP_LOCKED_DATA?
 	)
 	;
 
@@ -4336,7 +4363,11 @@ dsnutilUCSRunstatsTablespaceSpec
 	(dsnutilUCSPartOption1 dsnutilUCSForcerollupOption?)?
 	)
 	;
+/*
+Added dsnutilUCSInvalidatecacheOption per Martijn Rutte 2023-11-03.
 
+This isn't currently documented, but DB2 tolerates it.
+*/
 dsnutilUCSRunstatsTablespaceStatisticsSpec
 	: (
 	dsnutilUCSRunstatsTableSpec
@@ -4349,6 +4380,7 @@ dsnutilUCSRunstatsTablespaceStatisticsSpec
 	| dsnutilUCSHistoryOption
 	| dsnutilUCSUpdateOption
 	| dsnutilUCSReportOption
+	| dsnutilUCSInvalidatecacheOption
 	)
 	;
 

@@ -4010,6 +4010,7 @@ cicsWord
    | CHAR
    | CLASS
    | CLOSE
+   | CODEPAGE
    | COMMIT
    | COMPAT
    | CONDITION
