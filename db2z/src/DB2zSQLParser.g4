@@ -781,8 +781,15 @@ dsnutilUCSCheckDataDelete
 	)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2023-11-03.  The
+parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+*/
 dsnutilUCSYesOrNo
 	: (
+	((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) (DSNUTIL_YES | DSNUTIL_NO) DSNUTIL_RPAREN1)
+	|
 	DSNUTIL_YES | DSNUTIL_NO
 	)
 	;
