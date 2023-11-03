@@ -3593,17 +3593,21 @@ dsnutilUCSShrlevelChangeSpec2
 	)
 	;
 
+/*
+Moved  DSNUTIL_SKIP_LOCKED_DATA? from dsnutilUCSShrlevelChangeSpec3 
+to dsnutilUCSIsolationCSOption for clarity per Martijn Rutte 2023-11-03.
+*/
 dsnutilUCSShrlevelChangeSpec3
 	: (
 	DSNUTIL_SHRLEVEL DSNUTIL_CHANGE
-	((dsnutilUCSIsolationCSOption DSNUTIL_SKIP_LOCKED_DATA?)
+	((dsnutilUCSIsolationCSOption)
 	| (dsnutilUCSIsolationUROption dsnutilUCSRegisterOption))
 	)
 	;
 
 dsnutilUCSIsolationCSOption
 	: (
-	DSNUTIL_ISOLATION DSNUTIL_CS
+	DSNUTIL_ISOLATION DSNUTIL_CS DSNUTIL_SKIP_LOCKED_DATA?
 	)
 	;
 
