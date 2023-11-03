@@ -4359,7 +4359,11 @@ dsnutilUCSRunstatsTablespaceSpec
 	(dsnutilUCSPartOption1 dsnutilUCSForcerollupOption?)?
 	)
 	;
+/*
+Added dsnutilUCSInvalidatecacheOption per Martijn Rutte 2023-11-03.
 
+This isn't currently documented, but DB2 tolerates it.
+*/
 dsnutilUCSRunstatsTablespaceStatisticsSpec
 	: (
 	dsnutilUCSRunstatsTableSpec
@@ -4372,6 +4376,7 @@ dsnutilUCSRunstatsTablespaceStatisticsSpec
 	| dsnutilUCSHistoryOption
 	| dsnutilUCSUpdateOption
 	| dsnutilUCSReportOption
+	| dsnutilUCSInvalidatecacheOption
 	)
 	;
 

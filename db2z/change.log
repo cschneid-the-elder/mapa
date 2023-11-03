@@ -9,6 +9,11 @@ Alter dsnutilUCSStatsIndexSpecJustOne and dsnutilUCSStatTableSpecName1 to make
 parentheses optional.  The parentheses are not optional in the IBM 
 documentation syntax diagram, but their absence is tolerated by DB2.
 
+Added dsnutilUCSInvalidatecacheOption to 
+dsnutilUCSRunstatsTablespaceStatisticsSpec.  It's not documented, but DB2
+tolerates it.
+
+
 --2023-10-24--------------------------------------------------------------------
 Maintenance per Martin Rutte...
 
