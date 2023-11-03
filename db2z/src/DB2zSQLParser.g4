@@ -1612,10 +1612,17 @@ dsnutilUCSStatTableSpecOneOfMany
 	dsnutilUCSStatTableSpecName2 dsnutilUCSTableStatsSpec*
 	)
 	;
-
+/*
+Modified per Martijn Rutte 2023-11-03 to make parentheses optional.  This
+syntax is tolerated by DB2 but not mentioned in the IBM documentation as
+of this date.
+*/
 dsnutilUCSStatTableSpecName1
 	: (
-	DSNUTIL_TABLE DSNUTIL_DB_TS_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1
+	DSNUTIL_TABLE 
+	((DSNUTIL_DB_TS_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
+	|
+	dsnutilUCSArg)
 	)
 	;
 
@@ -1737,9 +1744,18 @@ dsnutilUCSStatIndexSpec2
 	)
 	;
 
+/*
+Modified per Martijn Rutte 2023-11-03 to make parentheses optional.  This
+syntax is tolerated by DB2 but not mentioned in the IBM documentation as
+of this date.
+*/
 dsnutilUCSStatsIndexSpecJustOne
 	: (
-	(DSNUTIL_DB_TS_LPAREN (dsnutilUCSQualifiedIndexName | DSNUTIL_ALL) DSNUTIL_RPAREN1)
+	(
+		(DSNUTIL_DB_TS_LPAREN (dsnutilUCSQualifiedIndexName | DSNUTIL_ALL) DSNUTIL_RPAREN1)
+	|
+		(dsnutilUCSQualifiedIndexName | DSNUTIL_ALL)
+	)
 	dsnutilUCSCorrelationStatsSpec*
 	)
 	;
