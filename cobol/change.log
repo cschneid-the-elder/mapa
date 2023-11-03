@@ -1,3 +1,7 @@
+--2023-11-03--------------------------------------------------------------------
+Fixed cicsWord in CobolParser.g4 to include CODEPAGE.  Not sure how this got
+left out, as the testLocalx for test9022.cbl checks for it.
+
 --2023-10-31--------------------------------------------------------------------
 Updates per IBM documentation this date.
 
