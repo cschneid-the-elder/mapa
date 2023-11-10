@@ -1249,6 +1249,7 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadKeepdictionaryOption
 	| dsnutilUCSReuseOption
 	| dsnutilUCSLoadLogOption
+	| dsnutilUCSLoadNocopypendOption
 	| dsnutilUCSLoadWorkddnOption
 	| dsnutilUCSLoadSortkeysOption
 	| dsnutilUCSFormatSpec
@@ -1340,15 +1341,15 @@ dsnutilUCSReuseOption
 	)
 	;
 
-/*
-Fix by Martijn Rutte, contrary to IBM documentation as of 2023-10-20
-NOCOPYPEND can prepend LOG.
-*/
 dsnutilUCSLoadLogOption
 	: (
-	(DSNUTIL_LOG (DSNUTIL_YES | (DSNUTIL_NO DSNUTIL_NOCOPYPEND?)))
-	|
-	(DSNUTIL_NOCOPYPEND? DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))
+	DSNUTIL_LOG dsnutilUCSYesOrNo
+	)
+	;
+
+dsnutilUCSLoadNocopypendOption
+	: (
+	DSNUTIL_NOCOPYPEND
 	)
 	;
 
