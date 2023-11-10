@@ -813,7 +813,7 @@ dsnutilUCSCheckDataWorkddn
 	;
 
 dsnutilUCSPunchddnOption
-	: (DSNUTIL_PUNCHDDN dsnutilUCSArg)
+	: (DSNUTIL_PUNCHDDN dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSSortdevtOption

@@ -4,6 +4,7 @@ Maintenance per Martin Rutte...
 Alteration to 2023-10-20 maintenance simplifying dsnutilUCSLoadLogOption and
 making NOCOPYPEND into its own option.
 
+Alter dsnutilUCSPunchddnOption to allow for argument in optional parentheses.
 
 --2023-11-03--------------------------------------------------------------------
 Maintenance per Martin Rutte...
