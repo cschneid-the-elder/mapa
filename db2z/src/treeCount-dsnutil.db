@@ -12,7 +12,7 @@
 +	sql_call_dsnutil_diagnose	9	36	0	0	0	0	0	1	1	12	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_exec_sql	29	116	0	0	0	0	0	0	0	0	29	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_listdef	7	28	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_load	23	92	0	0	0	0	0	0	0	0	1	0	23	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
++	sql_call_dsnutil_load	24	96	0	0	0	0	0	0	0	0	1	0	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
 +	sql_call_dsnutil_mergecopy	6	24	0	0	0	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0
 +	sql_call_dsnutil_modify_recovery	27	108	0	0	0	0	0	0	0	0	0	0	0	0	27	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_modify_statistics	119	476	0	0	0	0	0	0	0	0	0	0	0	0	0	119	0	0	0	0	0	0	0	0	0	0	0	0	0
@@ -28,6 +28,6 @@
 +	sql_call_dsnutil_runstats	47	188	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	47	0	0	0
 +	sql_call_dsnutil_stospace	6	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	0	0
 +	sql_call_dsnutil_template	22	88	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	22	0
-+	sql_call_dsnutil_unload	8	32	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8
++	sql_call_dsnutil_unload	10	40	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	10
 +	sql_NOUPLOAD_call_dsnutilv	2	8	0	0	0	0	0	1	0	0	0	1	0	0	1	0	0	0	0	0	0	18	0	0	0	0	0	4	0
 +	sql_NOUPLOAD_call_dsnutil_CR_error	2	8	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	4	0

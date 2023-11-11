@@ -812,8 +812,11 @@ dsnutilUCSCheckDataWorkddn
 	)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2023-11-10.
+*/
 dsnutilUCSPunchddnOption
-	: (DSNUTIL_PUNCHDDN dsnutilUCSArg)
+	: (DSNUTIL_PUNCHDDN dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSSortdevtOption
@@ -1249,6 +1252,7 @@ dsnutilUCSLoadOptions
 	| dsnutilUCSLoadKeepdictionaryOption
 	| dsnutilUCSReuseOption
 	| dsnutilUCSLoadLogOption
+	| dsnutilUCSLoadNocopypendOption
 	| dsnutilUCSLoadWorkddnOption
 	| dsnutilUCSLoadSortkeysOption
 	| dsnutilUCSFormatSpec
@@ -1340,15 +1344,18 @@ dsnutilUCSReuseOption
 	)
 	;
 
-/*
-Fix by Martijn Rutte, contrary to IBM documentation as of 2023-10-20
-NOCOPYPEND can prepend LOG.
-*/
 dsnutilUCSLoadLogOption
 	: (
-	(DSNUTIL_LOG (DSNUTIL_YES | (DSNUTIL_NO DSNUTIL_NOCOPYPEND?)))
-	|
-	(DSNUTIL_NOCOPYPEND? DSNUTIL_LOG (DSNUTIL_YES | DSNUTIL_NO))
+	DSNUTIL_LOG dsnutilUCSYesOrNo
+	)
+	;
+
+/*
+Made into separate option per Martijn Rutte 2023-22-10.
+*/
+dsnutilUCSLoadNocopypendOption
+	: (
+	DSNUTIL_NOCOPYPEND
 	)
 	;
 
@@ -4737,9 +4744,12 @@ dsnutilUCSUnloadSpec
 	)
 	;
 
+/*
+Alternate syntax without FROM added per Martijn Rutte 2023-11-10.
+*/
 dsnutilUCSUnloadSourceSpec
 	: (
-	DSNUTIL_FROM_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?
+	(DSNUTIL_FROM_TABLESPACE | DSNUTIL_TABLESPACE) dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?
 	(dsnutilUCSFromCopyDsnOption | dsnutilUCSFromCopyDdnOption)?
 	)
 	;
