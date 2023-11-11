@@ -6,6 +6,8 @@ making NOCOPYPEND into its own option.
 
 Alter dsnutilUCSPunchddnOption to allow for argument in optional parentheses.
 
+Alter dsnutilUCSUnloadSourceSpec to allow for alternate syntax without FROM.
+
 --2023-11-03--------------------------------------------------------------------
 Maintenance per Martin Rutte...
 

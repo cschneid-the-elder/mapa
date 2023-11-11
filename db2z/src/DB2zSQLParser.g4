@@ -812,6 +812,9 @@ dsnutilUCSCheckDataWorkddn
 	)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2023-11-10.
+*/
 dsnutilUCSPunchddnOption
 	: (DSNUTIL_PUNCHDDN dsnutilUCSArgOptionalParens)
 	;
@@ -1347,6 +1350,9 @@ dsnutilUCSLoadLogOption
 	)
 	;
 
+/*
+Made into separate option per Martijn Rutte 2023-22-10.
+*/
 dsnutilUCSLoadNocopypendOption
 	: (
 	DSNUTIL_NOCOPYPEND
@@ -4738,9 +4744,12 @@ dsnutilUCSUnloadSpec
 	)
 	;
 
+/*
+Alternate syntax without FROM added per Martijn Rutte 2023-11-10.
+*/
 dsnutilUCSUnloadSourceSpec
 	: (
-	DSNUTIL_FROM_TABLESPACE dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?
+	(DSNUTIL_FROM_TABLESPACE | DSNUTIL_TABLESPACE) dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?
 	(dsnutilUCSFromCopyDsnOption | dsnutilUCSFromCopyDdnOption)?
 	)
 	;
