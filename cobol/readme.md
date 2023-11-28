@@ -103,7 +103,7 @@ The DD record contains counts of how the file is opened.  This might be useful i
 
 ### Build/Execution Environment
 
-This was built on ubuntu 20.04 LTS with ANTLR 4.11.1, openjdk version "11.0.14.1", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 20.04 LTS with ANTLR 4.13.1, openjdk version "11.0.20.1 2023-08-24", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 The GNU toolchain is used for building.  If you want to build from scratch, i.e. a repository cloned with git, there are some instructions at the top of the Makefile.
 

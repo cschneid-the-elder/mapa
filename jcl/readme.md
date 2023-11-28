@@ -96,7 +96,7 @@ More generically...
 
 ### Build/Execution Environment
 
-This was built on ubuntu 20.04 LTS with ANTLR 4.11.1, openjdk 11.0.18 2023-01-17, and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 20.04 LTS with ANTLR 4.13.1, openjdk "11.0.20.1 2023-08-24", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 ### I Am Not A Java Person
 
