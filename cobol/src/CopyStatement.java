@@ -242,10 +242,14 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 
 	public String getCopyFile() {
 		String copyFile = this.getCopyFileRaw();
+		String delimiterChar = null;
 
-		if (copyFile.indexOf("'") != -1) {
+		if (copyFile.contains("'")) delimiterChar = "'";
+		if (copyFile.contains("\"")) delimiterChar = "\"";
+
+		if (delimiterChar != null) {
 			copyFile = 
-				copyFile.substring(copyFile.indexOf("'") + 1, copyFile.lastIndexOf("'"));
+				copyFile.substring(copyFile.indexOf(delimiterChar) + 1, copyFile.lastIndexOf(delimiterChar));
 		}
 
 		return copyFile;
