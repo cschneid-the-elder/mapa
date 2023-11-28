@@ -10,6 +10,6 @@ There is a mutual left-recursion problem in the tableReference rule with respect
 
 IBM's documentation for version 12 of Db2 for z/OS served as original source material.  This should be up to date with Db2 13 documentation dated 2023-06-08.  I do check back with the IBM documentation every three to six months looking for anything new that I should add to the grammars.
 
-This was built on Ubuntu 20.04 LTS with ANTLR 4.11.1 and openjdk version "11.0.18 2023-01-17".
+This was built on Ubuntu 20.04 LTS with ANTLR 4.13.1 and openjdk version "11.0.20.1 2023-08-24".
 
 

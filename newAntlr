@@ -1,0 +1,16 @@
+#!/bin/bash
+
+cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar cobol/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar db2z/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar jcl/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar cobol/
+cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar db2z/
+cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar jcl/
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' cobol/manifest
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' jcl/manifest
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' cobol/Makefile
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' db2z/Makefile
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' jcl/Makefile
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' db2z/src/tester
+sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' jcl/src/tester
+
