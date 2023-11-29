@@ -20,7 +20,7 @@ AOPT = -visitor -listener
 	java -jar ./lib/antlr-4.13.1-complete.jar $(AOPT) -Xexact-output-dir -o $(dir $<) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 
-all: ./src/DB2zSQLLexer.tokens ./src/DB2zSQLParser.tokens
+all: ./src/DB2zSQLLexer.tokens ./src/DB2zSQLParser.tokens ./class/ValidatingListener.class ./class/SQLValidator.class
 
 testrig:
 	echo `date` $@ $(n) >> build.log
@@ -47,8 +47,11 @@ testdsnutil:
 
 jar:
 	echo `date` $@ >> build.log
-	jar cf DB2zSQL.jar -C class .
+	jar vcf DB2zSQL.jar -C class DB2zSQL*.class
 
+validatorjar:
+	echo `date` $@ >> build.log
+	jar vcfm SQLValidator.jar SQLValidatorManifest -C class SQLValidator.class class/ValidatingListener.class
 
 ./src/DB2zSQLLexer.tokens: 
 

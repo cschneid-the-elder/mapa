@@ -1,0 +1,3 @@
+Main-Class: SQLValidator
+Class-Path: antlr-4.13.1-complete.jar DB2zSQL.jar
+
