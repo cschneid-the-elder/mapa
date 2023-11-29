@@ -53,6 +53,12 @@ validatorjar:
 	echo `date` $@ >> build.log
 	jar vcfm SQLValidator.jar SQLValidatorManifest -C class SQLValidator.class class/ValidatingListener.class
 
+demovalidator:
+	echo `date` $@ >> build.log
+	java -jar SQLValidator.jar testdata/sql_createProcedureSQLPL
+	java -jar SQLValidator.jar testdata/sql_createIndex
+	java -jar SQLValidator.jar testdata/sql_call_dsnutil_runstats
+
 ./src/DB2zSQLLexer.tokens: 
 
 ./src/DB2zSQLParser.tokens: ./src/DB2zSQLLexer.tokens

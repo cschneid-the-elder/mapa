@@ -49,11 +49,18 @@ public class SQLValidator {
 		}
 		
 		ParseTreeWalker walker = new ParseTreeWalker();
-	
+
+		ArrayList<String> errorMessages = new ArrayList<>();
+		ArrayList<String> warningMessages = new ArrayList<>();
+		ArrayList<String> informationMessages = new ArrayList<>();
 		/*
-		This listener validates the DSSIZE value.
+		This listener validates the DSSIZE value, accumulating errors in
+		the passed ArrayList.
 		*/
-		ValidatingListener listener = new ValidatingListener();
+		ValidatingListener listener = 
+			new ValidatingListener(errorMessages
+								, warningMessages
+								, informationMessages);
 	
 		System.out.println("walking parse tree with " + listener.getClass().getName());
 	
@@ -62,6 +69,18 @@ public class SQLValidator {
 		} catch(Exception e) {
 			System.out.println(listener.getClass().getName() + " error " + e);
 			System.exit(12);
+		}
+
+		for (String errMsg: errorMessages) {
+			System.out.println(errMsg);
+		}
+
+		for (String errMsg: warningMessages) {
+			System.out.println(errMsg);
+		}
+
+		for (String errMsg: informationMessages) {
+			System.out.println(errMsg);
 		}
 
 	}
