@@ -4173,152 +4173,158 @@ XSLTRANSFORM
 
 //generated sql special registers
 
+/*
+2023-12-04 Maarten van Haasteren found that DB2 tolerates both
+spaces and newlines between CURRENT and, well, all of the 
+following.
+*/
+
 CURRENT_ACCELERATOR
-	: C U R R E N T [ ]+ A C C E L E R A T O R 
+	: C U R R E N T (WS | NEWLINE)+ A C C E L E R A T O R 
 	;
 
 CURRENT_APPLICATION_COMPATIBILITY
-	: C U R R E N T [ ]+ A P P L I C A T I O N [ ]+ C O M P A T I B I L I T Y 
+	: C U R R E N T (WS | NEWLINE)+ A P P L I C A T I O N (WS | NEWLINE)+ C O M P A T I B I L I T Y 
 	;
 
 CURRENT_APPLICATION_ENCODING_SCHEME
-	: C U R R E N T [ ]+ (A P P L I C A T I O N [ ]+)? E N C O D I N G [ ]+ S C H E M E 
+	: C U R R E N T (WS | NEWLINE)+ (A P P L I C A T I O N (WS | NEWLINE)+)? E N C O D I N G (WS | NEWLINE)+ S C H E M E 
 	;
 
 CURRENT_CLIENT_ACCTNG
-	: C U R R E N T [ ]+ C L I E N T '_' A C C T N G 
+	: C U R R E N T (WS | NEWLINE)+ C L I E N T '_' A C C T N G 
 	;
 
 CURRENT_CLIENT_APPLNAME
-	: C U R R E N T [ ]+ C L I E N T '_' A P P L N A M E 
+	: C U R R E N T (WS | NEWLINE)+ C L I E N T '_' A P P L N A M E 
 	;
 
 CURRENT_CLIENT_CORR_TOKEN
-	: C U R R E N T [ ]+ C L I E N T '_' C O R R '_' T O K E N 
+	: C U R R E N T (WS | NEWLINE)+ C L I E N T '_' C O R R '_' T O K E N 
 	;
 
 CURRENT_CLIENT_USERID
-	: C U R R E N T [ ]+ C L I E N T '_' U S E R I D 
+	: C U R R E N T (WS | NEWLINE)+ C L I E N T '_' U S E R I D 
 	;
 
 CURRENT_CLIENT_WRKSTNNAME
-	: C U R R E N T [ ]+ C L I E N T '_' W R K S T N N A M E 
+	: C U R R E N T (WS | NEWLINE)+ C L I E N T '_' W R K S T N N A M E 
 	;
 
 CURRENT_DATE
-	: C U R R E N T ('_' | [ ]+) D A T E 
+	: C U R R E N T ('_' | (WS | NEWLINE)+) D A T E 
 	;
 
 CURRENT_DEBUG_MODE
-	: C U R R E N T [ ]+ D E B U G [ ]+ M O D E 
+	: C U R R E N T (WS | NEWLINE)+ D E B U G (WS | NEWLINE)+ M O D E 
 	;
 
 CURRENT_DECFLOAT_ROUNDING_MODE
-	: C U R R E N T [ ]+ D E C F L O A T [ ]+ R O U N D I N G [ ]+ M O D E 
+	: C U R R E N T (WS | NEWLINE)+ D E C F L O A T (WS | NEWLINE)+ R O U N D I N G (WS | NEWLINE)+ M O D E 
 	;
 
 CURRENT_DEGREE
-	: C U R R E N T [ ]+ D E G R E E 
+	: C U R R E N T (WS | NEWLINE)+ D E G R E E 
 	;
 
 CURRENT_EXPLAIN_MODE
-	: C U R R E N T [ ]+ E X P L A I N [ ]+ M O D E 
+	: C U R R E N T (WS | NEWLINE)+ E X P L A I N (WS | NEWLINE)+ M O D E 
 	;
 
 CURRENT_GET_ACCEL_ARCHIVE
-	: C U R R E N T [ ]+ G E T '_' A C C E L '_' A R C H I V E 
+	: C U R R E N T (WS | NEWLINE)+ G E T '_' A C C E L '_' A R C H I V E 
 	;
 
 CURRENT_LOCALE_LC_CTYPE
-	: C U R R E N T ('_' | [ ]+ | ([ ]+ L O C A L E [ ]+)) L C '_' C T Y P E 
+	: C U R R E N T ('_' | (WS | NEWLINE)+ | ((WS | NEWLINE)+ L O C A L E (WS | NEWLINE)+)) L C '_' C T Y P E 
 	;
 
 CURRENT_MAINTAINED_TABLE_TYPES_FOR_OPTIMIZATION
-	: C U R R E N T [ ]+ M A I N T A I N E D [ ]+ (T A B L E [ ]+)? T Y P E S [ ]+ (F O R [ ]+ O P T I M I Z A T I O N)? 
+	: C U R R E N T (WS | NEWLINE)+ M A I N T A I N E D (WS | NEWLINE)+ (T A B L E (WS | NEWLINE)+)? T Y P E S (WS | NEWLINE)+ (F O R (WS | NEWLINE)+ O P T I M I Z A T I O N)? 
 	;
 
 CURRENT_MEMBER
-	: C U R R E N T [ ]+ M E M B E R 
+	: C U R R E N T (WS | NEWLINE)+ M E M B E R 
 	;
 
 CURRENT_OPTIMIZATION_HINT
-	: C U R R E N T [ ]+ O P T I M I Z A T I O N [ ]+ H I N T 
+	: C U R R E N T (WS | NEWLINE)+ O P T I M I Z A T I O N (WS | NEWLINE)+ H I N T 
 	;
 
 CURRENT_PACKAGE_PATH
-	: C U R R E N T [ ]+ P A C K A G E [ ]+ P A T H 
+	: C U R R E N T (WS | NEWLINE)+ P A C K A G E (WS | NEWLINE)+ P A T H 
 	;
 
 CURRENT_PACKAGESET
-	: C U R R E N T [ ]+ P A C K A G E S E T 
+	: C U R R E N T (WS | NEWLINE)+ P A C K A G E S E T 
 	;
 
 CURRENT_PATH
-	: C U R R E N T [ ]+ P A T H 
+	: C U R R E N T (WS | NEWLINE)+ P A T H 
 	;
 
 CURRENT_PRECISION
-	: C U R R E N T [ ]+ P R E C I S I O N 
+	: C U R R E N T (WS | NEWLINE)+ P R E C I S I O N 
 	;
 
 CURRENT_QUERY_ACCELERATION
-	: C U R R E N T [ ]+ Q U E R Y [ ]+ A C C E L E R A T I O N 
+	: C U R R E N T (WS | NEWLINE)+ Q U E R Y (WS | NEWLINE)+ A C C E L E R A T I O N 
 	;
 
 CURRENT_QUERY_ACCELERATION_WAITFORDATA
-	: C U R R E N T [ ]+ Q U E R Y [ ]+ A C C E L E R A T I O N [ ]+ W A I T F O R D A T A 
+	: C U R R E N T (WS | NEWLINE)+ Q U E R Y (WS | NEWLINE)+ A C C E L E R A T I O N (WS | NEWLINE)+ W A I T F O R D A T A 
 	;
 
 CURRENT_REFRESH_AGE
-	: C U R R E N T [ ]+ R E F R E S H [ ]+ A G E 
+	: C U R R E N T (WS | NEWLINE)+ R E F R E S H (WS | NEWLINE)+ A G E 
 	;
 
 CURRENT_ROUTINE_VERSION
-	: C U R R E N T [ ]+ R O U T I N E [ ]+ V E R S I O N 
+	: C U R R E N T (WS | NEWLINE)+ R O U T I N E (WS | NEWLINE)+ V E R S I O N 
 	;
 
 CURRENT_RULES
-	: C U R R E N T [ ]+ R U L E S 
+	: C U R R E N T (WS | NEWLINE)+ R U L E S 
 	;
 
 CURRENT_SCHEMA
-	: C U R R E N T ('_' | [ ]+) S C H E M A 
+	: C U R R E N T ('_' | (WS | NEWLINE)+) S C H E M A 
 	;
 
 CURRENT_SERVER
-	: C U R R E N T [ ]+ S E R V E R 
+	: C U R R E N T (WS | NEWLINE)+ S E R V E R 
 	;
 
 CURRENT_SQLID
-	: C U R R E N T [ ]+ S Q L I D 
+	: C U R R E N T (WS | NEWLINE)+ S Q L I D 
 	;
 
 CURRENT_TEMPORAL_BUSINESS_TIME
-	: C U R R E N T [ ]+ T E M P O R A L [ ]+ B U S I N E S S '_' T I M E 
+	: C U R R E N T (WS | NEWLINE)+ T E M P O R A L (WS | NEWLINE)+ B U S I N E S S '_' T I M E 
 	;
 
 CURRENT_TEMPORAL_SYSTEM_TIME
-	: C U R R E N T [ ]+ T E M P O R A L [ ]+ S Y S T E M '_' T I M E 
+	: C U R R E N T (WS | NEWLINE)+ T E M P O R A L (WS | NEWLINE)+ S Y S T E M '_' T I M E 
 	;
 
 CURRENT_TIME
-	: C U R R E N T ('_' | [ ]+) T I M E 
+	: C U R R E N T ('_' | (WS | NEWLINE)+) T I M E 
 	;
 
 CURRENT_TIMESTAMP
-	: C U R R E N T ('_' | [ ]+) T I M E S T A M P 
+	: C U R R E N T ('_' | (WS | NEWLINE)+) T I M E S T A M P 
 	;
 
 CURRENT_TIME_ZONE
-	: C U R R E N T [ ]+ T I M E [ ]* Z O N E 
+	: C U R R E N T (WS | NEWLINE)+ T I M E (WS | NEWLINE)* Z O N E 
 	;
 
 ENCRYPTION_PASSWORD
-	: E N C R Y P T I O N [ ]+ P A S S W O R D 
+	: E N C R Y P T I O N (WS | NEWLINE)+ P A S S W O R D 
 	;
 
 SESSION_TIME_ZONE
-	: S E S S I O N [ ]* T I M E [ ]* Z O N E 
+	: S E S S I O N (WS | NEWLINE)* T I M E (WS | NEWLINE)* Z O N E 
 	;
 
 SESSION_USER

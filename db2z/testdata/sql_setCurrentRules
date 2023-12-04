@@ -1,3 +1,5 @@
 SET CURRENT RULES = 'doAsThouWilt';
 SET CURRENT RULES = :HV1;
+SET CURRENT 
+    RULES = 'doAsThouWilt';
 
