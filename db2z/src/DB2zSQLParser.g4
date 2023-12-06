@@ -41,7 +41,14 @@ parser grammar DB2zSQLParser;
 
 options {tokenVocab=DB2zSQLLexer;}
 
-startRule : sqlStatement* | (sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+)* | EOF ;
+startRule
+	: (
+	sqlStatement 
+	| (sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+) 
+	| unknownStatement 
+	)*
+	EOF
+	;
 
 /*
 The order of the releaseSavepointStatement and
@@ -13010,4 +13017,11 @@ sqlKeyword
 	| ZONE	)
 	;
 
+unknownStatement
+	: (
+	//LT sqlidentifier GT
+	(sqlKeyword | sqlidentifier | comparisonOperator | operator | literal | DOT)+
+	(SQL_STATEMENT_TERMINATOR | SEMICOLON)+
+	)
+	;
 
