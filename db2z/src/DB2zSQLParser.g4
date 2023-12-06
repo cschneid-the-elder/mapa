@@ -1,6 +1,7 @@
 /*
 Copyright (C) 2021 - 2023 Craig Schneiderwent.  Portions copyright
-2023 Martijn Rutte.  All rights reserved.
+2023 Martijn Rutte.  Portions copyright 2023 Maarten van Haasteren.
+All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
 of this software.  Use at your own risk.
@@ -8417,39 +8418,40 @@ copyOption
 //#KMG
 dssizeOption
 	: (
-	(DSSIZE INTEGERLITERAL sqlidentifier)
+	(DSSIZE INTEGERLITERAL SQLIDENTIFIER)
 	{
-		int a = $INTEGERLITERAL.int;
-		int b = -$INTEGERLITERAL.int;
+		int dssizeVal = $INTEGERLITERAL.int;
 		int line = $DSSIZE.line;
-		if ((a & b) != a) {
-			notifyErrorListeners(
-				"DSSIZE value must be a power of 2");
+		String sqlident = $SQLIDENTIFIER.text;
+		if (!sqlident.endsWith("G")) {
+			notifyErrorListeners("DSSIZE value must end with G");
+		}
+		if ((dssizeVal == 0) || (dssizeVal & -dssizeVal) != dssizeVal) {
+			notifyErrorListeners("DSSIZE value must be a power of 2");
+		}
+		if ((dssizeVal < 1) || (dssizeVal > 256)) {
+			notifyErrorListeners("DSSIZE value must be in the range [1-256] but is " + dssizeVal);
 		}
 	}
-	| (DSSIZE sqlidentifier)
+	| (DSSIZE SQLIDENTIFIER)
 	{
 		int line = $DSSIZE.line;
-		int dssizeInt = -1;
-		String sqlident1 = sqlidentifier().getText();
-		if (sqlident1.endsWith("G")) {
-			String sqlident2 = sqlident1.substring(0, sqlident1.length() - 1);
-			try {
-				dssizeInt = Integer.parseInt(sqlident2.trim());
-			} catch (NumberFormatException e) {
-				notifyErrorListeners(
-					"DSSIZE contains illegal value " 
-					+ sqlident2);
-			}
-		} else {
-				notifyErrorListeners(
-					"DSSIZE value must end with G");
+		int dssizeVal = 0;
+		String sqlident = $SQLIDENTIFIER.text;
+		if (!sqlident.endsWith("G")) {
+			notifyErrorListeners("DSSIZE value must end with G");
 		}
-		
-		if ((dssizeInt != -1) && ((dssizeInt & -dssizeInt) == dssizeInt)) {
-		} else {
-			notifyErrorListeners(
-				"DSSIZE value must be a power of 2");
+		String sqlidentVal = sqlident.substring(0, sqlident.length() - 1);
+		try {
+			dssizeVal = Integer.parseInt(sqlidentVal.trim());
+			if ((dssizeVal == 0) || ((dssizeVal & -dssizeVal) != dssizeVal)) {
+				notifyErrorListeners("DSSIZE value must be a power of 2");
+			}
+			if ((dssizeVal < 1) || (dssizeVal > 256)) {
+				notifyErrorListeners("DSSIZE value must be in the range [1-256] but is " + dssizeVal);
+			}
+		} catch (NumberFormatException e) {
+			notifyErrorListeners("DSSIZE contains illegal value " + sqlidentVal);
 		}
 	}
 	)
