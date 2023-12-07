@@ -1,6 +1,7 @@
 /*
 Copyright (C) 2021 - 2023 Craig Schneiderwent.  Portions copyright
-2023 Martijn Rutte.  All rights reserved.
+2023 Martijn Rutte.  Portions copyright 2023 Maarten van Haasteren.
+All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
 of this software.  Use at your own risk.
@@ -1801,7 +1802,7 @@ KEYCARD is deprecated.
 */
 dsnutilUCSCorrelationStatsSpec
 	: (
-	DSNUTIL_KEYCARD
+	DSNUTIL_KEYCARD //{notifyErrorListeners("KEYCARD has been deprecated as of DB2 10");}
 	| dsnutilUCSFreqval1 
 	| dsnutilUCSHistogram1
 	)
@@ -3661,8 +3662,11 @@ DB2 13 documentation indicates this is deprecated.
 dsnutilUCSOffposlimitSpec
 	: (
 	(DSNUTIL_OFFPOSLIMIT dsnutilUCSArg?)
+	//{notifyErrorListeners("OFFPOSLIMIT has been deprecated as of DB2 13");}
 	| (DSNUTIL_INDREFLIMIT dsnutilUCSArg?)
+	  //{notifyErrorListeners("INDEREFLIMIT has been deprecated as of DB2 13");}
 	| DSNUTIL_REPORTONLY
+	  //{notifyErrorListeners("REPORTONLY has been deprecated as of DB2 13");}
 	)
 	;
 
@@ -5605,6 +5609,11 @@ createIndexStatement
 		| (auxTableName))
 	createIndexOptionList*
 	)
+	/*{
+		if ($TYPE.text != null) {
+			notifyErrorListeners("TYPE has been deprecated as of DB2 8");
+		}
+	}*/
 	;
 
 createLobTablespaceStatement
@@ -7715,6 +7724,9 @@ organizationClause
 	LPAREN columnName (COMMA columnName)* RPAREN
 	(HASH SPACE INTEGERLITERAL? sqlidentifier)?
 	)
+	/*{
+		notifyErrorListeners("ORGANIZE has been deprecated as of DB2 12");
+	}*/
 	;
 
 createGlobalTemporaryTableColumnDefinition
@@ -8405,7 +8417,44 @@ copyOption
 
 //#KMG
 dssizeOption
-	: (DSSIZE INTEGERLITERAL? sqlidentifier)
+	: (
+	(DSSIZE INTEGERLITERAL SQLIDENTIFIER)
+	{
+		int dssizeVal = $INTEGERLITERAL.int;
+		int line = $DSSIZE.line;
+		String sqlident = $SQLIDENTIFIER.text;
+		if (!sqlident.endsWith("G")) {
+			notifyErrorListeners("DSSIZE value must end with G");
+		}
+		if ((dssizeVal == 0) || (dssizeVal & -dssizeVal) != dssizeVal) {
+			notifyErrorListeners("DSSIZE value must be a power of 2");
+		}
+		if ((dssizeVal < 1) || (dssizeVal > 256)) {
+			notifyErrorListeners("DSSIZE value must be in the range [1-256] but is " + dssizeVal);
+		}
+	}
+	| (DSSIZE SQLIDENTIFIER)
+	{
+		int line = $DSSIZE.line;
+		int dssizeVal = 0;
+		String sqlident = $SQLIDENTIFIER.text;
+		if (!sqlident.endsWith("G")) {
+			notifyErrorListeners("DSSIZE value must end with G");
+		}
+		String sqlidentVal = sqlident.substring(0, sqlident.length() - 1);
+		try {
+			dssizeVal = Integer.parseInt(sqlidentVal.trim());
+			if ((dssizeVal == 0) || ((dssizeVal & -dssizeVal) != dssizeVal)) {
+				notifyErrorListeners("DSSIZE value must be a power of 2");
+			}
+			if ((dssizeVal < 1) || (dssizeVal > 256)) {
+				notifyErrorListeners("DSSIZE value must be in the range [1-256] but is " + dssizeVal);
+			}
+		} catch (NumberFormatException e) {
+			notifyErrorListeners("DSSIZE contains illegal value " + sqlidentVal);
+		}
+	}
+	)
 	;
 
 /*
@@ -8854,14 +8903,23 @@ procedureSQLPLOptionList
 	| applcompatOption
 	| concentrateStatementsOption
 	| externalNameOption1    //deprecated as of db2 13
+	  //{notifyErrorListeners("EXTERNAL has been deprecated as of DB2 13");}
 	| fencedOption           //deprecated as of db2 13
+	  //{notifyErrorListeners("FENCED has been deprecated as of DB2 13");}
 	| dbinfoOption           //for compatibility only
+	  //{notifyErrorListeners("DBINFO is tolerated for compatibility purposes only");}
 	| collectionIdOption     //for compatibility only
+	  //{notifyErrorListeners("COLLID is tolerated for compatibility purposes only");}
 	| stopAfterFailureOption //for compatibility only
+	  //{notifyErrorListeners("STOP AFTER ... FAILURES / CONTINUE AFTER FAILURE is tolerated for compatibility purposes only");}
 	| stayResidentOption     //for compatibility only
+	  //{notifyErrorListeners("STAY RESIDENT is tolerated for compatibility purposes only");}
 	| programTypeOption      //for compatibility only
+	  //{notifyErrorListeners("PROGRAM TYPE is tolerated for compatibility purposes only");}
 	| securityOption         //for compatibility only
+	  //{notifyErrorListeners("SECURITY is tolerated for compatibility purposes only");}
 	| runOptionsOption       //for compatibility only
+	  //{notifyErrorListeners("RUN OPTIONS is tolerated for compatibility purposes only");}
 	)
 	;
 
@@ -9891,6 +9949,7 @@ partitioningPhrase
 //#KMG
 partitionHashSpace
 	: (HASH SPACE INTEGERLITERAL? sqlidentifier)
+	//{notifyErrorListeners("HASH SPACEs are deprecated as of DB2 12");}
 	;
 
 //deprecated as of Db2 12
@@ -9900,6 +9959,7 @@ alterHashOrganization
 	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE INTEGERLITERAL? sqlidentifier)
 	| (ALTER ORGANIZATION SET HASH SPACE INTEGERLITERAL? sqlidentifier)
 	)
+	//{notifyErrorListeners("HASH SPACEs are deprecated as of DB2 12");}
 	;
 
 partitioningClauseElement
