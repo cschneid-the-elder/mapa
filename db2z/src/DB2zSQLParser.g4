@@ -44,10 +44,9 @@ options {tokenVocab=DB2zSQLLexer;}
 
 startRule
 	: (
-	sqlStatement 
-	| (sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+) 
-	| unknownStatement 
-	)*
+	sqlStatement* 
+	| (sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+)* 
+	)
 	EOF
 	;
 
@@ -13077,11 +13076,4 @@ sqlKeyword
 	| ZONE	)
 	;
 
-unknownStatement
-	: (
-	//LT sqlidentifier GT
-	(sqlKeyword | sqlidentifier | comparisonOperator | operator | literal | DOT)+
-	(SQL_STATEMENT_TERMINATOR | SEMICOLON)+
-	)
-	;
 
