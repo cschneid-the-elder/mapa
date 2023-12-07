@@ -1,8 +1,21 @@
---2023-12-05--------------------------------------------------------------------
+--2023-12-08--------------------------------------------------------------------
 Applied fix suggested by Martijn Rutte to allow for zero sqlStatement or zero
 (sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+) in startRule.  This, along
 with the new unknownStatement rule, prevents ANTLR from skipping all subsequent
 SQL after a syntax error is encountered.
+
+--2023-12-07--------------------------------------------------------------------
+Added parser action for dssizeOption suggested by Maarten van Haasteren to edit
+for allowed values.
+
+There are a number of other parser actions commented out as they are only
+warning of deprecated features.  Not sure if this is desired.
+
+Also altered sql_createIndex and sql_alterTablespace test cases as they were
+now in error.
+
+I should really have a test harness that deals with things that are 
+intended to fail.  
 
 --2023-12-04--------------------------------------------------------------------
 Fixed problem found by Maarten van Haasteren, where DB2 tolerates both spaces
