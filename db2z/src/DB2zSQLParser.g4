@@ -1802,7 +1802,7 @@ KEYCARD is deprecated.
 */
 dsnutilUCSCorrelationStatsSpec
 	: (
-	DSNUTIL_KEYCARD {notifyErrorListeners("KEYCARD has been deprecated as of DB2 10");}
+	DSNUTIL_KEYCARD //{notifyErrorListeners("KEYCARD has been deprecated as of DB2 10");}
 	| dsnutilUCSFreqval1 
 	| dsnutilUCSHistogram1
 	)
@@ -3662,11 +3662,11 @@ DB2 13 documentation indicates this is deprecated.
 dsnutilUCSOffposlimitSpec
 	: (
 	(DSNUTIL_OFFPOSLIMIT dsnutilUCSArg?)
-	{notifyErrorListeners("OFFPOSLIMIT has been deprecated as of DB2 13");}
+	//{notifyErrorListeners("OFFPOSLIMIT has been deprecated as of DB2 13");}
 	| (DSNUTIL_INDREFLIMIT dsnutilUCSArg?)
-	  {notifyErrorListeners("INDEREFLIMIT has been deprecated as of DB2 13");}
+	  //{notifyErrorListeners("INDEREFLIMIT has been deprecated as of DB2 13");}
 	| DSNUTIL_REPORTONLY
-	  {notifyErrorListeners("REPORTONLY has been deprecated as of DB2 13");}
+	  //{notifyErrorListeners("REPORTONLY has been deprecated as of DB2 13");}
 	)
 	;
 
@@ -5609,11 +5609,11 @@ createIndexStatement
 		| (auxTableName))
 	createIndexOptionList*
 	)
-	{
+	/*{
 		if ($TYPE.text != null) {
 			notifyErrorListeners("TYPE has been deprecated as of DB2 8");
 		}
-	}
+	}*/
 	;
 
 createLobTablespaceStatement
@@ -7724,9 +7724,9 @@ organizationClause
 	LPAREN columnName (COMMA columnName)* RPAREN
 	(HASH SPACE INTEGERLITERAL? sqlidentifier)?
 	)
-	{
+	/*{
 		notifyErrorListeners("ORGANIZE has been deprecated as of DB2 12");
-	}
+	}*/
 	;
 
 createGlobalTemporaryTableColumnDefinition
@@ -8903,23 +8903,23 @@ procedureSQLPLOptionList
 	| applcompatOption
 	| concentrateStatementsOption
 	| externalNameOption1    //deprecated as of db2 13
-	  {notifyErrorListeners("EXTERNAL has been deprecated as of DB2 13");}
+	  //{notifyErrorListeners("EXTERNAL has been deprecated as of DB2 13");}
 	| fencedOption           //deprecated as of db2 13
-	  {notifyErrorListeners("FENCED has been deprecated as of DB2 13");}
+	  //{notifyErrorListeners("FENCED has been deprecated as of DB2 13");}
 	| dbinfoOption           //for compatibility only
-	  {notifyErrorListeners("DBINFO is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("DBINFO is tolerated for compatibility purposes only");}
 	| collectionIdOption     //for compatibility only
-	  {notifyErrorListeners("COLLID is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("COLLID is tolerated for compatibility purposes only");}
 	| stopAfterFailureOption //for compatibility only
-	  {notifyErrorListeners("STOP AFTER ... FAILURES / CONTINUE AFTER FAILURE is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("STOP AFTER ... FAILURES / CONTINUE AFTER FAILURE is tolerated for compatibility purposes only");}
 	| stayResidentOption     //for compatibility only
-	  {notifyErrorListeners("STAY RESIDENT is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("STAY RESIDENT is tolerated for compatibility purposes only");}
 	| programTypeOption      //for compatibility only
-	  {notifyErrorListeners("PROGRAM TYPE is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("PROGRAM TYPE is tolerated for compatibility purposes only");}
 	| securityOption         //for compatibility only
-	  {notifyErrorListeners("SECURITY is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("SECURITY is tolerated for compatibility purposes only");}
 	| runOptionsOption       //for compatibility only
-	  {notifyErrorListeners("RUN OPTIONS is tolerated for compatibility purposes only");}
+	  //{notifyErrorListeners("RUN OPTIONS is tolerated for compatibility purposes only");}
 	)
 	;
 
@@ -9949,7 +9949,7 @@ partitioningPhrase
 //#KMG
 partitionHashSpace
 	: (HASH SPACE INTEGERLITERAL? sqlidentifier)
-	{notifyErrorListeners("HASH SPACEs are deprecated as of DB2 12");}
+	//{notifyErrorListeners("HASH SPACEs are deprecated as of DB2 12");}
 	;
 
 //deprecated as of Db2 12
@@ -9959,7 +9959,7 @@ alterHashOrganization
 	(ADD ORGANIZE BY HASH UNIQUE LPAREN columnName (COMMA columnName)* RPAREN HASH SPACE INTEGERLITERAL? sqlidentifier)
 	| (ALTER ORGANIZATION SET HASH SPACE INTEGERLITERAL? sqlidentifier)
 	)
-	{notifyErrorListeners("HASH SPACEs are deprecated as of DB2 12");}
+	//{notifyErrorListeners("HASH SPACEs are deprecated as of DB2 12");}
 	;
 
 partitioningClauseElement
