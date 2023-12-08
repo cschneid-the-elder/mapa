@@ -1,3 +1,7 @@
+--2023-12-08--------------------------------------------------------------------
+Applied fix suggested by Martijn Rutte to allow for zero sqlStatement or zero
+(sqlplProcedureStatement SQL_STATEMENT_TERMINATOR+) in startRule.  
+
 --2023-12-07--------------------------------------------------------------------
 Added parser action for dssizeOption suggested by Maarten van Haasteren to edit
 for allowed values.
