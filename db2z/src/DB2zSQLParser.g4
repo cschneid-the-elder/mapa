@@ -8421,7 +8421,6 @@ copyOption
 	: (COPY (YES | NO))
 	;
 
-//#KMG
 dssizeOption
 	: (
 	(DSSIZE INTEGERLITERAL SQLIDENTIFIER)
@@ -8430,13 +8429,13 @@ dssizeOption
 		int line = $DSSIZE.line;
 		String sqlident = $SQLIDENTIFIER.text;
 		if (!sqlident.endsWith("G")) {
-			notifyErrorListeners("DSSIZE value must end with G");
+			notifyErrorListeners($SQLIDENTIFIER, "DSSIZE value must end with G", null);
 		}
 		if ((dssizeVal == 0) || (dssizeVal & -dssizeVal) != dssizeVal) {
-			notifyErrorListeners("DSSIZE value must be a power of 2");
+			notifyErrorListeners($INTEGERLITERAL, "DSSIZE value must be a power of 2", null);
 		}
 		if ((dssizeVal < 1) || (dssizeVal > 256)) {
-			notifyErrorListeners("DSSIZE value must be in the range [1-256] but is " + dssizeVal);
+			notifyErrorListeners($INTEGERLITERAL, "DSSIZE value must be in the range [1-256]", null);
 		}
 	}
 	| (DSSIZE SQLIDENTIFIER)
@@ -8445,19 +8444,19 @@ dssizeOption
 		int dssizeVal = 0;
 		String sqlident = $SQLIDENTIFIER.text;
 		if (!sqlident.endsWith("G")) {
-			notifyErrorListeners("DSSIZE value must end with G");
+			notifyErrorListeners($SQLIDENTIFIER, "DSSIZE value must end with G", null);
 		}
 		String sqlidentVal = sqlident.substring(0, sqlident.length() - 1);
 		try {
 			dssizeVal = Integer.parseInt(sqlidentVal.trim());
 			if ((dssizeVal == 0) || ((dssizeVal & -dssizeVal) != dssizeVal)) {
-				notifyErrorListeners("DSSIZE value must be a power of 2");
+				notifyErrorListeners($SQLIDENTIFIER, "DSSIZE value must be a power of 2", null);
 			}
 			if ((dssizeVal < 1) || (dssizeVal > 256)) {
-				notifyErrorListeners("DSSIZE value must be in the range [1-256] but is " + dssizeVal);
+				notifyErrorListeners($SQLIDENTIFIER, "DSSIZE value must be in the range [1-256]", null);
 			}
 		} catch (NumberFormatException e) {
-			notifyErrorListeners("DSSIZE contains illegal value " + sqlidentVal);
+			notifyErrorListeners($SQLIDENTIFIER, "DSSIZE contains illegal value " + sqlidentVal, null);
 		}
 	}
 	)
