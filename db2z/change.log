@@ -1,3 +1,6 @@
+--2023-12-27--------------------------------------------------------------------
+Applied fix from Martijn Rutte to make the dssizeOption rule case insensitive.
+
 --2023-12-10--------------------------------------------------------------------
 Applied fix from Maarten van Haasteren to the actions in the dssizeOption rule
 to more accurately point to the offending text.

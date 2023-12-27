@@ -8428,7 +8428,7 @@ dssizeOption
 		int dssizeVal = $INTEGERLITERAL.int;
 		int line = $DSSIZE.line;
 		String sqlident = $SQLIDENTIFIER.text;
-		if (!sqlident.endsWith("G")) {
+		if (!sqlident.toUpperCase().endsWith("G")) {
 			notifyErrorListeners($SQLIDENTIFIER, "DSSIZE value must end with G", null);
 		}
 		if ((dssizeVal == 0) || (dssizeVal & -dssizeVal) != dssizeVal) {
@@ -8443,7 +8443,7 @@ dssizeOption
 		int line = $DSSIZE.line;
 		int dssizeVal = 0;
 		String sqlident = $SQLIDENTIFIER.text;
-		if (!sqlident.endsWith("G")) {
+		if (!sqlident.toUpperCase().endsWith("G")) {
 			notifyErrorListeners($SQLIDENTIFIER, "DSSIZE value must end with G", null);
 		}
 		String sqlidentVal = sqlident.substring(0, sqlident.length() - 1);
