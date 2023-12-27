@@ -38,6 +38,14 @@ ALTER TABLESPACE EXPANSE.ROCINANTE
   DSSIZE 32G
 ;
 
+alter tablespace expanse.rocinante
+  dssize 32g
+;
+
+alter tablespace expanse.rocinante
+  dssize 32 g
+;
+
 ALTER TABLESPACE EXPANSE.ROCINANTE
   INSERT ALGORITHM 2
 ;
