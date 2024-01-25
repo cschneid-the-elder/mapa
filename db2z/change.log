@@ -1,3 +1,11 @@
+--2024-01-25--------------------------------------------------------------------
+Applied fix from Martijn Rutte to sqlTableReturnStatement, which was to
+insert...
+
+	(WITH commonTableExpression (COMMA commonTableExpression)*)?
+
+...into both "branches" of sqlTableReturnStatement parser rule.
+
 --2023-12-27--------------------------------------------------------------------
 Applied fix from Martijn Rutte to make the dssizeOption rule case insensitive.
 

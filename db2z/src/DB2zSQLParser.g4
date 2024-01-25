@@ -8167,11 +8167,21 @@ createFunctionStatementSqlTableOptions
 	)
 	;
 
+/*
+
+Applied fix from Martijn Rutte 2024-01-25, which was to
+insert...
+
+	(WITH commonTableExpression (COMMA commonTableExpression)*)?
+
+...into both "branches" of this rule.
+
+*/
 sqlTableReturnStatement
 	: ((BEGIN sqlplCompoundAtomicClause? 
-	RETURN fullSelect SEMICOLON? 
+	RETURN (WITH commonTableExpression (COMMA commonTableExpression)*)? fullSelect SEMICOLON? 
 	END SEMICOLON?)
-	| (RETURN fullSelect SEMICOLON?))
+	| (RETURN (WITH commonTableExpression (COMMA commonTableExpression)*)? fullSelect SEMICOLON?))
 	;
 
 sequenceAlias
