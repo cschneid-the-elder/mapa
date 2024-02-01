@@ -728,6 +728,10 @@ EXEC_EQUAL
 	->type(EQUAL),pushMode(KYWD_VAL_MODE)
 	;
 
+EXEC_ABDISPCC
+	: A B D I S P C C
+	->pushMode(KYWD_VAL_MODE)
+	;
 EXEC_ACCT
 	: A C C T (DOT_DFLT NM_PART)?
 	->pushMode(KYWD_VAL_MODE)
