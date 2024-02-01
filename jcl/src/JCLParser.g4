@@ -242,7 +242,7 @@ are only identical _now_ and may change. It's pretty easy to see which
 they are - the upper case part of the name is the same.  Except for 
 the COND parameter, which is in fact different.
 */
-execParameter : execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmROLL | execParmTIME | execParmTVSMSG | execParmTVSAMCOM | errorChars ;
+execParameter : execParmABDISPCC | execParmACCT | execParmADDRSPC | execParmCCSID | execParmCOND | execParmDYNAMNBR | execParmMEMLIMIT | execParmPARM | execParmPARMDD | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmRLSTMOUT | execParmROLL | execParmTIME | execParmTVSMSG | execParmTVSAMCOM | errorChars ;
 
 /*
 Some of the parameters for the EXEC statement can have a procstepname 
@@ -250,6 +250,8 @@ indicating they are potentially overriding a value coded in the proc.
 */
 
 execParameterOverrides : execParmACCT | execParmADDRSPC | execParmCOND | execParmDYNAMNBR | execParmPARM | execParmPERFORM | execParmRD | execParmREGION | execParmREGIONX | execParmTIME ;
+
+execParmABDISPCC : EXEC_ABDISPCC EQUAL LPAREN keywordOrSymbolic COMMA keywordOrSymbolic RPAREN ;
 
 execParmACCT : EXEC_ACCT EQUAL singleOrMultipleValue ;
 
