@@ -6726,10 +6726,27 @@ sqlplCompoundInitialDeclarations
 	| (sqlplReturnCodesDeclaration SEMICOLON))
 	;
 
+/*
+Changed...
+
+		| (dataType sqlplVariableDataTypeModifier?))
+
+...to...
+
+		| (procedureDataType sqlplVariableDataTypeModifier?))
+
+...as Martijn Rutte noticed on 01-Feb-2024 that the syntactically
+valid..
+
+    DECLARE W_S_Q_L_I_D         CHAR(128) CCSID EBCDIC FOR SBCS DATA;
+    DECLARE W_SQLTEXT   CHAR(100) CCSID EBCDIC FOR SBCS DATA DEFAULT '1' ;
+
+...failed to parse.
+*/
 sqlplVariableDeclaration
 	: (DECLARE sqlVariableName (COMMA sqlVariableName)*
 		((RESULT_SET_LOCATOR VARYING)
-		| (dataType sqlplVariableDataTypeModifier?))
+		| (procedureDataType sqlplVariableDataTypeModifier?))
 	)
 	;
 
@@ -8600,6 +8617,19 @@ functionDataType
 	: (functionBuiltInType | distinctTypeName)
 	;
 
+/*
+TODO
+
+I suspect that...
+
+ccsidClause1? forDataQualifier?
+
+...need to be changed to...
+
+(ccsidClause1 | forDataQualifier)*
+
+...as they were for procedureBuiltInType on 2023-05-24.
+*/
 functionBuiltInType
 	: (
 	SMALLINT
