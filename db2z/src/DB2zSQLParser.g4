@@ -751,15 +751,13 @@ dsnutilUCSRetryDelayOption
 	: (DSNUTIL_RETRY_DELAY dsnutilUCSArg)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2024-02-02.
+The parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+*/
 dsnutilUCSScopeOption
-	: (DSNUTIL_SCOPE (
-		DSNUTIL_PENDING 
-		| DSNUTIL_AUXONLY 
-		| DSNUTIL_ALL 
-		| DSNUTIL_REFONLY 
-		| DSNUTIL_XMLSCHEMAONLY
-		)
-	)
+	: (DSNUTIL_SCOPE dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSCheckDataAuxerror
@@ -809,25 +807,46 @@ dsnutilUCSExceptions
 	: (DSNUTIL_EXCEPTIONS dsnutilUCSArg)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2024-02-02.
+The parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+*/
 dsnutilUCSCheckDataErrddn
-	: (DSNUTIL_ERRDDN dsnutilUCSArg)
+	: (DSNUTIL_ERRDDN dsnutilUCSArgOptionalParens)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2024-02-02 via the
+addition of dsnutilUCSArgList2.
+The parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+*/
 dsnutilUCSCheckDataWorkddn
-	: (DSNUTIL_WORKDDN 
-	(dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)?) | (dsnutilUCSArg? (DSNUTIL_COMMA dsnutilUCSArg))
+	: (
+	DSNUTIL_WORKDDN
+	(dsnutilUCSArgList2?
+	| (dsnutilUCSArg (DSNUTIL_COMMA dsnutilUCSArg)?) 
+	| (dsnutilUCSArg? (DSNUTIL_COMMA dsnutilUCSArg)))
 	)
 	;
 
 /*
 Optional parentheses added per Martijn Rutte 2023-11-10.
+The parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
 */
 dsnutilUCSPunchddnOption
 	: (DSNUTIL_PUNCHDDN dsnutilUCSArgOptionalParens)
 	;
 
+/*
+Optional parentheses added per Martijn Rutte 2024-02-02.
+The parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+*/
 dsnutilUCSSortdevtOption
-	: (DSNUTIL_SORTDEVT dsnutilUCSArg)
+	: (DSNUTIL_SORTDEVT dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSSortnumOption

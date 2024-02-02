@@ -1,3 +1,31 @@
+--2024-02-02--------------------------------------------------------------------
+Applied fixes from Martijn Rutte to...
+
+dsnutilUCSCheckDataErrddn
+dsnutilUCSCheckDataWorkddn
+dsnutilUCSSortdevtOption
+dsnutilUCSScopeOption
+
+...which allow optional parentheses around the keyword argument.
+
+The parentheses are not in the syntax diagram in IBM's documentation
+as of this date but are tolerated by DB2.
+
+After a bit of digging I find the following in the IBM documentation...
+
+    To specify a utility option, specify the option keyword, followed by its 
+    associated parameter or parameters, if any. The parameter value can be a 
+    keyword. You need to enclose the values of some parameters in parentheses. 
+    The syntax diagrams for utility control statements show parentheses where 
+    they are required.
+
+...which indicates to me that parentheses are either mandatory (where 
+indicated) or allowed, maybe, I guess.  This is from the "Utility control 
+statements" section under the "Invoking Db2 online utilities" section under the
+"Db2 online utilities" section under the "Db2 Utilities" section of the Db2 13
+for z/OS documentation.  Identical wording is present in the DB2 version 6 for
+z/OS documentation.
+
 --2024-02-01--------------------------------------------------------------------
 Changed sqlplVariableDeclaration to fix problem reported by Martijn Rutte where
 the syntactically valid...
