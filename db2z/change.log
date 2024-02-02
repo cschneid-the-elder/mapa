@@ -1,3 +1,12 @@
+--2024-02-01--------------------------------------------------------------------
+Changed sqlplVariableDeclaration to fix problem reported by Martijn Rutte where
+the syntactically valid...
+
+    DECLARE W_S_Q_L_I_D         CHAR(128) CCSID EBCDIC FOR SBCS DATA;
+    DECLARE W_SQLTEXT   CHAR(100) CCSID EBCDIC FOR SBCS DATA DEFAULT '1' ;
+
+...failed to parse.
+
 --2024-01-25--------------------------------------------------------------------
 Applied fix from Martijn Rutte to sqlTableReturnStatement, which was to
 insert...
