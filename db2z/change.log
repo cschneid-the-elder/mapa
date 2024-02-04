@@ -1,3 +1,94 @@
+--2024-02-03--------------------------------------------------------------------
+Modifying many parser rules to allow optional parentheses around a keyword
+argument.  In consultation with Martijn Rutte we decided to guard against the
+need for future "one off" changes to add optional parentheses and just make the
+changes to allow them as the IBM documentation indicates.  Affected rules...
+
+ dsnutilUCSDrainWaitOption
+ dsnutilUCSRetryOption
+ dsnutilUCSRetryDelayOption
+ dsnutilUCSExceptions
+ dsnutilUCSSortnumOption
+ dsnutilUCSParallelOption
+ dsnutilUCSParallelOption2
+ dsnutilUCSCheckIndex
+ dsnutilUCSFromCopyDsnOption
+ dsnutilUCSDiagnoseMessageOrTraceID
+ dsnutilUCSLoadInddnOption
+ dsnutilUCSLoadDiscardsOption
+ dsnutilUCSImplicitTZOption
+ dsnutilUCSStatclgmemsrtOption
+ dsnutilUCSStatTableSpecName1
+ dsnutilUCSSampleOption
+ dsnutilUCSRepeatableOption
+ dsnutilUCSFreqval1
+ dsnutilUCSFreqval2
+ dsnutilUCSHistogram1
+ dsnutilUCSHistogram2
+ dsnutilUCSDelimitedOptions
+ dsnutilUCSPartOption1
+ dsnutilUCSIntoTableSpecDDNOption
+ dsnutilUCSIntoTableSpecNumrecsOption
+ dsnutilUCSIntoTableSpecWhenOption
+ dsnutilUCSMergecopyWorkddnOption
+ dsnutilUCSOptionsKey
+ dsnutilUCSOptionsListdefddOption
+ dsnutilUCSOptionsTemplateddOption
+ dsnutilUCSOptionsFilszOption
+ dsnutilUCSDelayOption
+ dsnutilUCSRecover
+ dsnutilUCSTorbaOption
+ dsnutilUCSRestorebeforeOption
+ dsnutilUCSReorgIndexLeafdistlimitOption
+ dsnutilUCSReorgTablespace
+ dsnutilUCSDiscarddnOption
+ dsnutilUCSDropPartOption
+ dsnutilUCSIclimitDasdOption
+ dsnutilUCSIclimitTapeOption
+ dsnutilUCSOffposlimitSpec
+ dsnutilUCSTableSpec2LimitOption
+ dsnutilUCSHeaderOption
+ dsnutilUCSReportTablespaceListOption
+ dsnutilUCSArchlogOption
+ dsnutilUCSStospace
+ dsnutilUCSDsnBufnoOption
+ dsnurtilUCSDsnDataclasOption
+ dsnutilUCSDsnMgmtclasOption
+ dsnutilUCSDsnStorclasOption
+ dsnutilUCSDsnRetpdOption
+ dsnutilUCSDsnVolumesOption
+ dsnutilUCSDsnVolcntOption
+ dsnutilUCSDsnUncntOption
+ dsnutilUCSDsnGdgLimitOption
+ dsnutilUCSDsnTimeOption
+ dsnutilUCSDsnPctprimeOption
+ dsnutilUCSDsnMaxprimeOption
+ dsnutilUCSDsnNbrsecndOption
+ dsnutilUCSDsnDirOption
+ dsnutilUCSDsnSubsysOption
+ dsnutilUCSDsnLreclOption
+ dsnutilUCSDsnRecfmOption
+ dsnutilUCSUnloadSourceSpec
+ dsnutilUCSMaxerrOption
+
+Also added a new parser rule dsnutilUCSCCSIDPhrase, factoring out code used in
+a number of places and incorporating the optional parentheses.  Affected
+rules...
+
+ dsnutilUCSLoadFieldSpecificationChar
+ dsnutilUCSUnloadFieldSpecificationChar
+ dsnutilUCSUnloadClobfSpec
+ dsnutilUCSLoadFieldSpecificationVarchar
+ dsnutilUCSUnloadFieldSpecificationVarchar
+ dsnutilUCSUnloadFieldSpecificationClob
+ dsnutilUCSLoadFieldSpecificationDbclob
+ dsnutilUCSUnloadFieldSpecificationDbclob
+ dsnutilUCSClobOptions
+ dsnutilUCSVargraphicOptions
+ dsnutilUCSGraphicOptions
+ dsnutilUCSClobfOptions
+ dsnutilUCSDbclobfOptions
+
 --2024-02-02--------------------------------------------------------------------
 Applied fixes from Martijn Rutte to...
 

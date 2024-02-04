@@ -740,15 +740,15 @@ dsnutilUCSShrlevelOption
 	;
 
 dsnutilUCSDrainWaitOption
-	: (DSNUTIL_DRAIN_WAIT dsnutilUCSArg)
+	: (DSNUTIL_DRAIN_WAIT dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSRetryOption
-	: (DSNUTIL_RETRY dsnutilUCSArg)
+	: (DSNUTIL_RETRY dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSRetryDelayOption
-	: (DSNUTIL_RETRY_DELAY dsnutilUCSArg)
+	: (DSNUTIL_RETRY_DELAY dsnutilUCSArgOptionalParens)
 	;
 
 /*
@@ -804,7 +804,7 @@ dsnutilUCSLogOption
 	;
 
 dsnutilUCSExceptions
-	: (DSNUTIL_EXCEPTIONS dsnutilUCSArg)
+	: (DSNUTIL_EXCEPTIONS dsnutilUCSArgOptionalParens)
 	;
 
 /*
@@ -850,11 +850,11 @@ dsnutilUCSSortdevtOption
 	;
 
 dsnutilUCSSortnumOption
-	: (DSNUTIL_SORTNUM dsnutilUCSArg)
+	: (DSNUTIL_SORTNUM dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSParallelOption
-	: (DSNUTIL_PARALLEL dsnutilUCSArg)
+	: (DSNUTIL_PARALLEL dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSParallelOption2
@@ -868,7 +868,7 @@ dsnutilUCSParallelOption3
 dsnutilUCSCheckIndex
 	: (
 		(
-		(DSNUTIL_CHECK_INDEX_LIST dsnutilUCSArg) 
+		(DSNUTIL_CHECK_INDEX_LIST dsnutilUCSArgOptionalParens) 
 		| (DSNUTIL_CHECK_INDEX_OPEN_PAREN dsnutilUCSIndexPhrase (DSNUTIL_COMMA dsnutilUCSIndexPhrase)* DSNUTIL_RPAREN1) 
 		| (DSNUTIL_CHECK_INDEX_ALL dsnutilUCSTablespacePhrase)
 		)
@@ -1043,7 +1043,7 @@ dsnutilUCSFromCopyDsnOption
 	dsnutilUCSDsn 
 	(DSNUTIL_FROMVOLUME 
 		(DSNUTIL_CATALOG 
-		| (dsnutilUCSArg (DSNUTIL_FROMSEQNO dsnutilUCSArg)?)
+		| (dsnutilUCSArg (DSNUTIL_FROMSEQNO dsnutilUCSArgOptionalParens)?)
 		)
 	)?
 	)
@@ -1090,8 +1090,8 @@ dsnutilUCSDiagnoseAbendStatement
 	;
 
 dsnutilUCSDiagnoseMessageOrTraceID
-	: ((DSNUTIL_MESSAGE dsnutilUCSArg (DSNUTIL_INSTANCE dsnutilUCSArg)?)
-	| (DSNUTIL_TRACEID dsnutilUCSArg (DSNUTIL_INSTANCE dsnutilUCSArg)?))
+	: ((DSNUTIL_MESSAGE dsnutilUCSArgOptionalParens (DSNUTIL_INSTANCE dsnutilUCSArgOptionalParens)?)
+	| (DSNUTIL_TRACEID dsnutilUCSArgOptionalParens (DSNUTIL_INSTANCE dsnutilUCSArgOptionalParens)?))
 	;
 
 dsnutilUCSExecSql
@@ -1312,7 +1312,8 @@ dsnutilUCSLoadOptions
 
 dsnutilUCSLoadInddnOption
 	: (
-	(DSNUTIL_INDDN (dsnutilUCSArg | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArg)?) | (DSNUTIL_INCURSOR dsnutilUCSArgOptionalParens)
+	(DSNUTIL_INDDN (dsnutilUCSArgOptionalParens | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArgOptionalParens)?) 
+	| (DSNUTIL_INCURSOR dsnutilUCSArgOptionalParens)
 	)
 	;
 
@@ -1415,6 +1416,12 @@ dsnutilUCSCCSIDOption
 	)
 	;
 
+dsnutilUCSCCSIDPhrase
+	: (
+	DSNUTIL_CCSID dsnutilUCSArgOptionalParens
+	)
+	;
+
 dsnutilUCSNosubsOption
 	: (
 	DSNUTIL_NOSUBS
@@ -1453,7 +1460,7 @@ dsnutilUCSLoadDiscarddnOption
 
 dsnutilUCSLoadDiscardsOption
 	: (
-	DSNUTIL_DISCARDS dsnutilUCSArg
+	DSNUTIL_DISCARDS dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -1501,7 +1508,7 @@ dsnutilUCSLoadIndexdeferOption
 
 dsnutilUCSImplicitTZOption
 	: (
-	DSNUTIL_IMPLICIT_TZ dsnutilUCSArg
+	DSNUTIL_IMPLICIT_TZ dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -1605,7 +1612,7 @@ dsnutilUCSUpdateOption
 
 dsnutilUCSStatclgmemsrtOption
 	: (
-	DSNUTIL_STATCLGMEMSRT dsnutilUCSArg
+	DSNUTIL_STATCLGMEMSRT dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -1652,10 +1659,7 @@ of this date.
 */
 dsnutilUCSStatTableSpecName1
 	: (
-	DSNUTIL_TABLE 
-	((DSNUTIL_DB_TS_LPAREN dsnutilUCSArg DSNUTIL_RPAREN1)
-	|
-	dsnutilUCSArg)
+	DSNUTIL_TABLE dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -1731,7 +1735,7 @@ dsnutilUCSSampleSpec2
 
 dsnutilUCSSampleOption
 	: (
-	DSNUTIL_SAMPLE dsnutilUCSArg?
+	DSNUTIL_SAMPLE dsnutilUCSArgOptionalParens?
 	)
 	;
 
@@ -1751,7 +1755,7 @@ dsnutilUCSTablesampleOption2
 
 dsnutilUCSRepeatableOption
 	: (
-	DSNUTIL_REPEATABLE dsnutilUCSArg
+	DSNUTIL_REPEATABLE dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -1836,29 +1840,29 @@ dsnutilUCSCorrelationStatsSpec
 dsnutilUCSFreqval1
 	: (
 	DSNUTIL_FREQVAL 
-	DSNUTIL_NUMCOLS dsnutilUCSArg 
-	(DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?)?
+	DSNUTIL_NUMCOLS dsnutilUCSArgOptionalParens 
+	(DSNUTIL_COUNT dsnutilUCSArgOptionalParens dsnutilUCSCountOptions?)?
 	)
 	;
 
 dsnutilUCSFreqval2
 	: (
 	DSNUTIL_FREQVAL 
-	(DSNUTIL_COUNT dsnutilUCSArg dsnutilUCSCountOptions?)?
+	(DSNUTIL_COUNT dsnutilUCSArgOptionalParens dsnutilUCSCountOptions?)?
 	)
 	;
 
 dsnutilUCSHistogram1
 	: (
 	DSNUTIL_HISTOGRAM 
-	(DSNUTIL_NUMCOLS dsnutilUCSArg (DSNUTIL_NUMQUANTILES dsnutilUCSArg)?)?
+	(DSNUTIL_NUMCOLS dsnutilUCSArgOptionalParens (DSNUTIL_NUMQUANTILES dsnutilUCSArgOptionalParens)?)?
 	)
 	;
 
 dsnutilUCSHistogram2
 	: (
 	DSNUTIL_HISTOGRAM 
-	(DSNUTIL_NUMQUANTILES dsnutilUCSArg)?
+	(DSNUTIL_NUMQUANTILES dsnutilUCSArgOptionalParens)?
 	)
 	;
 
@@ -1914,9 +1918,9 @@ dsnutilUCSDelimitedOption
 
 dsnutilUCSDelimitedOptions
 	: (
-	(DSNUTIL_COLDEL dsnutilUCSArg)
-	| (DSNUTIL_CHARDEL dsnutilUCSArg)
-	| (DSNUTIL_DECPT dsnutilUCSArg)
+	(DSNUTIL_COLDEL dsnutilUCSArgOptionalParens)
+	| (DSNUTIL_CHARDEL dsnutilUCSArgOptionalParens)
+	| (DSNUTIL_DECPT dsnutilUCSArgOptionalParens)
 	)
 	;
 
@@ -2051,7 +2055,7 @@ dsnutilUCSIntoTableSpecOptions
 	;
 
 dsnutilUCSPartOption1
-	: (DSNUTIL_PART dsnutilUCSArg)
+	: (DSNUTIL_PART dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSPartOption2
@@ -2066,13 +2070,13 @@ dsnutilUCSIntoTableSpecPreformatOption
 
 dsnutilUCSIntoTableSpecDDNOption
 	: (
-	(DSNUTIL_INDDN (dsnutilUCSArg | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArg)?) 
+	(DSNUTIL_INDDN (dsnutilUCSArgOptionalParens | dsnutilUCSArgList1) (DSNUTIL_DISCARDDN dsnutilUCSArgOptionalParens)?) 
 	| (DSNUTIL_INCURSOR dsnutilUCSArgOptionalParens)
 	)
 	;
 
 dsnutilUCSIntoTableSpecNumrecsOption
-	: (DSNUTIL_NUMRECS dsnutilUCSArg)
+	: (DSNUTIL_NUMRECS dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSIntoTableSpecWhenOption
@@ -2210,7 +2214,7 @@ dsnutilUCSLoadFieldSpecificationChar
 	(DSNUTIL_CHAR | DSNUTIL_CHARACTER)
 		(
 		(DSNUTIL_BIT dsnutilUCSArgInParens dsnutilUCSStripSpec*)
-		| (DSNUTIL_CCSID dsnutilUCSArg dsnutilUCSStripSpec*)
+		| (dsnutilUCSCCSIDPhrase dsnutilUCSStripSpec*)
 		| (DSNUTIL_MIXED dsnutilUCSStripSpec*)
 		| (DSNUTIL_BLOBF dsnutilUCSBlobfOptions*)
 		| (DSNUTIL_CLOBF dsnutilUCSClobfOptions*)
@@ -2224,16 +2228,16 @@ dsnutilUCSUnloadFieldSpecificationChar
 	: (
 	(DSNUTIL_CHAR | DSNUTIL_CHARACTER)
 	dsnutilUCSArgInParens?
-	((DSNUTIL_TRUNCATE (DSNUTIL_CCSID dsnutilUCSArg)?)
+	((DSNUTIL_TRUNCATE dsnutilUCSCCSIDPhrase?)
 	| dsnutilUCSUnloadClobfSpec
-	| (DSNUTIL_CCSID dsnutilUCSArg DSNUTIL_TRUNCATE?))
+	| (dsnutilUCSCCSIDPhrase DSNUTIL_TRUNCATE?))
 	)
 	;
 
 dsnutilUCSUnloadClobfSpec
 	: (
-	((DSNUTIL_DBCLOBF DSNUTIL_CCSID dsnutilUCSArg)
-	| (DSNUTIL_CLOBF DSNUTIL_CCSID dsnutilUCSArg)
+	((DSNUTIL_DBCLOBF dsnutilUCSCCSIDPhrase)
+	| (DSNUTIL_CLOBF dsnutilUCSCCSIDPhrase)
 	| DSNUTIL_BLOBF)
 	dsnutilUCSTemplateName
 	DSNUTIL_BINARYXML?
@@ -2245,7 +2249,7 @@ dsnutilUCSLoadFieldSpecificationVarchar
 	DSNUTIL_VARCHAR
 		(
 		DSNUTIL_BIT
-		| (DSNUTIL_CCSID dsnutilUCSArg)
+		| dsnutilUCSCCSIDPhrase
 		| DSNUTIL_MIXED
 		| (DSNUTIL_BLOBF dsnutilUCSBlobfOptions*)
 		| (DSNUTIL_CLOBF dsnutilUCSClobfOptions*)
@@ -2260,9 +2264,9 @@ dsnutilUCSUnloadFieldSpecificationVarchar
 	: (
 	DSNUTIL_VARCHAR
 	dsnutilUCSArgInParens?
-	((dsnutilUCSStripSpec (DSNUTIL_CCSID dsnutilUCSArg)?)
+	((dsnutilUCSStripSpec dsnutilUCSCCSIDPhrase?)
 	| dsnutilUCSUnloadClobfSpec
-	| (DSNUTIL_CCSID dsnutilUCSArg dsnutilUCSStripSpec?))
+	| (dsnutilUCSCCSIDPhrase dsnutilUCSStripSpec?))
 	)
 	;
 
@@ -2353,7 +2357,7 @@ dsnutilUCSFieldSpecificationTimestampWithTimeZone
 
 dsnutilUCSUnloadFieldSpecificationConstant
 	: (
-	DSNUTIL_CONSTANT dsnutilUCSArg
+	DSNUTIL_CONSTANT dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2388,13 +2392,13 @@ dsnutilUCSUnloadFieldSpecificationClob
 	DSNUTIL_CLOB
 	dsnutilUCSArgInParens? 
 	DSNUTIL_TRUNCATE?
-	(DSNUTIL_CCSID dsnutilUCSArg)?
+	dsnutilUCSCCSIDPhrase?
 	)
 	;
 
 dsnutilUCSLoadFieldSpecificationDbclob
 	: (
-	DSNUTIL_DBCLOB (DSNUTIL_CCSID dsnutilUCSArg)?
+	DSNUTIL_DBCLOB dsnutilUCSCCSIDPhrase?
 	)
 	;
 
@@ -2403,7 +2407,7 @@ dsnutilUCSUnloadFieldSpecificationDbclob
 	DSNUTIL_DBCLOB
 	dsnutilUCSArgInParens? 
 	DSNUTIL_TRUNCATE?
-	(DSNUTIL_CCSID dsnutilUCSArg)?
+	dsnutilUCSCCSIDPhrase?
 	)
 	;
 
@@ -2452,7 +2456,7 @@ dsnutilUCSDecfloatOptions
 dsnutilUCSClobOptions
 	: (
 	DSNUTIL_MIXED
-	| (DSNUTIL_CCSID dsnutilUCSArg)
+	| dsnutilUCSCCSIDPhrase
 	)
 	;
 
@@ -2488,7 +2492,7 @@ this rule is itself followed by a *.
 dsnutilUCSVargraphicOptions
 	: (
 	dsnutilUCSStripSpec
-	| (DSNUTIL_CCSID dsnutilUCSArg)
+	| dsnutilUCSCCSIDPhrase
 	)
 	;
 
@@ -2501,7 +2505,7 @@ dsnutilUCSGraphicOptions
 	DSNUTIL_EXTERNAL
 	| dsnutilUCSArgInParens
 	| dsnutilUCSStripSpec
-	| (DSNUTIL_CCSID dsnutilUCSArg)
+	| dsnutilUCSCCSIDPhrase
 	)
 	;
 
@@ -2516,14 +2520,14 @@ dsnutilUCSClobfOptions
 	: (
 	DSNUTIL_MIXED
 	| dsnutilUCSPreserveWhitespace
-	| (DSNUTIL_CCSID dsnutilUCSArg)
+	| dsnutilUCSCCSIDPhrase
 	)
 	;
 
 dsnutilUCSDbclobfOptions
 	: (
 	dsnutilUCSPreserveWhitespace
-	| (DSNUTIL_CCSID dsnutilUCSArg)
+	| dsnutilUCSCCSIDPhrase
 	)
 	;
 
@@ -2612,7 +2616,7 @@ dsnutilUCSMergecopyOptions
 
 dsnutilUCSMergecopyWorkddnOption
 	: (
-	DSNUTIL_WORKDDN dsnutilUCSArg
+	DSNUTIL_WORKDDN dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2764,7 +2768,7 @@ dsnutilUCSOptionsOff
 
 dsnutilUCSOptionsKey
 	: (
-	DSNUTIL_KEY dsnutilUCSArg
+	DSNUTIL_KEY dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2788,7 +2792,7 @@ dsnutilUCSOptionsPreviewOption
 
 dsnutilUCSOptionsListdefddOption
 	: (
-	DSNUTIL_LISTDEFDD dsnutilUCSArg
+	DSNUTIL_LISTDEFDD dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2798,13 +2802,13 @@ the TEMPLATEDD argument can optionally be enclosed in parentheses.
 */
 dsnutilUCSOptionsTemplateddOption
 	: (
-	DSNUTIL_TEMPLATEDD (dsnutilUCSArg | dsnutilUCSArgInParens)
+	DSNUTIL_TEMPLATEDD dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSOptionsFilszOption
 	: (
-	DSNUTIL_FILSZ dsnutilUCSArg
+	DSNUTIL_FILSZ dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2957,7 +2961,7 @@ dsnutilUCSLonglogOption
 
 dsnutilUCSDelayOption
 	: (
-	DSNUTIL_DELAY dsnutilUCSArg
+	DSNUTIL_DELAY dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -2990,7 +2994,7 @@ dsnutilUCSRecover
 	| dsnutilUCSRecoverOptionsSpec
 	| dsnutilUCSRecoverFromMultiSpec
 	| dsnutilUCSRecoverFromSpec
-	| (dsnutilUCSRecoverObjectSpec DSNUTIL_PAGE dsnutilUCSArg DSNUTIL_CONTINUE?))
+	| (dsnutilUCSRecoverObjectSpec DSNUTIL_PAGE dsnutilUCSArgOptionalParens DSNUTIL_CONTINUE?))
 	dsnutilUCSRecoverSiteOption?
 	dsnutilUCSLograngesOption?
 	)
@@ -3097,7 +3101,7 @@ dsnutilUCSEnforceOption
 
 dsnutilUCSTorbaOption
 	: (
-	(DSNUTIL_TORBA | DSNUTIL_TOLOGPOINT) dsnutilUCSArg
+	(DSNUTIL_TORBA | DSNUTIL_TOLOGPOINT) dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3128,7 +3132,7 @@ dsnutilUCSCurrentCopyOnlyOption
 
 dsnutilUCSRestorebeforeOption
 	: (
-	DSNUTIL_RESTOREBEFORE dsnutilUCSArg
+	DSNUTIL_RESTOREBEFORE dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3296,7 +3300,7 @@ dsnutilUCSFastswitchOption
 
 dsnutilUCSReorgIndexLeafdistlimitOption
 	: (
-	DSNUTIL_LEAFDISTLIMIT dsnutilUCSArg? DSNUTIL_REPORTONLY?
+	DSNUTIL_LEAFDISTLIMIT dsnutilUCSArgOptionalParens? DSNUTIL_REPORTONLY?
 	)
 	;
 
@@ -3393,7 +3397,7 @@ dsnutilUCSDeadlineOption
 dsnutilUCSReorgTablespace
 	: (
 	DSNUTIL_REORG 
-	((DSNUTIL_TABLESPACE_LIST dsnutilUCSListName (DSNUTIL_LISTPARTS dsnutilUCSArg)?)
+	((DSNUTIL_TABLESPACE_LIST dsnutilUCSListName (DSNUTIL_LISTPARTS dsnutilUCSArgOptionalParens)?)
 	| (dsnutilUCSQualifiedTablespaceNameWithLit (DSNUTIL_PART dsnutilUCSArgList1)?))
 	dsnutilUCSReorgTablespaceOptions*
 	)
@@ -3481,7 +3485,7 @@ dsnutilUCSUnlddnOption
 
 dsnutilUCSDiscarddnOption
 	: (
-	DSNUTIL_DISCARDDN dsnutilUCSArg
+	DSNUTIL_DISCARDDN dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3550,7 +3554,7 @@ dsnutilUCSSortdataOption
 
 dsnutilUCSDropPartOption
 	: (
-	DSNUTIL_DROP_PART dsnutilUCSArg
+	DSNUTIL_DROP_PART dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3572,13 +3576,13 @@ dsnutilUCSReorgTablespaceCopySpec
 
 dsnutilUCSIclimitDasdOption
 	: (
-	DSNUTIL_ICLIMIT_DASD dsnutilUCSArg
+	DSNUTIL_ICLIMIT_DASD dsnutilUCSArgOptionalParens
 	)
 	;
 
 dsnutilUCSIclimitTapeOption
 	: (
-	DSNUTIL_ICLIMIT_TAPE dsnutilUCSArg
+	DSNUTIL_ICLIMIT_TAPE dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3686,9 +3690,9 @@ DB2 13 documentation indicates this is deprecated.
 */
 dsnutilUCSOffposlimitSpec
 	: (
-	(DSNUTIL_OFFPOSLIMIT dsnutilUCSArg?)
+	(DSNUTIL_OFFPOSLIMIT dsnutilUCSArgOptionalParens?)
 	//{notifyErrorListeners("OFFPOSLIMIT has been deprecated as of DB2 13");}
-	| (DSNUTIL_INDREFLIMIT dsnutilUCSArg?)
+	| (DSNUTIL_INDREFLIMIT dsnutilUCSArgOptionalParens?)
 	  //{notifyErrorListeners("INDEREFLIMIT has been deprecated as of DB2 13");}
 	| DSNUTIL_REPORTONLY
 	  //{notifyErrorListeners("REPORTONLY has been deprecated as of DB2 13");}
@@ -3755,7 +3759,7 @@ dsnutilUCSFromTableSpec2Options
 
 dsnutilUCSTableSpec2LimitOption
 	: (
-	DSNUTIL_LIMIT dsnutilUCSArg
+	DSNUTIL_LIMIT dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -3764,7 +3768,7 @@ dsnutilUCSHeaderOption
 	DSNUTIL_HEADER
 	(DSNUTIL_OBID
 	| DSNUTIL_NONE
-	| (DSNUTIL_CONST dsnutilUCSArg))
+	| (DSNUTIL_CONST dsnutilUCSArgOptionalParens))
 	)
 	;
 
@@ -4176,7 +4180,7 @@ dsnutilUCSReportIndexListOption
 
 dsnutilUCSReportTablespaceListOption
 	: (
-	dsnutilUCSReportTablespaceListSpec (DSNUTIL_INDEX dsnutilUCSArg)?
+	dsnutilUCSReportTablespaceListSpec (DSNUTIL_INDEX dsnutilUCSArgOptionalParens)?
 	)
 	;
 
@@ -4245,7 +4249,7 @@ dsnutilUCSRecoverysiteOption
 
 dsnutilUCSArchlogOption
 	: (
-	DSNUTIL_ARCHLOG dsnutilUCSArg
+	DSNUTIL_ARCHLOG dsnutilUCSArgOptionalParens
 	)
 	;
 
@@ -4496,7 +4500,7 @@ dsnutilUCSSetProfileSpec
 dsnutilUCSStospace
 	: (
 	DSNUTIL_STOSPACE DSNUTIL_STOGROUP
-	(dsnutilUCSArg
+	(dsnutilUCSArgOptionalParens
 	| dsnutilUCSArgList1)
 	)
 	;
@@ -4608,23 +4612,23 @@ dsnutilUCSDsnModelDcbOption
 	;
 
 dsnutilUCSDsnBufnoOption
-	: (DSNUTIL_BUFNO dsnutilUCSArg)
+	: (DSNUTIL_BUFNO dsnutilUCSArgOptionalParens)
 	;
 
 dsnurtilUCSDsnDataclasOption
-	: (DSNUTIL_DATACLAS dsnutilUCSArg)
+	: (DSNUTIL_DATACLAS dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnMgmtclasOption
-	: (DSNUTIL_MGMTCLAS dsnutilUCSArg)
+	: (DSNUTIL_MGMTCLAS dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnStorclasOption
-	: (DSNUTIL_STORCLAS dsnutilUCSArg)
+	: (DSNUTIL_STORCLAS dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnRetpdOption
-	: ((DSNUTIL_RETPD | DSNUTIL_EXPDL) dsnutilUCSArg)
+	: ((DSNUTIL_RETPD | DSNUTIL_EXPDL) dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnVolumesOption
@@ -4632,11 +4636,11 @@ dsnutilUCSDsnVolumesOption
 	;
 
 dsnutilUCSDsnVolcntOption
-	: (DSNUTIL_VOLCNT dsnutilUCSArg)
+	: (DSNUTIL_VOLCNT dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnUncntOption
-	: (DSNUTIL_UNCNT dsnutilUCSArg)
+	: (DSNUTIL_UNCNT dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnGdgLimitOption
@@ -4652,7 +4656,7 @@ dsnutilUCSDsnLimitOption
 	;
 
 dsnutilUCSDsnTimeOption
-	: (DSNUTIL_TIME dsnutilUCSArg)
+	: (DSNUTIL_TIME dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnBlkszlimOption
@@ -4664,19 +4668,19 @@ dsnutilUCSDsnSpaceOption
 	;
 
 dsnutilUCSDsnPctprimeOption
-	: (DSNUTIL_PCTPRIME dsnutilUCSArg)
+	: (DSNUTIL_PCTPRIME dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnMaxprimeOption
-	: (DSNUTIL_MAXPRIME dsnutilUCSArg)
+	: (DSNUTIL_MAXPRIME dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnNbrsecndOption
-	: (DSNUTIL_NBRSECND dsnutilUCSArg)
+	: (DSNUTIL_NBRSECND dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnDirOption
-	: (DSNUTIL_DIR dsnutilUCSArg)
+	: (DSNUTIL_DIR dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnDsntypeOption
@@ -4707,15 +4711,15 @@ dsnutilUCSDsnTrtchOption
 	;
 
 dsnutilUCSDsnSubsysOption
-	: (DSNUTIL_SUBSYS dsnutilUCSArg)
+	: (DSNUTIL_SUBSYS dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnLreclOption
-	: (DSNUTIL_LRECL dsnutilUCSArg)
+	: (DSNUTIL_LRECL dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnRecfmOption
-	: (DSNUTIL_RECFM dsnutilUCSArg)
+	: (DSNUTIL_RECFM dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSPathFiledataOption
@@ -4778,7 +4782,7 @@ Alternate syntax without FROM added per Martijn Rutte 2023-11-10.
 */
 dsnutilUCSUnloadSourceSpec
 	: (
-	(DSNUTIL_FROM_TABLESPACE | DSNUTIL_TABLESPACE) dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArg)?
+	(DSNUTIL_FROM_TABLESPACE | DSNUTIL_TABLESPACE) dsnutilUCSQualifiedTablespaceName (DSNUTIL_PART dsnutilUCSArgOptionalParens)?
 	(dsnutilUCSFromCopyDsnOption | dsnutilUCSFromCopyDdnOption)?
 	)
 	;
@@ -4797,7 +4801,7 @@ dsnutilUCSUnloadFloatOption
 
 dsnutilUCSMaxerrOption
 	: (
-	DSNUTIL_MAXERR dsnutilUCSArg
+	DSNUTIL_MAXERR dsnutilUCSArgOptionalParens
 	)
 	;
 
