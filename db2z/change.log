@@ -70,7 +70,43 @@ changes to allow them as the IBM documentation indicates.  Affected rules...
  dsnutilUCSDsnRecfmOption
  dsnutilUCSUnloadSourceSpec
  dsnutilUCSMaxerrOption
+ dsnutilUCSMaxroOption
 
+These rules needed custom solutions to allow optional parentheses in order
+to preserve backward compatibility.
+
+ dsnutilUCSLoadSortkeysOption
+ dsnutilUCSTablesampleOption1
+ dsnutilUCSTablesampleOption2
+ dsnutilUCSNewmaxroOption
+ dsnutilUCSLonglogOption
+ dsnutilUCSReorgIndexUnloadOption
+ dsnutilUCSReorgIndexUnloadOption 
+ dsnutilUCSSortnpsiOption
+ dsnutilUCSShrlevelNoneSpec
+ dsnutilUCSShrlevelReferenceSpec1
+ dsnutilUCSShrlevelReferenceSpec2
+ dsnutilUCSShrlevelChangeSpec1
+ dsnutilUCSShrlevelChangeSpec2
+ dsnutilUCSShrlevelChangeSpec3
+ dsnutilUCSIsolationCSOption
+ dsnutilUCSIsolationUROption
+ dsnutilUCSUnloadExternalSpec
+ dsnutilUCSLocateTablespaceSpecRidOption
+ dsnutilUCSLocateTablespaceSpecPageOption
+ dsnutilUCSRepairDeleteStatement
+ dsnutilUCSSystempagesStatement
+ dsnutilUCSDeleteProfileOption
+ dsnutilUCSDsnTrtchOption
+ dsnutilUCSPathFiledataOption
+ dsnutilUCSUnloadFloatOption
+ dsnutilUCSIncludeNpi
+ dsnutilUCSDsnBlkszlimOption
+ dsnutilUCSTimeoutOption
+ dsnutilUCSDrainOption
+ dsnutilUCSDeadlineOption
+ dsnutilUCSSwitchtimeOption
+ 
 Also added a new parser rule dsnutilUCSCCSIDPhrase, factoring out code used in
 a number of places and incorporating the optional parentheses.  Affected
 rules...
