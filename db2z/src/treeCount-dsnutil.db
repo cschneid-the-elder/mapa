@@ -3,13 +3,13 @@
 =	callStatement	callArgument	dsnutilUCSBackup	dsnutilUCSCatmaint	dsnutilUCSCheckData	dsnutilUCSCheckIndex	dsnutilUCSCheckLob	dsnutilUCSCopy	dsnutilUCSCopyToCopy	dsnutilUCSDiagnose	dsnutilUCSExecSql	dsnutilUCSListdef	dsnutilUCSLoad	dsnutilUCSMergecopy	dsnutilUCSModifyRecovery	dsnutilUCSModifyStatistics	dsnutilUCSOptions	dsnutilUCSQuiesce	dsnutilUCSRebuildIndex	dsnutilUCSRecover	dsnutilUCSReorgIndex	dsnutilUCSReorgTablespace	dsnutilUCSRepair	dsnutilUCSReport	dsnutilUCSRestoreSystem	dsnutilUCSRunstats	dsnutilUCSStospace	dsnutilUCSTemplate	dsnutilUCSUnload
 +	sql_call_dsnutil	7	28	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	21	0	0	0	0	0	21	0
 +	sql_call_dsnutil_backup_system	11	44	11	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_catmaint	62	248	0	62	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_catmaint	66	264	0	66	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_check_data	30	120	0	0	30	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_check_index	9	36	0	0	0	9	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_check_index	11	44	0	0	0	11	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_check_lob	18	72	0	0	0	0	18	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_copy	21	84	0	0	0	0	0	22	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	19	0
-+	sql_call_dsnutil_copytocopy	11	44	0	0	0	0	0	0	11	0	0	1	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	5	0
-+	sql_call_dsnutil_diagnose	9	36	0	0	0	0	0	1	1	12	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_copy	22	88	0	0	0	0	0	23	0	0	0	5	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	19	0
++	sql_call_dsnutil_copytocopy	14	56	0	0	0	0	0	0	14	0	0	1	0	0	0	0	2	0	0	0	0	0	0	0	0	0	0	5	0
++	sql_call_dsnutil_diagnose	13	52	0	0	0	0	0	1	1	16	0	0	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_exec_sql	29	116	0	0	0	0	0	0	0	0	29	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_listdef	7	28	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_load	24	96	0	0	0	0	0	0	0	0	1	0	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0

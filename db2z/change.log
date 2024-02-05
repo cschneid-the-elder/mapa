@@ -106,6 +106,15 @@ to preserve backward compatibility.
  dsnutilUCSDrainOption
  dsnutilUCSDeadlineOption
  dsnutilUCSSwitchtimeOption
+ dsnutilUCSShrlevelOption
+ dsnutilUCSUtilxSpec
+ dsnutilUCSCheckDataAuxerror
+ dsnutilUCSCheckDataLoberror
+ dsnutilUCSCheckDataXmlerror
+ dsnutilUCSCheckDataDelete
+ dsnutilUCSDsnumOption
+ dsnutilUCSFlashcopyOption
+ dsnutilUCSFromCopyDsnOption
  
 Also added a new parser rule dsnutilUCSCCSIDPhrase, factoring out code used in
 a number of places and incorporating the optional parentheses.  Affected
@@ -124,6 +133,12 @@ rules...
  dsnutilUCSGraphicOptions
  dsnutilUCSClobfOptions
  dsnutilUCSDbclobfOptions
+
+Added new parser rule...
+
+ dsnutilUCSUnlddnSpec
+
+...to ease addition of optional parenthese to dsnutilUCSCatmaint.
 
 --2024-02-02--------------------------------------------------------------------
 Applied fixes from Martijn Rutte to...
