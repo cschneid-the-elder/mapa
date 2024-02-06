@@ -71,6 +71,7 @@ changes to allow them as the IBM documentation indicates.  Affected rules...
  dsnutilUCSUnloadSourceSpec
  dsnutilUCSMaxerrOption
  dsnutilUCSMaxroOption
+ dsnutilUCSLoadCopydictionaryOption
 
 These rules needed custom solutions to allow optional parentheses in order
 to preserve backward compatibility.
@@ -115,6 +116,18 @@ to preserve backward compatibility.
  dsnutilUCSDsnumOption
  dsnutilUCSFlashcopyOption
  dsnutilUCSFromCopyDsnOption
+ dsnutilUCSListdefDefinedOption
+ dsnutilUCSLoadEnforceOption
+ dsnutilUCSRbalrsnConversionOption
+ dsnutilUCSLoadRowformatOption
+ dsnutilUCSLoadIndexdeferOption
+ dsnutilUCSForceOption
+ dsnutilUCSLoadResumeSpecShrlevelOption
+ dsnutilUCSUpdateOption
+ dsnutilUCSHistoryOption
+ dsnutilUCSTableStatsColumnAll
+ dsnutilUCSDecfloatSpec
+ dsnutilUCSFormatSpecOptions
  
 Also added a new parser rule dsnutilUCSCCSIDPhrase, factoring out code used in
 a number of places and incorporating the optional parentheses.  Affected
