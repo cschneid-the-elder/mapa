@@ -14,12 +14,12 @@
 +	sql_call_dsnutil_listdef	8	32	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_load	24	96	0	0	0	0	0	0	0	0	1	0	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
 +	sql_call_dsnutil_mergecopy	6	24	0	0	0	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0
-+	sql_call_dsnutil_modify_recovery	27	108	0	0	0	0	0	0	0	0	0	0	0	0	27	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_modify_statistics	119	476	0	0	0	0	0	0	0	0	0	0	0	0	0	119	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_options	14	56	0	0	0	0	0	0	0	0	0	0	0	0	0	0	14	0	0	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_modify_recovery	29	116	0	0	0	0	0	0	0	0	0	0	0	0	29	0	0	0	0	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_modify_statistics	122	488	0	0	0	0	0	0	0	0	0	0	0	0	0	122	0	0	0	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_options	16	64	0	0	0	0	0	0	0	0	0	0	0	0	0	0	16	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_quiesce	73	292	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	73	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_rebuild_index	6	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_recover	16	64	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	16	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_rebuild_index	7	28	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_recover	23	92	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	23	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_reorg_index	18	72	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	18	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_reorg_tablespace	29	116	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	29	0	0	0	0	0	0	0
 +	sql_call_dsnutil_repair	15	60	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	15	0	0	0	0	0	0

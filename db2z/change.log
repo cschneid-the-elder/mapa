@@ -128,6 +128,14 @@ to preserve backward compatibility.
  dsnutilUCSTableStatsColumnAll
  dsnutilUCSDecfloatSpec
  dsnutilUCSFormatSpecOptions
+ dsnutilUCSModifyRecoveryFlashcopy
+ dsnutilUCSModifyRecoveryRetainOption
+ dsnutilUCSModifyStatisticsDeleteOption
+ dsnutilUCSRebuildIndexShrlevelOption
+ dsnutilUCSScopeOption2
+ dsnutilUCSRecoverNosyscopyOption
+ dsnutilUCSFlashcopyPprcpOption
+ dsnutilUCSRecoverImageCopySpec
  
 Also added a new parser rule dsnutilUCSCCSIDPhrase, factoring out code used in
 a number of places and incorporating the optional parentheses.  Affected
