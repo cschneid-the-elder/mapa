@@ -136,6 +136,11 @@ to preserve backward compatibility.
  dsnutilUCSRecoverNosyscopyOption
  dsnutilUCSFlashcopyPprcpOption
  dsnutilUCSRecoverImageCopySpec
+ dsnutilUCSReorgIndexShrlevelOption
+ dsnutilUCSTimestamp
+ dsnutilUCSRowformatOption
+ dsnutilUCSUnloadContinuePauseOnlySpec
+ dsnutilUCSSortdataOption
  
 Also added a new parser rule dsnutilUCSCCSIDPhrase, factoring out code used in
 a number of places and incorporating the optional parentheses.  Affected
