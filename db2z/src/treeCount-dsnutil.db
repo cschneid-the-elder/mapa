@@ -25,9 +25,9 @@
 +	sql_call_dsnutil_repair	22	88	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	22	0	0	0	0	0	0
 +	sql_call_dsnutil_report	8	32	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	8	0	0	0	0	0
 +	sql_call_dsnutil_restore_system	7	28	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0
-+	sql_call_dsnutil_runstats	47	188	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	47	0	0	0
++	sql_call_dsnutil_runstats	51	204	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	51	0	0	0
 +	sql_call_dsnutil_stospace	6	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	6	0	0
-+	sql_call_dsnutil_template	23	92	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	23	0
-+	sql_call_dsnutil_unload	10	40	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	10
++	sql_call_dsnutil_template	24	96	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	24	0
++	sql_call_dsnutil_unload	12	48	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	12
 +	sql_NOUPLOAD_call_dsnutilv	2	8	0	0	0	0	0	1	0	0	0	1	0	0	1	0	0	0	0	0	0	18	0	0	0	0	0	4	0
 +	sql_NOUPLOAD_call_dsnutil_CR_error	2	8	0	0	1	0	0	0	0	0	0	1	0	0	0	0	0	0	0	0	0	1	0	0	0	0	0	4	0

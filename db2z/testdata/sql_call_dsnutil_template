@@ -227,6 +227,34 @@ CALL SYSPROC.DSNUTILU (
   , '
 TEMPLATE
 ARETUZA
+PATH /dev1/db2/path
+  FILEDATA (RECORD)
+  RECFM (VB)
+  LRECL (27998)
+  PATHOPTS(OCREAT,OWRONLY)
+  PATHMODE(
+            SIRUSR
+          , SIWUSR
+          , SIXUSR
+          , SIRWXU
+          , SIRGRP
+          , SIXGRP
+          , SIRWXG
+          , SIROTH
+          , SIWOTH
+          , SIXOTH
+          )
+   PATHDISP(KEEP,DELETE)
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+TEMPLATE
+ARETUZA
 PATH '/dev1/db2/p a t h'
   FILEDATA RECORD
   RECFM VB
