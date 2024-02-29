@@ -1,3 +1,32 @@
+--2024-02-28--------------------------------------------------------------------
+Allow PART(3 : 5) in addition to PART(3:5) and PART(3).  Prior to this change,
+the (3:5) would have been tokenized by the lexer as...
+
+[@31,90:90='(',<DSNUTIL_LPAREN>,6:7]
+[@32,91:93='3:5',<DSNUTIL_PAREN_IDENTIFIER>,6:8]
+[@33,94:94=')',<DSNUTIL_RPAREN1>,6:11]
+
+...now it will be tokenized as...
+
+[@31,90:90='(',<DSNUTIL_LPAREN>,6:7]
+[@32,91:91='3',<DSNUTIL_PAREN_NUMBER>,6:8]
+[@33,92:92=':',<DSNUTIL_PAREN_COLON>,6:9]
+[@34,93:93='5',<DSNUTIL_PAREN_NUMBER>,6:10]
+[@35,94:94=')',<DSNUTIL_RPAREN1>,6:11]
+
+...which makes a bit more sense.  This is in addition to allowing the spaces
+embedded in the argument.
+
+Added...
+
+	| (sqlplStartLabel? setSpecialRegisterStatement)
+
+...to sqlplProcedureStatement parser rule per Maarten van Haasteren.
+
+Removed NEWLINE from first line of SQLCOMMENT lexer rule per Maarten van
+Haasteren as it caused a lexer error when the last line of the input was
+a comment.
+
 --2024-02-03--------------------------------------------------------------------
 Modifying many parser rules to allow optional parentheses around a keyword
 argument.  In consultation with Martijn Rutte we decided to guard against the

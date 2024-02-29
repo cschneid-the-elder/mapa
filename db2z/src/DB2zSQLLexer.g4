@@ -1,5 +1,5 @@
 /*
-Copyright (C) 2021 - 2023 Craig Schneiderwent.  Portions copyright
+Copyright (C) 2021 - 2024 Craig Schneiderwent.  Portions copyright (C)
 2023 Martijn Rutte.  All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
@@ -244,8 +244,12 @@ SET_STATEMENT_TERMINATOR
 	->channel(COMMENTS)
 	;
 
+/*
+Removed NEWLINE from first line of this rule per Maarten van Haasteren as
+it caused a lexer error when the last line of the input was a comment.
+*/
 SQLCOMMENT
-	: (('--' ~[\n\r]* NEWLINE)
+	: (('--' ~[\n\r]*)
 	| (SLASH SPLAT .*? SPLAT SLASH))
 	->channel(COMMENTS)
 	;
@@ -7785,6 +7789,18 @@ DSNUTIL_PAREN_COLON
 	: COLON
 	;
 
+/*
+Added the ':' to prevent greedy matching from eating it up in...
+
+PART(3:5)
+
+...and thus it, and...
+
+PART(3 : 5)
+
+...are recognized the same way by the parser.  This should make
+listeners and visitors easier.
+*/
 DSNUTIL_PAREN_IDENTIFIER
 	: ~[ \t\n\r,.;:)('"=><+-]+
 	//->type(DSNUTIL_IDENTIFIER)
