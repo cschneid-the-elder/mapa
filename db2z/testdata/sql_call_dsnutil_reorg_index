@@ -167,10 +167,70 @@ CALL SYSPROC.DSNUTILU (
       SORTNUM 42
       WORKDDN(SYSUT7)
       PREFORMAT
-      FLASHCOPY CONSISTENT FCCOPYDDN(T1)
+      FLASHCOPY (CONSISTENT) FCCOPYDDN(T1)
       RBALRSN_CONVERSION EXTENDED
       NOSYSUT1
       PARALLEL 7
+    '
+  , ''
+  );
+
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , 'REORG INDEX LIST GNOMON
+      REUSE
+      CLONE
+      SHRLEVEL (NONE)
+      SHRLEVEL (REFERENCE) DEADLINE (CURRENT TIMESTAMP WITH TIME ZONE + 4 YEARS)
+               FASTSWITCH(NO)
+      SHRLEVEL (CHANGE) 
+               DEADLINE (2020-02-02.00.00.00)
+               DRAIN_WAIT(1)
+               RETRY(2)
+               RETRY_DELAY(3)
+               TIMEOUT(TERM)
+               TIMEOUT(ABEND)
+               MAXRO(DEFER)
+               MAXRO(3)
+               DRAIN(ALL)
+               DRAIN(WRITERS)
+               LONGLOG(CONTINUE)
+               LONGLOG(TERM)
+               LONGLOG(DRAIN)
+               DELAY(1200)
+               LOGRANGES(YES)
+               LOGRANGES(NO)
+               LASTLOG(YES)
+               LASTLOG(NO)
+               SWITCHTIME( 2021-01-01.01.01.01) NEWMAXRO(NONE)
+               FASTSWITCH(YES)
+      FORCE (NONE)
+      FORCE (READERS)
+      FORCE (ALL)
+      LEAFDISTLIMIT (42) REPORTONLY
+      UNLOAD (CONTINUE)
+      UNLOAD (PAUSE)
+      UNLOAD (ONLY)
+      UNLOAD (CONTINUE)
+             STATISTICS REPORT (NO )
+             KEYCARD 
+             FREQVAL NUMCOLS (1) COUNT (10) MOST
+             FREQVAL NUMCOLS (2) COUNT (20) BOTH
+             FREQVAL NUMCOLS (3) COUNT (30) LEAST
+             HISTOGRAM NUMCOLS (1) NUMQUANTILES (100)
+             UPDATE (ALL)
+             INVALIDATECACHE (YES)
+             HISTORY (ALL)
+             FORCEROLLUP (YES)
+      SORTDEVT (WRK0)
+      SORTNUM (42)
+      WORKDDN(SYSUT7)
+      PREFORMAT
+      FLASHCOPY CONSISTENT FCCOPYDDN(T1)
+      RBALRSN_CONVERSION (EXTENDED)
+      NOSYSUT1
+      PARALLEL (7)
     '
   , ''
   );

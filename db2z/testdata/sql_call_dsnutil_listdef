@@ -102,4 +102,36 @@ LISTDEF EXPANSE
   , ''
   );
 
+CALL SYSPROC.DSNUTILU (
+    'DBB.STUFF'
+  , 'NO'
+  , '
+LISTDEF EXPANSE 
+        INCLUDE TABLESPACE THEBELT.CERES
+          CLONED (YES)
+          DEFINED (YES)
+          RI
+          BASE
+          HISTORY
+          BASIC (YES)
+          EXTENDED (YES)          
+        INCLUDE INDEXSPACE THEBELT.EROS
+          CLONED NO
+          DEFINED ALL
+          LOB
+          ARCHIVE
+          BASIC NO
+          EXTENDED NO
+        INCLUDE TABLESPACE THEBELT.GANYMEDE
+          DEFINED NO
+          XML          
+        INCLUDE TABLESPACES TABLE  OPA.TYCHO
+          LIST MILLER
+          ALL
+        EXCLUDE TABLESPACES DATABASE INNER
+        INCLUDE INDEXSPACES COPY (NO) DATABASE INNER
+    '
+  , ''
+  );
+
 

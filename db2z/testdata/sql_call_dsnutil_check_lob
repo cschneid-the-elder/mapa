@@ -198,6 +198,9 @@ CHECK LOB TABLESPACE "BBC"."TWO"  CLONE
         EXCEPTIONS 0
         SORTDEVT SYSDA
         SORTNUM 10
+        EXCEPTIONS (0)
+        SORTDEVT (SYSDA)
+        SORTNUM (10)
     "
   , ''
   );
