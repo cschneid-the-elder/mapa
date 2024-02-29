@@ -7501,8 +7501,12 @@ DSNUTIL_PAREN_NUMBER
 	: [0-9]+ ('.' [0-9]+)?
 	;
 
+DSNUTIL_PAREN_COLON
+	: COLON
+	;
+
 DSNUTIL_PAREN_IDENTIFIER
-	: ~[ \n\r,.;)('"=><+-]+
+	: ~[ \t\n\r,.;:)('"=><+-]+
 	//->type(DSNUTIL_IDENTIFIER)
 	;
 
