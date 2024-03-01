@@ -1,6 +1,6 @@
 /*
-Copyright (C) 2021 - 2023 Craig Schneiderwent.  Portions copyright
-2023 Martijn Rutte.  Portions copyright 2023 Maarten van Haasteren.
+Copyright (C) 2021 - 2024 Craig Schneiderwent.  Portions copyright (C)
+2023 Martijn Rutte.  Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
 All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
@@ -230,6 +230,7 @@ sqlplProcedureStatement
 	| (sqlplStartLabel? selectIntoStatement)
 	| (sqlplStartLabel? setConnectionStatement)
 	| (sqlplStartLabel? setAssignmentStatement)
+	| (sqlplStartLabel? setSpecialRegisterStatement)
 	| (sqlplStartLabel? truncateStatement)
 	| (sqlplStartLabel? updateStatement)
 	| (sqlplStartLabel? valuesIntoStatement)
@@ -5594,6 +5595,7 @@ dsnutilUCSArg
 	| DSNUTIL_DB_TS_IDENTIFIER
 	| DSNUTIL_DB_TS_HEX_LIT
 	| DSNUTIL_PAREN_NUMBER
+	| (DSNUTIL_PAREN_NUMBER DSNUTIL_PAREN_COLON DSNUTIL_PAREN_NUMBER)
 	| (DSNUTIL_DB_TS_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_QUOTE DSNUTIL_QUOTE_CHAR* DSNUTIL_QUOTE1)

@@ -1,3 +1,13 @@
+# Copyright (C) 2021 - 2024 Craig Schneiderwent.
+# Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
+# All rights reserved.
+
+# The authors accept no liability for damages of any kind resulting from the use
+# of this software.  Use at your own risk.
+
+# This software may be modified and distributed under the terms
+# of the MIT license. See the LICENSE file for details.
+
 SEP = :
 ifdef OS
     SEP = ;
@@ -21,6 +31,14 @@ AOPT = -visitor -listener
 	$(JC) $(JCOPT1) ./src/$**.java
 
 all: ./src/DB2zSQLLexer.tokens ./src/DB2zSQLParser.tokens
+
+clean:
+	echo 'cleaning directories'
+	echo `date` $@ >>build.log
+	rm -fR ./class
+	rm -f ./src/*.interp
+	rm -f ./src/*.tokens
+	rm -f ./src/*.java
 
 testrig:
 	echo `date` $@ $(n) >> build.log

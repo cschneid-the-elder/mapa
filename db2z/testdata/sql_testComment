@@ -1,0 +1,11 @@
+-- this is comment
+
+ CREATE TABLE TACHI.ROCINANTE
+    ( HOLDEN CHARACTER(8),
+      PERIOD BUSINESS_TIME(NAGATA,BURTON)
+    )
+    -- and this is comment as well
+   IN DATABASE THEBELT
+ ;
+
+-- COMMIT;
