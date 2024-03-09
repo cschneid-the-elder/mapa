@@ -1,12 +1,12 @@
        Identification Division.
-       Program-ID. test9028.
+       Program-ID. test9029.
        Environment Division.
        Configuration Section.
        Repository.
        Data Division.
        Working-Storage Section.
        01  CONSTANTS.
-           05  MYNAME               PIC X(012) VALUE 'test9028'.
+           05  MYNAME               PIC X(012) VALUE 'test9029'.
            05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
 
        01  WORK-AREAS.

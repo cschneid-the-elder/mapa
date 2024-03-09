@@ -114,6 +114,7 @@ class CobolSource {
 
 		CharStream cs = fromFileName(initFileName);  //load the file
 		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -149,6 +150,7 @@ class CobolSource {
 		LOGGER.fine(this.myName + " lookForIdDiv()");
 		CharStream cs = fromFileName(initFileName);  //load the file
 		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -698,6 +700,7 @@ class CobolSource {
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file
 		CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
@@ -790,6 +793,7 @@ class CobolSource {
 		LOGGER.finer("lexing " + fileName);
 
 		CobolLexer.testRig = false;
+		CobolLexer.freeForm = false;
 		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 

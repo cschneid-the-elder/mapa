@@ -34,18 +34,25 @@ lexer grammar CobolLexer;
 	Data Division.
 	*/
 	public Boolean specialNames = false;
+	
+	/*
+	This Boolean is set to true if the source being processed is free
+	form, i.e. line numbers are absent, Area A and Area B are not
+	applicable.
+	*/
+	public static Boolean freeForm = false; 
 }
 
 channels { COMPILER_DIRECTIVES }
 
 // lexer rules --------------------------------------------------------------------------------
 
-CLASSIC_COMMENT_INDICATOR : (ASTERISKCHAR | SLASHCHAR) {getCharPositionInLine() == 7}? ;
-CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_INDICATOR TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
+CLASSIC_COMMENT_INDICATOR : (ASTERISKCHAR | SLASHCHAR) {!freeForm && getCharPositionInLine() == 7}? ;
+CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_INDICATOR TEXTA*)+ {!freeForm && getCharPositionInLine() < 73}? -> skip;
 
-CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
-CLASSIC_DEBUG_INDICATOR : D {getCharPositionInLine() == 7}? ;
-CLASSIC_DEBUG_LINE : BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_DEBUG_INDICATOR TEXTA* {getCharPositionInLine() < 73}? -> skip;
+CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
+CLASSIC_DEBUG_INDICATOR : D {!freeForm && getCharPositionInLine() == 7}? ;
+CLASSIC_DEBUG_LINE : BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_DEBUG_INDICATOR TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
 
 /*
 The NIST test suite has lines with A, C, G, J, P, X, and Y in the indicator area.
@@ -54,40 +61,47 @@ These tokens exist specifically to eat these lines, as they seem to be flags to 
 rest of the test suite itself and not intended to be processed directly by a parser.
 */
 
-NIST_SEMI_COMMENT_A : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA A {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_B : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA B {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_C : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA C {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_E : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA E {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_F : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA F {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_G : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA G TEXTA* {getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_H : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA H {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_I : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA I {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_J : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA J TEXTA* {getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_P : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA P {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_S : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA S {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_T : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA T {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_U : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA U {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_X : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA X {getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_Y : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA Y {getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_A : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA A {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_B : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA B {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_C : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA C {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_E : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA E {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_F : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA F {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_G : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA G TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
+NIST_SEMI_COMMENT_H : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA H {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_I : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA I {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_J : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA J TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
+NIST_SEMI_COMMENT_P : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA P {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_S : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA S {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_T : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA T {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_U : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA U {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_X : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA X {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_Y : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA Y {!freeForm && getCharPositionInLine() == 7}? -> skip;
 
 
 
-CLASSIC_EOL_COMMENT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {testRig && getCharPositionInLine()==80}? -> skip;
+CLASSIC_EOL_COMMENT : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && testRig && getCharPositionInLine()==80}? -> skip;
 
 CLASSIC_EJECT: EJECT DOT? -> skip;
 CLASSIC_SKIP : (SKIP1 | SKIP2 | SKIP3) DOT? -> skip;
 CLASSIC_TITLE : TITLE NONNUMERICLITERAL DOT? -> skip;
-CLASSIC_CONTINUATION : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA MINUSCHAR;
+CLASSIC_CONTINUATION : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA MINUSCHAR {!freeForm}? ;
 
 
-AUTHOR_TAG : AUTHOR DOT {getCharPositionInLine() == 14}? -> pushMode(FFT);
-INSTALLATION_TAG : INSTALLATION DOT {getCharPositionInLine() == 20}? -> pushMode(FFT);
-DATE_WRITTEN_TAG : DATE_WRITTEN DOT {getCharPositionInLine() == 20}? -> pushMode(FFT);
-DATE_COMPILED_TAG : DATE_COMPILED DOT {getCharPositionInLine() == 21}? -> pushMode(FFT);
-SECURITY_TAG : SECURITY DOT {getCharPositionInLine() == 16}? -> pushMode(FFT);
-REMARKS_TAG : REMARKS DOT {getCharPositionInLine() == 15}? -> pushMode(FFT);
-ENVIRONMENT_TAG : ENVIRONMENT {getCharPositionInLine() == 18}?;
-DATA_TAG : DATA {getCharPositionInLine() == 11}?;
+AUTHOR_TAG : AUTHOR DOT {!freeForm && getCharPositionInLine() == 14}? -> pushMode(FFT);
+INSTALLATION_TAG : INSTALLATION DOT {!freeForm && getCharPositionInLine() == 20}? -> pushMode(FFT);
+DATE_WRITTEN_TAG : DATE_WRITTEN DOT {!freeForm && getCharPositionInLine() == 20}? -> pushMode(FFT);
+DATE_COMPILED_TAG : DATE_COMPILED DOT {!freeForm && getCharPositionInLine() == 21}? -> pushMode(FFT);
+SECURITY_TAG : SECURITY DOT {!freeForm && getCharPositionInLine() == 16}? -> pushMode(FFT);
+REMARKS_TAG : REMARKS DOT {!freeForm && getCharPositionInLine() == 15}? -> pushMode(FFT);
+ENVIRONMENT_TAG 
+   : ENVIRONMENT 
+   {freeForm || (!freeForm && getCharPositionInLine() == 18)}?
+   ;
+   
+DATA_TAG 
+   : DATA 
+   {freeForm || (!freeForm && getCharPositionInLine() == 11)}?
+   ;
 
 // keywords
 ABORT : A B O R T;
@@ -935,6 +949,24 @@ COLONCHAR : ':';
 COMMACHAR : ',';
 COMMENTENTRYTAG : '*>CE';
 COMMENTTAG : '*>';
+
+SOURCE_FORMAT_FREE_DIRECTIVE 
+   : '>>' SOURCE WS+ (FORMAT WS+)? (IS WS+)? FREE
+   {
+      freeForm = true;
+   }
+   -> channel(COMPILER_DIRECTIVES)
+   ;
+
+SOURCE_FORMAT_FIXED_DIRECTIVE 
+   : '>>' SOURCE WS+ (FORMAT WS+)? (IS WS+)? FIXED
+   {
+      freeForm = false;
+   }
+   -> channel(COMPILER_DIRECTIVES)
+   ;
+
+
 COMPILER_DIRECTIVE : '>>' TEXTA+ -> channel(COMPILER_DIRECTIVES);
 DOLLARCHAR : '$';
 DOUBLEQUOTE : '"';
@@ -984,7 +1016,7 @@ fragment HEXNUMBER :
 CONTINUED_HEXNUMBER :
 	(X '"' [0-9A-Fa-f]+
 	| X '\'' [0-9A-Fa-f]+)
-	 {getCharPositionInLine() < 73}?
+	 {!freeForm && getCharPositionInLine() < 73}?
 ;
 
 fragment NULLTERMINATED :
@@ -995,7 +1027,7 @@ fragment NULLTERMINATED :
 CONTINUED_NULLTERMINATED :
 	(Z '"' (~["\n\r] | '""' | '\'')*
 	| Z '\'' (~['\n\r] | '\'\'' | '"')*)
-	 {getCharPositionInLine() < 73}?
+	 {!freeForm && getCharPositionInLine() < 73}?
 ;
 
 fragment STRINGLITERAL :
@@ -1006,7 +1038,7 @@ fragment STRINGLITERAL :
 CONTINUED_STRINGLITERAL :
 	('"' (~["\n\r] | '""' | '\'')* 
 	| '\'' (~['\n\r] | '\'\'' | '"')*)
-	 {getCharPositionInLine() < 73}?
+	 {!freeForm && getCharPositionInLine() < 73}?
 ;
 
 fragment DBCSLITERAL :
@@ -1017,7 +1049,7 @@ fragment DBCSLITERAL :
 CONTINUED_DBCSLITERAL :
 	([GN] '"' (~["\n\r] | '""' | '\'')*
 	| [GN] '\'' (~['\n\r] | '\'\'' | '"')* )
-	 {getCharPositionInLine() < 73}?
+	 {!freeForm && getCharPositionInLine() < 73}?
 ;
 
 fragment HEXNATIONALNUMBER :
@@ -1057,6 +1089,8 @@ INTEGERLITERAL
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -1066,6 +1100,8 @@ NUMERICLITERAL
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -1077,6 +1113,8 @@ IDENTIFIER
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -1208,10 +1246,10 @@ PICTURE_CARDINALITY : LPARENCHAR INTEGERLITERAL RPARENCHAR;
 WS_PIC : [ \t\f;]+ -> channel(HIDDEN);
 NEWLINE_PIC : '\r'? '\n' -> channel(HIDDEN);
 
-CLASSIC_COMMENTLINE_PIC : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR | SLASHCHAR) TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
-CLASSIC_LINE_NUMBER_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
-CLASSIC_DEBUG_LINE_PIC : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA D TEXTA* {getCharPositionInLine() < 73}? -> skip;
-CLASSIC_EOL_COMMENT_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {testRig && getCharPositionInLine()==80}? -> skip;
+CLASSIC_COMMENTLINE_PIC : (BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA (ASTERISKCHAR | SLASHCHAR) TEXTA*)+ {!freeForm && getCharPositionInLine() < 73}? -> skip;
+CLASSIC_LINE_NUMBER_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
+CLASSIC_DEBUG_LINE_PIC : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA D TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
+CLASSIC_EOL_COMMENT_PIC : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && testRig && getCharPositionInLine()==80}? -> skip;
 
 mode EDITING_PIC_MODE1;
 
@@ -1233,25 +1271,25 @@ IDENTIFIER_LOCALE : IDENTIFIER ->type(IDENTIFIER);
 
 mode FFT;
 
-FFT_INSTALLATION_TAG : INSTALLATION DOT {getCharPositionInLine() == 20}? -> type(INSTALLATION_TAG);
-FFT_DATE_WRITTEN_TAG : DATE_WRITTEN DOT {getCharPositionInLine() == 20}? -> type(DATE_WRITTEN_TAG);
-FFT_DATE_COMPILED_TAG : DATE_COMPILED DOT {getCharPositionInLine() == 21}? -> type(DATE_COMPILED_TAG);
-FFT_SECURITY_TAG : SECURITY DOT {getCharPositionInLine() == 16}? -> type(SECURITY_TAG);
-FFT_REMARKS_TAG : REMARKS DOT {getCharPositionInLine() == 15}? -> type(REMARKS_TAG);
-FFT_ENVIRONMENT_TAG : ENVIRONMENT {getCharPositionInLine() == 18}? -> type(ENVIRONMENT_TAG), popMode;
-FFT_DATA_TAG : DATA {getCharPositionInLine() == 11}? -> type(DATA_TAG), popMode;
-FFT_PROCEDURE_TAG : PROCEDURE {getCharPositionInLine() == 16}? -> type(PROCEDURE), popMode;
+FFT_INSTALLATION_TAG : INSTALLATION DOT {!freeForm && getCharPositionInLine() == 20}? -> type(INSTALLATION_TAG);
+FFT_DATE_WRITTEN_TAG : DATE_WRITTEN DOT {!freeForm && getCharPositionInLine() == 20}? -> type(DATE_WRITTEN_TAG);
+FFT_DATE_COMPILED_TAG : DATE_COMPILED DOT {!freeForm && getCharPositionInLine() == 21}? -> type(DATE_COMPILED_TAG);
+FFT_SECURITY_TAG : SECURITY DOT {!freeForm && getCharPositionInLine() == 16}? -> type(SECURITY_TAG);
+FFT_REMARKS_TAG : REMARKS DOT {!freeForm && getCharPositionInLine() == 15}? -> type(REMARKS_TAG);
+FFT_ENVIRONMENT_TAG : ENVIRONMENT {!freeForm && getCharPositionInLine() == 18}? -> type(ENVIRONMENT_TAG), popMode;
+FFT_DATA_TAG : DATA {!freeForm && getCharPositionInLine() == 11}? -> type(DATA_TAG), popMode;
+FFT_PROCEDURE_TAG : PROCEDURE {!freeForm && getCharPositionInLine() == 16}? -> type(PROCEDURE), popMode;
 FREE_FORM_TEXT : (TEXTA)+?;
 FFT_NEWLINE : '\r'? '\n' -> channel(HIDDEN);
-FFT_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
+FFT_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
 FFT_CLASSIC_COMMENT_LINE : FFT_CLASSIC_LINE_NUMBER (ASTERISKCHAR | SLASHCHAR) TEXTA* -> skip;
 
 mode EXEC_SQL_MODE;
 
 ES_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
-ES_CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_INDICATOR TEXTA*)+ {getCharPositionInLine() < 73}? -> skip;
+ES_CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_INDICATOR TEXTA*)+ {!freeForm && getCharPositionInLine() < 73}? -> skip;
 
-ES_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {getCharPositionInLine() == 6}? -> skip;
+ES_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
 
 SQL_TEXT : (.+?);
 
