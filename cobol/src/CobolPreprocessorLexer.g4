@@ -36,6 +36,20 @@ lexer grammar CobolPreprocessorLexer;
 
 // lexer rules --------------------------------------------------------------------------------
 
+SOURCE_FORMAT_FREE_DIRECTIVE_1
+   : COMPILER_DIRECTIVE_TAG SOURCE WS+ (FORMAT WS+)? (IS WS+)? FREE
+   {
+      freeForm = true;
+   }
+   ;
+
+SOURCE_FORMAT_FIXED_DIRECTIVE_1
+   : COMPILER_DIRECTIVE_TAG SOURCE WS+ (FORMAT WS+)? (IS WS+)? FIXED
+   {
+      freeForm = false;
+   }
+   ;
+
 CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {!freeForm && getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
 CLASSIC_CONTINUATION : '-' {!freeForm && getCharPositionInLine()==7}?;
 CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
@@ -488,10 +502,9 @@ X_CHAR : X;
 // symbols
 COMMENTTAG : '*>';
 COMMACHAR : ',';
-COMPILER_DIRECTIVE_TAG : '>>' -> pushMode(COMPILER_DIRECTIVE_MODE);
 DOT : '.';
 DOUBLEEQUALCHAR : '==';
-
+COMPILER_DIRECTIVE_TAG : '>>' -> pushMode(COMPILER_DIRECTIVE_MODE);
 
 // literals
 NONNUMERICLITERAL

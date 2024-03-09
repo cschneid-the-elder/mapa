@@ -113,7 +113,7 @@ class CobolSource {
 		LOGGER.fine(this.myName + " lookForBasis()");
 
 		CharStream cs = fromFileName(initFileName);  //load the file
-		CobolPreprocessorLexer.testRig = false;
+		//CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -149,7 +149,7 @@ class CobolSource {
 	public Boolean lookForIdDiv(String initFileName) throws Exception {
 		LOGGER.fine(this.myName + " lookForIdDiv()");
 		CharStream cs = fromFileName(initFileName);  //load the file
-		CobolPreprocessorLexer.testRig = false;
+		//CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -193,6 +193,7 @@ class CobolSource {
 			, File baseDir
 			, String initFileNm
 			) throws IOException {
+		/*
 		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
 		File tmp = File.createTempFile("CallTree-" + initFileNm + "-without73to80-", "-cbl", baseDir);
 		staticCLI.setPosixAttributes(tmp);
@@ -212,6 +213,17 @@ class CobolSource {
 			out.println(outLine);
 		}
 		out.close();
+		*/
+		
+		File tmp = File.createTempFile("CallTree-" + initFileNm + "-copy-", "-cbl", baseDir);
+		staticCLI.setPosixAttributes(tmp);
+		if (staticCLI.saveTemp) {
+		} else {
+			tmp.deleteOnExit();
+		}
+		Path source = Paths.get(fileName);
+		Path target = Paths.get(tmp.getAbsolutePath());
+		Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
 		return tmp.getAbsolutePath();
 
 	}
@@ -699,7 +711,7 @@ class CobolSource {
 		LOGGER.fine(this.myName + " lookForCompilerDirectingStatements");
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file
-		CobolPreprocessorLexer.testRig = false;
+		//CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -792,7 +804,7 @@ class CobolSource {
 
 		LOGGER.finer("lexing " + fileName);
 
-		CobolLexer.testRig = false;
+		//CobolLexer.testRig = false;
 		CobolLexer.freeForm = false;
 		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
