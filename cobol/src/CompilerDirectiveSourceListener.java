@@ -18,7 +18,14 @@ public class CompilerDirectiveSourceListener extends CobolPreprocessorParserBase
 	}
 
 	@Override public void enterCompilerDirectiveSource(CobolPreprocessorParser.CompilerDirectiveSourceContext ctx) {
-		compilerDirectiveSourceStatements.add(new CompilerDirectiveSource(ctx, this.LOGGER, this.CLI));
+		CompilerDirectiveSource cds = new CompilerDirectiveSource(ctx, this.LOGGER, this.CLI);
+		int cdsListSize = compilerDirectiveSourceStatements.size();
+		
+		if (cdsListSize > 0) {
+			compilerDirectiveSourceStatements.get(cdsListSize -1).setLastLine(cds.getStartLine() - 1);
+		}
+		
+		compilerDirectiveSourceStatements.add(cds);
 	}
 
 }

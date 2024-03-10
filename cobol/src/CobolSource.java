@@ -114,6 +114,7 @@ class CobolSource {
 
 		CharStream cs = fromFileName(initFileName);  //load the file
 		//CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer.nistTest = this.CLI.nistTest;
 		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -150,6 +151,7 @@ class CobolSource {
 		LOGGER.fine(this.myName + " lookForIdDiv()");
 		CharStream cs = fromFileName(initFileName);  //load the file
 		//CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer.nistTest = this.CLI.nistTest;
 		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -193,8 +195,31 @@ class CobolSource {
 			, File baseDir
 			, String initFileNm
 			) throws IOException {
-		/*
-		LineNumberReader src = new LineNumberReader(new FileReader( new File(fileName)));
+
+		TestIntegration.LOGGER.fine(
+			"CobolSource copyWithout73to80("
+			+ fileName
+			+ ", "
+			+ baseDir
+			+ ", "
+			+ initFileNm
+			+ ")"
+			);
+		ArrayList<CompilerDirectiveSource> cdSourceList = null;
+		CharStream cs = fromFileName(fileName);  //load the file
+		CobolPreprocessorLexer.nistTest = TestIntegration.CLI.nistTest;
+		CobolPreprocessorLexer.freeForm = false;
+		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
+		parser.removeErrorListeners(); //that this is COBOL is not yet established
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+		ParseTreeWalker walker = new ParseTreeWalker();
+		CompilerDirectiveSourceListener listener = 
+			new CompilerDirectiveSourceListener(TestIntegration.LOGGER, TestIntegration.CLI);
+		walker.walk(listener, tree);
+		cdSourceList = listener.compilerDirectiveSourceStatements;
+		
 		File tmp = File.createTempFile("CallTree-" + initFileNm + "-without73to80-", "-cbl", baseDir);
 		staticCLI.setPosixAttributes(tmp);
 		if (staticCLI.saveTemp) {
@@ -203,18 +228,43 @@ class CobolSource {
 		}
 
 		PrintWriter out = new PrintWriter(tmp);
-		List<String> list = Files.readAllLines(Paths.get(fileName),Charset.forName("ISO-8859-1"));
+		List<String> list = Files.readAllLines(Paths.get(fileName), Charset.forName("ISO-8859-1"));
+		int lineNb = 0;
+		int cdNb = 0;
+		CompilerDirectiveSource cds = null;
+		if (cdSourceList.size() > 0) {
+			cds = cdSourceList.get(cdNb);
+		}
 		for (String line: list) {
+			lineNb++;
 			int length = line.length();
 			String outLine = new String(line);
-			if (length > 72) {
-				outLine = line.substring(0, 72);
+			if (cds == null && TestIntegration.CLI.freeForm) {
+				//do nothing
+			} else if (cds != null) {
+				if (lineNb > cds.getLastLine()) {
+					// lastLine is set to Integer.MAX_VALUE in the last cds in cdSourceList
+					cdNb++;
+					cds = cdSourceList.get(cdNb);
+				}
+				TestIntegration.LOGGER.finer("lineNb = " + lineNb + " cds = " + cds);
+				if (lineNb >= cds.getStartLine() && lineNb <= cds.getLastLine()) {
+					if (cds.isFixed()) {
+						if (length > 72) {
+							outLine = line.substring(0, 72);
+						}
+					}
+				}
+			} else if (!TestIntegration.CLI.freeForm) {
+				if (length > 72) {
+					outLine = line.substring(0, 72);
+				}
 			}
 			out.println(outLine);
 		}
 		out.close();
-		*/
-		
+
+		/*		
 		File tmp = File.createTempFile("CallTree-" + initFileNm + "-copy-", "-cbl", baseDir);
 		staticCLI.setPosixAttributes(tmp);
 		if (staticCLI.saveTemp) {
@@ -224,6 +274,7 @@ class CobolSource {
 		Path source = Paths.get(fileName);
 		Path target = Paths.get(tmp.getAbsolutePath());
 		Files.copy(source, target, StandardCopyOption.REPLACE_EXISTING);
+		*/
 		return tmp.getAbsolutePath();
 
 	}
@@ -712,6 +763,7 @@ class CobolSource {
 
 		CharStream aCharStream = fromFileName(fileName);  //load the file
 		//CobolPreprocessorLexer.testRig = false;
+		CobolPreprocessorLexer.nistTest = this.CLI.nistTest;
 		CobolPreprocessorLexer.freeForm = false;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -804,7 +856,8 @@ class CobolSource {
 
 		LOGGER.finer("lexing " + fileName);
 
-		//CobolLexer.testRig = false;
+		CobolLexer.testRig = false;
+		CobolLexer.nistTest = this.CLI.nistTest;
 		CobolLexer.freeForm = false;
 		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens

@@ -40,17 +40,40 @@ lexer grammar CobolLexer;
 	form, i.e. line numbers are absent, Area A and Area B are not
 	applicable.
 	*/
-	public static Boolean freeForm = false; 
+	public static Boolean freeForm = false;
+
+	/*
+	This Boolean is set to true if the source being processed is part
+	of the NIST COBOL 85 test suite, which includes non-standard flags
+	in column 7 as indicators to the suite itself.	
+	*/
+	public static Boolean nistTest = false;
 }
 
 channels { COMPILER_DIRECTIVES }
 
 // lexer rules --------------------------------------------------------------------------------
 
+SOURCE_FORMAT_FREE_DIRECTIVE 
+   : '>>' SOURCE WS+ (FORMAT WS+)? (IS WS+)? FREE
+   {
+      freeForm = true;
+   }
+   -> channel(COMPILER_DIRECTIVES)
+   ;
+
+SOURCE_FORMAT_FIXED_DIRECTIVE 
+   : '>>' SOURCE WS+ (FORMAT WS+)? (IS WS+)? FIXED
+   {
+      freeForm = false;
+   }
+   -> channel(COMPILER_DIRECTIVES)
+   ;
+
 CLASSIC_COMMENT_INDICATOR : (ASTERISKCHAR | SLASHCHAR) {!freeForm && getCharPositionInLine() == 7}? ;
 CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMMENT_INDICATOR TEXTA*)+ {!freeForm && getCharPositionInLine() < 73}? -> skip;
 
-CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
+CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> channel(HIDDEN);
 CLASSIC_DEBUG_INDICATOR : D {!freeForm && getCharPositionInLine() == 7}? ;
 CLASSIC_DEBUG_LINE : BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_DEBUG_INDICATOR TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
 
@@ -61,21 +84,21 @@ These tokens exist specifically to eat these lines, as they seem to be flags to 
 rest of the test suite itself and not intended to be processed directly by a parser.
 */
 
-NIST_SEMI_COMMENT_A : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA A {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_B : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA B {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_C : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA C {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_E : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA E {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_F : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA F {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_G : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA G TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_H : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA H {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_I : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA I {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_J : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA J TEXTA* {!freeForm && getCharPositionInLine() < 73}? -> skip;
-NIST_SEMI_COMMENT_P : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA P {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_S : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA S {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_T : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA T {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_U : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA U {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_X : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA X {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_SEMI_COMMENT_Y : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA Y {!freeForm && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_A : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA A {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_B : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA B {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_C : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA C {nistTest && getCharPositionInLine() == 7}? -> channel(HIDDEN);
+NIST_SEMI_COMMENT_E : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA E {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_F : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA F {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_G : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA G TEXTA* {nistTest && getCharPositionInLine() < 73}? -> skip;
+NIST_SEMI_COMMENT_H : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA H {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_I : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA I {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_J : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA J TEXTA* {nistTest && getCharPositionInLine() < 73}? -> skip;
+NIST_SEMI_COMMENT_P : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA P {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_S : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA S {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_T : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA T {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_U : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA U {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_X : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA X {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_SEMI_COMMENT_Y : BOL TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA Y {nistTest && getCharPositionInLine() == 7}? -> skip;
 
 
 
@@ -949,22 +972,6 @@ COLONCHAR : ':';
 COMMACHAR : ',';
 COMMENTENTRYTAG : '*>CE';
 COMMENTTAG : '*>';
-
-SOURCE_FORMAT_FREE_DIRECTIVE 
-   : '>>' SOURCE WS+ (FORMAT WS+)? (IS WS+)? FREE
-   {
-      freeForm = true;
-   }
-   -> channel(COMPILER_DIRECTIVES)
-   ;
-
-SOURCE_FORMAT_FIXED_DIRECTIVE 
-   : '>>' SOURCE WS+ (FORMAT WS+)? (IS WS+)? FIXED
-   {
-      freeForm = false;
-   }
-   -> channel(COMPILER_DIRECTIVES)
-   ;
 
 
 COMPILER_DIRECTIVE : '>>' TEXTA+ -> channel(COMPILER_DIRECTIVES);

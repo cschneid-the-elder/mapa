@@ -32,6 +32,13 @@ lexer grammar CobolPreprocessorLexer;
 	applicable.
 	*/
 	public static Boolean freeForm = false; 
+
+	/*
+	This Boolean is set to true if the source being processed is part
+	of the NIST COBOL 85 test suite, which includes non-standard flags
+	in column 7 as indicators to the suite itself.	
+	*/
+	public static Boolean nistTest = false;
 }
 
 // lexer rules --------------------------------------------------------------------------------
@@ -53,13 +60,13 @@ SOURCE_FORMAT_FIXED_DIRECTIVE_1
 CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {!freeForm && getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
 CLASSIC_CONTINUATION : '-' {!freeForm && getCharPositionInLine()==7}?;
 CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
-CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && testRig && getCharPositionInLine()==80}? -> skip;
+CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && testRig && getCharPositionInLine()==80}? -> channel(HIDDEN);
 
 ID_DIVISION_TAG : ID DIVISION {freeForm || (!freeForm && getCharPositionInLine()==18)}?;
 
-NIST_FLAG1 : (A | B | C | F | H | I | P | S | T | U | X | Y) {!freeForm && getCharPositionInLine() == 7}? -> skip;
-NIST_FLAG2 : (G | J) {!freeForm && getCharPositionInLine() == 7}? ;
-NIST_IGNORED_LINE : TEXT TEXT TEXT TEXT TEXT TEXT (NIST_FLAG1 | NIST_FLAG2) TEXT* {!freeForm && getCharPositionInLine() < 73}? -> skip;
+NIST_FLAG1 : (A | B | C | F | H | I | P | S | T | U | X | Y) {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_FLAG2 : (G | J) {nistTest && getCharPositionInLine() == 7}? ;
+NIST_IGNORED_LINE : TEXT TEXT TEXT TEXT TEXT TEXT (NIST_FLAG1 | NIST_FLAG2) TEXT* {nistTest && getCharPositionInLine() < 73}? -> skip;
 
 // keywords
 ABD : A B D;
