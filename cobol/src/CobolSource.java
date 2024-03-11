@@ -115,7 +115,7 @@ class CobolSource {
 		CharStream cs = fromFileName(initFileName);  //load the file
 		//CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer.nistTest = this.CLI.nistTest;
-		CobolPreprocessorLexer.freeForm = false;
+		CobolPreprocessorLexer.freeForm = false;  //BASIS seems to require fixed format
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -152,7 +152,7 @@ class CobolSource {
 		CharStream cs = fromFileName(initFileName);  //load the file
 		//CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer.nistTest = this.CLI.nistTest;
-		CobolPreprocessorLexer.freeForm = false;
+		CobolPreprocessorLexer.freeForm = this.CLI.freeForm;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -208,7 +208,7 @@ class CobolSource {
 		ArrayList<CompilerDirectiveSource> cdSourceList = null;
 		CharStream cs = fromFileName(fileName);  //load the file
 		CobolPreprocessorLexer.nistTest = TestIntegration.CLI.nistTest;
-		CobolPreprocessorLexer.freeForm = false;
+		CobolPreprocessorLexer.freeForm = TestIntegration.CLI.freeForm;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens	
@@ -764,7 +764,7 @@ class CobolSource {
 		CharStream aCharStream = fromFileName(fileName);  //load the file
 		//CobolPreprocessorLexer.testRig = false;
 		CobolPreprocessorLexer.nistTest = this.CLI.nistTest;
-		CobolPreprocessorLexer.freeForm = false;
+		CobolPreprocessorLexer.freeForm = this.CLI.freeForm;
 		CobolPreprocessorLexer lexer = new CobolPreprocessorLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolPreprocessorParser parser = new CobolPreprocessorParser(tokens);  //parse the tokens
@@ -858,7 +858,7 @@ class CobolSource {
 
 		CobolLexer.testRig = false;
 		CobolLexer.nistTest = this.CLI.nistTest;
-		CobolLexer.freeForm = false;
+		CobolLexer.freeForm = this.CLI.freeForm;
 		CobolLexer lexer = new CobolLexer(cs);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 

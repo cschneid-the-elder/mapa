@@ -2,9 +2,9 @@
 
 This is not intended to be a validating parser, but an analyzing parser; feed it valid COBOL and it will create a file of "callers" and "callees" and various other bits of data about your source code to enable you to learn things of possible interest.
 
-My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.
+My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.  Think of this as a demonstration of what _can_ be done, which may or may not be what you need.
 
-Currently (10-Feb-2023) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (11-Mar-2024) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -14,9 +14,9 @@ Currently (10-Feb-2023) a work in progress.  Parsing COBOL to extract various so
 
 Download the .jar files.  If you have provenance issues feel free to obtain the ANTLR jar from https://www.antlr.org and the commons-cli jar from https://commons.apache.org/proper/commons-cli/. 
 
-    usage: CallTree [-copy <arg>] [-copyList <arg>] [-file <arg>] [-fileList
-           <arg>] [-help] [-logLevel <arg>] [-out <arg>] [-saveTemp]
-           [-unitTest]
+    usage: CallTree [-copy <arg>] [-copyList <arg>] [-defList <arg>] [-file
+       <arg>] [-fileList <arg>] [-freeForm] [-help] [-logLevel <arg>]
+       [-nistTest] [-out <arg>] [-profile] [-saveTemp] [-unitTest]
      -copy <arg>       name of a single path in which to locate copybooks,
                        takes precedence over the copyList option
      -copyList <arg>   name of a file containing a list of paths in which to
@@ -26,9 +26,12 @@ Download the .jar files.  If you have provenance issues feel free to obtain the 
      -file <arg>       name of a single file to process, takes precedence over
                        the fileList option
      -fileList <arg>   name of a file containing a list of files to process
+     -freeForm         indicates if source is presumed free form in the
+                       absence of a compile option indicating otherwise
      -help             print this message
      -logLevel <arg>   logging level for this run {SEVERE, WARNING, INFO,
                        CONFIG, FINE, FINER, FINEST}
+     -nistTest         used to test with NIST COBOL 85 test suite
      -out <arg>        name of a file in which to store the CALLs, EXEC CICS
                        LINKs, EXEC CICS XCTLs, and EXEC SQL CALLs
      -profile          profile ANTLR grammar
@@ -103,7 +106,7 @@ The DD record contains counts of how the file is opened.  This might be useful i
 
 ### Build/Execution Environment
 
-This was built on ubuntu 20.04 LTS with ANTLR 4.13.1, openjdk version "11.0.20.1 2023-08-24", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 22.04 LTS with ANTLR 4.13.1, openjdk version "11.0.22 2024-01-16", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 The GNU toolchain is used for building.  If you want to build from scratch, i.e. a repository cloned with git, there are some instructions at the top of the Makefile.
 
@@ -129,7 +132,7 @@ Consider a program...
 
 So now what?  Well, my intention is for _you_ to deal with this by naming the directories containing your source and copybooks as the libraries from whence their contents were downloaded, and assemble your source and copybook file lists accordingly.  Separate runs with these lists _should_ give you the same results as your compile invocation.
 
-Worse, of course, is that in a dynamic call environment, which modules you invoke are controlled by your runtime environment.  Static code analysis, which is what this all is, cannot help you with that.
+Worse, of course, is that in a dynamic call environment, which modules you invoke are controlled by your runtime environment.  Static code analysis, which is what this all is, can only tell you that a module of a particular name might be called but not _which_ module by that name.
 
 Even worse, and why simply doing scans of your source code may be unrevealing, consider a program...
 
@@ -189,9 +192,8 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 ### What This Won't Do
 
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
- + Free format source.  I presume you're using the classic 80-column layout, with columns 1 - 6 reserved for line numbers, columns 73 - 80 reserved for line numbers, and conforming to the Area A and Area B requirements.
 
 ### Up To Date
 
-This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2023-10-31 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
+This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2024-02-26 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
 
