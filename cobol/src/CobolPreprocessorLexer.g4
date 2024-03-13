@@ -24,21 +24,49 @@ lexer grammar CobolPreprocessorLexer;
 	being processed via an application.  Under those circumstances,
 	the lexing code must set this variable to false.
 	*/
-	public static Boolean testRig = true; 
+	public static Boolean testRig = true;
+	
+	/*
+	This Boolean is set to true if the source being processed is free
+	form, i.e. line numbers are absent, Area A and Area B are not
+	applicable.
+	*/
+	public static Boolean freeForm = false; 
+
+	/*
+	This Boolean is set to true if the source being processed is part
+	of the NIST COBOL 85 test suite, which includes non-standard flags
+	in column 7 as indicators to the suite itself.	
+	*/
+	public static Boolean nistTest = false;
 }
 
 // lexer rules --------------------------------------------------------------------------------
 
-CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
-CLASSIC_CONTINUATION : '-' {getCharPositionInLine()==7}?;
-CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
-CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {testRig && getCharPositionInLine()==80}? -> skip;
+SOURCE_FORMAT_FREE_DIRECTIVE_1
+   : COMPILER_DIRECTIVE_TAG SOURCE WS+ (FORMAT WS+)? (IS WS+)? FREE
+   {
+      freeForm = true;
+   }
+   ;
 
-ID_DIVISION_TAG : ID DIVISION {getCharPositionInLine()==18}?;
+SOURCE_FORMAT_FIXED_DIRECTIVE_1
+   : COMPILER_DIRECTIVE_TAG SOURCE WS+ (FORMAT WS+)? (IS WS+)? FIXED
+   {
+      freeForm = false;
+   }
+   ;
 
-NIST_FLAG1 : (A | B | C | F | H | I | P | S | T | U | X | Y) {getCharPositionInLine() == 7}? -> skip;
-NIST_FLAG2 : (G | J) {getCharPositionInLine() == 7}? ;
-NIST_IGNORED_LINE : TEXT TEXT TEXT TEXT TEXT TEXT (NIST_FLAG1 | NIST_FLAG2) TEXT* {getCharPositionInLine() < 73}? -> skip;
+CLASSIC_COMMENT_TAG : TEXT TEXT TEXT TEXT TEXT TEXT '*' {!freeForm && getCharPositionInLine() == 7}? -> pushMode(CLASSIC_COMMENT_MODE);
+CLASSIC_CONTINUATION : '-' {!freeForm && getCharPositionInLine()==7}?;
+CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
+CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && testRig && getCharPositionInLine()==80}? -> channel(HIDDEN);
+
+ID_DIVISION_TAG : ID DIVISION {freeForm || (!freeForm && getCharPositionInLine()==18)}?;
+
+NIST_FLAG1 : (A | B | C | F | H | I | P | S | T | U | X | Y) {nistTest && getCharPositionInLine() == 7}? -> skip;
+NIST_FLAG2 : (G | J) {nistTest && getCharPositionInLine() == 7}? ;
+NIST_IGNORED_LINE : TEXT TEXT TEXT TEXT TEXT TEXT (NIST_FLAG1 | NIST_FLAG2) TEXT* {nistTest && getCharPositionInLine() < 73}? -> skip;
 
 // keywords
 ABD : A B D;
@@ -134,6 +162,7 @@ FLAG : F L A G;
 FLAGSTD : F L A G S T D;
 FNC : F N C;
 FORCENUMCMP : F O R C E N U M C M P;
+FREE : F R E E;
 FSRT : F S R T;
 FULL : F U L L;
 GDS : G D S;
@@ -142,8 +171,8 @@ HEX : H E X;
 HGPR : H G P R;
 HOOK : H O O K;
 IC : I C;
-ID : I D {getCharPositionInLine()==9}?;
-IDENTIFICATION : I D E N T I F I C A T I O N {getCharPositionInLine()==21}?;
+ID : I D {freeForm || (!freeForm && getCharPositionInLine()==9)}?;
+IDENTIFICATION : I D E N T I F I C A T I O N {freeForm || (!freeForm && getCharPositionInLine()==21)}?;
 IN : I N;
 INITCHECK : I N I T C H E C K;
 INTDATE : I N T D A T E;
@@ -480,10 +509,9 @@ X_CHAR : X;
 // symbols
 COMMENTTAG : '*>';
 COMMACHAR : ',';
-COMPILER_DIRECTIVE_TAG : '>>' -> pushMode(COMPILER_DIRECTIVE_MODE);
 DOT : '.';
 DOUBLEEQUALCHAR : '==';
-
+COMPILER_DIRECTIVE_TAG : '>>' -> pushMode(COMPILER_DIRECTIVE_MODE);
 
 // literals
 NONNUMERICLITERAL
@@ -500,6 +528,8 @@ NONNUMERICLITERAL
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -521,6 +551,8 @@ NUMERICLITERAL
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -620,6 +652,8 @@ IDENTIFIER
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -629,6 +663,8 @@ FILENAME
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -638,6 +674,8 @@ PSEUDOTEXTIDENTIFIER
     (getCharPositionInLine() > 7 && !testRig)
     ||
     (testRig && getCharPositionInLine() > 7 && getCharPositionInLine() < 73)
+    ||
+    freeForm
    }? 
    ;
 
@@ -695,7 +733,7 @@ mode COMPILER_DIRECTIVE_MODE;
 
 CD_NEWLINE : NEWLINE ->type(NEWLINE),popMode;
 CD_WS : WS ->channel(HIDDEN);
-CD_CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {testRig && getCharPositionInLine()==80}? -> skip;
+CD_CLASSIC_EOL_COMMENT : TEXT TEXT TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && testRig && getCharPositionInLine()==80}? -> skip;
 
 ASTERISKCHAR : '*';
 EQUALCHAR : '=';
@@ -785,6 +823,20 @@ UPON : U P O N;
 WHEN : W H E N;
 WITH : W I T H;
 
+SOURCE_FORMAT_FREE_DIRECTIVE 
+   : SOURCE WS+ (FORMAT WS+)? (IS WS+)? FREE
+   {
+      freeForm = true;
+   }
+   ;
+
+SOURCE_FORMAT_FIXED_DIRECTIVE 
+   : SOURCE WS+ (FORMAT WS+)? (IS WS+)? FIXED
+   {
+      freeForm = false;
+   }
+   ;
+
 CD_NONNUMERICLITERAL : NONNUMERICLITERAL ->type(NONNUMERICLITERAL);
 CD_NUMERICLITERAL : NUMERICLITERAL ->type(NUMERICLITERAL);
 CD_IDENTIFIER : IDENTIFIER ->type(IDENTIFIER);
@@ -811,7 +863,7 @@ ES_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
 SQL_TEXT : (.+?);
 
-ES_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+ES_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
 
 mode EXEC_CICS_MODE;
 
@@ -819,5 +871,5 @@ EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
 CICS_TEXT : (.+?);
 
-EC_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {getCharPositionInLine() == 6}? -> skip;
+EC_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
 

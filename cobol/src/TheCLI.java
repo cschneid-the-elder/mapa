@@ -23,6 +23,8 @@ public class TheCLI{
 	public Boolean unitTest = false;
 	public Boolean saveTemp = false;
 	public Boolean profile = false;
+	public Boolean freeForm = false;
+	public Boolean nistTest = false;
 	public ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
 
 	public TheCLI(String[] args, Logger LOGGER) throws Exception {
@@ -38,6 +40,8 @@ public class TheCLI{
 			, "name of a single path in which to locate copybooks, takes precedence over the copyList option");
 		Option copyList = new Option("copyList", true
 			, "name of a file containing a list of paths in which to locate copybooks");
+		Option freeForm = new Option("freeForm", false
+			, "indicates if source is presumed free form in the absence of a compile option indicating otherwise");
 		Option defList = new Option("defList", true
 			, "name of a file containing a list of >>DEFINE statements for conditional compilation variables and their values");
 		Option out = new Option("out", true
@@ -46,6 +50,8 @@ public class TheCLI{
 			, "logging level for this run {SEVERE, WARNING, INFO, CONFIG, FINE, FINER, FINEST}");
 		Option unitTest = new Option("unitTest", false
 			, "used to test lexer, parser, listeners, et. al");
+		Option nistTest = new Option("nistTest", false
+			, "used to test with NIST COBOL 85 test suite");
 		Option saveTemp = new Option("saveTemp", false
 			, "save temporary files, used to test lexer, parser, listeners, et. al");
 		Option profile = new Option("profile", false
@@ -56,10 +62,12 @@ public class TheCLI{
 		this.options.addOption(fileList);
 		this.options.addOption(copy);
 		this.options.addOption(copyList);
+		this.options.addOption(freeForm);
 		this.options.addOption(defList);
 		this.options.addOption(out);
 		this.options.addOption(logLevel);
 		this.options.addOption(unitTest);
+		this.options.addOption(nistTest);
 		this.options.addOption(saveTemp);
 		this.options.addOption(profile);
 		this.options.addOption(help);
@@ -163,6 +171,18 @@ public class TheCLI{
 			this.LOGGER.info("ANTLR grammar will be profiled");
 		}
 
+		if (this.line.hasOption("freeForm")) {
+			this.freeForm = true;
+			this.LOGGER.info("free format source presumed");
+		} else {
+			this.LOGGER.info("fixed format source presumed");
+		}
+		
+		if (this.line.hasOption("nistTest")) {
+			this.nistTest = true;
+			this.LOGGER.info("NIST COBOL 85 testing presumed");
+		}
+		
 	}
 
 	private void parseDefines(String fileName) throws Exception {

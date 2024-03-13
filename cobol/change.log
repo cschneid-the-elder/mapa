@@ -1,3 +1,6 @@
+--2024-03-11--------------------------------------------------------------------
+Add support for free form source code.
+
 --2024-03-08--------------------------------------------------------------------
 Merged update to CopyStatement.java by Bernardo Nascimento.  Rebuilt jar.
 
