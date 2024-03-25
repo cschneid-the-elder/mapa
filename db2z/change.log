@@ -1,3 +1,7 @@
+--2024-03-25--------------------------------------------------------------------
+Martijn Rutte noted there is alternate syntax for partition-element in the
+CREATE TABLE statement.  Added partitioningClauseElementAlternateSyntax.
+
 --2024-02-28--------------------------------------------------------------------
 Allow PART(3 : 5) in addition to PART(3:5) and PART(3).  Prior to this change,
 the (3:5) would have been tokenized by the lexer as...
