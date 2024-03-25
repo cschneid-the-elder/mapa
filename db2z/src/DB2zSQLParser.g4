@@ -10345,7 +10345,7 @@ instead of two (operator INTEGERLITERAL).
 expression
 	: (
 	functionInvocation
-	| LPAREN expression RPAREN
+	| (LPAREN expression (COMMA expression)* RPAREN)
 	| labeledDuration
 	| literal
 	| specialRegister
