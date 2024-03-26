@@ -2743,6 +2743,10 @@ dsnutilUCSModifyRecoveryListOrTablespace
 	)
 	;
 
+/*
+Added dsnutilUCSDsnumOption per Martijn Rutte 2024-03-26.
+*/
+
 dsnutilUCSModifyRecoveryOptions
 	: (
 	dsnutilUCSCloneOption
@@ -2750,6 +2754,7 @@ dsnutilUCSModifyRecoveryOptions
 	| dsnutilUCSModifyRecoveryRetainOption
 	| dsnutilUCSModifyRecoveryDeletedsOption
 	| dsnutilUCSModifyRecoveryNocopypendOption
+	| dsnutilUCSDsnumOption
 	)
 	;
 
@@ -4566,6 +4571,8 @@ dsnutilUCSRunstatsTablespaceSpec
 Added dsnutilUCSInvalidatecacheOption per Martijn Rutte 2023-11-03.
 
 This isn't currently documented, but DB2 tolerates it.
+
+Added dsnutilUCSSortnumOption per Martijn Rutte 2024-03-26.
 */
 dsnutilUCSRunstatsTablespaceStatisticsSpec
 	: (
@@ -4576,6 +4583,7 @@ dsnutilUCSRunstatsTablespaceStatisticsSpec
 	| dsnutilUCSShrlevelReferenceSpec2
 	| dsnutilUCSStatclgmemsrtOption
 	| dsnutilUCSSortdevtOption
+	| dsnutilUCSSortnumOption
 	| dsnutilUCSHistoryOption
 	| dsnutilUCSUpdateOption
 	| dsnutilUCSReportOption
