@@ -1,3 +1,22 @@
+--2024-03-25--------------------------------------------------------------------
+Martijn Rutte noted there is alternate syntax for partition-element in the
+CREATE TABLE statement.  Added partitioningClauseElementAlternateSyntax.
+
+Martijn Rutte noted the syntax...
+
+ WHERE (A, B, C) IN (SELECT X, Y, Z FROM T1 WHERE M IS NULL)
+
+...is valid.  Modified the expression parser rule to read (in part)...
+
+	| (LPAREN expression (COMMA expression)* RPAREN)
+
+...instead of...
+
+	| LPAREN expression RPAREN
+
+...to make the parser recognize this syntax.  Which did entail tracing through
+the whereClause, searchCondition, predicate, and inPredicate parser rules.
+
 --2024-02-28--------------------------------------------------------------------
 Allow PART(3 : 5) in addition to PART(3:5) and PART(3).  Prior to this change,
 the (3:5) would have been tokenized by the lexer as...

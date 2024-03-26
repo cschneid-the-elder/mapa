@@ -1,6 +1,7 @@
 /*
-Copyright (C) 2021 - 2024 Craig Schneiderwent.  Portions copyright (C)
-2023 Martijn Rutte.  All rights reserved.
+Copyright (C) 2021 - 2024 Craig Schneiderwent.  
+Portions copyright (C) 2023 - 2024 Martijn Rutte.  
+All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
 of this software.  Use at your own risk.

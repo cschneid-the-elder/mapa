@@ -1,6 +1,7 @@
 /*
-Copyright (C) 2021 - 2024 Craig Schneiderwent.  Portions copyright (C)
-2023 Martijn Rutte.  Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
+Copyright (C) 2021 - 2024 Craig Schneiderwent.  
+Portions copyright (C) 2023 - 2024 Martijn Rutte.  
+Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
 All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
@@ -10148,7 +10149,8 @@ partitioningClause
 		partitionExpression (COMMA partitionExpression)* 
 		RPAREN
 		LPAREN
-		partitioningClauseElement (COMMA partitioningClauseElement)*
+		((partitioningClauseElement (COMMA partitioningClauseElement)*)
+		| (partitioningClauseElementAlternateSyntax (COMMA partitioningClauseElementAlternateSyntax)*))
 		RPAREN)
 		| (SIZE (EVERY INTEGERLITERAL? sqlidentifier)?))
 	)
@@ -10212,6 +10214,17 @@ alterHashOrganization
 partitioningClauseElement
 	: (
 	PARTITION INTEGERLITERAL partitioningPhrase
+	)
+	;
+
+/*
+Alternate syntax noted by Martijn Rutte 2024-03-25.
+*/
+partitioningClauseElementAlternateSyntax
+	: (
+	(PARTITION | PART) INTEGERLITERAL
+	(VALUES LPAREN partitionLimitKey (COMMA partitionLimitKey)* RPAREN)
+	INCLUSIVE?
 	)
 	;
 
@@ -10332,7 +10345,7 @@ instead of two (operator INTEGERLITERAL).
 expression
 	: (
 	functionInvocation
-	| LPAREN expression RPAREN
+	| (LPAREN expression (COMMA expression)* RPAREN)
 	| labeledDuration
 	| literal
 	| specialRegister
