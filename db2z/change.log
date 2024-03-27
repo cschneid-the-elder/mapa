@@ -1,3 +1,8 @@
+--2024-03-26--------------------------------------------------------------------
+Per Martijn Rutte, added dsnutilUCSDsnumOption to 
+dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 
+dsnutilUCSRunstatsTablespaceStatisticsSpec.
+
 --2024-03-25--------------------------------------------------------------------
 Martijn Rutte noted there is alternate syntax for partition-element in the
 CREATE TABLE statement.  Added partitioningClauseElementAlternateSyntax.
