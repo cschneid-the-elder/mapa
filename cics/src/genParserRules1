@@ -1,0 +1,70 @@
+#! /usr/bin/awk -f
+
+# 
+# generate CICS parser rules 
+# preprocessing of input gives records...
+# 
+# ABEND
+# ADD+SUBEVENT
+# STARTBROWSE+CONTAINER+=BTS
+# 
+# ...from which this code produces...
+# 
+# abend
+# 	: abendOption abendOptions*
+# 	;
+# 
+# addSubevent
+# 	: addOption subeventOption addSubeventOptions*
+# 	;
+# 
+# startbrowseContainerBTS
+# 	: startbrowseOption containerOption startbrowseContainerBTSOptions*
+# 	;
+# 
+
+FS="+"
+OFS=""
+
+{
+	for(i=1; i<=NF; i++) {
+		gsub(/\s+$/, "", $i)
+		if (i==1) {
+			keyword[i] = tolower($i)
+#		} else if ($i == "TS" || $i == "TD") {
+#			keyword[i] = $i
+		} else if (substr($i,1,1) == "=") {
+			keyword[i] = substr($i,2)
+		} else {
+			keyword[i] = toupper(substr($i,1,1)) tolower(substr($i,2))
+		}
+	}
+	
+	for(i=1; i<=NF; i++) {
+		printf("%s", keyword[i])
+	}
+
+	printf("\n\t: (\n\t")
+
+    for(i=1; i<=NF; i++) {
+    	if (substr($i,1,1) != "=") {
+			printf(" %sOption", tolower(keyword[i]))
+		}
+	}
+	
+	printf(" ")
+	
+	for(i=1; i<=NF; i++) {
+		printf("%s", keyword[i])
+	}
+
+	printf("Options*")
+
+	printf("\n\t)\n\t;\n\n")
+}
+
+END {
+	print "// " NR " rules generated " strftime()
+	print ""
+}
+

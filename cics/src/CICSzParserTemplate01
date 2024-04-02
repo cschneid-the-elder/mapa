@@ -1,0 +1,51 @@
+/*
+Copyright (C) 2024 Craig Schneiderwent.  
+All rights reserved.
+
+The author(s) accept no liability for damages of any kind resulting from the use
+of this software.  Use at your own risk.
+
+This software may be modified and distributed under the terms
+of the MIT license. See the LICENSE file for details.
+
+CICS Transaction Server for z/OS Version 6.1, CICS Transaction Server for z/OS
+Version 3.1, CICS/MVS 2.1.2, CICS/DOS/VS 1.7, and CICS/VS 1.5 documentation 
+served as the original source material.
+
+*/
+
+
+parser grammar CICSzParser;
+
+options {tokenVocab=CICSzLexer;}
+
+startRule
+	: (
+	cicsCommandInitiator cicsCommand cicsCommandTerminator
+	)+
+	EOF
+	;
+
+cicsCommandInitiator
+	: (
+	EXEC_CICS
+	)
+	;
+
+cicsCommandTerminator
+	: (
+	END_EXEC
+	| SEMICOLON
+	)
+	;
+
+cicsCommand
+	: (
+	cicsAPI
+	| cicsSPI
+	)
+	;
+
+cicsAPI
+	: (
+

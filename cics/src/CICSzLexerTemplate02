@@ -1,0 +1,52 @@
+
+mode ARG_MODE;
+
+/*
+This token indicates the end of the argument has been found.
+*/
+
+RPAREN
+	: ')'
+	{
+		parenNesting == 0
+	}?
+	->popMode
+	;
+
+/*
+This token is part of the argument itself.  For example,
+
+    PROGRAM(PROGRAM-LIST(INDEX))
+
+*/
+
+ARG_RPAREN
+	: ')'
+	{
+		parenNesting != 0
+	}?
+	{
+		parenNesting--;
+	}
+	->type(ARG)
+	;
+
+/*
+This token is part of the argument itself.  For example,
+
+    PROGRAM(PROGRAM-LIST(INDEX))
+
+*/
+
+ARG_LPAREN
+	: '('
+	{
+		parenNesting++;
+	}
+	->pushMode(ARG_MODE),type(ARG)
+	;
+
+ARG
+	: .+?
+	;
+

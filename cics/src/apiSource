@@ -1,0 +1,3314 @@
+# this file is used to generate portions of the
+# CICSzLexer.g4 and CICSzParser.g4 files.
+# 
+# CICS Transaction Server for z/OS Version 6.1, CICS Transaction Server for z/OS
+# Version 3.1, CICS/MVS 2.1.2, CICS/DOS/VS 1.7, and CICS/VS 1.5 documentation 
+# served as the original source material.
+# 
+# annotations allow code generation
+# 
+# @     token that is first word of a parser rule
+# +     token that is subsequent word of a parser rule
+# +=    suffix for a parser rule (not a token)
+# (...) argument required
+# [...] argument optional
+# 
+# 
+
+@ABEND
+ABCODE( name )
+CANCEL
+NODUMP
+
+@ACQUIRE
+PROCESS( data-value )
+PROCESSTYPE( data-value )
+ACTIVITYID( data-value )
+
+@ADD
++SUBEVENT( data-value )
+EVENT( data-value )
+
+# 
+# CSA is no longer documented, and may be disallowed
+# 
+
+@ADDRESS
+ACEE( ptr-ref )
+EIB( ptr-ref )
+COMMAREA( ptr-ref )
+TCTUA( ptr-ref )
+CWA( ptr-ref )
+TWA( ptr-ref )
+CSA( ptr-ref )
+
+@ADDRESS
++SET( ptr-ref )
+USING( ptr-ref )
+
+@ALLOCATE
++=APPC
+SYSID( systemname )
+PROFILE( name )
+NOQUEUE
+PARTNER( name )
+STATE( cvda )
+
+@ALLOCATE
++=LU61
+SESSION( name )
+SYSID( systemname )
+PROFILE( name )
+NOQUEUE
+
+@ALLOCATE
++=MRO
+SYSID( systemname )
+PROFILE( name )
+NOQUEUE
+STATE( cvda )
+
+@ASKTIME
+ABSTIME( data-area )
+
+@ASSIGN
+ABCODE( data-area )
+ABDUMP( data-area )
+ABOFFSET( data-area )
+ABPROGRAM( data-area )
+ACTIVITY( data-area )
+ACTIVITYID( data-area )
+ALTSCRNHT( data-area )
+ALTSCRNWD( data-area )
+APLKYBD( data-area )
+APLTEXT( data-area )
+APPLICATION( data-area )
+APPLID( data-area )
+ASRAINTRPT( data-area )
+ASRAKEY( cvda )
+ASRAPSW( data-area )
+ASRAPSW16( data-area )
+ASRAREGS( data-area )
+ASRAREGS64( data-area )
+ASRASPC( cvda )
+ASRASTG( cvda )
+BRIDGE( data-area )
+BTRANS( data-area )
+CHANNEL( data-area )
+CMDSEC( data-area )
+COLOR( data-area )
+CWALENG( data-area )
+DEFSCRNHT( data-area )
+DEFSCRNWD( data-area )
+DELIMITER( data-area )
+DESTCOUNT( data-area )
+DESTID( data-area )
+DESTIDLENG( data-area )
+DSSCS( data-area )
+DS3270( data-area )
+ERRORMSG( data-area )
+ERRORMSGLEN( data-area )
+EWASUPP( data-area )
+EXTDS( data-area )
+FACILITY( data-area )
+FCI( data-area )
+GCHARS( data-area )
+GCODES( data-area )
+GMMI( data-area )
+GMEXITOPT( cvda )
+HILIGHT( data-area )
+INITPARM( data-area )
+INITPARMLEN( data-area )
+INPARTN( data-area )
+INPUTMSGLEN( data-area )
+INVOKINGPROG( data-area )
+KATAKANA( data-area )
+LANGINUSE( data-area )
+LDCMNEM( data-area )
+LDCNUM( data-area )
+LINKLEVEL( data-area )
+LOCALCCSID( data-area )
+MAJORVERSION( data-area )
+MAPCOLUMN( data-area )
+MAPHEIGHT( data-area )
+MAPLINE( data-area )
+MAPWIDTH( data-area )
+MICROVERSION( data-area )
+MINORVERSION( data-area )
+MSRCONTROL( data-area )
+NATLANGINUSE( data-area )
+NETNAME( data-area )
+NEXTTRANSID( data-area )
+NUMTAB( data-area )
+OPCLASS( data-area )
+OPERATION( data-area )
+OPERKEYS( data-area )
+OPID( data-area )
+OPSECURITY( data-area )
+ORGABCODE( data-area )
+OUTLINE( data-area )
+PAGENUM( data-area )
+PARTNPAGE( data-area )
+PARTNS( data-area )
+PARTNSET( data-area )
+PLATFORM( data-area )
+PRINSYSID( data-area )
+PROCESS( data-area )
+PROCESSTYPE( data-area )
+PROGRAM( data-area )
+PS( data-area )
+QNAME( data-area )
+RESSEC( data-area )
+RESTART( data-area )
+RETURNPROG( data-area )
+SCRNHT( data-area )
+SCRNWD( data-area )
+SIGDATA( data-area )
+SOSI( data-area )
+STARTCODE( data-area )
+STATIONID( data-area )
+SYSID( data-area )
+TASKPRIORITY( data-area )
+TCTUALENG( data-area )
+TELLERID( data-area )
+TERMCODE( data-area )
+TERMPRIORITY( data-area )
+TEXTKYBD( data-area )
+TEXTPRINT( data-area )
+TNADDR( data-area )
+TNIPFAMILY( cvda )
+TNPORT( data-area )
+TRANPRIORITY( data-area )
+TWALENG( data-area )
+UNATTEND( data-area )
+USERID( data-area )
+USERNAME( data-area )
+USERPRIORITY( data-area )
+VALIDATION( data-area )
+
+@BIF 
++DEEDIT
+FIELD( data-area )
+LENGTH( data-value )
+
+@BIF
++DIGEST
+RECORD( data-value )
+RECORDLEN( data-value )
+HEX
+BINARY
+BASE64
+DIGESTTYPE( cvda )
+RESULT( data-area )
+
+@BUILD 
++ATTACH
++=LU61
+ATTACHID( name )
+PROCESS( name )
+RPROCESS( name )
+IUTYPE( data-value )
+RRESOURCE( name )
+DATASTR( data-value )
+RESOURCE( name )
+QUEUE( name )
+RECFM( data-value )
+
+@BUILD 
++ATTACH
++=MRO
+ATTACHID( name )
+PROCESS( name )
+RPROCESS( name )
+IUTYPE( data-value )
+RRESOURCE( name )
+DATASTR( data-value )
+RESOURCE( name )
+QUEUE( name )
+RECFM( data-value )
+
+@CANCEL
+REQID( name )
+SYSID( systemname )
+TRANSID( name )
+
+@CANCEL
++=BTS
+ACTIVITY( data-value )
+ACQACTIVITY
+ACQPROCESS
+
+@CHANGE 
++PHRASE( data-area )
+PHRASELEN( data-value )
+NEWPHRASELEN( data-value )
+NEWPHRASE( data-area )
+USERID( data-value )
+ESMREASON( data-area )
+ESMRESP( data-area )
+
+@CHANGE 
++PASSWORD( data-value )
+ESMREASON( data-area )
+NEWPASSWORD( data-value )
+USERID( data-value )
+ESMRESP( data-area )
+
+@CHANGE 
++TASK
+PRIORITY( data-value )
+
+@CHECK
++ACQPROCESS
+COMPSTATUS( cvda )
+ABCODE( data-area )
+ABPROGRAM( data-area )
+MODE( cvda )
+SUSPSTATUS( cvda )
+
+@CHECK
++ACTIVITY( data-value )
+COMPSTATUS( cvda )
+ABCODE( data-area )
+ACQACTIVITY
+ABPROGRAM( data-area )
+MODE( cvda )
+SUSPSTATUS( cvda )
+
+@CHECK
++TIMER( data-value )
+STATUS( cvda )
+
+@CONNECT 
++PROCESS
+CONVID( name )
+SESSION( name )
+PROCNAME( data-area )
+PROCLENGTH( data-value )
+PARTNER( name )
+SYNCLEVEL( data-value )
+PIPLIST( data-area )
+PIPLENGTH( data-value )
+STATE( cvda )
+
+@CONVERSE
++=zOSCommServer
+ALTERNATE
+ASIS
+ATTACHID(name)
+CONVID(name)
+CTLCHAR(data-value)
+DEFAULT
+DEFRESP
+ERASE
+FMH
+FROM(data-area)
+FROMFLENGTH(data-value)
+FROMLENGTH(data-value)
+INTO(data-area)
+LDC(name)
+MAXFLENGTH(data-value)
+MAXLENGTH(data-value)
+NOTRUNCATE
+SESSION(name)
+SET(ptr-ref)
+STATE(cvda)
+STRFIELD
+TOFLENGTH(data-area)
+TOLENGTH(data-area)
+
+@CONVERSE
++=NonzOSCommServer
+ALTERNATE
+ASIS
+ATTACHID(name)
+CONVID(name)
+CTLCHAR(data-value)
+DEFAULT
+DEFRESP
+ERASE
+FMH
+FROM(data-area)
+FROMFLENGTH(data-value)
+FROMLENGTH(data-value)
+INTO(data-area)
+LEAVEKB
+LINEADDR(data-value)
+MAXFLENGTH(data-value)
+MAXLENGTH(data-value)
+NOTRUNCATE
+PSEUDOBIN
+SESSION(name)
+SET(ptr-ref)
+STATE(cvda)
+STRFIELD
+TOFLENGTH(data-area)
+TOLENGTH(data-area)
+
+@CONVERTTIME
+DATESTRING( data-area )
+ABSTIME( data-area )
+
+@DEFINE
++ACTIVITY( data-value )
+TRANSID( data-value )
+EVENT( data-value )
+PROGRAM( data-value )
+USERID( data-value )
+ACTIVITYID( data-area )
+
+@DEFINE
++COMPOSITE
++EVENT( data-value )
+AND
+OR
+SUBEVENT1( data-value )
+SUBEVENT2( data-value )
+SUBEVENT3( data-value )
+SUBEVENT4( data-value )
+SUBEVENT5( data-value )
+SUBEVENT6( data-value )
+SUBEVENT7( data-value )
+SUBEVENT8( data-value )
+
+@DEFINE
++COUNTER( name )
+POOL( name )
+VALUE( data-value )
+MINIMUM( data-value )
+MAXIMUM( data-value )
+NOSUSPEND
+
+@DEFINE
++DCOUNTER( name )
+POOL( name )
+VALUE( data-value )
+MAXIMUM( data-area )
+MINIMUM( data-value )
+NOSUSPEND
+
+@DEFINE
++INPUT
++EVENT( data-value )
+
+@DEFINE
++PROCESS( data-value )
+PROCESSTYPE( data-value )
+PROGRAM( data-value )
+USERID( data-value )
+TRANSID( data-value )
+NOCHECK
+
+@DEFINE
++TIMER( data-value )
+EVENT( data-value )
+AFTER
+DAYS( data-value )
+HOURS( data-value )
+MINUTES( data-value )
+SECONDS( data-value )
+AT
+HOURS( data-value )
+ON
+MINUTES( data-value )
+SECONDS( data-value )
+YEAR( data-value )
+MONTH( data-value )
+DAYOFMONTH( data-value )
+DAYOFYEAR( data-value )
+
+@DELAY
+INTERVAL( hhmmss )
+REQID( name )
+TIME( hhmmss )
+FOR
+HOURS( data-value )
+MINUTES( data-value )
+SECONDS( data-value )
+MILLISECS( data-value )
+UNTIL
+HOURS( data-value )
+MINUTES( data-value )
+SECONDS( data-value )
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@DELETE
+FILE( filename )
+DATASET( filename )
+TOKEN( data-area )
+RIDFLD( data-area )
+KEYLENGTH( data-value )
+GENERIC
+NUMREC( data-area )
+SYSID( systemname )
+NOSUSPEND
+RBA
+RRN
+
+@DELETE
++ACTIVITY( data-value )
+
+@DELETE 
++CHANNEL( data-value )
+
+@DELETE
++CONTAINER( data-value )
++=BTS
+ACTIVITY( data-value )
+ACQACTIVITY
+PROCESS
+ACQPROCESS
+
+@DELETE
++CONTAINER( data-value )
+CHANNEL( data-value )
+
+@DELETE 
++COUNTER( name )
+POOL( name )
+NOSUSPEND
+
+@DELETE 
++DCOUNTER( name )
+POOL( name )
+NOSUSPEND
+
+@DELETE
++EVENT( data-value )
+
+@DELETE
++TIMER( data-value )
+
+@DELETEQ 
++TD
+QUEUE( name )
+SYSID( systemname )
+
+@DELETEQ
++TS
+QUEUE( name )
+QNAME( name )
+SYSID( systemname )
+
+@DEQ
+RESOURCE( data-area )
+LENGTH( data-value )
+UOW
+MAXLIFETIME( cvda )
+TASK
+
+@DOCUMENT
++CREATE
+DOCTOKEN( data-area )
+FROM( data-area )
+LENGTH( data-area )
+TEXT( data-area )
+BINARY( data-area )
+FROMDOC( data-area )
+TEMPLATE( name )
+SYMBOLLIST( data-area )
+LISTLENGTH( data-value )
+DELIMITER( data-value )
+DOCSIZE( data-area )
+UNESCAPED
+HOSTCODEPAGE( name )
+
+@DOCUMENT
++DELETE
+DOCTOKEN( data-area )
+
+@DOCUMENT
++INSERT
+DOCTOKEN( data-area )
+TEXT( data-area )
+LENGTH( data-value )
+DOCSIZE( data-value )
+BINARY( data-area )
+FROM( data-area )
+SYMBOL( name )
+TEMPLATE( name )
+FROMDOC( data-area )
+BOOKMARK( name )
+HOSTCODEPAGE( name )
+AT( name )
+TO( name )
+
+@DOCUMENT
++RETRIEVE
+DOCTOKEN( data-area )
+MAXLENGTH( data-value )
+INTO( data-area )
+CHARACTERSET( name )
+LENGTH( data-value )
+DATAONLY
+
+@DOCUMENT
++SET
+DOCTOKEN( data-area )
+SYMBOL( name )
+VALUE( data-area )
+LENGTH( data-value )
+SYMBOLLIST( data-area )
+DELIMITER( data-value )
+UNESCAPED
+
+# 
+# DUMP is no longer documented.
+# 
+
+@DUMP
+DUMPCODE(name)
+FROM( data-area)
+LENGTH(data-value)
+FLENGTH(data-value)
+COMPLETE
+TASK
+STORAGE
+PROGRAM
+TERMINAL
+TABLES
+DCT
+FCT
+PCT
+PPT
+SIT
+TCT
+
+@DUMP 
++TRANSACTION
+DUMPCODE( name )
+FROM( data-area )
+LENGTH( data-value )
+COMPLETE
+FLENGTH( data-value )
+TRT
+SEGMENTLIST( data-area )
+TASKSTORAGE
+TABLESFCT
+LENGTHLIST( data-area )
+TERMINAL
+PROGRAM
+PCT
+NUMSEGMENTS( data-area )
+PPT
+SIT
+TCT
+DUMPID( data-area )
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@ENDBR
+FILE( filename )
+DATASET( filename )
+REQID( data-value )
+SYSID( systemname )
+
+@ENDBROWSE
++ACTIVITY
+BROWSETOKEN( data-value )
+
+@ENDBROWSE
+CONTAINER
+BROWSETOKEN( data-value )
+
+# 
+# ENDBROWSE CONTAINER (BTS) is identical to
+# ENDBROWSE CONTAINER (CHANNEL) so I'm
+# leaving it out.
+# 
+# ENDBROWSE
+# CONTAINER
+# BROWSETOKEN( data-value )
+
+@ENDBROWSE
++EVENT
+BROWSETOKEN( data-value )
+
+@ENDBROWSE
++PROCESS
+BROWSETOKEN( data-value )
+
+@ENDBROWSE
++TIMER
+BROWSETOKEN( data-value )
+
+@ENQ
+RESOURCE( data-area )
+LENGTH( data-value )
+UOW
+MAXLIFETIME( cvda )
+TASK
+NOSUSPEND
+
+# 
+# ENTER TRACEID is no longer documented.
+# 
+
+@ENTER
++TRACEID(data-value)
+FROM(data-area)
+RESOURCE(name)
+ENTRYNAME(name)
+ACCOUNT
+MONITOR
+PERFORM
+
+@ENTER 
++TRACENUM( data-value )
+FROM( data-area )
+FROMLENGTH( data-area )
+RESOURCE( name )
+EXCEPTION
+
+@EXTRACT 
++ATTACH
++=LU61
+PROCESS( data-area )
+ATTACHID( name )
+CONVID( name )
+SESSION( name )
+RESOURCE( data-area )
+RPROCESS( data-area )
+RRESOURCE( data-area )
+QUEUE( data-area )
+DATASTR( data-area )
+IUTYPE( data-area )
+RECFM( data-area )
+
+@EXTRACT 
++ATTACH
++=MRO
+PROCESS( data-area )
+ATTACHID( name )
+CONVID( name )
+SESSION( name )
+RESOURCE( data-area )
+RPROCESS( data-area )
+RRESOURCE( data-area )
+QUEUE( data-area )
+DATASTR( data-area )
+IUTYPE( data-area )
+RECFM( data-area )
+
+@EXTRACT 
++ATTRIBUTES
++=APPC
+CONVID( name )
+STATE( cvda )
+
+@EXTRACT 
++ATTRIBUTES
++=MRO
+CONVID( name )
+SESSION( name )
+STATE( cvda )
+
+@EXTRACT 
++CERTIFICATE( ptr-ref )
+LENGTH( data-area )
+SERIALNUM( ptr-ref )
+OWNER
+SERIALNUMLEN( data-area )
+COMMONNAME( ptr-ref )
+COUNTRY( ptr-ref )
+STATELEN( data-area )
+USERID( data-area )
+ISSUER
+COMMONNAMLEN( data-area )
+COUNTRYLEN( data-area )
+STATE( ptr-ref )
+LOCALITY( ptr-ref )
+LOCALITYLEN( data-area )
+ORGANIZATION( ptr-ref )
+ORGANIZATLEN( data-area )
+ORGUNIT( ptr-ref )
+ORGUNITLEN( data-area )
+
+@EXTRACT 
++LOGONMSG
+INTO( data-area )
+LENGTH( data-area )
+SET( ptr-ref )
+
+@EXTRACT 
++PROCESS
+PROCNAME( data-area )
+PROCLENGTH( data-area )
+MAXPROCLEN( data-value )
+CONVID( name )
+PIPLIST( ptr-ref )
+SYNCLEVEL( data-area )
+PIPLENGTH( data-area )
+
+@EXTRACT
++TCPIP
+AUTHENTICATE( cvda )
+CLIENTNAME( data-area )
+CNAMELENGTH( data-area )
+SERVERNAME( data-area )
+SNAMELENGTH( data-area )
+CLIENTADDR( data-area )
+CADDRLENGTH( data-area )
+CLNTIPFAMILY( cvda )
+CLIENTADDRNU( data-area )
+CLNTADDR6NU( data-area )
+SERVERADDR( data-area )
+SRVRIPFAMILY( cvda )
+SADDRLENGTH( data-area )
+SERVERADDRNU( data-area )
+SRVRADDR6NU( data-area )
+SSLTYPE( cvda )
+TCPIPSERVICE( data-area )
+PORTNUMBER( data-area )
+PORTNUMNU( data-area )
+PRIVACY( cvda )
+MAXDATALEN( data-area )
+
+@EXTRACT 
++TCT
+NETNAME( name )
+SYSID( systemname )
+TERMID( data-area )
+
+@EXTRACT
++WEB
+SCHEME( cvda )
+HOST( data-area )
+HOSTLENGTH( data-value )
+HOSTTYPE( cvda )
+HTTPMETHOD( data-area )
+METHODLENGTH( data-area )
+HTTPVERSION( data-area )
+VERSIONLEN( data-area )
+PATH( data-area )
+PATHLENGTH( data-area )
+QUERYSTRING( data-area )
+REQUESTTYPE( cvda )
+PORTNUMBER( data-area )
+QUERYSTRLEN( data-area )
+URIMAP( data-area )
+
+@FETCH
++ANY( data-area )
+COMPSTATUS( cvda )
+CHANNEL( data-area )
+ABCODE( data-area )
+NOSUSPEND
+TIMEOUT( data-value )
+
+@FETCH
++CHILD( data-value )
+COMPSTATUS( cvda )
+CHANNEL( data-area )
+ABCODE( data-area )
+NOSUSPEND
+TIMEOUT( data-value )
+
+@FORCE
++TIMER( data-value )
+ACQACTIVITY
+ACQPROCESS
+
+@FORMATTIME
+ABSTIME( data-area )
+DATE( data-area )
+FULLDATE( data-area )
+DATEFORM( data-area )
+DATESEP( data-value )
+DATESTRING( data_area )
+STRINGZONE( cvda )
+DAYCOUNT( data-area )
+DAYOFMONTH( data-area )
+DAYOFWEEK( data-area )
+DDMMYY( data-area )
+DDMMYYYY( data-area )
+MILLISECONDS( data-area )
+MMDDYY( data-area )
+MMDDYYYY( data-area )
+MONTHOFYEAR( data-area )
+STRINGFORMAT( cvda )
+TIME( data-area )
+TIMESEP( data-value )
+YEAR( data-area )
+YYMMDD( data-area )
+YYYYDDMM( data-area )
+YYDDD( data-area )
+YYDDMM( data-area )
+YYYYDDD( data-area )
+YYYYMMDD( data-area )
+
+@FREE
+
+@FREE
++=APPC
+CONVID( name )
+STATE( cvda )
+
+@FREE
++=LU61
+CONVID( name )
+SESSION( name )
+
+@FREE
++=MRO
+CONVID( name )
+SESSION( name )
+STATE( cvda )
+
+@FREE
++CHILD( data-value )
+
+@FREEMAIN
+DATA( data-area )
+DATAPOINTER( ptr-value )
+
+@FREEMAIN64
+DATA( data-area64 )
+DATAPOINTER( ptr-value64 )
+
+@GDS 
++ALLOCATE
+SYSID( systemname )
+MODENAME( name )
+PARTNER( name )
+CONVID( data-area )
+RETCODE( data-area )
+NOQUEUE
+STATE( cvda )
+
+@GDS 
++ASSIGN
+PRINCONVID( data-area )
+PRINSYSID( data-area )
+RETCODE( data-area )
+
+@GDS 
++CONNECT 
++PROCESS
+CONVID( name )
+PROCNAME( name )
+PROCLENGTH( data-value )
+PARTNER( name )
+SYNCLEVEL( data-value )
+PIPLIST( data-area )
+PIPLENGTH( data-value )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++EXTRACT 
++ATTRIBUTES
+CONVID( name )
+CONVDATA( data-area )
+STATE( cvda )
+RETCODE( data-area )
+
+@GDS 
++EXTRACT 
++PROCESS
+CONVID( name )
+PROCNAME( data-area )
+PROCLENGTH( data-area )
+MAXPROCLEN( data-value )
+SYNCLEVEL( data-area )
+PIPLIST( pointer-ref )
+PIPLENGTH( data-area )
+RETCODE( data-area )
+
+@GDS 
++FREE
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++ISSUE 
++ABEND
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++ISSUE 
++CONFIRMATION
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++ISSUE 
++ERROR
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++ISSUE 
++PREPARE
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++ISSUE 
++SIGNAL
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++RECEIVE
+CONVID( name )
+INTO( data-area )
+FLENGTH( data-area )
+SET( pointer-ref )
+BUFFER
+MAXFLENGTH( data-value )
+CONVDATA( data-area )
+LLID
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++SEND
+CONVID( name )
+FROM( data-area )
+FLENGTH( data-value )
+CONVDATA( data-area )
+INVITECONFIRM
+LASTWAIT
+RETCODE( data-area )
+STATE( cvda )
+
+@GDS 
++WAIT
+CONVID( name )
+CONVDATA( data-area )
+RETCODE( data-area )
+STATE( cvda )
+
+@GET
++CONTAINER( data-value )
++=BTS
+INTO( data-area )
+ACTIVITY( data-value )
+SET( ptr-ref )
+ACQACTIVITY
+NODATA
+PROCESS
+ACQPROCESS
+FLENGTH( data-area )
+
+@GET
++CONTAINER( data-value )
+CHANNEL( data-value )
+INTO( data-area )
+FLENGTH( data-area )
+BYTEOFFSET( data-value )
+SET( ptr-ref )
+FLENGTH( data-area )
+BYTEOFFSET( data-value )
+NODATA 
+FLENGTH( data-value )
+INTOCCSID( data-value )
+INTOCODEPAGE( data-value )
+CONVERTST( cvda )
+CCSID( data-area )
+
+@GET
++COUNTER( name )
+VALUE( data-area )
+POOL( name )
+INCREMENT( data-value )
+WRAP
+REDUCE
+COMPAREMIN( data-value )
+COMPAREMAX( data-value )
+NOSUSPEND
+
+@GET
++DCOUNTER( name )
+VALUE( data-area )
+POOL( name )
+INCREMENT( data-area )
+WRAP
+REDUCE
+COMPAREMIN( data-area )
+COMPAREMAX( data-area )
+NOSUSPEND
+
+@GETMAIN
+SET( ptr-ref )
+FLENGTH( data-value )
+BELOW
+LENGTH( data-value )
+INITIMG( data-value )
+NOSUSPEND
+EXECUTABLE
+SHARED
+USERDATAKEY
+CICSDATAKEY
+
+@GETMAIN64
+SET( ptr-ref64 )
+FLENGTH( data-value )
+LOCATION( cvda )
+SHARED
+NOSUSPEND
+EXECUTABLE
+USERDATAKEY
+CICSDATAKEY
+
+@GETNEXT
++ACTIVITY( data-area )
+ACTIVITYID( data-area )
+BROWSETOKEN( data-value )
+LEVEL( data-area )
+
+@GETNEXT
++CONTAINER( data-area )
+BROWSETOKEN( data-value )
+
+# 
+# GETNEXT CONTAINER (BTS) is identical to
+# GETNEXT CONTAINER (CHANNEL) so I'm
+# leaving it out.
+# 
+# GETNEXT
+# CONTAINER( data-area )
+# BROWSETOKEN( data-value )
+
+@GETNEXT
++EVENT( data-area )
+BROWSETOKEN( data-value )
+COMPOSITE( data-area )
+EVENTTYPE( cvda )
+FIRESTATUS( cvda )
+PREDICATE( cvda )
+TIMER( data-area )
+
+@GETNEXT
++PROCESS( data-area )
+BROWSETOKEN( data-value )
+ACTIVITYID( data-area )
+
+@GETNEXT
++TIMER( data-value )
+ACTIVITYID( data-value )
+EVENT( data-area )
+BROWSETOKEN( data-area )
+STATUS( cvda )
+ABSTIME( data-area )
+
+@GET64
++CONTAINER( data-value )
+CHANNEL( data-value )
+INTO( data-area64 )
+FLENGTH( data-area )
+BYTEOFFSET( data-area )
+SET( ptr-ref64 )
+FLENGTH( data-area )
+BYTEOFFSET( data-value )
+NODATA 
+FLENGTH( data-value )
+INTOCCSID( data-value )
+INTOCODEPAGE( data-value )
+CONVERTST( cvda )
+CCSID( data-area )
+
+@HANDLE 
++ABEND
+CANCEL
+PROGRAM( name )
+LABEL( label )
+RESET
+
+@HANDLE 
++AID
+ANYKEY[arg]
+CLEAR[arg]
+CLRPARTN[arg]
+ENTER[arg]
+LIGHTPEN[arg]
+OPERID[arg]
+PA1[arg]
+PA2[arg]
+PA3[arg]
+PF1[arg]
+PF2[arg]
+PF3[arg]
+PF4[arg]
+PF5[arg]
+PF6[arg]
+PF7[arg]
+PF8[arg]
+PF9[arg]
+PF10[arg]
+PF11[arg]
+PF12[arg]
+PF13[arg]
+PF14[arg]
+PF15[arg]
+PF16[arg]
+PF17[arg]
+PF18[arg]
+PF19[arg]
+PF20[arg]
+PF21[arg]
+PF22[arg]
+PF23[arg]
+PF24[arg]
+TRIGGER[arg]
+
+# 
+# Condition names added manually.
+# These are (currently, as of CICS TS for z/OS 6.1)
+# documented with the EIBRCODE field of the Execute
+# Interface Block in the Diagnostics section in the
+# Reference section of the Application Programming
+# Reference manual.
+# 
+
+@HANDLE 
++CONDITION
+ERROR[arg]
+ALLOCERR[arg]
+CBIDERR[arg]
+CHANNELERR[arg]
+DISABLED[arg]
+DSSTAT[arg]
+DUPKEY[arg]
+DUPREC[arg]
+ENDDATA[arg]
+ENDFILE[arg]
+ENDINPT[arg]
+ENQBUSY[arg]
+ENVDEFERR[arg]
+EOC[arg]
+EODS[arg]
+EOF[arg]
+EXPIRED[arg]
+FILENOTFOUND[arg]
+FUNCERR[arg]
+IGREQCD[arg]
+IGREQID[arg]
+ILLOGIC[arg]
+INBFMH[arg]
+INVERRTERM[arg]
+INVEXITREQ[arg]
+INVLDC[arg]
+INVMPSZ[arg]
+INVPARTN[arg]
+INVPARTNSET[arg]
+INVREQ[arg]
+IOERR[arg]
+ISCINVREQ[arg]
+ITEMERR[arg]
+JIDERR[arg]
+LENGERR[arg]
+LOADING[arg]
+LOCKED[arg]
+MAPFAIL[arg]
+NETNAMEIDERR[arg]
+NODEIDERR[arg]
+NOJBUFSP[arg]
+NONVAL[arg]
+NOPASSBKRD[arg]
+NOPASSBKWR[arg]
+NOSPACE[arg]
+NOSPOOL[arg]
+NOSTART[arg]
+NOSTG[arg]
+NOTALLOC[arg]
+NOTAUTH[arg]
+NOTFND[arg]
+NOTOPEN[arg]
+OPENERR[arg]
+OVERFLOW[arg]
+PARTNERIDERR[arg]
+PARTNFAIL[arg]
+PGMIDERR[arg]
+QBUSY[arg]
+QIDERR[arg]
+QZERO[arg]
+RDATT[arg]
+RECORDBUSY[arg]
+RESUNAVAIL[arg]
+RETPAGE[arg]
+ROLLEDBACK[arg]
+RTEFAIL[arg]
+RTESOME[arg]
+SELNERR[arg]
+SESSBUSY[arg]
+SESSIONERR[arg]
+SIGNAL[arg]
+SPOLBUSY[arg]
+SPOLERR[arg]
+STRELERR[arg]
+SUPPRESSED[arg]
+SYSBUSY[arg]
+SYSIDERR[arg]
+TERMERR[arg]
+TERMIDERR[arg]
+TRANSIDERR[arg]
+TSIOERR[arg]
+UNEXPIN[arg]
+USERIDERR[arg]
+WRBRK[arg]
+
+@IGNORE 
++CONDITION
+ERROR
+ALLOCERR
+CBIDERR
+CHANNELERR
+DISABLED
+DSSTAT
+DUPKEY
+DUPREC
+ENDDATA
+ENDFILE
+ENDINPT
+ENQBUSY
+ENVDEFERR
+EOC
+EODS
+EOF
+EXPIRED
+FILENOTFOUND
+FUNCERR
+IGREQCD
+IGREQID
+ILLOGIC
+INBFMH
+INVERRTERM
+INVEXITREQ
+INVLDC
+INVMPSZ
+INVPARTN
+INVPARTNSET
+INVREQ
+IOERR
+ISCINVREQ
+ITEMERR
+JIDERR
+LENGERR
+LOADING
+LOCKED
+MAPFAIL
+NETNAMEIDERR
+NODEIDERR
+NOJBUFSP
+NONVAL
+NOPASSBKRD
+NOPASSBKWR
+NOSPACE
+NOSPOOL
+NOSTART
+NOSTG
+NOTALLOC
+NOTAUTH
+NOTFND
+NOTOPEN
+OPENERR
+OVERFLOW
+PARTNERIDERR
+PARTNFAIL
+PGMIDERR
+QBUSY
+QIDERR
+QZERO
+RDATT
+RECORDBUSY
+RESUNAVAIL
+RETPAGE
+ROLLEDBACK
+RTEFAIL
+RTESOME
+SELNERR
+SESSBUSY
+SESSIONERR
+SIGNAL
+SPOLBUSY
+SPOLERR
+STRELERR
+SUPPRESSED
+SYSBUSY
+SYSIDERR
+TERMERR
+TERMIDERR
+TRANSIDERR
+TSIOERR
+UNEXPIN
+USERIDERR
+WRBRK
+
+@INQUIRE
++ACTIVITYID( data-value )
+ABCODE( data-area )
+ABPROGRAM( data-area )
+ACTIVITY( data-area )
+COMPSTATUS( cvda )
+EVENT( data-area )
+PROCESS( data-area )
+PROCESSTYPE( data-area )
+PROGRAM( data-area )
+SUSPSTATUS( cvda )
+MODE( cvda )
+TRANSID( data-area )
+USERID( data-area )
+
+@INQUIRE
++CONTAINER( data-value )
+ACTIVITYID( data-value )
+PROCESS( data-value )
+DATALENGTH( data-area )
+PROCESSTYPE( data-value )
+SET( data-area )
+
+@INQUIRE
++EVENT( data-value )
+FIRESTATUS( cvda )
+ACTIVITYID( data-value )
+EVENTTYPE( cvda )
+COMPOSITE( data-area )
+PREDICATE( cvda )
+TIMER( data-area )
+
+@INQUIRE
++PROCESS( data-value )
+PROCESSTYPE( data-value )
+ACTIVITYID( data-area )
+
+@INQUIRE
++TIMER( data-value )
+ACTIVITYID( data-value )
+STATUS( cvda )
+EVENT( data-area )
+ABSTIME( data-area )
+
+@INVOKE 
++APPLICATION( name )
+OPERATION( name )
+PLATFORM( name )
+MAJORVERSION( data-value )
+MINORVERSION( data-value )
+EXACTMATCH
+MINIMUM
+COMMAREA( data-area )
+LENGTH( data-value )
+CHANNEL( name )
+
+@INVOKE 
++SERVICE( data-value )
+CHANNEL( data-value )
+OPERATION( data-value )
+URI( data-value )
+URIMAP( data-value )
+SCOPE( data-value )
+SCOPELEN( data-value )
+
+@INVOKE 
++WEBSERVICE( data-value )
+CHANNEL( data-value )
+OPERATION( data-value )
+URI( data-value )
+URIMAP( data-value )
+SCOPE( data-value )
+SCOPELEN( data-value )
+
+@ISSUE 
++ABEND
+CONVID( name )
+STATE( cvda )
+
+@ISSUE 
++ABORT
+DESTID( data-value )
+DESTIDLENG( data-value )
+CONSOLE
+SUBADDR( data-value )
+PRINT
+CARD
+WPMEDIA1
+WPMEDIA2
+WPMEDIA3
+WPMEDIA4
+VOLUME( data-value )
+VOLUMELENG( data-value )
+
+@ISSUE 
++ADD
+DESTID( data-value )
+VOLUME( data-value )
+DESTIDLENG( data-value )
+FROM( data-area )
+VOLUMELENG( data-value )
+NUMREC( data-value )
+RIDFLD( data-area )
+LENGTH( data-value )
+DEFRESP
+NOWAIT
+RRN
+
+@ISSUE 
++CONFIRMATION
+CONVID( name )
+STATE( cvda )
+
+@ISSUE 
++COPY
+TERMID( name )
+CTLCHAR( data-value )
+WAIT
+
+@ISSUE 
++DISCONNECT
+
+@ISSUE 
++DISCONNECT
++=LU61
+SESSION( name )
+
+@ISSUE 
++END
+DESTID( data-value )
+DESTIDLENG( data-value )
+CONSOLE
+SUBADDR( data-value )
+PRINT
+CARD
+WPMEDIA1
+WPMEDIA2
+WPMEDIA3
+WPMEDIA4
+VOLUME( data-value )
+VOLUMELENG( data-value )
+
+@ISSUE 
++ENDFILE
+ENDOUTPUT
+
+@ISSUE 
++ENDOUTPUT
+ENDFILE
+
+@ISSUE 
++EODS
+
+@ISSUE 
++ERASE
+DESTID( data-value )
+VOLUME( data-value )
+DESTIDLENG( data-value )
+RIDFLD( data-area )
+VOLUMELENG( data-value )
+KEYLENGTH( data-value )
+KEYNUMBER( data-value )
+RRN
+NUMREC( data-value )
+DEFRESP
+NOWAIT
+
+@ISSUE 
++ERASEAUP
+WAIT
+
+@ISSUE 
++ERROR
+CONVID( name )
+STATE( cvda )
+
+@ISSUE 
++LOAD
+PROGRAM( name )
+CONVERSE
+
+@ISSUE 
++NOTE
+DESTID( data-value )
+VOLUME( data-value )
+DESTIDLENG( data-value )
+RIDFLD( data-area )
+RRN
+VOLUMELENG( data-value )
+
+@ISSUE 
++PASS
+LUNAME( name )
+FROM( data-area )
+LOGMODE( data-value )
+LENGTH( data-value )
+NOQUIESCE
+LOGONLOGMODE
+
+# 
+# SESSION is no longer documented
+# 
+
+@ISSUE 
++PREPARE
+CONVID( name )
+STATE( cvda )
+SESSION( name )
+
+@ISSUE 
++PRINT
+
+@ISSUE 
++QUERY
+DESTID( data-value )
+DESTIDLENG( data-value )
+VOLUME( data-value )
+VOLUMELENG( data-value )
+
+@ISSUE 
++RECEIVE
+INTO( data-area )
+SET( ptr-ref )
+LENGTH( data-area )
+
+@ISSUE 
++REPLACE
+DESTID( data-value )
+DESTIDLENG( data-value )
+FROM( data-area )
+VOLUME( data-value )
+VOLUMELENG( data-value )
+RIDFLD( data-area )
+LENGTH( data-value )
+NUMREC( data-value )
+KEYLENGTH( data-value )
+KEYNUMBER( data-value )
+DEFRESP
+RRN
+NOWAIT
+
+@ISSUE 
++RESET
+SESSION( name )
+
+@ISSUE 
++SEND
+DESTID( data-value )
+DESTIDLENG( data-value )
+CONSOLE
+SUBADDR( data-value )
+PRINT
+CARD
+WPMEDIA1
+WPMEDIA2
+WPMEDIA3
+WPMEDIA4
+FROM( data-area )
+VOLUME( data-value )
+VOLUMELENG( data-value )
+LENGTH( data-value )
+NOWAIT
+DEFRESP
+
+@ISSUE 
++SIGNAL
+CONVID( name )
+STATE( cvda )
+
+@ISSUE 
++SIGNAL
++=LU61
+CONVID( name )
+SESSION( name )
+
+@ISSUE 
++WAIT
+DESTID( data-value )
+DESTIDLENG( data-value )
+CONSOLE
+SUBADDR( data-value )
+PRINT
+CARD
+WPMEDIA1
+WPMEDIA2
+WPMEDIA3
+WPMEDIA4
+VOLUME( data-value )
+VOLUMELENG( data-value )
+
+# 
+# the existence of this API is still documented
+# but its syntax is not.  syntax retrieved from
+# ancient documentation for CICS 2.1.2 from 1991.	
+# 
+# 
+
+@JOURNAL
+JFILEID( data-value )
+JTYPEID( data-value )
+FROM( data-area )
+LENGTH( data-value )
+REQID( data-area )
+PREFIX( data-value )
+PFXLENG( data-value )
+STARTIO
+WAIT
+NOSUSPEND
+
+@LINK
+PROGRAM( name )
+COMMAREA( data-area )
+LENGTH( data-value )
+DATALENGTH( data-value )
+CHANNEL( name )
+INPUTMSG( data-area )
+INPUTMSGLEN( data-value )
+SYSID( systemname )
+SYNCONRETURN
+TRANSID( name )
+
+@LINK
++ACQPROCESS
+INPUTEVENT( data-value )
+
+@LINK
++ACTIVITY( data-value )
+ACQACTIVITY
+INPUTEVENT( data-value )
+
+@LOAD
+PROGRAM( name )
+SET( ptr-ref )
+LENGTH( data-area )
+FLENGTH( data-area )
+ENTRY( ptr-ref )
+HOLD
+
+@MONITOR
+POINT( data-value )
+DATA1( data-area )
+DATA2( data-area )
+ENTRYNAME( data-area )
+
+@MOVE
++CONTAINER( data-value )
++=BTS
+AS( data-value )
+FROMPROCESS
+FROMACTIVITY( data-value )
+TOPROCESS
+TOACTIVITY( data-value )
+
+@MOVE
++CONTAINER( data-value )
+AS( data-value )
+CHANNEL( data-value )
+TOCHANNEL( data-value )
+
+@POINT
+CONVID( name )
+SESSION( name )
+
+@POP 
++HANDLE
+
+@POST
+INTERVAL( hhmmss )
+TIME( hhmmss )
+HOURS( data-value )
+AFTER
+MINUTES( data-value )
+SECONDS( data-value )
+AT
+HOURS( data-value )
+MINUTES( data-value )
+SECONDS( data-value )
+SET( ptr-ref )
+REQID( name )
+
+@PURGE 
++MESSAGE
+
+@PUSH 
++HANDLE
+
+@PUT
++CONTAINER( data-value )
++=BTS
+FROM( data-area )
+ACTIVITY( data-value )
+ACQACTIVITY
+PROCESS
+ACQPROCESS
+FLENGTH( data-value )
+
+@PUT
++CONTAINER( data-value )
+FROM( data-area )
+CHANNEL( data-value )
+BIT
+FLENGTH( data-value )
+DATATYPE( cvda )
+CHAR
+FROMCCSID( data-value )
+APPEND
+FROMCODEPAGE( data-value )
+
+@PUT64
++CONTAINER( data-value )
+FROM( data-area64 )
+CHANNEL( data-value )
+BIT
+FLENGTH( data-value )
+DATATYPE( cvda )
+CHAR
+FROMCCSID( data-value )
+APPEND
+FROMCODEPAGE( data-value )
+
+@QUERY 
++CHANNEL( data-value )
+CONTAINERCNT( data-area )
+
+@QUERY
++COUNTER( name )
+POOL( name )
+MINIMUM( data-area )
+VALUE( data-area )
+MAXIMUM( data-area )
+NOSUSPEND
+
+@QUERY
++DCOUNTER( name )
+POOL( name )
+MINIMUM( data-area )
+VALUE( data-area )
+MAXIMUM( data-area )
+NOSUSPEND
+
+@QUERY 
++SECURITY
+RESTYPE( data-value )
+RESCLASS( data-value )
+RESIDLENGTH( data-value )
+RESID( data-value )
+LOGMESSAGE( cvda )
+READ( cvda )
+UPDATE( cvda )
+USERID( data-value )
+CONTROL( cvda )
+ALTER( cvda )
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@READ
+FILE( filename )
+DATASET( filename )
+UNCOMMITTED
+CONSISTENT
+REPEATABLE
+UPDATE
+TOKEN( data-area )
+INTO( data-area )
+RIDFLD( data-area )
+SET( ptr-ref )
+KEYLENGTH( data-value )
+GENERIC
+EQUAL
+SYSID( systemname )
+LENGTH( data-area )
+LENGTH( data-area )
+DEBKEY
+GTEQ
+DEBREC
+RBA
+RRN
+XRBA
+NOSUSPEND
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@READNEXT
+FILE( filename )
+DATASET( filename )
+INTO( data-area )
+SET( ptr-ref )
+RIDFLD( data-area )
+UNCOMMITTED
+CONSISTENT
+REPEATABLE
+UPDATE
+TOKEN( data-area )
+KEYLENGTH( data-value )
+SYSID( systemname )
+REQID( data-value )
+LENGTH( data-area )
+LENGTH( data-area )
+RBA
+NOSUSPEND
+RRN
+XRBA
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@READPREV
+FILE( filename )
+DATASET( filename )
+INTO( data-area )
+SET( ptr-ref )
+RIDFLD( data-area )
+UNCOMMITTED
+CONSISTENT
+REPEATABLE
+UPDATE
+TOKEN( data-area )
+KEYLENGTH( data-value )
+REQID( data-value )
+LENGTH( data-area )
+SYSID( systemname )
+LENGTH( data-area )
+RBA
+RRN
+XRBA
+NOSUSPEND
+
+@READQ 
++TD
+QUEUE( name )
+INTO( data-area )
+SET( ptr-ref )
+SYSID( systemname )
+LENGTH( data-area )
+NOSUSPEND
+
+@READQ
++TS
+QUEUE( name )
+INTO( data-area )
+QNAME( name )
+SET( ptr-ref )
+NEXT
+LENGTH( data-area )
+NUMITEMS( data-area )
+ITEM( data-value )
+SYSID( systemname )
+
+@RECEIVE
++=zOSCommServer
+ASIS
+BUFFER
+CONVID(name)
+FLENGTH(data-area)
+INTO(data-area)
+LENGTH(data-area)
+MAXFLENGTH(data-value)
+MAXLENGTH(data-value)
+NOTRUNCATE
+SESSION(name)
+SET(ptr-ref)
+STATE(cvda)
+
+@RECEIVE
++=NonzOSCommServer
+ASIS
+BUFFER
+FLENGTH(data-area)
+INTO(data-area)
+LEAVEKB
+LENGTH(data-area)
+MAXFLENGTH(data-value)
+MAXLENGTH(data-value)
+NOTRUNCATE
+PASSBK
+PSEUDOBIN
+SESSION(name)
+SET(ptr-ref)
+STATE(cvda)
+
+@RECEIVE 
++MAP( name )
+MAPSET( name )
+INTO( data-area )
+SET( ptr-ref )
+TERMINAL
+FROM( data-area )
+LENGTH( data-value )
+TERMINAL
+ASIS
+INPARTN( name )
+
+@RECEIVE 
++MAP( name )
++MAPPINGDEV( data-value )
+LENGTH( data-value )
+FROM( data-area )
+MAPSET( name )
+INTO( data-area )
+SET( ptr-ref )
+
+@RECEIVE 
++PARTN( data-area )
+INTO( data-area )
+LENGTH( data-value )
+SET( ptr-ref )
+ASIS
+
+@RELEASE
+PROGRAM( name )
+
+@REMOVE
++SUBEVENT( data-value )
+EVENT( data-value )
+
+@REQUEST
++ENCRYPTPTKT( ptr_ref )
+FLENGTH( data-area )
+ENCRYPTKEY( data-area )
+ESMAPPNAME( data-value )
+ESMREASON( data-area )
+ESMRESP( data-area )
+
+@REQUEST 
++PASSTICKET( data-area )
+ESMRESP( data-area )
+ESMAPPNAME( data-area )
+ESMREASON( data-area )
+
+@RESET
++ACQPROCESS
+
+@RESET
++ACTIVITY( data-value )
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@RESETBR
+FILE( filename )
+DATASET( filename )
+RIDFLD( data-area )
+KEYLENGTH( data-value )
+REQID( data-value )
+GENERIC
+GTEQ
+SYSID( systemname )
+EQUAL
+RBA
+RRN
+XRBA
+
+@RESUME
+ACQACTIVITY
+ACQPROCESS
+ACTIVITY( data-value )
+
+@RETRIEVE
+INTO( data-area )
+SET( ptr-ref )
+LENGTH( data-area )
+RTRANSID( data-area )
+RTERMID( data-area )
+QUEUE( data-area )
+WAIT
+
+@RETRIEVE
++REATTACH
+EVENT( data-area )
+EVENTTYPE( cvda )
+
+@RETRIEVE
++SUBEVENT( data-area )
+EVENT( data-value )
+EVENTTYPE( cvda )
+
+@RETURN
+TRANSID( name )
+COMMAREA( data-area )
+IMMEDIATE
+LENGTH( data-value )
+CHANNEL( name )
+INPUTMSG( data-area )
+ENDACTIVITY
+INPUTMSGLEN( data-value )
+
+@REWIND
++COUNTER( name )
+POOL( name )
+INCREMENT( data-value )
+NOSUSPEND
+
+@REWIND
++DCOUNTER( name )
+POOL( name )
+INCREMENT( data-area )
+NOSUSPEND
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@REWRITE
+FILE( filename )
+DATASET( filename )
+TOKEN( data-area )
+FROM( data-area )
+SYSID( systemname )
+LENGTH( data-value )
+NOSUSPEND
+LENGTH( data-value )
+
+@ROUTE
+INTERVAL( hhmmss )
+TIME( hhmmss )
+HOURS( data-value )
+AFTER
+MINUTES( data-value )
+SECONDS( data-value )
+HOURS( data-value )
+AT
+MINUTES( data-value )
+SECONDS( data-value )
+TITLE( data-area )
+ERRTERM( name )
+LIST( data-area )
+OPCLASS( data-area )
+REQID( name )
+LDC( name )
+NLEOM
+
+@RUN
+ACTIVITY( data-value )
+ACQACTIVITY
+ACQPROCESS
+SYNCHRONOUS
+ASYNCHRONOUS
+FACILITYTOKN( data-value )
+INPUTEVENT( data-value )
+
+@RUN
++TRANSID( name )
+CHILD( data-area )
+CHANNEL( name )
+
+@SEND
++=zOSCommServer
+ALTERNATE
+ATTACHID(name)
+CNOTCOMPL
+CONFIRM
+CONVID(name)
+CTLCHAR(data-value)
+DEFAULT
+DEFRESP
+ERASE
+FLENGTH(data-value)
+FMH
+FROM(data-area)
+INVITE
+LAST
+LDC(name)
+LENGTH(data-value)
+SESSION(name)
+STATE(cvda)
+STRFIELD
+WAIT
+
+@SEND
++=NonzOSCommServer
+ALTERNATE
+ASIS
+ATTACHID(name)
+CBUFF
+CNOTCOMPL
+CTLCHAR(data-value)
+DEFAULT
+DEFRESP
+ERASE
+FLENGTH(data-value)
+FMH
+FROM(data-area)
+INVITE
+LAST
+LEAVEKB
+LENGTH(data-value)
+LINEADDR(data-value)
+PASSBK
+PSEUDOBIN
+SESSION(name)
+STATE(cvda)
+STRFIELD
+WAIT
+
+# 
+# SEND CONTROL is no longer documented, found in CICS/DOS/VS 1.7 documentation
+# 
+
+@SEND
++CONTROL
+ERASEAUP
+ERASE
+ALARM
+FREEKB
+FRSET
+CURSOR[arg]
+PRINT
+FORMFEED
+MSR( data-value )
+OUTPARTN( name )
+ACTPARTN( name )
+LDC( name )
+ACCUM
+SET( ptr-ref )
+PAGING
+TERMINAL
+WAIT
+LAST
+REQID( name )
+L40
+L64
+L80
+HONEOM
+
+@SEND 
++MAP( name )
+MAPSET( name )
+FROM( data-area )
+DATAONLY
+LENGTH( data-value )
+MAPONLY
+CURSOR( data-value )
+FORMFEED
+PRINT
+ERASE
+ALTERNATE
+DEFAULT
+ERASEAUP
+ALARM
+FRSET
+NLEOM
+MSR( data-value )
+OUTPARTN( name )
+ACTPARTN( name )
+LDC( name )
+FMHPARM( name )
+FREEKB
+TERMINAL
+SET( ptr-ref )
+ACCUM
+REQID( name )
+PAGING
+TERMINAL
+WAIT
+LAST
+HONEOM
+NOFLUSH
+L40
+L64
+L80
+
+@SEND 
++MAP( name )
++MAPPINGDEV( data-value )
+SET( ptr-ref )
+MAPSET( name )
+FROM( data-area )
+DATAONLY
+LENGTH( data-value )
+MAPONLY
+CURSOR( data-value )
+FORMFEED
+PRINT
+FREEKB
+ERASE
+ERASEAUP
+ALARM
+FRSET
+
+@SEND 
++PAGE
+RELEASE
+TRANSID( name )
+TRAILER( data-area )
+RETAIN
+SET( ptr-ref )
+AUTOPAGE
+OPERPURGE
+CURRENT
+ALL
+NOAUTOPAGE
+FMHPARM( name )
+LAST
+
+@SEND 
++PARTNSET( name )
+
+@SEND 
++TEXT
+FROM( data-area )
+LENGTH( data-value )
+FORMFEED
+CURSOR( data-value )
+PRINT
+ERASE
+DEFAULT
+ALTERNATE
+FREEKB
+ALARM
+FMHPARM( name )
+NLEOM
+OUTPARTN( name )
+ACTPARTN( name )
+MSR( data-value )
+LDC( name )
+TERMINAL
+SET( ptr-ref )
+REQID( name )
+PAGING
+TERMINAL
+WAIT
+LAST
+HEADER( data-area )
+TRAILER( data-area )
+JUSTIFY( data-value )
+JUSFIRST
+JUSLAST
+HONEOM
+ACCUM
+L40
+L64
+L80
+
+@SEND 
++TEXT 
++MAPPED
+FROM( data-area )
+LENGTH( data-value )
+TERMINAL
+REQID( name )
+PAGING
+TERMINAL
+WAIT
+LAST
+
+@SEND 
++TEXT 
++NOEDIT
+FROM( data-area )
+LENGTH( data-value )
+PRINT
+ERASE
+FREEKB
+DEFAULT
+ALTERNATE
+ALARM
+OUTPARTN( name )
+TERMINAL
+REQID( name )
+TERMINAL
+WAIT
+LAST
+PAGING
+HONEOM
+L40
+L64
+L80
+
+@SIGNAL 
++EVENT( data-value )
+FROMCHANNEL( data-value )
+FROM( data-area )
+FROMLENGTH( data-value )
+
+@SIGNOFF
+
+@SIGNON
+USERID( data-value )
+ESMREASON( data-area )
+ESMRESP( data-area )
+GROUPID( data-value )
+LANGUAGECODE( data-value )
+LANGINUSE( data-area )
+NATLANG( data-value )
+NATLANGINUSE( data-area )
+PASSWORD( data-value )
+NEWPASSWORD( data-value )
+PHRASE( data-area )
+PHRASELEN( data-value )
+NEWPHRASE( data-area ) 
+NEWPHRASELEN( data-value )
+OIDCARD( data-value )
+
+@SIGNON 
++TOKEN( data-area )
+TOKENLEN( data-value )
+TOKENTYPE( cvda  )
+KERBEROS
+BIT
+GROUPID( data-value )
+LANGUAGECODE( data-value )
+LANGINUSE( data-area )
+DATATYPE( cvda )
+BASE64
+NATLANG( data-value )
+NATLANGINUSE( data-area )
+ESMREASON( data-area )
+ESMRESP( data-area )
+
+@SOAPFAULT 	
++ADD
+FAULTSTRING( data-value )
+FAULTSTRLEN( data-value )
+NATLANG( data-value )
+SUBCODESTR( data-value )
+SUBCODELEN( data-value )
+FROMCCSID( data-value )
+
+@SOAPFAULT 
++CREATE
+FAULTCODE( cvda )
+CLIENT
+SERVER
+SENDER
+RECEIVER
+FAULTCODESTR( data-value )
+FAULTCODELEN( data-value )
+FAULTSTRING( data-value )
+FAULTSTRLEN( data-value )
+NATLANG('en')
+NATLANG( data-value )
+ROLE( data-value )
+ROLELENGTH( data-value )
+FAULTACTOR( data-value )
+FAULTACTLEN( data-value )
+DETAIL( data-value )
+DETAILLENGTH( data-value )
+FROMCCSID( data-value )
+
+@SOAPFAULT 
++DELETE
+
+@SPOOLCLOSE
+TOKEN( data-area )
+NOHANDLE
+KEEP
+DELETE
+RESP
+RESP2
+
+@SPOOLOPEN 
++INPUT
+TOKEN( data-area )
+USERID( data-value )
+CLASS( data-value )
+NOHANDLE
+RESP
+RESP2
+
+@SPOOLOPEN 
++OUTPUT
+TOKEN( data-area )
+USERID( data-value )
+NODE( data-value )
+NOCC
+CLASS( data-value )
+OUTDESCR( ptr-ref )
+ASA
+MCC
+PRINT
+RECORDLENGTH( data-value )
+PUNCH
+
+@SPOOLREAD
+TOKEN( data-area )
+INTO( data-area )
+MAXFLENGTH( data-value )
+NOHANDLE
+TOFLENGTH( data-area )
+RESP
+RESP2
+
+@SPOOLWRITE
+TOKEN( data-area )
+FROM( data-area )
+FLENGTH( data-value )
+LINE
+NOHANDLE
+PAGE
+RESP
+RESP2
+
+# 
+# SPOOLOPEN REPORT is no longer documented.  This is a composite
+# of SPOOLOPEN REPORT, SPOOLOPEN MAPNAME, and SPOOLOPEN ESCAPE
+# as I strongly suspect it should be SPOOLOPEN OBSOLETE.
+# 
+
+@SPOOLOPEN
++REPORT(name)
+TOKEN(data-value)
+ASA
+MCC
+NOCC
+SCS
+T3270
+JCL
+TITLE(data-area)
+CLASS(data-value)
+LOG
+USERDATA(data-area)
+PRIORITY(data-value)
+DESTINATION(name)
+NODE(name)
+RSL(data-value)
+PHYSICAL
+LOGICAL
+COPIES(data-value)
+FORMS(name)
+SEP
+NOSEP
+PRINTFAIL
+LINES(data-value)
+LINELENGTH(data-value)
+NONUM
+HEADNUM
+FOOTNUM
+BOTHNUM
+HEAD(data-area)
+FOOT(data-area)
+DATETIME
+NOCONV
+ESCAPE(name)
+MAPNAME(name)
+MAPSET
+
+# 
+# SPOOLWRITE REPORT is no longer documented.  This is a composite 
+# of SPOOLWRITE REPORT and SPOOLWRITE MAPNAME.
+# 
+
+@SPOOLWRITE
++REPORT(name)
+TOKEN
+FROM(data-area)
+FLENGTH(data-value)
+LOG
+MAPNAME(name)
+MAPONLY
+MAPSET(name)
+
+# 
+# SPOOLCLOSE REPORT is no longer documented.
+# 
+
+@SPOOLCLOSE
++REPORT(name)
+TOKEN(data-value)
+RELEASE
+HOLD
+RESUME
+DELETE
+
+# 
+# SPOOLOPEN RESUME is no longer documented.
+# 
+
+@SPOOLOPEN
++RESUME
+REPORT(name)
+TOKEN
+
+@START
+TRANSID( name )
+INTERVAL( hhmmss )
+TIME( hhmmss )
+HOURS( data-value )
+AFTER
+MINUTES( data-value )
+SECONDS( data-value )
+HOURS( data-value )
+AT
+MINUTES( data-value )
+SECONDS( data-value )
+REQID( name )
+FROM( data-area )
+LENGTH( data-value )
+FMH
+TERMID( name )
+SYSID( systemname )
+RTRANSID( name )
+USERID( data-value )
+RTERMID( name )
+QUEUE( name )
+NOCHECK
+PROTECT
+
+@START 
++ATTACH
+TRANSID( name )
+FROM( data-area )
+LENGTH( data-value )
+
+@START
++BREXIT
+TRANSID( name )
+BREXIT( name )
+BRDATA( data-area )
+BRDATALENGTH( data-value )
+USERID( data-value )
+
+@START
++CHANNEL( name )
+TRANSID( name )
+TERMID( name )
+USERID( data-value )
+SYSID( systemname )
+NOCHECK
+PROTECT
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@STARTBR
+FILE( filename )
+DATASET( filename )
+RIDFLD( data-area )
+KEYLENGTH( data-value )
+REQID( data-value )
+GENERIC
+SYSID( systemname )
+DEBKEYGTEQ
+DEBRECEQUAL
+RBA
+RRN
+XRBA
+
+@STARTBROWSE 
++ACTIVITY
+ACTIVITYID( data-value )
+PROCESS( data-value )
+PROCESSTYPE( data-value )
+BROWSETOKEN( data-area )
+
+@STARTBROWSE
++CONTAINER
++=BTS
+ACTIVITYID( data-value )
+PROCESS( data-value )
+PROCESSTYPE( data-value )
+BROWSETOKEN( data-area )
+
+@STARTBROWSE
++CONTAINER
+BROWSETOKEN( data-area )
+CHANNEL( data-value )
+
+@STARTBROWSE
++EVENT
+BROWSETOKEN( data-area )
+ACTIVITYID( data-value )
+
+@STARTBROWSE
++PROCESS
+PROCESSTYPE( data-value )
+BROWSETOKEN( data-area )
+
+@STARTBROWSE
++TIMER( data-value )
+ACTIVITYID( data-value )
+BROWSETOKEN( data-area )
+
+@SUSPEND
+
+@SUSPEND
++=BTS
+ACQACTIVITY
+ACQPROCESS
+ACTIVITY( data-value )
+
+@SYNCPOINT
+
+@SYNCPOINT
++ROLLBACK
+
+@TEST
++EVENT( data-value )
+FIRESTATUS( cvda )
+
+@TRANSFORM 
++DATATOJSON
+CHANNEL( data-value )
+INCONTAINER( data-value )
+TRANSFORMER( name )
+OUTCONTAINER( data-value )
+
+@TRANSFORM 
++DATATOXML
+CHANNEL( data-value )
+ELEMNAME( data-area )
+ELEMNS( data-area )
+TYPENAME( data-area )
+DATCONTAINER( data-value )
+ELEMNAMELEN( data-area )
+ELEMNSLEN( data-area )
+TYPENAMELEN( data-area )
+TYPENS( data-area )
+TYPENSLEN( data-area )
+XMLTRANSFORM( name )
+XMLCONTAINER( data-value )
+
+@TRANSFORM 
++JSONTODATA
+CHANNEL( data-value )
+INCONTAINER( data-value )
+TRANSFORMER( name )
+OUTCONTAINER( data-value )
+
+@TRANSFORM 
++XMLTODATA
+CHANNEL( data-value )
+DATCONTAINER( data-value )
+ELEMNAME( data-area )
+ELEMNS( data-area )
+ELEMNAMELEN( data-area )
+ELEMNSLEN( data-area )
+TYPENAME( data-area )
+NSCONTAINER( data-value )
+TYPENAMELEN( data-area )
+XMLCONTAINER( data-value )
+TYPENS( data-area )
+TYPENSLEN( data-area )
+XMLTRANSFORM( name )
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@UNLOCK
+FILE( filename )
+DATASET( filename )
+TOKEN( data-area )
+SYSID( systemname )
+
+@UPDATE
++COUNTER( name )
+VALUE( data-value )
+POOL( name )
+COMPAREMIN( data-value )
+COMPAREMAX( data-value )
+NOSUSPEND
+
+@UPDATE 
++DCOUNTER( name )
+VALUE( data-area )
+POOL( name )
+COMPAREMIN( data-area )
+COMPAREMAX( data-area )
+NOSUSPEND
+
+@VERIFY 
++PASSWORD( data-value )
+USERID( data-value )
+GROUPID( data-value )
+CHANGETIME( data-area )
+DAYSLEFT( data-area )
+ESMREASON( data-area )
+ESMRESP( data-area )
+EXPIRYTIME( data-area )
+INVALIDCOUNT( data-area )
+LASTUSETIME( data-area )
+
+@VERIFY 
++PHRASE( data-area )
+PHRASELEN( data-value )
+USERID( data-value )
+GROUPID( data-value )
+CHANGETIME( data-area )
+DAYSLEFT( data-area )
+ESMREASON( data-area )
+ESMRESP( data-area )
+EXPIRYTIME( data-area )
+INVALIDCOUNT( data-area )
+LASTUSETIME( data-area )
+
+@VERIFY 
++TOKEN( data-area )
+TOKENLEN( data-value )
+TOKENTYPE( cvda )
+BASICAUTH
+JWT
+KERBEROS
+BIT
+ISUSERID( data-area )
+DATATYPE( cvda )
+BASE64
+ENCRYPTKEY(data-area )
+OUTTOKEN( ptr-ref )
+ESMRESP( data-area )
+OUTTOKENLEN( data-area )
+ESMREASON( data-area )
+
+@WAIT 
++CONVID( name )
+STATE( cvda )
+
+@WAIT 
++EVENT
+ECADDR( ptr-value )
+NAME( name )
+
+@WAIT 
++EXTERNAL
+ECBLIST( ptr-value )
+NUMEVENTS( data-value )
+PURGEABLE
+PURGEABILITY( cvda )
+NAME( name )
+NOTPURGEABLE
+
+# 
+# WAIT JOURNAL is no longer documented.
+# 
+
+@WAIT 
++JOURNAL
+JFILEID(data-value)
+REQID(data-value)
+STARTIO
+
+@WAIT 
++JOURNALNAME( data-value )
+REQID( data-value )
+
+@WAIT
++JOURNALNUM( data-value )
+REQID( data-value )
+
+@WAIT 
++SIGNAL
+
+@WAIT 
++TERMINAL
+CONVID( name )
+SESSION( name )
+
+@WAITCICS
+ECBLIST( ptr-value )
+NUMEVENTS( data-value )
+PURGEABLE
+PURGEABILITY( cvda )
+NOTPURGEABLE
+NAME( name )
+
+@WEB
++CLOSE
+SESSTOKEN( data-value )
+
+@WEB
++CONVERSE
+SESSTOKEN( data-value )
+GET
+PATH( data-area )
+PATHLENGTH( data-value )
+HEAD
+PATCH
+URIMAP( data-value )
+POST
+PUT
+TRACE
+OPTIONS
+DELETE
+METHOD( cvda )
+MEDIATYPE( data-area )
+QUERYSTRING( data-area )
+QUERYSTRLEN( data-value )
+NOCLOSE
+ACTION( cvda )
+CLOSE
+EXPECTCLOSESTATUS( cvda )
+INTO( data-area )
+SET( ptr-ref )
+TOCONTAINER( data-value )
+TOCHANNEL( data-value )
+TOLENGTH( data-area )
+MAXLENGTH( data-value )
+STATUSCODE( data-area )
+STATUSTEXT( data-area )
+BODYCHARSET( data-area )
+NOTRUNCATE
+STATUSLEN( data-value )
+NODOCDELETE
+DOCTOKEN( data-value )
+DOCDELETE
+DOCSTATUS( cvda )
+FROM( data-area )
+FROMLENGTH( data-value )
+CONTAINER( data-value )
+CHANNEL( data-value )
+NONE
+BASICAUTH
+USERNAME( data-value )
+USERNAMELEN( data-value )
+AUTHENTICATE( cvda )
+PASSWORD( data-value )
+PASSWORDLEN( data-value )
+CLICONVERT
+CHARACTERSET( data-value )
+NOINCONVERT
+NOOUTCONVERT
+NOCLICONVERT
+CLIENTCONV( cvda )
+
+@WEB
++ENDBROWSE
++FORMFIELD
+
+@WEB
++ENDBROWSE
++HTTPHEADER
+SESSTOKEN( data-value )
+
+@WEB
++ENDBROWSE
++QUERYPARM
+
+@WEB
++EXTRACT
++=Server
+SCHEME( cvda )
+HOST( data-area )
+HOSTLENGTH( data-value )
+HOSTTYPE( cvda )
+HTTPMETHOD( data-area )
+METHODLENGTH( data-area )
+HTTPVERSION( data-area )
+VERSIONLEN( data-area )
+PATH( data-area )
+PATHLENGTH( data-area )
+QUERYSTRING( data-area )
+REQUESTTYPE( cvda )
+PORTNUMBER( data-area )
+QUERYSTRLEN( data-area )
+URIMAP( data-area )
+
+@WEB
++EXTRACT
++=Client
+SESSTOKEN( data-area )
+SCHEME( cvda )
+HOST( data-area )
+HOSTLENGTH( data-value )
+HOSTTYPE( cvda )
+HTTPVERSION( data-area )
+PATH( data-area )
+URIMAP( data-area )
+VERSIONLEN( data-area )
+PATHLENGTH( data-area )
+REALM( data-area )
+PORTNUMBER( data-area )
+REALMLEN( data-area )
+
+@WEB 
++OPEN
+CERTIFICATE( data-value )
+URIMAP( data-value )
+SESSTOKEN( data-area )
+CODEPAGE( data-value )
+HTTPVNUM( data-area )
+HTTPRNUM( data-area )
+HOST( data-value )
+HOSTLENGTH( data-value )
+PORTNUMBER( data-value )
+SCHEME( cvda )
+CIPHERS( data-value )
+NUMCIPHERS( data-value )
+
+@WEB
++PARSE 
+URL( data-value )
+URLLENGTH( data-value )
+SCHEMENAME( data-area )
+HOST( data-area )
+HOSTLENGTH( data-area )
+HOSTTYPE( cvda )
+PORTNUMBER( data-area )
+QUERYSTRING( data-area )
+PATH( data-area )
+PATHLENGTH( data-area )
+QUERYSTRLEN( data-area )
+
+@WEB
++READ
++FORMFIELD( data-area )
+NAMELENGTH( data-value )
+VALUE( data-area )
+VALUELENGTH( data-area )
+SET( ptr-ref )
+CHARACTERSET( data-value )
+HOSTCODEPAGE( data-value )
+
+@WEB
++READ
++HTTPHEADER( data-area )
+NAMELENGTH( data-value )
+VALUE( data-area )
+VALUELENGTH( data-area )
+SESSTOKEN( data-area )
+
+@WEB
++READ
++QUERYPARM( data-value )
+NAMELENGTH( data-value )
+VALUE( data-area )
+VALUELENGTH( data-area )
+SET( ptr-ref )
+HOSTCODEPAGE( data-value )
+
+@WEB
++READNEXT
++FORMFIELD( data-area )
+NAMELENGTH( data-area )
+VALUE( data-area )
+VALUELENGTH( data-area )
+
+@WEB
++READNEXT
++HTTPHEADER( data-area )
+NAMELENGTH( data-area )
+VALUE( data-area )
+VALUELENGTH( data-area )
+SESSTOKEN( data-value )
+
+@WEB
++READNEXT
++QUERYPARM( data-area )
+NAMELENGTH( data-area )
+VALUE( data-area )
+VALUELENGTH( data-area )
+
+@WEB
++RECEIVE
++=ServerWithBuffer
+INTO( data-area )
+LENGTH( data-area )
+SET( ptr-ref )
+MAXLENGTH( data-value )
+TYPE( cvda )
+NOTRUNCATE
+CHARACTERSET( data-value )
+SRVCONVERT
+NOSRVCONVERT
+SERVERCONV( cvda )
+HOSTCODEPAGE( data-value )
+BODYCHARSET( data-area )
+MEDIATYPE( data-value )
+
+@WEB
++RECEIVE
++=ServerWithContainer
+TOCONTAINER( data-value )
+TOCHANNEL( data-value )
+TYPE( cvda )
+CHARACTERSET( data-value )
+BODYCHARSET( data-area )
+MEDIATYPE( data-value )
+
+@WEB
++RECEIVE
++=ClientWithBuffer
+SESSTOKEN( data-value )
+MEDIATYPE( data-area )
+STATUSCODE( data-value )
+INTO( data-area )
+STATUSTEXT( data-area )
+STATUSLEN( data-value )
+LENGTH( data-area )
+MAXLENGTH( data-value )
+SET( ptr-ref )
+CLICONVERT
+NOTRUNCATE
+BODYCHARSET( data-area )
+NOCLICONVERT
+CLIENTCONV( cvda )
+
+@WEB
++RECEIVE
++=ClientWithContainer
+SESSTOKEN( data-value )
+MEDIATYPE( data-area )
+STATUSCODE( data-value )
+STATUSTEXT( data-area )
+STATUSLEN( data-value )
+TOCONTAINER( data-value )
+TOCHANNEL( data-value )
+BODYCHARSET( data-area )
+
+@WEB
++RETRIEVE
+DOCTOKEN( data-area )
+
+@WEB
++SEND
++=Server
+NODOCDELETE
+DOCTOKEN( data-value )
+DOCDELETE
+DOCSTATUS( cvda )
+CHUNKNO
+FROM( data-area )
+FROMLENGTH( data-value )
+CHUNKYES
+HOSTCODEPAGE( data-value )
+CHUNKEND
+CHUNKING( cvda )
+CONTAINER( data-value )
+CHANNEL( data-value )
+MEDIATYPE( data-value )
+SRVCONVERT
+NOSRVCONVERT
+SERVERCONV( cvda )
+CHARACTERSET( data-value )
+STATUSCODE( data-value )
+STATUSTEXT( data-area )
+STATUSLEN( data-value )
+LENGTH( data-value )
+NOCLOSE
+IMMEDIATECLOSE
+EVENTUALCLOSESTATUS( cvda )
+ACTION( cvda )
+
+@WEB 
++SEND
++=Client
+SESSTOKEN( data-value )
+GET
+HEAD
+PATCH
+POST
+PUT
+TRACE
+OPTIONS
+DELETE
+METHOD( cvda )
+PATH( data-area )
+PATHLENGTH( data-value )
+URIMAP( data-value )
+QUERYSTRING( data-area )
+CLICONVERT
+QUERYSTRLEN( data-value )
+CHARACTERSET( data-value )
+EXPECT
+ACTION( cvda )
+NOCLICONVERT
+CLIENTCONV( cvda )
+NOCLOSE
+CLOSE
+NONE
+CLOSESTATUS( cvda )
+BASICAUTH
+AUTHENTICATE( cvda )
+MEDIATYPE( data-value )
+NODOCDELETE
+DOCTOKEN( data-value )
+DOCDELETE
+DOCSTATUS( cvda )
+CHUNKNO
+FROM( data-area )
+FROMLENGTH( data-value )
+CHUNKYES
+CHUNKEND
+CHUNKING( cvda )
+CONTAINER( data-value )
+CHANNEL( data-value )
+USERNAME( data-value )
+PASSWORD( data-value )
+USERNAMELEN( data-value )
+PASSWORDLEN( data-value )
+
+@WEB
++STARTBROWSE
++FORMFIELD[arg]
+NAMELENGTH( data-area )
+CHARACTERSET( data-value )
+HOSTCODEPAGE( data-value )
+
+@WEB
++STARTBROWSE
++HTTPHEADER
+SESSTOKEN( data-area )
+
+@WEB
++STARTBROWSE
++QUERYPARM[arg]
+NAMELENGTH( data-area )
+HOSTCODEPAGE( data-value )
+
+@WEB
++WRITE
++HTTPHEADER( data-area )
+NAMELENGTH( data-value )
+VALUE( data-area )
+SESSTOKEN( data-value )
+VALUELENGTH( data-value )
+
+# 
+# DATASET is no longer documented but was allowed
+# in CICS 2.1.2 in the early 1990s.
+# 
+
+@WRITE
+FILE( filename )
+DATASET( filename )
+FROM( data-area )
+RIDFLD( data-area )
+MASSINSERT
+KEYLENGTH( data-value )
+SYSID( systemname )
+LENGTH( data-value )
+LENGTH( data-value )
+RBA
+NOSUSPEND
+RRN
+XRBA
+
+@WRITE 
++JOURNALNAME( data-value )
+FLENGTH( data-value )
+JTYPEID( data-value )
+FROM( data-area )
+REQID( data-area )
+PREFIX( data-value )
+WAIT
+PFXLENG( data-value )
+NOSUSPEND
+
+@WRITE 
++JOURNALNUM( data-value )
+FLENGTH( data-value )
+JTYPEID( data-value )
+FROM( data-area )
+REQID( data-area )
+PREFIX( data-value )
+WAIT
+PFXLENG( data-value )
+NOSUSPEND
+
+@WRITE 
++OPERATOR
+TEXT( data-value )
+TEXTLENGTH( data-value )
+ROUTECODES( data-value )
+NUMROUTES( data-value )
+CONSNAME( data-value )
+EVENTUAL
+ACTION( cvda )
+CRITICAL
+IMMEDIATE
+REPLY( data-area )
+MAXLENGTH( data-value )
+REPLYLENGTH( data-area )
+TIMEOUT( data-value )
+
+@WRITEQ 
++TD
+QUEUE( name )
+FROM( data-area )
+LENGTH( data-value )
+SYSID( systemname )
+
+@WRITEQ
++TS
+FROM( data-area )
+QUEUE( name )
+QNAME( name )
+LENGTH( data-value )
+NUMITEMS( data-area )
+ITEM( data-area )
+REWRITE
+AUXILIARY
+SYSID( systemname )
+MAIN
+NOSUSPEND
+
+@WSACONTEXT 
++BUILD
+CHANNEL( data-value )
+ACTION( data-value )
+MESSAGEID( data-value )
+RELATESURI( data-value )
+RELATESTYPE( data-value )
+EPRTYPE( cvda )
+EPRFIELD( cvda )
+EPRFROM( data-value )
+EPRLENGTH( data-value )
+FROMCCSID( data-value )
+FROMCODEPAGE( data-value )
+
+@WSACONTEXT 
++DELETE
+CHANNEL( data-value )
+
+@WSACONTEXT 
++GET
+CONTEXTTYPE( cvda )
+CHANNEL( data-value )
+ACTION( data-area )
+MESSAGEID( data-area )
+RELATESURI( data-area )
+RELATESTYPE( data-area )
+EPRTYPE( cvda ) 
+EPRFIELD( cvda )
+RELATESINDEX( data-value )
+EPRINTO( data-area )
+EPRLENGTH( data-area )
+EPRSET( ptr-ref )
+INTOCCSID( data-value )
+INTOCODEPAGE( data-value )
+
+@WSAEPR 
++CREATE
+EPRINTO( data-area )
+EPRLENGTH( data-area )
+EPRSET( data-area )
+ADDRESS( data-value )
+REFPARMS( data-value ) 
+REFPARMSLEN( data-value )
+METADATA( data-value ) 
+METADATALEN( data-value )
+FROMCCSID( data-value )
+FROMCODEPAGE( data-value )
+
+@XCTL
+PROGRAM( name )
+COMMAREA( data-area )
+LENGTH( data-value )
+CHANNEL( name )
+INPUTMSG( data-area )
+INPUTMSGLEN( data-value )
+
+
