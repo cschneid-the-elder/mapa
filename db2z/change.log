@@ -1,6 +1,10 @@
 --2024-04-03--------------------------------------------------------------------
-Added dsnutilUCSFullOrChangelimit to dsnutilUCSCopySpecOptions per Martijn 
-Rutte 2024-04-03.
+Per Martijn Rutte...
+
+Added dsnutilUCSFullOrChangelimit to dsnutilUCSCopySpecOptions.
+
+Added DSNUTIL_DB_TS_HEX_LIT_DOUBLE_APOS in lexer mode DSNUTIL_DB_TS_MODE and
+parser rule dsnutilUCSArg.
 
 
 

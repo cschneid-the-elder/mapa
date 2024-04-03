@@ -6977,6 +6977,16 @@ DSNUTIL_DB_TS_HEX_LIT
 	->popMode
 	;
 
+/*
+Added per Martijn Rutte 2024-04-03.  It turns out that hex
+literals can be quoted with two apostrophes and not just one.
+*/
+
+DSNUTIL_DB_TS_HEX_LIT_DOUBLE_APOS
+	: [GNX] '\'\'' [0-9A-Za-z]+ '\'\''
+	->popMode
+	;
+
 mode DSNUTIL_PAREN_MODE;
 /*
 Why are we here?
