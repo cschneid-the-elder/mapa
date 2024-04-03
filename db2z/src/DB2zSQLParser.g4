@@ -956,6 +956,10 @@ dsnutilUCSCopy
 /*
 This does not match the syntax diagram, as there are
 discrepencies between the syntax diagram and the examples.
+
+TODO Maybe rewrite this in a simpler form where it's just
+all the dsnutilUCSCopySpecOptions and the contents of this
+rule "or'd" together.
 */
 dsnutilUCSCopySpec
 	: dsnutilUCSCopySpecOptions*
@@ -978,6 +982,11 @@ dsnutilUCSDsnumOption
 	)
 	;
 
+/*
+Added dsnutilUCSFullOrChangelimit per Martijn Rutte 2024-04-03.
+
+*/
+
 dsnutilUCSCopySpecOptions
 	: (
 	dsnutilUCSParallelOption2
@@ -988,6 +997,7 @@ dsnutilUCSCopySpecOptions
 	| dsnutilUCSCloneOption 
 	| dsnutilUCSShrlevelOption 
 	| dsnutilUCSScopeOption
+	| dsnutilUCSFullOrChangelimit
 	)
 	;
 

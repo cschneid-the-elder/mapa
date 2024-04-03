@@ -1,3 +1,10 @@
+--2024-04-03--------------------------------------------------------------------
+Added dsnutilUCSFullOrChangelimit to dsnutilUCSCopySpecOptions per Martijn 
+Rutte 2024-04-03.
+
+
+
+
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
 dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 
