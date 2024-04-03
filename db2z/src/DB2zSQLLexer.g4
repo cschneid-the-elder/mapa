@@ -21,6 +21,7 @@ lexer grammar DB2zSQLLexer;
 	public Boolean dsnutil_dsn_ws_char = false;
 	public Boolean dsnutil_db_ts_char = false;
 	public Boolean dsnutilLoad = false;
+	public Boolean dsnutilEXECSQL = false;
 }
 
 channels { COMMENTS }
@@ -199,6 +200,7 @@ DSNUTIL_OPEN_QUOTE
 NONNUMERICLITERAL
 	: STRINGLITERAL
 	| HEXLITERAL
+	| DOUBLE_APOS_STRINGLITERAL
 	;
 
 fragment HEXLITERAL
@@ -207,9 +209,16 @@ fragment HEXLITERAL
 	;
 
 fragment STRINGLITERAL
-	: (('"' (~["] | '""' | '\'')* '"')
-	| ('\'' (~['] | '\'\'' | '"')* '\''))
+	: (
+	('"' (~["] | '""' | '\'')* '"')
+	| ('\'' (~['] | '\'\'' | '"')* '\'')
+	)
 	{!(dsnutil && dsnutilArgc == 2)}?
+	;
+
+fragment DOUBLE_APOS_STRINGLITERAL
+	: ('\'\'' ~[']* '\'\'')
+	{dsnutilEXECSQL}?
 	;
 
 INTEGERLITERAL
@@ -265,6 +274,7 @@ SQLBLOCKCOMMENTEND
 
 DSNUTIL_ENDEXEC
 	: E N D E X E C
+	{dsnutilEXECSQL = false;}
 	->popMode
 	;
 
@@ -4955,6 +4965,7 @@ DSNUTIL_SWITCHTIME
 
 DSNUTIL_EXEC_SQL
 	: E X E C (WS | NEWLINE)+ S Q L
+	{dsnutilEXECSQL = true;}
 	->pushMode(DEFAULT_MODE)
 	;
 
@@ -6827,6 +6838,14 @@ DSNUTIL_DB_TS_WS_TERMINATING
 		dsnutil_db_ts_char = false;
 	}
 	->channel(HIDDEN),popMode
+	;
+
+DSNUTIL_DB_TS_DOUBLE_APOS
+	: '\'\''
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
 	;
 
 DSNUTIL_DB_TS_APOS
