@@ -21,7 +21,7 @@ options {tokenVocab=CICSzLexer;}
 
 startRule
 	: (
-	cicsCommandInitiator cicsCommand cicsCommandTerminator
+	cicsCommand 
 	)+
 	EOF
 	;
@@ -41,8 +41,9 @@ cicsCommandTerminator
 
 cicsCommand
 	: (
-	cicsAPI
-	| cicsSPI
+	cicsCommandInitiator
+	(cicsAPI | cicsSPI)
+	cicsCommandTerminator
 	)
 	;
 

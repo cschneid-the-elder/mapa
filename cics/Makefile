@@ -8,6 +8,21 @@
 # This software may be modified and distributed under the terms
 # of the MIT license. See the LICENSE file for details.
 
+# Targets:
+# 
+# gentokens  generate tokens from source, construct lexer grammar
+# genrules   generate rules from source, construct parser grammar
+# 
+# To the extent possible, maintenance should be done on the apiSource
+# and spiSource files; and the CICSz*Template* files.
+# 
+# To build...
+# 
+# make gentokens
+# make genrules
+# make
+# 
+
 SEP = :
 ifdef OS
     SEP = ;

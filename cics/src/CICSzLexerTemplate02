@@ -28,7 +28,7 @@ ARG_RPAREN
 	{
 		parenNesting--;
 	}
-	->type(ARG)
+	->popMode,type(ARG)
 	;
 
 /*
