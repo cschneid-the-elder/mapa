@@ -2305,6 +2305,9 @@ Having a length in parentheses isn't noted in the syntax diagram
 but it is in the examples.  And I'm allowing a strip-spec because
 as long as I have to make things up, I'm going to make things up
 that seem correct to me.
+
+Added dsnutilUCSArgInParens? following DSNUTIL_MIXED per Martijn
+Rutte 2024-04-03.
 */
 dsnutilUCSLoadFieldSpecificationChar
 	: (
@@ -2312,7 +2315,7 @@ dsnutilUCSLoadFieldSpecificationChar
 		(
 		(DSNUTIL_BIT dsnutilUCSArgInParens dsnutilUCSStripSpec*)
 		| (dsnutilUCSCCSIDPhrase dsnutilUCSStripSpec*)
-		| (DSNUTIL_MIXED dsnutilUCSStripSpec*)
+		| (DSNUTIL_MIXED dsnutilUCSArgInParens? dsnutilUCSStripSpec*)
 		| (DSNUTIL_BLOBF dsnutilUCSBlobfOptions*)
 		| (DSNUTIL_CLOBF dsnutilUCSClobfOptions*)
 		| (DSNUTIL_DBCLOBF dsnutilUCSDbclobfOptions*)
