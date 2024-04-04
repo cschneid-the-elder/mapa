@@ -30,6 +30,9 @@ by two apostrophes.
 Added DSNUTIL_DB_TS_RPAREN as a termination option for 
 dsnutilUCSLoadFieldListOption.
 
+Simplified dsnutilUCSSortdataOption.
+
+
 
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 

@@ -3684,10 +3684,18 @@ dsnutilUCSNosysrecOption
 	)
 	;
 
+/*
+This is simpler than the previous incarnation of this rule,
+and although it allows syntax that the syntax diagram
+does not, we've seen that the syntax diagrams are not always
+100% accurate.
+*/
+
 dsnutilUCSSortdataOption
 	: (
-	(DSNUTIL_SORTDATA (DSNUTIL_NO (DSNUTIL_RECLUSTER dsnutilUCSYesOrNo)?)?)
-	| (DSNUTIL_SORTDATA (DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) DSNUTIL_NO DSNUTIL_RPAREN1 (DSNUTIL_RECLUSTER dsnutilUCSYesOrNo)?)
+	DSNUTIL_SORTDATA 
+	dsnutilUCSYesOrNo?
+	(DSNUTIL_RECLUSTER dsnutilUCSYesOrNo)?
 	)
 	;
 
