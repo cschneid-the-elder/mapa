@@ -2665,10 +2665,14 @@ dsnutilUCSStripSpec
 	)
 	;
 
+/*
+DECIMAL is okay on its own per Martijn Rutte 2024-04-03.
+*/
+
 dsnutilUCSLoadDecimalSpec
 	: (
 	DSNUTIL_DECIMAL
-	(DSNUTIL_PACKED | DSNUTIL_ZONED | (DSNUTIL_EXTERNAL (dsnutilUCSArgList1)?))
+	(DSNUTIL_PACKED | DSNUTIL_ZONED | (DSNUTIL_EXTERNAL (dsnutilUCSArgList1)?))?
 	)
 	;
 
