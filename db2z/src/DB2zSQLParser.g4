@@ -4974,12 +4974,16 @@ dsnutilUCSPathName
 /*
 DSNUTIL_UNLOAD added to first option per issue reported 
 by Martijn Rutte 2024-04-03.
+
+dsnutilUCSUnloadSpec* sprinkled about as Martijn also discovered
+that at least some of these options are tolerated out of the
+order specified in the syntax diagram.
 */
 
 dsnutilUCSUnload
 	: (
-	(((DSNUTIL_UNLOAD_DATA | DSNUTIL_UNLOAD) dsnutilUCSFromTableSpec2+)
-	| (DSNUTIL_UNLOAD dsnutilUCSUnloadSourceSpec dsnutilUCSFromTableSpec2*)
+	(((DSNUTIL_UNLOAD_DATA | DSNUTIL_UNLOAD) (dsnutilUCSUnloadSpec* dsnutilUCSFromTableSpec2)+)
+	| (DSNUTIL_UNLOAD dsnutilUCSUnloadSourceSpec (dsnutilUCSUnloadSpec* dsnutilUCSFromTableSpec2)*)
 	| (DSNUTIL_UNLOAD dsnutilUCSListNameWithLit))
 	dsnutilUCSUnloadSpec*
 	)

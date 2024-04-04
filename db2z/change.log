@@ -40,6 +40,10 @@ dsnutilUCSLoadDecimalSpec.
 Made trailing options in dsnutilUCSUnloadFieldSpecificationChar
 actually optional.
 
+dsnutilUCSUnload now allows for dsnutilUCSUnloadSpec options to be before,
+after, or both before and after the dsnutilUCSFromTableSpec2.
+
+
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
 dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 
