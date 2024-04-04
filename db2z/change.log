@@ -50,6 +50,41 @@ Fixed typo in dsnutilUCSDsnDataclasOption, removing erroneous "r" between
 that made it read dsnurtilUCSDsnDataclasOption.  Also added optional
 DSNUTIL_EQUAL? before dsnutilUCSArgOptionalParens.
 
+I've modified the following in a similar fashion to 
+dsnutilUCSDsnDataclasOption, adding an optional DSNUTIL_EQUAL before 
+the dsnutilUCSArgOptionalParens.  My reasoning is that if it's allowed for one
+of these dataset options then it's likely allowed for them all.
+
+dsnutilUCSDsnUnitOption
+dsnutilUCSDsnBufnoOption
+dsnutilUCSDsnMgmtclasOption
+dsnutilUCSDsnStorclasOption
+dsnutilUCSDsnRetpdOption
+dsnutilUCSDsnVolumesOption
+dsnutilUCSDsnVolcntOption
+dsnutilUCSDsnUncntOption
+dsnutilUCSDsnGdgLimitOption
+dsnutilUCSDsnDispOption
+dsnutilUCSDsnLimitOption
+dsnutilUCSDsnTimeOption
+dsnutilUCSDsnBlkszlimOption
+dsnutilUCSDsnSpaceOption
+dsnutilUCSDsnPctprimeOption
+dsnutilUCSDsnMaxprimeOption
+dsnutilUCSDsnNbrsecndOption
+dsnutilUCSDsnDirOption
+dsnutilUCSDsnDsntypeOption
+dsnutilUCSDsnStackOption
+dsnutilUCSDsnTrtchOption
+dsnutilUCSDsnSubsysOption
+dsnutilUCSDsnLreclOption
+dsnutilUCSDsnRecfmOption
+dsnutilUCSPathFiledataOption
+dsnutilUCSPathPathoptsOption
+dsnutilUCSPathPathmodeOption
+dsnutilUCSPathPathdispOption
+
+
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
 dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 
