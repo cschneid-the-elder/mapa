@@ -2321,13 +2321,20 @@ dsnutilUCSLoadFieldSpecificationChar
 	)
 	;
 
+/*
+Making various options actually optional.
+
+TODO: this may be another instance where the options
+can be simplified.
+*/
+
 dsnutilUCSUnloadFieldSpecificationChar
 	: (
 	(DSNUTIL_CHAR | DSNUTIL_CHARACTER)
 	dsnutilUCSArgInParens?
 	((DSNUTIL_TRUNCATE dsnutilUCSCCSIDPhrase?)
 	| dsnutilUCSUnloadClobfSpec
-	| (dsnutilUCSCCSIDPhrase DSNUTIL_TRUNCATE?))
+	| (dsnutilUCSCCSIDPhrase DSNUTIL_TRUNCATE?))?
 	)
 	;
 

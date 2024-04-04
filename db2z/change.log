@@ -37,6 +37,9 @@ Trailing comma tolerated in dsnutilUCSLoadFieldListOption.
 Made everything following DSNUTIL_DECIMAL optional in 
 dsnutilUCSLoadDecimalSpec.
 
+Made trailing options in dsnutilUCSUnloadFieldSpecificationChar
+actually optional.
+
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
 dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 
