@@ -4761,7 +4761,7 @@ dsnutilUCSDsnCommonOptions
 	dsnutilUCSDsnUnitOption
 	| dsnutilUCSDsnModelDcbOption
 	| dsnutilUCSDsnBufnoOption
-	| dsnurtilUCSDsnDataclasOption
+	| dsnutilUCSDsnDataclasOption
 	| dsnutilUCSDsnMgmtclasOption
 	| dsnutilUCSDsnStorclasOption
 	| dsnutilUCSDsnRetpdOption
@@ -4832,7 +4832,7 @@ dsnutilUCSDsnBufnoOption
 	: (DSNUTIL_BUFNO dsnutilUCSArgOptionalParens)
 	;
 
-dsnurtilUCSDsnDataclasOption
+dsnutilUCSDsnDataclasOption
 	: (DSNUTIL_DATACLAS DSNUTIL_EQUAL? dsnutilUCSArgOptionalParens)
 	;
 
