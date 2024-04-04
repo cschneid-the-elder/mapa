@@ -3787,6 +3787,8 @@ dsnutilUCSShrlevelChangeSpec2
 /*
 Moved  DSNUTIL_SKIP_LOCKED_DATA? from dsnutilUCSShrlevelChangeSpec3 
 to dsnutilUCSIsolationCSOption for clarity per Martijn Rutte 2023-11-03.
+
+Made dsnutilUCSRegisterOption per Martijn Rutte 2023-04-03.
 */
 dsnutilUCSShrlevelChangeSpec3
 	: (
@@ -3794,7 +3796,7 @@ dsnutilUCSShrlevelChangeSpec3
 	(DSNUTIL_CHANGE
 	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) DSNUTIL_CHANGE DSNUTIL_RPAREN1))
 	((dsnutilUCSIsolationCSOption)
-	| (dsnutilUCSIsolationUROption dsnutilUCSRegisterOption))
+	| (dsnutilUCSIsolationUROption dsnutilUCSRegisterOption?))
 	)
 	;
 
@@ -4941,9 +4943,14 @@ dsnutilUCSPathName
 	: dsnutilUCSArg
 	;
 
+/*
+DSNUTIL_UNLOAD added to first option per issue reported 
+by Martijn Rutte 2024-04-03.
+*/
+
 dsnutilUCSUnload
 	: (
-	((DSNUTIL_UNLOAD_DATA dsnutilUCSFromTableSpec2+)
+	(((DSNUTIL_UNLOAD_DATA | DSNUTIL_UNLOAD) dsnutilUCSFromTableSpec2+)
 	| (DSNUTIL_UNLOAD dsnutilUCSUnloadSourceSpec dsnutilUCSFromTableSpec2*)
 	| (DSNUTIL_UNLOAD dsnutilUCSListNameWithLit))
 	dsnutilUCSUnloadSpec*
@@ -5621,6 +5628,7 @@ dsnutilUCSArg
 	| (DSNUTIL_PAREN_NUMBER DSNUTIL_PAREN_COLON DSNUTIL_PAREN_NUMBER)
 	| (DSNUTIL_DB_TS_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_DB_TS_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR* DSNUTIL_DOUBLE_APOS1)
+	| (DSNUTIL_PAREN_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR* DSNUTIL_DOUBLE_APOS1)
 	| (DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR* DSNUTIL_APOS)
 	| (DSNUTIL_PAREN_OPEN_QUOTE DSNUTIL_QUOTE_CHAR* DSNUTIL_QUOTE1)
 	| (DSNUTIL_PAREN_IDENTIFIER DSNUTIL_PAREN_OPEN_APOS DSNUTIL_APOS_CHAR+ DSNUTIL_APOS)

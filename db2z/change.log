@@ -1,12 +1,34 @@
 --2024-04-03--------------------------------------------------------------------
-Per Martijn Rutte...
+Per Martijn Rutte, to handle alternate syntaxes and literals delimited by two
+apostrophes...
 
 Added dsnutilUCSFullOrChangelimit to dsnutilUCSCopySpecOptions.
 
 Added DSNUTIL_DB_TS_HEX_LIT_DOUBLE_APOS in lexer mode DSNUTIL_DB_TS_MODE and
 parser rule dsnutilUCSArg.
 
+(DSNUTIL_UNLOAD_DATA | DSNUTIL_UNLOAD) added to dsnutilUCSUnload.
 
+Made dsnutilUCSRegisterOption optional in dsnutilUCSShrlevelChangeSpec3.
+
+Added...
+
+| (DSNUTIL_DB_TS_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR* DSNUTIL_DOUBLE_APOS1)
+| (DSNUTIL_PAREN_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR* DSNUTIL_DOUBLE_APOS1)
+
+... to dsnutilUCSArg.
+
+Added fragment DOUBLE_APOS_STRINGLITERAL to lexer and to lexer
+rule NONNUMERICLITERAL.  This is to handle literals delimited with two
+apostrophes codes as part of arbitrary SQL within the third argument to 
+DSNUTILx, delimited by EXEC SQL [...] ENDEXEC.  Added new Boolean 
+dsnutilEXECSQL to support this.
+
+Added DSNUTIL_DB_TS_DOUBLE_APOS to lexer, again to support literals delimited
+by two apostrophes.
+
+Added DSNUTIL_DB_TS_RPAREN as a termination option for 
+dsnutilUCSLoadFieldListOption.
 
 
 --2024-03-26--------------------------------------------------------------------
