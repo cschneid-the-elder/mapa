@@ -46,6 +46,9 @@ after, or both before and after the dsnutilUCSFromTableSpec2.
 Added dsnutilUCSArgInParens? following DSNUTIL_MIXED in 
 dsnutilUCSLoadFieldSpecificationChar.
 
+Fixed typo in dsnutilUCSDsnDataclasOption, removing erroneous "r" between
+that made it read dsnurtilUCSDsnDataclasOption.  Also added optional
+DSNUTIL_EQUAL? before dsnutilUCSArgOptionalParens.
 
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 

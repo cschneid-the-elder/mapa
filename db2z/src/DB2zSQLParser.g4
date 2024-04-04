@@ -4833,7 +4833,7 @@ dsnutilUCSDsnBufnoOption
 	;
 
 dsnurtilUCSDsnDataclasOption
-	: (DSNUTIL_DATACLAS dsnutilUCSArgOptionalParens)
+	: (DSNUTIL_DATACLAS DSNUTIL_EQUAL? dsnutilUCSArgOptionalParens)
 	;
 
 dsnutilUCSDsnMgmtclasOption
