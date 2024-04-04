@@ -2175,12 +2175,21 @@ dsnutilUCSIntoTableSpecWhenOption
 	)
 	;
 
+/*
+Trailing comma tolerated per Martijn Rutte 2024-04-03, as he
+noted "IBM Db2 z/OS is quite forgiving..."
+
+Also, apparently the DSNUTIL_DB_TS_RPAREN is no longer
+required.
+
+*/
 dsnutilUCSLoadFieldListOption
 	: (
 	DSNUTIL_LPAREN 
 	dsnutilUCSLoadFieldSpecification 
 	(DSNUTIL_COMMA dsnutilUCSLoadFieldSpecification)* 
-	(DSNUTIL_RPAREN1 | DSNUTIL_DB_TS_RPAREN)
+	DSNUTIL_COMMA?
+	DSNUTIL_RPAREN1
 	)
 	;
 

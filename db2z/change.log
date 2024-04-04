@@ -32,6 +32,8 @@ dsnutilUCSLoadFieldListOption.
 
 Simplified dsnutilUCSSortdataOption.
 
+Trailing comma tolerated in dsnutilUCSLoadFieldListOption.
+
 
 
 --2024-03-26--------------------------------------------------------------------
