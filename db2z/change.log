@@ -88,6 +88,10 @@ Made all the options of dsnutilUCSRecoverNosyscopyOption optional.
 
 Made dsnutilUCSCCSIDPhrase in dsnutilUCSUnloadClobfSpec optional.
 
+Added "dsnutil = false;" to DSNUTIL_OPEN_QUOTE to fix problem with third
+DSNUTILx parameter being delimited with '"' and also containing
+EXEC SQL ... ENDEXEC with a literal embedded.
+
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
 dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 

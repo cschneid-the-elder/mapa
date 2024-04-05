@@ -188,11 +188,24 @@ DSNUTIL_OPEN_APOS
 	->pushMode(DSNUTIL_MODE)
 	;
 
+/*
+2024-04-05 Added "dsnutil = false;" to fix problem with third
+DSNUTILx parameter being delimited with '"' and also containing
+EXEC SQL ... ENDEXEC with a literal embedded.
+*/
+
 DSNUTIL_OPEN_QUOTE
 	: '"'
 	{dsnutil && dsnutilArgc == 2}?
 	{
 		//System.out.println("dsnutil && dsnutilArgc == 2 & \"");
+		/*
+		Setting this variable to false is necessary here because 
+		the EXEC SQL online Utility Control Statement may come back
+		through this token if a literal is present in any dynamic
+		SQL being processed.
+		*/
+		dsnutil = false;
 	}
 	->pushMode(DSNUTIL_MODE)
 	;
@@ -215,6 +228,17 @@ fragment STRINGLITERAL
 	)
 	{!(dsnutil && dsnutilArgc == 2)}?
 	;
+
+/*
+This is interesting.  If we are processing the third parameter
+to DSNUTILx, and that parameter contains an EXEC SQL ... ENDEXEC
+statement, and that statement contains a literal, it may be
+delimited by two apostrophes.  Setting the dsnutilEXECSQL boolean
+means this will match instead of the first two apostrophes
+matching STRINGLITERAL, the intended contents of the literal
+possibly matching SQLIDENTIFIER, and the final two apostrophes
+matching STRINGLITERAL.
+*/
 
 fragment DOUBLE_APOS_STRINGLITERAL
 	: ('\'\'' ~[']* '\'\'')
@@ -6840,6 +6864,9 @@ DSNUTIL_DB_TS_WS_TERMINATING
 	->channel(HIDDEN),popMode
 	;
 
+/*
+Sometimes a literal is delimited with two apostrophes.
+*/
 DSNUTIL_DB_TS_DOUBLE_APOS
 	: '\'\''
 	{
