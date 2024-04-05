@@ -2341,10 +2341,14 @@ dsnutilUCSUnloadFieldSpecificationChar
 	)
 	;
 
+/*
+Made dsnutilUCSCCSIDPhrase optional per Martijn Rutte 2024-04-03.
+*/
+
 dsnutilUCSUnloadClobfSpec
 	: (
-	((DSNUTIL_DBCLOBF dsnutilUCSCCSIDPhrase)
-	| (DSNUTIL_CLOBF dsnutilUCSCCSIDPhrase)
+	((DSNUTIL_DBCLOBF dsnutilUCSCCSIDPhrase?)
+	| (DSNUTIL_CLOBF dsnutilUCSCCSIDPhrase?)
 	| DSNUTIL_BLOBF)
 	dsnutilUCSTemplateName
 	DSNUTIL_BINARYXML?
@@ -3819,7 +3823,7 @@ dsnutilUCSShrlevelChangeSpec2
 Moved  DSNUTIL_SKIP_LOCKED_DATA? from dsnutilUCSShrlevelChangeSpec3 
 to dsnutilUCSIsolationCSOption for clarity per Martijn Rutte 2023-11-03.
 
-Made dsnutilUCSRegisterOption per Martijn Rutte 2023-04-03.
+Made dsnutilUCSRegisterOption optional per Martijn Rutte 2023-04-03.
 */
 dsnutilUCSShrlevelChangeSpec3
 	: (
