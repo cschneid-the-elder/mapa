@@ -84,6 +84,8 @@ dsnutilUCSPathPathoptsOption
 dsnutilUCSPathPathmodeOption
 dsnutilUCSPathPathdispOption
 
+Made all the options of dsnutilUCSRecoverNosyscopyOption optional.
+
 
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
