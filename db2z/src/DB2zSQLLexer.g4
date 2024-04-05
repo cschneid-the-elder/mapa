@@ -6864,6 +6864,11 @@ DSNUTIL_DB_TS_WS_TERMINATING
 	->channel(HIDDEN),popMode
 	;
 
+DSNUTIL_DB_TS_EQUAL
+	: DSNUTIL_EQUAL
+	->type(DSNUTIL_EQUAL)
+	;
+
 /*
 Sometimes a literal is delimited with two apostrophes.
 */
@@ -6991,6 +6996,14 @@ DSNUTIL_DB_TS_TABLESAMPLE
 		dsnutil_db_ts_char = true;
 	}
 	->type(DSNUTIL_TABLESAMPLE)
+	;
+
+DSNUTIL_DB_TS_RECORD
+	: DSNUTIL_RECORD
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_RECORD)
 	;
 
 DSNUTIL_DB_TS_IDENTIFIER
