@@ -34,7 +34,7 @@
                 ADDRESS
                 ACEE(X)
                 COMMAREA(X)
-                CWS(X)
+                CWA(X)
                 EIB(X)
                 TCTUA(X)
                 TWA(X)
@@ -371,6 +371,7 @@
                 SESSION(X)
                 ATTACHID(X)
                 INTO(X)
+                LDC(X)
                 SET(X)
                 TOLENGTH(X)
                 TOFLENGTH(X)
@@ -383,7 +384,6 @@
            EXEC CICS
                 CONVERSE
                 STRFIELD
-                LDC(X)
                 LINEADDR(X)
                 LEAVEKB
                 PSEUDOBIN
@@ -507,7 +507,7 @@
                 KEYLENGTH(X)
                 GENERIC
                 NUMREC(X)
-                SYSTEM(X)
+                SYSID(X)
                 NOSUSPEND
                 RBA
                 RRN
@@ -524,6 +524,7 @@
            END-EXEC
 
            EXEC CICS
+                DELETE
                 CONTAINER(X)
                 ACTIVITY(X)
                 ACQACTIVITY
@@ -773,7 +774,7 @@
                 LOCALITY(X)
                 LOCALITYLEN(X)
                 ORGANIZATION(X)
-                ORGANIZATIONLEN(X)
+                ORGANIZATLEN(X)
                 ORGUNIT(X)
                 ORGUNITLEN(X)
            END-EXEC
@@ -821,7 +822,7 @@
                 PORTNUMBER(X)
                 PORTNUMNU(X)
                 PRIVACY(X)
-                MAXDATALENT(X)
+                MAXDATALEN(X)
            END-EXEC
 
            EXEC CICS
@@ -1178,7 +1179,7 @@
                 GETMAIN64
                 SET(X)
                 FLENGTH(X)
-                LOCATION
+                LOCATION(X)
                 EXECUTABLE
                 SHARED
                 NOSUSPEND
@@ -1740,6 +1741,16 @@
            EXEC CICS
                 INVOKE
                 SERVICE(X)
+                CHANNEL(X)
+                OPERATION(X)
+                URI(X)
+                URIMAP(X)
+                SCOPE(X)
+                SCOPELEN(X)
+           END-EXEC
+
+           EXEC CICS
+                INVOKE
                 WEBSERVICE(X)
                 CHANNEL(X)
                 OPERATION(X)
@@ -1783,7 +1794,7 @@
                 FROM(X)
                 LENGTH(X)
                 NUMREC(X)
-                DEFRESP(X)
+                DEFRESP
                 NOWAIT
                 RIDFLD(X)
                 RRN
@@ -1806,7 +1817,7 @@
 
            EXEC CICS
                 ISSUE
-                DISCONNECT(X)
+                DISCONNECT
                 SESSION(X)
            END-EXEC
 
@@ -1910,6 +1921,7 @@
 
            EXEC CICS
                 ISSUE
+                QUERY
                 DESTID(X)
                 DESTIDLENG(X)
                 VOLUME(X)

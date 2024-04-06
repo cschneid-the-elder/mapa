@@ -57,11 +57,11 @@ clean:
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig CICSz startRule -gui -tokens < ./testdata/test$(n)
+	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig CICSz startRule -gui -tokens < ./testdata/cics_$(n)
 
 testtree:
 	echo `date` $@ $(n) >> build.log
-	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig CICSz startRule -tree -tokens < ./testdata/test$(n)
+	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig CICSz startRule -tree -tokens < ./testdata/cics_$(n)
 
 test:
 ifeq ($(strip $(n)),)

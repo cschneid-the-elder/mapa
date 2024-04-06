@@ -587,8 +587,10 @@ COMPLETE
 FLENGTH( data-value )
 TRT
 SEGMENTLIST( data-area )
-TASKSTORAGE
-TABLESFCT
+TASK
+STORAGE
+TABLES
+FCT
 LENGTHLIST( data-area )
 TERMINAL
 PROGRAM
@@ -779,6 +781,7 @@ TERMID( data-area )
 
 @EXTRACT
 +WEB
++=AsHost
 SCHEME( cvda )
 HOST( data-area )
 HOSTLENGTH( data-value )
@@ -794,6 +797,23 @@ REQUESTTYPE( cvda )
 PORTNUMBER( data-area )
 QUERYSTRLEN( data-area )
 URIMAP( data-area )
+
+@EXTRACT
++WEB
++=AsClient
+SESSTOKEN( data-area )
+SCHEME( cvda )
+HOST( data-area )
+HOSTLENGTH( data-value )
+HOSTTYPE( cvda )
+HTTPVERSION( data-area )
+PATH( data-area )
+VERSIONLEN( data-area )
+PATHLENGTH( data-area )
+URIMAP( data-area )
+REALM( data-area )
+PORTNUMBER( data-area )
+REALMLEN( data-area )
 
 @FETCH
 +ANY( data-area )
@@ -989,8 +1009,10 @@ CONVID( name )
 FROM( data-area )
 FLENGTH( data-value )
 CONVDATA( data-area )
-INVITECONFIRM
-LASTWAIT
+INVITE
+CONFIRM
+LAST
+WAIT
 RETCODE( data-area )
 STATE( cvda )
 
@@ -1187,6 +1209,7 @@ TRIGGER[arg]
 +CONDITION
 ERROR[arg]
 ALLOCERR[arg]
+BUSY[arg]
 CBIDERR[arg]
 CHANNELERR[arg]
 DISABLED[arg]
@@ -1247,6 +1270,7 @@ QIDERR[arg]
 QZERO[arg]
 RDATT[arg]
 RECORDBUSY[arg]
+RESIDERR[arg]
 RESUNAVAIL[arg]
 RETPAGE[arg]
 ROLLEDBACK[arg]
@@ -2601,8 +2625,10 @@ KEYLENGTH( data-value )
 REQID( data-value )
 GENERIC
 SYSID( systemname )
-DEBKEYGTEQ
-DEBRECEQUAL
+DEBKEY
+DEBREC
+GTEQ
+EQUAL
 RBA
 RRN
 XRBA

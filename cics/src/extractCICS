@@ -1,0 +1,20 @@
+#! /usr/bin/awk -f
+
+# extract EXEC CICS ... END-EXEC from source
+
+BEGIN {
+	found = "N"
+}
+
+{
+	if ($0 ~ /EXEC\s+CICS/ || $0 ~ /EXECUTE\s+CICS/) {
+		found = "Y"
+	}
+	if (found == "Y") {
+		print $0
+	}
+	if ($0 ~ /END-EXEC/) {
+		found = "N"
+	}
+}
+
