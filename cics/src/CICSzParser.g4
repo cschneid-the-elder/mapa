@@ -121,7 +121,8 @@ cicsAPI
 	| extractProcess
 	| extractTcpip
 	| extractTct
-	| extractWeb
+	| extractWebAsHost
+	| extractWebAsClient
 	| fetchAny
 	| fetchChild
 	| forceTimer
@@ -1063,9 +1064,15 @@ extractTct
 	)
 	;
 
-extractWeb
+extractWebAsHost
 	: (
-	 extractOption webOption extractWebOptions*
+	 extractOption webOption extractWebAsHostOptions*
+	)
+	;
+
+extractWebAsClient
+	: (
+	 extractOption webOption extractWebAsClientOptions*
 	)
 	;
 
@@ -4027,7 +4034,7 @@ setXmltransform
 	)
 	;
 
-// 565 rules generated Sat Apr  6 16:13:56 CDT 2024
+// 566 rules generated Sun Apr  7 14:34:07 CDT 2024
 
 abendOptions
 	: (
@@ -4750,8 +4757,10 @@ dumpTransactionOptions
 	| flengthOption
 	| trtOption
 	| segmentlistOption
-	| taskstorageOption
-	| tablesfctOption
+	| taskOption
+	| storageOption
+	| tablesOption
+	| fctOption
 	| lengthlistOption
 	| terminalOption
 	| programOption
@@ -4978,7 +4987,7 @@ extractTctOptions
 	)
 	;
 
-extractWebOptions
+extractWebAsHostOptions
 	: (
 	schemeOption
 	| hostOption
@@ -4995,6 +5004,25 @@ extractWebOptions
 	| portnumberOption
 	| querystrlenOption
 	| urimapOption
+	| exceptionOptions
+	)
+	;
+
+extractWebAsClientOptions
+	: (
+	sesstokenOption
+	| schemeOption
+	| hostOption
+	| hostlengthOption
+	| hosttypeOption
+	| httpversionOption
+	| pathOption
+	| versionlenOption
+	| pathlengthOption
+	| urimapOption
+	| realmOption
+	| portnumberOption
+	| realmlenOption
 	| exceptionOptions
 	)
 	;
@@ -5258,8 +5286,10 @@ gdsSendOptions
 	| fromOption
 	| flengthOption
 	| convdataOption
-	| inviteconfirmOption
-	| lastwaitOption
+	| inviteOption
+	| confirmOption
+	| lastOption
+	| waitOption
 	| retcodeOption
 	| stateOption
 	| exceptionOptions
@@ -5486,13 +5516,25 @@ handleAidOptions
 handleConditionOptions
 	: (
 	errorOption
+	| activitybusyOption
+	| activityerrOption
 	| allocerrOption
+	| appnotfoundOption
+	| busyOption
 	| cbiderrOption
+	| ccsiderrOption
+	| changedOption
 	| channelerrOption
+	| codepageerrOption
+	| containererrOption
+	| csderrOption
 	| disabledOption
+	| dsnnotfoundOption
 	| dsstatOption
 	| dupkeyOption
 	| duprecOption
+	| dupresOption
+	| endOption
 	| enddataOption
 	| endfileOption
 	| endinptOption
@@ -5501,6 +5543,8 @@ handleConditionOptions
 	| eocOption
 	| eodsOption
 	| eofOption
+	| errorOption
+	| eventerrOption
 	| expiredOption
 	| filenotfoundOption
 	| funcerrOption
@@ -5508,6 +5552,7 @@ handleConditionOptions
 	| igreqidOption
 	| illogicOption
 	| inbfmhOption
+	| incompleteOption
 	| inverrtermOption
 	| invexitreqOption
 	| invldcOption
@@ -5515,43 +5560,56 @@ handleConditionOptions
 	| invpartnOption
 	| invpartnsetOption
 	| invreqOption
+	| invtsreqOption
 	| ioerrOption
 	| iscinvreqOption
 	| itemerrOption
 	| jiderrOption
 	| lengerrOption
+	| linkabendOption
 	| loadingOption
 	| lockedOption
 	| mapfailOption
+	| modeliderrOption
 	| netnameiderrOption
 	| nodeiderrOption
 	| nojbufspOption
 	| nonvalOption
 	| nopassbkrdOption
 	| nopassbkwrOption
+	| normalOption
 	| nospaceOption
 	| nospoolOption
 	| nostartOption
 	| nostgOption
 	| notallocOption
 	| notauthOption
+	| notfinishedOption
 	| notfndOption
 	| notopenOption
+	| notsuperuserOption
 	| openerrOption
+	| outdescrerrOption
 	| overflowOption
 	| partneriderrOption
 	| partnfailOption
 	| pgmiderrOption
+	| poolerrOption
+	| processbusyOption
+	| processerrOption
+	| profileiderrOption
 	| qbusyOption
 	| qiderrOption
 	| qzeroOption
 	| rdattOption
 	| recordbusyOption
+	| residerrOption
 	| resunavailOption
 	| retpageOption
 	| rolledbackOption
 	| rtefailOption
 	| rtesomeOption
+	| segiderrOption
 	| selnerrOption
 	| sessbusyOption
 	| sessionerrOption
@@ -5560,14 +5618,24 @@ handleConditionOptions
 	| spolerrOption
 	| strelerrOption
 	| suppressedOption
+	| symbolerrOption
 	| sysbusyOption
 	| sysiderrOption
+	| taskiderrOption
+	| tciderrOption
+	| templaterrOption
 	| termerrOption
 	| termiderrOption
+	| timedoutOption
+	| timererrOption
+	| tokenerrOption
 	| transiderrOption
 	| tsioerrOption
 	| unexpinOption
+	| uowlnotfoundOption
+	| uownotfoundOption
 	| useriderrOption
+	| voliderrOption
 	| wrbrkOption
 	| exceptionOptions
 	)
@@ -5576,13 +5644,25 @@ handleConditionOptions
 ignoreConditionOptions
 	: (
 	errorOption
+	| activitybusyOption
+	| activityerrOption
 	| allocerrOption
+	| appnotfoundOption
+	| busyOption
 	| cbiderrOption
+	| ccsiderrOption
+	| changedOption
 	| channelerrOption
+	| codepageerrOption
+	| containererrOption
+	| csderrOption
 	| disabledOption
+	| dsnnotfoundOption
 	| dsstatOption
 	| dupkeyOption
 	| duprecOption
+	| dupresOption
+	| endOption
 	| enddataOption
 	| endfileOption
 	| endinptOption
@@ -5591,6 +5671,8 @@ ignoreConditionOptions
 	| eocOption
 	| eodsOption
 	| eofOption
+	| errorOption
+	| eventerrOption
 	| expiredOption
 	| filenotfoundOption
 	| funcerrOption
@@ -5598,6 +5680,7 @@ ignoreConditionOptions
 	| igreqidOption
 	| illogicOption
 	| inbfmhOption
+	| incompleteOption
 	| inverrtermOption
 	| invexitreqOption
 	| invldcOption
@@ -5605,43 +5688,56 @@ ignoreConditionOptions
 	| invpartnOption
 	| invpartnsetOption
 	| invreqOption
+	| invtsreqOption
 	| ioerrOption
 	| iscinvreqOption
 	| itemerrOption
 	| jiderrOption
 	| lengerrOption
+	| linkabendOption
 	| loadingOption
 	| lockedOption
 	| mapfailOption
+	| modeliderrOption
 	| netnameiderrOption
 	| nodeiderrOption
 	| nojbufspOption
 	| nonvalOption
 	| nopassbkrdOption
 	| nopassbkwrOption
+	| normalOption
 	| nospaceOption
 	| nospoolOption
 	| nostartOption
 	| nostgOption
 	| notallocOption
 	| notauthOption
+	| notfinishedOption
 	| notfndOption
 	| notopenOption
+	| notsuperuserOption
 	| openerrOption
+	| outdescrerrOption
 	| overflowOption
 	| partneriderrOption
 	| partnfailOption
 	| pgmiderrOption
+	| poolerrOption
+	| processbusyOption
+	| processerrOption
+	| profileiderrOption
 	| qbusyOption
 	| qiderrOption
 	| qzeroOption
 	| rdattOption
 	| recordbusyOption
+	| residerrOption
 	| resunavailOption
 	| retpageOption
 	| rolledbackOption
 	| rtefailOption
 	| rtesomeOption
+	| segiderrOption
 	| selnerrOption
 	| sessbusyOption
 	| sessionerrOption
@@ -5650,14 +5746,24 @@ ignoreConditionOptions
 	| spolerrOption
 	| strelerrOption
 	| suppressedOption
+	| symbolerrOption
 	| sysbusyOption
 	| sysiderrOption
+	| taskiderrOption
+	| tciderrOption
+	| templaterrOption
 	| termerrOption
 	| termiderrOption
+	| timedoutOption
+	| timererrOption
+	| tokenerrOption
 	| transiderrOption
 	| tsioerrOption
 	| unexpinOption
+	| uowlnotfoundOption
+	| uownotfoundOption
 	| useriderrOption
+	| voliderrOption
 	| wrbrkOption
 	| exceptionOptions
 	)
@@ -6704,6 +6810,8 @@ sendControlOptions
 	eraseaupOption
 	| eraseOption
 	| alarmOption
+	| alternateOption
+	| defaultOption
 	| freekbOption
 	| frsetOption
 	| cursorOption
@@ -7539,7 +7647,8 @@ webConverseOptions
 	| nocloseOption
 	| actionOption
 	| closeOption
-	| expectclosestatusOption
+	| expectOption
+	| closestatusOption
 	| intoOption
 	| setOption
 	| tocontainerOption
@@ -7828,8 +7937,10 @@ webSendServerOptions
 	| statuslenOption
 	| lengthOption
 	| nocloseOption
-	| immediatecloseOption
-	| eventualclosestatusOption
+	| immediateOption
+	| closeOption
+	| eventualOption
+	| closestatusOption
 	| actionOption
 	| exceptionOptions
 	)
@@ -12570,7 +12681,7 @@ setXmltransformOptions
 	)
 	;
 
-// 565 rules generated Sat Apr  6 16:13:56 CDT 2024
+// 566 rules generated Sun Apr  7 14:34:07 CDT 2024
 
 abcodeOption
 	: (
@@ -12737,6 +12848,18 @@ activeOption
 activityOption
 	: (
 	ACTIVITY arg?
+	)
+	;
+
+activitybusyOption
+	: (
+	ACTIVITYBUSY arg?
+	)
+	;
+
+activityerrOption
+	: (
+	ACTIVITYERR arg?
 	)
 	;
 
@@ -13049,6 +13172,12 @@ applminorverOption
 applnamestOption
 	: (
 	APPLNAMEST arg
+	)
+	;
+
+appnotfoundOption
+	: (
+	APPNOTFOUND arg?
 	)
 	;
 
@@ -13588,7 +13717,7 @@ bundlepartOption
 
 busyOption
 	: (
-	BUSY arg
+	BUSY arg?
 	)
 	;
 
@@ -13694,6 +13823,12 @@ ccsidOption
 	)
 	;
 
+ccsiderrOption
+	: (
+	CCSIDERR arg?
+	)
+	;
+
 cdsasizeOption
 	: (
 	CDSASIZE arg
@@ -13733,6 +13868,12 @@ changeagentOption
 changeagrelOption
 	: (
 	CHANGEAGREL arg
+	)
+	;
+
+changedOption
+	: (
+	CHANGED arg?
 	)
 	;
 
@@ -13988,6 +14129,12 @@ codepageOption
 	)
 	;
 
+codepageerrOption
+	: (
+	CODEPAGEERR arg?
+	)
+	;
+
 coldstatusOption
 	: (
 	COLDSTATUS arg
@@ -14228,6 +14375,12 @@ containercntOption
 	)
 	;
 
+containererrOption
+	: (
+	CONTAINERERR arg?
+	)
+	;
+
 contexttypeOption
 	: (
 	CONTEXTTYPE arg
@@ -14375,6 +14528,12 @@ csaOption
 csdOption
 	: (
 	CSD
+	)
+	;
+
+csderrOption
+	: (
+	CSDERR arg?
 	)
 	;
 
@@ -15158,6 +15317,12 @@ dsnamelistOption
 	)
 	;
 
+dsnnotfoundOption
+	: (
+	DSNNOTFOUND arg?
+	)
+	;
+
 dsplistOption
 	: (
 	DSPLIST arg
@@ -15275,6 +15440,12 @@ duprecOption
 dupreplaceOption
 	: (
 	DUPREPLACE
+	)
+	;
+
+dupresOption
+	: (
+	DUPRES arg?
 	)
 	;
 
@@ -15406,7 +15577,7 @@ encryptptktOption
 
 endOption
 	: (
-	END
+	END arg?
 	)
 	;
 
@@ -15782,6 +15953,12 @@ eventbindingOption
 	)
 	;
 
+eventerrOption
+	: (
+	EVENTERR arg?
+	)
+	;
+
 eventnameOption
 	: (
 	EVENTNAME arg
@@ -15803,12 +15980,6 @@ eventtypeOption
 eventualOption
 	: (
 	EVENTUAL
-	)
-	;
-
-eventualclosestatusOption
-	: (
-	EVENTUALCLOSESTATUS arg
 	)
 	;
 
@@ -15899,12 +16070,6 @@ exittracingOption
 expectOption
 	: (
 	EXPECT
-	)
-	;
-
-expectclosestatusOption
-	: (
-	EXPECTCLOSESTATUS arg
 	)
 	;
 
@@ -16850,15 +17015,15 @@ immediateOption
 	)
 	;
 
-immediatecloseOption
-	: (
-	IMMEDIATECLOSE
-	)
-	;
-
 inbfmhOption
 	: (
 	INBFMH arg?
+	)
+	;
+
+incompleteOption
+	: (
+	INCOMPLETE arg?
 	)
 	;
 
@@ -17108,12 +17273,6 @@ inviteOption
 	)
 	;
 
-inviteconfirmOption
-	: (
-	INVITECONFIRM
-	)
-	;
-
 invldcOption
 	: (
 	INVLDC arg?
@@ -17159,6 +17318,12 @@ invpartnsetOption
 invreqOption
 	: (
 	INVREQ arg?
+	)
+	;
+
+invtsreqOption
+	: (
+	INVTSREQ arg?
 	)
 	;
 
@@ -17600,12 +17765,6 @@ lastusetimeOption
 	)
 	;
 
-lastwaitOption
-	: (
-	LASTWAIT
-	)
-	;
-
 lastwarmtimeOption
 	: (
 	LASTWARMTIME arg
@@ -17723,6 +17882,12 @@ linesOption
 linkOption
 	: (
 	LINK arg?
+	)
+	;
+
+linkabendOption
+	: (
+	LINKABEND arg?
 	)
 	;
 
@@ -18326,6 +18491,12 @@ modeOption
 	)
 	;
 
+modeliderrOption
+	: (
+	MODELIDERR arg?
+	)
+	;
+
 modenameOption
 	: (
 	MODENAME arg?
@@ -18806,6 +18977,12 @@ noquiesceOption
 	)
 	;
 
+normalOption
+	: (
+	NORMAL arg?
+	)
+	;
+
 nosdtranOption
 	: (
 	NOSDTRAN
@@ -18872,6 +19049,12 @@ noteOption
 	)
 	;
 
+notfinishedOption
+	: (
+	NOTFINISHED arg?
+	)
+	;
+
 notfndOption
 	: (
 	NOTFND arg?
@@ -18893,6 +19076,12 @@ notpurgeableOption
 notruncateOption
 	: (
 	NOTRUNCATE
+	)
+	;
+
+notsuperuserOption
+	: (
+	NOTSUPERUSER arg?
 	)
 	;
 
@@ -19361,6 +19550,12 @@ outcontainerOption
 outdescrOption
 	: (
 	OUTDESCR arg
+	)
+	;
+
+outdescrerrOption
+	: (
+	OUTDESCRERR arg?
 	)
 	;
 
@@ -19904,6 +20099,12 @@ poolOption
 	)
 	;
 
+poolerrOption
+	: (
+	POOLERR arg?
+	)
+	;
+
 poolnameOption
 	: (
 	POOLNAME arg
@@ -20036,6 +20237,18 @@ processOption
 	)
 	;
 
+processbusyOption
+	: (
+	PROCESSBUSY arg?
+	)
+	;
+
+processerrOption
+	: (
+	PROCESSERR arg?
+	)
+	;
+
 processtypeOption
 	: (
 	PROCESSTYPE arg?
@@ -20063,6 +20276,12 @@ profileOption
 profiledirOption
 	: (
 	PROFILEDIR arg
+	)
+	;
+
+profileiderrOption
+	: (
+	PROFILEIDERR arg?
 	)
 	;
 
@@ -20834,6 +21053,12 @@ residencyOption
 	)
 	;
 
+residerrOption
+	: (
+	RESIDERR arg?
+	)
+	;
+
 residlenOption
 	: (
 	RESIDLEN arg
@@ -21335,6 +21560,12 @@ securitynameOption
 securitystOption
 	: (
 	SECURITYST arg
+	)
+	;
+
+segiderrOption
+	: (
+	SEGIDERR arg?
 	)
 	;
 
@@ -22172,6 +22403,12 @@ symbolOption
 	)
 	;
 
+symbolerrOption
+	: (
+	SYMBOLERR arg?
+	)
+	;
+
 symbollistOption
 	: (
 	SYMBOLLIST arg
@@ -22298,12 +22535,6 @@ tablesOption
 	)
 	;
 
-tablesfctOption
-	: (
-	TABLESFCT
-	)
-	;
-
 tablesizeOption
 	: (
 	TABLESIZE arg
@@ -22370,6 +22601,12 @@ taskidOption
 	)
 	;
 
+taskiderrOption
+	: (
+	TASKIDERR arg?
+	)
+	;
+
 taskpriorityOption
 	: (
 	TASKPRIORITY arg
@@ -22391,12 +22628,6 @@ taskstartOption
 taskstartstOption
 	: (
 	TASKSTARTST arg
-	)
-	;
-
-taskstorageOption
-	: (
-	TASKSTORAGE
 	)
 	;
 
@@ -22433,6 +22664,12 @@ tcbsOption
 tcexitstatusOption
 	: (
 	TCEXITSTATUS arg
+	)
+	;
+
+tciderrOption
+	: (
+	TCIDERR arg?
 	)
 	;
 
@@ -22511,6 +22748,12 @@ templateOption
 templatenameOption
 	: (
 	TEMPLATENAME arg
+	)
+	;
+
+templaterrOption
+	: (
+	TEMPLATERR arg?
 	)
 	;
 
@@ -22646,6 +22889,12 @@ timeOption
 	)
 	;
 
+timedoutOption
+	: (
+	TIMEDOUT arg?
+	)
+	;
+
 timeoutOption
 	: (
 	TIMEOUT arg
@@ -22661,6 +22910,12 @@ timeoutintOption
 timerOption
 	: (
 	TIMER arg?
+	)
+	;
+
+timererrOption
+	: (
+	TIMERERR arg?
 	)
 	;
 
@@ -22733,6 +22988,12 @@ toflengthOption
 tokenOption
 	: (
 	TOKEN arg?
+	)
+	;
+
+tokenerrOption
+	: (
+	TOKENERR arg?
 	)
 	;
 
@@ -23126,6 +23387,18 @@ uowlinkOption
 	)
 	;
 
+uowlnotfoundOption
+	: (
+	UOWLNOTFOUND arg?
+	)
+	;
+
+uownotfoundOption
+	: (
+	UOWNOTFOUND arg?
+	)
+	;
+
 uowstateOption
 	: (
 	UOWSTATE arg
@@ -23339,6 +23612,12 @@ versionOption
 versionlenOption
 	: (
 	VERSIONLEN arg
+	)
+	;
+
+voliderrOption
+	: (
+	VOLIDERR arg?
 	)
 	;
 
@@ -23642,5 +23921,5 @@ zcptracingOption
 	)
 	;
 
-// 2083 rules generated Sat Apr  6 16:13:56 CDT 2024
+// 2149 rules generated Sun Apr  7 14:34:07 CDT 2024
 

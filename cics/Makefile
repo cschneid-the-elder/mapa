@@ -14,7 +14,7 @@
 # genrules   generate rules from source, construct parser grammar
 # 
 # To the extent possible, maintenance should be done on the apiSource
-# and spiSource files; and the CICSz*Template* files.
+# and spiSource files and the CICSz*Template* files.
 # 
 # To build...
 # 
@@ -128,6 +128,20 @@ ifneq ("$(wildcard src/CICSzParser.g4)","")
 	mv src/CICSzParser.g4 $(oldparserfile)
 endif
 	cat src/CICSzParserTemplate01 src/testRules4_00 src/CICSzParserTemplate02 src/testRules4_01 src/CICSzParserTemplate03 src/testRules1 src/testRules3 src/testRules2 > src/CICSzParser.g4
+
+oldspifile := ./testdata/cics_spi.$(shell date +%Y%m%d%H%M%S)
+extractspi:
+ifneq ("$(wildcard testdata/cics_spi)","")
+	mv testdata/cics_spi $(oldspifile)
+endif
+	cat ../cobol/testdata/local/test9026.cbl | src/extractCICS > testdata/cics_spi
+
+oldapifile := ./testdata/cics_api.$(shell date +%Y%m%d%H%M%S)
+extractapi:
+ifneq ("$(wildcard testdata/cics_api)","")
+	mv testdata/cics_api $(oldapifile)
+endif
+	cat ../cobol/testdata/local/test9022.cbl | src/extractCICS > testdata/cics_api
 
 ./src/CICSzLexer.tokens: 
 

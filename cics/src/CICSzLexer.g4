@@ -47,7 +47,15 @@ EXEC_CICS
 	;
 
 END_EXEC
-	: E N D '-' E X E C '.'?
+	: E N D HYPHEN E X E C DOT?
+	;
+
+HYPHEN
+	: '-'
+	;
+
+DOT
+	: '.'
 	;
 
 SEMICOLON
@@ -198,6 +206,14 @@ ACTIVE
 
 ACTIVITY
 	: A C T I V I T Y 
+	;
+
+ACTIVITYBUSY
+	: A C T I V I T Y B U S Y 
+	;
+
+ACTIVITYERR
+	: A C T I V I T Y E R R 
 	;
 
 ACTIVITYID
@@ -406,6 +422,10 @@ APPLMINORVER
 
 APPLNAMEST
 	: A P P L N A M E S T 
+	;
+
+APPNOTFOUND
+	: A P P N O T F O U N D 
 	;
 
 ARCHIVEFILE
@@ -836,6 +856,10 @@ CCSID
 	: C C S I D 
 	;
 
+CCSIDERR
+	: C C S I D E R R 
+	;
+
 CDSASIZE
 	: C D S A S I Z E 
 	;
@@ -862,6 +886,10 @@ CHANGEAGENT
 
 CHANGEAGREL
 	: C H A N G E A G R E L 
+	;
+
+CHANGED
+	: C H A N G E D 
 	;
 
 CHANGETIME
@@ -1032,6 +1060,10 @@ CODEPAGE
 	: C O D E P A G E 
 	;
 
+CODEPAGEERR
+	: C O D E P A G E E R R 
+	;
+
 COLDSTATUS
 	: C O L D S T A T U S 
 	;
@@ -1192,6 +1224,10 @@ CONTAINERCNT
 	: C O N T A I N E R C N T 
 	;
 
+CONTAINERERR
+	: C O N T A I N E R E R R 
+	;
+
 CONTEXTTYPE
 	: C O N T E X T T Y P E 
 	;
@@ -1290,6 +1326,10 @@ CSA
 
 CSD
 	: C S D 
+	;
+
+CSDERR
+	: C S D E R R 
 	;
 
 CTLCHAR
@@ -1812,6 +1852,10 @@ DSNAMELIST
 	: D S N A M E L I S T 
 	;
 
+DSNNOTFOUND
+	: D S N N O T F O U N D 
+	;
+
 DSPLIST
 	: D S P L I S T 
 	;
@@ -1890,6 +1934,10 @@ DUPREC
 
 DUPREPLACE
 	: D U P R E P L A C E 
+	;
+
+DUPRES
+	: D U P R E S 
 	;
 
 DURATION
@@ -2228,6 +2276,10 @@ EVENTBINDING
 	: E V E N T B I N D I N G 
 	;
 
+EVENTERR
+	: E V E N T E R R 
+	;
+
 EVENTNAME
 	: E V E N T N A M E 
 	;
@@ -2242,10 +2294,6 @@ EVENTTYPE
 
 EVENTUAL
 	: E V E N T U A L 
-	;
-
-EVENTUALCLOSESTATUS
-	: E V E N T U A L C L O S E S T A T U S 
 	;
 
 EWASUPP
@@ -2306,10 +2354,6 @@ EXITTRACING
 
 EXPECT
 	: E X P E C T 
-	;
-
-EXPECTCLOSESTATUS
-	: E X P E C T C L O S E S T A T U S 
 	;
 
 EXPIRED
@@ -2940,12 +2984,12 @@ IMMEDIATE
 	: I M M E D I A T E 
 	;
 
-IMMEDIATECLOSE
-	: I M M E D I A T E C L O S E 
-	;
-
 INBFMH
 	: I N B F M H 
+	;
+
+INCOMPLETE
+	: I N C O M P L E T E 
 	;
 
 INCONTAINER
@@ -3112,10 +3156,6 @@ INVITE
 	: I N V I T E 
 	;
 
-INVITECONFIRM
-	: I N V I T E C O N F I R M 
-	;
-
 INVLDC
 	: I N V L D C 
 	;
@@ -3146,6 +3186,10 @@ INVPARTNSET
 
 INVREQ
 	: I N V R E Q 
+	;
+
+INVTSREQ
+	: I N V T S R E Q 
 	;
 
 IOERR
@@ -3440,10 +3484,6 @@ LASTUSETIME
 	: L A S T U S E T I M E 
 	;
 
-LASTWAIT
-	: L A S T W A I T 
-	;
-
 LASTWARMTIME
 	: L A S T W A R M T I M E 
 	;
@@ -3522,6 +3562,10 @@ LINES
 
 LINK
 	: L I N K 
+	;
+
+LINKABEND
+	: L I N K A B E N D 
 	;
 
 LINKAUTH
@@ -3924,6 +3968,10 @@ MODE
 	: M O D E 
 	;
 
+MODELIDERR
+	: M O D E L I D E R R 
+	;
+
 MODENAME
 	: M O D E N A M E 
 	;
@@ -4244,6 +4292,10 @@ NOQUIESCE
 	: N O Q U I E S C E 
 	;
 
+NORMAL
+	: N O R M A L 
+	;
+
 NOSDTRAN
 	: N O S D T R A N 
 	;
@@ -4288,6 +4340,10 @@ NOTE
 	: N O T E 
 	;
 
+NOTFINISHED
+	: N O T F I N I S H E D 
+	;
+
 NOTFND
 	: N O T F N D 
 	;
@@ -4302,6 +4358,10 @@ NOTPURGEABLE
 
 NOTRUNCATE
 	: N O T R U N C A T E 
+	;
+
+NOTSUPERUSER
+	: N O T S U P E R U S E R 
 	;
 
 NOWAIT
@@ -4614,6 +4674,10 @@ OUTCONTAINER
 
 OUTDESCR
 	: O U T D E S C R 
+	;
+
+OUTDESCRERR
+	: O U T D E S C R E R R 
 	;
 
 OUTLINE
@@ -4976,6 +5040,10 @@ POOL
 	: P O O L 
 	;
 
+POOLERR
+	: P O O L E R R 
+	;
+
 POOLNAME
 	: P O O L N A M E 
 	;
@@ -5064,6 +5132,14 @@ PROCESS
 	: P R O C E S S 
 	;
 
+PROCESSBUSY
+	: P R O C E S S B U S Y 
+	;
+
+PROCESSERR
+	: P R O C E S S E R R 
+	;
+
 PROCESSTYPE
 	: P R O C E S S T Y P E 
 	;
@@ -5082,6 +5158,10 @@ PROFILE
 
 PROFILEDIR
 	: P R O F I L E D I R 
+	;
+
+PROFILEIDERR
+	: P R O F I L E I D E R R 
 	;
 
 PROGAUTO
@@ -5596,6 +5676,10 @@ RESIDENCY
 	: R E S I D E N C Y 
 	;
 
+RESIDERR
+	: R E S I D E R R 
+	;
+
 RESIDLEN
 	: R E S I D L E N 
 	;
@@ -5930,6 +6014,10 @@ SECURITYNAME
 
 SECURITYST
 	: S E C U R I T Y S T 
+	;
+
+SEGIDERR
+	: S E G I D E R R 
 	;
 
 SEGMENTLIST
@@ -6492,6 +6580,10 @@ SYMBOL
 	: S Y M B O L 
 	;
 
+SYMBOLERR
+	: S Y M B O L E R R 
+	;
+
 SYMBOLLIST
 	: S Y M B O L L I S T 
 	;
@@ -6576,10 +6668,6 @@ TABLES
 	: T A B L E S 
 	;
 
-TABLESFCT
-	: T A B L E S F C T 
-	;
-
 TABLESIZE
 	: T A B L E S I Z E 
 	;
@@ -6624,6 +6712,10 @@ TASKID
 	: T A S K I D 
 	;
 
+TASKIDERR
+	: T A S K I D E R R 
+	;
+
 TASKPRIORITY
 	: T A S K P R I O R I T Y 
 	;
@@ -6638,10 +6730,6 @@ TASKSTART
 
 TASKSTARTST
 	: T A S K S T A R T S T 
-	;
-
-TASKSTORAGE
-	: T A S K S T O R A G E 
 	;
 
 TASKSUBPOOL
@@ -6666,6 +6754,10 @@ TCBS
 
 TCEXITSTATUS
 	: T C E X I T S T A T U S 
+	;
+
+TCIDERR
+	: T C I D E R R 
 	;
 
 TCLASS
@@ -6718,6 +6810,10 @@ TEMPLATE
 
 TEMPLATENAME
 	: T E M P L A T E N A M E 
+	;
+
+TEMPLATERR
+	: T E M P L A T E R R 
 	;
 
 TEMPLATETYPE
@@ -6808,6 +6904,10 @@ TIME
 	: T I M E 
 	;
 
+TIMEDOUT
+	: T I M E D O U T 
+	;
+
 TIMEOUT
 	: T I M E O U T 
 	;
@@ -6818,6 +6918,10 @@ TIMEOUTINT
 
 TIMER
 	: T I M E R 
+	;
+
+TIMERERR
+	: T I M E R E R R 
 	;
 
 TIMESEP
@@ -6866,6 +6970,10 @@ TOFLENGTH
 
 TOKEN
 	: T O K E N 
+	;
+
+TOKENERR
+	: T O K E N E R R 
 	;
 
 TOKENLEN
@@ -7128,6 +7236,14 @@ UOWLINK
 	: U O W L I N K 
 	;
 
+UOWLNOTFOUND
+	: U O W L N O T F O U N D 
+	;
+
+UOWNOTFOUND
+	: U O W N O T F O U N D 
+	;
+
 UOWSTATE
 	: U O W S T A T E 
 	;
@@ -7270,6 +7386,10 @@ VERSION
 
 VERSIONLEN
 	: V E R S I O N L E N 
+	;
+
+VOLIDERR
+	: V O L I D E R R 
 	;
 
 VOLUME
@@ -7472,7 +7592,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 1846 rules generated Sat Apr  6 16:13:50 CDT 2024
+// 1874 rules generated Sun Apr  7 14:34:05 CDT 2024
 
 mode ARG_MODE;
 

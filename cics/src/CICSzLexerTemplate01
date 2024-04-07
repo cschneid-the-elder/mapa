@@ -47,7 +47,15 @@ EXEC_CICS
 	;
 
 END_EXEC
-	: E N D '-' E X E C '.'?
+	: E N D HYPHEN E X E C DOT?
+	;
+
+HYPHEN
+	: '-'
+	;
+
+DOT
+	: '.'
 	;
 
 SEMICOLON

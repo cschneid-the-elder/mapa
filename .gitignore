@@ -93,6 +93,11 @@ db2z/DB2zSQL.jar
 #
 cobol/DB2zSQL.jar.*
 #
+# these are backup copies of the generated CICSz grammars
+#
+cics/src/CICSzLexer.g4.*
+cics/src/CICSzParser.g4.*
+#
 # test data that should not be made public
 #
 db2z/testdata/sql_NOUPLOAD_*

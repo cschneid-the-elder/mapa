@@ -1,35 +1,20 @@
-       Identification Division.
-       Program-ID.    test9022.
-      *
-      * Test all the parameters of all the CICS API commands.
-      * This code definitely won't compile cleanly, in part
-      * due to mutually exclusive options on some commands.
-      * It's just here to test parsing.
-      *
-      * Current as of CICS TS 6.1
-      *
-       Procedure Division.
-
            EXEC CICS
                 ABEND
                 ABCODE(X)
                 CANCEL
                 NODUMP
            END-EXEC
-
            EXEC CICS
                 ACQUIRE
                 PROCESS(X)
                 PROCESSTYPE(X)
                 ACTIVITYID(X)
            END-EXEC
-
            EXEC CICS
                 ADD
                 SUBEVENT(X)
                 EVENT(X)
            END-EXEC
-
            EXEC CICS
                 ADDRESS
                 ACEE(X)
@@ -39,13 +24,11 @@
                 TCTUA(X)
                 TWA(X)
            END-EXEC
-
            EXEC CICS
                 ADDRESS
                 SET(X)
                 USING(X)
            END-EXEC
-
            EXEC CICS
                 ALLOCATE
                 SYSID(X)
@@ -54,7 +37,6 @@
                 NOQUEUE
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 ALLOCATE
                 SESSION(X)
@@ -62,11 +44,9 @@
                 PROFILE(X)
                 NOQUEUE
            END-EXEC
-
            EXEC CICS
                 ASKTIME ABSTIME(X)
            END-EXEC
-
            EXEC CICS
                 ASSIGN
                 ABCODE(data-area)
@@ -182,14 +162,12 @@
                 USERPRIORITY(data-area)
                 VALIDATION(data-area)
            END-EXEC
-
            EXEC CICS
                 BIF
                 DEEDIT
                 FIELD(X)
                 LENGTH(X)
            END-EXEC
-
            EXEC CICS
                 BIF
                 DIGEST
@@ -201,7 +179,6 @@
                 DIGESTTYPE(CVDA)
                 RESULT(X)
            END-EXEC
-
            EXEC CICS
                 BUILD
                 ATTACH
@@ -215,21 +192,18 @@
                 DATASTR(X)
                 RECFM(X)
            END-EXEC
-
            EXEC CICS
                 CANCEL
                 REQID(X)
                 SYSID(X)
                 TRANSID(X)
            END-EXEC
-
            EXEC CICS
                 CANCEL
                 ACTIVITY(X)
                 ACQACTIVITY
                 ACQPROCESS
            END-EXEC
-
            EXEC CICS
                 CHANGE
                 PHRASE(X)
@@ -240,7 +214,6 @@
                 ESMREASON(X)
                 ESMRESP(X)
            END-EXEC
-
            EXEC CICS
                 CHANGE
                 PASSWORD(X)
@@ -249,13 +222,11 @@
                 ESMREASON(X)
                 ESMRESP(X)
            END-EXEC
-
            EXEC CICS
                 CHANGE
                 TASK
                 PRIORITY(X)
            END-EXEC
-
            EXEC CICS
                 CHECK
                 ACQPROCESS
@@ -265,7 +236,6 @@
                 MODE(X)
                 SUSPSTATUS(X)
            END-EXEC
-
            EXEC CICS
                 CHECK
                 ACTIVITY(X)
@@ -276,13 +246,11 @@
                 MODE(X)
                 SUSPSTATUS(X)
            END-EXEC
-
            EXEC CICS
                 CHECK
                 TIMER(X)
                 STATUS(X)
            END-EXEC
-
            EXEC CICS
                 CONNECT
                 PROCESS
@@ -296,7 +264,6 @@
                 SYNCLEVEL(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 CONVERSE
                 FROM(X)
@@ -310,7 +277,6 @@
                 MAXFLENGTH(X)
                 NOTRUNCATE
            END-EXEC
-
            EXEC CICS
                 CONVERSE
                 CONVID(X)
@@ -326,7 +292,6 @@
                 NOTRUNCATE
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 CONVERSE
                 FROM(X)
@@ -346,7 +311,6 @@
                 NOTRUNCATE
                 ASIS
            END-EXEC
-
            EXEC CICS
                 CONVERSE
                 FROM(X)
@@ -361,7 +325,6 @@
                 DEFRESP
                 FMH
            END-EXEC
-
            EXEC CICS
                 CONVERSE
                 FROM(X)
@@ -381,7 +344,6 @@
                 DEFRESP
                 NOTRUNCATE
            END-EXEC
-
            EXEC CICS
                 CONVERSE
                 STRFIELD
@@ -389,13 +351,11 @@
                 LEAVEKB
                 PSEUDOBIN
            END-EXEC
-
            EXEC CICS
                 CONVERTTIME
                 DATESTRING(X)
                 ABSTIME(X)
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 ACTIVITY(X)
@@ -405,7 +365,6 @@
                 USERID(X)
                 ACTIVITYID(X)
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 COMPOSITE
@@ -421,7 +380,6 @@
                 SUBEVENT7(X)
                 SUBEVENT8(X)
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 COUNTER(X)
@@ -431,7 +389,6 @@
                 MAXIMUM(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 DCOUNTER(X)
@@ -441,13 +398,11 @@
                 MAXIMUM(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 INPUT
                 EVENT(X)
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 PROCESS(X)
@@ -457,7 +412,6 @@
                 USERID(X)
                 NOCHECK
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 TIMER(X)
@@ -468,7 +422,6 @@
                 MINUTES(X)
                 SECONDS(X)
            END-EXEC
-
            EXEC CICS
                 DEFINE
                 TIMER(X)
@@ -483,7 +436,6 @@
                 DAYOFMONTH(X)
                 DAYOFYEAR(X)
            END-EXEC
-
            EXEC CICS
                 DELAY
                 INTERVAL(X)
@@ -499,7 +451,6 @@
                 SECONDS(X)
                 REQID(X)
            END-EXEC
-
            EXEC CICS
                 DELETE
                 FILE(X)
@@ -513,17 +464,14 @@
                 RBA
                 RRN
            END-EXEC
-
            EXEC CICS
                 DELETE
                 ACTIVITY(X)
            END-EXEC
-
            EXEC CICS
                 DELETE
                 CHANNEL(X)
            END-EXEC
-
            EXEC CICS
                 DELETE
                 CONTAINER(X)
@@ -532,44 +480,37 @@
                 PROCESS
                 ACQPROCESS
            END-EXEC
-
            EXEC CICS
                 DELETE
                 CONTAINER(X)
                 CHANNEL(X)
            END-EXEC
-
            EXEC CICS
                 DELETE
                 COUNTER(X)
                 POOL(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 DELETE
                 DCOUNTER(X)
                 POOL(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 DELETE
                 EVENT(X)
            END-EXEC
-
            EXEC CICS
                 DELETE
                 TIMER(X)
            END-EXEC
-
            EXEC CICS
                 DELETEQ
                 TD
                 QUEUE(X)
                 SYSID(X)
            END-EXEC
-
            EXEC CICS
                 DELETEQ
                 TS
@@ -577,7 +518,6 @@
                 QNAME(X)
                 SYSID(X)
            END-EXEC
-
            EXEC CICS
                 DEQ
                 RESOURCE(X)
@@ -586,7 +526,6 @@
                 MAXLIFETIME(X)
                 TASK
            END-EXEC
-
            EXEC CICS
                 DOCUMENT
                 CREATE
@@ -604,13 +543,11 @@
                 DOCSIZE(X)
                 HOSTCODEPAGE(X)
            END-EXEC
-
            EXEC CICS
                 DOCUMENT
                 DELETE
                 DOCTOKEN(X)
            END-EXEC
-
            EXEC CICS
                 DOCUMENT
                 INSERT
@@ -628,7 +565,6 @@
                 AT(X)
                 TO(X)
            END-EXEC
-
            EXEC CICS
                 DOCUMENT
                 RETRIEVE
@@ -639,7 +575,6 @@
                 CHARACTERSET(X)
                 DATAONLY
            END-EXEC
-
            EXEC CICS
                 DOCUMENT
                 SET
@@ -651,7 +586,6 @@
                 LENGTH(X)
                 UNESCAPED
            END-EXEC
-
            EXEC CICS
                 DUMP
                 TRANSACTION
@@ -676,44 +610,37 @@
                 TCT
                 DUMPID(X)
            END-EXEC
-
            EXEC CICS
                 ENDBR
                 FILE(X)
                 REQID(X)
                 SYSID(X)
            END-EXEC
-
            EXEC CICS
                 ENDBROWSE
                 ACTIVITY
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 ENDBROWSE
                 CONTAINER
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 ENDBROWSE
                 EVENT
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 ENDBROWSE
                 PROCESS
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 ENDBROWSE
                 TIMER
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 ENQ
                 RESOURCE(X)
@@ -723,7 +650,6 @@
                 TASK
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 ENTER
                 TRACENUM(X)
@@ -732,7 +658,6 @@
                 RESOURCE(X)
                 EXCEPTION
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 ATTACH
@@ -748,7 +673,6 @@
                 DATASTR(X)
                 RECFM(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 ATTRIBUTES
@@ -756,7 +680,6 @@
                 SESSION(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 CERTIFICATE(X)
@@ -779,7 +702,6 @@
                 ORGUNIT(X)
                 ORGUNITLEN(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 LOGONMSG
@@ -787,7 +709,6 @@
                 SET(X)
                 LENGTH(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 PROCESS
@@ -799,7 +720,6 @@
                 PIPLIST(X)
                 PIPLENGTH(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 TCPIP
@@ -825,7 +745,6 @@
                 PRIVACY(X)
                 MAXDATALEN(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 TCT
@@ -833,7 +752,6 @@
                 SYSID(X)
                 TERMID(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 WEB
@@ -853,7 +771,6 @@
                 REQUESTTYPE(X)
                 URIMAP(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 WEB
@@ -871,7 +788,6 @@
                 REALM(X)
                 REALMLEN(X)
            END-EXEC
-
            EXEC CICS
                 FETCH
                 ANY(X)
@@ -881,7 +797,6 @@
                 NOSUSPEND
                 TIMEOUT(X)
            END-EXEC
-
            EXEC CICS
                 FETCH
                 CHILD(X)
@@ -891,14 +806,12 @@
                 NOSUSPEND
                 TIMEOUT(X)
            END-EXEC
-
            EXEC CICS
                 FORCE
                 TIMER
                 ACQACTIVITY
                 ACQPROCESS
            END-EXEC
-
            EXEC CICS
                 FORMATTIME
                 ABSTIME(X)
@@ -925,31 +838,26 @@
                 YYYYDDMM(X)
                 YYYYMMDD(X)
            END-EXEC
-
            EXEC CICS
                 FREE
                 CONVID(X)
                 SESSION(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 FREE
                 CHILD(X)
            END-EXEC
-
            EXEC CICS
                 FREEMAIN
                 DATA(X)
                 DATAPOINTER(X)
            END-EXEC
-
            EXEC CICS
                 FREEMAIN64
                 DATA(X)
                 DATAPOINTER(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ALLOCATE
@@ -961,7 +869,6 @@
                 NOQUEUE
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ASSIGN
@@ -969,7 +876,6 @@
                 PRINSYSID(X)
                 RETCODE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 CONNECT
@@ -985,7 +891,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 EXTRACT
@@ -995,7 +900,6 @@
                 CONVDATA(X)
                 RETCODE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 EXTRACT
@@ -1009,7 +913,6 @@
                 PIPLENGTH(X)
                 RETCODE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 FREE
@@ -1018,7 +921,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ISSUE
@@ -1028,7 +930,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ISSUE
@@ -1038,7 +939,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ISSUE
@@ -1048,7 +948,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ISSUE
@@ -1058,7 +957,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 ISSUE
@@ -1068,7 +966,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 RECEIVE
@@ -1083,7 +980,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 SEND
@@ -1098,7 +994,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GDS
                 WAIT
@@ -1107,7 +1002,6 @@
                 RETCODE(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 GET
                 CONTAINER(X)
@@ -1120,7 +1014,6 @@
                 NODATA
                 FLENGTH(X)
            END-EXEC
-
            EXEC CICS
                 GET
                 CONTAINER(X)
@@ -1135,7 +1028,6 @@
                 CONVERTST(X)
                 CCSID(X)
            END-EXEC
-
            EXEC CICS
                 GET
                 COUNTER(X)
@@ -1148,7 +1040,6 @@
                 COMPAREMAX(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 GET
                 DCOUNTER(X)
@@ -1161,7 +1052,6 @@
                 COMPAREMAX(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 GETMAIN
                 SET(X)
@@ -1175,7 +1065,6 @@
                 USERDATAKEY
                 CICSDATAKEY
            END-EXEC
-
            EXEC CICS
                 GETMAIN64
                 SET(X)
@@ -1187,7 +1076,6 @@
                 USERDATAKEY
                 CICSDATAKEY
            END-EXEC
-
            EXEC CICS
                 GETNEXT
                 ACTIVITY(X)
@@ -1195,13 +1083,11 @@
                 ACTIVITYID(X)
                 LEVEL(X)
            END-EXEC
-
            EXEC CICS
                 GETNEXT
                 CONTAINER(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 GETNEXT
                 EVENT(X)
@@ -1212,14 +1098,12 @@
                 PREDICATE(X)
                 TIMER(X)
            END-EXEC
-
            EXEC CICS
                 GETNEXT
                 PROCESS(X)
                 BROWSETOKEN(X)
                 ACTIVITYID(X)
            END-EXEC
-
            EXEC CICS
                 GETNEXT
                 TIMER(X)
@@ -1229,7 +1113,6 @@
                 ABSTIME(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 GET64
                 CONTAINER(X)
@@ -1244,7 +1127,6 @@
                 CONVERTST(X)
                 CCSID(X)
            END-EXEC
-
            EXEC CICS
                 HANDLE
                 ABEND
@@ -1253,7 +1135,6 @@
                 LABEL(X)
                 RESET
            END-EXEC
-
            EXEC CICS
                 HANDLE
                 AID
@@ -1292,7 +1173,6 @@
                 PF24
                 TRIGGER
            END-EXEC
-
            EXEC CICS
                 HANDLE
                 CONDITION
@@ -1418,7 +1298,6 @@
                 APPNOTFOUND
                 BUSY
            END-EXEC
-
            EXEC CICS
                 HANDLE
                 CONDITION
@@ -1544,7 +1423,6 @@
                 APPNOTFOUND(LABEL1)
                 BUSY(LABEL1)
            END-EXEC
-
            EXEC CICS
                 IGNORE
                 CONDITION
@@ -1670,7 +1548,6 @@
                 APPNOTFOUND
                 BUSY
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 ACTIVITYID(X)
@@ -1687,7 +1564,6 @@
                 TRANSID(X)
                 USERID(X)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CONTAINER(X)
@@ -1697,7 +1573,6 @@
                 DATALENGTH(X)
                 SET(X)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EVENT(X)
@@ -1708,14 +1583,12 @@
                 PREDICATE(X)
                 TIMER(X)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 PROCESS(X)
                 PROCESSTYPE(X)
                 ACTIVITYID(X)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TIMER(X)
@@ -1724,7 +1597,6 @@
                 STATUS(X)
                 ABSTIME(X)
            END-EXEC
-
            EXEC CICS
                 INVOKE
                 APPLICATION(X)
@@ -1738,7 +1610,6 @@
                 LENGTH(X)
                 CHANNEL(X)
            END-EXEC
-
            EXEC CICS
                 INVOKE
                 SERVICE(X)
@@ -1749,7 +1620,6 @@
                 SCOPE(X)
                 SCOPELEN(X)
            END-EXEC
-
            EXEC CICS
                 INVOKE
                 WEBSERVICE(X)
@@ -1760,14 +1630,12 @@
                 SCOPE(X)
                 SCOPELEN(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ABEND
                 CONVID(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ABORT
@@ -1784,7 +1652,6 @@
                 VOLUME(X)
                 VOLUMELENG(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ADD
@@ -1800,14 +1667,12 @@
                 RIDFLD(X)
                 RRN
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 CONFIRMATION
                 CONVID(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 COPY
@@ -1815,13 +1680,11 @@
                 CTLCHAR(X)
                 WAIT
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 DISCONNECT
                 SESSION(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 END
@@ -1838,18 +1701,15 @@
                 VOLUME(X)
                 VOLUMELENG(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ENDFILE
                 ENDOUTPUT
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 EODS
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ERASE
@@ -1865,27 +1725,23 @@
                 DEFRESP
                 NOWAIT
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ERASEAUP
                 WAIT
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 ERROR
                 CONVID(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 LOAD
                 PROGRAM(X)
                 CONVERSE
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 NOTE
@@ -1896,7 +1752,6 @@
                 RIDFLD(X)
                 RRN
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 PASS
@@ -1907,19 +1762,16 @@
                 LOGONLOGMODE
                 NOQUIESCE
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 PREPARE
                 CONVID(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 PRINT
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 QUERY
@@ -1928,7 +1780,6 @@
                 VOLUME(X)
                 VOLUMELENG(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 RECEIVE
@@ -1936,7 +1787,6 @@
                 SET(X)
                 LENGTH(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 REPLACE
@@ -1954,12 +1804,10 @@
                 DEFRESP
                 NOWAIT
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 RESET
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 SEND
@@ -1978,21 +1826,18 @@
                 FROM(X)
                 LENGTH(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 SIGNAL
                 CONVID(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 SIGNAL
                 CONVID(X)
                 SESSION(X)
            END-EXEC
-
            EXEC CICS
                 ISSUE
                 SEND
@@ -2009,11 +1854,9 @@
                 VOLUME(X)
                 VOLUMELENG(X)
            END-EXEC
-
            EXEC CICS
                 JOURNAL
            END-EXEC
-
            EXEC CICS
                 LINK
                 PROGRAM('SAMVIMES')
@@ -2027,20 +1870,17 @@
                 SYNCONRETURN
                 TRANSID(X)
            END-EXEC
-
            EXEC CICS
                 LINK
                 ACQPROCESS
                 INPUTEVENT(X)
            END-EXEC
-
            EXEC CICS
                 LINK
                 ACTIVITY(X)
                 ACQACTIVITY
                 INPUTEVENT(X)
            END-EXEC
-
            EXEC CICS
                 LOAD
                 PROGRAM(X)
@@ -2050,7 +1890,6 @@
                 ENTRY(X)
                 HOLD
            END-EXEC
-
            EXEC CICS
                 MONITOR
                 POINT(X)
@@ -2058,7 +1897,6 @@
                 DATA2(X)
                 ENTRYNAME(X)
            END-EXEC
-
            EXEC CICS
                 MOVE
                 CONTAINER(X)
@@ -2068,7 +1906,6 @@
                 TOPROCESS
                 TOACTIVITY(X)
            END-EXEC
-
            EXEC CICS
                 MOVE
                 CONTAINER(X)
@@ -2076,18 +1913,15 @@
                 CHANNEL(X)
                 TOCHANNEL(X)
            END-EXEC
-
            EXEC CICS
                 POINT
                 CONVID(X)
                 SESSION(X)
            END-EXEC
-
            EXEC CICS
                 POP
                 HANDLE
            END-EXEC
-
            EXEC CICS
                 POST
                 INTERVAL(X)
@@ -2100,17 +1934,14 @@
                 SET(X)
                 REQID(X)
            END-EXEC
-
            EXEC CICS
                 PURGE
                 MESSAGE
            END-EXEC
-
            EXEC CICS
                 PUSH
                 HANDLE
            END-EXEC
-
            EXEC CICS
                 PUT
                 CONTAINER(X)
@@ -2121,7 +1952,6 @@
                 FROM(X)
                 FLENGTH(X)
            END-EXEC
-
            EXEC CICS
                 PUT
                 CONTAINER(X)
@@ -2135,7 +1965,6 @@
                 FROMCODEPAGE(X)
                 APPEND
            END-EXEC
-
            EXEC CICS
                 PUT64
                 CONTAINER(X)
@@ -2149,13 +1978,11 @@
                 FROMCODEPAGE(X)
                 APPEND
            END-EXEC
-
            EXEC CICS
                 QUERY
                 CHANNEL(X)
                 CONTAINERCNT(X)
            END-EXEC
-
            EXEC CICS
                 QUERY
                 COUNTER(X)
@@ -2165,7 +1992,6 @@
                 MAXIMUM(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 QUERY
                 DCOUNTER(X)
@@ -2175,7 +2001,6 @@
                 MAXIMUM(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 QUERY SECURITY
                 RESTYPE(X)
@@ -2189,7 +2014,6 @@
                 CONTROL(X)
                 ALTER(X)
            END-EXEC
-
            EXEC CICS
                 READ
                 FILE(X)
@@ -2213,7 +2037,6 @@
                 GTEQ
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 READNEXT
                 FILE(X)
@@ -2234,7 +2057,6 @@
                 XRBA
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 READPREV
                 FILE(X)
@@ -2255,7 +2077,6 @@
                 XRBA
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 READQ
                 TD
@@ -2266,7 +2087,6 @@
                 SYSID(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 READQ
                 TS
@@ -2280,7 +2100,6 @@
                 ITEM(X)
                 SYSID(X)
            END-EXEC
-
            EXEC CICS
                 RECEIVE
                 ASIS
@@ -2296,7 +2115,6 @@
                 SET(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 RECEIVE
                 ASIS
@@ -2314,7 +2132,6 @@
                 PASSBK
                 PSEUDOBIN
            END-EXEC
-
            EXEC CICS
                 RECEIVE
                 MAP(X)
@@ -2327,7 +2144,6 @@
                 ASIS
                 INPARTN(X)
            END-EXEC
-
            EXEC CICS
                 RECEIVE
                 MAP(X)
@@ -2338,7 +2154,6 @@
                 INTO(X)
                 SET(X)
            END-EXEC
-
            EXEC CICS
                 RECEIVE
                 PARTN(X)
@@ -2347,18 +2162,15 @@
                 LENGTH(X)
                 ASIS
            END-EXEC
-
            EXEC CICS
                 RELEASE
                 PROGRAM(X)
            END-EXEC
-
            EXEC CICS
                 REMOVE
                 SUBEVENT(X)
                 EVENT(X)
            END-EXEC
-
            EXEC CICS
                 REQUEST
                 ENCRYPTPTKT(X)
@@ -2368,7 +2180,6 @@
                 ESMREASON(X)
                 ESMRESP(X)
            END-EXEC
-
            EXEC CICS
                 REQUEST
                 PASSTICKET(X)
@@ -2376,17 +2187,14 @@
                 ESMRESP(X)
                 ESMREASON(X)
            END-EXEC
-
            EXEC CICS
                 RESET
                 ACQPROCESS
            END-EXEC
-
            EXEC CICS
                 RESET
                 ACTIVITY(X)
            END-EXEC
-
            EXEC CICS
                 RESETBR
                 FILE(X)
@@ -2401,14 +2209,12 @@
                 RRN
                 XRBA
            END-EXEC
-
            EXEC CICS
                 RESUME
                 ACQACTIVITY
                 ACQPROCESS
                 ACTIVITY(X)
            END-EXEC
-
            EXEC CICS
                 RETRIEVE
                 INTO(X)
@@ -2419,21 +2225,18 @@
                 QUEUE(X)
                 WAIT
            END-EXEC
-
            EXEC CICS
                 RETRIEVE
                 REATTACH
                 EVENT(X)
                 EVENTTYPE(X)
            END-EXEC
-
            EXEC CICS
                 RETRIEVE
                 SUBEVENT(X)
                 EVENT(X)
                 EVENTTYPE(X)
            END-EXEC
-
            EXEC CICS
                 RETURN
                 TRANSID(EIBTRNID)
@@ -2445,7 +2248,6 @@
                 INPUTMSGLEN(X)
                 ENDACTIVITY
            END-EXEC
-
            EXEC CICS
                 REWIND
                 COUNTER(X)
@@ -2453,7 +2255,6 @@
                 INCREMENT(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 REWIND
                 DCOUNTER(X)
@@ -2461,7 +2262,6 @@
                 INCREMENT(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 REWRITE
                 FILE(X)
@@ -2471,7 +2271,6 @@
                 LENGTH(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 ROUTE
                 INTERVAL(X)
@@ -2489,7 +2288,6 @@
                 LDC(X)
                 NLEOM
            END-EXEC
-
            EXEC CICS
                 RUN
                 ACTIVITY(X)
@@ -2500,14 +2298,12 @@
                 FACILITYTOKN(X)
                 INPUTEVENT(X)
            END-EXEC
-
            EXEC CICS
                 RUN
                 TRANSID(X)
                 CHANNEL(X)
                 CHILD(X)
            END-EXEC
-
            EXEC CICS
                 SEND
                 ALTERNATE
@@ -2534,7 +2330,6 @@
                 STRFIELD
                 WAIT
            END-EXEC
-
            EXEC CICS
                 SEND
                 ALTERNATE
@@ -2558,7 +2353,6 @@
                 STRFIELD
                 WAIT
            END-EXEC
-
            EXEC CICS
                 SEND
                 CONTROL
@@ -2588,7 +2382,6 @@
                 TERMINAL
                 WAIT
            END-EXEC
-
            EXEC CICS
                 SEND
                 MAP(X)
@@ -2626,7 +2419,6 @@
                 TERMINAL
                 WAIT
            END-EXEC
-
            EXEC CICS
                 SEND
                 MAP(X)
@@ -2646,7 +2438,6 @@
                 ALARM
                 FRSET
            END-EXEC
-
            EXEC CICS
                 SEND
                 PAGE
@@ -2663,12 +2454,10 @@
                 FMHPARM(X)
                 LAST
            END-EXEC
-
            EXEC CICS
                 SEND
                 PARTNSET(X)
            END-EXEC
-
            EXEC CICS
                 SEND
                 TEXT
@@ -2705,7 +2494,6 @@
                 TRAILER(X)
                 WAIT
            END-EXEC
-
            EXEC CICS
                 SEND
                 TEXT
@@ -2718,13 +2506,11 @@
                 PAGING
                 REQID(X)
            END-EXEC
-
            EXEC CICS
                 SEND
                 TEXT
                 NOEDIT
            END-EXEC
-
            EXEC CICS
                 SIGNAL
                 EVENT(X)
@@ -2732,11 +2518,9 @@
                 FROM(X)
                 FROMLENGTH(X)
            END-EXEC
-
            EXEC CICS
                 SIGNOFF
            END-EXEC
-
            EXEC CICS
                 SIGNON
                 USERID(X)
@@ -2755,7 +2539,6 @@
                 NEWPHRASELEN(X)
                 OIDCARD(X)
            END-EXEC
-
            EXEC CICS
                 SIGNON
                 TOKEN(X)
@@ -2773,7 +2556,6 @@
                 ESMREASON(X)
                 ESMRESP(X)
            END-EXEC
-
            EXEC CICS
                 SOAPFAULT
                 ADD
@@ -2784,7 +2566,6 @@
                 SUBCODELEN(X)
                 FROMCCSID(X)
            END-EXEC
-
            EXEC CICS
                 SOAPFAULT
                 CREATE
@@ -2806,12 +2587,10 @@
                 DETAILLENGTH(X)
                 FROMCCSID(X)
            END-EXEC
-
            EXEC CICS
                 SOAPFAULT
                 DELETE
            END-EXEC
-
            EXEC CICS
                 SPOOLCLOSE
                 TOKEN(X)
@@ -2821,7 +2600,6 @@
                 RESP
                 RESP2
            END-EXEC
-
            EXEC CICS
                 SPOOLOPEN
                 INPUT
@@ -2832,7 +2610,6 @@
                 RESP
                 RESP2
            END-EXEC
-
            EXEC CICS
                 SPOOLOPEN
                 OUTPUT
@@ -2851,7 +2628,6 @@
                 RESP
                 RESP2
            END-EXEC
-
            EXEC CICS
                 SPOOLREAD
                 TOKEN(X)
@@ -2862,7 +2638,6 @@
                 RESP
                 RESP2
            END-EXEC
-
            EXEC CICS
                 SPOOLWRITE
                 TOKEN(X)
@@ -2874,7 +2649,6 @@
                 RESP
                 RESP2
            END-EXEC
-
            EXEC CICS
                 START
                 TRANSID(X)
@@ -2897,7 +2671,6 @@
                 NOCHECK
                 PROTECT
            END-EXEC
-
            EXEC CICS
                 START
                 ATTACH
@@ -2905,7 +2678,6 @@
                 FROM(X)
                 LENGTH(X)
            END-EXEC
-
            EXEC CICS
                 START
                 BREXIT(X)
@@ -2914,7 +2686,6 @@
                 BRDATALENGTH(X)
                 USERID(X)
            END-EXEC
-
            EXEC CICS
                 START
                 TRANSID(X)
@@ -2924,7 +2695,6 @@
                 NOCHECK
                 PROTECT
            END-EXEC
-
            EXEC CICS
                 STARTBR
                 FILE(X)
@@ -2941,7 +2711,6 @@
                 GTEQ
                 EQUAL
            END-EXEC
-
            EXEC CICS
                 STARTBROWSE
                 ACTIVITY
@@ -2950,7 +2719,6 @@
                 PROCESSTYPE(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 STARTBROWSE
                 CONTAINER
@@ -2959,57 +2727,48 @@
                 PROCESSTYPE(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 STARTBROWSE
                 CONTAINER
                 CHANNEL(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 STARTBROWSE
                 EVENT
                 BROWSETOKEN(X)
                 ACTIVITYID(X)
            END-EXEC
-
            EXEC CICS
                 STARTBROWSE
                 PROCESS
                 PROCESSTYPE(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 STARTBROWSE
                 TIMER(X)
                 ACTIVITYID(X)
                 BROWSETOKEN(X)
            END-EXEC
-
            EXEC CICS
                 SUSPEND
            END-EXEC
-
            EXEC CICS
                 SUSPEND
                 ACQACTIVITY
                 ACQPROCESS
                 ACTIVITY(X)
            END-EXEC
-
            EXEC CICS
                 SYNCPOINT
                 ROLLBACK
            END-EXEC
-
            EXEC CICS
                 TEST
                 EVENT(X)
                 FIRESTATUS(X)
            END-EXEC
-
            EXEC CICS
                 TRANSFORM
                 DATATOJSON
@@ -3018,7 +2777,6 @@
                 OUTCONTAINER(X)
                 TRANSFORMER(X)
            END-EXEC
-
            EXEC CICS
                 TRANSFORM
                 DATATOXML
@@ -3035,7 +2793,6 @@
                 XMLCONTAINER(X)
                 XMLTRANSFORM(X)
            END-EXEC
-
            EXEC CICS
                 TRANSFORM
                 JSONTODATA
@@ -3044,7 +2801,6 @@
                 OUTCONTAINER(X)
                 TRANSFORMER(X)
            END-EXEC
-
            EXEC CICS
                 TRANSFORM
                 XMLTODATA
@@ -3062,14 +2818,12 @@
                 XMLCONTAINER(X)
                 XMLTRANSFORM(X)
            END-EXEC
-
            EXEC CICS
                 UNLOCK
                 FILE(X)
                 TOKEN(X)
                 SYSID(X)
            END-EXEC
-
            EXEC CICS
                 UPDATE
                 COUNTER(X)
@@ -3079,7 +2833,6 @@
                 COMPAREMAX(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 UPDATE
                 DCOUNTER(X)
@@ -3089,7 +2842,6 @@
                 COMPAREMAX(X)
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 VERIFY
                 PASSWORD(X)
@@ -3103,7 +2855,6 @@
                 INVALIDCOUNT(X)
                 LASTUSETIME(X)
            END-EXEC
-
            EXEC CICS
                 VERIFY
                 PHRASE(X)
@@ -3118,7 +2869,6 @@
                 INVALIDCOUNT(X)
                 LASTUSETIME(X)
            END-EXEC
-
            EXEC CICS
                 VERIFY
                 TOKEN(X)
@@ -3137,20 +2887,17 @@
                 ESMRESP(X)
                 ESMREASON(X)
            END-EXEC
-
            EXEC CICS
                 WAIT
                 CONVID(X)
                 STATE(X)
            END-EXEC
-
            EXEC CICS
                 WAIT
                 EVENT
                 ECADDR(X)
                 NAME(X)
            END-EXEC
-
            EXEC CICS
                 WAIT
                 EXTERNAL
@@ -3161,31 +2908,26 @@
                 NOTPURGEABLE
                 NAME(X)
            END-EXEC
-
            EXEC CICS
                 WAIT
                 JOURNALNAME(X)
                 REQID(X)
            END-EXEC
-
            EXEC CICS
                 WAIT
                 JOURNALNUM(X)
                 REQID(X)
            END-EXEC
-
            EXEC CICS
                 WAIT
                 SIGNAL
            END-EXEC
-
            EXEC CICS
                 WAIT
                 TERMINAL
                 CONVID(X)
                 SESSION(X)
            END-EXEC
-
            EXEC CICS
                 WAITCICS
                 ECBLIST(X)
@@ -3195,13 +2937,11 @@
                 NOTPURGEABLE
                 NAME(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 CLOSE
                 SESSTOKEN(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 CONVERSE
@@ -3258,26 +2998,22 @@
                 NOCLICONVERT
                 CLIENTCONV(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 ENDBROWSE
                 FORMFIELD
            END-EXEC
-
            EXEC CICS
                 WEB
                 ENDBROWSE
                 HTTPHEADER
                 SESSTOKEN(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 ENDBROWSE
                 QUERYPARM
            END-EXEC
-
            EXEC CICS
                 WEB
                 EXTRACT
@@ -3297,7 +3033,6 @@
                 REQUESTTYPE(X)
                 URIMAP(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 EXTRACT
@@ -3315,7 +3050,6 @@
                 REALM(X)
                 REALMLEN(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 OPEN
@@ -3332,7 +3066,6 @@
                 HTTPVNUM(X)
                 HTTPRNUM(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 PARSE
@@ -3348,7 +3081,6 @@
                 QUERYSTRING(X)
                 QUERYSTRLEN(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 READ
@@ -3360,7 +3092,6 @@
                 CHARACTERSET(X)
                 HOSTCODEPAGE(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 READ
@@ -3370,7 +3101,6 @@
                 VALUE(X)
                 VALUELENGTH(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 READ
@@ -3381,7 +3111,6 @@
                 VALUELENGTH(X)
                 HOSTCODEPAGE(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 READNEXT
@@ -3390,7 +3119,6 @@
                 VALUE(X)
                 VALUELENGTH(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 READNEXT
@@ -3400,7 +3128,6 @@
                 VALUE(X)
                 VALUELENGTH(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 READNEXT
@@ -3409,7 +3136,6 @@
                 VALUE(X)
                 VALUELENGTH(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 RECEIVE
@@ -3427,7 +3153,6 @@
                 BODYCHARSET(X)
                 MEDIATYPE(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 RECEIVE
@@ -3438,7 +3163,6 @@
                 BODYCHARSET(X)
                 MEDIATYPE(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 RECEIVE
@@ -3457,7 +3181,6 @@
                 CLIENTCONV(X)
                 BODYCHARSET(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 RECEIVE
@@ -3470,13 +3193,11 @@
                 TOCHANNEL(X)
                 BODYCHARSET(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 RETRIEVE
                 DOCTOKEN(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 SEND
@@ -3509,7 +3230,6 @@
                 CLOSE
                 CLOSESTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 WEB
                 SEND
@@ -3558,7 +3278,6 @@
                 PASSWORD(data-value)
                 PASSWORDLEN(data-value)
            END-EXEC
-
            EXEC CICS
                 WEB
                 STARTBROWSE
@@ -3567,14 +3286,12 @@
                 CHARACTERSET(X)
                 HOSTCODEPAGE(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 STARTBROWSE
                 HTTPHEADER
                 SESSTOKEN(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 STARTBROWSE
@@ -3582,7 +3299,6 @@
                 NAMELENGTH(X)
                 HOSTCODEPAGE(X)
            END-EXEC
-
            EXEC CICS
                 WEB
                 WRITE
@@ -3592,7 +3308,6 @@
                 VALUE(X)
                 VALUELENGTH(X)
            END-EXEC
-
            EXEC CICS
                 WRITE
                 FILE(X)
@@ -3606,7 +3321,6 @@
                 RRN
                 XRBA
            END-EXEC
-
            EXEC CICS
                 WRITE
                 JOURNALNAME(X)
@@ -3619,12 +3333,10 @@
                 WAIT
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 WRITE
                 JOURNALNUM(X)
            END-EXEC
-
            EXEC CICS
                 WRITE
                 OPERATOR
@@ -3641,7 +3353,6 @@
                 REPLYLENGTH(X)
                 TIMEOUT(X)
            END-EXEC
-
            EXEC CICS
                 WRITEQ
                 TD
@@ -3650,7 +3361,6 @@
                 LENGTH(X)
                 SYSID(X)
            END-EXEC
-
            EXEC CICS
                 WRITEQ
                 TS
@@ -3666,7 +3376,6 @@
                 MAIN
                 NOSUSPEND
            END-EXEC
-
            EXEC CICS
                 WSACONTEXT
                 BUILD
@@ -3682,13 +3391,11 @@
                 FROMCCSID(data-value)
                 FROMCODEPAGE(data-value)
            END-EXEC
-
            EXEC CICS
                 WSACONTEXT
                 DELETE
                 CHANNEL(X)
            END-EXEC
-
            EXEC CICS
                 WSACONTEXT
                 GET
@@ -3707,7 +3414,6 @@
                 INTOCCSID(data-value)
                 INTOCODEPAGE(data-value)
            END-EXEC
-
            EXEC CICS
                 WSAEPR
                 CREATE
@@ -3722,7 +3428,6 @@
                 FROMCCSID(data-value)
                 FROMCODEPAGE(data-value)
            END-EXEC
-
            EXEC CICS
                 XCTL
                 PROGRAM('SAMVIMES')
@@ -3732,6 +3437,4 @@
                 INPUTMSG(X)
                 INPUTMSGLEN(X)
            END-EXEC
-
-
            EXEC CICS RETURN END-EXEC.
