@@ -469,10 +469,44 @@
                 CSD
                 DELETE
                 RESTYPE(CVDA)
+                ATOMSERVICE
+                BUNDLE
+                CONNECTION
+                CORBASERVER
+                DB2CONN
+                DB2ENTRY
+                DB2TRAN
+                DJAR
+                DOCTEMPLATE
+                DUMPCODE
+                ENQMODEL
+                FILE
+                IPCONN
+                JOURNALMODEL
+                JVMSERVER
+                LIBRARY
+                LSRPOOL
+                MAPSET
+                MQCONN
+                PARTITIONSET
+                PARTNER
+                PIPELINE
+                PROCESSTYPE
+                PROFILE
+                PROGRAM
+                REQUESTMODEL
+                SESSIONS
+                TCPIPSERVICE
+                TDQUEUE
+                TERMINAL
+                TRANCLASS
+                TRANSACTION
+                TSMODEL
+                TYPETERM
+                URIMAP
+                WEBSERVICE
                 RESID(X)
                 GROUP(X)
-                ATTRIBUTES(X)
-                ATTRLEN(LENGTH OF X)
                 LISTACTION(CVDA)
                 REMOVE
            END-EXEC
@@ -1456,11 +1490,11 @@
                 TYPE(cvda)
            END-EXEC
 
-           EXEC CICS
       *    
       *    Documentation indicates INQUIRE JOURNALNUM is obsolete
       *    so I'm just checking to ensure compatibility with old code.
       *    
+           EXEC CICS
                 INQUIRE
                 JOURNALNUM(data-value)
            END-EXEC
@@ -2521,6 +2555,23 @@
            EXEC CICS
                 INQUIRE
                 TSQUEUE(data-value)
+                POOLNAME(data-value)
+                SYSID(data-value)
+                EXPIRYINT(data-area)
+                EXPIRYINTMIN(data-area)
+                FLENGTH(data-area)
+                LASTUSEDINT(data-area)
+                LOCATION(cvda)
+                MAXITEMLEN(data-area)
+                MINITEMLEN(data-area)
+                NUMITEMS(data-area)
+                RECOVSTATUS(cvda)
+                TRANSID(data-area)
+                TSMODEL(data-value)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
                 TSQNAME(data-value)
                 POOLNAME(data-value)
                 SYSID(data-value)
@@ -2797,8 +2848,10 @@
                 PERFORM
                 JVMSERVER(data-area)
                 JVMTYPE(cvda)
-                JVMJVMACTION(cvda)
-                DUMPDUMPTYPE(cvda)
+                JVM
+                JVMACTION(cvda)
+                DUMP
+                DUMPTYPE(cvda)
                 ALL
                 JAVACORE
                 HEAP

@@ -638,7 +638,46 @@ GROUP( data-value )
 
 @CSD
 +INSTALL
++=List
 LIST( data-value )
+
+@CSD
++INSTALL
++=ResourceOrGroup
+RESTYPE( cvda )
+RESID( data-value )
+GROUP( data-value )
+ATOMSERVICE
+BUNDLE
+DB2CONN
+DB2ENTRY
+DB2TRAN
+DOCTEMPLATE
+DUMPCODE
+ENQMODEL
+FILE
+IPCONN
+JOURNALMODEL
+JVMSERVER
+LIBRARY
+LSRPOOL
+MAPSET
+MQCONN
+PARTITIONSET
+PARTNER
+PIPELINE
+PROCESSTYPE
+PROFILE
+PROGRAM
+TCPIPSERVICE
+TDQUEUE
+TERMINAL
+TRANCLASS
+TRANSACTION
+TSMODEL
+TYPETERM
+URIMAP
+WEBSERVICE
 
 @CSD
 +LOCK
@@ -774,7 +813,7 @@ TASKSTART
 +ATOMSERVICE( data-value )
 
 @DISCARD 
-+AUTOINSTMODEL( data-value )
++AUTINSTMODEL( data-value )
 
 @DISCARD 
 +BUNDLE( data-value )
@@ -1867,6 +1906,11 @@ TASKID( data-area )
 TRANSACTION( data-area )
 USERID( data-area )
 
+# 
+# ELEMENTLIST, LENGTHLIST, and SUBPOOLLIST are obsolete
+# but tolerated for backward compatibility.
+# 
+
 @INQUIRE 
 +MVSTCB[ptr-ref]
 START
@@ -1874,6 +1918,9 @@ NEXT
 END
 SET(ptr-ref)
 NUMELEMENTS(data-area)
+ELEMENTLIST(ptr-ref)
+LENGTHLIST(ptr-ref)
+SUBPOOLLIST(ptr-ref)
 
 @INQUIRE 
 +NETNAME[data-value]
@@ -2284,6 +2331,10 @@ MAXIMUM( data-area )
 SHUTOPTION( cvda )
 SYSDUMPING( cvda )
 
+# 
+# ETDSASIZE removed in CICS 6.1
+# 
+
 @INQUIRE 
 +SYSTEM
 ACTOPENTCBS( data-area )
@@ -2329,6 +2380,7 @@ RELEASE( data-area )
 ERDSASIZE( data-area )
 RLSSTATUS( cvda )
 ESDSASIZE( data-area )
+ETDSASIZE( data-area )
 RUNAWAY( data-area )
 EUDSASIZE( data-area )
 SCANDELAY( data-area )
@@ -2593,6 +2645,54 @@ MAPSETNAME(data-area)
 MODENAME(data-area)
 MSRCONTROLST(cvda)
 NATLANG(data-area)
+NATURE(cvda)
+NEXTTRANSID(data-area)
+NQNAME(data-area)
+OBFORMATST(cvda)
+OBOPERIDST(cvda)
+OPERID(data-area)
+OUTLINEST(cvda)
+PAGEHT(data-area)
+PAGESTATUS(cvda)
+PAGEWD(data-area)
+PARTITIONSST(cvda)
+PRINTADAPTST(cvda)
+PRINTER(data-area)
+PROGSYMBOLST(cvda)
+PRTCOPYST(cvda)
+QUERYST(cvda)
+RELREQST(cvda)
+REMOTENAME(data-area)
+REMOTESYSNET(data-area)
+REMOTESYSTEM(data-area)
+SCRNH(data-area)(
+SCRNWD(data-area)
+SECURITY(cvda)
+SERVSTATUS(cvda)
+SESSIONTYPE(cvda)
+SIGNONSTATUS(cvda)
+SOSIST(cvda)
+TASKID(data-area)
+TCAMCONTROL(data-area)
+TERMMODEL(data-area)
+TERMPRIORITY(data-area)
+TERMSTATUS(cvda)
+TEXTKYBDST(cvda)
+TEXTPRINTST(cvda)
+TNADDR(data-area)
+TNIPFAMILY(cvda)
+TNPORT(data-area)
+TRACING(cvda)
+TRANSACTION(data-area)
+TTISTATUS(cvda)
+UCTRANST(cvda)
+USERAREA(ptr-ref)
+USERAREALEN(data-area)
+USERID(data-area)
+USERNAME(data-area)
+VALIDATIONST(cvda)
+VFORMST(cvda)
+ZCPTRACING(cvda)
 
 @INQUIRE 
 +TRACEDEST
@@ -3085,6 +3185,21 @@ XLT(data-value)
 DUMP
 
 @PERFORM 
++SHUTDOWN 
++IMMEDIATE
+NORESTART
+SDTRAN(data-value)
+DUMP
+NOSDTRAN
+
+@PERFORM 
++SHUTDOWN 
++TAKEOVER
+SDTRAN(data-value)
+DUMP
+NOSDTRAN
+
+@PERFORM 
 +SSL 
 +REBUILD
 GSKRESP(data-area)
@@ -3173,6 +3288,7 @@ MAXREQS(data-value)
 @SET 
 +BRFACILITY(data-value)
 TERMSTATUS(cvda)
+RELEASED
 
 @SET 
 +BUNDLE( data-value )
@@ -3275,10 +3391,25 @@ COPY(cvda)
 @SET 
 +DSNAME(data-value)
 ACTION(cvda)
+REMOVE
+RECOVERED
+RESETLOCKS
+RETRY
 AVAILABILITY(cvda)
+AVAILABLE
+RREPL
+UNAVAILABLE
 QUESCESTATE(cvda)
+QUIESCED
+IMMQUIESCED
+UNQUIESCED
 BUSY(cvda)
+WAIT
+NOWAIT
 UOWACTION(cvda)
+BACKOUT
+COMMIT
+FORCE
 
 @SET 
 +DUMPDS

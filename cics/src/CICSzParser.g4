@@ -403,7 +403,8 @@ cicsSPI
 	| csdInquiregroup
 	| csdInquirelist
 	| csdInquirersrce
-	| csdInstall
+	| csdInstallList
+	| csdInstallResourceOrGroup
 	| csdLock
 	| csdRemove
 	| csdRename
@@ -414,7 +415,7 @@ cicsSPI
 	| csdUserdefine
 	| disableProgram
 	| discardAtomservice
-	| discardAutoinstmodel
+	| discardAutinstmodel
 	| discardBundle
 	| discardConnection
 	| discardDb2conn
@@ -2720,9 +2721,15 @@ csdInquirersrce
 	)
 	;
 
-csdInstall
+csdInstallList
 	: (
-	 csdOption installOption csdInstallOptions*
+	 csdOption installOption csdInstallListOptions*
+	)
+	;
+
+csdInstallResourceOrGroup
+	: (
+	 csdOption installOption csdInstallResourceOrGroupOptions*
 	)
 	;
 
@@ -2786,9 +2793,9 @@ discardAtomservice
 	)
 	;
 
-discardAutoinstmodel
+discardAutinstmodel
 	: (
-	 discardOption autoinstmodelOption discardAutoinstmodelOptions*
+	 discardOption autinstmodelOption discardAutinstmodelOptions*
 	)
 	;
 
@@ -4034,7 +4041,7 @@ setXmltransform
 	)
 	;
 
-// 566 rules generated Sun Apr  7 14:34:07 CDT 2024
+// 567 rules generated Sun Apr  7 16:15:25 CDT 2024
 
 abendOptions
 	: (
@@ -8972,9 +8979,49 @@ csdInquirersrceOptions
 	)
 	;
 
-csdInstallOptions
+csdInstallListOptions
 	: (
 	listOption
+	| exceptionOptions
+	)
+	;
+
+csdInstallResourceOrGroupOptions
+	: (
+	restypeOption
+	| residOption
+	| groupOption
+	| atomserviceOption
+	| bundleOption
+	| db2connOption
+	| db2entryOption
+	| db2tranOption
+	| doctemplateOption
+	| dumpcodeOption
+	| enqmodelOption
+	| fileOption
+	| ipconnOption
+	| journalmodelOption
+	| jvmserverOption
+	| libraryOption
+	| lsrpoolOption
+	| mapsetOption
+	| mqconnOption
+	| partitionsetOption
+	| partnerOption
+	| pipelineOption
+	| processtypeOption
+	| profileOption
+	| programOption
+	| tcpipserviceOption
+	| tdqueueOption
+	| terminalOption
+	| tranclassOption
+	| transactionOption
+	| tsmodelOption
+	| typetermOption
+	| urimapOption
+	| webserviceOption
 	| exceptionOptions
 	)
 	;
@@ -9142,7 +9189,7 @@ discardAtomserviceOptions
 	)
 	;
 
-discardAutoinstmodelOptions
+discardAutinstmodelOptions
 	: (
 	exceptionOptions
 	)
@@ -12681,7 +12728,7 @@ setXmltransformOptions
 	)
 	;
 
-// 566 rules generated Sun Apr  7 14:34:07 CDT 2024
+// 567 rules generated Sun Apr  7 16:15:25 CDT 2024
 
 abcodeOption
 	: (
@@ -13448,12 +13495,6 @@ autoconnectOption
 autoinstallOption
 	: (
 	AUTOINSTALL
-	)
-	;
-
-autoinstmodelOption
-	: (
-	AUTOINSTMODEL arg
 	)
 	;
 
@@ -23921,5 +23962,5 @@ zcptracingOption
 	)
 	;
 
-// 2149 rules generated Sun Apr  7 14:34:07 CDT 2024
+// 2149 rules generated Sun Apr  7 16:15:25 CDT 2024
 

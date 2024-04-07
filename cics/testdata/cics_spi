@@ -416,10 +416,44 @@
                 CSD
                 DELETE
                 RESTYPE(CVDA)
+                ATOMSERVICE
+                BUNDLE
+                CONNECTION
+                CORBASERVER
+                DB2CONN
+                DB2ENTRY
+                DB2TRAN
+                DJAR
+                DOCTEMPLATE
+                DUMPCODE
+                ENQMODEL
+                FILE
+                IPCONN
+                JOURNALMODEL
+                JVMSERVER
+                LIBRARY
+                LSRPOOL
+                MAPSET
+                MQCONN
+                PARTITIONSET
+                PARTNER
+                PIPELINE
+                PROCESSTYPE
+                PROFILE
+                PROGRAM
+                REQUESTMODEL
+                SESSIONS
+                TCPIPSERVICE
+                TDQUEUE
+                TERMINAL
+                TRANCLASS
+                TRANSACTION
+                TSMODEL
+                TYPETERM
+                URIMAP
+                WEBSERVICE
                 RESID(X)
                 GROUP(X)
-                ATTRIBUTES(X)
-                ATTRLEN(LENGTH OF X)
                 LISTACTION(CVDA)
                 REMOVE
            END-EXEC
@@ -1334,10 +1368,6 @@
                 TYPE(cvda)
            END-EXEC
            EXEC CICS
-      *    
-      *    Documentation indicates INQUIRE JOURNALNUM is obsolete
-      *    so I'm just checking to ensure compatibility with old code.
-      *    
                 INQUIRE
                 JOURNALNUM(data-value)
            END-EXEC
@@ -1517,11 +1547,6 @@
                 MVSTCB(ptr-ref)
                 SET(ptr-ref)
                 NUMELEMENTS(data-area)
-      *    
-      *    Documentation indicates ELEMENTLIST, LENGTHLIST, and
-      *    SUBPOOLLIST are obsolete
-      *    so I'm just checking to ensure compatibility with old code.
-      *    
                 ELEMENTLIST(ptr-ref)
                 LENGTHLIST(ptr-ref)
                 SUBPOOLLIST(ptr-ref)
@@ -1872,7 +1897,7 @@
                 EPUDSASIZE(data-area)
                 ERDSASIZE(data-area)
                 ESDSASIZE(data-area)
-                ETDSASIZE(data-area) *> removed in CICS TS 6.1
+                ETDSASIZE(data-area) 
                 EUDSASIZE(data-area)
                 FORCEQR(cvda)
                 GCDSASIZE(data-area)
