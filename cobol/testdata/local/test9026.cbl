@@ -2895,8 +2895,24 @@
                 NOSDTRAN
                 XLT(data-value)
                 DUMP
+           END-EXEC
+
+           EXEC CICS
+                PERFORM
+                SHUTDOWN
                 IMMEDIATE
+                NORESTART
+                SDTRAN(data-value)
+                NOSDTRAN
+                DUMP
+           END-EXEC
+
+           EXEC CICS
+                PERFORM
+                SHUTDOWN
                 TAKEOVER
+                SDTRAN(data-value)
+                NOSDTRAN
            END-EXEC
 
            EXEC CICS PERFORM SSL REBUILD GSKRESP(data-area) END-EXEC
@@ -3392,6 +3408,14 @@
            EXEC CICS
                 SET
                 TSQUEUE(data-value)
+                SYSID(data-value)
+                POOLNAME(data-value)
+                ACTION(cvda)
+                LASTUSEDINT(data-value)
+           END-EXEC
+
+           EXEC CICS
+                SET
                 TSQNAME(data-value)
                 SYSID(data-value)
                 POOLNAME(data-value)

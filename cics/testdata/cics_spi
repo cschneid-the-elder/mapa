@@ -2376,6 +2376,22 @@
            EXEC CICS
                 INQUIRE
                 TSQUEUE(data-value)
+                POOLNAME(data-value)
+                SYSID(data-value)
+                EXPIRYINT(data-area)
+                EXPIRYINTMIN(data-area)
+                FLENGTH(data-area)
+                LASTUSEDINT(data-area)
+                LOCATION(cvda)
+                MAXITEMLEN(data-area)
+                MINITEMLEN(data-area)
+                NUMITEMS(data-area)
+                RECOVSTATUS(cvda)
+                TRANSID(data-area)
+                TSMODEL(data-value)
+           END-EXEC
+           EXEC CICS
+                INQUIRE
                 TSQNAME(data-value)
                 POOLNAME(data-value)
                 SYSID(data-value)
@@ -2637,8 +2653,10 @@
                 PERFORM
                 JVMSERVER(data-area)
                 JVMTYPE(cvda)
-                JVMJVMACTION(cvda)
-                DUMPDUMPTYPE(cvda)
+                JVM
+                JVMACTION(cvda)
+                DUMP
+                DUMPTYPE(cvda)
                 ALL
                 JAVACORE
                 HEAP
@@ -2678,8 +2696,22 @@
                 NOSDTRAN
                 XLT(data-value)
                 DUMP
+           END-EXEC
+           EXEC CICS
+                PERFORM
+                SHUTDOWN
                 IMMEDIATE
+                NORESTART
+                SDTRAN(data-value)
+                NOSDTRAN
+                DUMP
+           END-EXEC
+           EXEC CICS
+                PERFORM
+                SHUTDOWN
                 TAKEOVER
+                SDTRAN(data-value)
+                NOSDTRAN
            END-EXEC
            EXEC CICS PERFORM SSL REBUILD GSKRESP(data-area) END-EXEC
            EXEC CICS
@@ -3137,6 +3169,13 @@
            EXEC CICS
                 SET
                 TSQUEUE(data-value)
+                SYSID(data-value)
+                POOLNAME(data-value)
+                ACTION(cvda)
+                LASTUSEDINT(data-value)
+           END-EXEC
+           EXEC CICS
+                SET
                 TSQNAME(data-value)
                 SYSID(data-value)
                 POOLNAME(data-value)

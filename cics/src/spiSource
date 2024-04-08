@@ -2665,7 +2665,7 @@ RELREQST(cvda)
 REMOTENAME(data-area)
 REMOTESYSNET(data-area)
 REMOTESYSTEM(data-area)
-SCRNH(data-area)(
+SCRNHT(data-area)
 SCRNWD(data-area)
 SECURITY(cvda)
 SERVSTATUS(cvda)
@@ -3079,7 +3079,10 @@ INTERVAL( data-area )
 OPENSTATUS( cvda )
 
 # 
-# INQUIRE WORKREQUEST is no longer documented
+# INQUIRE WORKREQUEST is no longer documented, it went away
+# as of CICS TS 5.1.
+# CLNTIP6ADDR, CLNTIPFAMILY, TARGETSYS, and TSYSTYPE were 
+# apparently only extant for CICS TS 4.2.
 # 
 
 @INQUIRE 
@@ -3089,6 +3092,8 @@ NEXT
 END
 WORKTYPE(cvda)
 CLIENTIPADDR(data-area)
+CLNTIP6ADDR(dataarea)   
+CLNTIPFAMILY(cvda)   
 CORBASERVER(data-area)
 LISTENERPORT(data-area)
 OAPPLID(data-area)
@@ -3096,9 +3101,11 @@ OTASK(data-area)
 OTRANSID(data-area)
 REQUESTID(data-area)
 STACK(data-area)
+TARGETSYS(data-area)
 TASK(data-area)
 TRANSID(data-area)
 TSYSTEM(data-area)
+TSYSTYPE(cvda)
 
 @INQUIRE 
 +XMLTRANSFORM[ name ]
@@ -3153,18 +3160,34 @@ NETID(data-value)
 +JVMSERVER( data-area )
 JVMTYPE( cvda )
 JVMACTION( cvda )
+JVM
+DUMP
 DUMPTYPE( cvda )
+ALL
+JAVACORE
+HEAP
+SNAPTRACE
+GATHER
 GATHERTYPE( cvda )
+DIAGNOSTICS
+STACKTRACE
 TASKID( data-value )
+LIBERTY
 LIBRTYACTION( cvda )
+REFRESH
 RESOURCETYPE( cvda )
+APPLICATION
 APPID( data-area )
 APPIDLEN( data-area )
+CONFIG
+SERVERDUMP
 OSGIACTION( cvda )
+REFRESHPKGS
 
 @PERFORM
 +PIPELINE(data-value)
 ACTION(cvda)
+SCAN
 
 @PERFORM 
 +RESETTIME
@@ -4133,8 +4156,8 @@ SWITCH
 SWITCHSTATUS(cvda)
 NOSWITCH
 SWITCHNEXT
-SWITCHALLT
-ABLESIZE(data-value)
+SWITCHALL
+TABLESIZE(data-value)
 
 @SET 
 +TRACEFLAG
@@ -4205,6 +4228,7 @@ STATUS( cvda )
 DISABLED
 ENABLED
 TCLASS( data-value )
+TRANCLASS( data-value )
 TRACING( cvda )
 SPECTRACE
 SPRSTRACE

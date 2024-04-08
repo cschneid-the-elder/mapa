@@ -188,6 +188,10 @@ ACQUIRE
 	: A C Q U I R E 
 	;
 
+ACQUIRED
+	: A C Q U I R E D 
+	;
+
 ACTION
 	: A C T I O N 
 	;
@@ -252,6 +256,10 @@ ADD
 	: A D D 
 	;
 
+ADDABLE
+	: A D D A B L E 
+	;
+
 ADDRESS
 	: A D D R E S S 
 	;
@@ -262,6 +270,10 @@ ADDRESS64
 
 ADJUSTMENT
 	: A D J U S T M E N T 
+	;
+
+ADVANCE
+	: A D V A N C E 
 	;
 
 AFFINITY
@@ -326,6 +338,10 @@ ALTPAGEWD
 
 ALTPRINTER
 	: A L T P R I N T E R 
+	;
+
+ALTPRTCOPY
+	: A L T P R T C O P Y 
 	;
 
 ALTPRTCOPYST
@@ -508,6 +524,10 @@ AT
 	: A T 
 	;
 
+ATI
+	: A T I 
+	;
+
 ATIFACILITY
 	: A T I F A C I L I T Y 
 	;
@@ -600,8 +620,16 @@ AUTINSTMODEL
 	: A U T I N S T M O D E L 
 	;
 
+AUTOACTIVE
+	: A U T O A C T I V E 
+	;
+
 AUTOCONNECT
 	: A U T O C O N N E C T 
+	;
+
+AUTOINACTIVE
+	: A U T O I N A C T I V E 
 	;
 
 AUTOINSTALL
@@ -610,6 +638,10 @@ AUTOINSTALL
 
 AUTOPAGE
 	: A U T O P A G E 
+	;
+
+AUTOPAGEABLE
+	: A U T O P A G E A B L E 
 	;
 
 AUTOSTART
@@ -624,8 +656,20 @@ AUXILIARY
 	: A U X I L I A R Y 
 	;
 
+AUXPAUSE
+	: A U X P A U S E 
+	;
+
+AUXSTART
+	: A U X S T A R T 
+	;
+
 AUXSTATUS
 	: A U X S T A T U S 
+	;
+
+AUXSTOP
+	: A U X S T O P 
 	;
 
 AVAILABILITY
@@ -642,6 +686,10 @@ AVAILSTATUS
 
 BACKLOG
 	: B A C K L O G 
+	;
+
+BACKOUT
+	: B A C K O U T 
 	;
 
 BACKTRANSST
@@ -742,6 +790,10 @@ BRFACILITY
 
 BRIDGE
 	: B R I D G E 
+	;
+
+BROWSABLE
+	: B R O W S A B L E 
 	;
 
 BROWSE
@@ -860,6 +912,10 @@ CDSASIZE
 	: C D S A S I Z E 
 	;
 
+CEDF
+	: C E D F 
+	;
+
 CEDFSTATUS
 	: C E D F S T A T U S 
 	;
@@ -870,6 +926,14 @@ CERTIFICATE
 
 CFDTPOOL
 	: C F D T P O O L 
+	;
+
+CFTABLE
+	: C F T A B L E 
+	;
+
+CGROUP
+	: C G R O U P 
 	;
 
 CHANGE
@@ -948,6 +1012,10 @@ CICSSYS
 	: C I C S S Y S 
 	;
 
+CICSTABLE
+	: C I C S T A B L E 
+	;
+
 CICSTSLEVEL
 	: C I C S T S L E V E L 
 	;
@@ -1012,12 +1080,24 @@ CLNTADDR6NU
 	: C L N T A D D R '6' N U 
 	;
 
+CLNTIP6ADDR
+	: C L N T I P '6' A D D R 
+	;
+
 CLNTIPFAMILY
 	: C L N T I P F A M I L Y 
 	;
 
 CLOSE
 	: C L O S E 
+	;
+
+CLOSED
+	: C L O S E D 
+	;
+
+CLOSELEAVE
+	: C L O S E L E A V E 
 	;
 
 CLOSESTATUS
@@ -1060,6 +1140,10 @@ CODEPAGEERR
 	: C O D E P A G E E R R 
 	;
 
+COLDACQ
+	: C O L D A C Q 
+	;
+
 COLDSTATUS
 	: C O L D S T A T U S 
 	;
@@ -1086,6 +1170,10 @@ COMAUTHTYPE
 
 COMMAREA
 	: C O M M A R E A 
+	;
+
+COMMIT
+	: C O M M I T 
 	;
 
 COMMONNAME
@@ -1124,6 +1212,10 @@ COMPOSITE
 	: C O M P O S I T E 
 	;
 
+COMPRESS
+	: C O M P R E S S 
+	;
+
 COMPRESSST
 	: C O M P R E S S S T 
 	;
@@ -1152,6 +1244,10 @@ CONDITION
 	: C O N D I T I O N 
 	;
 
+CONFIG
+	: C O N F I G 
+	;
+
 CONFIGDATA1
 	: C O N F I G D A T A '1' 
 	;
@@ -1170,6 +1266,10 @@ CONFIRMATION
 
 CONNECT
 	: C O N N E C T 
+	;
+
+CONNECTED
+	: C O N N E C T E D 
 	;
 
 CONNECTERROR
@@ -1224,6 +1324,10 @@ CONTAINERERR
 	: C O N T A I N E R E R R 
 	;
 
+CONTENTION
+	: C O N T E N T I O N 
+	;
+
 CONTEXTTYPE
 	: C O N T E X T T Y P E 
 	;
@@ -1258,6 +1362,10 @@ CONVERTTIME
 
 CONVID
 	: C O N V I D 
+	;
+
+COPID
+	: C O P I D 
 	;
 
 COPIES
@@ -1328,8 +1436,32 @@ CSDERR
 	: C S D E R R 
 	;
 
+CSIGN
+	: C S I G N 
+	;
+
+CTERM
+	: C T E R M 
+	;
+
 CTLCHAR
 	: C T L C H A R 
+	;
+
+CTLGALL
+	: C T L G A L L 
+	;
+
+CTLGMODIFY
+	: C T L G M O D I F Y 
+	;
+
+CTLGNONE
+	: C T L G N O N E 
+	;
+
+CTX
+	: C T X 
 	;
 
 CURAUXDS
@@ -1384,12 +1516,20 @@ CURSOR
 	: C U R S O R 
 	;
 
+CUSERID
+	: C U S E R I D 
+	;
+
 CWA
 	: C W A 
 	;
 
 CWALENG
 	: C W A L E N G 
+	;
+
+DAE
+	: D A E 
 	;
 
 DAEOPTION
@@ -1564,6 +1704,10 @@ DEBREC
 	: D E B R E C 
 	;
 
+DEBUG
+	: D E B U G 
+	;
+
 DEBUGTOOL
 	: D E B U G T O O L 
 	;
@@ -1610,6 +1754,10 @@ DEFSCRNWD
 
 DELAY
 	: D E L A Y 
+	;
+
+DELETABLE
+	: D E L E T A B L E 
 	;
 
 DELETE
@@ -1668,6 +1816,10 @@ DFLTUSER
 	: D F L T U S E R 
 	;
 
+DIAGNOSTICS
+	: D I A G N O S T I C S 
+	;
+
 DIGEST
 	: D I G E S T 
 	;
@@ -1694,6 +1846,10 @@ DISCARD
 
 DISCONNECT
 	: D I S C O N N E C T 
+	;
+
+DISCREQ
+	: D I S C R E Q 
 	;
 
 DISCREQST
@@ -1758,6 +1914,14 @@ DOCUMENT
 
 DPLLIMIT
 	: D P L L I M I T 
+	;
+
+DPLSUBSET
+	: D P L S U B S E T 
+	;
+
+DRAIN
+	: D R A I N 
 	;
 
 DROLLBACK
@@ -1996,12 +2160,24 @@ EMITMODE
 	: E M I T M O D E 
 	;
 
+EMPTY
+	: E M P T Y 
+	;
+
+EMPTYREQ
+	: E M P T Y R E Q 
+	;
+
 EMPTYSTATUS
 	: E M P T Y S T A T U S 
 	;
 
 ENABLE
 	: E N A B L E 
+	;
+
+ENABLED
+	: E N A B L E D 
 	;
 
 ENABLEDCOUNT
@@ -2260,6 +2436,10 @@ ESMRESP
 	: E S M R E S P 
 	;
 
+ETDSASIZE
+	: E T D S A S I Z E 
+	;
+
 EUDSASIZE
 	: E U D S A S I Z E 
 	;
@@ -2300,6 +2480,10 @@ EXACTMATCH
 	: E X A C T M A T C H 
 	;
 
+EXCEPT
+	: E X C E P T 
+	;
+
 EXCEPTCLASS
 	: E X C E P T C L A S S 
 	;
@@ -2314,6 +2498,10 @@ EXCI
 
 EXCLUSIVE
 	: E X C L U S I V E 
+	;
+
+EXCTL
+	: E X C T L 
 	;
 
 EXECKEY
@@ -2342,6 +2530,10 @@ EXITPGM
 
 EXITPROGRAM
 	: E X I T P R O G R A M 
+	;
+
+EXITTRACE
+	: E X I T T R A C E 
 	;
 
 EXITTRACING
@@ -2508,6 +2700,10 @@ FLENGTH
 	: F L E N G T H 
 	;
 
+FLUSH
+	: F L U S H 
+	;
+
 FMH
 	: F M H 
 	;
@@ -2540,8 +2736,24 @@ FORCE
 	: F O R C E 
 	;
 
+FORCECANCEL
+	: F O R C E C A N C E L 
+	;
+
+FORCECLOSE
+	: F O R C E C L O S E 
+	;
+
+FORCEPURGE
+	: F O R C E P U R G E 
+	;
+
 FORCEQR
 	: F O R C E Q R 
+	;
+
+FORCEUOW
+	: F O R C E U O W 
 	;
 
 FORMATEDF
@@ -2652,6 +2864,14 @@ FRSET
 	: F R S E T 
 	;
 
+FULL
+	: F U L L 
+	;
+
+FULLAPI
+	: F U L L A P I 
+	;
+
 FULLDATE
 	: F U L L D A T E 
 	;
@@ -2694,6 +2914,10 @@ GARBAGEINT
 
 GASET
 	: G A S E T 
+	;
+
+GATHER
+	: G A T H E R 
 	;
 
 GATHERTYPE
@@ -2796,6 +3020,10 @@ GROUPID
 	: G R O U P I D 
 	;
 
+GROUPRESYNC
+	: G R O U P R E S Y N C 
+	;
+
 GRSTATUS
 	: G R S T A T U S 
 	;
@@ -2812,8 +3040,16 @@ GTEQ
 	: G T E Q 
 	;
 
+GTFSTART
+	: G T F S T A R T 
+	;
+
 GTFSTATUS
 	: G T F S T A T U S 
+	;
+
+GTFSTOP
+	: G T F S T O P 
 	;
 
 GUDSASIZE
@@ -2852,6 +3088,10 @@ HEALTHCHECK
 	: H E A L T H C H E C K 
 	;
 
+HEAP
+	: H E A P 
+	;
+
 HEX
 	: H E X 
 	;
@@ -2862,6 +3102,10 @@ HFORMST
 
 HFSFILE
 	: H F S F I L E 
+	;
+
+HIGH
+	: H I G H 
 	;
 
 HILIGHT
@@ -2952,6 +3196,10 @@ IDLISTLENGTH
 	: I D L I S T L E N G T H 
 	;
 
+IDNTY
+	: I D N T Y 
+	;
+
 IDNTYCLASS
 	: I D N T Y C L A S S 
 	;
@@ -2976,8 +3224,16 @@ ILLOGIC
 	: I L L O G I C 
 	;
 
+IMMCLOSE
+	: I M M C L O S E 
+	;
+
 IMMEDIATE
 	: I M M E D I A T E 
+	;
+
+IMMQUIESCED
+	: I M M Q U I E S C E D 
 	;
 
 INBFMH
@@ -3088,6 +3344,10 @@ INSERT
 	: I N S E R T 
 	;
 
+INSERVICE
+	: I N S E R V I C E 
+	;
+
 INSTALL
 	: I N S T A L L 
 	;
@@ -3132,8 +3392,16 @@ INTOCODEPAGE
 	: I N T O C O D E P A G E 
 	;
 
+INTSTART
+	: I N T S T A R T 
+	;
+
 INTSTATUS
 	: I N T S T A T U S 
+	;
+
+INTSTOP
+	: I N T S T O P 
 	;
 
 INVALIDCOUNT
@@ -3268,6 +3536,10 @@ IUTYPE
 	: I U T Y P E 
 	;
 
+JAVACORE
+	: J A V A C O R E 
+	;
+
 JAVAHOME
 	: J A V A H O M E 
 	;
@@ -3332,6 +3604,10 @@ JUSTIFY
 	: J U S T I F Y 
 	;
 
+JVM
+	: J V M 
+	;
+
 JVMACTION
 	: J V M A C T I O N 
 	;
@@ -3394,6 +3670,10 @@ KEYNUMBER
 
 KEYPOSITION
 	: K E Y P O S I T I O N 
+	;
+
+KILL
+	: K I L L 
 	;
 
 L40
@@ -3520,6 +3800,10 @@ LEVEL
 	: L E V E L 
 	;
 
+LIBERTY
+	: L I B E R T Y 
+	;
+
 LIBRARY
 	: L I B R A R Y 
 	;
@@ -3624,6 +3908,10 @@ LOADTYPE
 	: L O A D T Y P E 
 	;
 
+LOCAL
+	: L O C A L 
+	;
+
 LOCALCCSID
 	: L O C A L C C S I D 
 	;
@@ -3646,6 +3934,10 @@ LOCK
 
 LOCKED
 	: L O C K E D 
+	;
+
+LOCKING
+	: L O C K I N G 
 	;
 
 LOG
@@ -3682,6 +3974,10 @@ LOGREPSTATUS
 
 LOSTLOCKS
 	: L O S T L O C K S 
+	;
+
+LOW
+	: L O W 
 	;
 
 LPASTATUS
@@ -3972,6 +4268,10 @@ MODENAME
 	: M O D E N A M E 
 	;
 
+MODIFY
+	: M O D I F Y 
+	;
+
 MONDATA
 	: M O N D A T A 
 	;
@@ -4100,6 +4400,10 @@ NATLANGINUSE
 	: N A T L A N G I N U S E 
 	;
 
+NATURE
+	: N A T U R E 
+	;
+
 NETID
 	: N E T I D 
 	;
@@ -4122,6 +4426,10 @@ NETWORK
 
 NETWORKID
 	: N E T W O R K I D 
+	;
+
+NEWCOPY
+	: N E W C O P Y 
 	;
 
 NEWMAXSOCKET
@@ -4172,12 +4480,32 @@ NLEOM
 	: N L E O M 
 	;
 
+NO
+	: N O 
+	;
+
+NOALTPRTCOPY
+	: N O A L T P R T C O P Y 
+	;
+
+NOATI
+	: N O A T I 
+	;
+
 NOAUTOPAGE
 	: N O A U T O P A G E 
 	;
 
+NOAUTOSTART
+	: N O A U T O S T A R T 
+	;
+
 NOCC
 	: N O C C 
+	;
+
+NOCEDF
+	: N O C E D F 
 	;
 
 NOCHECK
@@ -4196,8 +4524,28 @@ NOCOMPAT
 	: N O C O M P A T 
 	;
 
+NOCOMPRESS
+	: N O C O M P R E S S 
+	;
+
+NOCONNECT
+	: N O C O N N E C T 
+	;
+
 NOCONV
 	: N O C O N V 
+	;
+
+NOCONVERSE
+	: N O C O N V E R S E 
+	;
+
+NOCREATE
+	: N O C R E A T E 
+	;
+
+NODAE
+	: N O D A E 
 	;
 
 NODATA
@@ -4206,6 +4554,10 @@ NODATA
 
 NODE
 	: N O D E 
+	;
+
+NODEBUG
+	: N O D E B U G 
 	;
 
 NODEHOME
@@ -4220,6 +4572,10 @@ NODEJSAPP
 	: N O D E J S A P P 
 	;
 
+NODISCREQ
+	: N O D I S C R E Q 
+	;
+
 NODOCDELETE
 	: N O D O C D E L E T E 
 	;
@@ -4232,12 +4588,36 @@ NOEDIT
 	: N O E D I T 
 	;
 
+NOEMPTYREQ
+	: N O E M P T Y R E Q 
+	;
+
+NOEXCEPT
+	: N O E X C E P T 
+	;
+
+NOEXCTL
+	: N O E X C T L 
+	;
+
+NOEXITTRACE
+	: N O E X I T T R A C E 
+	;
+
 NOFLUSH
 	: N O F L U S H 
 	;
 
+NOFORCE
+	: N O F O R C E 
+	;
+
 NOHANDLE
 	: N O H A N D L E 
+	;
+
+NOIDNTY
+	: N O I D N T Y 
 	;
 
 NOINCONVERT
@@ -4248,8 +4628,20 @@ NOJBUFSP
 	: N O J B U F S P 
 	;
 
+NOJVM
+	: N O J V M 
+	;
+
+NOLOAD
+	: N O L O A D 
+	;
+
 NOLOG
 	: N O L O G 
+	;
+
+NONCRITICAL
+	: N O N C R I T I C A L 
 	;
 
 NONE
@@ -4268,6 +4660,10 @@ NONVAL
 	: N O N V A L 
 	;
 
+NOOBFORMAT
+	: N O O B F O R M A T 
+	;
+
 NOOUTCONVERT
 	: N O O U T C O N V E R T 
 	;
@@ -4280,12 +4676,48 @@ NOPASSBKWR
 	: N O P A S S B K W R 
 	;
 
+NOPERF
+	: N O P E R F 
+	;
+
+NOPRTCOPY
+	: N O P R T C O P Y 
+	;
+
 NOQUEUE
 	: N O Q U E U E 
 	;
 
 NOQUIESCE
 	: N O Q U I E S C E 
+	;
+
+NORECOVDATA
+	: N O R E C O V D A T A 
+	;
+
+NORELEASE
+	: N O R E L E A S E 
+	;
+
+NORELREQ
+	: N O R E L R E Q 
+	;
+
+NOREPLICATOR
+	: N O R E P L I C A T O R 
+	;
+
+NORESRCE
+	: N O R E S R C E 
+	;
+
+NORESTART
+	: N O R E S T A R T 
+	;
+
+NORESYNC
+	: N O R E S Y N C 
 	;
 
 NORMAL
@@ -4298,6 +4730,10 @@ NOSDTRAN
 
 NOSEP
 	: N O S E P 
+	;
+
+NOSHUTDOWN
+	: N O S H U T D O W N 
 	;
 
 NOSPACE
@@ -4324,6 +4760,22 @@ NOSUSPEND
 	: N O S U S P E N D 
 	;
 
+NOSWITCH
+	: N O S W I T C H 
+	;
+
+NOSYNCPOINT
+	: N O S Y N C P O I N T 
+	;
+
+NOSYSDUMP
+	: N O S Y S D U M P 
+	;
+
+NOTADDABLE
+	: N O T A D D A B L E 
+	;
+
 NOTALLOC
 	: N O T A L L O C 
 	;
@@ -4332,8 +4784,24 @@ NOTAUTH
 	: N O T A U T H 
 	;
 
+NOTBROWSABLE
+	: N O T B R O W S A B L E 
+	;
+
+NOTCONNECTED
+	: N O T C O N N E C T E D 
+	;
+
+NOTDELETABLE
+	: N O T D E L E T A B L E 
+	;
+
 NOTE
 	: N O T E 
+	;
+
+NOTERMINAL
+	: N O T E R M I N A L 
 	;
 
 NOTFINISHED
@@ -4348,8 +4816,24 @@ NOTOPEN
 	: N O T O P E N 
 	;
 
+NOTPENDING
+	: N O T P E N D I N G 
+	;
+
 NOTPURGEABLE
 	: N O T P U R G E A B L E 
+	;
+
+NOTRANDUMP
+	: N O T R A N D U M P 
+	;
+
+NOTREADABLE
+	: N O T R E A D A B L E 
+	;
+
+NOTRLS
+	: N O T R L S 
 	;
 
 NOTRUNCATE
@@ -4360,8 +4844,36 @@ NOTSUPERUSER
 	: N O T S U P E R U S E R 
 	;
 
+NOTTABLE
+	: N O T T A B L E 
+	;
+
+NOTTI
+	: N O T T I 
+	;
+
+NOTUPDATABLE
+	: N O T U P D A T A B L E 
+	;
+
+NOTWAIT
+	: N O T W A I T 
+	;
+
+NOUCTRAN
+	: N O U C T R A N 
+	;
+
+NOVALIDATION
+	: N O V A L I D A T I O N 
+	;
+
 NOWAIT
 	: N O W A I T 
+	;
+
+NOZCPTRACE
+	: N O Z C P T R A C E 
 	;
 
 NQNAME
@@ -4428,6 +4940,10 @@ OAPPLID
 	: O A P P L I D 
 	;
 
+OBFORMAT
+	: O B F O R M A T 
+	;
+
 OBFORMATST
 	: O B F O R M A T S T 
 	;
@@ -4438,6 +4954,10 @@ OBJECT
 
 OBJECTNAME
 	: O B J E C T N A M E 
+	;
+
+OBOPERIDST
+	: O B O P E R I D S T 
 	;
 
 OCCUPANCY
@@ -4520,8 +5040,16 @@ ODUSERID
 	: O D U S E R I D 
 	;
 
+OFF
+	: O F F 
+	;
+
 OIDCARD
 	: O I D C A R D 
+	;
+
+OLD
+	: O L D 
 	;
 
 ON
@@ -4542,6 +5070,10 @@ OPENAPI
 
 OPENERR
 	: O P E N E R R 
+	;
+
+OPENOUTPUT
+	: O P E N O U T P U T 
 	;
 
 OPENSTATUS
@@ -4680,12 +5212,20 @@ OUTLINE
 	: O U T L I N E 
 	;
 
+OUTLINEST
+	: O U T L I N E S T 
+	;
+
 OUTPARTN
 	: O U T P A R T N 
 	;
 
 OUTPUT
 	: O U T P U T 
+	;
+
+OUTSERVICE
+	: O U T S E R V I C E 
 	;
 
 OUTTOKEN
@@ -4720,12 +5260,24 @@ PAGE
 	: P A G E 
 	;
 
+PAGEABLE
+	: P A G E A B L E 
+	;
+
+PAGEHT
+	: P A G E H T 
+	;
+
 PAGENUM
 	: P A G E N U M 
 	;
 
 PAGESTATUS
 	: P A G E S T A T U S 
+	;
+
+PAGEWD
+	: P A G E W D 
 	;
 
 PAGING
@@ -4750,6 +5302,10 @@ PARTIAL
 
 PARTITIONSET
 	: P A R T I T I O N S E T 
+	;
+
+PARTITIONSST
+	: P A R T I T I O N S S T 
 	;
 
 PARTN
@@ -4828,12 +5384,20 @@ PENDSTATUS
 	: P E N D S T A T U S 
 	;
 
+PERF
+	: P E R F 
+	;
+
 PERFCLASS
 	: P E R F C L A S S 
 	;
 
 PERFORM
 	: P E R F O R M 
+	;
+
+PERMANENT
+	: P E R M A N E N T 
 	;
 
 PF1
@@ -4946,6 +5510,10 @@ PGMINTERFACE
 
 PHAPPLID
 	: P H A P P L I D 
+	;
+
+PHASEIN
+	: P H A S E I N 
 	;
 
 PHCOUNT
@@ -5104,6 +5672,10 @@ PRINT
 	: P R I N T 
 	;
 
+PRINTADAPTST
+	: P R I N T A D A P T S T 
+	;
+
 PRINTCONTROL
 	: P R I N T C O N T R O L 
 	;
@@ -5122,6 +5694,10 @@ PRIORITY
 
 PRIVACY
 	: P R I V A C Y 
+	;
+
+PRIVATE
+	: P R I V A T E 
 	;
 
 PROCESS
@@ -5184,6 +5760,10 @@ PROGRAMDEF
 	: P R O G R A M D E F 
 	;
 
+PROGSYMBOLST
+	: P R O G S Y M B O L S T 
+	;
+
 PROGTYPE
 	: P R O G T Y P E 
 	;
@@ -5198,6 +5778,10 @@ PROTECTNUM
 
 PROTOCOL
 	: P R O T O C O L 
+	;
+
+PRTCOPY
+	: P R T C O P Y 
 	;
 
 PRTCOPYST
@@ -5352,6 +5936,10 @@ QUERYPARM
 	: Q U E R Y P A R M 
 	;
 
+QUERYST
+	: Q U E R Y S T 
+	;
+
 QUERYSTRING
 	: Q U E R Y S T R I N G 
 	;
@@ -5374,6 +5962,10 @@ QUEUED
 
 QUEUELIMIT
 	: Q U E U E L I M I T 
+	;
+
+QUIESCED
+	: Q U I E S C E D 
 	;
 
 QUIESCESTATE
@@ -5406,6 +5998,10 @@ RDSASIZE
 
 READ
 	: R E A D 
+	;
+
+READABLE
+	: R E A D A B L E 
 	;
 
 READINTEG
@@ -5460,6 +6056,10 @@ RECFM
 	: R E C F M 
 	;
 
+RECONNECT
+	: R E C O N N E C T 
+	;
+
 RECORD
 	: R E C O R D 
 	;
@@ -5490,6 +6090,10 @@ RECORDNOW
 
 RECORDSIZE
 	: R E C O R D S I Z E 
+	;
+
+RECOVERED
+	: R E C O V E R E D 
 	;
 
 RECOVERY
@@ -5524,8 +6128,16 @@ REFRESH
 	: R E F R E S H 
 	;
 
+REFRESHPKGS
+	: R E F R E S H P K G S 
+	;
+
 REGIONUSERID
 	: R E G I O N U S E R I D 
+	;
+
+RELATED
+	: R E L A T E D 
 	;
 
 RELATESINDEX
@@ -5546,6 +6158,10 @@ RELATION
 
 RELEASE
 	: R E L E A S E 
+	;
+
+RELEASED
+	: R E L E A S E D 
 	;
 
 RELREQ
@@ -5598,6 +6214,10 @@ REPLACE
 
 REPLICATION
 	: R E P L I C A T I O N 
+	;
+
+REPLICATOR
+	: R E P L I C A T O R 
 	;
 
 REPLY
@@ -5654,6 +6274,10 @@ RESET
 
 RESETBR
 	: R E S E T B R 
+	;
+
+RESETLOCKS
+	: R E S E T L O C K S 
 	;
 
 RESETNOW
@@ -5716,6 +6340,10 @@ RESPWAIT
 	: R E S P W A I T 
 	;
 
+RESRCE
+	: R E S R C E 
+	;
+
 RESRCECLASS
 	: R E S R C E C L A S S 
 	;
@@ -5776,6 +6404,10 @@ RETRIEVE
 	: R E T R I E V E 
 	;
 
+RETRY
+	: R E T R Y 
+	;
+
 RETURN
 	: R E T U R N 
 	;
@@ -5798,6 +6430,10 @@ REWRITE
 
 RIDFLD
 	: R I D F L D 
+	;
+
+RLS
+	: R L S 
 	;
 
 RLSACCESS
@@ -5850,6 +6486,10 @@ ROUTING
 
 RPROCESS
 	: R P R O C E S S 
+	;
+
+RREPL
+	: R R E P L 
 	;
 
 RRESOURCE
@@ -5926,6 +6566,10 @@ RUNTIME
 
 SADDRLENGTH
 	: S A D D R L E N G T H 
+	;
+
+SCAN
+	: S C A N 
 	;
 
 SCANDELAY
@@ -6068,6 +6712,10 @@ SERVERCONV
 	: S E R V E R C O N V 
 	;
 
+SERVERDUMP
+	: S E R V E R D U M P 
+	;
+
 SERVERIPADDR
 	: S E R V E R I P A D D R 
 	;
@@ -6104,6 +6752,10 @@ SESSIONS
 	: S E S S I O N S 
 	;
 
+SESSIONTYPE
+	: S E S S I O N T Y P E 
+	;
+
 SESSTOKEN
 	: S E S S T O K E N 
 	;
@@ -6114,6 +6766,10 @@ SET
 
 SETTRANSID
 	: S E T T R A N S I D 
+	;
+
+SHARE
+	: S H A R E 
 	;
 
 SHARED
@@ -6132,12 +6788,20 @@ SHELF
 	: S H E L F 
 	;
 
+SHUTDISABLED
+	: S H U T D I S A B L E D 
+	;
+
 SHUTDOWN
 	: S H U T D O W N 
 	;
 
 SHUTDOWNST
 	: S H U T D O W N S T 
+	;
+
+SHUTENABLED
+	: S H U T E N A B L E D 
 	;
 
 SHUTOPTION
@@ -6150,6 +6814,10 @@ SHUTSTATUS
 
 SIGDATA
 	: S I G D A T A 
+	;
+
+SIGN
+	: S I G N 
 	;
 
 SIGNAL
@@ -6168,6 +6836,18 @@ SIGNON
 	: S I G N O N 
 	;
 
+SIGNONSTATUS
+	: S I G N O N S T A T U S 
+	;
+
+SINGLEOFF
+	: S I N G L E O F F 
+	;
+
+SINGLEON
+	: S I N G L E O N 
+	;
+
 SINGLESTATUS
 	: S I N G L E S T A T U S 
 	;
@@ -6178,6 +6858,10 @@ SIT
 
 SNAMELENGTH
 	: S N A M E L E N G T H 
+	;
+
+SNAPTRACE
+	: S N A P T R A C E 
 	;
 
 SOAPFAULT
@@ -6224,6 +6908,10 @@ SOSI
 	: S O S I 
 	;
 
+SOSIST
+	: S O S I S T 
+	;
+
 SOSSTATUS
 	: S O S S T A T U S 
 	;
@@ -6234,6 +6922,10 @@ SPECIAL
 
 SPECIFTCPS
 	: S P E C I F T C P S 
+	;
+
+SPECTRACE
+	: S P E C T R A C E 
 	;
 
 SPI
@@ -6266,6 +6958,22 @@ SPOOLREAD
 
 SPOOLWRITE
 	: S P O O L W R I T E 
+	;
+
+SPRSTRACE
+	: S P R S T R A C E 
+	;
+
+SQLCODE
+	: S Q L C O D E 
+	;
+
+SRRACTIVE
+	: S R R A C T I V E 
+	;
+
+SRRINACTIVE
+	: S R R I N A C T I V E 
 	;
 
 SRRSTATUS
@@ -6312,12 +7020,20 @@ STACK
 	: S T A C K 
 	;
 
+STACKTRACE
+	: S T A C K T R A C E 
+	;
+
 STANDARD
 	: S T A N D A R D 
 	;
 
 STANDBYMODE
 	: S T A N D B Y M O D E 
+	;
+
+STANTRACE
+	: S T A N T R A C E 
 	;
 
 START
@@ -6346,6 +7062,10 @@ STARTBRRSRCE
 
 STARTCODE
 	: S T A R T C O D E 
+	;
+
+STARTED
+	: S T A R T E D 
 	;
 
 STARTIO
@@ -6422,6 +7142,10 @@ STDOUT
 
 STOP
 	: S T O P 
+	;
+
+STOPPED
+	: S T O P P E D 
 	;
 
 STORAGE
@@ -6520,6 +7244,10 @@ SUBPOOL
 	: S U B P O O L 
 	;
 
+SUBPOOLLIST
+	: S U B P O O L L I S T 
+	;
+
 SUBRESID
 	: S U B R E S I D 
 	;
@@ -6564,8 +7292,20 @@ SUSPSTATUS
 	: S U S P S T A T U S 
 	;
 
+SWITCH
+	: S W I T C H 
+	;
+
 SWITCHACTION
 	: S W I T C H A C T I O N 
+	;
+
+SWITCHALL
+	: S W I T C H A L L 
+	;
+
+SWITCHNEXT
+	: S W I T C H N E X T 
 	;
 
 SWITCHSTATUS
@@ -6640,6 +7380,14 @@ SYSTEMLOG
 	: S Y S T E M L O G 
 	;
 
+SYSTEMOFF
+	: S Y S T E M O F F 
+	;
+
+SYSTEMON
+	: S Y S T E M O N 
+	;
+
 SYSTEMSTATUS
 	: S Y S T E M S T A T U S 
 	;
@@ -6658,6 +7406,10 @@ TABLEMGR
 
 TABLENAME
 	: T A B L E N A M E 
+	;
+
+TABLEONLY
+	: T A B L E O N L Y 
 	;
 
 TABLES
@@ -6680,6 +7432,10 @@ TAGS
 	: T A G S 
 	;
 
+TAKEOVER
+	: T A K E O V E R 
+	;
+
 TALENGTH
 	: T A L E N G T H 
 	;
@@ -6690,6 +7446,10 @@ TARGET
 
 TARGETCOUNT
 	: T A R G E T C O U N T 
+	;
+
+TARGETSYS
+	: T A R G E T S Y S 
 	;
 
 TASK
@@ -6748,8 +7508,24 @@ TCBS
 	: T C B S 
 	;
 
+TCEXITALL
+	: T C E X I T A L L 
+	;
+
+TCEXITALLOFF
+	: T C E X I T A L L O F F 
+	;
+
+TCEXITNONE
+	: T C E X I T N O N E 
+	;
+
 TCEXITSTATUS
 	: T C E X I T S T A T U S 
+	;
+
+TCEXITSYSTEM
+	: T C E X I T S Y S T E M 
 	;
 
 TCIDERR
@@ -6816,8 +7592,16 @@ TEMPLATETYPE
 	: T E M P L A T E T Y P E 
 	;
 
+TEMPORARY
+	: T E M P O R A R Y 
+	;
+
 TEMPSTORAGE
 	: T E M P S T O R A G E 
+	;
+
+TERM
+	: T E R M 
 	;
 
 TERMCODE
@@ -6840,6 +7624,10 @@ TERMINAL
 	: T E R M I N A L 
 	;
 
+TERMMODEL
+	: T E R M M O D E L 
+	;
+
 TERMPRIORITY
 	: T E R M P R I O R I T Y 
 	;
@@ -6860,12 +7648,20 @@ TEXTKYBD
 	: T E X T K Y B D 
 	;
 
+TEXTKYBDST
+	: T E X T K Y B D S T 
+	;
+
 TEXTLENGTH
 	: T E X T L E N G T H 
 	;
 
 TEXTPRINT
 	: T E X T P R I N T 
+	;
+
+TEXTPRINTST
+	: T E X T P R I N T S T 
 	;
 
 THREADCOUNT
@@ -6996,6 +7792,10 @@ TPNAMELEN
 	: T P N A M E L E N 
 	;
 
+TPOOL
+	: T P O O L 
+	;
+
 TRACE
 	: T R A C E 
 	;
@@ -7042,6 +7842,10 @@ TRANDUMPCODE
 
 TRANDUMPING
 	: T R A N D U M P I N G 
+	;
+
+TRANIDONLY
+	: T R A N I D O N L Y 
 	;
 
 TRANISOLATE
@@ -7140,6 +7944,14 @@ TSYSTEM
 	: T S Y S T E M 
 	;
 
+TSYSTYPE
+	: T S Y S T Y P E 
+	;
+
+TTI
+	: T T I 
+	;
+
 TTISTATUS
 	: T T I S T A T U S 
 	;
@@ -7148,12 +7960,24 @@ TWA
 	: T W A 
 	;
 
+TWAIT
+	: T W A I T 
+	;
+
 TWALENG
 	: T W A L E N G 
 	;
 
 TWASIZE
 	: T W A S I Z E 
+	;
+
+TX
+	: T X 
+	;
+
+TXID
+	: T X I D 
 	;
 
 TYPE
@@ -7180,6 +8004,10 @@ TYPETERM
 	: T Y P E T E R M 
 	;
 
+UCTRAN
+	: U C T R A N 
+	;
+
 UCTRANST
 	: U C T R A N S T 
 	;
@@ -7190,6 +8018,10 @@ UDSASIZE
 
 UNATTEND
 	: U N A T T E N D 
+	;
+
+UNAVAILABLE
+	: U N A V A I L A B L E 
 	;
 
 UNCOMMITTED
@@ -7206,6 +8038,10 @@ UNEXPIN
 
 UNLOCK
 	: U N L O C K 
+	;
+
+UNQUIESCED
+	: U N Q U I E S C E D 
 	;
 
 UNTIL
@@ -7242,6 +8078,10 @@ UOWNOTFOUND
 
 UOWSTATE
 	: U O W S T A T E 
+	;
+
+UPDATABLE
+	: U P D A T A B L E 
 	;
 
 UPDATE
@@ -7292,6 +8132,14 @@ USER
 	: U S E R 
 	;
 
+USERAREA
+	: U S E R A R E A 
+	;
+
+USERAREALEN
+	: U S E R A R E A L E N 
+	;
+
 USERAUTH
 	: U S E R A U T H 
 	;
@@ -7332,12 +8180,24 @@ USERNAMELEN
 	: U S E R N A M E L E N 
 	;
 
+USEROFF
+	: U S E R O F F 
+	;
+
+USERON
+	: U S E R O N 
+	;
+
 USERPRIORITY
 	: U S E R P R I O R I T Y 
 	;
 
 USERSTATUS
 	: U S E R S T A T U S 
+	;
+
+USERTABLE
+	: U S E R T A B L E 
 	;
 
 USERTAG
@@ -7382,6 +8242,10 @@ VERSION
 
 VERSIONLEN
 	: V E R S I O N L E N 
+	;
+
+VFORMST
+	: V F O R M S T 
 	;
 
 VOLIDERR
@@ -7560,6 +8424,10 @@ YEAR
 	: Y E A R 
 	;
 
+YES
+	: Y E S 
+	;
+
 YYDDD
 	: Y Y D D D 
 	;
@@ -7584,11 +8452,15 @@ YYYYMMDD
 	: Y Y Y Y M M D D 
 	;
 
+ZCPTRACE
+	: Z C P T R A C E 
+	;
+
 ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 1873 rules generated Sun Apr  7 16:15:22 CDT 2024
+// 2091 rules generated Mon Apr  8 17:23:52 CDT 2024
 
 mode ARG_MODE;
 

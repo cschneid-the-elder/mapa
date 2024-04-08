@@ -23,7 +23,7 @@
 				printf("[ ]+ ");
 			} else if (chars[i] ~ /[0-9]/) {
 				printf("'%s' ", chars[i]);
-			} else {
+  			} else {
 				printf("%s ", chars[i])
 			}
 		}

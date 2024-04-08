@@ -555,6 +555,8 @@ cicsSPI
 	| performResettime
 	| performSecurityRebuild
 	| performShutdown
+	| performShutdownImmediate
+	| performShutdownTakeover
 	| performSslRebuild
 	| performStatisticsRecord
 	| resyncEntryname
@@ -3633,6 +3635,18 @@ performShutdown
 	)
 	;
 
+performShutdownImmediate
+	: (
+	 performOption shutdownOption immediateOption performShutdownImmediateOptions*
+	)
+	;
+
+performShutdownTakeover
+	: (
+	 performOption shutdownOption takeoverOption performShutdownTakeoverOptions*
+	)
+	;
+
 performSslRebuild
 	: (
 	 performOption sslOption rebuildOption performSslRebuildOptions*
@@ -4041,7 +4055,7 @@ setXmltransform
 	)
 	;
 
-// 567 rules generated Sun Apr  7 16:15:25 CDT 2024
+// 569 rules generated Mon Apr  8 17:23:56 CDT 2024
 
 abendOptions
 	: (
@@ -10523,6 +10537,9 @@ inquireMvstcbOptions
 	| endOption
 	| setOption
 	| numelementsOption
+	| elementlistOption
+	| lengthlistOption
+	| subpoollistOption
 	| exceptionOptions
 	)
 	;
@@ -11041,6 +11058,7 @@ inquireSystemOptions
 	| erdsasizeOption
 	| rlsstatusOption
 	| esdsasizeOption
+	| etdsasizeOption
 	| runawayOption
 	| eudsasizeOption
 	| scandelayOption
@@ -11331,6 +11349,54 @@ inquireTerminalOptions
 	| modenameOption
 	| msrcontrolstOption
 	| natlangOption
+	| natureOption
+	| nexttransidOption
+	| nqnameOption
+	| obformatstOption
+	| oboperidstOption
+	| operidOption
+	| outlinestOption
+	| pagehtOption
+	| pagestatusOption
+	| pagewdOption
+	| partitionsstOption
+	| printadaptstOption
+	| printerOption
+	| progsymbolstOption
+	| prtcopystOption
+	| querystOption
+	| relreqstOption
+	| remotenameOption
+	| remotesysnetOption
+	| remotesystemOption
+	| scrnhtOption
+	| scrnwdOption
+	| securityOption
+	| servstatusOption
+	| sessiontypeOption
+	| signonstatusOption
+	| sosistOption
+	| taskidOption
+	| tcamcontrolOption
+	| termmodelOption
+	| termpriorityOption
+	| termstatusOption
+	| textkybdstOption
+	| textprintstOption
+	| tnaddrOption
+	| tnipfamilyOption
+	| tnportOption
+	| tracingOption
+	| transactionOption
+	| ttistatusOption
+	| uctranstOption
+	| userareaOption
+	| userarealenOption
+	| useridOption
+	| usernameOption
+	| validationstOption
+	| vformstOption
+	| zcptracingOption
 	| exceptionOptions
 	)
 	;
@@ -11776,6 +11842,8 @@ inquireWorkrequestOptions
 	| endOption
 	| worktypeOption
 	| clientipaddrOption
+	| clntip6addrOption
+	| clntipfamilyOption
 	| corbaserverOption
 	| listenerportOption
 	| oapplidOption
@@ -11783,9 +11851,11 @@ inquireWorkrequestOptions
 	| otransidOption
 	| requestidOption
 	| stackOption
+	| targetsysOption
 	| taskOption
 	| transidOption
 	| tsystemOption
+	| tsystypeOption
 	| exceptionOptions
 	)
 	;
@@ -11850,14 +11920,29 @@ performJvmserverOptions
 	: (
 	jvmtypeOption
 	| jvmactionOption
+	| jvmOption
+	| dumpOption
 	| dumptypeOption
+	| allOption
+	| javacoreOption
+	| heapOption
+	| snaptraceOption
+	| gatherOption
 	| gathertypeOption
+	| diagnosticsOption
+	| stacktraceOption
 	| taskidOption
+	| libertyOption
 	| librtyactionOption
+	| refreshOption
 	| resourcetypeOption
+	| applicationOption
 	| appidOption
 	| appidlenOption
+	| configOption
+	| serverdumpOption
 	| osgiactionOption
+	| refreshpkgsOption
 	| exceptionOptions
 	)
 	;
@@ -11865,6 +11950,7 @@ performJvmserverOptions
 performPipelineOptions
 	: (
 	actionOption
+	| scanOption
 	| exceptionOptions
 	)
 	;
@@ -11891,6 +11977,25 @@ performShutdownOptions
 	| nosdtranOption
 	| xltOption
 	| dumpOption
+	| exceptionOptions
+	)
+	;
+
+performShutdownImmediateOptions
+	: (
+	norestartOption
+	| sdtranOption
+	| dumpOption
+	| nosdtranOption
+	| exceptionOptions
+	)
+	;
+
+performShutdownTakeoverOptions
+	: (
+	sdtranOption
+	| dumpOption
+	| nosdtranOption
 	| exceptionOptions
 	)
 	;
@@ -11982,6 +12087,8 @@ setAssociationUsercorrdataOptions
 setAtomserviceOptions
 	: (
 	enablestatusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -11999,6 +12106,7 @@ setAutoinstallOptions
 setBrfacilityOptions
 	: (
 	termstatusOption
+	| releasedOption
 	| exceptionOptions
 	)
 	;
@@ -12006,8 +12114,13 @@ setBrfacilityOptions
 setBundleOptions
 	: (
 	availstatusOption
+	| availableOption
+	| unavailableOption
 	| enablestatusOption
+	| enabledOption
+	| disabledOption
 	| copyOption
+	| phaseinOption
 	| exceptionOptions
 	)
 	;
@@ -12016,14 +12129,34 @@ setConnectionOptions
 	: (
 	acqstatusOption
 	| connstatusOption
+	| acquiredOption
+	| releasedOption
 	| affinityOption
+	| endaffinityOption
 	| exittracingOption
+	| exittraceOption
+	| noexittraceOption
 	| pendstatusOption
+	| notpendingOption
 	| purgetypeOption
+	| cancelOption
+	| forcecancelOption
+	| forcepurgeOption
+	| killOption
+	| purgeOption
 	| recovstatusOption
+	| norecovdataOption
 	| servstatusOption
+	| inserviceOption
+	| outserviceOption
 	| uowactionOption
+	| backoutOption
+	| commitOption
+	| forceuowOption
+	| resyncOption
 	| zcptracingOption
+	| nozcptraceOption
+	| zcptraceOption
 	| exceptionOptions
 	)
 	;
@@ -12031,34 +12164,69 @@ setConnectionOptions
 setDb2connOptions
 	: (
 	accountrecOption
+	| uowOption
+	| taskOption
+	| txidOption
+	| noneOption
 	| authidOption
 	| authtypeOption
+	| groupOption
+	| signOption
+	| termOption
+	| txOption
+	| opidOption
+	| useridOption
 	| busyOption
+	| waitOption
+	| nowaitOption
+	| forceOption
 	| comauthidOption
 	| comauthtypeOption
+	| cgroupOption
+	| csignOption
+	| ctermOption
+	| ctxOption
+	| copidOption
+	| cuseridOption
 	| comthreadlimOption
 	| connecterrorOption
+	| abendOption
+	| sqlcodeOption
 	| connectstOption
+	| connectedOption
+	| notconnectedOption
 	| db2groupidOption
 	| db2idOption
 	| msgqueue1Option
 	| msgqueue2Option
 	| msgqueue3Option
 	| nontermrelOption
+	| releaseOption
+	| noreleaseOption
 	| planOption
 	| planexitnameOption
 	| priorityOption
+	| highOption
+	| equalOption
+	| lowOption
 	| purgecyclemOption
 	| purgecyclesOption
 	| resyncmemberOption
+	| resyncOption
+	| noresyncOption
 	| reuselimitOption
 	| securityOption
 	| signidOption
 	| standbymodeOption
+	| noconnectOption
+	| connectOption
+	| reconnectOption
 	| statsqueueOption
 	| tcblimitOption
 	| threadlimitOption
 	| threadwaitOption
+	| twaitOption
+	| notwaitOption
 	| exceptionOptions
 	)
 	;
@@ -12066,18 +12234,44 @@ setDb2connOptions
 setDb2entryOptions
 	: (
 	accountrecOption
+	| uowOption
+	| taskOption
+	| txidOption
+	| noneOption
 	| authidOption
 	| authtypeOption
+	| groupOption
+	| signOption
+	| termOption
+	| txOption
+	| opidOption
+	| useridOption
 	| busyOption
+	| waitOption
+	| nowaitOption
+	| forceOption
 	| disabledactOption
+	| abendOption
+	| sqlcodeOption
+	| poolOption
 	| enablestatusOption
+	| enabledOption
+	| disabledOption
 	| planOption
 	| planexitnameOption
 	| priorityOption
+	| highOption
+	| equalOption
+	| lowOption
 	| protectnumOption
 	| sharelocksOption
+	| yesOption
+	| noOption
 	| threadlimitOption
 	| threadwaitOption
+	| twaitOption
+	| notwaitOption
+	| tpoolOption
 	| exceptionOptions
 	)
 	;
@@ -12121,6 +12315,7 @@ setDispatcherOptions
 setDoctemplateOptions
 	: (
 	copyOption
+	| newcopyOption
 	| exceptionOptions
 	)
 	;
@@ -12128,10 +12323,25 @@ setDoctemplateOptions
 setDsnameOptions
 	: (
 	actionOption
+	| removeOption
+	| recoveredOption
+	| resetlocksOption
+	| retryOption
 	| availabilityOption
+	| availableOption
+	| rreplOption
+	| unavailableOption
 	| quescestateOption
+	| quiescedOption
+	| immquiescedOption
+	| unquiescedOption
 	| busyOption
+	| waitOption
+	| nowaitOption
 	| uowactionOption
+	| backoutOption
+	| commitOption
+	| forceOption
 	| exceptionOptions
 	)
 	;
@@ -12140,7 +12350,13 @@ setDumpdsOptions
 	: (
 	initialddsOption
 	| openstatusOption
+	| closedOption
+	| openOption
+	| switchOption
 	| switchstatusOption
+	| noswitchOption
+	| switchnextOption
+	| switchallOption
 	| exceptionOptions
 	)
 	;
@@ -12148,6 +12364,8 @@ setDumpdsOptions
 setEnqmodelOptions
 	: (
 	statusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -12155,6 +12373,8 @@ setEnqmodelOptions
 setEpadapterOptions
 	: (
 	enablestatusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -12162,6 +12382,8 @@ setEpadapterOptions
 setEpadaptersetOptions
 	: (
 	enablestatusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -12169,6 +12391,8 @@ setEpadaptersetOptions
 setEventbindingOptions
 	: (
 	enablestatusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -12176,6 +12400,9 @@ setEventbindingOptions
 setEventprocessOptions
 	: (
 	epstatusOption
+	| startedOption
+	| drainOption
+	| stoppedOption
 	| exceptionOptions
 	)
 	;
@@ -12183,30 +12410,67 @@ setEventprocessOptions
 setFileOptions
 	: (
 	addOption
+	| addableOption
+	| notaddableOption
 	| browseOption
+	| browsableOption
+	| notbrowsableOption
 	| busyOption
+	| waitOption
+	| forceOption
+	| nowaitOption
 	| cfdtpoolOption
 	| deleteOption
+	| deletableOption
+	| notdeletableOption
 	| dispositionOption
+	| oldOption
+	| shareOption
 	| emptystatusOption
+	| emptyOption
+	| emptyreqOption
+	| noemptyreqOption
 	| dsnameOption
 	| objectnameOption
 	| enablestatusOption
+	| disabledOption
+	| enabledOption
 	| openstatusOption
+	| closedOption
+	| openOption
 	| exclusiveOption
+	| exctlOption
+	| noexctlOption
 	| keylengthOption
 	| lsrpoolnumOption
 	| loadtypeOption
+	| loadOption
+	| noloadOption
 	| maxnumrecsOption
 	| readOption
+	| notreadableOption
+	| readableOption
 	| recordsizeOption
 	| readintegOption
+	| uncommittedOption
+	| consistentOption
+	| repeatableOption
 	| rlsaccessOption
+	| rlsOption
+	| notrlsOption
 	| stringsOption
 	| tableOption
+	| cftableOption
+	| cicstableOption
+	| nottableOption
+	| usertableOption
 	| tablenameOption
 	| updateOption
+	| notupdatableOption
+	| updatableOption
 	| updatemodelOption
+	| contentionOption
+	| lockingOption
 	| exceptionOptions
 	)
 	;
@@ -12214,30 +12478,67 @@ setFileOptions
 setDatasetOptions
 	: (
 	addOption
+	| addableOption
+	| notaddableOption
 	| browseOption
+	| browsableOption
+	| notbrowsableOption
 	| busyOption
+	| waitOption
+	| forceOption
+	| nowaitOption
 	| cfdtpoolOption
 	| deleteOption
+	| deletableOption
+	| notdeletableOption
 	| dispositionOption
+	| oldOption
+	| shareOption
 	| emptystatusOption
+	| emptyOption
+	| emptyreqOption
+	| noemptyreqOption
 	| dsnameOption
 	| objectnameOption
 	| enablestatusOption
+	| disabledOption
+	| enabledOption
 	| openstatusOption
+	| closedOption
+	| openOption
 	| exclusiveOption
+	| exctlOption
+	| noexctlOption
 	| keylengthOption
 	| lsrpoolnumOption
 	| loadtypeOption
+	| loadOption
+	| noloadOption
 	| maxnumrecsOption
 	| readOption
+	| notreadableOption
+	| readableOption
 	| recordsizeOption
 	| readintegOption
+	| uncommittedOption
+	| consistentOption
+	| repeatableOption
 	| rlsaccessOption
+	| rlsOption
+	| notrlsOption
 	| stringsOption
 	| tableOption
+	| cftableOption
+	| cicstableOption
+	| nottableOption
+	| usertableOption
 	| tablenameOption
 	| updateOption
+	| notupdatableOption
+	| updatableOption
 	| updatemodelOption
+	| contentionOption
+	| lockingOption
 	| exceptionOptions
 	)
 	;
@@ -12245,6 +12546,8 @@ setDatasetOptions
 setHostOptions
 	: (
 	enablestatusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -12252,11 +12555,26 @@ setHostOptions
 setIpconnOptions
 	: (
 	connstatusOption
+	| acquiredOption
+	| releasedOption
 	| pendstatusOption
+	| notpendingOption
 	| purgetypeOption
+	| cancelOption
+	| forcecancelOption
+	| forcepurgeOption
+	| killOption
+	| purgeOption
 	| recovstatusOption
+	| norecovdataOption
 	| servstatusOption
+	| inserviceOption
+	| outserviceOption
 	| uowactionOption
+	| backoutOption
+	| commitOption
+	| forceuowOption
+	| resyncOption
 	| exceptionOptions
 	)
 	;
@@ -12264,6 +12582,9 @@ setIpconnOptions
 setIrcOptions
 	: (
 	openstatusOption
+	| closedOption
+	| immcloseOption
+	| openOption
 	| exceptionOptions
 	)
 	;
@@ -12271,7 +12592,11 @@ setIrcOptions
 setJournalnameOptions
 	: (
 	actionOption
+	| flushOption
+	| resetOption
 	| statusOption
+	| disabledOption
+	| enabledOption
 	| exceptionOptions
 	)
 	;
@@ -12279,6 +12604,10 @@ setJournalnameOptions
 setJournalnumOptions
 	: (
 	openstatusOption
+	| advanceOption
+	| closedOption
+	| closeleaveOption
+	| openoutputOption
 	| exceptionOptions
 	)
 	;
@@ -12287,6 +12616,8 @@ setJvmendpointOptions
 	: (
 	jvmserverOption
 	| enablestatusOption
+	| enabledOption
+	| disabledOption
 	| exceptionOptions
 	)
 	;
@@ -12295,7 +12626,12 @@ setJvmserverOptions
 	: (
 	threadlimitOption
 	| enablestatusOption
+	| enabledOption
+	| disabledOption
 	| purgetypeOption
+	| purgeOption
+	| forcepurgeOption
+	| killOption
 	| exceptionOptions
 	)
 	;
@@ -12303,7 +12639,11 @@ setJvmserverOptions
 setLibraryOptions
 	: (
 	criticalstOption
+	| criticalOption
+	| noncriticalOption
 	| enablestatusOption
+	| enabledOption
+	| disabledOption
 	| rankingOption
 	| exceptionOptions
 	)
@@ -12314,6 +12654,8 @@ setModenameOptions
 	availableOption
 	| connectionOption
 	| acqstatusOption
+	| acquiredOption
+	| closedOption
 	| exceptionOptions
 	)
 	;
@@ -12321,19 +12663,35 @@ setModenameOptions
 setMonitorOptions
 	: (
 	compressstOption
+	| compressOption
+	| nocompressOption
 	| conversestOption
+	| converseOption
+	| noconverseOption
 	| dpllimitOption
 	| filelimitOption
 	| exceptclassOption
+	| exceptOption
+	| noexceptOption
 	| frequencyOption
 	| frequencyhrsOption
 	| frequencyminOption
 	| frequencysecOption
 	| idntyclassOption
+	| idntyOption
+	| noidntyOption
 	| perfclassOption
+	| perfOption
+	| noperfOption
 	| resrceclassOption
+	| resrceOption
+	| noresrceOption
 	| statusOption
+	| onOption
+	| offOption
 	| syncpointstOption
+	| syncpointOption
+	| nosyncpointOption
 	| tsqueuelimitOption
 	| urimaplimitOption
 	| webservlimitOption
@@ -12344,9 +12702,17 @@ setMonitorOptions
 setMqconnOptions
 	: (
 	busyOption
+	| waitOption
+	| nowaitOption
+	| forceOption
 	| mqnameOption
 	| connectstOption
+	| connectedOption
+	| notconnectedOption
 	| resyncmemberOption
+	| resyncOption
+	| noresyncOption
+	| groupresyncOption
 	| exceptionOptions
 	)
 	;
@@ -12354,8 +12720,14 @@ setMqconnOptions
 setMqmonitorOptions
 	: (
 	autostatusOption
+	| autostartOption
+	| noautostartOption
 	| enablestatusOption
+	| enabledOption
+	| disabledOption
 	| monstatusOption
+	| startedOption
+	| stoppedOption
 	| exceptionOptions
 	)
 	;
@@ -12363,6 +12735,8 @@ setMqmonitorOptions
 setNetnameOptions
 	: (
 	exittracingOption
+	| exittraceOption
+	| noexittraceOption
 	| exceptionOptions
 	)
 	;
@@ -12370,6 +12744,8 @@ setNetnameOptions
 setPipelineOptions
 	: (
 	enablestatusOption
+	| enabledOption
+	| disabledOption
 	| respwaitOption
 	| exceptionOptions
 	)
@@ -12378,7 +12754,13 @@ setPipelineOptions
 setProcesstypeOptions
 	: (
 	statusOption
+	| disabledOption
+	| enabledOption
 	| auditlevelOption
+	| activityOption
+	| fullOption
+	| offOption
+	| processOption
 	| exceptionOptions
 	)
 	;
@@ -12386,15 +12768,29 @@ setProcesstypeOptions
 setProgramOptions
 	: (
 	cedfstatusOption
+	| cedfOption
+	| nocedfOption
 	| copyOption
+	| newcopyOption
+	| phaseinOption
 	| executionsetOption
+	| dplsubsetOption
+	| fullapiOption
 	| jvmclassOption
 	| jvmprofileOption
 	| operationOption
 	| replicationOption
+	| replicatorOption
+	| noreplicatorOption
 	| runtimeOption
+	| jvmOption
+	| nojvmOption
 	| sharestatusOption
+	| sharedOption
+	| privateOption
 	| statusOption
+	| disabledOption
+	| enabledOption
 	| versionOption
 	| exceptionOptions
 	)
@@ -12403,6 +12799,8 @@ setProgramOptions
 setSecrecordingOptions
 	: (
 	actionOption
+	| modifyOption
+	| removeOption
 	| addOption
 	| maximumOption
 	| odadptridOption
@@ -12437,6 +12835,8 @@ setStatisticsOptions
 	| intervalminsOption
 	| intervalsecsOption
 	| recordingOption
+	| onOption
+	| offOption
 	| recordnowOption
 	| resetnowOption
 	| exceptionOptions
@@ -12446,13 +12846,24 @@ setStatisticsOptions
 setSysdumpcodeOptions
 	: (
 	actionOption
+	| addOption
+	| removeOption
+	| resetOption
 	| daeoptionOption
+	| daeOption
+	| nodaeOption
 	| dsplistOption
 	| dumpscopeOption
+	| localOption
+	| relatedOption
 	| joblistOption
 	| maximumOption
 	| shutoptionOption
+	| noshutdownOption
+	| shutdownOption
 	| sysdumpingOption
+	| nosysdumpOption
+	| sysdumpOption
 	| exceptionOptions
 	)
 	;
@@ -12461,12 +12872,19 @@ setSystemOptions
 	: (
 	akpOption
 	| debugtoolOption
+	| debugOption
+	| nodebugOption
 	| dsalimitOption
 	| dsrtprogramOption
 	| dtrprogramOption
 	| dumpingOption
+	| nosysdumpOption
+	| tableonlyOption
+	| sysdumpOption
 	| edsalimitOption
 	| forceqrOption
+	| forceOption
+	| noforceOption
 	| gmmtextOption
 	| gmmlengthOption
 	| logdeferOption
@@ -12474,8 +12892,13 @@ setSystemOptions
 	| newmaxtasksOption
 	| mrobatchOption
 	| progautoctlgOption
+	| ctlgallOption
+	| ctlgmodifyOption
+	| ctlgnoneOption
 	| progautoexitOption
 	| progautoinstOption
+	| autoactiveOption
+	| autoinactiveOption
 	| prtyagingOption
 	| runawayOption
 	| scandelayOption
@@ -12495,7 +12918,12 @@ setTaskOptions
 	: (
 	priorityOption
 	| purgetypeOption
+	| forcepurgeOption
+	| killOption
+	| purgeOption
 	| srrstatusOption
+	| srractiveOption
+	| srrinactiveOption
 	| exceptionOptions
 	)
 	;
@@ -12512,6 +12940,9 @@ setTcpipOptions
 	maxsocketsOption
 	| newmaxsocketOption
 	| openstatusOption
+	| closedOption
+	| immcloseOption
+	| openOption
 	| exceptionOptions
 	)
 	;
@@ -12521,6 +12952,9 @@ setTcpipserviceOptions
 	backlogOption
 	| maxdatalenOption
 	| openstatusOption
+	| closedOption
+	| immcloseOption
+	| openOption
 	| urmOption
 	| exceptionOptions
 	)
@@ -12529,11 +12963,17 @@ setTcpipserviceOptions
 setTdqueueOptions
 	: (
 	atifacilityOption
+	| noterminalOption
+	| terminalOption
 	| atitermidOption
 	| atitranidOption
 	| atiuseridOption
 	| enablestatusOption
+	| disabledOption
+	| enabledOption
 	| openstatusOption
+	| closedOption
+	| openOption
 	| triggerlevelOption
 	| exceptionOptions
 	)
@@ -12550,29 +12990,66 @@ setTerminalOptions
 	: (
 	acqstatusOption
 	| termstatusOption
+	| acquiredOption
+	| coldacqOption
+	| releasedOption
 	| altprinterOption
 	| altprtcopystOption
+	| altprtcopyOption
+	| noaltprtcopyOption
 	| atistatusOption
+	| atiOption
+	| noatiOption
 	| createsessOption
+	| createOption
+	| nocreateOption
 	| discreqstOption
+	| discreqOption
+	| nodiscreqOption
 	| exittracingOption
+	| exittraceOption
+	| noexittraceOption
 	| mapnameOption
 	| nexttransidOption
 	| mapsetnameOption
 	| obformatstOption
+	| obformatOption
+	| noobformatOption
 	| operidOption
 	| pagestatusOption
+	| autopageableOption
+	| pageableOption
 	| printerOption
 	| prtcopystOption
+	| prtcopyOption
+	| noprtcopyOption
 	| purgetypeOption
+	| cancelOption
+	| forcepurgeOption
+	| killOption
+	| purgeOption
+	| forceOption
 	| relreqstOption
+	| norelreqOption
+	| relreqOption
 	| servstatusOption
+	| inserviceOption
+	| outserviceOption
 	| tcamcontrolOption
 	| termpriorityOption
 	| tracingOption
+	| spectraceOption
+	| stantraceOption
 	| ttistatusOption
+	| ttiOption
+	| nottiOption
 	| uctranstOption
+	| uctranOption
+	| nouctranOption
+	| tranidonlyOption
 	| zcptracingOption
+	| nozcptraceOption
+	| zcptraceOption
 	| exceptionOptions
 	)
 	;
@@ -12580,10 +13057,21 @@ setTerminalOptions
 setTracedestOptions
 	: (
 	auxstatusOption
+	| auxpauseOption
+	| auxstartOption
+	| auxstopOption
 	| gtfstatusOption
+	| gtfstartOption
+	| gtfstopOption
 	| intstatusOption
+	| intstartOption
+	| intstopOption
 	| switchactionOption
+	| switchOption
 	| switchstatusOption
+	| noswitchOption
+	| switchnextOption
+	| switchallOption
 	| tablesizeOption
 	| exceptionOptions
 	)
@@ -12592,9 +13080,19 @@ setTracedestOptions
 setTraceflagOptions
 	: (
 	singlestatusOption
+	| singleoffOption
+	| singleonOption
 	| systemstatusOption
+	| systemoffOption
+	| systemonOption
 	| tcexitstatusOption
+	| tcexitallOption
+	| tcexitalloffOption
+	| tcexitnoneOption
+	| tcexitsystemOption
 	| userstatusOption
+	| useroffOption
+	| useronOption
 	| exceptionOptions
 	)
 	;
@@ -12602,6 +13100,8 @@ setTraceflagOptions
 setTracetypeOptions
 	: (
 	flagsetOption
+	| specialOption
+	| standardOption
 	| compidOption
 	| exceptionOptions
 	)
@@ -12618,11 +13118,22 @@ setTranclassOptions
 setTrandumpcodeOptions
 	: (
 	actionOption
+	| addOption
+	| removeOption
+	| resetOption
 	| dumpscopeOption
+	| localOption
+	| relatedOption
 	| maximumOption
 	| shutoptionOption
+	| noshutdownOption
+	| shutdownOption
 	| sysdumpingOption
+	| nosysdumpOption
+	| sysdumpOption
 	| trandumpingOption
+	| notrandumpOption
+	| trandumpOption
 	| exceptionOptions
 	)
 	;
@@ -12630,14 +13141,28 @@ setTrandumpcodeOptions
 setTransactionOptions
 	: (
 	dumpingOption
+	| trandumpOption
+	| notrandumpOption
 	| priorityOption
 	| purgeabilityOption
+	| notpurgeableOption
+	| purgeableOption
 	| runawayOption
 	| runawaytypeOption
+	| systemOption
+	| userOption
 	| shutdownOption
+	| shutdisabledOption
+	| shutenabledOption
 	| statusOption
+	| disabledOption
+	| enabledOption
 	| tclassOption
+	| tranclassOption
 	| tracingOption
+	| spectraceOption
+	| sprstraceOption
+	| stantraceOption
 	| exceptionOptions
 	)
 	;
@@ -12647,6 +13172,7 @@ setTsqueueOptions
 	sysidOption
 	| poolnameOption
 	| actionOption
+	| deleteOption
 	| lastusedintOption
 	| exceptionOptions
 	)
@@ -12657,6 +13183,7 @@ setTsqnameOptions
 	sysidOption
 	| poolnameOption
 	| actionOption
+	| deleteOption
 	| lastusedintOption
 	| exceptionOptions
 	)
@@ -12665,6 +13192,9 @@ setTsqnameOptions
 setUowOptions
 	: (
 	uowstateOption
+	| commitOption
+	| backoutOption
+	| forceOption
 	| exceptionOptions
 	)
 	;
@@ -12672,6 +13202,7 @@ setUowOptions
 setUowlinkOptions
 	: (
 	actionOption
+	| deleteOption
 	| exceptionOptions
 	)
 	;
@@ -12679,7 +13210,12 @@ setUowlinkOptions
 setUrimapOptions
 	: (
 	enablestatusOption
+	| disabledOption
+	| enabledOption
 	| redirecttypeOption
+	| noneOption
+	| permanentOption
+	| temporaryOption
 	| locationOption
 	| exceptionOptions
 	)
@@ -12688,6 +13224,10 @@ setUrimapOptions
 setVtamOptions
 	: (
 	openstatusOption
+	| closedOption
+	| forcecloseOption
+	| immcloseOption
+	| openOption
 	| psdintervalOption
 	| psdinthrsOption
 	| psdintminsOption
@@ -12708,6 +13248,8 @@ setWebOptions
 setWebserviceOptions
 	: (
 	validationstOption
+	| validationOption
+	| novalidationOption
 	| exceptionOptions
 	)
 	;
@@ -12717,6 +13259,9 @@ setWlmhealthOptions
 	adjustmentOption
 	| intervalOption
 	| openstatusOption
+	| openOption
+	| closedOption
+	| immcloseOption
 	| exceptionOptions
 	)
 	;
@@ -12724,11 +13269,13 @@ setWlmhealthOptions
 setXmltransformOptions
 	: (
 	validationstOption
+	| validationOption
+	| novalidationOption
 	| exceptionOptions
 	)
 	;
 
-// 567 rules generated Sun Apr  7 16:15:25 CDT 2024
+// 569 rules generated Mon Apr  8 17:23:56 CDT 2024
 
 abcodeOption
 	: (
@@ -12868,6 +13415,12 @@ acquireOption
 	)
 	;
 
+acquiredOption
+	: (
+	ACQUIRED
+	)
+	;
+
 actionOption
 	: (
 	ACTION arg
@@ -12964,6 +13517,12 @@ addOption
 	)
 	;
 
+addableOption
+	: (
+	ADDABLE
+	)
+	;
+
 addressOption
 	: (
 	ADDRESS arg?
@@ -12979,6 +13538,12 @@ address64Option
 adjustmentOption
 	: (
 	ADJUSTMENT arg
+	)
+	;
+
+advanceOption
+	: (
+	ADVANCE
 	)
 	;
 
@@ -13075,6 +13640,12 @@ altpagewdOption
 altprinterOption
 	: (
 	ALTPRINTER arg
+	)
+	;
+
+altprtcopyOption
+	: (
+	ALTPRTCOPY
 	)
 	;
 
@@ -13188,7 +13759,7 @@ appldataOption
 
 applicationOption
 	: (
-	APPLICATION arg
+	APPLICATION arg?
 	)
 	;
 
@@ -13348,6 +13919,12 @@ atOption
 	)
 	;
 
+atiOption
+	: (
+	ATI
+	)
+	;
+
 atifacilityOption
 	: (
 	ATIFACILITY arg
@@ -13486,9 +14063,21 @@ autinstmodelOption
 	)
 	;
 
+autoactiveOption
+	: (
+	AUTOACTIVE
+	)
+	;
+
 autoconnectOption
 	: (
 	AUTOCONNECT arg
+	)
+	;
+
+autoinactiveOption
+	: (
+	AUTOINACTIVE
 	)
 	;
 
@@ -13504,9 +14093,15 @@ autopageOption
 	)
 	;
 
+autopageableOption
+	: (
+	AUTOPAGEABLE
+	)
+	;
+
 autostartOption
 	: (
-	AUTOSTART arg
+	AUTOSTART arg?
 	)
 	;
 
@@ -13522,9 +14117,27 @@ auxiliaryOption
 	)
 	;
 
+auxpauseOption
+	: (
+	AUXPAUSE
+	)
+	;
+
+auxstartOption
+	: (
+	AUXSTART
+	)
+	;
+
 auxstatusOption
 	: (
 	AUXSTATUS arg
+	)
+	;
+
+auxstopOption
+	: (
+	AUXSTOP
 	)
 	;
 
@@ -13536,7 +14149,7 @@ availabilityOption
 
 availableOption
 	: (
-	AVAILABLE arg
+	AVAILABLE arg?
 	)
 	;
 
@@ -13549,6 +14162,12 @@ availstatusOption
 backlogOption
 	: (
 	BACKLOG arg
+	)
+	;
+
+backoutOption
+	: (
+	BACKOUT
 	)
 	;
 
@@ -13699,6 +14318,12 @@ brfacilityOption
 bridgeOption
 	: (
 	BRIDGE arg
+	)
+	;
+
+browsableOption
+	: (
+	BROWSABLE
 	)
 	;
 
@@ -13876,6 +14501,12 @@ cdsasizeOption
 	)
 	;
 
+cedfOption
+	: (
+	CEDF
+	)
+	;
+
 cedfstatusOption
 	: (
 	CEDFSTATUS arg
@@ -13891,6 +14522,18 @@ certificateOption
 cfdtpoolOption
 	: (
 	CFDTPOOL arg?
+	)
+	;
+
+cftableOption
+	: (
+	CFTABLE
+	)
+	;
+
+cgroupOption
+	: (
+	CGROUP
 	)
 	;
 
@@ -14008,6 +14651,12 @@ cicssysOption
 	)
 	;
 
+cicstableOption
+	: (
+	CICSTABLE
+	)
+	;
+
 cicstslevelOption
 	: (
 	CICSTSLEVEL arg
@@ -14104,6 +14753,12 @@ clntaddr6nuOption
 	)
 	;
 
+clntip6addrOption
+	: (
+	CLNTIP6ADDR arg
+	)
+	;
+
 clntipfamilyOption
 	: (
 	CLNTIPFAMILY arg
@@ -14113,6 +14768,18 @@ clntipfamilyOption
 closeOption
 	: (
 	CLOSE
+	)
+	;
+
+closedOption
+	: (
+	CLOSED
+	)
+	;
+
+closeleaveOption
+	: (
+	CLOSELEAVE
 	)
 	;
 
@@ -14176,6 +14843,12 @@ codepageerrOption
 	)
 	;
 
+coldacqOption
+	: (
+	COLDACQ
+	)
+	;
+
 coldstatusOption
 	: (
 	COLDSTATUS arg
@@ -14215,6 +14888,12 @@ comauthtypeOption
 commareaOption
 	: (
 	COMMAREA arg
+	)
+	;
+
+commitOption
+	: (
+	COMMIT
 	)
 	;
 
@@ -14272,6 +14951,12 @@ compositeOption
 	)
 	;
 
+compressOption
+	: (
+	COMPRESS
+	)
+	;
+
 compressstOption
 	: (
 	COMPRESSST arg
@@ -14314,6 +14999,12 @@ conditionOption
 	)
 	;
 
+configOption
+	: (
+	CONFIG
+	)
+	;
+
 configdata1Option
 	: (
 	CONFIGDATA1 arg
@@ -14341,6 +15032,12 @@ confirmationOption
 connectOption
 	: (
 	CONNECT
+	)
+	;
+
+connectedOption
+	: (
+	CONNECTED
 	)
 	;
 
@@ -14422,6 +15119,12 @@ containererrOption
 	)
 	;
 
+contentionOption
+	: (
+	CONTENTION
+	)
+	;
+
 contexttypeOption
 	: (
 	CONTEXTTYPE arg
@@ -14473,6 +15176,12 @@ converttimeOption
 convidOption
 	: (
 	CONVID arg
+	)
+	;
+
+copidOption
+	: (
+	COPID
 	)
 	;
 
@@ -14578,9 +15287,45 @@ csderrOption
 	)
 	;
 
+csignOption
+	: (
+	CSIGN
+	)
+	;
+
+ctermOption
+	: (
+	CTERM
+	)
+	;
+
 ctlcharOption
 	: (
 	CTLCHAR arg
+	)
+	;
+
+ctlgallOption
+	: (
+	CTLGALL
+	)
+	;
+
+ctlgmodifyOption
+	: (
+	CTLGMODIFY
+	)
+	;
+
+ctlgnoneOption
+	: (
+	CTLGNONE
+	)
+	;
+
+ctxOption
+	: (
+	CTX
 	)
 	;
 
@@ -14662,6 +15407,12 @@ cursorOption
 	)
 	;
 
+cuseridOption
+	: (
+	CUSERID
+	)
+	;
+
 cwaOption
 	: (
 	CWA arg
@@ -14671,6 +15422,12 @@ cwaOption
 cwalengOption
 	: (
 	CWALENG arg
+	)
+	;
+
+daeOption
+	: (
+	DAE
 	)
 	;
 
@@ -14932,6 +15689,12 @@ debrecOption
 	)
 	;
 
+debugOption
+	: (
+	DEBUG
+	)
+	;
+
 debugtoolOption
 	: (
 	DEBUGTOOL arg
@@ -15001,6 +15764,12 @@ defscrnwdOption
 delayOption
 	: (
 	DELAY
+	)
+	;
+
+deletableOption
+	: (
+	DELETABLE
 	)
 	;
 
@@ -15088,6 +15857,12 @@ dfltuserOption
 	)
 	;
 
+diagnosticsOption
+	: (
+	DIAGNOSTICS
+	)
+	;
+
 digestOption
 	: (
 	DIGEST
@@ -15127,6 +15902,12 @@ discardOption
 disconnectOption
 	: (
 	DISCONNECT
+	)
+	;
+
+discreqOption
+	: (
+	DISCREQ
 	)
 	;
 
@@ -15223,6 +16004,18 @@ documentOption
 dpllimitOption
 	: (
 	DPLLIMIT arg
+	)
+	;
+
+dplsubsetOption
+	: (
+	DPLSUBSET
+	)
+	;
+
+drainOption
+	: (
+	DRAIN
 	)
 	;
 
@@ -15580,6 +16373,18 @@ emitmodeOption
 	)
 	;
 
+emptyOption
+	: (
+	EMPTY
+	)
+	;
+
+emptyreqOption
+	: (
+	EMPTYREQ
+	)
+	;
+
 emptystatusOption
 	: (
 	EMPTYSTATUS arg
@@ -15589,6 +16394,12 @@ emptystatusOption
 enableOption
 	: (
 	ENABLE
+	)
+	;
+
+enabledOption
+	: (
+	ENABLED
 	)
 	;
 
@@ -15976,6 +16787,12 @@ esmrespOption
 	)
 	;
 
+etdsasizeOption
+	: (
+	ETDSASIZE arg
+	)
+	;
+
 eudsasizeOption
 	: (
 	EUDSASIZE arg
@@ -16036,6 +16853,12 @@ exactmatchOption
 	)
 	;
 
+exceptOption
+	: (
+	EXCEPT
+	)
+	;
+
 exceptclassOption
 	: (
 	EXCEPTCLASS arg
@@ -16057,6 +16880,12 @@ exciOption
 exclusiveOption
 	: (
 	EXCLUSIVE arg
+	)
+	;
+
+exctlOption
+	: (
+	EXCTL
 	)
 	;
 
@@ -16099,6 +16928,12 @@ exitpgmOption
 exitprogramOption
 	: (
 	EXITPROGRAM arg?
+	)
+	;
+
+exittraceOption
+	: (
+	EXITTRACE
 	)
 	;
 
@@ -16348,6 +17183,12 @@ flengthOption
 	)
 	;
 
+flushOption
+	: (
+	FLUSH
+	)
+	;
+
 fmhOption
 	: (
 	FMH
@@ -16396,9 +17237,33 @@ forceOption
 	)
 	;
 
+forcecancelOption
+	: (
+	FORCECANCEL
+	)
+	;
+
+forcecloseOption
+	: (
+	FORCECLOSE
+	)
+	;
+
+forcepurgeOption
+	: (
+	FORCEPURGE
+	)
+	;
+
 forceqrOption
 	: (
 	FORCEQR arg
+	)
+	;
+
+forceuowOption
+	: (
+	FORCEUOW
 	)
 	;
 
@@ -16564,6 +17429,18 @@ frsetOption
 	)
 	;
 
+fullOption
+	: (
+	FULL
+	)
+	;
+
+fullapiOption
+	: (
+	FULLAPI
+	)
+	;
+
 fulldateOption
 	: (
 	FULLDATE arg
@@ -16627,6 +17504,12 @@ garbageintOption
 gasetOption
 	: (
 	GASET arg
+	)
+	;
+
+gatherOption
+	: (
+	GATHER
 	)
 	;
 
@@ -16770,13 +17653,19 @@ grnameOption
 
 groupOption
 	: (
-	GROUP arg
+	GROUP arg?
 	)
 	;
 
 groupidOption
 	: (
 	GROUPID arg
+	)
+	;
+
+groupresyncOption
+	: (
+	GROUPRESYNC
 	)
 	;
 
@@ -16804,9 +17693,21 @@ gteqOption
 	)
 	;
 
+gtfstartOption
+	: (
+	GTFSTART
+	)
+	;
+
 gtfstatusOption
 	: (
 	GTFSTATUS arg
+	)
+	;
+
+gtfstopOption
+	: (
+	GTFSTOP
 	)
 	;
 
@@ -16864,6 +17765,12 @@ healthcheckOption
 	)
 	;
 
+heapOption
+	: (
+	HEAP
+	)
+	;
+
 hexOption
 	: (
 	HEX
@@ -16879,6 +17786,12 @@ hformstOption
 hfsfileOption
 	: (
 	HFSFILE arg
+	)
+	;
+
+highOption
+	: (
+	HIGH
 	)
 	;
 
@@ -17014,6 +17927,12 @@ idlistlengthOption
 	)
 	;
 
+idntyOption
+	: (
+	IDNTY
+	)
+	;
+
 idntyclassOption
 	: (
 	IDNTYCLASS arg
@@ -17050,9 +17969,21 @@ illogicOption
 	)
 	;
 
+immcloseOption
+	: (
+	IMMCLOSE
+	)
+	;
+
 immediateOption
 	: (
 	IMMEDIATE
+	)
+	;
+
+immquiescedOption
+	: (
+	IMMQUIESCED
 	)
 	;
 
@@ -17218,6 +18149,12 @@ insertOption
 	)
 	;
 
+inserviceOption
+	: (
+	INSERVICE
+	)
+	;
+
 installOption
 	: (
 	INSTALL
@@ -17284,9 +18221,21 @@ intocodepageOption
 	)
 	;
 
+intstartOption
+	: (
+	INTSTART
+	)
+	;
+
 intstatusOption
 	: (
 	INTSTATUS arg
+	)
+	;
+
+intstopOption
+	: (
+	INTSTOP
 	)
 	;
 
@@ -17488,6 +18437,12 @@ iutypeOption
 	)
 	;
 
+javacoreOption
+	: (
+	JAVACORE
+	)
+	;
+
 javahomeOption
 	: (
 	JAVAHOME arg
@@ -17584,6 +18539,12 @@ justifyOption
 	)
 	;
 
+jvmOption
+	: (
+	JVM
+	)
+	;
+
 jvmactionOption
 	: (
 	JVMACTION arg
@@ -17677,6 +18638,12 @@ keynumberOption
 keypositionOption
 	: (
 	KEYPOSITION arg
+	)
+	;
+
+killOption
+	: (
+	KILL
 	)
 	;
 
@@ -17866,6 +18833,12 @@ levelOption
 	)
 	;
 
+libertyOption
+	: (
+	LIBERTY
+	)
+	;
+
 libraryOption
 	: (
 	LIBRARY arg?
@@ -18022,6 +18995,12 @@ loadtypeOption
 	)
 	;
 
+localOption
+	: (
+	LOCAL
+	)
+	;
+
 localccsidOption
 	: (
 	LOCALCCSID arg
@@ -18055,6 +19034,12 @@ lockOption
 lockedOption
 	: (
 	LOCKED arg?
+	)
+	;
+
+lockingOption
+	: (
+	LOCKING
 	)
 	;
 
@@ -18109,6 +19094,12 @@ logrepstatusOption
 lostlocksOption
 	: (
 	LOSTLOCKS arg
+	)
+	;
+
+lowOption
+	: (
+	LOW
 	)
 	;
 
@@ -18544,6 +19535,12 @@ modenameOption
 	)
 	;
 
+modifyOption
+	: (
+	MODIFY
+	)
+	;
+
 mondataOption
 	: (
 	MONDATA arg
@@ -18736,6 +19733,12 @@ natlanginuseOption
 	)
 	;
 
+natureOption
+	: (
+	NATURE arg
+	)
+	;
+
 netidOption
 	: (
 	NETID arg
@@ -18769,6 +19772,12 @@ networkOption
 networkidOption
 	: (
 	NETWORKID arg
+	)
+	;
+
+newcopyOption
+	: (
+	NEWCOPY
 	)
 	;
 
@@ -18844,15 +19853,45 @@ nleomOption
 	)
 	;
 
+noOption
+	: (
+	NO
+	)
+	;
+
+noaltprtcopyOption
+	: (
+	NOALTPRTCOPY
+	)
+	;
+
+noatiOption
+	: (
+	NOATI
+	)
+	;
+
 noautopageOption
 	: (
 	NOAUTOPAGE
 	)
 	;
 
+noautostartOption
+	: (
+	NOAUTOSTART
+	)
+	;
+
 noccOption
 	: (
 	NOCC
+	)
+	;
+
+nocedfOption
+	: (
+	NOCEDF
 	)
 	;
 
@@ -18880,9 +19919,39 @@ nocompatOption
 	)
 	;
 
+nocompressOption
+	: (
+	NOCOMPRESS
+	)
+	;
+
+noconnectOption
+	: (
+	NOCONNECT
+	)
+	;
+
 noconvOption
 	: (
 	NOCONV
+	)
+	;
+
+noconverseOption
+	: (
+	NOCONVERSE
+	)
+	;
+
+nocreateOption
+	: (
+	NOCREATE
+	)
+	;
+
+nodaeOption
+	: (
+	NODAE
 	)
 	;
 
@@ -18895,6 +19964,12 @@ nodataOption
 nodeOption
 	: (
 	NODE arg
+	)
+	;
+
+nodebugOption
+	: (
+	NODEBUG
 	)
 	;
 
@@ -18916,6 +19991,12 @@ nodejsappOption
 	)
 	;
 
+nodiscreqOption
+	: (
+	NODISCREQ
+	)
+	;
+
 nodocdeleteOption
 	: (
 	NODOCDELETE
@@ -18934,15 +20015,51 @@ noeditOption
 	)
 	;
 
+noemptyreqOption
+	: (
+	NOEMPTYREQ
+	)
+	;
+
+noexceptOption
+	: (
+	NOEXCEPT
+	)
+	;
+
+noexctlOption
+	: (
+	NOEXCTL
+	)
+	;
+
+noexittraceOption
+	: (
+	NOEXITTRACE
+	)
+	;
+
 noflushOption
 	: (
 	NOFLUSH
 	)
 	;
 
+noforceOption
+	: (
+	NOFORCE
+	)
+	;
+
 nohandleOption
 	: (
 	NOHANDLE
+	)
+	;
+
+noidntyOption
+	: (
+	NOIDNTY
 	)
 	;
 
@@ -18958,9 +20075,27 @@ nojbufspOption
 	)
 	;
 
+nojvmOption
+	: (
+	NOJVM
+	)
+	;
+
+noloadOption
+	: (
+	NOLOAD
+	)
+	;
+
 nologOption
 	: (
 	NOLOG
+	)
+	;
+
+noncriticalOption
+	: (
+	NONCRITICAL
 	)
 	;
 
@@ -18988,6 +20123,12 @@ nonvalOption
 	)
 	;
 
+noobformatOption
+	: (
+	NOOBFORMAT
+	)
+	;
+
 nooutconvertOption
 	: (
 	NOOUTCONVERT
@@ -19006,6 +20147,18 @@ nopassbkwrOption
 	)
 	;
 
+noperfOption
+	: (
+	NOPERF
+	)
+	;
+
+noprtcopyOption
+	: (
+	NOPRTCOPY
+	)
+	;
+
 noqueueOption
 	: (
 	NOQUEUE
@@ -19015,6 +20168,48 @@ noqueueOption
 noquiesceOption
 	: (
 	NOQUIESCE
+	)
+	;
+
+norecovdataOption
+	: (
+	NORECOVDATA
+	)
+	;
+
+noreleaseOption
+	: (
+	NORELEASE
+	)
+	;
+
+norelreqOption
+	: (
+	NORELREQ
+	)
+	;
+
+noreplicatorOption
+	: (
+	NOREPLICATOR
+	)
+	;
+
+noresrceOption
+	: (
+	NORESRCE
+	)
+	;
+
+norestartOption
+	: (
+	NORESTART
+	)
+	;
+
+noresyncOption
+	: (
+	NORESYNC
 	)
 	;
 
@@ -19033,6 +20228,12 @@ nosdtranOption
 nosepOption
 	: (
 	NOSEP
+	)
+	;
+
+noshutdownOption
+	: (
+	NOSHUTDOWN
 	)
 	;
 
@@ -19072,6 +20273,30 @@ nosuspendOption
 	)
 	;
 
+noswitchOption
+	: (
+	NOSWITCH
+	)
+	;
+
+nosyncpointOption
+	: (
+	NOSYNCPOINT
+	)
+	;
+
+nosysdumpOption
+	: (
+	NOSYSDUMP
+	)
+	;
+
+notaddableOption
+	: (
+	NOTADDABLE
+	)
+	;
+
 notallocOption
 	: (
 	NOTALLOC arg?
@@ -19084,9 +20309,33 @@ notauthOption
 	)
 	;
 
+notbrowsableOption
+	: (
+	NOTBROWSABLE
+	)
+	;
+
+notconnectedOption
+	: (
+	NOTCONNECTED
+	)
+	;
+
+notdeletableOption
+	: (
+	NOTDELETABLE
+	)
+	;
+
 noteOption
 	: (
 	NOTE
+	)
+	;
+
+noterminalOption
+	: (
+	NOTERMINAL
 	)
 	;
 
@@ -19108,9 +20357,33 @@ notopenOption
 	)
 	;
 
+notpendingOption
+	: (
+	NOTPENDING
+	)
+	;
+
 notpurgeableOption
 	: (
 	NOTPURGEABLE
+	)
+	;
+
+notrandumpOption
+	: (
+	NOTRANDUMP
+	)
+	;
+
+notreadableOption
+	: (
+	NOTREADABLE
+	)
+	;
+
+notrlsOption
+	: (
+	NOTRLS
 	)
 	;
 
@@ -19126,9 +20399,51 @@ notsuperuserOption
 	)
 	;
 
+nottableOption
+	: (
+	NOTTABLE
+	)
+	;
+
+nottiOption
+	: (
+	NOTTI
+	)
+	;
+
+notupdatableOption
+	: (
+	NOTUPDATABLE
+	)
+	;
+
+notwaitOption
+	: (
+	NOTWAIT
+	)
+	;
+
+nouctranOption
+	: (
+	NOUCTRAN
+	)
+	;
+
+novalidationOption
+	: (
+	NOVALIDATION
+	)
+	;
+
 nowaitOption
 	: (
 	NOWAIT
+	)
+	;
+
+nozcptraceOption
+	: (
+	NOZCPTRACE
 	)
 	;
 
@@ -19228,6 +20543,12 @@ oapplidOption
 	)
 	;
 
+obformatOption
+	: (
+	OBFORMAT
+	)
+	;
+
 obformatstOption
 	: (
 	OBFORMATST arg
@@ -19243,6 +20564,12 @@ objectOption
 objectnameOption
 	: (
 	OBJECTNAME arg
+	)
+	;
+
+oboperidstOption
+	: (
+	OBOPERIDST arg
 	)
 	;
 
@@ -19366,9 +20693,21 @@ oduseridOption
 	)
 	;
 
+offOption
+	: (
+	OFF
+	)
+	;
+
 oidcardOption
 	: (
 	OIDCARD arg
+	)
+	;
+
+oldOption
+	: (
+	OLD
 	)
 	;
 
@@ -19399,6 +20738,12 @@ openapiOption
 openerrOption
 	: (
 	OPENERR arg?
+	)
+	;
+
+openoutputOption
+	: (
+	OPENOUTPUT
 	)
 	;
 
@@ -19440,7 +20785,7 @@ operpurgeOption
 
 opidOption
 	: (
-	OPID arg
+	OPID arg?
 	)
 	;
 
@@ -19606,6 +20951,12 @@ outlineOption
 	)
 	;
 
+outlinestOption
+	: (
+	OUTLINEST arg
+	)
+	;
+
 outpartnOption
 	: (
 	OUTPARTN arg
@@ -19615,6 +20966,12 @@ outpartnOption
 outputOption
 	: (
 	OUTPUT
+	)
+	;
+
+outserviceOption
+	: (
+	OUTSERVICE
 	)
 	;
 
@@ -19666,6 +21023,18 @@ pageOption
 	)
 	;
 
+pageableOption
+	: (
+	PAGEABLE
+	)
+	;
+
+pagehtOption
+	: (
+	PAGEHT arg
+	)
+	;
+
 pagenumOption
 	: (
 	PAGENUM arg
@@ -19675,6 +21044,12 @@ pagenumOption
 pagestatusOption
 	: (
 	PAGESTATUS arg
+	)
+	;
+
+pagewdOption
+	: (
+	PAGEWD arg
 	)
 	;
 
@@ -19711,6 +21086,12 @@ partialOption
 partitionsetOption
 	: (
 	PARTITIONSET arg?
+	)
+	;
+
+partitionsstOption
+	: (
+	PARTITIONSST arg
 	)
 	;
 
@@ -19828,6 +21209,12 @@ pendstatusOption
 	)
 	;
 
+perfOption
+	: (
+	PERF
+	)
+	;
+
 perfclassOption
 	: (
 	PERFCLASS arg
@@ -19837,6 +21224,12 @@ perfclassOption
 performOption
 	: (
 	PERFORM
+	)
+	;
+
+permanentOption
+	: (
+	PERMANENT
 	)
 	;
 
@@ -20008,6 +21401,12 @@ phapplidOption
 	)
 	;
 
+phaseinOption
+	: (
+	PHASEIN
+	)
+	;
+
 phcountOption
 	: (
 	PHCOUNT arg
@@ -20136,7 +21535,7 @@ policyruleOption
 
 poolOption
 	: (
-	POOL arg
+	POOL arg?
 	)
 	;
 
@@ -20242,6 +21641,12 @@ printOption
 	)
 	;
 
+printadaptstOption
+	: (
+	PRINTADAPTST arg
+	)
+	;
+
 printcontrolOption
 	: (
 	PRINTCONTROL arg
@@ -20269,6 +21674,12 @@ priorityOption
 privacyOption
 	: (
 	PRIVACY arg
+	)
+	;
+
+privateOption
+	: (
+	PRIVATE
 	)
 	;
 
@@ -20362,6 +21773,12 @@ programdefOption
 	)
 	;
 
+progsymbolstOption
+	: (
+	PROGSYMBOLST arg
+	)
+	;
+
 progtypeOption
 	: (
 	PROGTYPE arg
@@ -20383,6 +21800,12 @@ protectnumOption
 protocolOption
 	: (
 	PROTOCOL arg
+	)
+	;
+
+prtcopyOption
+	: (
+	PRTCOPY
 	)
 	;
 
@@ -20614,6 +22037,12 @@ queryparmOption
 	)
 	;
 
+querystOption
+	: (
+	QUERYST arg
+	)
+	;
+
 querystringOption
 	: (
 	QUERYSTRING arg
@@ -20647,6 +22076,12 @@ queuedOption
 queuelimitOption
 	: (
 	QUEUELIMIT arg
+	)
+	;
+
+quiescedOption
+	: (
+	QUIESCED
 	)
 	;
 
@@ -20695,6 +22130,12 @@ rdsasizeOption
 readOption
 	: (
 	READ arg?
+	)
+	;
+
+readableOption
+	: (
+	READABLE
 	)
 	;
 
@@ -20776,6 +22217,12 @@ recfmOption
 	)
 	;
 
+reconnectOption
+	: (
+	RECONNECT
+	)
+	;
+
 recordOption
 	: (
 	RECORD arg?
@@ -20821,6 +22268,12 @@ recordnowOption
 recordsizeOption
 	: (
 	RECORDSIZE arg
+	)
+	;
+
+recoveredOption
+	: (
+	RECOVERED
 	)
 	;
 
@@ -20872,9 +22325,21 @@ refreshOption
 	)
 	;
 
+refreshpkgsOption
+	: (
+	REFRESHPKGS
+	)
+	;
+
 regionuseridOption
 	: (
 	REGIONUSERID arg
+	)
+	;
+
+relatedOption
+	: (
+	RELATED
 	)
 	;
 
@@ -20905,6 +22370,12 @@ relationOption
 releaseOption
 	: (
 	RELEASE arg?
+	)
+	;
+
+releasedOption
+	: (
+	RELEASED
 	)
 	;
 
@@ -20983,6 +22454,12 @@ replaceOption
 replicationOption
 	: (
 	REPLICATION arg
+	)
+	;
+
+replicatorOption
+	: (
+	REPLICATOR
 	)
 	;
 
@@ -21067,6 +22544,12 @@ resetOption
 resetbrOption
 	: (
 	RESETBR
+	)
+	;
+
+resetlocksOption
+	: (
+	RESETLOCKS
 	)
 	;
 
@@ -21160,6 +22643,12 @@ respwaitOption
 	)
 	;
 
+resrceOption
+	: (
+	RESRCE
+	)
+	;
+
 resrceclassOption
 	: (
 	RESRCECLASS arg
@@ -21250,6 +22739,12 @@ retrieveOption
 	)
 	;
 
+retryOption
+	: (
+	RETRY
+	)
+	;
+
 returnOption
 	: (
 	RETURN
@@ -21283,6 +22778,12 @@ rewriteOption
 ridfldOption
 	: (
 	RIDFLD arg
+	)
+	;
+
+rlsOption
+	: (
+	RLS
 	)
 	;
 
@@ -21361,6 +22862,12 @@ routingOption
 rprocessOption
 	: (
 	RPROCESS arg
+	)
+	;
+
+rreplOption
+	: (
+	RREPL
 	)
 	;
 
@@ -21475,6 +22982,12 @@ runtimeOption
 saddrlengthOption
 	: (
 	SADDRLENGTH arg
+	)
+	;
+
+scanOption
+	: (
+	SCAN
 	)
 	;
 
@@ -21688,6 +23201,12 @@ serverconvOption
 	)
 	;
 
+serverdumpOption
+	: (
+	SERVERDUMP
+	)
+	;
+
 serveripaddrOption
 	: (
 	SERVERIPADDR arg
@@ -21742,6 +23261,12 @@ sessionsOption
 	)
 	;
 
+sessiontypeOption
+	: (
+	SESSIONTYPE arg
+	)
+	;
+
 sesstokenOption
 	: (
 	SESSTOKEN arg
@@ -21757,6 +23282,12 @@ setOption
 settransidOption
 	: (
 	SETTRANSID arg
+	)
+	;
+
+shareOption
+	: (
+	SHARE
 	)
 	;
 
@@ -21784,6 +23315,12 @@ shelfOption
 	)
 	;
 
+shutdisabledOption
+	: (
+	SHUTDISABLED
+	)
+	;
+
 shutdownOption
 	: (
 	SHUTDOWN arg?
@@ -21793,6 +23330,12 @@ shutdownOption
 shutdownstOption
 	: (
 	SHUTDOWNST arg
+	)
+	;
+
+shutenabledOption
+	: (
+	SHUTENABLED
 	)
 	;
 
@@ -21811,6 +23354,12 @@ shutstatusOption
 sigdataOption
 	: (
 	SIGDATA arg
+	)
+	;
+
+signOption
+	: (
+	SIGN
 	)
 	;
 
@@ -21838,6 +23387,24 @@ signonOption
 	)
 	;
 
+signonstatusOption
+	: (
+	SIGNONSTATUS arg
+	)
+	;
+
+singleoffOption
+	: (
+	SINGLEOFF
+	)
+	;
+
+singleonOption
+	: (
+	SINGLEON
+	)
+	;
+
 singlestatusOption
 	: (
 	SINGLESTATUS arg
@@ -21853,6 +23420,12 @@ sitOption
 snamelengthOption
 	: (
 	SNAMELENGTH arg
+	)
+	;
+
+snaptraceOption
+	: (
+	SNAPTRACE
 	)
 	;
 
@@ -21916,6 +23489,12 @@ sosiOption
 	)
 	;
 
+sosistOption
+	: (
+	SOSIST arg
+	)
+	;
+
 sosstatusOption
 	: (
 	SOSSTATUS arg
@@ -21931,6 +23510,12 @@ specialOption
 speciftcpsOption
 	: (
 	SPECIFTCPS arg
+	)
+	;
+
+spectraceOption
+	: (
+	SPECTRACE
 	)
 	;
 
@@ -21979,6 +23564,30 @@ spoolreadOption
 spoolwriteOption
 	: (
 	SPOOLWRITE
+	)
+	;
+
+sprstraceOption
+	: (
+	SPRSTRACE
+	)
+	;
+
+sqlcodeOption
+	: (
+	SQLCODE
+	)
+	;
+
+srractiveOption
+	: (
+	SRRACTIVE
+	)
+	;
+
+srrinactiveOption
+	: (
+	SRRINACTIVE
 	)
 	;
 
@@ -22048,6 +23657,12 @@ stackOption
 	)
 	;
 
+stacktraceOption
+	: (
+	STACKTRACE
+	)
+	;
+
 standardOption
 	: (
 	STANDARD
@@ -22057,6 +23672,12 @@ standardOption
 standbymodeOption
 	: (
 	STANDBYMODE arg
+	)
+	;
+
+stantraceOption
+	: (
+	STANTRACE
 	)
 	;
 
@@ -22099,6 +23720,12 @@ startbrrsrceOption
 startcodeOption
 	: (
 	STARTCODE arg
+	)
+	;
+
+startedOption
+	: (
+	STARTED
 	)
 	;
 
@@ -22213,6 +23840,12 @@ stdoutOption
 stopOption
 	: (
 	STOP
+	)
+	;
+
+stoppedOption
+	: (
+	STOPPED
 	)
 	;
 
@@ -22360,6 +23993,12 @@ subpoolOption
 	)
 	;
 
+subpoollistOption
+	: (
+	SUBPOOLLIST arg
+	)
+	;
+
 subresidOption
 	: (
 	SUBRESID arg
@@ -22426,9 +24065,27 @@ suspstatusOption
 	)
 	;
 
+switchOption
+	: (
+	SWITCH
+	)
+	;
+
 switchactionOption
 	: (
 	SWITCHACTION arg
+	)
+	;
+
+switchallOption
+	: (
+	SWITCHALL
+	)
+	;
+
+switchnextOption
+	: (
+	SWITCHNEXT
 	)
 	;
 
@@ -22540,6 +24197,18 @@ systemlogOption
 	)
 	;
 
+systemoffOption
+	: (
+	SYSTEMOFF
+	)
+	;
+
+systemonOption
+	: (
+	SYSTEMON
+	)
+	;
+
 systemstatusOption
 	: (
 	SYSTEMSTATUS arg
@@ -22567,6 +24236,12 @@ tablemgrOption
 tablenameOption
 	: (
 	TABLENAME arg
+	)
+	;
+
+tableonlyOption
+	: (
+	TABLEONLY
 	)
 	;
 
@@ -22600,6 +24275,12 @@ tagsOption
 	)
 	;
 
+takeoverOption
+	: (
+	TAKEOVER
+	)
+	;
+
 talengthOption
 	: (
 	TALENGTH arg
@@ -22615,6 +24296,12 @@ targetOption
 targetcountOption
 	: (
 	TARGETCOUNT arg
+	)
+	;
+
+targetsysOption
+	: (
+	TARGETSYS arg
 	)
 	;
 
@@ -22702,9 +24389,33 @@ tcbsOption
 	)
 	;
 
+tcexitallOption
+	: (
+	TCEXITALL
+	)
+	;
+
+tcexitalloffOption
+	: (
+	TCEXITALLOFF
+	)
+	;
+
+tcexitnoneOption
+	: (
+	TCEXITNONE
+	)
+	;
+
 tcexitstatusOption
 	: (
 	TCEXITSTATUS arg
+	)
+	;
+
+tcexitsystemOption
+	: (
+	TCEXITSYSTEM
 	)
 	;
 
@@ -22804,9 +24515,21 @@ templatetypeOption
 	)
 	;
 
+temporaryOption
+	: (
+	TEMPORARY
+	)
+	;
+
 tempstorageOption
 	: (
 	TEMPSTORAGE
+	)
+	;
+
+termOption
+	: (
+	TERM
 	)
 	;
 
@@ -22840,6 +24563,12 @@ terminalOption
 	)
 	;
 
+termmodelOption
+	: (
+	TERMMODEL arg
+	)
+	;
+
 termpriorityOption
 	: (
 	TERMPRIORITY arg
@@ -22870,6 +24599,12 @@ textkybdOption
 	)
 	;
 
+textkybdstOption
+	: (
+	TEXTKYBDST arg
+	)
+	;
+
 textlengthOption
 	: (
 	TEXTLENGTH arg
@@ -22879,6 +24614,12 @@ textlengthOption
 textprintOption
 	: (
 	TEXTPRINT arg
+	)
+	;
+
+textprintstOption
+	: (
+	TEXTPRINTST arg
 	)
 	;
 
@@ -23074,6 +24815,12 @@ tpnamelenOption
 	)
 	;
 
+tpoolOption
+	: (
+	TPOOL
+	)
+	;
+
 traceOption
 	: (
 	TRACE arg?
@@ -23143,6 +24890,12 @@ trandumpcodeOption
 trandumpingOption
 	: (
 	TRANDUMPING arg
+	)
+	;
+
+tranidonlyOption
+	: (
+	TRANIDONLY
 	)
 	;
 
@@ -23290,6 +25043,18 @@ tsystemOption
 	)
 	;
 
+tsystypeOption
+	: (
+	TSYSTYPE arg
+	)
+	;
+
+ttiOption
+	: (
+	TTI
+	)
+	;
+
 ttistatusOption
 	: (
 	TTISTATUS arg
@@ -23302,6 +25067,12 @@ twaOption
 	)
 	;
 
+twaitOption
+	: (
+	TWAIT
+	)
+	;
+
 twalengOption
 	: (
 	TWALENG arg
@@ -23311,6 +25082,18 @@ twalengOption
 twasizeOption
 	: (
 	TWASIZE arg
+	)
+	;
+
+txOption
+	: (
+	TX
+	)
+	;
+
+txidOption
+	: (
+	TXID
 	)
 	;
 
@@ -23350,6 +25133,12 @@ typetermOption
 	)
 	;
 
+uctranOption
+	: (
+	UCTRAN
+	)
+	;
+
 uctranstOption
 	: (
 	UCTRANST arg
@@ -23365,6 +25154,12 @@ udsasizeOption
 unattendOption
 	: (
 	UNATTEND arg
+	)
+	;
+
+unavailableOption
+	: (
+	UNAVAILABLE
 	)
 	;
 
@@ -23389,6 +25184,12 @@ unexpinOption
 unlockOption
 	: (
 	UNLOCK
+	)
+	;
+
+unquiescedOption
+	: (
+	UNQUIESCED
 	)
 	;
 
@@ -23443,6 +25244,12 @@ uownotfoundOption
 uowstateOption
 	: (
 	UOWSTATE arg
+	)
+	;
+
+updatableOption
+	: (
+	UPDATABLE
 	)
 	;
 
@@ -23518,6 +25325,18 @@ userOption
 	)
 	;
 
+userareaOption
+	: (
+	USERAREA arg
+	)
+	;
+
+userarealenOption
+	: (
+	USERAREALEN arg
+	)
+	;
+
 userauthOption
 	: (
 	USERAUTH arg
@@ -23556,7 +25375,7 @@ userdefineOption
 
 useridOption
 	: (
-	USERID arg
+	USERID arg?
 	)
 	;
 
@@ -23578,6 +25397,18 @@ usernamelenOption
 	)
 	;
 
+useroffOption
+	: (
+	USEROFF
+	)
+	;
+
+useronOption
+	: (
+	USERON
+	)
+	;
+
 userpriorityOption
 	: (
 	USERPRIORITY arg
@@ -23587,6 +25418,12 @@ userpriorityOption
 userstatusOption
 	: (
 	USERSTATUS arg
+	)
+	;
+
+usertableOption
+	: (
+	USERTABLE
 	)
 	;
 
@@ -23604,7 +25441,7 @@ usingOption
 
 validationOption
 	: (
-	VALIDATION arg
+	VALIDATION arg?
 	)
 	;
 
@@ -23653,6 +25490,12 @@ versionOption
 versionlenOption
 	: (
 	VERSIONLEN arg
+	)
+	;
+
+vformstOption
+	: (
+	VFORMST arg
 	)
 	;
 
@@ -23920,6 +25763,12 @@ yearOption
 	)
 	;
 
+yesOption
+	: (
+	YES
+	)
+	;
+
 yydddOption
 	: (
 	YYDDD arg
@@ -23956,11 +25805,17 @@ yyyymmddOption
 	)
 	;
 
+zcptraceOption
+	: (
+	ZCPTRACE
+	)
+	;
+
 zcptracingOption
 	: (
 	ZCPTRACING arg
 	)
 	;
 
-// 2149 rules generated Sun Apr  7 16:15:25 CDT 2024
+// 2375 rules generated Mon Apr  8 17:23:56 CDT 2024
 
