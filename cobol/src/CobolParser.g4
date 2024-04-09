@@ -31,7 +31,7 @@ options {tokenVocab=CobolLexer;}
 
 }
 
-startRule : compilationUnit EOF;
+startRule : compilationUnit | identifier EOF;
 
 compilationUnit
    : programUnit*
@@ -2171,7 +2171,7 @@ cicsKeywordWithArg
 
 execCicsStatement
 	: cicsCmdStart
-	(cicsKeyword | cicsKeywordWithArg)+
+	CICS_TEXT+
 	cicsCmdEnd
 	;
 

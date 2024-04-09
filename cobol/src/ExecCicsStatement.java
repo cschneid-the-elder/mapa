@@ -25,6 +25,34 @@ class ExecCicsStatement {
 			) {
 		this.ctx = ctx;
 		this.LOGGER = LOGGER;
+
+		StringBuilder sb = new StringBuilder();
+
+		for (TerminalNode tn: ctx.CICS_TEXT()) {
+			sb.append(tn.getSymbol().getText());
+		}
+		this.LOGGER.finest("CICS_TEXT = |" + sb + "|");
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		CICSzLexer lexer = new CICSzLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CICSzParser parser = new CICSzParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CICSzCommandListener listener = 
+			new CICSzCommandListener(this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		this.type = listener.getType();
+
+
+
+		// previous code follows
 		for (CobolParser.CicsKeywordContext kywdCtx: this.ctx.cicsKeyword()) {
 			if (kywdCtx.cobolWord() != null) {
 				CobolWord source = new CobolWord(kywdCtx.cobolWord()); 

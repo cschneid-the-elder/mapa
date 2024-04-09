@@ -113,22 +113,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 			return;
 		}
 
-		ExecCicsStatement cicsStmt = null;
-
-		String aString = null;
-
-		if (ctx.cicsKeyword() == null || ctx.cicsKeyword().size() == 0) {
-			if (ctx.cicsKeywordWithArg() == null || ctx.cicsKeywordWithArg().size() == 0) {
-				return;  //empty CICS API call
-			} else {
-				String allOfIt = ctx.cicsKeywordWithArg(0).getText().toUpperCase();
-				aString = allOfIt.substring(0, allOfIt.indexOf("("));
-			}
-		} else {
-			aString = ctx.cicsKeyword(0).getText().toUpperCase();
-		}
-
-		cicsStmt = new ExecCicsStatement(ctx, this.LOGGER);
+		ExecCicsStatement cicsStmt = new ExecCicsStatement(ctx, this.LOGGER);
 		switch(cicsStmt.getType()) {
 			case CICSLINK:
 			case CICSXCTL: //intentional fall through
