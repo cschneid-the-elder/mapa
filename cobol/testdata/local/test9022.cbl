@@ -211,7 +211,7 @@
                 RPROCESS(X)
                 RRESOURCE(X)
                 QUEUE(X)
-                IUTYUPE(X)
+                IUTYPE(X)
                 DATASTR(X)
                 RECFM(X)
            END-EXEC
@@ -762,7 +762,7 @@
                 CERTIFICATE(X)
                 LENGTH(X)
                 SERIALNUM(X)
-                SERIALNUMLENGTH(X)
+                SERIALNUMLEN(X)
                 USERID(X)
                 OWNER
                 ISSUER

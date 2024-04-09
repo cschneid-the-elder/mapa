@@ -4055,7 +4055,7 @@ setXmltransform
 	)
 	;
 
-// 569 rules generated Mon Apr  8 17:23:56 CDT 2024
+// 569 rules generated Tue Apr  9 13:59:38 CDT 2024
 
 abendOptions
 	: (
@@ -11941,6 +11941,7 @@ performJvmserverOptions
 	| appidlenOption
 	| configOption
 	| serverdumpOption
+	| osgiOption
 	| osgiactionOption
 	| refreshpkgsOption
 	| exceptionOptions
@@ -13275,7 +13276,7 @@ setXmltransformOptions
 	)
 	;
 
-// 569 rules generated Mon Apr  8 17:23:56 CDT 2024
+// 569 rules generated Tue Apr  9 13:59:39 CDT 2024
 
 abcodeOption
 	: (
@@ -20861,6 +20862,12 @@ orgunitlenOption
 	)
 	;
 
+osgiOption
+	: (
+	OSGI
+	)
+	;
+
 osgiactionOption
 	: (
 	OSGIACTION arg
@@ -25817,5 +25824,5 @@ zcptracingOption
 	)
 	;
 
-// 2375 rules generated Mon Apr  8 17:23:56 CDT 2024
+// 2376 rules generated Tue Apr  9 13:59:38 CDT 2024
 

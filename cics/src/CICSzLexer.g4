@@ -13,6 +13,16 @@ lexer grammar CICSzLexer;
 
 @lexer::members {
 	int parenNesting = 0;
+	
+	/*
+	These Booleans are intended to be set by an invoking application.  It
+	is syntactically correct for portions of a CICS command to be commented
+	out in a way that is syntactically correct for the host language.
+	*/
+	Boolean pliCode = false;
+	Boolean classicCOBOLCode = false;
+	Boolean freeFormCOBOLCode = false;
+	Boolean cCode = false;
 }
 
 fragment A:('a'|'A');
@@ -42,6 +52,41 @@ fragment X:('x'|'X');
 fragment Y:('y'|'Y');
 fragment Z:('z'|'Z');
 
+fragment SPLAT: '*';
+fragment SLASH: '/';
+fragment GT: '>';
+
+fragment CLASSIC_COBOL_COMMENT_FLAG
+	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] SPLAT)
+	{!freeFormCOBOLCode && classicCOBOLCode && getCharPositionInLine() == 7}?
+	;
+
+CLASSIC_COBOL_COMMENT
+	: (CLASSIC_COBOL_COMMENT_FLAG .*? [\n\r])
+	->channel(HIDDEN)
+	;
+
+FREE_FORM_COBOL_COMMENT
+	: (SPLAT GT ~[\n\r]* [\n\r])
+	{(classicCOBOLCode | freeFormCOBOLCode)}?
+	->channel(HIDDEN)
+	;
+
+PLI_COMMENT
+	: (SLASH SPLAT .*? SPLAT SLASH)
+	{pliCode}?
+	->channel(HIDDEN)
+	;
+
+C_COMMENT
+	: (
+	(SLASH SPLAT .*? SPLAT SLASH)
+	| (SLASH SLASH ~[\n\r]* [\n\r])
+	)
+	{cCode}?
+	->channel(HIDDEN)
+	;
+
 EXEC_CICS
 	: E X E C (U T E)? [ ]+ C I C S
 	;
@@ -62,8 +107,12 @@ SEMICOLON
 	: ';'
 	;
 
+/*
+The nongreedy suffix is necessary to make the CLASSIC_COBOL_COMMENT_FLAG 
+work correctly.
+*/
 WS
-	: [ \n\r\t]+
+	: [ \n\r\t]+?
 	->skip
 	;
 
@@ -5152,6 +5201,10 @@ ORGUNITLEN
 	: O R G U N I T L E N 
 	;
 
+OSGI
+	: O S G I 
+	;
+
 OSGIACTION
 	: O S G I A C T I O N 
 	;
@@ -8460,7 +8513,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2091 rules generated Mon Apr  8 17:23:52 CDT 2024
+// 2092 rules generated Tue Apr  9 13:59:36 CDT 2024
 
 mode ARG_MODE;
 
