@@ -1,0 +1,130 @@
+#! /usr/bin/awk -f
+
+# 
+# generate CICS parser rules 
+# input records...
+# 
+# @ACQUIRE
+# PROCESS( data-value )
+# PROCESSTYPE( data-value )
+# ACTIVITYID( data-value )
+# 
+# @ADD
+# +SUBEVENT( data-value )
+# EVENT( data-value )
+# 
+# @ALLOCATE
+# +=APPC
+# SYSID( systemname )
+# PROFILE( name )
+# NOQUEUE
+# PARTNER( name )
+# STATE( cvda )
+# 
+# ...from which this code produces...
+# 
+# acquireOptions
+# 	: (
+# 	processOption
+# 	| processtypeOption
+# 	| activityidOption
+# 	)
+# 	;
+# 
+# addSubeventOptions
+# 	: (
+# 	event
+# 	)
+# 	;
+# 
+# allocateAPPCOptions
+# 	: (
+# 	sysidOption
+# 	| profileOption
+# 	| noqueueOption
+# 	| partnerOption
+# 	| stateOption
+# 	)
+# 	;
+# 
+# 
+# 
+
+BEGIN {
+	bp1 = "\n\t: (\n"
+	bp2 = "\n\t)\n\t;\n\n"
+	i = 0
+	rules = 0
+	commandRule = ""
+}
+
+{
+	PROCINFO["sorted_in"] = "@ind_num_asc"
+	gsub(/\(.*\)/, "(arg)")
+	gsub(/\[.*\]/, "[arg]")
+	gsub(/\s+$/, "")
+	argIndex = index($0, "(arg)")
+	optArgIndex = index($0, "[arg]")
+	if ($0 == "") {
+		if (commandRule == "") {
+			# do nothing
+		} else {
+			printf("%sOptions%s", commandRule, bp1)
+			for(opt in options) {
+				if (opt == 1) {
+					printf("\t%s", options[opt])
+				} else {
+					printf("\n\t| %s", options[opt])
+				}
+			}
+			if (i > 0) {
+				printf("\n\t| exceptionOptions")
+			} else {
+				printf("\texceptionOptions")
+			}
+			printf("%s", bp2)
+			rules++
+		}
+		commandRule = ""
+		i = 0
+		delete options
+	} else if (substr($0,1,1) == "#") {
+		# do nothing
+	} else if (substr($0,1,1) == "@") {
+		gsub(/@/, "")
+		commandRule = tolower($0)
+	} else if (substr($0,1,1) == "+") {
+#		if (substr($0, 1, 2) == "+=" || substr($0, 2, 2) == "TS" || substr($0, 2, 2) == "TD") {
+		if (substr($0, 1, 2) == "+=") {
+			asis = 1
+		} else {
+			asis = 0
+		}
+		gsub(/[+=]/, "")
+		if (argIndex || optArgIndex) {
+			toAdd = substr($0, 1, length($0) - 5)
+		} else {
+			toAdd = $0
+		}
+		if (asis == 1) {
+			commandRule = commandRule toAdd
+		} else {
+			commandRule = commandRule substr(toAdd,1,1) tolower(substr(toAdd,2))
+		}
+	} else {
+		i++
+		if (argIndex || optArgIndex) {
+			withoutArg = substr($0, 1, length($0) - 5)
+			options[i] = sprintf("%sOption", tolower(withoutArg))
+		} else {
+			options[i] = sprintf("%sOption", tolower($0))
+		}
+	}
+}
+
+END {
+	print "// " rules " rules generated " strftime()
+	print ""
+}
+
+

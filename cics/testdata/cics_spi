@@ -1,15 +1,3 @@
-       Identification Division.
-       Program-ID.    test9026.
-      *
-      * Test all the parameters of all the CICS SPI commands.
-      * This code definitely won't compile cleanly, in part
-      * due to mutually exclusive options on some commands.
-      * It's just here to test parsing.
-      *
-      * Current as of CICS TS 6.1
-      *
-       Procedure Division.
-
            EXEC CICS
                 ACQUIRE
                 TERMINAL(X)
@@ -21,7 +9,6 @@
                 USERDATA(X)
                 USERDATALEN(X)
            END-EXEC
-
            EXEC CICS
                 COLLECT
                 STATISTICS
@@ -63,7 +50,6 @@
                 TSQUEUE
                 VTAM
            END-EXEC
-
            EXEC CICS
                 CREATE
                 ATOMSERVICE(X)
@@ -73,7 +59,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 BUNDLE(X)
@@ -83,7 +68,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 CONNECTION(X)
@@ -95,7 +79,6 @@
                 COMPLETE
                 DISCARD
            END-EXEC
-
            EXEC CICS
                 CREATE
                 DB2CONN(X)
@@ -105,7 +88,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 DB2ENTRY(X)
@@ -115,7 +97,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 DB2TRAN(X)
@@ -125,7 +106,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 DOCTEMPLATE(X)
@@ -135,7 +115,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 DUMPCODE(X)
@@ -145,7 +124,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 ENQMODEL(X)
@@ -155,7 +133,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 FILE(X)
@@ -165,7 +142,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 IPCONN(X)
@@ -175,7 +151,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 JOURNALMODEL(X)
@@ -185,7 +160,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 JVMSERVER(X)
@@ -195,7 +169,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 LIBRARY(X)
@@ -205,7 +178,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 LSRPOOL(X)
@@ -215,7 +187,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 MAPSET(X)
@@ -225,7 +196,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 MQCONN(X)
@@ -235,7 +205,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 MQMONITOR(X)
@@ -245,7 +214,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 PARTITIONSET(X)
@@ -255,7 +223,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 PARTNER(X)
@@ -265,7 +232,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 PIPELINE(X)
@@ -275,7 +241,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 PROCESSTYPE(X)
@@ -285,7 +250,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 PROFILE(X)
@@ -295,7 +259,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 PROGRAM(X)
@@ -305,7 +268,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 SESSIONS(X)
@@ -315,7 +277,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TCPIPSERVICE(X)
@@ -325,7 +286,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TDQUEUE(X)
@@ -335,7 +295,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TERMINAL(X)
@@ -347,7 +306,6 @@
                 COMPLETE
                 DISCARD
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TRANCLASS(X)
@@ -357,7 +315,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TRANSACTION(X)
@@ -367,7 +324,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TSMODEL(X)
@@ -377,7 +333,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 TYPETERM(X)
@@ -387,7 +342,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 URIMAP(X)
@@ -397,7 +351,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CREATE
                 WEBSERVICE(X)
@@ -407,7 +360,6 @@
                 NOLOG
                 LOGMESSAGE(CVDA)
            END-EXEC
-
            EXEC CICS
                 CSD
                 ADD
@@ -416,7 +368,6 @@
                 BEFORE(X)
                 AFTER(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 ALTER
@@ -429,14 +380,12 @@
                 COMPATMODE(CVDA)
                 COMPAT
            END-EXEC
-
            EXEC CICS
                 CSD
                 APPEND
                 LIST(X)
                 TO(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 COPY
@@ -451,7 +400,6 @@
                 DUPNOREPLACE
                 DUPREPLACE
            END-EXEC
-
            EXEC CICS
                 CSD
                 DEFINE
@@ -464,7 +412,6 @@
                 COMPATMODE(CVDA)
                 COMPAT
            END-EXEC
-
            EXEC CICS
                 CSD
                 DELETE
@@ -510,41 +457,34 @@
                 LISTACTION(CVDA)
                 REMOVE
            END-EXEC
-
            EXEC CICS
                 CSD
                 DISCONNECT
            END-EXEC
-
            EXEC CICS
                 CSD
                 ENDBRGROUP
                 LIST
            END-EXEC
-
            EXEC CICS
                 CSD
                 ENDBRLIST
            END-EXEC
-
            EXEC CICS
                 CSD
                 ENDBRRSRCE
            END-EXEC
-
            EXEC CICS
                 CSD
                 GETNEXTGROUP
                 GROUP(X)
                 LIST(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 GETNEXTLIST
                 LIST(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 GETNEXTRSRCE
@@ -555,20 +495,17 @@
                 ATTRLEN(X-LEN)
                 SET(WS-PTR)
            END-EXEC
-
            EXEC CICS
                 CSD
                 INQUIREGROUP
                 GROUP(X)
                 LIST(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 INQUIRELIST
                 LIST(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 INQUIRERSRCE
@@ -579,13 +516,11 @@
                 ATTRLEN(LENGTH OF X)
                 SET(WS-PTR)
            END-EXEC
-
            EXEC CICS
                 CSD
                 INSTALL
                 LIST(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 INSTALL
@@ -593,21 +528,18 @@
                 RESID(X)
                 GROUP(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 LOCK
                 LIST(X)
                 GROUP(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 REMOVE
                 LIST(X)
                 GROUP(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 RENAME
@@ -616,31 +548,26 @@
                 GROUP(X)
                 AS(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 STARTBRGROUP
                 LIST(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 STARTBRLIST
            END-EXEC
-
            EXEC CICS
                 CSD
                 STARTBRRSRCE
                 GROUP(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 UNLOCK
                 LIST(X)
                 GROUP(X)
            END-EXEC
-
            EXEC CICS
                 CSD
                 USERDEFINE
@@ -653,7 +580,6 @@
                 COMPATMODE(CVDA)
                 COMPAT
            END-EXEC
-
            EXEC CICS
                 DISABLE
                 PROGRAM(X)
@@ -667,17 +593,10 @@
                 STOP
                 TASKSTART
            END-EXEC
-
            EXEC CICS
                 DISCARD
                 AUTINSTMODEL(X)
            END-EXEC
-
-      *    The DISCARD API looks identical for the other 30 or so
-      *    definitions, all of which have been syntax-checked for
-      *    purposes of parsing in the preceding CREATE APIs.  So
-      *    I'm not coding them here.
-
            EXEC CICS
                 ENABLE
                 PROGRAM('J8675309')
@@ -703,7 +622,6 @@
                 TAEXECUTABLE
                 TASKSTART
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 EXIT
@@ -712,7 +630,6 @@
                 GALENGTH(X)
                 GASET(X)
            END-EXEC
-
            EXEC CICS
                 EXTRACT
                 STATISTICS
@@ -734,7 +651,6 @@
                 LASTRESETMIN(X)
                 LASTRESETSEC(X)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 ASSOCIATION(X)
@@ -802,7 +718,6 @@
                 USERCORRDATA(data-area)
                 USERID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 ASSOCIATION 
@@ -815,7 +730,6 @@
                 SET(ptr-ref)
                 USERCORRDATA(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 ATOMSERVICE(data-value)
@@ -837,12 +751,10 @@
                 URIMAP(data-area)
                 XMLTRANSFORM(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 AUTINSTMODEL(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 AUTOINSTALL 
@@ -853,7 +765,6 @@
                 MAXREQS(data-area)
                 PROGRAM(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 BRFACILITY(data-value)
@@ -870,7 +781,6 @@
                 TRANSACTION(data-area)
                 USERID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 BUNDLE(data-value)
@@ -896,7 +806,6 @@
                 PARTCOUNT(data-area)
                 TARGETCOUNT(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 BUNDLEPART(data-area)
@@ -907,7 +816,6 @@
                 PARTCLASS(cvda)
                 PARTTYPE(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CAPDATAPRED
@@ -923,7 +831,6 @@
                 STRUCTNAME(data-area)
                 VARIABLENAME(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CAPINFOSRCE
@@ -938,7 +845,6 @@
                 STRUCTNAME(data-area)
                 VARIABLENAME(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CAPOPTPRED
@@ -948,7 +854,6 @@
                 OPERATOR(cvda)
                 OPTIONNAME(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CAPTURESPEC(data-area)
@@ -969,7 +874,6 @@
                 PRIMPREDOP(cvda)
                 PRIMPREDTYPE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CONNECTION(data-value)
@@ -1007,13 +911,11 @@
                 XLNSTATUS(cvda)
                 ZCPTRACING(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 CFDTPOOL(data-value)
                 CONNSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DB2CONN
@@ -1060,7 +962,6 @@
                 THREADS(data-area)
                 THREADWAIT(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DB2ENTRY(data-value)
@@ -1089,7 +990,6 @@
                 THREADS(data-area)
                 THREADWAIT(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DB2TRAN(data-value)
@@ -1107,7 +1007,6 @@
                 PLANEXITNAME(data-area)
                 TRANSID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DELETSHIPPED
@@ -1120,7 +1019,6 @@
                 INTERVALMINS(data-area)
                 INTERVALSECS(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DISPATCHER
@@ -1139,7 +1037,6 @@
                 SUBTASKS(data-area)
                 TIME(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DOCTEMPLATE(data-value)
@@ -1167,7 +1064,6 @@
                 TSQUEUE(data-area)
                 TYPE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE 
                 DSNAME(data-value)
@@ -1186,7 +1082,6 @@
                 RETLOCKS(cvda)
                 VALIDITY(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 DUMPDS
@@ -1195,7 +1090,6 @@
                 OPENSTATUS(cvda)
                 SWITCHSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 ENQ
@@ -1217,7 +1111,6 @@
                 TYPE(cvda)
                 UOW(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 ENQMODEL(data-value)
@@ -1234,7 +1127,6 @@
                 INSTALLUSRID(data-area)
                 STATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EPADAPTER(data-value)
@@ -1260,7 +1152,6 @@
                 INSTALLTIME(data-area)
                 INSTALLUSRID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EPADAPTERSET(data-area)
@@ -1276,14 +1167,12 @@
                 INSTALLTIME(data-area)
                 INSTALLUSRID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EPADAPTINSET
                 EPADAPTERSET(data-value)
                 EPADAPTER(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EVENTBINDING(data-value)
@@ -1302,20 +1191,17 @@
                 INSTALLUSRID(data-area)
                 USERTAG(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EVENTPROCESSEPSTATUS(cvda)
                 SCHEMALEVEL(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EXCI(data-value)
                 TASK(data-value)
                 URID(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 EXITPROGRAM(data-value)
@@ -1340,14 +1226,12 @@
                 TASKSTARTST(cvda)
                 USECOUNT(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 FEATUREKEY(data-value)
                 VALUE(data-area)
                 FILEPATH(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 FILE(data-value)
@@ -1401,14 +1285,12 @@
                 UPDATE(cvda)
                 UPDATEMODEL(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 HOST(data-area)
                 ENABLESTATUS(cvda)
                 TCPIPSERVICE(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 IPCONN(cvda)
@@ -1451,20 +1333,17 @@
                 TCPIPSERVICE(data-area)
                 USERAUTH(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 IPFACILITY(data-value)
                 IPCONN(data-area)
                 IPFACILTYPE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 IRCOPENSTATUS(cvda)
                 XCFGROUP(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 JOURNALMODEL(data-value)
@@ -1481,7 +1360,6 @@
                 STREAMNAME(data-area)
                 TYPE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 JOURNALNAME(data-value)
@@ -1489,16 +1367,10 @@
                 STREAMNAME(data-area)
                 TYPE(cvda)
            END-EXEC
-
-      *    
-      *    Documentation indicates INQUIRE JOURNALNUM is obsolete
-      *    so I'm just checking to ensure compatibility with old code.
-      *    
            EXEC CICS
                 INQUIRE
                 JOURNALNUM(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 JVMENDPOINT(data-value)
@@ -1509,7 +1381,6 @@
                 SECPORT(data-area)
                 HOST(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 JVMSERVER(data-value)
@@ -1542,7 +1413,6 @@
                 TRACE(data-area)
                 WORKDIR(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 LIBRARY(data-value)
@@ -1583,7 +1453,6 @@
                 RANKING(data-area)
                 SEARCHPOS(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 MODENAME(data-value)
@@ -1594,7 +1463,6 @@
                 MAXIMUM(data-area)
                 MAXWINNERS(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 MONITOR
@@ -1619,7 +1487,6 @@
                 FREQUENCYMINS(data-area)
                 FREQUENCYSECS(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 MQCONN
@@ -1640,7 +1507,6 @@
                 TASKS(data-area)
                 TRIGMONTASKS(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 MQINI(data-value)
@@ -1655,7 +1521,6 @@
                 INSTALLTIME(data-area)
                 INSTALLUSRID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 MQMONITOR( data-value)
@@ -1677,28 +1542,20 @@
                 TRANSACTION(data-area)
                 USERID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 MVSTCB(ptr-ref)
                 SET(ptr-ref)
                 NUMELEMENTS(data-area)
-      *    
-      *    Documentation indicates ELEMENTLIST, LENGTHLIST, and
-      *    SUBPOOLLIST are obsolete
-      *    so I'm just checking to ensure compatibility with old code.
-      *    
                 ELEMENTLIST(ptr-ref)
                 LENGTHLIST(ptr-ref)
                 SUBPOOLLIST(ptr-ref)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 NETNAME(data-value)
                 TERMINAL(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 NODEJSAPP(data-value)
@@ -1722,7 +1579,6 @@
                 STDOUT(data-area)
                 TRACE(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 OSGIBUNDLE(data-value)
@@ -1742,7 +1598,6 @@
                 OSGIBUNDLEID(data-area)
                 OSGISTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 OSGISERVICE(data-value)
@@ -1754,7 +1609,6 @@
                 SRVCNAME(data-area)
                 SRVCSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 PARTNER(data-value)
@@ -1764,7 +1618,6 @@
                 TPNAME(data-area)
                 TPNAMELEN(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 PIPELINE(data-value)
@@ -1794,7 +1647,6 @@
                 XOPDIRECTST(cvda)
                 XOPSUPPORTST(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 POLICY(data-value)
@@ -1811,7 +1663,6 @@
                 INSTALLUSRID(data-area)
                 USERTAG(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 POLICYRULE(data-value)
@@ -1828,7 +1679,6 @@
                 THRESHOLD(data-area)
                 WLMOPENST(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 PROCESSTYPE(data-value )
@@ -1846,7 +1696,6 @@
                 INSTALLUSRID(data-area)
                 STATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 PROFILE( data-value)
@@ -1860,7 +1709,6 @@
                 INSTALLTIME(data-area)
                 INSTALLUSRID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 PROGRAM( data-value)
@@ -1912,7 +1760,6 @@
                 TRANSID(data-area)
                 USECOUNT(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 REQID(data-value)
@@ -1935,13 +1782,11 @@
                 QUEUE(data-area)
                 USERID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 RRMS
                 OPENSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 SECRECORDING(data-area)
@@ -1966,7 +1811,6 @@
                 MAXIMUM(data-area)
                 CURRENT(area-value)                
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 STATISTICS
@@ -1984,7 +1828,6 @@
                 NEXTTIMESECS(data-area)
                 RECORDING(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 STORAGE
@@ -1996,7 +1839,6 @@
                 LENGTHLIST(ptr-ref)
                 TASK(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 STREAMNAME(data-value)
@@ -2004,13 +1846,11 @@
                 SYSTEMLOG(cvda)
                 USECOUNT(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 SUBPOOL(data-area)
                 DSANAME(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 SYSDUMPCODE(data-value)
@@ -2032,7 +1872,6 @@
                 SHUTOPTION(cvda)
                 SYSDUMPING(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 SYSTEM
@@ -2058,7 +1897,7 @@
                 EPUDSASIZE(data-area)
                 ERDSASIZE(data-area)
                 ESDSASIZE(data-area)
-                ETDSASIZE(data-area) *> removed in CICS TS 6.1
+                ETDSASIZE(data-area) 
                 EUDSASIZE(data-area)
                 FORCEQR(cvda)
                 GCDSASIZE(data-area)
@@ -2117,7 +1956,6 @@
                 UDSASIZE(data-area)
                 XRFSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TAG
@@ -2125,7 +1963,6 @@
                 NEXT
                 END
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TASK(data-value)
@@ -2181,7 +2018,6 @@
                 UOW(data-area)
                 USERID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TASK LIST
@@ -2192,14 +2028,12 @@
                 SET(ptr-ref)
                 SETTRANSID(ptr-ref)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TCLASS(data-value)
                 CURRENT(data-area)
                 MAXIMUM(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TCPIP
@@ -2209,7 +2043,6 @@
                 SSLCACHE(cvda)
                 CRLPROFILE(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TCPIPSERVICE(data-value)
@@ -2250,7 +2083,6 @@
                 TRANSID(data-area)
                 URM(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TDQUEUE(data-value)
@@ -2294,14 +2126,12 @@
                 TRIGGERLEVEL(data-area)
                 TYPE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TEMPSTORAGE
                 TSMAININUSE(data-value)
                 TSMAINLIMIT(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TERMINAL(data-value)
@@ -2401,7 +2231,6 @@
                 VFORMST(cvda)
                 ZCPTRACING(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TRACEDEST
@@ -2412,7 +2241,6 @@
                 SWITCHSTATUS(cvda)
                 TABLESIZE(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TRACEFLAG
@@ -2421,7 +2249,6 @@
                 TCEXITSTATUS(cvda)
                 USERSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TRACETYPE
@@ -2430,7 +2257,6 @@
                 STANDARD
                 COMPID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TRANCLASS( data-value)
@@ -2448,7 +2274,6 @@
                 PURGETHRESH(data-area)
                 QUEUED(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TRANDUMPCODE( data-value)
@@ -2468,7 +2293,6 @@
                 SYSDUMPING(cvda)
                 TRANDUMPING(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TRANSACTION(data-value)
@@ -2522,7 +2346,6 @@
                 TRPROF(data-area)
                 TWASIZE(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TSMODEL(data-value)
@@ -2545,13 +2368,11 @@
                 REMOTESYSTEM(data-area)
                 SECURITYST(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TSPOOL(data-value)
                 CONNSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TSQUEUE(data-value)
@@ -2569,7 +2390,6 @@
                 TRANSID(data-area)
                 TSMODEL(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 TSQNAME(data-value)
@@ -2587,7 +2407,6 @@
                 TRANSID(data-area)
                 TSMODEL(data-value)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 UOW(data-area)
@@ -2605,7 +2424,6 @@
                 WAITCAUSE(cvda)
                 WAITSTATE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 UOWDSNFAIL
@@ -2617,7 +2435,6 @@
                 SYSID(data-area)
                 UOW(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 UOWENQ
@@ -2639,7 +2456,6 @@
                 TYPE(cvda)
                 UOW(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 UOWLINK(data-area)
@@ -2658,7 +2474,6 @@
                 URID(data-area)
                 XID(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 URIMAP(data-value)
@@ -2710,7 +2525,6 @@
                 USERID(data-area)
                 WEBSERVICE(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 VTAM
@@ -2723,14 +2537,12 @@
                 PSDINTMINS(data-area)
                 PSDINTSECS(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 WEB
                 GARBAGEINT(data-area)
                 TIMEOUTINT(data-area)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 WEBSERVICE(name)
@@ -2766,7 +2578,6 @@
                 XOPDIRECTST(cvda)
                 XOPSUPPORTST(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 WLMHEALTH
@@ -2776,7 +2587,6 @@
                 INTERVAL(data-area)
                 OPENSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 WORKREQUEST(datavalue)
@@ -2797,7 +2607,6 @@
                 TSYSTEM(dataarea)   
                 TSYSTYPE(cvda)
            END-EXEC
-
            EXEC CICS
                 INQUIRE
                 XMLTRANSFORM(name)
@@ -2823,9 +2632,7 @@
                 XMLSCHEMA(data-area)
                 XSDBIND(data-area)
            END-EXEC
-
            EXEC CICS PERFORM DELETSHIPPED END-EXEC
-
            EXEC CICS
                 PERFORM
                 DUMP
@@ -2836,14 +2643,12 @@
                 CALLERLENGTH(data-value)
                 DUMPID(data-area)
            END-EXEC
-
            EXEC CICS
                 PERFORM
                 ENDAFFINITY
                 NETNAME(data-value)
                 NETID(data-value)
            END-EXEC
-
            EXEC CICS
                 PERFORM
                 JVMSERVER(data-area)
@@ -2872,19 +2677,15 @@
                 OSGIACTION(cvda)
                 REFRESHPKGS
            END-EXEC
-
            EXEC CICS
                 PERFORM 
                 PIPELINE(data-value)
                 ACTION(cvda)
                 SCAN
            END-EXEC
-
            EXEC CICS PERFORM RESETTIME END-EXEC
-
            EXEC CICS PERFORM SECURITY REBUILD ESMRESP(data-area)
            END-EXEC
-
            EXEC CICS
                 PERFORM
                 SHUTDOWN
@@ -2896,7 +2697,6 @@
                 XLT(data-value)
                 DUMP
            END-EXEC
-
            EXEC CICS
                 PERFORM
                 SHUTDOWN
@@ -2906,7 +2706,6 @@
                 NOSDTRAN
                 DUMP
            END-EXEC
-
            EXEC CICS
                 PERFORM
                 SHUTDOWN
@@ -2914,9 +2713,7 @@
                 SDTRAN(data-value)
                 NOSDTRAN
            END-EXEC
-
            EXEC CICS PERFORM SSL REBUILD GSKRESP(data-area) END-EXEC
-
            EXEC CICS
                 PERFORM
                 STATISTICS
@@ -2976,7 +2773,6 @@
                 WEBSERVICE
                 XMLTRANSFORM
            END-EXEC
-
            EXEC CICS
                 RESYNC
                 ENTRYNAME(data-value)
@@ -2985,19 +2781,11 @@
                 IDLISTLENGTH(data-value)
                 PARTIAL
            END-EXEC
-
-      *
-      *    There are numerous SET SPI commands which do not appear
-      *    to introduce any new keywords beyond their corresponding
-      *    CREATE SPI command.  These are elided for brevity.
-      *
-
            EXEC CICS
                 SET
                 ASSOCIATION
                 USERCORRDATA(data-value)
            END-EXEC
-
            EXEC CICS
                 SET
                 AUTOINSTALL
@@ -3006,14 +2794,12 @@
                 MAXREQS(data-value)
                 PROGRAM(data-value)
            END-EXEC
-
            EXEC CICS
                 SET
                 BRFACILITY(data-value)
                 TERMSTATUS(cvda)
                 RELEASED
            END-EXEC
-
            EXEC CICS
                 SET
                 DELETSHIPPED
@@ -3026,7 +2812,6 @@
                 INTERVALMINS(data-value)
                 INTERVALSECS(data-value)
            END-EXEC
-
            EXEC CICS
                 SET
                 DISPATCHER
@@ -3039,7 +2824,6 @@
                 SCANDELAY(data-value)
                 TIME(data-value)
            END-EXEC
-
            EXEC CICS
                 SET
                 DSNAME( data-value)
@@ -3064,7 +2848,6 @@
                 COMMIT
                 FORCE
            END-EXEC
-
            EXEC CICS
                 SET
                 DUMPDS
@@ -3078,7 +2861,6 @@
                 SWITCHNEXT
                 SWITCHALL
            END-EXEC
-
            EXEC CICS
                 SET
                 EPADAPTER(data-value)
@@ -3086,7 +2868,6 @@
                 ENABLED
                 DISABLED
            END-EXEC
-
            EXEC CICS
                 SET
                 EPADAPTERSET(data-value)
@@ -3094,7 +2875,6 @@
                 ENABLED
                 DISABLED
            END-EXEC
-
            EXEC CICS
                 SET
                 EVENTBINDING(data-value)
@@ -3102,7 +2882,6 @@
                 ENABLED
                 DISABLED
            END-EXEC
-
            EXEC CICS
                 SET
                 EVENTPROCESS
@@ -3111,9 +2890,7 @@
                 DRAIN
                 STOPPED
            END-EXEC
-
            EXEC CICS SET HOST(data-area) ENABLESTATUS(cvda) END-EXEC
-
            EXEC CICS
                 SET
                 IRC
@@ -3122,7 +2899,6 @@
                 IMMCLOSE
                 OPEN
            END-EXEC
-
            EXEC CICS
                 SET
                 JOURNALNAME(data-value)
@@ -3133,7 +2909,6 @@
                 DISABLED
                 ENABLED
            END-EXEC
-
            EXEC CICS
                 SET
                 SYSTEM
@@ -3171,13 +2946,11 @@
                 SCANDELAY(data-value)
                 TIME(data-value)
            END-EXEC
-
            EXEC CICS
                 SET
                 TAGS
                 REFRESH
            END-EXEC
-
            EXEC CICS
                 SET 
                 TASK (data-value)
@@ -3187,7 +2960,6 @@
                 KILL
                 PURGE
            END-EXEC
-
            EXEC CICS
                 SET 
                 TCPIP 
@@ -3198,7 +2970,6 @@
                 IMMCLOSE
                 OPEN
            END-EXEC
-
            EXEC CICS
                 SET 
                 TCPIPSERVICE(data-value)
@@ -3210,7 +2981,6 @@
                 OPEN
                 URM(data-value)
            END-EXEC
-
            EXEC CICS
                 SET 
                 TDQUEUE(data-value)
@@ -3228,9 +2998,7 @@
                 OPEN
                 TRIGGERLEVEL(data-value)
            END-EXEC
-
            EXEC CICS SET TEMPSTORAGE TSMAINLIMIT(data-value) END-EXEC
-
            EXEC CICS
                 SET
                 TERMINAL(data-value)
@@ -3297,7 +3065,6 @@
                 NOZCPTRACE
                 ZCPTRACE
            END-EXEC
-
            EXEC CICS
                 SET
                 TRACEDEST
@@ -3319,7 +3086,6 @@
                 SWITCHALL
                 TABLESIZE(data-value)
            END-EXEC
-
            EXEC CICS
                 SET 
                 TRACEFLAG
@@ -3338,7 +3104,6 @@
                 USEROFF
                 USERON
            END-EXEC
-
            EXEC CICS
                 SET 
                 TRACETYPE
@@ -3347,14 +3112,12 @@
                 STANDARD
                 COMPID(data-value)
            END-EXEC
-
            EXEC CICS
                 SET 
                 TRANCLASS(data-value)
                 MAXACTIVE(data-value)
                 PURGETHRESH(data-value)
            END-EXEC
-
            EXEC CICS
                 SET 
                 TRANDUMPCODE(data-value)
@@ -3376,7 +3139,6 @@
                 NOTRANDUMP
                 TRANDUMP
            END-EXEC
-
            EXEC CICS
                 SET 
                 TRANSACTION(data-value)
@@ -3404,7 +3166,6 @@
                 SPRSTRACE
                 STANTRACE
            END-EXEC
-
            EXEC CICS
                 SET
                 TSQUEUE(data-value)
@@ -3413,7 +3174,6 @@
                 ACTION(cvda)
                 LASTUSEDINT(data-value)
            END-EXEC
-
            EXEC CICS
                 SET
                 TSQNAME(data-value)
@@ -3422,7 +3182,6 @@
                 ACTION(cvda)
                 LASTUSEDINT(data-value)
            END-EXEC
-
            EXEC CICS
                 SET 
                 UOW(data-value)
@@ -3431,14 +3190,12 @@
                 BACKOUT
                 FORCE
            END-EXEC
-
            EXEC CICS
                 SET 
                 UOWLINK(data-value)
                 ACTION(cvda)
                 DELETE
            END-EXEC
-
            EXEC CICS
                 SET 
                 URIMAP(data-area)
@@ -3451,7 +3208,6 @@
                 TEMPORARY
                 LOCATION(data-area)
            END-EXEC
-
            EXEC CICS
                 SET 
                 VTAM
@@ -3466,14 +3222,12 @@
                 PSDINTSECS(data-value)
                 DEREGISTERED
            END-EXEC
-
            EXEC CICS
                 SET 
                 WEB
                 GARBAGEINT(data-value)
                 TIMEOUTINT(data-value)
            END-EXEC
-
            EXEC CICS
                 SET 
                 WEBSERVICE(name) 
@@ -3481,7 +3235,6 @@
                 VALIDATION
                 NOVALIDATION
            END-EXEC
-
            EXEC CICS
                 SET
                 WLMHEALTH 
@@ -3489,7 +3242,6 @@
                 INTERVAL(data-value)
                 OPENSTATUS(cvda)
            END-EXEC
-
            EXEC CICS
                 SET 
                 XMLTRANSFORM(name)
@@ -3497,13 +3249,4 @@
                 VALIDATION
                 NOVALIDATION
            END-EXEC
-
-
-
-
-
-
-
-
-
            EXEC CICS RETURN END-EXEC.

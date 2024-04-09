@@ -1,0 +1,26 @@
+#! /usr/bin/awk -f
+
+# extract EXEC CICS ... END-EXEC from source
+
+BEGIN {
+	found = "N"
+	comment = "N"
+}
+
+{
+	comment = "N"
+	if ($0 ~ /EXEC\s+CICS/ || $0 ~ /EXECUTE\s+CICS/) {
+		found = "Y"
+	}
+	if (substr($0, 7, 1) == "*") {
+		comment = "Y"
+	}
+	gsub(/*>.*$/, "")
+	if (found == "Y" && comment == "N") {
+		print $0
+	}
+	if ($0 ~ /END-EXEC/) {
+		found = "N"
+	}
+}
+

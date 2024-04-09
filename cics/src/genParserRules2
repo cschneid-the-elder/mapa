@@ -1,0 +1,67 @@
+#! /usr/bin/awk -f
+
+# 
+# generate CICS parser rules 
+# preprocessing of input gives records...
+# 
+# FORMFIELD
+# FORMFIELD(arg)
+# FORMFIELD[arg]
+# TEST
+# TEXT
+# TEXT(arg)
+# TEXTKYBD(arg)
+# 
+# ...from which this code produces...
+# 
+# formfieldOption
+# 	: FORMFIELD arg?
+# 	;
+# 
+# testOption
+# 	: TEST
+# 	;
+# 
+# textOption
+# 	: TEXT arg?
+# 	;
+# 
+# textkybdOption
+# 	: TEXTKYBD arg
+# 	;
+# 
+
+{
+	PROCINFO["sorted_in"] = "@ind_str_asc"
+	bp1 = "\n\t: (\n\t"
+	bp2 = "\n\t)\n\t;\n\n"
+	argIndex = index($0, "(arg)")
+	optArgIndex = index($0, "[arg]")
+	if (argIndex || optArgIndex) {
+		withoutArg = substr($0, 1, length($0) - 5)
+		if (optArgIndex || length(keyword[withoutArg]) > 0) {
+			q = "?"
+		} else {
+			q = ""
+		}
+		if (withoutArg == "EOF") {
+			x = "EOF_"
+		} else {
+			x = withoutArg
+		}
+		keyword[withoutArg] = sprintf("%sOption%s%s arg%s%s", tolower(withoutArg), bp1, x, q, bp2)
+	} else {
+		keyword[$0] = sprintf("%sOption%s%s%s", tolower($0), bp1, $0, bp2)
+	}
+}
+
+END {
+	for(kywd in keyword) {
+		printf("%s", keyword[kywd])
+	}
+	
+	print "// " NR " rules generated " strftime()
+	print ""
+}
+
+

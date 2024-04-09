@@ -1,0 +1,21 @@
+#! /usr/bin/awk -f
+
+BEGIN {
+	RS=";"
+	prev = ""
+}
+
+{
+	gsub(/\n\t: .*/, "") 
+	gsub(/\n/, "")
+	prev = $0
+	if (substr($0, 1, 2) == "//") {
+		# do nothing
+	} else if (NR==1 || $0 == "acquireTerminal") {
+		printf("=\n")
+		printf("\t%s\n",$0)
+	} else {
+		printf("\t| %s\n",$0)
+	}
+}
+
