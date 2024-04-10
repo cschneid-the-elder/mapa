@@ -117,7 +117,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		switch(cicsStmt.getType()) {
 			case CICSLINK:
 			case CICSXCTL: //intentional fall through
-				CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+				CallWrapper aCall = new CallWrapper(cicsStmt, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 				this.currProgram.addCall(aCall);
 				break;
 			case CICSSTARTTRANSID:
@@ -131,11 +131,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 				this.currProgram.addCicsStatement(cicsStmt);
 				break;
 			case CICSRUNTRANSID:
-				if (ctx.cicsKeywordWithArg() != null && ctx.cicsKeywordWithArg().size() > 0) {
-					if (ctx.cicsKeywordWithArg(0).getText().toUpperCase().startsWith("TRANSID")) {
-						this.currProgram.addCicsStatement(cicsStmt);
-					}
-				}
+				this.currProgram.addCicsStatement(cicsStmt);
 				break;
 			default:
 				break;

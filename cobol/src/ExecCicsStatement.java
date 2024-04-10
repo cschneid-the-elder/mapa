@@ -18,6 +18,14 @@ class ExecCicsStatement {
 	private CicsKeywordWithArg program = null;
 	private CicsKeywordWithArg transID = null;
 	private CicsKeywordWithArg file = null;
+	private StringBuffer cicsText = null;
+	private StringBuffer programText = null;
+	private StringBuffer transidText = null;
+	private StringBuffer fileText = null;
+	private Identifier identifier = null;
+	private Literal literal = null;
+	private int line = -1;
+
 
 	public ExecCicsStatement(
 			CobolParser.ExecCicsStatementContext ctx
@@ -25,33 +33,11 @@ class ExecCicsStatement {
 			) {
 		this.ctx = ctx;
 		this.LOGGER = LOGGER;
+		this.line = ctx.start.getLine();
 
-		StringBuilder sb = new StringBuilder();
-
-		for (TerminalNode tn: ctx.CICS_TEXT()) {
-			sb.append(tn.getSymbol().getText());
-		}
-		this.LOGGER.finest("CICS_TEXT = |" + sb + "|");
-		CharStream aCharStream = CharStreams.fromString(sb.toString());
-		CICSzLexer lexer = new CICSzLexer(aCharStream);  //instantiate a lexer
-		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
-		CICSzParser parser = new CICSzParser(tokens);  //parse the tokens
-
-		ParseTree tree = parser.startRule(); // parse the content and get the tree
-
-		ParseTreeWalker walker = new ParseTreeWalker();
-
-		CICSzCommandListener listener = 
-			new CICSzCommandListener(this.LOGGER);
-
-		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
-
-		walker.walk(listener, tree);
-
-		this.type = listener.getType();
-
-
-
+		this.parseCicsCommand();
+		this.parseCicsCommandArg();
+		
 		// previous code follows
 		for (CobolParser.CicsKeywordContext kywdCtx: this.ctx.cicsKeyword()) {
 			if (kywdCtx.cobolWord() != null) {
@@ -140,6 +126,71 @@ class ExecCicsStatement {
 
 	}
 
+	private void parseCicsCommand() {
+		StringBuilder sb = new StringBuilder();
+
+		for (TerminalNode tn: this.ctx.CICS_TEXT()) {
+			sb.append(tn.getSymbol().getText());
+		}
+		this.LOGGER.finest("CICS_TEXT = |" + sb + "|");
+		this.cicsText = sb;
+		sb.insert(0, "EXEC CICS\n");
+		sb.append("\nEND-EXEC");
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		CICSzLexer lexer = new CICSzLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CICSzParser parser = new CICSzParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		CICSzCommandListener listener = 
+			new CICSzCommandListener(this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		this.type = listener.getType();
+		this.programText = listener.getProgramText();
+		this.fileText = listener.getFileText();
+		this.transidText = listener.getTransidText();
+	}
+	
+	private void parseCicsCommandArg() {
+		if (this.programText != null) {
+			aCharStream = CharStreams.fromString(this.programText.toString());
+		} else if (this.fileText != null) {
+			aCharStream = CharStreams.fromString(this.fileText.toString());
+		} else if (this.transidText != null) {
+			aCharStream = CharStreams.fromString(this.transidText.toString());
+		} else {
+			throw new IllegalArgumentException("CICS command arg problem with " + this.cicsText);
+		}
+
+		CobolLexer lexer = new CobolLexer(aCharStream);
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		CobolParser parser = new CobolParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		IdentifierEtAlListener listener = 
+			new IdentifierEtAlListener(this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+		
+		if (listener.getIdentifierCtx() != null) {
+			this.identifier = new Identifier(listener.getIdentifierCtx(), this.LOGGER);
+		} else if (listener.getLiteralCtx() != null) {
+			this.literal = new Literal(listener.getLiteralCtx());
+		}
+	}
+	
 	private void findProgram() {
 		for (CicsKeywordWithArg kywd: this.cicsKeywordsWithArg) {
 			if (kywd.isProgram()) {
@@ -175,6 +226,10 @@ class ExecCicsStatement {
 		return this.type;
 	}
 
+	public int getLine() {
+		return this.line;
+	}
+	
 	@SuppressWarnings({"fallthrough"})
 	public void writeOn(PrintWriter out, UUID parentUUID) {
 		String name = null;

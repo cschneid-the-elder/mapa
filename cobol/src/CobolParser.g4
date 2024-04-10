@@ -31,7 +31,7 @@ options {tokenVocab=CobolLexer;}
 
 }
 
-startRule : compilationUnit | identifier EOF;
+startRule : compilationUnit | (identifier | literal | constantEntry | dataDescriptionEntry)* EOF;
 
 compilationUnit
    : programUnit*

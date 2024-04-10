@@ -70,7 +70,7 @@ class CallWrapper {
 		this.initialize(ctx);
 	}
 
-	public CallWrapper(
+	public CallWrapper( //TODO remove
 			CobolParser.ExecCicsStatementContext ctx
 			, String callingModuleName
 			, String aLib
@@ -82,6 +82,19 @@ class CallWrapper {
 		this.aLib = aLib;
 		this.execCicsStmt = new ExecCicsStatement(ctx, LOGGER);
 		this.initialize(ctx);
+	}
+
+	public CallWrapper(
+			ExecCicsStatement execCicsStmt
+			, String callingModuleName
+			, String aLib
+			, Logger LOGGER
+			) {
+		this.execCicsStmt = execCicsStmt;
+		this.LOGGER = LOGGER;
+		this.callingModuleName = callingModuleName;
+		this.aLib = aLib;
+		this.initialize(execCicsStmt);
 	}
 
 	public CallWrapper(
@@ -228,7 +241,7 @@ class CallWrapper {
 			);
 	}
 
-	public void initialize(CobolParser.ExecCicsStatementContext ctx) {
+	public void initialize(CobolParser.ExecCicsStatementContext ctx) { //TODO remove
 		this.line = ctx.start.getLine();
 		CallType lit = null;
 		CallType id = null;
@@ -248,6 +261,26 @@ class CallWrapper {
 			);
 	}
 
+	private void initialize(ExecCicsStatement execCicsStmt) {
+		this.line = execCicsStmt.getLine();
+		CallType lit = null;
+		CallType id = null;
+
+		if (this.execCicsStmt.getType() == ExecCicsStatementType.CICSLINK) {
+			lit = CallType.CICSLINKBYLITERAL;
+			id = CallType.CICSLINKBYIDENTIFIER;
+		} else {
+			lit = CallType.CICSXCTLBYLITERAL;
+			id = CallType.CICSXCTLBYIDENTIFIER;
+		}
+		this.initialize(
+			this.execCicsStmt.getLiteralContext()
+			, this.execCicsStmt.getIdentifierContext()
+			, lit
+			, id
+			);
+	}
+	
 	public void initialize(DB2zCallStatement db2Call) {
 		this.line = db2Call.getLine();
 		if (db2Call.getModuleName() != null ) {
