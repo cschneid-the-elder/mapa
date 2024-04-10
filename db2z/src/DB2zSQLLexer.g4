@@ -21,6 +21,7 @@ lexer grammar DB2zSQLLexer;
 	public Boolean dsnutil_dsn_ws_char = false;
 	public Boolean dsnutil_db_ts_char = false;
 	public Boolean dsnutilLoad = false;
+	public Boolean dsnutilEXECSQL = false;
 }
 
 channels { COMMENTS }
@@ -187,11 +188,24 @@ DSNUTIL_OPEN_APOS
 	->pushMode(DSNUTIL_MODE)
 	;
 
+/*
+2024-04-05 Added "dsnutil = false;" to fix problem with third
+DSNUTILx parameter being delimited with '"' and also containing
+EXEC SQL ... ENDEXEC with a literal embedded.
+*/
+
 DSNUTIL_OPEN_QUOTE
 	: '"'
 	{dsnutil && dsnutilArgc == 2}?
 	{
 		//System.out.println("dsnutil && dsnutilArgc == 2 & \"");
+		/*
+		Setting this variable to false is necessary here because 
+		the EXEC SQL online Utility Control Statement may come back
+		through this token if a literal is present in any dynamic
+		SQL being processed.
+		*/
+		dsnutil = false;
 	}
 	->pushMode(DSNUTIL_MODE)
 	;
@@ -199,6 +213,7 @@ DSNUTIL_OPEN_QUOTE
 NONNUMERICLITERAL
 	: STRINGLITERAL
 	| HEXLITERAL
+	| DOUBLE_APOS_STRINGLITERAL
 	;
 
 fragment HEXLITERAL
@@ -207,9 +222,27 @@ fragment HEXLITERAL
 	;
 
 fragment STRINGLITERAL
-	: (('"' (~["] | '""' | '\'')* '"')
-	| ('\'' (~['] | '\'\'' | '"')* '\''))
+	: (
+	('"' (~["] | '""' | '\'')* '"')
+	| ('\'' (~['] | '\'\'' | '"')* '\'')
+	)
 	{!(dsnutil && dsnutilArgc == 2)}?
+	;
+
+/*
+This is interesting.  If we are processing the third parameter
+to DSNUTILx, and that parameter contains an EXEC SQL ... ENDEXEC
+statement, and that statement contains a literal, it may be
+delimited by two apostrophes.  Setting the dsnutilEXECSQL boolean
+means this will match instead of the first two apostrophes
+matching STRINGLITERAL, the intended contents of the literal
+possibly matching SQLIDENTIFIER, and the final two apostrophes
+matching STRINGLITERAL.
+*/
+
+fragment DOUBLE_APOS_STRINGLITERAL
+	: ('\'\'' ~[']* '\'\'')
+	{dsnutilEXECSQL}?
 	;
 
 INTEGERLITERAL
@@ -265,6 +298,7 @@ SQLBLOCKCOMMENTEND
 
 DSNUTIL_ENDEXEC
 	: E N D E X E C
+	{dsnutilEXECSQL = false;}
 	->popMode
 	;
 
@@ -4955,6 +4989,7 @@ DSNUTIL_SWITCHTIME
 
 DSNUTIL_EXEC_SQL
 	: E X E C (WS | NEWLINE)+ S Q L
+	{dsnutilEXECSQL = true;}
 	->pushMode(DEFAULT_MODE)
 	;
 
@@ -6829,6 +6864,22 @@ DSNUTIL_DB_TS_WS_TERMINATING
 	->channel(HIDDEN),popMode
 	;
 
+DSNUTIL_DB_TS_EQUAL
+	: DSNUTIL_EQUAL
+	->type(DSNUTIL_EQUAL)
+	;
+
+/*
+Sometimes a literal is delimited with two apostrophes.
+*/
+DSNUTIL_DB_TS_DOUBLE_APOS
+	: '\'\''
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->pushMode(DSNUTIL_DOUBLE_APOS_MODE)
+	;
+
 DSNUTIL_DB_TS_APOS
 	: '\''
 	{
@@ -6947,6 +6998,14 @@ DSNUTIL_DB_TS_TABLESAMPLE
 	->type(DSNUTIL_TABLESAMPLE)
 	;
 
+DSNUTIL_DB_TS_RECORD
+	: DSNUTIL_RECORD
+	{
+		dsnutil_db_ts_char = true;
+	}
+	->type(DSNUTIL_RECORD)
+	;
+
 DSNUTIL_DB_TS_IDENTIFIER
 	: ~[ \n\r.,;)('"]+
 	{
@@ -6974,6 +7033,16 @@ DSNUTIL_DB_TS_STRINGLITERAL
 
 DSNUTIL_DB_TS_HEX_LIT
 	: [GNX] '\'' [0-9A-Za-z]+ '\''
+	->popMode
+	;
+
+/*
+Added per Martijn Rutte 2024-04-03.  It turns out that hex
+literals can be quoted with two apostrophes and not just one.
+*/
+
+DSNUTIL_DB_TS_HEX_LIT_DOUBLE_APOS
+	: [GNX] '\'\'' [0-9A-Za-z]+ '\'\''
 	->popMode
 	;
 

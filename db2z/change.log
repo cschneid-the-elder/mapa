@@ -1,3 +1,97 @@
+--2024-04-03--------------------------------------------------------------------
+Per Martijn Rutte, to handle alternate syntaxes and literals delimited by two
+apostrophes...
+
+Added dsnutilUCSFullOrChangelimit to dsnutilUCSCopySpecOptions.
+
+Added DSNUTIL_DB_TS_HEX_LIT_DOUBLE_APOS in lexer mode DSNUTIL_DB_TS_MODE and
+parser rule dsnutilUCSArg.
+
+(DSNUTIL_UNLOAD_DATA | DSNUTIL_UNLOAD) added to dsnutilUCSUnload.
+
+Made dsnutilUCSRegisterOption optional in dsnutilUCSShrlevelChangeSpec3.
+
+Added...
+
+| (DSNUTIL_DB_TS_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR* DSNUTIL_DOUBLE_APOS1)
+| (DSNUTIL_PAREN_DOUBLE_APOS DSNUTIL_DOUBLE_APOS_CHAR* DSNUTIL_DOUBLE_APOS1)
+
+... to dsnutilUCSArg.
+
+Added fragment DOUBLE_APOS_STRINGLITERAL to lexer and to lexer
+rule NONNUMERICLITERAL.  This is to handle literals delimited with two
+apostrophes codes as part of arbitrary SQL within the third argument to 
+DSNUTILx, delimited by EXEC SQL [...] ENDEXEC.  Added new Boolean 
+dsnutilEXECSQL to support this.
+
+Added DSNUTIL_DB_TS_DOUBLE_APOS to lexer, again to support literals delimited
+by two apostrophes.
+
+Added DSNUTIL_DB_TS_RPAREN as a termination option for 
+dsnutilUCSLoadFieldListOption.
+
+Simplified dsnutilUCSSortdataOption.
+
+Trailing comma tolerated in dsnutilUCSLoadFieldListOption.
+
+Made everything following DSNUTIL_DECIMAL optional in 
+dsnutilUCSLoadDecimalSpec.
+
+Made trailing options in dsnutilUCSUnloadFieldSpecificationChar
+actually optional.
+
+dsnutilUCSUnload now allows for dsnutilUCSUnloadSpec options to be before,
+after, or both before and after the dsnutilUCSFromTableSpec2.
+
+Added dsnutilUCSArgInParens? following DSNUTIL_MIXED in 
+dsnutilUCSLoadFieldSpecificationChar.
+
+Fixed typo in dsnutilUCSDsnDataclasOption, removing erroneous "r" between
+that made it read dsnurtilUCSDsnDataclasOption.  Also added optional
+DSNUTIL_EQUAL? before dsnutilUCSArgOptionalParens.
+
+I've modified the following in a similar fashion to 
+dsnutilUCSDsnDataclasOption, adding an optional DSNUTIL_EQUAL before 
+the dsnutilUCSArgOptionalParens.  My reasoning is that if it's allowed for one
+of these dataset options then it's likely allowed for them all.
+
+dsnutilUCSDsnUnitOption
+dsnutilUCSDsnBufnoOption
+dsnutilUCSDsnMgmtclasOption
+dsnutilUCSDsnStorclasOption
+dsnutilUCSDsnRetpdOption
+dsnutilUCSDsnVolumesOption
+dsnutilUCSDsnVolcntOption
+dsnutilUCSDsnUncntOption
+dsnutilUCSDsnGdgLimitOption
+dsnutilUCSDsnDispOption
+dsnutilUCSDsnLimitOption
+dsnutilUCSDsnTimeOption
+dsnutilUCSDsnBlkszlimOption
+dsnutilUCSDsnSpaceOption
+dsnutilUCSDsnPctprimeOption
+dsnutilUCSDsnMaxprimeOption
+dsnutilUCSDsnNbrsecndOption
+dsnutilUCSDsnDirOption
+dsnutilUCSDsnDsntypeOption
+dsnutilUCSDsnStackOption
+dsnutilUCSDsnTrtchOption
+dsnutilUCSDsnSubsysOption
+dsnutilUCSDsnLreclOption
+dsnutilUCSDsnRecfmOption
+dsnutilUCSPathFiledataOption
+dsnutilUCSPathPathoptsOption
+dsnutilUCSPathPathmodeOption
+dsnutilUCSPathPathdispOption
+
+Made all the options of dsnutilUCSRecoverNosyscopyOption optional.
+
+Made dsnutilUCSCCSIDPhrase in dsnutilUCSUnloadClobfSpec optional.
+
+Added "dsnutil = false;" to DSNUTIL_OPEN_QUOTE to fix problem with third
+DSNUTILx parameter being delimited with '"' and also containing
+EXEC SQL ... ENDEXEC with a literal embedded.
+
 --2024-03-26--------------------------------------------------------------------
 Per Martijn Rutte, added dsnutilUCSDsnumOption to 
 dsnutilUCSModifyRecoveryOptions and dsnutilUCSSortnumOption to 

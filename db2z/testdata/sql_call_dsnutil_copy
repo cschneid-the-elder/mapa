@@ -393,4 +393,25 @@ COPY TABLESPACE PENNY.ADIYODI
   , ''
   );
 
+CALL SYSPROC.DSNUTILU( 
+  'TST.UTL01'
+, 'NO'
+, 'TEMPLATE 
+     COPY 
+     DSN ''TST03.&DB..&SN..P&PA(2,4)..DB2&SS(4,1).IC.&UQ.'' 
+     UNIT SYSDA 
+     VOLCNT 99 
+     RETPD 22 
+     STACK YES 
+   LISTDEF RIKER 
+     INCLUDE TABLESPACE DATA03.* 
+   COPY 
+     LIST RIKER
+     FULL YES 
+     SHRLEVEL CHANGE 
+     PARALLEL 5 
+     COPYDDN(COPY)'
+   , ''
+   )
+   ;
 

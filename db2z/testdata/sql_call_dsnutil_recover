@@ -326,7 +326,6 @@ RECOVER
       CURRENTCOPYONLY
       ENFORCE NO
       NOSYSCOPY
-        FCCOPY
       FLASHCOPY_PPRCP(PMPREF)
     '
   , ''
