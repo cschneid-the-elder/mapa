@@ -15,13 +15,39 @@ class ExecCicsStatement {
 	private ArrayList<String> cicsKeywords = new ArrayList<>();
 	private ArrayList<CicsKeywordWithArg> cicsKeywordsWithArg = new ArrayList<>();
 	private ExecCicsStatementType type = null;
-	private CicsKeywordWithArg program = null;
-	private CicsKeywordWithArg transID = null;
-	private CicsKeywordWithArg file = null;
+	private String program = null;
+	private String transID = null;
+	private String file = null;
+	/*
+	cicsText is what lies between EXEC CICS and END-EXEC.  This must
+	be parsed with the CICSz parser.
+	*/
 	private StringBuffer cicsText = null;
+	/*
+	programText is what lies betweent the parentheses in a PROGRAM(...)
+	option for a CICS command.  This must be parsed with the host
+	language parser.  programText, transidText, and fileText are all
+	mutually exclusive.
+	*/
 	private StringBuffer programText = null;
+	/*
+	transidText is what lies betweent the parentheses in a TRANSID(...)
+	option for a CICS command.  This must be parsed with the host
+	language parser.  programText, transidText, and fileText are all
+	mutually exclusive.
+	*/
 	private StringBuffer transidText = null;
+	/*
+	fileText is what lies betweent the parentheses in a FILE(...)
+	option for a CICS command.  This must be parsed with the host
+	language parser.  programText, transidText, and fileText are all
+	mutually exclusive.
+	*/
 	private StringBuffer fileText = null;
+	/*
+	When programText, transidText, or fileText are parsed with the
+	host language parser, either an Identifier or a Literal results.
+	*/
 	private Identifier identifier = null;
 	private Literal literal = null;
 	private int line = -1;
@@ -36,93 +62,11 @@ class ExecCicsStatement {
 		this.line = ctx.start.getLine();
 
 		this.parseCicsCommand();
-		this.parseCicsCommandArg();
 		
-		// previous code follows
-		for (CobolParser.CicsKeywordContext kywdCtx: this.ctx.cicsKeyword()) {
-			if (kywdCtx.cobolWord() != null) {
-				CobolWord source = new CobolWord(kywdCtx.cobolWord()); 
-				this.cicsKeywords.add(source.getText().toUpperCase());
-			} else {
-				CicsWord source = new CicsWord(kywdCtx.cicsWord()); 
-				this.cicsKeywords.add(source.getText().toUpperCase());
-			}
+		if (this.type != ExecCicsStatementType.CICSOTHER) {
+			this.parseCicsCommandArg();
 		}
-		for (CobolParser.CicsKeywordWithArgContext kywdWithArgCtx: this.ctx.cicsKeywordWithArg()) {
-			this.cicsKeywordsWithArg.add(new CicsKeywordWithArg(kywdWithArgCtx, this.LOGGER));
-		}
-		String aKywd = null;
-        if (this.cicsKeywords.size() > 0) {
-			aKywd = this.cicsKeywords.get(0);
-		} else if (this.cicsKeywordsWithArg.size() > 0) {
-			aKywd = this.cicsKeywordsWithArg.get(0).getKeyword();
-		} else {
-			aKywd = "";
-		}
-		switch(aKywd) {
-			case "LINK":
-				this.type = ExecCicsStatementType.CICSLINK;
-				this.findProgram();
-				if (this.program == null) {
-					this.type = ExecCicsStatementType.CICSOTHER;
-				}
-				break;
-			case "XCTL":
-				this.type = ExecCicsStatementType.CICSXCTL;
-				this.findProgram();
-				break;
-			case "START":
-				this.type = ExecCicsStatementType.CICSSTARTTRANSID;
-				this.findTransID();
-				break;
-			case "RUN":
-				this.type = ExecCicsStatementType.CICSRUNTRANSID;
-				this.findTransID();
-                if (this.transID == null) {
-					this.type = ExecCicsStatementType.CICSOTHER;
-				}
-				break;
-			case "DELETE":
-				this.type = ExecCicsStatementType.CICSDELETE;
-				this.findFile();
-				if (this.file == null) {
-					this.type = ExecCicsStatementType.CICSOTHER;
-				}
-				break;
-			case "READ":
-				this.type = ExecCicsStatementType.CICSREAD;
-				this.findFile();
-				if (this.file == null) {
-					this.type = ExecCicsStatementType.CICSOTHER;
-				}
-				break;
-			case "REWRITE":
-				this.type = ExecCicsStatementType.CICSREWRITE;
-				this.findFile();
-				break;
-			case "WRITE":
-				this.type = ExecCicsStatementType.CICSWRITE;
-				this.findFile();
-				if (this.file == null) {
-					this.type = ExecCicsStatementType.CICSOTHER;
-				}
-				break;
-			case "STARTBR":
-				this.type = ExecCicsStatementType.CICSSTARTBR;
-				this.findFile();
-				break;
-			case "READNEXT":
-				this.type = ExecCicsStatementType.CICSREADNEXT;
-				this.findFile();
-				break;
-			case "READPREV":
-				this.type = ExecCicsStatementType.CICSREADPREV;
-				this.findFile();
-				break;
-			default:
-				this.type = ExecCicsStatementType.CICSOTHER;
-
-		}
+		
 
 	}
 
@@ -166,7 +110,7 @@ class ExecCicsStatement {
 		} else if (this.transidText != null) {
 			aCharStream = CharStreams.fromString(this.transidText.toString());
 		} else {
-			throw new IllegalArgumentException("CICS command arg problem with " + this.cicsText);
+			return;
 		}
 
 		CobolLexer lexer = new CobolLexer(aCharStream);
@@ -191,37 +135,6 @@ class ExecCicsStatement {
 		}
 	}
 	
-	private void findProgram() {
-		for (CicsKeywordWithArg kywd: this.cicsKeywordsWithArg) {
-			if (kywd.isProgram()) {
-				this.program = kywd;
-				break;
-			}
-		}
-	}
-
-	private void findTransID() {
-		for (CicsKeywordWithArg kywd: this.cicsKeywordsWithArg) {
-			if (kywd.isTransID()) {
-				this.transID = kywd;
-				break;
-			}
-		}
-	}
-
-	private void findFile() {
-		for (CicsKeywordWithArg kywd: this.cicsKeywordsWithArg) {
-			if (kywd.isFile()) {
-				this.file = kywd;
-				break;
-			}
-		}
-	}
-
-	public CicsKeywordWithArg getProgram() {
-		return this.program;
-	}
-
 	public ExecCicsStatementType getType() {
 		return this.type;
 	}
@@ -230,27 +143,27 @@ class ExecCicsStatement {
 		return this.line;
 	}
 	
-	@SuppressWarnings({"fallthrough"})
+	public Identifier getIdentifier() {
+		return this.identifier;
+	}
+	
+	public Literal getLiteral() {
+		return this.literal;
+	}
+	
 	public void writeOn(PrintWriter out, UUID parentUUID) {
+		if (this.type == ExecCicsStatementType.CICSOTHER) {
+			return;
+		}
+		
 		String name = null;
 
-		switch (this.getType()) {
-			case CICSSTARTTRANSID:
-			case CICSRUNTRANSID: //intentional fall through
-				name = this.transID.getArgString();
-				break;
-			case CICSSTARTBR:
-			case CICSREADNEXT:
-			case CICSREADPREV:
-			case CICSDELETE:
-			case CICSREAD:
-			case CICSREWRITE:
-			case CICSWRITE: //intentional fall through
-				name = this.file.getArgString();
-				break;
-			default:
-				name = "<NOTFND>";
-				break;
+		if (this.identifier != null) {
+			name = this.identifier.getDataNameText();
+		} else if (this.literal != null) {
+			name = this.literal.getText();
+		} else {
+			name = "<NOTFND>";
 		}
 
 		out.printf(

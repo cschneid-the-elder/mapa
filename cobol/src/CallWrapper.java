@@ -38,6 +38,7 @@ class CallWrapper {
 	public CallType callType = null;
 	public String cobolIdentifier = null;
 	private Identifier identifier = null;
+	private Literal literal = null;
 	private ArrayList<UUID> calledModuleUUIDs = new ArrayList<>();
 	private List<String> calledModuleNames = new ArrayList<>();
 	public String callingModuleName = null;
@@ -90,6 +91,17 @@ class CallWrapper {
 			, String aLib
 			, Logger LOGGER
 			) {
+		if (execCicsStmt.getType() == CICSLINK
+		|| execCicsStmt.getType() == CICSXCTL) {
+			//do nothing
+		} else {
+			throw new IllegalArgumentException(
+				this.myName 
+				+ " cannot be instantiated with ExecCicsStatement of type "
+				+ execCicsStmt.getType().toString()
+				);
+		}
+		
 		this.execCicsStmt = execCicsStmt;
 		this.LOGGER = LOGGER;
 		this.callingModuleName = callingModuleName;
@@ -233,10 +245,15 @@ class CallWrapper {
 	
 	private void initialize(CobolParser.CallStatementContext ctx) {
 		this.line = ctx.start.getLine();
+		if (ctx.identifier() != null) {
+			this.identifier = new Identifier(ctx.identifier(), this.LOGGER);
+		} else if (ctx.literal() != null) {
+			this.literal = new Literal(ctx.literal());
+		} else {
+			throw new IllegalArgumentException("callStatement at " + this.line + " contains neither identifier nor literal");
+		}
 		this.initialize(
-			ctx.literal()
-			, ctx.identifier()
-			, CallType.CALLBYLITERAL
+			CallType.CALLBYLITERAL
 			, CallType.CALLBYIDENTIFIER
 			);
 	}
@@ -263,6 +280,8 @@ class CallWrapper {
 
 	private void initialize(ExecCicsStatement execCicsStmt) {
 		this.line = execCicsStmt.getLine();
+		this.identifier = execCicsStmt.getIdentifier();
+		this.literal = execCicsStmt.getLiteral();
 		CallType lit = null;
 		CallType id = null;
 
@@ -274,9 +293,7 @@ class CallWrapper {
 			id = CallType.CICSXCTLBYIDENTIFIER;
 		}
 		this.initialize(
-			this.execCicsStmt.getLiteralContext()
-			, this.execCicsStmt.getIdentifierContext()
-			, lit
+			lit
 			, id
 			);
 	}
@@ -299,7 +316,7 @@ class CallWrapper {
 		}
 	}
 
-	private void initialize(
+	private void initialize( //TODO remove
 			CobolParser.LiteralContext litCtx
 			, CobolParser.IdentifierContext idCtx
 			, CallType litCallType
@@ -316,6 +333,66 @@ class CallWrapper {
 		} else {
 			this.idCtx = idCtx;
 			this.identifier = new Identifier(idCtx, this.LOGGER);
+			this.callType = idCallType;
+			if (idCtx.qualifiedDataName() == null ) {
+				// CALL identifier(subscript) syntax (sneaky)
+				this.cobolIdentifier = 
+					idCtx
+					.tableCall()
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.dataName()
+					.cobolWord()
+					.IDENTIFIER()
+					.toString();
+				//this.cobolIdentifier = idCtx.getText(); doesn't work
+				this.subctxs = idCtx.tableCall().subscript();
+				this.subNames = new ArrayList<>();
+				for (CobolParser.SubscriptContext sub: subctxs) {
+					this.subNames.add(sub.getText());
+				}
+			} else {
+				// CALL identifier syntax
+				this.cobolIdentifier = 
+					idCtx
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.dataName()
+					.cobolWord()
+					.IDENTIFIER()
+					.toString();
+				//this.cobolIdentifier = idCtx.getText(); doesn't work
+				this.qualInData = QualifiedInData.bunchOfThese(
+					idCtx
+					.qualifiedDataName()
+					.qualifiedDataNameFormat1()
+					.qualifiedInData()
+					, this.LOGGER);
+				if (this.qualInData != null) {
+					for (QualifiedInData qind: this.qualInData) {
+						this.ofs.add(qind.getText());
+					}
+				}
+			}
+		}
+
+
+	}
+
+	private void initialize(
+			CallType litCallType
+			, CallType idCallType
+			) {
+		if ( this.identifier == null ) {
+			// CALL literal syntax
+			if (this.literal == null) {
+				// ExecSqlCallStatementContext is handled on its own
+			} else {
+				this.addCalledModuleName(this.literal.getText());
+				this.callType = litCallType;
+			}
+		} else {
+			CobolParser.IdentifierContext idCtx = this.identifier.getIdentifierContext();
 			this.callType = idCallType;
 			if (idCtx.qualifiedDataName() == null ) {
 				// CALL identifier(subscript) syntax (sneaky)
