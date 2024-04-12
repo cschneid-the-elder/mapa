@@ -115,25 +115,15 @@ public class CallEtAlListener extends CobolParserBaseListener {
 
 		ExecCicsStatement cicsStmt = new ExecCicsStatement(ctx, this.LOGGER);
 		switch(cicsStmt.getType()) {
+			case CICSOTHER:
+				break;
 			case CICSLINK:
 			case CICSXCTL: //intentional fall through
 				CallWrapper aCall = new CallWrapper(cicsStmt, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 				this.currProgram.addCall(aCall);
 				break;
-			case CICSSTARTTRANSID:
-			case CICSSTARTBR:
-			case CICSREADNEXT:
-			case CICSREADPREV:
-			case CICSDELETE:
-			case CICSREAD:
-			case CICSREWRITE:
-			case CICSWRITE: //intentional fall through
-				this.currProgram.addCicsStatement(cicsStmt);
-				break;
-			case CICSRUNTRANSID:
-				this.currProgram.addCicsStatement(cicsStmt);
-				break;
 			default:
+				this.currProgram.addCicsStatement(cicsStmt);
 				break;
 		}
 	}

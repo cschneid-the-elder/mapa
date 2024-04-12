@@ -2,6 +2,8 @@
 import java.util.*;
 import java.io.*;
 import java.util.logging.Logger;
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
 
 /**
 */
@@ -12,8 +14,6 @@ class ExecCicsStatement {
 	private UUID uuid = UUID.randomUUID();
 	private Logger LOGGER = null;
 	private CobolParser.ExecCicsStatementContext ctx = null;
-	private ArrayList<String> cicsKeywords = new ArrayList<>();
-	private ArrayList<CicsKeywordWithArg> cicsKeywordsWithArg = new ArrayList<>();
 	private ExecCicsStatementType type = null;
 	private String program = null;
 	private String transID = null;
@@ -71,7 +71,7 @@ class ExecCicsStatement {
 	}
 
 	private void parseCicsCommand() {
-		StringBuilder sb = new StringBuilder();
+		StringBuffer sb = new StringBuffer();
 
 		for (TerminalNode tn: this.ctx.CICS_TEXT()) {
 			sb.append(tn.getSymbol().getText());
@@ -81,6 +81,7 @@ class ExecCicsStatement {
 		sb.insert(0, "EXEC CICS\n");
 		sb.append("\nEND-EXEC");
 		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		CICSzLexer.classicCOBOLCode = true;
 		CICSzLexer lexer = new CICSzLexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CICSzParser parser = new CICSzParser(tokens);  //parse the tokens
@@ -103,6 +104,8 @@ class ExecCicsStatement {
 	}
 	
 	private void parseCicsCommandArg() {
+		CharStream aCharStream = null;
+		
 		if (this.programText != null) {
 			aCharStream = CharStreams.fromString(this.programText.toString());
 		} else if (this.fileText != null) {

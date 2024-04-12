@@ -19,10 +19,10 @@ lexer grammar CICSzLexer;
 	is syntactically correct for portions of a CICS command to be commented
 	out in a way that is syntactically correct for the host language.
 	*/
-	Boolean pliCode = false;
-	Boolean classicCOBOLCode = false;
-	Boolean freeFormCOBOLCode = false;
-	Boolean cCode = false;
+	public static Boolean pliCode = false;
+	public static Boolean classicCOBOLCode = false;
+	public static Boolean freeFormCOBOLCode = false;
+	public static Boolean cCode = false;
 }
 
 fragment A:('a'|'A');
@@ -8513,7 +8513,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2092 rules generated Tue Apr  9 13:59:36 CDT 2024
+// 2092 rules generated Fri Apr 12 17:21:30 CDT 2024
 
 mode ARG_MODE;
 

@@ -91,8 +91,8 @@ class CallWrapper {
 			, String aLib
 			, Logger LOGGER
 			) {
-		if (execCicsStmt.getType() == CICSLINK
-		|| execCicsStmt.getType() == CICSXCTL) {
+		if (execCicsStmt.getType() == ExecCicsStatementType.CICSLINK
+		|| execCicsStmt.getType() == ExecCicsStatementType.CICSXCTL) {
 			//do nothing
 		} else {
 			throw new IllegalArgumentException(
