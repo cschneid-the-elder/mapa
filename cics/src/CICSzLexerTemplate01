@@ -56,6 +56,12 @@ fragment SPLAT: '*';
 fragment SLASH: '/';
 fragment GT: '>';
 
+CLASSIC_COBOL_LINE_NUMBER
+	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r])
+	{!freeFormCOBOLCode && classicCOBOLCode && getCharPositionInLine() == 6}?
+	->channel(HIDDEN)
+	;
+
 fragment CLASSIC_COBOL_COMMENT_FLAG
 	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] SPLAT)
 	{!freeFormCOBOLCode && classicCOBOLCode && getCharPositionInLine() == 7}?

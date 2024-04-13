@@ -84,19 +84,29 @@ cobol/TestIntegration-*.log
 cobol/callList*.log
 jcl/Demo01-*.log
 #
-# this jar file is created, then copied to the cobol directory
+# these jar files are created, then copied to the cobol directory
 #
 db2z/DB2zSQL.jar
+cics/CICSz.jar
 #
 # these jar files are backups created when the above jar is
 # copied to the cobol directory
 #
 cobol/DB2zSQL.jar.*
+cobol/CICSz.jar.*
 #
 # these are backup copies of the generated CICSz grammars
 #
 cics/src/CICSzLexer.g4.*
 cics/src/CICSzParser.g4.*
+#
+# these are backup copies of test data extracted from
+# cobol/testdata/local/test9022.cbl and 
+# cobol/testdata/local/test9026.cbl via
+# make extractapi and make extractspi
+#
+cics/testdata/cics_api.*
+cics/testdata/cics_spi.*
 #
 # test data that should not be made public
 #

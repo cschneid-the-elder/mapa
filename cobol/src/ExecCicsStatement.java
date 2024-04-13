@@ -104,18 +104,20 @@ class ExecCicsStatement {
 	}
 	
 	private void parseCicsCommandArg() {
-		CharStream aCharStream = null;
+		// start the buffer with 12 spaces to get to COBOL area B
+		StringBuffer sb = new StringBuffer("            ");
 		
 		if (this.programText != null) {
-			aCharStream = CharStreams.fromString(this.programText.toString());
+			sb.append(this.programText);
 		} else if (this.fileText != null) {
-			aCharStream = CharStreams.fromString(this.fileText.toString());
+			sb.append(this.fileText);
 		} else if (this.transidText != null) {
-			aCharStream = CharStreams.fromString(this.transidText.toString());
+			sb.append(this.transidText);
 		} else {
 			return;
 		}
 
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
 		CobolLexer lexer = new CobolLexer(aCharStream);
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
 		CobolParser parser = new CobolParser(tokens);  //parse the tokens

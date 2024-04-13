@@ -56,6 +56,12 @@ fragment SPLAT: '*';
 fragment SLASH: '/';
 fragment GT: '>';
 
+CLASSIC_COBOL_LINE_NUMBER
+	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r])
+	{!freeFormCOBOLCode && classicCOBOLCode && getCharPositionInLine() == 6}?
+	->channel(HIDDEN)
+	;
+
 fragment CLASSIC_COBOL_COMMENT_FLAG
 	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] SPLAT)
 	{!freeFormCOBOLCode && classicCOBOLCode && getCharPositionInLine() == 7}?
@@ -8513,7 +8519,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2092 rules generated Fri Apr 12 17:21:30 CDT 2024
+// 2092 rules generated Sat Apr 13 18:23:20 CDT 2024
 
 mode ARG_MODE;
 

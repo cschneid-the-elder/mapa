@@ -1305,8 +1305,6 @@ mode EXEC_CICS_MODE;
 
 EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
-EC_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
-
 CICS_TEXT : (.+?);
 
 /*
