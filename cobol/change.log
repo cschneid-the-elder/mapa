@@ -1,3 +1,29 @@
+--2024-04-14--------------------------------------------------------------------
+Integrated CICSz parser.  Previously, EXEC CICS commands were parsed in a
+hand-coded and not very robust fashion.  Now there are ANTLR lexer and parser
+grammars for the CICS API and SPI commands and these are used instead.
+
+The CicsWord and CicsKeywordWithArg classes are obsolete and have been removed.
+
+The ExecCicsStatement class has been revised and... well, this is kind of 
+interesting.  When the CallEtAlListener is walking the parse tree of a COBOL
+program and notices an EXEC CICS statement, it instantiates an 
+ExecCicsStatement.  The ExecCicsStatement then uses the CICSz ANTLR grammar
+to parse the EXEC CICS statement.  Since we're interested in the arguments to
+some of the CICS commands, we then walk the CICS command parse tree with 
+CICSzCommandListener and save the pertinent arguments.  Those arguments are (in
+this case) either COBOL literals or COBOL identifiers, so we then use the COBOL
+grammar again in concert with an IdentifierEtAlListener to retrieve the 
+literal(s) or identifier(s).
+
+So whilst executing an ANTLR listener we invoke another parser and another
+listener, and whilst doing that we invoke the original parser and yet another
+listener.
+
+Still to do: do with the API arguments for non-LINK and non-XCTL work like 
+LINK and XCTL, i.e. match identifiers and their values.  Right now this only
+works as I'd like with literals.
+
 --2024-03-11--------------------------------------------------------------------
 Add support for free form source code.
 

@@ -6,6 +6,10 @@ import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.*;
 
 /**
+Instances of this class represent an EXEC CICS API or SPI command.
+
+This application only needs to know about a small subset of the API
+commands, others are ignored.
 */
 
 class ExecCicsStatement {
