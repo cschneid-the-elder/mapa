@@ -118,4 +118,9 @@ class Identifier {
 	public TableCall getTableCall() {
 		return this.tableCall;
 	}
+	
+	public CobolParser.IdentifierContext getIdentifierContext() {
+		return this.ctx;
+	}
+	
 }

@@ -13,7 +13,7 @@
                 XCTL
                 PROGRAM('PGMA0001')
                 COMMAREA(CA-STUFF)
-                COMMAREALENGTH(CA-STUFF-LEN)
+                LENGTH(CA-STUFF-LEN)
            END-EXEC
 
            DISPLAY MYNAME ' End'

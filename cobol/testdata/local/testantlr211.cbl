@@ -13,7 +13,7 @@
                 LINK                                                    00000013
                 PROGRAM('PGMA0001')                                     00000014
                 COMMAREA(CA-STUFF)                                      00000015
-                COMMAREALENGTH(CA-STUFF-LEN)                            00000016
+                LENGTH(CA-STUFF-LEN)                                    00000016
            END-EXEC                                                     00000017
                                                                         00000018
            DISPLAY MYNAME ' End'                                        00000019

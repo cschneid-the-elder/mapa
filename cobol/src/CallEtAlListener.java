@@ -113,46 +113,17 @@ public class CallEtAlListener extends CobolParserBaseListener {
 			return;
 		}
 
-		ExecCicsStatement cicsStmt = null;
-
-		String aString = null;
-
-		if (ctx.cicsKeyword() == null || ctx.cicsKeyword().size() == 0) {
-			if (ctx.cicsKeywordWithArg() == null || ctx.cicsKeywordWithArg().size() == 0) {
-				return;  //empty CICS API call
-			} else {
-				String allOfIt = ctx.cicsKeywordWithArg(0).getText().toUpperCase();
-				aString = allOfIt.substring(0, allOfIt.indexOf("("));
-			}
-		} else {
-			aString = ctx.cicsKeyword(0).getText().toUpperCase();
-		}
-
-		cicsStmt = new ExecCicsStatement(ctx, this.LOGGER);
+		ExecCicsStatement cicsStmt = new ExecCicsStatement(ctx, this.LOGGER);
 		switch(cicsStmt.getType()) {
+			case CICSOTHER:
+				break;
 			case CICSLINK:
 			case CICSXCTL: //intentional fall through
-				CallWrapper aCall = new CallWrapper(ctx, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
+				CallWrapper aCall = new CallWrapper(cicsStmt, this.currProgram.getProgramName(), this.aLib, this.LOGGER);
 				this.currProgram.addCall(aCall);
 				break;
-			case CICSSTARTTRANSID:
-			case CICSSTARTBR:
-			case CICSREADNEXT:
-			case CICSREADPREV:
-			case CICSDELETE:
-			case CICSREAD:
-			case CICSREWRITE:
-			case CICSWRITE: //intentional fall through
-				this.currProgram.addCicsStatement(cicsStmt);
-				break;
-			case CICSRUNTRANSID:
-				if (ctx.cicsKeywordWithArg() != null && ctx.cicsKeywordWithArg().size() > 0) {
-					if (ctx.cicsKeywordWithArg(0).getText().toUpperCase().startsWith("TRANSID")) {
-						this.currProgram.addCicsStatement(cicsStmt);
-					}
-				}
-				break;
 			default:
+				this.currProgram.addCicsStatement(cicsStmt);
 				break;
 		}
 	}

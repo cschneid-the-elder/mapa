@@ -19,10 +19,10 @@ lexer grammar CICSzLexer;
 	is syntactically correct for portions of a CICS command to be commented
 	out in a way that is syntactically correct for the host language.
 	*/
-	Boolean pliCode = false;
-	Boolean classicCOBOLCode = false;
-	Boolean freeFormCOBOLCode = false;
-	Boolean cCode = false;
+	public static Boolean pliCode = false;
+	public static Boolean classicCOBOLCode = false;
+	public static Boolean freeFormCOBOLCode = false;
+	public static Boolean cCode = false;
 }
 
 fragment A:('a'|'A');
@@ -55,6 +55,12 @@ fragment Z:('z'|'Z');
 fragment SPLAT: '*';
 fragment SLASH: '/';
 fragment GT: '>';
+
+CLASSIC_COBOL_LINE_NUMBER
+	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r])
+	{!freeFormCOBOLCode && classicCOBOLCode && getCharPositionInLine() == 6}?
+	->channel(HIDDEN)
+	;
 
 fragment CLASSIC_COBOL_COMMENT_FLAG
 	: (~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] ~[\n\r] SPLAT)

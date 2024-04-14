@@ -962,6 +962,7 @@ SUBSTITUTE :  S U B S T I T U T E ;
 E_CHAR : E;
 EXEC_CICS
 	: ((E X E C) | (E X E C U T E)) [ ]+ (C I C S)
+	->pushMode(EXEC_CICS_MODE)
 	;
 
 // symbols
@@ -1299,6 +1300,12 @@ ES_CLASSIC_COMMENTLINE : (BOL? TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA CLASSIC_COMME
 ES_CLASSIC_LINE_NUMBER : TEXTA TEXTA TEXTA TEXTA TEXTA TEXTA {!freeForm && getCharPositionInLine() == 6}? -> skip;
 
 SQL_TEXT : (.+?);
+
+mode EXEC_CICS_MODE;
+
+EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
+
+CICS_TEXT : (.+?);
 
 /*
 This mode is to ensure any COBOL reserved words that are DFHVALUE keywords

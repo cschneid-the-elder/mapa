@@ -14,7 +14,7 @@
                 XCTL                                                    00000014
                 PROGRAM(PGM-0001)                                       00000015
                 COMMAREA(CA-STUFF)                                      00000016
-                COMMAREALENGTH(CA-STUFF-LEN)                            00000017
+                LENGTH(CA-STUFF-LEN)                                    00000017
            END-EXEC                                                     00000018
                                                                         00000019
            DISPLAY MYNAME ' End'                                        00000020

@@ -13,7 +13,7 @@
 000013          XCTL                                                    00000013
 000014          PROGRAM('PGMA0001')                                     00000014
 000015          COMMAREA(CA-STUFF)                                      00000015
-000016          COMMAREALENGTH(CA-STUFF-LEN)                            00000016
+000016          LENGTH(CA-STUFF-LEN)                                    00000016
 000017     END-EXEC                                                     00000017
 000018                                                                  00000018
 000019     DISPLAY MYNAME ' End'                                        00000019

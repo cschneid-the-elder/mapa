@@ -14,7 +14,7 @@
 000014          LINK                                                    00000014
 000015          PROGRAM(PGM-0001)                                       00000015
 000016          COMMAREA(CA-STUFF)                                      00000016
-000017          COMMAREALENGTH(CA-STUFF-LEN)                            00000017
+000017          LENGTH(CA-STUFF-LEN)                                    00000017
 000018     END-EXEC                                                     00000018
 000019                                                                  00000019
 000020     DISPLAY MYNAME ' End'                                        00000020

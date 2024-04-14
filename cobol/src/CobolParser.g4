@@ -31,7 +31,7 @@ options {tokenVocab=CobolLexer;}
 
 }
 
-startRule : compilationUnit EOF;
+startRule : compilationUnit | (specialRegister | identifier | literal | constantEntry | dataDescriptionEntry)* EOF;
 
 compilationUnit
    : programUnit*
@@ -1544,7 +1544,12 @@ dataPictureClause
    ;
 
 pictureString
-   : (pictureChars+ pictureCardinality?)+
+//   : (pictureChars+ pictureCardinality?)+
+   : pictureCharAndCardinality+
+   ;
+
+pictureCharAndCardinality
+   : (pictureChars pictureCardinality?)
    ;
 
 pictureChars
@@ -2160,18 +2165,9 @@ cicsCmdEnd
 	: END_EXEC
 	;
 
-cicsKeyword
-	: (cobolWord | cicsWord)
-	;
-
-cicsKeywordWithArg
-	: (cobolWord | cicsWord)
-	LPARENCHAR (identifier | literal) RPARENCHAR
-	;
-
 execCicsStatement
 	: cicsCmdStart
-	(cicsKeyword | cicsKeywordWithArg)+
+	CICS_TEXT+
 	cicsCmdEnd
 	;
 
@@ -3981,139 +3977,6 @@ not intrisicFunctionName when used as data names.
    ;
 
 /*
-This rule must contain any tokens from the Lexer that are also
-CICS keywords.  These are not broken out by the Lexer because
-it seems like more work to detect the different permutations of
-COBOL identifiers (again) in the Lexer, i.e. identifying the CICS
-keywords would be easy but their arguments would be more
-difficult than this method.  I think.
-Added PASSWORD here when it was removed from cobolWord.
-*/
-cicsWord
-   : IDENTIFIER 
-   | ABORT
-   | ADD 
-   | ADDRESS
-   | AFTER
-   | ALL
-   | ALLOCATE
-   | ALTER
-   | ALTERNATE
-   | AND
-   | ANY
-   | ASSIGN
-   | AT
-   | ATTRIBUTES
-   | BEFORE
-   | BINARY
-   | CANCEL
-   | CHAR
-   | CLASS
-   | CLOSE
-   | CODEPAGE
-   | COMMIT
-   | COMPAT
-   | CONDITION
-   | CONTROL
-   | COPY
-   | CURSOR
-   | DATA
-   | DATE
-   | DEFAULT
-   | DELETE
-   | DELIMITER
-   | DETAIL
-   | DISABLE
-   | ELEMENT
-   | ENABLE
-   | END
-   | ENTRY
-   | EQUAL
-   | ERASE
-   | ERROR
-   | EXCEPTION
-   | EXIT
-   | EXTERNAL
-   | FILE
-   | FOR
-   | FREE
-   | FROM
-   | GET
-   | GROUP
-   | INPUT
-   | INTO
-   | INVOKE
-   | LABEL
-   | LAST
-   | LENGTH
-   | LINE
-   | LOCATION
-   | LOCK
-   | METHOD
-   | MESSAGE
-   | MODE
-   | MOVE
-   | NAME
-   | NAMESPACE
-   | NEXT
-   | NORMAL
-   | OBJECT
-   | ON
-   | OPEN
-   | OPTIONS
-   | OR
-   | ORGANIZATION
-   | OUTPUT
-   | OVERFLOW
-   | PAGE
-   | PASSWORD
-   | PERFORM
-   | PROCESS
-   | PURGE
-   | QUEUE
-   | READ
-   | RECEIVE
-   | RECORD
-   | RECORDING
-   | RELEASE
-   | REPLACE
-   | RESET
-   | RESUME
-   | RETRY
-   | RETURN
-   | REWIND
-   | REWRITE
-   | ROLLBACK
-   | RUN
-   | SECONDS
-   | SECURITY
-   | SEND
-   | SERVICE
-   | SET
-   | STANDARD
-   | START
-   | STATUS
-   | STOP
-   | TABLE
-   | TERMINAL
-   | TEST
-   | TEXT
-   | TIME
-   | TITLE
-   | TO
-   | TYPE
-   | UNLOCK
-   | UNTIL
-   | USAGE
-   | USING
-   | VALUE
-   | WAIT
-   | WEBSERVICE
-   | WRITE
-   | YEAR
-   ;
-
-/*
 There are two (count them, two!) copies of the body of this
 rule in addition to this one.  I don't like it any better than
 you do, but this is where we are.  One copy is in cobolWord
@@ -4287,9 +4150,9 @@ figurativeConstant
    ;
 
 specialRegister
-   : ADDRESS OF identifier
+   : (ADDRESS OF identifier)
    | DATE | DAY | DAY_OF_WEEK | DEBUG_CONTENTS | DEBUG_ITEM | DEBUG_LINE | DEBUG_NAME | DEBUG_SUB_1 | DEBUG_SUB_2 | DEBUG_SUB_3
-   | LENGTH OF? identifier | LINAGE_COUNTER | LINE_COUNTER
+   | (LENGTH OF? identifier) | LINAGE_COUNTER | LINE_COUNTER
    | PAGE_COUNTER
    | RETURN_CODE
    | SHIFT_IN | SHIFT_OUT | SORT_CONTROL | SORT_CORE_SIZE | SORT_FILE_SIZE | SORT_MESSAGE | SORT_MODE_SIZE | SORT_RETURN
