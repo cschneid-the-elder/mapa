@@ -1,8 +1,23 @@
+# Copyright (C) 2021 - 2024 Craig Schneiderwent.
+# Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
+# All rights reserved.
 
 #
 # Makefile for JCL parser which includes several ANTLR grammars and
 # attendant Java code for a demonstration application.
 #
+# if making from scratch, for example the ./class directory
+# is empty, then...
+#
+# make init
+# make
+# make mine
+#
+# ...the first make will result in a number of errors which
+# can be ignored, there are mutual references in a number of
+# classes.  The second should compile cleanly.
+#
+# make init       - create class directory
 # make all        - generate lexer/parser code and compile all java code
 # make clean      - delete all generated code
 # make cleanmine  - delete non-generated code
@@ -22,8 +37,13 @@
 # make testsys2   - run tests against downloaded SYS2.PROCLIB - probably only works on my machine
 #
 
+SEP = :
+ifdef OS
+    SEP = ;
+endif
+
 JC = javac
-CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.13.1-complete.jar"
+CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.1-complete.jar"
 JCOPT = -d ./class -g -Xlint:all -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
 AOPT = -visitor -listener
@@ -55,6 +75,10 @@ mine:
 	echo `date` $@ >> build.log
 	$(JC) $(JCOPT) ./src/CatchableErrorListener.java ./src/StdoutLexerErrorListener.java ./src/StdoutParserErrorListener.java ./src/Demo01.java ./src/TheCLI.java ./src/SetTypeOfSymbolValue.java ./src/KeywordValueType.java ./src/SetSymbolValue.java ./src/KeywordValueWrapper.java ./src/KeywordOrSymbolicWrapper.java ./src/IncludeStatement.java ./src/JobCardWrapper.java ./src/Job.java ./src/Proc.java ./src/SetSymbolValueListener.java ./src/JobListener.java ./src/JclStep.java ./src/SingleOrMultipleValueWrapper.java ./src/DatasetNameWrapper.java ./src/DispWrapper.java ./src/DsidWrapper.java ./src/TSOCallMemberListener.java ./src/AmpParmWrapper.java ./src/AmpParmListener.java ./src/DdStatement.java ./src/DdStatementAmalgamation.java ./src/Symbolic.java ./src/EmbeddedEqualityWrapper.java ./src/PPIncludeStatement.java ./src/PPJclStep.java ./src/PPJob.java ./src/PPKeywordValueWrapper.java ./src/PPKeywordOrSymbolicWrapper.java ./src/PPProc.java ./src/PPSetSymbolValue.java ./src/PPDdStatementAmalgamation.java ./src/PPSingleOrMultipleValueWrapper.java ./src/PPSymbolic.java ./src/PPOpType.java ./src/PPOp.java ./src/PPDdStatement.java ./src/PPListener.java ./src/PPSetSymbolValueListener.java ./src/PPEmbeddedEqualityWrapper.java ./src/ParameterString.java ./src/PathDispWrapper.java ./src/DsnRunListener.java ./src/DsnStreamListener.java ./src/DsnStreamWrapper.java ./src/AmpWrapper.java
 
+init:
+	echo `date` $@ $(n) >> build.log
+	if [ ! -d class ]; then mkdir class; fi
+
 jar:
 	echo `date` $@ >> build.log
 	jar cfm JCLParser.jar manifest -C class .
@@ -70,7 +94,7 @@ endif
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testpp:
 ifeq ($(strip $(n)),)
@@ -83,19 +107,19 @@ endif
 
 testrigpp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCLPP startRule -gui -tokens < ./testdata/test$(n).jcl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCLPP startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testrigtso:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig TSO startRule -gui -tokens < ./testdata/test$(n).tso
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig TSO startRule -gui -tokens < ./testdata/test$(n).tso
 
 testrigdsn:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig DSNTSO startRule -gui -tokens < ./testdata/test$(n).dsn
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig DSNTSO startRule -gui -tokens < ./testdata/test$(n).dsn
 
 testrigamp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCLDDAMP startRule -gui -tokens < ./testdata/test$(n).amp
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCLDDAMP startRule -gui -tokens < ./testdata/test$(n).amp
 
 testtso:
 ifeq ($(strip $(n)),)

@@ -1,3 +1,11 @@
+--2024-04-17--------------------------------------------------------------------
+Rebuild after local drive failure.
+
+Added "init" target to Makefile.
+
+ExecCicsStatement.java parseCicsCommand() method modified to handle CICS
+commands all on one line.
+
 --2024-04-14--------------------------------------------------------------------
 Integrated CICSz parser.  Previously, EXEC CICS commands were parsed in a
 hand-coded and not very robust fashion.  Now there are ANTLR lexer and parser

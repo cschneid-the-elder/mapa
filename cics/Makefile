@@ -18,6 +18,7 @@
 # 
 # To build...
 # 
+# make init
 # make gentokens
 # make genrules
 # make
@@ -54,6 +55,10 @@ clean:
 	rm -f ./src/*.interp
 	rm -f ./src/*.tokens
 	rm -f ./src/*.java
+
+init:
+	echo `date` $@ $(n) >> build.log
+	if [ ! -d class ]; then mkdir class; fi
 
 testrig:
 	echo `date` $@ $(n) >> build.log

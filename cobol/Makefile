@@ -1,8 +1,12 @@
-
+# Copyright (C) 2021 - 2024 Craig Schneiderwent.
+# Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
+# All rights reserved.
+# 
 # if making from scratch, for example the ./class directory
 # is empty, then...
 #
 # touch src/Cobol*.g4
+# make init
 # make
 # make mine
 #
@@ -41,9 +45,14 @@
 # make testrigppnist  run ANTLR test rig with CobolPreprocessor grammar,
 #                     n=@@###@ as in testNist
 
+SEP = :
+ifdef OS
+    SEP = ;
+endif
+
 JC = javac
 #CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
-CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.13.1-complete.jar:./DB2zSQL.jar:./CICSz.jar"
+CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.1-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -75,6 +84,10 @@ cleanmine:
 mine:
 	echo `date` $@ >> build.log
 	$(JC) $(JCOPT) ./src/ConstantEntry.java ./src/CobolProgramType.java ./src/BasisStatement.java ./src/InsertStatement.java ./src/DeleteStatement.java ./src/BasisListener.java ./src/TerminalNodeWrapper.java ./src/LiteralWrapper.java ./src/CharDataKeywordWrapper.java ./src/CobolWordWrapper.java ./src/DfhvalueWrapper.java ./src/PseudoTextWrapper.java ./src/CharDataWrapper.java ./src/FilenameWrapper.java ./src/CharDataLineWrapper.java ./src/PreprocessorParserTerminalNodeListener.java ./src/DirectoryPhrase.java ./src/ReplaceClause.java ./src/CobolProgram.java ./src/ProgramListener.java ./src/CobolWord.java ./src/AssignClause.java ./src/Literal.java ./src/ExecCicsStatementType.java ./src/ExecCicsStatement.java ./src/CallEtAlListener.java ./src/DataDescriptionEntryListener.java ./src/DDNode.java ./src/CallWrapper.java ./src/TheCLI.java ./src/CompilerOptionsWrapper.java ./src/CompilerDirectingStatementListener.java ./src/TestIntegration.java ./src/CallType.java ./src/IdDivListener.java ./src/CopyReplaceParent.java ./src/CopyStatement.java ./src/ReplaceOffStatement.java ./src/ReplaceStatement.java ./src/DataLocation.java ./src/CondCompToken.java ./src/CondCompCondition.java ./src/CondCompLogicOp.java ./src/CondCompArithOp.java ./src/CondCompGroupOp.java ./src/CondCompVar.java ./src/CondCompComparisonOp.java ./src/CondCompSimpleRelationalCondition.java ./src/CondCompBinaryCondition.java ./src/CondCompDefinedCondition.java ./src/CondCompRelationalCondition.java ./src/CondCompArithmeticAtom.java ./src/CondCompArithmeticExpression.java ./src/CompilerDirectingStatement.java ./src/CondCompStmtIf.java ./src/CondCompStmtElse.java ./src/CondCompStmtEndIf.java ./src/CondCompEvaluateSelection.java ./src/CondCompStmtEvaluate.java ./src/CondCompStmtWhen.java ./src/CondCompStmtEndEvaluate.java ./src/ConditionalCompilationStatement.java ./src/CobolSource.java ./src/Identifier.java ./src/QualifiedDataName.java ./src/QualifiedDataNameFormat1.java ./src/QualifiedInData.java ./src/DataName.java ./src/InData.java ./src/InTable.java ./src/TableCall.java ./src/MoveStatement.java ./src/DB2zTableName.java ./src/DB2zCallStatement.java ./src/SQLListener.java ./src/DB2zIncludeStatement.java ./src/SQLIncludeStatementListener.java ./src/CompilerDirectiveSource.java ./src/CompilerDirectiveSourceListener.java ./src/CICSzCommandListener.java ./src/IdentifierEtAlListener.java
+
+init:
+	echo `date` $@ $(n) >> build.log
+	if [ ! -d class ]; then mkdir class; fi
 
 evaluate:
 	echo `date` $@ >> build.log
@@ -122,27 +135,27 @@ endif
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigpp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigx:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/test$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrignist:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/nist/$(n)
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/nist/$(n)
 
 testrigppx:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrigppnist:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class:.:./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
 
 ziplogs:
 	echo `date` $@ >> build.log

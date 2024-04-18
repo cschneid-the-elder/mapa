@@ -1,3 +1,8 @@
+--2024-04-17--------------------------------------------------------------------
+Rebuild after local drive failure.
+
+Added "init" target to Makefile.
+
 --2024-04-09--------------------------------------------------------------------
 Grammars appear to generate correctly from apiSource and spiSource files,
 testing seems to indicate accuracy.

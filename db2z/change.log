@@ -1,3 +1,8 @@
+--2024-04-17--------------------------------------------------------------------
+Rebuild after local drive failure.
+
+Added "init" target to Makefile.
+
 --2024-04-03--------------------------------------------------------------------
 Per Martijn Rutte, to handle alternate syntaxes and literals delimited by two
 apostrophes...
