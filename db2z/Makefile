@@ -8,6 +8,13 @@
 # This software may be modified and distributed under the terms
 # of the MIT license. See the LICENSE file for details.
 
+# Makefile for DB2z SQL ANTLR lexer and parser.
+# 
+# make init       - create class directory
+# make            - generate lexer and parser, compile
+# make clean      - clean out class directory and delete generated source
+# 
+
 SEP = :
 ifdef OS
     SEP = ;
@@ -39,6 +46,10 @@ clean:
 	rm -f ./src/*.interp
 	rm -f ./src/*.tokens
 	rm -f ./src/*.java
+
+init:
+	echo `date` $@ $(n) >> build.log
+	if [ ! -d class ]; then mkdir class; fi
 
 testrig:
 	echo `date` $@ $(n) >> build.log

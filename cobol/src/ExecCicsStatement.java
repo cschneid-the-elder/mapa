@@ -82,8 +82,8 @@ class ExecCicsStatement {
 		}
 		this.LOGGER.finest("CICS_TEXT = |" + sb + "|");
 		this.cicsText = sb;
-		sb.insert(0, "EXEC CICS\n");
-		sb.append("\nEND-EXEC");
+		sb.insert(0, "            EXEC CICS");
+		sb.append("            END-EXEC");
 		CharStream aCharStream = CharStreams.fromString(sb.toString());
 		CICSzLexer.classicCOBOLCode = true;
 		CICSzLexer lexer = new CICSzLexer(aCharStream);  //instantiate a lexer
