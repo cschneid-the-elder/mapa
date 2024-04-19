@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (01-Feb-2024) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (19-Apr-2024) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -66,6 +66,69 @@ More generically, I would suggest...
  + Create a list of cataloged procedure and INCLUDE libraries and their corresponding directories (to use with the `-includeList` option) where each line is a library name followed by a comma followed by its corresponding directory - this will be used in resolving cataloged procedures and INCLUDEs by mapping the libraries on a job's JCLLIB statement to a directory.  You can also include directories corresponding to libraries in the JES PROCxx concatenation by not coding a comma or a library name on that line.  Maybe call this file myLibs.
  + Create a list of control statement libraries used in SYSTSIN DDs and their corresponding directories ( to use with the `-cntlList` option) where each line is a library name followed by a comma followed by its corresponding directory - this will be used in resolving SYSTSIN input.  Maybe call this file cntlList1.
  + Execute `java -jar JCLParser.jar -fileList myList -includeList myLibs -cntlList cntlList1 -outtree myOutput.tsv -outcsv myOutput.csv`
+
+### A Real Example
+
+This is what I did when I tested with the Amazon carddemo sample application.
+
+    git clone https://aws-samples/aws-mainframe-modernization-carddemo
+    cd aws-mainframe-modernization-carddemo/app/cbl
+
+Construct the file for the -fileList option for the COBOL demo application.
+
+    find $(pwd) -name '*.cbl' > ~/mapa/cobol/testListAWS
+    cd ../jcl
+
+Construct the file for the -fileList option for the JCL demo application.
+
+    find $(pwd) -name '*.jcl' > ~/mapa/jcl/testListAWS
+    cd ../cpy
+
+Construct the file for the -copyList option for the COBOL demo application.
+
+    echo $(pwd) > ~/mapa/cobol/testListAWS-cpy
+    cd ../cpy-bms
+    mkdir ~/aws-app-cpy-bms
+
+Copy the copybook files from here to my own directory.  These have a file extension for some reason and I need to remove it because the COBOL code that uses them does not make reference to the extension.
+
+    cp --update --verbose *.CPY ~/aws-app-cpy-bms
+    cd ../proc
+    mkdir ~/aws-app-proc
+
+Copy the cataloged procedure files from here to my own directory.  These have a file extension for some reason and I need to remove it because the JCL of course can't use the extension.
+
+    cp --update --verbose *.prc ~/aws-app-proc
+    cd ~/aws-app-cpy-bms
+
+Remove the file extension from the copybook files.
+
+    find -name "*.CPY" -exec sh -c 'mv "$1" "${1%.CPY}"' _ {} \;
+
+Add this directory to the file for the -copyList option for the COBOL demo application.
+
+    echo $(pwd) >> ~/mapa/cobol/testListAWS-cpy
+    cd ~/aws-app-proc
+
+Remove the file extension from the cataloged procedure files.
+
+    find -name "*.prc" -exec sh -c 'mv "$1" "${1%.prc}"' _ {} \;
+
+Construct the file for the -includeList option for the JCL demo application.
+
+    echo "$(pwd),AWS.M2.CARDDEMO.PROC" > ~/mapa/jcl/testListAWS-proc
+
+Run the COBOL demo application.
+
+    cd ~/mapa/cobol
+    java -jar CallTree.jar -copyList testListAWS-cpy -fileList testListAWS -out aws-carddemo.csv
+
+The output from this application shows a weakness of (my, at least) static code analysis.  The output for COUSR02C shows it XCTLing to programs it does not actually XCTL to because any literal MOVEd to the identifier in the EXEC CICS XCTL PROGRAM() argument is logged as a potential target.  I feel that writing an emulator is beyond the scope of this demonstration application.
+
+Run the JCL demo application.
+
+    cd ../jcl
+    java -jar JCLParser.jar -fileList testListAWS -includeList testListAWS-proc -outcsv aws-carddemo.csv -outtree aws-carddemo.tsv
 
 ### Bear In Mind
 

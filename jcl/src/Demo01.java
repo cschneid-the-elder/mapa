@@ -388,6 +388,12 @@ public static void main(String[] args) throws Exception {
 	/**
 	This method rewrites a file without the troublesome columns 72 
 	through 80.
+	
+	The JCL is also altered here to overlay a splat "*" character on
+	column 3 of lines following lines with a comment and a continuation
+	character in column 72.
+	
+	Apparently there is a copy of this method in PPJclStep?  WTF?
 	*/
 	private static File rewriteWithoutCol72to80(String aFileName, File baseDir) throws IOException {
 		LOGGER.finer(
@@ -446,10 +452,21 @@ public static void main(String[] args) throws Exception {
 			}
 			if (addSplat) {
 				/*
-				Note that the splat is added to the line _after_ the column 72
-				comment continuation was found.
+				If this line has anything other than a splat in its third
+				position, then the comment continuation is ignored because
+				this line is either a "//*" comment or begins with a
+				name field and thus is either a traditional comment or the
+				beginning of a new statement.
 				*/
-				newLine.setCharAt(2, '*');
+				if (newLine.charAt(2) == ' ') {
+					/*
+					Note that the splat is added to the line _after_ the column 72
+					comment continuation was found.
+					*/
+					newLine.setCharAt(2, '*');
+				} else {
+					addSplat = false;
+				}
 			}
 			if (onThisLine.size() > 0) {
 				if (cmBefore72 != null && col72 != null) {

@@ -635,9 +635,13 @@ I'm going with: they _are not_ mutually exclusive and that PROCLIB may be
 specified multiple times if it is present.
 
 This breaks my Job and PPJob classes.  Probably yours too.  Sorry.
+
+2024-04-18 whilst testing with the AWS carddemo application I found that
+JOBLIB is not a reserved DD name and can be used as the DD name for a
+JCLLIB statement.  I presume SYSCHK is the same.
 */
 jcllibStatement : 
-	SS NAME_FIELD? JCLLIB 
+	SS (JOBLIB | SYSCHK | NAME_FIELD)? JCLLIB 
 	(
 		(JCLLIB_PARM_ORDER EQUAL singleOrMultipleValue (JCLLIB_PARM_PROCLIB EQUAL keywordOrSymbolic)*)
 		| 
