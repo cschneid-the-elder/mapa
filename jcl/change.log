@@ -1,3 +1,25 @@
+--2024-04-19--------------------------------------------------------------------
+Much to my surprise JOBLIB is not a reserved name.  I always thought JOBLIB and
+SYSCHK and maybe STEPLIB were only allowed as DD names.  But Amazon's carddemo
+application teaches us many lessons, and the jcllibStatement parser rule in
+both the JCLParser.g4 and the JCLPPParser.g4 grammars has been altered to allow
+the name on a JCLLIB statement to be these formerly presumed reserved names.
+
+The rewriteWithoutCol72to80 method in Demo01.java and PPJclStep.java has had 
+code added to not continue comments where they are syntactically indicated to
+not be continued.  Okay that's not very clear, so let's expand that a bit.
+
+What I've done is modify the rewriteWithoutCol72to80 methods to _not_ continue 
+an inline comment when position 3 contains a non-blank character,indicating 
+that statement has a name field and is thus obviously intended to _not_ be a 
+comment continuation.
+
+Also, rewriteWithoutCol72to80 exists in two places?  WTF?
+
+Added some documentation for what I did to process the Amazon carddemo sample
+application.  This might be instructive for what may be necessary to process
+your own applications.
+
 --2024-04-17--------------------------------------------------------------------
 Rebuild after local drive failure.
 
