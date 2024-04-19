@@ -57,6 +57,69 @@ Depending on your build environment, you may want to construct several file list
 
 Note that the content of the file specified with the -defList option must contain `>>DEFINE` statements beginning in area A or area B.
 
+### A Real Example
+
+This is what I did when I tested with the Amazon carddemo sample application.
+
+    git clone https://aws-samples/aws-mainframe-modernization-carddemo
+    cd aws-mainframe-modernization-carddemo/app/cbl
+
+Construct the file for the -fileList option for the COBOL demo application.
+
+    find $(pwd) -name '*.cbl' > ~/mapa/cobol/testListAWS
+    cd ../jcl
+
+Construct the file for the -fileList option for the JCL demo application.
+
+    find $(pwd) -name '*.jcl' > ~/mapa/jcl/testListAWS
+    cd ../cpy
+
+Construct the file for the -copyList option for the COBOL demo application.
+
+    echo $(pwd) > ~/mapa/cobol/testListAWS-cpy
+    cd ../cpy-bms
+    mkdir ~/aws-app-cpy-bms
+
+Copy the copybook files from here to my own directory.  These have a file extension for some reason and I need to remove it because the COBOL code that uses them does not make reference to the extension.
+
+    cp --update --verbose *.CPY ~/aws-app-cpy-bms
+    cd ../proc
+    mkdir ~/aws-app-proc
+
+Copy the cataloged procedure files from here to my own directory.  These have a file extension for some reason and I need to remove it because the JCL of course can't use the extension.
+
+    cp --update --verbose *.prc ~/aws-app-proc
+    cd ~/aws-app-cpy-bms
+
+Remove the file extension from the copybook files.
+
+    find -name "*.CPY" -exec sh -c 'mv "$1" "${1%.CPY}"' _ {} \;
+
+Add this directory to the file for the -copyList option for the COBOL demo application.
+
+    echo $(pwd) >> ~/mapa/cobol/testListAWS-cpy
+    cd ~/aws-app-proc
+
+Remove the file extension from the cataloged procedure files.
+
+    find -name "*.prc" -exec sh -c 'mv "$1" "${1%.prc}"' _ {} \;
+
+Construct the file for the -includeList option for the JCL demo application.
+
+    echo "$(pwd),AWS.M2.CARDDEMO.PROC" > ~/mapa/jcl/testListAWS-proc
+
+Run the COBOL demo application.
+
+    cd ~/mapa/cobol
+    java -jar CallTree.jar -copyList testListAWS-cpy -fileList testListAWS -out aws-carddemo.csv
+
+The output from this application shows a weakness of (my, at least) static code analysis.  The output for COUSR02C shows it XCTLing to programs it does not actually XCTL to because any literal MOVEd to the identifier in the EXEC CICS XCTL PROGRAM() argument is logged as a potential target.  I feel that writing an emulator is beyond the scope of this demonstration application.
+
+Run the JCL demo application.
+
+    cd ../jcl
+    java -jar JCLParser.jar -fileList testListAWS -includeList testListAWS-proc -outcsv aws-carddemo.csv -outtree aws-carddemo.tsv
+
 ### Bear In Mind
 
 This application will create several temporary files for each COBOL member you parse.  Unless you specify the `-saveTemp` option, and it's just there for debugging purposes, these files will be deleted automatically on normal termination of the JVM.  These files will, however, persist for the length of the run, and there are several created for each piece of source code, so make sure you're not short of space for temporary files.
