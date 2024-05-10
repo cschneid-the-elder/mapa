@@ -201,9 +201,9 @@ endif
 
 ./class/IdDivListener.class: 
 
-./class/CobolProgram.class: ./class/AssignClause.class ./class/CobolProgramType.class
+./class/CobolProgram.class: ./class/AssignClause.class ./class/CobolProgramType.class ./class/ExecCicsStatement.class
 
-./class/CobolSource.class: ./class/TheCLI.class
+./class/CobolSource.class: ./class/TheCLI.class ./class/CobolProgram.class
 
 ./class/CompilerDirectingStatementListener.class:
 

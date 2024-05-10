@@ -10,13 +10,23 @@ programs may be nested within other COBOL programs.
 
 <p>An attempt is made to resolve dynamic CALLs of the CALL identifier
 (or data-name, if you prefer) form.  This entails tracking down
-references to the identifier in MOVE an SET statements in addition
+references to the identifier in MOVE and SET statements in addition
 to the original VALUE clause, should there be one.
+
+<p>An attempt is made to resolve dynamic CICS API invocations where
+the target is a COBOL identifier (or data-name, if you prefer).  
+This entails tracking down references to the identifier in MOVE and 
+SET statements in addition to the original VALUE clause, should 
+there be one.
 
 <p>Complicating this is the possibility that the identifier may be
 marked GLOBAL or EXTERNAL and thus may not be contained in this
 program at all, but in a program in which this program has been
 nested.
+
+<p>If the identifier is passed to the current program in the Linkage
+Section via commarea or other means then its value will remain
+unresolved.
 */
 
 class CobolProgram {
@@ -140,6 +150,78 @@ class CobolProgram {
 	}
 
 	/**
+	For each EXEC CICS statement, if its target is an identifier, locate the
+	identifier in the list of DDNodes for this program and any programs
+	in which this program is nested.
+
+	<p>Once the DDNode has been found, locate any MOVE or SET statements
+	that alter its contents.
+
+	<p>Finally, instruct any nested programs to do the same.
+	*/
+	public void resolveCICSStatementIdentifiers() {
+		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCICSStatementIdentifiers");
+
+		for (ExecCicsStatement cicsStmt: this.cicsStatements) {
+			if (cicsStmt.getIdentifierName() == null) {
+				LOGGER.finest("  cicsStmt does not use an identifier");
+			} else {
+				LOGGER.finest("  cicsStmt.identifier = " + cicsStmt.getIdentifierName());
+				Boolean resolved = false;
+				CobolProgram pgm = this;
+				while (pgm != null && !resolved) {
+					resolved = this.resolveCICSStatmentIdentifier(cicsStmt, pgm);
+					pgm = pgm.getParent();
+					LOGGER.finest(" parent = " + pgm);
+				}
+				if (resolved && cicsStmt.getDataNode() != null) {
+					this.findAllTheRightMoves(cicsStmt);
+				} else if (!resolved) {
+					this.LOGGER.warning(
+						"identifier " 
+						+ cicsStmt.getIdentifierName()
+						+ " not found");
+				}
+				if (cicsStmt.getDataNode() != null) {
+					this.findAllTheRightSets(cicsStmt);
+				}
+			}
+		}
+
+		for (CobolProgram pgm: this.programs) {
+			pgm.resolveCICSStatementIdentifiers();
+		}
+	}
+
+	/**
+	Search the <code>DDNodes</code> in the passed program for the one that matches the
+	identifier in the passed <code>ExecCicsStatement</code>.
+	*/
+	private Boolean resolveCICSStatmentIdentifier(ExecCicsStatement cicsStmt, CobolProgram pgm) {
+		this.LOGGER.fine(this.myName + " resolveCICSStatmentIdentifier(" + cicsStmt + ", " + pgm + ")");
+		Boolean rc = false;
+		ArrayList<DDNode> identifierDataNodes = new ArrayList<>();
+		ArrayList<DDNode> localDataNodes = null;
+		if (pgm == this) {
+			localDataNodes = this.getDataNodes();
+		} else {
+			localDataNodes = pgm.getPublicDataNodes();
+		}
+		for (DDNode node: localDataNodes) {
+			if (node.getParent() == null) {
+				identifierDataNodes.addAll(node.findChildrenNamed(cicsStmt.getIdentifierName()));
+			}
+		}
+		LOGGER.finest("  all node children named " + cicsStmt.getIdentifierName() + " = " + identifierDataNodes);
+		rc = cicsStmt.selectDataNode(identifierDataNodes);
+		LOGGER.finest("call.dataNode = " + cicsStmt.getDataNode());
+		if (!rc) {
+			rc = cicsStmt.selectConstant(this.constantEntries);
+		}
+		return rc;
+	}
+
+	/**
 	Find MOVE statements that seem to reference the identifier in
 	the passed CALL statement.
 
@@ -180,6 +262,46 @@ class CobolProgram {
 	}
 
 	/**
+	Find MOVE statements that seem to reference the identifier in
+	the passed EXEC CICS statement.
+
+	<code>
+	[...]
+	       01  LINKED-PROGRAMS.
+	           05  PGM1 PIC X(008) VALUE 'CRICHTON'.
+	               88  PGM-ZHAAN   VALUE 'ZHAAN'.
+	               88  PGM-CHIANA  VALUE 'CHIANA'.
+	               88  PGM-DARGO   VALUE 'DARGO'.
+	[...]
+	           EXEC CICS LINK PROGRAM(PGM1) END-EXEC
+	           MOVE 'AERYN' TO PGM1
+	           EXEC CICS LINK PROGRAM(PGM1) END-EXEC
+	</code>
+	*/
+	private void findAllTheRightMoves(ExecCicsStatement cicsStmt) {
+		CobolProgram pgm = this;
+		while (pgm != null) {
+			for (MoveStatement move: pgm.getMoves()) {
+				for (Identifier identifier: move.getIdentifiers()) {
+					if (identifier.seemsToMatch(cicsStmt.getIdentifier())) {
+						if (move.getText() == null) {
+							if (move.getSendingIdentifier() != null) {
+								cicsStmt.addIdentifierValue(
+									this.identifierValueInValueClause(move.getSendingIdentifier())
+									);
+							}
+						} else {
+							cicsStmt.addIdentifierValue(move.getText());
+						}
+					}
+				}
+			}
+			pgm = pgm.getParent();
+		}
+
+	}
+
+	/**
 	Find SET statements that seem to reference the identifier in
 	the passed CALL statement.
 
@@ -206,6 +328,38 @@ class CobolProgram {
 				if (ee.getIdentifier().equals(identifier.getDataNameText())) {
 					this.LOGGER.finest( "    ee.name.equals(ctx...IDENTIFIER())");
 					call.addCalledModuleName(ee.getValueInValueClause());
+				}
+			}
+		}
+	}
+
+	/**
+	Find SET statements that seem to reference the identifier in
+	the passed CALL statement.
+
+	<code>
+	[...]
+	       01  CALLED-PROGRAMS.
+	           05  PGM1 PIC X(008) VALUE 'CRICHTON'.
+	               88  PGM-ZHAAN   VALUE 'ZHAAN'.
+	               88  PGM-CHIANA  VALUE 'CHIANA'.
+	               88  PGM-DARGO   VALUE 'DARGO'.
+	[...]
+	           SET PGM-CHIANA TO TRUE
+	           EXEC CICS LINK PROGRAM(PGM1) END-EXEC
+	           SET PGM-DARGO TO TRUE
+	           EXEC CICS LINK PROGRAM(PGM1) END-EXEC
+	</code>
+	*/
+	private void findAllTheRightSets(ExecCicsStatement cicsStmt) {
+		for (DDNode ee: cicsStmt.getDataNode().getChildren()) {
+			if (!ee.isCondition()) continue;
+			this.LOGGER.finest("    call.eightyEight = " + ee);
+			for (Identifier identifier: this.sets) {
+				this.LOGGER.finest("    identifier.getDataNameText() = " + identifier.getDataNameText());
+				if (ee.getIdentifier().equals(identifier.getDataNameText())) {
+					this.LOGGER.finest( "    ee.name.equals(ctx...IDENTIFIER())");
+					cicsStmt.addIdentifierValue(ee.getValueInValueClause());
 				}
 			}
 		}

@@ -5,6 +5,8 @@
        01  CONSTANTS.
            05  MYNAME               PIC X(012) VALUE 'test9017'.
            05  PGM-0001             PIC X(008) VALUE 'PGMA0001'.
+           05  AFILE                PIC X(008) VALUE 'NOBBY   '.
+           05  ATRAN                PIC X(004) VALUE 'IJKL'.
 
        Procedure Division.
            DISPLAY MYNAME ' Begin'
@@ -76,6 +78,11 @@
            EXEC CICS READPREV DATASET('CMOTDBLR') INTO(PGM-0001)
            LENGTH(FUNCTION LENGTH(PGM-0001))
            END-EXEC
+
+           EXEC CICS READ FILE(AFILE) INTO(PGM-0001) END-EXEC
+           EXEC CICS START TRANSID(ATRAN) END-EXEC
+           MOVE 'MNOP' TO ATRAN
+           EXEC CICS START TRANSID(ATRAN) END-EXEC
 
            DISPLAY MYNAME ' End'
            
