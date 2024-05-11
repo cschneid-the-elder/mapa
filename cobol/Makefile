@@ -32,6 +32,8 @@
 #                     originally came from NIST and are from their COBOL
 #                     test suite, not all are intended to run as-is, add
 #                     n=@@###@ to run an individual test
+# make testAWS        test with aws-mainframe-modernization-carddemo,
+#                     probably only works on my machine
 # make testrig        run ANTLR test rig with Cobol grammar, specify n=### 
 #                     as in testLocal
 # make testrigx       run ANTLR test rig with Cobol grammar, specify n=#### 
@@ -132,6 +134,10 @@ else
 #	java -agentlib:hprof=cpu=samples -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
 	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -profile -out callListNist$(n).log -nistTest
 endif
+
+testAWS:
+	echo `date` $@ >> build.log
+	java -jar CallTree.jar -fileList testListAWS -copyList testListAWS-cpy -out callListAWS.log
 
 testrig:
 	echo `date` $@ $(n) >> build.log

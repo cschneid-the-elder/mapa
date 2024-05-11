@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.  Think of this as a demonstration of what _can_ be done, which may or may not be what you need.
 
-Currently (11-Mar-2024) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (11-May-2024) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -166,6 +166,8 @@ The ddname is my mainframe bias showing.  The assignment name in the various fla
 The PGM record contains counts of things that might be interesting and were easy to obtain.  Data description entry type 2 is a level-66 entry, type 3 is a level-88 entry, and type 1 is everything else that isn't enclosed in and `EXEC SQL END-EXEC` block.
 
 The DD record contains counts of how the file is opened.  This might be useful in showing program inputs and outputs, or discovering files that are no longer used.
+
+For reasons both obscure and annoying, the CICS APIs are not deduplicated, so if your code includes, for example, two READs for the same file you will get two output records.
 
 ### Build/Execution Environment
 
