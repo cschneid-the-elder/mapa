@@ -18,6 +18,8 @@ differences that I abandoned an effort to consolidate the code I perceived as
 common to CallWrapper and ExecCicsStatement into a superclass.  Some things
 are simply not meant to be.
 
+Also cleaned up some TODOs in a separate commit.
+
 --2024-04-17--------------------------------------------------------------------
 Rebuild after local drive failure.
 

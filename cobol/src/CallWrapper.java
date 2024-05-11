@@ -282,69 +282,6 @@ class CallWrapper {
 		}
 	}
 
-	private void initialize( //TODO remove
-			CobolParser.LiteralContext litCtx
-			, CobolParser.IdentifierContext idCtx
-			, CallType litCallType
-			, CallType idCallType
-			) {
-		if ( idCtx == null ) {
-			// CALL literal syntax
-			if (litCtx == null) {
-				// ExecSqlCallStatementContext is handled on its own
-			} else {
-				this.addCalledModuleName(litCtx.getText());
-				this.callType = litCallType;
-			}
-		} else {
-			this.idCtx = idCtx;
-			this.identifier = new Identifier(idCtx, this.LOGGER);
-			this.callType = idCallType;
-			if (idCtx.qualifiedDataName() == null ) {
-				// CALL identifier(subscript) syntax (sneaky)
-				this.cobolIdentifier = 
-					idCtx
-					.tableCall()
-					.qualifiedDataName()
-					.qualifiedDataNameFormat1()
-					.dataName()
-					.cobolWord()
-					.IDENTIFIER()
-					.toString();
-				//this.cobolIdentifier = idCtx.getText(); doesn't work
-				this.subctxs = idCtx.tableCall().subscript();
-				this.subNames = new ArrayList<>();
-				for (CobolParser.SubscriptContext sub: subctxs) {
-					this.subNames.add(sub.getText());
-				}
-			} else {
-				// CALL identifier syntax
-				this.cobolIdentifier = 
-					idCtx
-					.qualifiedDataName()
-					.qualifiedDataNameFormat1()
-					.dataName()
-					.cobolWord()
-					.IDENTIFIER()
-					.toString();
-				//this.cobolIdentifier = idCtx.getText(); doesn't work
-				this.qualInData = QualifiedInData.bunchOfThese(
-					idCtx
-					.qualifiedDataName()
-					.qualifiedDataNameFormat1()
-					.qualifiedInData()
-					, this.LOGGER);
-				if (this.qualInData != null) {
-					for (QualifiedInData qind: this.qualInData) {
-						this.ofs.add(qind.getText());
-					}
-				}
-			}
-		}
-
-
-	}
-
 	private void initialize(
 			CallType litCallType
 			, CallType idCallType
