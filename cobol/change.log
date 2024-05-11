@@ -1,3 +1,23 @@
+--2024-05-11--------------------------------------------------------------------
+Resolve CICS API and SPI calls whose target is a COBOL identifier.  
+
+For example...
+
+    EXEC CICS READ FILE(A-FILE-NAME) ...
+
+...is now reported as a CICSREAD of the value of A-FILE-NAME.
+
+These are not de-duplicated, by which I mean if there are multiple READs coded
+with the same COBOL identifier, they are all reported.  This is because 
+eliminating the duplicates turned into a nasty mess of loops modifying the
+collections being iterated over.  Also, the READs could have significantly
+different options, e.g. UPDATE, and someone might want to investigate that.
+
+This is similar to how COBOL dynamic CALLs are resolved, but there are enough
+differences that I abandoned an effort to consolidate the code I perceived as
+common to CallWrapper and ExecCicsStatement into a superclass.  Some things
+are simply not meant to be.
+
 --2024-04-17--------------------------------------------------------------------
 Rebuild after local drive failure.
 

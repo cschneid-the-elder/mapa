@@ -32,6 +32,8 @@
 #                     originally came from NIST and are from their COBOL
 #                     test suite, not all are intended to run as-is, add
 #                     n=@@###@ to run an individual test
+# make testAWS        test with aws-mainframe-modernization-carddemo,
+#                     probably only works on my machine
 # make testrig        run ANTLR test rig with Cobol grammar, specify n=### 
 #                     as in testLocal
 # make testrigx       run ANTLR test rig with Cobol grammar, specify n=#### 
@@ -133,6 +135,10 @@ else
 	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -profile -out callListNist$(n).log -nistTest
 endif
 
+testAWS:
+	echo `date` $@ >> build.log
+	java -jar CallTree.jar -fileList testListAWS -copyList testListAWS-cpy -out callListAWS.log
+
 testrig:
 	echo `date` $@ $(n) >> build.log
 	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
@@ -201,9 +207,9 @@ endif
 
 ./class/IdDivListener.class: 
 
-./class/CobolProgram.class: ./class/AssignClause.class ./class/CobolProgramType.class
+./class/CobolProgram.class: ./class/AssignClause.class ./class/CobolProgramType.class ./class/ExecCicsStatement.class
 
-./class/CobolSource.class: ./class/TheCLI.class
+./class/CobolSource.class: ./class/TheCLI.class ./class/CobolProgram.class
 
 ./class/CompilerDirectingStatementListener.class:
 

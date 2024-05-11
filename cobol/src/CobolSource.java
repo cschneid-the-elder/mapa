@@ -960,7 +960,7 @@ class CobolSource {
 	<p>For each CALL statement that references DDNode, the values that are
 	assigned to that DDNode, via MOVE or SET statements, are determined.
 	*/
-	private void resolveCalledNodes(ParseTree tree
+	private void resolveCalledNodes(ParseTree tree //TODO remove arguments
 						, ParseTreeWalker walker
 						, ArrayList<CallWrapper> calledNodes
 						, ArrayList<DDNode> dataNodes) {
@@ -969,6 +969,7 @@ class CobolSource {
 
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
+			pgm.resolveCICSStatementIdentifiers();
 		}
 	}
 
