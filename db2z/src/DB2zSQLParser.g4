@@ -10494,6 +10494,7 @@ scalarFunctionInvocation
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
 	| extractFunction
+	| interpretFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
 	)
 	;
@@ -10508,6 +10509,44 @@ extractFunction
 	FROM 
 	expression
 	RPAREN
+	)
+	;
+
+interpretFunction
+	: (
+	INTERPRET LPAREN expression AS interpretFunctionDataType RPAREN
+	)
+	;
+
+interpretFunctionDataType
+	: (
+	integerDataType
+	| charDataType
+	)
+	;
+
+integerDataType
+	: (
+	SMALLINT
+	| INTEGER
+	| INT
+	| BIGINT
+	)
+	;
+
+charDataType
+	: (
+	((CHAR | CHARACTER) (LPAREN INTEGERLITERAL RPAREN)? charDataTypeOptions*)
+	| ((CHAR | CHARACTER) VARYING (LPAREN INTEGERLITERAL RPAREN) charDataTypeOptions*)
+	| (VARCHAR (LPAREN INTEGERLITERAL RPAREN) charDataTypeOptions*)
+	)
+	;
+
+charDataTypeOptions
+	: (
+	ccsidClause1
+	| ccsidClause2
+	| forDataQualifier
 	)
 	;
 
@@ -11025,6 +11064,7 @@ scalarFunction
 	| INSTR
 	| INT
 	| INTEGER
+	| INTERPRET
 	| JULIAN_DAY
 	| LAST_DAY
 	| LCASE

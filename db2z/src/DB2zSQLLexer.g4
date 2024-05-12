@@ -214,11 +214,29 @@ NONNUMERICLITERAL
 	: STRINGLITERAL
 	| HEXLITERAL
 	| DOUBLE_APOS_STRINGLITERAL
+	| BINARYSTRINGLITERAL
+	| GRAPHICSTRINGLITERAL
+	| GRAPHICUNICODESTRINGLITERAL
 	;
 
 fragment HEXLITERAL
-	: X '"' [0-9A-F]+ '"'
-	| X '\'' [0-9A-F]+ '\''
+	: X '"' [0-9a-fA-F]+ '"'
+	| X '\'' [0-9a-fA-F]+ '\''
+	;
+
+fragment BINARYSTRINGLITERAL
+	: B X '"' [0-9a-fA-F]+ '"'
+	| B X '\'' [0-9a-fA-F]+ '\''
+	;
+
+fragment GRAPHICSTRINGLITERAL
+	: G X '"' [0-9a-fA-F]+ '"'
+	| G X '\'' [0-9a-fA-F]+ '\''
+	;
+
+fragment GRAPHICUNICODESTRINGLITERAL
+	: U X '"' [0-9a-fA-F]+ '"'
+	| U X '\'' [0-9a-fA-F]+ '\''
 	;
 
 fragment STRINGLITERAL
@@ -3706,6 +3724,10 @@ INT
 
 INTEGER
 	: I N T E G E R 
+	;
+
+INTERPRET
+	: I N T E R P R E T
 	;
 
 JULIAN_DAY

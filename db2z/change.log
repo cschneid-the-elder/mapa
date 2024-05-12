@@ -1,3 +1,26 @@
+--2024-05-12--------------------------------------------------------------------
+Added fragments...
+
+	| BINARYSTRINGLITERAL
+	| GRAPHICSTRINGLITERAL
+	| GRAPHICUNICODESTRINGLITERAL
+
+...to NONNUMERICLITERAL.  These have been missing since the inception of the
+DB2z lexer grammar.  The first is needed for the DB2 13 FL505 INTERPRET
+scalar function, which has also been added.
+
+The pattern for HEXLITERAL has been modified to include a-f (lower case) as
+the IBM documentation currently states...
+
+  A hexadecimal digit is a digit or any of the letters A through F. If 
+  the MIXED DATA subsystem parameter is set to YES, hexadecimal digits 
+  in a hexadecimal constant must be specified in upper case. Otherwise, 
+  an error might be returned when SQL statements are processed.
+
+...which at least implies that if the MIXED DATA subsystem parameter is not 
+set to YES, hexadecimal digits in a hexadecimal constant need not be specified 
+in upper case.
+
 --2024-04-17--------------------------------------------------------------------
 Rebuild after local drive failure.
 
