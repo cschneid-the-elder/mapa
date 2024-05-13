@@ -45,6 +45,7 @@ class CobolProgram {
 	private ArrayList<Identifier> sets = new ArrayList<>();
 	private CobolProgram parent = null;
 	private ArrayList<DB2zTableName> db2Tables = new ArrayList<>();
+	private ArrayList<DB2zTableName> imsTables = new ArrayList<>();
 	private ArrayList<ExecCicsStatement> cicsStatements = new ArrayList<>();
 	private int conditionalStatementCount = 0;
 	private int statementCount = 0;
@@ -436,6 +437,10 @@ class CobolProgram {
 		this.db2Tables.addAll(db2Tables);
 	}
 
+	public void addImsTables(ArrayList<DB2zTableName> db2Tables) {
+		this.imsTables.addAll(db2Tables);
+	}
+
 	public void setParent(CobolProgram parent) {
 		this.parent = parent;
 	}
@@ -654,6 +659,10 @@ class CobolProgram {
 		}
 
 		for (DB2zTableName tb: this.db2Tables) {
+			tb.writeOn(out, this.getUUID());
+		}
+
+		for (DB2zTableName tb: this.imsTables) {
 			tb.writeOn(out, this.getUUID());
 		}
 

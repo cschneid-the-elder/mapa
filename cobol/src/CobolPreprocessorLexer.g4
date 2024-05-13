@@ -152,6 +152,7 @@ EXCI : E X C I;
 EXEC : E X E C;
 EXEC_CICS : E X E C [ ]+ C I C S ->pushMode(EXEC_CICS_MODE);
 EXEC_SQL : E X E C [ ]+ S Q L ->pushMode(EXEC_SQL_MODE);
+EXEC_SQLIMS : E X E C [ ]+ S Q L I M S ->pushMode(EXEC_SQL_MODE);
 EXIT : E X I T;
 EXP : E X P;
 EXPORTALL : E X P O R T A L L;

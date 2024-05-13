@@ -395,6 +395,7 @@ EXCEPTION : E X C E P T I O N;
 EXCLUSIVE : E X C L U S I V E;
 EXEC : E X E C;
 EXEC_SQL : E X E C [ ]+ S Q L ->pushMode(EXEC_SQL_MODE);
+EXEC_SQLIMS : E X E C [ ]+ S Q L I M S ->pushMode(EXEC_SQL_MODE);
 EXHIBIT : E X H I B I T;
 EXIT : E X I T;
 EXPANDS : E X P A N D S;
@@ -987,9 +988,9 @@ DOT
    ;
 
 EQUALCHAR : '=';
-EXECCICSTAG : '*>EXECCICS';
-EXECSQLTAG : '*>EXECSQL';
-EXECSQLIMSTAG : '*>EXECSQLIMS';
+EXECCICSTAG : '*>EXECCICS';      //TODO obsolete?
+EXECSQLTAG : '*>EXECSQL';        //TODO obsolete?
+EXECSQLIMSTAG : '*>EXECSQLIMS';  //TODO obsolete?
 LESSTHANCHAR : '<';
 LESSTHANOREQUAL : '<=';
 LPARENCHAR : '(';
@@ -1128,9 +1129,9 @@ IDENTIFIER
 
 // whitespace, line breaks, comments, ...
 NEWLINE : '\r'? '\n' -> channel(HIDDEN);
-EXECCICSLINE : EXECCICSTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');
-EXECSQLIMSLINE : EXECSQLIMSTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');
-EXECSQLLINE : EXECSQLTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');
+EXECCICSLINE : EXECCICSTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');     //TODO obsolete?
+EXECSQLIMSLINE : EXECSQLIMSTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}'); //TODO obsolete?
+EXECSQLLINE : EXECSQLTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');       //TODO obsolete?
 COMMENTENTRYLINE : COMMENTENTRYTAG WS ~('\n' | '\r')*;
 COMMENTLINE : COMMENTTAG WS ~('\n' | '\r')* -> channel(HIDDEN);
 WS : [ \t\f;]+ -> channel(HIDDEN);

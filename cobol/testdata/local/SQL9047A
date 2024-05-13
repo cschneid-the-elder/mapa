@@ -1,0 +1,4 @@
+       01  SOME-FIELDS.
+           05  FIELD-01 PIC X(008).
+           05  FIELD-02 PIC 9(008) COMP-5.
+

@@ -2180,7 +2180,7 @@ execSqlStatement
 // exec sql ims statement
 
 execSqlImsStatement
-   : EXECSQLIMSLINE+
+   : EXEC_SQLIMS SQL_TEXT+ END_EXEC ((DOT NEWLINE?) | DOT_FS)?
    ;
 
 // exhibit statement

@@ -92,6 +92,30 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		this.LOGGER.fine(myName + " instantiated from SQL INCLUDE");
 	}
 
+	public CopyStatement(
+			DB2zIncludeStatement includeStatement
+			, CobolPreprocessorParser.ExecSqlImsStatementContext ctx 
+			, Logger LOGGER
+			, TheCLI CLI) {
+		this.includeStatement = includeStatement;
+		this.LOGGER = LOGGER;
+		this.CLI = CLI;
+		this.startLine = ctx.start.getLine();
+		this.endLine = ctx.stop.getLine();
+		TerminalNode end = null;
+		if (ctx.DOT() == null) {
+			end = ctx.END_EXEC();
+		} else {
+			end = ctx.DOT();
+		}
+
+		this.startPosn = ctx.start.getCharPositionInLine();
+		this.endPosn = end.getSymbol().getCharPositionInLine() + end.getText().length();
+
+		this.LOGGER.fine(myName + " " + this.getCopyFile());
+		this.LOGGER.fine(myName + " instantiated from SQLIMS INCLUDE");
+	}
+
 	public int getLine() {
 		return this.startLine;
 	}
@@ -188,7 +212,10 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		String testCopyFile = this.getCopyFileFull();
 
 		if (testCopyFile == null) {
-			if (!this.getCopyFile().equals("SQLCA")) {
+			if (!(this.getCopyFile().equals("SQLCA") 
+			|| this.getCopyFile().equals("SQLIMSCA")
+			|| this.getCopyFile().equals("SQLDA") 
+			|| this.getCopyFile().equals("SQLIMSDA"))) {
 				this.LOGGER.info(this.getCopyFile() + " not found");
 			}
 		} else {
