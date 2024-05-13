@@ -1,3 +1,12 @@
+--2024-05-13--------------------------------------------------------------------
+Corrected handling of SQLIMS statements, which were being improperly processed
+as syntactically incorrect SQL statements.  I think they're done correctly now.
+
+Fixed CopyStatement.apply() to not complain about SQLDA, SQLIMSCA, and 
+SQLIMSDA INCLUDEs.
+
+Added IMSSEGMENTs to output CSV.
+
 --2024-05-11--------------------------------------------------------------------
 Resolve CICS API and SPI calls whose target is a COBOL identifier.  
 

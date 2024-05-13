@@ -341,7 +341,7 @@ execSqlStatement
 // exec sql ims statement
 
 execSqlImsStatement
-   : EXEC SQLIMS (charData | classicCommentEntry)+ END_EXEC DOT?
+   : EXEC_SQLIMS (SQL_TEXT+ | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // copy statement

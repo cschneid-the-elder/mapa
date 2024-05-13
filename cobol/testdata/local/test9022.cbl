@@ -8,6 +8,11 @@
       *
       * Current as of CICS TS 6.1
       *
+       Data Division.
+       Working-Storage Section.
+       01  CONSTANTS.
+           05  X  PIC X(008) VALUE 'ABCD1234'.
+           
        Procedure Division.
 
            EXEC CICS

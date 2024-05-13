@@ -234,7 +234,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		ParseTreeWalker walker = new ParseTreeWalker();
 
 		SQLListener listener = 
-			new SQLListener(this.LOGGER);
+			new SQLListener(this.LOGGER, true);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
@@ -254,6 +254,35 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		}
 
 		this.LOGGER.finer("enterExecSqlStatement() exit");
+	}
+
+	public void enterExecSqlImsStatement(CobolParser.ExecSqlImsStatementContext ctx) {
+		this.LOGGER.finer("enterExecSqlImsStatement() entry");
+		StringBuilder sb = new StringBuilder();
+
+		for (TerminalNode tn: ctx.SQL_TEXT()) {
+			sb.append(tn.getSymbol().getText());
+		}
+		this.LOGGER.finest("SQL_TEXT = |" + sb + "|");
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		DB2zSQLLexer lexer = new DB2zSQLLexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		DB2zSQLParser parser = new DB2zSQLParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		SQLListener listener = 
+			new SQLListener(this.LOGGER, false);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		this.currProgram.addImsTables(listener.db2Tables);
+
+		this.LOGGER.finer("enterExecImsSqlStatement() exit");
 	}
 
 }

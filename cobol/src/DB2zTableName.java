@@ -16,13 +16,16 @@ class DB2zTableName {
 	private String myName = this.getClass().getName();
 	private DB2zSQLParser.TableNameContext ctx = null;
 	private String owningStatement = null;
+	private Boolean isDB2 = true;
 
 	public DB2zTableName(
 			DB2zSQLParser.TableNameContext ctx
 			, Logger LOGGER
+			, Boolean isDB2
 			) {
 		this.ctx = ctx;
 		this.LOGGER = LOGGER;
+		this.isDB2 = isDB2;
 		this.getOwningSQLStatement();
 	}
 
@@ -53,8 +56,17 @@ class DB2zTableName {
 	}
 
 	public void writeOn(PrintWriter out, UUID parentUUID) {
+		String label = null;
+		
+		if (this.isDB2) {
+			label = "DB2TABLE";
+		} else {
+			label = "IMSSEGMENT";
+		}
+		
 		out.printf(
-			"DB2TABLE,%s,%s,%s,%s\n"
+			"%s,%s,%s,%s,%s\n"
+			, label
 			, this.uuid.toString()
 			, parentUUID.toString()
 			, this.getTableName()
