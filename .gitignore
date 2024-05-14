@@ -34,6 +34,15 @@ db2z/src/DB2zSQLParser.java
 db2z/src/DB2zSQLParserListener.java
 db2z/src/DB2zSQLParserVisitor.java
 #
+dli/src/*.interp
+dli/src/*.tokens
+dli/src/DLILexer.java
+dli/src/DLIParser.java
+dli/src/DLIParserBaseListener.java
+dli/src/DLIParserBaseVisitor.java
+dli/src/DLIParserListener.java
+dli/src/DLIParserVisitor.java
+#
 jcl/src/*.tokens
 jcl/src/*.interp
 jcl/src/DSNTSOParserBaseListener.java
@@ -72,6 +81,7 @@ jcl/src/TSOParserVisitor.java
 cics/class/*
 cobol/class/*
 db2z/class/*
+dli/class/*
 jcl/class/*
 #
 # some log files are not interesting
@@ -79,6 +89,7 @@ jcl/class/*
 cics/build.log
 cobol/build.log
 db2z/build.log
+dli/build.log
 jcl/build.log
 cobol/TestIntegration-*.log
 cobol/callList*.log
@@ -86,12 +97,14 @@ jcl/Demo01-*.log
 #
 # these jar files are created, then copied to the cobol directory
 #
+dli/DLI.jar
 db2z/DB2zSQL.jar
 cics/CICSz.jar
 #
 # these jar files are backups created when the above jar is
 # copied to the cobol directory
 #
+cobol/DLI.jar.*
 cobol/DB2zSQL.jar.*
 cobol/CICSz.jar.*
 #
@@ -99,6 +112,12 @@ cobol/CICSz.jar.*
 #
 cics/src/CICSzLexer.g4.*
 cics/src/CICSzParser.g4.*
+#
+#
+# these are backup copies of the generated DLI grammars
+#
+dli/src/DLILexer.g4.*
+dli/src/DLIParser.g4.*
 #
 # these are backup copies of test data extracted from
 # cobol/testdata/local/test9022.cbl and 

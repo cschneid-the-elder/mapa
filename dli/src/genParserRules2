@@ -1,0 +1,49 @@
+#! /usr/bin/awk -f
+
+# 
+# generate EXEC DLI parser rules 
+# preprocessing of input gives records...
+# 
+# POSITION
+# PSB(arg)
+# PSB[arg]
+# 
+# ...from which this code produces...
+# 
+# positionOption
+# 	: (
+# 	POSITION
+# 	)
+# 	;
+# 
+# psbOption
+# 	: (
+# 	PSB arg
+# 	)
+# 	;
+# 
+
+{
+	PROCINFO["sorted_in"] = "@ind_str_asc"
+	bp1 = "\n\t: (\n\t"
+	bp2 = "\n\t)\n\t;\n\n"
+	argIndex = index($0, "(arg)")
+	optArgIndex = index($0, "[arg]")
+	if (argIndex || optArgIndex) {
+		withoutArg = substr($0, 1, length($0) - 5)
+		keyword[withoutArg] = sprintf("%sOption%s%s arg%s", tolower(withoutArg), bp1, withoutArg, bp2)
+	} else {
+		keyword[$0] = sprintf("%sOption%s%s%s", tolower($0), bp1, $0, bp2)
+	}
+}
+
+END {
+	for(kywd in keyword) {
+		printf("%s", keyword[kywd])
+	}
+	
+	print "// " NR " rules generated " strftime()
+	print ""
+}
+
+
