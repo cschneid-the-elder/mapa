@@ -1,9 +1,22 @@
 
+# 
+# Source data for generation of ANTLR DLI grammars.
+# 
+# Prefixes:
+# @     indicates the beginning of an API and its name
+# +     indicates an additional part of the API name     
+# +|    indicates an alternative name for the API
+# 
+# Blank lines between APIs are significant in that they
+# are signals used in processing the data.
+# 
+# 
+
 @ACCEPT
-STATUSGROUP
+STATUSGROUP(data_value)
 
 @CHECKPOINT
-CHKP
++|CHKP
 ID
 
 @DEQ
@@ -214,7 +227,7 @@ FROM(area)
 LENGTH(expression)
 
 @POSITION
-POS
++|POS
 USING
 PCB(n)
 INTO(data_ area)
@@ -300,7 +313,7 @@ FORMATTED
 UNFORMATTED
 SUMMARY
 
-@SYMCHK
+@SYMCHKP
 PID(chkpid)
 ID(' literal')
 AREA1(area)

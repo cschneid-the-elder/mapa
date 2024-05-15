@@ -454,8 +454,8 @@ SUMMARY
 	: S U M M A R Y 
 	;
 
-SYMCHK
-	: S Y M C H K 
+SYMCHKP
+	: S Y M C H K P 
 	;
 
 SYSSERVE
@@ -502,7 +502,7 @@ XRST
 	: X R S T 
 	;
 
-// 92 rules generated Tue May 14 17:33:27 CDT 2024
+// 92 rules generated Wed May 15 16:00:20 CDT 2024
 
 mode ARG_MODE;
 

@@ -70,7 +70,7 @@ dliCommand
 	| setsCommand
 	| setuCommand
 	| statisticsCommand
-	| symchkCommand
+	| symchkpCommand
 	| terminateCommand
 	| xrstCommand
 	)
@@ -89,7 +89,7 @@ acceptCommand
 
 checkpointCommand
 	: (
-	 checkpointOption checkpointOptions*
+	(( checkpointOption ) | chkpOption ) checkpointOptions*
 	)
 	;
 
@@ -143,7 +143,7 @@ logCommand
 
 positionCommand
 	: (
-	 positionOption positionOptions*
+	(( positionOption ) | posOption ) positionOptions*
 	)
 	;
 
@@ -213,9 +213,9 @@ statisticsCommand
 	)
 	;
 
-symchkCommand
+symchkpCommand
 	: (
-	 symchkOption symchkOptions*
+	 symchkpOption symchkpOptions*
 	)
 	;
 
@@ -231,7 +231,7 @@ xrstCommand
 	)
 	;
 
-// 25 rules generated Tue May 14 17:38:14 CDT 2024
+// 25 rules generated Wed May 15 16:00:22 CDT 2024
 acceptOptions
 	: (
 	statusgroupOption
@@ -240,8 +240,7 @@ acceptOptions
 
 checkpointOptions
 	: (
-	chkpOption
-	| idOption
+	idOption
 	)
 	;
 
@@ -469,8 +468,7 @@ logOptions
 
 positionOptions
 	: (
-	posOption
-	| usingOption
+	usingOption
 	| pcbOption
 	| intoOption
 	| keyfeedbackOption
@@ -577,7 +575,7 @@ statisticsOptions
 	)
 	;
 
-symchkOptions
+symchkpOptions
 	: (
 	pidOption
 	| idOption
@@ -619,7 +617,7 @@ xrstOptions
 	)
 	;
 
-// 22 rules generated Tue May 14 17:38:14 CDT 2024
+// 22 rules generated Wed May 15 16:00:22 CDT 2024
 
 acceptOption
 	: (
@@ -1091,7 +1089,7 @@ statisticsOption
 
 statusgroupOption
 	: (
-	STATUSGROUP
+	STATUSGROUP arg
 	)
 	;
 
@@ -1101,9 +1099,9 @@ summaryOption
 	)
 	;
 
-symchkOption
+symchkpOption
 	: (
-	SYMCHK
+	SYMCHKP
 	)
 	;
 
@@ -1173,5 +1171,5 @@ xrstOption
 	)
 	;
 
-// 96 rules generated Tue May 14 17:38:14 CDT 2024
+// 96 rules generated Wed May 15 16:00:22 CDT 2024
 
