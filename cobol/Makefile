@@ -46,6 +46,9 @@
 #                     specify n=#### as in testLocalx
 # make testrigppnist  run ANTLR test rig with CobolPreprocessor grammar,
 #                     n=@@###@ as in testNist
+# make cpdb2zjar      copy the DB2zSQL.jar file from ../db2z to here
+# make cpcicszjar     copy the CICSz.jar file from ../cics to here
+# make cpdlijar       copy the DLI.jar file from ../dli to here
 
 SEP = :
 ifdef OS
@@ -54,7 +57,7 @@ endif
 
 JC = javac
 #CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
-CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.1-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar"
+CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.1-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar$(SEP)./DLI.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -180,6 +183,14 @@ ifneq ("$(wildcard ./CICSz.jar)","")
 	cp ./CICSz.jar $(oldjarfile)
 endif
 	cp ../cics/CICSz.jar .
+
+oldjarfile := ./DLI.jar.$(shell date +%Y%m%d%H%M%S)
+cpdlijar:
+	echo `date` $@ >> build.log
+ifneq ("$(wildcard ./DLI.jar)","")
+	cp ./DLI.jar $(oldjarfile)
+endif
+	cp ../dli/DLI.jar .
 
 ./src/CobolLexer.tokens: 
 
