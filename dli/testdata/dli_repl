@@ -1,0 +1,16 @@
+EXEC DLI REPL SEGMENT(EDWIN) FROM(PAINE);
+
+EXEC DLI REPLACE
+         USING PCB(42)
+         VARIABLE
+         SEGMENT(CHARLES)
+         SEGMENT((EDWIN))
+         SEGLENGTH(LENGTH(EDWIN))
+         OFFSET(13)
+         FROM(PAINE)
+         MOVENEXT(1)
+         SET(2)
+         SETCOND(3)
+         SETZERO(4)
+END-EXEC.
+

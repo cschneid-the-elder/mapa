@@ -1,0 +1,50 @@
+/*
+Copyright (C) 2024 Craig Schneiderwent.  
+All rights reserved.
+
+The author(s) accept no liability for damages of any kind resulting from the use
+of this software.  Use at your own risk.
+
+This software may be modified and distributed under the terms
+of the MIT license. See the LICENSE file for details.
+
+This is intended to be an ANTLR4 grammar for the EXEC DLI interface.
+
+*/
+
+
+parser grammar DLIParser;
+
+options {tokenVocab=DLILexer;}
+
+startRule
+	: (
+	execDliCommand 
+	)+
+	EOF
+	;
+
+dliCommandInitiator
+	: (
+	EXEC_DLI
+	)
+	;
+
+dliCommandTerminator
+	: (
+	END_EXEC
+	| SEMICOLON
+	)
+	;
+
+execDliCommand
+	: (
+	dliCommandInitiator
+	dliCommand
+	dliCommandTerminator
+	)
+	;
+
+dliCommand
+	: (
+

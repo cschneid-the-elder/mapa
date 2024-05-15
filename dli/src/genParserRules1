@@ -1,0 +1,80 @@
+#! /usr/bin/awk -f
+
+# 
+# generate EXEC DLI parser rules 
+# preprocessing of input gives records...
+# 
+# DLET
+# GET+NEXT+|GN
+# 
+# ...from which this code produces...
+# 
+# dletCommand
+# 	: dletOption dletOptions*
+# 	;
+# 
+# getNextCommand
+# 	: (( getOption nextOption ) | gnOption ) getNextOptions*
+# 	;
+# 
+# 
+
+FS="+"
+OFS=""
+
+{
+	j = 0
+	altword = ""
+	for(i=1; i<=NF; i++) {
+		gsub(/\s+$/, "", $i)
+		if (i==1) {
+			keyword[i] = tolower($i)
+			j++
+		} else if (substr($i,1,1) == "|") {
+			altword = substr($i,2)
+		} else {
+			keyword[i] = toupper(substr($i,1,1)) tolower(substr($i,2))
+			j++
+		}
+	}
+	
+	for(i=1; i<=j; i++) {
+		printf("%s", keyword[i])
+	}
+
+	printf("Command\n\t: (\n\t")
+
+	if (altword != "") {
+		printf("((")
+	}
+	
+    for(i=1; i<=j; i++) {
+    	if (substr($i,1,1) != "=") {
+			printf(" %sOption", tolower(keyword[i]))
+		}
+	}
+	
+	if (altword != "") {
+		printf(" ) | %sOption )", tolower(altword))
+	}
+	
+	# these don't have any options
+	if (keyword[1] == "terminate" || keyword[1] == "rolb" || keyword[1] == "roll") {
+		# do nothing
+	} else {
+		printf(" ")
+		for(i=1; i<=NF; i++) {
+			printf("%s", keyword[i])
+		}
+		printf("Options*")
+	}
+
+	printf("\n\t)\n\t;\n\n")
+	delete keyword
+}
+
+END {
+	print "// " NR " rules generated " strftime()
+	print ""
+}
+
