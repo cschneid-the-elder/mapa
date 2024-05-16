@@ -285,7 +285,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.LOGGER.finer("enterExecImsSqlStatement() exit");
 	}
 
-	@Override public void enterExecDliStatement(CobolParser.ExecSqlImsStatementContext ctx) {
+	@Override public void enterExecDliStatement(CobolParser.ExecDliStatementContext ctx) {
 		this.LOGGER.finer("enterExecDliStatement() entry");
 		StringBuilder sb = new StringBuilder();
 
@@ -293,6 +293,8 @@ public class CallEtAlListener extends CobolParserBaseListener {
 			sb.append(tn.getSymbol().getText());
 		}
 		this.LOGGER.finest("DLI_TEXT = |" + sb + "|");
+		sb.insert(0, "EXEC DLI ");
+		sb.append(" END-EXEC");
 		CharStream aCharStream = CharStreams.fromString(sb.toString());
 		DLILexer lexer = new DLILexer(aCharStream);  //instantiate a lexer
 		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
@@ -303,13 +305,13 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		ParseTreeWalker walker = new ParseTreeWalker();
 
 		DLIListener listener = 
-			new DLIListener(this.LOGGER, false);
+			new DLIListener(this.LOGGER);
 
 		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
 
 		walker.walk(listener, tree);
 
-		this.currProgram.addImsTables(listener.db2Tables);
+		this.currProgram.addImsSegments(listener.imsSegments);
 
 		this.LOGGER.finer("enterExecDliStatement() exit");
 	}

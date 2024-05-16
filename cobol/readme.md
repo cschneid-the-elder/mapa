@@ -168,7 +168,7 @@ The PGM record contains counts of things that might be interesting and were easy
 
 The DD record contains counts of how the file is opened.  This might be useful in showing program inputs and outputs, or discovering files that are no longer used.
 
-The IMSSEGMENT record is only for accesses via EXEC SQLIMS statements.  I may create a new grammar for EXEC DLI statements.  My IMS experience consists of modifying one program in the late 1980s, so I'm a little shaky on what would be of use here.
+The IMSSEGMENT record is for accesses via both EXEC SQLIMS and EXEC DLI statements.  My IMS experience consists of modifying one program in the late 1980s, so I'm a little shaky on what would be of use here.
 
 For reasons both obscure and annoying, the CICS APIs are not deduplicated, so if your code includes, for example, two READs for the same file you will get two output records.
 

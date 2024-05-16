@@ -1,3 +1,6 @@
+--2024-05-16--------------------------------------------------------------------
+Integrated handling of EXEC DLI statements.
+
 --2024-05-13--------------------------------------------------------------------
 Corrected handling of SQLIMS statements, which were being improperly processed
 as syntactically incorrect SQL statements.  I think they're done correctly now.
