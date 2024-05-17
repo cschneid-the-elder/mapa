@@ -264,7 +264,7 @@ endif
 
 ./class/DLIListener.class: ./class/ImsSegmentName.class
 
-./class/ImsSegmentName.class: #../dli/class/DLIParser.class
+./class/ImsSegmentName.class: ../dli/class/DLIParser.class
 
-./class/DB2zTableName.class: #../db2z/class/DB2zParser.class
+./class/DB2zTableName.class: ../db2z/class/DB2zSQLParser.class
 
