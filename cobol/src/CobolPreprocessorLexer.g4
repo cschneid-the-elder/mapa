@@ -151,6 +151,7 @@ EVENPACK : E V E N P A C K;
 EXCI : E X C I;
 EXEC : E X E C;
 EXEC_CICS : E X E C [ ]+ C I C S ->pushMode(EXEC_CICS_MODE);
+EXEC_DLI : E X E C [ ]+ D L I ->pushMode(EXEC_DLI_MODE);
 EXEC_SQL : E X E C [ ]+ S Q L ->pushMode(EXEC_SQL_MODE);
 EXEC_SQLIMS : E X E C [ ]+ S Q L I M S ->pushMode(EXEC_SQL_MODE);
 EXIT : E X I T;
@@ -873,4 +874,12 @@ EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 CICS_TEXT : (.+?);
 
 EC_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
+
+mode EXEC_DLI_MODE;
+
+ED_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
+
+DLI_TEXT : (.+?);
+
+ED_CLASSIC_LINE_NUMBER : TEXT TEXT TEXT TEXT TEXT TEXT {!freeForm && getCharPositionInLine() == 6}? -> skip;
 

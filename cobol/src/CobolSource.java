@@ -967,6 +967,7 @@ class CobolSource {
 		for (CobolProgram pgm: this.programs) {
 			pgm.resolveCalledNodes();
 			pgm.resolveCICSStatementIdentifiers();
+			pgm.resolveImsSegmentIdentifiers();
 		}
 	}
 

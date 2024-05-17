@@ -21,7 +21,7 @@ options {tokenVocab=CobolPreprocessorLexer;}
 
 
 startRule
-   : (identificationDivisionTag | compilerOptions | compilerDirectiveStatement | classicCommentEntry | copyStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | replaceOffStatement | replaceArea | ejectStatement | skipStatement | titleStatement | charDataLine | NEWLINE)* EOF
+   : (identificationDivisionTag | compilerOptions | compilerDirectiveStatement | classicCommentEntry | copyStatement | execCicsStatement | execDliStatement | execSqlStatement | execSqlImsStatement | replaceOffStatement | replaceArea | ejectStatement | skipStatement | titleStatement | charDataLine | NEWLINE)* EOF
    ;
 
 // --- identification division (sort of, enough to recognize if this is a COBOL program)
@@ -330,6 +330,12 @@ classicCommentEntry
 
 execCicsStatement
    : EXEC_CICS (CICS_TEXT+ | classicCommentEntry)+ END_EXEC DOT?
+   ;
+
+// exec dli statement
+
+execDliStatement
+   : EXEC_DLI (DLI_TEXT+ | classicCommentEntry)+ END_EXEC DOT?
    ;
 
 // exec sql statement

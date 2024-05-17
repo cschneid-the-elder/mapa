@@ -46,6 +46,7 @@ class CobolProgram {
 	private CobolProgram parent = null;
 	private ArrayList<DB2zTableName> db2Tables = new ArrayList<>();
 	private ArrayList<DB2zTableName> imsTables = new ArrayList<>();
+	private ArrayList<ImsSegmentName> imsSegments = new ArrayList<>();
 	private ArrayList<ExecCicsStatement> cicsStatements = new ArrayList<>();
 	private int conditionalStatementCount = 0;
 	private int statementCount = 0;
@@ -88,7 +89,7 @@ class CobolProgram {
 	<p>Finally, instruct any nested programs to do the same.
 	*/
 	public void resolveCalledNodes() {
-		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCalledNodes");
+		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCalledNodes()");
 
 		for (CallWrapper call: this.calledNodes) {
 			LOGGER.finest("  call.identifier = " + call.getCobolIdentifier());
@@ -161,7 +162,7 @@ class CobolProgram {
 	<p>Finally, instruct any nested programs to do the same.
 	*/
 	public void resolveCICSStatementIdentifiers() {
-		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCICSStatementIdentifiers");
+		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveCICSStatementIdentifiers()");
 
 		for (ExecCicsStatement cicsStmt: this.cicsStatements) {
 			if (cicsStmt.getIdentifierName() == null) {
@@ -218,6 +219,79 @@ class CobolProgram {
 		LOGGER.finest("call.dataNode = " + cicsStmt.getDataNode());
 		if (!rc) {
 			rc = cicsStmt.selectConstant(this.constantEntries);
+		}
+		return rc;
+	}
+
+	/**
+	For each SEGMENT option in an EXEC DLI statement, if its target 
+	is an identifier, locate the
+	identifier in the list of DDNodes for this program and any programs
+	in which this program is nested.
+
+	<p>Once the DDNode has been found, locate any MOVE or SET statements
+	that alter its contents.
+
+	<p>Finally, instruct any nested programs to do the same.
+	*/
+	public void resolveImsSegmentIdentifiers() {
+		LOGGER.fine(this.myName + " " + this.getProgramName() + " resolveImsSegmentIdentifiers()");
+
+		for (ImsSegmentName segName: this.imsSegments) {
+			if (segName.getIdentifierName() == null) {
+				LOGGER.finest("  segName does not use an identifier");
+			} else {
+				LOGGER.finest("  segName.identifier = " + segName.getIdentifierName());
+				Boolean resolved = false;
+				CobolProgram pgm = this;
+				while (pgm != null && !resolved) {
+					resolved = this.resolveImsSegmentIdentifier(segName, pgm);
+					pgm = pgm.getParent();
+					LOGGER.finest(" parent = " + pgm);
+				}
+				if (resolved && segName.getDataNode() != null) {
+					this.findAllTheRightMoves(segName);
+				} else if (!resolved) {
+					this.LOGGER.warning(
+						"identifier " 
+						+ segName.getIdentifierName()
+						+ " not found");
+				}
+				if (segName.getDataNode() != null) {
+					this.findAllTheRightSets(segName);
+				}
+			}
+		}
+
+		for (CobolProgram pgm: this.programs) {
+			pgm.resolveImsSegmentIdentifiers();
+		}
+	}
+
+	/**
+	Search the <code>DDNodes</code> in the passed program for the one that matches the
+	identifier in the passed <code>ExecCicsStatement</code>.
+	*/
+	private Boolean resolveImsSegmentIdentifier(ImsSegmentName segName, CobolProgram pgm) {
+		this.LOGGER.fine(this.myName + " resolveImsSegmentIdentifier(" + segName + ", " + pgm + ")");
+		Boolean rc = false;
+		ArrayList<DDNode> identifierDataNodes = new ArrayList<>();
+		ArrayList<DDNode> localDataNodes = null;
+		if (pgm == this) {
+			localDataNodes = this.getDataNodes();
+		} else {
+			localDataNodes = pgm.getPublicDataNodes();
+		}
+		for (DDNode node: localDataNodes) {
+			if (node.getParent() == null) {
+				identifierDataNodes.addAll(node.findChildrenNamed(segName.getIdentifierName()));
+			}
+		}
+		LOGGER.finest("  all node children named " + segName.getIdentifierName() + " = " + identifierDataNodes);
+		rc = segName.selectDataNode(identifierDataNodes);
+		LOGGER.finest("call.dataNode = " + segName.getDataNode());
+		if (!rc) {
+			rc = segName.selectConstant(this.constantEntries);
 		}
 		return rc;
 	}
@@ -303,6 +377,46 @@ class CobolProgram {
 	}
 
 	/**
+	Find MOVE statements that seem to reference the identifier in
+	the passed Segment name from an EXEC DLI statement.
+
+	<code>
+	[...]
+	       01  SEGMENT-NAMES.
+	           05  SEG1 PIC X(008) VALUE 'CRICHTON'.
+	               88  SEG-ZHAAN   VALUE 'ZHAAN'.
+	               88  SEG-CHIANA  VALUE 'CHIANA'.
+	               88  SEG-DARGO   VALUE 'DARGO'.
+	[...]
+	           EXEC DLI DLET SEGMENT((SEG1)) FROM(M1) END-EXEC
+	           MOVE 'AERYN' TO SEG1
+	           EXEC DLI DLET SEGMENT((SEG1)) FROM(M1) END-EXEC
+	</code>
+	*/
+	private void findAllTheRightMoves(ImsSegmentName segName) {
+		CobolProgram pgm = this;
+		while (pgm != null) {
+			for (MoveStatement move: pgm.getMoves()) {
+				for (Identifier identifier: move.getIdentifiers()) {
+					if (identifier.seemsToMatch(segName.getIdentifier())) {
+						if (move.getText() == null) {
+							if (move.getSendingIdentifier() != null) {
+								segName.addIdentifierValue(
+									this.identifierValueInValueClause(move.getSendingIdentifier())
+									);
+							}
+						} else {
+							segName.addIdentifierValue(move.getText());
+						}
+					}
+				}
+			}
+			pgm = pgm.getParent();
+		}
+
+	}
+
+	/**
 	Find SET statements that seem to reference the identifier in
 	the passed CALL statement.
 
@@ -336,7 +450,7 @@ class CobolProgram {
 
 	/**
 	Find SET statements that seem to reference the identifier in
-	the passed CALL statement.
+	the passed EXEC CICS statement.
 
 	<code>
 	[...]
@@ -361,6 +475,38 @@ class CobolProgram {
 				if (ee.getIdentifier().equals(identifier.getDataNameText())) {
 					this.LOGGER.finest( "    ee.name.equals(ctx...IDENTIFIER())");
 					cicsStmt.addIdentifierValue(ee.getValueInValueClause());
+				}
+			}
+		}
+	}
+
+	/**
+	Find SET statements that seem to reference the identifier in
+	the SEGMENT option of the the passed EXEC DLI statement.
+
+	<code>
+	[...]
+	       01  SEGMENT-NAMES.
+	           05  SEG1 PIC X(008) VALUE 'CRICHTON'.
+	               88  SEG-ZHAAN   VALUE 'ZHAAN'.
+	               88  SEG-CHIANA  VALUE 'CHIANA'.
+	               88  SEG-DARGO   VALUE 'DARGO'.
+	[...]
+	           SET PGM-CHIANA TO TRUE
+	           EXEC DLI DLET SEGMENT((SEG1)) FROM(M1) END-EXEC
+	           SET PGM-DARGO TO TRUE
+	           EXEC DLI DLET SEGMENT((SEG1)) FROM(M1) END-EXEC
+	</code>
+	*/
+	private void findAllTheRightSets(ImsSegmentName segName) {
+		for (DDNode ee: segName.getDataNode().getChildren()) {
+			if (!ee.isCondition()) continue;
+			this.LOGGER.finest("    call.eightyEight = " + ee);
+			for (Identifier identifier: this.sets) {
+				this.LOGGER.finest("    identifier.getDataNameText() = " + identifier.getDataNameText());
+				if (ee.getIdentifier().equals(identifier.getDataNameText())) {
+					this.LOGGER.finest( "    ee.name.equals(ctx...IDENTIFIER())");
+					segName.addIdentifierValue(ee.getValueInValueClause());
 				}
 			}
 		}
@@ -439,6 +585,10 @@ class CobolProgram {
 
 	public void addImsTables(ArrayList<DB2zTableName> db2Tables) {
 		this.imsTables.addAll(db2Tables);
+	}
+
+	public void addImsSegments(ArrayList<ImsSegmentName> imsSegments) {
+		this.imsSegments.addAll(imsSegments);
 	}
 
 	public void setParent(CobolProgram parent) {
@@ -668,6 +818,10 @@ class CobolProgram {
 
 		for (ExecCicsStatement ec: this.cicsStatements) {
 			ec.writeOn(out, this.getUUID());
+		}
+
+		for (ImsSegmentName sn: this.imsSegments) {
+			sn.writeOn(out, this.getUUID());
 		}
 	}
 

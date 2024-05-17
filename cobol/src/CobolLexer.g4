@@ -966,6 +966,11 @@ EXEC_CICS
 	->pushMode(EXEC_CICS_MODE)
 	;
 
+EXEC_DLI
+   : E X E C [ ]+ D L I
+   ->pushMode(EXEC_DLI_MODE)
+   ;
+
 // symbols
 AMPCHAR : '&';
 ASTERISKCHAR : '*';
@@ -1307,6 +1312,12 @@ mode EXEC_CICS_MODE;
 EC_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
 
 CICS_TEXT : (.+?);
+
+mode EXEC_DLI_MODE;
+
+ED_END_EXEC : END_EXEC ->type(END_EXEC),popMode;
+
+DLI_TEXT : (.+?);
 
 /*
 This mode is to ensure any COBOL reserved words that are DFHVALUE keywords

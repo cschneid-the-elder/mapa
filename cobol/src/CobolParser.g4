@@ -1812,7 +1812,7 @@ sentence
    ;
 
 statement
-   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | resumeStatement | returnStatement | rewriteStatement | rollbackStatement | searchStatement | sendStatement | standardSendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | suppressStatement | terminateStatement | unlockStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
+   : (acceptStatement | addStatement | allocateStatement | alterStatement | callStatement | cancelStatement | closeStatement | commitStatement | computeStatement | continueStatement | deleteStatement | disableStatement | displayStatement | divideStatement | enableStatement | entryStatement | evaluateStatement | exhibitStatement | execCicsStatement | execDliStatement | execSqlStatement | execSqlImsStatement | exitStatement | freeStatement | generateStatement | gobackStatement | goToStatement | ifStatement | initializeStatement | initiateStatement | inspectStatement | invokeStatement | jsonGenerateStatement | jsonParseStatement | mergeStatement | moveStatement | multiplyStatement | nextSentenceStatement | openStatement | performStatement | purgeStatement | raiseStatement | readStatement | receiveStatement | standardReceiveStatement | releaseStatement | resumeStatement | returnStatement | rewriteStatement | rollbackStatement | searchStatement | sendStatement | standardSendStatement | setStatement | sortStatement | startStatement | stopStatement | stringStatement | subtractStatement | suppressStatement | terminateStatement | unlockStatement | unstringStatement | xmlGenerateStatement | xmlParseStatement | writeStatement) COMMACHAR?
    ;
 
 // accept statement
@@ -2170,6 +2170,12 @@ execCicsStatement
 	CICS_TEXT+
 	cicsCmdEnd
 	;
+
+// exec dli statement
+
+execDliStatement
+   : EXEC_DLI DLI_TEXT+ END_EXEC ((DOT NEWLINE?) | DOT_FS)?
+   ;
 
 // exec sql statement
 

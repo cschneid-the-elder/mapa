@@ -231,7 +231,7 @@ xrstCommand
 	)
 	;
 
-// 25 rules generated Wed May 15 16:00:22 CDT 2024
+// 25 rules generated Thu May 16 20:18:16 CDT 2024
 acceptOptions
 	: (
 	statusgroupOption
@@ -256,7 +256,6 @@ dletOptions
 	| pcbOption
 	| variableOption
 	| segmentOption
-	| segmentOption
 	| seglengthOption
 	| fromOption
 	| setzeroOption
@@ -274,7 +273,6 @@ getNextOptions
 	| firstOption
 	| lastOption
 	| currentOption
-	| segmentOption
 	| segmentOption
 	| seglengthOption
 	| offsetOption
@@ -294,7 +292,6 @@ getNextOptions
 	| variableOption
 	| firstOption
 	| lastOption
-	| segmentOption
 	| segmentOption
 	| seglengthOption
 	| offsetOption
@@ -325,7 +322,6 @@ getNextInParentOptions
 	| lastOption
 	| currentOption
 	| segmentOption
-	| segmentOption
 	| seglengthOption
 	| offsetOption
 	| intoOption
@@ -344,7 +340,6 @@ getNextInParentOptions
 	| variableOption
 	| firstOption
 	| lastOption
-	| segmentOption
 	| segmentOption
 	| seglengthOption
 	| offsetOption
@@ -373,7 +368,6 @@ getUniqueOptions
 	| variableOption
 	| lastOption
 	| segmentOption
-	| segmentOption
 	| seglengthOption
 	| offsetOption
 	| intoOption
@@ -391,7 +385,6 @@ getUniqueOptions
 	| keylengthOption
 	| variableOption
 	| lastOption
-	| segmentOption
 	| segmentOption
 	| seglengthOption
 	| offsetOption
@@ -419,7 +412,6 @@ insertOptions
 	| lastOption
 	| currentOption
 	| segmentOption
-	| segmentOption
 	| seglengthOption
 	| fromOption
 	| movenextOption
@@ -441,8 +433,6 @@ insertOptions
 	| setOption
 	| setcondOption
 	| setzeroOption
-	| segmentOption
-	| segmentOption
 	| fromOption
 	)
 	;
@@ -452,7 +442,6 @@ loadOptions
 	usingOption
 	| pcbOption
 	| variableOption
-	| segmentOption
 	| segmentOption
 	| seglengthOption
 	| fromOption
@@ -473,7 +462,6 @@ positionOptions
 	| intoOption
 	| keyfeedbackOption
 	| feedbacklenOption
-	| segmentOption
 	| segmentOption
 	| whereOption
 	| fieldlengthOption
@@ -499,7 +487,6 @@ replaceOptions
 	| pcbOption
 	| variableOption
 	| segmentOption
-	| segmentOption
 	| seglengthOption
 	| offsetOption
 	| fromOption
@@ -508,8 +495,6 @@ replaceOptions
 	| setcondOption
 	| setzeroOption
 	| variableOption
-	| segmentOption
-	| segmentOption
 	| seglengthOption
 	| offsetOption
 	| fromOption
@@ -617,7 +602,7 @@ xrstOptions
 	)
 	;
 
-// 22 rules generated Wed May 15 16:00:22 CDT 2024
+// 22 rules generated Thu May 16 20:18:16 CDT 2024
 
 acceptOption
 	: (
@@ -1171,5 +1156,5 @@ xrstOption
 	)
 	;
 
-// 96 rules generated Wed May 15 16:00:22 CDT 2024
+// 95 rules generated Thu May 16 20:18:16 CDT 2024
 

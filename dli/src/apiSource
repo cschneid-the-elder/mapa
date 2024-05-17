@@ -27,7 +27,6 @@ USING
 PCB(expression)
 VARIABLE
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 FROM(area)
 SETZERO(data_value)
@@ -45,7 +44,6 @@ FIRST
 LAST
 CURRENT
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 INTO(area)
@@ -65,7 +63,6 @@ VARIABLE
 FIRST
 LAST
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 INTO(area)
@@ -96,7 +93,6 @@ FIRST
 LAST
 CURRENT
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 INTO(area)
@@ -116,7 +112,6 @@ VARIABLE
 FIRST
 LAST
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 INTO(area)
@@ -143,7 +138,6 @@ INTO(area)
 VARIABLE
 LAST
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 INTO(area)
@@ -162,7 +156,6 @@ KEYLENGTH(expression)
 VARIABLE
 LAST
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 INTO(area)
@@ -187,7 +180,6 @@ FIRST
 LAST
 CURRENT
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 FROM(area)
 MOVENEXT(data_value)
@@ -209,8 +201,6 @@ GETFIRST(data_value)
 SET(data_value)
 SETCOND(data_value)
 SETZERO(data_value)
-SEGMENT(name)
-SEGMENT((area))
 FROM(area)
 
 @LOAD
@@ -218,7 +208,6 @@ USING
 PCB(expression)
 VARIABLE
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 FROM(area)
 
@@ -234,7 +223,6 @@ INTO(data_ area)
 KEYFEEDBACK(area)
 FEEDBACKLEN(expression)
 SEGMENT(name)
-SEGMENT((area))
 WHERE(qualification_ statement)
 FIELDLENGTH(expression)
 
@@ -251,7 +239,6 @@ USING
 PCB(expression)
 VARIABLE
 SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 FROM(area)
@@ -260,8 +247,6 @@ SET(data_value)
 SETCOND(data_value)
 SETZERO(data_value)
 VARIABLE
-SEGMENT(name)
-SEGMENT((area))
 SEGLENGTH(expression)
 OFFSET(expression)
 FROM(area)

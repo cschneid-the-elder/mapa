@@ -21,7 +21,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.programs = programs;
 	}
 
-	public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
+	@Override public void enterEveryRule(ParserRuleContext ctx) {  //see CobolBaseListener for allowed functions
 		//this.LOGGER.finest("enterEveryRule: " + ctx.getClass().getName() + " @line " + ctx.start.getLine() + ": " + ctx.getText());      //code that executes per rule
 	}
 
@@ -51,7 +51,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.LOGGER.finest("CallEtAlListener currProgram = " + this.currProgram);
 	}
 
-	public void enterIdentificationDivision(CobolParser.IdentificationDivisionContext ctx) {
+	@Override public void enterIdentificationDivision(CobolParser.IdentificationDivisionContext ctx) {
 	    if (ctx.programIdParagraph() != null) {
 	    	this.setCurrProgram(ctx.programIdParagraph().programName().getText());
 	    } else if (ctx.functionIdParagraph() != null) {
@@ -66,7 +66,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	    */
 	}
 
-	public void enterStatement(CobolParser.StatementContext ctx) {
+	@Override public void enterStatement(CobolParser.StatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -78,7 +78,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.incrementStatementCounter(ctx);
 	}
 
-	public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
+	@Override public void enterDataDescriptionEntry(CobolParser.DataDescriptionEntryContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -90,7 +90,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.incrementDataDescriptionCounter(ctx);
 	}
 
-	public void enterCallStatement(CobolParser.CallStatementContext ctx) {
+	@Override public void enterCallStatement(CobolParser.CallStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -104,7 +104,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 	}
 
 	@SuppressWarnings({"fallthrough"})
-	public void enterExecCicsStatement(CobolParser.ExecCicsStatementContext ctx) {
+	@Override public void enterExecCicsStatement(CobolParser.ExecCicsStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -128,11 +128,11 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		}
 	}
 
-	public void enterFileControlEntry(CobolParser.FileControlEntryContext ctx) {
+	@Override public void enterFileControlEntry(CobolParser.FileControlEntryContext ctx) {
 		this.currCobolFileName = ctx.selectClause().fileName().getText();
 	}
 
-	public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
+	@Override public void enterAssignClause(CobolParser.AssignClauseContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -144,7 +144,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.addAssignClause(new AssignClause(ctx, this.currCobolFileName, this.LOGGER));
 	}
 
-	public void enterOpenInputStatement(CobolParser.OpenInputStatementContext ctx) {
+	@Override public void enterOpenInputStatement(CobolParser.OpenInputStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -156,7 +156,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.noteOpenType(ctx);
 	}
 
-	public void enterOpenOutputStatement(CobolParser.OpenOutputStatementContext ctx) {
+	@Override public void enterOpenOutputStatement(CobolParser.OpenOutputStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -168,7 +168,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.noteOpenType(ctx);
 	}
 
-	public void enterOpenIOStatement(CobolParser.OpenIOStatementContext ctx) {
+	@Override public void enterOpenIOStatement(CobolParser.OpenIOStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -180,7 +180,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.noteOpenType(ctx);
 	}
 
-	public void enterOpenExtendStatement(CobolParser.OpenExtendStatementContext ctx) {
+	@Override public void enterOpenExtendStatement(CobolParser.OpenExtendStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -192,7 +192,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.noteOpenType(ctx);
 	}
 
-	public void enterMoveStatement(CobolParser.MoveStatementContext ctx) {
+	@Override public void enterMoveStatement(CobolParser.MoveStatementContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -204,7 +204,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.addMoveStatement(new MoveStatement(ctx, this.LOGGER));
 	}
 
-	public void enterSetTo(CobolParser.SetToContext ctx) {
+	@Override public void enterSetTo(CobolParser.SetToContext ctx) {
 		if (this.currProgram == null) {
 			/*
 			We are processing something other than a program, perhaps a
@@ -216,7 +216,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.addSetTo(new Identifier(ctx.identifier(), this.LOGGER));
 	}
 
-	public void enterExecSqlStatement(CobolParser.ExecSqlStatementContext ctx) {
+	@Override public void enterExecSqlStatement(CobolParser.ExecSqlStatementContext ctx) {
 		this.LOGGER.finer("enterExecSqlStatement() entry");
 		StringBuilder sb = new StringBuilder();
 
@@ -256,7 +256,7 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.LOGGER.finer("enterExecSqlStatement() exit");
 	}
 
-	public void enterExecSqlImsStatement(CobolParser.ExecSqlImsStatementContext ctx) {
+	@Override public void enterExecSqlImsStatement(CobolParser.ExecSqlImsStatementContext ctx) {
 		this.LOGGER.finer("enterExecSqlImsStatement() entry");
 		StringBuilder sb = new StringBuilder();
 
@@ -283,6 +283,37 @@ public class CallEtAlListener extends CobolParserBaseListener {
 		this.currProgram.addImsTables(listener.db2Tables);
 
 		this.LOGGER.finer("enterExecImsSqlStatement() exit");
+	}
+
+	@Override public void enterExecDliStatement(CobolParser.ExecDliStatementContext ctx) {
+		this.LOGGER.finer("enterExecDliStatement() entry");
+		StringBuilder sb = new StringBuilder();
+
+		for (TerminalNode tn: ctx.DLI_TEXT()) {
+			sb.append(tn.getSymbol().getText());
+		}
+		this.LOGGER.finest("DLI_TEXT = |" + sb + "|");
+		sb.insert(0, "EXEC DLI ");
+		sb.append(" END-EXEC");
+		CharStream aCharStream = CharStreams.fromString(sb.toString());
+		DLILexer lexer = new DLILexer(aCharStream);  //instantiate a lexer
+		CommonTokenStream tokens = new CommonTokenStream(lexer); //scan stream for tokens
+		DLIParser parser = new DLIParser(tokens);  //parse the tokens
+
+		ParseTree tree = parser.startRule(); // parse the content and get the tree
+
+		ParseTreeWalker walker = new ParseTreeWalker();
+
+		DLIListener listener = 
+			new DLIListener(this.LOGGER);
+
+		LOGGER.finer("----------walking tree with " + listener.getClass().getName());
+
+		walker.walk(listener, tree);
+
+		this.currProgram.addImsSegments(listener.imsSegments);
+
+		this.LOGGER.finer("enterExecDliStatement() exit");
 	}
 
 }
