@@ -435,11 +435,15 @@ public class AmpParmWrapper {
 		this.traceParms.put(ctx.PARM2().getText(), sb.toString());
 	}
 
-	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+	public void toCSV(StringBuffer csvOut, UUID parentUUID, Boolean isJob) {
 
 		if (this.traceParms.isEmpty()) {
 			csvOut.append(System.getProperty("line.separator"));
-			csvOut.append("AMP");
+			if (isJob) {
+				csvOut.append("JOBSTEPDDAMP");
+			} else {
+				csvOut.append("PROCSTEPDDAMP");
+			}
 			csvOut.append(",");
 			csvOut.append(parentUUID.toString());
 			csvOut.append(",");

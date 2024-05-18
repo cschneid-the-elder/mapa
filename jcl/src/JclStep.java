@@ -425,7 +425,11 @@ public class JclStep {
 	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
 		this.LOGGER.fine(this.myName + " " + this.stepName + " toCSV");
 
-		csvOut.append("STEP");
+		if (this.parentJob != null) {
+			csvOut.append("JOBSTEP");
+		} else {
+			csvOut.append("PROCSTEP");
+		}
 		csvOut.append(",");
 		csvOut.append(this.stepName);
 		csvOut.append(",");
@@ -443,7 +447,11 @@ public class JclStep {
 			if (this.isTSO()) {
 				for (String s: this.tsoCallPgms) {
 					csvOut.append(System.getProperty("line.separator"));
-					csvOut.append("TSOCALL");
+					if (this.parentJob != null) {
+						csvOut.append("JOBSTEPTSOCALL");
+					} else {
+						csvOut.append("PROCSTEPTSOCALL");
+					}
 					csvOut.append(",");
 					csvOut.append(this.uuid.toString());
 					csvOut.append(",");
@@ -454,7 +462,11 @@ public class JclStep {
 				int i = 0;
 				for (String s: this.tsoDSNPgms) {
 					csvOut.append(System.getProperty("line.separator"));
-					csvOut.append("DSNRUN");
+					if (this.parentJob != null) {
+						csvOut.append("JOBSTEPDSNRUN");
+					} else {
+						csvOut.append("PROCSTEPDSNRUN");
+					}
 					csvOut.append(",");
 					csvOut.append(this.uuid.toString());
 					csvOut.append(",");
@@ -477,7 +489,7 @@ public class JclStep {
 		}
 
 		for (DdStatementAmalgamation dda: ddStatements) {
-			dda.toCSV(csvOut, this.uuid);
+			dda.toCSV(csvOut, this.uuid, this.parentJob != null);
 		}
 	}
 

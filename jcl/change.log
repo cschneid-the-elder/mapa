@@ -1,3 +1,18 @@
+--2024-05-18--------------------------------------------------------------------
+Added src/sql_mapa_sample_table_ddl which contains sample DDL to create RDBMS 
+tables to hold the CSV output.
+
+Added src/mapaOutputSplit to split the CSV output into separate files suitable
+for loading into the RDBMS tables defined in src/sql_mapa_sample_table_ddl.
+
+Fixed a bug in Demo01.java where the processing timestamp was not added to
+the FILE record if only a PROC is present in the input file.
+
+Modified the CSV output to align with the RDBMS tables' referential integrity.
+So there are now more output types.
+
+Some documentation updates.
+
 --2024-04-19--------------------------------------------------------------------
 Much to my surprise JOBLIB is not a reserved name.  I always thought JOBLIB and
 SYSCHK and maybe STEPLIB were only allowed as DD names.  But Amazon's carddemo

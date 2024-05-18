@@ -74,7 +74,7 @@ public static void main(String[] args) throws Exception {
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
-		Boolean first = true;
+		Boolean fileHasBeenOutput = false;
 		fileNb++;
 		ArrayList<PPProc> procsPP = new ArrayList<>();
 		ArrayList<PPJob> jobsPP = new ArrayList<>();
@@ -136,7 +136,7 @@ public static void main(String[] args) throws Exception {
 			if (CLI.outcsvFileName == null) {
 			} else {
 				StringBuffer buf = new StringBuffer();
-				if (first) {
+				if (!fileHasBeenOutput) {
 					buf.append(System.getProperty("line.separator"));
 					buf.append("FILE");
 					buf.append(",");
@@ -145,6 +145,7 @@ public static void main(String[] args) throws Exception {
 					buf.append(dateTimeStamp);
 					buf.append(",");
 					buf.append(uuid.toString());
+					fileHasBeenOutput = true;
 				}
 				buf.append(System.getProperty("line.separator"));
 				jobs.get(0).toCSV(buf, uuid);
@@ -201,20 +202,22 @@ public static void main(String[] args) throws Exception {
 			if (CLI.outcsvFileName == null) {
 			} else {
 				StringBuffer buf = new StringBuffer();
-				if (first) {
+				if (!fileHasBeenOutput) {
 					buf.append(System.getProperty("line.separator"));
 					buf.append("FILE");
 					buf.append(",");
 					buf.append(aFileName);
 					buf.append(",");
+					buf.append(dateTimeStamp);
+					buf.append(",");
 					buf.append(uuid.toString());
+					fileHasBeenOutput = true;
 				}
 				buf.append(System.getProperty("line.separator"));
 				procs.get(0).toCSV(buf, uuid);
 				outcsv.write(buf.toString());
 				LOGGER.fine(buf.toString());
 			}
-			first = false;
 		}
 	}
 
