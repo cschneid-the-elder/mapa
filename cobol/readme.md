@@ -132,7 +132,7 @@ This is free software, developed by an old man trying to keep busy.  There are n
 
 ### Output File Format
 
-The file indicated by the `-out` option is a comma separated value (CSV) file containing identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a program, a program to its CALLs and DDNames, and so on.
+The file indicated by the `-out` option is a comma separated value (CSV) file containing identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a program, a program to its CALLs and DDNames, and so on.  There are sample RDBMS DDL statements in src/sql_mapa_sample_table_ddl, and a script to separate the various record types into files suitable for loading into the sample tables.
 
 More generically...
 
@@ -148,7 +148,7 @@ More generically...
 | UNRESOLVEDCALL | UUID, program UUID, calling program name, call type (see below), cobol identifier that could not be resolved |
 | DD | UUID, program UUID, ddname (see below), cobol file name, open input count, open output count, open i-o count, open extend count |
 | DB2TABLE | UUID, program UUID, table name, type of SQL statement |
-| IMSSEGMENT | UUID, program UUID, table name, type of SQL statement |
+| IMSSEGMENT | UUID, program UUID, table name, type of SQLIMS or EXEC DLI statement |
 | SQLINCLUDE | UUID, program UUID, included member name |
 | CICSSTARTTRANSID | UUID, program UUID, transaction being started |
 | CICSRUNTRANSID | UUID, program UUID, transaction being run asynchronously |

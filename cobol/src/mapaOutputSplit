@@ -1,0 +1,41 @@
+#! /usr/bin/awk -f
+
+BEGIN {
+	FS=","
+	OFS=","
+}
+
+$1 == "FILE" {print $2, $3, $4 > "MAPA_COBOL_FILE"}
+
+$1 == "COPY" {print $2, $3, $4 > "MAPA_COBOL_COPY"}
+
+$1 == "BASIS" {print $2, $3, $4 > "MAPA_COBOL_BASIS"}
+
+$1 == "PGM" || $1 == "FUNCTION" || $1 == "CLASS" \
+	{print $2, $3, $5, $6, $7, $8, $9, $10, $11, $12, $4, $1 > "MAPA_COBOL_PROGRAM"}
+
+$1 == "CALL" {print $2, $3, $4, $5, $6 > "MAPA_COBOL_CALL"}
+
+$1 == "UNRESOLVEDCALL" {print $2, $3, $4, $5, $6 > "MAPA_COBOL_UNRESOLVED_CALL"}
+
+$1 == "DD" {print $2, $3, $4, $5, $6, $7, $8, $9 > "MAPA_COBOL_DD"}
+
+$1 == "DB2TABLE" {print $2, $3, $4, $5 > "MAPA_COBOL_DB2TABLE"}
+
+$1 == "IMSSEGMENT" {print $2, $3, $4, $5 > "MAPA_COBOL_IMSSEGMENT"}
+
+$1 == "SQLINCLUDE" {print $2, $3, $4 > "MAPA_COBOL_SQLINCLUDE"}
+
+$1 == "CICSSTARTTRANSID" {print $2, $3, $4 > "MAPA_COBOL_CICS_START"}
+
+$1 == "CICSRUNTRANSID" {print $2, $3, $4 > "MAPA_COBOL_CICS_RUN"}
+
+$1 == "CICSREAD" || $1 == "CICSDELETE" || \
+$1 == "CICSWRITE" || $1 == "CICSREWRITE" || \
+$1 == "CICSSTARTBR" || $1 == "CICSREADNEXT" || \
+$1 == "CICSREADPREV" {print $2, $3, $4, $1 > "MAPA_COBOL_CICS_IO"}
+
+END {
+	print NR " records read"
+}
+
