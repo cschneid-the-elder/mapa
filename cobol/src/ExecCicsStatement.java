@@ -254,6 +254,7 @@ class ExecCicsStatement {
 		if (identifierValue != null) {
 			String aString = identifierValue.replace("'", "");
 			aString = aString.replace("\"", "");
+			aString = aString.trim();
 			if (!this.identifierValues.contains(aString)) {
 				this.identifierValues.add(aString);
 				this.identifierValueUUIDs.add(UUID.randomUUID());
@@ -281,7 +282,7 @@ class ExecCicsStatement {
 			if (this.identifier != null) {
 				name = this.identifier.getDataNameText();
 			} else if (this.literal != null) {
-				name = this.literal.getText();
+				name = this.literal.getText().replace("'", "").replace("\"", "").trim();
 			} else {
 				name = "<NOTFND>";
 			}
