@@ -77,8 +77,32 @@ class CobolSource {
 		}
 		Boolean idDivFound = lookForIdDiv(currTempFile);
 		if (!idDivFound) {
-			LOGGER.info(sourceFileName + " not COBOL?");
-			this.isCobol = false;
+			/*
+			If an Identification Division was not found, this is not
+			really a COBOL program.  The possibility exists the file is
+			not UTF-8 (which is required).  If we can find a byte whose
+			numeric value is decimal 37 (0x25), then we very likely have
+			a file in one of the EBCDIC code pages.
+			*/
+			byte[] bytes = new byte[1];
+			Boolean foundEBCDIC = false;
+			try {
+				bytes = Files.readAllBytes(Paths.get(currTempFile));
+				for (int i = 0; i < bytes.length && i < 100; i++) {
+					if ((int) bytes[i] == 37) {
+						foundEBCDIC = true;
+						break;
+					}
+				}
+				if (foundEBCDIC) {
+					LOGGER.info(sourceFileName + " not UTF8?");
+				} else {
+					LOGGER.info(sourceFileName + " not COBOL?");
+				}
+				this.isCobol = false;
+			} catch (Exception e) {
+				LOGGER.warning(currTempFile + " Exception instantiating CobolSource" + e);
+			}
 		} else {
 			currTempFile = CLI.copyCompressingContinuations(currTempFile, baseDir, initFileNm);
 			currTempFile = processCDS(currTempFile, baseDir, initFileNm);
