@@ -194,8 +194,13 @@ lint:
 	echo `date` $< >>build.log
 	$(JC) $(JCOPT) $<
 
-./class/DdStatement.class: ./src/DdStatement.java ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/PathDispWrapper.class ./class/DsidWrapper.class
+./class/DdStatement.class: ./src/DdStatement.java ./class/DatasetNameWrapper.class ./class/DispWrapper.class ./class/PathDispWrapper.class ./class/DsidWrapper.class ./class/AmpWrapper.class ./class/AmpParmWrapper.class
 	echo `date` $< >>build.log
 	$(JC) $(JCOPT) $<
+
+./class/JclStep.class: ./src/JclStep.java ./class/DdStatementAmalgamation.class ./class/
+
+./class/DdStatementAmalgamation.class: ./src/DdStatementAmalgamation.java ./class/DdStatement.class
+
 
 

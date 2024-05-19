@@ -866,13 +866,17 @@ public class DdStatement {
 		}
 	}
 
-	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+	public void toCSV(StringBuffer csvOut, UUID parentUUID, Boolean isJob) {
 		Boolean isUnix = false;
 		Boolean isSysout = false;
 
 		this.LOGGER.fine(this.myName + " " + this.ddName + " toCSV");
 
-		csvOut.append("DD");
+		if (isJob) {
+			csvOut.append("JOBSTEPDD");
+		} else {
+			csvOut.append("PROCSTEPDD");
+		}
 		csvOut.append(",");
 		csvOut.append(this.ddName);
 		csvOut.append(",");
@@ -942,7 +946,7 @@ public class DdStatement {
 		}
 
 		if (this.ampw != null) {
-			this.ampw.toCSV(csvOut, this.uuid);
+			this.ampw.toCSV(csvOut, this.uuid, isJob);
 		}
 	}
 

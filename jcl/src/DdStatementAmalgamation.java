@@ -179,12 +179,12 @@ public class DdStatementAmalgamation {
 
 	}
 
-	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+	public void toCSV(StringBuffer csvOut, UUID parentUUID, Boolean isJob) {
 		this.LOGGER.fine(this.myName + " toCSV");
 
 		for (DdStatement dd: this.dds) {
 			csvOut.append(System.getProperty("line.separator"));
-			dd.toCSV(csvOut, parentUUID);
+			dd.toCSV(csvOut, parentUUID, isJob);
 		}
 	}
 

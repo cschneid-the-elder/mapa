@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (19-Apr-2024) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (18-May-2024) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -142,7 +142,7 @@ Warnings will be logged for PROCs and INCLUDEs that cannot be located.  This may
 
 The outtree file is formatted with tab characters to give, once imported into LibreOffice Calc or similar, a tree view of steps executing programs or procedures and the steps in those procedures which may execute other procedures.
 
-The outcsv file has identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a job or jobs, a job to its steps, a step to its DD statements, a step to a PROC it may execute, a PROC to its steps, and so on.
+The outcsv file has identifiers for which type of data is on a given line, followed by pertinent data including surrogate keys (UUIDs) to tie a file to a job or jobs, a job to its steps, a step to its DD statements, a step to a PROC it may execute, a PROC to its steps, and so on.  There are sample RDBMS DDL statements in src/sql_mapa_sample_table_ddl, and a script to separate the various record types into files suitable for loading into the sample tables.
 
 More generically...
 
@@ -151,15 +151,20 @@ More generically...
 | FILE | file being processed, date / time stamp, UUID |
 | JOB | job name, ordinal number of job in file, file UUID, job UUID |
 | PROC | proc name, file UUID, proc UUID |
-| STEP | step name, ordinal number of step in job or proc, job or proc UUID, step UUID, PGM or PROC, what is being executed |
-| DD | ddname, step UUID, dd statement UUID, concatenation number within ddname, file type (Z = z/OS, O = SYSOUT, U = Unix, N = DD *), file or DSN, disp status, disp normal termination disposition, disp abnormal termination disposition |
-| TSOCALL | step UUID, TSO CALL statement UUID, program being executed |
-| DSNRUN | step UUID, DSN RUN statement UUID, program being executed, DB2 plan for program being executed |
-| AMP | dd statement UUID, AMP subparameter UUID, AMP subparameter, AMP subparameter value |
+| JOBSTEP | step name, ordinal number of step in job, job UUID, step UUID, PGM or PROC, what is being executed |
+| PROCSTEP | step name, ordinal number of step in proc, proc UUID, step UUID, PGM or PROC, what is being executed |
+| JOBSTEPDD | ddname, step UUID, dd statement UUID, concatenation number within ddname, file type (Z = z/OS, O = SYSOUT, U = Unix, N = DD *), file or DSN, disp status, disp normal termination disposition, disp abnormal termination disposition |
+| PROCSTEPDD | ddname, step UUID, dd statement UUID, concatenation number within ddname, file type (Z = z/OS, O = SYSOUT, U = Unix, N = DD *), file or DSN, disp status, disp normal termination disposition, disp abnormal termination disposition |
+| JOBSTEPTSOCALL | step UUID, TSO CALL statement UUID, program being executed |
+| PROCSTEPTSOCALL | step UUID, TSO CALL statement UUID, program being executed |
+| JOBSTEPDSNRUN | step UUID, DSN RUN statement UUID, program being executed, DB2 plan for program being executed |
+| PROCSTEPDSNRUN | step UUID, DSN RUN statement UUID, program being executed, DB2 plan for program being executed |
+| JOBSTEPDDAMP | dd statement UUID, AMP subparameter UUID, AMP subparameter, AMP subparameter value |
+| PROCSTEPDDAMP | dd statement UUID, AMP subparameter UUID, AMP subparameter, AMP subparameter value |
 
 ### Build/Execution Environment
 
-This was built on ubuntu 22.04 LTS with ANTLR 4.13.1, openjdk "11.0.21 2023-10-17", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 22.04 LTS with ANTLR 4.13.1, openjdk "11.0.22 2024-01-16", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 ### I Am Not A Java Person
 

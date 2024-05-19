@@ -1,5 +1,7 @@
 ## Mainframe Application Portfolio Analysis
 
+This repository contains ANTLR grammars for CICS APIs and SPIs, COBOL (at least the IBM Z dialect, but an attempt has been made to conform to the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23) DB2z SQL, SQL/PL, and the online utilities, the EXEC DLI and EXEC SQLIMS interfaces to IBM's IMS, and JCL.  These grammars may be of use on their own.
+
 The intent is to create at least part of what I would have wanted when I was being paid to be a mainframe application development tools person.
 
 I was often asked application impact analysis questions, what runs, how often, which program calls which other programs, et. al.

@@ -86,9 +86,9 @@ public class AmpWrapper {
 
 	}
 
-	public void toCSV(StringBuffer csvOut, UUID parentUUID) {
+	public void toCSV(StringBuffer csvOut, UUID parentUUID, Boolean isJob) {
 		for (AmpParmWrapper apw: this.ampws) {
-			apw.toCSV(csvOut, parentUUID);
+			apw.toCSV(csvOut, parentUUID, isJob);
 		}
 	}
 
