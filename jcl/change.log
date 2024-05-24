@@ -1,3 +1,8 @@
+--2024-05-24--------------------------------------------------------------------
+Added a cursory check to try and ensure the input is both JCL and UTF-8 by
+verifying the first two bytes are "//".  If they are not, the file is not
+processed.
+
 --2024-05-18--------------------------------------------------------------------
 Added src/sql_mapa_sample_table_ddl which contains sample DDL to create RDBMS 
 tables to hold the CSV output.
