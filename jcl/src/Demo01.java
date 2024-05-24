@@ -74,6 +74,24 @@ public static void main(String[] args) throws Exception {
 
 	for (String aFileName: CLI.fileNamesToProcess) {
 		LOGGER.info("Processing file " + aFileName);
+		/*
+		If the first two bytes are not "//" then this is either
+		not JCL or it's not UTF-8 (possibly the JCL was not converted
+		from one of the EBCDIC code pages).  Either way, it's not
+		something we can work with.
+		*/
+		try {
+			byte[] bytes = Files.readAllBytes(Paths.get(aFileName));
+			if (bytes.length > 2 && bytes[0] == '/' && bytes[1] == '/') {
+				//do nothing
+			} else {
+				LOGGER.info(aFileName + " first two bytes not \"//\", not JCL and/or not UTF8?");
+				continue;
+			}
+		} catch (Exception e) {
+			LOGGER.warning(aFileName + " Read exception " + e);
+			continue;
+		}
 		Boolean fileHasBeenOutput = false;
 		fileNb++;
 		ArrayList<PPProc> procsPP = new ArrayList<>();
