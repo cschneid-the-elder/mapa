@@ -1,3 +1,13 @@
+--2024-05-26--------------------------------------------------------------------
+Removed obsolete tokens from CobolLexer.g4
+
+EXECCICSTAG
+EXECSQLTAG
+EXECSQLIMSTAG
+EXECCICSLINE
+EXECSQLIMSLINE
+EXECSQLLINE
+ 
 --2024-05-19--------------------------------------------------------------------
 Added code to CobolSource.java to do a minimalist check for a non-UTF8 code
 page in the event an Identification Division cannot be found in the file being
