@@ -993,9 +993,6 @@ DOT
    ;
 
 EQUALCHAR : '=';
-EXECCICSTAG : '*>EXECCICS';      //TODO obsolete?
-EXECSQLTAG : '*>EXECSQL';        //TODO obsolete?
-EXECSQLIMSTAG : '*>EXECSQLIMS';  //TODO obsolete?
 LESSTHANCHAR : '<';
 LESSTHANOREQUAL : '<=';
 LPARENCHAR : '(';
@@ -1134,9 +1131,6 @@ IDENTIFIER
 
 // whitespace, line breaks, comments, ...
 NEWLINE : '\r'? '\n' -> channel(HIDDEN);
-EXECCICSLINE : EXECCICSTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');     //TODO obsolete?
-EXECSQLIMSLINE : EXECSQLIMSTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}'); //TODO obsolete?
-EXECSQLLINE : EXECSQLTAG WS ~('\n' | '\r' | '}')* ('\n' | '\r' | '}');       //TODO obsolete?
 COMMENTENTRYLINE : COMMENTENTRYTAG WS ~('\n' | '\r')*;
 COMMENTLINE : COMMENTTAG WS ~('\n' | '\r')* -> channel(HIDDEN);
 WS : [ \t\f;]+ -> channel(HIDDEN);
