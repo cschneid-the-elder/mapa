@@ -6927,10 +6927,6 @@ SOAPFAULT
 	: S O A P F A U L T 
 	;
 
-SOAPFAULT_	
-	: S O A P F A U L T [ ]+ 	 
-	;
-
 SOAPLEVEL
 	: S O A P L E V E L 
 	;
@@ -8519,7 +8515,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2092 rules generated Wed Apr 17 17:28:37 CDT 2024
+// 2091 rules generated Tue May 28 17:55:05 CDT 2024
 
 mode ARG_MODE;
 

@@ -1,3 +1,7 @@
+--2024-05-28--------------------------------------------------------------------
+New CICSz.jar.  Fixed bug in Makefile when copying new CICSz.jar from cics
+directory to cobol directory.
+
 --2024-05-26--------------------------------------------------------------------
 Removed obsolete tokens from CobolLexer.g4
 

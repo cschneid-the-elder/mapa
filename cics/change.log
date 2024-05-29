@@ -1,3 +1,7 @@
+--2024-05-28--------------------------------------------------------------------
+Remove whitespace after SOAPFAULT in apiSource file.  It was causing an
+anomaly in token generation.
+
 --2024-04-17--------------------------------------------------------------------
 Rebuild after local drive failure.
 
