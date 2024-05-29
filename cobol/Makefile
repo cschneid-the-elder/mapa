@@ -170,25 +170,25 @@ ziplogs:
 	echo `date` $@ >> build.log
 	zip -DjmTv9 testintegrationlogs TestIntegration-*.log
 
-oldjarfile := ./DB2zSQL.jar.$(shell date +%Y%m%d%H%M%S)
+olddb2zjar := ./DB2zSQL.jar.$(shell date +%Y%m%d%H%M%S)
 cpdb2zjar:
 	echo `date` $@ >> build.log
-	cp ./DB2zSQL.jar $(oldjarfile)
+	cp ./DB2zSQL.jar $(olddb2zjar)
 	cp ../db2z/DB2zSQL.jar .
 
-oldjarfile := ./CICSz.jar.$(shell date +%Y%m%d%H%M%S)
+oldcicsjar := ./CICSz.jar.$(shell date +%Y%m%d%H%M%S)
 cpcicszjar:
 	echo `date` $@ >> build.log
 ifneq ("$(wildcard ./CICSz.jar)","")
-	cp ./CICSz.jar $(oldjarfile)
+	cp ./CICSz.jar $(oldcicsjar)
 endif
 	cp ../cics/CICSz.jar .
 
-oldjarfile := ./DLI.jar.$(shell date +%Y%m%d%H%M%S)
+olddlijar := ./DLI.jar.$(shell date +%Y%m%d%H%M%S)
 cpdlijar:
 	echo `date` $@ >> build.log
 ifneq ("$(wildcard ./DLI.jar)","")
-	cp ./DLI.jar $(oldjarfile)
+	cp ./DLI.jar $(olddlijar)
 endif
 	cp ../dli/DLI.jar .
 

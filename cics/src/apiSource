@@ -2477,7 +2477,7 @@ NATLANGINUSE( data-area )
 ESMREASON( data-area )
 ESMRESP( data-area )
 
-@SOAPFAULT 	
+@SOAPFAULT
 +ADD
 FAULTSTRING( data-value )
 FAULTSTRLEN( data-value )
@@ -2486,7 +2486,7 @@ SUBCODESTR( data-value )
 SUBCODELEN( data-value )
 FROMCCSID( data-value )
 
-@SOAPFAULT 
+@SOAPFAULT
 +CREATE
 FAULTCODE( cvda )
 CLIENT
@@ -2507,7 +2507,7 @@ DETAIL( data-value )
 DETAILLENGTH( data-value )
 FROMCCSID( data-value )
 
-@SOAPFAULT 
+@SOAPFAULT
 +DELETE
 
 @SPOOLCLOSE
