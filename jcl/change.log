@@ -11,7 +11,7 @@ works better with the src/tester script.  These are supposed to error out
 and the naming convention is that the test0* scripts are all supposed to
 parse correctly.  test9024.jcl is EBCDIC.
 
-
+Removed unused tokens NULLFILE and IF_REL_EXP_KEYWORD.
 
 --2024-05-24--------------------------------------------------------------------
 Added a cursory check to try and ensure the input is both JCL and UTF-8 by

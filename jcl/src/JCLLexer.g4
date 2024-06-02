@@ -187,9 +187,6 @@ NOT_SYMBOL_DFLT
 	: [^!]
 	->type(NOT_SYMBOL)
 	;
-NULLFILE
-	: N U L L F I L E
-	;
 fragment NUM
 	: [0-9]
 	;
@@ -932,9 +929,6 @@ IF_LPAREN
 IF_RPAREN
 	: RPAREN_DFLT
 	->type(RPAREN)
-	;
-IF_REL_EXP_KEYWORD
-	: IF_ABEND | IF_ABENDCC | IF_RC | IF_RUN
 	;
 IF_STEP
 	: NM_PART DOT_DFLT (NM_PART DOT_DFLT)?
