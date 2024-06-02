@@ -1,0 +1,38 @@
+#! /usr/bin/awk -f
+
+BEGIN {
+	FS=","
+	OFS=","
+}
+
+$1 == "FILE" {print $4, $2, $3 > "MAPA_JCL_FILE"}
+
+$1 == "JOB" {print $5, $4, $2, $3 > "MAPA_JCL_JOB"}
+
+$1 == "PROC" {print $4 $3, $2 > "MAPA_JCL_PROC"}
+
+$1 == "JOBSTEP" {print $5, $4, $2, $3, $6, $7 > "MAPA_JCL_JOB_STEP"}
+
+$1 == "PROCSTEP" {print $5, $4, $2, $3, $6, $7 > "MAPA_JCL_PROC_STEP"}
+
+$1 == "JOBSTEPDD" {print $4, $3, $2, $5, $6, $7, $8, $9, $10 > "MAPA_JCL_JOB_STEP_DD"}
+
+$1 == "PROCSTEPDD" {print $4, $3, $2, $5, $6, $7, $8, $9, $10 > "MAPA_JCL_PROC_STEP_DD"}
+
+$1 == "JOBSTEPTSOCALL" {print $3, $2, $4 > "MAPA_JCL_JOB_STEP_TSOCALL"}
+
+$1 == "PROCSTEPTSOCALL" {print $3, $2, $4 > "MAPA_JCL_PROC_STEP_TSOCALL"}
+
+$1 == "JOBSTEPDSNRUN" {print $3, $2, $4, $5 > "MAPA_JCL_JOB_STEP_DSNRUN"}
+
+$1 == "PROCSTEPDSNRUN" {print $3, $2, $4, $5 > "MAPA_JCL_PROC_STEP_DSNRUN"}
+
+$1 == "JOBSTEPDDAMP" {print $3, $2, $4, $5 > "MAPA_JCL_JOB_STEP_DD_AMP"}
+
+$1 == "PROCSTEPDDAMP" {print $3, $2, $4, $5 > "MAPA_JCL_JOB_STEP_DD_AMP"}
+
+
+END {
+	print NR " records read"
+}
+

@@ -1,3 +1,18 @@
+--2024-06-02--------------------------------------------------------------------
+Actually added src/sql_mapa_sample_table_ddl and src/mapaOutputSplit mentioned
+in the 2024-05-18 change.  Omitted via carelessness.
+
+Modified UNQUOTED_STRING to be a fragment and added "," to the excluded
+characters, allowing this formerly unused token to be used in place of six
+other patterns, all the same.
+
+Renamed test0193.jcl to test9023.jcl and test0194.jcl to test9024.jcl as it
+works better with the src/tester script.  These are supposed to error out
+and the naming convention is that the test0* scripts are all supposed to
+parse correctly.  test9024.jcl is EBCDIC.
+
+Removed unused tokens NULLFILE and IF_REL_EXP_KEYWORD.
+
 --2024-05-24--------------------------------------------------------------------
 Added a cursory check to try and ensure the input is both JCL and UTF-8 by
 verifying the first two bytes are "//".  If they are not, the file is not

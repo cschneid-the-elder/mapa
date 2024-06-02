@@ -107,6 +107,8 @@ then
 	  echo "testdata/test9019.jcl" >> $tmp01
 	  echo "testdata/test9020.jcl" >> $tmp01
 	  echo "testdata/test9022.jcl" >> $tmp01
+	  echo "testdata/test9023.jcl" >> $tmp01
+	  echo "testdata/test9024.jcl" >> $tmp01
 	fi
 	testDemo
 else
