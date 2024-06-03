@@ -1,3 +1,18 @@
+--2024-06-03--------------------------------------------------------------------
+Removed unused tokens...
+
+CNVTSYS
+EXECSYS
+JCLONLY
+LOGGING_DDNAME
+DATASET_NAME
+EXEC_PARM_STRING
+DEST_VALUE
+
+...from tokenSpec in both JCLLexer.g4 and JCLPPLexer.g4 as there were no 
+->type() commands referring to them.
+
+
 --2024-06-02--------------------------------------------------------------------
 Actually added src/sql_mapa_sample_table_ddl and src/mapaOutputSplit mentioned
 in the 2024-05-18 change.  Omitted via carelessness.
