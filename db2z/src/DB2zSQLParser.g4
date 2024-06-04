@@ -12659,7 +12659,10 @@ identifier2
 sqlidentifier
 	: (SQLIDENTIFIER | NONNUMERICLITERAL)
 	;
-	
+
+/*
+Added TIMEOUT per Maarten van Haasteren 2024-06-04.
+*/
 sqlKeyword
 	: (
 	  ABSOLUTE
@@ -13358,6 +13361,7 @@ sqlKeyword
 	| TEMPORARY
 	| THEN
 	| TIME
+	| TIMEOUT
 	| TIMESTAMP
 	| TIMEZONE
 	| TO
