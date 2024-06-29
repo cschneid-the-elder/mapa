@@ -6,8 +6,9 @@ antlrCics=$(grep --count ";" cics/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {
 antlrCbl=$(grep --count ";" cobol/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
 antlrJcl=$(grep --count ";" jcl/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
 antlrDb2=$(grep --count ";" db2z/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
+antlrDli=$(grep --count ";" dli/src/*.g4 |  awk -F ":" '{tot = tot + $2} END {print tot}');
 javaTot=$((${javaCbl}+${javaJcl}));
-antlrTot=$((${antlrCics}+${antlrCbl}+${antlrJcl}+${antlrDb2}));
+antlrTot=$((${antlrCics}+${antlrCbl}+${antlrJcl}+${antlrDb2}+${antlrDli}));
 grandTot=$((${javaTot}+${antlrTot}));
 
 echo "java LOC cobol    = ${javaCbl}"
@@ -16,6 +17,7 @@ echo "antlr cics rules  = ${antlrCics}"
 echo "antlr cobol rules = ${antlrCbl}"
 echo "antlr jcl rules   = ${antlrJcl}"
 echo "antlr db2z rules  = ${antlrDb2}"
+echo "antlr dli rules   = ${antlrDli}"
 echo "java LOC total    = ${javaTot}"
 echo "antlr rules total = ${antlrTot}"
 echo "grand total FWIW  = ${grandTot}"
