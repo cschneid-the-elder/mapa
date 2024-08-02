@@ -1944,6 +1944,29 @@
 
            EXEC CICS
                 INQUIRE
+                SECDISCOVERY
+                STATUS( cvda)
+                CMD( cvda)
+                DB2( cvda)
+                DCT( cvda)
+                FCT( cvda)
+                HFS( cvda)
+                JCT( cvda)
+                PCT( cvda)
+                PPT( cvda)
+                PSB( cvda)
+                RES( cvda)
+                TRAN( cvda)
+                TST( cvda)
+                USER( cvda)
+                LASTSECDTIME( data-area)
+                LASTWRITTIME( data-area)
+                SECDCOUNT( data-area)
+                NEWSECDCOUNT( data-area)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
                 SECRECORDING(data-area)
                 ODADPTRID(data-value)
                 ODADPTRDATA1(data-value)
@@ -2882,6 +2905,8 @@
 
            EXEC CICS PERFORM RESETTIME END-EXEC
 
+           EXEC CICS PERFORM SECDISCOVERY ACTION(cvda) WRITE END-EXEC
+           
            EXEC CICS PERFORM SECURITY REBUILD ESMRESP(data-area)
            END-EXEC
 
@@ -3132,6 +3157,60 @@
                 STATUS(cvda)
                 DISABLED
                 ENABLED
+           END-EXEC
+
+           EXEC CICS
+                SET
+                SECDISCOVERY
+                ON
+                OFF
+                STATUS( cvda)
+                CMD( cvda)
+                DB2( cvda)
+                DCT( cvda)
+                FCT( cvda)
+                HFS( cvda)
+                JCT( cvda)
+                PCT( cvda)
+                PPT( cvda)
+                PSB( cvda)
+                RES( cvda)
+                TST( cvda)
+                USER( cvda)
+                DISCOVERALL
+           END-EXEC
+
+           EXEC CICS
+                SET
+                SECDISCOVERY
+                ON
+                OFF
+                STATUS( cvda)
+                CMD( cvda)
+                DB2( cvda)
+                DCT( cvda)
+                FCT( cvda)
+                HFS( cvda)
+                JCT( cvda)
+                PCT( cvda)
+                PPT( cvda)
+                PSB( cvda)
+                RES( cvda)
+                TST( cvda)
+                USER( cvda)
+                DISCOVERALL
+           END-EXEC
+
+           EXEC CICS
+                SET
+                SECDISCOVERY
+                ON
+           END-EXEC
+
+           EXEC CICS
+                SET
+                SECDISCOVERY
+                DISCOVERALL
            END-EXEC
 
            EXEC CICS

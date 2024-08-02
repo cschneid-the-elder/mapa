@@ -246,6 +246,11 @@ NEWPHRASE( data-area )
 USERID( data-value )
 ESMREASON( data-area )
 ESMRESP( data-area )
+CHANGETIME( data-area )
+DAYSLEFT( data-area )
+EXPIRYTIME( data-area )
+INVALIDCOUNT( data-area )
+LASTUSETIME( data-area )
 
 @CHANGE 
 +PASSWORD( data-value )
@@ -253,6 +258,11 @@ ESMREASON( data-area )
 NEWPASSWORD( data-value )
 USERID( data-value )
 ESMRESP( data-area )
+CHANGETIME( data-area )
+DAYSLEFT( data-area )
+EXPIRYTIME( data-area )
+INVALIDCOUNT( data-area )
+LASTUSETIME( data-area )
 
 @CHANGE 
 +TASK
@@ -2460,6 +2470,11 @@ PHRASELEN( data-value )
 NEWPHRASE( data-area ) 
 NEWPHRASELEN( data-value )
 OIDCARD( data-value )
+CHANGETIME( data-area )
+DAYSLEFT( data-area )
+EXPIRYTIME( data-area )
+INVALIDCOUNT( data-area )
+LASTUSETIME( data-area )
 
 @SIGNON 
 +TOKEN( data-area )

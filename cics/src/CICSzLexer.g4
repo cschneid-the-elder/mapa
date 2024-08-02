@@ -1167,6 +1167,10 @@ CLRPARTN
 	: C L R P A R T N 
 	;
 
+CMD
+	: C M D 
+	;
+
 CMDPROTECT
 	: C M D P R O T E C T 
 	;
@@ -1901,6 +1905,10 @@ DISCARD
 
 DISCONNECT
 	: D I S C O N N E C T 
+	;
+
+DISCOVERALL
+	: D I S C O V E R A L L 
 	;
 
 DISCREQ
@@ -3155,6 +3163,10 @@ HFORMST
 	: H F O R M S T 
 	;
 
+HFS
+	: H F S 
+	;
+
 HFSFILE
 	: H F S F I L E 
 	;
@@ -3603,6 +3615,10 @@ JCL
 	: J C L 
 	;
 
+JCT
+	: J C T 
+	;
+
 JFILEID
 	: J F I L E I D 
 	;
@@ -3807,6 +3823,10 @@ LASTRESETSEC
 	: L A S T R E S E T S E C 
 	;
 
+LASTSECDTIME
+	: L A S T S E C D T I M E 
+	;
+
 LASTUSEDINT
 	: L A S T U S E D I N T 
 	;
@@ -3817,6 +3837,10 @@ LASTUSETIME
 
 LASTWARMTIME
 	: L A S T W A R M T I M E 
+	;
+
+LASTWRITTIME
+	: L A S T W R I T T I M E 
 	;
 
 LDC
@@ -4505,6 +4529,10 @@ NEWPHRASE
 
 NEWPHRASELEN
 	: N E W P H R A S E L E N 
+	;
+
+NEWSECDCOUNT
+	: N E W S E C D C O U N T 
 	;
 
 NEXT
@@ -5855,6 +5883,10 @@ PS
 	: P S 
 	;
 
+PSB
+	: P S B 
+	;
+
 PSDINTERVAL
 	: P S D I N T E R V A L 
 	;
@@ -6319,6 +6351,10 @@ REQUIRED
 	: R E Q U I R E D 
 	;
 
+RES
+	: R E S 
+	;
+
 RESCLASS
 	: R E S C L A S S 
 	;
@@ -6685,6 +6721,14 @@ SDTRAN
 
 SEARCHPOS
 	: S E A R C H P O S 
+	;
+
+SECDCOUNT
+	: S E C D C O U N T 
+	;
+
+SECDISCOVERY
+	: S E C D I S C O V E R Y 
 	;
 
 SECONDS
@@ -7883,6 +7927,10 @@ TRAILER
 	: T R A I L E R 
 	;
 
+TRAN
+	: T R A N 
+	;
+
 TRANCLASS
 	: T R A N C L A S S 
 	;
@@ -7993,6 +8041,10 @@ TSQUEUE
 
 TSQUEUELIMIT
 	: T S Q U E U E L I M I T 
+	;
+
+TST
+	: T S T 
 	;
 
 TSYSTEM
@@ -8515,7 +8567,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2091 rules generated Tue May 28 17:55:05 CDT 2024
+// 2104 rules generated Fri Aug  2 11:12:53 CDT 2024
 
 mode ARG_MODE;
 
