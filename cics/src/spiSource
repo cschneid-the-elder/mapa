@@ -2228,6 +2228,27 @@ USERID(data-area)
 +RRMS
 OPENSTATUS(cvda)
 
+@INQUIRE
++SECDISCOVERY
+STATUS( cvda)
+CMD( cvda)
+DB2( cvda)
+DCT( cvda)
+FCT( cvda)
+HFS( cvda)
+JCT( cvda)
+PCT( cvda)
+PPT( cvda)
+PSB( cvda)
+RES( cvda)
+TRAN( cvda)
+TST( cvda)
+USER( cvda)
+LASTSECDTIME( data-area)
+LASTWRITTIME( data-area)
+SECDCOUNT( data-area)
+NEWSECDCOUNT( data-area)
+
 @INQUIRE 
 +SECRECORDING[ data-value ]
 START
@@ -3193,6 +3214,11 @@ SCAN
 @PERFORM 
 +RESETTIME
 
+@PERFORM
++SECDISCOVERY
+ACTION( cvda)
+WRITE
+
 @PERFORM 
 +SECURITY 
 +REBUILD
@@ -3912,6 +3938,25 @@ STATUS(cvda)
 DISABLED
 ENABLED
 VERSION(cvda)
+
+@SET
++SECDISCOVERY
+ON
+OFF
+STATUS( cvda)
+CMD( cvda)
+DB2( cvda)
+DCT( cvda)
+FCT( cvda)
+HFS( cvda)
+JCT( cvda)
+PCT( cvda)
+PPT( cvda)
+PSB( cvda)
+RES( cvda)
+TST( cvda)
+USER( cvda)
+DISCOVERALL
 
 @SET 
 +SECRECORDING(data-value)

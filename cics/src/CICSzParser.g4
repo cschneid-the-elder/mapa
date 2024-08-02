@@ -509,6 +509,7 @@ cicsSPI
 	| inquireProgram
 	| inquireReqid
 	| inquireRrms
+	| inquireSecdiscovery
 	| inquireSecrecording
 	| inquireStatistics
 	| inquireStorage
@@ -553,6 +554,7 @@ cicsSPI
 	| performJvmserver
 	| performPipeline
 	| performResettime
+	| performSecdiscovery
 	| performSecurityRebuild
 	| performShutdown
 	| performShutdownImmediate
@@ -597,6 +599,7 @@ cicsSPI
 	| setPipeline
 	| setProcesstype
 	| setProgram
+	| setSecdiscovery
 	| setSecrecording
 	| setStatistics
 	| setSysdumpcode
@@ -3359,6 +3362,12 @@ inquireRrms
 	)
 	;
 
+inquireSecdiscovery
+	: (
+	 inquireOption secdiscoveryOption inquireSecdiscoveryOptions*
+	)
+	;
+
 inquireSecrecording
 	: (
 	 inquireOption secrecordingOption inquireSecrecordingOptions*
@@ -3620,6 +3629,12 @@ performPipeline
 performResettime
 	: (
 	 performOption resettimeOption performResettimeOptions*
+	)
+	;
+
+performSecdiscovery
+	: (
+	 performOption secdiscoveryOption performSecdiscoveryOptions*
 	)
 	;
 
@@ -3887,6 +3902,12 @@ setProgram
 	)
 	;
 
+setSecdiscovery
+	: (
+	 setOption secdiscoveryOption setSecdiscoveryOptions*
+	)
+	;
+
 setSecrecording
 	: (
 	 setOption secrecordingOption setSecrecordingOptions*
@@ -4055,7 +4076,7 @@ setXmltransform
 	)
 	;
 
-// 569 rules generated Tue May 28 17:55:10 CDT 2024
+// 572 rules generated Fri Aug  2 11:13:09 CDT 2024
 
 abendOptions
 	: (
@@ -4336,6 +4357,11 @@ changePhraseOptions
 	| useridOption
 	| esmreasonOption
 	| esmrespOption
+	| changetimeOption
+	| daysleftOption
+	| expirytimeOption
+	| invalidcountOption
+	| lastusetimeOption
 	| exceptionOptions
 	)
 	;
@@ -4346,6 +4372,11 @@ changePasswordOptions
 	| newpasswordOption
 	| useridOption
 	| esmrespOption
+	| changetimeOption
+	| daysleftOption
+	| expirytimeOption
+	| invalidcountOption
+	| lastusetimeOption
 	| exceptionOptions
 	)
 	;
@@ -7051,6 +7082,11 @@ signonOptions
 	| newphraseOption
 	| newphraselenOption
 	| oidcardOption
+	| changetimeOption
+	| daysleftOption
+	| expirytimeOption
+	| invalidcountOption
+	| lastusetimeOption
 	| exceptionOptions
 	)
 	;
@@ -10889,6 +10925,30 @@ inquireRrmsOptions
 	)
 	;
 
+inquireSecdiscoveryOptions
+	: (
+	statusOption
+	| cmdOption
+	| db2Option
+	| dctOption
+	| fctOption
+	| hfsOption
+	| jctOption
+	| pctOption
+	| pptOption
+	| psbOption
+	| resOption
+	| tranOption
+	| tstOption
+	| userOption
+	| lastsecdtimeOption
+	| lastwrittimeOption
+	| secdcountOption
+	| newsecdcountOption
+	| exceptionOptions
+	)
+	;
+
 inquireSecrecordingOptions
 	: (
 	startOption
@@ -11962,6 +12022,14 @@ performResettimeOptions
 	)
 	;
 
+performSecdiscoveryOptions
+	: (
+	actionOption
+	| writeOption
+	| exceptionOptions
+	)
+	;
+
 performSecurityRebuildOptions
 	: (
 	esmrespOption
@@ -12797,6 +12865,28 @@ setProgramOptions
 	)
 	;
 
+setSecdiscoveryOptions
+	: (
+	onOption
+	| offOption
+	| statusOption
+	| cmdOption
+	| db2Option
+	| dctOption
+	| fctOption
+	| hfsOption
+	| jctOption
+	| pctOption
+	| pptOption
+	| psbOption
+	| resOption
+	| tstOption
+	| userOption
+	| discoverallOption
+	| exceptionOptions
+	)
+	;
+
 setSecrecordingOptions
 	: (
 	actionOption
@@ -13276,7 +13366,7 @@ setXmltransformOptions
 	)
 	;
 
-// 569 rules generated Tue May 28 17:55:10 CDT 2024
+// 572 rules generated Fri Aug  2 11:13:09 CDT 2024
 
 abcodeOption
 	: (
@@ -14802,6 +14892,12 @@ clrpartnOption
 	)
 	;
 
+cmdOption
+	: (
+	CMD arg
+	)
+	;
+
 cmdprotectOption
 	: (
 	CMDPROTECT arg
@@ -15602,7 +15698,7 @@ daysleftOption
 
 db2Option
 	: (
-	DB2
+	DB2 arg?
 	)
 	;
 
@@ -15656,7 +15752,7 @@ dcounterOption
 
 dctOption
 	: (
-	DCT
+	DCT arg?
 	)
 	;
 
@@ -15903,6 +15999,12 @@ discardOption
 disconnectOption
 	: (
 	DISCONNECT
+	)
+	;
+
+discoverallOption
+	: (
+	DISCOVERALL
 	)
 	;
 
@@ -17084,7 +17186,7 @@ fciOption
 
 fctOption
 	: (
-	FCT
+	FCT arg?
 	)
 	;
 
@@ -17784,6 +17886,12 @@ hformstOption
 	)
 	;
 
+hfsOption
+	: (
+	HFS arg
+	)
+	;
+
 hfsfileOption
 	: (
 	HFSFILE arg
@@ -18456,6 +18564,12 @@ jclOption
 	)
 	;
 
+jctOption
+	: (
+	JCT arg
+	)
+	;
+
 jfileidOption
 	: (
 	JFILEID arg
@@ -18762,6 +18876,12 @@ lastresetsecOption
 	)
 	;
 
+lastsecdtimeOption
+	: (
+	LASTSECDTIME arg
+	)
+	;
+
 lastusedintOption
 	: (
 	LASTUSEDINT arg
@@ -18777,6 +18897,12 @@ lastusetimeOption
 lastwarmtimeOption
 	: (
 	LASTWARMTIME arg
+	)
+	;
+
+lastwrittimeOption
+	: (
+	LASTWRITTIME arg
 	)
 	;
 
@@ -19809,6 +19935,12 @@ newphraseOption
 newphraselenOption
 	: (
 	NEWPHRASELEN arg
+	)
+	;
+
+newsecdcountOption
+	: (
+	NEWSECDCOUNT arg
 	)
 	;
 
@@ -21206,7 +21338,7 @@ pcdsasizeOption
 
 pctOption
 	: (
-	PCT
+	PCT arg?
 	)
 	;
 
@@ -21590,7 +21722,7 @@ postOption
 
 pptOption
 	: (
-	PPT
+	PPT arg?
 	)
 	;
 
@@ -21831,6 +21963,12 @@ prtyagingOption
 psOption
 	: (
 	PS arg
+	)
+	;
+
+psbOption
+	: (
+	PSB arg
 	)
 	;
 
@@ -22530,6 +22668,12 @@ requiredOption
 	)
 	;
 
+resOption
+	: (
+	RES arg
+	)
+	;
+
 resclassOption
 	: (
 	RESCLASS arg
@@ -23079,6 +23223,18 @@ sdtranOption
 searchposOption
 	: (
 	SEARCHPOS arg
+	)
+	;
+
+secdcountOption
+	: (
+	SECDCOUNT arg
+	)
+	;
+
+secdiscoveryOption
+	: (
+	SECDISCOVERY
 	)
 	;
 
@@ -24876,6 +25032,12 @@ trailerOption
 	)
 	;
 
+tranOption
+	: (
+	TRAN arg
+	)
+	;
+
 tranclassOption
 	: (
 	TRANCLASS arg?
@@ -25041,6 +25203,12 @@ tsqueueOption
 tsqueuelimitOption
 	: (
 	TSQUEUELIMIT arg
+	)
+	;
+
+tstOption
+	: (
+	TST arg
 	)
 	;
 
@@ -25328,7 +25496,7 @@ usecountOption
 
 userOption
 	: (
-	USER
+	USER arg?
 	)
 	;
 
@@ -25824,5 +25992,5 @@ zcptracingOption
 	)
 	;
 
-// 2376 rules generated Tue May 28 17:55:10 CDT 2024
+// 2395 rules generated Fri Aug  2 11:13:09 CDT 2024
 

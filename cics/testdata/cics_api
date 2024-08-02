@@ -213,6 +213,11 @@
                 USERID(X)
                 ESMREASON(X)
                 ESMRESP(X)
+                CHANGETIME(X)
+                DAYSLEFT(X)
+                EXPIRYTIME(X)
+                INVALIDCOUNT(X)
+                LASTUSETIME(X)
            END-EXEC
            EXEC CICS
                 CHANGE
@@ -221,6 +226,11 @@
                 USERID(X)
                 ESMREASON(X)
                 ESMRESP(X)
+                CHANGETIME(X)
+                DAYSLEFT(X)
+                EXPIRYTIME(X)
+                INVALIDCOUNT(X)
+                LASTUSETIME(X)
            END-EXEC
            EXEC CICS
                 CHANGE
@@ -2538,6 +2548,11 @@
                 NEWPHRASE(X)
                 NEWPHRASELEN(X)
                 OIDCARD(X)
+                CHANGETIME(X)
+                DAYSLEFT(X)
+                EXPIRYTIME(X)
+                INVALIDCOUNT(X)
+                LASTUSETIME(X)
            END-EXEC
            EXEC CICS
                 SIGNON
