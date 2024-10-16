@@ -1,24 +1,26 @@
 #!/bin/bash
 
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar cobol/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar db2z/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar jcl/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar cics/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar dli/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar cobol/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar db2z/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar jcl/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar cics/
-cp --no-clobber ~/Downloads/antlr-4.13.1-complete.jar dli/
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' cobol/manifest
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' jcl/manifest
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' cobol/Makefile
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' db2z/Makefile
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' jcl/Makefile
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' cics/Makefile
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' dli/Makefile
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' db2z/src/tester
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' jcl/src/tester
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' cics/src/tester
-sed -ie 's/antlr-4.11.1-complete.jar/antlr-4.13.1-complete.jar/' dli/src/tester
+sufx=$(date +%Y%m%d%H%M%S)
+
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cobol/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar db2z/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar jcl/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cics/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar dli/lib/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cobol/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar db2z/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar jcl/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cics/
+cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar dli/
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' cobol/manifest
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' jcl/manifest
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' cobol/Makefile
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' db2z/Makefile
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' jcl/Makefile
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' cics/Makefile
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' dli/Makefile
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' db2z/src/tester
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' jcl/src/tester
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' cics/src/tester
+sed -i.${sufx} 's/antlr-4.13.1-complete.jar/antlr-4.13.2-complete.jar/' dli/src/tester
 

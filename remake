@@ -1,0 +1,32 @@
+# 
+all:
+	touch -c cics/src/CICSzLexer.g4
+	$(MAKE) -C cics 
+	$(MAKE) -C cics test
+	$(MAKE) -C cics jar
+	touch -c db2z/src/DB2zSQLLexer.g4
+	$(MAKE) -C db2z 
+	$(MAKE) -C db2z test
+	$(MAKE) -C db2z jar
+	touch -c dli/src/DLILexer.g4
+	$(MAKE) -C dli 
+	$(MAKE) -C dli test
+	$(MAKE) -C dli jar
+	touch -c cobol/src/CobolLexer.g4 cobol/src/CobolPreprocessorLexer.g4
+	$(MAKE) -C cobol 
+	$(MAKE) -C cobol cpcicszjar
+	$(MAKE) -C cobol cpdb2zjar
+	$(MAKE) -C cobol cpdlijar
+	$(MAKE) -C cobol jar
+	$(MAKE) -C cobol testLocal
+	$(MAKE) -C cobol testLocalx
+	$(MAKE) -C cobol testNist
+	touch -c jcl/src/JCLLexer.g4 jcl/src/JCLPPLexer.g4 jcl/src/DSNTSOLexer.g4 jcl/src/TSOLexer.g4 jcl/src/JCLDDAMPLexer.g4
+	$(MAKE) -C jcl 
+	$(MAKE) -C jcl test
+	$(MAKE) -C jcl testpp
+	$(MAKE) -C jcl testtso
+	$(MAKE) -C jcl testamp
+	$(MAKE) -C jcl jar
+	$(MAKE) -C jcl testdemo
+

@@ -174,7 +174,7 @@ For reasons both obscure and annoying, the CICS APIs are not deduplicated, so if
 
 ### Build/Execution Environment
 
-This was built on ubuntu 22.04 LTS with ANTLR 4.13.1, openjdk version "11.0.22 2024-01-16", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on ubuntu 22.04 LTS with ANTLR 4.13.2, openjdk version "11.0.24 2024-07-16", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 The GNU toolchain is used for building.  If you want to build from scratch, i.e. a repository cloned with git, there are some instructions at the top of the Makefile.
 
