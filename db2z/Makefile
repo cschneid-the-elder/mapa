@@ -21,7 +21,7 @@ ifdef OS
 endif
 
 JC = javac
-CP = "./class$(SEP)./lib/antlr-4.13.1-complete.jar"
+CP = "./class$(SEP)./lib/antlr-4.13.2-complete.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -34,7 +34,7 @@ AOPT = -visitor -listener
 
 ./src/%.tokens: ./src/%.g4
 	echo `date` $< >>build.log
-	java -jar ./lib/antlr-4.13.1-complete.jar $(AOPT) -Xexact-output-dir -o $(dir $<) $<
+	java -jar ./lib/antlr-4.13.2-complete.jar $(AOPT) -Xexact-output-dir -o $(dir $<) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 
 all: ./src/DB2zSQLLexer.tokens ./src/DB2zSQLParser.tokens
@@ -53,11 +53,11 @@ init:
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig DB2zSQL startRule -gui -tokens < ./testdata/sql_$(n)
+	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.2-complete.jar" org.antlr.v4.gui.TestRig DB2zSQL startRule -gui -tokens < ./testdata/sql_$(n)
 
 testtree:
 	echo `date` $@ $(n) >> build.log
-	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.1-complete.jar" org.antlr.v4.gui.TestRig DB2zSQL startRule -tree -tokens < ./testdata/sql_$(n)
+	java -cp "./class$(SEP).$(SEP)./lib/antlr-4.13.2-complete.jar" org.antlr.v4.gui.TestRig DB2zSQL startRule -tree -tokens < ./testdata/sql_$(n)
 
 test:
 ifeq ($(strip $(n)),)

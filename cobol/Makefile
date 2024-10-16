@@ -57,7 +57,7 @@ endif
 
 JC = javac
 #CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
-CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.1-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar$(SEP)./DLI.jar"
+CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.2-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar$(SEP)./DLI.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -70,7 +70,7 @@ AOPT = -visitor -listener
 
 ./src/%.tokens: ./src/%.g4
 	echo `date` $< >>build.log
-	java -jar ./lib/antlr-4.13.1-complete.jar $(AOPT) $<
+	java -jar ./lib/antlr-4.13.2-complete.jar $(AOPT) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
@@ -144,27 +144,27 @@ testAWS:
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigpp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/testantlr$(n).cbl
 
 testrigx:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/test$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrignist:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/nist/$(n)
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig Cobol startRule -gui -tokens < ./testdata/nist/$(n)
 
 testrigppx:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/local/test$(n).cbl
 
 testrigppnist:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig CobolPreprocessor startRule -gui -tokens < ./testdata/nist/$(n)
 
 ziplogs:
 	echo `date` $@ >> build.log

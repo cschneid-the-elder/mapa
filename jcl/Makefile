@@ -43,7 +43,7 @@ ifdef OS
 endif
 
 JC = javac
-CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.1-complete.jar"
+CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.2-complete.jar"
 JCOPT = -d ./class -g -Xlint:all -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
 AOPT = -visitor -listener
@@ -55,7 +55,7 @@ AOPT = -visitor -listener
 
 ./src/%.tokens: ./src/%.g4
 	echo `date` $< >>build.log
-	java -jar ./lib/antlr-4.13.1-complete.jar $(AOPT) $<
+	java -jar ./lib/antlr-4.13.2-complete.jar $(AOPT) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
@@ -94,7 +94,7 @@ endif
 
 testrig:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig JCL startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testpp:
 ifeq ($(strip $(n)),)
@@ -107,19 +107,19 @@ endif
 
 testrigpp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCLPP startRule -gui -tokens < ./testdata/test$(n).jcl
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig JCLPP startRule -gui -tokens < ./testdata/test$(n).jcl
 
 testrigtso:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig TSO startRule -gui -tokens < ./testdata/test$(n).tso
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig TSO startRule -gui -tokens < ./testdata/test$(n).tso
 
 testrigdsn:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig DSNTSO startRule -gui -tokens < ./testdata/test$(n).dsn
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig DSNTSO startRule -gui -tokens < ./testdata/test$(n).dsn
 
 testrigamp:
 	echo `date` $@ $(n) >> build.log
-	java -cp ./class$(SEP).$(SEP)./antlr-4.13.1-complete.jar org.antlr.v4.gui.TestRig JCLDDAMP startRule -gui -tokens < ./testdata/test$(n).amp
+	java -cp ./class$(SEP).$(SEP)./antlr-4.13.2-complete.jar org.antlr.v4.gui.TestRig JCLDDAMP startRule -gui -tokens < ./testdata/test$(n).amp
 
 testtso:
 ifeq ($(strip $(n)),)
