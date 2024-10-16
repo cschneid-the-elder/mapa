@@ -1,3 +1,7 @@
+--2024-10-16--------------------------------------------------------------------
+Removed ./lib directory and its contents.  They were redundant.  Updated 
+Makefile accordingly.
+
 --2024-10-15--------------------------------------------------------------------
 ANTLR 4.13.2, Makefile, manifest, and src/tester changes.  New CICSz.jar,
 DB2zSQL.jar, DLI.jar.

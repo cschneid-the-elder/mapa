@@ -2,11 +2,6 @@
 
 sufx=$(date +%Y%m%d%H%M%S)
 
-cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cobol/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar db2z/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar jcl/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cics/lib/
-cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar dli/lib/
 cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar cobol/
 cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar db2z/
 cp --no-clobber ~/Downloads/antlr-4.13.2-complete.jar jcl/

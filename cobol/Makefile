@@ -57,7 +57,7 @@ endif
 
 JC = javac
 #CP = "./class:./lib/commons-cli-1.4.jar:./lib/antlr-4.9.2-complete.jar:./DB2zSQL.jar"
-CP = "./class$(SEP)./lib/commons-cli-1.4.jar$(SEP)./lib/antlr-4.13.2-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar$(SEP)./DLI.jar"
+CP = "./class$(SEP)./commons-cli-1.4.jar$(SEP)./antlr-4.13.2-complete.jar$(SEP)./DB2zSQL.jar$(SEP)./CICSz.jar$(SEP)./DLI.jar"
 JCOPT = -d ./class -g -Xlint -cp $(CP)
 #JCOPT = -d ./class -g -cp $(CP)
 JCOPT1 = -d ./class -cp $(CP)
@@ -70,7 +70,7 @@ AOPT = -visitor -listener
 
 ./src/%.tokens: ./src/%.g4
 	echo `date` $< >>build.log
-	java -jar ./lib/antlr-4.13.2-complete.jar $(AOPT) $<
+	java -jar ./antlr-4.13.2-complete.jar $(AOPT) $<
 	$(JC) $(JCOPT1) ./src/$**.java
 	
 
