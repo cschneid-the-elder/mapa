@@ -10493,9 +10493,35 @@ scalarFunctionInvocation
 	| aiAnalogyFunction
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
+	| trimFunction
 	| extractFunction
 	| interpretFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
+	)
+	;
+
+/*
+ Trim function added per Martijn Rutte 2024-10-18.
+*/
+trimFunction
+	: (
+	TRIM LPAREN
+	(trimFunctionIndicator?
+	literal?
+	FROM)?
+	expression
+	RPAREN
+	)
+	;
+
+trimFunctionIndicator
+	: (
+	BOTH 
+	| BOTH_ABBREVIATED  
+	| LEADING 
+	| LEADING_ABBREVIATED 
+	| TRAILING 
+	| TRAILING_ABBREVIATED
 	)
 	;
 
@@ -12724,6 +12750,7 @@ sqlKeyword
 	| BIT
 	| BLOB
 	| BOTH
+	| BOTH_ABBREVIATED
 	| BSDS
 	| BUFFERPOOL
 	| BUFFERPOOLS
@@ -13045,6 +13072,8 @@ sqlKeyword
 	| LAST_VALUE
 	| LC_CTYPE
 	| LEAD
+	| LEADING
+	| LEADING_ABBREVIATED
 	| LEAVE
 	| LEFT
 	| LEVEL
@@ -13368,6 +13397,8 @@ sqlKeyword
 	| TOKEN
 	| TRACE
 	| TRACKMOD
+	| TRAILING
+	| TRAILING_ABBREVIATED
 	| TRANSACTION
 	| TRANSFER
 	| TRIGGER

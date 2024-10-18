@@ -2622,8 +2622,28 @@ PRESERVE
 	: P R E S E R V E
 	;
 
+BOTH_ABBREVIATED
+	: B
+	;
+
 BOTH
 	: B O T H 
+	;
+
+LEADING_ABBREVIATED
+	: L
+	;
+
+LEADING
+	: L E A D I N G
+	;
+
+TRAILING_ABBREVIATED
+	: T
+	;
+
+TRAILING
+	: T R A I L I N G
 	;
 
 DESCRIBE

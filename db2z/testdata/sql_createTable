@@ -8857,3 +8857,34 @@ CREATE TABLE ROCINANTE
   )
   ;
 
+CREATE TABLE PUR_N_KLEEN (
+      A CHAR
+    , B CHAR
+    , C CHAR
+    , D CHAR
+    , E CHAR
+    , F CHAR
+    , G CHAR
+    , H CHAR
+    , I CHAR
+    , J CHAR
+    , K CHAR
+    , L CHAR
+    , M CHAR
+    , N CHAR
+    , O CHAR
+    , P CHAR
+    , Q CHAR
+    , R CHAR
+    , S CHAR
+    , T CHAR
+    , U CHAR
+    , V CHAR
+    , W CHAR
+    , X CHAR
+    , Y CHAR
+    , Z CHAR
+    )
+    IN DATABASE INNER_PLANETS
+    ;
+
