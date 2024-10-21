@@ -814,7 +814,7 @@ jobGroupERROR_RelOp : (
     JOBGROUP_ERROR_GT | 
     JOBGROUP_ERROR_LT
   ) ;
-jobGroupERROR_Keyword : (ABEND | ABENDCC | RUN | RC) ;
+jobGroupERROR_Keyword : (ABEND | ABENDCC | FAIL | RUN | RC) ;
 jobGroupERROR_Test : NOT_SYMBOL* jobGroupERROR_Keyword
     (NOT_SYMBOL* jobGroupERROR_RelOp (FALSE | TRUE | NUM_LIT | ALNUMNAT))? ;
 
