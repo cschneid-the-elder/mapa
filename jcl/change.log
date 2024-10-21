@@ -1,3 +1,14 @@
+--2024-10-21--------------------------------------------------------------------
+Added FAIL keyword to ERROR option of JOBGROUP in JCLLexer.g4, JCLParser.g4,
+JCLPPLexer.g4, and JCLPPParser.g4.
+
+Added '¬' character to NOT_SYMBOL_DFLT token in JCL lexers.
+
+Added DEPLEVEL token to DSNTSOLexer.g4 and deplevel DSNTSOParser.g4 rule in
+support of BIND and REBIND commands.
+
+Corrected pathdefault DSNTSOParser.g4 rule to not require an argument.
+
 --2024-10-16--------------------------------------------------------------------
 Removed ./lib directory and its contents.  They were redundant.  Updated 
 Makefile and src/tester accordingly.

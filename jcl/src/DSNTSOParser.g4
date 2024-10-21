@@ -92,6 +92,7 @@ bindOptions
 	| decdel
 	| defer
 	| degree
+	| deplevel
 	| deploy
 	| description
 	| descstat
@@ -251,6 +252,10 @@ degree
 	: DEGREE arg
 	;
 
+deplevel
+	: DEPLEVEL arg
+	;
+
 deploy
 	: DEPLOY arg
 	;
@@ -372,7 +377,7 @@ path
 	;
 
 pathdefault
-	: PATHDEFAULT arg
+	: PATHDEFAULT
 	;
 
 pklist

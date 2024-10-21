@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze JCL and record pertinent facts in some persistent store.
 
-Currently (18-May-2024) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
+Currently (21-Oct-2024) a work in progress.  Demonstration application using the generated parser seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.  Generating a "tree" view (TSV) suitable for loading into LibreOffice Calc seems to be working.
 
 "Seems to be working" means that I've run through some JCL I've written specifically with an eye towards tripping up my own logic, along with JCL supplied with the Hercules emulator in its SYS1.PROCLIB and SYS2.PROCLIB libraries.
 
@@ -13,6 +13,8 @@ Currently (18-May-2024) a work in progress.  Demonstration application using the
 The demonstration application is just that, an attempt to demonstrate that the grammars can be used to do something useful.
 
 Grammars for the `AMP DD` statement parm, TSO commands, and the DSN command processor are now included.
+
+This should be up to date as of the 2024-08-24 last update date for the z/OS 3.1.0 - MVS JCL Reference.
 
 ### How To Run
 
