@@ -1,3 +1,7 @@
+--2024-10-18--------------------------------------------------------------------
+Added syntax for TRIM function per Martijn Rutte.  Added new lexer tokens in
+support of TRIM function to sqlKeyword parser rule.
+
 --2024-10-16--------------------------------------------------------------------
 Removed ./lib directory and its contents.  They were redundant.  Updated 
 Makefile and src/tester accordingly.
