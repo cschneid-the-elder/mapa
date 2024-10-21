@@ -261,6 +261,10 @@ DEGREE
 	: D E G R E E 
 	;
 
+DEPLEVEL
+	: D E P L E V E L
+	;
+
 DEPLOY
 	: D E P L O Y 
 	;
