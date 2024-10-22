@@ -1,6 +1,9 @@
 --2024-10-22--------------------------------------------------------------------
 Added NOKEYDELETE to INDEXDEFER option of LOAD.
 
+Added AI_COMMONALITY function.
+
+
 --2024-10-18--------------------------------------------------------------------
 Added syntax for TRIM function per Martijn Rutte.  Added new lexer tokens in
 support of TRIM function to sqlKeyword parser rule.

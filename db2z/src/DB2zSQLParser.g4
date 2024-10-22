@@ -10511,6 +10511,7 @@ scalarFunctionInvocation
 	| xmlqueryFunction
 	| xmlserializeFunction
 	| aiAnalogyFunction
+	| aiCommonalityFunction
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
 	| trimFunction
@@ -11008,6 +11009,7 @@ scalarFunction
 	| ADD_DAYS
 	| ADD_MONTHS
 	| AI_ANALOGY
+	| AI_COMMONALITY
 	| AI_SEMANTIC_CLUSTER
 	| AI_SIMILARITY
 	| ARRAY_DELETE
@@ -11346,6 +11348,15 @@ aiAnalogyFunctionTarget2
 	: aiAnalogyFunctionTarget
 	;
 
+aiCommonalityFunction
+	: (
+	AI_COMMONALITY
+	LPAREN
+	aiFunctionExpression
+	RPAREN
+	)
+	;
+	
 aiSemanticClusterFunction
 	: (
 	AI_SEMANTIC_CLUSTER LPAREN

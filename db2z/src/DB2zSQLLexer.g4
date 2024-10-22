@@ -3358,6 +3358,10 @@ AI_ANALOGY
 	: A I '_' A N A L O G Y
 	;
 
+AI_COMMONALITY
+	: A I '_' C O M M O N A L I T Y
+	;
+
 AI_SEMANTIC_CLUSTER
 	: A I '_' S E M A N T I C '_' C L U S T E R
 	;
