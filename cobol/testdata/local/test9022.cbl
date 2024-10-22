@@ -2149,6 +2149,7 @@
                 FROMCCSID(X)
                 FROMCODEPAGE(X)
                 APPEND
+                PREPEND
            END-EXEC
 
            EXEC CICS
@@ -2163,6 +2164,7 @@
                 FROMCCSID(X)
                 FROMCODEPAGE(X)
                 APPEND
+                PREPEND
            END-EXEC
 
            EXEC CICS

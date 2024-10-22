@@ -4076,7 +4076,7 @@ setXmltransform
 	)
 	;
 
-// 572 rules generated Fri Aug  2 11:13:09 CDT 2024
+// 572 rules generated Tue Oct 22 16:21:34 CDT 2024
 
 abendOptions
 	: (
@@ -6365,6 +6365,7 @@ putContainerOptions
 	| charOption
 	| fromccsidOption
 	| appendOption
+	| prependOption
 	| fromcodepageOption
 	| exceptionOptions
 	)
@@ -6380,6 +6381,7 @@ put64ContainerOptions
 	| charOption
 	| fromccsidOption
 	| appendOption
+	| prependOption
 	| fromcodepageOption
 	| exceptionOptions
 	)
@@ -13366,7 +13368,7 @@ setXmltransformOptions
 	)
 	;
 
-// 572 rules generated Fri Aug  2 11:13:09 CDT 2024
+// 572 rules generated Tue Oct 22 16:21:34 CDT 2024
 
 abcodeOption
 	: (
@@ -21744,6 +21746,12 @@ prepareOption
 	)
 	;
 
+prependOption
+	: (
+	PREPEND
+	)
+	;
+
 primpredOption
 	: (
 	PRIMPRED arg
@@ -25992,5 +26000,5 @@ zcptracingOption
 	)
 	;
 
-// 2395 rules generated Fri Aug  2 11:13:09 CDT 2024
+// 2396 rules generated Tue Oct 22 16:21:34 CDT 2024
 

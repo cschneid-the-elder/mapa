@@ -1,3 +1,9 @@
+--2024-10-22--------------------------------------------------------------------
+Added PREPEND option to PUT CONTAINER (CHANNEL) and PUT64 CONTAINER.
+
+Changed Makefile to better work with how GNU make is supposed to work.  Added
+dependencies to the parser and lexer instead of manual triggering of rules.
+
 --2024-10-16--------------------------------------------------------------------
 Removed ./lib directory and its contents.  They were redundant.  Updated 
 Makefile and src/tester accordingly.
