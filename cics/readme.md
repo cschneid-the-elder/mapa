@@ -21,3 +21,5 @@ The purpose here is to provide grammars useful in analyzing existing code.
 
 This was built on Ubuntu 22.04 LTS with ANTLR 4.13.2 and openjdk version "11.0.24" 2024-07-16.
 
+The grammars should be up to date with CICS Transaction Server for z/OS 6.x documentation dated 2024-10-18.
+

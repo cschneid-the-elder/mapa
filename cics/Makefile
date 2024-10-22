@@ -10,8 +10,8 @@
 
 # Targets:
 # 
-# gentokens  generate tokens from source, construct lexer grammar
-# genrules   generate rules from source, construct parser grammar
+# extractapi extract test data from ../cobol/testdata/local/test9022.cbl
+# extractspi extract test data from ../cobol/testdata/local/test9026.cbl
 # 
 # To the extent possible, maintenance should be done on the apiSource
 # and spiSource files and the CICSz*Template* files.
@@ -19,8 +19,6 @@
 # To build...
 # 
 # make init
-# make gentokens
-# make genrules
 # make
 # 
 
@@ -83,8 +81,22 @@ jar:
 	echo `date` $@ >> build.log
 	jar cf CICSz.jar -C class .
 
+oldspifile := ./testdata/cics_spi.$(shell date +%Y%m%d%H%M%S)
+extractspi:
+ifneq ("$(wildcard testdata/cics_spi)","")
+	mv testdata/cics_spi $(oldspifile)
+endif
+	cat ../cobol/testdata/local/test9026.cbl | src/extractCICS > testdata/cics_spi
+
+oldapifile := ./testdata/cics_api.$(shell date +%Y%m%d%H%M%S)
+extractapi:
+ifneq ("$(wildcard testdata/cics_api)","")
+	mv testdata/cics_api $(oldapifile)
+endif
+	cat ../cobol/testdata/local/test9022.cbl | src/extractCICS > testdata/cics_api
+
 oldlexerfile := ./src/CICSzLexer.g4.$(shell date +%Y%m%d%H%M%S)
-gentokens:
+./src/CICSzLexer.g4: ./src/apiSource ./src/spiSource ./src/CICSzLexerTemplate01 ./src/CICSzLexerTemplate02
 	echo `date` $@ >> build.log
 # 
 # sed '/^#.*$/d'         get rid of comment lines
@@ -103,7 +115,7 @@ endif
 	cat src/CICSzLexerTemplate01 src/testTokens src/CICSzLexerTemplate02 > src/CICSzLexer.g4
 
 oldparserfile := ./src/CICSzParser.g4.$(shell date +%Y%m%d%H%M%S)
-genrules:
+./src/CICSzParser.g4: ./src/apiSource ./src/spiSource ./src/CICSzParserTemplate01 ./src/CICSzParserTemplate02 ./src/CICSzParserTemplate03
 	echo `date` $@ >> build.log
 # 
 # grep '^[@+]'           get just control records
@@ -134,22 +146,8 @@ ifneq ("$(wildcard src/CICSzParser.g4)","")
 endif
 	cat src/CICSzParserTemplate01 src/testRules4_00 src/CICSzParserTemplate02 src/testRules4_01 src/CICSzParserTemplate03 src/testRules1 src/testRules3 src/testRules2 > src/CICSzParser.g4
 
-oldspifile := ./testdata/cics_spi.$(shell date +%Y%m%d%H%M%S)
-extractspi:
-ifneq ("$(wildcard testdata/cics_spi)","")
-	mv testdata/cics_spi $(oldspifile)
-endif
-	cat ../cobol/testdata/local/test9026.cbl | src/extractCICS > testdata/cics_spi
+./src/CICSzLexer.tokens: ./src/CICSzLexer.g4
 
-oldapifile := ./testdata/cics_api.$(shell date +%Y%m%d%H%M%S)
-extractapi:
-ifneq ("$(wildcard testdata/cics_api)","")
-	mv testdata/cics_api $(oldapifile)
-endif
-	cat ../cobol/testdata/local/test9022.cbl | src/extractCICS > testdata/cics_api
-
-./src/CICSzLexer.tokens: 
-
-./src/CICSzParser.tokens: ./src/CICSzLexer.tokens
+./src/CICSzParser.tokens: ./src/CICSzLexer.tokens ./src/CICSzParser.g4
 
 
