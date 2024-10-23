@@ -10515,6 +10515,7 @@ scalarFunctionInvocation
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
 	| trimFunction
+	| stripFunction
 	| extractFunction
 	| interpretFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
@@ -10543,6 +10544,17 @@ trimFunctionIndicator
 	| LEADING_ABBREVIATED 
 	| TRAILING 
 	| TRAILING_ABBREVIATED
+	)
+	;
+
+stripFunction
+	: (
+	STRIP LPAREN
+	(trimFunctionIndicator?
+	literal?
+	FROM)?
+	expression
+	RPAREN
 	)
 	;
 

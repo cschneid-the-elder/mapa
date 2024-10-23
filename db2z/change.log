@@ -3,6 +3,9 @@ Added NOKEYDELETE to INDEXDEFER option of LOAD.
 
 Added AI_COMMONALITY function.
 
+Added test cases for GETVARIABLE scalar function.
+
+Added syntax for STRIP function, which is identical to the TRIM function.
 
 --2024-10-18--------------------------------------------------------------------
 Added syntax for TRIM function per Martijn Rutte.  Added new lexer tokens in

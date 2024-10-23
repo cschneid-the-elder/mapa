@@ -1,0 +1,23 @@
+SELECT STRIP(L '0' FROM KIRKWALL) INTO BRODGAR FROM SYSIBM.SYSDUMMY1;
+
+select strip(both '1' from SUMBURGH) into LERWICK from SHETLAND;
+select strip(b '2' from SUMBURGH) into LERWICK from SHETLAND;
+select strip(leading '3' from SUMBURGH) into LERWICK from SHETLAND;
+select strip(l '4' from SUMBURGH) into LERWICK from SHETLAND;
+select strip(trailing '5' from SUMBURGH) into LERWICK from SHETLAND;
+select strip(t '6' from SUMBURGH) into LERWICK from SHETLAND;
+
+select strip('7' from SUMBURGH) into LERWICK from SHETLAND;
+
+select strip(both from SUMBURGH) into LERWICK from SHETLAND;
+select strip(b from SUMBURGH) into LERWICK from SHETLAND;
+select strip(leading from SUMBURGH) into LERWICK from SHETLAND;
+select strip(l from SUMBURGH) into LERWICK from SHETLAND;
+select strip(trailing from SUMBURGH) into LERWICK from SHETLAND;
+select strip(t from SUMBURGH) into LERWICK from SHETLAND;
+
+select strip(OLD_SCATNESS) into BRESSAY from ESHANESS;
+
+SELECT STRIP(B FROM :MOUSA_BROCH) INTO MOUSA FROM SYSIBM.SYSDUMMY1;
+
+
