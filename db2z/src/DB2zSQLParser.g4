@@ -6345,12 +6345,16 @@ insertStatement
 	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
 	includeColumns?
 	(OVERRIDING USER VALUE)?
-	((VALUES (valuesList1 |
-		(LPAREN valuesList1 (COMMA valuesList1)* RPAREN)))
+	((VALUES ((valuesList1 (COMMA valuesList1)*) |
+		insertStatementListOfValues (COMMA insertStatementListOfValues)*))
 	| ((WITH commonTableExpression (COMMA commonTableExpression)*)?
 		fullSelect isolationClause? querynoClause?)
 	| multipleRowInsert)
 	)
+	;
+
+insertStatementListOfValues
+	: (LPAREN valuesList1 (COMMA valuesList1)* RPAREN)
 	;
 
 labelStatement

@@ -7,6 +7,18 @@ Added test cases for GETVARIABLE scalar function.
 
 Added syntax for STRIP function, which is identical to the TRIM function.
 
+Added new syntax for DB2 13 FL506 to INSERT statement VALUES clause...
+
+  INSERT INTO ARCONIA (NAME, FLOOR)
+  VALUES ('CHARLES', 7), ('OLIVER', 8), ('MABEL', 9);
+  
+ ...and...
+ 
+   INSERT INTO ARCONIA (NAME)
+   VALUES 'CHARLES', 'OLIVER', 'MABEL'
+
+...are now valid.
+
 --2024-10-18--------------------------------------------------------------------
 Added syntax for TRIM function per Martijn Rutte.  Added new lexer tokens in
 support of TRIM function to sqlKeyword parser rule.
