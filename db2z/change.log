@@ -1,3 +1,15 @@
+--2024-10-29--------------------------------------------------------------------
+Changed wlmEnvironmentOption1 to wlmEnvironmentOption2 in
+createFunctionStatementExternalScalarOptions and
+createFunctionStatementExternalTableOptions per Erwin Veenstra.  It appears
+the syntax diagram in the IBM documentation has been incorrect since at least
+April of 2000.
+
+wlmEnvironmentOption1 is now commented out and can be removed.  I'm leaving it
+there for now as a reminder that my source documents are the product of human
+effort at are thus not _necessarily_ correct.  That this doesn't happen more
+often is actually quite impressive.
+
 --2024-10-22--------------------------------------------------------------------
 Added NOKEYDELETE to INDEXDEFER option of LOAD.
 

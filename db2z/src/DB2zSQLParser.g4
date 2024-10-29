@@ -8086,6 +8086,11 @@ parameterDeclaration3
 	)
 	;
 
+/*
+wlmEnvironmentOption1 changed to wlmEnvironmentOption2 per
+Erwin Veenstra 2024-10-29.  It appears the syntax diagram in 
+the IBM documentation has been incorrect since April of 2000.
+*/
 createFunctionStatementExternalScalarOptions
 	: (
 	externalNameOption1
@@ -8103,7 +8108,7 @@ createFunctionStatementExternalScalarOptions
 	| dbinfoOption
 	| cardinalityOption
 	| collectionIdOption
-	| wlmEnvironmentOption1
+	| wlmEnvironmentOption2
 	| asuTimeOption
 	| stayResidentOption
 	| programTypeOption
@@ -8243,9 +8248,18 @@ collectionIdOption
 	: ((NO COLLID) | (COLLID collectionID))
 	;
 
+/*
+This was formerly (and incorrectly) used in createFunctionStatementExternalScalarOptions
+and createFunctionStatementExternalTableOptions.  It doesn't match the ALTER statement
+for either function and doesn't match the explanatory text in the documentation.  My
+mistake was I only looked at the syntax diagram when I was creating the grammar.
+
+Error found by Erwin Veenstra 2024-10-24.
+
 wlmEnvironmentOption1
 	: (WLM ENVIRONMENT (identifier | (LPAREN identifier RPAREN)))
 	;
+*/
 
 wlmEnvironmentOption2
 	: (WLM ENVIRONMENT (identifier | (LPAREN identifier COMMA SPLAT RPAREN)))
@@ -8317,7 +8331,11 @@ parameterOption2
 	: (PARAMETER ccsidClause1)
 	;
 
-//
+/*
+wlmEnvironmentOption1 changed to wlmEnvironmentOption2 per
+Erwin Veenstra 2024-10-29.  It appears the syntax diagram in 
+the IBM documentation has been incorrect since April of 2000.
+*/
 
 createFunctionStatementExternalTableOptions
 	: (
@@ -8336,7 +8354,7 @@ createFunctionStatementExternalTableOptions
 	| dbinfoOption
 	| cardinalityOption
 	| collectionIdOption
-	| wlmEnvironmentOption1
+	| wlmEnvironmentOption2
 	| asuTimeOption
 	| stayResidentOption
 	| programTypeOption
