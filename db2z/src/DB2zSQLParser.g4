@@ -1565,8 +1565,27 @@ dsnutilUCSLoadDrainOption
 dsnutilUCSLoadIndexdeferOption
 	: (
 	DSNUTIL_INDEXDEFER 
-	((DSNUTIL_NONE | DSNUTIL_NPI | DSNUTIL_ALL) 
-	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) (DSNUTIL_NONE | DSNUTIL_NPI | DSNUTIL_ALL) DSNUTIL_RPAREN1))
+	(dsnutilUCSLoadIndexdeferOptionNone
+	| dsnutilUCSLoadIndexdeferOptionNPI
+	| dsnutilUCSLoadIndexdeferOptionAll)
+	)
+	;
+
+dsnutilUCSLoadIndexdeferOptionNone
+	: (DSNUTIL_NONE
+	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) DSNUTIL_NONE DSNUTIL_RPAREN1))
+	;
+
+dsnutilUCSLoadIndexdeferOptionNPI
+	: ((DSNUTIL_NPI
+	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) DSNUTIL_NPI DSNUTIL_RPAREN1))
+	(DSNUTIL_NONUNIQUE | DSNUTIL_NOKEYDELETE)?
+	)
+	;
+
+dsnutilUCSLoadIndexdeferOptionAll
+	: ((DSNUTIL_ALL
+	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) DSNUTIL_ALL DSNUTIL_RPAREN1))
 	DSNUTIL_NONUNIQUE?
 	)
 	;
@@ -5431,6 +5450,7 @@ dsnutilUCSKeyword
 	| DSNUTIL_NOCOPYPEND
 	| DSNUTIL_NODUMP
 	| DSNUTIL_NODUMPS
+	| DSNUTIL_NOKEYDELETE
 	| DSNUTIL_NONE
 	| DSNUTIL_NONUNIQUE
 	| DSNUTIL_NOPAD
@@ -6325,12 +6345,16 @@ insertStatement
 	INSERT INTO tableName (LPAREN columnName (COMMA columnName)* RPAREN)?
 	includeColumns?
 	(OVERRIDING USER VALUE)?
-	((VALUES (valuesList1 |
-		(LPAREN valuesList1 (COMMA valuesList1)* RPAREN)))
+	((VALUES ((valuesList1 (COMMA valuesList1)*) |
+		insertStatementListOfValues (COMMA insertStatementListOfValues)*))
 	| ((WITH commonTableExpression (COMMA commonTableExpression)*)?
 		fullSelect isolationClause? querynoClause?)
 	| multipleRowInsert)
 	)
+	;
+
+insertStatementListOfValues
+	: (LPAREN valuesList1 (COMMA valuesList1)* RPAREN)
 	;
 
 labelStatement
@@ -10491,9 +10515,11 @@ scalarFunctionInvocation
 	| xmlqueryFunction
 	| xmlserializeFunction
 	| aiAnalogyFunction
+	| aiCommonalityFunction
 	| aiSemanticClusterFunction
 	| aiSimilarityFunction
 	| trimFunction
+	| stripFunction
 	| extractFunction
 	| interpretFunction
 	| ((schemaName DOT)? scalarFunction LPAREN (expression (COMMA expression)*)? RPAREN (AS NONNUMERICLITERAL)?)
@@ -10522,6 +10548,17 @@ trimFunctionIndicator
 	| LEADING_ABBREVIATED 
 	| TRAILING 
 	| TRAILING_ABBREVIATED
+	)
+	;
+
+stripFunction
+	: (
+	STRIP LPAREN
+	(trimFunctionIndicator?
+	literal?
+	FROM)?
+	expression
+	RPAREN
 	)
 	;
 
@@ -10988,6 +11025,7 @@ scalarFunction
 	| ADD_DAYS
 	| ADD_MONTHS
 	| AI_ANALOGY
+	| AI_COMMONALITY
 	| AI_SEMANTIC_CLUSTER
 	| AI_SIMILARITY
 	| ARRAY_DELETE
@@ -11326,6 +11364,15 @@ aiAnalogyFunctionTarget2
 	: aiAnalogyFunctionTarget
 	;
 
+aiCommonalityFunction
+	: (
+	AI_COMMONALITY
+	LPAREN
+	aiFunctionExpression
+	RPAREN
+	)
+	;
+	
 aiSemanticClusterFunction
 	: (
 	AI_SEMANTIC_CLUSTER LPAREN
