@@ -1,3 +1,19 @@
+--2024-11-18--------------------------------------------------------------------
+Changed TIME ZONE to (TIME ZONE) | TIMEZONE) per Maarten van Haasteren.  This
+is yet another case where DB2 is more lenient than the documentation indicates.
+Parser rules affected...
+
+builtInType
+functionBuiltInType
+procedureBuiltinType
+createTypeArrayBuiltinType
+createVariableBuiltInType
+castBuiltInType
+timeZoneSpecificExpression
+
+Also modified DSNUTIL_TIMESTAMP_WITH_TIME_ZONE in the lexer to allow both
+TIME ZONE and TIMEZONE.
+
 --2024-10-29--------------------------------------------------------------------
 Changed wlmEnvironmentOption1 to wlmEnvironmentOption2 in
 createFunctionStatementExternalScalarOptions and
