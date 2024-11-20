@@ -1,3 +1,28 @@
+--2024-11-20--------------------------------------------------------------------
+Modified parser rules ifThen and ifElse per issue 215.  Simplified to just...
+
+  statement+
+
+...instead of...
+
+  (NEXT SENTENCE | statement*)
+
+...as the statement rule includes the nextSentenceStatement rule.  Also, the
+original probably should have had parentheses around NEXT SENTENCE or made
+use of the nextSentenceStatement rule as in the issue 215 writeup.
+
+Thank you to William Fahle.
+
+Side note, it is apparently syntactically correct (though pointless) 
+to code...
+
+  IF A = B
+      NEXT SENTENCE
+      NEXT SENTENCE
+  END-IF.
+
+...as GnuCOBOL 3.2.0 allows it without complaint.
+
 --2024-10-16--------------------------------------------------------------------
 Removed ./lib directory and its contents.  They were redundant.  Updated 
 Makefile accordingly.
