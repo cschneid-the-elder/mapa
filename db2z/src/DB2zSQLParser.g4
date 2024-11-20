@@ -8944,6 +8944,9 @@ ccsidClause1? forDataQualifier?
 (ccsidClause1 | forDataQualifier)*
 
 ...as they were for procedureBuiltInType on 2023-05-24.
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
 */
 functionBuiltInType
 	: (
@@ -8964,7 +8967,7 @@ functionBuiltInType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE))?)
 	| ROWID
 	| XML
 	)
@@ -8974,6 +8977,9 @@ functionBuiltInType
 Changed CHAR and CLOB from ccsidClause1? forDataQualifier? to
 (ccsidClause1 | forDataQualifier)* to allow the clauses to be
 in any order.  2023-05-24
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
 */
 procedureBuiltinType
 	: (
@@ -8994,11 +9000,17 @@ procedureBuiltinType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE))?)
 	| ROWID
 	)
 	;
 
+/*
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
+
+*/
 createTypeArrayBuiltinType
 	: (
 	SMALLINT
@@ -9018,7 +9030,7 @@ createTypeArrayBuiltinType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE))?)
 	)
 	;
 
@@ -9030,6 +9042,12 @@ createTypeArrayBuiltinType2
 	)
 	;
 
+/*
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
+
+*/
 createVariableBuiltInType
 	: (
 	SMALLINT
@@ -9049,7 +9067,7 @@ createVariableBuiltInType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE))?)
 	)
 	;
 
@@ -10112,6 +10130,12 @@ dataType
 	: (builtInType | distinctTypeName)
 	;
 
+/*
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
+
+*/
 builtInType
 	: (
 	SMALLINT
@@ -10131,7 +10155,7 @@ builtInType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE))?)
 	| ROWID
 	| (XML (LPAREN xmlTypeModifier RPAREN)?)
 	)
@@ -11754,11 +11778,15 @@ namespacePrefix
 /*
 Added integerInParens? and | ((WITH | WITHOUT) TIME ZONE) per
 Martijn Rutte 2023-05-23.
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
+
 */
 timeZoneSpecificExpression
 	: timeZoneExpressionSubset
 	integerInParens?
-	((AT LOCAL) | (AT TIME ZONE timeZoneExpressionSubset) | ((WITH | WITHOUT) TIME ZONE))
+	((AT LOCAL) | (AT ((TIME ZONE) | TIMEZONE) timeZoneExpressionSubset) | ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE)))
 	;
 
 /*
@@ -11916,6 +11944,10 @@ castDataType
 
 /*
 Modified to allow forDataQualifier on its own per Martijn Rutte 2023-05-24.
+
+Changed TIME ZONE to ((TIME ZONE) | TIMEZONE) per 
+Maarten van Haasteren 2024-11-18.
+
 */
 castBuiltInType
 	: (
@@ -11936,7 +11968,7 @@ castBuiltInType
 	| (((BINARY LARGE OBJECT) | BLOB) length?)
 	| DATE
 	| TIME
-	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) TIME ZONE)?)
+	| (TIMESTAMP integerInParens? ((WITH | WITHOUT) ((TIME ZONE) | TIMEZONE))?)
 	| ROWID
 	| XML
 	)
