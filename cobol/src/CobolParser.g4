@@ -2252,11 +2252,11 @@ ifStatement
    ;
 
 ifThen
-   : THEN? (NEXT SENTENCE | statement*)
+   : THEN? statement+
    ;
 
 ifElse
-   : ELSE (NEXT SENTENCE | statement*)
+   : ELSE statement+
    ;
 
 // initialize statement
