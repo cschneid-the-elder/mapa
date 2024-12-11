@@ -6957,9 +6957,13 @@ sqlplRepeatStatement
 	)
 	;
 
+/*
+RESIGNAL on its own is legal per https://www.ibm.com/docs/en/db2-for-zos/13?topic=cnsp-raising-condition-within-sql-procedure-by-using-signal-resignal-statements
+as noted by Martijn Rutte 2024-12-11.
+*/
 sqlplResignalStatement
 	: (sqlplStartLabel? RESIGNAL 
-	sqlplResignalValue sqlplResignalInformation?
+	(sqlplResignalValue sqlplResignalInformation?)?
 	SEMICOLON?
 	)
 	;
