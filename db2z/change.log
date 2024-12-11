@@ -1,3 +1,7 @@
+--2024-12-11--------------------------------------------------------------------
+Fixed sqlplResignalStatement so RESIGNAL on its own is valid.  Noted by
+Martijn Rutte.
+
 --2024-11-18--------------------------------------------------------------------
 Changed TIME ZONE to (TIME ZONE) | TIMEZONE) per Maarten van Haasteren.  This
 is yet another case where DB2 is more lenient than the documentation indicates.
