@@ -10721,10 +10721,20 @@ externalFunctionInvocation
 	RPAREN)
 	;
 
+/*
+Added (LPAREN fullSelect RPAREN) because parsing
+failed on a scalarFullSelect due to its requirement
+that the fullSelect be in parens.  The expression
+had to be in parens here, then the fullSelect also
+had to be in parens, so two sets of parens were
+required by this rule when only one was required
+by DB2z. 2024-12-12
+*/
 labeledDuration
 	: (
 	(functionInvocation
 	| (LPAREN expression RPAREN)
+	| (LPAREN fullSelect RPAREN)
 	| INTEGERLITERAL
 	| columnName
 	| variable)
