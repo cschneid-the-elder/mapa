@@ -1,3 +1,15 @@
+--2024-12-12--------------------------------------------------------------------
+Fixed labeledDuration parser rule so it no longer requires two sets of 
+paretheses around a fullSelect.
+
+Previously, labeledDuration included LPAREN expression RPAREN, and expression
+included scalarFullSelect, which included LPAREN fullSelect RPAREN.  Adding
+LPAREN fullSelect RPAREN to labeledDuration so it no longer needed to "go
+through" the scalarFullSelect rule seemed the simplest and least intrusive 
+solution.
+
+Noted by Martijn Rutte.
+
 --2024-12-11--------------------------------------------------------------------
 Fixed sqlplResignalStatement so RESIGNAL on its own is valid.  Noted by
 Martijn Rutte.
