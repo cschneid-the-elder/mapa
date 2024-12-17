@@ -1,3 +1,6 @@
+--2024-12-17--------------------------------------------------------------------
+Refactor triggerDefinition to allow for more specific error detection.  
+
 --2024-12-12--------------------------------------------------------------------
 Fixed labeledDuration parser rule so it no longer requires two sets of 
 paretheses around a fullSelect.

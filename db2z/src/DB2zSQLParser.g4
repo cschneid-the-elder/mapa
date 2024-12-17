@@ -7696,10 +7696,32 @@ userOptions
 	;
 
 triggerDefinition
+	: triggerDefinitionBefore
+	| triggerDefinitionAfter
+	| triggerDefinitionInsteadOf
+	;
+
+triggerDefinitionBefore
 	: (
-	triggerActivationTime triggerEvent ON tableName
+	triggerActivationTimeBefore triggerEvent ON tableName
 	triggerReferencingPhrase?
-	triggerGranularity MODE_ DB2SQL triggerDefinitionOption? triggeredAction
+	triggerGranularity MODE_ DB2SQL triggerDefinitionOption? triggeredActionBefore
+	)
+	;
+
+triggerDefinitionAfter
+	: (
+	triggerActivationTimeAfter triggerEvent ON tableName
+	triggerReferencingPhrase?
+	triggerGranularity MODE_ DB2SQL triggerDefinitionOption? triggeredActionAfter
+	)
+	;
+
+triggerDefinitionInsteadOf
+	: (
+	triggerActivationTimeInsteadOf triggerEvent ON tableName
+	triggerReferencingPhrase?
+	triggerGranularity MODE_ DB2SQL triggerDefinitionOption? triggeredActionInsteadOf
 	)
 	;
 
@@ -7722,12 +7744,16 @@ triggerAdvancedReferencingPhrase
 		(((OLD ROW?) | (NEW ROW?) | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)
 	;
 	
-triggerActivationTime
-	: (
-	(NO CASCADE BEFORE)
-	| AFTER
-	| (INSTEAD OF)
-	)
+triggerActivationTimeBefore
+	: NO CASCADE BEFORE
+	;
+
+triggerActivationTimeAfter
+	: AFTER
+	;
+
+triggerActivationTimeInsteadOf
+	: INSTEAD OF
 	;
 
 triggerAdvancedActivationTime
@@ -7753,9 +7779,21 @@ triggerGranularity
 	)
 	;
 
-triggeredAction
+triggeredActionBefore
 	: (
-	(WHEN LPAREN searchCondition RPAREN)? sqlTriggerBody
+	(WHEN LPAREN searchCondition RPAREN)? sqlTriggerBodyBefore
+	)
+	;
+
+triggeredActionAfter
+	: (
+	(WHEN LPAREN searchCondition RPAREN)? sqlTriggerBodyAfter
+	)
+	;
+
+triggeredActionInsteadOf
+	: (
+	(WHEN LPAREN searchCondition RPAREN)? sqlTriggerBodyInsteadOf
 	)
 	;
 
@@ -7765,10 +7803,24 @@ triggeredAdvancedAction
 	)
 	;
 
-sqlTriggerBody
+sqlTriggerBodyBefore
 	: (
-	triggeredSqlStatement
-	| (BEGIN ATOMIC (triggeredSqlStatement SEMICOLON)+ END)
+	triggeredSqlStatementBefore
+	| (BEGIN ATOMIC (triggeredSqlStatementBefore SEMICOLON)+ END)
+	)
+	;
+
+sqlTriggerBodyAfter
+	: (
+	triggeredSqlStatementAfter
+	| (BEGIN ATOMIC (triggeredSqlStatementAfter SEMICOLON)+ END)
+	)
+	;
+
+sqlTriggerBodyInsteadOf
+	: (
+	triggeredSqlStatementInsteadOf
+	| (BEGIN ATOMIC (triggeredSqlStatementInsteadOf SEMICOLON)+ END)
 	)
 	;
 
@@ -7779,7 +7831,24 @@ sqlTriggerAdvancedBody
 	)
 	;
 
-triggeredSqlStatement
+triggeredSqlStatementBefore
+	: (
+	callStatement
+	| searchedDelete  {notifyErrorListeners("Searched DELETE invalid in triggered action");}
+	| ((commonTableExpression)? fullSelect)
+	| insertStatement {notifyErrorListeners("INSERT invalid in triggered action");}
+	| mergeStatement {notifyErrorListeners("MERGE invalid in triggered action");}
+	| refreshTableStatement {notifyErrorListeners("REFRESH TABLE invalid in triggered action");}
+	| setAssignmentStatement
+	| signalStatement
+	| truncateStatement {notifyErrorListeners("TRUNCATE invalid in triggered action");}
+	| searchedUpdate {notifyErrorListeners("Searched UPDATE invalid in triggered action");}
+	| valuesStatement
+	| triggerSqlStatementNotAllowed
+	)
+	;
+
+triggeredSqlStatementAfter
 	: (
 	callStatement
 	| searchedDelete
@@ -7787,12 +7856,114 @@ triggeredSqlStatement
 	| insertStatement
 	| mergeStatement
 	| refreshTableStatement
-	| setAssignmentStatement
+	| setAssignmentStatement {notifyErrorListeners("SET invalid in triggered action");}
 	| signalStatement
 	| truncateStatement
 	| searchedUpdate
 	| valuesStatement
+	| triggerSqlStatementNotAllowed
 	)
+	;
+
+triggeredSqlStatementInsteadOf
+	: (
+	callStatement
+	| searchedDelete
+	| ((commonTableExpression)? fullSelect)
+	| insertStatement
+	| mergeStatement
+	| refreshTableStatement
+	| setAssignmentStatement {notifyErrorListeners("SET invalid in triggered action");}
+	| signalStatement
+	| truncateStatement
+	| searchedUpdate
+	| valuesStatement
+	| triggerSqlStatementNotAllowed
+	)
+	;
+
+triggerSqlStatementNotAllowed
+	: allocateCursorStatement {notifyErrorListeners("ALLOCATE CURSOR invalid in triggered action");}
+	| alterDatabaseStatement {notifyErrorListeners("ALTER DATABASE invalid in triggered action");}
+	| alterFunctionStatement {notifyErrorListeners("ALTER FUNCTION invalid in triggered action");}
+	| alterIndexStatement {notifyErrorListeners("ALTER INDEX invalid in triggered action");}
+	| alterMaskStatement {notifyErrorListeners("ALTER MASK invalid in triggered action");}
+	| alterPermissionStatement {notifyErrorListeners("ALTER PERMISSION invalid in triggered action");}
+	| alterProcedureStatement {notifyErrorListeners("ALTER PROCEDURE invalid in triggered action");}
+	| alterProcedureSQLPLStatement {notifyErrorListeners("ALTER SQL/PL PROCEDURE invalid in triggered action");}
+	| alterSequenceStatement {notifyErrorListeners("ALTER SEQUENCE invalid in triggered action");}
+	| alterStogroupStatement {notifyErrorListeners("ALTER STOGROUP invalid in triggered action");}
+	| alterTableStatement {notifyErrorListeners("ALTER TABLE invalid in triggered action");}
+	| alterTablespaceStatement {notifyErrorListeners("ALTER TABLESPACE invalid in triggered action");}
+	| alterTriggerStatement {notifyErrorListeners("ALTER TRIGGER invalid in triggered action");}
+	| alterTriggerAdvancedStatement {notifyErrorListeners("ALTER TRIGGER (advanced) invalid in triggered action");}
+	| alterTrustedContextStatement {notifyErrorListeners("ALTER TRUSTED CONTEXT invalid in triggered action");}
+	| alterViewStatement {notifyErrorListeners("ALTER VIEW invalid in triggered action");}
+	| associateLocatorsStatement {notifyErrorListeners("ASSOCIATE LOCATOR invalid in triggered action");}
+	| beginDeclareSectionStatement {notifyErrorListeners("BEGIN DECLARE invalid in triggered action");}
+	| closeStatement {notifyErrorListeners("CLOSE invalid in triggered action");}
+	| commitStatement {notifyErrorListeners("COMMIT invalid in triggered action");}
+	| commentStatement {notifyErrorListeners("COMMENT invalid in triggered action");}
+	| connectStatement {notifyErrorListeners("CONNECT invalid in triggered action");}
+	| createAliasStatement {notifyErrorListeners("CREATE ALIAS invalid in triggered action");}
+	| createAuxiliaryTableStatement {notifyErrorListeners("CREATE AUXILIARY TABLE invalid in triggered action");}
+	| createDatabaseStatement {notifyErrorListeners("CREATE DATABASE invalid in triggered action");}
+	| createFunctionStatement {notifyErrorListeners("CREATE FUNCTION invalid in triggered action");}
+	| createGlobalTemporaryTableStatement {notifyErrorListeners("CREATE GLOBAL TEMPORARY TABLE invalid in triggered action");}
+	| createIndexStatement {notifyErrorListeners("CREATE INDEX invalid in triggered action");}
+	| createLobTablespaceStatement {notifyErrorListeners("CREATE LOB TABLESPACE invalid in triggered action");}
+	| createMaskStatement {notifyErrorListeners("CREATE MASK invalid in triggered action");}
+	| createPermissionStatement {notifyErrorListeners("CREATE PERMISSION invalid in triggered action");}
+	| createProcedureStatement {notifyErrorListeners("CREATE PROCEDURE invalid in triggered action");}
+	| createProcedureSQLPLStatement {notifyErrorListeners("CREATE SQL/PL PROCEDURE invalid in triggered action");}
+	| createRoleStatement {notifyErrorListeners("CREATE ROLE invalid in triggered action");}
+	| createSequenceStatement {notifyErrorListeners("CREATE SEQUENCE invalid in triggered action");}
+	| createStogroupStatement {notifyErrorListeners("CREATE STOGROUP invalid in triggered action");}
+	| createTableStatement {notifyErrorListeners("CREATE TABLE invalid in triggered action");}
+	| createTablespaceStatement {notifyErrorListeners("CREATE TABLESPACE invalid in triggered action");}
+	| createTriggerStatement {notifyErrorListeners("CREATE TRIGGER invalid in triggered action");}
+	| createTriggerAdvancedStatement {notifyErrorListeners("CREATE TRIGGER (advanced) invalid in triggered action");}
+	| createTrustedContextStatement {notifyErrorListeners("CREATE TRUSTED CONTEXT invalid in triggered action");}
+	| createTypeArrayStatement {notifyErrorListeners("CREATE TYPE ARRAY invalid in triggered action");}
+	| createTypeDistinctStatement {notifyErrorListeners("CREATE TYPE DISTINCT invalid in triggered action");}
+	| createVariableStatement {notifyErrorListeners("CREATE VARIABLE invalid in triggered action");}
+	| createViewStatement {notifyErrorListeners("CREATE VIEW invalid in triggered action");}
+	| declareCursorStatement {notifyErrorListeners("DECLARE CURSOR invalid in triggered action");}
+	| declareGlobalTemporaryTableStatement {notifyErrorListeners("DECLARE GLOBAL TEMPORARY TABLE invalid in triggered action");}
+	| declareTableStatement {notifyErrorListeners("DECLARE TABLE invalid in triggered action");}
+	| declareVariableStatement {notifyErrorListeners("DECLARE VARIABLE invalid in triggered action");}
+	| declareStatementStatement {notifyErrorListeners("DECLARE STATEMENT invalid in triggered action");}
+	| describeStatement {notifyErrorListeners("DESCRIBE invalid in triggered action");}
+	| dropStatement {notifyErrorListeners("DROP invalid in triggered action");}
+	| endDeclareSectionStatement {notifyErrorListeners("END DECLARE invalid in triggered action");}
+	| exchangeStatement {notifyErrorListeners("EXCHANGE invalid in triggered action");}
+	| executeStatement {notifyErrorListeners("EXECUTE invalid in triggered action");}
+	| executeImmediateStatement {notifyErrorListeners("EXECUTE IMMEDIATE invalid in triggered action");}
+	| explainStatement {notifyErrorListeners("EXPLAIN invalid in triggered action");}
+	| fetchStatement {notifyErrorListeners("FETCH invalid in triggered action");}
+	| freeLocatorStatement {notifyErrorListeners("FREE LOCATOR invalid in triggered action");}
+	| getDiagnosticsStatement {notifyErrorListeners("GET DIAGNOSTICS invalid in triggered action");}
+	| grantStatement {notifyErrorListeners("GRANT invalid in triggered action");}
+	| holdLocatorStatement {notifyErrorListeners("HOLD LOCATOR invalid in triggered action");}
+	| includeStatement {notifyErrorListeners("INCLUDE invalid in triggered action");}
+	| labelStatement {notifyErrorListeners("LABEL invalid in triggered action");}
+	| lockTableStatement {notifyErrorListeners("LOCK TABLE invalid in triggered action");}
+	| openStatement {notifyErrorListeners("OPEN invalid in triggered action");}
+	| prepareStatement {notifyErrorListeners("PREPARE invalid in triggered action");}
+	| releaseSavepointStatement {notifyErrorListeners("RELEASE SAVEPOINT invalid in triggered action");}
+	| releaseConnectionStatement {notifyErrorListeners("RELEASE CONNECTION invalid in triggered action");}
+	| renameStatement {notifyErrorListeners("RENAME invalid in triggered action");}
+	| revokeStatement {notifyErrorListeners("REVOKE invalid in triggered action");}
+	| rollbackStatement {notifyErrorListeners("ROLLBACK invalid in triggered action");}
+	| savepointStatement {notifyErrorListeners("SAVEPOINT invalid in triggered action");}
+	| setConnectionStatement {notifyErrorListeners("SET CONNECTION invalid in triggered action");}
+	| setEncryptionPasswordStatement {notifyErrorListeners("SET ENCRYPTION PASSWORD invalid in triggered action");}
+	| setPathStatement {notifyErrorListeners("SET PATH invalid in triggered action");}
+	| setSchemaStatement {notifyErrorListeners("SET SCHEMA invalid in triggered action");}
+	| setSessionTimezoneStatement {notifyErrorListeners("SET SESSION TIMEZONE invalid in triggered action");}
+	| setSpecialRegisterStatement {notifyErrorListeners("SET Special Register invalid in triggered action");}
+	| transferOwnershipStatement {notifyErrorListeners("TRANSFER OWNERSHIP invalid in triggered action");}
+	| wheneverStatement {notifyErrorListeners("WHENEVER invalid in triggered action");}
 	;
 
 triggeredAdvancedSqlStatement
