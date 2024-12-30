@@ -1075,7 +1075,39 @@ screenSection
    ;
 
 screenDescriptionEntry
-   : INTEGERLITERAL (FILLER | screenName)? (screenDescriptionBlankClause | screenDescriptionBellClause | screenDescriptionBlinkClause | screenDescriptionEraseClause | screenDescriptionLightClause | screenDescriptionGridClause | screenDescriptionReverseVideoClause | screenDescriptionUnderlineClause | screenDescriptionSizeClause | screenDescriptionLineClause | screenDescriptionColumnClause | screenDescriptionForegroundColorClause | screenDescriptionBackgroundColorClause | screenDescriptionControlClause | screenDescriptionValueClause | screenDescriptionPictureClause | (screenDescriptionFromClause | screenDescriptionUsingClause) | screenDescriptionUsageClause | screenDescriptionBlankWhenZeroClause | screenDescriptionJustifiedClause | screenDescriptionSignClause | screenDescriptionAutoClause | screenDescriptionSecureClause | screenDescriptionRequiredClause | screenDescriptionPromptClause | screenDescriptionFullClause | screenDescriptionZeroFillClause)* DOT_FS
+   : INTEGERLITERAL 
+   (FILLER | screenName)? 
+   (screenDescriptionBlankClause 
+   | screenDescriptionBellClause 
+   | screenDescriptionBlinkClause 
+   | screenDescriptionEraseClause 
+   | screenDescriptionLightClause 
+   | screenDescriptionGridClause 
+   | screenDescriptionReverseVideoClause 
+   | screenDescriptionUnderlineClause 
+   | screenDescriptionSizeClause 
+   | screenDescriptionLineClause 
+   | screenDescriptionColumnClause 
+   | screenDescriptionForegroundColorClause 
+   | screenDescriptionBackgroundColorClause 
+   | screenDescriptionControlClause 
+   | screenDescriptionValueClause 
+   | screenDescriptionPictureClause 
+   | (screenDescriptionFromClause | screenDescriptionUsingClause) 
+   | screenDescriptionUsageClause 
+   | screenDescriptionBlankWhenZeroClause 
+   | screenDescriptionJustifiedClause 
+   | screenDescriptionSignClause 
+   | screenDescriptionAutoClause 
+   | screenDescriptionSecureClause 
+   | screenDescriptionRequiredClause 
+   | screenDescriptionPromptClause 
+   | screenDescriptionFullClause 
+   | screenDescriptionZeroFillClause
+   | screenDescriptionUpperOrLowerClause
+   | screenDescriptionScrollClause
+   | screenDescriptionUpdateClause)* 
+   DOT_FS
    ;
 
 screenDescriptionBlankClause
@@ -1171,7 +1203,7 @@ screenDescriptionSignClause
    ;
 
 screenDescriptionAutoClause
-   : AUTO | AUTO_SKIP
+   : AUTO | AUTO_SKIP | AUTOTERMINATE
    ;
 
 screenDescriptionSecureClause
@@ -1192,6 +1224,18 @@ screenDescriptionPromptOccursClause
 
 screenDescriptionFullClause
    : FULL | LENGTH_CHECK
+   ;
+
+screenDescriptionUpperOrLowerClause
+   : LOWER | UPPER
+   ;
+
+screenDescriptionScrollClause
+   : SCROLL (UP | DOWN)
+   ;
+
+screenDescriptionUpdateClause
+   : (UPDATE | (NO UPDATE))
    ;
 
 screenDescriptionZeroFillClause

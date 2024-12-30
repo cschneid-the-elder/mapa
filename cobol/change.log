@@ -1,3 +1,12 @@
+--2024-12-30--------------------------------------------------------------------
+Fixed lexer definition of REVERSE_VIDEO per William Fahle issue 219.
+
+Added missing Screen Section attributes to screenDescriptionEntry.
+
+Also added Screen Section attributes to popMode in CobolLexer.g4 PIC_MODE,
+except not SIZE and TIME as the GNU COBOL documentation is currently kind
+of iffy of what they do.
+
 --2024-11-20--------------------------------------------------------------------
 Modified parser rules ifThen and ifElse per issue 215.  Simplified to just...
 
