@@ -2,6 +2,11 @@
 PTF for APAR PH64377 (January 2025) APPLCOMPAT is tolerated as abbreviated 
 spelling for APPLICATION COMPATIBILITY.
 
+APAR PH63145 (November 2024) MODIFY STATISTICS can be executed against a single 
+partition.
+
+
+
 --2024-12-12--------------------------------------------------------------------
 Fixed labeledDuration parser rule so it no longer requires two sets of 
 paretheses around a fullSelect.

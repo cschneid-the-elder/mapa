@@ -15,7 +15,7 @@
 +	sql_call_dsnutil_load	24	96	0	0	0	0	0	0	0	0	1	0	24	0	0	0	0	0	0	0	0	0	0	0	0	0	0	1	0
 +	sql_call_dsnutil_mergecopy	6	24	0	0	0	0	0	0	0	0	0	0	0	10	0	0	0	0	0	0	0	0	0	0	0	0	0	2	0
 +	sql_call_dsnutil_modify_recovery	29	116	0	0	0	0	0	0	0	0	0	0	0	0	29	0	0	0	0	0	0	0	0	0	0	0	0	0	0
-+	sql_call_dsnutil_modify_statistics	122	488	0	0	0	0	0	0	0	0	0	0	0	0	0	122	0	0	0	0	0	0	0	0	0	0	0	0	0
++	sql_call_dsnutil_modify_statistics	125	500	0	0	0	0	0	0	0	0	0	0	0	0	0	125	0	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_options	16	64	0	0	0	0	0	0	0	0	0	0	0	0	0	0	16	0	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_quiesce	73	292	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	73	0	0	0	0	0	0	0	0	0	0	0
 +	sql_call_dsnutil_rebuild_index	7	28	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	0	7	0	0	0	0	0	0	0	0	0	0

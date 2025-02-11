@@ -2878,11 +2878,16 @@ dsnutilUCSModifyStatisticsListOrTablespaceEtAl
 	)
 	;
 
+/*
+APAR PH63145 (November 2024)
+MODIFY STATISTICS can be executed against a single partition
+*/
 dsnutilUCSModifyStatisticsOptions
 	: (
 	dsnutilUCSModifyStatisticsDeleteOption
 	| dsnutilUCSModifyStatisticsAgeOption
 	| dsnutilUCSModifyStatisticsDateOption
+	| dsnutilUCSPartOption1
 	)
 	;
 
