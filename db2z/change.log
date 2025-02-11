@@ -1,3 +1,7 @@
+--2025-02-11--------------------------------------------------------------------
+PTF for APAR PH64377 (January 2025) APPLCOMPAT is tolerated as abbreviated 
+spelling for APPLICATION COMPATIBILITY.
+
 --2024-12-12--------------------------------------------------------------------
 Fixed labeledDuration parser rule so it no longer requires two sets of 
 paretheses around a fullSelect.

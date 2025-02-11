@@ -457,8 +457,12 @@ alterWhichProcedureSQLPL2
 	: ((ACTIVE VERSION) | versionOption)
 	;
 
+/*
+PTF for APAR PH64377 (January 2025)
+APPLCOMPAT is tolerated as abbreviated spelling
+*/
 applicationCompatibilityPhrase
-	: (USING APPLICATION COMPATIBILITY applCompatValue)
+	: (USING ((APPLICATION COMPATIBILITY) | APPLCOMPAT) applCompatValue)
 	;
 
 /*
@@ -524,8 +528,12 @@ alterWhichTrigger2
 	: ((ACTIVE VERSION) | versionOption)
 	;
 
+/*
+PTF for APAR PH64377 (January 2025)
+APPLCOMPAT is tolerated as abbreviated spelling
+*/
 alterTriggerAdvancedApplicationCompatibility
-	: (USING APPLICATION COMPATIBILITY applCompatValue)
+	: (USING ((APPLICATION COMPATIBILITY) | APPLCOMPAT) applCompatValue)
 	;
 
 triggerSpecification
@@ -542,10 +550,14 @@ alterTrustedContextStatement
 	)
 	;
 
+/*
+PTF for APAR PH64377 (January 2025)
+APPLCOMPAT is tolerated as abbreviated spelling
+*/
 alterViewStatement
 	: (
 	ALTER VIEW viewName REGENERATE
-	(USING APPLICATION COMPATIBILITY applCompatValue)?
+	(USING ((APPLICATION COMPATIBILITY) | APPLCOMPAT) applCompatValue)?
 	)
 	;
 
@@ -8724,8 +8736,12 @@ multipleRowInsert
 	)
 	;
 
+/*
+PTF for APAR PH64377 (January 2025)
+APPLCOMPAT is tolerated as abbreviated spelling
+*/
 regenerateClause
-	: (REGENERATE (USING APPLICATION COMPATIBILITY applCompatValue)?)
+	: (REGENERATE (USING ((APPLICATION COMPATIBILITY) | APPLCOMPAT) applCompatValue)?)
 	;
 
 /*
@@ -11337,10 +11353,15 @@ tableFunction
 	)
 	;
 	
+/*
+PTF for APAR PH64377 (January 2025)
+APPLCOMPAT is tolerated as abbreviated spelling
+*/
 specialRegister
 	: (
 	CURRENT_ACCELERATOR
 	| CURRENT_APPLICATION_COMPATIBILITY
+	| (CURRENT APPLCOMPAT)
 	| CURRENT_APPLICATION_ENCODING_SCHEME
 	| CURRENT_CLIENT_ACCTNG
 	| CURRENT_CLIENT_APPLNAME
