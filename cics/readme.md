@@ -19,7 +19,7 @@ The parser doesn't enforce any of the CICS TS API or SPI syntax rules.  For exam
 
 The purpose here is to provide grammars useful in analyzing existing code.
 
-This was built on Ubuntu 22.04 LTS with ANTLR 4.13.2 and openjdk version "11.0.24" 2024-07-16.
+This was built on Ubuntu 24.04.1 LTS with ANTLR 4.13.2 and openjdk version "21.0.6" 2025-01-21.
 
-The grammars should be up to date with CICS Transaction Server for z/OS 6.x documentation dated 2024-10-18.
+The grammars should be up to date with CICS Transaction Server for z/OS 6.x documentation dated 2025-02-07.
 

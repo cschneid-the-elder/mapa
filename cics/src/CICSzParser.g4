@@ -4076,7 +4076,7 @@ setXmltransform
 	)
 	;
 
-// 572 rules generated Tue Oct 22 16:21:34 CDT 2024
+// 572 rules generated Tue Feb 11 17:55:30 CST 2025
 
 abendOptions
 	: (
@@ -11158,6 +11158,7 @@ inquireSystemOptions
 	| udsasizeOption
 	| maxtasksOption
 	| xrfstatusOption
+	| grplistOption
 	| exceptionOptions
 	)
 	;
@@ -11446,6 +11447,7 @@ inquireTerminalOptions
 	| textkybdstOption
 	| textprintstOption
 	| tnaddrOption
+	| tnhostOption
 	| tnipfamilyOption
 	| tnportOption
 	| tracingOption
@@ -11512,6 +11514,7 @@ inquireTranclassOptions
 	| installtimeOption
 	| installusridOption
 	| maxactiveOption
+	| purgeactionOption
 	| purgethreshOption
 	| queuedOption
 	| exceptionOptions
@@ -13203,6 +13206,9 @@ setTracetypeOptions
 setTranclassOptions
 	: (
 	maxactiveOption
+	| purgeactionOption
+	| abendOption
+	| discardOption
 	| purgethreshOption
 	| exceptionOptions
 	)
@@ -13368,7 +13374,7 @@ setXmltransformOptions
 	)
 	;
 
-// 572 rules generated Tue Oct 22 16:21:34 CDT 2024
+// 572 rules generated Tue Feb 11 17:55:30 CST 2025
 
 abcodeOption
 	: (
@@ -17774,6 +17780,12 @@ groupresyncOption
 	)
 	;
 
+grplistOption
+	: (
+	GRPLIST arg
+	)
+	;
+
 grstatusOption
 	: (
 	GRSTATUS arg
@@ -22082,6 +22094,12 @@ purgeablestOption
 	)
 	;
 
+purgeactionOption
+	: (
+	PURGEACTION arg
+	)
+	;
+
 purgecyclemOption
 	: (
 	PURGECYCLEM arg
@@ -24896,6 +24914,12 @@ tnaddrOption
 	)
 	;
 
+tnhostOption
+	: (
+	TNHOST arg
+	)
+	;
+
 tnipfamilyOption
 	: (
 	TNIPFAMILY arg
@@ -26000,5 +26024,5 @@ zcptracingOption
 	)
 	;
 
-// 2396 rules generated Tue Oct 22 16:21:34 CDT 2024
+// 2399 rules generated Tue Feb 11 17:55:30 CST 2025
 

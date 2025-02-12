@@ -1,3 +1,11 @@
+--2022-02-11--------------------------------------------------------------------
+SPI changes per documentation dated 2025-02-07.
+
+Added GRPLIST to INQUIRE SYSTEM.
+Added TNHOST to INQUIRE TERMINAL.
+Added PURGEACTION to INQUIRE TRANCLASS.
+Added PURGEACTION, ABEND, and DISCARD to SET TRANCLASS.
+
 --2024-10-22--------------------------------------------------------------------
 Added PREPEND option to PUT CONTAINER (CHANNEL) and PUT64 CONTAINER.
 

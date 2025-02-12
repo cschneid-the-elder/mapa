@@ -2139,6 +2139,7 @@
                 TRANISOLATE(cvda)
                 UDSASIZE(data-area)
                 XRFSTATUS(cvda)
+                GRPLIST(data-area)
            END-EXEC
 
            EXEC CICS
@@ -2410,6 +2411,7 @@
                 TEXTKYBDST(cvda)
                 TEXTPRINTST(cvda)
                 TNADDR(data-area)
+                TNHOST(data-area)
                 TNIPFAMILY(cvda)
                 TNPORT(data-area)
                 TRACING(cvda)
@@ -2468,6 +2470,7 @@
                 INSTALLTIME(data-area)
                 INSTALLUSRID(data-area)
                 MAXACTIVE(data-area)
+                PURGEACTION(cvda)
                 PURGETHRESH(data-area)
                 QUEUED(data-area)
            END-EXEC
@@ -3431,6 +3434,9 @@
                 SET 
                 TRANCLASS(data-value)
                 MAXACTIVE(data-value)
+                PURGEACTION(cvda)
+                ABEND
+                DISCARD
                 PURGETHRESH(data-value)
            END-EXEC
 

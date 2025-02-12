@@ -3087,6 +3087,10 @@ GROUPRESYNC
 	: G R O U P R E S Y N C 
 	;
 
+GRPLIST
+	: G R P L I S T 
+	;
+
 GRSTATUS
 	: G R S T A T U S 
 	;
@@ -5959,6 +5963,10 @@ PURGEABLEST
 	: P U R G E A B L E S T 
 	;
 
+PURGEACTION
+	: P U R G E A C T I O N 
+	;
+
 PURGECYCLEM
 	: P U R G E C Y C L E M 
 	;
@@ -7835,6 +7843,10 @@ TNADDR
 	: T N A D D R 
 	;
 
+TNHOST
+	: T N H O S T 
+	;
+
 TNIPFAMILY
 	: T N I P F A M I L Y 
 	;
@@ -8571,7 +8583,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2105 rules generated Tue Oct 22 16:21:29 CDT 2024
+// 2108 rules generated Tue Feb 11 17:55:24 CST 2025
 
 mode ARG_MODE;
 

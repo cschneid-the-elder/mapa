@@ -2439,6 +2439,7 @@ MAXOPENTCBS( data-area )
 UDSASIZE( data-area )
 MAXTASKS( data-area )
 XRFSTATUS( cvda )
+GRPLIST( data-area )
 
 @INQUIRE 
 +TAG[data-value]
@@ -2701,6 +2702,7 @@ TERMSTATUS(cvda)
 TEXTKYBDST(cvda)
 TEXTPRINTST(cvda)
 TNADDR(data-area)
+TNHOST(data-area)
 TNIPFAMILY(cvda)
 TNPORT(data-area)
 TRACING(cvda)
@@ -2755,6 +2757,7 @@ INSTALLAGENT( cvda )
 INSTALLTIME( data-area )
 INSTALLUSRID( data-area )
 MAXACTIVE(data-area)
+PURGEACTION( cvda )
 PURGETHRESH(data-area)
 QUEUED(data-area)
 
@@ -4232,6 +4235,9 @@ COMPID(data-value)
 @SET 
 +TRANCLASS(data-value)
 MAXACTIVE(data-value)
+PURGEACTION( cvda )
+ABEND
+DISCARD
 PURGETHRESH(data-value)
 
 @SET 
