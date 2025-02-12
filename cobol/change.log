@@ -1,3 +1,8 @@
+--2025-02-12--------------------------------------------------------------------
+Added LSACHECK compiler option.
+
+Updated jsonGeneratePhrase1 and jsonParsePhrase1 to allow NULL per PH59733.
+
 --2024-12-30--------------------------------------------------------------------
 Fixed lexer definition of REVERSE_VIDEO per William Fahle issue 219.
 

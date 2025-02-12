@@ -143,6 +143,32 @@
                SUPPRESS 
                     SD-001
                     SD-002
+               CONVERTING SD-003 JSON NULL USING SPACES
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON GENERATE
+               WS-BUF FROM SOME-DATA
+               COUNT WS-COUNT
+               NAME SD-001 'ARTHUR'
+                    SD-002 'DENT'
+               SUPPRESS 
+                    SD-001
+                    SD-002
+               CONVERTING SD-003 NULL USING SPACES
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON GENERATE
+               WS-BUF FROM SOME-DATA
+               COUNT WS-COUNT
+               NAME SD-001 'ARTHUR'
+                    SD-002 'DENT'
+               SUPPRESS 
+                    SD-001
+                    SD-002
                CONVERTING SD-001 BOOLEAN SD-001-TRUTH
                ON EXCEPTION CALL 'CEE3ABD' END-CALL
                NOT ON EXCEPTION PERFORM 1000-para

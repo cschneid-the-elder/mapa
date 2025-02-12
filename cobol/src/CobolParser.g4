@@ -2493,7 +2493,7 @@ jsonGenerateGenericSupressionPhrase
    ;
 
 jsonGeneratePhrase1
-   : identifier TO? JSON? (BOOLEAN | BOOL) USING? (identifier | literal)
+   : identifier TO? JSON? (BOOLEAN | BOOL | NULL) USING? (identifier | literal)
    ;
 
 jsonGenerateConvertingPhrase
@@ -2539,7 +2539,7 @@ jsonParseSuppressPhrase
    ;
 
 jsonParsePhrase1
-   : identifier FROM? JSON? (BOOLEAN | BOOL) jsonParseUsingPhrase1
+   : identifier FROM? JSON? (BOOLEAN | BOOL | NULL) jsonParseUsingPhrase1
    ;
 
 jsonParseUsingPhrase1

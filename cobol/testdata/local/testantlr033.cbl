@@ -128,6 +128,28 @@
                NOT ON EXCEPTION PERFORM 1000-para
            END-JSON
 
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING SD-003 FROM JSON NULL USING SPACES
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON PARSE
+               WS-BUF INTO SOME-DATA
+               WITH DETAIL
+               NAME OF SD-001 IS 'ARTHUR'
+                       SD-002 IS OMITTED
+               SUPPRESS SD-001 SD-003
+               CONVERTING SD-003 FROM NULL USING SPACES
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
 
            DISPLAY MYNAME ' End'
            
