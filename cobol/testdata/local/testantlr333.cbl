@@ -128,13 +128,35 @@
 000128         NOT ON EXCEPTION PERFORM 1000-para                       00000128
 000129     END-JSON                                                     00000129
 000130                                                                  00000130
-000131                                                                  00000131
-000132     DISPLAY MYNAME ' End'                                        00000132
-000133                                                                  00000133
-000134     GOBACK                                                       00000134
-000135     .                                                            00000135
-000136                                                                  00000136
-000137 1000-para.                                                       00000137
-000138                                                                  00000138
-000139     .                                                            00000139
-000140                                                                  00000140
+000131     JSON PARSE                                                   00000131
+000132         WS-BUF INTO SOME-DATA                                    00000132
+000133         WITH DETAIL                                              00000133
+000134         NAME OF SD-001 IS 'ARTHUR'                               00000134
+000135                 SD-002 IS OMITTED                                00000135
+000136         SUPPRESS SD-001 SD-003                                   00000136
+000137         CONVERTING SD-003 FROM JSON NULL USING SPACES            00000137
+000138         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000138
+000139         NOT ON EXCEPTION PERFORM 1000-para                       00000139
+000140     END-JSON                                                     00000140
+000141                                                                  00000141
+000142     JSON PARSE                                                   00000142
+000143         WS-BUF INTO SOME-DATA                                    00000143
+000144         WITH DETAIL                                              00000144
+000145         NAME OF SD-001 IS 'ARTHUR'                               00000145
+000146                 SD-002 IS OMITTED                                00000146
+000147         SUPPRESS SD-001 SD-003                                   00000147
+000148         CONVERTING SD-003 FROM NULL USING SPACES                 00000148
+000149         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000149
+000150         NOT ON EXCEPTION PERFORM 1000-para                       00000150
+000151     END-JSON                                                     00000151
+000152                                                                  00000152
+000153                                                                  00000153
+000154     DISPLAY MYNAME ' End'                                        00000154
+000155                                                                  00000155
+000156     GOBACK                                                       00000156
+000157     .                                                            00000157
+000158                                                                  00000158
+000159 1000-para.                                                       00000159
+000160                                                                  00000160
+000161     .                                                            00000161
+000162                                                                  00000162

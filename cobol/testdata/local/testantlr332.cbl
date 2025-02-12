@@ -143,7 +143,7 @@
 000143         SUPPRESS                                                 00000143
 000144              SD-001                                              00000144
 000145              SD-002                                              00000145
-000146         CONVERTING SD-001 BOOLEAN SD-001-TRUTH                   00000146
+000146         CONVERTING SD-003 JSON NULL USING SPACES                 00000146
 000147         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000147
 000148         NOT ON EXCEPTION PERFORM 1000-para                       00000148
 000149     END-JSON                                                     00000149
@@ -156,7 +156,7 @@
 000156         SUPPRESS                                                 00000156
 000157              SD-001                                              00000157
 000158              SD-002                                              00000158
-000159         CONVERTING SD-001 TO JSON BOOL USING SD-001-TRUTH        00000159
+000159         CONVERTING SD-003 NULL USING SPACES                      00000159
 000160         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000160
 000161         NOT ON EXCEPTION PERFORM 1000-para                       00000161
 000162     END-JSON                                                     00000162
@@ -169,7 +169,7 @@
 000169         SUPPRESS                                                 00000169
 000170              SD-001                                              00000170
 000171              SD-002                                              00000171
-000172         CONVERTING SD-001 TO JSON BOOLEAN USING 'FPREFECT'       00000172
+000172         CONVERTING SD-001 BOOLEAN SD-001-TRUTH                   00000172
 000173         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000173
 000174         NOT ON EXCEPTION PERFORM 1000-para                       00000174
 000175     END-JSON                                                     00000175
@@ -182,20 +182,46 @@
 000182         SUPPRESS                                                 00000182
 000183              SD-001                                              00000183
 000184              SD-002                                              00000184
-000185         CONVERTING                                               00000185
-000186              SD-001 TO JSON BOOLEAN USING 'FPREFECT'             00000186
-000187              ALSO SD-002 BOOL '&&'                               00000187
-000188         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000188
-000189         NOT ON EXCEPTION PERFORM 1000-para                       00000189
-000190     END-JSON                                                     00000190
-000191                                                                  00000191
-000192                                                                  00000192
-000193     DISPLAY MYNAME ' End'                                        00000193
-000194                                                                  00000194
-000195     GOBACK                                                       00000195
-000196     .                                                            00000196
-000197                                                                  00000197
-000198 1000-para.                                                       00000198
-000199                                                                  00000199
-000200     .                                                            00000200
-000201                                                                  00000201
+000185         CONVERTING SD-001 TO JSON BOOL USING SD-001-TRUTH        00000185
+000186         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000186
+000187         NOT ON EXCEPTION PERFORM 1000-para                       00000187
+000188     END-JSON                                                     00000188
+000189                                                                  00000189
+000190     JSON GENERATE                                                00000190
+000191         WS-BUF FROM SOME-DATA                                    00000191
+000192         COUNT WS-COUNT                                           00000192
+000193         NAME SD-001 'ARTHUR'                                     00000193
+000194              SD-002 'DENT'                                       00000194
+000195         SUPPRESS                                                 00000195
+000196              SD-001                                              00000196
+000197              SD-002                                              00000197
+000198         CONVERTING SD-001 TO JSON BOOLEAN USING 'FPREFECT'       00000198
+000199         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000199
+000200         NOT ON EXCEPTION PERFORM 1000-para                       00000200
+000201     END-JSON                                                     00000201
+000202                                                                  00000202
+000203     JSON GENERATE                                                00000203
+000204         WS-BUF FROM SOME-DATA                                    00000204
+000205         COUNT WS-COUNT                                           00000205
+000206         NAME SD-001 'ARTHUR'                                     00000206
+000207              SD-002 'DENT'                                       00000207
+000208         SUPPRESS                                                 00000208
+000209              SD-001                                              00000209
+000210              SD-002                                              00000210
+000211         CONVERTING                                               00000211
+000212              SD-001 TO JSON BOOLEAN USING 'FPREFECT'             00000212
+000213              ALSO SD-002 BOOL '&&'                               00000213
+000214         ON EXCEPTION CALL 'CEE3ABD' END-CALL                     00000214
+000215         NOT ON EXCEPTION PERFORM 1000-para                       00000215
+000216     END-JSON                                                     00000216
+000217                                                                  00000217
+000218                                                                  00000218
+000219     DISPLAY MYNAME ' End'                                        00000219
+000220                                                                  00000220
+000221     GOBACK                                                       00000221
+000222     .                                                            00000222
+000223                                                                  00000223
+000224 1000-para.                                                       00000224
+000225                                                                  00000225
+000226     .                                                            00000226
+000227                                                                  00000227

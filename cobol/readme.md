@@ -4,7 +4,7 @@ This is not intended to be a validating parser, but an analyzing parser; feed it
 
 My intent is to provide a mechanism for people to analyze COBOL code and record pertinent facts in some persistent store.  Think of this as a demonstration of what _can_ be done, which may or may not be what you need.
 
-Currently (13-May-2024) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
+Currently (12-Feb-2025) a work in progress.  Parsing COBOL to extract various sorts of "calls" and other information of possible interest seems to be working.  Generating a CSV to be loaded into a persistent store seems to be working.
 
 "Seems to be working" means that I've run through some COBOL I've written specifically with an eye towards tripping up my own logic, along with the NIST COBOL test suite albeit with some manual alterations as some of their source is not intended to be processed without preprocessing by other parts of the suite.
 
@@ -174,7 +174,7 @@ For reasons both obscure and annoying, the CICS APIs are not deduplicated, so if
 
 ### Build/Execution Environment
 
-This was built on ubuntu 22.04 LTS with ANTLR 4.13.2, openjdk version "11.0.24 2024-07-16", and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on Ubuntu 24.04.1 LTS with ANTLR 4.13.2, openjdk version "21.0.6" 2025-01-21, and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 The GNU toolchain is used for building.  If you want to build from scratch, i.e. a repository cloned with git, there are some instructions at the top of the Makefile.
 
@@ -263,5 +263,5 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 
 ### Up To Date
 
-This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2024-02-26 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
+This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2025-01-22 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
 
