@@ -266,8 +266,11 @@ query
 	)
 	;
 
+/*
+fix suggested in issue #224
+*/
 cursorName
-	: identifier
+	: hostIdentifier
 	;
 
 statementName
