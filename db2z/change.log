@@ -1,3 +1,9 @@
+--2025-03-19--------------------------------------------------------------------
+Fix for issue #224 as suggested by travisdavidnelson.
+
+DECLARE CURSOR did not allow for hyphens in the name of the cursor.  Changed
+parser rule cursorName to reference hostIdentifier instead of identifier.
+
 --2025-02-11--------------------------------------------------------------------
 PTF for APAR PH64377 (January 2025) APPLCOMPAT is tolerated as abbreviated 
 spelling for APPLICATION COMPATIBILITY.
