@@ -7445,6 +7445,7 @@ singleRowFetch
 	| ((INTO | USING) DESCRIPTOR descriptorName)
 	)
 	;
+
 /*
 The target variable in this clause could be any of {global-variable-name,
 host-variable-name, SQL-parameter-name, SQL-variable-name, 
@@ -12317,20 +12318,25 @@ hostVariable
 	: COLON (hostStructure DOT)? hostIdentifier (INDICATOR? COLON (nullIndicatorStructure DOT)? nullIndicator)?
 	;
 
+/*
+Making the MINUS optional because COBOL (at least) host variables
+can look pretty strange... A-001B1C2 and so forth.
+2025-03-19
+*/
 hostIdentifier
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
 	;
 
 hostStructure
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
 	;
 
 nullIndicator
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
 	;
 
 nullIndicatorStructure
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
+	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
 	;
 
 globalVariableName
@@ -12828,6 +12834,11 @@ sqlidentifier
 
 /*
 Added TIMEOUT per Maarten van Haasteren 2024-06-04.
+
+Removed END_EXEC as it was getting caught up in the hostIdentifier,
+hostStructure, nullIndicator, nullIndicatorStructure changes
+to allow some of the more interesting COBOL constructs.
+2025-03-19
 */
 sqlKeyword
 	: (
@@ -13094,7 +13105,7 @@ sqlKeyword
 	| ENCODING
 	| ENCRYPTION
 	| END
-	| END_EXEC
+//	| END_EXEC
 	| ENDING
 	| ENFORCED
 	| ENVIRONMENT
