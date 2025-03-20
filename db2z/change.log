@@ -1,8 +1,17 @@
 --2025-03-19--------------------------------------------------------------------
-Fix for issue #224 as suggested by travisdavidnelson.
+Fix for issues #224 as suggested by travisdavidnelson.
 
 DECLARE CURSOR did not allow for hyphens in the name of the cursor.  Changed
 parser rule cursorName to reference hostIdentifier instead of identifier.
+
+Fix for issue #226.
+
+hostIdentifier, hostStructure, nullIndicator, and nullIndicatorStructure all
+had the same flaw in that MINUS was mandatory.  MINUS is now optional and
+the test case provided by travisdavidnelson works.
+
+Removed END_EXEC from sqlKeyword as it was getting caught up with the
+aforementioned rules once the MINUS was optional.
 
 --2025-02-11--------------------------------------------------------------------
 PTF for APAR PH64377 (January 2025) APPLCOMPAT is tolerated as abbreviated 
