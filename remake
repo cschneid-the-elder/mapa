@@ -20,13 +20,12 @@ all:
 	$(MAKE) -C cobol jar
 	$(MAKE) -C cobol testLocal
 	$(MAKE) -C cobol testLocalx
-	$(MAKE) -C cobol testNist
-	touch -c jcl/src/JCLLexer.g4 jcl/src/JCLPPLexer.g4 jcl/src/DSNTSOLexer.g4 jcl/src/TSOLexer.g4 jcl/src/JCLDDAMPLexer.g4
+	$(MAKE) -C cobol testNist	
+	touch -c jcl/src/main/java/cschneid/mapa/jcl/JCLLexer.g4 jcl/src/main/java/cschneid/mapa/jcl/JCLPPLexer.g4 jcl/src/main/java/cschneid/mapa/jcl/DSNTSOLexer.g4 jcl/src/main/java/cschneid/mapa/jcl/TSOLexer.g4 jcl/src/main/java/cschneid/mapa/jcl/JCLDDAMPLexer.g4
 	$(MAKE) -C jcl 
 	$(MAKE) -C jcl test
 	$(MAKE) -C jcl testpp
 	$(MAKE) -C jcl testtso
 	$(MAKE) -C jcl testamp
-	$(MAKE) -C jcl jar
 	$(MAKE) -C jcl testdemo
 
