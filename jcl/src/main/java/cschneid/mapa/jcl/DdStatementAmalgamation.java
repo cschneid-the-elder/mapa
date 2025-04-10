@@ -189,4 +189,23 @@ public class DdStatementAmalgamation {
 		}
 	}
 
+	public String getProcName() {
+		return procName;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public Boolean getInProc() {
+		return inProc;
+	}
+
+	public JCLParser.DdStatementAmalgamationContext getDdStmtAmlgnCtx() {
+		return ddStmtAmlgnCtx;
+	}
+
+	public ArrayList<DdStatement> getDds() {
+		return dds;
+	}
 }

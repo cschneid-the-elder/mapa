@@ -356,4 +356,63 @@ public class Proc {
 			+ this.fileName;
 	}
 
+	public JCLParser.ProcStatementContext getProcCtx() {
+		return procCtx;
+	}
+
+	public JCLParser.PendStatementContext getPendCtx() {
+		return pendCtx;
+	}
+
+	public ArrayList<SetSymbolValue> getSetSym() {
+		return setSym;
+	}
+
+	public ArrayList<IncludeStatement> getIncludes() {
+		return includes;
+	}
+
+	public ArrayList<KeywordOrSymbolicWrapper> getJcllib() {
+		return jcllib;
+	}
+
+	public ArrayList<JclStep> getSteps() {
+		return steps;
+	}
+
+	public ArrayList<Symbolic> getSym() {
+		return sym;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public int getStartLine() {
+		return startLine;
+	}
+
+	public int getEndLine() {
+		return endLine;
+	}
+
+	public int getJobOrdNb() {
+		return jobOrdNb;
+	}
+
+	public int getOrdNb() {
+		return ordNb;
+	}
+
+	public int getNbSteps() {
+		return nbSteps;
+	}
+
+	public File getBaseDir() {
+		return baseDir;
+	}
+
+	public File getTmpProcDir() {
+		return tmpProcDir;
+	}
 }

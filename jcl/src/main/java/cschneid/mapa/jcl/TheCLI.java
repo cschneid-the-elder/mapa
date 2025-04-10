@@ -174,6 +174,12 @@ public class TheCLI{
 				case "FINEST":
 					this.LOGGER.setLevel(Level.FINEST);
 					break;
+				case "ALL":
+					this.LOGGER.setLevel(Level.ALL);
+					break;
+				case "OFF":
+					this.LOGGER.setLevel(Level.OFF);
+					break;
 				default:
 					this.LOGGER.config("Unrecognized logLevel option " + this.line.getOptionValue("LogLevel"));
 			}
