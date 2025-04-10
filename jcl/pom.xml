@@ -1,0 +1,126 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>cschneid.mapa</groupId>
+    <artifactId>jcl-parser</artifactId>
+    <version>2024-10-21</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        
+        <!-- https://mvnrepository.com/artifact/org.antlr/antlr4 -->
+        <antlr4.version>4.13.2</antlr4.version>
+        <!-- https://mvnrepository.com/artifact/commons-cli/commons-cli -->
+        <commons-cli.version>1.9.0</commons-cli.version>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-compiler-plugin -->
+        <maven-compiler-plugin.version>3.14.0</maven-compiler-plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
+        <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-shade-plugin -->
+        <maven-shade-plugin.version>3.6.0</maven-shade-plugin.version>
+        <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-javadoc-plugin -->
+        <maven-javadoc-plugin.version>3.11.2</maven-javadoc-plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.antlr</groupId>
+            <artifactId>antlr4</artifactId>
+            <version>${antlr4.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-cli</groupId>
+            <artifactId>commons-cli</artifactId>
+            <version>${commons-cli.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.version}</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr4-maven-plugin</artifactId>
+                <version>${antlr4.version}</version>
+                <executions>
+                    <execution>
+                        <id>antlr</id>
+                        <goals>
+                            <goal>antlr4</goal>
+                        </goals>
+                        <phase>generate-sources</phase>
+                        <configuration>
+                            <visitor>true</visitor>
+                            <listener>true</listener>
+                            <sourceDirectory>${project.basedir}/src/main/java/</sourceDirectory>
+                            <libDirectory>${project.basedir}/src/main/java/</libDirectory>
+                            <outputDirectory>${project.build.directory}/generated-sources/antlr4</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>${maven-jar-plugin.version}</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>cschneid.mapa.jcl.Demo01</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>${maven-shade-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <shadedArtifactAttached>true</shadedArtifactAttached>
+                            <shadedClassifierName>with-dependencies</shadedClassifierName>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+		    <plugin>
+		        <groupId>org.apache.maven.plugins</groupId>
+		        <artifactId>maven-javadoc-plugin</artifactId>
+		        <version>${maven-javadoc-plugin.version}</version>
+		        <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <show>private</show>
+                    <doclint>none</doclint>
+                    <sourceFileExcludes>
+                        <!-- Auto-generated files by the ANTLR plugin. As they are in the same package name, this is the only way to exclude them from being in the JavaDoc. -->
+                        <sourceFileExclude>/cschneid/mapa/jcl/*Lexer.java</sourceFileExclude>
+                        <sourceFileExclude>/cschneid/mapa/jcl/*Parser.java</sourceFileExclude>
+                        <sourceFileExclude>/cschneid/mapa/jcl/*ParserBaseListener.java</sourceFileExclude>
+                        <sourceFileExclude>/cschneid/mapa/jcl/*ParserBaseVisitor.java</sourceFileExclude>
+                        <sourceFileExclude>/cschneid/mapa/jcl/*ParserListener.java</sourceFileExclude>
+                        <sourceFileExclude>/cschneid/mapa/jcl/*ParserVisitor.java</sourceFileExclude>
+                    </sourceFileExcludes>
+		        </configuration>
+		    </plugin>
+        </plugins>
+    </build>
+</project>

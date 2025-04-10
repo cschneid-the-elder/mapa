@@ -1,0 +1,7 @@
+target/
+dependency-reduced-pom.xml
+*.log
+.idea
+*.iml
+javadoc/
+JCLParserCLI.jar
