@@ -219,7 +219,21 @@ public class JclStep {
 	}
 
 	public String getProcExecuted() {
-		return this.procExecuted.getValue();
+		// an additional check to prevent NPE
+		if (this.isExecProc()) {
+			return this.procExecuted.getValue();
+		} else {
+			return null;
+		}
+	}
+
+	public String getPgmExecuted() {
+		// an additional check to prevent NPE
+		if (this.isExecPgm()) {
+			return this.pgmExecuted.getValue();
+		} else {
+			return null;
+		}
 	}
 
 	public void setOrdNb(int ordNb) {
@@ -505,5 +519,85 @@ public class JclStep {
 		}
 
 		return sb.toString();
+	}
+
+	public ArrayList<String> getTsoDSNPlans() {
+		return tsoDSNPlans;
+	}
+
+	public ArrayList<String> getTsoDSNPgms() {
+		return tsoDSNPgms;
+	}
+
+	public ArrayList<String> getTsoCallPgms() {
+		return tsoCallPgms;
+	}
+
+	public File getTmpProcDir() {
+		return tmpProcDir;
+	}
+
+	public File getBaseDir() {
+		return baseDir;
+	}
+
+	public ArrayList<KeywordOrSymbolicWrapper> getJcllib() {
+		return jcllib;
+	}
+
+	public ArrayList<DdStatementAmalgamation> getDdStatements() {
+		return ddStatements;
+	}
+
+	public ArrayList<SetSymbolValue> getIncomingSetSym() {
+		return incomingSetSym;
+	}
+
+	public ArrayList<SetSymbolValue> getSetSym() {
+		return setSym;
+	}
+
+	public List<JCLParser.DdStatementAmalgamationContext> getDdStmtAmlgnCtxs() {
+		return ddStmtAmlgnCtxs;
+	}
+
+	public JCLParser.ExecProcStatementContext getExecProcStmtCtx() {
+		return execProcStmtCtx;
+	}
+
+	public JCLParser.ExecPgmStatementContext getExecPgmStmtCtx() {
+		return execPgmStmtCtx;
+	}
+
+	public JCLParser.ExecStatementContext getExecStmtCtx() {
+		return execStmtCtx;
+	}
+
+	public JCLParser.JclStepContext getJclStepCtx() {
+		return jclStepCtx;
+	}
+
+	public Boolean getInProc() {
+		return inProc;
+	}
+
+	public int getOrdNb() {
+		return ordNb;
+	}
+
+	public int getJobOrdNb() {
+		return jobOrdNb;
+	}
+
+	public String getStepName() {
+		return stepName;
+	}
+
+	public String getProcName() {
+		return procName;
+	}
+
+	public String getFileName() {
+		return fileName;
 	}
 }
