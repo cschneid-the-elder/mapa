@@ -344,5 +344,69 @@ public class Job {
 			+ " in " 
 			+ this.fileName;
 	}
+
+	public JCLParser.JobCardContext getJobCardCtx() {
+		return jobCardCtx;
+	}
+
+	public JCLParser.JcllibStatementContext getJcllibCtx() {
+		return jcllibCtx;
+	}
+
+	public ArrayList<KeywordOrSymbolicWrapper> getJcllib() {
+		return jcllib;
+	}
+
+	public ArrayList<Proc> getProcs() {
+		return procs;
+	}
+
+	public ArrayList<SetSymbolValue> getSetSym() {
+		return setSym;
+	}
+
+	public ArrayList<IncludeStatement> getIncludes() {
+		return includes;
+	}
+
+	public ArrayList<JclStep> getSteps() {
+		return steps;
+	}
+
+	public ArrayList<Symbolic> getSym() {
+		return sym;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public int getStartLine() {
+		return startLine;
+	}
+
+	public int getEndLine() {
+		return endLine;
+	}
+
+	public int getOrdNb() {
+		return ordNb;
+	}
+
+	public int getNbSteps() {
+		return nbSteps;
+	}
+
+	public File getBaseDir() {
+		return baseDir;
+	}
+
+	public File getTmpJobDir() {
+		return tmpJobDir;
+	}
+
+	public File getTmpProcDir() {
+		return tmpProcDir;
+	}
 }
 

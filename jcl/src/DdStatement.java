@@ -950,4 +950,71 @@ public class DdStatement {
 		}
 	}
 
+	public int getOrdNb() {
+		return ordNb;
+	}
+
+	public AmpWrapper getAmpw() {
+		return ampw;
+	}
+
+	public DsidWrapper getDsidw() {
+		return dsidw;
+	}
+
+	public PathDispWrapper getPdispw() {
+		return pdispw;
+	}
+
+	public DispWrapper getDispw() {
+		return dispw;
+	}
+
+	public Hashtable<String, DatasetNameWrapper> getDsnParms() {
+		return dsnParms;
+	}
+
+	public Hashtable<String, SingleOrMultipleValueWrapper> getSomvParms() {
+		return somvParms;
+	}
+
+	public Hashtable<String, KeywordOrSymbolicWrapper> getKosParms() {
+		return kosParms;
+	}
+
+	public ArrayList<String> getBlankParms() {
+		return blankParms;
+	}
+
+	public JCLParser.DdParmSYSOUTContext getDdStmtSysoutCtx() {
+		return ddStmtSysoutCtx;
+	}
+
+	public List<JCLParser.DdParmASTERISK_DATAContext> getDdSplatCtx() {
+		return ddSplatCtx;
+	}
+
+	public JCLParser.DdStatementConcatenationContext getDdStmtConcatCtx() {
+		return ddStmtConcatCtx;
+	}
+
+	public JCLParser.DdStatementContext getDdStmtCtx() {
+		return ddStmtCtx;
+	}
+
+	public Boolean getInProc() {
+		return inProc;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public String getProcName() {
+		return procName;
+	}
+
+	public String getDdName() {
+		return ddName;
+	}
 }
