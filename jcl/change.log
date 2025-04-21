@@ -1,3 +1,14 @@
+--2025-04-20--------------------------------------------------------------------
+Implement changes from Vadym Ladonya - getters for some instance variables so
+they are accessable programmatically - in pull request #229. I'm not including 
+everything because I have a resistance to Maven based on life experiences: 
+automatically pulling in most recent versions of dependencies can sometimes 
+mess things up. The code changes merged via... 
+
+git cherry-pick 4e2cdf52ad49bfd13cf4364227b4b7104e02ce04 
+
+...are gratefully accepted.
+
 --2024-10-21--------------------------------------------------------------------
 Added FAIL keyword to ERROR option of JOBGROUP in JCLLexer.g4, JCLParser.g4,
 JCLPPLexer.g4, and JCLPPParser.g4.
