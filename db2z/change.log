@@ -1,3 +1,31 @@
+--2025-04-25--------------------------------------------------------------------
+Fix for issue #232 opened by Anil Peres-da-Silva.
+
+A positionedUpdate was incorrectly (but without error) parsed as a
+searchedUpdate because the WHERE CURRENT OF phrase was recognized as part of
+a hostIdentifier.
+
+I recall some interesting phrasing in the IBM documentation regarding there 
+being no reserved words but certain words being reserved in context.  This
+always troubled me, but I think I see it now.
+
+Fixed by adding a new lexer token, WHERE_CURRENT_OF, and a new parser rule,
+whereCurrentOfPhrase used in positionedUpdate and positionedDelete.
+
+In the process of testing, I noted a similar issue with the FOR ROW ...
+OF ROWSET phrase.  Fixed in a similar fashion with new lexer tokens and a
+new parser rule.
+
+Side effect of adding FOR_ROW token to lexer is "FOR ROWS" gets parsed as...
+
+[@11,51:57='FOR ROW',<FOR_ROW>,2:3]
+[@12,58:58='S',<SQLIDENTIFIER>,2:10]
+
+...because the lexer is greedy and wants to match the longest string possible
+even if that results in problems for me.  So we have the FOR_ROWS token.
+
+This may be necessary for other phrases.  Something to be aware of.
+
 --2025-03-19--------------------------------------------------------------------
 Fix for issues #224 as suggested by travisdavidnelson.
 

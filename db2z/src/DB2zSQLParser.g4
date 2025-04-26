@@ -5948,10 +5948,21 @@ createMaskStatement
 	)
 	;
 
+/*
+Side effect of adding FOR_ROW token to lexer is "FOR ROWS" gets parsed as...
+
+[@11,51:57='FOR ROW',<FOR_ROW>,2:3]
+[@12,58:58='S',<SQLIDENTIFIER>,2:10]
+
+...because the lexer is greedy and wants to match the longest string possible
+even if that results in problems for me.  So we have the FOR_ROWS token as 
+part of the issue #232 fix 2025-04-25.
+*/
+
 createPermissionStatement
 	: (
 	CREATE PERMISSION permissionName ON tableName (AS? correlationName)?
-	FOR ROWS WHERE searchCondition ENFORCED FOR ALL ACCESS enableDisableOption?
+	FOR_ROWS WHERE searchCondition ENFORCED FOR ALL ACCESS enableDisableOption?
 	)
 	;
 
@@ -8572,11 +8583,14 @@ searchedDelete
 
 /*
 Alternate syntax allows omission of FROM.  Noted by Martijn Rutte 2023-01-09.
+
+Factored in whereCurrentOfPhrase and forRowOfRowsetPhrase 2025-04-25 as part 
+of resolution of issue #232.
 */
 positionedDelete
 	: (
-	DELETE FROM? tableName AS? correlationName? WHERE CURRENT OF cursorName
-	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
+	DELETE FROM? tableName AS? correlationName? whereCurrentOfPhrase
+	forRowOfRowsetPhrase?
 	)
 	;
 
@@ -8588,13 +8602,34 @@ searchedUpdate
 	)
 	;
 
+/*
+Factored in whereCurrentOfPhrase and forRowOfRowsetPhrase 2025-04-25 as part 
+of resolution of issue #232.
+*/
+
 positionedUpdate
 	: (
 	UPDATE tableName AS? correlationName? 
 	SET assignmentClause
-	WHERE CURRENT OF cursorName
-	(FOR ROW (hostVariable | INTEGERLITERAL) OF ROWSET)?
+	whereCurrentOfPhrase
+	forRowOfRowsetPhrase?
 	)
+	;
+
+/*
+Created whereCurrentOfPhrase 2025-04-25 as part of resolution of issue #232.
+*/
+
+whereCurrentOfPhrase
+	: WHERE_CURRENT_OF cursorName
+	;
+
+/*
+Created forRowOfRowsetPhrase 2025-04-25 as part of resolution of issue #232.
+*/
+
+forRowOfRowsetPhrase
+	: FOR_ROW (hostVariable | INTEGERLITERAL) OF_ROWSET
 	;
 
 sourceValues

@@ -1502,6 +1502,37 @@ WHERE
 	: W H E R E 
 	;
 
+/*
+Created WHERE_CURRENT_OF 2025-04-25 as part of resolution of issue #232.
+*/
+
+WHERE_CURRENT_OF
+	: WHERE (WS | NEWLINE)+ CURRENT (WS | NEWLINE)+ OF
+	;
+
+FOR_ROW
+	: FOR (WS | NEWLINE)+ ROW
+	;
+
+OF_ROWSET
+	: OF (WS | NEWLINE)+ ROWSET
+	;
+
+/*
+Side effect of adding FOR_ROW token to lexer is "FOR ROWS" gets parsed as...
+
+[@11,51:57='FOR ROW',<FOR_ROW>,2:3]
+[@12,58:58='S',<SQLIDENTIFIER>,2:10]
+
+...because the lexer is greedy and wants to match the longest string possible
+even if that results in problems for me.  So we have the FOR_ROWS token as 
+part of the issue #232 fix 2025-04-25.
+*/
+
+FOR_ROWS
+	: FOR (WS | NEWLINE)+ ROWS
+	;
+
 WHILE
 	: W H I L E 
 	;
