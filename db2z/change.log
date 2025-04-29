@@ -1,3 +1,9 @@
+--2025-04-29--------------------------------------------------------------------
+Fix for issue #232 opened by Anil Peres-da-Silva.
+
+The FOR FETCH ONLY syntax was not allowed for in the parser.  Changed the
+readOnlyClause to include | FETCH as suggested in the issue.
+
 --2025-04-25--------------------------------------------------------------------
 Fix for issue #232 opened by Anil Peres-da-Silva.
 
