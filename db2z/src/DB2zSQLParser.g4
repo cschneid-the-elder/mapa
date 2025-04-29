@@ -1,7 +1,8 @@
 /*
-Copyright (C) 2021 - 2024 Craig Schneiderwent.  
+Copyright (C) 2021 - 2025 Craig Schneiderwent.  
 Portions copyright (C) 2023 - 2024 Martijn Rutte.  
 Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
+Portions copyright (C) 2025 Anil Peres-da-Silva.
 All rights reserved.
 
 The authors accept no liability for damages of any kind resulting from the use
@@ -12756,8 +12757,11 @@ updateClause
 	: (FOR UPDATE (OF columnName (COMMA columnName)*)?)
 	;
 
+/*
+FETCH added per issue 235 raised by Anil Peres-da-Silva 2025-04-29
+*/
 readOnlyClause
-	: (FOR READ ONLY)
+	: (FOR (READ | FETCH) ONLY)
 	;
 
 optimizeClause
