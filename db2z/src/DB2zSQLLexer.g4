@@ -778,6 +778,10 @@ GROUP
 	: G R O U P 
 	;
 
+GROWTH
+	: G R O W T H
+	;
+
 HANDLER
 	: H A N D L E R 
 	;

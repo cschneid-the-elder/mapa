@@ -1,3 +1,8 @@
+--2025-04-30--------------------------------------------------------------------
+Changes for DB2 13 Function Level 507.
+
+Added support for ALTER TABLE [...] ALTER PARTITIONING TO syntax.
+
 --2025-04-29--------------------------------------------------------------------
 Fix for issue #232 opened by Anil Peres-da-Silva.
 
