@@ -1,3 +1,10 @@
+--2025-05-01--------------------------------------------------------------------
+Fix for issue #237 opened by Anil Peres-da-Silva.
+
+Host variables containing the string "-OFF" caused a parsing error due to the
+OFF token not being included in the sqlKeyword parser rule.  Adding it in
+eliminated the error.
+
 --2025-04-30--------------------------------------------------------------------
 Changes for DB2 13 Function Level 507.
 

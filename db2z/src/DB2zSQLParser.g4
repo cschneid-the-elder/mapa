@@ -13416,6 +13416,7 @@ sqlKeyword
 	| OBJECT
 	| OCTETS
 	| OF
+	| OFF
 	| OFFSET
 	| OLD
 	| OLD_TABLE
