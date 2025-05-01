@@ -8828,6 +8828,9 @@ copyOption
 	: (COPY (YES | NO))
 	;
 
+/*
+This action is copied in partitionEveryOption.
+*/
 dssizeOption
 	: (
 	(DSSIZE INTEGERLITERAL SQLIDENTIFIER)
@@ -9662,6 +9665,7 @@ alterTableOptionList
 	| (ADD partitioningClause)
 	| (ADD PARTITION partitionClause)
 	| (ALTER PARTITION INTEGERLITERAL partitionClause)
+	| (alterPartitioningOption)
 	| (ROTATE PARTITION (FIRST | INTEGERLITERAL) TO LAST rotatePartitionClause)
 	| (DROP ORGANIZATION)
 	| (alterHashOrganization)
@@ -10394,6 +10398,72 @@ alter table statement.  Also, it's deprecated as of Db2 12.
 partitioningPhrase
 	: (ENDING AT? LPAREN partitionLimitKey (COMMA partitionLimitKey)* RPAREN partitionHashSpace? INCLUSIVE? partitionHashSpace?)
 	;
+
+/*
+DB2 13 FL 507
+*/
+alterPartitioningOption
+	: (
+	ALTER PARTITIONING TO 
+	(alterPartitioningOptionRange | alterPartitioningOptionGrowth)
+	)
+	;
+
+alterPartitioningOptionRange
+	: partitioningClause
+	;
+
+alterPartitioningOptionGrowth
+	: (
+	PARTITION BY (GROWTH | SIZE)
+	(dssizeOption | partitionEveryOption | maxpartitionsOption)*
+	)
+	;
+
+/*
+This action is a copy of the one for dssizeOption.
+*/
+partitionEveryOption
+	: (
+	(EVERY INTEGERLITERAL SQLIDENTIFIER)
+	{
+		int dssizeVal = $INTEGERLITERAL.int;
+		int line = $EVERY.line;
+		String sqlident = $SQLIDENTIFIER.text;
+		if (!sqlident.toUpperCase().endsWith("G")) {
+			notifyErrorListeners($SQLIDENTIFIER, "EVERY value must end with G", null);
+		}
+		if ((dssizeVal == 0) || (dssizeVal & -dssizeVal) != dssizeVal) {
+			notifyErrorListeners($INTEGERLITERAL, "EVERY value must be a power of 2", null);
+		}
+		if ((dssizeVal < 1) || (dssizeVal > 256)) {
+			notifyErrorListeners($INTEGERLITERAL, "EVERY value must be in the range [1-256]", null);
+		}
+	}
+	| (EVERY SQLIDENTIFIER)
+	{
+		int line = $EVERY.line;
+		int dssizeVal = 0;
+		String sqlident = $SQLIDENTIFIER.text;
+		if (!sqlident.toUpperCase().endsWith("G")) {
+			notifyErrorListeners($SQLIDENTIFIER, "EVERY value must end with G", null);
+		}
+		String sqlidentVal = sqlident.substring(0, sqlident.length() - 1);
+		try {
+			dssizeVal = Integer.parseInt(sqlidentVal.trim());
+			if ((dssizeVal == 0) || ((dssizeVal & -dssizeVal) != dssizeVal)) {
+				notifyErrorListeners($SQLIDENTIFIER, "EVERY value must be a power of 2", null);
+			}
+			if ((dssizeVal < 1) || (dssizeVal > 256)) {
+				notifyErrorListeners($SQLIDENTIFIER, "EVERY value must be in the range [1-256]", null);
+			}
+		} catch (NumberFormatException e) {
+			notifyErrorListeners($SQLIDENTIFIER, "EVERY contains illegal value " + sqlidentVal, null);
+		}
+	}
+	)
+	;
+
 
 //deprecated as of Db2 12
 //#KMG
@@ -13200,6 +13270,7 @@ sqlKeyword
 	| GRAPHIC
 	| GROUP
 	| GROUPING
+	| GROWTH
 	| HANDLER
 	| HAVING
 	| HIDDEN_
