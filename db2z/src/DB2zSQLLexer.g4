@@ -4578,9 +4578,24 @@ identifiers depending on the host language.  One way around this
 would be to have two different lexer rules, one that includes the
 national characters and one that does not; the parser rule for host
 identifiers could then refer to both.  I'm not sure this is necessary.
+
+As of 2025-05-30 the SQLIDENTIFIER rule has been modified from...
+
+  [a-zA-Z0-9@#$_]+
+
+...to...
+
+  [a-zA-Z0-9@#$_] [a-zA-Z0-9@#$\-_]*
+
+...as there have been far too many issues with this rule and the
+parser identifier rules regarding host variable names, SQL
+keywords embedded therein, and confusing SQL keywords with host
+variable names.
+
+Why I didn't code it this way in the first place is a mystery.
 */
 SQLIDENTIFIER
-	: [a-zA-Z0-9@#$_]+
+	: [a-zA-Z0-9@#$_] [a-zA-Z0-9@#$\-_]*
 	{
 		if (getText().equalsIgnoreCase("DSNUTILV")
 		||  getText().equalsIgnoreCase("DSNUTILU")
