@@ -8,7 +8,7 @@
 # This software may be modified and distributed under the terms
 # of the MIT license. See the LICENSE file for details.
 
-# Makefile for DB2z SQL ANTLR lexer and parser.
+# Makefile for EXEC DLI ANTLR lexer and parser.
 # 
 # make init       - create class directory
 # make            - generate lexer and parser, compile
