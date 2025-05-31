@@ -1,3 +1,24 @@
+--2025-05-30--------------------------------------------------------------------
+Fix for issue #241 opened by Anil Peres-da-Silva.
+
+The SQLIDENTIFIER lexer rule has been changed from...
+
+  [a-zA-Z0-9@#$_]+
+
+...to...
+
+  [a-zA-Z0-9@#$_] [a-zA-Z0-9@#$\-_]*
+
+to resolve this issue, where AND was being recognized as part of a 
+hostIdentifier, and issues 232 and 237.  The parser rules for hostIdentifier,
+hostStructure, nullIndicator, nullIndicatorStructure and hostLabel have also
+been simplified.
+
+My hope is that this is a more resilient fix and will avoid future issues
+of the same type.  I did spend some time staring at the SQLIDENTIFIER lexer
+rule, convinced there was a good reason I'd coded it as I had, before just
+making what now seems an obvious fix.
+
 --2025-05-01--------------------------------------------------------------------
 Fix for issue #237 opened by Anil Peres-da-Silva.
 

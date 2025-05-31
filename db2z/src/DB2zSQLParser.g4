@@ -12416,8 +12416,11 @@ specificName
 	: (schemaName DOT)? identifier
 	;
 
+/*
+Modified as hostIdentifier and its compatriots, for the same reasons.
+*/
 hostLabel
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS identifier))*
+	: identifier
 	;
 
 hostVariable
@@ -12428,21 +12431,34 @@ hostVariable
 Making the MINUS optional because COBOL (at least) host variables
 can look pretty strange... A-001B1C2 and so forth.
 2025-03-19
+
+As of 2025-05-30 the hostIdentifier, hostStructure, nullIndicator, and
+nullIndicatorStructure rules have been simplified due to changes to
+the lexer SQLIDENTIFIER rule.  Formerly, these were all of the form...
+
+  (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
+
+... and this was a problem because keywords would be conflated with
+identifiers.  Mind you, identifiers can be keywords, but not when
+there is whitespace between them, and the whitespace is discarded
+in the lexer.  The updated SQLIDENTIFIER lexer rule seems to fix
+these issues.
+
 */
 hostIdentifier
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
+	: identifier
 	;
 
 hostStructure
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
+	: identifier
 	;
 
 nullIndicator
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
+	: identifier
 	;
 
 nullIndicatorStructure
-	: (INTEGERLITERAL | identifier) (INTEGERLITERAL | (MINUS* identifier))*
+	: identifier
 	;
 
 globalVariableName
