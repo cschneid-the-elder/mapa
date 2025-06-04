@@ -1,3 +1,24 @@
+--2025-06-04--------------------------------------------------------------------
+Per notification from Eduarth Heinen, removed hardcoded /home/craig in...
+
+Makefile
+testList90
+testList91
+nistList
+
+...as this is unlikely to be anyone else's home directory name.  
+
+I did not remove /home/craig from...
+
+testListAWS
+testListAWS-cpy
+
+...as I would have to modify Java code (probably in CobolSource.java) to
+resolve ~.  Possibly with replaceFirst("^~", System.getProperty("user.home"));
+
+Also updated the readme.md file with some limitations of the CallTree
+application in the "What This Won't Do" section.
+
 --2025-02-12--------------------------------------------------------------------
 Added LSACHECK compiler option.
 

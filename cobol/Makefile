@@ -109,33 +109,33 @@ jar:
 testLocal:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
-	java -jar CallTree.jar -unitTest -fileList testList90 -copy /home/craig/mapa/cobol/testdata/local -out callListLocal.log
+	java -jar CallTree.jar -unitTest -fileList testList90 -copy testdata/local -out callListLocal.log
 else
 	echo `date` $@ $(n) >> build.log
-	java -jar CallTree.jar -unitTest -file testdata/local/testantlr$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -logLevel FINEST -saveTemp -out callListLocal$(n).log
+	java -jar CallTree.jar -unitTest -file testdata/local/testantlr$(n).cbl -copy testdata/local -logLevel FINEST -saveTemp -out callListLocal$(n).log
 endif
 
 testLocalx:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
-	java -jar CallTree.jar -fileList testList91 -copy /home/craig/mapa/cobol/testdata/local -out callListLocalx.log
+	java -jar CallTree.jar -fileList testList91 -copy testdata/local -out callListLocalx.log
 else
 	echo `date` $@ $(n) >> build.log
-ifeq ($(wildcard /home/craig/mapa/cobol/testdata/local/test$(n).def),)
-	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -logLevel FINEST -saveTemp -out callListLocalx$(n).log
+ifeq ($(wildcard testdata/local/test$(n).def),)
+	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy testdata/local -logLevel FINEST -saveTemp -out callListLocalx$(n).log
 else
-	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy /home/craig/mapa/cobol/testdata/local -defList /home/craig/mapa/cobol/testdata/local/test$(n).def -logLevel FINEST -saveTemp -out callListLocalx$(n).log
+	java -jar CallTree.jar -file testdata/local/test$(n).cbl -copy testdata/local -defList testdata/local/test$(n).def -logLevel FINEST -saveTemp -out callListLocalx$(n).log
 endif
 endif
 
 testNist:
 ifeq ($(strip $(n)),)
 	echo `date` $@ >> build.log
-	java -jar CallTree.jar -fileList nistList -copy /home/craig/mapa/cobol/testdata/nist -out callListNist.log -nistTest
+	java -jar CallTree.jar -fileList nistList -copy testdata/nist -out callListNist.log -nistTest
 else
 	echo `date` $@ $(n) >> build.log
-#	java -agentlib:hprof=cpu=samples -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
-	java -jar CallTree.jar -file testdata/nist/$(n) -copy /home/craig/mapa/cobol/testdata/nist -logLevel FINEST -saveTemp -profile -out callListNist$(n).log -nistTest
+#	java -agentlib:hprof=cpu=samples -jar CallTree.jar -file testdata/nist/$(n) -copy testdata/nist -logLevel FINEST -saveTemp -out callListNist$(n).log
+	java -jar CallTree.jar -file testdata/nist/$(n) -copy testdata/nist -logLevel FINEST -saveTemp -profile -out callListNist$(n).log -nistTest
 endif
 
 testAWS:
