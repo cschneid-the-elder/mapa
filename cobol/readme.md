@@ -260,6 +260,9 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 ### What This Won't Do
 
  + The `COPYLOC` compile option and the `OF` and `IN` parameters of the `COPY` compiler directive are not consulted when copybooks are resolved.
+ + Dynamically called programs whose name is constructed at runtime are not reported.  This would require me to write a COBOL interpreter and that is simply beyond my capabilities.
+ + Dynamically called programs whose name is retrieved from a database or other persistent data store at runtime are not reported.
+ + Dynamically called programs whose name is passed from a calling program are not reported.
 
 ### Up To Date
 
