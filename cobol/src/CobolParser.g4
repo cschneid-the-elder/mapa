@@ -2456,7 +2456,7 @@ jsonGenerateStatement
    ;
 
 jsonGenerateCountPhrase
-   : (COUNT IN? identifier)
+   : (COUNT (BYTES | CHARACTERS)? IN? identifier)
    ;
 
 jsonGenerateEncodingPhrase

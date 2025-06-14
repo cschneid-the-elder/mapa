@@ -52,6 +52,30 @@
 
            JSON GENERATE
                WS-BUF FROM SOME-DATA
+               COUNT CHARACTERS WS-COUNT
+               NAME SD-001 'ARTHUR'
+                    SD-002 'DENT'
+               SUPPRESS 
+                    SD-001
+                    SD-002
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON GENERATE
+               WS-BUF FROM SOME-DATA
+               COUNT BYTES WS-COUNT
+               NAME SD-001 'ARTHUR'
+                    SD-002 'DENT'
+               SUPPRESS 
+                    SD-001
+                    SD-002
+               ON EXCEPTION CALL 'CEE3ABD' END-CALL
+               NOT ON EXCEPTION PERFORM 1000-para
+           END-JSON
+
+           JSON GENERATE
+               WS-BUF FROM SOME-DATA
                COUNT IN WS-COUNT
                NAME OF SD-001 IS 'ARTHUR'
                        SD-002 IS 'DENT'
