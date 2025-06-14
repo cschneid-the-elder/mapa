@@ -26,5 +26,7 @@
        Procedure Division.
            MOVE STR1 TO STR2
            MOVE 'Hello, world!' TO S1
-           
+
+           MOVE G1::S1  TO G2::S1
+           COMPUTE G1::N1 = (G1::N1 + G2::N1) * 2
            GOBACK.

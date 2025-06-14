@@ -2,6 +2,8 @@
 Updates per IBM COBOL 6.5 documentation.
 
 TYPEDEF
+Data name qualifier ::
+New SMARTBIN options NAMES and NONAMES
 
 --2025-06-04--------------------------------------------------------------------
 Per notification from Eduarth Heinen, removed hardcoded /home/craig in...

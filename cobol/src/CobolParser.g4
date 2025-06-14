@@ -3679,7 +3679,7 @@ Changing the rule to its current form makes parsing NC246
 take ~10 seconds.
 */
 qualifiedInData
-   : (IN | OF) (dataName | fileName)
+   : (IN | OF | QUALIFIER) (dataName | fileName)
    ;
 
 // in ----------------------------------
