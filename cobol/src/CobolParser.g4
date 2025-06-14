@@ -3549,7 +3549,7 @@ combinableCondition
    ;
 
 simpleCondition
-   : LPARENCHAR condition RPARENCHAR | relationCondition | classCondition | conditionNameReference
+   : LPARENCHAR condition RPARENCHAR | relationCondition | classCondition | conditionNameReference | omittedArgumentCondition
    ;
 
 classCondition
@@ -3592,6 +3592,10 @@ relationalOperator
 
 abbreviation
    : NOT? relationalOperator? (arithmeticExpression | LPARENCHAR arithmeticExpression abbreviation RPARENCHAR)
+   ;
+
+omittedArgumentCondition
+   : dataName IS? NOT? OMITTED
    ;
 
 // identifier ----------------------------------
