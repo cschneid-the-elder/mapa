@@ -1663,7 +1663,9 @@ dataTypeClause
    | BLOB_LOCATOR
    | DBCLOB_LOCATOR
    | ROWID
-   | (CLOB | BLOB | DBCLOB | VARBINARY (XML AS CLOB)) LPARENCHAR (IDENTIFIER | INTEGERLITERAL) RPARENCHAR)
+   | ((CLOB | BLOB | DBCLOB | VARBINARY (XML AS CLOB)) LPARENCHAR (IDENTIFIER | INTEGERLITERAL) RPARENCHAR)
+   | dataName
+   )
    ;
 
 dataTypeDefClause
@@ -2454,7 +2456,7 @@ jsonGenerateStatement
    ;
 
 jsonGenerateCountPhrase
-   : (COUNT IN? identifier)
+   : (COUNT (BYTES | CHARACTERS)? IN? identifier)
    ;
 
 jsonGenerateEncodingPhrase
@@ -3677,7 +3679,7 @@ Changing the rule to its current form makes parsing NC246
 take ~10 seconds.
 */
 qualifiedInData
-   : (IN | OF) (dataName | fileName)
+   : (IN | OF | QUALIFIER) (dataName | fileName)
    ;
 
 // in ----------------------------------
