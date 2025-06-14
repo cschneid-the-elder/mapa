@@ -174,7 +174,7 @@ For reasons both obscure and annoying, the CICS APIs are not deduplicated, so if
 
 ### Build/Execution Environment
 
-This was built on Ubuntu 24.04.1 LTS with ANTLR 4.13.2, openjdk version "21.0.6" 2025-01-21, and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
+This was built on Ubuntu 24.04.2 LTS with ANTLR 4.13.2, openjdk 21.0.7 2025-04-15, and Apache Commons CLI 1.4.  I have no idea if this will run on any other OS.  Java is supposed to be extremely portable, give it a try.
 
 The GNU toolchain is used for building.  If you want to build from scratch, i.e. a repository cloned with git, there are some instructions at the top of the Makefile.
 
@@ -266,5 +266,5 @@ Even worse, and why simply doing scans of your source code may be unrevealing, c
 
 ### Up To Date
 
-This should be current with the changes IBM published in their Enterprise COBOL 6.4 documentation dated 2025-01-22 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
+This should be current with the changes IBM published in their Enterprise COBOL 6.5 documentation dated 2025-06-12 and the ISO COBOL 202x draft standard N=1207 document dated 2020-11-23.
 

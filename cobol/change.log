@@ -5,8 +5,7 @@ TYPEDEF
 Data name qualifier ::
 New SMARTBIN options NAMES and NONAMES
 New syntax for COUNT phrase in JSON GENERATE, BYTES or CHARACTERS can now
-optionally follow COUNT
-
+  optionally follow COUNT
 
 --2025-06-04--------------------------------------------------------------------
 Per notification from Eduarth Heinen, removed hardcoded /home/craig in...
