@@ -1,3 +1,13 @@
+--2025-06-18--------------------------------------------------------------------
+Modified the following files to account for the IBM extension allowing the ::
+qualifier for data names.  This allows CALL Z::Y::X as an alternative
+to CALL X OF Y OF Z to be correctly resolved with the VALUE clause of X.
+
+CallWrapper.java
+DDNode.java
+QualifiedDataNameFormat1.java
+QualifiedInData.java
+
 --2025-06-14--------------------------------------------------------------------
 Updates per IBM COBOL 6.5 documentation.
 
