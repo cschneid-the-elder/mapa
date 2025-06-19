@@ -60,5 +60,9 @@ class QualifiedInData {
 			return this.getInTableText();
 		}
 		return this.getInDataText();
-	}		
+	}
+	
+	public Boolean usesIBMextension() {
+		return (this.ctx.QUALIFIER() != null);
+	}	
 }

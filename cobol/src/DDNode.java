@@ -315,6 +315,7 @@ class DDNode {
 	*/
 	public Boolean matches(Identifier id) {
 		if (id == null) { 
+			LOGGER.finest(this.myName + " matches(" + id + ") returning false");
 			return false;
 		}
 		

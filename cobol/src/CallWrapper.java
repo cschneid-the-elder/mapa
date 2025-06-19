@@ -316,6 +316,7 @@ class CallWrapper {
 				}
 			} else {
 				// CALL identifier syntax
+				// we may have to change this value if an IBM extension is used
 				this.cobolIdentifier = 
 					idCtx
 					.qualifiedDataName()
@@ -332,8 +333,33 @@ class CallWrapper {
 					.qualifiedInData()
 					, this.LOGGER);
 				if (this.qualInData != null) {
-					for (QualifiedInData qind: this.qualInData) {
-						this.ofs.add(qind.getText());
+					this.LOGGER.finest("  this.qualInData != null");
+					/*
+					If the QualifiedInData uses the IBM extension introduced
+					in IBM COBOL 6.5 in 2025 then this is of the form...
+					
+					Z::Y::X
+					
+					...otherwise it is of the form...
+					
+					X OF Y OF Z
+					
+					...which is standard COBOL.
+					Note that the qualifiers are in reverse order with respect
+					to each other, so processing must reflect that.
+					*/
+					if (this.qualInData.size() > 0 && this.qualInData.get(0).usesIBMextension()) {
+						this.LOGGER.finest("  this.qualInData.get(0).usesIBMextension() == true");
+						int i = this.qualInData.size() - 1;
+						this.cobolIdentifier = this.qualInData.get(i).getText();
+						for (i = this.qualInData.size() - 2; i >= 0; i--) {
+							this.ofs.add(this.qualInData.get(i).getText());
+						}
+					} else {
+						this.LOGGER.finest("  this.qualInData.get(0).usesIBMextension() == false || this.qualInData.size() == 0");
+						for (QualifiedInData qind: this.qualInData) {
+							this.ofs.add(qind.getText());
+						}
 					}
 				}
 			}
