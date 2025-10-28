@@ -1034,8 +1034,8 @@ dsnutilUCSFlashcopyOption
 	DSNUTIL_FLASHCOPY
 	(DSNUTIL_NO
 	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) DSNUTIL_NO DSNUTIL_RPAREN1)
-	| ((DSNUTIL_YES | DSNUTIL_CONSISTENT) (DSNUTIL_FCCOPYDDN dsnutilUCSArgInParens)?)
-	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) (DSNUTIL_YES | DSNUTIL_CONSISTENT) DSNUTIL_RPAREN1 (DSNUTIL_FCCOPYDDN dsnutilUCSArgInParens)?))
+	| ((DSNUTIL_YES | DSNUTIL_CONSISTENT) dsnutilUCSFccopyddnOption?)
+	| ((DSNUTIL_LPAREN | DSNUTIL_LPAREN1 | DSNUTIL_DB_TS_LPAREN) (DSNUTIL_YES | DSNUTIL_CONSISTENT) DSNUTIL_RPAREN1 dsnutilUCSFccopyddnOption?))
 	)
 	;
 
@@ -1058,7 +1058,7 @@ dsnutilUCSFilterddnSpec
 	;
 
 dsnutilUCSDatasetSpec
-	: ((dsnutilUCSCopyddnOption dsnutilUCSRecoveryddnOption2?)
+	: (((dsnutilUCSCopyddnOption | dsnutilUCSFccopyddnOption)  dsnutilUCSRecoveryddnOption2?)
 	| dsnutilUCSRecoveryddnOption2)
 	;
 
@@ -1086,8 +1086,8 @@ dsnutilUCSIndexspaceCopySpec
 dsnutilUCSCopyToCopy
 	: (
 	DSNUTIL_COPYTOCOPY
-	((dsnutilUCSListNameWithLit dsnutilUCSFromCopySpec? dsnutilUCSDatasetSpec?)
-	| ((dsnutilUCSTablespaceCopySpec | dsnutilUCSIndexspaceCopySpec) dsnutilUCSFromCopySpec? dsnutilUCSDatasetSpec?)+)
+	((dsnutilUCSListNameWithLit (dsnutilUCSFromCopySpec | dsnutilUCSDatasetSpec | dsnutilUCSDsnumOption)+)
+	| ((dsnutilUCSTablespaceCopySpec | dsnutilUCSIndexspaceCopySpec) dsnutilUCSFromCopySpec? dsnutilUCSDatasetSpec? dsnutilUCSDsnumOption?)+)
 	DSNUTIL_CLONE?
 	)
 	;
@@ -2780,6 +2780,15 @@ Allow for argument in optional parentheses per Martijn Rutte
 dsnutilUCSCopyddnOption
 	: (
 	DSNUTIL_COPYDDN 
+	(dsnutilUCSArg
+	| dsnutilUCSArgList2
+	| dsnutilUCSArgOptionalParens)
+	)
+	;
+
+dsnutilUCSFccopyddnOption
+	: (
+	DSNUTIL_FCCOPYDDN 
 	(dsnutilUCSArg
 	| dsnutilUCSArgList2
 	| dsnutilUCSArgOptionalParens)
