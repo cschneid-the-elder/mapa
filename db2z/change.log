@@ -1,3 +1,15 @@
+--2025-10-28--------------------------------------------------------------------
+
+changed...
+
+    (PASSING (BY REF)? expression (COMMA expression)*)?
+
+...to...
+
+    (PASSING (BY REF)? xqueryArgument (COMMA xqueryArgument)*)?
+
+...in xmlExistsPredicate parser rule per bug found by Martijn Rutte.
+
 --2025-05-30--------------------------------------------------------------------
 Fix for issue #241 opened by Anil Peres-da-Silva.
 

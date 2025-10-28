@@ -1,6 +1,6 @@
 /*
 Copyright (C) 2021 - 2025 Craig Schneiderwent.  
-Portions copyright (C) 2023 - 2024 Martijn Rutte.  
+Portions copyright (C) 2023 - 2025 Martijn Rutte.  
 Portions copyright (C) 2023 - 2024 Maarten van Haasteren.
 Portions copyright (C) 2025 Anil Peres-da-Silva.
 All rights reserved.
@@ -12058,11 +12058,22 @@ nullPredicate
 	: expression ((IS NOT? NULL) | ISNULL | NOTNULL)
 	;
 
+/*
+2025-10-28 changed...
+
+	(PASSING (BY REF)? expression (COMMA expression)*)?
+
+...to...
+
+	(PASSING (BY REF)? xqueryArgument (COMMA xqueryArgument)*)?
+
+...per bug found by Martijn Rutte.
+*/
 xmlExistsPredicate
 	: XMLEXISTS
 	LPAREN
 	NONNUMERICLITERAL
-	(PASSING (BY REF)? expression (COMMA expression)*)?
+	(PASSING (BY REF)? xqueryArgument (COMMA xqueryArgument)*)?
 	RPAREN
 	;
 
