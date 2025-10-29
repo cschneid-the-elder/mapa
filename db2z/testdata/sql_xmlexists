@@ -1,0 +1,10 @@
+SELECT * FROM SYSIBM.SYSDUMMY1
+WHERE XMLEXISTS
+      (
+        '$stmt//compressOption/input[1][@line = $linenr]' 
+          PASSING BY REF 
+          XML_TABLESPACE.STMT AS "stmt"
+        , XML_COMPRESS.MATCH_LINE AS "linenr"
+      )
+;
+

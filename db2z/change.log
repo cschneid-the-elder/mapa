@@ -1,3 +1,32 @@
+--2025-10-28--------------------------------------------------------------------
+
+changed...
+
+    (PASSING (BY REF)? expression (COMMA expression)*)?
+
+...to...
+
+    (PASSING (BY REF)? xqueryArgument (COMMA xqueryArgument)*)?
+
+...in xmlExistsPredicate parser rule per bug found by Martijn Rutte.
+
+changed...
+
+dsnutilUCSFlashcopyOption
+dsnutilUCSDatasetSpec
+dsnutilUCSCopyToCopy
+
+...and added...
+
+dsnutilUCSFccopyddnOption
+
+...per discrepencies or perhaps ambiguities between the DB2z documentation and 
+what the product syntactically allows.  I have a vague recollection of the
+people who take care of this documentation inserting some wording that 
+attempted to convey that sometimes statement options could be in any order and
+sometimes they could not.  Martijn Rutte discovered that DB2z was more tolerant
+of some syntax than the documentation seems to indicate.
+
 --2025-05-30--------------------------------------------------------------------
 Fix for issue #241 opened by Anil Peres-da-Silva.
 
