@@ -500,6 +500,7 @@ cicsSPI
 	| inquireNodejsapp
 	| inquireOsgibundle
 	| inquireOsgiservice
+	| inquireOtel
 	| inquirePartner
 	| inquirePipeline
 	| inquirePolicy
@@ -596,6 +597,7 @@ cicsSPI
 	| setMqconn
 	| setMqmonitor
 	| setNetname
+	| setOtel
 	| setPipeline
 	| setProcesstype
 	| setProgram
@@ -3308,6 +3310,12 @@ inquireOsgiservice
 	)
 	;
 
+inquireOtel
+	: (
+	 inquireOption otelOption inquireOtelOptions*
+	)
+	;
+
 inquirePartner
 	: (
 	 inquireOption partnerOption inquirePartnerOptions*
@@ -3884,6 +3892,12 @@ setNetname
 	)
 	;
 
+setOtel
+	: (
+	 setOption otelOption setOtelOptions*
+	)
+	;
+
 setPipeline
 	: (
 	 setOption pipelineOption setPipelineOptions*
@@ -4076,7 +4090,7 @@ setXmltransform
 	)
 	;
 
-// 572 rules generated Tue Feb 11 17:55:30 CST 2025
+// 574 rules generated Sun Nov  2 13:57:39 CST 2025
 
 abendOptions
 	: (
@@ -10707,6 +10721,13 @@ inquireOsgiserviceOptions
 	)
 	;
 
+inquireOtelOptions
+	: (
+	traceOption
+	| exceptionOptions
+	)
+	;
+
 inquirePartnerOptions
 	: (
 	startOption
@@ -11575,6 +11596,8 @@ inquireTransactionOptions
 	| installusridOption
 	| isolatestOption
 	| operationOption
+	| otelemitOption
+	| otelpropOption
 	| otstimeoutOption
 	| platformOption
 	| priorityOption
@@ -12815,6 +12838,15 @@ setNetnameOptions
 	)
 	;
 
+setOtelOptions
+	: (
+	traceOption
+	| nooteltraceOption
+	| oteltraceOption
+	| exceptionOptions
+	)
+	;
+
 setPipelineOptions
 	: (
 	enablestatusOption
@@ -13242,6 +13274,12 @@ setTransactionOptions
 	dumpingOption
 	| trandumpOption
 	| notrandumpOption
+	| otelemitOption
+	| taskendOption
+	| noemitOption
+	| otelpropOption
+	| proponlyOption
+	| nopropOption
 	| priorityOption
 	| purgeabilityOption
 	| notpurgeableOption
@@ -13374,7 +13412,7 @@ setXmltransformOptions
 	)
 	;
 
-// 572 rules generated Tue Feb 11 17:55:30 CST 2025
+// 574 rules generated Sun Nov  2 13:57:39 CST 2025
 
 abcodeOption
 	: (
@@ -20162,6 +20200,12 @@ noeditOption
 	)
 	;
 
+noemitOption
+	: (
+	NOEMIT
+	)
+	;
+
 noemptyreqOption
 	: (
 	NOEMPTYREQ
@@ -20276,6 +20320,12 @@ noobformatOption
 	)
 	;
 
+nooteltraceOption
+	: (
+	NOOTELTRACE
+	)
+	;
+
 nooutconvertOption
 	: (
 	NOOUTCONVERT
@@ -20297,6 +20347,12 @@ nopassbkwrOption
 noperfOption
 	: (
 	NOPERF
+	)
+	;
+
+nopropOption
+	: (
+	NOPROP
 	)
 	;
 
@@ -21059,6 +21115,30 @@ oslevelOption
 otaskOption
 	: (
 	OTASK arg
+	)
+	;
+
+otelOption
+	: (
+	OTEL
+	)
+	;
+
+otelemitOption
+	: (
+	OTELEMIT arg
+	)
+	;
+
+otelpropOption
+	: (
+	OTELPROP arg
+	)
+	;
+
+oteltraceOption
+	: (
+	OTELTRACE
 	)
 	;
 
@@ -21941,6 +22021,12 @@ progsymbolstOption
 progtypeOption
 	: (
 	PROGTYPE arg
+	)
+	;
+
+proponlyOption
+	: (
+	PROPONLY
 	)
 	;
 
@@ -24512,6 +24598,12 @@ taskdatalocOption
 	)
 	;
 
+taskendOption
+	: (
+	TASKEND
+	)
+	;
+
 taskidOption
 	: (
 	TASKID arg
@@ -26024,5 +26116,5 @@ zcptracingOption
 	)
 	;
 
-// 2399 rules generated Tue Feb 11 17:55:30 CST 2025
+// 2408 rules generated Sun Nov  2 13:57:39 CST 2025
 

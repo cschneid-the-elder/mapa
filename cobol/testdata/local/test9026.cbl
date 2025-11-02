@@ -1757,6 +1757,12 @@
 
            EXEC CICS
                 INQUIRE
+                OTEL
+                TRACE(cvda)
+           END-EXEC
+
+           EXEC CICS
+                INQUIRE
                 PARTNER(data-value)
                 NETWORK(data-area)
                 NETNAME(data-area)
@@ -2522,6 +2528,8 @@
                 INSTALLUSRID(data-area)
                 ISOLATEST(cvda)
                 OPERATION(data-value)
+                OTELEMIT(cvda)
+                OTELPROP(cvda)
                 OTSTIMEOUT(data-area)
                 PLATFORM(data-value)
                 PRIORITY(data-area)
@@ -3164,6 +3172,14 @@
 
            EXEC CICS
                 SET
+                OTEL
+                TRACE(cvda)
+                NOOTELTRACE
+                OTELTRACE
+           END-EXEC
+
+           EXEC CICS
+                SET
                 SECDISCOVERY
                 ON
                 OFF
@@ -3468,6 +3484,12 @@
                 DUMPING(cvda)
                 TRANDUMP
                 NOTRANDUMP
+                OTELEMIT(cvda)
+                TASKEND
+                NOEMIT
+                OTELPROP(cvda)
+                PROPONLY
+                NOPROP
                 PRIORITY(data-value)
                 PURGEABILITY(cvda)
                 NOTPURGEABLE

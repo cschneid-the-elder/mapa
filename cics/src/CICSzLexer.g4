@@ -4675,6 +4675,10 @@ NOEDIT
 	: N O E D I T 
 	;
 
+NOEMIT
+	: N O E M I T 
+	;
+
 NOEMPTYREQ
 	: N O E M P T Y R E Q 
 	;
@@ -4751,6 +4755,10 @@ NOOBFORMAT
 	: N O O B F O R M A T 
 	;
 
+NOOTELTRACE
+	: N O O T E L T R A C E 
+	;
+
 NOOUTCONVERT
 	: N O O U T C O N V E R T 
 	;
@@ -4765,6 +4773,10 @@ NOPASSBKWR
 
 NOPERF
 	: N O P E R F 
+	;
+
+NOPROP
+	: N O P R O P 
 	;
 
 NOPRTCOPY
@@ -5273,6 +5285,22 @@ OSLEVEL
 
 OTASK
 	: O T A S K 
+	;
+
+OTEL
+	: O T E L 
+	;
+
+OTELEMIT
+	: O T E L E M I T 
+	;
+
+OTELPROP
+	: O T E L P R O P 
+	;
+
+OTELTRACE
+	: O T E L T R A C E 
 	;
 
 OTRANSID
@@ -5861,6 +5889,10 @@ PROGSYMBOLST
 
 PROGTYPE
 	: P R O G T Y P E 
+	;
+
+PROPONLY
+	: P R O P O N L Y 
 	;
 
 PROTECT
@@ -7575,6 +7607,10 @@ TASKDATALOC
 	: T A S K D A T A L O C 
 	;
 
+TASKEND
+	: T A S K E N D 
+	;
+
 TASKID
 	: T A S K I D 
 	;
@@ -8583,7 +8619,7 @@ ZCPTRACING
 	: Z C P T R A C I N G 
 	;
 
-// 2108 rules generated Tue Feb 11 17:55:24 CST 2025
+// 2117 rules generated Sun Nov  2 13:57:33 CST 2025
 
 mode ARG_MODE;
 
