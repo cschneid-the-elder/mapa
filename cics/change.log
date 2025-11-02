@@ -1,4 +1,12 @@
---2022-02-11--------------------------------------------------------------------
+--2025-11-02--------------------------------------------------------------------
+SPI changes per documentation dated 2025-10-31.
+
+Added INQUIRE OTEL.
+Added OTELEMIT and OTELPROP to INQUIRE TRANSACTION.
+Added SET OTEL.
+Added OTELEMIT and OTELPROP to SET TRANSACTION.
+
+--2025-02-11--------------------------------------------------------------------
 SPI changes per documentation dated 2025-02-07.
 
 Added GRPLIST to INQUIRE SYSTEM.
