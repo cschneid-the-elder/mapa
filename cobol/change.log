@@ -1,3 +1,9 @@
+--2026-08-19--------------------------------------------------------------------
+Updates per IBM COBOL 6.5 documentation.
+
+Added suboptions LISTLINE and SOURCELINE for the TERMINAL compile option in the
+preprocessor lexer and parser grammars.
+
 --2026-04-18--------------------------------------------------------------------
 Updates per IBM COBOL 6.5 documentation.
 
