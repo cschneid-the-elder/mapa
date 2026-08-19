@@ -206,6 +206,7 @@ LIN : L I N;
 LINECOUNT : L I N E C O U N T;
 LINKAGE : L I N K A G E;
 LIST : L I S T;
+LISTLINE: L I S T L I N E;
 LM : L M;
 LONGMIXED : L O N G M I X E D;
 LONGUPPER : L O N G U P P E R;
@@ -451,6 +452,7 @@ SKIP2 : S K I P '2';
 SKIP3 : S K I P '3';
 SMARTBIN : S M A R T B I N;
 SO : S O;
+SOURCELINE: S O U R C E L I N E;
 SS : S S;
 SSR : S S R;
 SSRANGE : S S R A N G E;
@@ -499,12 +501,17 @@ ZONECHECK : Z O N E C H E C K;
 ZONEDATA : Z O N E D A T A;
 ZWB : Z W B;
 
+/*
+Additions here must also be added to the identifier_et_al
+and charDataKeyword rules in the preprocessor parser grammar.
+*/
 C_CHAR : C;
 D_CHAR : D;
 E_CHAR : E;
 F_CHAR : F;
 H_CHAR : H;
 I_CHAR : I;
+L_CHAR : L;
 M_CHAR : M;
 N_CHAR : N;
 O_CHAR : O;

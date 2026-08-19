@@ -189,7 +189,7 @@ compilerOption
    | (STGOPT | SO)
    | (SUPP | SUPPRESS)
    | SYSEIB
-   | (TERMINAL | TERM)
+   | ((TERMINAL | TERM) (LPARENCHAR (LISTLINE | L_CHAR | SOURCELINE | S_CHAR) RPARENCHAR)?)
    | (TEST (LPARENCHAR test_opts (COMMACHAR test_opts)* RPARENCHAR)?)
    | THREAD
    | TRUNC LPARENCHAR (BIN | OPT | STD) RPARENCHAR
@@ -219,6 +219,7 @@ identifier_et_al
    | F_CHAR
    | H_CHAR
    | I_CHAR
+   | L_CHAR
    | M_CHAR
    | N_CHAR
    | O_CHAR
@@ -808,7 +809,7 @@ charDataKeyword
    | ZONECHECK
    | ZONEDATA
    | ZWB
-   | C_CHAR | D_CHAR | E_CHAR | F_CHAR | H_CHAR | I_CHAR | M_CHAR | N_CHAR | O_CHAR | Q_CHAR | S_CHAR | U_CHAR | W_CHAR | X_CHAR
+   | C_CHAR | D_CHAR | E_CHAR | F_CHAR | H_CHAR | I_CHAR | L_CHAR | M_CHAR | N_CHAR | O_CHAR | Q_CHAR | S_CHAR | U_CHAR | W_CHAR | X_CHAR
    | DIVISION
    | LEADING | TRAILING
    | BASIS | INSERT | DELETE
