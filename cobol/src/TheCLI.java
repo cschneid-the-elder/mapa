@@ -27,6 +27,12 @@ public class TheCLI{
 	public Boolean nistTest = false;
 	public ArrayList<CondCompVar> compOptDefines = new ArrayList<>();
 
+	@SuppressWarnings("this-escape")
+	/*
+	The copyCompressingContinuations method is global, intended to be used
+	by multiple classes, thus necessitating the suppression of "this-escape"
+	warnings.
+	*/
 	public TheCLI(String[] args, Logger LOGGER) throws Exception {
 
 		this.args = args;
@@ -261,6 +267,8 @@ public class TheCLI{
 	Convenience method used from multiple locations.
 
 	Global.
+	
+	Necessitates the suppression of this-escape warnings.
 	*/
 	public String copyCompressingContinuations(
 			String fileName

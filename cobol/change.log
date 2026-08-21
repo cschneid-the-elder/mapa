@@ -1,3 +1,10 @@
+--2026-08-21--------------------------------------------------------------------
+Suppress this-escape in TheCLI.
+
+The copyCompressingContinuations method is global, intended to be used
+by multiple classes, thus necessitating the suppression of "this-escape"
+warnings.
+
 --2026-08-19--------------------------------------------------------------------
 Updates per IBM COBOL 6.5 documentation.
 
