@@ -1,3 +1,9 @@
+--2026-08-22--------------------------------------------------------------------
+Fix this-escape in CopyStatement.
+
+Made getCopyFile() a private method in order to eliminate this-escape compile 
+warning.
+
 --2026-08-21--------------------------------------------------------------------
 Suppress this-escape in TheCLI.
 

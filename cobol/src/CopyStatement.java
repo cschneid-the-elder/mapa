@@ -267,7 +267,8 @@ public class CopyStatement extends CopyReplaceParent implements CompilerDirectin
 		out.println(outLine);
 	}
 
-	public String getCopyFile() {
+	// private to appease this-escape warning
+	private String getCopyFile() {
 		String copyFile = this.getCopyFileRaw();
 		String delimiterChar = null;
 
