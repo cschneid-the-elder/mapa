@@ -1,3 +1,12 @@
+--2026-11-16--------------------------------------------------------------------
+Implementing DB2z 13 FL510.
+
+Updated lexer to include UNIT_OF_RECOVERY_ID token and parser rule 
+createTriggerStatement to include UNIT_OF_RECOVERY_ID syntax.  APAR PH72338
+
+Updated parser rule transferOwnershipStatement to include [PUBLIC] ALIAS
+syntax.  APAR PH72585
+
 --2026-08-12--------------------------------------------------------------------
 Implementing PR 254 from Belastingdienst.  
 
