@@ -1446,6 +1446,10 @@ UNIQUE
 	: U N I Q U E 
 	;
 
+UNIT_OF_RECOVERY_ID
+	: U N I T '_' O F '_' R E C O V E R Y '_' I D
+	;
+
 UNTIL
 	: U N T I L 
 	;

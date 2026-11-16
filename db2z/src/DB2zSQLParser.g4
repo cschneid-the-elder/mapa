@@ -7766,7 +7766,7 @@ triggerAdvancedDefinition
 
 triggerReferencingPhrase
 	: (REFERENCING
-		((OLD | NEW | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE)) AS? correlationName)+)
+		((OLD | NEW | OLD_TABLE | NEW_TABLE | (OLD TABLE) | (NEW TABLE) | UNIT_OF_RECOVERY_ID) AS? correlationName)+)
 	;
 	
 triggerAdvancedReferencingPhrase
