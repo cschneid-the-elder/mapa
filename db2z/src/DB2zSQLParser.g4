@@ -6636,6 +6636,7 @@ ownedObject
 	| (TABLE tableName)
 	| (TABLESPACE (databaseName DOT)? tablespaceName)
 	| (VIEW viewName)
+	| (PUBLIC? ALIAS aliasName (FOR (TABLE | SEQUENCE))?) 
 	)
 	;
 
